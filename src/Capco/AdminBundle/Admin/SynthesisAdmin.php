@@ -11,7 +11,7 @@ class SynthesisAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by'    => 'enabled',
+        '_sort_by' => 'enabled',
     ];
 
     /**
@@ -28,32 +28,32 @@ class SynthesisAdmin extends Admin
         }
 
         $formMapper
-            ->add('enabled', null, [
-                'label'    => 'admin.fields.synthesis.enabled',
+            ->add('enabled', null, array(
+                'label' => 'admin.fields.synthesis.enabled',
                 'required' => false,
-            ])
-            ->add('editable', null, [
-                'label'    => 'admin.fields.synthesis.editable',
+            ))
+            ->add('editable', null, array(
+                'label' => 'admin.fields.synthesis.editable',
                 'required' => false,
-            ])
-            ->add('sourceType', 'sonata_type_choice_field_mask', [
-                'label'              => 'admin.fields.synthesis.source_type',
-                'required'           => true,
-                'choices'            => Synthesis::$sourceTypesLabels,
+            ))
+            ->add('sourceType', 'sonata_type_choice_field_mask', array(
+                'label' => 'admin.fields.synthesis.source_type',
+                'required' => true,
+                'choices' => Synthesis::$sourceTypesLabels,
                 'translation_domain' => 'CapcoAppBundleSynthesis',
-                'map'                => [
-                    'none'              => ['enabled'],
+                'map' => [
+                    'none' => ['enabled'],
                     'consultation_step' => ['enabled', 'consultationStep'],
                 ],
-            ])
-            ->add('consultationStep', 'entity', [
-                'label'         => 'admin.fields.synthesis.consultation_step',
-                'class'         => 'CapcoAppBundle:Steps\ConsultationStep',
+            ))
+            ->add('consultationStep', 'entity', array(
+                'label' => 'admin.fields.synthesis.consultation_step',
+                'class' => 'CapcoAppBundle:Steps\ConsultationStep',
                 'query_builder' => $this->createQueryBuilderForConsultationSteps($projectId),
-                'required'      => false,
-                'empty_value'   => 'admin.fields.synthesis.consultation_step_empty',
-                'help'          => 'admin.help.synthesis.consultation_step',
-        ]);
+                'required' => false,
+                'empty_value' => 'admin.fields.synthesis.consultation_step_empty',
+                'help' => 'admin.help.synthesis.consultation_step',
+        ));
     }
 
     public function prePersist($synthesis)
@@ -97,6 +97,6 @@ class SynthesisAdmin extends Admin
 
     public function getBatchActions()
     {
-        return [];
+        return array();
     }
 }

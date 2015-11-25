@@ -22,14 +22,14 @@ class OpinionAdmin extends Admin
             $opinionTypeId = $this->getRequest()->get('opinion_type_id');
         }
 
-        return [
+        return array(
             'opinion_type' => $opinionTypeId,
-        ];
+        );
     }
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     protected $formOptions = [
@@ -42,38 +42,38 @@ class OpinionAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.opinion.title',
-            ])
+            ))
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.opinion.author',
-            ], null, [
+            ], null, array(
                 'property' => 'username',
-            ])
-            ->add('step', null, [
+            ))
+            ->add('step', null, array(
                 'label' => 'admin.fields.opinion.step',
-            ])
-            ->add('OpinionType', null, [
+            ))
+            ->add('OpinionType', null, array(
                 'label' => 'admin.fields.opinion.opinion_type',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion.is_enabled',
-            ])
-            ->add('pinned', null, [
+            ))
+            ->add('pinned', null, array(
                 'label' => 'admin.fields.opinion.pinned_long',
-            ])
-            ->add('isTrashed', null, [
+            ))
+            ->add('isTrashed', null, array(
                 'label' => 'admin.fields.opinion.is_trashed',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.opinion.updated_at',
-            ])
-            ->add('argumentsCount', null, [
+            ))
+            ->add('argumentsCount', null, array(
                 'label' => 'admin.fields.opinion.argument_count',
-            ])
-            ->add('sourcesCount', null, [
+            ))
+            ->add('sourcesCount', null, array(
                 'label' => 'admin.fields.opinion.source_count',
-            ])
+            ))
         ;
     }
 
@@ -85,54 +85,54 @@ class OpinionAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, [
+            ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.opinion.title',
-            ])
-            ->add('Author', 'sonata_type_model', [
+            ))
+            ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion.author',
-            ])
-            ->add('OpinionType', null, [
+            ))
+            ->add('OpinionType', null, array(
                 'label' => 'admin.fields.opinion.opinion_type',
-            ])
-            ->add('step', 'sonata_type_model', [
+            ))
+            ->add('step', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion.step',
-            ])
-            ->add('voteCountTotal', 'integer', [
-                'label'    => 'admin.fields.opinion.vote_count_total',
-                'mapped'   => false,
+            ))
+            ->add('voteCountTotal', 'integer', array(
+                'label' => 'admin.fields.opinion.vote_count_total',
+                'mapped' => false,
                 'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig',
-            ])
-            ->add('position', null, [
+            ))
+            ->add('position', null, array(
                 'label' => 'admin.fields.opinion.position',
-            ])
-            ->add('argumentsCount', null, [
+            ))
+            ->add('argumentsCount', null, array(
                 'label' => 'admin.fields.opinion.argument_count',
-            ])
-            ->add('sourcesCount', null, [
+            ))
+            ->add('sourcesCount', null, array(
                 'label' => 'admin.fields.opinion.source_count',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.opinion.is_enabled',
-            ])
-            ->add('pinned', null, [
+                'label' => 'admin.fields.opinion.is_enabled',
+            ))
+            ->add('pinned', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.opinion.pinned',
-            ])
-            ->add('isTrashed', null, [
+                'label' => 'admin.fields.opinion.pinned',
+            ))
+            ->add('isTrashed', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.opinion.is_trashed',
-            ])
-            ->add('updatedAt', null, [
+                'label' => 'admin.fields.opinion.is_trashed',
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.opinion.updated_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -144,75 +144,75 @@ class OpinionAdmin extends Admin
         $subjectHasAppendices = $this->getSubject()->getAppendices()->count() > 0 ? true : false;
         $classname = $subjectHasAppendices ? '' : 'hidden';
         $formMapper
-            ->with('admin.fields.opinion.group_content', ['class' => 'col-md-12'])->end()
-            ->with('admin.fields.opinion.group_appendices', ['class' => 'col-md-12 '.$classname])->end()
-            ->with('admin.fields.opinion.group_publication', ['class' => 'col-md-12'])->end()
-            ->with('admin.fields.opinion.group_answer', ['class' => 'col-md-12'])->end()
+            ->with('admin.fields.opinion.group_content', array('class' => 'col-md-12'))->end()
+            ->with('admin.fields.opinion.group_appendices', array('class' => 'col-md-12 '.$classname))->end()
+            ->with('admin.fields.opinion.group_publication', array('class' => 'col-md-12'))->end()
+            ->with('admin.fields.opinion.group_answer', array('class' => 'col-md-12'))->end()
             ->end()
         ;
 
         $formMapper
             // Content
             ->with('admin.fields.opinion.group_content')
-                ->add('title', null, [
+                ->add('title', null, array(
                     'label' => 'admin.fields.opinion.title',
-                ])
+                ))
                 ->add('Author', 'sonata_type_model_autocomplete', [
-                    'label'    => 'admin.fields.opinion.author',
+                    'label' => 'admin.fields.opinion.author',
                     'property' => 'username',
                 ])
-                ->add('position', null, [
+                ->add('position', null, array(
                     'label' => 'admin.fields.opinion.position',
-                ])
-                ->add('body', 'ckeditor', [
-                    'label'       => 'admin.fields.opinion.body',
+                ))
+                ->add('body', 'ckeditor', array(
+                    'label' => 'admin.fields.opinion.body',
                     'config_name' => 'admin_editor',
-                ])
-                ->add('step', null, [
-                    'label'         => 'admin.fields.opinion.step',
+                ))
+                ->add('step', null, array(
+                    'label' => 'admin.fields.opinion.step',
                     'query_builder' => $this->createQueryBuilderForStep(),
-                    'required'      => true,
-                ])
+                    'required' => true,
+                ))
             ->end()
 
             // Appendices
             ->with('admin.fields.opinion.group_appendices')
-            ->add('appendices', 'sonata_type_collection', [
-                'label'        => 'admin.fields.opinion.appendices',
+            ->add('appendices', 'sonata_type_collection', array(
+                'label' => 'admin.fields.opinion.appendices',
                 'by_reference' => false,
-                'required'     => false,
-                'btn_add'      => false,
+                'required' => false,
+                'btn_add' => false,
                 'type_options' => ['delete' => false, 'btn_add' => false],
-                'attr'         => ['class'  => $classname],
-            ])
+                'attr' => ['class' => $classname],
+            ))
             ->end()
 
             // Publication
             ->with('admin.fields.opinion.group_publication')
-                ->add('isEnabled', null, [
-                    'label'    => 'admin.fields.opinion.is_enabled',
+                ->add('isEnabled', null, array(
+                    'label' => 'admin.fields.opinion.is_enabled',
                     'required' => false,
-                ])
-                ->add('pinned', null, [
-                    'label'    => 'admin.fields.opinion.pinned_long',
+                ))
+                ->add('pinned', null, array(
+                    'label' => 'admin.fields.opinion.pinned_long',
                     'required' => false,
-                ])
-                ->add('isTrashed', null, [
-                    'label'    => 'admin.fields.opinion.is_trashed',
+                ))
+                ->add('isTrashed', null, array(
+                    'label' => 'admin.fields.opinion.is_trashed',
                     'required' => false,
-                ])
-                ->add('trashedReason', null, [
+                ))
+                ->add('trashedReason', null, array(
                     'label' => 'admin.fields.opinion.trashed_reason',
-                ])
+                ))
             ->end()
 
             // Answer
             ->with('admin.fields.opinion.group_answer')
-            ->add('answer', 'sonata_type_model_list', [
-                'label'    => 'admin.fields.opinion.answer',
+            ->add('answer', 'sonata_type_model_list', array(
+                'label' => 'admin.fields.opinion.answer',
                 'btn_list' => false,
                 'required' => false,
-            ])
+            ))
             ->end()
         ;
     }
@@ -226,80 +226,80 @@ class OpinionAdmin extends Admin
         $subjectHasAppendices = $this->getSubject()->getAppendices()->count() > 0 ? true : false;
 
         $showMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.opinion.title',
-            ])
-            ->add('Author', null, [
+            ))
+            ->add('Author', null, array(
                 'label' => 'admin.fields.opinion.author',
-            ])
-            ->add('OpinionType', null, [
+            ))
+            ->add('OpinionType', null, array(
                 'label' => 'admin.fields.opinion.opinion_type',
-            ])
-            ->add('body', null, [
+            ))
+            ->add('body', null, array(
                 'label' => 'admin.fields.opinion.body',
-            ])
+            ))
         ;
 
         if ($subjectHasAppendices) {
             $showMapper
-                ->add('appendices', null, [
+                ->add('appendices', null, array(
                     'label' => 'admin.fields.opinion.appendices',
-                ])
+                ))
             ;
         }
 
         $showMapper
-            ->add('step', null, [
+            ->add('step', null, array(
                 'label' => 'admin.fields.opinion.step',
-            ])
-            ->add('position', null, [
+            ))
+            ->add('position', null, array(
                 'label' => 'admin.fields.opinion.position',
-            ])
-            ->add('voteCountTotal', null, [
-                'label'    => 'admin.fields.opinion.vote_count_total',
-                'mapped'   => false,
+            ))
+            ->add('voteCountTotal', null, array(
+                'label' => 'admin.fields.opinion.vote_count_total',
+                'mapped' => false,
                 'template' => 'CapcoAdminBundle:Opinion:vote_count_show_field.html.twig',
-            ])
-            ->add('votesCountOk', null, [
+            ))
+            ->add('votesCountOk', null, array(
                 'label' => 'admin.fields.opinion.vote_count_ok',
-            ])
-            ->add('votesCountNok', null, [
+            ))
+            ->add('votesCountNok', null, array(
                 'label' => 'admin.fields.opinion.vote_count_nok',
-            ])
-            ->add('votesCountMitige', null, [
+            ))
+            ->add('votesCountMitige', null, array(
                 'label' => 'admin.fields.opinion.vote_count_mitige',
-            ])
-            ->add('argumentsCount', null, [
+            ))
+            ->add('argumentsCount', null, array(
                 'label' => 'admin.fields.opinion.argument_count',
-            ])
-            ->add('sourcesCount', null, [
+            ))
+            ->add('sourcesCount', null, array(
                 'label' => 'admin.fields.opinion.source_count',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.opinion.is_enabled',
-            ])
-            ->add('pinned', null, [
+            ))
+            ->add('pinned', null, array(
                 'label' => 'admin.fields.opinion.pinned_long',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.opinion.created_at',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.opinion.updated_at',
-            ])
-            ->add('isTrashed', null, [
+            ))
+            ->add('isTrashed', null, array(
                 'label' => 'admin.fields.opinion.is_trashed',
-            ])
+            ))
         ;
 
         if ($subject->getIsTrashed()) {
             $showMapper
-                ->add('trashedAt', null, [
+                ->add('trashedAt', null, array(
                     'label' => 'admin.fields.opinion.trashed_at',
-                ])
-                ->add('trashedReason', null, [
+                ))
+                ->add('trashedReason', null, array(
                     'label' => 'admin.fields.opinion.trashed_reason',
-                ])
+                ))
             ;
         }
     }
@@ -368,7 +368,7 @@ class OpinionAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'show', 'create', 'edit', 'delete', 'export']);
+        $collection->clearExcept(array('list', 'show', 'create', 'edit', 'delete', 'export'));
     }
 
     public function getBatchActions()

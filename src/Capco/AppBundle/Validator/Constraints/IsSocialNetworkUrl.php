@@ -33,7 +33,7 @@ class IsSocialNetworkUrl extends Constraint
      */
     public function getRequiredOptions()
     {
-        return ['social_network'];
+        return array('social_network');
     }
 
     public function getMessage()

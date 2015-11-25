@@ -19,8 +19,8 @@ class ThemeSerializationListener implements EventSubscriberInterface
     {
         return [
             [
-                'event'  => 'serializer.post_serialize',
-                'class'  => 'Capco\AppBundle\Entity\Theme',
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Theme',
                 'method' => 'onPostTheme',
             ],
         ];
@@ -32,7 +32,7 @@ class ThemeSerializationListener implements EventSubscriberInterface
 
         $event->getVisitor()->addData(
             '_links', [
-                'show'     => $this->router->generate('app_theme_show', [
+                'show' => $this->router->generate('app_theme_show', [
                     'slug' => $theme->getSlug(),
                 ], true),
             ]

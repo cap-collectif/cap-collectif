@@ -14,7 +14,7 @@ class OpinionVoteAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'opinion.title',
+        '_sort_by' => 'opinion.title',
     ];
 
     /**
@@ -23,23 +23,23 @@ class OpinionVoteAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('opinion', null, [
+            ->add('opinion', null, array(
                 'label' => 'admin.fields.opinion_vote.opinion',
-            ])
+            ))
             ->add('user', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.opinion_vote.voter',
-            ], null, [
+            ], null, array(
                 'property' => 'username',
-            ])
-            ->add('value', null, [
+            ))
+            ->add('value', null, array(
                 'label' => 'admin.fields.opinion_vote.value',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.opinion_vote.updated_at',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.opinion_vote.created_at',
-            ])
+            ))
         ;
     }
 
@@ -51,28 +51,28 @@ class OpinionVoteAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('opinion', 'sonata_type_model', [
+            ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.opinion',
-            ])
-            ->add('user', 'sonata_type_model', [
+            ))
+            ->add('user', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.voter',
-            ])
-            ->add('value', null, [
-                'label'    => 'admin.fields.opinion_vote.value',
+            ))
+            ->add('value', null, array(
+                'label' => 'admin.fields.opinion_vote.value',
                 'template' => 'CapcoAdminBundle:OpinionVote:value_list_field.html.twig',
-                'labels'   => OpinionVote::$voteTypesLabels,
-                'styles'   => OpinionVote::$voteTypesStyles,
-            ])
-            ->add('updatedAt', null, [
+                'labels' => OpinionVote::$voteTypesLabels,
+                'styles' => OpinionVote::$voteTypesStyles,
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.opinion_vote.updated_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -82,24 +82,24 @@ class OpinionVoteAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('opinion', 'sonata_type_model', [
+            ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.opinion',
-            ])
-            ->add('user', 'sonata_type_model', [
+            ))
+            ->add('user', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.voter',
-            ])
-            ->add('value', null, [
-                'label'    => 'admin.fields.opinion_vote.value',
+            ))
+            ->add('value', null, array(
+                'label' => 'admin.fields.opinion_vote.value',
                 'template' => 'CapcoAdminBundle:OpinionVote:value_show_field.html.twig',
-                'labels'   => OpinionVote::$voteTypesLabels,
-                'styles'   => OpinionVote::$voteTypesStyles,
-            ])
-            ->add('updatedAt', null, [
+                'labels' => OpinionVote::$voteTypesLabels,
+                'styles' => OpinionVote::$voteTypesStyles,
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.opinion_vote.updated_at',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.opinion_vote.created_at',
-            ])
+            ))
         ;
     }
 
@@ -109,18 +109,18 @@ class OpinionVoteAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('opinion', 'sonata_type_model', [
+            ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.opinion_vote.opinion',
-            ])
+            ))
             ->add('user', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.opinion_vote.voter',
+                'label' => 'admin.fields.opinion_vote.voter',
                 'property' => 'username',
             ])
-            ->add('value', 'choice', [
-                'label'              => 'admin.fields.opinion_vote.value',
-                'choices'            => OpinionVote::$voteTypesLabels,
+            ->add('value', 'choice', array(
+                'label' => 'admin.fields.opinion_vote.value',
+                'choices' => OpinionVote::$voteTypesLabels,
                 'translation_domain' => 'CapcoAppBundle',
-            ])
+            ))
         ;
     }
 

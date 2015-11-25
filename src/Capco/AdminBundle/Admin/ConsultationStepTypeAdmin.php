@@ -12,7 +12,7 @@ class ConsultationStepTypeAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -21,18 +21,18 @@ class ConsultationStepTypeAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.consultation_step_type.title',
-            ])
-            ->add('opinionTypes', null, [
+            ))
+            ->add('opinionTypes', null, array(
                 'label' => 'admin.fields.consultation_step_type.opinion_types',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.consultation_step_type.updated_at',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.consultation_step_type.created_at',
-            ])
+            ))
         ;
     }
 
@@ -44,22 +44,22 @@ class ConsultationStepTypeAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, [
+            ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.consultation_step_type.title',
-            ])
-            ->add('opinionTypes', 'sonata_type_model', [
+            ))
+            ->add('opinionTypes', 'sonata_type_model', array(
                 'label' => 'admin.fields.consultation_step_type.opinion_types',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.consultation_step_type.updated_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -69,17 +69,17 @@ class ConsultationStepTypeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.consultation_step_type.title',
-            ])
+            ))
             ->add('opinionTypes', 'sonata_type_model', [
-                'label'        => 'admin.fields.consultation_step_type.opinion_types',
-                'query'        => $this->createQueryForOpinionTypes(),
+                'label' => 'admin.fields.consultation_step_type.opinion_types',
+                'query' => $this->createQueryForOpinionTypes(),
                 'by_reference' => false,
-                'multiple'     => true,
-                'expanded'     => true,
-                'required'     => true,
-                'tree'         => true,
+                'multiple' => true,
+                'expanded' => true,
+                'required' => true,
+                'tree' => true,
             ])
         ;
     }
@@ -92,18 +92,18 @@ class ConsultationStepTypeAdmin extends Admin
         $subject = $this->getSubject();
 
         $showMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.consultation_step_type.title',
-            ])
-            ->add('opinionTypes', null, [
+            ))
+            ->add('opinionTypes', null, array(
                 'label' => 'admin.fields.consultation_step_type.opinion_types',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.consultation_step_type.updated_at',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.consultation_step_type.created_at',
-            ])
+            ))
         ;
     }
 

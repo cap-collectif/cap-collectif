@@ -30,10 +30,10 @@ class OpinionType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class'      => 'Capco\AppBundle\Entity\Opinion',
+        $resolver->setDefaults(array(
+            'data_class' => 'Capco\AppBundle\Entity\Opinion',
             'csrf_protection' => false,
-        ]);
+        ));
     }
 
     /**

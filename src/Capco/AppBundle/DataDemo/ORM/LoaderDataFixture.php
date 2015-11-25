@@ -9,9 +9,9 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
 {
     protected function getProcessors()
     {
-        return [
+        return array(
             new MediaProcessor($this->container),
-        ];
+        );
     }
 
     public function getOrder()
@@ -24,7 +24,7 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
      */
     protected function getFixtures()
     {
-        return [
+        return array(
             __DIR__.'/MediaContext.yml',
             __DIR__.'/MediaCategory.yml',
             __DIR__.'/Media.yml',
@@ -41,6 +41,6 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
             __DIR__.'/SiteImage.yml',
             __DIR__.'/SiteColor.yml',
             __DIR__.'/Section.yml',
-        ];
+        );
     }
 }

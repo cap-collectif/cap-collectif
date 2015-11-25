@@ -18,7 +18,7 @@ class SynthesisType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class'      => 'Capco\AppBundle\Entity\Synthesis\Synthesis',
+            'data_class' => 'Capco\AppBundle\Entity\Synthesis\Synthesis',
             'csrf_protection' => false,
         ]);
     }

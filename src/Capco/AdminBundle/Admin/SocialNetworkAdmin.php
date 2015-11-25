@@ -15,7 +15,7 @@ class SocialNetworkAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -24,21 +24,21 @@ class SocialNetworkAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.social_network.title',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.social_network.is_enabled',
-            ])
-            ->add('link', null, [
+            ))
+            ->add('link', null, array(
                 'label' => 'admin.fields.social_network.link',
-            ])
-            ->add('position', null, [
+            ))
+            ->add('position', null, array(
                 'label' => 'admin.fields.social_network.position',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.social_network.updated_at',
-            ])
+            ))
         ;
     }
 
@@ -48,34 +48,34 @@ class SocialNetworkAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title', null, [
+            ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.social_network.title',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.social_network.is_enabled',
-            ])
-            ->add('link', null, [
+                'label' => 'admin.fields.social_network.is_enabled',
+            ))
+            ->add('link', null, array(
                 'label' => 'admin.fields.social_network.link',
-            ])
-            ->add('media', 'sonata_media_type', [
+            ))
+            ->add('media', 'sonata_media_type', array(
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_list_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label'    => 'admin.fields.social_network.media',
-            ])
-            ->add('position', null, [
+                'label' => 'admin.fields.social_network.media',
+            ))
+            ->add('position', null, array(
                 'label' => 'admin.fields.social_network.position',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.social_network.updated_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -85,28 +85,28 @@ class SocialNetworkAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.social_network.title',
-            ])
-            ->add('isEnabled', null, [
-                'label'    => 'admin.fields.social_network.is_enabled',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.social_network.is_enabled',
                 'required' => false,
-            ])
-            ->add('link', null, [
+            ))
+            ->add('link', null, array(
                 'label' => 'admin.fields.social_network.link',
-            ])
-            ->add('position', null, [
+            ))
+            ->add('position', null, array(
                 'label' => 'admin.fields.social_network.position',
-            ])
-            ->add('media', 'sonata_type_model_list', [
+            ))
+            ->add('media', 'sonata_type_model_list', array(
                 'required' => false,
-                'label'    => 'admin.fields.social_network.media',
-            ], [
-                'link_parameters' => [
-                    'context'      => 'default',
+                'label' => 'admin.fields.social_network.media',
+            ), array(
+                'link_parameters' => array(
+                    'context' => 'default',
                     'hide_context' => true,
-                    'provider'     => 'sonata.media.provider.image',
-            ], ])
+                    'provider' => 'sonata.media.provider.image',
+            ), ))
         ;
     }
 
@@ -116,28 +116,28 @@ class SocialNetworkAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.social_network.title',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.social_network.is_enabled',
-            ])
-            ->add('link', null, [
+            ))
+            ->add('link', null, array(
                 'label' => 'admin.fields.social_network.link',
-            ])
-            ->add('media', 'sonata_media_type', [
+            ))
+            ->add('media', 'sonata_media_type', array(
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_show_field.html.twig',
-                'label'    => 'admin.fields.social_network.media',
-            ])
-            ->add('position', null, [
+                'label' => 'admin.fields.social_network.media',
+            ))
+            ->add('position', null, array(
                 'label' => 'admin.fields.social_network.position',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.social_network.created_at',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.social_network.updated_at',
-            ])
+            ))
         ;
     }
 

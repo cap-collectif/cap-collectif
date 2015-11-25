@@ -10,13 +10,13 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class AppendixTypeAdmin extends Admin
 {
-    protected $formOptions = [
+    protected $formOptions = array(
         'cascade_validation' => true,
-    ];
+    );
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -25,12 +25,12 @@ class AppendixTypeAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.appendix_type.title',
-            ])
-            ->add('helpText', null, [
+            ))
+            ->add('helpText', null, array(
                 'label' => 'admin.fields.appendix_type.help_text',
-            ])
+            ))
         ;
     }
 
@@ -42,19 +42,19 @@ class AppendixTypeAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, [
+            ->addIdentifier('title', null, array(
                 'label' => 'admin.fields.appendix_type.title',
-            ])
-            ->add('helpText', null, [
+            ))
+            ->add('helpText', null, array(
                 'label' => 'admin.fields.appendix_type.help_text',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -64,25 +64,25 @@ class AppendixTypeAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title', null, [
+            ->add('title', null, array(
                 'label' => 'admin.fields.appendix_type.title',
-            ])
-            ->add('helpText', null, [
+            ))
+            ->add('helpText', null, array(
                 'label' => 'admin.fields.appendix_type.help_text',
-            ])
+            ))
         ;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, [
-                'label'    => 'admin.fields.appendix_type.title',
+            ->add('title', null, array(
+                'label' => 'admin.fields.appendix_type.title',
                 'required' => true,
-            ])
-            ->add('helpText', null, [
+            ))
+            ->add('helpText', null, array(
                 'label' => 'admin.fields.appendix_type.help_text',
-            ])
+            ))
         ;
     }
 }

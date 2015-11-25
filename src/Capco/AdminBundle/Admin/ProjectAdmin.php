@@ -14,7 +14,7 @@ class ProjectAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     protected $formOptions = [
@@ -92,33 +92,33 @@ class ProjectAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $listMapper->add('themes', null, [
+            $listMapper->add('themes', null, array(
                 'label' => 'admin.fields.project.themes',
-            ]);
+            ));
         }
 
         $listMapper
-            ->add('isEnabled', null, [
+            ->add('isEnabled', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.project.is_enabled',
-            ])
-            ->add('exportable', null, [
+                'label' => 'admin.fields.project.is_enabled',
+            ))
+            ->add('exportable', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.project.exportable',
-            ])
-            ->add('publishedAt', null, [
+                'label' => 'admin.fields.project.exportable',
+            ))
+            ->add('publishedAt', null, array(
                 'label' => 'admin.fields.project.published_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'     => [],
-                    'download' => [
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'download' => array(
                         'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
-                    ],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+                    ),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -141,12 +141,12 @@ class ProjectAdmin extends Admin
                 'label' => 'admin.fields.project.title',
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.project.author',
+                'label' => 'admin.fields.project.author',
                 'property' => 'username',
             ])
             ->add('opinionTerm', 'choice', [
-                'label'              => 'admin.fields.project.opinion_term',
-                'choices'            => Project::$opinionTermsLabels,
+                'label' => 'admin.fields.project.opinion_term',
+                'choices' => Project::$opinionTermsLabels,
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->end()
@@ -154,18 +154,18 @@ class ProjectAdmin extends Admin
             // Metadata
             ->with('admin.fields.project.group_meta')
             ->add('isEnabled', null, [
-                'label'    => 'admin.fields.project.is_enabled',
+                'label' => 'admin.fields.project.is_enabled',
                 'required' => false,
             ])
             ->add('exportable', null, [
-                'label'    => 'admin.fields.project.exportable',
+                'label' => 'admin.fields.project.exportable',
                 'required' => false,
             ])
             ->add('publishedAt', 'sonata_type_datetime_picker', [
-                'label'    => 'admin.fields.project.published_at',
+                'label' => 'admin.fields.project.published_at',
                 'required' => true,
-                'format'   => 'dd/MM/yyyy HH:mm',
-                'attr'     => [
+                'format' => 'dd/MM/yyyy HH:mm',
+                'attr' => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
             ])
@@ -174,9 +174,9 @@ class ProjectAdmin extends Admin
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper
                 ->add('themes', 'sonata_type_model', [
-                'label'        => 'admin.fields.project.themes',
-                'required'     => false,
-                'multiple'     => true,
+                'label' => 'admin.fields.project.themes',
+                'required' => false,
+                'multiple' => true,
                 'by_reference' => false,
             ]);
         }
@@ -184,18 +184,18 @@ class ProjectAdmin extends Admin
         $formMapper
             ->add('Cover', 'sonata_type_model_list', [
                 'required' => false,
-                'label'    => 'admin.fields.project.cover',
+                'label' => 'admin.fields.project.cover',
             ], [
                 'link_parameters' => [
-                    'context'      => 'default',
+                    'context' => 'default',
                     'hide_context' => true,
-                    'provider'     => 'sonata.media.provider.image',
+                    'provider' => 'sonata.media.provider.image',
                 ],
             ])
             ->add('video', null, [
-                'label'    => 'admin.fields.project.video',
+                'label' => 'admin.fields.project.video',
                 'required' => false,
-                'help'     => 'admin.help.project.video',
+                'help' => 'admin.help.project.video',
                 ], [
                     'link_parameters' => ['context' => 'project'],
             ])
@@ -204,15 +204,15 @@ class ProjectAdmin extends Admin
             // Ranking
             ->with('admin.fields.project.group_ranking')
             ->add('opinionsRankingThreshold', null, [
-                'label'    => 'admin.fields.project.ranking.opinions_threshold',
+                'label' => 'admin.fields.project.ranking.opinions_threshold',
                 'required' => false,
             ])
             ->add('versionsRankingThreshold', null, [
-                'label'    => 'admin.fields.project.ranking.versions_threshold',
+                'label' => 'admin.fields.project.ranking.versions_threshold',
                 'required' => false,
             ])
             ->add('includeAuthorInRanking', null, [
-                'label'    => 'admin.fields.project.ranking.include_author',
+                'label' => 'admin.fields.project.ranking.include_author',
                 'required' => false,
             ])
             ->end()
@@ -220,12 +220,12 @@ class ProjectAdmin extends Admin
             // Steps
             ->with('admin.fields.project.group_steps')
             ->add('steps', 'sonata_type_collection', [
-                'label'        => 'admin.fields.project.steps',
+                'label' => 'admin.fields.project.steps',
                 'by_reference' => false,
-                'required'     => false,
+                'required' => false,
             ], [
-                'edit'     => 'inline',
-                'inline'   => 'table',
+                'edit' => 'inline',
+                'inline' => 'table',
                 'sortable' => 'position',
             ])
             ->end()
@@ -263,7 +263,7 @@ class ProjectAdmin extends Admin
             ])
             ->add('Cover', null, [
                 'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
-                'label'    => 'admin.fields.project.cover',
+                'label' => 'admin.fields.project.cover',
             ])
             ->add('video', null, [
                 'label' => 'admin.fields.project.video',
@@ -271,9 +271,9 @@ class ProjectAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $showMapper->add('themes', null, [
+            $showMapper->add('themes', null, array(
                 'label' => 'admin.fields.project.themes',
-            ]);
+            ));
         }
 
         $showMapper
@@ -307,7 +307,7 @@ class ProjectAdmin extends Admin
         $showMapper
             ->with('admin.fields.project.proposals')
             ->add('proposals', null, [
-                'label'    => false,
+                'label' => false,
                 'template' => 'CapcoAdminBundle:Project:proposals_show_field.html.twig',
             ])
             ->end();

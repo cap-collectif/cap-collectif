@@ -28,10 +28,10 @@ class ThemeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_theme');
 
-        $form = $this->createForm(new ThemeSearchType(), null, [
+        $form = $this->createForm(new ThemeSearchType(), null, array(
             'action' => $currentUrl,
             'method' => 'POST',
-        ]);
+        ));
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -40,14 +40,14 @@ class ThemeController extends Controller
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_theme_search', [
+                return $this->redirect($this->generateUrl('app_theme_search', array(
                     'term' => $data['term'],
-                ]));
+                )));
             }
         } else {
-            $form->setData([
+            $form->setData(array(
                 'term' => $term,
-            ]);
+            ));
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('themes.pagination');
@@ -60,12 +60,12 @@ class ThemeController extends Controller
             $nbPage = ceil(count($themes) / $pagination);
         }
 
-        return [
+        return array(
             'themes' => $themes,
-            'form'   => $form->createView(),
-            'page'   => $page,
+            'form' => $form->createView(),
+            'page' => $page,
             'nbPage' => $nbPage,
-        ];
+        );
     }
 
     /**
@@ -80,12 +80,12 @@ class ThemeController extends Controller
     public function showAction(Theme $theme)
     {
         if (false == $theme->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', array(), 'CapcoAppBundle'));
         }
 
-        return [
+        return array(
             'theme' => $theme,
-        ];
+        );
     }
 
     /**
@@ -104,9 +104,9 @@ class ThemeController extends Controller
         $nbIdeas = $em->getRepository('CapcoAppBundle:Idea')->countSearchResults($theme->getSlug());
 
         return [
-            'ideas'   => $ideas,
-            'theme'   => $theme,
-            'max'     => $max,
+            'ideas' => $ideas,
+            'theme' => $theme,
+            'max' => $max,
             'nbIdeas' => $nbIdeas,
         ];
     }
@@ -127,9 +127,9 @@ class ThemeController extends Controller
         $nbProjects = $em->getRepository('CapcoAppBundle:Project')->countSearchResults($theme->getSlug());
 
         return [
-            'projects'   => $projects,
-            'theme'      => $theme,
-            'max'        => $max,
+            'projects' => $projects,
+            'theme' => $theme,
+            'max' => $max,
             'nbProjects' => $nbProjects,
         ];
     }

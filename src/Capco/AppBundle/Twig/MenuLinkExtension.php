@@ -29,9 +29,9 @@ class MenuLinkExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return [
-            new \Twig_SimpleFunction('menu_url', [$this, 'getMenuUrl']),
-       ];
+        return array(
+            new \Twig_SimpleFunction('menu_url', array($this, 'getMenuUrl')),
+       );
     }
 
     public function getMenuUrl($url)
@@ -50,6 +50,6 @@ class MenuLinkExtension extends \Twig_Extension
             return $url;
         }
 
-        return $this->router->generate('capco_app_cms', ['url' => $url]);
+        return $this->router->generate('capco_app_cms', array('url' => $url));
     }
 }

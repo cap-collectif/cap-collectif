@@ -27,21 +27,21 @@ class CommentType extends AbstractType
     {
         if ($this->action === 'edit') {
             $builder
-                ->add('confirm', 'checkbox', [
-                    'mapped'      => false,
-                    'label'       => 'comment.form.confirm',
-                    'required'    => true,
+                ->add('confirm', 'checkbox', array(
+                    'mapped' => false,
+                    'label' => 'comment.form.confirm',
+                    'required' => true,
                     'constraints' => [new True(['message' => 'comment.votes_not_confirmed'])],
-                ])
+                ))
             ;
         }
 
         $builder
-            ->add('body', 'textarea', [
-                'required'           => true,
-                'label'              => 'comment.form.body',
+            ->add('body', 'textarea', array(
+                'required' => true,
+                'label' => 'comment.form.body',
                 'translation_domain' => 'CapcoAppBundle',
-            ])
+            ))
         ;
 
         if ($this->action === 'create') {
@@ -54,14 +54,14 @@ class CommentType extends AbstractType
 
         if (null == $this->user) {
             $builder
-                ->add('authorName', null, [
-                    'required'           => true,
+                ->add('authorName', null, array(
+                    'required' => true,
                     'translation_domain' => 'CapcoAppBundle',
-                ])
-                ->add('authorEmail', 'email', [
-                    'required'           => true,
+                ))
+                ->add('authorEmail', 'email', array(
+                    'required' => true,
                     'translation_domain' => 'CapcoAppBundle',
-                ])
+                ))
             ;
         }
     }
@@ -71,11 +71,11 @@ class CommentType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class'         => 'Capco\AppBundle\Entity\Comment',
-            'csrf_protection'    => false,
+        $resolver->setDefaults(array(
+            'data_class' => 'Capco\AppBundle\Entity\Comment',
+            'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
-        ]);
+        ));
     }
 
     /**

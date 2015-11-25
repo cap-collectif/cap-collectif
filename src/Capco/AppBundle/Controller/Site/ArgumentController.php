@@ -31,17 +31,17 @@ class ArgumentController extends Controller
     public function updateArgumentAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($argumentId);
 
         if ($argument == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $argument->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $argument->getLinkedOpinion();
@@ -53,7 +53,7 @@ class ArgumentController extends Controller
         $userPostArgument = $argument->getAuthor()->getId();
 
         if ($userCurrent !== $userPostArgument) {
-            throw new AccessDeniedException($this->get('translator')->trans('argument.error.not_author', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('argument.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         $form = $this->createForm(new ArgumentForm('edit'), $argument);
@@ -76,9 +76,9 @@ class ArgumentController extends Controller
         }
 
         return [
-            'form'     => $form->createView(),
+            'form' => $form->createView(),
             'argument' => $argument,
-            'opinion'  => $opinion,
+            'opinion' => $opinion,
         ];
     }
 
@@ -99,17 +99,17 @@ class ArgumentController extends Controller
     public function deleteArgumentAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($argumentId);
 
         if ($argument == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $argument->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $opinion = $argument->getLinkedOpinion();
@@ -121,7 +121,7 @@ class ArgumentController extends Controller
         $userPostArgument = $argument->getAuthor()->getId();
 
         if ($userCurrent !== $userPostArgument) {
-            throw new AccessDeniedException($this->get('translator')->trans('argument.error.not_author', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('argument.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         //Champ CSRF
@@ -145,9 +145,9 @@ class ArgumentController extends Controller
         }
 
         return [
-            'form'     => $form->createView(),
+            'form' => $form->createView(),
             'argument' => $argument,
-            'opinion'  => $opinion,
+            'opinion' => $opinion,
         ];
     }
 }

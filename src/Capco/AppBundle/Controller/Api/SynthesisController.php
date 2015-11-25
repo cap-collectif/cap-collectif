@@ -74,7 +74,7 @@ class SynthesisController extends FOSRestController
         if ($form->isValid()) {
             $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
             $view = $this->view($synthesis, Codes::HTTP_CREATED);
-            $view->setSerializationContext(SerializationContext::create()->setGroups(['SynthesisDetails', 'Elements']));
+            $view->setSerializationContext(SerializationContext::create()->setGroups(array('SynthesisDetails', 'Elements')));
             $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             $view->setHeader('Location', $url);
 
@@ -116,7 +116,7 @@ class SynthesisController extends FOSRestController
         if ($form->isValid()) {
             $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
             $view = $this->view($synthesis, Codes::HTTP_CREATED);
-            $view->setSerializationContext(SerializationContext::create()->setGroups(['SynthesisDetails', 'Elements']));
+            $view->setSerializationContext(SerializationContext::create()->setGroups(array('SynthesisDetails', 'Elements')));
             $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             $view->setHeader('Location', $url);
 

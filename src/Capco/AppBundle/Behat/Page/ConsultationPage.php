@@ -15,14 +15,14 @@ class ConsultationPage extends Page
      */
     protected $path = '/projects/{projectSlug}/consultation/{stepSlug}';
 
-    protected $elements = [
-        'Opinion nav bar'  => '.project__nav',
-        'Opinion nav item' => [
+    protected $elements = array(
+        'Opinion nav bar' => '.project__nav',
+        'Opinion nav item' => array(
             'css' => '.project__nav li',
-        ],
-    ];
+        ),
+    );
 
-    protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = array())
     {
         $expectedUrl = $this->getUrl($urlParameters);
         $currentUrl = $this->getSession()->getCurrentUrl();

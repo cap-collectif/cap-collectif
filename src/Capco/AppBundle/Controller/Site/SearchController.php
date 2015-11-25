@@ -48,14 +48,14 @@ class SearchController extends Controller
         $nbPages = ceil($count / $pagination);
 
         return [
-            'form'    => $form->createView(),
-            'count'   => $count,
+            'form' => $form->createView(),
+            'count' => $count,
             'results' => $searchResults['results'],
-            'term'    => $term,
-            'type'    => $type,
-            'sort'    => $sort,
+            'term' => $term,
+            'type' => $type,
+            'sort' => $sort,
             'nbPages' => $nbPages,
-            'page'    => $page,
+            'page' => $page,
         ];
     }
 }

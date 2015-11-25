@@ -14,7 +14,7 @@ class ArgumentAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by'    => 'updatedAt',
+        '_sort_by' => 'updatedAt',
     ];
 
     /**
@@ -23,29 +23,29 @@ class ArgumentAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('type', null, [
+            ->add('type', null, array(
                 'label' => 'admin.fields.argument.type',
-            ])
-            ->add('opinion', null, [
+            ))
+            ->add('opinion', null, array(
                 'label' => 'admin.fields.argument.opinion',
-            ])
+            ))
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.argument.author',
-            ], null, [
+            ], null, array(
                 'property' => 'username',
-            ])
-            ->add('votesCount', null, [
+            ))
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.argument.vote_count',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.argument.updated_at',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.argument.is_enabled',
-            ])
-            ->add('isTrashed', null, [
+            ))
+            ->add('isTrashed', null, array(
                 'label' => 'admin.fields.argument.is_trashed',
-            ])
+            ))
         ;
     }
 
@@ -57,42 +57,42 @@ class ArgumentAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('body', null, [
-                'label'    => 'admin.fields.argument.body',
+            ->addIdentifier('body', null, array(
+                'label' => 'admin.fields.argument.body',
                 'template' => 'CapcoAdminBundle:Argument:body_list_field.html.twig',
-            ])
-            ->add('type', null, [
-                'label'       => 'admin.fields.argument.type',
-                'template'    => 'CapcoAdminBundle:Argument:type_list_field.html.twig',
+            ))
+            ->add('type', null, array(
+                'label' => 'admin.fields.argument.type',
+                'template' => 'CapcoAdminBundle:Argument:type_list_field.html.twig',
                 'typesLabels' => Argument::$argumentTypesLabels,
-            ])
-            ->add('opinion', 'sonata_type_model', [
+            ))
+            ->add('opinion', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument.opinion',
-            ])
-            ->add('Author', 'sonata_type_model', [
+            ))
+            ->add('Author', 'sonata_type_model', array(
                 'label' => 'admin.fields.argument.author',
-            ])
-            ->add('votesCount', null, [
+            ))
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.argument.vote_count',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.argument.is_enabled',
-            ])
-            ->add('isTrashed', null, [
+                'label' => 'admin.fields.argument.is_enabled',
+            ))
+            ->add('isTrashed', null, array(
                 'editable' => true,
-                'label'    => 'admin.fields.argument.is_trashed',
-            ])
-            ->add('updatedAt', 'datetime', [
+                'label' => 'admin.fields.argument.is_trashed',
+            ))
+            ->add('updatedAt', 'datetime', array(
                 'label' => 'admin.fields.argument.updated_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
-                    'delete' => [],
-                ],
-            ])
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                ),
+            ))
         ;
     }
 
@@ -102,37 +102,37 @@ class ArgumentAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('type', 'choice', [
-                'label'              => 'admin.fields.argument.type',
-                'choices'            => Argument::$argumentTypesLabels,
+            ->add('type', 'choice', array(
+                'label' => 'admin.fields.argument.type',
+                'choices' => Argument::$argumentTypesLabels,
                 'translation_domain' => 'CapcoAppBundle',
-            ])
-            ->add('isEnabled', null, [
-                'label'    => 'admin.fields.argument.is_enabled',
+            ))
+            ->add('isEnabled', null, array(
+                'label' => 'admin.fields.argument.is_enabled',
                 'required' => false,
-            ])
+            ))
             ->add('opinion', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.argument.opinion',
+                'label' => 'admin.fields.argument.opinion',
                 'property' => 'title',
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.argument.author',
+                'label' => 'admin.fields.argument.author',
                 'property' => 'username',
             ])
-            ->add('body', null, [
+            ->add('body', null, array(
                 'label' => 'admin.fields.argument.body',
-                'attr'  => [
+                'attr' => array(
                     'rows' => 10,
-                ],
-            ])
-            ->add('isTrashed', null, [
-                'label'    => 'admin.fields.argument.is_trashed',
+                ),
+            ))
+            ->add('isTrashed', null, array(
+                'label' => 'admin.fields.argument.is_trashed',
                 'required' => false,
-            ])
-            ->add('trashedReason', null, [
-                'label'    => 'admin.fields.argument.trashed_reason',
+            ))
+            ->add('trashedReason', null, array(
+                'label' => 'admin.fields.argument.trashed_reason',
                 'required' => false,
-            ])
+            ))
         ;
     }
 
@@ -144,45 +144,45 @@ class ArgumentAdmin extends Admin
         $subject = $this->getSubject();
 
         $showMapper
-            ->add('body', null, [
+            ->add('body', null, array(
                 'label' => 'admin.fields.argument.body',
-            ])
-            ->add('type', null, [
-                'label'       => 'admin.fields.argument.type',
-                'template'    => 'CapcoAdminBundle:Argument:type_show_field.html.twig',
+            ))
+            ->add('type', null, array(
+                'label' => 'admin.fields.argument.type',
+                'template' => 'CapcoAdminBundle:Argument:type_show_field.html.twig',
                 'typesLabels' => Argument::$argumentTypesLabels,
-            ])
-            ->add('opinion', null, [
+            ))
+            ->add('opinion', null, array(
                 'label' => 'admin.fields.argument.opinion',
-            ])
-            ->add('Author', null, [
+            ))
+            ->add('Author', null, array(
                 'label' => 'admin.fields.argument.author',
-            ])
-            ->add('votesCount', null, [
+            ))
+            ->add('votesCount', null, array(
                 'label' => 'admin.fields.argument.vote_count',
-            ])
-            ->add('createdAt', null, [
+            ))
+            ->add('createdAt', null, array(
                 'label' => 'admin.fields.argument.created_at',
-            ])
-            ->add('updatedAt', null, [
+            ))
+            ->add('updatedAt', null, array(
                 'label' => 'admin.fields.argument.updated_at',
-            ])
-            ->add('isEnabled', null, [
+            ))
+            ->add('isEnabled', null, array(
                 'label' => 'admin.fields.argument.is_enabled',
-            ])
-            ->add('isTrashed', null, [
+            ))
+            ->add('isTrashed', null, array(
                 'label' => 'admin.fields.argument.is_trashed',
-            ])
+            ))
         ;
 
         if ($subject->getIsTrashed()) {
             $showMapper
-                ->add('trashedAt', null, [
+                ->add('trashedAt', null, array(
                     'label' => 'admin.fields.argument.trashed_at',
-                ])
-                ->add('trashedReason', null, [
+                ))
+                ->add('trashedReason', null, array(
                     'label' => 'admin.fields.argument.trashed_reason',
-                ])
+                ))
             ;
         }
     }

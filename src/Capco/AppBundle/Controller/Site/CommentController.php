@@ -27,7 +27,7 @@ class CommentController extends Controller
     public function loginToCommentAction($objectType, $objectId)
     {
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         return $this->redirect($this->get('capco.comment.resolver')->getUrlOfObjectByTypeAndId($objectType, $objectId));
@@ -67,7 +67,7 @@ class CommentController extends Controller
 
         if ($request->getMethod() == 'POST') {
             if (false == $this->get('capco.comment.resolver')->canAddCommentOn($object)) {
-                throw new AccessDeniedException($this->get('translator')->trans('project.error.no_contribute', [], 'CapcoAppBundle'));
+                throw new AccessDeniedException($this->get('translator')->trans('project.error.no_contribute', array(), 'CapcoAppBundle'));
             }
 
             $form->handleRequest($request);
@@ -100,7 +100,7 @@ class CommentController extends Controller
 
         return [
             'object' => $object,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -133,17 +133,17 @@ class CommentController extends Controller
     public function voteOnCommentAction($commentId, Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:Comment')->getOneById($commentId);
 
         if ($comment == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $comment->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $user = $this->getUser();
@@ -154,10 +154,10 @@ class CommentController extends Controller
             $commentVote = new CommentVote();
             $commentVote->setUser($user);
 
-            $userVote = $em->getRepository('CapcoAppBundle:CommentVote')->findOneBy([
-                'user'    => $user,
+            $userVote = $em->getRepository('CapcoAppBundle:CommentVote')->findOneBy(array(
+                'user' => $user,
                 'comment' => $comment,
-            ]);
+            ));
 
             if ($userVote != null) {
                 $commentVote = $userVote;
@@ -204,24 +204,24 @@ class CommentController extends Controller
     public function updateCommentAction($commentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:Comment')->getOneById($commentId);
 
         if ($comment == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $comment->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $userCurrent = $this->getUser();
         $userPostComment = $comment->getAuthor();
 
         if ($userCurrent !== $userPostComment) {
-            throw new AccessDeniedException($this->get('translator')->trans('comment.error.not_author', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('comment.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         $form = $this->createForm(new CommentForm($userCurrent, 'edit'), $comment);
@@ -243,7 +243,7 @@ class CommentController extends Controller
         }
 
         return [
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
             'comment' => $comment,
         ];
     }
@@ -262,24 +262,24 @@ class CommentController extends Controller
     public function deleteCommentAction($commentId, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
         }
 
         $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:Comment')->getOneById($commentId);
 
         if ($comment == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', array(), 'CapcoAppBundle'));
         }
 
         if (false == $comment->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', array(), 'CapcoAppBundle'));
         }
 
         $userCurrent = $this->getUser()->getId();
         $userPostComment = $comment->getAuthor()->getId();
 
         if ($userCurrent !== $userPostComment) {
-            throw new AccessDeniedException($this->get('translator')->trans('comment.error.not_author', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('comment.error.not_author', array(), 'CapcoAppBundle'));
         }
 
         //Champ CSRF
@@ -306,7 +306,7 @@ class CommentController extends Controller
         }
 
         return [
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
             'comment' => $comment,
         ];
     }

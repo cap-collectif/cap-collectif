@@ -24,36 +24,36 @@ class IdeaSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('term', 'search', [
-                'required'           => false,
-                'label'              => 'idea.searchform.term',
+            ->add('term', 'search', array(
+                'required' => false,
+                'label' => 'idea.searchform.term',
                 'translation_domain' => 'CapcoAppBundle',
-            ])
-            ->add('sort', 'choice', [
-                'required'           => false,
-                'choices'            => Idea::$sortCriterias,
+            ))
+            ->add('sort', 'choice', array(
+                'required' => false,
+                'choices' => Idea::$sortCriterias,
                 'translation_domain' => 'CapcoAppBundle',
-                'label'              => 'idea.searchform.sort',
-                'empty_value'        => false,
-                'attr'               => ['onchange' => 'this.form.submit()'],
-            ])
+                'label' => 'idea.searchform.sort',
+                'empty_value' => false,
+                'attr' => array('onchange' => 'this.form.submit()'),
+            ))
         ;
 
         if ($this->toggleManager->isActive('themes')) {
-            $builder->add('theme', 'entity', [
-                'required'           => false,
-                'class'              => 'CapcoAppBundle:Theme',
-                'property'           => 'title',
-                'label'              => 'idea.searchform.theme',
+            $builder->add('theme', 'entity', array(
+                'required' => false,
+                'class' => 'CapcoAppBundle:Theme',
+                'property' => 'title',
+                'label' => 'idea.searchform.theme',
                 'translation_domain' => 'CapcoAppBundle',
-                'query_builder'      => function (ThemeRepository $tr) {
+                'query_builder' => function (ThemeRepository $tr) {
                     return $tr->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
                 'empty_value' => 'idea.searchform.all_themes',
-                'attr'        => ['onchange' => 'this.form.submit()'],
-            ]);
+                'attr' => array('onchange' => 'this.form.submit()'),
+            ));
         }
     }
 

@@ -14,7 +14,7 @@ class LoginPage extends Page
      */
     protected $path = '/login';
 
-    protected $elements = [
+    protected $elements = array(
         'Connection form' => '#login-form',
-    ];
+    );
 }

@@ -24,23 +24,23 @@ class ArgumentType extends AbstractType
     {
         if ($this->action === 'edit') {
             $builder
-                ->add('confirm', 'checkbox', [
-                    'mapped'             => false,
-                    'label'              => 'argument.form.confirm',
-                    'required'           => true,
+                ->add('confirm', 'checkbox', array(
+                    'mapped' => false,
+                    'label' => 'argument.form.confirm',
+                    'required' => true,
                     'translation_domain' => 'CapcoAppBundle',
-                    'constraints'        => [new True(['message' => 'argument.votes_not_confirmed'])],
-                ])
+                    'constraints' => [new True(['message' => 'argument.votes_not_confirmed'])],
+                ))
             ;
         }
 
         $builder
-            ->add('body', 'textarea', [
-                'required'           => true,
-                'label'              => 'argument.form.body',
+            ->add('body', 'textarea', array(
+                'required' => true,
+                'label' => 'argument.form.body',
                 'translation_domain' => 'CapcoAppBundle',
-                'attr'               => ['rows' => 7],
-            ])
+                'attr' => array('rows' => 7),
+            ))
         ;
     }
 
@@ -49,11 +49,11 @@ class ArgumentType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class'      => 'Capco\AppBundle\Entity\Argument',
+        $resolver->setDefaults(array(
+            'data_class' => 'Capco\AppBundle\Entity\Argument',
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
-        ]);
+        ));
     }
 
     /**
