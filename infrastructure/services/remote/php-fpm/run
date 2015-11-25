@@ -4,6 +4,7 @@
 mkdir -p app/cache
 mkdir -p app/logs
 
+# Clear previous cache if any
 rm -rf app/cache/*
 
 chown -R capco:capco /var/www/app/cache
@@ -17,6 +18,7 @@ sed -i 's/newrelic.license = "REPLACE_WITH_REAL_KEY"/newrelic.license = '***REMO
 # Wait till mysql is booted
 while ! mysql --host=127.0.0.1 symfony > /dev/null 2>&1; do sleep 1; done
 
+# Migrate existing database or create one with default data
 su capco <<'EOF'
 cd       /var/www
 RESULT=`php app/console doctrine:migrations:status --env=prod 2>&1 | grep -o "Unknown database" | wc -l`
@@ -28,11 +30,17 @@ if [ "$RESULT" != "0" ]; then
 else
     php app/console doctrine:migrations:migrate --env=prod --no-interaction
 fi
+EOF
 
+# Wait till elasticsearch is booted
+while ! curl http://localhost:9200 > /dev/null 2>&1; do sleep 1; done
+
+# Start daemons
+su capco <<'EOF'
+cd       /var/www
 php app/console cache:warmup --env=prod --no-interaction &
 php app/console assets:install --symlink --env=prod --no-interaction &
 php app/console fos:elastica:populate --env=prod --no-interaction &
-
 EOF
 
 exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O
