@@ -18,9 +18,9 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
     public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage, AbstractVoteRepository $voteRepository, Manager $toggleManager)
     {
-        $this->router = $router;
-        $this->tokenStorage = $tokenStorage;
-        $this->toggleManager = $toggleManager;
+        $this->router         = $router;
+        $this->tokenStorage   = $tokenStorage;
+        $this->toggleManager  = $toggleManager;
         $this->voteRepository = $voteRepository;
     }
 
@@ -28,18 +28,18 @@ class OpinionSerializationListener implements EventSubscriberInterface
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\OpinionVersion',
+                'event'  => 'serializer.post_serialize',
+                'class'  => 'Capco\AppBundle\Entity\OpinionVersion',
                 'method' => 'onPostOpinionVersion',
             ],
             [
-                'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\Opinion',
+                'event'  => 'serializer.post_serialize',
+                'class'  => 'Capco\AppBundle\Entity\Opinion',
                 'method' => 'onPostOpinion',
             ],
             [
-                'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\OpinionType',
+                'event'  => 'serializer.post_serialize',
+                'class'  => 'Capco\AppBundle\Entity\OpinionType',
                 'method' => 'onPostOpinionType',
             ],
         ];
@@ -47,28 +47,28 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
     public function onPostOpinionVersion(ObjectEvent $event)
     {
-        $version = $event->getObject();
-        $opinion = $version->getParent();
+        $version     = $event->getObject();
+        $opinion     = $version->getParent();
         $opinionType = $opinion->getOpinionType();
-        $step = $opinion->getStep();
-        $project = $step->getProjectAbstractStep()->getProject();
-        $user = $this->tokenStorage->getToken()->getUser();
+        $step        = $opinion->getStep();
+        $project     = $step->getProjectAbstractStep()->getProject();
+        $user        = $this->tokenStorage->getToken()->getUser();
 
         $event->getVisitor()->addData(
             '_links', [
-                'show' => $this->router->generate('app_project_show_opinion_version', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
+                'show'                => $this->router->generate('app_project_show_opinion_version', [
+                    'projectSlug'     => $project->getSlug(),
+                    'stepSlug'        => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'versionSlug' => $version->getSlug(),
+                    'opinionSlug'     => $opinion->getSlug(),
+                    'versionSlug'     => $version->getSlug(),
                 ], true),
-                'report' => $this->router->generate('app_report_opinion_version', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
+                'report'              => $this->router->generate('app_report_opinion_version', [
+                    'projectSlug'     => $project->getSlug(),
+                    'stepSlug'        => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'versionSlug' => $version->getSlug(),
+                    'opinionSlug'     => $opinion->getSlug(),
+                    'versionSlug'     => $version->getSlug(),
                 ], true),
             ]
         );
@@ -84,35 +84,35 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
     public function onPostOpinion(ObjectEvent $event)
     {
-        $opinion = $event->getObject();
+        $opinion     = $event->getObject();
         $opinionType = $opinion->getOpinionType();
-        $step = $opinion->getStep();
-        $project = $step->getProjectAbstractStep()->getProject();
-        $user = $this->tokenStorage->getToken()->getUser();
+        $step        = $opinion->getStep();
+        $project     = $step->getProjectAbstractStep()->getProject();
+        $user        = $this->tokenStorage->getToken()->getUser();
 
         $event->getVisitor()->addData(
             '_links', [
-                'show' => $this->router->generate('app_project_show_opinion', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
+                'show'                => $this->router->generate('app_project_show_opinion', [
+                    'projectSlug'     => $project->getSlug(),
+                    'stepSlug'        => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
+                    'opinionSlug'     => $opinion->getSlug(),
                 ], true),
-                'edit' => $this->router->generate('app_project_edit_opinion', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
+                'edit'                => $this->router->generate('app_project_edit_opinion', [
+                    'projectSlug'     => $project->getSlug(),
+                    'stepSlug'        => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
+                    'opinionSlug'     => $opinion->getSlug(),
                 ], true),
-                'report' => $this->router->generate('app_report_opinion', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
+                'report'              => $this->router->generate('app_report_opinion', [
+                    'projectSlug'     => $project->getSlug(),
+                    'stepSlug'        => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
+                    'opinionSlug'     => $opinion->getSlug(),
                 ], true),
-                'type' => $this->router->generate('app_project_show_opinions', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
+                'type'                => $this->router->generate('app_project_show_opinions', [
+                    'projectSlug'     => $project->getSlug(),
+                    'stepSlug'        => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
                 ], true),
             ]
@@ -146,7 +146,7 @@ class OpinionSerializationListener implements EventSubscriberInterface
             return [];
         }
 
-        $reflectionClass = new \ReflectionClass('JMS\Serializer\Exclusion\GroupsExclusionStrategy');
+        $reflectionClass    = new \ReflectionClass('JMS\Serializer\Exclusion\GroupsExclusionStrategy');
         $reflectionProperty = $reflectionClass->getProperty('groups');
         $reflectionProperty->setAccessible(true);
 

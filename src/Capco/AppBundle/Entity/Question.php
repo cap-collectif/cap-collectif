@@ -21,11 +21,11 @@ class Question
     use SluggableTitleTrait;
     use PositionableTrait;
 
-    const QUESTION_TYPE_SIMPLE_TEXT = 0;
+    const QUESTION_TYPE_SIMPLE_TEXT    = 0;
     const QUESTION_TYPE_MULTILINE_TEXT = 1;
 
     public static $questionTypes = [
-        self::QUESTION_TYPE_SIMPLE_TEXT => 'question_type.types.simple_text',
+        self::QUESTION_TYPE_SIMPLE_TEXT    => 'question_type.types.simple_text',
         self::QUESTION_TYPE_MULTILINE_TEXT => 'question_type.types.multiline_text',
     ];
 

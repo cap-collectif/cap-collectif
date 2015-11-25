@@ -41,7 +41,7 @@ class PostsController extends FOSRestController
     public function getPostCommentsAction(BlogPost $post, ParamFetcherInterface $paramFetcher)
     {
         $offset = $paramFetcher->get('offset');
-        $limit = $paramFetcher->get('limit');
+        $limit  = $paramFetcher->get('limit');
         $filter = $paramFetcher->get('filter');
 
         $paginator = $this->getDoctrine()->getManager()
@@ -59,8 +59,8 @@ class PostsController extends FOSRestController
 
         return [
             'comments_and_answers_count' => intval($countWithAnswers),
-            'comments_count' => count($paginator),
-            'comments' => $comments,
+            'comments_count'             => count($paginator),
+            'comments'                   => $comments,
         ];
     }
 

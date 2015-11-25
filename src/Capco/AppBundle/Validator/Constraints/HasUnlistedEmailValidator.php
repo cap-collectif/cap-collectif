@@ -34,7 +34,7 @@ class HasUnlistedEmailValidator extends ConstraintValidator
         }
 
         if ($present) {
-            $this->context->addViolationAt('email', $constraint->message, array(), null);
+            $this->context->addViolationAt('email', $constraint->message, [], null);
 
             return false;
         }

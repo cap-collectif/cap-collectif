@@ -24,7 +24,7 @@ class ApiContext extends ApplicationContext
     public function createClient()
     {
         $this->client = new Client(['base_url' => $this->getParameter('base.url')]);
-        $this->token = null;
+        $this->token  = null;
     }
 
     /**
@@ -69,7 +69,7 @@ class ApiContext extends ApplicationContext
                 ],
             ]
         );
-        $response = $this->client->send($request);
+        $response    = $this->client->send($request);
         $this->token = $response->json()['token'];
     }
 
@@ -86,7 +86,7 @@ class ApiContext extends ApplicationContext
         $request = $this->client->createRequest($method, $url, [
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
+                'Content-Type'  => 'application/json',
             ],
             'exceptions' => false,
         ]);
@@ -105,9 +105,9 @@ class ApiContext extends ApplicationContext
     public function iSendARequestWithValues($method, $url, TableNode $table)
     {
         $request = $this->client->createRequest($method, $url, [
-            'body' => $table->getHash(),
+            'body'       => $table->getHash(),
             'exceptions' => false,
-            'headers' => ['Authorization' => sprintf('Bearer %s', $this->token)],
+            'headers'    => ['Authorization' => sprintf('Bearer %s', $this->token)],
         ]);
         $this->response = $this->client->send($request);
     }
@@ -124,11 +124,11 @@ class ApiContext extends ApplicationContext
     public function iSendARequestWithJson($method, $url, PyStringNode $string)
     {
         $request = $this->client->createRequest($method, $url, [
-            'body' => $string->getRaw(),
+            'body'       => $string->getRaw(),
             'exceptions' => false,
-            'headers' => [
+            'headers'    => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
+                'Content-Type'  => 'application/json',
             ],
         ]);
         $this->response = $this->client->send($request);
@@ -168,7 +168,7 @@ class ApiContext extends ApplicationContext
     public function thereIsASynthesisWithIdAndElements($id, TableNode $elementsIds)
     {
         $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id);
-        $author = $this->getService('fos_user.user_manager')->findOneBy(['slug' => 'sfavot']);
+        $author    = $this->getService('fos_user.user_manager')->findOneBy(['slug' => 'sfavot']);
 
         if (null === $synthesis) {
             // Create synthesis
@@ -249,7 +249,7 @@ class ApiContext extends ApplicationContext
      */
     public function iCreateAnElementInSynthesisWithValues($id, TableNode $data)
     {
-        $values = $data->getRowsHash();
+        $values    = $data->getRowsHash();
         $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id);
 
         $element = new SynthesisElement();
@@ -289,8 +289,8 @@ class ApiContext extends ApplicationContext
      */
     public function thereShouldBeALogOnElementWithSentence($id, $sentence)
     {
-        $element = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($id);
-        $logs = $this->getService('capco.synthesis.log_manager')->getLogEntries($element);
+        $element   = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($id);
+        $logs      = $this->getService('capco.synthesis.log_manager')->getLogEntries($element);
         $logExists = false;
         foreach ($logs as $log) {
             $sentences = $this->getService('capco.synthesis.log_manager')->getSentencesForLog($log);
@@ -311,8 +311,8 @@ class ApiContext extends ApplicationContext
     public function thereShouldBeACreateLogOnResponseElement()
     {
         $this->response->json(); // check if json
-        $body = (string) $this->response->getBody();
-        $data = json_decode($body, true);
+        $body      = (string) $this->response->getBody();
+        $data      = json_decode($body, true);
         $elementId = $data['id'];
         $this->thereShouldBeALogOnElementWithSentence($elementId, 'Création de l\'élément');
     }

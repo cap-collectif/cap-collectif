@@ -12,7 +12,7 @@ class PositionableResolver
 
     public function __construct(PositionableRepository $repository, Manager $toggleManager)
     {
-        $this->repository = $repository;
+        $this->repository    = $repository;
         $this->toggleManager = $toggleManager;
     }
 
@@ -21,7 +21,7 @@ class PositionableResolver
      */
     public function getDisplayableOrdered()
     {
-        $all = $this->repository->getAllOrderedByPosition();
+        $all     = $this->repository->getAllOrderedByPosition();
         $objects = [];
         foreach ($all as $object) {
             if ($this->toggleManager->containsEnabledFeature($object->getAssociatedFeatures())) {
@@ -37,7 +37,7 @@ class PositionableResolver
      */
     public function getDisplayableEnabledOrdered()
     {
-        $all = $this->repository->getEnabledOrderedByPosition();
+        $all     = $this->repository->getEnabledOrderedByPosition();
         $objects = [];
         foreach ($all as $object) {
             if ($this->toggleManager->containsEnabledFeature($object->getAssociatedFeatures())) {

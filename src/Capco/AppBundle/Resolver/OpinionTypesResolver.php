@@ -18,8 +18,8 @@ class OpinionTypesResolver
     public function __construct(OpinionTypeRepository $opinionTypeRepo, OpinionRepository $opinionRepo, Router $router)
     {
         $this->opinionTypeRepo = $opinionTypeRepo;
-        $this->opinionRepo = $opinionRepo;
-        $this->router = $router;
+        $this->opinionRepo     = $opinionRepo;
+        $this->router          = $router;
         $this->opinionTypeRepo->setChildrenIndex('children');
     }
 
@@ -34,9 +34,9 @@ class OpinionTypesResolver
         $url = $this->router->generate('app_project_show', ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()]);
 
         $options = [
-            'decorate' => true,
-            'rootOpen' => '<ul class="nav">',
-            'rootClose' => '</ul>',
+            'decorate'      => true,
+            'rootOpen'      => '<ul class="nav">',
+            'rootClose'     => '</ul>',
             'nodeDecorator' => function ($node) use ($url) {
                 $link = $url.'#opinion-type--'.$node['slug'];
                 $levelClass = 'nav--level-'.$node['level'];
@@ -123,7 +123,7 @@ class OpinionTypesResolver
             return [];
         }
 
-        $allowed = false;
+        $allowed      = false;
         $opinionTypes = $this->getAllForConsultationStepType($consultationStepType);
         foreach ($opinionTypes as $ot) {
             if ($ot->getId() === $opinionType->getId()) {

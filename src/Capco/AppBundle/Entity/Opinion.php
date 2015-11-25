@@ -34,11 +34,11 @@ class Opinion implements SelfLinkableInterface, VotableInterface
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
-        'last' => 'opinion.sort.last',
-        'old' => 'opinion.sort.old',
+        'last'      => 'opinion.sort.last',
+        'old'       => 'opinion.sort.old',
         'favorable' => 'opinion.sort.favorable',
-        'votes' => 'opinion.sort.votes',
-        'comments' => 'opinion.sort.comments',
+        'votes'     => 'opinion.sort.votes',
+        'comments'  => 'opinion.sort.comments',
     ];
 
     /**
@@ -160,12 +160,12 @@ class Opinion implements SelfLinkableInterface, VotableInterface
 
     public function __construct()
     {
-        $this->votes = new ArrayCollection();
-        $this->Reports = new ArrayCollection();
-        $this->arguments = new ArrayCollection();
-        $this->Sources = new ArrayCollection();
-        $this->versions = new ArrayCollection();
-        $this->appendices = new ArrayCollection();
+        $this->votes       = new ArrayCollection();
+        $this->Reports     = new ArrayCollection();
+        $this->arguments   = new ArrayCollection();
+        $this->Sources     = new ArrayCollection();
+        $this->versions    = new ArrayCollection();
+        $this->appendices  = new ArrayCollection();
         $this->connections = new ArrayCollection();
 
         $this->updatedAt = new \Datetime();

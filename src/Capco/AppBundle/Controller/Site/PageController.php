@@ -25,12 +25,12 @@ class PageController extends Controller
     public function showAction(Page $page)
     {
         if ($page->getIsEnabled() == false) {
-            throw $this->createNotFoundException($this->get('translator')->trans('page.error.not_found', array(), 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        $response = $this->render('CapcoAppBundle:Page:show.html.twig', array(
+        $response = $this->render('CapcoAppBundle:Page:show.html.twig', [
             'page' => $page,
-        ));
+        ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
             $response->setPublic();

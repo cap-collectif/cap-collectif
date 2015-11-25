@@ -68,13 +68,13 @@ class SynthesisController extends FOSRestController
     public function createSynthesisAction(Request $request)
     {
         $synthesis = new Synthesis();
-        $form = $this->createForm(new SynthesisForm(), $synthesis);
+        $form      = $this->createForm(new SynthesisForm(), $synthesis);
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
             $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
-            $view = $this->view($synthesis, Codes::HTTP_CREATED);
-            $view->setSerializationContext(SerializationContext::create()->setGroups(array('SynthesisDetails', 'Elements')));
+            $view      = $this->view($synthesis, Codes::HTTP_CREATED);
+            $view->setSerializationContext(SerializationContext::create()->setGroups(['SynthesisDetails', 'Elements']));
             $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             $view->setHeader('Location', $url);
 
@@ -110,13 +110,13 @@ class SynthesisController extends FOSRestController
     public function createSynthesisFromConsultationStepAction(Request $request, ConsultationStep $consultationStep)
     {
         $synthesis = new Synthesis();
-        $form = $this->createForm(new SynthesisForm(), $synthesis);
+        $form      = $this->createForm(new SynthesisForm(), $synthesis);
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
             $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
-            $view = $this->view($synthesis, Codes::HTTP_CREATED);
-            $view->setSerializationContext(SerializationContext::create()->setGroups(array('SynthesisDetails', 'Elements')));
+            $view      = $this->view($synthesis, Codes::HTTP_CREATED);
+            $view->setSerializationContext(SerializationContext::create()->setGroups(['SynthesisDetails', 'Elements']));
             $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
             $view->setHeader('Location', $url);
 
@@ -223,10 +223,10 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
-        $type = $paramFetcher->get('type');
-        $term = $paramFetcher->get('term');
+        $type   = $paramFetcher->get('type');
+        $term   = $paramFetcher->get('term');
         $offset = $paramFetcher->get('offset');
-        $limit = $paramFetcher->get('limit');
+        $limit  = $paramFetcher->get('limit');
 
         if ($type !== 'published' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
@@ -258,8 +258,8 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesisElementsTreeAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
-        $type = $paramFetcher->get('type');
-        $depth = $paramFetcher->get('depth');
+        $type   = $paramFetcher->get('type');
+        $depth  = $paramFetcher->get('depth');
         $parent = $paramFetcher->get('parent');
 
         if ($type !== 'published' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
@@ -341,7 +341,7 @@ class SynthesisController extends FOSRestController
     public function createSynthesisElementAction(Request $request, Synthesis $synthesis)
     {
         $element = new SynthesisElement();
-        $form = $this->createForm(new SynthesisElementForm(false), $element);
+        $form    = $this->createForm(new SynthesisElementForm(false), $element);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

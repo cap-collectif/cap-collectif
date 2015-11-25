@@ -32,7 +32,7 @@ class IdeaController extends Controller
     public function createAction(Request $request)
     {
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $idea = new Idea();
@@ -52,13 +52,13 @@ class IdeaController extends Controller
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('idea.create.success'));
 
-                return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
+                return $this->redirect($this->generateUrl('app_idea_show', ['slug' => $idea->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('idea.create.error'));
             }
         }
 
-        return array('form' => $form->createView());
+        return ['form' => $form->createView()];
     }
 
     /**
@@ -73,18 +73,18 @@ class IdeaController extends Controller
     public function deleteAction(Idea $idea, Request $request)
     {
         if (false == $idea->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
-        $userCurrent = $this->getUser()->getId();
+        $userCurrent  = $this->getUser()->getId();
         $userPostIdea = $idea->getAuthor()->getId();
 
         if ($userCurrent !== $userPostIdea) {
-            throw new AccessDeniedException($this->get('translator')->trans('idea.error.not_author', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('idea.error.not_author', [], 'CapcoAppBundle'));
         }
 
         //Champ CSRF
@@ -99,16 +99,16 @@ class IdeaController extends Controller
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('idea.delete.success'));
 
-                return $this->redirect($this->generateUrl('app_idea', array()));
+                return $this->redirect($this->generateUrl('app_idea', []));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('idea.delete.error'));
             }
         }
 
-        return array(
+        return [
             'idea' => $idea,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
@@ -122,14 +122,14 @@ class IdeaController extends Controller
     public function showTrashedAction($page)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $em = $this->getDoctrine()->getManager();
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
 
-        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getTrashed($pagination, $page);
+        $ideas            = $em->getRepository('CapcoAppBundle:Idea')->getTrashed($pagination, $page);
         $publishedIdeasNb = $em->getRepository('CapcoAppBundle:Idea')->countPublished();
 
         //Avoid division by 0 in nbPage calculation
@@ -138,12 +138,12 @@ class IdeaController extends Controller
             $nbPage = ceil(count($ideas) / $pagination);
         }
 
-        return array(
-            'ideas' => $ideas,
+        return [
+            'ideas'            => $ideas,
             'publishedIdeasNb' => $publishedIdeasNb,
-            'page' => $page,
-            'nbPage' => $nbPage,
-        );
+            'page'             => $page,
+            'nbPage'           => $nbPage,
+        ];
     }
 
     /**
@@ -174,18 +174,18 @@ class IdeaController extends Controller
     public function updateAction(Idea $idea,  Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         if (false == $idea->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $userCurrent = $this->getUser()->getId();
+        $userCurrent  = $this->getUser()->getId();
         $userPostIdea = $idea->getAuthor()->getId();
 
         if ($userCurrent !== $userPostIdea) {
-            throw new AccessDeniedException($this->get('translator')->trans('idea.error.not_author', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('idea.error.not_author', [], 'CapcoAppBundle'));
         }
 
         $form = $this->createForm(new IdeaUpdateType($this->get('capco.toggle.manager')), $idea);
@@ -200,16 +200,16 @@ class IdeaController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('idea.update.success'));
 
-                return $this->redirect($this->generateUrl('app_idea_show', array('slug' => $idea->getSlug())));
+                return $this->redirect($this->generateUrl('app_idea_show', ['slug' => $idea->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('idea.update.error'));
             }
         }
 
-        return array(
+        return [
             'form' => $form->createView(),
             'idea' => $idea,
-        );
+        ];
     }
 
     /**
@@ -228,13 +228,13 @@ class IdeaController extends Controller
      */
     public function indexAction(Request $request, $page, $theme = null, $sort = 'last', $term = null)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em         = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_idea');
 
-        $form = $this->createForm(new IdeaSearchType($this->get('capco.toggle.manager')), null, array(
+        $form = $this->createForm(new IdeaSearchType($this->get('capco.toggle.manager')), null, [
             'action' => $currentUrl,
             'method' => 'POST',
-        ));
+        ]);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -243,23 +243,23 @@ class IdeaController extends Controller
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_idea_search_term', array(
+                return $this->redirect($this->generateUrl('app_idea_search_term', [
                     'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
-                    'sort' => $data['sort'],
-                    'term' => $data['term'],
-                )));
+                    'sort'  => $data['sort'],
+                    'term'  => $data['term'],
+                ]));
             }
         } else {
             $form->setData([
                 'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
-                'sort' => $sort,
-                'term' => $term,
+                'sort'  => $sort,
+                'term'  => $term,
             ]);
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
 
-        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getSearchResults($pagination, $page, $theme, $sort, $term);
+        $ideas          = $em->getRepository('CapcoAppBundle:Idea')->getSearchResults($pagination, $page, $theme, $sort, $term);
         $trashedIdeasNb = $em->getRepository('CapcoAppBundle:Idea')->countTrashed();
 
         //Avoid division by 0 in nbPage calculation
@@ -268,13 +268,13 @@ class IdeaController extends Controller
             $nbPage = ceil(count($ideas) / $pagination);
         }
 
-        return array(
-            'ideas' => $ideas,
-            'form' => $form->createView(),
-            'page' => $page,
-            'nbPage' => $nbPage,
+        return [
+            'ideas'          => $ideas,
+            'form'           => $form->createView(),
+            'page'           => $page,
+            'nbPage'         => $nbPage,
             'trashedIdeasNb' => $trashedIdeasNb,
-        );
+        ];
     }
 
     /**
@@ -288,13 +288,13 @@ class IdeaController extends Controller
      */
     public function showAction(Request $request, $slug)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em         = $this->getDoctrine()->getManager();
         $translator = $this->get('translator');
 
         $idea = $em->getRepository('CapcoAppBundle:Idea')->getOneJoinUserReports($slug, $this->getUser());
 
         if (!$idea || false === $idea->canDisplay()) {
-            throw $this->createNotFoundException($translator->trans('idea.error.not_found', array(), 'CapcoAppBundle'));
+            throw $this->createNotFoundException($translator->trans('idea.error.not_found', [], 'CapcoAppBundle'));
         }
 
         $votes = $em->getRepository('CapcoAppBundle:IdeaVote')->findAllByIdea($idea);
@@ -310,7 +310,7 @@ class IdeaController extends Controller
 
         if ($request->getMethod() == 'POST') {
             if (false == $idea->canContribute()) {
-                throw new AccessDeniedException($translator->trans('idea.error.no_contribute', array(), 'CapcoAppBundle'));
+                throw new AccessDeniedException($translator->trans('idea.error.no_contribute', [], 'CapcoAppBundle'));
             }
 
             $form->handleRequest($request);
@@ -360,9 +360,9 @@ class IdeaController extends Controller
         }
 
         return [
-            'idea' => $idea,
+            'idea'  => $idea,
             'votes' => $votes,
-            'form' => $form->createView(),
+            'form'  => $form->createView(),
         ];
     }
 }

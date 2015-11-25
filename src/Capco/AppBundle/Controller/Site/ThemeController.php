@@ -25,13 +25,13 @@ class ThemeController extends Controller
      */
     public function indexAction(Request $request, $page, $term = null)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em         = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_theme');
 
-        $form = $this->createForm(new ThemeSearchType(), null, array(
+        $form = $this->createForm(new ThemeSearchType(), null, [
             'action' => $currentUrl,
             'method' => 'POST',
-        ));
+        ]);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -40,14 +40,14 @@ class ThemeController extends Controller
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_theme_search', array(
+                return $this->redirect($this->generateUrl('app_theme_search', [
                     'term' => $data['term'],
-                )));
+                ]));
             }
         } else {
-            $form->setData(array(
+            $form->setData([
                 'term' => $term,
-            ));
+            ]);
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('themes.pagination');
@@ -60,12 +60,12 @@ class ThemeController extends Controller
             $nbPage = ceil(count($themes) / $pagination);
         }
 
-        return array(
+        return [
             'themes' => $themes,
-            'form' => $form->createView(),
-            'page' => $page,
+            'form'   => $form->createView(),
+            'page'   => $page,
             'nbPage' => $nbPage,
-        );
+        ];
     }
 
     /**
@@ -80,12 +80,12 @@ class ThemeController extends Controller
     public function showAction(Theme $theme)
     {
         if (false == $theme->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', array(), 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        return array(
+        return [
             'theme' => $theme,
-        );
+        ];
     }
 
     /**
@@ -99,14 +99,14 @@ class ThemeController extends Controller
      */
     public function lastIdeasAction($theme, $max = 8, $offset = 0)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
+        $em      = $this->get('doctrine.orm.entity_manager');
+        $ideas   = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
         $nbIdeas = $em->getRepository('CapcoAppBundle:Idea')->countSearchResults($theme->getSlug());
 
         return [
-            'ideas' => $ideas,
-            'theme' => $theme,
-            'max' => $max,
+            'ideas'   => $ideas,
+            'theme'   => $theme,
+            'max'     => $max,
             'nbIdeas' => $nbIdeas,
         ];
     }
@@ -122,14 +122,14 @@ class ThemeController extends Controller
      */
     public function lastProjectsAction($theme, $max = 8, $offset = 0)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $projects = $em->getRepository('CapcoAppBundle:Project')->getLastByTheme($theme->getId(), $max, $offset);
+        $em         = $this->get('doctrine.orm.entity_manager');
+        $projects   = $em->getRepository('CapcoAppBundle:Project')->getLastByTheme($theme->getId(), $max, $offset);
         $nbProjects = $em->getRepository('CapcoAppBundle:Project')->countSearchResults($theme->getSlug());
 
         return [
-            'projects' => $projects,
-            'theme' => $theme,
-            'max' => $max,
+            'projects'   => $projects,
+            'theme'      => $theme,
+            'max'        => $max,
             'nbProjects' => $nbProjects,
         ];
     }

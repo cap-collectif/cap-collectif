@@ -44,19 +44,19 @@ class ProposalsController extends FOSRestController
      */
     public function getProposalsByFormAction(ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
     {
-        $first = intval($paramFetcher->get('first'));
-        $offset = intval($paramFetcher->get('offset'));
-        $order = $paramFetcher->get('order');
-        $themeId = $paramFetcher->get('theme');
-        $statusId = $paramFetcher->get('status');
+        $first      = intval($paramFetcher->get('first'));
+        $offset     = intval($paramFetcher->get('offset'));
+        $order      = $paramFetcher->get('order');
+        $themeId    = $paramFetcher->get('theme');
+        $statusId   = $paramFetcher->get('status');
         $districtId = $paramFetcher->get('district');
-        $typeId = $paramFetcher->get('type');
+        $typeId     = $paramFetcher->get('type');
 
-        $em = $this->getDoctrine()->getManager();
-        $theme = null;
-        $status = null;
+        $em       = $this->getDoctrine()->getManager();
+        $theme    = null;
+        $status   = null;
         $district = null;
-        $type = null;
+        $type     = null;
 
         if ($themeId) {
             $theme = $em->getRepository('CapcoAppBundle:Theme')->find($themeId);
@@ -98,7 +98,7 @@ class ProposalsController extends FOSRestController
 
         return [
             'proposals' => $proposals,
-            'count' => count($paginator),
+            'count'     => count($paginator),
         ];
     }
 
@@ -154,7 +154,7 @@ class ProposalsController extends FOSRestController
     public function postProposalAction(Request $request, ProposalForm $proposalForm)
     {
         $user = $this->getUser();
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em   = $this->get('doctrine.orm.entity_manager');
 
         $proposal = (new Proposal())
             ->setAuthor($user)
@@ -196,7 +196,7 @@ class ProposalsController extends FOSRestController
     public function getProposalCommentsAction(ProposalForm $form, Proposal $proposal, ParamFetcherInterface $paramFetcher)
     {
         $offset = $paramFetcher->get('offset');
-        $limit = $paramFetcher->get('limit');
+        $limit  = $paramFetcher->get('limit');
         $filter = $paramFetcher->get('filter');
 
         $paginator = $this->getDoctrine()->getManager()
@@ -214,8 +214,8 @@ class ProposalsController extends FOSRestController
 
         return [
             'comments_and_answers_count' => intval($countWithAnswers),
-            'comments_count' => count($paginator),
-            'comments' => $comments,
+            'comments_count'             => count($paginator),
+            'comments'                   => $comments,
         ];
     }
 

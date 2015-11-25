@@ -21,8 +21,8 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 class Source implements VotableInterface
 {
     const TYPE_FOR = 1;
-    const LINK = 0;
-    const FILE = 1;
+    const LINK     = 0;
+    const FILE     = 1;
 
     public static $TypesLabels = [
         self::LINK => 'source.type.link',
@@ -171,9 +171,9 @@ class Source implements VotableInterface
 
     public function __construct()
     {
-        $this->type = self::LINK;
-        $this->Reports = new ArrayCollection();
-        $this->votes = new ArrayCollection();
+        $this->type      = self::LINK;
+        $this->Reports   = new ArrayCollection();
+        $this->votes     = new ArrayCollection();
         $this->updatedAt = new \DateTime();
     }
 
@@ -508,7 +508,7 @@ class Source implements VotableInterface
         if ($isTrashed != $this->isTrashed) {
             if (false == $this->isTrashed) {
                 $this->trashedReason = null;
-                $this->trashedAt = null;
+                $this->trashedAt     = null;
             }
         }
         $this->isTrashed = $isTrashed;

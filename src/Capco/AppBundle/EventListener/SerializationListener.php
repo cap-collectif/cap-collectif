@@ -17,9 +17,9 @@ class SerializationListener implements EventSubscriberInterface
 
     public function __construct(LogManager $logManager, MediaExtension $mediaExtension, Serializer $serializer)
     {
-        $this->logManager = $logManager;
+        $this->logManager     = $logManager;
         $this->mediaExtension = $mediaExtension;
-        $this->serializer = $serializer;
+        $this->serializer     = $serializer;
     }
 
     public static function getSubscribedEvents()

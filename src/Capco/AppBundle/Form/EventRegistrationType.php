@@ -14,7 +14,7 @@ class EventRegistrationType extends AbstractType
 
     public function __construct(User $user = null, $registered)
     {
-        $this->user = $user;
+        $this->user       = $user;
         $this->registered = $registered;
     }
 
@@ -27,7 +27,7 @@ class EventRegistrationType extends AbstractType
         if ($this->registered) {
             $builder->add('submit', 'submit', [
               'label' => 'event_registration.unsubscribe',
-              'attr' => ['class' => 'btn  btn-danger  btn-block'],
+              'attr'  => ['class' => 'btn  btn-danger  btn-block'],
             ]);
 
             return;
@@ -37,11 +37,11 @@ class EventRegistrationType extends AbstractType
             $builder
               ->add('private', null, [
                   'required' => false,
-                  'label' => 'event_registration.create.private',
+                  'label'    => 'event_registration.create.private',
               ])
               ->add('submit', 'submit', [
                   'label' => 'event_registration.create.register',
-                  'attr' => ['class' => 'btn btn-success btn-block'],
+                  'attr'  => ['class' => 'btn btn-success btn-block'],
               ])
             ;
 
@@ -57,21 +57,21 @@ class EventRegistrationType extends AbstractType
             ])
             ->add('private', null, [
                 'required' => false,
-                'label' => 'event_registration.create.private',
+                'label'    => 'event_registration.create.private',
             ])
             ->add('submit', 'submit', [
                   'label' => 'event_registration.create.submit',
-                  'attr' => ['class' => 'btn  btn-success  btn-block'],
+                  'attr'  => ['class' => 'btn  btn-success  btn-block'],
             ])
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Capco\AppBundle\Entity\EventRegistration',
+        $resolver->setDefaults([
+            'data_class'         => 'Capco\AppBundle\Entity\EventRegistration',
             'translation_domain' => 'CapcoAppBundle',
-        ));
+        ]);
     }
 
     /**

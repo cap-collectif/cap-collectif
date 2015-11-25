@@ -24,8 +24,8 @@ class MediaProcessor implements ProcessorInterface
         $this->container = $container;
 
         $this->categoryManager = $this->container->get('sonata.classification.manager.category');
-        $this->contextManager = $this->container->get('sonata.classification.manager.context');
-        $this->mediaManager = $this->container->get('sonata.media.manager.media');
+        $this->contextManager  = $this->container->get('sonata.classification.manager.context');
+        $this->mediaManager    = $this->container->get('sonata.media.manager.media');
     }
 
     /**

@@ -14,12 +14,12 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class OauthConnectController extends ConnectController
 {
-    protected $featuresForServices = array(
-        'facebook' => array('login_facebook'),
-        'google' => array('login_gplus'),
-        'twitter' => array('login_twitter'),
-        'nous_citoyens' => array('login_nous_citoyens'),
-    );
+    protected $featuresForServices = [
+        'facebook'      => ['login_facebook'],
+        'google'        => ['login_gplus'],
+        'twitter'       => ['login_twitter'],
+        'nous_citoyens' => ['login_nous_citoyens'],
+    ];
 
     public function getFeaturesForService($service)
     {
@@ -53,11 +53,11 @@ class OauthConnectController extends ConnectController
             && !$hasUser
             && $error instanceof AccountNotLinkedException
         ) {
-            $key = time();
+            $key     = time();
             $session = $request->getSession();
             $session->set('_hwi_oauth.registration_error.'.$key, $error);
 
-            return new RedirectResponse($this->generate('hwi_oauth_connect_registration', array('key' => $key)));
+            return new RedirectResponse($this->generate('hwi_oauth_connect_registration', ['key' => $key]));
         }
 
         if ($error) {
@@ -79,7 +79,7 @@ class OauthConnectController extends ConnectController
     public function connectServiceAction(Request $request, $service)
     {
         if (!$this->serviceHasEnabledFeature($service)) {
-            $message = $this->container->get('translator')->trans('error.feature_not_enabled', array(), 'CapcoAppBundle');
+            $message = $this->container->get('translator')->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
             throw new NotFoundHttpException($message);
         }
 
@@ -95,7 +95,7 @@ class OauthConnectController extends ConnectController
     public function redirectToServiceAction(Request $request, $service)
     {
         if (!$this->serviceHasEnabledFeature($service)) {
-            $message = $this->container->get('translator')->trans('error.feature_not_enabled', array(), 'CapcoAppBundle');
+            $message = $this->container->get('translator')->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
             throw new NotFoundHttpException($message);
         }
 
@@ -104,27 +104,27 @@ class OauthConnectController extends ConnectController
 
     public function nousCitoyensAction()
     {
-        $ro = $this->getResourceOwnerByName('nous_citoyens');
+        $ro         = $this->getResourceOwnerByName('nous_citoyens');
         $reflection = new \ReflectionClass($ro);
-        $property = $reflection->getProperty('options');
+        $property   = $reflection->getProperty('options');
         $property->setAccessible(true);
-        $url = $property->getValue($ro)['authorization_url'];
+        $url    = $property->getValue($ro)['authorization_url'];
         $router = $this->container->get('router');
         $router->getContext()->setScheme('http');
 
         $params = [
             'grant_type' => 'authorization_code',
-            'client_id' => $this->getParameter('nous_citoyens_app_id'),
+            'client_id'  => $this->getParameter('nous_citoyens_app_id'),
             // pas du tout secure mais bon on peut pas redirect
             // sur une route en POST... en plus cette route a aucune raison d'avoir besoin du secret...
             'client_secret' => $this->getParameter('nous_citoyens_app_secret'),
-            'redirect_uri' => $router->generate('nous_citoyens_login', [], true),
-            'state' => '123',
+            'redirect_uri'  => $router->generate('nous_citoyens_login', [], true),
+            'state'         => '123',
             'response_type' => 'code',
         ];
 
         return $this->render('CapcoUserBundle:Oauth:nous_citoyens.html.twig', [
-            'url' => $url,
+            'url'    => $url,
             'params' => $params,
         ]);
     }

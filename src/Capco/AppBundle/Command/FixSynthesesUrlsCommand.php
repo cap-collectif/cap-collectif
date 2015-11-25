@@ -20,7 +20,7 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
 
-        $em = $container->get('doctrine.orm.entity_manager');
+        $em       = $container->get('doctrine.orm.entity_manager');
         $elements = $em
             ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
             ->createQueryBuilder('se')
@@ -31,7 +31,7 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
         ;
         foreach ($elements as $el) {
             $contribution = $em->getRepository($el->getLinkedDataClass())->find($el->getLinkedDataId());
-            $urlResolver = $container->get('capco.url.resolver');
+            $urlResolver  = $container->get('capco.url.resolver');
             $el->setLinkedDataUrl($urlResolver->getObjectUrl($contribution, false));
         }
         $em->flush();

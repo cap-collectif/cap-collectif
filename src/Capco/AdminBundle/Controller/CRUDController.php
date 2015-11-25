@@ -21,7 +21,7 @@ class CRUDController extends Controller
      */
     protected function retrieveAutocompleteItems(Request $request, $conditions = [])
     {
-        $pool = $this->get('sonata.admin.pool');
+        $pool  = $this->get('sonata.admin.pool');
         $admin = $pool->getInstance($request->get('admin_code'));
         $admin->setRequest($request);
         $context = $request->get('_context', '');
@@ -42,15 +42,15 @@ class CRUDController extends Controller
 
         if ($context === 'filter') {
             // filter
-            $fieldDescription = $this->retrieveFilterFieldDescription($admin, $request->get('field'));
+            $fieldDescription   = $this->retrieveFilterFieldDescription($admin, $request->get('field'));
             $filterAutocomplete = $admin->getDatagrid()->getFilter($fieldDescription->getName());
 
-            $property = $filterAutocomplete->getFieldOption('property');
-            $callback = $filterAutocomplete->getFieldOption('callback');
+            $property           = $filterAutocomplete->getFieldOption('property');
+            $callback           = $filterAutocomplete->getFieldOption('callback');
             $minimumInputLength = $filterAutocomplete->getFieldOption('minimum_input_length', 3);
-            $itemsPerPage = $filterAutocomplete->getFieldOption('items_per_page', 10);
+            $itemsPerPage       = $filterAutocomplete->getFieldOption('items_per_page', 10);
             $reqParamPageNumber = $filterAutocomplete->getFieldOption('req_param_name_page_number', '_page');
-            $toStringCallback = $filterAutocomplete->getFieldOption('to_string_callback');
+            $toStringCallback   = $filterAutocomplete->getFieldOption('to_string_callback');
         } else {
             // create/edit form
             $fieldDescription = $this->retrieveFormFieldDescription($admin, $request->get('field'));
@@ -60,12 +60,12 @@ class CRUDController extends Controller
                 throw new AccessDeniedException('Autocomplete list can`t be retrieved because the form element is disabled or read_only.');
             }
 
-            $property = $formAutocomplete->getConfig()->getAttribute('property');
-            $callback = $formAutocomplete->getConfig()->getAttribute('callback');
+            $property           = $formAutocomplete->getConfig()->getAttribute('property');
+            $callback           = $formAutocomplete->getConfig()->getAttribute('callback');
             $minimumInputLength = $formAutocomplete->getConfig()->getAttribute('minimum_input_length');
-            $itemsPerPage = $formAutocomplete->getConfig()->getAttribute('items_per_page');
+            $itemsPerPage       = $formAutocomplete->getConfig()->getAttribute('items_per_page');
             $reqParamPageNumber = $formAutocomplete->getConfig()->getAttribute('req_param_name_page_number');
-            $toStringCallback = $formAutocomplete->getConfig()->getAttribute('to_string_callback');
+            $toStringCallback   = $formAutocomplete->getConfig()->getAttribute('to_string_callback');
         }
 
         $searchText = $request->get('q');
@@ -78,7 +78,7 @@ class CRUDController extends Controller
         }
 
         if (mb_strlen($searchText, 'UTF-8') < $minimumInputLength) {
-            return new JsonResponse(array('status' => 'KO', 'message' => 'Too short search string.'), 403);
+            return new JsonResponse(['status' => 'KO', 'message' => 'Too short search string.'], 403);
         }
 
         $targetAdmin->setPersistFilters(false);
@@ -123,7 +123,7 @@ class CRUDController extends Controller
 
         $pager = $datagrid->getPager();
 
-        $items = array();
+        $items   = [];
         $results = $pager->getResults();
 
         foreach ($results as $entity) {
@@ -135,20 +135,20 @@ class CRUDController extends Controller
                 $label = call_user_func($toStringCallback, $entity, $property);
             } else {
                 $resultMetadata = $targetAdmin->getObjectMetadata($entity);
-                $label = $resultMetadata->getTitle();
+                $label          = $resultMetadata->getTitle();
             }
 
-            $items[] = array(
-                'id' => $admin->id($entity),
+            $items[] = [
+                'id'    => $admin->id($entity),
                 'label' => $label,
-            );
+            ];
         }
 
-        return new JsonResponse(array(
+        return new JsonResponse([
             'status' => 'OK',
-            'more' => !$pager->isLastPage(),
-            'items' => $items,
-        ));
+            'more'   => !$pager->isLastPage(),
+            'items'  => $items,
+        ]);
     }
 
     /**

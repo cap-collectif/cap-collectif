@@ -143,13 +143,13 @@ class Proposal implements CommentableInterface, VotableInterface
      */
     public function __construct()
     {
-        $this->votes = new ArrayCollection();
-        $this->reports = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->votes             = new ArrayCollection();
+        $this->reports           = new ArrayCollection();
+        $this->comments          = new ArrayCollection();
         $this->proposalResponses = new ArrayCollection();
-        $this->commentsCount = 0;
-        $this->updatedAt = new \Datetime();
-        $this->selectionSteps = new ArrayCollection();
+        $this->commentsCount     = 0;
+        $this->updatedAt         = new \Datetime();
+        $this->selectionSteps    = new ArrayCollection();
     }
 
     public function __toString()

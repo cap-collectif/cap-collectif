@@ -15,7 +15,7 @@ class ApiSourceType extends AbstractType
             ->add('body', 'textarea', ['required' => true])
             ->add('Category', null, ['required' => true])
             ->add('link', 'url', [
-                'required' => true,
+                'required'         => true,
                 'default_protocol' => 'http',
             ])
         ;
@@ -23,11 +23,11 @@ class ApiSourceType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'csrf_protection' => false,
-            'data_class' => 'Capco\AppBundle\Entity\Source',
+        $resolver->setDefaults([
+            'csrf_protection'   => false,
+            'data_class'        => 'Capco\AppBundle\Entity\Source',
             'validation_groups' => ['Default', 'link'],
-        ));
+        ]);
     }
 
     public function getName()

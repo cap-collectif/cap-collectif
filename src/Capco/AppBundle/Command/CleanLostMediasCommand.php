@@ -28,9 +28,9 @@ class CleanLostMediasCommand extends ContainerAwareCommand
         }
 
         $mediasToRemove = [];
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $medias = $em->getRepository('CapcoMediaBundle:Media')->findAll();
-        $baseDir = $this->getContainer()->getParameter('kernel.root_dir');
+        $em             = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $medias         = $em->getRepository('CapcoMediaBundle:Media')->findAll();
+        $baseDir        = $this->getContainer()->getParameter('kernel.root_dir');
 
         $output->writeln(count($medias).' medias found.');
 

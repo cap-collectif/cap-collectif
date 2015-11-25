@@ -18,11 +18,11 @@ class RequestListener
 
     public function __construct(Manager $manager, TranslatorInterface $translator, Resolver $siteParameterResolver, $shieldLogin = null, $shieldPwd = null)
     {
-        $this->manager = $manager;
-        $this->translator = $translator;
+        $this->manager               = $manager;
+        $this->translator            = $translator;
         $this->siteParameterResolver = $siteParameterResolver;
-        $this->shieldLogin = $shieldLogin;
-        $this->shieldPwd = $shieldPwd;
+        $this->shieldLogin           = $shieldLogin;
+        $this->shieldPwd             = $shieldPwd;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -41,7 +41,7 @@ class RequestListener
                 if (null == $username) {
                     $username = 'admin';
                 }
-                $pwd = $this->siteParameterResolver->getValue('security.shield_mode.password');
+                $pwd        = $this->siteParameterResolver->getValue('security.shield_mode.password');
                 $authString = base64_encode($username.':'.$pwd);
 
                 // Maintenance authentication
@@ -64,11 +64,11 @@ class RequestListener
 
         // Disabled feature flag on requested url
         $flagsAttributes = $request->attributes->get('_feature_flags');
-        $flags = $flagsAttributes ? explode(',', $flagsAttributes) : array();
+        $flags           = $flagsAttributes ? explode(',', $flagsAttributes) : [];
 
         foreach ($flags as $flag) {
             if (null !== $flag && !$this->manager->isActive($flag)) {
-                $message = $this->translator->trans('error.feature_not_enabled', array(), 'CapcoAppBundle');
+                $message = $this->translator->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
                 throw new NotFoundHttpException($message);
             }
         }

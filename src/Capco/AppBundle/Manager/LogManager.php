@@ -15,16 +15,16 @@ class LogManager
 
     public function __construct(TranslatorInterface $translator, UserManager $userManager, EntityManager $em)
     {
-        $this->translator = $translator;
+        $this->translator  = $translator;
         $this->userManager = $userManager;
-        $this->em = $em;
+        $this->em          = $em;
     }
 
     public function getSentencesForLog(LogEntry $log)
     {
-        $sentences = array();
-        $username = $log->getUsername()
-            ? $this->userManager->findOneBy(array('slug' => $log->getUsername()))
+        $sentences = [];
+        $username  = $log->getUsername()
+            ? $this->userManager->findOneBy(['slug' => $log->getUsername()])
             : null
         ;
 
@@ -74,8 +74,8 @@ class LogManager
     {
         $transBase = 'synthesis.logs.sentence.';
 
-        return $this->translator->trans($transBase.$action, array(
+        return $this->translator->trans($transBase.$action, [
             '%author%' => $username,
-        ), 'CapcoAppBundleSynthesis');
+        ], 'CapcoAppBundleSynthesis');
     }
 }

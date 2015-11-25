@@ -19,7 +19,7 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getContainer();
-        $em = $container->get('doctrine.orm.entity_manager');
+        $em        = $container->get('doctrine.orm.entity_manager');
 
         $connection = $em->getConnection();
 
@@ -51,7 +51,7 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
             ;
 
             $childCount = count($publishedChildren);
-            $score = 0;
+            $score      = 0;
 
             foreach ($publishedChildren as $child) {
                 $votes = $child['votes'];
@@ -60,11 +60,11 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
                 }
             }
 
-            $elements[$el['id']] = [];
-            $elements[$el['id']]['count'] = $childCount;
+            $elements[$el['id']]               = [];
+            $elements[$el['id']]['count']      = $childCount;
             $elements[$el['id']]['votesScore'] = $score;
             if ($el['level'] > 0 && $el['parent'] && array_key_exists($el['parent'], $elements)) {
-                $elements[$el['id']]['parentCount'] = $elements[$el['parent']]['count'];
+                $elements[$el['id']]['parentCount']      = $elements[$el['parent']]['count'];
                 $elements[$el['id']]['parentVotesScore'] = $elements[$el['parent']]['votesScore'];
                 $em->getConnection()->executeUpdate('
                     UPDATE synthesis_element se

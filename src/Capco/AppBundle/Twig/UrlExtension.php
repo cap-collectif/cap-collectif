@@ -25,10 +25,10 @@ class UrlExtension extends \Twig_Extension
 
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('capco_url', array($this, 'getObjectUrl')),
-            new \Twig_SimpleFilter('capco_admin_url', array($this, 'getAdminObjectUrl')),
-        );
+        return [
+            new \Twig_SimpleFilter('capco_url', [$this, 'getObjectUrl']),
+            new \Twig_SimpleFilter('capco_admin_url', [$this, 'getAdminObjectUrl']),
+        ];
     }
 
     public function getObjectUrl($object, $absolute = false)

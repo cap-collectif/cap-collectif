@@ -68,15 +68,15 @@ class CommandContext implements KernelAwareContext
         $application = new Application($this->kernel);
 
         if (count($parameters) > 0) {
-            $arguments = array_merge(array('command' => $command), $parameters);
-            $input = new ArrayInput($arguments);
+            $arguments = array_merge(['command' => $command], $parameters);
+            $input     = new ArrayInput($arguments);
         } else {
             $input = new StringInput($command);
         }
 
         $input->setInteractive(false);
 
-        $fp = tmpfile();
+        $fp     = tmpfile();
         $output = new StreamOutput($fp);
 
         $this->statusCode = $application->doRun($input, $output);

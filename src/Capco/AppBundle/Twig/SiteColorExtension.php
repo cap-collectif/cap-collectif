@@ -25,9 +25,9 @@ class SiteColorExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('capco_site_color_value', array($this, 'getSiteColorValue'), array('is_safe' => array('html'))),
-       );
+        return [
+            new \Twig_SimpleFunction('capco_site_color_value', [$this, 'getSiteColorValue'], ['is_safe' => ['html']]),
+       ];
     }
 
     public function getSiteColorValue($key)

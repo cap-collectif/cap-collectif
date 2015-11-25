@@ -14,17 +14,17 @@ class MenuItemAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'menu',
+        '_sort_by'    => 'menu',
     ];
 
     public function createQuery($context = 'list')
     {
         $resolver = $this->getConfigurationPool()->getContainer()->get('capco.menu_item.resolver');
-        $em = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
+        $em       = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
 
         $all = $em->getRepository('CapcoAppBundle:MenuItem')->findAll();
 
-        $ids = array();
+        $ids = [];
         foreach ($all as $mi) {
             if ($resolver->hasEnabledFeatures($mi)) {
                 $ids[] = $mi->getId();
@@ -46,29 +46,29 @@ class MenuItemAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.menu_item.title',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.menu_item.is_enabled',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.menu_item.position',
-            ))
-            ->add('parent', null, array(
+            ])
+            ->add('parent', null, [
                     'label' => 'admin.fields.menu_item.parent',
-                ),
+                ],
                 'entity',
-                array(
+                [
                     'query_builder' => $this->createParentsItemQuery(),
-                )
+                ]
             )
-            ->add('Page', null, array(
+            ->add('Page', null, [
                 'label' => 'admin.fields.menu_item.page',
-            ))
-            ->add('link', null, array(
+            ])
+            ->add('link', null, [
                 'label' => 'admin.fields.menu_item.link',
-            ))
+            ])
         ;
     }
 
@@ -80,41 +80,41 @@ class MenuItemAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, array(
+            ->addIdentifier('title', null, [
                 'label' => 'admin.fields.menu_item.title',
-            ))
-            ->add('menu', null, array(
-                'label' => 'admin.fields.menu_item.menu',
-                'template' => 'CapcoAdminBundle:MenuItem:menu_list_field.html.twig',
+            ])
+            ->add('menu', null, [
+                'label'      => 'admin.fields.menu_item.menu',
+                'template'   => 'CapcoAdminBundle:MenuItem:menu_list_field.html.twig',
                 'menuLabels' => MenuItem::$menuLabels,
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.menu_item.is_enabled',
-            ))
-            ->add('position', null, array(
+                'label'    => 'admin.fields.menu_item.is_enabled',
+            ])
+            ->add('position', null, [
                 'label' => 'admin.fields.menu_item.position',
-            ))
-            ->add('parent', 'sonata_type_admin', array(
+            ])
+            ->add('parent', 'sonata_type_admin', [
                 'label' => 'admin.fields.menu_item.parent',
-            ))
-            ->add('Page', 'sonata_type_admin', array(
+            ])
+            ->add('Page', 'sonata_type_admin', [
                 'label' => 'admin.fields.menu_item.page',
-            ))
-            ->add('link', null, array(
-                'label' => 'admin.fields.menu_item.link',
+            ])
+            ->add('link', null, [
+                'label'    => 'admin.fields.menu_item.link',
                 'template' => 'CapcoAdminBundle:MenuItem:link_list_field.html.twig',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.menu_item.updated_at',
-            ))
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array('template' => 'CapcoAdminBundle:MenuItem:list__action_delete.html.twig'),
-                ),
-            ))
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'show'   => [],
+                    'edit'   => [],
+                    'delete' => ['template' => 'CapcoAdminBundle:MenuItem:list__action_delete.html.twig'],
+                ],
+            ])
         ;
     }
 
@@ -124,48 +124,48 @@ class MenuItemAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.menu_item.title',
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.menu_item.is_enabled',
+            ])
+            ->add('isEnabled', null, [
+                'label'    => 'admin.fields.menu_item.is_enabled',
                 'required' => false,
-            ))
-            ->add('menu', 'choice', array(
-                'label' => 'admin.fields.menu_item.menu',
-                'choices' => MenuItem::$menuLabels,
+            ])
+            ->add('menu', 'choice', [
+                'label'              => 'admin.fields.menu_item.menu',
+                'choices'            => MenuItem::$menuLabels,
                 'translation_domain' => 'CapcoAppBundle',
-                'required' => true,
-            ))
-            ->add('position', null, array(
+                'required'           => true,
+            ])
+            ->add('position', null, [
                 'label' => 'admin.fields.menu_item.position',
-            ))
-            ->add('parent', 'sonata_type_model', array(
-                'label' => 'admin.fields.menu_item.parent',
-                'help' => 'admin.help.menu_item.parent',
-                'required' => false,
-                'query' => $this->createParentsItemQuery(),
-                'preferred_choices' => array(),
-                'empty_value' => 'admin.fields.menu_item.parent_empty',
-            ))
+            ])
+            ->add('parent', 'sonata_type_model', [
+                'label'             => 'admin.fields.menu_item.parent',
+                'help'              => 'admin.help.menu_item.parent',
+                'required'          => false,
+                'query'             => $this->createParentsItemQuery(),
+                'preferred_choices' => [],
+                'empty_value'       => 'admin.fields.menu_item.parent_empty',
+            ])
         ;
 
         $subject = $this->getSubject();
 
         if ($subject->getIsFullyModifiable()) {
             $formMapper
-                ->add('Page', 'sonata_type_model', array(
-                    'label' => 'admin.fields.menu_item.page',
+                ->add('Page', 'sonata_type_model', [
+                    'label'    => 'admin.fields.menu_item.page',
                     'required' => false,
-                    'btn_add' => 'add',
-                    'query' => $this->createPageQuery(),
+                    'btn_add'  => 'add',
+                    'query'    => $this->createPageQuery(),
 
-                ))
-                ->add('link', null, array(
-                    'label' => 'admin.fields.menu_item.link',
+                ])
+                ->add('link', null, [
+                    'label'    => 'admin.fields.menu_item.link',
                     'required' => false,
-                    'help' => 'admin.help.menu_item.link',
-                ))
+                    'help'     => 'admin.help.menu_item.link',
+                ])
             ;
         }
     }
@@ -178,45 +178,45 @@ class MenuItemAdmin extends Admin
         $subject = $this->getSubject();
 
         $showMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.menu_item.title',
-            ))
-            ->add('menu', null, array(
-                'label' => 'admin.fields.menu_item.menu',
-                'template' => 'CapcoAdminBundle:MenuItem:menu_show_field.html.twig',
+            ])
+            ->add('menu', null, [
+                'label'      => 'admin.fields.menu_item.menu',
+                'template'   => 'CapcoAdminBundle:MenuItem:menu_show_field.html.twig',
                 'menuLabels' => MenuItem::$menuLabels,
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'editable' => false,
-                'label' => 'admin.fields.menu_item.is_enabled',
-            ))
-            ->add('position', null, array(
+                'label'    => 'admin.fields.menu_item.is_enabled',
+            ])
+            ->add('position', null, [
                 'label' => 'admin.fields.menu_item.position',
-            ))
-            ->add('parent', 'sonata_type_admin', array(
+            ])
+            ->add('parent', 'sonata_type_admin', [
                 'label' => 'admin.fields.menu_item.parent',
-            ))
-            ->add('Page', 'sonata_type_admin', array(
+            ])
+            ->add('Page', 'sonata_type_admin', [
                 'label' => 'admin.fields.menu_item.page',
-            ))
+            ])
         ;
 
         if (null == $subject->getPage()) {
             $showMapper
-                ->add('link', null, array(
-                    'label' => 'admin.fields.menu_item.link',
+                ->add('link', null, [
+                    'label'    => 'admin.fields.menu_item.link',
                     'template' => 'CapcoAdminBundle:MenuItem:link_show_field.html.twig',
-                ))
+                ])
             ;
         }
 
         $showMapper
-            ->add('createdAt', null, array(
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.menu_item.created_at',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.menu_item.updated_at',
-            ))
+            ])
         ;
     }
 
@@ -266,6 +266,6 @@ class MenuItemAdmin extends Admin
 
     public function getBatchActions()
     {
-        return array();
+        return [];
     }
 }

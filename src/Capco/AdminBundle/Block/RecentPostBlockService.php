@@ -28,18 +28,18 @@ class RecentPostBlockService extends BaseBlockService
         parent::__construct($name, $templating);
 
         $this->postRepository = $repository;
-        $this->toggleManager = $manager;
+        $this->toggleManager  = $manager;
     }
 
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => array(
-                array('number', 'integer', array('required' => true)),
-                array('title', 'text', array('required' => false)),
-                array('toggle', 'text', array('required' => false)),
-            ),
-        ));
+        $formMapper->add('settings', 'sonata_type_immutable_array', [
+            'keys' => [
+                ['number', 'integer', ['required' => true]],
+                ['title', 'text', ['required' => false]],
+                ['toggle', 'text', ['required' => false]],
+            ],
+        ]);
     }
 
     /**
@@ -53,12 +53,12 @@ class RecentPostBlockService extends BaseBlockService
             }
         }
 
-        $parameters = array(
-            'context' => $blockContext,
+        $parameters = [
+            'context'  => $blockContext,
             'settings' => $blockContext->getSettings(),
-            'block' => $blockContext->getBlock(),
-            'posts' => $this->postRepository->getRecentPosts($blockContext->getSetting('number')),
-        );
+            'block'    => $blockContext->getBlock(),
+            'posts'    => $this->postRepository->getRecentPosts($blockContext->getSetting('number')),
+        ];
 
         return $this->renderPrivateResponse($blockContext->getTemplate(), $parameters, $response);
     }
@@ -73,12 +73,12 @@ class RecentPostBlockService extends BaseBlockService
      */
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'number' => 5,
-            'toggle' => false,
-            'title' => 'Recent Posts',
+        $resolver->setDefaults([
+            'number'   => 5,
+            'toggle'   => false,
+            'title'    => 'Recent Posts',
             'template' => 'CapcoAdminBundle:Block:recent_posts.html.twig',
-        ));
+        ]);
     }
 
     /**

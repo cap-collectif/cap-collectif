@@ -14,7 +14,7 @@ class ThemeAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position',
+        '_sort_by'    => 'position',
     ];
 
     /**
@@ -23,38 +23,38 @@ class ThemeAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.theme.title',
-            ))
-            ->add('position', null, array(
+            ])
+            ->add('position', null, [
                 'label' => 'admin.fields.theme.position',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.theme.is_enabled',
-            ))
-            ->add('projects', null, array(
+            ])
+            ->add('projects', null, [
                 'label' => 'admin.fields.theme.projects',
-            ))
-            ->add('ideas', null, array(
+            ])
+            ->add('ideas', null, [
                 'label' => 'admin.fields.theme.ideas',
-            ))
-            ->add('events', null, array(
+            ])
+            ->add('events', null, [
                 'label' => 'admin.fields.theme.events',
-            ))
-            ->add('posts', null, array(
+            ])
+            ->add('posts', null, [
                 'label' => 'admin.fields.theme.posts',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.theme.created_at',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.theme.updated_at',
-            ))
+            ])
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.theme.author',
-            ], null, array(
+            ], null, [
                 'property' => 'username',
-            ))
+            ])
         ;
     }
 
@@ -64,50 +64,50 @@ class ThemeAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title', null, array(
+            ->addIdentifier('title', null, [
                 'label' => 'admin.fields.theme.title',
-            ))
-            ->add('Author', null, array(
+            ])
+            ->add('Author', null, [
                 'label' => 'admin.fields.theme.author',
-            ))
-            ->add('status', null, array(
-                'label' => 'admin.fields.theme.status',
-                'template' => 'CapcoAdminBundle:Theme:status_list_field.html.twig',
+            ])
+            ->add('status', null, [
+                'label'          => 'admin.fields.theme.status',
+                'template'       => 'CapcoAdminBundle:Theme:status_list_field.html.twig',
                 'statusesLabels' => Theme::$statusesLabels,
-            ))
-            ->add('position', null, array(
+            ])
+            ->add('position', null, [
                 'label' => 'admin.fields.theme.position',
-            ))
-            ->add('ideasCount', null, array(
-                'label' => 'admin.fields.theme.ideas_count',
+            ])
+            ->add('ideasCount', null, [
+                'label'    => 'admin.fields.theme.ideas_count',
                 'template' => 'CapcoAdminBundle:Theme:ideas_count_list_field.html.twig',
-            ))
-            ->add('projectsCount', null, array(
-                'label' => 'admin.fields.theme.projects_count',
+            ])
+            ->add('projectsCount', null, [
+                'label'    => 'admin.fields.theme.projects_count',
                 'template' => 'CapcoAdminBundle:Theme:projects_count_list_field.html.twig',
-            ))
-            ->add('eventsCount', null, array(
-                'label' => 'admin.fields.theme.events_count',
+            ])
+            ->add('eventsCount', null, [
+                'label'    => 'admin.fields.theme.events_count',
                 'template' => 'CapcoAdminBundle:Theme:events_count_list_field.html.twig',
-            ))
-            ->add('postsCount', null, array(
-                'label' => 'admin.fields.theme.posts_count',
+            ])
+            ->add('postsCount', null, [
+                'label'    => 'admin.fields.theme.posts_count',
                 'template' => 'CapcoAdminBundle:Theme:posts_count_list_field.html.twig',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.theme.is_enabled',
-            ))
-            ->add('updatedAt', 'datetime', array(
+                'label'    => 'admin.fields.theme.is_enabled',
+            ])
+            ->add('updatedAt', 'datetime', [
                 'label' => 'admin.fields.theme.updated_at',
-            ))
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                ),
-            ))
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'show'   => [],
+                    'edit'   => [],
+                    'delete' => [],
+                ],
+            ])
         ;
     }
 
@@ -117,47 +117,47 @@ class ThemeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, array(
-                'label' => 'admin.fields.theme.title',
+            ->add('title', null, [
+                'label'    => 'admin.fields.theme.title',
                 'required' => true,
-            ))
+            ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.theme.author',
+                'label'    => 'admin.fields.theme.author',
                 'property' => 'username',
             ])
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.theme.is_enabled',
+            ->add('isEnabled', null, [
+                'label'    => 'admin.fields.theme.is_enabled',
                 'required' => false,
-            ))
-            ->add('position', 'integer', array(
+            ])
+            ->add('position', 'integer', [
                 'label' => 'admin.fields.theme.position',
-            ))
-            ->add('teaser', 'textarea', array(
-                'label' => 'admin.fields.theme.teaser',
+            ])
+            ->add('teaser', 'textarea', [
+                'label'    => 'admin.fields.theme.teaser',
                 'required' => false,
-            ))
-            ->add('body', 'ckeditor', array(
-                'label' => 'admin.fields.theme.body',
+            ])
+            ->add('body', 'ckeditor', [
+                'label'       => 'admin.fields.theme.body',
                 'config_name' => 'admin_editor',
-                'required' => false,
-            ))
-            ->add('status', 'choice', array(
-                'label' => 'admin.fields.theme.status',
-                'choices' => Theme::$statusesLabels,
+                'required'    => false,
+            ])
+            ->add('status', 'choice', [
+                'label'              => 'admin.fields.theme.status',
+                'choices'            => Theme::$statusesLabels,
                 'translation_domain' => 'CapcoAppBundle',
+                'required'           => false,
+                'empty_value'        => 'admin.fields.theme.no_status',
+            ])
+            ->add('Media', 'sonata_type_model_list', [
                 'required' => false,
-                'empty_value' => 'admin.fields.theme.no_status',
-            ))
-            ->add('Media', 'sonata_type_model_list', array(
-                'required' => false,
-                'label' => 'admin.fields.theme.media',
-            ), array(
-                'link_parameters' => array(
-                    'context' => 'default',
+                'label'    => 'admin.fields.theme.media',
+            ], [
+                'link_parameters' => [
+                    'context'      => 'default',
                     'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
-                ),
-            ))
+                    'provider'     => 'sonata.media.provider.image',
+                ],
+            ])
         ;
     }
 
@@ -167,51 +167,51 @@ class ThemeAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.theme.title',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.theme.is_enabled',
-            ))
-            ->add('teaser', null, array(
+            ])
+            ->add('teaser', null, [
                 'label' => 'admin.fields.theme.teaser',
-            ))
-            ->add('body', null, array(
+            ])
+            ->add('body', null, [
                 'label' => 'admin.fields.theme.body',
-            ))
-            ->add('status', null, array(
-                'label' => 'admin.fields.theme.status',
-                'template' => 'CapcoAdminBundle:Theme:status_show_field.html.twig',
+            ])
+            ->add('status', null, [
+                'label'          => 'admin.fields.theme.status',
+                'template'       => 'CapcoAdminBundle:Theme:status_show_field.html.twig',
                 'statusesLabels' => Theme::$statusesLabels,
-            ))
-            ->add('position', null, array(
+            ])
+            ->add('position', null, [
                 'label' => 'admin.fields.theme.position',
-            ))
-            ->add('Author', null, array(
+            ])
+            ->add('Author', null, [
                 'label' => 'admin.fields.theme.author',
-            ))
-            ->add('projects', null, array(
+            ])
+            ->add('projects', null, [
                 'label' => 'admin.fields.theme.projects',
-            ))
-            ->add('ideas', null, array(
+            ])
+            ->add('ideas', null, [
                 'label' => 'admin.fields.theme.ideas',
-            ))
-            ->add('events', null, array(
+            ])
+            ->add('events', null, [
                 'label' => 'admin.fields.theme.events',
-            ))
-            ->add('posts', null, array(
+            ])
+            ->add('posts', null, [
                 'label' => 'admin.fields.theme.posts',
-            ))
-            ->add('Media', null, array(
+            ])
+            ->add('Media', null, [
                 'template' => 'CapcoAdminBundle:Theme:media_show_field.html.twig',
-                'label' => 'admin.fields.theme.media',
-            ))
-            ->add('createdAt', null, array(
+                'label'    => 'admin.fields.theme.media',
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.theme.created_at',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.theme.updated_at',
-            ))
+            ])
         ;
     }
 
@@ -221,8 +221,8 @@ class ThemeAdmin extends Admin
         $media = $object->getMedia();
         if ($media != null) {
             $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
+            $format   = $provider->getFormatName($media, 'form');
+            $url      = $provider->generatePublicUrl($media, $format);
 
             return new Metadata($object->getTitle(), $object->getBody(), $url);
         }
@@ -232,8 +232,8 @@ class ThemeAdmin extends Admin
 
     public function getFeatures()
     {
-        return array(
+        return [
             'themes',
-        );
+        ];
     }
 }

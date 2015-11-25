@@ -12,7 +12,7 @@ class UserTypeAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'name',
+        '_sort_by'    => 'name',
     ];
 
     /**
@@ -21,15 +21,15 @@ class UserTypeAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label' => 'admin.fields.user_type.name',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.user_type.created_at',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.user_type.updated_at',
-            ))
+            ])
         ;
     }
 
@@ -39,19 +39,19 @@ class UserTypeAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name', null, array(
+            ->addIdentifier('name', null, [
                 'label' => 'admin.fields.user_type.name',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.user_type.updated_at',
-            ))
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                ),
-            ))
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'show'   => [],
+                    'edit'   => [],
+                    'delete' => [],
+                ],
+            ])
         ;
     }
 
@@ -61,9 +61,9 @@ class UserTypeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label' => 'admin.fields.user_type.name',
-            ))
+            ])
         ;
     }
 
@@ -73,22 +73,22 @@ class UserTypeAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('name', null, array(
+            ->add('name', null, [
                 'label' => 'admin.fields.user_type.name',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.user_type.created_at',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.user_type.updated_at',
-            ))
+            ])
         ;
     }
 
     public function getFeatures()
     {
-        return array(
+        return [
             'user_type',
-        );
+        ];
     }
 }

@@ -37,7 +37,7 @@ class EventResolver
     public function getEventsGroupedByYearAndMonth($archived, $themeSlug, $projectSlug, $term)
     {
         $results = $this->repository->getSearchResults($archived, $themeSlug, $projectSlug, $term);
-        $events = [];
+        $events  = [];
 
         if (!empty($results)) {
             foreach ($results as $e) {

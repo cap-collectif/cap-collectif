@@ -22,7 +22,7 @@ class ProposalController extends Controller
      */
     public function showProposalAction(Project $project, CollectStep $currentStep, Proposal $proposal)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em         = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
         $proposalJson = $serializer->serialize([
@@ -42,13 +42,13 @@ class ProposalController extends Controller
         ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'ProposalResponses', 'Questions']));
 
         $response = $this->render('CapcoAppBundle:Proposal:show.html.twig', [
-            'project' => $project,
-            'currentStep' => $currentStep,
+            'project'       => $project,
+            'currentStep'   => $currentStep,
             'proposalTitle' => $proposal->getTitle(),
-            'proposal' => $proposalJson,
-            'themes' => $themes,
-            'districts' => $districts,
-            'form' => $form,
+            'proposal'      => $proposalJson,
+            'themes'        => $themes,
+            'districts'     => $districts,
+            'form'          => $form,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

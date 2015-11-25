@@ -18,27 +18,27 @@ class PositionableController extends Controller
 
     public function upAction()
     {
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         $this->move($object, -1);
 
         return new RedirectResponse($this->admin->generateUrl(
             'list',
-            array('filter' => $this->admin->getFilterParameters())
+            ['filter' => $this->admin->getFilterParameters()]
         ));
     }
 
     public function downAction()
     {
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         $this->move($object, 1);
 
         return new RedirectResponse($this->admin->generateUrl(
             'list',
-            array('filter' => $this->admin->getFilterParameters())
+            ['filter' => $this->admin->getFilterParameters()]
         ));
     }
 

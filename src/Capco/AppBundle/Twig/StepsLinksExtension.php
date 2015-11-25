@@ -25,11 +25,11 @@ class StepsLinksExtension extends \Twig_Extension
 
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('capco_step_link', array($this, 'getStepLink')),
-            new \Twig_SimpleFilter('capco_first_step_link', array($this, 'getFirstStepLink')),
-            new \Twig_SimpleFilter('capco_current_step_link', array($this, 'getCurrentStepLink')),
-        );
+        return [
+            new \Twig_SimpleFilter('capco_step_link', [$this, 'getStepLink']),
+            new \Twig_SimpleFilter('capco_first_step_link', [$this, 'getFirstStepLink']),
+            new \Twig_SimpleFilter('capco_current_step_link', [$this, 'getCurrentStepLink']),
+        ];
     }
 
     public function getStepLink($step, $absolute = false)

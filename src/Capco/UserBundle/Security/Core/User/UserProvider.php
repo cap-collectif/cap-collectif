@@ -17,12 +17,12 @@ class UserProvider extends FOSUBUserProvider
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
         $property = $this->getProperty($response);
-        $email = $response->getEmail() ? $response->getEmail() : $response->getUsername();
+        $email    = $response->getEmail() ? $response->getEmail() : $response->getUsername();
 
         //on connect - get the access token and the user ID
-        $service = $response->getResourceOwner()->getName();
-        $setter = 'set'.ucfirst($service);
-        $setter_id = $setter.'Id';
+        $service      = $response->getResourceOwner()->getName();
+        $setter       = 'set'.ucfirst($service);
+        $setter_id    = $setter.'Id';
         $setter_token = $setter.'AccessToken';
 
         //we "disconnect" previously connected users
@@ -43,9 +43,9 @@ class UserProvider extends FOSUBUserProvider
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $email = $response->getEmail() ? $response->getEmail() : 'twitter_'.$response->getUsername();
+        $email    = $response->getEmail() ? $response->getEmail() : 'twitter_'.$response->getUsername();
         $username = $response->getNickname() ? $response->getNickname() : $response->getFirstname().' '.$response->getLastname();
-        $user = $this->userManager->findUserByEmail($email);
+        $user     = $this->userManager->findUserByEmail($email);
 
         if (null === $user) {
             $user = $this->userManager->createUser();
@@ -56,9 +56,9 @@ class UserProvider extends FOSUBUserProvider
             $user->setIsTermsAccepted(true);
         }
 
-        $service = $response->getResourceOwner()->getName();
-        $setter = 'set'.ucfirst($service);
-        $setter_id = $setter.'Id';
+        $service      = $response->getResourceOwner()->getName();
+        $setter       = 'set'.ucfirst($service);
+        $setter_id    = $setter.'Id';
         $setter_token = $setter.'AccessToken';
         $user->$setter_id($response->getUsername());
         $user->$setter_token($response->getAccessToken());
@@ -75,7 +75,7 @@ class UserProvider extends FOSUBUserProvider
      */
     protected function random_string($length)
     {
-        $key = '';
+        $key  = '';
         $keys = array_merge(range(0, 9), range('a', 'Z'));
 
         for ($i = 0; $i < $length; ++$i) {

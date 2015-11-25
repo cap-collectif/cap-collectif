@@ -11,7 +11,7 @@ class ConvertCsvToArray
         }
 
         $header = null;
-        $data = [];
+        $data   = [];
 
         if (($handle = fopen($filename, 'r')) !== false) {
             while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {

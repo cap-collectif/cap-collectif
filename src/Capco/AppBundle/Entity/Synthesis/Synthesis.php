@@ -19,12 +19,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Synthesis
 {
-    const SOURCE_TYPE_NONE = 'none';
+    const SOURCE_TYPE_NONE         = 'none';
     const SOURCE_TYPE_CONSULTATION = 'consultation_step';
 
     public static $sourceTypesLabels = [
         self::SOURCE_TYPE_CONSULTATION => 'synthesis.source_types.consultation_step',
-        self::SOURCE_TYPE_NONE => 'synthesis.source_types.none',
+        self::SOURCE_TYPE_NONE         => 'synthesis.source_types.none',
     ];
 
     /**

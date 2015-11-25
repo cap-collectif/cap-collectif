@@ -27,19 +27,19 @@ use Symfony\Component\Console\Input\ArrayInput;
 class CreatePJLFromCsvCommand extends ContainerAwareCommand
 {
     private $opinionTypes = [];
-    private $username = 'Gouvernement';
-    private $password = 'KvN+j\E43&2U%KAF';
+    private $username     = 'Gouvernement';
+    private $password     = 'KvN+j\E43&2U%KAF';
 
     private $siteParameters = [
-        'admin.mail.notifications.send_address' => 'coucou@cap-collectif.com',
+        'admin.mail.notifications.send_address'    => 'coucou@cap-collectif.com',
         'admin.mail.notifications.receive_address' => 'assistance@cap-collectif.com',
-        'admin.mail.contact' => 'coucou@cap-collectif.com',
+        'admin.mail.contact'                       => 'coucou@cap-collectif.com',
 
         'homepage.jumbotron.button' => '',
-        'homepage.jumbotron.title' => 'Projet de loi Numérique',
+        'homepage.jumbotron.title'  => 'Projet de loi Numérique',
         'homepage.jumbotron.darken' => 0,
-        'global.site.fullname' => 'République Numérique',
-        'homepage.jumbotron.body' => '<p><span style="color:#FFFFFF ">Contribuez au projet de loi pour une r&eacute;publique num&eacute;rique</span></p>',
+        'global.site.fullname'      => 'République Numérique',
+        'homepage.jumbotron.body'   => '<p><span style="color:#FFFFFF ">Contribuez au projet de loi pour une r&eacute;publique num&eacute;rique</span></p>',
 
         'security.shield_mode.username' => 'Cap Collectif',
         'security.shield_mode.password' => 'Rg6hd4Tg',
@@ -47,18 +47,18 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
     ];
 
     private $siteColors = [
-        'color.body.bg' => '#ffffff',
-        'color.body.text' => '#333333',
-        'color.header.bg' => '#01a0d0',
-        'color.header.title' => '#ffffff',
-        'color.home.bg' => '#0b6ba8',
-        'color.home.title' => '#ffffff',
-        'color.header.text' => '#333333',
-        'color.header2.bg' => '#ffffff',
-        'color.header2.text' => '#333333',
+        'color.body.bg'       => '#ffffff',
+        'color.body.text'     => '#333333',
+        'color.header.bg'     => '#01a0d0',
+        'color.header.title'  => '#ffffff',
+        'color.home.bg'       => '#0b6ba8',
+        'color.home.title'    => '#ffffff',
+        'color.header.text'   => '#333333',
+        'color.header2.bg'    => '#ffffff',
+        'color.header2.text'  => '#333333',
         'color.header2.title' => '#0b6ba8',
-        'color.btn.bg' => '#0b6ba8',
-        'color.btn.text' => '#ffffff',
+        'color.btn.bg'        => '#0b6ba8',
+        'color.btn.text'      => '#ffffff',
 
         'color.h1' => '#000000',
         'color.h2' => '#0b6ba8',
@@ -67,29 +67,29 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         'color.h5' => '#202328',
         'color.h6' => '#3c4046',
 
-        'color.btn.primary.bg' => '#0b6ba8',
+        'color.btn.primary.bg'   => '#0b6ba8',
         'color.btn.primary.text' => '#ffffff',
-        'color.btn.ghost.hover' => '#ffffff',
-        'color.btn.ghost.base' => '#01a0d0',
+        'color.btn.ghost.hover'  => '#ffffff',
+        'color.btn.ghost.base'   => '#01a0d0',
 
         'color.link.default' => '#01a0d0',
-        'color.link.hover' => '#0b6ba8',
-        'color.footer.text' => '#ffffff',
-        'color.footer.bg' => '#3c4046',
+        'color.link.hover'   => '#0b6ba8',
+        'color.footer.text'  => '#ffffff',
+        'color.footer.bg'    => '#3c4046',
 
         'color.footer2.text' => '#ffffff',
-        'color.footer2.bg' => '#202328',
-        'color.section.bg' => '#f6f6f6',
+        'color.footer2.bg'   => '#202328',
+        'color.section.bg'   => '#f6f6f6',
         'color.section.text' => '#000000',
 
-        'color.main_menu.text' => '#333333',
+        'color.main_menu.text'        => '#333333',
         'color.main_menu.text_active' => '#ffffff',
-        'color.main_menu.text_hover' => '#ffffff',
-        'color.main_menu.bg' => '#ffffff',
-        'color.main_menu.bg_active' => '#0b6ba8',
+        'color.main_menu.text_hover'  => '#ffffff',
+        'color.main_menu.bg'          => '#ffffff',
+        'color.main_menu.bg_active'   => '#0b6ba8',
 
         'color.footer.title' => '#ffffff',
-        'color.user.vip.bg' => '#ffffff',
+        'color.user.vip.bg'  => '#ffffff',
     ];
 
     protected function findOpinionTypeByTitle($title, $parentTitle = false, $rootTitle = false)
@@ -253,9 +253,9 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
     protected function import(InputInterface $input, OutputInterface $output)
     {
         $opinionTypesData = $this->getOpinionTypes();
-        $opinions = $this->getOpinions();
-        $motives = $this->getMotives();
-        $modals = $this->getModals();
+        $opinions         = $this->getOpinions();
+        $motives          = $this->getMotives();
+        $modals           = $this->getModals();
 
         $em = $this->getContainer()->get('doctrine')->getManager();
 
@@ -375,7 +375,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $i = 1;
         foreach ($opinions as $row) {
             $opinionType = $this->findOpinionTypeByTitle($row['opinionType'], $row['opinionType_parent'], $row['opinionType_root']);
-            $opinion = $em->getRepository('CapcoAppBundle:Opinion')
+            $opinion     = $em->getRepository('CapcoAppBundle:Opinion')
                           ->findOneByTitle($row['opinion']);
 
             if (!is_object($opinion)) {
@@ -411,7 +411,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                 $motif->setBody('<p>'.$row['motif'].'</p>');
                 $opinion->addAppendice($motif);
             } else {
-                $motif = $opinion->getAppendices()[0];
+                $motif   = $opinion->getAppendices()[0];
                 $content = $motif->getBody();
                 $content .= '<p>'.$row['motif'].'</p>';
                 $motif->setBody($content);

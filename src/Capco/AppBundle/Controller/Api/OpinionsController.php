@@ -47,13 +47,13 @@ class OpinionsController extends FOSRestController
      */
     public function getOpinionAction(Opinion $opinion)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em   = $this->get('doctrine.orm.entity_manager');
         $repo = $em->getRepository('CapcoAppBundle:Opinion');
-        $id = $opinion->getId();
+        $id   = $opinion->getId();
 
-        $opinionWithArguments = $repo->getWithArguments($id);
-        $opinionWithSources = $repo->getWithSources($id);
-        $opinionWithVotes = $repo->getWithVotes($id, 5);
+        $opinionWithArguments   = $repo->getWithArguments($id);
+        $opinionWithSources     = $repo->getWithSources($id);
+        $opinionWithVotes       = $repo->getWithVotes($id, 5);
         $opinionWithConnections = $repo->getOneWithEnabledConnectionsOrdered($id);
 
         if (is_object($opinionWithArguments)) {
@@ -75,9 +75,9 @@ class OpinionsController extends FOSRestController
         $project = $opinion->getStep()->getProject();
 
         return [
-            'opinion' => $opinion,
+            'opinion'          => $opinion,
             'rankingThreshold' => $project->getOpinionsRankingThreshold(),
-            'opinionTerm' => $project->getOpinionTerm(),
+            'opinionTerm'      => $project->getOpinionTerm(),
         ];
     }
 
@@ -110,7 +110,7 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException($validationErrors->__toString());
         }
 
-        $user = $this->getUser();
+        $user         = $this->getUser();
         $previousVote = $this->get('doctrine.orm.entity_manager')
                     ->getRepository('CapcoAppBundle:OpinionVote')
                     ->findOneBy(['user' => $user, 'opinion' => $opinion]);
@@ -196,9 +196,9 @@ class OpinionsController extends FOSRestController
      */
     public function cgetOpinionVersionsAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
     {
-        $offset = $paramFetcher->get('offset');
-        $limit = $paramFetcher->get('limit');
-        $filter = $paramFetcher->get('filter');
+        $offset  = $paramFetcher->get('offset');
+        $limit   = $paramFetcher->get('limit');
+        $filter  = $paramFetcher->get('filter');
         $trashed = false;
 
         $paginator = $this->getDoctrine()->getManager()
@@ -213,9 +213,9 @@ class OpinionsController extends FOSRestController
         }
 
         return [
-            'versions' => $versions,
+            'versions'         => $versions,
             'rankingThreshold' => $project->getVersionsRankingThreshold(),
-            'opinionTerm' => $project->getOpinionTerm(),
+            'opinionTerm'      => $project->getOpinionTerm(),
         ];
     }
 
@@ -249,9 +249,9 @@ class OpinionsController extends FOSRestController
         }
 
         return [
-            'version' => $version,
+            'version'          => $version,
             'rankingThreshold' => $project->getVersionsRankingThreshold(),
-            'opinionTerm' => $project->getOpinionTerm(),
+            'opinionTerm'      => $project->getOpinionTerm(),
         ];
     }
 
@@ -282,7 +282,7 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException("Can't add a version to an unversionable opinion.");
         }
 
-        $user = $this->getUser();
+        $user           = $this->getUser();
         $opinionVersion = (new OpinionVersion())
             ->setAuthor($user)
             ->setParent($opinion)
@@ -372,9 +372,9 @@ class OpinionsController extends FOSRestController
      */
     public function cgetOpinionSourcesAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
     {
-        $offset = $paramFetcher->get('offset');
-        $limit = $paramFetcher->get('limit');
-        $filter = $paramFetcher->get('filter');
+        $offset  = $paramFetcher->get('offset');
+        $limit   = $paramFetcher->get('limit');
+        $filter  = $paramFetcher->get('filter');
         $trashed = false;
 
         $paginator = $this->getDoctrine()->getManager()
@@ -414,7 +414,7 @@ class OpinionsController extends FOSRestController
     public function cgetOpinionVersionSourcesAction(Opinion $opinion, OpinionVersion $version, ParamFetcherInterface $paramFetcher)
     {
         $offset = $paramFetcher->get('offset');
-        $limit = $paramFetcher->get('limit');
+        $limit  = $paramFetcher->get('limit');
         $filter = $paramFetcher->get('filter');
 
         $paginator = $this->getDoctrine()->getManager()
@@ -454,7 +454,7 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException("Can't add a source to an uncontributable opinion.");
         }
 
-        $user = $this->getUser();
+        $user   = $this->getUser();
         $source = (new Source())
                     ->setAuthor($user)
                     ->setType(Source::LINK)
@@ -507,7 +507,7 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException("Can't add a version to an unversionable opinion.");
         }
 
-        $user = $this->getUser();
+        $user   = $this->getUser();
         $source = (new Source())
                     ->setAuthor($user)
                     ->setType(Source::LINK)
@@ -652,7 +652,7 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException($validationErrors->__toString());
         }
 
-        $user = $this->getUser();
+        $user         = $this->getUser();
         $previousVote = $this->getDoctrine()->getManager()
                     ->getRepository('CapcoAppBundle:OpinionVersionVote')
                     ->findOneBy(['user' => $user, 'opinionVersion' => $version]);
@@ -741,7 +741,7 @@ class OpinionsController extends FOSRestController
     {
         $filter = $paramFetcher->get('filter');
 
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em      = $this->get('doctrine.orm.entity_manager');
         $opinion = $em->getRepository('CapcoAppBundle:Opinion')
                       ->getOneWithEnabledConnectionsOrdered($id, $filter)
                     ;

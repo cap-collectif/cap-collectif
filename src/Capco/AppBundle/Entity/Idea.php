@@ -27,9 +27,9 @@ class Idea implements CommentableInterface, VotableInterface
     use VotableOkTrait;
 
     public static $sortCriterias = [
-        'last' => 'idea.sort.last',
-        'old' => 'idea.sort.old',
-        'popular' => 'idea.sort.popular',
+        'last'     => 'idea.sort.last',
+        'old'      => 'idea.sort.old',
+        'popular'  => 'idea.sort.popular',
         'comments' => 'idea.sort.comments',
     ];
 
@@ -167,11 +167,11 @@ class Idea implements CommentableInterface, VotableInterface
      */
     public function __construct()
     {
-        $this->votes = new ArrayCollection();
-        $this->Reports = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->votes         = new ArrayCollection();
+        $this->Reports       = new ArrayCollection();
+        $this->comments      = new ArrayCollection();
         $this->commentsCount = 0;
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt     = new \Datetime();
     }
 
     public function __toString()
@@ -403,7 +403,7 @@ class Idea implements CommentableInterface, VotableInterface
     {
         if (false == $this->isTrashed) {
             $this->trashedReason = null;
-            $this->trashedAt = null;
+            $this->trashedAt     = null;
         }
         $this->isTrashed = $isTrashed;
 

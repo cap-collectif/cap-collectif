@@ -16,7 +16,7 @@ class SearchResolver
 
     public function __construct(Index $index, ElasticaToModelTransformerInterface $transformer)
     {
-        $this->index = $index;
+        $this->index       = $index;
         $this->transformer = $transformer;
     }
 
@@ -24,8 +24,8 @@ class SearchResolver
     public function searchAll($size, $page, $term, $type = 'all', $sort = 'score')
     {
         $results = [];
-        $count = 0;
-        $from = ($page - 1) * $size;
+        $count   = 0;
+        $from    = ($page - 1) * $size;
 
         if ($term) {
             $termQuery = $this->getTermQuery($term);
@@ -46,7 +46,7 @@ class SearchResolver
             $query->setSize($size);
 
             $resultSet = $this->index->search($query);
-            $count = $resultSet->getTotalHits();
+            $count     = $resultSet->getTotalHits();
 
             $results = $this->transformer->hybridTransform($resultSet->getResults());
         }
@@ -102,19 +102,19 @@ class SearchResolver
     protected function getHighlightSettings()
     {
         return [
-            'pre_tags' => ['<span class="search__highlight">'],
-            'post_tags' => ['</span>'],
+            'pre_tags'            => ['<span class="search__highlight">'],
+            'post_tags'           => ['</span>'],
             'number_of_fragments' => 3,
-            'fragment_size' => 175,
-            'fields' => [
-                'title' => ['number_of_fragments' => 0],
+            'fragment_size'       => 175,
+            'fields'              => [
+                'title'          => ['number_of_fragments' => 0],
                 'strippedObject' => new \stdClass(),
-                'strippedBody' => new \stdClass(),
-                'body' => new \stdClass(),
-                'teaser' => new \stdClass(),
-                'excerpt' => new \stdClass(),
-                'username' => ['number_of_fragments' => 0],
-                'biography' => new \stdClass(),
+                'strippedBody'   => new \stdClass(),
+                'body'           => new \stdClass(),
+                'teaser'         => new \stdClass(),
+                'excerpt'        => new \stdClass(),
+                'username'       => ['number_of_fragments' => 0],
+                'biography'      => new \stdClass(),
             ],
         ];
     }

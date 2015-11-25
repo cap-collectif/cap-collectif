@@ -19,7 +19,7 @@ class SynthesisElementHandler
 
     public function __construct(EntityManager $em, LogManager $logManager)
     {
-        $this->em = $em;
+        $this->em         = $em;
         $this->logManager = $logManager;
     }
 
@@ -42,7 +42,7 @@ class SynthesisElementHandler
 
         return [
             'elements' => $elements,
-            'count' => count($paginator),
+            'count'    => count($paginator),
         ];
     }
 

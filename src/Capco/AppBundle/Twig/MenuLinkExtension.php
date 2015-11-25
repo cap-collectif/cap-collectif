@@ -13,7 +13,7 @@ class MenuLinkExtension extends \Twig_Extension
 
     public function __construct(Router $router, ValidatorInterface $validator)
     {
-        $this->router = $router;
+        $this->router    = $router;
         $this->validator = $validator;
     }
 
@@ -29,9 +29,9 @@ class MenuLinkExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('menu_url', array($this, 'getMenuUrl')),
-       );
+        return [
+            new \Twig_SimpleFunction('menu_url', [$this, 'getMenuUrl']),
+       ];
     }
 
     public function getMenuUrl($url)
@@ -41,7 +41,7 @@ class MenuLinkExtension extends \Twig_Extension
         }
 
         $constraint = new Url();
-        $errorList = $this->validator->validate(
+        $errorList  = $this->validator->validate(
             $url,
             $constraint
         );
@@ -50,6 +50,6 @@ class MenuLinkExtension extends \Twig_Extension
             return $url;
         }
 
-        return $this->router->generate('capco_app_cms', array('url' => $url));
+        return $this->router->generate('capco_app_cms', ['url' => $url]);
     }
 }

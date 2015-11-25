@@ -45,7 +45,7 @@ class SectionController extends PositionableController
      */
     public function deleteAction($id, Request $request = null)
     {
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object->isCustom()) {

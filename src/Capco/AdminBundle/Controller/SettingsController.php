@@ -21,7 +21,7 @@ class SettingsController extends Controller
         }
 
         $admin_pool = $this->get('sonata.admin.pool');
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em         = $this->get('doctrine.orm.entity_manager');
 
         $parameters = $em->getRepository('CapcoAppBundle:SiteParameter')->findBy([
             'category' => $category,
@@ -38,17 +38,17 @@ class SettingsController extends Controller
         $featuresCategoryResolver = $this->get('capco.admin.features_category_resolver');
 
         $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
-        $group = $featuresCategoryResolver->getGroupNameForCategory($category);
+        $group   = $featuresCategoryResolver->getGroupNameForCategory($category);
 
-        return array(
-            'admin_pool' => $admin_pool,
-            'category' => $category,
-            'parameters' => $parameters,
-            'colors' => $colors,
-            'images' => $images,
-            'toggles' => $toggles,
+        return [
+            'admin_pool'          => $admin_pool,
+            'category'            => $category,
+            'parameters'          => $parameters,
+            'colors'              => $colors,
+            'images'              => $images,
+            'toggles'             => $toggles,
             'current_group_label' => $group,
-        );
+        ];
     }
 
     /**
@@ -62,12 +62,12 @@ class SettingsController extends Controller
         }
 
         $toggleManager = $this->get('capco.toggle.manager');
-        $value = $toggleManager->switchValue($toggle);
+        $value         = $toggleManager->switchValue($toggle);
 
         if ($value) {
-            $message = $this->get('translator')->trans('features.switch.enabled', array(), 'CapcoAppBundle');
+            $message = $this->get('translator')->trans('features.switch.enabled', [], 'CapcoAppBundle');
         } else {
-            $message = $this->get('translator')->trans('features.switch.disabled', array(), 'CapcoAppBundle');
+            $message = $this->get('translator')->trans('features.switch.disabled', [], 'CapcoAppBundle');
         }
 
         $this->get('sonata.core.flashmessage.manager')->getSession()->getFlashBag()->add('success', $message);

@@ -34,7 +34,7 @@ abstract class Comment implements VotableInterface
     use VotableOkTrait;
 
     public static $sortCriterias = [
-        'date' => 'argument.sort.date',
+        'date'       => 'argument.sort.date',
         'popularity' => 'argument.sort.popularity',
     ];
 
@@ -148,9 +148,9 @@ abstract class Comment implements VotableInterface
 
     public function __construct()
     {
-        $this->votes = new ArrayCollection();
-        $this->answers = new ArrayCollection();
-        $this->Reports = new ArrayCollection();
+        $this->votes     = new ArrayCollection();
+        $this->answers   = new ArrayCollection();
+        $this->Reports   = new ArrayCollection();
         $this->updatedAt = new \Datetime();
     }
 
@@ -421,7 +421,7 @@ abstract class Comment implements VotableInterface
         if ($isTrashed != $this->isTrashed) {
             if ($isTrashed == false) {
                 $this->trashedReason = null;
-                $this->trashedAt = null;
+                $this->trashedAt     = null;
             }
         }
         $this->isTrashed = $isTrashed;

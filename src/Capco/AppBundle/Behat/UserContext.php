@@ -57,7 +57,7 @@ class UserContext extends DefaultContext
      */
     public function isRegisteredToEvent($email, $slug)
     {
-        $event = $this->getRepository('CapcoAppBundle:Event')->findOneBySlug($slug);
+        $event        = $this->getRepository('CapcoAppBundle:Event')->findOneBySlug($slug);
         $registration = (new EventRegistration($event))
                             ->setEmail($email)
                             ->setUsername($email)

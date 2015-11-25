@@ -17,33 +17,33 @@ use Capco\AppBundle\Entity\ViewModel\OpinionTypeViewModel;
 class OpinionType
 {
     public static $colorsType = [
-        'red' => 'opinion_type.colors.red',
-        'green' => 'opinion_type.colors.green',
-        'blue' => 'opinion_type.colors.blue',
-        'orange' => 'opinion_type.colors.orange',
+        'red'      => 'opinion_type.colors.red',
+        'green'    => 'opinion_type.colors.green',
+        'blue'     => 'opinion_type.colors.blue',
+        'orange'   => 'opinion_type.colors.orange',
         'bluedark' => 'opinion_type.colors.bluedark',
-        'white' => 'opinion_type.colors.white',
-        'default' => 'opinion_type.colors.default',
+        'white'    => 'opinion_type.colors.white',
+        'default'  => 'opinion_type.colors.default',
     ];
 
     const VOTE_WIDGET_DISABLED = 0;
-    const VOTE_WIDGET_OK = 1;
-    const VOTE_WIDGET_BOTH = 2;
+    const VOTE_WIDGET_OK       = 1;
+    const VOTE_WIDGET_BOTH     = 2;
 
     public static $voteWidgetLabels = [
         self::VOTE_WIDGET_DISABLED => 'opinion_type.widget_type.disabled',
-        self::VOTE_WIDGET_OK => 'opinion_type.widget_type.ok',
-        self::VOTE_WIDGET_BOTH => 'opinion_type.widget_type.both',
+        self::VOTE_WIDGET_OK       => 'opinion_type.widget_type.ok',
+        self::VOTE_WIDGET_BOTH     => 'opinion_type.widget_type.both',
     ];
 
     const COMMENT_SYSTEM_DISABLED = 0;
-    const COMMENT_SYSTEM_OK = 1;
-    const COMMENT_SYSTEM_BOTH = 2;
+    const COMMENT_SYSTEM_OK       = 1;
+    const COMMENT_SYSTEM_BOTH     = 2;
 
     public static $commentSystemLabels = [
         self::COMMENT_SYSTEM_DISABLED => 'opinion_type.comment_system.disabled',
-        self::COMMENT_SYSTEM_OK => 'opinion_type.comment_system.ok',
-        self::COMMENT_SYSTEM_BOTH => 'opinion_type.comment_system.both',
+        self::COMMENT_SYSTEM_OK       => 'opinion_type.comment_system.ok',
+        self::COMMENT_SYSTEM_BOTH     => 'opinion_type.comment_system.both',
     ];
 
     /**
@@ -230,10 +230,10 @@ class OpinionType
     public function __construct()
     {
         $this->voteWidgetType = self::VOTE_WIDGET_BOTH;
-        $this->Opinions = new ArrayCollection();
-        $this->updatedAt = new \Datetime();
-        $this->appendixTypes = new ArrayCollection();
-        $this->children = new ArrayCollection();
+        $this->Opinions       = new ArrayCollection();
+        $this->updatedAt      = new \Datetime();
+        $this->appendixTypes  = new ArrayCollection();
+        $this->children       = new ArrayCollection();
     }
 
     public function __toString()
@@ -736,10 +736,10 @@ class OpinionType
         $data = [];
         foreach ($this->getAvailableOpinionTypesToCreateLink() as $opinionType) {
             if ($opinionType->getIsEnabled()) {
-                $opinionTypeViewModel = new OpinionTypeViewModel();
-                $opinionTypeViewModel->id = $opinionType->getId();
+                $opinionTypeViewModel        = new OpinionTypeViewModel();
+                $opinionTypeViewModel->id    = $opinionType->getId();
                 $opinionTypeViewModel->label = $opinionType->getTitle();
-                $data[] = $opinionTypeViewModel;
+                $data[]                      = $opinionTypeViewModel;
             }
         }
 

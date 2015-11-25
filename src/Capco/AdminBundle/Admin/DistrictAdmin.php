@@ -12,19 +12,19 @@ class DistrictAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'name',
+        '_sort_by'    => 'name',
     ];
 
-    protected $formOptions = array(
+    protected $formOptions = [
         'cascade_validation' => true,
-    );
+    ];
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('name', null, [
-                'label' => 'admin.fields.district.name',
+                'label'    => 'admin.fields.district.name',
                 'required' => true,
             ])
         ;
@@ -68,8 +68,8 @@ class DistrictAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])

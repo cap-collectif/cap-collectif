@@ -20,7 +20,7 @@ class VoteSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            CapcoAppBundleEvents::OPINION_VOTE_CHANGED => 'onOpinionVoteChanged',
+            CapcoAppBundleEvents::OPINION_VOTE_CHANGED  => 'onOpinionVoteChanged',
             CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED => 'onAbstractVoteChanged',
         ];
     }
@@ -28,8 +28,8 @@ class VoteSubscriber implements EventSubscriberInterface
     public function onOpinionVoteChanged(OpinionVoteChangedEvent $event)
     {
         $opinionVote = $event->getVote();
-        $action = $event->getAction();
-        $opinion = $opinionVote->getOpinion();
+        $action      = $event->getAction();
+        $opinion     = $opinionVote->getOpinion();
 
         if ($action == 'remove') {
             $opinion->decreaseVotesCount($opinionVote->getValue());
@@ -47,7 +47,7 @@ class VoteSubscriber implements EventSubscriberInterface
 
     public function onAbstractVoteChanged(AbstractVoteChangedEvent $event)
     {
-        $vote = $event->getVote();
+        $vote   = $event->getVote();
         $action = $event->getAction();
         $entity = $vote->getRelatedEntity();
 

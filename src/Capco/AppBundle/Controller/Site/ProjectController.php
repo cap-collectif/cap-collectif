@@ -59,11 +59,11 @@ class ProjectController extends Controller
         if (false === $currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
-        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
+        $nav      = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
         $response = $this->render('CapcoAppBundle:Project:show.html.twig', [
-            'project' => $project,
+            'project'     => $project,
             'currentStep' => $currentStep,
-            'nav' => $nav,
+            'nav'         => $nav,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
@@ -88,9 +88,9 @@ class ProjectController extends Controller
             ->getGroupedOpinionsForStep($currentStep);
 
         return [
-            'blocks' => $tree,
-            'project' => $project,
-            'currentStep' => $currentStep,
+            'blocks'            => $tree,
+            'project'           => $project,
+            'currentStep'       => $currentStep,
             'opinionSortOrders' => Opinion::$sortCriterias,
         ];
     }
@@ -126,13 +126,13 @@ class ProjectController extends Controller
             throw new NotFoundHttpException('This type does not exist for this consultation step');
         }
 
-        $filter = $opinionsSort ? $opinionsSort : $opinionType->getDefaultFilter();
+        $filter     = $opinionsSort ? $opinionsSort : $opinionType->getDefaultFilter();
         $currentUrl = $this
             ->generateUrl('app_project_show_opinions', [
-                'projectSlug' => $project->getSlug(),
-                'stepSlug' => $currentStep->getSlug(),
+                'projectSlug'     => $project->getSlug(),
+                'stepSlug'        => $currentStep->getSlug(),
                 'opinionTypeSlug' => $opinionType->getSlug(),
-                'page' => $page,
+                'page'            => $page,
             ]);
         $opinions = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:Opinion')
@@ -141,17 +141,17 @@ class ProjectController extends Controller
             ->getNavForStep($currentStep);
 
         return [
-            'currentUrl' => $currentUrl,
-            'project' => $project,
-            'opinionType' => $opinionType,
-            'opinions' => $opinions,
-            'page' => $page,
-            'nbPage' => ceil(count($opinions) / 10),
-            'opinionsSort' => $filter,
+            'currentUrl'        => $currentUrl,
+            'project'           => $project,
+            'opinionType'       => $opinionType,
+            'opinions'          => $opinions,
+            'page'              => $page,
+            'nbPage'            => ceil(count($opinions) / 10),
+            'opinionsSort'      => $filter,
             'opinionSortOrders' => Opinion::$sortCriterias,
-            'currentStep' => $currentStep,
-            'nav' => $nav,
-            'currentRoute' => $request->get('_route'),
+            'currentStep'       => $currentStep,
+            'nav'               => $nav,
+            'currentRoute'      => $request->get('_route'),
         ];
     }
 
@@ -177,20 +177,20 @@ class ProjectController extends Controller
 
         $em = $this->get('doctrine.orm.entity_manager');
 
-        $opinions = $em->getRepository('CapcoAppBundle:Opinion')->getTrashedOrUnpublishedByProject($project);
-        $versions = $em->getRepository('CapcoAppBundle:OpinionVersion')->getTrashedOrUnpublishedByProject($project);
+        $opinions  = $em->getRepository('CapcoAppBundle:Opinion')->getTrashedOrUnpublishedByProject($project);
+        $versions  = $em->getRepository('CapcoAppBundle:OpinionVersion')->getTrashedOrUnpublishedByProject($project);
         $arguments = $em->getRepository('CapcoAppBundle:Argument')->getTrashedOrUnpublishedByProject($project);
-        $sources = $em->getRepository('CapcoAppBundle:Source')->getTrashedOrUnpublishedByProject($project);
+        $sources   = $em->getRepository('CapcoAppBundle:Source')->getTrashedOrUnpublishedByProject($project);
 
         $proposals = $em->getRepository('CapcoAppBundle:Proposal')->getTrashedOrUnpublishedByProject($project);
 
         return [
-            'project' => $project,
-            'opinions' => $opinions,
-            'versions' => $versions,
-            'arguments' => $arguments,
-            'sources' => $sources,
-            'proposals' => $proposals,
+            'project'         => $project,
+            'opinions'        => $opinions,
+            'versions'        => $versions,
+            'arguments'       => $arguments,
+            'sources'         => $sources,
+            'proposals'       => $proposals,
             'argumentsLabels' => Argument::$argumentTypesLabels,
         ];
     }
@@ -218,15 +218,15 @@ class ProjectController extends Controller
         }
 
         $resolver = $this->get('capco.project.download.resolver');
-        $content = $resolver->getContent($step, $format);
+        $content  = $resolver->getContent($step, $format);
 
         if (!$content) {
             throw new NotFoundHttpException('Wrong format');
         }
 
-        $response = new Response($content);
+        $response    = new Response($content);
         $contentType = $resolver->getContentType($format);
-        $filename = $project->getSlug().'_'.$step->getSlug().'.'.$format;
+        $filename    = $project->getSlug().'_'.$step->getSlug().'.'.$format;
         $response->headers->set('Content-Type', $contentType);
         $response->headers->set('Content-Disposition', 'attachment;filename='.$filename);
 
@@ -246,11 +246,11 @@ class ProjectController extends Controller
     public function showEventsAction(Project $project)
     {
         $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(null, null, $project->getSlug(), null);
-        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $project->getSlug(), null);
+        $nbEvents      = $this->get('capco.event.resolver')->countEvents(null, null, $project->getSlug(), null);
 
         return [
-            'project' => $project,
-            'years' => $groupedEvents,
+            'project'  => $project,
+            'years'    => $groupedEvents,
             'nbEvents' => $nbEvents,
         ];
     }
@@ -285,9 +285,9 @@ class ProjectController extends Controller
 
         return [
             'project' => $project,
-            'posts' => $posts,
-            'page' => $page,
-            'nbPage' => $nbPage,
+            'posts'   => $posts,
+            'page'    => $page,
+            'nbPage'  => $nbPage,
         ];
     }
 
@@ -314,11 +314,11 @@ class ProjectController extends Controller
         }
 
         return [
-            'project' => $project,
+            'project'      => $project,
             'contributors' => $contributors,
-            'page' => $page,
-            'pagination' => $pagination,
-            'nbPage' => $nbPage,
+            'page'         => $page,
+            'pagination'   => $pagination,
+            'nbPage'       => $nbPage,
         ];
     }
 
@@ -332,13 +332,13 @@ class ProjectController extends Controller
      */
     public function showMetaAction($projectSlug, $currentStepSlug)
     {
-        $em = $this->getDoctrine();
+        $em      = $this->getDoctrine();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOneBySlugWithStepsAndEventsAndPosts($projectSlug);
 
         return [
-            'project' => $project,
+            'project'     => $project,
             'currentStep' => $currentStepSlug,
-            'stepStatus' => AbstractStep::$stepStatus,
+            'stepStatus'  => AbstractStep::$stepStatus,
         ];
     }
 
@@ -361,17 +361,17 @@ class ProjectController extends Controller
      */
     public function indexAction(Request $request, $page, $theme = null, $sort = null, $term = null)
     {
-        $em = $this->getDoctrine()->getManager();
-        $currentUrl = $this->generateUrl('app_project');
-        $toggleManager = $this->get('capco.toggle.manager');
+        $em              = $this->getDoctrine()->getManager();
+        $currentUrl      = $this->generateUrl('app_project');
+        $toggleManager   = $this->get('capco.toggle.manager');
         $themesActivated = $toggleManager->isActive('themes');
-        $formActivated = $toggleManager->isActive('projects_form');
+        $formActivated   = $toggleManager->isActive('projects_form');
 
         if ($formActivated) {
-            $form = $this->createForm(new ProjectSearchType($this->get('capco.toggle.manager')), null, array(
+            $form = $this->createForm(new ProjectSearchType($this->get('capco.toggle.manager')), null, [
                 'action' => $currentUrl,
                 'method' => 'POST',
-            ));
+            ]);
         }
 
         $themesActivated = $toggleManager->isActive('themes');
@@ -383,19 +383,19 @@ class ProjectController extends Controller
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_project_search_term', array(
+                return $this->redirect($this->generateUrl('app_project_search_term', [
                     'theme' => ($themesActivated && array_key_exists('theme', $data) && $data['theme']) ? $data['theme']->getSlug() : Theme::FILTER_ALL,
-                    'sort' => $data['sort'],
-                    'term' => $data['term'],
-                )));
+                    'sort'  => $data['sort'],
+                    'term'  => $data['term'],
+                ]));
             }
         } else {
             if ($formActivated) {
-                $form->setData(array(
+                $form->setData([
                     'theme' => $themesActivated ? $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme) : null,
-                    'sort' => $sort,
-                    'term' => $term,
-                ));
+                    'sort'  => $sort,
+                    'term'  => $term,
+                ]);
             }
         }
 
@@ -411,8 +411,8 @@ class ProjectController extends Controller
 
         $parameters = [
             'projects' => $projects,
-            'page' => $page,
-            'nbPage' => $nbPage,
+            'page'     => $page,
+            'nbPage'   => $nbPage,
         ];
 
         if ($formActivated) {

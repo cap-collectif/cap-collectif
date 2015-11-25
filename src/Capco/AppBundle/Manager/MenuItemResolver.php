@@ -13,7 +13,7 @@ class MenuItemResolver
     public function __construct(MenuItemRepository $repository, Manager $toggleManager)
     {
         $this->repository = $repository;
-        $this->manager = $toggleManager;
+        $this->manager    = $toggleManager;
     }
 
     /**
@@ -24,25 +24,25 @@ class MenuItemResolver
     public function getEnabledMenuItemsWithChildren($menu)
     {
         if (null !== $menu) {
-            $parents = $this->repository->getParentItems($menu);
+            $parents  = $this->repository->getParentItems($menu);
             $children = $this->repository->getChildItems($menu);
-            $links = [];
+            $links    = [];
 
             foreach ($parents as $parent) {
                 $links[$parent->getId()] = [
-                    'title' => $parent->getTitle(),
-                    'link' => $parent->getLink(),
+                    'title'             => $parent->getTitle(),
+                    'link'              => $parent->getLink(),
                     'hasEnabledFeature' => $this->manager->containsEnabledFeature($parent->getAssociatedFeatures()),
-                    'children' => [],
+                    'children'          => [],
                 ];
             }
 
             foreach ($children as $child) {
                 if (array_key_exists($child->getParent()->getId(), $links)) {
                     $links[$child->getParent()->getId()]['children'][] = [
-                        'id' => $child->getId(),
-                        'title' => $child->getTitle(),
-                        'link' => $child->getLink(),
+                        'id'                => $child->getId(),
+                        'title'             => $child->getTitle(),
+                        'link'              => $child->getLink(),
                         'hasEnabledFeature' => $this->manager->containsEnabledFeature($child->getAssociatedFeatures()),
                     ];
                 }

@@ -14,7 +14,7 @@ class SourceSerializationListener implements EventSubscriberInterface
 
     public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage)
     {
-        $this->router = $router;
+        $this->router       = $router;
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -22,8 +22,8 @@ class SourceSerializationListener implements EventSubscriberInterface
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\Source',
+                'event'  => 'serializer.post_serialize',
+                'class'  => 'Capco\AppBundle\Entity\Source',
                 'method' => 'onPostSource',
             ],
         ];
@@ -31,28 +31,28 @@ class SourceSerializationListener implements EventSubscriberInterface
 
     public function onPostSource(ObjectEvent $event)
     {
-        $source = $event->getObject();
-        $opinion = $source->getLinkedOpinion();
+        $source      = $event->getObject();
+        $opinion     = $source->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
-        $step = $opinion->getStep();
-        $project = $step->getProjectAbstractStep()->getProject();
-        $user = $this->tokenStorage->getToken()->getUser();
+        $step        = $opinion->getStep();
+        $project     = $step->getProjectAbstractStep()->getProject();
+        $user        = $this->tokenStorage->getToken()->getUser();
 
         $event->getVisitor()->addData(
             '_links', [
-                'edit' => $this->router->generate('app_edit_source', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
+                'edit'                => $this->router->generate('app_edit_source', [
+                    'projectSlug'     => $project->getSlug(),
+                    'stepSlug'        => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'sourceSlug' => $source->getSlug(),
+                    'opinionSlug'     => $opinion->getSlug(),
+                    'sourceSlug'      => $source->getSlug(),
                 ], true),
-                'report' => $this->router->generate('app_report_source', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
+                'report'              => $this->router->generate('app_report_source', [
+                    'projectSlug'     => $project->getSlug(),
+                    'stepSlug'        => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'sourceSlug' => $source->getSlug(),
+                    'opinionSlug'     => $opinion->getSlug(),
+                    'sourceSlug'      => $source->getSlug(),
                 ], true),
             ]
         );

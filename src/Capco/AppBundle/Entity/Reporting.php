@@ -15,18 +15,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Reporting
 {
-    const SIGNALEMENT_SEX = 0;
-    const SIGNALEMENT_OFF = 1;
-    const SIGNALEMENT_SPAM = 2;
-    const SIGNALEMENT_ERROR = 3;
+    const SIGNALEMENT_SEX       = 0;
+    const SIGNALEMENT_OFF       = 1;
+    const SIGNALEMENT_SPAM      = 2;
+    const SIGNALEMENT_ERROR     = 3;
     const SIGNALEMENT_OFF_TOPIC = 4;
 
     public static $statusesLabels = [
-        self::SIGNALEMENT_SPAM => 'reporting.status.spam',
-        self::SIGNALEMENT_OFF => 'reporting.status.offending',
-        self::SIGNALEMENT_ERROR => 'reporting.status.error',
+        self::SIGNALEMENT_SPAM      => 'reporting.status.spam',
+        self::SIGNALEMENT_OFF       => 'reporting.status.offending',
+        self::SIGNALEMENT_ERROR     => 'reporting.status.error',
         self::SIGNALEMENT_OFF_TOPIC => 'reporting.status.off_topic',
-        self::SIGNALEMENT_SEX => 'reporting.status.sexual',
+        self::SIGNALEMENT_SEX       => 'reporting.status.sexual',
     ];
 
     /**

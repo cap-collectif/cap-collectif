@@ -14,16 +14,16 @@ class Resolver
     public function __construct(SiteColorRepository $repository, LoggerInterface $logger)
     {
         $this->repository = $repository;
-        $this->logger = $logger;
-        $this->colors = $this->repository->getValuesIfEnabled();
+        $this->logger     = $logger;
+        $this->colors     = $this->repository->getValuesIfEnabled();
     }
 
     public function getValue($key)
     {
         if (!array_key_exists($key, $this->colors)) {
-            $this->logger->warning('Tried to access undefined or disabled site color.', array(
+            $this->logger->warning('Tried to access undefined or disabled site color.', [
                 'key' => $key,
-            ));
+            ]);
 
             return;
         }

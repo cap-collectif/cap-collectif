@@ -12,7 +12,7 @@ class Manager
 
     protected $prefix;
 
-    protected static $toggles = array(
+    protected static $toggles = [
         'blog',
         'calendar',
         'newsletter',
@@ -33,13 +33,13 @@ class Manager
         'idea_trash',
         'reporting',
         'zipcode_at_register',
-    );
+    ];
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory, $prefix)
     {
         $this->toggleManager = $toggleManager;
-        $this->context = $contextFactory->createContext();
-        $this->prefix = $prefix;
+        $this->context       = $contextFactory->createContext();
+        $this->prefix        = $prefix;
     }
 
     protected function getPrefixedName($name)
@@ -66,7 +66,7 @@ class Manager
     public function all($state = null)
     {
         // features are disabled by default
-        $return = array();
+        $return = [];
 
         foreach (self::$toggles as $name) {
             if (null == $state || $state == $this->isActive($name)) {
@@ -122,7 +122,7 @@ class Manager
         return !$value;
     }
 
-    private function createToggle($name, $status, array $conditions = array())
+    private function createToggle($name, $status, array $conditions = [])
     {
         $toggle = new Toggle($this->getPrefixedName($name), $conditions);
 

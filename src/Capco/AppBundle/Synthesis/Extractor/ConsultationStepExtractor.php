@@ -18,11 +18,11 @@ use Symfony\Component\Routing\Router;
 
 class ConsultationStepExtractor
 {
-    const LABEL_ARG_PROS = 'synthesis.consultation_step.arguments.pros';
-    const LABEL_ARG_CONS = 'synthesis.consultation_step.arguments.cons';
+    const LABEL_ARG_PROS   = 'synthesis.consultation_step.arguments.pros';
+    const LABEL_ARG_CONS   = 'synthesis.consultation_step.arguments.cons';
     const LABEL_ARG_SIMPLE = 'synthesis.consultation_step.arguments.simple';
-    const LABEL_SOURCES = 'synthesis.consultation_step.sources';
-    const LABEL_VERSIONS = 'synthesis.consultation_step.versions';
+    const LABEL_SOURCES    = 'synthesis.consultation_step.sources';
+    const LABEL_VERSIONS   = 'synthesis.consultation_step.versions';
 
     const LABEL_CONTEXT = 'synthesis.consultation_step.context';
     const LABEL_CONTENT = 'synthesis.consultation_step.content';
@@ -39,11 +39,11 @@ class ConsultationStepExtractor
 
     public function __construct(EntityManager $em, TranslatorInterface $translator, Router $router, OpinionTypesResolver $opinionTypeResolver, UrlResolver $urlResolver)
     {
-        $this->em = $em;
-        $this->translator = $translator;
-        $this->router = $router;
+        $this->em                   = $em;
+        $this->translator           = $translator;
+        $this->router               = $router;
         $this->opinionTypesResolver = $opinionTypeResolver;
-        $this->urlResolver = $urlResolver;
+        $this->urlResolver          = $urlResolver;
     }
 
     // *********************************** Main method **********************************
@@ -62,7 +62,7 @@ class ConsultationStepExtractor
             return false;
         }
 
-        $this->synthesis = $synthesis;
+        $this->synthesis        = $synthesis;
         $this->consultationStep = $consultationStep;
         $this->previousElements = $synthesis->getElements();
 
@@ -92,7 +92,7 @@ class ConsultationStepExtractor
 
             // Create elements from opinions
             $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->findBy([
-                'step' => $this->consultationStep,
+                'step'        => $this->consultationStep,
                 'OpinionType' => $ot,
             ]);
             if (count($opinions) > 0) {
@@ -119,7 +119,7 @@ class ConsultationStepExtractor
 
             // Create elements from arguments
             if ($opinion->getOpinionType()->getCommentSystem() === 2) {
-                $proArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_PROS, $elementFromOpinion);
+                $proArgumentsElement  = $this->createFolderInElement(self::LABEL_ARG_PROS, $elementFromOpinion);
                 $consArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_CONS, $elementFromOpinion);
                 $this->createElementsFromArguments($opinion->getArguments(), $proArgumentsElement, $consArgumentsElement);
             } elseif ($opinion->getOpinionType()->getCommentSystem() === 1) {
@@ -155,7 +155,7 @@ class ConsultationStepExtractor
             $elementFromVersion = $this->getRelatedElement($version, $parent);
 
             // Create elements from arguments
-            $proArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_PROS, $elementFromVersion);
+            $proArgumentsElement  = $this->createFolderInElement(self::LABEL_ARG_PROS, $elementFromVersion);
             $consArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_CONS, $elementFromVersion);
             $this->createElementsFromArguments($version->getArguments(), $proArgumentsElement, $consArgumentsElement);
 
@@ -398,10 +398,10 @@ class ConsultationStepExtractor
             $element->setBody($content);
 
             // Set votes
-            $votes = array();
+            $votes       = [];
             $votes['-1'] = $opinion->getVotesCountNok();
-            $votes['0'] = $opinion->getVotesCountMitige();
-            $votes['1'] = $opinion->getVotesCountOk();
+            $votes['0']  = $opinion->getVotesCountMitige();
+            $votes['1']  = $opinion->getVotesCountOk();
             $element->setVotes($votes);
         }
 
@@ -434,10 +434,10 @@ class ConsultationStepExtractor
             $element->setBody($content);
 
             // Set votes
-            $votes = array();
+            $votes       = [];
             $votes['-1'] = $version->getVotesCountNok();
-            $votes['0'] = $version->getVotesCountMitige();
-            $votes['1'] = $version->getVotesCountOk();
+            $votes['0']  = $version->getVotesCountMitige();
+            $votes['1']  = $version->getVotesCountOk();
             $element->setVotes($votes);
         }
 
@@ -469,7 +469,7 @@ class ConsultationStepExtractor
         }
 
         // Set votes
-        $votes = array();
+        $votes      = [];
         $votes['1'] = $source->getVotesCount();
         $element->setVotes($votes);
 
@@ -492,7 +492,7 @@ class ConsultationStepExtractor
         $element->setBody($argument->getBody());
 
         // Set votes
-        $votes = array();
+        $votes      = [];
         $votes['1'] = $argument->getVotesCount();
         $element->setVotes($votes);
 

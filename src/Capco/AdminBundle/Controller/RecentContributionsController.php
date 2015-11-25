@@ -23,10 +23,10 @@ class RecentContributionsController extends Controller
         $contributions = $resolver->getRecentContributions();
 
         return [
-            'contributions' => $contributions,
+            'contributions'       => $contributions,
             'recentContributions' => true,
-            'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
-            'admin_pool' => $this->get('sonata.admin.pool'),
+            'base_template'       => 'CapcoAdminBundle::standard_layout.html.twig',
+            'admin_pool'          => $this->get('sonata.admin.pool'),
         ];
     }
 
@@ -46,10 +46,10 @@ class RecentContributionsController extends Controller
         }
 
         return [
-            'contribution' => $contribution,
+            'contribution'        => $contribution,
             'recentContributions' => true,
-            'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
-            'admin_pool' => $this->get('sonata.admin.pool'),
+            'base_template'       => 'CapcoAdminBundle::standard_layout.html.twig',
+            'admin_pool'          => $this->get('sonata.admin.pool'),
         ];
     }
 
@@ -59,8 +59,8 @@ class RecentContributionsController extends Controller
      */
     public function validateAction(Request $request, $type, $id)
     {
-        $resolver = $this->get('capco_admin.recent_contributions_resolver');
-        $em = $this->get('doctrine.orm.entity_manager');
+        $resolver     = $this->get('capco_admin.recent_contributions_resolver');
+        $em           = $this->get('doctrine.orm.entity_manager');
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 
         if (!$contribution) {
@@ -88,8 +88,8 @@ class RecentContributionsController extends Controller
      */
     public function unpublishAction(Request $request, $type, $id)
     {
-        $resolver = $this->get('capco_admin.recent_contributions_resolver');
-        $em = $this->get('doctrine.orm.entity_manager');
+        $resolver     = $this->get('capco_admin.recent_contributions_resolver');
+        $em           = $this->get('doctrine.orm.entity_manager');
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 
         if (!$contribution) {
@@ -119,11 +119,11 @@ class RecentContributionsController extends Controller
         }
 
         return $this->render('CapcoAdminBundle:RecentContributions:confirm.html.twig', [
-            'type' => $type,
-            'id' => $id,
-            'del_action' => 'unpublish',
+            'type'          => $type,
+            'id'            => $id,
+            'del_action'    => 'unpublish',
             'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
-            'admin_pool' => $this->get('sonata.admin.pool'),
+            'admin_pool'    => $this->get('sonata.admin.pool'),
         ], null);
     }
 
@@ -133,8 +133,8 @@ class RecentContributionsController extends Controller
      */
     public function trashAction(Request $request, $type, $id)
     {
-        $resolver = $this->get('capco_admin.recent_contributions_resolver');
-        $em = $this->get('doctrine.orm.entity_manager');
+        $resolver     = $this->get('capco_admin.recent_contributions_resolver');
+        $em           = $this->get('doctrine.orm.entity_manager');
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 
         if (!$contribution) {
@@ -163,11 +163,11 @@ class RecentContributionsController extends Controller
         }
 
         return $this->render('CapcoAdminBundle:RecentContributions:confirm.html.twig', [
-            'type' => $type,
-            'id' => $id,
-            'del_action' => 'trash',
+            'type'          => $type,
+            'id'            => $id,
+            'del_action'    => 'trash',
             'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
-            'admin_pool' => $this->get('sonata.admin.pool'),
+            'admin_pool'    => $this->get('sonata.admin.pool'),
         ], null);
     }
 }

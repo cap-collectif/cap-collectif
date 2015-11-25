@@ -14,27 +14,27 @@ class ChangePasswordFormType extends AbstractType
         // copy paste of FOSUser but we add the message to enable traduction
         $constraint = new UserPassword(['message' => 'fos_user.password.not_current']);
 
-        $builder->add('current_password', 'password', array(
-            'label' => 'form.current_password',
+        $builder->add('current_password', 'password', [
+            'label'              => 'form.current_password',
             'translation_domain' => 'FOSUserBundle',
-            'mapped' => false,
-            'constraints' => $constraint,
-        ));
-        $builder->add('new', 'repeated', array(
-            'type' => 'password',
-            'options' => array('translation_domain' => 'FOSUserBundle'),
-            'first_options' => array('label' => 'form.new_password'),
-            'second_options' => array('label' => 'form.new_password_confirmation'),
+            'mapped'             => false,
+            'constraints'        => $constraint,
+        ]);
+        $builder->add('new', 'repeated', [
+            'type'            => 'password',
+            'options'         => ['translation_domain' => 'FOSUserBundle'],
+            'first_options'   => ['label'              => 'form.new_password'],
+            'second_options'  => ['label'              => 'form.new_password_confirmation'],
             'invalid_message' => 'fos_user.password.mismatch',
-        ));
+        ]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'FOS\UserBundle\Form\Model\ChangePassword',
-            'intention' => 'change_password',
-        ));
+            'intention'  => 'change_password',
+        ]);
     }
 
     public function getName()

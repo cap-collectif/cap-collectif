@@ -21,8 +21,8 @@ class CommentResolver
 
     public function __construct(EntityManager $em, Router $router, UrlResolver $urlResolver)
     {
-        $this->em = $em;
-        $this->router = $router;
+        $this->em          = $em;
+        $this->router      = $router;
         $this->urlResolver = $urlResolver;
     }
 

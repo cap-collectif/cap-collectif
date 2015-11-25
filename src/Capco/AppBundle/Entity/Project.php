@@ -19,27 +19,27 @@ class Project
 {
     const FILTER_ALL = 'all';
 
-    const SORT_ORDER_PUBLISHED_AT = 0;
+    const SORT_ORDER_PUBLISHED_AT        = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
     public static $sortOrder = [
-        'date' => self::SORT_ORDER_PUBLISHED_AT,
+        'date'       => self::SORT_ORDER_PUBLISHED_AT,
         'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
     ];
 
     public static $sortOrderLabels = [
-        'date' => 'project.sort.published_at',
+        'date'       => 'project.sort.published_at',
         'popularity' => 'project.sort.contributions_nb',
     ];
 
     const OPENING_STATUS_FUTURE = 0;
     const OPENING_STATUS_OPENED = 1;
-    const OPENING_STATUS_ENDED = 2;
+    const OPENING_STATUS_ENDED  = 2;
 
     public static $openingStatuses = [
         'future' => self::OPENING_STATUS_FUTURE,
         'opened' => self::OPENING_STATUS_OPENED,
-        'ended' => self::OPENING_STATUS_ENDED,
+        'ended'  => self::OPENING_STATUS_ENDED,
     ];
 
     const OPINION_TERM_OPINION = 0;
@@ -208,11 +208,11 @@ class Project
      */
     public function __construct()
     {
-        $this->themes = new ArrayCollection();
-        $this->steps = new ArrayCollection();
-        $this->events = new ArrayCollection();
-        $this->posts = new ArrayCollection();
-        $this->updatedAt = new \Datetime();
+        $this->themes      = new ArrayCollection();
+        $this->steps       = new ArrayCollection();
+        $this->events      = new ArrayCollection();
+        $this->posts       = new ArrayCollection();
+        $this->updatedAt   = new \Datetime();
         $this->publishedAt = new \DateTime();
     }
 

@@ -15,11 +15,11 @@ class ThemeSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('term', 'search', array(
-                'label' => 'theme.search.term',
+            ->add('term', 'search', [
+                'label'              => 'theme.search.term',
                 'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ))
+                'required'           => false,
+            ])
         ;
     }
 

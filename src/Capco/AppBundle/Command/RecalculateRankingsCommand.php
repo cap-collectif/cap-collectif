@@ -19,7 +19,7 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getApplication()->getKernel()->getContainer();
-        $em = $container->get('doctrine')->getManager();
+        $em        = $container->get('doctrine')->getManager();
 
         $projects = $em->getRepository('CapcoAppBundle:Project')
             ->findAll();
@@ -31,12 +31,12 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
             $opinions = $em->getRepository('CapcoAppBundle:Opinion')
                 ->getEnabledByProjectsOrderedByVotes($project, $excludedAuthor);
 
-            $prevValue = null;
+            $prevValue   = null;
             $prevRanking = 1;
             foreach ($opinions as $key => $opinion) {
                 $ranking = $opinion->getVotesCountOk() === $prevValue ? $prevRanking : $key + 1;
                 $opinion->setRanking($ranking);
-                $prevValue = $opinion->getVotesCountOk();
+                $prevValue   = $opinion->getVotesCountOk();
                 $prevRanking = $ranking;
             }
 
@@ -45,12 +45,12 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
                 ->getEnabledByProjectsOrderedByVotes($project, $excludedAuthor)
             ;
 
-            $prevValue = null;
+            $prevValue   = null;
             $prevRanking = 1;
             foreach ($versions as $key => $version) {
                 $ranking = $version->getVotesCountOk() === $prevValue ? $prevRanking : $key + 1;
                 $version->setRanking($ranking);
-                $prevValue = $version->getVotesCountOk();
+                $prevValue   = $version->getVotesCountOk();
                 $prevRanking = $ranking;
             }
         }

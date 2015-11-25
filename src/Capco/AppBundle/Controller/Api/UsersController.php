@@ -32,10 +32,10 @@ class UsersController extends FOSRestController
      */
     public function getUsersAction(ParamFetcherInterface $paramFetcher)
     {
-        $em = $this->getDoctrine()->getManager();
-        $type = $paramFetcher->get('type');
-        $from = $paramFetcher->get('from');
-        $to = $paramFetcher->get('to');
+        $em       = $this->getDoctrine()->getManager();
+        $type     = $paramFetcher->get('type');
+        $from     = $paramFetcher->get('from');
+        $to       = $paramFetcher->get('to');
         $userType = null;
 
         if ($type) {

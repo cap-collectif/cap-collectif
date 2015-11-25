@@ -9,7 +9,7 @@ class ReportingController extends Controller
 {
     public function disableAction()
     {
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {
@@ -32,13 +32,13 @@ class ReportingController extends Controller
 
         return new RedirectResponse($this->admin->generateUrl(
             'list',
-            array('filter' => $this->admin->getFilterParameters())
+            ['filter' => $this->admin->getFilterParameters()]
         ));
     }
 
     public function trashAction()
     {
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {
@@ -61,13 +61,13 @@ class ReportingController extends Controller
 
         return new RedirectResponse($this->admin->generateUrl(
             'list',
-            array('filter' => $this->admin->getFilterParameters())
+            ['filter' => $this->admin->getFilterParameters()]
         ));
     }
 
     public function archiveAction()
     {
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id     = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {
@@ -81,7 +81,7 @@ class ReportingController extends Controller
 
         return new RedirectResponse($this->admin->generateUrl(
             'list',
-            array('filter' => $this->admin->getFilterParameters())
+            ['filter' => $this->admin->getFilterParameters()]
         ));
     }
 }

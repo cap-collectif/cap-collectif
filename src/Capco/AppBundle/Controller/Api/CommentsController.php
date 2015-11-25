@@ -30,7 +30,7 @@ class CommentsController extends FOSRestController
     public function getCommentsAction(ParamFetcherInterface $paramFetcher)
     {
         $from = $paramFetcher->get('from');
-        $to = $paramFetcher->get('to');
+        $to   = $paramFetcher->get('to');
 
         $comments = $this->getDoctrine()->getManager()
                     ->getRepository('CapcoAppBundle:Comment')

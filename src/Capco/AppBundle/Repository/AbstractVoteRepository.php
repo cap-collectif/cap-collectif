@@ -27,20 +27,20 @@ class AbstractVoteRepository extends EntityRepository
             ;
         }
 
-        $votes = $qb->getQuery()->getScalarResult();
+        $votes  = $qb->getQuery()->getScalarResult();
         $result = [];
         $counts = [
             'date' => '',
-            '-1' => 0,
-            '0' => 0,
-            '1' => 0,
+            '-1'   => 0,
+            '0'    => 0,
+            '1'    => 0,
         ];
 
         foreach ($votes as $i => $vote) {
             if (isset($counts[$vote['value']])) {
                 ++$counts[$vote['value']];
                 $counts['date'] = (new \DateTime($vote['updatedAt']))->getTimestamp();
-                $result[] = array_values($counts);
+                $result[]       = array_values($counts);
             }
         }
 

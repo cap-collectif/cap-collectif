@@ -17,75 +17,75 @@ class Section
 {
     public static $fieldsForType = [
         'highlight' => [
-            'title' => true,
-            'teaser' => false,
-            'body' => false,
+            'title'     => true,
+            'teaser'    => false,
+            'body'      => false,
             'nbObjects' => false,
         ],
         'introduction' => [
-            'title' => true,
-            'teaser' => true,
-            'body' => true,
+            'title'     => true,
+            'teaser'    => true,
+            'body'      => true,
             'nbObjects' => false,
         ],
         'videos' => [
-            'title' => true,
-            'teaser' => true,
-            'body' => false,
+            'title'     => true,
+            'teaser'    => true,
+            'body'      => false,
             'nbObjects' => true,
         ],
         'projects' => [
-            'title' => false,
-            'teaser' => true,
-            'body' => false,
+            'title'     => false,
+            'teaser'    => true,
+            'body'      => false,
             'nbObjects' => true,
         ],
         'themes' => [
-            'title' => false,
-            'teaser' => true,
-            'body' => false,
+            'title'     => false,
+            'teaser'    => true,
+            'body'      => false,
             'nbObjects' => true,
         ],
         'ideas' => [
-            'title' => true,
-            'teaser' => true,
-            'body' => false,
+            'title'     => true,
+            'teaser'    => true,
+            'body'      => false,
             'nbObjects' => true,
         ],
         'news' => [
-            'title' => true,
-            'teaser' => true,
-            'body' => false,
+            'title'     => true,
+            'teaser'    => true,
+            'body'      => false,
             'nbObjects' => true,
         ],
         'events' => [
-            'title' => true,
-            'teaser' => true,
-            'body' => false,
+            'title'     => true,
+            'teaser'    => true,
+            'body'      => false,
             'nbObjects' => true,
         ],
         'newsletter' => [
-            'title' => true,
-            'teaser' => true,
-            'body' => false,
+            'title'     => true,
+            'teaser'    => true,
+            'body'      => false,
             'nbObjects' => false,
         ],
         'social-networks' => [
-            'title' => true,
-            'teaser' => true,
-            'body' => false,
+            'title'     => true,
+            'teaser'    => true,
+            'body'      => false,
             'nbObjects' => false,
         ],
         'proposals' => [
-            'title' => true,
-            'teaser' => true,
-            'body' => false,
+            'title'     => true,
+            'teaser'    => true,
+            'body'      => false,
             'nbObjects' => true,
         ],
         'custom' => [
-            'title' => true,
-            'teaser' => true,
-            'body' => true,
+            'title'     => true,
+            'teaser'    => true,
+            'body'      => true,
             'nbObjects' => false,
         ],
     ];
@@ -180,7 +180,7 @@ class Section
 
     public function __construct()
     {
-        $this->type = 'custom';
+        $this->type      = 'custom';
         $this->updatedAt = new \Datetime();
     }
 
