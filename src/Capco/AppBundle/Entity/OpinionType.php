@@ -222,7 +222,7 @@ class OpinionType
     protected $children;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStepType", inversedBy="opinionTypes", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStepType", inversedBy="opinionTypes", cascade={"persist"})
      * @ORM\JoinColumn(name="consultation_step_type_id", nullable=true, onDelete="CASCADE")
      */
     protected $consultationStepType;

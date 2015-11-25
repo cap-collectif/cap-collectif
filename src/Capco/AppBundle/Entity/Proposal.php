@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
@@ -133,12 +132,6 @@ class Proposal implements CommentableInterface, VotableInterface
     protected $reports;
 
     /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", mappedBy="proposals", cascade={"persist"})
-     */
-    private $selectionSteps;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -149,7 +142,6 @@ class Proposal implements CommentableInterface, VotableInterface
         $this->proposalResponses = new ArrayCollection();
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
-        $this->selectionSteps = new ArrayCollection();
     }
 
     public function __toString()
@@ -421,42 +413,6 @@ class Proposal implements CommentableInterface, VotableInterface
         $this->reports->removeElement($report);
 
         return $this;
-    }
-
-    /**
-     * Add selection step.
-     *
-     * @param SelectionStep $selectionStep
-     *
-     * @return SelectionStep
-     */
-    public function addSelectionStep(SelectionStep $selectionStep)
-    {
-        if (!$this->selectionSteps->contains($selectionStep)) {
-            $this->selectionSteps[] = $selectionStep;
-            $selectionStep->addProposal($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Remove selectionStep.
-     *
-     * @param SelectionStep $selectionStep
-     */
-    public function removeSelectionStep(SelectionStep $selectionStep)
-    {
-        $this->selectionSteps->removeElement($selectionStep);
-        $selectionStep->removeProposal($this);
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getSelectionSteps()
-    {
-        return $this->selectionSteps;
     }
 
     // CommentableInterface methods implementation

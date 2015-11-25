@@ -2,8 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\CollectStep;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -19,19 +18,6 @@ class StatusRepository extends EntityRepository
         $qb = $this->createQueryBuilder('s')
             ->where('s.step = :step')
             ->setParameter('step', $step)
-            ->orderBy('s.position', 'ASC')
-        ;
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function getByProject(Project $project)
-    {
-        $qb = $this->createQueryBuilder('s')
-            ->leftJoin('s.step', 'step')
-            ->leftJoin('step.projectAbstractStep', 'pas')
-            ->where('pas.project = :project')
-            ->setParameter('project', $project)
             ->orderBy('s.position', 'ASC')
         ;
 

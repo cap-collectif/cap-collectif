@@ -1,8 +1,0 @@
-Capco\AppBundle\Entity\Steps\ConsultationStep:
-    exclusion_policy: ALL
-    virtual_properties:
-        getProjectId:
-            serialized_name: projectId
-            groups: [Opinions]
-            type: integer
-

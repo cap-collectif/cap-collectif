@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Synthesis\Handler;
 
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
 use Doctrine\ORM\EntityManager;

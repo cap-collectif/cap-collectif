@@ -257,7 +257,8 @@ class UserAdmin extends BaseAdmin
                         'translation_domain' => 'SonataUserBundle',
                         'choices' => $currentUser->hasRole('ROLE_SUPER_ADMIN')
                             ? $this->rolesLabels
-                            : $this->rolesLabelsNoSuper,
+                            : $this->rolesLabelsNoSuper
+                        ,
                     ]
                 )
                 ->end()

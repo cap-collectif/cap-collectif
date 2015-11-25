@@ -36,7 +36,7 @@ const ProposalCreate = React.createClass({
   handleSubmitSuccess() {
     this.close();
     this.setState({isSubmitting: false});
-    ProposalActions.load('form', this.props.form.id);
+    ProposalActions.load(this.props.form.id, 'last');
   },
 
   handleValidationFailure() {

@@ -32,7 +32,7 @@ services:
     factory_service: doctrine.orm.default_entity_manager
     factory_method: getRepository
     arguments:
-      - Capco\AppBundle\Entity\Steps\ConsultationStepType
+      - Capco\AppBundle\Entity\ConsultationStepType
 
   capco.event.repository:
     class:           "%capco.event.repository.class%"

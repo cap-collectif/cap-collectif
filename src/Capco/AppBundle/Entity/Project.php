@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 
 /**
  * Project.
@@ -128,7 +127,7 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Steps\ProjectAbstractStep", mappedBy="project",  cascade={"persist", "remove"}, orphanRemoval = true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProjectAbstractStep", mappedBy="project",  cascade={"persist", "remove"}, orphanRemoval = true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $steps;
@@ -442,7 +441,7 @@ class Project
     /**
      * Add step.
      *
-     * @param ProjectAbstractStep $step
+     * @param \Capco\AppBundle\Entity\ProjectAbstractStep $step
      *
      * @return Project
      */
@@ -457,7 +456,7 @@ class Project
     /**
      * Remove step.
      *
-     * @param ProjectAbstractStep $step
+     * @param \Capco\AppBundle\Entity\ProjectAbstractStep $step
      *
      * @return $this
      */

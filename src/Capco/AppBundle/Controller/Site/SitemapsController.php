@@ -132,7 +132,7 @@ class SitemapsController extends Controller
 
         // Steps
         $stepResolver = $this->get('capco.step.resolver');
-        foreach ($em->getRepository('CapcoAppBundle:Steps\AbstractStep')->findBy(array(
+        foreach ($em->getRepository('CapcoAppBundle:AbstractStep')->findBy(array(
             'isEnabled' => true,
         )) as $step) {
             if ($step->getProject()->canDisplay()) {

@@ -1,82 +1,76 @@
 Capco\AppBundle\Entity\Proposal:
-  proposal1:
-    title: Ravalement de la façade de la biliothèque municipale
-    body: |
-       <p><text(100)></p>
-    enabled: true
-    isTrashed: false
-    author: @user502
-    proposalForm: @proposalform1
-    theme: @theme2
-    district: @district1
-    status: @status1
-    answer: @answer3
-    selectionSteps: [@selectionStep1]
-    createdAt: <(new \DateTime('2015-01-01'))>
-  proposal2:
-    title: Rénovation du gymnase
-    body: |
-       <p><text(100)></p>
-    enabled: true
-    rating: 4
-    annotation: Lancer l'appel d'offre
-    isTrashed: false
-    author: @user5
-    proposalForm: @proposalform1
-    theme: @theme3
-    district: @district2
-    status: @status2
-    selectionSteps: [@selectionStep1, @selectionStep2]
-    createdAt: <(new \DateTime('2015-02-01'))>
-  proposal3:
-    title: Installation de bancs sur la place de Mairie
-    body: |
-       <p><text(100)></p>
-    enabled: true
-    rating: 3
-    annotation: Vérifier les normes de sécurité
-    isTrashed: false
-    author: @user5
-    proposalForm: @proposalform1
-    theme: @theme1
-    district: @district4
-    status: @status1
-    selectionSteps: [@selectionStep1]
-    createdAt: <(new \DateTime('2015-03-01'))>
-  proposal4:
-    title: Plantation de tulipes dans les jardinière du parking de l'église
-    body: |
-       <p><text(100)></p>
-    enabled: true
-    rating: 1
-    annotation: Renvoyer l'idée à l'église
-    isTrashed: false
-    author: @user7
-    proposalForm: @proposalform1
-    theme: @theme4
-    district: @district2
-  proposal5:
-    title: Proposition à la corbeille
-    body: |
-       <p><text(100)></p>
-    enabled: true
-    isTrashed: true
-    rating: 1
-    author: @user7
-    proposalForm: @proposalform1
-    theme: @theme4
-    district: @district3
-    status: @status3
-    trashedReason: "Pub"
-  proposal6:
-    title: Proposition dépubliée
-    body: |
-       <p><text(100)></p>
-    enabled: false
-    isTrashed: false
-    rating: 3
-    author: @user4
-    proposalForm: @proposalform1
-    theme: @theme2
-    district: @district3
-    status: @status1
+    proposal1:
+        title: Ravalement de la façade de la biliothèque municipale
+        body: |
+             <text(100)>
+        enabled: true
+        isTrashed: false
+        author: @user502
+        proposalForm: @proposalform1
+        theme: @theme1
+        district: @district1
+        status: @status1
+        answer: @answer3
+    proposal2:
+        title: Rénovation du gymnase
+        body: |
+             <text(100)>
+        enabled: true
+        rating: 4
+        annotation: Lancer l'appel d'offre
+        isTrashed: false
+        author: @user5
+        proposalForm: @proposalform1
+        theme: @theme1
+        district: @district1
+        status: @status1
+    proposal3:
+        title: Installation de bancs sur la place de Mairie
+        body: |
+             <text(100)>
+        enabled: true
+        rating: 3
+        annotation: Vérifier les normes de sécurité
+        isTrashed: false
+        author: @user5
+        proposalForm: @proposalform1
+        theme: @theme1
+        district: @district1
+        status: @status1
+    proposal4:
+        title: Plantation de tulipes dans les jardinière du parking de l'église
+        body: |
+             <text(100)>
+        enabled: true
+        rating: 1
+        annotation: Renvoyer l'idée à l'église
+        isTrashed: false
+        author: @user7
+        proposalForm: @proposalform1
+        theme: @theme1
+        district: @district1
+    proposal5:
+        title: Proposition à la corbeille
+        body: |
+             <text(100)>
+        enabled: true
+        isTrashed: true
+        rating: 1
+        author: @user7
+        proposalForm: @proposalform1
+        theme: @theme1
+        district: @district1
+        status: @status1
+        trashedReason: "Pub"
+    proposal6:
+        title: Proposition dépubliée
+        body: |
+             <text(100)>
+        enabled: false
+        isTrashed: false
+        rating: 3
+        author: @user4
+        proposalForm: @proposalform1
+        theme: @theme2
+        district: @district3
+        status: @status1

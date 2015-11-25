@@ -22,30 +22,13 @@ import {
 
 export default {
 
-  load: (fetchFrom, id) => {
+  load: (form) => {
     const page = ProposalStore.currentPage;
     const order = ProposalStore.order;
     const filters = ProposalStore.filters;
     const first = page ? PROPOSAL_PAGINATION * (page - 1) : 0;
     const offset = page ? PROPOSAL_PAGINATION : 100;
-    let url = null;
-    switch (fetchFrom) {
-    case 'form':
-      url = `/proposal_forms/${id}/proposals`;
-      break;
-    case 'selectionStep':
-      url = `/selection_steps/${id}/proposals`;
-      break;
-    default:
-      break;
-    }
-
-    if (!url) {
-      return false;
-    }
-
-    url += `?order=${order}&first=${first}&offset=${offset}`;
-
+    let url = `/proposal_forms/${form}/proposals?order=${order}&first=${first}&offset=${offset}`;
     for (const filter in filters) {
       if (filters.hasOwnProperty(filter)) {
         url += `&${filter}=${filters[filter]}`;

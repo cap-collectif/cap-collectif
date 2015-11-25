@@ -8,7 +8,6 @@ use Capco\AppBundle\Traits\ColorableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 
 /**
  * Status.
@@ -48,7 +47,7 @@ class Status
     protected $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep", inversedBy="statuses", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\CollectStep", inversedBy="statuses", cascade={"persist"})
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private $step;

@@ -55,7 +55,7 @@ class Synthesis
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep")
      * @ORM\JoinColumn(name="consultation_step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $consultationStep = null;
