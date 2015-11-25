@@ -439,6 +439,7 @@ admin:
       created_at: Création
       district: Quartier
       enabled: Publié
+      form: Formulaire
       group_content: Proposition
       group_publication: Options de publication
       group_selection: Sélections et réponse officielle

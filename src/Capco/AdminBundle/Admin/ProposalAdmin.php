@@ -56,6 +56,9 @@ class ProposalAdmin extends Admin
                 'required' => true,
                 'property' => 'username',
             ])
+            ->add('proposalForm', null, [
+                'label' => 'admin.fields.proposal.form',
+            ])
             ->add('theme', 'sonata_type_model', [
                 'label'       => 'admin.fields.proposal.theme',
                 'required'    => false,
