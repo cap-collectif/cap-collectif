@@ -12,8 +12,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 class ProposalAdmin extends Admin
 {
     protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'updatedAt',
     ];
 
     protected $formOptions = [
@@ -135,6 +135,9 @@ class ProposalAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
+            ->addIdentifier('id', null, [
+                'label' => 'admin.fields.proposal.id',
+            ])
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.proposal.title',
             ])
@@ -192,20 +195,47 @@ class ProposalAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
+            ->add('id', null, [
+                'label' => 'admin.fields.proposal.id',
+            ])
             ->add('title', null, [
                 'label' => 'admin.fields.proposal.title',
+            ])
+            ->add('author', null, [
+                'label' => 'admin.fields.proposal.author',
+            ])
+            ->add('author.id', null, [
+                'label' => 'admin.fields.proposal.author_id',
+            ])
+            ->add('body', null, [
+                'label' => 'admin.fields.proposal.body',
+                'template' => 'CapcoAdminBundle:Proposal:body_show_field.html.twig',
+            ])
+            ->add('proposalResponses', null, [
+                'label' => 'admin.fields.proposal.responses',
+                'template' => 'CapcoAdminBundle:Proposal:responses_show_field.html.twig',
+            ])
+            ->add('theme', null, [
+                'label' => 'admin.fields.proposal.theme',
+            ])
+            ->add('district', null, [
+                'label' => 'admin.fields.proposal.district',
+            ])
+            ->add('status', null, [
+                'label' => 'admin.fields.proposal.status',
             ])
             ->add('enabled', null, [
                 'label' => 'admin.fields.proposal.enabled',
             ])
-            ->add('body', null, [
-                'label' => 'admin.fields.proposal.body',
+            ->add('createdAt', null, [
+                'label' => 'admin.fields.proposal.created_at',
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
             ])
-            ->add('createdAt', null, [
-                'label' => 'admin.fields.proposal.created_at',
+            ->add('link', null, [
+                'label' => 'admin.fields.proposal.link',
+                'template' => 'CapcoAdminBundle:Proposal:link_show_field.html.twig',
             ])
         ;
     }
