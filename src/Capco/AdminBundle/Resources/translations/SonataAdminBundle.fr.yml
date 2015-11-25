@@ -435,6 +435,7 @@ admin:
       answer: Réponse officielle
       author: Auteur
       author_id: Id de l'auteur
+      author_type: Type d'auteur
       body: Contenu
       created_at: Création
       district: Quartier

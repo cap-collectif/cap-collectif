@@ -210,6 +210,15 @@ class ProposalAdmin extends Admin
             ->add('author.id', null, [
                 'label' => 'admin.fields.proposal.author_id',
             ])
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('user_type')) {
+            $showMapper->add('author.userType.name', null, [
+                'label' => 'admin.fields.proposal.author_type',
+            ]);
+        }
+
+        $showMapper
             ->add('body', null, [
                 'label' => 'admin.fields.proposal.body',
                 'template' => 'CapcoAdminBundle:Proposal:body_show_field.html.twig',
