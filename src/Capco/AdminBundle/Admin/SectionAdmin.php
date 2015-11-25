@@ -210,7 +210,7 @@ class SectionAdmin extends Admin
         $qb = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:CollectStep')
+            ->getRepository('CapcoAppBundle:Steps\CollectStep')
             ->createQueryBuilder('cs')
             ->where('cs.isEnabled = :enabled')
             ->setParameter('enabled', true)

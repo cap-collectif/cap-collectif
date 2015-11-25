@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 
 /**
  * Section.
@@ -172,7 +173,7 @@ class Section
     private $associatedFeatures;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AbstractStep")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
     protected $step;

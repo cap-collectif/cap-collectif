@@ -50,19 +50,9 @@
                 </div>
             {% endif %}
 
-            <h2 class="h2">
-                {{ 'proposal.index.count' |transchoice(proposalsCount, {'%count%': proposalsCount}, 'CapcoAppBundle') }}
-                <span
-                    class="pull-right"
-                    id="render-collect-step-proposal-create"
-                    data-form='{{ form|escape }}'
-                    data-themes='{{ themes|escape }}'
-                    data-districts='{{ districts|escape }}'
-                >
-                </span>
-            </h2>
             <div
                 id="render-collect-step-page"
+                data-count='{{ proposalsCount }}'
                 data-form='{{ form|escape }}'
                 data-themes='{{ themes|escape }}'
                 data-statuses='{{ statuses|escape }}'

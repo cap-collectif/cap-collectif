@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\AbstractStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\CollectStep;
-use Capco\AppBundle\Entity\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;

@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\AbstractStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 
 class StepResolver
 {

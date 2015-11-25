@@ -5,9 +5,11 @@ import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
+import CollectStepPageHeader from './CollectStepPageHeader';
 
 const CollectStepPage = React.createClass({
   propTypes: {
+    count: React.PropTypes.number.isRequired,
     form: React.PropTypes.object.isRequired,
     themes: React.PropTypes.array.isRequired,
     statuses: React.PropTypes.array.isRequired,
@@ -19,7 +21,7 @@ const CollectStepPage = React.createClass({
   getInitialState() {
     return {
       proposals: ProposalStore.proposals,
-      proposalsCount: ProposalStore.proposalsCount,
+      proposalsCount: this.props.count,
       currentPage: ProposalStore.currentPage,
       isLoading: true,
     };
@@ -53,7 +55,7 @@ const CollectStepPage = React.createClass({
   },
 
   loadProposals() {
-    ProposalActions.load(this.props.form.id);
+    ProposalActions.load('form', this.props.form.id);
   },
 
   handleFilterOrOrderChange() {
@@ -69,6 +71,12 @@ const CollectStepPage = React.createClass({
     const nbPages = Math.ceil(this.state.proposalsCount / PROPOSAL_PAGINATION);
     return (
       <div>
+        <CollectStepPageHeader
+          count={this.state.proposalsCount}
+          form={this.props.form}
+          themes={this.props.themes}
+          districts={this.props.districts}
+        />
         <ProposalListFilters
           id={this.props.form.id}
           theme={this.props.themes}

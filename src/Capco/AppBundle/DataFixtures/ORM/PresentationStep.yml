@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\PresentationStep:
+Capco\AppBundle\Entity\Steps\PresentationStep:
     pstep1:
         title: Présentation
         isEnabled: true

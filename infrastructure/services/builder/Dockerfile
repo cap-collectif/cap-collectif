@@ -38,10 +38,10 @@ RUN wget https://getcomposer.org/composer.phar -O- -q >> /usr/local/bin/composer
     chmod +x /usr/local/bin/composer
 
 COPY capco.ini /etc/php5/cli/conf.d/capco.ini
-COPY build.sh /usr/local/bin/build
+COPY build.sh /usr/local/bin/capcobuild
 
 USER capco
 
 WORKDIR /capco
 
-CMD ["/usr/local/bin/build"]
+CMD ["/usr/local/bin/capcobuild"]

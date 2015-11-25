@@ -327,7 +327,7 @@ class OpinionAdmin extends Admin
         $qb = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:ConsultationStep')
+            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
             ->createQueryBuilder('cs')
             ->where('cs.consultationStepType = ?0')
             ->setParameter(0, $consultationStepType)

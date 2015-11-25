@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\AbstractStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Argument;
@@ -78,6 +78,9 @@ class UrlResolver
         }
         if ($step->isCollectStep()) {
             return $this->router->generate('app_project_show_collect',      ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
+        }
+        if ($step->isSelectionStep()) {
+            return $this->router->generate('app_project_show_selection',      ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
         }
 
         return '';

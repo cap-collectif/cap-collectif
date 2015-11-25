@@ -4,8 +4,7 @@
   "description": "Cap-Collectif version Symfony2",
   "main": "brunch-config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --cache --fix  app/Resources/js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -19,21 +18,21 @@
   "homepage": "https://github.com/jolicode/CapCollectif-SF2",
   "dependencies": {
     "babel-brunch": "^5.1.2",
+    "babel-eslint": "^4.1.5",
     "bower": "^1.6.5",
     "brunch": "^1.8.5",
     "clean-css-brunch": "^1.7.2",
     "css-brunch": "^1.7.0",
+    "eslint-brunch": "^1.8.4",
+    "eslint-config-airbnb": "^0.1.1",
+    "eslint-plugin-react": "^3.8.0",
     "javascript-brunch": "^1.7.1",
     "process-env-brunch": "^1.4.4-d",
+    "react": "^0.13.3",
     "sass-brunch": "^1.9.1",
     "uglify-js-brunch": "^1.7.8"
   },
   "devDependencies": {
-    "babel-eslint": "^4.1.6",
-    "eslint": "^1.10.1",
-    "eslint-brunch": "^1.8.4",
-    "eslint-config-airbnb": "^0.1.1",
-    "eslint-plugin-react": "^3.10.0",
     "fb-flo-brunch": "^1.7.22"
   }
 }

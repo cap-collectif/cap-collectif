@@ -3,7 +3,7 @@
 namespace spec\Capco\AppBundle\Synthesis\Handler;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
-use Capco\AppBundle\Entity\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\Synthesis\SynthesisRepository;
 use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
 use PhpSpec\ObjectBehavior;
