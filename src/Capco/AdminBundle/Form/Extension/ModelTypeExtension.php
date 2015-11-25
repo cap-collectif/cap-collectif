@@ -19,9 +19,9 @@ class ModelTypeExtension extends AbstractTypeExtension
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'tree' => false,
-        ));
+        ]);
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)

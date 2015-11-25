@@ -42,7 +42,7 @@ class SynthesisElementHandler
 
         return [
             'elements' => $elements,
-            'count' => count($paginator),
+            'count'    => count($paginator),
         ];
     }
 

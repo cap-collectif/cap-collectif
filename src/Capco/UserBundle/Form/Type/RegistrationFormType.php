@@ -23,12 +23,12 @@ class RegistrationFormType extends AbstractType
     {
         if ((null != $this->siteParameterResolver->getValue('signin.cgu.name')) && (null != $this->siteParameterResolver->getValue('signin.cgu.link'))) {
             $builder->add('isTermsAccepted', 'checkbox', [
-                'label' => null,
+                'label'    => null,
                 'required' => true,
             ]);
         } else {
             $builder->add('isTermsAccepted', 'hidden', [
-                'data' => true,
+                'data'          => true,
                 'property_path' => 'isTermsAccepted',
             ]);
         }
@@ -37,14 +37,14 @@ class RegistrationFormType extends AbstractType
             ->remove('plainPassword')
             ->add('plainPassword', 'password', [
                 'translation_domain' => 'FOSUserBundle',
-                'label' => 'form.password',
+                'label'              => 'form.password',
             ])
         ;
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', null, [
-                'required' => false,
-                'empty_value' => 'form.no_type',
+                'required'           => false,
+                'empty_value'        => 'form.no_type',
                 'translation_domain' => 'FOSUserBundle',
             ]);
         }

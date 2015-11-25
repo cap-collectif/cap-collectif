@@ -12,7 +12,7 @@ class ArgumentVoteAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'argument.title',
+        '_sort_by'    => 'argument.title',
     ];
 
     /**
@@ -21,17 +21,17 @@ class ArgumentVoteAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('createdAt', null, array(
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.opinion_vote.created_at',
-            ))
-            ->add('argument', null, array(
+            ])
+            ->add('argument', null, [
                 'label' => 'admin.fields.argument_vote.argument',
-            ))
+            ])
             ->add('user', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.argument_vote.voter',
-            ], null, array(
+            ], null, [
                 'property' => 'username',
-            ))
+            ])
         ;
     }
 
@@ -43,35 +43,35 @@ class ArgumentVoteAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('argument', 'sonata_type_model', array(
+            ->add('argument', 'sonata_type_model', [
                 'label' => 'admin.fields.argument_vote.argument',
-            ))
-            ->add('user', 'sonata_type_model', array(
+            ])
+            ->add('user', 'sonata_type_model', [
                 'label' => 'admin.fields.argument_vote.voter',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.opinion_vote.created_at',
-            ))
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                ),
-            ))
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'show' => [],
+                ],
+            ])
         ;
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('argument', 'sonata_type_model', array(
+            ->add('argument', 'sonata_type_model', [
                 'label' => 'admin.fields.argument_vote.argument',
-            ))
-            ->add('user', 'sonata_type_model', array(
+            ])
+            ->add('user', 'sonata_type_model', [
                 'label' => 'admin.fields.argument_vote.voter',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.argument_vote.created_at',
-            ))
+            ])
         ;
     }
 

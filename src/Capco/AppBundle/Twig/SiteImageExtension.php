@@ -25,9 +25,9 @@ class SiteImageExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('capco_site_image_media', array($this, 'getSiteImageMedia'), array('is_safe' => array('html'))),
-       );
+        return [
+            new \Twig_SimpleFunction('capco_site_image_media', [$this, 'getSiteImageMedia'], ['is_safe' => ['html']]),
+       ];
     }
 
     public function getSiteImageMedia($key)

@@ -15,24 +15,24 @@ class PageAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.page.title',
-            ))
-            ->add('body', 'ckeditor', array(
-                'label' => 'admin.fields.page.body',
+            ])
+            ->add('body', 'ckeditor', [
+                'label'       => 'admin.fields.page.body',
                 'config_name' => 'admin_editor',
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.page.is_enabled',
+            ])
+            ->add('isEnabled', null, [
+                'label'    => 'admin.fields.page.is_enabled',
                 'required' => false,
-            ))
+            ])
         ;
     }
 
@@ -40,18 +40,18 @@ class PageAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.page.title',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.page.is_enabled',
-            ))
-            ->add('MenuItems', null, array(
+            ])
+            ->add('MenuItems', null, [
                 'label' => 'admin.fields.page.menu_items',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.page.updated_at',
-            ))
+            ])
         ;
     }
 
@@ -61,26 +61,26 @@ class PageAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, array(
+            ->addIdentifier('title', null, [
                 'label' => 'admin.fields.page.title',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.page.is_enabled',
-            ))
-            ->add('MenuItems', null, array(
+                'label'    => 'admin.fields.page.is_enabled',
+            ])
+            ->add('MenuItems', null, [
                 'label' => 'admin.fields.page.menu_items',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.page.updated_at',
-            ))
-            ->add('_action', 'actions', array(
-                    'actions' => array(
-                        'show' => array(),
-                        'edit' => array(),
-                        'delete' => array(),
-                    ),
-                ))
+            ])
+            ->add('_action', 'actions', [
+                    'actions' => [
+                        'show'   => [],
+                        'edit'   => [],
+                        'delete' => [],
+                    ],
+                ])
         ;
     }
 
@@ -90,28 +90,28 @@ class PageAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.page.title',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.page.is_enabled',
-            ))
-            ->add('body', null, array(
+            ])
+            ->add('body', null, [
                 'label' => 'admin.fields.page.body',
-            ))
-            ->add('URL', null, array(
+            ])
+            ->add('URL', null, [
                 'template' => 'CapcoAdminBundle:Page:url_show_field.html.twig',
-                'label' => 'admin.fields.page.url',
-            ))
-            ->add('MenuItems', null, array(
+                'label'    => 'admin.fields.page.url',
+            ])
+            ->add('MenuItems', null, [
                 'label' => 'admin.fields.page.menu_items',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.page.updated_at',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.page.created_at',
-            ))
+            ])
         ;
     }
 }

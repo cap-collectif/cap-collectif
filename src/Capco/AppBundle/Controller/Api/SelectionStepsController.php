@@ -82,7 +82,7 @@ class SelectionStepsController extends FOSRestController
 
         return [
             'proposals' => $proposals,
-            'count' => count($paginator),
+            'count'     => count($paginator),
         ];
     }
 }

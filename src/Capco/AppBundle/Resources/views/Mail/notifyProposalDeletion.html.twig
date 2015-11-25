@@ -1,15 +1,13 @@
 {% block body_text %}
     {% autoescape false %}
-        <p>
-            {{ 'proposal_deletion.notification.body'|trans({
-                '%author%': contribution.author,
-                '%sitename%': capco_site_parameter_value('global.site.fullname'),
-                '%project%': contribution.step.project.title,
-                '%step%': contribution.step.title,
-                '%title%': contribution.title,
-                '%content%': contribution.body,
-            }, 'CapcoAppBundle') | raw }}
-        </p>
+        {{ 'proposal_deletion.notification.body'|trans({
+            '%author%': contribution.author,
+            '%sitename%': capco_site_parameter_value('global.site.fullname'),
+            '%project%': contribution.step.project.title,
+            '%step%': contribution.step.title,
+            '%title%': contribution.title,
+            '%content%': contribution.body,
+        }, 'CapcoAppBundle') | raw }}
     {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}

@@ -15,11 +15,11 @@ class AppendixType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('body', 'ckeditor', array(
-                'label' => false,
-                'required' => false,
+            ->add('body', 'ckeditor', [
+                'label'       => false,
+                'required'    => false,
                 'config_name' => 'user_editor',
-            ))
+            ])
         ;
     }
 
@@ -28,12 +28,12 @@ class AppendixType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Capco\AppBundle\Entity\OpinionAppendix',
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
+        $resolver->setDefaults([
+            'data_class'         => 'Capco\AppBundle\Entity\OpinionAppendix',
+            'csrf_protection'    => true,
+            'csrf_field_name'    => '_token',
             'translation_domain' => 'CapcoAppBundle',
-        ));
+        ]);
     }
 
     /**

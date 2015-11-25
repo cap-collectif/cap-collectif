@@ -50,7 +50,7 @@ class StepAdmin extends Admin
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
     protected $formOptions = [
@@ -78,28 +78,28 @@ class StepAdmin extends Admin
         $formMapper
             ->with('admin.fields.step.group_general')
             ->add('title', null, [
-                'label' => 'admin.fields.step.title',
+                'label'    => 'admin.fields.step.title',
                 'required' => true,
             ])
         ;
 
         $formMapper
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.step.is_enabled',
+                'label'    => 'admin.fields.step.is_enabled',
                 'required' => false,
             ])
             ->add('startAt', 'sonata_type_datetime_picker', [
-                'label' => 'admin.fields.step.start_at',
+                'label'  => 'admin.fields.step.start_at',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => [
+                'attr'   => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
                 'required' => false,
             ])
             ->add('endAt', 'sonata_type_datetime_picker', [
-                'label' => 'admin.fields.step.end_at',
+                'label'  => 'admin.fields.step.end_at',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => [
+                'attr'   => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
                 'required' => false,
@@ -110,32 +110,32 @@ class StepAdmin extends Admin
             $formMapper
                 ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
-                    'label' => 'admin.fields.step.body',
-                    'required' => false,
+                    'label'       => 'admin.fields.step.body',
+                    'required'    => false,
                 ])
             ;
         } elseif ($subject instanceof ConsultationStep) {
             $formMapper
                 ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
-                    'label' => 'admin.fields.step.body',
-                    'required' => false,
+                    'label'       => 'admin.fields.step.body',
+                    'required'    => false,
                 ])
                 ->add('consultationStepType', 'sonata_type_model', [
-                    'label' => 'admin.fields.project.consultation_step_type',
+                    'label'    => 'admin.fields.project.consultation_step_type',
                     'required' => true,
-                    'btn_add' => false,
+                    'btn_add'  => false,
                 ])
             ;
         } elseif ($subject instanceof SynthesisStep) {
             $formMapper
                 ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
-                    'label' => 'admin.fields.step.body',
-                    'required' => false,
+                    'label'       => 'admin.fields.step.body',
+                    'required'    => false,
                 ])
                 ->add('synthesis', 'sonata_type_admin', [
-                        'label' => 'admin.fields.step.synthesis',
+                        'label'    => 'admin.fields.step.synthesis',
                         'required' => true,
                 ], ['link_parameters' => ['projectId']]
             );
@@ -143,15 +143,15 @@ class StepAdmin extends Admin
             $formMapper
                 ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
-                    'label' => 'admin.fields.step.body',
-                    'required' => false,
+                    'label'       => 'admin.fields.step.body',
+                    'required'    => false,
                 ])
                 ->add('nbOpinionsToDisplay', null, [
-                    'label' => 'admin.fields.step.nb_opinions_to_display',
+                    'label'    => 'admin.fields.step.nb_opinions_to_display',
                     'required' => true,
                 ])
                 ->add('nbVersionsToDisplay', null, [
-                    'label' => 'admin.fields.step.nb_versions_to_display',
+                    'label'    => 'admin.fields.step.nb_versions_to_display',
                     'required' => true,
                 ])
             ;
@@ -159,18 +159,18 @@ class StepAdmin extends Admin
             $formMapper
                 ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
-                    'label' => 'admin.fields.step.body',
-                    'required' => false,
+                    'label'       => 'admin.fields.step.body',
+                    'required'    => false,
                 ])
                 ->add('proposals', 'sonata_type_model_autocomplete', [
-                    'label' => 'admin.fields.step.proposals',
+                    'label'    => 'admin.fields.step.proposals',
                     'required' => false,
                     'property' => 'title',
                     'multiple' => true,
-                    'route' => [
-                        'name' => 'capco_admin_proposals_autocomplete',
+                    'route'    => [
+                        'name'       => 'capco_admin_proposals_autocomplete',
                         'parameters' => [
-                            'projectId' => $projectId,
+                            'projectId'     => $projectId,
                             '_sonata_admin' => $this->getCode(),
                         ],
                     ],
@@ -186,22 +186,22 @@ class StepAdmin extends Admin
             $formMapper
                 ->with('admin.fields.step.group_form', ['class' => 'col-md-6'])
                 ->add('proposalForm', 'sonata_type_model', [
-                    'label' => 'admin.fields.step.proposal_form',
-                    'query' => $this->createQueryForProposalForms(),
+                    'label'        => 'admin.fields.step.proposal_form',
+                    'query'        => $this->createQueryForProposalForms(),
                     'by_reference' => false,
-                    'required' => false,
-                    'btn_add' => false,
-                    'empty_value' => 'admin.fields.step.no_proposal_form',
+                    'required'     => false,
+                    'btn_add'      => false,
+                    'empty_value'  => 'admin.fields.step.no_proposal_form',
                 ])
                 ->end()
                 ->with('admin.fields.step.group_statuses', ['class' => 'col-md-6'])
                 ->add('statuses', 'sonata_type_collection', [
-                    'label' => 'admin.fields.step.statuses',
+                    'label'        => 'admin.fields.step.statuses',
                     'by_reference' => false,
-                    'required' => false,
+                    'required'     => false,
                 ], [
-                    'edit' => 'inline',
-                    'inline' => 'table',
+                    'edit'     => 'inline',
+                    'inline'   => 'table',
                     'sortable' => 'position',
                 ])
                 ->end()

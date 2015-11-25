@@ -32,7 +32,7 @@ class ReportingController extends Controller
 
         return new RedirectResponse($this->admin->generateUrl(
             'list',
-            array('filter' => $this->admin->getFilterParameters())
+            ['filter' => $this->admin->getFilterParameters()]
         ));
     }
 
@@ -61,7 +61,7 @@ class ReportingController extends Controller
 
         return new RedirectResponse($this->admin->generateUrl(
             'list',
-            array('filter' => $this->admin->getFilterParameters())
+            ['filter' => $this->admin->getFilterParameters()]
         ));
     }
 
@@ -81,7 +81,7 @@ class ReportingController extends Controller
 
         return new RedirectResponse($this->admin->generateUrl(
             'list',
-            array('filter' => $this->admin->getFilterParameters())
+            ['filter' => $this->admin->getFilterParameters()]
         ));
     }
 }

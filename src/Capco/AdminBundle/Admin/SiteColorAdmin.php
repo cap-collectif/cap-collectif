@@ -10,7 +10,7 @@ class SiteColorAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'isEnabled',
+        '_sort_by'    => 'isEnabled',
     ];
 
     /**
@@ -19,14 +19,14 @@ class SiteColorAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.site_parameter.is_enabled',
+            ->add('isEnabled', null, [
+                'label'    => 'admin.fields.site_parameter.is_enabled',
                 'required' => false,
-            ))
-            ->add('value', null, array(
+            ])
+            ->add('value', null, [
                 'label' => 'admin.fields.site_parameter.value',
-                'attr' => array('class' => 'minicolors-input'),
-            ))
+                'attr'  => ['class' => 'minicolors-input'],
+            ])
         ;
     }
 

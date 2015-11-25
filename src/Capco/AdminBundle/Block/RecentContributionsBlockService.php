@@ -29,12 +29,12 @@ class RecentContributionsBlockService extends BaseBlockService
 
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => array(
-                array('number', 'integer', array('required' => true)),
-                array('title', 'text', array('required' => false)),
-            ),
-        ));
+        $formMapper->add('settings', 'sonata_type_immutable_array', [
+            'keys' => [
+                ['number', 'integer', ['required' => true]],
+                ['title', 'text', ['required' => false]],
+            ],
+        ]);
     }
 
     /**
@@ -44,12 +44,12 @@ class RecentContributionsBlockService extends BaseBlockService
     {
         $contributions = $this->resolver->getRecentContributions(10);
 
-        $parameters = array(
-            'context' => $blockContext,
-            'settings' => $blockContext->getSettings(),
-            'block' => $blockContext->getBlock(),
+        $parameters = [
+            'context'       => $blockContext,
+            'settings'      => $blockContext->getSettings(),
+            'block'         => $blockContext->getBlock(),
             'contributions' => $contributions,
-        );
+        ];
 
         return $this->renderPrivateResponse($blockContext->getTemplate(), $parameters, $response);
     }
@@ -64,11 +64,11 @@ class RecentContributionsBlockService extends BaseBlockService
      */
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'number' => 10,
-            'title' => 'Recents contributions',
+        $resolver->setDefaults([
+            'number'   => 10,
+            'title'    => 'Recents contributions',
             'template' => 'CapcoAdminBundle:Block:recent_contributions.html.twig',
-        ));
+        ]);
     }
 
     /**

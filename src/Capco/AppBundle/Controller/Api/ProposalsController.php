@@ -98,7 +98,7 @@ class ProposalsController extends FOSRestController
 
         return [
             'proposals' => $proposals,
-            'count' => count($paginator),
+            'count'     => count($paginator),
         ];
     }
 
@@ -214,8 +214,8 @@ class ProposalsController extends FOSRestController
 
         return [
             'comments_and_answers_count' => intval($countWithAnswers),
-            'comments_count' => count($paginator),
-            'comments' => $comments,
+            'comments_count'             => count($paginator),
+            'comments'                   => $comments,
         ];
     }
 

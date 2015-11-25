@@ -41,7 +41,7 @@ class LiipImagineThumbnail implements ThumbnailInterface
         } else {
             $path = $this->router->generate(
                 sprintf('_imagine_%s', $format),
-                array('path' => sprintf('%s/%s_%s.%s', $provider->generatePath($media), $media->getId(), $format, $this->getExtension($media)))
+                ['path' => sprintf('%s/%s_%s.%s', $provider->generatePath($media), $media->getId(), $format, $this->getExtension($media))]
             );
         }
 

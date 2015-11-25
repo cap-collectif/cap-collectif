@@ -16,7 +16,7 @@ class EventAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'updatedAt',
+        '_sort_by'    => 'updatedAt',
     ];
 
     /**
@@ -25,41 +25,41 @@ class EventAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.event.title',
-            ))
+            ])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $datagridMapper->add('themes', null, array(
+            $datagridMapper->add('themes', null, [
                 'label' => 'admin.fields.event.themes',
-            ));
+            ]);
         }
 
         $datagridMapper
-            ->add('projects', null, array(
+            ->add('projects', null, [
                 'label' => 'admin.fields.event.projects',
-            ))
+            ])
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.event.author',
-            ], null, array(
+            ], null, [
                 'property' => 'username',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
-            ))
-            ->add('isCommentable', null, array(
+            ])
+            ->add('isCommentable', null, [
                 'label' => 'admin.fields.event.is_commentable',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.event.updated_at',
-            ))
-            ->add('startAt', 'doctrine_orm_datetime_range', array(
+            ])
+            ->add('startAt', 'doctrine_orm_datetime_range', [
                 'label' => 'admin.fields.event.start_at',
-            ))
-            ->add('endAt', 'doctrine_orm_datetime_range', array(
+            ])
+            ->add('endAt', 'doctrine_orm_datetime_range', [
                 'label' => 'admin.fields.event.end_at',
-            ))
+            ])
         ;
     }
 
@@ -69,52 +69,52 @@ class EventAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title', null, array(
+            ->addIdentifier('title', null, [
                 'label' => 'admin.fields.event.title',
-            ))
-            ->add('startAt', null, array(
+            ])
+            ->add('startAt', null, [
                 'label' => 'admin.fields.event.start_at',
-            ))
-            ->add('endAt', null, array(
+            ])
+            ->add('endAt', null, [
                 'label' => 'admin.fields.event.end_at',
-            ))
+            ])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $listMapper->add('themes', null, array(
+            $listMapper->add('themes', null, [
                 'label' => 'admin.fields.event.themes',
-            ));
+            ]);
         }
 
         $listMapper
-            ->add('projects', null, array(
+            ->add('projects', null, [
                 'label' => 'admin.fields.event.projects',
-            ))
-            ->add('Author', 'sonata_type_model', array(
+            ])
+            ->add('Author', 'sonata_type_model', [
                 'label' => 'admin.fields.event.author',
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.event.is_enabled',
+            ])
+            ->add('isEnabled', null, [
+                'label'    => 'admin.fields.event.is_enabled',
                 'editable' => true,
-            ))
-            ->add('isCommentable', null, array(
-                'label' => 'admin.fields.event.is_commentable',
+            ])
+            ->add('isCommentable', null, [
+                'label'    => 'admin.fields.event.is_commentable',
                 'editable' => true,
-            ))
-            ->add('commentsCount', null, array(
+            ])
+            ->add('commentsCount', null, [
                 'label' => 'admin.fields.event.comments_count',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.event.updated_at',
-            ))
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'registrations' => array('template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig'),
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                ),
-            ))
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'registrations' => ['template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig'],
+                    'show'          => [],
+                    'edit'          => [],
+                    'delete'        => [],
+                ],
+            ])
         ;
     }
 
@@ -133,101 +133,101 @@ class EventAdmin extends Admin
 
         $formMapper
             ->with('admin.fields.event.group_event')
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.event.title',
-            ))
-            ->add('body', 'ckeditor', array(
-                'label' => 'admin.fields.event.body',
+            ])
+            ->add('body', 'ckeditor', [
+                'label'       => 'admin.fields.event.body',
                 'config_name' => 'admin_editor',
-            ))
+            ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.event.author',
+                'label'    => 'admin.fields.event.author',
                 'property' => 'username',
             ])
-            ->add('startAt', 'sonata_type_datetime_picker', array(
-                'label' => 'admin.fields.event.start_at',
+            ->add('startAt', 'sonata_type_datetime_picker', [
+                'label'  => 'admin.fields.event.start_at',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => array(
+                'attr'   => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
-                ),
-            ))
-            ->add('endAt', 'sonata_type_datetime_picker', array(
-                'label' => 'admin.fields.event.end_at',
+                ],
+            ])
+            ->add('endAt', 'sonata_type_datetime_picker', [
+                'label'  => 'admin.fields.event.end_at',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => array(
+                'attr'   => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
-                ),
-                'help' => 'admin.help.event.endAt',
+                ],
+                'help'     => 'admin.help.event.endAt',
                 'required' => false,
-            ))
+            ])
             ->end()
             ->with('admin.fields.event.group_meta')
             ->add('registrationEnable', null, [
-                  'label' => 'admin.fields.event.registration_enable',
+                  'label'    => 'admin.fields.event.registration_enable',
                   'required' => false,
             ])
-            ->add('link', 'url', array(
-                'label' => 'admin.fields.event.link',
+            ->add('link', 'url', [
+                'label'    => 'admin.fields.event.link',
                 'required' => false,
-                'attr' => array(
+                'attr'     => [
                     'placeholder' => 'http://',
-                ),
-            ))
-            ->add('Media', 'sonata_type_model_list', array(
-                'label' => 'admin.fields.event.media',
+                ],
+            ])
+            ->add('Media', 'sonata_type_model_list', [
+                'label'    => 'admin.fields.event.media',
                 'required' => false,
-            ), array(
-                'link_parameters' => array(
-                    'context' => 'default',
+            ], [
+                'link_parameters' => [
+                    'context'      => 'default',
                     'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
-                ),
-            ))
+                    'provider'     => 'sonata.media.provider.image',
+                ],
+            ])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $formMapper->add('themes', 'sonata_type_model', array(
-                'label' => 'admin.fields.event.themes',
-                'required' => false,
-                'multiple' => true,
+            $formMapper->add('themes', 'sonata_type_model', [
+                'label'        => 'admin.fields.event.themes',
+                'required'     => false,
+                'multiple'     => true,
                 'by_reference' => false,
-            ));
+            ]);
         }
 
         $formMapper
-            ->add('projects', 'sonata_type_model', array(
-                'label' => 'admin.fields.event.projects',
-                'required' => false,
-                'multiple' => true,
+            ->add('projects', 'sonata_type_model', [
+                'label'        => 'admin.fields.event.projects',
+                'required'     => false,
+                'multiple'     => true,
                 'by_reference' => false,
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.event.is_enabled',
+            ])
+            ->add('isEnabled', null, [
+                'label'    => 'admin.fields.event.is_enabled',
                 'required' => false,
-            ))
-            ->add('isCommentable', null, array(
-                'label' => 'admin.fields.event.is_commentable',
+            ])
+            ->add('isCommentable', null, [
+                'label'    => 'admin.fields.event.is_commentable',
                 'required' => false,
-            ))
+            ])
             ->end()
             ->with('admin.fields.event.group_address')
-            ->add('address', null, array(
-                'label' => 'admin.fields.event.address',
+            ->add('address', null, [
+                'label'    => 'admin.fields.event.address',
                 'required' => false,
-                'help' => 'admin.help.event.adress',
-            ))
-            ->add('zipCode', 'number', array(
-                'label' => 'admin.fields.event.zipcode',
+                'help'     => 'admin.help.event.adress',
+            ])
+            ->add('zipCode', 'number', [
+                'label'    => 'admin.fields.event.zipcode',
                 'required' => false,
-            ))
-            ->add('city', null, array(
-                'label' => 'admin.fields.event.city',
+            ])
+            ->add('city', null, [
+                'label'    => 'admin.fields.event.city',
                 'required' => false,
-            ))
-            ->add('country', null, array(
-                'label' => 'admin.fields.event.country',
+            ])
+            ->add('country', null, [
+                'label'    => 'admin.fields.event.country',
                 'required' => false,
-            ))
+            ])
             ->end()
         ;
     }
@@ -240,80 +240,80 @@ class EventAdmin extends Admin
         $subject = $this->getSubject();
 
         $showMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.event.title',
-            ))
-            ->add('body', null, array(
+            ])
+            ->add('body', null, [
                 'label' => 'admin.fields.event.body',
-            ))
-            ->add('startAt', null, array(
+            ])
+            ->add('startAt', null, [
                 'label' => 'admin.fields.event.start_at',
-            ))
-            ->add('endAt', null, array(
+            ])
+            ->add('endAt', null, [
                 'label' => 'admin.fields.event.end_at',
-            ))
+            ])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $showMapper->add('themes', null, array(
+            $showMapper->add('themes', null, [
                 'label' => 'admin.fields.event.themes',
-            ));
+            ]);
         }
 
         $showMapper
-            ->add('project', null, array(
+            ->add('project', null, [
                 'label' => 'admin.fields.event.project',
-            ))
-            ->add('Author', null, array(
+            ])
+            ->add('Author', null, [
                 'label' => 'admin.fields.event.author',
-            ))
-            ->add('Media', 'sonata_media_type', array(
+            ])
+            ->add('Media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'admin.fields.event.media',
-            ))
-            ->add('isEnabled', null, array(
+                'label'    => 'admin.fields.event.media',
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
-            ))
-            ->add('isCommentable', null, array(
+            ])
+            ->add('isCommentable', null, [
                 'label' => 'admin.fields.event.is_commentable',
-            ))
-            ->add('commentsCount', null, array(
+            ])
+            ->add('commentsCount', null, [
                 'label' => 'admin.fields.event.comments_count',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.event.updated_at',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.event.created_at',
-            ))
-            ->add('address', null, array(
+            ])
+            ->add('address', null, [
                 'label' => 'admin.fields.event.address',
-            ))
-            ->add('zipCode', 'number', array(
+            ])
+            ->add('zipCode', 'number', [
                 'label' => 'admin.fields.event.zipcode',
-            ))
-            ->add('city', null, array(
+            ])
+            ->add('city', null, [
                 'label' => 'admin.fields.event.city',
-            ))
-            ->add('country', null, array(
+            ])
+            ->add('country', null, [
                 'label' => 'admin.fields.event.country',
-            ))
-            ->add('lat', null, array(
+            ])
+            ->add('lat', null, [
                 'label' => 'admin.fields.event.lat',
-            ))
-            ->add('lng', null, array(
+            ])
+            ->add('lng', null, [
                 'label' => 'admin.fields.event.lng',
-            ))
+            ])
 
         ;
     }
 
     public function getFeatures()
     {
-        return array(
+        return [
             'calendar',
-        );
+        ];
     }
 
     public function prePersist($event)

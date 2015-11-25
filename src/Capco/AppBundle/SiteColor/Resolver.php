@@ -21,9 +21,9 @@ class Resolver
     public function getValue($key)
     {
         if (!array_key_exists($key, $this->colors)) {
-            $this->logger->warning('Tried to access undefined or disabled site color.', array(
+            $this->logger->warning('Tried to access undefined or disabled site color.', [
                 'key' => $key,
-            ));
+            ]);
 
             return;
         }

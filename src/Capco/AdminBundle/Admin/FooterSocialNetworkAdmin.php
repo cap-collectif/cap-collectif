@@ -13,7 +13,7 @@ class FooterSocialNetworkAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
     /**
@@ -22,24 +22,24 @@ class FooterSocialNetworkAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.footer_social_network.title',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.footer_social_network.is_enabled',
-            ))
-            ->add('link', null, array(
+            ])
+            ->add('link', null, [
                 'label' => 'admin.fields.footer_social_network.link',
-            ))
-            ->add('style', null, array(
+            ])
+            ->add('style', null, [
                 'label' => 'admin.fields.footer_social_network.style',
-            ))
-            ->add('position', null, array(
+            ])
+            ->add('position', null, [
                 'label' => 'admin.fields.footer_social_network.position',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.footer_social_network.updated_at',
-            ))
+            ])
         ;
     }
 
@@ -51,33 +51,33 @@ class FooterSocialNetworkAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, array(
+            ->addIdentifier('title', null, [
                 'label' => 'admin.fields.footer_social_network.title',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.footer_social_network.is_enabled',
-            ))
-            ->add('link', null, array(
+                'label'    => 'admin.fields.footer_social_network.is_enabled',
+            ])
+            ->add('link', null, [
                 'label' => 'admin.fields.footer_social_network.link',
-            ))
-            ->add('style', 'string', array(
+            ])
+            ->add('style', 'string', [
                 'template' => 'CapcoAdminBundle:FooterSocialNetwork:style_list_field.html.twig',
-                'label' => 'admin.fields.footer_social_network.style',
-            ))
-            ->add('position', null, array(
+                'label'    => 'admin.fields.footer_social_network.style',
+            ])
+            ->add('position', null, [
                 'label' => 'admin.fields.footer_social_network.position',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.footer_social_network.updated_at',
-            ))
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                ),
-            ))
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'show'   => [],
+                    'edit'   => [],
+                    'delete' => [],
+                ],
+            ])
         ;
     }
 
@@ -87,23 +87,23 @@ class FooterSocialNetworkAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.footer_social_network.title',
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.footer_social_network.is_enabled',
+            ])
+            ->add('isEnabled', null, [
+                'label'    => 'admin.fields.footer_social_network.is_enabled',
                 'required' => false,
-            ))
-            ->add('link', null, array(
+            ])
+            ->add('link', null, [
                 'label' => 'admin.fields.footer_social_network.link',
-            ))
-            ->add('style', 'choice', array(
+            ])
+            ->add('style', 'choice', [
                 'choices' => FooterSocialNetwork::$socialIcons,
-                'label' => 'admin.fields.footer_social_network.style',
-            ))
-            ->add('position', null, array(
+                'label'   => 'admin.fields.footer_social_network.style',
+            ])
+            ->add('position', null, [
                 'label' => 'admin.fields.footer_social_network.position',
-            ))
+            ])
         ;
     }
 
@@ -113,28 +113,28 @@ class FooterSocialNetworkAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.footer_social_network.title',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.footer_social_network.is_enabled',
-            ))
-            ->add('link', null, array(
+            ])
+            ->add('link', null, [
                 'label' => 'admin.fields.footer_social_network.link',
-            ))
-            ->add('style', null, array(
+            ])
+            ->add('style', null, [
                 'template' => 'CapcoAdminBundle:FooterSocialNetwork:style_show_field.html.twig',
-                'label' => 'admin.fields.footer_social_network.style',
-            ))
-            ->add('position', null, array(
+                'label'    => 'admin.fields.footer_social_network.style',
+            ])
+            ->add('position', null, [
                 'label' => 'admin.fields.footer_social_network.position',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.footer_social_network.created_at',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.footer_social_network.updated_at',
-            ))
+            ])
         ;
     }
 }
