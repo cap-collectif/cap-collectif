@@ -18,8 +18,8 @@ class IdeaVoteType extends AbstractType
 
     public function __construct(User $user = null, $confirmed, $commentable)
     {
-        $this->user        = $user;
-        $this->confirmed   = $confirmed;
+        $this->user = $user;
+        $this->confirmed = $confirmed;
         $this->commentable = $commentable;
     }
 

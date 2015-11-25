@@ -28,7 +28,7 @@ class RecentPostBlockService extends BaseBlockService
         parent::__construct($name, $templating);
 
         $this->postRepository = $repository;
-        $this->toggleManager  = $manager;
+        $this->toggleManager = $manager;
     }
 
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)

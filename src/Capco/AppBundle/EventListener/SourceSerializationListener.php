@@ -14,7 +14,7 @@ class SourceSerializationListener implements EventSubscriberInterface
 
     public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage)
     {
-        $this->router       = $router;
+        $this->router = $router;
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -31,12 +31,12 @@ class SourceSerializationListener implements EventSubscriberInterface
 
     public function onPostSource(ObjectEvent $event)
     {
-        $source      = $event->getObject();
-        $opinion     = $source->getLinkedOpinion();
+        $source = $event->getObject();
+        $opinion = $source->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
-        $step        = $opinion->getStep();
-        $project     = $step->getProjectAbstractStep()->getProject();
-        $user        = $this->tokenStorage->getToken()->getUser();
+        $step = $opinion->getStep();
+        $project = $step->getProjectAbstractStep()->getProject();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $event->getVisitor()->addData(
             '_links', [

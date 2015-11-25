@@ -127,11 +127,11 @@ class ProjectDownloadResolver
 
     public function __construct(EntityManager $em, TwigEngine $templating, TranslatorInterface $translator, UrlResolver $urlResolver)
     {
-        $this->em          = $em;
-        $this->templating  = $templating;
-        $this->translator  = $translator;
+        $this->em = $em;
+        $this->templating = $templating;
+        $this->translator = $translator;
         $this->urlResolver = $urlResolver;
-        $this->data        = [
+        $this->data = [
             'published'   => [],
             'unpublished' => [],
         ];
@@ -147,14 +147,14 @@ class ProjectDownloadResolver
             throw new \Exception('Wrong format');
         }
 
-        $data    = [];
+        $data = [];
         $headers = [];
 
         if ($step instanceof ConsultationStep) {
-            $data    = $this->getConsultationStepData($step);
+            $data = $this->getConsultationStepData($step);
             $headers = $this->consultationHeaders;
         } elseif ($step instanceof CollectStep) {
-            $data    = $this->getCollectStepData($step);
+            $data = $this->getCollectStepData($step);
             $headers = $this->collectHeaders;
         } else {
             throw new \Exception('Step must be of type collect or consultation');
@@ -386,7 +386,7 @@ class ProjectDownloadResolver
 
     private function getArgumentItem(Argument $argument)
     {
-        $parent      = $argument->getOpinion() ? $argument->getOpinion() : $argument->getOpinionVersion();
+        $parent = $argument->getOpinion() ? $argument->getOpinion() : $argument->getOpinionVersion();
         $contentType = $parent->getCommentSystem() === OpinionType::COMMENT_SYSTEM_OK
             ? $this->translator->trans('project_download.values.content_type.simple_argument', [], 'CapcoAppBundle')
             : $this->translator->trans('project_download.values.content_type.argument', [], 'CapcoAppBundle')
@@ -430,7 +430,7 @@ class ProjectDownloadResolver
 
     private function getSourceItem(Source $source)
     {
-        $parent        = $source->getOpinion() ? $source->getOpinion() : $source->getOpinionVersion();
+        $parent = $source->getOpinion() ? $source->getOpinion() : $source->getOpinionVersion();
         $relatedObject = $source->getOpinionVersion()
             ? $this->translator->trans('project_download.values.related.version', ['%name%' => $parent->getTitle()], 'CapcoAppBundle')
             : $this->translator->trans('project_download.values.related.opinion', ['%name%' => $parent->getTitle()], 'CapcoAppBundle')
@@ -562,7 +562,7 @@ class ProjectDownloadResolver
 
         $current = $opinion->getOpinionType();
         while ($current->getParent()) {
-            $current   = $current->getParent();
+            $current = $current->getParent();
             $parents[] = $current->getTitle();
         }
 
@@ -601,12 +601,12 @@ class ProjectDownloadResolver
 
     private function formatText($text)
     {
-        $oneBreak  = ['<br>', '<br/>', '&nbsp;'];
+        $oneBreak = ['<br>', '<br/>', '&nbsp;'];
         $twoBreaks = ['</p>'];
-        $text      = str_ireplace($oneBreak, "\r", $text);
-        $text      = str_ireplace($twoBreaks, "\r\n", $text);
-        $text      = strip_tags($text);
-        $text      = html_entity_decode($text, ENT_QUOTES);
+        $text = str_ireplace($oneBreak, "\r", $text);
+        $text = str_ireplace($twoBreaks, "\r\n", $text);
+        $text = strip_tags($text);
+        $text = html_entity_decode($text, ENT_QUOTES);
 
         return $text;
     }

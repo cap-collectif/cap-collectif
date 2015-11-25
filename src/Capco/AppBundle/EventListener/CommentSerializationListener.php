@@ -14,7 +14,7 @@ class CommentSerializationListener implements EventSubscriberInterface
 
     public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage)
     {
-        $this->router       = $router;
+        $this->router = $router;
         $this->tokenStorage = $tokenStorage;
     }
 

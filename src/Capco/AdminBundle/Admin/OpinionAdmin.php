@@ -13,7 +13,7 @@ class OpinionAdmin extends Admin
 {
     public function getPersistentParameters()
     {
-        $subject       = $this->getSubject();
+        $subject = $this->getSubject();
         $opinionTypeId = null;
 
         if ($subject && $subject->getOpinionType()) {
@@ -142,7 +142,7 @@ class OpinionAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $subjectHasAppendices = $this->getSubject()->getAppendices()->count() > 0 ? true : false;
-        $classname            = $subjectHasAppendices ? '' : 'hidden';
+        $classname = $subjectHasAppendices ? '' : 'hidden';
         $formMapper
             ->with('admin.fields.opinion.group_content', ['class' => 'col-md-12'])->end()
             ->with('admin.fields.opinion.group_appendices', ['class' => 'col-md-12 '.$classname])->end()
@@ -222,7 +222,7 @@ class OpinionAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $subject              = $this->getSubject();
+        $subject = $this->getSubject();
         $subjectHasAppendices = $this->getSubject()->getAppendices()->count() > 0 ? true : false;
 
         $showMapper

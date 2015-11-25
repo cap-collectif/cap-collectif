@@ -36,7 +36,7 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $em      = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
             throw new NotFoundHttpException();
@@ -65,15 +65,15 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $em      = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
             throw new NotFoundHttpException();
         }
-        $events   = $this->get('capco.event.resolver')->getLastByProject($projectSlug, 2);
-        $posts    = $this->get('capco.blog.post.repository')->getLastPublishedByProject($projectSlug, 2);
+        $events = $this->get('capco.event.resolver')->getLastByProject($projectSlug, 2);
+        $posts = $this->get('capco.blog.post.repository')->getLastPublishedByProject($projectSlug, 2);
         $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $projectSlug, null);
-        $nbPosts  = $em->getRepository('CapcoAppBundle:Post')->countSearchResults(null, $projectSlug);
+        $nbPosts = $em->getRepository('CapcoAppBundle:Post')->countSearchResults(null, $projectSlug);
 
         $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered($project, 10, 1);
 
@@ -105,7 +105,7 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $em      = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
             throw new NotFoundHttpException();
@@ -114,13 +114,13 @@ class StepController extends Controller
         $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
         $nbOpinionsToDisplay = $step->getNbOpinionsToDisplay() !== null ? $step->getNbOpinionsToDisplay() : 10;
-        $opinions            = $em
+        $opinions = $em
             ->getRepository('CapcoAppBundle:Opinion')
             ->getEnabledByProject($project, $excludedAuthor, true, $nbOpinionsToDisplay)
         ;
 
         $nbVersionsToDisplay = $step->getNbVersionsToDisplay() !== null ? $step->getNbVersionsToDisplay() : 10;
-        $versions            = $em
+        $versions = $em
             ->getRepository('CapcoAppBundle:OpinionVersion')
             ->getEnabledByProject($project, $excludedAuthor, true, $nbVersionsToDisplay)
         ;
@@ -152,7 +152,7 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $em      = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
             throw new NotFoundHttpException();
@@ -192,7 +192,7 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $em      = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
             throw new NotFoundHttpException();
@@ -231,7 +231,7 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $em      = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
             throw new NotFoundHttpException();
@@ -254,7 +254,7 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $em         = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
         $proposalsCount = $em
@@ -312,7 +312,7 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $em         = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
         $proposalsCount = $em
@@ -375,7 +375,7 @@ class StepController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
-        $em      = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
             throw new NotFoundHttpException();

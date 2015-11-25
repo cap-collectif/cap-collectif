@@ -59,7 +59,7 @@ class ProjectController extends Controller
         if (false === $currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
-        $nav      = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
+        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
         $response = $this->render('CapcoAppBundle:Project:show.html.twig', [
             'project'     => $project,
             'currentStep' => $currentStep,
@@ -126,7 +126,7 @@ class ProjectController extends Controller
             throw new NotFoundHttpException('This type does not exist for this consultation step');
         }
 
-        $filter     = $opinionsSort ? $opinionsSort : $opinionType->getDefaultFilter();
+        $filter = $opinionsSort ? $opinionsSort : $opinionType->getDefaultFilter();
         $currentUrl = $this
             ->generateUrl('app_project_show_opinions', [
                 'projectSlug'     => $project->getSlug(),
@@ -177,10 +177,10 @@ class ProjectController extends Controller
 
         $em = $this->get('doctrine.orm.entity_manager');
 
-        $opinions  = $em->getRepository('CapcoAppBundle:Opinion')->getTrashedOrUnpublishedByProject($project);
-        $versions  = $em->getRepository('CapcoAppBundle:OpinionVersion')->getTrashedOrUnpublishedByProject($project);
+        $opinions = $em->getRepository('CapcoAppBundle:Opinion')->getTrashedOrUnpublishedByProject($project);
+        $versions = $em->getRepository('CapcoAppBundle:OpinionVersion')->getTrashedOrUnpublishedByProject($project);
         $arguments = $em->getRepository('CapcoAppBundle:Argument')->getTrashedOrUnpublishedByProject($project);
-        $sources   = $em->getRepository('CapcoAppBundle:Source')->getTrashedOrUnpublishedByProject($project);
+        $sources = $em->getRepository('CapcoAppBundle:Source')->getTrashedOrUnpublishedByProject($project);
 
         $proposals = $em->getRepository('CapcoAppBundle:Proposal')->getTrashedOrUnpublishedByProject($project);
 
@@ -218,15 +218,15 @@ class ProjectController extends Controller
         }
 
         $resolver = $this->get('capco.project.download.resolver');
-        $content  = $resolver->getContent($step, $format);
+        $content = $resolver->getContent($step, $format);
 
         if (!$content) {
             throw new NotFoundHttpException('Wrong format');
         }
 
-        $response    = new Response($content);
+        $response = new Response($content);
         $contentType = $resolver->getContentType($format);
-        $filename    = $project->getSlug().'_'.$step->getSlug().'.'.$format;
+        $filename = $project->getSlug().'_'.$step->getSlug().'.'.$format;
         $response->headers->set('Content-Type', $contentType);
         $response->headers->set('Content-Disposition', 'attachment;filename='.$filename);
 
@@ -246,7 +246,7 @@ class ProjectController extends Controller
     public function showEventsAction(Project $project)
     {
         $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(null, null, $project->getSlug(), null);
-        $nbEvents      = $this->get('capco.event.resolver')->countEvents(null, null, $project->getSlug(), null);
+        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $project->getSlug(), null);
 
         return [
             'project'  => $project,
@@ -332,7 +332,7 @@ class ProjectController extends Controller
      */
     public function showMetaAction($projectSlug, $currentStepSlug)
     {
-        $em      = $this->getDoctrine();
+        $em = $this->getDoctrine();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOneBySlugWithStepsAndEventsAndPosts($projectSlug);
 
         return [
@@ -361,11 +361,11 @@ class ProjectController extends Controller
      */
     public function indexAction(Request $request, $page, $theme = null, $sort = null, $term = null)
     {
-        $em              = $this->getDoctrine()->getManager();
-        $currentUrl      = $this->generateUrl('app_project');
-        $toggleManager   = $this->get('capco.toggle.manager');
+        $em = $this->getDoctrine()->getManager();
+        $currentUrl = $this->generateUrl('app_project');
+        $toggleManager = $this->get('capco.toggle.manager');
         $themesActivated = $toggleManager->isActive('themes');
-        $formActivated   = $toggleManager->isActive('projects_form');
+        $formActivated = $toggleManager->isActive('projects_form');
 
         if ($formActivated) {
             $form = $this->createForm(new ProjectSearchType($this->get('capco.toggle.manager')), null, [

@@ -49,8 +49,8 @@ class CommentController extends Controller
     public function createAction($objectType, $objectId, Request $request)
     {
         $object = $this->get('capco.comment.resolver')->getObjectByTypeAndId($objectType, $objectId);
-        $user   = $this->getUser();
-        $ip     = $request->getClientIp();
+        $user = $this->getUser();
+        $ip = $request->getClientIp();
 
         $comment = $this->get('capco.comment.resolver')->createCommentForType($objectType);
         if (null != $user) {
@@ -217,7 +217,7 @@ class CommentController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $userCurrent     = $this->getUser();
+        $userCurrent = $this->getUser();
         $userPostComment = $comment->getAuthor();
 
         if ($userCurrent !== $userPostComment) {
@@ -275,7 +275,7 @@ class CommentController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $userCurrent     = $this->getUser()->getId();
+        $userCurrent = $this->getUser()->getId();
         $userPostComment = $comment->getAuthor()->getId();
 
         if ($userCurrent !== $userPostComment) {

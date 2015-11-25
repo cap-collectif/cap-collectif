@@ -12,7 +12,7 @@ class VoteResolver
 
     public function __construct(Router $router, UrlResolver $urlResolver)
     {
-        $this->router      = $router;
+        $this->router = $router;
         $this->urlResolver = $urlResolver;
     }
 

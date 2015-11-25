@@ -43,7 +43,7 @@ trait TrashableTrait
     {
         if (false == $isTrashed) {
             $this->trashedReason = null;
-            $this->trashedAt     = null;
+            $this->trashedAt = null;
         }
         $this->isTrashed = $isTrashed;
 

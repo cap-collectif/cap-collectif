@@ -319,8 +319,8 @@ class ProjectAdmin extends Admin
         $cover = $object->getCover();
         if ($cover != null) {
             $provider = $this->getConfigurationPool()->getContainer()->get($cover->getProviderName());
-            $format   = $provider->getFormatName($cover, 'form');
-            $url      = $provider->generatePublicUrl($cover, $format);
+            $format = $provider->getFormatName($cover, 'form');
+            $url = $provider->generatePublicUrl($cover, $format);
 
             return new Metadata($object->getTitle(), null, $url);
         }

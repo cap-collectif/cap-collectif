@@ -51,7 +51,7 @@ class ResettingFOSUser1Controller extends BaseController
     public function checkEmailAction()
     {
         $session = $this->container->get('session');
-        $email   = $session->get(static::SESSION_EMAIL);
+        $email = $session->get(static::SESSION_EMAIL);
         $session->remove(static::SESSION_EMAIL);
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:checkEmail.html.'.$this->getEngine(), [

@@ -16,7 +16,7 @@ class RegistrationFormType extends AbstractType
     public function __construct(SiteParameterResolver $resolver, Manager $toggleManager)
     {
         $this->siteParameterResolver = $resolver;
-        $this->toggleManager         = $toggleManager;
+        $this->toggleManager = $toggleManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

@@ -44,7 +44,7 @@ class AppendixType
     public function __construct()
     {
         $this->opinionTypes = new ArrayCollection();
-        $this->updatedAt    = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function __toString()

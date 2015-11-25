@@ -53,7 +53,7 @@ class OauthConnectController extends ConnectController
             && !$hasUser
             && $error instanceof AccountNotLinkedException
         ) {
-            $key     = time();
+            $key = time();
             $session = $request->getSession();
             $session->set('_hwi_oauth.registration_error.'.$key, $error);
 
@@ -104,11 +104,11 @@ class OauthConnectController extends ConnectController
 
     public function nousCitoyensAction()
     {
-        $ro         = $this->getResourceOwnerByName('nous_citoyens');
+        $ro = $this->getResourceOwnerByName('nous_citoyens');
         $reflection = new \ReflectionClass($ro);
-        $property   = $reflection->getProperty('options');
+        $property = $reflection->getProperty('options');
         $property->setAccessible(true);
-        $url    = $property->getValue($ro)['authorization_url'];
+        $url = $property->getValue($ro)['authorization_url'];
         $router = $this->container->get('router');
         $router->getContext()->setScheme('http');
 

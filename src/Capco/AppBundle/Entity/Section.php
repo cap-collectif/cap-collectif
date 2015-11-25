@@ -180,7 +180,7 @@ class Section
 
     public function __construct()
     {
-        $this->type      = 'custom';
+        $this->type = 'custom';
         $this->updatedAt = new \Datetime();
     }
 

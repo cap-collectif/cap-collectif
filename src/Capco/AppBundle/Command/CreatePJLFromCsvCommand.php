@@ -27,8 +27,8 @@ use Symfony\Component\Console\Input\ArrayInput;
 class CreatePJLFromCsvCommand extends ContainerAwareCommand
 {
     private $opinionTypes = [];
-    private $username     = 'Gouvernement';
-    private $password     = 'KvN+j\E43&2U%KAF';
+    private $username = 'Gouvernement';
+    private $password = 'KvN+j\E43&2U%KAF';
 
     private $siteParameters = [
         'admin.mail.notifications.send_address'    => 'coucou@cap-collectif.com',
@@ -253,9 +253,9 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
     protected function import(InputInterface $input, OutputInterface $output)
     {
         $opinionTypesData = $this->getOpinionTypes();
-        $opinions         = $this->getOpinions();
-        $motives          = $this->getMotives();
-        $modals           = $this->getModals();
+        $opinions = $this->getOpinions();
+        $motives = $this->getMotives();
+        $modals = $this->getModals();
 
         $em = $this->getContainer()->get('doctrine')->getManager();
 
@@ -375,7 +375,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $i = 1;
         foreach ($opinions as $row) {
             $opinionType = $this->findOpinionTypeByTitle($row['opinionType'], $row['opinionType_parent'], $row['opinionType_root']);
-            $opinion     = $em->getRepository('CapcoAppBundle:Opinion')
+            $opinion = $em->getRepository('CapcoAppBundle:Opinion')
                           ->findOneByTitle($row['opinion']);
 
             if (!is_object($opinion)) {
@@ -411,7 +411,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                 $motif->setBody('<p>'.$row['motif'].'</p>');
                 $opinion->addAppendice($motif);
             } else {
-                $motif   = $opinion->getAppendices()[0];
+                $motif = $opinion->getAppendices()[0];
                 $content = $motif->getBody();
                 $content .= '<p>'.$row['motif'].'</p>';
                 $motif->setBody($content);

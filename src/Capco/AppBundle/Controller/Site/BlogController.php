@@ -28,7 +28,7 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request, $page, $theme = null, $project = null)
     {
-        $em         = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_blog');
 
         $form = $this->createForm(new PostSearchType($this->get('capco.toggle.manager')), null, [

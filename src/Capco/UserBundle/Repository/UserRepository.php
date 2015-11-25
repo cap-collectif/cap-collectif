@@ -16,7 +16,7 @@ class UserRepository extends EntityRepository
 {
     public function findProjectSourceContributorsWithCount(Project $project)
     {
-        $em    = $this->getEntityManager();
+        $em = $this->getEntityManager();
         $query = $em->createQuery('
           select u.id, count(distinct s) as sources_count
           from CapcoUserBundle:User u
@@ -34,7 +34,7 @@ class UserRepository extends EntityRepository
 
     public function findProjectArgumentContributorsWithCount(Project $project)
     {
-        $em    = $this->getEntityManager();
+        $em = $this->getEntityManager();
         $query = $em->createQuery('
           select u.id, count(distinct a) as arguments_count
           from CapcoUserBundle:User u
@@ -132,7 +132,7 @@ class UserRepository extends EntityRepository
 
     public function findProjectArgumentVotersWithCount(Project $project)
     {
-        $em    = $this->getEntityManager();
+        $em = $this->getEntityManager();
         $query = $em->createQuery('
           select u.id, count(distinct av) as arguments_votes_count
           from CapcoUserBundle:User u
@@ -151,7 +151,7 @@ class UserRepository extends EntityRepository
 
     public function findProjectSourceVotersWithCount(Project $project)
     {
-        $em    = $this->getEntityManager();
+        $em = $this->getEntityManager();
         $query = $em->createQuery('
           select u.id, count(distinct sv) as sources_votes_count
           from CapcoUserBundle:User u

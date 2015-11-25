@@ -179,7 +179,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
     public function getFormattedTree($synthesis, $type, $parentId = null, $depth = null, $options = [])
     {
         $parent = $parentId ? $this->find($parentId) : null;
-        $nodes  = $this->getElementsHierarchy($synthesis, $type, $parent, $depth);
+        $nodes = $this->getElementsHierarchy($synthesis, $type, $parent, $depth);
 
         return $this->buildTree($nodes, $options);
     }
@@ -191,12 +191,12 @@ class SynthesisElementRepository extends MaterializedPathRepository
      */
     public function buildTreeArray(array $nodes)
     {
-        $meta               = $this->getClassMetadata();
-        $level              = 'level';
-        $childrenIndex      = 'children';
+        $meta = $this->getClassMetadata();
+        $level = 'level';
+        $childrenIndex = 'children';
         $childrenCountIndex = 'childrenCount';
-        $nestedTree         = [];
-        $l                  = 0;
+        $nestedTree = [];
+        $l = 0;
 
         if (count($nodes) > 0) {
             // Node Stack. Used to help building the hierarchy
@@ -204,7 +204,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
             // Array of ids, used to check if the element's parent is in the tree
             $idsStack = [];
             foreach ($nodes as $child) {
-                $item                 = $child;
+                $item = $child;
                 $item[$childrenIndex] = [];
                 if (array_key_exists($childrenCountIndex, $item)) {
                     $item[$childrenCountIndex] = intval($item[$childrenCountIndex]);
@@ -243,19 +243,19 @@ class SynthesisElementRepository extends MaterializedPathRepository
                 // Stack is empty (we are inspecting the root)
                 if ($l == 0) {
                     // Assigning the root child
-                    $i              = count($nestedTree);
+                    $i = count($nestedTree);
                     $nestedTree[$i] = $item;
-                    $stack[]        = &$nestedTree[$i];
-                    $idsStack[]     = $item['id'];
+                    $stack[] = &$nestedTree[$i];
+                    $idsStack[] = $item['id'];
                 } else {
                     // Check if item parent is present in the tree
                     $parentId = $this->extractParentIdFromPath($item['path']);
                     if (in_array($parentId, $idsStack)) {
                         // Add child to parent
-                        $i                                 = count($stack[$l - 1][$childrenIndex]);
+                        $i = count($stack[$l - 1][$childrenIndex]);
                         $stack[$l - 1][$childrenIndex][$i] = $item;
-                        $stack[]                           = &$stack[$l - 1][$childrenIndex][$i];
-                        $idsStack[]                        = $item['id'];
+                        $stack[] = &$stack[$l - 1][$childrenIndex][$i];
+                        $idsStack[] = $item['id'];
                     }
                 }
             }
@@ -289,11 +289,11 @@ class SynthesisElementRepository extends MaterializedPathRepository
      */
     public function getElementsHierarchy($synthesis, $type = 'published', $parent = null, $depth = null, $includeNode = false)
     {
-        $meta      = $this->getClassMetadata();
-        $config    = $this->listener->getConfiguration($this->_em, $meta->name);
+        $meta = $this->getClassMetadata();
+        $config = $this->listener->getConfiguration($this->_em, $meta->name);
         $separator = addcslashes($config['path_separator'], '%');
-        $path      = $config['path'];
-        $qb        = $this->createQueryBuilder('se')
+        $path = $config['path'];
+        $qb = $this->createQueryBuilder('se')
             ->select('se.id', 'se.level', 'se.path', 'se.displayType', 'se.title', 'se.body', 'se.description', 'COUNT(c.id) as childrenCount')
             ->leftJoin('se.children', 'c', 'WITH', $this->getOnClauseForChildren($type))
         ;
@@ -312,13 +312,13 @@ class SynthesisElementRepository extends MaterializedPathRepository
                 'se.linkedDataCreation'
             )->leftJoin('se.author', 'a');
         }
-        $expr            = '';
+        $expr = '';
         $includeNodeExpr = '';
 
         if (is_object($parent) && $parent instanceof $meta->name) {
-            $parent   = new EntityWrapper($parent, $this->_em);
+            $parent = new EntityWrapper($parent, $this->_em);
             $nodePath = $parent->getPropertyValue($path);
-            $expr     = $qb->expr()->andx()->add(
+            $expr = $qb->expr()->andx()->add(
                 $qb->expr()->like(
                     'se.'.$path,
                     $qb->expr()->literal(
@@ -357,7 +357,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         }
 
         $orderByField = 'se.'.$config['path'];
-        $orderByDir   = 'asc';
+        $orderByDir = 'asc';
         $qb->orderBy($orderByField, $orderByDir);
 
         $qb->groupBy('se.id');

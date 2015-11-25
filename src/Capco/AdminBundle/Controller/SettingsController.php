@@ -21,7 +21,7 @@ class SettingsController extends Controller
         }
 
         $admin_pool = $this->get('sonata.admin.pool');
-        $em         = $this->get('doctrine.orm.entity_manager');
+        $em = $this->get('doctrine.orm.entity_manager');
 
         $parameters = $em->getRepository('CapcoAppBundle:SiteParameter')->findBy([
             'category' => $category,
@@ -38,7 +38,7 @@ class SettingsController extends Controller
         $featuresCategoryResolver = $this->get('capco.admin.features_category_resolver');
 
         $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
-        $group   = $featuresCategoryResolver->getGroupNameForCategory($category);
+        $group = $featuresCategoryResolver->getGroupNameForCategory($category);
 
         return [
             'admin_pool'          => $admin_pool,
@@ -62,7 +62,7 @@ class SettingsController extends Controller
         }
 
         $toggleManager = $this->get('capco.toggle.manager');
-        $value         = $toggleManager->switchValue($toggle);
+        $value = $toggleManager->switchValue($toggle);
 
         if ($value) {
             $message = $this->get('translator')->trans('features.switch.enabled', [], 'CapcoAppBundle');

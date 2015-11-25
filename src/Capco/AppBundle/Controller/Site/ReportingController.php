@@ -45,10 +45,10 @@ class ReportingController extends Controller
 
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project     = $currentStep->getProject();
+        $project = $currentStep->getProject();
 
         $reporting = new Reporting();
-        $form      = $this->createForm(new ReportingType(), $reporting);
+        $form = $this->createForm(new ReportingType(), $reporting);
 
         if ($request->getMethod() == 'POST') {
             if ($form->handleRequest($request)->isValid()) {
@@ -114,10 +114,10 @@ class ReportingController extends Controller
 
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project     = $currentStep->getProject();
+        $project = $currentStep->getProject();
 
         $reporting = new Reporting();
-        $form      = $this->createForm(new ReportingType(), $reporting);
+        $form = $this->createForm(new ReportingType(), $reporting);
 
         if ($request->getMethod() == 'POST') {
             if ($form->handleRequest($request)->isValid()) {
@@ -181,13 +181,13 @@ class ReportingController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $opinion     = $source->getLinkedOpinion();
+        $opinion = $source->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project     = $currentStep->getProject();
+        $project = $currentStep->getProject();
 
         $reporting = new Reporting();
-        $form      = $this->createForm(new ReportingType(), $reporting);
+        $form = $this->createForm(new ReportingType(), $reporting);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -245,13 +245,13 @@ class ReportingController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $opinion     = $argument->getLinkedOpinion();
+        $opinion = $argument->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project     = $currentStep->getProject();
+        $project = $currentStep->getProject();
 
         $reporting = new Reporting();
-        $form      = $this->createForm(new ReportingType(), $reporting);
+        $form = $this->createForm(new ReportingType(), $reporting);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -300,7 +300,7 @@ class ReportingController extends Controller
         }
 
         $reporting = new Reporting();
-        $form      = $this->createForm(new ReportingType(), $reporting);
+        $form = $this->createForm(new ReportingType(), $reporting);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -353,7 +353,7 @@ class ReportingController extends Controller
         }
 
         $reporting = new Reporting();
-        $form      = $this->createForm(new ReportingType(), $reporting);
+        $form = $this->createForm(new ReportingType(), $reporting);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -401,10 +401,10 @@ class ReportingController extends Controller
         }
 
         $currentStep = $proposal->getProposalForm()->getStep();
-        $project     = $currentStep->getProject();
+        $project = $currentStep->getProject();
 
         $reporting = new Reporting();
-        $form      = $this->createForm(new ReportingType(), $reporting);
+        $form = $this->createForm(new ReportingType(), $reporting);
 
         if ($request->getMethod() == 'POST') {
             if ($form->handleRequest($request)->isValid()) {

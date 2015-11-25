@@ -14,7 +14,7 @@ class ProposalSubscriber implements EventSubscriberInterface
 
     public function __construct(EntityManager $em, Notify $notifier)
     {
-        $this->em       = $em;
+        $this->em = $em;
         $this->notifier = $notifier;
     }
 
@@ -28,7 +28,7 @@ class ProposalSubscriber implements EventSubscriberInterface
     public function onProposalDeleted(ProposalEvent $event)
     {
         $proposal = $event->getProposal();
-        $action   = $event->getAction();
+        $action = $event->getAction();
 
         if ($action == 'remove') {
             $this->notifier->notifyProposalDeletion($proposal);

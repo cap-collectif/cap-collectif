@@ -258,9 +258,9 @@ class SynthesisElement
 
     public function __construct()
     {
-        $this->updatedAt   = new \DateTime();
-        $this->votes       = [];
-        $this->children    = new ArrayCollection();
+        $this->updatedAt = new \DateTime();
+        $this->votes = [];
+        $this->children = new ArrayCollection();
         $this->displayType = 'folder';
     }
 

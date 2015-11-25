@@ -77,8 +77,8 @@ trait VotableOkNokMitigeTrait
             $this->removeVote($vote);
         }
         $this->votesCountMitige = 0;
-        $this->votesCountNok    = 0;
-        $this->votesCountOk     = 0;
+        $this->votesCountNok = 0;
+        $this->votesCountOk = 0;
 
         return $this;
     }

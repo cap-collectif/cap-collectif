@@ -21,7 +21,7 @@ class Question
     use SluggableTitleTrait;
     use PositionableTrait;
 
-    const QUESTION_TYPE_SIMPLE_TEXT    = 0;
+    const QUESTION_TYPE_SIMPLE_TEXT = 0;
     const QUESTION_TYPE_MULTILINE_TEXT = 1;
 
     public static $questionTypes = [

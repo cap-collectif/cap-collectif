@@ -17,9 +17,9 @@ class SitemapsController extends Controller
     public function sitemapAction()
     {
         $toggleManager = $this->get('capco.toggle.manager');
-        $em            = $this->get('doctrine.orm.entity_manager');
-        $urls          = [];
-        $hostname      = $this->get('request_stack')->getCurrentRequest()->getHost();
+        $em = $this->get('doctrine.orm.entity_manager');
+        $urls = [];
+        $hostname = $this->get('request_stack')->getCurrentRequest()->getHost();
 
         // Homepage
         $urls[] = [

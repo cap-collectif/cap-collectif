@@ -15,7 +15,7 @@ class SynthesisHandler
 
     public function __construct(EntityManager $em, ConsultationStepExtractor $consultationStepExtractor)
     {
-        $this->em                        = $em;
+        $this->em = $em;
         $this->consultationStepExtractor = $consultationStepExtractor;
     }
 

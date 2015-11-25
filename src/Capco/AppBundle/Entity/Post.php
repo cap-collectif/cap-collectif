@@ -126,12 +126,12 @@ class Post implements CommentableInterface
 
     public function __construct()
     {
-        $this->Authors       = new ArrayCollection();
-        $this->comments      = new ArrayCollection();
-        $this->themes        = new ArrayCollection();
-        $this->projects      = new ArrayCollection();
+        $this->Authors = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->themes = new ArrayCollection();
+        $this->projects = new ArrayCollection();
         $this->commentsCount = 0;
-        $this->updatedAt     = new \Datetime();
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()

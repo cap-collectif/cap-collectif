@@ -43,12 +43,12 @@ class SourceController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $opinion     = $source->getOpinion();
+        $opinion = $source->getOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project     = $currentStep->getProject();
+        $project = $currentStep->getProject();
 
-        $userCurrent    = $this->getUser()->getId();
+        $userCurrent = $this->getUser()->getId();
         $userPostSource = $source->getAuthor()->getId();
 
         if ($userCurrent !== $userPostSource) {
@@ -111,12 +111,12 @@ class SourceController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('source.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $opinion     = $source->getLinkedOpinion();
+        $opinion = $source->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project     = $currentStep->getProject();
+        $project = $currentStep->getProject();
 
-        $userCurrent    = $this->getUser()->getId();
+        $userCurrent = $this->getUser()->getId();
         $userPostSource = $source->getAuthor()->getId();
 
         if ($userCurrent !== $userPostSource) {
@@ -129,7 +129,7 @@ class SourceController extends Controller
 
             if ($form->isValid()) {
                 $type = $form->get('type')->getData();
-                $em   = $this->getDoctrine()->getManager();
+                $em = $this->getDoctrine()->getManager();
 
                 $source->resetVotes();
                 $source->setValidated(false);
@@ -137,7 +137,7 @@ class SourceController extends Controller
                 if ($type === 0) {
                     $source->setMedia(null);
                     $mediaManager = $this->container->get('sonata.media.manager.media');
-                    $media        = $mediaManager->findOneBy(['id' => $source->getMedia()]);
+                    $media = $mediaManager->findOneBy(['id' => $source->getMedia()]);
                     if (null != $media) {
                         $provider = $this->get($media->getProviderName());
                         $provider->removeThumbnails($media);

@@ -18,9 +18,9 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
     public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage, AbstractVoteRepository $voteRepository, Manager $toggleManager)
     {
-        $this->router         = $router;
-        $this->tokenStorage   = $tokenStorage;
-        $this->toggleManager  = $toggleManager;
+        $this->router = $router;
+        $this->tokenStorage = $tokenStorage;
+        $this->toggleManager = $toggleManager;
         $this->voteRepository = $voteRepository;
     }
 
@@ -47,12 +47,12 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
     public function onPostOpinionVersion(ObjectEvent $event)
     {
-        $version     = $event->getObject();
-        $opinion     = $version->getParent();
+        $version = $event->getObject();
+        $opinion = $version->getParent();
         $opinionType = $opinion->getOpinionType();
-        $step        = $opinion->getStep();
-        $project     = $step->getProjectAbstractStep()->getProject();
-        $user        = $this->tokenStorage->getToken()->getUser();
+        $step = $opinion->getStep();
+        $project = $step->getProjectAbstractStep()->getProject();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $event->getVisitor()->addData(
             '_links', [
@@ -84,11 +84,11 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
     public function onPostOpinion(ObjectEvent $event)
     {
-        $opinion     = $event->getObject();
+        $opinion = $event->getObject();
         $opinionType = $opinion->getOpinionType();
-        $step        = $opinion->getStep();
-        $project     = $step->getProjectAbstractStep()->getProject();
-        $user        = $this->tokenStorage->getToken()->getUser();
+        $step = $opinion->getStep();
+        $project = $step->getProjectAbstractStep()->getProject();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $event->getVisitor()->addData(
             '_links', [
@@ -146,7 +146,7 @@ class OpinionSerializationListener implements EventSubscriberInterface
             return [];
         }
 
-        $reflectionClass    = new \ReflectionClass('JMS\Serializer\Exclusion\GroupsExclusionStrategy');
+        $reflectionClass = new \ReflectionClass('JMS\Serializer\Exclusion\GroupsExclusionStrategy');
         $reflectionProperty = $reflectionClass->getProperty('groups');
         $reflectionProperty->setAccessible(true);
 

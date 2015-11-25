@@ -59,8 +59,8 @@ class RecentContributionsController extends Controller
      */
     public function validateAction(Request $request, $type, $id)
     {
-        $resolver     = $this->get('capco_admin.recent_contributions_resolver');
-        $em           = $this->get('doctrine.orm.entity_manager');
+        $resolver = $this->get('capco_admin.recent_contributions_resolver');
+        $em = $this->get('doctrine.orm.entity_manager');
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 
         if (!$contribution) {
@@ -88,8 +88,8 @@ class RecentContributionsController extends Controller
      */
     public function unpublishAction(Request $request, $type, $id)
     {
-        $resolver     = $this->get('capco_admin.recent_contributions_resolver');
-        $em           = $this->get('doctrine.orm.entity_manager');
+        $resolver = $this->get('capco_admin.recent_contributions_resolver');
+        $em = $this->get('doctrine.orm.entity_manager');
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 
         if (!$contribution) {
@@ -133,8 +133,8 @@ class RecentContributionsController extends Controller
      */
     public function trashAction(Request $request, $type, $id)
     {
-        $resolver     = $this->get('capco_admin.recent_contributions_resolver');
-        $em           = $this->get('doctrine.orm.entity_manager');
+        $resolver = $this->get('capco_admin.recent_contributions_resolver');
+        $em = $this->get('doctrine.orm.entity_manager');
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 
         if (!$contribution) {

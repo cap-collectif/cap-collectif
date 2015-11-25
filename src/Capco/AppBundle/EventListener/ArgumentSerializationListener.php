@@ -16,7 +16,7 @@ class ArgumentSerializationListener implements EventSubscriberInterface
 
     public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage)
     {
-        $this->router       = $router;
+        $this->router = $router;
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -33,12 +33,12 @@ class ArgumentSerializationListener implements EventSubscriberInterface
 
     public function onPostArgument(ObjectEvent $event)
     {
-        $argument    = $event->getObject();
-        $opinion     = $argument->getLinkedOpinion();
+        $argument = $event->getObject();
+        $opinion = $argument->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
-        $step        = $opinion->getStep();
-        $project     = $step->getProjectAbstractStep()->getProject();
-        $user        = $this->tokenStorage->getToken()->getUser();
+        $step = $opinion->getStep();
+        $project = $step->getProjectAbstractStep()->getProject();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $showUrl = '';
 

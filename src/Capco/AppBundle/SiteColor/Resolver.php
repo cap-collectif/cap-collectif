@@ -14,8 +14,8 @@ class Resolver
     public function __construct(SiteColorRepository $repository, LoggerInterface $logger)
     {
         $this->repository = $repository;
-        $this->logger     = $logger;
-        $this->colors     = $this->repository->getValuesIfEnabled();
+        $this->logger = $logger;
+        $this->colors = $this->repository->getValuesIfEnabled();
     }
 
     public function getValue($key)

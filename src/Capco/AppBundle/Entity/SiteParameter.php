@@ -14,14 +14,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class SiteParameter
 {
     const TYPE_SIMPLE_TEXT = 0;
-    const TYPE_RICH_TEXT   = 1;
-    const TYPE_INTEGER     = 2;
-    const TYPE_JS          = 3;
-    const TYPE_EMAIL       = 4;
-    const TYPE_INTERN_URL  = 5;
-    const TYPE_URL         = 6;
-    const TYPE_TEL_NB      = 7;
-    const TYPE_BOOLEAN     = 8;
+    const TYPE_RICH_TEXT = 1;
+    const TYPE_INTEGER = 2;
+    const TYPE_JS = 3;
+    const TYPE_EMAIL = 4;
+    const TYPE_INTERN_URL = 5;
+    const TYPE_URL = 6;
+    const TYPE_TEL_NB = 7;
+    const TYPE_BOOLEAN = 8;
 
     public static $types = [
         'simple_text' => self::TYPE_SIMPLE_TEXT,
@@ -113,7 +113,7 @@ class SiteParameter
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
-        $this->type      = self::TYPE_SIMPLE_TEXT;
+        $this->type = self::TYPE_SIMPLE_TEXT;
     }
 
     /**

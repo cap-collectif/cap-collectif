@@ -110,7 +110,7 @@ class ConsultationStepTypeAdmin extends Admin
     private function createQueryForOpinionTypes()
     {
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
-        $qb      = $this->getConfigurationPool()
+        $qb = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:OpinionType')

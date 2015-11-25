@@ -25,7 +25,7 @@ class ThemeController extends Controller
      */
     public function indexAction(Request $request, $page, $term = null)
     {
-        $em         = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_theme');
 
         $form = $this->createForm(new ThemeSearchType(), null, [
@@ -99,8 +99,8 @@ class ThemeController extends Controller
      */
     public function lastIdeasAction($theme, $max = 8, $offset = 0)
     {
-        $em      = $this->get('doctrine.orm.entity_manager');
-        $ideas   = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
+        $em = $this->get('doctrine.orm.entity_manager');
+        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
         $nbIdeas = $em->getRepository('CapcoAppBundle:Idea')->countSearchResults($theme->getSlug());
 
         return [
@@ -122,8 +122,8 @@ class ThemeController extends Controller
      */
     public function lastProjectsAction($theme, $max = 8, $offset = 0)
     {
-        $em         = $this->get('doctrine.orm.entity_manager');
-        $projects   = $em->getRepository('CapcoAppBundle:Project')->getLastByTheme($theme->getId(), $max, $offset);
+        $em = $this->get('doctrine.orm.entity_manager');
+        $projects = $em->getRepository('CapcoAppBundle:Project')->getLastByTheme($theme->getId(), $max, $offset);
         $nbProjects = $em->getRepository('CapcoAppBundle:Project')->countSearchResults($theme->getSlug());
 
         return [

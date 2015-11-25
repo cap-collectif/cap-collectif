@@ -56,9 +56,9 @@ class Loader
      */
     public function __construct($loaders, LoggerInterface $logger = null)
     {
-        $this->loaders    = $loaders;
+        $this->loaders = $loaders;
         $this->processors = [];
-        $this->logger     = $logger;
+        $this->logger = $logger;
         $this->references = new ArrayCollection();
     }
 

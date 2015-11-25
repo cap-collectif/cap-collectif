@@ -28,19 +28,19 @@ class SelectionStepsController extends FOSRestController
      */
     public function getProposalsBySelectionStepAction(SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
     {
-        $first      = intval($paramFetcher->get('first'));
-        $offset     = intval($paramFetcher->get('offset'));
-        $order      = $paramFetcher->get('order');
-        $themeId    = $paramFetcher->get('theme');
-        $statusId   = $paramFetcher->get('status');
+        $first = intval($paramFetcher->get('first'));
+        $offset = intval($paramFetcher->get('offset'));
+        $order = $paramFetcher->get('order');
+        $themeId = $paramFetcher->get('theme');
+        $statusId = $paramFetcher->get('status');
         $districtId = $paramFetcher->get('district');
-        $typeId     = $paramFetcher->get('type');
+        $typeId = $paramFetcher->get('type');
 
-        $em       = $this->getDoctrine()->getManager();
-        $theme    = null;
-        $status   = null;
+        $em = $this->getDoctrine()->getManager();
+        $theme = null;
+        $status = null;
         $district = null;
-        $type     = null;
+        $type = null;
 
         if ($themeId) {
             $theme = $em->getRepository('CapcoAppBundle:Theme')->find($themeId);

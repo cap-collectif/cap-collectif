@@ -13,8 +13,8 @@ class FeaturesController extends FOSRestController
      */
     public function cgetAction()
     {
-        $data     = $this->get('capco.toggle.manager')->all();
-        $view     = $this->view($data, 200);
+        $data = $this->get('capco.toggle.manager')->all();
+        $view = $this->view($data, 200);
         $response = $this->handleView($view);
         $response->setPublic();
         $response->setSharedMaxAge(60);

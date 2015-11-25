@@ -34,7 +34,7 @@ class OpinionController extends Controller
         }
 
         $currentStep = $opinion->getStep();
-        $sources     = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinionJoinUserReports($opinion, $this->getUser());
+        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinionJoinUserReports($opinion, $this->getUser());
 
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProject($projectSlug);
 
@@ -150,9 +150,9 @@ class OpinionController extends Controller
 
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project     = $currentStep->getProject();
+        $project = $currentStep->getProject();
 
-        $userCurrent     = $this->getUser()->getId();
+        $userCurrent = $this->getUser()->getId();
         $userPostOpinion = $opinion->getAuthor()->getId();
 
         if ($userCurrent !== $userPostOpinion) {
@@ -218,9 +218,9 @@ class OpinionController extends Controller
 
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project     = $currentStep->getProject();
+        $project = $currentStep->getProject();
 
-        $userCurrent     = $this->getUser()->getId();
+        $userCurrent = $this->getUser()->getId();
         $userPostOpinion = $opinion->getAuthor()->getId();
 
         if ($userCurrent !== $userPostOpinion) {
@@ -280,7 +280,7 @@ class OpinionController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        $currentUrl  = $this->generateUrl('app_project_show_opinion', ['projectSlug' => $projectSlug, 'stepSlug' => $stepSlug, 'opinionTypeSlug' => $opinionTypeSlug, 'opinionSlug' => $opinionSlug]);
+        $currentUrl = $this->generateUrl('app_project_show_opinion', ['projectSlug' => $projectSlug, 'stepSlug' => $stepSlug, 'opinionTypeSlug' => $opinionTypeSlug, 'opinionSlug' => $opinionSlug]);
         $currentStep = $opinion->getStep();
 
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProject($projectSlug);

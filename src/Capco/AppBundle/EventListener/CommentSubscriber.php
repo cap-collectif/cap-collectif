@@ -18,8 +18,8 @@ class CommentSubscriber implements EventSubscriberInterface
     public function onCommentChanged(CommentChangedEvent $event)
     {
         $comment = $event->getComment();
-        $action  = $event->getAction();
-        $entity  = $comment->getRelatedObject();
+        $action = $event->getAction();
+        $entity = $comment->getRelatedObject();
 
         if ($action == 'remove') {
             $entity->decreaseCommentsCount(1);

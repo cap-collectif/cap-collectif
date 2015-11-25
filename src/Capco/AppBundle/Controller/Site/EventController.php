@@ -32,7 +32,7 @@ class EventController extends Controller
      */
     public function indexAction(Request $request, $theme = null, $project = null, $term = null)
     {
-        $em         = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_event');
 
         $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, [
@@ -60,7 +60,7 @@ class EventController extends Controller
             ]);
         }
 
-        $groupedEvents    = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(false, $theme, $project, $term);
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(false, $theme, $project, $term);
         $archivedEventsNb = $this->get('capco.event.resolver')->countEvents(true, $theme, $project, $term);
 
         return [
@@ -86,7 +86,7 @@ class EventController extends Controller
      */
     public function showArchivedAction(Request $request, $theme = null, $project = null, $term = null)
     {
-        $em         = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_event_archived');
 
         $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, [
@@ -139,9 +139,9 @@ class EventController extends Controller
             return ['event' => $event];
         }
 
-        $user         = $this->getUser();
+        $user = $this->getUser();
         $registration = $eventHelper->findUserRegistrationOrCreate($event, $user);
-        $form         = $this->createForm(new EventRegistrationType($user, $registration->isConfirmed()), $registration);
+        $form = $this->createForm(new EventRegistrationType($user, $registration->isConfirmed()), $registration);
 
         if ($request->getMethod() == 'POST') {
             $registration->setIpAddress($request->getClientIp());

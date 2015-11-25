@@ -160,12 +160,12 @@ class Opinion implements SelfLinkableInterface, VotableInterface
 
     public function __construct()
     {
-        $this->votes       = new ArrayCollection();
-        $this->Reports     = new ArrayCollection();
-        $this->arguments   = new ArrayCollection();
-        $this->Sources     = new ArrayCollection();
-        $this->versions    = new ArrayCollection();
-        $this->appendices  = new ArrayCollection();
+        $this->votes = new ArrayCollection();
+        $this->Reports = new ArrayCollection();
+        $this->arguments = new ArrayCollection();
+        $this->Sources = new ArrayCollection();
+        $this->versions = new ArrayCollection();
+        $this->appendices = new ArrayCollection();
         $this->connections = new ArrayCollection();
 
         $this->updatedAt = new \Datetime();

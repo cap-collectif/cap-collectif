@@ -43,7 +43,7 @@ class IdeasController extends FOSRestController
     public function getIdeaCommentsAction(Idea $idea, ParamFetcherInterface $paramFetcher)
     {
         $offset = $paramFetcher->get('offset');
-        $limit  = $paramFetcher->get('limit');
+        $limit = $paramFetcher->get('limit');
         $filter = $paramFetcher->get('filter');
 
         $paginator = $this->getDoctrine()->getManager()
@@ -85,7 +85,7 @@ class IdeasController extends FOSRestController
     public function getIdeasAction(ParamFetcherInterface $paramFetcher)
     {
         $from = $paramFetcher->get('from');
-        $to   = $paramFetcher->get('to');
+        $to = $paramFetcher->get('to');
 
         $ideas = $this->getDoctrine()->getManager()
                     ->getRepository('CapcoAppBundle:Idea')
@@ -182,11 +182,11 @@ class IdeasController extends FOSRestController
 
         foreach ($anonymousVoters as $v) {
             $v['isMember'] = false;
-            $voters[]      = $v;
+            $voters[] = $v;
         }
         foreach ($memberVoters as $v) {
             $v['isMember'] = true;
-            $voters[]      = $v;
+            $voters[] = $v;
         }
 
         return [

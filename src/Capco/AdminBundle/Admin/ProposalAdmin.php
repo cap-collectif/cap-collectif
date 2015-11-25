@@ -22,7 +22,7 @@ class ProposalAdmin extends Admin
 
     public function getPersistentParameters()
     {
-        $subject   = $this->getSubject();
+        $subject = $this->getSubject();
         $projectId = null;
 
         if ($subject && $subject->getId()) {

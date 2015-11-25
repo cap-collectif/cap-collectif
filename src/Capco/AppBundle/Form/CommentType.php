@@ -15,7 +15,7 @@ class CommentType extends AbstractType
 
     public function __construct(User $user = null, $action = 'create')
     {
-        $this->user   = $user;
+        $this->user = $user;
         $this->action = $action;
     }
 

@@ -38,8 +38,8 @@ class Manager
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory, $prefix)
     {
         $this->toggleManager = $toggleManager;
-        $this->context       = $contextFactory->createContext();
-        $this->prefix        = $prefix;
+        $this->context = $contextFactory->createContext();
+        $this->prefix = $prefix;
     }
 
     protected function getPrefixedName($name)

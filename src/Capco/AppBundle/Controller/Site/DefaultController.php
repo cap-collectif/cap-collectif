@@ -20,7 +20,7 @@ class DefaultController extends Controller
      */
     public function contactAction(Request $request)
     {
-        $form       = $this->createForm(new ContactType());
+        $form = $this->createForm(new ContactType());
         $translator = $this->get('translator');
 
         if ($request->getMethod() == 'POST') {

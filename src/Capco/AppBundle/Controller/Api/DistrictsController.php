@@ -29,7 +29,7 @@ class DistrictsController extends FOSRestController
     public function getDistrictsAction()
     {
         $districtRepository = $this->getDoctrine()->getRepository('CapcoAppBundle:District');
-        $districts          = $districtRepository->findAll();
+        $districts = $districtRepository->findAll();
 
         return $districts;
     }

@@ -40,7 +40,7 @@ class MediaController extends BaseController
         }
 
         $provider = $this->getProvider($media);
-        $file     = $provider->getReferenceFile($media);
+        $file = $provider->getReferenceFile($media);
 
         // load the file content from the abstracted file system
         $tmpFile = sprintf('%s.%s', tempnam(sys_get_temp_dir(), 'sonata_media_liip_imagine'), $media->getExtension());

@@ -26,17 +26,17 @@ class ProfileController extends BaseController
         }
 
         $doctrine = $this->getDoctrine();
-        $user     = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $projects                     = $doctrine->getRepository('CapcoAppBundle:Project')->getByUser($user);
+        $projects = $doctrine->getRepository('CapcoAppBundle:Project')->getByUser($user);
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
-        $versions                     = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
-        $arguments                    = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
-        $ideas                        = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
-        $proposals                    = $doctrine->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
-        $sources                      = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
-        $comments                     = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
-        $votes                        = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
+        $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
+        $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
+        $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
+        $proposals = $doctrine->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
+        $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
+        $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
+        $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
         return [
             'user'                         => $user,
@@ -59,15 +59,15 @@ class ProfileController extends BaseController
      */
     public function showUserAction(User $user)
     {
-        $doctrine                     = $this->getDoctrine();
+        $doctrine = $this->getDoctrine();
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
-        $versions                     = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
-        $arguments                    = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
-        $ideas                        = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
-        $proposals                    = $doctrine->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
-        $sources                      = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
-        $comments                     = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
-        $votes                        = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
+        $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
+        $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
+        $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
+        $proposals = $doctrine->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
+        $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
+        $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
+        $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
 
         return [
             'user'                         => $user,

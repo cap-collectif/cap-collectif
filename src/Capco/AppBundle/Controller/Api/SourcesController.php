@@ -28,7 +28,7 @@ class SourcesController extends FOSRestController
             throw new BadRequestHttpException('Uncontributable source.');
         }
 
-        $user         = $this->getUser();
+        $user = $this->getUser();
         $previousVote = $this->getDoctrine()->getManager()
                     ->getRepository('CapcoAppBundle:SourceVote')
                     ->findOneBy(['user' => $user, 'source' => $source]);

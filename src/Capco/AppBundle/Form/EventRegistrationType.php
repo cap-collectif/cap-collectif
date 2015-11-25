@@ -14,7 +14,7 @@ class EventRegistrationType extends AbstractType
 
     public function __construct(User $user = null, $registered)
     {
-        $this->user       = $user;
+        $this->user = $user;
         $this->registered = $registered;
     }
 

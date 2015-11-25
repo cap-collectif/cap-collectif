@@ -15,15 +15,15 @@ class LogManager
 
     public function __construct(TranslatorInterface $translator, UserManager $userManager, EntityManager $em)
     {
-        $this->translator  = $translator;
+        $this->translator = $translator;
         $this->userManager = $userManager;
-        $this->em          = $em;
+        $this->em = $em;
     }
 
     public function getSentencesForLog(LogEntry $log)
     {
         $sentences = [];
-        $username  = $log->getUsername()
+        $username = $log->getUsername()
             ? $this->userManager->findOneBy(['slug' => $log->getUsername()])
             : null
         ;

@@ -21,7 +21,7 @@ class StepAdmin extends Admin
         $subClass = $this->getRequest()->query->get('subclass');
         // Workaround for proposals autocompletion
         $subClass = $subClass ? $subClass : 'selection_step';
-        $object   = $this->getModelManager()->getModelInstance($this->getSubClass($subClass));
+        $object = $this->getModelManager()->getModelInstance($this->getSubClass($subClass));
         foreach ($this->getExtensions() as $extension) {
             $extension->alterNewInstance($this, $object);
         }
@@ -31,7 +31,7 @@ class StepAdmin extends Admin
 
     public function getPersistentParameters()
     {
-        $subject   = $this->getSubject();
+        $subject = $this->getSubject();
         $projectId = null;
 
         if ($subject && $subject->getProject()) {
@@ -212,7 +212,7 @@ class StepAdmin extends Admin
     private function createQueryForProposalForms()
     {
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
-        $qb      = $this->getConfigurationPool()
+        $qb = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:ProposalForm')

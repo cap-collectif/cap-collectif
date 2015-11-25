@@ -13,7 +13,7 @@ class MenuLinkExtension extends \Twig_Extension
 
     public function __construct(Router $router, ValidatorInterface $validator)
     {
-        $this->router    = $router;
+        $this->router = $router;
         $this->validator = $validator;
     }
 
@@ -41,7 +41,7 @@ class MenuLinkExtension extends \Twig_Extension
         }
 
         $constraint = new Url();
-        $errorList  = $this->validator->validate(
+        $errorList = $this->validator->validate(
             $url,
             $constraint
         );

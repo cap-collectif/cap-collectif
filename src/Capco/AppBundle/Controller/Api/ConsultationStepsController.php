@@ -38,7 +38,7 @@ class ConsultationStepsController extends FOSRestController
             throw new BadRequestHttpException($this->get('translator')->trans('project.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $user    = $this->getUser();
+        $user = $this->getUser();
         $opinion = (new Opinion())
             ->setAuthor($user)
             ->setStep($step)
@@ -48,7 +48,7 @@ class ConsultationStepsController extends FOSRestController
         $form->handleRequest($request);
 
         $consultationStepType = $step->getConsultationStepType();
-        $link                 = $opinion->getLink();
+        $link = $opinion->getLink();
 
         $availablesOpinionTypes = $link
             ? $link->getOpinionType()->getAvailableOpinionTypesToCreateLink()

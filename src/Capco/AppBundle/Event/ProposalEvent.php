@@ -13,7 +13,7 @@ class ProposalEvent extends Event
     public function __construct(Proposal $proposal, $action)
     {
         $this->proposal = $proposal;
-        $this->action   = $action;
+        $this->action = $action;
     }
 
     public function getProposal()

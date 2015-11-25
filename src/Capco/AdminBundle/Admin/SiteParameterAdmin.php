@@ -27,7 +27,7 @@ class SiteParameterAdmin extends Admin
         ;
 
         $subject = $this->getSubject();
-        $types   = SiteParameter::$types;
+        $types = SiteParameter::$types;
 
         if ($subject->getType() == $types['simple_text']) {
             $formMapper->add('value', 'text', [

@@ -38,11 +38,11 @@ class CreateAccountsFromEmailsCommand extends ContainerAwareCommand
             $contents = $file->getContents();
         }
 
-        $userManager     = $this->getContainer()->get('fos_user.user_manager');
+        $userManager = $this->getContainer()->get('fos_user.user_manager');
         $passwordEncoder = $this->getContainer()->get('security.password_encoder');
 
         $emails = explode(' ', $contents);
-        $dump   = '';
+        $dump = '';
         foreach ($emails as $key => $email) {
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
             $output->writeln('Creating account for '.$email);

@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OpinionVersionVote extends AbstractVote
 {
-    const VOTE_OK     = 1;
-    const VOTE_NOK    = -1;
+    const VOTE_OK = 1;
+    const VOTE_NOK = -1;
     const VOTE_MITIGE = 0;
 
     public static $voteTypes = [

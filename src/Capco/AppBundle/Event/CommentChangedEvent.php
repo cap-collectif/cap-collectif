@@ -13,7 +13,7 @@ class CommentChangedEvent extends Event
     public function __construct(Comment $comment, $action)
     {
         $this->comment = $comment;
-        $this->action  = $action;
+        $this->action = $action;
     }
 
     public function getComment()

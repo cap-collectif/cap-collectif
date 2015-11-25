@@ -68,4 +68,4 @@ def runner():
 
 @task
 def csfixer():
-    local('php-cs-fixer fix . --config=sf23 --fixers=short_array_syntax,align_double_arrow -v', capture=False)
+    local('php-cs-fixer fix . --config=sf23 --fixers=short_array_syntax,align_double_arrow,unalign_equals -v', capture=False)

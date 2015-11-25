@@ -16,7 +16,7 @@ class SearchResolver
 
     public function __construct(Index $index, ElasticaToModelTransformerInterface $transformer)
     {
-        $this->index       = $index;
+        $this->index = $index;
         $this->transformer = $transformer;
     }
 
@@ -24,8 +24,8 @@ class SearchResolver
     public function searchAll($size, $page, $term, $type = 'all', $sort = 'score')
     {
         $results = [];
-        $count   = 0;
-        $from    = ($page - 1) * $size;
+        $count = 0;
+        $from = ($page - 1) * $size;
 
         if ($term) {
             $termQuery = $this->getTermQuery($term);
@@ -46,7 +46,7 @@ class SearchResolver
             $query->setSize($size);
 
             $resultSet = $this->index->search($query);
-            $count     = $resultSet->getTotalHits();
+            $count = $resultSet->getTotalHits();
 
             $results = $this->transformer->hybridTransform($resultSet->getResults());
         }

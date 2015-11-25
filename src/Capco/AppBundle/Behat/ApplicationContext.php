@@ -69,7 +69,7 @@ class ApplicationContext extends UserContext
      */
     public static function notifiyEnd(AfterSuiteScope $suiteScope)
     {
-        $suiteName  = $suiteScope->getSuite()->getName();
+        $suiteName = $suiteScope->getSuite()->getName();
         $resultCode = $suiteScope->getTestResult()->getResultCode();
         if ($notifier = NotifierFactory::create()) {
             $notification = new Notification();
@@ -193,7 +193,7 @@ class ApplicationContext extends UserContext
      */
     public function iTryToDownload($path)
     {
-        $url           = $this->getSession()->getCurrentUrl().$path;
+        $url = $this->getSession()->getCurrentUrl().$path;
         $this->headers = get_headers($url);
     }
 
@@ -225,7 +225,7 @@ class ApplicationContext extends UserContext
     public function elementShouldHaveClass($selector, $class)
     {
         $session = $this->getSession();
-        $page    = $session->getPage();
+        $page = $session->getPage();
         $element = $page->find('css', $selector);
         if (!$element) {
             throw new ElementNotFoundException($session, 'Element "'.$selector.'"');
@@ -241,7 +241,7 @@ class ApplicationContext extends UserContext
     public function elementShouldNotHaveClass($selector, $class)
     {
         $session = $this->getSession();
-        $page    = $session->getPage();
+        $page = $session->getPage();
         $element = $page->find('css', $selector);
         if (!$element) {
             throw new ElementNotFoundException($session, 'Element "'.$selector.'"');

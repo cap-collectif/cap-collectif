@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface
 {
-    const SORT_ORDER_CREATED_AT          = 0;
+    const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
     public static $sortOrder = [
@@ -236,16 +236,16 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     {
         parent::__construct();
 
-        $this->encoder         = $encoder;
-        $this->roles           = ['ROLE_USER'];
-        $this->opinions        = new ArrayCollection();
+        $this->encoder = $encoder;
+        $this->roles = ['ROLE_USER'];
+        $this->opinions = new ArrayCollection();
         $this->opinionVersions = new ArrayCollection();
-        $this->ideas           = new ArrayCollection();
-        $this->comments        = new ArrayCollection();
-        $this->arguments       = new ArrayCollection();
-        $this->votes           = new ArrayCollection();
-        $this->sources         = new ArrayCollection();
-        $this->proposals       = new ArrayCollection();
+        $this->ideas = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->arguments = new ArrayCollection();
+        $this->votes = new ArrayCollection();
+        $this->sources = new ArrayCollection();
+        $this->proposals = new ArrayCollection();
     }
 
     // for EncoderAwareInterface

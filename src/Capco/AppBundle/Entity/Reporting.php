@@ -15,10 +15,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Reporting
 {
-    const SIGNALEMENT_SEX       = 0;
-    const SIGNALEMENT_OFF       = 1;
-    const SIGNALEMENT_SPAM      = 2;
-    const SIGNALEMENT_ERROR     = 3;
+    const SIGNALEMENT_SEX = 0;
+    const SIGNALEMENT_OFF = 1;
+    const SIGNALEMENT_SPAM = 2;
+    const SIGNALEMENT_ERROR = 3;
     const SIGNALEMENT_OFF_TOPIC = 4;
 
     public static $statusesLabels = [

@@ -37,7 +37,7 @@ class LoadBaseDataCommand extends ContainerAwareCommand
     protected function loadFixtures(OutputInterface $output)
     {
         $command = $this->getApplication()->find('doctrine:fixtures:load');
-        $input   = new ArrayInput([
+        $input = new ArrayInput([
             'command'    => 'doctrine:fixtures:load',
             '--fixtures' => 'src/Capco/AppBundle/DataDemo/ORM',
         ]);
@@ -48,7 +48,7 @@ class LoadBaseDataCommand extends ContainerAwareCommand
     protected function loadToggles(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:reset-feature-flags');
-        $input   = new ArrayInput([
+        $input = new ArrayInput([
             '--force' => true,
             '',
         ]);

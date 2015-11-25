@@ -65,7 +65,7 @@ class Category
 
     public function __construct()
     {
-        $this->Sources   = new ArrayCollection();
+        $this->Sources = new ArrayCollection();
         $this->updatedAt = new \Datetime();
     }
 

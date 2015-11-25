@@ -20,7 +20,7 @@ class MenuItemAdmin extends Admin
     public function createQuery($context = 'list')
     {
         $resolver = $this->getConfigurationPool()->getContainer()->get('capco.menu_item.resolver');
-        $em       = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
 
         $all = $em->getRepository('CapcoAppBundle:MenuItem')->findAll();
 

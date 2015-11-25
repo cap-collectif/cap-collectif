@@ -71,21 +71,21 @@ class ReinitCommand extends ContainerAwareCommand
     protected function createDatabase(OutputInterface $output)
     {
         $command = $this->getApplication()->find('doctrine:database:create');
-        $input   = new ArrayInput(['']);
+        $input = new ArrayInput(['']);
         $command->run($input, $output);
     }
 
     protected function createSchema(OutputInterface $output)
     {
         $command = $this->getApplication()->find('doctrine:schema:create');
-        $input   = new ArrayInput(['']);
+        $input = new ArrayInput(['']);
         $command->run($input, $output);
     }
 
     protected function dropDatabase(OutputInterface $output)
     {
         $command = $this->getApplication()->find('doctrine:database:drop');
-        $input   = new ArrayInput([
+        $input = new ArrayInput([
             '--force' => true,
             '',
         ]);
@@ -101,7 +101,7 @@ class ReinitCommand extends ContainerAwareCommand
     protected function loadFixtures(OutputInterface $output)
     {
         $command = $this->getApplication()->find('doctrine:fixtures:load');
-        $input   = new ArrayInput(['']);
+        $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
     }
@@ -109,7 +109,7 @@ class ReinitCommand extends ContainerAwareCommand
     protected function loadToggles(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:reset-feature-flags');
-        $input   = new ArrayInput([
+        $input = new ArrayInput([
             '--force' => true,
             '',
         ]);
@@ -120,7 +120,7 @@ class ReinitCommand extends ContainerAwareCommand
     protected function recalculateCounters(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:recalculate-counters');
-        $input   = new ArrayInput(['']);
+        $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
     }
@@ -128,7 +128,7 @@ class ReinitCommand extends ContainerAwareCommand
     protected function recalculateProjectsCounters(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:recalculate-projects-counters');
-        $input   = new ArrayInput(['']);
+        $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
     }
@@ -136,7 +136,7 @@ class ReinitCommand extends ContainerAwareCommand
     protected function recalculateRankings(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:recalculate-rankings');
-        $input   = new ArrayInput(['']);
+        $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
     }
@@ -144,17 +144,17 @@ class ReinitCommand extends ContainerAwareCommand
     protected function updateSyntheses(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:syntheses:update');
-        $input   = new ArrayInput(['']);
+        $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
 
         $command = $this->getApplication()->find('capco:syntheses:fix-urls');
-        $input   = new ArrayInput(['']);
+        $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
 
         $command = $this->getApplication()->find('capco:syntheses:recalculate-counters');
-        $input   = new ArrayInput(['']);
+        $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
     }
@@ -162,7 +162,7 @@ class ReinitCommand extends ContainerAwareCommand
     protected function populateElastica(OutputInterface $output)
     {
         $command = $this->getApplication()->find('fos:elastica:populate');
-        $input   = new ArrayInput(['']);
+        $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
     }

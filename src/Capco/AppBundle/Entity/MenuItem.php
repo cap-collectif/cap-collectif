@@ -130,7 +130,7 @@ class MenuItem
      */
     public function __construct()
     {
-        $this->updatedAt          = new \Datetime();
+        $this->updatedAt = new \Datetime();
         $this->associatedFeatures = null;
     }
 

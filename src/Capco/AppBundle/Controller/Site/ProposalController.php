@@ -22,7 +22,7 @@ class ProposalController extends Controller
      */
     public function showProposalAction(Project $project, CollectStep $currentStep, Proposal $proposal)
     {
-        $em         = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
         $proposalJson = $serializer->serialize([

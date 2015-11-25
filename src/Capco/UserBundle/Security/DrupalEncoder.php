@@ -56,7 +56,7 @@ function drupal_random_bytes($count)
     }
     }
     $output = substr($bytes, 0, $count);
-    $bytes  = substr($bytes, $count);
+    $bytes = substr($bytes, $count);
 
     return $output;
 }
@@ -122,7 +122,7 @@ function _password_itoa64()
 function _password_base64_encode($input, $count)
 {
     $output = '';
-    $i      = 0;
+    $i = 0;
     $itoa64 = _password_itoa64();
     do {
         $value = ord($input[$i++]);
@@ -250,7 +250,7 @@ function _password_crypt($algo, $password, $setting)
         $hash = hash($algo, $hash.$password, true);
     } while (--$count);
 
-    $len    = strlen($hash);
+    $len = strlen($hash);
     $output = $setting._password_base64_encode($hash, $len);
   // _password_base64_encode() of a 16 byte MD5 will always be 22 characters.
   // _password_base64_encode() of a 64 byte sha512 will always be 86 characters.
@@ -304,7 +304,7 @@ class DrupalEncoder implements PasswordEncoderInterface
             // This may be an updated password from user_update_7000(). Such hashes
           // have 'U' added as the first character and need an extra md5().
           $stored_hash = substr($encoded, 1);
-            $password  = md5($password);
+            $password = md5($password);
         } else {
             $stored_hash = $encoded;
         }

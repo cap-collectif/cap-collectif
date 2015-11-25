@@ -24,8 +24,8 @@ class Argument implements VotableInterface
     use VotableOkTrait;
 
     const TYPE_AGAINST = 0;
-    const TYPE_FOR     = 1;
-    const TYPE_SIMPLE  = 2;
+    const TYPE_FOR = 1;
+    const TYPE_SIMPLE = 2;
 
     public static $argumentTypes = [
         self::TYPE_FOR     => 'yes',
@@ -137,8 +137,8 @@ class Argument implements VotableInterface
 
     public function __construct()
     {
-        $this->votes     = new ArrayCollection();
-        $this->Reports   = new ArrayCollection();
+        $this->votes = new ArrayCollection();
+        $this->Reports = new ArrayCollection();
         $this->updatedAt = new \DateTime();
     }
 

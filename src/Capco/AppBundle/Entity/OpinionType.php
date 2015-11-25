@@ -27,8 +27,8 @@ class OpinionType
     ];
 
     const VOTE_WIDGET_DISABLED = 0;
-    const VOTE_WIDGET_OK       = 1;
-    const VOTE_WIDGET_BOTH     = 2;
+    const VOTE_WIDGET_OK = 1;
+    const VOTE_WIDGET_BOTH = 2;
 
     public static $voteWidgetLabels = [
         self::VOTE_WIDGET_DISABLED => 'opinion_type.widget_type.disabled',
@@ -37,8 +37,8 @@ class OpinionType
     ];
 
     const COMMENT_SYSTEM_DISABLED = 0;
-    const COMMENT_SYSTEM_OK       = 1;
-    const COMMENT_SYSTEM_BOTH     = 2;
+    const COMMENT_SYSTEM_OK = 1;
+    const COMMENT_SYSTEM_BOTH = 2;
 
     public static $commentSystemLabels = [
         self::COMMENT_SYSTEM_DISABLED => 'opinion_type.comment_system.disabled',
@@ -230,10 +230,10 @@ class OpinionType
     public function __construct()
     {
         $this->voteWidgetType = self::VOTE_WIDGET_BOTH;
-        $this->Opinions       = new ArrayCollection();
-        $this->updatedAt      = new \Datetime();
-        $this->appendixTypes  = new ArrayCollection();
-        $this->children       = new ArrayCollection();
+        $this->Opinions = new ArrayCollection();
+        $this->updatedAt = new \Datetime();
+        $this->appendixTypes = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function __toString()
@@ -736,10 +736,10 @@ class OpinionType
         $data = [];
         foreach ($this->getAvailableOpinionTypesToCreateLink() as $opinionType) {
             if ($opinionType->getIsEnabled()) {
-                $opinionTypeViewModel        = new OpinionTypeViewModel();
-                $opinionTypeViewModel->id    = $opinionType->getId();
+                $opinionTypeViewModel = new OpinionTypeViewModel();
+                $opinionTypeViewModel->id = $opinionType->getId();
                 $opinionTypeViewModel->label = $opinionType->getTitle();
-                $data[]                      = $opinionTypeViewModel;
+                $data[] = $opinionTypeViewModel;
             }
         }
 

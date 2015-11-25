@@ -13,7 +13,7 @@ class RecentContributionsResolver
 
     public function __construct(EntityManager $em, Manager $toggleManager)
     {
-        $this->em            = $em;
+        $this->em = $em;
         $this->toggleManager = $toggleManager;
     }
 
@@ -50,7 +50,7 @@ class RecentContributionsResolver
     {
         switch ($type) {
             case 'argument':
-                $result          = $this->em->getRepository('CapcoAppBundle:Argument')->getArrayById($id);
+                $result = $this->em->getRepository('CapcoAppBundle:Argument')->getArrayById($id);
                 $result['title'] = 'Argument';
                 break;
             case 'opinion':
@@ -66,7 +66,7 @@ class RecentContributionsResolver
                 $result = $this->em->getRepository('CapcoAppBundle:Idea')->getArrayById($id);
                 break;
             case 'comment':
-                $result          = $this->em->getRepository('CapcoAppBundle:Comment')->getArrayById($id);
+                $result = $this->em->getRepository('CapcoAppBundle:Comment')->getArrayById($id);
                 $result['title'] = 'Commentaire';
                 break;
             default:
@@ -102,7 +102,7 @@ class RecentContributionsResolver
         ;
         foreach ($arguments as $key => $argument) {
             $arguments[$key]['title'] = 'Argument';
-            $arguments[$key]['type']  = 'argument';
+            $arguments[$key]['type'] = 'argument';
         }
 
         $sources = $this->em
@@ -127,7 +127,7 @@ class RecentContributionsResolver
         ;
         foreach ($comments as $key => $comment) {
             $comments[$key]['title'] = 'Commentaire';
-            $comments[$key]['type']  = 'comment';
+            $comments[$key]['type'] = 'comment';
         }
 
         $contributions = array_merge($opinions, $arguments, $versions, $sources, $ideas, $comments);

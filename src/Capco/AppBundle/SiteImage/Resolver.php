@@ -14,8 +14,8 @@ class Resolver
     public function __construct(SiteImageRepository $repository, LoggerInterface $logger)
     {
         $this->repository = $repository;
-        $this->logger     = $logger;
-        $this->images     = $this->repository->getValuesIfEnabled();
+        $this->logger = $logger;
+        $this->images = $this->repository->getValuesIfEnabled();
     }
 
     public function getMedia($key)

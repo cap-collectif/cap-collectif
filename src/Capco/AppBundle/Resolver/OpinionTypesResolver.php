@@ -18,8 +18,8 @@ class OpinionTypesResolver
     public function __construct(OpinionTypeRepository $opinionTypeRepo, OpinionRepository $opinionRepo, Router $router)
     {
         $this->opinionTypeRepo = $opinionTypeRepo;
-        $this->opinionRepo     = $opinionRepo;
-        $this->router          = $router;
+        $this->opinionRepo = $opinionRepo;
+        $this->router = $router;
         $this->opinionTypeRepo->setChildrenIndex('children');
     }
 
@@ -123,7 +123,7 @@ class OpinionTypesResolver
             return [];
         }
 
-        $allowed      = false;
+        $allowed = false;
         $opinionTypes = $this->getAllForConsultationStepType($consultationStepType);
         foreach ($opinionTypes as $ot) {
             if ($ot->getId() === $opinionType->getId()) {

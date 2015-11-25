@@ -9,7 +9,7 @@ class ReportingController extends Controller
 {
     public function disableAction()
     {
-        $id     = $this->get('request')->get($this->admin->getIdParameter());
+        $id = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {
@@ -38,7 +38,7 @@ class ReportingController extends Controller
 
     public function trashAction()
     {
-        $id     = $this->get('request')->get($this->admin->getIdParameter());
+        $id = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {
@@ -67,7 +67,7 @@ class ReportingController extends Controller
 
     public function archiveAction()
     {
-        $id     = $this->get('request')->get($this->admin->getIdParameter());
+        $id = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {

@@ -243,8 +243,8 @@ class IdeaAdmin extends Admin
         $media = $object->getMedia();
         if ($media != null) {
             $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
-            $format   = $provider->getFormatName($media, 'form');
-            $url      = $provider->generatePublicUrl($media, $format);
+            $format = $provider->getFormatName($media, 'form');
+            $url = $provider->generatePublicUrl($media, $format);
 
             return new Metadata($object->getTitle(), $object->getBody(), $url);
         }

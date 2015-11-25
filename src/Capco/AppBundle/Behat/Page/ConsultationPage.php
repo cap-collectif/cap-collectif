@@ -24,8 +24,8 @@ class ConsultationPage extends Page
 
     protected function verifyUrl(array $urlParameters = [])
     {
-        $expectedUrl    = $this->getUrl($urlParameters);
-        $currentUrl     = $this->getSession()->getCurrentUrl();
+        $expectedUrl = $this->getUrl($urlParameters);
+        $currentUrl = $this->getSession()->getCurrentUrl();
         $opinionTypeUrl = $expectedUrl.'/opinions/';
 
         if ($currentUrl !== $expectedUrl) {

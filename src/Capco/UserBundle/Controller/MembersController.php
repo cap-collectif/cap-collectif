@@ -29,7 +29,7 @@ class MembersController extends Controller
     public function indexAction(Request $request, $page, $userType = null, $sort = null)
     {
         $currentUrl = $this->generateUrl('app_members');
-        $em         = $this->get('doctrine.orm.entity_manager');
+        $em = $this->get('doctrine.orm.entity_manager');
 
         $form = $this->createForm(new MemberSearchType($this->get('capco.toggle.manager')), null, [
             'action' => $currentUrl,
@@ -57,7 +57,7 @@ class MembersController extends Controller
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('members.pagination.size');
 
-        $sort    = $sort === null ? 'activity' : $sort;
+        $sort = $sort === null ? 'activity' : $sort;
         $members = $em->getRepository('CapcoUserBundle:User')->getSearchResults($pagination, $page, $sort, $userType);
 
         //Avoid division by 0 in nbPage calculation

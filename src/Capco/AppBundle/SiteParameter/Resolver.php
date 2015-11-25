@@ -15,7 +15,7 @@ class Resolver
     public function __construct(SiteParameterRepository $repository, LoggerInterface $logger)
     {
         $this->repository = $repository;
-        $this->logger     = $logger;
+        $this->logger = $logger;
         $this->parameters = $this->repository->getValuesIfEnabled();
     }
 

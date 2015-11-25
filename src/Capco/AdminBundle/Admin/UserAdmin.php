@@ -32,8 +32,8 @@ class UserAdmin extends BaseAdmin
     {
         $this->formOptions['data_class'] = $this->getClass();
 
-        $options                       = $this->formOptions;
-        $options['validation_groups']  = 'Default';
+        $options = $this->formOptions;
+        $options['validation_groups'] = 'Default';
         $options['translation_domain'] = 'SonataUserBundle';
 
         $formBuilder = $this->getFormContractor()->getFormBuilder($this->getUniqid(), $options);
@@ -149,7 +149,7 @@ class UserAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $currentUser = $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
-        $subject     = $this->getSubject();
+        $subject = $this->getSubject();
 
         // define group zoning
         $formMapper
@@ -291,8 +291,8 @@ class UserAdmin extends BaseAdmin
         $media = $object->getMedia();
         if ($media != null) {
             $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
-            $format   = $provider->getFormatName($media, 'form');
-            $url      = $provider->generatePublicUrl($media, $format);
+            $format = $provider->getFormatName($media, 'form');
+            $url = $provider->generatePublicUrl($media, $format);
 
             return new Metadata($object->getUsername(), null, $url);
         }

@@ -110,9 +110,9 @@ class OpinionVersion implements VotableInterface
     {
         $this->updatedAt = new \DateTime();
         $this->arguments = new ArrayCollection();
-        $this->sources   = new ArrayCollection();
-        $this->votes     = new ArrayCollection();
-        $this->reports   = new ArrayCollection();
+        $this->sources = new ArrayCollection();
+        $this->votes = new ArrayCollection();
+        $this->reports = new ArrayCollection();
     }
 
     public function getReports()

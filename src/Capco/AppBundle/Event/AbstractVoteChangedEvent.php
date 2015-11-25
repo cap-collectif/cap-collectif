@@ -12,7 +12,7 @@ class AbstractVoteChangedEvent extends Event
 
     public function __construct(AbstractVote $vote, $action)
     {
-        $this->vote   = $vote;
+        $this->vote = $vote;
         $this->action = $action;
     }
 

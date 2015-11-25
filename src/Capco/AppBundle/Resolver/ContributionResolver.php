@@ -18,17 +18,17 @@ class ContributionResolver
     public function getProjectContributorsOrdered(Project $project, $pagination = 16, $page = 1)
     {
         // Fetch contributors
-        $sourcesContributors   = $this->repository->findProjectSourceContributorsWithCount($project);
+        $sourcesContributors = $this->repository->findProjectSourceContributorsWithCount($project);
         $argumentsContributors = $this->repository->findProjectArgumentContributorsWithCount($project);
-        $opinionsContributors  = $this->repository->findProjectOpinionContributorsWithCount($project);
+        $opinionsContributors = $this->repository->findProjectOpinionContributorsWithCount($project);
         $proposalsContributors = $this->repository->findProjectProposalContributorsWithCount($project);
-        $versionsContributors  = $this->repository->findProjectVersionContributorsWithCount($project);
+        $versionsContributors = $this->repository->findProjectVersionContributorsWithCount($project);
 
         // Fetch voters
-        $opinionsVoters  = $this->repository->findProjectOpinionVotersWithCount($project);
-        $versionsVoters  = $this->repository->findProjectVersionVotersWithCount($project);
+        $opinionsVoters = $this->repository->findProjectOpinionVotersWithCount($project);
+        $versionsVoters = $this->repository->findProjectVersionVotersWithCount($project);
         $argumentsVoters = $this->repository->findProjectArgumentVotersWithCount($project);
-        $sourcesVoters   = $this->repository->findProjectSourceVotersWithCount($project);
+        $sourcesVoters = $this->repository->findProjectSourceVotersWithCount($project);
 
         $contributors = [];
 

@@ -27,7 +27,7 @@ class AbstractVoteRepository extends EntityRepository
             ;
         }
 
-        $votes  = $qb->getQuery()->getScalarResult();
+        $votes = $qb->getQuery()->getScalarResult();
         $result = [];
         $counts = [
             'date' => '',
@@ -40,7 +40,7 @@ class AbstractVoteRepository extends EntityRepository
             if (isset($counts[$vote['value']])) {
                 ++$counts[$vote['value']];
                 $counts['date'] = (new \DateTime($vote['updatedAt']))->getTimestamp();
-                $result[]       = array_values($counts);
+                $result[] = array_values($counts);
             }
         }
 

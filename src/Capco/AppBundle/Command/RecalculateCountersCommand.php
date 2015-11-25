@@ -19,7 +19,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getApplication()->getKernel()->getContainer();
-        $em        = $container->get('doctrine')->getManager();
+        $em = $container->get('doctrine')->getManager();
 
         // ********************************* User counters *************************************************
 

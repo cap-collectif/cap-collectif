@@ -18,8 +18,8 @@ class OpinionTypeAdmin extends Admin
 
     public function getPersistentParameters()
     {
-        $subject                  = $this->getSubject();
-        $consultationStepTypeId   = null;
+        $subject = $this->getSubject();
+        $consultationStepTypeId = null;
         $consultationStepTypeName = null;
 
         if ($this->hasParentFieldDescription() && $this->getParentFieldDescription()->getAdmin()->getSubject()) {

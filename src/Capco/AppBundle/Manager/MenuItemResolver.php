@@ -13,7 +13,7 @@ class MenuItemResolver
     public function __construct(MenuItemRepository $repository, Manager $toggleManager)
     {
         $this->repository = $repository;
-        $this->manager    = $toggleManager;
+        $this->manager = $toggleManager;
     }
 
     /**
@@ -24,9 +24,9 @@ class MenuItemResolver
     public function getEnabledMenuItemsWithChildren($menu)
     {
         if (null !== $menu) {
-            $parents  = $this->repository->getParentItems($menu);
+            $parents = $this->repository->getParentItems($menu);
             $children = $this->repository->getChildItems($menu);
-            $links    = [];
+            $links = [];
 
             foreach ($parents as $parent) {
                 $links[$parent->getId()] = [

@@ -43,7 +43,7 @@ class ArgumentsController extends FOSRestController
      */
     public function cgetOpinionArgumentsAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
     {
-        $type   = $paramFetcher->get('type');
+        $type = $paramFetcher->get('type');
         $filter = $paramFetcher->get('filter');
 
         $arguments = $this->getDoctrine()->getManager()
@@ -75,7 +75,7 @@ class ArgumentsController extends FOSRestController
      */
     public function cgetOpinionVersionArgumentsAction(OpinionVersion $version, ParamFetcherInterface $paramFetcher)
     {
-        $type   = $paramFetcher->get('type');
+        $type = $paramFetcher->get('type');
         $filter = $paramFetcher->get('filter');
 
         $arguments = $this->getDoctrine()->getManager()
@@ -100,7 +100,7 @@ class ArgumentsController extends FOSRestController
             throw new BadRequestHttpException('Uncontributable argument.');
         }
 
-        $user         = $this->getUser();
+        $user = $this->getUser();
         $previousVote = $this->getDoctrine()->getManager()
                     ->getRepository('CapcoAppBundle:ArgumentVote')
                     ->findOneBy(['user' => $user, 'argument' => $argument]);

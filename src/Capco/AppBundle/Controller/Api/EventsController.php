@@ -41,7 +41,7 @@ class EventsController extends FOSRestController
     public function getEventCommentsAction(Event $event, ParamFetcherInterface $paramFetcher)
     {
         $offset = $paramFetcher->get('offset');
-        $limit  = $paramFetcher->get('limit');
+        $limit = $paramFetcher->get('limit');
         $filter = $paramFetcher->get('filter');
 
         $paginator = $this->getDoctrine()->getManager()

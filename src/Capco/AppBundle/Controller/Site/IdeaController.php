@@ -80,7 +80,7 @@ class IdeaController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
-        $userCurrent  = $this->getUser()->getId();
+        $userCurrent = $this->getUser()->getId();
         $userPostIdea = $idea->getAuthor()->getId();
 
         if ($userCurrent !== $userPostIdea) {
@@ -129,7 +129,7 @@ class IdeaController extends Controller
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
 
-        $ideas            = $em->getRepository('CapcoAppBundle:Idea')->getTrashed($pagination, $page);
+        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getTrashed($pagination, $page);
         $publishedIdeasNb = $em->getRepository('CapcoAppBundle:Idea')->countPublished();
 
         //Avoid division by 0 in nbPage calculation
@@ -181,7 +181,7 @@ class IdeaController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('idea.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $userCurrent  = $this->getUser()->getId();
+        $userCurrent = $this->getUser()->getId();
         $userPostIdea = $idea->getAuthor()->getId();
 
         if ($userCurrent !== $userPostIdea) {
@@ -228,7 +228,7 @@ class IdeaController extends Controller
      */
     public function indexAction(Request $request, $page, $theme = null, $sort = 'last', $term = null)
     {
-        $em         = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_idea');
 
         $form = $this->createForm(new IdeaSearchType($this->get('capco.toggle.manager')), null, [
@@ -259,7 +259,7 @@ class IdeaController extends Controller
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
 
-        $ideas          = $em->getRepository('CapcoAppBundle:Idea')->getSearchResults($pagination, $page, $theme, $sort, $term);
+        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getSearchResults($pagination, $page, $theme, $sort, $term);
         $trashedIdeasNb = $em->getRepository('CapcoAppBundle:Idea')->countTrashed();
 
         //Avoid division by 0 in nbPage calculation
@@ -288,7 +288,7 @@ class IdeaController extends Controller
      */
     public function showAction(Request $request, $slug)
     {
-        $em         = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $translator = $this->get('translator');
 
         $idea = $em->getRepository('CapcoAppBundle:Idea')->getOneJoinUserReports($slug, $this->getUser());

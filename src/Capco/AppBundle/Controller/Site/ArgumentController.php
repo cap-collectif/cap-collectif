@@ -44,12 +44,12 @@ class ArgumentController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $opinion     = $argument->getLinkedOpinion();
+        $opinion = $argument->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project     = $currentStep->getProject();
+        $project = $currentStep->getProject();
 
-        $userCurrent      = $this->getUser()->getId();
+        $userCurrent = $this->getUser()->getId();
         $userPostArgument = $argument->getAuthor()->getId();
 
         if ($userCurrent !== $userPostArgument) {
@@ -112,12 +112,12 @@ class ArgumentController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
-        $opinion     = $argument->getLinkedOpinion();
+        $opinion = $argument->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
         $currentStep = $opinion->getStep();
-        $project     = $currentStep->getProject();
+        $project = $currentStep->getProject();
 
-        $userCurrent      = $this->getUser()->getId();
+        $userCurrent = $this->getUser()->getId();
         $userPostArgument = $argument->getAuthor()->getId();
 
         if ($userCurrent !== $userPostArgument) {

@@ -175,7 +175,7 @@ class OpinionController extends Controller
         // the key used to lookup the template
         $templateKey = 'edit';
 
-        $id     = $request->get($this->admin->getIdParameter());
+        $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {
@@ -325,7 +325,7 @@ class OpinionController extends Controller
 
     public function deleteAction($id, Request $request = null)
     {
-        $id     = $request->get($this->admin->getIdParameter());
+        $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {
@@ -415,7 +415,7 @@ class OpinionController extends Controller
         $consultationStepTypes = [];
 
         foreach ($opinionTypes as $root) {
-            $ct                           = $root->getConsultationStepType()->getTitle();
+            $ct = $root->getConsultationStepType()->getTitle();
             $consultationStepTypes[$ct][] = $otRepo
                 ->childrenHierarchy($root, false, [
                     'decorate'      => true,
@@ -451,7 +451,7 @@ class OpinionController extends Controller
                 ['opinionType' => $opinion->getOpinionType()],
                 ['position'    => 'ASC']
         );
-        $newAppendices     = new ArrayCollection();
+        $newAppendices = new ArrayCollection();
         $currentAppendices = $opinion->getAppendices();
         foreach ($appendixTypes as $otat) {
             $found = false;

@@ -14,7 +14,7 @@ class ProposalSerializationListener implements EventSubscriberInterface
 
     public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage)
     {
-        $this->router       = $router;
+        $this->router = $router;
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -32,9 +32,9 @@ class ProposalSerializationListener implements EventSubscriberInterface
     public function onPostProposal(ObjectEvent $event)
     {
         $proposal = $event->getObject();
-        $step     = $proposal->getStep();
-        $project  = $step->getProjectAbstractStep()->getProject();
-        $user     = $this->tokenStorage->getToken()->getUser();
+        $step = $proposal->getStep();
+        $project = $step->getProjectAbstractStep()->getProject();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $showUrl = $this->router->generate('app_project_show_proposal', [
             'proposalSlug' => $proposal->getSlug(),

@@ -20,7 +20,7 @@ class SectionAdmin extends Admin
     public function createQuery($context = 'list')
     {
         $manager = $this->getConfigurationPool()->getContainer()->get('capco.toggle.manager');
-        $em      = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
 
         $all = $em->getRepository('CapcoAppBundle:Section')->findAll();
 
@@ -117,7 +117,7 @@ class SectionAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $fields  = Section::$fieldsForType[$this->getSubject()->getType()];
+        $fields = Section::$fieldsForType[$this->getSubject()->getType()];
         $subject = $this->getSubject();
 
         if ($fields['title']) {

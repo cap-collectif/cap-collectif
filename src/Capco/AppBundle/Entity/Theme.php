@@ -148,10 +148,10 @@ class Theme
 
     public function __construct()
     {
-        $this->projects  = new ArrayCollection();
-        $this->ideas     = new ArrayCollection();
-        $this->events    = new ArrayCollection();
-        $this->posts     = new ArrayCollection();
+        $this->projects = new ArrayCollection();
+        $this->ideas = new ArrayCollection();
+        $this->events = new ArrayCollection();
+        $this->posts = new ArrayCollection();
         $this->proposals = new ArrayCollection();
         $this->updatedAt = new \Datetime();
     }
