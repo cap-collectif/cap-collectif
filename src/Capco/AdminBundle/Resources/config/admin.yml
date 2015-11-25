@@ -353,8 +353,8 @@ services:
       calls:
         - [ setTranslationDomain, [SonataAdminBundle]]
 
-  capco.status_changer:
-      class: Capco\AdminBundle\EventListener\StatusChanger
+  capco.proposal_events:
+      class: Capco\AdminBundle\EventListener\ProposalEventsListener
       calls:
         - [ setContainer, [ @service_container ] ]
       tags:

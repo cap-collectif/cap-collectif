@@ -679,6 +679,23 @@ proposal_status_change:
       </ul>
       <a href="%proposal_link%">Voir votre contribution sur le site</a>
 
+proposal_answer:
+  notification:
+    subject: Votre proposition a obtenu une réponse officielle sur %sitename%.
+    body: |
+      <p>Bonjour %user%,</p>
+      <p>Votre proposition a obtenu une réponse officielle sur %sitename%.</p>
+      <ul>
+        <li><strong>Proposition :</strong> %proposal%</li>
+        <li><strong>Réponse :</strong> %answer%</li>
+      </ul>
+      <p><strong>Publiée dans :</strong></p>
+      <ul>
+        <li><strong>Projet :</strong> %project%</li>
+        <li><strong>Étape :</strong> %step%</li>
+      </ul>
+      <a href="%proposal_link%">Voir votre contribution sur le site</a>
+
 reporting:
   create:
     title: Signaler un contenu
