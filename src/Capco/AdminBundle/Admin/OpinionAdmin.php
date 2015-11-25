@@ -308,6 +308,10 @@ class OpinionAdmin extends Admin
     {
         $opinionTypeId = $this->getPersistentParameter('opinion_type');
 
+        if (!$opinionTypeId) {
+            return null;
+        }
+
         $root = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine.orm.entity_manager')
