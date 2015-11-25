@@ -101,7 +101,7 @@ fos_elastica:
               index_options: offsets
           persistence:
             driver: orm
-            model: Capco\AppBundle\Entity\ConsultationStep
+            model: Capco\AppBundle\Entity\Steps\ConsultationStep
             provider: ~
             listener: ~
             finder: ~
@@ -373,7 +373,7 @@ fos_elastica:
             groups: [ProjectAbstractSteps]
           persistence:
             driver: orm
-            model: Capco\AppBundle\Entity\ProjectAbstractStep
+            model: Capco\AppBundle\Entity\Steps\ProjectAbstractStep
             provider: ~
             listener: ~
             finder: ~
