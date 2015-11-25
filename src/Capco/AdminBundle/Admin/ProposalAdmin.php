@@ -73,6 +73,7 @@ class ProposalAdmin extends Admin
                 'required'    => false,
                 'empty_value' => 'admin.fields.proposal.no_status',
                 'btn_add'     => false,
+                'help'        => 'admin.fields.proposal.help.status',
             ])
             ->add('rating', 'choice', [
                 'label'    => 'admin.fields.proposal.rating',
