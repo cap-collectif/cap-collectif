@@ -20,7 +20,7 @@ class VoteSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            CapcoAppBundleEvents::OPINION_VOTE_CHANGED => 'onOpinionVoteChanged',
+            CapcoAppBundleEvents::OPINION_VOTE_CHANGED  => 'onOpinionVoteChanged',
             CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED => 'onAbstractVoteChanged',
         ];
     }

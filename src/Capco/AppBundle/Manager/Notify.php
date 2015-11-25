@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Manager;
 
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
@@ -46,7 +47,8 @@ class Notify implements MailerInterface
         ;
     }
 
-    public function sendInternalEmail($body, $subject, $contentType = 'text/html') {
+    public function sendInternalEmail($body, $subject, $contentType = 'text/html')
+    {
         $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
         $fromAdress = $this->resolver->getValue('admin.mail.notifications.send_address');
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
@@ -68,13 +70,12 @@ class Notify implements MailerInterface
     }
 
     // FOS User emails
-
     public function sendConfirmationEmailMessage(UserInterface $user)
     {
         $template = $this->parameters['confirmation.template'];
         $url = $this->router->generate('fos_user_registration_confirm', ['token' => $user->getConfirmationToken()], true);
         $rendered = $this->templating->render($template, [
-            'user' => $user,
+            'user'            => $user,
             'confirmationUrl' => $url,
         ]);
         $this->sendFOSEmail($rendered, $user->getEmail());
@@ -85,7 +86,7 @@ class Notify implements MailerInterface
         $template = $this->parameters['resetting.template'];
         $url = $this->router->generate('fos_user_resetting_reset', ['token' => $user->getConfirmationToken()], true);
         $rendered = $this->templating->render($template, [
-            'user' => $user,
+            'user'            => $user,
             'confirmationUrl' => $url,
         ]);
         $this->sendFOSEmail($rendered, $user->getEmail());
@@ -112,8 +113,13 @@ class Notify implements MailerInterface
         $this->sendEmail($toEmail, $fromEmail, $fromName, $body, $subject);
     }
 
-    // Notifications for reporting and moderation
+    /*
+     * Notifications for reporting and moderation
+     */
 
+    /**
+     * @param Reporting $report
+     */
     public function sendNotifyMessage(Reporting $report)
     {
         $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
@@ -130,12 +136,12 @@ class Notify implements MailerInterface
             $body = $this->templating->render(
                 $template,
                 [
-                    'user' => $report->getReporter(),
-                    'type' => $type,
-                    'message' => $report->getBody(),
+                    'user'         => $report->getReporter(),
+                    'type'         => $type,
+                    'message'      => $report->getBody(),
                     'contribution' => $report->getRelatedObject(),
-                    'siteURL' => $this->urlResolver->getObjectUrl($report->getRelatedObject(), true),
-                    'adminURL' => $this->router->generate('admin_capco_app_reporting_show', ['id' => $report->getRelatedObject()->getId()], true),
+                    'siteURL'      => $this->urlResolver->getObjectUrl($report->getRelatedObject(), true),
+                    'adminURL'     => $this->router->generate('admin_capco_app_reporting_show', ['id' => $report->getRelatedObject()->getId()], true),
                 ]
             );
 
@@ -143,6 +149,9 @@ class Notify implements MailerInterface
         }
     }
 
+    /**
+     * @param $contribution
+     */
     public function notifyModeration($contribution)
     {
         $from = $this->resolver->getValue('admin.mail.notifications.send_address');
@@ -155,7 +164,7 @@ class Notify implements MailerInterface
                 $template,
                 [
                     'contribution' => $contribution,
-                    'trashUrl' => $this->urlResolver->getTrashedObjectUrl($contribution, true),
+                    'trashUrl'     => $this->urlResolver->getTrashedObjectUrl($contribution, true),
                 ]
             );
 
@@ -163,6 +172,9 @@ class Notify implements MailerInterface
         }
     }
 
+    /**
+     * @param $contribution
+     */
     public function notifyProposalDeletion($contribution)
     {
         if ($contribution) {
@@ -179,5 +191,29 @@ class Notify implements MailerInterface
 
             $this->sendInternalEmail($body, $subject);
         }
+    }
+
+    /**
+     * @param Proposal $proposal
+     */
+    public function notifyProposalStatusChange(Proposal $proposal)
+    {
+        $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
+        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
+
+        $subject = $this->translator->trans(
+            'proposal_status_change.notification.subject', [
+                '%sitename%' => $this->resolver->getValue('global.site.fullname')
+            ], 'CapcoAppBundle'
+        );
+        $template = 'CapcoAppBundle:Mail:notifyProposalStatusChange.html.twig';
+        $body = $this->templating->render(
+            $template,
+            [
+                'proposal' => $proposal,
+            ]
+        );
+
+        $this->sendEmail($proposal->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
     }
 }

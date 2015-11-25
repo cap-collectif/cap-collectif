@@ -26,12 +26,13 @@ use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Entity\Status;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProposalsController extends FOSRestController
 {
     /**
      * @Get("/proposal_forms/{proposal_form_id}/proposals")
-     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}})
      * @QueryParam(name="first", requirements="[0-9.]+", default="0")
      * @QueryParam(name="offset", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|popular|comments)", default="last")
@@ -41,7 +42,7 @@ class ProposalsController extends FOSRestController
      * @QueryParam(name="type", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
      */
-    public function getProposalsAction(ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
+    public function getProposalsByFormAction(ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
     {
         $first = intval($paramFetcher->get('first'));
         $offset = intval($paramFetcher->get('offset'));
@@ -97,7 +98,7 @@ class ProposalsController extends FOSRestController
 
         return [
             'proposals' => $proposals,
-            'count' => count($paginator),
+            'count'     => count($paginator),
         ];
     }
 
@@ -213,8 +214,8 @@ class ProposalsController extends FOSRestController
 
         return [
             'comments_and_answers_count' => intval($countWithAnswers),
-            'comments_count' => count($paginator),
-            'comments' => $comments,
+            'comments_count'             => count($paginator),
+            'comments'                   => $comments,
         ];
     }
 

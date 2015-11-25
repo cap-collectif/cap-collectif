@@ -35,10 +35,10 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_event');
 
-        $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, array(
+        $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, [
             'action' => $currentUrl,
             'method' => 'POST',
-        ));
+        ]);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -46,26 +46,26 @@ class EventController extends Controller
             if ($form->isValid()) {
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_event_search_term', array(
-                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                return $this->redirect($this->generateUrl('app_event_search_term', [
+                    'theme'   => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
-                    'term' => $data['term'],
-                )));
+                    'term'    => $data['term'],
+                ]));
             }
         } else {
-            $form->setData(array(
-                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+            $form->setData([
+                'theme'   => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
                 'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
-                'term' => $term,
-            ));
+                'term'    => $term,
+            ]);
         }
 
         $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(false, $theme, $project, $term);
         $archivedEventsNb = $this->get('capco.event.resolver')->countEvents(true, $theme, $project, $term);
 
         return [
-            'years' => $groupedEvents,
-            'form' => $form->createView(),
+            'years'            => $groupedEvents,
+            'form'             => $form->createView(),
             'archivedEventsNb' => $archivedEventsNb,
         ];
     }
@@ -89,10 +89,10 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_event_archived');
 
-        $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, array(
+        $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, [
             'action' => $currentUrl,
             'method' => 'POST',
-        ));
+        ]);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -100,25 +100,25 @@ class EventController extends Controller
             if ($form->isValid()) {
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_event_archived_term', array(
-                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                return $this->redirect($this->generateUrl('app_event_archived_term', [
+                    'theme'   => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
-                    'term' => $data['term'],
-                )));
+                    'term'    => $data['term'],
+                ]));
             }
         } else {
-            $form->setData(array(
-                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+            $form->setData([
+                'theme'   => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
                 'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
-                'term' => $term,
-            ));
+                'term'    => $term,
+            ]);
         }
 
         $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(true, $theme, $project, $term);
 
         return [
             'years' => $groupedEvents,
-            'form' => $form->createView(),
+            'form'  => $form->createView(),
         ];
     }
 

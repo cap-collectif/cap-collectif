@@ -43,7 +43,7 @@ class IdeaVoteType extends AbstractType
         if ($this->confirmed) {
             $builder->add('submit', 'submit', [
               'label' => 'idea.vote.unsubscribe',
-              'attr' => ['class' => 'btn  btn-danger  btn-block'],
+              'attr'  => ['class' => 'btn  btn-danger  btn-block'],
             ]);
 
             return;
@@ -53,12 +53,12 @@ class IdeaVoteType extends AbstractType
             if ($this->commentable) {
                 $builder->add('message', 'textarea', [
                     'required' => false,
-                    'mapped' => false,
-                    'label' => 'idea.vote.comment',
-                    'attr' => [
+                    'mapped'   => false,
+                    'label'    => 'idea.vote.comment',
+                    'attr'     => [
                         'placeholder' => 'idea.vote.message',
-                        'rows' => 5,
-                        'style' => 'resize: vertical;',
+                        'rows'        => 5,
+                        'style'       => 'resize: vertical;',
                     ],
                 ]);
             }
@@ -66,14 +66,14 @@ class IdeaVoteType extends AbstractType
             $builder
               ->add('private', null, [
                   'required' => false,
-                  'label' => 'idea.vote.private',
+                  'label'    => 'idea.vote.private',
               ])
             ;
 
             $builder
               ->add('submit', 'submit', [
                   'label' => 'idea.vote.submit',
-                  'attr' => ['class' => 'btn btn-success btn-block'],
+                  'attr'  => ['class' => 'btn btn-success btn-block'],
               ])
             ;
 
@@ -94,25 +94,25 @@ class IdeaVoteType extends AbstractType
         if ($this->commentable) {
             $builder->add('message', 'textarea', [
                 'required' => false,
-                'mapped' => false,
-                'label' => 'idea.vote.comment',
-                'attr' => [
+                'mapped'   => false,
+                'label'    => 'idea.vote.comment',
+                'attr'     => [
                     'placeholder' => 'idea.vote.message',
-                    'rows' => 5,
-                    'style' => 'resize: vertical;',
+                    'rows'        => 5,
+                    'style'       => 'resize: vertical;',
                 ],
             ]);
         }
 
         $builder->add('private', null, [
             'required' => false,
-            'label' => 'idea.vote.private',
+            'label'    => 'idea.vote.private',
         ]);
 
         $builder
             ->add('submit', 'submit', [
                   'label' => 'idea.vote.submit',
-                  'attr' => ['class' => 'btn  btn-success  btn-block'],
+                  'attr'  => ['class' => 'btn  btn-success  btn-block'],
             ])
         ;
 
@@ -125,7 +125,7 @@ class IdeaVoteType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\IdeaVote',
+            'data_class'         => 'Capco\AppBundle\Entity\IdeaVote',
             'translation_domain' => 'CapcoAppBundle',
         ]);
     }

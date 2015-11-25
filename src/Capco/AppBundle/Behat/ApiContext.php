@@ -86,7 +86,7 @@ class ApiContext extends ApplicationContext
         $request = $this->client->createRequest($method, $url, [
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
+                'Content-Type'  => 'application/json',
             ],
             'exceptions' => false,
         ]);
@@ -105,9 +105,9 @@ class ApiContext extends ApplicationContext
     public function iSendARequestWithValues($method, $url, TableNode $table)
     {
         $request = $this->client->createRequest($method, $url, [
-            'body' => $table->getHash(),
+            'body'       => $table->getHash(),
             'exceptions' => false,
-            'headers' => ['Authorization' => sprintf('Bearer %s', $this->token)],
+            'headers'    => ['Authorization' => sprintf('Bearer %s', $this->token)],
         ]);
         $this->response = $this->client->send($request);
     }
@@ -124,11 +124,11 @@ class ApiContext extends ApplicationContext
     public function iSendARequestWithJson($method, $url, PyStringNode $string)
     {
         $request = $this->client->createRequest($method, $url, [
-            'body' => $string->getRaw(),
+            'body'       => $string->getRaw(),
             'exceptions' => false,
-            'headers' => [
+            'headers'    => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
+                'Content-Type'  => 'application/json',
             ],
         ]);
         $this->response = $this->client->send($request);
@@ -238,7 +238,7 @@ class ApiContext extends ApplicationContext
             $this->getEntityManager()->flush();
         }
 
-        $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:ConsultationStep')->find($csId);
+        $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:Steps\ConsultationStep')->find($csId);
         $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
     }
 

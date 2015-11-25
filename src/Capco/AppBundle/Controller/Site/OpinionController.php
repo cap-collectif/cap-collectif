@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionAppendix;
@@ -30,25 +30,25 @@ class OpinionController extends Controller
         $version = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->findOneBySlug($versionSlug);
 
         if (!$opinion || !$version || !$version->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
         }
 
         $currentStep = $opinion->getStep();
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinionJoinUserReports($opinion, $this->getUser());
 
-        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getByProject($projectSlug);
+        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProject($projectSlug);
 
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
         return [
-            'version' => $version,
+            'version'     => $version,
             'currentStep' => $currentStep,
-            'project' => $currentStep->getProject(),
-            'opinion' => $opinion,
-            'sources' => $sources,
+            'project'     => $currentStep->getProject(),
+            'opinion'     => $opinion,
+            'sources'     => $sources,
             'opinionType' => $opinion->getOpinionType(),
-            'votes' => $opinion->getVotes(),
-            'nav' => $nav,
+            'votes'       => $opinion->getVotes(),
+            'nav'         => $nav,
         ];
     }
 
@@ -56,7 +56,7 @@ class OpinionController extends Controller
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/add", name="app_project_new_opinion")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/add", name="app_consultation_new_opinion")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @ParamConverter("currentStep", class="CapcoAppBundle:ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
+     * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
      *
      * @param $opinionType
@@ -70,11 +70,11 @@ class OpinionController extends Controller
     public function createOpinionAction(Project $project, ConsultationStep $currentStep, OpinionType $opinionType, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         if (false == $currentStep->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('project.error.no_contribute', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('project.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
         if (!$opinionType->getIsEnabled()) {
@@ -111,10 +111,10 @@ class OpinionController extends Controller
         }
 
         return [
-            'project' => $project,
+            'project'     => $project,
             'currentStep' => $currentStep,
             'opinionType' => $opinionType,
-            'form' => $form->createView(),
+            'form'        => $form->createView(),
         ];
     }
 
@@ -135,17 +135,17 @@ class OpinionController extends Controller
     public function deleteOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
 
         if ($opinion == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
         }
 
         if (false == $opinion->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
         $opinionType = $opinion->getOpinionType();
@@ -156,7 +156,7 @@ class OpinionController extends Controller
         $userPostOpinion = $opinion->getAuthor()->getId();
 
         if ($userCurrent !== $userPostOpinion) {
-            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.not_author', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.not_author', [], 'CapcoAppBundle'));
         }
 
         //Champ CSRF
@@ -178,13 +178,13 @@ class OpinionController extends Controller
             }
         }
 
-        return array(
-            'opinion' => $opinion,
-            'project' => $project,
+        return [
+            'opinion'     => $opinion,
+            'project'     => $project,
             'currentStep' => $currentStep,
             'opinionType' => $opinionType,
-            'form' => $form->createView(),
-        );
+            'form'        => $form->createView(),
+        ];
     }
 
     /**
@@ -203,17 +203,17 @@ class OpinionController extends Controller
     public function updateOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
 
         if ($opinion == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
         }
 
         if (false == $opinion->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
         $opinionType = $opinion->getOpinionType();
@@ -224,7 +224,7 @@ class OpinionController extends Controller
         $userPostOpinion = $opinion->getAuthor()->getId();
 
         if ($userCurrent !== $userPostOpinion) {
-            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.not_author', array(), 'CapcoAppBundle'));
+            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.not_author', [], 'CapcoAppBundle'));
         }
 
         $form = $this->createForm(new OpinionForm('edit'), $opinion);
@@ -247,9 +247,9 @@ class OpinionController extends Controller
         }
 
         return [
-            'form' => $form->createView(),
-            'opinion' => $opinion,
-            'project' => $project,
+            'form'        => $form->createView(),
+            'opinion'     => $opinion,
+            'project'     => $project,
             'currentStep' => $currentStep,
             'opinionType' => $opinionType,
         ];
@@ -277,24 +277,24 @@ class OpinionController extends Controller
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
 
         if (!$opinion || !$opinion->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', array(), 'CapcoAppBundle'));
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
         }
 
         $currentUrl = $this->generateUrl('app_project_show_opinion', ['projectSlug' => $projectSlug, 'stepSlug' => $stepSlug, 'opinionTypeSlug' => $opinionTypeSlug, 'opinionSlug' => $opinionSlug]);
         $currentStep = $opinion->getStep();
 
-        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractStep')->getByProject($projectSlug);
+        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProject($projectSlug);
 
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
         return [
-            'currentUrl' => $currentUrl,
-            'currentStep' => $currentStep,
-            'project' => $currentStep->getProject(),
-            'opinion' => $opinion,
-            'opinionType' => $opinion->getOpinionType(),
+            'currentUrl'    => $currentUrl,
+            'currentStep'   => $currentStep,
+            'project'       => $currentStep->getProject(),
+            'opinion'       => $opinion,
+            'opinionType'   => $opinion->getOpinionType(),
             'project_steps' => $steps,
-            'nav' => $nav,
+            'nav'           => $nav,
         ];
     }
 
@@ -305,7 +305,7 @@ class OpinionController extends Controller
             ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
             ->findBy(
                 ['opinionType' => $opinion->getOpinionType()],
-                ['position' => 'ASC']
+                ['position'    => 'ASC']
             );
         foreach ($appendixTypes as $otat) {
             $app = new OpinionAppendix();

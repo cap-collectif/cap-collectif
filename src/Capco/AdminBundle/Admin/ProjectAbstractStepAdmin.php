@@ -14,7 +14,7 @@ class ProjectAbstractStepAdmin extends Admin
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position',
+        '_sort_by'    => 'position',
     ];
 
     protected $translationDomain = 'SonataAdminBundle';
@@ -38,13 +38,13 @@ class ProjectAbstractStepAdmin extends Admin
                 'label' => 'admin.fields.project_abstractstep.position',
             ])
             ->add('step', 'sonata_type_model_list', [
-                'required' => true,
-                'label' => 'admin.fields.project_abstractstep.steps',
+                'required'           => true,
+                'label'              => 'admin.fields.project_abstractstep.steps',
                 'translation_domain' => 'SonataAdminBundle',
-                'btn_delete' => false,
-                'btn_add' => 'admin.fields.project_abstractstep.steps_add',
+                'btn_delete'         => false,
+                'btn_add'            => 'admin.fields.project_abstractstep.steps_add',
             ], [
-               'link_parameters' => ['project_id' => $projectId],
+               'link_parameters' => ['projectId' => $projectId],
             ])
         ;
     }

@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\ConsultationStep:
+Capco\AppBundle\Entity\Steps\ConsultationStep:
     cstep1:
         title: Collecte des avis
         isEnabled: true

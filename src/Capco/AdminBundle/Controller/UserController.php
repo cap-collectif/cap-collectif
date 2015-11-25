@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             foreach ($selectedIds as $id) {
-                $user = $this->container->get('fos_user.user_manager')->findUserBy(array('id' => $id));
+                $user = $this->container->get('fos_user.user_manager')->findUserBy(['id' => $id]);
                 if ($user->hasRole('ROLE_SUPER_ADMIN')) {
                     return 'user.delete.batch_denied';
                 }

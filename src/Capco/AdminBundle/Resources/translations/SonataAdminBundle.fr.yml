@@ -430,29 +430,33 @@ admin:
       updated_at: Mise à jour
       created_at: Création
     proposal:
-      group_answer: Réponse officielle
-      group_publication: Options de publication
-      group_content: Proposition
-      answer: Réponse officielle
-      title: Titre
-      body: Contenu
-      author: Auteur
-      rating: Note
-      theme: Thème
-      no_theme: Aucun thème
-      status: Statut
-      no_status: Aucun statut
-      district: Quartier
-      no_district: Aucun quartier
       annotation: Annotation
+      answer: Réponse officielle
+      author: Auteur
+      body: Contenu
+      created_at: Création
+      district: Quartier
       enabled: Publié
+      group_content: Proposition
+      group_publication: Options de publication
+      group_selection: Sélections et réponse officielle
+      help:
+        annotation: Cette annotation ne sera pas visible sur le site.
+        rating: Cette note ne sera pas visible sur le site.
+        status: <span class="capco--sonata-ba-field-help"><i class="fa fa-exclamation-triangle"></i>&nbsp;Modifier le statut de cette proposition en informera son auteur par email</span>.
       isTrashed: Dans la corbeille
+      no_district: Aucun quartier
+      no_status: Aucun statut
+      no_theme: Aucun thème
+      project: Projet
+      rating: Note
+      selection_steps: Étapes de sélection
+      status: Statut
+      step: Étape
+      theme: Thème
+      title: Titre
       trashedReason: Raison de la mise dans la corbeille
       updated_at: Mise à jour
-      created_at: Création
-      help:
-        rating: Cette note ne sera pas visible sur le site.
-        annotation: Cette annotation ne sera pas visible sur le site.
     proposal_form:
       title: Titre
       description: Description
@@ -548,24 +552,26 @@ admin:
       trashed_reason: Raison de la mise à la corbeille
     step:
       body: Introduction
-      project: Projet
       created_at: Création
       end_at: Termine
+      group_general: Général
+      group_form: Formulaire
+      group_statuses: Statuts
       is_enabled: Publié
-      position: Position
       nb_opinions_to_display: Nombre de propositions dans l'aperçu du classement
       nb_versions_to_display: Nombre de modifications dans l'aperçu du classement
+      no_proposal_form: Aucun formulaire
+      position: Position
+      project: Projet
+      proposals: Propositions sélectionnées
+      proposal_form: Formulaire
       start_at: Commence
+      statuses: Statuts
       synthesis: Synthèse
       title: Titre
       type: Type d'étape
       updated_at: Mise à jour
-      proposal_form: Formulaire
-      statuses: Statuts
-      group_general: Général
-      group_form: Formulaire
-      group_statuses: Statuts
-      no_proposal_form: Aucun formulaire
+      votable: Soumettre les propositions au vote
     synthesis:
       enabled: Publiée
       editable: Éditable
@@ -737,3 +743,4 @@ consultation_step: Étape de consultation
 presentation_step: Étape de présentation
 synthesis_step: Étape de synthèse
 ranking_step: Étape de classement
+selection_step: Étape de sélection

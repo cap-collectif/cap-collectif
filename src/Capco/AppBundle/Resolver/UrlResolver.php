@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\AbstractStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Argument;
@@ -29,10 +29,10 @@ class UrlResolver
     {
         if ($object instanceof Opinion) {
             return $this->router->generate('app_project_show_opinion', [
-                'projectSlug' => $object->getStep()->getProject()->getSlug(),
-                'stepSlug' => $object->getStep()->getSlug(),
+                'projectSlug'     => $object->getStep()->getProject()->getSlug(),
+                'stepSlug'        => $object->getStep()->getSlug(),
                 'opinionTypeSlug' => $object->getOpinionType()->getSlug(),
-                'opinionSlug' => $object->getSlug(),
+                'opinionSlug'     => $object->getSlug(),
             ], $absolute);
         }
 
@@ -40,18 +40,18 @@ class UrlResolver
             $opinion = $object->getParent();
 
             return $this->router->generate('app_project_show_opinion_version', [
-                'projectSlug' => $opinion->getStep()->getProject()->getSlug(),
-                'stepSlug' => $opinion->getStep()->getSlug(),
+                'projectSlug'     => $opinion->getStep()->getProject()->getSlug(),
+                'stepSlug'        => $opinion->getStep()->getSlug(),
                 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
-                'opinionSlug' => $opinion->getSlug(),
-                'versionSlug' => $object->getSlug(),
+                'opinionSlug'     => $opinion->getSlug(),
+                'versionSlug'     => $object->getSlug(),
             ], $absolute);
         }
 
         if ($object instanceof Proposal) {
             return $this->router->generate('app_project_show_proposal', [
-                'projectSlug' => $object->getStep()->getProject()->getSlug(),
-                'stepSlug' => $object->getStep()->getSlug(),
+                'projectSlug'  => $object->getStep()->getProject()->getSlug(),
+                'stepSlug'     => $object->getStep()->getSlug(),
                 'proposalSlug' => $object->getSlug(),
             ], $absolute);
         }
@@ -79,6 +79,9 @@ class UrlResolver
         if ($step->isCollectStep()) {
             return $this->router->generate('app_project_show_collect',      ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
         }
+        if ($step->isSelectionStep()) {
+            return $this->router->generate('app_project_show_selection',      ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
+        }
 
         return '';
     }
@@ -86,7 +89,7 @@ class UrlResolver
     public function getObjectUrl($object, $absolute = false)
     {
         if ($object instanceof Idea) {
-            return $this->router->generate('app_idea_show', array('slug' => $object->getSlug()), $absolute);
+            return $this->router->generate('app_idea_show', ['slug' => $object->getSlug()], $absolute);
         }
 
         if ($object instanceof Post) {
@@ -131,7 +134,7 @@ class UrlResolver
     public function getTrashedObjectUrl($object, $absolute = false)
     {
         if ($object instanceof Idea) {
-            return $this->router->generate('app_idea_show', array('slug' => $object->getSlug()), $absolute);
+            return $this->router->generate('app_idea_show', ['slug' => $object->getSlug()], $absolute);
         }
 
         if ($object instanceof Argument || $object instanceof Source) {
@@ -152,15 +155,15 @@ class UrlResolver
     public function getAdminObjectUrl($object, $absolute = false)
     {
         if ($object instanceof Idea) {
-            return $this->router->generate('admin_capco_app_idea_show', array('id' => $object->getId()), $absolute);
+            return $this->router->generate('admin_capco_app_idea_show', ['id' => $object->getId()], $absolute);
         }
 
         if ($object instanceof Source) {
-            return $this->router->generate('admin_capco_app_source_show', array('id' => $object->getId()), $absolute);
+            return $this->router->generate('admin_capco_app_source_show', ['id' => $object->getId()], $absolute);
         }
 
         if ($object instanceof Argument) {
-            return $this->router->generate('admin_capco_app_argument_show', array('id' => $object->getId()), $absolute);
+            return $this->router->generate('admin_capco_app_argument_show', ['id' => $object->getId()], $absolute);
         }
 
         if ($object instanceof Comment) {
@@ -168,15 +171,15 @@ class UrlResolver
         }
 
         if ($object instanceof Opinion) {
-            return $this->router->generate('admin_capco_app_opinion_show', array('id' => $object->getId()), $absolute);
+            return $this->router->generate('admin_capco_app_opinion_show', ['id' => $object->getId()], $absolute);
         }
 
         if ($object instanceof OpinionVersion) {
-            return $this->router->generate('admin_capco_app_opinionversion_show', array('id' => $object->getId()), $absolute);
+            return $this->router->generate('admin_capco_app_opinionversion_show', ['id' => $object->getId()], $absolute);
         }
 
         if ($object instanceof Proposal) {
-            return $this->router->generate('admin_capco_app_proposal_show', array('id' => $object->getId()), $absolute);
+            return $this->router->generate('admin_capco_app_proposal_show', ['id' => $object->getId()], $absolute);
         }
 
         return '';

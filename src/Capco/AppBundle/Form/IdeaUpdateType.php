@@ -14,12 +14,12 @@ class IdeaUpdateType extends IdeaType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('confirm', 'checkbox', array(
-                'mapped' => false,
-                'label' => 'idea.form.confirm',
-                'required' => true,
+            ->add('confirm', 'checkbox', [
+                'mapped'      => false,
+                'label'       => 'idea.form.confirm',
+                'required'    => true,
                 'constraints' => [new True(['message' => 'idea.votes_not_confirmed'])],
-            ))
+            ])
         ;
 
         parent::buildForm($builder, $options);

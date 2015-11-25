@@ -34,11 +34,11 @@ class Opinion implements SelfLinkableInterface, VotableInterface
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
-        'last' => 'opinion.sort.last',
-        'old' => 'opinion.sort.old',
+        'last'      => 'opinion.sort.last',
+        'old'       => 'opinion.sort.old',
         'favorable' => 'opinion.sort.favorable',
-        'votes' => 'opinion.sort.votes',
-        'comments' => 'opinion.sort.comments',
+        'votes'     => 'opinion.sort.votes',
+        'comments'  => 'opinion.sort.comments',
     ];
 
     /**
@@ -109,7 +109,7 @@ class Opinion implements SelfLinkableInterface, VotableInterface
     private $OpinionType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ConsultationStep", inversedBy="opinions", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="opinions", cascade={"persist"})
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id")
      * @Assert\NotNull()
      */

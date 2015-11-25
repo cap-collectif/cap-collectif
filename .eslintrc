@@ -18,6 +18,7 @@
     "Modernizr": true,
     "Quill": true,
     "moment": true,
+    "jQuery": true,
   },
   "rules": {
     "no-nested-ternary": 0,

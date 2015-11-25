@@ -31,10 +31,10 @@ class BlogController extends Controller
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_blog');
 
-        $form = $this->createForm(new PostSearchType($this->get('capco.toggle.manager')), null, array(
+        $form = $this->createForm(new PostSearchType($this->get('capco.toggle.manager')), null, [
             'action' => $currentUrl,
             'method' => 'POST',
-        ));
+        ]);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -43,16 +43,16 @@ class BlogController extends Controller
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_blog_search_project', array(
-                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                return $this->redirect($this->generateUrl('app_blog_search_project', [
+                    'theme'   => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
-                )));
+                ]));
             }
         } else {
-            $form->setData(array(
-                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+            $form->setData([
+                'theme'   => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
                 'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
-            ));
+            ]);
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('blog.pagination.size');
@@ -71,11 +71,11 @@ class BlogController extends Controller
         }
 
         return [
-            'posts' => $posts,
-            'page' => $page,
-            'theme' => $theme,
+            'posts'  => $posts,
+            'page'   => $page,
+            'theme'  => $theme,
             'nbPage' => $nbPage,
-            'form' => $form->createView(),
+            'form'   => $form->createView(),
         ];
     }
 

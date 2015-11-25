@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\CollectStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -42,13 +42,13 @@ class ProposalController extends Controller
         ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'ProposalResponses', 'Questions']));
 
         $response = $this->render('CapcoAppBundle:Proposal:show.html.twig', [
-            'project' => $project,
-            'currentStep' => $currentStep,
+            'project'       => $project,
+            'currentStep'   => $currentStep,
             'proposalTitle' => $proposal->getTitle(),
-            'proposal' => $proposalJson,
-            'themes' => $themes,
-            'districts' => $districts,
-            'form' => $form,
+            'proposal'      => $proposalJson,
+            'themes'        => $themes,
+            'districts'     => $districts,
+            'form'          => $form,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

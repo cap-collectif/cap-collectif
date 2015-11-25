@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 
 /**
  * Project.
@@ -22,12 +23,12 @@ class Project
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
     public static $sortOrder = [
-        'date' => self::SORT_ORDER_PUBLISHED_AT,
+        'date'       => self::SORT_ORDER_PUBLISHED_AT,
         'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
     ];
 
     public static $sortOrderLabels = [
-        'date' => 'project.sort.published_at',
+        'date'       => 'project.sort.published_at',
         'popularity' => 'project.sort.contributions_nb',
     ];
 
@@ -38,7 +39,7 @@ class Project
     public static $openingStatuses = [
         'future' => self::OPENING_STATUS_FUTURE,
         'opened' => self::OPENING_STATUS_OPENED,
-        'ended' => self::OPENING_STATUS_ENDED,
+        'ended'  => self::OPENING_STATUS_ENDED,
     ];
 
     const OPINION_TERM_OPINION = 0;
@@ -127,7 +128,7 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProjectAbstractStep", mappedBy="project",  cascade={"persist", "remove"}, orphanRemoval = true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Steps\ProjectAbstractStep", mappedBy="project",  cascade={"persist", "remove"}, orphanRemoval = true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $steps;
@@ -441,7 +442,7 @@ class Project
     /**
      * Add step.
      *
-     * @param \Capco\AppBundle\Entity\ProjectAbstractStep $step
+     * @param ProjectAbstractStep $step
      *
      * @return Project
      */
@@ -456,7 +457,7 @@ class Project
     /**
      * Remove step.
      *
-     * @param \Capco\AppBundle\Entity\ProjectAbstractStep $step
+     * @param ProjectAbstractStep $step
      *
      * @return $this
      */

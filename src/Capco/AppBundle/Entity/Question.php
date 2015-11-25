@@ -25,7 +25,7 @@ class Question
     const QUESTION_TYPE_MULTILINE_TEXT = 1;
 
     public static $questionTypes = [
-        self::QUESTION_TYPE_SIMPLE_TEXT => 'question_type.types.simple_text',
+        self::QUESTION_TYPE_SIMPLE_TEXT    => 'question_type.types.simple_text',
         self::QUESTION_TYPE_MULTILINE_TEXT => 'question_type.types.multiline_text',
     ];
 

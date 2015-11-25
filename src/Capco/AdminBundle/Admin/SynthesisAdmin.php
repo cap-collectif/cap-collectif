@@ -11,7 +11,7 @@ class SynthesisAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'enabled',
+        '_sort_by'    => 'enabled',
     ];
 
     /**
@@ -22,38 +22,38 @@ class SynthesisAdmin extends Admin
         $projectId = null;
 
         if ($this->hasParentFieldDescription()) { // this Admin is embedded
-            $projectId = $this->getParentFieldDescription()->getAdmin()->getPersistentParameters()['project_id'];
+            $projectId = $this->getParentFieldDescription()->getAdmin()->getPersistentParameters()['projectId'];
         } else {
-            $projectId = $this->getRequest()->get('project_id');
+            $projectId = $this->getRequest()->get('projectId');
         }
 
         $formMapper
-            ->add('enabled', null, array(
-                'label' => 'admin.fields.synthesis.enabled',
+            ->add('enabled', null, [
+                'label'    => 'admin.fields.synthesis.enabled',
                 'required' => false,
-            ))
-            ->add('editable', null, array(
-                'label' => 'admin.fields.synthesis.editable',
+            ])
+            ->add('editable', null, [
+                'label'    => 'admin.fields.synthesis.editable',
                 'required' => false,
-            ))
-            ->add('sourceType', 'sonata_type_choice_field_mask', array(
-                'label' => 'admin.fields.synthesis.source_type',
-                'required' => true,
-                'choices' => Synthesis::$sourceTypesLabels,
+            ])
+            ->add('sourceType', 'sonata_type_choice_field_mask', [
+                'label'              => 'admin.fields.synthesis.source_type',
+                'required'           => true,
+                'choices'            => Synthesis::$sourceTypesLabels,
                 'translation_domain' => 'CapcoAppBundleSynthesis',
-                'map' => [
-                    'none' => ['enabled'],
+                'map'                => [
+                    'none'              => ['enabled'],
                     'consultation_step' => ['enabled', 'consultationStep'],
                 ],
-            ))
-            ->add('consultationStep', 'entity', array(
-                'label' => 'admin.fields.synthesis.consultation_step',
-                'class' => 'CapcoAppBundle:ConsultationStep',
+            ])
+            ->add('consultationStep', 'entity', [
+                'label'         => 'admin.fields.synthesis.consultation_step',
+                'class'         => 'CapcoAppBundle:Steps\ConsultationStep',
                 'query_builder' => $this->createQueryBuilderForConsultationSteps($projectId),
-                'required' => false,
-                'empty_value' => 'admin.fields.synthesis.consultation_step_empty',
-                'help' => 'admin.help.synthesis.consultation_step',
-        ));
+                'required'      => false,
+                'empty_value'   => 'admin.fields.synthesis.consultation_step_empty',
+                'help'          => 'admin.help.synthesis.consultation_step',
+        ]);
     }
 
     public function prePersist($synthesis)
@@ -74,7 +74,7 @@ class SynthesisAdmin extends Admin
     private function createQueryBuilderForConsultationSteps($projectId)
     {
         $qb = $this->modelManager
-            ->createQuery('CapcoAppBundle:ConsultationStep', 'cs')
+            ->createQuery('CapcoAppBundle:Steps\ConsultationStep', 'cs')
             ->where('cs.isEnabled = :enabled')
             ->setParameter('enabled', true)
         ;
@@ -97,6 +97,6 @@ class SynthesisAdmin extends Admin
 
     public function getBatchActions()
     {
-        return array();
+        return [];
     }
 }

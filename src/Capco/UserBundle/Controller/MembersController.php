@@ -31,10 +31,10 @@ class MembersController extends Controller
         $currentUrl = $this->generateUrl('app_members');
         $em = $this->get('doctrine.orm.entity_manager');
 
-        $form = $this->createForm(new MemberSearchType($this->get('capco.toggle.manager')), null, array(
+        $form = $this->createForm(new MemberSearchType($this->get('capco.toggle.manager')), null, [
             'action' => $currentUrl,
             'method' => 'POST',
-        ));
+        ]);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -43,16 +43,16 @@ class MembersController extends Controller
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_members_type_sorted', array(
+                return $this->redirect($this->generateUrl('app_members_type_sorted', [
                     'userType' => $data['userType'] ? $data['userType']->getSlug() : UserType::FILTER_ALL,
-                    'sort' => $data['sort'],
-                )));
+                    'sort'     => $data['sort'],
+                ]));
             }
         } else {
-            $form->setData(array(
+            $form->setData([
                 'userType' => $em->getRepository('CapcoUserBundle:UserType')->findOneBySlug($userType),
-                'sort' => $sort,
-            ));
+                'sort'     => $sort,
+            ]);
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('members.pagination.size');
@@ -68,9 +68,9 @@ class MembersController extends Controller
 
         return [
             'members' => $members,
-            'page' => $page,
-            'nbPage' => $nbPage,
-            'form' => $form->createView(),
+            'page'    => $page,
+            'nbPage'  => $nbPage,
+            'form'    => $form->createView(),
         ];
     }
 }

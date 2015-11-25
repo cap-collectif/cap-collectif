@@ -22,7 +22,7 @@ class OpinionTypeController extends Controller
         }
 
         if (null !== $request->get('btn_create_and_create')) {
-            $params = array();
+            $params = [];
             if ($this->admin->hasActiveSubClass()) {
                 $params['subclass'] = $request->get('subclass');
             }

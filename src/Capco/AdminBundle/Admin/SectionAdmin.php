@@ -14,7 +14,7 @@ class SectionAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'position',
+        '_sort_by'    => 'position',
     ];
 
     public function createQuery($context = 'list')
@@ -79,11 +79,11 @@ class SectionAdmin extends Admin
 
         $listMapper
             ->add('move_actions', 'actions', [
-                'label' => 'admin.action.highlighted_content.move_actions.label',
+                'label'    => 'admin.action.highlighted_content.move_actions.label',
                 'template' => 'SonataAdminBundle:CRUD:list__action.html.twig',
-                'type' => 'action',
-                'code' => 'Action',
-                'actions' => [
+                'type'     => 'action',
+                'code'     => 'Action',
+                'actions'  => [
                     'up' => [
                         'template' => 'CapcoAdminBundle:Section:list__action_up.html.twig',
                     ],
@@ -96,7 +96,7 @@ class SectionAdmin extends Admin
                 'label' => 'admin.fields.section.title',
             ])
             ->add('enabled', null, [
-                'label' => 'admin.fields.section.enabled',
+                'label'    => 'admin.fields.section.enabled',
                 'editable' => true,
             ])
             ->add('updatedAt', null, [
@@ -104,8 +104,8 @@ class SectionAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => ['template' => 'CapcoAdminBundle:Section:list__action_delete.html.twig'],
                 ],
             ])
@@ -126,14 +126,14 @@ class SectionAdmin extends Admin
             ]);
         } else {
             $formMapper->add('title', null, [
-                'label' => 'admin.fields.section.title',
+                'label'     => 'admin.fields.section.title',
                 'read_only' => true,
             ]);
         }
 
         $formMapper
             ->add('enabled', null, [
-                'label' => 'admin.fields.section.enabled',
+                'label'    => 'admin.fields.section.enabled',
                 'required' => false,
             ])
             ->add('position', null, [
@@ -143,14 +143,14 @@ class SectionAdmin extends Admin
 
         if ($fields['teaser']) {
             $formMapper->add('teaser', null, [
-                'label' => 'admin.fields.section.teaser',
+                'label'    => 'admin.fields.section.teaser',
                 'required' => false,
             ]);
         }
 
         if ($fields['body']) {
             $formMapper->add('body', 'ckeditor', [
-                'label' => 'admin.fields.section.body',
+                'label'       => 'admin.fields.section.body',
                 'config_name' => 'admin_editor',
             ]);
         }
@@ -163,9 +163,9 @@ class SectionAdmin extends Admin
 
         if ($subject && $subject->getType() === 'proposals') {
             $formMapper->add('step', 'sonata_type_model', [
-                'label' => 'admin.fields.section.collect_step',
+                'label'    => 'admin.fields.section.collect_step',
                 'required' => true,
-                'query' => $this->createQueryForCollectSteps(),
+                'query'    => $this->createQueryForCollectSteps(),
             ]);
         }
     }
@@ -186,11 +186,11 @@ class SectionAdmin extends Admin
                 'label' => 'admin.fields.section.position',
             ])
             ->add('teaser', 'ckeditor', [
-                'label' => 'admin.fields.section.teaser',
+                'label'       => 'admin.fields.section.teaser',
                 'config_name' => 'admin_editor',
             ])
             ->add('body', 'ckeditor', [
-                'label' => 'admin.fields.section.body',
+                'label'       => 'admin.fields.section.body',
                 'config_name' => 'admin_editor',
             ])
             ->add('nbObjects', null, [
@@ -210,7 +210,7 @@ class SectionAdmin extends Admin
         $qb = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:CollectStep')
+            ->getRepository('CapcoAppBundle:Steps\CollectStep')
             ->createQueryBuilder('cs')
             ->where('cs.isEnabled = :enabled')
             ->setParameter('enabled', true)

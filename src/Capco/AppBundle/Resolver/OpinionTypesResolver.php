@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\ConsultationStep;
-use Capco\AppBundle\Entity\ConsultationStepType;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
@@ -34,9 +34,9 @@ class OpinionTypesResolver
         $url = $this->router->generate('app_project_show', ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()]);
 
         $options = [
-            'decorate' => true,
-            'rootOpen' => '<ul class="nav">',
-            'rootClose' => '</ul>',
+            'decorate'      => true,
+            'rootOpen'      => '<ul class="nav">',
+            'rootClose'     => '</ul>',
             'nodeDecorator' => function ($node) use ($url) {
                 $link = $url.'#opinion-type--'.$node['slug'];
                 $levelClass = 'nav--level-'.$node['level'];
