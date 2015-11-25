@@ -22,9 +22,9 @@ class SynthesisAdmin extends Admin
         $projectId = null;
 
         if ($this->hasParentFieldDescription()) { // this Admin is embedded
-            $projectId = $this->getParentFieldDescription()->getAdmin()->getPersistentParameters()['projectId'];
+            $projectId = $this->getParentFieldDescription()->getAdmin()->getPersistentParameters()['project_id'];
         } else {
-            $projectId = $this->getRequest()->get('projectId');
+            $projectId = $this->getRequest()->get('project_id');
         }
 
         $formMapper
@@ -48,7 +48,7 @@ class SynthesisAdmin extends Admin
             ))
             ->add('consultationStep', 'entity', array(
                 'label' => 'admin.fields.synthesis.consultation_step',
-                'class' => 'CapcoAppBundle:Steps\ConsultationStep',
+                'class' => 'CapcoAppBundle:ConsultationStep',
                 'query_builder' => $this->createQueryBuilderForConsultationSteps($projectId),
                 'required' => false,
                 'empty_value' => 'admin.fields.synthesis.consultation_step_empty',
@@ -74,7 +74,7 @@ class SynthesisAdmin extends Admin
     private function createQueryBuilderForConsultationSteps($projectId)
     {
         $qb = $this->modelManager
-            ->createQuery('CapcoAppBundle:Steps\ConsultationStep', 'cs')
+            ->createQuery('CapcoAppBundle:ConsultationStep', 'cs')
             ->where('cs.isEnabled = :enabled')
             ->setParameter('enabled', true)
         ;

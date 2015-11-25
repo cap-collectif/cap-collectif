@@ -3,7 +3,7 @@
 namespace spec\Capco\AppBundle\Synthesis\Extractor;
 
 use Buzz\Util\Url;
-use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Capco\AppBundle\Entity\ConsultationStepType;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
@@ -13,7 +13,7 @@ use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManager;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;

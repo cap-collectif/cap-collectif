@@ -44,7 +44,7 @@ class ProjectAbstractStepAdmin extends Admin
                 'btn_delete' => false,
                 'btn_add' => 'admin.fields.project_abstractstep.steps_add',
             ], [
-               'link_parameters' => ['projectId' => $projectId],
+               'link_parameters' => ['project_id' => $projectId],
             ])
         ;
     }

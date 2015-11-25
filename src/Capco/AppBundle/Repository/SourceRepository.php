@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Doctrine\ORM\EntityRepository;

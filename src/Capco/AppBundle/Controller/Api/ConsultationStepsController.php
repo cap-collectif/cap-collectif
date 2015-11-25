@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Form\Api\OpinionType as OpinionForm;
 use Symfony\Component\HttpFoundation\Request;

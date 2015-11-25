@@ -2,9 +2,8 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\CollectStep;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\District;
@@ -93,67 +92,7 @@ class ProposalRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function getPublishedBySelectionStep(SelectionStep $step, $first = 0, $offset = 100, $order = 'last', Theme $theme = null, Status $status = null, District $district = null, UserType $type = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('author', 'amedia', 'theme', 'status', 'district')
-            ->leftJoin('proposal.author', 'author')
-            ->leftJoin('author.Media', 'amedia')
-            ->leftJoin('proposal.theme', 'theme')
-            ->leftJoin('proposal.district', 'district')
-            ->leftJoin('proposal.status', 'status')
-            ->leftJoin('proposal.selectionSteps', 'selectionSteps')
-            ->andWhere('proposal.isTrashed = :notTrashed')
-            ->andWhere('selectionSteps.id = :stepId')
-            ->setParameter('notTrashed', false)
-            ->setParameter('stepId', $step->getId())
-        ;
-
-        if ($theme) {
-            $qb->andWhere('proposal.theme = :theme')
-                ->setParameter('theme', $theme);
-        }
-
-        if ($status) {
-            $qb->andWhere('proposal.status = :status')
-                ->setParameter('status', $status);
-        }
-
-        if ($district) {
-            $qb->andWhere('proposal.district = :district')
-                ->setParameter('district', $district);
-        }
-
-        if ($type) {
-            $qb->andWhere('author.userType = :type')
-                ->setParameter('type', $type);
-        }
-
-        if ($order === 'old') {
-            $qb->addOrderBy('proposal.createdAt', 'ASC');
-        }
-
-        if ($order === 'last') {
-            $qb->addOrderBy('proposal.createdAt', 'DESC');
-        }
-
-        if ($order === 'popular') {
-            $qb->addOrderBy('proposal.votesCount', 'DESC');
-        }
-
-        if ($order === 'comments') {
-            $qb->addOrderBy('proposal.commentsCount', 'DESC');
-        }
-
-        $qb
-            ->setFirstResult($first)
-            ->setMaxResults($offset)
-        ;
-
-        return new Paginator($qb);
-    }
-
-    public function countPublishedForForm($form)
+    public function countEnabledForForm($form)
     {
         $qb = $this
             ->getIsEnabledQueryBuilder()
@@ -162,21 +101,6 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposal.proposalForm = :proposalForm')
             ->setParameter('notTrashed', false)
             ->setParameter('proposalForm', $form)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function countPublishedForSelectionStep(SelectionStep $step)
-    {
-        $qb = $this
-            ->getIsEnabledQueryBuilder()
-            ->select('COUNT(proposal.id) as proposalsCount')
-            ->leftJoin('proposal.selectionSteps', 'selectionSteps')
-            ->andWhere('proposal.isTrashed = :notTrashed')
-            ->andWhere('selectionSteps.id = :stepId')
-            ->setParameter('notTrashed', false)
-            ->setParameter('stepId', $step->getId())
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
@@ -331,5 +255,6 @@ class ProposalRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getResult();
+
     }
 }

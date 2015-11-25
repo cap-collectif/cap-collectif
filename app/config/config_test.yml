@@ -1,27 +1,23 @@
 imports:
-  - { resource: config_dev.yml }
+    - { resource: config_dev.yml }
 
 framework:
-  test: ~
-  session:
-    storage_id: session.storage.filesystem
-  profiler:
-    collect: false
+    test: ~
+    session:
+        storage_id: session.storage.filesystem
+    profiler:
+        collect: false
 
 web_profiler:
-  toolbar: false
-  intercept_redirects: false
+    toolbar: false
+    intercept_redirects: false
 
 swiftmailer:
-  mailers:
-    default:
-      disable_delivery: true
-    service:
-      disable_delivery: true
+    disable_delivery: true
 
 doctrine:
-  dbal:
-    default_connection: default
-    connections:
-      default:
-        dbname: "%database_name%_test"
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                dbname: "%database_name%_test"
