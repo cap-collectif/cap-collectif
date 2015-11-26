@@ -1,6 +1,3 @@
-imports:
-    - { resource: listeners.yml }
-
 services:
   capco_admin.admin.page:
     class: Capco\AdminBundle\Admin\PageAdmin
@@ -355,3 +352,10 @@ services:
         - {name: sonata.admin, manager_type: orm, label: admin.label.step}
       calls:
         - [ setTranslationDomain, [SonataAdminBundle]]
+
+  capco.status_changer:
+      class: Capco\AdminBundle\EventListener\StatusChanger
+      calls:
+        - [ setContainer, [ @service_container ] ]
+      tags:
+        - { name: doctrine.event_listener, event: preUpdate }

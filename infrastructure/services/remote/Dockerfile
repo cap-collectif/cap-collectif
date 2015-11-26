@@ -76,7 +76,7 @@ RUN addgroup --gid=1000 capco && \
     adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco
 
 # Prepare /var/www
-RUN rm -rf /var/www/html; cd /var/www ; chown -R capco:capco /var/www/
+RUN rm -rf /var/www/html; chown -R capco:capco /var/www/
 
 # Move mysql elsewhere because /var/lib/mysql will be a volume after build (see mysql/run)
 RUN mv /var/lib/mysql /var/lib/mysql_save
