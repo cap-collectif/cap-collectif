@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# We create cache and logs directories if they don't exist
+echo "Creating cache and logs directories"
 mkdir -p /var/www/app/cache
 mkdir -p /var/www/app/logs
 
-echo "Clearing cache..."
+echo "Clearing previous cache..."
 rm -rf /var/www/app/cache/*
 
 chmod -R 777 /var/www/app/cache
