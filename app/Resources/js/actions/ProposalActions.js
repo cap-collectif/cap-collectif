@@ -72,15 +72,16 @@ export default {
     });
   },
 
-  changeOrder: (order) => {
+  changeOrder: (newOrder) => {
+    LocalStorageService.set('proposals_order', newOrder);
     AppDispatcher.dispatch({
       actionType: CHANGE_ORDER,
-      order: order,
+      order: newOrder,
     });
   },
 
   changeFilterValue: (filterName, value) => {
-    const filters = ProposalStore.filters;
+    let filters = ProposalStore.filters;
     filters[filterName] = value;
     LocalStorageService.set('proposals_filters', filters);
 

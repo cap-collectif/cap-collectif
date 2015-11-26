@@ -15,7 +15,7 @@ class ProposalStore extends BaseStore {
     this.register(this._registerToActions.bind(this));
     this._proposalsCount = 0;
     this._proposals = [];
-    this._order = 'last';
+    this._order = LocalStorageService.get('proposals_order') || 'last';
     this._filters = LocalStorageService.get('proposals_filters') || {};
     this._currentPage = 1;
   }
