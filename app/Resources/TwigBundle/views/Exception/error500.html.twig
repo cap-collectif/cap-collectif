@@ -17,21 +17,4 @@
 		</p>
 	</div>
 
-	<div class="container">
-		<h2 class="h2">{{ 'error.contribute'|trans({}, 'CapcoAppBundle') }}</h2>
-		{{ render(controller('CapcoAppBundle:Site/Project:lastProject', {'max': 4, 'offset': 0})) }}
-	</div>
-
-{% endblock %}
-
-{% block javascripts %}
-	{{ parent() }}
-	<script type="text/javascript">
-        $(window).on('load', function() {
-            App.equalheight('.thumbnail--custom');
-        });
-        $(window).on('resize', function() {
-            App.resized('.thumbnail--custom');
-        });
-	</script>
 {% endblock %}

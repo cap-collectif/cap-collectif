@@ -3,7 +3,7 @@ Feature: Arguments
 ## List
 
   Scenario: API client wants to list arguments of an opinion
-    When I send a GET request to "/api/opinions/27/arguments"
+    When I send a GET request to "/api/opinions/2/arguments"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
