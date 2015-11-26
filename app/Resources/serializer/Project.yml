@@ -1,0 +1,35 @@
+Capco\AppBundle\Entity\Project:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Projects]
+        title:
+            expose: true
+            type: string
+            groups: [Projects]
+        author:
+            expose: true
+            type: Capco\UserBundle\Entity\User
+            serialized_name: author
+            groups: [Projects]
+        votesCount:
+            expose: true
+            type: integer
+            groups: [Projects]
+        canContribute:
+            expose: true
+            type: boolean
+            groups: [Projects]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Projects]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Projects]
+        enabled:
+            expose: true
+            groups: [Projects]

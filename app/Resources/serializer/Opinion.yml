@@ -122,3 +122,7 @@ Capco\AppBundle\Entity\Opinion:
             type: integer
             serialized_name: arguments_no_count
             groups: [Opinions]
+        getStep:
+            type: object
+            serialized_name: step
+            groups: [Opinions]

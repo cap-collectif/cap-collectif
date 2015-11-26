@@ -68,8 +68,12 @@ class Loader
     public function setObjectManager(ObjectManager $manager)
     {
         $this->objectManager = $manager;
-
         $this->persister = new Doctrine($this->objectManager);
+
+        $evm = $this->objectManager->getEventManager();
+        foreach($evm->getListeners()['postFlush'] as $listener) {
+            $evm->removeEventListener('postFlush', $listener);
+        }
 
         $newReferences = [];
         foreach ($this->references as $name => $reference) {

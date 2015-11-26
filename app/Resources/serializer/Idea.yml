@@ -1,0 +1,54 @@
+Capco\AppBundle\Entity\Idea:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Ideas]
+        title:
+            expose: true
+            type: string
+            groups: [Ideas]
+        body:
+            expose: true
+            type: string
+            groups: [Ideas]
+        slug:
+            expose: true
+            type: string
+            groups: [Ideas]
+        object:
+            expose: true
+            type: string
+            groups: [Ideas]
+        url:
+            expose: true
+            type: string
+            groups: [Ideas]
+        author:
+            expose: true
+            type: Capco\UserBundle\Entity\User
+            serialized_name: author
+            groups: [Ideas]
+        commentsCount:
+            expose: true
+            type: integer
+            groups: [Ideas]
+        canContribute:
+            expose: true
+            type: boolean
+            groups: [Ideas]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Ideas]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Ideas]
+        comments:
+            expose: true
+            groups: [Ideas]
+        enabled:
+            expose: true
+            groups: [Ideas]
