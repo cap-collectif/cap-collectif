@@ -37,11 +37,11 @@ Feature: Arguments
       | opinionSlug      | opinion-2                        |
     And I wait 8 seconds
     When I go on the arguments tab
-    And I click the "#arg-26 .argument__btn--vote" element
-    Then I should see "1" in the "#arg-26 .opinion__votes-nb" element
+    And I click the "#arg-24 .argument__btn--vote" element
+    Then I should see "1" in the "#arg-24 .opinion__votes-nb" element
     And I should see "Annuler mon vote"
-    And I click the "#arg-26 .argument__btn--vote" element
-    And I should see "0" in the "#arg-26 .opinion__votes-nb" element
+    And I click the "#arg-24 .argument__btn--vote" element
+    And I should see "0" in the "#arg-24 .opinion__votes-nb" element
 
   @javascript @database
   Scenario: Author of an argument loose their votes when updating it
