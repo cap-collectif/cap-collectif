@@ -448,7 +448,6 @@ admin:
         annotation: Cette annotation ne sera pas visible sur le site.
         rating: Cette note ne sera pas visible sur le site.
         status: <span class="capco--sonata-ba-field-help"><i class="fa fa-exclamation-triangle"></i>&nbsp;Modifier le statut de cette proposition en informera son auteur par email</span>.
-        answer: <span class="capco--sonata-ba-field-help"><i class="fa fa-exclamation-triangle"></i>&nbsp;Ajouter ou modifier un réponse à cette proposition en informera son auteur par email</span>.
       id: Id
       isTrashed: Dans la corbeille
       link: Lien
