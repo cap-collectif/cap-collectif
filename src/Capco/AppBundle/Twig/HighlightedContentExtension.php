@@ -28,10 +28,10 @@ class HighlightedContentExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('capco_is_first_highlighted', array($this, 'isFirstHighlightedContent')),
-            new \Twig_SimpleFilter('capco_is_last_highlighted', array($this, 'isLastHighlightedContent')),
-        );
+        return [
+            new \Twig_SimpleFilter('capco_is_first_highlighted', [$this, 'isFirstHighlightedContent']),
+            new \Twig_SimpleFilter('capco_is_last_highlighted', [$this, 'isLastHighlightedContent']),
+        ];
     }
 
     public function isFirstHighlightedContent($content)

@@ -25,9 +25,9 @@ class SiteParameterExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('capco_site_parameter_value', array($this, 'getSiteParameterValue'), array('is_safe' => array('html'))),
-       );
+        return [
+            new \Twig_SimpleFunction('capco_site_parameter_value', [$this, 'getSiteParameterValue'], ['is_safe' => ['html']]),
+       ];
     }
 
     public function getSiteParameterValue($key)

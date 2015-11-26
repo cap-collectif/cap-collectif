@@ -15,7 +15,7 @@ class IdeaPage extends Page
     protected $path = '/ideas/{slug}';
 
     protected $elements = [
-        'First comment vote button' => '.opinion--comment button.btn',
+        'First comment vote button'  => '.opinion--comment button.btn',
         'First comment vote counter' => '.opinion--comment .opinion__votes-nb',
     ];
 

@@ -353,3 +353,9 @@ services:
       calls:
         - [ setTranslationDomain, [SonataAdminBundle]]
 
+  capco.status_changer:
+      class: Capco\AdminBundle\EventListener\StatusChanger
+      calls:
+        - [ setContainer, [ @service_container ] ]
+      tags:
+        - { name: doctrine.event_listener, event: preUpdate }

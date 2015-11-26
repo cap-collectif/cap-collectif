@@ -34,7 +34,7 @@ abstract class Comment implements VotableInterface
     use VotableOkTrait;
 
     public static $sortCriterias = [
-        'date' => 'argument.sort.date',
+        'date'       => 'argument.sort.date',
         'popularity' => 'argument.sort.popularity',
     ];
 

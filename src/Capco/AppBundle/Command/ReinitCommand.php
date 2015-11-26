@@ -109,10 +109,10 @@ class ReinitCommand extends ContainerAwareCommand
     protected function loadToggles(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:reset-feature-flags');
-        $input = new ArrayInput(array(
+        $input = new ArrayInput([
             '--force' => true,
             '',
-        ));
+        ]);
         $input->setInteractive(false);
         $command->run($input, $output);
     }
@@ -120,7 +120,7 @@ class ReinitCommand extends ContainerAwareCommand
     protected function recalculateCounters(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:recalculate-counters');
-        $input = new ArrayInput(array(''));
+        $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
     }

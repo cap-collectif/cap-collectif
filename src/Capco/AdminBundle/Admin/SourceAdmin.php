@@ -13,7 +13,7 @@ class SourceAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
     /**
@@ -22,41 +22,41 @@ class SourceAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.source.title',
-            ))
-            ->add('body', null, array(
+            ])
+            ->add('body', null, [
                 'label' => 'admin.fields.source.body',
-            ))
+            ])
             ->add('Author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.source.author',
-            ], null, array(
+            ], null, [
                 'property' => 'username',
-            ))
-            ->add('Opinion', null, array(
+            ])
+            ->add('Opinion', null, [
                 'label' => 'admin.fields.source.opinion',
-            ))
-            ->add('Category', null, array(
+            ])
+            ->add('Category', null, [
                 'label' => 'admin.fields.source.category',
-            ))
-            ->add('link', null, array(
+            ])
+            ->add('link', null, [
                 'label' => 'admin.fields.source.link',
-            ))
-            ->add('votesCount', null, array(
+            ])
+            ->add('votesCount', null, [
                 'label' => 'admin.fields.source.vote_count_source',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.source.updated_at',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.source.created_at',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.source.is_enabled',
-            ))
-            ->add('isTrashed', null, array(
+            ])
+            ->add('isTrashed', null, [
                 'label' => 'admin.fields.source.is_trashed',
-            ))
+            ])
         ;
     }
 
@@ -68,39 +68,39 @@ class SourceAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, array(
+            ->addIdentifier('title', null, [
                 'label' => 'admin.fields.source.title',
-            ))
-            ->add('Author', 'sonata_type_model', array(
+            ])
+            ->add('Author', 'sonata_type_model', [
                 'label' => 'admin.fields.source.author',
-            ))
-            ->add('Opinion', 'sonata_type_model', array(
+            ])
+            ->add('Opinion', 'sonata_type_model', [
                 'label' => 'admin.fields.source.opinion',
-            ))
-            ->add('Category', 'sonata_type_model', array(
+            ])
+            ->add('Category', 'sonata_type_model', [
                 'label' => 'admin.fields.source.category',
-            ))
-            ->add('votesCount', null, array(
+            ])
+            ->add('votesCount', null, [
                 'label' => 'admin.fields.source.vote_count_source',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.source.is_enabled',
-            ))
-            ->add('isTrashed', null, array(
+                'label'    => 'admin.fields.source.is_enabled',
+            ])
+            ->add('isTrashed', null, [
                 'editable' => true,
-                'label' => 'admin.fields.source.is_trashed',
-            ))
-            ->add('updatedAt', null, array(
+                'label'    => 'admin.fields.source.is_trashed',
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.source.updated_at',
-            ))
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                ),
-            ))
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'show'   => [],
+                    'edit'   => [],
+                    'delete' => [],
+                ],
+            ])
         ;
     }
 
@@ -110,40 +110,40 @@ class SourceAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.source.title',
-            ))
-            ->add('isEnabled', null, array(
-                'label' => 'admin.fields.source.is_enabled',
+            ])
+            ->add('isEnabled', null, [
+                'label'    => 'admin.fields.source.is_enabled',
                 'required' => false,
-            ))
-            ->add('body', null, array(
+            ])
+            ->add('body', null, [
                 'label' => 'admin.fields.source.body',
-            ))
+            ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.source.author',
+                'label'    => 'admin.fields.source.author',
                 'property' => 'username',
             ])
-            ->add('Opinion', 'sonata_type_model', array(
+            ->add('Opinion', 'sonata_type_model', [
                 'label' => 'admin.fields.source.opinion',
-            ))
-            ->add('Category', 'sonata_type_model', array(
+            ])
+            ->add('Category', 'sonata_type_model', [
                 'label' => 'admin.fields.source.category',
-            ))
-            ->add('link', null, array(
+            ])
+            ->add('link', null, [
                 'label' => 'admin.fields.source.link',
-                'attr' => array(
+                'attr'  => [
                     'placeholder' => 'http://www.cap-collectif.com/',
-                ),
-            ))
-            ->add('isTrashed', null, array(
-                'label' => 'admin.fields.source.is_trashed',
+                ],
+            ])
+            ->add('isTrashed', null, [
+                'label'    => 'admin.fields.source.is_trashed',
                 'required' => false,
-            ))
-            ->add('trashedReason', null, array(
-                'label' => 'admin.fields.source.trashed_reason',
+            ])
+            ->add('trashedReason', null, [
+                'label'    => 'admin.fields.source.trashed_reason',
                 'required' => false,
-            ))
+            ])
         ;
     }
 
@@ -154,48 +154,48 @@ class SourceAdmin extends Admin
     {
         $subject = $this->getSubject();
         $showMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.source.title',
-            ))
-            ->add('body', null, array(
+            ])
+            ->add('body', null, [
                 'label' => 'admin.fields.source.body',
-            ))
-            ->add('Author', null, array(
+            ])
+            ->add('Author', null, [
                 'label' => 'admin.fields.source.author',
-            ))
-            ->add('Opinion', null, array(
+            ])
+            ->add('Opinion', null, [
                 'label' => 'admin.fields.source.opinion',
-            ))
-            ->add('Category', null, array(
+            ])
+            ->add('Category', null, [
                 'label' => 'admin.fields.source.category',
-            ))
-            ->add('link', null, array(
+            ])
+            ->add('link', null, [
                 'label' => 'admin.fields.source.link',
-            ))
-            ->add('votesCount', null, array(
+            ])
+            ->add('votesCount', null, [
                 'label' => 'admin.fields.source.vote_count_source',
-            ))
-            ->add('isEnabled', null, array(
+            ])
+            ->add('isEnabled', null, [
                 'label' => 'admin.fields.source.is_enabled',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.source.created_at',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.source.updated_at',
-            ))
-            ->add('isTrashed', null, array(
+            ])
+            ->add('isTrashed', null, [
                 'label' => 'admin.fields.source.is_trashed',
-            ))
+            ])
         ;
         if ($subject->getIsTrashed()) {
             $showMapper
-                ->add('trashedAt', null, array(
+                ->add('trashedAt', null, [
                     'label' => 'admin.fields.source.trashed_at',
-                ))
-                ->add('trashedReason', null, array(
+                ])
+                ->add('trashedReason', null, [
                     'label' => 'admin.fields.source.trashed_reason',
-                ))
+                ])
             ;
         }
     }

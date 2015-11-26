@@ -25,9 +25,9 @@ class IdeaExtension extends \Twig_Extension
 
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('capco_idea_user_voted', array($this, 'hasVoted')),
-        );
+        return [
+            new \Twig_SimpleFilter('capco_idea_user_voted', [$this, 'hasVoted']),
+        ];
     }
 
     public function hasVoted($idea, $user)

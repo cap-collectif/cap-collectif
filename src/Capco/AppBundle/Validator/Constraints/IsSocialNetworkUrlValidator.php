@@ -9,8 +9,8 @@ class IsSocialNetworkUrlValidator extends ConstraintValidator
 {
     public $patterns = [
         'facebook' => '#^(?:https?:\/\/)?(?:www\.)?facebook\.com\/[A-Za-z0-9\.]+\/?#i',
-        'twitter' => '#^(?:https?:\/\/)?twitter\.com\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
-        'gplus' => '#^(?:https?:\/\/)?plus\.google\.com\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
+        'twitter'  => '#^(?:https?:\/\/)?twitter\.com\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
+        'gplus'    => '#^(?:https?:\/\/)?plus\.google\.com\/(?:\#!\/)?[A-Za-z0-9_]+\/?#i',
     ];
 
     public function validate($value, Constraint $constraint)
@@ -33,6 +33,6 @@ class IsSocialNetworkUrlValidator extends ConstraintValidator
             return;
         }
 
-        $this->context->addViolation($constraint->getMessage(), array());
+        $this->context->addViolation($constraint->getMessage(), []);
     }
 }

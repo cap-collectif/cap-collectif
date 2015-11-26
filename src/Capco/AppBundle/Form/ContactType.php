@@ -12,25 +12,25 @@ class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text', array(
-                'label' => 'contact.form.name',
-                'required' => true,
+        $builder->add('name', 'text', [
+                'label'       => 'contact.form.name',
+                'required'    => true,
                 'constraints' => [new NotBlank(['message' => 'contact.no_name'])],
-            ))
-            ->add('email', 'email', array(
-                'label' => 'contact.form.email',
-                'required' => true,
+            ])
+            ->add('email', 'email', [
+                'label'       => 'contact.form.email',
+                'required'    => true,
                 'constraints' => [new NotBlank(['message' => 'contact.no_email']), new Email(['checkMX' => true])],
-            ))
-            ->add('message', 'textarea', array(
-                'label' => 'contact.form.message',
+            ])
+            ->add('message', 'textarea', [
+                'label'    => 'contact.form.message',
                 'required' => true,
-                'attr' => array(
+                'attr'     => [
                     'rows' => '10',
                     'cols' => '30',
-                ),
+                ],
                 'constraints' => [new NotBlank(['message' => 'contact.no_message'])],
-            ))
+            ])
         ;
     }
 
@@ -41,8 +41,8 @@ class ContactType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'translation_domain' => 'CapcoAppBundle',
-        ));
+        ]);
     }
 }

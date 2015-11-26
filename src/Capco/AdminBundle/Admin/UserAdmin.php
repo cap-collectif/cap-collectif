@@ -13,19 +13,19 @@ use Sonata\CoreBundle\Model\Metadata;
 class UserAdmin extends BaseAdmin
 {
     private $rolesLabels = [
-        'ROLE_USER' => 'roles.user',
-        'ROLE_ADMIN' => 'roles.admin',
+        'ROLE_USER'        => 'roles.user',
+        'ROLE_ADMIN'       => 'roles.admin',
         'ROLE_SUPER_ADMIN' => 'roles.super_admin',
     ];
 
     private $rolesLabelsNoSuper = [
-        'ROLE_USER' => 'roles.user',
+        'ROLE_USER'  => 'roles.user',
         'ROLE_ADMIN' => 'roles.admin',
     ];
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'username',
+        '_sort_by'    => 'username',
     ];
 
     public function getFormBuilder()
@@ -51,24 +51,24 @@ class UserAdmin extends BaseAdmin
         $listMapper
             ->addIdentifier('email')
             ->add('username')
-            ->add('enabled', null, array(
+            ->add('enabled', null, [
                 'editable' => true,
-            ))
-            ->add('locked', null, array(
+            ])
+            ->add('locked', null, [
                 'editable' => true,
-            ))
+            ])
             ->add('updatedAt')
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'edit' => array(
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'edit' => [
                         'template' => 'CapcoAdminBundle:User:list__action_edit.html.twig',
-                    ),
-                    'show' => array(),
-                    'delete' => array(
+                    ],
+                    'show'   => [],
+                    'delete' => [
                         'template' => 'CapcoAdminBundle:User:list__action_delete.html.twig',
-                    ),
-                ),
-            ))
+                    ],
+                ],
+            ])
         ;
     }
 
@@ -99,17 +99,17 @@ class UserAdmin extends BaseAdmin
             ->add('updatedAt')
             ->end()
             ->with('Profile')
-            ->add('Media', 'sonata_media_type', array(
+            ->add('Media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:User:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-            ))
+            ])
             ->add('dateOfBirth')
             ->add('firstname')
             ->add('lastname')
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('user_type')) {
-            $showMapper->add('userType', null, array());
+            $showMapper->add('userType', null, []);
         }
 
         $showMapper
@@ -154,17 +154,17 @@ class UserAdmin extends BaseAdmin
         // define group zoning
         $formMapper
             ->tab('User')
-            ->with('Profile', array('class' => 'col-md-6'))->end()
-            ->with('General', array('class' => 'col-md-6'))->end()
-            ->with('Social', array('class' => 'col-md-6'))->end()
+            ->with('Profile', ['class' => 'col-md-6'])->end()
+            ->with('General', ['class' => 'col-md-6'])->end()
+            ->with('Social', ['class' => 'col-md-6'])->end()
             ->end()
         ;
         if (($subject && !$subject->hasRole('ROLE_SUPER_ADMIN')) || $currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
                 ->tab('Security')
-                ->with('Status', array('class' => 'col-md-6'))->end()
-                ->with('Keys', array('class' => 'col-md-6'))->end()
-                ->with('Roles', array('class' => 'col-md-12'))->end()
+                ->with('Status', ['class' => 'col-md-6'])->end()
+                ->with('Keys', ['class' => 'col-md-6'])->end()
+                ->with('Roles', ['class' => 'col-md-12'])->end()
                 ->end()
             ;
         }
@@ -176,54 +176,54 @@ class UserAdmin extends BaseAdmin
             ->with('General')
             ->add('username')
             ->add('email')
-            ->add('plainPassword', 'text', array(
+            ->add('plainPassword', 'text', [
                 'required' => (!$this->getSubject() || is_null($this->getSubject()->getId())),
-            ))
+            ])
             ->end()
             ->with('Profile')
-            ->add('Media', 'sonata_type_model_list', array(
+            ->add('Media', 'sonata_type_model_list', [
                 'required' => false,
-            ), array(
-                'link_parameters' => array(
-                'context' => 'default',
+            ], [
+                'link_parameters' => [
+                'context'      => 'default',
                 'hide_context' => true,
-            ), ))
-            ->add('dateOfBirth', 'sonata_type_date_picker', array(
-                'years' => range(1900, $now->format('Y')),
+            ], ])
+            ->add('dateOfBirth', 'sonata_type_date_picker', [
+                'years'       => range(1900, $now->format('Y')),
                 'dp_min_date' => '1-1-1900',
                 'dp_max_date' => $now->format('c'),
-                'required' => false,
-            ))
-            ->add('firstname', null, array('required' => false))
-            ->add('lastname', null, array('required' => false))
+                'required'    => false,
+            ])
+            ->add('firstname', null, ['required' => false])
+            ->add('lastname', null, ['required' => false])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('user_type')) {
-            $formMapper->add('userType', null, array(
+            $formMapper->add('userType', null, [
                 'required' => false,
-            ));
+            ]);
         }
 
         $formMapper
-            ->add('website', 'url', array('required' => false))
-            ->add('biography', 'text', array('required' => false))
-            ->add('address', null, array('required' => false))
-            ->add('address2', null, array('required' => false))
-            ->add('zipCode', null, array('required' => false))
-            ->add('city', null, array('required' => false))
-            ->add('neighborhood', null, array('required' => false))
-            ->add('gender', 'sonata_user_gender', array(
-                'required' => true,
+            ->add('website', 'url', ['required' => false])
+            ->add('biography', 'text', ['required' => false])
+            ->add('address', null, ['required' => false])
+            ->add('address2', null, ['required' => false])
+            ->add('zipCode', null, ['required' => false])
+            ->add('city', null, ['required' => false])
+            ->add('neighborhood', null, ['required' => false])
+            ->add('gender', 'sonata_user_gender', [
+                'required'           => true,
                 'translation_domain' => 'SonataUserBundle',
-            ))
-            ->add('locale', 'locale', array('required' => false))
-            ->add('timezone', 'timezone', array('required' => false))
-            ->add('phone', null, array('required' => false))
+            ])
+            ->add('locale', 'locale', ['required' => false])
+            ->add('timezone', 'timezone', ['required' => false])
+            ->add('phone', null, ['required' => false])
             ->end()
             ->with('Social')
-            ->add('facebook_url', null, array('required' => false))
-            ->add('google_url', null, array('required' => false))
-            ->add('twitter_url', null, array('required' => false))
+            ->add('facebook_url', null, ['required' => false])
+            ->add('google_url', null, ['required' => false])
+            ->add('twitter_url', null, ['required' => false])
             ->end()
             ->end()
         ;
@@ -232,14 +232,14 @@ class UserAdmin extends BaseAdmin
             $formMapper
                 ->tab('Security')
                 ->with('Status')
-                ->add('locked', null, array('required' => false))
-                ->add('isTermsAccepted', null, array(
+                ->add('locked', null, ['required' => false])
+                ->add('isTermsAccepted', null, [
                     'required' => false,
-                    'data' => true,
-                ))
-                ->add('expired', null, array('required' => false))
-                ->add('enabled', null, array('required' => false))
-                ->add('credentialsExpired', null, array('required' => false))
+                    'data'     => true,
+                ])
+                ->add('expired', null, ['required' => false])
+                ->add('enabled', null, ['required' => false])
+                ->add('credentialsExpired', null, ['required' => false])
                 ->end()
 
                 // Roles
@@ -251,11 +251,11 @@ class UserAdmin extends BaseAdmin
                     'realRoles',
                     'sonata_security_roles',
                     [
-                        'expanded' => true,
-                        'multiple' => true,
-                        'required' => false,
+                        'expanded'           => true,
+                        'multiple'           => true,
+                        'required'           => false,
                         'translation_domain' => 'SonataUserBundle',
-                        'choices' => $currentUser->hasRole('ROLE_SUPER_ADMIN')
+                        'choices'            => $currentUser->hasRole('ROLE_SUPER_ADMIN')
                             ? $this->rolesLabels
                             : $this->rolesLabelsNoSuper,
                     ]
@@ -263,8 +263,8 @@ class UserAdmin extends BaseAdmin
                 ->end()
 
                 ->with('Keys')
-                ->add('token', null, array('required' => false))
-                ->add('twoStepVerificationCode', null, array('required' => false))
+                ->add('token', null, ['required' => false])
+                ->add('twoStepVerificationCode', null, ['required' => false])
                 ->end()
                 ->end()
             ;

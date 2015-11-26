@@ -12,12 +12,12 @@ class ProposalFormAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
-    protected $formOptions = array(
+    protected $formOptions = [
         'cascade_validation' => true,
-    );
+    ];
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
@@ -28,7 +28,7 @@ class ProposalFormAdmin extends Admin
                 'label' => 'admin.fields.proposal_form.title',
             ])
             ->add('description', 'ckeditor', [
-                'label' => 'admin.fields.proposal_form.description',
+                'label'       => 'admin.fields.proposal_form.description',
                 'config_name' => 'admin_editor',
             ])
             ->end()
@@ -37,12 +37,12 @@ class ProposalFormAdmin extends Admin
         $formMapper
             ->with('admin.fields.proposal_form.group_questions')
             ->add('questions', 'sonata_type_collection', [
-                'label' => 'admin.fields.proposal_form.questions',
+                'label'        => 'admin.fields.proposal_form.questions',
                 'by_reference' => false,
-                'required' => false,
+                'required'     => false,
             ], [
-                'edit' => 'inline',
-                'inline' => 'table',
+                'edit'     => 'inline',
+                'inline'   => 'table',
                 'sortable' => 'position',
             ])
             ->end()
@@ -76,8 +76,8 @@ class ProposalFormAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])

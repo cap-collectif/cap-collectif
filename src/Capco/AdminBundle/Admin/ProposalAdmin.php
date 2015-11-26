@@ -12,8 +12,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 class ProposalAdmin extends Admin
 {
     protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'updatedAt',
     ];
 
     protected $formOptions = [
@@ -48,56 +48,60 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.title',
             ])
             ->add('body', 'ckeditor', [
-                'label' => 'admin.fields.proposal.body',
+                'label'       => 'admin.fields.proposal.body',
                 'config_name' => 'admin_editor',
             ])
             ->add('author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.proposal.author',
+                'label'    => 'admin.fields.proposal.author',
                 'required' => true,
                 'property' => 'username',
             ])
+            ->add('proposalForm', null, [
+                'label' => 'admin.fields.proposal.form',
+            ])
             ->add('theme', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.theme',
-                'required' => false,
+                'label'       => 'admin.fields.proposal.theme',
+                'required'    => false,
                 'empty_value' => 'admin.fields.proposal.no_theme',
-                'btn_add' => false,
+                'btn_add'     => false,
             ])
             ->add('district', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.district',
-                'required' => false,
+                'label'       => 'admin.fields.proposal.district',
+                'required'    => false,
                 'empty_value' => 'admin.fields.proposal.no_district',
-                'btn_add' => false,
+                'btn_add'     => false,
             ])
             ->add('status', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.status',
-                'required' => false,
+                'label'       => 'admin.fields.proposal.status',
+                'required'    => false,
                 'empty_value' => 'admin.fields.proposal.no_status',
-                'btn_add' => false,
+                'btn_add'     => false,
+                'help'        => 'admin.fields.proposal.help.status',
             ])
             ->add('rating', 'choice', [
-                'label' => 'admin.fields.proposal.rating',
+                'label'    => 'admin.fields.proposal.rating',
                 'required' => false,
-                'choices' => Proposal::$ratings,
-                'help' => 'admin.fields.proposal.help.rating',
+                'choices'  => Proposal::$ratings,
+                'help'     => 'admin.fields.proposal.help.rating',
             ])
             ->add('annotation', 'ckeditor', [
-                'label' => 'admin.fields.proposal.annotation',
+                'label'    => 'admin.fields.proposal.annotation',
                 'required' => false,
-                'help' => 'admin.fields.proposal.help.annotation',
+                'help'     => 'admin.fields.proposal.help.annotation',
             ])
             ->end()
 
             ->with('admin.fields.proposal.group_publication')
                 ->add('enabled', null, [
-                    'label' => 'admin.fields.proposal.enabled',
+                    'label'    => 'admin.fields.proposal.enabled',
                     'required' => false,
                 ])
                 ->add('isTrashed', null, [
-                    'label' => 'admin.fields.proposal.isTrashed',
+                    'label'    => 'admin.fields.proposal.isTrashed',
                     'required' => false,
                 ])
                 ->add('trashedReason', null, [
-                    'label' => 'admin.fields.proposal.trashedReason',
+                    'label'    => 'admin.fields.proposal.trashedReason',
                     'required' => false,
                 ])
             ->end()
@@ -105,7 +109,7 @@ class ProposalAdmin extends Admin
             // Answer
             ->with('admin.fields.proposal.group_selection')
             ->add('answer', 'sonata_type_model_list', [
-                'label' => 'admin.fields.proposal.answer',
+                'label'    => 'admin.fields.proposal.answer',
                 'btn_list' => false,
                 'required' => false,
             ])
@@ -115,12 +119,12 @@ class ProposalAdmin extends Admin
         if ($projectId) {
             $formMapper
                 ->add('selectionSteps', 'sonata_type_model', [
-                    'label' => 'admin.fields.proposal.selection_steps',
-                    'query' => $this->createQueryForSelectionSteps(),
-                    'btn_add' => false,
+                    'label'        => 'admin.fields.proposal.selection_steps',
+                    'query'        => $this->createQueryForSelectionSteps(),
+                    'btn_add'      => false,
                     'by_reference' => false,
-                    'required' => false,
-                    'multiple' => true,
+                    'required'     => false,
+                    'multiple'     => true,
                 ])
             ;
         }
@@ -134,16 +138,19 @@ class ProposalAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
+            ->addIdentifier('id', null, [
+                'label' => 'admin.fields.proposal.id',
+            ])
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.proposal.title',
             ])
             ->add('enabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.proposal.enabled',
+                'label'    => 'admin.fields.proposal.enabled',
             ])
             ->add('isTrashed', null, [
                 'editable' => true,
-                'label' => 'admin.fields.proposal.isTrashed',
+                'label'    => 'admin.fields.proposal.isTrashed',
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
@@ -191,20 +198,56 @@ class ProposalAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
+            ->add('id', null, [
+                'label' => 'admin.fields.proposal.id',
+            ])
             ->add('title', null, [
                 'label' => 'admin.fields.proposal.title',
+            ])
+            ->add('author', null, [
+                'label' => 'admin.fields.proposal.author',
+            ])
+            ->add('author.id', null, [
+                'label' => 'admin.fields.proposal.author_id',
+            ])
+        ;
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('user_type')) {
+            $showMapper->add('author.userType.name', null, [
+                'label' => 'admin.fields.proposal.author_type',
+            ]);
+        }
+
+        $showMapper
+            ->add('body', null, [
+                'label' => 'admin.fields.proposal.body',
+                'template' => 'CapcoAdminBundle:Proposal:body_show_field.html.twig',
+            ])
+            ->add('proposalResponses', null, [
+                'label' => 'admin.fields.proposal.responses',
+                'template' => 'CapcoAdminBundle:Proposal:responses_show_field.html.twig',
+            ])
+            ->add('theme', null, [
+                'label' => 'admin.fields.proposal.theme',
+            ])
+            ->add('district', null, [
+                'label' => 'admin.fields.proposal.district',
+            ])
+            ->add('status', null, [
+                'label' => 'admin.fields.proposal.status',
             ])
             ->add('enabled', null, [
                 'label' => 'admin.fields.proposal.enabled',
             ])
-            ->add('body', null, [
-                'label' => 'admin.fields.proposal.body',
+            ->add('createdAt', null, [
+                'label' => 'admin.fields.proposal.created_at',
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
             ])
-            ->add('createdAt', null, [
-                'label' => 'admin.fields.proposal.created_at',
+            ->add('link', null, [
+                'label' => 'admin.fields.proposal.link',
+                'template' => 'CapcoAdminBundle:Proposal:link_show_field.html.twig',
             ])
         ;
     }

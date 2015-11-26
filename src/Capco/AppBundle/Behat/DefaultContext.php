@@ -126,7 +126,7 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
      *
      * @return string
      */
-    protected function generateUrl($route, array $parameters = array(), $absolute = false)
+    protected function generateUrl($route, array $parameters = [], $absolute = false)
     {
         return $this->locatePath($this->getService('router')->generate($route, $parameters, $absolute));
     }

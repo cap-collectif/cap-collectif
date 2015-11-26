@@ -13,7 +13,7 @@ class OpinionVersionAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
     /**
@@ -22,32 +22,32 @@ class OpinionVersionAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.opinion_version.title',
-            ))
-            ->add('body', null, array(
+            ])
+            ->add('body', null, [
                 'label' => 'admin.fields.opinion_version.body',
-            ))
-            ->add('comment', null, array(
+            ])
+            ->add('comment', null, [
                 'label' => 'admin.fields.opinion_version.comment',
-            ))
+            ])
             ->add('author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.opinion_version.author',
-            ], null, array(
+            ], null, [
                 'property' => 'username',
-            ))
-            ->add('parent', null, array(
+            ])
+            ->add('parent', null, [
                 'label' => 'admin.fields.opinion_version.parent',
-            ))
-            ->add('enabled', null, array(
+            ])
+            ->add('enabled', null, [
                 'label' => 'admin.fields.opinion_version.is_enabled',
-            ))
-            ->add('isTrashed', null, array(
+            ])
+            ->add('isTrashed', null, [
                 'label' => 'admin.fields.opinion_version.is_trashed',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.opinion_version.updated_at',
-            ))
+            ])
         ;
     }
 
@@ -59,39 +59,39 @@ class OpinionVersionAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, array(
+            ->addIdentifier('title', null, [
                 'label' => 'admin.fields.opinion_version.title',
-            ))
-            ->add('body', null, array(
+            ])
+            ->add('body', null, [
                 'label' => 'admin.fields.opinion_version.body',
-            ))
-            ->add('comment', null, array(
+            ])
+            ->add('comment', null, [
                 'label' => 'admin.fields.opinion_version.comment',
-            ))
-            ->add('author', null, array(
+            ])
+            ->add('author', null, [
                 'label' => 'admin.fields.opinion_version.author',
-            ))
-            ->add('parent', null, array(
+            ])
+            ->add('parent', null, [
                 'label' => 'admin.fields.opinion_version.parent',
-            ))
-            ->add('enabled', null, array(
-                'label' => 'admin.fields.opinion_version.is_enabled',
+            ])
+            ->add('enabled', null, [
+                'label'    => 'admin.fields.opinion_version.is_enabled',
                 'editable' => true,
-            ))
-            ->add('isTrashed', null, array(
-                'label' => 'admin.fields.opinion_version.is_trashed',
+            ])
+            ->add('isTrashed', null, [
+                'label'    => 'admin.fields.opinion_version.is_trashed',
                 'editable' => true,
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.opinion_version.updated_at',
-            ))
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                ),
-            ))
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'show'   => [],
+                    'edit'   => [],
+                    'delete' => [],
+                ],
+            ])
         ;
     }
 
@@ -101,29 +101,29 @@ class OpinionVersionAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('admin.fields.opinion_version.group_content', array('class' => 'col-md-12'))->end()
-            ->with('admin.fields.opinion_version.group_publication', array('class' => 'col-md-12'))->end()
-            ->with('admin.fields.opinion_version.group_answer', array('class' => 'col-md-12'))->end()
+            ->with('admin.fields.opinion_version.group_content', ['class' => 'col-md-12'])->end()
+            ->with('admin.fields.opinion_version.group_publication', ['class' => 'col-md-12'])->end()
+            ->with('admin.fields.opinion_version.group_answer', ['class' => 'col-md-12'])->end()
             ->end()
         ;
 
         $formMapper
             // Content
             ->with('admin.fields.opinion_version.group_content')
-                ->add('title', null, array(
+                ->add('title', null, [
                     'label' => 'admin.fields.opinion_version.title',
-                ))
+                ])
                 ->add('author', 'sonata_type_model_autocomplete', [
-                    'label' => 'admin.fields.opinion_version.author',
+                    'label'    => 'admin.fields.opinion_version.author',
                     'property' => 'username',
                 ])
-                ->add('parent', 'sonata_type_model', array(
+                ->add('parent', 'sonata_type_model', [
                     'label' => 'admin.fields.opinion_version.parent',
-                ))
-                ->add('body', 'ckeditor', array(
-                    'label' => 'admin.fields.opinion_version.body',
+                ])
+                ->add('body', 'ckeditor', [
+                    'label'       => 'admin.fields.opinion_version.body',
                     'config_name' => 'admin_editor',
-                ))
+                ])
                 ->add('comment', null, [
                     'label' => 'admin.fields.opinion_version.comment',
                 ])
@@ -131,26 +131,26 @@ class OpinionVersionAdmin extends Admin
 
             // Publication
             ->with('admin.fields.opinion_version.group_publication')
-                ->add('enabled', null, array(
-                    'label' => 'admin.fields.opinion_version.is_enabled',
+                ->add('enabled', null, [
+                    'label'    => 'admin.fields.opinion_version.is_enabled',
                     'required' => false,
-                ))
-                ->add('isTrashed', null, array(
-                    'label' => 'admin.fields.opinion_version.is_trashed',
+                ])
+                ->add('isTrashed', null, [
+                    'label'    => 'admin.fields.opinion_version.is_trashed',
                     'required' => false,
-                ))
-                ->add('trashedReason', null, array(
+                ])
+                ->add('trashedReason', null, [
                     'label' => 'admin.fields.opinion_version.trashed_reason',
-                ))
+                ])
             ->end()
 
             // Answer
             ->with('admin.fields.opinion_version.group_answer')
-            ->add('answer', 'sonata_type_model_list', array(
-                'label' => 'admin.fields.opinion_version.answer',
+            ->add('answer', 'sonata_type_model_list', [
+                'label'    => 'admin.fields.opinion_version.answer',
                 'btn_list' => false,
                 'required' => false,
-            ))
+            ])
             ->end()
         ;
     }
@@ -163,65 +163,65 @@ class OpinionVersionAdmin extends Admin
         $subject = $this->getSubject();
 
         $showMapper
-            ->add('title', null, array(
+            ->add('title', null, [
                 'label' => 'admin.fields.opinion_version.title',
-            ))
-            ->add('author', null, array(
+            ])
+            ->add('author', null, [
                 'label' => 'admin.fields.opinion_version.author',
-            ))
-            ->add('parent', null, array(
+            ])
+            ->add('parent', null, [
                 'label' => 'admin.fields.opinion_version.parent',
-            ))
-            ->add('body', null, array(
+            ])
+            ->add('body', null, [
                 'label' => 'admin.fields.opinion_version.body',
-            ))
-            ->add('comment', null, array(
+            ])
+            ->add('comment', null, [
                 'label' => 'admin.fields.opinion_version.comment',
-            ))
-            ->add('votesCountOk', null, array(
+            ])
+            ->add('votesCountOk', null, [
                 'label' => 'admin.fields.opinion_version.vote_count_ok',
-            ))
-            ->add('votesCountNok', null, array(
+            ])
+            ->add('votesCountNok', null, [
                 'label' => 'admin.fields.opinion_version.vote_count_nok',
-            ))
-            ->add('votesCountMitige', null, array(
+            ])
+            ->add('votesCountMitige', null, [
                 'label' => 'admin.fields.opinion_version.vote_count_mitige',
-            ))
-            ->add('argumentsCount', null, array(
+            ])
+            ->add('argumentsCount', null, [
                 'label' => 'admin.fields.opinion_version.argument_count',
-            ))
-            ->add('sourcesCount', null, array(
+            ])
+            ->add('sourcesCount', null, [
                 'label' => 'admin.fields.opinion_version.source_count',
-            ))
-            ->add('enabled', null, array(
+            ])
+            ->add('enabled', null, [
                 'label' => 'admin.fields.opinion_version.is_enabled',
-            ))
-            ->add('createdAt', null, array(
+            ])
+            ->add('createdAt', null, [
                 'label' => 'admin.fields.opinion_version.created_at',
-            ))
-            ->add('updatedAt', null, array(
+            ])
+            ->add('updatedAt', null, [
                 'label' => 'admin.fields.opinion_version.updated_at',
-            ))
-            ->add('isTrashed', null, array(
+            ])
+            ->add('isTrashed', null, [
                 'label' => 'admin.fields.opinion_version.is_trashed',
-            ))
+            ])
         ;
 
         if ($subject->getIsTrashed()) {
             $showMapper
-                ->add('trashedAt', null, array(
+                ->add('trashedAt', null, [
                     'label' => 'admin.fields.opinion_version.trashed_at',
-                ))
-                ->add('trashedReason', null, array(
+                ])
+                ->add('trashedReason', null, [
                     'label' => 'admin.fields.opinion_version.trashed_reason',
-                ))
+                ])
             ;
         }
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('list', 'show', 'create', 'edit', 'delete'));
+        $collection->clearExcept(['list', 'show', 'create', 'edit', 'delete']);
     }
 
     public function getBatchActions()

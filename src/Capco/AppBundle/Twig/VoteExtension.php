@@ -26,11 +26,11 @@ class VoteExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('capco_vote_object_url', array($this, 'getRelatedObjectUrl')),
-            new \Twig_SimpleFunction('capco_vote_object', array($this, 'getRelatedObject')),
-            new \Twig_SimpleFunction('capco_vote_object_admin_url', array($this, 'getRelatedObjectAdminUrl')),
-        );
+        return [
+            new \Twig_SimpleFunction('capco_vote_object_url', [$this, 'getRelatedObjectUrl']),
+            new \Twig_SimpleFunction('capco_vote_object', [$this, 'getRelatedObject']),
+            new \Twig_SimpleFunction('capco_vote_object_admin_url', [$this, 'getRelatedObjectAdminUrl']),
+        ];
     }
 
     public function getRelatedObjectUrl(Vote $vote, $absolute = false)

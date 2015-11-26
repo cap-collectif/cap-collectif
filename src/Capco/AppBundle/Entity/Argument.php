@@ -28,15 +28,15 @@ class Argument implements VotableInterface
     const TYPE_SIMPLE = 2;
 
     public static $argumentTypes = [
-        self::TYPE_FOR => 'yes',
+        self::TYPE_FOR     => 'yes',
         self::TYPE_AGAINST => 'no',
-        self::TYPE_SIMPLE => 'simple',
+        self::TYPE_SIMPLE  => 'simple',
    ];
 
     public static $argumentTypesLabels = [
-        self::TYPE_FOR => 'argument.show.type.for',
+        self::TYPE_FOR     => 'argument.show.type.for',
         self::TYPE_AGAINST => 'argument.show.type.against',
-        self::TYPE_SIMPLE => 'argument.show.type.simple',
+        self::TYPE_SIMPLE  => 'argument.show.type.simple',
     ];
 
     /**
