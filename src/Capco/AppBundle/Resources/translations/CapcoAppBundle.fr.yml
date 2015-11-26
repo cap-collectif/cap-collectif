@@ -651,7 +651,7 @@ proposal_deletion:
       subject: Une proposition a été supprimée par son auteur.
       body: |
         <p>Bonjour,</p>
-        <p>La proposition "%proposal%" vient d’être supprimée par son auteur sur %sitename%.</p>
+        <p>La proposition "%title%" vient d’être supprimée par son auteur sur %sitename%.</p>
         <p><strong>Informations complémentaires :</strong></p>
         <ul>
           <li>Projet : %project%</li>

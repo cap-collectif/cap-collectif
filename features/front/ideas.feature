@@ -148,6 +148,7 @@ Scenario: Can not comment an uncommentable idea
     And I visited "idea page" with:
       | slug | ideacommentable |
     And I wait 5 seconds
+    And The first comment vote counter should be "0"
     When I vote for the first comment
     And I wait 5 seconds
     Then I should see "Merci ! Votre vote a bien été pris en compte."
@@ -215,4 +216,4 @@ Scenario: Can not comment an uncommentable idea
     And I am logged in as user
     And I visited "ideas page"
     When I follow "Voir la corbeille"
-    Then I should see 7 ".media--macro" elements
+    Then I should see 11 ".media--macro" elements
