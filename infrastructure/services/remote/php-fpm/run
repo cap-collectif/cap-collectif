@@ -11,8 +11,8 @@ chmod -R 777 /var/www/app/cache
 chmod -R 777 /var/www/app/logs
 
 # Configure New Relic
-sed -i 's/newrelic.appname = "PHP Application"/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php5/fpm/conf.d/newrelic.ini
-sed -i 's/newrelic.license = "REPLACE_WITH_REAL_KEY"/newrelic.license = '***REMOVED***'/' /etc/php5/fpm/conf.d/newrelic.ini
+sed -i 's/newrelic.appname = "PHP Application"/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php5/fpm/conf.d/20-newrelic.ini
+sed -i 's/newrelic.license = "REPLACE_WITH_REAL_KEY"/newrelic.license = '***REMOVED***'/' /etc/php5/fpm/conf.d/20-newrelic.ini
 
 # Wait till mysql is booted
 while ! mysql --host=127.0.0.1 > /dev/null 2>&1; do sleep 1; done

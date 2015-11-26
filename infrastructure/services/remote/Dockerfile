@@ -58,9 +58,9 @@ RUN \
     apt-get update && \
     apt-get install -y newrelic-php5 && \
     newrelic-install install && \
-    rm -rf /etc/php5/cli/conf.d/20-newrelic.ini /etc/php5/fpm/conf.d/20-newrelic.ini && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/*
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
+    rm -f /etc/php5/*/conf.d/newrelic.ini
 
 # Install varnish
 RUN apt-get update && \
