@@ -109,9 +109,9 @@ const App = (($) => {
     let $el;
     let topPosition = 0;
 
-    $(container).each(function() {
-      $el = $(this);
-      $($el).height('auto');
+    $(container).each((index, el) => {
+      $el = $(el);
+      $el.height('auto');
       topPosition = $el.position().top;
 
       if ($(window).width() > 767) {
