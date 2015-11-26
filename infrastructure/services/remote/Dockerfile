@@ -106,14 +106,12 @@ COPY VERSION /VERSION
 
 USER root
 
-# Add entrypoint
-WORKDIR /var/www
-ENTRYPOINT ["/entrypoint.sh"]
-
 # Volume for redis / cache / logs
 VOLUME ["/data", "/var/www/app/cache", "/var/www/app/logs"]
 
-USER root
+# Add entrypoint
+WORKDIR /var/www
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Default command
 CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]
