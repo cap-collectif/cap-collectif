@@ -61,18 +61,6 @@ RUN \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/*
 
-# Update npm - Install bower
-RUN npm install -g npm && \
-    npm install -g bower
-
-# Install composer / drush
-RUN wget https://getcomposer.org/composer.phar -O- -q >> /usr/local/bin/composer && \
-    chmod +x /usr/local/bin/composer
-
-# Install builder
-COPY build.sh /usr/local/bin/capcobuild
-RUN chmod +x /usr/local/bin/capcobuild
-
 # Install varnish
 RUN apt-get update && \
     apt-get install -y wget apt-transport-https && \
@@ -86,9 +74,6 @@ RUN apt-get update && \
 # Install fake user 1000
 RUN addgroup --gid=1000 capco && \
     adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco
-
-# Add vendor binaries to PATH
-ENV PATH $PATH:/home/capco/.composer/vendor/bin/
 
 # Prepare /var/www
 RUN rm -rf /var/www/html; cd /var/www ; chown -R capco:capco /var/www/
@@ -117,26 +102,17 @@ COPY cron/crontab               /etc/cron.d/crontab
 COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 
-# Add ssh checkout key
-RUN mkdir /home/capco/.ssh && echo "Host github.com\n\tStrictHostKeyChecking no\n" > /home/capco/.ssh/config
-COPY ssh/id_rsa.pub /home/capco/.ssh/id_rsa.pub
-COPY ssh/id_rsa /home/capco/.ssh/id_rsa
-RUN chmod 600 /home/capco/.ssh/id_rsa.pub /home/capco/.ssh/id_rsa && chown capco:capco -R /home/capco/.ssh
+# Generate a new docker image even if dockerfiles has not changed
+COPY VERSION /VERSION
 
 USER capco
-
-# Retrieve project
-COPY VERSION /VERSION
-RUN cd /var/www ; git clone -b develop --single-branch --depth 1 git@github.com:jolicode/CapCollectif-SF2.git .
-RUN cd /var/www && /usr/local/bin/capcobuild
 
 # Add entrypoint
 WORKDIR /var/www
 ENTRYPOINT ["/entrypoint.sh"]
 
-# Add redis and elasticsearch volumes
+# Add redis volume
 VOLUME /data
-VOLUME /etc/elasticsearch/data
 
 USER root
 

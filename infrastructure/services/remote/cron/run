@@ -1,6 +1,7 @@
 #!/bin/bash
 
-sleep 10
+# Wait till php-fpm is booted
+while ! /etc/init.d/php5-fpm status > /dev/null 2>&1; do sleep 1; done
 
 # We install the crontab
 crontab /etc/cron.d/crontab
