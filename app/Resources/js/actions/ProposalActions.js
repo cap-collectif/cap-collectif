@@ -79,21 +79,14 @@ export default {
     });
   },
 
-  changeFilterValue: (filter, value) => {
-    const data = LocalStorageService.get('proposals_filters');
-    if (data === null) {
-      LocalStorageService.set('proposals_filters', {
-        [filter]: value,
-      });
-    } else {
-      let filters = data;
-      filters[filter] = value;
-      LocalStorageService.set('proposals_filters', filters);
-    }
+  changeFilterValue: (filterName, value) => {
+    const filters = ProposalStore.filters;
+    filters[filterName] = value;
+    LocalStorageService.set('proposals_filters', filters);
 
     AppDispatcher.dispatch({
       actionType: CHANGE_FILTERS,
-      filter: filter,
+      filter: filterName,
       value: value,
     });
   },

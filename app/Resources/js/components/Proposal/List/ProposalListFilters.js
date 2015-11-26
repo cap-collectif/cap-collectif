@@ -62,9 +62,9 @@ const ProposalListFilters = React.createClass({
     ProposalActions.changeOrder(order);
   },
 
-  handleFilterChange(filter) {
-    const value = this.refs[filter].getValue();
-    ProposalActions.changeFilterValue(filter, value);
+  handleFilterChange(filterName) {
+    const value = this.refs[filterName].getValue();
+    ProposalActions.changeFilterValue(filterName, value);
     this.reload();
   },
 
@@ -76,7 +76,6 @@ const ProposalListFilters = React.createClass({
   filters: ['theme', 'status', 'type', 'district'],
 
   render() {
-    console.log(this.filters);
     return (
     <div>
       <ButtonToolbar>
@@ -95,20 +94,20 @@ const ProposalListFilters = React.createClass({
       </ButtonToolbar>
       <Row>
         {
-          this.filters.map((filter, value) => {
+          this.filters.map((filterName) => {
             return (
               <Col xs={12} md={6}>
                 <Input
                   type="select"
-                  ref={filter}
-                  onChange={this.handleFilterChange.bind(this, filter)}
-                  value={value}
+                  ref={filterName}
+                  onChange={this.handleFilterChange.bind(this, filterName)}
+                  value={this.state.filters[filterName] || 0}
                 >
-                  <option value="">
-                    {this.getIntlMessage('global.select_' + filter)}
+                  <option value="0">
+                    {this.getIntlMessage('global.select_' + filterName)}
                   </option>
                   {
-                    this.props[filter].map((option) => {
+                    this.props[filterName].map((option) => {
                       return (
                         <option key={option.id} value={option.id}>
                           {option.title || option.name}
