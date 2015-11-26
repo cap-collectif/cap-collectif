@@ -37,12 +37,14 @@ class ProposalStore extends BaseStore {
       break;
     case CHANGE_ORDER:
       this._order = action.order;
+      LocalStorageService.set('proposals_order', action.order);
       this._currentPage = 1;
       this.emitChange();
       break;
     case CHANGE_FILTERS:
       this._filters[action.filter] = action.value;
       this._currentPage = 1;
+      LocalStorageService.set('proposals_filters', this._filters);
       this.emitChange();
       break;
     default: break;

@@ -1,6 +1,5 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import LocalStorageService from '../services/LocalStorageService';
 import ProposalStore from '../stores/ProposalStore';
 import {
   RECEIVE_PROPOSAL,
@@ -73,7 +72,6 @@ export default {
   },
 
   changeOrder: (newOrder) => {
-    LocalStorageService.set('proposals_order', newOrder);
     AppDispatcher.dispatch({
       actionType: CHANGE_ORDER,
       order: newOrder,
@@ -81,10 +79,6 @@ export default {
   },
 
   changeFilterValue: (filterName, value) => {
-    let filters = ProposalStore.filters;
-    filters[filterName] = value;
-    LocalStorageService.set('proposals_filters', filters);
-
     AppDispatcher.dispatch({
       actionType: CHANGE_FILTERS,
       filter: filterName,

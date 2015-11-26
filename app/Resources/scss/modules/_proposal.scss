@@ -99,6 +99,7 @@ $statuses:
 }
 
 .proposal-search-input {
-  width: 48%;
-  display: inline-block;
+  @media (max-width: $screen-sm-max) {
+    margin-top: 15px;
+  }
 }

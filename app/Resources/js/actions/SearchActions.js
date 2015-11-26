@@ -8,7 +8,7 @@ export default {
 
   getSearch: (terms = '', sort = 'score', type = 'all', page = 1, pagination = 10) => {
     return Fetcher
-      .get(`/search/${terms}/${sort}/${type}/${page}/${pagination}`, {})
+      .get(`/search/${terms}/${sort}/${type}/${page}/${pagination}`)
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSALS,

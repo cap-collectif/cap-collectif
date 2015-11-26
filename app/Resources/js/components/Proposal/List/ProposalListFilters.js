@@ -78,20 +78,26 @@ const ProposalListFilters = React.createClass({
   render() {
     return (
     <div>
-      <ButtonToolbar>
-        <ButtonGroup>
-          {
-            this.buttons.map((button) => {
-              return (
-                <Button active={this.state.order === button} onClick={this.handleOrderChange.bind(this, button)}>
-                  {this.getIntlMessage('global.filter_' + button)}
-                </Button>
-              );
-            })
-          }
-        </ButtonGroup>
-        <ProposalListSearch value={'search terms'} />
-      </ButtonToolbar>
+      <Row>
+        <Col xs={12} md={6}>
+          <ButtonToolbar>
+            <ButtonGroup>
+              {
+                this.buttons.map((button) => {
+                  return (
+                    <Button active={this.state.order === button} onClick={this.handleOrderChange.bind(this, button)}>
+                      {this.getIntlMessage('global.filter_f_' + button)}
+                    </Button>
+                  );
+                })
+              }
+            </ButtonGroup>
+          </ButtonToolbar>
+        </Col>
+        <Col xs={12} md={6}>
+          <ProposalListSearch/>
+        </Col>
+      </Row>
       <Row>
         {
           this.filters.map((filterName) => {

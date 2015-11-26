@@ -1,8 +1,6 @@
 import SearchActions from '../../../actions/SearchActions';
-import ProposalStore from '../../../stores/ProposalStore';
 import Input from '../../Form/Input';
 
-const Col = ReactBootstrap.Col;
 const Button = ReactBootstrap.Button;
 
 const ProposalListSearch = React.createClass({
@@ -11,12 +9,11 @@ const ProposalListSearch = React.createClass({
   },
   mixins: [
     ReactIntl.IntlMixin,
-    React.addons.LinkedStateMixin
+    React.addons.LinkedStateMixin,
   ],
 
   getInitialState() {
     return {
-      id: 'proposal-search-input',
       value: '',
     };
   },
@@ -35,7 +32,7 @@ const ProposalListSearch = React.createClass({
       <Button onClick={this.handleSubmit}>
         <i className="cap cap-magnifier"></i>
       </Button>
-    )
+    );
   },
 
   render() {
@@ -43,14 +40,13 @@ const ProposalListSearch = React.createClass({
       <Input
         type="text"
         ref={(c) => this._input = c}
-        placeholder={this.getIntlMessage('global.proposal_search')}
+        placeholder={this.getIntlMessage('proposal.search')}
         buttonAfter={this.renderSearchButton(this.handleSubmit)}
         valueLink={this.linkState('value')}
         groupClassName="proposal-search-input pull-right"
-      >
-      </Input>
-    )
-  }
+      />
+    );
+  },
 });
 
 export default ProposalListSearch;
