@@ -47,6 +47,10 @@ class CommentAdmin extends Admin
             ->add('isTrashed', null, [
                 'label' => 'admin.fields.comment.is_trashed',
             ])
+            ->add('type', 'doctrine_orm_class', [
+                'label' => 'admin.fields.comment.type',
+                'sub_classes' => $this->getSubClasses(),
+            ])
         ;
     }
 
@@ -71,7 +75,6 @@ class CommentAdmin extends Admin
                 'label'    => 'admin.fields.comment.author',
                 'template' => 'CapcoAdminBundle:Comment:author_list_field.html.twig',
                 'mapped'   => false,
-
             ])
             ->add('votesCount', null, [
                 'label' => 'admin.fields.comment.vote_count',

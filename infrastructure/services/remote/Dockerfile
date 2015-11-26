@@ -57,6 +57,7 @@ RUN \
     wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
     apt-get update && \
     apt-get install -y newrelic-php5 && \
+    newrelic-install install && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
     rm -f /etc/php5/*/conf.d/newrelic.ini
@@ -105,12 +106,14 @@ COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 # Generate a new docker image even if dockerfiles has not changed
 COPY VERSION /VERSION
 
-# Volume for redis
-VOLUME ["/data"]
+USER root
 
 # Add entrypoint
 WORKDIR /var/www
 ENTRYPOINT ["/entrypoint.sh"]
+
+# Add redis volume
+VOLUME /data
 
 USER root
 

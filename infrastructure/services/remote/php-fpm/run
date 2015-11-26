@@ -1,43 +1,42 @@
 #!/bin/bash
 
-mkdir -p /var/www/app/cache /var/www/app/logs
-# chown -R capco:capco /var/www/app/cache
-# chown -R capco:capco /var/www/app/logs
-# chown -R capco:capco /var/www/web/media
-chmod -R 777 /var/www/app/cache /var/www/app/logs /var/www/web/media
+echo "Creating cache and logs directories"
+mkdir -p /var/www/app/cache
+mkdir -p /var/www/app/logs
 
 echo "Clearing previous cache..."
 rm -rf /var/www/app/cache/*
+
+chmod -R 777 /var/www/app/cache
+chmod -R 777 /var/www/app/logs
+
+# Configure New Relic
+sed -i 's/newrelic.appname = "PHP Application"/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php5/fpm/conf.d/20-newrelic.ini
+sed -i 's/newrelic.license = "REPLACE_WITH_REAL_KEY"/newrelic.license = '***REMOVED***'/' /etc/php5/fpm/conf.d/20-newrelic.ini
 
 # Wait till mysql is booted
 while ! mysql --host=127.0.0.1 > /dev/null 2>&1; do sleep 1; done
 
 echo "Mysql has booted - Running database migrations."
 
-su capco <<'EOF'
-
-cd /var/www
-
 # Migrate existing database or create one with default data
 RESULT=`php app/console doctrine:migrations:status --env=prod 2>&1 | grep -o "Unknown database" | wc -l`
 if [ "$RESULT" != "0" ]; then
-    php app/console doctrine:database:create --if-not-exists --env=prod --no-interaction
-    php app/console doctrine:schema:create --env=prod --no-interaction
-    php app/console doctrine:migrations:version --add --all --env=prod --no-interaction
-    php app/console capco:load-base-data --force --env=prod --no-interaction
+    php /var/www/app/console doctrine:database:create --if-not-exists --env=prod --no-interaction
+    php /var/www/app/console doctrine:schema:create --env=prod --no-interaction
+    php /var/www/app/console doctrine:migrations:version --add --all --env=prod --no-interaction
+    php /var/www/app/console capco:load-base-data --force --env=prod --no-interaction
 else
-    php app/console doctrine:migrations:migrate --env=prod --no-interaction
+    php /var/www/app/console doctrine:migrations:migrate --env=prod --no-interaction
 fi
 
-php app/console cache:warmup --env=prod --no-interaction
-php app/console assets:install --symlink --env=prod --no-interaction
+php /var/www/app/console cache:warmup --env=prod --no-interaction
+php /var/www/app/console assets:install --symlink --env=prod --no-interaction
 
 # Wait till elasticsearch is booted
 while ! curl http://localhost:9200 > /dev/null 2>&1; do sleep 1; done
 
 echo "Elasticsearch has booted - Populating index."
-php app/console fos:elastica:populate --env=prod --no-interaction &
-
-EOF
+php /var/www/app/console fos:elastica:populate --env=prod --no-interaction &
 
 exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O
