@@ -16,7 +16,7 @@ sed -i 's/newrelic.appname = "PHP Application"/newrelic.appname = '"$NR_INSTALL_
 sed -i 's/newrelic.license = "REPLACE_WITH_REAL_KEY"/newrelic.license = '***REMOVED***'/' /etc/php5/fpm/conf.d/newrelic.ini
 
 # Wait till mysql is booted
-while ! mysql --host=127.0.0.1 symfony > /dev/null 2>&1; do sleep 1; done
+while ! mysql --host=127.0.0.1 > /dev/null 2>&1; do sleep 1; done
 
 # Migrate existing database or create one with default data
 su capco <<'EOF'
