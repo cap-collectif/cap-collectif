@@ -85,8 +85,3 @@ services:
     arguments: [@capco.vote.resolver]
     tags:
       - { name: twig.extension }
-
-  capco.twig.dates:
-      class: Capco\AppBundle\Twig\DateExtension
-      tags:
-        - { name: twig.extension }
