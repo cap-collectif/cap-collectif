@@ -105,7 +105,7 @@ COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 # Generate a new docker image even if dockerfiles has not changed
 COPY VERSION /VERSION
 
-USER capco
+USER root
 
 # Add entrypoint
 WORKDIR /var/www
@@ -113,8 +113,6 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 # Add redis volume
 VOLUME /data
-
-USER root
 
 # Default command
 CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]
