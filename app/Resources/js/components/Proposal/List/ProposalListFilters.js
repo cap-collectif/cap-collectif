@@ -1,7 +1,6 @@
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalListSearch from '../List/ProposalListSearch';
-import LocalStorageService from '../../../services/LocalStorageService';
 import Input from '../../Form/Input';
 
 
@@ -32,7 +31,7 @@ const ProposalListFilters = React.createClass({
   getInitialState() {
     return {
       order: ProposalStore.order,
-      filters: LocalStorageService.get('proposals_filters') || ProposalStore.filters,
+      filters: ProposalStore.filters,
       isLoading: true,
     };
   },
@@ -77,6 +76,7 @@ const ProposalListFilters = React.createClass({
   filters: ['theme', 'status', 'type', 'district'],
 
   render() {
+    console.log(this.filters);
     return (
     <div>
       <ButtonToolbar>
@@ -95,22 +95,23 @@ const ProposalListFilters = React.createClass({
       </ButtonToolbar>
       <Row>
         {
-          this.filters.map((filter) => {
+          this.filters.map((filter, value) => {
             return (
               <Col xs={12} md={6}>
                 <Input
                   type="select"
                   ref={filter}
                   onChange={this.handleFilterChange.bind(this, filter)}
+                  value={value}
                 >
-                  <option value="" selected>
+                  <option value="">
                     {this.getIntlMessage('global.select_' + filter)}
                   </option>
                   {
-                    this.props[filter].map((type) => {
+                    this.props[filter].map((option) => {
                       return (
-                        <option key={type.id} value={type.id}>
-                          {type.title || type.name}
+                        <option key={option.id} value={option.id}>
+                          {option.title || option.name}
                         </option>
                       );
                     })

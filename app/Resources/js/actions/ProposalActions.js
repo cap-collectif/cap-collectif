@@ -81,16 +81,14 @@ export default {
 
   changeFilterValue: (filter, value) => {
     const data = LocalStorageService.get('proposals_filters');
-    if (data === null || data.filters === null) {
+    if (data === null) {
       LocalStorageService.set('proposals_filters', {
-        filters: {
-          [filter]: {value},
-        }
+        [filter]: value,
       });
     } else {
-      let filters = data.filters;
-      filters[filter].value = value;
-      LocalStorageService.set('proposals_filters', {filters});
+      let filters = data;
+      filters[filter] = value;
+      LocalStorageService.set('proposals_filters', filters);
     }
 
     AppDispatcher.dispatch({

@@ -1,4 +1,5 @@
 import BaseStore from './BaseStore';
+import LocalStorageService from '../services/LocalStorageService';
 import {
   RECEIVE_PROPOSALS,
   RECEIVE_PROPOSAL,
@@ -15,7 +16,7 @@ class ProposalStore extends BaseStore {
     this._proposalsCount = 0;
     this._proposals = [];
     this._order = 'last';
-    this._filters = {};
+    this._filters = LocalStorageService.get('proposals_filters') || {};
     this._currentPage = 1;
   }
 
