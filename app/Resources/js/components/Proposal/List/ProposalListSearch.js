@@ -2,6 +2,7 @@ import ProposalActions from '../../../actions/ProposalActions';
 import ProposalStore from '../../../stores/ProposalStore';
 import Input from '../../Form/Input';
 
+const Col = ReactBootstrap.Col;
 const Button = ReactBootstrap.Button;
 
 const ProposalListSearch = React.createClass({
