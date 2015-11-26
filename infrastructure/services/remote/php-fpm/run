@@ -19,7 +19,6 @@ sed -i 's/newrelic.license = "REPLACE_WITH_REAL_KEY"/newrelic.license = '***REMO
 
 # Wait till mysql is booted
 while ! mysql --host=127.0.0.1 > /dev/null 2>&1; do sleep 1; done
-echo "Mysql has booted - Running database migrations."
 
 # Migrate existing database or create one with default data
 RESULT=`php app/console doctrine:migrations:status --env=prod 2>&1 | grep -o "Unknown database" | wc -l`
@@ -32,12 +31,12 @@ else
     php app/console doctrine:migrations:migrate --env=prod --no-interaction
 fi
 
-php app/console cache:warmup --env=prod --no-interaction
-php app/console assets:install --symlink --env=prod --no-interaction
-
 # Wait till elasticsearch is booted
 while ! curl http://localhost:9200 > /dev/null 2>&1; do sleep 1; done
-echo "Elasticsearch has booted - Populating index."
+
+# Start daemons
+php app/console cache:warmup --env=prod --no-interaction &
+php app/console assets:install --symlink --env=prod --no-interaction &
 php app/console fos:elastica:populate --env=prod --no-interaction &
 
 exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O
