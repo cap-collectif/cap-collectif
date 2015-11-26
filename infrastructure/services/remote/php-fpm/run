@@ -1,15 +1,17 @@
 #!/bin/bash
 
 # We create cache and logs directories if they don't exist
-mkdir -p app/cache
-mkdir -p app/logs
+mkdir -p /var/www/app/cache
+mkdir -p /var/www/app/logs
 
 # Clear previous cache if any
-rm -rf app/cache/*
+rm -rf /var/www/app/cache/*
 
 chown -R capco:capco /var/www/app/cache
 chown -R capco:capco /var/www/app/logs
 chown -R capco:capco /var/www/web/media
+chmod -R 777 /var/www/app/cache
+chmod -R 777 /var/www/app/logs
 
 # Configure New Relic
 sed -i 's/newrelic.appname = "PHP Application"/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php5/fpm/conf.d/newrelic.ini
