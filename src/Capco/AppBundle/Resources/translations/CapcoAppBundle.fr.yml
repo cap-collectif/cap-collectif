@@ -651,7 +651,7 @@ proposal_deletion:
       subject: Une proposition a été supprimée par son auteur.
       body: |
         <p>Bonjour,</p>
-        <p>La proposition "%title%" vient d’être supprimée par son auteur sur %sitename%.</p>
+        <p>La proposition "%proposal%" vient d’être supprimée par son auteur sur %sitename%.</p>
         <p><strong>Informations complémentaires :</strong></p>
         <ul>
           <li>Projet : %project%</li>
@@ -671,23 +671,6 @@ proposal_status_change:
       <ul>
         <li><strong>Proposition :</strong> %proposal%</li>
         <li><strong>Nouveau statut :</strong> %status%</li>
-      </ul>
-      <p><strong>Publiée dans :</strong></p>
-      <ul>
-        <li><strong>Projet :</strong> %project%</li>
-        <li><strong>Étape :</strong> %step%</li>
-      </ul>
-      <a href="%proposal_link%">Voir votre contribution sur le site</a>
-
-proposal_answer:
-  notification:
-    subject: Votre proposition a obtenu une réponse officielle sur %sitename%.
-    body: |
-      <p>Bonjour %user%,</p>
-      <p>Votre proposition a obtenu une réponse officielle sur %sitename%.</p>
-      <ul>
-        <li><strong>Proposition :</strong> %proposal%</li>
-        <li><strong>Réponse :</strong> %answer%</li>
       </ul>
       <p><strong>Publiée dans :</strong></p>
       <ul>

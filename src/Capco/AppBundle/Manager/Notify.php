@@ -216,28 +216,4 @@ class Notify implements MailerInterface
 
         $this->sendEmail($proposal->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
     }
-
-    /**
-     * @param Proposal $proposal
-     */
-    public function notifyProposalAnswer(Proposal $proposal)
-    {
-        $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
-        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-
-        $subject = $this->translator->trans(
-            'proposal_answer.notification.subject', [
-            '%sitename%' => $this->resolver->getValue('global.site.fullname')
-        ], 'CapcoAppBundle'
-        );
-        $template = 'CapcoAppBundle:Mail:notifyProposalAnswer.html.twig';
-        $body = $this->templating->render(
-            $template,
-            [
-                'proposal' => $proposal,
-            ]
-        );
-
-        $this->sendEmail($proposal->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
-    }
 }

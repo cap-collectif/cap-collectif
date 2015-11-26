@@ -104,11 +104,11 @@ Feature: Project
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "135 contributions"
+    Then I should see "139 contributions"
     And I hover over the "#contributions-counter-pill" element
     And I wait 5 seconds
-    And I should see "25 propositions"
-    And I should see "78 arguments"
+    And I should see "24 propositions"
+    And I should see "83 arguments"
     And I should see "32 sources"
 
   Scenario: Project header should display correct number of participants

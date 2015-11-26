@@ -112,7 +112,6 @@ class ProposalAdmin extends Admin
                 'label'    => 'admin.fields.proposal.answer',
                 'btn_list' => false,
                 'required' => false,
-                'help'     => 'admin.fields.proposal.help.answer',
             ])
         ;
 

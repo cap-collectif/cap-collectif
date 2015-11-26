@@ -1,7 +1,0 @@
-services:
-  capco.proposal_events:
-      class: Capco\AdminBundle\EventListener\ProposalListener
-      calls:
-        - [ setContainer, [ @service_container ] ]
-      tags:
-        - { name: doctrine.event_listener, event: preUpdate }

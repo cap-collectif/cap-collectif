@@ -2,13 +2,12 @@
 
 namespace Capco\AdminBundle\EventListener;
 
-use Capco\AppBundle\Entity\Answer;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Capco\AppBundle\Entity\Proposal;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ProposalListener implements ContainerAwareInterface
+class StatusChanger implements ContainerAwareInterface
 {
     private $container;
 
@@ -28,17 +27,9 @@ class ProposalListener implements ContainerAwareInterface
         $entity = $args->getEntity();
         $changeSet = $args->getEntityChangeSet();
 
-        if ($entity instanceof Proposal) {
+        if ($entity instanceof Proposal && array_key_exists('status', $changeSet)) {
             $notifier = $this->container->get('capco.notify_manager');
-
-            if (array_key_exists('status', $changeSet)) {
-                $notifier->notifyProposalStatusChange($entity);
-            }
-
-            if (array_key_exists('answer', $changeSet) && $changeSet['answer'][1] instanceof Answer) {
-                $notifier->notifyProposalAnswer($entity);
-            }
-
+            $notifier->notifyProposalStatusChange($entity);
         }
     }
 }
