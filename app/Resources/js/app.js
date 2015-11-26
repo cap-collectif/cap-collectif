@@ -109,7 +109,7 @@ const App = (($) => {
     let $el;
     let topPosition = 0;
 
-    $(container).each(() => {
+    $(container).each(function() {
       $el = $(this);
       $($el).height('auto');
       topPosition = $el.position().top;
