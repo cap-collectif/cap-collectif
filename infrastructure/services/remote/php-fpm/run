@@ -1,5 +1,12 @@
 #!/bin/bash
 
+rm -f /etc/php5/*/conf.d/newrelic.ini
+
+mkdir -p /var/www/app/cache
+mkdir -p /var/www/app/logs
+mkdir -p /var/www/web/bundles
+chmod -R 777 /var/www/app/cache /var/www/app/logs /var/www/web/media /var/www/web/bundles
+
 echo "Clearing previous cache..."
 rm -rf /var/www/app/cache/*
 

@@ -3,6 +3,6 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     virtual_properties:
         getProjectId:
             serialized_name: projectId
-            groups: [Opinions, ConsultationSteps]
+            groups: [Opinions]
             type: integer
 

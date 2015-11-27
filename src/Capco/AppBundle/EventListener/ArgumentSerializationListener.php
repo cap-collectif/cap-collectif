@@ -38,8 +38,7 @@ class ArgumentSerializationListener implements EventSubscriberInterface
         $opinionType = $opinion->getOpinionType();
         $step = $opinion->getStep();
         $project = $step->getProjectAbstractStep()->getProject();
-        $token = $this->tokenStorage->getToken();
-        $user = $token ? $token->getUser() : 'anon.';
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $showUrl = '';
 

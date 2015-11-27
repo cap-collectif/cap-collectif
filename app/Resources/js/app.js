@@ -161,10 +161,10 @@ const App = (($) => {
 
   const video = (el) => {
     const $el = $(el);
-    $el.on('click', () => {
+    $el.on('click', (e) => {
       $.fancybox({
-        href: this.href,
-        type: $(this).data('type'),
+        href: $(e.currentTarget).href,
+        type: $(e.currentTarget).data('type'),
         padding: 0,
         margin: 50,
         maxWidth: 1280,
@@ -180,8 +180,8 @@ const App = (($) => {
   const checkButton = (el) => {
     const $el = $(el);
 
-    $($el).on('change', () => {
-      const test = $(this).val();
+    $($el).on('change', (e) => {
+      const test = $(e.currentTarget).val();
       if (test === 0) {
         $('.block_media').hide();
         $('.block_link').toggle();
@@ -193,26 +193,26 @@ const App = (($) => {
   };
 
   const externalLinks = () => {
-    $(document).on('click', '.external-link', () => {
-      window.open($(this).attr('href'));
+    $(document).on('click', '.external-link', (e) => {
+      window.open($(e.currentTarget).attr('href'));
       return false;
     });
   };
 
   const showMap = (container) =>{
     const $mapCanvas = $(container);
-    $mapCanvas.each(() => {
+    $mapCanvas.each((index, el) => {
       // Map
       const mapOptions = {
-        center: new google.maps.LatLng($(this).attr('data-lat'), $(this).attr('data-lng')),
+        center: new google.maps.LatLng($(el).attr('data-lat'), $(el).attr('data-lng')),
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
       };
-      const map = new google.maps.Map(this, mapOptions);
+      const map = new google.maps.Map(el, mapOptions);
 
       // Marker
       const marker = new google.maps.Marker({
-        position: new google.maps.LatLng($(this).attr('data-lat'), $(this).attr('data-lng')),
+        position: new google.maps.LatLng($(el).attr('data-lat'), $(el).attr('data-lng')),
       });
       marker.setMap(map);
     });
@@ -228,12 +228,12 @@ const App = (($) => {
       let menuHtml = '';
 
       let width = 0;
-      $('#navbar-content').children().each(() => {
-        width += $(this).outerWidth(true);
+      $('#navbar-content').children().each((index, el) => {
+        width += $(el).outerWidth(true);
         if (maxWidth < width) {
           // Get outer html of children element
-          menuHtml += $(this).clone().wrap('<div>').parent().html();
-          $(this).remove();
+          menuHtml += $(el).clone().wrap('<div>').parent().html();
+          $(el).remove();
         }
       });
 
@@ -245,7 +245,7 @@ const App = (($) => {
       );
 
       $('#navbar-content li.hideshow').on('click', '.dropdown-menu', (e) => {
-        if ($(this).parent().is('.open')) {
+        if ($(e.currentTarget).parent().is('.open')) {
           e.stopPropagation();
         }
       });
@@ -283,10 +283,10 @@ const App = (($) => {
   const carousel = () => {
     $('.carousel-sidenav li').on('click', (e) => {
       e.preventDefault();
-      $('.carousel-sidenav li').each(() => {
-        $(this).removeClass('active');
+      $('.carousel-sidenav li').each((index, el) => {
+        $(el).removeClass('active');
       });
-      $(this).addClass('active');
+      $(e.currentTarget).addClass('active');
     });
   };
 
@@ -297,8 +297,8 @@ const App = (($) => {
     const checkboxField = checkboxDiv + ' input[type="checkbox"]';
     let oldVal = null;
 
-    $(messageField).on('change keyup paste', () => {
-      const currentVal = $(this).val();
+    $(messageField).on('change keyup paste', (e) => {
+      const currentVal = $(e.currentTarget).val();
       if (currentVal === oldVal) {
         return;
       }
@@ -310,8 +310,8 @@ const App = (($) => {
       $(checkboxDiv).removeClass('hidden');
     });
 
-    $(checkboxField).on('change', () => {
-      if ($(this).prop('checked')) {
+    $(checkboxField).on('change', (e) => {
+      if ($(e.currentTarget).prop('checked')) {
         $(messageDiv).addClass('hidden');
         return;
       }
