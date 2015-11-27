@@ -507,7 +507,8 @@ admin:
       idea: Idée
       is_archived: Traité
       object: Contribution
-      opinion: Proposition
+      opinion: Consultation / Proposition
+      proposal: Budget / Proposition
       reporter: Auteur
       source: Source
       status: Type de problème
