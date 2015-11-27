@@ -250,10 +250,6 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.link',
                 'template' => 'CapcoAdminBundle:Proposal:link_show_field.html.twig',
             ])
-            ->add('comments', null, [
-                'label' => 'admin.fields.proposal.comments',
-                'template' => 'CapcoAdminBundle:Proposal:comments_show_field.html.twig',
-            ])
         ;
     }
 

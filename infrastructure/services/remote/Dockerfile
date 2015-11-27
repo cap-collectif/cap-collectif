@@ -57,10 +57,8 @@ RUN \
     wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
     apt-get update && \
     apt-get install -y newrelic-php5 && \
-    newrelic-install install && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
-    rm -f /etc/php5/*/conf.d/newrelic.ini
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/*
 
 # Install varnish
 RUN apt-get update && \
@@ -81,6 +79,9 @@ RUN rm -rf /var/www/html; chown -R capco:capco /var/www/
 
 # Move mysql elsewhere because /var/lib/mysql will be a volume after build (see mysql/run)
 RUN mv /var/lib/mysql /var/lib/mysql_save
+
+# Generate a new docker image even if dockerfiles has not changed
+COPY VERSION /VERSION
 
 COPY entrypoint.sh /entrypoint.sh
 
@@ -103,17 +104,12 @@ COPY cron/crontab               /etc/cron.d/crontab
 COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 
-# Generate a new docker image even if dockerfiles has not changed
-COPY VERSION /VERSION
-
-USER root
+# Volume for redis
+VOLUME ["/data"]
 
 # Add entrypoint
 WORKDIR /var/www
 ENTRYPOINT ["/entrypoint.sh"]
-
-# Add redis volume
-VOLUME /data
 
 USER root
 
