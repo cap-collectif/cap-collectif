@@ -594,9 +594,6 @@ class OpinionsController extends FOSRestController
      */
     public function postOpinionVersionArgumentAction(Opinion $opinion, OpinionVersion $version, Argument $argument, ConstraintViolationListInterface $validationErrors)
     {
-        // Fix fos_rest.request_body constructor call missing
-        $argument->__construct();
-
         if (!$opinion->canContribute()) {
             throw new BadRequestHttpException("Can't add a vote to an uncontributable opinion.");
         }
