@@ -109,6 +109,8 @@ USER root
 
 RUN mkdir -p /var/www/app/cache /var/www/app/logs
 RUN chmod -R 777 /var/www/app/cache /var/www/app/logs
+RUN chown -R capco:capco /var/www/app/cache
+RUN chown -R capco:capco /var/www/app/logs
 
 # Volume for redis / cache / logs
 VOLUME ["/data", "/var/www/app/cache", "/var/www/app/logs"]
