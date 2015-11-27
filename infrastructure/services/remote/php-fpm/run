@@ -1,11 +1,5 @@
 #!/bin/bash
 
-mkdir -p /var/www/app/cache /var/www/app/logs
-# chown -R capco:capco /var/www/app/cache
-# chown -R capco:capco /var/www/app/logs
-# chown -R capco:capco /var/www/web/media
-chmod -R 777 /var/www/app/cache /var/www/app/logs /var/www/web/media
-
 echo "Clearing previous cache..."
 rm -rf /var/www/app/cache/*
 

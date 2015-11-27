@@ -1037,6 +1037,7 @@ project_download:
     arguments_nok: Arguments contre
     arguments_ok: Arguments pour
     author: Auteur
+    author_email: Email de l'auteur
     author_id: Id de l'auteur
     category: Catégorie
     content: Contenu

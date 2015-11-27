@@ -105,14 +105,19 @@ COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 # Generate a new docker image even if dockerfiles has not changed
 COPY VERSION /VERSION
 
-# Volume for redis
-VOLUME ["/data"]
+USER root
+
+RUN mkdir -p /var/www/app/cache /var/www/app/logs
+RUN chmod -R 777 /var/www/app/cache /var/www/app/logs
+RUN chown -R capco:capco /var/www/app/cache
+RUN chown -R capco:capco /var/www/app/logs
+
+# Volume for redis / cache / logs
+VOLUME ["/data", "/var/www/app/cache", "/var/www/app/logs"]
 
 # Add entrypoint
 WORKDIR /var/www
 ENTRYPOINT ["/entrypoint.sh"]
-
-USER root
 
 # Default command
 CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]
