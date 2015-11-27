@@ -1,13 +1,6 @@
 #!/bin/bash
 
-echo "php-fpm run script"
-pwd
-ls -l
-
-rm -f /etc/php5/*/conf.d/newrelic.ini
-
-mkdir -p /var/www/app/cache
-mkdir -p /var/www/app/logs
+mkdir -p /var/www/app/cache /var/www/app/logs
 # chown -R capco:capco /var/www/app/cache
 # chown -R capco:capco /var/www/app/logs
 # chown -R capco:capco /var/www/web/media

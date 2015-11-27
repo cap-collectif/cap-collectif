@@ -10,17 +10,23 @@ const ProposalPageAlert = React.createClass({
   render() {
     const proposal = this.props.proposal;
     if (proposal.isTrashed) {
-      const motive = proposal.trashedReason || this.getIntlMessage('proposal.trashed.no_motive');
       return (
         <Alert
           bsStyle="warning"
           style={{marginBottom: '0', textAlign: 'center'}}
         >
-          {this.getIntlMessage('proposal.trashed.label') + ' '}
-          <FormattedMessage
-            message={this.getIntlMessage('proposal.trashed.motive')}
-            motive={motive}
-          />
+          <strong>{this.getIntlMessage('proposal.trashed.label')}</strong>
+          {
+            proposal.trashedReason
+              ? <span>
+                  {' '}
+                  <FormattedMessage
+                    message={this.getIntlMessage('proposal.trashed.motive')}
+                    motive={proposal.trashedReason}
+                  />
+                </span>
+            : null
+          }
         </Alert>
       );
     }
