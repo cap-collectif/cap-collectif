@@ -1,14 +1,7 @@
 #!/bin/bash
 
-#echo "Creating cache and logs directories"
-#mkdir -p /var/www/app/cache
-#mkdir -p /var/www/app/logs
-
 echo "Clearing previous cache..."
 rm -rf /var/www/app/cache/*
-
-#chmod -R 777 /var/www/app/cache
-#chmod -R 777 /var/www/app/logs
 
 # Wait till mysql is booted
 while ! mysql --host=127.0.0.1 > /dev/null 2>&1; do sleep 1; done
