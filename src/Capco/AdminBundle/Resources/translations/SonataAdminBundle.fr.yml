@@ -170,20 +170,21 @@ admin:
       updated_at: Mise à jour
       created_at: Création
     comment:
-      body: Contenu
-      object: Objet lié
       author: Auteur
-      author_name: Nom de l'auteur
       author_email: E-mail de l'auteur
       author_ip: Adresse IP de l'auteur
-      vote_count: Nombre de votes
-      is_enabled: Publié
-      is_trashed: Dans la corbeille
-      updated_at: Mise à jour
+      author_name: Nom de l'auteur
+      body: Contenu
+      type: Type de commentaire
       created_at: Création
       idea: Idée liée
+      is_enabled: Publié
+      is_trashed: Dans la corbeille
+      object: Objet lié
       trashed_at: Mise à la corbeille
       trashed_reason: Raison de la mise à la corbeille
+      updated_at: Mise à jour
+      vote_count: Nombre de votes
     comment_vote:
       comment: Commentaire
       voter: Votant
@@ -437,6 +438,7 @@ admin:
       author_id: Id de l'auteur
       author_type: Type d'auteur
       body: Contenu
+      comments: Commentaires
       created_at: Création
       district: Quartier
       enabled: Publié
