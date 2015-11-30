@@ -1,8 +1,7 @@
-Feature: Proposal Restful Api
-  As an API client
+Feature: Selection steps
 
-  Scenario: Anonymous API client wants to get one proposal from a ProposalForm
-    When I send a GET request to "/api/proposal_forms/1/proposals/1"
+  Scenario: Anonymous API client wants to get one proposal from a selection step
+    When I send a GET request to "/api/selection_steps/6/proposals/1"
     Then the JSON response should match:
   """
   {
@@ -60,16 +59,20 @@ Feature: Proposal Restful Api
       "author": @...@
     },
     "hasUserReported": @boolean@,
+    "hasUserVoted": @boolean@,
+    "votes": @array@,
+    "votes_count": @integer@,
     "_links": {
       "show": @string@,
       "index": @string@,
-      "report": @string@
+      "report": @string@,
+      "vote": @string@,
     }
   }
   """
 
-  Scenario: Anonymous API client wants to get all proposals from a ProposalForm
-    When I send a GET request to "/api/proposal_forms/1/proposals?order=favorable&offset=1"
+  Scenario: Anonymous API client wants to get all proposals from a selection step
+    When I send a GET request to "/api/selection_steps/6/proposals?order=favorable&offset=1"
     Then the JSON response should match:
   """
   {
@@ -88,15 +91,18 @@ Feature: Proposal Restful Api
         "created_at": "@string@.isDateTime()",
         "title": @string@,
         "answer": @null@,
+        "hasUserVoted": @boolean@,
+        "votes": @array@,
+        "votes_count": @integer@,
         "_links": @...@
       }
     ],
-    "count": 4
+    "count": 3
   }
   """
 
-  Scenario: Anonymous API client wants to get all proposals from a ProposalForm
-    When I send a GET request to "/api/proposal_forms/1/proposals?theme=4"
+  Scenario: Anonymous API client wants to get all proposals in a theme from a selection step
+    When I send a GET request to "/api/selection_steps/6/proposals?theme=4"
     Then the JSON response should match:
   """
   {
@@ -115,6 +121,9 @@ Feature: Proposal Restful Api
         "created_at": "@string@.isDateTime()",
         "title": @string@,
         "answer": @null@,
+        "hasUserVoted": @boolean@,
+        "votes": @array@,
+        "votes_count": @integer@,
         "_links": @...@
       }
     ],
@@ -124,39 +133,13 @@ Feature: Proposal Restful Api
 
 
   @database
-  Scenario: logged in API client wants to add a proposal
+  Scenario: logged in API client wants to vote for a proposal in a selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/proposal_forms/1/proposals" with json:
-  """
-  {
-    "title": "Acheter un sauna pour Capco",
-    "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-    "theme": 1,
-    "district": 1,
-    "proposalResponses": [
-      {
-        "question": 1,
-        "value": "Mega important"
-      }
-    ]
-  }
-  """
+    When I send a POST request to "/api/selection_steps/6/proposals/1/vote"
     Then the JSON response status code should be 201
 
   @database
-  Scenario: logged in API client wants to edit a proposal
+  Scenario: logged in API client wants to remove a vote on a proposal for a selection step
     Given I am logged in to api as user
-    When I send a PUT request to "api/proposal_forms/1/proposals/2" with json:
-    """
-    {
-      "title": "Acheter un sauna par personne pour Capco",
-      "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit"
-    }
-    """
-    Then the JSON response status code should be 200
-
-  @database
-  Scenario: logged in API client wants to remove a proposal
-    Given I am logged in to api as user
-    When I send a DELETE request to "api/proposal_forms/1/proposals/2"
+    When I send a DELETE request to "/api/selection_steps/6/proposals/1/vote"
     Then the JSON response status code should be 204
