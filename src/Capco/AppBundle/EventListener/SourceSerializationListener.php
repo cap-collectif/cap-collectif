@@ -36,7 +36,8 @@ class SourceSerializationListener implements EventSubscriberInterface
         $opinionType = $opinion->getOpinionType();
         $step = $opinion->getStep();
         $project = $step->getProjectAbstractStep()->getProject();
-        $user = $this->tokenStorage->getToken()->getUser();
+        $token = $this->tokenStorage->getToken();
+        $user = $token ? $token->getUser() : 'anon.';
 
         $event->getVisitor()->addData(
             '_links', [

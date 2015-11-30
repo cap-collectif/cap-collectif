@@ -29,7 +29,6 @@ class SearchResolver
 
         if ($term) {
             $termQuery = $this->getTermQuery($term);
-
             if ('all' !== $type) {
                 $query = new Query($this->getTypeFilteredQuery($type, $termQuery));
             } else {

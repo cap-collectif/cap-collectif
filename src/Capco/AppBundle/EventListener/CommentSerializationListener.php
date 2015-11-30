@@ -47,7 +47,8 @@ class CommentSerializationListener implements EventSubscriberInterface
 
     private function canEdit($comment)
     {
-        $user = $this->tokenStorage->getToken()->getUser();
+        $token = $this->tokenStorage->getToken();
+        $user = $token ? $token->getUser() : 'anon.';
         if ($user === 'anon.') {
             return false;
         }
@@ -57,7 +58,8 @@ class CommentSerializationListener implements EventSubscriberInterface
 
     private function hasUserVoted($comment)
     {
-        $user = $this->tokenStorage->getToken()->getUser();
+        $token = $this->tokenStorage->getToken();
+        $user = $token ? $token->getUser() : 'anon.';
         if ($user === 'anon.') {
             return false;
         }
@@ -67,7 +69,8 @@ class CommentSerializationListener implements EventSubscriberInterface
 
     private function hasUserReported($comment)
     {
-        $user = $this->tokenStorage->getToken()->getUser();
+        $token = $this->tokenStorage->getToken();
+        $user = $token ? $token->getUser() : 'anon.';
         if ($user === 'anon.') {
             return false;
         }
