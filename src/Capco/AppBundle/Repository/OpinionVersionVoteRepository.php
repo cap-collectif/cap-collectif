@@ -26,15 +26,12 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->leftJoin('v.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'o')
             ->andWhere('o.step = :step')
-            ->andWhere('ov.enabled = 1')
-            ->andWhere('o.isEnabled = 1')
             ->setParameter('step', $step)
             ->orderBy('v.updatedAt', 'ASC');
 
         return $qb
             ->getQuery()
-            ->getResult()
-        ;
+            ->execute();
     }
 
     protected function getIsConfirmedQueryBuilder()

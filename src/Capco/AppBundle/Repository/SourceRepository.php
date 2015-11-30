@@ -203,18 +203,15 @@ class SourceRepository extends EntityRepository
     public function getEnabledByConsultationStep(ConsultationStep $step)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ca', 'o', 'ov', 'aut', 'votes')
+            ->addSelect('ca', 'o', 'ot', 'aut', 'votes')
             ->leftJoin('s.Category', 'ca')
+            ->leftJoin('s.Opinion', 'o')
+            ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('s.Author', 'aut')
             ->leftJoin('s.votes', 'votes')
-            ->leftJoin('s.Opinion', 'o')
-            ->leftJoin('s.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->andWhere('
-                (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step)
-                OR
-                (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step)
-            ')
+            ->andWhere('o.isEnabled = :oEnabled')
+            ->setParameter('oEnabled', true)
+            ->andWhere('o.step = :step')
             ->setParameter('step', $step)
             ->orderBy('s.updatedAt', 'DESC');
 

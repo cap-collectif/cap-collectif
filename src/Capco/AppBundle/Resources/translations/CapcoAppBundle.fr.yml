@@ -1079,9 +1079,9 @@ project_download:
     non_applicable: n/a
     related:
       argument: Argument "%id%"
-      opinion: Proposition "%id%"
-      source: Source "%id%"
-      version: Modification "%id%"
+      opinion: Proposition "%name%"
+      source: Source "%name%"
+      version: Modification "%name%"
     yes: Pour
     votes:
       mitige: Mitigé

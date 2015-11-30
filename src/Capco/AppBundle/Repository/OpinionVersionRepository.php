@@ -168,7 +168,6 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('args.Author', 'argsaut')
             ->leftJoin('o.OpinionType', 'ot')
             ->andWhere('o.step = :step')
-            ->andWhere('o.isEnabled = 1')
             ->setParameter('step', $step)
             ->addOrderBy('ov.updatedAt', 'DESC');
 

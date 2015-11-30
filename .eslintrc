@@ -1,5 +1,8 @@
 {
   "extends": "airbnb",
+  "plugins": [
+    "react"
+  ],
   "globals": {
     "$": true,
     "google": true,
@@ -24,6 +27,8 @@
     "no-nested-ternary": 0,
     "id-length": 0,
     "react/prefer-es6-class": 1,
+    "react/jsx-pascal-case": 2,
+    "react/jsx-key": 1,
     "react/jsx-closing-bracket-location": 2,
     "react/self-closing-comp": 2,
     "react/wrap-multilines": 1,
