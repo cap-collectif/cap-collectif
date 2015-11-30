@@ -40,10 +40,32 @@ class ProposalsController extends FOSRestController
      * @QueryParam(name="status", nullable=true)
      * @QueryParam(name="district", nullable=true)
      * @QueryParam(name="type", nullable=true)
+     * Search params
+     * @QueryParam(name="terms", nullable=true)
+     * @QueryParam(name="sort", nullable=true)
+     * @QueryParam(name="type", nullable=true)
+     * @QueryParam(name="page", nullable=true)
+     * @QueryParam(name="pagination", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
+     *
+     * @param ProposalForm $proposalForm
+     * @param ParamFetcherInterface $paramFetcher
+     * @return array
+     * @throws \Exception
      */
     public function getProposalsByFormAction(ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
     {
+        $searchResolver = $this->container->get('capco.search.resolver');
+
+        $searchResolver->searchAll(
+            intval($paramFetcher->get('pagination')),
+            intval($paramFetcher->get('page')),
+            $paramFetcher->get('terms'),
+            $paramFetcher->get('type') ?: 'proposal',
+            $paramFetcher->get('sort') ?: 'score',
+            false
+        );
+
         $first = intval($paramFetcher->get('first'));
         $offset = intval($paramFetcher->get('offset'));
         $order = $paramFetcher->get('order');

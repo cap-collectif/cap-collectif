@@ -30,12 +30,14 @@ import {
 
 export default {
 
-  load: (fetchFrom, id) => {
+  load: (fetchFrom, id, terms = null) => {
     const page = ProposalStore.currentPage;
     const order = ProposalStore.order;
     const filters = ProposalStore.filters;
     const first = page ? PROPOSAL_PAGINATION * (page - 1) : 0;
     const offset = page ? PROPOSAL_PAGINATION : 100;
+    const sort = 'score';
+    const type = 'proposal';
     let url = null;
     switch (fetchFrom) {
     case 'form':
@@ -58,6 +60,10 @@ export default {
       if (filters.hasOwnProperty(filter)) {
         url += `&${filter}=${filters[filter]}`;
       }
+    }
+
+    if (fetchFrom === 'form' && terms !== null) {
+      url += `?terms=${terms}&sort=${sort}&type=${type}&page=${page}&pagination=${PROPOSAL_PAGINATION}`;
     }
 
     Fetcher

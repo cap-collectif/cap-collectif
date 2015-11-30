@@ -24,16 +24,19 @@ class SearchResolver
     }
 
     /**
-     * search by term and type in elasticsearch
+     * Search by term and type in elasticsearch
      *
      * @param integer   $page
      * @param string    $term
      * @param string    $type
      * @param string    $sort
+     * @param string    $useTransformation
+     * @param string    $filters
+     * @param string    $resultsPerPage
      *
      * @return array
      */
-    public function searchAll($page = 1, $term = '', $type = 'all', $sort = 'score', $useTransformation = true, $resultsPerPage = self::RESULTS_PER_PAGE)
+    public function searchAll($page = 1, $term = '', $type = 'all', $sort = 'score', $useTransformation = true, $filters = [], $resultsPerPage = self::RESULTS_PER_PAGE)
     {
         $from = ($page - 1) * $resultsPerPage;
         $termQuery = empty(trim($term)) ? new Query\MatchAll() : $this->getSearchQuery($term);
@@ -112,7 +115,12 @@ class SearchResolver
         return $boolQuery;
     }
 
-    protected function getSortSettings($sort)
+    protected function getFieldFilteredQuery($filters)
+    {
+
+    }
+
+    protected function getSortSettings($sort, $order = 'desc')
     {
         $term = '_score';
         if ($sort === 'date') {
@@ -121,7 +129,7 @@ class SearchResolver
 
         return [
             $term => [
-                'order' => 'desc',
+                'order' => $order,
             ],
             'createdAt' => [
                 'order' => 'desc',
