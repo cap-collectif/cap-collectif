@@ -64,6 +64,9 @@ Icon
 # PHPStorm configuration
 .idea
 
+# Sublime Text Project Manager
+*.sublime-project
+
 # capco
 infrastructure/services/remote/VERSION
 data/*

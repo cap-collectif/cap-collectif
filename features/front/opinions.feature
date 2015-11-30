@@ -25,7 +25,7 @@ Feature: Opinions
     And I visited "consultation page" with:
       | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
       | stepSlug    | collecte-des-avis-pour-une-meilleur-strategie         |
-    Then I should see "Projet participatif terminé. La période de participation est maintenant terminée. Merci à tous d'avoir contribué."
+    Then I should see "Consultation terminée. La période de participation est maintenant terminée. Merci à tous d'avoir contribué."
     And I should not see "Proposer"
 
   Scenario: Can not create an opinion when not logged in
