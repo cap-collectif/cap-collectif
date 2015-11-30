@@ -1,5 +1,4 @@
 import BaseStore from './BaseStore';
-import LocalStorageService from '../services/LocalStorageService';
 import {
   RECEIVE_PROPOSALS,
   RECEIVE_PROPOSAL,
@@ -15,8 +14,8 @@ class ProposalStore extends BaseStore {
     this.register(this._registerToActions.bind(this));
     this._proposalsCount = 0;
     this._proposals = [];
-    this._order = LocalStorageService.get('proposals_order') || 'last';
-    this._filters = LocalStorageService.get('proposals_filters') || {};
+    this._order = 'last';
+    this._filters = {};
     this._currentPage = 1;
   }
 
@@ -37,14 +36,12 @@ class ProposalStore extends BaseStore {
       break;
     case CHANGE_ORDER:
       this._order = action.order;
-      LocalStorageService.set('proposals_order', action.order);
       this._currentPage = 1;
       this.emitChange();
       break;
     case CHANGE_FILTERS:
       this._filters[action.filter] = action.value;
       this._currentPage = 1;
-      LocalStorageService.set('proposals_filters', this._filters);
       this.emitChange();
       break;
     default: break;
