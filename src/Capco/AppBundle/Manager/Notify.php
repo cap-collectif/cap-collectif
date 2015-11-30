@@ -141,7 +141,7 @@ class Notify implements MailerInterface
                     'message'      => $report->getBody(),
                     'contribution' => $report->getRelatedObject(),
                     'siteURL'      => $this->urlResolver->getObjectUrl($report->getRelatedObject(), true),
-                    'adminURL'     => $this->urlResolver->getAdminObjectUrl($report->getRelatedObject(), true),
+                    'adminURL'     => $this->router->generate('admin_capco_app_reporting_show', ['id' => $report->getRelatedObject()->getId()], true),
                 ]
             );
 

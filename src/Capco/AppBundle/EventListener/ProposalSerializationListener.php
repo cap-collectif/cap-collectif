@@ -34,8 +34,7 @@ class ProposalSerializationListener implements EventSubscriberInterface
         $proposal = $event->getObject();
         $step = $proposal->getStep();
         $project = $step->getProjectAbstractStep()->getProject();
-        $token = $this->tokenStorage->getToken();
-        $user = $token ? $token->getUser() : 'anon.';
+        $user = $this->tokenStorage->getToken()->getUser();
 
         $showUrl = $this->router->generate('app_project_show_proposal', [
             'proposalSlug' => $proposal->getSlug(),

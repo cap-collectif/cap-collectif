@@ -186,6 +186,7 @@ export default {
       trashed: {
         label: 'Proposition dans la corbeille.',
         motive: 'Motif : {motive}',
+        no_motive: 'Non spécifié',
       },
       vote: {
         body: 'Commentaire',

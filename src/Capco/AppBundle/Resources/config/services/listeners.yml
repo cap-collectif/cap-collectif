@@ -17,6 +17,7 @@ services:
   capco.comment.serialization_listener:
     class: Capco\AppBundle\EventListener\CommentSerializationListener
     arguments: [@router, @security.token_storage]
+    scope: request
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
@@ -29,18 +30,21 @@ services:
   capco.argument.serialization_listener:
     class: Capco\AppBundle\EventListener\ArgumentSerializationListener
     arguments: [@router, @security.token_storage]
+    scope: request
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.proposal.serialization_listener:
     class: Capco\AppBundle\EventListener\ProposalSerializationListener
     arguments: [@router, @security.token_storage]
+    scope: request
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.source.serialization_listener:
     class: Capco\AppBundle\EventListener\SourceSerializationListener
     arguments: [@router, @security.token_storage]
+    scope: request
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
@@ -51,12 +55,14 @@ services:
       - @security.token_storage
       - @capco.abstract_vote.repository
       - @capco.toggle.manager
+    scope: request
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.user.serialization_listener:
     class: Capco\AppBundle\EventListener\UserSerializationListener
     arguments: [@router]
+    scope: request
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
