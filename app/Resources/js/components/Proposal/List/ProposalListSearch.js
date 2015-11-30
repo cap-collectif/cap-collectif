@@ -1,11 +1,12 @@
 import ProposalActions from '../../../actions/ProposalActions';
-import ProposalStore from '../../../stores/ProposalStore';
 import Input from '../../Form/Input';
 
-const Col = ReactBootstrap.Col;
 const Button = ReactBootstrap.Button;
 
 const ProposalListSearch = React.createClass({
+  propTypes: {
+    form: React.PropTypes.object.isRequired,
+  },
   mixins: [
     ReactIntl.IntlMixin,
     React.addons.LinkedStateMixin,
