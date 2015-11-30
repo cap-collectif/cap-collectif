@@ -30,14 +30,15 @@ su capco <<'EOF'
 
 cd /var/www
 
-# Migrate existing database or create one with default data
 RESULT=`php app/console doctrine:migrations:status --env=prod 2>&1 | grep -o "Unknown database" | wc -l`
 if [ "$RESULT" != "0" ]; then
+    echo "Creating a new database with base data..."
     php app/console doctrine:database:create --if-not-exists --env=prod --no-interaction
     php app/console doctrine:schema:create --env=prod --no-interaction
     php app/console doctrine:migrations:version --add --all --env=prod --no-interaction
     php app/console capco:load-base-data --force --env=prod --no-interaction
 else
+    echo "Migrating an existing database..."
     php app/console doctrine:migrations:migrate --env=prod --no-interaction
 fi
 
