@@ -97,3 +97,9 @@ $statuses:
 .proposal__author .proposal__date {
   margin-bottom: 0;
 }
+
+.proposal-search-input {
+  @media (max-width: $screen-sm-max) {
+    margin-top: 15px;
+  }
+}
