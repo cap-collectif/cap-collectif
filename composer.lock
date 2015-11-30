@@ -1,11 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "913fbccf6ddf2a79be71a5773a168eb7",
-    "content-hash": "de9b6324b4adaf90fe0773cadda9e8ff",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3939,12 +3938,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "54d4e2a5e3ad2c277b733f70aae4e5acdd2cc701"
+                "reference": "71b66d90e946ee5496ed54f3d3b78ab0f070a7ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/54d4e2a5e3ad2c277b733f70aae4e5acdd2cc701",
-                "reference": "54d4e2a5e3ad2c277b733f70aae4e5acdd2cc701",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/71b66d90e946ee5496ed54f3d3b78ab0f070a7ac",
+                "reference": "71b66d90e946ee5496ed54f3d3b78ab0f070a7ac",
                 "shasum": ""
             },
             "require": {
@@ -3969,7 +3968,7 @@
                 "symfony/twig-bridge": "~2.3",
                 "symfony/validator": "~2.3",
                 "twig/extensions": "~1.0",
-                "twig/twig": "~1.15"
+                "twig/twig": "~1.23"
             },
             "require-dev": {
                 "jms/translation-bundle": "~1.1",
@@ -4019,7 +4018,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-11-04 10:13:47"
+            "time": "2015-11-24 21:29:18"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -4706,7 +4705,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/1cc799eda0fa7dc0fb01045cb36747e89b4bffcf",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/27202a1acdd03f426e63dc2b25b019e490569fd5",
                 "reference": "5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
                 "shasum": ""
             },
@@ -4786,7 +4785,7 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2015-05-29 10:20:08"
+            "time": "2015-08-09 10:20:27"
         },
         {
             "name": "sonata-project/notification-bundle",
@@ -5627,7 +5626,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],

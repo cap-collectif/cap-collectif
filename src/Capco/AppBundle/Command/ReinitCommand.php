@@ -18,7 +18,14 @@ class ReinitCommand extends ContainerAwareCommand
         $this
             ->setName('capco:reinit')
             ->setDescription('Reinit the application data')
-            ->addOption('force', false, InputOption::VALUE_NONE, 'set this option to force the rebuild')
+            ->addOption(
+                'force', false, InputOption::VALUE_NONE,
+                'set this option to force the rebuild'
+            )
+            ->addOption(
+                'migrate', false, InputOption::VALUE_NONE,
+                'set this option to execute the migrations instead of creating schema'
+            )
         ;
     }
 
@@ -47,7 +54,12 @@ class ReinitCommand extends ContainerAwareCommand
         }
 
         $this->createDatabase($output);
-        $this->createSchema($output);
+        if ($input->getOption('migrate')) {
+            $this->executeMigrations($output);
+        } else {
+            $this->createSchema($output);
+            $this->mockMigrations($output);
+        }
         $this->loadFixtures($output);
         $this->loadToggles($output);
         $this->recalculateCounters($output);
@@ -163,6 +175,29 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $command = $this->getApplication()->find('fos:elastica:populate');
         $input = new ArrayInput(['']);
+        $input->setInteractive(false);
+        $command->run($input, $output);
+    }
+
+    protected function executeMigrations(OutputInterface $output)
+    {
+        $command = $this->getApplication()->find('doctrine:migration:migrate');
+        $input = new ArrayInput([
+            '--no-interaction' => true,
+            '',
+        ]);
+        $input->setInteractive(false);
+        $command->run($input, $output);
+    }
+
+    protected function mockMigrations(OutputInterface $output)
+    {
+        $command = $this->getApplication()->find('doctrine:migration:version');
+        $input = new ArrayInput([
+            '--add' => true,
+            '--all' => true,
+            '',
+        ]);
         $input->setInteractive(false);
         $command->run($input, $output);
     }

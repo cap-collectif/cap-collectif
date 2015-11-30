@@ -1,0 +1,31 @@
+Capco\AppBundle\Entity\Post:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Posts]
+        title:
+            expose: true
+            type: string
+            groups: [Posts]
+        body:
+            expose: true
+            type: string
+            groups: [Posts]
+        abstract:
+            expose: true
+            type: string
+            groups: [Posts]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Posts]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Posts]
+        is_published:
+            expose: true
+            type: boolean
+            groups: [Posts]

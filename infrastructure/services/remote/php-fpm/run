@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# Configure New Relic
-sed -i 's/newrelic.appname = ""/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php5/fpm/conf.d/20-newrelic.ini
-sed -i 's/newrelic.license = ""/newrelic.license = '"$NR_INSTALL_KEY"'/' /etc/php5/fpm/conf.d/20-newrelic.ini
+rm -f /etc/php5/*/conf.d/newrelic.ini
 
 mkdir -p /var/www/app/cache
 mkdir -p /var/www/app/logs

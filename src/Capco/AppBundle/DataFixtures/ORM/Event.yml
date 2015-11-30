@@ -109,10 +109,17 @@ Capco\AppBundle\Entity\Event:
         endAt: <(new \DateTime('2015-12-12'))>
         Author: @user<numberBetween(1, 5)>
         link: http://www.parisweb2014.fr
-    event{7..10}:
+    event7:
         title: <text(30)>
-        isEnabled: <boolean(80)>
+        isEnabled: false
         body: <text(1000)>
         startAt: <dateTimeBetween('-40 days', '-10 days')>
-        endAt: <dateTimeBetween('now', '+40 days')>
+        endAt: <dateTimeBetween('+2 days', '+40 days')>
+        Author: @user<numberBetween(1, 5)>
+    event{8..10}:
+        title: <text(30)>
+        isEnabled: true
+        body: <text(1000)>
+        startAt: <dateTimeBetween('-40 days', '-10 days')>
+        endAt: <dateTimeBetween('+2 days', '+40 days')>
         Author: @user<numberBetween(1, 5)>
