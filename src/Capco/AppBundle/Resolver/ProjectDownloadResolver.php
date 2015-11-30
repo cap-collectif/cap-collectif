@@ -37,6 +37,7 @@ class ProjectDownloadResolver
 
     protected $consultationHeaders = [
         'published' => [
+            'id',
             'author',
             'author_id',
             'user_type',
@@ -59,6 +60,7 @@ class ProjectDownloadResolver
             'arguments_nok',
         ],
         'unpublished' => [
+            'id',
             'author',
             'author_id',
             'user_type',
@@ -202,29 +204,33 @@ class ProjectDownloadResolver
 
     public function getConsultationStepData(ConsultationStep $consultationStep)
     {
+        echo "Exporting step ".$consultationStep->getTitle()."\n";
+
         $this->data = [
             'published'   => [],
             'unpublished' => [],
         ];
 
-        // Opinions
+        // Fetch data
+        echo "Fetching elements\n";
         $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getEnabledByConsultationStep($consultationStep);
-        $this->getOpinionsData($opinions);
+        echo "Opinions : ".count($opinions)."\n";
         $opinionsVotes = $this->em->getRepository('CapcoAppBundle:OpinionVote')->getEnabledByConsultationStep($consultationStep);
-        $this->getVotesData($opinionsVotes);
-
-        // Versions
         $versions = $this->em->getRepository('CapcoAppBundle:OpinionVersion')->getEnabledByConsultationStep($consultationStep);
-        $this->getVersionsData($versions);
+        echo "Versions : ".count($versions)."\n";
         $versionsVotes = $this->em->getRepository('CapcoAppBundle:OpinionVersionVote')->getEnabledByConsultationStep($consultationStep);
-        $this->getVotesData($versionsVotes);
-
-        // Arguments
+        echo "Votes (opinions + versions only) : ".(count($opinionsVotes) + count($versionsVotes))."\n";
         $arguments = $this->em->getRepository('CapcoAppBundle:Argument')->getEnabledByConsultationStep($consultationStep);
-        $this->getArgumentsData($arguments);
-
-        // Sources
+        echo "Arguments : ".count($arguments)."\n";
         $sources = $this->em->getRepository('CapcoAppBundle:Source')->getEnabledByConsultationStep($consultationStep);
+        echo "Sources : ".count($sources)."\n";
+
+        // Create items from data
+        $this->getOpinionsData($opinions);
+        $this->getVotesData($opinionsVotes);
+        $this->getVersionsData($versions);
+        $this->getVotesData($versionsVotes);
+        $this->getArgumentsData($arguments);
         $this->getSourcesData($sources);
 
         return $this->data;
@@ -232,15 +238,19 @@ class ProjectDownloadResolver
 
     public function getCollectStepData(CollectStep $collectStep)
     {
+        echo "Exporting step ".$collectStep->getTitle()."\n";
+
         $this->data = [
             'published'   => [],
             'unpublished' => [],
         ];
 
         // Proposals
+        echo "Fetching elements\n";
         $proposals = $this->em
             ->getRepository('CapcoAppBundle:Proposal')
             ->getEnabledByProposalForm($collectStep->getProposalForm(), 0, null);
+        echo "Proposals : ".count($proposals)."\n";
 
         $this->getProposalsData($proposals);
 
@@ -330,6 +340,7 @@ class ProjectDownloadResolver
     private function getOpinionItem(Opinion $opinion)
     {
         return $item = [
+            'id'              => $opinion->getId(),
             'title'           => $opinion->getTitle(),
             'content_type'    => $this->translator->trans('project_download.values.content_type.opinion', [], 'CapcoAppBundle'),
             'related_object'  => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
@@ -361,9 +372,10 @@ class ProjectDownloadResolver
         $opinion = $version->getParent();
 
         return $item = [
+            'id'              => $version->getId(),
             'title'           => $version->getTitle(),
             'content_type'    => $this->translator->trans('project_download.values.content_type.version', [], 'CapcoAppBundle'),
-            'related_object'  => $this->translator->trans('project_download.values.related.opinion', ['%name%' => $opinion->getTitle()], 'CapcoAppBundle'),
+            'related_object'  => $this->translator->trans('project_download.values.related.opinion', ['%id%' => $opinion->getId()], 'CapcoAppBundle'),
             'category'        => $this->getOpinionParents($opinion),
             'content'         => $this->formatText($version->getBody()),
             'link'            => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
@@ -399,10 +411,11 @@ class ProjectDownloadResolver
             : $this->translator->trans(Argument::$argumentTypesLabels[$argument->getType()], [], 'CapcoAppBundle')
         ;
         $relatedObject = $argument->getOpinionVersion()
-            ? $this->translator->trans('project_download.values.related.version', ['%name%' => $parent->getTitle()], 'CapcoAppBundle')
-            : $this->translator->trans('project_download.values.related.opinion', ['%name%' => $parent->getTitle()], 'CapcoAppBundle')
+            ? $this->translator->trans('project_download.values.related.version', ['%id%' => $parent->getId()], 'CapcoAppBundle')
+            : $this->translator->trans('project_download.values.related.opinion', ['%id%' => $parent->getId()], 'CapcoAppBundle')
         ;
         $item = [
+            'id'              => $argument->getId(),
             'title'           => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
             'content_type'    => $contentType,
             'category'        => $category,
@@ -435,11 +448,12 @@ class ProjectDownloadResolver
     {
         $parent = $source->getOpinion() ? $source->getOpinion() : $source->getOpinionVersion();
         $relatedObject = $source->getOpinionVersion()
-            ? $this->translator->trans('project_download.values.related.version', ['%name%' => $parent->getTitle()], 'CapcoAppBundle')
-            : $this->translator->trans('project_download.values.related.opinion', ['%name%' => $parent->getTitle()], 'CapcoAppBundle')
+            ? $this->translator->trans('project_download.values.related.version', ['%id%' => $parent->getId()], 'CapcoAppBundle')
+            : $this->translator->trans('project_download.values.related.opinion', ['%id%' => $parent->getId()], 'CapcoAppBundle')
         ;
 
         return $item = [
+            'id'              => $source->getId(),
             'title'           => $source->getTitle(),
             'content_type'    => $this->translator->trans('project_download.values.content_type.source', [], 'CapcoAppBundle'),
             'category'        => $source->getCategory(),
@@ -469,6 +483,7 @@ class ProjectDownloadResolver
     private function getVoteItem($vote)
     {
         return $item = [
+            'id'              => '',
             'title'           => $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle'),
             'content_type'    => $this->translator->trans('project_download.values.content_type.vote', [], 'CapcoAppBundle'),
             'related_object'  => $this->getVoteObject($vote),
@@ -516,16 +531,16 @@ class ProjectDownloadResolver
     {
         $object = $vote->getRelatedEntity();
         if ($object instanceof Opinion) {
-            return $this->translator->trans('project_download.values.related.opinion', ['%name%' => $object->getTitle()], 'CapcoAppBundle');
+            return $this->translator->trans('project_download.values.related.opinion', ['%id%' => $object->getId()], 'CapcoAppBundle');
         }
         if ($object instanceof OpinionVersion) {
-            return $this->translator->trans('project_download.values.related.version', ['%name%' => $object->getTitle()], 'CapcoAppBundle');
+            return $this->translator->trans('project_download.values.related.version', ['%id%' => $object->getId()], 'CapcoAppBundle');
         }
         if ($object instanceof Argument) {
             return $this->translator->trans('project_download.values.related.argument', ['%id%' => $object->getId()], 'CapcoAppBundle');
         }
         if ($object instanceof Source) {
-            return $this->translator->trans('project_download.values.related.source', ['%name%' => $object->getTitle()], 'CapcoAppBundle');
+            return $this->translator->trans('project_download.values.related.source', ['%id%' => $object->getId()], 'CapcoAppBundle');
         }
     }
 
