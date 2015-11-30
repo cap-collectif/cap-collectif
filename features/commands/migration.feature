@@ -8,4 +8,3 @@ Scenario: Admin want to migrate database from scratch
     And the command exit code should be 0
     When I run "doctrine:schema:validate -e test"
     Then the command exit code should be 0
-

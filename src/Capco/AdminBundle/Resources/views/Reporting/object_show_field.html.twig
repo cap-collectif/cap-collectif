@@ -26,7 +26,7 @@
             </a></p>
             {{ object.Idea.body | raw }}
         {% elseif (object.Comment is not null) %}
-            <a href="{{ path('admin_capco_app_abstractcomment_show', {'id': object.Comment.id}) }}">
+            <a href="{{ path('admin_capco_app_comment_show', {'id': object.Comment.id}) }}">
                 {{ object.Comment.body }}
             </a>
         {% endif %}
