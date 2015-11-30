@@ -17,7 +17,7 @@
 /vendor/
 /bin/
 /composer.phar
-
+.eslintcache
 
 # Configuration files
 app/config/parameters.ini
@@ -63,9 +63,6 @@ Icon
 
 # PHPStorm configuration
 .idea
-
-# Sublime Text Project Manager
-*.sublime-project
 
 # capco
 infrastructure/services/remote/VERSION

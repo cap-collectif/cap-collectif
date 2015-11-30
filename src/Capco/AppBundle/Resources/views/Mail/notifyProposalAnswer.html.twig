@@ -4,7 +4,7 @@
             '%sitename%': capco_site_parameter_value('global.site.fullname'),
             '%project%': proposal.step.project.title,
             '%proposal%': proposal.title,
-            '%answer%': proposal.answer.body,
+            '%answer%': proposal.answer.title,
             '%proposal_link%': url('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'stepSlug': proposal.step.slug, 'proposalSlug': proposal.slug}),
             '%step%': proposal.step.title,
             '%user%': proposal.author,
