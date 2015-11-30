@@ -13,7 +13,7 @@ class CollectPage extends Page
     /**
      * @var string
      */
-    protected $path = '/projects/{projectSlug}/collect/{stepSlug}';
+    protected $path = '/project/{projectSlug}/collect/{stepSlug}';
 
     protected $elements = [
     ];

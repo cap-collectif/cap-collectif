@@ -15,7 +15,7 @@ export default class Input extends ReactBootstrap.Input {
 
   renderInput() {
     if (this.props.type && this.props.type === 'editor') {
-      return <Editor valueLink={this.props.valueLink} />;
+      return <Editor id={this.props.id} className={this.props.className} valueLink={this.props.valueLink} />;
     }
 
     return super.renderInput();

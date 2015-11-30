@@ -1,43 +1,53 @@
 Feature: Proposals
 
-  @database
+  @database @javascript
   Scenario: Logged in user wants to create a proposal
     Given I am logged in as user
     And I visited "collect page" with:
-      | projectSlug | croissance-innovation-disruption |
+      | projectSlug | budget-participatif-rennes       |
       | stepSlug    | collecte-des-propositions        |
-    When I follow "add-proposal"
+    And I wait 5 seconds
+    When I press "Faire une proposition"
+    And I wait 5 seconds
     And I fill in the following:
       | proposal_title    | Titre                           |
       | proposal_body     | Description de ma proposition   |
       | proposal_custom-1 | Réponse à la question 1         |
       | proposal_custom-2 | Réponse à la question 2         |
+    And I select "Justice" from "proposal_theme"
+    And I select "Beaulieu" from "proposal_district"
     And I press "Publier"
-    Then I should see "Merci ! Votre proposition a bien été enregistrée."
+    And I wait 5 seconds
+    Then I should see "Merci ! Votre proposition a bien été créée."
 
+  @javascript
   Scenario: Logged in user wants to create a proposal in closed collect step
     Given I am logged in as user
     And I visited "collect page" with:
-      | projectSlug | croissance-innovation-disruption |
+      | projectSlug | budget-participatif-rennes       |
       | stepSlug    | collecte-des-propositions-fermee |
-    Then I should see "Étape de collecte terminée. La période de participation est maintenant terminée. Merci à tous d'avoir contribué."
-    And I should not see "Faire une proposition"
+    And I wait 5 seconds
+    Then I should see "Dépôt terminé. La période de participation est maintenant terminée. Merci à tous d'avoir contribué."
+    And the button "Faire une proposition" should be disabled
 
+  @javascript
   Scenario: Anonymous user wants to create a proposal
     And I visited "collect page" with:
-      | projectSlug | croissance-innovation-disruption |
-      | stepSlug    | collecte-des-propositions-fermee |
-    When I follow "add-proposal"
-    Then I should see "Connection form" on "login page"
+      | projectSlug | budget-participatif-rennes       |
+      | stepSlug    | collecte-des-propositions |
+    And I wait 5 seconds
+    When I press "Faire une proposition"
+    And I wait 5 seconds
+    Then I should see "Vous devez être connecté pour réaliser cette action."
 
   @javascript @database
   Scenario: Logged in user wants to report a proposal
     Given feature "reporting" is enabled
     And I am logged in as user
     And I visited "proposal page" with:
-      | projectSlug      | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-propositions        |
-      | proposalSlug     | renovation-du-gymnase            |
+      | projectSlug      | budget-participatif-rennes                    |
+      | stepSlug         | collecte-des-propositions                     |
+      | proposalSlug     | installation-de-bancs-sur-la-place-de-mairie  |
     And I wait 5 seconds
     When I follow "Signaler"
     And I wait 5 seconds
@@ -52,8 +62,8 @@ Feature: Proposals
   Scenario: Non author of a proposal wants to update it
     Given I am logged in as admin
     And I visited "proposal page" with:
-      | projectSlug      | croissance-innovation-disruption |
+      | projectSlug      | budget-participatif-rennes       |
       | stepSlug         | collecte-des-propositions        |
       | proposalSlug     | renovation-du-gymnase            |
     And I wait 5 seconds
-    Then I should not see "Modifier" in the ".proposal__description .proposal__buttons" element
+    Then I should not see "Modifier" in the ".proposal__content .proposal__buttons" element
