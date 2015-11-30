@@ -1,7 +1,7 @@
 fos_elastica:
   clients:
     default: { host: localhost, port: 9200 }
-  serializer: ~
+  serializer:
   indexes:
     app:
       index_name: app_prod
@@ -11,22 +11,14 @@ fos_elastica:
         user:
           indexable_callback: isEnabled
           serializer:
-            groups: [UsersInfos, Proposals]
+            groups: [UsersInfos]
           mappings:
-            id:
-              type: long
-            slug:
-              index: not_analyzed
             username:
               analyzer: %language_analyzer%
               index_options: offsets
             biography:
               analyzer: %language_analyzer%
               index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
           persistence:
             driver: orm
             model: Capco\UserBundle\Entity\User
@@ -42,11 +34,6 @@ fos_elastica:
             body:
               analyzer: %language_analyzer%
               index_options: offsets
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Argument
@@ -62,13 +49,6 @@ fos_elastica:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Project
@@ -79,23 +59,11 @@ fos_elastica:
         comment:
           indexable_callback: getIsEnabled
           serializer:
-            groups: [Comments, Proposals]
+            groups: [Comments]
           mappings:
-            id:
-              type: long
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
-            authorName: ~
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Comment
@@ -126,18 +94,9 @@ fos_elastica:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
-              slug:
-                index: not_analyzed
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Event
@@ -159,11 +118,6 @@ fos_elastica:
             strippedObject:
               analyzer: %language_analyzer%
               index_options: offsets
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Idea
@@ -176,73 +130,15 @@ fos_elastica:
           serializer:
             groups: [Proposals]
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
-            author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-            district:
-              type: object
-              properties:
-                name:
-                  index: not_analyzed
-            status:
-              type: object
-              properties:
-                name:
-                  index: not_analyzed
-            theme:
-              type: object
-              properties:
-                title:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Proposal
-            provider: ~
-            listener: ~
-            finder: ~
-        # Question
-        question:
-          serializer:
-            groups: [Proposals, Questions]
-          mappings:
-            title:
-              analyzer: %language_analyzer%
-              index_options: offsets
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\Question
-            provider: ~
-            listener: ~
-            finder: ~
-        # ProposalResponse
-        proposalresponse:
-          serializer:
-            groups: [Proposals]
-          mappings:
-            value:
-              analyzer: %language_analyzer%
-              index_options: offsets
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\ProposalResponse
             provider: ~
             listener: ~
             finder: ~
@@ -251,15 +147,9 @@ fos_elastica:
           serializer:
             groups: [Districts, Proposals]
           mappings:
-            id:
-              type: long
             name:
               analyzer: %language_analyzer%
               index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\District
@@ -271,15 +161,9 @@ fos_elastica:
           serializer:
             groups: [Statuses, Proposals]
           mappings:
-            id:
-              type: long
             name:
               analyzer: %language_analyzer%
               index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Status
@@ -295,16 +179,9 @@ fos_elastica:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Opinion
@@ -320,16 +197,9 @@ fos_elastica:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
-            author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\OpinionVersion
@@ -348,16 +218,9 @@ fos_elastica:
             abstract:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Post
@@ -373,16 +236,9 @@ fos_elastica:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             body:
               analyzer: %language_analyzer%
               index_options: offsets
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Source
@@ -395,28 +251,15 @@ fos_elastica:
           serializer:
             groups: [Themes, Proposals]
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            slug:
-              index: not_analyzed
             teaser:
               analyzer: %language_analyzer%
               index_options: offsets
             strippedBody:
               analyzer: %language_analyzer%
               index_options: offsets
-            Author:
-              type: object
-              properties:
-                slug:
-                  index: not_analyzed
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Theme
@@ -429,7 +272,7 @@ fos_elastica:
             groups: [ProjectAbstractSteps]
           persistence:
             driver: orm
-            model: Capco\AppBundle\Entity\Steps\ProjectAbstractStep
+            model: Capco\AppBundle\Entity\ProjectAbstractStep
             provider: ~
             listener: ~
             finder: ~

@@ -21,7 +21,7 @@ class SearchResolver
     }
 
     // search by term and type in elasticsearch
-    public function searchAll($size, $page, $term, $type = 'all', $sort = 'score', $useTransformation = true)
+    public function searchAll($size, $page, $term, $type = 'all', $sort = 'score')
     {
         $results = [];
         $count = 0;
@@ -47,11 +47,7 @@ class SearchResolver
             $resultSet = $this->index->search($query);
             $count = $resultSet->getTotalHits();
 
-            if ($useTransformation) {
-                $results = $this->transformer->hybridTransform($resultSet->getResults());
-            } else {
-                $results = $resultSet->getResults();
-            }
+            $results = $this->transformer->hybridTransform($resultSet->getResults());
         }
 
         return ['count' => $count, 'results' => $results];

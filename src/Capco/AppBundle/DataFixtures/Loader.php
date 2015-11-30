@@ -4,7 +4,6 @@ namespace Capco\AppBundle\DataFixtures;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use FOS\ElasticaBundle\Doctrine\Listener;
 use Nelmio\Alice\ProcessorInterface;
 use Psr\Log\LoggerInterface;
 use Hautelook\AliceBundle\Alice\Doctrine;
@@ -73,9 +72,7 @@ class Loader
 
         $evm = $this->objectManager->getEventManager();
         foreach($evm->getListeners()['postFlush'] as $listener) {
-            if ($listener instanceof Listener) {
-                $evm->removeEventListener('postFlush', $listener);
-            }
+            $evm->removeEventListener('postFlush', $listener);
         }
 
         $newReferences = [];
