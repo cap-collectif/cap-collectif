@@ -14,3 +14,4 @@ Scenario: Admin want to recalculate synthesis counters
 Scenario: Admin want to fix contributions urls on synthesis elements
   Given I run "capco:syntheses:fix-urls -e test"
   Then the command exit code should be 0
+

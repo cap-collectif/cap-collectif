@@ -169,6 +169,15 @@ class Proposal implements CommentableInterface, VotableInterface
         return $this->id;
     }
 
+    // Used by elasticsearch for indexing
+    /**
+     * @return string
+     */
+    public function getStrippedBody()
+    {
+        return strip_tags(html_entity_decode($this->body, ENT_QUOTES | ENT_HTML401, 'UTF-8'));
+    }
+
     /**
      * @return string
      */

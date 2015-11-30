@@ -1,10 +1,7 @@
 #!/bin/bash
 
-echo "Configuring New Relic..."
-sed -i 's/newrelic.appname = ""/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php5/*/conf.d/20-newrelic.ini
-sed -i 's/newrelic.license = ""/newrelic.license = '"$NR_INSTALL_KEY"'/' /etc/php5/*/conf.d/20-newrelic.ini
+rm -f /etc/php5/*/conf.d/newrelic.ini
 
-echo "Checking permissions..."
 mkdir -p /var/www/app/cache
 mkdir -p /var/www/app/logs
 mkdir -p /var/www/web/bundles
@@ -13,7 +10,7 @@ chmod -R 777 /var/www/app/cache /var/www/app/logs /var/www/web/media /var/www/we
 echo "Clearing previous cache..."
 rm -rf /var/www/app/cache/*
 
-echo "Wait till mysql is booted..."
+# Wait till mysql is booted
 while ! mysql --host=127.0.0.1 > /dev/null 2>&1; do sleep 1; done
 
 echo "Mysql has booted - Running database migrations."

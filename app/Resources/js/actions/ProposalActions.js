@@ -71,17 +71,17 @@ export default {
     });
   },
 
-  changeOrder: (order) => {
+  changeOrder: (newOrder) => {
     AppDispatcher.dispatch({
       actionType: CHANGE_ORDER,
-      order: order,
+      order: newOrder,
     });
   },
 
-  changeFilterValue: (filter, value) => {
+  changeFilterValue: (filterName, value) => {
     AppDispatcher.dispatch({
       actionType: CHANGE_FILTERS,
-      filter: filter,
+      filter: filterName,
       value: value,
     });
   },

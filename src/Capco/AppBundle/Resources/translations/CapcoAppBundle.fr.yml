@@ -336,7 +336,7 @@ project:
     alert:
       ended:
         text: La période de participation est maintenant terminée. Merci à tous d'avoir contribué.
-        title: Projet participatif terminé.
+        title: Consultation terminée.
       future:
         text: La période de participation débutera le %date%.
         title: Projet à venir.
