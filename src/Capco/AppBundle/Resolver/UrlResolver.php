@@ -167,7 +167,7 @@ class UrlResolver
         }
 
         if ($object instanceof Comment) {
-            return $this->getAdminObjectUrl($object->getRelatedObject(), $absolute);
+            return $this->getAdminObjectUrl($object->getRelatedEntity(), $absolute);
         }
 
         if ($object instanceof Opinion) {

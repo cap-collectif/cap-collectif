@@ -493,10 +493,6 @@ class Proposal implements CommentableInterface, VotableInterface
         return $this->enabled && !$this->isTrashed && $this->getStep()->canContribute();
     }
 
-    public function canComment() {
-        return $this->enabled && !$this->isTrashed && $this->getIsCommentable();
-    }
-
     public function userHasReport(User $user)
     {
         foreach ($this->reports as $report) {
