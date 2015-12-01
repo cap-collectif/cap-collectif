@@ -204,26 +204,18 @@ class ProjectDownloadResolver
 
     public function getConsultationStepData(ConsultationStep $consultationStep)
     {
-        echo "Exporting step ".$consultationStep->getTitle()."\n";
-
         $this->data = [
             'published'   => [],
             'unpublished' => [],
         ];
 
         // Fetch data
-        echo "Fetching elements\n";
         $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getEnabledByConsultationStep($consultationStep);
-        echo "Opinions : ".count($opinions)."\n";
         $opinionsVotes = $this->em->getRepository('CapcoAppBundle:OpinionVote')->getEnabledByConsultationStep($consultationStep);
         $versions = $this->em->getRepository('CapcoAppBundle:OpinionVersion')->getEnabledByConsultationStep($consultationStep);
-        echo "Versions : ".count($versions)."\n";
         $versionsVotes = $this->em->getRepository('CapcoAppBundle:OpinionVersionVote')->getEnabledByConsultationStep($consultationStep);
-        echo "Votes (opinions + versions only) : ".(count($opinionsVotes) + count($versionsVotes))."\n";
         $arguments = $this->em->getRepository('CapcoAppBundle:Argument')->getEnabledByConsultationStep($consultationStep);
-        echo "Arguments : ".count($arguments)."\n";
         $sources = $this->em->getRepository('CapcoAppBundle:Source')->getEnabledByConsultationStep($consultationStep);
-        echo "Sources : ".count($sources)."\n";
 
         // Create items from data
         $this->getOpinionsData($opinions);
@@ -238,19 +230,15 @@ class ProjectDownloadResolver
 
     public function getCollectStepData(CollectStep $collectStep)
     {
-        echo "Exporting step ".$collectStep->getTitle()."\n";
-
         $this->data = [
             'published'   => [],
             'unpublished' => [],
         ];
 
         // Proposals
-        echo "Fetching elements\n";
         $proposals = $this->em
             ->getRepository('CapcoAppBundle:Proposal')
             ->getEnabledByProposalForm($collectStep->getProposalForm(), 0, null);
-        echo "Proposals : ".count($proposals)."\n";
 
         $this->getProposalsData($proposals);
 
