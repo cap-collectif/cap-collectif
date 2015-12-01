@@ -333,13 +333,6 @@ project:
   see_all: Voir tous les projets
   share_button: Inviter
   show:
-    alert:
-      ended:
-        text: La période de participation est maintenant terminée. Merci à tous d'avoir contribué.
-        title: Consultation terminée.
-      future:
-        text: La période de participation débutera le %date%.
-        title: Projet à venir.
     arguments: "]-Inf, 1] %count% argument | ]1,Inf[ %count% arguments"
     arguments_no_nb: "]-Inf, 1] argument | ]1,Inf[ arguments"
     contributions_no_nb: "]-Inf, 1] contribution | ]1,Inf[ contributions"
@@ -411,8 +404,23 @@ step:
     closed: Terminé
     open: En cours
     future: À venir
+  consultation:
+    alert:
+      ended:
+        text: La période de participation est maintenant terminée. Merci à tous d'avoir contribué.
+        title: Consultation terminée.
+      future:
+        text: La période de participation débutera le %date%.
+        title: Consultation à venir.
   collect:
     title: Collecter
+    alert:
+      ended:
+        text: La période de participation est maintenant terminée. Merci à tous d'avoir contribué.
+        title: Dépôt terminé.
+      future:
+        text: La période de participation débutera le %date%.
+        title: Dépôt à venir.
 
 simple_argument:
   count: "%count% avis"
