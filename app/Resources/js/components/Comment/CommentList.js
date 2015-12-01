@@ -22,17 +22,14 @@ const CommentList = React.createClass({
       <ul className={classes}>
         {
           this.props.comments.map((comment) => {
-            if (comment.can_contribute) {
-              return (
-                <Comment
-                  {...this.props}
-                  key={comment.id}
-                  comment={comment}
-                  root={this.props.root}
-                />
-              );
-            }
-            return null;
+            return (
+              <Comment
+                {...this.props}
+                key={comment.id}
+                comment={comment}
+                root={this.props.root}
+              />
+            );
           })
         }
       </ul>
