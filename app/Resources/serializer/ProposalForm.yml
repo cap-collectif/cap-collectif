@@ -9,23 +9,7 @@ Capco\AppBundle\Entity\ProposalForm:
             expose: true
             type: string
             groups: [ProposalForms]
-        titleHelpText:
-            expose: true
-            type: string
-            groups: [ProposalForms]
         description:
-            expose: true
-            type: string
-            groups: [ProposalForms]
-        descriptionHelpText:
-            expose: true
-            type: string
-            groups: [ProposalForms]
-        themeHelpText:
-            expose: true
-            type: string
-            groups: [ProposalForms]
-        districtHelpText:
             expose: true
             type: string
             groups: [ProposalForms]

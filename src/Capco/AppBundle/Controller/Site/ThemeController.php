@@ -74,11 +74,10 @@ class ThemeController extends Controller
      * @Template("CapcoAppBundle:Theme:show.html.twig")
      *
      * @param Theme $theme
-     * @param int $max
      *
      * @return array
      */
-    public function showAction(Theme $theme, $max = 4)
+    public function showAction(Theme $theme)
     {
         if (false == $theme->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', [], 'CapcoAppBundle'));
@@ -86,7 +85,6 @@ class ThemeController extends Controller
 
         return [
             'theme' => $theme,
-            'maxProjectsDisplayed' => $max
         ];
     }
 
@@ -104,11 +102,35 @@ class ThemeController extends Controller
         $em = $this->get('doctrine.orm.entity_manager');
         $ideas = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
         $nbIdeas = $em->getRepository('CapcoAppBundle:Idea')->countSearchResults($theme->getSlug());
+
         return [
             'ideas'   => $ideas,
             'theme'   => $theme,
             'max'     => $max,
             'nbIdeas' => $nbIdeas,
+        ];
+    }
+
+    /**
+     * @Template("CapcoAppBundle:Theme:lastProjects.html.twig")
+     *
+     * @param $theme
+     * @param int $max
+     * @param int $offset
+     *
+     * @return array
+     */
+    public function lastProjectsAction($theme, $max = 8, $offset = 0)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $projects = $em->getRepository('CapcoAppBundle:Project')->getLastByTheme($theme->getId(), $max, $offset);
+        $nbProjects = $em->getRepository('CapcoAppBundle:Project')->countSearchResults($theme->getSlug());
+
+        return [
+            'projects'   => $projects,
+            'theme'      => $theme,
+            'max'        => $max,
+            'nbProjects' => $nbProjects,
         ];
     }
 }

@@ -13,7 +13,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  *
  * @CapcoAssert\HasUnlistedEmail()
  * @CapcoAssert\HasAnonymousOrUser()
- * @CapcoAssert\EmailDoesNotBelongToUser(message="event_registration.create.email_belongs_to_user")
+ * @CapcoAssert\EmailDoesNotBelongToUser()
  * @ORM\Table(name="event_registration")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRegistrationRepository")
  */
