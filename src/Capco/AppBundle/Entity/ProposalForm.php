@@ -65,25 +65,25 @@ class ProposalForm
 
     /**
      * @var string
-     * @ORM\Column(name="title_help_text", type="string", length=255)
+     * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
      */
     private $titleHelpText;
 
     /**
      * @var string
-     * @ORM\Column(name="description_help_text", type="string", length=255)
+     * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
      */
     private $descriptionHelpText;
 
     /**
      * @var string
-     * @ORM\Column(name="theme_help_text", type="string", length=255)
+     * @ORM\Column(name="theme_help_text", type="string", length=255, nullable=true)
      */
     private $themeHelpText;
 
     /**
      * @var string
-     * @ORM\Column(name="district_help_text", type="string", length=255)
+     * @ORM\Column(name="district_help_text", type="string", length=255, nullable=true)
      */
     private $districtHelpText;
 
