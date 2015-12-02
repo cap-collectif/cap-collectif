@@ -36,6 +36,7 @@ const ProposalEditModal = React.createClass({
   handleSubmitSuccess() {
     this.close();
     this.setState({isSubmitting: false});
+    this.reload();
   },
 
   handleValidationFailure() {

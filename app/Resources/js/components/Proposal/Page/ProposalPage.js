@@ -4,10 +4,7 @@ import ProposalPageAnswer from './ProposalPageAnswer';
 import ProposalPageAlert from './ProposalPageAlert';
 // import ProposalPageVotes from './ProposalPageVotes';
 import ProposalPageComments from './ProposalPageComments';
-import ProposalStore from '../../../stores/ProposalStore';
-import ProposalActions from '../../../actions/ProposalActions';
 // import ProposalVoteBox from '../Vote/ProposalVoteBox';
-import FlashMessages from '../../Utils/FlashMessages';
 
 const Row = ReactBootstrap.Row;
 const Col = ReactBootstrap.Col;
@@ -21,54 +18,15 @@ const ProposalPage = React.createClass({
   },
   mixins: [ReactIntl.IntlMixin],
 
-  getInitialState() {
-    ProposalStore.initProposal(this.props.proposal);
-    return {
-      messages: {
-        'errors': [],
-        'success': [],
-      },
-      proposal: ProposalStore.proposal,
-    };
-  },
-
-  componentWillMount() {
-    ProposalStore.addChangeListener(this.onChange);
-  },
-
-  componentWillUnmount() {
-    ProposalStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    if (ProposalStore.isProposalSync) {
-      this.setState({
-        messages: ProposalStore.messages,
-        proposal: ProposalStore.proposal,
-      });
-      return;
-    }
-
-    this.loadProposal();
-  },
-
-  loadProposal() {
-    ProposalActions.getOne(
-      this.props.form.id,
-      this.state.proposal.id
-    );
-  },
-
   render() {
-    const proposal = this.state.proposal;
+    const proposal = this.props.proposal;
     return (
       <div>
-        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} style={{marginBottom: 0}} />
         <ProposalPageAlert proposal={proposal} />
         <div id="sidebar-container" className="container sidebar__container">
           <Row>
             <Col xs={12}>
-              <ProposalPageHeader proposal={proposal} />
+              <ProposalPageHeader proposal={this.props.proposal} />
               <ProposalPageAnswer proposal={proposal} />
               <ProposalPageContent
                 proposal={proposal}

@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
+Capco\AppBundle\Entity\ProjectAbstractStep:
     exclusion_policy: ALL
     properties:
         id:

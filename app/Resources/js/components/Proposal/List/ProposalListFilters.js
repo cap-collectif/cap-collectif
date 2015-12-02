@@ -113,10 +113,10 @@ const ProposalListFilters = React.createClass({
                     {this.getIntlMessage('global.select_' + filterName)}
                   </option>
                   {
-                    this.props[filterName].map((choice) => {
+                    this.props[filterName].map((option) => {
                       return (
-                        <option key={choice.id} value={choice.id}>
-                          {choice.title || choice.name}
+                        <option key={option.id} value={option.id}>
+                          {option.title || option.name}
                         </option>
                       );
                     })

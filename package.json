@@ -23,7 +23,6 @@
     "brunch": "^1.8.5",
     "clean-css-brunch": "^1.7.2",
     "css-brunch": "^1.7.0",
-    "eslint-plugin-react": "^3.11.2",
     "javascript-brunch": "^1.7.1",
     "process-env-brunch": "^1.4.4-d",
     "sass-brunch": "^1.9.1",

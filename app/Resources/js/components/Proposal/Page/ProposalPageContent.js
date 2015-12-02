@@ -32,7 +32,7 @@ const ProposalPageHeader = React.createClass({
   render() {
     const proposal = this.props.proposal;
     return (
-      <div className="container--custom container--with-sidebar proposal__content">
+      <div className="container--custom container--with-sidebar">
         <div className="block">
           <h2 className="h2">{ this.getIntlMessage('proposal.description') }</h2>
           <div dangerouslySetInnerHTML={{__html: proposal.body}} />
@@ -47,7 +47,7 @@ const ProposalPageHeader = React.createClass({
             );
           })
         }
-        <div className="block proposal__buttons">
+        <div className="block">
           <ShareButtonDropdown
             url={proposal._links.show}
             title={proposal.title}
