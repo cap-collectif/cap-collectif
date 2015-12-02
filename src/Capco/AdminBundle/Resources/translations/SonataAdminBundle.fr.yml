@@ -470,19 +470,11 @@ admin:
     proposal_form:
       title: Titre
       description: Description
-      questions: Questions supplémentaires
+      questions: Questions
       updated_at: Mise à jour
       created_at: Création
-      title_help_text: Texte d'aide pour le champ Titre.
-      help_text_title_help_text: Le champ Titre est présent par défaut.
-      description_help_text: Texte d'aide pour le champ Description.
-      help_text_description_help_text: Le champ Description est présent par défaut.
-      theme_help_text: Texte d'aide pour le champ Thème.
-      help_text_theme_help_text: Le champ Thème est présent par défaut.
-      district_help_text: Texte d'aide pour le champ Quartier.
-      help_text_district_help_text: Le champ Quartier est présent par défaut.
-      group_general: Formulaire
-      group_questions: Champs du formulaire
+      group_general: Général
+      group_questions: Questions
     question:
       title: Titre
       help_text: Texte d'aide
