@@ -64,30 +64,6 @@ class ProposalForm
     protected $updatedAt;
 
     /**
-     * @var string
-     * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
-     */
-    private $titleHelpText;
-
-    /**
-     * @var string
-     * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
-     */
-    private $descriptionHelpText;
-
-    /**
-     * @var string
-     * @ORM\Column(name="theme_help_text", type="string", length=255, nullable=true)
-     */
-    private $themeHelpText;
-
-    /**
-     * @var string
-     * @ORM\Column(name="district_help_text", type="string", length=255, nullable=true)
-     */
-    private $districtHelpText;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -215,7 +191,7 @@ class ProposalForm
     }
 
     /**
-     * @return CollectStep
+     * @return mixed
      */
     public function getStep()
     {
@@ -223,8 +199,7 @@ class ProposalForm
     }
 
     /**
-     * @param CollectStep $step
-     * @return $this
+     * @param mixed $step
      */
     public function setStep(CollectStep $step = null)
     {
@@ -247,77 +222,5 @@ class ProposalForm
     public function canContribute()
     {
         return $this->getStep()->canContribute();
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitleHelpText()
-    {
-        return $this->titleHelpText;
-    }
-
-    /**
-     * @param string $titleHelpText
-     * @return $this
-     */
-    public function setTitleHelpText($titleHelpText)
-    {
-        $this->titleHelpText = $titleHelpText;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescriptionHelpText()
-    {
-        return $this->descriptionHelpText;
-    }
-
-    /**
-     * @param string $descriptionHelpText
-     * @return $this
-     */
-    public function setDescriptionHelpText($descriptionHelpText)
-    {
-        $this->descriptionHelpText = $descriptionHelpText;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getThemeHelpText()
-    {
-        return $this->themeHelpText;
-    }
-
-    /**
-     * @param string $themeHelpText
-     * @return $this
-     */
-    public function setThemeHelpText($themeHelpText)
-    {
-        $this->themeHelpText = $themeHelpText;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDistrictHelpText()
-    {
-        return $this->districtHelpText;
-    }
-
-    /**
-     * @param string $districtHelpText
-     * @return $this
-     */
-    public function setDistrictHelpText($districtHelpText)
-    {
-        $this->districtHelpText = $districtHelpText;
-        return $this;
     }
 }

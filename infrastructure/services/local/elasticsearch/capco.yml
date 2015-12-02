@@ -1,7 +1,5 @@
 cluster:
   name: capco
 
-discovery.zen.ping.multicast: false
-
 marvel.agent.enabled: false
 script.disable_dynamic: false

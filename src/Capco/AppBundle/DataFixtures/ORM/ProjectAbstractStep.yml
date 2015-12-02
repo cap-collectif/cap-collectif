@@ -56,10 +56,14 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     project: @p6
     position: 1
   pas16:
-    step: @selectionStep1
+    step: @collectstep2
     project: @p6
     position: 2
   pas17:
-    step: @selectionStep2
+    step: @selectionStep1
     project: @p6
     position: 3
+  pas18:
+    step: @selectionStep2
+    project: @p6
+    position: 4

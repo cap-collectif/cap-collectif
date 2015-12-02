@@ -3,6 +3,7 @@ import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
 import ProposalActions from '../../../actions/ProposalActions';
+import ProposalStore from '../../../stores/ProposalStore';
 
 const Modal = ReactBootstrap.Modal;
 
@@ -21,8 +22,18 @@ const ProposalCreate = React.createClass({
     };
   },
 
-  handleSubmit() {
-    this.setState({isSubmitting: true});
+  componentWillMount() {
+    ProposalStore.addChangeListener(this.onChange);
+  },
+
+  componentWillUnmount() {
+    ProposalStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    this.setState({
+      isSubmitting: ProposalStore.isProcessing,
+    });
   },
 
   close() {
@@ -33,18 +44,17 @@ const ProposalCreate = React.createClass({
     this.setState({showModal: true});
   },
 
+  handleSubmit() {
+    ProposalActions.submit();
+  },
+
   handleSubmitSuccess() {
     this.close();
-    this.setState({isSubmitting: false});
     ProposalActions.load('form', this.props.form.id);
   },
 
   handleValidationFailure() {
-    this.setState({isSubmitting: false});
-  },
-
-  handleSubmitFailure() {
-    this.setState({isSubmitting: false});
+    ProposalActions.validationFailure();
   },
 
   render() {
@@ -71,7 +81,6 @@ const ProposalCreate = React.createClass({
               isSubmitting={this.state.isSubmitting}
               onValidationFailure={this.handleValidationFailure.bind(null, this)}
               onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
-              onSubmitFailure={this.handleSubmitFailure.bind(null, this)}
             />
           </Modal.Body>
           <Modal.Footer>

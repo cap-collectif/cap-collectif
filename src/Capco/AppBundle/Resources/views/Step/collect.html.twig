@@ -63,16 +63,18 @@
                 </div>
             {% endif %}
 
-            <div
-                id="render-collect-step-page"
-                data-count='{{ proposalsCount }}'
-                data-form='{{ form|escape }}'
-                data-themes='{{ themes|escape }}'
-                data-statuses='{{ statuses|escape }}'
-                data-districts='{{ districts|escape }}'
-                data-types='{{ types|escape }}'
-            >
-            </div>
+            {% if form %}
+                <div
+                    id="render-collect-step-page"
+                    data-count='{{ proposalsCount }}'
+                    data-form='{{ form|escape }}'
+                    data-themes='{{ themes|escape }}'
+                    data-statuses='{{ statuses|escape }}'
+                    data-districts='{{ districts|escape }}'
+                    data-types='{{ types|escape }}'
+                >
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

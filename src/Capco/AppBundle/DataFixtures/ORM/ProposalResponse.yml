@@ -11,3 +11,7 @@ Capco\AppBundle\Entity\ProposalResponse:
     question: @question1
     proposal: @proposal2
     value: souhaitable
+  proposalresponse4:
+    question: @question2
+    proposal: @proposal2
+    value: 1 million !
