@@ -105,6 +105,9 @@ COPY cron/crontab               /etc/cron.d/crontab
 COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 
+# Daemons
+COPY php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
+
 # Volume for redis
 VOLUME ["/data"]
 

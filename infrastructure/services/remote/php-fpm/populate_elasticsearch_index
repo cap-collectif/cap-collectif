@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Checking if elasticsearch is booted..."
+while ! curl http://localhost:9200 > /dev/null 2>&1;
+  do sleep 1
+  echo "Waiting elasticsearch to boot..."
+done
+echo "Elasticsearch is up"
+
+# Increasing memory_limit is required when importing a lot of content
+php app/console -d memory_limit=512M fos:elastica:populate --env=prod --no-interaction
