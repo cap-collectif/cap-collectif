@@ -1,5 +1,7 @@
 #!/bin/bash
 
+start=$SECONDS
+
 echo "Configuring New Relic..."
 sed -i 's/newrelic.appname = ""/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php5/*/conf.d/20-newrelic.ini
 sed -i 's/newrelic.license = ""/newrelic.license = '"$NR_INSTALL_KEY"'/' /etc/php5/*/conf.d/20-newrelic.ini
@@ -8,27 +10,23 @@ cd /var/www
 
 for directory in app/cache app/logs web/bundles; do
   if [ ! -d "$directory" ]; then
-    echo "Creating '$directory' ..."
+    echo "Creating '$directory'..."
     mkdir -p -m 777 $directory
   fi
 done
 
-echo "Checking media permissions..."
+echo "Checking media permissions after $(( SECONDS - start )) seconds..."
 chmod -R 777 web/media
 
-echo "Clearing previous cache..."
+echo "Clearing previous cache after $(( SECONDS - start )) seconds..."
 rm -rf app/cache/*
 
-echo "Checking if mysql is booted..."
+echo "Checking if mysql is booted after $(( SECONDS - start )) seconds..."
 while ! mysql --host=127.0.0.1 > /dev/null 2>&1;
   do sleep 1
   echo "Waiting mysql to boot..."
 done
-echo "Mysql is up"
-
-su capco <<'EOF'
-
-cd /var/www
+echo "Mysql is ready after $(( SECONDS - start )) seconds !"
 
 RESULT=`php app/console doctrine:migrations:status --env=prod 2>&1 | grep -o "Unknown database" | wc -l`
 if [ "$RESULT" != "0" ]; then
@@ -38,19 +36,23 @@ if [ "$RESULT" != "0" ]; then
     php app/console doctrine:migrations:version --add --all --env=prod --no-interaction
     php app/console capco:load-base-data --force --env=prod --no-interaction
 else
+  RESULT=`app/console doctrine:migrations:status --show-versions | grep -o "not migrated" | wc -l`
+  if [ "$RESULT" != "0" ]; then
     echo "Migrating an existing database..."
     php app/console doctrine:migrations:migrate --env=prod --no-interaction
+    if [ $? -eq 1 ]; then
+      echo "Database migration failed... Exiting" >&2
+      exit 1
+    fi
+  fi
 fi
+echo "Database is ready after $(( SECONDS - start )) seconds !"
 
 php app/console cache:warmup --env=prod --no-interaction
 php app/console assets:install --symlink --env=prod --no-interaction
 
-echo "Checking if elasticsearch is booted..."
-while ! curl http://localhost:9200 > /dev/null 2>&1; do sleep 1; done
+echo "Starting daemon to populate elasticsearch..."
+/etc/service/php-fpm/populate_elasticsearch_index &
 
-echo "Elasticsearch has booted - Starting a daemon to populate the index."
-php app/console fos:elastica:populate --env=prod --no-interaction &
-
-EOF
-
+echo "php-fpm is ready after $(( SECONDS - start )) seconds !"
 exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O

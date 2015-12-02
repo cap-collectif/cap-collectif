@@ -10,7 +10,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  *
  * @CapcoAssert\DidNotAlreadyVoteEmail()
  * @CapcoAssert\HasAnonymousOrUser()
- * @CapcoAssert\EmailDoesNotBelongToUser(message="idea.vote.email_belongs_to_user")
+ * @CapcoAssert\EmailDoesNotBelongToUser()
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
