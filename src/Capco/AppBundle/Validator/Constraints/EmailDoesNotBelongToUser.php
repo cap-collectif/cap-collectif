@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class EmailDoesNotBelongToUser extends Constraint
 {
-    public $message = 'event_registration.create.email_belongs_to_user';
+    public $message = 'email.email_belongs_to_user';
 
     public function validatedBy()
     {
