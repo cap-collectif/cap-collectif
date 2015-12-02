@@ -15,18 +15,18 @@ for directory in app/cache app/logs web/bundles; do
   fi
 done
 
-echo "Checking media permissions..."
+echo "Checking media permissions after $(( SECONDS - start )) seconds..."
 chmod -R 777 web/media
 
-echo "Clearing previous cache..."
+echo "Clearing previous cache after $(( SECONDS - start )) seconds..."
 rm -rf app/cache/*
 
-echo "Checking if mysql is booted..."
+echo "Checking if mysql is booted after $(( SECONDS - start )) seconds..."
 while ! mysql --host=127.0.0.1 > /dev/null 2>&1;
   do sleep 1
   echo "Waiting mysql to boot..."
 done
-echo "Mysql is up"
+echo "Mysql is ready after $(( SECONDS - start )) seconds !"
 
 RESULT=`php app/console doctrine:migrations:status --env=prod 2>&1 | grep -o "Unknown database" | wc -l`
 if [ "$RESULT" != "0" ]; then
@@ -43,7 +43,7 @@ else
       exit 1
     fi
 fi
-echo "Done !"
+echo "Database is ready after $(( SECONDS - start )) seconds !"
 
 php app/console cache:warmup --env=prod --no-interaction
 php app/console assets:install --symlink --env=prod --no-interaction
@@ -51,5 +51,5 @@ php app/console assets:install --symlink --env=prod --no-interaction
 echo "Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &
 
-echo "php-fpm is ready to boot after $(( SECONDS - start )) seconds"
+echo "php-fpm is ready after $(( SECONDS - start )) seconds !"
 exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O
