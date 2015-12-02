@@ -2,12 +2,9 @@
 
 # First boot
 if [ ! -f /var/lib/mysql/ibdata1 ]; then
-  echo "No previous mysql detected in '/var/lib/mysql'."
-  echo "Installing mysql..."
-  mkdir -p /var/lib/mysql
+  mkdir /var/lib/mysql
   cp -R /var/lib/mysql_save/* /var/lib/mysql/
   chown -R mysql:mysql /var/lib/mysql
-  echo "Mysql is installed!"
 fi
 
 exec mysqld_safe
