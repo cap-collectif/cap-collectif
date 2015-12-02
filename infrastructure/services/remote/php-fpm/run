@@ -47,6 +47,6 @@ php app/console cache:warmup --env=prod --no-interaction
 php app/console assets:install --symlink --env=prod --no-interaction
 
 echo "Starting daemon to populate elasticsearch..."
-./etc/service/php-fpm/populate_elasticsearch_index &
+/etc/service/php-fpm/populate_elasticsearch_index &
 
 exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O
