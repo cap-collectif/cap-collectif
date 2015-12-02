@@ -2,7 +2,7 @@
 
 # First boot
 if [ ! -f /var/lib/mysql/ibdata1 ]; then
-  mkdir -p /var/lib/mysql
+  mkdir /var/lib/mysql
   cp -R /var/lib/mysql_save/* /var/lib/mysql/
   chown -R mysql:mysql /var/lib/mysql
 fi
