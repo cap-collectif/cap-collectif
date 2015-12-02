@@ -1,6 +1,7 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
 import ProposalStore from '../stores/ProposalStore';
+import LocalStorageService from '../services/LocalStorageService';
 import {
   RECEIVE_PROPOSAL,
   RECEIVE_PROPOSALS,
@@ -38,7 +39,10 @@ export default {
     const offset = page ? PROPOSAL_PAGINATION : 100;
     const sort = 'score';
     const type = 'proposal';
+
     let url = null;
+    let data = {};
+
     switch (fetchFrom) {
     case 'form':
       url = `/proposal_forms/${id}/proposals`;
@@ -56,25 +60,25 @@ export default {
 
     url += `?order=${order}&first=${first}&offset=${offset}`;
 
-    for (const filter in filters) {
-      if (filters.hasOwnProperty(filter)) {
-        url += `&${filter}=${filters[filter]}`;
-      }
-    }
-
-    if (fetchFrom === 'form' && terms !== null) {
-      url += `?terms=${terms}&sort=${sort}&type=${type}&page=${page}&pagination=${PROPOSAL_PAGINATION}`;
-    }
+    data.filters = filters;
+    data.terms = terms;
+    data.sort = sort;
+    data.type = type;
+    data.page = page;
+    data.pagination = PROPOSAL_PAGINATION;
 
     Fetcher
-      .get(url)
-      .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_PROPOSALS,
-          proposals: data.proposals,
-          count: data.count,
-        });
-        return true;
+      .post(url, data)
+      .then((response) => {
+        const promise = response.json();
+        promise.then((data) => {
+          AppDispatcher.dispatch({
+            actionType: RECEIVE_PROPOSALS,
+            proposals: data.proposals,
+            count: data.count,
+          });
+          return true;  
+        })
       });
   },
 
@@ -90,6 +94,7 @@ export default {
       actionType: CHANGE_ORDER,
       order: newOrder,
     });
+    LocalStorageService.set('proposals_order', ProposalStore.order);
   },
 
   changeFilterValue: (filterName, value) => {
@@ -98,6 +103,7 @@ export default {
       filter: filterName,
       value: value,
     });
+    LocalStorageService.set('proposals_filters', ProposalStore.filters);
   },
 
   submit: () => {

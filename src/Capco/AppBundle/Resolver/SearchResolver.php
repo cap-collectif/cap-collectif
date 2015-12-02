@@ -2,12 +2,15 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Elastica\Filter\Bool;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\AbstractQuery;
+use Elastica\Query\Bool as BoolQuery;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Filtered;
 use Elastica\Filter\Type;
+use Elastica\QueryBuilder;
 use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 
 class SearchResolver
@@ -31,16 +34,25 @@ class SearchResolver
      * @param string    $type
      * @param string    $sort
      * @param string    $useTransformation
-     * @param string    $filters
-     * @param string    $resultsPerPage
+     * @param bool|true $useTransformation
+     * @param array $filters
      *
      * @return array
      */
-    public function searchAll($page = 1, $term = '', $type = 'all', $sort = 'score', $useTransformation = true, $filters = [], $resultsPerPage = self::RESULTS_PER_PAGE)
+    public function searchAll($page = 1, $term = '', $type = 'all', $sort = 'score', $filters = [], $useTransformation = true, $resultsPerPage = self::RESULTS_PER_PAGE)
     {
+        $results = [];
+        $count = 0;
         $from = ($page - 1) * $resultsPerPage;
-        $termQuery = empty(trim($term)) ? new Query\MatchAll() : $this->getSearchQuery($term);
-        $query = 'all' === $type ? new Query($termQuery) : new Query($this->getTypeFilteredQuery($type, $termQuery));
+
+        $multiMatchQuery = empty(trim($term)) ? new Query\MatchAll() : $this->getMultiMatchQuery($term);
+        $boolFilter = ($type || !empty($filters)) ? $this->getBoolFilter($type, $filters) : null;
+
+        if ($multiMatchQuery && $boolFilter) {
+            $query = new Filtered($multiMatchQuery, new Filter($boolFilter));
+        } else {
+            $query = $multiMatchQuery ? new Query($multiMatchQuery) : new Query($boolFilter);
+        }
 
         if ($sort !== null && $sort !== 'score') {
             $query->setSort($this->getSortSettings($sort));
@@ -67,35 +79,14 @@ class SearchResolver
     }
 
     /**
-     * get filtered query with type filter and term query
-     * @param string        $type
-     * @param AbstractQuery $termQuery
-     * @return Filtered
+     * Get multi match query on term
+     *
+     * @param $term
+     * @return MultiMatch
      */
-    public function getTypeFilteredQuery($type, AbstractQuery $termQuery)
-    {
-        $typeFilter = new Type($type);
-
-        return new Filtered($termQuery, $typeFilter);
-    }
-
-    // get multi match query on term
-    protected function getSearchQuery($term)
+    protected function getMultiMatchQuery($term)
     {
         $boolQuery = new Query\Bool();
-
-        $termQuery = new MultiMatch();
-        $termQuery->setQuery($term);
-        $termQuery->setFields([
-            'title^5',
-            'body',
-            'object',
-            'body',
-            'teaser',
-            'excerpt',
-            'username^5',
-            'biography',
-        ]);
 
         $shouldQuery = new MultiMatch();
         $shouldQuery->setQuery($term);
@@ -109,22 +100,46 @@ class SearchResolver
             'biography.std',
         ]);
 
-        $boolQuery->addMust($termQuery);
+        $boolQuery->addMust($shouldQuery);
         $boolQuery->addShould($shouldQuery);
 
         return $boolQuery;
     }
 
-    protected function getFieldFilteredQuery($filters)
+    /**
+     * @param $type
+     * @param array $filters
+     * @return Bool
+     */
+    public function getBoolFilter($type, array $filters)
     {
+        $boolFilter = new Bool();
 
+        if ('all' !== $type) {
+            $boolFilter->addMust([
+                'type' => $type
+            ]);
+        }
+
+        foreach ($filters as $filterName => $filterValue) {
+            $boolFilter->addMust([
+                $filterName => $filterValue
+            ]);
+        }
+
+        return $boolFilter;
     }
 
+    /**
+     * @param $sort
+     * @param string $order
+     * @return array|void
+     */
     protected function getSortSettings($sort, $order = 'desc')
     {
         $term = '_score';
         if ($sort === 'date') {
-            $term = 'updatedAt';
+            $term = 'createdAt';
         }
 
         return [
@@ -137,7 +152,10 @@ class SearchResolver
         ];
     }
 
-    // get array of settings for highlighted results
+    /**
+     * get array of settings for highlighted results
+     * @return array
+     */
     protected function getHighlightSettings()
     {
         return [

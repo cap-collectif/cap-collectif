@@ -31,96 +31,42 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ProposalsController extends FOSRestController
 {
     /**
-     * @Get("/proposal_forms/{proposal_form_id}/proposals")
+     * @Post("/proposal_forms/{proposal_form_id}/proposals")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}})
      * @QueryParam(name="first", requirements="[0-9.]+", default="0")
      * @QueryParam(name="offset", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|popular|comments)", default="last")
-     * @QueryParam(name="theme", nullable=true)
-     * @QueryParam(name="status", nullable=true)
-     * @QueryParam(name="district", nullable=true)
-     * @QueryParam(name="type", nullable=true)
-     * Search params
-     * @QueryParam(name="terms", nullable=true)
-     * @QueryParam(name="sort", nullable=true)
-     * @QueryParam(name="type", nullable=true)
-     * @QueryParam(name="page", nullable=true)
-     * @QueryParam(name="pagination", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
      *
+     * @param Request $request
      * @param ProposalForm $proposalForm
      * @param ParamFetcherInterface $paramFetcher
      * @return array
-     * @throws \Exception
      */
-    public function getProposalsByFormAction(ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
+    public function getProposalsByFormAction(Request $request, ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
     {
         $searchResolver = $this->container->get('capco.search.resolver');
-
-        $searchResolver->searchAll(
-            intval($paramFetcher->get('pagination')),
-            intval($paramFetcher->get('page')),
-            $paramFetcher->get('terms'),
-            $paramFetcher->get('type') ?: 'proposal',
-            $paramFetcher->get('sort') ?: 'score',
-            false
-        );
 
         $first = intval($paramFetcher->get('first'));
         $offset = intval($paramFetcher->get('offset'));
         $order = $paramFetcher->get('order');
-        $themeId = $paramFetcher->get('theme');
-        $statusId = $paramFetcher->get('status');
-        $districtId = $paramFetcher->get('district');
-        $typeId = $paramFetcher->get('type');
 
-        $em = $this->getDoctrine()->getManager();
-        $theme = null;
-        $status = null;
-        $district = null;
-        $type = null;
+        $pagination = $request->request->has('pagination') ? intval($request->request->get('pagination')) : null;
+        $page = $request->request->has('page') ? intval($request->request->get('page')) : null;
+        $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
+        $type = $request->request->has('type') ? $request->request->get('type') : 'proposal';
+        $sort = $request->request->has('sort') ? $request->request->get('sort') : 'score';
+        $filters = $request->request->has('filters') ? $request->request->get('filters') : [];
 
-        if ($themeId) {
-            $theme = $em->getRepository('CapcoAppBundle:Theme')->find($themeId);
-            if (!$theme) {
-                throw new \Exception('Wrong theme');
-            }
-        }
+        $results = $searchResolver->searchAll($pagination, $page, $terms, $type, $sort, $filters, false);
 
-        if ($statusId) {
-            $status = $em->getRepository('CapcoAppBundle:Status')->find($statusId);
-            if (!$status) {
-                throw new \Exception('Wrong status');
-            }
-        }
-
-        if ($districtId) {
-            $district = $em->getRepository('CapcoAppBundle:District')->find($districtId);
-            if (!$district) {
-                throw new \Exception('Wrong district');
-            }
-        }
-
-        if ($typeId) {
-            $type = $em->getRepository('CapcoUserBundle:UserType')->find($typeId);
-            if (!$type) {
-                throw new \Exception('Wrong type');
-            }
-        }
-
-        $paginator = $em
-            ->getRepository('CapcoAppBundle:Proposal')
-            ->getPublishedByProposalForm($proposalForm, $first, $offset, $order, $theme, $status, $district, $type)
-        ;
-
-        $proposals = [];
-        foreach ($paginator as $proposal) {
-            $proposals[] = $proposal;
-        }
+        foreach($results['results'] as $result) {
+            dump($result);
+        }die;
 
         return [
-            'proposals' => $proposals,
-            'count'     => count($paginator),
+            'proposals' => $results['results'],
+            'count'     => $results['count'],
         ];
     }
 

@@ -86,9 +86,9 @@
                                         <a class="search-result__link" href="{{ result.transformed | capco_url }}">
                                             {{ title | raw }}
                                         </a>
-                                        {% if result.result.hit['_source']['updated_at'] is defined %}
+                                        {% if result.result.hit['_source']['created_at'] is defined %}
                                             <span class="small excerpt search-result__date">
-                                                {{ result.result.hit['_source']['updated_at'] | localizeddate('medium', 'none', app.request.locale) }}
+                                                {{ result.result.hit['_source']['created_at'] | localizeddate('medium', 'none', app.request.locale) }}
                                             </span>
                                         {% endif %}
                                 </h4>
