@@ -10,4 +10,4 @@ if [ ! -f /var/lib/mysql/ibdata1 ]; then
   echo "Mysql is installed!"
 fi
 
-exec mysqld_safe --skip-name-resolve
+exec mysqld_safe
