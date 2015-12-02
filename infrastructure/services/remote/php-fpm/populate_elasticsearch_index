@@ -9,3 +9,10 @@ echo "Elasticsearch is up"
 
 # Increasing memory_limit is required when importing a lot of content
 php -d memory_limit=512M app/console fos:elastica:populate --env=prod --no-interaction
+
+if [ $? -eq 1 ]; then
+  echo "Populating the index failed... Exiting" >&2
+  exit 1
+fi
+
+echo "Index has been populated !"
