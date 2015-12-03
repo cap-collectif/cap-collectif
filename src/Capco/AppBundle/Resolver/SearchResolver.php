@@ -33,9 +33,9 @@ class SearchResolver
      *
      * @return array
      */
-    public function searchAll($page, $term, $type = 'all', $sort = 'score')
+    public function searchAll($page, $term, $type = 'all', $sort = 'score', $resultsPerPage = self::RESULT_PER_PAGE)
     {
-        $from = ($page - 1) * self::RESULT_PER_PAGE;
+        $from = ($page - 1) * $resultsPerPage;
         $termQuery = empty(trim($term)) ? new Query\MatchAll() : $this->getSearchQuery($term);
         $query = 'all' === $type ? new Query($termQuery) : new Query($this->getTypeFilteredQuery($type, $termQuery));
 
