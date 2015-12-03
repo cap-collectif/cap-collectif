@@ -33,7 +33,7 @@ class SearchResolver
      *
      * @return array
      */
-    public function searchAll($page, $term, $type = 'all', $sort = 'score', $resultsPerPage = self::RESULT_PER_PAGE)
+    public function searchAll($page, $term, $type = 'all', $sort = 'score', $useTransformation = true, $resultsPerPage = self::RESULT_PER_PAGE)
     {
         $from = ($page - 1) * $resultsPerPage;
         $termQuery = empty(trim($term)) ? new Query\MatchAll() : $this->getSearchQuery($term);
@@ -51,7 +51,10 @@ class SearchResolver
         $resultSet = $this->index->search($query);
         $count = $resultSet->getTotalHits();
 
-        $results = $this->transformer->hybridTransform($resultSet->getResults());
+        $results = $useTransformation
+            ? $this->transformer->hybridTransform($resultSet->getResults())
+            : $resultSet->getResults()
+        ;
 
         return [
             'count' => $count,
