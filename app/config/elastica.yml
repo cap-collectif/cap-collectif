@@ -82,7 +82,7 @@ fos_elastica:
             updatedAt:
               type: date
             Author:
-              type: object
+              type: nested
               properties:
                 slug:
                   index: not_analyzed
@@ -107,7 +107,7 @@ fos_elastica:
             slug:
               index: not_analyzed
             Author:
-              type: object
+              type: nested
               properties:
                 slug:
                   index: not_analyzed
@@ -134,7 +134,7 @@ fos_elastica:
             updatedAt:
               type: date
             Author:
-              type: object
+              type: nested
               properties:
                 slug:
                   index: not_analyzed
@@ -189,7 +189,7 @@ fos_elastica:
             endAt:
               type: date
             Author:
-              type: object
+              type: nested
               properties:
                 slug:
                   index: not_analyzed
@@ -228,7 +228,7 @@ fos_elastica:
             updatedAt:
               type: date
             Author:
-              type: object
+              type: nested
               properties:
                 slug:
                   index: not_analyzed
@@ -262,7 +262,7 @@ fos_elastica:
             slug:
               index: not_analyzed
             author:
-              type: object
+              type: nested
               properties:
                 slug:
                   index: not_analyzed
@@ -341,7 +341,7 @@ fos_elastica:
               fields:
                 std: { type: string, analyzer: standard }
             Author:
-              type: object
+              type: nested
               properties:
                 slug:
                   index: not_analyzed
@@ -375,7 +375,7 @@ fos_elastica:
             updatedAt:
               type: date
             author:
-              type: object
+              type: nested
               properties:
                 slug:
                   index: not_analyzed
@@ -410,7 +410,7 @@ fos_elastica:
               fields:
                 std: { type: string, analyzer: standard }
             Author:
-              type: object
+              type: nested
               fields:
                 std: { type: string, analyzer: standard }
             createdAt:
@@ -454,7 +454,7 @@ fos_elastica:
             updatedAt:
               type: date
             Author:
-              type: object
+              type: nested
               properties:
                 slug:
                   index: not_analyzed
@@ -491,7 +491,7 @@ fos_elastica:
               fields:
                 std: { type: string, analyzer: standard }
             Author:
-              type: object
+              type: nested
               properties:
                 slug:
                   index: not_analyzed
