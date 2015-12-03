@@ -14,11 +14,14 @@ def lint():
     "Lint twig and yaml files"
     env.compose_run('php app/console lint:twig app/', 'builder', '.', no_deps=True)
 
+@task(environments=['local', 'testing'])
+def phpspec():
+    "Run Gerhkin Tests"
+    env.compose_run('bin/phpspec run --no-code-generation', 'builder', '.')
 
 @task(environments=['local', 'testing'])
 def behat():
     "Run Gerhkin Tests"
-    env.compose_run('bin/phpspec run --no-code-generation', 'builder', '.')
     env.service_command('bin/behat -s api', 'application', '.')      # to fix
     env.service_command('bin/behat -s commands', 'application', '.') # to fix
     env.service_command('bin/behat -s front', 'application', '.')    # to fix

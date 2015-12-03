@@ -6,27 +6,29 @@ import app
 
 @task
 def build():
-    "Build services for infrastructure"
-    if env.boot2docker:
-        local('docker-machine start capco')
-    env.compose('build')
+    with settings(warn_only=True):
+        "Build services for infrastructure"
+        if env.boot2docker:
+            local('docker-machine start capco')
+        env.compose('build')
 
 
 @task
 def up():
-    "Ensure infrastructure is sync and running"
-    if env.boot2docker:
-        local('docker-machine start capco')
-    if env.build_at_up:
-        env.compose('build')
-    env.compose('up -d')
+    with settings(warn_only=True):
+        "Ensure infrastructure is sync and running"
+        if env.boot2docker:
+            local('docker-machine start capco')
+        if env.build_at_up:
+            env.compose('build')
+        env.compose('up -d')
 
 
 @task
 def stop():
     "Stop the infrastructure"
     if env.boot2docker:
-        local('docker-machine start capco')
+        local('docker-machine stop capco')
     env.compose('stop')
 
 
