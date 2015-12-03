@@ -43,7 +43,6 @@ class SearchResolver
             $query->setSort($this->getSortSettings($sort));
         }
 
-        $query->setSort($this->getSortSettings($sort));
         $query->setHighlight($this->getHighlightSettings());
 
         $query->setFrom($from);
