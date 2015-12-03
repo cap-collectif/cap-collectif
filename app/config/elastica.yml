@@ -128,6 +128,7 @@ fos_elastica:
           indexable_callback: getIsEnabled
           serializer:
             groups: [ConsultationSteps]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
@@ -218,12 +219,9 @@ fos_elastica:
         # Proposal
         proposal:
           indexable_callback: isEnabled
+          _all: { enabled: false }
           serializer:
             groups: [Proposals]
-        # Opinion
-        opinion:
-          indexable_callback: getIsEnabled
-          _all: { enabled: false }
           mappings:
             id:
               type: long
@@ -250,18 +248,18 @@ fos_elastica:
                 std: { type: string, analyzer: standard }
             updatedAt:
               type: date
-            district:
-              type: object
+            district.name:
+              type: string
               properties:
                 name:
                   index: not_analyzed
-            status:
-              type: object
+            status.name:
+              type: string
               properties:
                 name:
                   index: not_analyzed
             theme:
-              type: object
+              type: nested
               properties:
                 title:
                   index: not_analyzed
@@ -275,6 +273,7 @@ fos_elastica:
         question:
           serializer:
             groups: [Proposals, Questions]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
@@ -289,6 +288,7 @@ fos_elastica:
         proposalresponse:
           serializer:
             groups: [Proposals]
+          _all: { enabled: false }
           mappings:
             value:
               analyzer: %language_analyzer%
@@ -299,51 +299,12 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
-        # District
-        district:
-          serializer:
-            groups: [Districts, Proposals]
-          mappings:
-            id:
-              type: long
-            name:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\District
-            provider: ~
-            listener: ~
-            finder: ~
-        # Status
-        status:
-          serializer:
-            groups: [Statuses, Proposals]
-          mappings:
-            id:
-              type: long
-            name:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\Status
-            provider: ~
-            listener: ~
-            finder: ~
         # Opinion
         opinion:
           indexable_callback: getIsEnabled
           serializer:
             groups: [Opinions]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
@@ -520,6 +481,7 @@ fos_elastica:
         projectabstractstep:
           serializer:
             groups: [ProjectAbstractSteps]
+          _all: { enabled: false }
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Steps\ProjectAbstractStep
