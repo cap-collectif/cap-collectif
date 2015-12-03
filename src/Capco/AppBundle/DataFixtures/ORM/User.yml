@@ -54,6 +54,7 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_ADMIN'
         isTermsAccepted: true
+        vip: true
 
     user5:
         username: user

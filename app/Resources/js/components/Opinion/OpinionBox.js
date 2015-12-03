@@ -1,6 +1,7 @@
 import {VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH} from '../../constants/VoteConstants';
 
 import OpinionPreview from './OpinionPreview';
+import OpinionAnswer from './OpinionAnswer';
 import OpinionButtons from './OpinionButtons';
 import OpinionAppendices from './OpinionAppendices';
 import OpinionBody from './OpinionBody';
@@ -163,15 +164,10 @@ const OpinionBox = React.createClass({
           </div>
           {this.renderVotes()}
         </div>
-        {opinion.answer
-          ? <div className="opinion__answer" id="answer">
-              {opinion.answer.title
-                ? <p className="h4" style={{marginTop: '0'}}>{opinion.answer.title}</p>
-                : null
-              }
-              <div dangerouslySetInnerHTML={{__html: opinion.answer.body}} />
-            </div>
-          : null
+        {
+          opinion.answer
+            ? <OpinionAnswer answer={opinion.answer} />
+            : null
         }
       </div>
     );

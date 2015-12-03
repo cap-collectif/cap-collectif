@@ -1,22 +1,37 @@
+import UserAvatar from '../../User/UserAvatar';
+
 const ProposalPageAnswer = React.createClass({
   propTypes: {
-    proposal: React.PropTypes.object.isRequired,
+    answer: React.PropTypes.object.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
   render() {
-    const proposal = this.props.proposal;
-    if (!proposal.answer) {
-      return null;
-    }
+    const answer = this.props.answer;
+    const classes = classNames({
+      'container--custom': true,
+      'container--with-sidebar': true,
+      'bg-vip': answer.author && answer.author.vip,
+    });
     return (
-      <div className="container--custom container--with-sidebar">
+      <div className={classes}>
         <div className="block">
-          {proposal.answer.title
-            ? <h2 className="h2">{proposal.answer.title}</h2>
+          {
+            answer.title
+            ? <h2 className="h2">{answer.title}</h2>
             : null
           }
-          <div dangerouslySetInnerHTML={{__html: proposal.answer.body}} />
+          {
+            answer.author
+              ? <div style={{marginBottom: '10px'}}>
+                  <UserAvatar user={answer.author} style={{marginRight: '10px'}} />
+                  <a href={answer.author._links.profile}>
+                    { answer.author.username }
+                  </a>
+                </div>
+              : null
+          }
+          <div dangerouslySetInnerHTML={{__html: answer.body}} />
         </div>
       </div>
     );

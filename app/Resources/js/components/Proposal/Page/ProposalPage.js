@@ -69,7 +69,11 @@ const ProposalPage = React.createClass({
           <Row>
             <Col xs={12}>
               <ProposalPageHeader proposal={proposal} />
-              <ProposalPageAnswer proposal={proposal} />
+              {
+                proposal.answer
+                  ? <ProposalPageAnswer answer={proposal.answer} />
+                  : null
+              }
               <ProposalPageContent
                 proposal={proposal}
                 form={this.props.form}

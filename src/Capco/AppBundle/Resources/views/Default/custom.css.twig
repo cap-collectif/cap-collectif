@@ -513,6 +513,24 @@
         .bg-vip:focus {
             background-color: {{ vipBg | raw }} !important;
         }
+
+        .main .container--custom.bg-vip {
+            position: relative;
+        }
+
+        .main .container--custom.bg-vip:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin-left: -200%;
+            margin-right: -200%;
+            z-index: -1;
+            background: {{ vipBg | raw }};
+        }
     {% endif %}
 
 

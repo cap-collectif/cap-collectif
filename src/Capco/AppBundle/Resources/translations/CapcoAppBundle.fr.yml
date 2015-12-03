@@ -407,19 +407,19 @@ step:
   consultation:
     alert:
       ended:
-        text: La période de participation est maintenant terminée. Merci à tous d'avoir contribué.
+        text: Merci à tous d'avoir contribué.
         title: Consultation terminée.
       future:
-        text: La période de participation débutera le %date%.
+        text: La consultation débutera le %date%.
         title: Consultation à venir.
   collect:
     title: Collecter
     alert:
       ended:
-        text: La période de participation est maintenant terminée. Merci à tous d'avoir contribué.
+        text: Merci à tous d'avoir contribué.
         title: Dépôt terminé.
       future:
-        text: La période de participation débutera le %date%.
+        text: L'étape de dépôt débutera le %date%.
         title: Dépôt à venir.
 
 simple_argument:
