@@ -35,16 +35,15 @@ class SearchResolver
      */
     public function searchAll($page, $term, $type = 'all', $sort = 'score')
     {
-        $from       = ($page - 1) * self::RESULT_PER_PAGE;
+        $from = ($page - 1) * self::RESULT_PER_PAGE;
 
         if (!empty(trim($term))) {
-            $termQuery = $this->getTermQuery($term);
+            $termQuery = $this->getSearchQuery($term);
             if ('all' !== $type) {
                 $query = new Query($this->getTypeFilteredQuery($type, $termQuery));
             } else {
                 $query = new Query($termQuery);
             }
-            $termQuery = $this->getSearchQuery($term);
         } else {
             $termQuery = new Query\MatchAll();
         }

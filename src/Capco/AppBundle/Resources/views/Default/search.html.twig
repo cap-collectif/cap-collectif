@@ -87,7 +87,7 @@
                                             {{ title | raw }}
                                         </a>
                                         <span class="small excerpt search-result__date">
-                                            {{ result.result.hit['_source']['updatedAt'] | localizeddate('medium', 'none', app.request.locale) }}
+                                            {{ result.result.hit['_source']['updated_at'] | localizeddate('medium', 'none', app.request.locale) }}
                                         </span>
                                 </h4>
                                 {% if result.result.hit['highlight'] is defined %}

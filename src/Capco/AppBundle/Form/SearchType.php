@@ -60,7 +60,7 @@ class SearchType extends AbstractType
 
         $builder
             ->add('term', 'text', [
-                'required'           => true,
+                'required'           => false,
                 'label'              => 'search.form.label.term',
                 'translation_domain' => 'CapcoAppBundle',
                 'constraints'        => [new NotBlank(['message' => 'search.no_term'])],

@@ -344,9 +344,9 @@ fos_elastica:
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
-            updatedAt:
-              type: date
             createdAt:
+              type: date
+            updatedAt:
               type: date
             author:
               type: object
