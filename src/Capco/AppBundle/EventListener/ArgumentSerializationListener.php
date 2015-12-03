@@ -35,13 +35,21 @@ class ArgumentSerializationListener implements EventSubscriberInterface
     {
         $argument = $event->getObject();
         $opinion = $argument->getLinkedOpinion();
-        $opinionType = $opinion->getOpinionType();
-        $step = $opinion->getStep();
-        $project = $step->getProjectAbstractStep()->getProject();
+        $opinionType = $opinion ? $opinion->getOpinionType() : null;
+        $step = $opinion ? $opinion->getStep() : null;
+        $pas = $step ? $step->getProjectAbstractStep() : null;
+        $project = $pas ? $pas->getProject() : null;
+
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
 
         $showUrl = '';
+
+        if (!$opinion || !$opinionType || !$step || !$project) {
+            throw new \Exception(
+                'Error during serialization of argument ' . $argument->getId()
+            );
+        }
 
         $parent = $argument->getParent();
         if ($parent instanceof Opinion) {
@@ -49,7 +57,7 @@ class ArgumentSerializationListener implements EventSubscriberInterface
                 'projectSlug'     => $project->getSlug(),
                 'stepSlug'        => $step->getSlug(),
                 'opinionTypeSlug' => $opinionType->getSlug(),
-                'opinionSlug'     => $opinion->getSlug(),
+                'opinionSlug'     => $parent->getSlug(),
             ], true).'#arg-'.$argument->getId();
         } elseif ($parent instanceof OpinionVersion) {
             $showUrl = $this->router->generate('app_project_show_opinion_version', [
