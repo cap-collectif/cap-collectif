@@ -43,8 +43,7 @@ RUN \
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 # Install elasticsearch.
-ENV ES_PKG_NAME elasticsearch-1.7.3
-
+ENV ES_PKG_NAME elasticsearch-1.7.0
 RUN \
   cd / && \
   wget https://download.elasticsearch.org/elasticsearch/elasticsearch/$ES_PKG_NAME.tar.gz && \

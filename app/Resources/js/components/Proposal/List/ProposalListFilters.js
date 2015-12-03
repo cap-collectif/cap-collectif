@@ -81,11 +81,11 @@ const ProposalListFilters = React.createClass({
       <Row>
         <Col xs={12} md={6}>
           <ButtonToolbar>
-            <ButtonGroup>
+            <ButtonGroup id="proposal-sorting">
               {
                 this.buttons.map((button) => {
                   return (
-                    <Button active={this.state.order === button} onClick={this.handleOrderChange.bind(this, button)}>
+                    <Button id={'proposal-sorting-' + button} active={this.state.order === button} onClick={this.handleOrderChange.bind(this, button)}>
                       {this.getIntlMessage('global.filter_f_' + button)}
                     </Button>
                   );
@@ -105,6 +105,7 @@ const ProposalListFilters = React.createClass({
               <Col xs={12} md={6}>
                 <Input
                   type="select"
+                  id={'proposal-filter-' + filterName}
                   ref={filterName}
                   onChange={this.handleFilterChange.bind(this, filterName)}
                   value={this.state.filters[filterName] || 0}
@@ -113,10 +114,10 @@ const ProposalListFilters = React.createClass({
                     {this.getIntlMessage('global.select_' + filterName)}
                   </option>
                   {
-                    this.props[filterName].map((option) => {
+                    this.props[filterName].map((choice) => {
                       return (
-                        <option key={option.id} value={option.id}>
-                          {option.title || option.name}
+                        <option key={choice.id} value={choice.id}>
+                          {choice.title || choice.name}
                         </option>
                       );
                     })

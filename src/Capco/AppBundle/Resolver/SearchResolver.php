@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Resolver;
 
 use Elastica\Index;
 use Elastica\Query;
-use Elastica\Query\AbstractQuery;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Filtered;
 use Elastica\Filter\Type;
@@ -12,8 +11,6 @@ use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 
 class SearchResolver
 {
-    const RESULT_PER_PAGE = 10;
-
     protected $index;
     protected $transformer;
 
@@ -23,53 +20,45 @@ class SearchResolver
         $this->transformer = $transformer;
     }
 
-    /**
-     * search by term and type in elasticsearch
-     *
-     * @param integer   $page
-     * @param string    $term
-     * @param string    $type
-     * @param string    $sort
-     *
-     * @return array
-     */
-    public function searchAll($page, $term, $type = 'all', $sort = 'score', $useTransformation = true, $resultsPerPage = self::RESULT_PER_PAGE)
+    // search by term and type in elasticsearch
+    public function searchAll($size, $page, $term, $type = 'all', $sort = 'score', $useTransformation = true)
     {
-        $from = ($page - 1) * $resultsPerPage;
-        $termQuery = empty(trim($term)) ? new Query\MatchAll() : $this->getSearchQuery($term);
-        $query = 'all' === $type ? new Query($termQuery) : new Query($this->getTypeFilteredQuery($type, $termQuery));
+        $results = [];
+        $count = 0;
+        $from = ($page - 1) * $size;
 
-        if ($sort !== null && $sort !== 'score') {
-            $query->setSort($this->getSortSettings($sort));
+        if ($term) {
+            $termQuery = $this->getTermQuery($term);
+            if ('all' !== $type) {
+                $query = new Query($this->getTypeFilteredQuery($type, $termQuery));
+            } else {
+                $query = new Query($termQuery);
+            }
+
+            if ($sort !== null && $sort !== 'score') {
+                $query->setSort($this->getSortSettings($sort));
+            }
+
+            $query->setHighlight($this->getHighlightSettings());
+
+            $query->setFrom($from);
+            $query->setSize($size);
+
+            $resultSet = $this->index->search($query);
+            $count = $resultSet->getTotalHits();
+
+            if ($useTransformation) {
+                $results = $this->transformer->hybridTransform($resultSet->getResults());
+            } else {
+                $results = $resultSet->getResults();
+            }
         }
 
-        $query->setHighlight($this->getHighlightSettings());
-
-        $query->setFrom($from);
-        $query->setSize(self::RESULT_PER_PAGE);
-
-        $resultSet = $this->index->search($query);
-        $count = $resultSet->getTotalHits();
-
-        $results = $useTransformation
-            ? $this->transformer->hybridTransform($resultSet->getResults())
-            : $resultSet->getResults()
-        ;
-
-        return [
-            'count' => $count,
-            'results' => $results,
-            'pages' => ceil($count / self::RESULT_PER_PAGE)
-        ];
+        return ['count' => $count, 'results' => $results];
     }
 
-    /**
-     * get filtered query with type filter and term query
-     * @param string        $type
-     * @param AbstractQuery $termQuery
-     * @return Filtered
-     */
-    public function getTypeFilteredQuery($type, AbstractQuery $termQuery)
+    // get filtered query with type filter and term query
+    public function getTypeFilteredQuery($type, $termQuery)
     {
         $typeFilter = new Type($type);
 
@@ -77,16 +66,14 @@ class SearchResolver
     }
 
     // get multi match query on term
-    protected function getSearchQuery($term)
+    protected function getTermQuery($term)
     {
-        $boolQuery = new Query\Bool();
-
         $termQuery = new MultiMatch();
         $termQuery->setQuery($term);
         $termQuery->setFields([
             'title^5',
-            'body',
-            'object',
+            'strippedBody',
+            'strippedObject',
             'body',
             'teaser',
             'excerpt',
@@ -94,38 +81,23 @@ class SearchResolver
             'biography',
         ]);
 
-        $shouldQuery = new MultiMatch();
-        $shouldQuery->setQuery($term);
-        $shouldQuery->setFields([
-            'title.std',
-            'body.std',
-            'object.std',
-            'body.std',
-            'teaser.std',
-            'username.std',
-            'biography.std',
-        ]);
-
-        $boolQuery->addMust($termQuery);
-        $boolQuery->addShould($shouldQuery);
-
-        return $boolQuery;
+        return $termQuery;
     }
 
     protected function getSortSettings($sort)
     {
-        $term = '_score';
+        $term = null;
         if ($sort === 'date') {
             $term = 'updatedAt';
+        }
+        if ($term === null) {
+            return;
         }
 
         return [
             $term => [
                 'order' => 'desc',
             ],
-            'createdAt' => [
-                'order' => 'desc',
-            ]
         ];
     }
 
@@ -139,8 +111,8 @@ class SearchResolver
             'fragment_size'       => 175,
             'fields'              => [
                 'title'          => ['number_of_fragments' => 0],
-                'object' => new \stdClass(),
-                'body'   => new \stdClass(),
+                'strippedObject' => new \stdClass(),
+                'strippedBody'   => new \stdClass(),
                 'body'           => new \stdClass(),
                 'teaser'         => new \stdClass(),
                 'excerpt'        => new \stdClass(),

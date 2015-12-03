@@ -3,8 +3,17 @@ import QuillToolbar from './QuillToolbar';
 const Editor = React.createClass({
   propTypes: {
     valueLink: React.PropTypes.object.isRequired,
+    id: React.PropTypes.string,
+    className: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
+
+  getDefaultProps() {
+    return {
+      id: '',
+      className: '',
+    };
+  },
 
   componentDidMount() {
     this._editor = new Quill(React.findDOMNode(this.refs.editor), {
@@ -50,8 +59,12 @@ const Editor = React.createClass({
   },
 
   render() {
+    const classes = {
+      'editor': true,
+    };
+    classes[this.props.className] = true;
     return (
-      <div className="editor">
+      <div id={this.props.id} className={classNames(classes)}>
         <QuillToolbar ref="toolbar" />
         <div ref="editor" style={{position: 'static'}} />
       </div>

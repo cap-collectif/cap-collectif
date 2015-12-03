@@ -11,9 +11,9 @@ const ProposalForm = React.createClass({
     themes: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
     isSubmitting: React.PropTypes.bool.isRequired,
-    onValidationFailure: React.PropTypes.func.isRequired,
-    onSubmitSuccess: React.PropTypes.func.isRequired,
-    onSubmitFailure: React.PropTypes.func.isRequired,
+    onValidationFailure: React.PropTypes.func,
+    onSubmitSuccess: React.PropTypes.func,
+    onSubmitFailure: React.PropTypes.func,
     mode: React.PropTypes.string,
     proposal: React.PropTypes.object,
   },
@@ -33,6 +33,9 @@ const ProposalForm = React.createClass({
         },
         responses: [],
       },
+      onSubmitSuccess: () => {},
+      onSubmitFailure: () => {},
+      onValidationFailure: () => {},
     };
   },
 
@@ -157,6 +160,7 @@ const ProposalForm = React.createClass({
       <form id="proposal-form" ref="form">
 
         <Input
+          id="proposal_title"
           type="text"
           ref="title"
           valueLink={this.linkState('form.title')}
@@ -167,6 +171,7 @@ const ProposalForm = React.createClass({
         />
 
         <Input
+          id="proposal_theme"
           type="select"
           ref="theme"
           valueLink={this.linkState('form.theme')}
@@ -188,6 +193,7 @@ const ProposalForm = React.createClass({
         </Input>
 
         <Input
+          id="proposal_district"
           type="select"
           ref="district"
           valueLink={this.linkState('form.district')}
@@ -209,6 +215,7 @@ const ProposalForm = React.createClass({
       </Input>
 
       <Input
+        id="proposal_body"
         type="editor"
         label={this.getIntlMessage('proposal.body') + '*'}
         groupClassName={this.getGroupStyle('body')}
@@ -222,6 +229,7 @@ const ProposalForm = React.createClass({
           const key = 'custom-' + question.id;
           return (
             <Input
+              id={'proposal_' + key}
               type="editor"
               label={question.title + '*'}
               groupClassName={this.getGroupStyle(key)}

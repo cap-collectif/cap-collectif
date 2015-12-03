@@ -22,10 +22,6 @@ Capco\AppBundle\Entity\Proposal:
             expose: true
             serialized_name: responses
             groups: [Proposals]
-        votesCount:
-            expose: true
-            type: integer
-            groups: [Proposals]
         commentsCount:
             expose: true
             type: integer
@@ -52,9 +48,6 @@ Capco\AppBundle\Entity\Proposal:
             expose: true
             groups: [Proposals]
         comments:
-            expose: true
-            groups: [Proposals]
-        votes:
             expose: true
             groups: [Proposals]
         answer:

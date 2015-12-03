@@ -1,6 +1,8 @@
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
+import ProposalStore from '../../../stores/ProposalStore';
+import ProposalActions from '../../../actions/ProposalActions';
 
 const Modal = ReactBootstrap.Modal;
 
@@ -21,8 +23,18 @@ const ProposalEditModal = React.createClass({
     };
   },
 
-  handleSubmit() {
-    this.setState({isSubmitting: true});
+  componentWillMount() {
+    ProposalStore.addChangeListener(this.onChange);
+  },
+
+  componentWillUnmount() {
+    ProposalStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    this.setState({
+      isSubmitting: ProposalStore.isProcessing,
+    });
   },
 
   close() {
@@ -33,18 +45,16 @@ const ProposalEditModal = React.createClass({
     this.props.onToggleModal(true);
   },
 
+  handleSubmit() {
+    ProposalActions.submit();
+  },
+
   handleSubmitSuccess() {
     this.close();
-    this.setState({isSubmitting: false});
-    this.reload();
   },
 
   handleValidationFailure() {
-    this.setState({isSubmitting: false});
-  },
-
-  handleSubmitFailure() {
-    this.setState({isSubmitting: false});
+    ProposalActions.validationFailure();
   },
 
   reload() {
@@ -75,7 +85,6 @@ const ProposalEditModal = React.createClass({
               isSubmitting={this.state.isSubmitting}
               onValidationFailure={this.handleValidationFailure.bind(null, this)}
               onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
-              onSubmitFailure={this.handleSubmitFailure.bind(null, this)}
               mode="edit"
               proposal={this.props.proposal}
             />

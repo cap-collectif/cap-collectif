@@ -158,7 +158,6 @@ export default {
       version_parent: 'Modification de : ',
     },
     proposal: {
-      search: 'Rechercher une proposition',
       add: 'Faire une proposition',
       body: 'Description',
       constraints: {
@@ -178,6 +177,21 @@ export default {
         header: '{user} {theme, select, no {le {createdDate}} other {dans {themeLink}, le {createdDate}}}',
       },
       no_status: 'Aucun statut',
+      request: {
+        create: {
+          success: 'Merci ! Votre proposition a bien été créée.',
+          failure: 'Toutes nos excuse ! Une erreur est survenue, merci de réessayer plus tard.',
+        },
+        delete: {
+          success: 'Votre proposition a bien été supprimée.',
+          failure: 'Toutes nos excuse ! Une erreur est survenue, merci de réessayer plus tard.',
+        },
+        update: {
+          success: 'Votre proposition a bien été modifiée.',
+          failure: 'Toutes nos excuse ! Une erreur est survenue, merci de réessayer plus tard.',
+        },
+      },
+      search: 'Rechercher une proposition',
       select: {
         district: 'Sélectionnez un quartier',
         theme: 'Sélectionnez un thème',

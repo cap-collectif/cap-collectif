@@ -50,8 +50,6 @@ Feature: Proposal Restful Api
     ],
     "comments_count": @integer@,
     "created_at": "@string@.isDateTime()",
-    "votes": @array@,
-    "votes_count": @integer@,
     "title": @string@,
     "isTrashed": @boolean@,
     "enabled": @boolean@,
@@ -88,8 +86,6 @@ Feature: Proposal Restful Api
         "responses": @array@,
         "comments_count": @integer@,
         "created_at": "@string@.isDateTime()",
-        "votes": @array@,
-        "votes_count": @integer@,
         "title": @string@,
         "answer": @null@,
         "_links": @...@
@@ -99,8 +95,8 @@ Feature: Proposal Restful Api
   }
   """
 
-  Scenario: Anonymous API client wants to get all proposals from a ProposalForm
-    When I send a GET request to "/api/proposal_forms/1/proposals?theme=4"
+  Scenario: Anonymous API client wants to get all proposals from a ProposalForm with theme filter
+    When I send a GET request to "/api/proposal_forms/1/proposals?theme=3"
     Then the JSON response should match:
   """
   {
@@ -117,8 +113,6 @@ Feature: Proposal Restful Api
         "responses": @array@,
         "comments_count": @integer@,
         "created_at": "@string@.isDateTime()",
-        "votes": @array@,
-        "votes_count": @integer@,
         "title": @string@,
         "answer": @null@,
         "_links": @...@

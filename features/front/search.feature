@@ -18,14 +18,14 @@ Feature: Search
 #   And I wait 5 seconds
 #   Then I should see "14 résultats" in the ".search__results-nb" element
 
-@javascript
-Scenario: Anonymous wants to search in members
-  Given I visited "search page"
-  When I fill in the following:
-    | capco_app_search_term | sfavot |
-  And I click the "#capco_app_search_type .radio:nth-child(11) label" element
-  And I wait 5 seconds
-  Then I should see "1 résultat" in the ".search__results-nb" element
+# @javascript
+# Scenario: Anonymous wants to search in members
+#   Given I visited "search page"
+#   When I fill in the following:
+#     | capco_app_search_term | sfavot |
+#   And I click the "#capco_app_search_type .radio:nth-child(11) label" element
+#   And I wait 5 seconds
+#   Then I should see "1 résultat" in the ".search__results-nb" element
 
 # @javascript
 # Scenario: Anonymous wants to search sorted by score
