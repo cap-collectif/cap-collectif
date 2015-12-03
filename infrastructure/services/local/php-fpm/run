@@ -21,7 +21,6 @@ if [ "$RESULT" != "0" ]; then
     php app/console doctrine:database:create --env=dev --if-not-exists
     php app/console doctrine:migrations:migrate --env=dev --no-interaction
     php app/console doctrine:fixtures:load --env=dev --no-interaction
-    php app/console cache:warmup --env=dev --no-debug
 else
     php app/console doctrine:migrations:migrate --env=dev --no-interaction
 fi

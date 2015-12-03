@@ -77,13 +77,6 @@ abstract class Comment implements VotableInterface
     protected $isEnabled = true;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="vote_count", type="integer")
-     */
-    protected $voteCount = 0;
-
-    /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="comments")
@@ -244,31 +237,6 @@ abstract class Comment implements VotableInterface
     public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     * Get voteCount.
-     *
-     * @return int
-     */
-    public function getVoteCount()
-    {
-        return $this->voteCount;
-    }
-
-    /**
-     * Set voteCount.
-     *
-     * @param int $voteCount
-     *
-     * @return Argument
-     */
-    public function setVoteCount($voteCount)
-    {
-        $this->voteCount = $voteCount;
 
         return $this;
     }

@@ -44,12 +44,9 @@ fos_elastica:
         # Argument
         argument:
           indexable_callback: getIsEnabled
-<<<<<<< HEAD
           serializer:
             groups: [Opinions, OpinionVersions]
-=======
           _all: { enabled: false }
->>>>>>> Disable the _all field as the only thing it does is being dumb
           mappings:
             body:
               analyzer: %language_analyzer%
