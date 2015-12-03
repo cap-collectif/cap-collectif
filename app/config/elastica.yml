@@ -5,6 +5,33 @@ fos_elastica:
   indexes:
     app:
       index_name: app_prod
+      settings:
+        number_of_shards: 1
+        number_of_replicas: 0
+        index:
+          analysis:
+            filter:
+              french_elision:
+                type: elision
+                articles: [ l, m, t, qu, n, s, j, d, c, jusqu, quoiqu, lorsqu, puisqu]
+              french_stop:
+                type: stop
+                stopwords: _french_
+                ignore_case : true
+              french_stemmer:
+                type: stemmer
+                language: light_french
+            tokenizer:
+              nGram:
+                type: nGram
+                min_gram: 2
+                max_gram: 20
+            analyzer: # We define custom analyzers for html content
+              analyse_html_french:
+                type: custom
+                char_filter: [html_strip]
+                tokenizer: nGram
+                filter: [french_elision, lowercase, french_stop, french_stemmer]
       finder: ~
       types:
       # User
@@ -12,6 +39,7 @@ fos_elastica:
           indexable_callback: isEnabled
           serializer:
             groups: [UsersInfos, Proposals]
+          _all: { enabled: false }
           mappings:
             id:
               type: long
@@ -20,9 +48,13 @@ fos_elastica:
             username:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             biography:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             createdAt:
               type: date
             updatedAt:
@@ -38,10 +70,17 @@ fos_elastica:
           indexable_callback: getIsEnabled
           serializer:
             groups: [Opinions, OpinionVersions]
+          _all: { enabled: false }
           mappings:
             body:
-              analyzer: %language_analyzer%
+              analyzer: "analyse_html_%language_analyzer%"
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
             Author:
               type: object
               properties:
@@ -58,10 +97,13 @@ fos_elastica:
           indexable_callback: getIsEnabled
           serializer:
             groups: [Opinions, OpinionVersions]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
             Author:
@@ -80,12 +122,13 @@ fos_elastica:
           indexable_callback: getIsEnabled
           serializer:
             groups: [Comments, Proposals]
+          _all: { enabled: false }
           mappings:
-            id:
-              type: long
-            strippedBody:
+            body:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             createdAt:
               type: date
             updatedAt:
@@ -107,6 +150,7 @@ fos_elastica:
           indexable_callback: getIsEnabled
           serializer:
             groups: [ConsultationSteps]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
@@ -122,17 +166,28 @@ fos_elastica:
           indexable_callback: getIsEnabled
           serializer:
             groups: [Events]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
-            strippedBody:
-              analyzer: %language_analyzer%
+            body:
+              analyzer: "analyse_html_%language_analyzer%"
               index_options: offsets
-              slug:
-                index: not_analyzed
+              fields:
+                std: { type: string, analyzer: standard }
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
+            startAt:
+              type: date
+            endAt:
+              type: date
             Author:
               type: object
               properties:
@@ -149,16 +204,29 @@ fos_elastica:
           indexable_callback: getIsEnabled
           serializer:
             groups: [Ideas]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
-            strippedBody:
-              analyzer: %language_analyzer%
+              fields:
+                std: { type: string, analyzer: standard }
+            slug:
+              index: not_analyzed
+            body:
+              analyzer: "analyse_html_%language_analyzer%"
               index_options: offsets
-            strippedObject:
-              analyzer: %language_analyzer%
+              fields:
+                std: { type: string, analyzer: standard }
+            object:
+              analyzer: "analyse_html_%language_analyzer%"
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
             Author:
               type: object
               properties:
@@ -173,6 +241,7 @@ fos_elastica:
         # Proposal
         proposal:
           indexable_callback: isEnabled
+          _all: { enabled: false }
           serializer:
             groups: [Proposals]
           mappings:
@@ -181,11 +250,15 @@ fos_elastica:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
-            strippedBody:
-              analyzer: %language_analyzer%
+            body:
+              analyzer: "analyse_html_%language_analyzer%"
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
             author:
@@ -195,20 +268,22 @@ fos_elastica:
                   index: not_analyzed
             createdAt:
               type: date
+              fields:
+                std: { type: string, analyzer: standard }
             updatedAt:
               type: date
-            district:
-              type: object
+            district.name:
+              type: string
               properties:
                 name:
                   index: not_analyzed
-            status:
-              type: object
+            status.name:
+              type: string
               properties:
                 name:
                   index: not_analyzed
             theme:
-              type: object
+              type: nested
               properties:
                 title:
                   index: not_analyzed
@@ -222,6 +297,7 @@ fos_elastica:
         question:
           serializer:
             groups: [Proposals, Questions]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
@@ -236,6 +312,7 @@ fos_elastica:
         proposalresponse:
           serializer:
             groups: [Proposals]
+          _all: { enabled: false }
           mappings:
             value:
               analyzer: %language_analyzer%
@@ -246,60 +323,23 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
-        # District
-        district:
-          serializer:
-            groups: [Districts, Proposals]
-          mappings:
-            id:
-              type: long
-            name:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\District
-            provider: ~
-            listener: ~
-            finder: ~
-        # Status
-        status:
-          serializer:
-            groups: [Statuses, Proposals]
-          mappings:
-            id:
-              type: long
-            name:
-              analyzer: %language_analyzer%
-              index_options: offsets
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\Status
-            provider: ~
-            listener: ~
-            finder: ~
         # Opinion
         opinion:
           indexable_callback: getIsEnabled
           serializer:
             groups: [Opinions]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
             slug:
               index: not_analyzed
-            strippedBody:
-              analyzer: %language_analyzer%
+            body:
+              analyzer: "analyse_html_%language_analyzer%"
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             Author:
               type: object
               properties:
@@ -316,15 +356,24 @@ fos_elastica:
           indexable_callback: isEnabled
           serializer:
             groups: [OpinionVersions]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
-            strippedBody:
-              analyzer: %language_analyzer%
+            body:
+              analyzer: "analyse_html_%language_analyzer%"
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
             author:
               type: object
               properties:
@@ -341,20 +390,37 @@ fos_elastica:
           indexable_callback: getIsPublished
           serializer:
             groups: [Posts]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             abstract:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
-            strippedBody:
-              analyzer: %language_analyzer%
+            body:
+              analyzer: "analyse_html_%language_analyzer%"
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             Author:
               type: object
+              fields:
+                std: { type: string, analyzer: standard }
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
+            publishedAt:
+              type: date
+            Authors:
+              type: nested
               properties:
                 slug:
                   index: not_analyzed
@@ -369,15 +435,24 @@ fos_elastica:
           indexable_callback: getIsEnabled
           serializer:
             groups: [Opinions]
+          _all: { enabled: false }
           mappings:
             title:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
             body:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
             Author:
               type: object
               properties:
@@ -394,20 +469,27 @@ fos_elastica:
           indexable_callback: getIsEnabled
           serializer:
             groups: [Themes, Proposals]
+          _all: { enabled: false }
           mappings:
             id:
               type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
             teaser:
               analyzer: %language_analyzer%
               index_options: offsets
-            strippedBody:
-              analyzer: %language_analyzer%
+              fields:
+                std: { type: string, analyzer: standard }
+            body:
+              analyzer: "analyse_html_%language_analyzer%"
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             Author:
               type: object
               properties:
@@ -427,6 +509,7 @@ fos_elastica:
         projectabstractstep:
           serializer:
             groups: [ProjectAbstractSteps]
+          _all: { enabled: false }
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Steps\ProjectAbstractStep

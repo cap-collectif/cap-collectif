@@ -15,8 +15,7 @@ const ProposalListSearch = React.createClass({
     };
   },
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit() {
     const value = this._input.getValue();
     const length = value.length;
 
@@ -27,7 +26,7 @@ const ProposalListSearch = React.createClass({
 
   renderSearchButton() {
     return (
-      <Button id="proposal-search-button" type="submit">
+      <Button onClick={this.handleSubmit}>
         <i className="cap cap-magnifier"></i>
       </Button>
     );
@@ -35,17 +34,14 @@ const ProposalListSearch = React.createClass({
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Input
-          id="proposal-search-input"
-          type="text"
-          ref={(c) => this._input = c}
-          placeholder={this.getIntlMessage('proposal.search')}
-          buttonAfter={this.renderSearchButton(this.handleSubmit)}
-          valueLink={this.linkState('value')}
-          groupClassName="proposal-search-group pull-right"
-        />
-      </form>
+      <Input
+        type="text"
+        ref={(c) => this._input = c}
+        placeholder={this.getIntlMessage('proposal.search')}
+        buttonAfter={this.renderSearchButton(this.handleSubmit)}
+        valueLink={this.linkState('value')}
+        groupClassName="proposal-search-input pull-right"
+      />
     );
   },
 });

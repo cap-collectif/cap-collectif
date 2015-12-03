@@ -77,7 +77,7 @@ abstract class Comment implements VotableInterface
     protected $isEnabled = true;
 
     /**
-     * @var
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
@@ -242,7 +242,7 @@ abstract class Comment implements VotableInterface
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getAuthor()
     {
@@ -250,7 +250,8 @@ abstract class Comment implements VotableInterface
     }
 
     /**
-     * @param mixed $Author
+     * @param User $Author
+     * @return $this
      */
     public function setAuthor($Author)
     {
@@ -478,12 +479,6 @@ abstract class Comment implements VotableInterface
     }
 
     // ************************ Custom methods *********************************
-
-    // Used by elasticsearch for indexing
-    public function getStrippedBody()
-    {
-        return strip_tags(html_entity_decode($this->body, ENT_QUOTES | ENT_HTML401, 'UTF-8'));
-    }
 
     /**
      * @param User $user

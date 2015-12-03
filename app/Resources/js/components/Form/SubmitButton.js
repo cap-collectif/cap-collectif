@@ -19,7 +19,6 @@ const SubmitButton = React.createClass({
   render() {
     return (
       <Button
-        id="confirm-delete"
         disabled={this.props.isSubmitting}
         onClick={!this.props.isSubmitting ? this.props.onSubmit : null}
         bsStyle={this.props.bsStyle}

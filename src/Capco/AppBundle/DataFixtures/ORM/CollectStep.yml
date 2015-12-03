@@ -4,8 +4,3 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('now', '+10 days')>
-  collectstep2:
-    title: Collecte des propositions fermée
-    body: <p><text(1000)></p>
-    startAt: <dateTimeBetween('-40 days', '-30 days')>
-    endAt: <dateTimeBetween('-28 days', '-10 days')>

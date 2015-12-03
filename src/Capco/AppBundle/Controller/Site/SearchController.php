@@ -12,50 +12,43 @@ class SearchController extends Controller
 {
     /**
      * @param Request $request
-     * @param $term
-     * @param $sort
-     * @param $type
-     * @param $page
-     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/search/{term}/{sort}/{type}/{page}", name="app_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "search"})
+     * @Route("/search", name="app_search", defaults={"_feature_flags" = "search"})
      * @Template("CapcoAppBundle:Default:search.html.twig")
      */
-    public function searchAction(Request $request, $term = '', $sort = 'score', $type = 'all', $page = 1)
+    public function searchAction(Request $request)
     {
-        $form = $this->createForm(new SearchForm($this->get('capco.toggle.manager')));
+        $searchParams = [
+            'term' => '',
+            'type' => 'all',
+            'sort' => 'score'
+        ];
 
-        if ($request->getMethod() == 'POST') {
-            $form->handleRequest($request);
+        $page = (int) $request->get('page', 1);
 
-            if ($form->isValid()) {
-                // redirect to the results page (avoids reload alerts)
-                $data = $form->getData();
+        $form = $this->createForm(new SearchForm($this->get('capco.toggle.manager')), $searchParams, ['method' => 'GET']);
 
-                return $this->redirect($this->generateUrl('app_search', array_merge($data, ['page' => $page])));
-            }
-        } else {
-            $form->setData(['term' => $term, 'type' => $type, 'sort' => $sort]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $searchParams = $form->getData();
         }
 
-        $pagination = 10;
-
-        $searchResults = $this->container->get('capco.search.resolver')->searchAll($pagination, $page, $term, $type, $sort);
-
-        $count = $searchResults['count'];
-
-        $nbPages = ceil($count / $pagination);
+        // Perform the search
+        $searchResults = $this->container->get('capco.search.resolver')->searchAll(
+            $page,
+            $searchParams['term'],
+            $searchParams['type'],
+            $searchParams['sort']
+        );
 
         return [
-            'form'    => $form->createView(),
-            'count'   => $count,
-            'results' => $searchResults['results'],
-            'term'    => $term,
-            'type'    => $type,
-            'sort'    => $sort,
-            'nbPages' => $nbPages,
-            'page'    => $page,
+            'form'      => $form->createView(),
+            'page'      => $page,
+            'q'         => $searchParams,
+            'count'     => $searchResults['count'],
+            'results'   => $searchResults['results'],
+            'nbPages'   => $searchResults['pages'],
         ];
     }
 }

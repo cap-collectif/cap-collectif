@@ -39,13 +39,13 @@ const EditButton = React.createClass({
       };
 
       return (
-        <button
+        <span
           style={this.props.style} className={classNames(classes, this.props.className)}
           onClick={() => this.props.onClick()}
         >
             <i className="cap cap-pencil-1"></i>
           { ' ' + this.getIntlMessage('global.edit')}
-          </button>
+          </span>
       );
     }
     return null;

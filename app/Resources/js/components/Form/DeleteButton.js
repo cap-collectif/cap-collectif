@@ -38,13 +38,13 @@ const DeleteButton = React.createClass({
       classes[this.props.className] = true;
 
       return (
-        <button
+        <span
           style={this.props.style} className={classNames(classes)}
           onClick={() => this.props.onClick()}
         >
             <i className="cap cap-bin-2"></i>
           { ' ' + this.getIntlMessage('global.remove')}
-          </button>
+          </span>
       );
     }
     return null;

@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Proposal:
   proposal1:
-    title: Ravalement de la façade de la bibliothèque municipale
+    title: Ravalement de la façade de la biliothèque municipale
     body: |
        <p><text(100)></p>
     enabled: true
@@ -29,7 +29,7 @@ Capco\AppBundle\Entity\Proposal:
     selectionSteps: [@selectionStep1, @selectionStep2]
     createdAt: <(new \DateTime('2015-02-01'))>
   proposal3:
-    title: Installation de bancs sur la place de la mairie
+    title: Installation de bancs sur la place de Mairie
     body: |
        <p><text(100)></p>
     enabled: true
@@ -38,7 +38,7 @@ Capco\AppBundle\Entity\Proposal:
     isTrashed: false
     author: @user502
     proposalForm: @proposalform1
-    theme: @theme2
+    theme: @theme1
     district: @district4
     status: @status1
     selectionSteps: [@selectionStep1]
@@ -53,7 +53,7 @@ Capco\AppBundle\Entity\Proposal:
     isTrashed: false
     author: @user7
     proposalForm: @proposalform1
-    theme: @theme2
+    theme: @theme4
     district: @district2
   proposal5:
     title: Proposition à la corbeille

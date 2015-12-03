@@ -5,18 +5,10 @@ import {
   RECEIVE_PROPOSAL,
   RECEIVE_PROPOSALS,
 
-  SUBMIT_PROPOSAL,
-  VALIDATION_FAILURE,
-  CREATE_PROPOSAL_SUCCESS,
-  CREATE_PROPOSAL_FAILURE,
-  UPDATE_PROPOSAL_SUCCESS,
-  UPDATE_PROPOSAL_FAILURE,
-  DELETE_PROPOSAL_SUCCESS,
-  DELETE_PROPOSAL_FAILURE,
-
   CREATE_PROPOSAL_VOTE,
   CREATE_PROPOSAL_VOTE_SUCCESS,
   CREATE_PROPOSAL_VOTE_FAILURE,
+
   DELETE_PROPOSAL_VOTE,
   DELETE_PROPOSAL_VOTE_SUCCESS,
   DELETE_PROPOSAL_VOTE_FAILURE,
@@ -94,76 +86,16 @@ export default {
     });
   },
 
-  submit: () => {
-    AppDispatcher.dispatch({
-      actionType: SUBMIT_PROPOSAL,
-    });
+  add: (form, data) => {
+    return Fetcher.post(`/proposal_forms/${form}/proposals`, data);
   },
 
-  validationFailure: () => {
-    AppDispatcher.dispatch({
-      actionType: VALIDATION_FAILURE,
-    });
+  update: (form, proposal, data) => {
+    return Fetcher.put(`/proposal_forms/${form}/proposals/${proposal}`, data);
   },
 
-  add: (form, data, successMessage = 'proposal.request.create.success', errorMessage = 'proposal.request.create.failure') => {
-    return Fetcher
-      .post(`/proposal_forms/${form}/proposals`, data)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: CREATE_PROPOSAL_SUCCESS,
-          message: successMessage,
-        });
-        return true;
-      })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: CREATE_PROPOSAL_FAILURE,
-          message: errorMessage,
-        });
-        return false;
-      })
-    ;
-  },
-
-  update: (form, proposal, data, successMessage = 'proposal.request.update.success', errorMessage = 'proposal.request.update.failure') => {
-    return Fetcher
-      .put(`/proposal_forms/${form}/proposals/${proposal}`, data)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_PROPOSAL_SUCCESS,
-          message: successMessage,
-        });
-        return true;
-      })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_PROPOSAL_FAILURE,
-          message: errorMessage,
-        });
-        return false;
-      })
-    ;
-  },
-
-  delete: (form, proposal, successMessage = 'proposal.request.delete.success', errorMessage = 'proposal.request.delete.failure') => {
-    return Fetcher
-      .delete(`/proposal_forms/${form}/proposals/${proposal}`)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: DELETE_PROPOSAL_SUCCESS,
-          message: successMessage,
-        });
-        return true;
-      })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: DELETE_PROPOSAL_FAILURE,
-          message: errorMessage,
-        });
-        return false;
-      })
-    ;
+  delete: (form, proposal) => {
+    return Fetcher.delete(`/proposal_forms/${form}/proposals/${proposal}`);
   },
 
   getOne: (form, proposal) => {
@@ -178,7 +110,7 @@ export default {
       });
   },
 
-  vote: (form, proposal, selectionStep, data, successMessage = 'proposal.request.vote.success', errorMessage = 'proposal.request.vote.failure') => {
+  vote: (form, proposal, data) => {
     AppDispatcher.dispatch({
       actionType: CREATE_PROPOSAL_VOTE,
     });
@@ -187,14 +119,12 @@ export default {
     .then(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_PROPOSAL_VOTE_SUCCESS,
-        message: successMessage,
       });
       return true;
     })
     .catch(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_PROPOSAL_VOTE_FAILURE,
-        message: errorMessage,
       });
     });
   },

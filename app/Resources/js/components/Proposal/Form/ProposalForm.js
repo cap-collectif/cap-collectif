@@ -11,9 +11,9 @@ const ProposalForm = React.createClass({
     themes: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
     isSubmitting: React.PropTypes.bool.isRequired,
-    onValidationFailure: React.PropTypes.func,
-    onSubmitSuccess: React.PropTypes.func,
-    onSubmitFailure: React.PropTypes.func,
+    onValidationFailure: React.PropTypes.func.isRequired,
+    onSubmitSuccess: React.PropTypes.func.isRequired,
+    onSubmitFailure: React.PropTypes.func.isRequired,
     mode: React.PropTypes.string,
     proposal: React.PropTypes.object,
   },
@@ -33,9 +33,6 @@ const ProposalForm = React.createClass({
         },
         responses: [],
       },
-      onSubmitSuccess: () => {},
-      onSubmitFailure: () => {},
-      onValidationFailure: () => {},
     };
   },
 
@@ -160,23 +157,23 @@ const ProposalForm = React.createClass({
       <form id="proposal-form" ref="form">
 
         <Input
-          id="proposal_title"
           type="text"
           ref="title"
           valueLink={this.linkState('form.title')}
           label={this.getIntlMessage('proposal.title') + '*'}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
+          help={this.props.form.title_help_text}
         />
 
         <Input
-          id="proposal_theme"
           type="select"
           ref="theme"
           valueLink={this.linkState('form.theme')}
           label={this.getIntlMessage('proposal.theme') + '*'}
           groupClassName={this.getGroupStyle('theme')}
           errors={this.renderFormErrors('theme')}
+          help={this.props.form.theme_help_text}
         >
           <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
           {
@@ -191,13 +188,13 @@ const ProposalForm = React.createClass({
         </Input>
 
         <Input
-          id="proposal_district"
           type="select"
           ref="district"
           valueLink={this.linkState('form.district')}
           label={this.getIntlMessage('proposal.district') + '*'}
           groupClassName={this.getGroupStyle('district')}
           errors={this.renderFormErrors('district')}
+          help={this.props.form.district_help_text}
         >
           <option value={-1} disabled>{this.getIntlMessage('proposal.select.district')}</option>
           {
@@ -212,12 +209,12 @@ const ProposalForm = React.createClass({
       </Input>
 
       <Input
-        id="proposal_body"
         type="editor"
         label={this.getIntlMessage('proposal.body') + '*'}
         groupClassName={this.getGroupStyle('body')}
         errors={this.renderFormErrors('body')}
         valueLink={this.linkState('form.body')}
+        help={this.props.form.description_help_text}
       />
 
       {
@@ -225,7 +222,6 @@ const ProposalForm = React.createClass({
           const key = 'custom-' + question.id;
           return (
             <Input
-              id={'proposal_' + key}
               type="editor"
               label={question.title + '*'}
               groupClassName={this.getGroupStyle(key)}

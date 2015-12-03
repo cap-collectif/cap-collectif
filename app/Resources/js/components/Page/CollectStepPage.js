@@ -6,7 +6,6 @@ import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import CollectStepPageHeader from './CollectStepPageHeader';
-import FlashMessages from '../Utils/FlashMessages';
 
 const CollectStepPage = React.createClass({
   propTypes: {
@@ -25,10 +24,6 @@ const CollectStepPage = React.createClass({
       proposalsCount: this.props.count,
       currentPage: ProposalStore.currentPage,
       isLoading: true,
-      messages: {
-        'errors': [],
-        'success': [],
-      },
     };
   },
 
@@ -52,7 +47,6 @@ const CollectStepPage = React.createClass({
 
   onChange() {
     this.setState({
-      messages: ProposalStore.messages,
       proposals: ProposalStore.proposals,
       proposalsCount: ProposalStore.proposalsCount,
       currentPage: ProposalStore.currentPage,
@@ -77,7 +71,6 @@ const CollectStepPage = React.createClass({
     const nbPages = Math.ceil(this.state.proposalsCount / PROPOSAL_PAGINATION);
     return (
       <div>
-        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
         <CollectStepPageHeader
           count={this.state.proposalsCount}
           form={this.props.form}

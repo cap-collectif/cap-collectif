@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -60,7 +60,7 @@ class SearchType extends AbstractType
 
         $builder
             ->add('term', 'text', [
-                'required'           => true,
+                'required'           => false,
                 'label'              => 'search.form.label.term',
                 'translation_domain' => 'CapcoAppBundle',
                 'constraints'        => [new NotBlank(['message' => 'search.no_term'])],
@@ -86,10 +86,7 @@ class SearchType extends AbstractType
         ;
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'csrf_protection'    => false,
@@ -102,6 +99,6 @@ class SearchType extends AbstractType
      */
     public function getName()
     {
-        return 'capco_app_search';
+        return 'q';
     }
 }

@@ -261,11 +261,9 @@ class StepController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $proposalsCount = $step->getProposalForm()
-            ? $em
-                ->getRepository('CapcoAppBundle:Proposal')
-                ->countPublishedForForm($step->getProposalForm())
-            : 0
+        $proposalsCount = $em
+            ->getRepository('CapcoAppBundle:Proposal')
+            ->countPublishedForForm($step->getProposalForm())
         ;
 
         $types = $serializer->serialize([
@@ -280,12 +278,9 @@ class StepController extends Controller
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
         ], 'json', SerializationContext::create()->setGroups(['Themes']));
 
-        $form = $step->getProposalForm()
-            ? $serializer->serialize([
-                'form' => $step->getProposalForm(),
-            ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'ProposalResponses', 'Questions']))
-            : null
-        ;
+        $form = $serializer->serialize([
+            'form' => $step->getProposalForm(),
+        ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'ProposalResponses', 'Questions']));
 
         $statuses = $serializer->serialize([
             'statuses' => $step->getStatuses(),

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Toggle\Manager;
@@ -161,13 +160,7 @@ class ApplicationContext extends UserContext
             },
             $this->getSession()->getPage()->findAll('css', $cssQuery)
         );
-        if (!in_array($first, $items)) {
-            throw new ElementNotFoundException($this->getSession(), 'Element "'.$first.'"');
-        }
-        if (!in_array($second, $items)) {
-            throw new ElementNotFoundException($this->getSession(), 'Element "'.$second.'"');
-        }
-        \PHPUnit_Framework_TestCase::assertTrue(array_search($first, $items) < array_search($second, $items));
+        expect(array_search($first, $items) > array_search($second, $items));
     }
 
     /**
@@ -184,28 +177,6 @@ class ApplicationContext extends UserContext
     public function iHoverOverTheElement($element)
     {
         $this->getSession()->getPage()->find('css', $element)->mouseOver();
-    }
-
-    /**
-     * Fills in form field with specified id|name|label|value.
-     * Overrided to fill wysiwyg fields as well.
-     */
-    public function fillField($field, $value)
-    {
-        $field = $this->fixStepArgument($field);
-        $value = $this->fixStepArgument($value);
-        try {
-            $this->getSession()->getPage()->fillField($field, $value);
-        } catch (ElementNotFoundException $e) {
-            // Try to get corresponding wysiwyg field
-            // Works only with quill editor for now
-            $wrapper = $this->getSession()->getPage()->find('named', array('id_or_name', $field));
-            if (!$wrapper || !$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor') ) {
-                throw $e;
-            }
-            $field = $wrapper->find('css', '.ql-editor');
-            $field->setValue($value);
-        }
     }
 
     /**
@@ -261,7 +232,6 @@ class ApplicationContext extends UserContext
         }
         \PHPUnit_Framework_TestCase::assertTrue($element->hasClass($class));
     }
-
     /**
      * Checks if an element doesn't have a class
      * Copyright neemzy https://github.com/neemzy/patchwork-core.
@@ -277,22 +247,5 @@ class ApplicationContext extends UserContext
             throw new ElementNotFoundException($session, 'Element "'.$selector.'"');
         }
         \PHPUnit_Framework_TestCase::assertFalse($element->hasClass($class));
-    }
-
-    /**
-     * Checks that a button is disabled
-     *
-     * @Then /^the button "([^"]*)" should be disabled$/
-     */
-    public function buttonShouldBeDisabled($locator)
-    {
-        $locator = $this->fixStepArgument($locator);
-        $button = $this->getSession()->getPage()->findButton($locator);
-
-        if (null === $button) {
-            throw new ElementNotFoundException($this->getSession(), 'button', 'id|name|title|alt|value', $locator);
-        }
-
-        \PHPUnit_Framework_TestCase::assertTrue($button->hasAttribute('disabled'));
     }
 }

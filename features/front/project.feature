@@ -45,7 +45,7 @@ Feature: Project
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"
-    And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".thumbnail--custom .figcaption h2 a "
+    And "Croissance, innovation, disruption" should be before "Projet vide" for selector ".thumbnail--custom .figcaption h2 a "
 
   @javascript
   Scenario: Project can be filtered by title
