@@ -96,7 +96,7 @@ Feature: Proposals
       | projectSlug | budget-participatif-rennes       |
       | stepSlug    | collecte-des-propositions-fermee |
     And I wait 5 seconds
-    Then I should see "Dépôt terminé. La période de participation est maintenant terminée. Merci à tous d'avoir contribué."
+    Then I should see "Dépôt terminé. Merci à tous d'avoir contribué."
     And the button "Faire une proposition" should be disabled
 
   @javascript
