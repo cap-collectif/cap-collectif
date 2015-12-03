@@ -100,9 +100,7 @@ fos_elastica:
             groups: [Comments, Proposals]
           _all: { enabled: false }
           mappings:
-            id:
-              type: long
-            strippedBody:
+            body:
               analyzer: %language_analyzer%
               index_options: offsets
               fields:
@@ -153,7 +151,7 @@ fos_elastica:
                 std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
-            strippedBody:
+            body:
               analyzer: %language_analyzer%
               index_options: offsets
               fields:
@@ -191,7 +189,7 @@ fos_elastica:
                 std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
-            strippedBody:
+            body:
               analyzer: %language_analyzer%
               index_options: offsets
               fields:
@@ -232,9 +230,11 @@ fos_elastica:
                 std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
-            strippedBody:
+            body:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
             author:
@@ -311,9 +311,11 @@ fos_elastica:
               index_options: offsets
             slug:
               index: not_analyzed
-            strippedBody:
+            body:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             Author:
               type: object
               properties:
@@ -339,7 +341,7 @@ fos_elastica:
                 std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
-            strippedBody:
+            body:
               analyzer: %language_analyzer%
               index_options: offsets
               fields:
@@ -378,9 +380,11 @@ fos_elastica:
                 std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
-            strippedBody:
+            body:
               analyzer: %language_analyzer%
               index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             Author:
               type: object
               fields:
@@ -457,7 +461,7 @@ fos_elastica:
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
-            strippedBody:
+            body:
               analyzer: %language_analyzer%
               index_options: offsets
               fields:
