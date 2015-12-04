@@ -22,7 +22,7 @@ use JMS\Serializer\SerializationContext;
 class StepController extends Controller
 {
     /**
-     * @Cache(expires="+1 hour", maxage="0", smaxage="600", public="true")
+     * @Cache(expires="+5 minutes", maxage="0", smaxage="300", public="true")
      * @Route("/project/{projectSlug}/step/{stepSlug}", name="app_project_show_step")
      * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
