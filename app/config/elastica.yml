@@ -17,20 +17,14 @@ fos_elastica:
               french_stop:
                 type: stop
                 stopwords: _french_
-                ignore_case : true
               french_stemmer:
                 type: stemmer
                 language: light_french
-            tokenizer:
-              nGram:
-                type: nGram
-                min_gram: 2
-                max_gram: 20
             analyzer: # We define custom analyzers for html content
               analyse_html_french:
                 type: custom
                 char_filter: [html_strip]
-                tokenizer: nGram
+                tokenizer: standard
                 filter: [french_elision, lowercase, french_stop, french_stemmer]
       finder: ~
       types:

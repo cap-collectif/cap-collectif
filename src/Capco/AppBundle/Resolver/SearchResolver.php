@@ -12,7 +12,7 @@ use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 
 class SearchResolver
 {
-    const RESULT_PER_PAGE = 10;
+    const RESULTS_PER_PAGE = 10;
 
     protected $index;
     protected $transformer;
@@ -33,7 +33,7 @@ class SearchResolver
      *
      * @return array
      */
-    public function searchAll($page, $term, $type = 'all', $sort = 'score', $useTransformation = true, $resultsPerPage = self::RESULT_PER_PAGE)
+    public function searchAll($page = 1, $term = '', $type = 'all', $sort = 'score', $useTransformation = true, $resultsPerPage = self::RESULTS_PER_PAGE)
     {
         $from = ($page - 1) * $resultsPerPage;
         $termQuery = empty(trim($term)) ? new Query\MatchAll() : $this->getSearchQuery($term);
@@ -46,7 +46,7 @@ class SearchResolver
         $query->setHighlight($this->getHighlightSettings());
 
         $query->setFrom($from);
-        $query->setSize(self::RESULT_PER_PAGE);
+        $query->setSize($resultsPerPage);
 
         $resultSet = $this->index->search($query);
         $count = $resultSet->getTotalHits();
@@ -59,7 +59,7 @@ class SearchResolver
         return [
             'count' => $count,
             'results' => $results,
-            'pages' => ceil($count / self::RESULT_PER_PAGE)
+            'pages' => ceil($count / $resultsPerPage)
         ];
     }
 

@@ -20,7 +20,7 @@ class SearchController extends Controller
      */
     public function searchAction($terms = '', $sort = 'score', $type = 'all', $page = 1, $pagination = 10)
     {
-        $searchResults = $this->container->get('capco.search.resolver')->searchAll($pagination, $page, $terms, $type, $sort, false);
+        $searchResults = $this->container->get('capco.search.resolver')->searchAll($page, $terms, $type, $sort, false, $pagination);
 
         $count = $searchResults['count'];
 

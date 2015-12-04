@@ -86,13 +86,15 @@
                                         <a class="search-result__link" href="{{ result.transformed | capco_url }}">
                                             {{ title | raw }}
                                         </a>
-                                        <span class="small excerpt search-result__date">
-                                            {{ result.result.hit['_source']['updated_at'] | localizeddate('medium', 'none', app.request.locale) }}
-                                        </span>
+                                        {% if result.result.hit['_source']['updated_at'] is defined %}
+                                            <span class="small excerpt search-result__date">
+                                                {{ result.result.hit['_source']['updated_at'] | localizeddate('medium', 'none', app.request.locale) }}
+                                            </span>
+                                        {% endif %}
                                 </h4>
                                 {% if result.result.hit['highlight'] is defined %}
                                     {% for key, highlights in result.result.hit['highlight'] if key != 'title' and key != 'username' %}
-                                        <p class="excerpt small">
+                                        <p class="excerpt small search-result__preview">
                                             {% for excerpt in highlights %}
                                                 {{ excerpt | raw }}...
                                             {% endfor %}
@@ -100,7 +102,7 @@
                                     {% endfor %}
                                 {% else %}
                                     {% for key in ['title', 'body'] if attribute(result.transformed, key) is defined %}
-                                        <p class="excerpt small">
+                                        <p class="excerpt small search-result__preview">
                                             {{ attribute(result.transformed, key)|striptags|truncate(175) }}
                                         </p>
                                     {% endfor %}

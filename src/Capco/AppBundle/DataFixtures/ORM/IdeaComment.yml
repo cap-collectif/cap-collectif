@@ -21,6 +21,14 @@ Capco\AppBundle\Entity\IdeaComment:
     iComment151:
         Idea: @Idea3
         Author: @user5
-        body: <text(300)>
+        body: Coucou ! Je suis un commentaire avec du vrai texte dedans.
         isEnabled: true
         isTrashed: false
+        updatedAt: <(new \DateTime('2015-08-14'))>
+    iComment152:
+        Idea: @Idea3
+        Author: @user5
+        body: Coucou coucou coucou coucou coucou coucou.
+        isEnabled: true
+        isTrashed: false
+        updatedAt: <(new \DateTime('2014-08-14'))>
