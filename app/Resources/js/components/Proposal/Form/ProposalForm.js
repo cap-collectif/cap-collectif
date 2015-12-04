@@ -158,7 +158,9 @@ const ProposalForm = React.createClass({
   render() {
     return (
       <form id="proposal-form" ref="form">
-
+        <p>
+          {this.props.form.description}
+        </p>
         <Input
           id="proposal_title"
           type="text"

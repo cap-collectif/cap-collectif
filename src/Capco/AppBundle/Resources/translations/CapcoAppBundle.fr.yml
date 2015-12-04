@@ -1145,18 +1145,17 @@ search:
       end_date: Au :
     types:
       all: Tous
-      arguments: Arguments
-      comments: Commentaires
-      events: Évènements
       ideas: Idées
+      comments: Commentaires
+      arguments: Arguments
       projects: Projets participatifs
-      opinions: Propositions (consultations)
+      events: Évènements
+      opinions: Propositions
+      versions: Modifications
       posts: Articles
-      proposals: Propositions (budget)
       sources: Sources
       themes: Thèmes
       users: Membres
-      versions: Modifications
     themes:
       all: Tous
     sort:
@@ -1169,15 +1168,14 @@ search:
     title: "]-Inf, 0] Aucun résultat | {1} 1 résultat | ]1,Inf[ %count% résultats"
     default_title: Voir plus
     type:
-      argument: Argument
-      comment: Commentaire
-      event: Évènement
       idea: Idée
-      opinion: Proposition
       opinionVersion: Modification
-      post: Article
+      comment: Commentaire
+      argument: Argument
       project: Projet participatif
-      proposal: Proposition
+      event: Évènement
+      opinion: Proposition
+      post: Article
       source: Source
       theme: Thème
       user: Membre

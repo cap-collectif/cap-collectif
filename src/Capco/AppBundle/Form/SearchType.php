@@ -21,7 +21,6 @@ class SearchType extends AbstractType
     {
         $choices = [
             'all'      => 'search.form.types.all',
-            'proposal' => 'search.form.types.proposals',
             'comment'  => 'search.form.types.comments',
             'argument' => 'search.form.types.arguments',
             'project'  => 'search.form.types.projects',

@@ -3,7 +3,7 @@ Feature: Search
 @javascript
 Scenario: Anonymous wants to search in all types
   Given I visited "search page"
-  Then I should see "971 résultats" in the ".search__results-nb" element
+  Then I should see "954 résultats" in the ".search__results-nb" element
   When I fill in the following:
     | q_term | article |
   And I click the ".btn[type='submit']" element
