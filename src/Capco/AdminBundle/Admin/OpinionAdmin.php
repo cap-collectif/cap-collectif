@@ -173,6 +173,11 @@ class OpinionAdmin extends Admin
                     'query_builder' => $this->createQueryBuilderForStep(),
                     'required'      => true,
                 ])
+            ->add('link', 'sonata_type_model_autocomplete', [
+                'label'    => 'admin.fields.opinion.link',
+                'required' => false,
+                'property' => 'title',
+            ])
             ->end()
 
             // Appendices

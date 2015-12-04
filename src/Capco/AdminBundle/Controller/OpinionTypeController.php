@@ -15,10 +15,10 @@ class OpinionTypeController extends Controller
         $consultationStepTypeId = $object->getConsultationStepType() ? $object->getConsultationStepType()->getId() : $request->get('consultation_step_type_id');
 
         if (null !== $request->get('btn_update_and_list')) {
-            $url = $this->generateUrl('admin_capco_app_consultation_step_type_edit', ['id' => $consultationStepTypeId]);
+            $url = $this->generateUrl('admin_capco_app_steps_consultationsteptype_edit', ['id' => $consultationStepTypeId]);
         }
         if (null !== $request->get('btn_create_and_list')) {
-            $url = $this->generateUrl('admin_capco_app_consultation_step_type_edit', ['id' => $consultationStepTypeId]);
+            $url = $this->generateUrl('admin_capco_app_steps_consultationsteptype_edit', ['id' => $consultationStepTypeId]);
         }
 
         if (null !== $request->get('btn_create_and_create')) {
@@ -31,7 +31,7 @@ class OpinionTypeController extends Controller
 
         if ($this->getRestMethod($request) === 'DELETE') {
             $consultationStepTypeId = $request->get('consultation_step_type_id');
-            $url = $this->generateUrl('admin_capco_app_consultation_step_type_edit', ['id' => $consultationStepTypeId]);
+            $url = $this->generateUrl('admin_capco_app_steps_consultationsteptype_edit', ['id' => $consultationStepTypeId]);
         }
 
         if (!$url) {

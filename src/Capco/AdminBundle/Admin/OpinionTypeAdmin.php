@@ -35,7 +35,8 @@ class OpinionTypeAdmin extends Admin
                 ->find($subject->getRoot())
             ;
             if ($root) {
-                $consultationStepTypeId = $root->getConsultationStepType()->getId();
+                $cst = $root->getConsultationStepType();
+                $consultationStepTypeId = $cst ? $cst->getId() : null;
             }
         }
 

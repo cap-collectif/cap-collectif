@@ -355,6 +355,7 @@ admin:
       position: Position
       is_enabled: Publié
       is_trashed: Dans la corbeille
+      link: Lié à la proposition
       updated_at: Mise à jour
       created_at: Création
       trashed_reason: Raison de la mise en corbeille
