@@ -499,14 +499,3 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
-        # ProjectAbstractStep
-        projectabstractstep:
-          serializer:
-            groups: [ProjectAbstractSteps]
-          _all: { enabled: false }
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\Steps\ProjectAbstractStep
-            provider: ~
-            listener: ~
-            finder: ~
