@@ -68,6 +68,7 @@ Feature: Proposal Restful Api
       "isTrashed": @boolean@,
       "trashedReason": @...@,
       "title": @string@,
+      "estimation": @number@,
       "answer": {
         "title": "Réponse du gouvernement à la proposition",
         "body": @string@,

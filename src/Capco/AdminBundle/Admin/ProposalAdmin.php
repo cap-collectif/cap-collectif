@@ -78,6 +78,11 @@ class ProposalAdmin extends Admin
                 'btn_add' => false,
                 'help' => 'admin.fields.proposal.help.status',
             ])
+            ->add('estimation', 'number', [
+                'label'    => 'admin.fields.proposal.estimation',
+                'required' => false,
+                'help'     => 'admin.fields.proposal.help.estimation',
+            ])
             ->add('rating', 'choice', [
                 'label' => 'admin.fields.proposal.rating',
                 'required' => false,
@@ -183,6 +188,9 @@ class ProposalAdmin extends Admin
             ])
             ->add('status', null, [
                 'label' => 'admin.fields.proposal.status',
+            ])
+            ->add('estimation', null, [
+                'label' => 'admin.fields.proposal.estimation',
             ])
             ->add('proposalForm.step', null, [
                 'label' => 'admin.fields.proposal.step',

@@ -1,5 +1,6 @@
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
+import ProposalPreviewEstimation from '../Detail/ProposalDetailEstimation';
 
 const FormattedDate = ReactIntl.FormattedDate;
 const FormattedMessage = ReactIntl.FormattedMessage;
@@ -25,6 +26,7 @@ const ProposalPageHeader = React.createClass({
         day="numeric" month="long" year="numeric" hour="numeric" minute="numeric"
       />
     );
+
     return (
       <div className="container--custom container--with-sidebar">
         <h1 className="consultation__header__title h1">{proposal.title}</h1>
@@ -85,6 +87,7 @@ const ProposalPageHeader = React.createClass({
           <span>
             <i className="cap cap-marker-1-1"></i>{proposal.district.name}
           </span>
+          <ProposalPreviewEstimation style={{marginLeft: 20, display: "inline-block"}} proposal={proposal} />
         </div>
       </div>
     );

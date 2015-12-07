@@ -14,6 +14,7 @@ Capco\AppBundle\Entity\Proposal:
     selectionSteps: [@selectionStep1]
     createdAt: <(new \DateTime('2015-01-01'))>
     answer: @answer4
+    estimation: 90000.9
   proposal2:
     title: Rénovation du gymnase
     body: |
