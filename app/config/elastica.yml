@@ -25,7 +25,7 @@ fos_elastica:
                 type: custom
                 char_filter: [html_strip]
                 tokenizer: standard
-                filter: [french_elision, lowercase, french_stop, french_stemmer]
+                filter: [lowercase, french_elision, french_stop, french_stemmer]
       finder: ~
       types:
       # User

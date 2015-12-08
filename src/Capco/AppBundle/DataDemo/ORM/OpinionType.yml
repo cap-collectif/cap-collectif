@@ -39,14 +39,14 @@ Capco\AppBundle\Entity\OpinionType:
         isEnabled: false
         consultationStepType: @pjlType
         color: red
-        defaultFilter: position
+        defaultFilter: positions
     opinionType6:
         title: Titre 2è
         position: 1
         isEnabled: false
         consultationStepType: @pjlType
         color: red
-        defaultFilter: position
+        defaultFilter: positions
     opinionType7:
         title: Chapitre 1er
         subtitle: Économie de la donnée
@@ -54,7 +54,7 @@ Capco\AppBundle\Entity\OpinionType:
         isEnabled: false
         parent: @opinionType5
         color: red
-        defaultFilter: position
+        defaultFilter: positions
     opinionType8:
         title: Section 1
         subtitle: Ouverture des données publiques
@@ -65,7 +65,7 @@ Capco\AppBundle\Entity\OpinionType:
         commentSystem: 1
         color: green
         isEnabled: true
-        defaultFilter: position
+        defaultFilter: positions
     opinionType9:
         title: Section 2
         subtitle: Service public de la donnée
@@ -76,4 +76,4 @@ Capco\AppBundle\Entity\OpinionType:
         commentSystem: 2
         color: red
         isEnabled: true
-        defaultFilter: position
+        defaultFilter: positions

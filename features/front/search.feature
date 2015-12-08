@@ -1,10 +1,6 @@
 Feature: Search
 
-Background:
-  Given feature "search" is enabled
-
-
-  @javascript
+@javascript
 Scenario: Anonymous wants to search in all types
   Given I visited "search page"
   Then I should see "954 résultats" in the ".search__results-nb" element
