@@ -82,8 +82,6 @@ class ContributionResolver
 
         uasort($contributors, function ($a, $b) { return $b['total'] - $a['total']; });
 
-
-
         if ($pagination && $page) {
             $contributorsPage = array_slice($contributors, $pagination * $page - $pagination, $pagination, true);
 
