@@ -49,6 +49,7 @@ class ConsultationStepType
     /**
      * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="consultationStepType", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $opinionTypes;
 
