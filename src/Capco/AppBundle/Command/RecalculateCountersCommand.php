@@ -210,8 +210,8 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $conn = $em->getConnection();
         $conn->executeUpdate('UPDATE opinion AS o
           JOIN
-          ( SELECT p1.id, COUNT(*) AS cnt
-            FROM opinion AS p1 JOIN opinion AS p2
+          ( SELECT p1.id, COUNT(p2.id) AS cnt
+            FROM opinion AS p1 LEFT JOIN opinion AS p2
             ON p2.link_id = p1.id AND p2.enabled = 1 AND p2.trashed = 0
             GROUP BY p1.id
           ) AS g
