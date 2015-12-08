@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Status;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -30,9 +31,11 @@ class StatusAdmin extends Admin
                 'label'    => 'admin.fields.status.name',
                 'required' => true,
             ])
-            ->add('color', null, [
-                'label'    => 'admin.fields.status.color',
-                'required' => true,
+            ->add('color', 'choice', [
+                'choices'            => Status::$statusesLabels,
+                'label'              => 'admin.fields.status.color',
+                'required'           => true,
+                'translation_domain' => 'CapcoAppBundle',
             ])
         ;
     }
