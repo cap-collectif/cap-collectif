@@ -298,16 +298,6 @@ theme:
   error:
     not_found: Thème introuvable.
 
-#Status
-statuses:
-  labels:
-    normal: Par défaut (blanc)
-    primary: Primaire (couleur personnalisée)
-    success: Succès (vert)
-    info: Information (bleu)
-    warning: Attention (orange)
-    danger: Danger (rouge)
-
 #Projet
 project:
   contributors:

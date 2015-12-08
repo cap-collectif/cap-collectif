@@ -8,7 +8,7 @@ sed -i 's/newrelic.license = ""/newrelic.license = '"$NR_INSTALL_KEY"'/' /etc/ph
 
 cd /var/www
 
-for directory in app/cache app/logs web/bundles; do
+for directory in app/cache app/logs web/bundles web/media/cache web/media/default web/media/sonata_category; do
   if [ ! -d "$directory" ]; then
     echo "Creating '$directory'..."
     mkdir -p -m 777 $directory
