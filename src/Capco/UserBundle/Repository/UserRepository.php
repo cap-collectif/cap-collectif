@@ -23,8 +23,16 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:Source s WITH s.Author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+          LEFT JOIN o.step ostep
+          LEFT JOIN ostep.projectAbstractStep opas
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE s.isEnabled = 1 AND ((s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :project) OR (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :project))
+          LEFT JOIN ovo.step ovostep
+          LEFT JOIN ovostep.projectAbstractStep ovopas
+          WHERE s.isEnabled = 1 AND (
+            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND opas.project = :project)
+            OR
+            (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovopas.project = :project)
+          )
           GROUP BY u.id
         ')
             ->setParameter('project', $project);
@@ -41,8 +49,16 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:Argument a WITH a.Author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+          LEFT JOIN o.step ostep
+          LEFT JOIN ostep.projectAbstractStep opas
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE a.isEnabled = 1 AND ((a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :project) OR (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :project))
+          LEFT JOIN ovo.step ovostep
+          LEFT JOIN ovostep.projectAbstractStep ovopas
+          WHERE a.isEnabled = 1 AND (
+            (a.opinion IS NOT NULL AND o.isEnabled = 1 AND opas.project = :project)
+            OR
+            (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovopas.project = :project)
+          )
           GROUP BY u.id
         ')
         ->setParameter('project', $project);
