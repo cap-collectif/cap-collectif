@@ -50,10 +50,7 @@ class ConsultationStepsController extends FOSRestController
         $consultationStepType = $step->getConsultationStepType();
         $link = $opinion->getLink();
 
-        $availablesOpinionTypes = $link
-            ? $link->getOpinionType()->getAvailableOpinionTypesToCreateLink()
-            : $this->get('capco.opinion_types.resolver')->getAllForConsultationStepType($consultationStepType)
-        ;
+        $availablesOpinionTypes = $this->get('capco.opinion_types.resolver')->getAvailableLinkTypesForConsultationStepType($consultationStepType);
 
         $opinionType = $opinion->getOpinionType();
 

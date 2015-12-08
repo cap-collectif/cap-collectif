@@ -64,3 +64,11 @@ services:
     class: Capco\AppBundle\EventListener\SynthesisLoggableListener
     calls:
       - [ setAnnotationReader, [ @annotation_reader ] ]
+
+  capco.opinion_type.serialization_listener:
+      class: Capco\AppBundle\EventListener\OpinionTypeSerializationListener
+      arguments:
+        - @capco.opinion_types.resolver
+        - @jms_serializer
+      tags:
+        - { name: "jms_serializer.event_subscriber" }

@@ -52,6 +52,7 @@ Capco\AppBundle\Entity\OpinionType:
         subtitle: Économie de la donnée
         position: 1
         isEnabled: false
+        consultationStepType: @pjlType
         parent: @opinionType5
         color: red
         defaultFilter: positions
@@ -66,11 +67,13 @@ Capco\AppBundle\Entity\OpinionType:
         color: green
         isEnabled: true
         defaultFilter: positions
+        consultationStepType: @pjlType
     opinionType9:
         title: Section 2
         subtitle: Service public de la donnée
         position: 2
         isEnabled: false
+        consultationStepType: @pjlType
         parent: @opinionType7
         voteWidgetType: 1
         commentSystem: 2

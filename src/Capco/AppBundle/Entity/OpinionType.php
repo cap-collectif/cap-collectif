@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Entity\ViewModel\OpinionTypeViewModel;
 
 /**
  * OpinionType.
@@ -223,7 +222,7 @@ class OpinionType
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStepType", inversedBy="opinionTypes", cascade={"persist"})
-     * @ORM\JoinColumn(name="consultation_step_type_id", nullable=true, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="consultation_step_type_id", nullable=false, onDelete="CASCADE")
      */
     protected $consultationStepType;
 
@@ -717,32 +716,5 @@ class OpinionType
         }
 
         return $types;
-    }
-
-    public function getAvailableOpinionTypesToCreateLink()
-    {
-        $parent = $this->getParent();
-        if ($parent) {
-            return $parent->getChildren(true);
-        }
-
-        return $this->getConsultationStepType()->getOpinionTypes();
-    }
-
-    // serializer seems to convert virtual_properties to an object
-    // so we force it as an array using this method...
-    public function getAvailableOpinionTypesToCreateLinkAsArray()
-    {
-        $data = [];
-        foreach ($this->getAvailableOpinionTypesToCreateLink() as $opinionType) {
-            if ($opinionType->getIsEnabled()) {
-                $opinionTypeViewModel = new OpinionTypeViewModel();
-                $opinionTypeViewModel->id = $opinionType->getId();
-                $opinionTypeViewModel->label = $opinionType->getTitle();
-                $data[] = $opinionTypeViewModel;
-            }
-        }
-
-        return $data;
     }
 }

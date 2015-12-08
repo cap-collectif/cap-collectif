@@ -165,4 +165,20 @@ class ConsultationStepType
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getRootOpinionTypes()
+    {
+        $ots = [];
+        foreach ($this->opinionTypes as $ot) {
+            if ($ot->getLevel() === 0) {
+                $ots[] = $ot;
+            }
+        }
+        return $ots;
+    }
+
+
 }

@@ -20,7 +20,7 @@ class OpinionTypesController extends FOSRestController
     public function getOpinionTypeAction(OpinionType $opinionType)
     {
         $context = SerializationContext::create()
-            ->setGroups(['OpinionTypeDetails'])
+            ->setGroups(['OpinionTypeDetails', 'OpinionTypeLinks'])
             ->setSerializeNull(false)
         ;
 

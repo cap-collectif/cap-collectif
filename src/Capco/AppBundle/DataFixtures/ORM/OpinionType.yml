@@ -50,6 +50,7 @@ Capco\AppBundle\Entity\OpinionType:
         isEnabled: false
         versionable: false
         sourceable: false
+        consultationStepType: @typePJL
         parent: @opinionType5bis
     opinionType5:
         title: Section 1
@@ -62,6 +63,7 @@ Capco\AppBundle\Entity\OpinionType:
         votesHelpText: <text(200)>
         votesThreshold: 5
         votesThresholdHelpText: <text(200)>
+        consultationStepType: @typePJL
         parent: @opinionType5ter
     opinionType6:
         title: Sous-partie 1
@@ -74,6 +76,7 @@ Capco\AppBundle\Entity\OpinionType:
         votesHelpText: <text(200)>
         votesThreshold: 5
         votesThresholdHelpText: <text(200)>
+        consultationStepType: @typePJL
         parent: @opinionType5
     opinionType7:
         title: Sous-partie 2
@@ -86,6 +89,7 @@ Capco\AppBundle\Entity\OpinionType:
         votesHelpText: <text(200)>
         votesThreshold: 5
         votesThresholdHelpText: <text(200)>
+        consultationStepType: @typePJL
         parent: @opinionType5
     opinionType7bis:
         title: Sous-sous-partie 1
@@ -97,6 +101,7 @@ Capco\AppBundle\Entity\OpinionType:
         votesHelpText: <text(200)>
         votesThreshold: 5
         votesThresholdHelpText: <text(200)>
+        consultationStepType: @typePJL
         parent: @opinionType7
     opinionType8:
         title: Le problème constaté
@@ -153,4 +158,5 @@ Capco\AppBundle\Entity\OpinionType:
         color: orange
         defaultFilter: votes
         isEnabled: true
+        consultationStepType: @typePJL
         parent: @opinionType5ter

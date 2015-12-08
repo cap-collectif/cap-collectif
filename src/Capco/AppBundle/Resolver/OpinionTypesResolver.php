@@ -53,7 +53,7 @@ class OpinionTypesResolver
 
         $nav = '';
 
-        foreach ($ct->getOpinionTypes() as $root) {
+        foreach ($ct->getRootOpinionTypes() as $root) {
             $nav .= $this->opinionTypeRepo->childrenHierarchy($root, false, $options, true);
         }
 
@@ -67,7 +67,7 @@ class OpinionTypesResolver
         }
 
         $opinionTypes = [];
-        foreach ($ct->getOpinionTypes() as $root) {
+        foreach ($ct->getRootOpinionTypes() as $root) {
             $opinionTypes = array_merge(
                 $opinionTypes,
                 $this->opinionTypeRepo->childrenHierarchy($root, false, $options, true)
@@ -106,15 +106,7 @@ class OpinionTypesResolver
             return [];
         }
 
-        $opinionTypes = [];
-        foreach ($ct->getOpinionTypes() as $root) {
-            $opinionTypes = array_merge(
-                $opinionTypes,
-                $this->opinionTypeRepo->getChildren($root, false, 'position', 'asc', true)
-            );
-        }
-
-        return $opinionTypes;
+        return $ct->getOpinionTypes();
     }
 
     public function consultationStepTypeAllowType(ConsultationStepType $consultationStepType, OpinionType $opinionType)
@@ -149,5 +141,17 @@ class OpinionTypesResolver
         return $this->opinionRepo
             ->getMaxPositionByOpinionTypeAndConsultationStep($step, $opinionType)
         ;
+    }
+
+    public function getAvailableLinkTypesForConsultationStepType(ConsultationStepType $consultationStepType)
+    {
+        $ots = [];
+        foreach ($consultationStepType->getOpinionTypes() as $ot) {
+            if ($ot->getIsEnabled() && $ot->isLinkable()) {
+                $ots[] = $ot;
+            }
+        }
+        return $ots;
+
     }
 }

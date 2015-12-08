@@ -206,7 +206,7 @@ class OpinionTypeAdmin extends Admin
 
     public function prePersist($type)
     {
-        if (!$type->getParent() && !$type->getConsultationStepType()) {
+        if (!$type->getConsultationStepType()) {
             $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
             if ($consultationStepTypeId !== null) {
                 $consultationStepType = $this->getConfigurationPool()

@@ -86,7 +86,7 @@ const OpinionLinkForm = React.createClass({
           <option value="" disabled selected>{this.getIntlMessage('global.select')}</option>
           {
             this.props.availableTypes.map((type) => {
-              return <option key={type.id} value={type.id}>{type.label}</option>;
+              return <option key={type.id} value={type.id}>{type.title}</option>;
             })
           }
         </Input>
