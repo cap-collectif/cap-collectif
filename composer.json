@@ -1,9 +1,9 @@
 {
     "name": "capco/symfony2",
     "license": "proprietary",
-    "type": "project",
     "description": "Cap-Collectif Symfony2",
     "autoload": {
+        "exclude-from-classmap": ["**/Behat/"],
         "psr-0": {
             "": "src/"
         }
@@ -19,16 +19,16 @@
         }
     ],
     "require": {
-        "php": ">=5.3.9",
-        "symfony/symfony": "2.7.*",
-        "doctrine/orm": "~2.2,>=2.2.3,<2.5",
-        "doctrine/dbal": "<2.5",
+        "php": ">=5.5.9",
+        "symfony/symfony": "~2.7.5",
+        "doctrine/orm": "^2.4.8",
+        "doctrine/dbal": "^2.4.4",
         "doctrine/doctrine-bundle": "~1.4",
         "twig/extensions": "~1.0",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~4.0",
-        "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
+        "sensio/framework-extra-bundle": "^3.0.2",
 
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "stof/doctrine-extensions-bundle": "~1.1",
@@ -69,44 +69,45 @@
         "ekino/newrelic-bundle": "^1.3"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3",
-        "behat/behat": "~3.0.6",
-        "behat/symfony2-extension": "~2.0@dev",
-        "behat/mink-extension": "~2.0@dev",
-        "behat/mink-selenium2-driver": "@dev",
-        "behat/mink": "~1.7@dev",
-        "behat/mink-browserkit-driver": "@dev",
+        "sensio/generator-bundle": "^3.0",
+        "behat/behat": "^3.0",
+        "behat/symfony2-extension": "^2.1",
+        "behat/mink-extension": "^2.1",
+        "behat/mink-selenium2-driver": "^1.3",
+        "behat/mink": "^1.7",
+        "behat/mink-browserkit-driver": "^1.3",
         "sensiolabs/behat-page-object-extension": "~2.0@dev",
-        "ocramius/proxy-manager": "~0.5",
-        "bossa/phpspec2-expect": "*",
-        "phpspec/phpspec": "~2.0",
+        "ocramius/proxy-manager": "^1.0",
+        "bossa/phpspec2-expect": "^1.0",
+        "phpspec/phpspec": "^2.4",
         "guzzlehttp/guzzle": "~5.0",
-        "coduo/php-matcher": "1.1.*",
+        "coduo/php-matcher": "^1.1",
+        "stage1/docker-php": "@dev",
         "jolicode/jolinotif": "^1.0",
         "phpunit/phpunit": "@stable",
-        "pyrech/composer-changelogs": "^1.2"
+        "pyrech/composer-changelogs": "^1.2",
+        "alexandresalome/mailcatcher": "^1.0"
     },
     "scripts": {
         "post-install-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"
         ],
         "post-update-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"
         ]
     },
     "config": {
-        "github-oauth": {"github.com": "***REMOVED***"},
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "github-oauth": {"github.com": "***REMOVED***"}
     },
     "extra": {
         "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
         "symfony-web-dir": "web"
-    },
-    "minimum-stability": "stable"
+    }
 }

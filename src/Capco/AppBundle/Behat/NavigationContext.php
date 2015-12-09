@@ -22,9 +22,7 @@ class NavigationContext extends PageObjectContext
      */
     public function iGoOnTheArgumentsTab()
     {
-        $this->getPage('opinion page')
-            ->clickArgumentsTab();
-        sleep(3);
+        $this->getPage('opinion page')->clickArgumentsTab();
     }
 
     /**
@@ -42,10 +40,8 @@ class NavigationContext extends PageObjectContext
      */
     public function clickAddSourceTab()
     {
-        sleep(2);
         $this->getPage('opinion page')
              ->clickAddSource();
-        sleep(2);
     }
 
     /**

@@ -9,46 +9,31 @@ use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
 use WebDriver\Exception\ElementNotVisible;
+use Docker\Docker;
+use Docker\Http\Client;
+use Docker\Container;
 
 class ApplicationContext extends UserContext
 {
     protected $headers;
 
     /**
-     * @BeforeSuite
+     * @BeforeScenario
      */
-    public static function reinitDatabase()
+    public static function restartContainer()
     {
-        exec('app/console capco:reinit --force -e test');
-        $exportCommand = 'mysqldump --opt -h 127.0.0.1 -u root symfony_test > app/dbtest.backup';
-        exec($exportCommand);
-    }
+        exec('php bin/console capco:reinit --force');
+        static $dbContainer = null;
+        $docker = new Docker(new Client('unix:///var/run/docker.sock'));
+        $manager = $docker->getContainerManager();
 
-    /**
-     * @BeforeScenario @purge
-     *
-     * Purge database
-     */
-    public static function purgeDatabase()
-    {
-        exec('app/console doctrine:database:drop --force -e test');
-        exec('app/console doctrine:schema:update --force -e test');
-    }
+        if (null !== $dbContainer) {
+            $manager->remove($dbContainer);
+        }
 
-    /**
-     * @AfterScenario @database
-     *
-     * Recreate database before loading fixtures to make sure we always have the same ids
-     */
-    public static function databaseContainsFixtures()
-    {
-        $importCommand = 'mysql -h 127.0.0.1 -u root symfony_test < app/dbtest.backup';
-        exec($importCommand);
-        exec('app/console capco:reset-feature-flags -e test');
-        exec('app/console capco:compute:counters -e test');
-        exec('app/console capco:compute:projects-counters -e test');
-        exec('app/console capco:compute:rankings -e test');
-        exec('app/console fos:elastica:populate -q -e test');
+        $dbContainer = new Container(['Image' => 'spyl94:capco-fixtures']);
+        $dbContainer->setEnv(['MYSQL_ROOT_PASSWORD=capco']);
+        $manager->create($dbContainer)->start($dbContainer);
     }
 
     /**
@@ -56,57 +41,47 @@ class ApplicationContext extends UserContext
      */
     public function clearLocalStorage()
     {
-        $this->getSession()->getDriver()->evaluateScript(
-            'localStorage.clear();'
-        );
+        $this->getSession()->getDriver()->evaluateScript('localStorage.clear();');
     }
 
-    /**
-     * @AfterSuite
-     */
-    public static function reinitFeatures()
-    {
-        exec('php app/console capco:reset-feature-flags --force');
-    }
+    // /**
+    //  * @AfterSuite
+    //  */
+    // public static function reinitFeatures()
+    // {
+    //     echo "Reinit Database";
+    //     exec('php bin/console capco:reset-feature-flags --force');
+    // }
 
-    /**
-     * @AfterSuite
-     *
-     * @param $suiteScope
-     */
-    public static function notifiyEnd(AfterSuiteScope $suiteScope)
-    {
-        $suiteName = $suiteScope->getSuite()->getName();
-        $resultCode = $suiteScope->getTestResult()->getResultCode();
-        if ($notifier = NotifierFactory::create()) {
-            $notification = new Notification();
-            if ($resultCode === TestResult::PASSED) {
-                $notification
-                    ->setTitle('Behat suite ended successfully')
-                    ->setBody('Suite "'.$suiteName.'" has ended without errors (for once). Congrats !')
-                ;
-            } elseif ($resultCode === TestResult::SKIPPED) {
-                $notification
-                    ->setTitle('Behat suite ended with skipped steps')
-                    ->setBody('Suite "'.$suiteName.'" has ended successfully but some steps have been skipped.')
-                ;
-            } else {
-                $notification
-                    ->setTitle('Behat suite ended with errors')
-                    ->setBody('Suite "'.$suiteName.'" has ended with errors. Go check it out you moron !')
-                ;
-            }
-            $notifier->send($notification);
-        }
-    }
-
-    /**
-     * @BeforeScenario
-     */
-    public function resetFeatures()
-    {
-        $this->getService('capco.toggle.manager')->deactivateAll();
-    }
+    // /**
+    //  * @AfterSuite
+    //  * @param $suiteScope
+    //  */
+    // public static function notifiyEnd(AfterSuiteScope $suiteScope)
+    // {
+    //     $suiteName = $suiteScope->getSuite()->getName();
+    //     $resultCode = $suiteScope->getTestResult()->getResultCode();
+    //     if ($notifier = NotifierFactory::create()) {
+    //         $notification = new Notification();
+    //         if ($resultCode === TestResult::PASSED) {
+    //             $notification
+    //                 ->setTitle('Behat suite ended successfully')
+    //                 ->setBody('Suite "'.$suiteName.'" has ended without errors (for once). Congrats !')
+    //             ;
+    //         } elseif ($resultCode === TestResult::SKIPPED) {
+    //             $notification
+    //                 ->setTitle('Behat suite ended with skipped steps')
+    //                 ->setBody('Suite "'.$suiteName.'" has ended successfully but some steps have been skipped.')
+    //             ;
+    //         } else {
+    //             $notification
+    //                 ->setTitle('Behat suite ended with errors')
+    //                 ->setBody('Suite "'.$suiteName.'" has ended with errors. Go check it out you moron !')
+    //             ;
+    //         }
+    //         $notifier->send($notification);
+    //     }
+    // }
 
     /**
      * @Given all features are enabled
@@ -228,8 +203,7 @@ class ApplicationContext extends UserContext
      */
     public function iWait($seconds)
     {
-        $time = intval($seconds * 1000);
-        $this->getSession()->wait($time);
+        $this->getSession()->wait(intval($seconds * 1000));
     }
 
     /**

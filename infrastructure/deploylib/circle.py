@@ -8,8 +8,12 @@ import re
 def load_cache():
     "Load cache"
     local('/bin/bash -c "if [[ -e ~/docker/capcotest_application.tar ]]; then docker load -i ~/docker/capcotest_application.tar; fi"')
+    local('/bin/bash -c "if [[ -e ~/docker/capcotest_applicationdata.tar ]]; then docker load -i ~/docker/capcotest_applicationdata.tar; fi"')
     local('/bin/bash -c "if [[ -e ~/docker/capcotest_builder.tar ]]; then docker load -i ~/docker/capcotest_builder.tar; fi"')
-
+    local('/bin/bash -c "if [[ -e ~/docker/capcotest_seleniumhub.tar ]]; then docker load -i ~/docker/capcotest_seleniumhub.tar; fi"')
+    local('/bin/bash -c "if [[ -e ~/docker/capcotest_firefox.tar ]]; then docker load -i ~/docker/capcotest_firefox.tar; fi"')
+    local('/bin/bash -c "if [[ -e ~/docker/capcotest_chrome.tar ]]; then docker load -i ~/docker/capcotest_chrome.tar; fi"')
+    local('/bin/bash -c "if [[ -e ~/docker/capcotest_mailcacher.tar ]]; then docker load -i ~/docker/capcotest_mailcacher.tar; fi"')
 
 @task(environments=['testing'])
 def save_cache():
@@ -40,6 +44,16 @@ def save_cache():
 
     if change_in_infrastructure:
         env.compose('build')
+        local('docker pull selenium/hub:latest')
+        local('docker pull selenium/node-firefox-debug:latest')
+        local('docker pull selenium/node-chrome-debug:latest')
+        local('docker pull jderusse/mailcatcher:latest')
         local('mkdir -p ~/docker')
         local('docker save capcotest_application > ~/docker/capcotest_application.tar')
+        local('docker save capcotest_applicationdata > ~/docker/capcotest_applicationdata.tar')
         local('docker save capcotest_builder > ~/docker/capcotest_builder.tar')
+        local('docker save selenium/hub > ~/docker/capcotest_seleniumhub.tar')
+        local('docker save selenium/node-firefox-debug > ~/docker/capcotest_firefox.tar')
+        local('docker save selenium/node-chrome-debug > ~/docker/capcotest_chrome.tar')
+        local('docker save jderusse/mailcatcher > ~/docker/capcotest_mailcacher.tar')
+

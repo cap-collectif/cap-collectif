@@ -1,5 +1,4 @@
 [mysqld]
-# innodb_force_recovery = 1
 
 # CLIENT #
 port                           = 3306

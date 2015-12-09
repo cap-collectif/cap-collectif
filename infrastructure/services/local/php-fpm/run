@@ -1,34 +1,14 @@
 #!/bin/bash
 
+cd /var/www
 
-rm -rf app/cache/*
+chown -R capco:capco var
 
-su capco <<'EOF'
-sleep 10
-cd       /var/www
-
-mkdir -p /var/www/app/cache
-mkdir -p /var/www/app/logs
-mkdir -p /var/www/web/media/cache
-chown -R capco:capco /var/www/app/cache
-chown -R capco:capco /var/www/app/logs
-chown -R capco:capco /var/www/web/media
-chmod -R 777 /var/www/app/cache
-chmod -R 777 /var/www/app/logs
-
-RESULT=`php app/console doctrine:migrations:status --env=dev 2>&1 | grep -o "Unknown database" | wc -l`
-if [ "$RESULT" != "0" ]; then
-    php app/console doctrine:database:create --env=dev --if-not-exists
-    php app/console doctrine:migrations:migrate --env=dev --no-interaction
-    php app/console doctrine:fixtures:load --env=dev --no-interaction
-else
-    php app/console doctrine:migrations:migrate --env=dev --no-interaction
-fi
-
-php app/console doctrine:cache:clear-metadata --env=dev --no-debug
-php app/console cache:warmup --env=dev --no-debug
-php app/console assets:install --symlink
-
-EOF
+echo "Checking if mysql is booted..."
+while ! mysql --host=database -uroot -pcapco > /dev/null 2>&1;
+  do sleep 1
+  echo "Waiting mysql to boot..."
+done
+echo "Mysql is ready!"
 
 exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O

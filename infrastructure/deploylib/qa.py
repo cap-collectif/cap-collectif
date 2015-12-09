@@ -7,21 +7,45 @@ from fabric.api import env
 def checkcs():
     "Check code style"
     env.compose_run('php-cs-fixer fix --level=symfony --dry-run --diff src || echo ""', 'builder', '.', no_deps=True)
+    local('pep8 infrastructure/deploylib --ignore=E501')
 
+@task(environments=['local'])
+def fix_cs_file(file, dry_run=False):
+    "Fix code style for one file"
+    if dry_run:
+        env.compose_run('php-cs-fixer fix --config-file=.php_cs --dry-run --diff %s' % file, 'builder', 'capco', no_deps=True)
+    else:
+        env.compose_run('php-cs-fixer fix --config-file=.php_cs %s' % file, 'builder', 'capco', no_deps=True)
 
 @task(environments=['local', 'testing'])
 def lint():
     "Lint twig and yaml files"
-    env.compose_run('php app/console lint:twig app/', 'builder', '.', no_deps=True)
+    env.service_command('php bin/console lint:twig app/', 'application', env.www_app)
 
 @task(environments=['local', 'testing'])
 def phpspec():
-    "Run Gerhkin Tests"
-    env.compose_run('bin/phpspec run --no-code-generation', 'builder', '.')
+    "Run Unit Tests"
+    env.service_command('./bin/phpspec run --no-code-generation', 'application', env.www_app)
 
 @task(environments=['local', 'testing'])
-def behat():
+def behat(fast_failure='true'):
     "Run Gerhkin Tests"
-    env.service_command('bin/behat -s api', 'application', '.')      # to fix
-    env.service_command('bin/behat -s commands', 'application', '.') # to fix
-    env.service_command('bin/behat -s front', 'application', '.')    # to fix
+    env.service_command('./bin/behat -p api'+ ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app, 'root')
+    env.service_command('./bin/behat -p commands'+ ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
+    env.service_command('./bin/behat -p frontend' + ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
+    env.service_command('./bin/behat -p javascript' + ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
+
+@task(environments=['local'])
+def view():
+  local('echo "secret" | vncviewer `docker-machine ip capco`::5900')
+
+@task(environments=['local'])
+def setup_git_hooks():
+    "Set git hooks"
+    local('rm -f .git/hooks/pre-commit && ln -s ../../infrastructure/git-hooks/hooks/pre-commit .git/hooks/pre-commit')
+
+@task(environments=['local'])
+def run_pre_commit_hook():
+    "Run pre-commit hook"
+    env.compose_run('infrastructure/git-hooks/scripts/cs-fixer.sh', 'builder', 'capco', '/var/www', no_deps=True)
+    env.compose_run('infrastructure/git-hooks/scripts/pep8.sh', 'builder', 'capco', '/var/www', no_deps=True)

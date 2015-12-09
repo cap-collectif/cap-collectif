@@ -2,45 +2,83 @@ application:
     build: ./infrastructure/services/local
     volumes:
         - .:/var/www
-        - ./data/mysql/:/var/lib/mysql
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /usr/local/bin/docker:/bin/docker
     ports:
         - "80:80"
-        - "6379:6379"
     environment:
         SYMFONY_ENV: dev
+        SYMFONY_MAILER_HOST: mailcatchersmtp
+        SYMFONY_MAILER_USER: ~
+        SYMFONY_MAILER_PASSWORD: ~
+        SYMFONY_DATABASE_HOST: database
+        SYMFONY_DATABASE_PASSWORD: capco
     volumes_from:
         - applicationdata
+    links:
+        - database:database
+        #- databasefixtures:database
+        - elasticsearch
+        - seleniumhub:selenium
+        - mailcatcher:mailcatchersmtp
 
 applicationdata:
     build: ./infrastructure/services/applicationdata
     volumes:
-        - ./data/media:/var/www/web/media
-        - ./data/redis:/data
-    command: echo "I'm a data container"
+        - /var/www/web/media
+        - /var/www/var/cache
+        - /var/www/var/logs
+
+database:
+    #image: spyl94:capco-fixtures
+    image: mariadb:10.0
+    environment:
+        MYSQL_ROOT_PASSWORD: 'capco'
+
+elasticsearch:
+    image: elasticsearch:1.7
+    volumes:
+    - ./infrastructure/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
 
 builder:
     build: ./infrastructure/services/builder
     volumes:
-        - .:/capco
+        - .:/var/www
         - ~/.composer:/home/capco/.composer
         - ~/.npm:/home/capco/.npm
-        - ~/.cache/bower:/home/capco/.cache/bower
+        - ~/.bower:/home/capco/.bower
     command: echo "Use 'docker-compose run builder build' to build deps"
+    user: capco
 
-# behat:
-#     build: infrastructure/services/behat
-#     links:
-#         - application:application
-#         - seleniumhub:selenium
-#     volumes:
-#         - .:/var/www/html
+seleniumhub:
+  image: selenium/hub
+  ports:
+    - "4444:4444"
 
-# seleniumhub:
-#     image: selenium/hub
+mailcatcher:
+  image: jderusse/mailcatcher
 
-# seleniumnode:
-#     image: selenium/node-firefox
-#     # image: selenium/node-chrome
-#     links:
-#         - seleniumhub:hub
-#         - application:application
+firefox:
+  image: selenium/node-firefox-debug
+  ports:
+   - "5900:5900"
+  links:
+    - seleniumhub:hub
+    - application:application
+
+databasefixtures:
+    build: ./infrastructure/services/databasefixtures
+    environment:
+        MYSQL_ROOT_PASSWORD: 'capco'
+    volumes:
+      - ~/.composer:/home/root/composer
+
+chrome:
+   image: selenium/node-chrome-debug
+   command: echo "Uncomment me"
+#   # ports:
+#   #  - "5900:5900"
+#   links:
+#     - seleniumhub:hub
+#     - application:application
+

@@ -5,12 +5,12 @@ from fabric.api import env
 import app
 
 @task
-def build():
+def build(use_cache='true'):
     with settings(warn_only=True):
         "Build services for infrastructure"
         if env.boot2docker:
             local('docker-machine start capco')
-        env.compose('build')
+        env.compose('build'+('', '  --no-cache')[use_cache == 'false'])
 
 
 @task
@@ -27,9 +27,9 @@ def up():
 @task
 def stop():
     "Stop the infrastructure"
+    env.compose('stop')
     if env.boot2docker:
         local('docker-machine stop capco')
-    env.compose('stop')
 
 
 @task

@@ -56,8 +56,10 @@ def locallinux():
 
 
 def ssh_into(service):
-    env.run('docker exec -t -i -u capco %s_%s_1 /bin/bash' % (env.project_name, service))
-
+    if env.boot2docker:
+        env.run('eval "$(docker-machine env capco)" && docker exec -t -i -u capco %s_%s_1 /bin/bash' % (env.project_name, service))
+    else:
+        env.run('docker exec -t -i -u capco %s_%s_1 /bin/bash' % (env.project_name, service))
 
 def command(command_name, service, directory=".", user="capco"):
     if env.lxc:
@@ -66,7 +68,6 @@ def command(command_name, service, directory=".", user="capco"):
         env.run('eval "$(docker-machine env capco)" && docker exec -t -i %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
     else:
         env.run('docker exec -t -i %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
-
 
 def compose_run(command_name, service, directory=".", user="root", no_deps=False):
     if no_deps:

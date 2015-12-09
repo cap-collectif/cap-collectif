@@ -1,0 +1,94 @@
+frontend:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    true
+            snippets: true
+    extensions:
+        Behat\Symfony2Extension: ~
+        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+            url: http://mailcatchersmtp
+        SensioLabs\Behat\PageObjectExtension:
+            namespaces:
+                page: [ Capco\AppBundle\Behat\Page ]
+        Behat\MinkExtension:
+            base_url: 'http://0.0.0.0:80/'
+            sessions:
+               default:
+                   symfony2: ~
+    suites:
+        front:
+            paths: [ %paths.base%/features/front ]
+            contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Alex\MailCatcher\Behat\MailCatcherContext
+            filters:
+                tags: "~@javascript"
+
+javascript:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    true
+            snippets: true
+    extensions:
+        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+            url: http://mailcatchersmtp
+        SensioLabs\Behat\PageObjectExtension:
+            namespaces:
+                page: [ Capco\AppBundle\Behat\Page ]
+        Behat\MinkExtension:
+            base_url: 'http://application/'
+            browser_name: firefox
+            sessions:
+               default:
+                    selenium2:
+                        capabilities:
+                            version: ''
+                        wd_host: http://selenium:4444/wd/hub
+    suites:
+        javascript:
+            paths: [ %paths.base%/features/front ]
+            contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Alex\MailCatcher\Behat\MailCatcherContext
+            filters:
+                tags: "@javascript"
+
+commands:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: true
+    extensions:
+        Behat\Symfony2Extension: ~
+    suites:
+        commands:
+            paths: [ %paths.base%/features/commands ]
+            contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Capco\AppBundle\Behat\CommandContext
+
+api:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: true
+    extensions:
+        Behat\Symfony2Extension: ~
+        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+            url: http://mailcatchersmtp
+    suites:
+        api:
+            paths: [ %paths.base%/features/api ]
+            contexts:
+                - Capco\AppBundle\Behat\ApiContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Alex\MailCatcher\Behat\MailCatcherContext
+            filters:
+               tags: "~@synthesis"

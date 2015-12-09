@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM debian:jessie
 
 MAINTAINER Bastien Jaillot <bjaillot@jolicode.com>
 

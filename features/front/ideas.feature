@@ -90,17 +90,17 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
 
 # Comments
 
-Scenario: Can not comment an uncommentable idea
-  Given I visited "ideas page"
-  And I follow "ideaNotCommentable"
-  Then I should not see "Commenter"
+  Scenario: Can not comment an uncommentable idea
+    Given I visited "idea page" with:
+     | slug | ideanotcommentable |
+    Then I should not see "Commenter"
 
   ## Add a comment
 
   @database @javascript
   Scenario: Anonymous wants to comment an idea
-    Given I visited "ideas page"
-    And I follow "ideaCommentable"
+    Given I visited "idea page" with:
+     | slug | ideacommentable |
     And I wait 5 seconds
     And I fill in the following:
       | body        | J'ai un truc à dire |
@@ -116,8 +116,8 @@ Scenario: Can not comment an uncommentable idea
   @database @javascript
   Scenario: Logged in user wants to comment an idea
     Given I am logged in as user
-    And I visited "ideas page"
-    And I follow "ideaCommentable"
+    Given I visited "idea page" with:
+     | slug | ideacommentable |
     And I wait 5 seconds
     And I fill in the following:
       | body        | J'ai un truc à dire |
@@ -129,8 +129,8 @@ Scenario: Can not comment an uncommentable idea
 
   @database @javascript
   Scenario: Anonymous wants to comment an idea without email
-    Given I visited "ideas page"
-    And I follow "ideaCommentable"
+    Given I visited "idea page" with:
+     | slug | ideacommentable |
     And I wait 5 seconds
     And I fill in the following:
       | body        | J'ai un truc à dire |

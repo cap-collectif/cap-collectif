@@ -8,18 +8,17 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-31                       |
-    And I wait 5 seconds
     And I go on the sources tab
     And I should see "Aucune source proposée"
     When I want to add a source
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
     | sourceLink   | http://www.google.fr     |
     | sourceTitle  | Titre de la source       |
     | sourceBody   | Contenu de la source     |
     And I select "Politique" from "sourceCategory"
     And I click the ".modal-footer .btn-primary" element
-    And I wait "5" seconds
+    And I wait "1" seconds
     Then I should see "1 source"
 
   @javascript
@@ -30,7 +29,6 @@ Feature: Source
       | stepSlug           | collecte-des-avis-pour-une-meilleur-strategie         |
       | opinionTypeSlug    | causes                                                |
       | opinionSlug        | opinion-51                                            |
-    And I wait 5 seconds
     And I go on the sources tab
     Then I should not see "Proposer une source"
 
@@ -42,7 +40,6 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
-    And I wait 5 seconds
     And I go on the sources tab
     When I vote for the first source
     Then I should see "Annuler mon vote"
@@ -54,20 +51,20 @@ Feature: Source
   Scenario: Author of a source loose their votes when updating it
     Given I am logged in as user
     And I visited "opinion page" with:
-      | projectSlug | croissance-innovation-disruption |
+      | projectSlug      | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I go on the sources tab
     And The first source vote counter should be "1"
     When I click the "#source-13 .source__btn--edit" element
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I check "capco_app_source_confirm"
     And I press "Modifier"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Merci ! Votre source a bien été modifiée."
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I go on the sources tab
     And The first source vote counter should be "0"
 
@@ -75,18 +72,18 @@ Feature: Source
   Scenario: Author of a source try to update without checking the confirm checkbox
     Given I am logged in as user
     And I visited "opinion page" with:
-      | projectSlug | croissance-innovation-disruption |
+      | projectSlug      | croissance-innovation-disruption |
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I go on the sources tab
     When I click the "#source-13 .source__btn--edit" element
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
       | capco_app_source_body      | Je modifie ma source !   |
     And I press "Modifier"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should not see "Merci ! Votre source a bien été modifiée."
 
   @javascript
@@ -97,7 +94,7 @@ Feature: Source
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I go on the sources tab
     Then I should not see "Modifier" in the "#source-13" element
 

@@ -1,10 +1,10 @@
 imports:
-  - { resource: config_dev.yml }
+    - { resource: config_dev.yml }
 
 framework:
   test: ~
   session:
-    storage_id: session.storage.filesystem
+    storage_id: session.storage.mock_file
   profiler:
     collect: false
 
@@ -19,9 +19,24 @@ swiftmailer:
     service:
       disable_delivery: true
 
-doctrine:
-  dbal:
-    default_connection: default
-    connections:
-      default:
-        dbname: "%database_name%_test"
+monolog:
+    handlers:
+        main:
+            type:   stream
+            path:   php://stderr
+            level:  info
+        console:
+            type:   console
+            bubble: false
+            verbosity_levels:
+                VERBOSITY_VERBOSE: INFO
+                VERBOSITY_VERY_VERBOSE: DEBUG
+            channels: ["!doctrine"]
+        console_very_verbose:
+            type:   console
+            bubble: false
+            verbosity_levels:
+                VERBOSITY_VERBOSE: NOTICE
+                VERBOSITY_VERY_VERBOSE: NOTICE
+                VERBOSITY_DEBUG: DEBUG
+            channels: ["doctrine"]

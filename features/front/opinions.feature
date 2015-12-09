@@ -128,4 +128,3 @@ Feature: Opinions
     And I should see "Titre" in the "#links-list" element
 
 
-

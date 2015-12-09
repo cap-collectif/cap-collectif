@@ -71,48 +71,48 @@ Scenario: Archived events can be filtered by title
   When I fill in the following:
     | capco_app_event_search_term | ParisWeb2014 |
   And I click the ".filter__search .btn" element
-  And I wait 5 seconds
+  And I wait 1 seconds
   Then I should see 1 ".event" elements
   And I should see "ParisWeb2014"
   And I should not see "PHPTour2014"
 
 @database @javascript
 Scenario: Anonymous wants to comment an event
-  Given I visited "events page"
-  And I follow "Event with registrations"
-  And I wait 5 seconds
+  Given I visited eventpage with:
+    | slug | event-with-registrations |
+  And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
   And I fill in the following:
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
   When I press "Commenter"
-  And I wait 5 seconds
+  And I wait 1 seconds
   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
 @database @javascript
 Scenario: Logged in user wants to comment an event
   Given I am logged in as user
-  And I visited "events page"
-  And I follow "Event with registrations"
-  And I wait 5 seconds
+  And I visited eventpage with:
+    | slug | event-with-registrations |
+  And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
   And I should not see "Commenter avec mon compte"
   And I should not see "Commenter sans créer de compte"
   When I press "Commenter"
-  And I wait 5 seconds
+  And I wait 1 seconds
   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
 @javascript
 Scenario: Anonymous wants to comment an event without email
-  Given I visited "events page"
-  And I follow "Event with registrations"
-  And I wait 5 seconds
+  Given I visited eventpage with:
+    | slug | event-with-registrations |
+  And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
   And I fill in the following:
     | authorName  | Naruto              |
   When I press "Commenter"
-  And I wait 5 seconds
+  And I wait 1 seconds
   Then I should not see "J'ai un truc à dire" in the ".opinion__list" element

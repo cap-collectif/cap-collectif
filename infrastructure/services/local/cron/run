@@ -1,8 +1,13 @@
 #!/bin/bash
 
-sleep 10
+# Wait till php-fpm is booted
+while ! /etc/init.d/php5-fpm status > /dev/null 2>&1; do sleep 1; done
+
+# Wait till mysql database is ready to use
+while ! mysql --host=127.0.0.1 -uroot symfony > /dev/null 2>&1; do sleep 1; done
 
 # We install the crontab
+echo "Installing crontab..."
 crontab /etc/cron.d/crontab
 
 exec cron -f

@@ -6,6 +6,7 @@ cluster.name: capco
 node.local: true
 discovery.zen.ping.multicast: false
 
+
 # Set this to false to disable all exporting of data.
 # Set this on the monitoring cluster, which is used to receive and analyze data from production,
 # to avoid collecting data from the monitoring cluster itself.
