@@ -16,6 +16,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Util\Codes;
+use Capco\AppBundle\Entity\OpinionAppendix;
 
 class ConsultationStepsController extends FOSRestController
 {
@@ -42,14 +43,13 @@ class ConsultationStepsController extends FOSRestController
         $opinion = (new Opinion())
             ->setAuthor($user)
             ->setStep($step)
-            ->setIsEnabled(true);
+            ->setIsEnabled(true)
+        ;
 
-        $form = $this->createForm('api_opinion', $opinion);
+        $form = $this->createForm('opinion', $opinion, ['action' => 'create']);
         $form->submit($request->request->all());
 
         $consultationStepType = $step->getConsultationStepType();
-
-        $availablesOpinionTypes = $this->get('capco.opinion_types.resolver')->getAvailableLinkTypesForConsultationStepType($consultationStepType);
 
         $opinionType = $opinion->getOpinionType();
 
@@ -57,40 +57,42 @@ class ConsultationStepsController extends FOSRestController
             throw new BadRequestHttpException('This opinionType is not enabled.');
         }
 
-        if (is_object($availablesOpinionTypes)) {
-            $availablesOpinionTypes = $availablesOpinionTypes->toArray();
-        }
-
-        if (!in_array($opinionType, $availablesOpinionTypes)) {
-            throw new BadRequestHttpException('This opinionType is not available.');
+        if ($request->request->get('link') && !$opinionType->isLinkable()) {
+            throw new BadRequestHttpException('This opinion type is not linkable.');
         }
 
         $em = $this->get('doctrine.orm.entity_manager');
 
-        // TODO à tester
-        $mustHaveAppendixTypes = $em->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
-                                    ->findBy(['opinionType' => $opinionType]);
-        $appendices = $opinion->getAppendices();
-        foreach ($mustHaveAppendixTypes as $appendixType) {
-            $found = false;
-            foreach ($appendices as $appendix) {
-                if ($appendix->getAppendixType() == $appendixType) {
-                    $found = true;
-                }
-            }
-            if (!$found) {
-                throw new BadRequestHttpException('Unable to find AppendixType');
-            }
-        }
-        //
-
         if ($form->isValid()) {
 
             // ce truc devrait être dans un event genre prePersit... mais au final le précédent controlleur devrait disparaître sous peu
-            $currentMaximumPosition = $this->get('capco.opinion_types.resolver')
-                                           ->getMaximumPositionByOpinionTypeAndStep($opinionType, $step);
+            $currentMaximumPosition = $this
+                ->get('capco.opinion_types.resolver')
+                ->getMaximumPositionByOpinionTypeAndStep($opinionType, $step)
+            ;
             $opinion->setPosition($currentMaximumPosition + 1);
-            //
+
+            $otats = $this->get('doctrine.orm.entity_manager')
+                ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
+                ->findBy(
+                    ['opinionType' => $opinion->getOpinionType()],
+                    ['position'    => 'ASC']
+            );
+            $appendices = $opinion->getAppendices();
+            foreach ($otats as $otat) {
+                $found = false;
+                foreach ($appendices as $appendix) {
+                    if ($appendix->getAppendixType() == $otat->getAppendixType()) {
+                        $found = true;
+                    }
+                }
+                if (!$found) {
+                    $app = new OpinionAppendix();
+                    $app->setAppendixType($otat->getAppendixType());
+                    $app->setOpinion($opinion);
+                    $opinion->addAppendice($app);
+                }
+            }
 
             $em->persist($opinion);
             $em->flush();

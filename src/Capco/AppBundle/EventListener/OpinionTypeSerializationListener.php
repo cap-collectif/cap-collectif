@@ -44,13 +44,14 @@ class OpinionTypeSerializationListener implements EventSubscriberInterface
             $context = new SerializationContext();
             $context->setGroups(["OpinionTypeDetails"]);
             $serializedTypes = $this->serializer->serialize(
-                $availableTypes,
+                ['data' => $availableTypes],
                 'json',
                 $context
             );
+
             $event->getVisitor()->addData(
                 'availableLinkTypes',
-                json_decode($serializedTypes)
+                json_decode($serializedTypes,true)['data']
             );
         }
     }

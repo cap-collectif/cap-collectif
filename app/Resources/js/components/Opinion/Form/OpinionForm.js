@@ -3,10 +3,12 @@ import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import Input from '../../Form/Input';
+import ArrayHelper from '../../../services/ArrayHelper';
 
-const OpinionLinkForm = React.createClass({
+const OpinionForm = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
+    action: React.PropTypes.bool.isRequired,
     availableTypes: React.PropTypes.array.isRequired,
     isSubmitting: React.PropTypes.bool.isRequired,
     onValidationFailure: React.PropTypes.func.isRequired,
@@ -27,6 +29,7 @@ const OpinionLinkForm = React.createClass({
         title: [],
         body: [],
       },
+      custom: {},
     };
   },
 
@@ -34,8 +37,18 @@ const OpinionLinkForm = React.createClass({
     if (nextProps.isSubmitting === true) {
       if (this.isValid()) {
         const step = this.props.opinion.step;
+        const appendices = [];
+        const form = this.state.form;
+        Object.keys(this.state.custom).map((key) => {
+          const appendixType = key.split('-')[1];
+          appendices.push({
+            body: this.state.custom[key],
+            appendixType: appendixType,
+          });
+        });
+        form.appendices = appendices;
         OpinionLinkActions
-          .add(step.projectId, step.id, this.state.form)
+          .add(step.projectId, step.id, form)
           .then(() => {
             this.setState(this.getInitialState());
             this.props.onSubmitSuccess();
@@ -48,6 +61,34 @@ const OpinionLinkForm = React.createClass({
 
       this.props.onValidationFailure();
     }
+  },
+
+  onTypeChange(ev) {
+    const type = parseInt(ev.target.value);
+    this.updateAppendices(type);
+  },
+
+  updateAppendices(type) {
+    const appendixTypes = this.getAppendixTypeForType(type);
+    const form = this.state.form;
+    const custom = {};
+    form.type = type;
+    appendixTypes.map((appendixType) => {
+      const ref = 'appendix-' + appendixType.id;
+      custom[ref] = null;
+    });
+    this.setState({
+      form: form,
+      custom: custom,
+    });
+  },
+
+  getAppendixTypeForType(type) {
+    const selectedType = ArrayHelper.getElementFromArray(this.props.availableTypes, type);
+    if (selectedType) {
+      return selectedType.appendixTypes;
+    }
+    return [];
   },
 
   formValidationRules: {
@@ -73,12 +114,14 @@ const OpinionLinkForm = React.createClass({
   },
 
   render() {
+    const selectedType = ArrayHelper.getElementFromArray(this.props.availableTypes, parseInt(this.state.form.type));
+    const appendixTypes = selectedType ? selectedType.appendixTypes : [];
     return (
       <form id="opinion-links-form" ref="form">
         <Input
           type="select"
-          valueLink={this.linkState('form.type')}
           ref="type"
+          onChange={this.onTypeChange}
           label={this.getIntlMessage('opinion.link.type')}
           groupClassName={this.getGroupStyle('type')}
           errors={this.renderFormErrors('type')}
@@ -108,10 +151,26 @@ const OpinionLinkForm = React.createClass({
           errors={this.renderFormErrors('body')}
         />
 
+        {
+          appendixTypes.map((appendixType) => {
+            const key = 'appendix-' + appendixType.id;
+            return (
+              <Input
+                id={'opinion_' + key}
+                type="editor"
+                label={appendixType.title}
+                groupClassName={this.getGroupStyle(key)}
+                valueLink={this.linkState('custom.' + key)}
+                errors={this.renderFormErrors(key)}
+              />
+            );
+          })
+        }
+
       </form>
     );
   },
 
 });
 
-export default OpinionLinkForm;
+export default OpinionForm;

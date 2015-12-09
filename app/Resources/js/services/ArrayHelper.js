@@ -9,6 +9,14 @@ class ArrayHelper {
     return index;
   }
 
+  getElementFromArray(els, value, uniqueField = 'id', secondUniqueField = null) {
+    let index = -1;
+    index = els.map((e) => {
+      return secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField];
+    }).indexOf(value);
+    return els[index];
+  }
+
   addElementToArray(els, el, uniqueField = 'id', secondUniqueField = null) {
     const index = this.getElementIndexFromArray(els, el, uniqueField, secondUniqueField);
     if (index === -1) {

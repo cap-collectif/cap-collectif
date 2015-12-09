@@ -88,4 +88,14 @@ class OpinionTypeAppendixType
 
         return $this;
     }
+
+    public function getAppendixTypeTitle()
+    {
+        return $this->appendixType ? $this->appendixType->getTitle() : null;
+    }
+
+    public function getAppendixTypeId()
+    {
+        return $this->appendixType ? $this->appendixType->getId() : null;
+    }
 }

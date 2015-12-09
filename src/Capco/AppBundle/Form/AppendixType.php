@@ -20,6 +20,15 @@ class AppendixType extends AbstractType
                 'required'    => false,
                 'config_name' => 'user_editor',
             ])
+            ->add('appendixType', null, [
+                'required' => true,
+                'attr' => [
+                    'class' => 'hidden',
+                ],
+                'label_attr' => [
+                    'class' => 'hidden'
+                ],
+            ])
         ;
     }
 

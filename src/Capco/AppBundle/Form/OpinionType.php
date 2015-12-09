@@ -6,9 +6,20 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
+use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
+use Doctrine\ORM\EntityManager;
 
-class OpinionsType extends AbstractType
+class OpinionType extends AbstractType
 {
+    protected $em;
+
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -36,10 +47,45 @@ class OpinionsType extends AbstractType
                 'required'    => true,
                 'config_name' => 'user_editor',
             ])
+            ->add('OpinionType', null, [
+                'required' => true,
+                'attr' => [
+                    'class' => 'hidden',
+                ],
+                'label_attr' => [
+                    'class' => 'hidden'
+                ],
+            ])
+            ->add('link', 'hidden', [
+                'required' => false,
+                'mapped' => false,
+            ])
             ->add('appendices', 'collection', [
                 'type'  => new AppendixType(),
                 'label' => false,
+                'required' => false,
+                'allow_add' => true,
+                'by_reference' => false,
             ])
+            ->addEventListener(
+                FormEvents::POST_SUBMIT,
+                function(FormEvent $event) {
+                    $linkId =
+                    $entity = $event->getForm()->getData();
+                    $entity->addParentConnection(
+                        $event->getForm()->get('link')->getData()
+                    );
+                }
+            )
+        ;
+
+        $transformer = new EntityToIdTransformer($this->em);
+        $transformer->setEntityClass('Capco\AppBundle\Entity\Opinion');
+        $transformer->setEntityRepository('CapcoAppBundle:Opinion');
+
+        $builder
+            ->get('link')
+            ->addModelTransformer($transformer)
         ;
     }
 
@@ -50,8 +96,7 @@ class OpinionsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => 'Capco\AppBundle\Entity\Opinion',
-            'csrf_protection'    => true,
-            'csrf_field_name'    => '_token',
+            'csrf_protection'    => false,
             'translation_domain' => 'CapcoAppBundle',
             'action' => 'create',
         ]);

@@ -14,6 +14,7 @@ export default {
       title: data.title,
       body: data.body,
       link: data.link,
+      appendices: data.appendices,
     };
 
     return Fetcher

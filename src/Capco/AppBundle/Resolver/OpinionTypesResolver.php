@@ -145,13 +145,10 @@ class OpinionTypesResolver
 
     public function getAvailableLinkTypesForConsultationStepType(ConsultationStepType $consultationStepType)
     {
-        $ots = [];
-        foreach ($consultationStepType->getOpinionTypes() as $ot) {
-            if ($ot->getIsEnabled() && $ot->isLinkable()) {
-                $ots[] = $ot;
-            }
-        }
-        return $ots;
+        return $this
+            ->opinionTypeRepo
+            ->getLinkableOpinionTypesForConsultationStepType($consultationStepType)
+        ;
 
     }
 }

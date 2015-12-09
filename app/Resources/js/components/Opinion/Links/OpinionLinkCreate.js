@@ -2,7 +2,7 @@ import OpinionLinkCreateButton from './OpinionLinkCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import OpinionLinkCreateInfos from './OpinionLinkCreateInfos';
-import OpinionLinkForm from './OpinionLinkForm';
+import OpinionForm from './../Form/OpinionForm';
 import OpinionTypeActions from '../../../actions/OpinionTypeActions';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
 
@@ -74,7 +74,8 @@ const OpinionLinkCreate = React.createClass({
           </Modal.Header>
           <Modal.Body>
             <OpinionLinkCreateInfos opinion={this.props.opinion} />
-            <OpinionLinkForm
+            <OpinionForm
+              action="create"
               opinion={this.props.opinion}
               availableTypes={this.state.availableTypes}
               isSubmitting={this.state.isSubmitting}

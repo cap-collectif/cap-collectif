@@ -66,7 +66,6 @@ const ProposalForm = React.createClass({
     });
   },
 
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSubmitting === true) {
       if (this.isValid()) {

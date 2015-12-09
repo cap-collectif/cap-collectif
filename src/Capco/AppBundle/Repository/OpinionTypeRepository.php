@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 /**
@@ -116,6 +117,23 @@ class OpinionTypeRepository extends NestedTreeRepository
         $qb = $this->createQueryBuilder('ot')
             ->where('ot.parent IS NULL')
             ->orderBy('ot.position', 'ASC')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getLinkableOpinionTypesForConsultationStepType(ConsultationStepType $consultationStepType)
+    {
+        $qb = $this->createQueryBuilder('ot')
+            ->addSelect('otat', 'at')
+            ->leftJoin('ot.appendixTypes', 'otat')
+            ->leftJoin('otat.appendixType', 'at')
+            ->andWhere('ot.isEnabled = :enabled')
+            ->andWhere('ot.linkable = :linkable')
+            ->andWhere('ot.consultationStepType = :type')
+            ->setParameter('enabled', true)
+            ->setParameter('linkable', true)
+            ->setParameter('type', $consultationStepType)
         ;
 
         return $qb->getQuery()->getResult();

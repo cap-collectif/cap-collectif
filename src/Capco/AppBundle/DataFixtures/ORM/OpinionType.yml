@@ -65,12 +65,13 @@ Capco\AppBundle\Entity\OpinionType:
         votesThresholdHelpText: <text(200)>
         consultationStepType: @typePJL
         parent: @opinionType5ter
+        linkable: true
     opinionType6:
         title: Sous-partie 1
         position: 1
         color: orange
         defaultFilter: positions
-        isEnabled: false
+        isEnabled: true
         versionable: true
         linkable: true
         votesHelpText: <text(200)>

@@ -58,3 +58,8 @@ Capco\AppBundle\Entity\OpinionType:
             type: string
             serialized_name: votesThresholdHelpText
             groups: [Opinions, OpinionVersions]
+        appendixTypes:
+          expose: true
+          type: Capco\AppBundle\Entity\OpinionTypeAppendixType
+          serialized_name: appendixTypes
+          groups: [OpinionTypeDetails]
