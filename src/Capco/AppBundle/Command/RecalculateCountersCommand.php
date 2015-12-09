@@ -11,7 +11,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('capco:recalculate-counters')
+            ->setName('capco:compute:counters')
             ->setDescription('Recalculate the application counters')
         ;
     }

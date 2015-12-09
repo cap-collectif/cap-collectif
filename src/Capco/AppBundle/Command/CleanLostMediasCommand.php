@@ -12,7 +12,7 @@ class CleanLostMediasCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('capco:clean-lost-medias')
+            ->setName('capco:clean:lost-medias')
             ->setDescription('Remove all user media that are not available anymore')
             ->addOption('force', false, InputOption::VALUE_NONE, 'set this option to force the operation')
         ;

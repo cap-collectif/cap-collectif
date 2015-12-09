@@ -7,7 +7,7 @@ Scenario: Admin want to update synthesis data
 
 @database
 Scenario: Admin want to recalculate synthesis counters
-  Given I run "capco:syntheses:recalculate-counters -e test"
+  Given I run "capco:syntheses:counters -e test"
   Then the command exit code should be 0
 
 @database

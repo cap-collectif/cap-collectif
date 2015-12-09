@@ -131,7 +131,7 @@ class ReinitCommand extends ContainerAwareCommand
 
     protected function recalculateCounters(OutputInterface $output)
     {
-        $command = $this->getApplication()->find('capco:recalculate-counters');
+        $command = $this->getApplication()->find('capco:compute:counters');
         $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
@@ -139,7 +139,7 @@ class ReinitCommand extends ContainerAwareCommand
 
     protected function recalculateProjectsCounters(OutputInterface $output)
     {
-        $command = $this->getApplication()->find('capco:recalculate-projects-counters');
+        $command = $this->getApplication()->find('capco:compute:projects-counters');
         $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
@@ -147,7 +147,7 @@ class ReinitCommand extends ContainerAwareCommand
 
     protected function recalculateRankings(OutputInterface $output)
     {
-        $command = $this->getApplication()->find('capco:recalculate-rankings');
+        $command = $this->getApplication()->find('capco:compute:rankings');
         $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
@@ -165,7 +165,7 @@ class ReinitCommand extends ContainerAwareCommand
         $input->setInteractive(false);
         $command->run($input, $output);
 
-        $command = $this->getApplication()->find('capco:syntheses:recalculate-counters');
+        $command = $this->getApplication()->find('capco:syntheses:counters');
         $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);

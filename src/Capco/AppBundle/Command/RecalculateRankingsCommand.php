@@ -11,7 +11,7 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('capco:recalculate-rankings')
+            ->setName('capco:compute:rankings')
             ->setDescription('Recalculate the rankings')
         ;
     }

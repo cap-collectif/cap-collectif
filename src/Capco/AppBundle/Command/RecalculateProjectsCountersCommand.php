@@ -11,7 +11,7 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('capco:recalculate-projects-counters')
+            ->setName('capco:compute:projects-counters')
             ->setDescription('Recalculate the projects counters')
         ;
     }

@@ -11,7 +11,7 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('capco:syntheses:recalculate-counters')
+            ->setName('capco:syntheses:counters')
             ->setDescription('Recalculate the syntheses counters')
         ;
     }

@@ -14,7 +14,7 @@ class CreateAccountsFromEmailsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('capco:create-user-acounts-from-emails')
+            ->setName('capco:import:user-acounts-from-emails')
             ->setDescription('Create users from a list of emails')
             ->addOption('force', false, InputOption::VALUE_NONE, 'set this option to force the creation')
         ;

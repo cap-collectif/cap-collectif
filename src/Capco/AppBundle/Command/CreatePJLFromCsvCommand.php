@@ -119,7 +119,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-        ->setName('import:pjl-from-csv')
+        ->setName('capco:import:pjl-from-csv')
         ->setDescription('Import from CSV file');
     }
 
