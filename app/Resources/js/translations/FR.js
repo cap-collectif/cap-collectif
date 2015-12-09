@@ -113,7 +113,6 @@ export default {
         },
         info: 'Votre proposition sera liée à :',
         infos: 'Merci d\'examiner les propositions existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
-        opinion: 'Proposition liée :',
         type: 'Type de proposition*',
       },
       no_new_link: 'Aucune proposition liée',

@@ -13,10 +13,6 @@ const OpinionBody = React.createClass({
     return !!this.props.opinion.parent;
   },
 
-  hasLink() {
-    return !!this.props.opinion.link;
-  },
-
   render() {
     const opinion = this.props.opinion;
 
@@ -37,24 +33,6 @@ const OpinionBody = React.createClass({
             : null
           }
           <div dangerouslySetInnerHTML={{__html: prettyDiff}} />
-        </div>
-      );
-    }
-
-    if (this.hasLink()) {
-      return (
-        <div>
-          <div>
-            <p className="control-label h5">
-              {this.getIntlMessage('opinion.link.opinion')}
-              { ' ' }
-              <a href={this.props.opinion.link._links.show}>
-                {this.props.opinion.link.title}
-              </a>
-            </p>
-            <br />
-          </div>
-          <OpinionBodyDiffContent opinion={opinion} />
         </div>
       );
     }

@@ -166,7 +166,8 @@ class Opinion implements SelfLinkableInterface, VotableInterface
         $this->Sources = new ArrayCollection();
         $this->versions = new ArrayCollection();
         $this->appendices = new ArrayCollection();
-        $this->connections = new ArrayCollection();
+        $this->childConnections = new ArrayCollection();
+        $this->parentConnections = new ArrayCollection();
 
         $this->updatedAt = new \Datetime();
         $this->createdAt = new \Datetime();
@@ -781,4 +782,25 @@ class Opinion implements SelfLinkableInterface, VotableInterface
             $this->OpinionType->removeOpinion($this);
         }
     }
+
+    public function getConnections($filter = 'last')
+    {
+        $connections = array_merge(
+            $this->childConnections->toArray(),
+            $this->parentConnections->toArray()
+        );
+
+        if ($filter === 'old') {
+            usort($connections, function($a, $b) {
+               return $a->getCreatedAt() > $b->getCreatedAt() ? 1 : -1;
+            });
+        } elseif ($filter === 'last') {
+            usort($connections, function($a, $b) {
+                return $a->getCreatedAt() < $b->getCreatedAt() ? 1 : -1;
+            });
+        }
+
+        return $connections;
+    }
+
 }

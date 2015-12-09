@@ -50,35 +50,17 @@ class OpinionRepository extends EntityRepository
     public function getOne($id)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'ot', 's', 'appendix')
+            ->addSelect('a', 'm', 'ot', 's', 'appendix', 'childConnections', 'parentConnections')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.step', 's')
             ->leftJoin('o.appendices', 'appendix')
+            ->leftJoin('o.childConnections', 'childConnections')
+            ->leftJoin('o.parentConnections', 'parentConnections')
             ->andWhere('o.id = :id')
             ->setParameter('id', $id)
         ;
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
-    public function getOneWithEnabledConnectionsOrdered($id, $filter = 'last')
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('connection')
-            ->leftJoin('o.connections', 'connection')
-            ->andWhere('connection.isEnabled = true')
-            ->andWhere('connection.isTrashed = false')
-            ->andWhere('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        if ($filter === 'old') {
-            $qb->addOrderBy('connection.createdAt', 'ASC');
-        } elseif ($filter === 'last') {
-            $qb->addOrderBy('connection.createdAt', 'DESC');
-        }
 
         return $qb->getQuery()->getOneOrNullResult();
     }

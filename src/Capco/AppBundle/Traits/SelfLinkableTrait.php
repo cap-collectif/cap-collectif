@@ -8,51 +8,75 @@ use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 
 trait SelfLinkableTrait
 {
-    protected $link;        // relations are added dynamically
-    protected $connections; // add new ArrayCollection() in the constructor of the class using the trait
+    protected $childConnections; // add new ArrayCollection() in the constructor of the class using the trait
+    protected $parentConnections; // add new ArrayCollection() in the constructor of the class using the trait
 
     /**
      * @ORM\Column(name="connections_count", type="integer")
      */
     protected $connectionsCount = 0;
 
-    public function getLink()
+    public function getChildConnections()
     {
-        return $this->link;
+        return $this->childConnections;
     }
 
-    public function setLink(SelfLinkableInterface $link)
+    public function setChildConnections($childConnections)
     {
-        $this->link = $link;
-        $link->addConnection($this);
+        $this->childConnections = $childConnections;
 
         return $this;
     }
 
-    public function getConnections()
+    public function addChildConnection(SelfLinkableInterface $childConnection)
     {
-        return $this->connections;
-    }
-
-    public function setConnections($connections)
-    {
-        $this->connections = $connections;
-
-        return $this;
-    }
-
-    public function addConnection(SelfLinkableInterface $connection)
-    {
-        if (!$this->connections->contains($connection)) {
-            $this->connections->add($connection);
+        if (!$this->childConnections->contains($childConnection)) {
+            $this->childConnections->add($childConnection);
+            $this->connectionsCount++;
         }
 
         return $this;
     }
 
-    public function removeConnection(SelfLinkableInterface $connection)
+    public function removeChildConnection(SelfLinkableInterface $childConnection)
     {
-        $this->connections->removeElement($connection);
+        $this->childConnections->removeElement($childConnection);
+        $this->connectionsCount--;
+
+        return $this;
+    }
+
+    public function getParentConnections()
+    {
+        return $this->parentConnections;
+    }
+
+    public function setParentConnections($parentConnections)
+    {
+        $this->parentConnections = $parentConnections;
+        foreach ($parentConnections as $pc) {
+            $pc->addChildConnection($this);
+        }
+
+        return $this;
+    }
+
+    public function addParentConnection(SelfLinkableInterface $parentConnection = null)
+    {
+        if ($parentConnection && !$this->parentConnections->contains($parentConnection)) {
+            $this->parentConnections->add($parentConnection);
+            $parentConnection->addChildConnection($this);
+            $this->connectionsCount++;
+        }
+
+        return $this;
+    }
+
+    public function removeParentConnection(SelfLinkableInterface $parentConnection)
+    {
+        $this->parentConnections->removeElement($parentConnection);
+        $parentConnection->removeChildConnection($this);
+        $this->connectionsCount--;
 
         return $this;
     }
@@ -73,5 +97,10 @@ trait SelfLinkableTrait
         $this->connectionsCount = $connectionsCount;
 
         return $this;
+    }
+
+    public function getConnections()
+    {
+        return array_merge($this->childConnections->toArray(), $this->parentConnections->toArray());
     }
 }

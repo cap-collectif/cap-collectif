@@ -4,9 +4,11 @@ namespace Capco\AppBundle\Entity\Interfaces;
 
 interface SelfLinkableInterface
 {
-    public function getLink();
-    public function setLink(SelfLinkableInterface $link);
     public function getConnections();
-    public function addConnection(SelfLinkableInterface $connection);
-    public function removeConnection(SelfLinkableInterface $connection);
+    public function getChildConnections();
+    public function addChildConnection(SelfLinkableInterface $childConnection);
+    public function removeChildConnection(SelfLinkableInterface $childConnection);
+    public function getParentConnections();
+    public function addParentConnection(SelfLinkableInterface $parentConnection);
+    public function removeParentConnection(SelfLinkableInterface $parentConnection);
 }

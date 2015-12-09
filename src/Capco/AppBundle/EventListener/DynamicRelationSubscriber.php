@@ -40,23 +40,20 @@ class DynamicRelationSubscriber implements EventSubscriber
             switch ($trait) {
                 case 'selflinkable':
                     if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
-                        $metadata->mapManyToOne([
+                        $metadata->mapManyToMany([
                             'targetEntity' => $metadata->getName(),
-                            'fieldName'    => 'link',
+                            'fieldName'    => 'childConnections',
                             'cascade'      => ['persist'],
-                            'inversedBy'   => 'connections',
-                            'joinColumns'  => [
-                                [
-                                    'onDelete' => 'SET NULL',
-                                ],
+                            'inversedBy' => 'parentConnections',
+                            'joinTable' => [
+                                'name' => $metadata->getTableName() . '_relation',
                             ],
                         ]);
-
-                        $metadata->mapOneToMany([
+                        $metadata->mapManyToMany([
                             'targetEntity' => $metadata->getName(),
-                            'fieldName'    => 'connections',
+                            'fieldName'    => 'parentConnections',
                             'cascade'      => ['persist'],
-                            'mappedBy'     => 'link',
+                            'mappedBy' => 'childConnections',
                         ]);
                     }
                 break;

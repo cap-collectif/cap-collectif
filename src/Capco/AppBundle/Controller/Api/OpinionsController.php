@@ -54,7 +54,6 @@ class OpinionsController extends FOSRestController
         $opinionWithArguments = $repo->getWithArguments($id);
         $opinionWithSources = $repo->getWithSources($id);
         $opinionWithVotes = $repo->getWithVotes($id, 5);
-        $opinionWithConnections = $repo->getOneWithEnabledConnectionsOrdered($id);
 
         if (is_object($opinionWithArguments)) {
             $opinion->setArguments($opinionWithArguments->getArguments());
@@ -66,10 +65,6 @@ class OpinionsController extends FOSRestController
 
         if (is_object($opinionWithVotes)) {
             $opinion->setVotes($opinionWithVotes->getVotes());
-        }
-
-        if (is_object($opinionWithConnections)) {
-            $opinion->setConnections($opinionWithConnections->getConnections());
         }
 
         $project = $opinion->getStep()->getProject();
@@ -740,23 +735,20 @@ class OpinionsController extends FOSRestController
      * )
      *
      * @Get("/opinions/{id}/links")
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature" = true})
      * @QueryParam(name="filter", requirements="(old|last)", default="last")
-     * @View(statusCode=200, serializerGroups={"OpinionLinkPreviews", "UsersInfos"})
+     * @View(statusCode=200, serializerGroups={"Opinions", "OpinionLinkPreviews", "UsersInfos"})
      */
-    public function cgetOpinionLinksAction($id, ParamFetcherInterface $paramFetcher)
+    public function cgetOpinionLinksAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
     {
         $filter = $paramFetcher->get('filter');
 
-        $em = $this->get('doctrine.orm.entity_manager');
-        $opinion = $em->getRepository('CapcoAppBundle:Opinion')
-                      ->getOneWithEnabledConnectionsOrdered($id, $filter)
-                    ;
         if (!$opinion) {
             throw $this->createNotFoundException('The opinion does not exist');
         }
 
         return [
-            'links' => $opinion->getConnections(),
+            'links' => $opinion->getConnections($filter),
         ];
     }
 }

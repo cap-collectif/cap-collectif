@@ -44,11 +44,13 @@ class ConsultationStepsController extends FOSRestController
             ->setStep($step)
             ->setIsEnabled(true);
 
-        $form = $this->createForm(new OpinionForm(), $opinion);
+        $form = $this->createForm(
+            new OpinionForm($this->get('doctrine.orm.entity_manager')),
+            $opinion
+        );
         $form->handleRequest($request);
 
         $consultationStepType = $step->getConsultationStepType();
-        $link = $opinion->getLink();
 
         $availablesOpinionTypes = $this->get('capco.opinion_types.resolver')->getAvailableLinkTypesForConsultationStepType($consultationStepType);
 
