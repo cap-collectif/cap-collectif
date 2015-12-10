@@ -7,8 +7,7 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Capco\AppBundle\Form\AppendixType;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Doctrine\ORM\EntityManager;
@@ -59,10 +58,7 @@ class OpinionType extends AbstractType
         ;
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class'      => 'Capco\AppBundle\Entity\Opinion',
@@ -75,6 +71,6 @@ class OpinionType extends AbstractType
      */
     public function getName()
     {
-        return '';
+        return 'api_opinion';
     }
 }

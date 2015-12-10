@@ -4,31 +4,24 @@ namespace Capco\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 class OpinionsType extends AbstractType
 {
-    protected $action;
-
-    public function __construct($action)
-    {
-        $this->action = $action;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($this->action === 'edit') {
+        if ($options['action'] === 'edit') {
             $builder
                 ->add('confirm', 'checkbox', [
                     'mapped'      => false,
                     'label'       => 'opinion.form.confirm',
                     'required'    => true,
-                    'constraints' => [new True(['message' => 'opinion.votes_not_confirmed'])],
+                    'constraints' => [new IsTrue(['message' => 'opinion.votes_not_confirmed'])],
                 ])
             ;
         }
@@ -51,15 +44,16 @@ class OpinionsType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class'         => 'Capco\AppBundle\Entity\Opinion',
             'csrf_protection'    => true,
             'csrf_field_name'    => '_token',
             'translation_domain' => 'CapcoAppBundle',
+            'action' => 'create',
         ]);
     }
 
@@ -68,6 +62,6 @@ class OpinionsType extends AbstractType
      */
     public function getName()
     {
-        return 'capco_app_opinion';
+        return 'opinion';
     }
 }

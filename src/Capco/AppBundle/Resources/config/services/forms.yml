@@ -1,0 +1,22 @@
+services:
+
+  capco.help_extension:
+    class: Capco\AppBundle\Form\Extension\HelpExtension
+    tags:
+      - { name: form.type_extension, alias: text }
+
+  capco.form.type_extension.media:
+    class: Capco\AppBundle\Form\Extension\MediaTypeExtension
+    tags:
+      - { name: form.type_extension, alias: sonata_media_type }
+
+  capco.form.api.opinion:
+    class: Capco\AppBundle\Form\Api\OpinionType
+    arguments: [@doctrine.orm.entity_manager]
+    tags:
+      - { name: form.type, alias: api_opinion }
+
+  capco.form.opinion:
+      class: Capco\AppBundle\Form\OpinionsType
+      tags:
+        - { name: form.type, alias: opinion }

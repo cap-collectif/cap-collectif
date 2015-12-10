@@ -4,11 +4,11 @@ imports:
     - { resource: services/resolvers.yml }
     - { resource: services/twig.yml }
     - { resource: services/validators.yml }
+    - { resource: services/forms.yml }
 
 parameters:
   capco.notify.manager.class: Capco\AppBundle\Manager\Notify
   capco.toggle.manager.class: Capco\AppBundle\Toggle\Manager
-  capco.help_extension.class: Capco\AppBundle\Form\Extension\HelpExtension
   traits:
     selflinkable:
       interfaces:
@@ -27,11 +27,6 @@ services:
       - {name: doctrine.event_subscriber, event: loadClassMetadata}
     arguments: ["%traits%"]
 
-  capco.form.type_extension.media:
-    class: Capco\AppBundle\Form\Extension\MediaTypeExtension
-    tags:
-      - { name: form.type_extension, alias: sonata_media_type }
-
   ## Service Notify - send mail
   capco.notify_manager:
     class:     %capco.notify.manager.class%
@@ -47,11 +42,6 @@ services:
 
   capco.idea.helper:
     class: Capco\AppBundle\Helper\IdeaHelper
-
-  capco.help_extension:
-    class: %capco.help_extension.class%
-    tags:
-      - { name: form.type_extension, alias: text }
 
   capco.vote.subscriber:
     class: Capco\AppBundle\EventListener\VoteSubscriber

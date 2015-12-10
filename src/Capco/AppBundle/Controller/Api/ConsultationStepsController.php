@@ -44,11 +44,8 @@ class ConsultationStepsController extends FOSRestController
             ->setStep($step)
             ->setIsEnabled(true);
 
-        $form = $this->createForm(
-            new OpinionForm($this->get('doctrine.orm.entity_manager')),
-            $opinion
-        );
-        $form->handleRequest($request);
+        $form = $this->createForm('api_opinion', $opinion);
+        $form->submit($request->request->all());
 
         $consultationStepType = $step->getConsultationStepType();
 
