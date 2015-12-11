@@ -861,106 +861,116 @@ Feature: Synthesis
     """
     Then the JSON response status code should be 401
 
-  # @database
-  # Scenario: API client wants to divide a synthesis element
-  #   Given I am logged in to api as admin
-  #   And there is a synthesis with id "42" and elements:
-  #     | 43 |
-  #   And I send a PUT request to "/api/syntheses/42/elements/43" with json:
-  #   """
-  #   {
-  #     "archived": true,
-  #     "published": false,
-  #     "division": {
-  #       "elements": [
-  #         {
-  #           "title": "Coucou, je suis un élément.",
-  #           "body": "blabla",
-  #           "notation": 5,
-  #           "archived": true,
-  #           "published": true
-  #         },
-  #         {
-  #           "title": "Coucou, je suis un autre élément.",
-  #           "body": "blabla",
-  #           "notation": 3,
-  #           "archived": true,
-  #           "published": true
-  #         },
-  #         {
-  #           "title": "Coucou, je suis le dernier élément.",
-  #           "body": "blabla",
-  #           "notation": 2,
-  #           "archived": true,
-  #           "published": true
-  #         }
-  #       ]
-  #     }
-  #   }
-  #   """
-  #   Then the JSON response status code should be 200
-  #   And the JSON response should match:
-  #   """
-  #   {
-  #     "has_linked_data": false,
-  #     "id": "43",
-  #     "published": false,
-  #     "created_at": "@string@.isDateTime()",
-  #     "updated_at": "@string@.isDateTime()",
-  #     "archived": true,
-  #     "author": @...@,
-  #     "original_division": @null@,
-  #     "division": {
-  #       "id": @string@,
-  #       "original_element": "43",
-  #       "elements": [
-  #         {
-  #           "has_linked_data": false,
-  #           "id": @string@,
-  #           "published": true,
-  #           "created_at": "@string@.isDateTime()",
-  #           "updated_at": "@string@.isDateTime()",
-  #           "archived": true,
-  #           "author": @...@,
-  #           "original_division": @string@,
-  #           "division": @null@,
-  #           "parent": @null@,
-  #           "children": [],
-  #           "displayType": "folder",
-  #           "title": "Coucou, je suis un élément.",
-  #           "body": "blabla",
-  #           "link": @null@,
-  #           "notation": 5,
-  #           "votes": [],
-  #           "linkedDataCreation": @null@,
-  #           "_links": {
-  #             "self": { "href": "/api/syntheses/42/elements/43" },
-  #             "history": { "href": "/api/syntheses/42/elements/43/history" }
-  #           }
-  #         },
-  #         @...@
-  #       ]
-  #     },
-  #     "parent": @null@,
-  #     "children": [],
-  #     "displayType": "folder",
-  #     "title": "Je suis un élément",
-  #     "body": "blabla",
-  #     "link": @null@,
-  #     "notation": @null@,
-  #     "comment": @null@,
-  #     "votes": {"-1": 21, "0":12, "1": 43},
-  #     "linkedDataCreation": @null@,
-  #     "logs": @...@,
-  #     "_links": {
-  #       "self": { "href": "/api/syntheses/42/elements/43" },
-  #       "history": { "href": "/api/syntheses/42/elements/43/history" }
-  #     }
-  #   }
-  #   """
-  #   And there should be a log on element 43 with sentence "admin a divisé l'élément"
-
   @database
+  Scenario: API client wants to divide a synthesis element
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I send a PUT request to "/api/syntheses/42/elements/43" with json:
+    """
+    {
+      "archived": true,
+      "published": false,
+      "division": {
+        "elements": [
+          {
+            "title": "Coucou, je suis un élément.",
+            "body": "blabla",
+            "notation": 5,
+            "archived": true,
+            "published": true
+          },
+          {
+            "title": "Coucou, je suis un autre élément.",
+            "body": "blabla",
+            "notation": 3,
+            "archived": true,
+            "published": true
+          },
+          {
+            "title": "Coucou, je suis le dernier élément.",
+            "body": "blabla",
+            "notation": 2,
+            "archived": true,
+            "published": true
+          }
+        ]
+      }
+    }
+    """
+    Then the JSON response status code should be 200
+    And the JSON response should match:
+    """
+    {
+      "childrenCount": @integer@,
+      "body": @string@,
+      "has_linked_data": @boolean@,
+      "id": "43",
+      "published": false,
+      "created_at": "@string@.isDateTime()",
+      "updated_at": "@string@.isDateTime()",
+      "archived": true,
+      "author": @...@,
+      "original_division": @null@,
+      "division": {
+        "id": @string@,
+        "original_element": @...@,
+        "elements": [
+          {
+            "childrenCount": @integer@,
+            "body": @string@,
+            "has_linked_data": false,
+            "id": @string@,
+            "published": true,
+            "created_at": "@string@.isDateTime()",
+            "updated_at": "@string@.isDateTime()",
+            "archived": true,
+            "author": @...@,
+            "original_division": @...@,
+            "division": @null@,
+            "level": @integer@,
+            "path": @string@,
+            "parent": @null@,
+            "children": @array@,
+            "displayType": "contribution",
+            "title": "Coucou, je suis un élément.",
+            "description": @...@,
+            "link": @null@,
+            "notation": 5,
+            "comment": @...@,
+            "votes": @array@,
+            "linkedDataCreation": @null@,
+            "logs": @array@,
+            "_links": {
+              "self": { "href": "/api/syntheses/42/elements/43" },
+              "history": { "href": "/api/syntheses/42/elements/43/history" }
+            }
+          },
+          @...@
+        ]
+      },
+      "level": @integer@,
+      "path": @string@,
+      "parent": @null@,
+      "children": @array@,
+      "displayType": "folder",
+      "title": "Je suis un élément",
+      "description": @...@,
+      "link": @null@,
+      "notation": @null@,
+      "comment": @...@,
+      "votes": {"-1": 21, "0":12, "1": 43},
+      "linkedDataCreation": @null@,
+      "logs": @array@,
+      "_links": {
+        "self": { "href": "/api/syntheses/42/elements/43" },
+        "history": { "href": "/api/syntheses/42/elements/43/history" }
+      }
+    }
+    """
+    And there should be a log on element 43 with sentence "admin a divisé l'élément"
+
+  @database @security
   Scenario: Non admin API client wants to divide a synthesis element
     Given I am logged in to api as user
     And there is a synthesis with id "42" and elements:
@@ -991,7 +1001,7 @@ Feature: Synthesis
     """
     Then the JSON response status code should be 403
 
-  @database
+  @database @security
   Scenario: Anonymous API client wants to divide a synthesis element
     Given there is a synthesis with id "42" and elements:
       | 43 |

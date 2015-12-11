@@ -44,7 +44,7 @@ Capco\AppBundle\Entity\Opinion:
             expose: true
             type: integer
             serialized_name: connections_count
-            groups: [Opinions]
+            groups: [Opinions, OpinionLinkPreviews]
         appendices:
             expose: true
             groups: [Opinions, OpinionVersions]

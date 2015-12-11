@@ -24,25 +24,25 @@ Capco\AppBundle\Entity\OpinionType:
         sourceable:
             expose: true
             type: boolean
-            groups: [Opinions, OpinionVersions]
+            groups: [Opinions, OpinionVersions, OpinionTypeDetails]
         versionable:
             expose: true
             type: boolean
-            groups: [Opinions, OpinionVersions]
+            groups: [Opinions, OpinionVersions, OpinionTypeDetails]
         linkable:
             expose: true
             type: boolean
-            groups: [Opinions, OpinionVersions]
+            groups: [Opinions, OpinionVersions, OpinionTypeDetails]
         voteWidgetType:
             expose: true
             type: integer
             serialized_name: voteWidgetType
-            groups: [Opinions, OpinionVersions, OpinionVersionPreviews]
+            groups: [Opinions, OpinionVersions, OpinionVersionPreviews, OpinionTypeDetails]
         commentSystem:
             expose: true
             type: integer
             serialized_name: commentSystem
-            groups: [Opinions, OpinionVersions]
+            groups: [Opinions, OpinionVersions, OpinionTypeDetails]
         votesThreshold:
             expose: true
             type: integer

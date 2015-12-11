@@ -8,6 +8,7 @@ use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
+use WebDriver\Exception\ElementNotVisible;
 
 class ApplicationContext extends UserContext
 {
@@ -18,7 +19,7 @@ class ApplicationContext extends UserContext
      */
     public static function reinitDatabase()
     {
-        //exec('app/console capco:reinit --force -e test');
+        exec('app/console capco:reinit --force -e test');
         $exportCommand = 'mysqldump --opt -h 127.0.0.1 -u root symfony_test > app/dbtest.backup';
         exec($exportCommand);
     }
@@ -205,6 +206,15 @@ class ApplicationContext extends UserContext
             }
             $field = $wrapper->find('css', '.ql-editor');
             $field->setValue($value);
+        } catch (ElementNotVisible $e) {
+            // Ckeditor case
+            $wrapper = $this->getSession()->getPage()->find('named', array('id_or_name', 'cke_'.$field));
+            if (!$wrapper || !$wrapper->hasClass('cke')) {
+                throw $e;
+            }
+            $this->getSession()->getDriver()->executeScript('
+                CKEDITOR.instances["'.$field.'"].setData("'.$value.'");
+            ');
         }
     }
 

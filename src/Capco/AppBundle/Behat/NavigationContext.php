@@ -28,6 +28,16 @@ class NavigationContext extends PageObjectContext
     }
 
     /**
+     * @When I go on the connections tab
+     */
+    public function iGoOnTheConnectionsTab()
+    {
+        $this->getPage('opinion page')
+            ->clickConnectionsTab();
+        sleep(3);
+    }
+
+    /**
      * @When I want to add a source
      */
     public function clickAddSourceTab()

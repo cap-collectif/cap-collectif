@@ -361,9 +361,9 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                     throw new \Exception('Parent does not exist', 1);
                 }
                 $opinionType->setParent($parent);
-            } else {
-                $opinionType->setConsultationStepType($consultationStepType);
             }
+
+            $opinionType->setConsultationStepType($consultationStepType);
 
             $em->persist($opinionType);
             $em->flush();

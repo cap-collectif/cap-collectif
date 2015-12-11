@@ -7,6 +7,6 @@ Scenario: Admin want to load base data
 
 @database
 Scenario: Admin want to create a PJL
-    Given I run "import:pjl-from-csv"
+    Given I run "capco:import:pjl-from-csv"
     Then the command exit code should be 0
 

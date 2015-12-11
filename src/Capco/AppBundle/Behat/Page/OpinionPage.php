@@ -25,6 +25,7 @@ class OpinionPage extends Page
         'sources tab'             => '#opinion__sources___tab',
         'source add'              => '#source-form__add',
         'arguments tab'           => '#opinion__arguments___tab',
+        'connections tab'         => '#opinion__links___tab',
     ];
 
     public function clickSourcesTab()
@@ -35,6 +36,11 @@ class OpinionPage extends Page
     public function clickArgumentsTab()
     {
         $this->getElement('arguments tab')->click();
+    }
+
+    public function clickConnectionsTab()
+    {
+        $this->getElement('connections tab')->click();
     }
 
     public function clickAddSource()

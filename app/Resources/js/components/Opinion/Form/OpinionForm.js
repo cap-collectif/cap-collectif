@@ -68,6 +68,14 @@ const OpinionForm = React.createClass({
     this.updateAppendices(type);
   },
 
+  getAppendixTypeForType(type) {
+    const selectedType = ArrayHelper.getElementFromArray(this.props.availableTypes, type);
+    if (selectedType) {
+      return selectedType.appendixTypes;
+    }
+    return [];
+  },
+
   updateAppendices(type) {
     const appendixTypes = this.getAppendixTypeForType(type);
     const form = this.state.form;
@@ -81,14 +89,6 @@ const OpinionForm = React.createClass({
       form: form,
       custom: custom,
     });
-  },
-
-  getAppendixTypeForType(type) {
-    const selectedType = ArrayHelper.getElementFromArray(this.props.availableTypes, type);
-    if (selectedType) {
-      return selectedType.appendixTypes;
-    }
-    return [];
   },
 
   formValidationRules: {
@@ -121,6 +121,7 @@ const OpinionForm = React.createClass({
         <Input
           type="select"
           ref="type"
+          id="opinion_type"
           onChange={this.onTypeChange}
           label={this.getIntlMessage('opinion.link.type')}
           groupClassName={this.getGroupStyle('type')}
@@ -138,6 +139,7 @@ const OpinionForm = React.createClass({
           type="text"
           valueLink={this.linkState('form.title')}
           ref="title"
+          id="opinion_title"
           label={this.getIntlMessage('opinion.title')}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
@@ -145,6 +147,7 @@ const OpinionForm = React.createClass({
 
         <Input
           type="editor"
+          id="opinion_body"
           valueLink={this.linkState('form.body')}
           label={this.getIntlMessage('opinion.body')}
           groupClassName={this.getGroupStyle('body')}

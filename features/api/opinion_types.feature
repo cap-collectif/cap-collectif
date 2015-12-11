@@ -1,17 +1,30 @@
 Feature: Opinion Types Api
 
-  Scenario: API client wants to list comments of an event
+  Scenario: API client wants to get an opinion type
     When I send a GET request to "/api/opinion_types/8"
     Then the JSON response should match:
     """
     {
+      "id": 8,
+      "title": @string@,
+      "voteWidgetType": @integer@,
+      "commentSystem": @integer@,
+      "versionable": @boolean@,
+      "linkable": @boolean@,
+      "sourceable": @boolean@,
+      "appendixTypes": @array@,
       "availableLinkTypes": [
         {
           "id": @integer@,
-          "label": @string@
-        }
-      ],
-      "id": 8,
-      "title": @string@
+          "title": @string@,
+          "voteWidgetType": @integer@,
+          "commentSystem": @integer@,
+          "versionable": @boolean@,
+          "linkable": @boolean@,
+          "sourceable": @boolean@,
+          "appendixTypes": @array@
+        },
+        @...@
+      ]
     }
     """

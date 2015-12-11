@@ -44,7 +44,7 @@ Feature: Arguments
     And I should see "0" in the "#arg-24 .opinion__votes-nb" element
 
   @javascript @database
-  Scenario: Author of an argument loose their votes when updating it
+  Scenario: Author of an argument looses his votes when updating it
     Given I am logged in as user
     And I visited "opinion page" with:
       | projectSlug      | croissance-innovation-disruption |
@@ -76,21 +76,6 @@ Feature: Arguments
     And I wait 8 seconds
     When I go on the arguments tab
     Then I should not see ".argument__btn--edit" in the "#arg-1" element
-
-#  @javascript
-#  Scenario: Author of an argument try to update without checking the confirm checkbox
-#    Given I am logged in as admin
-#    And I visited "opinion page" with:
-#      | projectSlug      | croissance-innovation-disruption |
-#      | stepSlug         | collecte-des-avis                |
-#      | opinionTypeSlug  | causes                           |
-#      | opinionSlug      | opinion-2                        |
-#    And I wait 8 seconds
-#    When I click the "#arg-30 .argument__btn--edit" element
-#    And I fill in the following:
-#      | capco_app_argument_body      | Je modifie mon argument !   |
-#    And I press "Modifier"
-#    Then I should see "Merci de confirmer la perte de vos votes pour continuer."
 
   @javascript @database
   Scenario: Argument must be at least 3 chars long

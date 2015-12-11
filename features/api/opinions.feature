@@ -41,14 +41,14 @@ Feature: Opinions
         "arguments_count": @integer@,
         "arguments_yes_count": @integer@,
         "arguments_no_count": @integer@,
-        "arguments": @...@,
+        "arguments": @array@,
 
         "sources_count": @integer@,
-        "sources": @...@,
+        "sources": @array@,
 
         "versions_count": @integer@,
 
-        "votes": @...@,
+        "votes": @array@,
         "votes_nok": @integer@,
         "votes_ok": @integer@,
         "votes_mitige": @integer@,
@@ -58,21 +58,21 @@ Feature: Opinions
           {
             "body": @string@,
             "type": {
-              "title": @string@,
-              "position": @integer@
+              "title": @string@
             }
           },
           @...@
         ],
 
-        "connections": @...@,
-        "link": @...@,
+        "connections": @array@,
+        "connections_count": @integer@,
 
         "author": {
           "username": @string@,
           "displayName": @string@,
           "uniqueId": @string@,
           "isAdmin": @boolean@,
+          "vip": @boolean@,
           "media": @...@,
           "_links": {
             "profile": @string@,
@@ -80,17 +80,20 @@ Feature: Opinions
           }
         },
 
+        "has_user_reported": @boolean@,
+        "user_vote": @null@,
+
+        "ranking": @...@,
+        "modals": @array@,
+
+        "answer": @...@,
+
         "_links": {
           "show": @string@,
           "edit": @string@,
           "report": @string@,
           "type": @string@
-        },
-
-        "has_user_reported": @boolean@,
-        "user_vote": @null@,
-
-        "ranking": @integer@
+        }
       },
       "rankingThreshold": @integer@,
       "opinionTerm": @integer@
@@ -220,25 +223,33 @@ Feature: Opinions
       "links": [
         {
           "id": @integer@,
+          "title": @string@,
+
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
+
           "versions_count": @integer@,
           "sources_count": @integer@,
           "arguments_count": @integer@,
-          "author": @...@,
-          "type": @...@,
-          "title": @string@,
+          "connections_count": @integer@,
+          "votes_total": @integer@,
           "votes_nok": @integer@,
           "votes_ok": @integer@,
           "votes_mitige": @integer@,
+
+          "author": @...@,
+
+          "type": @...@,
+
+          "user_vote": @null@,
+          "has_user_reported": @boolean@,
+
           "_links": {
             "show": @string@,
             "edit": @string@,
             "report": @string@,
             "type": @string@
-          },
-          "user_vote": @null@,
-          "has_user_reported": @boolean@
+          }
         },
         @...@
       ]

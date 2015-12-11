@@ -737,7 +737,7 @@ class OpinionsController extends FOSRestController
      * @Get("/opinions/{id}/links")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature" = true})
      * @QueryParam(name="filter", requirements="(old|last)", default="last")
-     * @View(statusCode=200, serializerGroups={"Opinions", "OpinionLinkPreviews", "UsersInfos"})
+     * @View(statusCode=200, serializerGroups={"OpinionLinkPreviews", "UsersInfos", "OpinionTypeDetails"})
      */
     public function cgetOpinionLinksAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
     {

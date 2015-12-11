@@ -148,7 +148,7 @@ Feature: Proposals
     And I wait 5 seconds
     Then I press "Supprimer"
     And I wait 5 seconds
-    And I press "confirm-delete"
+    And I press "confirm"
     And I wait 5 seconds
     Then I should see "3 propositions"
     And I should not see "Rénovation du gymnase"
