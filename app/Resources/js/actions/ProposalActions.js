@@ -24,6 +24,7 @@ import {
 
   CHANGE_PAGE,
   CHANGE_ORDER,
+  CHANGE_SEARCH_TERMS,
   CHANGE_FILTERS,
   PROPOSAL_PAGINATION,
 
@@ -31,17 +32,17 @@ import {
 
 export default {
 
-  load: (fetchFrom, id, terms = null) => {
+  load: (fetchFrom, id) => {
     const page = ProposalStore.currentPage;
     const order = ProposalStore.order;
     const filters = ProposalStore.filters;
+    const terms = ProposalStore.terms;
     const first = page ? PROPOSAL_PAGINATION * (page - 1) : 0;
     const offset = page ? PROPOSAL_PAGINATION : 100;
     const sort = 'score';
-    const type = 'proposal';
 
     let url = null;
-    let data = {};
+    const data = {};
 
     switch (fetchFrom) {
     case 'form':
@@ -60,25 +61,24 @@ export default {
 
     url += `?order=${order}&first=${first}&offset=${offset}`;
 
-    data.filters = filters;
-    data.terms = terms;
     data.sort = sort;
-    data.type = type;
     data.page = page;
     data.pagination = PROPOSAL_PAGINATION;
+    data.terms = terms;
+    data.filters = filters;
 
     Fetcher
       .post(url, data)
       .then((response) => {
         const promise = response.json();
-        promise.then((data) => {
+        promise.then((result) => {
           AppDispatcher.dispatch({
             actionType: RECEIVE_PROPOSALS,
-            proposals: data.proposals,
-            count: data.count,
+            proposals: result.proposals,
+            count: result.count,
           });
-          return true;  
-        })
+          return true;
+        });
       });
   },
 
@@ -95,6 +95,13 @@ export default {
       order: newOrder,
     });
     LocalStorageService.set('proposals_order', ProposalStore.order);
+  },
+
+  changeSearchTerms: (terms) => {
+    AppDispatcher.dispatch({
+      actionType: CHANGE_SEARCH_TERMS,
+      terms: terms,
+    });
   },
 
   changeFilterValue: (filterName, value) => {

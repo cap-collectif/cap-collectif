@@ -4,8 +4,8 @@ Capco\AppBundle\Entity\Theme:
         id:
             expose: true
             type: integer
-            groups: [Themes, Proposals]
+            groups: [Themes]
         title:
             expose: true
             type: string
-            groups: [Themes, Proposals]
+            groups: [Themes]

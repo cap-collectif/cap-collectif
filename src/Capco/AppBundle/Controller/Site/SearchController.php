@@ -24,6 +24,8 @@ class SearchController extends Controller
             'type' => 'all',
             'sort' => 'score'
         ];
+        $sortField = '_score';
+        $sortOrder = 'desc';
 
         $page = (int) $request->get('page', 1);
 
@@ -34,12 +36,18 @@ class SearchController extends Controller
             $searchParams = $form->getData();
         }
 
+        if ($searchParams['sort'] && $searchParams['sort'] === 'date') {
+            $sortField = 'createdAt';
+            $sortOrder = 'desc';
+        }
+
         // Perform the search
         $searchResults = $this->container->get('capco.search.resolver')->searchAll(
             $page,
             $searchParams['term'],
             $searchParams['type'],
-            $searchParams['sort']
+            $sortField,
+            $sortOrder
         );
 
         return [

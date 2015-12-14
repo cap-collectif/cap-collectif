@@ -3,6 +3,9 @@
 namespace Capco\AppBundle\Resolver;
 
 use Elastica\Filter\Bool;
+use Elastica\Filter\BoolFilter;
+use Elastica\Filter\Nested;
+use Elastica\Filter\Term;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\AbstractQuery;
@@ -32,38 +35,41 @@ class SearchResolver
      * @param integer   $page
      * @param string    $term
      * @param string    $type
-     * @param string    $sort
-     * @param string    $useTransformation
+     * @param string    $sortField
+     * @param string    $sortOrder
      * @param bool|true $useTransformation
      * @param array $filters
      *
      * @return array
      */
-    public function searchAll($page = 1, $term = '', $type = 'all', $sort = 'score', $filters = [], $useTransformation = true, $resultsPerPage = self::RESULTS_PER_PAGE)
+    public function searchAll($page = 1, $term = '', $type = 'all', $sortField = '_score', $sortOrder = 'DESC', $filters = [], $useTransformation = true, $resultsPerPage = self::RESULTS_PER_PAGE)
     {
         $results = [];
         $count = 0;
         $from = ($page - 1) * $resultsPerPage;
 
         $multiMatchQuery = empty(trim($term)) ? new Query\MatchAll() : $this->getMultiMatchQuery($term);
-        $boolFilter = ($type || !empty($filters)) ? $this->getBoolFilter($type, $filters) : null;
+        $boolFilter = !empty($filters) ? $this->getBoolFilter($filters) : null;
 
         if ($multiMatchQuery && $boolFilter) {
-            $query = new Filtered($multiMatchQuery, new Filter($boolFilter));
+            $query = new Query(new Filtered($multiMatchQuery, $boolFilter));
         } else {
             $query = $multiMatchQuery ? new Query($multiMatchQuery) : new Query($boolFilter);
         }
 
-        if ($sort !== null && $sort !== 'score') {
-            $query->setSort($this->getSortSettings($sort));
-        }
+        $query->setSort($this->getSortSettings($sortField, $sortOrder));
 
         $query->setHighlight($this->getHighlightSettings());
 
         $query->setFrom($from);
         $query->setSize($resultsPerPage);
 
-        $resultSet = $this->index->search($query);
+        if ($type && $type !== 'all') {
+            $resultSet = $this->index->getType($type)->search($query);
+        } else {
+            $resultSet = $this->index->search($query);
+        }
+
         $count = $resultSet->getTotalHits();
 
         $results = $useTransformation
@@ -91,13 +97,12 @@ class SearchResolver
         $shouldQuery = new MultiMatch();
         $shouldQuery->setQuery($term);
         $shouldQuery->setFields([
-            'title.std',
-            'body.std',
-            'object.std',
-            'body.std',
-            'teaser.std',
-            'username.std',
-            'biography.std',
+            'title', 'title.std',
+            'body', 'body.std',
+            'object', 'object.std',
+            'teaser', 'teaser.std',
+            'username', 'username.std',
+            'biography', 'biography.std',
         ]);
 
         $boolQuery->addMust($shouldQuery);
@@ -107,24 +112,28 @@ class SearchResolver
     }
 
     /**
+     * Take an array of filters and return correct elastica object.
+     * The array of filters can contain either simple filters (fieldName => value)
+     * or nested filters (path => [filters])
      * @param $type
      * @param array $filters
-     * @return Bool
+     * @return BoolFilter
      */
-    public function getBoolFilter($type, array $filters)
+    public function getBoolFilter(array $filters)
     {
-        $boolFilter = new Bool();
+        $boolFilter = new BoolFilter();
 
-        if ('all' !== $type) {
-            $boolFilter->addMust([
-                'type' => $type
-            ]);
-        }
-
-        foreach ($filters as $filterName => $filterValue) {
-            $boolFilter->addMust([
-                $filterName => $filterValue
-            ]);
+        foreach ($filters as $filterName => $filterData) {
+            if (is_array($filterData)) {
+                $nested = new Nested();
+                $nested->setPath($filterName);
+                $nested->setFilter($this->getBoolFilter($filterData));
+                $boolFilter->addMust($nested);
+            } else {
+                $boolFilter->addMust(new Term([
+                    $filterName => $filterData
+                ]));
+            }
         }
 
         return $boolFilter;
@@ -137,13 +146,10 @@ class SearchResolver
      */
     protected function getSortSettings($sort, $order = 'desc')
     {
-        $term = '_score';
-        if ($sort === 'date') {
-            $term = 'createdAt';
-        }
+        $sort = $sort ? $sort : '_score';
 
         return [
-            $term => [
+            $sort => [
                 'order' => $order,
             ],
             'createdAt' => [
@@ -165,8 +171,7 @@ class SearchResolver
             'fragment_size'       => 175,
             'fields'              => [
                 'title'          => ['number_of_fragments' => 0],
-                'object' => new \stdClass(),
-                'body'   => new \stdClass(),
+                'object'         => new \stdClass(),
                 'body'           => new \stdClass(),
                 'teaser'         => new \stdClass(),
                 'excerpt'        => new \stdClass(),

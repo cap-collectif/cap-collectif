@@ -5,12 +5,19 @@ const Button = ReactBootstrap.Button;
 
 const ProposalListSearch = React.createClass({
   propTypes: {
-    form: React.PropTypes.object.isRequired,
+    id: React.PropTypes.number.isRequired,
+    fetchFrom: React.PropTypes.string,
   },
   mixins: [
     ReactIntl.IntlMixin,
     React.addons.LinkedStateMixin,
   ],
+
+  getDefaultProps() {
+    return {
+      fetchFrom: 'form',
+    };
+  },
 
   getInitialState() {
     return {
@@ -20,12 +27,14 @@ const ProposalListSearch = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    const value = this._input.getValue();
-    const length = value.length;
+    let value = this._input.getValue();
+    value = value.length > 0 ? value : null;
+    ProposalActions.changeSearchTerms(value);
+    this.reload();
+  },
 
-    if (length > 0) {
-      ProposalActions.load('form', this.props.form.id, value);
-    }
+  reload() {
+    ProposalActions.load(this.props.fetchFrom, this.props.id);
   },
 
   renderSearchButton() {

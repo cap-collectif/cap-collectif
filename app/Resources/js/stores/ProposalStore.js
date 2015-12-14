@@ -13,6 +13,7 @@ import {
   DELETE_PROPOSAL_FAILURE,
   CHANGE_PAGE,
   CHANGE_ORDER,
+  CHANGE_SEARCH_TERMS,
   CHANGE_FILTERS,
 } from '../constants/ProposalConstants';
 
@@ -28,6 +29,7 @@ class ProposalStore extends BaseStore {
     this._isProcessing = false;
     this._order = LocalStorageService.get('proposals_order') || 'last';
     this._filters = LocalStorageService.get('proposals_filters') || {};
+    this._terms = null;
     this._currentPage = 1;
     this._messages = {
       errors: [],
@@ -104,14 +106,17 @@ class ProposalStore extends BaseStore {
       break;
     case CHANGE_ORDER:
       this._order = action.order;
-
+      this._currentPage = 1;
+      this.emitChange();
+      break;
+    case CHANGE_SEARCH_TERMS:
+      this._terms = action.terms;
       this._currentPage = 1;
       this.emitChange();
       break;
     case CHANGE_FILTERS:
       this._filters[action.filter] = action.value;
       this._currentPage = 1;
-
       this.emitChange();
       break;
     default: break;
@@ -136,6 +141,10 @@ class ProposalStore extends BaseStore {
 
   get order() {
     return this._order;
+  }
+
+  get terms() {
+    return this._terms;
   }
 
   get filters() {
