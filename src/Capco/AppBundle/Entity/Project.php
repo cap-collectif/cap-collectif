@@ -23,12 +23,12 @@ class Project
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
     public static $sortOrder = [
-        'date'       => self::SORT_ORDER_PUBLISHED_AT,
+        'date' => self::SORT_ORDER_PUBLISHED_AT,
         'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
     ];
 
     public static $sortOrderLabels = [
-        'date'       => 'project.sort.published_at',
+        'date' => 'project.sort.published_at',
         'popularity' => 'project.sort.contributions_nb',
     ];
 
@@ -39,7 +39,7 @@ class Project
     public static $openingStatuses = [
         'future' => self::OPENING_STATUS_FUTURE,
         'opened' => self::OPENING_STATUS_OPENED,
-        'ended'  => self::OPENING_STATUS_ENDED,
+        'ended' => self::OPENING_STATUS_ENDED,
     ];
 
     const OPINION_TERM_OPINION = 0;

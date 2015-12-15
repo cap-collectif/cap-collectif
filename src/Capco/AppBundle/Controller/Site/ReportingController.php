@@ -64,11 +64,11 @@ class ReportingController extends Controller
                     $this->generateUrl(
                         'app_project_show_opinion_version',
                         [
-                            'projectSlug'     => $project->getSlug(),
-                            'stepSlug'        => $currentStep->getSlug(),
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $currentStep->getSlug(),
                             'opinionTypeSlug' => $opinionType->getSlug(),
-                            'opinionSlug'     => $opinion->getSlug(),
-                            'versionSlug'     => $version->getSlug(),
+                            'opinionSlug' => $opinion->getSlug(),
+                            'versionSlug' => $version->getSlug(),
                         ]
                     )
                 );
@@ -79,7 +79,7 @@ class ReportingController extends Controller
 
         return [
             'opinion' => $opinion,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -133,10 +133,10 @@ class ReportingController extends Controller
                     $this->generateUrl(
                         'app_project_show_opinion',
                         [
-                            'projectSlug'     => $project->getSlug(),
-                            'stepSlug'        => $currentStep->getSlug(),
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $currentStep->getSlug(),
                             'opinionTypeSlug' => $opinionType->getSlug(),
-                            'opinionSlug'     => $opinion->getSlug(),
+                            'opinionSlug' => $opinion->getSlug(),
                         ]
                     )
                 );
@@ -147,7 +147,7 @@ class ReportingController extends Controller
 
         return [
             'opinion' => $opinion,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -211,7 +211,7 @@ class ReportingController extends Controller
 
         return [
             'opinion' => $opinion,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -275,7 +275,7 @@ class ReportingController extends Controller
 
         return [
             'opinion' => $opinion,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -377,7 +377,7 @@ class ReportingController extends Controller
 
         return [
             'comment' => $comment,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -420,8 +420,8 @@ class ReportingController extends Controller
                     $this->generateUrl(
                         'app_project_show_proposal',
                         [
-                            'projectSlug'  => $project->getSlug(),
-                            'stepSlug'     => $currentStep->getSlug(),
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $currentStep->getSlug(),
                             'proposalSlug' => $proposal->getSlug(),
                         ]
                     )
@@ -433,7 +433,7 @@ class ReportingController extends Controller
 
         return [
             'proposal' => $proposal,
-            'form'     => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 }

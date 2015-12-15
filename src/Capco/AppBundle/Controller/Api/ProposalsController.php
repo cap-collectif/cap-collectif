@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Event\ProposalEvent;
-use Capco\AppBundle\Form\ProposalType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,9 +37,10 @@ class ProposalsController extends FOSRestController
      * @QueryParam(name="order", requirements="(old|last|popular|comments)", default="last")
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
      *
-     * @param Request $request
-     * @param ProposalForm $proposalForm
+     * @param Request               $request
+     * @param ProposalForm          $proposalForm
      * @param ParamFetcherInterface $paramFetcher
+     *
      * @return array
      */
     public function getProposalsByFormAction(Request $request, ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
@@ -99,7 +99,6 @@ class ProposalsController extends FOSRestController
             $filters['author.user_type.id'] = $providedFilters['type'];
         }
 
-
         // Search
         $results = $searchResolver->searchAll($page, $terms, $type, $sortField, $sortOrder, $filters, false, $pagination);
 
@@ -110,7 +109,7 @@ class ProposalsController extends FOSRestController
 
         return [
             'proposals' => $proposals,
-            'count'     => $results['count'],
+            'count' => $results['count'],
         ];
     }
 
@@ -230,8 +229,8 @@ class ProposalsController extends FOSRestController
 
         return [
             'comments_and_answers_count' => intval($countWithAnswers),
-            'comments_count'             => count($paginator),
-            'comments'                   => $comments,
+            'comments_count' => count($paginator),
+            'comments' => $comments,
         ];
     }
 

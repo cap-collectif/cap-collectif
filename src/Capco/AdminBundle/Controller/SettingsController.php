@@ -41,12 +41,12 @@ class SettingsController extends Controller
         $group = $featuresCategoryResolver->getGroupNameForCategory($category);
 
         return [
-            'admin_pool'          => $admin_pool,
-            'category'            => $category,
-            'parameters'          => $parameters,
-            'colors'              => $colors,
-            'images'              => $images,
-            'toggles'             => $toggles,
+            'admin_pool' => $admin_pool,
+            'category' => $category,
+            'parameters' => $parameters,
+            'colors' => $colors,
+            'images' => $images,
+            'toggles' => $toggles,
             'current_group_label' => $group,
         ];
     }

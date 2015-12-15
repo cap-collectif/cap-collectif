@@ -29,7 +29,7 @@ class OpinionAdmin extends Admin
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     protected $formOptions = [
@@ -98,8 +98,8 @@ class OpinionAdmin extends Admin
                 'label' => 'admin.fields.opinion.step',
             ])
             ->add('voteCountTotal', 'integer', [
-                'label'    => 'admin.fields.opinion.vote_count_total',
-                'mapped'   => false,
+                'label' => 'admin.fields.opinion.vote_count_total',
+                'mapped' => false,
                 'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig',
             ])
             ->add('position', null, [
@@ -113,23 +113,23 @@ class OpinionAdmin extends Admin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.opinion.is_enabled',
+                'label' => 'admin.fields.opinion.is_enabled',
             ])
             ->add('pinned', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.opinion.pinned',
+                'label' => 'admin.fields.opinion.pinned',
             ])
             ->add('isTrashed', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.opinion.is_trashed',
+                'label' => 'admin.fields.opinion.is_trashed',
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.opinion.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])
@@ -158,23 +158,23 @@ class OpinionAdmin extends Admin
                     'label' => 'admin.fields.opinion.title',
                 ])
                 ->add('Author', 'sonata_type_model_autocomplete', [
-                    'label'    => 'admin.fields.opinion.author',
+                    'label' => 'admin.fields.opinion.author',
                     'property' => 'username',
                 ])
                 ->add('position', null, [
                     'label' => 'admin.fields.opinion.position',
                 ])
                 ->add('body', 'ckeditor', [
-                    'label'       => 'admin.fields.opinion.body',
+                    'label' => 'admin.fields.opinion.body',
                     'config_name' => 'admin_editor',
                 ])
                 ->add('step', null, [
-                    'label'         => 'admin.fields.opinion.step',
+                    'label' => 'admin.fields.opinion.step',
                     'query_builder' => $this->createQueryBuilderForStep(),
-                    'required'      => true,
+                    'required' => true,
                 ])
             ->add('link', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.opinion.link',
+                'label' => 'admin.fields.opinion.link',
                 'required' => false,
                 'property' => 'title',
             ])
@@ -183,27 +183,27 @@ class OpinionAdmin extends Admin
             // Appendices
             ->with('admin.fields.opinion.group_appendices')
             ->add('appendices', 'sonata_type_collection', [
-                'label'        => 'admin.fields.opinion.appendices',
+                'label' => 'admin.fields.opinion.appendices',
                 'by_reference' => false,
-                'required'     => false,
-                'btn_add'      => false,
+                'required' => false,
+                'btn_add' => false,
                 'type_options' => ['delete' => false, 'btn_add' => false],
-                'attr'         => ['class'  => $classname],
+                'attr' => ['class' => $classname],
             ])
             ->end()
 
             // Publication
             ->with('admin.fields.opinion.group_publication')
                 ->add('isEnabled', null, [
-                    'label'    => 'admin.fields.opinion.is_enabled',
+                    'label' => 'admin.fields.opinion.is_enabled',
                     'required' => false,
                 ])
                 ->add('pinned', null, [
-                    'label'    => 'admin.fields.opinion.pinned_long',
+                    'label' => 'admin.fields.opinion.pinned_long',
                     'required' => false,
                 ])
                 ->add('isTrashed', null, [
-                    'label'    => 'admin.fields.opinion.is_trashed',
+                    'label' => 'admin.fields.opinion.is_trashed',
                     'required' => false,
                 ])
                 ->add('trashedReason', null, [
@@ -214,7 +214,7 @@ class OpinionAdmin extends Admin
             // Answer
             ->with('admin.fields.opinion.group_answer')
             ->add('answer', 'sonata_type_model_list', [
-                'label'    => 'admin.fields.opinion.answer',
+                'label' => 'admin.fields.opinion.answer',
                 'btn_list' => false,
                 'required' => false,
             ])
@@ -261,8 +261,8 @@ class OpinionAdmin extends Admin
                 'label' => 'admin.fields.opinion.position',
             ])
             ->add('voteCountTotal', null, [
-                'label'    => 'admin.fields.opinion.vote_count_total',
-                'mapped'   => false,
+                'label' => 'admin.fields.opinion.vote_count_total',
+                'mapped' => false,
                 'template' => 'CapcoAdminBundle:Opinion:vote_count_show_field.html.twig',
             ])
             ->add('votesCountOk', null, [
@@ -314,7 +314,7 @@ class OpinionAdmin extends Admin
         $opinionTypeId = $this->getPersistentParameter('opinion_type');
 
         if (!$opinionTypeId) {
-            return null;
+            return;
         }
 
         $root = $this->getConfigurationPool()

@@ -76,9 +76,9 @@ class ArgumentController extends Controller
         }
 
         return [
-            'form'     => $form->createView(),
+            'form' => $form->createView(),
             'argument' => $argument,
-            'opinion'  => $opinion,
+            'opinion' => $opinion,
         ];
     }
 
@@ -145,9 +145,9 @@ class ArgumentController extends Controller
         }
 
         return [
-            'form'     => $form->createView(),
+            'form' => $form->createView(),
             'argument' => $argument,
-            'opinion'  => $opinion,
+            'opinion' => $opinion,
         ];
     }
 }

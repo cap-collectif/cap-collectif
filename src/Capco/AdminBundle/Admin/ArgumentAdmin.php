@@ -14,7 +14,7 @@ class ArgumentAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by'    => 'updatedAt',
+        '_sort_by' => 'updatedAt',
     ];
 
     /**
@@ -58,12 +58,12 @@ class ArgumentAdmin extends Admin
 
         $listMapper
             ->addIdentifier('body', null, [
-                'label'    => 'admin.fields.argument.body',
+                'label' => 'admin.fields.argument.body',
                 'template' => 'CapcoAdminBundle:Argument:body_list_field.html.twig',
             ])
             ->add('type', null, [
-                'label'       => 'admin.fields.argument.type',
-                'template'    => 'CapcoAdminBundle:Argument:type_list_field.html.twig',
+                'label' => 'admin.fields.argument.type',
+                'template' => 'CapcoAdminBundle:Argument:type_list_field.html.twig',
                 'typesLabels' => Argument::$argumentTypesLabels,
             ])
             ->add('opinion', 'sonata_type_model', [
@@ -77,19 +77,19 @@ class ArgumentAdmin extends Admin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.argument.is_enabled',
+                'label' => 'admin.fields.argument.is_enabled',
             ])
             ->add('isTrashed', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.argument.is_trashed',
+                'label' => 'admin.fields.argument.is_trashed',
             ])
             ->add('updatedAt', 'datetime', [
                 'label' => 'admin.fields.argument.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])
@@ -103,34 +103,34 @@ class ArgumentAdmin extends Admin
     {
         $formMapper
             ->add('type', 'choice', [
-                'label'              => 'admin.fields.argument.type',
-                'choices'            => Argument::$argumentTypesLabels,
+                'label' => 'admin.fields.argument.type',
+                'choices' => Argument::$argumentTypesLabels,
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('isEnabled', null, [
-                'label'    => 'admin.fields.argument.is_enabled',
+                'label' => 'admin.fields.argument.is_enabled',
                 'required' => false,
             ])
             ->add('opinion', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.argument.opinion',
+                'label' => 'admin.fields.argument.opinion',
                 'property' => 'title',
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.argument.author',
+                'label' => 'admin.fields.argument.author',
                 'property' => 'username',
             ])
             ->add('body', null, [
                 'label' => 'admin.fields.argument.body',
-                'attr'  => [
+                'attr' => [
                     'rows' => 10,
                 ],
             ])
             ->add('isTrashed', null, [
-                'label'    => 'admin.fields.argument.is_trashed',
+                'label' => 'admin.fields.argument.is_trashed',
                 'required' => false,
             ])
             ->add('trashedReason', null, [
-                'label'    => 'admin.fields.argument.trashed_reason',
+                'label' => 'admin.fields.argument.trashed_reason',
                 'required' => false,
             ])
         ;
@@ -148,8 +148,8 @@ class ArgumentAdmin extends Admin
                 'label' => 'admin.fields.argument.body',
             ])
             ->add('type', null, [
-                'label'       => 'admin.fields.argument.type',
-                'template'    => 'CapcoAdminBundle:Argument:type_show_field.html.twig',
+                'label' => 'admin.fields.argument.type',
+                'template' => 'CapcoAdminBundle:Argument:type_show_field.html.twig',
                 'typesLabels' => Argument::$argumentTypesLabels,
             ])
             ->add('opinion', null, [

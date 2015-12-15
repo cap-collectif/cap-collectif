@@ -13,7 +13,7 @@ class NewsletterSubscriptionAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'email',
+        '_sort_by' => 'email',
     ];
 
     /**
@@ -47,15 +47,15 @@ class NewsletterSubscriptionAdmin extends Admin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.newsletter_subscription.is_enabled',
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.newsletter_subscription.created_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])
@@ -72,7 +72,7 @@ class NewsletterSubscriptionAdmin extends Admin
                 'label' => 'admin.fields.newsletter_subscription.email',
             ])
             ->add('isEnabled', null, [
-                'label'    => 'admin.fields.newsletter_subscription.is_enabled',
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
                 'required' => false,
             ])
         ;
@@ -89,7 +89,7 @@ class NewsletterSubscriptionAdmin extends Admin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.newsletter_subscription.is_enabled',
+                'label' => 'admin.fields.newsletter_subscription.is_enabled',
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.newsletter_subscription.created_at',

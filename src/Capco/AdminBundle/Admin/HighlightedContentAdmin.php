@@ -17,7 +17,7 @@ class HighlightedContentAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'position',
+        '_sort_by' => 'position',
     ];
 
     /**
@@ -27,11 +27,11 @@ class HighlightedContentAdmin extends Admin
     {
         $listMapper
             ->add('move_actions', 'actions', [
-                'label'    => 'admin.action.highlighted_content.move_actions.label',
+                'label' => 'admin.action.highlighted_content.move_actions.label',
                 'template' => 'SonataAdminBundle:CRUD:list__action.html.twig',
-                'type'     => 'action',
-                'code'     => 'Action',
-                'actions'  => [
+                'type' => 'action',
+                'code' => 'Action',
+                'actions' => [
                     'up' => [
                         'template' => 'CapcoAdminBundle:HighlightedContent:list__action_up.html.twig',
                     ],
@@ -41,13 +41,13 @@ class HighlightedContentAdmin extends Admin
                 ],
             ])
             ->add('object', null, [
-                  'label'    => 'admin.fields.highlighted_content.object',
-                  'mapped'   => false,
+                  'label' => 'admin.fields.highlighted_content.object',
+                  'mapped' => false,
                   'template' => 'CapcoAdminBundle:HighlightedContent:list__object.html.twig',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'edit'   => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])

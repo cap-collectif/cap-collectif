@@ -201,7 +201,7 @@ class ApplicationContext extends UserContext
             // Try to get corresponding wysiwyg field
             // Works only with quill editor for now
             $wrapper = $this->getSession()->getPage()->find('named', array('id_or_name', $field));
-            if (!$wrapper || !$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor') ) {
+            if (!$wrapper || !$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor')) {
                 throw $e;
             }
             $field = $wrapper->find('css', '.ql-editor');
@@ -290,7 +290,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Checks that a button is disabled
+     * Checks that a button is disabled.
      *
      * @Then /^the button "([^"]*)" should be disabled$/
      */

@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionAppendix;
-use Capco\AppBundle\Form\OpinionsType as OpinionForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -41,14 +40,14 @@ class OpinionController extends Controller
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
         return [
-            'version'     => $version,
+            'version' => $version,
             'currentStep' => $currentStep,
-            'project'     => $currentStep->getProject(),
-            'opinion'     => $opinion,
-            'sources'     => $sources,
+            'project' => $currentStep->getProject(),
+            'opinion' => $opinion,
+            'sources' => $sources,
             'opinionType' => $opinion->getOpinionType(),
-            'votes'       => $opinion->getVotes(),
-            'nav'         => $nav,
+            'votes' => $opinion->getVotes(),
+            'nav' => $nav,
         ];
     }
 
@@ -111,10 +110,10 @@ class OpinionController extends Controller
         }
 
         return [
-            'project'     => $project,
+            'project' => $project,
             'currentStep' => $currentStep,
             'opinionType' => $opinionType,
-            'form'        => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -179,11 +178,11 @@ class OpinionController extends Controller
         }
 
         return [
-            'opinion'     => $opinion,
-            'project'     => $project,
+            'opinion' => $opinion,
+            'project' => $project,
             'currentStep' => $currentStep,
             'opinionType' => $opinionType,
-            'form'        => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -247,9 +246,9 @@ class OpinionController extends Controller
         }
 
         return [
-            'form'        => $form->createView(),
-            'opinion'     => $opinion,
-            'project'     => $project,
+            'form' => $form->createView(),
+            'opinion' => $opinion,
+            'project' => $project,
             'currentStep' => $currentStep,
             'opinionType' => $opinionType,
         ];
@@ -288,13 +287,13 @@ class OpinionController extends Controller
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
         return [
-            'currentUrl'    => $currentUrl,
-            'currentStep'   => $currentStep,
-            'project'       => $currentStep->getProject(),
-            'opinion'       => $opinion,
-            'opinionType'   => $opinion->getOpinionType(),
+            'currentUrl' => $currentUrl,
+            'currentStep' => $currentStep,
+            'project' => $currentStep->getProject(),
+            'opinion' => $opinion,
+            'opinionType' => $opinion->getOpinionType(),
             'project_steps' => $steps,
-            'nav'           => $nav,
+            'nav' => $nav,
         ];
     }
 
@@ -305,7 +304,7 @@ class OpinionController extends Controller
             ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
             ->findBy(
                 ['opinionType' => $opinion->getOpinionType()],
-                ['position'    => 'ASC']
+                ['position' => 'ASC']
             );
         foreach ($appendixTypes as $otat) {
             $app = new OpinionAppendix();

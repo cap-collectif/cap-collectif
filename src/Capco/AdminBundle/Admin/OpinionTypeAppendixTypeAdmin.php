@@ -14,7 +14,7 @@ class OpinionTypeAppendixTypeAdmin extends Admin
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'position',
+        '_sort_by' => 'position',
     ];
 
     protected $translationDomain = 'SonataAdminBundle';
@@ -26,7 +26,7 @@ class OpinionTypeAppendixTypeAdmin extends Admin
                 'label' => 'admin.fields.opiniontype_appendixtype.position',
             ])
             ->add('appendixType', 'sonata_type_model', [
-                'label'    => 'admin.fields.opiniontype_appendixtype.appendix_type',
+                'label' => 'admin.fields.opiniontype_appendixtype.appendix_type',
                 'required' => true,
             ])
         ;

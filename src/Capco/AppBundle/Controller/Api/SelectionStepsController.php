@@ -8,21 +8,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Capco\AppBundle\Entity\Status;
+use Symfony\Component\HttpFoundation\Request;
 
 class SelectionStepsController extends FOSRestController
 {
     /**
-     * @Get("/selection_steps/{selection_step_id}/proposals")
+     * @Post("/selection_steps/{selection_step_id}/proposals")
      * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @QueryParam(name="first", requirements="[0-9.]+", default="0")
      * @QueryParam(name="offset", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|popular|comments)", default="last")
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
      */
-    public function getProposalsBySelectionStepAction(SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
+    public function getProposalsBySelectionStepAction(Request $request, SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
     {
         $searchResolver = $this->container->get('capco.search.resolver');
 
@@ -62,7 +64,7 @@ class SelectionStepsController extends FOSRestController
         // Filters
         $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
         $filters = [];
-        $filters['selectionStep.id'] = $selectionStep->getId();
+        $filters['selectionSteps.id'] = $selectionStep->getId();
         $filters['isTrashed'] = false;
         $filters['enabled'] = true;
         if (array_key_exists('status', $providedFilters) && $providedFilters['status'] > 0) {
@@ -78,7 +80,6 @@ class SelectionStepsController extends FOSRestController
             $filters['author.user_type.id'] = $providedFilters['type'];
         }
 
-
         // Search
         $results = $searchResolver->searchAll($page, $terms, $type, $sortField, $sortOrder, $filters, false, $pagination);
 
@@ -89,7 +90,7 @@ class SelectionStepsController extends FOSRestController
 
         return [
             'proposals' => $proposals,
-            'count'     => $results['count'],
+            'count' => $results['count'],
         ];
     }
 }

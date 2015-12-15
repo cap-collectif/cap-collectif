@@ -13,19 +13,19 @@ use Sonata\CoreBundle\Model\Metadata;
 class UserAdmin extends BaseAdmin
 {
     private $rolesLabels = [
-        'ROLE_USER'        => 'roles.user',
-        'ROLE_ADMIN'       => 'roles.admin',
+        'ROLE_USER' => 'roles.user',
+        'ROLE_ADMIN' => 'roles.admin',
         'ROLE_SUPER_ADMIN' => 'roles.super_admin',
     ];
 
     private $rolesLabelsNoSuper = [
-        'ROLE_USER'  => 'roles.user',
+        'ROLE_USER' => 'roles.user',
         'ROLE_ADMIN' => 'roles.admin',
     ];
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'username',
+        '_sort_by' => 'username',
     ];
 
     public function getFormBuilder()
@@ -63,7 +63,7 @@ class UserAdmin extends BaseAdmin
                     'edit' => [
                         'template' => 'CapcoAdminBundle:User:list__action_edit.html.twig',
                     ],
-                    'show'   => [],
+                    'show' => [],
                     'delete' => [
                         'template' => 'CapcoAdminBundle:User:list__action_delete.html.twig',
                     ],
@@ -185,14 +185,14 @@ class UserAdmin extends BaseAdmin
                 'required' => false,
             ], [
                 'link_parameters' => [
-                'context'      => 'default',
+                'context' => 'default',
                 'hide_context' => true,
             ], ])
             ->add('dateOfBirth', 'sonata_type_date_picker', [
-                'years'       => range(1900, $now->format('Y')),
+                'years' => range(1900, $now->format('Y')),
                 'dp_min_date' => '1-1-1900',
                 'dp_max_date' => $now->format('c'),
-                'required'    => false,
+                'required' => false,
             ])
             ->add('firstname', null, ['required' => false])
             ->add('lastname', null, ['required' => false])
@@ -213,7 +213,7 @@ class UserAdmin extends BaseAdmin
             ->add('city', null, ['required' => false])
             ->add('neighborhood', null, ['required' => false])
             ->add('gender', 'sonata_user_gender', [
-                'required'           => true,
+                'required' => true,
                 'translation_domain' => 'SonataUserBundle',
             ])
             ->add('locale', 'locale', ['required' => false])
@@ -235,7 +235,7 @@ class UserAdmin extends BaseAdmin
                 ->add('locked', null, ['required' => false])
                 ->add('isTermsAccepted', null, [
                     'required' => false,
-                    'data'     => true,
+                    'data' => true,
                 ])
                 ->add('expired', null, ['required' => false])
                 ->add('enabled', null, ['required' => false])
@@ -251,11 +251,11 @@ class UserAdmin extends BaseAdmin
                     'realRoles',
                     'sonata_security_roles',
                     [
-                        'expanded'           => true,
-                        'multiple'           => true,
-                        'required'           => false,
+                        'expanded' => true,
+                        'multiple' => true,
+                        'required' => false,
                         'translation_domain' => 'SonataUserBundle',
-                        'choices'            => $currentUser->hasRole('ROLE_SUPER_ADMIN')
+                        'choices' => $currentUser->hasRole('ROLE_SUPER_ADMIN')
                             ? $this->rolesLabels
                             : $this->rolesLabelsNoSuper,
                     ]

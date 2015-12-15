@@ -14,7 +14,7 @@ class QuestionAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'position',
+        '_sort_by' => 'position',
     ];
 
     protected $formOptions = [
@@ -29,18 +29,18 @@ class QuestionAdmin extends Admin
                 'label' => 'admin.fields.question.position',
             ])
             ->add('title', null, [
-                'label'    => 'admin.fields.question.title',
+                'label' => 'admin.fields.question.title',
                 'required' => true,
             ])
             ->add('helpText', null, [
-                'label'    => 'admin.fields.question.help_text',
+                'label' => 'admin.fields.question.help_text',
                 'required' => true,
             ])
             ->add('questionType', 'choice', [
-                'label'              => 'admin.fields.question.question_type',
-                'choices'            => Question::$questionTypes,
+                'label' => 'admin.fields.question.question_type',
+                'choices' => Question::$questionTypes,
                 'translation_domain' => 'CapcoAppBundle',
-                'required'           => true,
+                'required' => true,
             ])
         ;
     }

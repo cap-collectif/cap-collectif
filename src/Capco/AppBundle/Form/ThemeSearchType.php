@@ -16,9 +16,9 @@ class ThemeSearchType extends AbstractType
     {
         $builder
             ->add('term', 'search', [
-                'label'              => 'theme.search.term',
+                'label' => 'theme.search.term',
                 'translation_domain' => 'CapcoAppBundle',
-                'required'           => false,
+                'required' => false,
             ])
         ;
     }

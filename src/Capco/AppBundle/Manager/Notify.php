@@ -75,7 +75,7 @@ class Notify implements MailerInterface
         $template = $this->parameters['confirmation.template'];
         $url = $this->router->generate('fos_user_registration_confirm', ['token' => $user->getConfirmationToken()], true);
         $rendered = $this->templating->render($template, [
-            'user'            => $user,
+            'user' => $user,
             'confirmationUrl' => $url,
         ]);
         $this->sendFOSEmail($rendered, $user->getEmail());
@@ -86,7 +86,7 @@ class Notify implements MailerInterface
         $template = $this->parameters['resetting.template'];
         $url = $this->router->generate('fos_user_resetting_reset', ['token' => $user->getConfirmationToken()], true);
         $rendered = $this->templating->render($template, [
-            'user'            => $user,
+            'user' => $user,
             'confirmationUrl' => $url,
         ]);
         $this->sendFOSEmail($rendered, $user->getEmail());
@@ -136,12 +136,12 @@ class Notify implements MailerInterface
             $body = $this->templating->render(
                 $template,
                 [
-                    'user'         => $report->getReporter(),
-                    'type'         => $type,
-                    'message'      => $report->getBody(),
+                    'user' => $report->getReporter(),
+                    'type' => $type,
+                    'message' => $report->getBody(),
                     'contribution' => $report->getRelatedObject(),
-                    'siteURL'      => $this->urlResolver->getObjectUrl($report->getRelatedObject(), true),
-                    'adminURL'     => $this->urlResolver->getAdminObjectUrl($report->getRelatedObject(), true),
+                    'siteURL' => $this->urlResolver->getObjectUrl($report->getRelatedObject(), true),
+                    'adminURL' => $this->urlResolver->getAdminObjectUrl($report->getRelatedObject(), true),
                 ]
             );
 
@@ -164,7 +164,7 @@ class Notify implements MailerInterface
                 $template,
                 [
                     'contribution' => $contribution,
-                    'trashUrl'     => $this->urlResolver->getTrashedObjectUrl($contribution, true),
+                    'trashUrl' => $this->urlResolver->getTrashedObjectUrl($contribution, true),
                 ]
             );
 
@@ -203,7 +203,7 @@ class Notify implements MailerInterface
 
         $subject = $this->translator->trans(
             'proposal_status_change.notification.subject', [
-                '%sitename%' => $this->resolver->getValue('global.site.fullname')
+                '%sitename%' => $this->resolver->getValue('global.site.fullname'),
             ], 'CapcoAppBundle'
         );
         $template = 'CapcoAppBundle:Mail:notifyProposalStatusChange.html.twig';
@@ -227,7 +227,7 @@ class Notify implements MailerInterface
 
         $subject = $this->translator->trans(
             'proposal_answer.notification.subject', [
-            '%sitename%' => $this->resolver->getValue('global.site.fullname')
+            '%sitename%' => $this->resolver->getValue('global.site.fullname'),
         ], 'CapcoAppBundle'
         );
         $template = 'CapcoAppBundle:Mail:notifyProposalAnswer.html.twig';

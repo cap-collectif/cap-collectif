@@ -45,9 +45,9 @@ class RecentContributionsBlockService extends BaseBlockService
         $contributions = $this->resolver->getRecentContributions(10);
 
         $parameters = [
-            'context'       => $blockContext,
-            'settings'      => $blockContext->getSettings(),
-            'block'         => $blockContext->getBlock(),
+            'context' => $blockContext,
+            'settings' => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
             'contributions' => $contributions,
         ];
 
@@ -65,8 +65,8 @@ class RecentContributionsBlockService extends BaseBlockService
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'number'   => 10,
-            'title'    => 'Recents contributions',
+            'number' => 10,
+            'title' => 'Recents contributions',
             'template' => 'CapcoAdminBundle:Block:recent_contributions.html.twig',
         ]);
     }

@@ -34,11 +34,11 @@ class Opinion implements SelfLinkableInterface, VotableInterface
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
-        'last'      => 'opinion.sort.last',
-        'old'       => 'opinion.sort.old',
+        'last' => 'opinion.sort.last',
+        'old' => 'opinion.sort.old',
         'favorable' => 'opinion.sort.favorable',
-        'votes'     => 'opinion.sort.votes',
-        'comments'  => 'opinion.sort.comments',
+        'votes' => 'opinion.sort.votes',
+        'comments' => 'opinion.sort.comments',
     ];
 
     /**
@@ -791,16 +791,15 @@ class Opinion implements SelfLinkableInterface, VotableInterface
         );
 
         if ($filter === 'old') {
-            usort($connections, function($a, $b) {
+            usort($connections, function ($a, $b) {
                return $a->getCreatedAt() > $b->getCreatedAt() ? 1 : -1;
             });
         } elseif ($filter === 'last') {
-            usort($connections, function($a, $b) {
+            usort($connections, function ($a, $b) {
                 return $a->getCreatedAt() < $b->getCreatedAt() ? 1 : -1;
             });
         }
 
         return $connections;
     }
-
 }

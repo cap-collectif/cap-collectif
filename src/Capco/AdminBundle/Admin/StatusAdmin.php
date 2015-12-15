@@ -13,7 +13,7 @@ class StatusAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'position',
+        '_sort_by' => 'position',
     ];
 
     protected $formOptions = [
@@ -28,13 +28,13 @@ class StatusAdmin extends Admin
                 'label' => 'admin.fields.status.position',
             ])
             ->add('name', null, [
-                'label'    => 'admin.fields.status.name',
+                'label' => 'admin.fields.status.name',
                 'required' => true,
             ])
             ->add('color', 'choice', [
-                'choices'            => Status::$statusesLabels,
-                'label'              => 'admin.fields.status.color',
-                'required'           => true,
+                'choices' => Status::$statusesLabels,
+                'label' => 'admin.fields.status.color',
+                'required' => true,
                 'translation_domain' => 'CapcoAppBundle',
             ])
         ;

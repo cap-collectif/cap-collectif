@@ -12,6 +12,7 @@ class SearchController extends Controller
 {
     /**
      * @param Request $request
+     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Route("/search", name="app_search", defaults={"_feature_flags" = "search"})
@@ -22,7 +23,7 @@ class SearchController extends Controller
         $searchParams = [
             'term' => '',
             'type' => 'all',
-            'sort' => 'score'
+            'sort' => 'score',
         ];
         $sortField = '_score';
         $sortOrder = 'desc';
@@ -51,12 +52,12 @@ class SearchController extends Controller
         );
 
         return [
-            'form'      => $form->createView(),
-            'page'      => $page,
-            'q'         => $searchParams,
-            'count'     => $searchResults['count'],
-            'results'   => $searchResults['results'],
-            'nbPages'   => $searchResults['pages'],
+            'form' => $form->createView(),
+            'page' => $page,
+            'q' => $searchParams,
+            'count' => $searchResults['count'],
+            'results' => $searchResults['results'],
+            'nbPages' => $searchResults['pages'],
         ];
     }
 }

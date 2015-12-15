@@ -22,8 +22,8 @@ class ProposalSerializationListener implements EventSubscriberInterface
     {
         return [
             [
-                'event'  => 'serializer.post_serialize',
-                'class'  => 'Capco\AppBundle\Entity\Proposal',
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Proposal',
                 'method' => 'onPostProposal',
             ],
         ];
@@ -39,24 +39,24 @@ class ProposalSerializationListener implements EventSubscriberInterface
 
         $showUrl = $this->router->generate('app_project_show_proposal', [
             'proposalSlug' => $proposal->getSlug(),
-            'projectSlug'  => $project->getSlug(),
-            'stepSlug'     => $step->getSlug(),
+            'projectSlug' => $project->getSlug(),
+            'stepSlug' => $step->getSlug(),
         ], true);
         $reportUrl = $this->router->generate('app_report_proposal', [
-            'projectSlug'  => $project->getSlug(),
-            'stepSlug'     => $step->getSlug(),
+            'projectSlug' => $project->getSlug(),
+            'stepSlug' => $step->getSlug(),
             'proposalSlug' => $proposal->getSlug(),
         ], true);
 
         $indexUrl = $this->router->generate('app_project_show_collect', [
             'projectSlug' => $project->getSlug(),
-            'stepSlug'    => $step->getSlug(),
+            'stepSlug' => $step->getSlug(),
         ], true);
 
         $event->getVisitor()->addData(
             '_links', [
-                'show'   => $showUrl,
-                'index'  => $indexUrl,
+                'show' => $showUrl,
+                'index' => $indexUrl,
                 'report' => $reportUrl,
             ]
         );

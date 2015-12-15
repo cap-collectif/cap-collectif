@@ -16,7 +16,7 @@ class AppendixTypeAdmin extends Admin
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -50,8 +50,8 @@ class AppendixTypeAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])
@@ -77,7 +77,7 @@ class AppendixTypeAdmin extends Admin
     {
         $formMapper
             ->add('title', null, [
-                'label'    => 'admin.fields.appendix_type.title',
+                'label' => 'admin.fields.appendix_type.title',
                 'required' => true,
             ])
             ->add('helpText', null, [

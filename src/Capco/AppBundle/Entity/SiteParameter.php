@@ -25,14 +25,14 @@ class SiteParameter
 
     public static $types = [
         'simple_text' => self::TYPE_SIMPLE_TEXT,
-        'rich_text'   => self::TYPE_RICH_TEXT,
-        'integer'     => self::TYPE_INTEGER,
-        'javascript'  => self::TYPE_JS,
-        'email'       => self::TYPE_EMAIL,
-        'intern_url'  => self::TYPE_INTERN_URL,
-        'url'         => self::TYPE_URL,
-        'tel'         => self::TYPE_TEL_NB,
-        'boolean'     => self::TYPE_BOOLEAN,
+        'rich_text' => self::TYPE_RICH_TEXT,
+        'integer' => self::TYPE_INTEGER,
+        'javascript' => self::TYPE_JS,
+        'email' => self::TYPE_EMAIL,
+        'intern_url' => self::TYPE_INTERN_URL,
+        'url' => self::TYPE_URL,
+        'tel' => self::TYPE_TEL_NB,
+        'boolean' => self::TYPE_BOOLEAN,
     ];
 
     /**

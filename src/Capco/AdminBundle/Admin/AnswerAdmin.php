@@ -14,7 +14,7 @@ class AnswerAdmin extends Admin
 
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -24,18 +24,18 @@ class AnswerAdmin extends Admin
     {
         $formMapper
             ->add('title', null, [
-                'label'    => 'admin.fields.answer.title',
+                'label' => 'admin.fields.answer.title',
                 'required' => false,
             ])
             ->add('author', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.answer.author',
+                'label' => 'admin.fields.answer.author',
                 'property' => 'username',
                 'required' => true,
             ])
             ->add('body', 'ckeditor', [
-                'label'       => 'admin.fields.answer.body',
+                'label' => 'admin.fields.answer.body',
                 'config_name' => 'admin_editor',
-                'required'    => true,
+                'required' => true,
             ])
         ;
     }

@@ -8,12 +8,9 @@ use Elastica\Filter\Nested;
 use Elastica\Filter\Term;
 use Elastica\Index;
 use Elastica\Query;
-use Elastica\Query\AbstractQuery;
-use Elastica\Query\Bool as BoolQuery;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Filtered;
 use Elastica\Filter\Type;
-use Elastica\QueryBuilder;
 use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 
 class SearchResolver
@@ -30,15 +27,15 @@ class SearchResolver
     }
 
     /**
-     * Search by term and type in elasticsearch
+     * Search by term and type in elasticsearch.
      *
-     * @param integer   $page
+     * @param int       $page
      * @param string    $term
      * @param string    $type
      * @param string    $sortField
      * @param string    $sortOrder
      * @param bool|true $useTransformation
-     * @param array $filters
+     * @param array     $filters
      *
      * @return array
      */
@@ -80,14 +77,15 @@ class SearchResolver
         return [
             'count' => $count,
             'results' => $results,
-            'pages' => ceil($count / $resultsPerPage)
+            'pages' => ceil($count / $resultsPerPage),
         ];
     }
 
     /**
-     * Get multi match query on term
+     * Get multi match query on term.
      *
      * @param $term
+     *
      * @return MultiMatch
      */
     protected function getMultiMatchQuery($term)
@@ -114,9 +112,11 @@ class SearchResolver
     /**
      * Take an array of filters and return correct elastica object.
      * The array of filters can contain either simple filters (fieldName => value)
-     * or nested filters (path => [filters])
+     * or nested filters (path => [filters]).
+     *
      * @param $type
      * @param array $filters
+     *
      * @return BoolFilter
      */
     public function getBoolFilter(array $filters)
@@ -131,7 +131,7 @@ class SearchResolver
                 $boolFilter->addMust($nested);
             } else {
                 $boolFilter->addMust(new Term([
-                    $filterName => $filterData
+                    $filterName => $filterData,
                 ]));
             }
         }
@@ -142,6 +142,7 @@ class SearchResolver
     /**
      * @param $sort
      * @param string $order
+     *
      * @return array|void
      */
     protected function getSortSettings($sort, $order = 'desc')
@@ -154,29 +155,30 @@ class SearchResolver
             ],
             'createdAt' => [
                 'order' => 'desc',
-            ]
+            ],
         ];
     }
 
     /**
-     * get array of settings for highlighted results
+     * get array of settings for highlighted results.
+     *
      * @return array
      */
     protected function getHighlightSettings()
     {
         return [
-            'pre_tags'            => ['<span class="search__highlight">'],
-            'post_tags'           => ['</span>'],
+            'pre_tags' => ['<span class="search__highlight">'],
+            'post_tags' => ['</span>'],
             'number_of_fragments' => 3,
-            'fragment_size'       => 175,
-            'fields'              => [
-                'title'          => ['number_of_fragments' => 0],
-                'object'         => new \stdClass(),
-                'body'           => new \stdClass(),
-                'teaser'         => new \stdClass(),
-                'excerpt'        => new \stdClass(),
-                'username'       => ['number_of_fragments' => 0],
-                'biography'      => new \stdClass(),
+            'fragment_size' => 175,
+            'fields' => [
+                'title' => ['number_of_fragments' => 0],
+                'object' => new \stdClass(),
+                'body' => new \stdClass(),
+                'teaser' => new \stdClass(),
+                'excerpt' => new \stdClass(),
+                'username' => ['number_of_fragments' => 0],
+                'biography' => new \stdClass(),
             ],
         ];
     }

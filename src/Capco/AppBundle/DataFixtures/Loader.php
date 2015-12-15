@@ -72,7 +72,7 @@ class Loader
         $this->persister = new Doctrine($this->objectManager);
 
         $evm = $this->objectManager->getEventManager();
-        foreach($evm->getListeners()['postFlush'] as $listener) {
+        foreach ($evm->getListeners()['postFlush'] as $listener) {
             if ($listener instanceof Listener) {
                 $evm->removeEventListener('postFlush', $listener);
             }

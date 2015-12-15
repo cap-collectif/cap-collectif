@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -21,14 +20,14 @@ class StepController extends CRUDController
         if (!$projectId) {
             return new JsonResponse([
                 'status' => 'OK',
-                'more'   => false,
-                'items'  => [],
+                'more' => false,
+                'items' => [],
             ]);
         }
 
         return $this->retrieveAutocompleteItems($request, [
-            'enabled'                                          => 1,
-            'isTrashed'                                        => 2,
+            'enabled' => 1,
+            'isTrashed' => 2,
             'proposalForm__step__projectAbstractStep__project' => $projectId,
         ]);
     }

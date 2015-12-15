@@ -26,7 +26,7 @@ class SynthesisElementType extends AbstractType
             ->add('notation', null, ['required' => false])
             ->add('comment', null, ['required' => false])
             ->add('parent', 'entity', [
-                'class'    => 'Capco\AppBundle\Entity\Synthesis\SynthesisElement',
+                'class' => 'Capco\AppBundle\Entity\Synthesis\SynthesisElement',
                 'property' => 'id',
                 'required' => false,
             ])
@@ -34,7 +34,7 @@ class SynthesisElementType extends AbstractType
 
         if ($this->hasDivision) {
             $builder->add('division', new SynthesisDivisionType(), [
-                'required'           => false,
+                'required' => false,
                 'cascade_validation' => true,
             ]);
         }
@@ -43,7 +43,7 @@ class SynthesisElementType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class'      => 'Capco\AppBundle\Entity\Synthesis\SynthesisElement',
+            'data_class' => 'Capco\AppBundle\Entity\Synthesis\SynthesisElement',
             'csrf_protection' => false,
         ]);
     }

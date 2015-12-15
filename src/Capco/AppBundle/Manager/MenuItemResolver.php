@@ -30,19 +30,19 @@ class MenuItemResolver
 
             foreach ($parents as $parent) {
                 $links[$parent->getId()] = [
-                    'title'             => $parent->getTitle(),
-                    'link'              => $parent->getLink(),
+                    'title' => $parent->getTitle(),
+                    'link' => $parent->getLink(),
                     'hasEnabledFeature' => $this->manager->containsEnabledFeature($parent->getAssociatedFeatures()),
-                    'children'          => [],
+                    'children' => [],
                 ];
             }
 
             foreach ($children as $child) {
                 if (array_key_exists($child->getParent()->getId(), $links)) {
                     $links[$child->getParent()->getId()]['children'][] = [
-                        'id'                => $child->getId(),
-                        'title'             => $child->getTitle(),
-                        'link'              => $child->getLink(),
+                        'id' => $child->getId(),
+                        'title' => $child->getTitle(),
+                        'link' => $child->getLink(),
                         'hasEnabledFeature' => $this->manager->containsEnabledFeature($child->getAssociatedFeatures()),
                     ];
                 }
