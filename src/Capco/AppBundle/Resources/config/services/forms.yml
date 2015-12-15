@@ -12,6 +12,16 @@ services:
 
   capco.form.opinion:
       class: Capco\AppBundle\Form\OpinionType
-      arguments: [@doctrine.orm.entity_manager]
+      arguments: [@capco.form.transformer.entity_to_id]
       tags:
         - { name: form.type, alias: opinion }
+
+  capco.form.proposal:
+      class: Capco\AppBundle\Form\ProposalType
+      arguments: [@capco.form.transformer.entity_to_id]
+      tags:
+        - { name: form.type, alias: proposal }
+
+  capco.form.transformer.entity_to_id:
+    class: Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer
+    arguments: [@doctrine.orm.entity_manager]

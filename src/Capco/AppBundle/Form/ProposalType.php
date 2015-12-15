@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -9,11 +10,11 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProposalType extends AbstractType
 {
-    protected $em;
+    protected $transformer;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityToIdTransformer $transformer)
     {
-        $this->em = $em;
+        $this->transformer = $transformer;
     }
 
     /**
@@ -39,7 +40,7 @@ class ProposalType extends AbstractType
                 'allow_add'    => true,
                 'allow_delete' => false,
                 'by_reference' => false,
-                'type'         => new ProposalResponseType($this->em),
+                'type'         => new ProposalResponseType($this->transformer),
                 'required'     => false,
             ])
         ;
@@ -63,6 +64,6 @@ class ProposalType extends AbstractType
      */
     public function getName()
     {
-        return '';
+        return 'proposal';
     }
 }

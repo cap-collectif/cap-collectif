@@ -10,11 +10,11 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProposalResponseType extends AbstractType
 {
-    protected $em;
+    protected $transformer;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityToIdTransformer $transformer)
     {
-        $this->em = $em;
+        $this->transformer = $transformer;
     }
 
     /**
@@ -23,9 +23,8 @@ class ProposalResponseType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $dataTransformer = new EntityToIdTransformer($this->em);
-        $dataTransformer->setEntityClass('Capco\AppBundle\Entity\Question');
-        $dataTransformer->setEntityRepository('CapcoAppBundle:Question');
+        $this->transformer->setEntityClass('Capco\AppBundle\Entity\Question');
+        $this->transformer->setEntityRepository('CapcoAppBundle:Question');
         $builder
             ->add('value', null, [
                 'required' => true,
@@ -34,7 +33,7 @@ class ProposalResponseType extends AbstractType
         ;
         $builder
             ->get('question')
-            ->addModelTransformer($dataTransformer)
+            ->addModelTransformer($this->transformer)
         ;
     }
 
@@ -56,6 +55,6 @@ class ProposalResponseType extends AbstractType
      */
     public function getName()
     {
-        return '';
+        return 'proposal_response';
     }
 }

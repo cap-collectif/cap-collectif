@@ -64,8 +64,7 @@ const OpinionForm = React.createClass({
   },
 
   onTypeChange(ev) {
-    const type = parseInt(ev.target.value);
-    this.updateAppendices(type);
+    this.updateAppendices(parseInt(ev.target.value));
   },
 
   getAppendixTypeForType(type) {

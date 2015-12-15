@@ -72,14 +72,14 @@ class ConsultationStepsController extends FOSRestController
             ;
             $opinion->setPosition($currentMaximumPosition + 1);
 
-            $otats = $this->get('doctrine.orm.entity_manager')
+            $opinionTypeAppendixTypes = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
                 ->findBy(
                     ['opinionType' => $opinion->getOpinionType()],
                     ['position'    => 'ASC']
             );
             $appendices = $opinion->getAppendices();
-            foreach ($otats as $otat) {
+            foreach ($opinionTypeAppendixTypes as $otat) {
                 $found = false;
                 foreach ($appendices as $appendix) {
                     if ($appendix->getAppendixType() == $otat->getAppendixType()) {

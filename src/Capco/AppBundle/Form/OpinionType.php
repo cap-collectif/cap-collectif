@@ -13,11 +13,11 @@ use Doctrine\ORM\EntityManager;
 
 class OpinionType extends AbstractType
 {
-    protected $em;
+    protected $transformer;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityToIdTransformer $transformer)
     {
-        $this->em = $em;
+        $this->transformer = $transformer;
     }
 
     /**
@@ -70,7 +70,6 @@ class OpinionType extends AbstractType
             ->addEventListener(
                 FormEvents::POST_SUBMIT,
                 function(FormEvent $event) {
-                    $linkId =
                     $entity = $event->getForm()->getData();
                     $entity->addParentConnection(
                         $event->getForm()->get('link')->getData()
@@ -79,13 +78,12 @@ class OpinionType extends AbstractType
             )
         ;
 
-        $transformer = new EntityToIdTransformer($this->em);
-        $transformer->setEntityClass('Capco\AppBundle\Entity\Opinion');
-        $transformer->setEntityRepository('CapcoAppBundle:Opinion');
+        $this->transformer->setEntityClass('Capco\AppBundle\Entity\Opinion');
+        $this->transformer->setEntityRepository('CapcoAppBundle:Opinion');
 
         $builder
             ->get('link')
-            ->addModelTransformer($transformer)
+            ->addModelTransformer($this->transformer)
         ;
     }
 
