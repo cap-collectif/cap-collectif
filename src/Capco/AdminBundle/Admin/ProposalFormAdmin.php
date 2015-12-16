@@ -12,7 +12,7 @@ class ProposalFormAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
     protected $formOptions = [
@@ -28,7 +28,7 @@ class ProposalFormAdmin extends Admin
                 'label' => 'admin.fields.proposal_form.title',
             ])
             ->add('description', 'ckeditor', [
-                'label' => 'admin.fields.proposal_form.description',
+                'label'       => 'admin.fields.proposal_form.description',
                 'config_name' => 'admin_editor',
             ])
             ->end()
@@ -37,32 +37,32 @@ class ProposalFormAdmin extends Admin
         $formMapper
             ->with('admin.fields.proposal_form.group_questions')
             ->add('titleHelpText', null, [
-                'label' => 'admin.fields.proposal_form.title_help_text',
+                'label'    => 'admin.fields.proposal_form.title_help_text',
                 'required' => false,
-                'help' => 'admin.fields.proposal_form.help_text_title_help_text',
+                'help'     => 'admin.fields.proposal_form.help_text_title_help_text',
             ])
             ->add('descriptionHelpText', null, [
-                'label' => 'admin.fields.proposal_form.description_help_text',
+                'label'    => 'admin.fields.proposal_form.description_help_text',
                 'required' => false,
-                'help' => 'admin.fields.proposal_form.help_text_description_help_text',
+                'help'     => 'admin.fields.proposal_form.help_text_description_help_text',
             ])
             ->add('themeHelpText', null, [
-                'label' => 'admin.fields.proposal_form.theme_help_text',
+                'label'    => 'admin.fields.proposal_form.theme_help_text',
                 'required' => false,
-                'help' => 'admin.fields.proposal_form.help_text_theme_help_text',
+                'help'     => 'admin.fields.proposal_form.help_text_theme_help_text',
             ])
             ->add('districtHelpText', null, [
-                'label' => 'admin.fields.proposal_form.district_help_text',
+                'label'    => 'admin.fields.proposal_form.district_help_text',
                 'required' => false,
-                'help' => 'admin.fields.proposal_form.help_text_district_help_text',
+                'help'     => 'admin.fields.proposal_form.help_text_district_help_text',
             ])
             ->add('questions', 'sonata_type_collection', [
-                'label' => 'admin.fields.proposal_form.questions',
+                'label'        => 'admin.fields.proposal_form.questions',
                 'by_reference' => false,
-                'required' => false,
+                'required'     => false,
             ], [
-                'edit' => 'inline',
-                'inline' => 'table',
+                'edit'     => 'inline',
+                'inline'   => 'table',
                 'sortable' => 'position',
             ])
             ->end()
@@ -96,8 +96,8 @@ class ProposalFormAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])

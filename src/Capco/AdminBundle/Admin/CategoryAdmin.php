@@ -12,7 +12,7 @@ class CategoryAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
     /**
@@ -29,7 +29,7 @@ class CategoryAdmin extends Admin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.category.is_enabled',
+                'label'    => 'admin.fields.category.is_enabled',
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.category.created_at',
@@ -50,15 +50,15 @@ class CategoryAdmin extends Admin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.category.is_enabled',
+                'label'    => 'admin.fields.category.is_enabled',
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.category.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])
@@ -75,7 +75,7 @@ class CategoryAdmin extends Admin
                 'label' => 'admin.fields.category.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.category.is_enabled',
+                'label'    => 'admin.fields.category.is_enabled',
                 'required' => false,
             ])
         ;
@@ -92,7 +92,7 @@ class CategoryAdmin extends Admin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.category.is_enabled',
+                'label'    => 'admin.fields.category.is_enabled',
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.category.updated_at',

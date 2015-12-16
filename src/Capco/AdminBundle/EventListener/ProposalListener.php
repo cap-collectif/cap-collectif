@@ -38,6 +38,7 @@ class ProposalListener implements ContainerAwareInterface
             if (array_key_exists('answer', $changeSet) && $changeSet['answer'][1] instanceof Answer) {
                 $notifier->notifyProposalAnswer($entity);
             }
+
         }
     }
 }

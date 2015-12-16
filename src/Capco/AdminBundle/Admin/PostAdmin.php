@@ -13,7 +13,7 @@ class PostAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'createdAt',
+        '_sort_by'    => 'createdAt',
     ];
 
     /**
@@ -91,13 +91,13 @@ class PostAdmin extends Admin
             ])
             ->add('isPublished', null, [
                 'editable' => true,
-                'label' => 'admin.fields.blog_post.is_published',
+                'label'    => 'admin.fields.blog_post.is_published',
             ])
             ->add('publishedAt', null, [
                 'label' => 'admin.fields.blog_post.published_at',
             ])
             ->add('isCommentable', null, [
-                'label' => 'admin.fields.blog_post.is_commentable',
+                'label'    => 'admin.fields.blog_post.is_commentable',
                 'editable' => true,
             ])
             ->add('commentsCount', null, [
@@ -108,8 +108,8 @@ class PostAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])
@@ -126,7 +126,7 @@ class PostAdmin extends Admin
                 'label' => 'admin.fields.blog_post.title',
             ])
             ->add('Authors', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.blog_post.authors',
+                'label'    => 'admin.fields.blog_post.authors',
                 'property' => 'username',
                 'multiple' => true,
                 'required' => false,
@@ -135,29 +135,29 @@ class PostAdmin extends Admin
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper->add('themes', 'sonata_type_model', [
-                'label' => 'admin.fields.blog_post.themes',
-                'required' => false,
-                'multiple' => true,
+                'label'        => 'admin.fields.blog_post.themes',
+                'required'     => false,
+                'multiple'     => true,
                 'by_reference' => false,
             ]);
         }
 
         $formMapper
             ->add('projects', 'sonata_type_model', [
-                'label' => 'admin.fields.blog_post.projects',
-                'required' => false,
-                'multiple' => true,
+                'label'        => 'admin.fields.blog_post.projects',
+                'required'     => false,
+                'multiple'     => true,
                 'by_reference' => false,
             ])
             ->add('isPublished', null, [
-                'label' => 'admin.fields.blog_post.is_published',
+                'label'    => 'admin.fields.blog_post.is_published',
                 'required' => false,
             ])
             ->add('publishedAt', 'sonata_type_datetime_picker', [
                 'required' => false,
-                'label' => 'admin.fields.blog_post.published_at',
-                'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => [
+                'label'    => 'admin.fields.blog_post.published_at',
+                'format'   => 'dd/MM/yyyy HH:mm',
+                'attr'     => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
             ])
@@ -165,17 +165,17 @@ class PostAdmin extends Admin
                 'label' => 'admin.fields.blog_post.abstract',
             ])
             ->add('body', 'ckeditor', [
-                'label' => 'admin.fields.blog_post.body',
+                'label'       => 'admin.fields.blog_post.body',
                 'config_name' => 'admin_editor',
             ])
             ->add('Media', 'sonata_type_model_list', ['required' => false], [
                 'link_parameters' => [
-                    'context' => 'default',
+                    'context'      => 'default',
                     'hide_context' => true,
                 ],
             ])
             ->add('isCommentable', null, [
-                'label' => 'admin.fields.blog_post.is_commentable',
+                'label'    => 'admin.fields.blog_post.is_commentable',
                 'required' => false,
             ])
         ;
@@ -209,13 +209,13 @@ class PostAdmin extends Admin
                 'label' => 'admin.fields.blog_post.abstract',
             ])
             ->add('body', 'ckeditor', [
-                'label' => 'admin.fields.blog_post.body',
+                'label'       => 'admin.fields.blog_post.body',
                 'config_name' => 'admin_editor',
             ])
             ->add('Media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Post:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'admin.fields.blog_post.media',
+                'label'    => 'admin.fields.blog_post.media',
             ])
             ->add('isPublished', null, [
                 'label' => 'admin.fields.blog_post.is_published',

@@ -42,17 +42,17 @@ class DynamicRelationSubscriber implements EventSubscriber
                     if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
                         $metadata->mapManyToMany([
                             'targetEntity' => $metadata->getName(),
-                            'fieldName' => 'childConnections',
-                            'cascade' => ['persist'],
+                            'fieldName'    => 'childConnections',
+                            'cascade'      => ['persist'],
                             'inversedBy' => 'parentConnections',
                             'joinTable' => [
-                                'name' => $metadata->getTableName().'_relation',
+                                'name' => $metadata->getTableName() . '_relation',
                             ],
                         ]);
                         $metadata->mapManyToMany([
                             'targetEntity' => $metadata->getName(),
-                            'fieldName' => 'parentConnections',
-                            'cascade' => ['persist'],
+                            'fieldName'    => 'parentConnections',
+                            'cascade'      => ['persist'],
                             'mappedBy' => 'childConnections',
                         ]);
                     }
@@ -66,11 +66,11 @@ class DynamicRelationSubscriber implements EventSubscriber
                         $fieldName = lcfirst(substr($metadata->getName(), strrpos($metadata->getName(), '\\') + 1));
 
                         $metadata->mapOneToMany([
-                            'targetEntity' => $metadata->getName().'Vote',
-                            'fieldName' => 'votes',
-                            'cascade' => ['persist', 'remove'],
+                            'targetEntity'  => $metadata->getName().'Vote',
+                            'fieldName'     => 'votes',
+                            'cascade'       => ['persist', 'remove'],
                             'orphanRemoval' => true,
-                            'mappedBy' => $fieldName,
+                            'mappedBy'      => $fieldName,
                         ]);
                     }
                 break;

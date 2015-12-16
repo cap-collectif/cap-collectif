@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
+use Doctrine\ORM\EntityManager;
 
 class OpinionType extends AbstractType
 {
@@ -28,9 +29,9 @@ class OpinionType extends AbstractType
         if ($options['action'] === 'edit') {
             $builder
                 ->add('confirm', 'checkbox', [
-                    'mapped' => false,
-                    'label' => 'opinion.form.confirm',
-                    'required' => true,
+                    'mapped'      => false,
+                    'label'       => 'opinion.form.confirm',
+                    'required'    => true,
                     'constraints' => [new IsTrue(['message' => 'opinion.votes_not_confirmed'])],
                 ])
             ;
@@ -38,12 +39,12 @@ class OpinionType extends AbstractType
 
         $builder
             ->add('title', 'text', [
-                'label' => 'opinion.form.title',
+                'label'    => 'opinion.form.title',
                 'required' => true,
             ])
             ->add('body', 'ckeditor', [
-                'label' => 'opinion.form.body',
-                'required' => true,
+                'label'       => 'opinion.form.body',
+                'required'    => true,
                 'config_name' => 'user_editor',
             ])
             ->add('OpinionType', null, [
@@ -52,7 +53,7 @@ class OpinionType extends AbstractType
                     'class' => 'hidden',
                 ],
                 'label_attr' => [
-                    'class' => 'hidden',
+                    'class' => 'hidden'
                 ],
             ])
             ->add('link', 'hidden', [
@@ -60,7 +61,7 @@ class OpinionType extends AbstractType
                 'mapped' => false,
             ])
             ->add('appendices', 'collection', [
-                'type' => new AppendixType(),
+                'type'  => new AppendixType(),
                 'label' => false,
                 'required' => false,
                 'allow_add' => true,
@@ -68,7 +69,7 @@ class OpinionType extends AbstractType
             ])
             ->addEventListener(
                 FormEvents::POST_SUBMIT,
-                function (FormEvent $event) {
+                function(FormEvent $event) {
                     $entity = $event->getForm()->getData();
                     $entity->addParentConnection(
                         $event->getForm()->get('link')->getData()
@@ -92,8 +93,8 @@ class OpinionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Opinion',
-            'csrf_protection' => false,
+            'data_class'         => 'Capco\AppBundle\Entity\Opinion',
+            'csrf_protection'    => false,
             'translation_domain' => 'CapcoAppBundle',
             'action' => 'create',
         ]);

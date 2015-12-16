@@ -7,9 +7,12 @@ use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializationContext;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class OpinionTypeSerializationListener implements EventSubscriberInterface
 {
+
     protected $resolver;
     protected $serializer;
 
@@ -23,8 +26,8 @@ class OpinionTypeSerializationListener implements EventSubscriberInterface
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\OpinionType',
+                'event'  => 'serializer.post_serialize',
+                'class'  => 'Capco\AppBundle\Entity\OpinionType',
                 'method' => 'onPostOpinionType',
             ],
         ];
@@ -39,7 +42,7 @@ class OpinionTypeSerializationListener implements EventSubscriberInterface
             );
 
             $context = new SerializationContext();
-            $context->setGroups(['OpinionTypeDetails']);
+            $context->setGroups(["OpinionTypeDetails"]);
             $serializedTypes = $this->serializer->serialize(
                 ['data' => $availableTypes],
                 'json',
@@ -48,7 +51,7 @@ class OpinionTypeSerializationListener implements EventSubscriberInterface
 
             $event->getVisitor()->addData(
                 'availableLinkTypes',
-                json_decode($serializedTypes, true)['data']
+                json_decode($serializedTypes,true)['data']
             );
         }
     }

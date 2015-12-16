@@ -1,4 +1,3 @@
-@synthesis
 Feature: Synthesis Commands
 
 @database

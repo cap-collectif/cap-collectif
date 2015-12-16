@@ -13,7 +13,7 @@ class IdeaAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
     /**
@@ -85,15 +85,15 @@ class IdeaAdmin extends Admin
                 'label' => 'admin.fields.idea.author',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.idea.is_enabled',
+                'label'    => 'admin.fields.idea.is_enabled',
                 'editable' => true,
             ])
             ->add('isTrashed', null, [
-                'label' => 'admin.fields.idea.is_trashed',
+                'label'    => 'admin.fields.idea.is_trashed',
                 'editable' => true,
             ])
             ->add('isCommentable', null, [
-                'label' => 'admin.fields.idea.is_commentable',
+                'label'    => 'admin.fields.idea.is_commentable',
                 'editable' => true,
             ])
             ->add('updatedAt', null, [
@@ -101,8 +101,8 @@ class IdeaAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])
@@ -119,51 +119,51 @@ class IdeaAdmin extends Admin
                 'label' => 'admin.fields.idea.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.idea.is_enabled',
+                'label'    => 'admin.fields.idea.is_enabled',
                 'required' => false,
             ])
             ->add('isCommentable', null, [
-                'label' => 'admin.fields.idea.is_commentable',
+                'label'    => 'admin.fields.idea.is_commentable',
                 'required' => false,
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.idea.author',
+                'label'    => 'admin.fields.idea.author',
                 'property' => 'username',
             ])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper->add('theme', 'sonata_type_model', [
-                'label' => 'admin.fields.idea.theme',
+                'label'    => 'admin.fields.idea.theme',
                 'required' => true,
             ]);
         }
 
         $formMapper
             ->add('object', 'ckeditor', [
-                'label' => 'admin.fields.idea.object',
+                'label'       => 'admin.fields.idea.object',
                 'config_name' => 'admin_editor',
             ])
             ->add('body', 'ckeditor', [
-                'label' => 'admin.fields.idea.body',
+                'label'       => 'admin.fields.idea.body',
                 'config_name' => 'admin_editor',
             ])
             ->add('Media', 'sonata_type_model_list', [
-                'label' => 'admin.fields.idea.media',
+                'label'    => 'admin.fields.idea.media',
                 'required' => false,
             ], [
                 'link_parameters' => [
-                    'context' => 'default',
+                    'context'      => 'default',
                     'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
+                    'provider'     => 'sonata.media.provider.image',
                 ],
             ])
             ->add('isTrashed', null, [
-                'label' => 'admin.fields.idea.is_trashed',
+                'label'    => 'admin.fields.idea.is_trashed',
                 'required' => false,
             ])
             ->add('trashedReason', null, [
-                'label' => 'admin.fields.idea.trashed_reason',
+                'label'    => 'admin.fields.idea.trashed_reason',
                 'required' => false,
             ])
         ;
@@ -203,7 +203,7 @@ class IdeaAdmin extends Admin
             ->add('Media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Idea:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'admin.fields.idea.media',
+                'label'    => 'admin.fields.idea.media',
             ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.idea.is_enabled',

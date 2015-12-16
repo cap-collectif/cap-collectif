@@ -1,23 +1,13 @@
-import ProposalActions from '../../../actions/ProposalActions';
+import SearchActions from '../../../actions/SearchActions';
 import Input from '../../Form/Input';
 
 const Button = ReactBootstrap.Button;
 
 const ProposalListSearch = React.createClass({
-  propTypes: {
-    id: React.PropTypes.number.isRequired,
-    fetchFrom: React.PropTypes.string,
-  },
   mixins: [
     ReactIntl.IntlMixin,
     React.addons.LinkedStateMixin,
   ],
-
-  getDefaultProps() {
-    return {
-      fetchFrom: 'form',
-    };
-  },
 
   getInitialState() {
     return {
@@ -27,14 +17,12 @@ const ProposalListSearch = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    let value = this._input.getValue();
-    value = value.length > 0 ? value : null;
-    ProposalActions.changeSearchTerms(value);
-    this.reload();
-  },
+    const value = this._input.getValue();
+    const length = value.length;
 
-  reload() {
-    ProposalActions.load(this.props.fetchFrom, this.props.id);
+    if (length > 0) {
+      SearchActions.getSearch(value, 'score', 'proposal', 1, 50);
+    }
   },
 
   renderSearchButton() {

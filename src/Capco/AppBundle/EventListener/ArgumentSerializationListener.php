@@ -24,8 +24,8 @@ class ArgumentSerializationListener implements EventSubscriberInterface
     {
         return [
             [
-                'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\Argument',
+                'event'  => 'serializer.post_serialize',
+                'class'  => 'Capco\AppBundle\Entity\Argument',
                 'method' => 'onPostArgument',
             ],
         ];
@@ -47,44 +47,44 @@ class ArgumentSerializationListener implements EventSubscriberInterface
 
         if (!$opinion || !$opinionType || !$step || !$project) {
             throw new \Exception(
-                'Error during serialization of argument '.$argument->getId()
+                'Error during serialization of argument ' . $argument->getId()
             );
         }
 
         $parent = $argument->getParent();
         if ($parent instanceof Opinion) {
             $showUrl = $this->router->generate('app_project_show_opinion', [
-                'projectSlug' => $project->getSlug(),
-                'stepSlug' => $step->getSlug(),
+                'projectSlug'     => $project->getSlug(),
+                'stepSlug'        => $step->getSlug(),
                 'opinionTypeSlug' => $opinionType->getSlug(),
-                'opinionSlug' => $parent->getSlug(),
+                'opinionSlug'     => $parent->getSlug(),
             ], true).'#arg-'.$argument->getId();
         } elseif ($parent instanceof OpinionVersion) {
             $showUrl = $this->router->generate('app_project_show_opinion_version', [
-                'projectSlug' => $project->getSlug(),
-                'stepSlug' => $step->getSlug(),
+                'projectSlug'     => $project->getSlug(),
+                'stepSlug'        => $step->getSlug(),
                 'opinionTypeSlug' => $opinionType->getSlug(),
-                'opinionSlug' => $opinion->getSlug(),
-                'versionSlug' => $parent->getSlug(),
+                'opinionSlug'     => $opinion->getSlug(),
+                'versionSlug'     => $parent->getSlug(),
             ], true).'#arg-'.$argument->getId();
         }
 
         $event->getVisitor()->addData(
             '_links', [
-                'show' => $showUrl,
-                'edit' => $this->router->generate('app_project_edit_argument', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
+                'show'                => $showUrl,
+                'edit'                => $this->router->generate('app_project_edit_argument', [
+                    'projectSlug'     => $project->getSlug(),
+                    'stepSlug'        => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'argumentId' => $argument->getId(),
+                    'opinionSlug'     => $opinion->getSlug(),
+                    'argumentId'      => $argument->getId(),
                 ], true),
-                'report' => $this->router->generate('app_report_argument', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
+                'report'              => $this->router->generate('app_report_argument', [
+                    'projectSlug'     => $project->getSlug(),
+                    'stepSlug'        => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'argumentId' => $argument->getId(),
+                    'opinionSlug'     => $opinion->getSlug(),
+                    'argumentId'      => $argument->getId(),
                 ], true),
             ]
         );

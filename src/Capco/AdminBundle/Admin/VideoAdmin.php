@@ -14,7 +14,7 @@ class VideoAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
     /**
@@ -56,19 +56,19 @@ class VideoAdmin extends Admin
                 'label' => 'admin.fields.video.title',
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.video.author',
+                'label'    => 'admin.fields.video.author',
                 'property' => 'username',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.video.is_enabled',
+                'label'    => 'admin.fields.video.is_enabled',
                 'editable' => true,
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.video.updated_at',
             ])
             ->add('color', null, [
-                'label' => 'admin.fields.video.color',
-                'template' => 'CapcoAdminBundle:OpinionType:color_list_field.html.twig',
+                'label'       => 'admin.fields.video.color',
+                'template'    => 'CapcoAdminBundle:OpinionType:color_list_field.html.twig',
                 'typesColors' => Video::$colorButtonPlay,
             ])
             ->add('position', null, [
@@ -76,8 +76,8 @@ class VideoAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])
@@ -97,14 +97,14 @@ class VideoAdmin extends Admin
                 'label' => 'admin.fields.video.body',
             ])
             ->add('Author', 'sonata_type_model', [
-                'label' => 'admin.fields.video.author',
+                'label'    => 'admin.fields.video.author',
                 'required' => true,
             ])
             ->add('link', null, [
-                'label' => 'admin.fields.video.link',
+                'label'    => 'admin.fields.video.link',
                 'required' => true,
-                'help' => 'admin.help.project.video',
-                'attr' => [
+                'help'     => 'admin.help.project.video',
+                'attr'     => [
                     'placeholder' => 'http://',
                 ],
             ])
@@ -112,23 +112,23 @@ class VideoAdmin extends Admin
                 'label' => 'admin.fields.video.position',
             ])
             ->add('color', 'choice', [
-                'label' => 'admin.fields.video.color',
-                'choices' => Video::$colorButtonPlay,
+                'label'              => 'admin.fields.video.color',
+                'choices'            => Video::$colorButtonPlay,
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('Media', 'sonata_type_model_list', [
-                'label' => 'admin.fields.video.media',
+                'label'    => 'admin.fields.video.media',
                 'required' => false,
-                'help' => 'admin.help.video.media',
+                'help'     => 'admin.help.video.media',
             ], [
                 'link_parameters' => [
-                    'context' => 'default',
+                    'context'      => 'default',
                     'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
+                    'provider'     => 'sonata.media.provider.image',
                 ],
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.video.is_enabled',
+                'label'    => 'admin.fields.video.is_enabled',
                 'required' => false,
             ])
         ;
@@ -154,15 +154,15 @@ class VideoAdmin extends Admin
             ->add('Media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'admin.fields.video.media',
+                'label'    => 'admin.fields.video.media',
             ])
             ->add('color', null, [
-                'label' => 'admin.fields.video.color',
-                'template' => 'CapcoAdminBundle:OpinionType:color_show_field.html.twig',
+                'label'       => 'admin.fields.video.color',
+                'template'    => 'CapcoAdminBundle:OpinionType:color_show_field.html.twig',
                 'typesColors' => Video::$colorButtonPlay,
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.video.is_enabled',
+                'label'    => 'admin.fields.video.is_enabled',
                 'editable' => true,
             ])
             ->add('updatedAt', null, [

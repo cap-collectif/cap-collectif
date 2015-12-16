@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class SearchType extends AbstractType
 {
@@ -19,13 +20,13 @@ class SearchType extends AbstractType
     private function generateChoices()
     {
         $choices = [
-            'all' => 'search.form.types.all',
+            'all'      => 'search.form.types.all',
             'proposal' => 'search.form.types.proposals',
-            'comment' => 'search.form.types.comments',
+            'comment'  => 'search.form.types.comments',
             'argument' => 'search.form.types.arguments',
-            'project' => 'search.form.types.projects',
-            'opinion' => 'search.form.types.opinions',
-            'source' => 'search.form.types.sources',
+            'project'  => 'search.form.types.projects',
+            'opinion'  => 'search.form.types.opinions',
+            'source'   => 'search.form.types.sources',
         ];
 
         if ($this->toggleManager->isActive('versions')) {
@@ -60,25 +61,25 @@ class SearchType extends AbstractType
 
         $builder
             ->add('term', 'text', [
-                'required' => false,
-                'label' => 'search.form.label.term',
+                'required'           => false,
+                'label'              => 'search.form.label.term',
                 'translation_domain' => 'CapcoAppBundle',
-                'attr' => ['placeholder' => 'search.form.placeholder.term'],
+                'attr'               => ['placeholder' => 'search.form.placeholder.term'],
             ])
             ->add('type', 'choice', [
-                'required' => false,
+                'required'           => false,
                 'translation_domain' => 'CapcoAppBundle',
-                'empty_value' => false,
-                'expanded' => true,
-                'choices' => $choices,
+                'empty_value'        => false,
+                'expanded'           => true,
+                'choices'            => $choices,
             ])
             ->add('sort', 'choice', [
-                'required' => false,
+                'required'           => false,
                 'translation_domain' => 'CapcoAppBundle',
-                'empty_value' => false,
-                'choices' => [
+                'empty_value'        => false,
+                'choices'            => [
                     'score' => 'search.form.sort.score',
-                    'date' => 'search.form.sort.date',
+                    'date'  => 'search.form.sort.date',
                 ],
                 'attr' => ['onchange' => 'this.form.submit()'],
             ])
@@ -88,7 +89,7 @@ class SearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'csrf_protection' => false,
+            'csrf_protection'    => false,
             'translation_domain' => 'CapcoAppBundle',
         ]);
     }

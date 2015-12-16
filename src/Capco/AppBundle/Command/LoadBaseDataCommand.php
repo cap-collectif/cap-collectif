@@ -38,7 +38,7 @@ class LoadBaseDataCommand extends ContainerAwareCommand
     {
         $command = $this->getApplication()->find('doctrine:fixtures:load');
         $input = new ArrayInput([
-            'command' => 'doctrine:fixtures:load',
+            'command'    => 'doctrine:fixtures:load',
             '--fixtures' => 'src/Capco/AppBundle/DataDemo/ORM',
         ]);
         $input->setInteractive(false);

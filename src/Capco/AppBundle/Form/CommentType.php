@@ -28,9 +28,9 @@ class CommentType extends AbstractType
         if ($this->action === 'edit') {
             $builder
                 ->add('confirm', 'checkbox', [
-                    'mapped' => false,
-                    'label' => 'comment.form.confirm',
-                    'required' => true,
+                    'mapped'      => false,
+                    'label'       => 'comment.form.confirm',
+                    'required'    => true,
                     'constraints' => [new True(['message' => 'comment.votes_not_confirmed'])],
                 ])
             ;
@@ -38,8 +38,8 @@ class CommentType extends AbstractType
 
         $builder
             ->add('body', 'textarea', [
-                'required' => true,
-                'label' => 'comment.form.body',
+                'required'           => true,
+                'label'              => 'comment.form.body',
                 'translation_domain' => 'CapcoAppBundle',
             ])
         ;
@@ -55,11 +55,11 @@ class CommentType extends AbstractType
         if (null == $this->user) {
             $builder
                 ->add('authorName', null, [
-                    'required' => true,
+                    'required'           => true,
                     'translation_domain' => 'CapcoAppBundle',
                 ])
                 ->add('authorEmail', 'email', [
-                    'required' => true,
+                    'required'           => true,
                     'translation_domain' => 'CapcoAppBundle',
                 ])
             ;
@@ -72,8 +72,8 @@ class CommentType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Comment',
-            'csrf_protection' => false,
+            'data_class'         => 'Capco\AppBundle\Entity\Comment',
+            'csrf_protection'    => false,
             'translation_domain' => 'CapcoAppBundle',
         ]);
     }

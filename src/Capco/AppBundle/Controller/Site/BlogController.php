@@ -44,13 +44,13 @@ class BlogController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_blog_search_project', [
-                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'theme'   => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
                 ]));
             }
         } else {
             $form->setData([
-                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+                'theme'   => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
                 'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
             ]);
         }
@@ -71,11 +71,11 @@ class BlogController extends Controller
         }
 
         return [
-            'posts' => $posts,
-            'page' => $page,
-            'theme' => $theme,
+            'posts'  => $posts,
+            'page'   => $page,
+            'theme'  => $theme,
             'nbPage' => $nbPage,
-            'form' => $form->createView(),
+            'form'   => $form->createView(),
         ];
     }
 

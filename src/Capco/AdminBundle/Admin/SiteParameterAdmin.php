@@ -11,7 +11,7 @@ class SiteParameterAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'isEnabled',
+        '_sort_by'    => 'isEnabled',
     ];
 
     /**
@@ -21,7 +21,7 @@ class SiteParameterAdmin extends Admin
     {
         $formMapper
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.site_parameter.is_enabled',
+                'label'    => 'admin.fields.site_parameter.is_enabled',
                 'required' => false,
             ])
         ;
@@ -31,57 +31,57 @@ class SiteParameterAdmin extends Admin
 
         if ($subject->getType() == $types['simple_text']) {
             $formMapper->add('value', 'text', [
-                    'label' => 'admin.fields.site_parameter.value',
+                    'label'    => 'admin.fields.site_parameter.value',
                     'required' => false,
                 ]);
         } elseif ($subject->getType() == $types['rich_text']) {
             $formMapper->add('value', 'ckeditor', [
-                'label' => 'admin.fields.site_parameter.value',
-                'required' => false,
+                'label'       => 'admin.fields.site_parameter.value',
+                'required'    => false,
                 'config_name' => 'admin_editor',
             ]);
         } elseif ($subject->getType() == $types['integer']) {
             $formMapper->add('value', 'integer', [
-                'label' => 'admin.fields.site_parameter.value',
+                'label'    => 'admin.fields.site_parameter.value',
                 'required' => false,
             ]);
         } elseif ($subject->getType() == $types['javascript']) {
             $formMapper->add('value', 'textarea', [
-                'label' => 'admin.fields.site_parameter.value',
+                'label'    => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'help' => 'admin.help.site_parameter.js',
-                'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
+                'help'     => 'admin.help.site_parameter.js',
+                'attr'     => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
             ]);
         } elseif ($subject->getType() == $types['email']) {
             $formMapper->add('value', 'email', [
-                'label' => 'admin.fields.site_parameter.value',
+                'label'    => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'attr' => ['placeholder' => 'hello@exemple.com'],
+                'attr'     => ['placeholder' => 'hello@exemple.com'],
             ]);
         } elseif ($subject->getType() == $types['intern_url']) {
             $formMapper->add('value', null, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label'    => 'admin.fields.site_parameter.value',
                 'required' => false,
             ]);
         } elseif ($subject->getType() == $types['url']) {
             $formMapper->add('value', 'url', [
-                'label' => 'admin.fields.site_parameter.value',
+                'label'    => 'admin.fields.site_parameter.value',
                 'required' => false,
             ]);
         } elseif ($subject->getType() == $types['tel']) {
             $formMapper->add('value', null, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label'    => 'admin.fields.site_parameter.value',
                 'required' => false,
             ]);
         } elseif ($subject->getType() == $types['boolean']) {
             $formMapper->add('value', 'choice', [
-                'label' => 'admin.fields.site_parameter.value',
+                'label'    => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'choices' => ['1' => 'Activé', '0' => 'Désactivé'],
+                'choices'  => ['1' => 'Activé', '0' => 'Désactivé'],
             ]);
         } else {
             $formMapper->add('value', null, [
-                'label' => 'admin.fields.site_parameter.value',
+                'label'    => 'admin.fields.site_parameter.value',
                 'required' => false,
             ]);
         }

@@ -15,7 +15,7 @@ class PageAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
     // Fields to be shown on create/edit forms
@@ -26,11 +26,11 @@ class PageAdmin extends Admin
                 'label' => 'admin.fields.page.title',
             ])
             ->add('body', 'ckeditor', [
-                'label' => 'admin.fields.page.body',
+                'label'       => 'admin.fields.page.body',
                 'config_name' => 'admin_editor',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.page.is_enabled',
+                'label'    => 'admin.fields.page.is_enabled',
                 'required' => false,
             ])
         ;
@@ -66,7 +66,7 @@ class PageAdmin extends Admin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.page.is_enabled',
+                'label'    => 'admin.fields.page.is_enabled',
             ])
             ->add('MenuItems', null, [
                 'label' => 'admin.fields.page.menu_items',
@@ -76,8 +76,8 @@ class PageAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                     'actions' => [
-                        'show' => [],
-                        'edit' => [],
+                        'show'   => [],
+                        'edit'   => [],
                         'delete' => [],
                     ],
                 ])
@@ -101,7 +101,7 @@ class PageAdmin extends Admin
             ])
             ->add('URL', null, [
                 'template' => 'CapcoAdminBundle:Page:url_show_field.html.twig',
-                'label' => 'admin.fields.page.url',
+                'label'    => 'admin.fields.page.url',
             ])
             ->add('MenuItems', null, [
                 'label' => 'admin.fields.page.menu_items',

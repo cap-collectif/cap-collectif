@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -36,11 +37,11 @@ class ProposalType extends AbstractType
                 'required' => true,
             ])
             ->add('proposalResponses', 'collection', [
-                'allow_add' => true,
+                'allow_add'    => true,
                 'allow_delete' => false,
                 'by_reference' => false,
-                'type' => new ProposalResponseType($this->transformer),
-                'required' => false,
+                'type'         => new ProposalResponseType($this->transformer),
+                'required'     => false,
             ])
         ;
     }
@@ -51,8 +52,8 @@ class ProposalType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Proposal',
-            'csrf_protection' => false,
+            'data_class'         => 'Capco\AppBundle\Entity\Proposal',
+            'csrf_protection'    => false,
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
         ]);

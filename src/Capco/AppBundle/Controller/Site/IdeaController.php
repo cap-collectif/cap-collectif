@@ -139,10 +139,10 @@ class IdeaController extends Controller
         }
 
         return [
-            'ideas' => $ideas,
+            'ideas'            => $ideas,
             'publishedIdeasNb' => $publishedIdeasNb,
-            'page' => $page,
-            'nbPage' => $nbPage,
+            'page'             => $page,
+            'nbPage'           => $nbPage,
         ];
     }
 
@@ -245,15 +245,15 @@ class IdeaController extends Controller
 
                 return $this->redirect($this->generateUrl('app_idea_search_term', [
                     'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
-                    'sort' => $data['sort'],
-                    'term' => $data['term'],
+                    'sort'  => $data['sort'],
+                    'term'  => $data['term'],
                 ]));
             }
         } else {
             $form->setData([
                 'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
-                'sort' => $sort,
-                'term' => $term,
+                'sort'  => $sort,
+                'term'  => $term,
             ]);
         }
 
@@ -269,10 +269,10 @@ class IdeaController extends Controller
         }
 
         return [
-            'ideas' => $ideas,
-            'form' => $form->createView(),
-            'page' => $page,
-            'nbPage' => $nbPage,
+            'ideas'          => $ideas,
+            'form'           => $form->createView(),
+            'page'           => $page,
+            'nbPage'         => $nbPage,
             'trashedIdeasNb' => $trashedIdeasNb,
         ];
     }
@@ -360,9 +360,9 @@ class IdeaController extends Controller
         }
 
         return [
-            'idea' => $idea,
+            'idea'  => $idea,
             'votes' => $votes,
-            'form' => $form->createView(),
+            'form'  => $form->createView(),
         ];
     }
 }

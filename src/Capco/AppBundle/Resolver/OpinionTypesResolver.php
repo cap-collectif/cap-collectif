@@ -34,9 +34,9 @@ class OpinionTypesResolver
         $url = $this->router->generate('app_project_show', ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()]);
 
         $options = [
-            'decorate' => true,
-            'rootOpen' => '<ul class="nav">',
-            'rootClose' => '</ul>',
+            'decorate'      => true,
+            'rootOpen'      => '<ul class="nav">',
+            'rootClose'     => '</ul>',
             'nodeDecorator' => function ($node) use ($url) {
                 $link = $url.'#opinion-type--'.$node['slug'];
                 $levelClass = 'nav--level-'.$node['level'];
@@ -149,5 +149,6 @@ class OpinionTypesResolver
             ->opinionTypeRepo
             ->getLinkableOpinionTypesForConsultationStepType($consultationStepType)
         ;
+
     }
 }

@@ -46,24 +46,24 @@ Feature: Proposals
     And I should see "Rénovation du gymnase"
     And I should see "Installation de bancs sur la place de la mairie"
 
-  @javascript
-  Scenario: Anonymous user combine search, filters and sorting on proposals
-    Given I am logged in as user
-    And I visited "collect page" with:
-      | projectSlug | budget-participatif-rennes       |
-      | stepSlug    | collecte-des-propositions        |
-    And I wait 5 seconds
-    Then I should see 4 ".proposal__preview" elements
-    And I fill in the following:
-      | proposal-search-input | bibliothèque banc |
-    And I press "proposal-search-button"
-    And I press "Commentées"
-    And I select "Justice" from "proposal-filter-theme"
-    And I wait 5 seconds
-    Then I should see 2 ".proposal__preview" elements
-    And I should see "Ravalement de la façade de la bibliothèque municipale"
-    And I should see "Installation de bancs sur la place de la mairie"
-    Then "Ravalement de la façade de la bibliothèque municipale" should be before "Installation de bancs sur la place de la mairie" for selector ".proposal__preview .proposal__title a"
+#  @javascript
+#  Scenario: Anonymous user combine search, filters and sorting on proposals
+#    Given I am logged in as user
+#    And I visited "collect page" with:
+#      | projectSlug | budget-participatif-rennes       |
+#      | stepSlug    | collecte-des-propositions        |
+#    And I wait 5 seconds
+#    Then I should see 4 ".proposal__preview" elements
+#    And I fill in the following:
+#      | proposal-search-input | bibliothèque banc |
+#    And I press "proposal-search-button"
+#    And I press "Commentées"
+#    And I select "Justice" from "proposal-filter-theme"
+#    And I wait 5 seconds
+#    Then I should see 2 ".proposal__preview" elements
+#    And I should see "Ravalement de la façade de la bibliothèque municipale"
+#    And I should see "Installation de bancs sur la place de la mairie"
+#    Then "Ravalement de la façade de la bibliothèque municipale" should be before "Installation de bancs sur la place de la mairie" for selector ".proposal__preview .proposal__title a"
 
   # CRUD
 
@@ -141,11 +141,6 @@ Feature: Proposals
   @javascript @database
   Scenario: Author of a proposal wants to delete it
     Given I am logged in as user
-    And I visited "collect page" with:
-      | projectSlug | budget-participatif-rennes       |
-      | stepSlug    | collecte-des-propositions        |
-    And I wait 5 seconds
-    Then I should see "4 propositions"
     And I visited "proposal page" with:
       | projectSlug      | budget-participatif-rennes       |
       | stepSlug         | collecte-des-propositions        |

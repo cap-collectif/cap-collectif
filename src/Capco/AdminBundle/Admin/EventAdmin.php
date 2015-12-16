@@ -16,7 +16,7 @@ class EventAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'updatedAt',
+        '_sort_by'    => 'updatedAt',
     ];
 
     /**
@@ -94,11 +94,11 @@ class EventAdmin extends Admin
                 'label' => 'admin.fields.event.author',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.event.is_enabled',
+                'label'    => 'admin.fields.event.is_enabled',
                 'editable' => true,
             ])
             ->add('isCommentable', null, [
-                'label' => 'admin.fields.event.is_commentable',
+                'label'    => 'admin.fields.event.is_commentable',
                 'editable' => true,
             ])
             ->add('commentsCount', null, [
@@ -110,9 +110,9 @@ class EventAdmin extends Admin
             ->add('_action', 'actions', [
                 'actions' => [
                     'registrations' => ['template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig'],
-                    'show' => [],
-                    'edit' => [],
-                    'delete' => [],
+                    'show'          => [],
+                    'edit'          => [],
+                    'delete'        => [],
                 ],
             ])
         ;
@@ -137,95 +137,95 @@ class EventAdmin extends Admin
                 'label' => 'admin.fields.event.title',
             ])
             ->add('body', 'ckeditor', [
-                'label' => 'admin.fields.event.body',
+                'label'       => 'admin.fields.event.body',
                 'config_name' => 'admin_editor',
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.event.author',
+                'label'    => 'admin.fields.event.author',
                 'property' => 'username',
             ])
             ->add('startAt', 'sonata_type_datetime_picker', [
-                'label' => 'admin.fields.event.start_at',
+                'label'  => 'admin.fields.event.start_at',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => [
+                'attr'   => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
             ])
             ->add('endAt', 'sonata_type_datetime_picker', [
-                'label' => 'admin.fields.event.end_at',
+                'label'  => 'admin.fields.event.end_at',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => [
+                'attr'   => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
-                'help' => 'admin.help.event.endAt',
+                'help'     => 'admin.help.event.endAt',
                 'required' => false,
             ])
             ->end()
             ->with('admin.fields.event.group_meta')
             ->add('registrationEnable', null, [
-                  'label' => 'admin.fields.event.registration_enable',
+                  'label'    => 'admin.fields.event.registration_enable',
                   'required' => false,
             ])
             ->add('link', 'url', [
-                'label' => 'admin.fields.event.link',
+                'label'    => 'admin.fields.event.link',
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'placeholder' => 'http://',
                 ],
             ])
             ->add('Media', 'sonata_type_model_list', [
-                'label' => 'admin.fields.event.media',
+                'label'    => 'admin.fields.event.media',
                 'required' => false,
             ], [
                 'link_parameters' => [
-                    'context' => 'default',
+                    'context'      => 'default',
                     'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
+                    'provider'     => 'sonata.media.provider.image',
                 ],
             ])
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper->add('themes', 'sonata_type_model', [
-                'label' => 'admin.fields.event.themes',
-                'required' => false,
-                'multiple' => true,
+                'label'        => 'admin.fields.event.themes',
+                'required'     => false,
+                'multiple'     => true,
                 'by_reference' => false,
             ]);
         }
 
         $formMapper
             ->add('projects', 'sonata_type_model', [
-                'label' => 'admin.fields.event.projects',
-                'required' => false,
-                'multiple' => true,
+                'label'        => 'admin.fields.event.projects',
+                'required'     => false,
+                'multiple'     => true,
                 'by_reference' => false,
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.event.is_enabled',
+                'label'    => 'admin.fields.event.is_enabled',
                 'required' => false,
             ])
             ->add('isCommentable', null, [
-                'label' => 'admin.fields.event.is_commentable',
+                'label'    => 'admin.fields.event.is_commentable',
                 'required' => false,
             ])
             ->end()
             ->with('admin.fields.event.group_address')
             ->add('address', null, [
-                'label' => 'admin.fields.event.address',
+                'label'    => 'admin.fields.event.address',
                 'required' => false,
-                'help' => 'admin.help.event.adress',
+                'help'     => 'admin.help.event.adress',
             ])
             ->add('zipCode', 'number', [
-                'label' => 'admin.fields.event.zipcode',
+                'label'    => 'admin.fields.event.zipcode',
                 'required' => false,
             ])
             ->add('city', null, [
-                'label' => 'admin.fields.event.city',
+                'label'    => 'admin.fields.event.city',
                 'required' => false,
             ])
             ->add('country', null, [
-                'label' => 'admin.fields.event.country',
+                'label'    => 'admin.fields.event.country',
                 'required' => false,
             ])
             ->end()
@@ -270,7 +270,7 @@ class EventAdmin extends Admin
             ->add('Media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'admin.fields.event.media',
+                'label'    => 'admin.fields.event.media',
             ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.event.is_enabled',

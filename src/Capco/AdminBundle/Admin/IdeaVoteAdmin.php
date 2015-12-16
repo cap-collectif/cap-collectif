@@ -12,7 +12,7 @@ class IdeaVoteAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'idea.title',
+        '_sort_by'    => 'idea.title',
     ];
 
     /**
@@ -69,8 +69,8 @@ class IdeaVoteAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])

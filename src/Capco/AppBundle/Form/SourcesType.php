@@ -27,11 +27,11 @@ class SourcesType extends AbstractType
         if ($this->action === 'edit') {
             $builder
                 ->add('confirm', 'checkbox', [
-                    'mapped' => false,
-                    'label' => 'source.form.confirm',
+                    'mapped'             => false,
+                    'label'              => 'source.form.confirm',
                     'translation_domain' => 'CapcoAppBundle',
-                    'required' => true,
-                    'constraints' => [new True(['message' => 'source.votes_not_confirmed'])],
+                    'required'           => true,
+                    'constraints'        => [new True(['message' => 'source.votes_not_confirmed'])],
                 ])
             ;
         }
@@ -39,37 +39,37 @@ class SourcesType extends AbstractType
         $builder
             ->add('title', 'text', [
                 'translation_domain' => 'CapcoAppBundle',
-                'label' => 'source.form.title',
+                'label'              => 'source.form.title',
             ])
             ->add('body', 'textarea', [
                 'translation_domain' => 'CapcoAppBundle',
-                'label' => 'source.form.body',
+                'label'              => 'source.form.body',
             ])
             ->add('Category', null, [
                 'translation_domain' => 'CapcoAppBundle',
-                'label' => 'source.form.category',
+                'label'              => 'source.form.category',
             ])
             ->add('type', 'choice', [
-                'choices' => Source::$TypesLabels,
-                'label' => 'source.form.type',
+                'choices'            => Source::$TypesLabels,
+                'label'              => 'source.form.type',
                 'translation_domain' => 'CapcoAppBundle',
-                'multiple' => false,
-                'expanded' => true,
-                'label' => false,
+                'multiple'           => false,
+                'expanded'           => true,
+                'label'              => false,
             ])
             ->add('link', 'url', [
-                'required' => false,
+                'required'           => false,
                 'translation_domain' => 'CapcoAppBundle',
-                'label' => 'source.form.link',
-                'attr' => ['placeholder' => 'http://'],
-                'default_protocol' => 'http',
+                'label'              => 'source.form.link',
+                'attr'               => ['placeholder' => 'http://'],
+                'default_protocol'   => 'http',
             ])
             ->add('media', 'sonata_media_type', [
-                'provider' => 'sonata.media.provider.file',
-                'context' => 'sources',
-                'required' => false,
+                'provider'           => 'sonata.media.provider.file',
+                'context'            => 'sources',
+                'required'           => false,
                 'cascade_validation' => true,
-                'label' => 'source.form.file',
+                'label'              => 'source.form.file',
                 'translation_domain' => 'CapcoAppBundle',
 //                'attr' => array('class' => 'media', 'style' => 'display:none')
             ])
@@ -82,9 +82,9 @@ class SourcesType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Source',
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
+            'data_class'        => 'Capco\AppBundle\Entity\Source',
+            'csrf_protection'   => true,
+            'csrf_field_name'   => '_token',
             'validation_groups' => function (FormInterface $form) {
                 $data = $form->getData();
                 if ($data->getType() == 0) {

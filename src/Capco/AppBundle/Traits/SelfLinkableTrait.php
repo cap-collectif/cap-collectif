@@ -32,7 +32,7 @@ trait SelfLinkableTrait
     {
         if (!$this->childConnections->contains($childConnection)) {
             $this->childConnections->add($childConnection);
-            ++$this->connectionsCount;
+            $this->connectionsCount++;
         }
 
         return $this;
@@ -41,7 +41,7 @@ trait SelfLinkableTrait
     public function removeChildConnection(SelfLinkableInterface $childConnection)
     {
         $this->childConnections->removeElement($childConnection);
-        --$this->connectionsCount;
+        $this->connectionsCount--;
 
         return $this;
     }
@@ -66,7 +66,7 @@ trait SelfLinkableTrait
         if ($parentConnection && !$this->parentConnections->contains($parentConnection)) {
             $this->parentConnections->add($parentConnection);
             $parentConnection->addChildConnection($this);
-            ++$this->connectionsCount;
+            $this->connectionsCount++;
         }
 
         return $this;
@@ -76,7 +76,7 @@ trait SelfLinkableTrait
     {
         $this->parentConnections->removeElement($parentConnection);
         $parentConnection->removeChildConnection($this);
-        --$this->connectionsCount;
+        $this->connectionsCount--;
 
         return $this;
     }

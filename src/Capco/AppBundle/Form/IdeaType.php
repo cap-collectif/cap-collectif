@@ -32,9 +32,9 @@ class IdeaType extends AbstractType
 
         if ($this->toggleManager->isActive('themes')) {
             $builder->add('theme', null, [
-                'label' => 'idea.form.theme',
-                'required' => true,
-                'empty_value' => 'idea.form.empty_theme',
+                'label'         => 'idea.form.theme',
+                'required'      => true,
+                'empty_value'   => 'idea.form.empty_theme',
                 'query_builder' => function (ThemeRepository $tr) {
                     return $tr->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
@@ -45,26 +45,26 @@ class IdeaType extends AbstractType
 
         $builder
             ->add('body', 'ckeditor', [
-                'label' => 'idea.form.body',
+                'label'       => 'idea.form.body',
                 'config_name' => 'user_editor',
             ])
             ->add('object', 'ckeditor', [
-                'label' => 'idea.form.object',
+                'label'       => 'idea.form.object',
                 'config_name' => 'user_editor',
             ])
             ->add('url', 'url', [
-                'label' => 'idea.form.url',
-                'required' => false,
+                'label'            => 'idea.form.url',
+                'required'         => false,
                 'default_protocol' => 'http',
-                'help' => 'idea.form.url_help',
-                'attr' => [
+                'help'             => 'idea.form.url_help',
+                'attr'             => [
                     'placeholder' => 'http://',
                 ],
             ])
             ->add('media', 'sonata_media_type', [
-                'label' => 'idea.form.media',
+                'label'    => 'idea.form.media',
                 'provider' => 'sonata.media.provider.image',
-                'context' => 'default',
+                'context'  => 'default',
                 'required' => false,
             ])
         ;
@@ -76,9 +76,9 @@ class IdeaType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Idea',
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
+            'data_class'         => 'Capco\AppBundle\Entity\Idea',
+            'csrf_protection'    => true,
+            'csrf_field_name'    => '_token',
             'translation_domain' => 'CapcoAppBundle',
         ]);
     }

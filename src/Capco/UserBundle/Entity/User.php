@@ -23,11 +23,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public static $sortOrder = [
         'activity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
-        'date' => self::SORT_ORDER_CREATED_AT,
+        'date'     => self::SORT_ORDER_CREATED_AT,
     ];
     public static $sortOrderLabels = [
         'activity' => 'user.index.sort.activity',
-        'date' => 'user.index.sort.date',
+        'date'     => 'user.index.sort.date',
     ];
 
     /**
@@ -962,8 +962,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     {
         return [
             UserInterface::GENDER_UNKNOWN => 'gender.unknown',
-            UserInterface::GENDER_FEMALE => 'gender.female',
-            UserInterface::GENDER_MALE => 'gender.male',
+            UserInterface::GENDER_FEMALE  => 'gender.female',
+            UserInterface::GENDER_MALE    => 'gender.male',
         ];
     }
 

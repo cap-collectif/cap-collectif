@@ -16,8 +16,8 @@ class AppendixType extends AbstractType
     {
         $builder
             ->add('body', 'ckeditor', [
-                'label' => false,
-                'required' => false,
+                'label'       => false,
+                'required'    => false,
                 'config_name' => 'user_editor',
             ])
             ->add('appendixType', null, [
@@ -26,7 +26,7 @@ class AppendixType extends AbstractType
                     'class' => 'hidden',
                 ],
                 'label_attr' => [
-                    'class' => 'hidden',
+                    'class' => 'hidden'
                 ],
             ])
         ;
@@ -38,9 +38,9 @@ class AppendixType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\OpinionAppendix',
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
+            'data_class'         => 'Capco\AppBundle\Entity\OpinionAppendix',
+            'csrf_protection'    => true,
+            'csrf_field_name'    => '_token',
             'translation_domain' => 'CapcoAppBundle',
         ]);
     }

@@ -15,7 +15,7 @@ class SocialNetworkAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
+        '_sort_by'    => 'title',
     ];
 
     /**
@@ -53,7 +53,7 @@ class SocialNetworkAdmin extends Admin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label' => 'admin.fields.social_network.is_enabled',
+                'label'    => 'admin.fields.social_network.is_enabled',
             ])
             ->add('link', null, [
                 'label' => 'admin.fields.social_network.link',
@@ -61,7 +61,7 @@ class SocialNetworkAdmin extends Admin
             ->add('media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_list_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
-                'label' => 'admin.fields.social_network.media',
+                'label'    => 'admin.fields.social_network.media',
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.social_network.position',
@@ -71,8 +71,8 @@ class SocialNetworkAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])
@@ -89,7 +89,7 @@ class SocialNetworkAdmin extends Admin
                 'label' => 'admin.fields.social_network.title',
             ])
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.social_network.is_enabled',
+                'label'    => 'admin.fields.social_network.is_enabled',
                 'required' => false,
             ])
             ->add('link', null, [
@@ -100,12 +100,12 @@ class SocialNetworkAdmin extends Admin
             ])
             ->add('media', 'sonata_type_model_list', [
                 'required' => false,
-                'label' => 'admin.fields.social_network.media',
+                'label'    => 'admin.fields.social_network.media',
             ], [
                 'link_parameters' => [
-                    'context' => 'default',
+                    'context'      => 'default',
                     'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
+                    'provider'     => 'sonata.media.provider.image',
             ], ])
         ;
     }
@@ -127,7 +127,7 @@ class SocialNetworkAdmin extends Admin
             ])
             ->add('media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_show_field.html.twig',
-                'label' => 'admin.fields.social_network.media',
+                'label'    => 'admin.fields.social_network.media',
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.social_network.position',

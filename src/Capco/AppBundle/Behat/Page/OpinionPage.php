@@ -16,16 +16,16 @@ class OpinionPage extends Page
 
     protected $elements = [
         // Arguments
-        'Argument yes field' => '#argument-form--yes textarea',
-        'Argument yes button' => '#argument-form--yes button',
-        'Argument no field' => '#argument-form--no textarea',
-        'Argument no button' => '#argument-form--no button',
+        'Argument yes field'      => '#argument-form--yes textarea',
+        'Argument yes button'     => '#argument-form--yes button',
+        'Argument no field'       => '#argument-form--no textarea',
+        'Argument no button'      => '#argument-form--no button',
         'first source vote count' => '#sources-list li:first-child .opinion__votes-nb',
-        'Vote first source' => '#sources-list li:first-child .source__btn--vote',
-        'sources tab' => '#opinion__sources___tab',
-        'source add' => '#source-form__add',
-        'arguments tab' => '#opinion__arguments___tab',
-        'connections tab' => '#opinion__links___tab',
+        'Vote first source'       => '#sources-list li:first-child .source__btn--vote',
+        'sources tab'             => '#opinion__sources___tab',
+        'source add'              => '#source-form__add',
+        'arguments tab'           => '#opinion__arguments___tab',
+        'connections tab'         => '#opinion__links___tab',
     ];
 
     public function clickSourcesTab()

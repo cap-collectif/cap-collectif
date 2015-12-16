@@ -64,7 +64,7 @@ const OpinionForm = React.createClass({
   },
 
   onTypeChange(ev) {
-    this.updateAppendices(parseInt(ev.target.value, 10));
+    this.updateAppendices(parseInt(ev.target.value));
   },
 
   getAppendixTypeForType(type) {
@@ -113,7 +113,7 @@ const OpinionForm = React.createClass({
   },
 
   render() {
-    const selectedType = ArrayHelper.getElementFromArray(this.props.availableTypes, parseInt(this.state.form.type, 10));
+    const selectedType = ArrayHelper.getElementFromArray(this.props.availableTypes, parseInt(this.state.form.type));
     const appendixTypes = selectedType ? selectedType.appendixTypes : [];
     return (
       <form id="opinion-links-form" ref="form">

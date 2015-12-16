@@ -12,7 +12,6 @@ class SearchController extends Controller
 {
     /**
      * @param Request $request
-     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Route("/search", name="app_search", defaults={"_feature_flags" = "search"})
@@ -23,10 +22,8 @@ class SearchController extends Controller
         $searchParams = [
             'term' => '',
             'type' => 'all',
-            'sort' => 'score',
+            'sort' => 'score'
         ];
-        $sortField = '_score';
-        $sortOrder = 'desc';
 
         $page = (int) $request->get('page', 1);
 
@@ -37,27 +34,21 @@ class SearchController extends Controller
             $searchParams = $form->getData();
         }
 
-        if ($searchParams['sort'] && $searchParams['sort'] === 'date') {
-            $sortField = 'createdAt';
-            $sortOrder = 'desc';
-        }
-
         // Perform the search
         $searchResults = $this->container->get('capco.search.resolver')->searchAll(
             $page,
             $searchParams['term'],
             $searchParams['type'],
-            $sortField,
-            $sortOrder
+            $searchParams['sort']
         );
 
         return [
-            'form' => $form->createView(),
-            'page' => $page,
-            'q' => $searchParams,
-            'count' => $searchResults['count'],
-            'results' => $searchResults['results'],
-            'nbPages' => $searchResults['pages'],
+            'form'      => $form->createView(),
+            'page'      => $page,
+            'q'         => $searchParams,
+            'count'     => $searchResults['count'],
+            'results'   => $searchResults['results'],
+            'nbPages'   => $searchResults['pages'],
         ];
     }
 }

@@ -14,7 +14,7 @@ class OpinionVoteAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'opinion.title',
+        '_sort_by'    => 'opinion.title',
     ];
 
     /**
@@ -58,18 +58,18 @@ class OpinionVoteAdmin extends Admin
                 'label' => 'admin.fields.opinion_vote.voter',
             ])
             ->add('value', null, [
-                'label' => 'admin.fields.opinion_vote.value',
+                'label'    => 'admin.fields.opinion_vote.value',
                 'template' => 'CapcoAdminBundle:OpinionVote:value_list_field.html.twig',
-                'labels' => OpinionVote::$voteTypesLabels,
-                'styles' => OpinionVote::$voteTypesStyles,
+                'labels'   => OpinionVote::$voteTypesLabels,
+                'styles'   => OpinionVote::$voteTypesStyles,
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.opinion_vote.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])
@@ -89,10 +89,10 @@ class OpinionVoteAdmin extends Admin
                 'label' => 'admin.fields.opinion_vote.voter',
             ])
             ->add('value', null, [
-                'label' => 'admin.fields.opinion_vote.value',
+                'label'    => 'admin.fields.opinion_vote.value',
                 'template' => 'CapcoAdminBundle:OpinionVote:value_show_field.html.twig',
-                'labels' => OpinionVote::$voteTypesLabels,
-                'styles' => OpinionVote::$voteTypesStyles,
+                'labels'   => OpinionVote::$voteTypesLabels,
+                'styles'   => OpinionVote::$voteTypesStyles,
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.opinion_vote.updated_at',
@@ -113,12 +113,12 @@ class OpinionVoteAdmin extends Admin
                 'label' => 'admin.fields.opinion_vote.opinion',
             ])
             ->add('user', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.opinion_vote.voter',
+                'label'    => 'admin.fields.opinion_vote.voter',
                 'property' => 'username',
             ])
             ->add('value', 'choice', [
-                'label' => 'admin.fields.opinion_vote.value',
-                'choices' => OpinionVote::$voteTypesLabels,
+                'label'              => 'admin.fields.opinion_vote.value',
+                'choices'            => OpinionVote::$voteTypesLabels,
                 'translation_domain' => 'CapcoAppBundle',
             ])
         ;

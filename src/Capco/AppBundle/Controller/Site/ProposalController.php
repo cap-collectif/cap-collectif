@@ -19,24 +19,15 @@ class ProposalController extends Controller
      * @ParamConverter("currentStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("proposal", options={"mapping": {"proposalSlug": "slug"}})
      * @Template("CapcoAppBundle:Proposal:show.html.twig")
-     * @param Project $project
-     * @param CollectStep $currentStep
-     * @param Proposal $proposal
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showProposalAction(Project $project, CollectStep $currentStep, Proposal $proposal)
     {
-
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $proposalJson = $serializer->serialize(
-            ['proposal' => $proposal],
-            'json',
-            SerializationContext::create()
-                ->setSerializeNull(true)
-                ->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])
-        );
+        $proposalJson = $serializer->serialize([
+            'proposal' => $proposal,
+        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
 
         $districts = $serializer->serialize([
             'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
@@ -51,13 +42,13 @@ class ProposalController extends Controller
         ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'ProposalResponses', 'Questions']));
 
         $response = $this->render('CapcoAppBundle:Proposal:show.html.twig', [
-            'project' => $project,
-            'currentStep' => $currentStep,
+            'project'       => $project,
+            'currentStep'   => $currentStep,
             'proposalTitle' => $proposal->getTitle(),
-            'proposal' => $proposalJson,
-            'themes' => $themes,
-            'districts' => $districts,
-            'form' => $form,
+            'proposal'      => $proposalJson,
+            'themes'        => $themes,
+            'districts'     => $districts,
+            'form'          => $form,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

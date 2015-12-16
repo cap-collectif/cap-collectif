@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Twig;
 
 class DateExtension extends \Twig_Extension
 {
+
     /**
      * Returns the name of the extension.
      *
@@ -30,14 +31,13 @@ class DateExtension extends \Twig_Extension
     public function hasSignificantDiff($firstDate, $secondDate, $maxDiff = 60)
     {
         $diff = $this->getDiffInSeconds($firstDate, $secondDate, true);
-
         return $diff > $maxDiff;
     }
 
     protected function getDiffInSeconds($firstDate, $secondDate, $absolute = false)
     {
         $diff = $firstDate->getTimestamp() - $secondDate->getTimestamp();
-
         return $absolute ? abs($diff) : $diff;
+
     }
 }

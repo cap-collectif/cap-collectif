@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\ProposalForm:
         id:
             expose: true
             type: integer
-            groups: [Proposals, ProposalForms]
+            groups: [ProposalForms]
         title:
             expose: true
             type: string

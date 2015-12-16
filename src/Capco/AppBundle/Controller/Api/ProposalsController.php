@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Event\ProposalEvent;
+use Capco\AppBundle\Form\ProposalType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,32 +31,75 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ProposalsController extends FOSRestController
 {
     /**
-     * @Post("/proposal_forms/{proposal_form_id}/proposals/search")
+     * @Get("/proposal_forms/{proposal_form_id}/proposals")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}})
-     * @QueryParam(name="page", requirements="[0-9.]+", default="1")
-     * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
+     * @QueryParam(name="first", requirements="[0-9.]+", default="0")
+     * @QueryParam(name="offset", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|popular|comments)", default="last")
+     * @QueryParam(name="theme", nullable=true)
+     * @QueryParam(name="status", nullable=true)
+     * @QueryParam(name="district", nullable=true)
+     * @QueryParam(name="type", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
-     *
-     * @param Request               $request
-     * @param ProposalForm          $proposalForm
-     * @param ParamFetcherInterface $paramFetcher
-     *
-     * @return array
      */
-    public function getProposalsByFormAction(Request $request, ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
+    public function getProposalsByFormAction(ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
     {
-        $page = intval($paramFetcher->get('page'));
-        $pagination = intval($paramFetcher->get('pagination'));
+        $first = intval($paramFetcher->get('first'));
+        $offset = intval($paramFetcher->get('offset'));
         $order = $paramFetcher->get('order');
+        $themeId = $paramFetcher->get('theme');
+        $statusId = $paramFetcher->get('status');
+        $districtId = $paramFetcher->get('district');
+        $typeId = $paramFetcher->get('type');
 
-        $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
+        $em = $this->getDoctrine()->getManager();
+        $theme = null;
+        $status = null;
+        $district = null;
+        $type = null;
 
-        // Filters
-        $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
-        $providedFilters['proposalForm'] = $proposalForm->getId();
+        if ($themeId) {
+            $theme = $em->getRepository('CapcoAppBundle:Theme')->find($themeId);
+            if (!$theme) {
+                throw new \Exception('Wrong theme');
+            }
+        }
 
-        return $this->get('capco.search.resolver')->searchProposals($page, $pagination, $order, $terms, $providedFilters);
+        if ($statusId) {
+            $status = $em->getRepository('CapcoAppBundle:Status')->find($statusId);
+            if (!$status) {
+                throw new \Exception('Wrong status');
+            }
+        }
+
+        if ($districtId) {
+            $district = $em->getRepository('CapcoAppBundle:District')->find($districtId);
+            if (!$district) {
+                throw new \Exception('Wrong district');
+            }
+        }
+
+        if ($typeId) {
+            $type = $em->getRepository('CapcoUserBundle:UserType')->find($typeId);
+            if (!$type) {
+                throw new \Exception('Wrong type');
+            }
+        }
+
+        $paginator = $em
+            ->getRepository('CapcoAppBundle:Proposal')
+            ->getPublishedByProposalForm($proposalForm, $first, $offset, $order, $theme, $status, $district, $type)
+        ;
+
+        $proposals = [];
+        foreach ($paginator as $proposal) {
+            $proposals[] = $proposal;
+        }
+
+        return [
+            'proposals' => $proposals,
+            'count'     => count($paginator),
+        ];
     }
 
     /**
@@ -73,7 +117,7 @@ class ProposalsController extends FOSRestController
      * @Get("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
-     * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias", "Themes"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
      *
      * @param ProposalForm $proposalForm
      * @param Proposal     $proposal
@@ -174,8 +218,8 @@ class ProposalsController extends FOSRestController
 
         return [
             'comments_and_answers_count' => intval($countWithAnswers),
-            'comments_count' => count($paginator),
-            'comments' => $comments,
+            'comments_count'             => count($paginator),
+            'comments'                   => $comments,
         ];
     }
 

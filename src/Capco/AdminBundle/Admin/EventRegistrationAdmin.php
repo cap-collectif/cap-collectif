@@ -13,7 +13,7 @@ class EventRegistrationAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'event.title',
+        '_sort_by'    => 'event.title',
     ];
 
     public function getPersistentParameters()
@@ -53,7 +53,7 @@ class EventRegistrationAdmin extends Admin
 
         $listMapper
             ->add('confirmed', null, [
-                'label' => 'admin.fields.event_registration.registered',
+                'label'    => 'admin.fields.event_registration.registered',
                 'editable' => true,
             ])
             ->add('user', null, [
@@ -73,8 +73,8 @@ class EventRegistrationAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'show'   => [],
+                    'edit'   => [],
                     'delete' => [],
                 ],
             ])
@@ -90,7 +90,7 @@ class EventRegistrationAdmin extends Admin
             ->add('event', null, ['label' => 'admin.fields.event_registration.event'])
             ->add('confirmed', null, ['label' => 'admin.fields.event_registration.registered', 'required' => false])
             ->add('user', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.event_registration.user',
+                'label'    => 'admin.fields.event_registration.user',
                 'property' => 'username',
             ])
             ->add('username', null, ['label' => 'admin.fields.event_registration.username'])

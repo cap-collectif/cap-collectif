@@ -9,9 +9,8 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
         synthesis: Capco\AppBundle\Entity\Steps\SynthesisStep
         collect: Capco\AppBundle\Entity\Steps\CollectStep
         ranking: Capco\AppBundle\Entity\Steps\RankingStep
-        selection: Capco\AppBundle\Entity\Steps\SelectionStep
     properties:
         id:
             expose: true
             type: integer
-            groups: [Opinions, Proposals]
+            groups: [Opinions]

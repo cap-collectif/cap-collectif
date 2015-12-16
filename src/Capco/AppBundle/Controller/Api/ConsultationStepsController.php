@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Form\Api\OpinionType as OpinionForm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -75,7 +76,7 @@ class ConsultationStepsController extends FOSRestController
                 ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
                 ->findBy(
                     ['opinionType' => $opinion->getOpinionType()],
-                    ['position' => 'ASC']
+                    ['position'    => 'ASC']
             );
             $appendices = $opinion->getAppendices();
             foreach ($opinionTypeAppendixTypes as $otat) {

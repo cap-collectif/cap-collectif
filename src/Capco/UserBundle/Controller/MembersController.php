@@ -45,13 +45,13 @@ class MembersController extends Controller
 
                 return $this->redirect($this->generateUrl('app_members_type_sorted', [
                     'userType' => $data['userType'] ? $data['userType']->getSlug() : UserType::FILTER_ALL,
-                    'sort' => $data['sort'],
+                    'sort'     => $data['sort'],
                 ]));
             }
         } else {
             $form->setData([
                 'userType' => $em->getRepository('CapcoUserBundle:UserType')->findOneBySlug($userType),
-                'sort' => $sort,
+                'sort'     => $sort,
             ]);
         }
 
@@ -68,9 +68,9 @@ class MembersController extends Controller
 
         return [
             'members' => $members,
-            'page' => $page,
-            'nbPage' => $nbPage,
-            'form' => $form->createView(),
+            'page'    => $page,
+            'nbPage'  => $nbPage,
+            'form'    => $form->createView(),
         ];
     }
 }

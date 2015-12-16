@@ -11,7 +11,7 @@ class SiteImageAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'isEnabled',
+        '_sort_by'    => 'isEnabled',
     ];
 
     /**
@@ -21,17 +21,17 @@ class SiteImageAdmin extends Admin
     {
         $formMapper
             ->add('isEnabled', null, [
-                'label' => 'admin.fields.site_image.is_enabled',
+                'label'    => 'admin.fields.site_image.is_enabled',
                 'required' => false,
             ])
             ->add('Media', 'sonata_type_model_list', [
                 'required' => false,
-                'label' => 'admin.fields.site_image.media',
+                'label'    => 'admin.fields.site_image.media',
             ], [
                 'link_parameters' => [
-                    'context' => 'default',
+                    'context'      => 'default',
                     'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
+                    'provider'     => 'sonata.media.provider.image',
             ], ])
         ;
     }

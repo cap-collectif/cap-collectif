@@ -12,7 +12,7 @@ class CommentVoteAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'createdAt',
+        '_sort_by'    => 'createdAt',
     ];
 
     /**

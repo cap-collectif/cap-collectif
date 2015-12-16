@@ -50,7 +50,7 @@ class HomepageController extends Controller
         }
 
         $response = $this->render('CapcoAppBundle:Homepage:homepage.html.twig', [
-            'form' => $newsletterActive ? $form->createView() : false,
+            'form'     => $newsletterActive ? $form->createView() : false,
             'sections' => $sections,
         ]);
 
@@ -71,8 +71,8 @@ class HomepageController extends Controller
 
         return [
             'highlighteds' => $highlighteds,
-            'section' => $section,
-            'alt' => $alt,
+            'section'      => $section,
+            'alt'          => $alt,
         ];
     }
 
@@ -84,9 +84,9 @@ class HomepageController extends Controller
         $videos = $this->get('capco.video.repository')->getLast($max, $offset);
 
         return [
-            'videos' => $videos,
+            'videos'  => $videos,
             'section' => $section,
-            'alt' => $alt,
+            'alt'     => $alt,
         ];
     }
 
@@ -99,9 +99,9 @@ class HomepageController extends Controller
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getPopular($max, $offset);
 
         return [
-            'ideas' => $ideas,
+            'ideas'   => $ideas,
             'section' => $section,
-            'alt' => $alt,
+            'alt'     => $alt,
         ];
     }
 
@@ -114,9 +114,9 @@ class HomepageController extends Controller
         $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
 
         return [
-            'ideas' => $ideas,
+            'ideas'   => $ideas,
             'section' => $section,
-            'alt' => $alt,
+            'alt'     => $alt,
         ];
     }
 
@@ -141,8 +141,8 @@ class HomepageController extends Controller
 
         return [
             'proposals' => $proposals,
-            'section' => $section,
-            'alt' => $alt,
+            'section'   => $section,
+            'alt'       => $alt,
         ];
     }
 
@@ -155,9 +155,9 @@ class HomepageController extends Controller
         $topics = $this->getDoctrine()->getRepository('CapcoAppBundle:Theme')->getLast($max, $offset);
 
         return [
-            'topics' => $topics,
+            'topics'  => $topics,
             'section' => $section,
-            'alt' => $alt,
+            'alt'     => $alt,
         ];
     }
 
@@ -170,9 +170,9 @@ class HomepageController extends Controller
         $posts = $this->get('capco.blog.post.repository')->getLast($max, $offset);
 
         return [
-            'posts' => $posts,
+            'posts'   => $posts,
             'section' => $section,
-            'alt' => $alt,
+            'alt'     => $alt,
         ];
     }
 
@@ -193,8 +193,8 @@ class HomepageController extends Controller
 
         return [
             'projects' => $projects,
-            'section' => $section,
-            'alt' => $alt,
+            'section'  => $section,
+            'alt'      => $alt,
         ];
     }
 
@@ -212,9 +212,9 @@ class HomepageController extends Controller
         $events = $this->get('capco.event.repository')->getLast($max, $offset);
 
         return [
-            'events' => $events,
+            'events'  => $events,
             'section' => $section,
-            'alt' => $alt,
+            'alt'     => $alt,
         ];
     }
 
@@ -227,8 +227,8 @@ class HomepageController extends Controller
 
         return [
             'socialNetworks' => $socialNetworks,
-            'section' => $section,
-            'alt' => $alt,
+            'section'        => $section,
+            'alt'            => $alt,
         ];
     }
 }

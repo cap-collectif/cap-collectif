@@ -47,9 +47,6 @@ Capco\AppBundle\Entity\Proposal:
         status:
             expose: true
             groups: [Proposals]
-        estimation:
-            expose: true
-            groups: [Proposals]
         comments:
             expose: true
             groups: [Proposals]
@@ -67,11 +64,3 @@ Capco\AppBundle\Entity\Proposal:
         enabled:
             expose: true
             groups: [Proposals]
-        proposalForm:
-          expose: true
-          groups: [Proposals]
-          serialized_name: proposalForm
-        selectionSteps:
-          expose: true
-          groups: [Proposals]
-          serialized_name: selectionSteps

@@ -15,9 +15,9 @@ class IdeaUpdateType extends IdeaType
     {
         $builder
             ->add('confirm', 'checkbox', [
-                'mapped' => false,
-                'label' => 'idea.form.confirm',
-                'required' => true,
+                'mapped'      => false,
+                'label'       => 'idea.form.confirm',
+                'required'    => true,
                 'constraints' => [new True(['message' => 'idea.votes_not_confirmed'])],
             ])
         ;

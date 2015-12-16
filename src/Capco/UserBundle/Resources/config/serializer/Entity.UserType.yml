@@ -4,12 +4,12 @@ Capco\UserBundle\Entity\UserType:
       id:
         expose: true
         type: integer
-        groups: [Default, UsersInfos]
+        groups: [Default]
       slug:
         expose: true
         type: string
-        groups: [Default, UsersInfos]
+        groups: [Default]
       name:
         expose: true
         type: string
-        groups: [Default, UsersInfos]
+        groups: [Default]

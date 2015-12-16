@@ -17,19 +17,19 @@ class FooterSocialNetwork
     use PositionableTrait;
 
     public static $socialIcons = [
-        'link-1' => 'Site externe',
-        'facebook' => 'Facebook',
-        'twitter' => 'Twitter',
-        'gplus' => 'Google+',
-        'rss' => 'RSS',
+        'link-1'    => 'Site externe',
+        'facebook'  => 'Facebook',
+        'twitter'   => 'Twitter',
+        'gplus'     => 'Google+',
+        'rss'       => 'RSS',
         'pinterest' => 'Pinterest',
-        'github' => 'Github',
-        'linkedin' => 'Linkedin',
-        'picasa' => 'Picasa',
-        'vimeo' => 'Vimeo',
+        'github'    => 'Github',
+        'linkedin'  => 'Linkedin',
+        'picasa'    => 'Picasa',
+        'vimeo'     => 'Vimeo',
         'instagram' => 'Instagram',
-        'flickr' => 'Flickr',
-        'tumblr' => 'Tumblr',
+        'flickr'    => 'Flickr',
+        'tumblr'    => 'Tumblr',
    ];
 
     /**

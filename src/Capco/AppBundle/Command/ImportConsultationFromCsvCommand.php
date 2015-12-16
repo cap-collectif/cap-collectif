@@ -1,0 +1,290 @@
+<?php
+
+namespace Capco\AppBundle\Command;
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionAppendix;
+use Capco\AppBundle\Entity\AppendixType;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Symfony\Component\Console\Input\ArrayInput;
+
+class ImportConsultationFromCsvCommand extends ContainerAwareCommand
+{
+    private $opinionTypes = [];
+
+    protected function configure()
+    {
+        $this
+            ->setName('capco:import:consultation-from-csv')
+            ->setDescription('Import consultation from CSV file with specified author and consultation step')
+            ->addArgument(
+                'user',
+                InputArgument::REQUIRED,
+                'Please provide the email of the author you want to use.'
+            )
+            ->addArgument(
+                'step',
+                InputArgument::REQUIRED,
+                'Please provide the slug of the consultation step you want to use'
+            )
+            ->addOption(
+                'force',
+                'f',
+                InputOption::VALUE_NONE,
+                'Set this option to force data import even if opinion with same title are found.'
+            )
+        ;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $this->import($input, $output);
+    }
+
+    protected function import(InputInterface $input, OutputInterface $output)
+    {
+        $userEmail = $input->getArgument('user');
+        $consultationStepSlug = $input->getArgument('step');
+
+        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+
+        $user = $this
+            ->getContainer()
+            ->get('fos_user.user_manager')
+            ->findUserByEmail($userEmail)
+        ;
+
+        $consultationStep = $em
+            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
+            ->findOneBy(['slug' => $consultationStepSlug])
+        ;
+
+        if (!$user) {
+            $output->writeln(
+                '<error>Unknown user'
+                .$userEmail.
+                '. Please provide an existing user email.</error>');
+            $output->writeln('<error>Import cancelled. No opinion created.</error>');
+            return 1;
+        }
+
+        if (!$consultationStep) {
+            $output->writeln(
+                '<error>Unknown consultation step'
+                .$consultationStepSlug.
+                '. Please provide an existing consultation step slug.</error>');
+            $output->writeln('<error>Import cancelled. No opinion created.</error>');
+            return 1;
+        }
+
+        if (!$consultationStep->getConsultationStepType()) {
+            $output->writeln(
+                '<error>Consultation step'
+                .$consultationStepSlug.
+                ' does not have a consultation step type associated Please create it then try importing data again.</error>');
+            $output->writeln('<error>Import cancelled. No opinion created.</error>');
+            return 1;
+        }
+
+        $opinions = $this->getOpinions();
+        $appendices = $this->getAppendices();
+
+        if (!$opinions || count($opinions) === 0) {
+            $output->writeln(
+                '<error>File "opinions.csv" is not provided, is empty or could not be parsed.</error>'
+            );
+            $output->writeln('<error>Import cancelled. No opinion created.</error>');
+            return 1;
+        }
+
+        $count = count($opinions);
+        $count += $appendices ? count($appendices) : 0;
+        $progress = new ProgressBar($output, $count);
+        $progress->start();
+
+        $i = 1;
+        foreach ($opinions as $row) {
+            $opinionType = null;
+            $otPath = explode('|', $row['opinion_type']);
+            foreach ($otPath as $index => $ot) {
+                if ($index === 0) {
+                    $opinionType = $em
+                        ->getRepository('CapcoAppBundle:OpinionType')
+                        ->findOneBy([
+                            'title' => $ot,
+                            'consultationStepType' => $consultationStep->getConsultationStepType()
+                    ]);
+                } else {
+                    $opinionType = $em
+                        ->getRepository('CapcoAppBundle:OpinionType')
+                        ->findOneBy([
+                            'title' => $ot,
+                            'consultationStepType' => $consultationStep->getConsultationStepType(),
+                            'parent' => $opinionType
+                        ]);
+                }
+            }
+
+            if (!$opinionType) {
+                $output->writeln(
+                    '<error>Opinion type with path '
+                    .$row['opinion_type'].
+                    ' does not exist for this consultation step (specified for opinion '
+                    .$row['opinion'].
+                    ').</error>');
+                $output->writeln('<error>Import cancelled. No opinion created.</error>');
+                return 1;
+            }
+
+            $opinion = $em
+                ->getRepository('CapcoAppBundle:Opinion')
+                ->findOneBy([
+                    'title' => $row['opinion'],
+                    'step' => $consultationStep
+                ])
+            ;
+
+            if (is_object($opinion) && !$input->getOption('force')) {
+                $output->writeln(
+                    '<error>Opinion with title "'
+                    . $row['opinion'] .
+                    '" already exists in this consultation step. Please change the title or specify the force option to import it anyway.</error>'
+                );
+                $output->writeln('<error>Import cancelled. No opinion created.</error>');
+
+                return 1;
+            }
+
+            if (!is_object($opinion)) {
+                $opinion = new Opinion();
+            }
+
+            $opinion->setTitle($row['opinion']);
+            $opinion->setStep($consultationStep);
+
+            $opinion->setOpinionType($opinionType);
+            $opinion->setAuthor($user);
+            $opinion->setPosition($i);
+            $opinion->setIsEnabled(true);
+            $opinion->setIsTrashed(false);
+            ++$i;
+
+            $content = $opinion->setBody('<p>'.$row['paragraphe'].'</p>');
+
+            $em->persist($opinion);
+            $progress->advance(1);
+        }
+
+        $output->writeln(
+            '<info>'
+            .count($opinions).
+            ' opinions successfully created.</info>'
+        );
+        $em->flush();
+
+        if ($appendices && count($appendices) > 0) {
+            foreach ($appendices as $row) {
+                $opinion = $em
+                    ->getRepository('CapcoAppBundle:Opinion')
+                    ->findOneBy([
+                        'title' => $row['opinion'],
+                        'step' => $consultationStep
+                    ])
+                ;
+
+                if (!is_object($opinion)) {
+                    $output->writeln(
+                        '<error>Opinion with title '
+                        . $row['opinion'] .
+                        ' does not exist in this consultation step (specified for appendix '
+                        . $row['body'] .
+                        ').</error>'
+                    );
+                    $output->writeln('<error>Import cancelled. No appendices created.</error>');
+
+                    return 1;
+                }
+
+                $typeTitle = array_key_exists('type', $row) ? $row['type'] : 'Contexte';
+
+                $appendixType = $em
+                    ->getRepository('CapcoAppBundle:AppendixType')
+                    ->findOneBy([
+                        'title' => $typeTitle,
+                    ])
+                ;
+
+                if (!is_object($appendixType)) {
+                    $output->writeln(
+                        '<error>Appendix type "'
+                        . $typeTitle .
+                        '" does not exist in this consultation step (specified for appendix '
+                        . $row['body'] .
+                        ').</error>'
+                    );
+                    $output->writeln('<error>Import cancelled. No appendices created.</error>');
+
+                    return 1;
+                }
+
+                $opinionTypeAppendixType = $em
+                    ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
+                    ->findOneBy([
+                        'appendixType' => $appendixType,
+                        'opinionType' => $opinion->getOpinionType()
+                    ])
+                ;
+
+                if (!is_object($opinionTypeAppendixType)) {
+                    $output->writeln(
+                        '<error>Appendix type '
+                        . $typeTitle .
+                        ' is not defined for opinion type '
+                        .$opinion->getOpinionType()->getTitle().
+                        '.</error>'
+                    );
+                    $output->writeln('<error>Import cancelled. No appendices created.</error>');
+
+                    return 1;
+                }
+
+                if (count($opinion->getAppendices()) === 0) {
+                    $appendix = new OpinionAppendix();
+                    $appendix->setAppendixType($appendixType);
+                    $opinion->addAppendice($appendix);
+                } else {
+                    $appendix = $opinion->getAppendices()[0];
+                }
+                $appendix->setBody('<p>' . $row['body'] . '</p>');
+
+                $progress->advance(1);
+            }
+        }
+
+        $em->flush();
+        $progress->finish();
+    }
+
+    protected function getOpinions()
+    {
+        return $this->getContainer()
+                    ->get('import.csvtoarray')
+                    ->convert('consultation/opinions.csv');
+    }
+
+    protected function getAppendices()
+    {
+        return $this->getContainer()
+                    ->get('import.csvtoarray')
+                    ->convert('consultation/appendices.csv');
+    }
+}

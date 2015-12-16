@@ -25,34 +25,34 @@ class IdeaSearchType extends AbstractType
     {
         $builder
             ->add('term', 'search', [
-                'required' => false,
-                'label' => 'idea.searchform.term',
+                'required'           => false,
+                'label'              => 'idea.searchform.term',
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('sort', 'choice', [
-                'required' => false,
-                'choices' => Idea::$sortCriterias,
+                'required'           => false,
+                'choices'            => Idea::$sortCriterias,
                 'translation_domain' => 'CapcoAppBundle',
-                'label' => 'idea.searchform.sort',
-                'empty_value' => false,
-                'attr' => ['onchange' => 'this.form.submit()'],
+                'label'              => 'idea.searchform.sort',
+                'empty_value'        => false,
+                'attr'               => ['onchange' => 'this.form.submit()'],
             ])
         ;
 
         if ($this->toggleManager->isActive('themes')) {
             $builder->add('theme', 'entity', [
-                'required' => false,
-                'class' => 'CapcoAppBundle:Theme',
-                'property' => 'title',
-                'label' => 'idea.searchform.theme',
+                'required'           => false,
+                'class'              => 'CapcoAppBundle:Theme',
+                'property'           => 'title',
+                'label'              => 'idea.searchform.theme',
                 'translation_domain' => 'CapcoAppBundle',
-                'query_builder' => function (ThemeRepository $tr) {
+                'query_builder'      => function (ThemeRepository $tr) {
                     return $tr->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
                 'empty_value' => 'idea.searchform.all_themes',
-                'attr' => ['onchange' => 'this.form.submit()'],
+                'attr'        => ['onchange' => 'this.form.submit()'],
             ]);
         }
     }

@@ -15,16 +15,16 @@ class ChangePasswordFormType extends AbstractType
         $constraint = new UserPassword(['message' => 'fos_user.password.not_current']);
 
         $builder->add('current_password', 'password', [
-            'label' => 'form.current_password',
+            'label'              => 'form.current_password',
             'translation_domain' => 'FOSUserBundle',
-            'mapped' => false,
-            'constraints' => $constraint,
+            'mapped'             => false,
+            'constraints'        => $constraint,
         ]);
         $builder->add('new', 'repeated', [
-            'type' => 'password',
-            'options' => ['translation_domain' => 'FOSUserBundle'],
-            'first_options' => ['label' => 'form.new_password'],
-            'second_options' => ['label' => 'form.new_password_confirmation'],
+            'type'            => 'password',
+            'options'         => ['translation_domain' => 'FOSUserBundle'],
+            'first_options'   => ['label'              => 'form.new_password'],
+            'second_options'  => ['label'              => 'form.new_password_confirmation'],
             'invalid_message' => 'fos_user.password.mismatch',
         ]);
     }
@@ -33,7 +33,7 @@ class ChangePasswordFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'FOS\UserBundle\Form\Model\ChangePassword',
-            'intention' => 'change_password',
+            'intention'  => 'change_password',
         ]);
     }
 

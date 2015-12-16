@@ -12,7 +12,7 @@ class ArgumentVoteAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'argument.title',
+        '_sort_by'    => 'argument.title',
     ];
 
     /**

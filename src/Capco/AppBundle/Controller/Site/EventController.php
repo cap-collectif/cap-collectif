@@ -47,16 +47,16 @@ class EventController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_event_search_term', [
-                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'theme'   => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
-                    'term' => $data['term'],
+                    'term'    => $data['term'],
                 ]));
             }
         } else {
             $form->setData([
-                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+                'theme'   => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
                 'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
-                'term' => $term,
+                'term'    => $term,
             ]);
         }
 
@@ -64,8 +64,8 @@ class EventController extends Controller
         $archivedEventsNb = $this->get('capco.event.resolver')->countEvents(true, $theme, $project, $term);
 
         return [
-            'years' => $groupedEvents,
-            'form' => $form->createView(),
+            'years'            => $groupedEvents,
+            'form'             => $form->createView(),
             'archivedEventsNb' => $archivedEventsNb,
         ];
     }
@@ -101,16 +101,16 @@ class EventController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect($this->generateUrl('app_event_archived_term', [
-                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
+                    'theme'   => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
                     'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
-                    'term' => $data['term'],
+                    'term'    => $data['term'],
                 ]));
             }
         } else {
             $form->setData([
-                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
+                'theme'   => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
                 'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
-                'term' => $term,
+                'term'    => $term,
             ]);
         }
 
@@ -118,7 +118,7 @@ class EventController extends Controller
 
         return [
             'years' => $groupedEvents,
-            'form' => $form->createView(),
+            'form'  => $form->createView(),
         ];
     }
 

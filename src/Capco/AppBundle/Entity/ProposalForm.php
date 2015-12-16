@@ -224,7 +224,6 @@ class ProposalForm
 
     /**
      * @param CollectStep $step
-     *
      * @return $this
      */
     public function setStep(CollectStep $step = null)
@@ -260,13 +259,11 @@ class ProposalForm
 
     /**
      * @param string $titleHelpText
-     *
      * @return $this
      */
     public function setTitleHelpText($titleHelpText)
     {
         $this->titleHelpText = $titleHelpText;
-
         return $this;
     }
 
@@ -280,13 +277,11 @@ class ProposalForm
 
     /**
      * @param string $descriptionHelpText
-     *
      * @return $this
      */
     public function setDescriptionHelpText($descriptionHelpText)
     {
         $this->descriptionHelpText = $descriptionHelpText;
-
         return $this;
     }
 
@@ -300,13 +295,11 @@ class ProposalForm
 
     /**
      * @param string $themeHelpText
-     *
      * @return $this
      */
     public function setThemeHelpText($themeHelpText)
     {
         $this->themeHelpText = $themeHelpText;
-
         return $this;
     }
 
@@ -320,13 +313,11 @@ class ProposalForm
 
     /**
      * @param string $districtHelpText
-     *
      * @return $this
      */
     public function setDistrictHelpText($districtHelpText)
     {
         $this->districtHelpText = $districtHelpText;
-
         return $this;
     }
 }

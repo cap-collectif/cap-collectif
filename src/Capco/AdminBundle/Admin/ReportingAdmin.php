@@ -13,7 +13,7 @@ class ReportingAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by' => 'isArchived',
+        '_sort_by'    => 'isArchived',
     ];
 
     /**
@@ -63,22 +63,22 @@ class ReportingAdmin extends Admin
 
         $listMapper
             ->addIdentifier('object', null, [
-                'label' => 'admin.fields.reporting.object',
+                'label'    => 'admin.fields.reporting.object',
                 'template' => 'CapcoAdminBundle:Reporting:object_list_field.html.twig',
-                'mapped' => false,
+                'mapped'   => false,
             ])
             ->add('type', null, [
-                'label' => 'admin.fields.reporting.type',
+                'label'    => 'admin.fields.reporting.type',
                 'template' => 'CapcoAdminBundle:Reporting:type_list_field.html.twig',
-                'mapped' => false,
+                'mapped'   => false,
             ])
             ->add('status', null, [
-                'label' => 'admin.fields.reporting.status',
-                'template' => 'CapcoAdminBundle:Reporting:status_list_field.html.twig',
+                'label'        => 'admin.fields.reporting.status',
+                'template'     => 'CapcoAdminBundle:Reporting:status_list_field.html.twig',
                 'statusLabels' => Reporting::$statusesLabels,
             ])
             ->add('isArchived', null, [
-                'label' => 'admin.fields.reporting.is_archived',
+                'label'    => 'admin.fields.reporting.is_archived',
                 'editable' => true,
             ])
             ->add('Reporter', null, [
@@ -102,25 +102,25 @@ class ReportingAdmin extends Admin
     {
         $showMapper
             ->add('object', null, [
-                'label' => 'admin.fields.reporting.object',
+                'label'    => 'admin.fields.reporting.object',
                 'template' => 'CapcoAdminBundle:Reporting:object_show_field.html.twig',
-                'mapped' => false,
+                'mapped'   => false,
             ])
             ->add('type', null, [
-                'label' => 'admin.fields.reporting.type',
+                'label'    => 'admin.fields.reporting.type',
                 'template' => 'CapcoAdminBundle:Reporting:type_show_field.html.twig',
-                'mapped' => false,
+                'mapped'   => false,
             ])
             ->add('status', null, [
-                'label' => 'admin.fields.reporting.status',
-                'template' => 'CapcoAdminBundle:Reporting:status_show_field.html.twig',
+                'label'        => 'admin.fields.reporting.status',
+                'template'     => 'CapcoAdminBundle:Reporting:status_show_field.html.twig',
                 'statusLabels' => Reporting::$statusesLabels,
             ])
             ->add('body', null, [
                 'label' => 'admin.fields.reporting.body',
             ])
             ->add('isArchived', null, [
-                'label' => 'admin.fields.reporting.is_archived',
+                'label'    => 'admin.fields.reporting.is_archived',
                 'editable' => true,
             ])
             ->add('Reporter', null, [

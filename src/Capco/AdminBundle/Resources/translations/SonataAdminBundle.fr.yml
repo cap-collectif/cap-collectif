@@ -449,7 +449,6 @@ admin:
       group_selection: Sélections et réponse officielle
       help:
         annotation: Cette annotation ne sera pas visible sur le site.
-        estimation: L'estimation sera affichée en euros.
         rating: Cette note ne sera pas visible sur le site.
         status: <span class="capco--sonata-ba-field-help"><i class="fa fa-exclamation-triangle"></i>&nbsp;Modifier le statut de cette proposition en informera son auteur par email</span>.
         answer: <span class="capco--sonata-ba-field-help"><i class="fa fa-exclamation-triangle"></i>&nbsp;Ajouter ou modifier une réponse à cette proposition en informera son auteur par email.</span>
@@ -460,7 +459,6 @@ admin:
       no_status: Aucun statut
       no_theme: Aucun thème
       project: Projet
-      estimation: Estimation
       rating: Note
       responses: Champs personnalisés
       selection_steps: Étapes de sélection

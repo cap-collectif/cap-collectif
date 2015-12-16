@@ -29,10 +29,10 @@ class UrlResolver
     {
         if ($object instanceof Opinion) {
             return $this->router->generate('app_project_show_opinion', [
-                'projectSlug' => $object->getStep()->getProject()->getSlug(),
-                'stepSlug' => $object->getStep()->getSlug(),
+                'projectSlug'     => $object->getStep()->getProject()->getSlug(),
+                'stepSlug'        => $object->getStep()->getSlug(),
                 'opinionTypeSlug' => $object->getOpinionType()->getSlug(),
-                'opinionSlug' => $object->getSlug(),
+                'opinionSlug'     => $object->getSlug(),
             ], $absolute);
         }
 
@@ -40,18 +40,18 @@ class UrlResolver
             $opinion = $object->getParent();
 
             return $this->router->generate('app_project_show_opinion_version', [
-                'projectSlug' => $opinion->getStep()->getProject()->getSlug(),
-                'stepSlug' => $opinion->getStep()->getSlug(),
+                'projectSlug'     => $opinion->getStep()->getProject()->getSlug(),
+                'stepSlug'        => $opinion->getStep()->getSlug(),
                 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
-                'opinionSlug' => $opinion->getSlug(),
-                'versionSlug' => $object->getSlug(),
+                'opinionSlug'     => $opinion->getSlug(),
+                'versionSlug'     => $object->getSlug(),
             ], $absolute);
         }
 
         if ($object instanceof Proposal) {
             return $this->router->generate('app_project_show_proposal', [
-                'projectSlug' => $object->getStep()->getProject()->getSlug(),
-                'stepSlug' => $object->getStep()->getSlug(),
+                'projectSlug'  => $object->getStep()->getProject()->getSlug(),
+                'stepSlug'     => $object->getStep()->getSlug(),
                 'proposalSlug' => $object->getSlug(),
             ], $absolute);
         }
