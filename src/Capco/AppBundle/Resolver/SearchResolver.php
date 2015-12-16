@@ -145,17 +145,13 @@ class SearchResolver
      *
      * @return array|void
      */
-    protected function getSortSettings($sort, $order = 'desc')
+    protected function getSortSettings($sort = '_score', $order = 'desc')
     {
         $sort = $sort ? $sort : '_score';
+        $order = $order ? $order : 'desc';
 
         return [
-            $sort => [
-                'order' => $order,
-            ],
-            'createdAt' => [
-                'order' => 'desc',
-            ],
+            $sort => $order,
         ];
     }
 
@@ -181,5 +177,69 @@ class SearchResolver
                 'biography' => new \stdClass(),
             ],
         ];
+    }
+
+    public function searchProposals($page, $pagination, $order, $terms, $providedFilters)
+    {
+        $type = 'proposal';
+
+        switch ($order) {
+            case 'old':
+                $sortField = 'created_at';
+                $sortOrder = 'asc';
+                break;
+            case 'last':
+                $sortField = 'created_at';
+                $sortOrder = 'desc';
+                break;
+            case 'popular':
+                $sortField = 'votes_count';
+                $sortOrder = 'desc';
+                break;
+            case 'comments':
+                $sortField = 'comments_count';
+                $sortOrder = 'desc';
+                break;
+            default;
+                $sortField = '_score';
+                $sortOrder = 'desc';
+                break;
+        }
+
+        $filters = [];
+        $filters['isTrashed'] = false;
+        $filters['enabled'] = true;
+        if (array_key_exists('selectionStep', $providedFilters)) {
+            $filters['selectionSteps.id'] = $providedFilters['selectionStep'];
+        }
+        if (array_key_exists('proposalForm', $providedFilters)) {
+            $filters['proposalForm.id'] = $providedFilters['proposalForm'];
+        }
+        if (array_key_exists('status', $providedFilters) && $providedFilters['status'] > 0) {
+            $filters['status.id'] = $providedFilters['status'];
+        }
+        if (array_key_exists('district', $providedFilters) && $providedFilters['district'] > 0) {
+            $filters['district.id'] = $providedFilters['district'];
+        }
+        if (array_key_exists('theme', $providedFilters) && $providedFilters['theme'] > 0) {
+            $filters['theme.id'] = $providedFilters['theme'];
+        }
+        if (array_key_exists('type', $providedFilters) && $providedFilters['type'] > 0) {
+            $filters['author.user_type.id'] = $providedFilters['type'];
+        }
+
+        // Search
+        $results = $this->searchAll($page, $terms, $type, $sortField, $sortOrder, $filters, false, $pagination);
+
+        $proposals = [];
+        foreach ($results['results'] as $result) {
+            $proposals[] = $result->getHit()['_source'];
+        }
+
+        return [
+            'proposals' => $proposals,
+            'count' => $results['count'],
+        ];
+
     }
 }

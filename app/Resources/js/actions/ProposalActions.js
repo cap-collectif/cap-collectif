@@ -34,22 +34,21 @@ export default {
 
   load: (fetchFrom, id) => {
     const page = ProposalStore.currentPage;
+    const pagination = PROPOSAL_PAGINATION;
+
     const order = ProposalStore.order;
     const filters = ProposalStore.filters;
     const terms = ProposalStore.terms;
-    const first = page ? PROPOSAL_PAGINATION * (page - 1) : 0;
-    const offset = page ? PROPOSAL_PAGINATION : 100;
-    const sort = 'score';
 
     let url = null;
     const data = {};
 
     switch (fetchFrom) {
     case 'form':
-      url = `/proposal_forms/${id}/proposals`;
+      url = `/proposal_forms/${id}/proposals/search`;
       break;
     case 'selectionStep':
-      url = `/selection_steps/${id}/proposals`;
+      url = `/selection_steps/${id}/proposals/search`;
       break;
     default:
       break;
@@ -59,11 +58,8 @@ export default {
       return false;
     }
 
-    url += `?order=${order}&first=${first}&offset=${offset}`;
+    url += `?page=${page}&pagination=${pagination}&order=${order}`;
 
-    data.sort = sort;
-    data.page = page;
-    data.pagination = PROPOSAL_PAGINATION;
     data.terms = terms;
     data.filters = filters;
 

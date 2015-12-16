@@ -44,6 +44,11 @@ class ApplicationContext extends UserContext
     {
         $importCommand = 'mysql -h 127.0.0.1 -u root symfony_test < app/dbtest.backup';
         exec($importCommand);
+        exec('app/console capco:reset-feature-flags -e test');
+        exec('app/console capco:compute:counters -e test');
+        exec('app/console capco:compute:projects-counters -e test');
+        exec('app/console capco:compute:rankings -e test');
+        exec('app/console fos:elastica:populate -q -e test');
     }
 
     /**
