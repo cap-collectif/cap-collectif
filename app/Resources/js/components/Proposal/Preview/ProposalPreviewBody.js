@@ -1,4 +1,4 @@
-import ProposalPreviewEstimation from '../Detail/ProposalDetailEstimation';
+import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 
 const ProposalPreviewBody = React.createClass({
   propTypes: {
@@ -27,7 +27,9 @@ const ProposalPreviewBody = React.createClass({
               </div>
             : null
           }
-          <ProposalPreviewEstimation className="proposal__info" proposal={proposal} />
+          <div className="proposal__info">
+            <ProposalDetailEstimation proposal={proposal} />
+          </div>
         </div>
       </div>
     );
