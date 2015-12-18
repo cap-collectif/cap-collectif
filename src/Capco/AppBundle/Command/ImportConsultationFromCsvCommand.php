@@ -96,7 +96,6 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         }
 
         $opinions = $this->getOpinions();
-        $appendices = $this->getAppendices();
 
         if (!$opinions || count($opinions) === 0) {
             $output->writeln(
@@ -107,14 +106,13 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         }
 
         $count = count($opinions);
-        $count += $appendices ? count($appendices) : 0;
         $progress = new ProgressBar($output, $count);
         $progress->start();
 
         $i = 1;
         foreach ($opinions as $row) {
             $opinionType = null;
-            $otPath = explode('|', $row['opinion_type']);
+            $otPath = explode('|', $row['type']);
             foreach ($otPath as $index => $ot) {
                 if ($index === 0) {
                     $opinionType = $em
@@ -137,9 +135,9 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             if (!$opinionType) {
                 $output->writeln(
                     '<error>Opinion type with path '
-                    .$row['opinion_type'].
+                    .$row['type'].
                     ' does not exist for this consultation step (specified for opinion '
-                    .$row['opinion'].
+                    .$row['titre'].
                     ').</error>');
                 $output->writeln('<error>Import cancelled. No opinion created.</error>');
                 return 1;
@@ -148,7 +146,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             $opinion = $em
                 ->getRepository('CapcoAppBundle:Opinion')
                 ->findOneBy([
-                    'title' => $row['opinion'],
+                    'title' => $row['titre'],
                     'step' => $consultationStep
                 ])
             ;
@@ -156,7 +154,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             if (is_object($opinion) && !$input->getOption('force')) {
                 $output->writeln(
                     '<error>Opinion with title "'
-                    . $row['opinion'] .
+                    . $row['titre'] .
                     '" already exists in this consultation step. Please change the title or specify the force option to import it anyway.</error>'
                 );
                 $output->writeln('<error>Import cancelled. No opinion created.</error>');
@@ -168,7 +166,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 $opinion = new Opinion();
             }
 
-            $opinion->setTitle($row['opinion']);
+            $opinion->setTitle($row['titre']);
             $opinion->setStep($consultationStep);
 
             $opinion->setOpinionType($opinionType);
@@ -178,9 +176,38 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             $opinion->setIsTrashed(false);
             ++$i;
 
-            $content = $opinion->setBody('<p>'.$row['paragraphe'].'</p>');
+            $content = $opinion->setBody('<p>'.$row['contenu'].'</p>');
 
             $em->persist($opinion);
+
+            if (array_key_exists('contexte', $row)) {
+                $opinionTypeAppendixType = $em
+                    ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
+                    ->findOneBy([
+                        'opinionType' => $opinion->getOpinionType()
+                    ])
+                ;
+                if (!is_object($opinionTypeAppendixType)) {
+                    $output->writeln(
+                        '<error>No appendix type defined for opinion type '
+                        .$opinion->getOpinionType()->getTitle().
+                        '.</error>'
+                    );
+                    $output->writeln('<error>Import cancelled. No opinions created.</error>');
+
+                    return 1;
+                }
+
+                if (count($opinion->getAppendices()) === 0) {
+                    $appendix = new OpinionAppendix();
+                    $appendix->setAppendixType($opinionTypeAppendixType->getAppendixType());
+                    $opinion->addAppendice($appendix);
+                } else {
+                    $appendix = $opinion->getAppendices()[0];
+                }
+                $appendix->setBody('<p>' . $row['contexte'] . '</p>');
+
+            }
             $progress->advance(1);
         }
 
@@ -189,87 +216,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             .count($opinions).
             ' opinions successfully created.</info>'
         );
-        $em->flush();
-
-        if ($appendices && count($appendices) > 0) {
-            foreach ($appendices as $row) {
-                $opinion = $em
-                    ->getRepository('CapcoAppBundle:Opinion')
-                    ->findOneBy([
-                        'title' => $row['opinion'],
-                        'step' => $consultationStep
-                    ])
-                ;
-
-                if (!is_object($opinion)) {
-                    $output->writeln(
-                        '<error>Opinion with title '
-                        . $row['opinion'] .
-                        ' does not exist in this consultation step (specified for appendix '
-                        . $row['body'] .
-                        ').</error>'
-                    );
-                    $output->writeln('<error>Import cancelled. No appendices created.</error>');
-
-                    return 1;
-                }
-
-                $typeTitle = array_key_exists('type', $row) ? $row['type'] : 'Contexte';
-
-                $appendixType = $em
-                    ->getRepository('CapcoAppBundle:AppendixType')
-                    ->findOneBy([
-                        'title' => $typeTitle,
-                    ])
-                ;
-
-                if (!is_object($appendixType)) {
-                    $output->writeln(
-                        '<error>Appendix type "'
-                        . $typeTitle .
-                        '" does not exist in this consultation step (specified for appendix '
-                        . $row['body'] .
-                        ').</error>'
-                    );
-                    $output->writeln('<error>Import cancelled. No appendices created.</error>');
-
-                    return 1;
-                }
-
-                $opinionTypeAppendixType = $em
-                    ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
-                    ->findOneBy([
-                        'appendixType' => $appendixType,
-                        'opinionType' => $opinion->getOpinionType()
-                    ])
-                ;
-
-                if (!is_object($opinionTypeAppendixType)) {
-                    $output->writeln(
-                        '<error>Appendix type '
-                        . $typeTitle .
-                        ' is not defined for opinion type '
-                        .$opinion->getOpinionType()->getTitle().
-                        '.</error>'
-                    );
-                    $output->writeln('<error>Import cancelled. No appendices created.</error>');
-
-                    return 1;
-                }
-
-                if (count($opinion->getAppendices()) === 0) {
-                    $appendix = new OpinionAppendix();
-                    $appendix->setAppendixType($appendixType);
-                    $opinion->addAppendice($appendix);
-                } else {
-                    $appendix = $opinion->getAppendices()[0];
-                }
-                $appendix->setBody('<p>' . $row['body'] . '</p>');
-
-                $progress->advance(1);
-            }
-        }
-
+        
         $em->flush();
         $progress->finish();
     }
