@@ -15,7 +15,7 @@ class CommentAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by'    => 'updatedAt',
+        '_sort_by' => 'updatedAt',
     ];
 
     /**
@@ -63,37 +63,37 @@ class CommentAdmin extends Admin
 
         $listMapper
             ->addIdentifier('body', null, [
-                'label'    => 'admin.fields.comment.body',
+                'label' => 'admin.fields.comment.body',
                 'template' => 'CapcoAdminBundle:Comment:body_list_field.html.twig',
             ])
             ->add('object', null, [
-                'label'    => 'admin.fields.comment.object',
+                'label' => 'admin.fields.comment.object',
                 'template' => 'CapcoAdminBundle:Comment:object_list_field.html.twig',
-                'mapped'   => false,
+                'mapped' => false,
             ])
             ->add('Author', 'sonata_type_model', [
-                'label'    => 'admin.fields.comment.author',
+                'label' => 'admin.fields.comment.author',
                 'template' => 'CapcoAdminBundle:Comment:author_list_field.html.twig',
-                'mapped'   => false,
+                'mapped' => false,
             ])
             ->add('votesCount', null, [
                 'label' => 'admin.fields.comment.vote_count',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.comment.is_enabled',
+                'label' => 'admin.fields.comment.is_enabled',
             ])
             ->add('isTrashed', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.comment.is_trashed',
+                'label' => 'admin.fields.comment.is_trashed',
             ])
             ->add('updatedAt', 'datetime', [
                 'label' => 'admin.fields.comment.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])
@@ -219,12 +219,12 @@ class CommentAdmin extends Admin
         $formMapper
             ->add('body', null, [
                 'label' => 'admin.fields.comment.body',
-                'attr'  => ['rows' => 8],
+                'attr' => ['rows' => 8],
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.comment.author',
+                'label' => 'admin.fields.comment.author',
                 'property' => 'username',
-                'help'     => 'admin.help.comment.author',
+                'help' => 'admin.help.comment.author',
                 'required' => false,
             ])
             ->add('authorName', null, [
@@ -234,11 +234,11 @@ class CommentAdmin extends Admin
                 'label' => 'admin.fields.comment.author_email',
             ])
             ->add('isEnabled', null, [
-                'label'    => 'admin.fields.comment.is_enabled',
+                'label' => 'admin.fields.comment.is_enabled',
                 'required' => false,
             ])
             ->add('isTrashed', null, [
-                'label'    => 'admin.fields.comment.is_trashed',
+                'label' => 'admin.fields.comment.is_trashed',
                 'required' => false,
             ])
             ->add('trashedReason', null, [

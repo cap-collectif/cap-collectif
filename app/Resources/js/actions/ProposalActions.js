@@ -1,6 +1,7 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
 import ProposalStore from '../stores/ProposalStore';
+import LocalStorageService from '../services/LocalStorageService';
 import {
   RECEIVE_PROPOSAL,
   RECEIVE_PROPOSALS,
@@ -23,6 +24,7 @@ import {
 
   CHANGE_PAGE,
   CHANGE_ORDER,
+  CHANGE_SEARCH_TERMS,
   CHANGE_FILTERS,
   PROPOSAL_PAGINATION,
 
@@ -32,17 +34,21 @@ export default {
 
   load: (fetchFrom, id) => {
     const page = ProposalStore.currentPage;
+    const pagination = PROPOSAL_PAGINATION;
+
     const order = ProposalStore.order;
     const filters = ProposalStore.filters;
-    const first = page ? PROPOSAL_PAGINATION * (page - 1) : 0;
-    const offset = page ? PROPOSAL_PAGINATION : 100;
+    const terms = ProposalStore.terms;
+
     let url = null;
+    const data = {};
+
     switch (fetchFrom) {
     case 'form':
-      url = `/proposal_forms/${id}/proposals`;
+      url = `/proposal_forms/${id}/proposals/search`;
       break;
     case 'selectionStep':
-      url = `/selection_steps/${id}/proposals`;
+      url = `/selection_steps/${id}/proposals/search`;
       break;
     default:
       break;
@@ -52,23 +58,23 @@ export default {
       return false;
     }
 
-    url += `?order=${order}&first=${first}&offset=${offset}`;
+    url += `?page=${page}&pagination=${pagination}&order=${order}`;
 
-    for (const filter in filters) {
-      if (filters.hasOwnProperty(filter)) {
-        url += `&${filter}=${filters[filter]}`;
-      }
-    }
+    data.terms = terms;
+    data.filters = filters;
 
     Fetcher
-      .get(url)
-      .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_PROPOSALS,
-          proposals: data.proposals,
-          count: data.count,
+      .post(url, data)
+      .then((response) => {
+        const promise = response.json();
+        promise.then((result) => {
+          AppDispatcher.dispatch({
+            actionType: RECEIVE_PROPOSALS,
+            proposals: result.proposals,
+            count: result.count,
+          });
+          return true;
         });
-        return true;
       });
   },
 
@@ -84,6 +90,14 @@ export default {
       actionType: CHANGE_ORDER,
       order: newOrder,
     });
+    LocalStorageService.set('proposals_order', ProposalStore.order);
+  },
+
+  changeSearchTerms: (terms) => {
+    AppDispatcher.dispatch({
+      actionType: CHANGE_SEARCH_TERMS,
+      terms: terms,
+    });
   },
 
   changeFilterValue: (filterName, value) => {
@@ -92,6 +106,7 @@ export default {
       filter: filterName,
       value: value,
     });
+    LocalStorageService.set('proposals_filters', ProposalStore.filters);
   },
 
   submit: () => {

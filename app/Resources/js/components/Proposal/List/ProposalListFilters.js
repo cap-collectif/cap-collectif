@@ -95,7 +95,7 @@ const ProposalListFilters = React.createClass({
           </ButtonToolbar>
         </Col>
         <Col xs={12} md={6}>
-          <ProposalListSearch/>
+          <ProposalListSearch fetchFrom={this.props.fetchFrom} id={this.props.id} />
         </Col>
       </Row>
       <Row>

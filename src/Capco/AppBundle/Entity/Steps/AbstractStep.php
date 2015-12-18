@@ -46,7 +46,7 @@ abstract class AbstractStep
      */
     public static $stepStatus = [
         'closed' => 'step.status.closed',
-        'open'   => 'step.status.open',
+        'open' => 'step.status.open',
         'future' => 'step.status.future',
     ];
 
@@ -56,10 +56,10 @@ abstract class AbstractStep
     public static $stepTypeLabels = [
         'presentation' => 'step.types.presentation',
         'consultation' => 'step.types.consultation',
-        'other'        => 'step.types.other',
-        'synthesis'    => 'step.types.synthesis',
-        'ranking'      => 'step.types.ranking',
-        'selection'    => 'step.types.selection',
+        'other' => 'step.types.other',
+        'synthesis' => 'step.types.synthesis',
+        'ranking' => 'step.types.ranking',
+        'selection' => 'step.types.selection',
     ];
 
     /**

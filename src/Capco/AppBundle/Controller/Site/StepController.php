@@ -28,7 +28,7 @@ class StepController extends Controller
      * @Template("CapcoAppBundle:Step:show.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\OtherStep", options={"mapping": {"stepSlug": "slug"}})
      *
-     * @param string $projectSlug
+     * @param string    $projectSlug
      * @param OtherStep $step
      *
      * @return array
@@ -46,7 +46,7 @@ class StepController extends Controller
         }
 
         return [
-            'project'     => $project,
+            'project' => $project,
             'currentStep' => $step,
         ];
     }
@@ -81,12 +81,12 @@ class StepController extends Controller
         $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered($project, 10, 1);
 
         return [
-            'project'      => $project,
-            'currentStep'  => $step,
-            'events'       => $events,
-            'posts'        => $posts,
-            'nbEvents'     => $nbEvents,
-            'nbPosts'      => $nbPosts,
+            'project' => $project,
+            'currentStep' => $step,
+            'events' => $events,
+            'posts' => $posts,
+            'nbEvents' => $nbEvents,
+            'nbPosts' => $nbPosts,
             'contributors' => $contributors,
         ];
     }
@@ -129,11 +129,11 @@ class StepController extends Controller
         ;
 
         return [
-            'project'             => $project,
-            'currentStep'         => $step,
-            'opinions'            => $opinions,
+            'project' => $project,
+            'currentStep' => $step,
+            'opinions' => $opinions,
             'nbOpinionsToDisplay' => $nbOpinionsToDisplay,
-            'versions'            => $versions,
+            'versions' => $versions,
             'nbVersionsToDisplay' => $nbVersionsToDisplay,
         ];
     }
@@ -169,11 +169,11 @@ class StepController extends Controller
         ;
 
         return [
-            'project'     => $project,
+            'project' => $project,
             'currentStep' => $step,
-            'opinions'    => $opinions,
-            'page'        => $page,
-            'nbPage'      => ceil(count($opinions) / 10),
+            'opinions' => $opinions,
+            'page' => $page,
+            'nbPage' => ceil(count($opinions) / 10),
         ];
     }
 
@@ -209,11 +209,11 @@ class StepController extends Controller
         ;
 
         return [
-            'project'     => $project,
+            'project' => $project,
             'currentStep' => $step,
-            'versions'    => $versions,
-            'page'        => $page,
-            'nbPage'      => ceil(count($versions) / 10),
+            'versions' => $versions,
+            'page' => $page,
+            'nbPage' => ceil(count($versions) / 10),
         ];
     }
 
@@ -241,7 +241,7 @@ class StepController extends Controller
         }
 
         return [
-            'project'     => $project,
+            'project' => $project,
             'currentStep' => $step,
         ];
     }
@@ -250,8 +250,10 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\CollectStep", options={"mapping" = {"stepSlug": "slug"}})
-     * @param Project $project
+     *
+     * @param Project     $project
      * @param CollectStep $step
+     *
      * @return Response
      */
     public function showCollectStepAction(Project $project, CollectStep $step)
@@ -294,14 +296,14 @@ class StepController extends Controller
         ], 'json', SerializationContext::create()->setGroups(['Statuses']));
 
         $response = $this->render('CapcoAppBundle:Step:collect.html.twig', [
-            'project'        => $project,
-            'currentStep'    => $step,
+            'project' => $project,
+            'currentStep' => $step,
             'proposalsCount' => $proposalsCount,
-            'themes'         => $themes,
-            'statuses'       => $statuses,
-            'districts'      => $districts,
-            'types'          => $types,
-            'form'           => $form,
+            'themes' => $themes,
+            'statuses' => $statuses,
+            'districts' => $districts,
+            'types' => $types,
+            'form' => $form,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
@@ -348,13 +350,13 @@ class StepController extends Controller
         ], 'json', SerializationContext::create()->setGroups(['Statuses']));
 
         $response = $this->render('CapcoAppBundle:Step:selection.html.twig', [
-            'project'        => $project,
-            'currentStep'    => $step,
+            'project' => $project,
+            'currentStep' => $step,
             'proposalsCount' => $proposalsCount,
-            'themes'         => $themes,
-            'statuses'       => $statuses,
-            'districts'      => $districts,
-            'types'          => $types,
+            'themes' => $themes,
+            'statuses' => $statuses,
+            'districts' => $districts,
+            'types' => $types,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
@@ -393,7 +395,7 @@ class StepController extends Controller
         }
 
         return [
-            'project'     => $project,
+            'project' => $project,
             'currentStep' => $step,
         ];
     }

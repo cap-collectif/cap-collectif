@@ -16,7 +16,7 @@ class ConsultationPage extends Page
     protected $path = '/projects/{projectSlug}/consultation/{stepSlug}';
 
     protected $elements = [
-        'Opinion nav bar'  => '.project__nav',
+        'Opinion nav bar' => '.project__nav',
         'Opinion nav item' => [
             'css' => '.project__nav li',
         ],

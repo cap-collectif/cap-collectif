@@ -139,15 +139,15 @@ class CRUDController extends Controller
             }
 
             $items[] = [
-                'id'    => $admin->id($entity),
+                'id' => $admin->id($entity),
                 'label' => $label,
             ];
         }
 
         return new JsonResponse([
             'status' => 'OK',
-            'more'   => !$pager->isLastPage(),
-            'items'  => $items,
+            'more' => !$pager->isLastPage(),
+            'items' => $items,
         ]);
     }
 

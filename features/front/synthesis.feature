@@ -1,3 +1,4 @@
+@synthesis
 Feature: Synthesis
 
 # View

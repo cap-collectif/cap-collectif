@@ -13,7 +13,7 @@ class OpinionTypeAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     public function getPersistentParameters()
@@ -47,7 +47,7 @@ class OpinionTypeAdmin extends Admin
         $consultationStepTypeName = $this->getRequest()->get('consultation_step_type_name');
 
         return [
-            'consultation_step_type_id'   => $consultationStepTypeId,
+            'consultation_step_type_id' => $consultationStepTypeId,
             'consultation_step_type_name' => $consultationStepTypeName,
         ];
     }
@@ -76,10 +76,10 @@ class OpinionTypeAdmin extends Admin
                 'label' => 'admin.fields.opinion_type.subtitle',
             ])
             ->add('parent', 'sonata_type_model', [
-                'label'    => 'admin.fields.opinion_type.parent',
+                'label' => 'admin.fields.opinion_type.parent',
                 'required' => false,
-                'query'    => $this->createQueryForParent(),
-                'btn_add'  => false,
+                'query' => $this->createQueryForParent(),
+                'btn_add' => false,
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.opinion_type.position',
@@ -89,72 +89,72 @@ class OpinionTypeAdmin extends Admin
             // Options
             ->with('admin.fields.opinion_type.group_options')
             ->add('color', 'choice', [
-                'label'              => 'admin.fields.opinion_type.color',
-                'choices'            => OpinionType::$colorsType,
+                'label' => 'admin.fields.opinion_type.color',
+                'choices' => OpinionType::$colorsType,
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('defaultFilter', 'choice', [
-                'label'              => 'admin.fields.opinion_type.default_filter',
-                'choices'            => Opinion::$sortCriterias,
+                'label' => 'admin.fields.opinion_type.default_filter',
+                'choices' => Opinion::$sortCriterias,
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->end()
 
             ->with('admin.fields.opinion_type.group_votes')
             ->add('voteWidgetType', 'choice', [
-                'label'              => 'admin.fields.opinion_type.vote_widget_type',
-                'choices'            => OpinionType::$voteWidgetLabels,
+                'label' => 'admin.fields.opinion_type.vote_widget_type',
+                'choices' => OpinionType::$voteWidgetLabels,
                 'translation_domain' => 'CapcoAppBundle',
-                'required'           => true,
+                'required' => true,
             ])
             ->add('votesHelpText', 'textarea', [
-                'label'    => 'admin.fields.opinion_type.votes_help_text',
+                'label' => 'admin.fields.opinion_type.votes_help_text',
                 'required' => false,
             ])
             ->add('votesThreshold', 'integer', [
-                'label'    => 'admin.fields.opinion_type.votes_threshold',
+                'label' => 'admin.fields.opinion_type.votes_threshold',
                 'required' => false,
             ])
             ->add('votesThresholdHelpText', 'textarea', [
-                'label'    => 'admin.fields.opinion_type.votes_threshold_help_text',
+                'label' => 'admin.fields.opinion_type.votes_threshold_help_text',
                 'required' => false,
             ])
             ->end()
 
             ->with('admin.fields.opinion_type.group_contribution')
             ->add('isEnabled', null, [
-                'label'    => 'admin.fields.opinion_type.is_enabled',
+                'label' => 'admin.fields.opinion_type.is_enabled',
                 'required' => false,
             ])
             ->add('versionable', null, [
-                'label'    => 'admin.fields.opinion_type.versionable',
+                'label' => 'admin.fields.opinion_type.versionable',
                 'required' => false,
             ])
             ->add('linkable', null, [
-                'label'    => 'admin.fields.opinion_type.linkable',
+                'label' => 'admin.fields.opinion_type.linkable',
                 'required' => false,
             ])
             ->add('sourceable', null, [
-                'label'    => 'admin.fields.opinion_type.sourceable',
+                'label' => 'admin.fields.opinion_type.sourceable',
                 'required' => false,
             ])
             ->add('commentSystem', 'choice', [
-                'label'              => 'admin.fields.opinion_type.comment_system',
-                'choices'            => OpinionType::$commentSystemLabels,
+                'label' => 'admin.fields.opinion_type.comment_system',
+                'choices' => OpinionType::$commentSystemLabels,
                 'translation_domain' => 'CapcoAppBundle',
-                'required'           => true,
+                'required' => true,
             ])
             ->end()
 
             // Appendices
             ->with('admin.fields.opinion_type.group_appendices')
             ->add('appendixTypes', 'sonata_type_collection', [
-                'label'        => 'admin.fields.opinion_type.appendices',
+                'label' => 'admin.fields.opinion_type.appendices',
                 'by_reference' => false,
-                'required'     => false,
+                'required' => false,
             ], [
-                'edit'     => 'inline',
-                'inline'   => 'table',
+                'edit' => 'inline',
+                'inline' => 'table',
                 'sortable' => 'position',
             ])
             ->end()

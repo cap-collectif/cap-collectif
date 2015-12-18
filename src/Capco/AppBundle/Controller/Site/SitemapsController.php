@@ -23,16 +23,16 @@ class SitemapsController extends Controller
 
         // Homepage
         $urls[] = [
-            'loc'        => $this->get('router')->generate('app_homepage'),
+            'loc' => $this->get('router')->generate('app_homepage'),
             'changefreq' => 'weekly',
-            'priority'   => '1.0',
+            'priority' => '1.0',
         ];
 
         // Contact
         $urls[] = [
-            'loc'        => $this->get('router')->generate('app_contact'),
+            'loc' => $this->get('router')->generate('app_contact'),
             'changefreq' => 'yearly',
-            'priority'   => '0.1',
+            'priority' => '0.1',
         ];
 
         // Pages
@@ -40,28 +40,28 @@ class SitemapsController extends Controller
             'isEnabled' => true,
         ]) as $page) {
             $urls[] = [
-                'loc'        => $this->get('router')->generate('app_page_show', ['slug' => $page->getSlug()]),
-                'lastmod'    => $page->getUpdatedAt()->format(\DateTime::W3C),
+                'loc' => $this->get('router')->generate('app_page_show', ['slug' => $page->getSlug()]),
+                'lastmod' => $page->getUpdatedAt()->format(\DateTime::W3C),
                 'changefreq' => 'monthly',
-                'priority'   => '0.1',
+                'priority' => '0.1',
             ];
         }
 
         // Themes
         if ($toggleManager->isActive('themes')) {
             $urls[] = [
-                'loc'        => $this->get('router')->generate('app_theme'),
+                'loc' => $this->get('router')->generate('app_theme'),
                 'changefreq' => 'weekly',
-                'priority'   => '0.5',
+                'priority' => '0.5',
             ];
             foreach ($em->getRepository('CapcoAppBundle:Theme')->findBy([
                 'isEnabled' => true,
             ]) as $theme) {
                 $urls[] = [
-                    'loc'        => $this->get('router')->generate('app_theme_show', ['slug' => $theme->getSlug()]),
-                    'lastmod'    => $theme->getUpdatedAt()->format(\DateTime::W3C),
+                    'loc' => $this->get('router')->generate('app_theme_show', ['slug' => $theme->getSlug()]),
+                    'lastmod' => $theme->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'weekly',
-                    'priority'   => '0.5',
+                    'priority' => '0.5',
                 ];
             }
         }
@@ -69,18 +69,18 @@ class SitemapsController extends Controller
         // Blog
         if ($toggleManager->isActive('blog')) {
             $urls[] = [
-                'loc'        => $this->get('router')->generate('app_blog'),
+                'loc' => $this->get('router')->generate('app_blog'),
                 'changefreq' => 'daily',
-                'priority'   => '1.0',
+                'priority' => '1.0',
             ];
             foreach ($em->getRepository('CapcoAppBundle:Post')->findBy([
                 'isPublished' => true,
             ]) as $post) {
                 $urls[] = [
-                    'loc'        => $this->get('router')->generate('app_blog_show', ['slug' => $post->getSlug()]),
-                    'lastmod'    => $post->getUpdatedAt()->format(\DateTime::W3C),
+                    'loc' => $this->get('router')->generate('app_blog_show', ['slug' => $post->getSlug()]),
+                    'lastmod' => $post->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'daily',
-                    'priority'   => '1.0',
+                    'priority' => '1.0',
                 ];
             }
         }
@@ -88,17 +88,17 @@ class SitemapsController extends Controller
         // Events
         if ($toggleManager->isActive('calendar')) {
             $urls[] = [
-                'loc'        => $this->get('router')->generate('app_event'),
+                'loc' => $this->get('router')->generate('app_event'),
                 'changefreq' => 'daily',
-                'priority'   => '1.0',
+                'priority' => '1.0',
             ];
             foreach ($em->getRepository('CapcoAppBundle:Event')->findBy([
                 'isEnabled' => true,
             ]) as $event) {
                 $urls[] = [
-                    'loc'        => $this->get('router')->generate('app_event_show', ['slug' => $event->getSlug()]),
-                    'priority'   => '1.0',
-                    'lastmod'    => $post->getUpdatedAt()->format(\DateTime::W3C),
+                    'loc' => $this->get('router')->generate('app_event_show', ['slug' => $event->getSlug()]),
+                    'priority' => '1.0',
+                    'lastmod' => $post->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'daily',
                 ];
             }
@@ -107,27 +107,27 @@ class SitemapsController extends Controller
         // Ideas
         if ($toggleManager->isActive('ideas')) {
             $urls[] = [
-                'loc'        => $this->get('router')->generate('app_idea'),
+                'loc' => $this->get('router')->generate('app_idea'),
                 'changefreq' => 'daily',
-                'priority'   => '1.0',
+                'priority' => '1.0',
             ];
             foreach ($em->getRepository('CapcoAppBundle:Idea')->findBy([
                 'isEnabled' => true,
             ]) as $idea) {
                 $urls[] = [
-                    'loc'        => $this->get('router')->generate('app_idea_show', ['slug' => $idea->getSlug()]),
-                    'lastmod'    => $idea->getUpdatedAt()->format(\DateTime::W3C),
+                    'loc' => $this->get('router')->generate('app_idea_show', ['slug' => $idea->getSlug()]),
+                    'lastmod' => $idea->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'daily',
-                    'priority'   => '1.0',
+                    'priority' => '1.0',
                 ];
             }
         }
 
         // Projects
         $urls[] = [
-            'loc'        => $this->get('router')->generate('app_project'),
+            'loc' => $this->get('router')->generate('app_project'),
             'changefreq' => 'weekly',
-            'priority'   => '0.5',
+            'priority' => '0.5',
         ];
 
         // Steps
@@ -137,9 +137,9 @@ class SitemapsController extends Controller
         ]) as $step) {
             if ($step->getProject()->canDisplay()) {
                 $urls[] = [
-                    'loc'        => $stepResolver->getLink($step, false),
-                    'priority'   => '0.5',
-                    'lastmod'    => $step->getUpdatedAt()->format(\DateTime::W3C),
+                    'loc' => $stepResolver->getLink($step, false),
+                    'priority' => '0.5',
+                    'lastmod' => $step->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'weekly',
                 ];
             }
@@ -151,16 +151,16 @@ class SitemapsController extends Controller
         ]) as $opinion) {
             if ($opinion->canDisplay()) {
                 $urls[] = [
-                    'loc'        => $this->get('router')->generate('app_project_show_opinion', ['projectSlug' => $opinion->getStep()->getProject()->getSlug(), 'stepSlug' => $opinion->getStep()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug()]),
-                    'priority'   => '2.0',
-                    'lastmod'    => $opinion->getUpdatedAt()->format(\DateTime::W3C),
+                    'loc' => $this->get('router')->generate('app_project_show_opinion', ['projectSlug' => $opinion->getStep()->getProject()->getSlug(), 'stepSlug' => $opinion->getStep()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug()]),
+                    'priority' => '2.0',
+                    'lastmod' => $opinion->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'hourly',
                 ];
             }
         }
 
         return [
-            'urls'     => $urls,
+            'urls' => $urls,
             'hostname' => $hostname,
         ];
     }

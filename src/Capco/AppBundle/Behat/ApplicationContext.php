@@ -44,6 +44,11 @@ class ApplicationContext extends UserContext
     {
         $importCommand = 'mysql -h 127.0.0.1 -u root symfony_test < app/dbtest.backup';
         exec($importCommand);
+        exec('app/console capco:reset-feature-flags -e test');
+        exec('app/console capco:compute:counters -e test');
+        exec('app/console capco:compute:projects-counters -e test');
+        exec('app/console capco:compute:rankings -e test');
+        exec('app/console fos:elastica:populate -q -e test');
     }
 
     /**
@@ -201,7 +206,7 @@ class ApplicationContext extends UserContext
             // Try to get corresponding wysiwyg field
             // Works only with quill editor for now
             $wrapper = $this->getSession()->getPage()->find('named', array('id_or_name', $field));
-            if (!$wrapper || !$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor') ) {
+            if (!$wrapper || !$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor')) {
                 throw $e;
             }
             $field = $wrapper->find('css', '.ql-editor');
@@ -290,7 +295,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Checks that a button is disabled
+     * Checks that a button is disabled.
      *
      * @Then /^the button "([^"]*)" should be disabled$/
      */

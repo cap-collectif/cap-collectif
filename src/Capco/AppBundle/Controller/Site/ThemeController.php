@@ -62,8 +62,8 @@ class ThemeController extends Controller
 
         return [
             'themes' => $themes,
-            'form'   => $form->createView(),
-            'page'   => $page,
+            'form' => $form->createView(),
+            'page' => $page,
             'nbPage' => $nbPage,
         ];
     }
@@ -74,7 +74,7 @@ class ThemeController extends Controller
      * @Template("CapcoAppBundle:Theme:show.html.twig")
      *
      * @param Theme $theme
-     * @param int $max
+     * @param int   $max
      *
      * @return array
      */
@@ -86,7 +86,7 @@ class ThemeController extends Controller
 
         return [
             'theme' => $theme,
-            'maxProjectsDisplayed' => $max
+            'maxProjectsDisplayed' => $max,
         ];
     }
 
@@ -104,10 +104,11 @@ class ThemeController extends Controller
         $em = $this->get('doctrine.orm.entity_manager');
         $ideas = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
         $nbIdeas = $em->getRepository('CapcoAppBundle:Idea')->countSearchResults($theme->getSlug());
+
         return [
-            'ideas'   => $ideas,
-            'theme'   => $theme,
-            'max'     => $max,
+            'ideas' => $ideas,
+            'theme' => $theme,
+            'max' => $max,
             'nbIdeas' => $nbIdeas,
         ];
     }

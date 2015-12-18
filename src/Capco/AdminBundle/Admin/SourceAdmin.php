@@ -13,7 +13,7 @@ class SourceAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -85,19 +85,19 @@ class SourceAdmin extends Admin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.source.is_enabled',
+                'label' => 'admin.fields.source.is_enabled',
             ])
             ->add('isTrashed', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.source.is_trashed',
+                'label' => 'admin.fields.source.is_trashed',
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.source.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])
@@ -114,14 +114,14 @@ class SourceAdmin extends Admin
                 'label' => 'admin.fields.source.title',
             ])
             ->add('isEnabled', null, [
-                'label'    => 'admin.fields.source.is_enabled',
+                'label' => 'admin.fields.source.is_enabled',
                 'required' => false,
             ])
             ->add('body', null, [
                 'label' => 'admin.fields.source.body',
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.source.author',
+                'label' => 'admin.fields.source.author',
                 'property' => 'username',
             ])
             ->add('Opinion', 'sonata_type_model', [
@@ -132,16 +132,16 @@ class SourceAdmin extends Admin
             ])
             ->add('link', null, [
                 'label' => 'admin.fields.source.link',
-                'attr'  => [
+                'attr' => [
                     'placeholder' => 'http://www.cap-collectif.com/',
                 ],
             ])
             ->add('isTrashed', null, [
-                'label'    => 'admin.fields.source.is_trashed',
+                'label' => 'admin.fields.source.is_trashed',
                 'required' => false,
             ])
             ->add('trashedReason', null, [
-                'label'    => 'admin.fields.source.trashed_reason',
+                'label' => 'admin.fields.source.trashed_reason',
                 'required' => false,
             ])
         ;

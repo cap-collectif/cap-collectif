@@ -78,7 +78,7 @@ class DefaultController extends Controller
 
         return [
             'socialNetworks' => $socialNetworks,
-            'footerLinks'    => $footerLinks,
+            'footerLinks' => $footerLinks,
         ];
     }
 
@@ -91,7 +91,7 @@ class DefaultController extends Controller
         $headerLinks = $this->get('capco.menu_item.resolver')->getEnabledMenuItemsWithChildren(MenuItem::TYPE_HEADER);
 
         return [
-            'pathInfo'    => $pathInfo,
+            'pathInfo' => $pathInfo,
             'headerLinks' => $headerLinks,
         ];
     }
@@ -114,7 +114,7 @@ class DefaultController extends Controller
 
         return new JsonResponse([
             'token' => $token,
-            'user'  => $userData,
+            'user' => $userData,
         ]);
     }
 }

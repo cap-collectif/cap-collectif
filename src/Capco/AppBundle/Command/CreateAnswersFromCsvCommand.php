@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -68,12 +67,12 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
             ;
 
             $object = null;
-            if ($type === "opinion") {
+            if ($type === 'opinion') {
                 $object = $em
                     ->getRepository('CapcoAppBundle:Opinion')
                     ->findOneBy(['slug' => $slug])
                 ;
-            } else if ($type === "version") {
+            } elseif ($type === 'version') {
                 $object = $em
                     ->getRepository('CapcoAppBundle:OpinionVersion')
                     ->findOneBy(['slug' => $slug])
@@ -96,14 +95,14 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
 
             $dump .=
                 '<li>'
-                . '<a href="'
-                . $this->getContainer()->get('capco.url.resolver')->getObjectUrl($object, false)
-                . '">'
-                . $object->getAuthor()->getUsername()
-                . ' - '
-                . $object->getTitle()
-                . '</a>'
-                . '</li>'
+                .'<a href="'
+                .$this->getContainer()->get('capco.url.resolver')->getObjectUrl($object, false)
+                .'">'
+                .$object->getAuthor()->getUsername()
+                .' - '
+                .$object->getTitle()
+                .'</a>'
+                .'</li>'
             ;
 
             $progress->advance(1);

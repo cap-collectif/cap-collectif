@@ -31,9 +31,9 @@ class AbstractVoteRepository extends EntityRepository
         $result = [];
         $counts = [
             'date' => '',
-            '-1'   => 0,
-            '0'    => 0,
-            '1'    => 0,
+            '-1' => 0,
+            '0' => 0,
+            '1' => 0,
         ];
 
         foreach ($votes as $i => $vote) {

@@ -59,8 +59,8 @@ class EventsController extends FOSRestController
 
         return [
             'comments_and_answers_count' => intval($countWithAnswers),
-            'comments_count'             => count($paginator),
-            'comments'                   => $comments,
+            'comments_count' => count($paginator),
+            'comments' => $comments,
         ];
     }
 

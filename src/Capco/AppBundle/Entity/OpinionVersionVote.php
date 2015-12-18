@@ -15,31 +15,31 @@ class OpinionVersionVote extends AbstractVote
     const VOTE_MITIGE = 0;
 
     public static $voteTypes = [
-        'ok'     => self::VOTE_OK,
+        'ok' => self::VOTE_OK,
         'mitige' => self::VOTE_MITIGE,
-        'nok'    => self::VOTE_NOK,
+        'nok' => self::VOTE_NOK,
     ];
 
     public static $voteTypesLabels = [
-        self::VOTE_OK     => 'opinion.show.vote.ok',
+        self::VOTE_OK => 'opinion.show.vote.ok',
         self::VOTE_MITIGE => 'opinion.show.vote.mitige',
-        self::VOTE_NOK    => 'opinion.show.vote.nok',
+        self::VOTE_NOK => 'opinion.show.vote.nok',
     ];
 
     public static $voteTypesStyles = [
         self::VOTE_OK => [
-            'color'        => 'success',
-            'icon'         => 'hand-like-2-1',
+            'color' => 'success',
+            'icon' => 'hand-like-2-1',
             'icon_checked' => 'hand-like-2',
         ],
         self::VOTE_NOK => [
-            'color'        => 'danger',
-            'icon'         => 'hand-unlike-2-1',
+            'color' => 'danger',
+            'icon' => 'hand-unlike-2-1',
             'icon_checked' => 'hand-unlike-2',
         ],
         self::VOTE_MITIGE => [
-            'color'        => 'warning',
-            'icon'         => 'hand-like-2-1 icon-rotate',
+            'color' => 'warning',
+            'icon' => 'hand-like-2-1 icon-rotate',
             'icon_checked' => 'hand-like-2 icon-rotate',
         ],
     ];

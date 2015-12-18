@@ -13,19 +13,19 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', 'text', [
-                'label'       => 'contact.form.name',
-                'required'    => true,
+                'label' => 'contact.form.name',
+                'required' => true,
                 'constraints' => [new NotBlank(['message' => 'contact.no_name'])],
             ])
             ->add('email', 'email', [
-                'label'       => 'contact.form.email',
-                'required'    => true,
+                'label' => 'contact.form.email',
+                'required' => true,
                 'constraints' => [new NotBlank(['message' => 'contact.no_email']), new Email(['checkMX' => true])],
             ])
             ->add('message', 'textarea', [
-                'label'    => 'contact.form.message',
+                'label' => 'contact.form.message',
                 'required' => true,
-                'attr'     => [
+                'attr' => [
                     'rows' => '10',
                     'cols' => '30',
                 ],

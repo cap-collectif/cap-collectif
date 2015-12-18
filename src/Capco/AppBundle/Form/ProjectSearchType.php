@@ -25,34 +25,34 @@ class ProjectSearchType extends AbstractType
     {
         $builder
             ->add('term', 'search', [
-                'required'           => false,
-                'label'              => 'project.searchform.term',
+                'required' => false,
+                'label' => 'project.searchform.term',
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('sort', 'choice', [
-                'required'           => false,
-                'choices'            => Project::$sortOrderLabels,
+                'required' => false,
+                'choices' => Project::$sortOrderLabels,
                 'translation_domain' => 'CapcoAppBundle',
-                'label'              => 'project.searchform.sort',
-                'empty_value'        => false,
-                'attr'               => ['onchange' => 'this.form.submit()'],
+                'label' => 'project.searchform.sort',
+                'empty_value' => false,
+                'attr' => ['onchange' => 'this.form.submit()'],
             ])
         ;
 
         if ($this->toggleManager->isActive('themes')) {
             $builder->add('theme', 'entity', [
-                'required'           => false,
-                'class'              => 'CapcoAppBundle:Theme',
-                'property'           => 'title',
-                'label'              => 'project.searchform.theme',
+                'required' => false,
+                'class' => 'CapcoAppBundle:Theme',
+                'property' => 'title',
+                'label' => 'project.searchform.theme',
                 'translation_domain' => 'CapcoAppBundle',
-                'query_builder'      => function (ThemeRepository $tr) {
+                'query_builder' => function (ThemeRepository $tr) {
                     return $tr->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
                 'empty_value' => 'project.searchform.all_themes',
-                'attr'        => ['onchange' => 'this.form.submit()'],
+                'attr' => ['onchange' => 'this.form.submit()'],
             ]);
         }
     }

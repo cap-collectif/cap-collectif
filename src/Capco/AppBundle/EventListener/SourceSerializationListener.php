@@ -22,8 +22,8 @@ class SourceSerializationListener implements EventSubscriberInterface
     {
         return [
             [
-                'event'  => 'serializer.post_serialize',
-                'class'  => 'Capco\AppBundle\Entity\Source',
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Source',
                 'method' => 'onPostSource',
             ],
         ];
@@ -41,19 +41,19 @@ class SourceSerializationListener implements EventSubscriberInterface
 
         $event->getVisitor()->addData(
             '_links', [
-                'edit'                => $this->router->generate('app_edit_source', [
-                    'projectSlug'     => $project->getSlug(),
-                    'stepSlug'        => $step->getSlug(),
+                'edit' => $this->router->generate('app_edit_source', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug'     => $opinion->getSlug(),
-                    'sourceSlug'      => $source->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
+                    'sourceSlug' => $source->getSlug(),
                 ], true),
-                'report'              => $this->router->generate('app_report_source', [
-                    'projectSlug'     => $project->getSlug(),
-                    'stepSlug'        => $step->getSlug(),
+                'report' => $this->router->generate('app_report_source', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
                     'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug'     => $opinion->getSlug(),
-                    'sourceSlug'      => $source->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
+                    'sourceSlug' => $source->getSlug(),
                 ], true),
             ]
         );

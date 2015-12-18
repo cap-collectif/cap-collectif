@@ -12,6 +12,9 @@ Capco\UserBundle\Entity\User:
       vip:
         expose: true
         groups: [UsersInfos, UserDetails]
+      userType:
+        expose: true
+        groups: [UsersInfos]
     virtual_properties:
       getDisplayName:
         serialized_name: displayName

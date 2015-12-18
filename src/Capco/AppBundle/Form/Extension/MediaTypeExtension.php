@@ -25,25 +25,25 @@ class MediaTypeExtension extends AbstractTypeExtension
     {
         if (!$options['show_unlink']) {
             $builder->add('unlink', 'hidden', [
-                'mapped'   => false,
-                'data'     => false,
+                'mapped' => false,
+                'data' => false,
                 'required' => false,
                 ])
             ;
         } else {
             $builder->add('unlink', 'checkbox', [
-                'label'              => 'media.form.unlink',
+                'label' => 'media.form.unlink',
                 'translation_domain' => 'CapcoAppBundle',
-                'mapped'             => false,
-                'data'               => false,
-                'required'           => false,
+                'mapped' => false,
+                'data' => false,
+                'required' => false,
             ]);
         }
         $builder
             ->add('binaryContent', 'file', [
-                'label'              => 'media.form.binary_content',
+                'label' => 'media.form.binary_content',
                 'translation_domain' => 'CapcoAppBundle',
-                'required'           => false,
+                'required' => false,
             ])
             ->remove('contentType')
         ;

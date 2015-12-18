@@ -15,5 +15,4 @@ class ProposalPage extends Page
     protected $path = '/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}';
 
     protected $elements = [];
-
 }

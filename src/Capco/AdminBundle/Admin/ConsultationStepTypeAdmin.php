@@ -12,7 +12,7 @@ class ConsultationStepTypeAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -55,8 +55,8 @@ class ConsultationStepTypeAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])
@@ -73,13 +73,13 @@ class ConsultationStepTypeAdmin extends Admin
                 'label' => 'admin.fields.consultation_step_type.title',
             ])
             ->add('opinionTypes', 'sonata_type_model', [
-                'label'        => 'admin.fields.consultation_step_type.opinion_types',
-                'query'        => $this->createQueryForOpinionTypes(),
+                'label' => 'admin.fields.consultation_step_type.opinion_types',
+                'query' => $this->createQueryForOpinionTypes(),
                 'by_reference' => false,
-                'multiple'     => true,
-                'expanded'     => true,
-                'required'     => true,
-                'tree'         => true,
+                'multiple' => true,
+                'expanded' => true,
+                'required' => true,
+                'tree' => true,
             ])
         ;
     }

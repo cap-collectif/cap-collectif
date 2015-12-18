@@ -12,7 +12,7 @@ class UserTypeAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'name',
+        '_sort_by' => 'name',
     ];
 
     /**
@@ -47,8 +47,8 @@ class UserTypeAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])

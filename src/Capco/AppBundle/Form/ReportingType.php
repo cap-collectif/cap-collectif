@@ -16,14 +16,14 @@ class ReportingType extends AbstractType
     {
         $builder
             ->add('status', 'choice', [
-                'choices'            => Reporting::$statusesLabels,
+                'choices' => Reporting::$statusesLabels,
                 'translation_domain' => 'CapcoAppBundle',
-                'label'              => 'reporting.form.status',
-                'empty_value'        => 'reporting.empty_value',
+                'label' => 'reporting.form.status',
+                'empty_value' => 'reporting.empty_value',
             ])
             ->add('body', 'textarea', [
                 'translation_domain' => 'CapcoAppBundle',
-                'label'              => 'reporting.form.body',
+                'label' => 'reporting.form.body',
             ])
         ;
     }

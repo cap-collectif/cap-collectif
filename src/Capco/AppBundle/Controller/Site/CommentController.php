@@ -100,7 +100,7 @@ class CommentController extends Controller
 
         return [
             'object' => $object,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ];
     }
 
@@ -155,7 +155,7 @@ class CommentController extends Controller
             $commentVote->setUser($user);
 
             $userVote = $em->getRepository('CapcoAppBundle:CommentVote')->findOneBy([
-                'user'    => $user,
+                'user' => $user,
                 'comment' => $comment,
             ]);
 
@@ -243,7 +243,7 @@ class CommentController extends Controller
         }
 
         return [
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
             'comment' => $comment,
         ];
     }
@@ -306,7 +306,7 @@ class CommentController extends Controller
         }
 
         return [
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
             'comment' => $comment,
         ];
     }

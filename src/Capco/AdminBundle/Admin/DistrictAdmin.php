@@ -12,7 +12,7 @@ class DistrictAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'name',
+        '_sort_by' => 'name',
     ];
 
     protected $formOptions = [
@@ -24,7 +24,7 @@ class DistrictAdmin extends Admin
     {
         $formMapper
             ->add('name', null, [
-                'label'    => 'admin.fields.district.name',
+                'label' => 'admin.fields.district.name',
                 'required' => true,
             ])
         ;
@@ -68,8 +68,8 @@ class DistrictAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])

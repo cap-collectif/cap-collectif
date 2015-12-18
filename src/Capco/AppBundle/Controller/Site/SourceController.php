@@ -76,8 +76,8 @@ class SourceController extends Controller
 
         return [
             'opinion' => $opinion,
-            'source'  => $source,
-            'form'    => $form->createView(),
+            'source' => $source,
+            'form' => $form->createView(),
         ];
     }
 
@@ -159,9 +159,9 @@ class SourceController extends Controller
         }
 
         return [
-            'opinion'      => $opinion,
-            'source'       => $source,
-            'form'         => $form->createView(),
+            'opinion' => $opinion,
+            'source' => $source,
+            'form' => $form->createView(),
             'buttonActive' => $form->get('type')->getData(),
         ];
     }

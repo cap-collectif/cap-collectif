@@ -13,7 +13,7 @@ class FooterSocialNetworkAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -56,14 +56,14 @@ class FooterSocialNetworkAdmin extends Admin
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.footer_social_network.is_enabled',
+                'label' => 'admin.fields.footer_social_network.is_enabled',
             ])
             ->add('link', null, [
                 'label' => 'admin.fields.footer_social_network.link',
             ])
             ->add('style', 'string', [
                 'template' => 'CapcoAdminBundle:FooterSocialNetwork:style_list_field.html.twig',
-                'label'    => 'admin.fields.footer_social_network.style',
+                'label' => 'admin.fields.footer_social_network.style',
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.footer_social_network.position',
@@ -73,8 +73,8 @@ class FooterSocialNetworkAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])
@@ -91,7 +91,7 @@ class FooterSocialNetworkAdmin extends Admin
                 'label' => 'admin.fields.footer_social_network.title',
             ])
             ->add('isEnabled', null, [
-                'label'    => 'admin.fields.footer_social_network.is_enabled',
+                'label' => 'admin.fields.footer_social_network.is_enabled',
                 'required' => false,
             ])
             ->add('link', null, [
@@ -99,7 +99,7 @@ class FooterSocialNetworkAdmin extends Admin
             ])
             ->add('style', 'choice', [
                 'choices' => FooterSocialNetwork::$socialIcons,
-                'label'   => 'admin.fields.footer_social_network.style',
+                'label' => 'admin.fields.footer_social_network.style',
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.footer_social_network.position',
@@ -124,7 +124,7 @@ class FooterSocialNetworkAdmin extends Admin
             ])
             ->add('style', null, [
                 'template' => 'CapcoAdminBundle:FooterSocialNetwork:style_show_field.html.twig',
-                'label'    => 'admin.fields.footer_social_network.style',
+                'label' => 'admin.fields.footer_social_network.style',
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.footer_social_network.position',

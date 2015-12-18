@@ -13,7 +13,7 @@ class OpinionVersionAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'title',
+        '_sort_by' => 'title',
     ];
 
     /**
@@ -75,11 +75,11 @@ class OpinionVersionAdmin extends Admin
                 'label' => 'admin.fields.opinion_version.parent',
             ])
             ->add('enabled', null, [
-                'label'    => 'admin.fields.opinion_version.is_enabled',
+                'label' => 'admin.fields.opinion_version.is_enabled',
                 'editable' => true,
             ])
             ->add('isTrashed', null, [
-                'label'    => 'admin.fields.opinion_version.is_trashed',
+                'label' => 'admin.fields.opinion_version.is_trashed',
                 'editable' => true,
             ])
             ->add('updatedAt', null, [
@@ -87,8 +87,8 @@ class OpinionVersionAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])
@@ -114,14 +114,14 @@ class OpinionVersionAdmin extends Admin
                     'label' => 'admin.fields.opinion_version.title',
                 ])
                 ->add('author', 'sonata_type_model_autocomplete', [
-                    'label'    => 'admin.fields.opinion_version.author',
+                    'label' => 'admin.fields.opinion_version.author',
                     'property' => 'username',
                 ])
                 ->add('parent', 'sonata_type_model', [
                     'label' => 'admin.fields.opinion_version.parent',
                 ])
                 ->add('body', 'ckeditor', [
-                    'label'       => 'admin.fields.opinion_version.body',
+                    'label' => 'admin.fields.opinion_version.body',
                     'config_name' => 'admin_editor',
                 ])
                 ->add('comment', null, [
@@ -132,11 +132,11 @@ class OpinionVersionAdmin extends Admin
             // Publication
             ->with('admin.fields.opinion_version.group_publication')
                 ->add('enabled', null, [
-                    'label'    => 'admin.fields.opinion_version.is_enabled',
+                    'label' => 'admin.fields.opinion_version.is_enabled',
                     'required' => false,
                 ])
                 ->add('isTrashed', null, [
-                    'label'    => 'admin.fields.opinion_version.is_trashed',
+                    'label' => 'admin.fields.opinion_version.is_trashed',
                     'required' => false,
                 ])
                 ->add('trashedReason', null, [
@@ -147,7 +147,7 @@ class OpinionVersionAdmin extends Admin
             // Answer
             ->with('admin.fields.opinion_version.group_answer')
             ->add('answer', 'sonata_type_model_list', [
-                'label'    => 'admin.fields.opinion_version.answer',
+                'label' => 'admin.fields.opinion_version.answer',
                 'btn_list' => false,
                 'required' => false,
             ])

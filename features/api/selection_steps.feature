@@ -1,58 +1,105 @@
 Feature: Selection steps
 
   Scenario: Anonymous API client wants to get all proposals from a selection step
-    When I send a GET request to "/api/selection_steps/6/proposals?order=favorable&offset=1"
-    Then the JSON response should match:
-  """
-  {
-    "proposals": [
+    When I send a POST request to "/api/selection_steps/6/proposals/search?order=last" with json:
+      """
       {
-        "id": @integer@,
-        "body": @string@,
-        "updated_at": "@string@.isDateTime()",
-        "theme": @...@,
-        "district": @...@,
-        "status": @...@,
-        "author": @...@,
-        "comments": @array@,
-        "responses": @array@,
-        "comments_count": @integer@,
-        "created_at": "@string@.isDateTime()",
-        "title": @string@,
-        "answer": @null@,
-        "_links": @...@
       }
-    ],
-    "count": 3
-  }
-  """
+      """
+    Then the JSON response should match:
+    """
+    {
+      "proposals": [
+        {
+          "id": @integer@,
+          "body": @string@,
+          "updated_at": "@string@.isDateTime()",
+          "theme": {
+            "id": @integer@,
+            "title": @string@,
+            "_links": @...@
+          },
+          "district": {
+            "id": @integer@,
+            "name": @string@
+          },
+          "status": {
+            "id": @integer@,
+            "name": @string@,
+            "color": @string@
+          },
+          "author": @...@,
+          "proposalForm": {
+            "id": @integer@
+          },
+          "comments": @...@,
+          "responses": @...@,
+          "selectionSteps": @...@,
+          "comments_count": @integer@,
+          "created_at": "@string@.isDateTime()",
+          "enabled": @boolean@,
+          "isTrashed": @boolean@,
+          "title": @string@,
+          "hasUserReported": @boolean@,
+          "_links": @...@
+        },
+        @...@
+      ],
+      "count": 3
+    }
+    """
 
   Scenario: Anonymous API client wants to get all proposals in a theme from a selection step filtered by theme
-    When I send a GET request to "/api/selection_steps/6/proposals?theme=3"
-    Then the JSON response should match:
-  """
-  {
-    "proposals": [
+    When I send a POST request to "/api/selection_steps/6/proposals/search" with json:
+    """
       {
-        "id": @integer@,
-        "body": @string@,
-        "updated_at": "@string@.isDateTime()",
-        "theme": @...@,
-        "district": @...@,
-        "status": @...@,
-        "author": @...@,
-        "comments": @array@,
-        "responses": @array@,
-        "comments_count": @integer@,
-        "created_at": "@string@.isDateTime()",
-        "title": @string@,
-        "answer": @null@,
-        "_links": @...@
+        "filters": {
+          "theme": 2
+        }
       }
-    ],
-    "count": 1
-  }
-  """
+      """
+    Then the JSON response should match:
+    """
+    {
+      "proposals": [
+        {
+          "id": @integer@,
+          "body": @string@,
+          "updated_at": "@string@.isDateTime()",
+          "theme": {
+            "id": @integer@,
+            "title": @string@,
+            "_links": @...@
+          },
+          "district": {
+            "id": @integer@,
+            "name": @string@
+          },
+          "status": {
+            "id": @integer@,
+            "name": @string@,
+            "color": @string@
+          },
+          "author": @...@,
+          "proposalForm": {
+            "id": @integer@
+          },
+          "comments": @...@,
+          "responses": @...@,
+          "selectionSteps": @...@,
+          "comments_count": @integer@,
+          "created_at": "@string@.isDateTime()",
+          "enabled": @boolean@,
+          "isTrashed": @boolean@,
+          "title": @string@,
+          "hasUserReported": @boolean@,
+          "_links": @...@
+        },
+        @...@
+      ],
+      "count": 2
+    }
+    """
 
 #  @database
 #  Scenario: logged in API client wants to vote for a proposal in a selection step

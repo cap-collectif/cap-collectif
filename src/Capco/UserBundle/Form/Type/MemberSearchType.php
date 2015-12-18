@@ -24,24 +24,24 @@ class MemberSearchType extends AbstractType
     {
         $builder
             ->add('sort', 'choice', [
-                'required'           => false,
-                'choices'            => User::$sortOrderLabels,
+                'required' => false,
+                'choices' => User::$sortOrderLabels,
                 'translation_domain' => 'CapcoAppBundle',
-                'label'              => 'user.index.sort.label',
-                'empty_value'        => false,
-                'attr'               => ['onchange' => 'this.form.submit()'],
+                'label' => 'user.index.sort.label',
+                'empty_value' => false,
+                'attr' => ['onchange' => 'this.form.submit()'],
             ])
         ;
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', 'entity', [
-                'required'           => false,
-                'class'              => 'CapcoUserBundle:UserType',
-                'property'           => 'name',
-                'label'              => 'user.index.user_type.label',
+                'required' => false,
+                'class' => 'CapcoUserBundle:UserType',
+                'property' => 'name',
+                'label' => 'user.index.user_type.label',
                 'translation_domain' => 'CapcoAppBundle',
-                'empty_value'        => 'user.index.user_type.all_types',
-                'attr'               => ['onchange' => 'this.form.submit()'],
+                'empty_value' => 'user.index.user_type.all_types',
+                'attr' => ['onchange' => 'this.form.submit()'],
             ]);
         }
     }

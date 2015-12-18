@@ -32,11 +32,9 @@ fos_elastica:
         user:
           indexable_callback: isEnabled
           serializer:
-            groups: [UsersInfos, Proposals]
+            groups: [UsersInfos]
           _all: { enabled: false }
           mappings:
-            id:
-              type: long
             slug:
               index: not_analyzed
             username:
@@ -49,10 +47,11 @@ fos_elastica:
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
-            createdAt:
-              type: date
-            updatedAt:
-              type: date
+            user_type:
+              type: object
+              properites:
+                id:
+                  type: long
           persistence:
             driver: orm
             model: Capco\UserBundle\Entity\User
@@ -100,6 +99,12 @@ fos_elastica:
                 std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
+            publishedAt:
+              type: date
+            createdAt:
+              type: date
+            updatedAt:
+              type: date
             Author:
               type: nested
               properties:
@@ -115,7 +120,7 @@ fos_elastica:
         comment:
           indexable_callback: getIsEnabled
           serializer:
-            groups: [Comments, Proposals]
+            groups: [Comments]
           _all: { enabled: false }
           mappings:
             body:
@@ -237,10 +242,8 @@ fos_elastica:
           indexable_callback: isEnabled
           _all: { enabled: false }
           serializer:
-            groups: [Proposals]
+            groups: [Proposals, Themes, UsersInfos]
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
@@ -253,10 +256,8 @@ fos_elastica:
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
-            slug:
-              index: not_analyzed
             author:
-              type: nested
+              type: object
               properties:
                 slug:
                   index: not_analyzed
@@ -266,54 +267,35 @@ fos_elastica:
                 std: { type: string, analyzer: standard }
             updatedAt:
               type: date
-            district.name:
-              type: string
+            district:
+              type: object
               properties:
                 name:
+                  type: string
                   index: not_analyzed
-            status.name:
-              type: string
+                id:
+                  type: long
+            status:
+              type: object
               properties:
+                id:
+                  type: long
                 name:
+                  type: string
                   index: not_analyzed
             theme:
-              type: nested
+              type: object
               properties:
-                title:
-                  index: not_analyzed
+                id:
+                  type: long
+            selectionSteps:
+              type: object
+              properties:
+                id:
+                  type: long
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Proposal
-            provider: ~
-            listener: ~
-            finder: ~
-        # Question
-        question:
-          serializer:
-            groups: [Proposals, Questions]
-          _all: { enabled: false }
-          mappings:
-            title:
-              analyzer: %language_analyzer%
-              index_options: offsets
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\Question
-            provider: ~
-            listener: ~
-            finder: ~
-        # ProposalResponse
-        proposalresponse:
-          serializer:
-            groups: [Proposals]
-          _all: { enabled: false }
-          mappings:
-            value:
-              analyzer: %language_analyzer%
-              index_options: offsets
-          persistence:
-            driver: orm
-            model: Capco\AppBundle\Entity\ProposalResponse
             provider: ~
             listener: ~
             finder: ~
@@ -334,8 +316,12 @@ fos_elastica:
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
+            updatedAt:
+              type: date
+            createdAt:
+              type: date
             Author:
-              type: nested
+              type: object
               properties:
                 slug:
                   index: not_analyzed
@@ -369,7 +355,7 @@ fos_elastica:
             updatedAt:
               type: date
             author:
-              type: nested
+              type: object
               properties:
                 slug:
                   index: not_analyzed
@@ -404,9 +390,12 @@ fos_elastica:
               fields:
                 std: { type: string, analyzer: standard }
             Author:
-              type: nested
-              fields:
-                std: { type: string, analyzer: standard }
+              type: object
+              properties:
+                slug:
+                  index: not_analyzed
+                  fields:
+                    std: { type: string, analyzer: standard }
             createdAt:
               type: date
             updatedAt:
@@ -414,7 +403,7 @@ fos_elastica:
             publishedAt:
               type: date
             Authors:
-              type: nested
+              type: object
               properties:
                 slug:
                   index: not_analyzed
@@ -448,7 +437,7 @@ fos_elastica:
             updatedAt:
               type: date
             Author:
-              type: nested
+              type: object
               properties:
                 slug:
                   index: not_analyzed
@@ -462,11 +451,9 @@ fos_elastica:
         theme:
           indexable_callback: getIsEnabled
           serializer:
-            groups: [Themes, Proposals]
+            groups: [Themes]
           _all: { enabled: false }
           mappings:
-            id:
-              type: long
             title:
               analyzer: %language_analyzer%
               index_options: offsets
@@ -485,7 +472,7 @@ fos_elastica:
               fields:
                 std: { type: string, analyzer: standard }
             Author:
-              type: nested
+              type: object
               properties:
                 slug:
                   index: not_analyzed

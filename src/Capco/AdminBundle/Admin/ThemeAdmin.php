@@ -14,7 +14,7 @@ class ThemeAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
-        '_sort_by'    => 'position',
+        '_sort_by' => 'position',
     ];
 
     /**
@@ -71,40 +71,40 @@ class ThemeAdmin extends Admin
                 'label' => 'admin.fields.theme.author',
             ])
             ->add('status', null, [
-                'label'          => 'admin.fields.theme.status',
-                'template'       => 'CapcoAdminBundle:Theme:status_list_field.html.twig',
+                'label' => 'admin.fields.theme.status',
+                'template' => 'CapcoAdminBundle:Theme:status_list_field.html.twig',
                 'statusesLabels' => Theme::$statusesLabels,
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.theme.position',
             ])
             ->add('ideasCount', null, [
-                'label'    => 'admin.fields.theme.ideas_count',
+                'label' => 'admin.fields.theme.ideas_count',
                 'template' => 'CapcoAdminBundle:Theme:ideas_count_list_field.html.twig',
             ])
             ->add('projectsCount', null, [
-                'label'    => 'admin.fields.theme.projects_count',
+                'label' => 'admin.fields.theme.projects_count',
                 'template' => 'CapcoAdminBundle:Theme:projects_count_list_field.html.twig',
             ])
             ->add('eventsCount', null, [
-                'label'    => 'admin.fields.theme.events_count',
+                'label' => 'admin.fields.theme.events_count',
                 'template' => 'CapcoAdminBundle:Theme:events_count_list_field.html.twig',
             ])
             ->add('postsCount', null, [
-                'label'    => 'admin.fields.theme.posts_count',
+                'label' => 'admin.fields.theme.posts_count',
                 'template' => 'CapcoAdminBundle:Theme:posts_count_list_field.html.twig',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
-                'label'    => 'admin.fields.theme.is_enabled',
+                'label' => 'admin.fields.theme.is_enabled',
             ])
             ->add('updatedAt', 'datetime', [
                 'label' => 'admin.fields.theme.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show'   => [],
-                    'edit'   => [],
+                    'show' => [],
+                    'edit' => [],
                     'delete' => [],
                 ],
             ])
@@ -118,44 +118,44 @@ class ThemeAdmin extends Admin
     {
         $formMapper
             ->add('title', null, [
-                'label'    => 'admin.fields.theme.title',
+                'label' => 'admin.fields.theme.title',
                 'required' => true,
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
-                'label'    => 'admin.fields.theme.author',
+                'label' => 'admin.fields.theme.author',
                 'property' => 'username',
             ])
             ->add('isEnabled', null, [
-                'label'    => 'admin.fields.theme.is_enabled',
+                'label' => 'admin.fields.theme.is_enabled',
                 'required' => false,
             ])
             ->add('position', 'integer', [
                 'label' => 'admin.fields.theme.position',
             ])
             ->add('teaser', 'textarea', [
-                'label'    => 'admin.fields.theme.teaser',
+                'label' => 'admin.fields.theme.teaser',
                 'required' => false,
             ])
             ->add('body', 'ckeditor', [
-                'label'       => 'admin.fields.theme.body',
+                'label' => 'admin.fields.theme.body',
                 'config_name' => 'admin_editor',
-                'required'    => false,
+                'required' => false,
             ])
             ->add('status', 'choice', [
-                'label'              => 'admin.fields.theme.status',
-                'choices'            => Theme::$statusesLabels,
+                'label' => 'admin.fields.theme.status',
+                'choices' => Theme::$statusesLabels,
                 'translation_domain' => 'CapcoAppBundle',
-                'required'           => false,
-                'empty_value'        => 'admin.fields.theme.no_status',
+                'required' => false,
+                'empty_value' => 'admin.fields.theme.no_status',
             ])
             ->add('Media', 'sonata_type_model_list', [
                 'required' => false,
-                'label'    => 'admin.fields.theme.media',
+                'label' => 'admin.fields.theme.media',
             ], [
                 'link_parameters' => [
-                    'context'      => 'default',
+                    'context' => 'default',
                     'hide_context' => true,
-                    'provider'     => 'sonata.media.provider.image',
+                    'provider' => 'sonata.media.provider.image',
                 ],
             ])
         ;
@@ -180,8 +180,8 @@ class ThemeAdmin extends Admin
                 'label' => 'admin.fields.theme.body',
             ])
             ->add('status', null, [
-                'label'          => 'admin.fields.theme.status',
-                'template'       => 'CapcoAdminBundle:Theme:status_show_field.html.twig',
+                'label' => 'admin.fields.theme.status',
+                'template' => 'CapcoAdminBundle:Theme:status_show_field.html.twig',
                 'statusesLabels' => Theme::$statusesLabels,
             ])
             ->add('position', null, [
@@ -204,7 +204,7 @@ class ThemeAdmin extends Admin
             ])
             ->add('Media', null, [
                 'template' => 'CapcoAdminBundle:Theme:media_show_field.html.twig',
-                'label'    => 'admin.fields.theme.media',
+                'label' => 'admin.fields.theme.media',
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.theme.created_at',

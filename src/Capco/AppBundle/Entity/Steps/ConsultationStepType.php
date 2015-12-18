@@ -178,8 +178,7 @@ class ConsultationStepType
                 $ots[] = $ot;
             }
         }
+
         return $ots;
     }
-
-
 }
