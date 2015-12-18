@@ -163,8 +163,8 @@ const App = (($) => {
     const $el = $(el);
     $el.on('click', (e) => {
       $.fancybox({
-        href: $(e.currentTarget).href,
-        type: $(e.currentTarget).data('type'),
+        href: e.currentTarget.href,
+        type: e.currentTarget.data('type'),
         padding: 0,
         margin: 50,
         maxWidth: 1280,
