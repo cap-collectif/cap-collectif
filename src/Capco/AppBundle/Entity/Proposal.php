@@ -139,6 +139,12 @@ class Proposal implements CommentableInterface, VotableInterface
     private $selectionSteps;
 
     /**
+     * @var
+     * @ORM\Column(name="estimation", type="float", nullable=true)
+     */
+    private $estimation;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -498,5 +504,23 @@ class Proposal implements CommentableInterface, VotableInterface
         }
 
         return false;
+    }
+
+    /**
+     * @return float
+     */
+    public function getEstimation()
+    {
+        return $this->estimation;
+    }
+
+    /**
+     * @param float $estimation
+     * @return $this
+     */
+    public function setEstimation($estimation)
+    {
+        $this->estimation = $estimation;
+        return $this;
     }
 }

@@ -47,6 +47,9 @@ Capco\AppBundle\Entity\Proposal:
         status:
             expose: true
             groups: [Proposals]
+        estimation:
+            expose: true
+            groups: [Proposals]
         comments:
             expose: true
             groups: [Proposals]
