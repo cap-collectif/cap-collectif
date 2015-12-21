@@ -37,7 +37,7 @@ monolog:
         swift:
             type: swift_mailer
             from_email: error@cap-collectif.com
-            to_email: [sfavot@jolicode.com]
+            to_email: [adavid@jolicode.com]
             subject: An error occurred
             level: debug
         console:
