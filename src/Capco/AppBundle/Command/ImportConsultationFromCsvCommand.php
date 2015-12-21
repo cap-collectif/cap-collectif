@@ -20,12 +20,18 @@ use Symfony\Component\Console\Input\ArrayInput;
 class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 {
     private $opinionTypes = [];
+    private $filePath;
 
     protected function configure()
     {
         $this
             ->setName('capco:import:consultation-from-csv')
             ->setDescription('Import consultation from CSV file with specified author and consultation step')
+            ->addArgument(
+                'filePath',
+                InputArgument::REQUIRED,
+                'Please provide the path of the file you want to use.'
+            )
             ->addArgument(
                 'user',
                 InputArgument::REQUIRED,
@@ -52,6 +58,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
     protected function import(InputInterface $input, OutputInterface $output)
     {
+        $this->filePath = $input->getArgument('filePath');
         $userEmail = $input->getArgument('user');
         $consultationStepSlug = $input->getArgument('step');
 
@@ -176,7 +183,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             $opinion->setIsTrashed(false);
             ++$i;
 
-            $content = $opinion->setBody('<p>'.$row['contenu'].'</p>');
+            $content = $opinion->setBody('<p>'.nl2br(htmlspecialchars($row['contenu'])).'</p>');
 
             $em->persist($opinion);
 
@@ -216,7 +223,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             .count($opinions).
             ' opinions successfully created.</info>'
         );
-        
+
         $em->flush();
         $progress->finish();
     }
@@ -225,7 +232,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
     {
         return $this->getContainer()
                     ->get('import.csvtoarray')
-                    ->convert('consultation/opinions.csv');
+                    ->convert($this->filePath);
     }
 
     protected function getAppendices()
