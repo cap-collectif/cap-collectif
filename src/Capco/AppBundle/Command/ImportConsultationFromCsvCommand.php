@@ -234,11 +234,4 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                     ->get('import.csvtoarray')
                     ->convert($this->filePath);
     }
-
-    protected function getAppendices()
-    {
-        return $this->getContainer()
-                    ->get('import.csvtoarray')
-                    ->convert('consultation/appendices.csv');
-    }
 }
