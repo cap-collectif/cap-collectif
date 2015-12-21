@@ -57,23 +57,13 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
     {
         $opinionTypeTitles = explode('|', $path, 2);
         $current = $opinionTypeTitles[0];
-        var_dump($opinionTypeTitles);
-
-        echo 'Searching in ...:';
-        foreach ($types as $type) {
-            var_dump($type->getTitle());
-        }
-        echo 'end\n';
 
         foreach ($types as $type) {
-
             if ($type->getTitle() == $current) {
                 $next = isset($opinionTypeTitles[1]) ? $opinionTypeTitles[1] : null;
                 if (!$next) {
                     return $type;
                 }
-                echo "found ".$current.'\n';
-
                 return $this->findOpinionTypeByPath($next, $type->getChildren());
             }
         }
