@@ -671,7 +671,7 @@ class OpinionType
      */
     public function addChild($child)
     {
-        if ($this->children->contains($child)) {
+        if (!$this->children->contains($child)) {
             $this->children->add($child);
         }
         $child->setParent($this);
