@@ -31,7 +31,7 @@ def macos_install(force=False):
             local('brew cask install dockertoolbox')
 
     with settings(warn_only=True):
-        local('docker-machine create --driver virtualbox --virtualbox-memory 4096 --virtualbox-disk-size 30000 capco')
+        local('docker-machine create --driver virtualbox --virtualbox-memory 4096 --virtualbox-disk-size 30000 --virtualbox-cpu-count 8 --virtualbox-hostonly-nictype "Am79C973" capco')
 
 @task(environments=['local'])
 def macos_mountnfs():

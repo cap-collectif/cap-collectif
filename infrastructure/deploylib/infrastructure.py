@@ -6,22 +6,20 @@ import app
 
 @task
 def build(use_cache='true'):
-    with settings(warn_only=True):
-        "Build services for infrastructure"
-        if env.boot2docker:
-            local('docker-machine start capco')
-        env.compose('build'+('', '  --no-cache')[use_cache == 'false'])
+    "Build services for infrastructure"
+    if env.boot2docker:
+        ensure_dockermachine_up()
+    env.compose('build'+('', '  --no-cache')[use_cache == 'false'])
 
 
 @task
 def up():
-    with settings(warn_only=True):
-        "Ensure infrastructure is sync and running"
-        if env.boot2docker:
-            local('docker-machine start capco')
-        if env.build_at_up:
-            env.compose('build')
-        env.compose('up -d')
+    "Ensure infrastructure is sync and running"
+    if env.boot2docker:
+        ensure_dockermachine_up()
+    if env.build_at_up:
+        env.compose('build')
+    env.compose('up -d')
 
 
 @task
@@ -36,7 +34,7 @@ def stop():
 def clean():
     "Clean the infrastructure, will also remove all data"
     if env.boot2docker:
-        local('docker-machine start capco')
+        ensure_dockermachine_up()
     env.compose('rm -f -v')
 
 
@@ -50,3 +48,8 @@ def ps():
 def logs():
     "Show infrastructure logs"
     env.compose('logs')
+
+def ensure_dockermachine_up():
+    machine_running = local('docker-machine status capco', capture=True)
+    if machine_running != 'Running':
+        local('docker-machine start capco')
