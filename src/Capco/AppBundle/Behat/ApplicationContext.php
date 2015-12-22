@@ -17,23 +17,22 @@ class ApplicationContext extends UserContext
 {
     protected $headers;
 
+    static $dbContainer = null;
+
     /**
      * @BeforeScenario
      */
     public static function restartContainer()
     {
-        exec('php bin/console capco:reinit --force');
-        static $dbContainer = null;
         $docker = new Docker(new Client('unix:///var/run/docker.sock'));
         $manager = $docker->getContainerManager();
 
-        if (null !== $dbContainer) {
-            $manager->remove($dbContainer);
+        if (null !== self::$dbContainer) {
+            $manager->remove(self::$dbContainer, false, 1);
         }
 
-        $dbContainer = new Container(['Image' => 'spyl94:capco-fixtures']);
-        $dbContainer->setEnv(['MYSQL_ROOT_PASSWORD=capco']);
-        $manager->create($dbContainer)->start($dbContainer);
+        self::$dbContainer = new Container(['Image' => 'spyl94/capco-fixtures']);
+        $manager->create(self::$dbContainer)->start(self::$dbContainer);
     }
 
     /**
@@ -44,14 +43,17 @@ class ApplicationContext extends UserContext
         $this->getSession()->getDriver()->evaluateScript('localStorage.clear();');
     }
 
-    // /**
-    //  * @AfterSuite
-    //  */
-    // public static function reinitFeatures()
-    // {
-    //     echo "Reinit Database";
-    //     exec('php bin/console capco:reset-feature-flags --force');
-    // }
+    /**
+     * @AfterSuite
+     */
+    public static function reinitFeatures()
+    {
+        $docker = new Docker(new Client('unix:///var/run/docker.sock'));
+        $manager = $docker->getContainerManager();
+        $manager->create(self::$dbContainer)->start(self::$dbContainer);
+
+        exec('php bin/console capco:reset-feature-flags --force');
+    }
 
     // /**
     //  * @AfterSuite

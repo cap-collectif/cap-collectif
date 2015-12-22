@@ -1,6 +1,6 @@
 imports:
     - { resource: parameters.php }
-    - { resource: parameters.yml, ignore_errors: true }
+    #- { resource: parameters.yml, ignore_errors: true }
     - { resource: security.yml }
     - { resource: sonata.yml }
     - { resource: liip_imagine.yml }

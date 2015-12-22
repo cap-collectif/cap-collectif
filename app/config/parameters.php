@@ -13,7 +13,9 @@ $container->setParameter('database_host',               set_var('database_host',
 $container->setParameter('database_port',               set_var('database_port', 3306));
 $container->setParameter('database_name',               set_var('database_name', 'symfony'));
 $container->setParameter('database_user',               set_var('database_user', 'root'));
-$container->setParameter('database_password',           set_var('database_password', null));
+$container->setParameter('database_password', null);
+
+$container->setParameter('elasticsearch_host',          set_var('elasticsearch_host', '127.0.0.1'));
 
 $container->setParameter('mailer_transport',            set_var('mailer_transport', 'smtp'));
 $container->setParameter('mailer_user',                 set_var('mailer_user', 'maxime@cap-collectif.com'));

@@ -21,7 +21,7 @@ def environnment(config):
 @environnment
 def testing():
     env.host_string = 'docker@circleci'
-    env.compose_file = 'docker-compose.yml'
+    env.compose_file = 'infrastructure/environments/development.yml'
     env.run = lrun
     env.local = True
     env.project_name = 'capcotest'
@@ -36,7 +36,7 @@ def local():
     elif _platform == "darwin":
         localmac()
     env.host_string = 'docker@localhost'
-    env.compose_file = 'docker-compose.yml'
+    env.compose_file = 'infrastructure/environments/development.yml'
     env.shell = "/bin/sh -c"
 
 
@@ -105,7 +105,7 @@ env.docker = True
 env.service_command = command
 env.compose = compose
 env.compose_run = compose_run
-env.project_name = 'capcollectifsf2'
+env.project_name = 'capco'
 env.www_app = '/var/www/'
 env.ssh_into = ssh_into
 env.pull = pull
@@ -114,4 +114,4 @@ env.boot2docker = False
 env.build_at_up = True
 env.lxc = False
 env.root_dir = os.path.realpath(os.path.dirname(os.path.realpath(__file__)) + '/../..')
-env.compose_files = env.root_dir + '/docker-compose.yml'
+env.compose_files = env.root_dir + '/infrastructure/environments/development.yml'

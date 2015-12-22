@@ -12,7 +12,7 @@ frontend:
             namespaces:
                 page: [ Capco\AppBundle\Behat\Page ]
         Behat\MinkExtension:
-            base_url: 'http://0.0.0.0:80/'
+            base_url: 'http://capco.dev:80/'
             sessions:
                default:
                    symfony2: ~

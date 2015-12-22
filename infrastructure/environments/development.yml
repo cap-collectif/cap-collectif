@@ -1,54 +1,60 @@
 application:
-    build: ./infrastructure/services/local
+    build: ../services/local
     volumes:
-        - .:/var/www
+        - ../../:/var/www
         - /var/run/docker.sock:/var/run/docker.sock
-        - /usr/local/bin/docker:/bin/docker
+        - /usr/local/bin/docker:/usr/bin/docker
     ports:
         - "80:80"
     environment:
         SYMFONY_ENV: dev
         SYMFONY_MAILER_HOST: mailcatchersmtp
-        SYMFONY_MAILER_USER: ~
-        SYMFONY_MAILER_PASSWORD: ~
         SYMFONY_DATABASE_HOST: database
-        SYMFONY_DATABASE_PASSWORD: capco
+        SYMFONY_ELASTICSEARCH_HOST: elasticsearch
     volumes_from:
         - applicationdata
     links:
-        - database:database
-        #- databasefixtures:database
-        - elasticsearch
+        #- database:database
+        - databasefixtures:database
+        - elasticsearch:elasticsearch
         - seleniumhub:selenium
         - mailcatcher:mailcatchersmtp
 
 applicationdata:
-    build: ./infrastructure/services/applicationdata
+    build: ../services/applicationdata
     volumes:
         - /var/www/web/media
         - /var/www/var/cache
         - /var/www/var/logs
 
-database:
-    #image: spyl94:capco-fixtures
-    image: mariadb:10.0
-    environment:
-        MYSQL_ROOT_PASSWORD: 'capco'
+databasefixtures:
+    build: ../services/databasefixtures
+    volumes:
+      - ~/.composer:/home/root/composer
+
+# database:
+#     image: mariadb:10.0
+#     environment:
+#         MYSQL_ROOT_PASSWORD: 'capco'
 
 elasticsearch:
     image: elasticsearch:1.7
     volumes:
-    - ./infrastructure/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
+    - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
 
 builder:
-    build: ./infrastructure/services/builder
+    build: ../services/builder
     volumes:
-        - .:/var/www
+        - ../../:/var/www
         - ~/.composer:/home/capco/.composer
         - ~/.npm:/home/capco/.npm
         - ~/.bower:/home/capco/.bower
     command: echo "Use 'docker-compose run builder build' to build deps"
-    user: capco
+    environment:
+        SYMFONY_ENV: dev
+        SYMFONY_MAILER_HOST: mailcatchersmtp
+        SYMFONY_DATABASE_HOST: database
+        SYMFONY_ELASTICSEARCH_HOST: elasticsearch
 
 seleniumhub:
   image: selenium/hub
@@ -65,13 +71,6 @@ firefox:
   links:
     - seleniumhub:hub
     - application:application
-
-databasefixtures:
-    build: ./infrastructure/services/databasefixtures
-    environment:
-        MYSQL_ROOT_PASSWORD: 'capco'
-    volumes:
-      - ~/.composer:/home/root/composer
 
 chrome:
    image: selenium/node-chrome-debug

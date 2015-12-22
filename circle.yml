@@ -14,14 +14,13 @@ dependencies:
         - ~/.bower
     override:
         - docker info
+        - cat /etc/group
         - mkdir -p $CIRCLE_TEST_REPORTS/junit/
         - pip install -q -r requirements.txt
         - fab testing.circle.load_cache
         - fab testing.circle.save_cache
         - fab testing.app.deploy
-        - fab testing.infrastructure.up && sleep 30
-        - fab testing.database.generate
-        #- sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' capcotest_application_1)" -- /bin/bash -c -l 'cd /var/www/ && su capco -c "curl  http://localhost:9200"'
+        - fab testing.infrastructure.up && sleep 5
 
 test:
     override:
@@ -29,6 +28,7 @@ test:
         - fab testing.qa.behat:fast_failure=false
         - fab testing.qa.checkcs
         - fab testing.qa.lint
+        - fab testing.infrastructure.logs
 
 deployment:
     preprod:

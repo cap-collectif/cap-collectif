@@ -38,10 +38,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install fake user 1000
-RUN groupadd --gid=1000 capco && \
-    /usr/sbin/useradd --system --uid=1000 --home /home/capco --shell /bin/bash -g capco capco
-
 # Install blackfire
 RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
     echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
@@ -50,6 +46,14 @@ RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
     mkdir -p /var/run/blackfire
+
+# Install fake user 1000
+RUN groupadd --gid=1000 capco && \
+    /usr/sbin/useradd --system --uid 1000 --home /home/capco --shell /bin/bash --gid 1000 capco
+
+# Can only run docker commands if I have same group id inside.
+RUN groupdel users &&  groupadd --gid=100 docker && \
+    usermod -a -G docker,capco capco
 
 # Service
 #COPY mysql/run                  /etc/service/mysql/run

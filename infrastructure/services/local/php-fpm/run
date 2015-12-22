@@ -1,11 +1,9 @@
 #!/bin/bash
 
-cd /var/www
-
-chown -R capco:capco var
+chown -R capco:capco /var/www/var
 
 echo "Checking if mysql is booted..."
-while ! mysql --host=database -uroot -pcapco > /dev/null 2>&1;
+while ! mysql --host=database -uroot > /dev/null 2>&1;
   do sleep 1
   echo "Waiting mysql to boot..."
 done
