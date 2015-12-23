@@ -31,7 +31,7 @@ def macos_install(force=False):
             local('brew cask install dockertoolbox')
 
     with settings(warn_only=True):
-        local('docker-machine create --driver virtualbox --virtualbox-memory 4096 --virtualbox-disk-size 30000 --virtualbox-cpu-count 8 --virtualbox-hostonly-nictype "Am79C973" capco')
+        local('docker-machine create --driver virtualbox --virtualbox-no-share --virtualbox-memory 4096 --virtualbox-disk-size 30000 --virtualbox-cpu-count 8 --virtualbox-hostonly-nictype "Am79C973" capco')
 
 @task(environments=['local'])
 def macos_mountnfs():
@@ -41,8 +41,8 @@ def macos_mountnfs():
     if not env.boot2docker:
         return
 
-    with settings(warn_only=True):
-        local('VBoxManage sharedfolder remove capco --name Users')
+    # with settings(warn_only=True):
+    #     local('VBoxManage sharedfolder remove capco --name Users')
 
     with settings(warn_only=True):
         env.host_string = 'docker@%s' % local('docker-machine ip capco', capture=True)

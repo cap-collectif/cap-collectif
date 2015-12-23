@@ -21,13 +21,13 @@ def environnment(config):
 @environnment
 def testing():
     env.host_string = 'docker@circleci'
-    env.compose_file = 'infrastructure/environments/development.yml'
+    env.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/testing.yml']
     env.run = lrun
     env.local = True
     env.project_name = 'capcotest'
     env.build_at_up = False
     env.lxc = True
-
+    env.directory = env.root_dir
 
 @environnment
 def local():
@@ -36,9 +36,9 @@ def local():
     elif _platform == "darwin":
         localmac()
     env.host_string = 'docker@localhost'
-    env.compose_file = 'infrastructure/environments/development.yml'
+    env.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/development.yml']
     env.shell = "/bin/sh -c"
-
+    env.directory = env.root_dir
 
 def localmac():
     env.run = lrun
@@ -75,20 +75,39 @@ def compose_run(command_name, service, directory=".", user="root", no_deps=False
     else:
         env.compose('run -u %s %s /bin/bash -c "cd %s && %s"' % (user, service, directory, command_name))
 
-
 def compose(command_name):
+    merge_infra_files()
     with cd(env.directory):
         if env.boot2docker:
-            env.run('eval "$(docker-machine env capco)" && docker-compose -p %s -f %s %s' % (env.project_name, env.compose_file, command_name))
+            env.run('eval "$(docker-machine env capco)" && docker-compose -p %s -f %s/%s %s' % (env.project_name, env.directory, env.temporary_file, command_name))
         else:
-            env.run('docker-compose -p %s -f %s %s' % (env.project_name, env.compose_file, command_name))
-
+            env.run('docker-compose -p %s -f %s/%s %s' % (env.project_name, env.directory, env.temporary_file, command_name))
 
 def pull(revision, directory, remote='origin'):
     with cd(directory):
         env.run('git remote update')
         env.run('git checkout %s/%s' % (remote, revision))
         env.run('git rev-parse --short HEAD > VERSION')
+
+def merge_infra_files():
+    output = None
+
+    for file in env.compose_files:
+        stream = open(env.root_dir + '/' + file, 'r')
+
+        if output is None:
+            output = load(stream)
+        else:
+            output = merge(load(stream), output)
+
+        stream.close()
+
+    outputStream = open(env.root_dir + '/' + env.temporary_file, 'w')
+    dump(output, outputStream)
+    outputStream.close()
+
+    if not env.local:
+        put(env.root_dir + '/' + env.temporary_file, env.directory + '/' + env.temporary_file)
 
 
 def merge(user, default):
@@ -114,4 +133,5 @@ env.boot2docker = False
 env.build_at_up = True
 env.lxc = False
 env.root_dir = os.path.realpath(os.path.dirname(os.path.realpath(__file__)) + '/../..')
-env.compose_files = env.root_dir + '/infrastructure/environments/development.yml'
+env.compose_files = []
+env.temporary_file = 'infrastructure/environments/current.yml'
