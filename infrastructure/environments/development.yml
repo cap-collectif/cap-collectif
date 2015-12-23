@@ -1,4 +1,6 @@
 application:
+    environment:
+        SYMFONY_ENV: dev
     volumes:
         - ../../:/var/www
         - /var/run/docker.sock:/var/run/docker.sock

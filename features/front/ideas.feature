@@ -101,7 +101,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
   Scenario: Anonymous wants to comment an idea
     Given I visited "idea page" with:
      | slug | ideacommentable |
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
       | body        | J'ai un truc à dire |
     And I should see "Commenter avec mon compte"
@@ -110,7 +110,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
       | authorName  | Naruto              |
       | authorEmail | naruto72@gmail.com  |
     When I press "Commenter"
-    And I wait 10 seconds
+    And I wait 2 seconds
     Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
   @database @javascript
@@ -118,20 +118,20 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
     Given I am logged in as user
     Given I visited "idea page" with:
      | slug | ideacommentable |
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
       | body        | J'ai un truc à dire |
     And I should not see "Commenter avec mon compte"
     And I should not see "Commenter sans créer de compte"
     When I press "Commenter"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
   @database @javascript
   Scenario: Anonymous wants to comment an idea without email
     Given I visited "idea page" with:
      | slug | ideacommentable |
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
       | body        | J'ai un truc à dire |
     And I fill in the following:
@@ -147,15 +147,15 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
     Given I am logged in as user
     And I visited "idea page" with:
       | slug | ideacommentable |
-    And I wait 5 seconds
+    And I wait 1 seconds
     And The first comment vote counter should be "0"
     When I vote for the first comment
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Merci ! Votre vote a bien été pris en compte."
     And I should see "Annuler mon vote"
     And The first comment vote counter should be "1"
     And I vote for the first comment
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I should see "Votre vote a bien été annulé."
     And The first comment vote counter should be "0"
 

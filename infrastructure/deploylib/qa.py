@@ -30,16 +30,29 @@ def phpspec():
 @task(environments=['local', 'testing'])
 def behat(fast_failure='true'):
     "Run Gerhkin Tests"
-    env.service_command('./bin/behat -p api'+ ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
-    env.service_command('./bin/behat -p commands'+ ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
-    env.service_command('./bin/behat -p frontend' + ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
-    env.service_command('./bin/behat -p javascript' + ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
+    if not env.lxc:
+        env.service_command('docker pull spyl94/capco-fixtures:latest', 'application')
+    #env.service_command('php -d memory_limit=-1 ./bin/behat -p api'+ ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
+    #env.service_command('php -d memory_limit=-1 ./bin/behat -p commands'+ ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
+    #env.service_command('php -d memory_limit=-1 ./bin/behat -p frontend' + ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
+    # kill_database_container()
+    # clear_fixtures()
+    env.service_command('php -d memory_limit=-1 ./bin/behat -p javascript' + ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
+    clear_fixtures()
 
 @task(environments=['local'])
 def view():
-  local('echo "secret" | vncviewer `docker-machine ip capco`::5900')
+  local('echo "secret" | open vnc://`docker-machine ip capco`::5900')
+
+def clear_fixtures():
+    local('docker ps -a | awk \'{ print $1,$2 }\' | grep spyl94/capco | awk \'{print $1 }\' | xargs -I {} docker rm -f {}')
+
+def kill_database_container():
+    with settings(warn_only=True):
+        local('docker kill capco_databasefixtures_1')
 
 # Improve this, but okay for now...
+# tag should be the current commit ?
 @task(environments=['local'])
 def save_fixtures_image(tag='latest'):
     "Publish a new fixtures image"

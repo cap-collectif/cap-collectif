@@ -47,14 +47,14 @@ Feature: Opinions
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | solutions                        |
       | opinionSlug      | opinion-5                        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     When I follow "Signaler"
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
       | capco_app_reporting_status | 1                       |
       | capco_app_reporting_body   | Pas terrible tout ça... |
     And I press "Signaler"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Merci ! Votre signalement a bien été pris en compte."
 
   @javascript @database
@@ -65,15 +65,15 @@ Feature: Opinions
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-3                        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I should see "1 vote" in the ".opinion__votes" element
     When I follow "Modifier"
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
       | opinion_body | Je modifie ma proposition !   |
     And I check "opinion_confirm"
     And I press "Modifier"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Merci ! Votre proposition a bien été modifiée."
     And I should see "0 vote" in the ".opinion__votes" element
 
@@ -85,7 +85,7 @@ Feature: Opinions
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-3                        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should not see "Modifier" in the ".opinion__description .opinion__buttons" element
 
   @javascript
@@ -95,13 +95,13 @@ Feature: Opinions
       | stepSlug         | elaboration-de-la-loi            |
       | opinionTypeSlug  | articles                         |
       | opinionSlug      | article-1                        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Motifs 1"
     And I press "Exposé des motifs"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should not see "Motifs 1"
     And I press "Étude d'impact"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Impacts 1"
 
   @javascript
@@ -112,7 +112,7 @@ Feature: Opinions
       | stepSlug         | elaboration-de-la-loi                     |
       | opinionTypeSlug  | section-1-ouverture-des-donnees-publiques |
       | opinionSlug      | article-1                                 |
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "0 proposition liée"
     When I go on the connections tab
     And I press "Ajouter une proposition liée"
@@ -123,7 +123,7 @@ Feature: Opinions
       | opinion_body       | Description de ma proposition   |
       | opinion_appendix-1 | Exposay                         |
     And I click the "#confirm" element
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "1 proposition liée"
     And I should see "Titre" in the "#links-list" element
 

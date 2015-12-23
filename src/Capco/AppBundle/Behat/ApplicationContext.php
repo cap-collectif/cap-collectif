@@ -24,15 +24,30 @@ class ApplicationContext extends UserContext
      */
     public static function restartContainer()
     {
-        $docker = new Docker(new Client('unix:///var/run/docker.sock'));
-        $manager = $docker->getContainerManager();
+        // if (getenv('SYMFONY_ENV') === 'test') {
+            $docker = new Docker(new Client('unix:///var/run/docker.sock'));
+            $manager = $docker->getContainerManager();
 
-        if (null !== self::$dbContainer) {
-            $manager->remove(self::$dbContainer, false, 1);
-        }
+            if (null !== self::$dbContainer && self::$dbContainer->exists()) {
+                echo "Killing previous fixtures image...\n";
+                $manager->stop(self::$dbContainer)->remove(self::$dbContainer, true, true);
+            }
 
-        self::$dbContainer = new Container(['Image' => 'spyl94/capco-fixtures']);
-        $manager->create(self::$dbContainer)->start(self::$dbContainer);
+            echo "Starting new fixtures image...\n";
+            self::$dbContainer = new Container(['Image' => 'spyl94/capco-fixtures']);
+            $manager->create(self::$dbContainer)->start(self::$dbContainer);
+            sleep(1);
+        // } else {
+        //     exec('php bin/console capco:reinit --force');
+        // }
+    }
+
+    /**
+     * @BeforeScenario @elasticsearch
+     */
+    public static function populateElasticsearch()
+    {
+        exec('php bin/console fos:elastica:populate -n');
     }
 
     /**
@@ -48,10 +63,6 @@ class ApplicationContext extends UserContext
      */
     public static function reinitFeatures()
     {
-        $docker = new Docker(new Client('unix:///var/run/docker.sock'));
-        $manager = $docker->getContainerManager();
-        $manager->create(self::$dbContainer)->start(self::$dbContainer);
-
         exec('php bin/console capco:reset-feature-flags --force');
     }
 

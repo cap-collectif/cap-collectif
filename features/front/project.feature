@@ -9,7 +9,7 @@ Feature: Project
     Given feature "projects_form" is enabled
     And I visited "projects page"
     And I select "Date de publication" from "capco_app_search_project_sort"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then "Projet vide" should be before "Croissance, innovation, disruption" for selector ".thumbnail--custom .figcaption h2 a "
 
   @javascript
@@ -17,7 +17,7 @@ Feature: Project
     Given feature "projects_form" is enabled
     And I visited "projects page"
     And I select "Nombre de contributions" from "capco_app_search_project_sort"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then "Croissance, innovation, disruption" should be before "Projet vide" for selector ".thumbnail--custom .figcaption h2 a "
 
   @javascript
@@ -26,7 +26,7 @@ Feature: Project
     And feature "projects_form" is enabled
     And I visited "projects page"
     And I select "Transport" from "capco_app_search_project_theme"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see 4 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
@@ -38,9 +38,9 @@ Feature: Project
     And feature "projects_form" is enabled
     And I visited "projects page"
     And I select "Transport" from "capco_app_search_project_theme"
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I select "Nombre de contributions" from "capco_app_search_project_sort"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see 4 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
@@ -54,7 +54,7 @@ Feature: Project
     When I fill in the following:
       | capco_app_search_project_term | innovation |
     And I click the ".filter__search .btn" element
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see 1 ".thumbnail--custom" elements
     And I should see "Croissance, innovation, disruption"
     And I should not see "Stratégie technologique de l'Etat et services publics"
@@ -106,7 +106,7 @@ Feature: Project
       | stepSlug    | collecte-des-avis                |
     Then I should see "135 contributions"
     And I hover over the "#contributions-counter-pill" element
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I should see "25 propositions"
     And I should see "78 arguments"
     And I should see "32 sources"

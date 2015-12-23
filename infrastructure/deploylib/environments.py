@@ -20,14 +20,23 @@ def environnment(config):
 
 @environnment
 def testing():
-    env.host_string = 'docker@circleci'
+    if os.environ.get('CIRCLECI'):
+        circleci()
+    elif os.environ.get('TRAVISCI'):
+        travisci()
     env.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/testing.yml']
     env.run = lrun
     env.local = True
     env.project_name = 'capcotest'
     env.build_at_up = False
-    env.lxc = True
     env.directory = env.root_dir
+
+def circleci():
+    env.lxc = True
+    env.host_string = 'docker@circleci'
+
+def travisci():
+    env.host_string = 'docker@localhost'
 
 @environnment
 def local():

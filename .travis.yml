@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - pip install -q -r requirements.txt
+  #- fab testing.circle.load_cache
+  #- fab testing.circle.save_cache
+  - fab testing.app.deploy
+  - fab testing.infrastructure.up && sleep 5
+
+script:
+  - fab testing.qa.phpspec
+  - fab testing.qa.behat:fast_failure=false
+  - fab testing.qa.checkcs
+  - fab testing.qa.lint
+  - fab testing.infrastructure.logs
+
+#notifications:
+#  email: false

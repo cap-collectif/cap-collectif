@@ -1,5 +1,7 @@
 application:
+    environment:
+        SYMFONY_ENV: test
     volumes:
         - ../../:/var/www
-#        - /var/run/docker.sock:/var/run/docker.sock
+        - /var/run/docker.sock:/run/docker.sock:ro
         - /usr/bin/docker:/usr/bin/docker

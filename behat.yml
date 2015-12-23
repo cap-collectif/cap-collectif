@@ -12,7 +12,7 @@ frontend:
             namespaces:
                 page: [ Capco\AppBundle\Behat\Page ]
         Behat\MinkExtension:
-            base_url: 'http://capco.dev:80/'
+            base_url: 'http://capco.dev/'
             sessions:
                default:
                    symfony2: ~
@@ -35,12 +35,14 @@ javascript:
     extensions:
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp
+        Behat\Symfony2Extension: ~
         SensioLabs\Behat\PageObjectExtension:
             namespaces:
                 page: [ Capco\AppBundle\Behat\Page ]
         Behat\MinkExtension:
             base_url: 'http://application/'
-            browser_name: firefox
+            # browser_name: firefox
+            browser_name: chrome
             sessions:
                default:
                     selenium2:

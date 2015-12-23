@@ -3,14 +3,13 @@ application:
     ports:
         - "80:80"
     environment:
-        SYMFONY_ENV: dev
         SYMFONY_MAILER_HOST: mailcatchersmtp
         SYMFONY_DATABASE_HOST: database
         SYMFONY_ELASTICSEARCH_HOST: elasticsearch
     volumes_from:
         - applicationdata
     links:
-        - databasefixtures:database
+        - database:database
         - elasticsearch:elasticsearch
         - seleniumhub:selenium
         - mailcatcher:mailcatchersmtp
@@ -22,11 +21,14 @@ applicationdata:
         - /var/www/var/cache
         - /var/www/var/logs
 
+database:
+    image: spyl94/capco-fixtures
+
 databasefixtures:
     build: ../services/databasefixtures
 
 elasticsearch:
-    image: elasticsearch:1.7
+    image: elasticsearch:1.3
     volumes:
     - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
 
@@ -45,7 +47,7 @@ builder:
         SYMFONY_ELASTICSEARCH_HOST: elasticsearch
 
 seleniumhub:
-  image: selenium/hub
+  image: selenium/hub:2.47.1 # Fixed version to avoid a Mink issue (https://github.com/Behat/MinkExtension/issues/224)
   ports:
     - "4444:4444"
 
@@ -54,17 +56,17 @@ mailcatcher:
 
 firefox:
   image: selenium/node-firefox-debug
-  ports:
-   - "5900:5900"
-  links:
-    - seleniumhub:hub
-    - application:application
+#  ports:
+#   - "5900:5900"
+#  links:
+#    - seleniumhub:hub
+#    - application:application
 
 chrome:
    image: selenium/node-chrome-debug
-#   # ports:
-#   #  - "5900:5900"
-#   links:
-#     - seleniumhub:hub
-#     - application:application
+   ports:
+    - "5900:5900"
+   links:
+     - seleniumhub:hub
+     - application:application
 

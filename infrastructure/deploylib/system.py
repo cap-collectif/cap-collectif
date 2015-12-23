@@ -15,6 +15,11 @@ def linux_docker_install(force=False):
     local('curl -sSL https://get.docker.com/ | sh')
     local('curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose')
 
+@task(environments=['local'])
+def macos_reinstall(force=False):
+    local('docker-machine rm capco')
+    macos_install()
+    macos_mountnfs()
 
 @task(environments=['local'])
 def macos_install(force=False):
@@ -31,7 +36,7 @@ def macos_install(force=False):
             local('brew cask install dockertoolbox')
 
     with settings(warn_only=True):
-        local('docker-machine create --driver virtualbox --virtualbox-no-share --virtualbox-memory 4096 --virtualbox-disk-size 30000 --virtualbox-cpu-count 8 --virtualbox-hostonly-nictype "Am79C973" capco')
+        local('docker-machine create --driver virtualbox --virtualbox-memory 4096 --virtualbox-disk-size 30000 --virtualbox-cpu-count 8 --virtualbox-hostonly-nictype "Am79C973" capco')
 
 @task(environments=['local'])
 def macos_mountnfs():
@@ -41,8 +46,8 @@ def macos_mountnfs():
     if not env.boot2docker:
         return
 
-    # with settings(warn_only=True):
-    #     local('VBoxManage sharedfolder remove capco --name Users')
+    with settings(warn_only=True):
+        local('VBoxManage sharedfolder remove capco --name Users')
 
     with settings(warn_only=True):
         env.host_string = 'docker@%s' % local('docker-machine ip capco', capture=True)

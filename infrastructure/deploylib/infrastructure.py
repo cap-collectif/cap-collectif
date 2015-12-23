@@ -1,7 +1,7 @@
 from task import task
 from fabric.operations import local, run, settings
 from fabric.api import env
-
+import time
 import app
 
 @task
@@ -29,6 +29,11 @@ def stop():
     if env.boot2docker:
         local('docker-machine stop capco')
 
+@task
+def reboot():
+    stop()
+    time.sleep(5)
+    up()
 
 @task
 def clean():
