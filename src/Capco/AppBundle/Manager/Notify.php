@@ -63,10 +63,10 @@ class Notify implements MailerInterface
     private function emailsAreValid($to, $from)
     {
         $emailConstraint = new EmailConstraint();
-        if ($this->valdiator->validateValue($to, $emailConstraint)->count() > 0) {
+        if ($this->validator->validateValue($to, $emailConstraint)->count() > 0) {
             return false;
         }
-        if ($this->valdiator->validateValue($from, $emailConstraint)->count() > 0) {
+        if ($this->validator->validateValue($from, $emailConstraint)->count() > 0) {
             return false;
         }
         return true;
