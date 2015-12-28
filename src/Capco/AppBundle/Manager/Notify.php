@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Router;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use FOS\UserBundle\Mailer\MailerInterface;
+use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
+use Symfony\Component\Validator\ValidatorInterface;
 
 class Notify implements MailerInterface
 {
@@ -23,8 +25,9 @@ class Notify implements MailerInterface
     protected $router;
     protected $parameters;
     protected $urlResolver;
+    protected $validator;
 
-    public function __construct(\Swift_Mailer $mailer, \Swift_Mailer $serviceMailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, array $parameters)
+    public function __construct(\Swift_Mailer $mailer, \Swift_Mailer $serviceMailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, ValidatorInterface $validator, array $parameters)
     {
         $this->mailer = $mailer;
         $this->serviceMailer = $serviceMailer;
@@ -33,6 +36,7 @@ class Notify implements MailerInterface
         $this->translator = $translator;
         $this->router = $router;
         $this->urlResolver = $urlResolver;
+        $this->validator = $validator;
         $this->parameters = $parameters;
     }
 
@@ -55,16 +59,29 @@ class Notify implements MailerInterface
         $this->sendServiceEmail($to, $fromAdress, $fromName, $body, $subject, $contentType);
     }
 
+
+    private function emailsAreValid($to, $from)
+    {
+        $emailConstraint = new EmailConstraint();
+        if ($this->valdiator->validateValue($to, $emailConstraint)->count() > 0) {
+            return false;
+        }
+        if ($this->valdiator->validateValue($from, $emailConstraint)->count() > 0) {
+            return false;
+        }
+        return true;
+    }
+
     public function sendServiceEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
     {
-        if ($to && $fromAddress) {
+        if ($this->emailsAreValid($to, $fromAddress) {
             $this->serviceMailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
         }
     }
 
     public function sendEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
     {
-        if ($to && $fromAddress) {
+        if ($this->emailsAreValid($to, $fromAddress) {
             $this->mailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
         }
     }

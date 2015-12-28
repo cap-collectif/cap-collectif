@@ -30,7 +30,7 @@ services:
   ## Service Notify - send mail
   capco.notify_manager:
     class:     %capco.notify.manager.class%
-    arguments: [@mailer, @swiftmailer.mailer.service, @templating, @translator, @capco.site_parameter.resolver, @router, @capco.url.resolver, {confirmation.template: %fos_user.registration.confirmation.template%, resetting.template: %fos_user.resetting.email.template%}]
+    arguments: [@mailer, @swiftmailer.mailer.service, @templating, @translator, @capco.site_parameter.resolver, @router, @capco.url.resolver, @validator, {confirmation.template: %fos_user.registration.confirmation.template%, resetting.template: %fos_user.resetting.email.template%}]
 
   ## Toggle
   capco.toggle.manager:
