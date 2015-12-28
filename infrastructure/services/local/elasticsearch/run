@@ -1,4 +1,0 @@
-#!/bin/bash
-
-echo "Starting elasticsearch..." whoami
-exec /etc/elasticsearch/bin/elasticsearch

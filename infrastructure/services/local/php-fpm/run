@@ -1,12 +1,27 @@
 #!/bin/bash
 
+if grep -i "^users" /etc/group; then
+  groupdel users
+fi
+
+if ! grep -i "^docker" /etc/group; then
+  echo "Adding docker group with gid: " $DOCKER_GID
+  groupadd --gid=$DOCKER_GID docker && usermod -a -G docker,capco capco
+fi
+
 chown -R capco:capco /var/www/var
 
 echo "Checking if mysql is booted..."
-while ! mysql --host=database -uroot > /dev/null 2>&1;
-  do sleep 1
+
+function test_mysqldatabase {
+  mysql --host=${SYMFONY_DATABASE_HOST} -uroot symfony > /dev/null
+}
+
+# Wait till mysql and php-fpm are ready
+until ( test_mysqldatabase )
+do
+  sleep 0.1
   echo "Waiting mysql to boot..."
 done
-echo "Mysql is ready!"
 
 exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O

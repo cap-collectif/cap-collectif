@@ -13,8 +13,6 @@ dependencies:
         - ~/.composer
         - ~/.bower
     override:
-        - docker info
-        - cat /etc/group
         - mkdir -p $CIRCLE_TEST_REPORTS/junit/
         - pip install -q -r requirements.txt
         - fab testing.circle.load_cache
@@ -25,6 +23,7 @@ dependencies:
 test:
     override:
         - fab testing.qa.phpspec
+        - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' capcotest_application_1)" -- /bin/bash -c -l 'cd /var/www/ && su capco -c "curl --retry 10 --retry-delay 5 -v http://elasticsearch:9200"'
         - fab testing.qa.behat:fast_failure=false
         - fab testing.qa.checkcs
         - fab testing.qa.lint

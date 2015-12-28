@@ -103,7 +103,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
      | slug | ideacommentable |
     And I wait 1 seconds
     And I fill in the following:
-      | body        | J'ai un truc à dire |
+      | body        | J'ai un truc à dire de la part de Naruto |
     And I should see "Commenter avec mon compte"
     And I should see "Commenter sans créer de compte"
     And I fill in the following:
@@ -111,7 +111,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
       | authorEmail | naruto72@gmail.com  |
     When I press "Commenter"
     And I wait 2 seconds
-    Then I should see "J'ai un truc à dire" in the ".opinion__list" element
+    Then I should see "J'ai un truc à dire de la part de Naruto" in the ".opinion__list" element
 
   @database @javascript
   Scenario: Logged in user wants to comment an idea
@@ -120,12 +120,12 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
      | slug | ideacommentable |
     And I wait 1 seconds
     And I fill in the following:
-      | body        | J'ai un truc à dire |
+      | body        | J'ai un truc à dire avec mon compte |
     And I should not see "Commenter avec mon compte"
     And I should not see "Commenter sans créer de compte"
     When I press "Commenter"
     And I wait 1 seconds
-    Then I should see "J'ai un truc à dire" in the ".opinion__list" element
+    Then I should see "J'ai un truc à dire avec mon compte" in the ".opinion__list" element
 
   @database @javascript
   Scenario: Anonymous wants to comment an idea without email
@@ -133,12 +133,12 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
      | slug | ideacommentable |
     And I wait 1 seconds
     And I fill in the following:
-      | body        | J'ai un truc à dire |
+      | body        | J'ai un truc à dire mais pas le droit |
     And I fill in the following:
       | authorName  | Naruto              |
     When I press "Commenter"
     Then I should see "Cette valeur n'est pas une adresse email valide."
-    And I should not see "J'ai un truc à dire" in the ".opinion__list" element
+    And I should not see "J'ai un truc à dire mais pas le droit" in the ".opinion__list" element
 
 ## Comments vote
 

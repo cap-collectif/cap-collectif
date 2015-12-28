@@ -12,34 +12,54 @@ use WebDriver\Exception\ElementNotVisible;
 use Docker\Docker;
 use Docker\Http\Client;
 use Docker\Container;
+use Docker\Exception\UnexpectedStatusCodeException;
 
 class ApplicationContext extends UserContext
 {
     protected $headers;
 
-    static $dbContainer = null;
+   // protected $dbContainer = null;
+
+    /**
+     * @BeforeSuite
+     */
+    public static function reinitDatabase()
+    {
+        exec('mysqldump --opt -h database -u root symfony > var/db.backup');
+    }
 
     /**
      * @BeforeScenario
      */
-    public static function restartContainer()
+    public function restartContainer()
     {
-        // if (getenv('SYMFONY_ENV') === 'test') {
-            $docker = new Docker(new Client('unix:///var/run/docker.sock'));
-            $manager = $docker->getContainerManager();
+        // Let's stick with the old way for now
+        exec('curl -XDELETE \'http://elasticsearch:9200/_all\'');
+        exec('mysql -h database -u root symfony < var/db.backup');
+        exec('php bin/console fos:elastica:populate -n');
 
-            if (null !== self::$dbContainer && self::$dbContainer->exists()) {
-                echo "Killing previous fixtures image...\n";
-                $manager->stop(self::$dbContainer)->remove(self::$dbContainer, true, true);
+        /*
+        $docker = new Docker(new Client('unix:///run/docker.sock'));
+        $manager = $docker->getContainerManager();
+
+        if (null !== $this->dbContainer && $this->dbContainer->exists()) {
+            try {
+                // echo "Killing previous fixtures image...\n";
+                $manager->stop($this->dbContainer)->remove($this->dbContainer, true, true);
+            } catch (UnexpectedStatusCodeException $e) {
+                if (!strpos($e->getMessage(), "Driver btrfs failed to remove root filesystem")) {
+                    throw $e;
+                }
+                // We don't care about that error which happen only on Circle-CI
             }
+        }
 
-            echo "Starting new fixtures image...\n";
-            self::$dbContainer = new Container(['Image' => 'spyl94/capco-fixtures']);
-            $manager->create(self::$dbContainer)->start(self::$dbContainer);
-            sleep(1);
-        // } else {
-        //     exec('php bin/console capco:reinit --force');
-        // }
+        // echo "Starting new fixtures image...\n";
+        $this->dbContainer = new Container([
+            'Image' => 'spyl94/capco-fixtures',
+        ]);
+        $manager->create($this->dbContainer)->start($this->dbContainer);
+        */
     }
 
     /**
@@ -47,7 +67,7 @@ class ApplicationContext extends UserContext
      */
     public static function populateElasticsearch()
     {
-        exec('php bin/console fos:elastica:populate -n');
+        // exec('php bin/console fos:elastica:populate -n');
     }
 
     /**
@@ -117,6 +137,7 @@ class ApplicationContext extends UserContext
      */
     public function iSubmitAnArgument($type, $text)
     {
+        $this->getSession()->wait(1000);
         $this->navigationContext->getPage('opinionPage')->submitArgument($type, $text);
     }
 

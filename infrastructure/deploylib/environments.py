@@ -24,6 +24,8 @@ def testing():
         circleci()
     elif os.environ.get('TRAVISCI'):
         travisci()
+    else:
+        env.host_string = 'docker@localhost'
     env.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/testing.yml']
     env.run = lrun
     env.local = True

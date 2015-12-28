@@ -799,7 +799,7 @@ user:
       thanks: Merci de vous être inscrit sur %sitename%. Veuillez cliquer sur le lien ci-dessous pour valider votre adresse électronique et vous connecter à la plateforme :
       validate: <a href="%url%"><strong>Confirmer mon adresse électronique</strong></a>
       participate: Après vous être connecté, vous pourrez voter, contribuer et compléter votre profil.
-      question: Si vous avez des questions concernant votre compte ou tout autre sujet, n'hésitez pas à nous contacter à cette adresse <a href="mailto:assistance@cap-collectif.com">assistance@cap-collectif.com</a> ou en répondant à ce courriel.
+      question: Si vous avez des questions concernant votre compte ou tout autre sujet, n'hésitez pas à nous contacter à cette adresse <a href="mailto:support@cap-collectif.com">support@cap-collectif.com</a> ou en répondant à ce courriel.
       bye: Bonne participation !
       footer1: Vous recevez ce courriel parce que vous avez créé un compte sur %sitename%.
       footer2: Ce message vous a été adressé automatiquement par <a href="http://www.cap-collectif.com">Cap Collectif</a>.

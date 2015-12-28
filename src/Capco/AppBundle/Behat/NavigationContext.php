@@ -12,9 +12,8 @@ class NavigationContext extends PageObjectContext
      */
     public function iGoOnTheSourcesTab()
     {
-        $this->getPage('opinion page')
-             ->clickSourcesTab();
-        sleep(3);
+        sleep(1);
+        $this->getPage('opinion page')->clickSourcesTab();
     }
 
     /**
@@ -30,9 +29,8 @@ class NavigationContext extends PageObjectContext
      */
     public function iGoOnTheConnectionsTab()
     {
-        $this->getPage('opinion page')
-            ->clickConnectionsTab();
-        sleep(3);
+        sleep(1);
+        $this->getPage('opinion page')->clickConnectionsTab();
     }
 
     /**
@@ -40,8 +38,8 @@ class NavigationContext extends PageObjectContext
      */
     public function clickAddSourceTab()
     {
-        $this->getPage('opinion page')
-             ->clickAddSource();
+        sleep(1);
+        $this->getPage('opinion page')->clickAddSource();
     }
 
     /**

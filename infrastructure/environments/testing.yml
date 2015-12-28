@@ -1,7 +1,14 @@
 application:
     environment:
         SYMFONY_ENV: test
+        DOCKER_GID: 998
     volumes:
         - ../../:/var/www
         - /var/run/docker.sock:/run/docker.sock:ro
         - /usr/bin/docker:/usr/bin/docker
+
+# elasticsearch:
+#     image: circleci/elasticsearch
+#     volumes:
+#     - ../services/local/elasticsearch/capco.yml:/elasticsearch/config/elasticsearch.yml
+

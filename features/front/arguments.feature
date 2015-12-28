@@ -8,7 +8,6 @@ Feature: Arguments
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | causes                           |
       | opinionSlug      | opinion-2                        |
-    And I wait 1 seconds
     # When I go on the arguments tab
     And I submit a "yes" argument with text "Texte de mon argument"
     And I wait 1 seconds

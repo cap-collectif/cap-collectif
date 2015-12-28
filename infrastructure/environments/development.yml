@@ -1,7 +1,12 @@
 application:
     environment:
         SYMFONY_ENV: dev
+        DOCKER_GID: 100
     volumes:
         - ../../:/var/www
         - /var/run/docker.sock:/var/run/docker.sock
         - /usr/local/bin/docker:/usr/bin/docker
+
+database:
+    ports:
+        - 3306

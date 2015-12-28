@@ -23,12 +23,19 @@ applicationdata:
 
 database:
     image: spyl94/capco-fixtures
+    # ports:
+        # - "3306:3306"
 
 databasefixtures:
     build: ../services/databasefixtures
 
+# elasticsearchfixtures:
+#     build: ../services/elasticsearchfixtures
+#     links:
+#         - application:application
+
 elasticsearch:
-    image: elasticsearch:1.3
+    image: elasticsearch:1.7.3
     volumes:
     - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
 

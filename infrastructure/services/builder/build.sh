@@ -25,8 +25,6 @@ else
   brunch build
 fi
 
-id
 cd /var/www
 php bin/console cache:warmup --no-debug --no-optional-warmers --env=prod --no-interaction
 php bin/console assets:install --symlink --env=prod --no-interaction
-ls -l var

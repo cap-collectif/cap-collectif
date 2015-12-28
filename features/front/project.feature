@@ -4,7 +4,7 @@ Feature: Project
     Given I visited "projects page"
     Then I should not see "capco_app_search_project"
 
-  @javascript
+  @javascript @elasticsearch
   Scenario: Project can be sorted by published date
     Given feature "projects_form" is enabled
     And I visited "projects page"
@@ -12,7 +12,7 @@ Feature: Project
     And I wait 1 seconds
     Then "Projet vide" should be before "Croissance, innovation, disruption" for selector ".thumbnail--custom .figcaption h2 a "
 
-  @javascript
+  @javascript @elasticsearch
   Scenario: Project can be sorted by contributions number
     Given feature "projects_form" is enabled
     And I visited "projects page"

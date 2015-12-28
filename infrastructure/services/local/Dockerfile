@@ -51,28 +51,20 @@ RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
 RUN groupadd --gid=1000 capco && \
     /usr/sbin/useradd --system --uid 1000 --home /home/capco --shell /bin/bash --gid 1000 capco
 
-# Can only run docker commands if I have same group id inside.
-RUN groupdel users &&  groupadd --gid=100 docker && \
-    usermod -a -G docker,capco capco
-
 # Service
-#COPY mysql/run                  /etc/service/mysql/run
 COPY nginx/run                  /etc/service/nginx/run
 COPY php-fpm/run                /etc/service/php-fpm/run
 COPY redis/run                  /etc/service/redis/run
 COPY cron/run                   /etc/service/cron/run
-#COPY elasticsearch/run          /etc/service/elasticsearch/run
 COPY blackfire/run              /etc/service/blackfire/run
 COPY varnish/run                /etc/service/varnish/run
 
 # Configuration
-#COPY mysql/capco.cnf            /etc/mysql/conf.d/capco.cnf
 COPY nginx/nginx.conf           /etc/nginx/nginx.conf
 COPY php-fpm/fpm.conf           /etc/service/php-fpm/fpm.conf
 COPY php-fpm/capco.ini          /etc/php5/fpm/conf.d/capco.ini
 COPY php-fpm/capco.ini          /etc/php5/cli/conf.d/capco.ini
 COPY cron/crontab               /etc/cron.d/crontab
-#COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 
 # Volume for log / cache ...
@@ -81,7 +73,6 @@ VOLUME /var/www/var/logs
 
 # Volume for redis / elasticsearch ...
 VOLUME /data
-#VOLUME /etc/elasticsearch/data
 
 WORKDIR /var/www
 

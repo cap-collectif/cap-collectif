@@ -27,7 +27,7 @@ Background:
 #   And I wait 1 seconds
 #   And "Coucou !..." should be before "Coucou coucou coucou coucou coucou coucou...." for selector ".search__results .search-result__preview"
 
-@javascript
+@javascript @elasticsearch
 Scenario: Anonymous wants to search in members
   Given I visited "search page"
   When I fill in the following:

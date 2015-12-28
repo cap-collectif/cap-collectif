@@ -7,7 +7,7 @@ Scenario: Anonymous wants to list published posts
   Given I visited "blog page"
   Then I should see 8 ".media--news" elements
 
-@javascript
+@javascript @elasticsearch
 Scenario: Posts can be filtered by projects
   Given I visited "blog page"
   And I select "Croissance, innovation, disruption" from "capco_app_search_blog_project"
@@ -15,7 +15,7 @@ Scenario: Posts can be filtered by projects
   And I should see "Post 5"
   And I should not see "Post 8"
 
-@javascript
+@javascript @elasticsearch
 Scenario: Post can be filtered by theme
   Given feature "themes" is enabled
   And I visited "blog page"
@@ -28,6 +28,7 @@ Scenario: Post can be filtered by theme
 Scenario: Anonymous wants to comment a blogpost
   Given I visited "blog article page" with:
     | articleSlug | post-2 |
+  And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
   And I fill in the following:
@@ -42,6 +43,7 @@ Scenario: Logged in user wants to comment a blogpost
   Given I am logged in as user
   And I visited "blog article page" with:
     | articleSlug | post-2 |
+  And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
   And I should not see "Commenter avec mon compte"
@@ -54,10 +56,11 @@ Scenario: Logged in user wants to comment a blogpost
 Scenario: Anonymous wants to comment a blogpost without email
   Given I visited "blog article page" with:
     | articleSlug | post-2 |
+  And I wait 1 seconds
   And I fill in the following:
-    | body        | J'ai un truc à dire |
+    | body        | J'ai un truc à dire anonymement |
   And I fill in the following:
     | authorName  | Naruto              |
   When I press "Commenter"
   And I wait 1 seconds
-  Then I should not see "J'ai un truc à dire" in the ".opinion__list" element
+  Then I should not see "J'ai un truc à dire anonymement" in the ".opinion__list" element
