@@ -74,14 +74,14 @@ class Notify implements MailerInterface
 
     public function sendServiceEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
     {
-        if ($this->emailsAreValid($to, $fromAddress) {
+        if ($this->emailsAreValid($to, $fromAddress)) {
             $this->serviceMailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
         }
     }
 
     public function sendEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
     {
-        if ($this->emailsAreValid($to, $fromAddress) {
+        if ($this->emailsAreValid($to, $fromAddress)) {
             $this->mailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
         }
     }
