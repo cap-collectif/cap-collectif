@@ -9,6 +9,7 @@ if ! grep -i "^docker" /etc/group; then
   groupadd --gid=$DOCKER_GID docker && usermod -a -G docker,capco capco
 fi
 
+mkdir -m 777 -p /var/www/var
 chown -R capco:capco /var/www/var
 
 echo "Checking if mysql is booted..."

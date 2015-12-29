@@ -22,22 +22,12 @@ applicationdata:
         - /var/www/var/logs
 
 database:
-    image: spyl94/capco-fixtures
-    # ports:
-        # - "3306:3306"
-
-databasefixtures:
-    build: ../services/databasefixtures
-
-# elasticsearchfixtures:
-#     build: ../services/elasticsearchfixtures
-#     links:
-#         - application:application
+    image: spyl94/capco-fixtures:latest
 
 elasticsearch:
     image: elasticsearch:1.7.3
-    volumes:
-    - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
+    # volumes:
+        # - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
 
 builder:
     build: ../services/builder
@@ -47,11 +37,6 @@ builder:
         - ~/.npm:/home/capco/.npm
         - ~/.bower:/home/capco/.bower
     command: echo "Use 'docker-compose run builder build' to build deps"
-    environment:
-        SYMFONY_ENV: dev
-        SYMFONY_MAILER_HOST: mailcatchersmtp
-        SYMFONY_DATABASE_HOST: database
-        SYMFONY_ELASTICSEARCH_HOST: elasticsearch
 
 seleniumhub:
   image: selenium/hub:2.47.1 # Fixed version to avoid a Mink issue (https://github.com/Behat/MinkExtension/issues/224)
@@ -59,20 +44,10 @@ seleniumhub:
     - "4444:4444"
 
 mailcatcher:
-  image: jderusse/mailcatcher
-
-firefox:
-  image: selenium/node-firefox-debug
-#  ports:
-#   - "5900:5900"
-#  links:
-#    - seleniumhub:hub
-#    - application:application
+  image: jderusse/mailcatcher:latest
 
 chrome:
-   image: selenium/node-chrome-debug
-   ports:
-    - "5900:5900"
+   image: selenium/node-chrome-debug:latest
    links:
      - seleniumhub:hub
      - application:application

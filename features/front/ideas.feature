@@ -23,8 +23,6 @@ Scenario: Can not create an idea from theme when idea creation is disabled
   Given feature "themes" is enabled
   And I visited "themes page"
   When I follow "Immobilier"
-  Then I should not see "Proposer une idée"
-
 
 # Homepage
 
@@ -124,7 +122,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
     And I should not see "Commenter avec mon compte"
     And I should not see "Commenter sans créer de compte"
     When I press "Commenter"
-    And I wait 1 seconds
+    And I wait 2 seconds
     Then I should see "J'ai un truc à dire avec mon compte" in the ".opinion__list" element
 
   @database @javascript
@@ -137,6 +135,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
     And I fill in the following:
       | authorName  | Naruto              |
     When I press "Commenter"
+    And I wait 2 seconds
     Then I should see "Cette valeur n'est pas une adresse email valide."
     And I should not see "J'ai un truc à dire mais pas le droit" in the ".opinion__list" element
 

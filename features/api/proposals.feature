@@ -132,6 +132,7 @@ Feature: Proposal Restful Api
     }
     """
 
+  @elasticsearch
   Scenario: Anonymous API client wants to get proposals from a ProposalForm with filters
     When I send a POST request to "/api/proposal_forms/1/proposals/search" with json:
     """

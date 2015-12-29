@@ -2,7 +2,7 @@ Feature: Proposals
 
   # See proposals with filters, sorting and search term
 
-  @javascript
+  @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a collect step and apply filters
     Given I am logged in as user
     And I visited "collect page" with:
@@ -16,7 +16,7 @@ Feature: Proposals
     And I should see "3 propositions"
     Then I should see 3 ".proposal__preview" elements
 
-  @javascript
+  @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a collect step and sort them
     Given I am logged in as user
     And I visited "collect page" with:
@@ -28,7 +28,7 @@ Feature: Proposals
     And I wait 1 seconds
     Then "Ravalement de la façade de la bibliothèque municipale" should be before "Rénovation du gymnase" for selector ".proposal__preview .proposal__title a"
 
-  @javascript
+  @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a collect step and search by term
     Given I am logged in as user
     And I visited "collect page" with:
@@ -46,7 +46,7 @@ Feature: Proposals
     And I should see "Rénovation du gymnase"
     And I should see "Installation de bancs sur la place de la mairie"
 
-  @javascript
+  @javascript @elasticsearch
   Scenario: Anonymous user combine search, filters and sorting on proposals
     Given I am logged in as user
     And I visited "collect page" with:
@@ -84,9 +84,9 @@ Feature: Proposals
     And I select "Justice" from "proposal_theme"
     And I select "Beaulieu" from "proposal_district"
     And I press "Publier"
-    And I wait 1 seconds
+    And I wait 2 seconds
     Then I should see "Merci ! Votre proposition a bien été créée."
-    #And I should see "5 propositions"
+    And I should see "5 propositions"
     And I should see "Nouvelle proposition créée"
 
   @javascript
@@ -171,7 +171,7 @@ Feature: Proposals
 
   # Reporting
 
-  @javascript @database
+  @javascript @database @fix
   Scenario: Logged in user wants to report a proposal
     Given feature "reporting" is enabled
     And I am logged in as user
@@ -179,7 +179,7 @@ Feature: Proposals
       | projectSlug      | budget-participatif-rennes                       |
       | stepSlug         | collecte-des-propositions                        |
       | proposalSlug     | installation-de-bancs-sur-la-place-de-la-mairie  |
-    And I wait 1 seconds
+    And I wait 2 seconds
     When I follow "Signaler"
     And I wait 1 seconds
     And I fill in the following:

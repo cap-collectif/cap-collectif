@@ -2,8 +2,6 @@ FROM debian:jessie
 
 MAINTAINER Aurélien David <adavid@jolicode.com>
 
-ENV DEBIAN_FRONTEND=noninteractive
-
 # Install basic
 RUN apt-get update && \
     apt-get install -y wget apt-transport-https curl cron imagemagick runit locales && \
@@ -17,7 +15,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install nginx and php mysqlclient
+# Install nginx, php and mysqlclient
 RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
     echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
     wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
@@ -25,9 +23,6 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
     apt-get install -y -qq mysql-client nginx php5-fpm php5-cli php5-curl php5-intl php5-mysql php5-xsl php5-redis php5-gd php5-imagick && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 # Install varnish
 RUN apt-get update && \
@@ -71,7 +66,7 @@ COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 VOLUME /var/www/var/cache
 VOLUME /var/www/var/logs
 
-# Volume for redis / elasticsearch ...
+# Volume for redis ...
 VOLUME /data
 
 WORKDIR /var/www

@@ -1,7 +1,7 @@
 from task import task
 from fabric.operations import local, run, settings
 from fabric.api import env
-
+import time
 
 @task(environments=['local', 'testing'])
 def checkcs():
@@ -28,17 +28,21 @@ def phpspec():
     env.service_command('./bin/phpspec run --no-code-generation', 'application', env.www_app)
 
 @task(environments=['local', 'testing'])
-def behat(fast_failure='true'):
+def behat(fast_failure='true', profile=False, tags='false'):
     "Run Gerhkin Tests"
     if not env.lxc:
         env.service_command('docker pull spyl94/capco-fixtures:latest', 'application')
-    #env.service_command('php -d memory_limit=-1 ./bin/behat -p api'+ ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
-    #env.service_command('php -d memory_limit=-1 ./bin/behat -p commands'+ ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
-    #env.service_command('php -d memory_limit=-1 ./bin/behat -p frontend' + ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
-#    kill_database_container()
-    #if not env.lxc:
-    #    clear_fixtures()
-    env.service_command('php -d memory_limit=-1 ./bin/behat -p javascript' + ('', '  --stop-on-failure')[fast_failure == 'true'], 'application', env.www_app)
+        env.compose('up -d --force-recreate database')
+        time.sleep(2)
+    env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
+    if profile:
+        jobs=[profile]
+    else:
+        jobs=['api', 'commands', 'frontend', 'javascript']
+
+    for job in jobs:
+        command='php ./bin/behat -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true']
+        env.service_command(command, 'application', env.www_app)
 
 @task(environments=['local'])
 def view():

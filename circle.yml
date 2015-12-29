@@ -15,19 +15,21 @@ dependencies:
     override:
         - mkdir -p $CIRCLE_TEST_REPORTS/junit/
         - pip install -q -r requirements.txt
+        - fab testing.circle.fix_environment_variables_with_lxc
         - fab testing.circle.load_cache
         - fab testing.circle.save_cache
+        - fab testing.infrastructure.up
         - fab testing.app.deploy
-        - fab testing.infrastructure.up && sleep 5
 
 test:
     override:
         - fab testing.qa.phpspec
-        - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' capcotest_application_1)" -- /bin/bash -c -l 'cd /var/www/ && su capco -c "curl --retry 10 --retry-delay 5 -v http://elasticsearch:9200"'
         - fab testing.qa.behat:fast_failure=false
         - fab testing.qa.checkcs
         - fab testing.qa.lint
-        - fab testing.infrastructure.logs
+    post:
+        - docker stop $(docker ps -a -q)
+        - fab testing.circle.save_logs
 
 deployment:
     preprod:

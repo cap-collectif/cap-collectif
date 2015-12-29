@@ -13,13 +13,13 @@ def build(use_cache='true'):
 
 
 @task
-def up():
+def up(force_recreate='false'):
     "Ensure infrastructure is sync and running"
     if env.boot2docker:
         ensure_dockermachine_up()
     if env.build_at_up:
         env.compose('build')
-    env.compose('up -d')
+    env.compose('up -d'+('', ' --force-recreate')[force_recreate == 'true'])
 
 
 @task

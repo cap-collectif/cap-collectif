@@ -22,7 +22,6 @@ $container->setParameter('mailer_user',                 set_var('mailer_user', '
 $container->setParameter('mailer_password',             set_var('mailer_password', '***REMOVED***'));
 $container->setParameter('mailer_host',                 set_var('mailer_host', '***REMOVED***'));
 $container->setParameter('mailer_port',                 set_var('mailer_port', 587));
-
 $container->setParameter('mailer_service_user',         set_var('mailer_service_user', 'maxime@cap-collectif.com'));
 $container->setParameter('mailer_service_password',     set_var('mailer_service_password', '***REMOVED***'));
 $container->setParameter('mailer_service_host',         set_var('mailer_service_host', '***REMOVED***'));

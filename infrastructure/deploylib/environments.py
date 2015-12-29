@@ -69,6 +69,8 @@ def locallinux():
 def ssh_into(service):
     if env.boot2docker:
         env.run('eval "$(docker-machine env capco)" && docker exec -t -i -u capco %s_%s_1 /bin/bash' % (env.project_name, service))
+    elif env.lxc:
+        print "Disabled in lxc environment."
     else:
         env.run('docker exec -t -i -u capco %s_%s_1 /bin/bash' % (env.project_name, service))
 

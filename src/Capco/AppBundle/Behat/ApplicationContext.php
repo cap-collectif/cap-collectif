@@ -13,30 +13,31 @@ use Docker\Docker;
 use Docker\Http\Client;
 use Docker\Container;
 use Docker\Exception\UnexpectedStatusCodeException;
+use Symfony\Component\Process\Process;
 
 class ApplicationContext extends UserContext
 {
     protected $headers;
 
-   // protected $dbContainer = null;
-
-    /**
-     * @BeforeSuite
-     */
-    public static function reinitDatabase()
-    {
-        exec('mysqldump --opt -h database -u root symfony > var/db.backup');
-    }
-
     /**
      * @BeforeScenario
      */
-    public function restartContainer()
+    public function reset($scope)
     {
         // Let's stick with the old way for now
-        exec('curl -XDELETE \'http://elasticsearch:9200/_all\'');
-        exec('mysql -h database -u root symfony < var/db.backup');
-        exec('php bin/console fos:elastica:populate -n');
+        $jobs = [
+            new Process('curl -sS -XDELETE \'http://elasticsearch:9200/_all\''),
+            new Process('mysql -h database -u root symfony < var/db.backup'),
+            new Process('redis-cli FLUSHALL'),
+        ];
+
+        $scenario = $scope->getScenario();
+        if ($scenario->hasTag('elasticsearch')) {
+            $jobs[] = new Process('php bin/console fos:elastica:populate -n');
+        }
+        foreach ($jobs as $job) {
+            $job->mustRun();
+        }
 
         /*
         $docker = new Docker(new Client('unix:///run/docker.sock'));
@@ -63,14 +64,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @BeforeScenario @elasticsearch
-     */
-    public static function populateElasticsearch()
-    {
-        // exec('php bin/console fos:elastica:populate -n');
-    }
-
-    /**
      * @AfterScenario @javascript
      */
     public function clearLocalStorage()
@@ -78,13 +71,13 @@ class ApplicationContext extends UserContext
         $this->getSession()->getDriver()->evaluateScript('localStorage.clear();');
     }
 
-    /**
-     * @AfterSuite
-     */
-    public static function reinitFeatures()
-    {
-        exec('php bin/console capco:reset-feature-flags --force');
-    }
+    // /**
+    //  * @AfterSuite
+    //  */
+    // public static function reinitFeatures()
+    // {
+    //     exec('php bin/console capco:reset-feature-flags --force');
+    // }
 
     // /**
     //  * @AfterSuite
