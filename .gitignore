@@ -17,6 +17,7 @@
 
 # infra
 infrastructure/environments/current.yml
+infrastructure/services/databasefixtures/dump.sql
 
 *.log
 .eslintcache

@@ -4,12 +4,12 @@ Background:
   Given feature "blog" is enabled
 
 Scenario: Anonymous wants to list published posts
-  Given I visited "blog page"
+  And I visited "blog page"
   Then I should see 8 ".media--news" elements
 
 @javascript @elasticsearch
 Scenario: Posts can be filtered by projects
-  Given I visited "blog page"
+  And I visited "blog page"
   And I select "Croissance, innovation, disruption" from "capco_app_search_blog_project"
   Then I should see 5 ".media--news" elements
   And I should see "Post 5"
@@ -17,7 +17,7 @@ Scenario: Posts can be filtered by projects
 
 @javascript @elasticsearch
 Scenario: Post can be filtered by theme
-  Given feature "themes" is enabled
+  And feature "themes" is enabled
   And I visited "blog page"
   And I select "Justice" from "capco_app_search_blog_theme"
   Then I should see 3 ".media--news" elements
@@ -26,7 +26,7 @@ Scenario: Post can be filtered by theme
 
 @database @javascript
 Scenario: Anonymous wants to comment a blogpost
-  Given I visited "blog article page" with:
+  And I visited "blog article page" with:
     | articleSlug | post-2 |
   And I wait 1 seconds
   And I fill in the following:
@@ -40,7 +40,7 @@ Scenario: Anonymous wants to comment a blogpost
 
 @database @javascript
 Scenario: Logged in user wants to comment a blogpost
-  Given I am logged in as user
+  And I am logged in as user
   And I visited "blog article page" with:
     | articleSlug | post-2 |
   And I wait 1 seconds
@@ -49,12 +49,12 @@ Scenario: Logged in user wants to comment a blogpost
   And I should not see "Commenter avec mon compte"
   And I should not see "Commenter sans créer de compte"
   When I press "Commenter"
-  And I wait 1 seconds
+  And I wait 2 seconds
   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
 @javascript
 Scenario: Anonymous wants to comment a blogpost without email
-  Given I visited "blog article page" with:
+  And I visited "blog article page" with:
     | articleSlug | post-2 |
   And I wait 1 seconds
   And I fill in the following:

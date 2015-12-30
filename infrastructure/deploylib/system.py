@@ -69,6 +69,8 @@ def configure_vhosts():
 
     domains = [
         'capco.dev',
+        'capco.prod',
+        'capco.test',
     ]
 
     for domain in domains:

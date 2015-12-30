@@ -8,11 +8,7 @@ application:
 
 database:
     ports:
-        - 3306
-
-#firefox:
-#  ports:
-#   - "5900:5900"
+        - "3306:3306"
 
 chrome:
    ports:
@@ -24,6 +20,8 @@ chrome:
 #   links:
 #     - seleniumhub:hub
 #     - application:application
+#   ports:
+#     - "5901:5900"
 
 # Used to generate spyl94/capco-fixtures
 databasefixtures:

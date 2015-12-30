@@ -16,6 +16,7 @@ $container->setParameter('database_user',               set_var('database_user',
 $container->setParameter('database_password', null);
 
 $container->setParameter('elasticsearch_host',          set_var('elasticsearch_host', '127.0.0.1'));
+$container->setParameter('redis_host',                  set_var('redis_host', '127.0.0.1'));
 
 $container->setParameter('mailer_transport',            set_var('mailer_transport', 'smtp'));
 $container->setParameter('mailer_user',                 set_var('mailer_user', 'maxime@cap-collectif.com'));
@@ -39,7 +40,6 @@ $container->setParameter('twitter_app_secret',          set_var('twitter_app_sec
 $container->setParameter('nous_citoyens_app_id',        set_var('nous_citoyens_app_id', 'xxx'));
 $container->setParameter('nous_citoyens_app_secret',    set_var('nous_citoyens_app_secret', 'xxx'));
 
-$container->setParameter('redis_prefix',                set_var('redis_prefix', 'capco'));
 $container->setParameter('shield_login',                set_var('shield_login', '***REMOVED***'));
 $container->setParameter('shield_pwd',                  set_var('shield_pwd', '***REMOVED***'));
 

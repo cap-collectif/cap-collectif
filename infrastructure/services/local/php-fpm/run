@@ -12,17 +12,25 @@ fi
 mkdir -m 777 -p /var/www/var
 chown -R capco:capco /var/www/var
 
-echo "Checking if mysql is booted..."
-
 function test_mysqldatabase {
-  mysql --host=${SYMFONY_DATABASE_HOST} -uroot symfony > /dev/null
+  mysql -h "${SYMFONY_DATABASE_HOST}" -uroot symfony > /dev/null
 }
 
-# Wait till mysql and php-fpm are ready
-until ( test_mysqldatabase )
+function test_redis {
+  redis-cli -h "${SYMFONY_REDIS_HOST}" PING > /dev/null
+}
+
+# Wait till mysql and redis are ready
+count=0
+until ( test_mysqldatabase && test_redis )
 do
+  ((count++))
+  if [ ${count} -gt 50 ]; then
+    echo "Mysql and redis didn't become ready in time"
+    exit 1
+  fi
   sleep 0.1
-  echo "Waiting mysql to boot..."
+  echo "Waiting"
 done
 
 exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O

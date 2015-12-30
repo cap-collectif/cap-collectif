@@ -18,6 +18,7 @@ use Symfony\Component\Process\Process;
 class ApplicationContext extends UserContext
 {
     protected $headers;
+    protected $dbContainer;
 
     /**
      * @BeforeScenario
@@ -27,8 +28,10 @@ class ApplicationContext extends UserContext
         // Let's stick with the old way for now
         $jobs = [
             new Process('curl -sS -XDELETE \'http://elasticsearch:9200/_all\''),
+            new Process('curl -XBAN http://capco.prod/'),
+            // new Process('varnishadm -T 127.0.0.1:6082')
             new Process('mysql -h database -u root symfony < var/db.backup'),
-            new Process('redis-cli FLUSHALL'),
+            new Process('redis-cli -h redis FLUSHALL'),
         ];
 
         $scenario = $scope->getScenario();
@@ -39,28 +42,26 @@ class ApplicationContext extends UserContext
             $job->mustRun();
         }
 
-        /*
+    }
+
+    public function resetUsingDocker()
+    {
         $docker = new Docker(new Client('unix:///run/docker.sock'));
         $manager = $docker->getContainerManager();
 
         if (null !== $this->dbContainer && $this->dbContainer->exists()) {
             try {
-                // echo "Killing previous fixtures image...\n";
                 $manager->stop($this->dbContainer)->remove($this->dbContainer, true, true);
             } catch (UnexpectedStatusCodeException $e) {
                 if (!strpos($e->getMessage(), "Driver btrfs failed to remove root filesystem")) {
                     throw $e;
                 }
-                // We don't care about that error which happen only on Circle-CI
+                // We don't care about this error that happen only because of Circle-CI bad support of Docker
             }
         }
 
-        // echo "Starting new fixtures image...\n";
-        $this->dbContainer = new Container([
-            'Image' => 'spyl94/capco-fixtures',
-        ]);
+        $this->dbContainer = new Container(['Image' => 'spyl94/capco-fixtures']);
         $manager->create($this->dbContainer)->start($this->dbContainer);
-        */
     }
 
     /**
@@ -71,43 +72,35 @@ class ApplicationContext extends UserContext
         $this->getSession()->getDriver()->evaluateScript('localStorage.clear();');
     }
 
-    // /**
-    //  * @AfterSuite
-    //  */
-    // public static function reinitFeatures()
-    // {
-    //     exec('php bin/console capco:reset-feature-flags --force');
-    // }
-
-    // /**
-    //  * @AfterSuite
-    //  * @param $suiteScope
-    //  */
-    // public static function notifiyEnd(AfterSuiteScope $suiteScope)
-    // {
-    //     $suiteName = $suiteScope->getSuite()->getName();
-    //     $resultCode = $suiteScope->getTestResult()->getResultCode();
-    //     if ($notifier = NotifierFactory::create()) {
-    //         $notification = new Notification();
-    //         if ($resultCode === TestResult::PASSED) {
-    //             $notification
-    //                 ->setTitle('Behat suite ended successfully')
-    //                 ->setBody('Suite "'.$suiteName.'" has ended without errors (for once). Congrats !')
-    //             ;
-    //         } elseif ($resultCode === TestResult::SKIPPED) {
-    //             $notification
-    //                 ->setTitle('Behat suite ended with skipped steps')
-    //                 ->setBody('Suite "'.$suiteName.'" has ended successfully but some steps have been skipped.')
-    //             ;
-    //         } else {
-    //             $notification
-    //                 ->setTitle('Behat suite ended with errors')
-    //                 ->setBody('Suite "'.$suiteName.'" has ended with errors. Go check it out you moron !')
-    //             ;
-    //         }
-    //         $notifier->send($notification);
-    //     }
-    // }
+    /**
+     * @AfterSuite
+     * @param $suiteScope
+     */
+    public static function notifiyEnd(AfterSuiteScope $suiteScope)
+    {
+        $suiteName = $suiteScope->getSuite()->getName();
+        $resultCode = $suiteScope->getTestResult()->getResultCode();
+        if ($notifier = NotifierFactory::create()) {
+            $notification = new Notification();
+            if ($resultCode === TestResult::PASSED) {
+                $notification
+                    ->setTitle('Behat suite ended successfully')
+                    ->setBody('Suite "'.$suiteName.'" has ended without errors (for once). Congrats !')
+                ;
+            } elseif ($resultCode === TestResult::SKIPPED) {
+                $notification
+                    ->setTitle('Behat suite ended with skipped steps')
+                    ->setBody('Suite "'.$suiteName.'" has ended successfully but some steps have been skipped.')
+                ;
+            } else {
+                $notification
+                    ->setTitle('Behat suite ended with errors')
+                    ->setBody('Suite "'.$suiteName.'" has ended with errors. Go check it out you moron !')
+                ;
+            }
+            $notifier->send($notification);
+        }
+    }
 
     /**
      * @Given all features are enabled
@@ -124,6 +117,15 @@ class ApplicationContext extends UserContext
     {
         $this->getService('capco.toggle.manager')->activate($feature);
     }
+
+    /**
+     * @When I print html
+     */
+    public function printHtml()
+    {
+        echo $this->getSession()->getPage()->getHtml();
+    }
+
 
     /**
      * @When I submit a :type argument with text :text

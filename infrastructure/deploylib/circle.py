@@ -9,8 +9,10 @@ def fix_environment_variables_with_lxc():
     with open('app/config/parameters.yml', 'w') as yaml_file:
         yaml_file.write(yaml.dump({
             'parameters': {
+                'mailer_host': 'mailcatchersmtp',
                 'database_host': 'database',
                 'elasticsearch_host': 'elasticsearch',
+                'redis_host': 'redis',
             }
         }, default_flow_style=False))
 
@@ -23,12 +25,16 @@ def load_cache():
     local('/bin/bash -c "if [[ -e ~/docker/capcotest_seleniumhub.tar ]]; then docker load -i ~/docker/capcotest_seleniumhub.tar; fi"')
     local('/bin/bash -c "if [[ -e ~/docker/capcotest_chrome.tar ]]; then docker load -i ~/docker/capcotest_chrome.tar; fi"')
     local('/bin/bash -c "if [[ -e ~/docker/capcotest_mailcacher.tar ]]; then docker load -i ~/docker/capcotest_mailcacher.tar; fi"')
+    local('/bin/bash -c "if [[ -e ~/docker/capcotest_elasticsearch.tar ]]; then docker load -i ~/docker/capcotest_elasticsearch.tar; fi"')
+    local('/bin/bash -c "if [[ -e ~/docker/capcotest_redis.tar ]]; then docker load -i ~/docker/capcotest_redis.tar; fi"')
 
 @task(environments=['testing'])
 def save_logs():
     "Save logs"
     local('docker logs capcotest_application_1 > $CIRCLE_TEST_REPORTS/application.log')
     local('docker logs capcotest_builder_1 > $CIRCLE_TEST_REPORTS/builder.log')
+    local('docker logs capcotest_elasticsearch_1 > $CIRCLE_TEST_REPORTS/elasticsearch.log')
+
 
 @task(environments=['local'])
 def save_fixtures_image(tag='latest'):
@@ -71,6 +77,7 @@ def save_cache():
     if change_in_infrastructure:
         env.compose('build')
         local('docker pull elasticsearch:1.7.3')
+        local('docker pull redis:3')
         local('docker pull selenium/hub:2.47.1')
         local('docker pull selenium/node-chrome-debug:latest')
         local('docker pull jderusse/mailcatcher:latest')
@@ -79,6 +86,7 @@ def save_cache():
         local('docker save capcotest_applicationdata > ~/docker/capcotest_applicationdata.tar')
         local('docker save capcotest_builder > ~/docker/capcotest_builder.tar')
         local('docker save elasticsearch > ~/docker/capcotest_elasticsearch.tar')
+        local('docker save redis > ~/docker/capcotest_redis.tar')
         local('docker save selenium/hub > ~/docker/capcotest_seleniumhub.tar')
         local('docker save selenium/node-chrome-debug > ~/docker/capcotest_chrome.tar')
         local('docker save jderusse/mailcatcher > ~/docker/capcotest_mailcacher.tar')

@@ -1,13 +1,5 @@
 ##### Spécifiques à Linux
 
-## Automatique
-
-```
-$ fab local.system.linux_docker_install
-```
-
-## Manuelle
-
 Installez [docker](https://docs.docker.com/installation) et [docker-compose](https://docs.docker.com/compose/install/).
 
 

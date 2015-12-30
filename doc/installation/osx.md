@@ -1,15 +1,4 @@
-
 # Spécifiques à OSX
-
-## Automatique
-
-```
-$ fab local.system.macos_install
-$ fab local.system.macos_mountnfs
-$ fab local.system.configure_vhosts
-```
-
-## Manuelle
 
 ```
 # installer docker toolbox

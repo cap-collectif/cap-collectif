@@ -36,12 +36,12 @@ snc_redis:
         default:
             type: predis
             alias: default
-            dsn: redis://localhost
+            dsn: redis://%redis_host%
             logging: %kernel.debug%
         session:
             type: predis
             alias: session
-            dsn: redis://localhost
+            dsn: redis://%redis_host%
     session:
         client: session
         ttl: 3600
@@ -103,14 +103,12 @@ swiftmailer:
     default_mailer: default
     mailers:
         default:
-            disable_delivery: true
             transport: "%mailer_transport%"
             host: "%mailer_host%"
             port: "%mailer_port%"
             username: "%mailer_user%"
             password: "%mailer_password%"
         service:
-            disable_delivery: true
             transport: "%mailer_transport%"
             host: "%mailer_service_host%"
             port: "%mailer_port%"
@@ -202,7 +200,7 @@ qandidate_toggle:
     persistence: redis
     context_factory: null
     redis_namespace: feature_toggle # default, only required when persistence = redis
-    redis_client: capco.predis.client # only required when persistence = redis
+    redis_client: snc_redis.default # only required when persistence = redis
 
 ivory_ck_editor:
     base_path: 'js/ckeditor/'

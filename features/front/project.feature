@@ -4,7 +4,7 @@ Feature: Project
     Given I visited "projects page"
     Then I should not see "capco_app_search_project"
 
-  @javascript @elasticsearch
+  @javascript @elasticsearch @circle
   Scenario: Project can be sorted by published date
     Given feature "projects_form" is enabled
     And I visited "projects page"
@@ -12,7 +12,7 @@ Feature: Project
     And I wait 1 seconds
     Then "Projet vide" should be before "Croissance, innovation, disruption" for selector ".thumbnail--custom .figcaption h2 a "
 
-  @javascript @elasticsearch
+  @javascript @elasticsearch @circle
   Scenario: Project can be sorted by contributions number
     Given feature "projects_form" is enabled
     And I visited "projects page"
@@ -20,7 +20,7 @@ Feature: Project
     And I wait 1 seconds
     Then "Croissance, innovation, disruption" should be before "Projet vide" for selector ".thumbnail--custom .figcaption h2 a "
 
-  @javascript
+  @javascript @circle
   Scenario: Project can be filtered by theme
     Given feature "themes" is enabled
     And feature "projects_form" is enabled
@@ -32,7 +32,7 @@ Feature: Project
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"
 
-  @javascript
+  @javascript @circle
   Scenario: Project can be filtered by theme and sorted by contributions number at the same time
     Given feature "themes" is enabled
     And feature "projects_form" is enabled
@@ -47,7 +47,7 @@ Feature: Project
     And I should not see "Croissance, innovation, disruption"
     And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".thumbnail--custom .figcaption h2 a "
 
-  @javascript
+  @javascript @circle
   Scenario: Project can be filtered by title
     Given feature "projects_form" is enabled
     And I visited "projects page"
@@ -117,16 +117,19 @@ Feature: Project
       | stepSlug    | collecte-des-avis                |
     Then I should see "22 participants"
 
+  @javascript
   Scenario: Can download a project in xslx format
     Given I visited "home page"
     When I try to download "projects/croissance-innovation-disruption/consultation/collecte-des-avis/download/xlsx"
     Then I should see in the header "Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
+  @javascript
   Scenario: Can download a project in csv format
     Given I visited "home page"
     When I try to download "projects/croissance-innovation-disruption/consultation/collecte-des-avis/download/csv"
     Then I should see in the header "Content-Type: text/csv; charset=UTF-8"
 
+  @javascript
   Scenario: Can download a project in xls format
     Given I visited "home page"
     When I try to download "projects/croissance-innovation-disruption/consultation/collecte-des-avis/download/xls"
@@ -138,6 +141,7 @@ Feature: Project
       | stepSlug      | collecte-des-avis-pour-une-meilleur-strategie         |
     Then I should not see "Exporter"
 
+  @javascript
   Scenario: Can not download a project if export is disabled
     Given I visited "home page"
     When I try to download "projets/strategie-technologique-de-l-etat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download/xls"

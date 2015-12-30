@@ -35,7 +35,7 @@ services:
   ## Toggle
   capco.toggle.manager:
     class:     %capco.toggle.manager.class%
-    arguments: [@qandidate.toggle.manager, @qandidate.toggle.user_context_factory, "%redis_prefix%" ]
+    arguments: [@qandidate.toggle.manager, @qandidate.toggle.user_context_factory ]
 
   capco.event.helper:
     class: Capco\AppBundle\Helper\EventHelper

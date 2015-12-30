@@ -9,7 +9,7 @@ dependencies:
     cache_directories:
         - ~/docker
         - bower_components
-        #- node_modules
+        - node_modules
         - ~/.composer
         - ~/.bower
     override:
@@ -19,7 +19,7 @@ dependencies:
         - fab testing.circle.load_cache
         - fab testing.circle.save_cache
         - fab testing.infrastructure.up
-        - fab testing.app.deploy
+        - fab testing.app.deploy:environment=test
 
 test:
     override:
@@ -28,6 +28,7 @@ test:
         - fab testing.qa.checkcs
         - fab testing.qa.lint
     post:
+        - docker ps
         - docker stop $(docker ps -a -q)
         - fab testing.circle.save_logs
 

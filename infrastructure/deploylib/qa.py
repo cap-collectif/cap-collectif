@@ -28,7 +28,7 @@ def phpspec():
     env.service_command('./bin/phpspec run --no-code-generation', 'application', env.www_app)
 
 @task(environments=['local', 'testing'])
-def behat(fast_failure='true', profile=False, tags='false'):
+def behat(fast_failure='true', profile=False, tags='false', feature='false'):
     "Run Gerhkin Tests"
     if not env.lxc:
         env.service_command('docker pull spyl94/capco-fixtures:latest', 'application')
@@ -41,12 +41,12 @@ def behat(fast_failure='true', profile=False, tags='false'):
         jobs=['api', 'commands', 'frontend', 'javascript']
 
     for job in jobs:
-        command='php ./bin/behat -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true']
+        command='php -d memory_limit=-1 ./bin/behat -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'] + ('', ' --name ' + feature)[feature != 'false']
         env.service_command(command, 'application', env.www_app)
 
 @task(environments=['local'])
-def view():
-  local('echo "secret" | open vnc://`docker-machine ip capco`::5900')
+def view(port='5900'):
+  local('echo "secret" | open vnc://`docker-machine ip capco`::' + port)
 
 @task(environments=['local'])
 def clear_fixtures():
@@ -62,7 +62,7 @@ def kill_database_container():
 @task(environments=['local'])
 def save_fixtures_image(tag='latest'):
     "Publish a new fixtures image"
-    env.service_command('php bin/console capco:reinit --force', 'application', env.www_app)
+    env.service_command('php bin/console capco:reinit --force --no-toggles', 'application', env.www_app)
     env.service_command('mysqldump -h database -uroot --opt symfony > infrastructure/services/databasefixtures/dump.sql', 'application', env.www_app, 'root')
     env.compose('build databasefixtures')
     image_id = local('docker images | grep capco_databasefixtures | awk \'{print $3}\'', capture=True)

@@ -5,9 +5,6 @@ from fabric.api import env
 def generate():
     "Generate database"
     env.service_command('php bin/console capco:reinit --force', 'application', env.www_app)
-    #env.service_command('php bin/console doctrine:database:drop --force --if-exists || echo ""', 'application', env.www_app)
-    #env.service_command('php bin/console doctrine:database:create', 'application', env.www_app)
-    #env.service_command('php bin/console doctrine:schema:create', 'application', env.www_app)
 
 @task(environments=['local'])
 def mysqlconsole():

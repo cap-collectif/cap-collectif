@@ -6,11 +6,13 @@ application:
         SYMFONY_MAILER_HOST: mailcatchersmtp
         SYMFONY_DATABASE_HOST: database
         SYMFONY_ELASTICSEARCH_HOST: elasticsearch
+        SYMFONY_REDIS_HOST: redis
     volumes_from:
         - applicationdata
     links:
         - database:database
         - elasticsearch:elasticsearch
+        - redis:redis
         - seleniumhub:selenium
         - mailcatcher:mailcatchersmtp
 
@@ -26,8 +28,11 @@ database:
 
 elasticsearch:
     image: elasticsearch:1.7.3
-    # volumes:
-        # - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
+    volumes:
+        - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
+
+redis:
+    image: redis:3
 
 builder:
     build: ../services/builder
@@ -50,5 +55,5 @@ chrome:
    image: selenium/node-chrome-debug:latest
    links:
      - seleniumhub:hub
-     - application:application
+     - application:capco.prod
 
