@@ -13,7 +13,7 @@ use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use FOS\UserBundle\Mailer\MailerInterface;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
-use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class Notify implements MailerInterface
 {
