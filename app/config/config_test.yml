@@ -3,8 +3,8 @@ imports:
 
 framework:
   test: ~
-  session:
-    storage_id: session.storage.mock_file
+  # session:
+  #   storage_id: session.storage.mock_file
   profiler:
     collect: false
 
@@ -25,3 +25,7 @@ monolog:
             type:   stream
             path:   php://stderr
             level:  warning
+        file:
+            type: stream
+            path: %kernel.logs_dir%/test.log
+            level: debug

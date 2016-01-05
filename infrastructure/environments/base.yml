@@ -55,5 +55,5 @@ chrome:
    image: selenium/node-chrome-debug:latest
    links:
      - seleniumhub:hub
-     - application:capco.prod
+     - application:capco.test
 

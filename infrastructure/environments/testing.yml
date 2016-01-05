@@ -5,3 +5,5 @@ application:
         - ../../:/var/www
         - /var/run/docker.sock:/run/docker.sock:ro
         - /usr/bin/docker:/usr/bin/docker
+    extra_hosts:
+        - "capco.test:0.0.0.0"

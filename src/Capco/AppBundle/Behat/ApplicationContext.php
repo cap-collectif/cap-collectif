@@ -28,7 +28,7 @@ class ApplicationContext extends UserContext
         // Let's stick with the old way for now
         $jobs = [
             new Process('curl -sS -XDELETE \'http://elasticsearch:9200/_all\''),
-            new Process('curl -XBAN http://capco.prod/'),
+            new Process('curl -sS -XBAN http://capco.test/'),
             new Process('mysql -h database -u root symfony < var/db.backup'),
             new Process('redis-cli -h redis FLUSHALL'),
         ];

@@ -37,13 +37,13 @@ javascript:
             url: http://mailcatchersmtp
         Behat\Symfony2Extension:
             kernel:
-                env: prod
+                env: test
                 debug: false
         SensioLabs\Behat\PageObjectExtension:
             namespaces:
                 page: [ Capco\AppBundle\Behat\Page ]
         Behat\MinkExtension:
-            base_url: 'http://capco.prod/'
+            base_url: 'http://capco.test/'
             # browser_name: firefox
             browser_name: chrome
             sessions:

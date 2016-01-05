@@ -12,7 +12,7 @@ class NavigationContext extends PageObjectContext
      */
     public function iGoOnTheSourcesTab()
     {
-        sleep(1);
+        sleep(2);
         $this->getPage('opinion page')->clickSourcesTab();
     }
 
@@ -29,7 +29,7 @@ class NavigationContext extends PageObjectContext
      */
     public function iGoOnTheConnectionsTab()
     {
-        sleep(1);
+        sleep(2);
         $this->getPage('opinion page')->clickConnectionsTab();
     }
 

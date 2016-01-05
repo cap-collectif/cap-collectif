@@ -180,7 +180,7 @@ Feature: Proposals
       | projectSlug      | budget-participatif-rennes                       |
       | stepSlug         | collecte-des-propositions                        |
       | proposalSlug     | installation-de-bancs-sur-la-place-de-la-mairie  |
-    And I wait 2 seconds
+    And I wait 4 seconds
     When I follow "Signaler"
     And I wait 1 seconds
     And I fill in the following:
