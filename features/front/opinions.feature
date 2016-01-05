@@ -38,7 +38,7 @@ Feature: Opinions
     When I follow "btn-add--les-causes-1"
     Then I should see "Connection form" on "login page"
 
-  @javascript @database @fix
+  @javascript @database
   Scenario: Logged in user can report an opinion
     Given feature "reporting" is enabled
     And I am logged in as user
@@ -47,7 +47,7 @@ Feature: Opinions
       | stepSlug         | collecte-des-avis                |
       | opinionTypeSlug  | solutions                        |
       | opinionSlug      | opinion-5                        |
-    And I wait 2 seconds
+    And I wait 4 seconds
     When I follow "Signaler"
     And I wait 1 seconds
     And I fill in the following:

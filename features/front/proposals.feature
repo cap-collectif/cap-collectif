@@ -172,7 +172,7 @@ Feature: Proposals
 
   # Reporting
 
-  @javascript @database @fix
+  @javascript @database @circle
   Scenario: Logged in user wants to report a proposal
     Given feature "reporting" is enabled
     And I am logged in as user

@@ -145,7 +145,7 @@ Feature: Project
   Scenario: Can not download a project if export is disabled
     Given I visited "home page"
     When I try to download "projets/strategie-technologique-de-l-etat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
-    Then I should see response status code "404"
+    Then I should see "Désolé, cette page n'existe pas (404)"
 
   Scenario: Can not access trash if feature is disabled
     Given I am logged in as user

@@ -95,7 +95,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
 
   ## Add a comment
 
-  @database @javascript
+  @database @javascript @circle
   Scenario: Anonymous wants to comment an idea
     Given I visited "idea page" with:
      | slug | ideacommentable |
@@ -108,10 +108,10 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
       | authorName  | Naruto              |
       | authorEmail | naruto72@gmail.com  |
     When I press "Commenter"
-    And I wait 2 seconds
+    And I wait 5 seconds
     Then I should see "J'ai un truc à dire de la part de Naruto" in the ".opinion__list" element
 
-  @database @javascript
+  @database @javascript @circle
   Scenario: Logged in user wants to comment an idea
     Given I am logged in as user
     Given I visited "idea page" with:
@@ -122,7 +122,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
     And I should not see "Commenter avec mon compte"
     And I should not see "Commenter sans créer de compte"
     When I press "Commenter"
-    And I wait 2 seconds
+    And I wait 5 seconds
     Then I should see "J'ai un truc à dire avec mon compte" in the ".opinion__list" element
 
   @database @javascript

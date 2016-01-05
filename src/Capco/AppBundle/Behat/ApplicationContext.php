@@ -29,7 +29,6 @@ class ApplicationContext extends UserContext
         $jobs = [
             new Process('curl -sS -XDELETE \'http://elasticsearch:9200/_all\''),
             new Process('curl -XBAN http://capco.prod/'),
-            // new Process('varnishadm -T 127.0.0.1:6082')
             new Process('mysql -h database -u root symfony < var/db.backup'),
             new Process('redis-cli -h redis FLUSHALL'),
         ];
@@ -46,6 +45,10 @@ class ApplicationContext extends UserContext
 
     public function resetUsingDocker()
     {
+        // This is the real docker way, but not that easy
+        // We need to use something like https://github.com/jwilder/nginx-proxy
+        // To reload containers, because we can't do reload on runtime with links
+        // So we have to make sure it's supported on Circle-CI...
         $docker = new Docker(new Client('unix:///run/docker.sock'));
         $manager = $docker->getContainerManager();
 
@@ -60,7 +63,7 @@ class ApplicationContext extends UserContext
             }
         }
 
-        $this->dbContainer = new Container(['Image' => 'spyl94/capco-fixtures']);
+        $this->dbContainer = new Container(['Image' => 'capco/fixtures']);
         $manager->create($this->dbContainer)->start($this->dbContainer);
     }
 
@@ -242,6 +245,7 @@ class ApplicationContext extends UserContext
     {
         $url = $this->getSession()->getCurrentUrl().$path;
         $this->headers = get_headers($url);
+        $this->getSession()->visit($url);
     }
 
     /**

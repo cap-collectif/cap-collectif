@@ -24,7 +24,7 @@ applicationdata:
         - /var/www/var/logs
 
 database:
-    image: spyl94/capco-fixtures:latest
+    image: capco/fixtures:latest
 
 elasticsearch:
     image: elasticsearch:1.7.3

@@ -27,11 +27,13 @@ Background:
 #   And I wait 1 seconds
 #   And "Coucou !..." should be before "Coucou coucou coucou coucou coucou coucou...." for selector ".search__results .search-result__preview"
 
-@javascript @elasticsearch @fix
+@javascript @elasticsearch @circle
 Scenario: Anonymous wants to search in members
   Given I visited "search page"
   When I fill in the following:
     | q_term | sfavot |
-  #And I click the "#q_type .radio:nth-child(9) label" element
-  #And I wait 1 seconds
-  #Then I should see "1 résultat" in the ".search__results-nb" element
+  And I click the "#q_type .radio:nth-child(8) label" element
+  And I wait 1 seconds
+  Then I should see "1 résultat" in the ".search__results-nb" element
+  And I should see "sfavot" in the ".search__results" element
+

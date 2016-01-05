@@ -3,6 +3,12 @@ from fabric.operations import local, run, settings
 from fabric.api import env
 import time
 
+capcobot = {
+    'user': 'capco',
+    'email': 'capco.bot@gmail.com',
+    'pass': 'elephpant-can-fly',
+}
+
 @task(environments=['local', 'testing'])
 def checkcs():
     "Check code style"
@@ -28,7 +34,7 @@ def phpspec():
 def behat(fast_failure='true', profile=False, tags='false', feature='false'):
     "Run Gerhkin Tests"
     if not env.lxc:
-        env.service_command('docker pull spyl94/capco-fixtures:latest', 'application')
+        env.service_command('docker pull capco/fixtures:latest', 'application')
         env.compose('up -d --force-recreate database')
         time.sleep(2)
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
@@ -47,7 +53,7 @@ def view(port='5900'):
 
 @task(environments=['local'])
 def clear_fixtures():
-    local('docker ps -a | awk \'{ print $1,$2 }\' | grep spyl94/capco | awk \'{print $1 }\' | xargs -I {} docker rm -f {}')
+    local('docker ps -a | awk \'{ print $1,$2 }\' | grep capco/fixtures | awk \'{print $1 }\' | xargs -I {} docker rm -f {}')
 
 @task(environments=['local'])
 def kill_database_container():
@@ -63,9 +69,9 @@ def save_fixtures_image(tag='latest'):
     env.service_command('mysqldump -h database -uroot --opt symfony > infrastructure/services/databasefixtures/dump.sql', 'application', env.www_app, 'root')
     env.compose('build databasefixtures')
     image_id = local('docker images | grep capco_databasefixtures | awk \'{print $3}\'', capture=True)
-    local('docker tag -f '+ image_id +' spyl94/capco-fixtures:'+tag)
-    local('docker login --username=spyl94')
-    local('docker push spyl94/capco-fixtures')
+    local('docker tag -f '+ image_id +' capco/fixtures:' + tag)
+    local('docker login -e ' + capcobot['email'] + ' -u ' + capcobot['user'] + ' -p ' + capcobot['pass'])
+    local('docker push capco/fixtures')
 
 @task(environments=['local'])
 def setup_git_hooks():
