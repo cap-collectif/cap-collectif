@@ -26,7 +26,6 @@ test:
         - fab testing.qa.phpspec
         - fab testing.qa.behat:fast_failure=false
         - fab testing.qa.checkcs
-        - fab testing.qa.lint
     post:
         - docker ps
         - docker stop $(docker ps -a -q)

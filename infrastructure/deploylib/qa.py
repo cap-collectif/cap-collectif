@@ -7,7 +7,9 @@ import time
 def checkcs():
     "Check code style"
     env.compose_run('php-cs-fixer fix --level=symfony --dry-run --diff src || echo ""', 'builder', '.', no_deps=True)
+    env.service_command('npm run lint', 'application', env.www_app)
     local('pep8 infrastructure/deploylib --ignore=E501')
+    env.service_command('php bin/console lint:twig app/', 'application', env.www_app)
 
 @task(environments=['local'])
 def fix_cs_file(file, dry_run=False):
@@ -16,11 +18,6 @@ def fix_cs_file(file, dry_run=False):
         env.compose_run('php-cs-fixer fix --config-file=.php_cs --dry-run --diff %s' % file, 'builder', 'capco', no_deps=True)
     else:
         env.compose_run('php-cs-fixer fix --config-file=.php_cs %s' % file, 'builder', 'capco', no_deps=True)
-
-@task(environments=['local', 'testing'])
-def lint():
-    "Lint twig and yaml files"
-    env.service_command('php bin/console lint:twig app/', 'application', env.www_app)
 
 @task(environments=['local', 'testing'])
 def phpspec():
