@@ -87,7 +87,7 @@ Scenario: Anonymous wants to comment an event
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
   When I press "Commenter"
-  And I wait 1 seconds
+  And I wait 2 seconds
   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
 @database @javascript
@@ -101,7 +101,7 @@ Scenario: Logged in user wants to comment an event
   And I should not see "Commenter avec mon compte"
   And I should not see "Commenter sans créer de compte"
   When I press "Commenter"
-  And I wait 1 seconds
+  And I wait 2 seconds
   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
 @javascript
@@ -114,5 +114,5 @@ Scenario: Anonymous wants to comment an event without email
   And I fill in the following:
     | authorName  | Naruto              |
   When I press "Commenter"
-  And I wait 1 seconds
+  And I wait 2 seconds
   Then I should not see "J'ai un truc à dire" in the ".opinion__list" element

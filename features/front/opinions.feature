@@ -112,7 +112,7 @@ Feature: Opinions
       | stepSlug         | elaboration-de-la-loi                     |
       | opinionTypeSlug  | section-1-ouverture-des-donnees-publiques |
       | opinionSlug      | article-1                                 |
-    And I wait 1 seconds
+    And I wait 2 seconds
     Then I should see "0 proposition liée"
     When I go on the connections tab
     And I press "Ajouter une proposition liée"

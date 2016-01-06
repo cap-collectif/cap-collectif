@@ -1,10 +1,11 @@
 {
   "name": "cap-collectif-SF2",
-  "version": "0.0.1",
+  "private": true,
+  "version": "0.1.0",
   "description": "Cap-Collectif version Symfony2",
   "main": "brunch-config.js",
   "scripts": {
-    "checkcs": "./node_modules/eslint/bin/eslint.js --cache app/Resources/js",
+    "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js",
     "lint": "./node_modules/eslint/bin/eslint.js --cache --fix  app/Resources/js"
   },
   "repository": {
@@ -31,7 +32,7 @@
   "devDependencies": {
     "babel-eslint": "^4.1.6",
     "eslint": "^1.10.3",
-    "eslint-brunch": "^1.8.4",
+    "eslint-brunch": "^1.8.5",
     "eslint-config-airbnb": "^0.1.1",
     "eslint-config-jolicode": "^0.1.0",
     "eslint-plugin-react": "^3.14.0",
