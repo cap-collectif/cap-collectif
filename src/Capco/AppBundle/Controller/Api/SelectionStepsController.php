@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -11,7 +10,6 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use Capco\AppBundle\Entity\Status;
 use Symfony\Component\HttpFoundation\Request;
 
 class SelectionStepsController extends FOSRestController

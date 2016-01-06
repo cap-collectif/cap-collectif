@@ -33,12 +33,15 @@ def testing():
     env.build_at_up = False
     env.directory = env.root_dir
 
+
 def circleci():
     env.lxc = True
     env.host_string = 'docker@circleci'
 
+
 def travisci():
     env.host_string = 'docker@localhost'
+
 
 @environnment
 def local():
@@ -51,13 +54,14 @@ def local():
     env.shell = "/bin/sh -c"
     env.directory = env.root_dir
 
+
 def localmac():
     env.run = lrun
     env.local = True
     env.host_string = 'docker@boot2docker'
     env.key_filename = '~/.ssh/id_boot2docker'
     env.boot2docker = True
-    env.local_ip = '192.168.99.100' # to verify
+    env.local_ip = '192.168.99.100'  # to verify
 
 
 def locallinux():
@@ -74,6 +78,7 @@ def ssh_into(service):
     else:
         env.run('docker exec -t -i -u capco %s_%s_1 /bin/bash' % (env.project_name, service))
 
+
 def command(command_name, service, directory=".", user="capco"):
     if env.lxc:
         env.run('sudo lxc-attach -n "$(docker inspect --format \'{{.Id}}\' %s_%s_1)" -- /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
@@ -82,11 +87,13 @@ def command(command_name, service, directory=".", user="capco"):
     else:
         env.run('docker exec -t -i %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
 
+
 def compose_run(command_name, service, directory=".", user="root", no_deps=False):
     if no_deps:
         env.compose('run --no-deps -u %s %s /bin/bash -c "cd %s && /bin/bash -c \\"%s\\""' % (user, service, directory, command_name))
     else:
         env.compose('run -u %s %s /bin/bash -c "cd %s && %s"' % (user, service, directory, command_name))
+
 
 def compose(command_name):
     merge_infra_files()
@@ -96,11 +103,13 @@ def compose(command_name):
         else:
             env.run('docker-compose -p %s -f %s/%s %s' % (env.project_name, env.directory, env.temporary_file, command_name))
 
+
 def pull(revision, directory, remote='origin'):
     with cd(directory):
         env.run('git remote update')
         env.run('git checkout %s/%s' % (remote, revision))
         env.run('git rev-parse --short HEAD > VERSION')
+
 
 def merge_infra_files():
     output = None

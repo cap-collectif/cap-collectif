@@ -59,7 +59,6 @@ class Notify implements MailerInterface
         $this->sendServiceEmail($to, $fromAdress, $fromName, $body, $subject, $contentType);
     }
 
-
     private function emailsAreValid($to, $from)
     {
         $emailConstraint = new EmailConstraint();
@@ -69,6 +68,7 @@ class Notify implements MailerInterface
         if ($this->validator->validateValue($from, $emailConstraint)->count() > 0) {
             return false;
         }
+
         return true;
     }
 

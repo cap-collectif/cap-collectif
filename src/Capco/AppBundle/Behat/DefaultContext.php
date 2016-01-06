@@ -8,7 +8,6 @@ use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Behat\MinkExtension\Context\MinkContext;
 
@@ -110,9 +109,9 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
     /**
      * Generate url.
      *
-     * @param string  $route
-     * @param array   $parameters
-     * @param Boolean $absolute
+     * @param string $route
+     * @param array  $parameters
+     * @param bool   $absolute
      *
      * @return string
      */

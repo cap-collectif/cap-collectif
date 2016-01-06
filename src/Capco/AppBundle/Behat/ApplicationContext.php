@@ -40,7 +40,6 @@ class ApplicationContext extends UserContext
         foreach ($jobs as $job) {
             $job->mustRun();
         }
-
     }
 
     public function resetUsingDocker()
@@ -56,7 +55,7 @@ class ApplicationContext extends UserContext
             try {
                 $manager->stop($this->dbContainer)->remove($this->dbContainer, true, true);
             } catch (UnexpectedStatusCodeException $e) {
-                if (!strpos($e->getMessage(), "Driver btrfs failed to remove root filesystem")) {
+                if (!strpos($e->getMessage(), 'Driver btrfs failed to remove root filesystem')) {
                     throw $e;
                 }
                 // We don't care about this error that happen only because of Circle-CI bad support of Docker
@@ -77,6 +76,7 @@ class ApplicationContext extends UserContext
 
     /**
      * @AfterSuite
+     *
      * @param $suiteScope
      */
     public static function notifiyEnd(AfterSuiteScope $suiteScope)
@@ -128,7 +128,6 @@ class ApplicationContext extends UserContext
     {
         echo $this->getSession()->getPage()->getHtml();
     }
-
 
     /**
      * @When I submit a :type argument with text :text

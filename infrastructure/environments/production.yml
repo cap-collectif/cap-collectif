@@ -1,0 +1,11 @@
+# Only the builder is used by the platform
+# The read docker-compose file is auto-generated, see (https://github.com/jolicode/CapCollectif-DeploymentTools/blob/master/api/app/Resources/views/docker-compose.yml.twig)
+
+builder:
+    build: ../services/builder
+    volumes:
+        - ../../:/var/www
+        - ~/.composer:/home/capco/.composer
+        - ~/.npm:/home/capco/.npm
+        - ~/.bower:/home/capco/.bower
+    command: echo "Use 'docker-compose run builder build' to build deps"

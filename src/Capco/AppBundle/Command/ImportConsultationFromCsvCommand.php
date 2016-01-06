@@ -12,10 +12,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionAppendix;
-use Capco\AppBundle\Entity\AppendixType;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStepType;
-use Symfony\Component\Console\Input\ArrayInput;
 
 class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 {
@@ -81,6 +78,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 .$userEmail.
                 '. Please provide an existing user email.</error>');
             $output->writeln('<error>Import cancelled. No opinion created.</error>');
+
             return 1;
         }
 
@@ -90,6 +88,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 .$consultationStepSlug.
                 '. Please provide an existing consultation step slug.</error>');
             $output->writeln('<error>Import cancelled. No opinion created.</error>');
+
             return 1;
         }
 
@@ -99,6 +98,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 .$consultationStepSlug.
                 ' does not have a consultation step type associated Please create it then try importing data again.</error>');
             $output->writeln('<error>Import cancelled. No opinion created.</error>');
+
             return 1;
         }
 
@@ -109,6 +109,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 '<error>File "opinions.csv" is not provided, is empty or could not be parsed.</error>'
             );
             $output->writeln('<error>Import cancelled. No opinion created.</error>');
+
             return 1;
         }
 
@@ -126,7 +127,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                         ->getRepository('CapcoAppBundle:OpinionType')
                         ->findOneBy([
                             'title' => $ot,
-                            'consultationStepType' => $consultationStep->getConsultationStepType()
+                            'consultationStepType' => $consultationStep->getConsultationStepType(),
                     ]);
                 } else {
                     $opinionType = $em
@@ -134,7 +135,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                         ->findOneBy([
                             'title' => $ot,
                             'consultationStepType' => $consultationStep->getConsultationStepType(),
-                            'parent' => $opinionType
+                            'parent' => $opinionType,
                         ]);
                 }
             }
@@ -147,6 +148,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                     .$row['titre'].
                     ').</error>');
                 $output->writeln('<error>Import cancelled. No opinion created.</error>');
+
                 return 1;
             }
 
@@ -154,14 +156,14 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 ->getRepository('CapcoAppBundle:Opinion')
                 ->findOneBy([
                     'title' => $row['titre'],
-                    'step' => $consultationStep
+                    'step' => $consultationStep,
                 ])
             ;
 
             if (is_object($opinion) && !$input->getOption('force')) {
                 $output->writeln(
                     '<error>Opinion with title "'
-                    . $row['titre'] .
+                    .$row['titre'].
                     '" already exists in this consultation step. Please change the title or specify the force option to import it anyway.</error>'
                 );
                 $output->writeln('<error>Import cancelled. No opinion created.</error>');
@@ -191,7 +193,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 $opinionTypeAppendixType = $em
                     ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
                     ->findOneBy([
-                        'opinionType' => $opinion->getOpinionType()
+                        'opinionType' => $opinion->getOpinionType(),
                     ])
                 ;
                 if (!is_object($opinionTypeAppendixType)) {
@@ -212,8 +214,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 } else {
                     $appendix = $opinion->getAppendices()[0];
                 }
-                $appendix->setBody('<p>' . $row['contexte'] . '</p>');
-
+                $appendix->setBody('<p>'.$row['contexte'].'</p>');
             }
             $progress->advance(1);
         }

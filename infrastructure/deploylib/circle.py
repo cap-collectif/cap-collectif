@@ -4,6 +4,7 @@ from fabric.api import env
 import re
 import yaml
 
+
 @task(environments=['local', 'testing'])
 def fix_environment_variables_with_lxc():
     with open('app/config/parameters.yml', 'w') as yaml_file:
@@ -16,6 +17,7 @@ def fix_environment_variables_with_lxc():
             }
         }, default_flow_style=False))
 
+
 @task(environments=['testing'])
 def load_cache():
     "Load cache"
@@ -27,6 +29,7 @@ def load_cache():
     local('/bin/bash -c "if [[ -e ~/docker/capcotest_mailcacher.tar ]]; then docker load -i ~/docker/capcotest_mailcacher.tar; fi"')
     local('/bin/bash -c "if [[ -e ~/docker/capcotest_elasticsearch.tar ]]; then docker load -i ~/docker/capcotest_elasticsearch.tar; fi"')
     local('/bin/bash -c "if [[ -e ~/docker/capcotest_redis.tar ]]; then docker load -i ~/docker/capcotest_redis.tar; fi"')
+
 
 @task(environments=['testing'])
 def save_logs():
@@ -43,9 +46,10 @@ def save_fixtures_image(tag='latest'):
     env.service_command('mysqldump -h database -uroot --opt symfony > infrastructure/services/databasefixtures/dump.sql', 'application', env.www_app, 'root')
     env.compose('build databasefixtures')
     image_id = local('docker images | grep capco_databasefixtures | awk \'{print $3}\'', capture=True)
-    local('docker tag -f '+ image_id +' spyl94/capco-fixtures:'+tag)
+    local('docker tag -f ' + image_id + ' spyl94/capco-fixtures:' + tag)
     local('docker login --username=spyl94')
     local('docker push spyl94/capco-fixtures')
+
 
 @task(environments=['testing'])
 def save_cache():
@@ -90,4 +94,3 @@ def save_cache():
         local('docker save selenium/hub > ~/docker/capcotest_seleniumhub.tar')
         local('docker save selenium/node-chrome-debug > ~/docker/capcotest_chrome.tar')
         local('docker save jderusse/mailcatcher > ~/docker/capcotest_mailcacher.tar')
-

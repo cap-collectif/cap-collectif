@@ -5,6 +5,7 @@
   "main": "brunch-config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "checkcs": "eslint --cache app/Resources/js",
     "lint": "eslint --cache --fix  app/Resources/js"
   },
   "repository": {

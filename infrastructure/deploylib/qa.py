@@ -9,13 +9,23 @@ capcobot = {
     'pass': 'elephpant-can-fly',
 }
 
+
 @task(environments=['local', 'testing'])
 def checkcs():
     "Check code style"
     env.compose_run('php-cs-fixer fix --level=symfony --dry-run --diff src || echo ""', 'builder', '.', no_deps=True)
-    env.service_command('npm run lint', 'builder', '.', no_deps=True)
+    env.compose_run('npm run checkcs', 'builder', '.', no_deps=True)
     local('pep8 infrastructure/deploylib --ignore=E501')
     env.service_command('php bin/console lint:twig app/', 'application', env.www_app)
+
+
+@task(environments=['local'])
+def lint():
+    "Lint"
+    env.compose_run('php-cs-fixer fix --level=symfony --diff src', 'builder', '.', no_deps=True)
+    env.compose_run('npm run lint', 'builder', '.', no_deps=True)
+    local('autopep8 --in-place --aggressive --aggressive infrastructure/deploylib/* --ignore=E501')
+
 
 @task(environments=['local'])
 def fix_cs_file(file, dry_run=False):
@@ -25,10 +35,12 @@ def fix_cs_file(file, dry_run=False):
     else:
         env.compose_run('php-cs-fixer fix --config-file=.php_cs %s' % file, 'builder', 'capco', no_deps=True)
 
+
 @task(environments=['local', 'testing'])
 def phpspec():
     "Run Unit Tests"
     env.service_command('./bin/phpspec run --no-code-generation', 'application', env.www_app)
+
 
 @task(environments=['local', 'testing'])
 def behat(fast_failure='true', profile=False, tags='false', feature='false'):
@@ -39,21 +51,24 @@ def behat(fast_failure='true', profile=False, tags='false', feature='false'):
         time.sleep(2)
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     if profile:
-        jobs=[profile]
+        jobs = [profile]
     else:
-        jobs=['api', 'commands', 'frontend', 'javascript']
+        jobs = ['api', 'commands', 'frontend', 'javascript']
 
     for job in jobs:
-        command='php -d memory_limit=-1 ./bin/behat -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'] + ('', ' --name ' + feature)[feature != 'false']
+        command = 'php -d memory_limit=-1 ./bin/behat -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'] + ('', ' --name ' + feature)[feature != 'false']
         env.service_command(command, 'application', env.www_app)
+
 
 @task(environments=['local'])
 def view(port='5900'):
-  local('echo "secret" | open vnc://`docker-machine ip capco`::' + port)
+    local('echo "secret" | open vnc://`docker-machine ip capco`::' + port)
+
 
 @task(environments=['local'])
 def clear_fixtures():
     local('docker ps -a | awk \'{ print $1,$2 }\' | grep capco/fixtures | awk \'{print $1 }\' | xargs -I {} docker rm -f {}')
+
 
 @task(environments=['local'])
 def kill_database_container():
@@ -62,6 +77,8 @@ def kill_database_container():
 
 # Improve this, but okay for now...
 # tag should be the current commit ?
+
+
 @task(environments=['local'])
 def save_fixtures_image(tag='latest'):
     "Publish a new fixtures image"
@@ -69,14 +86,16 @@ def save_fixtures_image(tag='latest'):
     env.service_command('mysqldump -h database -uroot --opt symfony > infrastructure/services/databasefixtures/dump.sql', 'application', env.www_app, 'root')
     env.compose('build databasefixtures')
     image_id = local('docker images | grep capco_databasefixtures | awk \'{print $3}\'', capture=True)
-    local('docker tag -f '+ image_id +' capco/fixtures:' + tag)
+    local('docker tag -f ' + image_id + ' capco/fixtures:' + tag)
     local('docker login -e ' + capcobot['email'] + ' -u ' + capcobot['user'] + ' -p ' + capcobot['pass'])
     local('docker push capco/fixtures')
+
 
 @task(environments=['local'])
 def setup_git_hooks():
     "Set git hooks"
     local('rm -f .git/hooks/pre-commit && ln -s ../../infrastructure/git-hooks/hooks/pre-commit .git/hooks/pre-commit')
+
 
 @task(environments=['local'])
 def run_pre_commit_hook():

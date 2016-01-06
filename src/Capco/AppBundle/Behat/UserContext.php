@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Capco\AppBundle\Entity\EventRegistration;
 
 class UserContext extends DefaultContext
