@@ -4,9 +4,8 @@
   "description": "Cap-Collectif version Symfony2",
   "main": "brunch-config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "checkcs": "eslint --cache app/Resources/js",
-    "lint": "eslint --cache --fix  app/Resources/js"
+    "checkcs": "./node_modules/eslint/bin/eslint.js --cache app/Resources/js",
+    "lint": "./node_modules/eslint/bin/eslint.js --cache --fix  app/Resources/js"
   },
   "repository": {
     "type": "git",
