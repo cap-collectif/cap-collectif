@@ -35,7 +35,8 @@ RUN curl https://deb.nodesource.com/node_5.x/pool/main/n/nodejs/nodejs_5.1.1-1no
 ENV NODE_ENV production
 
 # Update npm and install brunch / bower
-RUN npm install -g npm@2 bower brunch
+RUN npm install -g npm@2
+RUN npm install -g bower brunch
 
 # Install pep8
 RUN pip install pep8
