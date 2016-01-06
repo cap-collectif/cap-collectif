@@ -15,6 +15,8 @@ application:
         - redis:redis
         - seleniumhub:selenium
         - mailcatcher:mailcatchersmtp
+    extra_hosts: # Used to ban varnish cache
+        - "capco.test:0.0.0.0"
 
 applicationdata:
     build: ../services/applicationdata

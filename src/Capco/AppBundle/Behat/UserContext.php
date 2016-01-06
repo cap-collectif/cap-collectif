@@ -52,8 +52,8 @@ class UserContext extends DefaultContext
      */
     public function iGoOnTheSourcesTab()
     {
-        $page = $navigationContext->getPage('opinion page');
-        $this->getSession()->wait(3000, "$('".$page->getElement('sources tab')."').length > 0");
+        $page = $this->navigationContext->getPage('opinion page');
+        $this->getSession()->wait(3000, "$('".$page->getSelector('sources tab')."').length > 0");
         $page->clickSourcesTab();
     }
 
@@ -62,8 +62,8 @@ class UserContext extends DefaultContext
      */
     public function iGoOnTheArgumentsTab()
     {
-        $page = $navigationContext->getPage('opinion page');
-        $this->getSession()->wait(3000, "$('".$page->getElement('arguments tab')."').length > 0");
+        $page = $this->navigationContext->getPage('opinion page');
+        $this->getSession()->wait(3000, "$('".$page->getSelector('arguments tab')."').length > 0");
         $page->clickArgumentsTab();
     }
 
@@ -72,8 +72,8 @@ class UserContext extends DefaultContext
      */
     public function iGoOnTheConnectionsTab()
     {
-        $page = $navigationContext->getPage('opinion page');
-        $this->getSession()->wait(3000, "$('".$page->getElement('connections tab')."').length > 0");
+        $page = $this->navigationContext->getPage('opinion page');
+        $this->getSession()->wait(3000, "$('".$page->getSelector('connections tab')."').length > 0");
         $page->clickConnectionsTab();
     }
 
@@ -82,8 +82,8 @@ class UserContext extends DefaultContext
      */
     public function clickAddSourceTab()
     {
-        $page = $navigationContext->getPage('opinion page');
-        $this->getSession()->wait(2000, "$('".$page->getElement('sources add')."').length > 0");
+        $page = $this->navigationContext->getPage('opinion page');
+        $this->getSession()->wait(2000, "$('".$page->getSelector('sources add')."').length > 0");
         $page->clickAddSource();
     }
 

@@ -14,7 +14,7 @@ class OpinionPage extends Page
      */
     protected $path = '/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}';
 
-    protected $elements = [
+    public $elements = [
         // Arguments
         'Argument yes field' => '#argument-form--yes textarea',
         'Argument yes button' => '#argument-form--yes button',
