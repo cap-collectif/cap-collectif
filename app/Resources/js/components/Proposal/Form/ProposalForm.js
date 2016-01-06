@@ -231,6 +231,7 @@ const ProposalForm = React.createClass({
           return (
             <Input
               id={'proposal_' + key}
+              key={key}
               type="editor"
               label={question.title + '*'}
               groupClassName={this.getGroupStyle(key)}

@@ -136,7 +136,7 @@ const ViewTree = React.createClass({
           {
             orderedElements.map((element) => {
               return (
-                <li>
+                <li key={element.id}>
                   <ViewElement
                     key={element.id}
                     element={element}

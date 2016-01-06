@@ -107,9 +107,9 @@ const FolderManager = React.createClass({
       return (
         <ul className={'tree__list tree--level-' + level}>
           {
-            elements.map((element) => {
+            elements.map((element, index) => {
               return (
-                <li className="tree__item">
+                <li className="tree__item" key={index}>
                   {this.renderTreeItemContent(element)}
                   {this.state.expanded[element.id]
                     ? this.renderTreeItems(element.children, level + 1)

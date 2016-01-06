@@ -13,7 +13,7 @@ capcobot = {
 def checkcs():
     "Check code style"
     env.compose_run('php-cs-fixer fix --level=symfony --dry-run --diff src || echo ""', 'builder', '.', no_deps=True)
-    env.service_command('npm run lint', 'application', env.www_app)
+    env.service_command('npm run lint', 'builder', '.', no_deps=True)
     local('pep8 infrastructure/deploylib --ignore=E501')
     env.service_command('php bin/console lint:twig app/', 'application', env.www_app)
 
