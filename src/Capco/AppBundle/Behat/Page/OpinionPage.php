@@ -23,7 +23,7 @@ class OpinionPage extends Page
         'first source vote count' => '#sources-list li:first-child .opinion__votes-nb',
         'Vote first source' => '#sources-list li:first-child .source__btn--vote',
         'sources tab' => '#opinion__sources___tab',
-        'source add' => '#source-form__add',
+        'sources add' => '#source-form__add',
         'arguments tab' => '#opinion__arguments___tab',
         'connections tab' => '#opinion__links___tab',
     ];
@@ -45,7 +45,7 @@ class OpinionPage extends Page
 
     public function clickAddSource()
     {
-        $this->getElement('source add')->click();
+        $this->getElement('sources add')->click();
     }
 
     public function submitArgument($type, $text)
