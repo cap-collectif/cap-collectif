@@ -1,6 +1,6 @@
 Feature: Source
 
-  @javascript @database
+  @javascript @database @fix
   Scenario: User wants to add a source in a contribuable opinion
     Given I am logged in as user
     And I visited "opinion page" with:
