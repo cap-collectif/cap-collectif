@@ -495,4 +495,22 @@ abstract class AbstractStep
 
         return false;
     }
+
+    /**
+     * @return int|null
+     */
+    public function getOpeningStatus()
+    {
+        if ($this->isFuture()) {
+            return 'future';
+        }
+        if ($this->isClosed()) {
+            return 'closed';
+        }
+        if ($this->isOpen()) {
+            return 'open';
+        }
+
+        return;
+    }
 }

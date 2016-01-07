@@ -35,6 +35,7 @@ Feature: Proposal Votes Restful Api
         {
           "projectId": @integer@,
           "position": @integer@,
+          "openingStatus": @string@,
           "id": @integer@,
           "title": @string@,
           "enabled": @boolean@,

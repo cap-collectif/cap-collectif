@@ -8,6 +8,7 @@ RUN apt-get update && \
         adduser \
         apt-transport-https \
         build-essential \
+        bzip2 \
         cron \
         curl \
         imagemagick \
@@ -20,40 +21,55 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
-# Install nginx, redis and php (fpm)
-RUN apt-get update && \
+# Install php7.0
+RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
+    echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
+    wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
+    apt-get update && \
     apt-get install -y -qq \
-      nginx \
-      php5-fpm \
-      php5-cli \
-      php5-curl \
-      php5-intl \
-      php5-mysql \
-      php5-redis \
-      php5-xsl \
-      php5-gd \
-      php5-imagick \
-      redis-server \
+        php7.0-apcu \
+        php7.0-cli \
+        php7.0-common \
+        php7.0-curl \
+        php7.0-dev \
+        php7.0-fpm \
+        php7.0-gd \
+        php7.0-imagick \
+        php7.0-intl \
+        php7.0-json \
+        php7.0-mysql \
+        php7.0-opcache \
+        php7.0-redis \
+        php7.0-xsl \
     && \
-    # Configure Redis
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install mariadb
+RUN echo "deb http://mariadb.biz.net.id//repo/10.1/debian sid main" >> /etc/apt/sources.list.d/dotdeb.list && \
+    apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db && \
+    apt-get update && \
+    apt-get install -y -qq
+        mariadb-client \
+        mariadb-server \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install redis
+RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
+    echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
+    wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
+    apt-get update && \
+    apt-get install -y -qq \
+        redis-server \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*&& \
     sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
-    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Mariadb
-RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
-    echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.1/debian jessie main" >>/etc/apt/sources.list && \
-    apt-get update -qq && \
-    DEBIAN_FRONTEND=noninteractive apt-get -qq -y install \
-      mariadb-server \
-      mariadb-client \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
 
 # Install java
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \

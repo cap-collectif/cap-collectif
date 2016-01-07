@@ -88,7 +88,6 @@ def save_fixtures_image(tag='latest', publish='false'):
         local('docker login -e ' + capcobot['email'] + ' -u ' + capcobot['user'] + ' -p ' + capcobot['pass'])
         local('docker push capco/fixtures')
 
-
 @task(environments=['local'])
 def setup_git_hooks():
     "Set git hooks"
