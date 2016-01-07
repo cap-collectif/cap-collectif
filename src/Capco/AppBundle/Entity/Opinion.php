@@ -609,6 +609,7 @@ class Opinion implements SelfLinkableInterface, VotableInterface
 
     // ******************************* Custom methods **************************************
 
+
     public function userHasReport(User $user)
     {
         foreach ($this->Reports as $report) {

@@ -1,7 +1,0 @@
-application:
-    environment:
-        DOCKER_GID: 998
-    volumes:
-        - ../../:/var/www
-        - /var/run/docker.sock:/run/docker.sock:ro
-        - /usr/bin/docker:/usr/bin/docker

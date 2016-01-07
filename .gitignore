@@ -8,18 +8,15 @@
 /web/uploads/*
 /web/export/*
 
-/var/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
 /build/
 /vendor/
-!/bin/console
-!/bin/symfony_requirements
 /bin/
-
-# infra
-infrastructure/environments/current.yml
-infrastructure/services/databasefixtures/dump.sql
-
-*.log
+/composer.phar
 .eslintcache
 
 # Configuration files
@@ -32,15 +29,21 @@ app/config/parameters/*
 /app/Resources/libs
 /bower_components/
 
+# deployment
+.bundle
+.capistrano
+!.capistrano/metrics
+
 # redis
 dump.rdb
-.bundle
 
 # tests
-*.pyc
+fabfile.pyc
 app/test.db
 app/test.db-journal
 /report/
+behat.yml
+app/dbtest.backup
 mails.txt
 dump.txt
 

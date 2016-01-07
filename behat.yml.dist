@@ -1,0 +1,48 @@
+default:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: false
+    extensions:
+        Behat\Symfony2Extension: ~
+        SensioLabs\Behat\PageObjectExtension:
+            namespaces:
+                page: [ Capco\AppBundle\Behat\Page ]
+        Behat\MinkExtension:
+            base_url: 'http://127.0.0.1:8000/'
+            sessions:
+                default:
+                    symfony2: ~
+                javascript:
+                    selenium2: ~
+            browser_name: chrome
+            show_auto:    true
+            show_cmd: 'open %s'
+    suites:
+        front:
+            paths: [ %paths.base%/features/front ]
+            contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\NavigationContext
+            filters:
+                tags: "~@synthesis"
+            mink_session: default
+            mink_javascript_session: javascript
+        api:
+            paths: [ %paths.base%/features/api ]
+            contexts:
+                - Capco\AppBundle\Behat\ApiContext
+                - Capco\AppBundle\Behat\NavigationContext
+            filters:
+                tags: "~@synthesis"
+            mink_session: default
+        commands:
+            paths: [ %paths.base%/features/commands ]
+            contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Capco\AppBundle\Behat\CommandContext
+            filters:
+                tags: "~@synthesis"
+            mink_session: default

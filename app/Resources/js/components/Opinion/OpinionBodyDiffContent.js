@@ -48,12 +48,12 @@ const OpinionBodyDiffContent = React.createClass({
     return (
       <div>
         {
-          parts.map((part, index) => {
+          parts.map((part) => {
             if (!part.link) {
               return <p dangerouslySetInnerHTML={{__html: part.content}}></p>;
             }
             return (
-              <p key={index}>
+              <p>
                 <span dangerouslySetInnerHTML={{__html: part.before}} />
                 <OpinionBodyDiffModal link={part.link} modal={part.modal} />
                 <span dangerouslySetInnerHTML={{__html: part.after}} />

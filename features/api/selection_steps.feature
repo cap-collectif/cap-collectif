@@ -1,6 +1,5 @@
 Feature: Selection steps
 
-  @elasticsearch
   Scenario: Anonymous API client wants to get all proposals from a selection step
     When I send a POST request to "/api/selection_steps/6/proposals/search?order=last" with json:
       """
@@ -50,7 +49,6 @@ Feature: Selection steps
     }
     """
 
-  @elasticsearch
   Scenario: Anonymous API client wants to get all proposals in a theme from a selection step filtered by theme
     When I send a POST request to "/api/selection_steps/6/proposals/search" with json:
     """

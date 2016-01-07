@@ -19,15 +19,14 @@ class ProposalController extends Controller
      * @ParamConverter("currentStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("proposal", options={"mapping": {"proposalSlug": "slug"}})
      * @Template("CapcoAppBundle:Proposal:show.html.twig")
-     *
-     * @param Project     $project
+     * @param Project $project
      * @param CollectStep $currentStep
-     * @param Proposal    $proposal
-     *
+     * @param Proposal $proposal
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showProposalAction(Project $project, CollectStep $currentStep, Proposal $proposal)
     {
+
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 

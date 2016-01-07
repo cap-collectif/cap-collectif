@@ -23,7 +23,7 @@ class ApiContext extends ApplicationContext
      */
     public function createClient()
     {
-        $this->client = new Client(['base_url' => 'http://capco.test/']);
+        $this->client = new Client(['base_url' => $this->getParameter('base.url')]);
         $this->token = null;
     }
 

@@ -79,9 +79,9 @@ class ProposalAdmin extends Admin
                 'help' => 'admin.fields.proposal.help.status',
             ])
             ->add('estimation', 'number', [
-                'label' => 'admin.fields.proposal.estimation',
+                'label'    => 'admin.fields.proposal.estimation',
                 'required' => false,
-                'help' => 'admin.fields.proposal.help.estimation',
+                'help'     => 'admin.fields.proposal.help.estimation',
             ])
             ->add('rating', 'choice', [
                 'label' => 'admin.fields.proposal.rating',

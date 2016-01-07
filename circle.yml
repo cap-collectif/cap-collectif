@@ -1,41 +1,47 @@
 machine:
-    pre:
-        - sudo curl -L -o /usr/bin/docker 'https://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.1-circleci'
-        - sudo chmod 0755 /usr/bin/docker
-    services:
-        - docker
+    php:
+        version: 5.6.5
 
 dependencies:
     cache_directories:
-        - ~/docker
         - bower_components
         - node_modules
         - ~/.composer
-        - ~/.bower
     override:
-        - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-        - pip install -q -r requirements.txt
-        - fab testing.circle.fix_environment_variables_with_lxc
-        - fab testing.circle.load_cache
-        - fab testing.circle.save_cache
-        - fab testing.infrastructure.up
-        - fab testing.app.deploy:environment=test
-
-test:
-    override:
-        - fab testing.qa.phpspec
-        - fab testing.qa.behat:fast_failure=false,profile=api
-        - fab testing.qa.behat:fast_failure=false,profile=commands
-        - fab testing.qa.behat:fast_failure=false,profile=frontend
-        - fab testing.qa.behat:fast_failure=false,profile=javascript
-        - fab testing.qa.checkcs
+        - sudo composer self-update:
+            timeout: 3600
+    pre:
+        - sudo apt-get update && sudo apt-get install libfftw3-double3 libmagickcore5 imagemagick
+        - yes "" | pecl install imagick
+        - echo "memory_limit = 256M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+        - echo "always_populate_raw_post_data=-1" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/custom.ini
+        - mysql -u ubuntu -e "create database symfony"
+        - mysql -u ubuntu -e "create database symfony_test"
     post:
-        - docker ps
-        - docker stop $(docker ps -a -q)
-        - fab testing.circle.save_logs
+        - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
+        - java -jar selenium-server-standalone-2.44.0.jar: {background: true}
+        - curl http://get.sensiolabs.org/php-cs-fixer.phar -o php-cs-fixer
+        - sudo chmod a+x php-cs-fixer
+        - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.0.tar.gz
+        - tar -xvf elasticsearch-1.7.0.tar.gz
+        - elasticsearch-1.7.0/bin/elasticsearch: {background: true}
+        - npm install -g brunch@1
+        - pip install fabric
+        - npm install --production
+        - bower install --config.interactive=false
+        - composer install --prefer-dist --no-interaction --optimize-autoloader
 
 deployment:
     preprod:
         branch: develop
         commands:
             - "ssh capco@***REMOVED*** 'cd CapCollectif-DeploymentTools && fab deploy:preprod'"
+test:
+    pre:
+        - fab build:prod
+        - SYMFONY_ENV=test php app/console server:run --router=app/config/router_test.php: {background: true}
+
+    override:
+        - fab test
+        - fab lint
+

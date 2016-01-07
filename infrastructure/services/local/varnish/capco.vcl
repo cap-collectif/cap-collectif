@@ -9,11 +9,6 @@ backend default {
 sub vcl_recv {
   # Called at the beginning of a request, after the complete request has been received and parsed.
 
-  if (req.method == "BAN") {
-    ban("req.http.host == " + req.http.host);
-    return(synth(200, "Ban added"));
-  }
-
   if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css)$") {
     return (pass); # disable static files cache in dev
   }

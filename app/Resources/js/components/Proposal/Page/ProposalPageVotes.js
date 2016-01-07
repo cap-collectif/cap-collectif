@@ -21,8 +21,8 @@ const ProposalPageVotes = React.createClass({
         </h2>
         <Row>
           {
-            proposal.votes.map((vote, index) => {
-              return <UserPreview user={vote.user} key={index} />;
+            proposal.votes.map((vote) => {
+              return <UserPreview user={vote.user} />;
             })
           }
         </Row>

@@ -26,10 +26,6 @@ class ReinitCommand extends ContainerAwareCommand
                 'migrate', false, InputOption::VALUE_NONE,
                 'set this option to execute the migrations instead of creating schema'
             )
-            ->addOption(
-                'no-toggles', false, InputOption::VALUE_NONE,
-                'set this option to skip reseting feature flags'
-            )
         ;
     }
 
@@ -65,9 +61,7 @@ class ReinitCommand extends ContainerAwareCommand
             $this->mockMigrations($output);
         }
         $this->loadFixtures($output);
-        if (!$input->getOption('no-toggles')) {
-            $this->loadToggles($output);
-        }
+        $this->loadToggles($output);
         $this->recalculateCounters($output);
         $this->recalculateProjectsCounters($output);
         $this->recalculateRankings($output);

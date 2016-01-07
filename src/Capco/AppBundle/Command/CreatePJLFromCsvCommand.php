@@ -32,7 +32,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
     private $siteParameters = [
         'admin.mail.notifications.send_address' => 'coucou@cap-collectif.com',
-        'admin.mail.notifications.receive_address' => 'support@cap-collectif.com',
+        'admin.mail.notifications.receive_address' => 'assistance@cap-collectif.com',
         'admin.mail.contact' => 'coucou@cap-collectif.com',
 
         'homepage.jumbotron.button' => '',

@@ -59,6 +59,7 @@ class Notify implements MailerInterface
         $this->sendServiceEmail($to, $fromAdress, $fromName, $body, $subject, $contentType);
     }
 
+
     private function emailsAreValid($to, $from)
     {
         $emailConstraint = new EmailConstraint();
@@ -68,7 +69,6 @@ class Notify implements MailerInterface
         if ($this->validator->validateValue($from, $emailConstraint)->count() > 0) {
             return false;
         }
-
         return true;
     }
 
@@ -120,7 +120,7 @@ class Notify implements MailerInterface
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
 
         if (!$fromEmail) {
-            $fromEmail = 'support@cap-collectif.com';
+            $fromEmail = 'assistance@cap-collectif.com';
         }
 
         if (!$fromName) {
