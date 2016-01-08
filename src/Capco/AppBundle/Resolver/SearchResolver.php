@@ -240,6 +240,5 @@ class SearchResolver
             'proposals' => $proposals,
             'count' => $results['count'],
         ];
-
     }
 }

@@ -35,13 +35,13 @@ class Section
             'nbObjects' => true,
         ],
         'projects' => [
-            'title' => true,
+            'title' => false,
             'teaser' => true,
             'body' => false,
             'nbObjects' => true,
         ],
         'themes' => [
-            'title' => true,
+            'title' => false,
             'teaser' => true,
             'body' => false,
             'nbObjects' => true,

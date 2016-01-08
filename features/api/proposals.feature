@@ -83,6 +83,7 @@ Feature: Proposal Restful Api
     }
     """
 
+  @elasticsearch
   Scenario: Anonymous API client wants to get all proposals from a ProposalForm
     When I send a POST request to "/api/proposal_forms/1/proposals/search?page=1&pagination=50&order=old" with json:
     """
@@ -131,6 +132,7 @@ Feature: Proposal Restful Api
     }
     """
 
+  @elasticsearch
   Scenario: Anonymous API client wants to get proposals from a ProposalForm with filters
     When I send a POST request to "/api/proposal_forms/1/proposals/search" with json:
     """

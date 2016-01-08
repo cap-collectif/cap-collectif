@@ -9,46 +9,61 @@ use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
 use WebDriver\Exception\ElementNotVisible;
+use Docker\Docker;
+use Docker\Http\Client;
+use Docker\Container;
+use Docker\Exception\UnexpectedStatusCodeException;
+use Symfony\Component\Process\Process;
 
 class ApplicationContext extends UserContext
 {
     protected $headers;
+    protected $dbContainer;
 
     /**
-     * @BeforeSuite
+     * @BeforeScenario
      */
-    public static function reinitDatabase()
+    public function reset($scope)
     {
-        exec('app/console capco:reinit --force -e test');
-        $exportCommand = 'mysqldump --opt -h 127.0.0.1 -u root symfony_test > app/dbtest.backup';
-        exec($exportCommand);
+        // Let's stick with the old way for now
+        $jobs = [
+            new Process('curl -sS -XDELETE \'http://elasticsearch:9200/_all\''),
+            new Process('curl -sS -XBAN http://capco.test/'),
+            new Process('mysql -h database -u root symfony < var/db.backup'),
+            new Process('redis-cli -h redis FLUSHALL'),
+        ];
+
+        $scenario = $scope->getScenario();
+        if ($scenario->hasTag('elasticsearch')) {
+            $jobs[] = new Process('php bin/console fos:elastica:populate -n');
+        }
+        foreach ($jobs as $job) {
+            $job->mustRun();
+        }
     }
 
-    /**
-     * @BeforeScenario @purge
-     *
-     * Purge database
-     */
-    public static function purgeDatabase()
+    public function resetUsingDocker()
     {
-        exec('app/console doctrine:database:drop --force -e test');
-        exec('app/console doctrine:schema:update --force -e test');
-    }
+        // This is the real docker way, but not that easy
+        // We need to use something like https://github.com/jwilder/nginx-proxy
+        // To reload containers, because we can't do reload on runtime with links
+        // So we have to make sure it's supported on Circle-CI...
+        $docker = new Docker(new Client('unix:///run/docker.sock'));
+        $manager = $docker->getContainerManager();
 
-    /**
-     * @AfterScenario @database
-     *
-     * Recreate database before loading fixtures to make sure we always have the same ids
-     */
-    public static function databaseContainsFixtures()
-    {
-        $importCommand = 'mysql -h 127.0.0.1 -u root symfony_test < app/dbtest.backup';
-        exec($importCommand);
-        exec('app/console capco:reset-feature-flags -e test');
-        exec('app/console capco:compute:counters -e test');
-        exec('app/console capco:compute:projects-counters -e test');
-        exec('app/console capco:compute:rankings -e test');
-        exec('app/console fos:elastica:populate -q -e test');
+        if (null !== $this->dbContainer && $this->dbContainer->exists()) {
+            try {
+                $manager->stop($this->dbContainer)->remove($this->dbContainer, true, true);
+            } catch (UnexpectedStatusCodeException $e) {
+                if (!strpos($e->getMessage(), 'Driver btrfs failed to remove root filesystem')) {
+                    throw $e;
+                }
+                // We don't care about this error that happen only because of Circle-CI bad support of Docker
+            }
+        }
+
+        $this->dbContainer = new Container(['Image' => 'capco/fixtures']);
+        $manager->create($this->dbContainer)->start($this->dbContainer);
     }
 
     /**
@@ -56,17 +71,7 @@ class ApplicationContext extends UserContext
      */
     public function clearLocalStorage()
     {
-        $this->getSession()->getDriver()->evaluateScript(
-            'localStorage.clear();'
-        );
-    }
-
-    /**
-     * @AfterSuite
-     */
-    public static function reinitFeatures()
-    {
-        exec('php app/console capco:reset-feature-flags --force');
+        $this->getSession()->getDriver()->evaluateScript('localStorage.clear();');
     }
 
     /**
@@ -101,14 +106,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @BeforeScenario
-     */
-    public function resetFeatures()
-    {
-        $this->getService('capco.toggle.manager')->deactivateAll();
-    }
-
-    /**
      * @Given all features are enabled
      */
     public function allFeaturesAreEnabled()
@@ -125,10 +122,19 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @When I print html
+     */
+    public function printHtml()
+    {
+        echo $this->getSession()->getPage()->getHtml();
+    }
+
+    /**
      * @When I submit a :type argument with text :text
      */
     public function iSubmitAnArgument($type, $text)
     {
+        $this->getSession()->wait(1000);
         $this->navigationContext->getPage('opinionPage')->submitArgument($type, $text);
     }
 
@@ -228,8 +234,7 @@ class ApplicationContext extends UserContext
      */
     public function iWait($seconds)
     {
-        $time = intval($seconds * 1000);
-        $this->getSession()->wait($time);
+        $this->getSession()->wait(intval($seconds * 1000));
     }
 
     /**
@@ -239,6 +244,7 @@ class ApplicationContext extends UserContext
     {
         $url = $this->getSession()->getCurrentUrl().$path;
         $this->headers = get_headers($url);
+        $this->getSession()->visit($url);
     }
 
     /**

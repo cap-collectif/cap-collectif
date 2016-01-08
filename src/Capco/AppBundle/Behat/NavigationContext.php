@@ -8,47 +8,6 @@ use SensioLabs\Behat\PageObjectExtension\Context\PageObjectContext;
 class NavigationContext extends PageObjectContext
 {
     /**
-     * @When I go on the sources tab
-     */
-    public function iGoOnTheSourcesTab()
-    {
-        $this->getPage('opinion page')
-             ->clickSourcesTab();
-        sleep(3);
-    }
-
-    /**
-     * @When I go on the arguments tab
-     */
-    public function iGoOnTheArgumentsTab()
-    {
-        $this->getPage('opinion page')
-            ->clickArgumentsTab();
-        sleep(3);
-    }
-
-    /**
-     * @When I go on the connections tab
-     */
-    public function iGoOnTheConnectionsTab()
-    {
-        $this->getPage('opinion page')
-            ->clickConnectionsTab();
-        sleep(3);
-    }
-
-    /**
-     * @When I want to add a source
-     */
-    public function clickAddSourceTab()
-    {
-        sleep(2);
-        $this->getPage('opinion page')
-             ->clickAddSource();
-        sleep(2);
-    }
-
-    /**
      * @Given I visited :pageName
      */
     public function iVisitedPage($pageName)

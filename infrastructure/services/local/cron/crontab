@@ -1,6 +1,5 @@
-* * * * * php /var/www/app/console capco:compute:counters --env=prod
-* * * * * php /var/www/app/console capco:compute:projects-counters --env=prod
-#* * * * * php -d memory_limit=2048 -d zend.enable_gc=0 /var/www/app/console capco:recalculate-rankings --env=prod
-#* * * * * php -d memory_limit=2048 -d zend.enable_gc=0 /var/www/app/console capco:syntheses:update --env=prod
-#* * * * * php -d memory_limit=2048 -d zend.enable_gc=0 /var/www/app/console capco:syntheses:counters --env=prod
-# Don't remove the empty line at the end of this file. It is required to run the cron job
+* * * * * php /var/www/bin/console capco:compute:counters --env=prod
+* * * * * php /var/www/bin/console capco:compute:projects-counters --env=prod
+#* * * * * php -d memory_limit=2048 -d zend.enable_gc=0 /var/www/bin/console capco:recalculate-rankings --env=prod
+#* * * * * php -d memory_limit=2048 -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:update --env=prod
+#* * * * * php -d memory_limit=2048 -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:counters --env=prod

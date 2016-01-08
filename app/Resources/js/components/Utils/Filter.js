@@ -21,9 +21,9 @@ const Filter = React.createClass({
         onChange={this.props.onChange}
       >
         {
-          this.props.values.map((value) => {
+          this.props.values.map((value, index) => {
             return (
-              <option value={value}>
+              <option value={value} key={index}>
                 {this.getIntlMessage('global.filter_' + value)}
               </option>
             );
