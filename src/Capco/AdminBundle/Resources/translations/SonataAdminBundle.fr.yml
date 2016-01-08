@@ -489,6 +489,7 @@ admin:
     question:
       title: Titre
       help_text: Texte d'aide
+      required: Champ obligatoire
       position: Position
       updated_at: Mise à jour
       created_at: Création

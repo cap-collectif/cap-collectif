@@ -13,6 +13,7 @@ Feature: Feature Flags Api
       "registration": @boolean@,
       "login_facebook": @boolean@,
       "login_gplus": @boolean@,
+      "login_twitter": @boolean@,
       "login_nous_citoyens": @boolean@,
       "shield_mode": @boolean@,
       "user_type": @boolean@,

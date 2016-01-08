@@ -50,7 +50,7 @@ def behat(fast_failure='true', profile=False, tags='false', feature='false'):
         env.compose('up -d --force-recreate database')
         time.sleep(2)
     if env.ci:
-        env.service_command('php bin/console capco:reinit --force', 'application', env.www_app)
+        env.service_command('php bin/console capco:reinit --force -e test', 'application', env.www_app)
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     if profile:
         jobs = [profile]

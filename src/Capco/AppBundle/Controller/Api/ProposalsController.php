@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Event\ProposalEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -24,8 +25,8 @@ use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Capco\AppBundle\Entity\Status;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ProposalsController extends FOSRestController
 {
@@ -133,6 +134,22 @@ class ProposalsController extends FOSRestController
 
         $form = $this->createForm('proposal', $proposal);
         $form->submit($request->request->all());
+
+        $questions = $proposal->getProposalForm()->getQuestions();
+        $validationRulesForResponses = $this->getValidationRulesForProposalResponses($questions);
+        $proposalResponses = $request->get('proposalResponses');
+
+        foreach($proposalResponses as $proposalResponse) {
+            if (array_key_exists($proposalResponse['question'], $validationRulesForResponses)) {
+                $errorList = $this->get('validator')->validate(
+                    $proposalResponse['value'],
+                    $validationRulesForResponses[$proposalResponse['question']]['constraint']
+                );
+                if (count($errorList) > 0) {
+                    $form->addError((new FormError($errorList[0]->getMessage())));
+                }
+            }
+        }
 
         if (!$form->isValid()) {
             return $form;
@@ -321,5 +338,17 @@ class ProposalsController extends FOSRestController
         );
 
         return [];
+    }
+
+    private function getValidationRulesForProposalResponses($questions) {
+        $rules = [];
+
+        foreach($questions as $question) {
+            if ($question->isRequired()) {
+                $rules[$question->getId()]['constraint'] = new Assert\NotBlank();
+            }
+        }
+
+        return $rules;
     }
 }

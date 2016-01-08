@@ -1,6 +1,6 @@
 Feature: Proposal Restful Api
   As an API client
-
+  @debug
   Scenario: Anonymous API client wants to get one proposal from a ProposalForm
     When I send a GET request to "/api/proposal_forms/1/proposals/1"
     Then the JSON response should match:
@@ -34,7 +34,9 @@ Feature: Proposal Restful Api
         "user_type": {
           "id": @integer@,
           "name": @string@,
-          "slug": @string@
+          "slug": @string@,
+          "questionType": @number@,
+          "title": @string@
         },
         "vip": true,
         "_links": {
@@ -51,7 +53,8 @@ Feature: Proposal Restful Api
           "question": {
             "id": @integer@,
             "questionType": @number@,
-            "title": @string@
+            "title": @string@,
+            "isRequired": @boolean@
           },
           "value": @string@
         },

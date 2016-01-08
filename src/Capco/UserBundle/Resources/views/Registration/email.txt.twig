@@ -22,7 +22,7 @@
                 <p>{{ 'user.register.confirmation_message.thanks'|trans({'%sitename%': capco_site_parameter_value('global.site.fullname')}, 'CapcoAppBundle') }}</p>
                 <p>{{ 'user.register.confirmation_message.validate'|trans({'%url%': confirmationUrl}, 'CapcoAppBundle') }}</p>
                 <p>{{ 'user.register.confirmation_message.participate'|trans({}, 'CapcoAppBundle') }}</p>
-                <p>{{ 'user.register.confirmation_message.question'|trans({}, 'CapcoAppBundle') }}</p>
+                <p>{{ 'user.register.confirmation_message.question'|trans({'%email%': capco_site_parameter_value('admin.mail.contact') | default('support@cap-collectif.com')}, 'CapcoAppBundle') }}</p>
                 <p>{{ 'user.register.confirmation_message.bye'|trans({}, 'CapcoAppBundle') }}</p>
                 <hr />
                 <p>{{ 'user.register.confirmation_message.footer1'|trans({'%sitename%': capco_site_parameter_value('global.site.fullname')}, 'CapcoAppBundle') }}</p>

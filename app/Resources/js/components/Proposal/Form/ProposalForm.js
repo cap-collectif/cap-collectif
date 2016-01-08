@@ -5,6 +5,8 @@ import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
 
+const FormattedHTMLMessage = ReactIntl.FormattedHTMLMessage;
+
 const ProposalForm = React.createClass({
   propTypes: {
     form: React.PropTypes.object.isRequired,
@@ -60,9 +62,11 @@ const ProposalForm = React.createClass({
   componentDidMount() {
     this.props.form.questions.map((question) => {
       const ref = 'custom-' + question.id;
-      this.formValidationRules[ref] = {
-        notBlank: {message: 'global.constraints.notBlank'},
-      };
+      if (question.isRequired) {
+        this.formValidationRules[ref] = {
+          notBlank: {message: 'global.constraints.notBlank'},
+        };
+      }
     });
   },
 
@@ -157,9 +161,7 @@ const ProposalForm = React.createClass({
   render() {
     return (
       <form id="proposal-form" ref="form">
-        <p>
-          {this.props.form.description}
-        </p>
+        <FormattedHTMLMessage message={this.props.form.description} />
         <Input
           id="proposal_title"
           type="text"
@@ -233,7 +235,7 @@ const ProposalForm = React.createClass({
               id={'proposal_' + key}
               key={key}
               type="editor"
-              label={question.title + '*'}
+              label={question.title + (question.isRequired ? '*' : '')}
               groupClassName={this.getGroupStyle(key)}
               valueLink={this.linkState('custom.' + key)}
               help={question.helpText}

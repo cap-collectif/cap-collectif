@@ -77,6 +77,17 @@ class Question
      */
     private $proposalResponses;
 
+    /**
+     * @var bool
+     * @ORM\Column(name="required", type="boolean", nullable=true)
+     */
+    private $required;
+
+    public function __construct()
+    {
+        $this->required = false;
+    }
+
     public function __toString()
     {
         if ($this->getId()) {
@@ -197,6 +208,24 @@ class Question
     {
         $this->questionType = $questionType;
 
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRequired()
+    {
+        return $this->required;
+    }
+
+    /**
+     * @param boolean $required
+     * @return $this
+     */
+    public function setRequired($required)
+    {
+        $this->required = $required;
         return $this;
     }
 }

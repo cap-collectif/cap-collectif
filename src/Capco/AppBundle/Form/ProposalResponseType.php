@@ -5,7 +5,8 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProposalResponseType extends AbstractType
 {
@@ -25,9 +26,7 @@ class ProposalResponseType extends AbstractType
         $this->transformer->setEntityClass('Capco\AppBundle\Entity\Question');
         $this->transformer->setEntityRepository('CapcoAppBundle:Question');
         $builder
-            ->add('value', null, [
-                'required' => true,
-            ])
+            ->add('value', null)
             ->add('question', 'hidden')
         ;
         $builder
@@ -37,9 +36,9 @@ class ProposalResponseType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\ProposalResponse',

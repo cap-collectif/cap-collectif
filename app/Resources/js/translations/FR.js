@@ -179,15 +179,15 @@ export default {
       request: {
         create: {
           success: 'Merci ! Votre proposition a bien été créée.',
-          failure: 'Toutes nos excuse ! Une erreur est survenue, merci de réessayer plus tard.',
+          failure: 'Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.',
         },
         delete: {
           success: 'Votre proposition a bien été supprimée.',
-          failure: 'Toutes nos excuse ! Une erreur est survenue, merci de réessayer plus tard.',
+          failure: 'Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.',
         },
         update: {
           success: 'Votre proposition a bien été modifiée.',
-          failure: 'Toutes nos excuse ! Une erreur est survenue, merci de réessayer plus tard.',
+          failure: 'Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.',
         },
       },
       search: 'Rechercher une proposition',

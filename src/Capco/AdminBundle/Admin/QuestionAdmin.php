@@ -42,6 +42,9 @@ class QuestionAdmin extends Admin
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true,
             ])
+            ->add('required', null, [
+                'label' => 'admin.fields.question.required',
+            ])
         ;
     }
 

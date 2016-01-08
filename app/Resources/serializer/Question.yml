@@ -19,3 +19,8 @@ Capco\AppBundle\Entity\Question:
       expose: true
       type: string
       groups: [Questions]
+    required:
+      expose: true
+      type: boolean
+      serialized_name: isRequired
+      groups: [Questions, Proposals]

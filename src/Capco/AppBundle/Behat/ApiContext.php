@@ -11,6 +11,7 @@ use Doctrine\ORM\Id\AssignedGenerator;
 use GuzzleHttp\Client;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+use Coduo\PHPMatcher\Factory\SimpleFactory;
 
 class ApiContext extends ApplicationContext
 {
@@ -155,9 +156,12 @@ class ApiContext extends ApplicationContext
      */
     public function theJsonResponseShouldMatch(PyStringNode $pattern)
     {
+        $factory = new SimpleFactory();
+        $matcher = $factory->createMatcher();
+
         $this->response->json(); // check if json
         $body = (string) $this->response->getBody();
-        \PHPUnit_Framework_Assert::assertTrue(match($body, $pattern->getRaw()), $body);
+        \PHPUnit_Framework_Assert::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError());
     }
 
     /**
