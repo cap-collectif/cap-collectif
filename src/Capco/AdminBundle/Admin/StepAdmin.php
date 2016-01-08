@@ -184,7 +184,7 @@ class StepAdmin extends Admin
 
         if ($subject instanceof CollectStep) {
             $formMapper
-                ->with('admin.fields.step.group_form')
+                ->with('admin.fields.step.group_form', ['class' => 'col-md-6'])
                 ->add('proposalForm', 'sonata_type_model', [
                     'label' => 'admin.fields.step.proposal_form',
                     'query' => $this->createQueryForProposalForms(),
@@ -194,7 +194,7 @@ class StepAdmin extends Admin
                     'empty_value' => 'admin.fields.step.no_proposal_form',
                 ])
                 ->end()
-                ->with('admin.fields.step.group_statuses')
+                ->with('admin.fields.step.group_statuses', ['class' => 'col-md-6'])
                 ->add('statuses', 'sonata_type_collection', [
                     'label' => 'admin.fields.step.statuses',
                     'by_reference' => false,
