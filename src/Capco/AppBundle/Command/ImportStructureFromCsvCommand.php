@@ -5,13 +5,18 @@ namespace Capco\AppBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\AppendixType;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Symfony\Component\Console\Input\ArrayInput;
 
 class ImportStructureFromCsvCommand extends ContainerAwareCommand
 {
@@ -59,7 +64,6 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
                 if (!$next) {
                     return $type;
                 }
-
                 return $this->findOpinionTypeByPath($next, $type->getChildren());
             }
         }
@@ -120,4 +124,5 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
         $em->flush();
         $progress->finish();
     }
+
 }

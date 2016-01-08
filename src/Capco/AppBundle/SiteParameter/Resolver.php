@@ -22,6 +22,10 @@ class Resolver
     public function getValue($key, $value = null)
     {
         if (!array_key_exists($key, $this->parameters)) {
+            $this->logger->warning('Tried to access undefined or disabled site parameters.', [
+                'key' => $key,
+            ]);
+
             return $value;
         }
 

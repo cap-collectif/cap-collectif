@@ -516,13 +516,11 @@ class Proposal implements CommentableInterface, VotableInterface
 
     /**
      * @param float $estimation
-     *
      * @return $this
      */
     public function setEstimation($estimation)
     {
         $this->estimation = $estimation;
-
         return $this;
     }
 }

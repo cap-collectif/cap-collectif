@@ -1,7 +1,7 @@
 capco_admin:
-  resource: "@CapcoAdminBundle/Controller/"
-  type:     annotation
-  prefix:   /
+    resource: "@CapcoAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
 
 # API
 capco_api_synthesis:

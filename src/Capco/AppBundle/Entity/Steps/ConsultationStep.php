@@ -288,7 +288,7 @@ class ConsultationStep extends AbstractStep
     public function getProjectId()
     {
         if (!$this->projectAbstractStep) {
-            return;
+            return null;
         }
 
         return $this->projectAbstractStep

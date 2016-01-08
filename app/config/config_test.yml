@@ -1,10 +1,10 @@
 imports:
-    - { resource: config_dev.yml }
+  - { resource: config_dev.yml }
 
 framework:
   test: ~
-  # session:
-  #   storage_id: session.storage.mock_file
+  session:
+    storage_id: session.storage.filesystem
   profiler:
     collect: false
 
@@ -19,13 +19,9 @@ swiftmailer:
     service:
       disable_delivery: true
 
-monolog:
-    handlers:
-        main:
-            type:   stream
-            path:   php://stderr
-            level:  warning
-        file:
-            type: stream
-            path: %kernel.logs_dir%/test.log
-            level: debug
+doctrine:
+  dbal:
+    default_connection: default
+    connections:
+      default:
+        dbname: "%database_name%_test"

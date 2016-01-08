@@ -417,6 +417,7 @@ class Argument implements VotableInterface
 
     // ************************ Custom methods *********************************
 
+
     /**
      * @param User $user
      *
