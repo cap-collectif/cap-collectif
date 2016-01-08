@@ -63,7 +63,6 @@ function drupal_random_bytes($count)
 
 ######
 
-
 /*
  * The standard log2 number of iterations for password stretching. This should
  * increase by 1 every Drupal version in order to counteract increases in the
@@ -327,6 +326,6 @@ class DrupalEncoder implements PasswordEncoderInterface
               return false;
         }
 
-        return ($hash && $stored_hash == $hash);
+        return $hash && $stored_hash == $hash;
     }
 }

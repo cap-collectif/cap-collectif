@@ -79,9 +79,9 @@ class ProposalAdmin extends Admin
                 'help' => 'admin.fields.proposal.help.status',
             ])
             ->add('estimation', 'number', [
-                'label'    => 'admin.fields.proposal.estimation',
+                'label' => 'admin.fields.proposal.estimation',
                 'required' => false,
-                'help'     => 'admin.fields.proposal.help.estimation',
+                'help' => 'admin.fields.proposal.help.estimation',
             ])
             ->add('rating', 'choice', [
                 'label' => 'admin.fields.proposal.rating',
@@ -193,7 +193,7 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.estimation',
             ])
             ->add('proposalForm.step', null, [
-                'label' => 'admin.fields.proposal.collect_step',
+                'label' => 'admin.fields.proposal.step',
             ])
             ->add('proposalForm.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.proposal.project',

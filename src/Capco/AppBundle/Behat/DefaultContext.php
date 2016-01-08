@@ -8,7 +8,6 @@ use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Behat\MinkExtension\Context\MinkContext;
 
@@ -98,7 +97,7 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
      */
     protected function getUser()
     {
-        $token = $this->getSecurityContext()->getToken();
+        $token = $this->getService('security.token_storage')->getToken();
 
         if (null === $token) {
             throw new \Exception('No token found in security context.');
@@ -108,21 +107,11 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
     }
 
     /**
-     * Get security context.
-     *
-     * @return SecurityContextInterface
-     */
-    protected function getSecurityContext()
-    {
-        return $this->getContainer()->get('security.context');
-    }
-
-    /**
      * Generate url.
      *
-     * @param string  $route
-     * @param array   $parameters
-     * @param Boolean $absolute
+     * @param string $route
+     * @param array  $parameters
+     * @param bool   $absolute
      *
      * @return string
      */

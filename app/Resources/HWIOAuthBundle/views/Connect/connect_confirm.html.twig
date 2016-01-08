@@ -18,7 +18,7 @@
             </div>
             <div class="col-md6">
                 {% if userInformation.profilePicture is defined and userInformation.profilePicture is not empty %}
-                    {% thumbnail userInformation.profilePicture %}
+                    {% thumbnail userInformation.profilePicture, 'small' %}
                 {% endif %}
             </div>
         </div>

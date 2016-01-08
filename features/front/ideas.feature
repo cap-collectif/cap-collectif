@@ -23,8 +23,6 @@ Scenario: Can not create an idea from theme when idea creation is disabled
   Given feature "themes" is enabled
   And I visited "themes page"
   When I follow "Immobilier"
-  Then I should not see "Proposer une idée"
-
 
 # Homepage
 
@@ -90,55 +88,56 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
 
 # Comments
 
-Scenario: Can not comment an uncommentable idea
-  Given I visited "ideas page"
-  And I follow "ideaNotCommentable"
-  Then I should not see "Commenter"
+  Scenario: Can not comment an uncommentable idea
+    Given I visited "idea page" with:
+     | slug | ideanotcommentable |
+    Then I should not see "Commenter"
 
   ## Add a comment
 
-  @database @javascript
+  @database @javascript @circle
   Scenario: Anonymous wants to comment an idea
-    Given I visited "ideas page"
-    And I follow "ideaCommentable"
-    And I wait 5 seconds
+    Given I visited "idea page" with:
+     | slug | ideacommentable |
+    And I wait 1 seconds
     And I fill in the following:
-      | body        | J'ai un truc à dire |
+      | body        | J'ai un truc à dire de la part de Naruto |
     And I should see "Commenter avec mon compte"
     And I should see "Commenter sans créer de compte"
     And I fill in the following:
       | authorName  | Naruto              |
       | authorEmail | naruto72@gmail.com  |
     When I press "Commenter"
-    And I wait 10 seconds
-    Then I should see "J'ai un truc à dire" in the ".opinion__list" element
+    And I wait 5 seconds
+    Then I should see "J'ai un truc à dire de la part de Naruto" in the ".opinion__list" element
 
-  @database @javascript
+  @database @javascript @circle
   Scenario: Logged in user wants to comment an idea
     Given I am logged in as user
-    And I visited "ideas page"
-    And I follow "ideaCommentable"
-    And I wait 5 seconds
+    Given I visited "idea page" with:
+     | slug | ideacommentable |
+    And I wait 1 seconds
     And I fill in the following:
-      | body        | J'ai un truc à dire |
+      | body        | J'ai un truc à dire avec mon compte |
     And I should not see "Commenter avec mon compte"
     And I should not see "Commenter sans créer de compte"
     When I press "Commenter"
     And I wait 5 seconds
-    Then I should see "J'ai un truc à dire" in the ".opinion__list" element
+    Then I should see "J'ai un truc à dire avec mon compte" in the ".opinion__list" element
 
   @database @javascript
   Scenario: Anonymous wants to comment an idea without email
-    Given I visited "ideas page"
-    And I follow "ideaCommentable"
-    And I wait 5 seconds
+    Given I visited "idea page" with:
+     | slug | ideacommentable |
+    And I wait 1 seconds
     And I fill in the following:
-      | body        | J'ai un truc à dire |
+      | body        | J'ai un truc à dire mais pas le droit |
     And I fill in the following:
       | authorName  | Naruto              |
     When I press "Commenter"
+    And I wait 2 seconds
     Then I should see "Cette valeur n'est pas une adresse email valide."
-    And I should not see "J'ai un truc à dire" in the ".opinion__list" element
+    And I should not see "J'ai un truc à dire mais pas le droit" in the ".opinion__list" element
 
 ## Comments vote
 
@@ -147,15 +146,15 @@ Scenario: Can not comment an uncommentable idea
     Given I am logged in as user
     And I visited "idea page" with:
       | slug | ideacommentable |
-    And I wait 5 seconds
+    And I wait 1 seconds
     And The first comment vote counter should be "0"
     When I vote for the first comment
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Merci ! Votre vote a bien été pris en compte."
     And I should see "Annuler mon vote"
     And The first comment vote counter should be "1"
     And I vote for the first comment
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I should see "Votre vote a bien été annulé."
     And The first comment vote counter should be "0"
 

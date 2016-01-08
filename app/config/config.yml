@@ -1,8 +1,6 @@
-# parameters:
-#   security.authentication.rememberme.services.simplehash.class: Capco\UserBundle\Services\TokenBasedRememberMeServices
-
 imports:
     - { resource: parameters.php }
+    - { resource: parameters.yml, ignore_errors: true }
     - { resource: security.yml }
     - { resource: sonata.yml }
     - { resource: liip_imagine.yml }
@@ -38,12 +36,12 @@ snc_redis:
         default:
             type: predis
             alias: default
-            dsn: redis://localhost
+            dsn: redis://%redis_host%
             logging: %kernel.debug%
         session:
             type: predis
             alias: session
-            dsn: redis://localhost
+            dsn: redis://%redis_host%
     session:
         client: session
         ttl: 3600
@@ -202,7 +200,7 @@ qandidate_toggle:
     persistence: redis
     context_factory: null
     redis_namespace: feature_toggle # default, only required when persistence = redis
-    redis_client: capco.predis.client # only required when persistence = redis
+    redis_client: snc_redis.default # only required when persistence = redis
 
 ivory_ck_editor:
     base_path: 'js/ckeditor/'
@@ -307,6 +305,8 @@ fos_rest:
             'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
         messages:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+            'Symfony\Component\HttpKernel\Exception\HttpException': true
+            'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': true
 
 lexik_jwt_authentication:
     private_key_path: %jwt_private_key_path%

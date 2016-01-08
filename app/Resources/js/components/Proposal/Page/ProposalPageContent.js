@@ -38,9 +38,9 @@ const ProposalPageHeader = React.createClass({
           <div dangerouslySetInnerHTML={{__html: proposal.body}} />
         </div>
         {
-          proposal.responses.map((response) => {
+          proposal.responses.map((response, index) => {
             return (
-              <div className="block">
+              <div className="block" key={index}>
                 <h2 className="h2">{ response.question.title }</h2>
                 <div dangerouslySetInnerHTML={{__html: response.value}} />
               </div>

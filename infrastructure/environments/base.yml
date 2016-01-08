@@ -1,0 +1,61 @@
+application:
+    build: ../services/local
+    ports:
+        - "80:80"
+    environment:
+        SYMFONY_MAILER_HOST: mailcatchersmtp
+        SYMFONY_DATABASE_HOST: database
+        SYMFONY_ELASTICSEARCH_HOST: elasticsearch
+        SYMFONY_REDIS_HOST: redis
+    volumes_from:
+        - applicationdata
+    links:
+        - database:database
+        - elasticsearch:elasticsearch
+        - redis:redis
+        - seleniumhub:selenium
+        - mailcatcher:mailcatchersmtp
+    extra_hosts: # Used to ban varnish cache
+        - "capco.test:0.0.0.0"
+
+applicationdata:
+    build: ../services/applicationdata
+    volumes:
+        - /var/www/web/media
+        - /var/www/var/cache
+        - /var/www/var/logs
+
+database:
+    image: capco/fixtures:latest
+
+elasticsearch:
+    image: elasticsearch:1.7.3
+    volumes:
+        - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
+
+redis:
+    image: redis:3
+
+builder:
+    build: ../services/builder
+    volumes:
+        - ../../:/var/www
+        - ~/.composer:/home/capco/.composer
+        - ~/.npm:/home/capco/.npm
+        - ~/.bower:/home/capco/.bower
+    command: echo "Use 'docker-compose run builder build' to build deps"
+
+seleniumhub:
+  image: selenium/hub:2.47.1 # Fixed version to avoid a Mink issue (https://github.com/Behat/MinkExtension/issues/224)
+  ports:
+    - "4444:4444"
+
+mailcatcher:
+  image: jderusse/mailcatcher:latest
+
+chrome:
+   image: selenium/node-chrome-debug:latest
+   links:
+     - seleniumhub:hub
+     - application:capco.test
+

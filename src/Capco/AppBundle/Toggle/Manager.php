@@ -10,8 +10,6 @@ class Manager
 {
     protected $toggleManager;
 
-    protected $prefix;
-
     protected static $toggles = [
         'blog',
         'calendar',
@@ -35,20 +33,10 @@ class Manager
         'zipcode_at_register',
     ];
 
-    public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory, $prefix)
+    public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)
     {
         $this->toggleManager = $toggleManager;
         $this->context = $contextFactory->createContext();
-        $this->prefix = $prefix;
-    }
-
-    protected function getPrefixedName($name)
-    {
-        if (null != $this->prefix && !(0 === strpos($name, $this->prefix))) {
-            return $this->prefix.'__'.$name;
-        }
-
-        return $name;
     }
 
     public function activate($name)
@@ -91,7 +79,7 @@ class Manager
 
     public function isActive($name)
     {
-        return $this->toggleManager->active($this->getPrefixedName($name), $this->context);
+        return $this->toggleManager->active($name, $this->context);
     }
 
     public function hasOneActive($names)
@@ -122,9 +110,9 @@ class Manager
         return !$value;
     }
 
-    private function createToggle($name, $status, array $conditions = [])
+    private function createToggle($name, $status, $conditions = [])
     {
-        $toggle = new Toggle($this->getPrefixedName($name), $conditions);
+        $toggle = new Toggle($name, $conditions);
 
         if ($status === Toggle::INACTIVE) {
             $toggle->deactivate();
