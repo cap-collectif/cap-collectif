@@ -439,7 +439,6 @@ admin:
       author_id: Id de l'auteur
       author_type: Type d'auteur
       body: Contenu
-      collect_step: Étape de collecte
       comments: Commentaires
       created_at: Création
       district: Quartier
@@ -466,6 +465,7 @@ admin:
       responses: Champs personnalisés
       selection_steps: Étapes de sélection
       status: Statut
+      step: Étape
       theme: Thème
       title: Titre
       trashedReason: Raison de la mise dans la corbeille
