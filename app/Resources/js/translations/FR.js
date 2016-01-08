@@ -162,6 +162,7 @@ export default {
       constraints: {
         body: 'La description de la proposition doit faire au moins 2 caractères.',
         district: 'Sélectionnez un quartier',
+        question_mandatory: 'Ce champ est obligatoire.',
         theme: 'Sélectionnez un thème',
         title: 'Le titre de la proposition doit faire au moins 2 caractères.',
       },
@@ -274,7 +275,7 @@ export default {
       comment: 'Commentaire',
       comments: '{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}',
       constraints: {
-        notBlank: 'Cette valeur ne doit pas être vide',
+        notBlank: 'Cette valeur ne doit pas être vide.',
       },
       content: 'Contenu',
       done: 'Terminé',

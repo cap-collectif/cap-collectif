@@ -505,6 +505,7 @@ question_type:
   types:
     simple_text: Champ texte simple
     multiline_text: Champ texte multi-lignes
+    editor: Éditeur de texte
     file: Champ fichier
     address: Champ texte adresse
 

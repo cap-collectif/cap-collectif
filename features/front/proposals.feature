@@ -90,7 +90,26 @@ Feature: Proposals
     # And I should see "Nouvelle proposition créée"
     # And I should see "5 propositions"
 
-  @javascript
+  @javascript @security
+  Scenario: Logged in user wants to create a proposal without providing required response
+    Given I am logged in as user
+    And I visited "collect page" with:
+      | projectSlug | budget-participatif-rennes       |
+      | stepSlug    | collecte-des-propositions        |
+    And I wait 5 seconds
+    When I press "Faire une proposition"
+    And I wait 5 seconds
+    And I fill in the following:
+      | proposal_title    | Nouvelle proposition créée      |
+      | proposal_body     | Description de ma proposition   |
+      | proposal_custom-1 | Réponse à la question 1         |
+    And I select "Justice" from "proposal_theme"
+    And I select "Beaulieu" from "proposal_district"
+    And I press "Publier"
+    And I wait 5 seconds
+    Then I should see "Ce champ est obligatoire."
+
+  @javascript @security
   Scenario: Logged in user wants to create a proposal in closed collect step
     Given I am logged in as user
     And I visited "collect page" with:
@@ -100,7 +119,7 @@ Feature: Proposals
     Then I should see "Dépôt terminé. Merci à tous d'avoir contribué."
     And the button "Faire une proposition" should be disabled
 
-  @javascript
+  @javascript @security
   Scenario: Anonymous user wants to create a proposal
     Given I visited "collect page" with:
       | projectSlug | budget-participatif-rennes       |

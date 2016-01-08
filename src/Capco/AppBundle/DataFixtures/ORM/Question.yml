@@ -13,5 +13,5 @@ Capco\AppBundle\Entity\Question:
     questionChoices: []
     proposalForm: @proposalform1
     position: 2
-    questionType: 1
+    questionType: 2
     required: true

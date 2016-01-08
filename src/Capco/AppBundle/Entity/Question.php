@@ -23,15 +23,18 @@ class Question
 
     const QUESTION_TYPE_SIMPLE_TEXT = 0;
     const QUESTION_TYPE_MULTILINE_TEXT = 1;
+    const QUESTION_TYPE_EDITOR = 2;
 
     public static $questionTypesLabels = [
         self::QUESTION_TYPE_SIMPLE_TEXT => 'question_type.types.simple_text',
         self::QUESTION_TYPE_MULTILINE_TEXT => 'question_type.types.multiline_text',
+        self::QUESTION_TYPE_EDITOR => 'question_type.types.editor',
     ];
 
     public static $questionTypesInputs = [
         self::QUESTION_TYPE_SIMPLE_TEXT => 'text',
         self::QUESTION_TYPE_MULTILINE_TEXT => 'textarea',
+        self::QUESTION_TYPE_EDITOR => 'editor',
     ];
 
     /**
@@ -62,7 +65,7 @@ class Question
     /**
      * @var int
      * @Assert\NotNull()
-     * @Assert\Choice(choices={0, 1})
+     * @Assert\Choice(choices={0, 1, 2})
      * @ORM\Column(name="questionType", type="integer")
      */
     private $questionType;

@@ -4,6 +4,7 @@ import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
+import FeatureStore from '../../../stores/FeatureStore';
 
 const FormattedHTMLMessage = ReactIntl.FormattedHTMLMessage;
 
@@ -56,15 +57,20 @@ const ProposalForm = React.createClass({
         theme: [],
         district: [],
       },
+      showThemes: FeatureStore.isActive('themes'),
     };
+  },
+
+  componentWillMount() {
+    FeatureStore.addChangeListener(this.onChange);
   },
 
   componentDidMount() {
     this.props.form.questions.map((question) => {
       const ref = 'custom-' + question.id;
-      if (question.isRequired) {
+      if (question.required) {
         this.formValidationRules[ref] = {
-          notBlank: {message: 'global.constraints.notBlank'},
+          notBlank: {message: 'proposal.constraints.question_mandatory'},
         };
       }
     });
@@ -109,6 +115,19 @@ const ProposalForm = React.createClass({
       }
 
       this.props.onValidationFailure();
+    }
+  },
+
+  componentWillUnmount() {
+    FeatureStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    this.setState({
+      showThemes: FeatureStore.isActive('themes'),
+    });
+    if (!this.state.showThemes) {
+      this.formValidationRules.theme = {};
     }
   },
 
@@ -170,30 +189,34 @@ const ProposalForm = React.createClass({
           label={this.getIntlMessage('proposal.title') + '*'}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
-          help={this.props.form.title_help_text}
+          help={this.props.form.titleHelpText}
         />
 
-        <Input
-          id="proposal_theme"
-          type="select"
-          ref="theme"
-          valueLink={this.linkState('form.theme')}
-          label={this.getIntlMessage('proposal.theme') + '*'}
-          groupClassName={this.getGroupStyle('theme')}
-          errors={this.renderFormErrors('theme')}
-          help={this.props.form.theme_help_text}
-        >
-          <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
-          {
-            this.props.themes.map((theme) => {
-              return (
-                <option key={theme.id} value={theme.id}>
-                  {theme.title}
-                </option>
-              );
-            })
-          }
-        </Input>
+        {
+          this.state.showThemes
+            ? <Input
+              id="proposal_theme"
+              type="select"
+              ref="theme"
+              valueLink={this.linkState('form.theme')}
+              label={this.getIntlMessage('proposal.theme') + '*'}
+              groupClassName={this.getGroupStyle('theme')}
+              errors={this.renderFormErrors('theme')}
+              help={this.props.form.themeHelpText}
+            >
+              <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
+              {
+                this.props.themes.map((theme) => {
+                  return (
+                    <option key={theme.id} value={theme.id}>
+                      {theme.title}
+                    </option>
+                  );
+                })
+              }
+            </Input>
+            : null
+        }
 
         <Input
           id="proposal_district"
@@ -203,7 +226,7 @@ const ProposalForm = React.createClass({
           label={this.getIntlMessage('proposal.district') + '*'}
           groupClassName={this.getGroupStyle('district')}
           errors={this.renderFormErrors('district')}
-          help={this.props.form.district_help_text}
+          help={this.props.form.districtHelpText}
         >
           <option value={-1} disabled>{this.getIntlMessage('proposal.select.district')}</option>
           {
@@ -224,18 +247,19 @@ const ProposalForm = React.createClass({
         groupClassName={this.getGroupStyle('body')}
         errors={this.renderFormErrors('body')}
         valueLink={this.linkState('form.body')}
-        help={this.props.form.description_help_text}
+        help={this.props.form.descriptionHelpText}
       />
 
       {
         this.props.form.questions.map((question) => {
           const key = 'custom-' + question.id;
+          const inputType = question.inputType || 'text';
           return (
             <Input
               id={'proposal_' + key}
               key={key}
-              type="editor"
-              label={question.title + (question.isRequired ? '*' : '')}
+              type={inputType}
+              label={question.title + (question.required ? ' *' : '')}
               groupClassName={this.getGroupStyle(key)}
               valueLink={this.linkState('custom.' + key)}
               help={question.helpText}

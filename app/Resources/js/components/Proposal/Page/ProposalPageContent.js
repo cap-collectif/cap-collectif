@@ -4,6 +4,7 @@ import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
 import EditButton from '../../Form/EditButton';
 import DeleteButton from '../../Form/DeleteButton';
 import ReportButton from '../../Form/ReportButton';
+import ProposalResponse from './ProposalResponse';
 
 const ProposalPageHeader = React.createClass({
   propTypes: {
@@ -39,12 +40,7 @@ const ProposalPageHeader = React.createClass({
         </div>
         {
           proposal.responses.map((response, index) => {
-            return (
-              <div className="block" key={index}>
-                <h2 className="h2">{ response.question.title }</h2>
-                <div dangerouslySetInnerHTML={{__html: response.value}} />
-              </div>
-            );
+            return <ProposalResponse key={index} response={response} />;
           })
         }
         <div className="block proposal__buttons">
