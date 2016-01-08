@@ -24,9 +24,14 @@ class Question
     const QUESTION_TYPE_SIMPLE_TEXT = 0;
     const QUESTION_TYPE_MULTILINE_TEXT = 1;
 
-    public static $questionTypes = [
+    public static $questionTypesLabels = [
         self::QUESTION_TYPE_SIMPLE_TEXT => 'question_type.types.simple_text',
         self::QUESTION_TYPE_MULTILINE_TEXT => 'question_type.types.multiline_text',
+    ];
+
+    public static $questionTypesInputs = [
+        self::QUESTION_TYPE_SIMPLE_TEXT => 'text',
+        self::QUESTION_TYPE_MULTILINE_TEXT => 'textarea',
     ];
 
     /**
@@ -79,14 +84,9 @@ class Question
 
     /**
      * @var bool
-     * @ORM\Column(name="required", type="boolean", nullable=true)
+     * @ORM\Column(name="required", type="boolean", nullable=false)
      */
-    private $required;
-
-    public function __construct()
-    {
-        $this->required = false;
-    }
+    private $required = false;
 
     public function __toString()
     {
@@ -227,5 +227,13 @@ class Question
     {
         $this->required = $required;
         return $this;
+    }
+
+    public function getInputType()
+    {
+        if (array_key_exists($this->questionType, self::$questionTypesInputs)) {
+            return self::$questionTypesInputs[$this->questionType];
+        }
+        return null;
     }
 }

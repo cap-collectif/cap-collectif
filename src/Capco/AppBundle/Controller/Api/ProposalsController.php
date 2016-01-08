@@ -135,22 +135,6 @@ class ProposalsController extends FOSRestController
         $form = $this->createForm('proposal', $proposal);
         $form->submit($request->request->all());
 
-        $questions = $proposal->getProposalForm()->getQuestions();
-        $validationRulesForResponses = $this->getValidationRulesForProposalResponses($questions);
-        $proposalResponses = $request->get('proposalResponses');
-
-        foreach($proposalResponses as $proposalResponse) {
-            if (array_key_exists($proposalResponse['question'], $validationRulesForResponses)) {
-                $errorList = $this->get('validator')->validate(
-                    $proposalResponse['value'],
-                    $validationRulesForResponses[$proposalResponse['question']]['constraint']
-                );
-                if (count($errorList) > 0) {
-                    $form->addError((new FormError($errorList[0]->getMessage())));
-                }
-            }
-        }
-
         if (!$form->isValid()) {
             return $form;
         }
@@ -338,17 +322,5 @@ class ProposalsController extends FOSRestController
         );
 
         return [];
-    }
-
-    private function getValidationRulesForProposalResponses($questions) {
-        $rules = [];
-
-        foreach($questions as $question) {
-            if ($question->isRequired()) {
-                $rules[$question->getId()]['constraint'] = new Assert\NotBlank();
-            }
-        }
-
-        return $rules;
     }
 }

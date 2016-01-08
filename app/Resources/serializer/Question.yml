@@ -9,11 +9,6 @@ Capco\AppBundle\Entity\Question:
       expose: true
       type: string
       groups: [Questions, Proposals]
-    questionType:
-      expose: true
-      type: integer
-      serialized_name: questionType
-      groups: [Questions, Proposals]
     helpText:
       serialized_name: helpText
       expose: true
@@ -22,5 +17,11 @@ Capco\AppBundle\Entity\Question:
     required:
       expose: true
       type: boolean
-      serialized_name: isRequired
+      serialized_name: required
       groups: [Questions, Proposals]
+  virtual_properties:
+    getInputType:
+      expose: true
+      type: string
+      serialized_name: inputType
+      groups: [Questions]

@@ -46,8 +46,7 @@ class ProposalResponse
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     * @ORM\Column(name="value", type="text")
+     * @ORM\Column(name="value", type="text", nullable=true)
      */
     private $value;
 

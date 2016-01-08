@@ -13,6 +13,7 @@ Capco\AppBundle\Entity\ProposalForm:
             expose: true
             type: string
             groups: [ProposalForms]
+            serialized_name: titleHelpText
         description:
             expose: true
             type: string
@@ -21,26 +22,21 @@ Capco\AppBundle\Entity\ProposalForm:
             expose: true
             type: string
             groups: [ProposalForms]
+            serialized_name: descriptionHelpText
         themeHelpText:
             expose: true
             type: string
             groups: [ProposalForms]
+            serialized_name: themeHelpText
         districtHelpText:
             expose: true
             type: string
             groups: [ProposalForms]
+            serialized_name: districtHelpText
         questions:
             expose: true
             type: Capco\AppBundle\Entity\Question
             serialized_name: questions
-            groups: [ProposalForms]
-        createdAt:
-            expose: true
-            type: DateTime
-            groups: [ProposalForms]
-        updatedAt:
-            expose: true
-            type: DateTime
             groups: [ProposalForms]
     virtual_properties:
         canContribute:

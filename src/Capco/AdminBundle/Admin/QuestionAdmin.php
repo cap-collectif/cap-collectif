@@ -3,12 +3,9 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Question;
-use Capco\AppBundle\Entity\QuestionType;
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class QuestionAdmin extends Admin
 {
@@ -38,7 +35,7 @@ class QuestionAdmin extends Admin
             ])
             ->add('questionType', 'choice', [
                 'label' => 'admin.fields.question.question_type',
-                'choices' => Question::$questionTypes,
+                'choices' => Question::$questionTypesLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true,
             ])
@@ -48,27 +45,14 @@ class QuestionAdmin extends Admin
         ;
     }
 
-    // Fields to be shown on show page
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureRoutes(RouteCollection $collection)
     {
+        $collection->clearExcept(['create', 'edit', 'delete']);
     }
 
-    // Fields to be shown on filter forms
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    public function getBatchActions()
     {
+        return;
     }
 
-    // Fields to be shown on lists
-    /**
-     * @param ListMapper $listMapper
-     */
-    protected function configureListFields(ListMapper $listMapper)
-    {
-    }
 }

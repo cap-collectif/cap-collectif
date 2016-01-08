@@ -9,9 +9,26 @@ Feature: ProposalForm Restful Api
   "id": @integer@,
   "title": @string@,
   "description": @string@,
-  "questions": @...@,
-  "created_at": "@string@.isDateTime()",
-  "updated_at": "@string@.isDateTime()",
-  "isContribuable": @boolean@
+  "titleHelpText": @...@,
+  "descriptionHelpText": @...@,
+  "themeHelpText": @...@,
+  "districtHelpText": @...@,
+  "isContribuable": true,
+  "questions": [
+    {
+      "id": @integer@,
+      "inputType": "text",
+      "helpText": @string@,
+      "required": false,
+      "title": @string@
+    },
+    {
+      "id": @integer@,
+      "inputType": "textarea",
+      "helpText": @string@,
+      "required": true,
+      "title": @string@
+    }
+  ]
 }
 """

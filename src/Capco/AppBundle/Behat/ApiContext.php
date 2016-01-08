@@ -161,7 +161,7 @@ class ApiContext extends ApplicationContext
 
         $this->response->json(); // check if json
         $body = (string) $this->response->getBody();
-        \PHPUnit_Framework_Assert::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError());
+        \PHPUnit_Framework_Assert::assertTrue($matcher->match($body, $pattern->getRaw()), $body.' => '.$matcher->getError());
     }
 
     /**

@@ -1,6 +1,6 @@
 Feature: Proposal Restful Api
   As an API client
-  @debug
+
   Scenario: Anonymous API client wants to get one proposal from a ProposalForm
     When I send a GET request to "/api/proposal_forms/1/proposals/1"
     Then the JSON response should match:
@@ -34,9 +34,7 @@ Feature: Proposal Restful Api
         "user_type": {
           "id": @integer@,
           "name": @string@,
-          "slug": @string@,
-          "questionType": @number@,
-          "title": @string@
+          "slug": @string@
         },
         "vip": true,
         "_links": {
@@ -50,12 +48,7 @@ Feature: Proposal Restful Api
       "comments": @array@,
       "responses":[
         {
-          "question": {
-            "id": @integer@,
-            "questionType": @number@,
-            "title": @string@,
-            "isRequired": @boolean@
-          },
+          "question": @...@,
           "value": @string@
         },
         @...@
@@ -191,9 +184,54 @@ Feature: Proposal Restful Api
     }
     """
 
+    # Create proposal
 
   @database
-  Scenario: logged in API client wants to add a proposal
+  Scenario: Logged in API client wants to add a proposal (with no value for not required response)
+    Given I am logged in to api as user
+    When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+    """
+    {
+      "title": "Acheter un sauna pour Capco",
+      "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
+      "theme": 1,
+      "district": 1,
+      "proposalResponses": [
+        {
+          "question": 1,
+          "value": ""
+        },
+        {
+          "question": 2,
+          "value": "Réponse à la question obligatoire"
+        }
+      ]
+    }
+    """
+    Then the JSON response status code should be 201
+
+  @database
+  Scenario: Logged in API client wants to add a proposal (with nothing for not required response)
+    Given I am logged in to api as user
+    When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+    """
+    {
+      "title": "Acheter un sauna pour Capco",
+      "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
+      "theme": 1,
+      "district": 1,
+      "proposalResponses": [
+        {
+          "question": 2,
+          "value": "Réponse à la question obligatoire"
+        }
+      ]
+    }
+    """
+    Then the JSON response status code should be 201
+
+  @security
+  Scenario: Logged in API client wants to add a proposal without required response
     Given I am logged in to api as user
     When I send a POST request to "/api/proposal_forms/1/proposals" with json:
     """
@@ -210,7 +248,57 @@ Feature: Proposal Restful Api
       ]
     }
     """
-    Then the JSON response status code should be 201
+    Then the JSON response status code should be 400
+    And the JSON response should match:
+    """
+    {
+      "code": 400,
+      "message": "Validation Failed",
+      "errors": {
+          "errors": [
+            "Veuillez répondre à toutes les questions obligatoires pour soumettre cette proposition."
+          ],
+          "children": @...@
+      }
+    }
+    """
+
+  @security
+  Scenario: Logged in API client wants to add a proposal with empty required response
+    Given I am logged in to api as user
+    When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+    """
+    {
+      "title": "Acheter un sauna pour Capco",
+      "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
+      "theme": 1,
+      "district": 1,
+      "proposalResponses": [
+        {
+          "question": 1,
+          "value": "Mega important"
+        },
+        {
+          "question": 2,
+          "value": ""
+        }
+      ]
+    }
+    """
+    Then the JSON response status code should be 400
+    And the JSON response should match:
+    """
+    {
+      "code": 400,
+      "message": "Validation Failed",
+      "errors": {
+          "errors": [
+            "Veuillez répondre à toutes les questions obligatoires pour soumettre cette proposition."
+          ],
+          "children": @...@
+      }
+    }
+    """
 
   @database
   Scenario: logged in API client wants to edit a proposal

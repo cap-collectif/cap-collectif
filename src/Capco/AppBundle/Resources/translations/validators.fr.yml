@@ -62,5 +62,8 @@ argument:
 comment:
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
 
+proposal:
+  missing_required_responses: Veuillez répondre à toutes les questions obligatoires pour soumettre cette proposition.
+
 source:
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
