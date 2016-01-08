@@ -81,9 +81,9 @@ class Proposal implements CommentableInterface, VotableInterface
     private $annotation;
 
     /**
-     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @CapcoAssert\HasThemeIfActivated()
      */
     private $theme = null;
 

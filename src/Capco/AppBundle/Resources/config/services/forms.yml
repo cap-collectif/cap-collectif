@@ -18,7 +18,7 @@ services:
 
   capco.form.proposal:
       class: Capco\AppBundle\Form\ProposalType
-      arguments: [@capco.form.transformer.entity_to_id]
+      arguments: [@capco.form.transformer.entity_to_id, @capco.toggle.manager]
       tags:
         - { name: form.type, alias: proposal }
 

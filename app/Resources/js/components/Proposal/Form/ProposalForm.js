@@ -74,10 +74,11 @@ const ProposalForm = React.createClass({
         };
       }
     });
+    this.updateThemeConstraint();
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isSubmitting === true) {
+    if (!this.props.isSubmitting && nextProps.isSubmitting === true) {
       if (this.isValid()) {
         const form = this.state.form;
         const responses = [];
@@ -90,6 +91,9 @@ const ProposalForm = React.createClass({
           });
         });
         form.proposalResponses = responses;
+        if (!this.state.showThemes) {
+          delete form.theme;
+        }
         if (this.props.mode === 'edit') {
           ProposalActions
             .update(this.props.form.id, this.props.proposal.id, form)
@@ -126,9 +130,7 @@ const ProposalForm = React.createClass({
     this.setState({
       showThemes: FeatureStore.isActive('themes'),
     });
-    if (!this.state.showThemes) {
-      this.formValidationRules.theme = {};
-    }
+    this.updateThemeConstraint();
   },
 
   getInitialFormAnswers() {
@@ -152,10 +154,17 @@ const ProposalForm = React.createClass({
     return '';
   },
 
+  updateThemeConstraint() {
+    if (this.state.showThemes) {
+      this.formValidationRules.theme = {
+        minValue: {value: 0, message: 'proposal.constraints.theme'},
+      };
+      return;
+    }
+    this.formValidationRules.theme = {};
+  },
+
   formValidationRules: {
-    theme: {
-      minValue: {value: 0, message: 'proposal.constraints.theme'},
-    },
     district: {
       minValue: {value: 0, message: 'proposal.constraints.district'},
     },
@@ -186,7 +195,7 @@ const ProposalForm = React.createClass({
           type="text"
           ref="title"
           valueLink={this.linkState('form.title')}
-          label={this.getIntlMessage('proposal.title') + '*'}
+          label={this.getIntlMessage('proposal.title') + ' *'}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
           help={this.props.form.titleHelpText}
@@ -199,7 +208,7 @@ const ProposalForm = React.createClass({
               type="select"
               ref="theme"
               valueLink={this.linkState('form.theme')}
-              label={this.getIntlMessage('proposal.theme') + '*'}
+              label={this.getIntlMessage('proposal.theme') + ' *'}
               groupClassName={this.getGroupStyle('theme')}
               errors={this.renderFormErrors('theme')}
               help={this.props.form.themeHelpText}
@@ -223,7 +232,7 @@ const ProposalForm = React.createClass({
           type="select"
           ref="district"
           valueLink={this.linkState('form.district')}
-          label={this.getIntlMessage('proposal.district') + '*'}
+          label={this.getIntlMessage('proposal.district') + ' *'}
           groupClassName={this.getGroupStyle('district')}
           errors={this.renderFormErrors('district')}
           help={this.props.form.districtHelpText}
@@ -243,7 +252,7 @@ const ProposalForm = React.createClass({
       <Input
         id="proposal_body"
         type="editor"
-        label={this.getIntlMessage('proposal.body') + '*'}
+        label={this.getIntlMessage('proposal.body') + ' *'}
         groupClassName={this.getGroupStyle('body')}
         errors={this.renderFormErrors('body')}
         valueLink={this.linkState('form.body')}

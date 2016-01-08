@@ -194,7 +194,6 @@ Feature: Proposal Restful Api
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-      "theme": 1,
       "district": 1,
       "proposalResponses": [
         {
@@ -218,7 +217,6 @@ Feature: Proposal Restful Api
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-      "theme": 1,
       "district": 1,
       "proposalResponses": [
         {
@@ -238,7 +236,6 @@ Feature: Proposal Restful Api
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-      "theme": 1,
       "district": 1,
       "proposalResponses": [
         {
@@ -255,10 +252,10 @@ Feature: Proposal Restful Api
       "code": 400,
       "message": "Validation Failed",
       "errors": {
-          "errors": [
-            "Veuillez répondre à toutes les questions obligatoires pour soumettre cette proposition."
-          ],
-          "children": @...@
+        "errors": [
+          "Veuillez répondre à toutes les questions obligatoires pour soumettre cette proposition."
+        ],
+        "children": @...@
       }
     }
     """
@@ -271,7 +268,6 @@ Feature: Proposal Restful Api
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-      "theme": 1,
       "district": 1,
       "proposalResponses": [
         {

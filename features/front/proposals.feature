@@ -74,6 +74,30 @@ Feature: Proposals
       | projectSlug | budget-participatif-rennes       |
       | stepSlug    | collecte-des-propositions        |
     And I wait 1 seconds
+    Then I should see "4 propositions"
+    When I press "Faire une proposition"
+    And I wait 5 seconds
+    And I fill in the following:
+      | proposal_title    | Nouvelle proposition créée      |
+      | proposal_body     | Description de ma proposition   |
+      | proposal_custom-1 | Réponse à la question 1         |
+      | proposal_custom-2 | Réponse à la question 2         |
+    And I select "Beaulieu" from "proposal_district"
+    And I press "Publier"
+    And I wait 5 seconds
+    Then I should see "Merci ! Votre proposition a bien été créée."
+    And I should see "5 propositions"
+    And I should see "Nouvelle proposition créée"
+
+  @database @javascript @elasticsearch
+  Scenario: Logged in user wants to create a proposal with theme
+    Given feature "themes" is enabled
+    And I am logged in as user
+    And I visited "collect page" with:
+      | projectSlug | budget-participatif-rennes       |
+      | stepSlug    | collecte-des-propositions        |
+    And I wait 5 seconds
+    Then I should see "4 propositions"
     When I press "Faire une proposition"
     And I wait 1 seconds
     And I fill in the following:
@@ -103,7 +127,6 @@ Feature: Proposals
       | proposal_title    | Nouvelle proposition créée      |
       | proposal_body     | Description de ma proposition   |
       | proposal_custom-1 | Réponse à la question 1         |
-    And I select "Justice" from "proposal_theme"
     And I select "Beaulieu" from "proposal_district"
     And I press "Publier"
     And I wait 5 seconds
@@ -141,7 +164,6 @@ Feature: Proposals
     And I wait 1 seconds
     And I fill in the following:
       | proposal_title    | Nouveau titre                           |
-    And I select "Immobilier" from "proposal_theme"
     And I press "Publier"
     And I wait 1 seconds
     Then I should see "Votre proposition a bien été modifiée."
