@@ -2,56 +2,69 @@ from task import task
 from fabric.operations import local, run, settings
 from fabric.api import env
 from fabric.colors import cyan
-
+from infrastructure import ensure_vm_is_up
 
 @task(environments=['local'])
 def linux_docker_install(force=False):
     """
     Install docker on linux
     """
-    if env.boot2docker:
+    if env.docker_machine or env.dinghy:
         return
 
     local('curl -sSL https://get.docker.com/ | sh')
     local('curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose')
-
-
-@task(environments=['local'])
-def macos_reinstall(force=False):
-    local('docker-machine rm capco')
-    macos_install()
-    macos_mountnfs()
-
+    local('sudo apt-get install unrar')
 
 @task(environments=['local'])
-def macos_install(force=False):
+def docker_machine_install(force=False):
     """
     Install docker-machine
     """
-    if not env.boot2docker:
+    if not env.docker_machine:
         return
 
     with settings(warn_only=True):
         result = local('which docker-machine')
         if force or not result.succeeded:
-            local('brew install caskroom/cask/brew-cask')
-            local('brew cask install dockertoolbox')
+            docker_toolbox_install()
 
     with settings(warn_only=True):
         local('docker-machine create --driver virtualbox --virtualbox-memory 4096 --virtualbox-disk-size 30000 --virtualbox-cpu-count 8 --virtualbox-hostonly-nictype "Am79C973" capco')
 
+def docker_toolbox_install():
+    local('brew install caskroom/cask/brew-cask')
+    local('brew cask install dockertoolbox')
 
 @task(environments=['local'])
-def macos_mountnfs():
+def dinghy_install(force=False):
+    """
+    Install dinghy
+    """
+    with settings(warn_only=True):
+        result = local('which dinghy')
+        if force or not result.succeeded:
+            docker_toolbox_install()
+            local('brew tap codekitchen/dinghy')
+            local('brew install dinghy')
+
+    with settings(warn_only=True):
+        local('dinghy help create')
+        local('dinghy create --provider virtualbox --virtualbox-memory 4096 --virtualbox-disk-size 30000 --virtualbox-cpu-count 8 --virtualbox-hostonly-nictype "Am79C973" capco')
+
+
+@task(environments=['local'])
+def docker_macos_mountnfs():
     """
     Mount nfs shared folder on docker-machine
     """
-    if not env.boot2docker:
+    if not env.docker_machine:
         return
 
     with settings(warn_only=True):
         local('VBoxManage sharedfolder remove capco --name Users')
 
+    ensure_vm_is_up()
     with settings(warn_only=True):
         env.host_string = 'docker@%s' % local('docker-machine ip capco', capture=True)
     env.key_filename = '~/.docker/machine/machines/capco/id_rsa'

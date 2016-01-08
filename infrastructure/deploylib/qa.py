@@ -15,7 +15,7 @@ def checkcs():
     "Check code style"
     env.compose_run('php-cs-fixer fix --level=symfony --dry-run --diff src || echo ""', 'builder', '.', no_deps=True)
     env.compose_run('npm run checkcs', 'builder', '.', no_deps=True)
-    local('pep8 infrastructure/deploylib --ignore=E501')
+    env.compose_run('pep8 infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
     env.service_command('php bin/console lint:twig app/', 'application', env.www_app)
 
 
@@ -24,8 +24,7 @@ def lint():
     "Lint"
     env.compose_run('php-cs-fixer fix --level=symfony --diff src', 'builder', '.', no_deps=True)
     env.compose_run('npm run lint', 'builder', '.', no_deps=True)
-    local('autopep8 --in-place --aggressive --aggressive infrastructure/deploylib/* --ignore=E501')
-
+    env.compose_run('autopep8 --in-place --aggressive --aggressive infrastructure/deploylib/* --ignore=E501', 'builder', '.', no_deps=True)
 
 @task(environments=['local'])
 def fix_cs_file(file, dry_run=False):
@@ -49,6 +48,8 @@ def behat(fast_failure='true', profile=False, tags='false', feature='false'):
         env.service_command('docker pull capco/fixtures:latest', 'application')
         env.compose('up -d --force-recreate database')
         time.sleep(2)
+    if env.ci:
+        env.service_command('php bin/console capco:reinit --force', 'application', env.www_app)
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     if profile:
         jobs = [profile]

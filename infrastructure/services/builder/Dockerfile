@@ -36,7 +36,7 @@ RUN curl https://deb.nodesource.com/node_5.x/pool/main/n/nodejs/nodejs_5.1.1-1no
 RUN npm install -g bower brunch
 
 # Install pep8
-RUN pip install pep8
+RUN pip install pep8 autopep8
 
 # Install fake user 1000
 RUN mkdir -m 777 -p /home/capco

@@ -1,3 +1,2 @@
 Fabric==1.10.2
 docker-compose==1.5.1
-pep8

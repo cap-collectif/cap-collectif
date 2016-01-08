@@ -37,31 +37,45 @@ def testing():
 def circleci():
     env.lxc = True
     env.host_string = 'docker@circleci'
+    env.ci = True
 
 
 def travisci():
     env.host_string = 'docker@localhost'
-
+    env.ci = True
 
 @environnment
 def local():
     if _platform == "linux" or _platform == "linux2":
         locallinux()
     elif _platform == "darwin":
-        localmac()
+        with settings(warn_only=True):
+            result = lrun('which dinghy')
+         if result.succeeded:
+            print "Using dinghy"
+            localmac_dinghy()
+         else:
+             localmac_dockermachine()
     env.host_string = 'docker@localhost'
     env.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/development.yml']
     env.shell = "/bin/sh -c"
     env.directory = env.root_dir
 
-
-def localmac():
+def localmac_dinghy():
     env.run = lrun
     env.local = True
-    env.host_string = 'docker@boot2docker'
-    env.key_filename = '~/.ssh/id_boot2docker'
-    env.boot2docker = True
-    env.local_ip = '192.168.99.100'  # to verify
+    env.host_string = 'docker@192.168.99.100'
+    env.key_filename = '~/.docker/machine/machines/capco/id_rsa'
+    env.dinghy = True
+    env.local_ip = '192.168.99.100'
+
+def localmac_dockermachine():
+    env.run = lrun
+    env.local = True
+    env.host_string = 'docker@192.168.99.100'
+    env.key_filename = '~/.docker/machine/machines/capco/id_rsa'
+    env.docker_machine = True
+    env.local_ip = '192.168.99.100'
 
 
 def locallinux():
@@ -71,7 +85,7 @@ def locallinux():
 
 
 def ssh_into(service):
-    if env.boot2docker:
+    if env.docker_machine:
         env.run('eval "$(docker-machine env capco)" && docker exec -t -i -u capco %s_%s_1 /bin/bash' % (env.project_name, service))
     elif env.lxc:
         print "Disabled in lxc environment."
@@ -82,7 +96,7 @@ def ssh_into(service):
 def command(command_name, service, directory=".", user="capco"):
     if env.lxc:
         env.run('sudo lxc-attach -n "$(docker inspect --format \'{{.Id}}\' %s_%s_1)" -- /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
-    elif env.boot2docker:
+    elif env.docker_machine:
         env.run('eval "$(docker-machine env capco)" && docker exec -t -i %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
     else:
         env.run('docker exec -t -i %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
@@ -98,7 +112,7 @@ def compose_run(command_name, service, directory=".", user="root", no_deps=False
 def compose(command_name):
     merge_infra_files()
     with cd(env.directory):
-        if env.boot2docker:
+        if env.docker_machine:
             env.run('eval "$(docker-machine env capco)" && docker-compose -p %s -f %s/%s %s' % (env.project_name, env.directory, env.temporary_file, command_name))
         else:
             env.run('docker-compose -p %s -f %s/%s %s' % (env.project_name, env.directory, env.temporary_file, command_name))
@@ -146,12 +160,14 @@ env.docker = True
 env.service_command = command
 env.compose = compose
 env.compose_run = compose_run
+env.ci = False
 env.project_name = 'capco'
 env.www_app = '/var/www/'
 env.ssh_into = ssh_into
 env.pull = pull
 env.local = False
-env.boot2docker = False
+env.dinghy = False
+env.docker_machine = False
 env.build_at_up = True
 env.lxc = False
 env.root_dir = os.path.realpath(os.path.dirname(os.path.realpath(__file__)) + '/../..')
