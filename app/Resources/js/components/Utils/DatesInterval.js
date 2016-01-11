@@ -3,14 +3,13 @@ const FormattedMessage = ReactIntl.FormattedMessage;
 
 const DatesInterval = React.createClass({
   propTypes: {
-    startAt: React.PropTypes.string,
+    startAt: React.PropTypes.string.isRequired,
     endAt: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
-      startAt: null,
       endAt: null,
     };
   },
@@ -22,10 +21,6 @@ const DatesInterval = React.createClass({
 
   render() {
     const { startAt, endAt } = this.props;
-
-    if (!startAt) {
-      return null;
-    }
 
     const startDay = (
       <FormattedDate

@@ -17,8 +17,8 @@ const ProposalPageComments = React.createClass({
   render() {
     const classes = {
       'proposal__comments': true,
+      [this.props.className]: true,
     };
-    classes[this.props.className] = true;
     return (
       <div className={classNames(classes)}>
         <CommentSection

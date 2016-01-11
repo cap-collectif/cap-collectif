@@ -17,8 +17,8 @@ const ProposalPageAnswer = React.createClass({
     const answer = this.props.answer;
     const classes = {
       'bg-vip': answer.author && answer.author.vip,
+      [this.props.className]: true,
     };
-    classes[this.props.className] = true;
     return (
       <div className={classNames(classes)}>
         <div className="block">

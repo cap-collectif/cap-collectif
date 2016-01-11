@@ -9,19 +9,16 @@ const ProposalVoteForm = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     selectionStepId: React.PropTypes.number.isRequired,
-    userHasVote: React.PropTypes.bool,
     isSubmitting: React.PropTypes.bool.isRequired,
-    onValidationFailure: React.PropTypes.func,
-    onSubmitSuccess: React.PropTypes.func,
-    onSubmitFailure: React.PropTypes.func,
+    onValidationFailure: React.PropTypes.func.isRequired,
+    onSubmitSuccess: React.PropTypes.func.isRequired,
+    onSubmitFailure: React.PropTypes.func.isRequired,
+    userHasVote: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
-      onValidationFailure: () => {},
-      onSubmitSuccess: () => {},
-      onSubmitFailure: () => {},
       userHasVote: false,
     };
   },

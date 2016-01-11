@@ -41,8 +41,8 @@ const ProposalPageHeader = React.createClass({
     const proposal = this.props.proposal;
     const classes = {
       'proposal__content': true,
+      [this.props.className]: true,
     };
-    classes[this.props.className] = true;
     return (
       <div className={classNames(classes)}>
         <div className="block">
