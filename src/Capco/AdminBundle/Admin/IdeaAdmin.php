@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
-use Sonata\AdminBundle\Route\RouteCollection;
 
 class IdeaAdmin extends Admin
 {
@@ -105,7 +104,6 @@ class IdeaAdmin extends Admin
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
-                    'export_voters' => ['template' => 'CapcoAdminBundle:CRUD:list__action_export_voters.html.twig']
                 ],
             ])
         ;
@@ -237,11 +235,6 @@ class IdeaAdmin extends Admin
                 ])
             ;
         }
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->add('export_voters', $this->getRouterIdParameter().'/export_voters');
     }
 
     // For mosaic view

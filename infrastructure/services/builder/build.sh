@@ -8,6 +8,7 @@ if [ "$PRODUCTION" ]; then
 
   # Frontend deps
   npm install --production
+  npm rebuild node-sass
   bower install --config.interactive=false --allow-root --config.storage.cache=/home/capco/.cache/bower
   brunch build --production
 else
