@@ -16,10 +16,10 @@ trait PageTrait
 
     public function getSelector($name)
     {
-      if (isset($this->elements[$name])) {
-          return $this->elements[$name];
-      }
+        if (isset($this->elements[$name])) {
+            return $this->elements[$name];
+        }
 
-      throw new \Exception(sprintf('"%s" not found in array', $name));
+        throw new \Exception(sprintf('"%s" not found in array', $name));
     }
 }

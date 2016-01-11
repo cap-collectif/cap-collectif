@@ -1,6 +1,6 @@
 from fabric.api import env, cd
 from functools import wraps
-from fabric.operations import local as lrun, run
+from fabric.operations import local as lrun, run, settings
 from sys import platform as _platform
 from yaml import load, dump
 
@@ -44,6 +44,7 @@ def travisci():
     env.host_string = 'docker@localhost'
     env.ci = True
 
+
 @environnment
 def local():
     if _platform == "linux" or _platform == "linux2":
@@ -51,15 +52,16 @@ def local():
     elif _platform == "darwin":
         with settings(warn_only=True):
             result = lrun('which dinghy')
-         if result.succeeded:
-            print "Using dinghy"
-            localmac_dinghy()
-         else:
-             localmac_dockermachine()
+            if result.succeeded:
+                print "Using dinghy"
+                localmac_dinghy()
+            else:
+                localmac_dockermachine()
     env.host_string = 'docker@localhost'
     env.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/development.yml']
     env.shell = "/bin/sh -c"
     env.directory = env.root_dir
+
 
 def localmac_dinghy():
     env.run = lrun
@@ -68,6 +70,7 @@ def localmac_dinghy():
     env.key_filename = '~/.docker/machine/machines/capco/id_rsa'
     env.dinghy = True
     env.local_ip = '192.168.99.100'
+
 
 def localmac_dockermachine():
     env.run = lrun
@@ -87,6 +90,8 @@ def locallinux():
 def ssh_into(service):
     if env.docker_machine:
         env.run('eval "$(docker-machine env capco)" && docker exec -t -i -u capco %s_%s_1 /bin/bash' % (env.project_name, service))
+    elif env.dinghy:
+        env.run('eval "$(docker-machine env dinghy)" && docker exec -t -i -u capco %s_%s_1 /bin/bash' % (env.project_name, service))
     elif env.lxc:
         print "Disabled in lxc environment."
     else:
@@ -98,6 +103,8 @@ def command(command_name, service, directory=".", user="capco"):
         env.run('sudo lxc-attach -n "$(docker inspect --format \'{{.Id}}\' %s_%s_1)" -- /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
     elif env.docker_machine:
         env.run('eval "$(docker-machine env capco)" && docker exec -t -i %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
+    elif env.dinghy:
+        env.run('eval "$(docker-machine env dinghy)" && docker exec -t -i %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
     else:
         env.run('docker exec -t -i %s_%s_1 /bin/bash -c -l \'cd %s && su %s -c "%s"\'' % (env.project_name, service, directory, user, command_name))
 
@@ -114,6 +121,8 @@ def compose(command_name):
     with cd(env.directory):
         if env.docker_machine:
             env.run('eval "$(docker-machine env capco)" && docker-compose -p %s -f %s/%s %s' % (env.project_name, env.directory, env.temporary_file, command_name))
+        elif env.dinghy:
+            env.run('eval "$(docker-machine env dinghy)" && docker-compose -p %s -f %s/%s %s' % (env.project_name, env.directory, env.temporary_file, command_name))
         else:
             env.run('docker-compose -p %s -f %s/%s %s' % (env.project_name, env.directory, env.temporary_file, command_name))
 

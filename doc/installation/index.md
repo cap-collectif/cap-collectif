@@ -19,14 +19,27 @@ Il est recommandé d'utiliser le plugin oh-my-zsh pour l'autocompletion des comm
 
 #### Préparer sa machine
 
+On ajoute les vhosts:
+
+```
+$ fab local.system.configure_vhosts
+```
+
 Pour la suite des prérequis cela dépend de votre OS :
 
 ##### Spécifiques à OSX
 
+Recommandé pour les performances:
+
 ```
-$ fab local.system.macos_install
+$ fab local.system.dinghy_install
+```
+
+Sinon utilisez directemment docker-machine:
+
+```
+$ fab local.system.docker_machine_install
 $ fab local.system.macos_mountnfs
-$ fab local.system.configure_vhosts
 ```
 
 ##### Spécifiques à Linux

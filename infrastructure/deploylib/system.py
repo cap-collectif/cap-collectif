@@ -4,6 +4,7 @@ from fabric.api import env
 from fabric.colors import cyan
 from infrastructure import ensure_vm_is_up
 
+
 @task(environments=['local'])
 def linux_docker_install(force=False):
     """
@@ -15,6 +16,7 @@ def linux_docker_install(force=False):
     local('curl -sSL https://get.docker.com/ | sh')
     local('curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose')
     local('sudo apt-get install unrar')
+
 
 @task(environments=['local'])
 def docker_machine_install(force=False):
@@ -32,9 +34,11 @@ def docker_machine_install(force=False):
     with settings(warn_only=True):
         local('docker-machine create --driver virtualbox --virtualbox-memory 4096 --virtualbox-disk-size 30000 --virtualbox-cpu-count 8 --virtualbox-hostonly-nictype "Am79C973" capco')
 
+
 def docker_toolbox_install():
     local('brew install caskroom/cask/brew-cask')
     local('brew cask install dockertoolbox')
+
 
 @task(environments=['local'])
 def dinghy_install(force=False):
@@ -49,8 +53,7 @@ def dinghy_install(force=False):
             local('brew install dinghy')
 
     with settings(warn_only=True):
-        local('dinghy help create')
-        local('dinghy create --provider virtualbox --virtualbox-memory 4096 --virtualbox-disk-size 30000 --virtualbox-cpu-count 8 --virtualbox-hostonly-nictype "Am79C973" capco')
+        local('dinghy create --provider=virtualbox --memory=4096 --disk=30000 --cpus=8')
 
 
 @task(environments=['local'])

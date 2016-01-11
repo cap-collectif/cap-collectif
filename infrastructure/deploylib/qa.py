@@ -22,9 +22,10 @@ def checkcs():
 @task(environments=['local'])
 def lint():
     "Lint"
-    env.compose_run('php-cs-fixer fix --level=symfony --diff src', 'builder', '.', no_deps=True)
+    env.compose_run('php-cs-fixer fix --level=symfony --diff src || echo ""', 'builder', '.', no_deps=True)
     env.compose_run('npm run lint', 'builder', '.', no_deps=True)
     env.compose_run('autopep8 --in-place --aggressive --aggressive infrastructure/deploylib/* --ignore=E501', 'builder', '.', no_deps=True)
+
 
 @task(environments=['local'])
 def fix_cs_file(file, dry_run=False):
@@ -63,7 +64,7 @@ def behat(fast_failure='true', profile=False, tags='false', feature='false'):
 
 @task(environments=['local'])
 def view(port='5900'):
-    local('echo "secret" | open vnc://`docker-machine ip capco`::' + port)
+    local('echo "secret" | open vnc://`docker-machine ip dinghy`::' + port)
 
 
 @task(environments=['local'])

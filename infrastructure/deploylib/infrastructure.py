@@ -6,6 +6,7 @@ import app
 from fabric.colors import red
 from fabric.utils import abort
 
+
 @task
 def build(use_cache='true'):
     "Build services for infrastructure"
@@ -26,6 +27,9 @@ def up(force_recreate='false'):
 def stop():
     "Stop the infrastructure"
     env.compose('stop')
+    if env.dinghy:
+        local('docker-machine stop dinghy')
+    else:
         local('docker-machine stop capco')
 
 
@@ -53,6 +57,7 @@ def ps():
 def logs():
     "Show infrastructure logs"
     env.compose('logs')
+
 
 def ensure_vm_is_up():
     if env.docker_machine:
