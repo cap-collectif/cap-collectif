@@ -2,11 +2,10 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
 
-class UserSerializationListener implements EventSubscriberInterface
+class UserSerializationListener extends AbstractSerializationListener
 {
     private $router;
 

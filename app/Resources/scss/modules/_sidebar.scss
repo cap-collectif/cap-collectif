@@ -51,9 +51,6 @@
     .block {
       margin-bottom: 0;
     }
-    .sidebar-toggle {
-      margin-top: 10px;
-    }
   }
   .sidebar-hidden-small {
     display: none;
@@ -75,7 +72,7 @@
   .sidebar {
     position: fixed;
     left: 50%;
-    top: 120px;
+    top: 70px;
     width: $container-md*0.25;
     @include translate(100%, 0);
   }

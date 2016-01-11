@@ -4,12 +4,11 @@ namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Toggle\Manager;
-use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class OpinionSerializationListener implements EventSubscriberInterface
+class OpinionSerializationListener extends AbstractSerializationListener
 {
     private $toggleManager;
     private $tokenStorage;
@@ -139,19 +138,5 @@ class OpinionSerializationListener implements EventSubscriberInterface
 
     public function onPostOpinionType(ObjectEvent $event)
     {
-    }
-
-    protected function getIncludedGroups($event)
-    {
-        $exclusionStrategy = $event->getContext()->getExclusionStrategy();
-        if (!$exclusionStrategy) {
-            return [];
-        }
-
-        $reflectionClass = new \ReflectionClass('JMS\Serializer\Exclusion\GroupsExclusionStrategy');
-        $reflectionProperty = $reflectionClass->getProperty('groups');
-        $reflectionProperty->setAccessible(true);
-
-        return $reflectionProperty->getValue($exclusionStrategy);
     }
 }

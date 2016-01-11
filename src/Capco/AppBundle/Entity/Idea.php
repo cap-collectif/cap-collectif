@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,7 +21,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Idea implements CommentableInterface, VotableInterface
+class Idea implements CommentableInterface, VotableInterface, HasAuthorInterface
 {
     use CommentableTrait;
     use ValidableTrait;

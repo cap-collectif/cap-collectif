@@ -265,6 +265,7 @@ const ProposalForm = React.createClass({
           const inputType = question.inputType || 'text';
           return (
             <Input
+              key={key}
               id={'proposal_' + key}
               key={key}
               type={inputType}

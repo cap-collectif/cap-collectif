@@ -22,6 +22,12 @@ services:
       tags:
         - { name: form.type, alias: proposal }
 
+  capco.form.proposal_vote:
+        class: Capco\AppBundle\Form\ProposalVoteType
+        arguments: [@security.token_storage]
+        tags:
+          - { name: form.type, alias: proposal_vote }
+
   capco.form.transformer.entity_to_id:
     class: Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer
     arguments: [@doctrine.orm.entity_manager]

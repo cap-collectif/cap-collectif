@@ -184,6 +184,24 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
+    public function findProjectProposalVotersWithCount(Project $project)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+          select u.id, count(distinct pv) as proposals_votes_count
+          from CapcoUserBundle:User u
+          LEFT JOIN CapcoAppBundle:ProposalVote pv WITH pv.user = u
+          LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
+          LEFT JOIN p.selectionSteps s
+          LEFT JOIN s.projectAbstractStep pas
+          WHERE pv.user = u AND pv.confirmed = 1 AND p.enabled = 1 AND pas.project = :project
+          GROUP BY pv.user
+        ')
+            ->setParameter('project', $project);
+
+        return $query->getResult();
+    }
+
     public function findWithMediaByIds($ids)
     {
         $qb = $this->createQueryBuilder('u');

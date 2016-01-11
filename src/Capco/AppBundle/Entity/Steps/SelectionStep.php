@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class SelectionStep.
  *
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractStepRepository")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionStepRepository")
  */
 class SelectionStep extends AbstractStep
 {
@@ -24,6 +24,11 @@ class SelectionStep extends AbstractStep
      * @ORM\Column(name="votable", type="boolean")
      */
     private $votable;
+
+    /**
+     * @ORM\Column(name="votes_count", type="integer")
+     */
+    private $votesCount = 0;
 
     public function __construct()
     {
@@ -79,6 +84,40 @@ class SelectionStep extends AbstractStep
     public function setVotable($votable)
     {
         $this->votable = $votable;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVotesCount()
+    {
+        return $this->votesCount;
+    }
+
+    /**
+     * @param mixed $votesCount
+     *
+     * @return $this
+     */
+    public function setVotesCount($votesCount)
+    {
+        $this->votesCount = $votesCount;
+
+        return $this;
+    }
+
+    public function incrementVotesCount()
+    {
+        ++$this->votesCount;
+
+        return $this;
+    }
+
+    public function decrementVotesCount()
+    {
+        --$this->votesCount;
 
         return $this;
     }

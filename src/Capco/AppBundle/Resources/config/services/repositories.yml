@@ -107,3 +107,9 @@ services:
     factory_service: doctrine.orm.entity_manager
     factory_method:  getRepository
     arguments:       ['CapcoAppBundle:Video']
+
+  capco.proposal_vote.repository:
+    class: Capco\AppBundle\Repository\ProposalVoteRepository
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments: ['CapcoAppBundle:ProposalVote']

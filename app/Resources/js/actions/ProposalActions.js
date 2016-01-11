@@ -4,6 +4,7 @@ import ProposalStore from '../stores/ProposalStore';
 import LocalStorageService from '../services/LocalStorageService';
 import {
   RECEIVE_PROPOSAL,
+  RECEIVE_PROPOSAL_VOTES,
   RECEIVE_PROPOSALS,
 
   SUBMIT_PROPOSAL,
@@ -29,6 +30,10 @@ import {
   PROPOSAL_PAGINATION,
 
 } from '../constants/ProposalConstants';
+import {
+  CREATE_COMMENT_SUCCESS,
+  CREATE_COMMENT_FAILURE,
+} from '../constants/CommentConstants';
 
 export default {
 
@@ -72,9 +77,22 @@ export default {
             actionType: RECEIVE_PROPOSALS,
             proposals: result.proposals,
             count: result.count,
+            order: result.order,
           });
           return true;
         });
+      });
+  },
+
+  loadProposalVotes: (proposalForm, proposal) => {
+    Fetcher
+      .get(`/proposal_forms/${proposalForm}/proposals/${proposal}/votes`)
+      .then((result) => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_PROPOSAL_VOTES,
+          votes: result.votes,
+        });
+        return true;
       });
   },
 
@@ -187,49 +205,73 @@ export default {
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSAL,
-          proposal: data,
+          proposal: data.proposal,
+          userHasVote: data.userHasVote,
+          votableStep: data.votableStep,
         });
         return true;
       });
   },
 
-  vote: (form, proposal, selectionStep, data, successMessage = 'proposal.request.vote.success', errorMessage = 'proposal.request.vote.failure') => {
+  vote: (selectionStep, proposal, data = {}, successMessage = 'proposal.request.vote.success', errorMessage = 'proposal.request.vote.failure') => {
+    const hasComment = data.comment && data.comment.length > 0;
     AppDispatcher.dispatch({
       actionType: CREATE_PROPOSAL_VOTE,
+      proposal: proposal,
+      selectionStep: selectionStep,
+      hasComment: hasComment,
     });
     return Fetcher
-    .post(`/proposal_forms/${form}/proposals/${proposal}/votes`, data)
+    .post(`/selection_steps/${selectionStep}/proposals/${proposal}/vote`, data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_PROPOSAL_VOTE_SUCCESS,
         message: successMessage,
       });
+      if (hasComment) {
+        AppDispatcher.dispatch({
+          actionType: CREATE_COMMENT_SUCCESS,
+          message: 'comment.submit_success',
+        });
+      }
       return true;
     })
-    .catch(() => {
+    .catch((error) => {
       AppDispatcher.dispatch({
         actionType: CREATE_PROPOSAL_VOTE_FAILURE,
         message: errorMessage,
       });
+      if (hasComment) {
+        AppDispatcher.dispatch({
+          actionType: CREATE_COMMENT_FAILURE,
+          message: 'comment.submit_error',
+        });
+      }
+      throw error;
     });
   },
 
-  deleteVote: (form, proposal) => {
+  deleteVote: (selectionStep, proposal, successMessage = 'proposal.request.delete_vote.success', errorMessage = 'proposal.request.delete_vote.failure') => {
     AppDispatcher.dispatch({
       actionType: DELETE_PROPOSAL_VOTE,
+      proposal: proposal,
+      selectionStep: selectionStep,
     });
     return Fetcher
-      .delete(`/proposal_forms/${form}/proposals/${proposal}/votes`)
+      .delete(`/selection_steps/${selectionStep}/proposals/${proposal}/vote`)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_VOTE_SUCCESS,
+          message: successMessage,
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_VOTE_FAILURE,
+          message: errorMessage,
         });
+        return false;
       });
   },
 

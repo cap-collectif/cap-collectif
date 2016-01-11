@@ -9,8 +9,15 @@ const Label = ReactBootstrap.Label;
 const ProposalPageHeader = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
+    className: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
+
+  getDefaultProps() {
+    return {
+      className: '',
+    };
+  },
 
   render() {
     const proposal = this.props.proposal;
@@ -27,8 +34,13 @@ const ProposalPageHeader = React.createClass({
       />
     );
 
+    const classes = {
+      'proposal__header': true,
+    };
+    classes[this.props.className] = true;
+
     return (
-      <div className="container--custom container--with-sidebar proposal__header">
+      <div className={classNames(classes)}>
         <h1 className="consultation__header__title h1">{proposal.title}</h1>
         <div className="media">
           <UserAvatar className="pull-left" user={proposal.author} />
@@ -60,14 +72,19 @@ const ProposalPageHeader = React.createClass({
           </div>
         </div>
         <ul className="nav nav-pills project__infos">
-          {/* proposal.votes_count > 0
-            ? <li>
-                <div className="value">{proposal.votes_count}</div>
-                <div className="excerpt category">votes</div>
+          { proposal.votesCount > 0
+            ? <li className="proposal__votes">
+                <div className="value">{proposal.votesCount}</div>
+                <div className="excerpt category">
+                  <FormattedMessage
+                    message={this.getIntlMessage('vote.count_no_nb')}
+                    count={proposal.votesCount}
+                  />
+                </div>
               </li>
             : null
-          */}
-          <li>
+          }
+          <li className="proposal__comments">
             <div className="value">{proposal.comments_count}</div>
             <div className="excerpt category">
               <FormattedMessage

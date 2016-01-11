@@ -2,11 +2,11 @@ import ProposalPageHeader from './ProposalPageHeader';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageAnswer from './ProposalPageAnswer';
 import ProposalPageAlert from './ProposalPageAlert';
-// import ProposalPageVotes from './ProposalPageVotes';
+import ProposalPageVotes from './ProposalPageVotes';
 import ProposalPageComments from './ProposalPageComments';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalActions from '../../../actions/ProposalActions';
-// import ProposalVoteBox from '../Vote/ProposalVoteBox';
+import ProposalVoteSidebar from '../Vote/ProposalVoteSidebar';
 import FlashMessages from '../../Utils/FlashMessages';
 
 const Row = ReactBootstrap.Row;
@@ -18,17 +18,29 @@ const ProposalPage = React.createClass({
     proposal: React.PropTypes.object.isRequired,
     themes: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
+    votes: React.PropTypes.array.isRequired,
+    votableStep: React.PropTypes.object,
+    userHasVote: React.PropTypes.bool.isRequired,
   },
   mixins: [ReactIntl.IntlMixin],
 
+  getDefaultProps() {
+    return {
+      votableStep: null,
+    };
+  },
+
   getInitialState() {
-    ProposalStore.initProposal(this.props.proposal);
+    ProposalStore.initProposalData(this.props.proposal, this.props.userHasVote, this.props.votableStep);
     return {
       messages: {
         'errors': [],
         'success': [],
       },
       proposal: ProposalStore.proposal,
+      userHasVote: ProposalStore.userHasVote,
+      votableStep: ProposalStore.votableStep,
+      expandSidebar: false,
     };
   },
 
@@ -45,6 +57,8 @@ const ProposalPage = React.createClass({
       this.setState({
         messages: ProposalStore.messages,
         proposal: ProposalStore.proposal,
+        userHasVote: ProposalStore.userHasVote,
+        votableStep: ProposalStore.votableStep,
       });
       return;
     }
@@ -59,19 +73,45 @@ const ProposalPage = React.createClass({
     );
   },
 
+  toggleSidebarExpand() {
+    this.setState({
+      expandSidebar: !this.state.expandSidebar,
+    });
+  },
+
   render() {
     const proposal = this.state.proposal;
+    const showSidebar = !!this.state.votableStep;
+    const wrapperClassName = classNames({
+      'container': showSidebar,
+      'sidebar__container': showSidebar,
+    });
+    const containersClassName = classNames({
+      'container': !showSidebar,
+      'container--thinner': !showSidebar,
+      'container--custom': true,
+      'container--with-sidebar': showSidebar,
+    });
+    const overlayClassName = classNames({
+      'sidebar__darkened-overlay': this.state.expandSidebar,
+    });
     return (
       <div>
         <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} style={{marginBottom: 0}} />
-        <ProposalPageAlert proposal={proposal} />
-        <div id="sidebar-container" className="container sidebar__container">
+        <div id="sidebar-container" className={wrapperClassName}>
           <Row>
-            <Col xs={12}>
-              <ProposalPageHeader proposal={proposal} />
+            <Col xs={12} sm={showSidebar ? 9 : 12}>
+              <ProposalPageAlert proposal={proposal} />
+              <ProposalPageHeader
+                proposal={proposal}
+                className={containersClassName}
+              />
               {
                 proposal.answer
-                  ? <ProposalPageAnswer answer={proposal.answer} />
+                  ? <ProposalPageAnswer
+                      answer={proposal.answer}
+                      className={containersClassName}
+                  />
                   : null
               }
               <ProposalPageContent
@@ -79,15 +119,35 @@ const ProposalPage = React.createClass({
                 form={this.props.form}
                 themes={this.props.themes}
                 districts={this.props.districts}
+                className={containersClassName}
               />
-              {/* <ProposalPageVotes proposal={proposal} /> */}
-              <ProposalPageComments form={this.props.form} id={proposal.id} />
+              <ProposalPageVotes
+                proposal={proposal}
+                votes={this.props.votes}
+                className={containersClassName}
+              />
+              <ProposalPageComments
+                form={this.props.form}
+                id={proposal.id}
+                className={containersClassName}
+              />
             </Col>
-            {/* <div id="sidebar-overlay" /> */}
-            {/* proposal.canContribute
-              ? <ProposalVoteBox proposal={proposal} />
+            {
+              showSidebar
+              ? <div id="sidebar-overlay" className={overlayClassName} />
               : null
-            */}
+            }
+            {
+              showSidebar
+              ? <ProposalVoteSidebar
+                  proposal={proposal}
+                  votableStep={this.state.votableStep}
+                  userHasVote={this.state.userHasVote}
+                  expanded={this.state.expandSidebar}
+                  onToggleExpand={this.toggleSidebarExpand}
+              />
+              : null
+            }
           </Row>
         </div>
       </div>

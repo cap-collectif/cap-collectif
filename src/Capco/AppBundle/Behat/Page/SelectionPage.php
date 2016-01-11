@@ -13,7 +13,7 @@ class SelectionPage extends Page
     /**
      * @var string
      */
-    protected $path = '/projects/{projectSlug}/selection/{stepSlug}';
+    protected $path = '/project/{projectSlug}/selection/{stepSlug}';
 
     protected $elements = [
     ];
@@ -22,10 +22,10 @@ class SelectionPage extends Page
     {
         $expectedUrl = $this->getUrl($urlParameters);
         $currentUrl = $this->getSession()->getCurrentUrl();
-        $opinionTypeUrl = $expectedUrl.'/proposals/';
+        $proposalsUrl = $expectedUrl.'/proposals/';
 
         if ($currentUrl !== $expectedUrl) {
-            if (false === strrpos($currentUrl, $opinionTypeUrl)) {
+            if (false === strrpos($currentUrl, $proposalsUrl)) {
                 throw new UnexpectedPageException(
                     sprintf(
                         'Expected to be on "%s" but found "%s" instead',

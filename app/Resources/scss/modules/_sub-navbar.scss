@@ -15,17 +15,25 @@
       width: 100%;
       position: relative;
 
+      & > div {
+        position: relative;
+        display: block;
+        padding: 10px 15px;
+      }
+
       &:first-child {
         border-top: none;
       }
 
       &.active a,
-      &.active:hover a {
+      &.active > div,
+      &.active:hover a,
+      &.active:hover > div {
         border-left: 5px solid $brand-primary;
         background-color: $light-gray;
       }
 
-      &:hover a{
+      &:hover a, &:hover > div{
         background-color: $light-gray;
       }
     }

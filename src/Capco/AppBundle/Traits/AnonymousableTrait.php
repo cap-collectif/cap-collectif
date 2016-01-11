@@ -82,5 +82,7 @@ trait AnonymousableTrait
     public function setIpAddress($ipAddress)
     {
         $this->ipAddress = $ipAddress;
+
+        return $this;
     }
 }

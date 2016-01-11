@@ -13,3 +13,10 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     endAt: <dateTimeBetween('now', '+10 days')>
     body: <p><text(1000)></p>
     votable: false
+  selectionStep3:
+    title: Fermée
+    isEnabled: true
+    startAt: <dateTimeBetween('-10 days', '-5 days')>
+    endAt: <dateTimeBetween('-4 days', '-1 days')>
+    body: <p><text(1000)></p>
+    votable: true

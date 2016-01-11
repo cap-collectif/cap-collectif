@@ -73,16 +73,16 @@ const OpinionInfos = React.createClass({
             ? <FormattedMessage
                 message={this.getIntlMessage('opinion.ranking.versions')}
                 max={this.props.rankingThreshold}
-              />
+            />
             : this.props.opinionTerm === 0
               ? <FormattedMessage
                   message={this.getIntlMessage('opinion.ranking.opinions')}
                   max={this.props.rankingThreshold}
-                />
+              />
               : <FormattedMessage
                   message={this.getIntlMessage('opinion.ranking.articles')}
                   max={this.props.rankingThreshold}
-                />
+              />
           }
         </span>
       );

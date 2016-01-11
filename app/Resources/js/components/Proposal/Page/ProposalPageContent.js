@@ -12,8 +12,15 @@ const ProposalPageHeader = React.createClass({
     form: React.PropTypes.object.isRequired,
     themes: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
+    className: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
+
+  getDefaultProps() {
+    return {
+      className: '',
+    };
+  },
 
   getInitialState() {
     return {
@@ -32,8 +39,12 @@ const ProposalPageHeader = React.createClass({
 
   render() {
     const proposal = this.props.proposal;
+    const classes = {
+      'proposal__content': true,
+    };
+    classes[this.props.className] = true;
     return (
-      <div className="container--custom container--with-sidebar proposal__content">
+      <div className={classNames(classes)}>
         <div className="block">
           <h2 className="h2">{ this.getIntlMessage('proposal.description') }</h2>
           <div dangerouslySetInnerHTML={{__html: proposal.body}} />

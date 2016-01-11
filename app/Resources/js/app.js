@@ -51,6 +51,9 @@ AuthService
           form={$('#render-proposal-page').data('form').form}
           themes={$('#render-proposal-page').data('themes').themes}
           districts={$('#render-proposal-page').data('districts').districts}
+          votes={$('#render-proposal-page').data('votes').votes}
+          votableStep={$('#render-proposal-page').data('votablestep').votableStep}
+          userHasVote={$('#render-proposal-page').data('userhasvote')}
           {...IntlData}
         />,
         document.getElementById('render-proposal-page')

@@ -100,3 +100,7 @@ services:
   capco.proposal.resolver:
     class: %capco.proposal.resolver.class%
     arguments: [@capco.url.resolver]
+
+  capco.proposal_votes.resolver:
+    class: Capco\AppBundle\Resolver\ProposalVotesResolver
+    arguments: [@capco.proposal_vote.repository]

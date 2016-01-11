@@ -158,6 +158,7 @@ const OpinionForm = React.createClass({
             const key = 'appendix-' + appendixType.id;
             return (
               <Input
+                key={key}
                 id={'opinion_' + key}
                 key={key}
                 type="editor"

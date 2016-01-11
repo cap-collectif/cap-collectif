@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,7 +29,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * })
  * @CapcoAssert\HasAuthor
  */
-abstract class Comment implements VotableInterface
+abstract class Comment implements VotableInterface, HasAuthorInterface
 {
     use ValidableTrait;
     use VotableOkTrait;

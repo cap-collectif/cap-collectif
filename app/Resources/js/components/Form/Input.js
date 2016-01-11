@@ -43,7 +43,7 @@ export default class Input extends ReactBootstrap.Input {
         this.renderErrors(),
         this.renderHelp(),
       ])
-      ;
+    ;
   }
 
 }

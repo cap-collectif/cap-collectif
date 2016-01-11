@@ -92,8 +92,9 @@ const ProposalEditModal = React.createClass({
           <Modal.Footer>
             <CloseButton onClose={this.close.bind(null, this)} />
             <SubmitButton
+              id="confirm-proposal-edit"
               isSubmitting={this.state.isSubmitting}
-              onSubmit={this.handleSubmit.bind(null, this)}
+              onSubmit={this.handleSubmit}
             />
           </Modal.Footer>
         </Modal>

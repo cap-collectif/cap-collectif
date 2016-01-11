@@ -2,12 +2,11 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class CommentSerializationListener implements EventSubscriberInterface
+class CommentSerializationListener extends AbstractSerializationListener
 {
     private $router;
     private $tokenStorage;

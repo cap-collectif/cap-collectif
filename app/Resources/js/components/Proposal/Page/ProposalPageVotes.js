@@ -1,31 +1,116 @@
-import UserPreview from '../../User/UserPreview';
+import UserBox from '../../User/UserBox';
+import ProposalAllVotesModal from '../Vote/ProposalAllVotesModal';
+import ProposalActions from '../../../actions/ProposalActions';
+import ProposalStore from '../../../stores/ProposalStore';
+import {PROPOSAL_VOTES_TO_SHOW} from '../../../constants/ProposalConstants';
 
 const Row = ReactBootstrap.Row;
 const FormattedMessage = ReactIntl.FormattedMessage;
+const Button = ReactBootstrap.Button;
 
 const ProposalPageVotes = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
+    votes: React.PropTypes.array.isRequired,
+    className: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
 
+  getDefaultProps() {
+    return {
+      className: '',
+    };
+  },
+
+  getInitialState() {
+    return {
+      votes: this.props.votes,
+      showModal: false,
+    };
+  },
+
+  componentWillMount() {
+    ProposalStore.addChangeListener(this.onChange);
+  },
+
+  componentDidMount() {
+    this.loadProposalVotes();
+  },
+
+  componentWillUnmount() {
+    ProposalStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    if (ProposalStore.isProposalVotesListSync) {
+      this.setState({
+        votes: ProposalStore.proposalVotes,
+      });
+      return;
+    }
+
+    this.loadProposalVotes();
+  },
+
+  loadProposalVotes() {
+    ProposalActions.loadProposalVotes(this.props.proposal.proposalForm.id, this.props.proposal.id);
+  },
+
+  showModal() {
+    this.toggleModal(true);
+  },
+
+  toggleModal(value) {
+    this.setState({
+      showModal: value,
+    });
+  },
+
   render() {
     const proposal = this.props.proposal;
+    const votesToDisplay = this.state.votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
+    const moreVotes = proposal.votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
+
+    if (!proposal.votesCount) {
+      return null;
+    }
+
+    const classes = {
+      'proposal__votes': true,
+    };
+    classes[this.props.className] = true;
+
     return (
-      <div className="container--custom container--with-sidebar">
+      <div className={classNames(classes)}>
         <h2>
           <FormattedMessage
             message={this.getIntlMessage('proposal.vote.count')}
-            num={proposal.votes_count}
+            num={proposal.votesCount}
           />
         </h2>
         <Row>
           {
-            proposal.votes.map((vote, index) => {
-              return <UserPreview user={vote.user} key={index} />;
+            votesToDisplay.map((vote, index) => {
+              return <UserBox key={index} user={vote.user} username={vote.username} className="proposal__vote" />;
             })
           }
         </Row>
+        {
+          moreVotes
+          ? <Button
+              bsStyle="primary"
+              onClick={this.showModal}
+              className="btn--outline"
+          >
+            {this.getIntlMessage('proposal.vote.show_more')}
+          </Button>
+          : null
+        }
+        <ProposalAllVotesModal
+          votes={this.state.votes}
+          onToggleModal={this.toggleModal}
+          showModal={this.state.showModal}
+        />
       </div>
     );
   },

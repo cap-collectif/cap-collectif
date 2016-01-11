@@ -2,20 +2,22 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
+use Capco\AppBundle\Repository\ProposalVoteRepository;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ProposalSerializationListener implements EventSubscriberInterface
+class ProposalSerializationListener extends AbstractSerializationListener
 {
     private $router;
     private $tokenStorage;
+    private $proposalVoteRepository;
 
-    public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage)
+    public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage, ProposalVoteRepository $proposalVoteRepository)
     {
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
+        $this->proposalVoteRepository = $proposalVoteRepository;
     }
 
     public static function getSubscribedEvents()
@@ -61,8 +63,18 @@ class ProposalSerializationListener implements EventSubscriberInterface
             ]
         );
 
+        $votesCount = $this->proposalVoteRepository
+            ->getCountsByStepsForProposal($proposal);
+
         $event->getVisitor()->addData(
-            'hasUserReported', $user === 'anon.' ? false : $proposal->userHasReport($user)
+            'votesCountBySelectionSteps',
+            $votesCount
         );
+
+        if (isset($this->getIncludedGroups($event)['ProposalUserData'])) {
+            $event->getVisitor()->addData(
+                'hasUserReported', $user === 'anon.' ? false : $proposal->userHasReport($user)
+            );
+        }
     }
 }

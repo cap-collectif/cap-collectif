@@ -36,14 +36,6 @@ const ProposalCreate = React.createClass({
     });
   },
 
-  close() {
-    this.setState({showModal: false});
-  },
-
-  show() {
-    this.setState({showModal: true});
-  },
-
   handleSubmit() {
     ProposalActions.submit();
   },
@@ -55,6 +47,14 @@ const ProposalCreate = React.createClass({
 
   handleValidationFailure() {
     ProposalActions.validationFailure();
+  },
+
+  close() {
+    this.setState({showModal: false});
+  },
+
+  show() {
+    this.setState({showModal: true});
   },
 
   render() {
@@ -86,6 +86,7 @@ const ProposalCreate = React.createClass({
           <Modal.Footer>
             <CloseButton onClose={this.close.bind(null, this)} />
             <SubmitButton
+              id="confirm-proposal-create"
               isSubmitting={this.state.isSubmitting}
               onSubmit={this.handleSubmit.bind(null, this)}
             />

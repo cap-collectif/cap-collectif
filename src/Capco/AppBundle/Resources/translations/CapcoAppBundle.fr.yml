@@ -259,6 +259,8 @@ proposal:
     alert: Attention ! En modifiant votre proposition, vous perdrez les votes qui lui sont associés.
     success: Merci ! Votre proposition a bien été modifiée.
     error: Erreur, votre proposition n'a pas pu être modifiée.
+  vote:
+    anonymous: Anonyme
 
 #Theme
 theme:
@@ -432,6 +434,14 @@ step:
       future:
         text: L'étape de dépôt débutera le %date%.
         title: Dépôt à venir.
+  selection:
+    alert:
+      ended:
+        text: Merci à tous d'avoir contribué.
+        title: Sélection terminée.
+      future:
+        text: L'étape de sélection débutera le %date%.
+        title: Sélection à venir.
 
 simple_argument:
   count: "%count% avis"

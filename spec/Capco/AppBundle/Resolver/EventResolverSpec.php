@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Capco\AppBundle\Manager;
+namespace spec\Capco\AppBundle\Resolver;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

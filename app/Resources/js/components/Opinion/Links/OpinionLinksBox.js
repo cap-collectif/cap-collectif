@@ -64,7 +64,7 @@ const OpinionLinksBox = React.createClass({
                   onChange={this.handleFilterChange}
                   value={this.state.filter}
                   values={['last', 'old']}
-                />
+              />
               : null
             }
           </Col>

@@ -1,77 +1,82 @@
 Capco\AppBundle\Entity\Proposal:
-    exclusion_policy: ALL
-    properties:
-        id:
-            expose: true
-            type: integer
-            groups: [Proposals]
-        title:
-            expose: true
-            type: string
-            groups: [Proposals]
-        body:
-            expose: true
-            type: string
-            groups: [Proposals]
-        author:
-            expose: true
-            type: Capco\UserBundle\Entity\User
-            serialized_name: author
-            groups: [Proposals]
-        proposalResponses:
-            expose: true
-            serialized_name: responses
-            groups: [Proposals]
-        commentsCount:
-            expose: true
-            type: integer
-            groups: [Proposals]
-        canContribute:
-            expose: true
-            type: boolean
-            groups: [Proposals]
-        createdAt:
-            expose: true
-            type: DateTime
-            groups: [Proposals]
-        updatedAt:
-            expose: true
-            type: DateTime
-            groups: [Proposals]
-        theme:
-            expose: true
-            groups: [Proposals]
-        district:
-            expose: true
-            groups: [Proposals]
-        status:
-            expose: true
-            groups: [Proposals]
-        estimation:
-            expose: true
-            groups: [Proposals]
-        comments:
-            expose: true
-            groups: [Proposals]
-        answer:
-            expose: true
-            groups: [Proposals]
-        isTrashed:
-            expose: true
-            serialized_name: isTrashed
-            groups: [Proposals]
-        trashedReason:
-            expose: true
-            serialized_name: trashedReason
-            groups: [Proposals]
-        enabled:
-            expose: true
-            groups: [Proposals]
-        proposalForm:
-          expose: true
-          groups: [Proposals]
-          serialized_name: proposalForm
-        selectionSteps:
-          expose: true
-          groups: [Proposals]
-          serialized_name: selectionSteps
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: integer
+      groups: [Proposals]
+    title:
+      expose: true
+      type: string
+      groups: [Proposals]
+    body:
+      expose: true
+      type: string
+      groups: [Proposals]
+    author:
+      expose: true
+      type: Capco\UserBundle\Entity\User
+      serialized_name: author
+      groups: [Proposals]
+    proposalResponses:
+      expose: true
+      serialized_name: responses
+      groups: [Proposals]
+    commentsCount:
+      expose: true
+      type: integer
+      groups: [Proposals]
+    canContribute:
+      expose: true
+      type: boolean
+      groups: [Proposals]
+    createdAt:
+      expose: true
+      type: DateTime
+      groups: [Proposals]
+    updatedAt:
+      expose: true
+      type: DateTime
+      groups: [Proposals]
+    theme:
+      expose: true
+      groups: [Proposals]
+    district:
+      expose: true
+      groups: [Proposals]
+    status:
+      expose: true
+      groups: [Proposals]
+    estimation:
+      expose: true
+      groups: [Proposals]
+    comments:
+      expose: true
+      groups: [Proposals]
+    answer:
+      expose: true
+      groups: [Proposals]
+    isTrashed:
+      expose: true
+      serialized_name: isTrashed
+      groups: [Proposals]
+    trashedReason:
+      expose: true
+      serialized_name: trashedReason
+      groups: [Proposals]
+    enabled:
+      expose: true
+      groups: [Proposals]
+    proposalForm:
+      expose: true
+      groups: [Proposals]
+      serialized_name: proposalForm
+    selectionSteps:
+      expose: true
+      groups: [Proposals]
+      serialized_name: selectionSteps
+    votesCount:
+      expose: true
+      groups: [Proposals]
+      serialized_name: votesCount
+

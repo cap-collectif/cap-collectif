@@ -7,6 +7,7 @@ const FlashMessages = React.createClass({
     style: React.PropTypes.object,
     form: React.PropTypes.bool,
     onDismissMessage: React.PropTypes.func,
+    translate: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 
@@ -17,7 +18,15 @@ const FlashMessages = React.createClass({
       style: {},
       form: false,
       onDismissMessage: null,
+      translate: true,
     };
+  },
+
+  renderText(message) {
+    if (this.props.translate) {
+      return this.getIntlMessage(message);
+    }
+    return message;
   },
 
   renderMessage(message, type) {
@@ -28,13 +37,13 @@ const FlashMessages = React.createClass({
           style={this.props.style}
           onDismiss={this.props.onDismissMessage ? this.props.onDismissMessage.bind(null, message, type) : null}
         >
-          <p>{this.getIntlMessage(message)}</p>
+          <p>{this.renderText(message)}</p>
         </Alert>
       );
     }
     return (
       <span className="error-block" style={this.props.style}>
-        {this.getIntlMessage(message)}
+        {this.renderText(message)}
       </span>
     );
   },

@@ -1,30 +1,49 @@
-import UserAvatar from '../User/UserAvatar';
-import UserLink from '../User/UserLink';
-
-const Col = ReactBootstrap.Col;
-const FormattedMessage = ReactIntl.FormattedMessage;
+import UserAvatar from './UserAvatar';
+import UserLink from './UserLink';
 
 const UserPreview = React.createClass({
   propTypes: {
-    user: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object,
+    username: React.PropTypes.string,
+    className: React.PropTypes.string,
+    style: React.PropTypes.object,
+  },
+  mixins: [ReactIntl.IntlMixin],
+
+  getDefaultProps() {
+    return {
+      user: null,
+      username: null,
+      className: '',
+      style: {},
+    };
   },
 
   render() {
     const user = this.props.user;
+    const username = this.props.username === 'ANONYMOUS' ? this.getIntlMessage('global.anonymous') : this.props.username;
+    if (!user && !username) {
+      return null;
+    }
+    const classes = {
+      'media': true,
+      'media--user-thumbnail': true,
+      'box': true,
+    };
+    classes[this.props.className] = true;
     return (
-      <Col xs={12} sm={6} md={4} lg={4}>
-        <div className="media media--macro media--user-thumbnail box block block--bordered">
-          <UserAvatar user={user} />
-          <div className="media-body">
-            <p className="media-heading media--macro__user  small">
-              <UserLink user={user} />
-            </p>
-            <span className="excerpt small">
-              <FormattedMessage message="contribution" num={1} /> • <FormattedMessage message="votes" num={1} />
-            </span>
-          </div>
+      <div className={classNames(classes)} style={this.props.style}>
+        <UserAvatar user={user} className="pull-left" />
+        <div className="media-body">
+          <p className="media--aligned media--macro__user  small">
+            {
+              user
+              ? <UserLink user={user} />
+              : <span>{username}</span>
+            }
+          </p>
         </div>
-      </Col>
+      </div>
     );
   },
 

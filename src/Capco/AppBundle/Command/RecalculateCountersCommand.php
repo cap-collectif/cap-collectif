@@ -35,6 +35,10 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             (select count(p.id) from CapcoAppBundle:Proposal p where p.author = u AND p.enabled = 1 group by p.author)');
         $query->execute();
 
+        $query = $em->createQuery('update CapcoUserBundle:User u set u.proposalVotesCount =
+            (select count(pv.id) from CapcoAppBundle:ProposalVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p where pv.user = u AND pv.confirmed = 1 AND p.enabled = 1 group by pv.user)');
+        $query->execute();
+
         $query = $em->createQuery('update CapcoUserBundle:User u set u.opinionsCount =
             (select count(o.id) from CapcoAppBundle:Opinion o INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH o.step = cs where o.Author = u AND o.isEnabled = 1 AND cs.isEnabled = 1 group by o.Author)');
         $query->execute();
@@ -125,7 +129,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )');
         $query->execute();
 
-        // ************************ Project step counters ***********************************************
+        // ************************ Consultation step counters ***********************************************
 
         $query = $em->createQuery('update CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionCount =
             (select count(o.id) from CapcoAppBundle:Opinion o where o.step = cs AND o.isEnabled = 1 AND o.isTrashed = 0 group by o.step)');
@@ -181,6 +185,12 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           WHERE s.isEnabled = 1 AND s.isTrashed = 1 AND ((s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs) OR (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = cs))
         )');
+        $query->execute();
+
+        // ****************************** Selection steps counters **************************************
+
+        $query = $em->createQuery('update CapcoAppBundle:Steps\SelectionStep ss set ss.votesCount =
+            (select count(pv.id) from CapcoAppBundle:ProposalVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p where pv.selectionStep = ss AND pv.confirmed = 1 AND p.enabled = 1 group by pv.selectionStep)');
         $query->execute();
 
         // ****************************** Opinion counters **********************************************
@@ -276,6 +286,10 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         $query = $em->createQuery('update CapcoAppBundle:Comment c set c.votesCount =
             (select count(cv.id) from CapcoAppBundle:CommentVote cv where cv.comment = c AND cv.confirmed = 1 group by cv.comment)');
+        $query->execute();
+
+        $query = $em->createQuery('update CapcoAppBundle:Proposal p set p.votesCount =
+            (select count(pv.id) from CapcoAppBundle:ProposalVote pv where pv.proposal = p AND pv.confirmed = 1 group by pv.proposal)');
         $query->execute();
 
         // **************************************** Comments counters ***************************************

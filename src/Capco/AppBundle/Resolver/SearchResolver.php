@@ -192,8 +192,11 @@ class SearchResolver
                 $sortField = 'created_at';
                 $sortOrder = 'desc';
                 break;
-            case 'popular':
-                $sortField = 'votes_count';
+            case 'votes':
+                $sortField = $providedFilters['selectionStep']
+                    ? 'votesCountBySelectionSteps.'.$providedFilters['selectionStep']
+                    : 'created_at'
+                ;
                 $sortOrder = 'desc';
                 break;
             case 'comments':
@@ -239,6 +242,7 @@ class SearchResolver
         return [
             'proposals' => $proposals,
             'count' => $results['count'],
+            'order' => $order,
         ];
     }
 }

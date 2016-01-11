@@ -1,17 +1,17 @@
 <?php
 
-namespace spec\Capco\AppBundle\Manager;
+namespace spec\Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Resolver\UrlResolver;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\Routing\Router;
 
 
 class StepResolverSpec extends ObjectBehavior
 {
-    function let(Router $router)
+    function let(UrlResolver $urlResolver)
     {
-        $this->beConstructedWith($router);
+        $this->beConstructedWith($urlResolver);
     }
 
     function it_is_initializable()

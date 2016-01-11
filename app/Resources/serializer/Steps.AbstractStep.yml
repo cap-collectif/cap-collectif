@@ -1,17 +1,52 @@
 Capco\AppBundle\Entity\Steps\AbstractStep:
-    exclusion_policy: ALL
-    discriminator:
-      field_name: step_type
-      map:
-        consultation: Capco\AppBundle\Entity\Steps\ConsultationStep
-        presentation: Capco\AppBundle\Entity\Steps\PresentationStep
-        other: Capco\AppBundle\Entity\Steps\OtherStep
-        synthesis: Capco\AppBundle\Entity\Steps\SynthesisStep
-        collect: Capco\AppBundle\Entity\Steps\CollectStep
-        ranking: Capco\AppBundle\Entity\Steps\RankingStep
-        selection: Capco\AppBundle\Entity\Steps\SelectionStep
-    properties:
-        id:
-            expose: true
-            type: integer
-            groups: [Opinions, Proposals]
+  exclusion_policy: ALL
+  discriminator:
+    field_name: step_type
+    map:
+      consultation: Capco\AppBundle\Entity\Steps\ConsultationStep
+      presentation: Capco\AppBundle\Entity\Steps\PresentationStep
+      other: Capco\AppBundle\Entity\Steps\OtherStep
+      synthesis: Capco\AppBundle\Entity\Steps\SynthesisStep
+      collect: Capco\AppBundle\Entity\Steps\CollectStep
+      ranking: Capco\AppBundle\Entity\Steps\RankingStep
+      selection: Capco\AppBundle\Entity\Steps\SelectionStep
+  properties:
+    id:
+      expose: true
+      type: integer
+      groups: [Opinions, Proposals, Steps]
+    title:
+      expose: true
+      type: string
+      groups: [Steps]
+    isEnabled:
+      expose: true
+      type: boolean
+      groups: [Steps]
+      serialized_name: enabled
+    startAt:
+      expose: true
+      type: DateTime
+      groups: [Steps]
+      serialized_name: startAt
+    endAt:
+      expose: true
+      type: DateTime
+      groups: [Steps]
+      serialized_name: endAt
+  virtual_properties:
+    getProjectId:
+      expose: true
+      type: integer
+      groups: [Steps]
+      serialized_name: projectId
+    getPosition:
+      expose: true:
+      type: integer
+      groups: [Steps]
+      serialized_name: position
+    getOpeningStatus:
+      expose: true
+      type: string
+      groups: [Steps]
+      serialized_name: openingStatus

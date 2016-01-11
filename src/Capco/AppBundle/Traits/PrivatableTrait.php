@@ -9,7 +9,7 @@ trait PrivatableTrait
     /**
      * @ORM\Column(name="private", type="boolean", nullable=false)
      */
-    private $private;
+    private $private = false;
 
     /**
      * @return mixed

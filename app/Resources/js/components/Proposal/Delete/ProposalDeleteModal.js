@@ -67,6 +67,7 @@ const ProposalDeleteModal = React.createClass({
           <Modal.Footer>
             <CloseButton onClose={this.close.bind(null, this)} />
             <SubmitButton
+              id="confirm-proposal-delete"
               isSubmitting={this.state.isSubmitting}
               onSubmit={this.handleSubmit.bind(null, this)}
               label="global.remove"

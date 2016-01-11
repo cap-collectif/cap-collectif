@@ -5,6 +5,7 @@ import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
+import FlashMessages from '../Utils/FlashMessages';
 
 const FormattedMessage = ReactIntl.FormattedMessage;
 
@@ -26,6 +27,10 @@ const SelectionStepPage = React.createClass({
       proposalsCount: this.props.count,
       currentPage: ProposalStore.currentPage,
       isLoading: true,
+      messages: {
+        'errors': [],
+        'success': [],
+      },
     };
   },
 
@@ -48,12 +53,21 @@ const SelectionStepPage = React.createClass({
   },
 
   onChange() {
+    if (ProposalStore.isProposalListSync) {
+      this.setState({
+        messages: ProposalStore.messages,
+        proposals: ProposalStore.proposals,
+        proposalsCount: ProposalStore.proposalsCount,
+        currentPage: ProposalStore.currentPage,
+        isLoading: false,
+      });
+      return;
+    }
+
     this.setState({
-      proposals: ProposalStore.proposals,
-      proposalsCount: ProposalStore.proposalsCount,
-      currentPage: ProposalStore.currentPage,
-      isLoading: false,
+      isLoading: true,
     });
+    this.loadProposals();
   },
 
   loadProposals() {
@@ -87,22 +101,28 @@ const SelectionStepPage = React.createClass({
           type={this.props.types}
           status={this.props.statuses}
           onChange={() => this.handleFilterOrOrderChange()}
+          orderByVotes={this.props.votable}
         />
         <br />
         <Loader show={this.state.isLoading}>
           <div>
-            <ProposalList proposals={this.state.proposals} />
+            <ProposalList proposals={this.state.proposals} selectionStepId={this.props.votable ? this.props.stepId : null} />
             {
               nbPages > 1
               ? <Pagination
                   current={this.state.currentPage}
                   nbPages={nbPages}
                   onChange={this.selectPage}
-                />
+              />
               : null
             }
           </div>
         </Loader>
+        <FlashMessages
+          errors={this.state.messages.errors}
+          success={this.state.messages.success}
+          style={{marginBottom: '0'}}
+        />
       </div>
     );
   },

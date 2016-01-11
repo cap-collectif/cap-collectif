@@ -8,7 +8,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 /**
  * IdeaVote.
  *
- * @CapcoAssert\DidNotAlreadyVoteEmail()
+ * @CapcoAssert\DidNotAlreadyVote(message="idea.vote.already_voted", repositoryPath="CapcoAppBundle:IdeaVote", objectPath="idea")
  * @CapcoAssert\HasAnonymousOrUser()
  * @CapcoAssert\EmailDoesNotBelongToUser(message="idea.vote.email_belongs_to_user")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaVoteRepository")

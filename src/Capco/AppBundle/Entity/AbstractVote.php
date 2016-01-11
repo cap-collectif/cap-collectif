@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -25,7 +26,7 @@ use Capco\AppBundle\Traits\ConfirmableTrait;
  *      "proposal"        = "ProposalVote"
  * })
  */
-abstract class AbstractVote
+abstract class AbstractVote implements HasAuthorInterface
 {
     use ConfirmableTrait;
 
@@ -115,6 +116,16 @@ abstract class AbstractVote
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getAuthor()
+    {
+        return $this->user;
+    }
+
+    public function hasUser()
+    {
+        return !!$this->getUser();
     }
 
     abstract public function getRelatedEntity();

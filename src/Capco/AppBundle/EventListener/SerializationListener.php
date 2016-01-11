@@ -5,12 +5,11 @@ namespace Capco\AppBundle\EventListener;
 use Capco\AppBundle\Manager\LogManager;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
-class SerializationListener implements EventSubscriberInterface
+class SerializationListener extends AbstractSerializationListener
 {
     private $logManager;
     private $mediaExtension;

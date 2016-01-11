@@ -129,9 +129,9 @@ const OpinionTabs = React.createClass({
                 className="opinion-tabs"
                 eventKey={'versions'}
                 title={<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />}
-              >
-                {this.renderVersionsContent()}
-              </Tab>
+            >
+              {this.renderVersionsContent()}
+            </Tab>
             : null
           }
           { this.isCommentable()
@@ -140,9 +140,9 @@ const OpinionTabs = React.createClass({
                 className="opinion-tabs"
                 eventKey={'arguments'}
                 title={<FormattedMessage message={this.getArgumentsTrad()} num={opinion.arguments_count} />}
-              >
-                <OpinionArgumentsBox {...this.props} />
-              </Tab>
+            >
+              <OpinionArgumentsBox {...this.props} />
+            </Tab>
             : null
           }
           { this.isSourceable()
@@ -151,9 +151,9 @@ const OpinionTabs = React.createClass({
                 className="opinion-tabs"
                 eventKey={'sources'}
                 title={<FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />}
-              >
-                <OpinionSourcesBox {...this.props} />
-              </Tab>
+            >
+              <OpinionSourcesBox {...this.props} />
+            </Tab>
             : null
           }
           { this.hasStatistics()
@@ -162,9 +162,9 @@ const OpinionTabs = React.createClass({
                 className="opinion-tabs"
                 eventKey={'evolution'}
                 title={<FormattedMessage message={this.getIntlMessage('global.votes_evolution')} />}
-              >
-                <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />
-              </Tab>
+            >
+              <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />
+            </Tab>
             : null
           }
           { this.isLinkable()
@@ -173,9 +173,9 @@ const OpinionTabs = React.createClass({
                 className="opinion-tabs"
                 eventKey={'links'}
                 tab={<FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />}
-              >
-                <OpinionLinksBox {...this.props} />
-              </Tab>
+            >
+              <OpinionLinksBox {...this.props} />
+            </Tab>
             : null
           }
         </TabbedArea>

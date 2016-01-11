@@ -67,3 +67,7 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: @selectionStep2
     project: @p6
     position: 4
+  pas19:
+    step: @selectionStep3
+    project: @p6
+    position: 5

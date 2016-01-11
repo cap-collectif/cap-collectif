@@ -51,13 +51,18 @@ const CollectStepPage = React.createClass({
   },
 
   onChange() {
-    this.setState({
-      messages: ProposalStore.messages,
-      proposals: ProposalStore.proposals,
-      proposalsCount: ProposalStore.proposalsCount,
-      currentPage: ProposalStore.currentPage,
-      isLoading: false,
-    });
+    if (!ProposalStore.isProcessing && ProposalStore.isProposalListSync) {
+      this.setState({
+        messages: ProposalStore.messages,
+        proposals: ProposalStore.proposals,
+        proposalsCount: ProposalStore.proposalsCount,
+        currentPage: ProposalStore.currentPage,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.loadProposals();
   },
 
   loadProposals() {
@@ -102,7 +107,7 @@ const CollectStepPage = React.createClass({
                   current={this.state.currentPage}
                   nbPages={nbPages}
                   onChange={this.selectPage}
-                />
+              />
               : null
             }
           </div>

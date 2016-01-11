@@ -6,76 +6,93 @@ Feature: Proposal Restful Api
     Then the JSON response should match:
     """
     {
-      "id": @integer@,
-      "body": @string@,
-      "updated_at": "@string@.isDateTime()",
-      "theme": {
+      "proposal": {
         "id": @integer@,
-        "title": @string@,
-        "_links": {
-          "show": @string@
-        }
-      },
-      "district": {
-        "id": @integer@,
-        "name": @string@
-      },
-      "status": {
-        "id": @integer@,
-        "name": @string@,
-        "color": @string@
-      },
-      "author": {
-        "username": "welcomattic",
-        "displayName": "welcomattic",
-        "uniqueId": "welcomattic",
-        "isAdmin": true,
-        "media": @...@,
-        "user_type": {
+        "body": @string@,
+        "updated_at": "@string@.isDateTime()",
+        "theme": {
+          "id": @integer@,
+          "title": @string@,
+          "_links": {
+            "show": @string@
+          }
+        },
+        "district": {
+          "id": @integer@,
+          "name": @string@
+        },
+        "status": {
           "id": @integer@,
           "name": @string@,
-          "slug": @string@
+          "color": @string@
         },
-        "vip": true,
-        "_links": {
-          "profile": @string@,
-          "settings": @string@
-        }
-      },
-      "proposalForm": {
-        "id": @integer@
-      },
-      "comments": @array@,
-      "responses":[
-        {
-          "question": @...@,
-          "value": @string@
+        "author": {
+          "username": "welcomattic",
+          "displayName": "welcomattic",
+          "uniqueId": "welcomattic",
+          "isAdmin": true,
+          "media": @...@,
+          "user_type": {
+            "id": @integer@,
+            "name": @string@,
+            "slug": @string@
+          },
+          "vip": true,
+          "_links": {
+            "profile": @string@,
+            "settings": @string@
+          }
         },
-        @...@
-      ],
-      "selectionSteps": [
-        {
+        "proposalForm": {
           "id": @integer@
+        },
+        "comments": @array@,
+        "responses":[
+          {
+            "question": {
+              "id": @integer@,
+              "questionType": @number@,
+              "title": @string@
+            },
+            "value": @string@
+          },
+          @...@
+        ],
+        "selectionSteps": [
+          {
+            "projectId": @integer@,
+            "position": @integer@,
+            "openingStatus": @string@,
+            "id": @integer@,
+            "title": @string@,
+            "enabled": @boolean@,
+            "startAt": "@string@.isDateTime()",
+            "endAt": "@string@.isDateTime()",
+            "votable": @boolean@
+          }
+        ],
+        "estimation": @number@,
+        "comments_count": @integer@,
+        "created_at": "@string@.isDateTime()",
+        "votesCount": @integer@,
+        "enabled": @boolean@,
+        "isTrashed": @boolean@,
+        "trashedReason": @...@,
+        "title": @string@,
+        "answer": {
+          "title": "Réponse du gouvernement à la proposition",
+          "body": @string@,
+          "author": @...@
+        },
+        "hasUserReported": @boolean@,
+        "_links": {
+          "show": @string@,
+          "index": @string@,
+          "report": @string@
         }
-      ],
-      "comments_count": @integer@,
-      "created_at": "@string@.isDateTime()",
-      "enabled": @boolean@,
-      "isTrashed": @boolean@,
-      "trashedReason": @...@,
-      "title": @string@,
-      "estimation": @number@,
-      "answer": {
-        "title": "Réponse du gouvernement à la proposition",
-        "body": @string@,
-        "author": @...@
       },
-      "hasUserReported": @boolean@,
-      "_links": {
-        "show": @string@,
-        "index": @string@,
-        "report": @string@
-      }
+      "userHasVote": false,
+      "votableStep": @...@
     }
     """
 
@@ -114,17 +131,21 @@ Feature: Proposal Restful Api
           "comments": @...@,
           "responses": @...@,
           "selectionSteps": @...@,
+          "estimation": @number@,
           "comments_count": @integer@,
           "created_at": "@string@.isDateTime()",
+          "votesCount": @integer@,
           "enabled": @boolean@,
           "isTrashed": @boolean@,
           "title": @string@,
-          "hasUserReported": @boolean@,
+          "answer": @...@,
+          "votesCountBySelectionSteps": @...@,
           "_links": @...@
         },
         @...@
       ],
-      "count": 4
+      "count": 4,
+      "order": "old"
     }
     """
 
@@ -171,16 +192,19 @@ Feature: Proposal Restful Api
           "comments": @...@,
           "responses": @...@,
           "selectionSteps": @...@,
+          "estimation": @integer@,
           "comments_count": @integer@,
           "created_at": "@string@.isDateTime()",
           "enabled": @boolean@,
           "isTrashed": @boolean@,
           "title": @string@,
-          "hasUserReported": @boolean@,
+          "answer": @...@,
+          "votesCountBySelectionSteps": @...@,
           "_links": @...@
         }
       ],
-      "count": 1
+      "count": 1,
+      "order": "last"
     }
     """
 

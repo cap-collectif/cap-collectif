@@ -7,9 +7,11 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class DidNotAlreadyVoteEmail extends Constraint
+class DidNotAlreadyVote extends Constraint
 {
-    public $message = 'idea.vote.already';
+    public $message = 'global.already_voted';
+    public $repositoryPath = '';
+    public $objectPath = '';
 
     public function validatedBy()
     {

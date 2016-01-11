@@ -302,9 +302,10 @@ class IdeaController extends Controller
         $ideaHelper = $this->get('capco.idea.helper');
 
         $vote = $ideaHelper->findUserVoteOrCreate($idea, $this->getUser());
-        $vote->setUser($this->getUser())
-             ->setIpAddress($request->getClientIp())
-            ;
+        $vote
+            ->setUser($this->getUser())
+            ->setIpAddress($request->getClientIp())
+        ;
 
         $form = $this->createForm(new IdeaVoteType($this->getUser(), $vote->isConfirmed(), $idea->getIsCommentable()), $vote);
 

@@ -106,9 +106,9 @@ const ViewElement = React.createClass({
                 style={{marginLeft: '15px'}}
                 href={this.props.element.linkedDataUrl}
                 onClick={this.openOriginalContribution}
-              >
-                {this.getIntlMessage('counter.link')}
-              </a>
+            >
+              {this.getIntlMessage('counter.link')}
+            </a>
             : null
           }
         </div>

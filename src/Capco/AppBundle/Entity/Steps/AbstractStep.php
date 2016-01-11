@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -333,12 +334,38 @@ abstract class AbstractStep
     /**
      * Get project.
      *
-     * @return string
+     * @return Project
      */
     public function getProject()
     {
         if ($this->projectAbstractStep) {
             return $this->projectAbstractStep->getProject();
+        }
+
+        return;
+    }
+
+    /**
+     * Get project id.
+     *
+     * @return int
+     */
+    public function getProjectId()
+    {
+        $project = $this->getProject();
+
+        return $project ? $project->getId() : null;
+    }
+
+    /**
+     * Get position.
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        if ($this->projectAbstractStep) {
+            return $this->projectAbstractStep->getPosition();
         }
 
         return;

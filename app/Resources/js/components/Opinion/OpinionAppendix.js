@@ -54,11 +54,11 @@ const OpinionAppendix = React.createClass({
             ? <FormattedMessage
                 message={this.getIntlMessage('opinion.appendices.hide')}
                 title={this.props.appendix.type.title}
-              />
+            />
             : <FormattedMessage
                 message={this.getIntlMessage('opinion.appendices.show')}
                 title={this.props.appendix.type.title}
-              />
+            />
             }
         >
           {this.renderCaret()}

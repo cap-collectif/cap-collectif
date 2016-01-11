@@ -43,6 +43,15 @@ const FormMixin = { // This will be easy to use as an higher-order Component
     return [];
   },
 
+  setServerErrors(error) {
+    error.json()
+      .then((response) => {
+        this.setState({
+          serverErrors: response.errors,
+        });
+      });
+  },
+
 };
 
 export default FormMixin;

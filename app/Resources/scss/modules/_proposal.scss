@@ -88,6 +88,7 @@ $statuses:
 
 .proposal__counter {
   width: 100%;
+  display: inline-block;
   text-align: center;
 }
 
@@ -110,4 +111,15 @@ $statuses:
   @media (max-width: $screen-sm-max) {
     margin-top: 15px;
   }
+}
+
+@media (min-width: $screen-sm-min) {
+  .proposal__details__button {
+    margin-top: 10px;
+  }
+}
+
+.nb--highlighted {
+  color: $brand-primary;
+  font-size: 120%;
 }

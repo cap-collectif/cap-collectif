@@ -3,18 +3,24 @@ import UserAvatar from '../../User/UserAvatar';
 const ProposalPageAnswer = React.createClass({
   propTypes: {
     answer: React.PropTypes.object.isRequired,
+    className: React.PropTypes.string,
   },
   mixins: [ReactIntl.IntlMixin],
 
+  getDefaultProps() {
+    return {
+      className: '',
+    };
+  },
+
   render() {
     const answer = this.props.answer;
-    const classes = classNames({
-      'container--custom': true,
-      'container--with-sidebar': true,
+    const classes = {
       'bg-vip': answer.author && answer.author.vip,
-    });
+    };
+    classes[this.props.className] = true;
     return (
-      <div className={classes}>
+      <div className={classNames(classes)}>
         <div className="block">
           {
             answer.title

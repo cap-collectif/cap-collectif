@@ -3,7 +3,6 @@ import ProposalStore from '../../../stores/ProposalStore';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 
-
 const Button = ReactBootstrap.Button;
 const ButtonGroup = ReactBootstrap.ButtonGroup;
 const ButtonToolbar = ReactBootstrap.ButtonToolbar;
@@ -19,12 +18,14 @@ const ProposalListFilters = React.createClass({
     type: React.PropTypes.array.isRequired,
     district: React.PropTypes.array.isRequired,
     status: React.PropTypes.array.isRequired,
+    orderByVotes: React.PropTypes.bool,
   },
   mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
       fetchFrom: 'form',
+      orderByVotes: false,
     };
   },
 
@@ -38,6 +39,12 @@ const ProposalListFilters = React.createClass({
 
   componentWillMount() {
     ProposalStore.addChangeListener(this.onChange);
+  },
+
+  componentDidMount() {
+    if (this.props.orderByVotes) {
+      this.buttons.push('votes');
+    }
   },
 
   componentDidUpdate(prevProps, prevState) {
@@ -58,6 +65,9 @@ const ProposalListFilters = React.createClass({
     });
   },
 
+  buttons: ['last', 'old', 'comments'],
+  filters: ['theme', 'status', 'type', 'district'],
+
   handleOrderChange(order) {
     ProposalActions.changeOrder(order);
   },
@@ -71,9 +81,6 @@ const ProposalListFilters = React.createClass({
   reload() {
     ProposalActions.load(this.props.fetchFrom, this.props.id);
   },
-
-  buttons: ['last', 'old', 'comments'],
-  filters: ['theme', 'status', 'type', 'district'],
 
   render() {
     return (

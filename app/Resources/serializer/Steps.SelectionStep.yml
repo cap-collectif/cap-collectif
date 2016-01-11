@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\Steps\SelectionStep:
+    exclusion_policy: ALL
+    properties:
+      votable:
+        expose: true
+        type: boolean
+        groups: [Steps]
+

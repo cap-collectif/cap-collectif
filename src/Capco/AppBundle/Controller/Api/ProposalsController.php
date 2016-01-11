@@ -35,7 +35,7 @@ class ProposalsController extends FOSRestController
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}})
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
-     * @QueryParam(name="order", requirements="(old|last|popular|comments)", default="last")
+     * @QueryParam(name="order", requirements="(old|last|comments)", default="last")
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
      *
      * @param Request               $request
@@ -74,7 +74,7 @@ class ProposalsController extends FOSRestController
      * @Get("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
-     * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias", "Themes"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias", "Themes", "ProposalUserData", "Steps"})
      *
      * @param ProposalForm $proposalForm
      * @param Proposal     $proposal
@@ -83,7 +83,39 @@ class ProposalsController extends FOSRestController
      */
     public function getProposalAction(ProposalForm $proposalForm, Proposal $proposal)
     {
-        return $proposal;
+        $em = $this->get('doctrine.orm.entity_manager');
+        $votableSteps = $em
+            ->getRepository('CapcoAppBundle:Steps\SelectionStep')
+            ->getVotableStepsForProposal($proposal)
+        ;
+        $firstVotableStep = null;
+        foreach ($votableSteps as $step) {
+            if ($step->isOpen()) {
+                $firstVotableStep = $step;
+                break;
+            }
+        }
+        $userHasVote = false;
+        if ($this->getUser() && $firstVotableStep) {
+            $userVote = $em
+                ->getRepository('CapcoAppBundle:ProposalVote')
+                ->findOneBy(
+                    [
+                        'selectionStep' => $firstVotableStep,
+                        'user' => $this->getUser(),
+                        'proposal' => $proposal,
+                    ]
+                );
+            if ($userVote !== null) {
+                $userHasVote = true;
+            }
+        }
+
+        return [
+            'proposal' => $proposal,
+            'votableStep' => $firstVotableStep,
+            'userHasVote' => $userHasVote,
+        ];
     }
 
     /**
@@ -231,6 +263,25 @@ class ProposalsController extends FOSRestController
             CapcoAppBundleEvents::COMMENT_CHANGED,
             new CommentChangedEvent($comment, 'add')
         );
+    }
+
+    /**
+     * @Get("/proposal_forms/{form}/proposals/{proposal}/votes")
+     * @ParamConverter("form", options={"mapping": {"form": "id"}})
+     * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
+     * @View(serializerGroups={"ProposalVotes", "UsersInfos", "UserMedias"})
+     */
+    public function getAllProposalVotesAction(ProposalForm $form, Proposal $proposal)
+    {
+        $votes = $this
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:ProposalVote')
+            ->getVotesForProposal($proposal)
+        ;
+
+        return [
+            'votes' => $votes,
+        ];
     }
 
     /**

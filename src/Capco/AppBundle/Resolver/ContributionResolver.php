@@ -29,6 +29,7 @@ class ContributionResolver
         $versionsVoters = $this->repository->findProjectVersionVotersWithCount($project);
         $argumentsVoters = $this->repository->findProjectArgumentVotersWithCount($project);
         $sourcesVoters = $this->repository->findProjectSourceVotersWithCount($project);
+        $proposalsVoters = $this->repository->findProjectProposalVotersWithCount($project);
 
         $contributors = [];
 
@@ -68,6 +69,10 @@ class ContributionResolver
             $contributors[$sourcesVoter['id']]['sources_votes'] = $sourcesVoter['sources_votes_count'];
         }
 
+        foreach ($proposalsVoters as $proposalsVoter) {
+            $contributors[$proposalsVoter['id']]['proposals_votes'] = $proposalsVoter['proposals_votes_count'];
+        }
+
         foreach ($contributors as &$contributor) {
             $contributor['total'] = isset($contributor['sources']) ? $contributor['sources'] : 0;
             $contributor['total'] += isset($contributor['arguments']) ? $contributor['arguments'] : 0;
@@ -78,6 +83,7 @@ class ContributionResolver
             $contributor['total'] += isset($contributor['versions_votes']) ? $contributor['versions_votes'] : 0;
             $contributor['total'] += isset($contributor['arguments_votes']) ? $contributor['arguments_votes'] : 0;
             $contributor['total'] += isset($contributor['sources_votes']) ? $contributor['sources_votes'] : 0;
+            $contributor['total'] += isset($contributor['proposals_votes']) ? $contributor['proposals_votes'] : 0;
         }
 
         uasort($contributors, function ($a, $b) { return $b['total'] - $a['total']; });
@@ -107,6 +113,9 @@ class ContributionResolver
             if ($step->getStep()->isConsultationStep()) {
                 $count += $step->getStep()->getContributionsCount();
             }
+            if ($step->getStep()->isSelectionStep()) {
+                $count += count($step->getStep()->getProposals());
+            }
         }
 
         return $count;
@@ -135,6 +144,9 @@ class ContributionResolver
                         }
                     }
                 }
+            }
+            if ($step->getStep()->isSelectionStep()) {
+                $count += $step->getStep()->getVotesCount();
             }
         }
 

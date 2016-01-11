@@ -216,6 +216,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @var int
      */
+    protected $proposalVotesCount = 0;
+
+    /**
+     * @var int
+     */
     protected $opinionVotesCount = 0;
 
     /**
@@ -715,6 +720,26 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     }
 
     /**
+     * @return int
+     */
+    public function getProposalVotesCount()
+    {
+        return $this->proposalVotesCount;
+    }
+
+    /**
+     * @param int $proposalVotesCount
+     *
+     * @return $this
+     */
+    public function setProposalVotesCount($proposalVotesCount)
+    {
+        $this->proposalVotesCount = $proposalVotesCount;
+
+        return $this;
+    }
+
+    /**
      * Sets the value of argumentsCount.
      *
      * @param int $argumentsCount the arguments count
@@ -969,12 +994,12 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getContributionsCount()
     {
-        return $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->opinionVersionsCount + $this->getCommentsCount() + $this->getProposalsCount();
+        return $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->opinionVersionsCount + $this->getCommentsCount() + $this->proposalsCount;
     }
 
     public function getVotesCount()
     {
-        return $this->ideaVotesCount + $this->commentVotesCount + $this->opinionVotesCount + $this->opinionVersionVotesCount + $this->argumentVotesCount + $this->sourceVotesCount;
+        return $this->ideaVotesCount + $this->commentVotesCount + $this->opinionVotesCount + $this->opinionVersionVotesCount + $this->argumentVotesCount + $this->sourceVotesCount + $this->proposalVotesCount;
     }
 
     public function getCommentsCount()

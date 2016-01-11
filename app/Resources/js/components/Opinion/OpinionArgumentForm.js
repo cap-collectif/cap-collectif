@@ -98,12 +98,12 @@ const OpinionArgumentForm = React.createClass({
                   disabled={this.state.isSubmitting}
                   onClick={this.state.isSubmitting ? null : this.create.bind(null, this)}
                   bsStyle="primary"
-                >
-                  {this.state.isSubmitting
-                    ? this.getIntlMessage('global.loading')
-                    : this.getIntlMessage('global.publish')
-                  }
-                </Button>
+              >
+                {this.state.isSubmitting
+                  ? this.getIntlMessage('global.loading')
+                  : this.getIntlMessage('global.publish')
+                }
+              </Button>
               : null
             }
           </form>

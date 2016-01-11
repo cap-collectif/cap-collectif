@@ -35,7 +35,7 @@ export default class Pagination extends React.Component {
                 ariaLabel="Page 1"
                 disabled={this.props.current < 2}
                 active={false}
-              />
+            />
             : null
           }
           {
@@ -47,13 +47,14 @@ export default class Pagination extends React.Component {
                   ariaLabel={'Page ' + this.props.current - 1}
                   disabled={this.props.current < 2}
                   active={false}
-                />
+              />
               : null
           }
           {
             displayedPages.map((page, index) => {
               return (
                 <PaginationItem
+                  key={page}
                   page={page}
                   key={index}
                   onSelect={this.onSelect.bind(null, page)}
@@ -73,7 +74,7 @@ export default class Pagination extends React.Component {
                   ariaLabel={'Page ' + this.props.current + 1}
                   disabled={this.props.current > (this.props.nbPages - 1)}
                   active={false}
-                />
+              />
               : null
           }
           {
@@ -85,7 +86,7 @@ export default class Pagination extends React.Component {
                   ariaLabel={'Page ' + this.props.nbPages}
                   disabled={this.props.current > (this.props.nbPages - 1)}
                   active={false}
-                />
+              />
               : null
           }
         </ul>

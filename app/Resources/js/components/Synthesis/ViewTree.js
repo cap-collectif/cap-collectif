@@ -110,11 +110,11 @@ const ViewTree = React.createClass({
               ? <FormattedMessage
                   message={this.getIntlMessage('readmore.hide')}
                   title={element.title}
-                />
+              />
               : <FormattedMessage
                   message={this.getIntlMessage('readmore.show')}
                   title={element.title}
-                />
+              />
             }
           </span>
           <i style={{marginLeft: '5px'}} className={classes}></i>

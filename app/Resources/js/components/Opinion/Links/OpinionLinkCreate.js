@@ -87,6 +87,7 @@ const OpinionLinkCreate = React.createClass({
           <Modal.Footer>
             <CloseButton onClose={this.close.bind(null, this)} />
             <SubmitButton
+              id="confirm-opinion-link-create"
               isSubmitting={this.state.isSubmitting}
               onSubmit={this.handleSubmit.bind(null, this)}
             />

@@ -3,8 +3,15 @@ const FormattedMessage = ReactIntl.FormattedMessage;
 const ProposalPreviewFooter = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
+    selectionStepId: React.PropTypes.number,
   },
   mixins: [ReactIntl.IntlMixin],
+
+  getDefaultProps() {
+    return {
+      selectionStepId: null,
+    };
+  },
 
   render() {
     const proposal = this.props.proposal;
@@ -15,11 +22,18 @@ const ProposalPreviewFooter = React.createClass({
     if (proposal.status) {
       statusClasses['status--' + proposal.status.color] = true;
     }
+    const votesForSelectionStep = this.props.selectionStepId
+      ? proposal.votesCountBySelectionSteps[this.props.selectionStepId]
+        ? proposal.votesCountBySelectionSteps[this.props.selectionStepId]
+        : 0
+      : null
+    ;
+    const counterWidth = this.props.selectionStepId ? '50%' : '100%';
 
     return (
       <div className="proposal__footer">
         <div className="proposal__counters">
-          <div className="proposal__counter">
+          <div className="proposal__counter proposal__comments" style={{width: counterWidth}}>
             <div className="proposal__counter__value" >
               {proposal.comments_count}
             </div>
@@ -30,6 +44,21 @@ const ProposalPreviewFooter = React.createClass({
               />
             </div>
           </div>
+          {
+            this.props.selectionStepId
+            ? <div className="proposal__counter proposal__votes" style={{width: counterWidth, borderLeft: '1px solid #ccc'}}>
+                <div className="proposal__counter__value" >
+                  {votesForSelectionStep}
+                </div>
+                <div className="proposal__counter__label" >
+                  <FormattedMessage
+                    message={this.getIntlMessage('proposal.vote.count_no_nb')}
+                    count={votesForSelectionStep}
+                  />
+                </div>
+              </div>
+            : null
+          }
         </div>
         <div className={classNames(statusClasses)}>
           {

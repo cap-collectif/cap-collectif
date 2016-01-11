@@ -96,7 +96,7 @@ const OpinionBox = React.createClass({
               max={this.getOpinionType().votesThreshold}
               value={opinion.votes_ok}
               helpText={this.getOpinionType().votesThresholdHelpText}
-            />
+          />
           : null
         }
         {this.renderUserAvatarVotes()}

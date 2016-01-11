@@ -28,7 +28,7 @@ Capco\AppBundle\Entity\Proposal:
     theme: @theme3
     district: @district2
     status: @status2
-    selectionSteps: [@selectionStep1, @selectionStep2]
+    selectionSteps: [@selectionStep1, @selectionStep2, @selectionStep3]
     createdAt: <(new \DateTime('2015-02-01'))>
   proposal3:
     title: Installation de bancs sur la place de la mairie
