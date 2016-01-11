@@ -186,6 +186,18 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           WHERE s.isEnabled = 1 AND s.isTrashed = 1 AND ((s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs) OR (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = cs))
         )');
         $query->execute();
+        
+        // ****************************** Collect step counters **************************************
+
+        $query = $em->createQuery('update CapcoAppBundle:Steps\CollectStep cs set cs.proposalsCount =
+            (select count(p.id) from CapcoAppBundle:Proposal p INNER JOIN CapcoAppBundle:ProposalForm pf WITH p.proposalForm = pf where pf.step = cs AND p.enabled = 1 group by pf.step)');
+        $query->execute();
+
+        // ****************************** Selection steps counters **************************************
+
+        $query = $em->createQuery('update CapcoAppBundle:Steps\SelectionStep ss set ss.votesCount =
+            (select count(pv.id) from CapcoAppBundle:ProposalVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p where pv.selectionStep = ss AND pv.confirmed = 1 AND p.enabled = 1 group by pv.selectionStep)');
+        $query->execute();
 
         // ****************************** Selection steps counters **************************************
 

@@ -1,6 +1,6 @@
 {% macro contributions_popover(project) %}{% spaceless %}
     {% set opinionLabel = project.opinionTerm == 0 ? 'project.show.meta.opinionsCount' : 'project.show.meta.articlesCount' %}
-    {% set opinions = project.totalOpinionsCount %}
+    {% set opinions = project.totalOpinionsCount + project.totalProposalsCount %}
     {{ opinionLabel | transchoice(opinions, {}, 'CapcoAppBundle') }}
     </br>
     {% set versions = project.totalVersionsCount %}

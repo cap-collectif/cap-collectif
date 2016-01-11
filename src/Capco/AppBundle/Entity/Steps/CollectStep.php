@@ -27,6 +27,13 @@ class CollectStep extends AbstractStep
      **/
     private $statuses;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="proposals_count", type="integer")
+     */
+    private $proposalsCount = 0;
+
     public function __construct()
     {
         parent::__construct();
@@ -87,6 +94,25 @@ class CollectStep extends AbstractStep
     public function removeStatus($status)
     {
         $this->statuses->removeElement($status);
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProposalsCount()
+    {
+        return $this->proposalsCount;
+    }
+
+    /**
+     * @param int $proposalsCount
+     * @return $this
+     */
+    public function setProposalsCount($proposalsCount)
+    {
+        $this->proposalsCount = $proposalsCount;
 
         return $this;
     }

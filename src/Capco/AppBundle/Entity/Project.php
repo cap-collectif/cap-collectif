@@ -722,6 +722,21 @@ class Project
     /**
      * @return int
      */
+    public function getTotalProposalsCount()
+    {
+        $count = 0;
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isCollectStep()) {
+                $count += $step->getStep()->getProposalsCount();
+            }
+        }
+
+        return $count;
+    }
+
+    /**
+     * @return int
+     */
     public function getTotalVersionsCount()
     {
         $count = 0;
