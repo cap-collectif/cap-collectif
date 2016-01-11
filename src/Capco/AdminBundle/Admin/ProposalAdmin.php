@@ -193,7 +193,7 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.estimation',
             ])
             ->add('proposalForm.step', null, [
-                'label' => 'admin.fields.proposal.step',
+                'label' => 'admin.fields.proposal.collect_step',
             ])
             ->add('proposalForm.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.proposal.project',
