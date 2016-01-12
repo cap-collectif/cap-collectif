@@ -72,12 +72,6 @@ const CommentForm = React.createClass({
     autosize(React.findDOMNode(this.refs.body));
   },
 
-  getFormClasses() {
-    return React.addons.classSet({
-      'comment-answer-form': this.props.isAnswer,
-    });
-  },
-
   expand(newState) {
     if (!newState) {
       const $block = $(React.findDOMNode(this.refs.commentBlock));
@@ -213,8 +207,11 @@ const CommentForm = React.createClass({
   },
 
   render() {
+    const classes = classNames({
+      'comment-answer-form': this.props.isAnswer,
+    });
     return (
-      <div className={ this.getFormClasses() }>
+      <div className={classes}>
         <UserAvatar user={LoginStore.user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock" onBlur={this.expand.bind(this, false)}>
           <form ref="form">
