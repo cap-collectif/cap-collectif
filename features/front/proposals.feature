@@ -45,7 +45,7 @@ Feature: Proposals
     And I should see "Installation de bancs sur la place de la mairie"
 
   @javascript @elasticsearch
-  Scenario: Anonymous user combine search, filters and sorting on proposals
+  Scenario: Anonymous user combine search, filters and sorting on proposals in a collect step
     Given I am logged in as user
     And I visited "collect page" with:
       | projectSlug | budget-participatif-rennes       |
@@ -179,7 +179,7 @@ Feature: Proposals
     And I wait 1 seconds
     Then I should not see "Modifier" in the ".proposal__content .proposal__buttons" element
 
-  @javascript @database
+  @javascript @database @elasticsearch
   Scenario: Author of a proposal wants to delete it
     Given I am logged in as user
     And I visited "collect page" with:
@@ -233,7 +233,7 @@ Feature: Proposals
 
   # Selection step : See proposals with filters, sorting and search term
 
-  @javascript
+  @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a selection step and apply filters
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes   |
@@ -246,7 +246,7 @@ Feature: Proposals
     And I should see "2 propositions"
     Then I should see 2 ".proposal__preview" elements
 
-  @javascript
+  @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a selection step and sort them
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes       |
@@ -259,7 +259,7 @@ Feature: Proposals
 
   # Votes from selection step page
 
-  @javascript @database
+  @javascript @database @elasticsearch
   Scenario: Logged in user wants to vote and unvote for a proposal in a selection step
     Given I am logged in as user
     And I visited "selection page" with:
@@ -279,7 +279,7 @@ Feature: Proposals
     And I should see "Soutenir" in the "#proposal-2" element
     And I should see "Merci, votre vote a bien été supprimé."
 
-  @javascript @database
+  @javascript @database @elasticsearch
   Scenario: Anonymous user wants to vote for a proposal in a selection step with a comment
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes       |
@@ -301,7 +301,7 @@ Feature: Proposals
     And I should see "Soutenir" in the "#proposal-2" element
     And I should see "Merci, votre vote a bien été pris en compte."
 
-  @javascript @database
+  @javascript @database @elasticsearch
   Scenario: Anonymous user wants to vote for a proposal in a selection step anonymously
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes       |
@@ -323,7 +323,7 @@ Feature: Proposals
     And I should see "Soutenir" in the "#proposal-2" element
     And I should see "Merci, votre vote a bien été pris en compte."
 
-  @javascript
+  @javascript @elasticsearch
   Scenario: Anonymous user wants to vote twice with the same email from a selection step
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes       |
