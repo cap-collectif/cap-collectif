@@ -1,16 +1,16 @@
+import React from 'react';
+import classNames from 'classnames';
 import UserAvatar from '../User/UserAvatar';
 import OpinionInfos from './OpinionInfos';
 import OpinionSourceButtons from './OpinionSourceButtons';
-
-const Label = ReactBootstrap.Label;
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
+import {Label, Row, Col} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
 
 const OpinionSource = React.createClass({
   propTypes: {
     source: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   render() {
     const source = this.props.source;

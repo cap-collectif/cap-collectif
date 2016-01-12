@@ -1,3 +1,8 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {IntlMixin} from 'react-intl';
+import classNames from 'classnames';
+import Quill from 'quill';
 import QuillToolbar from './QuillToolbar';
 
 const Editor = React.createClass({
@@ -6,7 +11,7 @@ const Editor = React.createClass({
     id: React.PropTypes.string,
     className: React.PropTypes.string,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -16,9 +21,9 @@ const Editor = React.createClass({
   },
 
   componentDidMount() {
-    this._editor = new Quill(React.findDOMNode(this.refs.editor), {
+    this._editor = new Quill(ReactDOM.findDOMNode(this.refs.editor), {
       modules: {
-        'toolbar': { container: React.findDOMNode(this.refs.toolbar) },
+        'toolbar': { container: ReactDOM.findDOMNode(this.refs.toolbar) },
         'image-tooltip': {
           template: `
             <input class="input" type="textbox">

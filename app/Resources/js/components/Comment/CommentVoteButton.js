@@ -1,9 +1,12 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+
 const CommentVoteButton = React.createClass({
   propTypes: {
     comment: React.PropTypes.object,
     userIsAuthor: React.PropTypes.bool,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   renderFormOrDisabled() {
     if (this.props.userIsAuthor) {

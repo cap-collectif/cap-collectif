@@ -1,8 +1,9 @@
+import React from 'react';
+import classNames from 'classnames';
+import {Row, Col} from 'react-bootstrap';
+
 import OpinionPreview from './OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
-
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
 
 const OpinionVersion = React.createClass({
   propTypes: {

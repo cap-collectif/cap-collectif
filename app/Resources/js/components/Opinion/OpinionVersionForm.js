@@ -1,3 +1,6 @@
+import React from 'react';
+import {Modal, Button} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
 import LoginStore from '../../stores/LoginStore';
 import FormMixin from '../../utils/FormMixin';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
@@ -5,9 +8,6 @@ import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import FlashMessages from '../Utils/FlashMessages';
 import Input from '../Form/Input';
-
-const Modal = ReactBootstrap.Modal;
-const Button = ReactBootstrap.Button;
 
 const OpinionVersionForm = React.createClass({
   propTypes: {
@@ -19,7 +19,7 @@ const OpinionVersionForm = React.createClass({
     style: React.PropTypes.object,
     isContribuable: React.PropTypes.bool,
   },
-  mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {

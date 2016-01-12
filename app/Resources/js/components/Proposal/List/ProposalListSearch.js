@@ -1,7 +1,9 @@
+import React from 'react';
 import ProposalActions from '../../../actions/ProposalActions';
 import Input from '../../Form/Input';
-
-const Button = ReactBootstrap.Button;
+import {Button} from 'react-bootstrap';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import {IntlMixin} from 'react-intl';
 
 const ProposalListSearch = React.createClass({
   propTypes: {
@@ -9,8 +11,8 @@ const ProposalListSearch = React.createClass({
     fetchFrom: React.PropTypes.string,
   },
   mixins: [
-    ReactIntl.IntlMixin,
-    React.addons.LinkedStateMixin,
+    IntlMixin,
+    DeepLinkStateMixin,
   ],
 
   getDefaultProps() {

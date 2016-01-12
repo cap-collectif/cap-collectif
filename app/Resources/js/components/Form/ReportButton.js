@@ -1,8 +1,11 @@
+import React from 'react';
+import {Button} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
+import classNames from 'classnames';
 import LoginStore from '../../stores/LoginStore';
 import FeatureStore from '../../stores/FeatureStore';
 import LoginOverlay from '../Utils/LoginOverlay';
 
-const Button = ReactBootstrap.Button;
 
 const ReportButton = React.createClass({
   propTypes: {
@@ -12,7 +15,7 @@ const ReportButton = React.createClass({
     className: React.PropTypes.string,
     style: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

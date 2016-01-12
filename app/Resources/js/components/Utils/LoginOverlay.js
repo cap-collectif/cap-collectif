@@ -1,15 +1,14 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import LoginStore from '../../stores/LoginStore';
-
-const OverlayTrigger = ReactBootstrap.OverlayTrigger;
-const Popover = ReactBootstrap.Popover;
-const Button = ReactBootstrap.Button;
+import {Button, OverlayTrigger, Popover} from 'react-bootstrap';
 
 const LoginOverlay = React.createClass({
   propTypes: {
     children: React.PropTypes.element.isRequired,
     isRegistrationEnabled: React.PropTypes.bool,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

@@ -1,20 +1,19 @@
-import {COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH} from '../../constants/ArgumentConstants';
+import React from 'react';
+import {Tabs, Tab} from 'react-bootstrap';
+import {IntlMixin, FormattedMessage} from 'react-intl';
 
+import {COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH} from '../../constants/ArgumentConstants';
 import OpinionArgumentsBox from './OpinionArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourcesBox from './OpinionSourcesBox';
 import VoteLinechart from '../Utils/VoteLinechart';
 import OpinionLinksBox from './Links/OpinionLinksBox';
 
-const TabbedArea = ReactBootstrap.TabbedArea;
-const Tab = ReactBootstrap.Tab;
-const FormattedMessage = ReactIntl.FormattedMessage;
-
 const OpinionTabs = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   componentDidMount() {
     const scrollToAnchor = () => {
@@ -122,7 +121,7 @@ const OpinionTabs = React.createClass({
       // at least two tabs
 
       return (
-        <TabbedArea defaultActiveKey={this.getDefaultKey()} animation={false}>
+        <Tabs defaultActiveKey={this.getDefaultKey()} animation={false}>
           { this.isVersionable()
             ? <Tab
                 id="opinion__versions"
@@ -178,7 +177,7 @@ const OpinionTabs = React.createClass({
             </Tab>
             : null
           }
-        </TabbedArea>
+        </Tabs>
       );
     }
 

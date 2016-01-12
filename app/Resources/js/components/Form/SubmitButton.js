@@ -1,4 +1,6 @@
-const Button = ReactBootstrap.Button;
+import React from 'react';
+import {Button} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
 
 const SubmitButton = React.createClass({
   propTypes: {
@@ -10,7 +12,7 @@ const SubmitButton = React.createClass({
     className: React.PropTypes.string,
     style: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

@@ -1,3 +1,5 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import FeatureStore from '../../stores/FeatureStore';
 import LoginStore from '../../stores/LoginStore';
 
@@ -5,7 +7,7 @@ const CommentReport = React.createClass({
   propTypes: {
     comment: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

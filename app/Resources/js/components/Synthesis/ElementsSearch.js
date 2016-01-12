@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {IntlMixin} from 'react-intl';
 import ElementsList from './ElementsList';
 import Loader from '../Utils/Loader';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
@@ -10,7 +13,7 @@ const ElementsSearch = React.createClass({
     synthesis: React.PropTypes.object.isRequired,
     params: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -74,7 +77,7 @@ const ElementsSearch = React.createClass({
   },
 
   resetLoadMoreButton() {
-    const loadMoreButton = React.findDOMNode(this.refs.loadMore);
+    const loadMoreButton = ReactDOM.findDOMNode(this.refs.loadMore);
     if (loadMoreButton) {
       $(loadMoreButton).button('reset');
     }
@@ -90,7 +93,7 @@ const ElementsSearch = React.createClass({
   },
 
   loadMore() {
-    $(React.findDOMNode(this.refs.loadMore)).button('loading');
+    $(ReactDOM.findDOMNode(this.refs.loadMore)).button('loading');
     this.setState({
       isLoadingMore: true,
       limit: this.state.limit + Pagination,

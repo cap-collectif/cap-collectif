@@ -1,8 +1,9 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import {Modal} from 'react-bootstrap';
 import ProposalVoteBox from './ProposalVoteBox';
 import CloseButton from '../../Form/CloseButton';
 import RegisterButton from '../../Utils/RegisterButton';
-
-const Modal = ReactBootstrap.Modal;
 
 const ProposalVoteModal = React.createClass({
   propTypes: {
@@ -11,7 +12,7 @@ const ProposalVoteModal = React.createClass({
     showModal: React.PropTypes.bool.isRequired,
     onToggleModal: React.PropTypes.func.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   close() {
     this.props.onToggleModal(false);

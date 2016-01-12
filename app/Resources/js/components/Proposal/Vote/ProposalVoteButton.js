@@ -1,15 +1,18 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import {Button} from 'react-bootstrap';
+import classNames from 'classnames';
+
 import LoginStore from '../../../stores/LoginStore';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteModal from './ProposalVoteModal';
-
-const Button = ReactBootstrap.Button;
 
 const ProposalVoteButton = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     selectionStepId: React.PropTypes.number,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

@@ -1,5 +1,6 @@
-const FormattedDate = ReactIntl.FormattedDate;
-const FormattedMessage = ReactIntl.FormattedMessage;
+import React from 'react';
+import moment from 'moment';
+import {IntlMixin, FormattedMessage, FormattedDate} from 'react-intl';
 
 const OpinionInfos = React.createClass({
   propTypes: {
@@ -7,7 +8,7 @@ const OpinionInfos = React.createClass({
     rankingThreshold: React.PropTypes.number,
     opinionTerm: React.PropTypes.number,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   isVersion() {
     return !!this.props.opinion.parent;

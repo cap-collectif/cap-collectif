@@ -1,3 +1,6 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import classNames from 'classnames';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
 import ProposalEditModal from '../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
@@ -14,7 +17,7 @@ const ProposalPageHeader = React.createClass({
     districts: React.PropTypes.array.isRequired,
     className: React.PropTypes.string,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

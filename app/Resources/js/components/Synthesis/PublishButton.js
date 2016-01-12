@@ -1,11 +1,13 @@
-const Button = ReactBootstrap.Button;
+import React from 'react';
+import {Button} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
 
 const PublishButton = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
     onModal: React.PropTypes.func,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   click() {
     this.props.onModal(true, this.props.element);

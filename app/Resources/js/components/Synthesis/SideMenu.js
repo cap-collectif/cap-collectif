@@ -1,3 +1,8 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import {Nav, NavItem} from 'react-bootstrap';
+import {NavItemLink} from 'react-router-bootstrap';
+
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
@@ -5,15 +10,11 @@ import CreateModal from './CreateModal';
 import ElementsFinder from './ElementsFinder';
 import Loader from '../Utils/Loader';
 
-const Nav = ReactBootstrap.Nav;
-const NavItem = ReactBootstrap.NavItem;
-const NavItemLink = ReactRouterBootstrap.NavItemLink;
-
 const SideMenu = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

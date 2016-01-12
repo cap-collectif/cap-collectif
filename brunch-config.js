@@ -1,11 +1,15 @@
-'use strict';
-
 exports.config = {
   overrides: {
     production: {
       plugins: {
         off: ['eslint-brunch'],
       }
+    }
+  },
+  npm: {
+    enabled: true,
+    globals: {
+      React: 'react', // For ReactIntl only
     }
   },
   paths: {
@@ -20,11 +24,9 @@ exports.config = {
       joinTo: {
         'js/vendor.js': [
           'bower_components/jquery/dist/jquery.js',
-          'bower_components/readmore/readmore.js',
+          'bower_components/Readmore.js/readmore.min.js',
           'bower_components/ckeditor/ckeditor.js',
           'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
-          'bower_components/fancybox/source/jquery.fancybox.pack.js',
-          'bower_components/eventEmitter/EventEmitter.js',
 
           // safari polyfills
           'bower_components/es6-promise/promise.js',
@@ -32,28 +34,16 @@ exports.config = {
           'bower_components/intl/locale-data/jsonp/fr.js',
           // end
 
-          'bower_components/react/react-with-addons.js',
-          'bower_components/flux/dist/Flux.js',
+          /^node_modules/,
+
           'bower_components/fetch/fetch.js',
-          'bower_components/moment/moment.js',
-          'bower_components/react-intl/dist/react-intl.js',
-          'bower_components/react-intl/dist/locale-data/fr.js',
-          'bower_components/autosize/dist/autosize.js',
-
-          'bower_components/quill/dist/quill.js',
-
-          'bower_components/jsdiff/diff.js',
+          // 'bower_components/react-intl/dist/locale-data/fr.js',
 
           'app/Resources/js/jsapi.js',
           'app/Resources/js/cookiechoices.js',
           'app/Resources/js/googleCharts.js',
           'app/Resources/js/browserUpdate.js',
           'app/Resources/js/modernizr.js',
-          'bower_components/mailcheck/src/mailcheck.js',
-          'bower_components/react-router/build/umd/ReactRouter.js',
-          'bower_components/react-bootstrap/react-bootstrap.js',
-          'bower_components/classnames/index.js',
-          'bower_components/react-router-bootstrap/lib/ReactRouterBootstrap.js'
         ],
         'js/app.js': [
           'app/Resources/js/synthesis.js',
@@ -73,8 +63,8 @@ exports.config = {
         'css/style.css' : [
           'bower_components/bootstrap/assets/stylesheets/bootstrap.scss',
           'bower_components/css-spinners/css/spinners.css',
-          'bower_components/quill/dist/quill.base.css',
-          'bower_components/quill/dist/quill.snow.css',
+          'node_modules/quill/dist/quill.base.css',
+          'node_modules/quill/dist/quill.snow.css',
           'app/Resources/scss/style.scss'
         ],
         'css/jquery.minicolors.css' : ['bower_components/jquery-minicolors/jquery.minicolors.css'],

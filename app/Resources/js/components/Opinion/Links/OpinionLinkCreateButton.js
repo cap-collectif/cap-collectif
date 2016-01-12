@@ -1,13 +1,14 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import LoginStore from '../../../stores/LoginStore';
 import LoginOverlay from '../../Utils/LoginOverlay';
-
-const Button = ReactBootstrap.Button;
+import {Button} from 'react-bootstrap';
 
 const OpinionLinkCreateButton = React.createClass({
   propTypes: {
     handleClick: React.PropTypes.func.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   render() {
     return (

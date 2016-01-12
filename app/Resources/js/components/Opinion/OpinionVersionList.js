@@ -1,3 +1,5 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import OpinionVersion from './OpinionVersion';
 
 const OpinionVersionList = React.createClass({
@@ -5,7 +7,7 @@ const OpinionVersionList = React.createClass({
     versions: React.PropTypes.array.isRequired,
     rankingThreshold: React.PropTypes.number,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   render() {
     if (this.props.versions.length === 0) {

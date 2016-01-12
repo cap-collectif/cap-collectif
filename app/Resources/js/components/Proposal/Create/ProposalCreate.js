@@ -1,11 +1,12 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import ProposalCreateButton from './ProposalCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalStore from '../../../stores/ProposalStore';
-
-const Modal = ReactBootstrap.Modal;
+import {Modal} from 'react-bootstrap';
 
 const ProposalCreate = React.createClass({
   propTypes: {
@@ -13,7 +14,7 @@ const ProposalCreate = React.createClass({
     themes: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

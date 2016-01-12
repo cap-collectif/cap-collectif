@@ -1,11 +1,13 @@
-const Button = ReactBootstrap.Button;
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import {Button} from 'react-bootstrap';
 
 const DivideButton = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
     onModal: React.PropTypes.func,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   click() {
     this.props.onModal(true);

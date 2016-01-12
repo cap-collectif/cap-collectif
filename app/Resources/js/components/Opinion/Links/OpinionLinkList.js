@@ -1,10 +1,12 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import OpinionLink from './OpinionLink';
 
 const OpinionLinkList = React.createClass({
   propTypes: {
     links: React.PropTypes.array.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   render() {
     if (this.props.links.length === 0) {

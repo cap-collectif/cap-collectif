@@ -1,9 +1,13 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import classNames from 'classnames';
+
 const ElementIcon = React.createClass({
   propTypes: {
     element: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return ({

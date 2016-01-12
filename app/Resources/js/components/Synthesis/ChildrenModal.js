@@ -1,8 +1,8 @@
+import React from 'react';
 import ElementsList from './ElementsList';
 import Loader from '../Utils/Loader';
-
-const Modal = ReactBootstrap.Modal;
-const Button = ReactBootstrap.Button;
+import {Modal, Button} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
 
 const ChildrenModal = React.createClass({
   propTypes: {
@@ -10,7 +10,7 @@ const ChildrenModal = React.createClass({
     show: React.PropTypes.bool.isRequired,
     toggle: React.PropTypes.func.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

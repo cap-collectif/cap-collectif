@@ -1,5 +1,8 @@
-import {VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH} from '../../constants/VoteConstants';
+import React from 'react';
+import {Row, Col, Well} from 'react-bootstrap';
+import {IntlMixin, FormattedMessage} from 'react-intl';
 
+import {VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH} from '../../constants/VoteConstants';
 import OpinionPreview from './OpinionPreview';
 import OpinionAnswer from './OpinionAnswer';
 import OpinionButtons from './OpinionButtons';
@@ -9,19 +12,13 @@ import VotePiechart from '../Utils/VotePiechart';
 import UserAvatar from '../User/UserAvatar';
 import VotesBar from '../Utils/VotesBar';
 
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
-const Well = ReactBootstrap.Well;
-
-const FormattedMessage = ReactIntl.FormattedMessage;
-
 const OpinionBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
     rankingThreshold: React.PropTypes.number,
     opinionTerm: React.PropTypes.number,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getMaxVotesValue() {
     return this.getOpinionType().votesThreshold;

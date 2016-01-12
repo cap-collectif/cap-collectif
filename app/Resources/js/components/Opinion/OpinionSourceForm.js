@@ -1,19 +1,21 @@
+import React from 'react';
+import {Button, Modal} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
+
 import LoginStore from '../../stores/LoginStore';
 import ValidatorMixin from '../../utils/ValidatorMixin';
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import FlashMessages from '../Utils/FlashMessages';
 import Input from '../Form/Input';
-
-const Button = ReactBootstrap.Button;
-const Modal = ReactBootstrap.Modal;
+import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 
 const OpinionSourceForm = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
     categories: React.PropTypes.array.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, ValidatorMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, ValidatorMixin],
 
   getInitialState() {
     return {
@@ -150,7 +152,7 @@ const OpinionSourceForm = React.createClass({
                 type="text"
                 name="sourceTitle"
                 groupClassName={this.getGroupStyle('title')}
-                valueLink={this.linkState('title')}
+                value={this.linkState('title')}
                 label={this.getIntlMessage('source.title')}
                 errors={this.renderFormErrors('title')}
               />

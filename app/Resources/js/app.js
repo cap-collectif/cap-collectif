@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import IntlData from './translations/FR';
 import CommentSection from './components/Comment/CommentSection';
 import OpinionPage from './components/Opinion/OpinionPage';
@@ -6,7 +9,6 @@ import FeatureService from './services/FeatureService';
 import CollectStepPage from './components/Page/CollectStepPage';
 import SelectionStepPage from './components/Page/SelectionStepPage';
 import ProposalPage from './components/Proposal/Page/ProposalPage';
-
 FeatureService.load();
 
 AuthService
@@ -14,28 +16,28 @@ AuthService
   .then(() => {
     // We enable React apps
     if ($('#render-idea-comments').length) {
-      React.render(
+      ReactDOM.render(
         <CommentSection uri="ideas" object={$('#render-idea-comments').data('idea')} {...IntlData} />,
         document.getElementById('render-idea-comments')
       );
     }
 
     if ($('#render-post-comments').length) {
-      React.render(
+      ReactDOM.render(
         <CommentSection uri="posts" object={$('#render-post-comments').data('post')} {...IntlData} />,
         document.getElementById('render-post-comments')
       );
     }
 
     if ($('#render-event-comments').length) {
-      React.render(
+      ReactDOM.render(
         <CommentSection uri="events" object={$('#render-event-comments').data('event')} {...IntlData} />,
         document.getElementById('render-event-comments')
       );
     }
 
     if ($('#render-opinion').length) {
-      React.render(
+      ReactDOM.render(
         <OpinionPage
           opinionId={$('#render-opinion').data('opinion')}
           {...IntlData}
@@ -45,7 +47,7 @@ AuthService
     }
 
     if ($('#render-proposal-page').length) {
-      React.render(
+      ReactDOM.render(
         <ProposalPage
           proposal={$('#render-proposal-page').data('proposal').proposal}
           form={$('#render-proposal-page').data('form').form}
@@ -61,7 +63,7 @@ AuthService
     }
 
     if ($('#render-collect-step-page').length) {
-      React.render(
+      ReactDOM.render(
         <CollectStepPage
           count={$('#render-collect-step-page').data('count')}
           form={$('#render-collect-step-page').data('form').form}
@@ -76,7 +78,7 @@ AuthService
     }
 
     if ($('#render-selection-step-page').length) {
-      React.render(
+      ReactDOM.render(
         <SelectionStepPage
           count={$('#render-selection-step-page').data('count')}
           stepId={$('#render-selection-step-page').data('step-id')}
@@ -92,7 +94,7 @@ AuthService
     }
 
     if ($('#render-opinion-version').length) {
-      React.render(
+      ReactDOM.render(
         <OpinionPage
           opinionId={$('#render-opinion-version').data('opinion')}
           versionId={$('#render-opinion-version').data('version')}
@@ -101,7 +103,8 @@ AuthService
         document.getElementById('render-opinion-version')
       );
     }
-  });
+  }
+);
 
 // Our global App for symfony
 const App = (($) => {
