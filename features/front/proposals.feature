@@ -86,8 +86,8 @@ Feature: Proposals
     And I press "Publier"
     And I wait 5 seconds
     Then I should see "Merci ! Votre proposition a bien été créée."
-    And I should see "5 propositions"
-    And I should see "Nouvelle proposition créée"
+    # And I should see "5 propositions"
+    # And I should see "Nouvelle proposition créée"
 
   @database @javascript @elasticsearch
   Scenario: Logged in user wants to create a proposal with theme
