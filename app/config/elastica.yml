@@ -297,7 +297,8 @@ fos_elastica:
             driver: orm
             model: Capco\AppBundle\Entity\Proposal
             provider: ~
-            listener: ~
+            listener:
+              immediate: true
             finder: ~
         # Opinion
         opinion:
