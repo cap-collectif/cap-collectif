@@ -76,7 +76,7 @@ Feature: Proposals
     And I wait 1 seconds
     Then I should see "4 propositions"
     When I press "Faire une proposition"
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
       | proposal_title    | Nouvelle proposition créée      |
       | proposal_body     | Description de ma proposition   |
@@ -84,10 +84,10 @@ Feature: Proposals
       | proposal_custom-2 | Réponse à la question 2         |
     And I select "Beaulieu" from "proposal_district"
     And I press "Publier"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Merci ! Votre proposition a bien été créée."
-    # And I should see "5 propositions"
-    # And I should see "Nouvelle proposition créée"
+    And I should see "5 propositions"
+    And I should see "Nouvelle proposition créée"
 
   @database @javascript @elasticsearch
   Scenario: Logged in user wants to create a proposal with theme
@@ -96,7 +96,7 @@ Feature: Proposals
     And I visited "collect page" with:
       | projectSlug | budget-participatif-rennes       |
       | stepSlug    | collecte-des-propositions        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "4 propositions"
     When I press "Faire une proposition"
     And I wait 1 seconds
@@ -108,11 +108,10 @@ Feature: Proposals
     And I select "Justice" from "proposal_theme"
     And I select "Beaulieu" from "proposal_district"
     And I press "Publier"
-    And I wait 2 seconds
+    And I wait 1 seconds
     Then I should see "Merci ! Votre proposition a bien été créée."
-    # And I wait 3 seconds
-    # And I should see "Nouvelle proposition créée"
-    # And I should see "5 propositions"
+    And I should see "Nouvelle proposition créée"
+    And I should see "5 propositions"
 
   @javascript @security
   Scenario: Logged in user wants to create a proposal without providing required response
@@ -120,16 +119,16 @@ Feature: Proposals
     And I visited "collect page" with:
       | projectSlug | budget-participatif-rennes       |
       | stepSlug    | collecte-des-propositions        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     When I press "Faire une proposition"
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
       | proposal_title    | Nouvelle proposition créée      |
       | proposal_body     | Description de ma proposition   |
       | proposal_custom-1 | Réponse à la question 1         |
     And I select "Beaulieu" from "proposal_district"
     And I press "Publier"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Ce champ est obligatoire."
 
   @javascript @security
@@ -196,9 +195,9 @@ Feature: Proposals
     Then I press "Supprimer"
     And I wait 1 seconds
     And I press "confirm"
-    And I wait 3 seconds
-    #Then I should see "3 propositions"
-    #And I should not see "Rénovation du gymnase"
+    And I wait 1 seconds
+    Then I should see "3 propositions"
+    And I should not see "Rénovation du gymnase"
 
   @javascript
   Scenario: Non author of a proposal wants to delete it
@@ -221,7 +220,7 @@ Feature: Proposals
       | projectSlug      | budget-participatif-rennes                       |
       | stepSlug         | collecte-des-propositions                        |
       | proposalSlug     | installation-de-bancs-sur-la-place-de-la-mairie  |
-    And I wait 4 seconds
+    And I wait 1 seconds
     When I follow "Signaler"
     And I wait 1 seconds
     And I fill in the following:
