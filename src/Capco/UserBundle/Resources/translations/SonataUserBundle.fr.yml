@@ -33,7 +33,6 @@ registration:
     content:
       body: Pour empêcher les fausses inscriptions, vous envoyer des notifications par e-mail liées au service. Par exemple, vous pourrez recevoir des messages relatifs à la réinitialisation de votre mot de passe si vous avez oublié vos données de connexion.
       title: Pourquoi dois-je confirmer mon adresse électronique ?
-    spam: Il est possible que l'e-mail envoyé soit considéré comme indésirable. Merci de consulter vos courriers indésirables si vous ne recevez pas cet e-mail dans les 5 minutes après votre inscription.
     title: Confirmer votre adresse électronique
   flash:
     user_created: Merci ! Votre compte a bien été créé.
