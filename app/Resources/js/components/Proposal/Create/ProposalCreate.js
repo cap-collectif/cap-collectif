@@ -50,7 +50,13 @@ const ProposalCreate = React.createClass({
 
   handleSubmitSuccess() {
     this.close();
-    ProposalActions.load('form', this.props.form.id);
+    // Temporary fix :
+    // If not present, request is sometimes done before es has been updated,
+    // therefore leading to an outdated set of data being fetched.
+    const that = this;
+    setTimeout(() => {
+      ProposalActions.load('form', that.props.form.id);
+    }, 100);
   },
 
   handleValidationFailure() {

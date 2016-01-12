@@ -1,3 +1,4 @@
+@proposal
 Feature: Proposals
 
   # See proposals with filters, sorting and search term
@@ -86,6 +87,7 @@ Feature: Proposals
     And I press "Publier"
     And I wait 1 seconds
     Then I should see "Merci ! Votre proposition a bien été créée."
+    And I wait 2 seconds
     And I should see "5 propositions"
     And I should see "Nouvelle proposition créée"
 
@@ -110,8 +112,9 @@ Feature: Proposals
     And I press "Publier"
     And I wait 1 seconds
     Then I should see "Merci ! Votre proposition a bien été créée."
-    And I should see "Nouvelle proposition créée"
+    And I wait 2 seconds
     And I should see "5 propositions"
+    And I should see "Nouvelle proposition créée"
 
   @javascript @security
   Scenario: Logged in user wants to create a proposal without providing required response
