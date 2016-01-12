@@ -754,9 +754,6 @@ highlighted_theme: un thème à la une
 highlighted_event: un évènement à la une
 highlighted_project: un projet à la une
 
-idea:
-  export_voters: emails des votants
-
 idea_comment: un commentaire sur une idée
 event_comment: un commentaire sur un évènement
 post_comment: un commentaire sur un article

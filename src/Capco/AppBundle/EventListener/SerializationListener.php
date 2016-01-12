@@ -8,7 +8,6 @@ use JMS\Serializer\Serializer;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class SerializationListener implements EventSubscriberInterface
 {
@@ -34,14 +33,10 @@ class SerializationListener implements EventSubscriberInterface
 
     public function onPostMediaSerialize(ObjectEvent $event)
     {
-        try {
-            $event->getVisitor()->addData(
-                'url',
-                $this->mediaExtension->path($event->getObject(), 'avatar')
-            );
-        } catch(RouteNotFoundException $e) {
-            // Avoid some SonataMedia problems
-        }
+        $event->getVisitor()->addData(
+            'url',
+            $this->mediaExtension->path($event->getObject(), 'avatar')
+        );
     }
 
     public function onPostLogSerialize(ObjectEvent $event)
