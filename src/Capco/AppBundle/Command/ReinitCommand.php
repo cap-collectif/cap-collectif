@@ -180,7 +180,11 @@ class ReinitCommand extends ContainerAwareCommand
     protected function populateElastica(OutputInterface $output)
     {
         $command = $this->getApplication()->find('fos:elastica:populate');
-        $input = new ArrayInput(['']);
+        $input = new ArrayInput([
+            '--quiet' => true,
+            '--no-debug' => true,
+            '',
+        ]);
         $input->setInteractive(false);
         $command->run($input, $output);
     }
