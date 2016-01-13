@@ -9,7 +9,6 @@ use Capco\UserBundle\Entity\User;
 class ProposalVotesResolver
 {
     protected $repository;
-    protected $userVotesForSelectionSteps = [];
 
     public function __construct(ProposalVoteRepository $repository)
     {
@@ -18,7 +17,7 @@ class ProposalVotesResolver
 
     public function addVotesToProposalsForSelectionStepAndUser(array $proposals, SelectionStep $selectionStep, User $user)
     {
-        $this->usersVotesForSelectionStep = $this
+        $usersVotesForSelectionStep = $this
             ->repository
             ->findBy(
                 [
@@ -28,16 +27,16 @@ class ProposalVotesResolver
             );
         $results = [];
         foreach ($proposals as $proposal) {
-            $proposal['userHasVote'] = $this->proposalHasVote($proposal);
+            $proposal['userHasVote'] = $this->proposalHasVote($proposal, $usersVotesForSelectionStep);
             $results[] = $proposal;
         }
 
         return $results;
     }
 
-    public function proposalHasVote($proposal)
+    public function proposalHasVote($proposal, $usersVotesForSelectionStep)
     {
-        foreach ($this->usersVotesForSelectionStep as $vote) {
+        foreach ($usersVotesForSelectionStep as $vote) {
             if ($vote->getProposal()->getId() === $proposal['id']) {
                 return true;
             }
