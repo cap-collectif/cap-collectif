@@ -189,11 +189,7 @@ export default {
         },
         delete_vote: {
           success: 'Merci, votre vote a bien été supprimé.',
-          failure: 'Toutes nos excuse ! Une erreur est survenue, merci de réessayer plus tard.',
-        },
-        delete_vote: {
-          success: 'Merci, votre vote a bien été supprimé.',
-          failure: 'Toutes nos excuse ! Une erreur est survenue, merci de réessayer plus tard.',
+          failure: 'Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.',
         },
         update: {
           success: 'Votre proposition a bien été modifiée.',
@@ -201,11 +197,7 @@ export default {
         },
         vote: {
           success: 'Merci, votre vote a bien été pris en compte.',
-          failure: 'Toutes nos excuse ! Une erreur est survenue, merci de réessayer plus tard.',
-        },
-        vote: {
-          success: 'Merci, votre vote a bien été pris en compte.',
-          failure: 'Toutes nos excuse ! Une erreur est survenue, merci de réessayer plus tard.',
+          failure: 'Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.',
         },
       },
       search: 'Rechercher une proposition',
