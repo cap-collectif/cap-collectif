@@ -18,7 +18,7 @@ Feature: Source
     | sourceBody   | Contenu de la source     |
     And I select "Politique" from "sourceCategory"
     And I click the ".modal-footer .btn-primary" element
-    And I wait "2" seconds
+    And I wait 3 seconds
     Then I should see "1 source"
 
   @javascript

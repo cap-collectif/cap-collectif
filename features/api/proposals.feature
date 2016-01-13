@@ -51,8 +51,8 @@ Feature: Proposal Restful Api
           {
             "question": {
               "id": @integer@,
-              "questionType": @number@,
-              "title": @string@
+              "title": @string@,
+              "required": @boolean@
             },
             "value": @string@
           },
