@@ -31,6 +31,9 @@ const VotePiechart = React.createClass({
   },
 
   initChart() {
+    if (!React.findDOMNode(this.refs.piechart)) {
+      return;
+    }
     const PieChart = google.visualization.PieChart;
     const DataTable = google.visualization.arrayToDataTable;
 
