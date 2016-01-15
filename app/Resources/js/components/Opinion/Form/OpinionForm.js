@@ -160,6 +160,7 @@ const OpinionForm = React.createClass({
               <Input
                 key={key}
                 id={'opinion_' + key}
+                key={key}
                 type="editor"
                 label={appendixType.title}
                 groupClassName={this.getGroupStyle(key)}
