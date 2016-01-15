@@ -8,9 +8,6 @@ exports.config = {
   },
   npm: {
     enabled: true,
-    globals: {
-      React: 'react', // For ReactIntl only
-    }
   },
   paths: {
     watched: ['app/Resources'],
@@ -37,7 +34,6 @@ exports.config = {
           /^node_modules/,
 
           'bower_components/fetch/fetch.js',
-          // 'bower_components/react-intl/dist/locale-data/fr.js',
 
           'app/Resources/js/jsapi.js',
           'app/Resources/js/cookiechoices.js',
