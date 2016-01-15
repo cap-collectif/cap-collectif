@@ -54,7 +54,6 @@ export default class Pagination extends React.Component {
             displayedPages.map((page, index) => {
               return (
                 <PaginationItem
-                  key={page}
                   page={page}
                   key={index}
                   onSelect={this.onSelect.bind(null, page)}

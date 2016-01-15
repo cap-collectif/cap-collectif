@@ -267,6 +267,7 @@ const ProposalForm = React.createClass({
             <Input
               key={key}
               id={'proposal_' + key}
+              key={key}
               type={inputType}
               label={question.title + (question.required ? ' *' : '')}
               groupClassName={this.getGroupStyle(key)}
