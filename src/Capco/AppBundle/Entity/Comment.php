@@ -513,7 +513,7 @@ abstract class Comment implements VotableInterface, HasAuthorInterface
      */
     public function canContribute()
     {
-        return $this->isEnabled && !$this->isTrashed;
+        return $this->isEnabled && !$this->isTrashed && $this->getRelatedObject()->isEnabled() && !$this->getRelatedObject()->isTrashed();
     }
 
     /**
