@@ -1,10 +1,11 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalActions from '../../../actions/ProposalActions';
-
-const Modal = ReactBootstrap.Modal;
+import {Modal} from 'react-bootstrap';
 
 const ProposalEditModal = React.createClass({
   propTypes: {
@@ -15,7 +16,7 @@ const ProposalEditModal = React.createClass({
     show: React.PropTypes.bool.isRequired,
     onToggleModal: React.PropTypes.func.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

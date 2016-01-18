@@ -1,3 +1,4 @@
+import React from 'react';
 import matchParser from '../../utils/match_parser';
 
 function prepareElements(text) {

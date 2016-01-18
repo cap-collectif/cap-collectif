@@ -1,3 +1,5 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import ElementTitle from './ElementTitle';
 
 const ElementBreadcrumb = React.createClass({
@@ -5,7 +7,7 @@ const ElementBreadcrumb = React.createClass({
     element: React.PropTypes.object,
     link: React.PropTypes.bool,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

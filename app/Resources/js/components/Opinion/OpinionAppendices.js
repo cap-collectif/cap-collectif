@@ -1,10 +1,12 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import OpinionAppendix from './OpinionAppendix';
 
 const OpinionAppendices = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   isVersion() {
     return !!this.props.opinion.parent;

@@ -1,3 +1,4 @@
+import React from 'react';
 import DefaultAvatar from './DefaultAvatar';
 
 const UserAvatar = React.createClass({

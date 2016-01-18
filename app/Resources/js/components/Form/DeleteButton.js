@@ -1,3 +1,6 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import classNames from 'classnames';
 import LoginStore from '../../stores/LoginStore';
 
 const DeleteButton = React.createClass({
@@ -7,7 +10,7 @@ const DeleteButton = React.createClass({
     className: React.PropTypes.string,
     style: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

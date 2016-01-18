@@ -1,4 +1,5 @@
-const FormattedHTMLMessage = ReactIntl.FormattedHTMLMessage;
+import React from 'react';
+import {FormattedHTMLMessage} from 'react-intl';
 
 const ProposalResponse = React.createClass({
   propTypes: {

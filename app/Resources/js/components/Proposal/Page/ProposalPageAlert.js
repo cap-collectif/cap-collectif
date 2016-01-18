@@ -1,11 +1,12 @@
-const Alert = ReactBootstrap.Alert;
-const FormattedMessage = ReactIntl.FormattedMessage;
+import React from 'react';
+import {Alert} from 'react-bootstrap';
+import {IntlMixin, FormattedMessage} from 'react-intl';
 
 const ProposalPageAlert = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   render() {
     const proposal = this.props.proposal;

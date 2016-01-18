@@ -1,3 +1,5 @@
+import React from 'react';
+import {IntlMixin, FormattedHTMLMessage} from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
@@ -5,8 +7,6 @@ import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
 import FeatureStore from '../../../stores/FeatureStore';
-
-const FormattedHTMLMessage = ReactIntl.FormattedHTMLMessage;
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -20,7 +20,7 @@ const ProposalForm = React.createClass({
     mode: React.PropTypes.string,
     proposal: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
@@ -267,6 +267,7 @@ const ProposalForm = React.createClass({
             <Input
               key={key}
               id={'proposal_' + key}
+              key={key}
               type={inputType}
               label={question.title + (question.required ? ' *' : '')}
               groupClassName={this.getGroupStyle(key)}

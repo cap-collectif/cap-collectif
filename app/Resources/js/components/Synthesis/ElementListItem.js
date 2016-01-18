@@ -1,3 +1,6 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import classNames from 'classnames';
 import ElementBlock from './ElementBlock';
 
 const ElementListItem = React.createClass({
@@ -9,7 +12,7 @@ const ElementListItem = React.createClass({
     hasLink: React.PropTypes.bool,
     linkType: React.PropTypes.string,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return ({

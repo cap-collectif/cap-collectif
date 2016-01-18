@@ -1,10 +1,12 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import OpinionSource from './OpinionSource';
 
 const OpinionSourceList = React.createClass({
   propTypes: {
     sources: React.PropTypes.array,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   render() {
     if (this.props.sources.length === 0) {

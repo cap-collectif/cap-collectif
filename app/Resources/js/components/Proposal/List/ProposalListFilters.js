@@ -1,13 +1,10 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
-
-const Button = ReactBootstrap.Button;
-const ButtonGroup = ReactBootstrap.ButtonGroup;
-const ButtonToolbar = ReactBootstrap.ButtonToolbar;
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
+import {Button, ButtonGroup, ButtonToolbar, Row, Col} from 'react-bootstrap';
 
 const ProposalListFilters = React.createClass({
   propTypes: {
@@ -20,7 +17,7 @@ const ProposalListFilters = React.createClass({
     status: React.PropTypes.array.isRequired,
     orderByVotes: React.PropTypes.bool,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

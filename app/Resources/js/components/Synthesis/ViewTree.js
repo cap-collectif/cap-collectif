@@ -1,3 +1,7 @@
+import React from 'react';
+import {IntlMixin, FormattedMessage} from 'react-intl';
+import classNames from 'classnames';
+
 import ViewElement from './ViewElement';
 import Loader from '../Utils/Loader';
 
@@ -6,16 +10,13 @@ import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
 import ArrayHelper from '../../services/ArrayHelper';
-
 import SynthesisDisplayRules from '../../services/SynthesisDisplayRules';
-
-const FormattedMessage = ReactIntl.FormattedMessage;
 
 const ViewTree = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

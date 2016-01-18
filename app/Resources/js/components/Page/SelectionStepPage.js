@@ -1,3 +1,5 @@
+import React from 'react';
+import {IntlMixin, FormattedMessage} from 'react-intl';
 import ProposalStore from '../../stores/ProposalStore';
 import ProposalActions from '../../actions/ProposalActions';
 import {PROPOSAL_PAGINATION} from '../../constants/ProposalConstants';
@@ -6,8 +8,6 @@ import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import FlashMessages from '../Utils/FlashMessages';
-
-const FormattedMessage = ReactIntl.FormattedMessage;
 
 const SelectionStepPage = React.createClass({
   propTypes: {
@@ -19,7 +19,7 @@ const SelectionStepPage = React.createClass({
     votable: React.PropTypes.bool.isRequired,
     count: React.PropTypes.number.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

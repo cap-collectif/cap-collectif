@@ -1,6 +1,8 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 
 const QuillToolbar = React.createClass({
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   render() {
     return (

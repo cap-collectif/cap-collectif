@@ -1,16 +1,18 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Row, Col} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
+
 import OpinionSourceList from './OpinionSourceList';
 import OpinionSourceForm from './OpinionSourceForm';
 import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
 
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
-
 const OpinionSourcesBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -36,7 +38,7 @@ const OpinionSourcesBox = React.createClass({
 
   updateSelectedValue() {
     this.setState({
-      filter: $(React.findDOMNode(this.refs.filter)).val(),
+      filter: $(ReactDOM.findDOMNode(this.refs.filter)).val(),
       isLoading: true,
       sources: [],
     });
