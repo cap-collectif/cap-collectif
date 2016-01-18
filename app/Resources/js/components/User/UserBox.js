@@ -1,5 +1,6 @@
 import UserPreview from './UserPreview';
-import {Col} from 'react-bootstrap';
+
+const Col = ReactBootstrap.Col;
 
 const UserBox = React.createClass({
   propTypes: {

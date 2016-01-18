@@ -1,12 +1,16 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import LoginStore from '../../stores/LoginStore';
 import UserAvatar from '../User/UserAvatar';
-import {Navbar, Nav, NavItem, DropdownButton, MenuItem, Input, Button} from 'react-bootstrap';
-import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
+
+const Navbar = ReactBootstrap.Navbar;
+const Nav = ReactBootstrap.Nav;
+const NavItem = ReactBootstrap.NavItem;
+const DropdownButton = ReactBootstrap.DropdownButton;
+const MenuItem = ReactBootstrap.MenuItem;
+const Input = ReactBootstrap.Input;
+const Button = ReactBootstrap.Button;
 
 const MainNavbar = React.createClass({
-  mixins: [IntlMixin, DeepLinkStateMixin],
+  mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation, React.addons.LinkedStateMixin],
 
   getInitialState() {
     return {

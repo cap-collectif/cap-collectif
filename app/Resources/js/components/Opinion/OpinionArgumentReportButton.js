@@ -1,15 +1,14 @@
-import React from 'react';
-import {Button} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
 import LoginStore from '../../stores/LoginStore';
 import FeatureStore from '../../stores/FeatureStore';
 import LoginOverlay from '../Utils/LoginOverlay';
+
+const Button = ReactBootstrap.Button;
 
 const OpinionArgumentReportButton = React.createClass({
   propTypes: {
     argument: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {

@@ -1,6 +1,3 @@
-import React from 'react';
-import classNames from 'classnames';
-
 export default class PaginationItem extends React.Component {
   render() {
     const classes = classNames({

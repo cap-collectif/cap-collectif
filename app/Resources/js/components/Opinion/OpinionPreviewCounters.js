@@ -1,13 +1,13 @@
-import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
 import {COMMENT_SYSTEM_NONE} from '../../constants/ArgumentConstants';
 import {VOTE_WIDGET_DISABLED} from '../../constants/VoteConstants';
+
+const FormattedMessage = ReactIntl.FormattedMessage;
 
 const OpinionPreviewCounters = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getType() {
     const opinion = this.props.opinion;

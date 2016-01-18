@@ -5,8 +5,6 @@
   "description": "Cap-Collectif version Symfony2",
   "main": "brunch-config.js",
   "scripts": {
-    "build": "./node_modules/brunch/bin/brunch build",
-    "build:prod": "./node_modules/brunch/bin/brunch build --production",
     "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js",
     "lint": "./node_modules/eslint/bin/eslint.js --cache --fix  app/Resources/js"
   },
@@ -21,35 +19,15 @@
   },
   "homepage": "https://github.com/jolicode/CapCollectif-SF2",
   "dependencies": {
-    "autosize": "^3.0.14",
     "babel-brunch": "^5.1.2",
     "bower": "^1.6.5",
-    "brunch": "github:brunch/brunch",
-    "classnames": "^2.2.3",
+    "brunch": "^1.8.5",
     "clean-css-brunch": "^1.7.2",
     "css-brunch": "^1.7.0",
-    "diff": "^2.2.1",
-    "events": "^1.1.0",
-    "fancybox": "^3.0.0",
-    "flux": "^2.1.1",
-    "history": "^1.17.0",
     "javascript-brunch": "^1.7.1",
-    "jquery": "^2.2.0",
-    "jquery-minicolors": "^2.1.10",
-    "mailcheck": "^1.1.1",
-    "moment": "^2.11.1",
     "process-env-brunch": "^1.4.4-d",
-    "quill": "^0.20.1",
-    "react": "^0.14.5",
-    "react-bootstrap": "^0.27.3",
-    "react-dom": "^0.14.5",
-    "react-intl": "^1.2.2",
-    "react-router": "^2.0.0-rc4",
-    "react-router-bootstrap": "^0.20.1",
-    "readmore": "0.0.2",
     "sass-brunch": "^1.9.1",
-    "uglify-js-brunch": "^1.7.8",
-    "whatwg-fetch": "^0.10.1"
+    "uglify-js-brunch": "^1.7.8"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.6",
@@ -57,7 +35,7 @@
     "eslint-brunch": "^1.8.5",
     "eslint-config-airbnb": "^0.1.1",
     "eslint-config-jolicode": "^0.1.0",
-    "eslint-plugin-react": "^3.15.0",
+    "eslint-plugin-react": "^3.14.0",
     "fb-flo-brunch": "^1.7.22"
   }
 }

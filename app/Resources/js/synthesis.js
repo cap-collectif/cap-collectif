@@ -1,27 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Router, browserHistory} from 'react-router';
-
-import routes from './routes';
 import IntlData from './translations/Synthesis/FR';
+import RouterContainer from './services/RouterContainer';
+import router from './router';
 import SynthesisBox from './components/Synthesis/SynthesisBox';
 import AuthService from './services/AuthService';
+
+RouterContainer.set(router);
 
 AuthService
 .login()
 .then(() => {
   if ($('#render-synthesis-view-box').length) {
-    ReactDOM.render(
+    React.render(
       <SynthesisBox synthesis_id={$('#render-synthesis-view-box').data('synthesis')} mode="view" {...IntlData} />,
       document.getElementById('render-synthesis-view-box')
     );
   }
   if ($('#render-synthesis-edit-box').length) {
-    ReactDOM.render(
-      <Router history={browserHistory}>
-        {routes}
-      </Router>,
-      document.getElementById('render-synthesis-edit-box')
-    );
+    router.run((Handler, state) => {
+      React.render(<Handler synthesis_id={$('#render-synthesis-edit-box').data('synthesis')} mode="edit" {...state} {...IntlData} />, document.getElementById('render-synthesis-edit-box'));
+    });
   }
 });

@@ -1,8 +1,6 @@
-import React from 'react';
 import Editor from './Editor';
-import {Input as ReactBootstrapInput} from 'react-bootstrap';
 
-export default class Input extends ReactBootstrapInput {
+export default class Input extends ReactBootstrap.Input {
 
   renderErrors() {
     return this.props.errors

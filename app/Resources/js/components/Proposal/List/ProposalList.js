@@ -1,15 +1,13 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import classNames from 'classnames';
 import ProposalPreview from '../Preview/ProposalPreview';
-import {Row} from 'react-bootstrap';
+
+const Row = ReactBootstrap.Row;
 
 const ProposalList = React.createClass({
   propTypes: {
     proposals: React.PropTypes.array.isRequired,
     selectionStepId: React.PropTypes.number,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
@@ -22,7 +20,7 @@ const ProposalList = React.createClass({
       return <p>{ this.getIntlMessage('proposal.empty') }</p>;
     }
 
-    const classes = classNames({
+    const classes = React.addons.classSet({
       'media-list': true,
       'opinion__list': true,
     });

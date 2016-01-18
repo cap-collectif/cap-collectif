@@ -1,13 +1,11 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Button} from 'react-bootstrap';
+const Button = ReactBootstrap.Button;
 
 const RemoveButton = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
     onRemove: React.PropTypes.func,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   click() {
     this.props.onRemove(this.props.element);

@@ -1,11 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {IntlMixin} from 'react-intl';
-import {Modal, Button, Grid, Row, Col, OverlayTrigger, Popover} from 'react-bootstrap';
-import autosize from 'autosize';
-import classNames from 'classnames';
-
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
+
 import ArrayHelper from '../../services/ArrayHelper';
 import FormattedText from '../../services/FormattedText';
 
@@ -17,6 +11,14 @@ import RemoveButton from './RemoveButton';
 
 import PublishModal from './PublishModal';
 
+const Button = ReactBootstrap.Button;
+const Modal = ReactBootstrap.Modal;
+const Grid = ReactBootstrap.Grid;
+const Row = ReactBootstrap.Row;
+const Col = ReactBootstrap.Col;
+const OverlayTrigger = ReactBootstrap.OverlayTrigger;
+const Popover = ReactBootstrap.Popover;
+
 const DivideModal = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
@@ -24,7 +26,7 @@ const DivideModal = React.createClass({
     show: React.PropTypes.bool,
     toggle: React.PropTypes.func,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation],
 
   getInitialState() {
     return {
@@ -36,11 +38,11 @@ const DivideModal = React.createClass({
   },
 
   componentDidUpdate() {
-    autosize(ReactDOM.findDOMNode(this.refs.originalText));
+    autosize(React.findDOMNode(this.refs.originalText));
   },
 
   componentWillUnmount() {
-    autosize.destroy(ReactDOM.findDOMNode(this.refs.originalText));
+    autosize.destroy(React.findDOMNode(this.refs.originalText));
     this.togglePublishModal(false);
   },
 
@@ -70,7 +72,7 @@ const DivideModal = React.createClass({
   },
 
   selectText() {
-    const selectedText = this.getSelectedText(ReactDOM.findDOMNode(this.refs.originalText));
+    const selectedText = this.getSelectedText(React.findDOMNode(this.refs.originalText));
     this.setState({
       selectedText: selectedText,
     });

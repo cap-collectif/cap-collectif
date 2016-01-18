@@ -1,6 +1,4 @@
-import React from 'react';
 import {VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH} from '../../constants/VoteConstants';
-import {IntlMixin} from 'react-intl';
 
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
@@ -8,13 +6,15 @@ import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import LoginStore from '../../stores/LoginStore';
 import OpinionVersionForm from './OpinionVersionForm';
 import OpinionReportButton from './OpinionReportButton';
-import {ButtonToolbar, Button} from 'react-bootstrap';
+
+const ButtonToolbar = ReactBootstrap.ButtonToolbar;
+const Button = ReactBootstrap.Button;
 
 const OpinionButtons = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   isVersion() {
     return !!this.props.opinion.parent;

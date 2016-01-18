@@ -1,6 +1,4 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Button} from 'react-bootstrap';
+const Button = ReactBootstrap.Button;
 
 const LoginButton = React.createClass({
   propTypes: {
@@ -9,7 +7,7 @@ const LoginButton = React.createClass({
     label: React.PropTypes.string,
     className: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

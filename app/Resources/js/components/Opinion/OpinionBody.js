@@ -1,14 +1,13 @@
-import React from 'react';
-import {Well} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
 import CustomDiff from '../../services/CustomDiff';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
+
+const Well = ReactBootstrap.Well;
 
 const OpinionBody = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   isVersion() {
     return !!this.props.opinion.parent;

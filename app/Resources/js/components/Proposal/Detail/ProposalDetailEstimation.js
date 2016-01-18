@@ -1,11 +1,10 @@
-import React from 'react';
-import {IntlMixin, FormattedNumber} from 'react-intl';
+const FormattedNumber = ReactIntl.FormattedNumber;
 
 const ProposalPreviewEstimation = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   render() {
     const proposal = this.props.proposal;

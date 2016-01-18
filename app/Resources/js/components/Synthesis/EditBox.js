@@ -1,16 +1,15 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import MainNavbar from './MainNavbar';
 import SecondNavbar from './SecondNavbar';
 import SideMenu from './SideMenu';
 import TopMenu from './TopMenu';
-import {RouteHandler} from 'react-router';
+
+const RouteHandler = ReactRouter.RouteHandler;
 
 const EditBox = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   render() {
     if (this.props.synthesis.editable) {

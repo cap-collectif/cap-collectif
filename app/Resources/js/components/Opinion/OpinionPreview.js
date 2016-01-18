@@ -1,5 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import UserAvatar from '../User/UserAvatar';
 import OpinionInfos from './OpinionInfos';
 import OpinionPreviewTitle from './OpinionPreviewTitle';
@@ -12,7 +10,7 @@ const OpinionPreview = React.createClass({
     link: React.PropTypes.bool,
     showTypeLabel: React.PropTypes.bool,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

@@ -1,6 +1,4 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Button} from 'react-bootstrap';
+const Button = ReactBootstrap.Button;
 
 const NotationButtons = React.createClass({
   propTypes: {
@@ -8,7 +6,7 @@ const NotationButtons = React.createClass({
     onChange: React.PropTypes.func,
     block: React.PropTypes.bool,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getNotationStarsClasses() {
     const classes = [];

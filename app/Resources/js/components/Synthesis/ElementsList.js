@@ -1,7 +1,6 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import ElementListItem from './ElementListItem';
-import {Nav} from 'react-bootstrap';
+
+const Nav = ReactBootstrap.Nav;
 
 const ElementsList = React.createClass({
   propTypes: {
@@ -12,7 +11,7 @@ const ElementsList = React.createClass({
     hasLink: React.PropTypes.bool,
     linkType: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return ({

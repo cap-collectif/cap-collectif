@@ -1,6 +1,5 @@
-import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
 import ProposalCreate from '../Proposal/Create/ProposalCreate';
+const FormattedMessage = ReactIntl.FormattedMessage;
 
 const CollectStepPageHeader = React.createClass({
   propTypes: {
@@ -9,7 +8,7 @@ const CollectStepPageHeader = React.createClass({
     themes: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

@@ -1,12 +1,10 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import ViewTree from './ViewTree';
 
 const Preview = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   render() {
     return (

@@ -1,6 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Row, Col} from 'react-bootstrap';
 import OpinionLinkList from './OpinionLinkList';
 import OpinionLinkCreate from './OpinionLinkCreate';
 import Filter from '../../Utils/Filter';
@@ -8,11 +5,14 @@ import Loader from '../../Utils/Loader';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
 import OpinionLinkStore from '../../../stores/OpinionLinkStore';
 
+const Row = ReactBootstrap.Row;
+const Col = ReactBootstrap.Col;
+
 const OpinionLinksBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {

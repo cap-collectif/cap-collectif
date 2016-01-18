@@ -1,12 +1,12 @@
-import React from 'react';
-import {Row, Button} from 'react-bootstrap';
-import classNames from 'classnames';
-import {IntlMixin, FormattedMessage} from 'react-intl';
 import UserBox from '../../User/UserBox';
 import ProposalAllVotesModal from '../Vote/ProposalAllVotesModal';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalStore from '../../../stores/ProposalStore';
 import {PROPOSAL_VOTES_TO_SHOW} from '../../../constants/ProposalConstants';
+
+const Row = ReactBootstrap.Row;
+const FormattedMessage = ReactIntl.FormattedMessage;
+const Button = ReactBootstrap.Button;
 
 const ProposalPageVotes = React.createClass({
   propTypes: {
@@ -14,7 +14,7 @@ const ProposalPageVotes = React.createClass({
     votes: React.PropTypes.array.isRequired,
     className: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

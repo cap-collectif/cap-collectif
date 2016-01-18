@@ -1,14 +1,13 @@
-import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
-
 import DatesInterval from './../Utils/DatesInterval';
+
+const FormattedMessage = ReactIntl.FormattedMessage;
 
 const StepPreview = React.createClass({
   propTypes: {
     step: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

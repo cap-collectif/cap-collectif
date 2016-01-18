@@ -1,6 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import classNames from 'classnames';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import ElementTitle from './ElementTitle';
 import ElementIcon from './ElementIcon';
@@ -16,7 +13,7 @@ const ElementsFinder = React.createClass({
     onExpand: React.PropTypes.func,
     hiddenElementId: React.PropTypes.number,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

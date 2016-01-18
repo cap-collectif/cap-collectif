@@ -1,12 +1,9 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-
 const Loader = React.createClass({
   propTypes: {
     show: React.PropTypes.bool,
     children: React.PropTypes.node,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

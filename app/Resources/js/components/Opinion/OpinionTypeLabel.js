@@ -1,5 +1,4 @@
-import React from 'react';
-import {Label} from 'react-bootstrap';
+const Label = ReactBootstrap.Label;
 
 export default class OpinionTypeLabel extends React.Component {
 

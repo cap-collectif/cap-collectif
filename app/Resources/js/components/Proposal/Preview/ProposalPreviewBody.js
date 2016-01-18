@@ -1,12 +1,10 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 
 const ProposalPreviewBody = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   render() {
     const proposal = this.props.proposal;

@@ -1,6 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import classNames from 'classnames';
 import UserAvatar from './UserAvatar';
 import UserLink from './UserLink';
 
@@ -11,7 +8,7 @@ const UserPreview = React.createClass({
     className: React.PropTypes.string,
     style: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
@@ -32,9 +29,8 @@ const UserPreview = React.createClass({
       'media': true,
       'media--user-thumbnail': true,
       'box': true,
-      [this.props.className]: true,
     };
-
+    classes[this.props.className] = true;
     return (
       <div className={classNames(classes)} style={this.props.style}>
         <UserAvatar user={user} className="pull-left" />

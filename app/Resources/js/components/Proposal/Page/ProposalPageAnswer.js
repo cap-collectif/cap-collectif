@@ -1,6 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import classNames from 'classnames';
 import UserAvatar from '../../User/UserAvatar';
 
 const ProposalPageAnswer = React.createClass({
@@ -8,7 +5,7 @@ const ProposalPageAnswer = React.createClass({
     answer: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
