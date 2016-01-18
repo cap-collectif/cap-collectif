@@ -171,7 +171,7 @@ const OpinionTabs = React.createClass({
                 id="opinion__links"
                 className="opinion-tabs"
                 eventKey={'links'}
-                tab={<FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />}
+                title={<FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />}
             >
               <OpinionLinksBox {...this.props} />
             </Tab>
