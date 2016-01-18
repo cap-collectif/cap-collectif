@@ -81,6 +81,14 @@ admin.label.settings.shield_mode: Mode bouclier
 # Messages
 admin:
   help:
+    comment:
+      author: Il est obligatoire de spécifier soit un auteur, soit un nom et une adresse email.
+    event:
+      adress: Il est nécessaire de spécifier au moins l'adresse et la ville pour afficher la carte.
+      endAt: Si l'évènement ne dure qu'une journée, ne renseignez pas de date de fin.
+    menu_item:
+      link: Si vous avez associé une page à l'élément de menu, le lien sera défini automatiquement.
+      parent: Non applicable pour les éléments du menu de bas de page (footer).
     project:
       closed_at: Si le projet ne dure qu'une journée, renseignez la même date que pour la date de début.
       steps: |
@@ -89,20 +97,14 @@ admin:
       video: |
             Entrez l'URL embed de la vidéo souhaitée. Ex: http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1<br/>
             Ajoutez <strong>?autoplay=1</strong> à la fin de l'URL pour que la vidéo se lance automatiquement au clic.
-    menu_item:
-      parent: Non applicable pour les éléments du menu de bas de page (footer).
-      link: Si vous avez associé une page à l'élément de menu, le lien sera défini automatiquement.
     site_parameter:
       js: Rajoutez ici un ou plusieurs scripts entourés par leurs balises < script >.
-    video:
-      media: Pour un rendu optimal, choisissez une image faisant au moins 320 pixels de largeur et 215 pixels de hauteur.
-    comment:
-      author: Il est obligatoire de spécifier soit un auteur, soit un nom et une adresse email.
-    event:
-      adress: Il est nécessaire de spécifier au moins l'adresse et la ville pour afficher la carte.
-      endAt: Si l'évènement ne dure qu'une journée, ne renseignez pas de date de fin.
+    step:
+      vote_type: Dans le cas d'un vote selon le budget, vous devez renseigner le budget du projet et les estimations de chacune des propositions concernées.
     synthesis:
       consultation_step: La création d'une nouvelle synthèse à partir d'une étape de consultation peut prendre un peu de temps, toutes les contributions étant exportées vers l'outil de synthèse. Pas d'inquiétude, cela est tout à fait normal.
+    video:
+      media: Pour un rendu optimal, choisissez une image faisant au moins 320 pixels de largeur et 215 pixels de hauteur.
 
   features:
     title:
@@ -595,8 +597,8 @@ admin:
       title: Titre
       type: Type d'étape
       updated_at: Mise à jour
-      votable: Soumettre les propositions au vote
       votesHelpText: Règle des votes
+      vote_type: Type de vote
     synthesis:
       enabled: Publiée
       editable: Éditable

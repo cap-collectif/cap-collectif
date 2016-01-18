@@ -7,21 +7,24 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\ProposalVoteRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\UserBundle\Entity\User;
 
 class ProposalVotesResolver
 {
-    protected $repository;
+    protected $proposalVoteRepository;
+    protected $selectionStepRepository;
 
-    public function __construct(ProposalVoteRepository $repository)
+    public function __construct(ProposalVoteRepository $proposalVoteRepository, SelectionStepRepository $selectionStepRepository)
     {
-        $this->repository = $repository;
+        $this->proposalVoteRepository = $proposalVoteRepository;
+        $this->selectionStepRepository = $selectionStepRepository;
     }
 
     public function addVotesToProposalsForSelectionStepAndUser(array $proposals, SelectionStep $selectionStep, User $user)
     {
         $usersVotesForSelectionStep = $this
-            ->repository
+            ->proposalVoteRepository
             ->findBy(
                 [
                     'selectionStep' => $selectionStep,
@@ -55,7 +58,7 @@ class ProposalVotesResolver
         $otherVotes = [];
         if ($vote->getUser()) {
             $otherVotes = $this
-                ->repository
+                ->proposalVoteRepository
                 ->findBy(
                     [
                         'selectionStep' => $selectionStep,
@@ -65,7 +68,7 @@ class ProposalVotesResolver
             ;
         } else if ($vote->getEmail()) {
             $otherVotes = $this
-                ->repository
+                ->proposalVoteRepository
                 ->findBy(
                     [
                         'selectionStep' => $selectionStep,
@@ -76,7 +79,10 @@ class ProposalVotesResolver
         }
 
         $project = $selectionStep->getProject();
-        if ($project && $project->getBudget()) {
+        if (!$selectionStep->isVotable()) {
+            return false;
+        }
+        if ($selectionStep->getVoteType() === SelectionStep::VOTE_TYPE_BUDGET && $project && $project->getBudget()) {
             $left = $project->getBudget() - $this->getAmountSpentForVotes($otherVotes);
             return $left >= $proposal->getEstimation();
         }
@@ -95,7 +101,7 @@ class ProposalVotesResolver
     public function getSpentCreditsForUser(User $user, SelectionStep $selectionStep)
     {
         $votes = $this
-            ->repository
+            ->proposalVoteRepository
             ->findBy(
                 [
                     'selectionStep' => $selectionStep,
@@ -110,11 +116,33 @@ class ProposalVotesResolver
     public function getCreditsLeftForUser(User $user = null, SelectionStep $selectionStep)
     {
         $creditsLeft = $selectionStep->getProject()->getBudget();
-        if ($creditsLeft > 0 && $user) {
+        if ($creditsLeft > 0 && $user && $selectionStep->getVoteType() === SelectionStep::VOTE_TYPE_BUDGET) {
             $creditsLeft -= $this
                 ->getSpentCreditsForUser($user, $selectionStep)
             ;
         }
         return $creditsLeft;
+    }
+
+    public function getVotableStepsForProposal(Proposal $proposal)
+    {
+        return $this
+            ->selectionStepRepository
+            ->getVotableStepsForProposal($proposal)
+        ;
+
+    }
+
+    public function getFirstVotableStepForProposal(Proposal $proposal)
+    {
+        $votableSteps = $this->getVotableStepsForProposal($proposal);
+        $firstVotableStep = null;
+        foreach ($votableSteps as $step) {
+            if ($step->isOpen()) {
+                $firstVotableStep = $step;
+                break;
+            }
+        }
+        return $firstVotableStep;
     }
 }

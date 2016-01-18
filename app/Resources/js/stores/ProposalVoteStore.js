@@ -20,7 +20,6 @@ class ProposalVoteStore extends BaseStore {
     this._proposalVotes = [];
     this._votesCount = 0;
     this._userHasVote = false;
-    this._votableStep = null;
     this._isProposalVotesListSync = false;
   }
 
@@ -28,7 +27,6 @@ class ProposalVoteStore extends BaseStore {
     switch (action.actionType) {
     case INIT_PROPOSAL_VOTES:
       this._creditsLeft = action.creditsLeft;
-      this._votableStep = action.votableStep;
       this._userHasVote = action.userHasVote;
       break;
     case RECEIVE_PROPOSALS:
@@ -37,7 +35,6 @@ class ProposalVoteStore extends BaseStore {
       break;
     case RECEIVE_PROPOSAL:
       this._userHasVote = action.userHasVote;
-      this._votableStep = action.votableStep;
       this._creditsLeft = action.creditsLeft;
       this.emitChange();
       break;
@@ -69,10 +66,6 @@ class ProposalVoteStore extends BaseStore {
 
   get userHasVote() {
     return this._userHasVote;
-  }
-
-  get votableStep() {
-    return this._votableStep;
   }
 
   get creditsLeft() {

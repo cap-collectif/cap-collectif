@@ -1,12 +1,13 @@
-const OverlayTrigger = ReactBootstrap.OverlayTrigger;
-const Tooltip = ReactBootstrap.Tooltip;
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap';
 
 const VoteButtonOverlay = React.createClass({
   propTypes: {
     children: React.PropTypes.element.isRequired,
     show: React.PropTypes.bool.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   // We add tooltip if user has not enough credits
   render() {

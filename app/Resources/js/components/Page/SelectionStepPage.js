@@ -10,6 +10,7 @@ import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import FlashMessages from '../Utils/FlashMessages';
+import {VOTE_TYPE_DISABLED} from '../../constants/ProposalConstants';
 
 const SelectionStepPage = React.createClass({
   propTypes: {
@@ -18,20 +19,19 @@ const SelectionStepPage = React.createClass({
     districts: React.PropTypes.array.isRequired,
     types: React.PropTypes.array.isRequired,
     stepId: React.PropTypes.number.isRequired,
-    votable: React.PropTypes.bool.isRequired,
+    voteType: React.PropTypes.number.isRequired,
     count: React.PropTypes.number.isRequired,
     creditsLeft: React.PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
   getInitialState() {
-    ProposalActions.initProposalVotes(this.props.votable ? this.props.stepId : null, this.props.creditsLeft);
+    ProposalActions.initProposalVotes(this.props.creditsLeft);
     return {
       proposals: ProposalStore.proposals,
       proposalsCount: this.props.count,
       currentPage: ProposalStore.currentPage,
       creditsLeft: ProposalVoteStore.creditsLeft,
-      votableStep: ProposalVoteStore.votableStep,
       isLoading: true,
       messages: {
         'errors': [],
@@ -70,7 +70,6 @@ const SelectionStepPage = React.createClass({
 
   onVoteChange() {
     this.setState({
-      votableStep: ProposalVoteStore.votableStep,
       creditsLeft: ProposalVoteStore.creditsLeft,
     });
   },
@@ -123,12 +122,17 @@ const SelectionStepPage = React.createClass({
           type={this.props.types}
           status={this.props.statuses}
           onChange={() => this.handleFilterOrOrderChange()}
-          orderByVotes={this.props.votable}
+          orderByVotes={this.props.voteType !== VOTE_TYPE_DISABLED}
         />
         <br />
         <Loader show={this.state.isLoading}>
           <div>
-            <ProposalList proposals={this.state.proposals} selectionStepId={this.state.votableStep} creditsLeft={this.state.creditsLeft} />
+            <ProposalList
+              proposals={this.state.proposals}
+              selectionStepId={this.props.stepId}
+              creditsLeft={this.state.creditsLeft}
+              voteType={this.props.voteType}
+            />
             {
               nbPages > 1
               ? <Pagination

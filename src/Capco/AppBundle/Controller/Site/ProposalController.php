@@ -31,17 +31,10 @@ class ProposalController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $votableSteps = $em
-            ->getRepository('CapcoAppBundle:Steps\SelectionStep')
-            ->getVotableStepsForProposal($proposal)
+        $firstVotableStep = $this
+            ->get('capco.proposal_votes.resolver')
+            ->getFirstVotableStepForProposal($proposal)
         ;
-        $firstVotableStep = null;
-        foreach ($votableSteps as $step) {
-            if ($step->isOpen()) {
-                $firstVotableStep = $step;
-                break;
-            }
-        }
 
         $votableStep = $serializer->serialize([
             'votableStep' => $firstVotableStep,
@@ -89,7 +82,7 @@ class ProposalController extends Controller
 
         $remainingCredits = $this
             ->get('capco.proposal_votes.resolver')
-            ->getCreditsLeftForUser($this->getUser(), $step)
+            ->getCreditsLeftForUser($this->getUser(), $firstVotableStep)
         ;
 
         $response = $this->render('CapcoAppBundle:Proposal:show.html.twig', [

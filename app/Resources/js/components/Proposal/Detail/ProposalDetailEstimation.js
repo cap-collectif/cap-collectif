@@ -4,16 +4,18 @@ import {IntlMixin, FormattedNumber} from 'react-intl';
 const ProposalPreviewEstimation = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
+    showNullEstimation: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
     const proposal = this.props.proposal;
+    const estimation = !proposal.estimation && this.props.showNullEstimation ? 0 : proposal.estimation;
 
-    return proposal.estimation || proposal.estimation === 0
+    return estimation
       ? <span>
           <i className="cap cap-clip-2-1"></i>
-          <FormattedNumber value={proposal.estimation} style="currency" currency="EUR" />
+          <FormattedNumber value={estimation} style="currency" currency="EUR" />
         </span>
       : null
     ;

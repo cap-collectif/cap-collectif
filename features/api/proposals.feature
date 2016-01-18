@@ -1,3 +1,4 @@
+@proposals
 Feature: Proposal Restful Api
   As an API client
 
@@ -10,6 +11,7 @@ Feature: Proposal Restful Api
         "id": @integer@,
         "body": @string@,
         "updated_at": "@string@.isDateTime()",
+        "estimation": @...@,
         "theme": {
           "id": @integer@,
           "title": @string@,
@@ -68,10 +70,9 @@ Feature: Proposal Restful Api
             "enabled": @boolean@,
             "startAt": "@string@.isDateTime()",
             "endAt": "@string@.isDateTime()",
-            "votable": @boolean@
+            "voteType": @integer@
           }
         ],
-        "estimation": @number@,
         "comments_count": @integer@,
         "created_at": "@string@.isDateTime()",
         "votesCount": @integer@,
@@ -92,7 +93,7 @@ Feature: Proposal Restful Api
         }
       },
       "userHasVote": false,
-      "votableStep": @...@
+      "creditsLeft": @...@
     }
     """
 
@@ -131,7 +132,6 @@ Feature: Proposal Restful Api
           "comments": @...@,
           "responses": @...@,
           "selectionSteps": @...@,
-          "estimation": @number@,
           "comments_count": @integer@,
           "created_at": "@string@.isDateTime()",
           "votesCount": @integer@,
@@ -192,7 +192,6 @@ Feature: Proposal Restful Api
           "comments": @...@,
           "responses": @...@,
           "selectionSteps": @...@,
-          "estimation": @integer@,
           "comments_count": @integer@,
           "created_at": "@string@.isDateTime()",
           "enabled": @boolean@,

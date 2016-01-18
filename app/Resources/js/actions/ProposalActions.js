@@ -46,10 +46,9 @@ export default {
     });
   },
 
-  initProposalVotes: (votableStep, creditsLeft, userHasVote = false) => {
+  initProposalVotes: (creditsLeft, userHasVote = false) => {
     AppDispatcher.dispatch({
       actionType: INIT_PROPOSAL_VOTES,
-      votableStep: votableStep,
       creditsLeft: creditsLeft,
       userHasVote: userHasVote,
     });
@@ -227,7 +226,6 @@ export default {
           actionType: RECEIVE_PROPOSAL,
           proposal: data.proposal,
           userHasVote: data.userHasVote,
-          votableStep: data.votableStep,
         });
         return true;
       });

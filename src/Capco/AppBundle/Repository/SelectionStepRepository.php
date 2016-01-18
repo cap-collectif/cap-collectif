@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+
 /**
  * SelectionStepRepository.
  */
@@ -13,12 +15,12 @@ class SelectionStepRepository extends AbstractStepRepository
             return $value->getId();
         }, $proposal->getSelectionSteps()->getValues());
 
-        $qb = $this->createQueryBuilder('ss')
-            ->leftJoin('ss.projectAbstractStep', 'pas')
+        $qb = $this->createQueryBuilder('ss');
+        $expr = $qb->expr();
+        $qb->leftJoin('ss.projectAbstractStep', 'pas')
             ->where('ss.id in (:ids)')
-            ->andWhere('ss.votable = :votable')
+            ->andWhere($expr->neq('ss.voteType', SelectionStep::VOTE_TYPE_DISABLED))
             ->setParameter('ids', $ids)
-            ->setParameter('votable', 1)
             ->orderBy('pas.position')
         ;
 

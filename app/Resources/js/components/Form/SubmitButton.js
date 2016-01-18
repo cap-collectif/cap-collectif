@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
 import {IntlMixin} from 'react-intl';
+import LoginOverlay from '../Utils/LoginOverlay';
 
 const SubmitButton = React.createClass({
   propTypes: {
@@ -12,6 +13,7 @@ const SubmitButton = React.createClass({
     className: React.PropTypes.string,
     style: React.PropTypes.object,
     disabled: React.PropTypes.bool,
+    loginOverlay: React.PropTypes.bool,
   },
   mixins: [IntlMixin],
 
@@ -22,25 +24,28 @@ const SubmitButton = React.createClass({
       className: '',
       style: {},
       disabled: false,
+      loginOverlay: false,
     };
   },
 
   render() {
+    const disabled = this.props.isSubmitting || this.props.loginOverlay ? false : this.props.disabled;
     return (
-      <Button
-        id={this.props.id}
-        disabled={this.props.isSubmitting}
-        onClick={!this.props.isSubmitting ? this.props.onSubmit : null}
-        bsStyle={this.props.bsStyle}
-        className={this.props.className}
-        style={this.props.style}
-        disabled={this.props.disabled}
-      >
-        {this.props.isSubmitting
-          ? this.getIntlMessage('global.loading')
-          : this.getIntlMessage(this.props.label)
-        }
-      </Button>
+      <LoginOverlay enabled={this.props.loginOverlay}>
+        <Button
+          id={this.props.id}
+          disabled={disabled}
+          onClick={!this.props.isSubmitting ? this.props.onSubmit : null}
+          bsStyle={this.props.bsStyle}
+          className={this.props.className}
+          style={this.props.style}
+        >
+          {this.props.isSubmitting
+            ? this.getIntlMessage('global.loading')
+            : this.getIntlMessage(this.props.label)
+          }
+        </Button>
+      </LoginOverlay>
     );
   },
 

@@ -83,7 +83,7 @@ AuthService
         <SelectionStepPage
           count={$('#render-selection-step-page').data('count')}
           stepId={$('#render-selection-step-page').data('step-id')}
-          votable={$('#render-selection-step-page').data('votable')}
+          voteType={$('#render-selection-step-page').data('vote-type')}
           themes={$('#render-selection-step-page').data('themes').themes}
           districts={$('#render-selection-step-page').data('districts').districts}
           types={$('#render-selection-step-page').data('types').types}

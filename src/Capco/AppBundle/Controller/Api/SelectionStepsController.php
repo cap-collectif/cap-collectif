@@ -16,6 +16,7 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use FOS\RestBundle\Util\Codes;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\CommentChangedEvent;
@@ -101,6 +102,12 @@ class SelectionStepsController extends FOSRestController
         if (!$selectionStep->isVotable()) {
             throw new BadRequestHttpException('This selection step is not votable.');
         }
+
+        // If selection step vote type is of type "budget", user must be logged in
+        if(!$user && $selectionStep->getVoteType() === SelectionStep::VOTE_TYPE_BUDGET) {
+            throw new UnauthorizedHttpException();
+        }
+
 
         $vote = (new ProposalVote())
             ->setIpAddress($request->getClientIp())

@@ -14,6 +14,7 @@ import MessageStore from '../../../stores/MessageStore';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteSidebar from '../Vote/ProposalVoteSidebar';
 import FlashMessages from '../../Utils/FlashMessages';
+import {VOTE_TYPE_DISABLED} from '../../../constants/ProposalConstants';
 
 const ProposalPage = React.createClass({
   propTypes: {
@@ -36,7 +37,7 @@ const ProposalPage = React.createClass({
   },
 
   getInitialState() {
-    ProposalActions.initProposalVotes(this.props.votableStep, this.props.creditsLeft, !!this.props.userHasVote);
+    ProposalActions.initProposalVotes(this.props.creditsLeft, !!this.props.userHasVote);
     ProposalActions.initProposal(this.props.proposal);
     return {
       messages: {
@@ -45,7 +46,6 @@ const ProposalPage = React.createClass({
       },
       proposal: ProposalStore.proposal,
       userHasVote: ProposalVoteStore.userHasVote,
-      votableStep: ProposalVoteStore.votableStep,
       creditsLeft: ProposalVoteStore.creditsLeft,
       expandSidebar: false,
     };
@@ -72,7 +72,6 @@ const ProposalPage = React.createClass({
   onVoteChange() {
     this.setState({
       userHasVote: ProposalVoteStore.userHasVote,
-      votableStep: ProposalVoteStore.votableStep,
       creditsLeft: ProposalVoteStore.creditsLeft,
     });
   },
@@ -103,7 +102,7 @@ const ProposalPage = React.createClass({
 
   render() {
     const proposal = this.state.proposal;
-    const showSidebar = !!this.state.votableStep;
+    const showSidebar = !!this.props.votableStep && this.props.votableStep.voteType !== VOTE_TYPE_DISABLED;
     const wrapperClassName = classNames({
       'container': showSidebar,
       'sidebar__container': showSidebar,
@@ -163,7 +162,7 @@ const ProposalPage = React.createClass({
               showSidebar
               ? <ProposalVoteSidebar
                   proposal={proposal}
-                  votableStep={this.state.votableStep}
+                  votableStep={this.props.votableStep}
                   userHasVote={this.state.userHasVote}
                   expanded={this.state.expandSidebar}
                   onToggleExpand={this.toggleSidebarExpand}

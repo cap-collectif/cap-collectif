@@ -442,6 +442,10 @@ step:
       future:
         text: L'étape de sélection débutera le %date%.
         title: Sélection à venir.
+    vote_type:
+      budget: Vote selon le budget
+      disabled: Désactivé
+      simple: Vote simple
 
 simple_argument:
   count: "%count% avis"

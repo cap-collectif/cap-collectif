@@ -32,6 +32,7 @@ const ProposalVoteSidebar = React.createClass({
 
     const proposal = this.props.proposal;
     const votableStepId = this.props.votableStep.id;
+    const voteType = this.props.votableStep.voteType;
     const wrapperClassName = classNames({
       'sidebar-hideable': true,
       'sidebar-hidden-small': !this.props.expanded,
@@ -48,6 +49,7 @@ const ProposalVoteSidebar = React.createClass({
           <ProposalVoteBox
             proposal={proposal}
             selectionStepId={votableStepId}
+            voteType={voteType}
             className="block block--bordered box"
             formWrapperClassName="sidebar__form"
             userHasVote={this.props.userHasVote}

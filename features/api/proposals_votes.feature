@@ -1,4 +1,4 @@
-@proposal_vote
+@proposals_votes
 Feature: Proposal Votes Restful Api
   As an API client
 
@@ -175,7 +175,7 @@ Feature: Proposal Votes Restful Api
     @security
     Scenario: Logged in API client wants to vote when he has not enough credits left
       Given I am logged in to api as admin
-      When I send a POST request to "/api/selection_steps/6/proposals/1/votes" with json:
+      When I send a POST request to "/api/selection_steps/9/proposals/8/votes" with json:
       """
       {
       }
@@ -192,21 +192,12 @@ Feature: Proposal Votes Restful Api
       """
 
   @security
-  Scenario: Anonymous API client wants to vote with an email that has not enough credits left
-    When I send a POST request to "/api/selection_steps/6/proposals/1/votes" with json:
+  Scenario: Anonymous API client wants to vote on a selection step that has budget vote
+    When I send a POST request to "/api/selection_steps/9/proposals/8/votes" with json:
       """
       {
         "username": "bouh",
         "email": "voter@test.com"
       }
       """
-    Then the JSON response status code should be 400
-    And the JSON response should match:
-    """
-    {
-      "form": @...@,
-      "errors":[
-        "Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition."
-      ]
-    }
-    """
+    Then the JSON response status code should be 401

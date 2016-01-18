@@ -27,7 +27,7 @@ Feature: Project
     And I visited "projects page"
     And I select "Transport" from "capco_app_search_project_theme"
     And I wait 1 seconds
-    Then I should see 4 ".thumbnail--custom" elements
+    Then I should see 5 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"
@@ -41,7 +41,7 @@ Feature: Project
     And I wait 1 seconds
     And I select "Nombre de contributions" from "capco_app_search_project_sort"
     And I wait 1 seconds
-    Then I should see 4 ".thumbnail--custom" elements
+    Then I should see 5 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"

@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20160113034735 extends AbstractMigration
+class Version20160118230038 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -19,7 +19,7 @@ class Version20160113034735 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE project ADD budget DOUBLE PRECISION DEFAULT NULL');
-        $this->addSql('ALTER TABLE step ADD votes_help_text VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE step ADD vote_type INT DEFAULT NULL, ADD votes_help_text VARCHAR(255) DEFAULT NULL, DROP votable');
     }
 
     /**
@@ -31,6 +31,6 @@ class Version20160113034735 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE project DROP budget');
-        $this->addSql('ALTER TABLE step DROP votes_help_text');
+        $this->addSql('ALTER TABLE step ADD votable TINYINT(1) DEFAULT NULL, DROP vote_type, DROP votes_help_text');
     }
 }
