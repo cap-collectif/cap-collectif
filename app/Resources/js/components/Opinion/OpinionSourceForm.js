@@ -152,7 +152,7 @@ const OpinionSourceForm = React.createClass({
                 type="text"
                 name="sourceTitle"
                 groupClassName={this.getGroupStyle('title')}
-                value={this.linkState('title')}
+                valueLink={this.linkState('title')}
                 label={this.getIntlMessage('source.title')}
                 errors={this.renderFormErrors('title')}
               />
