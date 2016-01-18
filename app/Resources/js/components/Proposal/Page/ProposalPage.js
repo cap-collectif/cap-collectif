@@ -9,6 +9,8 @@ import ProposalPageAlert from './ProposalPageAlert';
 import ProposalPageVotes from './ProposalPageVotes';
 import ProposalPageComments from './ProposalPageComments';
 import ProposalStore from '../../../stores/ProposalStore';
+import ProposalVoteStore from '../../../stores/ProposalVoteStore';
+import MessageStore from '../../../stores/MessageStore';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteSidebar from '../Vote/ProposalVoteSidebar';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -21,45 +23,64 @@ const ProposalPage = React.createClass({
     districts: React.PropTypes.array.isRequired,
     votes: React.PropTypes.array.isRequired,
     votableStep: React.PropTypes.object,
-    userHasVote: React.PropTypes.bool.isRequired,
+    userHasVote: React.PropTypes.bool,
+    creditsLeft: React.PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       votableStep: null,
+      userHasVote: false,
     };
   },
 
   getInitialState() {
-    ProposalStore.initProposalData(this.props.proposal, this.props.userHasVote, this.props.votableStep);
+    ProposalActions.initProposalVotes(this.props.votableStep, this.props.creditsLeft, !!this.props.userHasVote);
+    ProposalActions.initProposal(this.props.proposal);
     return {
       messages: {
         'errors': [],
         'success': [],
       },
       proposal: ProposalStore.proposal,
-      userHasVote: ProposalStore.userHasVote,
-      votableStep: ProposalStore.votableStep,
+      userHasVote: ProposalVoteStore.userHasVote,
+      votableStep: ProposalVoteStore.votableStep,
+      creditsLeft: ProposalVoteStore.creditsLeft,
       expandSidebar: false,
     };
   },
 
   componentWillMount() {
     ProposalStore.addChangeListener(this.onChange);
+    ProposalVoteStore.addChangeListener(this.onVoteChange);
+    MessageStore.addChangeListener(this.onMessageChange);
   },
 
   componentWillUnmount() {
     ProposalStore.removeChangeListener(this.onChange);
+    ProposalVoteStore.removeChangeListener(this.onVoteChange);
+    MessageStore.removeChangeListener(this.onMessageChange);
+  },
+
+  onMessageChange() {
+    this.setState({
+      messages: MessageStore.messages,
+    });
+  },
+
+  onVoteChange() {
+    this.setState({
+      userHasVote: ProposalVoteStore.userHasVote,
+      votableStep: ProposalVoteStore.votableStep,
+      creditsLeft: ProposalVoteStore.creditsLeft,
+    });
   },
 
   onChange() {
     if (ProposalStore.isProposalSync) {
       this.setState({
-        messages: ProposalStore.messages,
         proposal: ProposalStore.proposal,
-        userHasVote: ProposalStore.userHasVote,
-        votableStep: ProposalStore.votableStep,
       });
       return;
     }
@@ -146,6 +167,7 @@ const ProposalPage = React.createClass({
                   userHasVote={this.state.userHasVote}
                   expanded={this.state.expandSidebar}
                   onToggleExpand={this.toggleSidebarExpand}
+                  creditsLeft={this.state.creditsLeft}
               />
               : null
             }

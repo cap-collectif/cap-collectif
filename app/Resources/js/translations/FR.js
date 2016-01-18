@@ -230,6 +230,7 @@ export default {
         modal: {
           title: 'Soutenir',
         },
+        not_enough_credits: 'Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux.',
         show_more: 'Voir tous les votes',
         vote_with_my_account: 'Soutenir avec mon compte',
       },

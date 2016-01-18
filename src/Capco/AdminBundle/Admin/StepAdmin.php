@@ -178,6 +178,9 @@ class StepAdmin extends Admin
                 ->add('votable', null, [
                     'label' => 'admin.fields.step.votable',
                 ])
+                ->add('votesHelpText', null, [
+                    'label' => 'admin.fields.step.votesHelpText',
+                ])
             ;
         }
         $formMapper->end();

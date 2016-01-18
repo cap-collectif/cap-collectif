@@ -66,11 +66,18 @@ class SelectionStepsController extends FOSRestController
             ;
         }
 
+        $creditsLeft = $this
+            ->get('capco.proposal_votes.resolver')
+            ->getCreditsLeftForUser($this->getUser(), $selectionStep)
+        ;
+
+        $results['creditsLeft'] = $creditsLeft;
+
         return $results;
     }
 
     /**
-     * @Post("/selection_steps/{selection_step_id}/proposals/{proposal_id}/vote")
+     * @Post("/selection_steps/{selection_step_id}/proposals/{proposal_id}/votes")
      * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
      * @View(statusCode=201)
@@ -142,7 +149,7 @@ class SelectionStepsController extends FOSRestController
 
     /**
      * @Security("has_role('ROLE_USER')")
-     * @Delete("/selection_steps/{selection_step_id}/proposals/{proposal_id}/vote")
+     * @Delete("/selection_steps/{selection_step_id}/proposals/{proposal_id}/votes")
      * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
      * @View(statusCode=204)

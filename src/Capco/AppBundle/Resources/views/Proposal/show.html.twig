@@ -16,9 +16,10 @@
          data-themes='{{ themes|escape }}'
          data-districts='{{ districts|escape }}'
          data-votes='{{ votes|escape }}'
-         data-votablestep='{{ votableStep|escape }}'
-         data-userhasvote='{{ userHasVote|escape }}'
-    />
+         data-votable-step='{{ votableStep|escape }}'
+         data-user-has-vote='{{ userHasVote }}'
+         data-credits-left='{{ remainingCredits|escape }}'
+    ></div>
 
 {% endblock %}
 

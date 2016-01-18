@@ -30,6 +30,11 @@ class SelectionStep extends AbstractStep
      */
     private $votesCount = 0;
 
+    /**
+     * @ORM\Column(name="votes_help_text", type="string", nullable=true)
+     */
+    private $votesHelpText = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -118,6 +123,25 @@ class SelectionStep extends AbstractStep
     public function decrementVotesCount()
     {
         --$this->votesCount;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVotesHelpText()
+    {
+        return $this->votesHelpText;
+    }
+
+    /**
+     * @param mixed $votesHelpText
+     * @return $this
+     */
+    public function setVotesHelpText($votesHelpText)
+    {
+        $this->votesHelpText = $votesHelpText;
 
         return $this;
     }

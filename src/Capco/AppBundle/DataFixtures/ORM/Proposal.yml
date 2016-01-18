@@ -14,7 +14,7 @@ Capco\AppBundle\Entity\Proposal:
     selectionSteps: [@selectionStep1]
     createdAt: <(new \DateTime('2015-01-01'))>
     answer: @answer4
-    estimation: 90000.9
+    estimation: 1000
   proposal2:
     title: Rénovation du gymnase
     body: |
@@ -30,6 +30,7 @@ Capco\AppBundle\Entity\Proposal:
     status: @status2
     selectionSteps: [@selectionStep1, @selectionStep2, @selectionStep3]
     createdAt: <(new \DateTime('2015-02-01'))>
+    estimation: 2999999
   proposal3:
     title: Installation de bancs sur la place de la mairie
     body: |
@@ -45,6 +46,7 @@ Capco\AppBundle\Entity\Proposal:
     status: @status1
     selectionSteps: [@selectionStep1]
     createdAt: <(new \DateTime('2015-03-01'))>
+    estimation: 0
   proposal4:
     title: Plantation de tulipes dans les jardinière du parking de l'église
     body: |

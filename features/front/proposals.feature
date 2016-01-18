@@ -238,11 +238,11 @@ Feature: Proposals
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes   |
       | stepSlug    | selection                    |
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I should see "3 propositions"
     Then I should see 3 ".proposal__preview" elements
     And I select "Justice" from "proposal-filter-theme"
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I should see "2 propositions"
     Then I should see 2 ".proposal__preview" elements
 
@@ -251,10 +251,10 @@ Feature: Proposals
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes       |
       | stepSlug    | selection                        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then "Rénovation du gymnase" should be before "Ravalement de la façade de la bibliothèque municipale" for selector ".proposal__preview .proposal__title a"
     And I press "Commentées"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then "Ravalement de la façade de la bibliothèque municipale" should be before "Rénovation du gymnase" for selector ".proposal__preview .proposal__title a"
 
   # Votes from selection step page
@@ -265,17 +265,17 @@ Feature: Proposals
     And I visited "selection page" with:
       | projectSlug | budget-participatif-rennes       |
       | stepSlug    | selection                        |
-    And I wait 5 seconds
-    Then I should see "2" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
+    And I wait 1 seconds
+    Then I should see "3" in the "#proposal-2 .proposal__counter--votes .proposal__counter__value" element
     And I should see "Soutenir" in the "#proposal-2" element
     When I click the "#proposal-2 .proposal__preview__vote" element
-    And I wait 5 seconds
-    Then I should see "3" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
+    And I wait 1 seconds
+    Then I should see "4" in the "#proposal-2 .proposal__counter--votes .proposal__counter__value" element
     And I should see "Annuler mon soutien" in the "#proposal-2" element
     And I should see "Merci, votre vote a bien été pris en compte."
     When I click the "#proposal-2 .proposal__preview__vote" element
-    And I wait 5 seconds
-    Then I should see "2" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
+    And I wait 1 seconds
+    Then I should see "3" in the "#proposal-2 .proposal__counter--votes .proposal__counter__value" element
     And I should see "Soutenir" in the "#proposal-2" element
     And I should see "Merci, votre vote a bien été supprimé."
 
@@ -284,20 +284,20 @@ Feature: Proposals
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes       |
       | stepSlug    | selection                        |
-    And I wait 5 seconds
-    Then I should see "2" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
-    And I should see "0" in the "#proposal-2 .proposal__comments .proposal__counter__value" element
+    And I wait 1 seconds
+    Then I should see "3" in the "#proposal-2 .proposal__counter--votes .proposal__counter__value" element
+    And I should see "0" in the "#proposal-2 .proposal__counter--comments .proposal__counter__value" element
     And I should see "Soutenir" in the "#proposal-2" element
     When I click the "#proposal-2 .proposal__preview__vote" element
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
       | proposal-vote__username   | test                |
       | proposal-vote__email      | test@coucou.fr      |
       | proposal-vote__comment    | Coucou !            |
     And I press "confirm-proposal-vote"
-    And I wait 5 seconds
-    Then I should see "3" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
-    And I should see "1" in the "#proposal-2 .proposal__comments .proposal__counter__value" element
+    And I wait 1 seconds
+    Then I should see "4" in the "#proposal-2 .proposal__counter--votes .proposal__counter__value" element
+    And I should see "1" in the "#proposal-2 .proposal__counter--comments .proposal__counter__value" element
     And I should see "Soutenir" in the "#proposal-2" element
     And I should see "Merci, votre vote a bien été pris en compte."
 
@@ -306,20 +306,20 @@ Feature: Proposals
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes       |
       | stepSlug    | selection                        |
-    And I wait 5 seconds
-    Then I should see "2" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
-    And I should see "0" in the "#proposal-2 .proposal__comments .proposal__counter__value" element
+    And I wait 1 seconds
+    Then I should see "3" in the "#proposal-2 .proposal__counter--votes .proposal__counter__value" element
+    And I should see "0" in the "#proposal-2 .proposal__counter--comments .proposal__counter__value" element
     And I should see "Soutenir" in the "#proposal-2" element
     When I click the "#proposal-2 .proposal__preview__vote" element
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
       | proposal-vote__username   | test                |
       | proposal-vote__email      | test@coucou.fr      |
     And I check "proposal-vote__private"
     And I press "confirm-proposal-vote"
-    And I wait 5 seconds
-    Then I should see "3" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
-    And I should see "0" in the "#proposal-2 .proposal__comments .proposal__counter__value" element
+    And I wait 1 seconds
+    Then I should see "4" in the "#proposal-2 .proposal__counter--votes .proposal__counter__value" element
+    And I should see "0" in the "#proposal-2 .proposal__counter--comments .proposal__counter__value" element
     And I should see "Soutenir" in the "#proposal-2" element
     And I should see "Merci, votre vote a bien été pris en compte."
 
@@ -328,16 +328,44 @@ Feature: Proposals
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes       |
       | stepSlug    | selection                        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     When I click the "#proposal-2 .proposal__preview__vote" element
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I fill in the following:
       | proposal-vote__username   | test                |
       | proposal-vote__email      | cheater@test.com       |
       | proposal-vote__comment    | Coucou !            |
     And I press "confirm-proposal-vote"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Vous avez déjà voté pour cette proposition."
+
+  @javascript @security @elasticsearch
+  Scenario: Logged in user wants to vote when he has not enough credits left
+    Given I am logged in as admin
+    When I visited "selection page" with:
+      | projectSlug | budget-participatif-rennes       |
+      | stepSlug    | selection                        |
+    And I wait 1 seconds
+    Then "#proposal-1 .proposal__preview__vote" element should have class "disabled"
+  # Hovering does not work properly. To fix later
+  #  And I hover over the "#proposal-1 .proposal__preview__vote" element
+  #  And I wait 1 seconds
+  #  Then I should see "Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux."
+
+  @javascript @security @elasticsearch
+  Scenario: Anonymous API client wants to vote with an email that has not enough credits left
+    When I visited "selection page" with:
+      | projectSlug | budget-participatif-rennes       |
+      | stepSlug    | selection                        |
+    And I wait 1 seconds
+    When I click the "#proposal-1 .proposal__preview__vote" element
+    And I wait 1 seconds
+    And I fill in the following:
+      | proposal-vote__username   | test                |
+      | proposal-vote__email      | voter@test.com      |
+    And I press "confirm-proposal-vote"
+    And I wait 1 seconds
+    Then I should see "Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition."
 
   # Votes from proposal page
 
@@ -348,21 +376,19 @@ Feature: Proposals
       | projectSlug      | budget-participatif-rennes       |
       | stepSlug         | collecte-des-propositions        |
       | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
-    And I should see "0" in the ".proposal__comments .value" element
+    And I wait 1 seconds
+    Then I should see "3" in the ".proposal__info--votes .value" element
     And I fill in the following:
-     | proposal-vote__comment    | Coucou !                 |
+     | proposal-vote__comment    | Coucou, je suis un nouveau commentaire !  |
     And I press "Soutenir"
-    And I wait 5 seconds
-    Then I should see "3" in the ".proposal__votes .value" element
-    And I should see "1" in the ".proposal__comments .value" element
+    And I wait 1 seconds
+    Then I should see "4" in the ".proposal__info--votes .value" element
+    And I should see "Coucou, je suis un nouveau commentaire !" in the ".proposal__comments" element
     And I should see "user" in the ".proposal__vote:nth-child(1)" element
     And I should see "Merci, votre vote a bien été pris en compte"
     And I press "Annuler mon soutien"
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
-    And I should see "1" in the ".proposal__comments .value" element
+    And I wait 1 seconds
+    Then I should see "3" in the ".proposal__info--votes .value" element
     And I should not see "user" in the ".proposal__vote:nth-child(1)" element
     And I should see "Merci, votre vote a bien été supprimé."
 
@@ -373,12 +399,12 @@ Feature: Proposals
       | projectSlug      | budget-participatif-rennes       |
       | stepSlug         | collecte-des-propositions        |
       | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
+    And I wait 1 seconds
+    Then I should see "3" in the ".proposal__info--votes .value" element
     And I check "proposal-vote__private"
     And I press "Soutenir"
-    And I wait 5 seconds
-    Then I should see "3" in the ".proposal__votes .value" element
+    And I wait 1 seconds
+    Then I should see "4" in the ".proposal__info--votes .value" element
     And I should see "Annuler mon soutien"
     And I should see "Anonyme" in the ".proposal__vote:nth-child(1)" element
     And I should see "Merci, votre vote a bien été pris en compte"
@@ -389,17 +415,17 @@ Feature: Proposals
       | projectSlug      | budget-participatif-rennes       |
       | stepSlug         | collecte-des-propositions        |
       | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
-    And I should see "0" in the ".proposal__comments .value" element
+    And I wait 1 seconds
+    Then I should see "3" in the ".proposal__info--votes .value" element
+    And I should see "0" in the ".proposal__info--comments .value" element
     And I fill in the following:
-      | proposal-vote__username   | test                |
-      | proposal-vote__email      | test@coucou.fr      |
-      | proposal-vote__comment    | Coucou !            |
+      | proposal-vote__username   | test                                      |
+      | proposal-vote__email      | test@coucou.fr                            |
+      | proposal-vote__comment    | Coucou, je suis un nouveau commentaire !  |
     And I press "Soutenir"
-    And I wait 5 seconds
-    Then I should see "3" in the ".proposal__votes .value" element
-    And I should see "1" in the ".proposal__comments .value" element
+    And I wait 3 seconds
+    Then I should see "4" in the ".proposal__info--votes .value" element
+    And I should see "Coucou, je suis un nouveau commentaire !" in the ".proposal__comments" element
     And I should see "test" in the ".proposal__vote:nth-child(1)" element
     And I should see "Merci, votre vote a bien été pris en compte"
 
@@ -409,15 +435,15 @@ Feature: Proposals
       | projectSlug      | budget-participatif-rennes       |
       | stepSlug         | collecte-des-propositions        |
       | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
+    And I wait 1 seconds
+    Then I should see "3" in the ".proposal__info--votes .value" element
     And I fill in the following:
       | proposal-vote__username   | test                |
       | proposal-vote__email      | test@coucou.fr      |
     And I check "proposal-vote__private"
     And I press "Soutenir"
-    And I wait 5 seconds
-    Then I should see "3" in the ".proposal__votes .value" element
+    And I wait 1 seconds
+    Then I should see "4" in the ".proposal__info--votes .value" element
     And I should see "Anonyme" in the ".proposal__vote:nth-child(1)" element
     And I should see "Merci, votre vote a bien été pris en compte"
 
@@ -427,13 +453,13 @@ Feature: Proposals
       | projectSlug      | budget-participatif-rennes       |
       | stepSlug         | collecte-des-propositions        |
       | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
+    And I wait 1 seconds
+    Then I should see "3" in the ".proposal__info--votes .value" element
     And I fill in the following:
       | proposal-vote__username   | test                |
       | proposal-vote__email      | cheater@test.com    |
     And I press "Soutenir"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Vous avez déjà voté pour cette proposition."
 
   @javascript @security
@@ -442,11 +468,36 @@ Feature: Proposals
       | projectSlug      | budget-participatif-rennes       |
       | stepSlug         | collecte-des-propositions        |
       | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
+    And I wait 1 seconds
+    Then I should see "3" in the ".proposal__info--votes .value" element
     And I fill in the following:
       | proposal-vote__username   | test                |
       | proposal-vote__email      | user@test.com    |
     And I press "Soutenir"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then I should see "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition."
+
+  @javascript @security
+  Scenario: Logged in user wants to vote when he has not enough credits left
+    Given I am logged in as admin
+    When I visited "proposal page" with:
+      | projectSlug      | budget-participatif-rennes                             |
+      | stepSlug         | collecte-des-propositions                              |
+      | proposalSlug     | ravalement-de-la-facade-de-la-bibliotheque-municipale  |
+    And I wait 1 seconds
+    Then the button "Soutenir" should be disabled
+    And I should see "Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux."
+
+  @javascript @security
+  Scenario: Anonymous API client wants to vote with an email that has not enough credits left
+    When I visited "proposal page" with:
+      | projectSlug      | budget-participatif-rennes                             |
+      | stepSlug         | collecte-des-propositions                              |
+      | proposalSlug     | ravalement-de-la-facade-de-la-bibliotheque-municipale  |
+    And I wait 1 seconds
+    And I fill in the following:
+      | proposal-vote__username   | test                |
+      | proposal-vote__email      | voter@test.com      |
+    And I press "Soutenir"
+    And I wait 1 seconds
+    Then I should see "Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition."

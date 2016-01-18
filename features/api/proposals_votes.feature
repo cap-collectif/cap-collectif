@@ -1,3 +1,4 @@
+@proposal_vote
 Feature: Proposal Votes Restful Api
   As an API client
 
@@ -16,25 +17,26 @@ Feature: Proposal Votes Restful Api
           "private": @boolean@
         },
         @...@
-      ]
+      ],
+      "count": @integer@
     }
     """
 
   @database
   Scenario: Logged in API client wants to vote and unvote for a proposal in a selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/6/proposals/2/vote" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
     """
     {
     }
     """
     Then the JSON response status code should be 201
-    And I send a DELETE request to "/api/selection_steps/6/proposals/2/vote"
+    And I send a DELETE request to "/api/selection_steps/6/proposals/2/votes"
     Then the JSON response status code should be 204
 
   @database
   Scenario: Anonymous API client wants to vote for a proposal in a selection step
-    When I send a POST request to "/api/selection_steps/6/proposals/2/vote" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
     """
     {
       "username": "test",
@@ -46,7 +48,7 @@ Feature: Proposal Votes Restful Api
   @security
   Scenario: Logged in API client wants to vote several times for a proposal in a selection step
     Given I am logged in to api as admin
-    When I send a POST request to "/api/selection_steps/6/proposals/2/vote" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
     """
     {
     }
@@ -64,7 +66,7 @@ Feature: Proposal Votes Restful Api
 
   @security
   Scenario: Anonymous API client wants to vote several times for a proposal in a selection step
-    When I send a POST request to "/api/selection_steps/6/proposals/2/vote" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
     """
     {
       "username": "test",
@@ -84,7 +86,7 @@ Feature: Proposal Votes Restful Api
 
   @security
   Scenario: Anonymous API client wants to vote with an email associated to an account
-    When I send a POST request to "/api/selection_steps/6/proposals/2/vote" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
     """
     {
       "username": "test",
@@ -105,7 +107,7 @@ Feature: Proposal Votes Restful Api
   @security
   Scenario: Logged in API client wants to delete a non-existing vote
     Given I am logged in to api as user
-    When I send a DELETE request to "/api/selection_steps/6/proposals/2/vote"
+    When I send a DELETE request to "/api/selection_steps/6/proposals/2/votes"
     Then the JSON response status code should be 400
     And the JSON response should match:
     """
@@ -119,7 +121,7 @@ Feature: Proposal Votes Restful Api
   @security
   Scenario: Logged in API client wants to vote for a proposal in a wrong selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/6/proposals/3/vote" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/3/votes" with json:
     """
     {
     }
@@ -137,7 +139,7 @@ Feature: Proposal Votes Restful Api
   @security
   Scenario: Logged in API client wants to vote for a proposal in a not votable selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/7/proposals/2/vote" with json:
+    When I send a POST request to "/api/selection_steps/7/proposals/2/votes" with json:
     """
     {
     }
@@ -155,7 +157,7 @@ Feature: Proposal Votes Restful Api
   @security
   Scenario: Logged in API client wants to vote for a proposal in a closed selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/8/proposals/2/vote" with json:
+    When I send a POST request to "/api/selection_steps/8/proposals/2/votes" with json:
     """
     {
     }
@@ -167,5 +169,44 @@ Feature: Proposal Votes Restful Api
       "code": 400,
       "message": "This selection step is no longer contributable.",
       "errors": @null@
+    }
+    """
+
+    @security
+    Scenario: Logged in API client wants to vote when he has not enough credits left
+      Given I am logged in to api as admin
+      When I send a POST request to "/api/selection_steps/6/proposals/1/votes" with json:
+      """
+      {
+      }
+      """
+      Then the JSON response status code should be 400
+      And the JSON response should match:
+      """
+      {
+        "form": @...@,
+        "errors":[
+          "Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition."
+        ]
+      }
+      """
+
+  @security
+  Scenario: Anonymous API client wants to vote with an email that has not enough credits left
+    When I send a POST request to "/api/selection_steps/6/proposals/1/votes" with json:
+      """
+      {
+        "username": "bouh",
+        "email": "voter@test.com"
+      }
+      """
+    Then the JSON response status code should be 400
+    And the JSON response should match:
+    """
+    {
+      "form": @...@,
+      "errors":[
+        "Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition."
+      ]
     }
     """

@@ -185,17 +185,27 @@ class ApplicationContext extends UserContext
     /**
      * @When I click the :element element
      */
-    public function iClickElement($element)
+    public function iClickElement($selector)
     {
-        $this->getSession()->getPage()->find('css', $element)->click();
+        $element = $this->getSession()->getPage()->find('css', $selector);
+        if (null === $element) {
+            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
+        }
+        $element->click();
     }
 
     /**
-     * @When I hover over the :element element
+     * @When I hover over the :selector element
      */
-    public function iHoverOverTheElement($element)
+    public function iHoverOverTheElement($selector)
     {
-        $this->getSession()->getPage()->find('css', $element)->mouseOver();
+        $element = $this->getSession()->getPage()->find('css', $selector);
+
+        if (null === $element) {
+            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
+        }
+
+        $element->mouseOver();
     }
 
     /**
@@ -315,5 +325,21 @@ class ApplicationContext extends UserContext
         }
 
         \PHPUnit_Framework_TestCase::assertTrue($button->hasAttribute('disabled'));
+    }
+
+    /**
+     * Checks that an element has an attribute
+     *
+     * @Then /^the element "([^"]*)" should have attribute :attribute $/
+     */
+    public function elementHasAttribute($selector, $attribute)
+    {
+        $element = $this->getSession()->getPage()->find('css', $selector);
+
+        if (null === $element) {
+            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
+        }
+
+        \PHPUnit_Framework_TestCase::assertTrue($element->hasAttribute($attribute));
     }
 }

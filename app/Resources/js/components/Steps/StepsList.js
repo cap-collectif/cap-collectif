@@ -5,12 +5,14 @@ const StepsList = React.createClass({
   propTypes: {
     steps: React.PropTypes.array,
     style: React.PropTypes.object,
+    votes: React.PropTypes.object,
   },
 
   getDefaultProps() {
     return {
       steps: [],
       style: {},
+      votes: {},
     };
   },
 
@@ -23,7 +25,7 @@ const StepsList = React.createClass({
         <ul className="nav">
           {
             this.props.steps.map( (step) => {
-              return <StepPreview key={step.id} step={step} />;
+              return <StepPreview key={step.id} step={step} votes={this.props.votes[step.id]} />;
             })
           }
         </ul>

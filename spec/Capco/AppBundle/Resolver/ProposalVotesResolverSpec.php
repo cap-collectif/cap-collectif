@@ -2,8 +2,11 @@
 
 namespace spec\Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalVote;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Repository\ProposalVoteRepository;
 
@@ -19,7 +22,7 @@ class ProposalVotesResolverSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Resolver\ProposalVotesResolver');
     }
 
-    function it_can_say_if_proposal_has_vote(ProposalVote $vote1, ProposalVote $vote2, Proposal $proposal1, Proposal $proposal2)
+    function it_can_tell_if_proposal_has_vote(ProposalVote $vote1, ProposalVote $vote2, Proposal $proposal1, Proposal $proposal2)
     {
         $arrayProposal1 = [
             'id' => 1,
@@ -35,5 +38,68 @@ class ProposalVotesResolverSpec extends ObjectBehavior
 
         $this->proposalHasVote($arrayProposal1, $usersVotesForSelectionStep)->shouldReturn(true);
         $this->proposalHasVote($arrayProposal2, $usersVotesForSelectionStep)->shouldReturn(false);
+    }
+
+    function it_can_tell_if_vote_is_possible(ProposalVoteRepository $repository, SelectionStep $selectionStep1, SelectionStep $selectionStep2, User $user1, Proposal $proposal, ProposalVote $otherVote1, ProposalVote $otherVote2, Project $project1, Project $project2, Proposal $proposal1, Proposal $proposal2, ProposalVote $vote1, ProposalVote $vote2, ProposalVote $vote3)
+    {
+        $proposal1->getEstimation()->willReturn(50);
+        $proposal2->getEstimation()->willReturn(80);
+        $otherVote1->getProposal()->willReturn($proposal1);
+        $otherVote2->getProposal()->willReturn($proposal2);
+        $repository->findBy([
+            'selectionStep' => $selectionStep1,
+            'user' => $user1,
+        ])->willReturn([]);
+        $repository->findBy([
+            'selectionStep' => $selectionStep2,
+            'user' => $user1,
+        ])->willReturn([$otherVote1]);
+        $repository->findBy([
+            'selectionStep' => $selectionStep2,
+            'email' => 'email@test.com',
+        ])->willReturn([$otherVote2]);
+        $this->beConstructedWith($repository);
+
+        $project1->getBudget()->willReturn(null);
+        $project2->getBudget()->willReturn(100);
+        $selectionStep1->getProject()->willReturn($project1);
+        $selectionStep2->getProject()->willReturn($project2);
+
+        $proposal->getEstimation()->willReturn(30);
+
+        // No budget defined
+        $vote1->getProposal()->willReturn($proposal);
+        $vote1->getUser()->willReturn($user1);
+        $vote1->getSelectionStep()->willReturn($selectionStep1);
+        $this->getAmountSpentForVotes([])->shouldReturn(0);
+        $this->voteIsPossible($vote1)->shouldReturn(true);
+
+        // Enough money left
+        $vote2->getProposal()->willReturn($proposal);
+        $vote2->getUser()->willReturn($user1);
+        $vote2->getSelectionStep()->willReturn($selectionStep2);
+        $this->getAmountSpentForVotes([$otherVote1])->shouldReturn(50);
+        $this->voteIsPossible($vote2)->shouldReturn(true);
+
+        // Not enough money left
+        $vote3->getProposal()->willReturn($proposal);
+        $vote3->getUser()->willReturn(null);
+        $vote3->getEmail()->willReturn('email@test.com');
+        $vote3->getSelectionStep()->willReturn($selectionStep2);
+        $this->getAmountSpentForVotes([$otherVote2])->shouldReturn(80);
+        $this->voteIsPossible($vote3)->shouldReturn(false);
+
+    }
+
+    function it_can_tell_which_amount_has_been_spent_on_votes(ProposalVote $vote1, ProposalVote $vote2, Proposal $proposal1, Proposal $proposal2)
+    {
+        $proposal1->getEstimation()->willReturn(20);
+        $proposal2->getEstimation()->willReturn(50);
+        $vote1->getProposal()->willReturn($proposal1);
+        $vote2->getProposal()->willReturn($proposal2);
+
+        $this->getAmountSpentForVotes([$vote1])->shouldReturn(20);
+        $this->getAmountSpentForVotes([$vote2])->shouldReturn(50);
+        $this->getAmountSpentForVotes([$vote1, $vote2])->shouldReturn(70);
     }
 }

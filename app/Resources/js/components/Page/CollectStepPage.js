@@ -2,6 +2,7 @@ import React from 'react';
 import {IntlMixin} from 'react-intl';
 
 import ProposalStore from '../../stores/ProposalStore';
+import MessageStore from '../../stores/MessageStore';
 import ProposalActions from '../../actions/ProposalActions';
 import {PROPOSAL_PAGINATION} from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
@@ -37,6 +38,7 @@ const CollectStepPage = React.createClass({
 
   componentWillMount() {
     ProposalStore.addChangeListener(this.onChange);
+    MessageStore.addChangeListener(this.onMessageChange);
   },
 
   componentDidMount() {
@@ -51,12 +53,18 @@ const CollectStepPage = React.createClass({
 
   componentWillUnmount() {
     ProposalStore.removeChangeListener(this.onChange);
+    MessageStore.removeChangeListener(this.onMessageChange);
+  },
+
+  onMessageChange() {
+    this.setState({
+      messages: MessageStore.messages,
+    });
   },
 
   onChange() {
     if (!ProposalStore.isProcessing && ProposalStore.isProposalListSync) {
       this.setState({
-        messages: ProposalStore.messages,
         proposals: ProposalStore.proposals,
         proposalsCount: ProposalStore.proposalsCount,
         currentPage: ProposalStore.currentPage,

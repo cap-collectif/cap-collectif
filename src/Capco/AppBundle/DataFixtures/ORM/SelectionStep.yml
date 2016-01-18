@@ -6,6 +6,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     endAt: <dateTimeBetween('now', '+40 days')>
     body: <p><text(1000)></p>
     votable: true
+    votesHelpText: <text(1000)>
   selectionStep2:
     title: Vainqueur
     isEnabled: true

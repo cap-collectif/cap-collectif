@@ -189,60 +189,6 @@ admin:
       comment: Commentaire
       voter: Votant
       created_at: Création
-    project:
-      argument_count: Arguments
-      author: Auteur
-      body: Introduction
-      closed_at: Fermé
-      consultation_step_type: Structure
-      cover: Image
-      created_at: Création
-      events: Évènements
-      events_count: Évènements
-      exportable: Autoriser l'export
-      group_content: Contenu
-      group_meta: Métadonnées
-      group_opinion_types: Structure
-      group_ranking: Classements
-      group_steps: Étapes
-      is_enabled: Publié
-      opened_at: Ouvert
-      opening_status: Statut
-      opinion_count: Propositions
-      opinion_term: Usage
-      posts: Articles
-      posts_count: Articles
-      published_at: Publication
-      ranking:
-        opinions_threshold: Taille du classement des propositions
-        versions_threshold: Taille du classement des modifications
-        include_author: Inclure les contributions de l'auteur
-      steps: Étapes
-      step_position: Position de l'étape
-      step_title: Titre de l'étape
-      teaser: Accroche
-      title: Titre
-      themes: Thèmes
-      trashed_argument_count: Arguments dans la corbeille
-      trashed_opinion_count: Propositions dans la corbeille
-      updated_at: Mise à jour
-      video: Vidéo
-      general: Général
-      proposals: Propositions
-      proposals_table:
-        id: Id
-        title: Titre
-        author: Auteur
-        enabled: Publié
-        isTrashed: Dans la corbeille
-        updatedAt: Date de mise à jour
-        yes: Oui
-        no: Non
-        actions: Actions
-    project_abstractstep:
-      position: Position
-      steps: Étapes
-      steps_add: Choisissez le type d'étape
     consultation_step_type:
       title: Titre
       opinion_types: Éléments de structure
@@ -432,6 +378,61 @@ admin:
       menu_items: Menus
       updated_at: Mise à jour
       created_at: Création
+    project:
+      argument_count: Arguments
+      author: Auteur
+      body: Introduction
+      budget: Budget alloué
+      closed_at: Fermé
+      consultation_step_type: Structure
+      cover: Image
+      created_at: Création
+      events: Évènements
+      events_count: Évènements
+      exportable: Autoriser l'export
+      group_content: Contenu
+      group_meta: Métadonnées
+      group_opinion_types: Structure
+      group_ranking: Classements
+      group_steps: Étapes
+      is_enabled: Publié
+      opened_at: Ouvert
+      opening_status: Statut
+      opinion_count: Propositions
+      opinion_term: Usage
+      posts: Articles
+      posts_count: Articles
+      published_at: Publication
+      ranking:
+        opinions_threshold: Taille du classement des propositions
+        versions_threshold: Taille du classement des modifications
+        include_author: Inclure les contributions de l'auteur
+      steps: Étapes
+      step_position: Position de l'étape
+      step_title: Titre de l'étape
+      teaser: Accroche
+      title: Titre
+      themes: Thèmes
+      trashed_argument_count: Arguments dans la corbeille
+      trashed_opinion_count: Propositions dans la corbeille
+      updated_at: Mise à jour
+      video: Vidéo
+      general: Général
+      proposals: Propositions
+      proposals_table:
+        id: Id
+        title: Titre
+        author: Auteur
+        enabled: Publié
+        isTrashed: Dans la corbeille
+        updatedAt: Date de mise à jour
+        yes: Oui
+        no: Non
+        actions: Actions
+    project_abstractstep:
+      position: Position
+      steps: Étapes
+      steps_add: Choisissez le type d'étape
     proposal:
       annotation: Annotation
       answer: Réponse officielle
@@ -595,6 +596,7 @@ admin:
       type: Type d'étape
       updated_at: Mise à jour
       votable: Soumettre les propositions au vote
+      votesHelpText: Règle des votes
     synthesis:
       enabled: Publiée
       editable: Éditable

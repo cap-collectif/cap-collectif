@@ -111,10 +111,16 @@ class ProposalsController extends FOSRestController
             }
         }
 
+        $creditsLeft = $this
+            ->get('capco.proposal_votes.resolver')
+            ->getCreditsLeftForUser($this->getUser(), $firstVotableStep)
+        ;
+
         return [
             'proposal' => $proposal,
             'votableStep' => $firstVotableStep,
             'userHasVote' => $userHasVote,
+            'creditsLeft' => $creditsLeft,
         ];
     }
 
@@ -281,6 +287,7 @@ class ProposalsController extends FOSRestController
 
         return [
             'votes' => $votes,
+            'count' => count($votes),
         ];
     }
 

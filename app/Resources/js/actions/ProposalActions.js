@@ -7,6 +7,7 @@ import {
   RECEIVE_PROPOSAL_VOTES,
   RECEIVE_PROPOSALS,
 
+  INIT_PROPOSAL,
   SUBMIT_PROPOSAL,
   VALIDATION_FAILURE,
   CREATE_PROPOSAL_SUCCESS,
@@ -16,6 +17,7 @@ import {
   DELETE_PROPOSAL_SUCCESS,
   DELETE_PROPOSAL_FAILURE,
 
+  INIT_PROPOSAL_VOTES,
   CREATE_PROPOSAL_VOTE,
   CREATE_PROPOSAL_VOTE_SUCCESS,
   CREATE_PROPOSAL_VOTE_FAILURE,
@@ -36,6 +38,22 @@ import {
 } from '../constants/CommentConstants';
 
 export default {
+
+  initProposal: (proposal) => {
+    AppDispatcher.dispatch({
+      actionType: INIT_PROPOSAL,
+      proposal: proposal,
+    });
+  },
+
+  initProposalVotes: (votableStep, creditsLeft, userHasVote = false) => {
+    AppDispatcher.dispatch({
+      actionType: INIT_PROPOSAL_VOTES,
+      votableStep: votableStep,
+      creditsLeft: creditsLeft,
+      userHasVote: userHasVote,
+    });
+  },
 
   load: (fetchFrom, id) => {
     const page = ProposalStore.currentPage;
@@ -78,6 +96,7 @@ export default {
             proposals: result.proposals,
             count: result.count,
             order: result.order,
+            creditsLeft: result.creditsLeft || null,
           });
           return true;
         });
@@ -91,6 +110,7 @@ export default {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSAL_VOTES,
           votes: result.votes,
+          votesCount: result.count,
         });
         return true;
       });
@@ -222,7 +242,7 @@ export default {
       hasComment: hasComment,
     });
     return Fetcher
-    .post(`/selection_steps/${selectionStep}/proposals/${proposal}/vote`, data)
+    .post(`/selection_steps/${selectionStep}/proposals/${proposal}/votes`, data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_PROPOSAL_VOTE_SUCCESS,
@@ -258,7 +278,7 @@ export default {
       selectionStep: selectionStep,
     });
     return Fetcher
-      .delete(`/selection_steps/${selectionStep}/proposals/${proposal}/vote`)
+      .delete(`/selection_steps/${selectionStep}/proposals/${proposal}/votes`)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_VOTE_SUCCESS,

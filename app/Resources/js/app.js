@@ -54,8 +54,9 @@ AuthService
           themes={$('#render-proposal-page').data('themes').themes}
           districts={$('#render-proposal-page').data('districts').districts}
           votes={$('#render-proposal-page').data('votes').votes}
-          votableStep={$('#render-proposal-page').data('votablestep').votableStep}
-          userHasVote={$('#render-proposal-page').data('userhasvote')}
+          votableStep={$('#render-proposal-page').data('votable-step').votableStep}
+          userHasVote={$('#render-proposal-page').data('user-has-vote')}
+          creditsLeft={$('#render-proposal-page').data('credits-left')}
           {...IntlData}
         />,
         document.getElementById('render-proposal-page')
@@ -87,6 +88,7 @@ AuthService
           districts={$('#render-selection-step-page').data('districts').districts}
           types={$('#render-selection-step-page').data('types').types}
           statuses={$('#render-selection-step-page').data('statuses').statuses}
+          creditsLeft={$('#render-selection-step-page').data('credits-left')}
           {...IntlData}
         />,
         document.getElementById('render-selection-step-page')

@@ -12,12 +12,14 @@ const ProposalPreview = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     selectionStepId: React.PropTypes.number,
+    creditsLeft: React.PropTypes.number,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       selectionStepId: null,
+      creditsLeft: null,
     };
   },
 

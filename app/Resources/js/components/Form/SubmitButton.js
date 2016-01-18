@@ -11,6 +11,7 @@ const SubmitButton = React.createClass({
     bsStyle: React.PropTypes.string,
     className: React.PropTypes.string,
     style: React.PropTypes.object,
+    disabled: React.PropTypes.bool,
   },
   mixins: [IntlMixin],
 
@@ -20,6 +21,7 @@ const SubmitButton = React.createClass({
       bsStyle: 'primary',
       className: '',
       style: {},
+      disabled: false,
     };
   },
 
@@ -32,6 +34,7 @@ const SubmitButton = React.createClass({
         bsStyle={this.props.bsStyle}
         className={this.props.className}
         style={this.props.style}
+        disabled={this.props.disabled}
       >
         {this.props.isSubmitting
           ? this.getIntlMessage('global.loading')

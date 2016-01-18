@@ -1,6 +1,8 @@
 import React from 'react';
 import {IntlMixin, FormattedMessage} from 'react-intl';
 import ProposalStore from '../../stores/ProposalStore';
+import ProposalVoteStore from '../../stores/ProposalVoteStore';
+import MessageStore from '../../stores/MessageStore';
 import ProposalActions from '../../actions/ProposalActions';
 import {PROPOSAL_PAGINATION} from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
@@ -18,14 +20,18 @@ const SelectionStepPage = React.createClass({
     stepId: React.PropTypes.number.isRequired,
     votable: React.PropTypes.bool.isRequired,
     count: React.PropTypes.number.isRequired,
+    creditsLeft: React.PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
   getInitialState() {
+    ProposalActions.initProposalVotes(this.props.votable ? this.props.stepId : null, this.props.creditsLeft);
     return {
       proposals: ProposalStore.proposals,
       proposalsCount: this.props.count,
       currentPage: ProposalStore.currentPage,
+      creditsLeft: ProposalVoteStore.creditsLeft,
+      votableStep: ProposalVoteStore.votableStep,
       isLoading: true,
       messages: {
         'errors': [],
@@ -36,6 +42,8 @@ const SelectionStepPage = React.createClass({
 
   componentWillMount() {
     ProposalStore.addChangeListener(this.onChange);
+    ProposalVoteStore.addChangeListener(this.onVoteChange);
+    MessageStore.addChangeListener(this.onMessageChange);
   },
 
   componentDidMount() {
@@ -50,12 +58,26 @@ const SelectionStepPage = React.createClass({
 
   componentWillUnmount() {
     ProposalStore.removeChangeListener(this.onChange);
+    ProposalVoteStore.removeChangeListener(this.onVoteChange);
+    MessageStore.removeChangeListener(this.onMessageChange);
+  },
+
+  onMessageChange() {
+    this.setState({
+      messages: MessageStore.messages,
+    });
+  },
+
+  onVoteChange() {
+    this.setState({
+      votableStep: ProposalVoteStore.votableStep,
+      creditsLeft: ProposalVoteStore.creditsLeft,
+    });
   },
 
   onChange() {
     if (ProposalStore.isProposalListSync) {
       this.setState({
-        messages: ProposalStore.messages,
         proposals: ProposalStore.proposals,
         proposalsCount: ProposalStore.proposalsCount,
         currentPage: ProposalStore.currentPage,
@@ -106,7 +128,7 @@ const SelectionStepPage = React.createClass({
         <br />
         <Loader show={this.state.isLoading}>
           <div>
-            <ProposalList proposals={this.state.proposals} selectionStepId={this.props.votable ? this.props.stepId : null} />
+            <ProposalList proposals={this.state.proposals} selectionStepId={this.state.votableStep} creditsLeft={this.state.creditsLeft} />
             {
               nbPages > 1
               ? <Pagination
