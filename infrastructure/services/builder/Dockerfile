@@ -32,8 +32,8 @@ RUN curl https://deb.nodesource.com/node_5.x/pool/main/n/nodejs/nodejs_5.1.1-1no
     dpkg -i node.deb && \
     rm node.deb
 
-# Update npm and install brunch / bower
-RUN npm install -g bower brunch/brunch
+# Update npm and install bower
+RUN npm install -g bower
 
 # Install pep8
 RUN pip install pep8 autopep8

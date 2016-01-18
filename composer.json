@@ -62,7 +62,7 @@
         "jms/serializer-bundle": "~1.0",
         "jms/serializer": "dev-fix/2-nested-serializer-calls as 1.0.0",
         "nelmio/api-doc-bundle": "~2.9",
-        "friendsofsymfony/rest-bundle": "~1.7",
+        "friendsofsymfony/rest-bundle": "^1.7",
         "lexik/jwt-authentication-bundle": "~1.0",
         "willdurand/hateoas-bundle": "~1.0",
         "snc/redis-bundle": "1.1.x-dev",

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Row, Col, Well} from 'react-bootstrap';
 import {IntlMixin, FormattedMessage} from 'react-intl';
 
@@ -14,9 +14,9 @@ import VotesBar from '../Utils/VotesBar';
 
 const OpinionBox = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
-    rankingThreshold: React.PropTypes.number,
-    opinionTerm: React.PropTypes.number,
+    opinion: PropTypes.object.isRequired,
+    rankingThreshold: PropTypes.number,
+    opinionTerm: PropTypes.number,
   },
   mixins: [IntlMixin],
 

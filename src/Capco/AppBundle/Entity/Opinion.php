@@ -310,6 +310,20 @@ class Opinion implements SelfLinkableInterface, VotableInterface
         return $this;
     }
 
+    public function incrementSourcesCount()
+    {
+        ++$this->sourcesCount;
+
+        return $this;
+    }
+
+    public function decrementSourcesCount()
+    {
+        --$this->sourcesCount;
+
+        return $this;
+    }
+
     /**
      * @return int
      */

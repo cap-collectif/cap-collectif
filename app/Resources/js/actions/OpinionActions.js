@@ -152,12 +152,4 @@ export default {
     });
   },
 
-  addSource: (opinion, data) => {
-    return Fetcher
-    .post(`/opinions/${opinion}/sources`, data)
-    .then(() => {
-      return true;
-    });
-  },
-
 };

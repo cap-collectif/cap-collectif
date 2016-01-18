@@ -5,15 +5,26 @@ import {IntlMixin, FormattedMessage} from 'react-intl';
 import {COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH} from '../../constants/ArgumentConstants';
 import OpinionArgumentsBox from './OpinionArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
-import OpinionSourcesBox from './OpinionSourcesBox';
+import OpinionSourceBox from './Source/OpinionSourceBox';
 import VoteLinechart from '../Utils/VoteLinechart';
 import OpinionLinksBox from './Links/OpinionLinksBox';
+import OpinionSourceStore from '../../stores/OpinionSourceStore';
 
 const OpinionTabs = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
+
+  getInitialState() {
+    return {
+      sources_count: this.props.opinion.sources_count,
+    };
+  },
+
+  componentWillMount() {
+    OpinionSourceStore.addChangeListener(this.onChange);
+  },
 
   componentDidMount() {
     const scrollToAnchor = () => {
@@ -26,6 +37,16 @@ const OpinionTabs = React.createClass({
       }
     };
     setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
+  },
+
+  componentWillUnmount() {
+    OpinionSourceStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    this.setState({
+      sources_count: OpinionSourceStore.count,
+    });
   },
 
   getHashKey(hash) {
@@ -115,7 +136,7 @@ const OpinionTabs = React.createClass({
   },
 
   render() {
-    const opinion = this.props.opinion;
+    const {opinion} = this.props;
 
     if (this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() + this.isLinkable() > 1) {
       // at least two tabs
@@ -149,9 +170,9 @@ const OpinionTabs = React.createClass({
                 id="opinion__sources"
                 className="opinion-tabs"
                 eventKey={'sources'}
-                title={<FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />}
+                title={<FormattedMessage message={this.getIntlMessage('global.sources')} num={this.state.sources_count} />}
             >
-              <OpinionSourcesBox {...this.props} />
+              <OpinionSourceBox {...this.props} />
             </Tab>
             : null
           }
@@ -182,7 +203,7 @@ const OpinionTabs = React.createClass({
     }
 
     if (this.isSourceable()) {
-      return <OpinionSourcesBox {...this.props} />;
+      return <OpinionSourceBox {...this.props} />;
     }
     if (this.isVersionable()) {
       return this.renderVersionsContent();

@@ -4,7 +4,7 @@ import OpinionSource from './OpinionSource';
 
 const OpinionSourceList = React.createClass({
   propTypes: {
-    sources: React.PropTypes.array,
+    sources: React.PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 

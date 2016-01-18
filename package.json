@@ -5,6 +5,8 @@
   "description": "Cap-Collectif version Symfony2",
   "main": "brunch-config.js",
   "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --opts mocha.opts",
+    "test:watch": "./node_modules/mocha/bin/mocha --opts mocha.opts --watch --reporter min",
     "build": "./node_modules/brunch/bin/brunch build",
     "build:prod": "./node_modules/brunch/bin/brunch build --production",
     "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js",
@@ -24,7 +26,7 @@
     "autosize": "^3.0.14",
     "babel-brunch": "^5.1.2",
     "bower": "^1.6.5",
-    "brunch": "https://github.com/spyl94/brunch/tarball/e5639312ba3273b0d142937d19be6fe29d1722cd",
+    "brunch": "https://github.com/spyl94/brunch/tarball/ef66045f3676c25571e4aa361828e95a13a312e5",
     "classnames": "^2.2.3",
     "clean-css-brunch": "^1.7.2",
     "css-brunch": "^1.7.0",
@@ -51,12 +53,19 @@
     "whatwg-fetch": "^0.10.1"
   },
   "devDependencies": {
+    "babel": "^5.8.29",
+    "babel-core": "^5.8.29",
     "babel-eslint": "^4.1.6",
+    "chai": "^3.4.1",
+    "enzyme": "^2.0.0-rc1",
     "eslint": "^1.10.3",
     "eslint-brunch": "^1.8.5",
     "eslint-config-airbnb": "^0.1.1",
     "eslint-config-jolicode": "^0.1.0",
+    "eslint-plugin-mocha": "^1.1.0",
     "eslint-plugin-react": "^3.15.0",
-    "fb-flo-brunch": "^1.7.22"
+    "fb-flo-brunch": "^1.7.22",
+    "mocha": "^2.3.4",
+    "react-addons-test-utils": "^0.14.6"
   }
 }

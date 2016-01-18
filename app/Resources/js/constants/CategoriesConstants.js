@@ -1,0 +1,3 @@
+export default {
+  RECEIVE_CATEGORIES: 'RECEIVE_CATEGORIES',
+};

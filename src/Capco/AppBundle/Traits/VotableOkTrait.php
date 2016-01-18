@@ -62,7 +62,9 @@ trait VotableOkTrait
 
     public function removeVote(AbstractVote $vote)
     {
-        $this->votes->removeElement($vote);
+        if ($this->votes->contains($vote)) {
+            $this->votes->removeElement($vote);
+        }
 
         return $this;
     }

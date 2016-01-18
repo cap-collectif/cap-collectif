@@ -11,7 +11,7 @@ const OpinionLink = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    const link = this.props.link;
+    const {link} = this.props;
     const classes = classNames({
       'opinion': true,
       'block--bordered': true,

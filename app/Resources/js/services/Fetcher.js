@@ -1,23 +1,18 @@
 import config from '../config';
 import LoginStore from '../stores/LoginStore';
 
-function status(response) {
+const status = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
   const error = new Error(response.statusText);
   error.response = response;
   throw error;
-}
+};
 
-function json(response) {
-  if (response) {
-    return response.json();
-  }
-  return {};
-}
+const json = (response) => response ? response.json() : {};
 
-function createHeaders() {
+const createHeaders = () => {
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -28,16 +23,15 @@ function createHeaders() {
   }
 
   return headers;
-}
+};
 
 // If shield mode is activated, Safari will override the Authorization header, so we need this
-function addAuthorization(req) {
+const addAuthorization = (req) => {
   if (LoginStore.jwt !== null) {
     const header = 'Bearer ' + LoginStore.jwt;
     req.setRequestHeader('Authorization', header);
   }
-}
-
+};
 
 class Fetcher {
 
@@ -45,9 +39,7 @@ class Fetcher {
     return fetch(config.api + uri, {
       method: 'get',
       headers: createHeaders(),
-      beforeSend: function(req) {
-        addAuthorization(req);
-      },
+      beforeSend: addAuthorization,
     })
     .then(status)
     .then(json);
@@ -57,9 +49,7 @@ class Fetcher {
     return fetch(config.api + uri, {
       method: 'post',
       headers: createHeaders(),
-      beforeSend: function(req) {
-        addAuthorization(req);
-      },
+      beforeSend: addAuthorization,
       body: JSON.stringify(body),
     })
     .then(status);
@@ -69,9 +59,7 @@ class Fetcher {
     return fetch(config.api + uri, {
       method: 'put',
       headers: createHeaders(),
-      beforeSend: function(req) {
-        addAuthorization(req);
-      },
+      beforeSend: addAuthorization,
       body: JSON.stringify(body),
     })
     .then(status);
@@ -81,9 +69,7 @@ class Fetcher {
     return fetch(config.api + uri, {
       method: 'delete',
       headers: createHeaders(),
-      beforeSend: function(req) {
-        addAuthorization(req);
-      },
+      beforeSend: addAuthorization,
     })
     .then(status);
   }

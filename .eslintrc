@@ -1,13 +1,13 @@
 {
   "extends": "jolicode",
   "plugins": [
-    "react"
+    "react",
+    "mocha",
   ],
   "globals": {
     "$": true,
     "google": true,
     "CKEDITOR": true,
-    "React": true,
     "document": true,
     "Modernizr": true,
     "jQuery": true,

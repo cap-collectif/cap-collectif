@@ -39,25 +39,6 @@ class SourceSerializationListener extends AbstractSerializationListener
         $user = $token ? $token->getUser() : 'anon.';
 
         $event->getVisitor()->addData(
-            '_links', [
-                'edit' => $this->router->generate('app_edit_source', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'sourceSlug' => $source->getSlug(),
-                ], true),
-                'report' => $this->router->generate('app_report_source', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'sourceSlug' => $source->getSlug(),
-                ], true),
-            ]
-        );
-
-        $event->getVisitor()->addData(
             'has_user_voted', $user === 'anon.' ? false : $source->userHasVote($user)
         );
 

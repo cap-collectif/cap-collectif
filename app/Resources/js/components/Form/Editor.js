@@ -23,7 +23,9 @@ const Editor = React.createClass({
   componentDidMount() {
     this._editor = new Quill(ReactDOM.findDOMNode(this.refs.editor), {
       modules: {
-        'toolbar': { container: ReactDOM.findDOMNode(this.refs.toolbar) },
+        'toolbar': {
+          container: ReactDOM.findDOMNode(this.refs.toolbar),
+        },
         'image-tooltip': {
           template: `
             <input class="input" type="textbox">
@@ -66,8 +68,8 @@ const Editor = React.createClass({
   render() {
     const classes = {
       'editor': true,
+      [this.props.className]: true,
     };
-    classes[this.props.className] = true;
     return (
       <div id={this.props.id} className={classNames(classes)}>
         <QuillToolbar ref="toolbar" />

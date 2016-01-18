@@ -31,19 +31,6 @@
         {% if trashed is not defined %}
             <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
             <span class="nb-votes">{{ source.votesCount }}</span>
-
-            {% if is_feature_enabled('reporting') %}
-                {% if source.reports | length > 0 %}
-                    <button disabled="disabled" class="btn btn-xs btn-dark-gray"><i class="cap cap-flag-1"></i> {{ 'source.report.reported'|trans({}, 'CapcoAppBundle') }}</button>
-                {% else %}
-                    <a href="{{ path('app_report_source' ,{'projectSlug': project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug } ) }}" class="btn btn-xs btn-dark-gray  btn--outline"><i class="cap cap-flag-1"></i> {{ 'source.report.submit'|trans({}, 'CapcoAppBundle') }}</a>
-                {% endif %}
-            {% endif %}
-
-            {% if source.canContribute and app.user is not null and app.user == source.Author %}
-                <a href="{{ path('app_edit_source' ,{'projectSlug': project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'sourceSlug': source.slug} ) }}" class="btn  btn-dark-gray  btn--outline  btn-xs"><i class="cap cap-pencil-1"></i> {{ 'source.update.button'|trans({}, 'CapcoAppBundle') }}</a>
-            {% endif %}
-
         {% else %}
             <button disabled="disabled" class="btn  btn-default btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
             <span class="nb-votes">{{ source.votesCount }}</span>

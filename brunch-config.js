@@ -11,7 +11,7 @@ exports.config = {
     enabled: true,
     styles: {
       quill: ['dist/quill.base.css', 'dist/quill.snow.css'],
-    }
+    },
   },
   paths: {
     watched: ['app/Resources'],
@@ -64,10 +64,14 @@ exports.config = {
           'bower_components/bootstrap/assets/stylesheets/bootstrap.scss',
           'bower_components/css-spinners/css/spinners.css',
           /^node_modules/,
-          'app/Resources/scss/style.scss'
+          'app/Resources/scss/style.scss',
         ],
-        'css/jquery.minicolors.css' : ['bower_components/jquery-minicolors/jquery.minicolors.css'],
-        'css/style-admin.css' : ['app/Resources/scss/style-admin.scss'],
+        'css/jquery.minicolors.css' : [
+          'bower_components/jquery-minicolors/jquery.minicolors.css',
+        ],
+        'css/style-admin.css' : [
+          'app/Resources/scss/style-admin.scss',
+        ],
       }
     }
   },

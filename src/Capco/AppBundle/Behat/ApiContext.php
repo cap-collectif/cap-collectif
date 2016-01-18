@@ -45,11 +45,19 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * @When I am logged in to api as :username with pwd :pwd
+     * @When /^I am logged in to api as xlacot$/
      */
-    public function iAmLoggedInToApi($username, $pwd)
+    public function iAmLoggedInToApiAsXlacot()
     {
-        $this->createAuthenticatedClient($username, $pwd);
+        $this->createAuthenticatedClient('xlacot@jolicode.com', 'toto');
+    }
+
+    /**
+     * @When I am logged in to api as :email with pwd :pwd
+     */
+    public function iAmLoggedInToApi($email, $pwd)
+    {
+        $this->createAuthenticatedClient($email, $pwd);
     }
 
     /**
@@ -75,11 +83,37 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * Sends HTTP request to specific relative URL.
-     *
-     * @param string $method request method
-     * @param string $url    relative url
-     *
+     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid source json$/
+     */
+    public function iSendSourceRequest($method, $url)
+    {
+        $json = <<< EOF
+        {
+            "link": "http://google.com",
+            "title": "Je suis une source",
+            "body": "<div>Jai un corps mais pas de bras :'(</div>",
+            "Category": 2
+        }
+EOF;
+
+        $this->iSendARequestWithJson($method, $url, $json);
+    }
+
+    /**
+     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid report json$/
+     */
+    public function iSendReportRequest($method, $url)
+    {
+        $json = <<< EOF
+        {
+            "status": 2,
+            "body": "Pas très catholique tout ça"
+        }
+EOF;
+
+        $this->iSendARequestWithJson($method, $url, $json);
+    }
+    /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)"$/
      */
     public function iSendARequest($method, $url)
@@ -95,12 +129,6 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * Sends HTTP request to specific URL with field values from Table.
-     *
-     * @param string    $method request method
-     * @param string    $url    relative url
-     * @param TableNode $values table of values
-     *
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with values:$/
      */
     public function iSendARequestWithValues($method, $url, TableNode $table)
@@ -114,18 +142,25 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * Sends HTTP request to specific URL with field values from Table.
-     *
-     * @param string    $method request method
-     * @param string    $url    relative url
-     * @param TableNode $values table of values
-     *
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with json:$/
      */
-    public function iSendARequestWithJson($method, $url, PyStringNode $string)
+    public function iSendARequestWithJsonFromPyString($method, $url, PyStringNode $string)
     {
         $request = $this->client->createRequest($method, $url, [
             'body' => $string->getRaw(),
+            'exceptions' => false,
+            'headers' => [
+                'Authorization' => sprintf('Bearer %s', $this->token),
+                'Content-Type' => 'application/json',
+            ],
+        ]);
+        $this->response = $this->client->send($request);
+    }
+
+    private function iSendARequestWithJson($method, $url, $body)
+    {
+        $request = $this->client->createRequest($method, $url, [
+            'body' => $body,
             'exceptions' => false,
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),

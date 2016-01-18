@@ -11,7 +11,8 @@ if [ "$PRODUCTION" ]; then
   npm --quiet --no-color install --production
   #npm rebuild node-sass
   bower install --config.interactive=false --allow-root --config.storage.cache=/home/capco/.cache/bower
-  NODE_ENV=production brunch build --production
+  NODE_ENV=production npm run build:prod
+>>>>>>> opinion source update
 else
   echo "Building for development"
   # Symfony deps
@@ -21,5 +22,5 @@ else
   npm install
   npm rebuild node-sass
   bower install --config.interactive=false --config.storage.cache=/home/capco/.bower
-  brunch build
+  npm run build
 fi

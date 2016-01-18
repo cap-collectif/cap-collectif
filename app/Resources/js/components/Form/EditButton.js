@@ -46,7 +46,8 @@ const EditButton = React.createClass({
       return (
         <button
           id={this.props.id}
-          style={this.props.style} className={classNames(classes, this.props.className)}
+          style={this.props.style}
+          className={classNames(classes, this.props.className)}
           onClick={() => this.props.onClick()}
         >
             <i className="cap cap-pencil-1"></i>

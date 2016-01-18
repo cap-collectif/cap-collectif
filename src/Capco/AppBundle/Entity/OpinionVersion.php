@@ -314,6 +314,20 @@ class OpinionVersion implements VotableInterface
         $this->argumentsCount = $argumentsCount;
     }
 
+    public function incrementSourcesCount()
+    {
+        ++$this->sourcesCount;
+
+        return $this;
+    }
+
+    public function decrementSourcesCount()
+    {
+        --$this->sourcesCount;
+
+        return $this;
+    }
+
     /**
      * @return mixed
      */

@@ -2,6 +2,16 @@
 export default {
   locales: ['fr-FR'],
   messages: {
+    alert: {
+      success: {
+        reported: {
+          source: 'Merci ! La source a bien été signalée.',
+        },
+        updated: {
+          source: 'Merci ! Votre source a bien été modifiée.',
+        },
+      },
+    },
     comment: {
       constraints: {
         author_email: 'Cette valeur n\'est pas une adresse email valide.',
@@ -42,14 +52,22 @@ export default {
     },
     source: {
       add: 'Créer une source',
+      update: 'Modifier une source',
+      delete: 'Supprimer une source',
       body: 'Description *',
       constraints: {
         body: 'Le contenu de la source doit faire au moins 2 caractères.',
         category: 'Veuillez choisir un type pour soumettre une source',
         link: 'Cette valeur n\'est pas une URL valide.',
         title: 'Le titre de la source doit faire au moins 2 caractères.',
+        check: 'Veuillez cocher cette case pour continuer.',
       },
-      infos: 'Merci d\'examiner les sources existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
+      add_infos: 'Merci d\'examiner les sources existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !',
+      delete_infos: {
+        header: 'Êtes-vous sûr de vouloir supprimer cette source ?',
+        comment: 'Cette suppression marquera la fin de ce contenu à jamais.',
+      },
+      check: 'En modifiant ma source, je comprends que les votes qui lui sont associés seront réinitialisés.',
       link: 'Lien *',
       title: 'Titre *',
       type: 'Type *',
@@ -282,6 +300,15 @@ export default {
       link: 'Lien',
       image: 'Image',
     },
+    reporting: {
+      status: {
+        sexual: 'Contenu à caractère sexuel',
+        spam: 'Spam ou contenu trompeur',
+        error: 'Information erronée',
+        off_topic: 'Propos hors-sujet',
+        offending: 'Contenu raciste, offensant ou haineux',
+      },
+    },
     global: {
       advanced_filters: 'Filtres avancés',
       all_required: 'Tous les champs sont obligatoires.',
@@ -290,12 +317,23 @@ export default {
       arguments: '{num, plural, =0{0 argument} one{# argument} other{# arguments}}',
       back: 'Retour',
       cancel: 'Annuler',
+      delete: 'Supprimer',
       change: 'Changer',
       close: 'Fermer',
       comment: 'Commentaire',
       comments: '{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}',
       constraints: {
         notBlank: 'Cette valeur ne doit pas être vide.',
+      },
+      modal: {
+        report: {
+          title: 'Signaler un contenu',
+          form: {
+            status: 'Quelle est la nature du problème ? *',
+            body: 'Message *',
+          },
+          infos: 'L\'équipe du site évalue les contenus et les utilisateurs signalés régulièrement pour déterminer s\'ils portent atteinte au règlement de la communauté. Les comptes sont sanctionnés pour toute infraction au règlement de la communauté et peuvent être clôturés en cas de violations graves ou répétées.',
+        },
       },
       content: 'Contenu',
       dates: {

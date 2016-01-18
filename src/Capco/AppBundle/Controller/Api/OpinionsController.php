@@ -7,8 +7,6 @@ use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Form\ApiSourceType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -363,7 +361,7 @@ class OpinionsController extends FOSRestController
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
-     * @View(serializerGroups={"Opinions", "UsersInfos"})
+     * @View(serializerGroups={"Opinions", "UsersInfos", "Categories"})
      */
     public function cgetOpinionSourcesAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
     {
@@ -372,9 +370,9 @@ class OpinionsController extends FOSRestController
         $filter = $paramFetcher->get('filter');
         $trashed = false;
 
-        $paginator = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoAppBundle:Source')
-                    ->getByOpinion($opinion, $offset, $limit, $filter, $trashed);
+        $em = $this->getDoctrine()->getManager();
+        $paginator = $em->getRepository('CapcoAppBundle:Source')
+                        ->getByOpinion($opinion, $offset, $limit, $filter, $trashed);
 
         $sources = [];
         foreach ($paginator as $source) {
@@ -383,6 +381,7 @@ class OpinionsController extends FOSRestController
 
         return [
             'sources' => $sources,
+            'count' => count($paginator),
         ];
     }
 
@@ -423,108 +422,8 @@ class OpinionsController extends FOSRestController
 
         return [
             'sources' => $sources,
+            'count' => count($paginator),
         ];
-    }
-
-    /**
-     * Post a source for an opinion.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Post a source for an opinion.",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    404 = "Returned when opinion not found",
-     *  }
-     * )
-     *
-     * @Security("has_role('ROLE_USER')")
-     * @Post("/opinions/{opinionId}/sources")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postOpinionSourceAction(Request $request, Opinion $opinion)
-    {
-        if (!$opinion->canContribute()) {
-            throw new BadRequestHttpException("Can't add a source to an uncontributable opinion.");
-        }
-
-        $user = $this->getUser();
-        $source = (new Source())
-                    ->setAuthor($user)
-                    ->setType(Source::LINK)
-                    ->setOpinion($opinion)
-                    ->setIsEnabled(true)
-                    ->setUpdatedAt(new \Datetime())
-                ;
-
-        $form = $this->createForm(new ApiSourceType(), $source);
-        $form->submit($request->request->all(), false);
-
-        if ($form->isValid()) {
-            $opinion->setSourcesCount($opinion->getSourcesCount() + 1);
-            $this->getDoctrine()->getManager()->persist($source);
-            $this->getDoctrine()->getManager()->flush();
-
-            return $source;
-        }
-
-        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
-
-        return $view;
-    }
-
-    /**
-     * Post a source for an opinion version.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Post a source for an opinion version.",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    404 = "Returned when opinion or opinion version not found",
-     *  }
-     * )
-     *
-     * @Security("has_role('ROLE_USER')")
-     * @Post("/opinions/{opinionId}/versions/{versionId}/sources")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
-     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postOpinionVersionSourceAction(Request $request, Opinion $opinion, OpinionVersion $version)
-    {
-        if (!$opinion->canContribute()) {
-            throw new BadRequestHttpException("Can't add a source to an uncontributable opinion.");
-        }
-
-        if (!$opinion->getOpinionType()->isVersionable()) {
-            throw new BadRequestHttpException("Can't add a version to an unversionable opinion.");
-        }
-
-        $user = $this->getUser();
-        $source = (new Source())
-                    ->setAuthor($user)
-                    ->setType(Source::LINK)
-                    ->setOpinionVersion($version)
-                    ->setIsEnabled(true)
-                    ->setUpdatedAt(new \Datetime())
-                ;
-
-        $form = $this->createForm(new ApiSourceType(), $source);
-        $form->submit($request->request->all(), false);
-
-        if ($form->isValid()) {
-            $version->setSourcesCount($version->getSourcesCount() + 1);
-            $this->getDoctrine()->getManager()->persist($source);
-            $this->getDoctrine()->getManager()->flush();
-
-            return $source;
-        }
-
-        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
-
-        return $view;
     }
 
     /**

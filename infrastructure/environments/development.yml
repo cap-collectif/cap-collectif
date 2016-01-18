@@ -7,8 +7,8 @@ application:
         - /usr/local/bin/docker:/usr/bin/docker
 
 database:
-    ports:
-        - "3306:3306"
+   ports:
+       - "3306:3306"
 
 chrome:
    ports:

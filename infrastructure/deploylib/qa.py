@@ -43,6 +43,12 @@ def phpspec():
 
 
 @task(environments=['local', 'testing'])
+def mocha():
+    "Run Mocha Tests"
+    env.compose_run('npm test', 'builder', '.', no_deps=True)
+
+
+@task(environments=['local', 'testing'])
 def behat(fast_failure='true', profile=False, tags='false', feature='false'):
     "Run Gerhkin Tests"
     if not env.lxc:

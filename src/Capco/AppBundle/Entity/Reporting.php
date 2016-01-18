@@ -221,6 +221,8 @@ class Reporting
     public function setBody($body)
     {
         $this->body = $body;
+
+        return $this;
     }
 
     /**
@@ -237,6 +239,8 @@ class Reporting
     public function setReporter($reporter)
     {
         $this->Reporter = $reporter;
+
+        return $this;
     }
 
     /**
@@ -254,6 +258,8 @@ class Reporting
     {
         $this->Opinion = $Opinion;
         $this->Opinion->addReport($this);
+
+        return $this;
     }
 
     /**
@@ -271,6 +277,8 @@ class Reporting
     {
         $this->Source = $Source;
         $this->Source->addReport($this);
+
+        return $this;
     }
 
     /**
@@ -290,6 +298,8 @@ class Reporting
     {
         $this->Argument = $Argument;
         $this->Argument->addReport($this);
+
+        return $this;
     }
 
     /**
@@ -307,6 +317,8 @@ class Reporting
     {
         $this->Idea = $Idea;
         $this->Idea->addReport($this);
+
+        return $this;
     }
 
     public function getOpinionVersion()
@@ -317,7 +329,8 @@ class Reporting
     public function setOpinionVersion($opinionVersion)
     {
         $this->opinionVersion = $opinionVersion;
-        // $this->opinionVersion->addReport($this);
+
+        return $this;
     }
 
     /**
@@ -335,6 +348,8 @@ class Reporting
     {
         $this->Comment = $Comment;
         $this->Comment->addReport($this);
+
+        return $this;
     }
 
     /**
@@ -370,6 +385,8 @@ class Reporting
     public function setIsArchived($isArchived)
     {
         $this->isArchived = $isArchived;
+
+        return $this;
     }
 
     // ******************* Custom methods *************************
