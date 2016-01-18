@@ -1,6 +1,3 @@
-import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
-import classNames from 'classnames';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
@@ -10,11 +7,13 @@ import Loader from '../Utils/Loader';
 import IgnoreButton from './IgnoreButton';
 import UpdateButton from './UpdateButton';
 
+const FormattedMessage = ReactIntl.FormattedMessage;
+
 const FolderManager = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {

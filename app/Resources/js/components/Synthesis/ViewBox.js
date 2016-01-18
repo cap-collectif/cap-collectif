@@ -1,5 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import ViewTree from './ViewTree';
 import LoginStore from '../../stores/LoginStore';
 
@@ -7,7 +5,7 @@ const ViewBox = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   render() {
     if (this.props.synthesis.enabled || (LoginStore.user && LoginStore.user.vip)) {

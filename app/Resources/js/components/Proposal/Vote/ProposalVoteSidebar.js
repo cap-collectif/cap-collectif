@@ -1,10 +1,8 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Col, Button} from 'react-bootstrap';
-import classNames from 'classnames';
-
 import StepsList from '../../Steps/StepsList';
 import ProposalVoteBox from './ProposalVoteBox';
+
+const Col = ReactBootstrap.Col;
+const Button = ReactBootstrap.Button;
 
 const ProposalVoteSidebar = React.createClass({
   propTypes: {
@@ -14,7 +12,7 @@ const ProposalVoteSidebar = React.createClass({
     expanded: React.PropTypes.bool.isRequired,
     onToggleExpand: React.PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

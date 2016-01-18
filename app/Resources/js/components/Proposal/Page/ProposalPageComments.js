@@ -1,6 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import classNames from 'classnames';
 import CommentSection from '../../Comment/CommentSection';
 
 const ProposalPageComments = React.createClass({
@@ -9,7 +6,7 @@ const ProposalPageComments = React.createClass({
     form: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

@@ -1,12 +1,10 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import OpinionBodyDiffModal from './OpinionBodyDiffModal';
 
 const OpinionBodyDiffContent = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   render() {
     const opinion = this.props.opinion;

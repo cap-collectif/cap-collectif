@@ -1,21 +1,19 @@
-import React from 'react';
-import {Button, Modal} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
-
 import LoginStore from '../../stores/LoginStore';
 import ValidatorMixin from '../../utils/ValidatorMixin';
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import FlashMessages from '../Utils/FlashMessages';
 import Input from '../Form/Input';
-import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
+
+const Button = ReactBootstrap.Button;
+const Modal = ReactBootstrap.Modal;
 
 const OpinionSourceForm = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
     categories: React.PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin, ValidatorMixin],
+  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, ValidatorMixin],
 
   getInitialState() {
     return {

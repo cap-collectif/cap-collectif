@@ -1,15 +1,14 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import LoginStore from '../../../stores/LoginStore';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import {Button} from 'react-bootstrap';
+
+const Button = ReactBootstrap.Button;
 
 const ProposalCreateButton = React.createClass({
   propTypes: {
     handleClick: React.PropTypes.func.isRequired,
     disabled: React.PropTypes.bool.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   onClick() {
     if (!this.props.disabled && LoginStore.isLoggedIn()) {

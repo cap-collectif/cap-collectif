@@ -1,6 +1,9 @@
-import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
-import {ProgressBar, OverlayTrigger, Tooltip} from 'react-bootstrap';
+const ProgressBar = ReactBootstrap.ProgressBar;
+const OverlayTrigger = ReactBootstrap.OverlayTrigger;
+const Tooltip = ReactBootstrap.Tooltip;
+
+
+const FormattedMessage = ReactIntl.FormattedMessage;
 
 const VotesBar = React.createClass({
   propTypes: {
@@ -10,7 +13,7 @@ const VotesBar = React.createClass({
     value: React.PropTypes.number.isRequired,
     helpText: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   renderBar() {
     const bar = <ProgressBar style={{marginBottom: '5px'}} bsStyle="success" max={this.props.max} now={this.props.value} label="%(percent)s%" />;

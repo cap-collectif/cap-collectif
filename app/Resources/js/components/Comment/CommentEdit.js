@@ -1,11 +1,8 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-
 const CommentEdit = React.createClass({
   propTypes: {
     comment: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   render() {
     if (this.props.comment.can_edit) {

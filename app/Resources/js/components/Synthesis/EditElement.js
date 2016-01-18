@@ -1,7 +1,3 @@
-import React from 'react';
-import {IntlMixin, FormattedDate} from 'react-intl';
-import moment from 'moment';
-
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import Loader from '../Utils/Loader';
@@ -14,12 +10,14 @@ import IgnoreButton from './IgnoreButton';
 import PublishModal from './PublishModal';
 import DivideModal from './DivideModal';
 
+const FormattedDate = ReactIntl.FormattedDate;
+
 const EditElement = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
     params: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {

@@ -1,13 +1,10 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import classNames from 'classnames';
 import UserAvatar from '../User/UserAvatar';
 
 const OpinionAnswer = React.createClass({
   propTypes: {
     answer: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   render() {
     const answer = this.props.answer;

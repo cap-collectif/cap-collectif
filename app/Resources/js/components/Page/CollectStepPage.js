@@ -1,6 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-
 import ProposalStore from '../../stores/ProposalStore';
 import ProposalActions from '../../actions/ProposalActions';
 import {PROPOSAL_PAGINATION} from '../../constants/ProposalConstants';
@@ -20,7 +17,7 @@ const CollectStepPage = React.createClass({
     districts: React.PropTypes.array.isRequired,
     types: React.PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {

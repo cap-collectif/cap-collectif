@@ -1,13 +1,12 @@
-import React from 'react';
-import {IntlMixin, FormattedDate, FormattedMessage} from 'react-intl';
-import moment from 'moment';
+const FormattedDate = ReactIntl.FormattedDate;
+const FormattedMessage = ReactIntl.FormattedMessage;
 
 const DatesInterval = React.createClass({
   propTypes: {
     startAt: React.PropTypes.string.isRequired,
     endAt: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

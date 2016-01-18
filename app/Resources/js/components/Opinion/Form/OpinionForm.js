@@ -1,5 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
@@ -17,7 +15,7 @@ const OpinionForm = React.createClass({
     onSubmitSuccess: React.PropTypes.func.isRequired,
     onSubmitFailure: React.PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
+  mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getInitialState() {
     return {
@@ -162,7 +160,6 @@ const OpinionForm = React.createClass({
               <Input
                 key={key}
                 id={'opinion_' + key}
-                key={key}
                 type="editor"
                 label={appendixType.title}
                 groupClassName={this.getGroupStyle(key)}

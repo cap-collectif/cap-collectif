@@ -1,5 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import Fetcher from '../../services/Fetcher';
 import ViewBox from './ViewBox';
 import EditBox from './EditBox';
@@ -12,7 +10,7 @@ const SynthesisBox = React.createClass({
     mode: React.PropTypes.string,
     synthesis_id: React.PropTypes.string.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {

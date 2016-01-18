@@ -1,7 +1,3 @@
-import React from 'react';
-import {Row, Col} from 'react-bootstrap';
-import classNames from 'classnames';
-import {IntlMixin} from 'react-intl';
 import ProposalPageHeader from './ProposalPageHeader';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageAnswer from './ProposalPageAnswer';
@@ -13,6 +9,9 @@ import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteSidebar from '../Vote/ProposalVoteSidebar';
 import FlashMessages from '../../Utils/FlashMessages';
 
+const Row = ReactBootstrap.Row;
+const Col = ReactBootstrap.Col;
+
 const ProposalPage = React.createClass({
   propTypes: {
     form: React.PropTypes.object.isRequired,
@@ -23,7 +22,7 @@ const ProposalPage = React.createClass({
     votableStep: React.PropTypes.object,
     userHasVote: React.PropTypes.bool.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

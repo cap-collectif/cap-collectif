@@ -1,13 +1,11 @@
-import React from 'react';
-import {Button} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+const Button = ReactBootstrap.Button;
 
 const CloseButton = React.createClass({
   propTypes: {
     onClose: React.PropTypes.func.isRequired,
     label: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

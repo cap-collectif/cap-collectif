@@ -46,6 +46,7 @@ def phpspec():
 def behat(fast_failure='true', profile=False, tags='false', feature='false'):
     "Run Gerhkin Tests"
     if not env.lxc:
+        env.service_command('docker pull capco/fixtures:latest', 'application')
         env.compose('up -d --force-recreate database')
         time.sleep(2)
     if env.ci:

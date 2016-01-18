@@ -1,19 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Row, Col} from 'react-bootstrap';
-import {IntlMixin, FormattedMessage} from 'react-intl';
 import OpinionStore from '../../stores/OpinionStore';
 import OpinionActions from '../../actions/OpinionActions';
+
 import OpinionArgumentItem from './OpinionArgumentItem';
 import Loader from '../Utils/Loader';
-import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
+
+const FormattedMessage = ReactIntl.FormattedMessage;
+
+const Col = ReactBootstrap.Col;
+const Row = ReactBootstrap.Row;
 
 const OpinionArgumentList = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
     type: React.PropTypes.string.isRequired,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin],
+  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
 
   getInitialState() {
     return {
@@ -52,7 +53,7 @@ const OpinionArgumentList = React.createClass({
 
   updateSelectedValue() {
     this.setState({
-      filter: $(ReactDOM.findDOMNode(this.refs.filter)).val(),
+      filter: $(React.findDOMNode(this.refs.filter)).val(),
       isLoading: true,
       arguments: [],
     });

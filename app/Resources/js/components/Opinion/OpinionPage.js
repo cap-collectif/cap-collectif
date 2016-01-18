@@ -1,5 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import OpinionStore from '../../stores/OpinionStore';
 import OpinionActions from '../../actions/OpinionActions';
 import FlashMessages from '../Utils/FlashMessages';
@@ -13,7 +11,7 @@ const OpinionPage = React.createClass({
     opinionId: React.PropTypes.number.isRequired,
     versionId: React.PropTypes.number,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {

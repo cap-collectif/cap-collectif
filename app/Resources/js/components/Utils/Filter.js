@@ -1,5 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 
 const Filter = React.createClass({
   propTypes: {
@@ -7,7 +5,7 @@ const Filter = React.createClass({
     values: React.PropTypes.array,
     onChange: React.PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

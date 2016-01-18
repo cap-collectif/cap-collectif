@@ -1,17 +1,15 @@
-import React from 'react';
-import {IntlMixin, FormattedDate} from 'react-intl';
-import classNames from 'classnames';
-import moment from 'moment';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import OpinionArgumentButtons from './OpinionArgumentButtons';
 import AutoLinkText from '../Utils/AutoLinkText';
 
+const FormattedDate = ReactIntl.FormattedDate;
+
 const OpinionArgumentItem = React.createClass({
   propTypes: {
     argument: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   renderDate() {
     const argument = this.props.argument;
@@ -34,7 +32,7 @@ const OpinionArgumentItem = React.createClass({
     const classes = classNames({
       'opinion': true,
       'opinion--argument': true,
-      'bg-vip': argument.author.vip,
+      'bg-vip': argument.author && argument.author.vip,
     });
     return (
       <li className={classes} id={'arg-' + argument.id}>

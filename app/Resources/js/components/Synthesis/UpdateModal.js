@@ -1,10 +1,10 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import ElementsFinder from './ElementsFinder';
-import {Button, Modal, Input} from 'react-bootstrap';
-import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
+
+const Button = ReactBootstrap.Button;
+const Modal = ReactBootstrap.Modal;
+const Input = ReactBootstrap.Input;
 
 const UpdateModal = React.createClass({
   propTypes: {
@@ -14,7 +14,7 @@ const UpdateModal = React.createClass({
     toggle: React.PropTypes.func.isRequired,
     process: React.PropTypes.func,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin],
+  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin],
 
   getDefaultProps() {
     return {

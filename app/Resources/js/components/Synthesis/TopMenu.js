@@ -1,13 +1,11 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Nav} from 'react-bootstrap';
-import {NavItemLink} from 'react-router-bootstrap';
+const Nav = ReactBootstrap.Nav;
+const NavItemLink = ReactRouterBootstrap.NavItemLink;
 
 const TopMenu = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getMenuItems() {
     return [

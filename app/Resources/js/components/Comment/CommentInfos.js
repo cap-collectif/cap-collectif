@@ -1,12 +1,10 @@
-import React from 'react';
-import {IntlMixin, FormattedDate} from 'react-intl';
-import moment from 'moment';
+const FormattedDate = ReactIntl.FormattedDate;
 
 const CommentInfos = React.createClass({
   propTypes: {
     comment: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   renderDate() {
     if (!Modernizr.intl) {

@@ -1,5 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
 import LoginStore from '../../../stores/LoginStore';
 import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
@@ -18,7 +16,7 @@ const ProposalVoteBox = React.createClass({
     onSubmitFailure: React.PropTypes.func,
     onValidationFailure: React.PropTypes.func,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

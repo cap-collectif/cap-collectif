@@ -1,7 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import ReactDOM from 'react-dom';
-
 const VoteLinechart = React.createClass({
   propTypes: {
     history: React.PropTypes.array.isRequired,
@@ -10,7 +6,7 @@ const VoteLinechart = React.createClass({
     top: React.PropTypes.number,
     left: React.PropTypes.number,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
@@ -59,7 +55,7 @@ const VoteLinechart = React.createClass({
       theme: 'maximized',
     };
 
-    (new AreaChart(ReactDOM.findDOMNode(this.refs.linechart)))
+    (new AreaChart(React.findDOMNode(this.refs.linechart)))
       .draw(new DataTable(lines), options);
   },
 

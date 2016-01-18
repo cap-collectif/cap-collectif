@@ -1,12 +1,9 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-
 const ElementNotation = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
     classes: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getNotationStarsClasses() {
     const notation = this.props.element.notation;

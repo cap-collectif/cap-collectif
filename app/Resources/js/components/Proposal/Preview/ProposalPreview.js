@@ -1,19 +1,16 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Col} from 'react-bootstrap';
-import classNames from 'classnames';
-
 import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewButtons from './ProposalPreviewButtons';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
+
+const Col = ReactBootstrap.Col;
 
 const ProposalPreview = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     selectionStepId: React.PropTypes.number,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

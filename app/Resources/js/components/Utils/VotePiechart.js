@@ -1,7 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import ReactDOM from 'react-dom';
-
 const VotePiechart = React.createClass({
   propTypes: {
     ok: React.PropTypes.number,
@@ -12,7 +8,7 @@ const VotePiechart = React.createClass({
     top: React.PropTypes.number,
     left: React.PropTypes.number,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {
@@ -35,13 +31,13 @@ const VotePiechart = React.createClass({
   },
 
   initChart() {
-    if (!ReactDOM.findDOMNode(this.refs.piechart)) {
+    if (!React.findDOMNode(this.refs.piechart)) {
       return;
     }
     const PieChart = google.visualization.PieChart;
     const DataTable = google.visualization.arrayToDataTable;
 
-    (new PieChart(ReactDOM.findDOMNode(this.refs.piechart))).draw(
+    (new PieChart(React.findDOMNode(this.refs.piechart))).draw(
       new DataTable([
         [{type: 'string'}, {type: 'number'}],
         [this.getIntlMessage('vote.ok'), this.props.ok],

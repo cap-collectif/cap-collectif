@@ -1,6 +1,4 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Button} from 'react-bootstrap';
+const Button = ReactBootstrap.Button;
 import UpdateModal from './UpdateModal';
 
 const UpdateButton = React.createClass({
@@ -8,7 +6,7 @@ const UpdateButton = React.createClass({
     synthesis: React.PropTypes.object.isRequired,
     element: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return ({

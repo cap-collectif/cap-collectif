@@ -1,12 +1,10 @@
-import React from 'react';
 import AutoLinkText from '../Utils/AutoLinkText';
-import {IntlMixin} from 'react-intl';
 
 const CommentBody = React.createClass({
   propTypes: {
     comment: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {

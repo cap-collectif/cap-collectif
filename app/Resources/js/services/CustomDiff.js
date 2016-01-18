@@ -1,5 +1,3 @@
-import {Diff} from 'diff';
-
 function removeEmpty(array) {
   const ret = [];
   for (let i = 0; i < array.length; i++) {
@@ -44,7 +42,7 @@ function escapeChars(text) {
     ;
 }
 
-class CustomDiff extends Diff {
+class CustomDiff extends JsDiff.Diff {
 
   tokenize = function tokenize(value) {
     let strippedValue = strip(value);

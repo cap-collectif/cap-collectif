@@ -1,7 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Row, Col} from 'react-bootstrap';
-import {IntlMixin, FormattedMessage} from 'react-intl';
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 import CommentActions from '../../actions/CommentActions';
@@ -9,6 +5,9 @@ import CommentStore from '../../stores/CommentStore';
 import Loader from '../Utils/Loader';
 import FlashMessages from '../Utils/FlashMessages';
 
+const Row = ReactBootstrap.Row;
+const Col = ReactBootstrap.Col;
+const FormattedMessage = ReactIntl.FormattedMessage;
 const MessagePagination = 10;
 
 const CommentSection = React.createClass({
@@ -16,7 +15,7 @@ const CommentSection = React.createClass({
     uri: React.PropTypes.string,
     object: React.PropTypes.number,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getInitialState() {
     return {
@@ -83,7 +82,7 @@ const CommentSection = React.createClass({
 
   updateSelectedValue() {
     this.setState({
-      filter: $(ReactDOM.findDOMNode(this.refs.filter)).val(),
+      filter: $(React.findDOMNode(this.refs.filter)).val(),
       isLoading: true,
       comments: [],
     });
@@ -100,14 +99,14 @@ const CommentSection = React.createClass({
   },
 
   resetLoadMoreButton() {
-    const loadMoreButton = ReactDOM.findDOMNode(this.refs.loadMore);
+    const loadMoreButton = React.findDOMNode(this.refs.loadMore);
     if (loadMoreButton) {
       $(loadMoreButton).button('reset');
     }
   },
 
   loadMore() {
-    $(ReactDOM.findDOMNode(this.refs.loadMore)).button('loading');
+    $(React.findDOMNode(this.refs.loadMore)).button('loading');
     this.setState({
       isLoadingMore: true,
       limit: this.state.limit + MessagePagination,

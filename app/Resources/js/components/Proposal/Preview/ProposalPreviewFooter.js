@@ -1,13 +1,11 @@
-import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
-import classNames from 'classnames';
+const FormattedMessage = ReactIntl.FormattedMessage;
 
 const ProposalPreviewFooter = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     selectionStepId: React.PropTypes.number,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   getDefaultProps() {
     return {

@@ -1,6 +1,3 @@
-import React from 'react';
-import {IntlMixin} from 'react-intl';
-import classNames from 'classnames';
 import Comment from './Comment';
 
 const CommentList = React.createClass({
@@ -8,7 +5,7 @@ const CommentList = React.createClass({
     root: React.PropTypes.bool,
     comments: React.PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [ReactIntl.IntlMixin],
 
   render() {
     if (this.props.comments.length === 0) {
