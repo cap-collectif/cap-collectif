@@ -32,6 +32,9 @@ RUN curl https://deb.nodesource.com/node_5.x/pool/main/n/nodejs/nodejs_5.1.1-1no
     dpkg -i node.deb && \
     rm node.deb
 
+# Rollback to npm2
+RUN npm install -g npm@2
+
 # Update npm and install brunch / bower
 RUN npm install -g bower brunch
 
