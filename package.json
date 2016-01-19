@@ -32,7 +32,6 @@
     "events": "^1.1.0",
     "fancybox": "^3.0.0",
     "flux": "^2.1.1",
-    "history": "^1.17.0",
     "javascript-brunch": "^1.7.1",
     "jquery": "^2.2.0",
     "jquery-minicolors": "^2.1.10",
