@@ -8,7 +8,7 @@ if [ "$PRODUCTION" ]; then
   php vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php var
 
   # Frontend deps
-  npm install --production
+  npm --quiet install --production
   npm rebuild node-sass
   bower install --config.interactive=false --allow-root --config.storage.cache=/home/capco/.cache/bower
   brunch build --production
