@@ -34,7 +34,7 @@ const OpinionArgumentItem = React.createClass({
     const classes = classNames({
       'opinion': true,
       'opinion--argument': true,
-      'bg-vip': argument.author.vip,
+      'bg-vip': argument.author && argument.author.vip,
     });
     return (
       <li className={classes} id={'arg-' + argument.id}>
