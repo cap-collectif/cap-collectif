@@ -32,11 +32,11 @@ RUN curl https://deb.nodesource.com/node_5.x/pool/main/n/nodejs/nodejs_5.1.1-1no
     dpkg -i node.deb && \
     rm node.deb
 
-# Workaround for this: https://github.com/npm/npm/issues/9863
+# workaround for this: https://github.com/npm/npm/issues/9863
 RUN rm -rf /usr/local/lib/node_modules/npm \
  && git clone https://github.com/DIREKTSPEED-LTD/npm /usr/local/lib/node_modules/npm \
  && rm -rf /usr/local/lib/node_modules/npm/.git \
- && rm -f /usr/local/bin/npm \
+ && rm -f  /usr/bin/npm \
  && ln -s -f /usr/local/bin/npm /usr/bin/npm \
  && cd /usr/local/lib/node_modules/npm \
  && npm install
