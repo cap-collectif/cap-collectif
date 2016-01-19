@@ -1,16 +1,15 @@
+import React from 'react';
+import {Row, Col} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
 import {COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH} from '../../constants/ArgumentConstants';
-
 import OpinionArgumentList from './OpinionArgumentList';
 import OpinionArgumentForm from './OpinionArgumentForm';
-
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
 
 const OpinionArgumentsBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getCommentSystem() {
     return this.props.opinion.parent ? this.props.opinion.parent.type.commentSystem : this.props.opinion.type.commentSystem;

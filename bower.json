@@ -16,54 +16,21 @@
     "tests"
   ],
   "dependencies": {
-    "jquery-minicolors": "~2.1.10",
-    "fancybox": "~2.1.5",
-    "readmore": "*",
     "ckeditor": "#full/4.4.7",
     "compass-mixins": "~1.0.2",
-    "mailcheck": "~1.1.0",
-    "react": "~0.13.3",
-    "flux": "~2.0.2",
-    "eventEmitter": "~4.2.11",
-    "fetch": "~0.9.0",
     "react-intl": "~1.2.0",
-    "autosize": "~3.0.6",
     "css-spinners": "~2.1.0",
     "es6-promise": "~2.2.0",
-    "react-router": "0.13.3",
-    "react-bootstrap": "v0.25.2",
-    "classnames": "~2.1.3",
-    "jsdiff": "~1.4.0",
-    "bootstrap-sass": "~3.3.5",
-    "moment": "~2.10.6",
-    "react-router-bootstrap": "v0.18.1",
-    "quill": "~0.20.0"
-  },
-  "resolutions": {
-    "react": "0.13.3"
+    "fetch": "~0.10.1",
+    "bootstrap-sass": "~3.3.6",
+    "Readmore.js": "readmore#~2.1.0"
   },
   "overrides": {
-    "quill": {
-      "main": [
-        "dist/quill.js",
-        "dist/quill.base.css",
-        "dist/quill.snow.css"
-      ]
-    },
     "fancybox": {
       "main": "source/jquery.fancybox.pack.js"
     },
     "ckeditor": {
       "main": "ckeditor.js"
-    },
-    "mailcheck": {
-      "scripts": []
-    },
-    "readmore": {
-      "main": "readmore.js"
-    },
-    "react": {
-      "main": "react-with-addons.js"
     },
     "intl": {
       "main": [
@@ -72,13 +39,7 @@
       ]
     },
     "react-intl": {
-      "main": [
-        "dist/react-intl.js",
-        "dist/locale-data/fr.js"
-      ]
-    },
-    "react-router-bootstrap": {
-      "main": "lib/ReactRouterBootstrap.js"
+      "main": []
     }
   }
 }

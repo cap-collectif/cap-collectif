@@ -1,4 +1,6 @@
-const Alert = ReactBootstrap.Alert;
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import {Alert} from 'react-bootstrap';
 
 const FlashMessages = React.createClass({
   propTypes: {
@@ -9,7 +11,7 @@ const FlashMessages = React.createClass({
     onDismissMessage: React.PropTypes.func,
     translate: React.PropTypes.bool,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

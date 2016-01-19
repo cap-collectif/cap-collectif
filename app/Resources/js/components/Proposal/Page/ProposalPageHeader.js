@@ -1,17 +1,18 @@
+import React from 'react';
+import {IntlMixin, FormattedMessage, FormattedDate} from 'react-intl';
+import {Label} from 'react-bootstrap';
+import classNames from 'classnames';
+import moment from 'moment';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
-
-const FormattedDate = ReactIntl.FormattedDate;
-const FormattedMessage = ReactIntl.FormattedMessage;
-const Label = ReactBootstrap.Label;
 
 const ProposalPageHeader = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

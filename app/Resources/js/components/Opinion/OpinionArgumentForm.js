@@ -1,3 +1,10 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {IntlMixin} from 'react-intl';
+import {Button} from 'react-bootstrap';
+import autosize from 'autosize';
+
+import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 import LoginStore from '../../stores/LoginStore';
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
@@ -5,14 +12,12 @@ import ValidatorMixin from '../../utils/ValidatorMixin';
 import FlashMessages from '../Utils/FlashMessages';
 import Input from '../Form/Input';
 
-const Button = ReactBootstrap.Button;
-
 const OpinionArgumentForm = React.createClass({
   propTypes: {
     type: React.PropTypes.string.isRequired,
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, ValidatorMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, ValidatorMixin],
 
   getInitialState() {
     return {
@@ -32,7 +37,7 @@ const OpinionArgumentForm = React.createClass({
   },
 
   componentDidUpdate() {
-    autosize(React.findDOMNode(this.refs.body).querySelector('textarea'));
+    autosize(ReactDOM.findDOMNode(this.refs.body).querySelector('textarea'));
   },
 
   create() {
@@ -52,7 +57,7 @@ const OpinionArgumentForm = React.createClass({
         .addArgument(this.props.opinion, data)
         .then(() => {
           this.setState(this.getInitialState());
-          autosize.destroy(React.findDOMNode(this.refs.body));
+          autosize.destroy(ReactDOM.findDOMNode(this.refs.body));
           return true;
         })
         .catch(() => {

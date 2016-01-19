@@ -1,9 +1,10 @@
-const Navbar = ReactBootstrap.Navbar;
-const Nav = ReactBootstrap.Nav;
-const NavItemLink = ReactRouterBootstrap.NavItemLink;
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import {Nav, Navbar} from 'react-bootstrap';
+import {NavItemLink} from 'react-router';
 
 const SecondNavbar = React.createClass({
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   render() {
     return (

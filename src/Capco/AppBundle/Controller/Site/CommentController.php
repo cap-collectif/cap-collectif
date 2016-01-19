@@ -142,7 +142,7 @@ class CommentController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        if (!$comment->canVote()) {
+        if (false == $comment->canContribute()) {
             throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
         }
 

@@ -1,15 +1,14 @@
+import React from 'react';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
-
-const Button = ReactBootstrap.Button;
-const Modal = ReactBootstrap.Modal;
-const FormattedMessage = ReactIntl.FormattedMessage;
+import {Button, Modal} from 'react-bootstrap';
+import {IntlMixin, FormattedMessage} from 'react-intl';
 
 const IgnoreButton = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
     element: React.PropTypes.object,
   },
-  mixins: [ReactIntl.IntlMixin, ReactRouter.Navigation],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

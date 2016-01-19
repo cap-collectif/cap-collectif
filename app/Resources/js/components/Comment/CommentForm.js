@@ -1,12 +1,17 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {IntlMixin} from 'react-intl';
+import classNames from 'classnames';
+import autosize from 'autosize';
+
 import UserAvatar from '../User/UserAvatar';
 import LoginStore from '../../stores/LoginStore';
 import FlashMessages from '../Utils/FlashMessages';
 import ValidatorMixin from '../../utils/ValidatorMixin';
+import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 import Input from '../Form/Input';
+import {Row, Col, Button} from 'react-bootstrap';
 
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
-const Button = ReactBootstrap.Button;
 
 const CommentForm = React.createClass({
   propTypes: {
@@ -14,7 +19,7 @@ const CommentForm = React.createClass({
     focus: React.PropTypes.bool,
     comment: React.PropTypes.func,
   },
-  mixins: [ReactIntl.IntlMixin, React.addons.LinkedStateMixin, ValidatorMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, ValidatorMixin],
 
   getDefaultProps() {
     return {
@@ -34,7 +39,7 @@ const CommentForm = React.createClass({
 
   componentDidMount() {
     if (this.props.focus) {
-      React.findDOMNode(this.refs.body).focus();
+      ReactDOM.findDOMNode(this.refs.body).focus();
     }
     const constraints = LoginStore.isLoggedIn() ?
       {
@@ -63,18 +68,24 @@ const CommentForm = React.createClass({
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.focus) {
-      React.findDOMNode(this.refs.body).focus();
+      ReactDOM.findDOMNode(this.refs.body).focus();
       this.setState({'expanded': true});
     }
   },
 
   componentDidUpdate() {
-    autosize(React.findDOMNode(this.refs.body));
+    autosize(ReactDOM.findDOMNode(this.refs.body));
+  },
+
+  getFormClasses() {
+    return classNames({
+      'comment-answer-form': this.props.isAnswer,
+    });
   },
 
   expand(newState) {
     if (!newState) {
-      const $block = $(React.findDOMNode(this.refs.commentBlock));
+      const $block = $(ReactDOM.findDOMNode(this.refs.commentBlock));
       if (event.relatedTarget && ($(event.relatedTarget).is($block) || $block.has($(event.relatedTarget)).length)) {
         return; // clicked on an element inside comment block
       }
@@ -105,7 +116,7 @@ const CommentForm = React.createClass({
       this.props.comment(data)
       .then(() => {
         this.setState(this.getInitialState());
-        autosize.destroy(React.findDOMNode(this.refs.body));
+        autosize.destroy(ReactDOM.findDOMNode(this.refs.body));
       })
       .catch(() => {
         this.setState({isSubmitting: false, submitted: false});

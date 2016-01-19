@@ -1,4 +1,6 @@
-const Link = ReactRouter.Link;
+import React from 'react';
+import {Link} from 'react-router';
+import {IntlMixin} from 'react-intl';
 
 const ElementTitle = React.createClass({
   propTypes: {
@@ -9,7 +11,7 @@ const ElementTitle = React.createClass({
     style: React.PropTypes.object,
     onClick: React.PropTypes.func,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

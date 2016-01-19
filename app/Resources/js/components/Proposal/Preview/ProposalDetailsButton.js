@@ -1,11 +1,14 @@
-const Button = ReactBootstrap.Button;
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import {Button} from 'react-bootstrap';
+import classNames from 'classnames';
 
 const ProposalDetailsButton = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

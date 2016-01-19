@@ -1,16 +1,15 @@
-import CustomDiff from '../../services/CustomDiff';
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 
-const Modal = ReactBootstrap.Modal;
-const Button = ReactBootstrap.Button;
-const OverlayTrigger = ReactBootstrap.OverlayTrigger;
-const Tooltip = ReactBootstrap.Tooltip;
+import CustomDiff from '../../services/CustomDiff';
 
 const OpinionBodyDiffModal = React.createClass({
   propTypes: {
     link: React.PropTypes.string.isRequired,
     modal: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return { showModal: false };

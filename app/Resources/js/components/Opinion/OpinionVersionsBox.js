@@ -1,17 +1,19 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Row, Col} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
+
 import OpinionVersionList from './OpinionVersionList';
 import OpinionVersionForm from './OpinionVersionForm';
 import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
-
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
 
 const OpinionVersionsBox = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
     opinionBody: React.PropTypes.string.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -35,7 +37,7 @@ const OpinionVersionsBox = React.createClass({
 
   updateSelectedValue() {
     this.setState({
-      filter: $(React.findDOMNode(this.refs.filter)).val(),
+      filter: $(ReactDOM.findDOMNode(this.refs.filter)).val(),
       isLoading: true,
       versions: [],
     });

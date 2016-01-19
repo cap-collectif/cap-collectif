@@ -1,14 +1,13 @@
-const Button = ReactBootstrap.Button;
-const Panel = ReactBootstrap.Panel;
-
-const FormattedMessage = ReactIntl.FormattedMessage;
+import React from 'react';
+import {IntlMixin, FormattedMessage} from 'react-intl';
+import {Button, Panel} from 'react-bootstrap';
 
 const OpinionAppendix = React.createClass({
   propTypes: {
     appendix: React.PropTypes.object.isRequired,
     expanded: React.PropTypes.bool,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

@@ -1,3 +1,5 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
@@ -15,7 +17,7 @@ const ProposalVoteForm = React.createClass({
     onSubmitFailure: React.PropTypes.func.isRequired,
     userHasVote: React.PropTypes.bool,
   },
-  mixins: [ReactIntl.IntlMixin, DeepLinkStateMixin, FormMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {

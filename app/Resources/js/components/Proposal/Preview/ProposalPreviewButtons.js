@@ -1,15 +1,15 @@
 import ProposalVoteButton from '../Vote/ProposalVoteButton';
 import ProposalDetailsButton from './ProposalDetailsButton';
-
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
+import React from 'react';
+import {Row, Col} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
 
 const ProposalPreviewButtons = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     selectionStepId: React.PropTypes.number,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

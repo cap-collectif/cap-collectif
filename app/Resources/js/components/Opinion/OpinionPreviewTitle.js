@@ -1,3 +1,4 @@
+import React from 'react';
 import OpinionTypeLabel from './OpinionTypeLabel';
 
 export default class OpinionPreviewTitle extends React.Component {

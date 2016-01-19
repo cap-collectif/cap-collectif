@@ -1,13 +1,14 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import OpinionPreview from '../OpinionPreview';
-
-const Row = ReactBootstrap.Row;
-const Col = ReactBootstrap.Col;
+import {Row, Col} from 'react-bootstrap';
+import classNames from 'classnames';
 
 const OpinionLink = React.createClass({
   propTypes: {
     link: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   render() {
     const link = this.props.link;

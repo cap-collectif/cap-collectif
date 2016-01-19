@@ -1,8 +1,11 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+
 const OpinionLinkCreateInfos = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   render() {
     return (

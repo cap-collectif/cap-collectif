@@ -1,3 +1,6 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import classNames from 'classnames';
 import UserAvatar from '../User/UserAvatar';
 import CommentInfos from './CommentInfos';
 import CommentBody from './CommentBody';
@@ -16,7 +19,7 @@ const Comment = React.createClass({
     comment: React.PropTypes.object,
     root: React.PropTypes.bool,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     if (this.props.comment.answers.length > 0) {

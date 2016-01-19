@@ -1,3 +1,6 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
+import classNames from 'classnames';
 import LoginStore from '../../stores/LoginStore';
 
 const EditButton = React.createClass({
@@ -8,7 +11,7 @@ const EditButton = React.createClass({
     style: React.PropTypes.object,
     editable: React.PropTypes.bool,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

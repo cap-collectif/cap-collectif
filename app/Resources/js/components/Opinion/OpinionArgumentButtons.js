@@ -1,16 +1,17 @@
+import React from 'react';
+import {Button} from 'react-bootstrap';
+import {IntlMixin} from 'react-intl';
 import ArgumentActions from '../../actions/ArgumentActions';
 import LoginStore from '../../stores/LoginStore';
 import LoginOverlay from '../Utils/LoginOverlay';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import OpinionArgumentReportButton from './OpinionArgumentReportButton';
 
-const Button = ReactBootstrap.Button;
-
 const OpinionArgumentButtons = React.createClass({
   propTypes: {
     argument: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

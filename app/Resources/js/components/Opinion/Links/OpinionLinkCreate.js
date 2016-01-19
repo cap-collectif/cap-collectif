@@ -1,3 +1,5 @@
+import React from 'react';
+import {IntlMixin} from 'react-intl';
 import OpinionLinkCreateButton from './OpinionLinkCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
@@ -5,14 +7,13 @@ import OpinionLinkCreateInfos from './OpinionLinkCreateInfos';
 import OpinionForm from './../Form/OpinionForm';
 import OpinionTypeActions from '../../../actions/OpinionTypeActions';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
-
-const Modal = ReactBootstrap.Modal;
+import {Modal} from 'react-bootstrap';
 
 const OpinionLinkCreate = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

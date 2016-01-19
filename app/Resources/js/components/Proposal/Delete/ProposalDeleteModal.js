@@ -1,9 +1,9 @@
+import React from 'react';
+import {IntlMixin, FormattedMessage} from 'react-intl';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalActions from '../../../actions/ProposalActions';
-
-const Modal = ReactBootstrap.Modal;
-const FormattedMessage = ReactIntl.FormattedMessage;
+import {Modal} from 'react-bootstrap';
 
 const ProposalDeleteModal = React.createClass({
   propTypes: {
@@ -12,7 +12,7 @@ const ProposalDeleteModal = React.createClass({
     show: React.PropTypes.bool.isRequired,
     onToggleModal: React.PropTypes.func.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {

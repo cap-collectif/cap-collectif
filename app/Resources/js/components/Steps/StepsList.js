@@ -1,3 +1,4 @@
+import React from 'react';
 import StepPreview from './StepPreview';
 
 const StepsList = React.createClass({

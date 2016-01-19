@@ -1,12 +1,12 @@
+import React from 'react';
+import { DefaultRoute, Route } from 'react-router';
+
 import SynthesisBox from './components/Synthesis/SynthesisBox';
 import ElementsInbox from './components/Synthesis/ElementsInbox';
 import ElementsSearch from './components/Synthesis/ElementsSearch';
 import FolderManager from './components/Synthesis/FolderManager';
 import EditElement from './components/Synthesis/EditElement';
 import Preview from './components/Synthesis/Preview';
-
-const Route = ReactRouter.Route;
-const DefaultRoute = ReactRouter.DefaultRoute;
 
 const RedirectToDefaultInbox = React.createClass({
   statics: {

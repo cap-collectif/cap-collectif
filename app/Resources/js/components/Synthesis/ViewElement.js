@@ -1,12 +1,11 @@
+import React from 'react';
+import {IntlMixin, FormattedMessage} from 'react-intl';
 import ElementTitle from './ElementTitle';
 import UserAvatar from '../User/UserAvatar';
 import VotePiechart from '../Utils/VotePiechart';
 import ChildrenModal from './ChildrenModal';
 import SynthesisDisplayRules from '../../services/SynthesisDisplayRules';
-
-const FormattedMessage = ReactIntl.FormattedMessage;
-const OverlayTrigger = ReactBootstrap.OverlayTrigger;
-const Tooltip = ReactBootstrap.Tooltip;
+import {Tooltip, OverlayTrigger} from 'react-bootstrap';
 
 const ViewElement = React.createClass({
   propTypes: {
@@ -15,7 +14,7 @@ const ViewElement = React.createClass({
     settings: React.PropTypes.array.isRequired,
     onExpandElement: React.PropTypes.func.isRequired,
   },
-  mixins: [ReactIntl.IntlMixin],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

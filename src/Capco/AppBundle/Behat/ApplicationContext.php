@@ -134,7 +134,7 @@ class ApplicationContext extends UserContext
      */
     public function iSubmitAnArgument($type, $text)
     {
-        $this->getSession()->wait(1000);
+        $this->getSession()->wait(1200);
         $this->navigationContext->getPage('opinionPage')->submitArgument($type, $text);
     }
 
