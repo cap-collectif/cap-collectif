@@ -32,7 +32,11 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
         foreach ($steps as $cs) {
             $content = $resolver->getContent($cs, 'csv');
             $date = (new \DateTime())->format('Y-m-d');
-            $filename = $date.'_'.$cs->getProject()->getSlug().'_'.$cs->getSlug().'.csv';
+            $filename = $date . '_';
+            if ($cs->getProject()) {
+                $filename .= $cs->getProject()->getSlug() . '_';
+            }
+            $filename .= $cs->getSlug().'.csv';
             $path = $this->getContainer()->getParameter('kernel.root_dir');
             $fs->dumpFile($path.'/../web/export/'.$filename, $content);
             $output->writeln('The export file "'.$filename.'" has been created.');
