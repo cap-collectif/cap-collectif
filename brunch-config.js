@@ -3,8 +3,9 @@ exports.config = {
     production: {
       plugins: {
         off: ['eslint-brunch'],
-      }
-    }
+      },
+      sourceMaps: true,
+    },
   },
   npm: {
     enabled: true,

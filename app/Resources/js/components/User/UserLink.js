@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {PropTypes, Component} from 'react';
 
-export default class UserLink extends React.Component {
+export default class UserLink extends Component {
 
   render() {
-    return <a href={this.props.user._links.profile}>{this.props.user.displayName}</a>;
+    const {user} = this.props;
+    const url = user._links && user._links.profile ? user._links.profile : '#';
+    return <a href={url}>{user.displayName}</a>;
   }
 }
 
 UserLink.propTypes = {
-  user: React.PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };
