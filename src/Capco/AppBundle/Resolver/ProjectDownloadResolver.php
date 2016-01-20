@@ -164,9 +164,12 @@ class ProjectDownloadResolver
             throw new \Exception('Step must be of type collect or consultation');
         }
 
+        $title = $step->getProject() ? $step->getProject()->getTitle() + '_' : '';
+        $title .= $step->getTitle();
+
         $content = $this->templating->render('CapcoAppBundle:Project:download.xls.twig',
             [
-                'title' => $step->getProject()->getTitle().'_'.$step->getTitle(),
+                'title' => $title,
                 'format' => $format,
                 'sheets' => $this->sheets,
                 'headers' => $headers,
