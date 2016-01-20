@@ -17,7 +17,7 @@ const OpinionSource = React.createClass({
     const classes = classNames({
       'opinion': true,
       'block--bordered': true,
-      'bg-vip': source.author.vip,
+      'bg-vip': source.author && source.author.vip,
     });
     return (
       <li className={classes} id={'source-' + source.id}>

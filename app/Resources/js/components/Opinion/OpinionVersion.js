@@ -17,7 +17,7 @@ const OpinionVersion = React.createClass({
       'opinion': true,
       'block--bordered': true,
       'has-chart': true,
-      'bg-vip': version.author.vip,
+      'bg-vip': version.author && version.author.vip,
     });
     return (
       <li className={classes}>
