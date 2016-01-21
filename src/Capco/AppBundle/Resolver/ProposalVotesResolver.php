@@ -82,7 +82,7 @@ class ProposalVotesResolver
         if (!$selectionStep->isVotable()) {
             return false;
         }
-        if ($selectionStep->getVoteType() === SelectionStep::VOTE_TYPE_BUDGET && $project && $project->getBudget()) {
+        if ($selectionStep->isBudgetVotable() && $project && $project->getBudget()) {
             $left = $project->getBudget() - $this->getAmountSpentForVotes($otherVotes);
             return $left >= $proposal->getEstimation();
         }
@@ -110,13 +110,12 @@ class ProposalVotesResolver
             )
         ;
         return $this->getAmountSpentForVotes($votes);
-
     }
 
     public function getCreditsLeftForUser(User $user = null, SelectionStep $selectionStep)
     {
         $creditsLeft = $selectionStep->getProject()->getBudget();
-        if ($creditsLeft > 0 && $user && $selectionStep->getVoteType() === SelectionStep::VOTE_TYPE_BUDGET) {
+        if ($creditsLeft > 0 && $user && $selectionStep->isBudgetVotable()) {
             $creditsLeft -= $this
                 ->getSpentCreditsForUser($user, $selectionStep)
             ;

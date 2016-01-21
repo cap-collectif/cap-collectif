@@ -237,3 +237,15 @@ Feature: Proposal votes
     And I press "Soutenir"
     And I wait 1 seconds
     Then I should see "Vous devez être connecté pour réaliser cette action."
+
+  # Votes page
+  @javascript
+  Scenario: Logged in user wants to see his votes on a project and remove one
+    Given I am logged in as user
+    When I go to the votes details page
+    Then there should be 2 votes
+    And I should see "2 propositions sélectionnées"
+    And I remove the first vote
+    Then I should see "Merci, votre vote a bien été supprimé"
+    And I should see "1 proposition sélectionnée"
+    And there should be 1 votes

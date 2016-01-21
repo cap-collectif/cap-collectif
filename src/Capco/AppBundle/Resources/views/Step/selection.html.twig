@@ -1,5 +1,7 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
+{% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
+
 {% block canonical_link %}{{ url('app_project_show_selection', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block metaTags %}
@@ -25,6 +27,14 @@
 {% endblock %}
 
 {% block body %}
+
+{% if showVotesWidget %}
+    <div id="render-proposal-vote-basket-widget"
+         data-total-budget='{{ totalBudget|escape }}'
+         data-credits-left='{{ creditsLeft|escape }}'
+         data-votes-page-url='{{ url('app_project_show_user_votes', {'projectSlug': project.slug}, true) }}'
+    ></div>
+{% endif %}
 
 <div class="container  container--custom">
     {% include '@CapcoApp/Project/show_title.html.twig' %}

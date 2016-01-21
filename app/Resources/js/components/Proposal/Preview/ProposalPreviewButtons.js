@@ -4,6 +4,9 @@ import {VOTE_TYPE_DISABLED} from '../../../constants/ProposalConstants';
 import React from 'react';
 import {Row, Col} from 'react-bootstrap';
 import {IntlMixin} from 'react-intl';
+import ProposalPreviewVote from './ProposalPreviewVote';
+import ProposalDetailsButton from './ProposalDetailsButton';
+import {VOTE_TYPE_DISABLED} from '../../../constants/ProposalConstants';
 
 const ProposalPreviewButtons = React.createClass({
   propTypes: {

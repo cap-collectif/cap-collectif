@@ -97,6 +97,8 @@ class ProposalController extends Controller
             'votableStep' => $votableStep,
             'userHasVote' => $userHasVote,
             'remainingCredits' => $remainingCredits,
+            'totalBudget' => $project->getBudget(),
+            'showVotesWidget' => $votableStep && $this->getUser()
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

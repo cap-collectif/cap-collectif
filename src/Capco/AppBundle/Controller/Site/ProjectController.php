@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use JMS\Serializer\SerializationContext;
 
 class ProjectController extends Controller
 {
@@ -38,6 +40,73 @@ class ProjectController extends Controller
         return [
             'projects' => $projects,
         ];
+    }
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     * @Route("/projects/{projectSlug}/votes", name="app_project_show_user_votes")
+     * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
+     *
+     * @param Project     $project
+     */
+    public function showUserVotesAction(Project $project)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $serializer = $this->get('jms_serializer');
+
+        $votableSteps = $em
+            ->getRepository('CapcoAppBundle:Steps\SelectionStep')
+            ->getVotableStepsForProject($project)
+        ;
+        $firstVotableStep = null;
+        foreach ($votableSteps as $step) {
+            if ($step->isOpen()) {
+                $firstVotableStep = $step;
+                break;
+            }
+        }
+
+        $votableStep = $serializer->serialize([
+            'votableStep' => $firstVotableStep,
+        ], 'json', SerializationContext::create()->setGroups(['Steps']));
+
+        $districts = $serializer->serialize([
+            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Districts']));
+
+        $themes = $serializer->serialize([
+            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Themes']));
+
+        $userVotes = $serializer->serialize([
+            'votes' => $em
+                ->getRepository('CapcoAppBundle:ProposalVote')
+                ->getVotesForUserInProject($this->getUser(), $project)
+            ,
+        ], 'json', SerializationContext::create()->setGroups(['ProposalVotes', 'Proposals', 'Steps', 'UsersInfos']));
+
+        $creditsLeft = $this
+            ->get('capco.proposal_votes.resolver')
+            ->getCreditsLeftForUser($this->getUser(), $step)
+        ;
+
+        $response = $this->render('CapcoAppBundle:Project:show_user_votes.html.twig', [
+            'project' => $project,
+            'themes' => $themes,
+            'districts' => $districts,
+            'votes' => $userVotes,
+            'votableStep' => $votableStep,
+            'creditsLeft' => $creditsLeft,
+            'totalBudget' => $project->getBudget(),
+            'showVotesWidget' => $votableStep && $this->getUser(),
+        ]);
+
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
+            $response->setPublic();
+            $response->setSharedMaxAge(60);
+        }
+
+        return $response;
     }
 
     // Page project

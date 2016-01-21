@@ -349,7 +349,7 @@ class StepController extends Controller
             'statuses' => $em->getRepository('CapcoAppBundle:Status')->getByProject($project),
         ], 'json', SerializationContext::create()->setGroups(['Statuses']));
 
-        $remainingCredits = $this
+        $creditsLeft = $this
             ->get('capco.proposal_votes.resolver')
             ->getCreditsLeftForUser($this->getUser(), $step)
         ;
@@ -362,7 +362,9 @@ class StepController extends Controller
             'statuses' => $statuses,
             'districts' => $districts,
             'types' => $types,
-            'remainingCredits' => $remainingCredits,
+            'creditsLeft' => $creditsLeft,
+            'totalBudget' => $project->getBudget(),
+            'showVotesWidget' => $this->getUser(),
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

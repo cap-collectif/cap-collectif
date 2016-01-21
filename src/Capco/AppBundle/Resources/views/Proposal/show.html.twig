@@ -2,6 +2,8 @@
 
 {% block canonical_link %}{{ '' }}{% endblock %}
 
+{% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
+
 {% block title %}
     {{ parent() }} - {{ proposalTitle }}
 {% endblock %}
@@ -9,6 +11,14 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
+
+    {% if showVotesWidget %}
+        <div id="render-proposal-vote-basket-widget"
+             data-total-budget='{{ totalBudget|escape }}'
+             data-credits-left='{{ remainingCredits|escape }}'
+             data-votes-page-url='{{ url('app_project_show_user_votes', {'projectSlug': project.slug}, true) }}'
+        ></div>
+    {% endif %}
 
     <div id="render-proposal-page"
          data-proposal='{{ proposal|escape }}'

@@ -173,6 +173,11 @@ class SelectionStep extends AbstractStep
 
     public function isVotable()
     {
-        return $this->voteType === self::VOTE_TYPE_BUDGET || $this->voteType === self::VOTE_TYPE_SIMPLE;
+        return $this->voteType !== self::VOTE_TYPE_DISABLED;
+    }
+
+    public function isBudgetVotable()
+    {
+        return $this->voteType === self::VOTE_TYPE_BUDGET;
     }
 }

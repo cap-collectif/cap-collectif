@@ -22,6 +22,30 @@ Feature: Proposal Votes Restful Api
     }
     """
 
+  Scenario: Logged in API client wants to get all his votes
+    Given I am logged in to api as user
+    When I send a GET request to "/api/projects/6/user_votes"
+    Then the JSON response status code should be 200
+    And the JSON response should match:
+    """
+    {
+      "votes": [
+        {
+          "proposal": @...@,
+          "selectionStep": @...@,
+          "private": @boolean@
+        },
+        @...@
+      ],
+      "count": @integer@
+    }
+    """
+
+  @security
+  Scenario: Anonymous API client wants to get all his votes
+    When I send a GET request to "/api/projects/6/user_votes"
+    Then the JSON response status code should be 401
+
   @database
   Scenario: Logged in API client wants to vote and unvote for a proposal in a selection step
     Given I am logged in to api as user

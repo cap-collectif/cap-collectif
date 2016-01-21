@@ -9,6 +9,9 @@ import FeatureService from './services/FeatureService';
 import CollectStepPage from './components/Page/CollectStepPage';
 import SelectionStepPage from './components/Page/SelectionStepPage';
 import ProposalPage from './components/Proposal/Page/ProposalPage';
+import ProposalVoteBasketWidget from './components/Proposal/Vote/ProposalVoteBasketWidget';
+import ProposalsUserVotesPage from './components/Project/Page/ProposalsUserVotesPage';
+
 FeatureService.load();
 
 AuthService
@@ -92,6 +95,34 @@ AuthService
           {...IntlData}
         />,
         document.getElementById('render-selection-step-page')
+      );
+    }
+
+    if ($('#render-proposal-vote-basket-widget').length) {
+      React.render(
+        <ProposalVoteBasketWidget
+          totalBudget={$('#render-proposal-vote-basket-widget').data('total-budget')}
+          creditsLeft={$('#render-proposal-vote-basket-widget').data('credits-left')}
+          votesPageUrl={$('#render-proposal-vote-basket-widget').data('votes-page-url')}
+          {...IntlData}
+        />,
+        document.getElementById('render-proposal-vote-basket-widget')
+      );
+    }
+
+    if ($('#render-proposals-user-votes-page').length) {
+      React.render(
+        <ProposalsUserVotesPage
+          themes={$('#render-proposals-user-votes-page').data('themes').themes}
+          districts={$('#render-proposals-user-votes-page').data('districts').districts}
+          votes={$('#render-proposals-user-votes-page').data('votes').votes}
+          count={$('#render-proposals-user-votes-page').data('count')}
+          votableStep={$('#render-proposals-user-votes-page').data('votable-step').votableStep}
+          creditsLeft={$('#render-proposals-user-votes-page').data('credits-left')}
+          projectId={$('#render-proposals-user-votes-page').data('project-id')}
+          {...IntlData}
+        />,
+        document.getElementById('render-proposals-user-votes-page')
       );
     }
 

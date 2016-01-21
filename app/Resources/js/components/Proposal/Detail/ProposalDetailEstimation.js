@@ -14,7 +14,7 @@ const ProposalPreviewEstimation = React.createClass({
 
     return estimation
       ? <span>
-          <i className="cap cap-clip-2-1"></i>
+          <i className="cap cap-coins-2"></i>
           <FormattedNumber value={estimation} style="currency" currency="EUR" />
         </span>
       : null

@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -44,5 +46,23 @@ class ProposalVoteRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getVotesForUserInProject(User $user, Project $project)
+    {
+        $qb = $this->createQueryBuilder('pv')
+            ->addSelect('p', 'pf', 's')
+            ->leftJoin('pv.proposal', 'p')
+            ->leftJoin('p.proposalForm', 'pf')
+            ->leftJoin('pf.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pas')
+            ->where('pv.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('pas.project = :project')
+            ->setParameter('project', $project)
+            ->addOrderBy('pv.createdAt', 'DESC')
+        ;
+        return $qb->getQuery()->getResult();
+
     }
 }

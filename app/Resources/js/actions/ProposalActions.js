@@ -115,6 +115,19 @@ export default {
       });
   },
 
+  loadProposalVotesForUser: (projectId) => {
+    Fetcher
+      .get(`/projects/${projectId}/user_votes`)
+      .then((result) => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_PROPOSAL_VOTES,
+          votes: result.votes,
+          votesCount: result.count,
+        });
+        return true;
+      });
+  },
+
   changePage: (page) => {
     AppDispatcher.dispatch({
       actionType: CHANGE_PAGE,

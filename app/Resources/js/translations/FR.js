@@ -156,6 +156,19 @@ export default {
       version_comment: 'Explication',
       version_parent: 'Modification de : ',
     },
+    project: {
+      votes: {
+        delete: 'Retirer',
+        nb: '{num, plural, =0{0 proposition sélectionnée} one{# proposition sélectionnée} other{# propositions sélectionnées}}',
+        title: 'Détails de mes votes',
+        widget: {
+          brand: 'Mes votes',
+          budget: 'Budget',
+          left: 'Restant',
+          spent: 'Dépensé',
+        },
+      },
+    },
     proposal: {
       add: 'Faire une proposition',
       body: 'Description',

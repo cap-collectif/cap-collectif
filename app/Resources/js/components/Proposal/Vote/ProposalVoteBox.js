@@ -124,7 +124,7 @@ const ProposalVoteBox = React.createClass({
           className="btn-block"
           style={{marginTop: '10px'}}
           disabled={!this.displayForm()}
-          loginOverlay={this.props.voteType === VOTE_TYPE_BUDGET && !LoginStore.isLoggedIn()}
+          loginOverlay={this.props.voteType === VOTE_TYPE_BUDGET}
         />
         {
           !LoginStore.isLoggedIn() && this.props.voteType !== VOTE_TYPE_BUDGET

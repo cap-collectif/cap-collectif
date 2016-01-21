@@ -342,4 +342,38 @@ class ApplicationContext extends UserContext
 
         \PHPUnit_Framework_TestCase::assertTrue($element->hasAttribute($attribute));
     }
+
+    private function visitPageWithParams($page, $params) {
+        $this->navigationContext->getPage($page)->open($params);
+        $this->getSession()->wait(1000);
+    }
+
+    /**
+     * Go to the votes details page
+     * @When I go to the votes details page
+     */
+    public function iGoToTheVotesDetailsPage()
+    {
+        $this->visitPageWithParams("project user votes page",['projectSlug' => 'budget-participatif-rennes']);
+    }
+
+    /**
+     * There should be nb votes
+     * @Then there should be :nb votes
+     */
+    public function thereShouldBeNbVotes($nb)
+    {
+        $count = $this->navigationContext->getPage('project user votes page')->countVotes();
+        expect($count == $nb);
+    }
+
+    /**
+     * I remove the first vote
+     * @When I remove the first vote
+     */
+    public function iRemoveTheFirstVote()
+    {
+        $this->navigationContext->getPage('project user votes page')->removeFirstVote();
+        $this->getSession()->wait(5000);
+    }
 }
