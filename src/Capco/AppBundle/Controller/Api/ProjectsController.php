@@ -24,23 +24,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ProjectsController extends FOSRestController
 {
+
     /**
-     * @Security("has_role('ROLE_USER')")
-     * @Get("/projects/{project_id}/user_votes")
+     * @Get("/projects/{project_id}/votable_steps")
      * @ParamConverter("project", options={"mapping": {"project_id": "id"}})
-     * @View(serializerGroups={"ProposalVotes", "Proposals", "Steps", "UsersInfos"})
+     * @View(serializerGroups={"Steps", "UserVotes"})
      */
-    public function getUserVotesAction(Project $project)
+    public function getVotableStepsAction(Project $project)
     {
-        $votes = $this
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:ProposalVote')
-            ->getVotesForUserInProject($this->getUser(), $project)
+        $votableSteps = $this
+            ->get('capco.proposal_votes.resolver')
+            ->getVotableStepsForProject($project)
         ;
 
         return [
-            'votes' => $votes,
-            'count' => count($votes),
+            'votableSteps' => $votableSteps,
         ];
     }
 }

@@ -160,12 +160,18 @@ export default {
       votes: {
         delete: 'Retirer',
         nb: '{num, plural, =0{0 proposition sélectionnée} one{# proposition sélectionnée} other{# propositions sélectionnées}}',
+        no_active_step: 'Aucun étape de vote n\'est actuellement active.',
         title: 'Détails de mes votes',
+        type: {
+          budget: '(vote selon le budget)',
+          simple: '(vote simple)',
+        },
         widget: {
-          brand: 'Mes votes',
           budget: 'Budget',
+          count: 'Mes votes',
           left: 'Restant',
           spent: 'Dépensé',
+          step: 'Étape',
         },
       },
     },

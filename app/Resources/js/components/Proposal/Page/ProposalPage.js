@@ -14,7 +14,7 @@ import MessageStore from '../../../stores/MessageStore';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteSidebar from '../Vote/ProposalVoteSidebar';
 import FlashMessages from '../../Utils/FlashMessages';
-import {VOTE_TYPE_DISABLED} from '../../../constants/ProposalConstants';
+import {VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET} from '../../../constants/ProposalConstants';
 
 const ProposalPage = React.createClass({
   propTypes: {
@@ -25,7 +25,6 @@ const ProposalPage = React.createClass({
     votes: React.PropTypes.array.isRequired,
     votableStep: React.PropTypes.object,
     userHasVote: React.PropTypes.bool,
-    creditsLeft: React.PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -37,7 +36,7 @@ const ProposalPage = React.createClass({
   },
 
   getInitialState() {
-    ProposalActions.initProposalVotes(this.props.creditsLeft, !!this.props.userHasVote);
+    ProposalActions.initProposalVotes(this.props.votableStep.creditsLeft, !!this.props.userHasVote);
     ProposalActions.initProposal(this.props.proposal);
     return {
       messages: {
@@ -126,6 +125,7 @@ const ProposalPage = React.createClass({
               <ProposalPageHeader
                 proposal={proposal}
                 className={containersClassName}
+                showNullEstimation={this.props.votableStep && this.props.votableStep.voteType === VOTE_TYPE_BUDGET}
               />
               {
                 proposal.answer

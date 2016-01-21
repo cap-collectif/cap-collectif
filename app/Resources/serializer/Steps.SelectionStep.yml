@@ -6,4 +6,13 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         type: integer
         groups: [Steps]
         serialized_name: voteType
+      votesHelpText:
+        expose: true
+        type: string
+        groups: [Steps]
+        serialized_name: votesHelpText
+      budget:
+        expose: true
+        type: float
+        groups: [Steps]
 

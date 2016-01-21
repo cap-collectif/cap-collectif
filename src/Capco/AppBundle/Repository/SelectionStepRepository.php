@@ -28,17 +28,19 @@ class SelectionStepRepository extends AbstractStepRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getVotableStepsForProject(Project $project)
+    public function getVotableStepsForProject(Project $project, $asArray = false)
     {
-        $qb = $this->createQueryBuilder('ss')
+        $qb = $this->createQueryBuilder('ss');
+        $expr = $qb->expr();
+        $qb
             ->leftJoin('ss.projectAbstractStep', 'pas')
-            ->where('ss.votable = :votable')
-            ->setParameter('votable', true)
+            ->andWhere($expr->neq('ss.voteType', SelectionStep::VOTE_TYPE_DISABLED))
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)
             ->orderBy('pas.position')
         ;
 
-        return $qb->getQuery()->getResult();
+        $query = $qb->getQuery();
+        return $asArray ? $query->getArrayResult() : $query->getResult();
     }
 }

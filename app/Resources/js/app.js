@@ -59,7 +59,6 @@ AuthService
           votes={$('#render-proposal-page').data('votes').votes}
           votableStep={$('#render-proposal-page').data('votable-step').votableStep}
           userHasVote={$('#render-proposal-page').data('user-has-vote')}
-          creditsLeft={$('#render-proposal-page').data('credits-left')}
           {...IntlData}
         />,
         document.getElementById('render-proposal-page')
@@ -85,13 +84,11 @@ AuthService
       ReactDOM.render(
         <SelectionStepPage
           count={$('#render-selection-step-page').data('count')}
-          stepId={$('#render-selection-step-page').data('step-id')}
-          voteType={$('#render-selection-step-page').data('vote-type')}
+          step={$('#render-selection-step-page').data('step').step}
           themes={$('#render-selection-step-page').data('themes').themes}
           districts={$('#render-selection-step-page').data('districts').districts}
           types={$('#render-selection-step-page').data('types').types}
           statuses={$('#render-selection-step-page').data('statuses').statuses}
-          creditsLeft={$('#render-selection-step-page').data('credits-left')}
           {...IntlData}
         />,
         document.getElementById('render-selection-step-page')
@@ -99,10 +96,10 @@ AuthService
     }
 
     if ($('#render-proposal-vote-basket-widget').length) {
-      React.render(
+      ReactDOM.render(
         <ProposalVoteBasketWidget
-          totalBudget={$('#render-proposal-vote-basket-widget').data('total-budget')}
-          creditsLeft={$('#render-proposal-vote-basket-widget').data('credits-left')}
+          projectId={$('#render-proposal-vote-basket-widget').data('project-id')}
+          votableSteps={$('#render-proposal-vote-basket-widget').data('votable-steps').votableSteps}
           votesPageUrl={$('#render-proposal-vote-basket-widget').data('votes-page-url')}
           {...IntlData}
         />,
@@ -111,14 +108,11 @@ AuthService
     }
 
     if ($('#render-proposals-user-votes-page').length) {
-      React.render(
+      ReactDOM.render(
         <ProposalsUserVotesPage
           themes={$('#render-proposals-user-votes-page').data('themes').themes}
           districts={$('#render-proposals-user-votes-page').data('districts').districts}
-          votes={$('#render-proposals-user-votes-page').data('votes').votes}
-          count={$('#render-proposals-user-votes-page').data('count')}
-          votableStep={$('#render-proposals-user-votes-page').data('votable-step').votableStep}
-          creditsLeft={$('#render-proposals-user-votes-page').data('credits-left')}
+          votableSteps={$('#render-proposals-user-votes-page').data('votable-steps').votableSteps}
           projectId={$('#render-proposals-user-votes-page').data('project-id')}
           {...IntlData}
         />,

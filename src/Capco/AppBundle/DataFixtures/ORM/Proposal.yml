@@ -94,7 +94,7 @@ Capco\AppBundle\Entity\Proposal:
     district: @district3
     status: @status1
     estimation: 2999999
-    selectionSteps: [@selectionStep4]
+    selectionSteps: [@selectionStep4, @selectionStep5]
   proposal8:
     title: Proposition pas chère
     body: |
@@ -108,7 +108,7 @@ Capco\AppBundle\Entity\Proposal:
     district: @district3
     status: @status1
     estimation: 100
-    selectionSteps: [@selectionStep4]
+    selectionSteps: [@selectionStep4, @selectionStep5]
   proposal9:
     title: Proposition gratuite
     body: |
@@ -121,4 +121,4 @@ Capco\AppBundle\Entity\Proposal:
     theme: @theme2
     district: @district3
     status: @status1
-    selectionSteps: [@selectionStep4]
+    selectionSteps: [@selectionStep4, @selectionStep5]

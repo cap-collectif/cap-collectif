@@ -6,6 +6,7 @@ import {
   RECEIVE_PROPOSAL,
   RECEIVE_PROPOSAL_VOTES,
   RECEIVE_PROPOSALS,
+  RECEIVE_VOTABLE_STEPS,
 
   INIT_PROPOSAL,
   SUBMIT_PROPOSAL,
@@ -18,6 +19,7 @@ import {
   DELETE_PROPOSAL_FAILURE,
 
   INIT_PROPOSAL_VOTES,
+  INIT_VOTABLE_STEPS,
   CREATE_PROPOSAL_VOTE,
   CREATE_PROPOSAL_VOTE_SUCCESS,
   CREATE_PROPOSAL_VOTE_FAILURE,
@@ -51,6 +53,13 @@ export default {
       actionType: INIT_PROPOSAL_VOTES,
       creditsLeft: creditsLeft,
       userHasVote: userHasVote,
+    });
+  },
+
+  initVotableSteps: (votableSteps) => {
+    AppDispatcher.dispatch({
+      actionType: INIT_VOTABLE_STEPS,
+      votableSteps: votableSteps,
     });
   },
 
@@ -110,6 +119,18 @@ export default {
           actionType: RECEIVE_PROPOSAL_VOTES,
           votes: result.votes,
           votesCount: result.count,
+        });
+        return true;
+      });
+  },
+
+  loadVotableSteps: (projectId) => {
+    Fetcher
+      .get(`/projects/${projectId}/votable_steps`)
+      .then((result) => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_VOTABLE_STEPS,
+          votableSteps: result.votableSteps,
         });
         return true;
       });

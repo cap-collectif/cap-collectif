@@ -61,12 +61,10 @@ class ProposalVotesResolverSpec extends ObjectBehavior
         ])->willReturn([$otherVote2]);
         $this->beConstructedWith($proposalVoteRepository, $selectionStepRepository);
 
-        $project1->getBudget()->willReturn(null);
-        $project2->getBudget()->willReturn(100);
-        $selectionStep1->getProject()->willReturn($project1);
+        $selectionStep1->getBudget()->willReturn(null);
         $selectionStep1->isVotable()->willReturn(true);
         $selectionStep1->isBudgetVotable()->willReturn(true);
-        $selectionStep2->getProject()->willReturn($project2);
+        $selectionStep2->getBudget()->willReturn(100);
         $selectionStep2->isVotable()->willReturn(true);
         $selectionStep2->isBudgetVotable()->willReturn(true);
 

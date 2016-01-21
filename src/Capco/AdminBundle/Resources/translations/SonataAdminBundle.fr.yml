@@ -100,7 +100,7 @@ admin:
     site_parameter:
       js: Rajoutez ici un ou plusieurs scripts entourés par leurs balises < script >.
     step:
-      vote_type: Dans le cas d'un vote selon le budget, vous devez renseigner le budget du projet et les estimations de chacune des propositions concernées.
+      vote_type: Dans le cas d'un vote selon le budget, vous devez renseigner le budget de l'étape et les estimations de chacune des propositions concernées.
     synthesis:
       consultation_step: La création d'une nouvelle synthèse à partir d'une étape de consultation peut prendre un peu de temps, toutes les contributions étant exportées vers l'outil de synthèse. Pas d'inquiétude, cela est tout à fait normal.
     video:
@@ -384,7 +384,6 @@ admin:
       argument_count: Arguments
       author: Auteur
       body: Introduction
-      budget: Budget alloué
       closed_at: Fermé
       consultation_step_type: Structure
       cover: Image
@@ -578,6 +577,7 @@ admin:
       trashed_reason: Raison de la mise à la corbeille
     step:
       body: Introduction
+      budget: Budget alloué
       created_at: Création
       end_at: Termine
       group_general: Général

@@ -38,7 +38,7 @@ class ProposalController extends Controller
 
         $votableStep = $serializer->serialize([
             'votableStep' => $firstVotableStep,
-        ], 'json', SerializationContext::create()->setGroups(['Steps']));
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
 
         $proposalJson = $serializer->serialize(
             ['proposal' => $proposal],
@@ -80,11 +80,6 @@ class ProposalController extends Controller
             'votes' => $em->getRepository('CapcoAppBundle:ProposalVote')->getVotesForProposal($proposal, 6),
         ], 'json', SerializationContext::create()->setGroups(['ProposalVotes', 'UsersInfos', 'UserMedias']));
 
-        $remainingCredits = $this
-            ->get('capco.proposal_votes.resolver')
-            ->getCreditsLeftForUser($this->getUser(), $firstVotableStep)
-        ;
-
         $response = $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,
             'currentStep' => $currentStep,
@@ -96,9 +91,6 @@ class ProposalController extends Controller
             'votes' => $votes,
             'votableStep' => $votableStep,
             'userHasVote' => $userHasVote,
-            'remainingCredits' => $remainingCredits,
-            'totalBudget' => $project->getBudget(),
-            'showVotesWidget' => $votableStep && $this->getUser()
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

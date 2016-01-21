@@ -349,22 +349,19 @@ class StepController extends Controller
             'statuses' => $em->getRepository('CapcoAppBundle:Status')->getByProject($project),
         ], 'json', SerializationContext::create()->setGroups(['Statuses']));
 
-        $creditsLeft = $this
-            ->get('capco.proposal_votes.resolver')
-            ->getCreditsLeftForUser($this->getUser(), $step)
-        ;
+        $stepJson = $serializer->serialize([
+            'step' => $step,
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
 
         $response = $this->render('CapcoAppBundle:Step:selection.html.twig', [
             'project' => $project,
             'currentStep' => $step,
+            'step' => $stepJson,
             'proposalsCount' => $proposalsCount,
             'themes' => $themes,
             'statuses' => $statuses,
             'districts' => $districts,
             'types' => $types,
-            'creditsLeft' => $creditsLeft,
-            'totalBudget' => $project->getBudget(),
-            'showVotesWidget' => $this->getUser(),
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

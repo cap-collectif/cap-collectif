@@ -6,35 +6,25 @@ import FlashMessages from '../../Utils/FlashMessages';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
 import {Table} from 'react-bootstrap';
 import {IntlMixin, FormattedMessage} from 'react-intl';
+import {VOTE_TYPE_BUDGET} from '../../../constants/ProposalConstants';
 
 const ProposalsUserVotesPage = React.createClass({
   propTypes: {
     projectId: React.PropTypes.number.isRequired,
     themes: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
-    votes: React.PropTypes.array.isRequired,
-    votableStep: React.PropTypes.object,
-    creditsLeft: React.PropTypes.number.isRequired,
+    votableSteps: React.PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
-  getDefaultProps() {
-    return {
-      votableStep: null,
-    };
-  },
-
   getInitialState() {
-    ProposalActions.initProposalVotes(this.props.votableStep, this.props.creditsLeft);
+    ProposalActions.initVotableSteps(this.props.votableSteps);
     return {
       messages: {
         'errors': [],
         'success': [],
       },
-      votableStep: ProposalVoteStore.votableStep,
-      creditsLeft: ProposalVoteStore.creditsLeft,
-      votesCount: this.props.votes.length,
-      votes: this.props.votes,
+      votableSteps: ProposalVoteStore.votableSteps,
     };
   },
 
@@ -55,23 +45,13 @@ const ProposalsUserVotesPage = React.createClass({
   },
 
   onVotesChange() {
-    if (ProposalVoteStore.isProposalVotesListSync) {
+    if (ProposalVoteStore.isVotableStepsSync) {
       this.setState({
-        votableStep: ProposalVoteStore.votableStep,
-        creditsLeft: ProposalVoteStore.creditsLeft,
-        votes: ProposalVoteStore.proposalVotes,
-        votesCount: ProposalVoteStore.votesCount,
+        votableSteps: ProposalVoteStore.votableSteps,
       });
       return;
     }
-
-    this.loadVotes();
-  },
-
-  loadVotes() {
-    ProposalActions.loadProposalVotesForUser(
-      this.props.projectId
-    );
+    ProposalActions.loadVotableSteps(this.props.projectId);
   },
 
   render() {
@@ -82,21 +62,44 @@ const ProposalsUserVotesPage = React.createClass({
           <h1 style={{marginBottom: '0'}}>{this.getIntlMessage('project.votes.title')}</h1>
         </div>
         <div className="container container--custom">
-          <h2>
-            <FormattedMessage
-              num={this.state.votesCount}
-              message={this.getIntlMessage('project.votes.nb')}
-            />
-          </h2>
-          <Table responsive hover className="proposals-user-votes__table">
-            <tbody>
-              {
-                this.state.votes.map((vote, index) => {
-                  return <ProposalUserVoteItem key={index} vote={vote} />;
-                })
-              }
-            </tbody>
-          </Table>
+          {
+            this.state.votableSteps.length > 0
+              ? this.state.votableSteps.map((step, index) => {
+                return (
+                  <div key={index} className="block">
+                    <h2>
+                      {step.title + ' '}
+                      {
+                        step.voteType === VOTE_TYPE_BUDGET
+                        ? this.getIntlMessage('project.votes.type.budget')
+                        : this.getIntlMessage('project.votes.type.simple')
+                      }
+                    </h2>
+                    {
+                      step.votesHelpText
+                      ? <p>{step.votesHelpText}</p>
+                      : null
+                    }
+                    <h3>
+                      <FormattedMessage
+                        num={step.userVotesCount}
+                        message={this.getIntlMessage('project.votes.nb')}
+                      />
+                    </h3>
+                    <Table responsive hover className="proposals-user-votes__table">
+                      <tbody>
+                      {
+                        step.userVotes.map((vote, index2) => {
+                          return <ProposalUserVoteItem key={index2} vote={vote}/>;
+                        })
+                      }
+                      </tbody>
+                    </Table>
+                  </div>
+                );
+              })
+              : <p>{this.getIntlMessage('project.votes.no_active_step')}</p>
+          }
         </div>
       </div>
     );

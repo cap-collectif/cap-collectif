@@ -1,8 +1,6 @@
-{% extends '@CapcoApp/base.html.twig' %}
+{% extends '@CapcoApp/Project/project_base.html.twig' %}
 
 {% block canonical_link %}{{ '' }}{% endblock %}
-
-{% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
 
 {% block title %}
     {{ parent() }} - {{ proposalTitle }}
@@ -12,14 +10,6 @@
 
 {% block body %}
 
-    {% if showVotesWidget %}
-        <div id="render-proposal-vote-basket-widget"
-             data-total-budget='{{ totalBudget|escape }}'
-             data-credits-left='{{ remainingCredits|escape }}'
-             data-votes-page-url='{{ url('app_project_show_user_votes', {'projectSlug': project.slug}, true) }}'
-        ></div>
-    {% endif %}
-
     <div id="render-proposal-page"
          data-proposal='{{ proposal|escape }}'
          data-form='{{ form|escape }}'
@@ -28,24 +18,6 @@
          data-votes='{{ votes|escape }}'
          data-votable-step='{{ votableStep|escape }}'
          data-user-has-vote='{{ userHasVote }}'
-         data-credits-left='{{ remainingCredits|escape }}'
     ></div>
 
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-            App.makeSidebar({ // TODO -> go React
-                sidebar: '#sidebar',
-                container: '#sidebar-container',
-                hideable: '.sidebar-hideable',
-                toggle: '.sidebar-toggle',
-                overlay: '#sidebar-overlay'
-            });
-            App.hideableMessageAndCheckbox({
-                message: '.message-hideable-js',
-                checkbox: '.checkbox-hideable-js',
-            });
-    </script>
 {% endblock %}

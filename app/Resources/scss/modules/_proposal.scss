@@ -135,6 +135,7 @@ $statuses:
   margin-top: $navbar-height;
   height: $navbar-height;
   overflow: hidden;
+  z-index: 1020;
 
   .container {
     padding-top: 0;
@@ -149,6 +150,10 @@ $statuses:
   .widget__counter__label {
     margin-bottom: 0;
     font-size: 12px;
+  }
+
+  .widget__counter__select {
+    height: 22px;
   }
 
   .widget__progress-bar {

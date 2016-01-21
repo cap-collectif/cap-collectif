@@ -12,7 +12,7 @@ const ProposalPreviewEstimation = React.createClass({
     const proposal = this.props.proposal;
     const estimation = !proposal.estimation && this.props.showNullEstimation ? 0 : proposal.estimation;
 
-    return estimation
+    return estimation !== null && typeof estimation !== 'undefined'
       ? <span>
           <i className="cap cap-coins-2"></i>
           <FormattedNumber value={estimation} style="currency" currency="EUR" />

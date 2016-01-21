@@ -199,11 +199,6 @@ class ProjectAdmin extends Admin
                 ], [
                     'link_parameters' => ['context' => 'project'],
             ])
-            ->add('budget', 'money', [
-                'currency' => 'EUR',
-                'label' => 'admin.fields.project.budget',
-                'required' => false,
-            ])
             ->end()
 
             // Ranking

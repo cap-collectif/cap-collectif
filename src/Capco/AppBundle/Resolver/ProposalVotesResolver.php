@@ -78,12 +78,11 @@ class ProposalVotesResolver
             ;
         }
 
-        $project = $selectionStep->getProject();
         if (!$selectionStep->isVotable()) {
             return false;
         }
-        if ($selectionStep->isBudgetVotable() && $project && $project->getBudget()) {
-            $left = $project->getBudget() - $this->getAmountSpentForVotes($otherVotes);
+        if ($selectionStep->isBudgetVotable() && $selectionStep->getBudget()) {
+            $left = $selectionStep->getBudget() - $this->getAmountSpentForVotes($otherVotes);
             return $left >= $proposal->getEstimation();
         }
         return true;
@@ -114,7 +113,7 @@ class ProposalVotesResolver
 
     public function getCreditsLeftForUser(User $user = null, SelectionStep $selectionStep)
     {
-        $creditsLeft = $selectionStep->getProject()->getBudget();
+        $creditsLeft = $selectionStep->getBudget();
         if ($creditsLeft > 0 && $user && $selectionStep->isBudgetVotable()) {
             $creditsLeft -= $this
                 ->getSpentCreditsForUser($user, $selectionStep)
@@ -132,6 +131,15 @@ class ProposalVotesResolver
 
     }
 
+    public function getVotableStepsForProject(Project $project)
+    {
+        return $this
+            ->selectionStepRepository
+            ->getVotableStepsForProject($project)
+            ;
+
+    }
+
     public function getFirstVotableStepForProposal(Proposal $proposal)
     {
         $votableSteps = $this->getVotableStepsForProposal($proposal);
@@ -143,5 +151,26 @@ class ProposalVotesResolver
             }
         }
         return $firstVotableStep;
+    }
+
+    public function hasVotableStep(Project $project)
+    {
+        return count($this->getVotableStepsForProject($project)) > 0;
+    }
+
+    public function getVotesCountForUserInSelectionStep(User $user, SelectionStep $step)
+    {
+        return $this
+            ->proposalVoteRepository
+            ->countForUserAndStep($user, $step)
+        ;
+    }
+
+    public function getVotesForUserInSelectionStep(User $user, SelectionStep $step)
+    {
+        return $this
+            ->proposalVoteRepository
+            ->getVotesForUserInStep($user, $step)
+        ;
     }
 }

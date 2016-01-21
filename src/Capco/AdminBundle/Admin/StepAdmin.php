@@ -185,6 +185,11 @@ class StepAdmin extends Admin
                 ->add('votesHelpText', 'textarea', [
                     'label' => 'admin.fields.step.votesHelpText',
                 ])
+                ->add('budget', 'money', [
+                    'currency' => 'EUR',
+                    'label' => 'admin.fields.step.budget',
+                    'required' => false,
+                ])
             ;
         }
         $formMapper->end();

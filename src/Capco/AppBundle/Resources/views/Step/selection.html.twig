@@ -1,6 +1,4 @@
-{% extends '@CapcoApp/base.html.twig' %}
-
-{% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
+{% extends '@CapcoApp/Project/project_base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_selection', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
@@ -27,14 +25,6 @@
 {% endblock %}
 
 {% block body %}
-
-{% if showVotesWidget %}
-    <div id="render-proposal-vote-basket-widget"
-         data-total-budget='{{ totalBudget|escape }}'
-         data-credits-left='{{ creditsLeft|escape }}'
-         data-votes-page-url='{{ url('app_project_show_user_votes', {'projectSlug': project.slug}, true) }}'
-    ></div>
-{% endif %}
 
 <div class="container  container--custom">
     {% include '@CapcoApp/Project/show_title.html.twig' %}
@@ -76,9 +66,7 @@
             <div
                 id="render-selection-step-page"
                 data-count="{{ proposalsCount }}"
-                data-step-id="{{ currentStep.id }}"
-                data-vote-type="{{ currentStep.voteType }}"
-                data-credits-left="{{ remainingCredits }}"
+                data-step="{{ step|escape }}"
                 data-themes='{{ themes|escape }}'
                 data-statuses='{{ statuses|escape }}'
                 data-districts='{{ districts|escape }}'

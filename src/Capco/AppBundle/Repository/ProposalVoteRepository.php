@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
@@ -14,6 +15,10 @@ class ProposalVoteRepository extends EntityRepository
 {
     public function getCountsByStepsForProposal(Proposal $proposal)
     {
+        $ids = array_map(function ($value) {
+            return $value->getId();
+        }, $proposal->getSelectionSteps()->getValues());
+
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id) as votesCount', 'ss.id as selectionStep')
             ->leftJoin('pv.selectionStep', 'ss')
@@ -28,6 +33,11 @@ class ProposalVoteRepository extends EntityRepository
             $counts[$result['selectionStep']] = intval($result['votesCount']);
         }
 
+        foreach ($ids as $id) {
+            if (!array_key_exists($id, $counts)) {
+                $counts[$id] = 0;
+            }
+        }
         return $counts;
     }
 
@@ -48,21 +58,45 @@ class ProposalVoteRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getVotesForUserInProject(User $user, Project $project)
+    public function getVotesForUserInProjectGroupedBySteps(User $user, Project $project)
     {
         $qb = $this->createQueryBuilder('pv')
             ->addSelect('p', 'pf', 's')
             ->leftJoin('pv.proposal', 'p')
             ->leftJoin('p.proposalForm', 'pf')
+            ->leftJoin('pv.selectionStep', 'ss')
             ->leftJoin('pf.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->where('pv.user = :user')
             ->setParameter('user', $user)
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)
-            ->addOrderBy('pv.createdAt', 'DESC')
+            ->orderBy('pv.createdAt', 'DESC')
+            ->groupBy('ss.id')
         ;
         return $qb->getQuery()->getResult();
+    }
 
+    public function countForUserAndStep(User $user, SelectionStep $step)
+    {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('COUNT(pv.id) as votesCount')
+            ->where('pv.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('pv.selectionStep = :step')
+            ->setParameter('step', $step)
+        ;
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getVotesForUserInStep(User $user, SelectionStep $step)
+    {
+        $qb = $this->createQueryBuilder('pv')
+            ->where('pv.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('pv.selectionStep = :step')
+            ->setParameter('step', $step)
+        ;
+        return $qb->getQuery()->getResult();
     }
 }

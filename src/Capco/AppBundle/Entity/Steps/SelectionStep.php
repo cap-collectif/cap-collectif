@@ -47,6 +47,11 @@ class SelectionStep extends AbstractStep
      */
     private $votesHelpText = null;
 
+    /**
+     * @ORM\Column(name="budget", type="float", nullable=true)
+     */
+    private $budget = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -155,6 +160,25 @@ class SelectionStep extends AbstractStep
     public function setVoteType($voteType)
     {
         $this->voteType = $voteType;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBudget()
+    {
+        return $this->budget;
+    }
+
+    /**
+     * @param mixed $budget
+     * @return $this
+     */
+    public function setBudget($budget)
+    {
+        $this->budget = $budget;
 
         return $this;
     }

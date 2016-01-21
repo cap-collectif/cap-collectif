@@ -54,21 +54,11 @@ class ProjectController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $votableSteps = $em
-            ->getRepository('CapcoAppBundle:Steps\SelectionStep')
-            ->getVotableStepsForProject($project)
-        ;
-        $firstVotableStep = null;
-        foreach ($votableSteps as $step) {
-            if ($step->isOpen()) {
-                $firstVotableStep = $step;
-                break;
-            }
-        }
-
-        $votableStep = $serializer->serialize([
-            'votableStep' => $firstVotableStep,
-        ], 'json', SerializationContext::create()->setGroups(['Steps']));
+        $votableSteps = $serializer->serialize([
+            'votableSteps' => $this
+                ->get('capco.proposal_votes.resolver')
+                ->getVotableStepsForProject($project),
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
 
         $districts = $serializer->serialize([
             'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
@@ -78,27 +68,11 @@ class ProjectController extends Controller
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
         ], 'json', SerializationContext::create()->setGroups(['Themes']));
 
-        $userVotes = $serializer->serialize([
-            'votes' => $em
-                ->getRepository('CapcoAppBundle:ProposalVote')
-                ->getVotesForUserInProject($this->getUser(), $project)
-            ,
-        ], 'json', SerializationContext::create()->setGroups(['ProposalVotes', 'Proposals', 'Steps', 'UsersInfos']));
-
-        $creditsLeft = $this
-            ->get('capco.proposal_votes.resolver')
-            ->getCreditsLeftForUser($this->getUser(), $step)
-        ;
-
         $response = $this->render('CapcoAppBundle:Project:show_user_votes.html.twig', [
             'project' => $project,
             'themes' => $themes,
             'districts' => $districts,
-            'votes' => $userVotes,
-            'votableStep' => $votableStep,
-            'creditsLeft' => $creditsLeft,
-            'totalBudget' => $project->getBudget(),
-            'showVotesWidget' => $votableStep && $this->getUser(),
+            'votableSteps' => $votableSteps,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
@@ -489,5 +463,30 @@ class ProjectController extends Controller
         }
 
         return $parameters;
+    }
+
+    /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
+     * @Template("CapcoAppBundle:Project:votes_widget.html.twig")
+     *
+     * @param $max
+     * @param $offset
+     *
+     * @return array
+     */
+    public function showVotesWidgetAction(Project $project)
+    {
+        $serializer = $this->get('jms_serializer');
+        $votableSteps = $serializer->serialize([
+            'votableSteps' => $this
+                ->get('capco.proposal_votes.resolver')
+                ->getVotableStepsForProject($project),
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
+
+        return [
+            'votableSteps' => $votableSteps,
+            'project' => $project,
+        ];
     }
 }

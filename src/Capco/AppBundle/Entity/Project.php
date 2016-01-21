@@ -204,11 +204,6 @@ class Project
     private $opinionTerm = self::OPINION_TERM_OPINION;
 
     /**
-     * @ORM\Column(name="budget", type="float", nullable=true)
-     */
-    private $budget = null;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -689,25 +684,6 @@ class Project
     public function setOpinionTerm($opinionTerm)
     {
         $this->opinionTerm = $opinionTerm;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBudget()
-    {
-        return $this->budget;
-    }
-
-    /**
-     * @param mixed $budget
-     * @return $this
-     */
-    public function setBudget($budget)
-    {
-        $this->budget = $budget;
-
-        return $this;
     }
 
     // ******************** Custom methods ******************************

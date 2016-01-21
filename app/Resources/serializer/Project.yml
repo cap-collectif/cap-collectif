@@ -33,7 +33,3 @@ Capco\AppBundle\Entity\Project:
         enabled:
             expose: true
             groups: [Projects]
-        budget:
-          expose: true
-          type: float
-          groups: [Projects]

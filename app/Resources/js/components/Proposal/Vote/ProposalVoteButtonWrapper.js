@@ -21,8 +21,12 @@ const ProposalVoteButtonWrapper = React.createClass({
     };
   },
 
+  userHasVote() {
+    return this.props.proposal.userHasVote;
+  },
+
   userHasEnoughCredits() {
-    if (this.props.creditsLeft !== null && this.props.proposal.estimation !== null) {
+    if (!this.userHasVote() && this.props.creditsLeft !== null && !!this.props.proposal.estimation) {
       return this.props.creditsLeft >= this.props.proposal.estimation;
     }
     return true;

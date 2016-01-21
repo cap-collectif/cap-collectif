@@ -11,6 +11,7 @@ const ProposalPageHeader = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
+    showNullEstimation: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -108,7 +109,7 @@ const ProposalPageHeader = React.createClass({
             <i className="cap cap-marker-1-1"></i>{proposal.district.name}
           </span>
           <span className="proposal__info">
-            <ProposalDetailEstimation proposal={proposal} />
+            <ProposalDetailEstimation proposal={proposal} showNullEstimation={this.props.showNullEstimation} />
           </span>
         </div>
       </div>
