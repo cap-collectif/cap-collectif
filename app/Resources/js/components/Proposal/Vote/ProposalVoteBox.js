@@ -71,15 +71,19 @@ const ProposalVoteBox = React.createClass({
     this.props.onValidationFailure();
   },
 
+  userHasVote() {
+    return LoginStore.isLoggedIn() && this.props.userHasVote;
+  },
+
   userHasEnoughCredits() {
-    if (this.props.creditsLeft !== null && this.props.proposal.estimation !== null) {
+    if (LoginStore.isLoggedIn() && !this.userHasVote() && this.props.creditsLeft !== null && this.props.proposal.estimation !== null) {
       return this.props.creditsLeft >= this.props.proposal.estimation;
     }
     return true;
   },
 
   displayForm() {
-    return this.props.voteType === VOTE_TYPE_SIMPLE || (LoginStore.isLoggedIn() && this.userHasEnoughCredits());
+    return this.props.voteType === VOTE_TYPE_SIMPLE || this.userHasEnoughCredits();
   },
 
   render() {
@@ -108,7 +112,7 @@ const ProposalVoteBox = React.createClass({
             : null
           }
           {
-            !this.userHasEnoughCredits()
+            !this.userHasEnoughCredits() && !this.state.isSubmitting
             ? <p style={{marginTop: '10px'}}>
                 {this.getIntlMessage('proposal.vote.not_enough_credits')}
               </p>
@@ -123,7 +127,7 @@ const ProposalVoteBox = React.createClass({
           bsStyle={(!this.props.userHasVote || this.state.isSubmitting) ? 'success' : 'danger'}
           className="btn-block"
           style={{marginTop: '10px'}}
-          disabled={!this.displayForm()}
+          disabled={!this.displayForm() && LoginStore.isLoggedIn()}
           loginOverlay={this.props.voteType === VOTE_TYPE_BUDGET}
         />
         {

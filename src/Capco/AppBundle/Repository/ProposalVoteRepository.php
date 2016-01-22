@@ -86,7 +86,7 @@ class ProposalVoteRepository extends EntityRepository
             ->andWhere('pv.selectionStep = :step')
             ->setParameter('step', $step)
         ;
-        return $qb->getQuery()->getSingleScalarResult();
+        return intval($qb->getQuery()->getSingleScalarResult());
     }
 
     public function getVotesForUserInStep(User $user, SelectionStep $step)

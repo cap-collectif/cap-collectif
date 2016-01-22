@@ -2,6 +2,7 @@ import React from 'react';
 import {Button} from 'react-bootstrap';
 import {IntlMixin} from 'react-intl';
 import LoginOverlay from '../Utils/LoginOverlay';
+import LoginStore from '../../stores/LoginStore';
 
 const SubmitButton = React.createClass({
   propTypes: {
@@ -28,14 +29,21 @@ const SubmitButton = React.createClass({
     };
   },
 
+  onClick() {
+    if ((!LoginStore.isLoggedIn() && this.props.loginOverlay) || this.props.isSubmitting) {
+      return;
+    }
+    this.props.onSubmit();
+  },
+
   render() {
-    const disabled = this.props.isSubmitting || this.props.loginOverlay ? false : this.props.disabled;
+    const disabled = this.props.isSubmitting || this.props.disabled;
     return (
       <LoginOverlay enabled={this.props.loginOverlay}>
         <Button
           id={this.props.id}
           disabled={disabled}
-          onClick={!this.props.isSubmitting ? this.props.onSubmit : null}
+          onClick={this.onClick}
           bsStyle={this.props.bsStyle}
           className={this.props.className}
           style={this.props.style}

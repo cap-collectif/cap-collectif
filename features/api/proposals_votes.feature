@@ -22,29 +22,42 @@ Feature: Proposal Votes Restful Api
     }
     """
 
-  Scenario: Logged in API client wants to get all his votes
-    Given I am logged in to api as user
-    When I send a GET request to "/api/projects/6/user_votes"
+  Scenario: Logged in API client wants to get all votable steps with votes
+    Given I am logged in to api as admin
+    When I send a GET request to "/api/projects/7/votable_steps"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
     {
-      "votes": [
+      "votableSteps": [
         {
-          "proposal": @...@,
-          "selectionStep": @...@,
-          "private": @boolean@
+          "projectId": @integer@,
+          "position": @integer@,
+          "openingStatus": @string@,
+          "id": @integer@,
+          "title": @string@,
+          "enabled": @boolean@,
+          "startAt": "@string@.isDateTime()",
+          "endAt": "@string@.isDateTime()",
+          "voteType": @integer@,
+          "isOpen": @boolean@,
+          "votesHelpText": @string@,
+          "budget": @...@,
+          "creditsLeft": @number@,
+          "userVotesCount": @integer@,
+          "userVotes": [
+            {
+              "proposal": @...@,
+              "selectionStep": @...@,
+              "private": @boolean@
+            },
+            @...@
+          ]
         },
         @...@
-      ],
-      "count": @integer@
+      ]
     }
     """
-
-  @security
-  Scenario: Anonymous API client wants to get all his votes
-    When I send a GET request to "/api/projects/6/user_votes"
-    Then the JSON response status code should be 401
 
   @database
   Scenario: Logged in API client wants to vote and unvote for a proposal in a selection step

@@ -136,7 +136,7 @@ class ProposalVotesResolver
         return $this
             ->selectionStepRepository
             ->getVotableStepsForProject($project)
-            ;
+        ;
 
     }
 
