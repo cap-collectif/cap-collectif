@@ -6,9 +6,7 @@ import {
   RECEIVE_PROPOSAL,
   RECEIVE_PROPOSAL_VOTES,
   RECEIVE_PROPOSALS,
-  RECEIVE_VOTABLE_STEPS,
 
-  INIT_PROPOSAL,
   SUBMIT_PROPOSAL,
   VALIDATION_FAILURE,
   CREATE_PROPOSAL_SUCCESS,
@@ -18,8 +16,6 @@ import {
   DELETE_PROPOSAL_SUCCESS,
   DELETE_PROPOSAL_FAILURE,
 
-  INIT_PROPOSAL_VOTES,
-  INIT_VOTABLE_STEPS,
   CREATE_PROPOSAL_VOTE,
   CREATE_PROPOSAL_VOTE_SUCCESS,
   CREATE_PROPOSAL_VOTE_FAILURE,
@@ -40,28 +36,6 @@ import {
 } from '../constants/CommentConstants';
 
 export default {
-
-  initProposal: (proposal) => {
-    AppDispatcher.dispatch({
-      actionType: INIT_PROPOSAL,
-      proposal: proposal,
-    });
-  },
-
-  initProposalVotes: (creditsLeft, userHasVote = false) => {
-    AppDispatcher.dispatch({
-      actionType: INIT_PROPOSAL_VOTES,
-      creditsLeft: creditsLeft,
-      userHasVote: userHasVote,
-    });
-  },
-
-  initVotableSteps: (votableSteps) => {
-    AppDispatcher.dispatch({
-      actionType: INIT_VOTABLE_STEPS,
-      votableSteps: votableSteps,
-    });
-  },
 
   load: (fetchFrom, id) => {
     const page = ProposalStore.currentPage;
@@ -104,7 +78,6 @@ export default {
             proposals: result.proposals,
             count: result.count,
             order: result.order,
-            creditsLeft: result.creditsLeft || null,
           });
           return true;
         });
@@ -118,32 +91,6 @@ export default {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSAL_VOTES,
           votes: result.votes,
-          votesCount: result.count,
-        });
-        return true;
-      });
-  },
-
-  loadVotableSteps: (projectId) => {
-    Fetcher
-      .get(`/projects/${projectId}/votable_steps`)
-      .then((result) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_VOTABLE_STEPS,
-          votableSteps: result.votableSteps,
-        });
-        return true;
-      });
-  },
-
-  loadProposalVotesForUser: (projectId) => {
-    Fetcher
-      .get(`/projects/${projectId}/user_votes`)
-      .then((result) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_PROPOSAL_VOTES,
-          votes: result.votes,
-          votesCount: result.count,
         });
         return true;
       });
@@ -260,6 +207,7 @@ export default {
           actionType: RECEIVE_PROPOSAL,
           proposal: data.proposal,
           userHasVote: data.userHasVote,
+          votableStep: data.votableStep,
         });
         return true;
       });
@@ -274,7 +222,7 @@ export default {
       hasComment: hasComment,
     });
     return Fetcher
-    .post(`/selection_steps/${selectionStep}/proposals/${proposal}/votes`, data)
+    .post(`/selection_steps/${selectionStep}/proposals/${proposal}/vote`, data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_PROPOSAL_VOTE_SUCCESS,
@@ -310,7 +258,7 @@ export default {
       selectionStep: selectionStep,
     });
     return Fetcher
-      .delete(`/selection_steps/${selectionStep}/proposals/${proposal}/votes`)
+      .delete(`/selection_steps/${selectionStep}/proposals/${proposal}/vote`)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_VOTE_SUCCESS,

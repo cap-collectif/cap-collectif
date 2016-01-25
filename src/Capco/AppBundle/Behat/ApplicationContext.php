@@ -185,27 +185,17 @@ class ApplicationContext extends UserContext
     /**
      * @When I click the :element element
      */
-    public function iClickElement($selector)
+    public function iClickElement($element)
     {
-        $element = $this->getSession()->getPage()->find('css', $selector);
-        if (null === $element) {
-            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
-        }
-        $element->click();
+        $this->getSession()->getPage()->find('css', $element)->click();
     }
 
     /**
-     * @When I hover over the :selector element
+     * @When I hover over the :element element
      */
-    public function iHoverOverTheElement($selector)
+    public function iHoverOverTheElement($element)
     {
-        $element = $this->getSession()->getPage()->find('css', $selector);
-
-        if (null === $element) {
-            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
-        }
-
-        $element->mouseOver();
+        $this->getSession()->getPage()->find('css', $element)->mouseOver();
     }
 
     /**
@@ -325,55 +315,5 @@ class ApplicationContext extends UserContext
         }
 
         \PHPUnit_Framework_TestCase::assertTrue($button->hasAttribute('disabled'));
-    }
-
-    /**
-     * Checks that an element has an attribute
-     *
-     * @Then /^the element "([^"]*)" should have attribute :attribute $/
-     */
-    public function elementHasAttribute($selector, $attribute)
-    {
-        $element = $this->getSession()->getPage()->find('css', $selector);
-
-        if (null === $element) {
-            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
-        }
-
-        \PHPUnit_Framework_TestCase::assertTrue($element->hasAttribute($attribute));
-    }
-
-    private function visitPageWithParams($page, $params) {
-        $this->navigationContext->getPage($page)->open($params);
-        $this->getSession()->wait(1000);
-    }
-
-    /**
-     * Go to the votes details page
-     * @When I go to the votes details page
-     */
-    public function iGoToTheVotesDetailsPage()
-    {
-        $this->visitPageWithParams("project user votes page",['projectSlug' => 'budget-participatif-rennes']);
-    }
-
-    /**
-     * There should be nb votes
-     * @Then there should be :nb votes
-     */
-    public function thereShouldBeNbVotes($nb)
-    {
-        $count = $this->navigationContext->getPage('project user votes page')->countVotes();
-        expect($count == $nb);
-    }
-
-    /**
-     * I remove the first vote
-     * @When I remove the first vote
-     */
-    public function iRemoveTheFirstVote()
-    {
-        $this->navigationContext->getPage('project user votes page')->removeFirstVote();
-        $this->getSession()->wait(5000);
     }
 }

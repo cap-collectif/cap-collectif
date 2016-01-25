@@ -1,4 +1,3 @@
-@proposals_votes
 Feature: Proposal Votes Restful Api
   As an API client
 
@@ -17,44 +16,6 @@ Feature: Proposal Votes Restful Api
           "private": @boolean@
         },
         @...@
-      ],
-      "count": @integer@
-    }
-    """
-
-  Scenario: Logged in API client wants to get all votable steps with votes
-    Given I am logged in to api as admin
-    When I send a GET request to "/api/projects/7/votable_steps"
-    Then the JSON response status code should be 200
-    And the JSON response should match:
-    """
-    {
-      "votableSteps": [
-        {
-          "projectId": @integer@,
-          "position": @integer@,
-          "openingStatus": @string@,
-          "id": @integer@,
-          "title": @string@,
-          "enabled": @boolean@,
-          "startAt": "@string@.isDateTime()",
-          "endAt": "@string@.isDateTime()",
-          "voteType": @integer@,
-          "isOpen": @boolean@,
-          "votesHelpText": @string@,
-          "budget": @...@,
-          "creditsLeft": @number@,
-          "userVotesCount": @integer@,
-          "userVotes": [
-            {
-              "proposal": @...@,
-              "selectionStep": @...@,
-              "private": @boolean@
-            },
-            @...@
-          ]
-        },
-        @...@
       ]
     }
     """
@@ -62,18 +23,18 @@ Feature: Proposal Votes Restful Api
   @database
   Scenario: Logged in API client wants to vote and unvote for a proposal in a selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/2/vote" with json:
     """
     {
     }
     """
     Then the JSON response status code should be 201
-    And I send a DELETE request to "/api/selection_steps/6/proposals/2/votes"
+    And I send a DELETE request to "/api/selection_steps/6/proposals/2/vote"
     Then the JSON response status code should be 204
 
   @database
   Scenario: Anonymous API client wants to vote for a proposal in a selection step
-    When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/2/vote" with json:
     """
     {
       "username": "test",
@@ -85,7 +46,7 @@ Feature: Proposal Votes Restful Api
   @security
   Scenario: Logged in API client wants to vote several times for a proposal in a selection step
     Given I am logged in to api as admin
-    When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/2/vote" with json:
     """
     {
     }
@@ -103,7 +64,7 @@ Feature: Proposal Votes Restful Api
 
   @security
   Scenario: Anonymous API client wants to vote several times for a proposal in a selection step
-    When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/2/vote" with json:
     """
     {
       "username": "test",
@@ -123,7 +84,7 @@ Feature: Proposal Votes Restful Api
 
   @security
   Scenario: Anonymous API client wants to vote with an email associated to an account
-    When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/2/vote" with json:
     """
     {
       "username": "test",
@@ -144,7 +105,7 @@ Feature: Proposal Votes Restful Api
   @security
   Scenario: Logged in API client wants to delete a non-existing vote
     Given I am logged in to api as user
-    When I send a DELETE request to "/api/selection_steps/6/proposals/2/votes"
+    When I send a DELETE request to "/api/selection_steps/6/proposals/2/vote"
     Then the JSON response status code should be 400
     And the JSON response should match:
     """
@@ -158,7 +119,7 @@ Feature: Proposal Votes Restful Api
   @security
   Scenario: Logged in API client wants to vote for a proposal in a wrong selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/6/proposals/3/votes" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/3/vote" with json:
     """
     {
     }
@@ -176,7 +137,7 @@ Feature: Proposal Votes Restful Api
   @security
   Scenario: Logged in API client wants to vote for a proposal in a not votable selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/7/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/7/proposals/2/vote" with json:
     """
     {
     }
@@ -194,7 +155,7 @@ Feature: Proposal Votes Restful Api
   @security
   Scenario: Logged in API client wants to vote for a proposal in a closed selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/8/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/8/proposals/2/vote" with json:
     """
     {
     }
@@ -208,33 +169,3 @@ Feature: Proposal Votes Restful Api
       "errors": @null@
     }
     """
-
-    @security
-    Scenario: Logged in API client wants to vote when he has not enough credits left
-      Given I am logged in to api as admin
-      When I send a POST request to "/api/selection_steps/9/proposals/8/votes" with json:
-      """
-      {
-      }
-      """
-      Then the JSON response status code should be 400
-      And the JSON response should match:
-      """
-      {
-        "form": @...@,
-        "errors":[
-          "Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition."
-        ]
-      }
-      """
-
-  @security
-  Scenario: Anonymous API client wants to vote on a selection step that has budget vote
-    When I send a POST request to "/api/selection_steps/9/proposals/8/votes" with json:
-      """
-      {
-        "username": "bouh",
-        "email": "voter@test.com"
-      }
-      """
-    Then the JSON response status code should be 401

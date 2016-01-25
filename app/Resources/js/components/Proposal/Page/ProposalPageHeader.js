@@ -11,7 +11,6 @@ const ProposalPageHeader = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
-    showNullEstimation: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -23,8 +22,6 @@ const ProposalPageHeader = React.createClass({
 
   render() {
     const proposal = this.props.proposal;
-    const votesCount = proposal.votesCount;
-
     const createdDate = (
       <FormattedDate
        value={moment(proposal.created_at)}
@@ -77,18 +74,18 @@ const ProposalPageHeader = React.createClass({
         </div>
         <ul className="nav nav-pills project__infos">
           { proposal.votesCount > 0
-            ? <li className="proposal__info--votes">
-                <div className="value">{votesCount}</div>
+            ? <li className="proposal__votes">
+                <div className="value">{proposal.votesCount}</div>
                 <div className="excerpt category">
                   <FormattedMessage
                     message={this.getIntlMessage('vote.count_no_nb')}
-                    count={votesCount}
+                    count={proposal.votesCount}
                   />
                 </div>
               </li>
             : null
           }
-          <li className="proposal__info--comments">
+          <li className="proposal__comments">
             <div className="value">{proposal.comments_count}</div>
             <div className="excerpt category">
               <FormattedMessage
@@ -109,7 +106,7 @@ const ProposalPageHeader = React.createClass({
             <i className="cap cap-marker-1-1"></i>{proposal.district.name}
           </span>
           <span className="proposal__info">
-            <ProposalDetailEstimation proposal={proposal} showNullEstimation={this.props.showNullEstimation} />
+            <ProposalDetailEstimation proposal={proposal} />
           </span>
         </div>
       </div>

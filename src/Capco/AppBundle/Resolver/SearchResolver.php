@@ -149,13 +149,9 @@ class SearchResolver
     {
         $sort = $sort ? $sort : '_score';
         $order = $order ? $order : 'desc';
-        $missing = $order === 'desc' ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1;
 
         return [
-            $sort => [
-                'order' => $order,
-                'missing' => $missing,
-            ]
+            $sort => $order,
         ];
     }
 

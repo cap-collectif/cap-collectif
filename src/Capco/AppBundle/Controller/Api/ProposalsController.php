@@ -84,9 +84,17 @@ class ProposalsController extends FOSRestController
     public function getProposalAction(ProposalForm $proposalForm, Proposal $proposal)
     {
         $em = $this->get('doctrine.orm.entity_manager');
-        $firstVotableStep = $this->get('capco.proposal_votes.resolver')
-            ->getFirstVotableStepForProposal($proposal)
+        $votableSteps = $em
+            ->getRepository('CapcoAppBundle:Steps\SelectionStep')
+            ->getVotableStepsForProposal($proposal)
         ;
+        $firstVotableStep = null;
+        foreach ($votableSteps as $step) {
+            if ($step->isOpen()) {
+                $firstVotableStep = $step;
+                break;
+            }
+        }
         $userHasVote = false;
         if ($this->getUser() && $firstVotableStep) {
             $userVote = $em
@@ -103,15 +111,10 @@ class ProposalsController extends FOSRestController
             }
         }
 
-        $creditsLeft = $this
-            ->get('capco.proposal_votes.resolver')
-            ->getCreditsLeftForUser($this->getUser(), $firstVotableStep)
-        ;
-
         return [
             'proposal' => $proposal,
+            'votableStep' => $firstVotableStep,
             'userHasVote' => $userHasVote,
-            'creditsLeft' => $creditsLeft,
         ];
     }
 
@@ -278,7 +281,6 @@ class ProposalsController extends FOSRestController
 
         return [
             'votes' => $votes,
-            'count' => count($votes),
         ];
     }
 

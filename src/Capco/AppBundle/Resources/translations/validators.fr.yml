@@ -27,13 +27,12 @@ proposal:
     already_voted: Vous avez déjà voté pour cette proposition.
     email_belongs_to_user: Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition.
     no_comment_when_private_error: Vous ne pouvez pas poster de commentaire en tant qu'anonyme.
-    not_enough_credits: Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition.
 
 idea:
   vote:
     already_voted: Vous avez déjà voté pour cette idée.
-    email_belongs_to_user: Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette idée.
     no_message_when_private_error: Vous ne pouvez pas poster de commentaire en tant qu'anonyme.
+    email_belongs_to_user: Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette idée.
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
 
 date:

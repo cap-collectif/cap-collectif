@@ -349,14 +349,9 @@ class StepController extends Controller
             'statuses' => $em->getRepository('CapcoAppBundle:Status')->getByProject($project),
         ], 'json', SerializationContext::create()->setGroups(['Statuses']));
 
-        $stepJson = $serializer->serialize([
-            'step' => $step,
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
-
         $response = $this->render('CapcoAppBundle:Step:selection.html.twig', [
             'project' => $project,
             'currentStep' => $step,
-            'step' => $stepJson,
             'proposalsCount' => $proposalsCount,
             'themes' => $themes,
             'statuses' => $statuses,

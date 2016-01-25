@@ -13,7 +13,6 @@ const ProposalVoteSidebar = React.createClass({
     userHasVote: React.PropTypes.bool,
     expanded: React.PropTypes.bool.isRequired,
     onToggleExpand: React.PropTypes.func.isRequired,
-    creditsLeft: React.PropTypes.number,
   },
   mixins: [IntlMixin],
 
@@ -21,7 +20,6 @@ const ProposalVoteSidebar = React.createClass({
     return {
       votableStep: null,
       userHasVote: false,
-      creditsLeft: null,
     };
   },
 
@@ -32,28 +30,26 @@ const ProposalVoteSidebar = React.createClass({
 
     const proposal = this.props.proposal;
     const votableStepId = this.props.votableStep.id;
-    const voteType = this.props.votableStep.voteType;
     const wrapperClassName = classNames({
       'sidebar-hideable': true,
       'sidebar-hidden-small': !this.props.expanded,
     });
+    const stepToDisplay = this.props.votableStep;
+    stepToDisplay.votesCount = proposal.votesCountBySelectionSteps[votableStepId];
 
     return (
       <Col xs={12} sm={3} className="sidebar" id="sidebar">
         <div className={wrapperClassName}>
           <StepsList
-            steps={[this.props.votableStep]}
-            votes={proposal.votesCountBySelectionSteps}
+            steps={[stepToDisplay]}
             style={{borderBottom: '0'}}
           />
           <ProposalVoteBox
             proposal={proposal}
             selectionStepId={votableStepId}
-            voteType={voteType}
             className="block block--bordered box"
             formWrapperClassName="sidebar__form"
             userHasVote={this.props.userHasVote}
-            creditsLeft={this.props.creditsLeft}
           />
         </div>
         <Button

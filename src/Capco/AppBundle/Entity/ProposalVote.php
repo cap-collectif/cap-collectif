@@ -14,7 +14,6 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * @CapcoAssert\HasAnonymousOrUser()
  * @CapcoAssert\EmailDoesNotBelongToUser(message="proposal.vote.email_belongs_to_user")
  * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalVote", objectPath="proposal")
- * @CapcoAssert\HasEnoughCreditsToVote()
  */
 class ProposalVote extends AbstractVote
 {

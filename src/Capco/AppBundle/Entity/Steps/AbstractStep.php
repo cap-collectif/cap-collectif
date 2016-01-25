@@ -342,7 +342,7 @@ abstract class AbstractStep
             return $this->projectAbstractStep->getProject();
         }
 
-        return null;
+        return;
     }
 
     /**

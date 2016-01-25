@@ -113,9 +113,3 @@ services:
     factory_service: doctrine.orm.entity_manager
     factory_method: getRepository
     arguments: ['CapcoAppBundle:ProposalVote']
-
-  capco.selection_step.repository:
-      class: Capco\AppBundle\Repository\SelectionStepRepository
-      factory_service: doctrine.orm.entity_manager
-      factory_method: getRepository
-      arguments: ['CapcoAppBundle:Steps\SelectionStep']

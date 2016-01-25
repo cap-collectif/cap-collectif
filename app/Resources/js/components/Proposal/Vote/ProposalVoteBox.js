@@ -5,15 +5,12 @@ import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
 import ProposalVoteForm from './ProposalVoteForm';
 import LoginButton from '../../Utils/LoginButton';
-import {VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE} from '../../../constants/ProposalConstants';
 
 const ProposalVoteBox = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     selectionStepId: React.PropTypes.number.isRequired,
-    voteType: React.PropTypes.number,
     userHasVote: React.PropTypes.bool,
-    creditsLeft: React.PropTypes.number,
     className: React.PropTypes.string,
     formWrapperClassName: React.PropTypes.string,
     onSubmit: React.PropTypes.func,
@@ -26,8 +23,6 @@ const ProposalVoteBox = React.createClass({
   getDefaultProps() {
     return {
       userHasVote: false,
-      creditsLeft: null,
-      voteType: 1,
       className: '',
       formWrapperClassName: '',
       onSubmit: () => {},
@@ -71,21 +66,6 @@ const ProposalVoteBox = React.createClass({
     this.props.onValidationFailure();
   },
 
-  userHasVote() {
-    return LoginStore.isLoggedIn() && this.props.userHasVote;
-  },
-
-  userHasEnoughCredits() {
-    if (LoginStore.isLoggedIn() && !this.userHasVote() && this.props.creditsLeft !== null && this.props.proposal.estimation !== null) {
-      return this.props.creditsLeft >= this.props.proposal.estimation;
-    }
-    return true;
-  },
-
-  displayForm() {
-    return this.props.voteType === VOTE_TYPE_SIMPLE || this.userHasEnoughCredits();
-  },
-
   render() {
     return (
       <div className={this.props.className}>
@@ -98,26 +78,15 @@ const ProposalVoteBox = React.createClass({
             : null
         }
         <div className={this.props.formWrapperClassName}>
-          {
-            this.displayForm()
-              ? <ProposalVoteForm
-              proposal={this.props.proposal}
-              selectionStepId={this.props.selectionStepId}
-              isSubmitting={this.state.isSubmitting}
-              onValidationFailure={this.handleValidationFailure}
-              onSubmitSuccess={this.handleSubmitSuccess}
-              onSubmitFailure={this.handleSubmitFailure}
-              userHasVote={this.props.userHasVote}
-            />
-            : null
-          }
-          {
-            !this.userHasEnoughCredits() && !this.state.isSubmitting
-            ? <p style={{marginTop: '10px'}}>
-                {this.getIntlMessage('proposal.vote.not_enough_credits')}
-              </p>
-            : null
-          }
+          <ProposalVoteForm
+            proposal={this.props.proposal}
+            selectionStepId={this.props.selectionStepId}
+            isSubmitting={this.state.isSubmitting}
+            onValidationFailure={this.handleValidationFailure}
+            onSubmitSuccess={this.handleSubmitSuccess}
+            onSubmitFailure={this.handleSubmitFailure}
+            userHasVote={this.props.userHasVote}
+          />
         </div>
         <SubmitButton
           id="confirm-proposal-vote"
@@ -127,11 +96,9 @@ const ProposalVoteBox = React.createClass({
           bsStyle={(!this.props.userHasVote || this.state.isSubmitting) ? 'success' : 'danger'}
           className="btn-block"
           style={{marginTop: '10px'}}
-          disabled={!this.displayForm() && LoginStore.isLoggedIn()}
-          loginOverlay={this.props.voteType === VOTE_TYPE_BUDGET}
         />
         {
-          !LoginStore.isLoggedIn() && this.props.voteType !== VOTE_TYPE_BUDGET
+          !LoginStore.isLoggedIn()
           ? <div>
             <p
               className="text-center excerpt"
