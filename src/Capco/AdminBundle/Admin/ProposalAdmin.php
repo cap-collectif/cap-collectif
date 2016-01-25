@@ -78,7 +78,8 @@ class ProposalAdmin extends Admin
                 'btn_add' => false,
                 'help' => 'admin.fields.proposal.help.status',
             ])
-            ->add('estimation', 'number', [
+            ->add('estimation', 'money', [
+                'currency' => 'EUR',
                 'label' => 'admin.fields.proposal.estimation',
                 'required' => false,
                 'help' => 'admin.fields.proposal.help.estimation',

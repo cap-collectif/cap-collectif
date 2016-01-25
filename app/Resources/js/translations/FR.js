@@ -156,6 +156,25 @@ export default {
       version_comment: 'Explication',
       version_parent: 'Modification de : ',
     },
+    project: {
+      votes: {
+        delete: 'Retirer',
+        nb: '{num, plural, =0{0 proposition sélectionnée} one{# proposition sélectionnée} other{# propositions sélectionnées}}',
+        no_active_step: 'Aucun étape de vote n\'est actuellement active.',
+        title: 'Détails de mes votes',
+        type: {
+          budget: '(vote selon le budget)',
+          simple: '(vote simple)',
+        },
+        widget: {
+          budget: 'Budget',
+          count: 'Mes votes',
+          left: 'Restant',
+          spent: 'Dépensé',
+          step: 'Étape',
+        },
+      },
+    },
     proposal: {
       add: 'Faire une proposition',
       body: 'Description',
@@ -230,6 +249,7 @@ export default {
         modal: {
           title: 'Soutenir',
         },
+        not_enough_credits: 'Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux.',
         show_more: 'Voir tous les votes',
         vote_with_my_account: 'Soutenir avec mon compte',
       },

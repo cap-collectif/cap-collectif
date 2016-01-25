@@ -144,7 +144,7 @@ class Proposal implements CommentableInterface, VotableInterface
      * @var
      * @ORM\Column(name="estimation", type="float", nullable=true)
      */
-    private $estimation;
+    private $estimation = null;
 
     /**
      * Constructor.

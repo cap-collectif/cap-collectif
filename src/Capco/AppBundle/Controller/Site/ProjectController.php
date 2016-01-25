@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use JMS\Serializer\SerializationContext;
 
 class ProjectController extends Controller
 {
@@ -38,6 +40,47 @@ class ProjectController extends Controller
         return [
             'projects' => $projects,
         ];
+    }
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     * @Route("/projects/{projectSlug}/votes", name="app_project_show_user_votes")
+     * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
+     *
+     * @param Project     $project
+     */
+    public function showUserVotesAction(Project $project)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $serializer = $this->get('jms_serializer');
+
+        $votableSteps = $serializer->serialize([
+            'votableSteps' => $this
+                ->get('capco.proposal_votes.resolver')
+                ->getVotableStepsForProject($project),
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
+
+        $districts = $serializer->serialize([
+            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Districts']));
+
+        $themes = $serializer->serialize([
+            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Themes']));
+
+        $response = $this->render('CapcoAppBundle:Project:show_user_votes.html.twig', [
+            'project' => $project,
+            'themes' => $themes,
+            'districts' => $districts,
+            'votableSteps' => $votableSteps,
+        ]);
+
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
+            $response->setPublic();
+            $response->setSharedMaxAge(60);
+        }
+
+        return $response;
     }
 
     // Page project
@@ -420,5 +463,30 @@ class ProjectController extends Controller
         }
 
         return $parameters;
+    }
+
+    /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
+     * @Template("CapcoAppBundle:Project:votes_widget.html.twig")
+     *
+     * @param $max
+     * @param $offset
+     *
+     * @return array
+     */
+    public function showVotesWidgetAction(Project $project)
+    {
+        $serializer = $this->get('jms_serializer');
+        $votableSteps = $serializer->serialize([
+            'votableSteps' => $this
+                ->get('capco.proposal_votes.resolver')
+                ->getVotableStepsForProject($project),
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
+
+        return [
+            'votableSteps' => $votableSteps,
+            'project' => $project,
+        ];
     }
 }

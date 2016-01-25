@@ -1,0 +1,18 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% set showVotesWidget = capco_has_votable_step(project) and is_granted('ROLE_USER') %}
+{% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
+
+{% block mainContent %}
+
+    {% if showVotesWidget %}
+        {{ render(controller('CapcoAppBundle:Site/Project:showVotesWidget', { 'projectSlug': project.slug })) }}
+    {% endif %}
+
+    {{ parent() }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

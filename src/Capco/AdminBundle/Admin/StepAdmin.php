@@ -175,8 +175,20 @@ class StepAdmin extends Admin
                         ],
                     ],
                 ])
-                ->add('votable', null, [
-                    'label' => 'admin.fields.step.votable',
+                ->add('voteType', 'choice', [
+                    'label' => 'admin.fields.step.vote_type',
+                    'choices' => SelectionStep::$voteTypeLabels,
+                    'translation_domain' => 'CapcoAppBundle',
+                    'required' => true,
+                    'help' => 'admin.help.step.vote_type',
+                ])
+                ->add('votesHelpText', 'textarea', [
+                    'label' => 'admin.fields.step.votesHelpText',
+                ])
+                ->add('budget', 'money', [
+                    'currency' => 'EUR',
+                    'label' => 'admin.fields.step.budget',
+                    'required' => false,
                 ])
             ;
         }
