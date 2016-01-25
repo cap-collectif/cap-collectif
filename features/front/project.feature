@@ -1,3 +1,4 @@
+@project
 Feature: Project
 
   Scenario: Can not sort or filter if feature projects_form is disabled
@@ -27,7 +28,7 @@ Feature: Project
     And I visited "projects page"
     And I select "Transport" from "capco_app_search_project_theme"
     And I wait 1 seconds
-    Then I should see 4 ".thumbnail--custom" elements
+    Then I should see 5 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"
@@ -41,7 +42,7 @@ Feature: Project
     And I wait 1 seconds
     And I select "Nombre de contributions" from "capco_app_search_project_sort"
     And I wait 1 seconds
-    Then I should see 4 ".thumbnail--custom" elements
+    Then I should see 5 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"
@@ -104,18 +105,18 @@ Feature: Project
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "135 contributions"
+    Then I should see "139 contributions"
     And I hover over the "#contributions-counter-pill" element
     And I wait 1 seconds
-    And I should see "25 propositions"
-    And I should see "78 arguments"
+    And I should see "26 propositions"
+    And I should see "81 arguments"
     And I should see "32 sources"
 
   Scenario: Project header should display correct number of participants
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "22 participants"
+    Then I should see "21 participants"
 
   @javascript
   Scenario: Can download a project in xslx format
@@ -169,8 +170,8 @@ Feature: Project
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     When I follow "Corbeille"
-    Then I should see 130 ".opinion__list .opinion" elements
-    And I should see "130" in the "span.badge" element
+    Then I should see 128 ".opinion__list .opinion" elements
+    And I should see "128" in the "span.badge" element
 
   Scenario: I should not see opinion types menu when only one type is allowed
     Given I visited "consultation page" with:

@@ -7,12 +7,14 @@ const LoginOverlay = React.createClass({
   propTypes: {
     children: React.PropTypes.element.isRequired,
     isRegistrationEnabled: React.PropTypes.bool,
+    enabled: React.PropTypes.bool,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       isRegistrationEnabled: true,
+      enabled: true,
     };
   },
 
@@ -21,7 +23,7 @@ const LoginOverlay = React.createClass({
     if (!this.props.children) {
       return null;
     }
-    if (LoginStore.isLoggedIn()) {
+    if (LoginStore.isLoggedIn() || !this.props.enabled) {
       return this.props.children;
     }
 

@@ -8,12 +8,16 @@ const ProposalList = React.createClass({
   propTypes: {
     proposals: React.PropTypes.array.isRequired,
     selectionStepId: React.PropTypes.number,
+    creditsLeft: React.PropTypes.number,
+    voteType: React.PropTypes.number,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       selectionStepId: null,
+      creditsLeft: null,
+      voteType: 0,
     };
   },
 
@@ -36,6 +40,8 @@ const ProposalList = React.createClass({
                 key={proposal.id}
                 proposal={proposal}
                 selectionStepId={this.props.selectionStepId}
+                creditsLeft={this.props.creditsLeft}
+                voteType={this.props.voteType}
               />
             );
           })

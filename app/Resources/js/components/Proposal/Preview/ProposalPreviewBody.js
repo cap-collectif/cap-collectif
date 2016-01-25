@@ -5,6 +5,7 @@ import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 const ProposalPreviewBody = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
+    showNullEstimation: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -30,7 +31,10 @@ const ProposalPreviewBody = React.createClass({
             : null
           }
           <div className="proposal__info">
-            <ProposalDetailEstimation proposal={proposal} />
+            <ProposalDetailEstimation
+              proposal={proposal}
+              showNullEstimation={this.props.showNullEstimation}
+            />
           </div>
         </div>
       </div>

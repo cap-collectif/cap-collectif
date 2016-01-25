@@ -5,18 +5,36 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('now', '+40 days')>
     body: <p><text(1000)></p>
-    votable: true
+    voteType: 1
+    votesHelpText: <text(1000)>
   selectionStep2:
     title: Vainqueur
     isEnabled: true
     startAt: <dateTimeBetween('-10 days', 'now')>
     endAt: <dateTimeBetween('now', '+10 days')>
     body: <p><text(1000)></p>
-    votable: false
+    voteType: 0
   selectionStep3:
     title: Fermée
     isEnabled: true
     startAt: <dateTimeBetween('-10 days', '-5 days')>
     endAt: <dateTimeBetween('-4 days', '-1 days')>
     body: <p><text(1000)></p>
-    votable: true
+    voteType: 1
+  selectionStep4:
+    title: Sélection avec vote selon le budget
+    isEnabled: true
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('now', '+40 days')>
+    body: <p><text(1000)></p>
+    voteType: 2
+    votesHelpText: <text(1000)>
+    budget: 3000000
+  selectionStep5:
+    title: Sélection avec vote simple
+    isEnabled: true
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('now', '+40 days')>
+    body: <p><text(1000)></p>
+    voteType: 1
+    votesHelpText: <text(1000)>

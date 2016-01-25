@@ -1,4 +1,4 @@
-@proposal
+@proposals
 Feature: Proposals
 
   # Collect step : See proposals with filters, sorting and search term
@@ -238,11 +238,11 @@ Feature: Proposals
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes   |
       | stepSlug    | selection                    |
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I should see "3 propositions"
     Then I should see 3 ".proposal__preview" elements
     And I select "Justice" from "proposal-filter-theme"
-    And I wait 5 seconds
+    And I wait 1 seconds
     And I should see "2 propositions"
     Then I should see 2 ".proposal__preview" elements
 
@@ -251,202 +251,8 @@ Feature: Proposals
     Given I visited "selection page" with:
       | projectSlug | budget-participatif-rennes       |
       | stepSlug    | selection                        |
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then "Rénovation du gymnase" should be before "Ravalement de la façade de la bibliothèque municipale" for selector ".proposal__preview .proposal__title a"
     And I press "Commentées"
-    And I wait 5 seconds
+    And I wait 1 seconds
     Then "Ravalement de la façade de la bibliothèque municipale" should be before "Rénovation du gymnase" for selector ".proposal__preview .proposal__title a"
-
-  # Votes from selection step page
-
-  @javascript @database @elasticsearch
-  Scenario: Logged in user wants to vote and unvote for a proposal in a selection step
-    Given I am logged in as user
-    And I visited "selection page" with:
-      | projectSlug | budget-participatif-rennes       |
-      | stepSlug    | selection                        |
-    And I wait 5 seconds
-    Then I should see "2" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
-    And I should see "Soutenir" in the "#proposal-2" element
-    When I click the "#proposal-2 .proposal__preview__vote" element
-    And I wait 5 seconds
-    Then I should see "3" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
-    And I should see "Annuler mon soutien" in the "#proposal-2" element
-    And I should see "Merci, votre vote a bien été pris en compte."
-    When I click the "#proposal-2 .proposal__preview__vote" element
-    And I wait 5 seconds
-    Then I should see "2" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
-    And I should see "Soutenir" in the "#proposal-2" element
-    And I should see "Merci, votre vote a bien été supprimé."
-
-  @javascript @database @elasticsearch
-  Scenario: Anonymous user wants to vote for a proposal in a selection step with a comment
-    Given I visited "selection page" with:
-      | projectSlug | budget-participatif-rennes       |
-      | stepSlug    | selection                        |
-    And I wait 5 seconds
-    Then I should see "2" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
-    And I should see "0" in the "#proposal-2 .proposal__comments .proposal__counter__value" element
-    And I should see "Soutenir" in the "#proposal-2" element
-    When I click the "#proposal-2 .proposal__preview__vote" element
-    And I wait 5 seconds
-    And I fill in the following:
-      | proposal-vote__username   | test                |
-      | proposal-vote__email      | test@coucou.fr      |
-      | proposal-vote__comment    | Coucou !            |
-    And I press "confirm-proposal-vote"
-    And I wait 5 seconds
-    Then I should see "3" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
-    And I should see "1" in the "#proposal-2 .proposal__comments .proposal__counter__value" element
-    And I should see "Soutenir" in the "#proposal-2" element
-    And I should see "Merci, votre vote a bien été pris en compte."
-
-  @javascript @database @elasticsearch
-  Scenario: Anonymous user wants to vote for a proposal in a selection step anonymously
-    Given I visited "selection page" with:
-      | projectSlug | budget-participatif-rennes       |
-      | stepSlug    | selection                        |
-    And I wait 5 seconds
-    Then I should see "2" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
-    And I should see "0" in the "#proposal-2 .proposal__comments .proposal__counter__value" element
-    And I should see "Soutenir" in the "#proposal-2" element
-    When I click the "#proposal-2 .proposal__preview__vote" element
-    And I wait 5 seconds
-    And I fill in the following:
-      | proposal-vote__username   | test                |
-      | proposal-vote__email      | test@coucou.fr      |
-    And I check "proposal-vote__private"
-    And I press "confirm-proposal-vote"
-    And I wait 5 seconds
-    Then I should see "3" in the "#proposal-2 .proposal__votes .proposal__counter__value" element
-    And I should see "0" in the "#proposal-2 .proposal__comments .proposal__counter__value" element
-    And I should see "Soutenir" in the "#proposal-2" element
-    And I should see "Merci, votre vote a bien été pris en compte."
-
-  @javascript @elasticsearch
-  Scenario: Anonymous user wants to vote twice with the same email from a selection step
-    Given I visited "selection page" with:
-      | projectSlug | budget-participatif-rennes       |
-      | stepSlug    | selection                        |
-    And I wait 5 seconds
-    When I click the "#proposal-2 .proposal__preview__vote" element
-    And I wait 5 seconds
-    And I fill in the following:
-      | proposal-vote__username   | test                |
-      | proposal-vote__email      | cheater@test.com       |
-      | proposal-vote__comment    | Coucou !            |
-    And I press "confirm-proposal-vote"
-    And I wait 5 seconds
-    Then I should see "Vous avez déjà voté pour cette proposition."
-
-  # Votes from proposal page
-
-  @javascript @database
-  Scenario: Logged in user wants to vote and unvote for a proposal with a comment
-    Given I am logged in as user
-    When I visited "proposal page" with:
-      | projectSlug      | budget-participatif-rennes       |
-      | stepSlug         | collecte-des-propositions        |
-      | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
-    And I should see "0" in the ".proposal__comments .value" element
-    And I fill in the following:
-     | proposal-vote__comment    | Coucou !                 |
-    And I press "Soutenir"
-    And I wait 5 seconds
-    Then I should see "3" in the ".proposal__votes .value" element
-    And I should see "1" in the ".proposal__comments .value" element
-    And I should see "user" in the ".proposal__vote:nth-child(1)" element
-    And I should see "Merci, votre vote a bien été pris en compte"
-    And I press "Annuler mon soutien"
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
-    And I should see "1" in the ".proposal__comments .value" element
-    And I should not see "user" in the ".proposal__vote:nth-child(1)" element
-    And I should see "Merci, votre vote a bien été supprimé."
-
-  @javascript @database
-  Scenario: Logged in user wants to vote for a proposal anonymously
-    Given I am logged in as user
-    When I visited "proposal page" with:
-      | projectSlug      | budget-participatif-rennes       |
-      | stepSlug         | collecte-des-propositions        |
-      | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
-    And I check "proposal-vote__private"
-    And I press "Soutenir"
-    And I wait 5 seconds
-    Then I should see "3" in the ".proposal__votes .value" element
-    And I should see "Annuler mon soutien"
-    And I should see "Anonyme" in the ".proposal__vote:nth-child(1)" element
-    And I should see "Merci, votre vote a bien été pris en compte"
-
-  @javascript @database
-  Scenario: Anonymous user wants to vote for a proposal with a comment
-    When I visited "proposal page" with:
-      | projectSlug      | budget-participatif-rennes       |
-      | stepSlug         | collecte-des-propositions        |
-      | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
-    And I should see "0" in the ".proposal__comments .value" element
-    And I fill in the following:
-      | proposal-vote__username   | test                |
-      | proposal-vote__email      | test@coucou.fr      |
-      | proposal-vote__comment    | Coucou !            |
-    And I press "Soutenir"
-    And I wait 5 seconds
-    Then I should see "3" in the ".proposal__votes .value" element
-    And I should see "1" in the ".proposal__comments .value" element
-    And I should see "test" in the ".proposal__vote:nth-child(1)" element
-    And I should see "Merci, votre vote a bien été pris en compte"
-
-  @javascript @database
-  Scenario: Anonymous user wants to vote for a proposal anonymously
-    When I visited "proposal page" with:
-      | projectSlug      | budget-participatif-rennes       |
-      | stepSlug         | collecte-des-propositions        |
-      | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
-    And I fill in the following:
-      | proposal-vote__username   | test                |
-      | proposal-vote__email      | test@coucou.fr      |
-    And I check "proposal-vote__private"
-    And I press "Soutenir"
-    And I wait 5 seconds
-    Then I should see "3" in the ".proposal__votes .value" element
-    And I should see "Anonyme" in the ".proposal__vote:nth-child(1)" element
-    And I should see "Merci, votre vote a bien été pris en compte"
-
-  @javascript @security
-  Scenario: Anonymous user wants to vote twice with the same email
-    When I visited "proposal page" with:
-      | projectSlug      | budget-participatif-rennes       |
-      | stepSlug         | collecte-des-propositions        |
-      | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
-    And I fill in the following:
-      | proposal-vote__username   | test                |
-      | proposal-vote__email      | cheater@test.com    |
-    And I press "Soutenir"
-    And I wait 5 seconds
-    Then I should see "Vous avez déjà voté pour cette proposition."
-
-  @javascript @security
-  Scenario: Anonymous user wants to vote with an email already associated to an account
-    When I visited "proposal page" with:
-      | projectSlug      | budget-participatif-rennes       |
-      | stepSlug         | collecte-des-propositions        |
-      | proposalSlug     | renovation-du-gymnase            |
-    And I wait 5 seconds
-    Then I should see "2" in the ".proposal__votes .value" element
-    And I fill in the following:
-      | proposal-vote__username   | test                |
-      | proposal-vote__email      | user@test.com    |
-    And I press "Soutenir"
-    And I wait 5 seconds
-    Then I should see "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition."

@@ -14,7 +14,6 @@ Capco\AppBundle\Entity\Proposal:
     selectionSteps: [@selectionStep1]
     createdAt: <(new \DateTime('2015-01-01'))>
     answer: @answer4
-    estimation: 90000.9
   proposal2:
     title: Rénovation du gymnase
     body: |
@@ -82,3 +81,44 @@ Capco\AppBundle\Entity\Proposal:
     theme: @theme2
     district: @district3
     status: @status1
+  proposal7:
+    title: Proposition très chère
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: @user4
+    proposalForm: @proposalform3
+    theme: @theme2
+    district: @district3
+    status: @status1
+    estimation: 2999999
+    selectionSteps: [@selectionStep4, @selectionStep5]
+  proposal8:
+    title: Proposition pas chère
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: @user4
+    proposalForm: @proposalform3
+    theme: @theme2
+    district: @district3
+    status: @status1
+    estimation: 100
+    selectionSteps: [@selectionStep4, @selectionStep5]
+  proposal9:
+    title: Proposition gratuite
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: @user4
+    proposalForm: @proposalform3
+    theme: @theme2
+    district: @district3
+    status: @status1
+    selectionSteps: [@selectionStep4, @selectionStep5]
