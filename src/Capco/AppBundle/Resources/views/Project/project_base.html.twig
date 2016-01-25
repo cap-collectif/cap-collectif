@@ -1,77 +1,18 @@
-{% extends '@CapcoApp/layout.html.twig' %}
+{% extends '@CapcoApp/base.html.twig' %}
 
 {% set showVotesWidget = capco_has_votable_step(project) and is_granted('ROLE_USER') %}
 {% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
 
 {% block mainContent %}
 
-    {# Header  #}
-    {% include '@CapcoApp/Default/header.html.twig' %}
-
     {% if showVotesWidget %}
         {{ render(controller('CapcoAppBundle:Site/Project:showVotesWidget', { 'projectSlug': project.slug })) }}
     {% endif %}
 
-    {% if app.request.hasPreviousSession %}
-        {% for key, messages in app.session.flashbag.all() %}
-            {% for message in messages %}
-            <div class="alert alert-{{ key }} alert-dismissible  alert--no-radius" role="alert" style="margin-bottom: 0; text-align: center">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'global.alert.close'|trans({}, 'CapcoAppBundle') }}</span></button>
-                <span>{% block error_message %}{{ message | trans({}, 'CapcoAppBundle') }}{% endblock %}</span>
-            </div>
-            {% endfor %}
-        {% endfor %}
-    {% endif %}
-
-
-    {# Main jumbotron for a primary marketing message or call to action #}
-    {% block jumbotron %}{% endblock %}
-
-    <div id="main" class="main" tabindex="-1">
-        {% block body %}{% endblock %}
-    </div>
-
-    {# Footer #}
-    {{ render(controller('CapcoAppBundle:Site/Default:footer')) }}
+    {{ parent() }}
 
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript">
-        require('Resources/js/modernizr');
-        require('Resources/js/jsapi');
-        require('Resources/js/googleCharts');
-        var cookieChoices = require('Resources/js/cookiechoices');
-        var App = require('Resources/js/app');
-        if (!Modernizr.intl) {
-            require('Resources/js/browserUpdate');
-        }
-
-        $(window).on('load', function() {
-            App.externalLinks();
-            App.navbarAutocollapse("{{ 'global.menu.see_more' | trans({}, 'CapcoAppBundle') }}");
-            App.skipLinks();
-        });
-        $(window).on('resize', function() {
-            App.navbarAutocollapse("{{ 'global.menu.see_more' | trans({}, 'CapcoAppBundle') }}");
-        });
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip();
-        });
-        document.addEventListener('DOMContentLoaded', function(event) {
-            cookieChoices.showCookieConsentBar(
-              "{{ 'cnil.message' | trans({}, 'CapcoAppBundle') | raw }}",
-              "{{ 'cnil.close' | trans({}, 'CapcoAppBundle') | raw }}",
-              "{{ 'cnil.learn' | trans({}, 'CapcoAppBundle') | raw }}",
-              "{{ url('app_confidentialite') }}"
-            );
-        });
-        App.customModal('.modal--custom');
-        App.video('.fancybox');
-    </script>
-    {% set client_js = capco_site_parameter_value('global.site.embed_js') %}
-    {% if null != client_js %}
-        {{ client_js|raw }}
-    {% endif %}
 {% endblock %}

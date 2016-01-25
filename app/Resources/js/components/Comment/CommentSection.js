@@ -155,10 +155,7 @@ const CommentSection = React.createClass({
           { this.renderFilter() }
         </Row>
         <Loader show={this.state.isLoading} />
-        {(!this.state.isLoading
-            ? <CommentForm comment={this.comment} focus={false} />
-            : null
-        )}
+        <CommentForm comment={this.comment} focus={false} />
         <CommentList {...this.props}
           comments={this.state.comments}
           root

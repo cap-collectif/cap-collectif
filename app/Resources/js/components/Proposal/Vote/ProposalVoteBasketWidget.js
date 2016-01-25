@@ -7,6 +7,7 @@ import Input from '../../Form/Input';
 import {VOTE_TYPE_BUDGET} from '../../../constants/ProposalConstants';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
 import ProposalActions from '../../../actions/ProposalActions';
+import ProposalVotesHelper from '../../../services/ProposalVotesHelper';
 
 const ProposalVoteBasketWidget = React.createClass({
   propTypes: {
@@ -52,10 +53,10 @@ const ProposalVoteBasketWidget = React.createClass({
     );
     const creditsLeft = selectedStep.creditsLeft;
     const creditsSpent = selectedStep.budget - creditsLeft;
-    let percentage = creditsSpent > 0 && selectedStep.budget > 0
-      ? creditsSpent / selectedStep.budget * 100
-      : 0;
-    percentage = Math.round(percentage * 100) / 100;
+    const percentage = ProposalVotesHelper.getSpentPercentage(
+      selectedStep.budget,
+      creditsSpent
+    );
     return (
       <Navbar fixedTop className="proposal-vote__widget hidden-xs">
         <Nav>
