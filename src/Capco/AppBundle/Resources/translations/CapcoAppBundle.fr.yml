@@ -1207,3 +1207,5 @@ search:
       source: Source
       theme: Thème
       user: Membre
+
+'User account is disabled.': Ce compte n'est pas activé.

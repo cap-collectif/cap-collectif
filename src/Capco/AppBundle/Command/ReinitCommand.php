@@ -30,6 +30,10 @@ class ReinitCommand extends ContainerAwareCommand
                 'no-toggles', false, InputOption::VALUE_NONE,
                 'set this option to skip reseting feature flags'
             )
+            ->addOption(
+                'no-es-populate', false, InputOption::VALUE_NONE,
+                'set this option to skip populating ES'
+            )
         ;
     }
 
@@ -72,7 +76,9 @@ class ReinitCommand extends ContainerAwareCommand
         $this->recalculateProjectsCounters($output);
         $this->recalculateRankings($output);
         $this->updateSyntheses($output);
-        $this->populateElastica($output);
+        if (!$input->getOption('no-es-populate')) {
+            $this->populateElastica($output);
+        }
 
         $output->writeln('Reinit completed');
 
