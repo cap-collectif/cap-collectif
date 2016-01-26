@@ -25,9 +25,4 @@ abstract class AbstractSerializationListener implements EventSubscriberInterface
 
         return $reflectionProperty->getValue($exclusionStrategy);
     }
-
-    protected function eventHasGroup($event, $group)
-    {
-        return isset($this->getIncludedGroups($event)[$group]);
-    }
 }

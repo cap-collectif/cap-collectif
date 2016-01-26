@@ -1,8 +1,6 @@
 import React from 'react';
 import {IntlMixin, FormattedMessage} from 'react-intl';
 import ProposalStore from '../../stores/ProposalStore';
-import ProposalVoteStore from '../../stores/ProposalVoteStore';
-import MessageStore from '../../stores/MessageStore';
 import ProposalActions from '../../actions/ProposalActions';
 import {PROPOSAL_PAGINATION} from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
@@ -10,7 +8,6 @@ import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import FlashMessages from '../Utils/FlashMessages';
-import {VOTE_TYPE_DISABLED} from '../../constants/ProposalConstants';
 
 const SelectionStepPage = React.createClass({
   propTypes: {
@@ -18,18 +15,17 @@ const SelectionStepPage = React.createClass({
     statuses: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
     types: React.PropTypes.array.isRequired,
-    step: React.PropTypes.object.isRequired,
+    stepId: React.PropTypes.number.isRequired,
+    votable: React.PropTypes.bool.isRequired,
     count: React.PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
   getInitialState() {
-    ProposalActions.initProposalVotes(this.props.step.creditsLeft);
     return {
       proposals: ProposalStore.proposals,
       proposalsCount: this.props.count,
       currentPage: ProposalStore.currentPage,
-      creditsLeft: ProposalVoteStore.creditsLeft,
       isLoading: true,
       messages: {
         'errors': [],
@@ -40,8 +36,6 @@ const SelectionStepPage = React.createClass({
 
   componentWillMount() {
     ProposalStore.addChangeListener(this.onChange);
-    ProposalVoteStore.addChangeListener(this.onVoteChange);
-    MessageStore.addChangeListener(this.onMessageChange);
   },
 
   componentDidMount() {
@@ -56,25 +50,12 @@ const SelectionStepPage = React.createClass({
 
   componentWillUnmount() {
     ProposalStore.removeChangeListener(this.onChange);
-    ProposalVoteStore.removeChangeListener(this.onVoteChange);
-    MessageStore.removeChangeListener(this.onMessageChange);
-  },
-
-  onMessageChange() {
-    this.setState({
-      messages: MessageStore.messages,
-    });
-  },
-
-  onVoteChange() {
-    this.setState({
-      creditsLeft: ProposalVoteStore.creditsLeft,
-    });
   },
 
   onChange() {
     if (ProposalStore.isProposalListSync) {
       this.setState({
+        messages: ProposalStore.messages,
         proposals: ProposalStore.proposals,
         proposalsCount: ProposalStore.proposalsCount,
         currentPage: ProposalStore.currentPage,
@@ -90,7 +71,7 @@ const SelectionStepPage = React.createClass({
   },
 
   loadProposals() {
-    ProposalActions.load('selectionStep', this.props.step.id);
+    ProposalActions.load('selectionStep', this.props.stepId);
   },
 
   handleFilterOrOrderChange() {
@@ -113,24 +94,19 @@ const SelectionStepPage = React.createClass({
           />
         </h2>
         <ProposalListFilters
-          id={this.props.step.id}
+          id={this.props.stepId}
           fetchFrom="selectionStep"
           theme={this.props.themes}
           district={this.props.districts}
           type={this.props.types}
           status={this.props.statuses}
           onChange={() => this.handleFilterOrOrderChange()}
-          orderByVotes={this.props.step.voteType !== VOTE_TYPE_DISABLED}
+          orderByVotes={this.props.votable}
         />
         <br />
         <Loader show={this.state.isLoading}>
           <div>
-            <ProposalList
-              proposals={this.state.proposals}
-              selectionStepId={this.props.step.id}
-              creditsLeft={this.state.creditsLeft}
-              voteType={this.props.step.isOpen ? this.props.step.voteType : 0}
-            />
+            <ProposalList proposals={this.state.proposals} selectionStepId={this.props.votable ? this.props.stepId : null} />
             {
               nbPages > 1
               ? <Pagination

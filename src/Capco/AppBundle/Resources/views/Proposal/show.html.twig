@@ -1,4 +1,4 @@
-{% extends '@CapcoApp/Project/project_base.html.twig' %}
+{% extends '@CapcoApp/base.html.twig' %}
 
 {% block canonical_link %}{{ '' }}{% endblock %}
 
@@ -16,8 +16,25 @@
          data-themes='{{ themes|escape }}'
          data-districts='{{ districts|escape }}'
          data-votes='{{ votes|escape }}'
-         data-votable-step='{{ votableStep|escape }}'
-         data-user-has-vote='{{ userHasVote }}'
-    ></div>
+         data-votablestep='{{ votableStep|escape }}'
+         data-userhasvote='{{ userHasVote|escape }}'
+    />
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+            App.makeSidebar({ // TODO -> go React
+                sidebar: '#sidebar',
+                container: '#sidebar-container',
+                hideable: '.sidebar-hideable',
+                toggle: '.sidebar-toggle',
+                overlay: '#sidebar-overlay'
+            });
+            App.hideableMessageAndCheckbox({
+                message: '.message-hideable-js',
+                checkbox: '.checkbox-hideable-js',
+            });
+    </script>
 {% endblock %}

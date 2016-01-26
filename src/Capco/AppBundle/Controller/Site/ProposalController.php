@@ -31,14 +31,21 @@ class ProposalController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $firstVotableStep = $this
-            ->get('capco.proposal_votes.resolver')
-            ->getFirstVotableStepForProposal($proposal)
+        $votableSteps = $em
+            ->getRepository('CapcoAppBundle:Steps\SelectionStep')
+            ->getVotableStepsForProposal($proposal)
         ;
+        $firstVotableStep = null;
+        foreach ($votableSteps as $step) {
+            if ($step->isOpen()) {
+                $firstVotableStep = $step;
+                break;
+            }
+        }
 
         $votableStep = $serializer->serialize([
             'votableStep' => $firstVotableStep,
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
+        ], 'json', SerializationContext::create()->setGroups(['Steps']));
 
         $proposalJson = $serializer->serialize(
             ['proposal' => $proposal],

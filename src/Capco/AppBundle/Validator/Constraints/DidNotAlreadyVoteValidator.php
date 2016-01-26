@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Capco\AppBundle\Entity\ProposalVote;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -23,20 +22,17 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
 
         $votes = [];
 
-        $data = [
-            $constraint->objectPath => $accessor->getValue($object, $constraint->objectPath)
-        ];
-        $object->hasUser()
-            ? $data['user'] = $object->getUser()
-            : $data['email'] = $object->getEmail()
-        ;
-
-        // Data specific to proposal votes
-        if ($object instanceof ProposalVote) {
-            $data['selectionStep'] = $object->getSelectionStep();
+        if ($object->hasUser()) {
+            $votes = $this->entityManager->getRepository($constraint->repositoryPath)->findBy([
+                $constraint->objectPath => $accessor->getValue($object, $constraint->objectPath),
+                'user' => $object->getUser(),
+            ]);
+        } else {
+            $votes = $this->entityManager->getRepository($constraint->repositoryPath)->findBy([
+                $constraint->objectPath => $accessor->getValue($object, $constraint->objectPath),
+                'email' => $object->getEmail(),
+            ]);
         }
-
-        $votes = $this->entityManager->getRepository($constraint->repositoryPath)->findBy($data);
 
         foreach ($votes as $vote) {
             if ($vote->getId() != $object->getId()) {

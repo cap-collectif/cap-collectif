@@ -3,19 +3,15 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Entity\AbstractVote as Vote;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Resolver\ProposalVotesResolver;
 use Capco\AppBundle\Resolver\VoteResolver;
 
 class VoteExtension extends \Twig_Extension
 {
-    protected $voteResolver;
-    protected $proposalVotesResolver;
+    protected $resolver;
 
-    public function __construct(VoteResolver $voteResolver, ProposalVotesResolver $proposalVotesResolver)
+    public function __construct(VoteResolver $resolver)
     {
-        $this->voteResolver = $voteResolver;
-        $this->proposalVotesResolver = $proposalVotesResolver;
+        $this->resolver = $resolver;
     }
 
     /**
@@ -34,27 +30,21 @@ class VoteExtension extends \Twig_Extension
             new \Twig_SimpleFunction('capco_vote_object_url', [$this, 'getRelatedObjectUrl']),
             new \Twig_SimpleFunction('capco_vote_object', [$this, 'getRelatedObject']),
             new \Twig_SimpleFunction('capco_vote_object_admin_url', [$this, 'getRelatedObjectAdminUrl']),
-            new \Twig_SimpleFunction('capco_has_votable_step', [$this, 'hasVotableStep']),
         ];
     }
 
     public function getRelatedObjectUrl(Vote $vote, $absolute = false)
     {
-        return $this->voteResolver->getRelatedObjectUrl($vote, $absolute);
+        return $this->resolver->getRelatedObjectUrl($vote, $absolute);
     }
 
     public function getRelatedObjectAdminUrl(Vote $vote, $absolute = false)
     {
-        return $this->voteResolver->getRelatedObjectAdminUrl($vote, $absolute);
+        return $this->resolver->getRelatedObjectAdminUrl($vote, $absolute);
     }
 
     public function getRelatedObject(Vote $vote)
     {
-        return $this->voteResolver->getRelatedObject($vote);
-    }
-
-    public function hasVotableStep(Project $project)
-    {
-        return $this->proposalVotesResolver->hasVotableStep($project);
+        return $this->resolver->getRelatedObject($vote);
     }
 }

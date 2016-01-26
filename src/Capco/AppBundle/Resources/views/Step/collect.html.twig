@@ -1,4 +1,4 @@
-{% extends '@CapcoApp/Project/project_base.html.twig' %}
+{% extends '@CapcoApp/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_collect', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 

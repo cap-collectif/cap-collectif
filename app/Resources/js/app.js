@@ -9,9 +9,6 @@ import FeatureService from './services/FeatureService';
 import CollectStepPage from './components/Page/CollectStepPage';
 import SelectionStepPage from './components/Page/SelectionStepPage';
 import ProposalPage from './components/Proposal/Page/ProposalPage';
-import ProposalVoteBasketWidget from './components/Proposal/Vote/ProposalVoteBasketWidget';
-import ProposalsUserVotesPage from './components/Project/Page/ProposalsUserVotesPage';
-
 FeatureService.load();
 
 AuthService
@@ -57,8 +54,8 @@ AuthService
           themes={$('#render-proposal-page').data('themes').themes}
           districts={$('#render-proposal-page').data('districts').districts}
           votes={$('#render-proposal-page').data('votes').votes}
-          votableStep={$('#render-proposal-page').data('votable-step').votableStep}
-          userHasVote={$('#render-proposal-page').data('user-has-vote')}
+          votableStep={$('#render-proposal-page').data('votablestep').votableStep}
+          userHasVote={$('#render-proposal-page').data('userhasvote')}
           {...IntlData}
         />,
         document.getElementById('render-proposal-page')
@@ -84,7 +81,8 @@ AuthService
       ReactDOM.render(
         <SelectionStepPage
           count={$('#render-selection-step-page').data('count')}
-          step={$('#render-selection-step-page').data('step').step}
+          stepId={$('#render-selection-step-page').data('step-id')}
+          votable={$('#render-selection-step-page').data('votable')}
           themes={$('#render-selection-step-page').data('themes').themes}
           districts={$('#render-selection-step-page').data('districts').districts}
           types={$('#render-selection-step-page').data('types').types}
@@ -92,31 +90,6 @@ AuthService
           {...IntlData}
         />,
         document.getElementById('render-selection-step-page')
-      );
-    }
-
-    if ($('#render-proposal-vote-basket-widget').length) {
-      ReactDOM.render(
-        <ProposalVoteBasketWidget
-          projectId={$('#render-proposal-vote-basket-widget').data('project-id')}
-          votableSteps={$('#render-proposal-vote-basket-widget').data('votable-steps').votableSteps}
-          votesPageUrl={$('#render-proposal-vote-basket-widget').data('votes-page-url')}
-          {...IntlData}
-        />,
-        document.getElementById('render-proposal-vote-basket-widget')
-      );
-    }
-
-    if ($('#render-proposals-user-votes-page').length) {
-      ReactDOM.render(
-        <ProposalsUserVotesPage
-          themes={$('#render-proposals-user-votes-page').data('themes').themes}
-          districts={$('#render-proposals-user-votes-page').data('districts').districts}
-          votableSteps={$('#render-proposals-user-votes-page').data('votable-steps').votableSteps}
-          projectId={$('#render-proposals-user-votes-page').data('project-id')}
-          {...IntlData}
-        />,
-        document.getElementById('render-proposals-user-votes-page')
       );
     }
 

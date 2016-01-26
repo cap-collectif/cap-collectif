@@ -1,4 +1,3 @@
-@selection_steps
 Feature: Selection steps
 
   @elasticsearch
@@ -51,8 +50,7 @@ Feature: Selection steps
         @...@
       ],
       "count": 3,
-      "order": "votes",
-      "creditsLeft": @...@
+      "order": "votes"
     }
     """
 
@@ -104,8 +102,7 @@ Feature: Selection steps
         @...@
       ],
       "count": 3,
-      "order": "votes",
-      "creditsLeft": @...@
+      "order": "votes"
     }
     """
 
@@ -160,7 +157,6 @@ Feature: Selection steps
         @...@
       ],
       "count": 2,
-      "order": "votes",
-      "creditsLeft": @...@
+      "order": "votes"
     }
     """

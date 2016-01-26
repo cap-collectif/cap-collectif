@@ -9,12 +9,9 @@ import ProposalPageAlert from './ProposalPageAlert';
 import ProposalPageVotes from './ProposalPageVotes';
 import ProposalPageComments from './ProposalPageComments';
 import ProposalStore from '../../../stores/ProposalStore';
-import ProposalVoteStore from '../../../stores/ProposalVoteStore';
-import MessageStore from '../../../stores/MessageStore';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteSidebar from '../Vote/ProposalVoteSidebar';
 import FlashMessages from '../../Utils/FlashMessages';
-import {VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET} from '../../../constants/ProposalConstants';
 
 const ProposalPage = React.createClass({
   propTypes: {
@@ -24,61 +21,45 @@ const ProposalPage = React.createClass({
     districts: React.PropTypes.array.isRequired,
     votes: React.PropTypes.array.isRequired,
     votableStep: React.PropTypes.object,
-    userHasVote: React.PropTypes.bool,
+    userHasVote: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       votableStep: null,
-      userHasVote: false,
     };
   },
 
   getInitialState() {
-    ProposalActions.initProposalVotes(this.props.votableStep.creditsLeft, !!this.props.userHasVote);
-    ProposalActions.initProposal(this.props.proposal);
+    ProposalStore.initProposalData(this.props.proposal, this.props.userHasVote, this.props.votableStep);
     return {
       messages: {
         'errors': [],
         'success': [],
       },
       proposal: ProposalStore.proposal,
-      userHasVote: ProposalVoteStore.userHasVote,
-      creditsLeft: ProposalVoteStore.creditsLeft,
+      userHasVote: ProposalStore.userHasVote,
+      votableStep: ProposalStore.votableStep,
       expandSidebar: false,
     };
   },
 
   componentWillMount() {
     ProposalStore.addChangeListener(this.onChange);
-    ProposalVoteStore.addChangeListener(this.onVoteChange);
-    MessageStore.addChangeListener(this.onMessageChange);
   },
 
   componentWillUnmount() {
     ProposalStore.removeChangeListener(this.onChange);
-    ProposalVoteStore.removeChangeListener(this.onVoteChange);
-    MessageStore.removeChangeListener(this.onMessageChange);
-  },
-
-  onMessageChange() {
-    this.setState({
-      messages: MessageStore.messages,
-    });
-  },
-
-  onVoteChange() {
-    this.setState({
-      userHasVote: ProposalVoteStore.userHasVote,
-      creditsLeft: ProposalVoteStore.creditsLeft,
-    });
   },
 
   onChange() {
     if (ProposalStore.isProposalSync) {
       this.setState({
+        messages: ProposalStore.messages,
         proposal: ProposalStore.proposal,
+        userHasVote: ProposalStore.userHasVote,
+        votableStep: ProposalStore.votableStep,
       });
       return;
     }
@@ -101,7 +82,7 @@ const ProposalPage = React.createClass({
 
   render() {
     const proposal = this.state.proposal;
-    const showSidebar = !!this.props.votableStep && this.props.votableStep.voteType !== VOTE_TYPE_DISABLED;
+    const showSidebar = !!this.state.votableStep;
     const wrapperClassName = classNames({
       'container': showSidebar,
       'sidebar__container': showSidebar,
@@ -125,7 +106,6 @@ const ProposalPage = React.createClass({
               <ProposalPageHeader
                 proposal={proposal}
                 className={containersClassName}
-                showNullEstimation={this.props.votableStep && this.props.votableStep.voteType === VOTE_TYPE_BUDGET}
               />
               {
                 proposal.answer
@@ -162,11 +142,10 @@ const ProposalPage = React.createClass({
               showSidebar
               ? <ProposalVoteSidebar
                   proposal={proposal}
-                  votableStep={this.props.votableStep}
+                  votableStep={this.state.votableStep}
                   userHasVote={this.state.userHasVote}
                   expanded={this.state.expandSidebar}
                   onToggleExpand={this.toggleSidebarExpand}
-                  creditsLeft={this.state.creditsLeft}
               />
               : null
             }

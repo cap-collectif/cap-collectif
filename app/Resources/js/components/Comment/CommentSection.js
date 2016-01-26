@@ -133,7 +133,7 @@ const CommentSection = React.createClass({
   renderLoadMore() {
     if (!this.state.isLoading && (this.state.limit < this.state.count || this.state.isLoadingMore)) {
       return (
-        <button className="btn btn-block btn-dark-grey" ref="loadMore" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.loadMore}>
+        <button className="btn btn-block btn-dark-grey" ref="loadMore" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.loadMore.bind(this)}>
           { this.getIntlMessage('comment.more') }
         </button>
       );
@@ -155,7 +155,10 @@ const CommentSection = React.createClass({
           { this.renderFilter() }
         </Row>
         <Loader show={this.state.isLoading} />
-        <CommentForm comment={this.comment} focus={false} />
+        {(!this.state.isLoading
+            ? <CommentForm comment={this.comment.bind(this)} focus={false} />
+            : null
+        )}
         <CommentList {...this.props}
           comments={this.state.comments}
           root
