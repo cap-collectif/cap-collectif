@@ -1,4 +1,4 @@
-{% extends '@CapcoApp/base.html.twig' %}
+{% extends '@CapcoApp/Project/project_base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_selection', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
@@ -66,8 +66,7 @@
             <div
                 id="render-selection-step-page"
                 data-count="{{ proposalsCount }}"
-                data-step-id="{{ currentStep.id }}"
-                data-votable="{{ currentStep.isVotable }}"
+                data-step="{{ step|escape }}"
                 data-themes='{{ themes|escape }}'
                 data-statuses='{{ statuses|escape }}'
                 data-districts='{{ districts|escape }}'

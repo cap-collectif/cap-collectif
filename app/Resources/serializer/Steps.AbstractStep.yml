@@ -50,3 +50,8 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
       type: string
       groups: [Steps]
       serialized_name: openingStatus
+    isOpen:
+      expose: true
+      type: boolean
+      groups: [Steps]
+      serialized_name: isOpen

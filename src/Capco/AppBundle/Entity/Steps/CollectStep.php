@@ -68,7 +68,6 @@ class CollectStep extends AbstractStep
      */
     public function setProposalForm($proposalForm)
     {
-        $proposalForm->setStep($this);
         $this->proposalForm = $proposalForm;
 
         return $this;

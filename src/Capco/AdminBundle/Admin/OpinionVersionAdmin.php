@@ -124,9 +124,8 @@ class OpinionVersionAdmin extends Admin
                     'label' => 'admin.fields.opinion_version.body',
                     'config_name' => 'admin_editor',
                 ])
-                ->add('comment', 'ckeditor', [
+                ->add('comment', null, [
                     'label' => 'admin.fields.opinion_version.comment',
-                    'config_name' => 'admin_editor',
                 ])
             ->end()
 

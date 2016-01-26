@@ -14,6 +14,7 @@ const ReportButton = React.createClass({
     hasReported: React.PropTypes.bool,
     className: React.PropTypes.string,
     style: React.PropTypes.object,
+    id: React.PropTypes.string,
   },
   mixins: [IntlMixin],
 
@@ -23,6 +24,7 @@ const ReportButton = React.createClass({
       hasReported: false,
       className: '',
       style: {},
+      id: 'report-button',
     };
   },
 
@@ -68,6 +70,7 @@ const ReportButton = React.createClass({
       return (
         <LoginOverlay>
           <Button
+            id={this.props.id}
             href={this.props.url}
             style={this.props.style}
             active={reported}

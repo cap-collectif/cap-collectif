@@ -103,4 +103,4 @@ services:
 
   capco.proposal_votes.resolver:
     class: Capco\AppBundle\Resolver\ProposalVotesResolver
-    arguments: [@capco.proposal_vote.repository]
+    arguments: [@capco.proposal_vote.repository, @capco.selection_step.repository]

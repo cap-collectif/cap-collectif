@@ -9,6 +9,7 @@ const DeleteButton = React.createClass({
     onClick: React.PropTypes.func.isRequired,
     className: React.PropTypes.string,
     style: React.PropTypes.object,
+    id: React.PropTypes.string,
   },
   mixins: [IntlMixin],
 
@@ -17,6 +18,7 @@ const DeleteButton = React.createClass({
       author: null,
       className: '',
       style: null,
+      id: 'delete-button',
     };
   },
 
@@ -42,6 +44,7 @@ const DeleteButton = React.createClass({
 
       return (
         <button
+          id={this.props.id}
           style={this.props.style} className={classNames(classes)}
           onClick={() => this.props.onClick()}
         >

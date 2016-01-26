@@ -37,3 +37,9 @@ services:
     arguments: [@doctrine.orm.entity_manager]
     tags:
       - { name: validator.constraint_validator, alias: unlisted_email.validator }
+
+  capco.has_enough_credits.validator:
+      class: Capco\AppBundle\Validator\Constraints\HasEnoughCreditsToVoteValidator
+      arguments: [@capco.proposal_votes.resolver]
+      tags:
+        - { name: validator.constraint_validator, alias: has_enough_credits.validator }

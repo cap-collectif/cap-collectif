@@ -10,7 +10,6 @@ parameters:
   capco.twig.site_parameter.class: Capco\AppBundle\Twig\SiteParameterExtension
   capco.twig.steps_links.class: Capco\AppBundle\Twig\StepsLinksExtension
   capco.twig.url.class: Capco\AppBundle\Twig\UrlExtension
-  capco.twig.vote.class: Capco\AppBundle\Twig\VoteExtension
 
 services:
   capco.twig.comment:
@@ -81,8 +80,8 @@ services:
       - { name: twig.extension }
 
   capco.twig.vote:
-    class: %capco.twig.vote.class%
-    arguments: [@capco.vote.resolver]
+    class: Capco\AppBundle\Twig\VoteExtension
+    arguments: [@capco.vote.resolver, @capco.proposal_votes.resolver]
     tags:
       - { name: twig.extension }
 
