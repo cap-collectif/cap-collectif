@@ -78,7 +78,7 @@ class ThemeController extends Controller
      *
      * @return array
      */
-    public function showAction(Theme $theme, $max = 4)
+    public function showAction(Theme $theme)
     {
         if (false == $theme->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', [], 'CapcoAppBundle'));
@@ -86,7 +86,7 @@ class ThemeController extends Controller
 
         return [
             'theme' => $theme,
-            'maxProjectsDisplayed' => $max,
+            'maxProjectsDisplayed' => 12,
         ];
     }
 
