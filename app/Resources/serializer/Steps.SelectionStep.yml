@@ -1,18 +1,8 @@
 Capco\AppBundle\Entity\Steps\SelectionStep:
     exclusion_policy: ALL
     properties:
-      voteType:
+      votable:
         expose: true
-        type: integer
-        groups: [Steps]
-        serialized_name: voteType
-      votesHelpText:
-        expose: true
-        type: string
-        groups: [Steps]
-        serialized_name: votesHelpText
-      budget:
-        expose: true
-        type: float
+        type: boolean
         groups: [Steps]
 

@@ -15,19 +15,8 @@ Capco\AppBundle\Entity\ProposalVote:
     selectionStep: @selectionStep1
     user: @user5
     confirmed: true
-  proposalVote4:
-    proposal: @proposal2
-    selectionStep: @selectionStep1
-    username: coucou
-    email: voter@test.com
-    confirmed: true
-  proposalVote{5...50}:
-    proposal: @proposal3
+  proposalVote{4...50}:
+    proposal: @proposal4
     selectionStep: @selectionStep1
     user: @user<current()>
-    confirmed: true
-  proposalVote51:
-    proposal: @proposal7
-    selectionStep: @selectionStep4
-    user: @user4
     confirmed: true

@@ -49,7 +49,6 @@ Capco\AppBundle\Entity\Proposal:
       groups: [Proposals]
     estimation:
       expose: true
-      type: float
       groups: [Proposals]
     comments:
       expose: true

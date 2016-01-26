@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Proposal;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class SelectionStep.
@@ -14,16 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SelectionStep extends AbstractStep
 {
-    const VOTE_TYPE_DISABLED = 0;
-    const VOTE_TYPE_SIMPLE = 1;
-    const VOTE_TYPE_BUDGET = 2;
-
-    public static $voteTypeLabels = [
-        self::VOTE_TYPE_DISABLED => 'step.selection.vote_type.disabled',
-        self::VOTE_TYPE_SIMPLE => 'step.selection.vote_type.simple',
-        self::VOTE_TYPE_BUDGET => 'step.selection.vote_type.budget',
-    ];
-
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selectionSteps", cascade={"persist"})
@@ -32,25 +21,14 @@ class SelectionStep extends AbstractStep
     private $proposals;
 
     /**
-     * @Assert\Choice(choices={0,1,2})
-     * @ORM\Column(name="vote_type", type="integer")
+     * @ORM\Column(name="votable", type="boolean")
      */
-    private $voteType = self::VOTE_TYPE_DISABLED;
+    private $votable;
 
     /**
      * @ORM\Column(name="votes_count", type="integer")
      */
     private $votesCount = 0;
-
-    /**
-     * @ORM\Column(name="votes_help_text", type="string", nullable=true)
-     */
-    private $votesHelpText = null;
-
-    /**
-     * @ORM\Column(name="budget", type="float", nullable=true)
-     */
-    private $budget = null;
 
     public function __construct()
     {
@@ -95,6 +73,24 @@ class SelectionStep extends AbstractStep
     /**
      * @return mixed
      */
+    public function isVotable()
+    {
+        return $this->votable;
+    }
+
+    /**
+     * @param mixed $votable
+     */
+    public function setVotable($votable)
+    {
+        $this->votable = $votable;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getVotesCount()
     {
         return $this->votesCount;
@@ -126,63 +122,6 @@ class SelectionStep extends AbstractStep
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getVotesHelpText()
-    {
-        return $this->votesHelpText;
-    }
-
-    /**
-     * @param mixed $votesHelpText
-     * @return $this
-     */
-    public function setVotesHelpText($votesHelpText)
-    {
-        $this->votesHelpText = $votesHelpText;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVoteType()
-    {
-        return $this->voteType;
-    }
-
-    /**
-     * @param mixed $voteType
-     * @return $this
-     */
-    public function setVoteType($voteType)
-    {
-        $this->voteType = $voteType;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBudget()
-    {
-        return $this->budget;
-    }
-
-    /**
-     * @param mixed $budget
-     * @return $this
-     */
-    public function setBudget($budget)
-    {
-        $this->budget = $budget;
-
-        return $this;
-    }
-
     // **************************** Custom methods *******************************
 
     public function getType()
@@ -193,15 +132,5 @@ class SelectionStep extends AbstractStep
     public function isSelectionStep()
     {
         return true;
-    }
-
-    public function isVotable()
-    {
-        return $this->voteType !== self::VOTE_TYPE_DISABLED;
-    }
-
-    public function isBudgetVotable()
-    {
-        return $this->voteType === self::VOTE_TYPE_BUDGET;
     }
 }

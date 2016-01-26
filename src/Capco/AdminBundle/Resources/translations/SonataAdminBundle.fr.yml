@@ -81,14 +81,6 @@ admin.label.settings.shield_mode: Mode bouclier
 # Messages
 admin:
   help:
-    comment:
-      author: Il est obligatoire de spécifier soit un auteur, soit un nom et une adresse email.
-    event:
-      adress: Il est nécessaire de spécifier au moins l'adresse et la ville pour afficher la carte.
-      endAt: Si l'évènement ne dure qu'une journée, ne renseignez pas de date de fin.
-    menu_item:
-      link: Si vous avez associé une page à l'élément de menu, le lien sera défini automatiquement.
-      parent: Non applicable pour les éléments du menu de bas de page (footer).
     project:
       closed_at: Si le projet ne dure qu'une journée, renseignez la même date que pour la date de début.
       steps: |
@@ -97,14 +89,20 @@ admin:
       video: |
             Entrez l'URL embed de la vidéo souhaitée. Ex: http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1<br/>
             Ajoutez <strong>?autoplay=1</strong> à la fin de l'URL pour que la vidéo se lance automatiquement au clic.
+    menu_item:
+      parent: Non applicable pour les éléments du menu de bas de page (footer).
+      link: Si vous avez associé une page à l'élément de menu, le lien sera défini automatiquement.
     site_parameter:
       js: Rajoutez ici un ou plusieurs scripts entourés par leurs balises < script >.
-    step:
-      vote_type: Dans le cas d'un vote selon le budget, vous devez renseigner le budget de l'étape et les estimations de chacune des propositions concernées.
-    synthesis:
-      consultation_step: La création d'une nouvelle synthèse à partir d'une étape de consultation peut prendre un peu de temps, toutes les contributions étant exportées vers l'outil de synthèse. Pas d'inquiétude, cela est tout à fait normal.
     video:
       media: Pour un rendu optimal, choisissez une image faisant au moins 320 pixels de largeur et 215 pixels de hauteur.
+    comment:
+      author: Il est obligatoire de spécifier soit un auteur, soit un nom et une adresse email.
+    event:
+      adress: Il est nécessaire de spécifier au moins l'adresse et la ville pour afficher la carte.
+      endAt: Si l'évènement ne dure qu'une journée, ne renseignez pas de date de fin.
+    synthesis:
+      consultation_step: La création d'une nouvelle synthèse à partir d'une étape de consultation peut prendre un peu de temps, toutes les contributions étant exportées vers l'outil de synthèse. Pas d'inquiétude, cela est tout à fait normal.
 
   features:
     title:
@@ -191,6 +189,60 @@ admin:
       comment: Commentaire
       voter: Votant
       created_at: Création
+    project:
+      argument_count: Arguments
+      author: Auteur
+      body: Introduction
+      closed_at: Fermé
+      consultation_step_type: Structure
+      cover: Image
+      created_at: Création
+      events: Évènements
+      events_count: Évènements
+      exportable: Autoriser l'export
+      group_content: Contenu
+      group_meta: Métadonnées
+      group_opinion_types: Structure
+      group_ranking: Classements
+      group_steps: Étapes
+      is_enabled: Publié
+      opened_at: Ouvert
+      opening_status: Statut
+      opinion_count: Propositions
+      opinion_term: Usage
+      posts: Articles
+      posts_count: Articles
+      published_at: Publication
+      ranking:
+        opinions_threshold: Taille du classement des propositions
+        versions_threshold: Taille du classement des modifications
+        include_author: Inclure les contributions de l'auteur
+      steps: Étapes
+      step_position: Position de l'étape
+      step_title: Titre de l'étape
+      teaser: Accroche
+      title: Titre
+      themes: Thèmes
+      trashed_argument_count: Arguments dans la corbeille
+      trashed_opinion_count: Propositions dans la corbeille
+      updated_at: Mise à jour
+      video: Vidéo
+      general: Général
+      proposals: Propositions
+      proposals_table:
+        id: Id
+        title: Titre
+        author: Auteur
+        enabled: Publié
+        isTrashed: Dans la corbeille
+        updatedAt: Date de mise à jour
+        yes: Oui
+        no: Non
+        actions: Actions
+    project_abstractstep:
+      position: Position
+      steps: Étapes
+      steps_add: Choisissez le type d'étape
     consultation_step_type:
       title: Titre
       opinion_types: Éléments de structure
@@ -380,60 +432,6 @@ admin:
       menu_items: Menus
       updated_at: Mise à jour
       created_at: Création
-    project:
-      argument_count: Arguments
-      author: Auteur
-      body: Introduction
-      closed_at: Fermé
-      consultation_step_type: Structure
-      cover: Image
-      created_at: Création
-      events: Évènements
-      events_count: Évènements
-      exportable: Autoriser l'export
-      group_content: Contenu
-      group_meta: Métadonnées
-      group_opinion_types: Structure
-      group_ranking: Classements
-      group_steps: Étapes
-      is_enabled: Publié
-      opened_at: Ouvert
-      opening_status: Statut
-      opinion_count: Propositions
-      opinion_term: Usage
-      posts: Articles
-      posts_count: Articles
-      published_at: Publication
-      ranking:
-        opinions_threshold: Taille du classement des propositions
-        versions_threshold: Taille du classement des modifications
-        include_author: Inclure les contributions de l'auteur
-      steps: Étapes
-      step_position: Position de l'étape
-      step_title: Titre de l'étape
-      teaser: Accroche
-      title: Titre
-      themes: Thèmes
-      trashed_argument_count: Arguments dans la corbeille
-      trashed_opinion_count: Propositions dans la corbeille
-      updated_at: Mise à jour
-      video: Vidéo
-      general: Général
-      proposals: Propositions
-      proposals_table:
-        id: Id
-        title: Titre
-        author: Auteur
-        enabled: Publié
-        isTrashed: Dans la corbeille
-        updatedAt: Date de mise à jour
-        yes: Oui
-        no: Non
-        actions: Actions
-    project_abstractstep:
-      position: Position
-      steps: Étapes
-      steps_add: Choisissez le type d'étape
     proposal:
       annotation: Annotation
       answer: Réponse officielle
@@ -577,7 +575,6 @@ admin:
       trashed_reason: Raison de la mise à la corbeille
     step:
       body: Introduction
-      budget: Budget alloué
       created_at: Création
       end_at: Termine
       group_general: Général
@@ -597,8 +594,7 @@ admin:
       title: Titre
       type: Type d'étape
       updated_at: Mise à jour
-      votesHelpText: Règle des votes
-      vote_type: Type de vote
+      votable: Soumettre les propositions au vote
     synthesis:
       enabled: Publiée
       editable: Éditable

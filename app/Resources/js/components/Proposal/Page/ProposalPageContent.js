@@ -63,7 +63,6 @@ const ProposalPageHeader = React.createClass({
             title={proposal.title}
           />
           <ReportButton
-            id="proposal-report-button"
             author={proposal.author}
             url={proposal._links.report}
             hasReported={proposal.hasUserReported}
@@ -71,13 +70,11 @@ const ProposalPageHeader = React.createClass({
           />
           <div className="pull-right">
             <EditButton
-              id="proposal-edit-button"
               author={this.props.proposal.author}
               onClick={this.toggleEditModal.bind(null, true)}
               editable={this.props.form.isContribuable}
             />
             <DeleteButton
-              id="proposal-delete-button"
               author={this.props.proposal.author}
               onClick={this.toggleDeleteModal.bind(null, true)}
               style={{marginLeft: '15px'}}

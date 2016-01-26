@@ -7,14 +7,12 @@ const StepPreview = React.createClass({
   propTypes: {
     step: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
-    votes: React.PropTypes.number,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       className: '',
-      votes: null,
     };
   },
 
@@ -39,17 +37,17 @@ const StepPreview = React.createClass({
               : null
             }
             {
-              this.props.votes === null
+              step.votesCount === null
               ? null
               : <p style={{marginTop: '5px'}}>
                   <span className="nb--highlighted">
-                    {this.props.votes}
+                    {step.votesCount}
                   </span>
                   <span className="excerpt">
                     {' '}
                     <FormattedMessage
                       message={this.getIntlMessage('vote.count_no_nb')}
-                      count={this.props.votes}
+                      count={step.votesCount}
                     />
                   </span>
               </p>

@@ -10,7 +10,6 @@ const EditButton = React.createClass({
     className: React.PropTypes.string,
     style: React.PropTypes.object,
     editable: React.PropTypes.bool,
-    id: React.PropTypes.string,
   },
   mixins: [IntlMixin],
 
@@ -20,7 +19,6 @@ const EditButton = React.createClass({
       className: '',
       style: null,
       editable: true,
-      id: 'edit-button',
     };
   },
 
@@ -45,7 +43,6 @@ const EditButton = React.createClass({
 
       return (
         <button
-          id={this.props.id}
           style={this.props.style} className={classNames(classes, this.props.className)}
           onClick={() => this.props.onClick()}
         >

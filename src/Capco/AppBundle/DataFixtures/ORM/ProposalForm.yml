@@ -11,7 +11,3 @@ Capco\AppBundle\Entity\ProposalForm:
     title: Formulaire de collecte
     description: <text(100)>
     step: @collectstep2
-  proposalform3:
-    title: Formulaire de collecte
-    description: <text(100)>
-    step: @collectstep3

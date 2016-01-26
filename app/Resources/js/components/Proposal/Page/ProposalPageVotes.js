@@ -5,7 +5,7 @@ import {IntlMixin, FormattedMessage} from 'react-intl';
 import UserBox from '../../User/UserBox';
 import ProposalAllVotesModal from '../Vote/ProposalAllVotesModal';
 import ProposalActions from '../../../actions/ProposalActions';
-import ProposalVoteStore from '../../../stores/ProposalVoteStore';
+import ProposalStore from '../../../stores/ProposalStore';
 import {PROPOSAL_VOTES_TO_SHOW} from '../../../constants/ProposalConstants';
 
 const ProposalPageVotes = React.createClass({
@@ -25,13 +25,12 @@ const ProposalPageVotes = React.createClass({
   getInitialState() {
     return {
       votes: this.props.votes,
-      votesCount: this.props.proposal.votesCount,
       showModal: false,
     };
   },
 
   componentWillMount() {
-    ProposalVoteStore.addChangeListener(this.onChange);
+    ProposalStore.addChangeListener(this.onChange);
   },
 
   componentDidMount() {
@@ -39,14 +38,13 @@ const ProposalPageVotes = React.createClass({
   },
 
   componentWillUnmount() {
-    ProposalVoteStore.removeChangeListener(this.onChange);
+    ProposalStore.removeChangeListener(this.onChange);
   },
 
   onChange() {
-    if (ProposalVoteStore.isProposalVotesListSync) {
+    if (ProposalStore.isProposalVotesListSync) {
       this.setState({
-        votes: ProposalVoteStore.proposalVotes,
-        votesCount: ProposalVoteStore.votesCount,
+        votes: ProposalStore.proposalVotes,
       });
       return;
     }
@@ -69,10 +67,11 @@ const ProposalPageVotes = React.createClass({
   },
 
   render() {
+    const proposal = this.props.proposal;
     const votesToDisplay = this.state.votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
-    const moreVotes = this.state.votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
+    const moreVotes = proposal.votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
 
-    if (!this.state.votesCount) {
+    if (!proposal.votesCount) {
       return null;
     }
 
@@ -86,7 +85,7 @@ const ProposalPageVotes = React.createClass({
         <h2>
           <FormattedMessage
             message={this.getIntlMessage('proposal.vote.count')}
-            num={this.state.votesCount}
+            num={proposal.votesCount}
           />
         </h2>
         <Row>
