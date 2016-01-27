@@ -349,10 +349,6 @@ class OpinionRepository extends EntityRepository
             }
         }
 
-        $qb->addOrderBy('vnb', 'DESC')
-            ->addOrderBy('o.argumentsCount', 'DESC')
-            ->addOrderBy('o.updatedAt', 'DESC');
-
         $query = $qb->getQuery()
             ->setFirstResult(($page - 1) * $nbByPage)
             ->setMaxResults($nbByPage)
