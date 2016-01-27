@@ -33,7 +33,7 @@ const OpinionPreviewCounters = React.createClass({
     if (type.sourceable) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />);
     }
-    if (type.linkable) {
+    if (!opinion.parent && type.linkable) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />);
     }
     return (

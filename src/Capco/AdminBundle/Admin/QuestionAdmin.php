@@ -31,7 +31,7 @@ class QuestionAdmin extends Admin
             ])
             ->add('helpText', null, [
                 'label' => 'admin.fields.question.help_text',
-                'required' => false,
+                'required' => true,
             ])
             ->add('questionType', 'choice', [
                 'label' => 'admin.fields.question.question_type',
@@ -41,7 +41,6 @@ class QuestionAdmin extends Admin
             ])
             ->add('required', null, [
                 'label' => 'admin.fields.question.required',
-                'required' => false,
             ])
         ;
     }
