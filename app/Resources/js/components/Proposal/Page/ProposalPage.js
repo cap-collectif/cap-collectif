@@ -10,8 +10,10 @@ import ProposalPageVotes from './ProposalPageVotes';
 import ProposalPageComments from './ProposalPageComments';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
+import MessageStore from '../../../stores/MessageStore';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteSidebar from '../Vote/ProposalVoteSidebar';
+import FlashMessages from '../../Utils/FlashMessages';
 import {VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET} from '../../../constants/ProposalConstants';
 
 const ProposalPage = React.createClass({
@@ -37,6 +39,10 @@ const ProposalPage = React.createClass({
     ProposalActions.initProposalVotes(this.props.votableStep.creditsLeft, !!this.props.userHasVote);
     ProposalActions.initProposal(this.props.proposal);
     return {
+      messages: {
+        'errors': [],
+        'success': [],
+      },
       proposal: ProposalStore.proposal,
       userHasVote: ProposalVoteStore.userHasVote,
       creditsLeft: ProposalVoteStore.creditsLeft,
@@ -47,11 +53,19 @@ const ProposalPage = React.createClass({
   componentWillMount() {
     ProposalStore.addChangeListener(this.onChange);
     ProposalVoteStore.addChangeListener(this.onVoteChange);
+    MessageStore.addChangeListener(this.onMessageChange);
   },
 
   componentWillUnmount() {
     ProposalStore.removeChangeListener(this.onChange);
     ProposalVoteStore.removeChangeListener(this.onVoteChange);
+    MessageStore.removeChangeListener(this.onMessageChange);
+  },
+
+  onMessageChange() {
+    this.setState({
+      messages: MessageStore.messages,
+    });
   },
 
   onVoteChange() {
@@ -103,6 +117,7 @@ const ProposalPage = React.createClass({
     });
     return (
       <div>
+        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} style={{marginBottom: 0}} />
         <div id="sidebar-container" className={wrapperClassName}>
           <Row>
             <Col xs={12} sm={showSidebar ? 9 : 12}>

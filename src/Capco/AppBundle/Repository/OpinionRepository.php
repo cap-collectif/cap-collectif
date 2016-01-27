@@ -323,31 +323,35 @@ class OpinionRepository extends EntityRepository
             ->setParameter('step', $step)
             ->setParameter('opinionType', $opinionTypeId)
             ->setParameter('notTrashed', false)
-            ->addOrderBy('o.pinned', 'DESC')
+            ->orderBy('o.pinned', 'DESC')
         ;
 
         if ($opinionsSort) {
             if ($opinionsSort == 'last') {
-                $qb->addOrderBy('o.createdAt', 'DESC');
+                $qb->addOrderBy('o.updatedAt', 'DESC');
                 $qb->addOrderBy('o.votesCountOk', 'DESC');
             } elseif ($opinionsSort == 'old') {
-                $qb->addOrderBy('o.createdAt', 'ASC');
+                $qb->addOrderBy('o.updatedAt', 'ASC');
                 $qb->addOrderBy('o.votesCountOk', 'DESC');
             } elseif ($opinionsSort == 'favorable') {
                 $qb->addOrderBy('o.votesCountOk', 'DESC');
                 $qb->addOrderBy('o.votesCountNok', 'ASC');
-                $qb->addOrderBy('o.createdAt', 'DESC');
+                $qb->addOrderBy('o.updatedAt', 'DESC');
             } elseif ($opinionsSort == 'votes') {
                 $qb->addOrderBy('vnb', 'DESC');
-                $qb->addOrderBy('o.createdAt', 'DESC');
+                $qb->addOrderBy('o.updatedAt', 'DESC');
             } elseif ($opinionsSort == 'comments') {
                 $qb->addOrderBy('o.argumentsCount', 'DESC');
-                $qb->addOrderBy('o.createdAt', 'DESC');
+                $qb->addOrderBy('o.updatedAt', 'DESC');
             } elseif ($opinionsSort == 'positions') {
                 $qb->addOrderBy('o.position', 'ASC');
-                $qb->addOrderBy('o.createdAt', 'DESC');
+                $qb->addOrderBy('o.updatedAt', 'DESC');
             }
         }
+
+        $qb->addOrderBy('vnb', 'DESC')
+            ->addOrderBy('o.argumentsCount', 'DESC')
+            ->addOrderBy('o.updatedAt', 'DESC');
 
         $query = $qb->getQuery()
             ->setFirstResult(($page - 1) * $nbByPage)

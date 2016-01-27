@@ -10,12 +10,7 @@ const ProposalVoteButton = React.createClass({
     creditsLeft: React.PropTypes.number,
     voteType: React.PropTypes.number.isRequired,
     disabled: React.PropTypes.bool.isRequired,
-    userHasVote: React.PropTypes.bool.isRequired,
     onClick: React.PropTypes.func.isRequired,
-    onMouseOver: React.PropTypes.func,
-    onMouseOut: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
   },
   mixins: [IntlMixin],
 
@@ -24,35 +19,30 @@ const ProposalVoteButton = React.createClass({
       disabled: false,
       selectionStepId: null,
       creditsLeft: null,
-      onMouseOver: () => {},
-      onMouseOut: () => {},
-      onFocus: () => {},
-      onBlur: () => {},
     };
   },
 
+  userHasVote() {
+    return this.props.proposal.userHasVote;
+  },
+
   render() {
-    const style = this.props.userHasVote ? 'danger' : 'success';
+    const style = this.userHasVote() ? 'danger' : 'success';
     const classes = classNames({
       'proposal__preview__vote': true,
-      'btn--outline': !this.props.userHasVote,
+      'btn--outline': !this.userHasVote(),
       'disabled': this.props.disabled,
     });
-    const onClick = this.props.disabled ? null : this.props.onClick;
     return (
       <Button
         bsStyle={style}
         className={classes}
         style={{width: '100%'}}
-        onClick={onClick}
-        active={this.props.userHasVote}
-        onMouseOver={this.props.onMouseOver}
-        onMouseOut={this.props.onMouseOut}
-        onFocus={this.props.onFocus}
-        onBlur={this.props.onBlur}
+        onClick={this.props.onClick}
+        active={this.userHasVote()}
       >
         {
-          this.props.userHasVote
+          this.userHasVote()
             ? this.getIntlMessage('proposal.vote.delete')
             : this.getIntlMessage('proposal.vote.add')
         }

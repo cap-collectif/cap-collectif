@@ -12,7 +12,6 @@ const ProposalVoteButtonWrapper = React.createClass({
     creditsLeft: React.PropTypes.number,
     voteType: React.PropTypes.number.isRequired,
     onClick: React.PropTypes.func.isRequired,
-    userHasVote: React.PropTypes.bool.isRequired,
   },
 
   getDefaultProps() {
@@ -22,8 +21,12 @@ const ProposalVoteButtonWrapper = React.createClass({
     };
   },
 
+  userHasVote() {
+    return this.props.proposal.userHasVote;
+  },
+
   userHasEnoughCredits() {
-    if (!this.props.userHasVote && this.props.creditsLeft !== null && !!this.props.proposal.estimation) {
+    if (!this.userHasVote() && this.props.creditsLeft !== null && !!this.props.proposal.estimation) {
       return this.props.creditsLeft >= this.props.proposal.estimation;
     }
     return true;
@@ -36,10 +39,7 @@ const ProposalVoteButtonWrapper = React.createClass({
 
     if (LoginStore.isLoggedIn()) {
       return (
-        <VoteButtonOverlay
-            tooltipId={'vote-tooltip-proposal-' + this.props.proposal.id}
-            show={!this.userHasEnoughCredits()}
-        >
+        <VoteButtonOverlay show={!this.userHasEnoughCredits()}>
           <ProposalVoteButton {...this.props} disabled={!this.userHasEnoughCredits()} />
         </VoteButtonOverlay>
       );

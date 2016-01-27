@@ -26,7 +26,6 @@ class SelectionPage extends Page
         'proposal vote button 8' => '#proposal-8 .proposal__preview__vote',
         'proposal comments counter 8' => '#proposal-8 .proposal__counter--comments .proposal__counter__value',
         'proposal' => '.proposal__preview',
-        'proposal vote button to hover' => '#proposal-1 .proposal__preview__vote',
     ];
 
     public function getProposalSelector()
@@ -77,11 +76,6 @@ class SelectionPage extends Page
     public function submitProposalVoteForm()
     {
         $this->getElement('proposal vote form submit button')->click();
-    }
-
-    public function hoverOverVoteButton($id = 8)
-    {
-        $this->getVoteButton($id)->mouseOver();
     }
 
     protected function verifyUrl(array $urlParameters = [])

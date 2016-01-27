@@ -136,24 +136,15 @@ $statuses:
   height: $navbar-height;
   overflow: hidden;
   z-index: 1020;
-  border-color: $white;
-  background-color: $brand-color-1;
 
   .container {
     padding-top: 0;
     padding-bottom: 0;
   }
 
-  li {
-    margin: 0;
-    padding: 15px;
-  }
-
   .widget__counter {
-    color: $white;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-right: 1px solid white;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 
   .widget__counter__label {
