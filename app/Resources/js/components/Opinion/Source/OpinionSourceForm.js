@@ -43,9 +43,15 @@ const OpinionSourceForm = React.createClass({
       if (this.isValid()) {
         const {opinion, source, onSubmitSuccess, onSubmitFailure} = this.props;
 
+
+        const tmpFixData = this.state.form;
+        tmpFixData.Category = parseInt(tmpFixData.category, 10);
+        delete tmpFixData.category;
+        delete tmpFixData.check;
+
         if (!source) {
           return OpinionSourceActions
-            .add(opinion, this.state.form)
+            .add(opinion, tmpFixData)
             .then(() => {
               this.setState(this.getInitialState());
               onSubmitSuccess();
@@ -55,7 +61,7 @@ const OpinionSourceForm = React.createClass({
         }
 
         return OpinionSourceActions
-          .update(opinion, source.id, this.state.form)
+          .update(opinion, source.id, tmpFixData)
           .then(onSubmitSuccess)
           .catch(onSubmitFailure)
         ;

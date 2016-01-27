@@ -9,8 +9,8 @@
     "test:watch": "./node_modules/mocha/bin/mocha --opts mocha.opts --watch --reporter min",
     "build": "./node_modules/brunch/bin/brunch build",
     "build:prod": "./node_modules/brunch/bin/brunch build --production",
-    "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js",
-    "lint": "./node_modules/eslint/bin/eslint.js --cache --fix  app/Resources/js"
+    "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js && ./node_modules/jscs/bin/jscs app/Resources/js/translations/*.js",
+    "lint": "./node_modules/eslint/bin/eslint.js --cache --fix  app/Resources/js && ./node_modules/jscs/bin/jscs --fix app/Resources/js/translations/*.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jolicode/CapCollectif-SF2/issues"
+  },
+  "jscsConfig": {
+    "validateOrderInObjectKeys": "asc"
   },
   "homepage": "https://github.com/jolicode/CapCollectif-SF2",
   "dependencies": {
@@ -65,6 +68,7 @@
     "eslint-plugin-mocha": "^1.1.0",
     "eslint-plugin-react": "^3.15.0",
     "fb-flo-brunch": "^1.7.22",
+    "jscs": "^2.9.0",
     "mocha": "^2.3.4",
     "react-addons-test-utils": "^0.14.6"
   }

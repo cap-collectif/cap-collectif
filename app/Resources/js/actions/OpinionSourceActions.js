@@ -28,13 +28,8 @@ export default {
   },
 
   add: (opinion, data) => {
-    delete data.check;
-    const tmpFixData = data;
-    tmpFixData.Category = parseInt(data.category, 10);
-    delete tmpFixData.category;
-    delete tmpFixData.check;
     return Fetcher
-    .post(`/${baseUrl(opinion)}/${opinion.id}/sources`, tmpFixData)
+    .post(`/${baseUrl(opinion)}/${opinion.id}/sources`, data)
     .then((source) => {
       AppDispatcher.dispatch({
         actionType: CREATE_OPINION_SOURCE_SUCCESS,
@@ -50,13 +45,8 @@ export default {
   },
 
   update: (opinion, source, data) => {
-    delete data.check;
-    const tmpFixData = data;
-    tmpFixData.Category = parseInt(data.category, 10);
-    delete tmpFixData.category;
-    delete tmpFixData.check;
     return Fetcher
-    .put(`/${baseUrl(opinion)}/${opinion.id}/sources/${source}`, tmpFixData)
+    .put(`/${baseUrl(opinion)}/${opinion.id}/sources/${source}`, data)
     .then((updatedSource) => {
       AppDispatcher.dispatch({
         actionType: UPDATE_OPINION_SOURCE_SUCCESS,
