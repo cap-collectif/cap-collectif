@@ -2,14 +2,12 @@ import React from 'react';
 import {IntlMixin, FormattedMessage} from 'react-intl';
 import ProposalStore from '../../stores/ProposalStore';
 import ProposalVoteStore from '../../stores/ProposalVoteStore';
-import MessageStore from '../../stores/MessageStore';
 import ProposalActions from '../../actions/ProposalActions';
 import {PROPOSAL_PAGINATION} from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
-import FlashMessages from '../Utils/FlashMessages';
 import {VOTE_TYPE_DISABLED} from '../../constants/ProposalConstants';
 
 const SelectionStepPage = React.createClass({
@@ -31,17 +29,12 @@ const SelectionStepPage = React.createClass({
       currentPage: ProposalStore.currentPage,
       creditsLeft: ProposalVoteStore.creditsLeft,
       isLoading: true,
-      messages: {
-        'errors': [],
-        'success': [],
-      },
     };
   },
 
   componentWillMount() {
     ProposalStore.addChangeListener(this.onChange);
     ProposalVoteStore.addChangeListener(this.onVoteChange);
-    MessageStore.addChangeListener(this.onMessageChange);
   },
 
   componentDidMount() {
@@ -57,13 +50,6 @@ const SelectionStepPage = React.createClass({
   componentWillUnmount() {
     ProposalStore.removeChangeListener(this.onChange);
     ProposalVoteStore.removeChangeListener(this.onVoteChange);
-    MessageStore.removeChangeListener(this.onMessageChange);
-  },
-
-  onMessageChange() {
-    this.setState({
-      messages: MessageStore.messages,
-    });
   },
 
   onVoteChange() {
@@ -142,11 +128,6 @@ const SelectionStepPage = React.createClass({
             }
           </div>
         </Loader>
-        <FlashMessages
-          errors={this.state.messages.errors}
-          success={this.state.messages.success}
-          style={{marginBottom: '0'}}
-        />
       </div>
     );
   },

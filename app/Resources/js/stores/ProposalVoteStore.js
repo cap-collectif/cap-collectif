@@ -59,6 +59,9 @@ class ProposalVoteStore extends BaseStore {
       break;
     case CREATE_PROPOSAL_VOTE:
       this._userHasVote = true;
+      if (action.estimation) {
+        this._creditsLeft -= action.estimation;
+      }
       this.emitChange();
       break;
     case CREATE_PROPOSAL_VOTE_SUCCESS:
@@ -68,6 +71,9 @@ class ProposalVoteStore extends BaseStore {
       break;
     case DELETE_PROPOSAL_VOTE:
       this._userHasVote = false;
+      if (action.estimation) {
+        this._creditsLeft += action.estimation;
+      }
       this.emitChange();
       break;
     case DELETE_PROPOSAL_VOTE_SUCCESS:

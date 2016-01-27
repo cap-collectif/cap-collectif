@@ -96,20 +96,20 @@ class ProposalStore extends BaseStore {
       break;
     case CREATE_PROPOSAL_VOTE_SUCCESS:
       this._isProposalSync = false;
-      this._isProposalListSync = false;
       this.emitChange();
       break;
     case CREATE_PROPOSAL_VOTE_FAILURE:
       this._isProposalSync = false;
+      this._isProposalListSync = false;
       this.emitChange();
       break;
     case DELETE_PROPOSAL_VOTE_SUCCESS:
-      this._isProposalListSync = false;
       this._isProposalSync = false;
       this.emitChange();
       break;
     case DELETE_PROPOSAL_VOTE_FAILURE:
       this._isProposalSync = false;
+      this._isProposalListSync = false;
       this.emitChange();
       break;
     case CHANGE_PAGE:

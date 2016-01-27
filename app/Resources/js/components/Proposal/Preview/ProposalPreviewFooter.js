@@ -7,6 +7,7 @@ const ProposalPreviewFooter = React.createClass({
     proposal: React.PropTypes.object.isRequired,
     selectionStepId: React.PropTypes.number,
     showVote: React.PropTypes.bool,
+    votesDelta: React.PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -32,6 +33,7 @@ const ProposalPreviewFooter = React.createClass({
         : 0
       : null
     ;
+    const votesCount = votesForSelectionStep + this.props.votesDelta;
     const counterWidth = this.props.selectionStepId ? '50%' : '100%';
 
     return (
@@ -52,12 +54,12 @@ const ProposalPreviewFooter = React.createClass({
             this.props.selectionStepId && this.props.showVote
             ? <div className="proposal__counter proposal__counter--votes" style={{width: counterWidth, borderLeft: '1px solid #ccc'}}>
                 <div className="proposal__counter__value" >
-                  {votesForSelectionStep}
+                  {votesCount}
                 </div>
                 <div className="proposal__counter__label" >
                   <FormattedMessage
                     message={this.getIntlMessage('proposal.vote.count_no_nb')}
-                    count={votesForSelectionStep}
+                    count={votesCount}
                   />
                 </div>
               </div>
