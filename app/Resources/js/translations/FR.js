@@ -197,6 +197,7 @@ export default {
         header: '{user} {theme, select, no {le {createdDate}} other {dans {themeLink}, le {createdDate}}}',
       },
       no_status: 'Aucun statut',
+      random_search: 'Afficher d\'autres propositions',
       request: {
         create: {
           success: 'Merci ! Votre proposition a bien été créée.',
@@ -308,6 +309,7 @@ export default {
       filter_f_comments: 'Commentées',
       filter_f_last: 'Récentes',
       filter_f_old: 'Anciennes',
+      filter_f_random: 'Aléatoire',
       filter_f_votes: 'Votées',
       filter_comments: 'Commentés',
       filter_last: 'Récents',

@@ -9,6 +9,7 @@ import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import CollectStepPageHeader from './CollectStepPageHeader';
+import ProposalRandomButton from '../Proposal/List/ProposalRandomButton';
 
 const CollectStepPage = React.createClass({
   propTypes: {
@@ -27,6 +28,7 @@ const CollectStepPage = React.createClass({
       proposalsCount: this.props.count,
       currentPage: ProposalStore.currentPage,
       isLoading: true,
+      randomOrder: ProposalStore.order === 'random',
     };
   },
 
@@ -55,10 +57,14 @@ const CollectStepPage = React.createClass({
         proposalsCount: ProposalStore.proposalsCount,
         currentPage: ProposalStore.currentPage,
         isLoading: false,
+        randomOrder: ProposalStore.order === 'random',
       });
       return;
     }
 
+    this.setState({
+      isLoading: true,
+    });
     this.loadProposals();
   },
 
@@ -77,6 +83,7 @@ const CollectStepPage = React.createClass({
 
   render() {
     const nbPages = Math.ceil(this.state.proposalsCount / PROPOSAL_PAGINATION);
+    const showPagination = nbPages > 1 && !this.state.randomOrder;
     return (
       <div>
         <CollectStepPageHeader
@@ -98,12 +105,17 @@ const CollectStepPage = React.createClass({
           <div>
             <ProposalList proposals={this.state.proposals} />
             {
-              nbPages > 1
+              showPagination
               ? <Pagination
                   current={this.state.currentPage}
                   nbPages={nbPages}
                   onChange={this.selectPage}
               />
+              : null
+            }
+            {
+              this.state.randomOrder
+              ? <ProposalRandomButton isLoading={this.state.isLoading} onClick={this.loadProposals} />
               : null
             }
           </div>

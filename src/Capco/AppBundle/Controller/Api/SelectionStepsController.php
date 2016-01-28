@@ -29,7 +29,7 @@ class SelectionStepsController extends FOSRestController
      * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
-     * @QueryParam(name="order", requirements="(old|last|votes|comments)", default="votes")
+     * @QueryParam(name="order", requirements="(old|last|votes|comments|random)", default="random")
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
      */
     public function getProposalsBySelectionStepAction(Request $request, SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)

@@ -35,7 +35,7 @@ class ProposalsController extends FOSRestController
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}})
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
-     * @QueryParam(name="order", requirements="(old|last|comments)", default="last")
+     * @QueryParam(name="order", requirements="(old|last|comments|random)", default="random")
      * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
      *
      * @param Request               $request

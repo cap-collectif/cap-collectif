@@ -10,6 +10,8 @@ use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Filtered;
+use Elastica\Query\FunctionScore;
+use Elastica\Query\AbstractQuery;
 use Elastica\Filter\Type;
 use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 
@@ -39,7 +41,7 @@ class SearchResolver
      *
      * @return array
      */
-    public function searchAll($page = 1, $term = '', $type = 'all', $sortField = '_score', $sortOrder = 'DESC', $filters = [], $useTransformation = true, $resultsPerPage = self::RESULTS_PER_PAGE)
+    public function searchAll($page = 1, $term = '', $type = 'all', $sortField = '_score', $sortOrder = 'DESC', $filters = [], $useTransformation = true, $resultsPerPage = self::RESULTS_PER_PAGE, $random = false)
     {
         $results = [];
         $count = 0;
@@ -49,9 +51,15 @@ class SearchResolver
         $boolFilter = !empty($filters) ? $this->getBoolFilter($filters) : null;
 
         if ($multiMatchQuery && $boolFilter) {
-            $query = new Query(new Filtered($multiMatchQuery, $boolFilter));
+            $abstractQuery = new Filtered($multiMatchQuery, $boolFilter);
         } else {
-            $query = $multiMatchQuery ? new Query($multiMatchQuery) : new Query($boolFilter);
+            $abstractQuery = $multiMatchQuery ? $multiMatchQuery : $boolFilter;
+        }
+
+        if ($random) {
+            $query = $this->getRandomSortedQuery($abstractQuery);
+        } else {
+            $query = new Query($abstractQuery);
         }
 
         $query->setSort($this->getSortSettings($sortField, $sortOrder));
@@ -79,6 +87,22 @@ class SearchResolver
             'results' => $results,
             'pages' => ceil($count / $resultsPerPage),
         ];
+    }
+
+    /**
+     * Get random sorted query
+     *
+     * @param AbstractQuery $query
+     *
+     * @return FunctionScore
+     */
+    protected function getRandomSortedQuery(AbstractQuery $query)
+    {
+        $functionScore = new FunctionScore();
+        $functionScore->setQuery($query);
+        $functionScore->setRandomScore();
+        return new Query($functionScore);
+
     }
 
     /**
@@ -236,7 +260,17 @@ class SearchResolver
         }
 
         // Search
-        $results = $this->searchAll($page, $terms, $type, $sortField, $sortOrder, $filters, false, $pagination);
+        $results = $this->searchAll(
+            $page,
+            $terms,
+            $type,
+            $sortField,
+            $sortOrder,
+            $filters,
+            false,
+            $pagination,
+            $order === 'random'
+        );
 
         $proposals = [];
         foreach ($results['results'] as $result) {

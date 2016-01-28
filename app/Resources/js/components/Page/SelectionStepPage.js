@@ -9,6 +9,7 @@ import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import {VOTE_TYPE_DISABLED} from '../../constants/ProposalConstants';
+import ProposalRandomButton from '../Proposal/List/ProposalRandomButton';
 
 const SelectionStepPage = React.createClass({
   propTypes: {
@@ -28,6 +29,7 @@ const SelectionStepPage = React.createClass({
       proposalsCount: this.props.count,
       currentPage: ProposalStore.currentPage,
       creditsLeft: ProposalVoteStore.creditsLeft,
+      randomOrder: ProposalStore.order === 'random',
       isLoading: true,
     };
   },
@@ -59,12 +61,13 @@ const SelectionStepPage = React.createClass({
   },
 
   onChange() {
-    if (ProposalStore.isProposalListSync) {
+    if (!ProposalStore.isProcessing && ProposalStore.isProposalListSync) {
       this.setState({
         proposals: ProposalStore.proposals,
         proposalsCount: ProposalStore.proposalsCount,
         currentPage: ProposalStore.currentPage,
         isLoading: false,
+        randomOrder: ProposalStore.order === 'random',
       });
       return;
     }
@@ -90,6 +93,7 @@ const SelectionStepPage = React.createClass({
 
   render() {
     const nbPages = Math.ceil(this.state.proposalsCount / PROPOSAL_PAGINATION);
+    const showPagination = nbPages > 1 && !this.state.randomOrder;
     return (
       <div>
         <h2 className="h2">
@@ -118,13 +122,18 @@ const SelectionStepPage = React.createClass({
               voteType={this.props.step.isOpen ? this.props.step.voteType : 0}
             />
             {
-              nbPages > 1
+              showPagination
               ? <Pagination
                   current={this.state.currentPage}
                   nbPages={nbPages}
                   onChange={this.selectPage}
               />
               : null
+            }
+            {
+              this.state.randomOrder
+                ? <ProposalRandomButton isLoading={this.state.isLoading} onClick={this.loadProposals} />
+                : null
             }
           </div>
         </Loader>

@@ -62,7 +62,7 @@ const ProposalListFilters = React.createClass({
     });
   },
 
-  buttons: ['last', 'old', 'comments'],
+  buttons: ['random', 'last', 'old', 'comments'],
   filters: ['theme', 'status', 'type', 'district'],
 
   handleOrderChange(order) {
