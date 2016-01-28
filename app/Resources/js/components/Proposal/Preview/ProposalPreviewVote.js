@@ -11,6 +11,8 @@ const ProposalPreviewVote = React.createClass({
     selectionStepId: React.PropTypes.number,
     creditsLeft: React.PropTypes.number,
     voteType: React.PropTypes.number.isRequired,
+    userHasVote: React.PropTypes.bool.isRequired,
+    onVoteChange: React.PropTypes.func.isRequired,
   },
 
   getDefaultProps() {
@@ -30,10 +32,6 @@ const ProposalPreviewVote = React.createClass({
     return this.props.selectionStepId && this.props.voteType === VOTE_TYPE_SIMPLE;
   },
 
-  userHasVote() {
-    return this.props.proposal.userHasVote;
-  },
-
   toggleModal(value) {
     this.setState({
       showModal: value,
@@ -41,11 +39,29 @@ const ProposalPreviewVote = React.createClass({
   },
 
   vote() {
-    ProposalActions.vote(this.props.selectionStepId, this.props.proposal.id);
+    ProposalActions
+      .vote(
+        this.props.selectionStepId,
+        this.props.proposal.id,
+        this.props.proposal.estimation
+      )
+      .then(() => {
+        this.props.onVoteChange(true);
+      })
+    ;
   },
 
   deleteVote() {
-    ProposalActions.deleteVote(this.props.selectionStepId, this.props.proposal.id);
+    ProposalActions
+      .deleteVote(
+        this.props.selectionStepId,
+        this.props.proposal.id,
+        this.props.proposal.estimation
+      )
+      .then(() => {
+        this.props.onVoteChange(false);
+      })
+    ;
   },
 
   voteAction() {
@@ -53,7 +69,7 @@ const ProposalPreviewVote = React.createClass({
       this.toggleModal(true);
       return;
     }
-    if (this.userHasVote()) {
+    if (this.props.userHasVote) {
       this.deleteVote();
     } else {
       this.vote();

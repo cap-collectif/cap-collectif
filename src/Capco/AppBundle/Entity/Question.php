@@ -49,9 +49,9 @@ class Question
     /**
      * @var string
      *
-     * @ORM\Column(name="helpText", type="text")
+     * @ORM\Column(name="helpText", type="text", nullable=true)
      */
-    private $helpText;
+    private $helpText = null;
 
     /**
      * @var ProposalForm

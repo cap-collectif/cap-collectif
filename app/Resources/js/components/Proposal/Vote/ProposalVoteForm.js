@@ -63,7 +63,7 @@ const ProposalVoteForm = React.createClass({
       if (this.isValid()) {
         if (LoginStore.isLoggedIn() && this.props.userHasVote) {
           ProposalActions
-            .deleteVote(this.props.selectionStepId, this.props.proposal.id)
+            .deleteVote(this.props.selectionStepId, this.props.proposal.id, this.props.proposal.estimation)
             .then(() => {
               this.setState(this.getInitialState());
               this.props.onSubmitSuccess();
@@ -80,7 +80,12 @@ const ProposalVoteForm = React.createClass({
           delete data.email;
         }
         ProposalActions
-          .vote(this.props.selectionStepId, this.props.proposal.id, data)
+          .vote(
+            this.props.selectionStepId,
+            this.props.proposal.id,
+            this.props.proposal.estimation,
+            data
+          )
           .then(() => {
             this.setState(this.getInitialState());
             this.props.onSubmitSuccess();

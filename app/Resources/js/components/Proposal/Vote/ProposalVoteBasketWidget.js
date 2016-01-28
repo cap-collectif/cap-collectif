@@ -127,7 +127,11 @@ const ProposalVoteBasketWidget = React.createClass({
           </Nav>
           : null
         }
-        <Button bsStyle="default" className="btn--outline navbar-btn pull-right" href={this.props.votesPageUrl} >
+        <Button
+          bsStyle="default"
+          className="btn--outline btn-light-gray navbar-btn pull-right"
+          href={this.props.votesPageUrl}
+        >
           {this.getIntlMessage('proposal.details') }
         </Button>
         {
