@@ -149,4 +149,4 @@ Feature: Source
     And I fill in the following:
       | reportBody   | scandaleux     |
     And I press "confirm-opinion-source-report"
-    Then I should see "Merci d'avoir signalé."
+    Then I should see "Merci ! La source a bien été signalée."

@@ -3,11 +3,25 @@ export default {
   locales: ['fr-FR'],
   messages: {
     alert: {
+      danger: {
+        add: {
+          source: 'Désolé un problème est survenu lors de l\'ajout de la source.',
+        },
+        update: {
+          source: 'Désolé un problème est survenu lors de l\'édition de votre source.',
+        },
+      },
       success: {
-        reported: {
+        add: {
+          source: 'Merci ! La source a bien été ajoutée.',
+        },
+        delete: {
+          source: 'Merci ! La source a bien été supprimée.',
+        },
+        report: {
           source: 'Merci ! La source a bien été signalée.',
         },
-        updated: {
+        update: {
           source: 'Merci ! Votre source a bien été modifiée.',
         },
       },

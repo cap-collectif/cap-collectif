@@ -123,7 +123,7 @@ Feature: Opinions
       | opinion_body       | Description de ma proposition   |
       | opinion_appendix-1 | Exposay                         |
     And I press "confirm-opinion-link-create"
-    And I wait 1 seconds
+    And I wait 2 seconds
     Then I should see "1 proposition liée"
     And I should see "Titre" in the "#links-list" element
 
