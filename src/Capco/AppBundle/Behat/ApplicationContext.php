@@ -860,7 +860,7 @@ class ApplicationContext extends UserContext
      */
     public function iClickTheProposalVoteButton()
     {
-        $this->clickProposalVoteButtonWithLabel('Voter pour');
+        $this->clickProposalVoteButtonWithLabel('Soutenir');
     }
 
     /**
@@ -869,7 +869,7 @@ class ApplicationContext extends UserContext
      */
     public function iClickTheProposalUnvoteButton()
     {
-        $this->clickProposalVoteButtonWithLabel('Annuler mon vote');
+        $this->clickProposalVoteButtonWithLabel('Annuler mon soutien');
     }
 
     /**
@@ -950,17 +950,6 @@ class ApplicationContext extends UserContext
             $button->hasClass('disabled') || $button->hasAttribute('disabled'),
             'The proposal vote button is not disabled neither it has class "disabled".'
         );
-    }
-
-    /**
-     * I should see the proposal vote tooltip
-     * @When I should see the proposal vote tooltip
-     */
-    public function iShouldSeeTheProposalVoteTooltip()
-    {
-        $this->navigationContext->getPage('selection page')->hoverOverVoteButton($this->getProposalId());
-        $this->iWait(1);
-        $this->assertPageContainsText("Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux.");
     }
 
     protected function assertProposalCommentsContains($text)

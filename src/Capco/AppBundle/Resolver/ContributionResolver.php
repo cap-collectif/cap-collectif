@@ -113,8 +113,8 @@ class ContributionResolver
             if ($step->getStep()->isConsultationStep()) {
                 $count += $step->getStep()->getContributionsCount();
             }
-            if ($step->getStep()->isCollectStep()) {
-                $count += $step->getStep()->getProposalsCount();
+            if ($step->getStep()->isSelectionStep()) {
+                $count += count($step->getStep()->getProposals());
             }
         }
 

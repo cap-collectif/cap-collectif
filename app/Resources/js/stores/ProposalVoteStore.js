@@ -9,10 +9,8 @@ import {
   INIT_VOTABLE_STEPS,
   CREATE_PROPOSAL_VOTE,
   CREATE_PROPOSAL_VOTE_SUCCESS,
-  CREATE_PROPOSAL_VOTE_FAILURE,
   DELETE_PROPOSAL_VOTE,
   DELETE_PROPOSAL_VOTE_SUCCESS,
-  DELETE_PROPOSAL_VOTE_FAILURE,
 } from '../constants/ProposalConstants';
 
 class ProposalVoteStore extends BaseStore {
@@ -61,9 +59,6 @@ class ProposalVoteStore extends BaseStore {
       break;
     case CREATE_PROPOSAL_VOTE:
       this._userHasVote = true;
-      if (action.estimation) {
-        this._creditsLeft -= action.estimation;
-      }
       this.emitChange();
       break;
     case CREATE_PROPOSAL_VOTE_SUCCESS:
@@ -71,28 +66,13 @@ class ProposalVoteStore extends BaseStore {
       this._isVotableStepsSync = false;
       this.emitChange();
       break;
-    case CREATE_PROPOSAL_VOTE_FAILURE:
-      if (action.estimation) {
-        this._creditsLeft += action.estimation;
-      }
-      this.emitChange();
-      break;
     case DELETE_PROPOSAL_VOTE:
       this._userHasVote = false;
-      if (action.estimation) {
-        this._creditsLeft += action.estimation;
-      }
       this.emitChange();
       break;
     case DELETE_PROPOSAL_VOTE_SUCCESS:
       this._isProposalVotesListSync = false;
       this._isVotableStepsSync = false;
-      this.emitChange();
-      break;
-    case DELETE_PROPOSAL_VOTE_FAILURE:
-      if (action.estimation) {
-        this._creditsLeft -= action.estimation;
-      }
       this.emitChange();
       break;
     default: break;

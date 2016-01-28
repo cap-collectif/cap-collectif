@@ -1,6 +1,8 @@
 import React from 'react';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
+import MessageStore from '../../../stores/MessageStore';
+import FlashMessages from '../../Utils/FlashMessages';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
 import {Table} from 'react-bootstrap';
 import {IntlMixin, FormattedMessage} from 'react-intl';
@@ -18,16 +20,28 @@ const ProposalsUserVotesPage = React.createClass({
   getInitialState() {
     ProposalActions.initVotableSteps(this.props.votableSteps);
     return {
+      messages: {
+        'errors': [],
+        'success': [],
+      },
       votableSteps: ProposalVoteStore.votableSteps,
     };
   },
 
   componentWillMount() {
     ProposalVoteStore.addChangeListener(this.onVotesChange);
+    MessageStore.addChangeListener(this.onMessageChange);
   },
 
   componentWillUnmount() {
     ProposalVoteStore.removeChangeListener(this.onVotesChange);
+    MessageStore.removeChangeListener(this.onMessageChange);
+  },
+
+  onMessageChange() {
+    this.setState({
+      messages: MessageStore.messages,
+    });
   },
 
   onVotesChange() {
@@ -43,6 +57,7 @@ const ProposalsUserVotesPage = React.createClass({
   render() {
     return (
       <div>
+        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} style={{marginBottom: 0}} />
         <div className="container container--custom text-center">
           <h1 style={{marginBottom: '0'}}>{this.getIntlMessage('project.votes.title')}</h1>
         </div>
@@ -52,18 +67,14 @@ const ProposalsUserVotesPage = React.createClass({
               ? this.state.votableSteps.map((step, index) => {
                 return (
                   <div key={index} className="block">
-                    {
-                      this.state.votableSteps.length > 1
-                      ? <h2>
-                        {step.title + ' '}
-                        {
-                          step.voteType === VOTE_TYPE_BUDGET
-                            ? this.getIntlMessage('project.votes.type.budget')
-                            : this.getIntlMessage('project.votes.type.simple')
-                        }
-                      </h2>
-                      : null
-                    }
+                    <h2>
+                      {step.title + ' '}
+                      {
+                        step.voteType === VOTE_TYPE_BUDGET
+                        ? this.getIntlMessage('project.votes.type.budget')
+                        : this.getIntlMessage('project.votes.type.simple')
+                      }
+                    </h2>
                     {
                       step.votesHelpText
                       ? <p>{step.votesHelpText}</p>

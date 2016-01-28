@@ -103,7 +103,14 @@ const OpinionButtons = React.createClass({
     if (this.isContribuable() && this.isTheUserTheAuthor()) {
       if (this.isVersion()) {
         return (
-          <OpinionVersionForm className="pull-right" style={{marginLeft: '5px'}} mode="edit" opinionId={this.props.opinion.parent.id} version={this.props.opinion} />
+          <OpinionVersionForm
+            className="pull-right"
+            style={{marginLeft: '5px'}}
+            mode="edit"
+            opinionId={this.props.opinion.parent.id}
+            version={this.props.opinion}
+            isContribuable
+          />
         );
       }
       return (

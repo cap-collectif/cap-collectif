@@ -7,16 +7,6 @@ class ProposalVoteHelper {
     return Math.round(percentage * 100) / 100;
   }
 
-  getVotesDelta(userHasVoteInitially, userHasVote) {
-    if (userHasVote && !userHasVoteInitially) {
-      return 1;
-    }
-    if (!userHasVote && userHasVoteInitially) {
-      return -1;
-    }
-    return 0;
-  }
-
 }
 
 export default new ProposalVoteHelper();
