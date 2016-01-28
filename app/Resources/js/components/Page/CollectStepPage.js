@@ -2,7 +2,6 @@ import React from 'react';
 import {IntlMixin} from 'react-intl';
 
 import ProposalStore from '../../stores/ProposalStore';
-import MessageStore from '../../stores/MessageStore';
 import ProposalActions from '../../actions/ProposalActions';
 import {PROPOSAL_PAGINATION} from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
@@ -10,7 +9,6 @@ import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import CollectStepPageHeader from './CollectStepPageHeader';
-import FlashMessages from '../Utils/FlashMessages';
 
 const CollectStepPage = React.createClass({
   propTypes: {
@@ -29,16 +27,11 @@ const CollectStepPage = React.createClass({
       proposalsCount: this.props.count,
       currentPage: ProposalStore.currentPage,
       isLoading: true,
-      messages: {
-        'errors': [],
-        'success': [],
-      },
     };
   },
 
   componentWillMount() {
     ProposalStore.addChangeListener(this.onChange);
-    MessageStore.addChangeListener(this.onMessageChange);
   },
 
   componentDidMount() {
@@ -53,13 +46,6 @@ const CollectStepPage = React.createClass({
 
   componentWillUnmount() {
     ProposalStore.removeChangeListener(this.onChange);
-    MessageStore.removeChangeListener(this.onMessageChange);
-  },
-
-  onMessageChange() {
-    this.setState({
-      messages: MessageStore.messages,
-    });
   },
 
   onChange() {
@@ -93,7 +79,6 @@ const CollectStepPage = React.createClass({
     const nbPages = Math.ceil(this.state.proposalsCount / PROPOSAL_PAGINATION);
     return (
       <div>
-        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
         <CollectStepPageHeader
           count={this.state.proposalsCount}
           form={this.props.form}

@@ -38,6 +38,7 @@ import {
   CREATE_COMMENT_SUCCESS,
   CREATE_COMMENT_FAILURE,
 } from '../constants/CommentConstants';
+import {UPDATE_ALERT} from '../constants/AlertConstants';
 
 export default {
 
@@ -198,14 +199,20 @@ export default {
       .then(() => {
         AppDispatcher.dispatch({
           actionType: CREATE_PROPOSAL_SUCCESS,
-          message: successMessage,
+        });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: {bsStyle: 'success', content: successMessage},
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: CREATE_PROPOSAL_FAILURE,
-          message: errorMessage,
+        });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: {bsStyle: 'warning', content: errorMessage},
         });
         return false;
       })
@@ -218,14 +225,20 @@ export default {
       .then(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_PROPOSAL_SUCCESS,
-          message: successMessage,
+        });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: {bsStyle: 'success', content: successMessage},
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_PROPOSAL_FAILURE,
-          message: errorMessage,
+        });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: {bsStyle: 'warning', content: errorMessage},
         });
         return false;
       })
@@ -238,14 +251,20 @@ export default {
       .then(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_SUCCESS,
-          message: successMessage,
+        });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: {bsStyle: 'success', content: successMessage},
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_FAILURE,
-          message: errorMessage,
+        });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: {bsStyle: 'warning', content: errorMessage},
         });
         return false;
       })
@@ -265,12 +284,13 @@ export default {
       });
   },
 
-  vote: (selectionStep, proposal, data = {}, successMessage = 'proposal.request.vote.success', errorMessage = 'proposal.request.vote.failure') => {
+  vote: (selectionStep, proposal, estimation = null, data = {}, successMessage = 'proposal.request.vote.success', errorMessage = 'proposal.request.vote.failure') => {
     const hasComment = data.comment && data.comment.length > 0;
     AppDispatcher.dispatch({
       actionType: CREATE_PROPOSAL_VOTE,
       proposal: proposal,
       selectionStep: selectionStep,
+      estimation: estimation,
       hasComment: hasComment,
     });
     return Fetcher
@@ -278,7 +298,10 @@ export default {
     .then(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_PROPOSAL_VOTE_SUCCESS,
-        message: successMessage,
+      });
+      AppDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: {bsStyle: 'success', content: successMessage},
       });
       if (hasComment) {
         AppDispatcher.dispatch({
@@ -291,7 +314,11 @@ export default {
     .catch((error) => {
       AppDispatcher.dispatch({
         actionType: CREATE_PROPOSAL_VOTE_FAILURE,
-        message: errorMessage,
+        estimation: estimation,
+      });
+      AppDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: {bsStyle: 'warning', content: errorMessage},
       });
       if (hasComment) {
         AppDispatcher.dispatch({
@@ -303,25 +330,33 @@ export default {
     });
   },
 
-  deleteVote: (selectionStep, proposal, successMessage = 'proposal.request.delete_vote.success', errorMessage = 'proposal.request.delete_vote.failure') => {
+  deleteVote: (selectionStep, proposal, estimation = null, successMessage = 'proposal.request.delete_vote.success', errorMessage = 'proposal.request.delete_vote.failure') => {
     AppDispatcher.dispatch({
       actionType: DELETE_PROPOSAL_VOTE,
       proposal: proposal,
       selectionStep: selectionStep,
+      estimation: estimation,
     });
     return Fetcher
       .delete(`/selection_steps/${selectionStep}/proposals/${proposal}/votes`)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_VOTE_SUCCESS,
-          message: successMessage,
+        });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: {bsStyle: 'success', content: successMessage},
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_VOTE_FAILURE,
-          message: errorMessage,
+          estimation: estimation,
+        });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: {bsStyle: 'warning', content: errorMessage},
         });
         return false;
       });

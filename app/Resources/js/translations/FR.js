@@ -231,27 +231,27 @@ export default {
         motive: 'Motif : {motive}',
       },
       vote: {
-        add: 'Soutenir',
+        add: 'Voter pour',
         constraints: {
           email: 'Veuillez entrer une adresse email valide',
           username: 'Le nom doit faire au moins 2 caractères.',
         },
         count: '{num, plural, =0{0 vote} one{# vote} other{# votes}}',
         count_no_nb: '{count, plural, =0{vote} one{vote} other{votes}}',
-        delete: 'Annuler mon soutien',
+        delete: 'Annuler mon vote',
         form: {
           comment: 'Commentaire',
           comment_placeholder: 'Pourquoi soutenez-vous ce projet ? (optionnel)',
           email: 'Adresse électronique',
           username: 'Nom',
-          private: 'Soutenir de manière anonyme',
+          private: 'Voter de manière anonyme',
         },
         modal: {
-          title: 'Soutenir',
+          title: 'Voter',
         },
         not_enough_credits: 'Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux.',
         show_more: 'Voir tous les votes',
-        vote_with_my_account: 'Soutenir avec mon compte',
+        vote_with_my_account: 'Voter avec mon compte',
       },
     },
     share: {
