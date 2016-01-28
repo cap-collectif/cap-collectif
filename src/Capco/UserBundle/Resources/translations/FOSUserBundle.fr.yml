@@ -10,3 +10,4 @@ form:
 registration:
   email:
     subject: %sitename% — Confirmez votre adresse électronique
+

@@ -118,3 +118,17 @@ Capco\UserBundle\Entity\User:
         Media: @MediaUser5
         isTermsAccepted: true
         vip: true
+
+    user503:
+        username: disabled
+        firstname: disabled
+        lastname: disabled
+        email: disabled@test.com
+        enabled: false
+        userType: @UserType1
+        plainPassword: disabled
+        roles:
+         - 'ROLE_USER'
+        Media: @MediaUser1
+        isTermsAccepted: true
+        vip: false
