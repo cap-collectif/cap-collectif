@@ -11,6 +11,7 @@ import SelectionStepPage from './components/Page/SelectionStepPage';
 import ProposalPage from './components/Proposal/Page/ProposalPage';
 import ProposalVoteBasketWidget from './components/Proposal/Vote/ProposalVoteBasketWidget';
 import ProposalsUserVotesPage from './components/Project/Page/ProposalsUserVotesPage';
+import AlertBox from './components/Alert/AlertBox';
 
 FeatureService.load();
 
@@ -18,6 +19,13 @@ AuthService
   .login()
   .then(() => {
     // We enable React apps
+    if ($('#render-alert-box').length) {
+      ReactDOM.render(
+        <AlertBox {...IntlData} />,
+        document.getElementById('render-alert-box')
+      );
+    }
+
     if ($('#render-idea-comments').length) {
       ReactDOM.render(
         <CommentSection uri="ideas" object={$('#render-idea-comments').data('idea')} {...IntlData} />,
