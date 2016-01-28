@@ -36,7 +36,7 @@ class ProposalStore extends BaseStore {
     this._isProposalSync = false;
     this._isProposalListSync = false;
     this._isProcessing = false;
-    this._order = LocalStorageService.get('proposals_order') || 'votes';
+    this._order = LocalStorageService.get('proposals_order') || 'random';
     this._filters = LocalStorageService.get('proposals_filters') || {};
     this._terms = null;
     this._currentPage = 1;

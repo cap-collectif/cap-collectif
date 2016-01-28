@@ -467,12 +467,22 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * I sort by date
+     * @When I sort by date
+     */
+    public function iSortByDate()
+    {
+        $this->getCurrentProposalPage()->sortByDate();
+        $this->iWait(1);
+    }
+
+    /**
      * I sort by comments
      * @When I sort by comments
      */
     public function iSortByComments()
     {
-        $this->pressButton('Commentées');
+        $this->getCurrentProposalPage()->sortByComments();
         $this->iWait(1);
     }
 
@@ -502,10 +512,22 @@ class ApplicationContext extends UserContext
      */
     public function proposalsShouldBeOrderedByDate()
     {
+        $selector = $this->getCurrentProposalPage()->getDateSortingButtonSelector();
+        $this->elementShouldHaveClass($selector, 'active');
         $this->proposalBeforeProposal(
             'Rénovation du gymnase',
             'Ravalement de la façade de la bibliothèque municipale'
         );
+    }
+
+    /**
+     * Proposals should be ordered randomly
+     * @Then proposals should be ordered randomly
+     */
+    public function proposalsShouldBeOrderedRandomly()
+    {
+        $selector = $this->getCurrentProposalPage()->getRandomSortingButtonSelector();
+        $this->elementShouldHaveClass($selector, 'active');
     }
 
     /**
@@ -514,6 +536,8 @@ class ApplicationContext extends UserContext
      */
     public function proposalsShouldBeOrderedByComments()
     {
+        $selector = $this->getCurrentProposalPage()->getCommentsSortingButtonSelector();
+        $this->elementShouldHaveClass($selector, 'active');
         $this->proposalBeforeProposal(
             'Ravalement de la façade de la bibliothèque municipale',
             'Rénovation du gymnase'
@@ -536,6 +560,8 @@ class ApplicationContext extends UserContext
      */
     public function proposalsShouldBeFilteredByThemeAndTermsAndSortedByComments()
     {
+        $selector = $this->getCurrentProposalPage()->getCommentsSortingButtonSelector();
+        $this->elementShouldHaveClass($selector, 'active');
         $this->assertPageContainsText("Ravalement de la façade de la bibliothèque municipale");
         $this->assertPageContainsText("Installation de bancs sur la place de la mairie");
         $this->proposalBeforeProposal(

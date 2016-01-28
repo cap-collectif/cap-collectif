@@ -14,6 +14,8 @@ Feature: Proposals
   @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a collect step and sort them
     Given I go to an open collect step
+    Then proposals should be ordered randomly
+    When I sort by date
     Then proposals should be ordered by date
     When I sort by comments
     Then proposals should be ordered by comments
@@ -146,6 +148,8 @@ Feature: Proposals
   @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a selection step and sort them
     Given I go to a selection step with simple vote enabled
+    Then proposals should be ordered randomly
+    When I sort by date
     Then proposals should be ordered by date
     When I sort by comments
     Then proposals should be ordered by comments

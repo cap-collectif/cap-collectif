@@ -51,7 +51,7 @@ Feature: Selection steps
         @...@
       ],
       "count": 3,
-      "order": "votes",
+      "order": "random",
       "creditsLeft": @...@
     }
     """
@@ -104,7 +104,7 @@ Feature: Selection steps
         @...@
       ],
       "count": 3,
-      "order": "votes",
+      "order": "random",
       "creditsLeft": @...@
     }
     """
@@ -160,7 +160,7 @@ Feature: Selection steps
         @...@
       ],
       "count": 2,
-      "order": "votes",
+      "order": "random",
       "creditsLeft": @...@
     }
     """

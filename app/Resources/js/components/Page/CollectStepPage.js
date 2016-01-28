@@ -62,13 +62,13 @@ const CollectStepPage = React.createClass({
       return;
     }
 
-    this.setState({
-      isLoading: true,
-    });
     this.loadProposals();
   },
 
   loadProposals() {
+    this.setState({
+      isLoading: true,
+    });
     ProposalActions.load('form', this.props.form.id);
   },
 
@@ -84,6 +84,7 @@ const CollectStepPage = React.createClass({
   render() {
     const nbPages = Math.ceil(this.state.proposalsCount / PROPOSAL_PAGINATION);
     const showPagination = nbPages > 1 && !this.state.randomOrder;
+    const showRandomButton = nbPages > 1 && this.state.randomOrder;
     return (
       <div>
         <CollectStepPageHeader
@@ -114,7 +115,7 @@ const CollectStepPage = React.createClass({
               : null
             }
             {
-              this.state.randomOrder
+              showRandomButton
               ? <ProposalRandomButton isLoading={this.state.isLoading} onClick={this.loadProposals} />
               : null
             }

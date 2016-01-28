@@ -206,7 +206,7 @@ Feature: Proposal Restful Api
         }
       ],
       "count": 1,
-      "order": "last"
+      "order": "random"
     }
     """
 

@@ -19,7 +19,35 @@ class CollectPage extends Page
         'proposal' => '.proposal__preview',
         'create proposal button' => '#add-proposal',
         'proposal form submit button' => '#confirm-proposal-create',
+        'random sorting button' => '#proposal-sorting-random',
+        'date sorting button' => '#proposal-sorting-last',
+        'comments sorting button' => '#proposal-sorting-comments',
     ];
+
+    public function getRandomSortingButtonSelector()
+    {
+        return $this->getSelector('random sorting button');
+    }
+
+    public function getDateSortingButtonSelector()
+    {
+        return $this->getSelector('date sorting button');
+    }
+
+    public function sortByDate()
+    {
+        $this->getElement('date sorting button')->click();
+    }
+
+    public function getCommentsSortingButtonSelector()
+    {
+        return $this->getSelector('comments sorting button');
+    }
+
+    public function sortByComments()
+    {
+        $this->getElement('comments sorting button')->click();
+    }
 
     public function getProposalSelector()
     {

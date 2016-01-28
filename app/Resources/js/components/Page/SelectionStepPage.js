@@ -72,13 +72,13 @@ const SelectionStepPage = React.createClass({
       return;
     }
 
-    this.setState({
-      isLoading: true,
-    });
     this.loadProposals();
   },
 
   loadProposals() {
+    this.setState({
+      isLoading: true,
+    });
     ProposalActions.load('selectionStep', this.props.step.id);
   },
 
@@ -93,6 +93,7 @@ const SelectionStepPage = React.createClass({
 
   render() {
     const nbPages = Math.ceil(this.state.proposalsCount / PROPOSAL_PAGINATION);
+    const showRandomButton = nbPages > 1 && this.state.randomOrder;
     const showPagination = nbPages > 1 && !this.state.randomOrder;
     return (
       <div>
@@ -131,7 +132,7 @@ const SelectionStepPage = React.createClass({
               : null
             }
             {
-              this.state.randomOrder
+              showRandomButton
                 ? <ProposalRandomButton isLoading={this.state.isLoading} onClick={this.loadProposals} />
                 : null
             }
