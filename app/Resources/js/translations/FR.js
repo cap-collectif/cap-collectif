@@ -169,7 +169,6 @@ export default {
         widget: {
           budget: 'Budget',
           count: 'Mes votes',
-          no_value: 'Non renseigné',
           left: 'Restant',
           spent: 'Dépensé',
           step: 'Étape',

@@ -51,11 +51,10 @@ const ProposalVoteBasketWidget = React.createClass({
       this.state.votableSteps,
       parseInt(this.state.selectedStepId, 10)
     );
-    const budget = selectedStep.budget || 0;
-    const creditsLeft = selectedStep.creditsLeft || 0;
-    const creditsSpent = budget - creditsLeft;
+    const creditsLeft = selectedStep.creditsLeft;
+    const creditsSpent = selectedStep.budget - creditsLeft;
     const percentage = ProposalVotesHelper.getSpentPercentage(
-      budget,
+      selectedStep.budget,
       creditsSpent
     );
     return (
@@ -106,11 +105,7 @@ const ProposalVoteBasketWidget = React.createClass({
                   {this.getIntlMessage('project.votes.widget.budget')}
                 </p>
                 <span className="widget__counter__value">
-                  {
-                    budget
-                      ? <FormattedNumber value={budget} style="currency" currency="EUR"/>
-                      : this.getIntlMessage('project.votes.widget.no_value')
-                  }
+                  <FormattedNumber value={selectedStep.budget} style="currency" currency="EUR"/>
                 </span>
               </li>
               <li className="navbar-text widget__counter">
