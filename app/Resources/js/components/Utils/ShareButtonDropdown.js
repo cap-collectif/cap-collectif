@@ -24,23 +24,27 @@ const ShareButtonDropdown = React.createClass({
     };
   },
 
+  getEncodedUrl() {
+    return encodeURIComponent(this.props.url);
+  },
+
   facebook() {
     this.openSharer(
-      `http://www.facebook.com/sharer.php?u=${this.props.url}&t=${this.props.title}`,
+      `http://www.facebook.com/sharer.php?u=${this.getEncodedUrl()}&t=${this.props.title}`,
       'Facebook'
     );
   },
 
   twitter() {
     this.openSharer(
-      `https://twitter.com/share?url=${this.props.url}&text=${this.props.title}`,
+      `https://twitter.com/share?url=${this.getEncodedUrl()}&text=${this.props.title}`,
       'Twitter'
     );
   },
 
   googleplus() {
     this.openSharer(
-      `https://plus.google.com/share?url=${this.props.url}&title=${this.props.title}`,
+      `https://plus.google.com/share?url=${this.getEncodedUrl()}&title=${this.props.title}`,
       'Google+'
     );
   },
@@ -86,6 +90,7 @@ const ShareButtonDropdown = React.createClass({
   },
 
   render() {
+    console.log(this.getEncodedUrl());
     return (
       <DropdownButton
         bsStyle={this.props.bsStyle}
