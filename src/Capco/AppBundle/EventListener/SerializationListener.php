@@ -38,7 +38,7 @@ class SerializationListener extends AbstractSerializationListener
                 'url',
                 $this->mediaExtension->path($event->getObject(), 'avatar')
             );
-        } catch(RouteNotFoundException $e) {
+        } catch (RouteNotFoundException $e) {
             // Avoid some SonataMedia problems
         }
     }

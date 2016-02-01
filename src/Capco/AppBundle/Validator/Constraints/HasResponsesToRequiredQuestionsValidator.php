@@ -15,21 +15,24 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
         foreach ($questions as $question) {
             if ($question->isRequired() && !$this->hasResponseForQuestion($question, $responses)) {
                 $this->context->addViolationAt('proposalResponses', $constraint->message, [], null);
+
                 return;
             }
         }
-
     }
 
-    private function hasResponseForQuestion(Question $question, $responses) {
+    private function hasResponseForQuestion(Question $question, $responses)
+    {
         foreach ($responses as $response) {
             if ($response->getQuestion() === $question) {
                 if ($response->getValue() && strlen($response->getValue())) {
                     return true;
                 }
+
                 return false;
             }
         }
+
         return false;
     }
 }

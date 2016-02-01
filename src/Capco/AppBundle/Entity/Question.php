@@ -223,12 +223,14 @@ class Question
     }
 
     /**
-     * @param boolean $required
+     * @param bool $required
+     *
      * @return $this
      */
     public function setRequired($required)
     {
         $this->required = $required;
+
         return $this;
     }
 
@@ -237,6 +239,7 @@ class Question
         if (array_key_exists($this->questionType, self::$questionTypesInputs)) {
             return self::$questionTypesInputs[$this->questionType];
         }
-        return null;
+
+        return;
     }
 }

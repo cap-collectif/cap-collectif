@@ -66,7 +66,7 @@ class ProposalVotesResolver
                     ]
                 )
             ;
-        } else if ($vote->getEmail()) {
+        } elseif ($vote->getEmail()) {
             $otherVotes = $this
                 ->proposalVoteRepository
                 ->findBy(
@@ -83,8 +83,10 @@ class ProposalVotesResolver
         }
         if ($selectionStep->isBudgetVotable() && $selectionStep->getBudget()) {
             $left = $selectionStep->getBudget() - $this->getAmountSpentForVotes($otherVotes);
+
             return $left >= $proposal->getEstimation();
         }
+
         return true;
     }
 
@@ -94,6 +96,7 @@ class ProposalVotesResolver
         foreach ($votes as $vote) {
             $spent += $vote->getProposal()->getEstimation();
         }
+
         return $spent;
     }
 
@@ -108,6 +111,7 @@ class ProposalVotesResolver
                 ]
             )
         ;
+
         return $this->getAmountSpentForVotes($votes);
     }
 
@@ -119,6 +123,7 @@ class ProposalVotesResolver
                 ->getSpentCreditsForUser($user, $selectionStep)
             ;
         }
+
         return $creditsLeft;
     }
 
@@ -128,7 +133,6 @@ class ProposalVotesResolver
             ->selectionStepRepository
             ->getVotableStepsForProposal($proposal)
         ;
-
     }
 
     public function getVotableStepsForProject(Project $project)
@@ -137,7 +141,6 @@ class ProposalVotesResolver
             ->selectionStepRepository
             ->getVotableStepsForProject($project)
         ;
-
     }
 
     public function getFirstVotableStepForProposal(Proposal $proposal)
@@ -150,6 +153,7 @@ class ProposalVotesResolver
                 break;
             }
         }
+
         return $firstVotableStep;
     }
 

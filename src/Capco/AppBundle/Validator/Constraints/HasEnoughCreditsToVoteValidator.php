@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Validator\Constraints;
 use Capco\AppBundle\Resolver\ProposalVotesResolver;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class HasEnoughCreditsToVoteValidator extends ConstraintValidator
 {
@@ -23,6 +22,7 @@ class HasEnoughCreditsToVoteValidator extends ConstraintValidator
                 ->buildViolation($constraint->message)
                 ->addViolation()
             ;
+
             return false;
         }
 

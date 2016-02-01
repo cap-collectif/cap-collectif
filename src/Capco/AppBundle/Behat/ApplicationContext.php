@@ -6,7 +6,6 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Tester\Result\TestResult;
-use Capco\AppBundle\Behat\Page\ProjectUserVotesPage;
 use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
@@ -31,7 +30,7 @@ class ApplicationContext extends UserContext
         'stepSlug' => 'collecte-des-propositions-fermee',
     ];
     protected static $votesDetailsPageParams = [
-        'projectSlug' => 'budget-participatif-rennes'
+        'projectSlug' => 'budget-participatif-rennes',
     ];
     protected static $selectionStepWithSimpleVoteParams = [
         'projectSlug' => 'budget-participatif-rennes',
@@ -51,7 +50,6 @@ class ApplicationContext extends UserContext
         'stepSlug' => 'collecte-des-propositions-1',
         'proposalSlug' => 'proposition-pas-chere',
     ];
-
 
     /**
      * @BeforeScenario
@@ -361,7 +359,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Checks that an element has an attribute
+     * Checks that an element has an attribute.
      *
      * @Then /^the element "([^"]*)" should have attribute :attribute $/
      */
@@ -376,7 +374,8 @@ class ApplicationContext extends UserContext
         \PHPUnit_Framework_TestCase::assertTrue($element->hasAttribute($attribute));
     }
 
-    private function visitPageWithParams($page, $params) {
+    private function visitPageWithParams($page, $params)
+    {
         $this->navigationContext->getPage($page)->open($params);
         $this->iWait(2);
     }
@@ -394,16 +393,18 @@ class ApplicationContext extends UserContext
         if ($this->closedCollectStepIsOpen() || $this->openCollectStepIsOpen()) {
             return $this->navigationContext->getPage('collect page');
         }
-        return null;
+
+        return;
     }
 
     /**
-     * Go to an open collect step page
+     * Go to an open collect step page.
+     *
      * @When I go to an open collect step
      */
     public function iGoToAnOpenCollectStep()
     {
-        $this->visitPageWithParams("collect page", self::$collectStepOpenParams);
+        $this->visitPageWithParams('collect page', self::$collectStepOpenParams);
     }
 
     protected function openCollectStepIsOpen()
@@ -415,12 +416,13 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Go to a closed collect step page
+     * Go to a closed collect step page.
+     *
      * @When I go to a closed collect step
      */
     public function iGoToAClosedCollectStep()
     {
-        $this->visitPageWithParams("collect page", self::$collectStepClosedParams);
+        $this->visitPageWithParams('collect page', self::$collectStepClosedParams);
     }
 
     protected function closedCollectStepIsOpen()
@@ -432,12 +434,13 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Go to a proposal page
+     * Go to a proposal page.
+     *
      * @When I go to a proposal
      */
     public function iGoToAProposal()
     {
-        $this->visitPageWithParams("proposal page", self::$proposalWithSimpleVoteParams);
+        $this->visitPageWithParams('proposal page', self::$proposalWithSimpleVoteParams);
     }
 
     protected function proposalPageIsOpen()
@@ -446,18 +449,20 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * There should be nb proposals
+     * There should be nb proposals.
+     *
      * @Then there should be :nb proposals
      */
     public function thereShouldBeNbProposals($nb)
     {
-        $this->assertPageContainsText($nb . ' propositions');
+        $this->assertPageContainsText($nb.' propositions');
         $proposalSelector = $this->getCurrentProposalPage()->getProposalSelector();
         $this->assertNumElements($nb, $proposalSelector);
     }
 
     /**
-     * I change the theme filter
+     * I change the theme filter.
+     *
      * @When I change the theme filter
      */
     public function iChangeTheThemeFilter()
@@ -467,27 +472,30 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I sort by date
-     * @When I sort by date
+     * I sort proposals by date.
+     *
+     * @When I sort proposals by date
      */
-    public function iSortByDate()
+    public function iSortProposalsByDate()
     {
         $this->getCurrentProposalPage()->sortByDate();
         $this->iWait(1);
     }
 
     /**
-     * I sort by comments
-     * @When I sort by comments
+     * I sort proposals by comments.
+     *
+     * @When I sort proposals by comments
      */
-    public function iSortByComments()
+    public function iSortProposalsByComments()
     {
         $this->getCurrentProposalPage()->sortByComments();
         $this->iWait(1);
     }
 
     /**
-     * I sort for proposals with terms
+     * I sort for proposals with terms.
+     *
      * @When I search for proposals with terms :terms
      */
     public function iSearchForProposalsWithTerms($terms)
@@ -507,7 +515,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Proposals should be ordered by date
+     * Proposals should be ordered by date.
+     *
      * @Then proposals should be ordered by date
      */
     public function proposalsShouldBeOrderedByDate()
@@ -521,7 +530,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Proposals should be ordered randomly
+     * Proposals should be ordered randomly.
+     *
      * @Then proposals should be ordered randomly
      */
     public function proposalsShouldBeOrderedRandomly()
@@ -531,7 +541,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Proposals should be ordered by comments
+     * Proposals should be ordered by comments.
+     *
      * @Then proposals should be ordered by comments
      */
     public function proposalsShouldBeOrderedByComments()
@@ -545,33 +556,36 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Proposals should be filtered by terms
+     * Proposals should be filtered by terms.
+     *
      * @Then proposals should be filtered by terms
      */
     public function proposalsShouldBeFilteredByTerms()
     {
-        $this->assertPageContainsText("Rénovation du gymnase");
-        $this->assertPageContainsText("Installation de bancs sur la place de la mairie");
+        $this->assertPageContainsText('Rénovation du gymnase');
+        $this->assertPageContainsText('Installation de bancs sur la place de la mairie');
     }
 
     /**
-     * Proposals should be filtered by theme and terms and sorted by comments
+     * Proposals should be filtered by theme and terms and sorted by comments.
+     *
      * @Then proposals should be filtered by theme and terms and sorted by comments
      */
     public function proposalsShouldBeFilteredByThemeAndTermsAndSortedByComments()
     {
         $selector = $this->getCurrentProposalPage()->getCommentsSortingButtonSelector();
         $this->elementShouldHaveClass($selector, 'active');
-        $this->assertPageContainsText("Ravalement de la façade de la bibliothèque municipale");
-        $this->assertPageContainsText("Installation de bancs sur la place de la mairie");
+        $this->assertPageContainsText('Ravalement de la façade de la bibliothèque municipale');
+        $this->assertPageContainsText('Installation de bancs sur la place de la mairie');
         $this->proposalBeforeProposal(
-            "Ravalement de la façade de la bibliothèque municipale",
-            "Installation de bancs sur la place de la mairie"
+            'Ravalement de la façade de la bibliothèque municipale',
+            'Installation de bancs sur la place de la mairie'
         );
     }
 
     /**
-     * I click the create proposal button
+     * I click the create proposal button.
+     *
      * @Then I click the create proposal button
      */
     public function iClickTheCreateProposalButton()
@@ -581,7 +595,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I fill the proposal form
+     * I fill the proposal form.
+     *
      * @When I fill the proposal form
      */
     public function iFillTheProposalForm()
@@ -590,7 +605,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I fill the proposal form with a theme
+     * I fill the proposal form with a theme.
+     *
      * @When I fill the proposal form with a theme
      */
     public function iFillTheProposalFormWithATheme()
@@ -599,7 +615,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I fill the proposal form without required response
+     * I fill the proposal form without required response.
+     *
      * @When I fill the proposal form without required response
      */
     public function iFillTheProposalFormWithoutRequiredResponse()
@@ -625,7 +642,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I submit the create proposal form
+     * I submit the create proposal form.
+     *
      * @When I submit the create proposal form
      */
     public function iSubmitTheCreateProposalForm()
@@ -635,7 +653,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I submit the edit proposal form
+     * I submit the edit proposal form.
+     *
      * @When I submit the edit proposal form
      */
     public function iSubmitTheEditProposalForm()
@@ -645,7 +664,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * The create proposal button should be disabled
+     * The create proposal button should be disabled.
+     *
      * @Then the create proposal button should be disabled
      */
     public function theCreateProposalButtonShouldBeDisabled()
@@ -655,7 +675,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see my new proposal
+     * I should see my new proposal.
+     *
      * @Then I should see my new proposal
      */
     public function iShouldSeMyNewProposal()
@@ -664,7 +685,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I click the edit proposal button
+     * I click the edit proposal button.
+     *
      * @Then I click the edit proposal button
      */
     public function iClickTheEditProposalButton()
@@ -674,7 +696,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I change the proposal title
+     * I change the proposal title.
+     *
      * @When I change the proposal title
      */
     public function iChangeTheProposalTitle()
@@ -683,17 +706,19 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * The proposal title should have change
+     * The proposal title should have change.
+     *
      * @Then the proposal title should have changed
      */
     public function theProposalTitleShouldHaveChanged()
     {
-        $this->assertPageNotContainsText("Rénovation du gymnase");
-        $this->assertPageContainsText("Nouveau titre");
+        $this->assertPageNotContainsText('Rénovation du gymnase');
+        $this->assertPageContainsText('Nouveau titre');
     }
 
     /**
-     * I should not see the edit proposal button
+     * I should not see the edit proposal button.
+     *
      * @Then I should not see the edit proposal button
      */
     public function iShouldNotSeeTheEditProposalButton()
@@ -703,7 +728,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I click the delete proposal button
+     * I click the delete proposal button.
+     *
      * @Then I click the delete proposal button
      */
     public function iClickTheDeleteProposalButton()
@@ -713,7 +739,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I confirm proposal deletion
+     * I confirm proposal deletion.
+     *
      * @Then I confirm proposal deletion
      */
     public function iConfirmProposalDeletion()
@@ -723,16 +750,18 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should not see my proposal anymore
+     * I should not see my proposal anymore.
+     *
      * @Then I should not see my proposal anymore
      */
     public function iShouldNotSeeMyProposalAnymore()
     {
-        $this->assertPageNotContainsText("Rénovation du gymnase");
+        $this->assertPageNotContainsText('Rénovation du gymnase');
     }
 
     /**
-     * I should not see the delete proposal button
+     * I should not see the delete proposal button.
+     *
      * @Then I should not see the delete proposal button
      */
     public function iShouldNotSeeTheDeleteProposalButton()
@@ -742,7 +771,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I click the report proposal button
+     * I click the report proposal button.
+     *
      * @Then I click the report proposal button
      */
     public function iClickTheReportProposalButton()
@@ -751,17 +781,16 @@ class ApplicationContext extends UserContext
         $this->iWait(1);
     }
 
-
-
     // ********************************** Proposal votes *************************************************
 
     /**
-     * Go to the votes details page
+     * Go to the votes details page.
+     *
      * @When I go to the votes details page
      */
     public function iGoToTheVotesDetailsPage()
     {
-        $this->visitPageWithParams("project user votes page", self::$votesDetailsPageParams);
+        $this->visitPageWithParams('project user votes page', self::$votesDetailsPageParams);
     }
 
     protected function votesDetailsPageIsOpen()
@@ -770,12 +799,13 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Go to a selection step page with simple vote enabled
+     * Go to a selection step page with simple vote enabled.
+     *
      * @When I go to a selection step with simple vote enabled
      */
     public function iGoToASelectionStepWithSimpleVoteEnabled()
     {
-        $this->visitPageWithParams("selection page", self::$selectionStepWithSimpleVoteParams);
+        $this->visitPageWithParams('selection page', self::$selectionStepWithSimpleVoteParams);
     }
 
     protected function selectionStepWithSimpleVoteIsOpen()
@@ -787,12 +817,13 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Go to a selection step page with budget vote enabled
+     * Go to a selection step page with budget vote enabled.
+     *
      * @When I go to a selection step with budget vote enabled
      */
     public function iGoToASelectionStepWithBudgetVoteEnabled()
     {
-        $this->visitPageWithParams("selection page", self::$selectionStepWithBudgetVoteParams);
+        $this->visitPageWithParams('selection page', self::$selectionStepWithBudgetVoteParams);
     }
 
     protected function selectionStepWithBudgetVoteIsOpen()
@@ -804,12 +835,13 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Go to a proposal page with budget vote enabled
+     * Go to a proposal page with budget vote enabled.
+     *
      * @When I go to a proposal with budget vote enabled
      */
     public function iGoToAProposalWithBudgetVoteEnabled()
     {
-        $this->visitPageWithParams("proposal page", self::$proposalWithBudgetVoteParams);
+        $this->visitPageWithParams('proposal page', self::$proposalWithBudgetVoteParams);
     }
 
     protected function proposalPageWithBudgetVoteIsOpen()
@@ -825,11 +857,13 @@ class ApplicationContext extends UserContext
         if ($this->proposalPageWithBudgetVoteIsOpen() || $this->selectionStepWithBudgetVoteIsOpen()) {
             return 8;
         }
-        return null;
+
+        return;
     }
 
     /**
-     * I should have nb votes
+     * I should have nb votes.
+     *
      * @Then I should have :nb votes
      */
     public function iShouldHaveNbVotes($nb)
@@ -839,29 +873,32 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * The proposal should have nb votes
+     * The proposal should have nb votes.
+     *
      * @Given the proposal has :nb votes
      * @Then the proposal should have :nb votes
      */
     public function theProposalShouldHaveNbVotes($nb)
     {
         $votesCount = $this->getCurrentProposalPage()->getVotesCount($this->getProposalId());
-        \PHPUnit_Framework_Assert::assertEquals($nb, $votesCount, 'Incorrect votes number '. $votesCount . ' for proposal.');
+        \PHPUnit_Framework_Assert::assertEquals($nb, $votesCount, 'Incorrect votes number '.$votesCount.' for proposal.');
     }
 
     /**
-     * The proposal should have nb comments
+     * The proposal should have nb comments.
+     *
      * @Given the proposal has :nb comments
      * @Then the proposal should have :nb comments
      */
     public function theProposalShouldHaveNbComments($nb)
     {
         $commentsCount = $this->getCurrentProposalPage()->getCommentsCount($this->getProposalId());
-        \PHPUnit_Framework_Assert::assertEquals($nb, $commentsCount, 'Incorrect comments number '. $commentsCount . ' for proposal.');
+        \PHPUnit_Framework_Assert::assertEquals($nb, $commentsCount, 'Incorrect comments number '.$commentsCount.' for proposal.');
     }
 
     /**
-     * I remove the first vote
+     * I remove the first vote.
+     *
      * @When I remove the first vote
      */
     public function iRemoveTheFirstVote()
@@ -875,13 +912,14 @@ class ApplicationContext extends UserContext
         $page = $this->getCurrentProposalPage();
         $proposalId = $this->getProposalId();
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
-        \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label '. $buttonLabel . ' on proposal vote button.');
+        \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label '.$buttonLabel.' on proposal vote button.');
         $page->clickVoteButton($proposalId);
         $this->iWait(2);
     }
 
     /**
-     * I click the proposal vote button
+     * I click the proposal vote button.
+     *
      * @When I click the proposal vote button
      */
     public function iClickTheProposalVoteButton()
@@ -890,7 +928,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I click the proposal unvote button
+     * I click the proposal unvote button.
+     *
      * @When I click the proposal unvote button
      */
     public function iClickTheProposalUnvoteButton()
@@ -899,7 +938,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I fill the proposal vote form
+     * I fill the proposal vote form.
+     *
      * @When I fill the proposal vote form
      */
     public function iFillTheProposalVoteForm()
@@ -912,7 +952,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I fill the proposal vote form with already used email
+     * I fill the proposal vote form with already used email.
+     *
      * @When I fill the proposal vote form with already used email
      */
     public function iFillTheProposalVoteFormWithAlreadyUsedEmail()
@@ -925,7 +966,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I fill the proposal vote form with a registered email
+     * I fill the proposal vote form with a registered email.
+     *
      * @When I fill the proposal vote form with a registered email
      */
     public function iFillTheProposalVoteFormWithARegisteredEmail()
@@ -938,7 +980,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I add a proposal vote comment
+     * I add a proposal vote comment.
+     *
      * @When I add a proposal vote comment
      */
     public function iAddAProposalVoteComment()
@@ -947,7 +990,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I check the proposal vote private checkbox
+     * I check the proposal vote private checkbox.
+     *
      * @When I check the proposal vote private checkbox
      */
     public function iCheckTheProposalVotePrivateCheckbox()
@@ -956,7 +1000,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I submit the proposal vote form
+     * I submit the proposal vote form.
+     *
      * @When I submit the proposal vote form
      */
     public function iSubmitTheProposalVoteForm()
@@ -966,7 +1011,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * The proposal vote button must be disabled
+     * The proposal vote button must be disabled.
+     *
      * @Then the proposal vote button must be disabled
      */
     public function theProposalVoteButtonMustBeDisabled()
@@ -979,14 +1025,15 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see the proposal vote tooltip
+     * I should see the proposal vote tooltip.
+     *
      * @When I should see the proposal vote tooltip
      */
     public function iShouldSeeTheProposalVoteTooltip()
     {
         $this->navigationContext->getPage('selection page')->hoverOverVoteButton($this->getProposalId());
         $this->iWait(1);
-        $this->assertPageContainsText("Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux.");
+        $this->assertPageContainsText('Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux.');
     }
 
     protected function assertProposalCommentsContains($text)
@@ -996,7 +1043,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see my comment in the proposal comments list
+     * I should see my comment in the proposal comments list.
+     *
      * @Then I should see my comment in the proposal comments list
      */
     public function iShouldSeeMyCommentInTheProposalCommentsList()
@@ -1017,7 +1065,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see my vote in the proposal votes list
+     * I should see my vote in the proposal votes list.
+     *
      * @Then I should see my vote in the proposal votes list
      */
     public function iShouldSeeMyVoteInTheProposalVotesList()
@@ -1026,7 +1075,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should not see my vote in the proposal votes list
+     * I should not see my vote in the proposal votes list.
+     *
      * @Then I should not see my vote in the proposal votes list
      */
     public function iShouldNotSeeMyVoteInTheProposalVotesList()
@@ -1035,7 +1085,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see my anonymous vote in the proposal votes list
+     * I should see my anonymous vote in the proposal votes list.
+     *
      * @Then I should see my anonymous vote in the proposal votes list
      */
     public function iShouldSeeMyAnonymousVoteInTheProposalVotesList()
@@ -1044,7 +1095,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see my not logged in vote in the proposal votes list
+     * I should see my not logged in vote in the proposal votes list.
+     *
      * @Then I should see my not logged in vote in the proposal votes list
      */
     public function iShouldSeeMyNotLoggedInVoteInTheProposalVotesList()
@@ -1055,7 +1107,8 @@ class ApplicationContext extends UserContext
     // ******************************** Reporting ***************************
 
     /**
-     * I fill the reporting form
+     * I fill the reporting form.
+     *
      * @When I fill the reporting form
      */
     public function iFillTheReportingForm()
@@ -1068,7 +1121,8 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I submit the reporting form
+     * I submit the reporting form.
+     *
      * @When I submit the reporting form
      */
     public function iSubmitTheReportingForm()

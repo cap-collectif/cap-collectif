@@ -23,7 +23,7 @@ class ProposalPage extends Page
         'edit proposal button' => '#proposal-edit-button',
         'delete proposal button' => '#proposal-delete-button',
         'confirm delete proposal button' => '#confirm-proposal-delete',
-        'confirm edit proposal button' => "#confirm-proposal-edit",
+        'confirm edit proposal button' => '#confirm-proposal-edit',
         'report proposal button' => '#proposal-report-button',
         'proposal buttons' => '.proposal__content .proposal__buttons',
     ];

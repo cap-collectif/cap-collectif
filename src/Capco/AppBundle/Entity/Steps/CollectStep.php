@@ -109,6 +109,7 @@ class CollectStep extends AbstractStep
 
     /**
      * @param int $proposalsCount
+     *
      * @return $this
      */
     public function setProposalsCount($proposalsCount)

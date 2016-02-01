@@ -47,7 +47,7 @@ class ProjectController extends Controller
      * @Route("/projects/{projectSlug}/votes", name="app_project_show_user_votes")
      * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
      *
-     * @param Project     $project
+     * @param Project $project
      */
     public function showUserVotesAction(Project $project)
     {

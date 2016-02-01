@@ -105,7 +105,7 @@ class IdeaAdmin extends Admin
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
-                    'export_voters' => ['template' => 'CapcoAdminBundle:CRUD:list__action_export_voters.html.twig']
+                    'export_voters' => ['template' => 'CapcoAdminBundle:CRUD:list__action_export_voters.html.twig'],
                 ],
             ])
         ;

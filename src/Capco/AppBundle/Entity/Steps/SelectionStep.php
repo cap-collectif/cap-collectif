@@ -136,6 +136,7 @@ class SelectionStep extends AbstractStep
 
     /**
      * @param mixed $votesHelpText
+     *
      * @return $this
      */
     public function setVotesHelpText($votesHelpText)
@@ -155,6 +156,7 @@ class SelectionStep extends AbstractStep
 
     /**
      * @param mixed $voteType
+     *
      * @return $this
      */
     public function setVoteType($voteType)
@@ -174,6 +176,7 @@ class SelectionStep extends AbstractStep
 
     /**
      * @param mixed $budget
+     *
      * @return $this
      */
     public function setBudget($budget)

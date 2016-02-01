@@ -64,12 +64,12 @@ class SelectionPage extends Page
 
     public function getVoteButton($id)
     {
-        return $this->getElement('proposal vote button ' . $id);
+        return $this->getElement('proposal vote button '.$id);
     }
 
     public function getVoteButtonSelector($id = 2)
     {
-        return $this->getSelector('proposal vote button ' . $id);
+        return $this->getSelector('proposal vote button '.$id);
     }
 
     public function clickVoteButton($id = 2)
@@ -84,7 +84,7 @@ class SelectionPage extends Page
 
     public function getVotesCounter($id)
     {
-        return $this->getElement('proposal votes counter ' . $id);
+        return $this->getElement('proposal votes counter '.$id);
     }
 
     public function getVotesCount($id = 2)
@@ -94,7 +94,7 @@ class SelectionPage extends Page
 
     public function getCommentsCounter($id)
     {
-        return $this->getElement('proposal comments counter ' . $id);
+        return $this->getElement('proposal comments counter '.$id);
     }
 
     public function getCommentsCount($id = 2)

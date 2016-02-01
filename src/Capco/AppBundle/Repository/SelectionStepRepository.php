@@ -41,6 +41,7 @@ class SelectionStepRepository extends AbstractStepRepository
         ;
 
         $query = $qb->getQuery();
+
         return $asArray ? $query->getArrayResult() : $query->getResult();
     }
 }

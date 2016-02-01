@@ -104,7 +104,7 @@ class SelectionStepsController extends FOSRestController
         }
 
         // If selection step vote type is of type "budget", user must be logged in
-        if(!$user && $selectionStep->isBudgetVotable()) {
+        if (!$user && $selectionStep->isBudgetVotable()) {
             throw new UnauthorizedHttpException();
         }
 

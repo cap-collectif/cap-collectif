@@ -5,16 +5,9 @@ namespace Capco\AppBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Capco\UserBundle\Entity\User;
-
 use Capco\AppBundle\Entity\Opinion;
-
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionModal;
-
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\ArrayInput;
 
 class ImportConsultationModalsCommand extends ContainerAwareCommand
 {
@@ -54,7 +47,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
             $opinion = $em->getRepository('CapcoAppBundle:Opinion')
                           ->findOneBy([
                                 'title' => $row['opinion'],
-                                'step' => $step
+                                'step' => $step,
                             ]);
 
             if (!is_object($opinion)) {
@@ -71,7 +64,6 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
             $em->persist($modal);
             $em->flush();
         }
-
     }
 
     protected function getModals($filePath)
@@ -80,5 +72,4 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
                     ->get('import.csvtoarray')
                     ->convert($filePath);
     }
-
 }

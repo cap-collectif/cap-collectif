@@ -3,7 +3,6 @@
 namespace Capco\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class IdeaController extends Controller
@@ -32,7 +31,7 @@ class IdeaController extends Controller
 
         return new Response($content, 200, [
             'Content-Type' => 'application/force-download',
-            'Content-Disposition' => 'attachment; filename="export_voters.csv"'
+            'Content-Disposition' => 'attachment; filename="export_voters.csv"',
         ]);
     }
 }

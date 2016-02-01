@@ -17,12 +17,13 @@ class ProjectUserVotesPage extends Page
     public $elements = [
         'vote table' => '.proposals-user-votes__table',
         'vote' => '.proposals-user-votes__row',
-        'first vote button' => '.proposals-user-votes__table .proposals-user-votes__row:nth-child(1) .proposal-vote__delete'
+        'first vote button' => '.proposals-user-votes__table .proposals-user-votes__row:nth-child(1) .proposal-vote__delete',
     ];
 
     public function countVotes()
     {
         $table = $this->getElement('vote table');
+
         return count($table->find('css', '.proposals-user-votes__row'));
     }
 

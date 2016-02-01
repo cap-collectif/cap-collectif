@@ -38,6 +38,7 @@ class ProposalVoteRepository extends EntityRepository
                 $counts[$id] = 0;
             }
         }
+
         return $counts;
     }
 
@@ -74,6 +75,7 @@ class ProposalVoteRepository extends EntityRepository
             ->orderBy('pv.createdAt', 'DESC')
             ->groupBy('ss.id')
         ;
+
         return $qb->getQuery()->getResult();
     }
 
@@ -86,6 +88,7 @@ class ProposalVoteRepository extends EntityRepository
             ->andWhere('pv.selectionStep = :step')
             ->setParameter('step', $step)
         ;
+
         return intval($qb->getQuery()->getSingleScalarResult());
     }
 
@@ -97,6 +100,7 @@ class ProposalVoteRepository extends EntityRepository
             ->andWhere('pv.selectionStep = :step')
             ->setParameter('step', $step)
         ;
+
         return $qb->getQuery()->getResult();
     }
 }

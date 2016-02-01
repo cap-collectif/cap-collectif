@@ -24,7 +24,7 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
         $votes = [];
 
         $data = [
-            $constraint->objectPath => $accessor->getValue($object, $constraint->objectPath)
+            $constraint->objectPath => $accessor->getValue($object, $constraint->objectPath),
         ];
         $object->hasUser()
             ? $data['user'] = $object->getUser()

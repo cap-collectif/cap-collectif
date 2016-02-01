@@ -90,7 +90,7 @@ class SearchResolver
     }
 
     /**
-     * Get random sorted query
+     * Get random sorted query.
      *
      * @param AbstractQuery $query
      *
@@ -101,8 +101,8 @@ class SearchResolver
         $functionScore = new FunctionScore();
         $functionScore->setQuery($query);
         $functionScore->setRandomScore();
-        return new Query($functionScore);
 
+        return new Query($functionScore);
     }
 
     /**
@@ -179,7 +179,7 @@ class SearchResolver
             $sort => [
                 'order' => $order,
                 'missing' => $missing,
-            ]
+            ],
         ];
     }
 

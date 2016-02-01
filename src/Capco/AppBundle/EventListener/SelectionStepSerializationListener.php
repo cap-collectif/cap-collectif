@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Repository\ProposalVoteRepository;
 use Capco\AppBundle\Resolver\ProposalVotesResolver;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Serializer;
@@ -51,10 +50,9 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
             $userVotes = $this->serializer->serialize([
                 'data' => $this
                     ->proposalVotesResolver
-                    ->getVotesForUserInSelectionStep($user, $step)
-                ,
+                    ->getVotesForUserInSelectionStep($user, $step),
             ], 'json', SerializationContext::create()->setGroups(['ProposalVotes', 'Proposals', 'Steps', 'UsersInfos']));
-            $event->getVisitor()->addData('userVotes', json_decode($userVotes,true)['data']);
+            $event->getVisitor()->addData('userVotes', json_decode($userVotes, true)['data']);
         }
     }
 }

@@ -15,9 +15,9 @@ Feature: Proposals
   Scenario: Anonymous user wants to see proposals in a collect step and sort them
     Given I go to an open collect step
     Then proposals should be ordered randomly
-    When I sort by date
+    When I sort proposals by date
     Then proposals should be ordered by date
-    When I sort by comments
+    When I sort proposals by comments
     Then proposals should be ordered by comments
 
   @javascript @elasticsearch
@@ -34,7 +34,7 @@ Feature: Proposals
     And I am logged in as user
     And I go to an open collect step
     Then there should be 4 proposals
-    When I sort by comments
+    When I sort proposals by comments
     And I search for proposals with terms "bibliothèque banc"
     And I change the theme filter
     Then there should be 2 proposals
@@ -149,7 +149,7 @@ Feature: Proposals
   Scenario: Anonymous user wants to see proposals in a selection step and sort them
     Given I go to a selection step with simple vote enabled
     Then proposals should be ordered randomly
-    When I sort by date
+    When I sort proposals by date
     Then proposals should be ordered by date
-    When I sort by comments
+    When I sort proposals by comments
     Then proposals should be ordered by comments

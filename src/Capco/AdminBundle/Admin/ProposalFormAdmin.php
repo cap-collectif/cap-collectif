@@ -49,7 +49,7 @@ class ProposalFormAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-           $formMapper
+            $formMapper
                ->add('themeHelpText', null, [
                    'label' => 'admin.fields.proposal_form.theme_help_text',
                    'required' => false,

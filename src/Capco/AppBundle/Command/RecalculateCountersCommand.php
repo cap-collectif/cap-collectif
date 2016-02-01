@@ -186,7 +186,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           WHERE s.isEnabled = 1 AND s.isTrashed = 1 AND ((s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs) OR (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = cs))
         )');
         $query->execute();
-        
+
         // ****************************** Collect step counters **************************************
 
         $query = $em->createQuery('update CapcoAppBundle:Steps\CollectStep cs set cs.proposalsCount =

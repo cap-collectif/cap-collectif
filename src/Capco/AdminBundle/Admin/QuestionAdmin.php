@@ -55,5 +55,4 @@ class QuestionAdmin extends Admin
     {
         return;
     }
-
 }
