@@ -54,16 +54,6 @@ export default {
 
   // Vote for opinion or version
 
-  loadAllVotes: (opinionId, versionId) => {
-    const url = versionId ? `/opinions/${opinionId}/versions/${versionId}/votes` : `/opinions/${opinionId}/votes`;
-    return Fetcher
-      .get(url)
-      .then((data) => {
-        return data.votes;
-      })
-    ;
-  },
-
   vote: (data, opinion, parent, successMessage = 'opinion.request.create_vote.success', errorMessage = 'opinion.request.failure') => {
     AppDispatcher.dispatch({
       actionType: CREATE_OPINION_VOTE,

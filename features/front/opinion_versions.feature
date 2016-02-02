@@ -19,9 +19,3 @@ Feature: Opinion Versions
   Scenario: Anonymous wants to delete a version
     Given I go to a version
     Then I should not see the delete version button
-
-  @javascript
-  Scenario: Anonymous user wants to see all votes of a version
-    Given I go to an opinion version with loads of votes
-    When I click the show all opinion version votes button
-    Then I should see all opinion version votes

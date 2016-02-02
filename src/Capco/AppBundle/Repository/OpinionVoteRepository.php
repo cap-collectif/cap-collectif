@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Doctrine\ORM\EntityRepository;
 
@@ -34,27 +33,6 @@ class OpinionVoteRepository extends EntityRepository
             ->getQuery()
             ->getResult()
         ;
-    }
-
-    /**
-     * Get all by opinion.
-     *
-     * @param $opinion
-     *
-     * @return mixed
-     */
-    public function getAllByOpinion(Opinion $opinion)
-    {
-        $qb = $this->getIsConfirmedQueryBuilder()
-            ->addSelect('u', 'ut', 'o')
-            ->leftJoin('v.user', 'u')
-            ->leftJoin('u.userType', 'ut')
-            ->leftJoin('v.opinion', 'o')
-            ->andWhere('v.opinion = :opinion')
-            ->setParameter('opinion', $opinion)
-            ->orderBy('v.updatedAt', 'ASC');
-
-        return $qb->getQuery()->getResult();
     }
 
     protected function getIsConfirmedQueryBuilder()

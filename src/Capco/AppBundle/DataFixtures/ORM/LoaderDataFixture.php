@@ -69,7 +69,6 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
             __DIR__.'/OpinionAppendix.yml',
             __DIR__.'/OpinionVote.yml',
             __DIR__.'/OpinionVersion.yml',
-            __DIR__.'/OpinionVersionVote.yml',
             __DIR__.'/Category.yml',
             __DIR__.'/Source.yml',
             __DIR__.'/SourceVote.yml',
