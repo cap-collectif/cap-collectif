@@ -34,7 +34,7 @@ const ProposalPreviewFooter = React.createClass({
       : null
     ;
     const votesCount = votesForSelectionStep + this.props.votesDelta;
-    const counterWidth = this.props.selectionStepId ? '50%' : '100%';
+    const counterWidth = this.props.selectionStepId && this.props.showVote ? '50%' : '100%';
 
     return (
       <div className="proposal__footer">

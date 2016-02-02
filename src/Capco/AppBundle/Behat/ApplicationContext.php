@@ -494,7 +494,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I sort for proposals with terms.
+     * I search for proposals with terms.
      *
      * @When I search for proposals with terms :terms
      */
@@ -521,8 +521,8 @@ class ApplicationContext extends UserContext
      */
     public function proposalsShouldBeOrderedByDate()
     {
-        $selector = $this->getCurrentProposalPage()->getDateSortingButtonSelector();
-        $this->elementShouldHaveClass($selector, 'active');
+        $option = $this->getCurrentProposalPage()->getSelectedSortingOption();
+        \PHPUnit_Framework_Assert::assertEquals('last', $option);
         $this->proposalBeforeProposal(
             'Rénovation du gymnase',
             'Ravalement de la façade de la bibliothèque municipale'
@@ -536,8 +536,8 @@ class ApplicationContext extends UserContext
      */
     public function proposalsShouldBeOrderedRandomly()
     {
-        $selector = $this->getCurrentProposalPage()->getRandomSortingButtonSelector();
-        $this->elementShouldHaveClass($selector, 'active');
+        $option = $this->getCurrentProposalPage()->getSelectedSortingOption();
+        \PHPUnit_Framework_Assert::assertEquals('random', $option);
     }
 
     /**
@@ -547,8 +547,8 @@ class ApplicationContext extends UserContext
      */
     public function proposalsShouldBeOrderedByComments()
     {
-        $selector = $this->getCurrentProposalPage()->getCommentsSortingButtonSelector();
-        $this->elementShouldHaveClass($selector, 'active');
+        $option = $this->getCurrentProposalPage()->getSelectedSortingOption();
+        \PHPUnit_Framework_Assert::assertEquals('comments', $option);
         $this->proposalBeforeProposal(
             'Ravalement de la façade de la bibliothèque municipale',
             'Rénovation du gymnase'
@@ -573,8 +573,8 @@ class ApplicationContext extends UserContext
      */
     public function proposalsShouldBeFilteredByThemeAndTermsAndSortedByComments()
     {
-        $selector = $this->getCurrentProposalPage()->getCommentsSortingButtonSelector();
-        $this->elementShouldHaveClass($selector, 'active');
+        $option = $this->getCurrentProposalPage()->getSelectedSortingOption();
+        \PHPUnit_Framework_Assert::assertEquals('comments', $option);
         $this->assertPageContainsText('Ravalement de la façade de la bibliothèque municipale');
         $this->assertPageContainsText('Installation de bancs sur la place de la mairie');
         $this->proposalBeforeProposal(
@@ -649,7 +649,7 @@ class ApplicationContext extends UserContext
     public function iSubmitTheCreateProposalForm()
     {
         $this->navigationContext->getPage('collect page')->submitProposalForm();
-        $this->iWait(2);
+        $this->iWait(5);
     }
 
     /**

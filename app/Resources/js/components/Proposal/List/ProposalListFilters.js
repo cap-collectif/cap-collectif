@@ -4,7 +4,7 @@ import ProposalActions from '../../../actions/ProposalActions';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
-import {Button, ButtonGroup, ButtonToolbar, Row, Col} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 
 const ProposalListFilters = React.createClass({
   propTypes: {
@@ -40,7 +40,7 @@ const ProposalListFilters = React.createClass({
 
   componentDidMount() {
     if (this.props.orderByVotes) {
-      this.buttons.push('votes');
+      this.orders.push('votes');
     }
   },
 
@@ -62,10 +62,11 @@ const ProposalListFilters = React.createClass({
     });
   },
 
-  buttons: ['random', 'last', 'old', 'comments'],
+  orders: ['random', 'last', 'old', 'comments'],
   filters: ['theme', 'status', 'type', 'district'],
 
-  handleOrderChange(order) {
+  handleOrderChange(ev) {
+    const order = ev.target.value;
     ProposalActions.changeOrder(order);
   },
 
@@ -84,24 +85,22 @@ const ProposalListFilters = React.createClass({
     <div>
       <Row>
         <Col xs={12} md={6}>
-          <ButtonToolbar>
-            <ButtonGroup id="proposal-sorting">
-              {
-                this.buttons.map((button, index) => {
-                  return (
-                    <Button
-                      id={'proposal-sorting-' + button}
-                      key={index}
-                      active={this.state.order === button}
-                      onClick={this.handleOrderChange.bind(this, button)}
-                    >
-                      {this.getIntlMessage('global.filter_f_' + button)}
-                    </Button>
-                  );
-                })
-              }
-            </ButtonGroup>
-          </ButtonToolbar>
+          <Input
+            id="proposal-sorting"
+            type="select"
+            onChange={this.handleOrderChange}
+            value={this.state.order || 'random'}
+          >
+            {
+              this.orders.map((choice) => {
+                return (
+                  <option key={choice} value={choice}>
+                    {this.getIntlMessage('global.filter_f_' + choice)}
+                  </option>
+                );
+              })
+            }
+          </Input>
         </Col>
         <Col xs={12} md={6}>
           <ProposalListSearch fetchFrom={this.props.fetchFrom} id={this.props.id} />

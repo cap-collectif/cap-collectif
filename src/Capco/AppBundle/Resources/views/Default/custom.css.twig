@@ -512,13 +512,13 @@
     }
 
     .proposal-vote__widget {
-        border-color: {{ mainText }};
-        background-color: {{ mainBg }};
+        border-color: {{ mainText | raw }};
+        background-color: {{ mainBg | raw }};
     }
 
     .proposal-vote__widget .widget__counter {
-        color: {{ mainText }};
-        border-right: 1px solid {{ mainText }};
+        color: {{ mainText | raw }};
+        border-right: 1px solid {{ mainText | raw }};
     }
 
     {% if null != vipBg %}
