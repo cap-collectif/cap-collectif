@@ -38,6 +38,11 @@ class OpinionModal
     private $after;
 
     /**
+     * @ORM\Column(name="modal_diff", type="text", nullable=false)
+     */
+    private $diff;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="modals", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
@@ -87,6 +92,18 @@ class OpinionModal
     public function setAfter($after)
     {
         $this->after = $after;
+
+        return $this;
+    }
+
+    public function getDiff()
+    {
+        return $this->diff;
+    }
+
+    public function setDiff($diff)
+    {
+        $this->diff = $diff;
 
         return $this;
     }

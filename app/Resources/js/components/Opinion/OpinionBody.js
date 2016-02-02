@@ -1,7 +1,6 @@
 import React from 'react';
 import {Well} from 'react-bootstrap';
 import {IntlMixin} from 'react-intl';
-import CustomDiff from '../../services/CustomDiff';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
 import Validator from '../../services/Validator';
 
@@ -16,11 +15,9 @@ const OpinionBody = React.createClass({
   },
 
   render() {
-    const opinion = this.props.opinion;
+    const {opinion} = this.props;
 
     if (this.isVersion()) {
-      const prettyDiff = CustomDiff.prettyDiff(opinion.parent.body, opinion.body);
-
       return (
         <div>
           {opinion.comment !== null && (new Validator(opinion.comment)).notBlankHtml()
@@ -34,7 +31,7 @@ const OpinionBody = React.createClass({
               </div>
             : null
           }
-          <div dangerouslySetInnerHTML={{__html: prettyDiff}} />
+          <div dangerouslySetInnerHTML={{__html: opinion.diff}} />
         </div>
       );
     }
@@ -45,5 +42,3 @@ const OpinionBody = React.createClass({
 });
 
 export default OpinionBody;
-
-

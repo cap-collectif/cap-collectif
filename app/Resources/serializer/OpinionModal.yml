@@ -9,11 +9,7 @@ Capco\AppBundle\Entity\OpinionModal:
             expose: true
             type: string
             groups: [Opinions, OpinionVersions]
-        before:
-            expose: true
-            type: string
-            groups: [Opinions, OpinionVersions]
-        after:
+        diff:
             expose: true
             type: string
             groups: [Opinions, OpinionVersions]
