@@ -47,7 +47,7 @@ const OpinionBodyDiffModal = React.createClass({
             <p className="small excerpt">
               {this.getIntlMessage('opinion.diff.infos')}
             </p>
-            <div dangerouslySetInnerHTML={{__html: this.props.modal.diff }} />
+            <div className="diff" dangerouslySetInnerHTML={{__html: this.props.modal.diff }} />
           </Modal.Body>
           <Modal.Footer>
             <Button bsStyle="primary" onClick={() => this.close()}>{this.getIntlMessage('global.close')}</Button>

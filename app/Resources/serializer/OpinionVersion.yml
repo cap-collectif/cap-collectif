@@ -17,6 +17,10 @@ Capco\AppBundle\Entity\OpinionVersion:
             expose: true
             type: string
             groups: [OpinionVersions]
+        diff:
+            expose: true
+            type: string
+            groups: [OpinionVersions]
         comment:
             expose: true
             type: string

@@ -12,9 +12,11 @@ use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
+use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\UserBundle\Entity\User;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Model\HasDiffInterface;
 
 /**
  * Opinion Version.
@@ -23,7 +25,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVersionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionVersion implements VotableInterface
+class OpinionVersion implements VotableInterface, HasDiffInterface
 {
     use TrashableTrait;
     use EnableTrait;
@@ -32,6 +34,7 @@ class OpinionVersion implements VotableInterface
     use VotableOkNokMitigeTrait;
     use ValidableTrait;
     use AnswerableTrait;
+    use DiffableTrait;
 
     /**
      * @var int

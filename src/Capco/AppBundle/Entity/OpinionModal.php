@@ -5,15 +5,18 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\DiffableTrait;
+use Capco\AppBundle\Model\HasDiffInterface;
 
 /**
  * @ORM\Table(name="opinion_modals")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionModalRepository")
  */
-class OpinionModal
+class OpinionModal implements HasDiffInterface
 {
     use TimestampableTrait;
     use SluggableTitleTrait;
+    use DiffableTrait;
 
     /**
      * @ORM\Column(name="id", type="integer")
@@ -36,11 +39,6 @@ class OpinionModal
      * @ORM\Column(name="modal_after", type="text", nullable=false)
      */
     private $after;
-
-    /**
-     * @ORM\Column(name="modal_diff", type="text", nullable=false)
-     */
-    private $diff;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="modals", cascade={"persist"})
@@ -92,18 +90,6 @@ class OpinionModal
     public function setAfter($after)
     {
         $this->after = $after;
-
-        return $this;
-    }
-
-    public function getDiff()
-    {
-        return $this->diff;
-    }
-
-    public function setDiff($diff)
-    {
-        $this->diff = $diff;
 
         return $this;
     }

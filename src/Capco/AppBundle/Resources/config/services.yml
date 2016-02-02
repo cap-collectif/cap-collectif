@@ -40,6 +40,10 @@ services:
   capco.event.helper:
     class: Capco\AppBundle\Helper\EventHelper
 
+  capco.diff.generator:
+    class: Capco\AppBundle\Generator\DiffGenerator
+    arguments: [@caxy.html_diff]
+
   capco.idea.helper:
     class: Capco\AppBundle\Helper\IdeaHelper
 

@@ -8,6 +8,12 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
+  capco.diff.subscriber:
+    class: Capco\AppBundle\EventListener\DiffSubscriber
+    arguments: [@capco.diff.generator]
+    tags:
+        - { name: doctrine.event_subscriber, connection: default }
+
   capco.serialization_listener:
     class: Capco\AppBundle\EventListener\SerializationListener
     arguments: [@capco.synthesis.log_manager, @sonata.media.twig.extension, @jms_serializer]

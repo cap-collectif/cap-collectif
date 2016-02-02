@@ -75,6 +75,8 @@ class AppKernel extends Kernel
             // NewRelic
             new Ekino\Bundle\NewRelicBundle\EkinoNewRelicBundle(),
 
+            new Caxy\HtmlDiffBundle\CaxyHtmlDiffBundle(),
+
             // API
             new \FOS\RestBundle\FOSRestBundle(),
             new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),

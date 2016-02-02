@@ -31,7 +31,7 @@ const OpinionBody = React.createClass({
               </div>
             : null
           }
-          <div dangerouslySetInnerHTML={{__html: opinion.diff}} />
+          <div className="diff" dangerouslySetInnerHTML={{__html: opinion.diff}} />
         </div>
       );
     }
