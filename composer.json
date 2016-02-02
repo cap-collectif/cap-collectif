@@ -66,7 +66,8 @@
         "lexik/jwt-authentication-bundle": "~1.0",
         "willdurand/hateoas-bundle": "~1.0",
         "snc/redis-bundle": "1.1.x-dev",
-        "ekino/newrelic-bundle": "^1.3"
+        "ekino/newrelic-bundle": "^1.3",
+        "caxy/php-htmldiff": "^0.0.13"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
