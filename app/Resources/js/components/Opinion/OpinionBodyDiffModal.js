@@ -2,8 +2,6 @@ import React from 'react';
 import {IntlMixin} from 'react-intl';
 import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 
-import CustomDiff from '../../services/CustomDiff';
-
 const OpinionBodyDiffModal = React.createClass({
   propTypes: {
     link: React.PropTypes.string.isRequired,
