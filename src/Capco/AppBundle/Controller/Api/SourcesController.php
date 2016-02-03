@@ -370,6 +370,7 @@ class SourcesController extends FOSRestController
 
         $this->get('doctrine.orm.entity_manager')->persist($report);
         $this->get('doctrine.orm.entity_manager')->flush();
+        $this->get('capco.notify_manager')->sendNotifyMessage($reporting);
 
         return $report;
     }

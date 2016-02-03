@@ -403,7 +403,7 @@ class OpinionsController extends FOSRestController
      * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
-     * @View(serializerGroups={"Opinions", "UsersInfos"})
+     * @View(serializerGroups={"Opinions", "UsersInfos", "Categories"})
      */
     public function cgetOpinionVersionSourcesAction(Opinion $opinion, OpinionVersion $version, ParamFetcherInterface $paramFetcher)
     {

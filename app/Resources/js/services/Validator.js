@@ -14,6 +14,11 @@ class Validator {
           errors.push(this.rules[rule].message);
         }
         break;
+      case 'minHtml':
+        if (!this.minHtml(this.rules[rule].value)) {
+          errors.push(this.rules[rule].message);
+        }
+        break;
       case 'max':
         if (!this.max(this.rules[rule].value)) {
           errors.push(this.rules[rule].message);
@@ -49,6 +54,11 @@ class Validator {
           errors.push(this.rules[rule].message);
         }
         break;
+      case 'notBlankHtml':
+        if (!this.notBlankHtml()) {
+          errors.push(this.rules[rule].message);
+        }
+        break;
       case 'isTrue':
         if (!this.isTrue()) {
           errors.push(this.rules[rule].message);
@@ -73,6 +83,10 @@ class Validator {
 
   min(value) {
     return !this.value || this.value.length >= value;
+  }
+
+  minHtml(value) {
+    return !this.value || $(this.value).text().length >= value;
   }
 
   max(value) {
@@ -103,6 +117,10 @@ class Validator {
 
   notBlank() {
     return this.notNull() && this.value !== '';
+  }
+
+  notBlankHtml() {
+    return this.notNull() && $(this.value).text() !== '';
   }
 
   isTrue() {

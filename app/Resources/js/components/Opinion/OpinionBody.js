@@ -3,6 +3,7 @@ import {Well} from 'react-bootstrap';
 import {IntlMixin} from 'react-intl';
 import CustomDiff from '../../services/CustomDiff';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
+import Validator from '../../services/Validator';
 
 const OpinionBody = React.createClass({
   propTypes: {
@@ -22,7 +23,7 @@ const OpinionBody = React.createClass({
 
       return (
         <div>
-          {opinion.comment !== null
+          {opinion.comment !== null && (new Validator(opinion.comment)).notBlankHtml()
             ? <div>
                 <p className="control-label h5">
                   {this.getIntlMessage('opinion.version_comment')}

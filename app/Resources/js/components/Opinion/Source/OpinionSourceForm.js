@@ -43,7 +43,6 @@ const OpinionSourceForm = React.createClass({
       if (this.isValid()) {
         const {opinion, source, onSubmitSuccess, onSubmitFailure} = this.props;
 
-
         const tmpFixData = this.state.form;
         tmpFixData.Category = parseInt(tmpFixData.category, 10);
         delete tmpFixData.category;
@@ -77,8 +76,8 @@ const OpinionSourceForm = React.createClass({
       notBlank: {message: 'source.constraints.title'},
     },
     body: {
-      min: {value: 2, message: 'source.constraints.body'},
-      notBlank: {message: 'source.constraints.body'},
+      minHtml: {value: 2, message: 'source.constraints.body'},
+      notBlankHtml: {message: 'source.constraints.body'},
     },
     category: {
       notBlank: {message: 'source.constraints.category'},
@@ -111,7 +110,7 @@ const OpinionSourceForm = React.createClass({
                   type="checkbox"
                   ref="check"
                   id="sourceEditCheck"
-                  valueLink={this.linkState('form.check')}
+                  checkedLink={this.linkState('form.check')}
                   label={this.getIntlMessage('source.check')}
                   labelClassName=""
                   groupClassName={this.getGroupStyle('check')}

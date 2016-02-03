@@ -391,6 +391,11 @@ export default {
         link: 'Cette valeur n\'est pas une URL valide.',
         title: 'Le titre de la source doit faire au moins 2 caractères.',
       },
+      delete_modal: {
+        bold: 'Êtes-vous sûr de vouloir supprimer cette source ?',
+        title: 'Supprimer une source',
+        infos: 'Cette suppression marquera la fin de ce contenu à jamais.',
+      },
       done: 'Terminé',
       edit: 'Modifier',
       edited: 'modifié le',

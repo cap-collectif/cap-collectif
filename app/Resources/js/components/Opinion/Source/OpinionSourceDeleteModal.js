@@ -48,15 +48,15 @@ const OpinionSourceDeleteModal = React.createClass({
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-              {this.getIntlMessage('source.delete')}
+              {this.getIntlMessage('source.delete_modal.title')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p className="h4">
-            {this.getIntlMessage('source.delete_infos.header')}
+            {this.getIntlMessage('source.delete_modal.bold')}
           </p>
           <div>
-            {this.getIntlMessage('source.delete_infos.comment')}
+            {this.getIntlMessage('source.delete_modal.infos')}
           </div>
         </Modal.Body>
         <Modal.Footer>
