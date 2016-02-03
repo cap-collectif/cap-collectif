@@ -1,0 +1,46 @@
+{% extends '@CapcoApp/Project/show.html.twig' %}
+
+{% block canonical_link %}{{ url('app_project_show_stats', {'projectSlug': project.slug}, true) }}{% endblock %}
+
+{% block metaTags %}
+    {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    'title':  project.title~' - '~('project.show.stats.title' | trans({}, 'CapcoAppBundle')),
+    'url':    url('app_project_show_stats', {'projectSlug': project.slug}),
+    'type':   'project',
+    'image':  projectCover,
+    'author': url('capco_user_profile_show_all', {'slug': project.Author.slug})
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ 'project.show.stats.title' | trans({}, 'CapcoAppBundle') }}
+{% endblock %}
+
+{% block jumbotron %}{% endblock %}
+
+{% block body %}
+
+    <div class="container  container--custom">
+        {% include '@CapcoApp/Project/show_title.html.twig' %}
+    </div>
+
+    <div class="container  container--custom">
+        <div class="row">
+            <div class="col-xs-12  col-sm-4  col-md-3">
+                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': 'stats_step'})) }}
+            </div>
+
+            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+                <div id="render-project-stats-page"
+                     data-steps='{{ steps|escape }}'
+                     data-project-id='{{ project.id|escape }}'
+                     data-districts='{{ districts|escape }}'
+                     data-themes='{{ themes|escape }}'
+                ></div>
+            </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
+        </div> <!-- .row -->
+
+    </div>
+
+{% endblock %}

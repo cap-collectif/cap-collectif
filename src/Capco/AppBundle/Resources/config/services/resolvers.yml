@@ -104,3 +104,7 @@ services:
   capco.proposal_votes.resolver:
     class: Capco\AppBundle\Resolver\ProposalVotesResolver
     arguments: [@capco.proposal_vote.repository, @capco.selection_step.repository]
+
+  capco.project_stats.resolver:
+      class: Capco\AppBundle\Resolver\ProjectStatsResolver
+      arguments: [@doctrine.orm.entity_manager]

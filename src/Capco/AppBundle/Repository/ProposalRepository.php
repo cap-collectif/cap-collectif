@@ -332,4 +332,103 @@ class ProposalRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getProposalsWithCostsForStep(CollectStep $step, $limit = null)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('proposal.title as name', 'proposal.estimation as value')
+            ->leftJoin('proposal.proposalForm', 'proposalForm')
+            ->andWhere('proposalForm.step = :step')
+            ->setParameter('step', $step)
+            ->orderBy('proposal.estimation', 'DESC')
+        ;
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, $limit = null, $themeId = null, $districtId = null)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('proposal.title as name')
+            ->addSelect('(
+                SELECT COUNT(pv.id) as pvCount
+                FROM CapcoAppBundle:ProposalVote pv
+                LEFT JOIN pv.proposal as pvp
+                LEFT JOIN pv.selectionStep ss
+                WHERE ss.id = :stepId
+                AND pvp.id = proposal.id
+            ) as value')
+            ->leftJoin('proposal.selectionSteps', 'selectionSteps')
+            ->andWhere('selectionSteps.id = :stepId')
+            ->setParameter('stepId', $step->getId())
+        ;
+
+        if ($themeId) {
+            $qb
+                ->leftJoin('proposal.theme', 't')
+                ->andWhere('t.id = :themeId')
+                ->setParameter('themeId', $themeId)
+            ;
+        }
+
+        if ($districtId) {
+            $qb
+                ->leftJoin('proposal.district', 'd')
+                ->andWhere('d.id = :districtId')
+                ->setParameter('districtId', $districtId)
+            ;
+        }
+
+        $qb->orderBy('value', 'DESC');
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function getTotalCostForStep(CollectStep $step)
+    {
+        $qb = $this->getIsEnabledQueryBuilder('p')
+            ->select('SUM(p.estimation)')
+            ->leftJoin('p.proposalForm', 'pf')
+            ->andWhere('pf.step = :step')
+            ->setParameter('step', $step)
+        ;
+
+        return intval($qb->getQuery()->getSingleScalarResult());
+    }
+
+    public function countForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
+    {
+        $qb = $this->getIsEnabledQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->leftJoin('p.selectionSteps', 'ss')
+            ->andWhere('ss.id = :stepId')
+            ->setParameter('stepId', $step->getId())
+        ;
+
+        if ($themeId) {
+            $qb
+                ->leftJoin('p.theme', 't')
+                ->andWhere('t.id = :themeId')
+                ->setParameter('themeId', $themeId)
+            ;
+        }
+
+        if ($districtId) {
+            $qb
+                ->leftJoin('p.district', 'd')
+                ->andWhere('d.id = :districtId')
+                ->setParameter('districtId', $districtId)
+            ;
+        }
+
+        return intval($qb->getQuery()->getSingleScalarResult());
+    }
 }

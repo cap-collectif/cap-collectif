@@ -83,6 +83,44 @@ class ProjectController extends Controller
         return $response;
     }
 
+    /**
+     * @Route("/projects/{projectSlug}/stats", name="app_project_show_stats")
+     * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
+     *
+     * @param Project $project
+     */
+    public function showStatsAction(Project $project)
+    {
+        $serializer = $this->get('jms_serializer');
+        $em = $this->get('doctrine.orm.entity_manager');
+
+        $steps = $serializer->serialize([
+            'steps' => $this
+                ->get('capco.project_stats.resolver')
+                ->getStepsWithStatsForProject($project),
+        ], 'json', SerializationContext::create());
+
+        $districts = $serializer->serialize([
+            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Districts']));
+
+        $themes = $serializer->serialize([
+            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
+        ], 'json', SerializationContext::create()->setGroups(['Themes']));
+
+        $response = $this->render('CapcoAppBundle:Project:show_stats.html.twig', [
+            'project' => $project,
+            'steps' => $steps,
+            'districts' => $districts,
+            'themes' => $themes,
+        ]);
+
+        $response->setPublic();
+        $response->setSharedMaxAge(60);
+
+        return $response;
+    }
+
     // Page project
 
     /**

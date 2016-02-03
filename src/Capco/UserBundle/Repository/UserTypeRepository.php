@@ -1,27 +1,29 @@
 <?php
 
-namespace Capco\AppBundle\Repository;
+namespace Capco\UserBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Doctrine\ORM\EntityRepository;
+use Capco\UserBundle\Entity\UserType;
 
 /**
- * DistrictRepository.
+ * UserTypeRepository.
  */
-class DistrictRepository extends EntityRepository
+class UserTypeRepository extends EntityRepository
 {
-    public function getDistrictsWithProposalsCountForStep(CollectStep $step, $limit = null)
+    public function getUserTypesWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
-        $qb = $this->createQueryBuilder('d')
-            ->select('d.name as name')
+        $qb = $this->createQueryBuilder('ut')
+            ->select('ut.name as name')
             ->addSelect('(
                 SELECT COUNT(p.id) as pCount
                 FROM CapcoAppBundle:Proposal p
                 LEFT JOIN p.proposalForm pf
-                LEFT JOIN p.district pd
+                LEFT JOIN p.author pa
+                LEFT JOIN pa.userType paut
                 WHERE pf.step = :step
                 AND p.enabled = true
-                AND pd.id = d.id
+                AND paut.id = ut.id
             ) as value')
             ->setParameter('step', $step)
             ->orderBy('value', 'DESC')
@@ -36,8 +38,8 @@ class DistrictRepository extends EntityRepository
 
     public function countAll()
     {
-        $qb = $this->createQueryBuilder('d')
-            ->select('COUNT(d.id)')
+        $qb = $this->createQueryBuilder('ut')
+            ->select('COUNT(ut.id)')
         ;
 
         return intval($qb->getQuery()->getSingleScalarResult());
