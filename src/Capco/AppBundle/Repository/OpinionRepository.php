@@ -345,7 +345,13 @@ class OpinionRepository extends EntityRepository
                 $qb->addOrderBy('o.createdAt', 'DESC');
             } elseif ($opinionsSort == 'positions') {
                 $qb->addOrderBy('o.position', 'ASC');
-                $qb->addOrderBy('o.createdAt', 'DESC');
+                $qb->addSelect('RAND() as HIDDEN rand')
+                    ->addOrderBy('rand')
+                ;
+            } elseif ($opinionsSort == 'random') {
+                $qb->addSelect('RAND() as HIDDEN rand')
+                    ->addOrderBy('rand')
+                ;
             }
         }
 

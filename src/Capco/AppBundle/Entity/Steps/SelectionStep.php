@@ -97,10 +97,6 @@ class SelectionStep extends AbstractStep
      */
     public function getVotesCount()
     {
-        if (!$this->votesCount) {
-            return 0;
-        }
-
         return $this->votesCount;
     }
 

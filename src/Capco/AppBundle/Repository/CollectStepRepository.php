@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -31,27 +30,6 @@ class CollectStepRepository extends EntityRepository
         $qb->setFirstResult($offset);
 
         return new Paginator($qb, $fetchJoin = true);
-    }
-
-    /**
-     * Get all collect steps for project.
-     *
-     * @param Project $project
-     *
-     * @return array
-     */
-    public function getCollectStepsForProject(Project $project)
-    {
-        $qb = $this
-            ->getIsEnabledQueryBuilder()
-            ->addSelect('pas')
-            ->leftJoin('cs.projectAbstractStep', 'pas')
-            ->andWhere('pas.project = :project')
-            ->setParameter('project', $project)
-            ->orderBy('pas.position', 'ASC')
-        ;
-
-        return $qb->getQuery()->getResult();
     }
 
     protected function getIsEnabledQueryBuilder()

@@ -64,13 +64,6 @@ class ConsultationStepsController extends FOSRestController
 
         if ($form->isValid()) {
 
-            // ce truc devrait être dans un event genre prePersit... mais au final le précédent controlleur devrait disparaître sous peu
-            $currentMaximumPosition = $this
-                ->get('capco.opinion_types.resolver')
-                ->getMaximumPositionByOpinionTypeAndStep($opinionType, $step)
-            ;
-            $opinion->setPosition($currentMaximumPosition + 1);
-
             $opinionTypeAppendixTypes = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
                 ->findBy(

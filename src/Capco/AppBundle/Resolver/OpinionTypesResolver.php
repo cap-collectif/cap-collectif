@@ -136,13 +136,6 @@ class OpinionTypesResolver
         return $this->consultationStepTypeAllowType($step->getConsultationStepType(), $type);
     }
 
-    public function getMaximumPositionByOpinionTypeAndStep($opinionType, ConsultationStep $step)
-    {
-        return $this->opinionRepo
-            ->getMaxPositionByOpinionTypeAndConsultationStep($step, $opinionType)
-        ;
-    }
-
     public function getAvailableLinkTypesForConsultationStepType(ConsultationStepType $consultationStepType)
     {
         return $this
