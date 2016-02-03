@@ -397,6 +397,7 @@ export default {
         title: 'Supprimer une source',
         infos: 'Cette suppression marquera la fin de ce contenu à jamais.',
       },
+      link: 'Lien *',
       title: 'Titre *',
       type: 'Type *',
       update: 'Modifier une source',
