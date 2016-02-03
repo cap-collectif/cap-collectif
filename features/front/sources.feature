@@ -64,7 +64,7 @@ Feature: Source
     And I wait 1 seconds
     And I check "sourceEditCheck"
     And I press "confirm-opinion-source-update"
-    And I wait 1 seconds
+    And I wait 3 seconds
     Then I should see "Merci ! Votre source a bien été modifiée."
     And I wait 1 seconds
     And I go on the sources tab
@@ -149,4 +149,5 @@ Feature: Source
     And I fill in the following:
       | reportBody   | scandaleux     |
     And I press "confirm-opinion-source-report"
+    And I wait 3 seconds
     Then I should see "Merci ! La source a bien été signalée."
