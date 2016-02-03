@@ -54,7 +54,7 @@ mailcatcher:
   image: jderusse/mailcatcher:latest
 
 chrome:
-   image: selenium/node-chrome-debug:latest
+   image: selenium/node-chrome-debug:2.47.1
    links:
      - seleniumhub:hub
      - application:capco.test
