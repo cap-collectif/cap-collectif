@@ -1,36 +1,45 @@
 import React from 'react';
-import { DefaultRoute, Route } from 'react-router';
-
+import { IndexRoute, Route } from 'react-router';
 import SynthesisBox from './components/Synthesis/SynthesisBox';
 import ElementsInbox from './components/Synthesis/ElementsInbox';
 import ElementsSearch from './components/Synthesis/ElementsSearch';
 import FolderManager from './components/Synthesis/FolderManager';
 import EditElement from './components/Synthesis/EditElement';
 import Preview from './components/Synthesis/Preview';
+import IntlData from './translations/Synthesis/FR';
 
-const RedirectToDefaultInbox = React.createClass({
-  statics: {
-    willTransitionTo(transition) {
-      transition.redirect('/inbox/new');
-    },
+const redirectToDefaultInbox = (nextState, replace) => {
+  replace({
+    pathname: '/inbox/new',
+  });
+};
+
+const SynthesisBoxWrapper = React.createClass({
+  propTypes: {
+    children: React.PropTypes.object.isRequired,
   },
-
   render() {
-    return null;
+    return (
+      <SynthesisBox
+        synthesis_id={$('#render-synthesis-edit-box').data('synthesis')}
+        mode="edit"
+        children={this.props.children}
+        {...IntlData}
+      />
+    );
   },
-
 });
 
 export default (
-  <Route handler={SynthesisBox}>
-    <DefaultRoute handler={RedirectToDefaultInbox} />
+  <Route path="/" component={SynthesisBoxWrapper}>
+    <IndexRoute component={SynthesisBoxWrapper} onEnter={redirectToDefaultInbox} />
     <Route path="inbox">
-      <DefaultRoute handler={RedirectToDefaultInbox} />
-      <Route name="inbox" path=":type" handler={ElementsInbox} />
+      <IndexRoute component={ElementsInbox} onEnter={redirectToDefaultInbox} />
+      <Route path=":type" component={ElementsInbox} />
     </Route>
-    <Route name="search" path="search/:term" handler={ElementsSearch} />
-    <Route name="folder_manager" path="folder-manager" handler={FolderManager} />
-    <Route name="show_element" path="element/:element_id" handler={EditElement} />
-    <Route name="preview" path="preview" handler={Preview} />
+    <Route path="search/:term" component={ElementsSearch} />
+    <Route path="folder-manager" handler={FolderManager} />
+    <Route path="element/:element_id" component={EditElement} />
+    <Route path="preview" component={Preview} />
   </Route>
 );
