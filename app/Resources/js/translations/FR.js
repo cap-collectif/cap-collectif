@@ -149,6 +149,7 @@ export default {
       link: 'Lien *',
       links: '{num, plural, =0{0 proposition liée} one{# proposition liée} other{# propositions liées}}',
       loading: 'Chargement...',
+      login: 'Connexion',
       modal: {
         report: {
           form: {
