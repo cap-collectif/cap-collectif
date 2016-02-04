@@ -88,7 +88,9 @@ const ProjectStatsPage = React.createClass({
                   </div>
                 );
               })
-              : <p>{this.getIntlMessage('project.stats.no_steps')}</p>
+              : <p className="project-stats__empty">
+                  {this.getIntlMessage('project.stats.no_data')}
+              </p>
           }
         </div>
       </div>
