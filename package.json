@@ -44,9 +44,9 @@
     "moment": "^2.11.1",
     "process-env-brunch": "^1.4.4-d",
     "quill": "^0.20.1",
-    "react": "^0.14.5",
+    "react": "^0.14.7",
     "react-bootstrap": "^0.27.3",
-    "react-dom": "^0.14.5",
+    "react-dom": "^0.14.7",
     "react-intl": "^1.2.2",
     "react-router": "^2.0.0-rc4",
     "react-router-bootstrap": "^0.20.1",
@@ -70,6 +70,6 @@
     "fb-flo-brunch": "^1.7.22",
     "jscs": "^2.9.0",
     "mocha": "^2.3.4",
-    "react-addons-test-utils": "^0.14.6"
+    "react-addons-test-utils": "^0.14.7"
   }
 }
