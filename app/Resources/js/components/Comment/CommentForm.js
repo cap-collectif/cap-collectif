@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
 
@@ -10,7 +10,7 @@ import FlashMessages from '../Utils/FlashMessages';
 import ValidatorMixin from '../../utils/ValidatorMixin';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 import Input from '../Form/Input';
-import {Row, Col, Button} from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 
 
 const CommentForm = React.createClass({
@@ -44,22 +44,22 @@ const CommentForm = React.createClass({
     const constraints = LoginStore.isLoggedIn() ?
       {
         body: {
-          notBlank: {message: 'comment.constraints.body'},
-          min: {value: 2, message: 'comment.constraints.body'},
+          notBlank: { message: 'comment.constraints.body' },
+          min: { value: 2, message: 'comment.constraints.body' },
         },
       }
       : {
         authorEmail: {
-          notBlank: {message: 'comment.constraints.author_email'},
-          isEmail: {message: 'comment.constraints.author_email'},
+          notBlank: { message: 'comment.constraints.author_email' },
+          isEmail: { message: 'comment.constraints.author_email' },
         },
         authorName: {
-          notBlank: {message: 'comment.constraints.author_name'},
-          min: {value: 2, message: 'comment.constraints.author_name'},
+          notBlank: { message: 'comment.constraints.author_name' },
+          min: { value: 2, message: 'comment.constraints.author_name' },
         },
         body: {
-          notBlank: {message: 'comment.constraints.body'},
-          min: {value: 2, message: 'comment.constraints.body'},
+          notBlank: { message: 'comment.constraints.body' },
+          min: { value: 2, message: 'comment.constraints.body' },
         },
       }
     ;
@@ -69,7 +69,7 @@ const CommentForm = React.createClass({
   componentWillReceiveProps(nextProps) {
     if (nextProps.focus) {
       ReactDOM.findDOMNode(this.refs.body).focus();
-      this.setState({'expanded': true});
+      this.setState({ 'expanded': true });
     }
   },
 
@@ -90,20 +90,20 @@ const CommentForm = React.createClass({
         return; // clicked on an element inside comment block
       }
       if (this.state.body.length === 0) {
-        this.setState({expanded: false, submitted: false});
+        this.setState({ expanded: false, submitted: false });
         return;
       }
     }
-    this.setState({'expanded': newState});
+    this.setState({ 'expanded': newState });
   },
 
   create() {
-    this.setState({submitted: true}, () => {
+    this.setState({ submitted: true }, () => {
       if (!this.isValid()) {
         return;
       }
 
-      this.setState({isSubmitting: true});
+      this.setState({ isSubmitting: true });
 
       const data = {
         body: this.state.body,
@@ -119,7 +119,7 @@ const CommentForm = React.createClass({
         autosize.destroy(ReactDOM.findDOMNode(this.refs.body));
       })
       .catch(() => {
-        this.setState({isSubmitting: false, submitted: false});
+        this.setState({ isSubmitting: false, submitted: false });
       });
     });
   },

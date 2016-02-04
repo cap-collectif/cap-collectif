@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
@@ -47,12 +47,12 @@ const ProposalVoteForm = React.createClass({
     if (!LoginStore.isLoggedIn()) {
       this.formValidationRules = {
         username: {
-          min: {value: 2, message: 'proposal.vote.constraints.username'},
-          notBlank: {message: 'proposal.vote.constraints.username'},
+          min: { value: 2, message: 'proposal.vote.constraints.username' },
+          notBlank: { message: 'proposal.vote.constraints.username' },
         },
         email: {
-          notBlank: {message: 'proposal.vote.constraints.email'},
-          isEmail: {message: 'proposal.vote.constraints.email'},
+          notBlank: { message: 'proposal.vote.constraints.email' },
+          isEmail: { message: 'proposal.vote.constraints.email' },
         },
       };
     }

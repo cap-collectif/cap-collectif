@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import OpinionSource from './OpinionSource';
 
 const OpinionSourceList = React.createClass({
@@ -20,7 +20,7 @@ const OpinionSourceList = React.createClass({
     }
 
     return (
-      <ul id="sources-list" className="media-list" style={{marginTop: '20px'}}>
+      <ul id="sources-list" className="media-list" style={{ marginTop: '20px' }}>
         {
           this.props.sources.map((source) => {
             return (

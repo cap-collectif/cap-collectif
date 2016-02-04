@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-import {IntlMixin} from 'react-intl';
+import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import OpinionSourceActions from '../../../actions/OpinionSourceActions';
@@ -19,14 +19,14 @@ const OpinionSourceForm = React.createClass({
   mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getInitialState() {
-    const {source} = this.props;
+    const { source } = this.props;
     return {
       form: {
         link: source ? source.link : '',
         title: source ? source.title : '',
         body: source ? source.body : '',
         category: source ? source.category.id : null,
-        check: source ? false : true,
+        check: !!!source,
       },
       errors: {
         link: [],
@@ -41,7 +41,7 @@ const OpinionSourceForm = React.createClass({
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSubmitting) {
       if (this.isValid()) {
-        const {opinion, source, onSubmitSuccess, onSubmitFailure} = this.props;
+        const { opinion, source, onSubmitSuccess, onSubmitFailure } = this.props;
 
         const tmpFixData = this.state.form;
         tmpFixData.Category = parseInt(tmpFixData.category, 10);
@@ -72,22 +72,22 @@ const OpinionSourceForm = React.createClass({
 
   formValidationRules: {
     title: {
-      min: {value: 2, message: 'source.constraints.title'},
-      notBlank: {message: 'source.constraints.title'},
+      min: { value: 2, message: 'source.constraints.title' },
+      notBlank: { message: 'source.constraints.title' },
     },
     body: {
-      minHtml: {value: 2, message: 'source.constraints.body'},
-      notBlankHtml: {message: 'source.constraints.body'},
+      minHtml: { value: 2, message: 'source.constraints.body' },
+      notBlankHtml: { message: 'source.constraints.body' },
     },
     category: {
-      notBlank: {message: 'source.constraints.category'},
+      notBlank: { message: 'source.constraints.category' },
     },
     link: {
-      notBlank: {message: 'source.constraints.link'},
-      isUrl: {message: 'source.constraints.link'},
+      notBlank: { message: 'source.constraints.link' },
+      isUrl: { message: 'source.constraints.link' },
     },
     check: {
-      isTrue: {message: 'source.constraints.check'},
+      isTrue: { message: 'source.constraints.check' },
     },
   },
 
@@ -101,7 +101,7 @@ const OpinionSourceForm = React.createClass({
   },
 
   render() {
-    const {source} = this.props;
+    const { source } = this.props;
     return (
       <form id="source-form" ref="form">
         {source

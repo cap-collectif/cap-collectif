@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
-import {ProgressBar, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import { IntlMixin, FormattedMessage } from 'react-intl';
+import { ProgressBar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const VotesBar = React.createClass({
   propTypes: {
@@ -13,7 +13,7 @@ const VotesBar = React.createClass({
   mixins: [IntlMixin],
 
   renderBar() {
-    const bar = <ProgressBar style={{marginBottom: '5px'}} bsStyle="success" max={this.props.max} now={this.props.value} label="%(percent)s%" />;
+    const bar = <ProgressBar style={{ marginBottom: '5px' }} bsStyle="success" max={this.props.max} now={this.props.value} label="%(percent)s%" />;
     if (this.props.helpText) {
       return this.renderOverlay(bar);
     }
@@ -22,14 +22,14 @@ const VotesBar = React.createClass({
 
   renderIcon() {
     if (this.props.helpText) {
-      const icon = <i style={{fontSize: '24px', color: '#999', paddingLeft: '15px', top: '-5px'}} className="pull-right cap cap-information"></i>;
+      const icon = <i style={{ fontSize: '24px', color: '#999', paddingLeft: '15px', top: '-5px' }} className="pull-right cap cap-information"></i>;
       return this.renderOverlay(icon);
     }
   },
 
   renderDoneNb() {
     return (
-      <p className="small excerpt" style={{marginBottom: '5px'}}>
+      <p className="small excerpt" style={{ marginBottom: '5px' }}>
         <FormattedMessage message={this.getIntlMessage('opinion.progress.done')} num={this.props.value} />
       </p>
     );

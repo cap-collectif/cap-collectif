@@ -1,10 +1,10 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
-import {Row, Col} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 const ProposalListFilters = React.createClass({
   propTypes: {

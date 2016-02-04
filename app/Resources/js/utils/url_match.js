@@ -40,7 +40,7 @@ export default class URLMatch {
     let url = this._url;
 
     // if the url string doesn't begin with a protocol, assume 'http://'
-    if (!this._protocolRelativeMatch && !this._protocolUrlMatch && !this.protocolPrepended ) {
+    if (!this._protocolRelativeMatch && !this._protocolUrlMatch && !this.protocolPrepended) {
       url = this._url = 'http://' + url;
 
       this.protocolPrepended = true;
@@ -57,7 +57,7 @@ export default class URLMatch {
   getAnchorHref() {
     const url = this.getUrl();
 
-    return url.replace( /&amp;/g, '&' );  // any &amp;'s in the URL should be converted back to '&' if they were displayed as &amp; in the source html
+    return url.replace(/&amp;/g, '&');  // any &amp;'s in the URL should be converted back to '&' if they were displayed as &amp; in the source html
   }
 
   /**
@@ -119,7 +119,7 @@ export default class URLMatch {
   removeTrailingSlash(anchorText) {
     let text = anchorText;
     if (text.charAt(text.length - 1) === '/') {
-      text = text.slice( 0, -1 );
+      text = text.slice(0, -1);
     }
     return text;
   }

@@ -1,10 +1,10 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import MainNavbar from './MainNavbar';
 import SecondNavbar from './SecondNavbar';
 import SideMenu from './SideMenu';
 import TopMenu from './TopMenu';
-import {RouteHandler} from 'react-router';
+import { RouteHandler } from 'react-router';
 
 const EditBox = React.createClass({
   propTypes: {

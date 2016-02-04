@@ -1,8 +1,8 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import LoginStore from '../../stores/LoginStore';
 import UserAvatar from '../User/UserAvatar';
-import {Navbar, Nav, NavItem, DropdownButton, MenuItem, Input, Button} from 'react-bootstrap';
+import { Navbar, Nav, NavItem, DropdownButton, MenuItem, Input, Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 
 const MainNavbar = React.createClass({
@@ -16,22 +16,22 @@ const MainNavbar = React.createClass({
 
   search() {
     if (this.state.searchTerm !== '') {
-      this.transitionTo('search', {'term': this.state.searchTerm});
+      this.transitionTo('search', { 'term': this.state.searchTerm });
     }
   },
 
   renderBrand() {
     return (
       <a href="/">
-          <span style={{color: '#A94442 !important'}}>Cap</span> <span style={{color: '#000 !important'}}>Collectif</span>
+          <span style={{ color: '#A94442 !important' }}>Cap</span> <span style={{ color: '#000 !important' }}>Collectif</span>
       </a>
     );
   },
 
   renderSearchForm() {
-    const searchButton = <Button onClick={this.search.bind(null, this)} style={{paddingTop: '7px'}} className="btn-gray" ><i className="cap cap-magnifier"></i></Button>;
+    const searchButton = <Button onClick={this.search.bind(null, this)} style={{ paddingTop: '7px' }} className="btn-gray" ><i className="cap cap-magnifier"></i></Button>;
     return (
-      <form className="navbar-form navbar-right" style={{marginRight: '15px', paddingRight: 0}} onSubmit={this.search.bind(null, this)} >
+      <form className="navbar-form navbar-right" style={{ marginRight: '15px', paddingRight: 0 }} onSubmit={this.search.bind(null, this)} >
         <Input type="text" placeholder={this.getIntlMessage('edition.navbar.search')} buttonAfter={searchButton} valueLink={this.linkState('searchTerm')} />
       </form>
     );
@@ -48,7 +48,7 @@ const MainNavbar = React.createClass({
   renderUserButtonTitle() {
     return (
       <span>
-        <UserAvatar user={LoginStore.user} size={34} style={{marginRight: '10px'}} anchor={false} />
+        <UserAvatar user={LoginStore.user} size={34} style={{ marginRight: '10px' }} anchor={false} />
         <span className="hidden-xs">{LoginStore.user.displayName}</span>
       </span>
     );
@@ -92,4 +92,3 @@ const MainNavbar = React.createClass({
 });
 
 export default MainNavbar;
-

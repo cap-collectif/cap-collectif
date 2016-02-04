@@ -1,7 +1,7 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Nav} from 'react-bootstrap';
-import {NavItemLink} from 'react-router-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Nav } from 'react-bootstrap';
+import { NavItemLink } from 'react-router-bootstrap';
 
 const TopMenu = React.createClass({
   propTypes: {
@@ -49,7 +49,7 @@ const TopMenu = React.createClass({
     const iconClass = 'icon--' + item.color;
     return (
       <NavItemLink to={item.link} className={'menu__item ' + menuItemClass}>
-          <i style={{fontSize: '25px'}} className={'cap ' + item.icon + ' ' + iconClass}></i> <span className="hidden-sm">{this.getIntlMessage('edition.topMenu.' + item.label)}</span>
+          <i style={{ fontSize: '25px' }} className={'cap ' + item.icon + ' ' + iconClass}></i> <span className="hidden-sm">{this.getIntlMessage('edition.topMenu.' + item.label)}</span>
       </NavItemLink>
     );
   },

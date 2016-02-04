@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import UserAvatar from '../User/UserAvatar';
 import CommentInfos from './CommentInfos';

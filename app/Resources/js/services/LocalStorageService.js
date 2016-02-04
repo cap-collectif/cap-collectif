@@ -9,7 +9,7 @@ class LocalStorageService {
     if (!cache) {
       return false;
     }
-    const time = cacheTime ? cacheTime : this.defaultCacheTime;
+    const time = cacheTime || this.defaultCacheTime;
     return (new Date().getTime() - cache.timestamp) < time;
   }
 

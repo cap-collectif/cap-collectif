@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {CREATE_COMMENT_SUCCESS, CREATE_COMMENT_FAILURE, RECEIVE_COMMENTS} from '../constants/CommentConstants';
+import { CREATE_COMMENT_SUCCESS, CREATE_COMMENT_FAILURE, RECEIVE_COMMENTS } from '../constants/CommentConstants';
 
 export default {
 

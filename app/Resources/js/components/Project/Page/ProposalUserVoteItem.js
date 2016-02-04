@@ -1,9 +1,9 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ProposalActions from '../../../actions/ProposalActions';
 import UserLink from '../../User/UserLink';
-import {Button} from 'react-bootstrap';
-import {VOTE_TYPE_BUDGET} from '../../../constants/ProposalConstants';
+import { Button } from 'react-bootstrap';
+import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalDetailsEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
 
 const ProposalUserVoteItem = React.createClass({

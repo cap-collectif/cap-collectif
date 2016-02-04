@@ -1,5 +1,5 @@
 import BaseStore from './BaseStore';
-import {RECEIVE_CATEGORIES} from '../constants/CategoriesConstants';
+import { RECEIVE_CATEGORIES } from '../constants/CategoriesConstants';
 
 class CategoriesStore extends BaseStore {
 
@@ -11,12 +11,12 @@ class CategoriesStore extends BaseStore {
 
   _registerToActions(action) {
     switch (action.actionType) {
-    case RECEIVE_CATEGORIES:
-      this._categories = action.categories;
-      this.emitChange();
-      break;
-    default:
-      break;
+      case RECEIVE_CATEGORIES:
+        this._categories = action.categories;
+        this.emitChange();
+        break;
+      default:
+        break;
     }
   }
 

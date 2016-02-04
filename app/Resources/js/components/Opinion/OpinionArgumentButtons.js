@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import { Button } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 import ArgumentActions from '../../actions/ArgumentActions';
 import LoginStore from '../../stores/LoginStore';
 import LoginOverlay from '../Utils/LoginOverlay';
@@ -31,12 +31,12 @@ const OpinionArgumentButtons = React.createClass({
   },
 
   vote() {
-    this.setState({hasVoted: true});
+    this.setState({ hasVoted: true });
     ArgumentActions.addVote(this.props.argument.id);
   },
 
   deleteVote() {
-    this.setState({hasVoted: false});
+    this.setState({ hasVoted: false });
     ArgumentActions.deleteVote(this.props.argument.id);
   },
 
@@ -95,7 +95,7 @@ const OpinionArgumentButtons = React.createClass({
   render() {
     return (
       <div>
-        <form style={{display: 'inline-block'}}>
+        <form style={{ display: 'inline-block' }}>
           <LoginOverlay children={ this.renderVoteButton() } />
         </form>
         { ' ' }

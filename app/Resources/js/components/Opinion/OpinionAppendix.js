@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
-import {Button, Panel} from 'react-bootstrap';
+import { IntlMixin, FormattedMessage } from 'react-intl';
+import { Button, Panel } from 'react-bootstrap';
 
 const OpinionAppendix = React.createClass({
   propTypes: {
@@ -30,10 +30,10 @@ const OpinionAppendix = React.createClass({
 
   renderContent() {
     const appendix = this.props.appendix;
-    const style = this.state.expanded ? {marginBottom: '15px'} : {};
+    const style = this.state.expanded ? { marginBottom: '15px' } : {};
     return (
       <Panel collapsible expanded={this.state.expanded} style={style} className="opinion__appendix__content">
-        <div dangerouslySetInnerHTML={{__html: appendix.body}} />
+        <div dangerouslySetInnerHTML={{ __html: appendix.body }} />
       </Panel>
     );
   },
@@ -47,7 +47,7 @@ const OpinionAppendix = React.createClass({
 
     return (
       <div className="opinion__appendix">
-        <Button className="opinion__appendix__title" bsStyle="link" style={{paddingLeft: '0', fontSize: '18px', fontWeight: '500'}}
+        <Button className="opinion__appendix__title" bsStyle="link" style={{ paddingLeft: '0', fontSize: '18px', fontWeight: '500' }}
           onClick={this.toggle.bind(null, this)}
           title={this.state.expanded
             ? <FormattedMessage

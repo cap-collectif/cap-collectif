@@ -1,8 +1,8 @@
 import React from 'react';
 import ElementsList from './ElementsList';
 import Loader from '../Utils/Loader';
-import {Modal, Button} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import { Modal, Button } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 
 const ChildrenModal = React.createClass({
   propTypes: {

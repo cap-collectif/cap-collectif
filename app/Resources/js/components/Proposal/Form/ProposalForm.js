@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin, FormattedHTMLMessage} from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
@@ -70,7 +70,7 @@ const ProposalForm = React.createClass({
       const ref = 'custom-' + question.id;
       if (question.required) {
         this.formValidationRules[ref] = {
-          notBlank: {message: 'proposal.constraints.question_mandatory'},
+          notBlank: { message: 'proposal.constraints.question_mandatory' },
         };
       }
     });
@@ -144,7 +144,7 @@ const ProposalForm = React.createClass({
   getProposalResponseForQuestion(id) {
     const index = ArrayHelper.getElementIndexFromArray(
       this.props.proposal.responses,
-      {question: {id: id}},
+      { question: { id: id } },
       'question',
       'id'
     );
@@ -157,7 +157,7 @@ const ProposalForm = React.createClass({
   updateThemeConstraint() {
     if (this.state.showThemes) {
       this.formValidationRules.theme = {
-        minValue: {value: 0, message: 'proposal.constraints.theme'},
+        minValue: { value: 0, message: 'proposal.constraints.theme' },
       };
       return;
     }
@@ -166,15 +166,15 @@ const ProposalForm = React.createClass({
 
   formValidationRules: {
     district: {
-      minValue: {value: 0, message: 'proposal.constraints.district'},
+      minValue: { value: 0, message: 'proposal.constraints.district' },
     },
     title: {
-      min: {value: 2, message: 'proposal.constraints.title'},
-      notBlank: {message: 'proposal.constraints.title'},
+      min: { value: 2, message: 'proposal.constraints.title' },
+      notBlank: { message: 'proposal.constraints.title' },
     },
     body: {
-      min: {value: 2, message: 'proposal.constraints.body'},
-      notBlank: {message: 'proposal.constraints.body'},
+      min: { value: 2, message: 'proposal.constraints.body' },
+      notBlank: { message: 'proposal.constraints.body' },
     },
   },
 

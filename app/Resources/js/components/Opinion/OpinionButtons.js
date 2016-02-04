@@ -1,6 +1,6 @@
 import React from 'react';
-import {VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH} from '../../constants/VoteConstants';
-import {IntlMixin} from 'react-intl';
+import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../constants/VoteConstants';
+import { IntlMixin } from 'react-intl';
 
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
@@ -8,7 +8,7 @@ import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import LoginStore from '../../stores/LoginStore';
 import OpinionVersionForm from './OpinionVersionForm';
 import OpinionReportButton from './OpinionReportButton';
-import {ButtonToolbar, Button} from 'react-bootstrap';
+import { ButtonToolbar, Button } from 'react-bootstrap';
 
 const OpinionButtons = React.createClass({
   propTypes: {
@@ -30,9 +30,9 @@ const OpinionButtons = React.createClass({
 
   vote(value) {
     if (this.isVersion()) {
-      OpinionActions.vote({value: value}, this.props.opinion.id, this.props.opinion.parent.id);
+      OpinionActions.vote({ value: value }, this.props.opinion.id, this.props.opinion.parent.id);
     } else {
-      OpinionActions.vote({value: value}, this.props.opinion.id);
+      OpinionActions.vote({ value: value }, this.props.opinion.id);
     }
   },
 
@@ -105,7 +105,7 @@ const OpinionButtons = React.createClass({
         return (
           <OpinionVersionForm
             className="pull-right"
-            style={{marginLeft: '5px'}}
+            style={{ marginLeft: '5px' }}
             mode="edit"
             opinionId={this.props.opinion.parent.id}
             version={this.props.opinion}

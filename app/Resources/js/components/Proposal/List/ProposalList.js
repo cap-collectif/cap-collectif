@@ -1,8 +1,8 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import ProposalPreview from '../Preview/ProposalPreview';
-import {Row} from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 
 const ProposalList = React.createClass({
   propTypes: {

@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Row, Col} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Row, Col } from 'react-bootstrap';
 import OpinionLinkList from './OpinionLinkList';
 import OpinionLinkCreate from './OpinionLinkCreate';
 import Filter from '../../Utils/Filter';

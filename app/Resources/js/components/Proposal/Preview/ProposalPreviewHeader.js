@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
-import {IntlMixin, FormattedMessage, FormattedDate} from 'react-intl';
+import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
 
 const ProposalPreviewHeader = React.createClass({
   propTypes: {

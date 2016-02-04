@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IntlMixin} from 'react-intl';
-import {Modal, Button, Grid, Row, Col, OverlayTrigger, Popover} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Modal, Button, Grid, Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
 import autosize from 'autosize';
 import classNames from 'classnames';
 
@@ -123,7 +123,7 @@ const DivideModal = React.createClass({
       },
     };
     SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
-    this.transitionTo('inbox', {'type': 'new'});
+    this.transitionTo('inbox', { 'type': 'new' });
   },
 
 

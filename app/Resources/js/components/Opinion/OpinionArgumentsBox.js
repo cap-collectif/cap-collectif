@@ -1,7 +1,7 @@
 import React from 'react';
-import {Row, Col} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
-import {COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH} from '../../constants/ArgumentConstants';
+import { Row, Col } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
 import OpinionArgumentList from './OpinionArgumentList';
 import OpinionArgumentForm from './OpinionArgumentForm';
 

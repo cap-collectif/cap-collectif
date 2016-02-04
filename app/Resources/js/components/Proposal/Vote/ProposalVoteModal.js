@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Modal} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Modal } from 'react-bootstrap';
 import ProposalVoteBox from './ProposalVoteBox';
 import CloseButton from '../../Form/CloseButton';
 import RegisterButton from '../../Utils/RegisterButton';

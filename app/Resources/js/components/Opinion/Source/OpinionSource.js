@@ -1,6 +1,6 @@
 import React from 'react';
-import {Row, Col} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import { Row, Col } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 
 import UserAvatar from '../../User/UserAvatar';
@@ -16,7 +16,7 @@ const OpinionSource = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    const {source} = this.props;
+    const { source } = this.props;
     const classes = classNames({
       'opinion': true,
       'block--bordered': true,

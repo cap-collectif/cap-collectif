@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin, FormattedDate} from 'react-intl';
+import { IntlMixin, FormattedDate } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
 import UserAvatar from '../User/UserAvatar';

@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import {Modal} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import React, { PropTypes } from 'react';
+import { Modal } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import OpinionSourceFormInfos from './OpinionSourceFormInfos';
@@ -25,22 +25,22 @@ const OpinionSourceFormModal = React.createClass({
   },
 
   handleFailure() {
-    this.setState({isSubmitting: false});
+    this.setState({ isSubmitting: false });
   },
 
   handleSubmit() {
-    this.setState({isSubmitting: true});
+    this.setState({ isSubmitting: true });
   },
 
   handleSubmitSuccess() {
     this.props.onClose();
-    this.setState({isSubmitting: false});
+    this.setState({ isSubmitting: false });
     OpinionSourceActions.load(OpinionSourceStore.opinion, 'last');
   },
 
   render() {
-    const {isSubmitting} = this.state;
-    const {source, onClose, show} = this.props;
+    const { isSubmitting } = this.state;
+    const { source, onClose, show } = this.props;
     const action = source ? 'update' : 'create';
     return (
       <Modal

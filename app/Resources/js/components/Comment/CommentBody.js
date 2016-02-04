@@ -1,6 +1,6 @@
 import React from 'react';
 import AutoLinkText from '../Utils/AutoLinkText';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 
 const CommentBody = React.createClass({
   propTypes: {

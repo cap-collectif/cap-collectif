@@ -2,9 +2,9 @@ import React from 'react';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
-import {Table} from 'react-bootstrap';
-import {IntlMixin, FormattedMessage} from 'react-intl';
-import {VOTE_TYPE_BUDGET} from '../../../constants/ProposalConstants';
+import { Table } from 'react-bootstrap';
+import { IntlMixin, FormattedMessage } from 'react-intl';
+import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
 const ProposalsUserVotesPage = React.createClass({
   propTypes: {
@@ -44,7 +44,7 @@ const ProposalsUserVotesPage = React.createClass({
     return (
       <div>
         <div className="container container--custom text-center">
-          <h1 style={{marginBottom: '0'}}>{this.getIntlMessage('project.votes.title')}</h1>
+          <h1 style={{ marginBottom: '0' }}>{this.getIntlMessage('project.votes.title')}</h1>
         </div>
         <div className="container container--custom">
           {

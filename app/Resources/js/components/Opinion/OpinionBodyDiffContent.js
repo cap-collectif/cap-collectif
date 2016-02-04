@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import OpinionBodyDiffModal from './OpinionBodyDiffModal';
 
 const OpinionBodyDiffContent = React.createClass({
@@ -12,7 +12,7 @@ const OpinionBodyDiffContent = React.createClass({
     const opinion = this.props.opinion;
 
     if (opinion.modals.length < 1) {
-      return <div dangerouslySetInnerHTML={{__html: opinion.body}} />;
+      return <div dangerouslySetInnerHTML={{ __html: opinion.body }} />;
     }
 
     const modals = opinion.modals;
@@ -52,13 +52,13 @@ const OpinionBodyDiffContent = React.createClass({
         {
           parts.map((part, index) => {
             if (!part.link) {
-              return <p dangerouslySetInnerHTML={{__html: part.content}}></p>;
+              return <p dangerouslySetInnerHTML={{ __html: part.content }}></p>;
             }
             return (
               <p key={index}>
-                <span dangerouslySetInnerHTML={{__html: part.before}} />
+                <span dangerouslySetInnerHTML={{ __html: part.before }} />
                 <OpinionBodyDiffModal link={part.link} modal={part.modal} />
-                <span dangerouslySetInnerHTML={{__html: part.after}} />
+                <span dangerouslySetInnerHTML={{ __html: part.after }} />
               </p>
             );
           })

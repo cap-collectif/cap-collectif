@@ -1,10 +1,10 @@
 import React from 'react';
-import {IntlMixin, FormattedNumber} from 'react-intl';
+import { IntlMixin, FormattedNumber } from 'react-intl';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import {Nav, Navbar, Button, ProgressBar} from 'react-bootstrap';
+import { Nav, Navbar, Button, ProgressBar } from 'react-bootstrap';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
-import {VOTE_TYPE_BUDGET} from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVotesHelper from '../../../services/ProposalVotesHelper';

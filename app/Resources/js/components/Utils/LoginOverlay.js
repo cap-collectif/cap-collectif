@@ -1,7 +1,7 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import LoginStore from '../../stores/LoginStore';
-import {Button, OverlayTrigger, Popover} from 'react-bootstrap';
+import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 
 const LoginOverlay = React.createClass({
   propTypes: {

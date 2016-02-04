@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Button} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Button } from 'react-bootstrap';
 
 const LoginButton = React.createClass({
   propTypes: {

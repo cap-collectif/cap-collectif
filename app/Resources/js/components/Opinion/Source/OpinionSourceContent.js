@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
-const OpinionSourceContent = ({source}) => {
+const OpinionSourceContent = ({ source }) => {
   return <p className="excerpt" dangerouslySetInnerHTML={{ __html: source.body }} />;
 };
 

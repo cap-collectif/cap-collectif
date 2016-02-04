@@ -1,7 +1,7 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Nav, Navbar} from 'react-bootstrap';
-import {NavItemLink} from 'react-router';
+import { IntlMixin } from 'react-intl';
+import { Nav, Navbar } from 'react-bootstrap';
+import { NavItemLink } from 'react-router';
 
 const SecondNavbar = React.createClass({
   mixins: [IntlMixin],
@@ -21,4 +21,3 @@ const SecondNavbar = React.createClass({
 });
 
 export default SecondNavbar;
-

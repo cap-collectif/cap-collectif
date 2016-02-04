@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-import {IntlMixin} from 'react-intl';
+import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 
 const OpinionSourceFormInfos = React.createClass({
   propTypes: {

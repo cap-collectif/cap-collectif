@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import OpinionSourceButtons from './OpinionSourceButtons';
 
-const OpinionSourceFooter = ({source}) => {
+const OpinionSourceFooter = ({ source }) => {
   return (
     <div className="opinion__votes excerpt small">
       <OpinionSourceButtons source={source} />

@@ -7,14 +7,14 @@ function prepareElements(text) {
 
   this.forEach((match) => {
     if (match.position.start !== 0) {
-      elements.push(<span dangerouslySetInnerHTML={{__html: text.slice(lastIndex, match.position.start) }} />);
+      elements.push(<span dangerouslySetInnerHTML={{ __html: text.slice(lastIndex, match.position.start) }} />);
     }
     elements.push(<a href={match.getAnchorHref()} className="external-link">{match.getAnchorText()}</a>);
     lastIndex = match.position.end;
   });
 
   if (lastIndex < text.length) {
-    elements.push(<span dangerouslySetInnerHTML={{__html: text.slice(lastIndex) }} />);
+    elements.push(<span dangerouslySetInnerHTML={{ __html: text.slice(lastIndex) }} />);
   }
 
   return elements;
@@ -49,7 +49,7 @@ function truncate(maxLength) {
  */
 function keyElements() {
   return this.map((el, index) => {
-    return React.cloneElement(el, {key: index});
+    return React.cloneElement(el, { key: index });
   });
 }
 

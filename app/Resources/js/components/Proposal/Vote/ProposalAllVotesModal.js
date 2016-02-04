@@ -1,6 +1,6 @@
 import React from 'react';
-import {Modal, Row} from 'react-bootstrap';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { Modal, Row } from 'react-bootstrap';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import CloseButton from '../../Form/CloseButton';
 import UserBox from '../../User/UserBox';
 

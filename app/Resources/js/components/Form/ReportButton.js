@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import { Button } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import LoginStore from '../../stores/LoginStore';
 import FeatureStore from '../../stores/FeatureStore';

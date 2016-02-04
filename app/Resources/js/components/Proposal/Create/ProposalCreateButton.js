@@ -1,8 +1,8 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import LoginStore from '../../../stores/LoginStore';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import {Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 const ProposalCreateButton = React.createClass({
   propTypes: {

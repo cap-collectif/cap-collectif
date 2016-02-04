@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {RECEIVE_FEATURES} from '../constants/FeatureConstants';
+import { RECEIVE_FEATURES } from '../constants/FeatureConstants';
 import LocalStorageService from '../services/LocalStorageService';
 
 export default {

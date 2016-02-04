@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Button} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
 
 const ProposalVoteButton = React.createClass({
@@ -43,7 +43,7 @@ const ProposalVoteButton = React.createClass({
       <Button
         bsStyle={style}
         className={classes}
-        style={{width: '100%'}}
+        style={{ width: '100%' }}
         onClick={onClick}
         active={this.props.userHasVote}
         onMouseOver={this.props.onMouseOver}

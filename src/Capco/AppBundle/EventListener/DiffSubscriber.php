@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\EventListener;
 
-
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Capco\AppBundle\Model\HasDiffInterface;

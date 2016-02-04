@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import {Modal} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import React, { PropTypes } from 'react';
+import { Modal } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
@@ -22,22 +22,22 @@ const ReportModal = React.createClass({
 
   handleValidationSucess(data) {
     this.props.onSubmit(data)
-        .then(() =>{
-          this.setState({isSubmitting: false});
+        .then(() => {
+          this.setState({ isSubmitting: false });
         });
   },
 
   handleSubmit() {
-    this.setState({isSubmitting: true});
+    this.setState({ isSubmitting: true });
   },
 
   handleFailure() {
-    this.setState({isSubmitting: false});
+    this.setState({ isSubmitting: false });
   },
 
   render() {
-    const {isSubmitting} = this.state;
-    const {onClose, show} = this.props;
+    const { isSubmitting } = this.state;
+    const { onClose, show } = this.props;
     return (
       <Modal
         animation={false}

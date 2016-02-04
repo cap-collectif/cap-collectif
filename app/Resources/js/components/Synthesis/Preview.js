@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ViewTree from './ViewTree';
 
 const Preview = React.createClass({
@@ -10,7 +10,7 @@ const Preview = React.createClass({
 
   render() {
     return (
-      <div className="synthesis__view" style={{paddingTop: '30px'}}>
+      <div className="synthesis__view" style={{ paddingTop: '30px' }}>
         <ViewTree synthesis={this.props.synthesis} />
       </div>
     );

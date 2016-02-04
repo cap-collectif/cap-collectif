@@ -1,6 +1,6 @@
 import React from 'react';
-import {Well} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import { Well } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
 import Validator from '../../services/Validator';
 
@@ -15,7 +15,7 @@ const OpinionBody = React.createClass({
   },
 
   render() {
-    const {opinion} = this.props;
+    const { opinion } = this.props;
 
     if (this.isVersion()) {
       return (
@@ -26,12 +26,12 @@ const OpinionBody = React.createClass({
                   {this.getIntlMessage('opinion.version_comment')}
                 </p>
                 <Well bsSize="small">
-                  <div dangerouslySetInnerHTML={{__html: opinion.comment}} />
+                  <div dangerouslySetInnerHTML={{ __html: opinion.comment }} />
                 </Well>
               </div>
             : null
           }
-          <div className="diff" dangerouslySetInnerHTML={{__html: opinion.diff}} />
+          <div className="diff" dangerouslySetInnerHTML={{ __html: opinion.diff }} />
         </div>
       );
     }

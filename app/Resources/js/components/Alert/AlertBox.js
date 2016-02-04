@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import AlertStore from '../../stores/AlertStore';
 import AlertAutoDismissable from './AlertAutoDismissable';
 
@@ -33,7 +33,7 @@ const AlertBox = React.createClass({
   },
 
   render() {
-    const {alert} = this.state;
+    const { alert } = this.state;
     if (!alert) {
       return null;
     }

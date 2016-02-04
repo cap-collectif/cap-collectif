@@ -2,7 +2,7 @@ import React from 'react';
 import LoginStore from '../../../stores/LoginStore';
 import ProposalVoteButton from './ProposalVoteButton';
 import VoteButtonOverlay from './VoteButtonOverlay';
-import {VOTE_TYPE_SIMPLE} from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import LoginOverlay from '../../Utils/LoginOverlay';
 
 const ProposalVoteButtonWrapper = React.createClass({

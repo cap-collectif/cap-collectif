@@ -1,4 +1,4 @@
-import {isValidMatch} from './match_validator';
+import { isValidMatch } from './match_validator';
 import URLMatch from './url_match';
 
 // match protocol, allow in format "http://" or "mailto:". However, do not match
@@ -44,7 +44,7 @@ const urlRegex = [
   '(?:' + urlSuffixRegex.source + ')?',  // match for path, query string, and/or hash anchor - optional
 ].join('');
 
-export default function(text = '') {
+export default function (text = '') {
   const regex = new RegExp(urlRegex, 'gi');
   const matches = [];
 
@@ -71,7 +71,7 @@ export default function(text = '') {
     }
 
     if (isValidMatch(matchedText, protocolUrlMatch, protocolRelativeMatch)) {
-      const position = {start: match.index, end: regex.lastIndex};
+      const position = { start: match.index, end: regex.lastIndex };
       matches.push(new URLMatch(matchedText, protocolUrlMatch, protocolRelativeMatch, position));
     }
     match = regex.exec(text);

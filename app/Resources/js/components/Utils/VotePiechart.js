@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ReactDOM from 'react-dom';
 
 const VotePiechart = React.createClass({
@@ -43,7 +43,7 @@ const VotePiechart = React.createClass({
 
     (new PieChart(ReactDOM.findDOMNode(this.refs.piechart))).draw(
       new DataTable([
-        [{type: 'string'}, {type: 'number'}],
+        [{ type: 'string' }, { type: 'number' }],
         [this.getIntlMessage('vote.ok'), this.props.ok],
         [this.getIntlMessage('vote.mitige'), this.props.mitige],
         [this.getIntlMessage('vote.nok'), this.props.nok],

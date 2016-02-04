@@ -2,7 +2,7 @@ import React from 'react';
 import LoginStore from '../../../stores/LoginStore';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
-import {VOTE_TYPE_DISABLED, VOTE_TYPE_SIMPLE} from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_DISABLED, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 
 const ProposalPreviewVote = React.createClass({

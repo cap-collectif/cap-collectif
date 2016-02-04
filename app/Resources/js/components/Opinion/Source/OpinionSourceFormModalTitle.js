@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import {IntlMixin} from 'react-intl';
-import {Modal} from 'react-bootstrap';
+import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
+import { Modal } from 'react-bootstrap';
 
 const OpinionSourceFormModalTitle = React.createClass({
   propTypes: {

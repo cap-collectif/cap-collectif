@@ -38,7 +38,7 @@ import {
   CREATE_COMMENT_SUCCESS,
   CREATE_COMMENT_FAILURE,
 } from '../constants/CommentConstants';
-import {UPDATE_ALERT} from '../constants/AlertConstants';
+import { UPDATE_ALERT } from '../constants/AlertConstants';
 
 export default {
 
@@ -76,14 +76,14 @@ export default {
     const data = {};
 
     switch (fetchFrom) {
-    case 'form':
-      url = `/proposal_forms/${id}/proposals/search`;
-      break;
-    case 'selectionStep':
-      url = `/selection_steps/${id}/proposals/search`;
-      break;
-    default:
-      break;
+      case 'form':
+        url = `/proposal_forms/${id}/proposals/search`;
+        break;
+      case 'selectionStep':
+        url = `/selection_steps/${id}/proposals/search`;
+        break;
+      default:
+        break;
     }
 
     if (!url) {
@@ -202,7 +202,7 @@ export default {
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: {bsStyle: 'success', content: successMessage},
+          alert: { bsStyle: 'success', content: successMessage },
         });
         return true;
       })
@@ -212,7 +212,7 @@ export default {
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: {bsStyle: 'warning', content: errorMessage},
+          alert: { bsStyle: 'warning', content: errorMessage },
         });
         return false;
       })
@@ -228,7 +228,7 @@ export default {
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: {bsStyle: 'success', content: successMessage},
+          alert: { bsStyle: 'success', content: successMessage },
         });
         return true;
       })
@@ -238,7 +238,7 @@ export default {
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: {bsStyle: 'warning', content: errorMessage},
+          alert: { bsStyle: 'warning', content: errorMessage },
         });
         return false;
       })
@@ -254,7 +254,7 @@ export default {
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: {bsStyle: 'success', content: successMessage},
+          alert: { bsStyle: 'success', content: successMessage },
         });
         return true;
       })
@@ -264,7 +264,7 @@ export default {
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: {bsStyle: 'warning', content: errorMessage},
+          alert: { bsStyle: 'warning', content: errorMessage },
         });
         return false;
       })
@@ -301,7 +301,7 @@ export default {
       });
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: {bsStyle: 'success', content: successMessage},
+        alert: { bsStyle: 'success', content: successMessage },
       });
       if (hasComment) {
         AppDispatcher.dispatch({
@@ -318,7 +318,7 @@ export default {
       });
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: {bsStyle: 'warning', content: errorMessage},
+        alert: { bsStyle: 'warning', content: errorMessage },
       });
       if (hasComment) {
         AppDispatcher.dispatch({
@@ -345,7 +345,7 @@ export default {
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: {bsStyle: 'success', content: successMessage},
+          alert: { bsStyle: 'success', content: successMessage },
         });
         return true;
       })
@@ -356,7 +356,7 @@ export default {
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: {bsStyle: 'warning', content: errorMessage},
+          alert: { bsStyle: 'warning', content: errorMessage },
         });
         return false;
       });

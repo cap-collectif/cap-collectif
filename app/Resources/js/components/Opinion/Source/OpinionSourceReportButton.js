@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import { Button } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 import LoginStore from '../../../stores/LoginStore';
 import FeatureStore from '../../../stores/FeatureStore';
 import LoginOverlay from '../../Utils/LoginOverlay';
@@ -36,11 +36,11 @@ const OpinionSourceReportButton = React.createClass({
   },
 
   openReportModal() {
-    this.setState({isReporting: true});
+    this.setState({ isReporting: true });
   },
 
   closeReportModal() {
-    this.setState({isReporting: false});
+    this.setState({ isReporting: false });
   },
 
   isTheUserTheAuthor() {
@@ -58,7 +58,7 @@ const OpinionSourceReportButton = React.createClass({
   },
 
   render() {
-    const {reporting, isReporting} = this.state;
+    const { reporting, isReporting } = this.state;
     if (!this.isTheUserTheAuthor() && reporting) {
       return (
         <span>

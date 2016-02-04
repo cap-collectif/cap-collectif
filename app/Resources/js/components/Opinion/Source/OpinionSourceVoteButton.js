@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import {Button} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import React, { PropTypes } from 'react';
+import { Button } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 
 const OpinionSourceVoteButton = React.createClass({
   propTypes: {
@@ -11,7 +11,7 @@ const OpinionSourceVoteButton = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    const {disabled, hasVoted, onClick} = this.props;
+    const { disabled, hasVoted, onClick } = this.props;
     return (
       <Button
         disabled={disabled}

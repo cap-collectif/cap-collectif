@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import UserAvatar from '../../User/UserAvatar';
 
@@ -32,15 +32,15 @@ const ProposalPageAnswer = React.createClass({
           }
           {
             answer.author
-              ? <div style={{marginBottom: '10px'}}>
-                  <UserAvatar user={answer.author} style={{marginRight: '10px'}} />
+              ? <div style={{ marginBottom: '10px' }}>
+                  <UserAvatar user={answer.author} style={{ marginRight: '10px' }} />
                   <a href={answer.author._links.profile}>
                     { answer.author.username }
                   </a>
                 </div>
               : null
           }
-          <div dangerouslySetInnerHTML={{__html: answer.body}} />
+          <div dangerouslySetInnerHTML={{ __html: answer.body }} />
         </div>
       </div>
     );

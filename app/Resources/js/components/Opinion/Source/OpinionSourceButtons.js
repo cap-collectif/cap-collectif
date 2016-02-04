@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 
 import LoginStore from '../../../stores/LoginStore';
 import OpinionSourceReportButton from './OpinionSourceReportButton';
@@ -30,23 +30,23 @@ const OpinionSourceButtons = React.createClass({
   },
 
   openEditModal() {
-    this.setState({isEditing: true});
+    this.setState({ isEditing: true });
   },
 
   closeEditModal() {
-    this.setState({isEditing: false});
+    this.setState({ isEditing: false });
   },
 
   openDeleteModal() {
-    this.setState({isDeleting: true});
+    this.setState({ isDeleting: true });
   },
 
   closeDeleteModal() {
-    this.setState({isDeleting: false});
+    this.setState({ isDeleting: false });
   },
 
   render() {
-    const {source} = this.props;
+    const { source } = this.props;
     return (
       <div>
         <OpinionSourceVoteBox

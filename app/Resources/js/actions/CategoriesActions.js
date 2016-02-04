@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
-import {RECEIVE_CATEGORIES} from '../constants/CategoriesConstants';
+import { RECEIVE_CATEGORIES } from '../constants/CategoriesConstants';
 
 export default {
 

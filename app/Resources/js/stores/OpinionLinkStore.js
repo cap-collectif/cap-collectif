@@ -1,5 +1,5 @@
 import BaseStore from './BaseStore';
-import {RECEIVE_LINKS} from '../constants/OpinionConstants';
+import { RECEIVE_LINKS } from '../constants/OpinionConstants';
 
 class OpinionLinkStore extends BaseStore {
 
@@ -11,11 +11,11 @@ class OpinionLinkStore extends BaseStore {
 
   _registerToActions(action) {
     switch (action.actionType) {
-    case RECEIVE_LINKS:
-      this._links = action.links;
-      this.emitChange();
-      break;
-    default: break;
+      case RECEIVE_LINKS:
+        this._links = action.links;
+        this.emitChange();
+        break;
+      default: break;
     }
   }
 

@@ -8,7 +8,7 @@ import {
   RECEIVE_SOURCES,
 } from '../constants/OpinionSourceConstants';
 
-import {UPDATE_ALERT} from '../constants/AlertConstants';
+import { UPDATE_ALERT } from '../constants/AlertConstants';
 
 const baseUrl = (opinion) => opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
 
@@ -39,7 +39,7 @@ export default {
       });
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: {bsStyle: 'success', content: 'alert.success.add.source'},
+        alert: { bsStyle: 'success', content: 'alert.success.add.source' },
       });
       return true;
     })
@@ -49,7 +49,7 @@ export default {
       });
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: {bsStyle: 'danger', content: 'alert.danger.add.source'},
+        alert: { bsStyle: 'danger', content: 'alert.danger.add.source' },
       });
     });
   },
@@ -64,7 +64,7 @@ export default {
       });
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: {bsStyle: 'success', content: 'alert.success.update.source'},
+        alert: { bsStyle: 'success', content: 'alert.success.update.source' },
       });
       return true;
     })
@@ -74,7 +74,7 @@ export default {
       });
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: {bsStyle: 'danger', content: 'alert.danger.update.source'},
+        alert: { bsStyle: 'danger', content: 'alert.danger.update.source' },
       });
     });
   },
@@ -85,7 +85,7 @@ export default {
       .then(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: {bsStyle: 'success', content: 'alert.success.delete.source'},
+          alert: { bsStyle: 'success', content: 'alert.success.delete.source' },
         });
       });
   },
@@ -96,7 +96,7 @@ export default {
       .then(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: {bsStyle: 'success', content: 'alert.success.report.source'},
+          alert: { bsStyle: 'success', content: 'alert.success.report.source' },
         });
       });
   },

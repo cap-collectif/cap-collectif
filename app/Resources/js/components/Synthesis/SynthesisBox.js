@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import Fetcher from '../../services/Fetcher';
 import ViewBox from './ViewBox';
 import EditBox from './EditBox';
@@ -90,4 +90,3 @@ const SynthesisBox = React.createClass({
 });
 
 export default SynthesisBox;
-

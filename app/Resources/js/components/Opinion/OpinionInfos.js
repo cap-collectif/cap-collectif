@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import {IntlMixin, FormattedMessage, FormattedDate} from 'react-intl';
+import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
 
 const OpinionInfos = React.createClass({
   propTypes: {

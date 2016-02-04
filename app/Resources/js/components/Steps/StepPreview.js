@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 
 import DatesInterval from './../Utils/DatesInterval';
 
@@ -41,7 +41,7 @@ const StepPreview = React.createClass({
             {
               this.props.votes === null
               ? null
-              : <p style={{marginTop: '5px'}}>
+              : <p style={{ marginTop: '5px' }}>
                   <span className="nb--highlighted">
                     {this.props.votes}
                   </span>

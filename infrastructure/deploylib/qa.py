@@ -87,13 +87,11 @@ def kill_database_container():
 
 
 @task(environments=['local'])
-def save_fixtures_image(tag='latest'):
+def save_fixtures_image(tag='latest', publish='False'):
     "Publish a new fixtures image"
     env.service_command('php bin/console capco:reinit --force --no-toggles', 'application', env.www_app)
     env.service_command('mysqldump -h database -uroot --opt symfony > infrastructure/services/databasefixtures/dump.sql', 'application', env.www_app, 'root')
-    env.compose('build databasefixtures')
-    image_id = local('docker images | grep capco_databasefixtures | awk \'{print $3}\'', capture=True)
-    local('docker tag -f ' + image_id + ' capco/fixtures:' + tag)
+    local('docker build -t capco/fixtures:latest infrastructure/services/databasefixtures')
     local('docker login -e ' + capcobot['email'] + ' -u ' + capcobot['user'] + ' -p ' + capcobot['pass'])
     local('docker push capco/fixtures')
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin, FormattedDate} from 'react-intl';
+import { IntlMixin, FormattedDate } from 'react-intl';
 import moment from 'moment';
 
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
@@ -116,7 +116,7 @@ const EditElement = React.createClass({
                 <ElementBlock element={element} />
               </div>
               {this.renderDescription()}
-              <div className="element__description box has-chart" dangerouslySetInnerHTML={{__html: element.body}} />
+              <div className="element__description box has-chart" dangerouslySetInnerHTML={{ __html: element.body }} />
               {this.renderElementButtons()}
             </div>
           </div>

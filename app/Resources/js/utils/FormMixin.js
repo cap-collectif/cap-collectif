@@ -21,7 +21,7 @@ const FormMixin = { // This will be easy to use as an higher-order Component
 
       const formErrors = this.state.errors;
       formErrors[ref] = errors;
-      this.setState({errors: formErrors});
+      this.setState({ errors: formErrors });
 
       return errors.length === 0;
     }

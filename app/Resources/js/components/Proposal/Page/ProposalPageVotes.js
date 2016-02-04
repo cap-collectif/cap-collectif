@@ -1,12 +1,12 @@
 import React from 'react';
-import {Row, Button} from 'react-bootstrap';
+import { Row, Button } from 'react-bootstrap';
 import classNames from 'classnames';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import UserBox from '../../User/UserBox';
 import ProposalAllVotesModal from '../Vote/ProposalAllVotesModal';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
-import {PROPOSAL_VOTES_TO_SHOW} from '../../../constants/ProposalConstants';
+import { PROPOSAL_VOTES_TO_SHOW } from '../../../constants/ProposalConstants';
 
 const ProposalPageVotes = React.createClass({
   propTypes: {

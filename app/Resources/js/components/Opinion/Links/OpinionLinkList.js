@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import OpinionLink from './OpinionLink';
 
 const OpinionLinkList = React.createClass({
@@ -20,7 +20,7 @@ const OpinionLinkList = React.createClass({
     }
 
     return (
-      <ul id="links-list" className="media-list" style={{ marginTop: '20px'}}>
+      <ul id="links-list" className="media-list" style={{ marginTop: '20px' }}>
         {
           this.props.links.map((link) => {
             return <OpinionLink {...this.props} key={link.id} link={link} />;

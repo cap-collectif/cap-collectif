@@ -1,11 +1,11 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import LoginStore from '../../../stores/LoginStore';
 import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
 import ProposalVoteForm from './ProposalVoteForm';
 import LoginButton from '../../Utils/LoginButton';
-import {VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE} from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 
 const ProposalVoteBox = React.createClass({
   propTypes: {
@@ -93,7 +93,7 @@ const ProposalVoteBox = React.createClass({
           LoginStore.isLoggedIn()
             ? <UserPreview
                 user={LoginStore.user}
-                style={{padding: '0', marginBottom: '0', fontSize: '18px'}}
+                style={{ padding: '0', marginBottom: '0', fontSize: '18px' }}
             />
             : null
         }
@@ -113,7 +113,7 @@ const ProposalVoteBox = React.createClass({
           }
           {
             !this.userHasEnoughCredits() && !this.state.isSubmitting
-            ? <p style={{marginTop: '10px'}}>
+            ? <p style={{ marginTop: '10px' }}>
                 {this.getIntlMessage('proposal.vote.not_enough_credits')}
               </p>
             : null
@@ -126,7 +126,7 @@ const ProposalVoteBox = React.createClass({
           label={this.props.userHasVote ? 'proposal.vote.delete' : 'proposal.vote.add'}
           bsStyle={(!this.props.userHasVote || this.state.isSubmitting) ? 'success' : 'danger'}
           className="btn-block"
-          style={{marginTop: '10px'}}
+          style={{ marginTop: '10px' }}
           disabled={!this.displayForm() && LoginStore.isLoggedIn()}
           loginOverlay={this.props.voteType === VOTE_TYPE_BUDGET}
         />
@@ -135,7 +135,7 @@ const ProposalVoteBox = React.createClass({
           ? <div>
             <p
               className="text-center excerpt"
-              style={{margin: '10px 0 0'}}
+              style={{ margin: '10px 0 0' }}
             >
               {this.getIntlMessage('global.or')}
             </p>

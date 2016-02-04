@@ -1,6 +1,6 @@
 import * as Actions from '../constants/SynthesisElementActionsConstants';
 import BaseStore from './BaseStore';
-import {DISMISS_MESSAGE} from '../constants/MessageConstants';
+import { DISMISS_MESSAGE } from '../constants/MessageConstants';
 import ArrayHelper from '../services/ArrayHelper';
 
 class SynthesisElementStore extends BaseStore {
@@ -64,193 +64,193 @@ class SynthesisElementStore extends BaseStore {
 
   _registerToActions(action) {
     let element = null;
+    const parentId = typeof action.parent === 'object' ? action.parent.id : action.parent;
     switch (action.actionType) {
-    case Actions.RECEIVE_COUNT:
-      this._counts[action.type] = action.count;
-      this._isCountSync = true;
-      this.emitChange();
-      break;
-    case Actions.RECEIVE_ELEMENT:
-      this._currentId = action.elementId;
-      this._isElementSync = false;
-      this._isProcessing = true;
-      this.updateSelectedId(action.elementId);
-      this.emitChange();
-      break;
-    case Actions.RECEIVE_ELEMENT_SUCCESS:
-      if (action.element.id === this._currentId) {
-        this._element = action.element;
-        this._isElementSync = true;
-        this._isProcessing = false;
+      case Actions.RECEIVE_COUNT:
+        this._counts[action.type] = action.count;
+        this._isCountSync = true;
         this.emitChange();
-      }
-      break;
-    case Actions.RECEIVE_ELEMENT_FAILURE:
-      this._isProcessing = false;
-      break;
-    case Actions.RECEIVE_ELEMENTS:
-      this._isFetchingTree = true;
-      this._isInboxSync[action.type] = false;
-      this.emitChange();
-      break;
-    case Actions.RECEIVE_ELEMENTS_SUCCESS:
-      if (!action.parent) {
-        this._elements[action.type] = action.elements;
-      } else {
-        this.updateTreeByTypeWithChildren(action.type, action.parent, action.elements);
-      }
-      this._counts[action.type] = action.count;
-      this._isInboxSync[action.type] = true;
-      this._isFetchingTree = false;
-      this.emitChange();
-      break;
-    case Actions.RECEIVE_ELEMENTS_FAILURE:
-      this._isFetchingTree = false;
-      this.emitChange();
-      break;
-    case Actions.EXPAND_TREE_ITEM:
-      this._expandedItems[action.type][action.elementId] = action.expanded;
-      this.emitChange();
-      break;
-    case Actions.SELECT_NAV_ITEM:
-      this.updateSelectedId(action.elementId);
-      this.emitChange();
-      break;
-    case Actions.CREATE_ELEMENT:
-      this._resetInboxSync();
-      this._isProcessing = true;
-      this._resetMessages();
-      this.emitChange();
-      break;
-    case Actions.ARCHIVE_ELEMENT:
-      this._resetMessages();
-      element = this._element && action.elementId === this._element.id
+        break;
+      case Actions.RECEIVE_ELEMENT:
+        this._currentId = action.elementId;
+        this._isElementSync = false;
+        this._isProcessing = true;
+        this.updateSelectedId(action.elementId);
+        this.emitChange();
+        break;
+      case Actions.RECEIVE_ELEMENT_SUCCESS:
+        if (action.element.id === this._currentId) {
+          this._element = action.element;
+          this._isElementSync = true;
+          this._isProcessing = false;
+          this.emitChange();
+        }
+        break;
+      case Actions.RECEIVE_ELEMENT_FAILURE:
+        this._isProcessing = false;
+        break;
+      case Actions.RECEIVE_ELEMENTS:
+        this._isFetchingTree = true;
+        this._isInboxSync[action.type] = false;
+        this.emitChange();
+        break;
+      case Actions.RECEIVE_ELEMENTS_SUCCESS:
+        if (!action.parent) {
+          this._elements[action.type] = action.elements;
+        } else {
+          this.updateTreeByTypeWithChildren(action.type, action.parent, action.elements);
+        }
+        this._counts[action.type] = action.count;
+        this._isInboxSync[action.type] = true;
+        this._isFetchingTree = false;
+        this.emitChange();
+        break;
+      case Actions.RECEIVE_ELEMENTS_FAILURE:
+        this._isFetchingTree = false;
+        this.emitChange();
+        break;
+      case Actions.EXPAND_TREE_ITEM:
+        this._expandedItems[action.type][action.elementId] = action.expanded;
+        this.emitChange();
+        break;
+      case Actions.SELECT_NAV_ITEM:
+        this.updateSelectedId(action.elementId);
+        this.emitChange();
+        break;
+      case Actions.CREATE_ELEMENT:
+        this._resetInboxSync();
+        this._isProcessing = true;
+        this._resetMessages();
+        this.emitChange();
+        break;
+      case Actions.ARCHIVE_ELEMENT:
+        this._resetMessages();
+        element = this._element && action.elementId === this._element.id
         ? this._element
         : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
       ;
       // Update data
       // If we ignored an element, lists are not synced anymore
-      if (action.published && element) {
-        this._elements.new = ArrayHelper.removeElementFromArray(this._elements.new, element);
-        this._counts.new = this._elements.new.length;
-        this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, element);
-        this._elements.published = ArrayHelper.addElementToArray(this._elements.published, element);
-        this._elements.unpublished = ArrayHelper.removeElementFromArray(this._elements.unpublished, element);
-      } else {
+        if (action.published && element) {
+          this._elements.new = ArrayHelper.removeElementFromArray(this._elements.new, element);
+          this._counts.new = this._elements.new.length;
+          this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, element);
+          this._elements.published = ArrayHelper.addElementToArray(this._elements.published, element);
+          this._elements.unpublished = ArrayHelper.removeElementFromArray(this._elements.unpublished, element);
+        } else {
+          if (element) {
+            this.removeElementFromTree(element);
+          }
+          this._isProcessing = true;
+          this._resetInboxSync();
+        }
+        if (this._element && action.elementId === this._element.id) {
+        // Apply changes to element
+          this._element.archived = action.archived;
+          this._element.published = action.published;
+        }
+        this.emitChange();
+        break;
+      case Actions.NOTE_ELEMENT:
+        this._element.notation = action.notation;
+        this._resetInboxSync();
+        this._isProcessing = true;
+        this._resetMessages();
+        this.emitChange();
+        break;
+      case Actions.COMMENT_ELEMENT:
+        this._element.comment = action.comment;
+        this._resetInboxSync();
+        this._isProcessing = true;
+        this._resetMessages();
+        this.emitChange();
+        break;
+      case Actions.DESCRIBE_ELEMENT:
+        element = this._element && action.elementId === this._element.id
+        ? this._element
+        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
+      ;
+        if (element) {
+          element.description = action.description;
+        }
+        this._resetInboxSync();
+        this._isProcessing = true;
+        this._resetMessages();
+        this.emitChange();
+        break;
+      case Actions.NAME_ELEMENT:
+        element = this._element && action.elementId === this._element.id
+        ? this._element
+        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
+      ;
+        if (element) {
+          element.title = action.title;
+        }
+        this._resetInboxSync();
+        this._isProcessing = true;
+        this._resetMessages();
+        this.emitChange();
+        break;
+      case Actions.MOVE_ELEMENT:
+        this.changeElementParent(parentId, action.elementId);
+        this._resetInboxSync();
+        this._isProcessing = true;
+        this._resetMessages();
+        this.emitChange();
+        break;
+      case Actions.DIVIDE_ELEMENT:
+        this._element.division = action.division;
+        action.division.elements.map((newElement) => {
+          this.addElementInTree(newElement);
+        });
+        element = this._element && action.elementId === this._element.id
+        ? this._element
+        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
+      ;
         if (element) {
           this.removeElementFromTree(element);
         }
-        this._isProcessing = true;
         this._resetInboxSync();
-      }
-      if (this._element && action.elementId === this._element.id) {
-        // Apply changes to element
-        this._element.archived = action.archived;
-        this._element.published = action.published;
-      }
-      this.emitChange();
-      break;
-    case Actions.NOTE_ELEMENT:
-      this._element.notation = action.notation;
-      this._resetInboxSync();
-      this._isProcessing = true;
-      this._resetMessages();
-      this.emitChange();
-      break;
-    case Actions.COMMENT_ELEMENT:
-      this._element.comment = action.comment;
-      this._resetInboxSync();
-      this._isProcessing = true;
-      this._resetMessages();
-      this.emitChange();
-      break;
-    case Actions.DESCRIBE_ELEMENT:
-      element = this._element && action.elementId === this._element.id
-        ? this._element
-        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
-      ;
-      if (element) {
-        element.description = action.description;
-      }
-      this._resetInboxSync();
-      this._isProcessing = true;
-      this._resetMessages();
-      this.emitChange();
-      break;
-    case Actions.NAME_ELEMENT:
-      element = this._element && action.elementId === this._element.id
-        ? this._element
-        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
-      ;
-      if (element) {
-        element.title = action.title;
-      }
-      this._resetInboxSync();
-      this._isProcessing = true;
-      this._resetMessages();
-      this.emitChange();
-      break;
-    case Actions.MOVE_ELEMENT:
-      const parentId = typeof action.parent === 'object' ? action.parent.id : action.parent;
-      this.changeElementParent(parentId, action.elementId);
-      this._resetInboxSync();
-      this._isProcessing = true;
-      this._resetMessages();
-      this.emitChange();
-      break;
-    case Actions.DIVIDE_ELEMENT:
-      this._element.division = action.division;
-      action.division.elements.map((newElement) => {
-        this.addElementInTree(newElement);
-      });
-      element = this._element && action.elementId === this._element.id
-        ? this._element
-        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
-      ;
-      if (element) {
-        this.removeElementFromTree(element);
-      }
-      this._resetInboxSync();
-      this._isProcessing = true;
-      this._resetMessages();
-      this.emitChange();
-      break;
-    case Actions.UPDATE_ELEMENT_SUCCESS:
-      this._resetMessages();
-      this._messages.success.push(action.message);
-      this._isProcessing = false;
-      this.emitChange();
-      break;
-    case Actions.UPDATE_ELEMENT_FAILURE:
-      this._messages.errors.push(action.message);
-      this._messages.success = [];
-      this._isProcessing = false;
-      this._isElementSync = false;
-      this._resetInboxSync();
-      this.emitChange();
-      break;
-    case Actions.CREATE_ELEMENT_SUCCESS:
-      this._resetMessages();
-      this._messages.success.push(action.message);
-      this.addElementInTree(action.element);
-      this._isProcessing = false;
-      this.emitChange();
-      break;
-    case Actions.CREATE_ELEMENT_FAILURE:
-      this._messages.errors.push(action.message);
-      this._messages.success = [];
-      this._isProcessing = false;
-      this._isElementSync = false;
-      this._resetInboxSync();
-      this.emitChange();
-      break;
-    case DISMISS_MESSAGE:
-      this._messages[action.type] = this._messages[action.type].filter((message) => {
-        return message !== action.message;
-      });
-      this.emitChange();
-      break;
-    default: break;
+        this._isProcessing = true;
+        this._resetMessages();
+        this.emitChange();
+        break;
+      case Actions.UPDATE_ELEMENT_SUCCESS:
+        this._resetMessages();
+        this._messages.success.push(action.message);
+        this._isProcessing = false;
+        this.emitChange();
+        break;
+      case Actions.UPDATE_ELEMENT_FAILURE:
+        this._messages.errors.push(action.message);
+        this._messages.success = [];
+        this._isProcessing = false;
+        this._isElementSync = false;
+        this._resetInboxSync();
+        this.emitChange();
+        break;
+      case Actions.CREATE_ELEMENT_SUCCESS:
+        this._resetMessages();
+        this._messages.success.push(action.message);
+        this.addElementInTree(action.element);
+        this._isProcessing = false;
+        this.emitChange();
+        break;
+      case Actions.CREATE_ELEMENT_FAILURE:
+        this._messages.errors.push(action.message);
+        this._messages.success = [];
+        this._isProcessing = false;
+        this._isElementSync = false;
+        this._resetInboxSync();
+        this.emitChange();
+        break;
+      case DISMISS_MESSAGE:
+        this._messages[action.type] = this._messages[action.type].filter((message) => {
+          return message !== action.message;
+        });
+        this.emitChange();
+        break;
+      default: break;
     }
   }
 

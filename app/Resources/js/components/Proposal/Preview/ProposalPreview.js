@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Col} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Col } from 'react-bootstrap';
 import classNames from 'classnames';
 
 import ProposalVotesHelper from '../../../services/ProposalVotesHelper';
@@ -8,7 +8,7 @@ import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
-import {VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET} from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
 const ProposalPreview = React.createClass({
   propTypes: {
@@ -39,12 +39,12 @@ const ProposalPreview = React.createClass({
   },
 
   render() {
-    const {proposal} = this.props;
+    const { proposal } = this.props;
     const classes = classNames({
       'box': true,
       'bg-vip': proposal.author && proposal.author.vip,
     });
-    const {userHasVote} = this.state;
+    const { userHasVote } = this.state;
 
     return (
       <Col componentClass="li" xs={12} sm={6} md={4}>

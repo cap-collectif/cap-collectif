@@ -1,14 +1,14 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import ProposalStore from '../../stores/ProposalStore';
 import ProposalVoteStore from '../../stores/ProposalVoteStore';
 import ProposalActions from '../../actions/ProposalActions';
-import {PROPOSAL_PAGINATION} from '../../constants/ProposalConstants';
+import { PROPOSAL_PAGINATION } from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
-import {VOTE_TYPE_DISABLED} from '../../constants/ProposalConstants';
+import { VOTE_TYPE_DISABLED } from '../../constants/ProposalConstants';
 import ProposalRandomButton from '../Proposal/List/ProposalRandomButton';
 
 const SelectionStepPage = React.createClass({
@@ -83,11 +83,11 @@ const SelectionStepPage = React.createClass({
   },
 
   handleFilterOrOrderChange() {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
   },
 
   selectPage(newPage) {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     ProposalActions.changePage(newPage);
   },
 

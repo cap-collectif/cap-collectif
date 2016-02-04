@@ -13,7 +13,7 @@ class MessageStore extends BaseStore {
 
   _registerToActions(action) {
     switch (action.actionType) {
-    default: break;
+      default: break;
     }
   }
 

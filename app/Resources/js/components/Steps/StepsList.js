@@ -24,7 +24,7 @@ const StepsList = React.createClass({
       <div className="navbar--sub" style={this.props.style}>
         <ul className="nav">
           {
-            this.props.steps.map( (step) => {
+            this.props.steps.map((step) => {
               return <StepPreview key={step.id} step={step} votes={this.props.votes[step.id]} />;
             })
           }

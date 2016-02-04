@@ -26,15 +26,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install blackfire
-RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
-    echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
-    apt-get update && \
-    apt-get install -y blackfire-agent blackfire-php && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
-    mkdir -p /var/run/blackfire
-
 # Install fake user 1000
 RUN groupadd --gid=1000 capco && \
     /usr/sbin/useradd --system --uid 1000 --home /home/capco --shell /bin/bash --gid 1000 capco
@@ -43,7 +34,6 @@ RUN groupadd --gid=1000 capco && \
 COPY nginx/run                  /etc/service/nginx/run
 COPY php-fpm/run                /etc/service/php-fpm/run
 COPY cron/run                   /etc/service/cron/run
-COPY blackfire/run              /etc/service/blackfire/run
 COPY varnish/run                /etc/service/varnish/run
 
 # Configuration
@@ -60,5 +50,4 @@ VOLUME /var/www/var/logs
 
 WORKDIR /var/www
 
-# Default command
 CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]

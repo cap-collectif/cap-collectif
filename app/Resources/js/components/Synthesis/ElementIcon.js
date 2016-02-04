@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 
 const ElementIcon = React.createClass({

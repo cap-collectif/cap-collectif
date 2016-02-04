@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import SourceActions from '../../../actions/SourceActions';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
@@ -17,24 +17,24 @@ const OpinionSourceVoteBox = React.createClass({
   },
 
   vote() {
-    this.setState({hasVoted: true});
+    this.setState({ hasVoted: true });
     SourceActions.addVote(this.props.source.id);
   },
 
   deleteVote() {
-    this.setState({hasVoted: false});
+    this.setState({ hasVoted: false });
     SourceActions.deleteVote(this.props.source.id);
   },
 
   render() {
-    const {hasVoted} = this.state;
-    const {source} = this.props;
+    const { hasVoted } = this.state;
+    const { source } = this.props;
     const hasVotedSince = (hasVoted && !source.has_user_voted);
     const hasUnVotedSince = (!hasVoted && source.has_user_voted);
     const showVoted = hasVoted || hasVotedSince;
     return (
       <span>
-        <form style={{display: 'inline-block'}}>
+        <form style={{ display: 'inline-block' }}>
           <LoginOverlay>
             <OpinionSourceVoteButton
               disabled={!source.isContribuable}

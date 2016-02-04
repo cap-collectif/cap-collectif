@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import {Modal} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import React, { PropTypes } from 'react';
+import { Modal } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import CloseButton from '../../Form/CloseButton';
@@ -22,22 +22,22 @@ const OpinionSourceDeleteModal = React.createClass({
   },
 
   handleSubmit() {
-    this.setState({isSubmitting: true});
+    this.setState({ isSubmitting: true });
     OpinionSourceActions
       .delete(OpinionSourceStore.opinion, this.props.source.id)
       .then(() => {
         this.props.onClose();
-        this.setState({isSubmitting: false});
+        this.setState({ isSubmitting: false });
         OpinionSourceActions.load(OpinionSourceStore.opinion, 'last');
       })
       .catch(() => {
-        this.setState({isSubmitting: false});
+        this.setState({ isSubmitting: false });
       });
   },
 
   render() {
-    const {isSubmitting} = this.state;
-    const {onClose, show} = this.props;
+    const { isSubmitting } = this.state;
+    const { onClose, show } = this.props;
     return (
       <Modal
         animation={false}

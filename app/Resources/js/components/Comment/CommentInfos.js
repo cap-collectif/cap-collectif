@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin, FormattedDate} from 'react-intl';
+import { IntlMixin, FormattedDate } from 'react-intl';
 import moment from 'moment';
 
 const CommentInfos = React.createClass({

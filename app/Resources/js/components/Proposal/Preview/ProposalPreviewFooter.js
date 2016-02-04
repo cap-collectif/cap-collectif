@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
 const ProposalPreviewFooter = React.createClass({
@@ -39,7 +39,7 @@ const ProposalPreviewFooter = React.createClass({
     return (
       <div className="proposal__footer">
         <div className="proposal__counters">
-          <div className="proposal__counter proposal__counter--comments" style={{width: counterWidth}}>
+          <div className="proposal__counter proposal__counter--comments" style={{ width: counterWidth }}>
             <div className="proposal__counter__value" >
               {proposal.comments_count}
             </div>
@@ -52,7 +52,7 @@ const ProposalPreviewFooter = React.createClass({
           </div>
           {
             this.props.selectionStepId && this.props.showVote
-            ? <div className="proposal__counter proposal__counter--votes" style={{width: counterWidth, borderLeft: '1px solid #ccc'}}>
+            ? <div className="proposal__counter proposal__counter--votes" style={{ width: counterWidth, borderLeft: '1px solid #ccc' }}>
                 <div className="proposal__counter__value" >
                   {votesCount}
                 </div>

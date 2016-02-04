@@ -1,11 +1,11 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalActions from '../../../actions/ProposalActions';
-import {Modal} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const ProposalEditModal = React.createClass({
   propTypes: {

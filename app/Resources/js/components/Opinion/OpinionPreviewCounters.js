@@ -1,7 +1,7 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
-import {COMMENT_SYSTEM_NONE} from '../../constants/ArgumentConstants';
-import {VOTE_WIDGET_DISABLED} from '../../constants/VoteConstants';
+import { IntlMixin, FormattedMessage } from 'react-intl';
+import { COMMENT_SYSTEM_NONE } from '../../constants/ArgumentConstants';
+import { VOTE_WIDGET_DISABLED } from '../../constants/VoteConstants';
 
 const OpinionPreviewCounters = React.createClass({
   propTypes: {
@@ -39,7 +39,7 @@ const OpinionPreviewCounters = React.createClass({
     return (
       <p className="opinion__votes excerpt small">
         {
-          counters.map( (counter, index) => {
+          counters.map((counter, index) => {
             if (index < (counters.length - 1)) {
               return <span>{counter}<span> • </span></span>;
             }

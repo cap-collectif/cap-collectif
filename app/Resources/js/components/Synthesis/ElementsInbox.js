@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ElementsList from './ElementsList';
 import Loader from '../Utils/Loader';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
@@ -18,7 +18,7 @@ const ElementsInbox = React.createClass({
 
   getDefaultProps() {
     return {
-      params: {type: 'new'},
+      params: { type: 'new' },
       searchTerm: '',
     };
   },

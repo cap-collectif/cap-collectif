@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col} from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import UserPreview from './UserPreview';
 
 const UserBox = React.createClass({

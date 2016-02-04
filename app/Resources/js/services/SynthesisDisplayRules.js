@@ -1,4 +1,4 @@
-import {ALLOWED_RULES} from '../constants/SynthesisDisplayConstants';
+import { ALLOWED_RULES } from '../constants/SynthesisDisplayConstants';
 
 class SynthesisDisplayRules {
 
@@ -17,9 +17,9 @@ class SynthesisDisplayRules {
 
   isElementMatchingCondition(condition, element) {
     switch (condition.type) {
-    case 'level': return element.level === condition.value;
-    case 'display_type': return element.displayType === condition.value;
-    default: return false;
+      case 'level': return element.level === condition.value;
+      case 'display_type': return element.displayType === condition.value;
+      default: return false;
     }
   }
 
@@ -34,7 +34,7 @@ class SynthesisDisplayRules {
     const name = rule.name;
     const allowed = ALLOWED_RULES[category].indexOf(name) > -1;
     if (!allowed) {
-      console.warn(name + ' rule is not allow in category ' + category + '. Allowed rules are :', ALLOWED_RULES[category]);
+//      console.warn(name + ' rule is not allow in category ' + category + '. Allowed rules are :', ALLOWED_RULES[category]);
     }
     return allowed;
   }

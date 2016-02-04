@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import OpinionLinkCreateButton from './OpinionLinkCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
@@ -7,7 +7,7 @@ import OpinionLinkCreateInfos from './OpinionLinkCreateInfos';
 import OpinionForm from './../Form/OpinionForm';
 import OpinionTypeActions from '../../../actions/OpinionTypeActions';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
-import {Modal} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const OpinionLinkCreate = React.createClass({
   propTypes: {
@@ -27,29 +27,29 @@ const OpinionLinkCreate = React.createClass({
     OpinionTypeActions
       .getAvailableTypes(this.props.opinion.type.id)
       .then((availableTypes) => {
-        this.setState({'availableTypes': availableTypes});
+        this.setState({ 'availableTypes': availableTypes });
       });
   },
 
   handleFailure() {
-    this.setState({isSubmitting: false});
+    this.setState({ isSubmitting: false });
   },
 
   handleSubmit() {
-    this.setState({isSubmitting: true});
+    this.setState({ isSubmitting: true });
   },
 
   close() {
-    this.setState({showModal: false});
+    this.setState({ showModal: false });
   },
 
   show() {
-    this.setState({showModal: true});
+    this.setState({ showModal: true });
   },
 
   handleSubmitSuccess() {
     this.close();
-    this.setState({isSubmitting: false});
+    this.setState({ isSubmitting: false });
     OpinionLinkActions.load(this.props.opinion.id, 'last');
   },
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 
 const CommentVoteButton = React.createClass({
   propTypes: {
@@ -20,7 +20,7 @@ const CommentVoteButton = React.createClass({
     }
 
     return (
-      <form method="POST" style={{display: 'inline-block'}} action={this.props.comment._links.vote}>
+      <form method="POST" style={{ display: 'inline-block' }} action={this.props.comment._links.vote}>
         { this.renderVoteButton() }
       </form>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
 import ProposalEditModal from '../Edit/ProposalEditModal';
@@ -33,11 +33,11 @@ const ProposalPageHeader = React.createClass({
   },
 
   toggleEditModal(value) {
-    this.setState({showEditModal: value});
+    this.setState({ showEditModal: value });
   },
 
   toggleDeleteModal(value) {
-    this.setState({showDeleteModal: value});
+    this.setState({ showDeleteModal: value });
   },
 
   render() {
@@ -50,7 +50,7 @@ const ProposalPageHeader = React.createClass({
       <div className={classNames(classes)}>
         <div className="block">
           <h2 className="h2">{ this.getIntlMessage('proposal.description') }</h2>
-          <div dangerouslySetInnerHTML={{__html: proposal.body}} />
+          <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
         </div>
         {
           proposal.responses.map((response, index) => {
@@ -67,7 +67,7 @@ const ProposalPageHeader = React.createClass({
             author={proposal.author}
             url={proposal._links.report}
             hasReported={proposal.hasUserReported}
-            style={{marginLeft: '15px'}}
+            style={{ marginLeft: '15px' }}
           />
           <div className="pull-right">
             <EditButton
@@ -80,7 +80,7 @@ const ProposalPageHeader = React.createClass({
               id="proposal-delete-button"
               author={this.props.proposal.author}
               onClick={this.toggleDeleteModal.bind(null, true)}
-              style={{marginLeft: '15px'}}
+              style={{ marginLeft: '15px' }}
               deletable={this.props.form.isContribuable}
             />
           </div>

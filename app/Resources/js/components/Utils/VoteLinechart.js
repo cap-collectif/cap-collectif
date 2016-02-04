@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ReactDOM from 'react-dom';
 
 const VoteLinechart = React.createClass({
@@ -33,10 +33,10 @@ const VoteLinechart = React.createClass({
     const AreaChart = google.visualization.AreaChart;
     const DataTable = google.visualization.arrayToDataTable;
     const lines = [[
-      {type: 'datetime', label: this.getIntlMessage('vote.date')},
-      {type: 'number', label: this.getIntlMessage('vote.nok')},
-      {type: 'number', label: this.getIntlMessage('vote.mitige')},
-      {type: 'number', label: this.getIntlMessage('vote.ok')},
+      { type: 'datetime', label: this.getIntlMessage('vote.date') },
+      { type: 'number', label: this.getIntlMessage('vote.nok') },
+      { type: 'number', label: this.getIntlMessage('vote.mitige') },
+      { type: 'number', label: this.getIntlMessage('vote.ok') },
     ]];
 
     $.each(this.props.history, (i, row) => {
@@ -49,13 +49,13 @@ const VoteLinechart = React.createClass({
     });
 
     const options = {
-      hAxis: {titleTextStyle: {color: '#333'}},
-      vAxis: {title: this.getIntlMessage('vote.votes'), minValue: 0},
+      hAxis: { titleTextStyle: { color: '#333' } },
+      vAxis: { title: this.getIntlMessage('vote.votes'), minValue: 0 },
       isStacked: true,
       colors: ['#d9534f', '#f0ad4e', '#5cb85c'],
       height: this.props.height,
       width: this.props.width,
-      legend: {position: 'top', maxLines: 3},
+      legend: { position: 'top', maxLines: 3 },
       theme: 'maximized',
     };
 

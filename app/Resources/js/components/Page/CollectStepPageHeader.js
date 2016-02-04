@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import ProposalCreate from '../Proposal/Create/ProposalCreate';
 
 const CollectStepPageHeader = React.createClass({

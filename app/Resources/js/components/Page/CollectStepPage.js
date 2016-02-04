@@ -1,9 +1,9 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 
 import ProposalStore from '../../stores/ProposalStore';
 import ProposalActions from '../../actions/ProposalActions';
-import {PROPOSAL_PAGINATION} from '../../constants/ProposalConstants';
+import { PROPOSAL_PAGINATION } from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
@@ -73,11 +73,11 @@ const CollectStepPage = React.createClass({
   },
 
   handleFilterOrOrderChange() {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
   },
 
   selectPage(newPage) {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     ProposalActions.changePage(newPage);
   },
 

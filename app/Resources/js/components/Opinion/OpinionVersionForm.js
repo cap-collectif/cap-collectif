@@ -1,6 +1,6 @@
 import React from 'react';
-import {Modal, Button} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import { Modal, Button } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 import LoginStore from '../../stores/LoginStore';
 import FormMixin from '../../utils/FormMixin';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
@@ -51,22 +51,22 @@ const OpinionVersionForm = React.createClass({
 
   componentDidMount() {
     this.formValidationRules.body = {
-      notEqual: {value: this.props.opinionBody, message: 'opinion.version.body_error'},
+      notEqual: { value: this.props.opinionBody, message: 'opinion.version.body_error' },
     };
 
     if (this.props.mode === 'edit') {
       this.formValidationRules.confirm = {
-        isTrue: {message: 'opinion.version.confirm_error'},
+        isTrue: { message: 'opinion.version.confirm_error' },
       };
     }
   },
 
   close() {
-    this.setState({showModal: false});
+    this.setState({ showModal: false });
   },
 
   show() {
-    this.setState({showModal: true});
+    this.setState({ showModal: true });
   },
 
   create() {
@@ -77,7 +77,7 @@ const OpinionVersionForm = React.createClass({
         return;
       }
 
-      this.setState({isSubmitting: true});
+      this.setState({ isSubmitting: true });
 
       OpinionActions
       .createVersion(this.props.opinionId, this.state.form)
@@ -88,18 +88,18 @@ const OpinionVersionForm = React.createClass({
         return true;
       })
       .catch(() => {
-        this.setState({isSubmitting: false, submitted: false});
+        this.setState({ isSubmitting: false, submitted: false });
       });
     });
   },
 
   update() {
-    this.setState({submitted: true}, () => {
+    this.setState({ submitted: true }, () => {
       if (!this.isValid()) {
         return;
       }
 
-      this.setState({isSubmitting: true});
+      this.setState({ isSubmitting: true });
 
       const data = {
         title: this.state.form.title,
@@ -116,7 +116,7 @@ const OpinionVersionForm = React.createClass({
           return true;
         })
         .catch(() => {
-          this.setState({isSubmitting: false, submitted: false});
+          this.setState({ isSubmitting: false, submitted: false });
         });
     });
   },
@@ -139,8 +139,8 @@ const OpinionVersionForm = React.createClass({
 
   formValidationRules: {
     title: {
-      notBlank: {message: 'opinion.version.title_error'},
-      min: {value: 2, message: 'opinion.version.title_error'},
+      notBlank: { message: 'opinion.version.title_error' },
+      min: { value: 2, message: 'opinion.version.title_error' },
     },
   },
 

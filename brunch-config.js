@@ -79,6 +79,9 @@ exports.config = {
     babel: {
       stage: 0,
     },
+    // JSCS: {
+    //   files: /^app/,
+    // },
     sass: {
       mode: 'native',
     },

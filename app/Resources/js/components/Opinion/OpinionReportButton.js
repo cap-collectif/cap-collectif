@@ -2,8 +2,8 @@ import React from 'react';
 import LoginOverlay from '../Utils/LoginOverlay';
 import LoginStore from '../../stores/LoginStore';
 import FeatureStore from '../../stores/FeatureStore';
-import {Button} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import { Button } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 
 const OpinionReportButton = React.createClass({
   propTypes: {

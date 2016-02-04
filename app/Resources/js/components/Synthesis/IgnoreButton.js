@@ -1,7 +1,7 @@
 import React from 'react';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
-import {Button, Modal} from 'react-bootstrap';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { Button, Modal } from 'react-bootstrap';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 
 const IgnoreButton = React.createClass({
   propTypes: {
@@ -39,7 +39,7 @@ const IgnoreButton = React.createClass({
       'published': false,
     };
     SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
-    this.transitionTo('inbox', {'type': 'new'});
+    this.transitionTo('inbox', { 'type': 'new' });
   },
 
   renderConfirmButton() {

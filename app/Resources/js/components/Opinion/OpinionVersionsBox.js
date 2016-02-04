@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Row, Col} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import { Row, Col } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 
 import OpinionVersionList from './OpinionVersionList';
 import OpinionVersionForm from './OpinionVersionForm';
@@ -44,7 +44,7 @@ const OpinionVersionsBox = React.createClass({
   },
 
   loadVersionsFromServer() {
-    this.setState({'isLoading': true});
+    this.setState({ 'isLoading': true });
 
     Fetcher
     .get(`/opinions/${this.props.opinionId}/versions?offset=${this.state.offset}&filter=${this.state.filter}`)

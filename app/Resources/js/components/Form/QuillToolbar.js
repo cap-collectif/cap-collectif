@@ -1,12 +1,12 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 
 const QuillToolbar = React.createClass({
   mixins: [IntlMixin],
 
   render() {
     return (
-      <div style={{borderBottom: '1px solid #ddd', padding: '5px 12px'}}>
+      <div style={{ borderBottom: '1px solid #ddd', padding: '5px 12px' }}>
         <span className="ql-format-group">
           <select title="Size" className="ql-size">
             <option value="10px">{this.getIntlMessage('editor.size.small')}</option>

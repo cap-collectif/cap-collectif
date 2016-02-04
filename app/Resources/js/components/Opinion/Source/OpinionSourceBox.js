@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import {Row, Col} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import React, { PropTypes } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 
 import OpinionSourceList from './OpinionSourceList';
 import OpinionSourceAdd from './OpinionSourceAdd';
@@ -58,7 +58,7 @@ const OpinionSourceBox = React.createClass({
   },
 
   loadSourcesFromServer() {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     OpinionSourceActions.load(this.props.opinion, this.state.filter);
   },
 
@@ -67,8 +67,8 @@ const OpinionSourceBox = React.createClass({
   },
 
   render() {
-    const {opinion} = this.props;
-    const {sources, isLoading, filter} = this.state;
+    const { opinion } = this.props;
+    const { sources, isLoading, filter } = this.state;
     return (
       <div>
         <Row>

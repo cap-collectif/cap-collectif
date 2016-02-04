@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Generator;
 
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Routing\Router;
 use Caxy\HtmlDiffBundle\Service\HtmlDiffService;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionModal;
@@ -25,6 +23,7 @@ class DiffGenerator
             $newText = $entity->getBody();
             $diff = $this->diffService->diff($oldText, $newText);
             $entity->setDiff($diff);
+
             return true;
         }
 
@@ -33,6 +32,7 @@ class DiffGenerator
             $newText = $entity->getAfter();
             $diff = $this->diffService->diff($oldText, $newText);
             $entity->setDiff($diff);
+
             return true;
         }
 

@@ -5,6 +5,15 @@ application:
         - ../../:/var/www
         - /var/run/docker.sock:/var/run/docker.sock
         - /usr/local/bin/docker:/usr/bin/docker
+    links:
+        - blackfire:blackfire
+
+blackfire:
+    restart: always
+    image: blackfire/blackfire
+    environment:
+        - BLACKFIRE_SERVER_ID=eeb5e6cc-acbd-4966-9c67-8d836b26b066
+        - BLACKFIRE_SERVER_TOKEN=***REMOVED***
 
 database:
    ports:
@@ -22,7 +31,3 @@ chrome:
 #     - application:application
 #   ports:
 #     - "5901:5900"
-
-# Used to generate spyl94/capco-fixtures
-databasefixtures:
-    build: ../services/databasefixtures

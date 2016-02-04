@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import {Row, Col} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import OpinionPreview from './OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';

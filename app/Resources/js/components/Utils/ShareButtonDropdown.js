@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {MenuItem, DropdownButton, Modal} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { MenuItem, DropdownButton, Modal } from 'react-bootstrap';
 
 const ShareButtonDropdown = React.createClass({
   propTypes: {

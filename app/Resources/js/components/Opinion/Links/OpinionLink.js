@@ -1,7 +1,7 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import OpinionPreview from '../OpinionPreview';
-import {Row, Col} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
 
 const OpinionLink = React.createClass({
@@ -11,7 +11,7 @@ const OpinionLink = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    const {link} = this.props;
+    const { link } = this.props;
     const classes = classNames({
       'opinion': true,
       'block--bordered': true,

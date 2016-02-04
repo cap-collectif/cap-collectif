@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Modal, Input, Button} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Modal, Input, Button } from 'react-bootstrap';
 
 import ElementsFinder from './ElementsFinder';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
@@ -98,7 +98,7 @@ const CreateModal = React.createClass({
 
   expandItem(element) {
     const expanded = this.state.expanded;
-    expanded[element.id] = this.state.expanded[element.id] ? false : true;
+    expanded[element.id] = !this.state.expanded[element.id];
     this.setState({
       expanded: expanded,
     });

@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage, FormattedDate} from 'react-intl';
-import {Label} from 'react-bootstrap';
+import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
+import { Label } from 'react-bootstrap';
 import classNames from 'classnames';
 import moment from 'moment';
 import UserAvatar from '../../User/UserAvatar';
@@ -98,7 +98,7 @@ const ProposalPageHeader = React.createClass({
             </div>
           </li>
           {proposal.status
-            ? <li style={{fontSize: 26, paddingTop: 5}}>
+            ? <li style={{ fontSize: 26, paddingTop: 5 }}>
                 <Label bsSize="large" bsStyle={proposal.status.color}>{proposal.status.name}</Label>
               </li>
             : null

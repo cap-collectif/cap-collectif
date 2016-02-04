@@ -1,7 +1,7 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Nav, NavItem} from 'react-bootstrap';
-import {NavItemLink} from 'react-router-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Nav, NavItem } from 'react-bootstrap';
+import { NavItemLink } from 'react-router-bootstrap';
 
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
@@ -52,7 +52,7 @@ const SideMenu = React.createClass({
   selectItem(element) {
     SynthesisElementActions.selectNavItem(element.id);
     if (element.id !== 'root') {
-      this.transitionTo('show_element', {'element_id': element.id});
+      this.transitionTo('show_element', { 'element_id': element.id });
     }
   },
 
@@ -157,4 +157,3 @@ const SideMenu = React.createClass({
 });
 
 export default SideMenu;
-

@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin, FormattedNumber} from 'react-intl';
+import { IntlMixin, FormattedNumber } from 'react-intl';
 
 const ProposalPreviewEstimation = React.createClass({
   propTypes: {

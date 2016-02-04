@@ -1,11 +1,11 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import ElementTitle from './ElementTitle';
 import UserAvatar from '../User/UserAvatar';
 import VotePiechart from '../Utils/VotePiechart';
 import ChildrenModal from './ChildrenModal';
 import SynthesisDisplayRules from '../../services/SynthesisDisplayRules';
-import {Tooltip, OverlayTrigger} from 'react-bootstrap';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 const ViewElement = React.createClass({
   propTypes: {
@@ -58,7 +58,7 @@ const ViewElement = React.createClass({
     if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'author')) {
       return (
         <div className="synthesis__element__author">
-          <UserAvatar className="pull-left" style={{marginRight: '15px', marginTop: '15px'}} />
+          <UserAvatar className="pull-left" style={{ marginRight: '15px', marginTop: '15px' }} />
           <span>
             {this.props.element.authorName}
           </span>
@@ -80,7 +80,7 @@ const ViewElement = React.createClass({
             nok={votes[-1] || 0}
             mitige={votes[0] || 0}
           />
-          <p style={{textAlign: 'center'}}>
+          <p style={{ textAlign: 'center' }}>
             <FormattedMessage
               message={this.getIntlMessage('vote.total')}
               nb={(votes[-1] || 0) + (votes[0] || 0) + (votes[1] || 0)}
@@ -102,7 +102,7 @@ const ViewElement = React.createClass({
           />
           {this.props.element.linkedDataUrl
             ? <a
-                style={{marginLeft: '15px'}}
+                style={{ marginLeft: '15px' }}
                 href={this.props.element.linkedDataUrl}
                 onClick={this.openOriginalContribution}
             >
@@ -187,7 +187,7 @@ const ViewElement = React.createClass({
         <div className="synthesis__element">
           <OverlayTrigger placement="top" overlay={tooltip}>
             <div className="synthesis__element__bar">
-              <span className="synthesis__element__bar__value" style={{width: percentage + '%'}} />
+              <span className="synthesis__element__bar__value" style={{ width: percentage + '%' }} />
               {this.renderTitle()}
             </div>
           </OverlayTrigger>

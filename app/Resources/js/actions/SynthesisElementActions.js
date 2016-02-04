@@ -1,8 +1,8 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
 import * as Actions from '../constants/SynthesisElementActionsConstants';
-import {NAV_DEPTH} from '../constants/SynthesisElementConstants';
-import {DISMISS_MESSAGE} from '../constants/MessageConstants';
+import { NAV_DEPTH } from '../constants/SynthesisElementConstants';
+import { DISMISS_MESSAGE } from '../constants/MessageConstants';
 
 const idOf = (val) => {
   if (val === 'root') {
@@ -138,8 +138,7 @@ export default {
         });
         return true;
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
         AppDispatcher.dispatch({
           actionType: Actions.RECEIVE_ELEMENTS_FAILURE,
           type: type + 'Tree',

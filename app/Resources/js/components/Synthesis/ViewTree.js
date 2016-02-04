@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
 import ViewElement from './ViewElement';
@@ -118,7 +118,7 @@ const ViewTree = React.createClass({
               />
             }
           </span>
-          <i style={{marginLeft: '5px'}} className={classes}></i>
+          <i style={{ marginLeft: '5px' }} className={classes}></i>
         </div>
       );
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
@@ -47,7 +47,7 @@ const FolderManager = React.createClass({
       SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, 'notIgnored', element.id);
     }
     const expanded = this.state.expanded;
-    expanded[element.id] = this.state.expanded[element.id] ? false : true;
+    expanded[element.id] = !this.state.expanded[element.id];
     this.setState({
       expanded: expanded,
     });
@@ -155,4 +155,3 @@ const FolderManager = React.createClass({
 });
 
 export default FolderManager;
-

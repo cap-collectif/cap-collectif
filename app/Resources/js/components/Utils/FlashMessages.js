@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Alert} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Alert } from 'react-bootstrap';
 
 const FlashMessages = React.createClass({
   propTypes: {
@@ -51,7 +51,7 @@ const FlashMessages = React.createClass({
   },
 
   render() {
-    if (this.props.errors.length > 0 || this.props.success.length > 0 ) {
+    if (this.props.errors.length > 0 || this.props.success.length > 0) {
       return (
         <div className="flashmessages">
           {

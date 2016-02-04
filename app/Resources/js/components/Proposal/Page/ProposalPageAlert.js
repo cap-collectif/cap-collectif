@@ -1,6 +1,6 @@
 import React from 'react';
-import {Alert} from 'react-bootstrap';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { Alert } from 'react-bootstrap';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 
 const ProposalPageAlert = React.createClass({
   propTypes: {
@@ -14,7 +14,7 @@ const ProposalPageAlert = React.createClass({
       return (
         <Alert
           bsStyle="warning"
-          style={{marginBottom: '0', textAlign: 'center'}}
+          style={{ marginBottom: '0', textAlign: 'center' }}
         >
           <strong>{this.getIntlMessage('proposal.trashed.label')}</strong>
           {

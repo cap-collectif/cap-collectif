@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const OpinionBodyDiffModal = React.createClass({
   propTypes: {
@@ -45,7 +45,7 @@ const OpinionBodyDiffModal = React.createClass({
             <p className="small excerpt">
               {this.getIntlMessage('opinion.diff.infos')}
             </p>
-            <div className="diff" dangerouslySetInnerHTML={{__html: this.props.modal.diff }} />
+            <div className="diff" dangerouslySetInnerHTML={{ __html: this.props.modal.diff }} />
           </Modal.Body>
           <Modal.Footer>
             <Button bsStyle="primary" onClick={() => this.close()}>{this.getIntlMessage('global.close')}</Button>

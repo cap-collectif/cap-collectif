@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Row, Col} from 'react-bootstrap';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { Row, Col } from 'react-bootstrap';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import OpinionStore from '../../stores/OpinionStore';
 import OpinionActions from '../../actions/OpinionActions';
 import OpinionArgumentItem from './OpinionArgumentItem';
@@ -83,7 +83,7 @@ const OpinionArgumentList = React.createClass({
   },
 
   loadArguments() {
-    this.setState({'isLoading': true});
+    this.setState({ 'isLoading': true });
     const type = this.getNumericType();
     OpinionActions.loadArguments(
       this.props.opinion,

@@ -193,7 +193,7 @@ const App = (($) => {
 
   const pieChart = () => {
     if (typeof(google) !== 'undefined') {
-      google.load('visualization', '1', {packages: ['corechart']});
+      google.load('visualization', '1', { packages: ['corechart'] });
       google.setOnLoadCallback(() => {
         $('.has-chart').googleCharts();
       });
@@ -240,7 +240,7 @@ const App = (($) => {
     });
   };
 
-  const showMap = (container) =>{
+  const showMap = (container) => {
     const $mapCanvas = $(container);
     $mapCanvas.each((index, el) => {
       // Map

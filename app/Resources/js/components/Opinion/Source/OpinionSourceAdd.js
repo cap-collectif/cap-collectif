@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-import {IntlMixin} from 'react-intl';
+import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 
 import OpinionSourceAddButton from './OpinionSourceAddButton';
 import OpinionSourceFormModal from './OpinionSourceFormModal';
@@ -24,11 +24,11 @@ const OpinionSourceAdd = React.createClass({
   },
 
   close() {
-    this.setState({showModal: false});
+    this.setState({ showModal: false });
   },
 
   show() {
-    this.setState({showModal: true});
+    this.setState({ showModal: true });
   },
 
   render() {

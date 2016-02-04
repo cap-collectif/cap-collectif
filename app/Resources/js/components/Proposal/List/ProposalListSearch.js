@@ -1,9 +1,9 @@
 import React from 'react';
 import ProposalActions from '../../../actions/ProposalActions';
 import Input from '../../Form/Input';
-import {Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 
 const ProposalListSearch = React.createClass({
   propTypes: {

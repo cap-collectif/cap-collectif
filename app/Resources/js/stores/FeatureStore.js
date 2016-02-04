@@ -1,5 +1,5 @@
 import BaseStore from './BaseStore';
-import {RECEIVE_FEATURES} from '../constants/FeatureConstants';
+import { RECEIVE_FEATURES } from '../constants/FeatureConstants';
 
 class FeatureStore extends BaseStore {
 
@@ -11,12 +11,12 @@ class FeatureStore extends BaseStore {
 
   _registerToActions(action) {
     switch (action.actionType) {
-    case RECEIVE_FEATURES:
-      this._features = action.features;
-      this.emitChange();
-      break;
-    default:
-      break;
+      case RECEIVE_FEATURES:
+        this._features = action.features;
+        this.emitChange();
+        break;
+      default:
+        break;
     }
   }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import OpinionVersion from './OpinionVersion';
 
 const OpinionVersionList = React.createClass({
@@ -21,7 +21,7 @@ const OpinionVersionList = React.createClass({
     }
 
     return (
-      <ul className="media-list" style={{ marginTop: '20px'}}>
+      <ul className="media-list" style={{ marginTop: '20px' }}>
         {
           this.props.versions.map((version) => {
             return <OpinionVersion key={version.id} version={version} rankingThreshold={this.props.rankingThreshold} />;

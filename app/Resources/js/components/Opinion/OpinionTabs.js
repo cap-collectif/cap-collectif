@@ -1,8 +1,8 @@
 import React from 'react';
-import {Tabs, Tab} from 'react-bootstrap';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { Tabs, Tab } from 'react-bootstrap';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 
-import {COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH} from '../../constants/ArgumentConstants';
+import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
 import OpinionArgumentsBox from './OpinionArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourceBox from './Source/OpinionSourceBox';
@@ -136,7 +136,7 @@ const OpinionTabs = React.createClass({
   },
 
   render() {
-    const {opinion} = this.props;
+    const { opinion } = this.props;
 
     if (this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() + this.isLinkable() > 1) {
       // at least two tabs

@@ -1,9 +1,9 @@
 import React from 'react';
-import {IntlMixin, FormattedMessage} from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalActions from '../../../actions/ProposalActions';
-import {Modal} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const ProposalDeleteModal = React.createClass({
   propTypes: {
@@ -21,14 +21,14 @@ const ProposalDeleteModal = React.createClass({
   },
 
   handleSubmit() {
-    this.setState({isSubmitting: true});
+    this.setState({ isSubmitting: true });
     ProposalActions
       .delete(this.props.form.id, this.props.proposal.id)
       .then(() => {
         window.location.href = this.props.proposal._links.index;
       })
       .catch(() => {
-        this.setState({isSubmitting: false});
+        this.setState({ isSubmitting: false });
       })
     ;
   },

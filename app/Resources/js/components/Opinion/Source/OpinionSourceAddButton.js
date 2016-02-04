@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import {Button} from 'react-bootstrap';
-import {IntlMixin} from 'react-intl';
+import React, { PropTypes } from 'react';
+import { Button } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 import LoginStore from '../../../stores/LoginStore';
 import LoginOverlay from '../../Utils/LoginOverlay';
 

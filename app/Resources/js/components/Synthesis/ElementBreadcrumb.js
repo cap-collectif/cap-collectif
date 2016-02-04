@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ElementTitle from './ElementTitle';
 
 const ElementBreadcrumb = React.createClass({

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import Quill from 'quill';
 import QuillToolbar from './QuillToolbar';
@@ -73,7 +73,7 @@ const Editor = React.createClass({
     return (
       <div id={this.props.id} className={classNames(classes)}>
         <QuillToolbar ref="toolbar" />
-        <div ref="editor" style={{position: 'static'}} />
+        <div ref="editor" style={{ position: 'static' }} />
       </div>
     );
   },

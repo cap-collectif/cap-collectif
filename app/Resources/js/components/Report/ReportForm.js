@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-import {IntlMixin} from 'react-intl';
+import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import FormMixin from '../../utils/FormMixin';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 import FlashMessages from '../Utils/FlashMessages';
@@ -20,11 +20,11 @@ const ReportForm = React.createClass({
         body: '',
       },
       statuses: [
-        {id: 0, label: 'reporting.status.sexual'},
-        {id: 1, label: 'reporting.status.offending'},
-        {id: 2, label: 'reporting.status.spam'},
-        {id: 3, label: 'reporting.status.error'},
-        {id: 4, label: 'reporting.status.off_topic'},
+        { id: 0, label: 'reporting.status.sexual' },
+        { id: 1, label: 'reporting.status.offending' },
+        { id: 2, label: 'reporting.status.spam' },
+        { id: 3, label: 'reporting.status.error' },
+        { id: 4, label: 'reporting.status.off_topic' },
       ],
       errors: {
         status: [],
@@ -34,7 +34,7 @@ const ReportForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    const {onValidationFailure, onValidationSuccess} = this.props;
+    const { onValidationFailure, onValidationSuccess } = this.props;
     if (nextProps.isSubmitting) {
       if (this.isValid()) {
         onValidationSuccess(this.state.form);
@@ -47,11 +47,11 @@ const ReportForm = React.createClass({
 
   formValidationRules: {
     body: {
-      min: {value: 2, message: 'source.constraints.body'},
-      notBlank: {message: 'source.constraints.body'},
+      min: { value: 2, message: 'source.constraints.body' },
+      notBlank: { message: 'source.constraints.body' },
     },
     status: {
-      notBlank: {message: 'source.constraints.category'},
+      notBlank: { message: 'source.constraints.category' },
     },
   },
 

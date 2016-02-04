@@ -30,6 +30,7 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
 # Install nodejs and deps for npm install
 RUN curl https://deb.nodesource.com/node_5.x/pool/main/n/nodejs/nodejs_5.1.1-1nodesource1~jessie1_amd64.deb > node.deb && \
     dpkg -i node.deb && \
+    npm set progress=false && \
     rm node.deb
 
 # Update npm and install bower

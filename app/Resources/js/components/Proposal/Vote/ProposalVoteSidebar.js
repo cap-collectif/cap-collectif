@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Col, Button} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Col, Button } from 'react-bootstrap';
 import classNames from 'classnames';
 
 import StepsList from '../../Steps/StepsList';
@@ -44,7 +44,7 @@ const ProposalVoteSidebar = React.createClass({
           <StepsList
             steps={[this.props.votableStep]}
             votes={proposal.votesCountBySelectionSteps}
-            style={{borderBottom: '0'}}
+            style={{ borderBottom: '0' }}
           />
           <ProposalVoteBox
             proposal={proposal}

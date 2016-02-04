@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IntlMixin} from 'react-intl';
-import {Button} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Button } from 'react-bootstrap';
 import autosize from 'autosize';
 
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
@@ -29,9 +29,9 @@ const OpinionArgumentForm = React.createClass({
   componentDidMount() {
     this.initForm('form', {
       body: {
-        notBlank: {message: 'argument.constraints.min'},
-        min: {value: 3, message: 'argument.constraints.min'},
-        max: {value: 2000, message: 'argument.constraints.max'},
+        notBlank: { message: 'argument.constraints.min' },
+        min: { value: 3, message: 'argument.constraints.min' },
+        max: { value: 2000, message: 'argument.constraints.max' },
       },
     });
   },
@@ -41,12 +41,12 @@ const OpinionArgumentForm = React.createClass({
   },
 
   create() {
-    this.setState({submitted: true}, () => {
+    this.setState({ submitted: true }, () => {
       if (!this.isValid()) {
         return;
       }
 
-      this.setState({isSubmitting: true});
+      this.setState({ isSubmitting: true });
 
       const data = {
         body: this.state.body,
@@ -61,7 +61,7 @@ const OpinionArgumentForm = React.createClass({
           return true;
         })
         .catch(() => {
-          this.setState({isSubmitting: false, submitted: false});
+          this.setState({ isSubmitting: false, submitted: false });
         });
     });
   },

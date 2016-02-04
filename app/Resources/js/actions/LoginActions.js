@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
-import {LOGIN_USER, LOGOUT_USER} from '../constants/LoginConstants';
+import { LOGIN_USER, LOGOUT_USER } from '../constants/LoginConstants';
 
 export default {
 

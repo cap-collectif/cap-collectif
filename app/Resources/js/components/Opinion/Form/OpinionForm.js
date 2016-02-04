@@ -1,5 +1,5 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
@@ -94,15 +94,15 @@ const OpinionForm = React.createClass({
 
   formValidationRules: {
     type: {
-      notNull: {message: 'opinion.link.constraints.type'},
+      notNull: { message: 'opinion.link.constraints.type' },
     },
     title: {
-      min: {value: 2, message: 'opinion.constraints.title'},
-      notBlank: {message: 'opinion.constraints.title'},
+      min: { value: 2, message: 'opinion.constraints.title' },
+      notBlank: { message: 'opinion.constraints.title' },
     },
     body: {
-      min: {value: 2, message: 'opinion.constraints.body'},
-      notBlank: {message: 'opinion.constraints.body'},
+      min: { value: 2, message: 'opinion.constraints.body' },
+      notBlank: { message: 'opinion.constraints.body' },
     },
   },
 

@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
-import {Label} from 'react-bootstrap';
+import React, { PropTypes } from 'react';
+import { Label } from 'react-bootstrap';
 
-const OpinionSourceTitle = ({source}) => {
+const OpinionSourceTitle = ({ source }) => {
   return (
     <h3 className="opinion__title">
       <Label bsStyle="primary">

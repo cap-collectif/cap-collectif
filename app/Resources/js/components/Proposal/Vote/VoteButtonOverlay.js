@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const VoteButtonOverlay = React.createClass({
   propTypes: {

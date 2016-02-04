@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import {IntlMixin} from 'react-intl';
-import {Alert} from 'react-bootstrap';
+import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
+import { Alert } from 'react-bootstrap';
 
 const AlertAutoDismissable = React.createClass({
   propTypes: {

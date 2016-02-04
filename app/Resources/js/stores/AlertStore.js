@@ -1,5 +1,5 @@
 import BaseStore from './BaseStore';
-import {UPDATE_ALERT} from '../constants/AlertConstants';
+import { UPDATE_ALERT } from '../constants/AlertConstants';
 
 class AlertStore extends BaseStore {
 
@@ -11,12 +11,12 @@ class AlertStore extends BaseStore {
 
   _registerToActions(action) {
     switch (action.actionType) {
-    case UPDATE_ALERT:
-      this._alert = action.alert;
-      this.emitChange();
-      break;
-    default:
-      break;
+      case UPDATE_ALERT:
+        this._alert = action.alert;
+        this.emitChange();
+        break;
+      default:
+        break;
     }
   }
 

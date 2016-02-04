@@ -1,10 +1,10 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import NotationButtons from './NotationButtons';
 import ElementsFinder from './ElementsFinder';
-import {Button, Modal, Input} from 'react-bootstrap';
+import { Button, Modal, Input } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 
 const PublishModal = React.createClass({
@@ -133,12 +133,12 @@ const PublishModal = React.createClass({
       return;
     }
     SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
-    this.transitionTo('inbox', {'type': 'new'});
+    this.transitionTo('inbox', { 'type': 'new' });
   },
 
   expandItem(element) {
     const expanded = this.state.expanded;
-    expanded[element.id] = this.state.expanded[element.id] ? false : true;
+    expanded[element.id] = !this.state.expanded[element.id];
     this.setState({
       expanded: expanded,
     });
