@@ -164,6 +164,10 @@ export default {
       more: 'Voir plus',
       name: 'Nom ',
       or: 'OU',
+      pinned: {
+        label: 'Épinglé',
+        tooltip: 'Ce commentaire a été épinglé par l\'administrateur.',
+      },
       preview: 'Aperçu',
       publish: 'Publier',
       read_more: 'Afficher la suite',

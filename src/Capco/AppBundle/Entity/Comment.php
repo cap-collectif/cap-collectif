@@ -147,6 +147,11 @@ abstract class Comment implements VotableInterface, HasAuthorInterface
      */
     protected $trashedReason = null;
 
+    /**
+     * @ORM\Column(name="pinned", type="boolean")
+     */
+    protected $pinned = false;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
@@ -258,6 +263,11 @@ abstract class Comment implements VotableInterface, HasAuthorInterface
     public function setAuthor($Author)
     {
         $this->Author = $Author;
+        if ($Author->isVip()) {
+            $this->setPinned(true);
+        } else {
+            $this->setPinned(false);
+        }
 
         return $this;
     }
@@ -476,6 +486,25 @@ abstract class Comment implements VotableInterface, HasAuthorInterface
     public function setTrashedReason($trashedReason)
     {
         $this->trashedReason = $trashedReason;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPinned()
+    {
+        return $this->pinned;
+    }
+
+    /**
+     * @param mixed $pinned
+     * @return $this
+     */
+    public function setPinned($pinned)
+    {
+        $this->pinned = $pinned;
 
         return $this;
     }
