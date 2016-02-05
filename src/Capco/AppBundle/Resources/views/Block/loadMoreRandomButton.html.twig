@@ -1,0 +1,5 @@
+ <div class="text-center">
+    <a class="btn btn-primary" href="{{ path(route, params | merge( { opinionsSort: 'random' })) }}">
+        {{ 'opinion.sort.load_more_random' | trans({}, 'CapcoAppBundle') }}
+    </a>
+</div>

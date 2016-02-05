@@ -659,16 +659,18 @@ opinion:
     submit: Signaler
     reported: Signalé
   sort:
-    positions: Ordre de publication
-    last: Les plus récents
-    old: Les plus anciens
-    votes: Les plus votés
-    favorable: Les plus favorables
-    comments: Les plus commentés
     label: Trier par
     label_sr: Trier "%name%" par
+    load_more_random: Voir plus de propositions aléatoires
+    comments: Les plus commentés
+    favorable: Les plus favorables
+    last: Les plus récents
+    old: Les plus anciens
+    positions: Ordre de publication
+    random: Tri aléatoire
     sort_by: Trier "%name%" selon "%sortOrder%"
     sorted_by: Trié selon "%sortOrder%"
+    votes: Les plus votés
   error:
     not_found: Proposition introuvable.
     not_author: Vous ne pouvez pas modifier cette proposition car vous n'en êtes pas l'auteur.

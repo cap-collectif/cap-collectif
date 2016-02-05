@@ -142,6 +142,7 @@ export default {
       filter_last: 'Récents',
       filter_old: 'Anciens',
       filter_popular: 'Populaires',
+      filter_random: 'Tri aléatoire',
       filter_votes: 'Votés',
       fullname: 'Nom complet *',
       hidden_email: 'Adresse électronique (cachée) *',
