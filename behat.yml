@@ -85,6 +85,7 @@ api:
             paths:    true
             snippets: true
     extensions:
+        #Tonic\Behat\ParallelScenarioExtension: ~
         Behat\Symfony2Extension: ~
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp

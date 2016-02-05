@@ -22,8 +22,8 @@ class ProjectStatsPage extends Page
         'user type stats items' => '#stats-21-userTypes .stats__list__row',
         'costs stats items' => '#stats-21-costs .stats__list__row',
         'votes stats items' => '#stats-9-votes .stats__list__row',
-        'theme filter select' => '#stats-9-votes .stats__filter--themes',
-        'district filter select' => '#stats-9-votes .stats__filter--districts',
+        'theme filter button' => '#stats-9-votes .stats__filter--themes',
+        'district filter button' => '#stats-9-votes .stats__filter--districts',
     ];
 
     public function getThemeStatsItemsSelector()
@@ -61,13 +61,13 @@ class ProjectStatsPage extends Page
         return $this->getSelector('district stats modal items');
     }
 
-    public function filterByTheme()
+    public function getThemeFilterSelector()
     {
-        return $this->getElement('theme filter select')->selectOption('Justice');
+        return $this->getSelector('theme filter button');
     }
 
-    public function filterByDistrict()
+    public function getDistrictFilterSelector()
     {
-        return $this->getElement('district filter select')->selectOption('Beauregard');
+        return $this->getSelector('district filter button');
     }
 }

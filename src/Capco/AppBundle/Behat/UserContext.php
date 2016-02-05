@@ -47,6 +47,16 @@ class UserContext extends DefaultContext
     }
 
     /**
+     * @When I vote for the first source
+     */
+    public function iVoteForTheFirstSource()
+    {
+        $page = $this->navigationContext->getPage('opinion page');
+        $this->getSession()->wait(3000, "$('".$page->getSelector('Vote first source')."').length > 0");
+        $page->voteForFirstSource();
+    }
+
+    /**
      * @When I go on the sources tab
      */
     public function iGoOnTheSourcesTab()

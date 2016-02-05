@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0dd201f300891a8173d1eab470f3907d",
-    "content-hash": "4929e628d16a59d3c7a4e79463a1309c",
+    "hash": "42f929926be056e7d587091ec090e54b",
+    "content-hash": "55b8f42a1fc59df7ab4b95ccfcc8b642",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -4102,7 +4102,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/34a171da0686721eeab3f94cb2aa84533a2d777e",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/ee5098f6115380ee4e4ccccd76a6e564045e0e1c",
                 "reference": "71b66d90e946ee5496ed54f3d3b78ab0f070a7ac",
                 "shasum": ""
             },
@@ -4867,7 +4867,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/c8292e48b0d3c571e3b535c2e22baffe6411280f",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/a9671d98f51b7b983808879f9e787ad277dfc40a",
                 "reference": "5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
                 "shasum": ""
             },
@@ -8396,6 +8396,79 @@
             ],
             "description": "A Docker PHP client",
             "time": "2014-05-02 08:33:00"
+        },
+        {
+            "name": "tonicforhealth/behat-parallel-scenario",
+            "version": "v1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tonicforhealth/behat-parallel-scenario.git",
+                "reference": "cfdfbac257aeca537b50d9793dd9ce2acf2080a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tonicforhealth/behat-parallel-scenario/zipball/cfdfbac257aeca537b50d9793dd9ce2acf2080a5",
+                "reference": "cfdfbac257aeca537b50d9793dd9ce2acf2080a5",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "3.*",
+                "tonicforhealth/parallel-process-runner": "1.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.1.*",
+                "symfony/finder": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tonic\\Behat\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "oleksii.storozhylov",
+                    "email": "oleksii.storozhylov@tonicforhealth.com"
+                }
+            ],
+            "time": "2015-12-15 15:12:56"
+        },
+        {
+            "name": "tonicforhealth/parallel-process-runner",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tonicforhealth/parallel-process-runner.git",
+                "reference": "9adce2e7f2f48b102a6983ddc7cb1bc46c96db85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tonicforhealth/parallel-process-runner/zipball/9adce2e7f2f48b102a6983ddc7cb1bc46c96db85",
+                "reference": "9adce2e7f2f48b102a6983ddc7cb1bc46c96db85",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/event-dispatcher": ">2.7 <= 3",
+                "symfony/process": ">2.7 <= 3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tonic\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "oleksii.storozhylov",
+                    "email": "oleksii.storozhylov@tonicforhealth.com"
+                }
+            ],
+            "time": "2015-12-11 15:47:41"
         }
     ],
     "aliases": [

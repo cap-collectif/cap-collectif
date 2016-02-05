@@ -2,7 +2,7 @@ Feature: Comments
 
 # Update
 
-  @javascript @database @circle
+  @javascript @database
 Scenario: Author of a comment loose their votes when updating it
   Given feature "ideas" is enabled
   And I am logged in as user
@@ -28,7 +28,7 @@ Scenario: Non author of a comment wants to update it
   And I wait 1 seconds
   Then I should not see "Modifier"
 
-  @javascript @circle
+  @javascript
 Scenario: Author of a comment try to update it without checking the confirm checkbox
   Given feature "ideas" is enabled
   And I am logged in as user

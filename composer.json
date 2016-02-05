@@ -87,7 +87,8 @@
         "jolicode/jolinotif": "^1.0",
         "phpunit/phpunit": "@stable",
         "pyrech/composer-changelogs": "^1.2",
-        "alexandresalome/mailcatcher": "^1.0"
+        "alexandresalome/mailcatcher": "^1.0",
+        "tonicforhealth/behat-parallel-scenario": "^1.0"
     },
     "scripts": {
         "post-install-cmd": [],

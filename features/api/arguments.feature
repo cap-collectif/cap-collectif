@@ -2,6 +2,7 @@ Feature: Arguments
 
 ## List
 
+  @parallel-scenario
   Scenario: API client wants to list arguments of an opinion
     When I send a GET request to "/api/opinions/2/arguments"
     Then the JSON response status code should be 200
@@ -46,6 +47,7 @@ Feature: Arguments
     }
     """
 
+  @parallel-scenario
   Scenario: API client wants to list arguments of an opinion version
     When I send a GET request to "/api/versions/1/arguments"
     Then the JSON response status code should be 200
@@ -94,7 +96,7 @@ Feature: Arguments
 
   ### As an Anonymous
 
-  @database
+  @parallel-scenario
   Scenario: Anonymous API client wants to vote for an argument
     When I send a POST request to "/api/arguments/1/votes" with json:
     """

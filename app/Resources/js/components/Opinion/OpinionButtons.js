@@ -9,7 +9,6 @@ import LoginStore from '../../stores/LoginStore';
 import OpinionVersionForm from './OpinionVersionForm';
 import OpinionReportButton from './OpinionReportButton';
 import { ButtonToolbar, Button } from 'react-bootstrap';
-import OpinionDelete from './Delete/OpinionDelete';
 
 const OpinionButtons = React.createClass({
   propTypes: {
@@ -129,7 +128,6 @@ const OpinionButtons = React.createClass({
         {this.isContribuable() ? <LoginOverlay children={ this.renderVoteButton('ok') } /> : null}
         {this.isContribuable() ? <LoginOverlay children={ this.renderVoteButton('mitige') } /> : null}
         {this.isContribuable() ? <LoginOverlay children={ this.renderVoteButton('nok') } /> : null}
-        <OpinionDelete opinion={opinion} />
         {this.renderEditButton()}
         <OpinionReportButton opinion={opinion} />
         <ShareButtonDropdown className="pull-right" title={opinion.title} url={opinion._links.show} />

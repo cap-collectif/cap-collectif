@@ -96,7 +96,7 @@ const OpinionTabs = React.createClass({
 
   isLinkable() {
     const type = this.getType();
-    return this.isVersion() ? false : type.linkable;
+    return type !== 'undefined' ? type.linkable : false;
   },
 
   isSourceable() {

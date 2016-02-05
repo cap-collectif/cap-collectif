@@ -95,7 +95,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
 
   ## Add a comment
 
-  @database @javascript @circle
+  @database @javascript
   Scenario: Anonymous wants to comment an idea
     Given I visited "idea page" with:
      | slug | ideacommentable |
@@ -111,7 +111,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
     And I wait 5 seconds
     Then I should see "J'ai un truc à dire de la part de Naruto" in the ".opinion__list" element
 
-  @database @javascript @circle
+  @database @javascript
   Scenario: Logged in user wants to comment an idea
     Given I am logged in as user
     Given I visited "idea page" with:

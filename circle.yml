@@ -29,7 +29,6 @@ test:
         - fab testing.qa.checkcs
     post:
         - docker ps
-        - fab testing.infrastructure.logs
         - docker stop $(docker ps -a -q)
         - fab testing.circle.save_logs
 

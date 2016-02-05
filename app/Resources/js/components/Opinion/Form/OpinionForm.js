@@ -10,7 +10,7 @@ import ArrayHelper from '../../../services/ArrayHelper';
 const OpinionForm = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
-    action: React.PropTypes.string.isRequired,
+    action: React.PropTypes.bool.isRequired,
     availableTypes: React.PropTypes.array.isRequired,
     isSubmitting: React.PropTypes.bool.isRequired,
     onValidationFailure: React.PropTypes.func.isRequired,
