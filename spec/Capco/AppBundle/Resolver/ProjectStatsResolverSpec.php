@@ -3,105 +3,509 @@
 namespace spec\Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalVote;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Repository\SelectionStepRepository;
-use Capco\UserBundle\Entity\User;
-use PhpSpec\ObjectBehavior;
+use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\DistrictRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ProposalVoteRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
+use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\UserBundle\Repository\UserTypeRepository;
+use PhpSpec\ObjectBehavior;
 
-class ProposalVotesResolverSpec extends ObjectBehavior
+class ProjectStatsResolverSpec extends ObjectBehavior
 {
-    function let(ProposalVoteRepository $proposalVoteRepository, SelectionStepRepository $selectionStepRepository)
-    {
-        $this->beConstructedWith($proposalVoteRepository, $selectionStepRepository);
+    function let(
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo
+    ) {
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Resolver\ProposalVotesResolver');
+        $this->shouldHaveType('Capco\AppBundle\Resolver\ProjectStatsResolver');
     }
 
-    function it_can_tell_if_proposal_has_vote(ProposalVote $vote1, ProposalVote $vote2, Proposal $proposal1, Proposal $proposal2)
+    function it_can_get_themes_with_proposals_count_for_step(
+        CollectStep $cs,
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
     {
-        $arrayProposal1 = [
-            'id' => 1,
-        ];
-        $arrayProposal2 = [
-            'id' => 2,
-        ];
-        $proposal1->getId()->willReturn(1);
-        $proposal2->getId()->willReturn(2);
-        $vote1->getProposal()->willReturn($proposal1);
-        $vote2->getProposal()->willReturn($proposal1);
-        $usersVotesForSelectionStep = [$vote1, $vote2];
+        $cs->getProposalsCount()->willReturn(100);
+        $themeRepo->getThemesWithProposalsCountForStep($cs, null)
+            ->willReturn([
+                [
+                    'name' => 'Thème 1',
+                    'value' => 40,
+                ],
+                [
+                    'name' => 'Thème 2',
+                    'value' => 60
+                ],
+        ]);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->getThemesWithProposalsCountForStep($cs)
+            ->shouldReturn([
+                [
+                    'name' => 'Thème 1',
+                    'value' => 40,
+                    'percentage' => 40.0,
+                ],
+                [
+                    'name' => 'Thème 2',
+                    'value' => 60,
+                    'percentage' => 60.0,
+                ],
+        ]);
 
-        $this->proposalHasVote($arrayProposal1, $usersVotesForSelectionStep)->shouldReturn(true);
-        $this->proposalHasVote($arrayProposal2, $usersVotesForSelectionStep)->shouldReturn(false);
     }
 
-    function it_can_tell_if_vote_is_possible(ProposalVoteRepository $proposalVoteRepository, SelectionStepRepository $selectionStepRepository, SelectionStep $selectionStep1, SelectionStep $selectionStep2, User $user1, Proposal $proposal, ProposalVote $otherVote1, ProposalVote $otherVote2, Project $project1, Project $project2, Proposal $proposal1, Proposal $proposal2, ProposalVote $vote1, ProposalVote $vote2, ProposalVote $vote3)
+    function it_can_count_themes(
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
     {
-        $proposal1->getEstimation()->willReturn(50);
-        $proposal2->getEstimation()->willReturn(80);
-        $otherVote1->getProposal()->willReturn($proposal1);
-        $otherVote2->getProposal()->willReturn($proposal2);
-        $proposalVoteRepository->findBy([
-            'selectionStep' => $selectionStep1,
-            'user' => $user1,
-        ])->willReturn([]);
-        $proposalVoteRepository->findBy([
-            'selectionStep' => $selectionStep2,
-            'user' => $user1,
-        ])->willReturn([$otherVote1]);
-        $proposalVoteRepository->findBy([
-            'selectionStep' => $selectionStep2,
-            'email' => 'email@test.com',
-        ])->willReturn([$otherVote2]);
-        $this->beConstructedWith($proposalVoteRepository, $selectionStepRepository);
+        $themeRepo->countAll()
+            ->willReturn(12);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->countThemes()->shouldReturn(12);
 
-        $selectionStep1->getBudget()->willReturn(null);
-        $selectionStep1->isVotable()->willReturn(true);
-        $selectionStep1->isBudgetVotable()->willReturn(true);
-        $selectionStep2->getBudget()->willReturn(100);
-        $selectionStep2->isVotable()->willReturn(true);
-        $selectionStep2->isBudgetVotable()->willReturn(true);
-
-        $proposal->getEstimation()->willReturn(30);
-
-        // No budget defined
-        $vote1->getProposal()->willReturn($proposal);
-        $vote1->getUser()->willReturn($user1);
-        $vote1->getSelectionStep()->willReturn($selectionStep1);
-        $this->getAmountSpentForVotes([])->shouldReturn(0);
-        $this->voteIsPossible($vote1)->shouldReturn(true);
-
-        // Enough money left
-        $vote2->getProposal()->willReturn($proposal);
-        $vote2->getUser()->willReturn($user1);
-        $vote2->getSelectionStep()->willReturn($selectionStep2);
-        $this->getAmountSpentForVotes([$otherVote1])->shouldReturn(50);
-        $this->voteIsPossible($vote2)->shouldReturn(true);
-
-        // Not enough money left
-        $vote3->getProposal()->willReturn($proposal);
-        $vote3->getUser()->willReturn(null);
-        $vote3->getEmail()->willReturn('email@test.com');
-        $vote3->getSelectionStep()->willReturn($selectionStep2);
-        $this->getAmountSpentForVotes([$otherVote2])->shouldReturn(80);
-        $this->voteIsPossible($vote3)->shouldReturn(false);
     }
 
-    function it_can_tell_which_amount_has_been_spent_on_votes(ProposalVote $vote1, ProposalVote $vote2, Proposal $proposal1, Proposal $proposal2)
+    function it_can_get_districts_with_proposals_count_for_step(
+        CollectStep $cs,
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
     {
-        $proposal1->getEstimation()->willReturn(20);
-        $proposal2->getEstimation()->willReturn(50);
-        $vote1->getProposal()->willReturn($proposal1);
-        $vote2->getProposal()->willReturn($proposal2);
+        $cs->getProposalsCount()->willReturn(100);
+        $districtRepo->getDistrictsWithProposalsCountForStep($cs, null)
+            ->willReturn([
+                [
+                    'name' => 'Quartier 1',
+                    'value' => 40,
+                ],
+                [
+                    'name' => 'Quartier 2',
+                    'value' => 60
+                ],
+            ]);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->getDistrictsWithProposalsCountForStep($cs)
+            ->shouldReturn([
+                [
+                    'name' => 'Quartier 1',
+                    'value' => 40,
+                    'percentage' => 40.0,
+                ],
+                [
+                    'name' => 'Quartier 2',
+                    'value' => 60,
+                    'percentage' => 60.0,
+                ],
+            ]);
 
-        $this->getAmountSpentForVotes([$vote1])->shouldReturn(20);
-        $this->getAmountSpentForVotes([$vote2])->shouldReturn(50);
-        $this->getAmountSpentForVotes([$vote1, $vote2])->shouldReturn(70);
     }
+
+    function it_can_count_districts(
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
+    {
+        $districtRepo->countAll()
+            ->willReturn(12);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->countDistricts()->shouldReturn(12);
+
+    }
+
+    function it_can_get_user_type_with_proposals_count_for_step(
+        CollectStep $cs,
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
+    {
+        $cs->getProposalsCount()->willReturn(100);
+        $userTypeRepo->getUserTypesWithProposalsCountForStep($cs, null)
+            ->willReturn([
+                [
+                    'name' => 'User type 1',
+                    'value' => 40,
+                ],
+                [
+                    'name' => 'User type 2',
+                    'value' => 60
+                ],
+            ]);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->getUserTypesWithProposalsCountForStep($cs)
+            ->shouldReturn([
+                [
+                    'name' => 'User type 1',
+                    'value' => 40,
+                    'percentage' => 40.0,
+                ],
+                [
+                    'name' => 'User type 2',
+                    'value' => 60,
+                    'percentage' => 60.0,
+                ],
+            ]);
+
+    }
+
+    function it_can_count_user_types(
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
+    {
+        $userTypeRepo->countAll()
+            ->willReturn(12);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->countUserTypes()->shouldReturn(12);
+
+    }
+
+    function it_can_get_proposals_with_costs_for_step(
+        CollectStep $cs,
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
+    {
+        $proposalRepo->getTotalCostForStep($cs)->willReturn(100);
+        $proposalRepo->getProposalsWithCostsForStep($cs, null)
+            ->willReturn([
+                [
+                    'name' => 'Proposal 1',
+                    'value' => 40,
+                ],
+                [
+                    'name' => 'Proposal 2',
+                    'value' => 60
+                ],
+            ]);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->getProposalsWithCostsForStep($cs)
+            ->shouldReturn([
+                [
+                    'name' => 'Proposal 1',
+                    'value' => 40,
+                    'percentage' => 40.0,
+                ],
+                [
+                    'name' => 'Proposal 2',
+                    'value' => 60,
+                    'percentage' => 60.0,
+                ],
+            ]);
+
+    }
+
+    function it_can_get_total_cost_for_step(
+        CollectStep $cs,
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
+    {
+        $proposalRepo->getTotalCostForStep($cs)->willReturn(100);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->getTotalCostForStep($cs)->shouldReturn(100);
+
+    }
+
+    function it_can_get_proposals_with_votes_count_for_selection_step(
+        SelectionStep $ss,
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
+    {
+        $proposalVoteRepo->getVotesCountForSelectionStep($ss, null, null)->willReturn(100);
+        $proposalRepo->getProposalsWithVotesCountForSelectionStep($ss, null, null, null)
+            ->willReturn([
+                [
+                    'name' => 'Proposal 1',
+                    'value' => 40,
+                ],
+                [
+                    'name' => 'Proposal 2',
+                    'value' => 60
+                ],
+            ]);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->getProposalsWithVotesCountForSelectionStep($ss)
+            ->shouldReturn([
+                [
+                    'name' => 'Proposal 1',
+                    'value' => 40,
+                    'percentage' => 40.0,
+                ],
+                [
+                    'name' => 'Proposal 2',
+                    'value' => 60,
+                    'percentage' => 60.0,
+                ],
+            ]);
+
+    }
+
+    function it_can_get_votes_count_for_selection_step(
+        SelectionStep $ss,
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
+    {
+        $proposalVoteRepo->getVotesCountForSelectionStep($ss, null, null)->willReturn(100);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->getVotesCountForSelectionStep($ss)->shouldReturn(100);
+
+    }
+
+    function it_can_get_proposals_count_for_selection_step(
+        SelectionStep $ss,
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
+    {
+        $proposalRepo->countForSelectionStep($ss, null, null)->willReturn(100);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->getProposalsCountForSelectionStep($ss)->shouldReturn(100);
+
+    }
+
+    function it_can_add_percentage_to_array()
+    {
+        $this->addPercentages([
+                [
+                    'name' => 'Nom 1',
+                    'value' => 40,
+                ],
+                [
+                    'name' => 'Nom 2',
+                    'value' => 30,
+                ],
+            ], 100)
+        ->shouldReturn([
+            [
+                'name' => 'Nom 1',
+                'value' => 40,
+                'percentage' => 40.0,
+            ],
+            [
+                'name' => 'Nom 2',
+                'value' => 30,
+                'percentage' => 30.0,
+            ],
+        ]);
+
+        $this->addPercentages([
+            [
+                'name' => 'Nom 1',
+                'value' => 58,
+            ],
+            [
+                'name' => 'Nom 2',
+                'value' => 376,
+            ],
+        ], 960)
+            ->shouldReturn([
+                [
+                    'name' => 'Nom 1',
+                    'value' => 58,
+                    'percentage' => 6.04,
+                ],
+                [
+                    'name' => 'Nom 2',
+                    'value' => 376,
+                    'percentage' => 39.17,
+                ],
+            ]);
+    }
+
+    function it_can_tell_if_project_has_steps_with_stats(
+        Project $projectWithSteps,
+        Project $projectWithNoSteps,
+        SelectionStep $ss,
+        CollectStep $cs,
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalVoteRepository $proposalVoteRepo)
+    {
+        $selectionStepRepo
+            ->getVotableStepsForProject($projectWithSteps)
+            ->willReturn([$ss]);
+        $selectionStepRepo
+            ->getVotableStepsForProject($projectWithNoSteps)
+            ->willReturn([]);
+        $collectStepRepo
+            ->getCollectStepsForProject($projectWithSteps)
+            ->willReturn([$cs]);
+        $collectStepRepo
+            ->getCollectStepsForProject($projectWithNoSteps)
+            ->willReturn([]);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->hasStepsWithStats($projectWithSteps)->shouldReturn(true);
+        $this->hasStepsWithStats($projectWithNoSteps)->shouldReturn(false);
+
+    }
+
 }

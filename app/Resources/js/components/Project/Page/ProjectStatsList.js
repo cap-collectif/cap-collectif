@@ -1,11 +1,11 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {ListGroup, ListGroupItem} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import ProjectStatsListItem from './ProjectStatsListItem';
 import ProjectStatsModal from './ProjectStatsModal';
 import ProjectStatsFilters from './ProjectStatsFilters';
 import ProjectStatsActions from '../../../actions/ProjectStatsActions';
-import {DEFAULT_STATS_PAGINATION} from '../../../constants/ProjectStatsConstants';
+import { DEFAULT_STATS_PAGINATION } from '../../../constants/ProjectStatsConstants';
 
 const ProjectStatsList = React.createClass({
   propTypes: {
@@ -66,7 +66,7 @@ const ProjectStatsList = React.createClass({
   },
 
   render() {
-    const {data} = this.state;
+    const { data } = this.state;
 
     return (
       <div className="block" id={'stats-' + this.props.stepId + '-' + this.props.type}>

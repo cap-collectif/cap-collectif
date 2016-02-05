@@ -1,4 +1,4 @@
-import {Diff} from 'diff';
+import { Diff } from 'diff';
 
 function removeEmpty(array) {
   const ret = [];
@@ -15,11 +15,8 @@ function strip(value) {
 }
 
 function everythingHasChanged(diff) {
-  const changed = diff.every(function changed(part) {
-    if (!part.added && !part.removed && part.value !== ' ') {
-      return false;
-    }
-    return true;
+  const changed = diff.every((part) => {
+    return part.added || part.removed || part.value === ' ';
   });
   return !!changed;
 }

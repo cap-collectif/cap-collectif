@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Input, Row, Col} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Input, Row, Col } from 'react-bootstrap';
 
 const ProjectStatsFilters = React.createClass({
   propTypes: {

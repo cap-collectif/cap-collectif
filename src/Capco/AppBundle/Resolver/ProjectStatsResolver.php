@@ -6,25 +6,41 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Doctrine\ORM\EntityManager;
+use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\DistrictRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ProposalVoteRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
+use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\UserBundle\Repository\UserTypeRepository;
 
 class ProjectStatsResolver
 {
-    protected $em;
+    protected $selectionStepRepo;
+    protected $collectStepRepo;
+    protected $themeRepo;
+    protected $districtRepo;
+    protected $userTypeRepo;
+    protected $proposalRepo;
+    protected $proposalVoteRepo;
 
-    public function __construct(EntityManager $em)
+    public function __construct(SelectionStepRepository $selectionStepRepo, CollectStepRepository $collectStepRepo, ThemeRepository $themeRepo, DistrictRepository $districtRepo, UserTypeRepository $userTypeRepo, ProposalRepository $proposalRepo, ProposalVoteRepository $proposalVoteRepo)
     {
-        $this->em = $em;
+        $this->selectionStepRepo = $selectionStepRepo;
+        $this->collectStepRepo = $collectStepRepo;
+        $this->themeRepo = $themeRepo;
+        $this->districtRepo = $districtRepo;
+        $this->userTypeRepo = $userTypeRepo;
+        $this->proposalRepo = $proposalRepo;
+        $this->proposalVoteRepo = $proposalVoteRepo;
     }
 
     public function getStepsWithStatsForProject(Project $project)
     {
-        $selectionSteps = $this->em
-            ->getRepository('CapcoAppBundle:Steps\SelectionStep')
+        $selectionSteps = $this->selectionStepRepo
             ->getVotableStepsForProject($project)
         ;
-        $collectSteps = $this->em
-            ->getRepository('CapcoAppBundle:Steps\CollectStep')
+        $collectSteps = $this->collectStepRepo
             ->getCollectStepsForProject($project)
         ;
         $steps = array_merge($collectSteps, $selectionSteps);
@@ -45,7 +61,7 @@ class ProjectStatsResolver
         return $stepsWithData;
     }
 
-    protected function getStatsForStep(AbstractStep $step, $limit = null)
+    public function getStatsForStep(AbstractStep $step, $limit = null)
     {
         $stats = [];
         if ($step->getType() === 'collect') {
@@ -85,7 +101,7 @@ class ProjectStatsResolver
                 break;
             case 'costs':
                 if ($step->getType() === 'collect') {
-                    $data['values'] = $this->getProposalsWithCostForStep($step, $limit);
+                    $data['values'] = $this->getProposalsWithCostsForStep($step, $limit);
                     $data['total'] = $step->getProposalsCount();
                 }
                 break;
@@ -100,100 +116,94 @@ class ProjectStatsResolver
         return $data;
     }
 
-    protected function getThemesWithProposalsCountForStep(CollectStep $step, $limit = null)
+    public function getThemesWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
-        $data = $this->em
-            ->getRepository('CapcoAppBundle:Theme')
+        $data = $this->themeRepo
             ->getThemesWithProposalsCountForStep($step, $limit)
         ;
+
         return $this->addPercentages($data, $step->getProposalsCount());
     }
 
-    protected function countThemes()
+    public function countThemes()
     {
-        return $this->em
-            ->getRepository('CapcoAppBundle:Theme')
+        return $this->themeRepo
             ->countAll()
         ;
     }
 
-    protected function getDistrictsWithProposalsCountForStep(CollectStep $step, $limit = null)
+    public function getDistrictsWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
-        $data = $this->em
-            ->getRepository('CapcoAppBundle:District')
+        $data = $this->districtRepo
             ->getDistrictsWithProposalsCountForStep($step, $limit)
         ;
+
         return $this->addPercentages($data, $step->getProposalsCount());
     }
 
-    protected function countDistricts()
+    public function countDistricts()
     {
-        return $this->em
-            ->getRepository('CapcoAppBundle:District')
+        return $this->districtRepo
             ->countAll()
             ;
     }
 
-    protected function getUserTypesWithProposalsCountForStep(CollectStep $step, $limit = null)
+    public function getUserTypesWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
-        $data =  $this->em
-            ->getRepository('CapcoUserBundle:UserType')
+        $data = $this->userTypeRepo
             ->getUserTypesWithProposalsCountForStep($step, $limit)
         ;
+
         return $this->addPercentages($data, $step->getProposalsCount());
     }
 
-    protected function countUserTypes()
+    public function countUserTypes()
     {
-        return $this->em
-            ->getRepository('CapcoUserBundle:UserType')
+        return $this->userTypeRepo
             ->countAll()
             ;
     }
 
-    protected function getProposalsWithCostForStep(CollectStep $step, $limit = null)
+    public function getProposalsWithCostsForStep(CollectStep $step, $limit = null)
     {
-        $data = $this->em
-            ->getRepository('CapcoAppBundle:Proposal')
+        $data = $this->proposalRepo
             ->getProposalsWithCostsForStep($step, $limit)
         ;
+
         return $this->addPercentages($data, $this->getTotalCostForStep($step));
     }
 
-    protected function getTotalCostForStep(CollectStep $step)
+    public function getTotalCostForStep(CollectStep $step)
     {
-        return $this->em
-            ->getRepository('CapcoAppBundle:Proposal')
+        return $this->proposalRepo
             ->getTotalCostForStep($step)
         ;
     }
 
-    protected function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, $limit = null, $themeId = null, $districtId = null)
+    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, $limit = null, $themeId = null, $districtId = null)
     {
-        $data = $this->em
-            ->getRepository('CapcoAppBundle:Proposal')
+        $data = $this->proposalRepo
             ->getProposalsWithVotesCountForSelectionStep($step, $limit, $themeId, $districtId)
         ;
+
         return $this->addPercentages($data, $this->getVotesCountForSelectionStep($step, $themeId, $districtId));
     }
 
-    protected function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
+    public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
     {
-        return $this->em
-            ->getRepository('CapcoAppBundle:ProposalVote')
+        return $this->proposalVoteRepo
             ->getVotesCountForSelectionStep($step, $themeId, $districtId)
         ;
     }
 
-    protected function getProposalsCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
+    public function getProposalsCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
     {
-        return $this->em
-            ->getRepository('CapcoAppBundle:Proposal')
+        return $this->proposalRepo
             ->countForSelectionStep($step, $themeId, $districtId)
         ;
     }
 
-    protected function addPercentages(array $values, $base)
+    public function addPercentages(array $values, $base)
     {
         $newValues = [];
         foreach ($values as $value) {
@@ -204,11 +214,20 @@ class ProjectStatsResolver
             $value['percentage'] = $percentage;
             $newValues[] = $value;
         }
+
         return $newValues;
     }
 
     public function hasStepsWithStats(Project $project)
     {
-        return count($this->getStepsWithStatsForProject($project)) > 0;
+        $selectionSteps = $this->selectionStepRepo
+            ->getVotableStepsForProject($project)
+        ;
+        $collectSteps = $this->collectStepRepo
+            ->getCollectStepsForProject($project)
+        ;
+        $steps = array_merge($collectSteps, $selectionSteps);
+
+        return count($steps) > 0;
     }
 }

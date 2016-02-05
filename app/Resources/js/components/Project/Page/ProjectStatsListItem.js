@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin, FormattedNumber} from 'react-intl';
-import {ListGroupItem} from 'react-bootstrap';
+import { IntlMixin, FormattedNumber } from 'react-intl';
+import { ListGroupItem } from 'react-bootstrap';
 
 const ProjectStatsListItem = React.createClass({
   propTypes: {
@@ -22,10 +22,10 @@ const ProjectStatsListItem = React.createClass({
   },
 
   render() {
-    const {item} = this.props;
+    const { item } = this.props;
     return (
       <ListGroupItem className="stats__list__row">
-        <span className="stats__list__bar" style={{width: item.percentage + '%'}} />
+        <span className="stats__list__bar" style={{ width: item.percentage + '%' }} />
         <div className="stats__list__value">
           <span className="badge pull-right">
             {this.getFormattedValue()}

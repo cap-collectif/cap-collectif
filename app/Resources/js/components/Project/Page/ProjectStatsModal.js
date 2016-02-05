@@ -1,6 +1,6 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
-import {Button, Modal, ListGroup} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Button, Modal, ListGroup } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import ProjectStatsListItem from './ProjectStatsListItem';
 import ProjectStatsActions from '../../../actions/ProjectStatsActions';

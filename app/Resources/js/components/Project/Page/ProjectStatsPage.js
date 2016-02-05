@@ -1,7 +1,7 @@
 import React from 'react';
-import {IntlMixin} from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ProjectStatsList from './ProjectStatsList';
-import {ButtonToolbar, ButtonGroup, Button} from 'react-bootstrap';
+import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 
 const ProjectStatsPage = React.createClass({
   propTypes: {
