@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -106,6 +107,39 @@ class ThemeRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function getThemesWithProposalsCountForStep(CollectStep $step, $limit = null)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('t.title as name')
+            ->addSelect('(
+                SELECT COUNT(p.id) as pCount
+                FROM CapcoAppBundle:Proposal p
+                LEFT JOIN p.proposalForm pf
+                LEFT JOIN p.theme pt
+                WHERE pf.step = :step
+                AND p.enabled = true
+                AND pt.id = t.id
+            ) as value')
+            ->setParameter('step', $step)
+            ->orderBy('value', 'DESC')
+        ;
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function countAll()
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('COUNT(t.id)')
+        ;
+
+        return intval($qb->getQuery()->getSingleScalarResult());
     }
 
     protected function getIsEnabledQueryBuilder()

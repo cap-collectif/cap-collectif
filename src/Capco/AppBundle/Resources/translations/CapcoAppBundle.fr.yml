@@ -366,7 +366,8 @@ project:
         events: Évènements
         posts: Actualités
         trash: Corbeille
-        title: Informations
+        title: Informations relatives
+        stats: Statistiques
       intro:
         title: Introduction
       opinionsCount: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
@@ -388,6 +389,8 @@ project:
       title: Actualités
     remaining_days: "]-Inf, 0] Projet participatif terminé | {1} Dernier jour | ]1,Inf[ %count% jours restants"
     sources: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
+    stats:
+      title: Statistiques
     versions: "]-Inf, 1] %count% modification | ]1,Inf[ %count% modifications"
     votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
     votes_no_nb: "]-Inf, 1] vote | ]1,Inf[ votes"
@@ -659,18 +662,16 @@ opinion:
     submit: Signaler
     reported: Signalé
   sort:
-    label: Trier par
-    label_sr: Trier "%name%" par
-    load_more_random: Voir plus de propositions aléatoires
-    comments: Les plus commentés
-    favorable: Les plus favorables
+    positions: Ordre de publication
     last: Les plus récents
     old: Les plus anciens
-    positions: Ordre de publication
-    random: Tri aléatoire
+    votes: Les plus votés
+    favorable: Les plus favorables
+    comments: Les plus commentés
+    label: Trier par
+    label_sr: Trier "%name%" par
     sort_by: Trier "%name%" selon "%sortOrder%"
     sorted_by: Trié selon "%sortOrder%"
-    votes: Les plus votés
   error:
     not_found: Proposition introuvable.
     not_author: Vous ne pouvez pas modifier cette proposition car vous n'en êtes pas l'auteur.

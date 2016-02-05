@@ -34,7 +34,6 @@ class Opinion implements SelfLinkableInterface, VotableInterface
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
-        'random' => 'opinion.sort.random',
         'last' => 'opinion.sort.last',
         'old' => 'opinion.sort.old',
         'favorable' => 'opinion.sort.favorable',
@@ -78,9 +77,9 @@ class Opinion implements SelfLinkableInterface, VotableInterface
     protected $body;
 
     /**
-     * @ORM\Column(name="position", type="integer", nullable=true)
+     * @ORM\Column(name="position", type="integer")
      */
-    protected $position = null;
+    protected $position = 0;
 
     /**
      * @ORM\Column(name="versions_count", type="integer")

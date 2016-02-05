@@ -217,14 +217,14 @@ class EventRepository extends EntityRepository
     {
         if ($archived) {
             return $qb
-                ->andWhere('('.$alias.'.endAt IS NOT NULL AND :now > '.$alias.'.endAt) OR ('.$alias.'.endAt IS NULL AND DATE(:now) > DATE('.$alias.'.startAt))')
+                ->andWhere('('.$alias.'.endAt IS NOT NULL AND :now > '.$alias.'.endAt) OR ('.$alias.'.endAt IS NULL AND capco_date(:now) > capco_date('.$alias.'.startAt))')
                 ->setParameter('now', new \DateTime())
                 ->orderBy($alias.'.startAt', 'DESC')
             ;
         }
 
         return $qb
-            ->andWhere('('.$alias.'.endAt IS NULL AND DATE(:now) <= DATE('.$alias.'.startAt)) OR ('.$alias.'.endAt IS NOT NULL AND :now < '.$alias.'.endAt)')
+            ->andWhere('('.$alias.'.endAt IS NULL AND capco_date(:now) <= capco_date('.$alias.'.startAt)) OR ('.$alias.'.endAt IS NOT NULL AND :now < '.$alias.'.endAt)')
             ->setParameter('now', new \DateTime())
         ;
     }
