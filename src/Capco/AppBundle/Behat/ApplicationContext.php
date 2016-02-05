@@ -50,6 +50,19 @@ class ApplicationContext extends UserContext
         'stepSlug' => 'collecte-des-propositions-1',
         'proposalSlug' => 'proposition-pas-chere',
     ];
+    protected static $opinionWithVersions = [
+        'projectSlug' => 'projet-de-loi-renseignement',
+        'stepSlug' => 'elaboration-de-la-loi',
+        'opinionTypeSlug' => 'section-1-ouverture-des-donnees-publiques',
+        'opinionSlug' => 'article-1',
+    ];
+    protected static $version = [
+        'projectSlug' => 'projet-de-loi-renseignement',
+        'stepSlug' => 'elaboration-de-la-loi',
+        'opinionTypeSlug' => 'section-1-ouverture-des-donnees-publiques',
+        'opinionSlug' => 'article-1',
+        'versionSlug' => 'modification-1',
+    ];
 
     /**
      * @BeforeScenario
@@ -1130,7 +1143,7 @@ class ApplicationContext extends UserContext
         $this->pressButton('Signaler');
         $this->iWait(1);
     }
-
+    
     // ************************** Project stats *****************************
 
     /**
@@ -1265,4 +1278,71 @@ class ApplicationContext extends UserContext
         $selector = $this->navigationContext->getPage('project stats page')->getVotesStatsItemsSelector();
         $this->assertNumElements(0, $selector);
     }
+
+    // ************************ Opinion versions **************************************
+
+    /**
+     * Go to an opinion with versions.
+     *
+     * @When I go to an opinion with versions
+     */
+    public function iGoToAnOpinionWithVersions()
+    {
+        $this->visitPageWithParams('opinion page', self::$opinionWithVersions);
+    }
+
+    /**
+     * Go to a version
+     *
+     * @When I go to a version
+     */
+    public function iGoToAVersion()
+    {
+        $this->visitPageWithParams('opinion version page', self::$version);
+    }
+
+    /**
+     * I should not see the delete version button
+     *
+     * @Then I should not see the delete version button
+     */
+    public function iShouldNotSeeTheDeleteVersionButton()
+    {
+        $buttonSelector = $this->navigationContext->getPage('opinion version page')->getDeleteButtonSelector();
+        $this->assertElementNotOnPage($buttonSelector);
+    }
+
+    /**
+     * I click the delete version button
+     *
+     * @When I click the delete version button
+     */
+    public function iClickTheDeleteVersionButton()
+    {
+        $this->navigationContext->getPage('opinion version page')->clickDeleteButton();
+        $this->iWait(1);
+    }
+
+    /**
+    * I confirm version deletion
+    *
+    * @When I confirm version deletion
+    */
+    public function iConfirmVersionDeletion()
+    {
+        $this->navigationContext->getPage('opinion version page')->confirmDeletion();
+        $this->iWait(1);
+    }
+
+    /**
+     * I should not see my version anymore
+     *
+     * @Then I should not see my version anymore
+     */
+    public function iShouldNotSeeMyVersionAnymore()
+    {
+        $this->assertPageNotContainsText('Modification 1');
+    }
+
+
 }

@@ -233,6 +233,19 @@ Feature: Opinions Versions
     """
     Then the JSON response status code should be 403
 
+## Delete
+
+  @database
+  Scenario: Author of a version wants to delete it
+    Given I am logged in to api as user
+    When I send a DELETE request to "/api/opinions/57/versions/1"
+    Then the JSON response status code should be 204
+
+  @database
+  Scenario: Non author of a version wants to delete it
+    Given I am logged in to api as admin
+    When I send a DELETE request to "/api/opinions/57/versions/1"
+    Then the JSON response status code should be 403
 
 ## Vote
 
