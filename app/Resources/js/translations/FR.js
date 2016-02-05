@@ -266,6 +266,26 @@ export default {
       version_parent: 'Modification de : ',
     },
     project: {
+      stats: {
+        display: {
+          all: 'Voir tous',
+          number: 'Nombres',
+          percentage: 'Poids',
+        },
+        list: {
+          costs: 'Répartition des coûts par proposition',
+          districts: 'Répartition par quartiers',
+          themes: 'Répartition par thèmes',
+          userTypes: 'Répartition par profil de l\'auteur',
+          votes: 'Répartition des votes par propositions',
+        },
+        modal: {
+          close: 'Fermer',
+        },
+        no_data: 'Aucune source de données',
+        no_values: 'Aucun élèment.',
+        title: 'Statistiques',
+      },
       votes: {
         delete: 'Retirer',
         nb: '{num, plural, =0{0 proposition sélectionnée} one{# proposition sélectionnée} other{# propositions sélectionnées}}',

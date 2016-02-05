@@ -11,6 +11,7 @@ import SelectionStepPage from './components/Page/SelectionStepPage';
 import ProposalPage from './components/Proposal/Page/ProposalPage';
 import ProposalVoteBasketWidget from './components/Proposal/Vote/ProposalVoteBasketWidget';
 import ProposalsUserVotesPage from './components/Project/Page/ProposalsUserVotesPage';
+import ProjectStatsPage from './components/Project/Page/ProjectStatsPage';
 import AlertBox from './components/Alert/AlertBox';
 
 FeatureService.load();
@@ -125,6 +126,19 @@ AuthService
           {...IntlData}
         />,
         document.getElementById('render-proposals-user-votes-page')
+      );
+    }
+
+    if ($('#render-project-stats-page').length) {
+      ReactDOM.render(
+        <ProjectStatsPage
+          steps={$('#render-project-stats-page').data('steps').steps}
+          projectId={$('#render-project-stats-page').data('project-id')}
+          themes={$('#render-project-stats-page').data('themes').themes}
+          districts={$('#render-project-stats-page').data('districts').districts}
+          {...IntlData}
+        />,
+        document.getElementById('render-project-stats-page')
       );
     }
 
