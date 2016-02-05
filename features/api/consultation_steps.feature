@@ -4,7 +4,7 @@ Feature: Consultation Steps
 
   ### As an Anonymous
 
-  @database @security
+  @security @parallel-scenario
   Scenario: Anonymous API client wants to add an opinion
     When I send a POST request to "/api/projects/1/steps/4/opinions"
     Then the JSON response status code should be 401
@@ -51,7 +51,7 @@ Feature: Consultation Steps
     """
     Then the JSON response status code should be 201
 
-  @database @security
+  @security
   Scenario: logged in API client wants to add a linked opinion of not linkable type
     Given I am logged in to api as user
     When I send a POST request to "/api/projects/5/steps/5/opinions" with json:
@@ -73,7 +73,7 @@ Feature: Consultation Steps
     }
     """
 
-  @database @security
+  @security
   Scenario: logged in API client wants to add an opinion to a not enabled opinionType
     Given I am logged in to api as user
     When I send a POST request to "/api/projects/1/steps/4/opinions" with json:

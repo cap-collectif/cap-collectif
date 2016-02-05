@@ -2,6 +2,7 @@ Feature: Proposals comments
 
 ## List Comments
 
+  @parallel-scenario
   Scenario: API client wants to list comments of a proposal
     When I send a GET request to "/api/proposal_forms/1/proposals/1/comments"
     Then the JSON response should match:
@@ -47,6 +48,7 @@ Feature: Proposals comments
     }
     """
 
+  @parallel-scenario
   Scenario: API client wants to find the first comment of a proposal
     When I send a GET request to "/api/proposal_forms/1/proposals/1/comments?limit=1"
     Then the JSON response should match:
@@ -77,6 +79,7 @@ Feature: Proposals comments
     }
     """
 
+  @parallel-scenario
   Scenario: API client wants to find popular comments of a proposal
     When I send a GET request to "/api/proposal_forms/1/proposals/1/comments?filter=popular"
     Then the JSON response should match:

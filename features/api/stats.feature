@@ -1,6 +1,7 @@
 @stats
 Feature: Stats
 
+  @parallel-scenario
   Scenario: Anonymous API client wants to get votes stats for a selection step
     When I send a GET request to "/api/project_stats/6?key=votes"
     Then the JSON response status code should be 200
@@ -21,6 +22,7 @@ Feature: Stats
     }
     """
 
+  @parallel-scenario
   Scenario: Anonymous API client wants to get votes stats for a selection step filtered by theme
     When I send a GET request to "/api/project_stats/6?key=votes&theme=1"
     Then the JSON response status code should be 200
@@ -34,6 +36,7 @@ Feature: Stats
     }
     """
 
+  @parallel-scenario
   Scenario: Anonymous API client wants to get themes stats for a collect step
     When I send a GET request to "/api/project_stats/19?key=themes"
     Then the JSON response status code should be 200

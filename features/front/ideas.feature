@@ -5,6 +5,7 @@ Background:
 
 # Themes
 
+@parallel-scenario
 Scenario: Can see no ideas in empty theme
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -12,6 +13,7 @@ Scenario: Can see no ideas in empty theme
   Then I should see "Il n'y a aucune idée pour le moment."
   And I should see 0 ".media--macro" elements
 
+@parallel-scenario
 Scenario: Can see ideas in not empty theme
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -19,6 +21,7 @@ Scenario: Can see ideas in not empty theme
   Then I should not see "Il n'y a aucune idée pour le moment."
   And I should see 3 ".media--macro" elements
 
+@parallel-scenario
 Scenario: Can not create an idea from theme when idea creation is disabled
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -26,12 +29,14 @@ Scenario: Can not create an idea from theme when idea creation is disabled
 
 # Homepage
 
+@parallel-scenario
 Scenario: Can not create an idea from homepage when idea creation is disabled
   Given I visited "home page"
   Then I should not see "Proposer une idée"
 
 # Create
 
+@database
 Scenario: Can create an idea when logged in
   Given feature "themes" is enabled
   And feature "idea_creation" is enabled
@@ -57,6 +62,7 @@ Scenario: Can not create an idea when not logged in
   Then I should see "Se connecter"
 
 # Update
+@database
 Scenario: Author of an idea loose their votes when updating it
   Given I am logged in as user
   And I visited "ideas page"
@@ -70,12 +76,14 @@ Scenario: Author of an idea loose their votes when updating it
   Then I should see "Merci ! Votre idée a bien été modifiée."
   And I should not see "1 vote"
 
+@parallel-scenario
 Scenario: Non author of an idea wants to update it
   Given I am logged in as admin
   And I visited "ideas page"
   And I follow "Dernière idée"
   Then I should not see "Modifier" in the ".pull-right" element
 
+@parallel-scenario
 Scenario: Author of an idea try to update without checking the confirm checkbox
   Given I am logged in as user
   And I visited "ideas page"
@@ -88,6 +96,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
 
 # Comments
 
+  @parallel-scenario
   Scenario: Can not comment an uncommentable idea
     Given I visited "idea page" with:
      | slug | ideanotcommentable |
@@ -183,6 +192,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
    Then I should see "Merci ! Votre vote a bien été pris en compte."
    And I should see "Dupont" in the "#ideaVotesModal" element
 
+  @parallel-scenario
   Scenario: Anonymous user wants to vote with his account
     Given I visited "idea page" with:
       | slug | ideacommentable |
@@ -199,7 +209,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
    And I should see "user" in the "#ideaVotesModal" element
 
 # Trash
-
+  @parallel-scenario
   Scenario: Can not access trash if feature is disabled
     Given I visited "ideas page"
     Then I should not see "Corbeille des idées"

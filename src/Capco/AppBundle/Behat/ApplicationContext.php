@@ -60,7 +60,6 @@ class ApplicationContext extends UserContext
         $jobs = [
             new Process('curl -sS -XDELETE \'http://elasticsearch:9200/_all\''),
             new Process('curl -sS -XBAN http://capco.test/'),
-            new Process('mysql -h database -u root symfony < var/db.backup'),
             new Process('redis-cli -h redis FLUSHALL'),
         ];
 
@@ -70,6 +69,17 @@ class ApplicationContext extends UserContext
         }
         foreach ($jobs as $job) {
             $job->mustRun();
+        }
+    }
+
+    /**
+     * @AfterScenario
+     */
+    public function resetDatabase($scope)
+    {
+        $scenario = $scope->getScenario();
+        if ($scenario->hasTag('database')) {
+            (new Process('mysql -h database -u root symfony < var/db.backup'))->mustRun();
         }
     }
 

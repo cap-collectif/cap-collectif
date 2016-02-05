@@ -1,15 +1,18 @@
 Feature: Login
 
+  @parallel-scenario
   Scenario: Login user
     Given I am logged in as user
     And I visited "home page"
     Then I should see "user"
 
+  @parallel-scenario
   Scenario: Login admin
     Given I am logged in as admin
     And I visited "home page"
     Then I should see "admin"
 
+  @parallel-scenario
   Scenario: Lost password
     Given I visited "login page"
     When I follow "Mot de passe oublié ?"

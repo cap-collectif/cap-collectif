@@ -1,5 +1,6 @@
 Feature: Feature Flags Api
 
+  @parallel-scenario
   Scenario: API client wants to list features
     When I send a GET request to "/api/features"
     Then the JSON response should match:

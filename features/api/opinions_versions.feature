@@ -2,6 +2,7 @@ Feature: Opinions Versions
 
 ## List
 
+  @parallel-scenario
   Scenario: API client wants to list versions of an opinion
     When I send a GET request to "/api/opinions/57/versions"
     Then the JSON response status code should be 200
@@ -73,6 +74,7 @@ Feature: Opinions Versions
 
 ## Get
 
+  @parallel-scenario
   Scenario: API client wants to get an opinion version
     When I send a GET request to "/api/opinions/57/versions/1"
     Then the JSON response status code should be 200
@@ -152,7 +154,7 @@ Feature: Opinions Versions
 
   ### As an Anonymous
 
-  @database
+  @parallel-scenario
   Scenario: Anonymous API client wants to add a version
     When I send a POST request to "/api/opinions/57/versions" with json:
     """

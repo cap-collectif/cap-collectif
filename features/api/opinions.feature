@@ -2,6 +2,7 @@ Feature: Opinions
 
 ## Get
 
+  @parallel-scenario
   Scenario: Anonymous API client wants to retrieve an opinion
     When I send a GET request to "/api/opinions/57"
     Then the JSON response should match:
@@ -104,7 +105,7 @@ Feature: Opinions
 
   ### As an Anonymous
 
-  @database
+  @parallel-scenario
   Scenario: Anonymous API client wants to vote on an opinion
     When I send a PUT request to "/api/opinions/57/votes" with json:
     """

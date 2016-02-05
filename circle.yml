@@ -17,14 +17,15 @@ dependencies:
         - fab testing.circle.save_cache
         - fab testing.infrastructure.up
         - fab testing.app.deploy:environment=test
+        - fab testing.qa.save_fixtures_image
 
 test:
     override:
         - fab testing.qa.phpspec
         - fab testing.qa.mocha
-        - fab testing.qa.behat:fast_failure=false,profile=api
-        - fab testing.qa.behat:fast_failure=false,profile=commands
-        - fab testing.qa.behat:fast_failure=false,profile=frontend
+        - fab testing.qa.behat:fast_failure=false,profile=api,parallel=true
+        - fab testing.qa.behat:fast_failure=false,profile=commands,parallel=true
+        - fab testing.qa.behat:fast_failure=false,profile=frontend,parallel=true
         - fab testing.qa.behat:fast_failure=false,profile=javascript
         - fab testing.qa.checkcs
     post:

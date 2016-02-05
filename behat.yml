@@ -6,6 +6,7 @@ frontend:
             snippets: true
     extensions:
         Behat\Symfony2Extension: ~
+        Tonic\Behat\ParallelScenarioExtension: ~
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp
         SensioLabs\Behat\PageObjectExtension:
@@ -69,6 +70,7 @@ commands:
             paths:    true
             snippets: true
     extensions:
+        Tonic\Behat\ParallelScenarioExtension: ~
         Behat\Symfony2Extension: ~
     suites:
         commands:
@@ -85,7 +87,7 @@ api:
             paths:    true
             snippets: true
     extensions:
-        #Tonic\Behat\ParallelScenarioExtension: ~
+        Tonic\Behat\ParallelScenarioExtension: ~
         Behat\Symfony2Extension: ~
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp

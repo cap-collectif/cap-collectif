@@ -49,13 +49,11 @@ def mocha():
 
 
 @task(environments=['local', 'testing'])
-def behat(fast_failure='true', profile=False, tags='false', feature='false'):
+def behat(fast_failure='true', profile=False, tags='false', feature='false', parallel='false'):
     "Run Gerhkin Tests"
-    if not env.lxc:
-        env.compose('up -d --force-recreate database')
+    if not env.ci:
+        env.compose('up -d --force-recreate database || true')
         time.sleep(2)
-    if env.ci:
-        env.service_command('php bin/console capco:reinit --force -e test', 'application', env.www_app)
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     if profile:
         jobs = [profile]
@@ -63,7 +61,7 @@ def behat(fast_failure='true', profile=False, tags='false', feature='false'):
         jobs = ['api', 'commands', 'frontend', 'javascript']
 
     for job in jobs:
-        command = 'php -d memory_limit=-1 ./bin/behat --parallel-process 2 -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'] + ('', ' --name ' + feature)[feature != 'false']
+        command = 'php -d memory_limit=-1 ./bin/behat' + ('', ' --parallel-process 10')[parallel != 'false'] + ' -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'] + ('', ' --name ' + feature)[feature != 'false']
         env.service_command(command, 'application', env.www_app)
 
 
@@ -82,18 +80,16 @@ def kill_database_container():
     with settings(warn_only=True):
         local('docker ps -a | grep databasefixtures | awk \'{print $1}\' | xargs -I {} docker kill {}')
 
-# Improve this, but okay for now...
-# tag should be the current commit ?
 
-
-@task(environments=['local'])
-def save_fixtures_image(tag='latest', publish='False'):
+@task(environments=['local', 'testing'])
+def save_fixtures_image(tag='latest', publish='false'):
     "Publish a new fixtures image"
-    env.service_command('php bin/console capco:reinit --force --no-toggles', 'application', env.www_app)
+    env.service_command('php bin/console capco:reinit --force --no-toggles --no-es-populate', 'application', env.www_app)
     env.service_command('mysqldump -h database -uroot --opt symfony > infrastructure/services/databasefixtures/dump.sql', 'application', env.www_app, 'root')
     local('docker build -t capco/fixtures:latest infrastructure/services/databasefixtures')
-    local('docker login -e ' + capcobot['email'] + ' -u ' + capcobot['user'] + ' -p ' + capcobot['pass'])
-    local('docker push capco/fixtures')
+    if publish != 'false':
+        local('docker login -e ' + capcobot['email'] + ' -u ' + capcobot['user'] + ' -p ' + capcobot['pass'])
+        local('docker push capco/fixtures')
 
 
 @task(environments=['local'])

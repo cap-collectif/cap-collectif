@@ -63,7 +63,6 @@ class ConsultationStepsController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
 
         if ($form->isValid()) {
-
             $opinionTypeAppendixTypes = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
                 ->findBy(

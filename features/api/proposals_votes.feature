@@ -2,6 +2,7 @@
 Feature: Proposal Votes Restful Api
   As an API client
 
+  @parallel-scenario
   Scenario: Anonymous API client wants to get all votes for a proposal
     When I send a GET request to "/api/proposal_forms/1/proposals/2/votes"
     Then the JSON response status code should be 200
@@ -22,6 +23,7 @@ Feature: Proposal Votes Restful Api
     }
     """
 
+  @parallel-scenario
   Scenario: Logged in API client wants to get all votable steps with votes
     Given I am logged in to api as admin
     When I send a GET request to "/api/projects/7/votable_steps"

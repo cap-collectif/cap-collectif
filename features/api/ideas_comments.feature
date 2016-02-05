@@ -2,6 +2,7 @@ Feature: Ideas comments
 
 ## List Comments
 
+  @parallel-scenario
   Scenario: API client wants to list comments of an idea
     When I send a GET request to "/api/ideas/4/comments"
     Then the JSON response should match:
@@ -47,6 +48,7 @@ Feature: Ideas comments
     }
     """
 
+  @parallel-scenario
   Scenario: API client wants to find the first comment of an idea
     When I send a GET request to "/api/ideas/4/comments?limit=1"
     Then the JSON response should match:
@@ -77,6 +79,7 @@ Feature: Ideas comments
     }
     """
 
+  @parallel-scenario
   Scenario: API client wants to find popular comments of an idea
     When I send a GET request to "/api/ideas/4/comments?filter=popular"
     Then the JSON response should match:

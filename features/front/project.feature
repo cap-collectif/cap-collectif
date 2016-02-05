@@ -163,6 +163,7 @@ Feature: Project
     When I follow "Corbeille"
     Then I should see "Se connecter"
 
+  @parallel-wait
   Scenario: Project trash display correct numbers of elements
     Given feature "project_trash" is enabled
     And I am logged in as user

@@ -3,10 +3,12 @@ Feature: Events
 Background:
   Given feature "calendar" is enabled
 
+@parallel-scenario
 Scenario: Anonymous wants to list events
   Given I visited "events page"
   Then I should see 8 ".event" elements
 
+@parallel-scenario
 Scenario: Anonymous wants to list archived events
   Given I visited "events page"
   And I should see "2 évènements passés"

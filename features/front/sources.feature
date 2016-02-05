@@ -65,9 +65,6 @@ Feature: Source
     And I check "sourceEditCheck"
     And I press "confirm-opinion-source-update"
     And I wait 3 seconds
-    Then I should see "Merci ! Votre source a bien été modifiée."
-    And I wait 1 seconds
-    And I go on the sources tab
     And The first source vote counter should be "0"
 
   @javascript @database
