@@ -366,8 +366,7 @@ project:
         events: Évènements
         posts: Actualités
         trash: Corbeille
-        title: Informations relatives
-        stats: Statistiques
+        title: Informations
       intro:
         title: Introduction
       opinionsCount: "]-Inf, 1] %count% proposition | ]1,Inf[ %count% propositions"
@@ -389,8 +388,6 @@ project:
       title: Actualités
     remaining_days: "]-Inf, 0] Projet participatif terminé | {1} Dernier jour | ]1,Inf[ %count% jours restants"
     sources: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
-    stats:
-      title: Statistiques
     versions: "]-Inf, 1] %count% modification | ]1,Inf[ %count% modifications"
     votes: "]-Inf, 1] %count% vote | ]1,Inf[ %count% votes"
     votes_no_nb: "]-Inf, 1] vote | ]1,Inf[ votes"

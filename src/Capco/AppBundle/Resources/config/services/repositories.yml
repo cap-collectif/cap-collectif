@@ -119,27 +119,3 @@ services:
       factory_service: doctrine.orm.entity_manager
       factory_method: getRepository
       arguments: ['CapcoAppBundle:Steps\SelectionStep']
-
-  capco.collect_step.repository:
-      class: Capco\AppBundle\Repository\CollectStepRepository
-      factory_service: doctrine.orm.entity_manager
-      factory_method: getRepository
-      arguments: ['CapcoAppBundle:Steps\CollectStep']
-
-  capco.theme.repository:
-      class:           Capco\AppBundle\Repository\ThemeRepository
-      factory_service: doctrine.orm.entity_manager
-      factory_method:  getRepository
-      arguments:       ['CapcoAppBundle:Theme']
-
-  capco.district.repository:
-      class:           Capco\AppBundle\Repository\DistrictRepository
-      factory_service: doctrine.orm.entity_manager
-      factory_method:  getRepository
-      arguments:       ['CapcoAppBundle:District']
-
-  capco.proposal.repository:
-        class:           Capco\AppBundle\Repository\ProposalRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method:  getRepository
-        arguments:       ['CapcoAppBundle:Proposal']
