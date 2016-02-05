@@ -82,9 +82,7 @@ doctrine:
               enabled: true
         dql:
           datetime_functions:
-            DATE: Capco\AppBundle\DQL\DateFunction
-          numeric_functions:
-            RAND: Capco\AppBundle\DQL\RandFunction
+            capco_date: Capco\AppBundle\DQL\DateFunction
         mappings:
           tree:
             type: annotation

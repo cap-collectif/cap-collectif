@@ -6,6 +6,11 @@ application:
         - /var/run/docker.sock:/var/run/docker.sock
         - /usr/local/bin/docker:/usr/bin/docker
     links:
+        - database:database
+        - elasticsearch:elasticsearch
+        - redis:redis
+        - seleniumhub:selenium
+        - mailcatcher:mailcatchersmtp
         - blackfire:blackfire
 
 blackfire:
@@ -16,8 +21,8 @@ blackfire:
         - BLACKFIRE_SERVER_TOKEN=***REMOVED***
 
 database:
-   ports:
-       - "3306:3306"
+    ports:
+        - "3306:3306"
 
 chrome:
    ports:

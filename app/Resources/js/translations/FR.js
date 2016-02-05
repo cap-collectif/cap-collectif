@@ -142,7 +142,6 @@ export default {
       filter_last: 'Récents',
       filter_old: 'Anciens',
       filter_popular: 'Populaires',
-      filter_random: 'Tri aléatoire',
       filter_votes: 'Votés',
       fullname: 'Nom complet *',
       hidden_email: 'Adresse électronique (cachée) *',
@@ -266,26 +265,6 @@ export default {
       version_parent: 'Modification de : ',
     },
     project: {
-      stats: {
-        display: {
-          all: 'Voir tous',
-          number: 'Nombres',
-          percentage: 'Poids',
-        },
-        list: {
-          costs: 'Répartition des coûts par proposition',
-          districts: 'Répartition par quartiers',
-          themes: 'Répartition par thèmes',
-          userTypes: 'Répartition par profil de l\'auteur',
-          votes: 'Répartition des votes par propositions',
-        },
-        modal: {
-          close: 'Fermer',
-        },
-        no_data: 'Aucune source de données',
-        no_values: 'Aucun élèment.',
-        title: 'Statistiques',
-      },
       votes: {
         delete: 'Retirer',
         nb: '{num, plural, =0{0 proposition sélectionnée} one{# proposition sélectionnée} other{# propositions sélectionnées}}',

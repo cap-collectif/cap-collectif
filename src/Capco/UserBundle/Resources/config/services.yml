@@ -30,9 +30,3 @@ services:
       class: Capco\UserBundle\Form\Type\ChangePasswordFormType
       tags:
           - { name: form.type, alias: capco_user_change_password }
-
-  capco.user_type.repository:
-      class:           Capco\UserBundle\Repository\UserTypeRepository
-      factory_service: doctrine.orm.entity_manager
-      factory_method:  getRepository
-      arguments:       ['CapcoUserBundle:UserType']

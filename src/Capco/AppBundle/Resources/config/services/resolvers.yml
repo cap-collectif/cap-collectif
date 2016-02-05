@@ -104,7 +104,3 @@ services:
   capco.proposal_votes.resolver:
     class: Capco\AppBundle\Resolver\ProposalVotesResolver
     arguments: [@capco.proposal_vote.repository, @capco.selection_step.repository]
-
-  capco.project_stats.resolver:
-      class: Capco\AppBundle\Resolver\ProjectStatsResolver
-      arguments: [@capco.selection_step.repository, @capco.collect_step.repository, @capco.theme.repository, @capco.district.repository, @capco.user_type.repository, @capco.proposal.repository, @capco.proposal_vote.repository]

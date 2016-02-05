@@ -163,7 +163,6 @@ class OpinionAdmin extends Admin
                 ])
                 ->add('position', null, [
                     'label' => 'admin.fields.opinion.position',
-                    'required' => false,
                 ])
                 ->add('body', 'ckeditor', [
                     'label' => 'admin.fields.opinion.body',

@@ -103,32 +103,4 @@ class ProposalVoteRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-
-    public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
-    {
-        $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id)')
-            ->leftJoin('pv.proposal', 'p')
-            ->andWhere('pv.selectionStep = :step')
-            ->setParameter('step', $step)
-        ;
-
-        if ($themeId) {
-            $qb
-                ->leftJoin('p.theme', 't')
-                ->andWhere('t.id = :themeId')
-                ->setParameter('themeId', $themeId)
-            ;
-        }
-
-        if ($districtId) {
-            $qb
-                ->leftJoin('p.district', 'd')
-                ->andWhere('d.id = :districtId')
-                ->setParameter('districtId', $districtId)
-            ;
-        }
-
-        return intval($qb->getQuery()->getSingleScalarResult());
-    }
 }

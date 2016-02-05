@@ -119,10 +119,9 @@ class OpinionVersionRepository extends EntityRepository
         } elseif ($filter == 'comments') {
             $qb->orderBy('o.argumentsCount', 'DESC');
             $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ($filter == 'random') {
-            $qb->addSelect('RAND() as HIDDEN rand')
-                ->addOrderBy('rand')
-            ;
+        } elseif ($filter == 'positions') {
+            $qb->orderBy('o.position', 'ASC');
+            $qb->addOrderBy('o.updatedAt', 'DESC');
         }
 
         if ($offset) {
