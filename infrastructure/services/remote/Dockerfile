@@ -21,7 +21,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install php7.0
+# Install php7
 RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
     echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
     wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
@@ -46,12 +46,12 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install mariadb
-RUN echo "deb http://mariadb.biz.net.id//repo/10.1/debian sid main" >> /etc/apt/sources.list.d/dotdeb.list && \
-    apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db && \
-    apt-get update && \
-    apt-get install -y -qq
-        mariadb-client \
-        mariadb-server \
+RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
+    echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.1/debian jessie main" >> /etc/apt/sources.list && \
+    apt-get update -qq && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install \
+        mariadb-server-10.1=10.1.12+maria-1~jessie \
+        mariadb-client-10.1=10.1.12+maria-1~jessie \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -72,15 +72,22 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
     sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
 
 # Install java
-RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-    echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
-    echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
-    apt-get update && \
-    apt-get install  -y -qq --no-install-recommends oracle-java8-installer && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /var/cache/oracle-jdk8-installer
+RUN \
+    echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list  && \
+    echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list  && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886  && \
+    apt-get update  && \
+    echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections  && \
+    echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections  && \
+    DEBIAN_FRONTEND=noninteractive  apt-get install -y --force-yes \
+        oracle-java8-installer \
+        oracle-java8-set-default \
+    && \
+    rm -rf /var/cache/oracle-jdk8-installer  && \
+    apt-get clean  && \
+    rm -rf /var/lib/apt/lists/*
 
+# Install ES
 RUN \
   cd / && \
   wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.7.3.tar.gz && \
@@ -112,9 +119,6 @@ RUN apt-get update && \
 RUN addgroup --gid=1000 capco && \
     adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco
 
-# Prepare /var/www
-RUN rm -rf /var/www/html; chown -R capco:capco /var/www/
-
 # Move mysql elsewhere because /var/lib/mysql will be a volume after build (see mysql/run)
 RUN mv /var/lib/mysql /var/lib/mysql_save
 
@@ -142,9 +146,6 @@ COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 
 # Daemons
 COPY php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
-
-# Volume for redis
-VOLUME ["/data"]
 
 # Add entrypoint
 WORKDIR /var/www

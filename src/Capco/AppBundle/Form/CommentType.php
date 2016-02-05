@@ -6,7 +6,7 @@ use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\Validator\Constraints\isTrue;
 
 class CommentType extends AbstractType
 {
@@ -31,7 +31,7 @@ class CommentType extends AbstractType
                     'mapped' => false,
                     'label' => 'comment.form.confirm',
                     'required' => true,
-                    'constraints' => [new True(['message' => 'comment.votes_not_confirmed'])],
+                    'constraints' => [new isTrue(['message' => 'comment.votes_not_confirmed'])],
                 ])
             ;
         }
