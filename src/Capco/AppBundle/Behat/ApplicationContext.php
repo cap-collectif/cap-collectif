@@ -1292,7 +1292,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Go to a version
+     * Go to a version.
      *
      * @When I go to a version
      */
@@ -1302,7 +1302,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should not see the delete version button
+     * I should not see the delete version button.
      *
      * @Then I should not see the delete version button
      */
@@ -1313,7 +1313,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I click the delete version button
+     * I click the delete version button.
      *
      * @When I click the delete version button
      */
@@ -1335,7 +1335,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should not see my version anymore
+     * I should not see my version anymore.
      *
      * @Then I should not see my version anymore
      */

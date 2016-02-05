@@ -50,14 +50,10 @@ class OpinionStore extends BaseStore {
         this.emitChange();
         break;
       case DELETE_OPINION_SUCCESS:
-        this._isProcessing = false;
         this._resetArgumentsSync();
-        this._isOpinionSync = false;
         break;
       case DELETE_OPINION_FAILURE:
-        this._isProcessing = false;
         this._resetArgumentsSync();
-        this._isOpinionSync = false;
         break;
       case CREATE_OPINION_VOTE:
         vote = {

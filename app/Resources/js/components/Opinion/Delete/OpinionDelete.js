@@ -12,7 +12,7 @@ const OpinionDelete = React.createClass({
   },
   mixins: [IntlMixin],
 
-  getIntialState() {
+  getInitialState() {
     return {
       showModal: false,
       isSubmitting: false,
