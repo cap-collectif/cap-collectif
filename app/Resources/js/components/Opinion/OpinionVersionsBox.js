@@ -66,6 +66,7 @@ const OpinionVersionsBox = React.createClass({
             {this.getIntlMessage('opinion.version.filter')}
           </label>
           <select id="filter-opinion-version" ref="filter" className="form-control pull-right" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
+            <option value="random">{this.getIntlMessage('global.filter_random')}</option>
             <option value="last">{this.getIntlMessage('global.filter_last')}</option>
             <option value="old">{this.getIntlMessage('global.filter_old')}</option>
             <option value="favorable">{this.getIntlMessage('global.filter_favorable')}</option>

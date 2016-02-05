@@ -345,7 +345,13 @@ class OpinionRepository extends EntityRepository
                 $qb->addOrderBy('o.createdAt', 'DESC');
             } elseif ($opinionsSort == 'positions') {
                 $qb->addOrderBy('o.position', 'ASC');
-                $qb->addOrderBy('o.createdAt', 'DESC');
+                $qb->addSelect('RAND() as HIDDEN rand')
+                    ->addOrderBy('rand')
+                ;
+            } elseif ($opinionsSort == 'random') {
+                $qb->addSelect('RAND() as HIDDEN rand')
+                    ->addOrderBy('rand')
+                ;
             }
         }
 
@@ -355,21 +361,6 @@ class OpinionRepository extends EntityRepository
         ;
 
         return new Paginator($query);
-    }
-
-    public function getMaxPositionByOpinionTypeAndConsultationStep(ConsultationStep $step, OpinionType $type)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('MAX(o.position)')
-            ->andWhere('o.step = :step')
-            ->andWhere('o.OpinionType = :opinionType')
-            ->andWhere('o.isTrashed = :notTrashed')
-            ->setParameter('step', $step)
-            ->setParameter('opinionType', $type)
-            ->setParameter('notTrashed', false)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
