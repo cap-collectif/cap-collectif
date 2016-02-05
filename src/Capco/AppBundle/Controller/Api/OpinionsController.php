@@ -75,6 +75,38 @@ class OpinionsController extends FOSRestController
     }
 
     /**
+     * Delete an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Delete an opinion",
+     *  statusCodes={
+     *    204 = "Returned when successful",
+     *    403 = "Returned when requesting user is not the opinion's author",
+     *    400 = "Returned when delete fail",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_USER')")
+     * @Delete("/opinions/{opinionId}")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @View(statusCode=204, serializerGroups={})
+     */
+    public function deleteOpinionAction(Request $request, Opinion $opinion)
+    {
+        $user = $this->getUser();
+        if ($user !== $opinion->getAuthor()) {
+            throw new AccessDeniedException();
+        }
+
+        $em = $this->get('doctrine.orm.entity_manager');
+        $em->remove($opinion);
+        $em->flush();
+
+        return;
+    }
+
+    /**
      * Vote on an opinion.
      *
      * @ApiDoc(
@@ -342,6 +374,39 @@ class OpinionsController extends FOSRestController
         $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
 
         return $view;
+    }
+
+    /**
+     * Delete an opinion version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Delete an opinion version",
+     *  statusCodes={
+     *    204 = "Returned when successful",
+     *    403 = "Returned when requesting user is not the version's author",
+     *    400 = "Returned when delete fail",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_USER')")
+     * @Delete("/opinions/{opinionId}/versions/{versionId}")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @ParamConverter("opinionVersion", options={"mapping": {"versionId": "id"}})
+     * @View(statusCode=204, serializerGroups={})
+     */
+    public function deleteOpinionVersionAction(Request $request, Opinion $opinion, OpinionVersion $opinionVersion)
+    {
+        $user = $this->getUser();
+        if ($user !== $opinionVersion->getAuthor()) {
+            throw new AccessDeniedException();
+        }
+
+        $em = $this->get('doctrine.orm.entity_manager');
+        $em->remove($opinionVersion);
+        $em->flush();
+
+        return;
     }
 
     /**
