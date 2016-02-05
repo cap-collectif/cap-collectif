@@ -21,7 +21,7 @@ Capco\AppBundle\Entity\IdeaComment:
   iComment151:
     Idea: @Idea3
     Author: @user5
-    body: Coucou ! Je suis un commentaire avec du vrai texte dedans.
+    body: Coucou ! Je suis un commentaire épinglé.
     isEnabled: true
     isTrashed: false
     pinned: true
@@ -29,7 +29,7 @@ Capco\AppBundle\Entity\IdeaComment:
   iComment152:
     Idea: @Idea3
     Author: @user5
-    body: Coucou coucou coucou coucou coucou coucou.
+    body: Coucou, je suis un simple commentaire.
     isEnabled: true
     isTrashed: false
     updatedAt: <(new \DateTime('2014-08-14'))>
