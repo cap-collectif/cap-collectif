@@ -200,6 +200,9 @@ export default {
         body: 'Le contenu de la proposition doit faire au moins 2 caractères.',
         title: 'Le titre de la proposition doit faire au moins 2 caractères.',
       },
+      delete: {
+        confirm: 'Voulez-vous vraiment supprimer la proposition "{title}" ?',
+      },
       diff: {
         infos: 'Les ajouts en vert et les suppressions en rouge',
         title: 'Modification(s) proposée(s)',
