@@ -146,7 +146,7 @@ Feature: Proposal votes
     Then I should see "Vous devez être connecté pour réaliser cette action."
 
   # Votes page
-  @javascript
+  @javascript @database
   Scenario: Logged in user wants to see his votes on a project and remove one
     Given I am logged in as user
     When I go to the votes details page
