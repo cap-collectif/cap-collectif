@@ -51,9 +51,6 @@ def mocha():
 @task(environments=['local', 'testing'])
 def behat(fast_failure='true', profile=False, tags='false', feature='false', parallel='false'):
     "Run Gerhkin Tests"
-    if not env.ci:
-        env.compose('up -d --force-recreate database || true')
-        time.sleep(2)
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     if profile:
         jobs = [profile]

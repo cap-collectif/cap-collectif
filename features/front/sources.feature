@@ -63,8 +63,11 @@ Feature: Source
     When I click the "#source-35 .source__btn--edit" element
     And I wait 1 seconds
     And I check "sourceEditCheck"
+    And I fill in the following:
+      | sourceBody       | Je modifie ma source !   |
     And I press "confirm-opinion-source-update"
-    And I wait 3 seconds
+    And I wait 2 seconds
+    Then I should see "Merci ! Votre source a bien été modifiée."
     And The first source vote counter should be "0"
 
   @javascript @database
