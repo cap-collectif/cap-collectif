@@ -271,7 +271,7 @@ Feature: Opinions Versions
 ## Vote
 
   Scenario: Anonymous API client wants to get all votes of a version
-    When I send a GET request to "/api/opinions/57/versions/1/votes"
+    When I send a GET request to "/api/opinions/57/versions/2/votes"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
@@ -279,7 +279,7 @@ Feature: Opinions Versions
       "votes": [
         {
           "user": @...@,
-          "value": @integer@,
+          "value": @integer@
         },
         @...@
       ]

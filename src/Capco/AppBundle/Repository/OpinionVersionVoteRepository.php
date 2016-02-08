@@ -39,7 +39,7 @@ class OpinionVersionVoteRepository extends EntityRepository
     }
 
     /**
-     * Get all by version
+     * Get all by version.
      *
      * @param $version
      *
@@ -51,8 +51,8 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->addSelect('u', 'ut', 'version')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
-            ->leftJoin('v.version', 'version')
-            ->andWhere('v.version = :version')
+            ->leftJoin('v.opinionVersion', 'version')
+            ->andWhere('v.opinionVersion = :version')
             ->setParameter('version', $version)
             ->orderBy('v.updatedAt', 'ASC');
 

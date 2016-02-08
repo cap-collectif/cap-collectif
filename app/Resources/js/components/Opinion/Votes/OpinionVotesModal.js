@@ -51,7 +51,7 @@ const OpinionVotesModal = React.createClass({
 
     return (
       <span>
-        <span onClick={this.show} className="opinion__votes__more__link text-center">
+        <span id="opinion-votes-show-all" onClick={this.show} className="opinion__votes__more__link text-center">
           {'+' + moreVotes}
         </span>
         <Modal
@@ -72,7 +72,7 @@ const OpinionVotesModal = React.createClass({
               <Row>
                 {
                   this.state.votes.map((vote, index) => {
-                    return <UserBox key={index} user={vote.user} username={vote.username} />;
+                    return <UserBox key={index} user={vote.user} username={vote.username} className="opinion__votes__userbox" />;
                   })
                 }
               </Row>

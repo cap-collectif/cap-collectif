@@ -37,7 +37,7 @@ class OpinionVoteRepository extends EntityRepository
     }
 
     /**
-     * Get all by opinion
+     * Get all by opinion.
      *
      * @param $opinion
      *

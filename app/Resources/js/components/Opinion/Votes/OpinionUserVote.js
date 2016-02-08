@@ -24,7 +24,7 @@ const OpinionUserVote = React.createClass({
             {vote.user.displayName}
           </Tooltip>
         }>
-        <UserAvatar key={vote.user.id} user={vote.user} style={this.props.style} />
+        <UserAvatar user={vote.user} style={this.props.style} />
       </OverlayTrigger>
     );
   },

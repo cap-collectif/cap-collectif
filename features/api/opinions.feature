@@ -1,3 +1,4 @@
+@opinions
 Feature: Opinions
 
 ## Get
@@ -112,7 +113,7 @@ Feature: Opinions
       "votes": [
         {
           "user": @...@,
-          "value": @integer@,
+          "value": @integer@
         },
         @...@
       ]

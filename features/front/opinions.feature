@@ -127,4 +127,10 @@ Feature: Opinions
     Then I should see "1 proposition liée"
     And I should see "Titre" in the "#links-list" element
 
+  @javascript
+  Scenario: Anonymous user wants to see all votes of an opinion
+    Given I go to an opinion with loads of votes
+    When I click the show all opinion votes button
+    Then I should see all opinion votes
+
 
