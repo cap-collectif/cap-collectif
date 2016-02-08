@@ -4,8 +4,6 @@ import {
   RECEIVE_OPINION,
   UPDATE_OPINION_SUCCESS,
   UPDATE_OPINION_FAILURE,
-  DELETE_OPINION_SUCCESS,
-  DELETE_OPINION_FAILURE,
   CREATE_OPINION_VOTE,
   DELETE_OPINION_VOTE,
   RECEIVE_ARGUMENTS,
@@ -14,8 +12,6 @@ import {
   CREATE_OPINION_VERSION_FAILURE,
   UPDATE_OPINION_VERSION_SUCCESS,
   UPDATE_OPINION_VERSION_FAILURE,
-  DELETE_OPINION_VERSION_SUCCESS,
-  DELETE_OPINION_VERSION_FAILURE,
 } from '../constants/OpinionConstants';
 
 class OpinionStore extends BaseStore {
@@ -48,12 +44,6 @@ class OpinionStore extends BaseStore {
         this._opinionTerm = action.opinionTerm;
         this._isOpinionSync = true;
         this.emitChange();
-        break;
-      case DELETE_OPINION_SUCCESS:
-        this._resetArgumentsSync();
-        break;
-      case DELETE_OPINION_FAILURE:
-        this._resetArgumentsSync();
         break;
       case CREATE_OPINION_VOTE:
         vote = {
@@ -110,16 +100,6 @@ class OpinionStore extends BaseStore {
         this._isOpinionSync = false;
         break;
       case UPDATE_OPINION_VERSION_FAILURE:
-        this._isProcessing = false;
-        this._resetArgumentsSync();
-        this._isOpinionSync = false;
-        break;
-      case DELETE_OPINION_VERSION_SUCCESS:
-        this._isProcessing = false;
-        this._resetArgumentsSync();
-        this._isOpinionSync = false;
-        break;
-      case DELETE_OPINION_VERSION_FAILURE:
         this._isProcessing = false;
         this._resetArgumentsSync();
         this._isOpinionSync = false;

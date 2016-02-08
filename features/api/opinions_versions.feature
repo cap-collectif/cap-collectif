@@ -1,4 +1,3 @@
-@versions
 Feature: Opinions Versions
 
 ## List
@@ -59,8 +58,7 @@ Feature: Opinions Versions
 
           "_links": {
             "show": @string@,
-            "report": @string@,
-            "parent": @string@
+            "report": @string@
           },
 
           "user_vote": @null@,
@@ -137,8 +135,7 @@ Feature: Opinions Versions
         },
         "_links": {
           "show": @string@,
-          "report": @string@,
-          "parent": @string@
+          "report": @string@
         },
         "user_vote": @null@,
         "has_user_reported": @boolean@,
@@ -224,7 +221,7 @@ Feature: Opinions Versions
     """
     Then the JSON response status code should be 204
 
-  @security
+  @database
   Scenario: Non author of a version wants to update it
     Given I am logged in to api as admin
     When I send a PUT request to "/api/opinions/57/versions/1" with json:
@@ -236,35 +233,6 @@ Feature: Opinions Versions
     """
     Then the JSON response status code should be 403
 
-  @security
-  Scenario: Anonymous wnats to update a version
-    Given I send a PUT request to "/api/opinions/57/versions/1" with json:
-    """
-    {
-      "title": "Nouveau titre",
-      "body": "Mes modifications blablabla"
-    }
-    """
-    Then the JSON response status code should be 401
-
-## Delete
-
-  @database
-  Scenario: Author of a version wants to delete it
-    Given I am logged in to api as user
-    When I send a DELETE request to "/api/opinions/57/versions/1"
-    Then the JSON response status code should be 204
-
-  @security
-  Scenario: Non author of a version wants to delete it
-    Given I am logged in to api as admin
-    When I send a DELETE request to "/api/opinions/57/versions/1"
-    Then the JSON response status code should be 403
-
-  @security
-  Scenario: Anonymous wants to delete a version
-    Given I send a DELETE request to "/api/opinions/57/versions/1"
-    Then the JSON response status code should be 401
 
 ## Vote
 

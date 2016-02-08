@@ -3,8 +3,6 @@ import LoginStore from '../stores/LoginStore';
 import Fetcher from '../services/Fetcher';
 import {
   RECEIVE_OPINION,
-  DELETE_OPINION_SUCCESS,
-  DELETE_OPINION_FAILURE,
   UPDATE_OPINION_SUCCESS,
   UPDATE_OPINION_FAILURE,
   CREATE_OPINION_VOTE,
@@ -16,8 +14,6 @@ import {
   CREATE_OPINION_VERSION_FAILURE,
   UPDATE_OPINION_VERSION_SUCCESS,
   UPDATE_OPINION_VERSION_FAILURE,
-  DELETE_OPINION_VERSION_SUCCESS,
-  DELETE_OPINION_VERSION_FAILURE,
 } from '../constants/OpinionConstants';
 
 export default {
@@ -34,21 +30,6 @@ export default {
           opinionTerm: data.opinionTerm,
         });
         return true;
-      });
-  },
-
-  deleteOpinion: (opinion) => {
-    return Fetcher
-      .delete(`/opinions/${opinion}`)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: DELETE_OPINION_SUCCESS,
-        });
-      })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: DELETE_OPINION_FAILURE,
-        });
       });
   },
 
@@ -159,21 +140,6 @@ export default {
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_OPINION_VERSION_FAILURE,
-        });
-      });
-  },
-
-  deleteVersion: (opinion, version) => {
-    return Fetcher
-      .delete(`/opinions/${opinion}/versions/${version}`)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: DELETE_OPINION_VERSION_SUCCESS,
-        });
-      })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: DELETE_OPINION_VERSION_FAILURE,
         });
       });
   },
