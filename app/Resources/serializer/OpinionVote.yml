@@ -4,4 +4,4 @@ Capco\AppBundle\Entity\OpinionVote:
     value:
       expose: true
       type: integer
-      groups: [OpinionVersions]
+      groups: [Opinions]

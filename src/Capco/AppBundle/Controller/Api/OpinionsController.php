@@ -107,6 +107,33 @@ class OpinionsController extends FOSRestController
     }
 
     /**
+     * Get all votes of an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all votes of an opinion",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when opinion is not found",
+     *  }
+     * )
+     *
+     * @Get("/opinions/{id}/votes")
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne"})
+     * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
+     */
+    public function getOpinionVotesAction(Opinion $opinion)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $votes = $em->getRepository('CapcoAppBundle:OpinionVote')
+            ->getAllByOpinion($opinion);
+
+        return [
+            'votes' => $votes,
+        ];
+    }
+
+    /**
      * Vote on an opinion.
      *
      * @ApiDoc(
@@ -582,6 +609,34 @@ class OpinionsController extends FOSRestController
         $version->increaseArgumentsCount();
         $this->getDoctrine()->getManager()->persist($argument);
         $this->getDoctrine()->getManager()->flush();
+    }
+
+    /**
+     * Get all votes of a version.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all votes of a version",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when version is not found",
+     *  }
+     * )
+     *
+     * @Get("/opinions/{opinionId}/versions/{versionId}/votes")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
+     * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos", "UserMedias"})
+     */
+    public function getOpinionVersionVotesAction(Opinion $opinion, OpinionVersion $version)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $votes = $em->getRepository('CapcoAppBundle:OpinionVersionVote')
+            ->getAllByVersion($version);
+
+        return [
+            'votes' => $votes,
+        ];
     }
 
     /**

@@ -1,16 +1,12 @@
 import React, { PropTypes } from 'react';
-import { Row, Col, Well } from 'react-bootstrap';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 
-import { VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH } from '../../constants/VoteConstants';
 import OpinionPreview from './OpinionPreview';
 import OpinionAnswer from './OpinionAnswer';
 import OpinionButtons from './OpinionButtons';
 import OpinionAppendices from './OpinionAppendices';
 import OpinionBody from './OpinionBody';
-import VotePiechart from '../Utils/VotePiechart';
-import UserAvatar from '../User/UserAvatar';
-import VotesBar from '../Utils/VotesBar';
+import OpinionVotesBox from './Votes/OpinionVotesBox';
 
 const OpinionBox = React.createClass({
   propTypes: {
@@ -40,97 +36,6 @@ const OpinionBox = React.createClass({
     return this.props.opinion && this.props.opinion.parent;
   },
 
-  renderVotesHelpText() {
-    const helpText = this.getOpinionType().votesHelpText;
-    if (helpText) {
-      return <Well bsSize="small" style={{ marginBottom: '10px', fontSize: '14px' }}>{helpText}</Well>;
-    }
-  },
-
-  renderUserAvatarVotes() {
-    const opinion = this.props.opinion;
-    const votes = opinion.votes;
-    let moreVotes = null;
-
-    if (opinion.votes_total > 5) {
-      moreVotes = opinion.votes_total - 5;
-    }
-
-    return (
-      <div style={{ paddingTop: '20px' }}>
-      {
-        votes.map((vote) => {
-          return <UserAvatar key={vote.user.id} user={vote.user} style={{ marginRight: 5 }} />;
-        })
-      }
-      {moreVotes !== null
-        ? <span>+ {moreVotes}</span>
-        : null
-      }
-      </div>
-    );
-  },
-
-  renderPieChart() {
-    const opinion = this.props.opinion;
-    return (
-      <VotePiechart
-        top={20}
-        height={180}
-        ok={opinion.votes_ok}
-        nok={opinion.votes_nok}
-        mitige={opinion.votes_mitige}
-      />
-    );
-  },
-
-  renderVotesBar() {
-    const opinion = this.props.opinion;
-    return (
-      <div>
-        {this.getOpinionType().votesThreshold
-          ? <VotesBar
-              max={this.getOpinionType().votesThreshold}
-              value={opinion.votes_ok}
-              helpText={this.getOpinionType().votesThresholdHelpText}
-          />
-          : null
-        }
-        {this.renderUserAvatarVotes()}
-        <div>
-          <FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total}/>
-        </div>
-      </div>
-    );
-  },
-
-  renderVotes() {
-    const opinion = this.props.opinion;
-    const widgetType = this.getOpinionType().voteWidgetType;
-    if (widgetType !== VOTE_WIDGET_DISABLED && (opinion.votes.length > 0 || this.getOpinionType().votesThreshold)) {
-      if (opinion.votes.length > 0 && widgetType === VOTE_WIDGET_BOTH) {
-        return (
-          <Row style={{ borderTop: '1px solid #ddd' }}>
-            <Col sm={12} md={4}>
-              {this.renderPieChart()}
-            </Col>
-            <Col sm={12} md={7} style={{ paddingTop: '15px' }}>
-              {this.renderVotesBar()}
-            </Col>
-          </Row>
-        );
-      }
-      return (
-        <Row style={{ borderTop: '1px solid #ddd' }}>
-          <Col sm={12} mdOffset={2} md={8} style={{ paddingTop: '15px' }}>
-            {this.renderVotesBar()}
-          </Col>
-        </Row>
-      );
-    }
-    return null;
-  },
-
   render() {
     const opinion = this.props.opinion;
     const color = this.getOpinionType().color;
@@ -156,10 +61,9 @@ const OpinionBox = React.createClass({
           <p className="h4" style={{ marginTop: '0' }}>{opinion.title}</p>
           <OpinionBody opinion={opinion} />
           <div className="opinion__buttons" style={{ marginTop: '15px', marginBottom: '15px' }} aria-label={this.getIntlMessage('vote.form')}>
-            {this.renderVotesHelpText()}
-            <OpinionButtons {...this.props} opinion={opinion} />
+            <OpinionButtons opinion={opinion} />
           </div>
-          {this.renderVotes()}
+          <OpinionVotesBox opinion={opinion} />
         </div>
         {
           opinion.answer

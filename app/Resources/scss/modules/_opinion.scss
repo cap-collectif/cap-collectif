@@ -587,3 +587,23 @@
   border-top: 1px solid $border-color;
   padding: 15px;
 }
+
+.opinion__votes__box {
+  border-top: 1px solid $border-color;
+}
+
+.opinion__votes__buttons {
+  margin-bottom: 15px;
+}
+
+.opinion__votes__more__link {
+  background-color: $brand-color-1;
+  color: $white;
+  @include border-radius(50%);
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  vertical-align: middle;
+  line-height: 45px;
+  cursor: pointer;
+}

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Doctrine\ORM\EntityRepository;
 
@@ -35,6 +36,27 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * Get all by version
+     *
+     * @param $version
+     *
+     * @return mixed
+     */
+    public function getAllByVersion(OpinionVersion $version)
+    {
+        $qb = $this->getIsConfirmedQueryBuilder()
+            ->addSelect('u', 'ut', 'version')
+            ->leftJoin('v.user', 'u')
+            ->leftJoin('u.userType', 'ut')
+            ->leftJoin('v.version', 'version')
+            ->andWhere('v.version = :version')
+            ->setParameter('version', $version)
+            ->orderBy('v.updatedAt', 'ASC');
+
+        return $qb->getQuery()->getResult();
     }
 
     protected function getIsConfirmedQueryBuilder()
