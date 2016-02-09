@@ -24,15 +24,14 @@ class EventCommentRepository extends EntityRepository
             ->andWhere('c.isTrashed = :notTrashed')
             ->setParameter('event', $event)
             ->setParameter('notTrashed', false)
-            ->orderBy('c.pinned', 'DESC')
         ;
 
         if ($filter === 'old') {
-            $qb->addOrderBy('c.createdAt', 'ASC');
+            $qb->addOrderBy('c.updatedAt', 'ASC');
         }
 
         if ($filter === 'last') {
-            $qb->addOrderBy('c.createdAt', 'DESC');
+            $qb->addOrderBy('c.updatedAt', 'DESC');
         }
 
         if ($filter === 'popular') {

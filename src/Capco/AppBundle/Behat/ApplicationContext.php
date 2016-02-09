@@ -76,9 +76,6 @@ class ApplicationContext extends UserContext
         'opinionSlug' => 'article-2',
         'versionSlug' => 'modification-2',
     ];
-    protected static $ideaWithPinnedComments = [
-      'slug' => 'troisieme-idee',
-    ];
 
     /**
      * @BeforeScenario
@@ -1432,45 +1429,5 @@ class ApplicationContext extends UserContext
     {
         $votesInModalSelector = $this->navigationContext->getPage('opinion page')->getVotesInModalSelector();
         $this->assertNumElements(44, $votesInModalSelector);
-    }
-
-    // ********************************* Comments **************************************
-
-    /**
-     * Go to an idea with pinned comments.
-     *
-     * @When I go to an idea with pinned comments
-     */
-    public function iGoToAnIdeaWithPinnedComments()
-    {
-        $this->visitPageWithParams('idea page', self::$ideaWithPinnedComments);
-    }
-
-    /**
-     * Pinned comments should be on top of the list.
-     *
-     * @Then pinned comments should be on top of the list
-     */
-    public function pinnedCommentsShouldBeOnTopOfTheList()
-    {
-        $this->element1ShouldBeBeforeElement2ForSelector(
-            'Coucou ! Je suis un commentaire épinglé.',
-            'Coucou, je suis un simple commentaire.',
-            '.opinion--comment .opinion__text'
-        );
-    }
-
-    /**
-     * VIP comments should be on top of the list.
-     *
-     * @Then VIP comments should be on top of the list
-     */
-    public function VIPCommentsShouldBeOnTopOfTheList()
-    {
-        $this->element1ShouldBeBeforeElement2ForSelector(
-            'Commentaire d\'un VIP !',
-            'Coucou, je suis un simple commentaire.',
-            '.opinion--comment .opinion__text'
-        );
     }
 }

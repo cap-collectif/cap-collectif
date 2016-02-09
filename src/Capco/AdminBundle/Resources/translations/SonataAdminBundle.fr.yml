@@ -183,7 +183,6 @@ admin:
       is_enabled: Publié
       is_trashed: Dans la corbeille
       object: Objet lié
-      pinned: Épinglé en haut de la liste
       trashed_at: Mise à la corbeille
       trashed_reason: Raison de la mise à la corbeille
       updated_at: Mise à jour
@@ -598,7 +597,7 @@ admin:
       title: Titre
       type: Type d'étape
       updated_at: Mise à jour
-      votesHelpText: Règle des votes
+      votesHelpText: Informations à propos du vote
       vote_type: Type de vote
     synthesis:
       enabled: Publiée

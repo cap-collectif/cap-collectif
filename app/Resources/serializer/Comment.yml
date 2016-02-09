@@ -1,53 +1,49 @@
 Capco\AppBundle\Entity\Comment:
-  exclusion_policy: ALL
-  properties:
-    id:
-      expose: true
-      type: integer
-      groups: [Comments]
-    body:
-      expose: true
-      type: string
-      groups: [Comments]
-    createdAt:
-      expose: true
-      type: DateTime
-      groups: [Comments]
-    updatedAt:
-      expose: true
-      type: DateTime
-      groups: [Comments]
-    votesCount:
-      expose: true
-      type: integer
-      groups: [Comments]
-    Author:
-      expose: true
-      type: Capco\UserBundle\Entity\User
-      serialized_name: author
-      groups: [Comments, UserMedias]
-    authorName:
-      expose: true
-      type: string
-      groups: [Comments]
-    authorEmail:
-      expose: true
-      type: string
-      groups: [Comments]
-    isTrashed:
-      expose: true
-      type: boolean
-      groups: [Comments]
-    answers:
-      expose: true
-      groups: [Comments, UserMedias]
-    pinned:
-      expose: true
-      type: boolean
-      groups: [Comments]
-  virtual_properties:
-    canContribute:
-      serialized_name: can_contribute
-      type: boolean
-      groups: [Comments]
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Comments]
+        body:
+            expose: true
+            type: string
+            groups: [Comments]
+        createdAt:
+            expose: true
+            type: DateTime
+            groups: [Comments]
+        updatedAt:
+            expose: true
+            type: DateTime
+            groups: [Comments]
+        votesCount:
+            expose: true
+            type: integer
+            groups: [Comments]
+        Author:
+            expose: true
+            type: Capco\UserBundle\Entity\User
+            serialized_name: author
+            groups: [Comments, UserMedias]
+        authorName:
+            expose: true
+            type: string
+            groups: [Comments]
+        authorEmail:
+            expose: true
+            type: string
+            groups: [Comments]
+        isTrashed:
+            expose: true
+            type: boolean
+            groups: [Comments]
+        answers:
+            expose: true
+            groups: [Comments, UserMedias]
+    virtual_properties:
+        canContribute:
+            serialized_name: can_contribute
+            type: boolean
+            groups: [Comments]
 

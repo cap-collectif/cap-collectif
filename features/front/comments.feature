@@ -1,4 +1,3 @@
-@comments
 Feature: Comments
 
 # Update
@@ -41,10 +40,3 @@ Scenario: Author of a comment try to update it without checking the confirm chec
     | body      | Je modifie mon commentaire !   |
   And I press "Modifier"
   Then I should not see "Merci ! Votre commentaire a bien été modifié."
-
-  @javascript
-  Scenario: Anonymous user wants to see pinned and vip comments on top of the comments list
-    Given feature "ideas" is enabled
-    And I go to an idea with pinned comments
-    Then pinned comments should be on top of the list
-    And VIP comments should be on top of the list

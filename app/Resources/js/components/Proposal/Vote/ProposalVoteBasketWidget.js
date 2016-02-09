@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlMixin, FormattedNumber } from 'react-intl';
+import { IntlMixin, FormattedNumber, FormattedMessage } from 'react-intl';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import { Nav, Navbar, Button, ProgressBar } from 'react-bootstrap';
 import ArrayHelper from '../../../services/ArrayHelper';
@@ -61,40 +61,43 @@ const ProposalVoteBasketWidget = React.createClass({
     return (
       <Navbar fixedTop className="proposal-vote__widget hidden-xs">
         <Nav>
+          {
+            this.state.votableSteps.length > 1
+              ? <li className="navbar-text widget__counter">
+                <p className="widget__counter__label">
+                  {this.getIntlMessage('project.votes.widget.step')}
+                </p>
+                <span className="widget__counter__value">
+                  <Input
+                    id="votes_widget_step"
+                    type="select"
+                    className="widget__counter__select"
+                    valueLink={this.linkState('selectedStepId')}
+                    label={false}
+                  >
+                    {
+                      this.state.votableSteps.map((step) => {
+                        return (
+                          <option key={step.id} value={step.id}>
+                            {step.title}
+                          </option>
+                        );
+                      })
+                    }
+                  </Input>
+                </span>
+            </li>
+            : null
+          }
           <li className="navbar-text widget__counter">
             <p className="widget__counter__label">
-              {this.getIntlMessage('project.votes.widget.step')}
+              {this.getIntlMessage('project.votes.widget.selection')}
             </p>
             <span className="widget__counter__value">
-              {
-                this.state.votableSteps.length > 1
-                ? <Input
-                  id="votes_widget_step"
-                  type="select"
-                  className="widget__counter__select"
-                  valueLink={this.linkState('selectedStepId')}
-                  label={false}
-                >
-                  {
-                    this.state.votableSteps.map((step) => {
-                      return (
-                        <option key={step.id} value={step.id}>
-                          {step.title}
-                        </option>
-                      );
-                    })
-                  }
-                </Input>
-                : selectedStep.title
-              }
-            </span>
-          </li>
-          <li className="navbar-text widget__counter">
-            <p className="widget__counter__label">
-              {this.getIntlMessage('project.votes.widget.count')}
-            </p>
-            <span className="widget__counter__value">
-              {selectedStep.userVotesCount}
+              <FormattedMessage
+                message={this.getIntlMessage('project.votes.widget.count')}
+                num={selectedStep.userVotesCount}
+              />
             </span>
           </li>
         </Nav>
@@ -108,25 +111,40 @@ const ProposalVoteBasketWidget = React.createClass({
                 <span className="widget__counter__value">
                   {
                     budget
-                      ? <FormattedNumber value={budget} style="currency" currency="EUR"/>
+                      ? <FormattedNumber
+                          minimumFractionDigits={0}
+                          value={budget}
+                          style="currency"
+                          currency="EUR"
+                      />
                       : this.getIntlMessage('project.votes.widget.no_value')
                   }
                 </span>
               </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {this.getIntlMessage('project.votes.widget.left')}
+                  {this.getIntlMessage('project.votes.widget.spent')}
                 </p>
-                <span className="widget__counter__value">
-                  <FormattedNumber value={creditsLeft} style="currency" currency="EUR"/>
-                </span>
+                  <span className="widget__counter__value">
+                    <FormattedNumber
+                      minimumFractionDigits={0}
+                      value={creditsSpent}
+                      style="currency"
+                      currency="EUR"
+                    />
+                  </span>
               </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {this.getIntlMessage('project.votes.widget.spent')}
+                  {this.getIntlMessage('project.votes.widget.left')}
                 </p>
                 <span className="widget__counter__value">
-                  <FormattedNumber value={creditsSpent} style="currency" currency="EUR"/>
+                  <FormattedNumber
+                    minimumFractionDigits={0}
+                    value={creditsLeft}
+                    style="currency"
+                    currency="EUR"
+                  />
                 </span>
               </li>
           </Nav>
@@ -134,7 +152,7 @@ const ProposalVoteBasketWidget = React.createClass({
         }
         <Button
           bsStyle="default"
-          className="btn--outline btn-light-gray navbar-btn pull-right"
+          className="widget__button navbar-btn pull-right"
           href={this.props.votesPageUrl}
         >
           {this.getIntlMessage('proposal.details') }

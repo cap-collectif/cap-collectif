@@ -77,7 +77,7 @@ class EventsController extends FOSRestController
      * )
      *
      * @Post("/events/{id}/comments")
-     * @ParamConverter("event", options={"mapping": {"id": "id"}})
+     * @ParamConverter("evetn", options={"mapping": {"id": "id"}})
      * @View(statusCode=201, serializerGroups={"Comments", "UsersInfos"})
      */
     public function postEventCommentsAction(Request $request, Event $event)
@@ -85,11 +85,11 @@ class EventsController extends FOSRestController
         $user = $this->getUser();
 
         $comment = (new EventComment())
-            ->setAuthorIp($request->getClientIp())
-            ->setAuthor($user)
-            ->setEvent($event)
-            ->setIsEnabled(true)
-        ;
+                    ->setAuthorIp($request->getClientIp())
+                    ->setAuthor($user)
+                    ->setEvent($event)
+                    ->setIsEnabled(true)
+                ;
 
         $form = $this->createForm(new CommentType($user), $comment);
         $form->handleRequest($request);

@@ -1,7 +1,6 @@
 import React from 'react';
 import { IntlMixin, FormattedDate } from 'react-intl';
 import moment from 'moment';
-import PinnedLabel from '../Utils/PinnedLabel';
 
 const CommentInfos = React.createClass({
   propTypes: {
@@ -63,11 +62,10 @@ const CommentInfos = React.createClass({
   render() {
     return (
       <p className="h5  opinion__user">
-        {this.renderAuthorName()}
-        {'  '}
-        {this.renderDate()}
-        {this.renderEditionDate()}
-        <PinnedLabel show={this.props.comment.pinned} />
+        { this.renderAuthorName() }
+        { '  ' }
+        { this.renderDate() }
+        { this.renderEditionDate() }
       </p>
     );
   },

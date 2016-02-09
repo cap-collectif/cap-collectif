@@ -23,7 +23,6 @@ class PostCommentRepository extends EntityRepository
             ->andWhere('c.parent is NULL')
             ->andWhere('c.isTrashed = false')
             ->setParameter('post', $post)
-            ->orderBy('c.pinned', 'DESC')
         ;
 
         if ($filter === 'old') {

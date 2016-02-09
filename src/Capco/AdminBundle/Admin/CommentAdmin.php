@@ -244,10 +244,6 @@ class CommentAdmin extends Admin
             ->add('trashedReason', null, [
                 'label' => 'admin.fields.comment.trashed_reason',
             ])
-            ->add('pinned', null, [
-                'label' => 'admin.fields.comment.pinned',
-                'required' => false,
-            ])
         ;
     }
 }
