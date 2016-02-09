@@ -2,6 +2,7 @@ import React from 'react';
 import { IntlMixin } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { History } from 'react-router';
 
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
@@ -14,7 +15,7 @@ const SideMenu = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
+  mixins: [IntlMixin, History],
 
   getInitialState() {
     return {
@@ -33,7 +34,7 @@ const SideMenu = React.createClass({
   },
 
   componentDidMount() {
-    this.fetchElements();
+    this.loadElementsTreeFromServer();
   },
 
   componentWillUnmount() {
@@ -42,7 +43,21 @@ const SideMenu = React.createClass({
   },
 
   onChange() {
-    this.fetchElements();
+    if (SynthesisElementStore.isFetchingTree || SynthesisElementStore.isInboxSync.notIgnoredTree) {
+      this.setState({
+        navItems: SynthesisElementStore.elements.notIgnoredTree,
+        expanded: SynthesisElementStore.expandedItems.nav,
+        selectedId: SynthesisElementStore.selectedNavItem,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true,
+    }, () => {
+      this.loadElementsTreeFromServer();
+    });
   },
 
   toggleExpand(element) {
@@ -52,7 +67,7 @@ const SideMenu = React.createClass({
   selectItem(element) {
     SynthesisElementActions.selectNavItem(element.id);
     if (element.id !== 'root') {
-      this.transitionTo('show_element', { 'element_id': element.id });
+      this.history.pushState(null, `element/${element.id}`);
     }
   },
 
@@ -68,26 +83,6 @@ const SideMenu = React.createClass({
     this.setState({
       showCreateModal: value,
     });
-  },
-
-  fetchElements() {
-    if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.notIgnoredTree) {
-        this.setState({
-          navItems: SynthesisElementStore.elements.notIgnoredTree,
-          expanded: SynthesisElementStore.expandedItems.nav,
-          selectedId: SynthesisElementStore.selectedNavItem,
-          isLoading: false,
-        });
-        return;
-      }
-
-      this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadElementsTreeFromServer();
-      });
-    }
   },
 
   loadElementsTreeFromServer() {

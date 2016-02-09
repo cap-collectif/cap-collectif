@@ -45,11 +45,12 @@ const TopMenu = React.createClass({
   },
 
   renderMenuItem(item, index) {
-    const menuItemClass = 'menu__item--' + item.color;
+    const menuItemClass = 'menu__item menu__item--' + item.color;
+    const menuItemId = 'menu-item-' + item.label;
     const iconClass = 'icon--' + item.color;
     return (
       <LinkContainer to={item.link} key={index}>
-        <NavItem className={'menu__item ' + menuItemClass}>
+        <NavItem className={menuItemClass} id={menuItemId}>
             <i style={{ fontSize: '25px' }} className={'cap ' + item.icon + ' ' + iconClass}></i> <span className="hidden-sm">{this.getIntlMessage('edition.topMenu.' + item.label)}</span>
         </NavItem>
       </LinkContainer>

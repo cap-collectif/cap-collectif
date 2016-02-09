@@ -81,7 +81,9 @@ Capco\AppBundle\Entity\Opinion:
     opinion51:
         step: @cstep2
         title: Opinion 51
-        body: Contenu de ma super opinion !
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
         isEnabled: true
         isTrashed: false
         Author: @user5
@@ -90,9 +92,7 @@ Capco\AppBundle\Entity\Opinion:
     opinion52:
         step: @cstep2
         title: Opinion 52
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
+        body: Contenu de ma super opinion !
         isEnabled: true
         isTrashed: false
         Author: @user4

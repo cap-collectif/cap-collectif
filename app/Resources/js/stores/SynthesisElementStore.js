@@ -64,7 +64,7 @@ class SynthesisElementStore extends BaseStore {
 
   _registerToActions(action) {
     let element = null;
-    const parentId = typeof action.parent === 'object' ? action.parent.id : action.parent;
+    const parentId = typeof action.parent === 'object' && action.parent !== null ? action.parent.id : action.parent;
     switch (action.actionType) {
       case Actions.RECEIVE_COUNT:
         this._counts[action.type] = action.count;
@@ -91,7 +91,6 @@ class SynthesisElementStore extends BaseStore {
         break;
       case Actions.RECEIVE_ELEMENTS:
         this._isFetchingTree = true;
-        this._isInboxSync[action.type] = false;
         this.emitChange();
         break;
       case Actions.RECEIVE_ELEMENTS_SUCCESS:

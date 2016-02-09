@@ -10,7 +10,7 @@ const Pagination = 15;
 
 const ElementsInbox = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object.isRequired,
+    synthesis: React.PropTypes.object,
     params: React.PropTypes.object,
     searchTerm: React.PropTypes.string,
   },
@@ -39,7 +39,7 @@ const ElementsInbox = React.createClass({
   },
 
   componentDidMount() {
-    this.onChange();
+    this.loadElementsByTypeFromServer();
   },
 
   componentWillReceiveProps(nextProps) {
@@ -58,24 +58,22 @@ const ElementsInbox = React.createClass({
   },
 
   onChange() {
-    if (!SynthesisElementStore.isProcessing) {
-      if (SynthesisElementStore.isInboxSync[this.props.params.type]) {
-        this.setState({
-          elements: SynthesisElementStore.elements[this.props.params.type],
-          count: SynthesisElementStore.counts[this.props.params.type],
-          isLoading: false,
-          isLoadingMore: false,
-        });
-        this.resetLoadMoreButton();
-        return;
-      }
-
+    if (SynthesisElementStore.isProcessing || SynthesisElementStore.isInboxSync[this.props.params.type]) {
       this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadElementsByTypeFromServer();
+        elements: SynthesisElementStore.elements[this.props.params.type],
+        count: SynthesisElementStore.counts[this.props.params.type],
+        isLoading: false,
+        isLoadingMore: false,
       });
+      this.resetLoadMoreButton();
+      return;
     }
+
+    this.setState({
+      isLoading: true,
+    }, () => {
+      this.loadElementsByTypeFromServer();
+    });
   },
 
   resetLoadMoreButton() {

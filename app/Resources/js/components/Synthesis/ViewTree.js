@@ -20,7 +20,7 @@ const ViewTree = React.createClass({
 
   getInitialState() {
     return {
-      settings: [],
+      settings: SynthesisStore.settings,
       elements: [],
       expanded: [],
       isLoading: true,
@@ -32,8 +32,7 @@ const ViewTree = React.createClass({
   },
 
   componentDidMount() {
-    this.fetchSettings();
-    this.fetchElements();
+    this.loadElementsTreeFromServer();
   },
 
   componentWillUnmount() {
@@ -41,7 +40,20 @@ const ViewTree = React.createClass({
   },
 
   onChange() {
-    this.fetchElements();
+    if (SynthesisElementStore.isFetchingTree || SynthesisElementStore.isInboxSync.publishedTree) {
+      this.setState({
+        elements: SynthesisElementStore.elements.publishedTree,
+        expanded: SynthesisElementStore.expandedItems.view,
+        isLoading: false,
+      });
+      return;
+    }
+
+    this.setState({
+      isLoading: true,
+    }, () => {
+      this.loadElementsTreeFromServer();
+    });
   },
 
   toggleExpand(element) {
@@ -49,31 +61,6 @@ const ViewTree = React.createClass({
       SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, 'published', element.id);
     }
     SynthesisElementActions.expandTreeItem('view', element.id, !this.state.expanded[element.id]);
-  },
-
-  fetchSettings() {
-    this.setState({
-      settings: SynthesisStore.settings,
-    });
-  },
-
-  fetchElements() {
-    if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.publishedTree) {
-        this.setState({
-          elements: SynthesisElementStore.elements.publishedTree,
-          expanded: SynthesisElementStore.expandedItems.view,
-          isLoading: false,
-        });
-        return;
-      }
-
-      this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadElementsTreeFromServer();
-      });
-    }
   },
 
   loadElementsTreeFromServer() {
