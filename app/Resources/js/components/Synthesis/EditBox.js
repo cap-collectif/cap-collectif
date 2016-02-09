@@ -8,7 +8,7 @@ import TopMenu from './TopMenu';
 const EditBox = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
-    children: React.PropTypes.object,
+    children: React.PropTypes.element,
   },
   mixins: [IntlMixin],
 
