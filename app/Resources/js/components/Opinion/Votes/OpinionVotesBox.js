@@ -63,11 +63,7 @@ const OpinionVotesBox = React.createClass({
         }
         <Row>
           <Col {...barCols} style={{ paddingTop: '15px' }}>
-            {
-              this.showVotesButtons()
-              ? <OpinionVotesButtons opinion={opinion} />
-              : null
-            }
+            <OpinionVotesButtons show={this.showVotesButtons()} opinion={opinion} />
             <OpinionVotesBar opinion={opinion} />
           </Col>
           {

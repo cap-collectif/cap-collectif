@@ -8,16 +8,9 @@ import { ButtonToolbar } from 'react-bootstrap';
 const OpinionVotesButtons = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
+    show: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
-
-  isVersion() {
-    return !!this.props.opinion.parent;
-  },
-
-  isContribuable() {
-    return this.isVersion() ? this.props.opinion.parent.isContribuable : this.props.opinion.isContribuable;
-  },
 
   isTheUserTheAuthor() {
     if (this.props.opinion.author === null || !LoginStore.isLoggedIn()) {
@@ -27,7 +20,7 @@ const OpinionVotesButtons = React.createClass({
   },
 
   render() {
-    if (!this.isContribuable) {
+    if (!this.props.show) {
       return null;
     }
     const opinion = this.props.opinion;

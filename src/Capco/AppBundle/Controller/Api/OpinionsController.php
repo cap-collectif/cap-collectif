@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\Argument;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Form\OpinionVersionType;
@@ -120,6 +121,7 @@ class OpinionsController extends FOSRestController
      *
      * @Get("/opinions/{id}/votes")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne"})
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */
     public function getOpinionVotesAction(Opinion $opinion)
@@ -626,6 +628,7 @@ class OpinionsController extends FOSRestController
      * @Get("/opinions/{opinionId}/versions/{versionId}/votes")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos", "UserMedias"})
      */
     public function getOpinionVersionVotesAction(Opinion $opinion, OpinionVersion $version)
