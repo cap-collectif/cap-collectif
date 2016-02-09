@@ -9,9 +9,8 @@ import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
 const SynthesisBox = React.createClass({
   propTypes: {
-    mode: React.PropTypes.string.isRequired,
+    mode: React.PropTypes.string,
     synthesis_id: React.PropTypes.string.isRequired,
-    children: React.PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -66,7 +65,7 @@ const SynthesisBox = React.createClass({
       }
       if (this.props.mode === 'edit') {
         return (
-          <EditBox synthesis={this.state.synthesis} children={this.props.children} />
+          <EditBox synthesis={this.state.synthesis} />
         );
       }
       return (

@@ -1,3 +1,4 @@
+@opinions
 Feature: Opinions
 
 ## Get
@@ -102,6 +103,22 @@ Feature: Opinions
     """
 
 ## Vote
+
+  Scenario: Anonymous API client wants to get all votes of an opinion
+    When I send a GET request to "/api/opinions/57/votes"
+    Then the JSON response status code should be 200
+    And the JSON response should match:
+    """
+    {
+      "votes": [
+        {
+          "user": @...@,
+          "value": @integer@
+        },
+        @...@
+      ]
+    }
+    """
 
   ### As an Anonymous
 

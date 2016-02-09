@@ -25,7 +25,7 @@ frontend:
                 - Capco\AppBundle\Behat\NavigationContext
                 - Alex\MailCatcher\Behat\MailCatcherContext
             filters:
-                tags: "~@javascript"
+                tags: "~@javascript&&~@synthesis"
 
 javascript:
     formatters:
@@ -61,7 +61,7 @@ javascript:
                 - Capco\AppBundle\Behat\NavigationContext
                 - Alex\MailCatcher\Behat\MailCatcherContext
             filters:
-                tags: "@javascript"
+                tags: "@javascript&&~@synthesis"
 
 commands:
     formatters:
@@ -98,3 +98,5 @@ api:
                 - Capco\AppBundle\Behat\ApiContext
                 - Capco\AppBundle\Behat\NavigationContext
                 - Alex\MailCatcher\Behat\MailCatcherContext
+            filters:
+               tags: "~@synthesis"

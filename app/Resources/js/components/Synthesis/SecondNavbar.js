@@ -1,23 +1,18 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import { Nav, Navbar, NavBrand, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
+import { NavItemLink } from 'react-router';
 
 const SecondNavbar = React.createClass({
   mixins: [IntlMixin],
 
   render() {
     return (
-      <Navbar fixedTop fluid className="synthesis__second-navbar">
-        <NavBrand>
-          {this.getIntlMessage('edition.navbar.second.brand')}
-        </NavBrand>
+      <Navbar fixedTop fluid className="synthesis__second-navbar" brand={this.getIntlMessage('edition.navbar.second.brand')}>
         <Nav right>
-          <LinkContainer to={'/preview'}>
-            <NavItem>
-              {this.getIntlMessage('edition.navbar.second.preview')}
-            </NavItem>
-          </LinkContainer>
+          <NavItemLink to={'preview'}>
+            {this.getIntlMessage('edition.navbar.second.preview')}
+          </NavItemLink>
         </Nav>
       </Navbar>
     );

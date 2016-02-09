@@ -35,8 +35,9 @@ Scenario: Anonymous wants to comment a blogpost
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
   When I press "Commenter"
-  And I wait 2 seconds
-  Then I should see "J'ai un truc à dire" in the ".opinion__list" element
+  And I wait 8 seconds
+  Then I should see "Merci ! Votre commentaire a bien été ajouté."
+  And I should see "J'ai un truc à dire" in the ".opinion__list" element
 
 @database @javascript
 Scenario: Logged in user wants to comment a blogpost

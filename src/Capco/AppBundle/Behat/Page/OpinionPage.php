@@ -26,6 +26,8 @@ class OpinionPage extends Page
         'sources add' => '#source-form__add',
         'arguments tab' => '#opinion__arguments___tab',
         'connections tab' => '#opinion__links___tab',
+        'show all votes button' => '#opinion-votes-show-all',
+        'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',
     ];
 
     public function clickSourcesTab()
@@ -64,5 +66,15 @@ class OpinionPage extends Page
     public function voteForFirstSource()
     {
         $this->getElement('Vote first source')->click();
+    }
+
+    public function clickShowAllVotesButton()
+    {
+        $this->getElement('show all votes button')->click();
+    }
+
+    public function getVotesInModalSelector()
+    {
+        return $this->getSelector('votes in modal');
     }
 }

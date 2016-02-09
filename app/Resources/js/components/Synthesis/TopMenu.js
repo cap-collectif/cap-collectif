@@ -1,7 +1,7 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import { Nav, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Nav } from 'react-bootstrap';
+import { NavItemLink } from 'react-router-bootstrap';
 
 const TopMenu = React.createClass({
   propTypes: {
@@ -44,15 +44,13 @@ const TopMenu = React.createClass({
     ];
   },
 
-  renderMenuItem(item, index) {
+  renderMenuItem(item) {
     const menuItemClass = 'menu__item--' + item.color;
     const iconClass = 'icon--' + item.color;
     return (
-      <LinkContainer to={item.link} key={index}>
-        <NavItem className={'menu__item ' + menuItemClass}>
-            <i style={{ fontSize: '25px' }} className={'cap ' + item.icon + ' ' + iconClass}></i> <span className="hidden-sm">{this.getIntlMessage('edition.topMenu.' + item.label)}</span>
-        </NavItem>
-      </LinkContainer>
+      <NavItemLink to={item.link} className={'menu__item ' + menuItemClass}>
+          <i style={{ fontSize: '25px' }} className={'cap ' + item.icon + ' ' + iconClass}></i> <span className="hidden-sm">{this.getIntlMessage('edition.topMenu.' + item.label)}</span>
+      </NavItemLink>
     );
   },
 
@@ -61,9 +59,9 @@ const TopMenu = React.createClass({
     return (
       <Nav bsStyle="tabs" justified className="synthesis__top-menu">
         {
-          items.map((item, index) => {
+          items.map((item) => {
             return (
-              this.renderMenuItem(item, index)
+              this.renderMenuItem(item)
             );
           })
         }

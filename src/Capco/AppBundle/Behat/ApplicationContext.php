@@ -56,12 +56,25 @@ class ApplicationContext extends UserContext
         'opinionTypeSlug' => 'section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-1',
     ];
+    protected static $opinionWithLoadsOfVotes = [
+        'projectSlug' => 'projet-de-loi-renseignement',
+        'stepSlug' => 'elaboration-de-la-loi',
+        'opinionTypeSlug' => 'section-1-ouverture-des-donnees-publiques',
+        'opinionSlug' => 'article-2',
+    ];
     protected static $version = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
         'opinionTypeSlug' => 'section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-1',
         'versionSlug' => 'modification-1',
+    ];
+    protected static $opinionVersionWithLoadsOfVotes = [
+        'projectSlug' => 'projet-de-loi-renseignement',
+        'stepSlug' => 'elaboration-de-la-loi',
+        'opinionTypeSlug' => 'section-1-ouverture-des-donnees-publiques',
+        'opinionSlug' => 'article-2',
+        'versionSlug' => 'modification-2',
     ];
 
     /**
@@ -1153,7 +1166,7 @@ class ApplicationContext extends UserContext
         $this->pressButton('Signaler');
         $this->iWait(1);
     }
-    
+
     // ************************** Project stats *****************************
 
     /**
@@ -1310,6 +1323,16 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * Go to a opinion version with loads of votes.
+     *
+     * @When I go to an opinion version with loads of votes
+     */
+    public function iGoToAnOpinionVersionWithLoadsOfVote()
+    {
+        $this->visitPageWithParams('opinion version page', self::$opinionVersionWithLoadsOfVotes);
+    }
+
+    /**
      * I should not see the delete version button.
      *
      * @Then I should not see the delete version button
@@ -1332,10 +1355,10 @@ class ApplicationContext extends UserContext
     }
 
     /**
-    * I confirm version deletion
-    *
-    * @When I confirm version deletion
-    */
+     * I confirm version deletion.
+     *
+     * @When I confirm version deletion
+     */
     public function iConfirmVersionDeletion()
     {
         $this->navigationContext->getPage('opinion version page')->confirmDeletion();
@@ -1352,5 +1375,59 @@ class ApplicationContext extends UserContext
         $this->assertPageNotContainsText('Modification 1');
     }
 
+    /**
+     * I click the show all opinion version votes button.
+     *
+     * @When I click the show all opinion version votes button
+     */
+    public function iClickTheShowAllOpinionVersionVotesButton()
+    {
+        $this->navigationContext->getPage('opinion version page')->clickShowAllVotesButton();
+        $this->iWait(1);
+    }
 
+    /**
+     * I should see all opinion version votes.
+     *
+     * @Then I should see all opinion version votes
+     */
+    public function iShouldSeeAllOpinionVersionVotes()
+    {
+        $votesInModalSelector = $this->navigationContext->getPage('opinion version page')->getVotesInModalSelector();
+        $this->assertNumElements(49, $votesInModalSelector);
+    }
+
+    // ************************************ Opinion **************************************************
+
+    /**
+     * Go to a opinion with loads of votes.
+     *
+     * @When I go to an opinion with loads of votes
+     */
+    public function iGoToAnOpinionWithLoadsOfVote()
+    {
+        $this->visitPageWithParams('opinion page', self::$opinionWithLoadsOfVotes);
+    }
+
+    /**
+     * I click the show all opinion votes button.
+     *
+     * @When I click the show all opinion votes button
+     */
+    public function iClickTheShowAllOpinionVotesButton()
+    {
+        $this->navigationContext->getPage('opinion page')->clickShowAllVotesButton();
+        $this->iWait(1);
+    }
+
+    /**
+     * I should see all opinion votes.
+     *
+     * @Then I should see all opinion votes
+     */
+    public function iShouldSeeAllOpinionVotes()
+    {
+        $votesInModalSelector = $this->navigationContext->getPage('opinion page')->getVotesInModalSelector();
+        $this->assertNumElements(44, $votesInModalSelector);
+    }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { NavItemLink } from 'react-router-bootstrap';
 
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
@@ -99,11 +99,9 @@ const SideMenu = React.createClass({
 
   renderContributionsButton() {
     return (
-      <LinkContainer to="/folder_manager">
-        <NavItem className="menu__link" bsStyle="link">
+        <NavItemLink to="folder_manager" className="menu__link" bsStyle="link">
           <i className="cap cap-baloon"></i> {this.getIntlMessage('edition.sideMenu.contributions')}
-        </NavItem>
-      </LinkContainer>
+        </NavItemLink>
     );
   },
 
@@ -135,11 +133,9 @@ const SideMenu = React.createClass({
 
   renderManageButton() {
     return (
-      <LinkContainer to="/folder_manager">
-        <NavItem className="menu__link menu__action">
-          <i className="cap cap-folder-edit"></i> {this.getIntlMessage('edition.action.manage.label')}
-        </NavItem>
-      </LinkContainer>
+      <NavItemLink className="menu__link menu__action" to="folder_manager">
+        <i className="cap cap-folder-edit"></i> {this.getIntlMessage('edition.action.manage.label')}
+      </NavItemLink>
     );
   },
 

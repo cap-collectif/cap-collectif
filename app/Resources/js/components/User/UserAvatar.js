@@ -8,6 +8,10 @@ const UserAvatar = React.createClass({
     className: React.PropTypes.string,
     style: React.PropTypes.object,
     anchor: React.PropTypes.bool,
+    onBlur: React.PropTypes.func,
+    onFocus: React.PropTypes.func,
+    onMouseOver: React.PropTypes.func,
+    onMouseOut: React.PropTypes.func,
   },
 
   getDefaultProps() {
@@ -17,6 +21,10 @@ const UserAvatar = React.createClass({
       className: '',
       style: {},
       anchor: true,
+      onBlur: () => {},
+      onFocus: () => {},
+      onMouseOver: () => {},
+      onMouseOut: () => {},
     };
   },
 
@@ -29,16 +37,22 @@ const UserAvatar = React.createClass({
   },
 
   render() {
+    const funcProps = {
+      onBlur: this.props.onBlur,
+      onFocus: this.props.onFocus,
+      onMouseOver: this.props.onMouseOver,
+      onMouseOut: this.props.onMouseOut,
+    };
     if (this.props.user && this.props.user._links && this.props.anchor) {
       return (
-        <a className={this.props.className} style={this.props.style} href={this.props.user._links.profile}>
+        <a {...funcProps} className={this.props.className} style={this.props.style} href={this.props.user._links.profile}>
           { this.renderAvatar() }
         </a>
       );
     }
 
     return (
-      <span className={this.props.className} style={this.props.style} >
+      <span {...funcProps} className={this.props.className} style={this.props.style} >
         { this.renderAvatar() }
       </span>
     );

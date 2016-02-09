@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, hashHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 
 import routes from './routes';
 import IntlData from './translations/Synthesis/FR';
@@ -18,7 +18,7 @@ AuthService
   }
   if ($('#render-synthesis-edit-box').length) {
     ReactDOM.render(
-      <Router history={hashHistory}>
+      <Router history={browserHistory}>
         {routes}
       </Router>,
       document.getElementById('render-synthesis-edit-box')

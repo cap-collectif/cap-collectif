@@ -521,6 +521,11 @@
         border-right: 1px solid {{ mainText | raw }};
     }
 
+    .opinion__votes__more__link {
+        background-color: {{ btnPrimary | raw }};
+        color: {{ btnPrimaryText | raw }};
+    }
+
     {% if null != vipBg %}
         .bg-vip,
         .bg-vip:hover,

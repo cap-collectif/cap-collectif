@@ -60,7 +60,7 @@ Feature: Source
     And I wait 1 seconds
     And I go on the sources tab
     And The first source vote counter should be "1"
-    When I click the "#source-35 .source__btn--edit" element
+    When I click the "#source-28 .source__btn--edit" element
     And I wait 1 seconds
     And I check "sourceEditCheck"
     And I fill in the following:
@@ -80,7 +80,7 @@ Feature: Source
       | opinionSlug      | opinion-2                        |
     And I wait 1 seconds
     And I go on the sources tab
-    When I click the "#source-35 .source__btn--edit" element
+    When I click the "#source-28 .source__btn--edit" element
     And I wait 1 seconds
     And I fill in the following:
       | sourceBody       | Je modifie ma source !   |
@@ -97,8 +97,8 @@ Feature: Source
       | opinionSlug      | opinion-2                        |
     And I wait 1 seconds
     And I go on the sources tab
-    Then I should not see "Modifier" in the "#source-35" element
-    Then I should not see "Supprimer" in the "#source-35" element
+    Then I should not see "Modifier" in the "#source-28" element
+    Then I should not see "Supprimer" in the "#source-28" element
 
  # Delete
   @javascript @database
@@ -111,11 +111,11 @@ Feature: Source
       | opinionSlug      | opinion-2                        |
     And I wait 1 seconds
     And I go on the sources tab
-    And I should see a "#source-35" element
-    When I click the "#source-35 .source__btn--delete" element
+    And I should see a "#source-28" element
+    When I click the "#source-28 .source__btn--delete" element
     And I press "confirm-opinion-source-delete"
     And I wait 1 seconds
-    And I should not see a "#source-35" element
+    And I should not see a "#source-28" element
 
   # Reporting
   @javascript @security
@@ -129,8 +129,8 @@ Feature: Source
       | opinionSlug      | opinion-2                        |
     And I wait 1 seconds
     And I go on the sources tab
-    And I should see a "#source-35" element
-    And I should not see a "#source-35 .source__btn--report" element
+    And I should see a "#source-28" element
+    And I should not see a "#source-28 .source__btn--report" element
 
   @javascript
   Scenario: Non author of a source can report it
@@ -143,8 +143,8 @@ Feature: Source
       | opinionSlug      | opinion-2                        |
     And I wait 1 seconds
     And I go on the sources tab
-    And I should see a "#source-35" element
-    When I click the "#source-35 .source__btn--report" element
+    And I should see a "#source-28" element
+    When I click the "#source-28 .source__btn--report" element
     And I select "Contenu à caractère sexuel" from "reportType"
     And I fill in the following:
       | reportBody   | scandaleux     |
