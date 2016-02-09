@@ -3,7 +3,7 @@ import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
 import { Table } from 'react-bootstrap';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
 const ProposalsUserVotesPage = React.createClass({
@@ -55,6 +55,10 @@ const ProposalsUserVotesPage = React.createClass({
                     {
                       this.state.votableSteps.length > 1
                       ? <h2>
+                          <a className="pull-left btn btn-default" href={step._links.show} style={{ marginRight: '15px' }}>
+                            <i className="cap cap-arrow-1-1"></i>
+                            <span> {this.getIntlMessage('project.votes.back')}</span>
+                          </a>
                         {step.title + ' '}
                         {
                           step.voteType === VOTE_TYPE_BUDGET
@@ -62,11 +66,18 @@ const ProposalsUserVotesPage = React.createClass({
                             : this.getIntlMessage('project.votes.type.simple')
                         }
                       </h2>
-                      : null
+                      : <p>
+                          <a className="btn btn-default" href={step._links.show}>
+                            <i className="cap cap-arrow-1-1"></i>
+                            <span> {this.getIntlMessage('project.votes.back')}</span>
+                          </a>
+                        </p>
                     }
                     {
                       step.votesHelpText
-                      ? <p>{step.votesHelpText}</p>
+                      ? <div>
+                          <FormattedHTMLMessage message={step.votesHelpText} />
+                      </div>
                       : null
                     }
                     <h3>

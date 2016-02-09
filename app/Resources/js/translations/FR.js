@@ -299,6 +299,7 @@ export default {
         title: 'Statistiques',
       },
       votes: {
+        back: 'Retour à l\'étape de vote',
         delete: 'Retirer',
         nb: '{num, plural, =0{0 proposition sélectionnée} one{# proposition sélectionnée} other{# propositions sélectionnées}}',
         no_active_step: 'Aucun étape de vote n\'est actuellement active.',
@@ -309,9 +310,10 @@ export default {
         },
         widget: {
           budget: 'Budget',
-          count: 'Mes votes',
+          count: '{num, plural, =0{0 vote} one{# vote} other{# votes}}',
           left: 'Restant',
           no_value: 'Non renseigné',
+          selection: 'Ma sélection',
           spent: 'Dépensé',
           step: 'Étape',
         },
