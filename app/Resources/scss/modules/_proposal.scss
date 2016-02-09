@@ -136,8 +136,8 @@ $statuses:
   height: $navbar-height;
   overflow: hidden;
   z-index: 1020;
-  border-color: $votes-widget-border;
-  background-color: $votes-widget-bg;
+  border-color: $white;
+  background-color: $brand-color-1;
 
   .container {
     padding-top: 0;
@@ -150,10 +150,10 @@ $statuses:
   }
 
   .widget__counter {
-    color: $votes-widget-text;
+    color: $white;
     padding-top: 5px;
     padding-bottom: 5px;
-    border-right: 1px solid $votes-widget-border;
+    border-right: 1px solid white;
   }
 
   .widget__counter__label {
@@ -171,12 +171,6 @@ $statuses:
     .progress-bar {
       min-width: 30px;
     }
-  }
-
-  .widget__button {
-    margin-left: 15px;
-    background-color: $votes-widget-btn-bg;
-    color: $votes-widget-btn-text;
   }
 }
 

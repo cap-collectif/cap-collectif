@@ -1,3 +1,4 @@
+@proposals_comments
 Feature: Proposals comments
 
 ## List Comments
@@ -117,7 +118,7 @@ Feature: Proposals comments
     When I send a POST request to "/api/proposal_forms/1/proposals/1/comments" with json:
     """
     {
-      "parent": 153,
+      "parent": 154,
       "authorName": "Kéké",
       "authorEmail": "vivele94@gmail.com",
       "body": "Ma super réponse"
@@ -154,7 +155,7 @@ Feature: Proposals comments
     When I send a POST request to "/api/proposal_forms/1/proposals/1/comments" with json:
     """
     {
-      "parent": 153,
+      "parent": 154,
       "body": "Oh oui j'ose :-P"
     }
     """
@@ -206,7 +207,7 @@ Feature: Proposals comments
     When I send a POST request to "/api/proposal_forms/1/proposals/1/comments" with json:
     """
     {
-      "parent": 157,
+      "parent": 158,
       "body": "Pr0 Hacker"
     }
     """

@@ -6,8 +6,6 @@ use Capco\AppBundle\Resolver\ProposalVotesResolver;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializationContext;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class SelectionStepSerializationListener extends AbstractSerializationListener
@@ -15,14 +13,12 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
     private $tokenStorage;
     private $proposalVotesResolver;
     protected $serializer;
-    protected $router;
 
-    public function __construct(TokenStorageInterface $tokenStorage, ProposalVotesResolver $proposalVotesResolver, Serializer $serializer, RouterInterface $router)
+    public function __construct(TokenStorageInterface $tokenStorage, ProposalVotesResolver $proposalVotesResolver, Serializer $serializer)
     {
         $this->tokenStorage = $tokenStorage;
         $this->proposalVotesResolver = $proposalVotesResolver;
         $this->serializer = $serializer;
-        $this->router = $router;
     }
 
     public static function getSubscribedEvents()
@@ -58,14 +54,5 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
             ], 'json', SerializationContext::create()->setGroups(['ProposalVotes', 'Proposals', 'Steps', 'UsersInfos']));
             $event->getVisitor()->addData('userVotes', json_decode($userVotes, true)['data']);
         }
-
-        $event->getVisitor()->addData(
-            '_links', [
-                'show' => $this->router->generate('app_project_show_selection', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                ], true),
-            ]
-        );
     }
 }

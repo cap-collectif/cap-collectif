@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     endAt: <dateTimeBetween('now', '+40 days')>
     body: <p><text(1000)></p>
     voteType: 1
-    votesHelpText: <p><text(1000)></p>
+    votesHelpText: <text(1000)>
   selectionStep2:
     title: Vainqueur
     isEnabled: true
@@ -28,7 +28,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     endAt: <dateTimeBetween('now', '+40 days')>
     body: <p><text(1000)></p>
     voteType: 2
-    votesHelpText: <p><text(1000)></p>
+    votesHelpText: <text(1000)>
     budget: 3000000
   selectionStep5:
     title: Sélection avec vote simple
@@ -37,4 +37,4 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     endAt: <dateTimeBetween('now', '+40 days')>
     body: <p><text(1000)></p>
     voteType: 1
-    votesHelpText: <p><text(1000)></p>
+    votesHelpText: <text(1000)>

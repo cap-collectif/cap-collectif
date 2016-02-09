@@ -83,11 +83,7 @@ const ProposalVoteBox = React.createClass({
   },
 
   displayForm() {
-    return this.props.voteType === VOTE_TYPE_SIMPLE || (LoginStore.isLoggedIn() && this.userHasEnoughCredits());
-  },
-
-  disableSubmitButton() {
-    return LoginStore.isLoggedIn() && this.props.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits();
+    return this.props.voteType === VOTE_TYPE_SIMPLE || this.userHasEnoughCredits();
   },
 
   render() {
@@ -131,7 +127,7 @@ const ProposalVoteBox = React.createClass({
           bsStyle={(!this.props.userHasVote || this.state.isSubmitting) ? 'success' : 'danger'}
           className="btn-block"
           style={{ marginTop: '10px' }}
-          disabled={this.disableSubmitButton()}
+          disabled={!this.displayForm() && LoginStore.isLoggedIn()}
           loginOverlay={this.props.voteType === VOTE_TYPE_BUDGET}
         />
         {

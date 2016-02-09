@@ -25,6 +25,7 @@ class ProposalCommentRepository extends EntityRepository
             ->andWhere('c.isTrashed = :notTrashed')
             ->setParameter('proposal', $proposal)
             ->setParameter('notTrashed', false)
+            ->orderBy('c.pinned', 'DESC')
         ;
 
         if ($filter === 'old') {

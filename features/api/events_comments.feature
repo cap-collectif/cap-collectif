@@ -1,3 +1,4 @@
+@events_comments
 Feature: Events comments
 
 ## List Comments
@@ -14,6 +15,7 @@ Feature: Events comments
       [
         {
           "can_contribute": @boolean@,
+          "pinned": @boolean@,
           "id": @integer@,
           "body": @string@,
           "created_at": "@string@.isDateTime()",

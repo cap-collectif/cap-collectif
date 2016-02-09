@@ -182,8 +182,7 @@ class StepAdmin extends Admin
                     'required' => true,
                     'help' => 'admin.help.step.vote_type',
                 ])
-                ->add('votesHelpText', 'ckeditor', [
-                    'config_name' => 'admin_editor',
+                ->add('votesHelpText', 'textarea', [
                     'label' => 'admin.fields.step.votesHelpText',
                     'required' => false,
                 ])

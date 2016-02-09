@@ -183,29 +183,3 @@ Capco\AppBundle\Entity\SiteColor:
         category: settings.appearance
         value: '#b1D2F2'
         position: 28
-
-    SiteColor33:
-        keyname: color.votes_bar.bg
-        category: settings.appearance
-        value: '#F6F6F6'
-        position: 29
-    SiteColor34:
-        keyname: color.votes_bar.text
-        category: settings.appearance
-        value: '#777777'
-        position: 30
-    SiteColor35:
-        keyname: color.votes_bar.border
-        category: settings.appearance
-        value: '#E7E7E7'
-        position: 31
-    SiteColor36:
-        keyname: color.votes_bar.btn.bg
-        category: settings.appearance
-        value: '#FFFFFF'
-        position: 32
-    SiteColor37:
-        keyname: color.votes_bar.btn.text
-        category: settings.appearance
-        value: '#000000'
-        position: 33

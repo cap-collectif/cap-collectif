@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\HasAuthorInterface;
+use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -33,6 +34,7 @@ abstract class Comment implements VotableInterface, HasAuthorInterface
 {
     use ValidableTrait;
     use VotableOkTrait;
+    use PinnableTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
@@ -258,6 +260,7 @@ abstract class Comment implements VotableInterface, HasAuthorInterface
     public function setAuthor($Author)
     {
         $this->Author = $Author;
+        $this->setPinned($Author && $Author->isVip());
 
         return $this;
     }

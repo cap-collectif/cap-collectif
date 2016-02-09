@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\AnswerableTrait;
+use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -31,6 +32,7 @@ class Opinion implements SelfLinkableInterface, VotableInterface
     use ValidableTrait;
     use SelfLinkableTrait;
     use AnswerableTrait;
+    use PinnableTrait;
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
@@ -148,11 +150,6 @@ class Opinion implements SelfLinkableInterface, VotableInterface
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionAppendix", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $appendices;
-
-    /**
-     * @ORM\Column(name="pinned", type="boolean")
-     */
-    protected $pinned = false;
 
     /**
      * @ORM\Column(name="ranking", type="integer", nullable=true)
@@ -582,24 +579,6 @@ class Opinion implements SelfLinkableInterface, VotableInterface
     public function removeAppendice(OpinionAppendix $appendix)
     {
         $this->appendices->removeElement($appendix);
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isPinned()
-    {
-        return $this->pinned;
-    }
-
-    /**
-     * @param bool $pinned
-     */
-    public function setPinned($pinned)
-    {
-        $this->pinned = $pinned;
 
         return $this;
     }

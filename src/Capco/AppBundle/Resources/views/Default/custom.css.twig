@@ -91,13 +91,6 @@
 {# VIP user #}
 {% set vipBg = capco_site_color_value('color.user.vip.bg') %}
 
-{# Proposal votes widget #}
-{% set votesWidgetBg = capco_site_color_value('color.votes_bar.bg') | default('#F6F6F6') %}
-{% set votesWidgetText = capco_site_color_value('color.votes_bar.text') | default('#777777') %}
-{% set votesWidgetBorder = capco_site_color_value('color.votes_bar.border') | default('#E7E7E7') %}
-{% set votesWidgetBtnBg = capco_site_color_value('color.votes_bar.btn.bg') | default('#FFFFFF') %}
-{% set votesWidgetBtnText = capco_site_color_value('color.votes_bar.btn.text') | default('#000000') %}
-
 <style>
     a,
     .btn.btn-link {
@@ -519,18 +512,13 @@
     }
 
     .proposal-vote__widget {
-        border-color: {{ votesWidgetBorder | raw }};
-        background-color: {{ votesWidgetBg | raw }};
+        border-color: {{ mainText | raw }};
+        background-color: {{ mainBg | raw }};
     }
 
     .proposal-vote__widget .widget__counter {
-        color: {{ votesWidgetText | raw }};
-        border-right: 1px solid {{ votesWidgetBorder | raw }};
-    }
-
-    .proposal-vote__widget .widget__button {
-        background-color: {{ votesWidgetBtnBg | raw }};
-        color: {{ votesWidgetBtnText | raw }};
+        color: {{ mainText | raw }};
+        border-right: 1px solid {{ mainText | raw }};
     }
 
     .opinion__votes__more__link {

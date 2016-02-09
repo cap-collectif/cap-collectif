@@ -107,13 +107,13 @@ class CommentRepository extends EntityRepository
         if ($from) {
             $qb->andWhere('c.createdAt >= :from')
                ->setParameter('from', $from)
-               ;
+            ;
         }
 
         if ($to) {
             $qb->andWhere('c.createdAt <= :to')
                ->setParameter('to', $to)
-               ;
+           ;
         }
 
         return $qb->getQuery()->getResult();

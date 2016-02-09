@@ -65,13 +65,6 @@ color:
   user:
     vip:
       bg: Couleur de fond des utilisateurs VIP
-  votes_bar:
-    bg: Fond de la barre de votes
-    border: Bordure de la barre de votes
-    btn:
-      bg: Bouton de la barre de votes
-      text: Texte du bouton de la barre de votes
-    text: Texte de la barre de votes
 
 projects:
   content:
