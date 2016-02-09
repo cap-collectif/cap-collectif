@@ -26,8 +26,7 @@ class SelectionStep extends AbstractStep
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selectionSteps", cascade={"persist"})
-     * @ORM\JoinTable(name="selectionstep_proposal")
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="selectionSteps", cascade={"persist"})
      */
     private $proposals;
 
@@ -77,6 +76,7 @@ class SelectionStep extends AbstractStep
     {
         if (!$this->proposals->contains($proposal)) {
             $this->proposals[] = $proposal;
+            $proposal->addSelectionStep($this);
         }
 
         return $this;
@@ -90,6 +90,7 @@ class SelectionStep extends AbstractStep
     public function removeProposal(Proposal $proposal)
     {
         $this->proposals->removeElement($proposal);
+        $proposal->removeSelectionStep($this);
     }
 
     /**

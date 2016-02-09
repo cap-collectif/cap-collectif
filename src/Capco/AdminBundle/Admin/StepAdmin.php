@@ -274,21 +274,11 @@ class StepAdmin extends Admin
         }
     }
 
-    public function postPersist($step)
-    {
-        $this->refreshElastica($step);
-    }
-
     public function preUpdate($step)
     {
         if ($step instanceof SynthesisStep) {
             //$this->manageEmbeddedSynthesis($step);
         }
-    }
-
-    public function postUpdate($step)
-    {
-        $this->refreshElastica($step);
     }
 
     protected function manageEmbeddedSynthesis($step)
@@ -309,14 +299,6 @@ class StepAdmin extends Admin
                     $this->getConfigurationPool()->getContainer()->get('capco.synthesis.synthesis_handler')->createOrUpdateElementsFromSource($synthesis);
                 }
             }
-        }
-    }
-
-    protected function refreshElastica($step)
-    {
-        if ($step instanceof SelectionStep) {
-            $index = $this->getConfigurationPool()->getContainer()->get('fos_elastica.index');
-            $index->refresh();
         }
     }
 }
