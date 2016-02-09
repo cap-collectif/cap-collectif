@@ -5,7 +5,7 @@ import ElementTitle from './ElementTitle';
 const ElementBreadcrumb = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
-    link: React.PropTypes.bool,
+    link: React.PropTypes.string,
   },
   mixins: [IntlMixin],
 

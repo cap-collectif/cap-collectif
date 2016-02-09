@@ -267,11 +267,6 @@ export default {
       },
       version_comment: 'Explication',
       version_parent: 'Modification de : ',
-      votes: {
-        modal: {
-          title: 'Tous les votes',
-        },
-      },
     },
     project: {
       stats: {

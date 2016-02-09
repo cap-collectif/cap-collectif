@@ -2,7 +2,7 @@ import React from 'react';
 import { IntlMixin } from 'react-intl';
 import LoginStore from '../../stores/LoginStore';
 import UserAvatar from '../User/UserAvatar';
-import { Navbar, Nav, NavItem, DropdownButton, MenuItem, Input, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavbarBrand, NavItem, DropdownButton, MenuItem, Input, Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 
 const MainNavbar = React.createClass({
@@ -79,8 +79,11 @@ const MainNavbar = React.createClass({
 
   render() {
     return (
-      <Navbar fixedTop fluid navExpanded className="synthesis__main-navbar" brand={this.renderBrand()}>
-        <Nav navbar right>
+      <Navbar fixedTop fluid className="synthesis__main-navbar">
+        <NavbarBrand>
+          {this.renderBrand()}
+        </NavbarBrand>
+        <Nav navbar pullRight>
           {this.renderNotifications()}
           {this.renderUser()}
         </Nav>

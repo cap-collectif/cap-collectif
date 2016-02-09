@@ -4,16 +4,18 @@ import MainNavbar from './MainNavbar';
 import SecondNavbar from './SecondNavbar';
 import SideMenu from './SideMenu';
 import TopMenu from './TopMenu';
-import { RouteHandler } from 'react-router';
 
 const EditBox = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
+    children: React.PropTypes.element,
   },
   mixins: [IntlMixin],
 
   render() {
-    if (this.props.synthesis.editable) {
+    const synthesis = this.props.synthesis;
+    const children = this.props.children;
+    if (synthesis.editable) {
       return (
         <div className="synthesis__tool">
           <MainNavbar />
@@ -21,12 +23,12 @@ const EditBox = React.createClass({
           <div className="synthesis__container container-fluid">
             <div className="row">
               <div className="col--left col--scrollable col-xs-12 block--mobile">
-                <SideMenu synthesis={this.props.synthesis} />
+                <SideMenu synthesis={synthesis} />
               </div>
               <div className="col--right col-xs-12 block--mobile">
-                <TopMenu synthesis={this.props.synthesis} />
+                <TopMenu synthesis={synthesis} />
                 <div className="synthesis__content">
-                  <RouteHandler synthesis={this.props.synthesis} />
+                  { React.cloneElement(children, { synthesis: synthesis }) }
                 </div>
               </div>
             </div>

@@ -111,19 +111,19 @@ Feature: Sources
 
   @security
   Scenario: Anonymous API client wants to update a source
-    When I send a PUT request to "/api/opinions/57/versions/1/sources/27" with a valid source json
+    When I send a PUT request to "/api/opinions/57/versions/1/sources/20" with a valid source json
     Then the JSON response status code should be 401
 
   @security
   Scenario: Logged in API client wants to update a source but is not the author
     Given I am logged in to api as admin
-    When I send a PUT request to "/api/opinions/57/versions/1/sources/27" with a valid source json
+    When I send a PUT request to "/api/opinions/57/versions/1/sources/20" with a valid source json
     Then the JSON response status code should be 403
 
   @database
   Scenario: Logged in API client wants to update his source
     Given I am logged in to api as xlacot
-    When I send a PUT request to "/api/opinions/57/versions/1/sources/27" with a valid source json
+    When I send a PUT request to "/api/opinions/57/versions/1/sources/20" with a valid source json
     Then the JSON response status code should be 200
 
 ## Delete
@@ -152,19 +152,19 @@ Feature: Sources
 
   @security
   Scenario: Anonymous API client wants to delete a source
-    When I send a DELETE request to "/api/opinions/57/versions/1/sources/27"
+    When I send a DELETE request to "/api/opinions/57/versions/1/sources/20"
     Then the JSON response status code should be 401
 
   @security
   Scenario: Logged in API client wants to delete a source but is not the author
     Given I am logged in to api as admin
-    When I send a DELETE request to "/api/opinions/57/versions/1/sources/27"
+    When I send a DELETE request to "/api/opinions/57/versions/1/sources/20"
     Then the JSON response status code should be 403
 
   @database
   Scenario: Logged in API client wants to delete his source
     Given I am logged in to api as xlacot
-    When I send a DELETE request to "/api/opinions/57/versions/1/sources/27"
+    When I send a DELETE request to "/api/opinions/57/versions/1/sources/20"
     Then the JSON response status code should be 204
 
 ## Vote
@@ -225,17 +225,17 @@ Feature: Sources
   # OpinionVersion
   @database
   Scenario: Anonymous API client wants to add a report
-    When I send a POST request to "/api/opinions/57/versions/1/sources/27/reports" with a valid report json
+    When I send a POST request to "/api/opinions/57/versions/1/sources/20/reports" with a valid report json
     Then the JSON response status code should be 401
 
   @database
   Scenario: Logged in API client wants to delete a source but is the author
     Given I am logged in to api as xlacot
-    When I send a POST request to "/api/opinions/57/versions/1/sources/27/reports" with a valid report json
+    When I send a POST request to "/api/opinions/57/versions/1/sources/20/reports" with a valid report json
     Then the JSON response status code should be 403
 
   @database
   Scenario: Logged in API client wants to report his source
     Given I am logged in to api as admin
-    When I send a POST request to "/api/opinions/57/versions/1/sources/27/reports" with a valid report json
+    When I send a POST request to "/api/opinions/57/versions/1/sources/20/reports" with a valid report json
     Then the JSON response status code should be 201

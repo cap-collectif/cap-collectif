@@ -27,8 +27,6 @@ class OpinionVersionPage extends Page
         'arguments tab' => '#opinion__arguments___tab',
         'delete button' => '#opinion-delete',
         'confirm delete button' => '#confirm-opinion-delete',
-        'show all votes button' => '#opinion-votes-show-all',
-        'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',
     ];
 
     public function clickSourcesTab()
@@ -77,15 +75,5 @@ class OpinionVersionPage extends Page
     public function getDeleteButtonSelector()
     {
         return $this->getSelector('delete button');
-    }
-
-    public function clickShowAllVotesButton()
-    {
-        $this->getElement('show all votes button')->click();
-    }
-
-    public function getVotesInModalSelector()
-    {
-        return $this->getSelector('votes in modal');
     }
 }
