@@ -1,3 +1,4 @@
+@comments
 Feature: Comments
 
 # Update

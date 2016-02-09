@@ -385,7 +385,12 @@ EOF;
     public function commentsOrderedByPopularity()
     {
         $max = 100000;
+        $pinned = true;
         foreach ($this->response->json()['comments'] as $comment) {
+            if ($pinned && !$comment['pinned']) {
+                $max = 100000;
+                $pinned = false;
+            }
             \PHPUnit_Framework_Assert::assertGreaterThanOrEqual($comment['votes_count'], $max);
             $max = $comment['votes_count'];
         }

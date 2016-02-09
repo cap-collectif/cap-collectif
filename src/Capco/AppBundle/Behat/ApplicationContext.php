@@ -1456,7 +1456,7 @@ class ApplicationContext extends UserContext
         $this->element1ShouldBeBeforeElement2ForSelector(
             'Coucou ! Je suis un commentaire épinglé.',
             'Coucou, je suis un simple commentaire.',
-            'li.opinion--comment'
+            '.opinion--comment .opinion__text'
         );
     }
 
@@ -1470,7 +1470,7 @@ class ApplicationContext extends UserContext
         $this->element1ShouldBeBeforeElement2ForSelector(
             'Commentaire d\'un VIP !',
             'Coucou, je suis un simple commentaire.',
-            'li.opinion--comment'
+            '.opinion--comment .opinion__text'
         );
     }
 }

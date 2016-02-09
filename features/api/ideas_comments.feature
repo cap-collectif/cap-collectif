@@ -1,3 +1,4 @@
+@ideas_comments
 Feature: Ideas comments
 
 ## List Comments
