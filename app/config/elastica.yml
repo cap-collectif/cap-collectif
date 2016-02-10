@@ -144,8 +144,8 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
-        # Consultation Step
-        consultationStep:
+        # consultation_step
+        consultation_step:
           indexable_callback: getIsEnabled
           serializer:
             groups: [ConsultationSteps]

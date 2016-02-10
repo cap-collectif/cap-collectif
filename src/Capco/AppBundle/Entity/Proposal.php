@@ -136,8 +136,7 @@ class Proposal implements CommentableInterface, VotableInterface
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", inversedBy="proposals", cascade={"persist"})
-     * @ORM\JoinTable(name="selectionstep_proposal")
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", mappedBy="proposals", cascade={"persist"})
      */
     private $selectionSteps;
 
@@ -443,6 +442,7 @@ class Proposal implements CommentableInterface, VotableInterface
     {
         if (!$this->selectionSteps->contains($selectionStep)) {
             $this->selectionSteps[] = $selectionStep;
+            $selectionStep->addProposal($this);
         }
 
         return $this;
@@ -456,6 +456,7 @@ class Proposal implements CommentableInterface, VotableInterface
     public function removeSelectionStep(SelectionStep $selectionStep)
     {
         $this->selectionSteps->removeElement($selectionStep);
+        $selectionStep->removeProposal($this);
     }
 
     /**
