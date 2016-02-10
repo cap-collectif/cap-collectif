@@ -23,7 +23,7 @@ class SynthesisEditionPage extends Page
         'menu item unpublished' => '#menu-item-unpublished',
         'menu item all' => '#menu-item-all',
         'element link' => [
-            'xpath' => '//*[contains(@class,\'element__title\') and text()=\'Opinion 52\']'
+            'xpath' => '//*[contains(@class,\'element__title\') and text()=\'Opinion 52\']',
         ],
         'ignore element button' => '.element__action-ignore',
         'publish element button' => '.element__action-publish',
@@ -140,6 +140,4 @@ class SynthesisEditionPage extends Page
     {
         $this->getElement('element creation submit button')->click();
     }
-
-
 }

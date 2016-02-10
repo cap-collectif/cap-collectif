@@ -40,6 +40,11 @@ Feature: Proposals
     Then there should be 2 proposals
     Then proposals should be filtered by theme and terms and sorted by comments
 
+  @javascript @elasticsearch
+  Scenario: Anonymous user wants to see proposals likers
+    Given I go to an open collect step
+    Then I should see the proposal likers
+
   # CRUD
 
   @database @javascript @elasticsearch

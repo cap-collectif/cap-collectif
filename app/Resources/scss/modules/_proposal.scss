@@ -107,6 +107,10 @@ $statuses:
   margin-bottom: 0;
 }
 
+.proposal__preview .proposal__info {
+  display: block;
+}
+
 .proposal-search-group {
   @media (max-width: $screen-sm-max) {
     margin-top: 15px;

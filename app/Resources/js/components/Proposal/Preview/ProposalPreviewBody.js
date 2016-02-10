@@ -1,6 +1,7 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
+import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 
 const ProposalPreviewBody = React.createClass({
   propTypes: {
@@ -30,12 +31,13 @@ const ProposalPreviewBody = React.createClass({
               </div>
             : null
           }
-          <div className="proposal__info">
-            <ProposalDetailEstimation
-              proposal={proposal}
-              showNullEstimation={this.props.showNullEstimation}
-            />
-          </div>
+          <ProposalDetailEstimation
+            proposal={proposal}
+            showNullEstimation={this.props.showNullEstimation}
+          />
+          <ProposalDetailLikers
+            proposal={proposal}
+          />
         </div>
       </div>
     );

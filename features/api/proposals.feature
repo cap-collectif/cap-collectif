@@ -90,6 +90,7 @@ Feature: Proposal Restful Api
           "author": @...@
         },
         "hasUserReported": @boolean@,
+        "likers": @array@,
         "_links": {
           "show": @string@,
           "index": @string@,
@@ -144,6 +145,7 @@ Feature: Proposal Restful Api
           "title": @string@,
           "answer": @...@,
           "votesCountBySelectionSteps": @...@,
+          "likers": @array@,
           "_links": @...@
         },
         @...@
@@ -203,6 +205,7 @@ Feature: Proposal Restful Api
           "title": @string@,
           "answer": @...@,
           "votesCountBySelectionSteps": @...@,
+          "likers": @array@,
           "_links": @...@
         }
       ],

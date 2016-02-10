@@ -459,6 +459,7 @@ admin:
         answer: <span class="capco--sonata-ba-field-help"><i class="fa fa-exclamation-triangle"></i>&nbsp;Ajouter ou modifier une réponse à cette proposition en informera son auteur par email.</span>
       id: Id
       isTrashed: Dans la corbeille
+      likers: Coup(s) de coeur
       link: Lien
       no_district: Aucun quartier
       no_status: Aucun statut

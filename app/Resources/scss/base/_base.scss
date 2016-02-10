@@ -625,3 +625,12 @@ svg.avatar {
     content: none;
   }
 }
+
+@each $icon in $icons-colors {
+  $name: nth($icon, 1);
+  $color: nth($icon, 2);
+
+  .icon--#{$name} {
+    color: $color;
+  }
+}

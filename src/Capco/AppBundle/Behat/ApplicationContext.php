@@ -825,6 +825,16 @@ class ApplicationContext extends UserContext
         $this->iWait(1);
     }
 
+    /**
+     * I should see the proposal likers.
+     *
+     * @Then I should see the proposal likers
+     */
+    public function iShouldSeeTheProposalLikers()
+    {
+        $this->assertPageContainsText('2 coups de coeur');
+    }
+
     // ********************************** Proposal votes *************************************************
 
     /**
@@ -1502,7 +1512,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see the synthesis
+     * I should see the synthesis.
      *
      * @Then I should see the synthesis
      */
@@ -1515,7 +1525,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I go to the new inbox
+     * I go to the new inbox.
      *
      * @When I go to the new inbox
      */
@@ -1526,7 +1536,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see the new synthesis elements
+     * I should see the new synthesis elements.
      *
      * @Then I should see the new synthesis elements
      */
@@ -1537,7 +1547,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I go to the archived inbox
+     * I go to the archived inbox.
      *
      * @When I go to the archived inbox
      */
@@ -1548,7 +1558,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see the archived synthesis elements
+     * I should see the archived synthesis elements.
      *
      * @Then I should see the archived synthesis elements
      */
@@ -1559,7 +1569,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I go to the published inbox
+     * I go to the published inbox.
      *
      * @When I go to the published inbox
      */
@@ -1570,7 +1580,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see the published synthesis elements
+     * I should see the published synthesis elements.
      *
      * @Then I should see the published synthesis elements
      */
@@ -1581,7 +1591,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I go to the unpublished inbox
+     * I go to the unpublished inbox.
      *
      * @When I go to the unpublished inbox
      */
@@ -1592,7 +1602,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see the unpublished synthesis elements
+     * I should see the unpublished synthesis elements.
      *
      * @Then I should see the unpublished synthesis elements
      */
@@ -1606,7 +1616,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I go to the all elements inbox
+     * I go to the all elements inbox.
      *
      * @When I go to the all elements inbox
      */
@@ -1617,7 +1627,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see all the synthesis elements
+     * I should see all the synthesis elements.
      *
      * @Then I should see all the synthesis elements
      */
@@ -1628,7 +1638,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I click on a synthesis element
+     * I click on a synthesis element.
      *
      * @When I click on a synthesis element
      */
@@ -1639,7 +1649,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see the synthesis element details
+     * I should see the synthesis element details.
      *
      * @Then I should see the synthesis element details
      */
@@ -1649,7 +1659,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I click the ignore element button
+     * I click the ignore element button.
      *
      * @When I click the ignore element button
      */
@@ -1660,7 +1670,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I confirm the ignore element action
+     * I confirm the ignore element action.
      *
      * @When I confirm the ignore element action
      */
@@ -1671,7 +1681,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see the synthesis element in the unpublished inbox
+     * I should see the synthesis element in the unpublished inbox.
      *
      * @Then I should see the synthesis element in the unpublished inbox
      */
@@ -1683,7 +1693,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see the synthesis element in the archived inbox
+     * I should see the synthesis element in the archived inbox.
      *
      * @Then I should see the synthesis element in the archived inbox
      */
@@ -1695,7 +1705,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I click the publish element button
+     * I click the publish element button.
      *
      * @When I click the publish element button
      */
@@ -1706,7 +1716,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I confirm element publication
+     * I confirm element publication.
      *
      * @When I confirm element publication
      */
@@ -1717,7 +1727,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I give a note to the synthesis element
+     * I give a note to the synthesis element.
      *
      * @When I give a note to the synthesis element
      */
@@ -1727,7 +1737,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * The synthesis element should have the correct note
+     * The synthesis element should have the correct note.
      *
      * @Then the synthesis element should have the correct note
      */
@@ -1741,7 +1751,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I choose a parent for the synthesis element
+     * I choose a parent for the synthesis element.
      *
      * @When I choose a parent for the synthesis element
      */
@@ -1751,7 +1761,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I add a comment to the synthesis element
+     * I add a comment to the synthesis element.
      *
      * @When I add a comment to the synthesis element
      */
@@ -1761,7 +1771,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I click the divide element button
+     * I click the divide element button.
      *
      * @When I click the divide element button
      */
@@ -1772,7 +1782,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I click the create element division button
+     * I click the create element division button.
      *
      * @When I click the create element division button
      */
@@ -1783,7 +1793,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I click the new folder button
+     * I click the new folder button.
      *
      * @When I click the new folder button
      */
@@ -1794,7 +1804,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I create a new synthesis element
+     * I create a new synthesis element.
      *
      * @When I create a new synthesis element
      */
@@ -1805,7 +1815,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * I should see my newly created element in the archived inbox
+     * I should see my newly created element in the archived inbox.
      *
      * @Then I should see my newly created element in the archived inbox
      */

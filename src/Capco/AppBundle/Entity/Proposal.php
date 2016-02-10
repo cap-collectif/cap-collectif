@@ -148,6 +148,13 @@ class Proposal implements CommentableInterface, VotableInterface
     private $estimation = null;
 
     /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinTable(name="user_favorite_proposal")
+     */
+    protected $likers;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -159,6 +166,7 @@ class Proposal implements CommentableInterface, VotableInterface
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
         $this->selectionSteps = new ArrayCollection();
+        $this->likers = new ArrayCollection();
     }
 
     public function __toString()
@@ -525,5 +533,27 @@ class Proposal implements CommentableInterface, VotableInterface
         $this->estimation = $estimation;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLikers()
+    {
+        return $this->likers;
+    }
+
+    public function addLikers(User $liker)
+    {
+        if (!$this->likers->contains($liker)) {
+            $this->likers[] = $liker;
+        }
+
+        return $this;
+    }
+
+    public function removeLikers(User $liker)
+    {
+        $this->likers->removeElement($liker);
     }
 }

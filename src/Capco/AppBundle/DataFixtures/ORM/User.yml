@@ -132,3 +132,17 @@ Capco\UserBundle\Entity\User:
         Media: @MediaUser1
         isTermsAccepted: true
         vip: false
+
+    user504:
+        username: user avec un nom très long comme par exemple conseil régional de machin truc
+        firstname: prenom
+        lastname: nom
+        email: conseilregional@test.com
+        enabled: true
+        userType: @UserType1
+        plainPassword: monsupermotdepassetropsafe
+        roles:
+         - 'ROLE_USER'
+        Media: null
+        isTermsAccepted: true
+        vip: truen

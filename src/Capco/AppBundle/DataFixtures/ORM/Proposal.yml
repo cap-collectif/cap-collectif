@@ -14,6 +14,7 @@ Capco\AppBundle\Entity\Proposal:
     selectionSteps: [@selectionStep1]
     createdAt: <(new \DateTime('2015-01-01'))>
     answer: @answer4
+    likers: [@user1, @user2]
   proposal2:
     title: Rénovation du gymnase
     body: |
@@ -29,6 +30,7 @@ Capco\AppBundle\Entity\Proposal:
     status: @status2
     selectionSteps: [@selectionStep1, @selectionStep2, @selectionStep3]
     createdAt: <(new \DateTime('2015-02-01'))>
+    likers: [@user504]
   proposal3:
     title: Installation de bancs sur la place de la mairie
     body: |

@@ -6,6 +6,7 @@ import moment from 'moment';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
+import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 
 const ProposalPageHeader = React.createClass({
   propTypes: {
@@ -108,9 +109,8 @@ const ProposalPageHeader = React.createClass({
           <span className="proposal__info">
             <i className="cap cap-marker-1-1"></i>{proposal.district.name}
           </span>
-          <span className="proposal__info">
-            <ProposalDetailEstimation proposal={proposal} showNullEstimation={this.props.showNullEstimation} />
-          </span>
+          <ProposalDetailEstimation proposal={proposal} showNullEstimation={this.props.showNullEstimation} />
+          <ProposalDetailLikers proposal={proposal} />
         </div>
       </div>
     );

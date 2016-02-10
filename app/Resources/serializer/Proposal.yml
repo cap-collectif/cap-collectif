@@ -76,6 +76,9 @@ Capco\AppBundle\Entity\Proposal:
       expose: true
       groups: [Proposals]
       serialized_name: selectionSteps
+    likers:
+      expose: true
+      groups: [Proposals]
     votesCount:
       expose: true
       groups: [Proposals]

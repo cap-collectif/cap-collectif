@@ -340,6 +340,10 @@ export default {
       infos: {
         header: '{user} {theme, select, no {le {createdDate}} other {dans {themeLink}, le {createdDate}}}',
       },
+      likers: {
+        count: '{num, plural, one{# coup de coeur} other{# coups de coeur}}',
+        label: 'Coup de coeur de {user}',
+      },
       no_status: 'Aucun statut',
       random_search: 'Afficher d\'autres propositions',
       request: {

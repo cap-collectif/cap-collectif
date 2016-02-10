@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\UnexpectedPageException;
 
 class SynthesisPage extends Page
 {

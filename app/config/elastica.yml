@@ -293,6 +293,11 @@ fos_elastica:
               properties:
                 id:
                   type: long
+            likers:
+              type: object
+              properties:
+                slug:
+                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Proposal
