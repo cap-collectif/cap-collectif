@@ -19,12 +19,13 @@ class IdeaCommentRepository extends EntityRepository
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.Idea', 'i')
-            ->leftJoin('c.answers', 'ans')
+            ->leftJoin('c.answers', 'ans', 'WITH', 'ans.isEnabled = :enabled AND ans.isTrashed = :notTrashed')
             ->andWhere('c.Idea = :idea')
             ->andWhere('c.parent is NULL')
             ->andWhere('c.isTrashed = :notTrashed')
-            ->setParameter('idea', $idea)
+            ->setParameter('enabled', true)
             ->setParameter('notTrashed', false)
+            ->setParameter('idea', $idea)
             ->orderBy('c.pinned', 'DESC')
         ;
 
