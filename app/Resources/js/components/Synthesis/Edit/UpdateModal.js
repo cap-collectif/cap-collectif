@@ -1,10 +1,10 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import SynthesisElementActions from '../../actions/SynthesisElementActions';
-import SynthesisElementStore from '../../stores/SynthesisElementStore';
-import ElementsFinder from './ElementsFinder';
+import SynthesisElementActions from '../../../actions/SynthesisElementActions';
+import SynthesisElementStore from '../../../stores/SynthesisElementStore';
+import ElementsFinder from './../ElementsFinder';
 import { Button, Modal, Input } from 'react-bootstrap';
-import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 
 const UpdateModal = React.createClass({
   propTypes: {

@@ -2,9 +2,9 @@ import React from 'react';
 import { IntlMixin } from 'react-intl';
 import { Modal, Input, Button } from 'react-bootstrap';
 
-import ElementsFinder from './ElementsFinder';
-import SynthesisElementActions from '../../actions/SynthesisElementActions';
-import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
+import ElementsFinder from './../ElementsFinder';
+import SynthesisElementActions from '../../../actions/SynthesisElementActions';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 
 const CreateModal = React.createClass({
   propTypes: {

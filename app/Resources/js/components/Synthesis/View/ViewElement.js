@@ -1,10 +1,10 @@
 import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
-import ElementTitle from './ElementTitle';
-import UserAvatar from '../User/UserAvatar';
-import VotePiechart from '../Utils/VotePiechart';
+import ElementTitle from './../Element/ElementTitle';
+import UserAvatar from '../../User/UserAvatar';
+import VotePiechart from '../../Utils/VotePiechart';
 import ChildrenModal from './ChildrenModal';
-import SynthesisDisplayRules from '../../services/SynthesisDisplayRules';
+import SynthesisDisplayRules from '../../../services/SynthesisDisplayRules';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 const ViewElement = React.createClass({
