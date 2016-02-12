@@ -9,7 +9,7 @@ const MainNavbarUser = React.createClass({
 
   render() {
     if (LoginStore.isLoggedIn()) {
-      const { user } = LoginStore.user;
+      const user = LoginStore.user;
       const dropdownTitle = (
         <span>
           <UserAvatar user={user} size={34} style={{ marginRight: '10px' }} anchor={false} />

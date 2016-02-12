@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 /* eslint no-unused-expressions:0 */
-import React from 'react';
+// waiting for rewire
+/* import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import MainNavbarUser from './MainNavbarUser';
@@ -24,9 +25,7 @@ describe('<MainNavbarUser />', () => {
     },
   };
 
-  // waiting for rewire
-
-  /* it('should render nothing when user is not logged in', () => {
+  it('should render nothing when user is not logged in', () => {
     MainNavbarUser.__Rewire__('LoginStore', {
       isLoggedIn: false,
       user: null,
@@ -55,5 +54,5 @@ describe('<MainNavbarUser />', () => {
     expect(wrapper.find('Nav')).to.have.length(1);
     expect(wrapper.find('NavDropdown')).to.have.length(1);
     expect(wrapper.find('MenuItem')).to.have.length(5);
-  }); */
-});
+  });
+}); */
