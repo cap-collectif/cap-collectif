@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
-import ElementsList from './../List/ElementsList';
-import Loader from '../../Utils/Loader';
-import SynthesisElementStore from '../../../stores/SynthesisElementStore';
-import SynthesisElementActions from '../../../actions/SynthesisElementActions';
+import ElementsList from './ElementsList';
+import Loader from '../Utils/Loader';
+import SynthesisElementStore from '../../stores/SynthesisElementStore';
+import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
 const Pagination = 15;
 

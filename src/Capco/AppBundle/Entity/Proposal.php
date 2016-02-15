@@ -543,7 +543,7 @@ class Proposal implements CommentableInterface, VotableInterface
         return $this->likers;
     }
 
-    public function addLikers(User $liker)
+    public function addLiker(User $liker)
     {
         if (!$this->likers->contains($liker)) {
             $this->likers[] = $liker;
@@ -552,7 +552,7 @@ class Proposal implements CommentableInterface, VotableInterface
         return $this;
     }
 
-    public function removeLikers(User $liker)
+    public function removeLiker(User $liker)
     {
         $this->likers->removeElement($liker);
     }

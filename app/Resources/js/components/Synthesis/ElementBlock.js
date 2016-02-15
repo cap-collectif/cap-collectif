@@ -1,7 +1,7 @@
 import React from 'react';
 import { IntlMixin, FormattedDate } from 'react-intl';
 import moment from 'moment';
-import UserLink from '../../User/UserLink';
+import UserLink from '../User/UserLink';
 import ElementIcon from './ElementIcon';
 import ElementTitle from './ElementTitle';
 import ElementBreadcrumb from './ElementBreadcrumb';
