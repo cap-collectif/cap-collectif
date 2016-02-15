@@ -35,7 +35,9 @@ const ProposalPage = React.createClass({
   },
 
   getInitialState() {
-    ProposalActions.initProposalVotes(this.props.votableStep.creditsLeft, !!this.props.userHasVote);
+    if (this.props.votableStep) {
+      ProposalActions.initProposalVotes(this.props.votableStep.creditsLeft, !!this.props.userHasVote);
+    }
     ProposalActions.initProposal(this.props.proposal);
     return {
       proposal: ProposalStore.proposal,
