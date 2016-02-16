@@ -43,7 +43,7 @@
             'opinionsSort': opinionsSort,
         } only %}
 
-        {% if opinions|length > 0 %}
+        {% if (opinions|length > 0) %}
         <ul class="media-list  opinion__list">
             {% for opinion in opinions %}
                 {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinionType, 'opinionTerm': project.opinionTerm} only %}
@@ -63,7 +63,7 @@
         {% set params = params | merge({'opinionsSort': opinionsSort }) %}
     {% endif %}
 
-    {% if opinionsSort == 'random' and opinions|length > 10  %}
+    {% if opinionsSort == 'random' %}
         {% include 'CapcoAppBundle:Block:loadMoreRandomButton.html.twig' with {'route': currentRoute, 'params': params} only %}
     {% else %}
         {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': currentRoute, 'params': params} only  %}

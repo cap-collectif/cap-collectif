@@ -1,13 +1,13 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 
 const ProposalDetailLikersLabel = React.createClass({
   propTypes: {
-    likers: PropTypes.array.isRequired,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onMouseOver: PropTypes.func,
-    onMouseOut: PropTypes.func,
+    proposal: React.PropTypes.object.isRequired,
+    onFocus: React.PropTypes.func,
+    onBlur: React.PropTypes.func,
+    onMouseOver: React.PropTypes.func,
+    onMouseOut: React.PropTypes.func,
   },
   mixins: [IntlMixin],
 
@@ -21,19 +21,19 @@ const ProposalDetailLikersLabel = React.createClass({
   },
 
   getLabelText() {
-    const { likers } = this.props;
-    if (likers.length === 1) {
-      const name = likers[0].displayName;
+    const { proposal } = this.props;
+    if (proposal.likers.length === 1) {
+      const name = proposal.likers[0].displayName;
       if (name.length > 30) {
         return name.substring(0, 30) + '...';
       }
       return name;
     }
-    if (likers.length > 1) {
+    if (proposal.likers.length > 1) {
       return (
         <FormattedMessage
           message={this.getIntlMessage('proposal.likers.count')}
-          num={likers.length}
+          num={proposal.likers.length}
         />
       );
     }
@@ -47,8 +47,8 @@ const ProposalDetailLikersLabel = React.createClass({
       onMouseOver: this.props.onMouseOver,
       onMouseOut: this.props.onMouseOut,
     };
-    const { likers } = this.props;
-    if (likers.length > 0) {
+    const { proposal } = this.props;
+    if (proposal.likers.length > 0) {
       return (
         <span {...funcProps}>
           <i className="cap cap-heart-1 icon--red"></i>
