@@ -1,9 +1,9 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import MainNavbar from './MainNavbar';
-import SecondNavbar from './SecondNavbar';
-import SideMenu from './SideMenu';
-import TopMenu from './TopMenu';
+import MainNavbar from './Navbars/MainNavbar';
+import SecondNavbar from './Navbars/SecondNavbar';
+import SideMenu from './Navbars/SideMenu';
+import TopMenu from './Inbox/TopMenu';
 
 const EditBox = React.createClass({
   propTypes: {

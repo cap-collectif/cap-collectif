@@ -1,7 +1,7 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
-import ElementBlock from './ElementBlock';
+import ElementBlock from './../Element/ElementBlock';
 
 const ElementListItem = React.createClass({
   propTypes: {

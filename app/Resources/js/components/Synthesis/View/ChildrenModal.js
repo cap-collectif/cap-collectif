@@ -1,6 +1,6 @@
 import React from 'react';
-import ElementsList from './ElementsList';
-import Loader from '../Utils/Loader';
+import ElementsList from './../List/ElementsList';
+import Loader from '../../Utils/Loader';
 import { Modal, Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 
