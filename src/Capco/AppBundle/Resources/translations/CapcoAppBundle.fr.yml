@@ -908,7 +908,7 @@ blog:
   show:
     in_theme: dans
     projects:
-      title: "]-Inf, 1] Projet participatif lié : | ]1,Inf[ Projets participatifs liés :"
+      title: "]-Inf, 1] Lié à : | ]1,Inf[ Liés à :"
     comments: "]-Inf, 0] 0 commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
 
 # Features
@@ -958,7 +958,7 @@ event:
     on_date: le %date%
     comments: "]-Inf, 0] 0 commentaire | {1} 1 commentaire | ]1,Inf[ %count% commentaires"
     projects:
-      title: "]-Inf, 1] Projet participatif lié : | ]1, Inf[ Projets participatifs liés :"
+      title: "]-Inf, 1] Lié à : | ]1, Inf[ Liés à :"
   link_button: Inscription
   no_result:  Aucun évènement ne correspond à ces critères de recherche.
   and: et
