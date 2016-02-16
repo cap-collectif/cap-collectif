@@ -13,6 +13,15 @@ use Doctrine\ORM\Query;
  */
 class OpinionVersionRepository extends EntityRepository
 {
+    public function getAllIds()
+    {
+        $qb = $this->createQueryBuilder('o')
+                  ->select('o.id')
+        ;
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
     public function getOne($id)
     {
         $qb = $this->getIsEnabledQueryBuilder('o')

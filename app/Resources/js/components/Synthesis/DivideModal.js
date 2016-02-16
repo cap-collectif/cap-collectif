@@ -5,17 +5,17 @@ import { Modal, Button, Grid, Row, Col, OverlayTrigger, Popover } from 'react-bo
 import autosize from 'autosize';
 import classNames from 'classnames';
 
-import SynthesisElementActions from '../../../actions/SynthesisElementActions';
-import ArrayHelper from '../../../services/ArrayHelper';
-import FormattedText from '../../../services/FormattedText';
+import SynthesisElementActions from '../../actions/SynthesisElementActions';
+import ArrayHelper from '../../services/ArrayHelper';
+import FormattedText from '../../services/FormattedText';
 
-import ElementTitle from './../Element/ElementTitle';
-import ElementBreadcrumb from './../Element/ElementBreadcrumb';
+import ElementTitle from './ElementTitle';
+import ElementBreadcrumb from './ElementBreadcrumb';
 
-import PublishButton from './../Publish/PublishButton';
-import RemoveButton from './../Delete/RemoveButton';
+import PublishButton from './PublishButton';
+import RemoveButton from './RemoveButton';
 
-import PublishModal from './../Publish/PublishModal';
+import PublishModal from './PublishModal';
 
 const DivideModal = React.createClass({
   propTypes: {
@@ -146,7 +146,7 @@ const DivideModal = React.createClass({
       return <Button bsStyle="success" className="division__create-element" onClick={this.createFromSelection.bind(null, this)}>{this.getIntlMessage('edition.action.divide.create_button')}</Button>;
     }
     return (
-      <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={<Popover id="divide-modal-help-popover" title={this.getIntlMessage('edition.action.divide.help.title')}>{this.getIntlMessage('edition.action.divide.help.message')}</Popover>}>
+      <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={<Popover title={this.getIntlMessage('edition.action.divide.help.title')}>{this.getIntlMessage('edition.action.divide.help.message')}</Popover>}>
         <Button bsStyle="success" className="division__create-element">{this.getIntlMessage('edition.action.divide.create_button')}</Button>
       </OverlayTrigger>
     );

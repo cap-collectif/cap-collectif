@@ -20,9 +20,12 @@ class ComputeDiffCommand extends ContainerAwareCommand
     {
         $container = $this->getApplication()->getKernel()->getContainer();
         $em = $container->get('doctrine.orm.entity_manager');
+        $repo = $em->getRepository('CapcoAppBundle:OpinionVersion');
 
-        $versions = $em->getRepository('CapcoAppBundle:OpinionVersion')->findAll();
-        foreach ($versions as $version) {
+        $versions = $repo->getAllIds();
+
+        foreach ($versions as $versionId) {
+            $version = $repo->find($versionId);
             $container->get('capco.diff.generator')->generate($version);
         }
 

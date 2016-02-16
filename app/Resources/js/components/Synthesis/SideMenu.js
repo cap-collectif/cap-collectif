@@ -2,22 +2,20 @@ import React from 'react';
 import { IntlMixin } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { History } from 'react-router';
 
-import SynthesisElementStore from '../../../stores/SynthesisElementStore';
-import SynthesisElementActions from '../../../actions/SynthesisElementActions';
+import SynthesisElementStore from '../../stores/SynthesisElementStore';
+import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
-import CreateModal from './../Create/CreateModal';
-import ElementsFinder from './../ElementsFinder';
-import Loader from '../../Utils/Loader';
+import CreateModal from './CreateModal';
+import ElementsFinder from './ElementsFinder';
+import Loader from '../Utils/Loader';
 
 const SideMenu = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
   },
-  contextTypes: {
-    router: React.PropTypes.object.isRequired,
-  },
-  mixins: [IntlMixin],
+  mixins: [IntlMixin, History],
 
   getInitialState() {
     return {
@@ -69,7 +67,7 @@ const SideMenu = React.createClass({
   selectItem(element) {
     SynthesisElementActions.selectNavItem(element.id);
     if (element.id !== 'root') {
-      this.context.router.push(`element/${element.id}`);
+      this.history.pushState(null, `element/${element.id}`);
     }
   },
 
@@ -132,7 +130,7 @@ const SideMenu = React.createClass({
 
   renderManageButton() {
     return (
-      <LinkContainer to="/folder-manager">
+      <LinkContainer to="/folder_manager">
         <NavItem className="menu__link menu__action">
           <i className="cap cap-folder-edit"></i> {this.getIntlMessage('edition.action.manage.label')}
         </NavItem>

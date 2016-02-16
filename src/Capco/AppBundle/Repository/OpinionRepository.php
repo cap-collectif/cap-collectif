@@ -307,9 +307,9 @@ class OpinionRepository extends EntityRepository
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
-                'The argument "page" cannot be lower than 1 (current value: "%s")',
-                $page
-            ));
+                    'The argument "page" cannot be lower than 1 (current value: "%s")',
+                    $page
+                ));
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
@@ -328,52 +328,36 @@ class OpinionRepository extends EntityRepository
 
         if ($opinionsSort) {
             if ($opinionsSort == 'last') {
-                $qb
-                    ->addOrderBy('o.createdAt', 'DESC')
-                    ->addOrderBy('o.votesCountOk', 'DESC')
-                ;
+                $qb->addOrderBy('o.createdAt', 'DESC');
+                $qb->addOrderBy('o.votesCountOk', 'DESC');
             } elseif ($opinionsSort == 'old') {
-                $qb
-                    ->addOrderBy('o.createdAt', 'ASC')
-                    ->addOrderBy('o.votesCountOk', 'DESC')
-                ;
+                $qb->addOrderBy('o.createdAt', 'ASC');
+                $qb->addOrderBy('o.votesCountOk', 'DESC');
             } elseif ($opinionsSort == 'favorable') {
-                $qb
-                    ->addOrderBy('o.votesCountOk', 'DESC')
-                    ->addOrderBy('o.votesCountNok', 'ASC')
-                    ->addOrderBy('o.createdAt', 'DESC')
-                ;
+                $qb->addOrderBy('o.votesCountOk', 'DESC');
+                $qb->addOrderBy('o.votesCountNok', 'ASC');
+                $qb->addOrderBy('o.createdAt', 'DESC');
             } elseif ($opinionsSort == 'votes') {
-                $qb
-                    ->addOrderBy('vnb', 'DESC')
-                    ->addOrderBy('o.createdAt', 'DESC')
-                ;
+                $qb->addOrderBy('vnb', 'DESC');
+                $qb->addOrderBy('o.createdAt', 'DESC');
             } elseif ($opinionsSort == 'comments') {
-                $qb
-                    ->addOrderBy('o.argumentsCount', 'DESC')
-                    ->addOrderBy('o.createdAt', 'DESC')
-                ;
+                $qb->addOrderBy('o.argumentsCount', 'DESC');
+                $qb->addOrderBy('o.createdAt', 'DESC');
             } elseif ($opinionsSort == 'positions') {
-                $qb
-                    // trick in DQL to order NULL values last
-                    ->addSelect('-o.position as HIDDEN inversePosition')
-                    ->addOrderBy('inversePosition', 'DESC')
-                    //
-                    ->addSelect('RAND() as HIDDEN rand')
+                $qb->addOrderBy('o.position', 'ASC');
+                $qb->addSelect('RAND() as HIDDEN rand')
                     ->addOrderBy('rand')
                 ;
             } elseif ($opinionsSort == 'random') {
-                $qb
-                    ->addSelect('RAND() as HIDDEN rand')
+                $qb->addSelect('RAND() as HIDDEN rand')
                     ->addOrderBy('rand')
                 ;
             }
         }
 
-        $query = $qb
-                    ->getQuery()
-                    ->setFirstResult(($page - 1) * $nbByPage)
-                    ->setMaxResults($nbByPage)
+        $query = $qb->getQuery()
+            ->setFirstResult(($page - 1) * $nbByPage)
+            ->setMaxResults($nbByPage)
         ;
 
         return new Paginator($query);

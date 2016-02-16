@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
-import ElementIcon from './Element/ElementIcon';
-import ElementTitle from './Element/ElementTitle';
+import ElementIcon from './ElementIcon';
+import ElementTitle from './ElementTitle';
 import Loader from '../Utils/Loader';
-import IgnoreButton from './Ignore/IgnoreButton';
-import UpdateButton from './Edit/UpdateButton';
+import IgnoreButton from './IgnoreButton';
+import UpdateButton from './UpdateButton';
 
 const FolderManager = React.createClass({
   propTypes: {
