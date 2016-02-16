@@ -3,14 +3,14 @@ import { IntlMixin, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
 import ViewElement from './ViewElement';
-import Loader from '../Utils/Loader';
+import Loader from '../../Utils/Loader';
 
-import SynthesisStore from '../../stores/SynthesisStore';
-import SynthesisElementStore from '../../stores/SynthesisElementStore';
-import SynthesisElementActions from '../../actions/SynthesisElementActions';
+import SynthesisStore from '../../../stores/SynthesisStore';
+import SynthesisElementStore from '../../../stores/SynthesisElementStore';
+import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 
-import ArrayHelper from '../../services/ArrayHelper';
-import SynthesisDisplayRules from '../../services/SynthesisDisplayRules';
+import ArrayHelper from '../../../services/ArrayHelper';
+import SynthesisDisplayRules from '../../../services/SynthesisDisplayRules';
 
 const ViewTree = React.createClass({
   propTypes: {

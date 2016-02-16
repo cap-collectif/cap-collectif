@@ -7,37 +7,41 @@ import ProposalDetailLikersTooltipLabel from './ProposalDetailLikersTooltipLabel
 import IntlData from '../../../translations/FR';
 
 describe('<ProposalDetailLikersTooltipLabel />', () => {
-  const oneLiker = [
-    {
-      displayName: 'user',
-    },
-  ];
+  const proposalWithOneLiker = {
+    likers: [
+      {
+        displayName: 'user',
+      },
+    ],
+  };
+  const proposalWithSeveralLikers = {
+    likers: [
+      {
+        displayName: 'user 1',
+      },
+      {
+        displayName: 'user 2',
+      },
+    ],
+  };
+  const proposalWithNoLikers = {
+    likers: [],
+  };
 
-  const severalLikers = [
-    {
-      displayName: 'user 1',
-    },
-    {
-      displayName: 'user 2',
-    },
-  ];
-
-  it('should render a formatted message when one liker', () => {
-    const wrapper = shallow(<ProposalDetailLikersTooltipLabel likers={oneLiker} {...IntlData} />);
+  it('should render a tooltip with a formatted message when proposal has one liker', () => {
+    const wrapper = shallow(<ProposalDetailLikersTooltipLabel proposal={proposalWithOneLiker} {...IntlData} />);
     expect(wrapper.find('FormattedMessage')).to.have.length(1);
   });
 
-  it('should render two formatted message when several likers', () => {
-    const wrapper = shallow(<ProposalDetailLikersTooltipLabel likers={severalLikers} {...IntlData} />);
+  it('should render a tooltip with two formatted message when proposal has several likers', () => {
+    const wrapper = shallow(<ProposalDetailLikersTooltipLabel proposal={proposalWithSeveralLikers} {...IntlData} />);
     expect(wrapper.find('FormattedMessage')).to.have.length(1);
-    expect(wrapper.find('FormattedMessage').prop('num')).to.equal(2);
     expect(wrapper.find('br')).to.have.length(1);
     expect(wrapper.find('FormattedHTMLMessage')).to.have.length(1);
-    expect(wrapper.find('FormattedHTMLMessage').prop('message')).to.equal('user 1<br/>user 2');
   });
 
-  it('should render nothing when no likers', () => {
-    const wrapper = shallow(<ProposalDetailLikersTooltipLabel likers={[]} {...IntlData} />);
+  it('should render nothing when proposal has no likers', () => {
+    const wrapper = shallow(<ProposalDetailLikersTooltipLabel proposal={proposalWithNoLikers} {...IntlData} />);
     expect(wrapper.children()).to.have.length(0);
   });
 });
