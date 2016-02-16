@@ -50,16 +50,19 @@ const OpinionVotesBox = React.createClass({
     }
     const { opinion } = this.props;
     const helpText = this.getOpinionType().votesHelpText;
-
+    const barCols = this.showPiechart()
+      ? { sm: 12, md: 7, mdOffset: 1 }
+      : { sm: 12, md: 8, mdOffset: 2 }
+    ;
     return (
       <div className="opinion__votes__box">
         {
           helpText
-          ? <p className="h4" style={{ marginBottom: '0' }}>{helpText}</p>
+          ? <p className="h5" style={{ marginBottom: '0' }}>{helpText}</p>
           : null
         }
         <Row>
-          <Col sm={12} md={8} style={{ paddingTop: '15px' }}>
+          <Col {...barCols} style={{ paddingTop: '15px' }}>
             <OpinionVotesButtons show={this.showVotesButtons()} opinion={opinion} />
             <OpinionVotesBar opinion={opinion} />
           </Col>
