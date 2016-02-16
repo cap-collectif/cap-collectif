@@ -2,8 +2,8 @@ import React from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
-import ElementTitle from './ElementTitle';
-import ElementIcon from './ElementIcon';
+import ElementTitle from './Element/ElementTitle';
+import ElementIcon from './Element/ElementIcon';
 
 const ElementsFinder = React.createClass({
   propTypes: {
@@ -14,7 +14,7 @@ const ElementsFinder = React.createClass({
     expanded: React.PropTypes.object,
     onSelect: React.PropTypes.func,
     onExpand: React.PropTypes.func,
-    hiddenElementId: React.PropTypes.number,
+    hiddenElementId: React.PropTypes.string,
   },
   mixins: [IntlMixin],
 

@@ -2,17 +2,17 @@ import React from 'react';
 import { IntlMixin, FormattedDate } from 'react-intl';
 import moment from 'moment';
 
-import SynthesisElementStore from '../../stores/SynthesisElementStore';
-import SynthesisElementActions from '../../actions/SynthesisElementActions';
-import Loader from '../Utils/Loader';
-import ElementTitle from './ElementTitle';
-import ElementBlock from './ElementBlock';
-import ElementsList from './ElementsList';
-import PublishButton from './PublishButton';
-import DivideButton from './DivideButton';
-import IgnoreButton from './IgnoreButton';
-import PublishModal from './PublishModal';
-import DivideModal from './DivideModal';
+import SynthesisElementStore from '../../../stores/SynthesisElementStore';
+import SynthesisElementActions from '../../../actions/SynthesisElementActions';
+import Loader from '../../Utils/Loader';
+import ElementTitle from './../Element/ElementTitle';
+import ElementBlock from './../Element/ElementBlock';
+import ElementsList from './../List/ElementsList';
+import PublishButton from './../Publish/PublishButton';
+import DivideButton from './../Divide/DivideButton';
+import IgnoreButton from './../Ignore/IgnoreButton';
+import PublishModal from './../Publish/PublishModal';
+import DivideModal from './../Divide/DivideModal';
 
 const EditElement = React.createClass({
   propTypes: {
