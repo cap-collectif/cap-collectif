@@ -24,8 +24,8 @@ const ProposalDetailLikersLabel = React.createClass({
     const { likers } = this.props;
     if (likers.length === 1) {
       const name = likers[0].displayName;
-      if (name.length > 30) {
-        return name.substring(0, 30) + '...';
+      if (name.length > 28) {
+        return name.substring(0, 28) + '...';
       }
       return name;
     }

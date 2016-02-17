@@ -35,7 +35,7 @@ describe('<ProposalDetailLikersLabel />', () => {
 
   it('should render truncated liker name when the liker has a long name', () => {
     const wrapper = shallow(<ProposalDetailLikersLabel likers={oneLongNameLiker} {...IntlData} />);
-    expect(wrapper.text()).to.equal('user with a very long name tha...');
+    expect(wrapper.text()).to.equal('user with a very long name t...');
   });
 
   it('should render a <FormattedMessage/> when several likers', () => {
