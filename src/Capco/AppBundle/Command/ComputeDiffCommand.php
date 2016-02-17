@@ -29,6 +29,7 @@ class ComputeDiffCommand extends ContainerAwareCommand
         foreach ($versions as $versionId) {
             $version = $repo->find($versionId);
             $container->get('capco.diff.generator')->generate($version);
+            $em->flush();
             $progress->advance();
         }
         $progress->finish();
@@ -37,11 +38,11 @@ class ComputeDiffCommand extends ContainerAwareCommand
         $progress = new ProgressBar($output, count($modals));
         foreach ($modals as $modal) {
             $container->get('capco.diff.generator')->generate($modal);
+            $em->flush();
             $progress->advance();
         }
         $progress->finish();
 
-        $em->flush();
         $output->writeln('Computation completed');
     }
 }
