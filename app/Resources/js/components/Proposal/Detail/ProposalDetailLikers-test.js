@@ -3,42 +3,52 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ProposalDetailLikers from './ProposalDetailLikers';
+import ProposalDetailLikersTooltipLabel from './ProposalDetailLikersTooltipLabel';
+import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
 
 describe('<ProposalDetailLikers />', () => {
-  const proposalWithOneLiker = {
+  const proposalWithoutLikers = {
+    likers: [],
+  };
+
+  it('should not render nothing when proposal has no likers', () => {
+    const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithoutLikers} />);
+    expect(wrapper.children()).to.have.length(0);
+  });
+
+  const proposalWithLikers = {
+    id: 1,
     likers: [
       {
         displayName: 'user',
       },
     ],
   };
-  const proposalWithSeveralLikers = {
-    likers: [
-      {
-        displayName: 'user 1',
-      },
-      {
-        displayName: 'user 2',
-      },
-    ],
-  };
-  const proposalWithNoLikers = {
-    likers: [],
-  };
 
-  it('should render a span with class proposal__info when proposal has one liker', () => {
-    const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithOneLiker} />);
+  it('should render a span with class proposal__info when proposal has likers', () => {
+    const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithLikers} />);
     expect(wrapper.find('span.proposal__info')).to.have.length(1);
   });
 
-  it('should render a span with class proposal__info when proposal has several likers', () => {
-    const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithSeveralLikers} />);
-    expect(wrapper.find('span.proposal__info')).to.have.length(1);
+  it('should render a <OverlayTrigger /> with <Tooltip /> when proposal has likers', () => {
+    const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithLikers} />);
+    const overlayTrigger = wrapper.find(OverlayTrigger);
+    expect(overlayTrigger).to.have.length(1);
+    expect(overlayTrigger.prop('placement')).to.equal('top');
+    const tooltip = shallow(overlayTrigger.prop('overlay'));
+    expect(tooltip.instance()).to.be.instanceOf(Tooltip);
+    expect(tooltip.prop('id')).to.equal('proposal-1-likers-tooltip-');
+    const tooltipLabel = tooltip.find(ProposalDetailLikersTooltipLabel);
+    expect(tooltipLabel).to.have.length(1);
+    expect(tooltipLabel.prop('likers')).to.equal(proposalWithLikers.likers);
   });
 
-  it('should not render a span with class proposal_info when proposal has no likers', () => {
-    const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithNoLikers} />);
-    expect(wrapper.find('span.proposal__info')).to.not.exists;
+  it('should render a <ProposalDetailLikersLabel> when proposal has likers', () => {
+    const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithLikers} />);
+    const label = wrapper.find(ProposalDetailLikersLabel);
+    expect(label).to.have.length(1);
+    expect(label.prop('likers')).to.equal(proposalWithLikers.likers);
   });
 });
