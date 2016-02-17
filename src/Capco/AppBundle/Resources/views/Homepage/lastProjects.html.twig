@@ -16,6 +16,8 @@
                 {% include '@CapcoApp/Project/blockProject.html.twig' with {'project': project} only %}
             {% endfor %}
         </div>
-        <a href="{{ path('app_project') }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+        {% if projects|length > max %}
+            <a href="{{ path('app_project') }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+        {% endif %}
     </div>
 {% endif %}

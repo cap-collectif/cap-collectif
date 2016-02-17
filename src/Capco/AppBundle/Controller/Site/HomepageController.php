@@ -192,6 +192,7 @@ class HomepageController extends Controller
         $projects = $this->getDoctrine()->getRepository('CapcoAppBundle:Project')->getLastPublished($max, $offset);
 
         return [
+            'max' => $max,
             'projects' => $projects,
             'section' => $section,
             'alt' => $alt,
