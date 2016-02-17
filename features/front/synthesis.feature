@@ -59,6 +59,19 @@ Scenario: Admin wants to see all elements list
   When I go to the all elements inbox
   Then I should see all the synthesis elements
 
+#@javascript
+#Scenario: Admin wants to see elements tree
+#  Given I am logged in as admin
+#  And I visited "consultation page" with:
+#    | projectSlug      | strategie-technologique-de-l-etat-et-services-publics |
+#    | stepSlug         | collecte-des-avis-pour-une-meilleur-strategie         |
+#  And I follow "Synthèse"
+#  And I follow "Éditer"
+#  And I wait 1 seconds
+#  And I follow "Les contributions"
+#  And I wait 1 seconds
+#  Then I should see 2 ".synthesis__content .tree--level-0 > .tree__item" elements
+
   # Element details
 
 @javascript

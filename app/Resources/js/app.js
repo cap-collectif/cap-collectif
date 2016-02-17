@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-require('fancybox')($);
 
 import IntlData from './translations/FR';
 import CommentSection from './components/Comment/CommentSection';
@@ -228,7 +227,7 @@ const App = (($) => {
         fitToView: false,
         width: '90%',
         height: '90%',
-      });
+      }); // fancybox
       return false;
     }); // on
   };
