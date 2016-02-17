@@ -303,7 +303,7 @@ class OpinionRepository extends EntityRepository
      *
      * @internal param $opinionType
      */
-    public function getByOpinionTypeAndConsultationStepOrdered(ConsultationStep $step, $opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'last')
+    public function getByOpinionTypeAndConsultationStepOrdered(ConsultationStep $step, $opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'positions')
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
