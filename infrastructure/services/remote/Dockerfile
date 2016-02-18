@@ -1,63 +1,83 @@
-FROM debian:wheezy
+FROM debian:jessie
 
-MAINTAINER Bastien Jaillot <bjaillot@jolicode.com>
+MAINTAINER Aurélien David <adavid@jolicode.com>
 
 # Install basic
 RUN apt-get update && \
-    apt-get install -y wget runit locales adduser wget bzip2 git && \
+    apt-get install -y -qq \
+        adduser \
+        apt-transport-https \
+        build-essential \
+        cron \
+        curl \
+        imagemagick \
+        libmagickwand-dev \
+        locales \
+        pkg-config \
+        runit \
+        wget \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-    # Install nginx, mariadb and php (fpm)
-    echo "deb http://packages.dotdeb.org wheezy all" > /etc/apt/sources.list.d/dotdeb.list && \
-    echo "deb http://packages.dotdeb.org wheezy-php56 all" >> /etc/apt/sources.list.d/dotdeb.list && \
-    echo "deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/10.0/debian wheezy main" >> /etc/apt/sources.list.d/dotdeb.list && \
-    apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db && \
-    wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
-    apt-get update && \
-    apt-get install -y -qq curl imagemagick cron nginx php5-fpm php5-cli php5-curl php5-intl php5-mysqli php5-redis php5-xsl php5-gd php5-imagick mariadb-server redis-server && \
 
+# Install nginx, redis and php (fpm)
+RUN apt-get update && \
+    apt-get install -y -qq \
+      nginx \
+      php5-fpm \
+      php5-cli \
+      php5-curl \
+      php5-intl \
+      php5-mysql \
+      php5-redis \
+      php5-xsl \
+      php5-gd \
+      php5-imagick \
+      redis-server \
+    && \
     # Configure Redis
     sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
     sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-    # Install node js and deps for npm install
-    wget https://deb.nodesource.com/setup -O- -q | bash - && \
-    apt-get install -y nodejs npm && \
-
+# Mariadb
+RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
+    echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.1/debian jessie main" >>/etc/apt/sources.list && \
+    apt-get update -qq && \
+    DEBIAN_FRONTEND=noninteractive apt-get -qq -y install \
+      mariadb-server \
+      mariadb-client \
+    && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install java
-RUN \
-  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
-  echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
-  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
-  apt-get update && \
-  apt-get install  -y -qq --no-install-recommends oracle-java8-installer && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf /var/cache/oracle-jdk8-installer
-
-# Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
-
-# Install elasticsearch.
-ENV ES_PKG_NAME elasticsearch-1.7.3
+RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+    echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
+    echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
+    apt-get update && \
+    apt-get install  -y -qq --no-install-recommends oracle-java8-installer && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/cache/oracle-jdk8-installer
 
 RUN \
   cd / && \
-  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/$ES_PKG_NAME.tar.gz && \
-  tar xvzf $ES_PKG_NAME.tar.gz && \
-  rm -f $ES_PKG_NAME.tar.gz && \
-  mv /$ES_PKG_NAME /etc/elasticsearch
+  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.7.3.tar.gz && \
+  tar xvzf elasticsearch-1.7.3.tar.gz && \
+  rm -f elasticsearch-1.7.3.tar.gz && \
+  mv /elasticsearch-1.7.3 /etc/elasticsearch
 
 # Install New Relic Agent
 RUN \
     echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list && \
     wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
     apt-get update && \
-    apt-get install -y newrelic-php5 && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y newrelic-php5 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
     rm -f /etc/php5/*/conf.d/newrelic.ini
@@ -66,7 +86,7 @@ RUN \
 RUN apt-get update && \
     apt-get install -y wget apt-transport-https && \
     wget https://repo.varnish-cache.org/debian/GPG-key.txt -O- -q | apt-key add - && \
-    echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-4.0" >> /etc/apt/sources.list.d/varnish-cache.list && \
+    echo "deb https://repo.varnish-cache.org/debian/ jessie varnish-4.0" >> /etc/apt/sources.list.d/varnish-cache.list && \
     apt-get update && \
     apt-get install -y varnish && \
     apt-get clean && \
