@@ -6,8 +6,9 @@ if [ ! -f /var/lib/mysql/ibdata1 ]; then
   echo "Installing mysql..."
   mkdir -p /var/lib/mysql
   cp -R /var/lib/mysql_save/* /var/lib/mysql/
-  chown -R mysql:mysql /var/lib/mysql
   echo "Mysql is installed!"
 fi
+
+chown -R mysql:mysql /var/lib/mysql
 
 exec mysqld_safe
