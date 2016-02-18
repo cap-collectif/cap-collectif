@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Input\InputOption;
 
 class ComputeDiffCommand extends ContainerAwareCommand
 {
@@ -14,6 +15,10 @@ class ComputeDiffCommand extends ContainerAwareCommand
         $this
             ->setName('capco:compute:diff')
             ->setDescription('Recalculate diff')
+            ->addOption(
+                'force', false, InputOption::VALUE_NONE,
+                'set this option to force the recompute on non empty diff'
+            )
         ;
     }
 
@@ -28,8 +33,10 @@ class ComputeDiffCommand extends ContainerAwareCommand
 
         foreach ($versions as $versionId) {
             $version = $repo->find($versionId);
-            $container->get('capco.diff.generator')->generate($version);
-            $em->flush();
+            if ($version->getDiff() === "" || $input->getOption('force')) {
+                $container->get('capco.diff.generator')->generate($version);
+                $em->flush();
+            }
             $progress->advance();
         }
         $progress->finish();
