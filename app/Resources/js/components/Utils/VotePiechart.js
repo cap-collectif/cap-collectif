@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import ReactDOM from 'react-dom';
 
 const VotePiechart = React.createClass({
   propTypes: {
-    ok: React.PropTypes.number,
-    nok: React.PropTypes.number,
-    mitige: React.PropTypes.number,
-    height: React.PropTypes.number,
-    width: React.PropTypes.number,
-    top: React.PropTypes.number,
-    left: React.PropTypes.number,
+    ok: PropTypes.number,
+    nok: PropTypes.number,
+    mitige: PropTypes.number,
+    height: PropTypes.number,
+    width: PropTypes.number,
+    top: PropTypes.number,
+    left: PropTypes.number,
   },
   mixins: [IntlMixin],
 
@@ -35,30 +35,31 @@ const VotePiechart = React.createClass({
   },
 
   initChart() {
-    if (!ReactDOM.findDOMNode(this.refs.piechart)) {
+    if (!ReactDOM.findDOMNode(this.refs.piechart) || !google || !google.visualization || !google.visualization.PieChart) {
       return;
     }
     const PieChart = google.visualization.PieChart;
     const DataTable = google.visualization.arrayToDataTable;
+    const { ok, mitige, nok, left, top, height, width } = this.props;
 
     (new PieChart(ReactDOM.findDOMNode(this.refs.piechart))).draw(
       new DataTable([
         [{ type: 'string' }, { type: 'number' }],
-        [this.getIntlMessage('vote.ok'), this.props.ok],
-        [this.getIntlMessage('vote.mitige'), this.props.mitige],
-        [this.getIntlMessage('vote.nok'), this.props.nok],
+        [this.getIntlMessage('vote.ok'), ok],
+        [this.getIntlMessage('vote.mitige'), mitige],
+        [this.getIntlMessage('vote.nok'), nok],
       ]), {
         legend: 'none',
         chartArea: {
-          left: this.props.left,
-          top: this.props.top,
+          left: left,
+          top: top,
           width: '100%',
           height: '85%',
         },
         colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
         pieSliceText: 'value',
-        height: this.props.height,
-        width: this.props.width,
+        height: height,
+        width: width,
         backgroundColor: 'transparent',
       });
   },
