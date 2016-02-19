@@ -183,11 +183,10 @@ const App = (($) => {
     let currentTallest = 0;
     let currentRowStart = 0;
     const rowDivs = [];
-    let $el;
     let topPosition = 0;
 
     $(container).each((index, el) => {
-      $el = $(el);
+      const $el = $(el);
       $el.height('auto');
       topPosition = $el.position().top;
 

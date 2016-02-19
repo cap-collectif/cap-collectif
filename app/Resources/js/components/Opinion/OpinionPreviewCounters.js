@@ -22,10 +22,10 @@ const OpinionPreviewCounters = React.createClass({
     const type = this.getType();
     const counters = [];
     if (type.voteWidgetType !== VOTE_WIDGET_DISABLED) {
-      counters.push(<FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total}/>);
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total} />);
     }
     if (!opinion.parent && type.versionable) {
-      counters.push(<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count}/>);
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />);
     }
     if (type.commentSystem !== COMMENT_SYSTEM_NONE) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.argumentsCount} />);

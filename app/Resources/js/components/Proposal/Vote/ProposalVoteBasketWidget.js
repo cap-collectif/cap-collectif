@@ -80,7 +80,7 @@ const ProposalVoteBasketWidget = React.createClass({
               </i>
             </Navbar.Toggle>
             <li className="navbar-text widget__progress-bar hidden visible-xs">
-              <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%"/>
+              <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%" />
             </li>
           </Navbar.Header>
           : null
@@ -187,7 +187,7 @@ const ProposalVoteBasketWidget = React.createClass({
             selectedStep.voteType === VOTE_TYPE_BUDGET
               ? <Nav pullRight className="widget__progress-bar-nav hidden-xs">
               <li className="navbar-text widget__progress-bar">
-                <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%"/>
+                <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%" />
               </li>
             </Nav>
               : null

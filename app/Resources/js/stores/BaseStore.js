@@ -3,10 +3,6 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 
 export default class BaseStore extends EventEmitter {
 
-  constructor() {
-    super();
-  }
-
   register(actionSubscribe) {
     this._dispatchToken = AppDispatcher.register(actionSubscribe);
   }

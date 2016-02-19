@@ -25,8 +25,8 @@ const ProposalDetailLikersTooltipLabel = React.createClass({
             message={this.getIntlMessage('proposal.likers.count')}
             num={likers.length}
           />
-          <br/>
-          <FormattedHTMLMessage message={message}/>
+          <br />
+          <FormattedHTMLMessage message={message} />
         </span>
       );
     }
