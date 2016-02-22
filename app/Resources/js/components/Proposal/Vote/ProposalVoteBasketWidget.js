@@ -14,8 +14,15 @@ const ProposalVoteBasketWidget = React.createClass({
     projectId: React.PropTypes.number.isRequired,
     votableSteps: React.PropTypes.array.isRequired,
     votesPageUrl: React.PropTypes.string.isRequired,
+    image: React.PropTypes.object,
   },
   mixins: [IntlMixin, DeepLinkStateMixin],
+
+  getDefaultProps() {
+    return {
+      image: null,
+    };
+  },
 
   getInitialState() {
     return {
@@ -60,6 +67,15 @@ const ProposalVoteBasketWidget = React.createClass({
     );
     return (
       <Navbar fixedTop className="proposal-vote__widget hidden-xs">
+        {
+          this.props.image
+          ? <Navbar.Header>
+            <Navbar.Brand>
+              <img className="widget__image" src={this.props.image.url} />
+            </Navbar.Brand>
+          </Navbar.Header>
+          : null
+        }
         <Nav>
           {
             this.state.votableSteps.length > 1

@@ -135,6 +135,7 @@ image:
   header: Image de fond
   logo: Logo
   picto: Pictogramme
+  votes_bar: Illustration de la barre des votes
 
 login:
   text:

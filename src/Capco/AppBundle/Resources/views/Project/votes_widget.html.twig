@@ -2,4 +2,5 @@
       data-project-id='{{ project.id|escape }}'
       data-votable-steps='{{ votableSteps|escape }}'
       data-votes-page-url='{{ url('app_project_show_user_votes', {'projectSlug': project.slug}, true) }}'
+      data-image='{{ image|escape }}'
 ></span>

@@ -137,3 +137,9 @@ Capco\MediaBundle\Entity\Media:
         enabled: true
         name: Avatar
         context: @MediaContext1
+
+    MediaVotesBar:
+        binaryContent: ../files/votes_bar_image.png
+        enabled: true
+        name: Image de la barre de votes
+        context: @MediaContext1

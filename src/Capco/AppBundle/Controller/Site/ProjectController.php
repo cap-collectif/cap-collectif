@@ -516,10 +516,16 @@ class ProjectController extends Controller
                 ->get('capco.proposal_votes.resolver')
                 ->getVotableStepsForProject($project),
         ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
+        $image = $serializer->serialize([
+            'image' => $this
+            ->get('capco.site_image.resolver')
+            ->getMedia('image.votes_bar'),
+        ], 'json', SerializationContext::create());
 
         return [
             'votableSteps' => $votableSteps,
             'project' => $project,
+            'image' => $image,
         ];
     }
 }

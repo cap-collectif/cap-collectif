@@ -111,6 +111,7 @@ AuthService
           projectId={$('#render-proposal-vote-basket-widget').data('project-id')}
           votableSteps={$('#render-proposal-vote-basket-widget').data('votable-steps').votableSteps}
           votesPageUrl={$('#render-proposal-vote-basket-widget').data('votes-page-url')}
+          image={$('#render-proposal-vote-basket-widget').data('image').image}
           {...IntlData}
         />,
         document.getElementById('render-proposal-vote-basket-widget')

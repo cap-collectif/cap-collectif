@@ -182,6 +182,11 @@ $statuses:
     background-color: $votes-widget-btn-bg;
     color: $votes-widget-btn-text;
   }
+
+  .widget__image {
+    height: 100%;
+    width: auto;
+  }
 }
 
 @media (max-width: $screen-xs-max) {

@@ -23,3 +23,9 @@ Capco\AppBundle\Entity\SiteImage:
         media: null
         isEnabled: true
         position: 4
+    SiteImage5:
+        keyname: image.votes_bar
+        category: settings.appearance
+        media: @MediaVotesBar
+        isEnabled: true
+        position: 5
