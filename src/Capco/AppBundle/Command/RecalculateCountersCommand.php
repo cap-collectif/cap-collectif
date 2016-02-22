@@ -20,6 +20,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
     {
         $container = $this->getApplication()->getKernel()->getContainer();
         $em = $container->get('doctrine')->getManager();
+        $contributionResolver = $container->get('capco.contribution.resolver');
 
         // ********************************* User counters *************************************************
 
@@ -186,6 +187,28 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           WHERE s.isEnabled = 1 AND s.isTrashed = 1 AND ((s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs) OR (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = cs))
         )');
         $query->execute();
+
+        $consultationSteps = $em->getRepository('CapcoAppBundle:Steps\ConsultationStep')->findAll();
+
+        foreach ($consultationSteps as $cs) {
+            $participants = $contributionResolver->countStepContributors($cs);
+            $query = $em->createQuery('
+              update CapcoAppBundle:Steps\ConsultationStep cs
+              set cs.contributorsCount = '.$participants.'
+              where cs.id = '.$cs->getId()
+            );
+            $query->execute();
+        }
+
+        foreach ($consultationSteps as $cs) {
+            $votes = $contributionResolver->countStepVotes($cs);
+            $query = $em->createQuery('
+              update CapcoAppBundle:Steps\ConsultationStep cs
+              set cs.votesCount = '.$votes.'
+              where cs.id = '.$cs->getId()
+            );
+            $query->execute();
+        }
 
         // ****************************** Collect step counters **************************************
 

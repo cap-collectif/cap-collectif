@@ -37,8 +37,12 @@
     {% block content %}
         <h2 class="h2">{{ currentStep.title }}</h2>
 
+        <div id="render-counters-nav"
+          data-counters='{{ counters }}'
+        ></div>
+
         {% if currentStep.body is not null %}
-            <div class="block  block--bordered">
+            <div class="block  block--bordered step-intro step-intro--with-counters">
                 <div class="opinion  opinion--current  opinion--default">
                     <div class="box">
                         <div class="more">{{ currentStep.body | raw }}</div>

@@ -14,6 +14,7 @@ import ProposalVoteBasketWidget from './components/Proposal/Vote/ProposalVoteBas
 import ProposalsUserVotesPage from './components/Project/Page/ProposalsUserVotesPage';
 import ProjectStatsPage from './components/Project/Page/ProjectStatsPage';
 import AlertBox from './components/Alert/AlertBox';
+import CountersNav from './components/Utils/CountersNav';
 
 FeatureService.load();
 
@@ -25,6 +26,13 @@ AuthService
       ReactDOM.render(
         <AlertBox {...IntlData} />,
         document.getElementById('render-alert-box')
+      );
+    }
+
+    if ($('#render-counters-nav').length) {
+      ReactDOM.render(
+        <CountersNav counters={$('#render-counters-nav').data('counters').counters} {...IntlData} />,
+        document.getElementById('render-counters-nav')
       );
     }
 

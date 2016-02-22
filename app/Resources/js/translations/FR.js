@@ -122,6 +122,12 @@ export default {
         notBlank: 'Cette valeur ne doit pas être vide.',
       },
       content: 'Contenu',
+      counters: {
+        contributions: '{num, plural, =0{contribution} one{contribution} other{contributions}}',
+        contributors: '{num, plural, =0{participant} one{participant} other{participants}}',
+        remaining_days: '{num, plural, =0{jour restant} one{jour restant} other{jours restants}}',
+        votes: '{num, plural, =0{vote} one{vote} other{votes}}',
+      },
       dates: {
         between: 'Du {start} au {end}',
         full_day: 'Le {date} à {time}',

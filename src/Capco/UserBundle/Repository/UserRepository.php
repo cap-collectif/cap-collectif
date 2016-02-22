@@ -2,6 +2,10 @@
 
 namespace Capco\UserBundle\Repository;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Doctrine\ORM\EntityRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
@@ -236,6 +240,175 @@ class UserRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function findConsultationStepSourceContributorsWithCount(ConsultationStep $step)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+          select u.id, count(distinct s) as sources_count
+          from CapcoUserBundle:User u
+          LEFT JOIN CapcoAppBundle:Source s WITH s.Author = u
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          WHERE s.isEnabled = 1 AND (
+            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step)
+            OR
+            (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step)
+          )
+          GROUP BY u.id
+        ')
+            ->setParameter('step', $step);
+
+        return $query->getResult();
+    }
+
+    public function findConsultationStepArgumentContributorsWithCount(ConsultationStep $step)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+          select u.id, count(distinct a) as arguments_count
+          from CapcoUserBundle:User u
+          LEFT JOIN CapcoAppBundle:Argument a WITH a.Author = u
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          WHERE a.isEnabled = 1 AND (
+            (a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step)
+            OR
+            (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step)
+          )
+          GROUP BY u.id
+        ')
+            ->setParameter('step', $step);
+
+        return $query->getResult();
+    }
+
+    public function findConsultationStepOpinionContributorsWithCount(ConsultationStep $step)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.id', 'count(distinct opinions) as opinions_count')
+            ->leftJoin('u.opinions', 'opinions', 'WITH', 'opinions.isEnabled = 1')
+            ->where('opinions.step = :step')
+            ->groupBy('u.id')
+            ->setParameter('step', $step)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findCollectStepProposalContributorsWithCount(CollectStep $step)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.id', 'count(distinct proposals) as proposals_count')
+            ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.enabled = 1')
+            ->leftJoin('proposals.proposalForm', 'proposalForm')
+            ->where('proposalForm.step = :step')
+            ->groupBy('u.id')
+            ->setParameter('step', $step)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findConsultationStepVersionContributorsWithCount(ConsultationStep $step)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.id', 'count(distinct versions) as versions_count')
+            ->leftJoin('u.opinionVersions', 'versions', 'WITH', 'versions.enabled = 1')
+            ->leftJoin('versions.parent', 'opinions', 'WITH', 'opinions.isEnabled = 1')
+            ->where('opinions.step = :step')
+            ->groupBy('u.id')
+            ->setParameter('step', $step)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findConsultationStepOpinionVotersWithCount(ConsultationStep $step)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.id', 'count(distinct opinions_votes) as opinions_votes_count')
+            ->leftJoin('CapcoAppBundle:OpinionVote', 'opinions_votes', 'WITH', 'opinions_votes.user = u AND opinions_votes.confirmed = 1')
+            ->leftJoin('opinions_votes.opinion', 'opinions_votes_opinion', 'WITH', 'opinions_votes_opinion.isEnabled = 1')
+            ->where('opinions_votes_opinion.step = :step')
+            ->groupBy('u.id')
+            ->setParameter('step', $step)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findConsultationStepVersionVotersWithCount(ConsultationStep $step)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.id', 'count(distinct versions_votes) as versions_votes_count')
+            ->leftJoin('CapcoAppBundle:OpinionVersionVote', 'versions_votes', 'WITH', 'versions_votes.user = u AND versions_votes.confirmed = 1')
+            ->leftJoin('versions_votes.opinionVersion', 'versions_votes_version', 'WITH', 'versions_votes_version.enabled = 1')
+            ->leftJoin('versions_votes_version.parent', 'versions_votes_version_parent', 'WITH', 'versions_votes_version_parent.isEnabled = 1')
+            ->where('versions_votes_version_parent.step = :step')
+            ->groupBy('u.id')
+            ->setParameter('step', $step)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findConsultationStepArgumentVotersWithCount(ConsultationStep $step)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+          select u.id, count(distinct av) as arguments_votes_count
+          from CapcoUserBundle:User u
+          LEFT JOIN CapcoAppBundle:ArgumentVote av WITH av.user = u
+          LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          WHERE av.user = u AND av.confirmed = 1 AND a.isEnabled = 1 AND ((a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step) OR (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step))
+          GROUP BY av.user
+        ')
+            ->setParameter('step', $step);
+
+        return $query->getResult();
+    }
+
+    public function findConsultationStepSourceVotersWithCount(ConsultationStep $step)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+          select u.id, count(distinct sv) as sources_votes_count
+          from CapcoUserBundle:User u
+          LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
+          LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
+          LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
+          WHERE sv.user = u AND sv.confirmed = 1 AND s.isEnabled = 1 AND ((s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step) OR (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step))
+          GROUP BY sv.user
+        ')
+            ->setParameter('step', $step);
+
+        return $query->getResult();
+    }
+
+    public function findSelectionStepProposalVotersWithCount(SelectionStep $step)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+          select u.id, count(distinct pv) as proposals_votes_count
+          from CapcoUserBundle:User u
+          LEFT JOIN CapcoAppBundle:ProposalVote pv WITH pv.user = u
+          LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
+          LEFT JOIN p.selectionSteps s
+          WHERE pv.user = u AND pv.confirmed = 1 AND p.enabled = 1 AND s.id = :step
+          GROUP BY pv.user
+        ')
+            ->setParameter('step', $step);
+
+        return $query->getResult();
     }
 
     /**

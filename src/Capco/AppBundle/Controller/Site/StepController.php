@@ -421,14 +421,27 @@ class StepController extends Controller
      */
     public function showConsultationAction(Request $request, Project $project, ConsultationStep $currentStep)
     {
+        $serializer = $this->get('jms_serializer');
+
         if (false === $currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
+
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
+        $counters = $serializer->serialize([
+            'counters' => [
+                'contributions' => $currentStep->getContributionsCount(),
+                'votes' => $currentStep->getVotesCount(),
+                'contributors' => $currentStep->getContributorsCount(),
+                'remainingDays' => intval($currentStep->getRemainingDays()),
+            ],
+        ], 'json', SerializationContext::create());
+
         $response = $this->render('CapcoAppBundle:Consultation:show.html.twig', [
             'project' => $project,
             'currentStep' => $currentStep,
             'nav' => $nav,
+            'counters' => $counters,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

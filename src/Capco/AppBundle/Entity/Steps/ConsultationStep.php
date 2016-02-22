@@ -71,6 +71,20 @@ class ConsultationStep extends AbstractStep
     private $trashedSourceCount = 0;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="votes_count", type="integer")
+     */
+    private $votesCount = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="contributors_count", type="integer")
+     */
+    private $contributorsCount = 0;
+
+    /**
      * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="step",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
@@ -231,6 +245,44 @@ class ConsultationStep extends AbstractStep
     public function setTrashedSourceCount($trashedSourceCount)
     {
         $this->trashedSourceCount = $trashedSourceCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVotesCount()
+    {
+        return $this->votesCount;
+    }
+
+    /**
+     * @param int $votesCount
+     * @return $this
+     */
+    public function setVotesCount($votesCount)
+    {
+        $this->votesCount = $votesCount;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getContributorsCount()
+    {
+        return $this->contributorsCount;
+    }
+
+    /**
+     * @param int $contributorsCount
+     * @return $this
+     */
+    public function setContributorsCount($contributorsCount)
+    {
+        $this->contributorsCount = $contributorsCount;
+
+        return $this;
     }
 
     /**
