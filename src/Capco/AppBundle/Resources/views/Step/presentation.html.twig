@@ -1,4 +1,4 @@
-{% extends '@CapcoApp/Project/show.html.twig' %}
+{% extends '@CapcoApp/Project/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_presentation', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
@@ -16,93 +16,74 @@
 
 {% block jumbotron %}{% endblock %}
 
-{% block body %}
-    <div class="container  container--custom">
-        {% include '@CapcoApp/Project/show_title.html.twig' %}
+{% block details %}
+
+    <h2 class="h2">{{ currentStep.title }}</h2>
+    <div class="block  block--bordered  box">
+        {{ currentStep.body | raw }}
+
+        {% if project.ConsultationStepOpen and project.ConsultationStepOpen.canContribute %}
+            <p><a class="btn  btn-primary" href="{{ path('app_project_show_consultation', {'projectSlug': project.slug, 'stepSlug': project.ConsultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a></p>
+        {% endif %}
     </div>
 
-    <div class="container  container--custom">
-        <div class="row">
-            <div class="col-xs-12  col-sm-4  col-md-3">
-                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {
-                        'projectSlug': project.slug,
-                        'currentStepSlug': currentStep.slug,
-                    }))
-                }}
+    {% if is_feature_enabled('blog') and posts | length > 0 %}
+        <div class="block">
+            <h2 class="h2">{{ 'step.presentation.posts.title'|trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ nbPosts }}</span></h2>
+            <ul class="media-list">
+                {% for post in posts %}
+                    {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
+                {% endfor %}
+            </ul>
+            {% if nbPosts > 2 %}
+                <a href="{{ path('app_project_show_posts', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.posts.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if is_feature_enabled('calendar') and events | length > 0 %}
+        <div class="block">
+            <h2 class="h2">{{ 'step.presentation.events.title'|trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ nbEvents }}</span></h2>
+            <div class="row">
+                {% for event in events %}
+                    {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event, 'col_classes': 'col-md-6  col-sm-12'} only %}
+                {% endfor %}
             </div>
+            {% if nbEvents > 2 %}
+                <a href="{{ path('app_project_show_events', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.events.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+            {% endif %}
+        </div>
+    {% endif %}
 
-            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-
-                <h2 class="h2">{{ currentStep.title }}</h2>
-                <div class="block  block--bordered  box">
-                    {{ currentStep.body | raw }}
-
-                    {% if project.ConsultationStepOpen and project.ConsultationStepOpen.canContribute %}
-                        <p><a class="btn  btn-primary" href="{{ path('app_project_show', {'projectSlug': project.slug, 'stepSlug': project.ConsultationStepOpen.slug}) }}">{{ 'step.presentation.participe' | trans({}, 'CapcoAppBundle') }}</a></p>
-                    {% endif %}
-                </div>
-
-                {% if is_feature_enabled('blog') and posts | length > 0 %}
-                    <div class="block">
-                        <h2 class="h2">{{ 'step.presentation.posts.title'|trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ nbPosts }}</span></h2>
-                        <ul class="media-list">
-                            {% for post in posts %}
-                                {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
-                            {% endfor %}
-                        </ul>
-                        {% if nbPosts > 2 %}
-                            <a href="{{ path('app_project_show_posts', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.posts.see_all'|trans({}, 'CapcoAppBundle') }}</a>
-                        {% endif %}
-                    </div>
+    <div class="block">
+        <h2 class="h2">{{ 'step.presentation.contributors.title'|trans({}, 'CapcoAppBundle') }}
+            <span class="small excerpt">{{ contributors|length }}</span>
+            {% if is_feature_enabled('share_buttons') %}
+                <a class="btn btn-primary pull-right" href="mailto:?body={{ project | capco_first_step_link(true) | escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
+                    <i class="cap cap-user-add-2"></i>
+                    {{ 'project.share_button' | trans({}, 'CapcoAppBundle') }}
+                </a>
+            {% endif %}
+        </h2>
+        <div class="row">
+            {% for contributor in contributors|slice(0,9) %}
+                {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': contributor.user, 'contributions': contributor.total, 'col': 4} only %}
+            {% else %}
+                {% if (project.consultationStep is defined) and project.isOpen %}
+                    {{ 'project.contributors.participate' | trans({
+                    '%link%': '<a href="' ~ path('app_project_show_consultation', {'projectSlug': project.slug, 'stepSlug': project.ConsultationStepOpen.slug}) ~'"">' ,
+                    '%endlink%': '</a>'
+                    }, 'CapcoAppBundle') | raw }}
+                {% else %}
+                    {{ 'project.contributors.no' | trans({}, 'CapcoAppBundle')}}
                 {% endif %}
-
-                {% if is_feature_enabled('calendar') and events | length > 0 %}
-                    <div class="block">
-                        <h2 class="h2">{{ 'step.presentation.events.title'|trans({}, 'CapcoAppBundle') }} <span class="small excerpt">{{ nbEvents }}</span></h2>
-                        <div class="row">
-                            {% for event in events %}
-                                {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event, 'col_classes': 'col-md-6  col-sm-12'} only %}
-                            {% endfor %}
-                        </div>
-                        {% if nbEvents > 2 %}
-                            <a href="{{ path('app_project_show_events', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.events.see_all'|trans({}, 'CapcoAppBundle') }}</a>
-                        {% endif %}
-                    </div>
-                {% endif %}
-
-                <div class="block">
-                    <h2 class="h2">{{ 'step.presentation.contributors.title'|trans({}, 'CapcoAppBundle') }}
-                        <span class="small excerpt">{{ contributors|length }}</span>
-                        {% if is_feature_enabled('share_buttons') %}
-                            <a class="btn btn-primary pull-right" href="mailto:?body={{ project | capco_first_step_link(true) | escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
-                                <i class="cap cap-user-add-2"></i>
-                                {{ 'project.share_button' | trans({}, 'CapcoAppBundle') }}
-                            </a>
-                        {% endif %}
-                    </h2>
-                    <div class="row">
-                        {% for contributor in contributors|slice(0,9) %}
-                            {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': contributor.user, 'contributions': contributor.total, 'col': 4} only %}
-                        {% else %}
-                            {% if (project.consultationStep is defined) and project.isOpen %}
-                                {{ 'project.contributors.participate' | trans({
-                                '%link%': '<a href="' ~ path('app_project_show', {'projectSlug': project.slug, 'stepSlug': project.ConsultationStepOpen.slug}) ~'"">' ,
-                                '%endlink%': '</a>'
-                                }, 'CapcoAppBundle') | raw }}
-                            {% else %}
-                                {{ 'project.contributors.no' | trans({}, 'CapcoAppBundle')}}
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    {% if contributors|length > 9 %}
-                        <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">
-                            {{ 'step.presentation.contributors.see_all'|trans({}, 'CapcoAppBundle') }}
-                        </a>
-                    {% endif %}
-                </div>
-
-            </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
-        </div> <!-- .row -->
+            {% endfor %}
+        </div>
+        {% if contributors|length > 9 %}
+            <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">
+                {{ 'step.presentation.contributors.see_all'|trans({}, 'CapcoAppBundle') }}
+            </a>
+        {% endif %}
     </div>
 
 {% endblock %}

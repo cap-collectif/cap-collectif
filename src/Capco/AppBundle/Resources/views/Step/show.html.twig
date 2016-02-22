@@ -1,4 +1,4 @@
-{% extends '@CapcoApp/Project/show.html.twig' %}
+{% extends '@CapcoApp/Project/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_step', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
@@ -16,24 +16,9 @@
 
 {% block jumbotron %}{% endblock %}
 
-{% block body %}
-    <div class="container  container--custom">
-        {% include '@CapcoApp/Project/show_title.html.twig' %}
+{% block details %}
+    <h2 class="h2">{{ currentStep.title }}</h2>
+    <div class="block  block--bordered  box">
+        {{ currentStep.body | raw }}
     </div>
-
-    <div class="container  container--custom">
-        <div class="row">
-            <div class="col-xs-12  col-sm-4  col-md-3">
-                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStep.slug})) }}
-            </div>
-
-            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-                <h2 class="h2">{{ currentStep.title }}</h2>
-                <div class="block  block--bordered  box">
-                    {{ currentStep.body | raw }}
-                </div>
-            </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
-        </div> <!-- .row -->
-    </div>
-
 {% endblock %}

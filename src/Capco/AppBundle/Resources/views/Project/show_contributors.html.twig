@@ -1,4 +1,4 @@
-{% extends '@CapcoApp/Project/show.html.twig' %}
+{% extends '@CapcoApp/Project/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_contributors', {'projectSlug': project.slug}) }}{% endblock %}
 
@@ -13,46 +13,30 @@
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ project.title }} - {{ 'project.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ 'project.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
-{% block body %}
-    <div class="container  container--custom">
-        {% include '@CapcoApp/Project/show_title.html.twig' %}
-    </div>
-
-    <div class="container  container--custom">
+{% block details %}
+    <div class="block">
+        <h2 class="h2">{{ 'project.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
+            <span class="small excerpt">{{ contributors | length }}</span>
+            {% if is_feature_enabled('share_buttons') %}
+                <a class="btn btn-primary pull-right" href="mailto:?body={{ project | capco_first_step_link(true) |escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
+                    <i class="cap cap-user-add-2"></i>
+                    {{ 'project.share_button' | trans({}, 'CapcoAppBundle') }}
+                </a>
+            {% endif %}
+        </h2>
         <div class="row">
-            <div class="col-xs-12  col-sm-4  col-md-3">
-                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': 'contributors_step'})) }}
-            </div>
-
-            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-                <div class="block  box">
-                    <h2 class="h2">{{ 'project.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
-                        <span class="small excerpt">{{ contributors | length }}</span>
-                        {% if is_feature_enabled('share_buttons') %}
-                            <a class="btn btn-primary pull-right" href="mailto:?body={{ project | capco_first_step_link(true) |escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
-                                <i class="cap cap-user-add-2"></i>
-                                {{ 'project.share_button' | trans({}, 'CapcoAppBundle') }}
-                            </a>
-                        {% endif %}
-                    </h2>
-                    <div class="row">
-                        {% set offset = pagination*page - pagination %}
-                        {% set limit = contributors|length <= pagination*page ? contributors|length : pagination %}
-                        {% for contributor in contributors|slice(offset, limit) %}
-                            {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': contributor.user, 'contributions': contributor.total, 'col': 4} only %}
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+            {% set offset = pagination*page - pagination %}
+            {% set limit = contributors|length <= pagination*page ? contributors|length : pagination %}
+            {% for contributor in contributors|slice(offset, limit) %}
+                {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': contributor.user, 'contributions': contributor.total, 'col': 4} only %}
+            {% endfor %}
         </div>
-
-        {% set route, params = 'app_project_show_contributors', {'projectSlug': project.slug} %}
-
-        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
-
     </div>
+
+    {% set route, params = 'app_project_show_contributors', {'projectSlug': project.slug} %}
+    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 
 {% endblock %}

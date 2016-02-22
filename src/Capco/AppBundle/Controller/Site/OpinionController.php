@@ -17,6 +17,88 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class OpinionController extends Controller
 {
+
+    /**
+     * @Template("CapcoAppBundle:Consultation:show_opinions.html.twig")
+     *
+     * @param $project
+     * @param $currentStep
+     *
+     * @return array
+     */
+    public function showOpinionsAction(Project $project, ConsultationStep $currentStep)
+    {
+        $tree = $this->get('capco.opinion_types.resolver')
+            ->getGroupedOpinionsForStep($currentStep);
+
+        return [
+            'blocks' => $tree,
+            'project' => $project,
+            'currentStep' => $currentStep,
+            'opinionSortOrders' => Opinion::$sortCriterias,
+        ];
+    }
+
+    /**
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{page}", name="app_project_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random"}, defaults={"page" = 1})
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random"}, defaults={"page" = 1})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
+     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
+     * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
+     *
+     * @param Project          $project
+     * @param ConsultationStep $currentStep
+     * @param OpinionType      $opinionType
+     * @param $page
+     * @param Request $request
+     * @param $opinionsSort
+     *
+     * @return array
+     */
+    public function showByTypeAction(Project $project, ConsultationStep $currentStep, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
+    {
+        if (false == $currentStep->canDisplay()) {
+            throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
+        }
+
+        $opinionTypesResolver = $this->get('capco.opinion_types.resolver');
+
+        if (false == $opinionTypesResolver->stepAllowType($currentStep, $opinionType)) {
+            throw new NotFoundHttpException('This type does not exist for this consultation step');
+        }
+
+        $filter = $opinionsSort ? $opinionsSort : $opinionType->getDefaultFilter();
+        $currentUrl = $this
+            ->generateUrl('app_consultation_show_opinions', [
+                'projectSlug' => $project->getSlug(),
+                'stepSlug' => $currentStep->getSlug(),
+                'opinionTypeSlug' => $opinionType->getSlug(),
+                'page' => $page,
+            ]);
+        $opinions = $this->getDoctrine()
+            ->getRepository('CapcoAppBundle:Opinion')
+            ->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType->getId(), 10, $page, $filter);
+        $nav = $this->get('capco.opinion_types.resolver')
+            ->getNavForStep($currentStep);
+
+        return [
+            'currentUrl' => $currentUrl,
+            'project' => $project,
+            'opinionType' => $opinionType,
+            'opinions' => $opinions,
+            'page' => $page,
+            'nbPage' => ceil(count($opinions) / 10),
+            'opinionsSort' => $filter,
+            'opinionSortOrders' => Opinion::$sortCriterias,
+            'currentStep' => $currentStep,
+            'nav' => $nav,
+            'currentRoute' => $request->get('_route'),
+        ];
+    }
+
     /**
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_project_show_opinion_version")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_consultation_show_opinion_version")
@@ -167,7 +249,7 @@ class OpinionController extends Controller
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('opinion.delete.success'));
 
-                return $this->redirect($this->generateUrl('app_project_show', ['projectSlug' => $project->getSlug(), 'stepSlug' => $currentStep->getSlug()]));
+                return $this->redirect($this->generateUrl('app_project_show_consultation', ['projectSlug' => $project->getSlug(), 'stepSlug' => $currentStep->getSlug()]));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.delete.error'));
             }

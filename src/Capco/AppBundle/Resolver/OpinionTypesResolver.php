@@ -31,7 +31,7 @@ class OpinionTypesResolver
             return [];
         }
 
-        $url = $this->router->generate('app_project_show', ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()]);
+        $url = $this->router->generate('app_project_show_consultation', ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()]);
 
         $options = [
             'decorate' => true,

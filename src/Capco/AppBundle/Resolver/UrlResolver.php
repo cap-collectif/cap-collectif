@@ -62,7 +62,7 @@ class UrlResolver
     public function getStepUrl($step, $absolute = false)
     {
         if ($step->isConsultationStep()) {
-            return $this->router->generate('app_project_show',              ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
+            return $this->router->generate('app_project_show_consultation',              ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
         }
         if ($step->isPresentationStep()) {
             return $this->router->generate('app_project_show_presentation', ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);

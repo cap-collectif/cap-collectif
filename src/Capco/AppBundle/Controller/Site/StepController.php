@@ -9,6 +9,8 @@ use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -403,5 +405,37 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
         ];
+    }
+
+    /**
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}", name="app_project_show")
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}", name="app_project_show_consultation")
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}, "repository_method"="getOne"})
+     * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOne"})
+     *
+     * @param Request          $request
+     * @param Project          $project
+     * @param ConsultationStep $currentStep
+     *
+     * @return array
+     */
+    public function showConsultationAction(Request $request, Project $project, ConsultationStep $currentStep)
+    {
+        if (false === $currentStep->canDisplay()) {
+            throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
+        }
+        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
+        $response = $this->render('CapcoAppBundle:Consultation:show.html.twig', [
+            'project' => $project,
+            'currentStep' => $currentStep,
+            'nav' => $nav,
+        ]);
+
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
+            $response->setPublic();
+            $response->setSharedMaxAge(30);
+        }
+
+        return $response;
     }
 }

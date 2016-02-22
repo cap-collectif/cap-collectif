@@ -1,4 +1,4 @@
-{% extends '@CapcoApp/Project/show.html.twig' %}
+{% extends '@CapcoApp/Project/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_synthesis', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
@@ -16,44 +16,28 @@
 
 {% block jumbotron %}{% endblock %}
 
-{% block body %}
-    <div class="container  container--custom">
-        {% include '@CapcoApp/Project/show_title.html.twig' %}
+{% block details %}
+    <h2 class="h2">
+        {{ currentStep.title }}
+        {% if currentStep.synthesis.editable and is_granted('ROLE_ADMIN') %}
+            <a class="btn btn-primary pull-right" href="{{ path('app_project_edit_synthesis', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" title="{{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}">
+                <i class="cap cap-pencil-1"></i>
+                {{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}
+            </a>
+        {% endif %}
+    </h2>
+
+    <div class="block  block--bordered  box">
+        {{ currentStep.body | raw }}
     </div>
 
-    <div class="container  container--custom">
-        <div class="row">
-            <div class="col-xs-12  col-sm-4  col-md-3">
-                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStep.slug})) }}
-            </div>
-
-            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-                <h2 class="h2">
-                    {{ currentStep.title }}
-                    {% if currentStep.synthesis.editable and is_granted('ROLE_ADMIN') %}
-                        <a class="btn btn-primary pull-right" href="{{ path('app_project_edit_synthesis', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" title="{{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}">
-                            <i class="cap cap-pencil-1"></i>
-                            {{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}
-                        </a>
-                    {% endif %}
-                </h2>
-
-                <div class="block  block--bordered  box">
-                    {{ currentStep.body | raw }}
-                </div>
-
-                {% if currentStep.synthesis == null %}
-                    <p class="excerpt">{{ 'synthesis.show.no_synthesis' | trans({}, 'CapcoAppBundle') }}</p>
-                {% elseif currentStep.synthesis.enabled == false and ( app.user == null or app.user.vip == false) %}
-                    <p class="excerpt">{{ 'synthesis.show.not_enabled' | trans({}, 'CapcoAppBundle') }}</p>
-                {% else %}
-                    <div id="render-synthesis-view-box" data-synthesis="{{ currentStep.synthesis.id }}"></div>
-                {% endif %}
-
-            </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
-        </div> <!-- .row -->
-    </div>
-
+    {% if currentStep.synthesis == null %}
+        <p class="excerpt">{{ 'synthesis.show.no_synthesis' | trans({}, 'CapcoAppBundle') }}</p>
+    {% elseif currentStep.synthesis.enabled == false and ( app.user == null or app.user.vip == false) %}
+        <p class="excerpt">{{ 'synthesis.show.not_enabled' | trans({}, 'CapcoAppBundle') }}</p>
+    {% else %}
+        <div id="render-synthesis-view-box" data-synthesis="{{ currentStep.synthesis.id }}"></div>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}

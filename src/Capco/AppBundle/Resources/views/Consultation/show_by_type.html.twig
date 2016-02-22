@@ -1,13 +1,13 @@
-{% extends '@CapcoApp/Project/show.html.twig' %}
+{% extends '@CapcoApp/Consultation/show.html.twig' %}
 
-{% block canonical_link %}{{ url('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endblock %}
+{% block canonical_link %}{{ url('app_consultation_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}{% endblock %}
 
 {% block metaTags %}
     {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       project.title~' - '~opinionType.title,
         'description': currentStep.body|striptags|truncate(250, true),
-        'url':         url('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}),
+        'url':         url('app_consultation_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}),
         'type':        'project',
         'image':       projectCover,
         'author':      url('capco_user_profile_show_all', {'slug': project.Author.slug})
@@ -21,7 +21,7 @@
 {% block content %}
 
     <p id="back-button">
-        <a href="{{ path('app_project_show', {'projectSlug': project.slug, 'stepSlug': currentStep.slug})  }}" class="btn btn-default">
+        <a href="{{ path('app_project_show_consultation', {'projectSlug': project.slug, 'stepSlug': currentStep.slug})  }}" class="btn btn-default">
             <i class="cap cap-arrow-1-1"></i> {{ 'project.show.global.title' | trans({}, 'CapcoAppBundle') }}
         </a>
     </p>
@@ -59,7 +59,7 @@
 
     {% set params = {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug } %}
 
-    {% if currentRoute == 'app_project_show_opinions_sorted' %}
+    {% if currentRoute == 'app_consultation_show_opinions_sorted' %}
         {% set params = params | merge({'opinionsSort': opinionsSort }) %}
     {% endif %}
 

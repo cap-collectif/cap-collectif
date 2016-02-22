@@ -1,0 +1,52 @@
+{% extends '@CapcoApp/Project/layout_with_widget.html.twig' %}
+
+{% set currentStepSlug = currentStep.slug is defined ? currentStep.slug : currentStep %}
+
+{% block canonical_link %}{% endblock %}
+
+{% block metaTags %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ project.title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block jumbotron %}{% endblock %}
+
+{% block body %}
+
+    <div class="container  container--custom">
+        {% include '@CapcoApp/Project/show_title.html.twig' %}
+    </div>
+
+    <div class="container  container--custom">
+
+        <div class="row">
+            <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
+                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStepSlug })) }}
+            </div>
+
+            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+
+                {% block details %}{% endblock %}
+
+            </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
+        </div> <!-- .row -->
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('.more').readmore({
+            collapsedHeight: 88,
+            moreLink: '<a class="text-center" href="#">{{ 'project.show.meta.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
+            lessLink: '<a class="text-center" href="#">{{ 'project.show.meta.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
+        });
+    </script>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% extends '@CapcoApp/Project/project_base.html.twig' %}
+{% extends '@CapcoApp/Project/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_collect', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
@@ -24,60 +24,44 @@
 {% block jumbotron %}
 {% endblock %}
 
-{% block body %}
+{% block details %}
 
-<div class="container  container--custom">
-    {% include '@CapcoApp/Project/show_title.html.twig' %}
-</div>
-
-<div class="container container--custom">
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStep.slug})) }}
+    {% if currentStep.isClosed %}
+        <div class="alert alert-info alert-dismissible  block" role="alert">
+            <p><strong>{{ 'step.collect.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.collect.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
         </div>
+    {% endif %}
 
-        <div class="col-xs-12  col-sm-8  col-md-9" id="details">
-
-            {% if currentStep.isClosed %}
-                <div class="alert alert-info alert-dismissible  block" role="alert">
-                    <p><strong>{{ 'step.collect.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.collect.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
-                </div>
-            {% endif %}
-
-            {% if currentStep.isFuture %}
-                <div class="alert alert-info alert-dismissible  block" role="alert">
-                    <p><strong>{{ 'step.collect.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.collect.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
-                </div>
-            {% endif %}
-
-            {% if currentStep.body is not null %}
-                <p class="text-center opinion-type__title level--0">
-                    {{ 'project.show.meta.intro.title' | trans({}, 'CapcoAppBundle') }}
-                </p>
-                <div class="block  block--bordered">
-                    <div class="opinion  opinion--current  opinion--default">
-                        <div class="box">
-                            <div class="more">{{ currentStep.body | raw }}</div>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-
-            {% if form %}
-                <div
-                    id="render-collect-step-page"
-                    data-count='{{ proposalsCount }}'
-                    data-form='{{ form|escape }}'
-                    data-themes='{{ themes|escape }}'
-                    data-statuses='{{ statuses|escape }}'
-                    data-districts='{{ districts|escape }}'
-                    data-types='{{ types|escape }}'
-                >
-                </div>
-            {% endif %}
+    {% if currentStep.isFuture %}
+        <div class="alert alert-info alert-dismissible  block" role="alert">
+            <p><strong>{{ 'step.collect.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.collect.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
         </div>
-    </div>
-</div>
+    {% endif %}
+
+    {% if currentStep.body is not null %}
+        <p class="text-center opinion-type__title level--0">
+            {{ 'project.show.meta.intro.title' | trans({}, 'CapcoAppBundle') }}
+        </p>
+        <div class="block  block--bordered">
+            <div class="opinion  opinion--current  opinion--default">
+                <div class="box">
+                    <div class="more">{{ currentStep.body | raw }}</div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if form %}
+        <div
+            id="render-collect-step-page"
+            data-count='{{ proposalsCount }}'
+            data-form='{{ form|escape }}'
+            data-themes='{{ themes|escape }}'
+            data-statuses='{{ statuses|escape }}'
+            data-districts='{{ districts|escape }}'
+            data-types='{{ types|escape }}'
+        >
+        </div>
+    {% endif %}
 
 {% endblock %}

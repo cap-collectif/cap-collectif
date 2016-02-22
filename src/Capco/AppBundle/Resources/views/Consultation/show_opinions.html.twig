@@ -28,7 +28,7 @@
                     {% if block.total_opinions_count > 5  %}
                         {% set showAllLabel = project.opinionTerm == 0 ? 'opinion.show.all' : 'opinion.show.articles_all'  %}
                         <div class="opinion  opinion__footer  box">
-                            <a href="{{ path('app_project_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug,'opinionTypeSlug': block.slug}) }}" class="text-center" style="display: block">
+                            <a href="{{ path('app_consultation_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug,'opinionTypeSlug': block.slug}) }}" class="text-center" style="display: block">
                                 {{ showAllLabel | trans({}, 'CapcoAppBundle') }}
                             </a>
                         </div>

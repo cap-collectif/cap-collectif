@@ -1,4 +1,4 @@
-{% extends '@CapcoApp/Project/show.html.twig' %}
+{% extends '@CapcoApp/Project/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_opinions_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
@@ -16,56 +16,35 @@
 
 {% block jumbotron %}{% endblock %}
 
-{% block body %}
-    <div class="container  container--custom">
-        {% include '@CapcoApp/Project/show_title.html.twig' %}
-    </div>
+{% block details %}
+    <p id="back-button">
+        <a href="{{ path('app_project_show_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" class="btn btn-default">
+            <i class="cap cap-arrow-1-1"></i> {{ 'project.show.global.title' | trans({}, 'CapcoAppBundle') }}
+        </a>
+    </p>
 
-    <div class="container  container--custom">
-        <div class="row">
-            <div class="col-xs-12  col-sm-4  col-md-3">
-                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {
-                        'projectSlug': project.slug,
-                        'currentStepSlug': currentStep.slug,
-                    }))
-                }}
+    <div id="opinions__ranking" class="anchor-offset  block  block--bordered">
+
+        {% set opinionsLabel = project.opinionTerm == 0 ? 'project.ranking.opinions' : 'project.ranking.articles' %}
+        <div class="opinion opinion--default">
+            <div class="opinion__header  opinion__header--mobile-centered">
+                <h2 class="pull-left  h4  opinion__header__title">
+                    {{ opinionsLabel | transchoice(opinions | length, {}, 'CapcoAppBundle')  }}
+                </h2>
             </div>
+        </div>
 
-            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+        {% if opinions | length > 0 %}
+            <ul class="media-list  opinion__list">
+                {% for opinion in opinions %}
+                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'showRanking': true, 'opinionTerm': project.opinionTerm} only %}
+                {% endfor %}
+            </ul>
+        {% endif %}
 
-                <p id="back-button">
-                    <a href="{{ path('app_project_show_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" class="btn btn-default">
-                        <i class="cap cap-arrow-1-1"></i> {{ 'project.show.global.title' | trans({}, 'CapcoAppBundle') }}
-                    </a>
-                </p>
-
-                <div id="opinions__ranking" class="anchor-offset  block  block--bordered">
-
-                    {% set opinionsLabel = project.opinionTerm == 0 ? 'project.ranking.opinions' : 'project.ranking.articles' %}
-                    <div class="opinion opinion--default">
-                        <div class="opinion__header  opinion__header--mobile-centered">
-                            <h2 class="pull-left  h4  opinion__header__title">
-                                {{ opinionsLabel | transchoice(opinions | length, {}, 'CapcoAppBundle')  }}
-                            </h2>
-                        </div>
-                    </div>
-
-                    {% if opinions | length > 0 %}
-                        <ul class="media-list  opinion__list">
-                            {% for opinion in opinions %}
-                                {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'showRanking': true, 'opinionTerm': project.opinionTerm} only %}
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-
-                </div>
-
-                {% set route, params = 'app_project_show_opinions_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug} %}
-
-                {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
-
-            </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
-        </div> <!-- .row -->
     </div>
 
+    {% set route, params = 'app_project_show_opinions_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug} %}
+
+    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 {% endblock %}

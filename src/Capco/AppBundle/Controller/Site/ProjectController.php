@@ -113,125 +113,13 @@ class ProjectController extends Controller
             'steps' => $steps,
             'districts' => $districts,
             'themes' => $themes,
+            'currentStep' => 'stats_step',
         ]);
 
         $response->setPublic();
         $response->setSharedMaxAge(60);
 
         return $response;
-    }
-
-    // Page project
-
-    /**
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}", name="app_project_show")
-     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}", name="app_consultation_show")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}, "repository_method"="getOne"})
-     * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOne"})
-     *
-     * @param Request          $request
-     * @param Project          $project
-     * @param ConsultationStep $currentStep
-     *
-     * @return array
-     */
-    public function showAction(Request $request, Project $project, ConsultationStep $currentStep)
-    {
-        if (false === $currentStep->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
-        }
-        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
-        $response = $this->render('CapcoAppBundle:Project:show.html.twig', [
-            'project' => $project,
-            'currentStep' => $currentStep,
-            'nav' => $nav,
-        ]);
-
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
-            $response->setPublic();
-            $response->setSharedMaxAge(30);
-        }
-
-        return $response;
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Project:show_opinions.html.twig")
-     *
-     * @param $project
-     * @param $currentStep
-     *
-     * @return array
-     */
-    public function showOpinionsAction(Project $project, ConsultationStep $currentStep)
-    {
-        $tree = $this->get('capco.opinion_types.resolver')
-            ->getGroupedOpinionsForStep($currentStep);
-
-        return [
-            'blocks' => $tree,
-            'project' => $project,
-            'currentStep' => $currentStep,
-            'opinionSortOrders' => Opinion::$sortCriterias,
-        ];
-    }
-
-    /**
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{page}", name="app_project_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random"}, defaults={"page" = 1})
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
-     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
-     * @Template("CapcoAppBundle:Project:show_by_type.html.twig")
-     *
-     * @param Project          $project
-     * @param ConsultationStep $currentStep
-     * @param OpinionType      $opinionType
-     * @param $page
-     * @param Request $request
-     * @param $opinionsSort
-     *
-     * @return array
-     */
-    public function showByTypeAction(Project $project, ConsultationStep $currentStep, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
-    {
-        if (false == $currentStep->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
-        }
-
-        $opinionTypesResolver = $this->get('capco.opinion_types.resolver');
-
-        if (false == $opinionTypesResolver->stepAllowType($currentStep, $opinionType)) {
-            throw new NotFoundHttpException('This type does not exist for this consultation step');
-        }
-
-        $filter = $opinionsSort ? $opinionsSort : $opinionType->getDefaultFilter();
-        $currentUrl = $this
-            ->generateUrl('app_project_show_opinions', [
-                'projectSlug' => $project->getSlug(),
-                'stepSlug' => $currentStep->getSlug(),
-                'opinionTypeSlug' => $opinionType->getSlug(),
-                'page' => $page,
-            ]);
-        $opinions = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:Opinion')
-            ->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType->getId(), 10, $page, $filter);
-        $nav = $this->get('capco.opinion_types.resolver')
-            ->getNavForStep($currentStep);
-
-        return [
-            'currentUrl' => $currentUrl,
-            'project' => $project,
-            'opinionType' => $opinionType,
-            'opinions' => $opinions,
-            'page' => $page,
-            'nbPage' => ceil(count($opinions) / 10),
-            'opinionsSort' => $filter,
-            'opinionSortOrders' => Opinion::$sortCriterias,
-            'currentStep' => $currentStep,
-            'nav' => $nav,
-            'currentRoute' => $request->get('_route'),
-        ];
     }
 
     /**
@@ -271,6 +159,7 @@ class ProjectController extends Controller
             'sources' => $sources,
             'proposals' => $proposals,
             'argumentsLabels' => Argument::$argumentTypesLabels,
+            'currentStep' => 'trash_step',
         ];
     }
 
@@ -331,6 +220,7 @@ class ProjectController extends Controller
             'project' => $project,
             'years' => $groupedEvents,
             'nbEvents' => $nbEvents,
+            'currentStep' => 'events_step',
         ];
     }
 
@@ -367,6 +257,7 @@ class ProjectController extends Controller
             'posts' => $posts,
             'page' => $page,
             'nbPage' => $nbPage,
+            'currentStep' => 'posts_step',
         ];
     }
 
@@ -398,6 +289,7 @@ class ProjectController extends Controller
             'page' => $page,
             'pagination' => $pagination,
             'nbPage' => $nbPage,
+            'currentStep' => 'contributors_step',
         ];
     }
 

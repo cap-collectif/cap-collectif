@@ -1,0 +1,59 @@
+{% extends '@CapcoApp/Project/base.html.twig' %}
+
+{% block canonical_link %}{{ url('app_project_show_consultation', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+
+{% block metaTags %}
+    {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       project.title,
+        'description': currentStep.body|striptags|truncate(250, true),
+        'url':         url('app_project_show_consultation', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}),
+        'type':        'project',
+        'image':       projectCover,
+        'author':      url('capco_user_profile_show_all', {'slug': project.Author.slug})
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ currentStep.title }}
+{% endblock %}
+
+{% block jumbotron %}{% endblock %}
+
+{% block details %}
+
+    {% if currentStep.isClosed %}
+        <div class="alert alert-info alert-dismissible  block" role="alert">
+            <p><strong>{{ 'step.consultation.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.consultation.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
+        </div>
+    {% endif %}
+
+    {% if currentStep.isFuture %}
+        <div class="alert alert-info alert-dismissible  block" role="alert">
+            <p><strong>{{ 'step.consultation.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.consultation.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
+        </div>
+    {% endif %}
+
+    {% block content %}
+        {% if currentStep.body is not null %}
+            <p class="text-center opinion-type__title level--0">
+                {{ 'project.show.meta.intro.title' | trans({}, 'CapcoAppBundle') }}
+            </p>
+            <div class="block  block--bordered">
+                <div class="opinion  opinion--current  opinion--default">
+                    <div class="box">
+                        <div class="more">{{ currentStep.body | raw }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {{ render(controller('CapcoAppBundle:Site/Opinion:showOpinions', {'project': project.id, 'currentStep': currentStep})) }}
+    {% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        App.pieChart();
+    </script>
+{% endblock %}
