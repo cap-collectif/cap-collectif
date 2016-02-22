@@ -38,10 +38,8 @@
         </div>
     {% endif %}
 
+    <h2 class="h2">{{ currentStep.title }}</h2>
     {% if currentStep.body is not null %}
-        <p class="text-center opinion-type__title level--0">
-            {{ 'project.show.meta.intro.title' | trans({}, 'CapcoAppBundle') }}
-        </p>
         <div class="block  block--bordered">
             <div class="opinion  opinion--current  opinion--default">
                 <div class="box">

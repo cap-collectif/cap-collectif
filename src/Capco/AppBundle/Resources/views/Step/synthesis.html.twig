@@ -27,9 +27,11 @@
         {% endif %}
     </h2>
 
-    <div class="block  block--bordered  box">
-        {{ currentStep.body | raw }}
-    </div>
+    {% if currentStep.body %}
+        <div class="block  block--bordered  box">
+            {{ currentStep.body | raw }}
+        </div>
+    {% endif %}
 
     {% if currentStep.synthesis == null %}
         <p class="excerpt">{{ 'synthesis.show.no_synthesis' | trans({}, 'CapcoAppBundle') }}</p>

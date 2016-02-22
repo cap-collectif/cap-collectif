@@ -76,54 +76,42 @@
         {% set votesCount = project.votesCount %}
         {% set contributionsCount = project.contributionsCount %}
         {% set contributorsCount = project.participantsCount %}
-        {% set remDays = null %}
-        {% set openStep = project.currentStep %}
-        {% if null != openStep %}
-            {% set remDays = openStep.remainingDays %}
-        {% endif %}
 
-        {% if votesCount > 0 or contributionsCount > 0 or contributorsCount > 0 or remDays is not null %}
+        {% if votesCount > 0 or contributionsCount > 0 or contributorsCount > 0 %}
             <ul class="nav nav-pills project__infos">
+                {% if contributionsCount > 0 %}
+                    <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
+                        <i class="cap cap-file-edit-1"></i>
+                        <span class="value">{{ contributionsCount }}</span>
+                        <span class="excerpt category">
+                            {% transchoice contributionsCount from 'CapcoAppBundle' %}
+                            project.show.meta.total_count
+                            {% endtranschoice %}
+                        </span>
+                    </li>
+                {% endif %}
                 {% if votesCount > 0 %}
                     <li id="votes-counter-pill">
-                        <div class="value">{{ votesCount }}</div>
-                        <div class="excerpt category">
+                        <i class="cap cap-hand-like-2-1"></i>
+                        <span class="value">{{ votesCount }}</span>
+                        <span class="excerpt category">
                             {% transchoice votesCount from 'CapcoAppBundle' %}
                             project.show.meta.votes_count
                             {% endtranschoice %}
-                        </div>
-                    </li>
-                {% endif %}
-                {% if contributionsCount > 0 %}
-                    <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
-                        <div class="value">{{ contributionsCount }}</div>
-                        <div class="excerpt category">
-                            {% transchoice contributionsCount from 'CapcoAppBundle' %}
-                                project.show.meta.total_count
-                            {% endtranschoice %}
-                        </div>
+                        </span>
                     </li>
                 {% endif %}
                 {% if contributorsCount > 0 %}
                     <li id="contributors-counter-pill">
                         <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}">
-                            <div class="value">{{ contributorsCount }}</div>
-                            <div class="excerpt category">
+                            <i class="cap cap-contacts-1"></i>
+                            <span class="value">{{ contributorsCount }}</span>
+                            <span class="excerpt category">
                                 {% transchoice contributorsCount from 'CapcoAppBundle' %}
                                 project.show.meta.contributors_count
                                 {% endtranschoice %}
-                            </div>
+                            </span>
                         </a>
-                    </li>
-                {% endif %}
-                {% if remDays is not null %}
-                    <li data-toggle="tooltip" data-placement="top" title="{{ 'project.show.end_at' | trans({'%date%': openStep.endAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}">
-                        <div class="value">{{ remDays }}</div>
-                        <div class="excerpt  category">
-                            {% transchoice remDays from 'CapcoAppBundle' %}
-                                project.show.meta.remaining_days
-                            {% endtranschoice %}
-                        </div>
                     </li>
                 {% endif %}
             </ul>
