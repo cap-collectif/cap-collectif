@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\UserBundle\Repository\UserRepository;
-use GuzzleHttp\Stream\Exception\SeekException;
 
 class ContributionResolver
 {
@@ -152,12 +151,12 @@ class ContributionResolver
             foreach ($sourcesVoters as $sourcesVoter) {
                 $contributors[$sourcesVoter['id']]['sources_votes'] = $sourcesVoter['sources_votes_count'];
             }
-        } else if ($step instanceof CollectStep) {
+        } elseif ($step instanceof CollectStep) {
             $proposalsContributors = $this->repository->findCollectStepProposalContributorsWithCount($step);
             foreach ($proposalsContributors as $proposalsContributor) {
                 $contributors[$proposalsContributor['id']]['proposals'] = $proposalsContributor['proposals_count'];
             }
-        } else if ($step instanceof SelectionStep) {
+        } elseif ($step instanceof SelectionStep) {
             $proposalsVoters = $this->repository->findSelectionStepProposalVotersWithCount($step);
             foreach ($proposalsVoters as $proposalsVoter) {
                 $contributors[$proposalsVoter['id']]['proposals_votes'] = $proposalsVoter['proposals_votes_count'];
@@ -224,7 +223,7 @@ class ContributionResolver
                     }
                 }
             }
-        } else if ($step instanceof SelectionStep) {
+        } elseif ($step instanceof SelectionStep) {
             $count += $step->getVotesCount();
         }
 
@@ -237,6 +236,7 @@ class ContributionResolver
         foreach ($project->getSteps() as $pas) {
             $count += $this->countStepVotes($pas->getStep());
         }
+
         return $count;
     }
 }

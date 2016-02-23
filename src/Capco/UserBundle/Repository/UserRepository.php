@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\Repository;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;

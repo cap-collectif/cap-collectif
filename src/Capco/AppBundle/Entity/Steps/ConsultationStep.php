@@ -257,6 +257,7 @@ class ConsultationStep extends AbstractStep
 
     /**
      * @param int $votesCount
+     *
      * @return $this
      */
     public function setVotesCount($votesCount)
@@ -276,6 +277,7 @@ class ConsultationStep extends AbstractStep
 
     /**
      * @param int $contributorsCount
+     *
      * @return $this
      */
     public function setContributorsCount($contributorsCount)

@@ -168,6 +168,7 @@ class SelectionStep extends AbstractStep
 
     /**
      * @param mixed $contributorsCount
+     *
      * @return $this
      */
     public function setContributorsCount($contributorsCount)

@@ -124,6 +124,7 @@ class CollectStep extends AbstractStep
 
     /**
      * @param int $contributorsCount
+     *
      * @return $this
      */
     public function setContributorsCount($contributorsCount)

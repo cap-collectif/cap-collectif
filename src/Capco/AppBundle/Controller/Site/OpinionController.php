@@ -17,7 +17,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class OpinionController extends Controller
 {
-
     /**
      * @Template("CapcoAppBundle:Consultation:show_opinions.html.twig")
      *
