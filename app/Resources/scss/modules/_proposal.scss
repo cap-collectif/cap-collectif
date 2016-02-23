@@ -184,8 +184,10 @@ $statuses:
   }
 
   .widget__image {
-    height: 100%;
+    height: auto;
     width: auto;
+    padding: 5px;
+    max-height: 50px;
   }
 }
 
