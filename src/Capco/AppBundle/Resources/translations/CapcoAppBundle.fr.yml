@@ -387,6 +387,7 @@ project:
     opinions_no_nb: "]-Inf, 1] opinion | ]1,Inf[ opinions"
     posts:
       title: Actualités
+    published_by: Publié par
     remaining_days: "]-Inf, 0] Projet participatif terminé | {1} Dernier jour | ]1,Inf[ %count% jours restants"
     sources: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
     stats:

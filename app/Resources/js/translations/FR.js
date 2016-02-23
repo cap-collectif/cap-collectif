@@ -125,7 +125,7 @@ export default {
       counters: {
         contributions: '{num, plural, =0{contribution} one{contribution} other{contributions}}',
         contributors: '{num, plural, =0{participant} one{participant} other{participants}}',
-        remaining_days: '{num, plural, =0{jour restant} one{jour restant} other{jours restants}}',
+        remaining_days: '{num, plural, =0{jour restant} one{jour restant} other{jours restants}}',
         votes: '{num, plural, =0{vote} one{vote} other{votes}}',
       },
       dates: {
@@ -407,6 +407,8 @@ export default {
         },
         not_enough_credits: 'Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux.',
         show_more: 'Voir tous les votes',
+        step_closed: 'L\'étape de sélection est terminée, merci pour votre participation.',
+        step_not_yet_open: 'L\'étape de sélection n\'est pas encore ouverte aux votes. Revenez plus tard !',
         vote_with_my_account: 'Voter avec mon compte',
       },
     },

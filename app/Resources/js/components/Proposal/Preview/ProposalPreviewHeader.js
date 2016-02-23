@@ -30,16 +30,6 @@ const ProposalPreviewHeader = React.createClass({
               day="numeric" month="long" year="numeric"
             />
           </p>
-          {
-            (moment(proposal.updated_at).diff(proposal.created_at, 'seconds') > 1)
-              ? <p className="excerpt small proposal__date">
-                <FormattedMessage
-                  message={this.getIntlMessage('global.edited_on')}
-                  updated={updatedDate}
-                />
-              </p>
-              : null
-          }
         </div>
       </div>
     );

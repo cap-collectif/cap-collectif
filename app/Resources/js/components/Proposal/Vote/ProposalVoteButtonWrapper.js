@@ -8,7 +8,7 @@ import LoginOverlay from '../../Utils/LoginOverlay';
 const ProposalVoteButtonWrapper = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
-    selectionStepId: React.PropTypes.number,
+    selectionStep: React.PropTypes.object,
     creditsLeft: React.PropTypes.number,
     voteType: React.PropTypes.number.isRequired,
     onClick: React.PropTypes.func.isRequired,
@@ -17,9 +17,13 @@ const ProposalVoteButtonWrapper = React.createClass({
 
   getDefaultProps() {
     return {
-      selectionStepId: null,
+      selectionStep: null,
       creditsLeft: null,
     };
+  },
+
+  selectionStepIsOpen() {
+    return this.props.selectionStep && this.props.selectionStep.isOpen;
   },
 
   userHasEnoughCredits() {
@@ -31,7 +35,12 @@ const ProposalVoteButtonWrapper = React.createClass({
 
   render() {
     if (this.props.voteType === VOTE_TYPE_SIMPLE) {
-      return <ProposalVoteButton {...this.props} disabled={false} />;
+      return (
+        <ProposalVoteButton
+          {...this.props}
+          disabled={!this.selectionStepIsOpen()}
+        />
+      );
     }
 
     if (LoginStore.isLoggedIn()) {
@@ -40,14 +49,20 @@ const ProposalVoteButtonWrapper = React.createClass({
             tooltipId={'vote-tooltip-proposal-' + this.props.proposal.id}
             show={!this.userHasEnoughCredits()}
         >
-          <ProposalVoteButton {...this.props} disabled={!this.userHasEnoughCredits()} />
+          <ProposalVoteButton
+            {...this.props}
+            disabled={!this.selectionStepIsOpen() || !this.userHasEnoughCredits()}
+          />
         </VoteButtonOverlay>
       );
     }
 
     return (
       <LoginOverlay>
-        <ProposalVoteButton {...this.props} disabled={false} />
+        <ProposalVoteButton
+          {...this.props}
+          disabled={!this.selectionStepIsOpen()}
+        />
       </LoginOverlay>
     );
   },

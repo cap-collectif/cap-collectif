@@ -40,6 +40,14 @@ class ApplicationContext extends UserContext
         'projectSlug' => 'projet-avec-budget',
         'stepSlug' => 'selection-avec-vote-selon-le-budget',
     ];
+    protected static $selectionStepNotYetOpen = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'selection-a-venir',
+    ];
+    protected static $selectionStepClosed = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'fermee',
+    ];
     protected static $proposalWithSimpleVoteParams = [
         'projectSlug' => 'projet-avec-budget',
         'stepSlug' => 'collecte-des-propositions',
@@ -49,6 +57,16 @@ class ApplicationContext extends UserContext
         'projectSlug' => 'projet-avec-budget',
         'stepSlug' => 'collecte-des-propositions-1',
         'proposalSlug' => 'proposition-pas-chere',
+    ];
+    protected static $proposalNotYetVotable = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'collecte-des-propositions',
+        'proposalSlug' => 'proposition-pas-encore-votable',
+    ];
+    protected static $proposalNotVotableAnymore = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'collecte-des-propositions',
+        'proposalSlug' => 'proposition-plus-votable',
     ];
     protected static $opinionWithVersions = [
         'projectSlug' => 'projet-de-loi-renseignement',
@@ -428,10 +446,10 @@ class ApplicationContext extends UserContext
 
     protected function getCurrentProposalPage()
     {
-        if ($this->proposalPageIsOpen() || $this->proposalPageWithBudgetVoteIsOpen()) {
+        if ($this->proposalPageIsOpen() || $this->proposalPageWithBudgetVoteIsOpen() || $this->proposalNotYetVotablePageIsOpen() || $this->proposalNotVotableAnymoreIsOpen()) {
             return $this->navigationContext->getPage('proposal page');
         }
-        if ($this->selectionStepWithSimpleVoteIsOpen() || $this->selectionStepWithBudgetVoteIsOpen()) {
+        if ($this->selectionStepWithSimpleVoteIsOpen() || $this->selectionStepWithBudgetVoteIsOpen() || $this->selectionStepNotYetOpenIsOpen() || $this->selectionStepClosedIsOpen()) {
             return $this->navigationContext->getPage('selection page');
         }
         if ($this->closedCollectStepIsOpen() || $this->openCollectStepIsOpen()) {
@@ -490,6 +508,36 @@ class ApplicationContext extends UserContext
     protected function proposalPageIsOpen()
     {
         return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalWithSimpleVoteParams);
+    }
+
+    /**
+     * Go to a proposal not yet votable.
+     *
+     * @When I go to a proposal not yet votable
+     */
+    public function iGoToAProposalNotYetVotable()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalNotYetVotable);
+    }
+
+    protected function proposalNotYetVotablePageIsOpen()
+    {
+        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalNotYetVotable);
+    }
+
+    /**
+     * Go to a proposal not votable anymore.
+     *
+     * @When I go to a proposal not votable anymore
+     */
+    public function iGoToAProposalNotVotableAnymore()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalNotVotableAnymore);
+    }
+
+    protected function proposalNotVotableAnymoreIsOpen()
+    {
+        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalNotVotableAnymore);
     }
 
     /**
@@ -889,6 +937,42 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * Go to a selection step not yet open.
+     *
+     * @When I go to a selection step not yet open
+     */
+    public function iGoToASelectionStepNotYetOpen()
+    {
+        $this->visitPageWithParams('selection page', self::$selectionStepNotYetOpen);
+    }
+
+    protected function selectionStepNotYetOpenIsOpen()
+    {
+        return $this->navigationContext
+            ->getPage('selection page')
+            ->isOpen(self::$selectionStepNotYetOpen)
+            ;
+    }
+
+    /**
+     * Go to a closed selection step.
+     *
+     * @When I go to a closed selection step
+     */
+    public function iGoToAClosedSelectionStep()
+    {
+        $this->visitPageWithParams('selection page', self::$selectionStepClosed);
+    }
+
+    protected function selectionStepClosedIsOpen()
+    {
+        return $this->navigationContext
+            ->getPage('selection page')
+            ->isOpen(self::$selectionStepClosed)
+            ;
+    }
+
+    /**
      * Go to a proposal page with budget vote enabled.
      *
      * @When I go to a proposal with budget vote enabled
@@ -911,8 +995,14 @@ class ApplicationContext extends UserContext
         if ($this->proposalPageWithBudgetVoteIsOpen() || $this->selectionStepWithBudgetVoteIsOpen()) {
             return 8;
         }
+        if ($this->selectionStepNotYetOpenIsOpen() || $this->proposalNotYetVotablePageIsOpen()) {
+            return 10;
+        }
+        if ($this->selectionStepClosedIsOpen() || $this->proposalNotVotableAnymoreIsOpen()) {
+            return 11;
+        }
 
-        return;
+        return null;
     }
 
     /**

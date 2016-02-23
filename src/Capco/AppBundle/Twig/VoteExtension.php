@@ -34,7 +34,7 @@ class VoteExtension extends \Twig_Extension
             new \Twig_SimpleFunction('capco_vote_object_url', [$this, 'getRelatedObjectUrl']),
             new \Twig_SimpleFunction('capco_vote_object', [$this, 'getRelatedObject']),
             new \Twig_SimpleFunction('capco_vote_object_admin_url', [$this, 'getRelatedObjectAdminUrl']),
-            new \Twig_SimpleFunction('capco_has_votable_step', [$this, 'hasVotableStep']),
+            new \Twig_SimpleFunction('capco_has_votable_step_not_future', [$this, 'hasVotableStepNotFuture']),
         ];
     }
 
@@ -53,8 +53,8 @@ class VoteExtension extends \Twig_Extension
         return $this->voteResolver->getRelatedObject($vote);
     }
 
-    public function hasVotableStep(Project $project)
+    public function hasVotableStepNotFuture(Project $project)
     {
-        return $this->proposalVotesResolver->hasVotableStep($project);
+        return $this->proposalVotesResolver->hasVotableStepNotFuture($project);
     }
 }

@@ -20,7 +20,14 @@ class SelectionPage extends Page
         'proposal votes counter 2' => '#proposal-2 .proposal__counter--votes .proposal__counter__value',
         'proposal vote button 2' => '#proposal-2 .proposal__preview__vote',
         'proposal comments counter 2' => '#proposal-2 .proposal__counter--comments .proposal__counter__value',
-        'proposal vote form submit button' => '#confirm-proposal-vote',
+        'proposal preview 10' => '#proposal-10',
+        'proposal votes counter 10' => '#proposal-10 .proposal__counter--votes .proposal__counter__value',
+        'proposal vote button 10' => '#proposal-10 .proposal__preview__vote',
+        'proposal comments counter 10' => '#proposal-10 .proposal__counter--comments .proposal__counter__value',
+        'proposal preview 11' => '#proposal-11',
+        'proposal votes counter 11' => '#proposal-11 .proposal__counter--votes .proposal__counter__value',
+        'proposal vote button 11' => '#proposal-11 .proposal__preview__vote',
+        'proposal comments counter 11' => '#proposal-11 .proposal__counter--comments .proposal__counter__value',
         'proposal preview 8' => '#proposal-8',
         'proposal votes counter 8' => '#proposal-8 .proposal__counter--votes .proposal__counter__value',
         'proposal vote button 8' => '#proposal-8 .proposal__preview__vote',
@@ -29,6 +36,7 @@ class SelectionPage extends Page
         'proposal vote button to hover' => '#proposal-1 .proposal__preview__vote',
         'sorting select' => 'select#proposal-sorting',
         'selected sorting option' => '#proposal-sorting option[selected]',
+        'proposal vote form submit button' => '#confirm-proposal-vote',
     ];
 
     public function sortByDate()

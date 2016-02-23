@@ -15,7 +15,12 @@ const ProposalDetailEstimation = React.createClass({
     return estimation !== null && typeof estimation !== 'undefined'
       ? <span className="proposal__info">
           <i className="cap cap-coins-2-1 icon--yellow"></i>
-          <FormattedNumber value={estimation} style="currency" currency="EUR" />
+          <FormattedNumber
+            minimumFractionDigits={0}
+            value={estimation}
+            style="currency"
+            currency="EUR"
+          />
         </span>
       : null
     ;

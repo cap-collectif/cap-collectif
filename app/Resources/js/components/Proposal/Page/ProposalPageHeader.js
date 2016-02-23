@@ -76,7 +76,7 @@ const ProposalPageHeader = React.createClass({
             </p>
           </div>
         </div>
-        <ul className="nav nav-pills project__infos">
+        <ul className="nav nav-pills counters-nav counters-nav--proposal">
           { proposal.votesCount > 0
             ? <li className="proposal__info--votes">
                 <div className="value">{votesCount}</div>

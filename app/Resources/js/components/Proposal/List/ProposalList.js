@@ -7,17 +7,15 @@ import { Row } from 'react-bootstrap';
 const ProposalList = React.createClass({
   propTypes: {
     proposals: React.PropTypes.array.isRequired,
-    selectionStepId: React.PropTypes.number,
+    selectionStep: React.PropTypes.object,
     creditsLeft: React.PropTypes.number,
-    voteType: React.PropTypes.number,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
-      selectionStepId: null,
       creditsLeft: null,
-      voteType: 0,
+      selectionStep: null,
     };
   },
 
@@ -39,9 +37,8 @@ const ProposalList = React.createClass({
               <ProposalPreview
                 key={proposal.id}
                 proposal={proposal}
-                selectionStepId={this.props.selectionStepId}
+                selectionStep={this.props.selectionStep}
                 creditsLeft={this.props.creditsLeft}
-                voteType={this.props.voteType}
               />
             );
           })

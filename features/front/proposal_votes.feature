@@ -63,6 +63,18 @@ Feature: Proposal votes
     And I click the proposal vote button
     Then I should see "Vous devez être connecté pour réaliser cette action."
 
+  @javascript @security @elasticsearch
+    Scenario: Anonymous user wants to vote on a selection step that is not open yet
+    When I go to a selection step not yet open
+    Then the proposal should have 0 votes
+    And the proposal vote button must be disabled
+
+  @javascript @security @elasticsearch
+  Scenario: Anonymous user wants to vote on a selection step that is closed
+    When I go to a closed selection step
+    Then the proposal should have 1 votes
+    And the proposal vote button must be disabled
+
   # Votes from proposal page
 
   @javascript @database
@@ -156,3 +168,15 @@ Feature: Proposal votes
     Then I should see "Merci, votre vote a bien été supprimé"
     And I should see "1 proposition sélectionnée"
     And I should have 1 votes
+
+  @javascript @security
+  Scenario: Anonymous user wants to vote for a proposal that is not votable yet
+    Given I go to a proposal not yet votable
+    Then the proposal vote button must be disabled
+    And I should see "L'étape de sélection n'est pas encore ouverte aux votes. Revenez plus tard !"
+
+  @javascript @security
+  Scenario: Anonymous user wants to vote for a proposal that is not votable anymore
+    Given I go to a proposal not votable anymore
+    Then the proposal vote button must be disabled
+    And I should see "L'étape de sélection est terminée, merci pour votre participation."

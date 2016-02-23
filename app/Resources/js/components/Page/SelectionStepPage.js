@@ -120,9 +120,8 @@ const SelectionStepPage = React.createClass({
           <div>
             <ProposalList
               proposals={this.state.proposals}
-              selectionStepId={this.props.step.id}
+              selectionStep={this.props.step}
               creditsLeft={this.state.creditsLeft}
-              voteType={this.props.step.isOpen ? this.props.step.voteType : 0}
             />
             {
               showPagination

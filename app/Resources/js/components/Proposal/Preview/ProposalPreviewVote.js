@@ -8,7 +8,7 @@ import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 const ProposalPreviewVote = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
-    selectionStepId: React.PropTypes.number,
+    selectionStep: React.PropTypes.object,
     creditsLeft: React.PropTypes.number,
     voteType: React.PropTypes.number.isRequired,
     userHasVote: React.PropTypes.bool.isRequired,
@@ -17,7 +17,7 @@ const ProposalPreviewVote = React.createClass({
 
   getDefaultProps() {
     return {
-      selectionStepId: null,
+      selectionStep: null,
       creditsLeft: null,
     };
   },
@@ -29,7 +29,7 @@ const ProposalPreviewVote = React.createClass({
   },
 
   anonymousCanVote() {
-    return this.props.selectionStepId && this.props.voteType === VOTE_TYPE_SIMPLE;
+    return this.props.selectionStep && this.props.selectionStep.voteType === VOTE_TYPE_SIMPLE;
   },
 
   toggleModal(value) {
@@ -41,7 +41,7 @@ const ProposalPreviewVote = React.createClass({
   vote() {
     ProposalActions
       .vote(
-        this.props.selectionStepId,
+        this.props.selectionStep.id,
         this.props.proposal.id,
         this.props.proposal.estimation
       )
@@ -54,7 +54,7 @@ const ProposalPreviewVote = React.createClass({
   deleteVote() {
     ProposalActions
       .deleteVote(
-        this.props.selectionStepId,
+        this.props.selectionStep.id,
         this.props.proposal.id,
         this.props.proposal.estimation
       )
@@ -77,7 +77,8 @@ const ProposalPreviewVote = React.createClass({
   },
 
   render() {
-    if (!this.props.selectionStepId || this.props.voteType === VOTE_TYPE_DISABLED) {
+    const { selectionStep } = this.props;
+    if (!selectionStep || selectionStep.voteType === VOTE_TYPE_DISABLED) {
       return null;
     }
 
@@ -88,7 +89,7 @@ const ProposalPreviewVote = React.createClass({
           !LoginStore.isLoggedIn() && this.anonymousCanVote()
             ? <ProposalVoteModal
                 proposal={this.props.proposal}
-                selectionStepId={this.props.selectionStepId}
+                selectionStepId={selectionStep ? selectionStep.id : null}
                 showModal={this.state.showModal}
                 onToggleModal={this.toggleModal}
             />

@@ -16,7 +16,14 @@ const ProjectStatsListItem = React.createClass({
     }
 
     if (this.props.isCurrency) {
-      return <FormattedNumber value={this.props.item.value || 0} style="currency" currency="EUR"/>;
+      return (
+        <FormattedNumber
+          minimumFractionDigits={0}
+          value={this.props.item.value || 0}
+          style="currency"
+          currency="EUR"
+        />
+      );
     }
     return this.props.item.value;
   },

@@ -31,3 +31,8 @@ Capco\AppBundle\Entity\ProposalVote:
     selectionStep: @selectionStep4
     user: @user4
     confirmed: true
+  proposalVote52:
+    proposal: @proposal11
+    selectionStep: @selectionStep3
+    user: @user4
+    confirmed: true

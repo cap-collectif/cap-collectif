@@ -143,6 +143,17 @@ class ProposalVotesResolver
         ;
     }
 
+    public function getVotableStepsNotFutureForProject(Project $project)
+    {
+        $steps = [];
+        foreach ($this->getVotableStepsForProject($project) as $step) {
+            if (!$step->isFuture()) {
+                $steps[] = $step;
+            }
+        }
+        return $steps;
+    }
+
     public function getFirstVotableStepForProposal(Proposal $proposal)
     {
         $votableSteps = $this->getVotableStepsForProposal($proposal);
@@ -153,13 +164,29 @@ class ProposalVotesResolver
                 break;
             }
         }
+        if (!$firstVotableStep) {
+            foreach ($votableSteps as $step) {
+                if ($step->isFuture()) {
+                    $firstVotableStep = $step;
+                    break;
+                }
+            }
+        }
+        if (!$firstVotableStep) {
+            foreach ($votableSteps as $step) {
+                if ($step->isClosed()) {
+                    $firstVotableStep = $step;
+                    break;
+                }
+            }
+        }
 
         return $firstVotableStep;
     }
 
-    public function hasVotableStep(Project $project)
+    public function hasVotableStepNotFuture(Project $project)
     {
-        return count($this->getVotableStepsForProject($project)) > 0;
+        return count($this->getVotableStepsNotFutureForProject($project)) > 0;
     }
 
     public function getVotesCountForUserInSelectionStep(User $user, SelectionStep $step)

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+/* import ReactDOM from 'react-dom'; */
 import { FormattedHTMLMessage } from 'react-intl';
 import ReadMoreLink from '../../Utils/ReadMoreLink';
 
@@ -18,12 +18,12 @@ const StepText = React.createClass({
     return {
       expanded: true,
       truncated: false,
-      hideText: true,
+      hideText: false,
     };
   },
 
   componentDidMount() {
-    const totalHeight = ReactDOM.findDOMNode(this.refs.content).offsetHeight;
+    /* const totalHeight = ReactDOM.findDOMNode(this.refs.content).offsetHeight;
     // Text should be truncated
     if (totalHeight > 105) {
       this.setState({
@@ -38,7 +38,7 @@ const StepText = React.createClass({
       hideText: false,
       truncated: false,
       expanded: true,
-    });
+    }); */
   },
 
   toggleExpand() {

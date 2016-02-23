@@ -23,7 +23,7 @@ const ReadMoreLink = React.createClass({
     }
     const { expanded } = this.props;
     return (
-      <Button bsStyle="link" onClick={this.props.onClick}>
+      <Button bsStyle="link" className="btn-block" onClick={this.props.onClick}>
         {
           expanded
           ? this.getIntlMessage('global.read_less')
