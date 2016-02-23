@@ -13,7 +13,7 @@ describe('<ProposalDetailLikers />', () => {
     likers: [],
   };
 
-  it('should not render nothing when proposal has no likers', () => {
+  it('should not render anything when proposal has no likers', () => {
     const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithoutLikers} />);
     expect(wrapper.children()).to.have.length(0);
   });

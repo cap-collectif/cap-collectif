@@ -6,7 +6,6 @@ import ReadMoreLink from '../../Utils/ReadMoreLink';
 const StepText = React.createClass({
   propTypes: {
     text: React.PropTypes.string,
-    expanded: React.PropTypes.bool,
   },
 
   getDefaultProps() {
