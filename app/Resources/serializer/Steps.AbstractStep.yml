@@ -34,6 +34,10 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
       type: DateTime
       groups: [Steps]
       serialized_name: endAt
+    body:
+      expose: true
+      type: string
+      groups: [Steps]
   virtual_properties:
     getProjectId:
       expose: true

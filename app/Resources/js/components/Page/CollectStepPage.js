@@ -10,9 +10,11 @@ import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import CollectStepPageHeader from './CollectStepPageHeader';
 import ProposalRandomButton from '../Proposal/List/ProposalRandomButton';
+import StepPageHeader from '../Steps/Page/StepPageHeader';
 
 const CollectStepPage = React.createClass({
   propTypes: {
+    step: React.PropTypes.object.isRequired,
     count: React.PropTypes.number.isRequired,
     form: React.PropTypes.object.isRequired,
     themes: React.PropTypes.array.isRequired,
@@ -87,6 +89,7 @@ const CollectStepPage = React.createClass({
     const showRandomButton = nbPages > 1 && this.state.randomOrder;
     return (
       <div>
+        <StepPageHeader step={this.props.step} />
         <CollectStepPageHeader
           count={this.state.proposalsCount}
           form={this.props.form}

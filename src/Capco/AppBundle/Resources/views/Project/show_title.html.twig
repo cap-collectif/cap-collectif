@@ -78,7 +78,7 @@
         {% set contributorsCount = project.participantsCount %}
 
         {% if votesCount > 0 or contributionsCount > 0 or contributorsCount > 0 %}
-            <ul class="nav nav-pills counters-nav">
+            <ul class="nav nav-pills counters-nav counters-nav--project">
                 {% if contributionsCount > 0 %}
                     <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
                         <i class="cap cap-file-edit-1"></i>

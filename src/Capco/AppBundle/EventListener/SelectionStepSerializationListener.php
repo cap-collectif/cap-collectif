@@ -59,6 +59,16 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
             $event->getVisitor()->addData('userVotes', json_decode($userVotes, true)['data']);
         }
 
+        $counters = [];
+        $counters['contributions'] = count($step->getProposals());
+        if ($step->isVotable()) {
+            $counters['votes'] = $step->getVotesCount();
+        }
+        $counters['contributors'] = $step->getContributorsCount();
+        $counters['remainingDays'] = intval($step->getRemainingDays());
+
+        $event->getVisitor()->addData('counters', $counters);
+
         $event->getVisitor()->addData(
             '_links', [
                 'show' => $this->router->generate('app_project_show_selection', [

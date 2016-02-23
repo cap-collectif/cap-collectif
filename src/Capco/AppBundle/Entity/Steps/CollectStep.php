@@ -34,23 +34,18 @@ class CollectStep extends AbstractStep
      */
     private $proposalsCount = 0;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="contributors_count", type="integer")
+     */
+    private $contributorsCount = 0;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->statuses = new ArrayCollection();
-    }
-
-    // **************************** Custom methods *******************************
-
-    public function getType()
-    {
-        return 'collect';
-    }
-
-    public function isCollectStep()
-    {
-        return true;
     }
 
     /**
@@ -117,5 +112,36 @@ class CollectStep extends AbstractStep
         $this->proposalsCount = $proposalsCount;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getContributorsCount()
+    {
+        return $this->contributorsCount;
+    }
+
+    /**
+     * @param int $contributorsCount
+     * @return $this
+     */
+    public function setContributorsCount($contributorsCount)
+    {
+        $this->contributorsCount = $contributorsCount;
+
+        return $this;
+    }
+
+    // **************************** Custom methods *******************************
+
+    public function getType()
+    {
+        return 'collect';
+    }
+
+    public function isCollectStep()
+    {
+        return true;
     }
 }

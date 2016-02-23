@@ -38,28 +38,16 @@
         </div>
     {% endif %}
 
-    <h2 class="h2">{{ currentStep.title }}</h2>
-    {% if currentStep.body is not null %}
-        <div class="block  block--bordered">
-            <div class="opinion  opinion--current  opinion--default">
-                <div class="box">
-                    <div class="more">{{ currentStep.body | raw }}</div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
-    {% if form %}
-        <div
-            id="render-collect-step-page"
-            data-count='{{ proposalsCount }}'
-            data-form='{{ form|escape }}'
-            data-themes='{{ themes|escape }}'
-            data-statuses='{{ statuses|escape }}'
-            data-districts='{{ districts|escape }}'
-            data-types='{{ types|escape }}'
-        >
-        </div>
-    {% endif %}
+    <div
+        id="render-collect-step-page"
+        data-step='{{ step|escape }}'
+        data-count='{{ proposalsCount }}'
+        data-form='{{ form|escape }}'
+        data-themes='{{ themes|escape }}'
+        data-statuses='{{ statuses|escape }}'
+        data-districts='{{ districts|escape }}'
+        data-types='{{ types|escape }}'
+    >
+    </div>
 
 {% endblock %}

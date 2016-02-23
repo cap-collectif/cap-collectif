@@ -216,11 +216,33 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             (select count(p.id) from CapcoAppBundle:Proposal p INNER JOIN CapcoAppBundle:ProposalForm pf WITH p.proposalForm = pf where pf.step = cs AND p.enabled = 1 group by pf.step)');
         $query->execute();
 
+        $collectSteps = $em->getRepository('CapcoAppBundle:Steps\CollectStep')->findAll();
+        foreach ($collectSteps as $cs) {
+            $participants = $contributionResolver->countStepContributors($cs);
+            $query = $em->createQuery('
+              update CapcoAppBundle:Steps\CollectStep cs
+              set cs.contributorsCount = '.$participants.'
+              where cs.id = '.$cs->getId()
+            );
+            $query->execute();
+        }
+
         // ****************************** Selection steps counters **************************************
 
         $query = $em->createQuery('update CapcoAppBundle:Steps\SelectionStep ss set ss.votesCount =
             (select count(pv.id) from CapcoAppBundle:ProposalVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p where pv.selectionStep = ss AND pv.confirmed = 1 AND p.enabled = 1 group by pv.selectionStep)');
         $query->execute();
+
+        $selectionSteps = $em->getRepository('CapcoAppBundle:Steps\SelectionStep')->findAll();
+        foreach ($selectionSteps as $ss) {
+            $participants = $contributionResolver->countStepContributors($ss);
+            $query = $em->createQuery('
+              update CapcoAppBundle:Steps\SelectionStep ss
+              set ss.contributorsCount = '.$participants.'
+              where ss.id = '.$ss->getId()
+            );
+            $query->execute();
+        }
 
         // ****************************** Opinion counters **********************************************
 

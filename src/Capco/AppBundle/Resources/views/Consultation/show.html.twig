@@ -37,19 +37,10 @@
     {% block content %}
         <h2 class="h2">{{ currentStep.title }}</h2>
 
-        <div id="render-counters-nav"
-          data-counters='{{ counters }}'
+        <div id="render-step-infos"
+          data-step='{{ step|escape }}'
         ></div>
 
-        {% if currentStep.body is not null %}
-            <div class="block  block--bordered step-intro step-intro--with-counters">
-                <div class="opinion  opinion--current  opinion--default">
-                    <div class="box">
-                        <div class="more">{{ currentStep.body | raw }}</div>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
         {{ render(controller('CapcoAppBundle:Site/Opinion:showOpinions', {'project': project.id, 'currentStep': currentStep})) }}
     {% endblock %}
 {% endblock %}

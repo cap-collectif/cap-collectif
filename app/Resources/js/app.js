@@ -14,7 +14,7 @@ import ProposalVoteBasketWidget from './components/Proposal/Vote/ProposalVoteBas
 import ProposalsUserVotesPage from './components/Project/Page/ProposalsUserVotesPage';
 import ProjectStatsPage from './components/Project/Page/ProjectStatsPage';
 import AlertBox from './components/Alert/AlertBox';
-import CountersNav from './components/Utils/CountersNav';
+import StepInfos from './components/Steps/Page/StepInfos';
 
 FeatureService.load();
 
@@ -29,10 +29,10 @@ AuthService
       );
     }
 
-    if ($('#render-counters-nav').length) {
+    if ($('#render-step-infos').length) {
       ReactDOM.render(
-        <CountersNav counters={$('#render-counters-nav').data('counters').counters} {...IntlData} />,
-        document.getElementById('render-counters-nav')
+        <StepInfos step={$('#render-step-infos').data('step').step} {...IntlData} />,
+        document.getElementById('render-step-infos')
       );
     }
 
@@ -86,6 +86,7 @@ AuthService
     if ($('#render-collect-step-page').length) {
       ReactDOM.render(
         <CollectStepPage
+          step={$('#render-collect-step-page').data('step').step}
           count={$('#render-collect-step-page').data('count')}
           form={$('#render-collect-step-page').data('form').form}
           themes={$('#render-collect-step-page').data('themes').themes}

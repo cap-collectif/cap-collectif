@@ -10,6 +10,7 @@ import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import { VOTE_TYPE_DISABLED } from '../../constants/ProposalConstants';
 import ProposalRandomButton from '../Proposal/List/ProposalRandomButton';
+import StepPageHeader from '../Steps/Page/StepPageHeader';
 
 const SelectionStepPage = React.createClass({
   propTypes: {
@@ -97,6 +98,7 @@ const SelectionStepPage = React.createClass({
     const showPagination = nbPages > 1 && !this.state.randomOrder;
     return (
       <div>
+        <StepPageHeader step={this.props.step} />
         <h2 className="h2">
           <FormattedMessage
             message={this.getIntlMessage('proposal.count')}

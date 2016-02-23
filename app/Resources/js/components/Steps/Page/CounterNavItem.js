@@ -9,7 +9,8 @@ const CounterNavItem = React.createClass({
   },
 
   render() {
-    const { counter, icon, label } = this.props;
+    const { icon, label } = this.props;
+    const counter = this.props.counter || 0;
     return (
       <li>
         <div className="text-center">

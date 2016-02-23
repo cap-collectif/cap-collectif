@@ -176,6 +176,7 @@ export default {
       },
       preview: 'Aperçu',
       publish: 'Publier',
+      read_less: 'Masquer',
       read_more: 'Afficher la suite',
       register: 'S\'inscrire',
       remove: 'Supprimer',

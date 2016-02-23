@@ -37,17 +37,6 @@
         </div>
     {% endif %}
 
-    <h2 class="h2">{{ currentStep.title }}</h2>
-    {% if currentStep.body is not null %}
-        <div class="block  block--bordered">
-            <div class="opinion  opinion--current  opinion--default">
-                <div class="box">
-                    <div class="more">{{ currentStep.body | raw }}</div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
     <div
         id="render-selection-step-page"
         data-count="{{ proposalsCount }}"

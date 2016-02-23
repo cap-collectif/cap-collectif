@@ -267,6 +267,10 @@ class StepController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
+        $stepJson = $serializer->serialize([
+            'step' => $step,
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
+
         $proposalsCount = $step->getProposalForm()
             ? $em
                 ->getRepository('CapcoAppBundle:Proposal')
@@ -301,6 +305,7 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'proposalsCount' => $proposalsCount,
+            'step' => $stepJson,
             'themes' => $themes,
             'statuses' => $statuses,
             'districts' => $districts,
@@ -428,20 +433,16 @@ class StepController extends Controller
         }
 
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
-        $counters = $serializer->serialize([
-            'counters' => [
-                'contributions' => $currentStep->getContributionsCount(),
-                'votes' => $currentStep->getVotesCount(),
-                'contributors' => $currentStep->getContributorsCount(),
-                'remainingDays' => intval($currentStep->getRemainingDays()),
-            ],
-        ], 'json', SerializationContext::create());
+
+        $stepJson = $serializer->serialize([
+            'step' => $currentStep,
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
 
         $response = $this->render('CapcoAppBundle:Consultation:show.html.twig', [
             'project' => $project,
             'currentStep' => $currentStep,
+            'step' => $stepJson,
             'nav' => $nav,
-            'counters' => $counters,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

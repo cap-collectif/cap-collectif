@@ -21,9 +21,6 @@
 
 .counters-nav {
   padding: 5px;
-  border-top: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
-  margin-top: 15px;
 
   & > li > a {
     padding: 0;
@@ -56,6 +53,16 @@
   li .category {
     font-size: 14px;
   }
+}
+
+.counters-nav--bordered {
+  border-bottom: 1px solid $border-color;
+}
+
+.counters-nav--project {
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  margin-top: 15px;
 }
 
 .project__header__title {
@@ -94,4 +101,8 @@
 
 #details > h2:first-child {
   margin-top: 0;
+}
+
+.step__intro__content {
+  overflow: hidden;
 }

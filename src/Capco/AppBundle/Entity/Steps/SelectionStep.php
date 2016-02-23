@@ -47,6 +47,13 @@ class SelectionStep extends AbstractStep
     private $votesHelpText = null;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="contributors_count", type="integer")
+     */
+    private $contributorsCount = 0;
+
+    /**
      * @ORM\Column(name="budget", type="float", nullable=true)
      */
     private $budget = null;
@@ -147,6 +154,25 @@ class SelectionStep extends AbstractStep
     public function setVotesHelpText($votesHelpText)
     {
         $this->votesHelpText = $votesHelpText;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContributorsCount()
+    {
+        return $this->contributorsCount;
+    }
+
+    /**
+     * @param mixed $contributorsCount
+     * @return $this
+     */
+    public function setContributorsCount($contributorsCount)
+    {
+        $this->contributorsCount = $contributorsCount;
 
         return $this;
     }
