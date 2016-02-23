@@ -235,13 +235,8 @@ class ContributionResolver
     {
         $count = 0;
         foreach ($project->getSteps() as $pas) {
-            if ($pas->getStep() instanceof ConsultationStep) {
-                $count += $pas->getStep()->getVotesCount();
-            } else if ($pas->getStep() instanceof SelectionStep) {
-                $count += $pas->getStep()->getVotesCount();
-            }
+            $count += $this->countStepVotes($pas->getStep());
         }
-
         return $count;
     }
 }

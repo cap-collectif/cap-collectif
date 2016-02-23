@@ -1,3 +1,4 @@
+@opinions
 Feature: Opinions
 
   @database

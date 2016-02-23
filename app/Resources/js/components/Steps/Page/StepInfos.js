@@ -1,11 +1,13 @@
 import React from 'react';
 import CountersNav from './CountersNav';
 import StepText from './StepText';
+import { IntlMixin } from 'react-intl';
 
 const StepInfos = React.createClass({
   propTypes: {
     step: React.PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { step } = this.props;

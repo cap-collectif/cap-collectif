@@ -24,7 +24,6 @@ const StepText = React.createClass({
 
   componentDidMount() {
     const totalHeight = ReactDOM.findDOMNode(this.refs.content).offsetHeight;
-    console.log(totalHeight);
     // Text should be truncated
     if (totalHeight > 105) {
       this.setState({

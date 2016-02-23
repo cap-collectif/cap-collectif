@@ -46,6 +46,7 @@ Feature: Proposal Votes Restful Api
           "votesHelpText": @string@,
           "budget": @...@,
           "creditsLeft": @number@,
+          "body": @string@,
           "userVotesCount": @integer@,
           "userVotes": [
             {

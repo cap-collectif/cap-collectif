@@ -13,7 +13,7 @@ class ConsultationPage extends Page
     /**
      * @var string
      */
-    protected $path = '/projects/{projectSlug}/consultation/{stepSlug}';
+    protected $path = '/project/{projectSlug}/consultation/{stepSlug}';
 
     protected $elements = [
         'Opinion nav bar' => '.project__nav',

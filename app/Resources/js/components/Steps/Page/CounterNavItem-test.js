@@ -12,7 +12,7 @@ describe('<CounterNavItem />', () => {
     label: 'blabla',
   };
   it('should render a li, an icon, a value and a label', () => {
-    const wrapper = shallow(<CounterNavItem {...props}  />);
+    const wrapper = shallow(<CounterNavItem {...props} />);
     expect(wrapper.find('li')).to.have.length(1);
     expect(wrapper.find('i')).to.have.length(1);
     expect(wrapper.find('span.value')).to.have.length(1);

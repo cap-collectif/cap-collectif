@@ -1,3 +1,4 @@
+@arguments
 Feature: Arguments
 
   @database @javascript

@@ -74,7 +74,8 @@ Feature: Proposal Restful Api
             "voteType": @integer@,
             "isOpen": @boolean@,
             "votesHelpText": @string@,
-            "budget": @...@
+            "budget": @...@,
+            "body": @string@
           }
         ],
         "comments_count": @integer@,
