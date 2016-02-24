@@ -8,7 +8,7 @@ import RegisterButton from '../../Utils/RegisterButton';
 const ProposalVoteModal = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
-    selectionStepId: React.PropTypes.number.isRequired,
+    selectionStep: React.PropTypes.object.isRequired,
     showModal: React.PropTypes.bool.isRequired,
     onToggleModal: React.PropTypes.func.isRequired,
   },
@@ -39,7 +39,7 @@ const ProposalVoteModal = React.createClass({
         <Modal.Body>
           <ProposalVoteBox
             proposal={this.props.proposal}
-            selectionStepId={this.props.selectionStepId}
+            selectionStep={this.props.selectionStep}
             onSubmitSuccess={this.close}
           />
         </Modal.Body>

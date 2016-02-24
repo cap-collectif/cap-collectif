@@ -405,6 +405,7 @@ export default {
         modal: {
           title: 'Voter',
         },
+        must_log_in: 'Vous devez vous connecter pour pouvoir voter pour cette proposition.',
         not_enough_credits: 'Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux.',
         show_more: 'Voir tous les votes',
         step_closed: 'L\'étape de sélection est terminée, merci pour votre participation.',

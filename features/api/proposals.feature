@@ -151,7 +151,7 @@ Feature: Proposal Restful Api
         },
         @...@
       ],
-      "count": 4,
+      "count": 6,
       "order": "old"
     }
     """

@@ -1002,7 +1002,7 @@ class ApplicationContext extends UserContext
             return 11;
         }
 
-        return null;
+        return;
     }
 
     /**

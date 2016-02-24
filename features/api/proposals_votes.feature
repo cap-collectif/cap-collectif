@@ -197,7 +197,7 @@ Feature: Proposal Votes Restful Api
   @security
   Scenario: Logged in API client wants to vote for a proposal in a closed selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/8/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/8/proposals/11/votes" with json:
     """
     {
     }

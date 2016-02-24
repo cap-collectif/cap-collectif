@@ -5,12 +5,13 @@ import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
 import ProposalVoteForm from './ProposalVoteForm';
 import LoginButton from '../../Utils/LoginButton';
+import ProposalVoteBoxMessage from './ProposalVoteBoxMessage';
 import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 
 const ProposalVoteBox = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
-    votableStep: React.PropTypes.object.isRequired,
+    selectionStep: React.PropTypes.object.isRequired,
     userHasVote: React.PropTypes.bool,
     creditsLeft: React.PropTypes.number,
     className: React.PropTypes.string,
@@ -81,11 +82,11 @@ const ProposalVoteBox = React.createClass({
   },
 
   displayForm() {
-    return this.props.votableStep.isOpen && (this.props.voteType === VOTE_TYPE_SIMPLE || (LoginStore.isLoggedIn() && this.userHasEnoughCredits()));
+    return this.props.selectionStep.isOpen && (this.props.selectionStep.voteType === VOTE_TYPE_SIMPLE || (LoginStore.isLoggedIn() && this.userHasEnoughCredits()));
   },
 
   disableSubmitButton() {
-    return !this.props.votableStep.isOpen || (LoginStore.isLoggedIn() && this.props.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
+    return !this.props.selectionStep.isOpen || (LoginStore.isLoggedIn() && this.props.selectionStep.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
   },
 
   render() {
@@ -104,7 +105,7 @@ const ProposalVoteBox = React.createClass({
             this.displayForm()
               ? <ProposalVoteForm
               proposal={this.props.proposal}
-              selectionStepId={this.props.votableStep.id}
+              selectionStepId={this.props.selectionStep.id}
               isSubmitting={this.state.isSubmitting}
               onValidationFailure={this.handleValidationFailure}
               onSubmitSuccess={this.handleSubmitSuccess}
@@ -113,27 +114,11 @@ const ProposalVoteBox = React.createClass({
             />
             : null
           }
-          {
-            !this.userHasEnoughCredits() && !this.state.isSubmitting
-            ? <p style={{ marginTop: '10px' }}>
-                {this.getIntlMessage('proposal.vote.not_enough_credits')}
-              </p>
-            : null
-          }
-          {
-            this.props.votableStep.openingStatus === 'future'
-              ? <p style={{ marginTop: '10px' }}>
-              {this.getIntlMessage('proposal.vote.step_not_yet_open')}
-            </p>
-              : null
-          }
-          {
-            this.props.votableStep.openingStatus === 'closed'
-              ? <p style={{ marginTop: '10px' }}>
-              {this.getIntlMessage('proposal.vote.step_closed')}
-            </p>
-              : null
-          }
+          <ProposalVoteBoxMessage
+            enoughCredits={this.userHasEnoughCredits()}
+            submitting={this.state.isSubmitting}
+            selectionStep={this.props.selectionStep}
+          />
         </div>
         <SubmitButton
           id="confirm-proposal-vote"
@@ -144,10 +129,10 @@ const ProposalVoteBox = React.createClass({
           className="btn-block"
           style={{ marginTop: '10px' }}
           disabled={this.disableSubmitButton()}
-          loginOverlay={this.props.voteType === VOTE_TYPE_BUDGET}
+          loginOverlay={this.props.selectionStep.voteType === VOTE_TYPE_BUDGET}
         />
         {
-          !LoginStore.isLoggedIn() && this.props.voteType !== VOTE_TYPE_BUDGET
+          !LoginStore.isLoggedIn() && this.props.selectionStep.voteType !== VOTE_TYPE_BUDGET && this.props.selectionStep.isOpen
           ? <div>
             <p
               className="text-center excerpt"

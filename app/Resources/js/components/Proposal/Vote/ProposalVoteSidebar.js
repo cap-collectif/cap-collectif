@@ -51,7 +51,7 @@ const ProposalVoteSidebar = React.createClass({
           }
           <ProposalVoteBox
             proposal={proposal}
-            votableStep={votableStep}
+            selectionStep={votableStep}
             className="block block--bordered box"
             formWrapperClassName="sidebar__form"
             userHasVote={this.props.userHasVote}

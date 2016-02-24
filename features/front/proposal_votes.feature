@@ -154,7 +154,8 @@ Feature: Proposal votes
   @javascript @security
   Scenario: Anonymous user wants to vote on a selection step that has budget vote
     When I go to a proposal with budget vote enabled
-    And I submit the proposal vote form
+    Then I should see "Vous devez vous connecter pour pouvoir voter pour cette proposition."
+    When I submit the proposal vote form
     Then I should see "Vous devez être connecté pour réaliser cette action."
 
   # Votes page

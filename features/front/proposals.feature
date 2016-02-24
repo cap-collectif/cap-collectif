@@ -7,9 +7,9 @@ Feature: Proposals
   Scenario: Anonymous user wants to see proposals in a collect step and apply filters
     Given feature "themes" is enabled
     And I go to an open collect step
-    Then there should be 4 proposals
+    Then there should be 6 proposals
     And I change the theme filter
-    Then there should be 3 proposals
+    Then there should be 5 proposals
 
   @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a collect step and sort them
@@ -23,7 +23,7 @@ Feature: Proposals
   @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a collect step and search by term
     Given I go to an open collect step
-    Then there should be 4 proposals
+    Then there should be 6 proposals
     When I search for proposals with terms "gymnase banc"
     Then there should be 2 proposals
     Then proposals should be filtered by terms
@@ -33,7 +33,7 @@ Feature: Proposals
     Given feature "themes" is enabled
     And I am logged in as user
     And I go to an open collect step
-    Then there should be 4 proposals
+    Then there should be 6 proposals
     When I sort proposals by comments
     And I search for proposals with terms "bibliothèque banc"
     And I change the theme filter
@@ -51,12 +51,12 @@ Feature: Proposals
   Scenario: Logged in user wants to create a proposal
     Given I am logged in as user
     And I go to an open collect step
-    Then there should be 4 proposals
+    Then there should be 6 proposals
     When I click the create proposal button
     And I fill the proposal form
     And I submit the create proposal form
     Then I should see "Merci ! Votre proposition a bien été créée."
-    Then there should be 5 proposals
+    Then there should be 7 proposals
     And I should see my new proposal
 
   @database @javascript @elasticsearch
@@ -64,12 +64,12 @@ Feature: Proposals
     Given feature "themes" is enabled
     And I am logged in as user
     And I go to an open collect step
-    Then there should be 4 proposals
+    Then there should be 6 proposals
     When I click the create proposal button
     And I fill the proposal form with a theme
     And I submit the create proposal form
     Then I should see "Merci ! Votre proposition a bien été créée."
-    And there should be 5 proposals
+    And there should be 7 proposals
     And I should see my new proposal
 
   @javascript @security
@@ -114,11 +114,11 @@ Feature: Proposals
   Scenario: Author of a proposal wants to delete it
     Given I am logged in as user
     And I go to an open collect step
-    Then there should be 4 proposals
+    Then there should be 6 proposals
     And I go to a proposal
     When I click the delete proposal button
     And I confirm proposal deletion
-    Then there should be 3 proposals
+    Then there should be 5 proposals
     And I should not see my proposal anymore
 
   @javascript

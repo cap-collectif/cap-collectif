@@ -10,7 +10,6 @@ const ProposalVoteButtonWrapper = React.createClass({
     proposal: React.PropTypes.object.isRequired,
     selectionStep: React.PropTypes.object,
     creditsLeft: React.PropTypes.number,
-    voteType: React.PropTypes.number.isRequired,
     onClick: React.PropTypes.func.isRequired,
     userHasVote: React.PropTypes.bool.isRequired,
   },
@@ -34,10 +33,11 @@ const ProposalVoteButtonWrapper = React.createClass({
   },
 
   render() {
-    if (this.props.voteType === VOTE_TYPE_SIMPLE) {
+    if (this.props.selectionStep && this.props.selectionStep.voteType === VOTE_TYPE_SIMPLE) {
       return (
         <ProposalVoteButton
-          {...this.props}
+          userHasVote={this.props.userHasVote}
+          onClick={this.props.onClick}
           disabled={!this.selectionStepIsOpen()}
         />
       );
@@ -50,7 +50,8 @@ const ProposalVoteButtonWrapper = React.createClass({
             show={!this.userHasEnoughCredits()}
         >
           <ProposalVoteButton
-            {...this.props}
+            userHasVote={this.props.userHasVote}
+            onClick={this.props.onClick}
             disabled={!this.selectionStepIsOpen() || !this.userHasEnoughCredits()}
           />
         </VoteButtonOverlay>
@@ -60,7 +61,8 @@ const ProposalVoteButtonWrapper = React.createClass({
     return (
       <LoginOverlay>
         <ProposalVoteButton
-          {...this.props}
+          userHasVote={this.props.userHasVote}
+          onClick={this.props.onClick}
           disabled={!this.selectionStepIsOpen()}
         />
       </LoginOverlay>

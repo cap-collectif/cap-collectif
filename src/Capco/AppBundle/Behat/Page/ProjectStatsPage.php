@@ -15,12 +15,12 @@ class ProjectStatsPage extends Page
     protected $path = '/projects/{projectSlug}/stats';
 
     public $elements = [
-        'theme stats items' => '#stats-21-themes .stats__list__row',
-        'district stats items' => '#stats-21-districts .stats__list__row',
-        'district stats modal items' => '#stats-modal-21-districts .stats__list__row',
-        'district stats show more button' => '#stats-21-districts .stats__all-button',
-        'user type stats items' => '#stats-21-userTypes .stats__list__row',
-        'costs stats items' => '#stats-21-costs .stats__list__row',
+        'theme stats items' => '#stats-22-themes .stats__list__row',
+        'district stats items' => '#stats-22-districts .stats__list__row',
+        'district stats modal items' => '#stats-modal-22-districts .stats__list__row',
+        'district stats show more button' => '#stats-22-districts .stats__all-button',
+        'user type stats items' => '#stats-22-userTypes .stats__list__row',
+        'costs stats items' => '#stats-22-costs .stats__list__row',
         'votes stats items' => '#stats-9-votes .stats__list__row',
         'theme filter select' => '#stats-9-votes .stats__filter--themes',
         'district filter select' => '#stats-9-votes .stats__filter--districts',

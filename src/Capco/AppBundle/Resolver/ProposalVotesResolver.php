@@ -151,6 +151,7 @@ class ProposalVotesResolver
                 $steps[] = $step;
             }
         }
+
         return $steps;
     }
 

@@ -10,7 +10,6 @@ const ProposalPreviewVote = React.createClass({
     proposal: React.PropTypes.object.isRequired,
     selectionStep: React.PropTypes.object,
     creditsLeft: React.PropTypes.number,
-    voteType: React.PropTypes.number.isRequired,
     userHasVote: React.PropTypes.bool.isRequired,
     onVoteChange: React.PropTypes.func.isRequired,
   },
@@ -84,12 +83,18 @@ const ProposalPreviewVote = React.createClass({
 
     return (
       <div>
-        <ProposalVoteButtonWrapper {...this.props} onClick={this.voteAction} />
+        <ProposalVoteButtonWrapper
+          selectionStep={selectionStep}
+          proposal={this.props.proposal}
+          creditsLeft={this.props.creditsLeft}
+          userHasVote={this.props.userHasVote}
+          onClick={this.voteAction}
+        />
         {
           !LoginStore.isLoggedIn() && this.anonymousCanVote()
             ? <ProposalVoteModal
                 proposal={this.props.proposal}
-                selectionStepId={selectionStep ? selectionStep.id : null}
+                selectionStep={selectionStep}
                 showModal={this.state.showModal}
                 onToggleModal={this.toggleModal}
             />

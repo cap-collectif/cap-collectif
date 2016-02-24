@@ -5,10 +5,6 @@ import classNames from 'classnames';
 
 const ProposalVoteButton = React.createClass({
   propTypes: {
-    proposal: React.PropTypes.object.isRequired,
-    selectionStepId: React.PropTypes.number,
-    creditsLeft: React.PropTypes.number,
-    voteType: React.PropTypes.number.isRequired,
     disabled: React.PropTypes.bool.isRequired,
     userHasVote: React.PropTypes.bool.isRequired,
     onClick: React.PropTypes.func.isRequired,
@@ -22,8 +18,6 @@ const ProposalVoteButton = React.createClass({
   getDefaultProps() {
     return {
       disabled: false,
-      selectionStepId: null,
-      creditsLeft: null,
       onMouseOver: () => {},
       onMouseOut: () => {},
       onFocus: () => {},
