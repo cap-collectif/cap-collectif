@@ -1268,9 +1268,9 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeTheShareDropdown()
     {
-        $this->assertElementOnPage(".dropdown-menu");
-        $this->assertElementContainsText(".share-button-dropdown", "Facebook");
-        $this->assertElementContainsText(".share-button-dropdown", "Lien de partage");
+        $this->assertElementOnPage('.dropdown-menu');
+        $this->assertElementContainsText('.share-button-dropdown', 'Facebook');
+        $this->assertElementContainsText('.share-button-dropdown', 'Lien de partage');
     }
 
     /**
@@ -1280,7 +1280,7 @@ class ApplicationContext extends UserContext
      */
     public function iClickTheShareLinkButton()
     {
-        $this->clickLink("Lien de partage");
+        $this->clickLink('Lien de partage');
         $this->iWait(1);
     }
 
@@ -1291,9 +1291,8 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeTheShareLinkModal()
     {
-        $this->assertElementOnPage(".modal--share-link");
+        $this->assertElementOnPage('.modal--share-link');
     }
-
 
     // ******************************** Reporting ***************************
 

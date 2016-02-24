@@ -94,7 +94,7 @@ class Proposal implements CommentableInterface, VotableInterface
     private $district = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"}, inversedBy="proposals")
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $status = null;

@@ -80,6 +80,11 @@ class Status
     private $step;
 
     /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="status", cascade={"persist", "remove"})
+     */
+    private $proposals;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -134,5 +139,34 @@ class Status
         $this->step = $step;
 
         return $this;
+    }
+
+    public function getProposals()
+    {
+        return $this->proposals;
+    }
+
+    /**
+     * Add proposal.
+     *
+     * @param Proposal $proposal
+     */
+    public function addProposal(Proposal $proposal)
+    {
+        if (!$this->proposals->contains($proposal)) {
+            $this->proposals[] = $proposal;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove proposal.
+     *
+     * @param Proposal $proposal
+     */
+    public function removeProposal(Proposal $proposal)
+    {
+        $this->proposals->removeElement($proposal);
     }
 }

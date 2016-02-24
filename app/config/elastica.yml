@@ -85,6 +85,20 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
+        # District
+        district:
+          serializer:
+            groups: [Districts]
+          _all: { enabled: false }
+          mappings:
+            name:
+              index: not_analyzed
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\District
+            provider: ~
+            listener: ~
+            finder: ~
         # Project
         project:
           indexable_callback: getIsEnabled
@@ -483,6 +497,22 @@ fos_elastica:
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Source
+            provider: ~
+            listener: ~
+            finder: ~
+        # Status
+        status:
+          serializer:
+            groups: [Statuses]
+          _all: { enabled: false }
+          mappings:
+            name:
+              index: not_analyzed
+            color:
+              index: not_analyzed
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\Status
             provider: ~
             listener: ~
             finder: ~
