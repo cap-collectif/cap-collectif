@@ -19,7 +19,7 @@ const CollectStepPageHeader = React.createClass({
 
   render() {
     return (
-      <h2 className="h2">
+      <h3 className="h3" style={{ marginBottom: '15px' }}>
         <FormattedMessage
           message={this.getIntlMessage('proposal.count')}
           num={this.props.count}
@@ -31,7 +31,7 @@ const CollectStepPageHeader = React.createClass({
             districts={this.props.districts}
           />
         </span>
-      </h2>
+      </h3>
     );
   },
 
