@@ -346,7 +346,7 @@ export default {
       district: 'Quartier',
       empty: 'Aucune proposition',
       infos: {
-        header: '{user}, le {createdDate}',
+        header: '{user} {theme, select, no {le {createdDate}} other {dans {themeLink}, le {createdDate}}}',
       },
       likers: {
         count: '{num, plural, one{# coup de coeur} other{# coups de coeur}}',

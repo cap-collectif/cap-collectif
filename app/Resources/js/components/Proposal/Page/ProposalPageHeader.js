@@ -54,6 +54,12 @@ const ProposalPageHeader = React.createClass({
               <FormattedMessage
                 message={this.getIntlMessage('proposal.infos.header')}
                 user={<UserLink user={proposal.author} />}
+                theme={proposal.theme ? 'yes' : 'no'}
+                themeLink={
+                  <a href={proposal.theme._links.show}>
+                    {proposal.theme.title}
+                  </a>
+                }
                 createdDate={createdDate}
               />
               {
@@ -100,23 +106,9 @@ const ProposalPageHeader = React.createClass({
           }
         </ul>
         <div className="proposal__infos">
-          {
-            proposal.theme
-              ? <span className="proposal__info">
-                <i className="cap cap-tag-1-1"></i>
-                <a href={proposal.theme._links.show}>
-                  {proposal.theme.title}
-                </a>
-              </span>
-              : null
-          }
-          {
-            proposal.district
-            ? <span className="proposal__info">
-              <i className="cap cap-marker-1-1"></i>{proposal.district.name}
-            </span>
-            : null
-          }
+          <span className="proposal__info">
+            <i className="cap cap-marker-1-1"></i>{proposal.district.name}
+          </span>
           <ProposalDetailEstimation proposal={proposal} showNullEstimation={this.props.showNullEstimation} />
           <ProposalDetailLikers proposal={proposal} />
         </div>

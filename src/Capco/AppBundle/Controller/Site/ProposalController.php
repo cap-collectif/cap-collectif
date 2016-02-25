@@ -45,9 +45,7 @@ class ProposalController extends Controller
             'json',
             SerializationContext::create()
                 ->setSerializeNull(true)
-                ->setGroups([
-                    'Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias', 'ProposalUserData', 'Themes', 'Steps',
-                ])
+                ->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias', 'ProposalUserData'])
         );
 
         $userHasVote = false;

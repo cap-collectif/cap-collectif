@@ -39,7 +39,9 @@
 
 <body>
 
-{% block mainContent %}{% endblock %}
+<div id="app-wrapper">
+    {% block mainContent %}{% endblock %}
+</div>
 
 {% block javascripts %}
     <script src="{{ asset('js/vendor.js') }}"></script>
