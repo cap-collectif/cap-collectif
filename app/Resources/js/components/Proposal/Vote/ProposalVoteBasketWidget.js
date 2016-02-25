@@ -75,7 +75,7 @@ const ProposalVoteBasketWidget = React.createClass({
             </Navbar.Brand>
             <Navbar.Toggle>
               <i
-                style={{ fontSize: '24px', color: '#999' }}
+                style={{ fontSize: '24px' }}
                 className="cap cap-information-1">
               </i>
             </Navbar.Toggle>
