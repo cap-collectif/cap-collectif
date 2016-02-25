@@ -6,6 +6,7 @@ body {
   background-color: $body-bg;
   font-family: $font-family-sans-serif;
   font-size: $font-size-base;
+  overflow-x: hidden;
 }
 
 @media (max-width: $screen-xs-max) {
@@ -404,6 +405,10 @@ a.excerpt {
   @media (max-width: $screen-xs-max) {
     float: none !important;
   }
+}
+
+.share-button-dropdown {
+  display: inline-block;
 }
 
 // Custom modal
