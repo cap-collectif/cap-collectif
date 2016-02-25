@@ -1248,6 +1248,53 @@ class ApplicationContext extends UserContext
         $this->assertFirstProposalVoteContains('test');
     }
 
+    /**
+     * I click the share proposal button.
+     *
+     * @When I click the share proposal button
+     */
+    public function iClickTheShareProposalButton()
+    {
+        $this->navigationContext->getPage('proposal page')->clickShareButton();
+        $this->iWait(1);
+    }
+
+    // ******************************** Sharing *****************************
+
+    /**
+     * I should see the share dropdown.
+     *
+     * @Then I should see the share dropdown
+     */
+    public function iShouldSeeTheShareDropdown()
+    {
+        $this->assertElementOnPage(".dropdown-menu");
+        $this->assertElementContainsText(".share-button-dropdown", "Facebook");
+        $this->assertElementContainsText(".share-button-dropdown", "Lien de partage");
+    }
+
+    /**
+     * I click the share link button.
+     *
+     * @When I click the share link button
+     */
+    public function iClickTheShareLinkButton()
+    {
+        $this->clickLink("Lien de partage");
+        $this->iWait(1);
+    }
+
+    /**
+     * I should see the share link modal.
+     *
+     * @Then I should see the share link modal
+     */
+    public function iShouldSeeTheShareLinkModal()
+    {
+        $this->assertElementOnPage(".modal--share-link");
+    }
+
+
     // ******************************** Reporting ***************************
 
     /**
@@ -1506,6 +1553,17 @@ class ApplicationContext extends UserContext
     }
 
     // ************************************ Opinion **************************************************
+
+    /**
+     * I click the share opinion button.
+     *
+     * @When I click the share opinion button
+     */
+    public function iClickTheShareOpinionButton()
+    {
+        $this->navigationContext->getPage('opinion page')->clickShareButton();
+        $this->iWait(1);
+    }
 
     /**
      * Go to a opinion with loads of votes.

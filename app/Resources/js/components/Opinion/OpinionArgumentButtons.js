@@ -105,9 +105,11 @@ const OpinionArgumentButtons = React.createClass({
         { ' ' }
         <OpinionArgumentReportButton argument={this.props.argument} />
         { this.renderEditButton() }
+        { ' ' }
         <ShareButtonDropdown
+          id={'arg-' + this.props.argument.id + '-share-button'}
           url={this.props.argument._links.show}
-          className="btn-xs btn--outline"
+          className="argument__btn--share btn-dark-gray btn--outline btn btn-xs"
         />
       </div>
     );

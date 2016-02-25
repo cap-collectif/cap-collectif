@@ -22,16 +22,13 @@ class ConsultationStepSerializationListener extends AbstractSerializationListene
     {
         $step = $event->getObject();
 
-        $counters = [
-            'contributions' => $step->getContributionsCount(),
-            'votes' => $step->getVotesCount(),
-            'contributors' => $step->getContributorsCount(),
-        ];
-
-        if (!$step->isFuture()) {
-            $counters['remainingDays'] = intval($step->getRemainingDays());
-        }
-
-        $event->getVisitor()->addData('counters', $counters);
+        $event->getVisitor()->addData(
+            'counters', [
+                'contributions' => $step->getContributionsCount(),
+                'votes' => $step->getVotesCount(),
+                'contributors' => $step->getContributorsCount(),
+                'remainingDays' => intval($step->getRemainingDays()),
+            ]
+        );
     }
 }

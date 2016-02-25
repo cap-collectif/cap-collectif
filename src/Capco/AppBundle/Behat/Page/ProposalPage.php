@@ -26,6 +26,7 @@ class ProposalPage extends Page
         'confirm edit proposal button' => '#confirm-proposal-edit',
         'report proposal button' => '#proposal-report-button',
         'proposal buttons' => '.proposal__content .proposal__buttons',
+        'share button' => '#proposal-share-button',
     ];
 
     public function getVoteButtonSelector($id)
@@ -101,5 +102,10 @@ class ProposalPage extends Page
     public function submitEditProposalForm()
     {
         $this->getElement('confirm edit proposal button')->click();
+    }
+
+    public function clickShareButton()
+    {
+        $this->getElement('share button')->click();
     }
 }
