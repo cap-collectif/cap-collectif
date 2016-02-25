@@ -35,6 +35,10 @@ const CountersNav = React.createClass({
       icon: 'cap cap-contacts-1',
       label: 'global.counters.contributors',
     },
+    voters: {
+      icon: 'cap cap-contacts-1',
+      label: 'global.counters.voters',
+    },
     remainingDays: {
       icon: 'cap cap-hourglass-1-1',
       label: 'global.counters.remaining_days',
