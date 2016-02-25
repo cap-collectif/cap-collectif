@@ -29,7 +29,6 @@ class OpinionVersionPage extends Page
         'confirm delete button' => '#confirm-opinion-delete',
         'show all votes button' => '#opinion-votes-show-all',
         'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',
-        'share button' => 'opinion-share-button',
     ];
 
     public function clickSourcesTab()
@@ -45,11 +44,6 @@ class OpinionVersionPage extends Page
     public function clickAddSource()
     {
         $this->getElement('sources add')->click();
-    }
-
-    public function clickShareButton()
-    {
-        $this->getElement('share button')->click();
     }
 
     public function submitArgument($type, $text)

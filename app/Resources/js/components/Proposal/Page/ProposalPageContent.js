@@ -9,7 +9,7 @@ import DeleteButton from '../../Form/DeleteButton';
 import ReportButton from '../../Form/ReportButton';
 import ProposalResponse from './ProposalResponse';
 
-const ProposalPageContent = React.createClass({
+const ProposalPageHeader = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     form: React.PropTypes.object.isRequired,
@@ -59,7 +59,6 @@ const ProposalPageContent = React.createClass({
         }
         <div className="block proposal__buttons">
           <ShareButtonDropdown
-            id="proposal-share-button"
             url={proposal._links.show}
             title={proposal.title}
           />
@@ -106,4 +105,4 @@ const ProposalPageContent = React.createClass({
 
 });
 
-export default ProposalPageContent;
+export default ProposalPageHeader;

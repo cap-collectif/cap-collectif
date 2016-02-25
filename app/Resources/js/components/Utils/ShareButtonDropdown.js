@@ -4,7 +4,6 @@ import { MenuItem, DropdownButton, Modal } from 'react-bootstrap';
 
 const ShareButtonDropdown = React.createClass({
   propTypes: {
-    id: React.PropTypes.string,
     title: React.PropTypes.string,
     url: React.PropTypes.string.isRequired,
     className: React.PropTypes.string,
@@ -14,7 +13,6 @@ const ShareButtonDropdown = React.createClass({
 
   getDefaultProps() {
     return {
-      id: 'share-button',
       className: '',
       title: '',
     };
@@ -77,7 +75,7 @@ const ShareButtonDropdown = React.createClass({
 
   renderModal() {
     return (
-      <Modal show={this.state.show} onHide={this.hideModal} animation={false} dialogClassName="modal--custom modal--share-link">
+      <Modal show={this.state.show} onHide={this.hideModal} animation={false} dialogClassName="modal--custom">
         <Modal.Header closeButton>
           <Modal.Title>{this.getIntlMessage('share.link')}</Modal.Title>
         </Modal.Header>
@@ -94,7 +92,6 @@ const ShareButtonDropdown = React.createClass({
   render() {
     return (
       <DropdownButton
-        id={this.props.id}
         bsStyle={this.props.bsStyle}
         className={this.props.className + ' dropdown--custom'}
         title={

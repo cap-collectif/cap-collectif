@@ -134,17 +134,4 @@ Feature: Opinions
     When I click the show all opinion votes button
     Then I should see all opinion votes
 
-  @javascript @database
-  Scenario: Anonymous user wants to share an opinion
-    Given I visited "opinion page" with:
-      | projectSlug      | projet-de-loi-renseignement               |
-      | stepSlug         | elaboration-de-la-loi                     |
-      | opinionTypeSlug  | section-1-ouverture-des-donnees-publiques |
-      | opinionSlug      | article-1                                 |
-    And I wait 2 seconds
-    When I click the share opinion button
-    Then I should see the share dropdown
-    And I click the share link button
-    Then I should see the share link modal
-
 

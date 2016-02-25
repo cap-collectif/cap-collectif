@@ -140,15 +140,6 @@ Feature: Proposals
     And I submit the reporting form
     Then I should see "Merci ! Votre signalement a bien été pris en compte."
 
-  # Sharing
-
-  @javascript @database
-  Scenario: Anonymous user wants to share a proposal
-    Given I go to a proposal
-    When I click the share proposal button
-    Then I should see the share dropdown
-    And I click the share link button
-    Then I should see the share link modal
 
   # Selection step : See proposals with filters, sorting and search term
 

@@ -58,12 +58,7 @@ const OpinionButtons = React.createClass({
         <OpinionDelete opinion={opinion} />
         {this.renderEditButton()}
         <OpinionReportButton opinion={opinion} />
-        <ShareButtonDropdown
-          id="opinion-share-button"
-          className="pull-right"
-          title={opinion.title}
-          url={opinion._links.show}
-        />
+        <ShareButtonDropdown className="pull-right" title={opinion.title} url={opinion._links.show} />
       </ButtonToolbar>
     );
   },
