@@ -715,7 +715,6 @@ proposal_status_change:
       <p><strong>Publiée dans :</strong></p>
       <ul>
         <li><strong>Projet :</strong> %project%</li>
-        <li><strong>Étape :</strong> %step%</li>
       </ul>
       <a href="%proposal_link%">Voir votre contribution sur le site</a>
 
