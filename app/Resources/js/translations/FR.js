@@ -127,7 +127,6 @@ export default {
         contributors: '{num, plural, =0{participant} one{participant} other{participants}}',
         proposals: '{num, plural, =0{proposition} one{proposition} other{propositions}}',
         remaining_days: '{num, plural, =0{jour restant} one{jour restant} other{jours restants}}',
-        voters: '{num, plural, =0{votant} one{votant} other{votants}}',
         votes: '{num, plural, =0{vote} one{vote} other{votes}}',
       },
       dates: {

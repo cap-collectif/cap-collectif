@@ -63,7 +63,7 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
         $counters['proposals'] = count($step->getProposals());
         if ($step->isVotable()) {
             $counters['votes'] = $step->getVotesCount();
-            $counters['voters'] = $step->getContributorsCount();
+            $counters['contributors'] = $step->getContributorsCount();
         }
         if (!$step->isFuture()) {
             $counters['remainingDays'] = intval($step->getRemainingDays());

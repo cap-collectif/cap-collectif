@@ -99,12 +99,12 @@ const SelectionStepPage = React.createClass({
     return (
       <div>
         <StepPageHeader step={this.props.step} />
-        <h3 className="h3" style={{ marginBottom: '15px' }}>
+        <h2 className="h2">
           <FormattedMessage
             message={this.getIntlMessage('proposal.count')}
             num={this.state.proposalsCount}
           />
-        </h3>
+        </h2>
         <ProposalListFilters
           id={this.props.step.id}
           fetchFrom="selectionStep"
