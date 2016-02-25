@@ -251,7 +251,7 @@ $statuses:
   }
   @media (max-width: $screen-xs-max) {
     body {
-      padding-top: $navbar-height;
+      padding-top: $navbar-height + $navbar-collapsed-height;
     }
   }
   @media (min-width: $screen-md-min) {
