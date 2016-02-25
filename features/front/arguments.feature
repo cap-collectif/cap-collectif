@@ -41,6 +41,21 @@ Feature: Arguments
     And I should see "0" in the "#arg-23 .opinion__votes-nb" element
 
   @javascript @database
+  Scenario: Anonymous user wants to share an argument
+    Given I visited "opinion page" with:
+      | projectSlug      | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+      | opinionTypeSlug  | causes                           |
+      | opinionSlug      | opinion-2                        |
+    And I wait 1 seconds
+    And I click the "#arg-23 .argument__btn--share" element
+    Then I should see "Facebook" in the "#arg-23 .dropdown-menu" element
+    Then I should see "Lien de partage" in the "#arg-23 .dropdown-menu" element
+    And I follow "Lien de partage"
+    And I wait 1 seconds
+    Then I should see ".modal--share-link"
+
+  @javascript @database
   Scenario: Author of an argument looses his votes when updating it
     Given I am logged in as user
     And I visited "opinion page" with:

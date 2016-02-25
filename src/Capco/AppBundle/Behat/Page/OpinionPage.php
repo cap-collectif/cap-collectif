@@ -28,6 +28,7 @@ class OpinionPage extends Page
         'connections tab' => '#opinion__links___tab',
         'show all votes button' => '#opinion-votes-show-all',
         'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',
+        'share button' => 'opinion-share-button',
     ];
 
     public function clickSourcesTab()
@@ -48,6 +49,11 @@ class OpinionPage extends Page
     public function clickAddSource()
     {
         $this->getElement('sources add')->click();
+    }
+
+    public function clickShareButton()
+    {
+        $this->getElement('share button')->click();
     }
 
     public function submitArgument($type, $text)

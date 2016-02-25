@@ -99,8 +99,6 @@
   // Body of opinion blocks
   .opinion__body {
 
-    overflow: hidden;
-
     img {
       margin-right: 15px;
     }
@@ -324,9 +322,6 @@
     padding-top: 30px;
     padding-bottom: 30px;
 
-    .opinion__body {
-      overflow: visible;
-    }
     .opinion__text {
       word-break: break-word;
     }
@@ -356,11 +351,9 @@
 .opinion__description {
   padding: 15px;
   border-top: 1px solid $border-color;
-  overflow: hidden;
   word-wrap: break-word;
 
   .opinion__buttons {
-    overflow: hidden;
     margin-bottom: 15px;
     clear: both;
   }
