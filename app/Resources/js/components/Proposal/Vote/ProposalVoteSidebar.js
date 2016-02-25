@@ -61,15 +61,17 @@ const ProposalVoteSidebar = React.createClass({
         <Button
           block
           className="sidebar-toggle sidebar-hideable sidebar-hidden-large btn--no-radius"
-          bsStyle={this.props.userHasVote ? 'danger' : 'success'}
+          bsStyle={this.props.userHasVote || this.props.expanded ? 'danger' : 'success'}
           bsSize="large"
           onClick={this.props.onToggleExpand}
         >
           {
             this.getIntlMessage(
-              this.props.userHasVote
-                ? 'proposal.vote.delete'
-                : 'proposal.vote.add'
+              this.props.expanded
+                ? 'proposal.vote.hide'
+                : this.props.userHasVote
+                  ? 'proposal.vote.delete'
+                  : 'proposal.vote.add'
             )
           }
         </Button>

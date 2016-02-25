@@ -196,9 +196,47 @@ $statuses:
 @media (max-width: $screen-xs-max) {
   .proposal-vote__widget {
     margin-top: $navbar-collapsed-height;
+    height: auto;
     .container {
       padding-top: 0;
       padding-bottom: 0;
+    }
+    .widget__image {
+      margin-top: 8px;
+      margin-right: 10px;
+    }
+    & > .container .navbar-brand {
+      margin-left: 15px !important;
+    }
+    .widget__progress-bar {
+      width: auto;
+    }
+    .progress {
+      margin-bottom: 0;
+    }
+    .navbar-toggle {
+      padding: 0;
+      border: 0;
+      background-color: transparent !important;
+      margin-bottom: 0;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .widget__counter__select {
+      width: auto;
+      margin-right: 0;
+    }
+    .widget__counter__value .form-group {
+      margin-bottom: 0;
+    }
+    .navbar-nav {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .widget__button {
+      float: none !important;
+      margin-left: 0;
+      width: 100%;
     }
   }
 }

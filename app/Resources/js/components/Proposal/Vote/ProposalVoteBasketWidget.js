@@ -66,122 +66,133 @@ const ProposalVoteBasketWidget = React.createClass({
       creditsSpent
     );
     return (
-      <Navbar fixedTop className="proposal-vote__widget hidden-xs">
+      <Navbar fixedTop className="proposal-vote__widget">
         {
           this.props.image
           ? <Navbar.Header>
             <Navbar.Brand>
               <img className="widget__image" src={this.props.image.url} />
             </Navbar.Brand>
+            <Navbar.Toggle>
+              <i
+                style={{ fontSize: '24px', color: '#999' }}
+                className="cap cap-information-1">
+              </i>
+            </Navbar.Toggle>
+            <li className="navbar-text widget__progress-bar hidden visible-xs">
+              <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%"/>
+            </li>
           </Navbar.Header>
           : null
         }
-        <Nav>
-          {
-            this.state.votableSteps.length > 1
-              ? <li className="navbar-text widget__counter">
-                <p className="widget__counter__label">
-                  {this.getIntlMessage('project.votes.widget.step')}
-                </p>
-                <span className="widget__counter__value">
-                  <Input
-                    id="votes_widget_step"
-                    type="select"
-                    className="widget__counter__select"
-                    valueLink={this.linkState('selectedStepId')}
-                    label={false}
-                  >
-                    {
-                      this.state.votableSteps.map((step) => {
-                        return (
-                          <option key={step.id} value={step.id}>
-                            {step.title}
-                          </option>
-                        );
-                      })
-                    }
-                  </Input>
-                </span>
-            </li>
-            : null
-          }
-          <li className="navbar-text widget__counter">
-            <p className="widget__counter__label">
-              {this.getIntlMessage('project.votes.widget.selection')}
-            </p>
-            <span className="widget__counter__value">
-              <FormattedMessage
-                message={this.getIntlMessage('project.votes.widget.count')}
-                num={selectedStep.userVotesCount}
-              />
-            </span>
-          </li>
-        </Nav>
-        {
-          selectedStep.voteType === VOTE_TYPE_BUDGET
-            ? <Nav>
-              <li className="navbar-text widget__counter">
-                <p className="widget__counter__label">
-                  {this.getIntlMessage('project.votes.widget.budget')}
-                </p>
-                <span className="widget__counter__value">
-                  {
-                    budget
-                      ? <FormattedNumber
-                          minimumFractionDigits={0}
-                          value={budget}
-                          style="currency"
-                          currency="EUR"
-                      />
-                      : this.getIntlMessage('project.votes.widget.no_value')
-                  }
-                </span>
+        <Navbar.Collapse>
+          <Nav>
+            {
+              this.state.votableSteps.length > 1
+                ? <li className="navbar-text widget__counter">
+                  <p className="widget__counter__label">
+                    {this.getIntlMessage('project.votes.widget.step')}
+                  </p>
+                  <span className="widget__counter__value">
+                    <Input
+                      id="votes_widget_step"
+                      type="select"
+                      className="widget__counter__select"
+                      valueLink={this.linkState('selectedStepId')}
+                      label={false}
+                    >
+                      {
+                        this.state.votableSteps.map((step) => {
+                          return (
+                            <option key={step.id} value={step.id}>
+                              {step.title}
+                            </option>
+                          );
+                        })
+                      }
+                    </Input>
+                  </span>
               </li>
-              <li className="navbar-text widget__counter">
-                <p className="widget__counter__label">
-                  {this.getIntlMessage('project.votes.widget.spent')}
-                </p>
+              : null
+            }
+            <li className="navbar-text widget__counter">
+              <p className="widget__counter__label">
+                {this.getIntlMessage('project.votes.widget.selection')}
+              </p>
+              <span className="widget__counter__value">
+                <FormattedMessage
+                  message={this.getIntlMessage('project.votes.widget.count')}
+                  num={selectedStep.userVotesCount}
+                />
+              </span>
+            </li>
+          </Nav>
+          {
+            selectedStep.voteType === VOTE_TYPE_BUDGET
+              ? <Nav>
+                <li className="navbar-text widget__counter">
+                  <p className="widget__counter__label">
+                    {this.getIntlMessage('project.votes.widget.budget')}
+                  </p>
+                  <span className="widget__counter__value">
+                    {
+                      budget
+                        ? <FormattedNumber
+                            minimumFractionDigits={0}
+                            value={budget}
+                            style="currency"
+                            currency="EUR"
+                        />
+                        : this.getIntlMessage('project.votes.widget.no_value')
+                    }
+                  </span>
+                </li>
+                <li className="navbar-text widget__counter">
+                  <p className="widget__counter__label">
+                    {this.getIntlMessage('project.votes.widget.spent')}
+                  </p>
+                    <span className="widget__counter__value">
+                      <FormattedNumber
+                        minimumFractionDigits={0}
+                        value={creditsSpent}
+                        style="currency"
+                        currency="EUR"
+                      />
+                    </span>
+                </li>
+                <li className="navbar-text widget__counter">
+                  <p className="widget__counter__label">
+                    {this.getIntlMessage('project.votes.widget.left')}
+                  </p>
                   <span className="widget__counter__value">
                     <FormattedNumber
                       minimumFractionDigits={0}
-                      value={creditsSpent}
+                      value={creditsLeft}
                       style="currency"
                       currency="EUR"
                     />
                   </span>
-              </li>
-              <li className="navbar-text widget__counter">
-                <p className="widget__counter__label">
-                  {this.getIntlMessage('project.votes.widget.left')}
-                </p>
-                <span className="widget__counter__value">
-                  <FormattedNumber
-                    minimumFractionDigits={0}
-                    value={creditsLeft}
-                    style="currency"
-                    currency="EUR"
-                  />
-                </span>
-              </li>
-          </Nav>
-          : null
-        }
-        <Button
-          bsStyle="default"
-          className="widget__button navbar-btn pull-right"
-          href={this.props.votesPageUrl}
-        >
-          {this.getIntlMessage('proposal.details') }
-        </Button>
-        {
-          selectedStep.voteType === VOTE_TYPE_BUDGET
-            ? <Nav pullRight>
+                </li>
+            </Nav>
+            : null
+          }
+          <Button
+            bsStyle="default"
+            className="widget__button navbar-btn pull-right"
+            href={this.props.votesPageUrl}
+          >
+            {this.getIntlMessage('proposal.details') }
+          </Button>
+          {
+            selectedStep.voteType === VOTE_TYPE_BUDGET
+              ? <Nav pullRight className="widget__progress-bar-nav hidden-xs">
               <li className="navbar-text widget__progress-bar">
                 <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%"/>
               </li>
             </Nav>
-            : null
-        }
+              : null
+          }
+        </Navbar.Collapse>
       </Navbar>
     );
   },

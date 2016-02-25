@@ -403,6 +403,7 @@ export default {
           private: 'Voter de manière anonyme',
           username: 'Nom',
         },
+        hide: 'Masquer',
         modal: {
           title: 'Voter',
         },
