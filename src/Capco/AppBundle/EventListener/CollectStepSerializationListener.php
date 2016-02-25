@@ -22,15 +22,12 @@ class CollectStepSerializationListener extends AbstractSerializationListener
     {
         $step = $event->getObject();
 
-        $counters = [
-            'proposals' => $step->getProposalsCount(),
-            'contributors' => $step->getContributorsCount(),
-        ];
-
-        if (!$step->isFuture()) {
-            $counters['remainingDays'] = intval($step->getRemainingDays());
-        }
-
-        $event->getVisitor()->addData('counters', $counters);
+        $event->getVisitor()->addData(
+            'counters', [
+                'contributions' => $step->getProposalsCount(),
+                'contributors' => $step->getContributorsCount(),
+                'remainingDays' => intval($step->getRemainingDays()),
+            ]
+        );
     }
 }
