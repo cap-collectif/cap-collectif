@@ -117,10 +117,14 @@ const ProposalPage = React.createClass({
                 className={containersClassName}
                 showNullEstimation={this.props.votableStep && this.props.votableStep.voteType === VOTE_TYPE_BUDGET}
               />
-              <ProposalPageAnswer
-                answer={proposal.answer}
-                className={containersClassName}
-              />
+              {
+                proposal.answer
+                  ? <ProposalPageAnswer
+                      answer={proposal.answer}
+                      className={containersClassName}
+                  />
+                  : null
+              }
               <ProposalPageContent
                 proposal={proposal}
                 form={this.props.form}

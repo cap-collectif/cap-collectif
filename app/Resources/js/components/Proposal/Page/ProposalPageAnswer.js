@@ -1,7 +1,7 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
-import AnswerBody from '../../Answer/AnswerBody';
+import UserAvatar from '../../User/UserAvatar';
 
 const ProposalPageAnswer = React.createClass({
   propTypes: {
@@ -18,9 +18,6 @@ const ProposalPageAnswer = React.createClass({
 
   render() {
     const answer = this.props.answer;
-    if (!answer) {
-      return null;
-    }
     const classes = {
       'bg-vip': answer.author && answer.author.vip,
       [this.props.className]: true,
@@ -33,7 +30,17 @@ const ProposalPageAnswer = React.createClass({
             ? <h2 className="h2">{answer.title}</h2>
             : null
           }
-          <AnswerBody answer={answer} />
+          {
+            answer.author
+              ? <div style={{ marginBottom: '10px' }}>
+                  <UserAvatar user={answer.author} style={{ marginRight: '10px' }} />
+                  <a href={answer.author._links.profile}>
+                    { answer.author.username }
+                  </a>
+                </div>
+              : null
+          }
+          <div dangerouslySetInnerHTML={{ __html: answer.body }} />
         </div>
       </div>
     );

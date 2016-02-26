@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+
 import OpinionPreview from './OpinionPreview';
 import OpinionAnswer from './OpinionAnswer';
 import OpinionButtons from './OpinionButtons';
@@ -64,7 +65,11 @@ const OpinionBox = React.createClass({
           </div>
           <OpinionVotesBox opinion={opinion} />
         </div>
-        <OpinionAnswer answer={opinion.answer} />
+        {
+          opinion.answer
+            ? <OpinionAnswer answer={opinion.answer} />
+            : null
+        }
       </div>
     );
   },
