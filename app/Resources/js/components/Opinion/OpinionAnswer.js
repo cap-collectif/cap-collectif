@@ -1,7 +1,7 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
-import UserAvatar from '../User/UserAvatar';
+import AnswerBody from '../Answer/AnswerBody';
 
 const OpinionAnswer = React.createClass({
   propTypes: {
@@ -11,6 +11,9 @@ const OpinionAnswer = React.createClass({
 
   render() {
     const answer = this.props.answer;
+    if (!answer) {
+      return null;
+    }
     const classes = classNames({
       'opinion__answer': true,
       'bg-vip': answer.author && answer.author.vip,
@@ -22,17 +25,7 @@ const OpinionAnswer = React.createClass({
           ? <p className="h4" style={{ marginTop: '0' }}>{answer.title}</p>
           : null
         }
-        {
-          answer.author
-          ? <div style={{ marginBottom: '10px' }}>
-              <UserAvatar user={answer.author} style={{ marginRight: '10px' }} />
-              <a href={answer.author._links.profile}>
-                { answer.author.username }
-              </a>
-            </div>
-          : null
-        }
-        <div dangerouslySetInnerHTML={{ __html: answer.body }} />
+        <AnswerBody answer={answer} />
       </div>
     );
   },
