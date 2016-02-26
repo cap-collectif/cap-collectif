@@ -58,32 +58,37 @@ const Comment = React.createClass({
     const classes = classNames({
       'opinion': true,
       'opinion--comment': true,
+    });
+    const contentClasses = classNames({
       'bg-vip': comment.author && comment.author.vip,
+      'opinion__content': true,
     });
     return (
       <li className={classes} >
         <div className="opinion__body">
-          <UserAvatar user={comment.author} className="pull-left" />
-          <div className="opinion__data">
-            <CommentInfos comment={comment} />
-          </div>
-          <CommentBody comment={comment} />
-          <div className="comment__buttons">
-            <CommentVoteButton comment={comment} userIsAuthor={this.isTheUserTheAuthor()} />
-            {' '}
-            {this.props.root
-              ? <a onClick={this.answer.bind(this)} className="btn btn-xs btn-dark-gray btn--outline">
-                  <i className="cap-reply-mail-2"></i>
-                  { ' ' }
-                  { this.getIntlMessage('global.answer') }
-                </a>
-              : null
-            }
-            {' '}
-            <CommentReport comment={comment} />
-            {' '}
-            <CommentEdit comment={comment} />
-            {' '}
+          <div className={contentClasses}>
+            <UserAvatar user={comment.author} className="pull-left" />
+            <div className="opinion__data">
+              <CommentInfos comment={comment} />
+            </div>
+            <CommentBody comment={comment} />
+            <div className="comment__buttons">
+              <CommentVoteButton comment={comment} userIsAuthor={this.isTheUserTheAuthor()} />
+              {' '}
+              {this.props.root
+                ? <a onClick={this.answer.bind(this)} className="btn btn-xs btn-dark-gray btn--outline">
+                    <i className="cap-reply-mail-2"></i>
+                    { ' ' }
+                    { this.getIntlMessage('global.answer') }
+                  </a>
+                : null
+              }
+              {' '}
+              <CommentReport comment={comment} />
+              {' '}
+              <CommentEdit comment={comment} />
+              {' '}
+            </div>
           </div>
           <div className="comment-answers-block">
             {this.props.root

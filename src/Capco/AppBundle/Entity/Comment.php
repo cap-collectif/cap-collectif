@@ -260,7 +260,7 @@ abstract class Comment implements VotableInterface, HasAuthorInterface
     public function setAuthor($Author)
     {
         $this->Author = $Author;
-        $this->setPinned($Author && $Author->isVip());
+        $this->setPinned($Author && $Author->isVip() && !$this->parent);
 
         return $this;
     }
@@ -279,6 +279,7 @@ abstract class Comment implements VotableInterface, HasAuthorInterface
     public function setParent($parent)
     {
         $this->parent = $parent;
+        $this->setPinned($this->pinned && !$parent);
 
         return $this;
     }

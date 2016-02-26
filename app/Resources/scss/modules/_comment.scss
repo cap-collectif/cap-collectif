@@ -31,6 +31,11 @@
 
 }
 
+.opinion--comment .opinion__content {
+  padding: 5px;
+  border-radius: 5px;
+}
+
 // List of comment answers
 .comment-answers {
 
@@ -61,11 +66,11 @@
     margin-bottom: 10px;
 }
 
-.opinion__list {
+.comments__section > .opinion__list > .opinion--comment:first-child {
+  margin-top: 20px;
+}
 
-    .opinion--comment:first-child {
-        margin-top: 20px;
-    }
+.opinion__list {
 
     .opinion--comment:last-child {
         margin-bottom: 15px;
@@ -80,5 +85,4 @@
 
 .comment__buttons {
     padding-left: 55px;
-    padding-bottom: 10px;
 }
