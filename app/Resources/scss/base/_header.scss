@@ -49,6 +49,14 @@
   }
 
   @media (max-width: $screen-xs-max) {
+    .navbar-brand {
+      max-width: 50%;
+      & > img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
     a.navbar__search {
       display: block;
       font-size: 16px;
