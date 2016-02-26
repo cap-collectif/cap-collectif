@@ -49,6 +49,7 @@
   }
 
   @media (max-width: $screen-xs-max) {
+    min-height: $navbar-collapsed-height;
     .navbar-brand {
       max-width: 50%;
       & > img {
