@@ -48,10 +48,3 @@
 
     {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        App.pieChart();
-    </script>
-{% endblock %}
