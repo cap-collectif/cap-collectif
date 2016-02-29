@@ -52,7 +52,7 @@
                     {% endif %}
                 </p>
                 {% if currentStep.isOpen %}
-                    {% set remainingDays = currentStep.remainingDays %}
+                    {% set remainingDays = currentStep.remainingTime.days %}
                     <p class="excerpt"><i class="cap cap-calendar-1"></i>
                         {% transchoice remainingDays with {'%count%': remainingDays} from 'CapcoAppBundle' %}
                             project.show.remaining_days

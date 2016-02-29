@@ -43,6 +43,10 @@ const CountersNav = React.createClass({
       icon: 'cap cap-hourglass-1-1',
       label: 'global.counters.remaining_days',
     },
+    remainingHours: {
+      icon: 'cap cap-hourglass-1-1',
+      label: 'global.counters.remaining_hours',
+    },
   },
 
   render() {

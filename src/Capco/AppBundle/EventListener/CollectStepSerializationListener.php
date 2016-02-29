@@ -27,8 +27,17 @@ class CollectStepSerializationListener extends AbstractSerializationListener
             'contributors' => $step->getContributorsCount(),
         ];
 
-        if (!$step->isFuture()) {
-            $counters['remainingDays'] = intval($step->getRemainingDays());
+        $remainingTime = $step->getRemainingTime();
+        if ($remainingTime) {
+            if ($step->isClosed()) {
+                $counters['remainingDays'] = $remainingTime['days'];
+            } elseif ($step->isOpen()) {
+                if ($remainingTime['days'] > 0) {
+                    $counters['remainingDays'] = $remainingTime['days'];
+                } else {
+                    $counters['remainingHours'] = $remainingTime['hours'];
+                }
+            }
         }
 
         $event->getVisitor()->addData('counters', $counters);
