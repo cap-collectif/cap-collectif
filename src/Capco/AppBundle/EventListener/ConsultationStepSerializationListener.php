@@ -28,17 +28,8 @@ class ConsultationStepSerializationListener extends AbstractSerializationListene
             'contributors' => $step->getContributorsCount(),
         ];
 
-        $remainingTime = $step->getRemainingTime();
-        if ($remainingTime) {
-            if ($step->isClosed()) {
-                $counters['remainingDays'] = $remainingTime['days'];
-            } elseif ($step->isOpen()) {
-                if ($remainingTime['days'] > 0) {
-                    $counters['remainingDays'] = $remainingTime['days'];
-                } else {
-                    $counters['remainingHours'] = $remainingTime['hours'];
-                }
-            }
+        if (!$step->isFuture()) {
+            $counters['remainingDays'] = intval($step->getRemainingDays());
         }
 
         $event->getVisitor()->addData('counters', $counters);

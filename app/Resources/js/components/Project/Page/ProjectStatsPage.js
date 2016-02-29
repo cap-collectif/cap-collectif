@@ -1,7 +1,7 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import ProjectStatsList from './ProjectStatsList';
-import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
+import { Nav, NavItem } from 'react-bootstrap';
 
 const ProjectStatsPage = React.createClass({
   propTypes: {
@@ -14,15 +14,13 @@ const ProjectStatsPage = React.createClass({
 
   getInitialState() {
     return {
-      showPercentage: {},
+      selectedStepIndex: 0,
     };
   },
 
-  showPercentage(stepId, value) {
-    const showPercentage = this.state.showPercentage;
-    showPercentage[stepId] = value;
+  selectStep(index) {
     this.setState({
-      showPercentage: showPercentage,
+      selectedStepIndex: index,
     });
   },
 
@@ -36,63 +34,57 @@ const ProjectStatsPage = React.createClass({
 
   render() {
     const icons = this.listIcons;
+    const selectedStep = this.props.steps[this.state.selectedStepIndex];
     return (
       <div>
         <h2>{this.getIntlMessage('project.stats.title')}</h2>
-        <div className="block">
-          {
-            this.props.steps.length > 0
-              ? this.props.steps.map((step, index) => {
-                return (
-                  <div key={index} className="block">
-                    <h3>
+        {
+          this.props.steps.length > 1
+          ? <Nav
+              bsStyle="pills"
+              justified
+              activeKey={this.state.selectedStepIndex}
+              onSelect={this.selectStep}
+              className="block"
+          >
+              {
+                this.props.steps.map((step, index) => {
+                  return (
+                    <NavItem key={index} eventKey={index}>
                       {step.title}
-                      <ButtonToolbar className="pull-right">
-                        <ButtonGroup id={'step-stats-display-' + step.id}>
-                          <Button
-                            id={'step-stats-display-' + step.id + '-number'}
-                            active={!this.state.showPercentage[step.id]}
-                            onClick={this.showPercentage.bind(this, step.id, false)}
-                          >
-                            {this.getIntlMessage('project.stats.display.number')}
-                          </Button>
-                          <Button
-                            id={'step-stats-display-' + step.id + '-percentage'}
-                            active={this.state.showPercentage[step.id]}
-                            onClick={this.showPercentage.bind(this, step.id, true)}
-                          >
-                            {this.getIntlMessage('project.stats.display.percentage')}
-                          </Button>
-                        </ButtonGroup>
-                      </ButtonToolbar>
-                    </h3>
-                    {
-                      Object.keys(step.stats).map((key) => {
-                        return (
-                          <ProjectStatsList
-                            key={key}
-                            type={key}
-                            stepId={step.id}
-                            data={step.stats[key]}
-                            label={'project.stats.list.' + key}
-                            icon={icons[key]}
-                            showPercentage={!!this.state.showPercentage[step.id]}
-                            isCurrency={key === 'costs'}
-                            showFilters={key === 'votes'}
-                            themes={this.props.themes}
-                            districts={this.props.districts}
-                          />
-                        );
-                      })
-                    }
-                  </div>
-                );
-              })
-              : <p className="project-stats__empty">
-                  {this.getIntlMessage('project.stats.no_data')}
-              </p>
-          }
-        </div>
+                    </NavItem>
+                  );
+                })
+              }
+            </Nav>
+          : null
+        }
+        {
+          selectedStep
+          ? <div className="block stats__step-details">
+              {
+                Object.keys(selectedStep.stats).map((key) => {
+                  return (
+                    <ProjectStatsList
+                      key={key}
+                      type={key}
+                      stepId={selectedStep.id}
+                      data={selectedStep.stats[key]}
+                      label={'project.stats.list.' + key}
+                      icon={icons[key]}
+                      isCurrency={key === 'costs'}
+                      showFilters={key === 'votes'}
+                      themes={this.props.themes}
+                      districts={this.props.districts}
+                    />
+                  );
+                })
+              }
+          </div>
+          : <p className="project-stats__empty">
+            {this.getIntlMessage('project.stats.no_data')}
+          </p>
+        }
       </div>
     );
   },

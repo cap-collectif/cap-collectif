@@ -427,25 +427,18 @@ abstract class AbstractStep
         return false;
     }
 
-    public function getRemainingTime()
+    public function getRemainingDays()
     {
         $now = new \DateTime();
         if ($this->isOpen()) {
             if (null != $this->endAt) {
-                $time = $this->endAt->diff($now);
-            } else {
-                $time = null != $this->startAt ? $this->startAt->diff($now) : null;
+                return $this->endAt->diff($now)->format('%a');
             }
 
-            if ($time) {
-                return [
-                    'days' => intval($time->format('%a')),
-                    'hours' => intval($time->format('%h')),
-                ];
-            }
+            return null != $this->startAt ? $this->startAt->diff($now)->format('%a') : null;
         }
 
-        return null;
+        return;
     }
 
     public function lastOneDay()
