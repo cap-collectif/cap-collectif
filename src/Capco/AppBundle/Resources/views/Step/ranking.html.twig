@@ -82,3 +82,10 @@
         </div>
     {% endif %}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        App.pieChart();
+    </script>
+{% endblock %}
