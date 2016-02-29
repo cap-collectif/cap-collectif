@@ -36,30 +36,14 @@
                 {% endif %}
                 <h2 class="h4"><a href="{{ link }}">{{ project.title }}</a></h2>
             </div>
-            {% set currentStep = project.currentStep %}
-            {% if currentStep %}
-            <div class="thumbnail__status">
-                <p>
-                    {{ currentStep.title }} :
-                    {% if currentStep.isOpen %}
-                        <span class="label label-success">{{ 'step.status.open'|trans({}, 'CapcoAppBundle') }}</span>
-                    {% endif %}
-                    {% if currentStep.isClosed %}
-                        <span class="label label-danger">{{ 'step.status.closed'|trans({}, 'CapcoAppBundle') }}</span>
-                    {% endif %}
-                    {% if currentStep.isFuture %}
-                        <span class="label label-info">{{ 'step.status.future'|trans({}, 'CapcoAppBundle') }}</span>
-                    {% endif %}
-                </p>
-                {% if currentStep.isOpen %}
-                    {% set remainingDays = currentStep.remainingTime.days %}
-                    <p class="excerpt"><i class="cap cap-calendar-1"></i>
-                        {% transchoice remainingDays with {'%count%': remainingDays} from 'CapcoAppBundle' %}
-                            project.show.remaining_days
-                        {% endtranschoice %}
-                    </p>
-                {% endif %}
-            </div>
+
+            {% set steps = project.steps %}
+            {% if (steps | length > 0) %}
+                <div
+                        id="render-project-progress-bar"
+                        data-project='{{ project|escape }}'
+                >
+                </div>
             {% endif %}
 
             {% set contributorsCount = project.participantsCount %}
