@@ -57,6 +57,8 @@ homepage:
     invalid: Veuillez entrer une adresse email valide.
     form:
       email: Adresse email
+  projects:
+    title: Projets participatifs
   proposals:
     title: Propositions
   social_networks:
