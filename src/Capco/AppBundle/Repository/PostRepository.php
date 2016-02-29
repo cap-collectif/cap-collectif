@@ -129,7 +129,9 @@ class PostRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return new Paginator($qb->getQuery(), true);
+        return $qb
+            ->getQuery()
+            ->execute();
     }
 
     /**
