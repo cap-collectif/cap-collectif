@@ -10,6 +10,7 @@ Feature: Themes
   {
     "id": @integer@,
     "title": @string@,
+    "enabled": @boolean@,
     "_links": {
       "show": @string@
     }

@@ -11,10 +11,11 @@ import CollectStepPage from './components/Page/CollectStepPage';
 import SelectionStepPage from './components/Page/SelectionStepPage';
 import ProposalPage from './components/Proposal/Page/ProposalPage';
 import ProposalVoteBasketWidget from './components/Proposal/Vote/ProposalVoteBasketWidget';
-import ProposalsUserVotesPage from './components/Project/Page/ProposalsUserVotesPage';
-import ProjectStatsPage from './components/Project/Page/ProjectStatsPage';
+import ProposalsUserVotesPage from './components/Project/Votes/ProposalsUserVotesPage';
+import ProjectStatsPage from './components/Project/Stats/ProjectStatsPage';
 import AlertBox from './components/Alert/AlertBox';
 import StepInfos from './components/Steps/Page/StepInfos';
+import ProjectsList from './components/Project/List/ProjectsList';
 
 FeatureService.load();
 
@@ -161,6 +162,16 @@ AuthService
           {...IntlData}
         />,
         document.getElementById('render-opinion-version')
+      );
+    }
+
+    if ($('#render-projects-list').length) {
+      ReactDOM.render(
+        <ProjectsList
+          projects={$('#render-projects-list').data('projects').projects}
+          {...IntlData}
+        />,
+        document.getElementById('render-projects-list')
       );
     }
   }

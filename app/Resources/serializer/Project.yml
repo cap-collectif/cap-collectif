@@ -1,35 +1,55 @@
 Capco\AppBundle\Entity\Project:
-    exclusion_policy: ALL
-    properties:
-        id:
-            expose: true
-            type: integer
-            groups: [Projects]
-        title:
-            expose: true
-            type: string
-            groups: [Projects]
-        author:
-            expose: true
-            type: Capco\UserBundle\Entity\User
-            serialized_name: author
-            groups: [Projects]
-        votesCount:
-            expose: true
-            type: integer
-            groups: [Projects]
-        canContribute:
-            expose: true
-            type: boolean
-            groups: [Projects]
-        createdAt:
-            expose: true
-            type: DateTime
-            groups: [Projects]
-        updatedAt:
-            expose: true
-            type: DateTime
-            groups: [Projects]
-        enabled:
-            expose: true
-            groups: [Projects]
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: integer
+      groups: [Projects]
+    title:
+      expose: true
+      type: string
+      groups: [Projects]
+    author:
+      expose: true
+      type: Capco\UserBundle\Entity\User
+      serialized_name: author
+      groups: [Projects]
+    contributionsCount:
+      expose: true
+      type: integer
+      groups: [Projects]
+      serialized_name: contributionsCount
+    participantsCount:
+      expose: true
+      type: integer
+      groups: [Projects]
+      serialized_name: participantsCount
+    votesCount:
+      expose: true
+      type: integer
+      groups: [Projects]
+      serialized_name: votesCount
+    canContribute:
+      expose: true
+      type: boolean
+      groups: [Projects]
+    createdAt:
+      expose: true
+      type: DateTime
+      groups: [Projects]
+    updatedAt:
+      expose: true
+      type: DateTime
+      groups: [Projects]
+    enabled:
+      expose: true
+      groups: [Projects]
+    themes:
+      expose: true
+      groups: [Projects]
+    steps:
+      expose: true
+      groups: [Projects]
+    video:
+      expose: true
+      groups: [Projects]

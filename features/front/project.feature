@@ -11,7 +11,7 @@ Feature: Project
     And I visited "projects page"
     And I select "Date de publication" from "capco_app_search_project_sort"
     And I wait 1 seconds
-    Then "Projet vide" should be before "Croissance, innovation, disruption" for selector ".thumbnail--custom .figcaption h2 a "
+    Then "Projet vide" should be before "Croissance, innovation, disruption" for selector ".thumbnail--custom .project__preview__title a"
 
   @javascript @elasticsearch
   Scenario: Project can be sorted by contributions number
@@ -19,7 +19,7 @@ Feature: Project
     And I visited "projects page"
     And I select "Nombre de contributions" from "capco_app_search_project_sort"
     And I wait 1 seconds
-    Then "Croissance, innovation, disruption" should be before "Projet vide" for selector ".thumbnail--custom .figcaption h2 a "
+    Then "Croissance, innovation, disruption" should be before "Projet vide" for selector ".thumbnail--custom .project__preview__title a"
 
   @javascript
   Scenario: Project can be filtered by theme
@@ -46,7 +46,7 @@ Feature: Project
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"
-    And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".thumbnail--custom .figcaption h2 a "
+    And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".thumbnail--custom .project__preview__title a"
 
   @javascript
   Scenario: Project can be filtered by title

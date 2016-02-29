@@ -153,7 +153,13 @@ class ProjectRepository extends EntityRepository
                 ->setMaxResults($nbByPage);
         }
 
-        return new Paginator($query);
+        $results = new Paginator($query);
+        $projects = [];
+        foreach ($results as $project) {
+            $projects[] = $project;
+        }
+
+        return $projects;
     }
 
     /**
@@ -215,7 +221,22 @@ class ProjectRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return new Paginator($qb, $fetchJoin = true);
+        $results = new Paginator($qb, $fetchJoin = true);
+        $projects = [];
+        foreach ($results as $project) {
+            $projects[] = $project;
+        }
+
+        return $projects;
+    }
+
+    public function countPublished()
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('COUNT(p.id)')
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -247,9 +268,13 @@ class ProjectRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        $paginator = new Paginator($qb->getQuery());
+        $projects = [];
+        foreach ($paginator as $project) {
+            $projects[] = $project;
+        }
+
+        return $projects;
     }
 
     protected function getIsEnabledQueryBuilder()

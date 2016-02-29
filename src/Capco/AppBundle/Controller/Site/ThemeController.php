@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use JMS\Serializer\SerializationContext;
 
 class ThemeController extends Controller
 {
@@ -83,10 +84,19 @@ class ThemeController extends Controller
         if (false == $theme->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', [], 'CapcoAppBundle'));
         }
+        $maxProjectsDisplayed = 12;
+        $serializer = $this->get('jms_serializer');
+        $projects = $serializer->serialize([
+            'projects' => $this
+                ->get('doctrine.orm.entity_manager')
+                ->getRepository('CapcoAppBundle:Project')
+                ->getLastByTheme($theme->getId(), $maxProjectsDisplayed, 0),
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
 
         return [
             'theme' => $theme,
-            'maxProjectsDisplayed' => 12,
+            'maxProjectsDisplayed' => $maxProjectsDisplayed,
+            'projects' => $projects,
         ];
     }
 

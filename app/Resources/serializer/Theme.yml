@@ -1,11 +1,16 @@
 Capco\AppBundle\Entity\Theme:
-    exclusion_policy: ALL
-    properties:
-        id:
-            expose: true
-            type: integer
-            groups: [Themes]
-        title:
-            expose: true
-            type: string
-            groups: [Themes]
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: integer
+      groups: [Themes]
+    title:
+      expose: true
+      type: string
+      groups: [Themes]
+    isEnabled:
+      expose: true
+      type: boolean
+      groups: [Themes]
+      serialized_name: enabled

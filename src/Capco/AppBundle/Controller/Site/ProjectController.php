@@ -33,10 +33,18 @@ class ProjectController extends Controller
      */
     public function lastProjectsAction($max = 4, $offset = 0)
     {
-        $projects = $this->getDoctrine()->getRepository('CapcoAppBundle:Project')->getLastPublished($max, $offset);
+        $serializer = $this->get('jms_serializer');
+        $count = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:Project')->countPublished();
+        $projects = $serializer->serialize([
+            'projects' => $this
+                ->get('doctrine.orm.entity_manager')
+                ->getRepository('CapcoAppBundle:Project')
+                ->getLastPublished($max, $offset),
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
 
         return [
             'projects' => $projects,
+            'count' => $count,
         ];
     }
 
@@ -365,18 +373,22 @@ class ProjectController extends Controller
             }
         }
 
+        $serializer = $this->get('jms_serializer');
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('projects.pagination');
-
-        $projects = $em->getRepository('CapcoAppBundle:Project')->getSearchResults($pagination, $page, $theme, $sort, $term);
+        $projectsRaw = $em->getRepository('CapcoAppBundle:Project')->getSearchResults($pagination, $page, $theme, $sort, $term);
+        $projects = $serializer->serialize([
+            'projects' => $projectsRaw,
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
         if ($pagination !== null && $pagination !== 0) {
-            $nbPage = ceil(count($projects) / $pagination);
+            $nbPage = ceil(count($projectsRaw) / $pagination);
         }
 
         $parameters = [
             'projects' => $projects,
+            'count' => count($projectsRaw),
             'page' => $page,
             'nbPage' => $nbPage,
         ];

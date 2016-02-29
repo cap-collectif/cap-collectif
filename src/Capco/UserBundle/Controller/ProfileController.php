@@ -9,6 +9,7 @@ use Capco\UserBundle\Entity\User;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use JMS\Serializer\SerializationContext;
 
 /**
  * @Route("/profile")
@@ -26,9 +27,17 @@ class ProfileController extends BaseController
         }
 
         $doctrine = $this->getDoctrine();
+        $serializer = $this->get('jms_serializer');
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $projects = $doctrine->getRepository('CapcoAppBundle:Project')->getByUser($user);
+        $projectsRaw = $doctrine
+            ->getRepository('CapcoAppBundle:Project')
+            ->getByUser($user)
+        ;
+        $projects = $serializer->serialize([
+            'projects' => $projectsRaw,
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
+        $projectsCount = count($projectsRaw);
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
@@ -41,6 +50,7 @@ class ProfileController extends BaseController
         return [
             'user' => $user,
             'projects' => $projects,
+            'projectsCount' => $projectsCount,
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'versions' => $versions,
             'arguments' => $arguments,
@@ -59,7 +69,16 @@ class ProfileController extends BaseController
      */
     public function showUserAction(User $user)
     {
+        $serializer = $this->get('jms_serializer');
         $doctrine = $this->getDoctrine();
+        $projectsRaw = $doctrine
+            ->getRepository('CapcoAppBundle:Project')
+            ->getByUser($user)
+        ;
+        $projects = $serializer->serialize([
+            'projects' => $projectsRaw,
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
+        $projectsCount = count($projectsRaw);
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
@@ -71,6 +90,8 @@ class ProfileController extends BaseController
 
         return [
             'user' => $user,
+            'projects' => $projects,
+            'projectsCount' => $projectsCount,
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'versions' => $versions,
             'arguments' => $arguments,
@@ -93,11 +114,21 @@ class ProfileController extends BaseController
      */
     public function showProjectsAction(User $user)
     {
-        $projects = $this->getDoctrine()->getRepository('CapcoAppBundle:Project')->getByUser($user);
+        $serializer = $this->get('jms_serializer');
+        $projectsRaw = $this
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:Project')
+            ->getByUser($user)
+        ;
+        $projects = $serializer->serialize([
+            'projects' => $projectsRaw,
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
+        $projectsCount = count($projectsRaw);
 
         return [
             'user' => $user,
             'projects' => $projects,
+            'projectsCount' => $projectsCount,
         ];
     }
 

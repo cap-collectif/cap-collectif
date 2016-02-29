@@ -445,7 +445,7 @@ abstract class AbstractStep
             }
         }
 
-        return null;
+        return;
     }
 
     public function lastOneDay()

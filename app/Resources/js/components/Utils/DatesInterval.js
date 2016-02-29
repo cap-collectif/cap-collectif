@@ -4,24 +4,29 @@ import moment from 'moment';
 
 const DatesInterval = React.createClass({
   propTypes: {
-    startAt: React.PropTypes.string.isRequired,
+    startAt: React.PropTypes.string,
     endAt: React.PropTypes.string,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
+      startAt: null,
       endAt: null,
     };
   },
 
   lastOneDay() {
     const { startAt, endAt } = this.props;
-    return moment(startAt).diff(moment(endAt), 'days') < 1;
+    return moment(endAt).diff(moment(startAt), 'days') < 1;
   },
 
   render() {
     const { startAt, endAt } = this.props;
+
+    if (!startAt) {
+      return null;
+    }
 
     const startDay = (
       <FormattedDate

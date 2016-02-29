@@ -10,8 +10,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
       groups: [ProjectAbstractSteps]
     step:
       expose: true
-      groups: [ProjectAbstractSteps]
+      groups: [ProjectAbstractSteps, Steps]
     position:
       expose: true
       type: integer
-      groups: [ProjectAbstractSteps]
+      groups: [ProjectAbstractSteps, Steps]

@@ -78,45 +78,39 @@
         {% set contributionsCount = project.contributionsCount %}
         {% set contributorsCount = project.participantsCount %}
 
-        {% if votesCount > 0 or contributionsCount > 0 or contributorsCount > 0 %}
-            <ul class="nav nav-pills counters-nav counters-nav--project">
-                {% if contributionsCount > 0 %}
-                    <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
-                        <i class="cap cap-file-edit-1"></i>
-                        <span class="value">{{ contributionsCount }}</span>
-                        <span class="excerpt category">
-                            {% transchoice contributionsCount from 'CapcoAppBundle' %}
-                            project.show.meta.total_count
-                            {% endtranschoice %}
-                        </span>
-                    </li>
-                {% endif %}
-                {% if votesCount > 0 %}
-                    <li id="votes-counter-pill">
-                        <i class="cap cap-hand-like-2-1"></i>
-                        <span class="value">{{ votesCount }}</span>
-                        <span class="excerpt category">
-                            {% transchoice votesCount from 'CapcoAppBundle' %}
-                            project.show.meta.votes_count
-                            {% endtranschoice %}
-                        </span>
-                    </li>
-                {% endif %}
-                {% if contributorsCount > 0 %}
-                    <li id="contributors-counter-pill">
-                        <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}">
-                            <i class="cap cap-contacts-1"></i>
-                            <span class="value">{{ contributorsCount }}</span>
-                            <span class="excerpt category">
-                                {% transchoice contributorsCount from 'CapcoAppBundle' %}
-                                project.show.meta.contributors_count
-                                {% endtranschoice %}
-                            </span>
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-        {% endif %}
+        <ul class="nav nav-pills counters-nav counters-nav--project">
+            <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
+                <i class="cap cap-file-edit-1"></i>
+                <span class="value">{{ contributionsCount }}</span>
+                <span class="excerpt category">
+                    {% transchoice contributionsCount from 'CapcoAppBundle' %}
+                    project.show.meta.total_count
+                    {% endtranschoice %}
+                </span>
+            </li>
+            {% if votesCount > 0 %}
+                <li id="votes-counter-pill">
+                    <i class="cap cap-hand-like-2-1"></i>
+                    <span class="value">{{ votesCount }}</span>
+                    <span class="excerpt category">
+                        {% transchoice votesCount from 'CapcoAppBundle' %}
+                        project.show.meta.votes_count
+                        {% endtranschoice %}
+                    </span>
+                </li>
+            {% endif %}
+            <li id="contributors-counter-pill">
+                <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}">
+                    <i class="cap cap-contacts-1"></i>
+                    <span class="value">{{ contributorsCount }}</span>
+                    <span class="excerpt category">
+                        {% transchoice contributorsCount from 'CapcoAppBundle' %}
+                        project.show.meta.contributors_count
+                        {% endtranschoice %}
+                    </span>
+                </a>
+            </li>
+        </ul>
 
         <div style="margin-top: 15px">
 

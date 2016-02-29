@@ -1,11 +1,6 @@
  /* ===============================================================
    $Thumbnail
 ================================================================*/
- .bg--project {
-   background-color: $brand-primary;
-   padding-top: 45px;
-   padding-bottom: 45px;
- }
 
 .thumbnail--custom {
   @include border-radius(0);
@@ -13,6 +8,26 @@
 
   &:hover {
     background-color: $light-gray;
+  }
+
+  .project__preview__cover {
+   height: 175px;
+   width: 100%;
+   img {
+     width: 100%;
+     height: auto;
+   }
+  }
+
+  .project__preview__body {
+    height: 175px;
+  }
+
+  .project__preview__title {
+    line-height: 25px;
+    height: 75px;
+    margin-top: 10px;
+    overflow: hidden;
   }
 
   .progress {
@@ -24,34 +39,64 @@
     padding-left: 15px;
   }
 
-  .thumbnail__status {
-    margin-bottom: 5px;
+  .thumbnail__steps-bar {
+    width: 100%;
+    height: 25px;
+    border: 1px solid $border-color;
+
+    .thumbnail__steps-bar__percentage {
+      position: absolute;
+      left: 45%;
+      color: #EBEBEB;
+    }
+
+    .thumbnail__steps-bar__item {
+      height: 100%;
+      display: inline-block;
+      border-left: 1px solid $border-color;
+      background-color: $brand-success;
+
+      &:first-child {
+        border-left: 0;
+      }
+    }
+    .thumbnail__steps-bar__item--closed {
+      background-color: $brand-success;
+    }
+    .thumbnail__steps-bar__item--open {
+      background-color: $brand-warning;
+    }
+    .thumbnail__steps-bar__item--future {
+      background-color: #dddddd;
+    }
   }
 
   .thumbnail__numbers {
+    background-color: #f6f6f6;
+    padding: 5px;
+    border-top: 1px solid #ddd;
+    height: 55px;
+
     .thumbnail__number-block {
       display: inline-block;
-      margin-left: 15px;
-      margin-top: 10px;
-      &:first-child {
-        margin-left: 0;
+      text-align: center;
+      border-left: 1px solid $border-color;
+
+      &:first-of-type {
+        border-left: 0;
       }
     }
     .thumbnail__number {
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 0;
+      font-size: 18px;
     }
     .thumbnail__number__label {
       font-size: 12px;
-      margin-top: 0;
-      margin-bottom: 0;
     }
   }
+}
 
-  @media (max-width: $screen-xs-max) {
-    img {
-      width: 100%;
-    }
-  }
+.bg--project {
+  background-color: $brand-primary;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }

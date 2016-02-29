@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use Capco\AppBundle\Entity\Project;
+use JMS\Serializer\SerializationContext;
 
 class HomepageController extends Controller
 {
@@ -189,11 +190,19 @@ class HomepageController extends Controller
      */
     public function lastProjectsAction($max = 3, $offset = 0, $section = null, $alt = null)
     {
-        $projects = $this->getDoctrine()->getRepository('CapcoAppBundle:Project')->getLastPublished($max, $offset);
+        $serializer = $this->get('jms_serializer');
+        $count = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:Project')->countPublished();
+        $projects = $serializer->serialize([
+            'projects' => $this
+                ->get('doctrine.orm.entity_manager')
+                ->getRepository('CapcoAppBundle:Project')
+                ->getLastPublished($max, $offset),
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
 
         return [
             'max' => $max,
             'projects' => $projects,
+            'count' => $count,
             'section' => $section,
             'alt' => $alt,
         ];

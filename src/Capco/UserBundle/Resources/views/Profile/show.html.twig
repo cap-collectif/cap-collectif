@@ -26,6 +26,11 @@
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
 
     <div class="container container--custom">
+        <h2>{{ 'user.profile.show.projects' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% include '@CapcoUser/Profile/projects.html.twig' %}
+    </div>
+
+    <div class="container container--custom">
         <h2>{{ 'user.profile.show.opinions' | trans({}, 'CapcoAppBundle') }}</h2>
         {% include '@CapcoUser/Profile/opinions.html.twig' %}
     </div>

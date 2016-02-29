@@ -288,6 +288,16 @@ export default {
       },
     },
     project: {
+      preview: {
+        counters: {
+          contributions: '{num, plural, =0{contribution} one{contribution} other{contributions}}',
+          contributors: '{num, plural, =0{participant} one{participant} other{participants}}',
+          votes: '{num, plural, =0{vote} one{vote} other{votes}}',
+        },
+        popover: {
+          title: 'Étape {num}',
+        },
+      },
       stats: {
         display: {
           all: 'Voir tous',

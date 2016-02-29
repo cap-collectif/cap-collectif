@@ -54,14 +54,14 @@
 
     <div class="container  container--custom">
         <h2 class="h2">{{ 'theme.show.projects.title'|trans({}, 'CapcoAppBundle') }}</h2>
-        {% set projects = theme.projects %}
-        {% if projects|length > 0 %}
-            <div class="row">
-                {% for project in projects|slice(0, maxProjectsDisplayed) %}
-                    {% include '@CapcoApp/Project/blockProject.html.twig' with {'project': project} only %}
-                {% endfor %}
+        {% set projectsCount = theme.projects | length %}
+        {% if projectsCount > 0 %}
+            <div
+                id="render-projects-list"
+                data-projects='{{ projects | escape }}'
+            >
             </div>
-            {% if projects|length > maxProjectsDisplayed %}
+            {% if projectsCount > maxProjectsDisplayed %}
                 <a href="{{ path('app_project_search', {'theme': theme.slug, 'sort': 'date'}) }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
         {% else %}
@@ -89,13 +89,11 @@
     <script type="text/javascript">
         $(window).on('load', function() {
             App.equalheight('.theme');
-            App.equalheight('.thumbnail--custom');
             App.equalheight('.media--macro');
         });
 
         $(window).on('resize', function() {
             App.resized('.theme');
-            App.resized('.thumbnail--custom');
             App.resized('.media--macro');
         });
     </script>

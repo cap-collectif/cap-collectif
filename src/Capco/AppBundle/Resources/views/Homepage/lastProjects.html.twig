@@ -1,4 +1,4 @@
-{% if projects|length > 0 %}
+{% if count > 0 %}
     <div class="container  container--custom">
         {% if null != section.title %}
             <h2 class="h2">{{ section.title }}</h2>
@@ -9,12 +9,14 @@
         {% if null != section.body %}
             <p>{{ section.body | raw }}</p>
         {% endif %}
-        <div class="row">
-            {% for project in projects %}
-                {% include '@CapcoApp/Project/blockProject.html.twig' with {'project': project} only %}
-            {% endfor %}
+
+        <div
+            id="render-projects-list"
+            data-projects='{{ projects | escape }}'
+        >
         </div>
-        {% if projects|length > max %}
+
+        {% if count > max %}
             <a href="{{ path('app_project') }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
         {% endif %}
     </div>

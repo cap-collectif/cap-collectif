@@ -13,7 +13,6 @@ Capco\AppBundle\Entity\Project:
     title: Stratégie technologique de l'Etat et services publics
     Author: @user4
     Cover: @MediaProject2
-    video: 'http://www.youtube.com/embed/wTcNtgA6gHs?autoplay=1'
     themes: [@theme1, @theme3]
     publishedAt: <dateTimeBetween('-50 days', 'now')>
   p3:

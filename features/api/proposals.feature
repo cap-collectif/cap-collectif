@@ -16,6 +16,7 @@ Feature: Proposal Restful Api
         "theme": {
           "id": @integer@,
           "title": @string@,
+          "enabled": @boolean@,
           "_links": {
             "show": @string@
           }
@@ -120,6 +121,7 @@ Feature: Proposal Restful Api
           "theme": {
             "id": @integer@,
             "title": @string@,
+            "enabled": @boolean@,
             "_links": @...@
           },
           "district": {
@@ -181,6 +183,7 @@ Feature: Proposal Restful Api
           "theme": {
             "id": @integer@,
             "title": @string@,
+            "enabled": @boolean@,
             "_links": @...@
           },
           "district": {

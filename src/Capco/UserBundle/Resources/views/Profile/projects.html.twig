@@ -1,8 +1,8 @@
-{% if projects|length > 0 %}
-    <div class="row">
-        {% for project in projects %}
-            {% include 'CapcoAppBundle:Project:blockProject.html.twig' with {'project': project} only %}
-        {% endfor %}
+{% if projectsCount | length > 0 %}
+    <div
+        id="render-projects-list"
+        data-projects='{{ projects | escape }}'
+    >
     </div>
 {% else %}
     <div class="project__empty-block  text-center">

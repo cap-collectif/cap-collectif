@@ -85,17 +85,17 @@
         </div>
         {% endif %}
 
-        <div class="row">
-            {% if projects|length > 0 %}
-                {% for project in projects %}
-                    {% include '@CapcoApp/Project/blockProject.html.twig' with {'project': project} only %}
-                {% endfor %}
-            {% else %}
-                <p>
-                    {{ 'project.searchform.no_result'|trans({}, 'CapcoAppBundle') }}
-                </p>
-            {% endif %}
-        </div>
+        {% if count | length > 0 %}
+            <div
+                    id="render-projects-list"
+                    data-projects='{{ projects | escape }}'
+            >
+            </div>
+        {% else %}
+            <p>
+                {{ 'project.searchform.no_result'|trans({}, 'CapcoAppBundle') }}
+            </p>
+        {% endif %}
 
         {% set route, params = 'app_project', {} %}
         {% if is_feature_enabled('projects_form') and form is defined %}
@@ -114,16 +114,4 @@
 
     </div>
 
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        $(window).on('load', function() {
-            App.equalheight('.thumbnail--custom');
-        });
-        $(window).on('resize', function() {
-            App.resized('.thumbnail--custom');
-        });
-    </script>
 {% endblock %}

@@ -20,6 +20,7 @@ Feature: Selection steps
           "theme": {
             "id": @integer@,
             "title": @string@,
+            "enabled": @boolean@,
             "_links": @...@
           },
           "district": {
@@ -74,6 +75,7 @@ Feature: Selection steps
           "theme": {
             "id": @integer@,
             "title": @string@,
+            "enabled": @boolean@,
             "_links": @...@
           },
           "district": {
@@ -130,6 +132,7 @@ Feature: Selection steps
           "theme": {
             "id": @integer@,
             "title": @string@,
+            "enabled": @boolean@,
             "_links": @...@
           },
           "district": {
