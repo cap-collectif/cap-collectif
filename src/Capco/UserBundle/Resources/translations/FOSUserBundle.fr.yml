@@ -5,7 +5,7 @@ resetting:
   check_email: Si un compte est associé à l'adresse %email%, vous recevrez un e-mail avec un lien pour réinitialiser votre mot de passe.
 
 form:
-  no_type: Sélectionnez un statut
+  no_type: Sélectionner un statut
 
 registration:
   email:
