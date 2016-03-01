@@ -32,9 +32,9 @@ describe('<ProjectStatsPage />', () => {
     ...IntlData,
   };
 
-  it('should render one block per step', () => {
+  it('should render only one block', () => {
     const wrapper = shallow(<ProjectStatsPage steps={steps} {...props} />);
-    expect(wrapper.find('h3')).to.have.length(3);
+    expect(wrapper.find('div.stats__step-details')).to.have.length(1);
   });
 
   it('should render a paragraph if no steps', () => {

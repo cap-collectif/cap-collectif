@@ -292,7 +292,7 @@ export default {
         display: {
           all: 'Voir tous',
           number: 'Nombres',
-          percentage: 'Poids',
+          percentage: 'Pourcentage',
         },
         list: {
           costs: 'Répartition des coûts par proposition',
