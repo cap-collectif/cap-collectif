@@ -2,8 +2,6 @@
     <div class="container  container--custom">
         {% if null != section.title %}
             <h2 class="h2">{{ section.title }}</h2>
-        {% else %}
-            <h2 class="h2">{{ 'homepage.projects.title' | trans({}, 'CapcoAppBundle') }}</h2>
         {% endif %}
         {% if null != section.teaser %}
             <p class="block">{{ section.teaser }}</p>
