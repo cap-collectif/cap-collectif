@@ -18,6 +18,19 @@ class CommentAdmin extends Admin
         '_sort_by' => 'updatedAt',
     ];
 
+    public function getNewInstance()
+    {
+        $subClass = $this->getRequest()->query->get('subclass');
+        // Workaround for author autocompletion
+        $subClass = $subClass ? $subClass : 'post_comment';
+        $object = $this->getModelManager()->getModelInstance($this->getSubClass($subClass));
+        foreach ($this->getExtensions() as $extension) {
+            $extension->alterNewInstance($this, $object);
+        }
+
+        return $object;
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
