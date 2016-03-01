@@ -34,7 +34,7 @@ const ProjectStatsListItem = React.createClass({
       <ListGroupItem className="stats__list__row">
         <span className="stats__list__bar" style={{ width: item.percentage + '%' }} />
         <div className="stats__list__value">
-          <span className="badge badge-primary pull-right">
+          <span className="badge pull-right">
             {this.getFormattedValue()}
           </span>
           {item.name}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import ProjectStatsListItem from './ProjectStatsListItem';
 import ProjectStatsModal from './ProjectStatsModal';
 import ProjectStatsFilters from './ProjectStatsFilters';
@@ -14,6 +14,7 @@ const ProjectStatsList = React.createClass({
     icon: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
     data: React.PropTypes.object.isRequired,
+    showPercentage: React.PropTypes.bool.isRequired,
     isCurrency: React.PropTypes.bool.isRequired,
     themes: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
@@ -23,17 +24,10 @@ const ProjectStatsList = React.createClass({
 
   getInitialState() {
     return {
-      showPercentage: false,
       data: this.props.data,
       theme: 0,
       district: 0,
     };
-  },
-
-  showPercentage(value) {
-    this.setState({
-      showPercentage: value,
-    });
   },
 
   changeTheme(ev) {
@@ -86,25 +80,6 @@ const ProjectStatsList = React.createClass({
         <ListGroup className="stats__list">
           <ListGroupItem className="stats__list__header">
             <i className={this.props.icon}></i> {this.getIntlMessage(this.props.label)}
-            <span id={'step-stats-display-' + this.props.stepId} className="pull-right excerpt stats__buttons">
-              <Button
-                bsStyle="link"
-                id={'step-stats-display-' + this.props.stepId + '-number'}
-                active={!this.state.showPercentage}
-                onClick={this.showPercentage.bind(this, false)}
-              >
-                {this.getIntlMessage('project.stats.display.number')}
-              </Button>
-              <span>/</span>
-              <Button
-                bsStyle="link"
-                id={'step-stats-display-' + this.props.stepId + '-percentage'}
-                active={this.state.showPercentage}
-                onClick={this.showPercentage.bind(this, true)}
-              >
-                {this.getIntlMessage('project.stats.display.percentage')}
-              </Button>
-            </span>
           </ListGroupItem>
           {
             data.values.length > 0
@@ -113,7 +88,7 @@ const ProjectStatsList = React.createClass({
                 <ProjectStatsListItem
                   key={index}
                   item={row}
-                  showPercentage={this.state.showPercentage}
+                  showPercentage={this.props.showPercentage}
                   isCurrency={this.props.isCurrency}
                 />
               );
@@ -131,7 +106,7 @@ const ProjectStatsList = React.createClass({
                 data={data}
                 label={this.props.label}
                 icon={this.props.icon}
-                showPercentage={this.state.showPercentage}
+                showPercentage={this.props.showPercentage}
                 isCurrency={this.props.isCurrency}
                 theme={this.state.theme}
                 district={this.state.district}

@@ -22,15 +22,10 @@
     left: 0;
     display: block;
     height: 100%;
-    background-color: #EBEBEB;
+    background-color: $lightest-gray;
   }
 }
 
 .stats__filters {
   margin-top: 15px;
-}
-
-.stats__buttons .btn.btn-link:active,
-.stats__buttons .btn.btn-link.active {
-  color: $excerpt;
 }

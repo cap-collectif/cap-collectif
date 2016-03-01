@@ -9,10 +9,8 @@ Feature: Stats
     And I should see user types stats
 
   @javascript
-  Scenario: Anonymous user wants to filter votes stats
+  Scenario: Anonymous user wants to filter stats
     Given I go to a project stats page
-    And I go to the selection step stats
-    Then I should see votes stats
     When I filter votes stats by theme
     Then the votes stats should be filtered by theme
     And I filter votes stats by district

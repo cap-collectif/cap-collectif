@@ -70,17 +70,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * I go to the selection step stats.
-     *
-     * @When I go to the selection step stats
-     */
-    public function iGoToTheSelectionStepStats()
-    {
-        $this->clickLink("Sélection avec vote selon le budget");
-        $this->iWait(1);
-    }
-
-    /**
      * I click the show all districts stats button.
      *
      * @When I click the show all districts stats button
