@@ -187,20 +187,23 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findProjectProposalVotersWithCount(Project $project)
+    public function findProjectProposalVotersWithCount(Project $project, $excludePrivate = false)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
+        $voteWith = $excludePrivate ? '(pv.user = u AND pv.private = 0)' : 'pv.user = u';
+        $rawQuery = '
           select u.id, count(distinct pv) as proposals_votes_count
           from CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:ProposalVote pv WITH pv.user = u
+          LEFT JOIN CapcoAppBundle:ProposalVote pv WITH '.$voteWith.'
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
-          LEFT JOIN p.selectionSteps s
+          LEFT JOIN pv.selectionStep s
           LEFT JOIN s.projectAbstractStep pas
           WHERE pv.user = u AND pv.confirmed = 1 AND p.enabled = 1 AND pas.project = :project
           GROUP BY pv.user
-        ')
-            ->setParameter('project', $project);
+        ';
+        $query = $em->createQuery($rawQuery)
+            ->setParameter('project', $project)
+        ;
 
         return $query->getResult();
     }
@@ -399,10 +402,9 @@ class UserRepository extends EntityRepository
         $query = $em->createQuery('
           select u.id, count(distinct pv) as proposals_votes_count
           from CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:ProposalVote pv WITH pv.user = u
+          LEFT JOIN CapcoAppBundle:ProposalVote pv WITH (pv.user = u AND pv.selectionStep = :step)
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
-          LEFT JOIN p.selectionSteps s
-          WHERE pv.user = u AND pv.confirmed = 1 AND p.enabled = 1 AND s.id = :step
+          WHERE pv.user = u AND pv.confirmed = 1 AND p.enabled = 1
           GROUP BY pv.user
         ')
             ->setParameter('step', $step);

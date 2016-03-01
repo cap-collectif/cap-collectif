@@ -75,7 +75,7 @@ class AbstractVoteRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getByUser($user)
+    public function getPublicVotesByUser($user)
     {
         $qb = $this->getIsConfirmedQueryBuilder()
             ->addSelect('u', 'm')
@@ -85,9 +85,14 @@ class AbstractVoteRepository extends EntityRepository
             ->setParameter('user', $user)
             ->orderBy('v.updatedAt', 'ASC');
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        $votes = $qb->getQuery()->execute();
+        $publicVotes = [];
+        foreach ($votes as $vote) {
+            if (!method_exists($vote, 'isPrivate') || !$vote->isPrivate()) {
+                $publicVotes[] = $vote;
+            }
+        }
+        return $publicVotes;
     }
 
     public function getByObjectUser($objectType, $object, $user)

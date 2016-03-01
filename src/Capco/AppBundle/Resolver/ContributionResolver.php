@@ -19,7 +19,7 @@ class ContributionResolver
     }
 
     // Code may looks ugly but in fact it's highly optimized !
-    public function getProjectContributorsOrdered(Project $project, $pagination = 16, $page = 1)
+    public function getProjectContributorsOrdered(Project $project, $excludePrivate = false, $pagination = 16, $page = 1)
     {
         // Fetch contributors
         $sourcesContributors = $this->repository->findProjectSourceContributorsWithCount($project);
@@ -33,7 +33,7 @@ class ContributionResolver
         $versionsVoters = $this->repository->findProjectVersionVotersWithCount($project);
         $argumentsVoters = $this->repository->findProjectArgumentVotersWithCount($project);
         $sourcesVoters = $this->repository->findProjectSourceVotersWithCount($project);
-        $proposalsVoters = $this->repository->findProjectProposalVotersWithCount($project);
+        $proposalsVoters = $this->repository->findProjectProposalVotersWithCount($project, $excludePrivate);
 
         $contributors = [];
 

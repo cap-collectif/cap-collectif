@@ -80,7 +80,7 @@ class StepController extends Controller
         $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $projectSlug, null);
         $nbPosts = $em->getRepository('CapcoAppBundle:Post')->countSearchResults(null, $projectSlug);
 
-        $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered($project, 10, 1);
+        $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered($project, true, 10, 1);
 
         return [
             'project' => $project,

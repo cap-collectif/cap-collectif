@@ -36,7 +36,7 @@ class ProfileController extends BaseController
         $proposals = $doctrine->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
-        $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
+        $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getPublicVotesByUser($user);
 
         return [
             'user' => $user,
@@ -67,7 +67,7 @@ class ProfileController extends BaseController
         $proposals = $doctrine->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
-        $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
+        $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getPublicVotesByUser($user);
 
         return [
             'user' => $user,
@@ -214,7 +214,7 @@ class ProfileController extends BaseController
      */
     public function showVotesAction(User $user)
     {
-        $votes = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractVote')->getByUser($user);
+        $votes = $this->getDoctrine()->getRepository('CapcoAppBundle:AbstractVote')->getPublicVotesByUser($user);
 
         return [
             'user' => $user,
