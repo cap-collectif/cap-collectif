@@ -860,7 +860,7 @@ user:
       password: Mot de passe
       submit: Enregistrer les modifications
       gender: Genre
-      no_user_type: Sélectionnez une valeur
+      no_user_type: Sélectionner un statut
       user_type: Type de profil
     show:
       all: Contributions
