@@ -198,7 +198,6 @@ export default {
       title: 'Titre',
       versions: '{num, plural, =0{0 modification} one{# modification} other{# modifications}}',
       votes: '{num, plural, =0{0 vote} one{# vote} other{# votes}}',
-      votes_evolution: 'évolution des votes',
     },
     opinion: {
       add_new_source: 'Proposer une source',
@@ -485,7 +484,14 @@ export default {
       },
       cancel: 'Annuler mon vote',
       count_no_nb: '{count, plural, =0{vote} one{vote} other{votes}}',
-      date: 'Date',
+      evolution: {
+        date: 'Date',
+        mitige: 'Mitigé',
+        nok: 'Pas d\'accord',
+        ok: 'D\'accord',
+        tab: 'Évolution des votes',
+        vaxis: 'Votes',
+      },
       form: 'Formulaire de vote',
       mitige: 'Mitigé',
       nok: 'Pas d\'accord',

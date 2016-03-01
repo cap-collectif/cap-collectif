@@ -60,8 +60,8 @@ const OpinionTabs = React.createClass({
     if (hash.indexOf('source') !== -1) {
       key = 'sources';
     }
-    if (hash.indexOf('evolution') !== -1) {
-      key = 'evolution';
+    if (hash.indexOf('votesevolution') !== -1) {
+      key = 'votesevolution';
     }
     return key;
   },
@@ -178,10 +178,10 @@ const OpinionTabs = React.createClass({
           }
           { this.hasStatistics()
             ? <Tab
-                id="opinion__evolution"
+                id="opinion__votesevolution"
                 className="opinion-tabs"
-                eventKey={'evolution'}
-                title={<FormattedMessage message={this.getIntlMessage('global.votes_evolution')} />}
+                eventKey={'votesevolution'}
+                title={<FormattedMessage message={this.getIntlMessage('vote.evolution.tab')} />}
             >
               <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />
             </Tab>
