@@ -147,4 +147,14 @@ Feature: Opinions
     And I click the share link button
     Then I should see the share link modal
 
-
+  @javascript
+  Scenario: Anonymous wants to see votes evolution
+    Given feature "votes_evolution" is enabled
+    And I visited "opinion page" with:
+      | projectSlug      | projet-de-loi-renseignement      |
+      | stepSlug         | elaboration-de-la-loi            |
+      | opinionTypeSlug  | articles                         |
+      | opinionSlug      | article-1                        |
+    And I wait 1 seconds
+    When I go on the votes evolution tab
+    Then I should see 1 ".opinion__history_chart" element

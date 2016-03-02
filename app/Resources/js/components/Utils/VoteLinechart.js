@@ -33,10 +33,10 @@ const VoteLinechart = React.createClass({
     const AreaChart = google.visualization.AreaChart;
     const DataTable = google.visualization.arrayToDataTable;
     const lines = [[
-      { type: 'datetime', label: this.getIntlMessage('vote.date') },
-      { type: 'number', label: this.getIntlMessage('vote.nok') },
-      { type: 'number', label: this.getIntlMessage('vote.mitige') },
-      { type: 'number', label: this.getIntlMessage('vote.ok') },
+      { type: 'datetime', label: this.getIntlMessage('vote.evolution.date') },
+      { type: 'number', label: this.getIntlMessage('vote.evolution.nok') },
+      { type: 'number', label: this.getIntlMessage('vote.evolution.mitige') },
+      { type: 'number', label: this.getIntlMessage('vote.evolution.ok') },
     ]];
 
     $.each(this.props.history, (i, row) => {
@@ -50,7 +50,7 @@ const VoteLinechart = React.createClass({
 
     const options = {
       hAxis: { titleTextStyle: { color: '#333' } },
-      vAxis: { title: this.getIntlMessage('vote.votes'), minValue: 0 },
+      vAxis: { title: this.getIntlMessage('vote.evolution.vaxis'), minValue: 0 },
       isStacked: true,
       colors: ['#d9534f', '#f0ad4e', '#5cb85c'],
       height: this.props.height,
@@ -64,7 +64,9 @@ const VoteLinechart = React.createClass({
   },
 
   render() {
-    return <div className="opinion__history_chart" ref="linechart" />;
+    return (
+      <div className="opinion__history_chart" ref="linechart"></div>
+    );
   },
 
 });

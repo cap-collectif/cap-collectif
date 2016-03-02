@@ -47,56 +47,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @When I vote for the first source
-     */
-    public function iVoteForTheFirstSource()
-    {
-        $page = $this->navigationContext->getPage('opinion page');
-        $this->getSession()->wait(3000, "$('".$page->getSelector('Vote first source')."').length > 0");
-        $page->voteForFirstSource();
-    }
-
-    /**
-     * @When I go on the sources tab
-     */
-    public function iGoOnTheSourcesTab()
-    {
-        $page = $this->navigationContext->getPage('opinion page');
-        $this->getSession()->wait(3000, "$('".$page->getSelector('sources tab')."').length > 0");
-        $page->clickSourcesTab();
-    }
-
-    /**
-     * @When I go on the arguments tab
-     */
-    public function iGoOnTheArgumentsTab()
-    {
-        $page = $this->navigationContext->getPage('opinion page');
-        $this->getSession()->wait(3000, "$('".$page->getSelector('arguments tab')."').length > 0");
-        $page->clickArgumentsTab();
-    }
-
-    /**
-     * @When I go on the connections tab
-     */
-    public function iGoOnTheConnectionsTab()
-    {
-        $page = $this->navigationContext->getPage('opinion page');
-        $this->getSession()->wait(3000, "$('".$page->getSelector('connections tab')."').length > 0");
-        $page->clickConnectionsTab();
-    }
-
-    /**
-     * @When I want to add a source
-     */
-    public function clickAddSourceTab()
-    {
-        $page = $this->navigationContext->getPage('opinion page');
-        $this->getSession()->wait(2000, "$('".$page->getSelector('sources add')."').length > 0");
-        $page->clickAddSource();
-    }
-
-    /**
      * @Given :email is registered to event :slug
      */
     public function isRegisteredToEvent($email, $slug)
