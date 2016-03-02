@@ -13,7 +13,7 @@ fos_elastica:
             filter:
               french_elision:
                 type: elision
-                articles: [ l, m, t, qu, n, s, j, d, c, jusqu, quoiqu, lorsqu, puisqu]
+                articles: [l, m, t, qu, n, s, j, d, c, jusqu, quoiqu, lorsqu, puisqu]
               french_stop:
                 type: stop
                 stopwords: _french_
@@ -39,7 +39,6 @@ fos_elastica:
               index: not_analyzed
             username:
               analyzer: %language_analyzer%
-              index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
             biography:

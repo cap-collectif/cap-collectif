@@ -17,4 +17,4 @@ def mysqlconsole():
 @task(environments=['local'])
 def importbdd():
     "Import dump.sql"
-    local('eval "$(docker-machine env capco)" && cat dump.sql | docker exec -i capcollectifsf2_application_1 /bin/bash -c "mysql -u root symfony"')
+    env.service_command('cat dump.sql | mysql -u root symfony', 'application')

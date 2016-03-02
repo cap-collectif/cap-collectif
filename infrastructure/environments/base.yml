@@ -28,11 +28,6 @@ applicationdata:
 database:
     image: capco/fixtures:latest
 
-elasticsearch:
-    image: elasticsearch:1.7.3
-    volumes:
-        - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
-
 redis:
     image: redis:3
 
@@ -58,4 +53,3 @@ chrome:
    links:
      - seleniumhub:hub
      - application:capco.test
-

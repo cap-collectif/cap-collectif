@@ -67,6 +67,7 @@ Icon
 # capco
 infrastructure/services/remote/VERSION
 data/*
+dump.sql
 
 # cs-fixer
 php-cs-fixer

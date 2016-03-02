@@ -26,7 +26,6 @@ class OpinionPage extends Page
         'sources add' => '#source-form__add',
         'arguments tab' => '#opinion__arguments___tab',
         'connections tab' => '#opinion__links___tab',
-        'votes evolution tab' => '#opinion__votesevolution___tab',
         'show all votes button' => '#opinion-votes-show-all',
         'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',
         'share button' => '#opinion-share-button',
@@ -45,11 +44,6 @@ class OpinionPage extends Page
     public function clickConnectionsTab()
     {
         $this->getElement('connections tab')->click();
-    }
-
-    public function clickVotesEvolutionTab()
-    {
-        $this->getElement('votes evolution tab')->click();
     }
 
     public function clickAddSource()

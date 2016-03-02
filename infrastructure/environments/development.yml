@@ -19,6 +19,14 @@ blackfire:
     environment:
         - BLACKFIRE_SERVER_ID=eeb5e6cc-acbd-4966-9c67-8d836b26b066
         - BLACKFIRE_SERVER_TOKEN=***REMOVED***
+
+elasticsearch:
+    image: elasticsearch:1.7.3
+    volumes:
+        - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
+    ports:
+        - "9200:9200"
+
 database:
     ports:
         - "3306:3306"

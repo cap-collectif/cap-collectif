@@ -5,3 +5,8 @@ application:
         - ../../:/var/www
         - /var/run/docker.sock:/run/docker.sock:ro
         - /usr/bin/docker:/usr/bin/docker
+
+elasticsearch:
+    image: elasticsearch:1.7.3
+    volumes:
+        - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml

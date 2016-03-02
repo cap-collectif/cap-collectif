@@ -24,7 +24,6 @@ Feature: Feature Flags Api
       "project_trash": @boolean@,
       "idea_trash": @boolean@,
       "reporting": @boolean@,
-      "votes_evolution": @boolean@,
       "zipcode_at_register": @boolean@
     }
     """
