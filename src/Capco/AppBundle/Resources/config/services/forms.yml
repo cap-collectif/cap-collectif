@@ -31,3 +31,9 @@ services:
   capco.form.transformer.entity_to_id:
     class: Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer
     arguments: [@doctrine.orm.entity_manager]
+
+  capco.form.argument:
+    class: Capco\AppBundle\Form\ArgumentType
+    arguments: []
+    tags:
+      - { name: form.type, alias: argument }

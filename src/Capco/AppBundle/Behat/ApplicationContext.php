@@ -27,6 +27,7 @@ class ApplicationContext extends UserContext
 {
     protected $headers;
     protected $dbContainer;
+    protected $currentPage;
 
     use CommentStepsTrait;
     use IdeaStepsTrait;
@@ -363,7 +364,17 @@ class ApplicationContext extends UserContext
 
     private function visitPageWithParams($page, $params)
     {
+        $this->currentPage = $page;
         $this->navigationContext->getPage($page)->open($params);
         $this->iWait(2);
+    }
+
+    private function getCurrentPage()
+    {
+        if ($this->currentPage) {
+            return $this->navigationContext->getPage($this->currentPage);
+        }
+
+        return;
     }
 }

@@ -40,7 +40,7 @@ const AlertBox = React.createClass({
 
     return (
       <AlertAutoDismissable onDismiss={this.handleDismiss} bsStyle={alert.bsStyle}>
-        {this.getIntlMessage(alert.content)}
+        <span>{this.getIntlMessage(alert.content)}</span>
       </AlertAutoDismissable>
     );
   },

@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Argument:
     Opinion: @opinion2
     type: 0
     Author: @user5
-    body: <text(300)>
+    body: Coucou, je suis un bel argument !
     isEnabled: true
     isTrashed: false
   argument2:
@@ -49,17 +49,18 @@ Capco\AppBundle\Entity\Argument:
   argument201:
     Opinion: @opinion51
     type: 0
-    Author: @user<numberBetween(1, 5)>
+    Author: @user1
     body: <text(300)>
     isEnabled: true
     isTrashed: false
   argument202:
     Opinion: @opinion51
     type: 0
-    Author: @user<numberBetween(1, 5)>
+    Author: @user2
     body: <text(300)>
     isEnabled: true
     isTrashed: false
+
   argument203:
     Opinion: @opinion52
     type: 0
@@ -73,7 +74,7 @@ Capco\AppBundle\Entity\Argument:
   argument204:
     opinionVersion: @version1
     type: 0
-    Author: @user<numberBetween(1, 5)>
+    Author: @user5
     body: <text(300)>
     isEnabled: true
     isTrashed: false
@@ -90,6 +91,14 @@ Capco\AppBundle\Entity\Argument:
     Opinion: @opinion57
     type: 1
     Author: @user<numberBetween(1, 5)>
+    body: <text(300)>
+    isEnabled: true
+    isTrashed: false
+
+  argument211:
+    opinionVersion: @version11
+    type: 1
+    Author: @user1
     body: <text(300)>
     isEnabled: true
     isTrashed: false

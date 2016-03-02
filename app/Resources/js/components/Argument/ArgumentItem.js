@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import moment from 'moment';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
-import OpinionArgumentButtons from './OpinionArgumentButtons';
+import ArgumentButtons from './ArgumentButtons';
 import AutoLinkText from '../Utils/AutoLinkText';
 
-const OpinionArgumentItem = React.createClass({
+const ArgumentItem = React.createClass({
   propTypes: {
     argument: React.PropTypes.object,
   },
@@ -49,7 +49,7 @@ const OpinionArgumentItem = React.createClass({
           <p className="opinion__text">
             <AutoLinkText text={argument.body} />
           </p>
-          <OpinionArgumentButtons
+          <ArgumentButtons
             argument={argument}
           />
         </div>
@@ -59,4 +59,4 @@ const OpinionArgumentItem = React.createClass({
 
 });
 
-export default OpinionArgumentItem;
+export default ArgumentItem;

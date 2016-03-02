@@ -15,21 +15,49 @@ class OpinionPage extends Page
     protected $path = '/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}';
 
     public $elements = [
-        // Arguments
-        'Argument yes field' => '#argument-form--yes textarea',
-        'Argument yes button' => '#argument-form--yes button',
-        'Argument no field' => '#argument-form--no textarea',
-        'Argument no button' => '#argument-form--no button',
-        'first source vote count' => '#sources-list li:first-child .opinion__votes-nb',
-        'Vote first source' => '#sources-list li:first-child .source__btn--vote',
+        // Tabs
         'sources tab' => '#opinion__sources___tab',
-        'sources add' => '#source-form__add',
         'arguments tab' => '#opinion__arguments___tab',
         'connections tab' => '#opinion__links___tab',
         'votes evolution tab' => '#opinion__votesevolution___tab',
+        // Opinion
         'show all votes button' => '#opinion-votes-show-all',
         'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',
         'share button' => '#opinion-share-button',
+        // Arguments
+        'argument yes field' => '#argument-form--yes textarea',
+        'argument yes button' => '#argument-form--yes button',
+        'argument no field' => '#argument-form--no textarea',
+        'argument no button' => '#argument-form--no button',
+        'arguments yes box' => '#opinion__arguments--yes .opinion__list',
+        'arguments no box' => '#opinion__arguments--no',
+        'argument edit button' => '#arg-1 .argument__btn--edit',
+        'argument edit body field' => '#argument-form #argument-body',
+        'argument edit confirm checkbox' => '#argument-form #argument-confirm',
+        'argument edit submit button' => '#confirm-argument-update',
+        'argument delete button' => '#arg-1 .argument__btn--delete',
+        'argument confirm delete button' => '#confirm-argument-delete',
+        'argument votes counter' => '#arg-1 .opinion__votes-nb',
+        'argument vote button' => '#arg-1 .argument__btn--vote',
+        'argument vote button in closed step' => '#arg-207 .argument__btn--vote',
+        'argument report button' => '#arg-1 .argument__btn--report',
+        // Sources
+        'sources list' => '#sources-list',
+        'add source button' => '#source-form__add',
+        'source vote button' => '#sources-list li:first-child .source__btn--vote',
+        'first source vote count' => '#sources-list li:first-child .opinion__votes-nb',
+        'source create title field' => '#source-form #sourceTitle',
+        'source create body field' => '#source-form #sourceBody .ql-editor',
+        'source create link field' => '#source-form #sourceLink',
+        'source create category select' => '#source-form #sourceCategory',
+        'source create submit button' => '#confirm-opinion-source-create',
+        'source edit button' => '#source-12 .source__btn--edit',
+        'source edit body field' => '#source-form #sourceBody .ql-editor',
+        'source edit confirm checkbox' => '#source-form #sourceEditCheck',
+        'source edit submit button' => '#confirm-opinion-source-update',
+        'source delete button' => '#source-12 .source__btn--delete',
+        'source confirm delete button' => '#confirm-opinion-source-delete',
+        'source report button' => '#source-12 .source__btn--report',
     ];
 
     public function clickSourcesTab()
@@ -54,30 +82,12 @@ class OpinionPage extends Page
 
     public function clickAddSource()
     {
-        $this->getElement('sources add')->click();
+        $this->getElement('add source button')->click();
     }
 
     public function clickShareButton()
     {
         $this->getElement('share button')->click();
-    }
-
-    public function submitArgument($type, $text)
-    {
-        $field = $this->getElement('Argument '.$type.' field');
-        $button = $this->getElement('Argument '.$type.' button');
-        $field->setValue($text);
-        $button->press();
-    }
-
-    public function getFirstSourceVoteCounter()
-    {
-        return $this->getElement('first source vote count')->getText();
-    }
-
-    public function voteForFirstSource()
-    {
-        $this->getElement('Vote first source')->click();
     }
 
     public function clickShowAllVotesButton()
@@ -88,5 +98,174 @@ class OpinionPage extends Page
     public function getVotesInModalSelector()
     {
         return $this->getSelector('votes in modal');
+    }
+
+    // ************************************* Arguments *********************************************************
+
+    public function getArgumentsYesBoxSelector()
+    {
+        return $this->getSelector('arguments yes box');
+    }
+
+    public function getArgumentsNoBoxSelector()
+    {
+        return $this->getSelector('arguments no box');
+    }
+
+    public function getArgumentVotesCounter()
+    {
+        return $this->getElement('argument votes counter');
+    }
+
+    public function getArgumentVotesCount()
+    {
+        return intval($this->getArgumentVotesCounter()->getText());
+    }
+
+    public function clickArgumentEditButton()
+    {
+        $this->getElement('argument edit button')->click();
+    }
+
+    public function fillArgumentBodyField($str = 'Je modifie mon argument !')
+    {
+        $this->getElement('argument edit body field')->setValue($str);
+    }
+
+    public function checkArgumentConfirmCheckbox()
+    {
+        $this->getElement('argument edit confirm checkbox')->check();
+    }
+
+    public function submitArgumentEditForm()
+    {
+        $this->getElement('argument edit submit button')->click();
+    }
+
+    public function clickArgumentDeleteButton()
+    {
+        $this->getElement('argument delete button')->click();
+    }
+
+    public function clickArgumentConfirmDeletionButton()
+    {
+        $this->getElement('argument confirm delete button')->click();
+    }
+
+    public function getArgumentVoteButton($inClosedStep = false)
+    {
+        if ($inClosedStep) {
+            return $this->getElement('argument vote button in closed step');
+        }
+
+        return $this->getElement('argument vote button');
+    }
+
+    public function clickArgumentVoteButton()
+    {
+        return $this->getArgumentVoteButton()->click();
+    }
+
+    public function getArgumentVoteButtonLabel()
+    {
+        return $this->getArgumentVoteButton()->getText();
+    }
+
+    public function submitArgument($type, $text)
+    {
+        $field = $this->getElement('argument '.$type.' field');
+        $button = $this->getElement('argument '.$type.' button');
+        $field->setValue($text);
+        $button->press();
+    }
+
+    public function clickArgumentReportButton()
+    {
+        $this->getElement('argument report button')->click();
+    }
+
+    // ***************************** Sources *****************************************
+
+    public function getSourcesListSelector()
+    {
+        return $this->getSelector('sources list');
+    }
+
+    public function getFirstSourceVotesCounter()
+    {
+        return $this->getElement('first source vote count');
+    }
+
+    public function getSourceVotesCount()
+    {
+        return intval($this->getFirstSourceVotesCounter()->getText());
+    }
+
+    public function clickSourceVoteButton()
+    {
+        $this->getElement('source vote button')->click();
+    }
+
+    public function getSourceVoteButtonLabel()
+    {
+        return $this->getElement('source vote button')->getText();
+    }
+
+    public function fillSourceForm()
+    {
+        $this->getElement('source create title field')->setValue('Titre de la source');
+        $this->getElement('source create body field')->setValue('Contenu de la source');
+        $this->getElement('source create link field')->setValue('http://www.google.fr');
+        $this->selectSourceCategory();
+    }
+
+    public function selectSourceCategory()
+    {
+        $this->getElement('source create category select')->selectOption('Politique');
+    }
+
+    public function submitSourceForm()
+    {
+        $this->getElement('source create submit button')->click();
+    }
+
+    public function getAddSourceButton()
+    {
+        return $this->getElement('add source button');
+    }
+
+    public function clickSourceEditButton()
+    {
+        $this->getElement('source edit button')->click();
+    }
+
+    public function fillSourceBodyField($str = 'Je modifie ma source !')
+    {
+        $this->getElement('source edit body field')->setValue($str);
+    }
+
+    public function checkSourceConfirmCheckbox()
+    {
+        $this->getElement('source edit confirm checkbox')->check();
+    }
+
+    public function submitSourceEditForm()
+    {
+        $this->getElement('source edit submit button')->click();
+    }
+
+    public function clickSourceDeleteButton()
+    {
+        $this->getElement('source delete button')->click();
+    }
+
+    public function clickSourceConfirmDeletionButton()
+    {
+        $this->getElement('source confirm delete button')->click();
+    }
+
+    public function clickSourceReportButton()
+    {
+        $this->getElement('source report button')->click();
     }
 }

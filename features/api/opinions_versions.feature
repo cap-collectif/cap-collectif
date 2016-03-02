@@ -44,7 +44,7 @@ Feature: Opinions Versions
 
           "sources_count": @integer@,
 
-          "arguments_count": @integer@,
+          "argumentsCount": @integer@,
           "arguments_yes_count": @integer@,
           "arguments_no_count": @integer@,
 
@@ -96,7 +96,7 @@ Feature: Opinions Versions
         "arguments": @...@,
         "arguments_yes_count": @integer@,
         "arguments_no_count": @integer@,
-        "arguments_count": @integer@,
+        "argumentsCount": @integer@,
 
         "sources": @...@,
         "sources_count": @integer@,
@@ -319,32 +319,3 @@ Feature: Opinions Versions
     Then the JSON response status code should be 204
     When I send a DELETE request to "/api/opinions/57/versions/1/votes"
     Then the JSON response status code should be 204
-
-## Argument
-
-  ### As anonymous
-
-  @database
-  Scenario: Anonymous API client wants to add an argument to an opinion version
-    When I send a POST request to "/api/opinions/57/versions/1/arguments" with json:
-    """
-    {
-      "type": 1,
-      "body": "Tu veux voir mon gros argument ?"
-    }
-    """
-    Then the JSON response status code should be 401
-
-  ### As a Logged in user
-  @database
-  Scenario: logged in API client wants to add an argument to an opinion version
-    Given I am logged in to api as user
-    When I send a POST request to "/api/opinions/57/versions/1/arguments" with json:
-    """
-    {
-      "type": 1,
-      "body": "Tu veux voir mon gros argument ?"
-    }
-    """
-    Then the JSON response status code should be 201
-

@@ -4,7 +4,7 @@ import { IntlMixin } from 'react-intl';
 import LoginStore from '../../../stores/LoginStore';
 import LoginOverlay from '../../Utils/LoginOverlay';
 
-const OpinionSourceVoteButton = React.createClass({
+const ArgumentVoteButton = React.createClass({
   propTypes: {
     disabled: PropTypes.bool.isRequired,
     hasVoted: PropTypes.bool.isRequired,
@@ -19,7 +19,7 @@ const OpinionSourceVoteButton = React.createClass({
         <Button
           disabled={disabled}
           bsStyle={hasVoted ? 'danger' : 'success'}
-          className={'source__btn--vote' + (hasVoted ? '' : ' btn--outline')}
+          className={'argument__btn--vote' + (hasVoted ? '' : ' btn--outline')}
           bsSize="xsmall"
           onClick={LoginStore.isLoggedIn() ? onClick : null}
         >
@@ -38,4 +38,4 @@ const OpinionSourceVoteButton = React.createClass({
 
 });
 
-export default OpinionSourceVoteButton;
+export default ArgumentVoteButton;

@@ -87,6 +87,7 @@ class Argument implements VotableInterface
      * @var int
      *
      * @ORM\Column(name="type", type="integer")
+     * @Assert\Choice(choices={0, 1})
      */
     private $type = 1;
 

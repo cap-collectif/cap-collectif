@@ -46,7 +46,7 @@ Feature: Opinions
           }
         },
 
-        "arguments_count": @integer@,
+        "argumentsCount": @integer@,
         "arguments_yes_count": @integer@,
         "arguments_no_count": @integer@,
         "arguments": @array@,
@@ -180,7 +180,7 @@ Feature: Opinions
 
           "versions_count": @integer@,
           "sources_count": @integer@,
-          "arguments_count": @integer@,
+          "argumentsCount": @integer@,
           "connections_count": @integer@,
           "votes_total": @integer@,
           "votes_nok": @integer@,

@@ -71,29 +71,15 @@ class ArgumentSerializationListener extends AbstractSerializationListener
         $event->getVisitor()->addData(
             '_links', [
                 'show' => $showUrl,
-                'edit' => $this->router->generate('app_project_edit_argument', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'argumentId' => $argument->getId(),
-                ], true),
-                'report' => $this->router->generate('app_report_argument', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'argumentId' => $argument->getId(),
-                ], true),
             ]
         );
 
         $event->getVisitor()->addData(
-            'has_user_voted', $user === 'anon.' ? false : $argument->userHasVote($user)
+            'hasUserVoted', $user === 'anon.' ? false : $argument->userHasVote($user)
         );
 
         $event->getVisitor()->addData(
-            'has_user_reported', $user === 'anon.' ? false : $argument->userHasReport($user)
+            'hasUserReported', $user === 'anon.' ? false : $argument->userHasReport($user)
         );
     }
 }

@@ -33,7 +33,7 @@ Capco\AppBundle\Entity\Opinion:
         argumentsCount:
             expose: true
             type: integer
-            serialized_name: arguments_count
+            serialized_name: argumentsCount
             groups: [Opinions, OpinionLinkPreviews]
         sourcesCount:
             expose: true

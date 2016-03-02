@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionVersionVote;
-use Capco\AppBundle\Entity\Argument;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
@@ -518,99 +517,6 @@ class OpinionsController extends FOSRestController
             'sources' => $sources,
             'count' => count($paginator),
         ];
-    }
-
-    /**
-     * Post an argument for an opinion.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Post an argument for an opinion.",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    404 = "Returned when opinion not found",
-     *  }
-     * )
-     *
-     * @Security("has_role('ROLE_USER')")
-     * @Post("/opinions/{opinionId}/arguments")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
-     * @ParamConverter("argument", converter="fos_rest.request_body")
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postOpinionArgumentAction(Opinion $opinion, Argument $argument, ConstraintViolationListInterface $validationErrors)
-    {
-        // Fix fos_rest.request_body constructor call missing
-        $argument->__construct();
-
-        if (!$opinion->canContribute() || $opinion->getOpinionType()->getCommentSystem() === 0) {
-            throw new BadRequestHttpException("Can't add an argument to an uncontributable opinion.");
-        }
-
-        if ($validationErrors->count() > 0) {
-            throw new BadRequestHttpException($validationErrors->__toString());
-        }
-
-        $user = $this->getUser();
-
-        $argument
-            ->setOpinion($opinion)
-            ->setAuthor($user)
-            ->setUpdatedAt(new \Datetime())
-        ;
-
-        $opinion->increaseArgumentsCount();
-        $this->getDoctrine()->getManager()->persist($argument);
-        $this->getDoctrine()->getManager()->flush();
-    }
-
-    /**
-     * Post an argument for an opinion version.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Post an argument for an opinion version.",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    404 = "Returned when opinion or opinion version not found",
-     *  }
-     * )
-     *
-     * @Security("has_role('ROLE_USER')")
-     * @Post("/opinions/{opinionId}/versions/{versionId}/arguments")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
-     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
-     * @ParamConverter("argument", converter="fos_rest.request_body")
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postOpinionVersionArgumentAction(Opinion $opinion, OpinionVersion $version, Argument $argument, ConstraintViolationListInterface $validationErrors)
-    {
-        // Fix fos_rest.request_body constructor call missing
-        $argument->__construct();
-
-        if (!$opinion->canContribute()) {
-            throw new BadRequestHttpException("Can't add a vote to an uncontributable opinion.");
-        }
-
-        if (!$opinion->getOpinionType()->isVersionable()) {
-            throw new BadRequestHttpException("Can't add a version to an unversionable opinion.");
-        }
-
-        if ($validationErrors->count() > 0) {
-            throw new BadRequestHttpException($validationErrors->__toString());
-        }
-
-        $user = $this->getUser();
-
-        $argument
-            ->setOpinionVersion($version)
-            ->setAuthor($user)
-            ->setUpdatedAt(new \Datetime())
-        ;
-
-        $version->increaseArgumentsCount();
-        $this->getDoctrine()->getManager()->persist($argument);
-        $this->getDoctrine()->getManager()->flush();
     }
 
     /**

@@ -31,10 +31,11 @@ const FlashMessages = React.createClass({
     return message;
   },
 
-  renderMessage(message, type) {
+  renderMessage(index, message, type) {
     if (!this.props.form) {
       return (
         <Alert
+          key={index}
           bsStyle={type}
           style={this.props.style}
           onDismiss={this.props.onDismissMessage ? this.props.onDismissMessage.bind(null, message, type) : null}
@@ -44,7 +45,7 @@ const FlashMessages = React.createClass({
       );
     }
     return (
-      <span className="error-block" style={this.props.style}>
+      <span key={index} className="error-block" style={this.props.style}>
         {this.renderText(message)}
       </span>
     );
@@ -55,13 +56,13 @@ const FlashMessages = React.createClass({
       return (
         <div className="flashmessages">
           {
-            this.props.errors.map((message) => {
-              return this.renderMessage(message, 'warning');
+            this.props.errors.map((message, index) => {
+              return this.renderMessage(index, message, 'warning');
             })
           }
           {
-            this.props.success.map((message) => {
-              return this.renderMessage(message, 'success');
+            this.props.success.map((message, index) => {
+              return this.renderMessage(index, message, 'success');
             })
           }
         </div>

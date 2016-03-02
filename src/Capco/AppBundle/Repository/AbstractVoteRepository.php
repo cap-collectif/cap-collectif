@@ -92,6 +92,7 @@ class AbstractVoteRepository extends EntityRepository
                 $publicVotes[] = $vote;
             }
         }
+
         return $publicVotes;
     }
 

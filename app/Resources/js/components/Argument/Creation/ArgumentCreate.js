@@ -3,16 +3,15 @@ import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import autosize from 'autosize';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import LoginStore from '../../../stores/LoginStore';
+import LoginOverlay from '../../Utils/LoginOverlay';
+import ValidatorMixin from '../../../utils/ValidatorMixin';
+import FlashMessages from '../../Utils/FlashMessages';
+import ArgumentActions from '../../../actions/ArgumentActions';
+import Input from '../../Form/Input';
 
-import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
-import LoginStore from '../../stores/LoginStore';
-import OpinionActions from '../../actions/OpinionActions';
-import LoginOverlay from '../Utils/LoginOverlay';
-import ValidatorMixin from '../../utils/ValidatorMixin';
-import FlashMessages from '../Utils/FlashMessages';
-import Input from '../Form/Input';
-
-const OpinionArgumentForm = React.createClass({
+const ArgumentCreate = React.createClass({
   propTypes: {
     type: React.PropTypes.string.isRequired,
     opinion: React.PropTypes.object.isRequired,
@@ -23,6 +22,7 @@ const OpinionArgumentForm = React.createClass({
     return {
       body: '',
       isSubmitting: false,
+      type: this.getNumericType(),
     };
   },
 
@@ -40,6 +40,10 @@ const OpinionArgumentForm = React.createClass({
     autosize(ReactDOM.findDOMNode(this.refs.body).querySelector('textarea'));
   },
 
+  getNumericType() {
+    return this.props.type === 'no' ? 0 : 1;
+  },
+
   create() {
     this.setState({ submitted: true }, () => {
       if (!this.isValid()) {
@@ -53,11 +57,12 @@ const OpinionArgumentForm = React.createClass({
         type: this.props.type === 'yes' || this.props.type === 'simple' ? 1 : 0,
       };
 
-      OpinionActions
-        .addArgument(this.props.opinion, data)
+      ArgumentActions
+        .add(this.props.opinion, data)
         .then(() => {
           this.setState(this.getInitialState());
           autosize.destroy(ReactDOM.findDOMNode(this.refs.body));
+          ArgumentActions.load(this.props.opinion, this.state.type);
           return true;
         })
         .catch(() => {
@@ -119,4 +124,4 @@ const OpinionArgumentForm = React.createClass({
 
 });
 
-export default OpinionArgumentForm;
+export default ArgumentCreate;

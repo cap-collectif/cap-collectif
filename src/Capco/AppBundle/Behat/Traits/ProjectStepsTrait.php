@@ -76,7 +76,7 @@ trait ProjectStepsTrait
      */
     public function iGoToTheSelectionStepStats()
     {
-        $this->clickLink("Sélection avec vote selon le budget");
+        $this->clickLink('Sélection avec vote selon le budget');
         $this->iWait(1);
     }
 

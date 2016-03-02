@@ -5,31 +5,55 @@ export default {
     alert: {
       danger: {
         add: {
-          source: 'Désolé un problème est survenu lors de l\'ajout de la source.',
+          argument: 'Toutes nos excuses, un problème est survenu lors de la création de l\'argument. Réessayez plus tard.',
+          source: 'Toutes nos excuses, un problème est survenu lors de l\'ajout de la source. Réessayez plus tard.',
+          vote: 'Toutes nos excuses, un problème est survenu lors de l\'ajout votre vote. Réessayez plus tard.',
+        },
+        delete: {
+          vote: 'Toutes nos excuses, un problème est survenu lors de la suppression votre vote. Réessayez plus tard.',
         },
         update: {
-          source: 'Désolé un problème est survenu lors de l\'édition de votre source.',
+          argument: 'Toutes nos excuses, un problème est survenu lors de la mise à jour de votre argument. Réessayez plus tard.',
+          source: 'Toutes nos excuses, un problème est survenu lors de l\'édition de votre source. Réessayez plus tard.',
         },
       },
       success: {
         add: {
+          argument: 'Merci ! Votre argument a bien été enregistré.',
           source: 'Merci ! La source a bien été ajoutée.',
+          vote: 'Merci ! Votre vote a bien été pris en compte.',
         },
         delete: {
-          source: 'Merci ! La source a bien été supprimée.',
+          argument: 'Votre argument a bien été supprimé.',
+          source: 'La source a bien été supprimée.',
+          vote: 'Votre vote a bien été supprimé.',
         },
         report: {
+          argument: 'Merci ! L\'argument a bien été signalé.',
           source: 'Merci ! La source a bien été signalée.',
         },
         update: {
+          argument: 'Merci ! Votre argument a bien été mis à jour.',
           source: 'Merci ! Votre source a bien été modifiée.',
         },
       },
     },
     argument: {
       constraints: {
+        confirm: 'Vous devez confirmer la perte de vos votes pour continuer.',
         max: 'Les avis sont limités à 2000 caractères. Soyez plus concis ou publiez une nouvelle proposition.',
         min: 'Le contenu doit faire au moins 3 caractères.',
+      },
+      delete: {
+        modal: {
+          bold: 'Êtes-vous sûr de vouloir supprimer cet argument ?',
+          infos: 'Cette suppression marquera la fin de ce contenu à jamais.',
+          title: 'Supprimer l\'argument',
+        },
+      },
+      edit: {
+        body: 'Contenu',
+        confirm: 'En modifiant mon argument, je comprends que les votes qui lui sont associés seront réinitialisés.',
       },
       filter: {
         no: 'Trier les arguments contre',
@@ -44,6 +68,7 @@ export default {
         add: 'Déposer un avis',
         list: '{num, plural, =0{0 avis} one{# avis} other{# avis}}',
       },
+      update: 'Modifier l\'argument',
       yes: {
         add: 'Ajouter un argument pour',
         list: '{num, plural, =0{0 argument pour} one{# argument pour} other{# arguments pour}}',

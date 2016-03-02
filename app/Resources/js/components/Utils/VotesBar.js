@@ -55,9 +55,9 @@ const VotesBar = React.createClass({
 
   renderOverlay(children) {
     return (
-      <OverlayTrigger rootClose trigger="hover" placement="top"
+      <OverlayTrigger rootClose placement="top"
         overlay={
-          <Tooltip>
+          <Tooltip id="votes-bar-tooltip">
             { this.props.helpText }
           </Tooltip>
         }

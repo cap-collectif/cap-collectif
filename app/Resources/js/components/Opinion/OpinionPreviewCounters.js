@@ -28,7 +28,7 @@ const OpinionPreviewCounters = React.createClass({
       counters.push(<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count}/>);
     }
     if (type.commentSystem !== COMMENT_SYSTEM_NONE) {
-      counters.push(<FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.arguments_count} />);
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.argumentsCount} />);
     }
     if (type.sourceable) {
       counters.push(<FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />);
@@ -41,9 +41,9 @@ const OpinionPreviewCounters = React.createClass({
         {
           counters.map((counter, index) => {
             if (index < (counters.length - 1)) {
-              return <span>{counter}<span> • </span></span>;
+              return <span key={index}>{counter}<span> • </span></span>;
             }
-            return counter;
+            return <span key={index}>{counter}</span>;
           })
         }
       </p>

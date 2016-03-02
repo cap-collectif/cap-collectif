@@ -61,6 +61,7 @@ Capco\AppBundle\Entity\OpinionVersion:
             expose: true
             type: integer
             groups: [OpinionVersions, OpinionVersionPreviews]
+            serialized_name: argumentsCount
         votes:
             expose: true
             groups: [OpinionVersions]

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Opinion;
@@ -138,70 +137,6 @@ class ReportingController extends Controller
                             'opinionSlug' => $opinion->getSlug(),
                         ]
                     )
-                );
-            } else {
-                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));
-            }
-        }
-
-        return [
-            'opinion' => $opinion,
-            'form' => $form->createView(),
-        ];
-    }
-
-    /**
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument", defaults={"_feature_flags" = "reporting"})
-     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/arguments/{argumentId}/report", name="app_report_argument", defaults={"_feature_flags" = "reporting"})
-     * @Template("CapcoAppBundle:Reporting:create.html.twig")
-     *
-     * @param $request
-     * @param $projectSlug
-     * @param $stepSlug
-     * @param $opinionTypeSlug
-     * @param $argumentId
-     * @param $opinionSlug
-     *
-     * @return array
-     */
-    public function reportingArgumentAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $argumentId, Request $request)
-    {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
-        }
-
-        $argument = $this->getDoctrine()->getRepository('CapcoAppBundle:Argument')->getOneById($argumentId);
-
-        if ($argument == null) {
-            throw $this->createNotFoundException($this->get('translator')->trans('argument.error.not_found', [], 'CapcoAppBundle'));
-        }
-
-        if (false == $argument->canDisplay()) {
-            throw new AccessDeniedException($this->get('translator')->trans('argument.error.no_contribute', [], 'CapcoAppBundle'));
-        }
-
-        $opinion = $argument->getLinkedOpinion();
-        $opinionType = $opinion->getOpinionType();
-        $currentStep = $opinion->getStep();
-        $project = $currentStep->getProject();
-
-        $reporting = new Reporting();
-        $form = $this->createForm(new ReportingType(), $reporting);
-
-        if ($request->getMethod() == 'POST') {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $reporting->setArgument($argument);
-                $reporting->setReporter($this->getUser());
-                $this->get('capco.notify_manager')->sendNotifyMessage($reporting);
-                $em->persist($reporting);
-                $em->flush();
-                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
-
-                return $this->redirect(
-                    $this->get('capco.url.resolver')->getObjectUrl($argument)
                 );
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));

@@ -5,9 +5,15 @@ import AnswerBody from '../Answer/AnswerBody';
 
 const OpinionAnswer = React.createClass({
   propTypes: {
-    answer: React.PropTypes.object.isRequired,
+    answer: React.PropTypes.object,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      answer: null,
+    };
+  },
 
   render() {
     const answer = this.props.answer;

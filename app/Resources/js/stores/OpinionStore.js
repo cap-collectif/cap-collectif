@@ -4,12 +4,8 @@ import {
   RECEIVE_OPINION,
   UPDATE_OPINION_SUCCESS,
   UPDATE_OPINION_FAILURE,
-  DELETE_OPINION_SUCCESS,
-  DELETE_OPINION_FAILURE,
   CREATE_OPINION_VOTE,
   DELETE_OPINION_VOTE,
-  RECEIVE_ARGUMENTS,
-  CREATE_ARGUMENT_SUCCESS,
   CREATE_OPINION_VERSION_SUCCESS,
   CREATE_OPINION_VERSION_FAILURE,
   UPDATE_OPINION_VERSION_SUCCESS,
@@ -28,10 +24,6 @@ class OpinionStore extends BaseStore {
     this._rankingThreshold = null;
     this._opinionTerm = 0;
     this._isOpinionSync = false;
-    this._areArgumentsSync = {
-      0: true,
-      1: true,
-    };
     this._messages = {
       errors: [],
       success: [],
@@ -40,7 +32,6 @@ class OpinionStore extends BaseStore {
 
   _registerToActions(action) {
     let vote = {};
-    const args = [];
     switch (action.actionType) {
       case RECEIVE_OPINION:
         this._opinion = action.opinion;
@@ -48,12 +39,6 @@ class OpinionStore extends BaseStore {
         this._opinionTerm = action.opinionTerm;
         this._isOpinionSync = true;
         this.emitChange();
-        break;
-      case DELETE_OPINION_SUCCESS:
-        this._resetArgumentsSync();
-        break;
-      case DELETE_OPINION_FAILURE:
-        this._resetArgumentsSync();
         break;
       case CREATE_OPINION_VOTE:
         vote = {
@@ -78,56 +63,29 @@ class OpinionStore extends BaseStore {
         this._opinion.user_vote = null;
         this.emitChange();
         break;
-      case RECEIVE_ARGUMENTS:
-        this._opinion.arguments.map((arg) => {
-          if (arg.type !== action.type) {
-            args.push(arg);
-          }
-        });
-        this._opinion.arguments = args.concat(action.arguments);
-        if (action.type === 0) {
-          this._opinion.arguments_no_count = action.arguments.length;
-        } else if (action.type === 1) {
-          this._opinion.arguments_yes_count = action.arguments.length;
-        }
-        this._opinion.arguments_count = this._opinion.arguments_yes_count + this._opinion.arguments_no_count;
-        this._areArgumentsSync[action.type] = true;
-        this.emitChange();
-        break;
       case CREATE_OPINION_VERSION_SUCCESS:
         this._isProcessing = false;
-        this._resetArgumentsSync();
         this._isOpinionSync = false;
         break;
       case CREATE_OPINION_VERSION_FAILURE:
         this._isProcessing = false;
-        this._resetArgumentsSync();
         this._isOpinionSync = false;
         break;
       case UPDATE_OPINION_VERSION_SUCCESS:
         this._isProcessing = false;
-        this._resetArgumentsSync();
         this._isOpinionSync = false;
         break;
       case UPDATE_OPINION_VERSION_FAILURE:
         this._isProcessing = false;
-        this._resetArgumentsSync();
         this._isOpinionSync = false;
         break;
       case DELETE_OPINION_VERSION_SUCCESS:
         this._isProcessing = false;
-        this._resetArgumentsSync();
         this._isOpinionSync = false;
         break;
       case DELETE_OPINION_VERSION_FAILURE:
         this._isProcessing = false;
-        this._resetArgumentsSync();
         this._isOpinionSync = false;
-        break;
-      case CREATE_ARGUMENT_SUCCESS:
-        this._isProcessing = false;
-        this._areArgumentsSync[action.type] = false;
-        this.emitChange();
         break;
       case UPDATE_OPINION_SUCCESS:
         this._resetMessages();
@@ -166,17 +124,8 @@ class OpinionStore extends BaseStore {
     return this._isOpinionSync;
   }
 
-  get areArgumentsSync() {
-    return this._areArgumentsSync;
-  }
-
   get messages() {
     return this._messages;
-  }
-
-  _resetArgumentsSync() {
-    this._areArgumentsSync[0] = false;
-    this._areArgumentsSync[1] = false;
   }
 
   _resetMessages() {

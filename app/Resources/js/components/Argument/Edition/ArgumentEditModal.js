@@ -2,15 +2,17 @@ import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 
-import CloseButton from '../Form/CloseButton';
-import SubmitButton from '../Form/SubmitButton';
-import ReportForm from './ReportForm';
+import ArgumentStore from '../../../stores/ArgumentStore';
+import ArgumentActions from '../../../actions/ArgumentActions';
+import ArgumentForm from './ArgumentForm';
+import CloseButton from '../../Form/CloseButton';
+import SubmitButton from '../../Form/SubmitButton';
 
-const ReportModal = React.createClass({
+const ArgumentEditModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
+    argument: PropTypes.object,
     onClose: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -20,24 +22,23 @@ const ReportModal = React.createClass({
     };
   },
 
-  handleValidationSucess(data) {
-    this.props.onSubmit(data)
-        .then(() => {
-          this.setState({ isSubmitting: false });
-        });
+  handleFailure() {
+    this.setState({ isSubmitting: false });
   },
 
   handleSubmit() {
     this.setState({ isSubmitting: true });
   },
 
-  handleFailure() {
+  handleSubmitSuccess() {
+    this.props.onClose();
     this.setState({ isSubmitting: false });
+    ArgumentActions.load(ArgumentStore.opinion, this.props.argument.type);
   },
 
   render() {
     const { isSubmitting } = this.state;
-    const { onClose, show } = this.props;
+    const { argument, onClose, show } = this.props;
     return (
       <Modal
         animation={false}
@@ -48,22 +49,23 @@ const ReportModal = React.createClass({
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {this.getIntlMessage('global.modal.report.title')}
+            {this.getIntlMessage('argument.update')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ReportForm
+          <ArgumentForm
+            argument={argument}
             isSubmitting={isSubmitting}
             onValidationFailure={this.handleFailure}
-            onValidationSuccess={this.handleValidationSucess}
+            onSubmitSuccess={this.handleSubmitSuccess}
+            onSubmitFailure={this.handleFailure}
           />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
           <SubmitButton
-            id="confirm-opinion-source-report"
-            className="report-button-submit"
-            label="global.report.submit"
+            id="confirm-argument-update"
+            label="global.edit"
             isSubmitting={isSubmitting}
             onSubmit={this.handleSubmit}
           />
@@ -74,4 +76,4 @@ const ReportModal = React.createClass({
 
 });
 
-export default ReportModal;
+export default ArgumentEditModal;

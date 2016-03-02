@@ -148,6 +148,7 @@ const OpinionSourceForm = React.createClass({
           }
         </Input>
         <Input
+          id="sourceLink"
           ref="link"
           type="text"
           valueLink={this.linkState('form.link')}
@@ -158,17 +159,17 @@ const OpinionSourceForm = React.createClass({
           placeholder="http://"
         />
         <Input
+          id="sourceTitle"
           type="text"
           valueLink={this.linkState('form.title')}
           ref="title"
-          id="sourceTitle"
           groupClassName={this.getGroupStyle('title')}
           label={this.getIntlMessage('source.title')}
           errors={this.renderFormErrors('title')}
         />
         <Input
-          type="editor"
           id="sourceBody"
+          type="editor"
           valueLink={this.linkState('form.body')}
           label={this.getIntlMessage('source.body')}
           groupClassName={this.getGroupStyle('body')}

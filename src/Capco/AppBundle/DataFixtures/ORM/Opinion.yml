@@ -44,14 +44,14 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: @opinionType10
     opinion5:
         step: @cstep1
-        title: Opinion 5
+        title: Opinion sans sources
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
         isEnabled: true
         isTrashed: false
         Author: @user3
-        OpinionType: @opinionType10
+        OpinionType: @opinionType9
 
 # Project 2
 
@@ -97,6 +97,7 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user4
         OpinionType: @opinionType11
+        updatedAt: <dateTimeBetween('+40 days', '+60 days')>
 
     opinion53:
         step: @cstep2

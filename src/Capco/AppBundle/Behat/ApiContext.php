@@ -113,6 +113,36 @@ EOF;
 
         $this->iSendARequestWithJson($method, $url, $json);
     }
+
+    /**
+     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid argument json$/
+     */
+    public function iSendArgumentRequest($method, $url)
+    {
+        $json = <<< EOF
+        {
+            "type": "1",
+            "body": "Coucou, je suis un argument !"
+        }
+EOF;
+
+        $this->iSendARequestWithJson($method, $url, $json);
+    }
+
+    /**
+     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid argument update json$/
+     */
+    public function iSendUpdateArgumentRequest($method, $url)
+    {
+        $json = <<< EOF
+        {
+            "body": "Je suis un argument modifié."
+        }
+EOF;
+
+        $this->iSendARequestWithJson($method, $url, $json);
+    }
+
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)"$/
      */

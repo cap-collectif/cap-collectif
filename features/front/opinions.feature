@@ -42,13 +42,8 @@ Feature: Opinions
   @javascript @database
   Scenario: Logged in user can report an opinion
     Given feature "reporting" is enabled
-    And I am logged in as user
-    And I visited "opinion page" with:
-      | projectSlug      | croissance-innovation-disruption |
-      | stepSlug         | collecte-des-avis                |
-      | opinionTypeSlug  | solutions                        |
-      | opinionSlug      | opinion-5                        |
-    And I wait 4 seconds
+    And I am logged in as admin
+    And I go to an opinion
     When I follow "Signaler"
     And I wait 1 seconds
     And I fill in the following:
@@ -91,12 +86,7 @@ Feature: Opinions
 
   @javascript
   Scenario: Anonymous wants to see opinion appendix
-    Given I visited "opinion page" with:
-      | projectSlug | projet-de-loi-renseignement      |
-      | stepSlug         | elaboration-de-la-loi            |
-      | opinionTypeSlug  | articles                         |
-      | opinionSlug      | article-1                        |
-    And I wait 1 seconds
+    Given I go to an opinion with versions
     Then I should see "Motifs 1"
     And I press "Exposé des motifs"
     And I wait 1 seconds
@@ -108,12 +98,7 @@ Feature: Opinions
   @javascript
   Scenario: Logged in user wants to create a linked opinion
     Given I am logged in as user
-    And I visited "opinion page" with:
-      | projectSlug      | projet-de-loi-renseignement               |
-      | stepSlug         | elaboration-de-la-loi                     |
-      | opinionTypeSlug  | section-1-ouverture-des-donnees-publiques |
-      | opinionSlug      | article-1                                 |
-    And I wait 2 seconds
+    And I go to an opinion with versions
     Then I should see "0 proposition liée"
     When I go on the connections tab
     And I press "Ajouter une proposition liée"
@@ -136,12 +121,7 @@ Feature: Opinions
 
   @javascript @database
   Scenario: Anonymous user wants to share an opinion
-    Given I visited "opinion page" with:
-      | projectSlug      | projet-de-loi-renseignement               |
-      | stepSlug         | elaboration-de-la-loi                     |
-      | opinionTypeSlug  | section-1-ouverture-des-donnees-publiques |
-      | opinionSlug      | article-1                                 |
-    And I wait 2 seconds
+    Given I go to an opinion with versions
     When I click the share opinion button
     Then I should see the share dropdown
     And I click the share link button
@@ -150,11 +130,6 @@ Feature: Opinions
   @javascript
   Scenario: Anonymous wants to see votes evolution
     Given feature "votes_evolution" is enabled
-    And I visited "opinion page" with:
-      | projectSlug      | projet-de-loi-renseignement      |
-      | stepSlug         | elaboration-de-la-loi            |
-      | opinionTypeSlug  | articles                         |
-      | opinionSlug      | article-1                        |
-    And I wait 1 seconds
+    And I go to an opinion with versions
     When I go on the votes evolution tab
     Then I should see 1 ".opinion__history_chart" element

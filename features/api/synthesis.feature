@@ -113,12 +113,12 @@ Feature: Synthesis
       "editable": true,
       "elements": [
         {
-            "id": @string@,
-            "title": "Le problème constaté",
-            "_links": {
-              "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements')" },
-              "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
-            }
+          "id": @string@,
+          "title": "Le problème constaté",
+          "_links": {
+            "self": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements')" },
+            "history": { "href": "@string@.startsWith('/api/syntheses/').contains('/elements/').endsWith('/history')" }
+          }
         },
         {
           "id": @string@,
@@ -135,71 +135,7 @@ Feature: Synthesis
           "title": "Arguments contre",
           "_links": "@*@"
         },
-        {
-          "id": @string@,
-          "title": @null@,
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": "Sources",
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": "Les causes",
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": "Opinion 51",
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": "Arguments pour",
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": "Arguments contre",
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": @null@,
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": @null@,
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": "Sources",
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": "Opinion 53",
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": "Arguments pour",
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": "Arguments contre",
-          "_links": "@*@"
-        },
-        {
-          "id": @string@,
-          "title": "Sources",
-          "_links": "@*@"
-        }
+        @...@
       ],
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/')" },
@@ -215,7 +151,7 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/48/elements/count?type=all"
     Then the JSON response should match:
     """
-    {"count": 17}
+    {"count": 24}
     """
 
   @database

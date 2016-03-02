@@ -45,3 +45,12 @@ Capco\AppBundle\Entity\OpinionVersion:
         parent: @opinion<numberBetween(57,59)>
         comment: Coeur avec les doigts !
         ranking: <numberBetween(1,5)>
+    version11:
+        title: Version sur une étape fermée
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        enabled: true
+        isTrashed: false
+        author: @user5
+        parent: @opinion51

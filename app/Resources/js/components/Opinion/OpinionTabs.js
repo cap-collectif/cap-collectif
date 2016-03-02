@@ -1,9 +1,9 @@
 import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage } from 'react-intl';
-
+import ArgumentStore from '../../stores/ArgumentStore';
 import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
-import OpinionArgumentsBox from './OpinionArgumentsBox';
+import ArgumentsBox from '../Argument/ArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourceBox from './Source/OpinionSourceBox';
 import VoteLinechart from '../Utils/VoteLinechart';
@@ -19,11 +19,13 @@ const OpinionTabs = React.createClass({
   getInitialState() {
     return {
       sources_count: this.props.opinion.sources_count,
+      argumentsCount: this.props.opinion.argumentsCount,
     };
   },
 
   componentWillMount() {
-    OpinionSourceStore.addChangeListener(this.onChange);
+    OpinionSourceStore.addChangeListener(this.onSourceChange);
+    ArgumentStore.addChangeListener(this.onArgumentChange);
   },
 
   componentDidMount() {
@@ -40,12 +42,19 @@ const OpinionTabs = React.createClass({
   },
 
   componentWillUnmount() {
+    ArgumentStore.removeChangeListener(this.onArgumentChange);
     OpinionSourceStore.removeChangeListener(this.onChange);
   },
 
-  onChange() {
+  onSourceChange() {
     this.setState({
       sources_count: OpinionSourceStore.count,
+    });
+  },
+
+  onArgumentChange() {
+    this.setState({
+      argumentsCount: ArgumentStore.count,
     });
   },
 
@@ -159,9 +168,9 @@ const OpinionTabs = React.createClass({
                 id="opinion__arguments"
                 className="opinion-tabs"
                 eventKey={'arguments'}
-                title={<FormattedMessage message={this.getArgumentsTrad()} num={opinion.arguments_count} />}
+                title={<FormattedMessage message={this.getArgumentsTrad()} num={this.state.argumentsCount} />}
             >
-              <OpinionArgumentsBox {...this.props} />
+              <ArgumentsBox {...this.props} />
             </Tab>
             : null
           }
@@ -209,7 +218,7 @@ const OpinionTabs = React.createClass({
       return this.renderVersionsContent();
     }
     if (this.isCommentable()) {
-      return <OpinionArgumentsBox {...this.props} />;
+      return <ArgumentsBox {...this.props} />;
     }
     if (this.hasStatistics()) {
       return <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />;

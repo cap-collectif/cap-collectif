@@ -1,6 +1,6 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import LoginOverlay from '../../Utils/LoginOverlay';
+import LoginStore from '../../../stores/LoginStore';
 import SourceActions from '../../../actions/SourceActions';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
 
@@ -26,6 +26,13 @@ const OpinionSourceVoteBox = React.createClass({
     SourceActions.deleteVote(this.props.source.id);
   },
 
+  isTheUserTheAuthor() {
+    if (this.props.source.author === null || !LoginStore.isLoggedIn()) {
+      return false;
+    }
+    return LoginStore.user.uniqueId === this.props.source.author.uniqueId;
+  },
+
   render() {
     const { hasVoted } = this.state;
     const { source } = this.props;
@@ -35,13 +42,11 @@ const OpinionSourceVoteBox = React.createClass({
     return (
       <span>
         <form style={{ display: 'inline-block' }}>
-          <LoginOverlay>
-            <OpinionSourceVoteButton
-              disabled={!source.isContribuable}
-              hasVoted={showVoted}
-              onClick={showVoted ? this.deleteVote : this.vote}
-            />
-          </LoginOverlay>
+          <OpinionSourceVoteButton
+            disabled={!source.isContribuable || this.isTheUserTheAuthor()}
+            hasVoted={showVoted}
+            onClick={showVoted ? this.deleteVote : this.vote}
+          />
         </form>
         { ' ' }
         <span className="opinion__votes-nb">

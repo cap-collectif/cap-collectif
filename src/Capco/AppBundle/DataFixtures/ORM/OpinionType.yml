@@ -145,6 +145,7 @@ Capco\AppBundle\Entity\OpinionType:
         color: orange
         defaultFilter: votes
         isEnabled: true
+        versionable: true
         consultationStepType: @typeSimple
     opinionType13:
         title: Les causes

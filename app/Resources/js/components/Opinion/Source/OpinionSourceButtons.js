@@ -1,7 +1,4 @@
 import React from 'react';
-import { IntlMixin } from 'react-intl';
-
-import LoginStore from '../../../stores/LoginStore';
 import OpinionSourceReportButton from './OpinionSourceReportButton';
 import OpinionSourceFormModal from './OpinionSourceFormModal';
 import OpinionSourceDeleteModal from './OpinionSourceDeleteModal';
@@ -13,20 +10,12 @@ const OpinionSourceButtons = React.createClass({
   propTypes: {
     source: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
       isEditing: false,
       isDeleting: false,
     };
-  },
-
-  isTheUserTheAuthor() {
-    if (this.props.source.author === null || !LoginStore.isLoggedIn()) {
-      return false;
-    }
-    return LoginStore.user.uniqueId === this.props.source.author.uniqueId;
   },
 
   openEditModal() {

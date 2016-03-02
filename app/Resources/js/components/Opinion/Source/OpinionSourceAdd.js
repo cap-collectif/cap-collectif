@@ -6,13 +6,13 @@ import OpinionSourceFormModal from './OpinionSourceFormModal';
 
 const OpinionSourceAdd = React.createClass({
   propTypes: {
-    show: PropTypes.bool,
+    disabled: PropTypes.bool,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
-      show: true,
+      disabled: false,
     };
   },
 
@@ -32,14 +32,17 @@ const OpinionSourceAdd = React.createClass({
   },
 
   render() {
-    if (!this.props.show) {
-      return null;
-    }
-
     return (
       <div>
-        <OpinionSourceAddButton handleClick={this.show.bind(null, this)} />
-        <OpinionSourceFormModal show={this.state.showModal} onClose={this.close} />
+        <OpinionSourceAddButton
+          disabled={this.props.disabled}
+          handleClick={this.show.bind(null, this)}
+        />
+        {
+          !this.props.disabled
+          ? <OpinionSourceFormModal show={this.state.showModal} onClose={this.close} />
+          : null
+        }
       </div>
     );
   },

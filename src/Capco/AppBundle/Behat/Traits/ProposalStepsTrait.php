@@ -56,21 +56,6 @@ trait ProposalStepsTrait
 
     // ********************************* Proposals *********************************************
 
-    protected function getCurrentProposalPage()
-    {
-        if ($this->proposalPageIsOpen() || $this->proposalPageWithBudgetVoteIsOpen() || $this->proposalNotYetVotablePageIsOpen() || $this->proposalNotVotableAnymoreIsOpen()) {
-            return $this->navigationContext->getPage('proposal page');
-        }
-        if ($this->selectionStepWithSimpleVoteIsOpen() || $this->selectionStepWithBudgetVoteIsOpen() || $this->selectionStepNotYetOpenIsOpen() || $this->selectionStepClosedIsOpen()) {
-            return $this->navigationContext->getPage('selection page');
-        }
-        if ($this->closedCollectStepIsOpen() || $this->openCollectStepIsOpen()) {
-            return $this->navigationContext->getPage('collect page');
-        }
-
-        return;
-    }
-
     /**
      * Go to an open collect step page.
      *
@@ -160,7 +145,7 @@ trait ProposalStepsTrait
     public function thereShouldBeNbProposals($nb)
     {
         $this->assertPageContainsText($nb.' propositions');
-        $proposalSelector = $this->getCurrentProposalPage()->getProposalSelector();
+        $proposalSelector = $this->getCurrentPage()->getProposalSelector();
         $this->assertNumElements($nb, $proposalSelector);
     }
 
@@ -182,7 +167,7 @@ trait ProposalStepsTrait
      */
     public function iSortProposalsByDate()
     {
-        $this->getCurrentProposalPage()->sortByDate();
+        $this->getCurrentPage()->sortByDate();
         $this->iWait(1);
     }
 
@@ -193,7 +178,7 @@ trait ProposalStepsTrait
      */
     public function iSortProposalsByComments()
     {
-        $this->getCurrentProposalPage()->sortByComments();
+        $this->getCurrentPage()->sortByComments();
         $this->iWait(1);
     }
 
@@ -225,7 +210,7 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeOrderedByDate()
     {
-        $option = $this->getCurrentProposalPage()->getSelectedSortingOption();
+        $option = $this->getCurrentPage()->getSelectedSortingOption();
         \PHPUnit_Framework_Assert::assertEquals('last', $option);
         $this->proposalBeforeProposal(
             'Rénovation du gymnase',
@@ -240,7 +225,7 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeOrderedRandomly()
     {
-        $option = $this->getCurrentProposalPage()->getSelectedSortingOption();
+        $option = $this->getCurrentPage()->getSelectedSortingOption();
         \PHPUnit_Framework_Assert::assertEquals('random', $option);
     }
 
@@ -251,7 +236,7 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeOrderedByComments()
     {
-        $option = $this->getCurrentProposalPage()->getSelectedSortingOption();
+        $option = $this->getCurrentPage()->getSelectedSortingOption();
         \PHPUnit_Framework_Assert::assertEquals('comments', $option);
         $this->proposalBeforeProposal(
             'Ravalement de la façade de la bibliothèque municipale',
@@ -277,7 +262,7 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeFilteredByThemeAndTermsAndSortedByComments()
     {
-        $option = $this->getCurrentProposalPage()->getSelectedSortingOption();
+        $option = $this->getCurrentPage()->getSelectedSortingOption();
         \PHPUnit_Framework_Assert::assertEquals('comments', $option);
         $this->assertPageContainsText('Ravalement de la façade de la bibliothèque municipale');
         $this->assertPageContainsText('Installation de bancs sur la place de la mairie');
@@ -451,6 +436,7 @@ trait ProposalStepsTrait
     {
         $this->navigationContext->getPage('proposal page')->clickConfirmDeleteProposalButton();
         $this->iWait(3);
+        $this->currentPage = 'collect page';
     }
 
     /**
@@ -647,7 +633,7 @@ trait ProposalStepsTrait
      */
     public function theProposalShouldHaveNbVotes($nb)
     {
-        $votesCount = $this->getCurrentProposalPage()->getVotesCount($this->getProposalId());
+        $votesCount = $this->getCurrentPage()->getVotesCount($this->getProposalId());
         \PHPUnit_Framework_Assert::assertEquals($nb, $votesCount, 'Incorrect votes number '.$votesCount.' for proposal.');
     }
 
@@ -659,7 +645,7 @@ trait ProposalStepsTrait
      */
     public function theProposalShouldHaveNbComments($nb)
     {
-        $commentsCount = $this->getCurrentProposalPage()->getCommentsCount($this->getProposalId());
+        $commentsCount = $this->getCurrentPage()->getCommentsCount($this->getProposalId());
         \PHPUnit_Framework_Assert::assertEquals($nb, $commentsCount, 'Incorrect comments number '.$commentsCount.' for proposal.');
     }
 
@@ -676,7 +662,7 @@ trait ProposalStepsTrait
 
     protected function clickProposalVoteButtonWithLabel($label)
     {
-        $page = $this->getCurrentProposalPage();
+        $page = $this->getCurrentPage();
         $proposalId = $this->getProposalId();
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
         \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label '.$buttonLabel.' on proposal vote button.');
@@ -773,7 +759,7 @@ trait ProposalStepsTrait
      */
     public function iSubmitTheProposalVoteForm()
     {
-        $page = $this->getCurrentProposalPage()->submitProposalVoteForm();
+        $page = $this->getCurrentPage()->submitProposalVoteForm();
         $this->iWait(3);
     }
 
@@ -784,7 +770,7 @@ trait ProposalStepsTrait
      */
     public function theProposalVoteButtonMustBeDisabled()
     {
-        $button = $this->getCurrentProposalPage()->getVoteButton($this->getProposalId());
+        $button = $this->getCurrentPage()->getVoteButton($this->getProposalId());
         \PHPUnit_Framework_Assert::assertTrue(
             $button->hasClass('disabled') || $button->hasAttribute('disabled'),
             'The proposal vote button is not disabled neither it has class "disabled".'

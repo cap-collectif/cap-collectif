@@ -61,7 +61,7 @@ trait SynthesisStepsTrait
     public function iShouldSeeTheNewSynthesisElements()
     {
         $elementsSelector = $this->navigationContext->getPage('synthesis edition page')->getElementsSelector();
-        $this->assertNumElements(6, $elementsSelector);
+        $this->assertNumElements(8, $elementsSelector);
     }
 
     /**
@@ -80,7 +80,7 @@ trait SynthesisStepsTrait
      *
      * @Then I should see the archived synthesis elements
      */
-    public function iShouldSeeTheArchivedSynthesisElements($nb = 11)
+    public function iShouldSeeTheArchivedSynthesisElements($nb = 15)
     {
         $elementsSelector = $this->navigationContext->getPage('synthesis edition page')->getElementsSelector();
         $this->assertNumElements($nb, $elementsSelector);
@@ -105,7 +105,7 @@ trait SynthesisStepsTrait
     public function iShouldSeeThePublishedSynthesisElements()
     {
         $elementsSelector = $this->navigationContext->getPage('synthesis edition page')->getElementsSelector();
-        $this->assertNumElements(11, $elementsSelector);
+        $this->assertNumElements(15, $elementsSelector);
     }
 
     /**
@@ -218,7 +218,7 @@ trait SynthesisStepsTrait
     public function iShouldSeeTheSynthesisElementInTheArchivedInbox()
     {
         $this->iGoToTheArchivedInbox();
-        $this->iShouldSeeTheArchivedSynthesisElements(12);
+        $this->iShouldSeeTheArchivedSynthesisElements(15);
         $this->assertPageContainsText('Opinion 52');
     }
 
@@ -340,7 +340,7 @@ trait SynthesisStepsTrait
     public function iShouldSeeMyNewlyCreatedElementInTheArchivedInbox()
     {
         $this->iGoToTheArchivedInbox();
-        $this->iShouldSeeTheArchivedSynthesisElements(12);
+        $this->iShouldSeeTheArchivedSynthesisElements(15);
         $this->assertPageContainsText('Bisous');
     }
 }

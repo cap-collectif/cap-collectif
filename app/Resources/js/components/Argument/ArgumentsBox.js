@@ -2,10 +2,10 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
-import OpinionArgumentList from './OpinionArgumentList';
-import OpinionArgumentForm from './OpinionArgumentForm';
+import ArgumentList from './ArgumentList';
+import ArgumentCreate from './Creation/ArgumentCreate';
 
-const OpinionArgumentsBox = React.createClass({
+const ArgumentsBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
@@ -20,11 +20,11 @@ const OpinionArgumentsBox = React.createClass({
       <div id={'arguments-col--' + type} >
         { this.props.opinion.isContribuable
           ? <div className="opinion opinion--add-argument block block--bordered">
-              <OpinionArgumentForm type={type} opinion={this.props.opinion}/>
+              <ArgumentCreate type={type} opinion={this.props.opinion}/>
             </div>
           : null
         }
-        <OpinionArgumentList type={type} {...this.props} opinion={this.props.opinion}/>
+        <ArgumentList type={type} {...this.props} opinion={this.props.opinion}/>
       </div>
     );
   },
@@ -52,4 +52,4 @@ const OpinionArgumentsBox = React.createClass({
 
 });
 
-export default OpinionArgumentsBox;
+export default ArgumentsBox;

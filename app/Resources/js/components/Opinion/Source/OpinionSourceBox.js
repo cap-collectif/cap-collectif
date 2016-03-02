@@ -74,7 +74,7 @@ const OpinionSourceBox = React.createClass({
         <Row>
           <Col xs={12} sm={6} md={6}>
             <OpinionSourceAdd
-              show={opinion.isContribuable}
+              disabled={!opinion.isContribuable}
             />
           </Col>
           <Col xs={12} sm={6} md={6}>

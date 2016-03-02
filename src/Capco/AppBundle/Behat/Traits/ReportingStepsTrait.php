@@ -21,6 +21,17 @@ trait ReportingStepsTrait
     }
 
     /**
+     * I fill the reporting form from the modal.
+     *
+     * @When I fill the reporting form from the modal
+     */
+    public function iFillTheReportingFormFromTheModal()
+    {
+        $this->fillField('reportBody', 'Pas terrible tout ça...');
+        $this->selectOption('reportType', 'Contenu à caractère sexuel');
+    }
+
+    /**
      * I submit the reporting form.
      *
      * @When I submit the reporting form
@@ -28,6 +39,17 @@ trait ReportingStepsTrait
     public function iSubmitTheReportingForm()
     {
         $this->pressButton('Signaler');
+        $this->iWait(1);
+    }
+
+    /**
+     * I submit the reporting form from the modal.
+     *
+     * @When I submit the reporting form from the modal
+     */
+    public function iSubmitTheReportingFormFromTheModal()
+    {
+        $this->getSession()->getPage()->find('css', '.report-button-submit')->click();
         $this->iWait(1);
     }
 }
