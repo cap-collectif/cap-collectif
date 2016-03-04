@@ -465,6 +465,10 @@ export default {
       update: 'Modifier une source',
     },
     step: {
+      remaining: {
+        days: '{num, plural, =0{0 jour restant} one{# jour restant} other{# jours restants}}',
+        hours: '{num, plural, =0{0 heure restante} one{# heure restante} other{# heures restantes}}',
+      },
       status: {
         closed: 'Terminé',
         future: 'À venir',

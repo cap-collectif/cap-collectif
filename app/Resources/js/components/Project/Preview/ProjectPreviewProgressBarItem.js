@@ -2,7 +2,7 @@ import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
-import DatesInterval from './../../Utils/DatesInterval';
+import ProjectPreviewPopoverContent from './ProjectPreviewPopoverContent';
 
 const ProjectPreviewProgressBarItem = React.createClass({
   propTypes: {
@@ -37,17 +37,9 @@ const ProjectPreviewProgressBarItem = React.createClass({
           />
         }
       >
-        <div>
-          <p className="h5">{step.title}</p>
-          <p><DatesInterval startAt={step.startAt} endAt={step.endAt} /></p>
-          {
-            step.openingStatus
-              ? <p className="label label-default">
-                {this.getIntlMessage('step.status.' + step.openingStatus)}
-              </p>
-              : null
-          }
-        </div>
+        <ProjectPreviewPopoverContent
+          step={step}
+        />
       </Popover>
     );
     return (
