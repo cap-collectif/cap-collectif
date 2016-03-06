@@ -62,9 +62,9 @@ const DivideModal = React.createClass({
     this.props.toggle(false);
   },
 
-  togglePublishModal(value, element) {
+  togglePublishModal(value, element = null) {
     this.setState({
-      currentElement: element,
+      currentElement: !!element ? element : this.state.currentElement,
       showPublishModal: value,
     });
   },
@@ -158,8 +158,8 @@ const DivideModal = React.createClass({
       return (
         <ul className="division__elements-list">
           {
-            elements.map((element) => {
-              return this.renderElement(element);
+            elements.map((element, index) => {
+              return this.renderElement(element, index);
             })
           }
         </ul>
@@ -167,10 +167,10 @@ const DivideModal = React.createClass({
     }
   },
 
-  renderElement(element) {
+  renderElement(element, index) {
     if (element) {
       return (
-        <li className="division__element">
+        <li key={index} className="division__element">
           <ElementTitle hasLink={false} className="element__title" element={element} />
           <div className="element__body">
             {FormattedText.strip(element.body)}

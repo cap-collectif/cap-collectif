@@ -41,9 +41,9 @@ const ElementBreadcrumb = React.createClass({
     return items;
   },
 
-  renderBreadCrumbItem(element) {
+  renderBreadCrumbItem(element, index) {
     return (
-      <span key={element.id} className="element__breadcrumb-item">
+      <span key={index} className="element__breadcrumb-item">
         <span className="element__breadcrumb-arrow"> > </span>
         <ElementTitle element={element} link={this.props.link} />
       </span>
@@ -56,8 +56,8 @@ const ElementBreadcrumb = React.createClass({
       <p className="element__breadcrumb">
         <i className="cap cap-folder-2"></i>
         {
-          items.map((element) => {
-            return this.renderBreadCrumbItem(element);
+          items.map((element, index) => {
+            return this.renderBreadCrumbItem(element, index);
           })
           }
       </p>
