@@ -62,7 +62,7 @@
     "chai": "^3.5.0",
     "enzyme": "^1.5.0",
     "eslint": "^2.2.0",
-    "eslint-brunch": "^3.2.0",
+    "eslint-brunch": "^3.3.0",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-config-jolicode": "^0.2.0",
     "eslint-plugin-mocha": "^2.0.0",
