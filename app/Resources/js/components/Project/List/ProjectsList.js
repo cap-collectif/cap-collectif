@@ -16,7 +16,7 @@ const ProjectsList = React.createClass({
         <Row>
           {
             projects.map((project, index) => {
-              return <ProjectPreview key={index} project={project} />;
+              return <ProjectPreview key={index} project={project}/>;
             })
           }
         </Row>

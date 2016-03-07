@@ -7,7 +7,7 @@ export default {
 
   loadFromServer: () => {
     Fetcher
-    .get('/features')
+    .get(`/features`)
     .then((features) => {
       AppDispatcher.dispatch({
         actionType: RECEIVE_FEATURES,

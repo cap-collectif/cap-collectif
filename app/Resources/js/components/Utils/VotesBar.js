@@ -40,14 +40,14 @@ const VotesBar = React.createClass({
     if (left > 0) {
       return (
         <p className="small excerpt">
-          <FormattedMessage message={this.getIntlMessage('opinion.progress.left')} left={left} max={this.props.max} />
+          <FormattedMessage message={this.getIntlMessage('opinion.progress.left')} left={left} max={this.props.max}/>
           {this.renderIcon()}
         </p>
       );
     }
     return (
       <p className="small excerpt">
-        <FormattedMessage message={this.getIntlMessage('opinion.progress.reached')} with={this.props.value} />
+        <FormattedMessage message={this.getIntlMessage('opinion.progress.reached')} with={this.props.value}/>
         {this.renderIcon()}
       </p>
     );

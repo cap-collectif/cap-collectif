@@ -83,7 +83,7 @@ const FolderManager = React.createClass({
       return (
         <div className="pull-right">
           <UpdateButton synthesis={this.props.synthesis} element={element} />
-          <IgnoreButton synthesis={this.props.synthesis} element={element} />
+          <IgnoreButton synthesis={this.props.synthesis} element={element}/>
         </div>
       );
     }
@@ -132,7 +132,7 @@ const FolderManager = React.createClass({
         {this.renderButtons(element)}
         <ElementIcon className="tree__item__icon" element={element} />
         <ElementTitle element={element} className="tree__item__title" />
-        <br />
+        <br/>
         <span className="small excerpt">
           <FormattedMessage
             message={this.getIntlMessage('common.elements.nb')}

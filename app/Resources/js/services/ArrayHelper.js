@@ -72,7 +72,8 @@ class ArrayHelper {
         if (!rd.test(a1)) return 1;
         if (!rd.test(b1)) return -1;
         if (a1 !== b1) return a1 - b1;
-      } else if (a1 !== b1) return a1 > b1 ? 1 : -1;
+      }
+      else if (a1 !== b1) return a1 > b1 ? 1 : -1;
     }
     return a.length - b.length;
   }
