@@ -1,7 +1,7 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import DatesInterval from './../../Utils/DatesInterval';
-import StepRemainingTime from '../../Steps/StepRemainingTime';
+import RemainingTime from '../../Utils/RemainingTime';
 
 const ProjectPreviewPopoverContent = React.createClass({
   propTypes: {
@@ -23,9 +23,9 @@ const ProjectPreviewPopoverContent = React.createClass({
             : null
         }
         {
-          step.open
+          step.open && step.counters
           ? <p style={{ marginTop: '10px' }}>
-              <StepRemainingTime step={step} />
+              <RemainingTime hours={step.counters.remainingHours} days={step.counters.remainingDays} />
             </p>
           : null
         }

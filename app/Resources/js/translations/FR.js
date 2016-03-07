@@ -207,6 +207,10 @@ export default {
       read_less: 'Masquer',
       read_more: 'Afficher la suite',
       register: 'S\'inscrire',
+      remaining: {
+        days: '{num, plural, =0{0 jour restant} one{# jour restant} other{# jours restants}}',
+        hours: '{num, plural, =0{0 heure restante} one{# heure restante} other{# heures restantes}}',
+      },
       remove: 'Supprimer',
       report: {
         reported: 'Signalé',
@@ -490,10 +494,6 @@ export default {
       update: 'Modifier une source',
     },
     step: {
-      remaining: {
-        days: '{num, plural, =0{0 jour restant} one{# jour restant} other{# jours restants}}',
-        hours: '{num, plural, =0{0 heure restante} one{# heure restante} other{# heures restantes}}',
-      },
       status: {
         closed: 'Terminé',
         future: 'À venir',
