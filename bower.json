@@ -23,8 +23,7 @@
     "es6-promise": "~2.2.0",
     "fetch": "~0.10.1",
     "bootstrap-sass": "~3.3.6",
-    "Readmore.js": "readmore#~2.1.0",
-    "jquery-minicolors": "~2.2.3"
+    "Readmore.js": "readmore#~2.1.0"
   },
   "overrides": {
     "fancybox": {
