@@ -18,7 +18,7 @@ framework:
         enabled: true
         enable_annotations: true
     templating:
-        assets_version: v7
+        assets_version: "%assets_version%"
         engines:
             - twig
     default_locale: "%locale%"

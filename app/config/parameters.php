@@ -53,6 +53,8 @@ $container->setParameter('language_analyzer',           set_var('language_analyz
 $container->setParameter('remember_secret',             set_var('remember_secret', '***REMOVED***'));
 
 $container->setParameter('router.request_context.host', set_var('router.request_context.host', 'localhost'));
+$container->setParameter('assets_version',              set_var('assets_version', 'v1'));
+
 
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
 
