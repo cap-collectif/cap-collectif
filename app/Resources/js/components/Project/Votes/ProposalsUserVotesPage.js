@@ -90,7 +90,7 @@ const ProposalsUserVotesPage = React.createClass({
                       <tbody>
                       {
                         step.userVotes.map((vote, index2) => {
-                          return <ProposalUserVoteItem key={index2} vote={vote} step={step}/>;
+                          return <ProposalUserVoteItem key={index2} vote={vote} step={step} />;
                         })
                       }
                       </tbody>

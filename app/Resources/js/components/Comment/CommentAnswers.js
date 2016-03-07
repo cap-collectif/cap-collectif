@@ -12,7 +12,7 @@ const CommentAnswers = React.createClass({
     if (this.props.comments) {
       return (
         <div>
-          <CommentList comments={this.props.comments} root={false}/>
+          <CommentList comments={this.props.comments} root={false} />
         </div>
       );
     }
