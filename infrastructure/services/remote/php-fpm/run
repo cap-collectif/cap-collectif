@@ -12,6 +12,7 @@ for directory in var/cache var/logs web/bundles web/media/default web/media/sona
   if [ ! -d "$directory" ]; then
     echo "Creating '$directory'..."
     mkdir -p -m 777 $directory
+    chown capco:capco $directory
   fi
 done
 
@@ -36,10 +37,12 @@ VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod 
 database=`echo "$VERSIONS" | grep -o "Unknown database" | wc -l`
 if [ "$database" != "0" ]; then
     echo "Creating a new database with base data..."
-    php bin/console doctrine:database:create --env=prod --no-interaction
-    php bin/console doctrine:schema:create --env=prod --no-interaction
-    php bin/console doctrine:migrations:version --add --all --env=prod --no-interaction
-    php bin/console capco:load-base-data --force --env=prod --no-interaction
+    su capco <<'EOF'
+php bin/console doctrine:database:create --env=prod --no-interaction
+php bin/console doctrine:schema:create --env=prod --no-interaction
+php bin/console doctrine:migrations:version --add --all --env=prod --no-interaction
+php bin/console capco:load-base-data --force --env=prod --no-interaction
+EOF
 else
   migrations=`echo "$VERSIONS" | grep -o "not migrated" | wc -l`
   if [ "$migrations" == "0" ]; then

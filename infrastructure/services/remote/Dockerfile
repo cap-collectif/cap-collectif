@@ -105,8 +105,6 @@ RUN mv /var/lib/mysql /var/lib/mysql_save
 # Generate a new docker image even if dockerfiles has not changed
 COPY VERSION /VERSION
 
-COPY entrypoint.sh /entrypoint.sh
-
 # Service
 COPY mysql/run                  /etc/service/mysql/run
 COPY nginx/run                  /etc/service/nginx/run
@@ -134,7 +132,6 @@ VOLUME ["/data"]
 
 # Add entrypoint
 WORKDIR /var/www
-ENTRYPOINT ["/entrypoint.sh"]
 
 USER root
 

@@ -54,7 +54,7 @@ $container->setParameter('remember_secret',             set_var('remember_secret
 
 $container->setParameter('router.request_context.host', set_var('router.request_context.host', 'localhost'));
 $container->setParameter('assets_version',              set_var('assets_version', 'v1'));
-$container->setParameter('server_version',              set_var('server_version', '10.1.11-MariaDB-1~jessie'));
+
 
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
 
