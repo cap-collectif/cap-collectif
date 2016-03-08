@@ -57,7 +57,7 @@
   "devDependencies": {
     "babel": "^5.8.34",
     "babel-core": "^5.8.34",
-    "babel-eslint": "^4.1.8",
+    "babel-eslint": "^6.0.0-beta.2",
     "chai": "^3.5.0",
     "enzyme": "^1.5.0",
     "eslint": "^2.2.0",

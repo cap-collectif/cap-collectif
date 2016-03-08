@@ -12,7 +12,6 @@ for directory in var/cache var/logs web/bundles web/media/default web/media/sona
   if [ ! -d "$directory" ]; then
     echo "Creating '$directory'..."
     mkdir -p -m 777 $directory
-    chown capco:capco $directory
   fi
 done
 

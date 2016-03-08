@@ -16,6 +16,7 @@
     "no-nested-ternary": 0,
     "react/prefer-es6-class": 0,
     "react/jsx-closing-bracket-location": 0,
+    "react/prefer-stateless-function": 0,
     "arrow-body-style": 0,
     "max-len": 0,
     "object-shorthand": 0,
