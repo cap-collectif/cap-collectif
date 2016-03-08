@@ -20,11 +20,11 @@ const ArgumentsBox = React.createClass({
       <div id={'arguments-col--' + type} >
         { this.props.opinion.isContribuable
           ? <div className="opinion opinion--add-argument block block--bordered">
-              <ArgumentCreate type={type} opinion={this.props.opinion}/>
+              <ArgumentCreate type={type} opinion={this.props.opinion} />
             </div>
           : null
         }
-        <ArgumentList type={type} {...this.props} opinion={this.props.opinion}/>
+        <ArgumentList type={type} {...this.props} opinion={this.props.opinion} />
       </div>
     );
   },
