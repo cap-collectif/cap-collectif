@@ -104,7 +104,7 @@ RUN \
     DEBIAN_FRONTEND=noninteractive apt-get install -y newrelic-php5 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
-    rm -f /etc/php5/*/conf.d/newrelic.ini
+    newrelic-install install
 
 # Install varnish
 RUN apt-get update && \
@@ -139,8 +139,8 @@ COPY varnish/run                /etc/service/varnish/run
 COPY mysql/capco.cnf            /etc/mysql/conf.d/capco.cnf
 COPY nginx/nginx.conf           /etc/nginx/nginx.conf
 COPY php-fpm/fpm.conf           /etc/service/php-fpm/fpm.conf
-COPY php-fpm/capco.ini          /etc/php5/fpm/conf.d/capco.ini
-COPY php-fpm/capco.ini          /etc/php5/cli/conf.d/capco.ini
+COPY php-fpm/capco.ini          /etc/php/7.0/fpm/conf.d/capco.ini
+COPY php-fpm/capco.ini          /etc/php/7.0/cli/conf.d/capco.ini
 COPY cron/crontab               /etc/cron.d/crontab
 COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl

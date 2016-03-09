@@ -3,8 +3,8 @@
 start=$SECONDS
 
 echo "Configuring New Relic..."
-sed -i 's/newrelic.appname = ""/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php5/*/conf.d/20-newrelic.ini
-sed -i 's/newrelic.license = ""/newrelic.license = '"$NR_INSTALL_KEY"'/' /etc/php5/*/conf.d/20-newrelic.ini
+sed -i 's/newrelic.appname = "PHP Application"/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php/7.0/*/conf.d/newrelic.ini
+sed -i 's/newrelic.license = "REPLACE_WITH_REAL_KEY"/newrelic.license = '"$NR_INSTALL_KEY"'/' /etc/php/7.0/*/conf.d/newrelic.ini
 
 cd /var/www
 
@@ -62,4 +62,4 @@ echo "Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &
 
 echo "php-fpm is ready to boot after $(( SECONDS - start )) seconds!"
-exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O
+exec /usr/sbin/php-fpm7.0 -y /etc/service/php-fpm/fpm.conf -O
