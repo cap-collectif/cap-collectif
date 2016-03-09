@@ -3,9 +3,9 @@ from fabric.api import env
 
 
 @task(environments=['local', 'testing'])
-def generate():
+def generate(populate='true'):
     "Generate database"
-    env.service_command('php bin/console capco:reinit --force', 'application', env.www_app)
+    env.service_command('php bin/console capco:reinit --force ' + ('', ' --no-es-populate')[populate != 'true'], 'application', env.www_app)
 
 
 @task(environments=['local'])
