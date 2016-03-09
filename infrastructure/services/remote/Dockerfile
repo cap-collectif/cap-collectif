@@ -11,6 +11,7 @@ RUN apt-get update && \
         bzip2 \
         cron \
         curl \
+        nginx \
         imagemagick \
         libmagickwand-dev \
         locales \
