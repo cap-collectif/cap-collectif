@@ -28,8 +28,7 @@ EOF
 
 echo "Checking if mysql is booted after $(( SECONDS - start )) seconds..."
 while ! mysql --host=127.0.0.1 > /dev/null 2>&1;
-  do sleep 1
-  echo "Waiting mysql to boot..."
+  do sleep 0.1
 done
 echo "Mysql is ready after $(( SECONDS - start )) seconds!"
 

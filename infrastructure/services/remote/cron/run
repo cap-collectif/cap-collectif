@@ -1,9 +1,20 @@
 #!/bin/bash
 
-# Wait till php-fpm is booted
-while ! /etc/init.d/php5-fpm status > /dev/null 2>&1; do sleep 1; done
+function test_phpfpm {
+  /etc/init.d/php7.0-fpm status > /dev/null
+}
 
-# We install the crontab
+function test_mysqldatabase {
+  mysql --host=127.0.0.1 -uroot symfony > /dev/null
+}
+
+# Wait till mysql and php-fpm are ready
+until ( test_phpfpm && test_mysqldatabase )
+do
+  sleep 0.1
+done
+
+echo "Installing crontab..."
 crontab /etc/cron.d/crontab
 
 exec cron -f
