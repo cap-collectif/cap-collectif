@@ -15,4 +15,9 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         expose: true
         type: float
         groups: [Steps]
+      defaultOrder:
+        expose: true
+        type: string
+        groups: [Steps]
+        serialized_name: defaultOrder
 
