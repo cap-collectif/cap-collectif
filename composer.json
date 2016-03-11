@@ -20,7 +20,7 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "symfony/symfony": "~2.8",
+        "symfony/symfony": "~2.7.5",
         "doctrine/orm": "^2.4.8",
         "doctrine/dbal": "^2.4.4",
         "doctrine/doctrine-bundle": "~1.4",
@@ -82,7 +82,7 @@
         "bossa/phpspec2-expect": "^1.0",
         "phpspec/phpspec": "^2.4",
         "guzzlehttp/guzzle": "~5.0",
-        "coduo/php-matcher": "dev-master",
+        "coduo/php-matcher": "^1.1",
         "stage1/docker-php": "@dev",
         "jolicode/jolinotif": "^1.0",
         "phpunit/phpunit": "@stable",

@@ -8,7 +8,6 @@ parameters:
   capco.twig.site_color.class: Capco\AppBundle\Twig\SiteColorExtension
   capco.twig.site_image.class: Capco\AppBundle\Twig\SiteImageExtension
   capco.twig.site_parameter.class: Capco\AppBundle\Twig\SiteParameterExtension
-  capco.twig.steps_links.class: Capco\AppBundle\Twig\StepsLinksExtension
   capco.twig.url.class: Capco\AppBundle\Twig\UrlExtension
 
 services:
@@ -67,8 +66,8 @@ services:
     tags:
       - { name: twig.extension }
 
-  capco.twig.steps_links:
-    class:     %capco.twig.steps_links.class%
+  capco.twig.steps:
+    class:     Capco\AppBundle\Twig\StepsExtension
     arguments: [@capco.step.resolver]
     tags:
       - { name: twig.extension }

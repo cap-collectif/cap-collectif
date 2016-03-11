@@ -14,6 +14,7 @@
             id="render-projects-list"
             data-projects='{{ projects | escape }}'
         >
+            <p class="text-center">{{ 'global.loading' | trans({}, 'CapcoAppBundle') }}</p>
         </div>
 
         {% if count > max %}

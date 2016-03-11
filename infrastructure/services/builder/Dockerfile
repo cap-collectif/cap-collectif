@@ -23,7 +23,7 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
     echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
     wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
     apt-get update && \
-    apt-get install -y -qq php7.0-gd php7.0-cli php7.0-curl php7.0-intl php7.0-mysql && \
+    apt-get install -y -qq php5-gd php5-cli php5-curl php5-intl php5-mysql && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
