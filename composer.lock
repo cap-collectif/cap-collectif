@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "43d4cc2f1e5b7385c86759486bcd957b",
-    "content-hash": "ae27022fb875ae66c6ea360bdec08610",
+    "hash": "934d9da6ca7c51ebc2e1ec0f3fc787e8",
+    "content-hash": "730e21ef0b320c4df2e37c7a3e1a10ca",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -58,7 +58,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/53fbc922d10190473091837057f029a44d86eb1a",
+                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/814a0c143d99309c4608334fe8ac0dd9f49edb76",
                 "reference": "53fbc922d10190473091837057f029a44d86eb1a",
                 "shasum": ""
             },
@@ -95,22 +95,35 @@
         },
         {
             "name": "caxy/php-htmldiff",
-            "version": "0.0.14",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caxy/php-htmldiff.git",
-                "reference": "95f36cbd0672ee3649392ae4eb22bf249b1e36f6"
+                "reference": "c20812d9d31496f0820588482322551e14fc5e19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/95f36cbd0672ee3649392ae4eb22bf249b1e36f6",
-                "reference": "95f36cbd0672ee3649392ae4eb22bf249b1e36f6",
+                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/c20812d9d31496f0820588482322551e14fc5e19",
+                "reference": "c20812d9d31496f0820588482322551e14fc5e19",
                 "shasum": ""
             },
             "require": {
+                "ezyang/htmlpurifier": "^4.7",
                 "php": ">=5.3.3"
             },
+            "require-dev": {
+                "doctrine/cache": "~1.0",
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "doctrine/cache": "Used for caching the calculated diffs using a Doctrine Cache Provider"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Caxy\\HtmlDiff": "lib/"
@@ -133,7 +146,7 @@
                 "diff",
                 "html"
             ],
-            "time": "2016-02-03 16:43:59"
+            "time": "2016-03-10 23:18:58"
         },
         {
             "name": "cocur/slugify",
@@ -1505,6 +1518,50 @@
                 "profiler"
             ],
             "time": "2015-12-21 16:18:05"
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "ae1828d955112356f7677c465f94f7deb7d27a40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/ae1828d955112356f7677c465f94f7deb7d27a40",
+                "reference": "ae1828d955112356f7677c465f94f7deb7d27a40",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "time": "2015-08-05 01:03:42"
         },
         {
             "name": "friendsofsymfony/elastica-bundle",
@@ -9923,16 +9980,16 @@
         },
         {
             "name": "tonicforhealth/behat-parallel-scenario",
-            "version": "v1.0.7.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tonicforhealth/behat-parallel-scenario.git",
-                "reference": "6b74bb25063e4bd220e5f28f4407d2370512fc6e"
+                "url": "https://github.com/spyl94/behat-parallel-scenario.git",
+                "reference": "65b5b4d1130d3c9c16097d172882781e839ecfc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tonicforhealth/behat-parallel-scenario/zipball/6b74bb25063e4bd220e5f28f4407d2370512fc6e",
-                "reference": "6b74bb25063e4bd220e5f28f4407d2370512fc6e",
+                "url": "https://api.github.com/repos/spyl94/behat-parallel-scenario/zipball/65b5b4d1130d3c9c16097d172882781e839ecfc5",
+                "reference": "65b5b4d1130d3c9c16097d172882781e839ecfc5",
                 "shasum": ""
             },
             "require": {
@@ -9949,7 +10006,6 @@
                     "Tonic\\Behat\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "oleksii.storozhylov",
@@ -9958,13 +10014,16 @@
             ],
             "description": "Behat parallel scenario",
             "keywords": [
-                "BDD",
-                "Behat",
+                "bdd",
+                "behat",
                 "parallel",
                 "process",
                 "testing"
             ],
-            "time": "2016-03-03 19:14:41"
+            "support": {
+                "source": "https://github.com/spyl94/behat-parallel-scenario/tree/master"
+            },
+            "time": "2016-03-11 13:43:33"
         },
         {
             "name": "tonicforhealth/parallel-process-runner",
@@ -10027,7 +10086,8 @@
         "sensiolabs/behat-page-object-extension": 20,
         "coduo/php-matcher": 20,
         "docker-php/docker-php": 20,
-        "phpunit/phpunit": 0
+        "phpunit/phpunit": 0,
+        "tonicforhealth/behat-parallel-scenario": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

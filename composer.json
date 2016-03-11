@@ -20,6 +20,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/emgiezet/FOSElasticaBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/spyl94/behat-parallel-scenario"
         }
     ],
     "require": {
@@ -92,7 +96,7 @@
         "phpunit/phpunit": "@stable",
         "pyrech/composer-changelogs": "^1.2",
         "alexandresalome/mailcatcher": "^1.0",
-        "tonicforhealth/behat-parallel-scenario": "^1.0"
+        "tonicforhealth/behat-parallel-scenario": "dev-master#65b5b4d1130d3c9c16097d172882781e839ecfc5"
     },
     "config": {
         "bin-dir": "bin",
