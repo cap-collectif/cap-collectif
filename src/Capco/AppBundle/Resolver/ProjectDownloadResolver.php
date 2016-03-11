@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Entity\Answer;
+use Capco\AppBundle\Entity\ProposalVote;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -91,6 +93,7 @@ class ProjectDownloadResolver
         'published' => [
             'id',
             'title',
+            'content_type',
             'author',
             'author_id',
             'author_email',
@@ -99,6 +102,9 @@ class ProjectDownloadResolver
             'theme',
             'district',
             'status',
+            'estimation',
+            'answer',
+            'nbVotes',
             'created',
             'updated',
             'link',
@@ -106,6 +112,7 @@ class ProjectDownloadResolver
         'unpublished' => [
             'id',
             'title',
+            'content_type',
             'author',
             'author_id',
             'author_email',
@@ -114,6 +121,9 @@ class ProjectDownloadResolver
             'theme',
             'district',
             'status',
+            'estimation',
+            'answer',
+            'nbVotes',
             'created',
             'updated',
             'link',
@@ -253,6 +263,16 @@ class ProjectDownloadResolver
         foreach ($proposals as $proposal) {
             if ($proposal->isEnabled()) {
                 $this->addItemToData($this->getProposalItem($proposal), !$proposal->getIsTrashed());
+                $this->getProposalVotesData($proposal->getVotes());
+            }
+        }
+    }
+
+    public function getProposalVotesData($votes)
+    {
+        foreach ($votes as $vote) {
+            if ($vote->isConfirmed()) {
+                $this->addItemToData($this->getProposalVoteItem($vote), true);
             }
         }
     }
@@ -311,6 +331,7 @@ class ProjectDownloadResolver
         return $item = [
             'id' => $proposal->getId(),
             'title' => $proposal->getTitle(),
+            'content_type' => $this->translator->trans('project_download.values.content_type.proposal', [], 'CapcoAppBundle'),
             'content' => $this->getProposalContent($proposal),
             'link' => $this->urlResolver->getObjectUrl($proposal, true),
             'created' => $this->dateToString($proposal->getCreatedAt()),
@@ -325,6 +346,37 @@ class ProjectDownloadResolver
             'theme' => $proposal->getTheme() ? $proposal->getTheme()->getTitle() : '',
             'district' => $proposal->getDistrict() ? $proposal->getDistrict()->getName() : '',
             'status' => $proposal->getStatus() ? $proposal->getStatus()->getName() : '',
+            'estimation' => $proposal->getEstimation() ? $proposal->getEstimation().' €' : '',
+            'answer' => $proposal->getAnswer() ? $this->getProposalAnswer($proposal->getAnswer()) : '',
+            'nbVotes' => $proposal->getVotesCount() ? $proposal->getVotesCount() : 0,
+        ];
+    }
+
+    private function getProposalVoteItem(ProposalVote $vote)
+    {
+        $proposal = $vote->getProposal();
+        $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
+        return $item = [
+            'id' => $vote->getId(),
+            'title' => $proposal->getTitle(),
+            'content_type' => $this->translator->trans('project_download.values.content_type.vote', [], 'CapcoAppBundle'),
+            'content' => $na,
+            'link' => $this->urlResolver->getObjectUrl($proposal, true),
+            'created' => $this->dateToString($vote->getCreatedAt()),
+            'updated' => $na,
+            'author' => $vote->getUser() ? $vote->getUser()->getUsername() : $vote->getUsername(),
+            'author_id' => $vote->getUser() ? $vote->getUser()->getId() : '',
+            'author_email' => $vote->getUser() ? $vote->getUser()->getEmail() : $vote->getEmail(),
+            'user_type' => $vote->getUser() ? $vote->getUser()->getUserType() : '',
+            'trashed' => $na,
+            'trashed_date' => $na,
+            'trashed_reason' => $na,
+            'theme' => $proposal->getTheme() ? $proposal->getTheme()->getTitle() : '',
+            'district' => $proposal->getDistrict() ? $proposal->getDistrict()->getName() : '',
+            'status' => $na,
+            'estimation' => $na,
+            'answer' => $na,
+            'nbVotes' => $na,
         ];
     }
 
@@ -561,6 +613,15 @@ class ProjectDownloadResolver
             $body .= "\n\n".$response->getQuestion()->getTitle().' :';
             $body .= "\n".$this->formatText($response->getValue());
         }
+
+        return $body;
+    }
+
+    private function getProposalAnswer(Answer $answer)
+    {
+        $body = $answer->getTitle();
+        $body .= "\n".$answer->getAuthor()->getUsername();
+        $body .= "\n\n".$this->formatText(html_entity_decode($answer->getBody()));
 
         return $body;
     }

@@ -1077,6 +1077,7 @@ project_download:
     published: Contenu publié
     unpublished: Contenu à la corbeille
   label:
+    answer: Réponse officielle
     arguments_nok: Arguments contre
     arguments_ok: Arguments pour
     author: Auteur
@@ -1088,8 +1089,10 @@ project_download:
     created: Création
     district: Quartier
     enabled: Publié
+    estimation: Estimation financière
     id: Identifiant
     link: Lien
+    nbVotes: Nombre de votes
     related_object: Lié à :
     score: Score
     sources: Sources
@@ -1112,6 +1115,7 @@ project_download:
     content_type:
       argument: Argument
       opinion: Proposition
+      proposal: Projet
       simple_argument: Avis
       source: Source
       version: Modification
