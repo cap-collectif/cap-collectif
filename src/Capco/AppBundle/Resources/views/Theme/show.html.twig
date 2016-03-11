@@ -60,6 +60,7 @@
                 id="render-projects-list"
                 data-projects='{{ projects | escape }}'
             >
+                <p class="text-center">{{ 'global.loading' | trans({}, 'CapcoAppBundle') }}</p>
             </div>
             {% if projectsCount > maxProjectsDisplayed %}
                 <a href="{{ path('app_project_search', {'theme': theme.slug, 'sort': 'date'}) }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
