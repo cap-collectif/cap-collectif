@@ -24,16 +24,6 @@ class SelectionStep extends AbstractStep
         self::VOTE_TYPE_BUDGET => 'step.selection.vote_type.budget',
     ];
 
-    public static $sort = ['old', 'last', 'votes', 'comments', 'random',];
-
-    public static $sortLabels = [
-        'comments' => 'step.sort.comments',
-        'last' => 'step.sort.last',
-        'old' => 'step.sort.old',
-        'random' => 'step.sort.random',
-        'votes' => 'step.sort.votes',
-    ];
-
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="selectionSteps", cascade={"persist"})
@@ -67,12 +57,6 @@ class SelectionStep extends AbstractStep
      * @ORM\Column(name="budget", type="float", nullable=true)
      */
     private $budget = null;
-
-    /**
-     * @ORM\Column(name="default_sort", type="string", nullable=false)
-     * @Assert\Choice(choices={"old","last","votes","comments","random"})
-     */
-    private $defaultSort = 'random';
 
     public function __construct()
     {
@@ -230,25 +214,6 @@ class SelectionStep extends AbstractStep
     public function setBudget($budget)
     {
         $this->budget = $budget;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDefaultSort()
-    {
-        return $this->defaultSort;
-    }
-
-    /**
-     * @param mixed $defaultSort
-     * @return $this
-     */
-    public function setDefaultSort($defaultSort)
-    {
-        $this->defaultSort = $defaultSort;
 
         return $this;
     }

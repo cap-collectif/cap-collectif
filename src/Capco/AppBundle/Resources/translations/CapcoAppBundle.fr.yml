@@ -419,12 +419,6 @@ step:
     closed: Terminé
     open: En cours
     future: À venir
-  sort:
-    comments: Les plus commentées
-    last: Les plus récentes
-    old: Les plus anciennes
-    random: Aléatoire
-    votes: Les plus votées
   consultation:
     alert:
       ended:
