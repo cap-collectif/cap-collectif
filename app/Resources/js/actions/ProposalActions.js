@@ -20,6 +20,7 @@ import {
 
   INIT_PROPOSAL_VOTES,
   INIT_VOTABLE_STEPS,
+  INIT_PROPOSALS_ORDER,
   CREATE_PROPOSAL_VOTE,
   CREATE_PROPOSAL_VOTE_SUCCESS,
   CREATE_PROPOSAL_VOTE_FAILURE,
@@ -46,6 +47,13 @@ export default {
     AppDispatcher.dispatch({
       actionType: INIT_PROPOSAL,
       proposal: proposal,
+    });
+  },
+
+  initSortOrder: (order) => {
+    AppDispatcher.dispatch({
+      actionType: INIT_PROPOSALS_ORDER,
+      order: order,
     });
   },
 

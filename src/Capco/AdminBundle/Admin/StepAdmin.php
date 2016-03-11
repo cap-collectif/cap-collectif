@@ -175,6 +175,12 @@ class StepAdmin extends Admin
                         ],
                     ],
                 ])
+                ->add('defaultSort', 'choice', [
+                    'label' => 'admin.fields.step.default_sort',
+                    'choices' => SelectionStep::$sortLabels,
+                    'translation_domain' => 'CapcoAppBundle',
+                    'required' => true,
+                ])
                 ->add('voteType', 'choice', [
                     'label' => 'admin.fields.step.vote_type',
                     'choices' => SelectionStep::$voteTypeLabels,

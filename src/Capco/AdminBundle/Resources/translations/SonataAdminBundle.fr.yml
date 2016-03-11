@@ -581,6 +581,7 @@ admin:
       body: Introduction
       budget: Budget alloué
       created_at: Création
+      default_sort: Tri des propositions par défaut
       end_at: Termine
       group_general: Général
       group_form: Formulaire
