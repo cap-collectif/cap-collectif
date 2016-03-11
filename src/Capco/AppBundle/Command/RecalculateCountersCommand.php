@@ -37,7 +37,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.proposalVotesCount =
-            (select count(pv.id) from CapcoAppBundle:ProposalVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p where pv.user = u AND pv.confirmed = 1 AND p.enabled = 1 group by pv.user)');
+            (select count(pv.id) from CapcoAppBundle:ProposalVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p where pv.user = u AND pv.confirmed = 1 AND pv.private = 0 AND p.enabled = 1 group by pv.user)');
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.opinionsCount =
@@ -87,7 +87,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.ideaVotesCount =
-            (select count(iv.id) from CapcoAppBundle:IdeaVote iv INNER JOIN CapcoAppBundle:Idea i WITH iv.idea = i where iv.user = u AND iv.confirmed = 1 AND i.isEnabled = 1 group by iv.user)');
+            (select count(iv.id) from CapcoAppBundle:IdeaVote iv INNER JOIN CapcoAppBundle:Idea i WITH iv.idea = i where iv.user = u AND iv.confirmed = 1 AND iv.private = 0 AND i.isEnabled = 1 group by iv.user)');
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.commentVotesCount =
