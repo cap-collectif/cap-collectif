@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Elastica\Filter\Bool;
 use Elastica\Filter\BoolFilter;
 use Elastica\Filter\Nested;
 use Elastica\Filter\Term;

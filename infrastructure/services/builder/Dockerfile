@@ -4,34 +4,26 @@ MAINTAINER Bastien Jaillot <bjaillot@jolicode.com>
 
 # Install basic
 RUN apt-get update && \
-    apt-get install -y --force-yes -qq \
-        wget \
-        curl \
-        apt-transport-https \
-        git \
-        locales \
-        libpng-dev \
-        python-all \
-        python-pip \
-        build-essential \
-        rlwrap \
-    && \
+    apt-get install -y --force-yes \
+    wget \
+    curl \
+    apt-transport-https \
+    git \
+    locales \
+    libpng-dev \
+    python-all \
+    python-pip \
+    build-essential \
+    rlwrap && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install php7.0
+# Install php
 RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
     echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
     wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
     apt-get update && \
-    apt-get install -y -qq \
-        php7.0-cli \
-        php7.0-curl \
-        php7.0-gd \
-        php7.0-imagick \
-        php7.0-intl \
-        php7.0-mysql \
-    && \
+    apt-get install -y -qq php5-gd php5-cli php5-curl php5-intl php5-mysql && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

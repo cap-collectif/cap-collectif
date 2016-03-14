@@ -75,7 +75,7 @@ doctrine:
         types:
             json: Sonata\Doctrine\Types\JsonType
     orm:
-        auto_generate_proxy_classes: true
+        auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
         filters:
           softdeleteable:

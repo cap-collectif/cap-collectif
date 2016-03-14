@@ -4,11 +4,10 @@ MAINTAINER Aurélien David <adavid@jolicode.com>
 
 # Install basic
 RUN apt-get update && \
-    apt-get install -y -qq --fix-missing \
+    apt-get install -y -qq \
         adduser \
         apt-transport-https \
         build-essential \
-        bzip2 \
         cron \
         curl \
         imagemagick \
@@ -21,95 +20,67 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install php7
-RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
-    echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
-    wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
-    apt-get update && \
-    apt-get install -y -qq \
-        php7.0-apcu \
-        php7.0-apc \
-        php7.0-cli \
-        php7.0-common \
-        php7.0-curl \
-        php7.0-dev \
-        php7.0-fpm \
-        php7.0-gd \
-        php7.0-imagick \
-        php7.0-intl \
-        php7.0-json \
-        php7.0-mysql \
-        php7.0-opcache \
-        php7.0-redis \
-        php7.0-xsl \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install mariadb
-RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
-    echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.1/debian jessie main" >> /etc/apt/sources.list && \
-    apt-get update -qq && \
-    DEBIAN_FRONTEND=noninteractive apt-get -y install \
-        mariadb-server-10.1=10.1.12+maria-1~jessie \
-        mariadb-client-10.1=10.1.12+maria-1~jessie \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Install nginx
+# Install nginx, redis and php (fpm)
 RUN apt-get update && \
     apt-get install -y -qq \
-        nginx \
+      nginx \
+      php5-fpm \
+      php5-cli \
+      php5-curl \
+      php5-intl \
+      php5-mysql \
+      php5-redis \
+      php5-xsl \
+      php5-gd \
+      php5-imagick \
+      redis-server \
     && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Install redis
-RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
-    echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
-    wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
-    apt-get update && \
-    apt-get install -y -qq \
-        redis-server \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*&& \
+    # Configure Redis
     sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
-    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
+    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Mariadb
+RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
+    echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.1/debian jessie main" >>/etc/apt/sources.list && \
+    apt-get update -qq && \
+    DEBIAN_FRONTEND=noninteractive apt-get -qq -y install \
+      mariadb-server \
+      mariadb-client \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install java
-RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list  && \
-    echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list  && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886  && \
-    apt-get update  && \
-    echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections  && \
-    echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections  && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes \
-        oracle-java8-installer \
-        oracle-java8-set-default \
-    && \
-    rm -rf /var/cache/oracle-jdk8-installer  && \
-    apt-get clean  && \
-    rm -rf /var/lib/apt/lists/*
+RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+    echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
+    echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
+    apt-get update && \
+    apt-get install  -y -qq --no-install-recommends oracle-java8-installer && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/cache/oracle-jdk8-installer
 
-# Install ES
-RUN cd / && \
-    wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.7.3.tar.gz && \
-    tar xvzf elasticsearch-1.7.3.tar.gz && \
-    rm -f elasticsearch-1.7.3.tar.gz && \
-    mv /elasticsearch-1.7.3 /etc/elasticsearch
+RUN \
+  cd / && \
+  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.7.3.tar.gz && \
+  tar xvzf elasticsearch-1.7.3.tar.gz && \
+  rm -f elasticsearch-1.7.3.tar.gz && \
+  mv /elasticsearch-1.7.3 /etc/elasticsearch
 
 # Install New Relic Agent
-RUN echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list && \
+RUN \
+    echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list && \
     wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y newrelic-php5 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
-    newrelic-install install
+    rm -f /etc/php5/*/conf.d/newrelic.ini
 
 # Install varnish
 RUN apt-get update && \
@@ -124,6 +95,9 @@ RUN apt-get update && \
 # Install fake user 1000
 RUN addgroup --gid=1000 capco && \
     adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco
+
+# Prepare /var/www
+RUN rm -rf /var/www/html; chown -R capco:capco /var/www/
 
 # Move mysql elsewhere because /var/lib/mysql will be a volume after build (see mysql/run)
 RUN mv /var/lib/mysql /var/lib/mysql_save
@@ -144,8 +118,8 @@ COPY varnish/run                /etc/service/varnish/run
 COPY mysql/capco.cnf            /etc/mysql/conf.d/capco.cnf
 COPY nginx/nginx.conf           /etc/nginx/nginx.conf
 COPY php-fpm/fpm.conf           /etc/service/php-fpm/fpm.conf
-COPY php-fpm/capco.ini          /etc/php/7.0/fpm/conf.d/capco.ini
-COPY php-fpm/capco.ini          /etc/php/7.0/cli/conf.d/capco.ini
+COPY php-fpm/capco.ini          /etc/php5/fpm/conf.d/capco.ini
+COPY php-fpm/capco.ini          /etc/php5/cli/conf.d/capco.ini
 COPY cron/crontab               /etc/cron.d/crontab
 COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
@@ -153,7 +127,12 @@ COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 # Daemons
 COPY php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
 
+# Volume for redis
+VOLUME ["/data"]
+
+# Add entrypoint
 WORKDIR /var/www
+
 USER root
 
 # Default command

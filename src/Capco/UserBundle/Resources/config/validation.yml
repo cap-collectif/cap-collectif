@@ -10,7 +10,7 @@ Capco\UserBundle\Entity\User:
       - Length: { min: 8, max: 128, minMessage: password.minMessage, groups: [registration] }
     isTermsAccepted:
       - NotNull: { message: charte.blank, groups: [registration] }
-      - "IsTrue": { message: charte.blank, groups: [registration] }
+      - "True": { message: charte.blank, groups: [registration] }
     email:
       - NotBlank: { message: email.blank, groups: [registration, profile] }
       - Email: { checkMX: true, message: email.invalid, groups: [registration, profile] }

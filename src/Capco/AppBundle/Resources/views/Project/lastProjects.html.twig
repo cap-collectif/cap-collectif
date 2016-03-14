@@ -3,6 +3,7 @@
         id="render-projects-list"
         data-projects='{{ projects | escape }}'
     >
+        <p class="text-center">{{ 'global.loading' | trans({}, 'CapcoAppBundle') }}</p>
     </div>
     <a href="{{ path('app_project') }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
 {% else %}

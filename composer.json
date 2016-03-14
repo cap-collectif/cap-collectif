@@ -16,30 +16,22 @@
         {
             "type": "vcs",
             "url": "https://github.com/spyl94/HWIOAuthBundle"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/emgiezet/FOSElasticaBundle"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/spyl94/behat-parallel-scenario"
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "symfony/symfony": "~2.8",
+        "php": ">=5.5.9",
+        "symfony/symfony": "~2.7.5",
         "doctrine/orm": "^2.4.8",
         "doctrine/dbal": "^2.4.4",
-        "doctrine/doctrine-bundle": "~1.6",
+        "doctrine/doctrine-bundle": "~1.4",
         "twig/extensions": "~1.0",
         "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.9",
-        "sensio/distribution-bundle": "~5.0",
-        "sensio/framework-extra-bundle": "^3.0.14",
+        "symfony/monolog-bundle": "~2.4",
+        "sensio/distribution-bundle": "~4.0",
+        "sensio/framework-extra-bundle": "^3.0.2",
 
-        "doctrine/doctrine-fixtures-bundle": "~2.3",
-        "stof/doctrine-extensions-bundle": "~1.2",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "stof/doctrine-extensions-bundle": "~1.1",
         "hautelook/alice-bundle": "~0.2",
 
         "elao/web-profiler-extra-bundle": "~2.3",
@@ -61,20 +53,20 @@
         "predis/predis": "^1.0",
         "jolicode/jolitypo-bundle": "@stable",
 
-        "doctrine/doctrine-migrations-bundle": "~1.1",
+        "doctrine/doctrine-migrations-bundle": "~1.0",
         "willdurand/geocoder": "~3.0",
         "tilleuls/ckeditor-sonata-media-bundle": "~1.0",
         "egeloen/ckeditor-bundle": "~3.0",
-        "mewesk/twig-excel-bundle": "~2.0",
-        "friendsofsymfony/elastica-bundle": "dev-master#f583cc5842d1fc2cb42d963f97b7b67f208be0f7",
+        "mewesk/twig-excel-bundle": "~1.0",
+        "friendsofsymfony/elastica-bundle": "~3.1",
         "jms/serializer-bundle": "~1.0",
         "jms/serializer": "dev-fix/2-nested-serializer-calls as 1.0.0",
         "nelmio/api-doc-bundle": "~2.9",
-        "friendsofsymfony/rest-bundle": "~1.7",
-        "lexik/jwt-authentication-bundle": "~1.4",
-        "willdurand/hateoas-bundle": "~1.1",
-        "snc/redis-bundle": "~1.1.10",
-        "ekino/newrelic-bundle": "~1.3",
+        "friendsofsymfony/rest-bundle": "^1.7",
+        "lexik/jwt-authentication-bundle": "~1.0",
+        "willdurand/hateoas-bundle": "~1.0",
+        "snc/redis-bundle": "1.1.x-dev",
+        "ekino/newrelic-bundle": "^1.3",
         "caxy/htmldiff-bundle": "dev-master"
     },
     "require-dev": {
@@ -90,13 +82,17 @@
         "bossa/phpspec2-expect": "^1.0",
         "phpspec/phpspec": "^2.4",
         "guzzlehttp/guzzle": "~5.0",
-        "coduo/php-matcher": "dev-master",
-        "docker-php/docker-php": "@dev",
+        "coduo/php-matcher": "^1.1",
+        "stage1/docker-php": "@dev",
         "jolicode/jolinotif": "^1.0",
         "phpunit/phpunit": "@stable",
         "pyrech/composer-changelogs": "^1.2",
         "alexandresalome/mailcatcher": "^1.0",
-        "tonicforhealth/behat-parallel-scenario": "dev-master#65b5b4d1130d3c9c16097d172882781e839ecfc5"
+        "tonicforhealth/behat-parallel-scenario": "^1.0"
+    },
+    "scripts": {
+        "post-install-cmd": [],
+        "post-update-cmd": []
     },
     "config": {
         "bin-dir": "bin",

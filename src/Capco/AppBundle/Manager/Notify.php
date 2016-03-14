@@ -120,7 +120,7 @@ class Notify implements MailerInterface
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
 
         if (!$fromEmail) {
-            $fromEmail = 'assistance@cap-collectif.com';
+            $fromEmail = 'support@cap-collectif.com';
         }
 
         if (!$fromName) {

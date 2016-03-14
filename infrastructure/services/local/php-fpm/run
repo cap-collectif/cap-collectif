@@ -33,4 +33,4 @@ do
   echo "Waiting"
 done
 
-exec /usr/sbin/php-fpm7.0 -y /etc/service/php-fpm/fpm.conf -O
+exec php5-fpm -y /etc/service/php-fpm/fpm.conf -O

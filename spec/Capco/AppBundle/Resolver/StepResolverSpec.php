@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Resolver\UrlResolver;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

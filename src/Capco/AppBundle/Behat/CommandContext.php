@@ -10,10 +10,6 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\StreamOutput;
 
-// TODO: remove when we use Symfony 3.0
-// This avoid failure because of deprecated warnings
-error_reporting(0);
-
 class CommandContext implements KernelAwareContext
 {
     use KernelDictionary;

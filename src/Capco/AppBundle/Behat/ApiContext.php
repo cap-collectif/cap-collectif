@@ -3,7 +3,6 @@
 /**
  * @Copyright 2015 Aurélien David a.k.a "PretentiouSpyl" <adavid@jolicode.com>
  */
-
 namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
@@ -224,6 +223,7 @@ EOF;
     {
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
+
         $this->response->json(); // check if json
         $body = (string) $this->response->getBody();
         \PHPUnit_Framework_Assert::assertTrue($matcher->match($body, $pattern->getRaw()), $body.' => '.$matcher->getError());

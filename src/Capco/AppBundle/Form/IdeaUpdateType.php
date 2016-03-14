@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\True;
 
 class IdeaUpdateType extends IdeaType
 {
@@ -18,7 +18,7 @@ class IdeaUpdateType extends IdeaType
                 'mapped' => false,
                 'label' => 'idea.form.confirm',
                 'required' => true,
-                'constraints' => [new IsTrue(['message' => 'idea.votes_not_confirmed'])],
+                'constraints' => [new True(['message' => 'idea.votes_not_confirmed'])],
             ])
         ;
 

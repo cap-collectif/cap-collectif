@@ -11,10 +11,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Behat\MinkExtension\Context\MinkContext;
 
-// TODO: remove when we use Symfony 3.0
-// This avoid failure because of deprecated warnings
-error_reporting(0);
-
 abstract class DefaultContext extends MinkContext implements Context, KernelAwareContext
 {
     protected $navigationContext;

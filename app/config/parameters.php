@@ -1,58 +1,60 @@
 <?php
 
-if (!function_exists('getenv_default')) {
-    function getenv_default($key, $default = null)
-    {
-        return getenv('SYMFONY_'.strtoupper(str_replace('.', '__', $key))) ?: $default;
-    }
+function get_env_var($key) {
+    return getenv('SYMFONY_'.strtoupper(str_replace('.', '__', $key)));
 }
 
-$container->setParameter('database_driver', getenv_default('database_driver', 'pdo_mysql'));
-$container->setParameter('database_host', getenv_default('database_host', '127.0.0.1'));
-$container->setParameter('database_port', getenv_default('database_port', 3306));
-$container->setParameter('database_name', getenv_default('database_name', 'symfony'));
-$container->setParameter('database_user', getenv_default('database_user', 'root'));
+function set_var($key, $default) {
+    return get_env_var($key) ?: $default;
+}
+
+$container->setParameter('database_driver',             set_var('database_driver', 'pdo_mysql'));
+$container->setParameter('database_host',               set_var('database_host', '127.0.0.1'));
+$container->setParameter('database_port',               set_var('database_port', 3306));
+$container->setParameter('database_name',               set_var('database_name', 'symfony'));
+$container->setParameter('database_user',               set_var('database_user', 'root'));
 $container->setParameter('database_password', null);
-$container->setParameter('elasticsearch_host', getenv_default('elasticsearch_host', '127.0.0.1'));
-$container->setParameter('redis_host', getenv_default('redis_host', '127.0.0.1'));
 
-$container->setParameter('mailer_transport', getenv_default('mailer_transport', 'smtp'));
-$container->setParameter('mailer_user', getenv_default('mailer_user', 'maxime@cap-collectif.com'));
-$container->setParameter('mailer_password', getenv_default('mailer_password', '***REMOVED***'));
-$container->setParameter('mailer_host', getenv_default('mailer_host', '***REMOVED***'));
-$container->setParameter('mailer_port', getenv_default('mailer_port', 587));
-$container->setParameter('mailer_service_user', getenv_default('mailer_service_user', 'maxime@cap-collectif.com'));
-$container->setParameter('mailer_service_password', getenv_default('mailer_service_password', '***REMOVED***'));
-$container->setParameter('mailer_service_host', getenv_default('mailer_service_host', '***REMOVED***'));
+$container->setParameter('elasticsearch_host',          set_var('elasticsearch_host', '127.0.0.1'));
+$container->setParameter('redis_host',                  set_var('redis_host', '127.0.0.1'));
 
-$container->setParameter('locale', getenv_default('locale', 'fr'));
-$container->setParameter('secret', getenv_default('secret', '***REMOVED***'));
-$container->setParameter('use_assetic_controller', getenv_default('use_assetic_controller', true));
+$container->setParameter('mailer_transport',            set_var('mailer_transport', 'smtp'));
+$container->setParameter('mailer_user',                 set_var('mailer_user', 'maxime@cap-collectif.com'));
+$container->setParameter('mailer_password',             set_var('mailer_password', '***REMOVED***'));
+$container->setParameter('mailer_host',                 set_var('mailer_host', '***REMOVED***'));
+$container->setParameter('mailer_port',                 set_var('mailer_port', 587));
+$container->setParameter('mailer_service_user',         set_var('mailer_service_user', 'maxime@cap-collectif.com'));
+$container->setParameter('mailer_service_password',     set_var('mailer_service_password', '***REMOVED***'));
+$container->setParameter('mailer_service_host',         set_var('mailer_service_host', '***REMOVED***'));
 
-$container->setParameter('facebook_app_id', getenv_default('facebook_app_id', '***REMOVED***'));
-$container->setParameter('facebook_app_secret', getenv_default('facebook_app_secret', '***REMOVED***'));
-$container->setParameter('google_app_id', getenv_default('google_app_id', '***REMOVED***'));
-$container->setParameter('google_app_secret', getenv_default('google_app_secret', '***REMOVED***'));
-$container->setParameter('twitter_app_id', getenv_default('twitter_app_id', '***REMOVED***'));
-$container->setParameter('twitter_app_secret', getenv_default('twitter_app_secret', '***REMOVED***'));
-$container->setParameter('nous_citoyens_app_id', getenv_default('nous_citoyens_app_id', 'xxx'));
-$container->setParameter('nous_citoyens_app_secret', getenv_default('nous_citoyens_app_secret', 'xxx'));
+$container->setParameter('locale',                      set_var('locale', 'fr'));
+$container->setParameter('secret',                      set_var('secret', '***REMOVED***'));
+$container->setParameter('use_assetic_controller',      set_var('use_assetic_controller', true));
 
-$container->setParameter('shield_login', getenv_default('shield_login', '***REMOVED***'));
-$container->setParameter('shield_pwd', getenv_default('shield_pwd', '***REMOVED***'));
+$container->setParameter('facebook_app_id',             set_var('facebook_app_id', '***REMOVED***'));
+$container->setParameter('facebook_app_secret',         set_var('facebook_app_secret', '***REMOVED***'));
+$container->setParameter('google_app_id',               set_var('google_app_id', '***REMOVED***'));
+$container->setParameter('google_app_secret',           set_var('google_app_secret', '***REMOVED***'));
+$container->setParameter('twitter_app_id',              set_var('twitter_app_id', '***REMOVED***'));
+$container->setParameter('twitter_app_secret',          set_var('twitter_app_secret', '***REMOVED***'));
+$container->setParameter('nous_citoyens_app_id',        set_var('nous_citoyens_app_id', 'xxx'));
+$container->setParameter('nous_citoyens_app_secret',    set_var('nous_citoyens_app_secret', 'xxx'));
 
-$container->setParameter('jwt_private_key_path', getenv_default('jwt_private_key_path', '%kernel.root_dir%/var/jwt/private.pem'));
-$container->setParameter('jwt_public_key_path', getenv_default('jwt_public_key_path', '%kernel.root_dir%/var/jwt/public.pem'));
-$container->setParameter('jwt_key_pass_phrase', getenv_default('jwt_key_pass_phrase', 'iamapassphrase'));
-$container->setParameter('jwt_token_ttl', getenv_default('jwt_token_ttl', 86400));
+$container->setParameter('shield_login',                set_var('shield_login', '***REMOVED***'));
+$container->setParameter('shield_pwd',                  set_var('shield_pwd', '***REMOVED***'));
 
-$container->setParameter('language_analyzer', getenv_default('language_analyzer', 'french'));
+$container->setParameter('jwt_private_key_path',        set_var('jwt_private_key_path', '%kernel.root_dir%/var/jwt/private.pem'));
+$container->setParameter('jwt_public_key_path',         set_var('jwt_public_key_path', '%kernel.root_dir%/var/jwt/public.pem'));
+$container->setParameter('jwt_key_pass_phrase',         set_var('jwt_key_pass_phrase', 'iamapassphrase'));
+$container->setParameter('jwt_token_ttl',               set_var('jwt_token_ttl', 86400));
 
-$container->setParameter('remember_secret', getenv_default('remember_secret', '***REMOVED***'));
+$container->setParameter('language_analyzer',           set_var('language_analyzer', 'french'));
 
-$container->setParameter('router.request_context.host', getenv_default('router.request_context.host', 'localhost'));
-$container->setParameter('assets_version', getenv_default('assets_version', 'v1'));
-$container->setParameter('server_version', getenv_default('server_version', '10.1.11-MariaDB-1~jessie'));
+$container->setParameter('remember_secret',             set_var('remember_secret', '***REMOVED***'));
+
+$container->setParameter('router.request_context.host', set_var('router.request_context.host', 'localhost'));
+$container->setParameter('assets_version',              set_var('assets_version', 'v1'));
+$container->setParameter('server_version',              set_var('server_version', '10.1.11-MariaDB-1~jessie'));
 
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
 
