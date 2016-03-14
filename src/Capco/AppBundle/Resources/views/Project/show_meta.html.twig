@@ -14,9 +14,9 @@
                             <p class="excerpt small">
                                 {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': step} only %}
                             </p>
-                            {% if step | capco_step_opening_status is not null %}
+                            {% if step.openingStatus is not null %}
                                 <p class="label label-default">
-                                    {{ stepStatus[step | capco_step_opening_status] | trans({}, 'CapcoAppBundle') }}
+                                    {{ stepStatus[step.openingStatus] | trans({}, 'CapcoAppBundle') }}
                                 </p>
                             {% endif %}
                         </div>

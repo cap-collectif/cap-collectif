@@ -1,7 +1,6 @@
 Capco\AppBundle\Entity\Argument:
 
-## Arguments on opinion
-
+  ## Arguments on opinion
   argument1:
     Opinion: @opinion2
     type: 0
@@ -69,8 +68,7 @@ Capco\AppBundle\Entity\Argument:
     isEnabled: true
     isTrashed: false
 
-## Argument on versions
-
+  ## Argument on versions
   argument204:
     opinionVersion: @version1
     type: 0

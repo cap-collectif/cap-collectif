@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Elastica\Filter\Bool;
 use Elastica\Filter\BoolFilter;
 use Elastica\Filter\Nested;
 use Elastica\Filter\Term;
@@ -114,7 +113,7 @@ class SearchResolver
      */
     protected function getMultiMatchQuery($term)
     {
-        $boolQuery = new Query\Bool();
+        $boolQuery = new Query\BoolQuery();
 
         $shouldQuery = new MultiMatch();
         $shouldQuery->setQuery($term);

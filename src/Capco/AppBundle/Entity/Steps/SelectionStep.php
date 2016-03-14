@@ -24,7 +24,7 @@ class SelectionStep extends AbstractStep
         self::VOTE_TYPE_BUDGET => 'step.selection.vote_type.budget',
     ];
 
-    public static $sort = ['old', 'last', 'votes', 'comments', 'random',];
+    public static $sort = ['old', 'last', 'votes', 'comments', 'random'];
 
     public static $sortLabels = [
         'comments' => 'step.sort.comments',
@@ -244,6 +244,7 @@ class SelectionStep extends AbstractStep
 
     /**
      * @param mixed $defaultSort
+     *
      * @return $this
      */
     public function setDefaultSort($defaultSort)
