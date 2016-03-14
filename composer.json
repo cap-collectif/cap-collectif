@@ -24,6 +24,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/spyl94/behat-parallel-scenario"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/spyl94/BehatPageObjectExtension"
         }
     ],
     "require": {
@@ -75,6 +79,7 @@
         "willdurand/hateoas-bundle": "~1.1",
         "snc/redis-bundle": "~1.1.10",
         "ekino/newrelic-bundle": "~1.3",
+        "ocramius/proxy-manager": "^2.0",
         "caxy/htmldiff-bundle": "dev-master"
     },
     "require-dev": {
@@ -85,8 +90,7 @@
         "behat/mink-selenium2-driver": "^1.3",
         "behat/mink": "^1.7",
         "behat/mink-browserkit-driver": "^1.3",
-        "sensiolabs/behat-page-object-extension": "~2.0@dev",
-        "ocramius/proxy-manager": "^1.0",
+        "sensiolabs/behat-page-object-extension": "dev-master#34bd046923234ae6b1a6c5733db905d4e0ea7a97",
         "bossa/phpspec2-expect": "^1.0",
         "phpspec/phpspec": "^2.4",
         "guzzlehttp/guzzle": "~5.0",
