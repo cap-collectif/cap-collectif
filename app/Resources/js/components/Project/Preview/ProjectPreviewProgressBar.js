@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import ProjectPreviewProgressBarItem from './ProjectPreviewProgressBarItem';
 
 const ProjectPreviewProgressBar = React.createClass({
   propTypes: {
-    project: React.PropTypes.object.isRequired,
+    project: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 

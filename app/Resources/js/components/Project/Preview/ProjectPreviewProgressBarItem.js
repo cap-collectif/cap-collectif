@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
@@ -6,8 +6,8 @@ import ProjectPreviewPopoverContent from './ProjectPreviewPopoverContent';
 
 const ProjectPreviewProgressBarItem = React.createClass({
   propTypes: {
-    projectStep: React.PropTypes.object.isRequired,
-    style: React.PropTypes.object,
+    projectStep: PropTypes.object.isRequired,
+    style: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -25,7 +25,7 @@ const ProjectPreviewProgressBarItem = React.createClass({
       'thumbnail__steps-bar__item': true,
       'thumbnail__steps-bar__item--closed': !step.isOpen,
       'thumbnail__steps-bar__item--open': step.isOpen,
-      // 'thumbnail__steps-bar__item--future': step.openingStatus === 'future',
+      'thumbnail__steps-bar__item--future': step.isFuture,
     });
     const popover = (
       <Popover
