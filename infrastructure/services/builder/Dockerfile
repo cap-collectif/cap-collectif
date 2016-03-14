@@ -4,7 +4,7 @@ MAINTAINER Bastien Jaillot <bjaillot@jolicode.com>
 
 # Install basic
 RUN apt-get update && \
-    apt-get install -y --force-yes -qq \
+    apt-get install -y --force-yes -qq --fix-missing \
         wget \
         curl \
         apt-transport-https \

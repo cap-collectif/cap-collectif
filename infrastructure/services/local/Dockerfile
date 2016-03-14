@@ -4,7 +4,7 @@ MAINTAINER Aurélien David <adavid@jolicode.com>
 
 # Install basic
 RUN apt-get update && \
-    apt-get install -y -qq \
+    apt-get install -y -qq --fix-missing \
         apt-transport-https \
         build-essential \
         cron \
