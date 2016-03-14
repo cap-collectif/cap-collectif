@@ -3,7 +3,7 @@
 if [ "$PRODUCTION" ]; then
   echo "Building for production"
   # Symfony deps
-  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-scripts --no-progress
+  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-progress
   mkdir -p var
   php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var
 

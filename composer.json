@@ -102,6 +102,7 @@
         "alexandresalome/mailcatcher": "^1.0",
         "tonicforhealth/behat-parallel-scenario": "dev-master#65b5b4d1130d3c9c16097d172882781e839ecfc5"
     },
+    "scripts": {},
     "config": {
         "bin-dir": "bin",
         "github-oauth": {"github.com": "***REMOVED***"}
