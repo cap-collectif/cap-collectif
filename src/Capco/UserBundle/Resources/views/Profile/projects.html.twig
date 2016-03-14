@@ -3,6 +3,7 @@
         id="render-projects-list"
         data-projects='{{ projects | escape }}'
     >
+        <p class="text-center">{{ 'global.loading' | trans({}, 'CapcoAppBundle') }}</p>
     </div>
 {% else %}
     <div class="project__empty-block  text-center">
