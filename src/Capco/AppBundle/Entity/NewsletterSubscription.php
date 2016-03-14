@@ -51,9 +51,9 @@ class NewsletterSubscription
     {
         if ($this->id) {
             return $this->getEmail();
-        } else {
-            return 'New newsletter';
         }
+
+        return 'New newsletter';
     }
 
     /**

@@ -19,31 +19,35 @@ class HomepageController extends Controller
      */
     public function homepageAction(Request $request)
     {
-        $toggleManager = $this->get('capco.toggle.manager');
-
         $sections = $this->get('capco.section.resolver')->getDisplayableEnabledOrdered();
+        $newsletterActive = $this->get('capco.toggle.manager')->isActive('newsletter');
 
         // Subscription to newsletter
-        if ($newsletterActive = $toggleManager->isActive('newsletter')) {
+        if ($newsletterActive) {
             $subscription = new NewsletterSubscription();
 
-            $form = $this->createForm(new NewsletterSubscriptionType(), $subscription);
+            $form = $this->createForm(NewsletterSubscriptionType::class, $subscription);
+            $form->handleRequest($request);
 
-            if ($request->getMethod() == 'POST') {
-                $form->handleRequest($request);
+            if ($form->isSubmitted()) {
+                $flashBag = $this->get('session')->getFlashBag();
+                $translator = $this->get('translator');
+                $em = $this->getDoctrine()->getManager();
 
-                if ($toggleManager->isActive('newsletter') && $form->isValid()) {
-                    $alreadyExists = $this->getDoctrine()->getRepository('CapcoAppBundle:NewsletterSubscription')->findOneByEmail($subscription->getEmail());
+                if ($form->isValid()) {
+                    // TODO: move this to a unique constraint in form instead
+                    $alreadyExists = $em->getRepository('CapcoAppBundle:NewsletterSubscription')
+                                        ->findOneByEmail($subscription->getEmail());
+
                     if (null != $alreadyExists) {
-                        $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('homepage.newsletter.already_subscribed'));
+                        $flashBag->add('info', $translator->trans('homepage.newsletter.already_subscribed'));
                     } else {
-                        $em = $this->getDoctrine()->getManager();
                         $em->persist($subscription);
                         $em->flush();
-                        $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('homepage.newsletter.success'));
+                        $flashBag->add('success', $translator->trans('homepage.newsletter.success'));
                     }
                 } else {
-                    $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('homepage.newsletter.invalid'));
+                    $flashBag->add('danger', $translator->trans('homepage.newsletter.invalid'));
                 }
 
                 return $this->redirect($this->generateUrl('app_homepage'));

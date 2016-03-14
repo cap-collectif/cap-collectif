@@ -26,7 +26,6 @@ framework:
     trusted_proxies: ['127.0.0.1']
     session:
         handler_id: snc_redis.session.handler
-        # cookie_secure: true
     fragments: null
     http_method_override: true
     translator: { fallback: fr }
@@ -42,10 +41,10 @@ snc_redis:
             type: predis
             alias: session
             dsn: redis://%redis_host%
+            logging: %kernel.debug%
     session:
         client: session
-        ttl: 3600
-        use_as_default: true
+        ttl: 1209600 # Two weeks
 
 twig:
     debug: "%kernel.debug%"

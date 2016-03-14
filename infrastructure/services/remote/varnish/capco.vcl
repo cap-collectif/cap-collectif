@@ -6,13 +6,23 @@ backend default {
   .port = "8080";
 }
 
+# Called at the beginning of a request, after the complete request has been received and parsed.
 sub vcl_recv {
-  # Called at the beginning of a request, after the complete request has been received and parsed.
 
+  # Prod only
   if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css)$") {
     unset req.http.Cookie;
   }
+  # End Prod only
 
+  # Ensure that the Symfony Router generates URLs correctly with Varnish
+  if (req.http.X-Forwarded-Proto == "https" ) {
+    set req.http.X-Forwarded-Port = "443";
+  } else {
+    set req.http.X-Forwarded-Port = "80";
+  }
+
+  # Remove all cookies except the session ID.
   if (req.http.Cookie) {
     set req.http.Cookie = ";" + req.http.Cookie;
     set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
@@ -21,6 +31,7 @@ sub vcl_recv {
     set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
 
     if (req.http.Cookie == "") {
+      # If there are no more cookies, remove the header to get page cached.
       unset req.http.Cookie;
     }
   }

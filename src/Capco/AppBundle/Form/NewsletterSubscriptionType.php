@@ -30,6 +30,7 @@ class NewsletterSubscriptionType extends AbstractType
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\NewsletterSubscription',
             'translation_domain' => 'CapcoAppBundle',
+            'csrf_protection' => false,
         ]);
     }
 

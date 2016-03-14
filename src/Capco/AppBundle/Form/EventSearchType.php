@@ -70,6 +70,16 @@ class EventSearchType extends AbstractType
     }
 
     /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults([
+            'csrf_protection' => false,
+        ]);
+    }
+
+    /**
      * @return string
      */
     public function getName()
