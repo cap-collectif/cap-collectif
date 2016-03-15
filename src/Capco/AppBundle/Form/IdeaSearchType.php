@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class IdeaSearchType extends AbstractType
 {

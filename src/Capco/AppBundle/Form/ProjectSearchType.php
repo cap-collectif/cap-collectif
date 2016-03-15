@@ -7,6 +7,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Repository\ThemeRepository;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProjectSearchType extends AbstractType
 {

@@ -19,6 +19,9 @@ done
 echo "Checking media permissions after $(( SECONDS - start )) seconds..."
 chmod -R 777 web/media
 
+echo "Checking var permissions after $(( SECONDS - start )) seconds..."
+chown -R capco:capco var
+
 echo "Warming up cache and install bundle assets after $(( SECONDS - start )) seconds..."
 su capco <<'EOF'
 cd /var/www

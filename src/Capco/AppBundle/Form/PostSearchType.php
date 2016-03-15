@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PostSearchType extends AbstractType
 {

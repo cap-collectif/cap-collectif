@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class EventSearchType extends AbstractType
 {

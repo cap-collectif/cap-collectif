@@ -2,11 +2,13 @@
 
 if [ "$PRODUCTION" ]; then
   echo "Building for production"
-  # Symfony deps
-  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-progress
-  mkdir -p var
-  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-scripts --no-progress
+  # We create var directory used by Symfony
   mkdir -m 777 -p var
+  # We install vendors with composer
+  # We don't use `--no-scripts` or `--no-plugins` because a script in a composer plugin
+  # will generate the file vendor/ocramius/package-versions/src/PackageVersions/Versions.php
+  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-progress
+  # We build bootstrap.php.cache in the `var` directory
   php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var
 
   # Frontend deps
@@ -16,7 +18,7 @@ if [ "$PRODUCTION" ]; then
 else
   echo "Building for development"
   # Symfony deps
-  composer install --prefer-dist --no-interaction --no-scripts
+  composer install --prefer-dist --no-interaction
 
   # Frontend deps
   npm install

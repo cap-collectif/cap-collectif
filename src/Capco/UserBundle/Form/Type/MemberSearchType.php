@@ -6,6 +6,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class MemberSearchType extends AbstractType
 {
