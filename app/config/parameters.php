@@ -52,7 +52,7 @@ $container->setParameter('remember_secret', getenv_default('remember_secret', '*
 
 $container->setParameter('router.request_context.host', getenv_default('router.request_context.host', 'localhost'));
 $container->setParameter('assets_version', getenv_default('assets_version', 'v1'));
-$container->setParameter('server_version', getenv_default('server_version', '10.1.11-MariaDB-1~jessie'));
+$container->setParameter('server_version', getenv_default('server_version', '5.6'));
 
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
 
