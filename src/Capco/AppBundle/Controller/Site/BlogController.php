@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Capco\AppBundle\Form\PostSearchType;
@@ -18,13 +19,7 @@ class BlogController extends Controller
      * @Route("/blog/filter/{theme}/{page}", name="app_blog_search_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "_feature_flags" = "blog"} )
      * @Route("/blog/filter/{theme}/{project}/{page}", name="app_blog_search_project", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "project" = "all", "_feature_flags" = "blog"} )
      * @Template("CapcoAppBundle:Blog:index.html.twig")
-     *
-     * @param $request
-     * @param $page
-     * @param $theme
-     * @param $project
-     *
-     * @return array
+     * @Cache(smaxage="60", public=true)
      */
     public function indexAction(Request $request, $page, $theme = null, $project = null)
     {

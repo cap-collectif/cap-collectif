@@ -21,14 +21,8 @@ class EventController extends Controller
      * @Route("/events/filter/{theme}", name="app_event_search_theme", defaults={"_feature_flags" = "calendar", "theme" = "all"} )
      * @Route("/events/filter/{theme}/{project}", name="app_event_search_project", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
      * @Route("/events/filter/{theme}/{project}/{term}", name="app_event_search_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Event:index.html.twig")
-     *
-     * @param $request
-     * @param $theme
-     * @param $project
-     * @param $term
-     *
-     * @return array
      */
     public function indexAction(Request $request, $theme = null, $project = null, $term = null)
     {

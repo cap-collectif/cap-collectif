@@ -24,10 +24,6 @@ class IdeaController extends Controller
     /**
      * @Route("/ideas/add", name="app_idea_create", defaults={"_feature_flags" = "ideas,idea_creation"})
      * @Template("CapcoAppBundle:Idea:create.html.twig")
-     *
-     * @param $request
-     *
-     * @return array
      */
     public function createAction(Request $request)
     {
@@ -217,14 +213,7 @@ class IdeaController extends Controller
      * @Route("/ideas/filter/{theme}/{sort}/{page}", name="app_idea_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "sort" = "date", "_feature_flags" = "ideas"} )
      * @Route("/ideas/filter/{theme}/{sort}/{term}/{page}", name="app_idea_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "sort" = "date", "_feature_flags" = "ideas"} )
      * @Template("CapcoAppBundle:Idea:index.html.twig")
-     *
-     * @param $page
-     * @param $request
-     * @param $theme
-     * @param $sort
-     * @param $term
-     *
-     * @return array
+     * @Cache(smaxage="60", public=true)
      */
     public function indexAction(Request $request, $page, $theme = null, $sort = 'last', $term = null)
     {

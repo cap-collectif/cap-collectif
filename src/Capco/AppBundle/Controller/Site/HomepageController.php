@@ -16,6 +16,8 @@ class HomepageController extends Controller
 {
     /**
      * @Route("/", name="app_homepage")
+     * @Cache(smaxage="60", public=true)
+     * @Template("CapcoAppBundle:Homepage:homepage.html.twig")
      */
     public function homepageAction(Request $request)
     {
@@ -54,17 +56,10 @@ class HomepageController extends Controller
             }
         }
 
-        $response = $this->render('CapcoAppBundle:Homepage:homepage.html.twig', [
+        return [
             'form' => $newsletterActive ? $form->createView() : false,
             'sections' => $sections,
-        ]);
-
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
-            $response->setPublic();
-            $response->setSharedMaxAge(60);
-        }
-
-        return $response;
+        ];
     }
 
     /**

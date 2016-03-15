@@ -6,6 +6,7 @@ use Capco\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\UserBundle\Form\Type\MemberSearchType;
 use Capco\UserBundle\Entity\UserType;
@@ -17,14 +18,7 @@ class MembersController extends Controller
      * @Route("/members/{userType}/{page}", name="app_members_type", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "members_list"} )
      * @Route("/members/{userType}/{sort}/{page}", name="app_members_type_sorted", requirements={"page" = "\d+"}, defaults={"page" = 1, "userType" = null, "_feature_flags" = "members_list"} )
      * @Template()
-     *
-     * @param $request
-     * @param $page
-     * @param $userType
-     * @param $sort
-     *t
-     *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Cache(smaxage="60", public=true)
      */
     public function indexAction(Request $request, $page, $userType = null, $sort = null)
     {
