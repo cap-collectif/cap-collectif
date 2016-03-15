@@ -118,6 +118,6 @@ services:
 
   capco.abstract_step.serialization_listener:
     class: Capco\AppBundle\EventListener\AbstractStepSerializationListener
-    arguments: [@capco.step.resolver]
+    arguments: [@capco.step.helper]
     tags:
       - { name: "jms_serializer.event_subscriber" }

@@ -3,15 +3,15 @@
 namespace Capco\AppBundle\EventListener;
 
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use Capco\AppBundle\Resolver\StepResolver;
+use Capco\AppBundle\Helper\StepHelper;
 
 class AbstractStepSerializationListener extends AbstractSerializationListener
 {
-    private $stepResolver;
+    private $stepHelper;
 
-    public function __construct(StepResolver $stepResolver)
+    public function __construct(StepHelper $stepHelper)
     {
-        $this->stepResolver = $stepResolver;
+        $this->stepHelper = $stepHelper;
     }
 
     public static function getSubscribedEvents()
@@ -29,6 +29,6 @@ class AbstractStepSerializationListener extends AbstractSerializationListener
     {
         $step = $event->getObject();
 
-        $event->getVisitor()->addData('openingStatus', $this->stepResolver->getOpeningStatus($step));
+        $event->getVisitor()->addData('status', $this->stepHelper->getStatus($step));
     }
 }
