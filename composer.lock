@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1ab63c6853edf57905c367e62a86ae12",
-    "content-hash": "99d242f6a1fbb4677ae2a5283a13c9ae",
+    "hash": "9b31de5ccdc01ea181b375551ee33344",
+    "content-hash": "5b3c9b99c2347a0961f96aaf1c2ce006",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -9969,12 +9969,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spyl94/BehatPageObjectExtension.git",
-                "reference": "34bd046923234ae6b1a6c5733db905d4e0ea7a97"
+                "reference": "0da748bdb327c2da6afedca8b1d8a1a6f3da67d2"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/spyl94/BehatPageObjectExtension/zipball/34bd046923234ae6b1a6c5733db905d4e0ea7a97",
-                "reference": "34bd046923234ae6b1a6c5733db905d4e0ea7a97",
+                "reference": "0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
                 "shasum": ""
             },
             "require": {
@@ -10027,7 +10027,7 @@
             "support": {
                 "source": "https://github.com/spyl94/BehatPageObjectExtension/tree/master"
             },
-            "time": "2016-03-14 16:52:49"
+            "time": "2016-03-15 13:13:55"
         },
         {
             "name": "tonicforhealth/behat-parallel-scenario",
