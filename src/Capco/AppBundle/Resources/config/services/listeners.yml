@@ -85,23 +85,23 @@ services:
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
-  capco.selection_step.serialization_listener:
-    class: Capco\AppBundle\EventListener\SelectionStepSerializationListener
-    arguments: [@security.token_storage, @capco.proposal_votes.resolver, @jms_serializer, @router]
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
+  # capco.selection_step.serialization_listener:
+  #   class: Capco\AppBundle\EventListener\SelectionStepSerializationListener
+  #   arguments: [@security.token_storage, @capco.proposal_votes.resolver, @jms_serializer, @router]
+  #   tags:
+  #     - { name: "jms_serializer.event_subscriber" }
 
-  capco.consultation_step.serialization_listener:
-    class: Capco\AppBundle\EventListener\ConsultationStepSerializationListener
-    arguments: []
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
+  # capco.consultation_step.serialization_listener:
+  #   class: Capco\AppBundle\EventListener\ConsultationStepSerializationListener
+  #   arguments: []
+  #   tags:
+  #     - { name: "jms_serializer.event_subscriber" }
 
-  capco.collect_step.serialization_listener:
-    class: Capco\AppBundle\EventListener\CollectStepSerializationListener
-    arguments: []
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
+  # capco.collect_step.serialization_listener:
+  #   class: Capco\AppBundle\EventListener\CollectStepSerializationListener
+  #   arguments: []
+  #   tags:
+  #     - { name: "jms_serializer.event_subscriber" }
 
   capco.elastica.listener:
     class: Capco\AppBundle\EventListener\ElasticaListener
@@ -112,12 +112,12 @@ services:
 
   capco.project.serialization_listener:
     class: Capco\AppBundle\EventListener\ProjectSerializationListener
-    arguments: [@capco.step.resolver, @sonata.media.twig.extension]
+    arguments: [@capco.step.resolver, @sonata.media.twig.extension, @jms_serializer, @capco.project.helper ]
     tags:
      - { name: "jms_serializer.event_subscriber" }
 
   capco.abstract_step.serialization_listener:
     class: Capco\AppBundle\EventListener\AbstractStepSerializationListener
-    arguments: [@capco.step.resolver]
+    arguments: [@capco.step.helper]
     tags:
       - { name: "jms_serializer.event_subscriber" }

@@ -3,14 +3,18 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Resolver\StepResolver;
+use Capco\AppBundle\Helper\StepHelper;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 
 class StepsExtension extends \Twig_Extension
 {
     protected $resolver;
+    protected $helper;
 
-    public function __construct(StepResolver $resolver)
+    public function __construct(StepResolver $resolver, StepHelper $helper)
     {
         $this->resolver = $resolver;
+        $this->helper = $helper;
     }
 
     /**
@@ -29,7 +33,7 @@ class StepsExtension extends \Twig_Extension
             new \Twig_SimpleFilter('capco_step_link', [$this, 'getStepLink']),
             new \Twig_SimpleFilter('capco_first_step_link', [$this, 'getFirstStepLink']),
             new \Twig_SimpleFilter('capco_current_step_link', [$this, 'getCurrentStepLink']),
-            new \Twig_SimpleFilter('capco_step_opening_status', [$this, 'getOpeningStatus']),
+            new \Twig_SimpleFilter('capco_step_status', [$this, 'getStatus']),
         ];
     }
 
@@ -48,8 +52,8 @@ class StepsExtension extends \Twig_Extension
         return $this->resolver->getCurrentStepLinkForProject($project, $absolute);
     }
 
-    public function getOpeningStatus($step)
+    public function getStatus(AbstractStep $step)
     {
-        return $this->resolver->getOpeningStatus($step);
+        return $this->helper->getStatus($step);
     }
 }

@@ -45,17 +45,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
       groups: [Steps]
       serialized_name: projectId
     getPosition:
-      expose: true:
+      expose: true
       type: integer
       groups: [Steps]
       serialized_name: position
-    isOpen:
-      expose: true
-      type: boolean
-      groups: [Steps]
-      serialized_name: isOpen
-    isFuture:
-      expose: true
-      type: boolean
-      groups: [Steps]
-      serialized_name: isFuture
