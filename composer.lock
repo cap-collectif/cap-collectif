@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3f1ecb77a2032f45c61da38a2cc054fd",
-    "content-hash": "2d01859bda37b2bf5c453f40bf713102",
+    "hash": "9b31de5ccdc01ea181b375551ee33344",
+    "content-hash": "5b3c9b99c2347a0961f96aaf1c2ce006",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -4320,29 +4320,29 @@
         },
         {
             "name": "snc/redis-bundle",
-            "version": "dev-master",
+            "version": "1.1.10",
+            "target-dir": "Snc/RedisBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/snc/SncRedisBundle.git",
-                "reference": "baa89a36bdb2483d7571ba5a748f5bb9aa8a6b71"
+                "reference": "3b11bdc877f470fa8a1e728ada48c62c0d33e0ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/baa89a36bdb2483d7571ba5a748f5bb9aa8a6b71",
-                "reference": "baa89a36bdb2483d7571ba5a748f5bb9aa8a6b71",
+                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/3b11bdc877f470fa8a1e728ada48c62c0d33e0ed",
+                "reference": "3b11bdc877f470fa8a1e728ada48c62c0d33e0ed",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "symfony/framework-bundle": "^2.7 || ^3.0",
-                "symfony/yaml": "^2.7 || ^3.0"
+                "symfony/framework-bundle": "^2.1",
+                "symfony/yaml": "^2.1"
             },
             "require-dev": {
-                "doctrine/cache": "1.*",
-                "phpunit/phpunit": "4.7.*",
+                "doctrine/cache": "^1.0",
+                "phpunit/phpunit": "^4.0",
                 "predis/predis": "^1.0",
-                "symfony/console": "^2.7 || ^3.0",
-                "symfony/phpunit-bridge": "^2.7 || ^3.0"
+                "symfony/console": "^2.1"
             },
             "suggest": {
                 "monolog/monolog": "If you want to use the monolog redis handler.",
@@ -4350,14 +4350,9 @@
                 "symfony/console": "If you want to use commands to interact with the redis database"
             },
             "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
             "autoload": {
-                "psr-4": {
-                    "Snc\\RedisBundle\\": ""
+                "psr-0": {
+                    "Snc\\RedisBundle": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4374,14 +4369,14 @@
                     "homepage": "https://github.com/snc/SncRedisBundle/contributors"
                 }
             ],
-            "description": "A Redis bundle for Symfony",
+            "description": "A Redis bundle for Symfony2",
             "homepage": "https://github.com/snc/SncRedisBundle",
             "keywords": [
                 "nosql",
                 "redis",
                 "symfony"
             ],
-            "time": "2016-02-15 13:14:43"
+            "time": "2016-01-21 18:29:37"
         },
         {
             "name": "sonata-project/admin-bundle",
@@ -4393,7 +4388,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/139d11065bf21d987a321b1bad85a35d5ba52578",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/9681619bdfb130ff746e8289f7d2660b9d5318e4",
                 "reference": "9681619bdfb130ff746e8289f7d2660b9d5318e4",
                 "shasum": ""
             },
@@ -5162,7 +5157,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/fd73a883209994ee5d787a8240574138547c8dd9",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/a9671d98f51b7b983808879f9e787ad277dfc40a",
                 "reference": "5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
                 "shasum": ""
             },
@@ -9978,7 +9973,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spyl94/BehatPageObjectExtension/zipball/0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
+                "url": "https://api.github.com/repos/spyl94/BehatPageObjectExtension/zipball/34bd046923234ae6b1a6c5733db905d4e0ea7a97",
                 "reference": "0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
                 "shasum": ""
             },
@@ -10138,7 +10133,6 @@
         "jolicode/jolitypo-bundle": 0,
         "friendsofsymfony/elastica-bundle": 20,
         "jms/serializer": 20,
-        "snc/redis-bundle": 20,
         "caxy/htmldiff-bundle": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "coduo/php-matcher": 20,

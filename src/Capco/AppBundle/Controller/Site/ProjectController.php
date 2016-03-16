@@ -315,6 +315,7 @@ class ProjectController extends Controller
         return [
             'project' => $project,
             'currentStep' => $currentStepSlug,
+            'stepStatus' => AbstractStep::$stepStatus,
         ];
     }
 

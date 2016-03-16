@@ -6,7 +6,7 @@ import ProjectPreviewPopoverContent from './ProjectPreviewPopoverContent';
 
 const ProjectPreviewProgressBarItem = React.createClass({
   propTypes: {
-    step: PropTypes.object.isRequired,
+    projectStep: PropTypes.object.isRequired,
     style: PropTypes.object,
   },
   mixins: [IntlMixin],
@@ -18,13 +18,14 @@ const ProjectPreviewProgressBarItem = React.createClass({
   },
 
   render() {
-    const { step } = this.props;
-    const position = step.position;
+    const { projectStep } = this.props;
+    const step = projectStep.step;
+    const position = projectStep.position;
     const classes = classNames({
       'thumbnail__steps-bar__item': true,
-      'thumbnail__steps-bar__item--closed': step.status === 'closed',
-      'thumbnail__steps-bar__item--open': step.status === 'open',
-      'thumbnail__steps-bar__item--future': step.status === 'future',
+      'thumbnail__steps-bar__item--closed': !step.isOpen,
+      'thumbnail__steps-bar__item--open': step.isOpen,
+      'thumbnail__steps-bar__item--future': step.isFuture,
     });
     const popover = (
       <Popover

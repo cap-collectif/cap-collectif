@@ -9,13 +9,14 @@ const ProjectPreviewProgressBar = React.createClass({
   mixins: [IntlMixin],
 
   getCompletedStepsNb() {
-    const completedSteps = this.props.project.steps.filter((step) => {
-      return step.status !== 'open';
+    const completedSteps = this.props.project.steps.filter((pas) => {
+      return !pas.step.isOpen;
     });
     return completedSteps.length;
   },
 
   getCompletedStepsPercentage() {
+    console.log(this.props, this.state);
     const completedStepsNb = this.getCompletedStepsNb();
     const total = this.props.project.steps.length;
     const percentage = completedStepsNb > 0 && total > 0
@@ -32,11 +33,11 @@ const ProjectPreviewProgressBar = React.createClass({
       return (
         <div className="thumbnail__steps-bar">
           {
-            project.steps.sort((a, b) => a.position - b.position).map((step, index) => {
+            project.steps.map((pas, index) => {
               return (
                 <ProjectPreviewProgressBarItem
                   key={index}
-                  step={step}
+                  projectStep={pas}
                   style={{ width: width }}
                 />
               );

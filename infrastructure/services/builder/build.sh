@@ -19,7 +19,6 @@ else
   echo "Building for development"
   # Symfony deps
   composer install --prefer-dist --no-interaction
-  composer dump-autoload
 
   # Frontend deps
   npm install

@@ -47,6 +47,9 @@ Capco\AppBundle\Entity\Project:
     themes:
       expose: true
       groups: [Projects]
+    steps:
+      expose: true
+      groups: [Projects]
     video:
       expose: true
       groups: [Projects]

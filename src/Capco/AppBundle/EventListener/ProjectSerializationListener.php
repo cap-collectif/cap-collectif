@@ -3,25 +3,18 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Resolver\StepResolver;
-use Capco\AppBundle\Helper\ProjectHelper;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
-use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializationContext;
 
 class ProjectSerializationListener extends AbstractSerializationListener
 {
     private $stepResolver;
     private $mediaExtension;
-    private $serializer;
-    private $helper;
 
-    public function __construct(StepResolver $stepResolver, MediaExtension $mediaExtension, Serializer $serializer, ProjectHelper $helper)
+    public function __construct(StepResolver $stepResolver, MediaExtension $mediaExtension)
     {
         $this->stepResolver = $stepResolver;
         $this->mediaExtension = $mediaExtension;
-        $this->serializer = $serializer;
-        $this->helper = $helper;
     }
 
     public static function getSubscribedEvents()
@@ -55,16 +48,5 @@ class ProjectSerializationListener extends AbstractSerializationListener
                 // Avoid some SonataMedia problems
             }
         }
-
-        $abstractSteps = $this->helper->getAbstractSteps($project);
-
-        $context = new SerializationContext();
-        $context->setGroups(['Steps']);
-        $steps = $this->serializer->serialize($abstractSteps, 'json', $context);
-
-        $event->getVisitor()->addData(
-            'steps',
-            json_decode($steps, true)
-        );
     }
 }
