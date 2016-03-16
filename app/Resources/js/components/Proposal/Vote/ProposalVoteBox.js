@@ -82,11 +82,11 @@ const ProposalVoteBox = React.createClass({
   },
 
   displayForm() {
-    return this.props.selectionStep.isOpen && (this.props.selectionStep.voteType === VOTE_TYPE_SIMPLE || (LoginStore.isLoggedIn() && this.userHasEnoughCredits()));
+    return this.props.selectionStep.open && (this.props.selectionStep.voteType === VOTE_TYPE_SIMPLE || (LoginStore.isLoggedIn() && this.userHasEnoughCredits()));
   },
 
   disableSubmitButton() {
-    return !this.props.selectionStep.isOpen || (LoginStore.isLoggedIn() && this.props.selectionStep.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
+    return !this.props.selectionStep.open || (LoginStore.isLoggedIn() && this.props.selectionStep.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
   },
 
   render() {
@@ -132,7 +132,7 @@ const ProposalVoteBox = React.createClass({
           loginOverlay={this.props.selectionStep.voteType === VOTE_TYPE_BUDGET}
         />
         {
-          !LoginStore.isLoggedIn() && this.props.selectionStep.voteType !== VOTE_TYPE_BUDGET && this.props.selectionStep.isOpen
+          !LoginStore.isLoggedIn() && this.props.selectionStep.voteType !== VOTE_TYPE_BUDGET && this.props.selectionStep.open
           ? <div>
             <p
               className="text-center excerpt"

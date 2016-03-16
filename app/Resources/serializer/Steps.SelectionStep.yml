@@ -20,9 +20,3 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         type: string
         groups: [Steps]
         serialized_name: defaultOrder
-    virtual_properties:
-      isOpen:
-        expose: true
-        type: boolean
-        groups: [Steps]
-        serialized_name: isOpen

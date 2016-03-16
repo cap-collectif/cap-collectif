@@ -16,14 +16,14 @@ const ProjectPreviewPopoverContent = React.createClass({
         <p className="h5">{step.title}</p>
         <p><DatesInterval startAt={step.startAt} endAt={step.endAt} /></p>
         {
-          step.openingStatus
+          step.status
             ? <p className="label label-default">
-              {this.getIntlMessage('step.status.' + step.openingStatus)}
+              {this.getIntlMessage('step.status.' + step.status)}
             </p>
             : null
         }
         {
-          step.isOpen
+          step.open
           ? <p style={{ marginTop: '10px' }}>
               <StepRemainingTime step={step} />
             </p>

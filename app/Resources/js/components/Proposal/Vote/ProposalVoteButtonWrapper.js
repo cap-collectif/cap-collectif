@@ -22,7 +22,7 @@ const ProposalVoteButtonWrapper = React.createClass({
   },
 
   selectionStepIsOpen() {
-    return this.props.selectionStep && this.props.selectionStep.isOpen;
+    return this.props.selectionStep && this.props.selectionStep.open;
   },
 
   userHasEnoughCredits() {
