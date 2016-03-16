@@ -57,7 +57,9 @@ class AbstractStepSerializationListener extends AbstractSerializationListener
 
     public function onPostAbstractStep(ObjectEvent $event)
     {
-        $step = $event->getObject();
-        $event->getVisitor()->addData('status', $this->stepHelper->getStatus($step));
+        if (isset($this->getIncludedGroups($event)['Steps'])) {
+            $step = $event->getObject();
+            $event->getVisitor()->addData('status', $this->stepHelper->getStatus($step));
+        }
     }
 }
