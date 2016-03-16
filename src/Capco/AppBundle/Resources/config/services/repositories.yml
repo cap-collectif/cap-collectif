@@ -143,9 +143,3 @@ services:
         factory_service: doctrine.orm.entity_manager
         factory_method:  getRepository
         arguments:       ['CapcoAppBundle:Proposal']
-
-  capco.project.repository:
-        class:           Capco\AppBundle\Repository\ProjectRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method:  getRepository
-        arguments:       ['CapcoAppBundle:Project']

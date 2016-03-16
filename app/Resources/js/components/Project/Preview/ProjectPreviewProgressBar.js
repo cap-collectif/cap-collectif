@@ -10,12 +10,13 @@ const ProjectPreviewProgressBar = React.createClass({
 
   getCompletedStepsNb() {
     const completedSteps = this.props.project.steps.filter((pas) => {
-      return pas.step.status != 'open';
+      return !pas.step.isOpen;
     });
     return completedSteps.length;
   },
 
   getCompletedStepsPercentage() {
+    console.log(this.props, this.state);
     const completedStepsNb = this.getCompletedStepsNb();
     const total = this.props.project.steps.length;
     const percentage = completedStepsNb > 0 && total > 0

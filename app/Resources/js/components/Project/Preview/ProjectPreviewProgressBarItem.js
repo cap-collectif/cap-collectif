@@ -23,9 +23,9 @@ const ProjectPreviewProgressBarItem = React.createClass({
     const position = projectStep.position;
     const classes = classNames({
       'thumbnail__steps-bar__item': true,
-      'thumbnail__steps-bar__item--closed': step.status === 'closed',
-      'thumbnail__steps-bar__item--open': step.status === 'open',
-      'thumbnail__steps-bar__item--future': step.status === 'future',
+      'thumbnail__steps-bar__item--closed': !step.isOpen,
+      'thumbnail__steps-bar__item--open': step.isOpen,
+      'thumbnail__steps-bar__item--future': step.isFuture,
     });
     const popover = (
       <Popover
