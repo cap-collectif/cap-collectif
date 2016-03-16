@@ -68,7 +68,7 @@ services:
 
   capco.twig.steps:
     class:     Capco\AppBundle\Twig\StepsExtension
-    arguments: [@capco.step.resolver]
+    arguments: [@capco.step.resolver, @capco.step.helper]
     tags:
       - { name: twig.extension }
 

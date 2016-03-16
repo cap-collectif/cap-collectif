@@ -141,7 +141,7 @@ export default {
       });
   },
 
-  deleteVersion: (version, opinion) => {
+  deleteVersion: (opinion, version) => {
     return Fetcher
       .delete(`/opinions/${opinion}/versions/${version}`)
       .then(() => {

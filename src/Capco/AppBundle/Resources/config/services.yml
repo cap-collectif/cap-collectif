@@ -47,6 +47,14 @@ services:
   capco.idea.helper:
     class: Capco\AppBundle\Helper\IdeaHelper
 
+  capco.project.helper:
+    class: Capco\AppBundle\Helper\ProjectHelper
+    arguments: [@capco.project.repository, @capco.abstract_step.repository]
+
+  capco.step.helper:
+    class: Capco\AppBundle\Helper\StepHelper
+    arguments: [@capco.project.helper]
+
   capco.vote.subscriber:
     class: Capco\AppBundle\EventListener\VoteSubscriber
     arguments: [@doctrine.orm.entity_manager]

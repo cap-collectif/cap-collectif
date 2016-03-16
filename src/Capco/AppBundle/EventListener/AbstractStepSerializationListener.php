@@ -3,15 +3,15 @@
 namespace Capco\AppBundle\EventListener;
 
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use Capco\AppBundle\Resolver\StepResolver;
+use Capco\AppBundle\Helper\StepHelper;
 
 class AbstractStepSerializationListener extends AbstractSerializationListener
 {
-    private $stepResolver;
+    private $stepHelper;
 
-    public function __construct(StepResolver $stepResolver)
+    public function __construct(StepHelper $stepHelper)
     {
-        $this->stepResolver = $stepResolver;
+        $this->stepHelper = $stepHelper;
     }
 
     public static function getSubscribedEvents()
@@ -19,7 +19,37 @@ class AbstractStepSerializationListener extends AbstractSerializationListener
         return [
             [
                 'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\Steps\AbstractStep',
+                'class' => 'Capco\AppBundle\Entity\Steps\ConsultationStep',
+                'method' => 'onPostAbstractStep',
+            ],
+            [
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Steps\PresentationStep',
+                'method' => 'onPostAbstractStep',
+            ],
+            [
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Steps\CollectStep',
+                'method' => 'onPostAbstractStep',
+            ],
+            [
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Steps\SelectionStep',
+                'method' => 'onPostAbstractStep',
+            ],
+            [
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Steps\OtherStep',
+                'method' => 'onPostAbstractStep',
+            ],
+            [
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Steps\RankingStep',
+                'method' => 'onPostAbstractStep',
+            ],
+            [
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Steps\SynthesisStep',
                 'method' => 'onPostAbstractStep',
             ],
         ];
@@ -27,8 +57,9 @@ class AbstractStepSerializationListener extends AbstractSerializationListener
 
     public function onPostAbstractStep(ObjectEvent $event)
     {
-        $step = $event->getObject();
-
-        $event->getVisitor()->addData('openingStatus', $this->stepResolver->getOpeningStatus($step));
+        if (isset($this->getIncludedGroups($event)['Steps'])) {
+            $step = $event->getObject();
+            $event->getVisitor()->addData('status', $this->stepHelper->getStatus($step));
+        }
     }
 }

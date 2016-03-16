@@ -72,8 +72,8 @@ Feature: Proposal Restful Api
             "startAt": "@string@.isDateTime()",
             "endAt": "@string@.isDateTime()",
             "voteType": @integer@,
-            "isOpen": @boolean@,
             "votesHelpText": @string@,
+            "isOpen": @boolean@,
             "budget": @...@,
             "body": @string@
           }

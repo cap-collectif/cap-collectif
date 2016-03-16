@@ -21,6 +21,9 @@ $container->setParameter('mailer_user', getenv_default('mailer_user', 'maxime@ca
 $container->setParameter('mailer_password', getenv_default('mailer_password', '***REMOVED***'));
 $container->setParameter('mailer_host', getenv_default('mailer_host', '***REMOVED***'));
 $container->setParameter('mailer_port', getenv_default('mailer_port', 587));
+$container->setParameter('mailer_service_user', getenv_default('mailer_service_user', 'maxime@cap-collectif.com'));
+$container->setParameter('mailer_service_password', getenv_default('mailer_service_password', '***REMOVED***'));
+$container->setParameter('mailer_service_host', getenv_default('mailer_service_host', '***REMOVED***'));
 
 $container->setParameter('locale', getenv_default('locale', 'fr'));
 $container->setParameter('secret', getenv_default('secret', '***REMOVED***'));
