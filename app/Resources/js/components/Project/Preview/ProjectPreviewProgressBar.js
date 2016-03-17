@@ -10,7 +10,7 @@ const ProjectPreviewProgressBar = React.createClass({
 
   getCompletedStepsNb() {
     const completedSteps = this.props.project.steps.filter((step) => {
-      return step.status !== 'open';
+      return step.status === 'closed';
     });
     return completedSteps.length;
   },

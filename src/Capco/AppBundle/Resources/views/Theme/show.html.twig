@@ -34,8 +34,6 @@
             {% thumbnail theme.Media, 'idea' with {'class': 'block  img-responsive'} %}
         {% endif %}
         {% if theme.body %}
-            <h2 class="h2">{{ 'theme.show.body_title'|trans({}, 'CapcoAppBundle') }}
-            </h2>
             {{ theme.body|raw }}
         {% endif %}
         {% if theme.status != null %}

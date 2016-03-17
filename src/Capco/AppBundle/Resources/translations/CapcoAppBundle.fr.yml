@@ -277,7 +277,6 @@ theme:
       title: Projets participatifs
     ideas:
       title: Idées
-    body_title: Contexte
     status:
       title: "Statut du thème : "
       opened: "Ouvert"
