@@ -30,3 +30,15 @@ Feature: Users
     }
     """
 
+    @database @test
+    Scenario: Anonymous API client wants to register
+      Given feature "registration" is enabled
+      When I send a POST request to "/api/users" with json:
+      """
+      {
+        "username": "user2",
+        "email": "user2@test.com",
+        "plainPassword": "supersecureuserpass"
+      }
+      """
+      Then the JSON response status code should be 201

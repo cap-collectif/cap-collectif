@@ -50,7 +50,7 @@ security:
                 require_previous_session: false
 
         api:
-            pattern:   ^/api
+            pattern: ^/api
             provider: fos_userbundle
             stateless: true
             anonymous: true
@@ -63,27 +63,30 @@ security:
                     enabled: true
                     name: bearer
         main:
-            pattern:             ^/
+            pattern: ^/
             form_login:
-                provider:       fos_userbundle
-                csrf_provider:  form.csrf_provider
-                login_path:     /login
-                check_path:     /login_check
-                use_forward:    false
-                failure_path:   null
+                provider: fos_userbundle
+                login_path: /login
+                check_path: /login_check
+                success_handler: authentication_handler
+                failure_handler: authentication_handler
+                require_previous_session: false
             oauth:
                 resource_owners:
                     facebook: "/login/check-facebook"
                     google:   "/login/check-google"
+                    twitter: "/login/check-twitter"
                     nous_citoyens:  "/login/check-nous-citoyens"
+                # success_handler: authentication_handler
+                # failure_handler: authentication_handler
                 login_path: /login
                 oauth_user_provider:
                     service: my_user_provider
-            remember_me:
-                key: %remember_secret%
-                lifetime: 31536000
-                path: /
-                domain: ~
+            # remember_me:
+            #     key: %remember_secret%
+            #     lifetime: 31536000
+            #     path: /
+            #     domain: ~
             logout:
               path: /logout
               target: /
@@ -98,7 +101,7 @@ security:
 
         # Admin login page needs to be accessed without credential
         - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY } # wtf ?
         - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # Api
