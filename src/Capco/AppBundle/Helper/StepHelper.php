@@ -34,7 +34,7 @@ class StepHelper
       $previousSteps = $this->projectHelper->getPreviousSteps($step);
 
       foreach ($previousSteps as $previousStep) {
-        if ($previousStep->getStartAt() && $previousStep->getEndAt()) {
+        if ($previousStep->getStartAt() > $now || $previousStep->getEndAt() > $now) {
           return 'future';
         }
       }

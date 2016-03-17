@@ -53,16 +53,17 @@ class StepHelperSpec extends ObjectBehavior
         $step->getStartAt()->willReturn(null);
         $step->getEndAt()->willReturn(null);
 
-        // if at least one previous step has dates
+        // if at least one previous step has future dates
         $helper->getPreviousSteps($step)->willReturn([$stepA, $stepB]);
-        $stepA->getStartAt()->willReturn(new \DateTime());
-        $stepA->getEndAt()->willReturn(new \DateTime());
+        $stepA->getStartAt()->willReturn((new \DateTime())->modify('+1 weeks'));
+        $stepA->getEndAt()->willReturn(null);
         $this->getStatus($step)->shouldReturn('future');
 
-        $helper->getPreviousSteps($step)->willReturn([$stepA, $stepB]);
+        // $helper->getPreviousSteps($step)->willReturn([$stepA, $stepB]);
         $stepA->getStartAt()->willReturn(null);
-        $stepB->getStartAt()->willReturn(new \DateTime());
-        $stepB->getEndAt()->willReturn(new \DateTime());
+        $stepA->getEndAt()->willReturn(null);
+        $stepB->getStartAt()->willReturn((new \DateTime())->modify('+1 weeks'));
+        $stepB->getEndAt()->willReturn((new \DateTime())->modify('+1 weeks'));
         $this->getStatus($step)->shouldReturn('future');
 
         // if no previous steps
@@ -73,6 +74,11 @@ class StepHelperSpec extends ObjectBehavior
         $helper->getPreviousSteps($step)->willReturn([$stepA]);
         $stepA->getStartAt()->willReturn(null);
         $stepA->getEndAt()->willReturn(null);
+        $this->getStatus($step)->shouldReturn('closed');
+
+        // if previous steps have past dates
+        $stepA->getStartAt()->willReturn((new \DateTime())->modify('-1 weeks'));
+        $stepA->getEndAt()->willReturn((new \DateTime())->modify('-1 weeks'));
         $this->getStatus($step)->shouldReturn('closed');
     }
 }
