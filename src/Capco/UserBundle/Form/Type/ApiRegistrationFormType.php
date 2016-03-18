@@ -30,7 +30,9 @@ class ApiRegistrationFormType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        // registration group is set by sonata
+        $resolver->setDefaults([
+            'csrf_protection' => false,
+        ]);
     }
 
     public function getParent()
@@ -40,6 +42,6 @@ class ApiRegistrationFormType extends AbstractType
 
     public function getName()
     {
-        return 'capco_user_registration';
+        return 'registration';
     }
 }

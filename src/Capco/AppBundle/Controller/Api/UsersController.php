@@ -13,6 +13,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 
 class UsersController extends FOSRestController
 {
@@ -49,8 +50,7 @@ class UsersController extends FOSRestController
             }
         }
 
-        $users = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoUserBundle:User')
+        $users = $em->getRepository('CapcoUserBundle:User')
                     ->getEnabledWith($userType, $from, $to);
 
         return [
@@ -69,40 +69,35 @@ class UsersController extends FOSRestController
      *  }
      * )
      *
-     * @Security("has_role('IS_AUTHENTICATED_ANONYMOUSLY')")
      * @Post("/users", defaults={"_feature_flags" = "registration"})
      * @View(statusCode=201, serializerGroups={})
      */
-    public function postUsersAction(Request $request)
+    public function postUserAction(Request $request)
     {
-        $user = $this->getUser();
-        $opinionVersion = (new OpinionVersion())
-            ->setAuthor($user)
-            ->setParent($opinion)
-        ;
-
-        $form = $this->createForm(new OpinionVersionType(), $opinionVersion);
+        $user = $this->userManager->createUser();
+        $form = $this->createForm('registration', $user);
         $form->submit($request->request->all(), false);
 
-        if ($form->isValid()) {
-            $opinion->setVersionsCount($opinion->getVersionsCount() + 1);
-            $this->getDoctrine()->getManager()->persist($opinionVersion);
-            $this->getDoctrine()->getManager()->flush();
-
-            return $opinionVersion;
+        if (!$form->isValid()) {
+            return $form;
         }
 
-        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+        $user->setEnabled(false);
+        $user->setConfirmationToken($this->tokenGenerator->generateToken());
+        $this->mailer->sendConfirmationEmailMessage($user);
+
+        $this->userManager->updateUser($user);
 
         // try {
-            $this->get('fos_user.security.login_manager')->loginUser(
-                $this->container->getParameter('fos_user.firewall_name'),
-                $user,
-                $response);
+        $this->get('fos_user.security.login_manager')->loginUser(
+            $this->container->getParameter('fos_user.firewall_name'),
+            $user,
+            $response
+        );
         // } catch (AccountStatusException $ex) {
             // We simply do not authenticate users which do not pass the user
             // checker (not enabled, expired, etc.).
         // }
-        return $view;
+        return $user;
     }
 }
