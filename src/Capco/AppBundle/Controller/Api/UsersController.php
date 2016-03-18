@@ -74,7 +74,8 @@ class UsersController extends FOSRestController
      */
     public function postUserAction(Request $request)
     {
-        $user = $this->userManager->createUser();
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->createUser();
         $form = $this->createForm('registration', $user);
         $form->submit($request->request->all(), false);
 
@@ -82,11 +83,12 @@ class UsersController extends FOSRestController
             return $form;
         }
 
+        $userManager->updatePassword($user);
         $user->setEnabled(false);
-        $user->setConfirmationToken($this->tokenGenerator->generateToken());
-        $this->mailer->sendConfirmationEmailMessage($user);
+        $user->setConfirmationToken($this->get('fos_user.util.token_generator')->generateToken());
+        $this->get('fos_user.mailer')->sendConfirmationEmailMessage($user);
 
-        $this->userManager->updateUser($user);
+        $userManager->updateUser($user);
 
         // try {
         $this->get('fos_user.security.login_manager')->loginUser(

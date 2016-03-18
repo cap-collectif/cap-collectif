@@ -256,25 +256,7 @@ const RegistrationForm = React.createClass({
         help={this.props.form.descriptionHelpText}
       />
 
-      {
-        this.props.form.questions.map((question) => {
-          const key = 'custom-' + question.id;
-          const inputType = question.inputType || 'text';
-          return (
-            <Input
-              key={key}
-              id={'proposal_' + key}
-              type={inputType}
-              label={question.title + (question.required ? ' *' : '')}
-              groupClassName={this.getGroupStyle(key)}
-              valueLink={this.linkState('custom.' + key)}
-              help={question.helpText}
-              errors={this.renderFormErrors(key)}
-            />
-          );
-        })
-      }
-
+      <div className="g-recaptcha" data-sitekey="6LfKLxsTAAAAANGSsNIlspDarsFFK53b4bKiBYKC"></div>
       </form>
     );
   },

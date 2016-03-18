@@ -19,6 +19,17 @@ class ApiRegistrationFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // disable password repeated
+        $builder
+            ->remove('plainPassword')
+            ->add('plainPassword', 'password')
+        ;
+
+        $builder->add('g-recaptcha-response', 'string', [
+          mapped => false,
+          required => true,
+        ]);
+
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', null, ['required' => false]);
         }

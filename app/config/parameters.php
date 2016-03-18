@@ -50,3 +50,6 @@ $container->setParameter('assets_version', getenv_default('assets_version', 'v1'
 $container->setParameter('server_version', getenv_default('server_version', '5.6'));
 
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
+
+$container->setParameter('recaptcha_public_key', getenv_default('recaptcha_public_key', '6LfKLxsTAAAAANGSsNIlspDarsFFK53b4bKiBYKC'));
+$container->setParameter('recaptcha_private_key', getenv_default('recaptcha_private_key', '***REMOVED***'));
