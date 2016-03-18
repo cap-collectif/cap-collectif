@@ -19,10 +19,6 @@
    }
   }
 
-  .project__preview__body {
-    height: 175px;
-  }
-
   .project__preview__title {
     line-height: 25px;
     height: 75px;
@@ -42,7 +38,6 @@
   .thumbnail__steps-bar {
     width: 100%;
     height: 25px;
-    border: 1px solid $border-color;
 
     .thumbnail__steps-bar__percentage {
       position: absolute;
@@ -53,7 +48,7 @@
     .thumbnail__steps-bar__item {
       height: 100%;
       display: inline-block;
-      border-left: 1px solid $border-color;
+      border-left: 1px solid #f6f6f6;
       background-color: $brand-success;
 
       &:first-child {
