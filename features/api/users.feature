@@ -43,3 +43,15 @@ Feature: Users
       }
       """
       Then the JSON response status code should be 201
+
+
+    @security
+    Scenario: Anonymous API client wants to register
+      When I send a POST request to "/login_check" with json:
+      """
+      {
+        "_username": "user2",
+        "_password": "supersecureuserpass"
+      }
+      """
+      Then the JSON response status code should be 200

@@ -27,6 +27,11 @@ const RegistrationModal = React.createClass({
     this.setState({ isSubmitting: false });
   },
 
+  handleSubmitSuccess() {
+    this.stopSubmit();
+    this.props.onClose();
+  },
+
   render() {
     const { isSubmitting } = this.state;
     const { onClose, show } = this.props;
@@ -45,9 +50,10 @@ const RegistrationModal = React.createClass({
         <Modal.Body>
           <LoginSocialButtons />
           <RegistrationForm
-            isSubmitting={this.state.isSubmitting}
+            isSubmitting={isSubmitting}
             onSubmitFailure={this.stopSubmit}
-            onSubmitSuccess={this.onClose}
+            onValidationFailure={this.stopSubmit}
+            onSubmitSuccess={this.handleSubmitSuccess}
           />
         </Modal.Body>
         <Modal.Footer>

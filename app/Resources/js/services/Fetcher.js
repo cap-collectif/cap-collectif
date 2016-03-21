@@ -55,6 +55,16 @@ class Fetcher {
     .then(status);
   }
 
+  postWithoutStatusCheck(uri, body) {
+    return fetch(config.api + uri, {
+      method: 'post',
+      headers: createHeaders(),
+      beforeSend: addAuthorization,
+      body: JSON.stringify(body),
+    })
+    .then(json);
+  }
+
   put(uri, body) {
     return fetch(config.api + uri, {
       method: 'put',

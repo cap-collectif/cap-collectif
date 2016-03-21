@@ -47,7 +47,7 @@ const LoginModal = React.createClass({
           <LoginForm
             isSubmitting={this.state.isSubmitting}
             onSubmitFailure={this.stopSubmit}
-            onSubmitSuccess={this.onClose}
+            onSubmitSuccess={onClose}
           />
         </Modal.Body>
         <Modal.Footer>

@@ -72,13 +72,11 @@ class UsersController extends FOSRestController
      * )
      *
      * @Post("/users", defaults={"_feature_flags" = "registration"})
+     * @View(statusCode=201, serializerGroups={})
+     *
      */
     public function postUserAction(Request $request)
     {
-        $view = RestView::create();
-        $view->setFormat('json');
-        $response = new JsonResponse();
-
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
         $form = $this->createForm('registration', $user);
@@ -90,23 +88,22 @@ class UsersController extends FOSRestController
         }
 
         $userManager->updatePassword($user);
-        $user->setEnabled(false);
+        $user->setEnabled(true);
         $user->setConfirmationToken($this->get('fos_user.util.token_generator')->generateToken());
         $this->get('fos_user.mailer')->sendConfirmationEmailMessage($user);
 
         $userManager->updateUser($user);
 
         // try {
-        $this->get('fos_user.security.login_manager')->loginUser(
-            $this->container->getParameter('fos_user.firewall_name'),
-            $user,
-            $response
-        );
+        // $this->get('fos_user.security.login_manager')->loginUser(
+        //     $this->container->getParameter('fos_user.firewall_name'),
+        //     $user,
+        //     $response
+        // );
         // } catch (AccountStatusException $ex) {
             // We simply do not authenticate users which do not pass the user
             // checker (not enabled, expired, etc.).
         // }
-        $response->setData(['user' => $user]);
-        return $response;
+        return ['user' => $user];
     }
 }

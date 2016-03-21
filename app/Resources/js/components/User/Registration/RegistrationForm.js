@@ -5,7 +5,7 @@ import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import UserActions from '../../../actions/UserActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import Input from '../../Form/Input';
-import FeatureStore from '../../../stores/FeatureStore';
+// import FeatureStore from '../../../stores/FeatureStore';
 
 const RegistrationForm = React.createClass({
   propTypes: {
@@ -30,11 +30,13 @@ const RegistrationForm = React.createClass({
         username: 'user2',
         email: 'user2@test.com',
         plainPassword: 'supersecureuserpass',
+        charte: false,
       },
       errors: {
         username: [],
         email: [],
         plainPassword: [],
+        charte: [],
       },
     };
   },
@@ -43,15 +45,27 @@ const RegistrationForm = React.createClass({
     const { isSubmitting, onSubmitSuccess, onSubmitFailure, onValidationFailure } = this.props;
     if (!isSubmitting && nextProps.isSubmitting) {
       if (this.isValid()) {
-        const form = this.state.form;
+        const form = JSON.parse(JSON.stringify(this.state.form));
+        delete form.charte;
         return UserActions
           .register(form)
-          .then(() => {
-            this.setState(this.getInitialState());
-            onSubmitSuccess();
-            window.location.reload();
-          })
-          .catch(onSubmitFailure);
+          .then((response) => {
+            if (response.user) {
+              UserActions.login({ _username: form.email, _password: form.plainPassword });
+              this.setState(this.getInitialState());
+              onSubmitSuccess();
+              return;
+            }
+            if (response.errors && response.errors.children.email.errors.length > 0) {
+              const errors = this.state.errors;
+              errors.email = ['registration.constraints.email.already_used'];
+              this.setState({ errors: errors });
+              onValidationFailure();
+              return;
+            }
+            onSubmitFailure();
+            return;
+          });
       }
       onValidationFailure();
     }
@@ -59,16 +73,21 @@ const RegistrationForm = React.createClass({
 
   formValidationRules: {
     username: {
-      min: { value: 2, message: 'proposal.constraints.title' },
-      notBlank: { message: 'proposal.constraints.title' },
+      min: { value: 2, message: 'registration.constraints.username.min' },
+      max: { value: 128, message: 'registration.constraints.username.max' },
+      notBlank: { message: 'global.constraints.notBlank' },
     },
     email: {
-      min: { value: 2, message: 'proposal.constraints.title' },
-      notBlank: { message: 'proposal.constraints.title' },
+      min: { value: 2, message: 'registration.constraints.email.min' },
+      notBlank: { message: 'global.constraints.notBlank' },
     },
     plainPassword: {
-      min: { value: 2, message: 'proposal.constraints.body' },
-      notBlank: { message: 'proposal.constraints.body' },
+      min: { value: 8, message: 'registration.constraints.password.min' },
+      max: { value: 128, message: 'registration.constraints.password.max' },
+      notBlank: { message: 'global.constraints.notBlank' },
+    },
+    charte: {
+      isTrue: { message: 'global.constraints.notBlank' },
     },
   },
 
@@ -87,26 +106,34 @@ const RegistrationForm = React.createClass({
           id="_username"
           type="text"
           valueLink={this.linkState('form.username')}
-          label={this.getIntlMessage('proposal.title') + ' *'}
+          label={this.getIntlMessage('registration.username') + ' *'}
           groupClassName={this.getGroupStyle('username')}
           errors={this.renderFormErrors('username')}
-          help="Votre nom sera rendu public sur le site."
+          help={this.getIntlMessage('registration.help.username')}
         />
         <Input
           id="_email"
           type="text"
           valueLink={this.linkState('form.email')}
-          label={this.getIntlMessage('proposal.title') + ' *'}
+          label={this.getIntlMessage('global.email') + ' *'}
           groupClassName={this.getGroupStyle('email')}
           errors={this.renderFormErrors('email')}
         />
         <Input
           id="_password"
-          type="text"
+          type="password"
           valueLink={this.linkState('form.plainPassword')}
-          label={this.getIntlMessage('proposal.title') + ' *'}
+          label={this.getIntlMessage('global.password') + ' *'}
           groupClassName={this.getGroupStyle('plainPassword')}
           errors={this.renderFormErrors('plainPassword')}
+        />
+        <Input
+          id="_charte"
+          type="checkbox"
+          valueLink={this.linkState('form.charte')}
+          label={this.getIntlMessage('registration.charte')}
+          groupClassName={this.getGroupStyle('charte')}
+          errors={this.renderFormErrors('charte')}
         />
         <div
           className="g-recaptcha"

@@ -25,6 +25,8 @@ class ApiRegistrationFormType extends AbstractType
             ->add('plainPassword', 'password')
         ;
 
+        $builder->remove('isTermsAccepted');
+
         // $builder->add('g-recaptcha-response', 'string', [
         //   mapped => false,
         //   required => true,
@@ -43,6 +45,7 @@ class ApiRegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
+            'validation_groups' => ['registration'],
         ]);
     }
 
