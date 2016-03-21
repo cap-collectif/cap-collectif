@@ -14,6 +14,8 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
+use FOS\RestBundle\View\View as RestView;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UsersController extends FOSRestController
 {
@@ -70,13 +72,17 @@ class UsersController extends FOSRestController
      * )
      *
      * @Post("/users", defaults={"_feature_flags" = "registration"})
-     * @View(statusCode=201, serializerGroups={})
      */
     public function postUserAction(Request $request)
     {
+        $view = RestView::create();
+        $view->setFormat('json');
+        $response = new JsonResponse();
+
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
         $form = $this->createForm('registration', $user);
+
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -100,6 +106,7 @@ class UsersController extends FOSRestController
             // We simply do not authenticate users which do not pass the user
             // checker (not enabled, expired, etc.).
         // }
-        return $user;
+        $response->setData(['user' => $user]);
+        return $response;
     }
 }

@@ -33,7 +33,7 @@ const LoginForm = React.createClass({
           this.props.onSubmitSuccess();
         })
         .catch(() => {
-          this.setState({hasError: true});
+          this.setState({ hasError: true });
           this.props.onSubmitFailure();
         });
       return;

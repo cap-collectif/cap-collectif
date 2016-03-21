@@ -25,10 +25,10 @@ class ApiRegistrationFormType extends AbstractType
             ->add('plainPassword', 'password')
         ;
 
-        $builder->add('g-recaptcha-response', 'string', [
-          mapped => false,
-          required => true,
-        ]);
+        // $builder->add('g-recaptcha-response', 'string', [
+        //   mapped => false,
+        //   required => true,
+        // ]);
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', null, ['required' => false]);

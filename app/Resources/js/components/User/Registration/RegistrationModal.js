@@ -3,8 +3,8 @@ import { Modal } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import LoginForm from './LoginForm';
-import LoginSocialButtons from './LoginSocialButtons';
+import RegistrationForm from './RegistrationForm';
+import LoginSocialButtons from '../Login/LoginSocialButtons';
 
 const RegistrationModal = React.createClass({
   propTypes: {

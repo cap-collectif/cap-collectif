@@ -1,3 +1,4 @@
+@users
 Feature: Users
 
   @parallel-scenario

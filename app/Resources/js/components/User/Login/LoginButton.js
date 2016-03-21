@@ -13,11 +13,11 @@ const LoginButton = React.createClass({
   getInitialState() {
     return {
       show: false,
-    }
+    };
   },
 
   handleClick() {
-    this.setState({show: true});
+    this.setState({ show: true });
   },
 
   render() {

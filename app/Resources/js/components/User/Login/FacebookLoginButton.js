@@ -11,7 +11,7 @@ const FacebookLoginButton = React.createClass({
     }
     return (
       <a
-       href={"/login/facebook?_destination="+ window.location.href}
+       href={'/login/facebook?_destination=' + window.location.href}
        title="Sign in with Facebook"
        className="btn login__social-btn login__social-btn--facebook"
       >Se connecter avec Facebook</a>

@@ -11,7 +11,7 @@ const GoogleLoginButton = React.createClass({
     }
     return (
       <a
-       href={"/login/google?_destination="+ window.location.href}
+       href={'/login/google?_destination=' + window.location.href}
        title="Sign in with Google"
        className="btn login__social-btn login__social-btn--googleplus"
       >Se connecter avec Google</a>

@@ -1,5 +1,6 @@
-import AppDispatcher from '../dispatchers/AppDispatcher';
-import { LOGIN, REGISTER } from '../constants/UserConstants';
+// import AppDispatcher from '../dispatchers/AppDispatcher';
+// import { LOGIN, REGISTER } from '../constants/UserConstants';
+import Fetcher from '../services/Fetcher';
 
 export default {
 
@@ -16,18 +17,15 @@ export default {
     })
     .then(response => response.json())
     .then(response => {
-        if (response.success) {
-          window.location.reload();
-          return true;
-        }
-        throw new Error(response.message);
+      if (response.success) {
+        window.location.reload();
+        return true;
+      }
+      throw new Error(response.message);
     });
   },
 
   register: (data) => {
-    AppDispatcher.dispatch({
-      actionType: LOGIN,
-    });
+    return Fetcher.post('/users', data);
   },
-
 };
