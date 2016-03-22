@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Capco\AppBundle\Toggle\Manager;
@@ -27,10 +28,7 @@ class ApiRegistrationFormType extends AbstractType
 
         $builder->remove('isTermsAccepted');
 
-        // $builder->add('g-recaptcha-response', 'string', [
-        //   mapped => false,
-        //   required => true,
-        // ]);
+        $builder->add('captcha', ReCaptchaType::class, ['validation_groups' => ['registration']]);
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', null, ['required' => false]);
@@ -45,6 +43,7 @@ class ApiRegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
+            'cascade_validation' => true,
             'validation_groups' => ['registration'],
         ]);
     }

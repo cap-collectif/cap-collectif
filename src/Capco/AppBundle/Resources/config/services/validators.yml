@@ -53,5 +53,6 @@ services:
 
   capco.recaptcha.validator:
         class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
+        arguments: [@request_stack, '%recaptcha_private_key%']
         tags:
             - { name: validator.constraint_validator, alias: recaptcha.validator }

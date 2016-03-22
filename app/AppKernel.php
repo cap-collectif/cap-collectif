@@ -81,6 +81,7 @@ class AppKernel extends Kernel
             new \FOS\RestBundle\FOSRestBundle(),
             new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new \Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+            new Gfreeau\Bundle\GetJWTBundle\GfreeauGetJWTBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 
             // Server side Js rendering

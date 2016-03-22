@@ -4,6 +4,9 @@ capco_admin:
   prefix:   /
 
 # API
+api_login_check:
+    path: /api/login_check
+
 capco_api_synthesis:
   resource: "@CapcoAppBundle/Controller/Api/SynthesisController.php"
   type: rest
@@ -115,7 +118,6 @@ capco_api_replies:
   prefix: /api
 
 # App
-
 capco_app:
     resource: "@CapcoAppBundle/Controller/Site"
     type:     annotation
@@ -134,6 +136,21 @@ capco_user:
     type: annotation
     prefix: /
 
+fos_user_registration_check_email:
+    path: /check-email
+    defaults:
+      _controller: SonataUserBundle:RegistrationFOSUser1:checkEmail
+
+fos_user_registration_confirm:
+    path: /confirm/{token}
+    defaults:
+      _controller: SonataUserBundle:RegistrationFOSUser1:confirm
+
+fos_user_security_logout:
+    path: /logout
+    defaults:
+      _controller: SonataUserBundle:SecurityFOSUser1:logout
+
 # sonata admin...
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
@@ -145,9 +162,6 @@ _sonata_admin:
     prefix: /admin
 
 # sonata user bundle
-sonata_user_security:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
-
 sonata_user_resetting:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
     prefix: /resetting
@@ -155,10 +169,6 @@ sonata_user_resetting:
 sonata_user_profile:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
     prefix: /profile
-
-sonata_user_register:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
-    prefix: /register
 
 sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
@@ -175,16 +185,7 @@ _imagine:
     type:     imagine
 
 #HWIOAuthBundle routes
-
-hwi_oauth_security:
-    resource: "@CapcoUserBundle/Resources/config/routing.xml"
-    prefix: /login
-
-hwi_oauth_connect:
-    resource: "@CapcoUserBundle/Resources/config/routing.xml"
-    prefix: /login
-
-hwi_oauth_redirect:
+hwi_oauth:
     resource: "@CapcoUserBundle/Resources/config/routing.xml"
     prefix: /login
 
@@ -193,9 +194,6 @@ facebook_login:
 
 google_login:
     path: /login/check-google
-
-nous_citoyens_login:
-    path: /login/check-nous-citoyens
 
 api_login_check:
     path: /api/login_check

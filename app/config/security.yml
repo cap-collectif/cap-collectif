@@ -19,74 +19,59 @@ security:
 
     firewalls:
         dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         admin:
-            pattern:            /admin(.*)
-            context:            user
+            pattern: /admin(.*)
+            context: user
             form_login:
-                provider:       fos_userbundle
-                login_path:     /admin/login
-                use_forward:    false
-                check_path:     /admin/login_check
-                failure_path:   null
+                provider: fos_userbundle
+                login_path: /admin/login
+                use_forward: false
+                check_path: /admin/login_check
+                failure_path: ~
             logout:
-                path:           /admin/logout
-            anonymous:          true
+                path: /admin/logout
+            anonymous: true
 
         api_login:
-            pattern:  ^/api/login
+            pattern:  ^/api/login_check
             provider: fos_userbundle
             stateless: true
-            anonymous: true
-            context:         user
-            form_login:
-                check_path:               /api/login_check
-                username_parameter:       username
-                password_parameter:       password
-                success_handler:          lexik_jwt_authentication.handler.authentication_success
-                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
-                require_previous_session: false
+            gfreeau_get_jwt: ~ # form_login is never stateless, that's why we use this bundle
 
         api:
             pattern: ^/api
             provider: fos_userbundle
             stateless: true
             anonymous: true
-            context:   user
             lexik_jwt:
                 authorization_header:
                     enabled: true
                     prefix: Bearer
                 query_parameter:
-                    enabled: true
-                    name: bearer
+                    enabled: false
         main:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
-                login_path: /login
+                login_path: /
                 check_path: /login_check
-                success_handler: authentication_handler
-                failure_handler: authentication_handler
                 require_previous_session: false
             oauth:
                 resource_owners:
-                    facebook: "/login/check-facebook"
-                    google:   "/login/check-google"
-                    twitter: "/login/check-twitter"
-                    nous_citoyens:  "/login/check-nous-citoyens"
-                # success_handler: authentication_handler
-                # failure_handler: authentication_handler
+                    facebook: /login/check-facebook
+                    google: /login/check-google
                 login_path: /login
                 oauth_user_provider:
                     service: my_user_provider
-            # remember_me:
-            #     key: %remember_secret%
-            #     lifetime: 31536000
-            #     path: /
-            #     domain: ~
+            remember_me:
+              always_remember_me: true
+              key: %remember_secret%
+              lifetime: 31536000
+              path: /
+              domain: ~
             logout:
               path: /logout
               target: /
@@ -101,11 +86,11 @@ security:
 
         # Admin login page needs to be accessed without credential
         - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY } # wtf ?
+        # - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY } # wtf ?
         - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # Api
-        - { path: ^/api,       role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.

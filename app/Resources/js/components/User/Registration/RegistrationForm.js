@@ -1,11 +1,48 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import mailcheck from 'mailcheck';
+import ReCAPTCHA from 'react-google-recaptcha';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import UserActions from '../../../actions/UserActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import Input from '../../Form/Input';
 // import FeatureStore from '../../../stores/FeatureStore';
+
+const domains = [
+  '9online.fr',
+  'aliceadsl.fr',
+  'aol.fr',
+  'aol.com',
+  'bbox.fr',
+  'cap-collectif.com',
+  'club-internet.fr',
+  'democratieouverte.org',
+  'free.fr',
+  'gmail.com',
+  'googlemail.com',
+  'hotmail.com',
+  'hotmail.fr',
+  'icloud.com',
+  'jolicode.com',
+  'laposte.net',
+  'live.com',
+  'live.fr',
+  'me.com',
+  'msn.com',
+  'msn.fr',
+  'neuf.fr',
+  'numericable.com',
+  'numericable.fr',
+  'orange.fr',
+  'outlook.com',
+  'outlook.fr',
+  'sfr.fr',
+  'voila.fr',
+  'wanadoo.fr',
+  'yahoo.com',
+  'yahoo.fr',
+];
 
 const RegistrationForm = React.createClass({
   propTypes: {
@@ -31,12 +68,15 @@ const RegistrationForm = React.createClass({
         email: 'user2@test.com',
         plainPassword: 'supersecureuserpass',
         charte: false,
+        captcha: '',
       },
+      suggestedEmail: false,
       errors: {
         username: [],
         email: [],
         plainPassword: [],
         charte: [],
+        captcha: [],
       },
     };
   },
@@ -53,21 +93,23 @@ const RegistrationForm = React.createClass({
             if (response.user) {
               UserActions.login({ _username: form.email, _password: form.plainPassword });
               this.setState(this.getInitialState());
-              onSubmitSuccess();
-              return;
+              return onSubmitSuccess();
             }
-            if (response.errors && response.errors.children.email.errors.length > 0) {
+            if (response.errors) {
               const errors = this.state.errors;
-              errors.email = ['registration.constraints.email.already_used'];
+              if (response.errors.children.email.errors.length > 0) {
+                errors.email = ['registration.constraints.email.already_used'];
+              }
+              if (response.errors.children.captcha.errors.length > 0) {
+                errors.captcha = ['registration.constraints.captcha.invalid'];
+              }
               this.setState({ errors: errors });
-              onValidationFailure();
-              return;
+              return onValidationFailure();
             }
-            onSubmitFailure();
-            return;
+            return onSubmitFailure();
           });
       }
-      onValidationFailure();
+      return onValidationFailure();
     }
   },
 
@@ -79,6 +121,7 @@ const RegistrationForm = React.createClass({
     },
     email: {
       min: { value: 2, message: 'registration.constraints.email.min' },
+      max: { value: 128, message: 'registration.constraints.email.max' },
       notBlank: { message: 'global.constraints.notBlank' },
     },
     plainPassword: {
@@ -89,6 +132,25 @@ const RegistrationForm = React.createClass({
     charte: {
       isTrue: { message: 'global.constraints.notBlank' },
     },
+    captcha: {
+      notBlank: { message: 'global.constraints.notBlank' },
+    },
+  },
+
+  checkMail() {
+    console.log(this._email);
+    mailcheck.run({
+      email: this._email.value,
+      domains: domains,
+      suggested: suggestion => this.setState({ suggestedEmail: suggestion.full }),
+      empty: () => this.setState({ suggestedEmail: null }),
+    });
+  },
+
+  handleCaptchaChange(value) {
+    const form = this.state.form;
+    form.captcha = value;
+    this.setState({ form: form });
   },
 
   renderFormErrors(field) {
@@ -113,12 +175,20 @@ const RegistrationForm = React.createClass({
         />
         <Input
           id="_email"
+          ref={c => this._email = c}
           type="text"
           valueLink={this.linkState('form.email')}
           label={this.getIntlMessage('global.email') + ' *'}
           groupClassName={this.getGroupStyle('email')}
           errors={this.renderFormErrors('email')}
+          onBlur={this.checkMail()}
         />
+        {this.state.suggestedEmail
+          ? <p className="registration__help">
+              global.helper.typo <a onClick={this.setSuggestedEmail()} className="js-email-correction">{ this.state.suggestedEmail }</a> ?
+            </p>
+          : null
+        }
         <Input
           id="_password"
           type="password"
@@ -135,10 +205,13 @@ const RegistrationForm = React.createClass({
           groupClassName={this.getGroupStyle('charte')}
           errors={this.renderFormErrors('charte')}
         />
-        <div
-          className="g-recaptcha"
-          data-sitekey="6LfKLxsTAAAAANGSsNIlspDarsFFK53b4bKiBYKC"
-        />
+        <div className={this.getGroupStyle('captcha')}>
+          <ReCAPTCHA
+            sitekey="6LctYxsTAAAAANsAl06GxNeV5xGaPjy5jbDe-J8M"
+            onChange={this.handleCaptchaChange}
+          />
+          {this.renderFormErrors('captcha')}
+        </div>
       </form>
     );
   },

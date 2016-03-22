@@ -37,5 +37,14 @@ services:
       factory_method:  getRepository
       arguments:       ['CapcoUserBundle:UserType']
 
-  authentication_handler:
-     class: Capco\UserBundle\Handler\AuthenticationHandler
+  # We override default security services:
+  security.authentication.success_handler:
+      class:  Capco\UserBundle\Handler\AuthenticationSuccessHandler
+      arguments:  ["@security.http_utils", {}]
+      tags:
+          - { name: 'monolog.logger', channel: 'security' }
+  security.authentication.failure_handler:
+      class:  Capco\UserBundle\Handler\AuthenticationFailureHandler
+      arguments:  ["@http_kernel", "@security.http_utils", {}, "@logger"]
+      tags:
+          - { name: 'monolog.logger', channel: 'security' }
