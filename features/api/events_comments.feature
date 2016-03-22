@@ -136,6 +136,23 @@ Feature: Events comments
     }
     """
     Then the JSON response status code should be 400
+    And the JSON response should match:
+    """
+    {
+      "code": 400,
+      "message": "Validation Failed",
+      "errors": {
+        "children": {
+          "body":[],
+          "parent":[],
+          "authorName":{
+            "errors":["comment.create.no_author_error"]
+          },
+          "authorEmail":[]
+        }
+      }
+    }
+    """
 
   ### Logged
 
@@ -172,11 +189,11 @@ Feature: Events comments
       "body": "Pr0 Hacker"
     }
     """
-    Then the JSON response status code should be 404
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 404,
+      "code": 401,
       "message": "This parent comment is not linked to this event",
       "errors": @null@
     }

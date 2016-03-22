@@ -84,7 +84,7 @@ Feature: Synthesis
       "enabled": true
     }
     """
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   Scenario: Anonymous API client wants to create a synthesis
     Given I send a POST request to "/api/syntheses" with json:
@@ -200,7 +200,7 @@ Feature: Synthesis
       "enabled": false
     }
     """
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @database
   Scenario: Anonymous API client wants to update a synthesis
@@ -695,7 +695,7 @@ Feature: Synthesis
       "notation": 5
     }
     """
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @database
   Scenario: Anonymous API client wants to create a synthesis element
@@ -782,7 +782,7 @@ Feature: Synthesis
       "notation": 2
     }
     """
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @database
   Scenario: Anonymous API client wants to update a synthesis element
@@ -935,7 +935,7 @@ Feature: Synthesis
       }
     }
     """
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @database @security
   Scenario: Anonymous API client wants to divide a synthesis element

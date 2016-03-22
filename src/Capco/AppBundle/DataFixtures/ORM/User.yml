@@ -10,7 +10,6 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser2
-        isTermsAccepted: true
 
     user2:
         username: sfavot
@@ -24,7 +23,6 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser1
         city: Antony
-        isTermsAccepted: true
         website: www.sfavot.fr
         biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
         vip: true
@@ -40,7 +38,6 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser3
-        isTermsAccepted: true
 
     user4:
         username: admin
@@ -53,7 +50,6 @@ Capco\UserBundle\Entity\User:
         Media: null
         roles:
          - 'ROLE_ADMIN'
-        isTermsAccepted: true
         vip: true
 
     user5:
@@ -67,7 +63,6 @@ Capco\UserBundle\Entity\User:
         plainPassword: user
         roles:
          - 'ROLE_USER'
-        isTermsAccepted: true
 
     user_drupal:
         __construct: ['drupal']
@@ -89,7 +84,6 @@ Capco\UserBundle\Entity\User:
         password: <password()>
         roles:
          - 'ROLE_USER'
-        isTermsAccepted: true
 
     user501:
         username: spyl
@@ -102,7 +96,6 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser4
-        isTermsAccepted: true
         vip: true
 
     user502:
@@ -116,7 +109,6 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser5
-        isTermsAccepted: true
         vip: true
 
     user503:
@@ -130,7 +122,6 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_USER'
         Media: @MediaUser1
-        isTermsAccepted: true
         vip: false
 
     user504:
@@ -144,5 +135,4 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_USER'
         Media: null
-        isTermsAccepted: true
         vip: truen

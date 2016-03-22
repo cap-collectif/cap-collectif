@@ -30,6 +30,9 @@ framework:
     http_method_override: true
     translator: { fallback: fr }
 
+sensio_framework_extra:
+    view: { annotations: false }
+
 snc_redis:
     clients:
         default:
@@ -274,20 +277,30 @@ fos_rest:
     view:
         view_response_listener: true
         failed_validation: HTTP_BAD_REQUEST
+        empty_content: 204
         formats:
             jsonp: true
             json: true
             xml: false
             rss: false
         templating_formats:
-          html: true
+            html: true
+        force_redirects:
+            html: true
     format_listener:
+        enabled: true
         rules:
-            - { path: ^/api, fallback_format: json }
+            - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: false }
             - { path: ^/, stop: true }
+    # versioning: false
     body_listener:
+        enabled: true
         decoders:
             json: fos_rest.decoder.json
+        array_normalizer:
+            service: fos_rest.normalizer.camel_keys_with_leading_underscore
+            forms: true
+        # throw_exception_on_unsupported_content_type: false
     body_converter:
         enabled: true
         validate: true
@@ -297,14 +310,26 @@ fos_rest:
     serializer:
         serialize_null: true
     exception:
+        enabled: true
         codes:
-            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+            'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': 401
+            'Symfony\Component\HttpKernel\Exception\HttpException': 401
+            'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': 400
+            'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': 401
             'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': 404
-            'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+            'Symfony\Component\Security\Core\Exception\AuthenticationException': 401
+            'Symfony\Component\Security\Core\Exception\AccessDeniedException': 403
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+            'Doctrine\ORM\OptimisticLockException': 409
         messages:
-            'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+            'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': true
             'Symfony\Component\HttpKernel\Exception\HttpException': true
             'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': true
+            'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': true
+            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': true
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+            'Symfony\Component\Security\Core\Exception\AccessDeniedException': true
+            'Symfony\Component\Security\Core\Exception\AuthenticationException': true
 
 lexik_jwt_authentication:
     private_key_path: %jwt_private_key_path%

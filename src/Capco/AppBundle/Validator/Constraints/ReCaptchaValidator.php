@@ -2,13 +2,9 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use DS\Library\ReCaptcha\Http\Driver\DriverInterface;
-use DS\Library\ReCaptcha\ReCaptcha;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\Validator\Exception\InvalidArgumentException;
 
 class ReCaptchaValidator extends ConstraintValidator
 {

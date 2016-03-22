@@ -37,10 +37,6 @@
         <field name="twitter_access_token" column="twitter_access_token" type="string" length="255" nullable="true" />
         <field name="twitter_url" column="twitter_url" type="string" length="255" nullable="true" />
 
-
-        <field name="nous_citoyens_id" column="nous_citoyens_id" type="string" length="255" nullable="true" />
-        <field name="nous_citoyens_access_token" column="nous_citoyens_access_token" type="string" length="255" nullable="true" />
-
         <attribute-overrides>
             <attribute-override name="usernameCanonical">
                 <field column="username_canonical" type="string" length="255" unique="false" nullable="true"/>
@@ -59,8 +55,6 @@
             </cascade>
             <join-column name="media_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
-
-        <field name="isTermsAccepted" column="is_terms_accepted" type="boolean" nullable="false" />
 
         <field name="address" column="address" type="string" length="255" nullable="true" />
         <field name="address2" column="address2" type="string" length="255" nullable="true" />

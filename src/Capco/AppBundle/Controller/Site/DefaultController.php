@@ -101,20 +101,25 @@ class DefaultController extends Controller
      */
     public function getTokenAction()
     {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            return new JsonResponse(['error' => 'You are not authenticated.'], 401);
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            return new JsonResponse([
+              'error' => 'You are not authenticated.'
+            ], 401);
         }
 
         $user = $this->getUser();
-
         $token = $this->get('lexik_jwt_authentication.jwt_manager')
                       ->create($user);
 
-        $userData = $this->get('jms_serializer')->serialize($user, 'json', SerializationContext::create()->setGroups(['Default', 'Users', 'UsersInfos']));
+        $json = $this->get('jms_serializer')->serialize(
+            $user,
+            'json',
+            SerializationContext::create()->setGroups(['Default', 'Users', 'UsersInfos'])
+        );
 
         return new JsonResponse([
             'token' => $token,
-            'user' => $userData,
+            'user' => $json,
         ]);
     }
 }

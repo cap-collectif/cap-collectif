@@ -171,11 +171,11 @@ Feature: Posts comments
       "body": "Pr0 Hacker"
     }
     """
-    Then the JSON response status code should be 404
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 404,
+      "code": 401,
       "message": "This parent comment is not linked to this post",
       "errors": @null@
     }

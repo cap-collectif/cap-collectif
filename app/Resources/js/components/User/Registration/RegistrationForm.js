@@ -7,42 +7,7 @@ import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import UserActions from '../../../actions/UserActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import Input from '../../Form/Input';
-// import FeatureStore from '../../../stores/FeatureStore';
-
-const domains = [
-  '9online.fr',
-  'aliceadsl.fr',
-  'aol.fr',
-  'aol.com',
-  'bbox.fr',
-  'cap-collectif.com',
-  'club-internet.fr',
-  'democratieouverte.org',
-  'free.fr',
-  'gmail.com',
-  'googlemail.com',
-  'hotmail.com',
-  'hotmail.fr',
-  'icloud.com',
-  'jolicode.com',
-  'laposte.net',
-  'live.com',
-  'live.fr',
-  'me.com',
-  'msn.com',
-  'msn.fr',
-  'neuf.fr',
-  'numericable.com',
-  'numericable.fr',
-  'orange.fr',
-  'outlook.com',
-  'outlook.fr',
-  'sfr.fr',
-  'voila.fr',
-  'wanadoo.fr',
-  'yahoo.com',
-  'yahoo.fr',
-];
+import domains from './email_domains';
 
 const RegistrationForm = React.createClass({
   propTypes: {
@@ -64,13 +29,13 @@ const RegistrationForm = React.createClass({
   getInitialState() {
     return {
       form: {
-        username: 'user2',
-        email: 'user2@test.com',
-        plainPassword: 'supersecureuserpass',
+        username: '',
+        email: '',
+        plainPassword: '',
         charte: false,
         captcha: '',
       },
-      suggestedEmail: false,
+      suggestedEmail: null,
       errors: {
         username: [],
         email: [],
@@ -138,13 +103,18 @@ const RegistrationForm = React.createClass({
   },
 
   checkMail() {
-    console.log(this._email);
     mailcheck.run({
-      email: this._email.value,
+      email: this._email.refs.input.value,
       domains: domains,
       suggested: suggestion => this.setState({ suggestedEmail: suggestion.full }),
       empty: () => this.setState({ suggestedEmail: null }),
     });
+  },
+
+  setSuggestedEmail() {
+    const form = this.state.form;
+    form.email = this.state.suggestedEmail;
+    this.setState({ form: form, suggestedEmail: null });
   },
 
   handleCaptchaChange(value) {
@@ -167,6 +137,7 @@ const RegistrationForm = React.createClass({
         <Input
           id="_username"
           type="text"
+          autoFocus
           valueLink={this.linkState('form.username')}
           label={this.getIntlMessage('registration.username') + ' *'}
           groupClassName={this.getGroupStyle('username')}
@@ -181,11 +152,11 @@ const RegistrationForm = React.createClass({
           label={this.getIntlMessage('global.email') + ' *'}
           groupClassName={this.getGroupStyle('email')}
           errors={this.renderFormErrors('email')}
-          onBlur={this.checkMail()}
+          onBlur={this.checkMail}
         />
         {this.state.suggestedEmail
           ? <p className="registration__help">
-              global.helper.typo <a onClick={this.setSuggestedEmail()} className="js-email-correction">{ this.state.suggestedEmail }</a> ?
+              { this.getIntlMessage('global.typo') } <a onClick={this.setSuggestedEmail} className="js-email-correction">{ this.state.suggestedEmail }</a> ?
             </p>
           : null
         }

@@ -147,11 +147,11 @@ Feature: Proposal Votes Restful Api
   Scenario: Logged in API client wants to delete a non-existing vote
     Given I am logged in to api as user
     When I send a DELETE request to "/api/selection_steps/6/proposals/2/votes"
-    Then the JSON response status code should be 400
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 400,
+      "code": 401,
       "message": "You have not voted for this proposal in this selection step.",
       "errors": @null@
     }
@@ -165,11 +165,11 @@ Feature: Proposal Votes Restful Api
     {
     }
     """
-    Then the JSON response status code should be 400
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 400,
+      "code": 401,
       "message": "This proposal is not associated to this selection step.",
       "errors": @null@
     }
@@ -183,11 +183,11 @@ Feature: Proposal Votes Restful Api
     {
     }
     """
-    Then the JSON response status code should be 400
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 400,
+      "code": 401,
       "message": "This selection step is not votable.",
       "errors": @null@
     }
@@ -201,11 +201,11 @@ Feature: Proposal Votes Restful Api
     {
     }
     """
-    Then the JSON response status code should be 400
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 400,
+      "code": 401,
       "message": "This selection step is no longer contributable.",
       "errors": @null@
     }

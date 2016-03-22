@@ -26,8 +26,6 @@ class ApiRegistrationFormType extends AbstractType
             ->add('plainPassword', 'password')
         ;
 
-        $builder->remove('isTermsAccepted');
-
         $builder->add('captcha', ReCaptchaType::class, ['validation_groups' => ['registration']]);
 
         if ($this->toggleManager->isActive('user_type')) {

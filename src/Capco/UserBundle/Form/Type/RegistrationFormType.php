@@ -21,18 +21,6 @@ class RegistrationFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ((null != $this->siteParameterResolver->getValue('signin.cgu.name')) && (null != $this->siteParameterResolver->getValue('signin.cgu.link'))) {
-            $builder->add('isTermsAccepted', 'checkbox', [
-                'label' => null,
-                'required' => true,
-            ]);
-        } else {
-            $builder->add('isTermsAccepted', 'hidden', [
-                'data' => true,
-                'property_path' => 'isTermsAccepted',
-            ]);
-        }
-
         $builder
             ->remove('plainPassword')
             ->add('plainPassword', 'password', [

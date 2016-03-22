@@ -12,6 +12,7 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use FOS\RestBundle\View\View as RestView;
@@ -87,23 +88,39 @@ class UsersController extends FOSRestController
             return $form;
         }
 
+        // We generate a confirmation token to valdiate email
+        $token = $this->get('fos_user.util.token_generator')->generateToken();
+
         $userManager->updatePassword($user);
-        $user->setEnabled(true);
-        $user->setConfirmationToken($this->get('fos_user.util.token_generator')->generateToken());
-        $this->get('fos_user.mailer')->sendConfirmationEmailMessage($user);
+        $user->setEnabled(true); // the user can use the website but...
+        $user->setExpiresAt((new \DateTime())->modify('+ 2 weeks')); // the account expires in 2 weeks (if not confirmed)
+        $user->setConfirmationToken($token);
+        $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
 
         $userManager->updateUser($user);
 
-        // try {
         // $this->get('fos_user.security.login_manager')->loginUser(
         //     $this->container->getParameter('fos_user.firewall_name'),
         //     $user,
         //     $response
         // );
-        // } catch (AccountStatusException $ex) {
-            // We simply do not authenticate users which do not pass the user
-            // checker (not enabled, expired, etc.).
-        // }
+
         return ['user' => $user];
+    }
+
+    /**
+     * @Post("/re-send-email-confirmation", defaults={"_feature_flags" = "registration"})
+     * @Security("has_role('ROLE_USER')")
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postUserResendConfirmationAction()
+    {
+        $user = $this->getUser();
+        if ($user->isEmailConfirmed()) {
+          throw new BadRequestHttpException('Already confirmed.');
+        }
+
+        $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
+        return [];
     }
 }

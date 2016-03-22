@@ -7,11 +7,13 @@ use Capco\AppBundle\Entity\EventRegistration;
 class UserContext extends DefaultContext
 {
     /**
-     * @Given I am logged out
+     * @Given I logout
      */
-    public function iAmLoggedOut()
+    public function iLogout()
     {
-        $this->navigationContext->iVisitedPage('LogoutPage');
+      $home = $this->navigationContext->getPage('HomePage');
+      $home->clickLogout();
+      sleep(2);
     }
 
     /**
@@ -38,12 +40,24 @@ class UserContext extends DefaultContext
         $this->logInWith('user@test.com', 'user');
     }
 
+    /**
+     * @Given I open login modal
+     */
+    public function iOpenLoginModal()
+    {
+      $this->navigationContext->iVisitedPage('HomePage');
+      $home = $this->navigationContext->getPage('HomePage');
+      sleep(3);
+      $home->openLoginModal();
+    }
+
     private function logInWith($email, $pwd)
     {
-        $this->navigationContext->iVisitedPage('LoginPage');
+        $this->iOpenLoginModal();
         $this->fillField('_username', $email);
         $this->fillField('_password', $pwd);
         $this->pressButton('Se connecter');
+        sleep(3);
     }
 
     /**

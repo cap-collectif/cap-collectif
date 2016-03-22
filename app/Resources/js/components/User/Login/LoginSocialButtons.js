@@ -8,7 +8,7 @@ const LoginSocialButtons = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (!FeatureStore.isActive('login_facebook') && FeatureStore.isActive('login_gplus')) {
+    if (!FeatureStore.isActive('login_facebook') && !FeatureStore.isActive('login_gplus')) {
       return null;
     }
     return (

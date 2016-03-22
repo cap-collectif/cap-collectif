@@ -99,7 +99,7 @@ Feature: Sources
   Scenario: Logged in API client wants to update a source but is not the author
     Given I am logged in to api as admin
     When I send a PUT request to "/api/opinions/3/sources/1" with a valid source json
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @security
   Scenario: Logged in API client wants to update his source
@@ -118,7 +118,7 @@ Feature: Sources
   Scenario: Logged in API client wants to update a source but is not the author
     Given I am logged in to api as admin
     When I send a PUT request to "/api/opinions/57/versions/1/sources/8" with a valid source json
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @database
   Scenario: Logged in API client wants to update his source
@@ -139,7 +139,7 @@ Feature: Sources
   Scenario: Logged in API client wants to delete a source but is not the author
     Given I am logged in to api as admin
     When I send a DELETE request to "/api/opinions/3/sources/1"
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @database
   Scenario: Logged in API client wants to delete his source
@@ -159,7 +159,7 @@ Feature: Sources
   Scenario: Logged in API client wants to delete a source but is not the author
     Given I am logged in to api as admin
     When I send a DELETE request to "/api/opinions/57/versions/1/sources/8"
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @database
   Scenario: Logged in API client wants to delete his source
@@ -192,11 +192,11 @@ Feature: Sources
   Scenario: logged in API client wants to delete a vote that doesn't exist
     Given I am logged in to api as user
     When I send a DELETE request to "/api/sources/1/votes"
-    Then the JSON response status code should be 400
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 400,
+      "code": 401,
       "message": "You have not voted for this source.",
       "errors": @null@
     }
@@ -214,7 +214,7 @@ Feature: Sources
   Scenario: Logged in API client wants to report his source
     Given I am logged in to api as user
     When I send a POST request to "/api/opinions/3/sources/1/reports" with a valid report json
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @database
   Scenario: Logged in API client wants to report a source
@@ -232,7 +232,7 @@ Feature: Sources
   Scenario: Logged in API client wants to report his source
     Given I am logged in to api as user
     When I send a POST request to "/api/opinions/57/versions/1/sources/8/reports" with a valid report json
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @database
   Scenario: Logged in API client wants to report a source

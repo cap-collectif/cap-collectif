@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import LoginModal from './LoginModal';
-import LoginStore from '../../../stores/LoginStore';
-import { ButtonToolbar, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 const LoginButton = React.createClass({
   propTypes: {
@@ -20,11 +19,23 @@ const LoginButton = React.createClass({
     this.setState({ show: true });
   },
 
+  handleClose() {
+    this.setState({ show: false });
+  },
+
   render() {
     return (
       <span>
-        <a onClick={this.handleClick} className="btn btn-darkest-gray navbar-btn btn--connection">layout.login</a>
-        <LoginModal show={this.state.show} onClose={() => {}} />
+        <Button
+          onClick={this.handleClick}
+          className="btn-darkest-gray navbar-btn btn--connection"
+        >
+        { this.getIntlMessage('global.login') }
+        </Button>
+        <LoginModal
+          show={this.state.show}
+          onClose={this.handleClose}
+        />
       </span>
     );
   },

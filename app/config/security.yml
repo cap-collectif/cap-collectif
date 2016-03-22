@@ -11,10 +11,10 @@ security:
         ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN]
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
         SONATA:
-            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT  # if you are using acl then this line must be commented
+            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT # if you are using acl then this line must be commented
 
     providers:
-        fos_userbundle:
+        fos_userbundle: # will be used as the default provider
             id: capco_user.user_provider.email
 
     firewalls:
@@ -22,28 +22,14 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        admin:
-            pattern: /admin(.*)
-            context: user
-            form_login:
-                provider: fos_userbundle
-                login_path: /admin/login
-                use_forward: false
-                check_path: /admin/login_check
-                failure_path: ~
-            logout:
-                path: /admin/logout
-            anonymous: true
-
         api_login:
-            pattern:  ^/api/login_check
-            provider: fos_userbundle
+            pattern: ^/api/login_check
+            # anonymous: true
             stateless: true
             gfreeau_get_jwt: ~ # form_login is never stateless, that's why we use this bundle
 
         api:
             pattern: ^/api
-            provider: fos_userbundle
             stateless: true
             anonymous: true
             lexik_jwt:
@@ -54,16 +40,16 @@ security:
                     enabled: false
         main:
             pattern: ^/
+            anonymous: true
             form_login:
-                provider: fos_userbundle
-                login_path: /
+                # login_path: /
                 check_path: /login_check
                 require_previous_session: false
             oauth:
                 resource_owners:
                     facebook: /login/check-facebook
                     google: /login/check-google
-                login_path: /login
+                login_path: /
                 oauth_user_provider:
                     service: my_user_provider
             remember_me:
@@ -75,25 +61,6 @@ security:
             logout:
               path: /logout
               target: /
-            anonymous: true
-            context: user
 
     access_control:
-        # URL of FOSUserBundle which need to be available to anonymous users
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        # Admin login page needs to be accessed without credential
-        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        # - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY } # wtf ?
-        - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        # Api
-        - { path: ^/api/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        # Secured part of the site
-        # This config requires being logged for the whole site and having the admin role for the admin part.
-        # Change these rules to adapt them to your needs
-        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
-        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }

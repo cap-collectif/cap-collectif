@@ -1,5 +1,3 @@
-// import AppDispatcher from '../dispatchers/AppDispatcher';
-// import { LOGIN, REGISTER } from '../constants/UserConstants';
 import Fetcher from '../services/Fetcher';
 
 export default {

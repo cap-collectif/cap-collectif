@@ -54,7 +54,7 @@ const LoginModal = React.createClass({
           <CloseButton onClose={onClose} />
           <SubmitButton
             id="confirm-login"
-            label="global.login"
+            label="global.login_me"
             isSubmitting={isSubmitting}
             onSubmit={this.handleSubmit}
           />

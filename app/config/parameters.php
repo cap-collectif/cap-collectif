@@ -30,8 +30,6 @@ $container->setParameter('facebook_app_id', getenv_default('facebook_app_id', '*
 $container->setParameter('facebook_app_secret', getenv_default('facebook_app_secret', '***REMOVED***'));
 $container->setParameter('google_app_id', getenv_default('google_app_id', '***REMOVED***'));
 $container->setParameter('google_app_secret', getenv_default('google_app_secret', '***REMOVED***'));
-$container->setParameter('nous_citoyens_app_id', getenv_default('nous_citoyens_app_id', 'xxx'));
-$container->setParameter('nous_citoyens_app_secret', getenv_default('nous_citoyens_app_secret', 'xxx'));
 
 $container->setParameter('shield_login', getenv_default('shield_login', '***REMOVED***'));
 $container->setParameter('shield_pwd', getenv_default('shield_pwd', '***REMOVED***'));

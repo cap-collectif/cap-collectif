@@ -171,11 +171,11 @@ Feature: Ideas comments
       "body": "Pr0 Hacker"
     }
     """
-    Then the JSON response status code should be 404
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 404,
+      "code": 401,
       "message": "This parent comment is not linked to this idea",
       "errors": @null@
     }
@@ -191,11 +191,11 @@ Feature: Ideas comments
       "body": "Pr0 Hacker"
     }
     """
-    Then the JSON response status code should be 404
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 404,
+      "code": 401,
       "message": "This parent comment is not linked to this idea",
       "errors": @null@
     }
@@ -211,11 +211,11 @@ Feature: Ideas comments
       "body": "Pr0 Hacker"
     }
     """
-    Then the JSON response status code should be 400
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 400,
+      "code": 401,
       "message": "You can't answer the answer of a comment.",
       "errors": @null@
     }

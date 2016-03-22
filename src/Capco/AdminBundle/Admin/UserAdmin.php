@@ -233,10 +233,6 @@ class UserAdmin extends BaseAdmin
                 ->tab('Security')
                 ->with('Status')
                 ->add('locked', null, ['required' => false])
-                ->add('isTermsAccepted', null, [
-                    'required' => false,
-                    'data' => true,
-                ])
                 ->add('expired', null, ['required' => false])
                 ->add('enabled', null, ['required' => false])
                 ->add('credentialsExpired', null, ['required' => false])
@@ -269,11 +265,6 @@ class UserAdmin extends BaseAdmin
                 ->end()
             ;
         }
-    }
-
-    public function prePersist($user)
-    {
-        $user->setIsTermsAccepted(true);
     }
 
     public function getTemplate($name)

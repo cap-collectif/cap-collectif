@@ -3,6 +3,7 @@ import { IntlMixin } from 'react-intl';
 import FeatureStore from '../../../stores/FeatureStore';
 
 const FacebookLoginButton = React.createClass({
+  displayName: 'FacebookLoginButton',
   mixins: [IntlMixin],
 
   render() {

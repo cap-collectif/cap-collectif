@@ -3,7 +3,6 @@ import { IntlMixin } from 'react-intl';
 import { Alert } from 'react-bootstrap';
 import UserActions from '../../../actions/UserActions';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import FlashMessages from '../../Utils/FlashMessages';
 import Input from '../../Form/Input';
 
 const LoginForm = React.createClass({

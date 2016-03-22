@@ -61,6 +61,7 @@
     "react": "^0.14.8",
     "react-bootstrap": "^0.28.4",
     "react-dom": "^0.14.8",
+    "react-google-recaptcha": "^0.5.2",
     "react-intl": "1.2.0",
     "react-on-rails": "^5.2.0",
     "react-redux": "^4.4.5",
@@ -72,6 +73,8 @@
     "readmore": "0.0.2",
     "redux": "^3.4.0",
     "sass-brunch": "^2.6.2",
+    "sass-brunch": "^2.0.0",
+    "sinon": "^1.17.3",
     "uglify-js-brunch": "^2.0.1",
     "webpack": "^1.12.15",
     "whatwg-fetch": "^0.11.0"

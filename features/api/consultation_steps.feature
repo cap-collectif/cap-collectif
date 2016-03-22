@@ -63,11 +63,11 @@ Feature: Consultation Steps
       "OpinionType": 10
     }
     """
-    Then the JSON response status code should be 400
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 400,
+      "code": 401,
       "message": "This opinion type is not linkable.",
       "errors": @null@
     }
@@ -84,11 +84,11 @@ Feature: Consultation Steps
       "OpinionType": 1
     }
     """
-    Then the JSON response status code should be 400
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 400,
+      "code": 401,
       "message": "This opinionType is not enabled.",
       "errors": @null@
     }

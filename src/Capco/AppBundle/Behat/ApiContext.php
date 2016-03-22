@@ -73,6 +73,9 @@ class ApiContext extends ApplicationContext
             'POST',
             '/api/login_check',
             [
+                'headers' => [
+                  'X-Requested-With' => 'XMLHttpRequest',
+                ],
                 'body' => [
                     'username' => $username,
                     'password' => $password,
@@ -83,25 +86,6 @@ class ApiContext extends ApplicationContext
         $this->token = $response->json()['token'];
     }
 
-    protected function createAuthenticatedAjaxClient($username = 'test', $password = 'test')
-    {
-        $request = $this->client->createRequest(
-            'POST',
-            '/login_check',
-            [
-                'headers' => [
-                    'X-Requested-With' => 'XMLHttpRequest',
-                ],
-                'body' => [
-                    '_username' => $username,
-                    '_password' => $password,
-                ],
-            ]
-        );
-        $response = $this->client->send($request);
-        var_dump($response->json());
-        // $this->token = $response->json()['token'];
-    }
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid source json$/
@@ -216,6 +200,7 @@ EOF;
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
             ],
         ]);
         $this->response = $this->client->send($request);

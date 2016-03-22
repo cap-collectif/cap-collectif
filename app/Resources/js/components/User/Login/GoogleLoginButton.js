@@ -3,6 +3,7 @@ import { IntlMixin } from 'react-intl';
 import FeatureStore from '../../../stores/FeatureStore';
 
 const GoogleLoginButton = React.createClass({
+  displayName: 'GoogleLoginButton',
   mixins: [IntlMixin],
 
   render() {

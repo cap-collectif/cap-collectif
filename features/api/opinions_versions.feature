@@ -202,11 +202,11 @@ Feature: Opinions Versions
       "comment": "Un peu de fun dans ce monde trop sobre !"
     }
     """
-    Then the JSON response status code should be 400
+    Then the JSON response status code should be 401
     And the JSON response should match:
     """
     {
-      "code": 400,
+      "code": 401,
       "message": "Can't add a version to an uncontributable opinion.",
       "errors": @null@
     }
@@ -236,7 +236,7 @@ Feature: Opinions Versions
       "body": "Mes modifications blablabla"
     }
     """
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @security
   Scenario: Anonymous wnats to update a version
@@ -261,7 +261,7 @@ Feature: Opinions Versions
   Scenario: Non author of a version wants to delete it
     Given I am logged in to api as admin
     When I send a DELETE request to "/api/opinions/57/versions/1"
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @security
   Scenario: Anonymous wants to delete a version

@@ -1,6 +1,6 @@
 Feature: Registration
 
-  @database
+  @database @javascript
   Scenario: Anonymous wants to register with user type
     Given feature "registration" is enabled
     And feature "user_type" is enabled
@@ -16,7 +16,7 @@ Feature: Registration
     Then I should see "Merci ! Votre compte a bien été créé."
     And I should see "Pour finaliser la création de votre compte, merci de cliquer sur le lien que nous venons de vous envoyer par e-mail à l'adresse naruto42@gmail.com."
 
-  @database
+  @database @javascript
   Scenario: Anonymous wants to register
     Given feature "registration" is enabled
     And I visited "home page"
@@ -30,6 +30,7 @@ Feature: Registration
     Then I should see "Merci ! Votre compte a bien été créé."
     And I should see "Pour finaliser la création de votre compte, merci de cliquer sur le lien que nous venons de vous envoyer par e-mail à l'adresse naruto42@gmail.com."
 
+  @javascript @security
   Scenario: Anonymous wants to register with every possible errors
     Given feature "registration" is enabled
     And I visited "home page"

@@ -23,7 +23,7 @@
                         <h4 class="h4">{{ "user.profile.title" | trans({}, 'CapcoAppBundle')}}</h4>
                     </div>
                     <hr class="hr--no-margin"/>
-                    <form action="{{ path('sonata_user_profile_edit') }}" method="POST" enctype="multipart/form-data" class="form-horizontal settings__form" role="form">
+                    <form action="{{ path('capco_profile_edit') }}" method="POST" enctype="multipart/form-data" class="form-horizontal settings__form" role="form">
                         <div class="box">
                             {{ form_errors(form) }}
                             <div class="form-group">

@@ -27,10 +27,9 @@ class Notify implements MailerInterface
     protected $urlResolver;
     protected $validator;
 
-    public function __construct(\Swift_Mailer $mailer, \Swift_Mailer $serviceMailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, ValidatorInterface $validator, array $parameters)
+    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, ValidatorInterface $validator, array $parameters)
     {
         $this->mailer = $mailer;
-        $this->serviceMailer = $serviceMailer;
         $this->templating = $templating;
         $this->resolver = $resolver;
         $this->translator = $translator;
@@ -56,7 +55,7 @@ class Notify implements MailerInterface
         $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
         $fromAdress = $this->resolver->getValue('admin.mail.notifications.send_address');
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-        $this->sendServiceEmail($to, $fromAdress, $fromName, $body, $subject, $contentType);
+        $this->sendEmail($to, $fromAdress, $fromName, $body, $subject, $contentType);
     }
 
     private function emailsAreValid($to, $from)
@@ -72,13 +71,6 @@ class Notify implements MailerInterface
         return true;
     }
 
-    public function sendServiceEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
-    {
-        if ($this->emailsAreValid($to, $fromAddress)) {
-            $this->serviceMailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
-        }
-    }
-
     public function sendEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
     {
         if ($this->emailsAreValid($to, $fromAddress)) {
@@ -90,7 +82,9 @@ class Notify implements MailerInterface
     public function sendConfirmationEmailMessage(UserInterface $user)
     {
         $template = $this->parameters['confirmation.template'];
-        $url = $this->router->generate('fos_user_registration_confirm', ['token' => $user->getConfirmationToken()], true);
+        $url = $this->router->generate('capco_user_confirmation_email', [
+          'token' => $user->getConfirmationToken()
+        ], true);
         $rendered = $this->templating->render($template, [
             'user' => $user,
             'confirmationUrl' => $url,
@@ -162,7 +156,7 @@ class Notify implements MailerInterface
                 ]
             );
 
-            $this->sendServiceEmail($to, $report->getReporter()->getEmail(), $report->getReporter()->getUsername(), $body, $subject);
+            $this->sendEmail($to, $report->getReporter()->getEmail(), $report->getReporter()->getUsername(), $body, $subject);
         }
     }
 
