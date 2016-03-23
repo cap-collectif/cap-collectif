@@ -260,10 +260,6 @@ proposal:
   vote:
     anonymous: Anonyme
 
-# Reply
-reply:
-  has_replied: a répondu au questionnaire
-
 #Theme
 theme:
   none: Il n' y a pas de thème.
@@ -882,12 +878,10 @@ user:
       no_opinions_versions: Il n'y a pas de modifications.
       no_projects: Il n'y a pas de projets participatifs.
       no_proposals: Il n'y a pas de projets
-      no_replies: Il n'y a pas de réponses aux questionnaires.
       opinions: Propositions
       opinions_versions: Modifications
       projects: Projets participatifs
       proposals: Projets
-      replies: Questionnaires
       since: Inscrit depuis le
       sources: Sources
       title: Profil de %name%

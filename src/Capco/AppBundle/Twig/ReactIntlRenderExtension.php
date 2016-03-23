@@ -27,6 +27,11 @@ class ReactIntlRenderExtension extends \Twig_Extension
 
     public function reactRenderIntlComponent($componentName, $options = [])
     {
+<<<<<<< HEAD
+=======
+        // var_dump($options);
+        // die();
+>>>>>>> we have v8js on the docker
         if (!array_key_exists('props', $options)) {
             $options['props'] = [];
         }
