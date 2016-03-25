@@ -58,7 +58,7 @@ RUN wget https://getcomposer.org/composer.phar -O- -q >> /usr/local/bin/composer
     chmod +x /usr/local/bin/composer && \
     chmod +x /usr/local/bin/php-cs-fixer
 
-COPY capco.ini /etc/php5/cli/conf.d/capco.ini
+COPY capco.ini /etc/php/7.0/cli/conf.d/capco.ini
 COPY build.sh /usr/local/bin/build
 
 # Use utf 8
