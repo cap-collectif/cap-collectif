@@ -30,9 +30,7 @@ body .btn:focus {
       border: 1px solid $border;
       color: $bg;
       &:hover,
-      &.active,
-      &[disabled],
-      &.disabled {
+      &.active {
         background-color: $bg;
         color: $color;
       }

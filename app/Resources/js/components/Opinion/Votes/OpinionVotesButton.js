@@ -12,12 +12,14 @@ const OpinionVotesButton = React.createClass({
     style: React.PropTypes.object,
     opinion: React.PropTypes.object.isRequired,
     value: React.PropTypes.oneOf([-1, 0, 1]).isRequired,
+    disabled: React.PropTypes.bool,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       style: {},
+      disabled: false,
     };
   },
 
@@ -46,7 +48,7 @@ const OpinionVotesButton = React.createClass({
   },
 
   voteAction() {
-    if (!LoginStore.isLoggedIn()) {
+    if (!LoginStore.isLoggedIn() || this.props.disabled) {
       return null;
     }
     return this.isCurrentVote() ? this.deleteVote() : this.vote();
@@ -96,6 +98,7 @@ const OpinionVotesButton = React.createClass({
           onClick={this.voteAction}
           active={this.isCurrentVote()}
           aria-label={this.isCurrentVote() ? this.getIntlMessage('vote.aria_label_active.' + data.str) : this.getIntlMessage('vote.aria_label.' + data.str)}
+          disabled={this.props.disabled}
         >
           <i className={data.icon}></i>
           { ' ' + this.getIntlMessage('vote.' + data.str) }
