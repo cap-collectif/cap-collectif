@@ -73,7 +73,7 @@
     "enzyme": "^2.2.0",
     "eslint-brunch": "^3.5.0",
     "eslint-config-airbnb": "^6.2.0",
-    "eslint-config-jolicode": "^0.2.0",
+    "eslint-config-jolicode": "^1.0.1",
     "eslint-plugin-mocha": "^2.0.0",
     "eslint-plugin-react": "^4.2.3",
     "fb-flo-brunch": "^1.7.22",
