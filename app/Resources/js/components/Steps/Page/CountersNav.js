@@ -5,6 +5,7 @@ import CounterNavItem from './CounterNavItem';
 import classNames from 'classnames';
 
 const CountersNav = React.createClass({
+  displayName: 'CountersNav',
   propTypes: {
     counters: React.PropTypes.object,
     bordered: React.PropTypes.bool,

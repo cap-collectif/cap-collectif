@@ -3,6 +3,7 @@ import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
 
 const ReadMoreLink = React.createClass({
+  displayName: 'ReadMoreLink',
   propTypes: {
     visible: React.PropTypes.bool,
     expanded: React.PropTypes.bool,

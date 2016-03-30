@@ -4,6 +4,7 @@ import { FormattedHTMLMessage } from 'react-intl';
 import ReadMoreLink from '../../Utils/ReadMoreLink';
 
 const StepText = React.createClass({
+  displayName: 'StepText',
   propTypes: {
     text: React.PropTypes.string,
   },

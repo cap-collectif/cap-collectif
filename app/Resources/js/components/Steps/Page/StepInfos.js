@@ -4,6 +4,7 @@ import StepText from './StepText';
 import { IntlMixin } from 'react-intl';
 
 const StepInfos = React.createClass({
+  displayName: 'StepInfos',
   propTypes: {
     step: React.PropTypes.object.isRequired,
   },

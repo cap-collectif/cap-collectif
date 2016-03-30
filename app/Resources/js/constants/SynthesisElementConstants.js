@@ -1,3 +1,1 @@
-export default {
-  NAV_DEPTH: 3,
-};
+export const NAV_DEPTH = 3;

@@ -5,6 +5,7 @@ import UserAvatar from '../../User/UserAvatar';
 import { Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 
 const MainNavbarUser = React.createClass({
+  displayName: 'MainNavbarUser',
   mixins: [IntlMixin],
 
   render() {

@@ -1,5 +1,3 @@
-export default {
-  VOTE_WIDGET_DISABLED: 0,
-  VOTE_WIDGET_SIMPLE: 1,
-  VOTE_WIDGET_BOTH: 2,
-};
+export const VOTE_WIDGET_DISABLED = 0;
+export const VOTE_WIDGET_SIMPLE = 1;
+export const VOTE_WIDGET_BOTH = 2;

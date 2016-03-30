@@ -43,16 +43,16 @@ function escapeChars(text) {
 
 class CustomDiff extends Diff {
 
-  tokenize = function tokenize(value) {
+  tokenize(value) {
     let strippedValue = strip(value);
     strippedValue = strippedValue.replace(/(<parend>)/g, '|$1|');
     strippedValue = strippedValue.replace(/(&nbsp;)/g, '|$1|');
     strippedValue = strippedValue.replace(/(<br \/>)/g, '|$1|');
     strippedValue = strippedValue.replace(/(\s+?)(?=.+?)/g, '|$1|');
     return removeEmpty(strippedValue.split('|'));
-  };
+  }
 
-  prettyDiff = function pDiff(oldValue, newValue) {
+  pDiff(oldValue, newValue) {
     let prettyDiff = '';
     // Compute diff
     const diff = this.diff(escapeChars(oldValue), escapeChars(newValue));
@@ -74,7 +74,7 @@ class CustomDiff extends Diff {
     });
     // Put <p> back
     return '<p>' + prettyDiff.replace(/<parend>/g, '</p><p>') + '</p>';
-  };
+  }
 
 }
 

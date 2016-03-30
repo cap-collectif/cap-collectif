@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar } from 'react-bootstrap';
 
 const MainNavbarHeader = React.createClass({
+  displayName: 'MainNavbarHeader',
 
   render() {
     return (

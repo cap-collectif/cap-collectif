@@ -1,6 +1,4 @@
 /**
- * @class Autolinker.match.Url
- *
  * Represents a Url match found in an input string which should be Autolinked.
  */
 export default class URLMatch {
@@ -9,26 +7,24 @@ export default class URLMatch {
     this._protocolUrlMatch = protocolUrlMatch;
     this._protocolRelativeMatch = protocolRelativeMatch;
     this.position = position;
+    /**
+     * A regular expression used to remove the 'http://' or 'https://' and/or the 'www.' from URLs.
+     */
+    this.urlPrefixRegex = /^(https?:\/\/)?(www\.)?/i;
+
+    /**
+     * The regular expression used to remove the protocol-relative '//' from the {@link #url} string, for purposes
+     * of {@link #getAnchorText}. A protocol-relative URL is, for example, "//yahoo.com"
+     */
+    this.protocolRelativeRegex = /^\/\//;
+
+    /**
+     * Will be set to `true` if the 'http://' protocol has been prepended to the {@link #url} (because the
+     * {@link #url} did not have a protocol)
+     */
+    this.protocolPrepended = false;
+    this.stripPrefix = true;
   }
-
-  /**
-   * A regular expression used to remove the 'http://' or 'https://' and/or the 'www.' from URLs.
-   */
-  urlPrefixRegex = /^(https?:\/\/)?(www\.)?/i;
-
-  /**
-   * The regular expression used to remove the protocol-relative '//' from the {@link #url} string, for purposes
-   * of {@link #getAnchorText}. A protocol-relative URL is, for example, "//yahoo.com"
-   */
-  protocolRelativeRegex = /^\/\//;
-
-  /**
-   * Will be set to `true` if the 'http://' protocol has been prepended to the {@link #url} (because the
-   * {@link #url} did not have a protocol)
-   */
-  protocolPrepended = false;
-
-  stripPrefix = true;
 
   /**
    * Returns the url that was matched, assuming the protocol to be 'http://' if the original

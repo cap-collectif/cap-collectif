@@ -5,6 +5,7 @@ import MainNavbarUser from './MainNavbarUser';
 import MainNavbarSearch from './MainNavbarSearch';
 
 const MainNavbar = React.createClass({
+  displayName: 'MainNavbar',
 
   render() {
     return (

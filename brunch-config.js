@@ -19,6 +19,10 @@ exports.config = {
   },
   conventions: {
     assets: /^app\/Resources\/assets/,
+    ignored: [
+      /[\\/]_/,
+      /\-test.js$/,
+    ],
   },
   files: {
     javascripts: {
@@ -77,7 +81,7 @@ exports.config = {
   },
   plugins: {
     babel: {
-      stage: 0,
+      babelrc: true,
     },
     // JSCS: {
     //   files: /^app/,

@@ -54,12 +54,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/caxy/HtmlDiffBundle.git",
-                "reference": "53fbc922d10190473091837057f029a44d86eb1a"
+                "reference": "064eae651f0f8d375339dfc76f9f129b84ea175c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/814a0c143d99309c4608334fe8ac0dd9f49edb76",
-                "reference": "53fbc922d10190473091837057f029a44d86eb1a",
+                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/064eae651f0f8d375339dfc76f9f129b84ea175c",
+                "reference": "064eae651f0f8d375339dfc76f9f129b84ea175c",
                 "shasum": ""
             },
             "require": {
@@ -67,7 +67,18 @@
                 "php": ">=5.3.3",
                 "symfony/framework-bundle": "~2.1"
             },
+            "require-dev": {
+                "doctrine/doctrine-cache-bundle": "~1.0"
+            },
+            "suggest": {
+                "doctrine/doctrine-cache-bundle": "Used for caching the calculated diffs in caxy/php-htmldiff"
+            },
             "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Caxy\\HtmlDiffBundle": ""
@@ -91,20 +102,20 @@
                 "diffing",
                 "html"
             ],
-            "time": "2015-01-08 23:16:43"
+            "time": "2016-03-16 16:54:33"
         },
         {
             "name": "caxy/php-htmldiff",
-            "version": "0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caxy/php-htmldiff.git",
-                "reference": "c20812d9d31496f0820588482322551e14fc5e19"
+                "reference": "65b1794a9a7ce790712a2ab3419f3d5600c70bb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/c20812d9d31496f0820588482322551e14fc5e19",
-                "reference": "c20812d9d31496f0820588482322551e14fc5e19",
+                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/65b1794a9a7ce790712a2ab3419f3d5600c70bb8",
+                "reference": "65b1794a9a7ce790712a2ab3419f3d5600c70bb8",
                 "shasum": ""
             },
             "require": {
@@ -146,7 +157,7 @@
                 "diff",
                 "html"
             ],
-            "time": "2016-03-10 23:18:58"
+            "time": "2016-03-16 15:51:25"
         },
         {
             "name": "cocur/slugify",
@@ -1996,12 +2007,12 @@
             "target-dir": "HWI/Bundle/OAuthBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spyl94/HWIOAuthBundle.git",
+                "url": "https://github.com/hwi/HWIOAuthBundle.git",
                 "reference": "4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spyl94/HWIOAuthBundle/zipball/4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/6c00622a9b87e475236949175f62bf4146c43216",
                 "reference": "4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84",
                 "shasum": ""
             },
@@ -3563,16 +3574,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v1.2.2",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "b3313b618f4edd76523572531d5d7e22fe747430"
+                "reference": "c7e26a21ba357863de030f0b9e701c7d04593774"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/b3313b618f4edd76523572531d5d7e22fe747430",
-                "reference": "b3313b618f4edd76523572531d5d7e22fe747430",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/c7e26a21ba357863de030f0b9e701c7d04593774",
+                "reference": "c7e26a21ba357863de030f0b9e701c7d04593774",
                 "shasum": ""
             },
             "require": {
@@ -3607,7 +3618,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-03-11 19:54:08"
+            "time": "2016-03-18 20:34:03"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -4389,12 +4400,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "9681619bdfb130ff746e8289f7d2660b9d5318e4"
+                "reference": "139d11065bf21d987a321b1bad85a35d5ba52578"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/139d11065bf21d987a321b1bad85a35d5ba52578",
-                "reference": "9681619bdfb130ff746e8289f7d2660b9d5318e4",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/4cde5539c3781db18cbc6a823cc648a8e21c04dd",
+                "reference": "139d11065bf21d987a321b1bad85a35d5ba52578",
                 "shasum": ""
             },
             "require": {
@@ -4422,12 +4433,14 @@
                 "twig/twig": "~1.23"
             },
             "require-dev": {
+                "jms/di-extra-bundle": "~1.7",
                 "sensio/generator-bundle": "~2.3|~3.0",
                 "sonata-project/intl-bundle": "^2.2.4",
                 "symfony/phpunit-bridge": "~2.7|~3.0",
                 "symfony/yaml": "~2.3|~3.0"
             },
             "suggest": {
+                "jms/di-extra-bundle": "Annotations for Admin definition",
                 "jms/translation-bundle": "Extract message keys from Admins",
                 "sensio/generator-bundle": "Add sonata:admin:generate command",
                 "sonata-project/intl-bundle": "Add localized date and number into the list"
@@ -4466,7 +4479,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2016-03-10 07:33:07"
+            "time": "2016-03-15 16:19:21"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -6763,20 +6776,20 @@
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "1.3.3",
+            "version": "1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "4d54fde709664562eb63356f0250d527824d05de"
+                "reference": "b1d59735b672865dbeb930805029c24f226e3e77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/4d54fde709664562eb63356f0250d527824d05de",
-                "reference": "4d54fde709664562eb63356f0250d527824d05de",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/b1d59735b672865dbeb930805029c24f226e3e77",
+                "reference": "b1d59735b672865dbeb930805029c24f226e3e77",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4",
+                "php": "^5.4 || ^7.0",
                 "psr/http-message": "~1.0"
             },
             "provide": {
@@ -6809,7 +6822,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2016-01-04 21:37:32"
+            "time": "2016-03-17 18:02:05"
         },
         {
             "name": "zendframework/zend-eventmanager",
@@ -7501,12 +7514,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/coduo/php-matcher.git",
-                "reference": "5fc8221869aa54200bba709310f3383c3d6f404c"
+                "reference": "fddefee866d44f673f68d2bc7716b7fa824b6942"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/5fc8221869aa54200bba709310f3383c3d6f404c",
-                "reference": "5fc8221869aa54200bba709310f3383c3d6f404c",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/fddefee866d44f673f68d2bc7716b7fa824b6942",
+                "reference": "fddefee866d44f673f68d2bc7716b7fa824b6942",
                 "shasum": ""
             },
             "require": {
@@ -7553,7 +7566,7 @@
                 "matcher",
                 "tests"
             ],
-            "time": "2016-03-03 16:14:59"
+            "time": "2016-03-18 09:28:02"
         },
         {
             "name": "coduo/php-to-string",
@@ -8428,16 +8441,16 @@
         },
         {
             "name": "php-http/message",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/message.git",
-                "reference": "a3b45d51ae5a7e800b857d2424792fe26c7dcd63"
+                "reference": "c8fadec9533f5e34a8a730a947fa76363f3aa620"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message/zipball/a3b45d51ae5a7e800b857d2424792fe26c7dcd63",
-                "reference": "a3b45d51ae5a7e800b857d2424792fe26c7dcd63",
+                "url": "https://api.github.com/repos/php-http/message/zipball/c8fadec9533f5e34a8a730a947fa76363f3aa620",
+                "reference": "c8fadec9533f5e34a8a730a947fa76363f3aa620",
                 "shasum": ""
             },
             "require": {
@@ -8462,7 +8475,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
@@ -8490,7 +8503,7 @@
                 "message",
                 "psr-7"
             ],
-            "time": "2016-02-25 10:37:53"
+            "time": "2016-03-29 20:44:24"
         },
         {
             "name": "php-http/message-factory",
@@ -9252,16 +9265,16 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.0.6",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "49bc700750196c04dd6bc2c4c99cb632b893836b"
+                "reference": "7c34c9bdde4131b824086457a3145e27dba10ca1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/49bc700750196c04dd6bc2c4c99cb632b893836b",
-                "reference": "49bc700750196c04dd6bc2c4c99cb632b893836b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/7c34c9bdde4131b824086457a3145e27dba10ca1",
+                "reference": "7c34c9bdde4131b824086457a3145e27dba10ca1",
                 "shasum": ""
             },
             "require": {
@@ -9279,7 +9292,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "3.1.x-dev"
                 }
             },
             "autoload": {
@@ -9304,7 +9317,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-12-08 08:47:06"
+            "time": "2016-03-24 05:58:25"
         },
         {
             "name": "psr/cache",
@@ -9408,16 +9421,16 @@
         },
         {
             "name": "react/promise",
-            "version": "v2.2.2",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "3aacad8bf10c7d83e6fa2089d413529888c2bedf"
+                "reference": "8ffacee1171e33a1c129f424bf1ec36e062eba82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/3aacad8bf10c7d83e6fa2089d413529888c2bedf",
-                "reference": "3aacad8bf10c7d83e6fa2089d413529888c2bedf",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/8ffacee1171e33a1c129f424bf1ec36e062eba82",
+                "reference": "8ffacee1171e33a1c129f424bf1ec36e062eba82",
                 "shasum": ""
             },
             "require": {
@@ -9448,7 +9461,7 @@
                 }
             ],
             "description": "A lightweight implementation of CommonJS Promises/A for PHP",
-            "time": "2016-02-26 19:09:02"
+            "time": "2016-03-24 21:20:22"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

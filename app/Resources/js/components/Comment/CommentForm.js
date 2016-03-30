@@ -41,8 +41,8 @@ const CommentForm = React.createClass({
     if (this.props.focus) {
       ReactDOM.findDOMNode(this.refs.body).focus();
     }
-    const constraints = LoginStore.isLoggedIn() ?
-      {
+    const constraints = LoginStore.isLoggedIn()
+      ? {
         body: {
           notBlank: { message: 'comment.constraints.body' },
           min: { value: 2, message: 'comment.constraints.body' },

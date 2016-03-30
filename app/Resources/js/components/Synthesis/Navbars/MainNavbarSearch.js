@@ -4,6 +4,7 @@ import { Navbar, Input, Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 
 const MainNavbarSearch = React.createClass({
+  displayName: 'MainNavbarSearch',
   contextTypes: {
     router: React.PropTypes.object.isRequired,
   },

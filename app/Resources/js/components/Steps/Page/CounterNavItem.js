@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 const CounterNavItem = React.createClass({
+  displayName: 'CounterNavItem',
   propTypes: {
     counter: React.PropTypes.number.isRequired,
     icon: React.PropTypes.string.isRequired,

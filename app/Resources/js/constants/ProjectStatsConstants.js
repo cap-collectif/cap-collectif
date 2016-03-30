@@ -1,3 +1,1 @@
-export default {
-  DEFAULT_STATS_PAGINATION: 10,
-};
+export const DEFAULT_STATS_PAGINATION = 10;

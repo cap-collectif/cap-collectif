@@ -1,3 +1,1 @@
-export default {
-  DISMISS_MESSAGE: 'DISMISS_MESSAGE',
-};
+export const DISMISS_MESSAGE = 'DISMISS_MESSAGE';

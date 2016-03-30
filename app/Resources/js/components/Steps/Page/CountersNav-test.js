@@ -15,8 +15,9 @@ describe('<CountersNav />', () => {
 
   it('should render a Nav and correct amount of CounterNavItem', () => {
     const wrapper = shallow(<CountersNav counters={counters} {...IntlData} />);
-    expect(wrapper.find('Nav')).to.have.length(1);
-    expect(wrapper.find('CounterNavItem')).to.have.length(3);
+    const nav = wrapper.find('Nav');
+    expect(nav).to.have.length(1);
+    expect(nav.find('CounterNavItem')).to.have.length(3);
   });
 
   it('should not render anything when counters is empty', () => {

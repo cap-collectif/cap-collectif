@@ -1,3 +1,1 @@
-export default {
-  RECEIVE_FEATURES: 'RECEIVE_FEATURES',
-};
+export const RECEIVE_FEATURES = 'RECEIVE_FEATURES';

@@ -35,8 +35,8 @@
         require('Resources/js/modernizr');
         require('Resources/js/jsapi');
         require('Resources/js/googleCharts');
-        var cookieChoices = require('Resources/js/cookiechoices');
-        var App = require('Resources/js/app');
+        var cookieChoices = require('Resources/js/cookiechoices').default;
+        var App = require('Resources/js/app').default;
         if (!Modernizr.intl) {
             require('Resources/js/browserUpdate');
         }

@@ -163,14 +163,13 @@ services:
 hwi_oauth:
     connect:
         account_connector: my_user_provider
-    firewall_name: main
+    firewall_names: [main]
     fosub:
         username_iterations: 30
         properties:
             facebook: facebook_id
             google: google_id
             twitter: twitter_id
-            nous_citoyens: nous_citoyens_id
     resource_owners:
         facebook:
             type: facebook
@@ -193,10 +192,6 @@ hwi_oauth:
             type: twitter
             client_id: %twitter_app_id%
             client_secret: %twitter_app_secret%
-        nous_citoyens:
-            type: nous_citoyens
-            client_id: "%nous_citoyens_app_id%"
-            client_secret: "%nous_citoyens_app_secret%"
 
 qandidate_toggle:
     persistence: redis
@@ -340,4 +335,3 @@ jms_serializer:
             GedmoLoggable:
                 namespace_prefix: "Gedmo\\Loggable"
                 path: "@CapcoAppBundle/Resources/config/serializer/GedmoLoggable"
-
