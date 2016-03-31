@@ -8,7 +8,7 @@ import OpinionPreviewCounters from './OpinionPreviewCounters';
 const OpinionPreview = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
-    rankingThreshold: React.PropTypes.number.isRequired,
+    rankingThreshold: React.PropTypes.number,
     link: React.PropTypes.bool,
     showTypeLabel: React.PropTypes.bool,
   },
@@ -18,6 +18,7 @@ const OpinionPreview = React.createClass({
     return {
       link: true,
       showTypeLabel: false,
+      rankingThreshold: null,
     };
   },
 

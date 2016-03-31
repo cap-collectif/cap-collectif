@@ -7,8 +7,11 @@ import MainNavbarSearch from './MainNavbarSearch';
 import IntlData from '../../../translations/Synthesis/FR';
 
 describe('<MainNavbarSearch />', () => {
+  const context = { router: {} };
   it('should render a search form', () => {
-    const wrapper = shallow(<MainNavbarSearch {...IntlData} />);
+    const wrapper = shallow(<MainNavbarSearch {...IntlData} />,
+      { context }
+    );
     expect(wrapper.find('NavbarForm')).to.have.length(1);
     expect(wrapper.find('Input')).to.have.length(1);
   });

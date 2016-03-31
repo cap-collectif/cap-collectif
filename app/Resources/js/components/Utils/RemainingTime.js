@@ -3,8 +3,8 @@ import { IntlMixin, FormattedMessage } from 'react-intl';
 
 const RemainingTime = React.createClass({
   propTypes: {
-    days: React.PropTypes.integer,
-    hours: React.PropTypes.integer,
+    days: React.PropTypes.number,
+    hours: React.PropTypes.number,
   },
   mixins: [IntlMixin],
 

@@ -14,7 +14,7 @@ const PinnedLabel = React.createClass({
       <OverlayTrigger
         placement="top"
         overlay={
-            <Tooltip placement="top" className="in">
+            <Tooltip placement="top" className="in" id="pinned-label">
               {this.getIntlMessage('global.pinned.tooltip')}
             </Tooltip>
           }
