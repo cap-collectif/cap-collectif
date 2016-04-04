@@ -30,9 +30,6 @@ framework:
     http_method_override: true
     translator: { fallback: fr }
 
-sensio_framework_extra:
-    view: { annotations: false }
-
 snc_redis:
     clients:
         default:
@@ -105,7 +102,7 @@ doctrine:
           Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface: Capco\UserBundle\Entity\User
 
 swiftmailer:
-    default_mailer: mailcatcher
+    default_mailer: "%swiftmailer_service%"
     mailers:
         default:
             transport: "%mailer_transport%"

@@ -161,6 +161,7 @@
     },
     "delete": "Supprimer",
     "done": "Termin\u00e9",
+    "email": "Adresse électronique",
     "edit": "Modifier",
     "edited": "modifi\u00e9 le",
     "edited_on": "Modifi\u00e9 le {updated}",
@@ -199,15 +200,20 @@
     "more": "Voir plus",
     "name": "Nom ",
     "or": "OU",
+    "password": "Mot de passe",
     "pinned": {
       "label": "\u00c9pingl\u00e9",
       "tooltip": "Ce commentaire a \u00e9t\u00e9 \u00e9pingl\u00e9 par l'administrateur."
     },
     "preview": "Aper\u00e7u",
     "publish": "Publier",
+    "login_me": "Se connecter",
+    "login_failed": "Email ou mot de passe incorrect.",
+    "logout": "Déconnexion",
     "read_less": "Masquer",
     "read_more": "Afficher la suite",
     "register": "S'inscrire",
+    "registration": "Inscription",
     "remaining": {
       "days": "{num, plural, =0{0 jour restant} one{# jour restant} other{# jours restants}}",
       "hours": "{num, plural, =0{0 heure restante} one{# heure restante} other{# heures restantes}}"
@@ -226,8 +232,15 @@
     "simple_arguments": "{num, plural, =0{0 avis} one{# avis} other{# avis}}",
     "sources": "{num, plural, =0{0 source} one{# source} other{# sources}}",
     "title": "Titre",
+    "typo": "Vouliez vous dire",
     "versions": "{num, plural, =0{0 modification} one{# modification} other{# modifications}}",
     "votes": "{num, plural, =0{0 vote} one{# vote} other{# votes}}"
+  },
+  "navbar": {
+    "search": "Rechercher",
+    "admin": "Administration",
+    "profile": "Mon profil",
+    "user_settings": "Mes préférences"
   },
   "opinion": {
     "add_new_source": "Proposer une source",
@@ -314,6 +327,41 @@
       "modal": {
         "title": "Tous les votes"
       }
+    }
+  },
+  "registration": {
+   "username": "Nom complet",
+   "charte": "J'ai lu et j'accepte la charte.",
+   "type": "Vous êtes :",
+   "help": {
+     "username": "Votre nom sera rendu public sur le site."
+   },
+   "constraints": {
+     "captcha": {
+       "invalid": "Un problème est survenu la valeur n'est pas valide, réessayez."
+     },
+     "username": {
+       "min": "Votre nom doit faire au moins 2 caractères",
+       "max": "Votre nom doit faire moins de 128 caractères"
+     },
+     "email": {
+       "min": "Votre email doit faire au moins 2 caractères",
+       "max": "Votre email doit faire moins de 128 caractères",
+       "already_used": "Cette adresse électronique est déjà utilisée."
+     },
+     "password": {
+       "min": "Votre mot de passe doit faire au moins 8 caractères",
+       "max": "Votre mot de passe doit faire moins de 128 caractères"
+     }
+   }
+  },
+  "user": {
+    "confirm": {
+      "email": "Merci de confirmer votre adresse e-mail :",
+      "sent": "Un nouveau mail de confirmation a été envoyé !",
+      "sending": "Envoi en cours...",
+      "update": "Mettre à jour l'adresse email",
+      "resend": "Renvoyer la confirmation"
     }
   },
   "project": {

@@ -25,7 +25,5 @@
             {% endif %}
         {% endfor %}
     </ul>
-
-    {# Connection and search #}
-    <div id="render-navbar-right"></div>
+    {{ react_intl_component('NavbarRight', { 'props': props }) }}
 </div>

@@ -1,7 +1,7 @@
 @opinions
 Feature: Opinions
 
-  @database
+  @javascript @database
   Scenario: Can create an opinion of contribuable type in opened project
     Given I am logged in as user
     And I visited "consultation page" with:
@@ -14,7 +14,7 @@ Feature: Opinions
     And I press "Publier"
     Then I should see "Merci ! Votre proposition a bien été enregistrée."
 
-  @security
+  @javascript @security
   Scenario: Can not create an opinion of non-contribuable type
     Given I am logged in as user
     And I visited "consultation page" with:
@@ -22,7 +22,7 @@ Feature: Opinions
       | stepSlug    | collecte-des-avis                |
     Then I should not see "Proposer" in the "#opinions--le-probleme-constate-1" element
 
-  @security
+  @javascript @security
   Scenario: Can not create an opinion in closed project
     Given I am logged in as user
     And I visited "consultation page" with:

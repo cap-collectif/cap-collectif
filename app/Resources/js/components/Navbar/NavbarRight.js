@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
@@ -7,7 +7,22 @@ import LoginStore from '../../stores/LoginStore';
 import LoginActions from '../../actions/LoginActions';
 
 const NavbarRight = React.createClass({
+  propTypes: {
+    user: PropTypes.object,
+  },
   mixins: [IntlMixin],
+
+  componentWillMount() {
+    LoginStore.addChangeListener(this.onChange);
+  },
+
+  componentWillUnmount() {
+    LoginStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    this.forceUpdate();
+  },
 
   logout() {
     LoginActions.logoutUser();
@@ -15,6 +30,7 @@ const NavbarRight = React.createClass({
   },
 
   render() {
+    const { user } = this.props;
     return (
       <div className="nav navbar-right">
         {
@@ -25,15 +41,15 @@ const NavbarRight = React.createClass({
           : null
         }
         {
-          LoginStore.isLoggedIn()
+          user
           ? <ul className="nav navbar-nav navbar-right">
                <li className="dropdown">
                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" id="navbar-username">
-                     { LoginStore.username }<span className="caret"></span>
+                     { user.username }<span className="caret"></span>
                    </a>
                    <ul className="dropdown-menu" role="menu">
                        {
-                         LoginStore.isAdmin()
+                         user.isAdmin
                            ? <li role="menuitem"><a href="/admin">{ this.getIntlMessage('navbar.admin') }</a></li>
                            : null
                        }

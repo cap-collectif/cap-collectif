@@ -10,5 +10,5 @@ const registerStore = ReactOnRails.registerStore;
 
 registerStore({ appStore });
 register({ ProjectsListApp });
-register({ CollectStepPageApp })
+register({ CollectStepPageApp });
 register({ SelectionStepPageApp });

@@ -90,7 +90,19 @@ class DefaultController extends Controller
     {
         $headerLinks = $this->get('capco.menu_item.resolver')->getEnabledMenuItemsWithChildren(MenuItem::TYPE_HEADER);
 
+        $user = $this->getUser()
+            ? [
+                'username' => $this->getUser()->getUsername(),
+                'isAdmin' => false,
+              ]
+            : null
+        ;
+        $props = [
+          'user' => $user
+        ];
+
         return [
+            'props' => $props,
             'pathInfo' => $pathInfo,
             'headerLinks' => $headerLinks,
         ];

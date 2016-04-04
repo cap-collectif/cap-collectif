@@ -24,7 +24,6 @@ security:
 
         api_login:
             pattern: ^/api/login_check
-            # anonymous: true
             stateless: true
             gfreeau_get_jwt: ~ # form_login is never stateless, that's why we use this bundle
 
@@ -42,7 +41,6 @@ security:
             pattern: ^/
             anonymous: true
             form_login:
-                # login_path: /
                 check_path: /login_check
                 require_previous_session: false
             oauth:
