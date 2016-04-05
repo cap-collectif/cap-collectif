@@ -44,7 +44,7 @@ const EmailNotConfirmedAlert = React.createClass({
     }
     const { confirmationSent, resendingConfirmation } = this.state;
     return (
-      <Alert bsStyle="warning">
+      <Alert bsStyle="warning" id="alert-email-not-confirmed">
         <div className="container">
           <p>{ this.getIntlMessage('user.confirm.email') } <strong>{ user.email }</strong>.</p>
           <p>

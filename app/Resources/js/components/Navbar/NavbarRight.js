@@ -47,7 +47,7 @@ const NavbarRight = React.createClass({
                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" id="navbar-username">
                      { user.username }<span className="caret"></span>
                    </a>
-                   <ul className="dropdown-menu" role="menu">
+                   <ul className="dropdown-menu" id="navbar-user-dropdown" role="menu">
                        {
                          user.isAdmin
                            ? <li role="menuitem"><a href="/admin">{ this.getIntlMessage('navbar.admin') }</a></li>

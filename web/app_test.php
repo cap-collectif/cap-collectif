@@ -33,7 +33,7 @@ if (!\Symfony\Component\HttpFoundation\IpUtils::checkIp($request->getClientIp(),
 
 require_once __DIR__.'/../app/AppKernel.php';
 
-$kernel = new AppKernel('test', true);
+$kernel = new AppKernel('test', false);
 $kernel->loadClassCache();
 $response = $kernel->handle($request);
 $response->send();

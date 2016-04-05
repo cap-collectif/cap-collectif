@@ -93,7 +93,7 @@ class DefaultController extends Controller
         $user = $this->getUser()
             ? [
                 'username' => $this->getUser()->getUsername(),
-                'isAdmin' => false,
+                'isAdmin' => $this->getUser()->isAdmin(),
               ]
             : null
         ;

@@ -43,7 +43,7 @@ builder:
     command: echo "Use 'docker-compose run builder build' to build deps"
 
 seleniumhub:
-  image: selenium/hub:2.47.1 # Fixed version to avoid a Mink issue (https://github.com/Behat/MinkExtension/issues/224)
+  image: selenium/hub:2.52.0 # Fixed version to avoid a Mink issue (https://github.com/Behat/MinkExtension/issues/224)
   ports:
     - "4444:4444"
 
@@ -53,7 +53,7 @@ mailcatcher:
     - "25:25"
 
 chrome:
-   image: selenium/node-chrome-debug:2.47.1
+   image: selenium/node-chrome-debug:2.52.0
    links:
      - seleniumhub:hub
      - application:capco.test

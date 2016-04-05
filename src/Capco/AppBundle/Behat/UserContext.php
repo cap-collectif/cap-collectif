@@ -17,6 +17,14 @@ class UserContext extends DefaultContext
     }
 
     /**
+     * @Given I am logged in as user_not_confirmed
+     */
+    public function iAmLoggedInAsUserNotConfirmed()
+    {
+        $this->logInWith('user_not_confirmed@test.com', 'user_not_confirmed');
+    }
+
+    /**
      * @Given I am logged in as admin
      */
     public function iAmLoggedInAsAdmin()
@@ -41,13 +49,29 @@ class UserContext extends DefaultContext
     }
 
     /**
+     * @Then I can see I am logged in as :username
+     */
+    public function iCanSeeIamLoggedInAs($username)
+    {
+      $this->assertElementContainsText('#navbar-username', $username);
+    }
+
+    /**
+     * @Then I can access admin in navbar
+     */
+    public function iCanAccessAdminInNavbar()
+    {
+      $this->navigationContext->getPage('HomePage')->openUserDropdown();
+      $this->assertElementContainsText('#navbar-user-dropdown', 'Administration');
+    }
+
+    /**
      * @Given I open login modal
      */
     public function iOpenLoginModal()
     {
       $this->navigationContext->iVisitedPage('HomePage');
       $home = $this->navigationContext->getPage('HomePage');
-      sleep(3);
       $home->openLoginModal();
     }
 
@@ -57,7 +81,24 @@ class UserContext extends DefaultContext
         $this->fillField('_username', $email);
         $this->fillField('_password', $pwd);
         $this->pressButton('Se connecter');
-        sleep(3);
+        sleep(4); // TODO
+    }
+
+    /**
+     * @Then I should be asked to confirm my email :email
+     */
+    public function iShouldBeAskedToConfirmMyEmail($email)
+    {
+      $this->assertSession()->elementExists('css', '#alert-email-not-confirmed');
+      $this->assertElementContainsText('#alert-email-not-confirmed', $email);
+    }
+
+    /**
+     * @Then I should not be asked to confirm my email
+     */
+    public function iShouldNotBeAskedToConfirmMyEmail()
+    {
+      $this->assertSession()->elementNotExists('css', '#alert-email-not-confirmed');
     }
 
     /**

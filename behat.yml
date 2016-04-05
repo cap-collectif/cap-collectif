@@ -44,7 +44,7 @@ javascript:
             namespaces:
                 page: [ Capco\AppBundle\Behat\Page ]
         Behat\MinkExtension:
-            base_url: 'http://capco.test/'
+            base_url: 'http://capco.dev/'
             # browser_name: firefox
             browser_name: chrome
             sessions:
