@@ -99,12 +99,6 @@ class UsersController extends FOSRestController
 
         $userManager->updateUser($user);
 
-        // $this->get('fos_user.security.login_manager')->loginUser(
-        //     $this->container->getParameter('fos_user.firewall_name'),
-        //     $user,
-        //     $response
-        // );
-
         return ['user' => $user];
     }
 

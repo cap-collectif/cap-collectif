@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Alert, Button } from 'react-bootstrap';
-import LoginStore from '../../stores/LoginStore';
 import Fetcher from '../../services/Fetcher';
 
 const EmailNotConfirmedAlert = React.createClass({
+  propTypes: {
+    user: PropTypes.object,
+    style: PropTypes.string,
+  },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      style: 'position: fixed; width: 100%; left: 0; z-index: 30;',
+      user: null,
+    };
+  },
 
   getInitialState() {
     return {
@@ -28,14 +38,15 @@ const EmailNotConfirmedAlert = React.createClass({
   },
 
   render() {
-    if (!LoginStore.isLoggedIn() || LoginStore.isEmailConfirmed()) {
+    const { user } = this.props;
+    if (!user || user.isEmailConfirmed) {
       return null;
     }
     const { confirmationSent, resendingConfirmation } = this.state;
     return (
       <Alert bsStyle="warning">
         <div className="container">
-          <p>{ this.getIntlMessage('user.confirm.email') } <strong>{ LoginStore.email }</strong>.</p>
+          <p>{ this.getIntlMessage('user.confirm.email') } <strong>{ user.email }</strong>.</p>
           <p>
             {
               confirmationSent

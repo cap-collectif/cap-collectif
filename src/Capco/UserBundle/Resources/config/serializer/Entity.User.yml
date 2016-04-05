@@ -28,12 +28,3 @@ Capco\UserBundle\Entity\User:
         serialized_name: isAdmin
         type: boolean
         groups: [UserDetails, UsersInfos]
-      # isEmailConfirmed:
-      #   serialized_name: isEmailConfirmed
-      #   expose: true
-      #   groups: [UserDetails, UsersInfos]
-      # getEmail:
-      #   serialized_name: email
-      #   expose: true
-      #   type: string
-      #   groups: [UsersInfos]
