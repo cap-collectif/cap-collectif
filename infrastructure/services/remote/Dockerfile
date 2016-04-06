@@ -51,8 +51,8 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a
     echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.1/debian jessie main" >> /etc/apt/sources.list && \
     apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
-        mariadb-server-10.1=10.1.12+maria-1~jessie \
-        mariadb-client-10.1=10.1.12+maria-1~jessie \
+        mariadb-server-10.1 \
+        mariadb-client-10.1 \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
