@@ -32,9 +32,9 @@ const StepPreview = React.createClass({
               <DatesInterval startAt={step.startAt} endAt={step.endAt} />
             </p>
             {
-              step.openingStatus
+              step.status
               ? <p className="label label-default">
-                {this.getIntlMessage('step.status.' + step.openingStatus)}
+                {this.getIntlMessage('step.status.' + step.status)}
               </p>
               : null
             }
