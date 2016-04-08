@@ -356,6 +356,7 @@ class ProjectDownloadResolver
     {
         $proposal = $vote->getProposal();
         $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
+
         return $item = [
             'id' => $vote->getId(),
             'title' => $proposal->getTitle(),

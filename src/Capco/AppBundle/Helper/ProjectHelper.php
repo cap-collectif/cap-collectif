@@ -9,31 +9,31 @@ use Capco\AppBundle\Entity\Project;
 
 class ProjectHelper
 {
-  protected $projectRepository;
-  protected $stepRepository;
+    protected $projectRepository;
+    protected $stepRepository;
 
-  public function __construct(ProjectRepository $projectRepository, AbstractStepRepository $stepRepository)
-  {
-      $this->projectRepository = $projectRepository;
-      $this->stepRepository = $stepRepository;
-  }
+    public function __construct(ProjectRepository $projectRepository, AbstractStepRepository $stepRepository)
+    {
+        $this->projectRepository = $projectRepository;
+        $this->stepRepository = $stepRepository;
+    }
 
-  public function getAbstractSteps(Project $project)
-  {
-      return $this->stepRepository->getByProject($project->getSlug());
-  }
+    public function getAbstractSteps(Project $project)
+    {
+        return $this->stepRepository->getByProject($project->getSlug());
+    }
 
-  public function getPreviousSteps(AbstractStep $step)
-  {
-      $position = $step->getPosition();
-      $previousSteps = [];
-      $projectSteps = $this->getAbstractSteps($step->getProject());
-      foreach ($projectSteps as $projectStep) {
-          if ($projectStep->getPosition() < $position) {
-              $previousSteps[] = $projectStep;
-          }
-      }
-      return $previousSteps;
-  }
+    public function getPreviousSteps(AbstractStep $step)
+    {
+        $position = $step->getPosition();
+        $previousSteps = [];
+        $projectSteps = $this->getAbstractSteps($step->getProject());
+        foreach ($projectSteps as $projectStep) {
+            if ($projectStep->getPosition() < $position) {
+                $previousSteps[] = $projectStep;
+            }
+        }
 
+        return $previousSteps;
+    }
 }
