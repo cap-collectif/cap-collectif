@@ -22,6 +22,7 @@ const ProjectsList = React.createClass({
         </Row>
       );
     }
+    return <p>Aucun projet</p>;
   },
 
 });

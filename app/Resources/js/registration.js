@@ -1,0 +1,27 @@
+import ReactOnRails from 'react-on-rails';
+import LoginButton from './components/User/LoginButton';
+import ProjectsList from './components/Project/List/ProjectsList';
+import ProjectPreview from './components/Project/Preview/ProjectPreview';
+import ProjectCover from './components/Project/Preview/ProjectCover';
+import ProjectPreviewBody from './components/Project/Preview/ProjectPreviewBody';
+import ProjectPreviewCounters from './components/Project/Preview/ProjectPreviewCounters';
+import ProjectPreviewThemes from './components/Project/Preview/ProjectPreviewThemes';
+import ProjectPreviewProgressBar from './components/Project/Preview/ProjectPreviewProgressBar';
+import ProjectPreviewProgressBarItem from './components/Project/Preview/ProjectPreviewProgressBarItem';
+import ProjectPreviewCounter from './components/Project/Preview/ProjectPreviewCounter';
+import DatesInterval from './components/Utils/DatesInterval';
+import StepRemainingTime from './components/Steps/StepRemainingTime';
+
+const register = ReactOnRails.register;
+register({ LoginButton });
+register({ ProjectsList });
+register({ ProjectPreview });
+register({ ProjectCover });
+register({ ProjectPreviewBody });
+register({ ProjectPreviewCounter });
+register({ ProjectPreviewCounters });
+register({ ProjectPreviewThemes });
+register({ ProjectPreviewProgressBar });
+register({ ProjectPreviewProgressBarItem });
+register({ DatesInterval });
+register({ StepRemainingTime });

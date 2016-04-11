@@ -85,18 +85,7 @@
         </div>
         {% endif %}
 
-        {% if count | length > 0 %}
-            <div
-                    id="render-projects-list"
-                    data-projects='{{ projects | escape }}'
-            >
-                <p class="text-center">{{ 'global.loading' | trans({}, 'CapcoAppBundle') }}</p>
-            </div>
-        {% else %}
-            <p>
-                {{ 'project.searchform.no_result'|trans({}, 'CapcoAppBundle') }}
-            </p>
-        {% endif %}
+        {{ react_intl_component('ProjectsList', {'props': props}) }}
 
         {% set route, params = 'app_project', {} %}
         {% if is_feature_enabled('projects_form') and form is defined %}

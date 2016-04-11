@@ -15,6 +15,9 @@ if [ "$PRODUCTION" ]; then
   npm --quiet --no-color install --production
   bower install --config.interactive=false --allow-root --config.storage.cache=/home/capco/.cache/bower
   NODE_ENV=production npm run build:prod
+
+  # Server side rendering deps
+  NODE_ENV=production npm run build-server-bundle
 else
   echo "Building for development"
   # Symfony deps
@@ -26,4 +29,7 @@ else
   npm rebuild node-sass
   bower install --config.interactive=false --config.storage.cache=/home/capco/.bower
   npm run build
+
+  # Server side rendering deps
+  npm run build-server-bundle
 fi

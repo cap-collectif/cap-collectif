@@ -10,12 +10,7 @@
             <p>{{ section.body | raw }}</p>
         {% endif %}
 
-        <div
-            id="render-projects-list"
-            data-projects='{{ projects | escape }}'
-        >
-            <p class="text-center">{{ 'global.loading' | trans({}, 'CapcoAppBundle') }}</p>
-        </div>
+        {{ react_intl_component('ProjectsList', {'props': props}) }}
 
         {% if count > max %}
             <a href="{{ path('app_project') }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>

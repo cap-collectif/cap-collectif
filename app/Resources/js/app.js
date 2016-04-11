@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './registration';
 require('fancybox')($);
 
 import IntlData from './translations/FR';
@@ -15,7 +16,6 @@ import ProposalsUserVotesPage from './components/Project/Votes/ProposalsUserVote
 import ProjectStatsPage from './components/Project/Stats/ProjectStatsPage';
 import AlertBox from './components/Alert/AlertBox';
 import StepInfos from './components/Steps/Page/StepInfos';
-import ProjectsList from './components/Project/List/ProjectsList';
 
 FeatureService.load();
 
@@ -162,16 +162,6 @@ AuthService
           {...IntlData}
         />,
         document.getElementById('render-opinion-version')
-      );
-    }
-
-    if ($('#render-projects-list').length) {
-      ReactDOM.render(
-        <ProjectsList
-          projects={$('#render-projects-list').data('projects').projects}
-          {...IntlData}
-        />,
-        document.getElementById('render-projects-list')
       );
     }
   }

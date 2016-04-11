@@ -17,6 +17,7 @@ RUN apt-get update && \
         pkg-config \
         runit \
         wget \
+        libicu-dev \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -45,6 +46,32 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install recent v8, phpv8js
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y vim git git-svn subversion make g++ libreadline-dev && \
+    git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /usr/local/depot_tools && \
+    export PATH=/usr/local/depot_tools:$PATH && \
+    cd /tmp && \
+    fetch v8 && \
+    cd v8 && \
+    git checkout 4.9.385.28 && \
+    gclient sync && \
+    export GYP_DEFINES="use_system_icu=1" && \
+    export GYPFLAGS="-Dv8_use_external_startup_data=0" && \
+    make native library=shared snapshot=on -j4 && \
+    cp out/native/lib.target/lib*.so /usr/lib/ && \
+    cp out/native/obj.target/tools/gyp/libv8_libplatform.a /usr/lib && \
+    cp -R include/* /usr/include && \
+    git clone https://github.com/phpv8/v8js.git --branch 1.1.0 /tmp/v8js && \
+    cd /tmp/v8js && phpize && ./configure && \
+    make all test install && \
+    cd / && \
+    rm -rf /tmp/* /usr/local/depot_tools && \
+    apt-get purge -y vim git git-svn subversion make g++ libreadline-dev && \
+    apt-get autoremove -y && \
+    apt-get clean all
 
 # Install mariadb
 RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \

@@ -25,17 +25,10 @@ class ProjectController extends Controller
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Project:lastProjects.html.twig")
-     *
-     * @param $max
-     * @param $offset
-     *
-     * @return array
      */
     public function lastProjectsAction($max = 4, $offset = 0)
     {
-        $serializer = $this->get('jms_serializer');
-        $count = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:Project')->countPublished();
-        $projects = $serializer->serialize([
+        $props = $this->get('jms_serializer')->serialize([
             'projects' => $this
                 ->get('doctrine.orm.entity_manager')
                 ->getRepository('CapcoAppBundle:Project')
@@ -43,8 +36,7 @@ class ProjectController extends Controller
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
 
         return [
-            'projects' => $projects,
-            'count' => $count,
+            'props' => $props,
         ];
     }
 
@@ -375,7 +367,7 @@ class ProjectController extends Controller
         $serializer = $this->get('jms_serializer');
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('projects.pagination');
         $projectsRaw = $em->getRepository('CapcoAppBundle:Project')->getSearchResults($pagination, $page, $theme, $sort, $term);
-        $projects = $serializer->serialize([
+        $props = $this->get('jms_serializer')->serialize([
             'projects' => $projectsRaw,
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
 
@@ -386,7 +378,7 @@ class ProjectController extends Controller
         }
 
         $parameters = [
-            'projects' => $projects,
+            'props' => $props,
             'count' => count($projectsRaw),
             'page' => $page,
             'nbPage' => $nbPage,

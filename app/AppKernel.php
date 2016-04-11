@@ -82,6 +82,9 @@ class AppKernel extends Kernel
             new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new \Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+
+            // Server side Js rendering
+            new Limenius\ReactBundle\LimeniusReactBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

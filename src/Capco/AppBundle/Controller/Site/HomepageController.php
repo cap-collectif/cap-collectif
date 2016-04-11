@@ -191,7 +191,7 @@ class HomepageController extends Controller
     {
         $serializer = $this->get('jms_serializer');
         $count = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:Project')->countPublished();
-        $projects = $serializer->serialize([
+        $props = $serializer->serialize([
             'projects' => $this
                 ->get('doctrine.orm.entity_manager')
                 ->getRepository('CapcoAppBundle:Project')
@@ -200,7 +200,7 @@ class HomepageController extends Controller
 
         return [
             'max' => $max,
-            'projects' => $projects,
+            'props' => $props,
             'count' => $count,
             'section' => $section,
             'alt' => $alt,

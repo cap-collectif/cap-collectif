@@ -21,6 +21,7 @@ exports.config = {
     assets: /^app\/Resources\/assets/,
     ignored: [
       /[\\/]_/,
+      'app/Resources/js-server/registration.js',
       /\-test.js$/,
     ],
   },
@@ -52,40 +53,39 @@ exports.config = {
         'js/app.js': [
           'app/Resources/js/synthesis.js',
           'app/Resources/js/app.js',
-          'app/Resources/js/**/**/*.js'
+          'app/Resources/js/**/**/*.json',
+          'app/Resources/js/**/**/*.js',
         ],
         'js/ckeditor/ckeditor.js': [
-          'bower_components/ckeditor/ckeditor.js'
+          'bower_components/ckeditor/ckeditor.js',
         ],
         'js/jquery.minicolors.js': [
-          'bower_components/jquery-minicolors/jquery.minicolors.js'
-        ]
-      }
+          'bower_components/jquery-minicolors/jquery.minicolors.js',
+        ],
+      },
     },
     stylesheets: {
       joinTo: {
-        'css/style.css' : [
+        'css/style.css': [
           'bower_components/bootstrap/assets/stylesheets/bootstrap.scss',
           'bower_components/css-spinners/css/spinners.css',
           /^node_modules/,
           'app/Resources/scss/style.scss',
         ],
-        'css/jquery.minicolors.css' : [
+        'css/jquery.minicolors.css': [
           'bower_components/jquery-minicolors/jquery.minicolors.css',
         ],
-        'css/style-admin.css' : [
+        'css/style-admin.css': [
           'app/Resources/scss/style-admin.scss',
         ],
-      }
-    }
+      },
+    },
   },
   plugins: {
     babel: {
       babelrc: true,
+      ignore: [/^(bower_components|node_modules)/],
     },
-    // JSCS: {
-    //   files: /^app/,
-    // },
     sass: {
       mode: 'native',
     },
@@ -100,5 +100,5 @@ exports.config = {
       mangle: true,
       compress: false,
     },
-  }
+  },
 };

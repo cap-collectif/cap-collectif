@@ -335,3 +335,14 @@ jms_serializer:
             GedmoLoggable:
                 namespace_prefix: "Gedmo\\Loggable"
                 path: "@CapcoAppBundle/Resources/config/serializer/GedmoLoggable"
+
+limenius_react:
+    serverside_rendering:
+        # In case of error in server-side rendering, throw exception
+        fail_loud: false
+        # Replay every console.log message produced during server-side rendering
+        # in the JavaScript console
+        # Note that if enabled it will throw a (harmless) React warning
+        trace: false
+        # Location of the server bundle, that contains React and React on Rails.
+        server_bundle_path: "%kernel.root_dir%/../web/js/server-bundle.js"

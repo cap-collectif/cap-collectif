@@ -1,11 +1,1 @@
-{% if count > 0 %}
-    <div
-        id="render-projects-list"
-        data-projects='{{ projects | escape }}'
-    >
-        <p class="text-center">{{ 'global.loading' | trans({}, 'CapcoAppBundle') }}</p>
-    </div>
-    <a href="{{ path('app_project') }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
-{% else %}
-    <p>{{ 'project.none'|trans({}, 'CapcoAppBundle') }}</p>
-{% endif %}
+{{ react_intl_component('ProjectsList', {'props': props}) }}

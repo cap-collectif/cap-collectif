@@ -88,3 +88,9 @@ services:
   capco.synthesis.consultation_step_extractor:
     class: Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor
     arguments: [@doctrine.orm.entity_manager, @translator, @router, @capco.opinion_types.resolver, @capco.url.resolver]
+
+  capco.react_intl_render.twig:
+    class: Capco\AppBundle\Twig\ReactIntlRenderExtension
+    arguments: [@limenius_react.render_extension, %kernel.root_dir%/Resources/js/translations/messages.json]
+    tags:
+      - { name: "twig.extension" }
