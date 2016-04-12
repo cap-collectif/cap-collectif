@@ -31,13 +31,14 @@ Feature: Opinions
     Then I should see "Consultation terminée. Merci à tous d'avoir contribué."
     And I should not see "Proposer"
 
-  @security
+  @javascript @security
   Scenario: Can not create an opinion when not logged in
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     When I follow "btn-add--les-causes-1"
-    Then I should see "Connection form" on "login page"
+    # TODO no popover until refonte...
+    Then I should be on "homepage"
 
   @javascript @database
   Scenario: Logged in user can report an opinion

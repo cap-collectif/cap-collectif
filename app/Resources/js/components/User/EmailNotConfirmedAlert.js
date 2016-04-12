@@ -47,7 +47,7 @@ const EmailNotConfirmedAlert = React.createClass({
       <Alert bsStyle="warning" id="alert-email-not-confirmed">
         <div className="container">
           <p>{ this.getIntlMessage('user.confirm.email') } <strong>{ user.email }</strong>.</p>
-          <p>
+          <p style={{ marginBottom: 0 }}>
             {
               confirmationSent
               ? <Button bsStyle="primary" disabled>
@@ -64,8 +64,7 @@ const EmailNotConfirmedAlert = React.createClass({
                   }
                 </Button>
             }
-            { ' ' }
-            <a href="/profile/edit-profile">{ this.getIntlMessage('user.confirm.update') }</a>
+            <a className="small" style={{ marginLeft: 10 }} href="/profile/edit-profile">{ this.getIntlMessage('user.confirm.update') }</a>
           </p>
         </div>
       </Alert>

@@ -49,6 +49,14 @@ class UserContext extends DefaultContext
     }
 
     /**
+     * @Given I want to login as expired_user
+     */
+    public function iWantToLoginAsExpiredUser()
+    {
+        $this->logInWith('user_expired@test.com', 'user_expired');
+    }
+
+    /**
      * @Then I can see I am logged in as :username
      */
     public function iCanSeeIamLoggedInAs($username)

@@ -27,15 +27,15 @@
 
         <field name="facebook_id" column="facebook_id" type="string" length="255" nullable="true" />
         <field name="facebook_access_token" column="facebook_access_token" type="string" length="255" nullable="true" />
-        <field name="facebook_url" column="facebook_url" type="string" length="255" nullable="true" />
+        <field name="facebookUrl" column="facebook_url" type="string" length="255" nullable="true" />
 
         <field name="google_id" column="google_id" type="string" length="255" nullable="true" />
         <field name="google_access_token" column="google_access_token" type="string" length="255" nullable="true" />
-        <field name="google_url" column="google_url" type="string" length="255" nullable="true" />
+        <field name="googleUrl" column="google_url" type="string" length="255" nullable="true" />
 
         <field name="twitter_id" column="twitter_id" type="string" length="255" nullable="true" />
         <field name="twitter_access_token" column="twitter_access_token" type="string" length="255" nullable="true" />
-        <field name="twitter_url" column="twitter_url" type="string" length="255" nullable="true" />
+        <field name="twitterUrl" column="twitter_url" type="string" length="255" nullable="true" />
 
         <attribute-overrides>
             <attribute-override name="usernameCanonical">
@@ -109,6 +109,7 @@
         </one-to-many>
 
         <field name="vip" column="vip" type="boolean" />
+        <field name="emailConfirmationSentAt" column="email_confirmation_sent_at" type="datetime" nullable="true" />
 
     </entity>
 

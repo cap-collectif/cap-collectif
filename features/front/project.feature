@@ -160,6 +160,7 @@ Feature: Project
       | stepSlug    | collecte-des-avis                |
     Then I should not see "Corbeille"
 
+  @javascript  
   Scenario: Can not access trash if not logged in
     Given feature "project_trash" is enabled
     And I visited "consultation page" with:

@@ -51,6 +51,7 @@ mailcatcher:
   image: jderusse/mailcatcher:latest
   ports:
     - "25:25"
+    - "1080:80"
 
 chrome:
    image: selenium/node-chrome-debug:2.47.1

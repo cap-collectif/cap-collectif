@@ -11,13 +11,13 @@ Capco\UserBundle\Entity\User:
     email:
       - NotBlank: { message: email.blank, groups: [registration, profile] }
       - Email: { checkMX: true, message: email.invalid, groups: [registration, profile] }
-    twitter_url:
+    twitterUrl:
       - Url: { groups: [profile] }
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: twitter, groups: [profile] }
-    facebook_url:
+    facebookUrl:
       - Url: { groups: [profile] }
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: facebook, groups: [profile] }
-    google_url:
+    googleUrl:
       - Url: { groups: [profile] }
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: gplus, groups: [profile] }
     Media:

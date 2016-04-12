@@ -338,7 +338,7 @@
    },
    "constraints": {
      "captcha": {
-       "invalid": "Un problème est survenu la valeur n'est pas valide, réessayez."
+       "invalid": "Veuillez valider que vous n'êtes pas un robot."
      },
      "username": {
        "min": "Votre nom doit faire au moins 2 caractères",

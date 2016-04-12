@@ -31,7 +31,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * @When /^I am logged in to api as admin$/
+     * @When I am logged in to api as admin
      */
     public function iAmLoggedInToApiAsAdmin()
     {
@@ -39,7 +39,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * @When /^I am logged in to api as user$/
+     * @When I am logged in to api as user
      */
     public function iAmLoggedInToApiAsUser()
     {
@@ -47,7 +47,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * @When /^I am logged in to api as user_not_confirmed$/
+     * @When I am logged in to api as user_not_confirmed
      */
     public function iAmLoggedInToApiAsUserNotConfirmed()
     {
@@ -55,7 +55,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * @When /^I am logged in to api as xlacot$/
+     * @When I am logged in to api as xlacot
      */
     public function iAmLoggedInToApiAsXlacot()
     {

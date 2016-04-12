@@ -75,7 +75,8 @@ class UserRepository extends EntityRepository
       $qb = $this->createQueryBuilder('u');
       $qb
           ->andwhere('u.expired = false')
-          ->andWhere('u.expiresAt > CURRENT_DATE()')
+          ->andWhere('u.expiresAt IS NOT NULL')
+          ->andWhere('u.expiresAt < CURRENT_DATE()')
         ;
       return $qb->getQuery()->getResult();
     }

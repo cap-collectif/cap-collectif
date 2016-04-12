@@ -30,3 +30,8 @@ Feature: Login
     And  I fill in "email" with "user@test.com"
     And I press "Réinitialiser le mot de passe"
     Then I should see "Si un compte est associé à l'adresse user@test.com, vous recevrez un e-mail avec un lien pour réinitialiser votre mot de passe."
+
+  @javascript
+  Scenario: Expired user can not login
+    Given I want to login as expired_user
+    Then I should see "Email ou mot de passe incorrect."

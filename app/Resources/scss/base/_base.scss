@@ -22,6 +22,10 @@ body {
   width: 100%;
 }
 
+.w335 {
+  width: 335px;
+}
+
 .main {
   background-color: $main-bg;
 
@@ -624,6 +628,10 @@ svg.avatar {
   height: 60px;
   margin-top: -60px;
   visibility: hidden;
+}
+
+#alert-email-not-confirmed {
+  margin-bottom: 0;
 }
 
 @media print {

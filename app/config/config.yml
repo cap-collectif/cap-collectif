@@ -288,9 +288,9 @@ fos_rest:
         enabled: true
         decoders:
             json: fos_rest.decoder.json
-        array_normalizer:
-            service: fos_rest.normalizer.camel_keys_with_leading_underscore
-            forms: true
+        # array_normalizer:
+        #     service: fos_rest.normalizer.camel_keys_with_leading_underscore
+        #     forms: true
         # throw_exception_on_unsupported_content_type: false
     body_converter:
         enabled: true

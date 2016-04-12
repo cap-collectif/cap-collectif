@@ -35,6 +35,7 @@ const LoginModal = React.createClass({
         animation={false}
         show={show}
         onHide={onClose}
+        dialogClassName="w335"
         aria-labelledby="contained-modal-title-lg"
       >
         <Modal.Header closeButton>

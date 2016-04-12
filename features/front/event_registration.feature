@@ -3,7 +3,7 @@ Feature: Event Registration
   Background:
     Given feature "calendar" is enabled
 
-  @database
+  @database @javascript
   Scenario: Anonymous user wants to register an event anonymously
     Given I visited eventpage with:
     | slug | event-without-registrations |
@@ -14,7 +14,7 @@ Feature: Event Registration
     And I press "S'inscrire à l'évènement"
     Then I should see "Anonyme" in the "#eventRegistrationModal" element
 
-  @database
+  @database @javascript
   Scenario: Anonymous wants to register an event
     Given I visited eventpage with:
     | slug | event-without-registrations |
@@ -24,7 +24,7 @@ Feature: Event Registration
     And I press "S'inscrire à l'évènement"
     Then I should see "Naruto42" in the "#eventRegistrationModal" element
 
-  @database
+  @database @javascript
   Scenario: Anonymous wants to register an event with existing email
     Given "naruto42@gmail.com" is registered to event "event-without-registrations"
     Given I visited eventpage with:

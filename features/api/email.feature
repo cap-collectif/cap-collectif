@@ -41,11 +41,53 @@ Feature: Email
       "errors": null
     }
     """
+
   @database
   Scenario: Not confirmed logged in API client wants re-send a confirmation email
     Given feature "registration" is enabled
     And I am logged in to api as user_not_confirmed
     When I send a POST request to "/api/re-send-email-confirmation"
     Then the JSON response status code should be 201
+    Then 1 mail should be sent
+    And I purge mails
     When I send a POST request to "/api/re-send-email-confirmation"
-    Then the JSON response status code should be 400
+    Then the JSON response status code should be 401
+    And the JSON response should match:
+    """
+    {
+      "code": 401,
+      "message": "Email already send 1 minute ago.",
+      "errors":null
+    }
+    """
+    And 0 mail should be sent
+
+  @database
+  Scenario: Not confirmed logged in API client can receive a new confirmation email
+    Given feature "registration" is enabled
+    And I am logged in to api as user_not_confirmed
+    And I send a POST request to "/api/re-send-email-confirmation"
+    Then the JSON response status code should be 201
+    And 1 mail should be sent
+    And I open mail with subject "Cap-Collectif — Confirmez votre adresse électronique"
+    Then I should see "Confirmer mon adresse électronique" in mail
+    Then I should see "/email-confirmation/azertyuiop" in mail
+
+  @database @security
+  Scenario: Not confirmed logged in API client wants to mass spam confirmation email
+    Given feature "registration" is enabled
+    And I am logged in to api as user_not_confirmed
+    And I send a POST request to "/api/re-send-email-confirmation"
+    And 1 mail should be sent
+    And I purge mails
+    When I send a POST request to "/api/re-send-email-confirmation"
+    Then the JSON response status code should be 401
+    And the JSON response should match:
+    """
+    {
+      "code": 401,
+      "message": "Email already send 1 minute ago.",
+      "errors":null
+    }
+    """
+    And 0 mail should be sent

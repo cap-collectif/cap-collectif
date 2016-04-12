@@ -113,13 +113,13 @@ class UsersController extends FOSRestController
         if ($user->isEmailConfirmed()) {
           throw new BadRequestHttpException('Already confirmed.');
         }
-        // security against email spamming
-        if ($user->getLastConfirmationEmailMessage() > (new \DateTime())->modify('- 1 minutes')) {
+        // security against mass click email resend
+        if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
           throw new BadRequestHttpException('Email already send 1 minute ago.');
         }
 
         $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
-        $user->setLastEmailConfirmationSend(new \DateTime());
-        $this->getEntityManager()->flush();
+        $user->setEmailConfirmationSentAt(new \DateTime());
+        $this->getDoctrine()->getManager()->flush();
     }
 }

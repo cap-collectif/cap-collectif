@@ -23,6 +23,8 @@ class ConfirmationController extends Controller
         }
 
         $user->setConfirmationToken(null);
+        $user->setEnabled(true);
+        $user->setExpired(false);
         $user->setExpiresAt(null);
         $user->setLastLogin(new \DateTime());
         $manager->updateUser($user);

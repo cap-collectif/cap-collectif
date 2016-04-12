@@ -53,7 +53,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @var int
      */
-    protected $facebook_url;
+    protected $facebookUrl;
 
     /**
      * @var int
@@ -68,7 +68,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @var int
      */
-    protected $google_url;
+    protected $googleUrl;
 
     /**
      * @var string
@@ -83,7 +83,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @var string
      */
-    protected $twitter_url;
+    protected $twitterUrl;
 
     /**
      * @var
@@ -236,6 +236,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $vip = false;
 
+    protected $emailConfirmationSentAt = null;
+
     public function __construct($encoder = null)
     {
         parent::__construct();
@@ -382,15 +384,15 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     public function getFacebookUrl()
     {
-        return $this->facebook_url;
+        return $this->facebookUrl;
     }
 
     /**
-     * @param int $facebook_url
+     * @param int $facebookUrl
      */
-    public function setFacebookUrl($facebook_url)
+    public function setFacebookUrl($facebookUrl)
     {
-        $this->facebook_url = $facebook_url;
+        $this->facebookUrl = $facebookUrl;
     }
 
     /**
@@ -398,15 +400,15 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     public function getGoogleUrl()
     {
-        return $this->google_url;
+        return $this->googleUrl;
     }
 
     /**
-     * @param int $google_url
+     * @param int $googleUrl
      */
-    public function setGoogleUrl($google_url)
+    public function setGoogleUrl($googleUrl)
     {
-        $this->google_url = $google_url;
+        $this->googleUrl = $googleUrl;
     }
 
     /**
@@ -414,15 +416,15 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     public function getTwitterUrl()
     {
-        return $this->twitter_url;
+        return $this->twitterUrl;
     }
 
     /**
-     * @param string $twitter_url
+     * @param string $twitterUrl
      */
-    public function setTwitterUrl($twitter_url)
+    public function setTwitterUrl($twitterUrl)
     {
-        $this->twitter_url = $twitter_url;
+        $this->twitterUrl = $twitterUrl;
     }
 
     /**
@@ -959,6 +961,25 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->vip = $vip;
 
         return $this;
+    }
+
+    public function getEmailConfirmationSentAt()
+    {
+      return $this->emailConfirmationSentAt;
+    }
+
+    public function setEmailConfirmationSentAt(\DateTime $date = null)
+    {
+        $this->emailConfirmationSentAt = $date;
+
+        return $this;
+    }
+
+    public function setExpiresAt(\DateTime $date = null)
+    {
+      $this->expiresAt = $date;
+
+      return $this;
     }
 
     // ************************* Custom methods *********************************

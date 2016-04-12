@@ -9,6 +9,7 @@ frontend:
         Tonic\Behat\ParallelScenarioExtension: ~
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp
+            purge_before_scenario: true
         SensioLabs\Behat\PageObjectExtension:
             namespaces:
                 page: [ Capco\AppBundle\Behat\Page ]
@@ -36,6 +37,7 @@ javascript:
     extensions:
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp
+            purge_before_scenario: true
         Behat\Symfony2Extension:
             kernel:
                 env: test
@@ -72,6 +74,9 @@ commands:
     extensions:
         Tonic\Behat\ParallelScenarioExtension: ~
         Behat\Symfony2Extension: ~
+        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+            url: http://mailcatchersmtp
+            purge_before_scenario: true
     suites:
         commands:
             paths: [ %paths.base%/features/commands ]
@@ -79,6 +84,7 @@ commands:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext
                 - Capco\AppBundle\Behat\CommandContext
+                - Alex\MailCatcher\Behat\MailCatcherContext
 
 api:
     formatters:
@@ -91,6 +97,7 @@ api:
         Behat\Symfony2Extension: ~
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp
+            purge_before_scenario: true
     suites:
         api:
             paths: [ %paths.base%/features/api ]
