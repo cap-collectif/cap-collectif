@@ -93,7 +93,7 @@ class UsersController extends FOSRestController
 
         $userManager->updatePassword($user);
         $user->setEnabled(true); // the user can use the website but...
-        $user->setExpiresAt((new \DateTime())->modify('+ 2 weeks')); // the account expires in 2 weeks (if not confirmed)
+        $user->setExpiresAt((new \DateTime())->modify('+ 2 days')); // the account expires in 2 days (if not confirmed)
         $user->setConfirmationToken($token);
         $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
 
@@ -107,14 +107,19 @@ class UsersController extends FOSRestController
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */
-    public function postUserResendConfirmationAction()
+    public function postResendEmailConfirmationAction()
     {
         $user = $this->getUser();
         if ($user->isEmailConfirmed()) {
           throw new BadRequestHttpException('Already confirmed.');
         }
+        // security against email spamming
+        if ($user->getLastConfirmationEmailMessage() > (new \DateTime())->modify('- 1 minutes')) {
+          throw new BadRequestHttpException('Email already send 1 minute ago.');
+        }
 
         $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
-        return [];
+        $user->setLastEmailConfirmationSend(new \DateTime());
+        $this->getEntityManager()->flush();
     }
 }

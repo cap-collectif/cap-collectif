@@ -16,9 +16,7 @@ export default {
     .then(response => response.json())
     .then(response => {
       if (response.success) {
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        window.location.reload();
         return true;
       }
       throw new Error(response.message);

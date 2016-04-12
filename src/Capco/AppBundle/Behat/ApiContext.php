@@ -14,12 +14,9 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use PHPUnit_Framework_Assert as PHPUnit;
-use Coduo\PHPMatcher\PHPUnit\PHPMatcherAssertions;
 
 class ApiContext extends ApplicationContext
 {
-    use PHPMatcherAssertions;
-
     public $client;
     public $token;
     public $response;
@@ -47,6 +44,14 @@ class ApiContext extends ApplicationContext
     public function iAmLoggedInToApiAsUser()
     {
         $this->createAuthenticatedClient('user@test.com', 'user');
+    }
+
+    /**
+     * @When /^I am logged in to api as user_not_confirmed$/
+     */
+    public function iAmLoggedInToApiAsUserNotConfirmed()
+    {
+        $this->createAuthenticatedClient('user_not_confirmed@test.com', 'user_not_confirmed');
     }
 
     /**

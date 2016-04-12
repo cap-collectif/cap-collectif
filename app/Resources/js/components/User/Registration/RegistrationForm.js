@@ -62,10 +62,10 @@ const RegistrationForm = React.createClass({
             }
             if (response.errors) {
               const errors = this.state.errors;
-              if (response.errors.children.email.errors.length > 0) {
+              if (response.errors.children.email.errors && response.errors.children.email.errors.length > 0) {
                 errors.email = ['registration.constraints.email.already_used'];
               }
-              if (response.errors.children.captcha.errors.length > 0) {
+              if (response.errors.children.captcha.errors && response.errors.children.captcha.errors.length > 0) {
                 errors.captcha = ['registration.constraints.captcha.invalid'];
               }
               this.setState({ errors: errors });
@@ -78,6 +78,20 @@ const RegistrationForm = React.createClass({
     }
   },
 
+  setSuggestedEmail() {
+    const form = JSON.parse(JSON.stringify(this.state.form));
+    form.email = this.state.suggestedEmail;
+    this.setState({ form: form, suggestedEmail: null });
+  },
+
+  checkMail() {
+    mailcheck.run({
+      email: this._email.refs.input.value,
+      domains: domains,
+      suggested: suggestion => this.setState({ suggestedEmail: suggestion.full }),
+      empty: () => this.setState({ suggestedEmail: null }),
+    });
+  },
   formValidationRules: {
     username: {
       min: { value: 2, message: 'registration.constraints.username.min' },
@@ -97,28 +111,13 @@ const RegistrationForm = React.createClass({
     charte: {
       isTrue: { message: 'global.constraints.notBlank' },
     },
-    captcha: {
-      notBlank: { message: 'global.constraints.notBlank' },
-    },
-  },
-
-  checkMail() {
-    mailcheck.run({
-      email: this._email.refs.input.value,
-      domains: domains,
-      suggested: suggestion => this.setState({ suggestedEmail: suggestion.full }),
-      empty: () => this.setState({ suggestedEmail: null }),
-    });
-  },
-
-  setSuggestedEmail() {
-    const form = this.state.form;
-    form.email = this.state.suggestedEmail;
-    this.setState({ form: form, suggestedEmail: null });
+    // captcha: {
+    //   notBlank: { message: 'global.constraints.notBlank' },
+    // },
   },
 
   handleCaptchaChange(value) {
-    const form = this.state.form;
+    const form = JSON.parse(JSON.stringify(this.state.form));
     form.captcha = value;
     this.setState({ form: form });
   },

@@ -10,16 +10,18 @@ class ReCaptchaValidator extends ConstraintValidator
 {
     protected $request;
     protected $recaptcha;
+    protected $enabled;
 
-    public function __construct(RequestStack $requestStack, string $privateKey)
+    public function __construct(RequestStack $requestStack, string $privateKey, $enabled = true)
     {
         $this->request = $requestStack->getCurrentRequest();
         $this->recaptcha = new \ReCaptcha\ReCaptcha($privateKey);
+        $this->enabled = $enabled;
     }
 
     public function validate($value, Constraint $constraint)
     {
-        if (!$this->recaptcha->verify($value, $this->request->getClientIp())->isSuccess()) {
+        if ($this->enabled && !$this->recaptcha->verify($value, $this->request->getClientIp())->isSuccess()) {
            $this->context->buildViolation($constraint->message)->addViolation();
         }
     }

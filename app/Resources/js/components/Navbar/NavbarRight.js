@@ -3,7 +3,6 @@ import { IntlMixin } from 'react-intl';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
 import FeatureStore from '../../stores/FeatureStore';
-import LoginStore from '../../stores/LoginStore';
 import LoginActions from '../../actions/LoginActions';
 
 const NavbarRight = React.createClass({
@@ -11,18 +10,6 @@ const NavbarRight = React.createClass({
     user: PropTypes.object,
   },
   mixins: [IntlMixin],
-
-  componentWillMount() {
-    LoginStore.addChangeListener(this.onChange);
-  },
-
-  componentWillUnmount() {
-    LoginStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    this.forceUpdate();
-  },
 
   logout() {
     LoginActions.logoutUser();
