@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0349958c031da2c09d2a1f08a5b0f159",
-    "content-hash": "0c61dccf8698bfd388873255ba46e255",
+    "hash": "eadbfb0637666d514f4df3838b0de2a4",
+    "content-hash": "986062daf0164b570d642689d74fd46c",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -54,12 +54,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/caxy/HtmlDiffBundle.git",
-                "reference": "064eae651f0f8d375339dfc76f9f129b84ea175c"
+                "reference": "fabf6d592855611db77d2b5b778446d03b6df6ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/064eae651f0f8d375339dfc76f9f129b84ea175c",
-                "reference": "064eae651f0f8d375339dfc76f9f129b84ea175c",
+                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/fabf6d592855611db77d2b5b778446d03b6df6ea",
+                "reference": "fabf6d592855611db77d2b5b778446d03b6df6ea",
                 "shasum": ""
             },
             "require": {
@@ -102,7 +102,7 @@
                 "diffing",
                 "html"
             ],
-            "time": "2016-03-16 16:54:33"
+            "time": "2016-04-10 18:38:03"
         },
         {
             "name": "caxy/php-htmldiff",
@@ -2110,7 +2110,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/ed4c22a435c1c379aa7f9c2580e8a6a2e4d114d2",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/3b7f7bffd546d40ee40054ac2d1264492cbe6286",
                 "reference": "4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84",
                 "shasum": ""
             },
@@ -3000,17 +3000,17 @@
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "v1.4.3",
+            "version": "v1.5.1",
             "target-dir": "Lexik/Bundle/JWTAuthenticationBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "ffb58688d3222b24dd425d5bbdf3ac10f4cf1473"
+                "reference": "3631b6284fc3c3a06f8c3c429736ca4910c64371"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/ffb58688d3222b24dd425d5bbdf3ac10f4cf1473",
-                "reference": "ffb58688d3222b24dd425d5bbdf3ac10f4cf1473",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/3631b6284fc3c3a06f8c3c429736ca4910c64371",
+                "reference": "3631b6284fc3c3a06f8c3c429736ca4910c64371",
                 "shasum": ""
             },
             "require": {
@@ -3071,7 +3071,7 @@
                 "rest",
                 "symfony"
             ],
-            "time": "2016-01-30 13:02:32"
+            "time": "2016-04-11 08:02:08"
         },
         {
             "name": "liip/imagine-bundle",
@@ -4575,12 +4575,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "44265e2695143cdf315bf083c0e996596fd87ab6"
+                "reference": "57a5b438b0daf16656395e3bc97a6cb0fcea6a1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/44265e2695143cdf315bf083c0e996596fd87ab6",
-                "reference": "44265e2695143cdf315bf083c0e996596fd87ab6",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/57a5b438b0daf16656395e3bc97a6cb0fcea6a1d",
+                "reference": "57a5b438b0daf16656395e3bc97a6cb0fcea6a1d",
                 "shasum": ""
             },
             "require": {
@@ -4658,7 +4658,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2016-04-02 10:52:48"
+            "time": "2016-04-11 14:39:46"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -4797,12 +4797,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataClassificationBundle.git",
-                "reference": "b981854dd926d130a8cc071dc5f49ae695be4276"
+                "reference": "37fd5134aae9b633e542e11e4b0b5796c8344a85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/b981854dd926d130a8cc071dc5f49ae695be4276",
-                "reference": "b981854dd926d130a8cc071dc5f49ae695be4276",
+                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/37fd5134aae9b633e542e11e4b0b5796c8344a85",
+                "reference": "37fd5134aae9b633e542e11e4b0b5796c8344a85",
                 "shasum": ""
             },
             "require": {
@@ -4857,7 +4857,7 @@
                 "tag",
                 "taxonomy"
             ],
-            "time": "2016-03-28 16:45:05"
+            "time": "2016-04-08 16:21:41"
         },
         {
             "name": "sonata-project/core-bundle",
@@ -4934,12 +4934,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDatagridBundle.git",
-                "reference": "0749e710b936bf84736c648eee16bc45e2c04607"
+                "reference": "6e7940af246fb64f7a5c2a902f894691adf7328b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/0749e710b936bf84736c648eee16bc45e2c04607",
-                "reference": "0749e710b936bf84736c648eee16bc45e2c04607",
+                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/6e7940af246fb64f7a5c2a902f894691adf7328b",
+                "reference": "6e7940af246fb64f7a5c2a902f894691adf7328b",
                 "shasum": ""
             },
             "require": {
@@ -4948,7 +4948,6 @@
             },
             "require-dev": {
                 "doctrine/orm": "~2.4",
-                "fabpot/php-cs-fixer": "~0.5|~1.0",
                 "symfony/phpunit-bridge": "~2.7|~3.0"
             },
             "type": "symfony-bundle",
@@ -4983,7 +4982,7 @@
                 "datagrid",
                 "sonata"
             ],
-            "time": "2015-12-16 08:53:13"
+            "time": "2016-04-08 17:08:34"
         },
         {
             "name": "sonata-project/doctrine-extensions",
@@ -5040,12 +5039,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "e8eb83f7dc5b64113892cbf7367705864c651691"
+                "reference": "9e79f15e43512b4c809a9029a5c0247e7354a277"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/e8eb83f7dc5b64113892cbf7367705864c651691",
-                "reference": "e8eb83f7dc5b64113892cbf7367705864c651691",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/9e79f15e43512b4c809a9029a5c0247e7354a277",
+                "reference": "9e79f15e43512b4c809a9029a5c0247e7354a277",
                 "shasum": ""
             },
             "require": {
@@ -5064,7 +5063,6 @@
                 "sonata-project/admin-bundle-persistency-layer": "1.0.0"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "~0.1|~1.0",
                 "simplethings/entity-audit-bundle": "~0.1",
                 "symfony/phpunit-bridge": "~2.7|~3.0"
             },
@@ -5106,7 +5104,7 @@
                 "generator",
                 "sonata"
             ],
-            "time": "2016-01-24 12:24:43"
+            "time": "2016-04-08 16:23:52"
         },
         {
             "name": "sonata-project/easy-extends-bundle",
@@ -5354,7 +5352,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/fd73a883209994ee5d787a8240574138547c8dd9",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/efdf77321924df153828fc340ff327aa9a53aa79",
                 "reference": "5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
                 "shasum": ""
             },
@@ -5518,12 +5516,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "d2c8c2bcdb4a87d32b4ac904adfafada06b1bf66"
+                "reference": "e1e021a30ca0693e181e17f4bf5636d0e300330f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/d2c8c2bcdb4a87d32b4ac904adfafada06b1bf66",
-                "reference": "d2c8c2bcdb4a87d32b4ac904adfafada06b1bf66",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/e1e021a30ca0693e181e17f4bf5636d0e300330f",
+                "reference": "e1e021a30ca0693e181e17f4bf5636d0e300330f",
                 "shasum": ""
             },
             "require": {
@@ -5544,7 +5542,6 @@
             },
             "require-dev": {
                 "doctrine/orm": "^2.2.3",
-                "fabpot/php-cs-fixer": "~0.1|~1.0",
                 "friendsofsymfony/rest-bundle": "~1.1",
                 "jms/serializer-bundle": "~0.11|~1.0",
                 "nelmio/api-doc-bundle": "~2.4",
@@ -5588,7 +5585,7 @@
                 "sonata",
                 "user"
             ],
-            "time": "2016-03-28 12:13:53"
+            "time": "2016-04-08 16:21:08"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -7686,42 +7683,40 @@
         },
         {
             "name": "coduo/php-matcher",
-            "version": "1.0.8",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coduo/php-matcher.git",
-                "reference": "30304a6dc3ea6aeafdb2558d14ec8e3ab979986c"
+                "reference": "2b16b166cf003dfb585c5068c5d6ab7c2a246f3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/30304a6dc3ea6aeafdb2558d14ec8e3ab979986c",
-                "reference": "30304a6dc3ea6aeafdb2558d14ec8e3ab979986c",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/1e70e5ca27e0447cdcc0941a56437cee01cfcd6c",
+                "reference": "2b16b166cf003dfb585c5068c5d6ab7c2a246f3a",
                 "shasum": ""
             },
             "require": {
-                "coduo/php-to-string": "1.0.*",
-                "openlss/lib-array2xml": "0.0.9",
+                "coduo/php-to-string": "^2",
+                "doctrine/lexer": "1.0.*",
+                "ext-filter": "*",
+                "openlss/lib-array2xml": "~0.0.9",
                 "php": ">=5.3.0",
-                "symfony/expression-language": "~2.4",
-                "symfony/property-access": "~2.3"
+                "symfony/expression-language": "^2.3|^3.0",
+                "symfony/property-access": "^2.3|^3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "^4.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Coduo\\PHPMatcher": "src/",
-                    "Coduo\\PHPMatcher\\Tests": "tests/"
-                },
-                "files": [
-                    "match.php"
-                ]
+                "psr-4": {
+                    "Coduo\\PHPMatcher\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -7737,30 +7732,31 @@
                     "email": "dabrowski@brillante.pl"
                 }
             ],
+            "description": "PHP Matcher enables you to match values with patterns",
             "keywords": [
+                "Match",
                 "json",
                 "matcher",
                 "tests"
             ],
-            "time": "2015-07-14 07:17:54"
+            "time": "2016-03-27 20:50:37"
         },
         {
             "name": "coduo/php-to-string",
-            "version": "1.0.2",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coduo/php-to-string.git",
-                "reference": "fb3f879af3878310bd05c35fbec7256b4aeaf58c"
+                "reference": "4c1d7e2e76017719edc70e944ace0ec570748a78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/fb3f879af3878310bd05c35fbec7256b4aeaf58c",
-                "reference": "fb3f879af3878310bd05c35fbec7256b4aeaf58c",
+                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/4c1d7e2e76017719edc70e944ace0ec570748a78",
+                "reference": "4c1d7e2e76017719edc70e944ace0ec570748a78",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
-                "symfony/intl": "~2.5"
+                "php": ">=5.3.0"
             },
             "require-dev": {
                 "coduo/phpspec-data-provider-extension": "^1",
@@ -7769,7 +7765,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -7797,7 +7793,7 @@
                 "to",
                 "to string"
             ],
-            "time": "2015-12-13 12:36:16"
+            "time": "2016-01-20 18:29:02"
         },
         {
             "name": "docker-php/docker-php",
@@ -8395,16 +8391,16 @@
         },
         {
             "name": "openlss/lib-array2xml",
-            "version": "0.0.9",
+            "version": "0.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openlss/lib-array2xml.git",
-                "reference": "21249c9aa40ec7bfc91776e4bc3cfe3ef4dce769"
+                "reference": "f6686668959a342ec326c5ad82ac557d767f34ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openlss/lib-array2xml/zipball/21249c9aa40ec7bfc91776e4bc3cfe3ef4dce769",
-                "reference": "21249c9aa40ec7bfc91776e4bc3cfe3ef4dce769",
+                "url": "https://api.github.com/repos/openlss/lib-array2xml/zipball/f6686668959a342ec326c5ad82ac557d767f34ef",
+                "reference": "f6686668959a342ec326c5ad82ac557d767f34ef",
                 "shasum": ""
             },
             "require": {
@@ -8440,7 +8436,7 @@
                 "xml",
                 "xml conversion"
             ],
-            "time": "2013-03-27 03:38:29"
+            "time": "2015-09-16 18:59:23"
         },
         {
             "name": "php-http/client-common",
@@ -9368,16 +9364,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.3.0",
+            "version": "5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "dd3001822b2df8f5add266020e3d2fd3c5db3ae9"
+                "reference": "34a3acb401ae79deb37bc6e5f5ec3d325b369b4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/dd3001822b2df8f5add266020e3d2fd3c5db3ae9",
-                "reference": "dd3001822b2df8f5add266020e3d2fd3c5db3ae9",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/34a3acb401ae79deb37bc6e5f5ec3d325b369b4c",
+                "reference": "34a3acb401ae79deb37bc6e5f5ec3d325b369b4c",
                 "shasum": ""
             },
             "require": {
@@ -9392,7 +9388,7 @@
                 "phpunit/php-code-coverage": "^3.3.0",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
-                "phpunit/php-timer": ">=1.0.6",
+                "phpunit/php-timer": "^1.0.6",
                 "phpunit/phpunit-mock-objects": "^3.1",
                 "sebastian/comparator": "~1.1",
                 "sebastian/diff": "~1.2",
@@ -9439,7 +9435,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-03-31 21:35:50"
+            "time": "2016-04-07 07:04:34"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -10378,6 +10374,7 @@
         "snc/redis-bundle": 20,
         "caxy/htmldiff-bundle": 20,
         "sensiolabs/behat-page-object-extension": 20,
+        "coduo/php-matcher": 20,
         "tonicforhealth/behat-parallel-scenario": 20
     },
     "prefer-stable": false,

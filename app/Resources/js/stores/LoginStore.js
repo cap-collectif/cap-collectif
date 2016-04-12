@@ -27,28 +27,12 @@ class LoginStore extends BaseStore {
     }
   }
 
-  get email() {
-    return this._user.email;
-  }
-
-  get username() {
-    return this._user.username;
-  }
-
   get user() {
     return this._user;
   }
 
   get jwt() {
     return this._jwt;
-  }
-
-  isAdmin() {
-    return this._user.isAdmin;
-  }
-
-  isEmailConfirmed() {
-    return this._user.isEmailConfirmed;
   }
 
   isLoggedIn() {

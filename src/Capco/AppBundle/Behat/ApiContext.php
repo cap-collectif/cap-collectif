@@ -14,9 +14,12 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use PHPUnit_Framework_Assert as PHPUnit;
+use Coduo\PHPMatcher\PHPUnit\PHPMatcherAssertions;
 
 class ApiContext extends ApplicationContext
 {
+    use PHPMatcherAssertions;
+
     public $client;
     public $token;
     public $response;
@@ -228,10 +231,11 @@ EOF;
      */
     public function theJsonResponseShouldMatch(PyStringNode $pattern)
     {
-        // $factory = new SimpleFactory();
-        // $matcher = $factory->createMatcher();
         $this->response->json(); // check if json
         $body = (string) $this->response->getBody();
+        $factory = new SimpleFactory();
+        $matcher = $factory->createMatcher();
+        PHPUnit::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError());
     }
 
     /**

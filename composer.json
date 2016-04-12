@@ -24,6 +24,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/spyl94/BehatPageObjectExtension"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/bendavies/php-matcher"
         }
     ],
     "require": {
