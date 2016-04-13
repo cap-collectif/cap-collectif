@@ -6,8 +6,10 @@
             <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }}
         </a>
     {% else %}
-        <div style="position: relative;">
-            <a class="btn btn-sm btn-default view_link sonata-ba-action dropdown-toggle" type="button" data-toggle="dropdown"><i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span></a>
+        <div style="position:relative; float:left;">
+            <a class="btn btn-sm btn-default view_link sonata-ba-action dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius:0;margin-left:-1px;">
+                <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span>
+            </a>
             <ul class="dropdown-menu" role="menu" style="position: absolute; top: 100%;">
                 {% for pas in steps %}
                     <li class="small">

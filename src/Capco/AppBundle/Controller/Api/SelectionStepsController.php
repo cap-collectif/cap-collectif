@@ -9,7 +9,6 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
@@ -30,7 +29,11 @@ class SelectionStepsController extends FOSRestController
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|votes|comments|random)", nullable=true)
-     * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
+     *
+     * @param Request               $request
+     * @param SelectionStep         $selectionStep
+     * @param ParamFetcherInterface $paramFetcher
      */
     public function getProposalsBySelectionStepAction(Request $request, SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
     {

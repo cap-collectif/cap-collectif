@@ -11,6 +11,7 @@
 
 namespace Capco\MediaBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseMedia as BaseMedia;
 
@@ -44,17 +45,17 @@ class Media extends BaseMedia
      */
     public function __construct()
     {
-        $this->galleryHasMedias = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->galleryHasMedias = new ArrayCollection();
     }
 
     /**
      * Add galleryHasMedia.
      *
-     * @param \Capco\MediaBundle\Entity\GalleryHasMedia $galleryHasMedia
+     * @param GalleryHasMedia $galleryHasMedia
      *
      * @return Media
      */
-    public function addGalleryHasMedia(\Capco\MediaBundle\Entity\GalleryHasMedia $galleryHasMedia)
+    public function addGalleryHasMedia(GalleryHasMedia $galleryHasMedia)
     {
         $this->galleryHasMedias[] = $galleryHasMedia;
 
@@ -64,9 +65,9 @@ class Media extends BaseMedia
     /**
      * Remove galleryHasMedia.
      *
-     * @param \Capco\MediaBundle\Entity\GalleryHasMedia $galleryHasMedia
+     * @param GalleryHasMedia $galleryHasMedia
      */
-    public function removeGalleryHasMedia(\Capco\MediaBundle\Entity\GalleryHasMedia $galleryHasMedia)
+    public function removeGalleryHasMedia(GalleryHasMedia $galleryHasMedia)
     {
         $this->galleryHasMedias->removeElement($galleryHasMedia);
     }

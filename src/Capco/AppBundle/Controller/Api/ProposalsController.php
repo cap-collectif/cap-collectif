@@ -34,7 +34,7 @@ class ProposalsController extends FOSRestController
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|comments|random)", default="random")
-     * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
      *
      * @param Request               $request
      * @param ProposalForm          $proposalForm
@@ -70,16 +70,12 @@ class ProposalsController extends FOSRestController
      * )
      *
      * @Get("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
-     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
-     * @View(statusCode=200, serializerGroups={"Proposals", "ProposalResponses", "UsersInfos", "UserMedias", "Themes", "ProposalUserData", "Steps"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias", "Themes", "ProposalUserData", "Steps"})
      *
-     * @param ProposalForm $proposalForm
-     * @param Proposal     $proposal
-     *
-     * @return array
+     * @param Proposal $proposal
      */
-    public function getProposalAction(ProposalForm $proposalForm, Proposal $proposal)
+    public function getProposalAction(Proposal $proposal)
     {
         $em = $this->get('doctrine.orm.entity_manager');
         $firstVotableStep = $this->get('capco.proposal_votes.resolver')
@@ -128,7 +124,7 @@ class ProposalsController extends FOSRestController
      * @Security("has_role('ROLE_USER')")
      * @Post("/proposal_forms/{proposal_form_id}/proposals")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @View(statusCode=201, serializerGroups={"ProposalForms", "Proposals", "ProposalResponses", "UsersInfos", "UserMedias"})
+     * @View(statusCode=201, serializerGroups={"ProposalForms", "Proposals", "UsersInfos", "UserMedias"})
      *
      * @param Request      $request
      * @param ProposalForm $proposalForm
@@ -186,6 +182,12 @@ class ProposalsController extends FOSRestController
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
      * @View(serializerGroups={"Comments", "UsersInfos"})
+     *
+     * @param ProposalForm          $form
+     * @param Proposal              $proposal
+     * @param ParamFetcherInterface $paramFetcher
+     *
+     * @return array
      */
     public function getProposalCommentsAction(ProposalForm $form, Proposal $proposal, ParamFetcherInterface $paramFetcher)
     {
@@ -218,6 +220,12 @@ class ProposalsController extends FOSRestController
      * @ParamConverter("form", options={"mapping": {"form": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
      * @View(statusCode=201, serializerGroups={"Comments", "UsersInfos"})
+     *
+     * @param Request      $request
+     * @param ProposalForm $form
+     * @param Proposal     $proposal
+     *
+     * @return ProposalForm|\Symfony\Component\Form\Form
      */
     public function postProposalCommentsAction(Request $request, ProposalForm $form, Proposal $proposal)
     {
@@ -265,6 +273,11 @@ class ProposalsController extends FOSRestController
      * @ParamConverter("form", options={"mapping": {"form": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
      * @View(serializerGroups={"ProposalVotes", "UsersInfos", "UserMedias"})
+     *
+     * @param ProposalForm $form
+     * @param Proposal     $proposal
+     *
+     * @return array
      */
     public function getAllProposalVotesAction(ProposalForm $form, Proposal $proposal)
     {
@@ -294,10 +307,11 @@ class ProposalsController extends FOSRestController
      *
      * @Security("has_role('ROLE_USER')")
      * @Put("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
-     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200)
      *
+     * @param Request      $request
      * @param ProposalForm $proposalForm
      * @param Proposal     $proposal
      *
@@ -345,7 +359,7 @@ class ProposalsController extends FOSRestController
      *
      * @Security("has_role('ROLE_USER')")
      * @Delete("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
-     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=204)
      *

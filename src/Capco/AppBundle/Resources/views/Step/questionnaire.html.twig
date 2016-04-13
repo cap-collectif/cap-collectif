@@ -1,0 +1,49 @@
+{% extends '@CapcoApp/Project/base.html.twig' %}
+
+{% block canonical_link %}{{ url('app_project_show_questionnaire', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+
+{% block metaTags %}
+    <meta property="og:title" content="{{ project.title }}" />
+    <meta property="og:url" content="{{ url('app_project_show_questionnaire', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" />
+    {% if currentStep is defined and currentStep.body %}
+        <meta property="og:description" content="{{ currentStep.body }}" />
+    {% endif %}
+    <meta property="og:type" content="project" />
+    {% if project.Cover %}
+        <meta property="og:image" content="{% path project.Cover, 'blockHeader' %}" />
+    {% endif %}
+    <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+    <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ project.title }}
+{% endblock %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block details %}
+
+    {% if currentStep.isClosed %}
+        <div class="alert alert-info alert-dismissible  block" role="alert">
+            <p><strong>{{ 'step.questionnaire.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.questionnaire.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
+        </div>
+    {% endif %}
+
+    {% if currentStep.isFuture %}
+        <div class="alert alert-info alert-dismissible  block" role="alert">
+            <p><strong>{{ 'step.questionnaire.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.questionnaire.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
+        </div>
+    {% endif %}
+
+    <div
+        id="render-questionnaire-step-page"
+        data-step='{{ step|escape }}'
+        data-form='{{ form|escape }}'
+        data-user-replies='{{ userReplies }}'
+    >
+    </div>
+
+{% endblock %}

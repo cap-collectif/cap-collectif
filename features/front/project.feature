@@ -9,6 +9,7 @@ Feature: Project
   Scenario: Project can be sorted by published date
     Given feature "projects_form" is enabled
     And I visited "projects page"
+    And I wait 1 seconds
     And I select "Date de publication" from "capco_app_search_project_sort"
     And I wait 1 seconds
     Then "Projet vide" should be before "Croissance, innovation, disruption" for selector ".thumbnail--custom .project__preview__title a"
@@ -26,9 +27,11 @@ Feature: Project
     Given feature "themes" is enabled
     And feature "projects_form" is enabled
     And I visited "projects page"
+    And I wait 1 seconds
+    Then I should see 7 ".thumbnail--custom" elements
     And I select "Transport" from "capco_app_search_project_theme"
     And I wait 1 seconds
-    Then I should see 5 ".thumbnail--custom" elements
+    Then I should see 6 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"
@@ -42,7 +45,7 @@ Feature: Project
     And I wait 1 seconds
     And I select "Nombre de contributions" from "capco_app_search_project_sort"
     And I wait 1 seconds
-    Then I should see 5 ".thumbnail--custom" elements
+    Then I should see 6 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"

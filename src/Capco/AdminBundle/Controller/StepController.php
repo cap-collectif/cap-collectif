@@ -14,6 +14,11 @@ class StepController extends CRUDController
      *
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/project/{projectId}/proposals_autocomplete", name="capco_admin_proposals_autocomplete")
+     *
+     * @param Request $request
+     * @param null    $projectId
+     *
+     * @return JsonResponse
      */
     public function retrieveProposalsAutocompleteItemsAction(Request $request, $projectId = null)
     {

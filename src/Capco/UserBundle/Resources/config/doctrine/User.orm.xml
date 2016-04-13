@@ -94,6 +94,7 @@
         <field name="projectsCount" column="projects_count" type="integer" nullable="false" />
         <field name="ideasCount" column="ideas_count" type="integer" nullable="false" />
         <field name="proposalsCount" column="proposals_count" type="integer" nullable="false" />
+        <field name="repliesCount" column="replies_count" type="integer" nullable="false" />
         <field name="argumentsCount" column="arguments_count" type="integer" nullable="false" />
         <field name="sourcesCount" column="sources_count" type="integer" nullable="false" />
         <field name="opinionsCount" column="opinions_count" type="integer" nullable="false" />
@@ -108,6 +109,9 @@
 
         <one-to-many target-entity="Capco\AppBundle\Entity\Proposal" mapped-by="author" field="proposals">
 
+        </one-to-many>
+
+        <one-to-many target-entity="Capco\AppBundle\Entity\Reply" mapped-by="author" field="replies">
         </one-to-many>
 
         <field name="vip" column="vip" type="boolean" />

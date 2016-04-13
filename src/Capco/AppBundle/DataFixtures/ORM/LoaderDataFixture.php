@@ -62,6 +62,7 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
             __DIR__.'/Synthesis.yml',
             __DIR__.'/SynthesisStep.yml',
             __DIR__.'/CollectStep.yml',
+            __DIR__.'/QuestionnaireStep.yml',
             __DIR__.'/ProjectAbstractStep.yml',
 
             __DIR__.'/Answer.yml',
@@ -77,12 +78,17 @@ class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInter
             __DIR__.'/ArgumentVote.yml',
 
             __DIR__.'/ProposalForm.yml',
+            __DIR__.'/Questionnaire.yml',
             __DIR__.'/Status.yml',
             __DIR__.'/District.yml',
-            __DIR__.'/Question.yml',
+            __DIR__.'/QuestionChoice.yml',
+            __DIR__.'/SimpleQuestion.yml',
+            __DIR__.'/MultipleChoiceQuestion.yml',
+            __DIR__.'/QuestionnaireAbstractQuestion.yml',
             __DIR__.'/QuestionChoice.yml',
             __DIR__.'/Proposal.yml',
-            __DIR__.'/ProposalResponse.yml',
+            __DIR__.'/Reply.yml',
+            __DIR__.'/Response.yml',
             __DIR__.'/ProposalVote.yml',
             __DIR__.'/ProposalComment.yml',
 

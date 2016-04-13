@@ -5,6 +5,7 @@ global:
   is_not_facebook_url: Veuillez entrer un lien Facebook valide.
   is_not_twitter_url: Veuillez entrer un lien Twitter valide.
   is_not_google_url: Veuillez entrer un lien Google+ valide.
+  missing_required_responses: Veuillez répondre à toutes les questions obligatoires.
 
 contact:
   no_name: Veuillez renseigner votre nom pour continuer.
@@ -28,6 +29,9 @@ proposal:
     email_belongs_to_user: Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition.
     no_comment_when_private_error: Vous ne pouvez pas poster de commentaire en tant qu'anonyme.
     not_enough_credits: Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition.
+
+reply:
+  missing_required_responses: Veuillez répondre à toutes les questions obligatoires pour soumettre votre réponse.
 
 idea:
   vote:

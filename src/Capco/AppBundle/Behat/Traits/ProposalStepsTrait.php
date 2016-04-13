@@ -157,7 +157,7 @@ trait ProposalStepsTrait
     public function iChangeTheThemeFilter()
     {
         $this->selectOption('proposal-filter-theme', 'Justice');
-        $this->iWait(1);
+        $this->iWait(2);
     }
 
     /**
@@ -168,7 +168,7 @@ trait ProposalStepsTrait
     public function iSortProposalsByDate()
     {
         $this->getCurrentPage()->sortByDate();
-        $this->iWait(1);
+        $this->iWait(2);
     }
 
     /**
@@ -321,7 +321,7 @@ trait ProposalStepsTrait
             ['proposal_custom-1', 'Réponse à la question 1'],
         ]);
         if ($requiredResponse !== false) {
-            $this->fillField('proposal_custom-2', $requiredResponse);
+            $this->fillField('proposal_custom-3', $requiredResponse);
         }
         $this->fillFields($tableNode);
         $this->selectOption('proposal_district', 'Beaulieu');
@@ -760,7 +760,7 @@ trait ProposalStepsTrait
     public function iSubmitTheProposalVoteForm()
     {
         $page = $this->getCurrentPage()->submitProposalVoteForm();
-        $this->iWait(3);
+        $this->iWait(4);
     }
 
     /**

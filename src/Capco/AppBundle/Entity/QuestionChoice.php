@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +15,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class QuestionChoice
 {
+    use SluggableTitleTrait;
+    use PositionableTrait;
+
     /**
      * @var int
      *
@@ -22,12 +28,36 @@ class QuestionChoice
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var Media
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $image;
+
+    /**
      * @var Question
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Question", inversedBy="questionChoices", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion", inversedBy="questionChoices", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
     private $question;
+
+    public function __toString()
+    {
+        if ($this->title) {
+            return $this->title;
+        }
+
+        return 'New QuestionChoice';
+    }
 
     /**
      * Get id.
@@ -48,13 +78,53 @@ class QuestionChoice
     }
 
     /**
-     * @param Question $question
+     * @param AbstractQuestion $question
      *
      * @return $this
      */
-    public function setQuestion(Question $question)
+    public function setQuestion(AbstractQuestion $question)
     {
         $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Media
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param Media $image
+     *
+     * @return $this
+     */
+    public function setImage($image = null)
+    {
+        $this->image = $image;
 
         return $this;
     }

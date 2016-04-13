@@ -62,7 +62,7 @@ class UrlResolver
     public function getStepUrl($step, $absolute = false)
     {
         if (!$step->getProject() || !$step->getProject()->getSlug() || !$step->getSlug()) {
-            return null;
+            return;
         }
         if ($step->isConsultationStep()) {
             return $this->router->generate('app_project_show_consultation',              ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
@@ -84,6 +84,9 @@ class UrlResolver
         }
         if ($step->isSelectionStep()) {
             return $this->router->generate('app_project_show_selection',      ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
+        }
+        if ($step->isQuestionnaireStep()) {
+            return $this->router->generate('app_project_show_questionnaire',      ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
         }
 
         return '';

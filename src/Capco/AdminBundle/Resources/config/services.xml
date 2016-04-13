@@ -44,5 +44,9 @@
             <tag name="sonata.block" />
         </service>
 
+        <service id="capco.admin.vars_extension" class="Capco\AdminBundle\Twig\VarsExtension">
+            <tag name="twig.extension" />
+        </service>
+
     </services>
 </container>

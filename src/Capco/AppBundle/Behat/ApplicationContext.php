@@ -13,6 +13,7 @@ use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
 use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
+use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
 use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
@@ -34,6 +35,7 @@ class ApplicationContext extends UserContext
     use OpinionStepsTrait;
     use ProjectStepsTrait;
     use ProposalStepsTrait;
+    use QuestionnaireStepsTrait;
     use ReportingStepsTrait;
     use SharingStepsTrait;
     use SynthesisStepsTrait;
@@ -52,7 +54,7 @@ class ApplicationContext extends UserContext
 
         $scenario = $scope->getScenario();
         if ($scenario->hasTag('elasticsearch')) {
-            $jobs[] = new Process('php bin/console fos:elastica:populate -e test -n');
+            $jobs[] = new Process('SYMFONY_ROUTER__REQUEST_CONTEXT__HOST=capco.test php bin/console fos:elastica:populate -e test -n');
         }
         foreach ($jobs as $job) {
             $job->mustRun();

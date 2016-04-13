@@ -5,7 +5,7 @@ import AnswerBody from '../../Answer/AnswerBody';
 
 const ProposalPageAnswer = React.createClass({
   propTypes: {
-    answer: React.PropTypes.object.isRequired,
+    answer: React.PropTypes.object,
     className: React.PropTypes.string,
   },
   mixins: [IntlMixin],

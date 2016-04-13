@@ -2,6 +2,7 @@ parameters:
   capco.email_belongs_not.validator.class: Capco\AppBundle\Validator\Constraints\EmailDoesNotBelongToUserValidator
   capco.end_after_start.validator.class: Capco\AppBundle\Validator\Constraints\EndAfterStartValidator
   capco.has_theme_if_activated.validator.class: Capco\AppBundle\Validator\Constraints\HasThemeIfActivatedValidator
+  capco.has_district_if_activated.validator.class: Capco\AppBundle\Validator\Constraints\HasDistrictIfActivatedValidator
 
 services:
   capco.already_vote.validator:
@@ -26,6 +27,12 @@ services:
     arguments: [@capco.toggle.manager]
     tags:
       - { name: validator.constraint_validator, alias: has_theme_if_activated.validator }
+
+  capco.has_district_if_activated.validator:
+    class: %capco.has_district_if_activated.validator.class%
+    arguments: [@capco.toggle.manager]
+    tags:
+      - { name: validator.constraint_validator, alias: has_district_if_activated.validator }
 
   capco.is_social_network_url.validator:
     class: Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrlValidator

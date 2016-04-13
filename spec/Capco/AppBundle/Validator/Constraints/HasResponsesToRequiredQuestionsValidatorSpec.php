@@ -2,8 +2,8 @@
 
 namespace spec\Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\ProposalResponse;
-use Capco\AppBundle\Entity\Question;
+use Capco\AppBundle\Entity\Response;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -14,7 +14,7 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestionsValidator');
     }
 
-    function it_should_should_find_if_proposal_has_response_for_question(Question $question1, Question $question2, ProposalResponse $response1, ProposalResponse $response2, ProposalResponse $response3)
+    function it_should_find_if_proposal_has_response_for_question(AbstractQuestion $question1, AbstractQuestion $question2, Response $response1, Response $response2, Response $response3)
     {
         // Response exists
         $response1->getQuestion()->willReturn($question1);

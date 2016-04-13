@@ -1,0 +1,18 @@
+Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
+  exclusion_policy: ALL
+  properties:
+    randomQuestionChoices:
+      expose: true
+      type: boolean
+      serialized_name: randomChoices
+      groups: [Questions]
+    otherAllowed:
+      expose: true
+      type: boolean
+      groups: [Questions]
+      serialized_name: isOtherAllowed
+    questionChoices:
+      expose: true
+      serialized_name: choices
+      groups: [Questions]
+      type: array

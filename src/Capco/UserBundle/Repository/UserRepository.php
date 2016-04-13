@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Doctrine\ORM\EntityRepository;
 use Capco\UserBundle\Entity\User;
@@ -91,6 +92,22 @@ class UserRepository extends EntityRepository
             ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.enabled = 1')
             ->leftJoin('proposals.proposalForm', 'proposalForm')
             ->leftJoin('proposalForm.step', 'step', 'WITH', 'step.isEnabled = 1')
+            ->leftJoin('step.projectAbstractStep', 'pas')
+            ->where('pas.project = :project')
+            ->groupBy('u.id')
+            ->setParameter('project', $project)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findProjectReplyContributorsWithCount(Project $project)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.id', 'count(distinct replies) as replies_count')
+            ->leftJoin('u.replies', 'replies', 'WITH', 'replies.enabled = 1')
+            ->leftJoin('replies.questionnaire', 'questionnaire')
+            ->leftJoin('questionnaire.step', 'step', 'WITH', 'step.isEnabled = 1')
             ->leftJoin('step.projectAbstractStep', 'pas')
             ->where('pas.project = :project')
             ->groupBy('u.id')
@@ -308,6 +325,20 @@ class UserRepository extends EntityRepository
             ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.enabled = 1')
             ->leftJoin('proposals.proposalForm', 'proposalForm')
             ->where('proposalForm.step = :step')
+            ->groupBy('u.id')
+            ->setParameter('step', $step)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findQuestionnaireStepReplyContributorsWithCount(QuestionnaireStep $step)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.id', 'count(distinct replies) as replies_count')
+            ->leftJoin('u.replies', 'replies', 'WITH', 'replies.enabled = 1')
+            ->leftJoin('replies.questionnaire', 'questionnaire')
+            ->where('questionnaire.step = :step')
             ->groupBy('u.id')
             ->setParameter('step', $step)
         ;

@@ -403,27 +403,6 @@ project:
   title: Projets participatifs
 
 step:
-  presentation:
-    participe: Participer
-    posts:
-      title: Actualités
-      see_all: Voir tous les articles
-    events:
-      title: Évènements
-      see_all: Voir tous les évènements
-    contributors:
-      title: Participants
-      see_all: Voir tous les participants
-  status:
-    closed: Terminé
-    open: En cours
-    future: À venir
-  sort:
-    comments: Les plus commentées
-    last: Les plus récentes
-    old: Les plus anciennes
-    random: Aléatoire
-    votes: Les plus votées
   consultation:
     alert:
       ended:
@@ -441,6 +420,35 @@ step:
       future:
         text: L'étape de dépôt débutera le %date%.
         title: Dépôt à venir.
+  presentation:
+    participe: Participer
+    posts:
+      title: Actualités
+      see_all: Voir tous les articles
+    events:
+      title: Évènements
+      see_all: Voir tous les évènements
+    contributors:
+      title: Participants
+      see_all: Voir tous les participants
+  questionnaire:
+    alert:
+      ended:
+        text: Merci à tous d'avoir contribué.
+        title: Questionnaire terminé.
+      future:
+        text: L'étape de questionnaire débutera le %date%.
+        title: Questionnaire à venir.
+  status:
+    closed: Terminé
+    open: En cours
+    future: À venir
+  sort:
+    comments: Les plus commentées
+    last: Les plus récentes
+    old: Les plus anciennes
+    random: Aléatoire
+    votes: Les plus votées
   selection:
     alert:
       ended:
@@ -521,14 +529,6 @@ argument:
     no_contribute: Impossible de contribuer sur cet argument.
     not_author: Vous ne pouvez pas modifier cet argument car vous n'en êtes pas l'auteur.
   count: "]-Inf, 0] 0 argument | {1} 1 argument | ]1,Inf[ %count% arguments"
-
-question_type:
-  types:
-    simple_text: Champ texte simple
-    multiline_text: Champ texte multi-lignes
-    editor: Éditeur de texte
-    file: Champ fichier
-    address: Champ texte adresse
 
 version:
   show:
@@ -932,7 +932,7 @@ share_button:
   link: Lien de partage
   share_on:
     facebook: Partager sur Facebook
-    twitter: Partager sur Facebook
+    twitter: Partager sur Twitter
     gplus: Partager sur Google+
     email: Partager par email
     link: Lien de partage
@@ -1167,6 +1167,15 @@ synthesis:
   edit:
     button: Éditer
     no_synthesis: Aucune synthèse associée à cette étape.
+
+question:
+  types:
+    text: Réponse courte
+    textarea: Réponse longue
+    editor: Réponse longue avec éditeur de texte
+    radio: Boutons radio (une seule réponse possible)
+    select: Liste déroulante (une seule réponse possible)
+    checkbox: Cases à cocher (plusieurs réponses possibles)
 
 search:
   title: Rechercher sur le site

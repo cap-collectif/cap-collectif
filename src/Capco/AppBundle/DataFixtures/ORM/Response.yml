@@ -1,0 +1,49 @@
+Capco\AppBundle\Entity\Response:
+  response1:
+    question: @simplequestion1
+    proposal: @proposal1
+    value: souhaitable
+  response2:
+    question: @simplequestion3
+    proposal: @proposal1
+    value: "250 000 €"
+  response3:
+    question: @simplequestion1
+    proposal: @proposal2
+    value: souhaitable
+  response4:
+    question: @simplequestion3
+    proposal: @proposal2
+    value: 1 million !
+  response5:
+    question: @simplequestion3
+    proposal: @proposal3
+    value: réponse obligatoire
+  response6:
+    question: @simplequestion3
+    proposal: @proposal4
+    value: réponse obligatoire
+  response7:
+    question: @simplequestion3
+    proposal: @proposal5
+    value: réponse obligatoire
+  response8:
+    question: @simplequestion3
+    proposal: @proposal6
+    value: réponse obligatoire
+  response9:
+    question: @simplequestion2
+    reply: @reply1
+    value: Trop bien ! On va voir de supers athlètes à Paris !
+  response10:
+    question: @multiplequestion1
+    reply: @reply1
+    value: {"labels":["Athlétisme","Sports collectifs"],"other":null}
+  response11:
+    question: @simplequestion2
+    reply: @reply2
+    value: Youpi ! J'adore des JO
+  response12:
+    question: @multiplequestion1
+    reply: @reply2
+    value: {"labels":["Natation","Sports collectifs"],"other":null}

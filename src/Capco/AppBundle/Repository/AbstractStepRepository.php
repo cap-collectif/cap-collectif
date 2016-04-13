@@ -12,17 +12,19 @@ class AbstractStepRepository extends EntityRepository
     /**
      * Get steps by project.
      *
+     * @param $slug
+     *
      * @return array
      */
     public function getByProject($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('c', 'cas')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
-            ->andWhere('c.slug = :project')
+            ->addSelect('p', 'pas')
+            ->leftJoin('s.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->andWhere('p.slug = :project')
             ->setParameter('project', $slug)
-            ->addOrderBy('cas.position', 'DESC')
+            ->addOrderBy('pas.position', 'DESC')
         ;
 
         return $qb

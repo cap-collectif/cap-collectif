@@ -26,6 +26,7 @@ admin.label.category: Types de sources
 admin.label.comment: Commentaires
 admin.label.project: Projets participatifs
 admin.label.project_abstractstep: Étape d'un projet
+admin.label.questionnaire_abstractquestion: Question d'un questionnaire
 admin.label.consultation_step_type: Structure
 admin.label.events: Évènements
 admin.label.event_registrations: Inscriptions à l'évènement
@@ -36,10 +37,12 @@ admin.label.idea: Idées
 admin.label.menu_item: Navigation
 admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
 admin.label.proposal: Budget / Propositions
-admin.label.proposal_form: Formulaire
+admin.label.proposal_form: Budget / Formulaire
+admin.label.questionnaire: Questionnaire
 admin.label.question: Question
-admin.label.question_type: Type de question
+admin.label.question_choice: Choix
 admin.label.opinion: Consultation / Propositions
+admin.label.reply: Questionnaire / Réponses
 admin.label.opinion_type: Éléments de structure
 admin.label.opinion_version: Modifications
 admin.label.page: Pages statiques
@@ -435,6 +438,12 @@ admin:
       position: Position
       steps: Étapes
       steps_add: Choisissez le type d'étape
+      steps_delete: Supprimer l'étape
+    questionnaire_abstractquestion:
+      position: Position
+      questions: Questions
+      questions_add: Choisissez le type de question
+      questions_delete: Supprimer cette question
     proposal:
       annotation: Annotation
       answer: Réponse officielle
@@ -477,7 +486,6 @@ admin:
     proposal_form:
       title: Titre
       description: Description
-      questions: Questions supplémentaires
       updated_at: Mise à jour
       created_at: Création
       title_help_text: Texte d'aide pour le champ Titre.
@@ -489,17 +497,40 @@ admin:
       district_help_text: Texte d'aide pour le champ Quartier.
       help_text_district_help_text: Le champ Quartier est présent par défaut.
       group_general: Formulaire
-      group_questions: Champs du formulaire
+      group_questions: Questions
+      questions: Questions
+      add_question: Ajouter une question
+    questionnaire:
+      title: Titre
+      description: Description
+      updated_at: Mise à jour
+      created_at: Création
+      group_general: Formulaire
+      group_questions: Questions
+      group_options: Options
+      questions: Questions
+      add_question: Ajouter une question
+      multiple_replies_allowed: Autoriser plusieurs réponses par utilisateur
+      modify_allowed: Autoriser la modification des réponses
     question:
       title: Titre
       help_text: Texte d'aide
       required: Champ obligatoire
       position: Position
+      type: Format de réponse
       updated_at: Mise à jour
       created_at: Création
-      question_type: Type de question
-    question_type:
-      type: Type
+      question_choices: Choix
+      random_question_choices: Ordre aléatoire des choix
+      other_allowed: Champ "Autre" autorisé
+      group_content: Question
+      group_question_choices: Choix de réponse
+    question_choice:
+      title: Titre
+      description: Description
+      image: Image
+      position: Position
+      required: Champ obligatoire
     status:
       name: Nom
       color: Couleur
@@ -517,6 +548,17 @@ admin:
       trashed: Corbeille
       type: Type
       updated_at: Mise à jour
+    reply:
+      author: Auteur
+      updated_at: Mise à jour
+      questionnaire_step: Étape de questionnaire
+      questionnaire: Questionnaire
+      project: Projet participatif
+      responses: Réponses
+      enabled: Publié
+      id: ID
+      group_content: Réponse
+      group_publication: Options de publication
     reporting:
       argument: Argument
       body: Motif
@@ -590,10 +632,12 @@ admin:
       nb_opinions_to_display: Nombre de propositions dans l'aperçu du classement
       nb_versions_to_display: Nombre de modifications dans l'aperçu du classement
       no_proposal_form: Aucun formulaire
+      no_questionnaire: Aucun formulaire
       position: Position
       project: Projet
-      proposals: Propositions sélectionnées
       proposal_form: Formulaire
+      proposals: Propositions sélectionnées
+      questionnaire: Formulaire
       start_at: Commence
       statuses: Statuts
       synthesis: Synthèse
@@ -696,6 +740,7 @@ capco:
     newsletter: Lettre d'information
     ideas: Idées
     themes: Thèmes
+    districts: Quartiers
     registration: Inscription
     login_facebook: Authentification avec Facebook
     login_gplus: Authentification avec Google+
@@ -777,3 +822,7 @@ presentation_step: Étape de présentation
 synthesis_step: Étape de synthèse
 ranking_step: Étape de classement
 selection_step: Étape de sélection
+questionnaire_step: Étape de questionnaire
+
+simple_question: Question simple
+multiple_choice_question: Question à choix multiple

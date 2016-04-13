@@ -6,7 +6,6 @@ Background:
 
 # Themes
 
-@parallel-scenario
 Scenario: Can see no ideas in empty theme
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -14,7 +13,6 @@ Scenario: Can see no ideas in empty theme
   Then I should see "Il n'y a aucune idée pour le moment."
   And I should see 0 ".media--macro" elements
 
-@parallel-scenario
 Scenario: Can see ideas in not empty theme
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -22,7 +20,6 @@ Scenario: Can see ideas in not empty theme
   Then I should not see "Il n'y a aucune idée pour le moment."
   And I should see 3 ".media--macro" elements
 
-@parallel-scenario
 Scenario: Can not create an idea from theme when idea creation is disabled
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -30,7 +27,6 @@ Scenario: Can not create an idea from theme when idea creation is disabled
 
 # Homepage
 
-@parallel-scenario
 Scenario: Can not create an idea from homepage when idea creation is disabled
   Given I visited "home page"
   Then I should not see "Proposer une idée"

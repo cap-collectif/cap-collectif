@@ -11,22 +11,34 @@ services:
       - { name: form.type_extension, alias: sonata_media_type }
 
   capco.form.opinion:
-      class: Capco\AppBundle\Form\OpinionType
-      arguments: [@capco.form.transformer.entity_to_id]
-      tags:
-        - { name: form.type, alias: opinion }
+    class: Capco\AppBundle\Form\OpinionType
+    arguments: [@capco.form.transformer.entity_to_id]
+    tags:
+      - { name: form.type, alias: opinion }
 
   capco.form.proposal:
-      class: Capco\AppBundle\Form\ProposalType
-      arguments: [@capco.form.transformer.entity_to_id, @capco.toggle.manager]
-      tags:
-        - { name: form.type, alias: proposal }
+    class: Capco\AppBundle\Form\ProposalType
+    arguments: [@capco.form.transformer.entity_to_id, @capco.toggle.manager, @capco.abstract_question.repository]
+    tags:
+      - { name: form.type, alias: proposal }
+
+  capco.form.reply:
+    class: Capco\AppBundle\Form\ReplyType
+    arguments: [@capco.form.transformer.entity_to_id, @capco.toggle.manager, @capco.abstract_question.repository]
+    tags:
+      - { name: form.type, alias: reply }
+
+  capco.form.response:
+    class: Capco\AppBundle\Form\ResponseType
+    arguments: [@capco.form.transformer.entity_to_id, @capco.abstract_question.repository]
+    tags:
+      - { name: form.type, alias: response }
 
   capco.form.proposal_vote:
-        class: Capco\AppBundle\Form\ProposalVoteType
-        arguments: [@security.token_storage]
-        tags:
-          - { name: form.type, alias: proposal_vote }
+      class: Capco\AppBundle\Form\ProposalVoteType
+      arguments: [@security.token_storage]
+      tags:
+        - { name: form.type, alias: proposal_vote }
 
   capco.form.transformer.entity_to_id:
     class: Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer

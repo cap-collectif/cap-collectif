@@ -1,0 +1,16 @@
+Capco\AppBundle\Entity\Response:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      groups: [Proposals, Replies]
+    updatedAt:
+      expose: true
+      groups: [Proposals, Replies]
+    value:
+      expose: true
+      groups: [Proposals, Replies]
+    question:
+      expose: true
+      groups: [Proposals, Replies]
+      serialized_name: field

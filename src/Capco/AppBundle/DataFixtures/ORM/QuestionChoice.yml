@@ -1,3 +1,34 @@
 Capco\AppBundle\Entity\QuestionChoice:
-    questionchoice1:
-        question: @question1
+  questionchoice1:
+    title: Athlétisme
+    position: 1
+  questionchoice2:
+    title: Natation
+    position: 2
+  questionchoice3:
+    title: Sports collectifs
+    position: 3
+  questionchoice4:
+    title: Sports individuels
+    position: 4
+  questionchoice5:
+    title: Maxime Arrouard
+    position: 1
+  questionchoice6:
+    title: Superman
+    position: 2
+  questionchoice7:
+    title: Cyril Lage
+    position: 3
+  questionchoice8:
+    title: Spylou Super Sayen
+    position: 4
+  questionchoice9:
+    title: Trop fort (Mon sonotone est tout neuf)
+    position: 1
+  questionchoice10:
+    title: Assez fort (Mon sonotone est mal réglé)
+    position: 2
+  questionchoice11:
+    title: Pas assez fort (Mon sonotone est en panne)
+    position: 3

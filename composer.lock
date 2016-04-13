@@ -10235,6 +10235,7 @@
         "snc/redis-bundle": 20,
         "caxy/htmldiff-bundle": 20,
         "sensiolabs/behat-page-object-extension": 20,
+        "coduo/php-matcher": 20,
         "docker-php/docker-php": 20,
         "phpunit/phpunit": 0,
         "tonicforhealth/behat-parallel-scenario": 20

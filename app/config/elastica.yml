@@ -255,7 +255,7 @@ fos_elastica:
           indexable_callback: isEnabled
           _all: { enabled: false }
           serializer:
-            groups: [Proposals, Themes, UsersInfos, ProposalResponses]
+            groups: [Proposals, Themes, UsersInfos]
           mappings:
             title:
               analyzer: %language_analyzer%

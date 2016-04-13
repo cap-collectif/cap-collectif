@@ -82,6 +82,22 @@ services:
     calls:
       - [ setTranslationDomain, [SonataAdminBundle]]
 
+  capco_admin.admin.reply:
+    class: Capco\AdminBundle\Admin\ReplyAdmin
+    arguments: [~, Capco\AppBundle\Entity\Reply, SonataAdminBundle:CRUD]
+    tags:
+      - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.reply}
+    calls:
+      - [ setTranslationDomain, [SonataAdminBundle]]
+
+  capco_admin.admin.questionnaire:
+    class: Capco\AdminBundle\Admin\QuestionnaireAdmin
+    arguments: [~, Capco\AppBundle\Entity\Questionnaire, SonataAdminBundle:CRUD]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label: admin.label.questionnaire}
+    calls:
+      - [ setTranslationDomain, [SonataAdminBundle]]
+
   capco_admin.admin.proposal_form:
     class: Capco\AdminBundle\Admin\ProposalFormAdmin
     arguments: [~, Capco\AppBundle\Entity\ProposalForm, SonataAdminBundle:CRUD]
@@ -92,9 +108,19 @@ services:
 
   capco_admin.admin.question:
     class: Capco\AdminBundle\Admin\QuestionAdmin
-    arguments: [~, Capco\AppBundle\Entity\Question, SonataAdminBundle:CRUD]
+    arguments: [~, Capco\AppBundle\Entity\Questions\AbstractQuestion, SonataAdminBundle:CRUD]
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.question}
+    calls:
+      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setSubClasses, [{ simple_question: Capco\AppBundle\Entity\Questions\SimpleQuestion, multiple_choice_question: Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion }]]
+      - [ setTemplate, [edit, CapcoAdminBundle:Question:edit.html.twig]]
+
+  capco_admin.admin.question_choice:
+    class: Capco\AdminBundle\Admin\QuestionChoiceAdmin
+    arguments: [~, Capco\AppBundle\Entity\QuestionChoice, SonataAdminBundle:CRUD]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label: admin.label.question_choice}
     calls:
       - [ setTranslationDomain, [SonataAdminBundle]]
 
@@ -169,7 +195,7 @@ services:
       - {name: sonata.admin, manager_type: orm, label: admin.label.step}
     calls:
       - [ setTranslationDomain, [SonataAdminBundle]]
-      - [setSubClasses, [{ collect_step: Capco\AppBundle\Entity\Steps\CollectStep, presentation_step: Capco\AppBundle\Entity\Steps\PresentationStep, consultation_step: Capco\AppBundle\Entity\Steps\ConsultationStep, synthesis_step: Capco\AppBundle\Entity\Steps\SynthesisStep, ranking_step: Capco\AppBundle\Entity\Steps\RankingStep, selection_step: Capco\AppBundle\Entity\Steps\SelectionStep, other_step: Capco\AppBundle\Entity\Steps\OtherStep }]]
+      - [setSubClasses, [{ collect_step: Capco\AppBundle\Entity\Steps\CollectStep, presentation_step: Capco\AppBundle\Entity\Steps\PresentationStep, consultation_step: Capco\AppBundle\Entity\Steps\ConsultationStep, synthesis_step: Capco\AppBundle\Entity\Steps\SynthesisStep, ranking_step: Capco\AppBundle\Entity\Steps\RankingStep, selection_step: Capco\AppBundle\Entity\Steps\SelectionStep, questionnaire_step: Capco\AppBundle\Entity\Steps\QuestionnaireStep, other_step: Capco\AppBundle\Entity\Steps\OtherStep }]]
 
   capco_admin.admin.theme:
     class: Capco\AdminBundle\Admin\ThemeAdmin
@@ -323,6 +349,12 @@ services:
     arguments: [~, Capco\AppBundle\Entity\Steps\ProjectAbstractStep, SonataAdminBundle:CRUD]
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.project_abstractstep}
+
+  capco_admin.admin.questionnaire_abstractquestion:
+    class: Capco\AdminBundle\Admin\QuestionnaireAbstractQuestionAdmin
+    arguments: [~, Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion, SonataAdminBundle:CRUD]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label: admin.label.questionnaire_abstractquestion}
 
   capco_admin.admin.synthesis:
     class: Capco\AdminBundle\Admin\SynthesisAdmin

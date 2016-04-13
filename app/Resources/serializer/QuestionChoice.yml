@@ -1,0 +1,20 @@
+Capco\AppBundle\Entity\QuestionChoice:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: integer
+      groups: [QuestionChoices, Questions, Questionnaires]
+    title:
+      expose: true
+      type: string
+      groups: [QuestionChoices, Questions, Questionnaires]
+      serialized_name: label
+    description:
+      expose: true
+      type: string
+      groups: [QuestionChoices, Questions, Questionnaires]
+    position:
+      expose: true
+      type: integer
+      groups: [QuestionChoices, Questions, Questionnaires]

@@ -69,6 +69,11 @@ capco_api_projects:
   type: rest
   prefix: /api
 
+capco_api_questionnaires:
+  resource: "@CapcoAppBundle/Controller/Api/QuestionnairesController.php"
+  type: rest
+  prefix: /api
+
 capco_api_proposal_forms:
   resource: "@CapcoAppBundle/Controller/Api/ProposalFormsController.php"
   type: rest
@@ -101,6 +106,11 @@ capco_api_sources:
 
 capco_api_categories:
   resource: "@CapcoAppBundle/Controller/Api/CategoriesController.php"
+  type: rest
+  prefix: /api
+
+capco_api_replies:
+  resource: "@CapcoAppBundle/Controller/Api/RepliesController.php"
   type: rest
   prefix: /api
 

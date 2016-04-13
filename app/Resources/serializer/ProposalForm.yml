@@ -33,13 +33,12 @@ Capco\AppBundle\Entity\ProposalForm:
             type: string
             groups: [ProposalForms]
             serialized_name: districtHelpText
-        questions:
-            expose: true
-            type: Capco\AppBundle\Entity\Question
-            serialized_name: questions
-            groups: [ProposalForms]
     virtual_properties:
         canContribute:
             serialized_name: isContribuable
             type: boolean
+            groups: [ProposalForms]
+        getRealQuestions:
+            serialized_name: fields
+            type: array
             groups: [ProposalForms]

@@ -1,0 +1,24 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    {% if value | length > 0 %}
+        {% for response in value %}
+            <strong>{{ response.question.title }}</strong></br>
+            </br>
+            {% if response.value is iterable %}
+                <ul>
+                    {% for label in response.value.labels %}
+                        <li>{{ label }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                {% if response.value.label is defined %}
+                    {{ response.value.label }}
+                {% else %}
+                    {{ response.value }}
+                {% endif %}
+            {% endif %}
+            {% if loop.last == false %}<hr>{% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

@@ -59,6 +59,11 @@ class Validator {
             errors.push(this.rules[rule].message);
           }
           break;
+        case 'notEmpty':
+          if (!this.notEmpty()) {
+            errors.push(this.rules[rule].message);
+          }
+          break;
         case 'isTrue':
           if (!this.isTrue()) {
             errors.push(this.rules[rule].message);
@@ -121,6 +126,10 @@ class Validator {
 
   notBlankHtml() {
     return this.notNull() && $(this.value).text() !== '';
+  }
+
+  notEmpty() {
+    return this.notNull() && Array.isArray(this.value) && this.value.length > 0;
   }
 
   isTrue() {

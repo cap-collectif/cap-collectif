@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -52,7 +53,7 @@ class ProposalForm
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Question", mappedBy="proposalForm", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="proposalForm", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $questions;
 
@@ -162,6 +163,19 @@ class ProposalForm
     /**
      * @return ArrayCollection
      */
+    public function getRealQuestions()
+    {
+        $questions = [];
+        foreach ($this->questions as $qaq) {
+            $questions[] = $qaq->getQuestion();
+        }
+
+        return $questions;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
     public function getQuestions()
     {
         return $this->questions;
@@ -185,11 +199,11 @@ class ProposalForm
     /**
      * Add question.
      *
-     * @param Question $question
+     * @param QuestionnaireAbstractQuestion $question
      *
      * @return $this
      */
-    public function addQuestion(Question $question)
+    public function addQuestion(QuestionnaireAbstractQuestion $question)
     {
         if (!$this->questions->contains($question)) {
             $this->questions->add($question);
@@ -202,11 +216,11 @@ class ProposalForm
     /**
      * Remove question.
      *
-     * @param Question $question
+     * @param QuestionnaireAbstractQuestion $question
      *
      * @return $this
      */
-    public function removeQuestion(Question $question)
+    public function removeQuestion(QuestionnaireAbstractQuestion $question)
     {
         $this->questions->removeElement($question);
         $question->setProposalForm(null);

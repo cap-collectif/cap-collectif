@@ -1,0 +1,19 @@
+Capco\AppBundle\Entity\Questionnaire:
+  questionnaire1:
+    title: Votre avis sur les JO 2024 à Paris
+    description: <p><text(100)></p>
+    step: @questionnairestep1
+    multipleRepliesAllowed: true
+    modifyAllowed: true
+  questionnaire2:
+    title: Questionnaire de test
+    description: <p><text(100)></p>
+    step: @questionnairestep2
+    multipleRepliesAllowed: false
+    modifyAllowed: false
+  questionnaire3:
+    title: Questionnaire dans une étape fermée
+    description: <p><text(100)></p>
+    step: @questionnairestep3
+    multipleRepliesAllowed: true
+    modifyAllowed: true

@@ -46,6 +46,8 @@ class ProjectController extends Controller
      * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
      *
      * @param Project $project
+     *
+     * @return Response
      */
     public function showUserVotesAction(Project $project)
     {
@@ -86,6 +88,8 @@ class ProjectController extends Controller
      * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
      *
      * @param Project $project
+     *
+     * @return Response
      */
     public function showStatsAction(Project $project)
     {
@@ -281,6 +285,8 @@ class ProjectController extends Controller
             $nbPage = ceil(count($contributors) / $pagination);
         }
 
+        $showVotes = $this->get('capco.project.helper')->hasStepWithVotes($project);
+
         return [
             'project' => $project,
             'contributors' => $contributors,
@@ -288,6 +294,7 @@ class ProjectController extends Controller
             'pagination' => $pagination,
             'nbPage' => $nbPage,
             'currentStep' => 'contributors_step',
+            'showVotes' => $showVotes,
         ];
     }
 

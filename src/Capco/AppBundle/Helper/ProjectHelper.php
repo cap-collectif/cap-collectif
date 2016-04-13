@@ -6,6 +6,8 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 
 class ProjectHelper
 {
@@ -35,5 +37,20 @@ class ProjectHelper
         }
 
         return $previousSteps;
+    }
+
+    public function hasStepWithVotes(Project $project)
+    {
+        $steps = $this->getAbstractSteps($project);
+        foreach ($steps as $step) {
+            if (
+                $step instanceof ConsultationStep
+                || ($step instanceof SelectionStep && $step->isVotable() === true)
+            ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

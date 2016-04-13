@@ -11,6 +11,7 @@ Feature: Feature Flags Api
       "newsletter": @boolean@,
       "ideas": @boolean@,
       "themes": @boolean@,
+      "districts": @boolean@,
       "registration": @boolean@,
       "login_facebook": @boolean@,
       "login_gplus": @boolean@,

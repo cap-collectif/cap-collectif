@@ -22,7 +22,9 @@ trait AnswerableTrait
     }
 
     /**
-     * @param mixed $answer
+     * @param Answer $answer
+     *
+     * @return $this
      */
     public function setAnswer(Answer $answer = null)
     {

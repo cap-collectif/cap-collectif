@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\ProposalForm;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -46,27 +47,6 @@ class CollectStep extends AbstractStep
         parent::__construct();
 
         $this->statuses = new ArrayCollection();
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getProposalForm()
-    {
-        return $this->proposalForm;
-    }
-
-    /**
-     * @param ProposalForm $proposalForm
-     *
-     * @return ArrayCollection
-     */
-    public function setProposalForm($proposalForm)
-    {
-        $proposalForm->setStep($this);
-        $this->proposalForm = $proposalForm;
-
-        return $this;
     }
 
     /**
@@ -144,5 +124,25 @@ class CollectStep extends AbstractStep
     public function isCollectStep()
     {
         return true;
+    }
+
+    /**
+     * @return ProposalForm
+     */
+    public function getProposalForm()
+    {
+        return $this->proposalForm;
+    }
+
+    /**
+     * @param ProposalForm $proposalForm
+     *
+     * @return $this
+     */
+    public function setProposalForm(ProposalForm $proposalForm = null)
+    {
+        $this->proposalForm = $proposalForm;
+
+        return $this;
     }
 }

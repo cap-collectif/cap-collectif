@@ -3,9 +3,11 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
@@ -82,6 +84,8 @@ class StepController extends Controller
 
         $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered($project, true, 10, 1);
 
+        $showVotes = $this->get('capco.project.helper')->hasStepWithVotes($project);
+
         return [
             'project' => $project,
             'currentStep' => $step,
@@ -90,6 +94,7 @@ class StepController extends Controller
             'nbEvents' => $nbEvents,
             'nbPosts' => $nbPosts,
             'contributors' => $contributors,
+            'showVotes' => $showVotes,
         ];
     }
 
@@ -293,7 +298,7 @@ class StepController extends Controller
         $form = $step->getProposalForm()
             ? $serializer->serialize([
                 'form' => $step->getProposalForm(),
-            ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'ProposalResponses', 'Questions']))
+            ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'Questions']))
             : null
         ;
 
@@ -317,6 +322,79 @@ class StepController extends Controller
             $response->setPublic();
             $response->setSharedMaxAge(60);
         }
+
+        return $response;
+    }
+
+    /**
+     * @Route("/project/{projectSlug}/questionnaire/{stepSlug}", name="app_project_show_questionnaire")
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
+     * @ParamConverter("step", class="CapcoAppBundle:Steps\QuestionnaireStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @Cache(smaxage="60", public="true")
+     *
+     * @param Project           $project
+     * @param QuestionnaireStep $step
+     *
+     * @return Response
+     */
+    public function showQuestionnaireStepAction(Project $project, QuestionnaireStep $step)
+    {
+        if (!$step->canDisplay()) {
+            throw new NotFoundHttpException();
+        }
+
+        foreach ($step->getQuestionnaire()->getRealQuestions() as $question) {
+            if ($question instanceof MultipleChoiceQuestion) {
+                if ($question->isRandomQuestionChoices()) {
+                    $choices = $question->getQuestionChoices()->toArray();
+                    shuffle($choices);
+                    $question->setQuestionChoices($choices);
+                }
+            }
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $serializer = $this->get('jms_serializer');
+
+        $userRepliesRaw = [];
+        if ($this->getUser()) {
+            $userRepliesRaw = $em
+                ->getRepository('CapcoAppBundle:Reply')
+                ->findBy(
+                    [
+                        'questionnaire' => $step->getQuestionnaire(),
+                        'author' => $this->getUser(),
+                    ]
+                )
+            ;
+        }
+        $userReplies = $serializer->serialize([
+          'replies' => $userRepliesRaw,
+      ], 'json', SerializationContext::create()->setGroups(['Replies', 'UsersInfos', 'UserMedias']));
+
+        $repliesCount = $em
+            ->getRepository('CapcoAppBundle:Reply')
+            ->countPublishedForQuestionnaire($step->getQuestionnaire())
+        ;
+
+        $stepJson = $serializer->serialize([
+            'step' => $step,
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
+
+        $formJson = $step->getQuestionnaire()
+            ? $serializer->serialize([
+                'form' => $step->getQuestionnaire(),
+            ], 'json', SerializationContext::create()->setGroups(['Questionnaires', 'Questions']))
+            : null
+        ;
+
+        $response = $this->render('CapcoAppBundle:Step:questionnaire.html.twig', [
+            'project' => $project,
+            'currentStep' => $step,
+            'step' => $stepJson,
+            'form' => $formJson,
+            'userReplies' => $userReplies,
+        ]);
 
         return $response;
     }

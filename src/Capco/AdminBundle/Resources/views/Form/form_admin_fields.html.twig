@@ -86,10 +86,9 @@
                         <a  href="{{ sonata_admin.field_description.associationadmin.generateUrl('create') }}"
                             onclick="return start_field_dialog_form_add_{{ id }}(this);"
                             class="btn btn-success btn-sm sonata-ba-action"
-                            title="{{ btn_add|trans({}, btn_catalogue) }}"
-                                >
-                            <i class="fa fa-plus-circle"></i>
-                            {{ btn_add|trans({}, btn_catalogue) }}
+                            title="{{ btn_add|trans({}, btn_catalogue) }}">
+                                <i class="fa fa-plus-circle"></i>
+                                {{ btn_add|trans({}, btn_catalogue) }}
                         </a>
                     {% else %}
                         <a class="btn btn-success btn-sm sonata-ba-action dropdown-toggle" data-toggle="dropdown" href="#">
@@ -102,11 +101,12 @@
                             {% for subclass in sonata_admin.field_description.associationadmin.subclasses|keys %}
                                 {% set link_options = {'subclass': subclass} | merge(sonata_admin.field_description.getOption('link_parameters', {})) %}
                                 <li>
-                                    <a
-                                            onclick="return start_field_dialog_form_add_{{ id }}(this);"
-                                            accesskey=""
-                                            title="{{ subclass|trans({}, sonata_admin.field_description.associationadmin.translationdomain) }}"
-                                            href="{{ sonata_admin.field_description.associationadmin.generateUrl('create', link_options) }}">{{ subclass|trans({}, sonata_admin.field_description.associationadmin.translationdomain) }}</a>
+                                    <a  onclick="return start_field_dialog_form_add_{{ id }}(this);"
+                                        accesskey=""
+                                        title="{{ subclass|trans({}, sonata_admin.field_description.associationadmin.translationdomain) }}"
+                                        href="{{ sonata_admin.field_description.associationadmin.generateUrl('create', link_options) }}">
+                                            {{ subclass|trans({}, sonata_admin.field_description.associationadmin.translationdomain) }}
+                                    </a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -119,10 +119,9 @@
                     <a  href=""
                         onclick="return remove_selected_element_{{ id }}(this);"
                         class="btn btn-danger btn-sm sonata-ba-action"
-                        title="{{ btn_delete|trans({}, btn_catalogue) }}"
-                            >
-                        <i class="fa fa-minus-circle"></i>
-                        {{ btn_delete|trans({}, btn_catalogue) }}
+                        title="{{ btn_delete|trans({}, btn_catalogue) }}">
+                            <i class="fa fa-minus-circle"></i>
+                            {{ btn_delete|trans({}, btn_catalogue) }}
                     </a>
                 {% endif %}
             </span>

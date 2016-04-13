@@ -2,18 +2,22 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProposalResponseType extends AbstractType
+class ResponseType extends AbstractType
 {
     protected $transformer;
+    protected $questionRepository;
 
-    public function __construct(EntityToIdTransformer $transformer)
+    public function __construct(EntityToIdTransformer $transformer, AbstractQuestionRepository $questionRepository)
     {
         $this->transformer = $transformer;
+        $this->questionRepository = $questionRepository;
     }
 
     /**
@@ -22,8 +26,8 @@ class ProposalResponseType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->transformer->setEntityClass('Capco\AppBundle\Entity\Question');
-        $this->transformer->setEntityRepository('CapcoAppBundle:Question');
+        $this->transformer->setEntityClass(AbstractQuestion::class);
+        $this->transformer->setEntityRepository('CapcoAppBundle:Questions\AbstractQuestion');
         $builder
             ->add('value', null)
             ->add('question', 'hidden')
@@ -40,18 +44,15 @@ class ProposalResponseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\ProposalResponse',
+            'data_class' => 'Capco\AppBundle\Entity\Response',
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
         ]);
     }
 
-    /**
-     * @return string
-     */
     public function getName()
     {
-        return 'proposal_response';
+        return 'response';
     }
 }

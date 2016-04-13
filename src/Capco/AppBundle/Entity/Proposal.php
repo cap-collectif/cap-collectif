@@ -27,7 +27,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
- * @CapcoAssert\HasResponsesToRequiredQuestions()
+ * @CapcoAssert\HasResponsesToRequiredQuestions(message="proposal.missing_required_responses", formField="proposalForm")
  */
 class Proposal implements CommentableInterface, VotableInterface
 {
@@ -90,6 +90,7 @@ class Proposal implements CommentableInterface, VotableInterface
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District", inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(name="district_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @CapcoAssert\HasDistrictIfActivated()
      */
     private $district = null;
 
@@ -125,9 +126,9 @@ class Proposal implements CommentableInterface, VotableInterface
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalResponse", mappedBy="proposal", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Response", mappedBy="proposal", cascade={"persist", "remove"})
      */
-    private $proposalResponses;
+    private $responses;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -162,7 +163,7 @@ class Proposal implements CommentableInterface, VotableInterface
         $this->votes = new ArrayCollection();
         $this->reports = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->proposalResponses = new ArrayCollection();
+        $this->responses = new ArrayCollection();
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
         $this->selectionSteps = new ArrayCollection();
@@ -357,50 +358,50 @@ class Proposal implements CommentableInterface, VotableInterface
     }
 
     /**
-     * Add proposalResponse.
+     * Add response.
      *
-     * @param ProposalResponse $proposalResponse
+     * @param Response $response
      *
      * @return Proposal
      */
-    public function addProposalResponse(ProposalResponse $proposalResponse)
+    public function addResponse(Response $response)
     {
-        if (!$this->proposalResponses->contains($proposalResponse)) {
-            $this->proposalResponses[] = $proposalResponse;
-            $proposalResponse->setProposal($this);
+        if (!$this->responses->contains($response)) {
+            $this->responses[] = $response;
+            $response->setProposal($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove proposalResponse.
+     * Remove response.
      *
-     * @param ProposalResponse $proposalResponse
+     * @param Response $response
      */
-    public function removeProposalResponse(ProposalResponse $proposalResponse)
+    public function removeResponse(Response $response)
     {
-        $this->proposalResponses->removeElement($proposalResponse);
+        $this->responses->removeElement($response);
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getProposalResponses()
+    public function getResponses()
     {
-        return $this->proposalResponses;
+        return $this->responses;
     }
 
     /**
-     * @param ArrayCollection $proposalResponses
+     * @param ArrayCollection $responses
      *
      * @return $this
      */
-    public function setProposalResponses(ArrayCollection $proposalResponses)
+    public function setResponses(ArrayCollection $responses)
     {
-        $this->proposalResponses = $proposalResponses;
-        foreach ($proposalResponses as $proposalResponse) {
-            $proposalResponse->setProposal($this);
+        $this->responses = $responses;
+        foreach ($responses as $response) {
+            $response->setProposal($this);
         }
 
         return $this;

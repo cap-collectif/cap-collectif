@@ -17,3 +17,9 @@ def deploy(environment='prod'):
 def ssh(user='capco'):
     "Ssh into application container"
     env.ssh_into('application', user)
+
+
+@task
+def clear_cache(environment='dev'):
+    "Clear cache"
+    env.service_command('rm -rf var/cache/' + environment, 'application', env.www_app)

@@ -46,7 +46,7 @@ class ProposalController extends Controller
             SerializationContext::create()
                 ->setSerializeNull(true)
                 ->setGroups([
-                    'Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias', 'ProposalUserData', 'Themes', 'Steps',
+                    'Proposals', 'UsersInfos', 'UserMedias', 'ProposalUserData', 'Themes', 'Steps',
                 ])
         );
 
@@ -76,7 +76,7 @@ class ProposalController extends Controller
 
         $form = $serializer->serialize([
             'form' => $currentStep->getProposalForm(),
-        ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'ProposalResponses', 'Questions']));
+        ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'Questions']));
 
         $votes = $serializer->serialize([
             'votes' => $em->getRepository('CapcoAppBundle:ProposalVote')->getVotesForProposal($proposal, 6),

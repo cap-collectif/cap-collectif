@@ -9,6 +9,7 @@ import OpinionPage from './components/Opinion/OpinionPage';
 import AuthService from './services/AuthService';
 import FeatureService from './services/FeatureService';
 import CollectStepPage from './components/Page/CollectStepPage';
+import QuestionnaireStepPage from './components/Page/QuestionnaireStepPage';
 import SelectionStepPage from './components/Page/SelectionStepPage';
 import ProposalPage from './components/Proposal/Page/ProposalPage';
 import ProposalVoteBasketWidget from './components/Proposal/Vote/ProposalVoteBasketWidget';
@@ -78,7 +79,7 @@ AuthService
           districts={$('#render-proposal-page').data('districts').districts}
           votes={$('#render-proposal-page').data('votes').votes}
           votableStep={$('#render-proposal-page').data('votable-step').votableStep}
-          userHasVote={$('#render-proposal-page').data('user-has-vote')}
+          userHasVote={$('#render-proposal-page').data('user-has-vote') === 1}
           {...IntlData}
         />,
         document.getElementById('render-proposal-page')
@@ -98,6 +99,19 @@ AuthService
           {...IntlData}
         />,
         document.getElementById('render-collect-step-page')
+      );
+    }
+
+    if ($('#render-questionnaire-step-page').length) {
+      ReactDOM.render(
+          <QuestionnaireStepPage
+              step={$('#render-questionnaire-step-page').data('step').step}
+              count={$('#render-questionnaire-step-page').data('count')}
+              form={$('#render-questionnaire-step-page').data('form').form}
+              userReplies={$('#render-questionnaire-step-page').data('user-replies').replies}
+              {...IntlData}
+          />,
+          document.getElementById('render-questionnaire-step-page')
       );
     }
 

@@ -10,7 +10,7 @@ class ReactIntlRenderExtension extends \Twig_Extension
     private $messages;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(ReactRenderExtension $extension, $file)
     {
@@ -28,15 +28,16 @@ class ReactIntlRenderExtension extends \Twig_Extension
     public function reactRenderIntlComponent($componentName, $options = [])
     {
         if (!array_key_exists('props', $options)) {
-          $options['props'] = [];
+            $options['props'] = [];
         }
         if (is_string($options['props'])) {
-          $props = json_decode($options['props'], true);
-          $props['messages'] = $this->messages;
-          $options['props'] = $props;
+            $props = json_decode($options['props'], true);
+            $props['messages'] = $this->messages;
+            $options['props'] = $props;
         } else {
-          $options['props']['messages'] = $this->messages;
+            $options['props']['messages'] = $this->messages;
         }
+
         return $this->extension->reactRenderComponent($componentName, $options);
     }
 

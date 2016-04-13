@@ -12,6 +12,8 @@ def build(use_cache='true'):
     "Build services for infrastructure"
     ensure_vm_is_up()
     env.compose('build' + ('', '  --no-cache')[use_cache == 'false'])
+    env.service_command('chmod -R 777 var/cache/*', 'application', '.', 'root')
+    env.service_command('chmod -R 777 web/media/*', 'application', '.', 'root')
 
 
 @task
@@ -43,7 +45,6 @@ def reboot():
 @task
 def clean():
     "Clean the infrastructure, will also remove all data"
-    ensure_vm_is_up()
     env.compose('rm -f -v')
 
 
@@ -64,7 +65,7 @@ def ensure_vm_is_up():
         with settings(warn_only=True):
             machine_exist = local('docker-machine status capco')
         if not machine_exist.succeeded:
-            print(red('[ERROR] Docker-machine capco doesn\'t exist, you should launch the \'make install\' command to install the VM and the project.'))
+            print(red('[ERROR] Docker-machine capco doesn\'t exist, you should launch the \'fab local.system.docker_machine_install\' command to install the VM and the project.'))
             abort('Make sure that docker-machine capco has already been created.')
         else:
             machine_running = local('docker-machine status capco', capture=True)

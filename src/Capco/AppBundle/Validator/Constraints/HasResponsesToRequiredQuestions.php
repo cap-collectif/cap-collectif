@@ -9,7 +9,8 @@ use Symfony\Component\Validator\Constraint;
  */
 class HasResponsesToRequiredQuestions extends Constraint
 {
-    public $message = 'proposal.missing_required_responses';
+    public $message = 'global.missing_required_responses';
+    public $formField = '';
 
     public function validatedBy()
     {

@@ -2,18 +2,19 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * ProposalResponse.
+ * Response.
  *
- * @ORM\Table(name="proposal_response")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalResponseRepository")
+ * @ORM\Table(name="response")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ResponseRepository")
  */
-class ProposalResponse
+class Response
 {
     use TimestampableTrait;
 
@@ -29,24 +30,31 @@ class ProposalResponse
     /**
      * @var Proposal
      *
-     * @Assert\NotNull()
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalResponses", cascade={"persist"})
-     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="responses", cascade={"persist"})
+     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $proposal;
 
     /**
-     * @var Question
+     * @var Reply
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Reply", inversedBy="responses", cascade={"persist"})
+     * @ORM\JoinColumn(name="reply_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    private $reply;
+
+    /**
+     * @var AbstractQuestion
      *
      * @Assert\NotNull()
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Question", inversedBy="proposalResponses", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private $question;
 
     /**
      * @var string
-     * @ORM\Column(name="value", type="text", nullable=true)
+     * @ORM\Column(name="value", type="json", nullable=true)
      */
     private $value;
 
@@ -96,7 +104,7 @@ class ProposalResponse
     }
 
     /**
-     * @return Question
+     * @return AbstractQuestion
      */
     public function getQuestion()
     {
@@ -104,11 +112,11 @@ class ProposalResponse
     }
 
     /**
-     * @param Question $question
+     * @param AbstractQuestion $question
      *
      * @return $this
      */
-    public function setQuestion(Question $question)
+    public function setQuestion(AbstractQuestion $question)
     {
         $this->question = $question;
 
@@ -131,6 +139,26 @@ class ProposalResponse
     public function setValue($value)
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return Reply
+     */
+    public function getReply()
+    {
+        return $this->reply;
+    }
+
+    /**
+     * @param Reply $reply
+     *
+     * @return $this
+     */
+    public function setReply($reply)
+    {
+        $this->reply = $reply;
 
         return $this;
     }

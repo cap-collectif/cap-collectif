@@ -17,7 +17,7 @@ const ProposalResponse = React.createClass({
     }
     return (
       <div className="block">
-        <h2 className="h2">{ response.question.title }</h2>
+        <h2 className="h2">{ response.field.question }</h2>
         {
           this.isHTML()
           ? <FormattedHTMLMessage message={response.value} />

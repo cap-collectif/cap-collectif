@@ -28,6 +28,7 @@ class Manager
         'registration',
         'reporting',
         'themes',
+        'districts',
         'user_type',
         'votes_evolution',
         'zipcode_at_register',

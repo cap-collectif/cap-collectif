@@ -10,6 +10,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
       collect: Capco\AppBundle\Entity\Steps\CollectStep
       ranking: Capco\AppBundle\Entity\Steps\RankingStep
       selection: Capco\AppBundle\Entity\Steps\SelectionStep
+      questionnaire: Capco\AppBundle\Entity\Steps\QuestionnaireStep
   properties:
     id:
       expose: true

@@ -9,26 +9,28 @@ Feature: ProposalForm Restful Api
 {
   "id": @integer@,
   "title": @string@,
-  "description": @string@,
   "titleHelpText": @string@,
+  "description": @string@,
   "descriptionHelpText": @string@,
   "themeHelpText": @string@,
   "districtHelpText": @string@,
   "isContribuable": true,
-  "questions": [
+  "fields": [
     {
       "id": @integer@,
-      "inputType": "text",
+      "type": @string@,
       "helpText": @string@,
-      "required": false,
-      "title": @string@
+      "required": @...@,
+      "question": @string@,
+      "slug": @string@
     },
     {
       "id": @integer@,
-      "inputType": "editor",
+      "type": @string@,
       "helpText": @string@,
       "required": true,
-      "title": @string@
+      "question": @string@,
+      "slug": @string@
     }
   ]
 }

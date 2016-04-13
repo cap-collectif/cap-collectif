@@ -1,0 +1,24 @@
+Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
+  multiplequestion1:
+    title: Pour quel type d'épreuve êtes vous prêt à acheter des places ?
+    helpText: Plusieurs choix sont possibles
+    questionChoices: [@questionchoice1, @questionchoice2, @questionchoice3, @questionchoice4]
+    required: true
+    type: 5 # checkbox
+    randomQuestionChoices: false
+    otherAllowed: true
+  multiplequestion2:
+    title: Quel est ton athlète favori ?
+    helpText: Un seul choix possible
+    questionChoices: [@questionchoice5, @questionchoice6, @questionchoice7, @questionchoice8]
+    required: false
+    type: 3 # radio
+    randomQuestionChoices: true
+    otherAllowed: true
+  multiplequestion3:
+    title: Nelson Monfort parle-t-il:
+    helpText: Merci de répondre sincèrement
+    questionChoices: [@questionchoice9, @questionchoice10, @questionchoice11]
+    required: false
+    type: 4
+    randomQuestionChoices: true

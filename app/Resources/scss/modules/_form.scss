@@ -48,6 +48,11 @@ Hack form button - radio check
     background-color: $warning-bg;
   }
 
+  .checkbox--other .form-control {
+    border-color: #ccc;
+    background-color: initial;
+  }
+
   .cke_wysiwyg_frame {
     background-color: $warning-bg;
   }
@@ -64,7 +69,11 @@ Hack form button - radio check
     border: 1px solid $warning-text;;
   }
 
-  input[type="checkbox"] + span {
+  input[type="checkbox"] + span, input[type="radio"] + span {
+    color: $darkest-gray;
+  }
+
+  *:not('.has-warning') input[type="checkbox"] + span {
     color: $warning-text;
   }
 

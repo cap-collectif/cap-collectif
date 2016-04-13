@@ -45,7 +45,7 @@ $container->setParameter('language_analyzer', getenv_default('language_analyzer'
 
 $container->setParameter('remember_secret', getenv_default('remember_secret', '***REMOVED***'));
 
-$container->setParameter('router.request_context.host', getenv_default('router.request_context.host', 'localhost'));
+$container->setParameter('router.request_context.host', getenv_default('router.request_context.host', 'capco.dev'));
 $container->setParameter('assets_version', getenv_default('assets_version', 'v1'));
 $container->setParameter('server_version', getenv_default('server_version', '5.6'));
 

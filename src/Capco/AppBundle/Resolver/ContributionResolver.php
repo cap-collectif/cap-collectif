@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\UserBundle\Repository\UserRepository;
 
@@ -26,6 +27,7 @@ class ContributionResolver
         $argumentsContributors = $this->repository->findProjectArgumentContributorsWithCount($project);
         $opinionsContributors = $this->repository->findProjectOpinionContributorsWithCount($project);
         $proposalsContributors = $this->repository->findProjectProposalContributorsWithCount($project);
+        $repliesContributors = $this->repository->findProjectReplyContributorsWithCount($project);
         $versionsContributors = $this->repository->findProjectVersionContributorsWithCount($project);
 
         // Fetch voters
@@ -53,6 +55,10 @@ class ContributionResolver
             $contributors[$proposalsContributor['id']]['proposals'] = $proposalsContributor['proposals_count'];
         }
 
+        foreach ($repliesContributors as $repliesContributor) {
+            $contributors[$repliesContributor['id']]['replies'] = $repliesContributor['replies_count'];
+        }
+
         foreach ($versionsContributors as $versionContributor) {
             $contributors[$versionContributor['id']]['versions'] = $versionContributor['versions_count'];
         }
@@ -78,19 +84,20 @@ class ContributionResolver
         }
 
         foreach ($contributors as &$contributor) {
-            $contributor['total'] = isset($contributor['sources']) ? $contributor['sources'] : 0;
-            $contributor['total'] += isset($contributor['arguments']) ? $contributor['arguments'] : 0;
-            $contributor['total'] += isset($contributor['opinions']) ? $contributor['opinions'] : 0;
-            $contributor['total'] += isset($contributor['proposals']) ? $contributor['proposals'] : 0;
-            $contributor['total'] += isset($contributor['versions']) ? $contributor['versions'] : 0;
-            $contributor['total'] += isset($contributor['opinions_votes']) ? $contributor['opinions_votes'] : 0;
-            $contributor['total'] += isset($contributor['versions_votes']) ? $contributor['versions_votes'] : 0;
-            $contributor['total'] += isset($contributor['arguments_votes']) ? $contributor['arguments_votes'] : 0;
-            $contributor['total'] += isset($contributor['sources_votes']) ? $contributor['sources_votes'] : 0;
-            $contributor['total'] += isset($contributor['proposals_votes']) ? $contributor['proposals_votes'] : 0;
+            $contributor['contributions'] = isset($contributor['sources']) ? $contributor['sources'] : 0;
+            $contributor['contributions'] += isset($contributor['arguments']) ? $contributor['arguments'] : 0;
+            $contributor['contributions'] += isset($contributor['opinions']) ? $contributor['opinions'] : 0;
+            $contributor['contributions'] += isset($contributor['proposals']) ? $contributor['proposals'] : 0;
+            $contributor['contributions'] += isset($contributor['replies']) ? $contributor['replies'] : 0;
+            $contributor['contributions'] += isset($contributor['versions']) ? $contributor['versions'] : 0;
+            $contributor['votes'] = isset($contributor['opinions_votes']) ? $contributor['opinions_votes'] : 0;
+            $contributor['votes'] += isset($contributor['versions_votes']) ? $contributor['versions_votes'] : 0;
+            $contributor['votes'] += isset($contributor['arguments_votes']) ? $contributor['arguments_votes'] : 0;
+            $contributor['votes'] += isset($contributor['sources_votes']) ? $contributor['sources_votes'] : 0;
+            $contributor['votes'] += isset($contributor['proposals_votes']) ? $contributor['proposals_votes'] : 0;
         }
 
-        uasort($contributors, function ($a, $b) { return $b['total'] - $a['total']; });
+        uasort($contributors, function ($a, $b) { return $b['contributions'] + $b['votes'] - $a['contributions'] - $a['votes']; });
 
         if ($pagination && $page) {
             $contributorsPage = array_slice($contributors, $pagination * $page - $pagination, $pagination, true);
@@ -156,6 +163,11 @@ class ContributionResolver
             foreach ($proposalsContributors as $proposalsContributor) {
                 $contributors[$proposalsContributor['id']]['proposals'] = $proposalsContributor['proposals_count'];
             }
+        } elseif ($step instanceof QuestionnaireStep) {
+            $repliesContributors = $this->repository->findQuestionnaireStepReplyContributorsWithCount($step);
+            foreach ($repliesContributors as $repliesContributor) {
+                $contributors[$repliesContributor['id']]['replies'] = $repliesContributor['replies_count'];
+            }
         } elseif ($step instanceof SelectionStep) {
             $proposalsVoters = $this->repository->findSelectionStepProposalVotersWithCount($step);
             foreach ($proposalsVoters as $proposalsVoter) {
@@ -164,19 +176,19 @@ class ContributionResolver
         }
 
         foreach ($contributors as &$contributor) {
-            $contributor['total'] = isset($contributor['sources']) ? $contributor['sources'] : 0;
-            $contributor['total'] += isset($contributor['arguments']) ? $contributor['arguments'] : 0;
-            $contributor['total'] += isset($contributor['opinions']) ? $contributor['opinions'] : 0;
-            $contributor['total'] += isset($contributor['proposals']) ? $contributor['proposals'] : 0;
-            $contributor['total'] += isset($contributor['versions']) ? $contributor['versions'] : 0;
-            $contributor['total'] += isset($contributor['opinions_votes']) ? $contributor['opinions_votes'] : 0;
-            $contributor['total'] += isset($contributor['versions_votes']) ? $contributor['versions_votes'] : 0;
-            $contributor['total'] += isset($contributor['arguments_votes']) ? $contributor['arguments_votes'] : 0;
-            $contributor['total'] += isset($contributor['sources_votes']) ? $contributor['sources_votes'] : 0;
-            $contributor['total'] += isset($contributor['proposals_votes']) ? $contributor['proposals_votes'] : 0;
+            $contributor['contributions'] = isset($contributor['sources']) ? $contributor['sources'] : 0;
+            $contributor['contributions'] += isset($contributor['arguments']) ? $contributor['arguments'] : 0;
+            $contributor['contributions'] += isset($contributor['opinions']) ? $contributor['opinions'] : 0;
+            $contributor['contributions'] += isset($contributor['proposals']) ? $contributor['proposals'] : 0;
+            $contributor['contributions'] += isset($contributor['versions']) ? $contributor['versions'] : 0;
+            $contributor['votes'] = isset($contributor['opinions_votes']) ? $contributor['opinions_votes'] : 0;
+            $contributor['votes'] += isset($contributor['versions_votes']) ? $contributor['versions_votes'] : 0;
+            $contributor['votes'] += isset($contributor['arguments_votes']) ? $contributor['arguments_votes'] : 0;
+            $contributor['votes'] += isset($contributor['sources_votes']) ? $contributor['sources_votes'] : 0;
+            $contributor['votes'] += isset($contributor['proposals_votes']) ? $contributor['proposals_votes'] : 0;
         }
 
-        uasort($contributors, function ($a, $b) { return $b['total'] - $a['total']; });
+        uasort($contributors, function ($a, $b) { return $b['contributions'] + $b['votes'] - $a['contributions'] - $a['votes']; });
 
         return $contributors;
     }
@@ -195,6 +207,9 @@ class ContributionResolver
             }
             if ($step->getStep()->isCollectStep()) {
                 $count += $step->getStep()->getProposalsCount();
+            }
+            if ($step->getStep()->isQuestionnaireStep()) {
+                $count += $step->getStep()->getRepliesCount();
             }
         }
 

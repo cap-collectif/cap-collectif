@@ -239,7 +239,7 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.body',
                 'template' => 'CapcoAdminBundle:Proposal:body_show_field.html.twig',
             ])
-            ->add('proposalResponses', null, [
+            ->add('responses', null, [
                 'label' => 'admin.fields.proposal.responses',
                 'template' => 'CapcoAdminBundle:Proposal:responses_show_field.html.twig',
             ])

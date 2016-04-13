@@ -2,16 +2,17 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class StepAdmin extends Admin
@@ -22,6 +23,7 @@ class StepAdmin extends Admin
         // Workaround for proposals autocompletion
         $subClass = $subClass ? $subClass : 'selection_step';
         $object = $this->getModelManager()->getModelInstance($this->getSubClass($subClass));
+
         foreach ($this->getExtensions() as $extension) {
             $extension->alterNewInstance($this, $object);
         }
@@ -106,7 +108,7 @@ class StepAdmin extends Admin
             ])
         ;
 
-        if ($subject instanceof PresentationStep || $subject instanceof OtherStep || $subject instanceof CollectStep) {
+        if ($subject instanceof PresentationStep || $subject instanceof OtherStep || $subject instanceof CollectStep || $subject instanceof QuestionnaireStep) {
             $formMapper
                 ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
@@ -210,10 +212,28 @@ class StepAdmin extends Admin
                     'query' => $this->createQueryForProposalForms(),
                     'by_reference' => false,
                     'required' => false,
-                    'btn_add' => false,
                     'empty_value' => 'admin.fields.step.no_proposal_form',
                 ])
                 ->end()
+            ;
+        }
+
+        if ($subject instanceof QuestionnaireStep) {
+            $formMapper
+                ->with('admin.fields.step.group_form')
+                ->add('questionnaire', 'sonata_type_model', [
+                    'label' => 'admin.fields.step.questionnaire',
+                    'query' => $this->createQueryForQuestionnaires(),
+                    'by_reference' => false,
+                    'required' => false,
+                    'empty_value' => 'admin.fields.step.no_questionnaire',
+                ])
+                ->end()
+            ;
+        }
+
+        if ($subject instanceof CollectStep) {
+            $formMapper
                 ->with('admin.fields.step.group_statuses')
                 ->add('statuses', 'sonata_type_collection', [
                     'label' => 'admin.fields.step.statuses',
@@ -224,8 +244,7 @@ class StepAdmin extends Admin
                     'inline' => 'table',
                     'sortable' => 'position',
                 ])
-                ->end()
-            ;
+                ->end();
         }
     }
 
@@ -244,28 +263,19 @@ class StepAdmin extends Admin
         return $qb->getQuery();
     }
 
-    private function createQueryBuilderForProposals()
+    private function createQueryForQuestionnaires()
     {
-        $projectId = $this->getPersistentParameter('projectId');
-        if ($projectId) {
-            $qb = $this->getConfigurationPool()
-                ->getContainer()
-                ->get('doctrine.orm.entity_manager')
-                ->getRepository('CapcoAppBundle:Proposal')
-                ->createQueryBuilder('p')
-                ->leftJoin('p.proposalForm', 'f')
-                ->leftJoin('f.step', 's')
-                ->leftJoin('s.projectAbstractStep', 'pas')
-                ->leftJoin('pas.project', 'pr')
-                ->where('pr.id = :projectId')
-                ->andWhere('p.enabled = 1 AND p.isTrashed = 0')
-                ->setParameter('projectId', $projectId)
-            ;
+        $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
+        $qb = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:Questionnaire')
+            ->createQueryBuilder('q')
+            ->where('q.step IS NULL OR q.step = :step')
+            ->setParameter('step', $subject)
+        ;
 
-            return $qb;
-        }
-
-        return;
+        return $qb->getQuery();
     }
 
     protected function configureRoutes(RouteCollection $collection)

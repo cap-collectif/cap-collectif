@@ -2,30 +2,38 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Capco\AppBundle\Entity\Question;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint)
+    public function validate($object, Constraint $constraint)
     {
-        $responses = $value->getProposalResponses();
-        $questions = $value->getProposalForm()->getQuestions();
-        foreach ($questions as $question) {
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $responses = $object->getResponses();
+        $form = $accessor->getValue($object, $constraint->formField);
+        $questions = $form->getQuestions();
+        foreach ($questions as $qaq) {
+            $question = $qaq->getQuestion();
             if ($question->isRequired() && !$this->hasResponseForQuestion($question, $responses)) {
-                $this->context->addViolationAt('proposalResponses', $constraint->message, [], null);
+                $this->context->addViolationAt('responses', $constraint->message, [], null);
 
                 return;
             }
         }
     }
 
-    private function hasResponseForQuestion(Question $question, $responses)
+    private function hasResponseForQuestion(AbstractQuestion $question, $responses)
     {
         foreach ($responses as $response) {
             if ($response->getQuestion() === $question) {
-                if ($response->getValue() && strlen($response->getValue())) {
+                $value = $response->getValue();
+                if (is_array($value) && count($value)) {
+                    return true;
+                }
+                if (is_string($value) && strlen($value)) {
                     return true;
                 }
 

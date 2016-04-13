@@ -31,17 +31,17 @@ Feature: Proposal Restful Api
           "color": @string@
         },
         "author": {
-          "username": "welcomattic",
-          "displayName": "welcomattic",
-          "uniqueId": "welcomattic",
-          "isAdmin": true,
+          "username": @string@,
+          "displayName": @string@,
+          "uniqueId": @string@,
+          "isAdmin": @boolean@,
           "media": @...@,
           "user_type": {
             "id": @integer@,
             "name": @string@,
             "slug": @string@
           },
-          "vip": true,
+          "vip": @boolean@,
           "_links": {
             "profile": @string@,
             "settings": @string@
@@ -53,12 +53,17 @@ Feature: Proposal Restful Api
         "comments": @array@,
         "responses":[
           {
-            "question": {
+            "id": @integer@,
+            "field": {
               "id": @integer@,
-              "title": @string@,
+              "question": @string@,
+              "type": @string@,
+              "helpText": @string@,
+              "slug": @string@,
               "required": @boolean@
             },
-            "value": @string@
+            "value": @string@,
+            "updated_at": "@string@.isDateTime()"
           },
           @...@
         ],
@@ -90,6 +95,7 @@ Feature: Proposal Restful Api
           "body": @string@,
           "author": @...@
         },
+        "votesCountBySelectionSteps": @...@,
         "hasUserReported": @boolean@,
         "likers": @array@,
         "_links": {
@@ -222,19 +228,22 @@ Feature: Proposal Restful Api
   @database
   Scenario: Logged in API client wants to add a proposal (with no value for not required response)
     Given I am logged in to api as user
+    Given feature themes is enabled
+    Given feature districts is enabled
     When I send a POST request to "/api/proposal_forms/1/proposals" with json:
     """
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "district": 1,
-      "proposalResponses": [
+      "theme": 1,
+      "responses": [
         {
           "question": 1,
           "value": ""
         },
         {
-          "question": 2,
+          "question": 3,
           "value": "Réponse à la question obligatoire"
         }
       ]
@@ -245,15 +254,18 @@ Feature: Proposal Restful Api
   @database
   Scenario: Logged in API client wants to add a proposal (with nothing for not required response)
     Given I am logged in to api as user
+    Given feature themes is enabled
+    Given feature districts is enabled
     When I send a POST request to "/api/proposal_forms/1/proposals" with json:
     """
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "district": 1,
-      "proposalResponses": [
+      "theme": 1,
+      "responses": [
         {
-          "question": 2,
+          "question": 3,
           "value": "Réponse à la question obligatoire"
         }
       ]
@@ -264,13 +276,16 @@ Feature: Proposal Restful Api
   @security
   Scenario: Logged in API client wants to add a proposal without required response
     Given I am logged in to api as user
+    Given feature themes is enabled
+    Given feature districts is enabled
     When I send a POST request to "/api/proposal_forms/1/proposals" with json:
     """
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "district": 1,
-      "proposalResponses": [
+      "theme": 1,
+      "responses": [
         {
           "question": 1,
           "value": "Mega important"
@@ -296,19 +311,22 @@ Feature: Proposal Restful Api
   @security
   Scenario: Logged in API client wants to add a proposal with empty required response
     Given I am logged in to api as user
+    Given feature themes is enabled
+    Given feature districts is enabled
     When I send a POST request to "/api/proposal_forms/1/proposals" with json:
     """
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "district": 1,
-      "proposalResponses": [
+      "theme": 1,
+      "responses": [
         {
           "question": 1,
           "value": "Mega important"
         },
         {
-          "question": 2,
+          "question": 3,
           "value": ""
         }
       ]

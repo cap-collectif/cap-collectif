@@ -1,0 +1,34 @@
+Capco\AppBundle\Entity\Questionnaire:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: integer
+      groups: [Questionnaires]
+    title:
+      expose: true
+      type: string
+      groups: [Questionnaires]
+    description:
+      expose: true
+      type: string
+      groups: [Questionnaires]
+    multipleRepliesAllowed:
+      expose: true
+      type: boolean
+      groups: [Questionnaires]
+      serialized_name: multipleRepliesAllowed
+    modifyAllowed:
+      expose: true
+      type: boolean
+      groups: [Questionnaire]
+      serialized_name: isModifyAllowed
+  virtual_properties:
+    canContribute:
+      serialized_name: contribuable
+      type: boolean
+      groups: [Questionnaires]
+    getRealQuestions:
+      serialized_name: fields
+      type: array
+      groups: [Questionnaires, Questions]

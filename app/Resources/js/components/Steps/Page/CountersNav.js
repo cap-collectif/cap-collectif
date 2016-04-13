@@ -28,6 +28,10 @@ const CountersNav = React.createClass({
       icon: 'cap cap-file-edit-1',
       label: 'global.counters.proposals',
     },
+    replies: {
+      icon: 'cap cap-file-edit-1',
+      label: 'global.counters.replies',
+    },
     votes: {
       icon: 'cap-hand-like-2-1',
       label: 'global.counters.votes',

@@ -1,0 +1,26 @@
+#reply-form {
+  & > .form-group {
+    margin-bottom: 40px;
+  }
+
+  & > .form-group .form-group {
+    margin: 0;
+  }
+
+  & div.radio, & div.checkbox  {
+    margin: 0;
+    & label span {
+      height: 20px;
+      display: inline-block;
+      padding-top: 2px;
+    }
+  }
+
+  & div.radio label span {
+    padding-top: 3px;
+  }
+
+  & .form-group .form-group-sm {
+    margin-top: 6px;
+  }
+}

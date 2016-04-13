@@ -219,15 +219,15 @@ class ProjectAdmin extends Admin
 
             // Steps
             ->with('admin.fields.project.group_steps')
-            ->add('steps', 'sonata_type_collection', [
-                'label' => 'admin.fields.project.steps',
-                'by_reference' => false,
-                'required' => false,
-            ], [
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable' => 'position',
-            ])
+                ->add('steps', 'sonata_type_collection', [
+                    'label' => 'admin.fields.project.steps',
+                    'by_reference' => false,
+                    'required' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ])
             ->end()
         ;
     }
@@ -237,8 +237,6 @@ class ProjectAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $subject = $this->getSubject();
-
         $showMapper
             ->with('admin.fields.project.general',   ['class' => 'col-md-3'])->end()
             ->with('admin.fields.project.proposals', ['class' => 'col-md-9'])->end()

@@ -144,6 +144,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $proposals;
 
+    protected $replies;
+
     /**
      * @var int
      */
@@ -168,6 +170,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      * @var int
      */
     protected $proposalsCount = 0;
+
+    /**
+     * @var int
+     */
+    protected $repliesCount = 0;
 
     /**
      * @var int
@@ -251,6 +258,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->votes = new ArrayCollection();
         $this->sources = new ArrayCollection();
         $this->proposals = new ArrayCollection();
+        $this->replies = new ArrayCollection();
     }
 
     // for EncoderAwareInterface
@@ -607,6 +615,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->proposals;
     }
 
+    public function getReplies()
+    {
+        return $this->replies;
+    }
+
     /**
      * Gets the value of projectsCount.
      *
@@ -711,10 +724,32 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     /**
      * @param int $proposalsCount
+     *
+     * @return $this
      */
     public function setProposalsCount($proposalsCount)
     {
         $this->proposalsCount = $proposalsCount;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRepliesCount()
+    {
+        return $this->repliesCount;
+    }
+
+    /**
+     * @param int $repliesCount
+     *
+     * @return $this
+     */
+    public function setRepliesCount($repliesCount)
+    {
+        $this->repliesCount = $repliesCount;
 
         return $this;
     }

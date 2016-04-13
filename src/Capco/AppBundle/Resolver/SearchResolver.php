@@ -35,15 +35,15 @@ class SearchResolver
      * @param string    $type
      * @param string    $sortField
      * @param string    $sortOrder
-     * @param bool|true $useTransformation
      * @param array     $filters
+     * @param bool|true $useTransformation
+     * @param int       $resultsPerPage
+     * @param bool      $random
      *
      * @return array
      */
     public function searchAll($page = 1, $term = '', $type = 'all', $sortField = '_score', $sortOrder = 'DESC', $filters = [], $useTransformation = true, $resultsPerPage = self::RESULTS_PER_PAGE, $random = false)
     {
-        $results = [];
-        $count = 0;
         $from = ($page - 1) * $resultsPerPage;
 
         $multiMatchQuery = empty(trim($term)) ? new Query\MatchAll() : $this->getMultiMatchQuery($term);

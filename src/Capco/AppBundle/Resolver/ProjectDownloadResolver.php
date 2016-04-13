@@ -564,6 +564,7 @@ class ProjectDownloadResolver
         $authorName = $author ? $author->getUsername() : $this->translator->trans('project_download.values.user_removed', [], 'CapcoAppBundle');
         $authorId = $author ? $author->getId() : $na;
         $authorType = $author && $author->getUserType() ? $author->getUserType()->getName() : $na;
+
         return $item = [
             'id' => '',
             'title' => $na,
@@ -648,7 +649,7 @@ class ProjectDownloadResolver
     private function getProposalContent(Proposal $proposal)
     {
         $body = $this->formatText(html_entity_decode($proposal->getBody()));
-        foreach ($proposal->getProposalResponses() as $response) {
+        foreach ($proposal->getResponses() as $response) {
             $body .= "\n\n".$response->getQuestion()->getTitle().' :';
             $body .= "\n".$this->formatText($response->getValue());
         }

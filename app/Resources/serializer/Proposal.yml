@@ -18,7 +18,7 @@ Capco\AppBundle\Entity\Proposal:
       type: Capco\UserBundle\Entity\User
       serialized_name: author
       groups: [Proposals]
-    proposalResponses:
+    responses:
       expose: true
       serialized_name: responses
       groups: [Proposals]

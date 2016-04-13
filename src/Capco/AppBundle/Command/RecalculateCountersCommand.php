@@ -36,6 +36,10 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             (select count(p.id) from CapcoAppBundle:Proposal p where p.author = u AND p.enabled = 1 group by p.author)');
         $query->execute();
 
+        $query = $em->createQuery('update CapcoUserBundle:User u set u.repliesCount =
+            (select count(r.id) from CapcoAppBundle:Reply r where r.author = u AND r.enabled = 1 group by r.author)');
+        $query->execute();
+
         $query = $em->createQuery('update CapcoUserBundle:User u set u.proposalVotesCount =
             (select count(pv.id) from CapcoAppBundle:ProposalVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p where pv.user = u AND pv.confirmed = 1 AND pv.private = 0 AND p.enabled = 1 group by pv.user)');
         $query->execute();
@@ -340,6 +344,23 @@ class RecalculateCountersCommand extends ContainerAwareCommand
               update CapcoAppBundle:Steps\CollectStep cs
               set cs.contributorsCount = '.$participants.'
               where cs.id = '.$cs->getId()
+            );
+            $query->execute();
+        }
+
+        // ****************************** Questionnaire step counters **************************************
+
+        $query = $em->createQuery('update CapcoAppBundle:Steps\QuestionnaireStep qs set qs.repliesCount =
+            (select count(r.id) from CapcoAppBundle:Reply r INNER JOIN CapcoAppBundle:Questionnaire q WITH r.questionnaire = q where q.step = qs AND r.enabled = 1 group by q.step)');
+        $query->execute();
+
+        $questionnaireSteps = $em->getRepository('CapcoAppBundle:Steps\QuestionnaireStep')->findAll();
+        foreach ($questionnaireSteps as $qs) {
+            $participants = $contributionResolver->countStepContributors($qs);
+            $query = $em->createQuery('
+              update CapcoAppBundle:Steps\QuestionnaireStep qs
+              set qs.contributorsCount = '.$participants.'
+              where qs.id = '.$qs->getId()
             );
             $query->execute();
         }
