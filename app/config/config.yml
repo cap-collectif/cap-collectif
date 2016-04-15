@@ -169,7 +169,6 @@ hwi_oauth:
         properties:
             facebook: facebook_id
             google: google_id
-            twitter: twitter_id
     resource_owners:
         facebook:
             type: facebook
@@ -188,10 +187,6 @@ hwi_oauth:
                 approval_prompt: auto
                 display: page
                 login_hint: email address
-        twitter:
-            type: twitter
-            client_id: %twitter_app_id%
-            client_secret: %twitter_app_secret%
 
 qandidate_toggle:
     persistence: redis

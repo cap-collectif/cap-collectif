@@ -807,7 +807,6 @@ user:
     social:
       facebook: Se connecter avec Facebook
       gplus: Se connecter avec Google+
-      twitter: Se connecter avec Twitter
       nouscitoyens: Se connecter avec Nous Citoyens
     or: ou
     submit: Se connecter
@@ -830,7 +829,6 @@ user:
     social:
       facebook: S'inscrire avec Facebook
       gplus: S'inscrire avec Google+
-      twitter: S'inscrire avec Twitter
     or: OU
     username:
       username: Nom complet *

@@ -30,8 +30,6 @@ $container->setParameter('facebook_app_id', getenv_default('facebook_app_id', '*
 $container->setParameter('facebook_app_secret', getenv_default('facebook_app_secret', '***REMOVED***'));
 $container->setParameter('google_app_id', getenv_default('google_app_id', '***REMOVED***'));
 $container->setParameter('google_app_secret', getenv_default('google_app_secret', '***REMOVED***'));
-$container->setParameter('twitter_app_id', getenv_default('twitter_app_id', '***REMOVED***'));
-$container->setParameter('twitter_app_secret', getenv_default('twitter_app_secret', '***REMOVED***'));
 $container->setParameter('nous_citoyens_app_id', getenv_default('nous_citoyens_app_id', 'xxx'));
 $container->setParameter('nous_citoyens_app_secret', getenv_default('nous_citoyens_app_secret', 'xxx'));
 
@@ -52,4 +50,3 @@ $container->setParameter('assets_version', getenv_default('assets_version', 'v1'
 $container->setParameter('server_version', getenv_default('server_version', '5.6'));
 
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
-
