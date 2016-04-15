@@ -61,6 +61,9 @@ class UrlResolver
 
     public function getStepUrl($step, $absolute = false)
     {
+        if (!$step->getProject() || !$step->getProject()->getSlug() || !$step->getSlug()) {
+            return null;
+        }
         if ($step->isConsultationStep()) {
             return $this->router->generate('app_project_show_consultation',              ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()], $absolute);
         }
@@ -88,19 +91,19 @@ class UrlResolver
 
     public function getObjectUrl($object, $absolute = false)
     {
-        if ($object instanceof Idea) {
+        if ($object instanceof Idea && $object->getSlug()) {
             return $this->router->generate('app_idea_show', ['slug' => $object->getSlug()], $absolute);
         }
 
-        if ($object instanceof Post) {
+        if ($object instanceof Post && $object->getSlug()) {
             return $this->router->generate('app_blog_show', ['slug' => $object->getSlug()], $absolute);
         }
 
-        if ($object instanceof Argument) {
+        if ($object instanceof Argument && $object->getParent() && $object->getId()) {
             return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute).'#arg-'.$object->getId();
         }
 
-        if ($object instanceof Source) {
+        if ($object instanceof Source && $object->getParent() && $object->getId()) {
             return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute).'#source-'.$object->getId();
         }
 
@@ -108,19 +111,19 @@ class UrlResolver
             return $this->getStepUrl($object, $absolute);
         }
 
-        if ($object instanceof Event) {
+        if ($object instanceof Event && $object->getSlug()) {
             return $this->router->generate('app_event_show', ['slug' => $object->getSlug()], $absolute);
         }
 
-        if ($object instanceof Comment) {
+        if ($object instanceof Comment && $object->getRelatedObject()) {
             return $this->getObjectUrl($object->getRelatedObject());
         }
 
-        if ($object instanceof Theme) {
+        if ($object instanceof Theme && $object->getSlug()) {
             return $this->router->generate('app_theme_show', ['slug' => $object->getSlug()], $absolute);
         }
 
-        if ($object instanceof User) {
+        if ($object instanceof User && $object->getSlug()) {
             return $this->router->generate('capco_user_profile_show_all', ['slug' => $object->getSlug()], $absolute);
         }
 
@@ -133,11 +136,11 @@ class UrlResolver
 
     public function getTrashedObjectUrl($object, $absolute = false)
     {
-        if ($object instanceof Idea) {
+        if ($object instanceof Idea && $object->getSlug()) {
             return $this->router->generate('app_idea_show', ['slug' => $object->getSlug()], $absolute);
         }
 
-        if ($object instanceof Argument || $object instanceof Source) {
+        if (($object instanceof Argument || $object instanceof Source) && $object->getLinkedOpinion()) {
             return $this->router
                 ->generate('app_project_show_trashed', [
                     'projectSlug' => $object->getLinkedOpinion()->getStep()->getProject()->getSlug(),
