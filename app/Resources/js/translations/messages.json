@@ -180,6 +180,7 @@
     "form": {
       "optional": " (facultatif)"
     },
+    "forgot_password": "Mot de passe oublié ?",
     "fullname": "Nom complet *",
     "hidden_email": "Adresse \u00e9lectronique (cach\u00e9e) *",
     "insert": "Ins\u00e9rer",
@@ -187,6 +188,10 @@
     "links": "{num, plural, =0{0 proposition li\u00e9e} one{# proposition li\u00e9e} other{# propositions li\u00e9es}}",
     "loading": "Chargement...",
     "login": "Connexion",
+    "login_social": {
+      "facebook": "Se connecter avec Facebook",
+      "google": "Se connecter avec Google",
+    },
     "modal": {
       "report": {
         "form": {

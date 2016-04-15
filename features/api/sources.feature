@@ -192,11 +192,11 @@ Feature: Sources
   Scenario: logged in API client wants to delete a vote that doesn't exist
     Given I am logged in to api as user
     When I send a DELETE request to "/api/sources/1/votes"
-    Then the JSON response status code should be 401
+    Then the JSON response status code should be 400
     And the JSON response should match:
     """
     {
-      "code": 401,
+      "code": 400,
       "message": "You have not voted for this source.",
       "errors": @null@
     }

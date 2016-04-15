@@ -60,11 +60,11 @@ Feature: Stats
   @security
   Scenario: Anonymous API client wants to get votes stats for a collect step
     When I send a GET request to "/api/project_stats/20?key=votes"
-    Then the JSON response status code should be 401
+    Then the JSON response status code should be 400
     And the JSON response should match:
     """
     {
-      "code": 401,
+      "code": 400,
       "message": "Collect steps have no votes stats.",
       "errors": @null@
     }
@@ -73,11 +73,11 @@ Feature: Stats
   @security
   Scenario: Anonymous API client wants to get districts stats for a selection step
     When I send a GET request to "/api/project_stats/6?key=districts"
-    Then the JSON response status code should be 401
+    Then the JSON response status code should be 400
     And the JSON response should match:
     """
     {
-      "code": 401,
+      "code": 400,
       "message": "Selection steps have no districts stats.",
       "errors": @null@
     }
@@ -86,11 +86,11 @@ Feature: Stats
   @security
   Scenario: Anonymous API client wants to get votes stats for a collect step filtered by theme
     When I send a GET request to "/api/project_stats/20?key=districts&theme=1"
-    Then the JSON response status code should be 401
+    Then the JSON response status code should be 400
     And the JSON response should match:
     """
     {
-      "code": 401,
+      "code": 400,
       "message": "Only votes stats can be filtered by theme or district.",
       "errors": @null@
     }

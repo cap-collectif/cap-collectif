@@ -27,7 +27,7 @@ describe('<EmailNotConfirmedAlert />', () => {
     expect(wrapper.children()).to.have.length(0);
   });
 
-  it('renders an alert if user is logged and confirmed his email', () => {
+  it('renders an alert if user is logged and has not confirmed his email', () => {
     const wrapper = shallow(<EmailNotConfirmedAlert {...props} user={userWithNotConfirmedEmail} />);
     expect(wrapper.find('Alert')).to.have.length(1);
   });

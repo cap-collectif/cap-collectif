@@ -202,11 +202,11 @@ Feature: Opinions Versions
       "comment": "Un peu de fun dans ce monde trop sobre !"
     }
     """
-    Then the JSON response status code should be 401
+    Then the JSON response status code should be 400
     And the JSON response should match:
     """
     {
-      "code": 401,
+      "code": 400,
       "message": "Can't add a version to an uncontributable opinion.",
       "errors": @null@
     }

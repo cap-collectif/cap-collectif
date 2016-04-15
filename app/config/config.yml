@@ -303,18 +303,16 @@ fos_rest:
     exception:
         enabled: true
         codes:
-            'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': 401
-            'Symfony\Component\HttpKernel\Exception\HttpException': 401
             'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': 400
             'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': 401
-            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': 404
             'Symfony\Component\Security\Core\Exception\AuthenticationException': 401
+            'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': 403
             'Symfony\Component\Security\Core\Exception\AccessDeniedException': 403
+            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': 404
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
             'Doctrine\ORM\OptimisticLockException': 409
         messages:
             'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': true
-            'Symfony\Component\HttpKernel\Exception\HttpException': true
             'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': true
             'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': true
             'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': true

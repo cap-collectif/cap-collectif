@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
-import FeatureStore from '../../stores/FeatureStore';
 import LoginActions from '../../actions/LoginActions';
 
 const NavbarRight = React.createClass({
   propTypes: {
     user: PropTypes.object,
+    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -17,45 +18,49 @@ const NavbarRight = React.createClass({
   },
 
   render() {
-    const { user } = this.props;
+    const { user, features } = this.props;
     return (
-      <div className="nav navbar-right">
+      <Nav pullRight>
         {
-          FeatureStore.isActive('search')
-          ? <a className="navbar__search" href="/search">
-               <i className="cap cap-magnifier"></i> <span className="visible-xs">{ this.getIntlMessage('navbar.search') }</span>
-           </a>
+          features.search
+          ? <NavItem eventKey={1} className="navbar__search" href="/search">
+              <i className="cap cap-magnifier"></i> <span className="visible-xs">{ this.getIntlMessage('navbar.search') }</span>
+            </NavItem>
           : null
         }
         {
           user
-          ? <ul className="nav navbar-nav navbar-right">
-               <li className="dropdown">
-                   <a href="#" className="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" id="navbar-username">
-                     { user.username }<span className="caret"></span>
-                   </a>
-                   <ul className="dropdown-menu" id="navbar-user-dropdown" role="menu">
-                       {
-                         user.isAdmin
-                           ? <li role="menuitem"><a href="/admin">{ this.getIntlMessage('navbar.admin') }</a></li>
-                           : null
-                       }
-                       <li role="menuitem"><a href="/profile">{ this.getIntlMessage('navbar.profile') }</a></li>
-                       <li role="menuitem"><a href="/profile/edit-profile">{ this.getIntlMessage('navbar.user_settings') }</a></li>
-                       <li className="divider" role="separator"></li>
-                       <li role="menuitem" id="logout-button">
-                        <a onClick={this.logout} role="button">{ this.getIntlMessage('global.logout') }</a>
-                      </li>
-                   </ul>
-               </li>
-           </ul>
-         : <span>
-            <RegistrationButton />
-            { ' ' }
-            <LoginButton />
-           </span>
-      }
-    </div>
+          ? <NavDropdown eventKey={3} title={
+              <span>{user.username} <span className="caret" />
+              </span>
+            } id="navbar-username">
+              {
+                user.isAdmin
+                ? <MenuItem eventKey={3.1} href="/admin">
+                    { this.getIntlMessage('navbar.admin') }
+                  </MenuItem>
+                : null
+              }
+              <MenuItem eventKey={3.2}>
+                <a href="/profile">{ this.getIntlMessage('navbar.profile') }</a>
+              </MenuItem>
+              <MenuItem eventKey={3.3}>
+                <a href="/profile/edit-profile">{ this.getIntlMessage('navbar.user_settings') }</a>
+              </MenuItem>
+              <MenuItem divider />
+              <MenuItem eventKey={3.3} id="logout-button">
+                <a onClick={this.logout} role="button">
+                  { this.getIntlMessage('global.logout') }
+                </a>
+              </MenuItem>
+            </NavDropdown>
+          : <span>
+              <RegistrationButton />
+              { ' ' }
+              <LoginButton />
+            </span>
+        }
+      </Nav>
     );
   },
 

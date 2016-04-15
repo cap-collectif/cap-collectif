@@ -103,7 +103,7 @@ class UsersController extends FOSRestController
     }
 
     /**
-     * @Post("/re-send-email-confirmation", defaults={"_feature_flags" = "registration"})
+     * @Post("/resend-email-confirmation", defaults={"_feature_flags" = "registration"})
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */

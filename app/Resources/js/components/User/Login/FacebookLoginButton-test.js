@@ -11,7 +11,7 @@ describe('<FacebookLoginButton />', () => {
     ...IntlData,
   };
 
-  it('renders nothing if login_facebook is not activate', () => {
+  it('renders nothing if login_facebook is not activated', () => {
     FacebookLoginButton.__Rewire__('FeatureStore', {
       isActive: () => false,
     });

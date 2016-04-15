@@ -6,13 +6,11 @@ import Fetcher from '../../services/Fetcher';
 const EmailNotConfirmedAlert = React.createClass({
   propTypes: {
     user: PropTypes.object,
-    style: PropTypes.string,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
-      style: 'position: fixed; width: 100%; left: 0; z-index: 30;',
       user: null,
     };
   },
@@ -27,7 +25,7 @@ const EmailNotConfirmedAlert = React.createClass({
   handleResend() {
     this.setState({ resendingConfirmation: true });
     Fetcher
-      .post('/re-send-email-confirmation', {})
+      .post('/resend-email-confirmation', {})
       .then(() => {
         this.setState({
           resendingConfirmation: false,

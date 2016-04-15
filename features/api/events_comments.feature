@@ -189,11 +189,11 @@ Feature: Events comments
       "body": "Pr0 Hacker"
     }
     """
-    Then the JSON response status code should be 401
+    Then the JSON response status code should be 404
     And the JSON response should match:
     """
     {
-      "code": 401,
+      "code": 404,
       "message": "This parent comment is not linked to this event",
       "errors": @null@
     }

@@ -41,7 +41,11 @@ Feature: Users
       "plainPassword": "supersecureuserpass"
     }
     """
-    Then the JSON response status code should be 401
+    Then the JSON response status code should be 404
+    And the JSON response should match:
+    """
+    {"code":404,"message":"Cette fonction n'est pas activ\u00e9e, veuillez l'activer dans l'espace d'administration !","errors":null}
+    """
 
   # Note: captcha validation is disabled in test environement
   @database
