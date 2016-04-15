@@ -85,18 +85,26 @@ class ThemeController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', [], 'CapcoAppBundle'));
         }
         $maxProjectsDisplayed = 12;
+
+        $em = $this->get('doctrine.orm.entity_manager');
         $serializer = $this->get('jms_serializer');
-        $props = $serializer->serialize([
+        $projectProps = $serializer->serialize([
             'projects' => $this
                 ->get('doctrine.orm.entity_manager')
                 ->getRepository('CapcoAppBundle:Project')
                 ->getLastByTheme($theme->getId(), $maxProjectsDisplayed, 0),
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
 
+        $ideaCreationProps = $serializer->serialize([
+            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
+            'theme' => $theme->getId(),
+        ], 'json', SerializationContext::create()->setGroups(['Themes']));
+
         return [
             'theme' => $theme,
             'maxProjectsDisplayed' => $maxProjectsDisplayed,
-            'props' => $props,
+            'projectProps' => $projectProps,
+            'ideaCreationProps' => $ideaCreationProps,
         ];
     }
 
@@ -112,14 +120,17 @@ class ThemeController extends Controller
     public function lastIdeasAction($theme, $max = 8, $offset = 0)
     {
         $em = $this->get('doctrine.orm.entity_manager');
-        $ideas = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
-        $nbIdeas = $em->getRepository('CapcoAppBundle:Idea')->countSearchResults($theme->getSlug());
+        $serializer = $this->get('jms_serializer');
+        $ideasRaw = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
+        $props = $serializer->serialize([
+            'ideas' => $ideasRaw,
+        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'Themes', 'UsersInfos']));
 
         return [
-            'ideas' => $ideas,
+            'props' => $props,
             'theme' => $theme,
             'max' => $max,
-            'nbIdeas' => $nbIdeas,
+            'nbIdeas' => count($ideasRaw),
         ];
     }
 }

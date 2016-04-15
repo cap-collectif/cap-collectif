@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\Theme;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Capco\AppBundle\Repository\ThemeRepository;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvents;
 
 class IdeaType extends AbstractType
 {
@@ -25,61 +26,46 @@ class IdeaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', [
-                'label' => 'idea.form.title',
+            ->add('title', null, [
+                'required' => true,
             ])
         ;
 
         if ($this->toggleManager->isActive('themes')) {
             $builder->add('theme', null, [
-                'label' => 'idea.form.theme',
                 'required' => true,
-                'empty_value' => 'idea.form.empty_theme',
-                'query_builder' => function (ThemeRepository $tr) {
-                    return $tr->createQueryBuilder('t')
-                        ->where('t.isEnabled = :enabled')
-                        ->setParameter('enabled', true);
-                },
             ]);
         }
 
         $builder
-            ->add('body', 'ckeditor', [
-                'label' => 'idea.form.body',
-                'config_name' => 'user_editor',
+            ->add('body', null, [
+                'required' => true,
             ])
-            ->add('object', 'ckeditor', [
-                'label' => 'idea.form.object',
-                'config_name' => 'user_editor',
+            ->add('object', null, [
+                'required' => true,
             ])
             ->add('url', 'url', [
-                'label' => 'idea.form.url',
                 'required' => false,
                 'default_protocol' => 'http',
-                'help' => 'idea.form.url_help',
-                'attr' => [
-                    'placeholder' => 'http://',
-                ],
             ])
             ->add('media', 'sonata_media_type', [
-                'label' => 'idea.form.media',
+                'required' => false,
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
+            ])
+            ->add('delete_media', 'checkbox', [
                 'required' => false,
+                'mapped' => false,
             ])
         ;
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\Idea',
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
-            'translation_domain' => 'CapcoAppBundle',
+            'csrf_protection' => false,
+            'cascade_validation' => true,
         ]);
     }
 
@@ -88,6 +74,6 @@ class IdeaType extends AbstractType
      */
     public function getName()
     {
-        return 'capco_appbundle_idea';
+        return 'idea';
     }
 }

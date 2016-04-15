@@ -38,5 +38,13 @@
     "consistent-return": 0,
     "array-callback-return": 0,
     "no-return-assign": 0
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
   }
 }

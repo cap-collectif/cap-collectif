@@ -68,7 +68,7 @@ const Comment = React.createClass({
               <CommentVoteButton comment={comment} />
               {' '}
               {this.props.root
-                ? <a onClick={this.answer.bind(this)} className="btn btn-xs btn-dark-gray btn--outline">
+                ? <a onClick={this.answer} className="btn btn-xs btn-dark-gray btn--outline">
                     <i className="cap-reply-mail-2"></i>
                     { ' ' }
                     { this.getIntlMessage('global.answer') }
@@ -88,7 +88,7 @@ const Comment = React.createClass({
               : null
             }
             {this.state.answerFormShown
-              ? <CommentForm comment={this.comment.bind(this)} focus={this.state.answerFormFocus} isAnswer />
+              ? <CommentForm comment={this.comment} focus={this.state.answerFormFocus} isAnswer />
               : null
             }
           </div>

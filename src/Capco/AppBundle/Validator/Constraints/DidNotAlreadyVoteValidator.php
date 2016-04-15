@@ -26,10 +26,13 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
         $data = [
             $constraint->objectPath => $accessor->getValue($object, $constraint->objectPath),
         ];
-        $object->hasUser()
-            ? $data['user'] = $object->getUser()
-            : $data['email'] = $object->getEmail()
-        ;
+        if ($object->hasUser()) {
+            $data['user'] = $object->getUser();
+        } elseif ($object->getEmail()) {
+            $data['email'] = $object->getEmail();
+        } else {
+            return true;
+        }
 
         // Data specific to proposal votes
         if ($object instanceof ProposalVote) {
@@ -45,7 +48,6 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
                     ->atPath('email')
                     ->addViolation()
                 ;
-
                 return false;
             }
         }
