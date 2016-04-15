@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
 import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import RegistrationButton from '../User/Registration/RegistrationButton';
@@ -30,10 +31,7 @@ const NavbarRight = React.createClass({
         }
         {
           user
-          ? <NavDropdown eventKey={3} title={
-              <span>{user.username} <span className="caret" />
-              </span>
-            } id="navbar-username">
+          ? <NavDropdown eventKey={3} title={user.username} id="navbar-username">
               {
                 user.isAdmin
                 ? <MenuItem eventKey={3.1} href="/admin">
@@ -66,4 +64,8 @@ const NavbarRight = React.createClass({
 
 });
 
-export default NavbarRight;
+const mapStateToProps = (state) => {
+  return { features: state.features };
+};
+
+export default connect(mapStateToProps)(NavbarRight);

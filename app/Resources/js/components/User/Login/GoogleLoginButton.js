@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
-import FeatureStore from '../../../stores/FeatureStore';
 
 const GoogleLoginButton = React.createClass({
   displayName: 'GoogleLoginButton',
+  propTypes: {
+    features: PropTypes.object.isRequired,
+  },
   mixins: [IntlMixin],
 
   render() {
-    if (!FeatureStore.isActive('login_gplus')) {
+    if (!this.props.features.login_gplus) {
       return null;
     }
     return (
@@ -15,10 +18,14 @@ const GoogleLoginButton = React.createClass({
        href={'/login/google?_destination=' + window.location.href}
        title="Sign in with Google"
        className="btn login__social-btn login__social-btn--googleplus"
-      >{this.getIntlMessage('gobal.login_social.google')}</a>
+      >{this.getIntlMessage('global.login_social.google')}</a>
     );
   },
 
 });
 
-export default GoogleLoginButton;
+const mapStateToProps = (state) => {
+  return { features: state.features };
+};
+
+export default connect(mapStateToProps)(GoogleLoginButton);

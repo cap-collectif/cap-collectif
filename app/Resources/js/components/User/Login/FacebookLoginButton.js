@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
-import FeatureStore from '../../../stores/FeatureStore';
 
 const FacebookLoginButton = React.createClass({
   displayName: 'FacebookLoginButton',
+  propTypes: {
+    features: PropTypes.object.isRequired,
+  },
   mixins: [IntlMixin],
 
   render() {
-    if (!FeatureStore.isActive('login_facebook')) {
+    if (!this.props.features.login_facebook) {
       return null;
     }
     return (
@@ -15,10 +18,14 @@ const FacebookLoginButton = React.createClass({
        href={'/login/facebook?_destination=' + window.location.href}
        title="Sign in with Facebook"
        className="btn login__social-btn login__social-btn--facebook"
-      >{this.getIntlMessage('gobal.login_social.facebook')}</a>
+      >{this.getIntlMessage('global.login_social.facebook')}</a>
     );
   },
 
 });
 
-export default FacebookLoginButton;
+const mapStateToProps = (state) => {
+  return { features: state.features };
+};
+
+export default connect(mapStateToProps)(FacebookLoginButton);
