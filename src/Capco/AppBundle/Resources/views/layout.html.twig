@@ -40,6 +40,10 @@
 <body>
 
 <div id="app-wrapper">
+  {{ redux_store('appStore', {
+    'features': features_list(),
+    'user': {},
+  }) }}
     {% block mainContent %}{% endblock %}
 </div>
 

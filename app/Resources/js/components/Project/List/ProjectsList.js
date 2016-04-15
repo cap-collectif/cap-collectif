@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Row } from 'react-bootstrap';
 import ProjectPreview from '../Preview/ProjectPreview';
 
 const ProjectsList = React.createClass({
   propTypes: {
-    projects: React.PropTypes.array.isRequired,
+    projects: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 

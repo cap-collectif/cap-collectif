@@ -28,6 +28,7 @@ class FeatureToggleExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('is_feature_enabled', [$this, 'getIsFeatureEnabled']),
             new \Twig_SimpleFunction('has_feature_enabled', [$this, 'getHasFeatureEnabled']),
+            new \Twig_SimpleFunction('features_list', [$this, 'getFeatures']),
        ];
     }
 
@@ -39,5 +40,10 @@ class FeatureToggleExtension extends \Twig_Extension
     public function getHasFeatureEnabled($flags)
     {
         return $this->manager->hasOneActive($flags);
+    }
+
+    public function getFeatures()
+    {
+        return $this->manager->all();
     }
 }
