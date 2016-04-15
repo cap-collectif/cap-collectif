@@ -38,11 +38,21 @@ class ProfileController extends BaseController
             'projects' => $projectsRaw,
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
         $projectsCount = count($projectsRaw);
+
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
         $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
-        $proposals = $doctrine->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
+
+        $proposalsRaw = $doctrine
+            ->getRepository('CapcoAppBundle:Proposal')
+            ->getByUser($user)
+        ;
+        $proposals = $serializer->serialize([
+            'proposals' => $proposalsRaw,
+        ], 'json', SerializationContext::create()->setGroups(["Proposals", "ProposalResponses", "UsersInfos", "UserMedias"]));
+        $proposalsCount = count($proposalsRaw);
+
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getPublicVotesByUser($user);
@@ -56,6 +66,7 @@ class ProfileController extends BaseController
             'arguments' => $arguments,
             'ideas' => $ideas,
             'proposals' => $proposals,
+            'proposalsCount' => $proposalsCount,
             'sources' => $sources,
             'comments' => $comments,
             'votes' => $votes,
@@ -83,7 +94,14 @@ class ProfileController extends BaseController
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
         $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
-        $proposals = $doctrine->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
+        $proposalsRaw = $doctrine
+            ->getRepository('CapcoAppBundle:Proposal')
+            ->getByUser($user)
+        ;
+        $proposals = $serializer->serialize([
+            'proposals' => $proposalsRaw,
+        ], 'json', SerializationContext::create()->setGroups(["Proposals", "ProposalResponses", "UsersInfos", "UserMedias"]));
+        $proposalsCount = count($proposalsRaw);
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getPublicVotesByUser($user);
@@ -97,6 +115,7 @@ class ProfileController extends BaseController
             'arguments' => $arguments,
             'ideas' => $ideas,
             'proposals' => $proposals,
+            'proposalsCount' => $proposalsCount,
             'sources' => $sources,
             'comments' => $comments,
             'votes' => $votes,
@@ -174,11 +193,21 @@ class ProfileController extends BaseController
      */
     public function showProposalsAction(User $user)
     {
-        $proposals = $this->getDoctrine()->getRepository('CapcoAppBundle:Proposal')->getByUser($user);
+        $serializer = $this->get('jms_serializer');
+        $proposalsRaw = $this
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:Proposal')
+            ->getByUser($user)
+        ;
+        $proposals = $serializer->serialize([
+            'proposals' => $proposalsRaw,
+        ], 'json', SerializationContext::create()->setGroups(["Proposals", "ProposalResponses", "UsersInfos", "UserMedias"]));
+        $proposalsCount = count($proposalsRaw);
 
         return [
             'user' => $user,
             'proposals' => $proposals,
+            'proposalsCount' => $proposalsCount,
         ];
     }
 

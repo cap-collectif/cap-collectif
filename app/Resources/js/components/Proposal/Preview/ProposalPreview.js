@@ -15,6 +15,7 @@ const ProposalPreview = React.createClass({
     proposal: React.PropTypes.object.isRequired,
     selectionStep: React.PropTypes.object,
     creditsLeft: React.PropTypes.number,
+    showAllVotes: React.PropTypes.bool,
   },
   mixins: [IntlMixin],
 
@@ -22,6 +23,7 @@ const ProposalPreview = React.createClass({
     return {
       selectionStep: null,
       creditsLeft: null,
+      showAllVotes: false,
     };
   },
 
@@ -67,7 +69,7 @@ const ProposalPreview = React.createClass({
           </div>
           <ProposalPreviewFooter
             proposal={proposal}
-            showVote={voteType !== VOTE_TYPE_DISABLED}
+            showVotes={this.props.showAllVotes || voteType !== VOTE_TYPE_DISABLED}
             votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, userHasVote)}
             selectionStepId={selectionStep ? selectionStep.id : null}
           />

@@ -9,6 +9,7 @@ const ProposalList = React.createClass({
     proposals: React.PropTypes.array.isRequired,
     selectionStep: React.PropTypes.object,
     creditsLeft: React.PropTypes.number,
+    showAllVotes: React.PropTypes.bool,
   },
   mixins: [IntlMixin],
 
@@ -16,6 +17,7 @@ const ProposalList = React.createClass({
     return {
       creditsLeft: null,
       selectionStep: null,
+      showAllVotes: false,
     };
   },
 
@@ -39,6 +41,7 @@ const ProposalList = React.createClass({
                 proposal={proposal}
                 selectionStep={this.props.selectionStep}
                 creditsLeft={this.props.creditsLeft}
+                showAllVotes={this.props.showAllVotes}
               />
             );
           })

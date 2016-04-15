@@ -6,7 +6,7 @@ const ProposalPreviewFooter = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     selectionStepId: React.PropTypes.number,
-    showVote: React.PropTypes.bool,
+    showVotes: React.PropTypes.bool,
     votesDelta: React.PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
@@ -14,7 +14,7 @@ const ProposalPreviewFooter = React.createClass({
   getDefaultProps() {
     return {
       selectionStepId: null,
-      showVote: false,
+      showVotes: false,
     };
   },
 
@@ -27,14 +27,13 @@ const ProposalPreviewFooter = React.createClass({
     if (proposal.status) {
       statusClasses['status--' + proposal.status.color] = true;
     }
-    const votesForSelectionStep = this.props.selectionStepId
+    const votesCount = this.props.selectionStepId
       ? proposal.votesCountBySelectionSteps[this.props.selectionStepId]
-        ? proposal.votesCountBySelectionSteps[this.props.selectionStepId]
-        : 0
-      : null
+        ? proposal.votesCountBySelectionSteps[this.props.selectionStepId] + this.props.votesDelta
+        : 0 + this.props.votesDelta
+      : proposal.votesCount
     ;
-    const votesCount = votesForSelectionStep + this.props.votesDelta;
-    const counterWidth = this.props.selectionStepId && this.props.showVote ? '50%' : '100%';
+    const counterWidth = this.props.showVotes ? '50%' : '100%';
 
     return (
       <div className="proposal__footer">
@@ -51,7 +50,7 @@ const ProposalPreviewFooter = React.createClass({
             </div>
           </div>
           {
-            this.props.selectionStepId && this.props.showVote
+            this.props.showVotes
             ? <div className="proposal__counter proposal__counter--votes" style={{ width: counterWidth, borderLeft: '1px solid #ccc' }}>
                 <div className="proposal__counter__value" >
                   {votesCount}

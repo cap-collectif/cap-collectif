@@ -95,7 +95,7 @@ Feature: Opinions
     And I wait 1 seconds
     Then I should see "Impacts 1"
 
-  @javascript
+  @javascript @database
   Scenario: Logged in user wants to create a linked opinion
     Given I am logged in as user
     And I go to an opinion with versions
@@ -119,7 +119,7 @@ Feature: Opinions
     When I click the show all opinion votes button
     Then I should see all opinion votes
 
-  @javascript @database
+  @javascript
   Scenario: Anonymous user wants to share an opinion
     Given I go to an opinion with versions
     When I click the share opinion button

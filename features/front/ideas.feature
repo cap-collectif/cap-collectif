@@ -1,3 +1,4 @@
+@ideas
 Feature: Ideas
 
 Background:

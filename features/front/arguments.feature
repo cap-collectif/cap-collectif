@@ -240,7 +240,7 @@ Feature: Arguments
     And I go to an opinion
     And I should not see the argument report button
 
-  @javascript
+  @javascript @database
   Scenario: Non author of an argument can report it
     Given feature "reporting" is enabled
     And I am logged in as admin

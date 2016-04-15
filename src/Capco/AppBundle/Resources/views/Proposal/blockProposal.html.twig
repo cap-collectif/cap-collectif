@@ -11,11 +11,6 @@
                     <p class="excerpt small proposal__date">
                         {{ proposal.createdAt | localizeddate('long', 'none') }}
                     </p>
-                    {% if proposal.updatedAt != proposal.createdAt %}
-                        <span class="small excerpt proposal__date">
-                            {{ 'proposal.edited_on' | trans({'%updated%': proposal.updatedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
-                        </span>
-                    {% endif %}
                 </div>
             </div>
             <div class="proposal__body" >
