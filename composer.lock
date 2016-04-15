@@ -1,11 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7bfa247d224e4685e390f2ab0e0e1f7d",
-    "content-hash": "848f5c2664bc4a5f43840ed5fc74544b",
+    "hash": "4e831afdc3f4573a70e5ec542e6cf847",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1366,6 +1365,7 @@
                 "http-client",
                 "psr-7"
             ],
+            "abandoned": "php-http/httplug",
             "time": "2015-08-12 09:35:40"
         },
         {
@@ -2007,12 +2007,12 @@
             "target-dir": "HWI/Bundle/OAuthBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hwi/HWIOAuthBundle.git",
+                "url": "https://github.com/spyl94/HWIOAuthBundle.git",
                 "reference": "4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/ed4c22a435c1c379aa7f9c2580e8a6a2e4d114d2",
+                "url": "https://api.github.com/repos/spyl94/HWIOAuthBundle/zipball/4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84",
                 "reference": "4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84",
                 "shasum": ""
             },
@@ -2779,7 +2779,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -5281,12 +5281,15 @@
             "require-dev": {
                 "aws/aws-sdk-php": "~2.7",
                 "doctrine/mongodb-odm": "~1.0",
+                "friendsofsymfony/rest-bundle": "^1.7.4|~2.0",
                 "jackalope/jackalope-doctrine-dbal": "~1.1",
+                "nelmio/api-doc-bundle": "~2.11",
                 "sonata-project/admin-bundle": "~2.3",
+                "sonata-project/block-bundle": "^2.3.7",
                 "sonata-project/datagrid-bundle": "~2.2",
                 "sonata-project/doctrine-orm-admin-bundle": "~2.3",
                 "sonata-project/formatter-bundle": "~2.2",
-                "sonata-project/seo-bundle": "^1.1.5",
+                "sonata-project/seo-bundle": "^1.1.5|~2.0",
                 "symfony/phpunit-bridge": "~2.7|~3.0"
             },
             "suggest": {
@@ -5334,7 +5337,7 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2015-05-29 10:20:08"
+            "time": "2016-02-29 17:54:52"
         },
         {
             "name": "sonata-project/notification-bundle",
@@ -7588,44 +7591,40 @@
         },
         {
             "name": "coduo/php-matcher",
-            "version": "1.1.8",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coduo/php-matcher.git",
-                "reference": "973e136747d9a9063c34987cc9f02fb38e0915e5"
+                "reference": "a48618cdf1c63e40d0968e3d940fee10af228b07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/973e136747d9a9063c34987cc9f02fb38e0915e5",
-                "reference": "973e136747d9a9063c34987cc9f02fb38e0915e5",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/a48618cdf1c63e40d0968e3d940fee10af228b07",
+                "reference": "a48618cdf1c63e40d0968e3d940fee10af228b07",
                 "shasum": ""
             },
             "require": {
-                "coduo/php-to-string": "~1.0",
+                "coduo/php-to-string": "^2",
                 "doctrine/lexer": "1.0.*",
                 "ext-filter": "*",
                 "openlss/lib-array2xml": "~0.0.9",
                 "php": ">=5.3.0",
-                "symfony/expression-language": "~2.4",
-                "symfony/property-access": "~2.3"
+                "symfony/expression-language": "^2.3|^3.0",
+                "symfony/property-access": "^2.3|^3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "^4.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Coduo\\PHPMatcher": "src/",
-                    "Coduo\\PHPMatcher\\Tests": "tests/"
-                },
-                "files": [
-                    "match.php"
-                ]
+                "psr-4": {
+                    "Coduo\\PHPMatcher\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -7641,30 +7640,31 @@
                     "email": "dabrowski@brillante.pl"
                 }
             ],
+            "description": "PHP Matcher enables you to match values with patterns",
             "keywords": [
+                "Match",
                 "json",
                 "matcher",
                 "tests"
             ],
-            "time": "2016-02-08 15:20:03"
+            "time": "2016-04-12 12:03:33"
         },
         {
             "name": "coduo/php-to-string",
-            "version": "1.0.2",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coduo/php-to-string.git",
-                "reference": "fb3f879af3878310bd05c35fbec7256b4aeaf58c"
+                "reference": "4c1d7e2e76017719edc70e944ace0ec570748a78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/fb3f879af3878310bd05c35fbec7256b4aeaf58c",
-                "reference": "fb3f879af3878310bd05c35fbec7256b4aeaf58c",
+                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/4c1d7e2e76017719edc70e944ace0ec570748a78",
+                "reference": "4c1d7e2e76017719edc70e944ace0ec570748a78",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
-                "symfony/intl": "~2.5"
+                "php": ">=5.3.0"
             },
             "require-dev": {
                 "coduo/phpspec-data-provider-extension": "^1",
@@ -7673,7 +7673,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -7701,7 +7701,7 @@
                 "to",
                 "to string"
             ],
-            "time": "2015-12-13 12:36:16"
+            "time": "2016-01-20 18:29:02"
         },
         {
             "name": "docker-php/docker-php",

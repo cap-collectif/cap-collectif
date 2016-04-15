@@ -95,7 +95,7 @@
         "phpspec/phpspec": "~2.4",
         "ocramius/proxy-manager": "^2.0",
         "guzzlehttp/guzzle": "~5.0",
-        "coduo/php-matcher": "^1.1.8",
+        "coduo/php-matcher": "~2.0",
         "docker-php/docker-php": "@dev",
         "jolicode/jolinotif": "^1.0",
         "phpunit/phpunit": "@stable",
