@@ -1128,11 +1128,12 @@ project_download:
       opinion: Proposition "%id%"
       source: Source "%id%"
       version: Modification "%id%"
-    yes: Pour
+    user_removed: Utilisateur supprimé
     votes:
       mitige: Mitigé
       nok: Contre
       ok: Pour
+    yes: Pour
 
 votes:
   none: Il n'y a pas de votes.
