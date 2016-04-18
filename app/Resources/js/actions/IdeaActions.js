@@ -19,10 +19,8 @@ import {
   DELETE_IDEA_SUCCESS,
   DELETE_IDEA_FAILURE,
 
-  CREATE_IDEA_VOTE,
   CREATE_IDEA_VOTE_SUCCESS,
   CREATE_IDEA_VOTE_FAILURE,
-  DELETE_IDEA_VOTE,
   DELETE_IDEA_VOTE_SUCCESS,
   DELETE_IDEA_VOTE_FAILURE,
 
@@ -40,10 +38,11 @@ import { UPDATE_ALERT } from '../constants/AlertConstants';
 
 export default {
 
-  initIdea: (idea) => {
+  initIdea: (idea, votes) => {
     AppDispatcher.dispatch({
       actionType: INIT_IDEA,
       idea: idea,
+      votes: votes,
     });
   },
 
@@ -242,11 +241,6 @@ export default {
 
   vote: (idea, data = {}) => {
     const hasComment = data.comment && data.comment.length > 0;
-    AppDispatcher.dispatch({
-      actionType: CREATE_IDEA_VOTE,
-      idea: idea,
-      hasComment: hasComment,
-    });
     return Fetcher
       .post(`/ideas/${idea}/votes`, data)
       .then(() => {
@@ -285,10 +279,6 @@ export default {
   },
 
   deleteVote: (idea) => {
-    AppDispatcher.dispatch({
-      actionType: DELETE_IDEA_VOTE,
-      idea: idea,
-    });
     return Fetcher
       .delete(`/ideas/${idea}/votes`)
       .then(() => {

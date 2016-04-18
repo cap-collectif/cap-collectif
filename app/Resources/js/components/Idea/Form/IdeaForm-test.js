@@ -42,7 +42,7 @@ describe('<IdeaForm />', () => {
   });
 
   it('it should render theme field when feature is enabled', () => {
-    const wrapper = shallow(<IdeaForm {...props} isSubmitting={false} showThemes={true} {...IntlData} />);
+    const wrapper = shallow(<IdeaForm {...props} isSubmitting={false} showThemes {...IntlData} />);
     const form = wrapper.find('#idea-form');
     expect(form).to.have.length(1);
     expect(form.find('#idea_theme')).to.have.length(1);

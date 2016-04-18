@@ -48,6 +48,7 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
                     ->atPath('email')
                     ->addViolation()
                 ;
+
                 return false;
             }
         }

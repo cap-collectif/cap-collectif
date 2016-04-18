@@ -4,8 +4,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
-import IdeasIndexFooter from './IdeasIndexFooter';
-
+import { IdeasIndexFooter } from './IdeasIndexFooter';
 
 const props = {
   trashUrl: 'trash.html',
@@ -17,7 +16,7 @@ const featuresIdeaTrashEnabled = {
 };
 
 const featuresIdeaTrashDisabled = {
-  idea_trash: true,
+  idea_trash: false,
 };
 
 describe('<IdeasIndexFooter />', () => {
@@ -33,7 +32,7 @@ describe('<IdeasIndexFooter />', () => {
     expect(wrapper.find('Col')).to.have.length(1);
     expect(wrapper.find('.appendices__item')).to.have.length(1);
     const message = wrapper.find('FormattedMessage');
-    expect(message.find({num: props.countTrashed})).to.have.length(1);
+    expect(message.find({ num: props.countTrashed })).to.have.length(1);
     expect(wrapper.find('#ideas-trash')).to.have.length(1);
   });
 });

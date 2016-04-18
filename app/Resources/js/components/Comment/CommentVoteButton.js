@@ -1,26 +1,29 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
+import CommentActions from '../../actions/CommentActions';
 
 const CommentVoteButton = React.createClass({
   propTypes: {
-    comment: React.PropTypes.object,
-    user: PropTypes.object,
+    comment: PropTypes.object,
+    userIsAuthor: PropTypes.bool,
+    onVote: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
-  getDefaultProps() {
-    return {
-      user: null,
-    };
+  deleteVote() {
+    CommentActions.deleteVote(this.props.comment.id)
+      .then(() => {
+        this.props.onVote();
+      })
+    ;
   },
 
-  isTheUserTheAuthor() {
-    const { comment, user } = this.props;
-    if (comment.author === null || !user) {
-      return false;
-    }
-    return user.uniqueId === comment.author.uniqueId;
+  vote() {
+    CommentActions.vote(this.props.comment.id)
+      .then(() => {
+        this.props.onVote();
+      })
+    ;
   },
 
   renderFormOrDisabled() {
@@ -34,24 +37,20 @@ const CommentVoteButton = React.createClass({
       );
     }
 
-    return (
-      <form method="POST" style={{ display: 'inline-block' }} action={this.props.comment._links.vote}>
-        { this.renderVoteButton() }
-      </form>
-    );
+    return this.renderVoteButton();
   },
 
   renderVoteButton() {
     if (this.props.comment.has_user_voted) {
       return (
-        <button className="btn btn-danger btn-xs">
+        <button className="btn btn-danger btn-xs" onClick={this.deleteVote}>
           { this.getIntlMessage('comment.vote.remove') }
         </button>
       );
     }
 
     return (
-      <button className="btn btn-success btn--outline btn-xs">
+      <button className="btn btn-success btn--outline btn-xs" onClick={this.vote}>
         <i className="cap-hand-like-2"></i>
         { ' ' }
         { this.getIntlMessage('comment.vote.submit') }

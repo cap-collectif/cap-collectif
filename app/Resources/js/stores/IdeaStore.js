@@ -43,6 +43,8 @@ class IdeaStore extends BaseStore {
     switch (action.actionType) {
       case INIT_IDEA:
         this._idea = action.idea;
+        this._votes = action.votes;
+        this._votesCount = action.idea.votesCount;
         this.emitChange();
         break;
       case SET_IDEAS_PAGINATION:

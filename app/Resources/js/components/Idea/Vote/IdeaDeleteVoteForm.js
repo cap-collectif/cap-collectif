@@ -22,7 +22,7 @@ const IdeaDeleteVoteForm = React.createClass({
         IdeaActions
           .deleteVote(idea.id)
           .then(() => {
-            this.setState(this.getInitialState());
+            ideaVoteForm.reinitState();
             this.props.onSubmitSuccess();
           })
           .catch(this.props.onFailure)

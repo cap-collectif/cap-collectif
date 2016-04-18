@@ -97,7 +97,7 @@ class ThemeController extends Controller
 
         $ideaCreationProps = $serializer->serialize([
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
-            'theme' => $theme->getId(),
+            'themeId' => $theme->getId(),
         ], 'json', SerializationContext::create()->setGroups(['Themes']));
 
         return [

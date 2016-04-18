@@ -24,7 +24,7 @@ const ideaNotCommentable = {
 
 describe('<IdeaVoteForm />', () => {
   it('should render the form with username, email, comment and private when user is not logged in', () => {
-    const wrapper = shallow(<IdeaVoteForm anonymous={true} idea={idea} {...IntlData} />);
+    const wrapper = shallow(<IdeaVoteForm anonymous idea={idea} {...IntlData} />);
     expect(wrapper.find(FlashMessages)).to.have.length(1);
     expect(wrapper.find('form')).to.have.length(1);
     expect(wrapper.find('#idea-vote-username')).to.have.length(1);
@@ -44,7 +44,7 @@ describe('<IdeaVoteForm />', () => {
   });
 
   it('should not show comment field when private is checked', () => {
-    const wrapper = shallow(<IdeaVoteForm anonymous={true} idea={idea} {...IntlData} />);
+    const wrapper = shallow(<IdeaVoteForm anonymous idea={idea} {...IntlData} />);
     expect(wrapper.find(FlashMessages)).to.have.length(1);
     expect(wrapper.find('form')).to.have.length(1);
     const state = wrapper.state();
@@ -59,7 +59,7 @@ describe('<IdeaVoteForm />', () => {
   });
 
   it('should not show private checkbox when comment is filled', () => {
-    const wrapper = shallow(<IdeaVoteForm anonymous={true} idea={idea} {...IntlData} />);
+    const wrapper = shallow(<IdeaVoteForm anonymous idea={idea} {...IntlData} />);
     expect(wrapper.find(FlashMessages)).to.have.length(1);
     expect(wrapper.find('form')).to.have.length(1);
     const state = wrapper.state();
@@ -81,17 +81,15 @@ describe('<IdeaVoteForm />', () => {
     expect(wrapper.find('#idea-vote-email')).to.have.length(0);
     expect(wrapper.find('#idea-vote-private')).to.have.length(0);
     expect(wrapper.find('#idea-vote-comment')).to.have.length(0);
-
   });
 
   it('should not show comment field when idea is not commentable', () => {
-    const wrapper = shallow(<IdeaVoteForm anonymous={true} idea={ideaNotCommentable} {...IntlData} />);
+    const wrapper = shallow(<IdeaVoteForm anonymous idea={ideaNotCommentable} {...IntlData} />);
     expect(wrapper.find(FlashMessages)).to.have.length(1);
     expect(wrapper.find('form')).to.have.length(1);
     expect(wrapper.find('#idea-vote-username')).to.have.length(1);
     expect(wrapper.find('#idea-vote-email')).to.have.length(1);
     expect(wrapper.find('#idea-vote-private')).to.have.length(1);
     expect(wrapper.find('#idea-vote-comment')).to.have.length(0);
-
   });
 });

@@ -19,10 +19,11 @@ const IdeaPage = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
-    IdeaActions.initIdea(this.props.idea);
+    IdeaActions.initIdea(this.props.idea, this.props.votes);
     return {
       idea: IdeaStore.idea,
       expandSidebar: false,
+
     };
   },
 
@@ -35,20 +36,9 @@ const IdeaPage = React.createClass({
   },
 
   onChange() {
-    if (!IdeaStore.isProcessing) {
-      this.setState({
-        idea: IdeaStore.idea,
-      });
-      return;
-    }
-
-    this.loadIdea();
-  },
-
-  loadIdea() {
-    IdeaActions.getOne(
-      this.state.idea.id
-    );
+    this.setState({
+      idea: IdeaStore.idea,
+    });
   },
 
   toggleSidebarExpand() {

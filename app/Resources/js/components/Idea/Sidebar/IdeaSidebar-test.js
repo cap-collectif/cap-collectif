@@ -15,7 +15,7 @@ const ideaNotContribuable = {
 };
 
 const props = {
-  onToggleExpand: (value) => {},
+  onToggleExpand: () => {},
 };
 
 describe('<IdeaSidebar />', () => {
@@ -34,7 +34,7 @@ describe('<IdeaSidebar />', () => {
   });
 
   it('should render expanded class when required', () => {
-    const wrapper = shallow(<IdeaSidebar idea={ideaContribuable} expanded={true} {...props} {...IntlData} />);
+    const wrapper = shallow(<IdeaSidebar idea={ideaContribuable} expanded {...props} {...IntlData} />);
     expect(wrapper.find('.sidebar-hideable')).to.have.length(2);
     expect(wrapper.find('.sidebar-hidden-small')).to.have.length(0);
   });

@@ -19,7 +19,7 @@ describe('<IdeaEditModal />', () => {
     const wrapper = shallow(<IdeaEditModal {...props} {...IntlData} />);
     const modal = wrapper.find('Modal');
     expect(modal).to.have.length(1);
-    const form = modal.find(IdeaEditForm)
+    const form = modal.find(IdeaEditForm);
     expect(form).to.have.length(1);
     expect(form.prop('themes')).to.equal(props.themes);
     expect(form.prop('isSubmitting')).to.equal(wrapper.state('isSubmitting'));

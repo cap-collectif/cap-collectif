@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
-use Symfony\Component\Form\FormError;
 
 class OpinionType extends AbstractType
 {

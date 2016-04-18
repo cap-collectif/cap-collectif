@@ -6,9 +6,6 @@ use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormError;
-use Symfony\Component\Form\FormEvents;
 
 class CommentType extends AbstractType
 {

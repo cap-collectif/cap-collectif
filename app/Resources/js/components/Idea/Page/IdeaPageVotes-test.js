@@ -41,7 +41,7 @@ describe('<IdeaPageVotes />', () => {
     expect(wrapper.find('.idea__votes')).to.have.length(1);
     expect(wrapper.find('h2')).to.have.length(1);
     const messages = wrapper.find('FormattedMessage');
-    expect(messages.find({num: idea.votesCount})).to.have.length(1);
+    expect(messages.find({ num: idea.votesCount })).to.have.length(1);
     expect(wrapper.find('Row')).to.have.length(1);
     expect(wrapper.find(UserBox)).to.have.length(2);
     const modal = wrapper.find(AllVotesModal);

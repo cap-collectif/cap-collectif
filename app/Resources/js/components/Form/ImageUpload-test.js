@@ -10,7 +10,7 @@ import Input from '../Form/Input';
 const valueLink = {};
 const preview = 'image.png';
 const id = 'id';
-const className = 'css-class'
+const className = 'css-class';
 
 describe('<ImageUpload />', () => {
   it('should show the image upload field', () => {
@@ -26,7 +26,7 @@ describe('<ImageUpload />', () => {
     expect(wrapper.find('img')).to.have.length(0);
     expect(wrapper.find(Input)).to.have.length(0);
   });
-  
+
   it('should show the preview and the delete checkbox if preview is provided', () => {
     const wrapper = shallow(<ImageUpload valueLink={valueLink} preview={preview} {...IntlData} />);
     expect(wrapper.find('img')).to.have.length(1);

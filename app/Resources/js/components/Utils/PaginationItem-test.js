@@ -25,13 +25,13 @@ describe('<PaginationItem />', () => {
   });
 
   it('should render a disabled pagination item when specified', () => {
-    const wrapper = shallow(<PaginationItem {...props} disabled={true} {...IntlData} />);
+    const wrapper = shallow(<PaginationItem {...props} disabled {...IntlData} />);
     const item = wrapper.find('li');
     expect(item.prop('className')).to.contain('disabled');
   });
 
   it('should render an active pagination item when specified', () => {
-    const wrapper = shallow(<PaginationItem {...props} active={true} {...IntlData} />);
+    const wrapper = shallow(<PaginationItem {...props} active {...IntlData} />);
     const item = wrapper.find('li');
     expect(item.prop('className')).to.contain('active');
   });

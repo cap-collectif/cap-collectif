@@ -3,7 +3,7 @@ import { IntlMixin, FormattedMessage } from 'react-intl';
 import { Row, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-const IdeasIndexFooter = React.createClass({
+export const IdeasIndexFooter = React.createClass({
   propTypes: {
     trashUrl: PropTypes.string,
     countTrashed: PropTypes.number.isRequired,

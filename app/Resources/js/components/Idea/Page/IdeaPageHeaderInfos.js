@@ -4,7 +4,7 @@ import moment from 'moment';
 import UserLink from '../../User/UserLink';
 import { connect } from 'react-redux';
 
-const IdeaPageHeaderInfos = React.createClass({
+export const IdeaPageHeaderInfos = React.createClass({
   propTypes: {
     idea: PropTypes.object.isRequired,
     features: PropTypes.object.isRequired,
@@ -98,7 +98,9 @@ const IdeaPageHeaderInfos = React.createClass({
 });
 
 const mapStateToProps = (state) => {
-  return { features: state.features };
+  return {
+    features: state.features,
+  };
 };
 
-export default connect(mapStateToProps)(IdeaPageHeaderInfos);
+export default connect(mapStateToProps, null, null, { pure: false })(IdeaPageHeaderInfos);

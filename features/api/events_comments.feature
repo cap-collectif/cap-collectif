@@ -37,7 +37,6 @@ Feature: Events comments
           "author_name": @null@,
           "is_trashed": @boolean@,
           "_links": {
-            "vote": @string@,
             "edit": @string@,
             "report": @string@
           },

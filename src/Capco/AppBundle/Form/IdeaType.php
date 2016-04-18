@@ -6,9 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormError;
-use Symfony\Component\Form\FormEvents;
 
 class IdeaType extends AbstractType
 {

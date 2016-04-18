@@ -23,7 +23,7 @@ describe('<IdeaVoteBox />', () => {
     state.anonymous = true;
     wrapper.setState(state);
     expect(wrapper.find('UserPreview')).to.have.length(0);
-    const form = wrapper.find('IdeaCreateVoteForm')
+    const form = wrapper.find('IdeaCreateVoteForm');
     expect(form).to.have.length(1);
     expect(form.prop('idea')).to.equal(props.idea);
     expect(form.prop('isSubmitting')).to.equal(wrapper.state('isSubmitting'));

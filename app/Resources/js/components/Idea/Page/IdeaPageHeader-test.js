@@ -20,7 +20,7 @@ describe('<IdeaPageHeader />', () => {
     const wrapper = shallow(<IdeaPageHeader {...props} {...IntlData} />);
     expect(wrapper.find('div.idea__header')).to.have.length(1);
     expect(wrapper.find('#idea-title')).to.have.length(1);
-    const title = wrapper.find('h1')
+    const title = wrapper.find('h1');
     expect(title).to.have.length(1);
     expect(title.text()).to.equal(props.idea.title);
     expect(wrapper.find(UserAvatar)).to.have.length(1);

@@ -8,7 +8,7 @@ import { Row, Col } from 'react-bootstrap';
 import IdeaCreate from '../Create/IdeaCreate';
 import { connect } from 'react-redux';
 
-const IdeasListFilters = React.createClass({
+export const IdeasListFilters = React.createClass({
   propTypes: {
     onChange: PropTypes.func.isRequired,
     themes: PropTypes.array.isRequired,

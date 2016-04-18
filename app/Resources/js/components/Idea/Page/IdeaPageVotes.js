@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
-import IdeaActions from '../../../actions/IdeaActions';
 import IdeaStore from '../../../stores/IdeaStore';
 import { IDEA_VOTES_TO_SHOW } from '../../../constants/IdeaConstants';
 
@@ -43,11 +42,6 @@ const IdeaPageVotes = React.createClass({
       votes: IdeaStore.votes,
       votesCount: IdeaStore.votesCount,
     });
-    return;
-  },
-
-  loadVotes() {
-    IdeaActions.loadVotes(this.props.idea.id);
   },
 
   showModal() {

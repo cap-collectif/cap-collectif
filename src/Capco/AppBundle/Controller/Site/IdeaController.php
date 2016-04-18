@@ -4,17 +4,11 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Form\IdeaVoteType;
-use Capco\AppBundle\Entity\IdeaComment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Capco\AppBundle\Event\AbstractVoteChangedEvent;
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\CommentChangedEvent;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 

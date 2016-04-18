@@ -27,14 +27,14 @@ describe('<IdeaPreviewFooter />', () => {
     expect(wrapper.find('.idea__preview__footer')).to.have.length(1);
     const messages = wrapper.find('FormattedMessage');
     expect(messages).to.have.length(1);
-    expect(messages.find({num: idea.votesCount})).to.have.length(1);
-    expect(messages.find({num: idea.commentsCount})).to.have.length(0);
+    expect(messages.find({ num: idea.votesCount })).to.have.length(1);
+    expect(messages.find({ num: idea.commentsCount })).to.have.length(0);
   });
 
   it('should render comment counter when idea is commentable', () => {
     const wrapper = shallow(<IdeaPreviewFooter idea={ideaCommentable} {...IntlData} />);
     const messages = wrapper.find('FormattedMessage');
     expect(messages).to.have.length(2);
-    expect(messages.find({num: ideaCommentable.commentsCount})).to.have.length(1);
+    expect(messages.find({ num: ideaCommentable.commentsCount })).to.have.length(1);
   });
 });

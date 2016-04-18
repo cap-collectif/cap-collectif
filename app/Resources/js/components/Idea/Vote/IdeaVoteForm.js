@@ -64,7 +64,7 @@ const IdeaVoteForm = React.createClass({
   },
 
   reinitState() {
-    this.setState(this.getInitialState());
+    this.setState(this.getInitialState);
   },
 
   formValidationRules: {},

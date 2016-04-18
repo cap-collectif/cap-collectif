@@ -23,8 +23,6 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use FOS\RestBundle\Util\Codes;
 
 class IdeasController extends FOSRestController
 {

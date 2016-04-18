@@ -7,11 +7,11 @@ import { connect } from 'react-redux';
 
 import UserAvatar from '../User/UserAvatar';
 import FlashMessages from '../Utils/FlashMessages';
-import ValidatorMixin from '../../utils/ValidatorMixin';
+import FormMixin from '../../utils/FormMixin';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 import Input from '../Form/Input';
 import { Row, Col, Button } from 'react-bootstrap';
-
+import LoginStore from '../../stores/LoginStore';
 
 const CommentForm = React.createClass({
   propTypes: {
@@ -19,8 +19,9 @@ const CommentForm = React.createClass({
     focus: PropTypes.bool,
     comment: PropTypes.func,
     user: PropTypes.object,
+    anonymous: PropTypes.bool,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin, ValidatorMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
@@ -31,11 +32,18 @@ const CommentForm = React.createClass({
 
   getInitialState() {
     return {
-      body: '',
+      form: {
+        body: '',
+        authorName: '',
+        authorEmail: '',
+      },
+      errors: {
+        body: [],
+        authorName: [],
+        authorEmail: [],
+      },
       expanded: false,
       isSubmitting: false,
-      authorName: null,
-      authorEmail: null,
     };
   },
 
@@ -43,35 +51,16 @@ const CommentForm = React.createClass({
     if (this.props.focus) {
       ReactDOM.findDOMNode(this.refs.body).focus();
     }
-    const constraints = !!this.props.user
-      ? {
-        body: {
-          notBlank: { message: 'comment.constraints.body' },
-          min: { value: 2, message: 'comment.constraints.body' },
-        },
-      }
-      : {
-        authorEmail: {
-          notBlank: { message: 'comment.constraints.author_email' },
-          isEmail: { message: 'comment.constraints.author_email' },
-        },
-        authorName: {
-          notBlank: { message: 'comment.constraints.author_name' },
-          min: { value: 2, message: 'comment.constraints.author_name' },
-        },
-        body: {
-          notBlank: { message: 'comment.constraints.body' },
-          min: { value: 2, message: 'comment.constraints.body' },
-        },
-      }
-    ;
-    this.initForm('form', constraints);
+    this.updateConstraints(this.props.anonymous);
   },
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.focus) {
       ReactDOM.findDOMNode(this.refs.body).focus();
       this.setState({ 'expanded': true });
+    }
+    if (nextProps.anonymous !== this.props.anonymous) {
+      this.updateConstraints(nextProps.anonymous);
     }
   },
 
@@ -85,13 +74,34 @@ const CommentForm = React.createClass({
     });
   },
 
+  formValidationRules: {},
+
+  updateConstraints(anonymous) {
+    this.formValidationRules = {
+      body: {
+        notBlank: { message: 'comment.constraints.body' },
+        min: { value: 2, message: 'comment.constraints.body' },
+      },
+    };
+    if (anonymous) {
+      this.formValidationRules.authorEmail = {
+        notBlank: { message: 'comment.constraints.author_email' },
+        isEmail: { message: 'comment.constraints.author_email' },
+      };
+      this.formValidationRules.authorName = {
+        notBlank: { message: 'comment.constraints.author_name' },
+        min: { value: 2, message: 'comment.constraints.author_name' },
+      };
+    }
+  },
+
   expand(newState) {
     if (!newState) {
       const $block = $(ReactDOM.findDOMNode(this.refs.commentBlock));
       if (event.relatedTarget && ($(event.relatedTarget).is($block) || $block.has($(event.relatedTarget)).length)) {
         return; // clicked on an element inside comment block
       }
-      if (this.state.body.length === 0) {
+      if (this.state.form.body.length === 0) {
         this.setState({ expanded: false, submitted: false });
         return;
       }
@@ -106,13 +116,10 @@ const CommentForm = React.createClass({
       }
 
       this.setState({ isSubmitting: true });
-
-      const data = {
-        body: this.state.body,
-      };
-      if (!this.props.user) {
-        data.authorName = this.state.authorName;
-        data.authorEmail = this.state.authorEmail;
+      const data = this.state.form;
+      if (!this.props.anonymous) {
+        delete data.authorName;
+        delete data.authorEmail;
       }
 
       this.props.comment(data)
@@ -135,7 +142,7 @@ const CommentForm = React.createClass({
   },
 
   renderAnonymous() {
-    if (!this.props.user) {
+    if (this.props.anonymous) {
       return (
         <div>
           <Row>
@@ -164,7 +171,7 @@ const CommentForm = React.createClass({
                   ref="authorName"
                   id="authorName"
                   name="authorName"
-                  valueLink={this.linkState('authorName')}
+                  valueLink={this.linkState('form.authorName')}
                   label={ this.getIntlMessage('global.fullname') }
                   help={ this.getIntlMessage('comment.public_name') }
                   groupClassName={this.getGroupStyle('authorName')}
@@ -175,7 +182,7 @@ const CommentForm = React.createClass({
                   ref="authorEmail"
                   id="authorEmail"
                   name="authorEmail"
-                  valueLink={this.linkState('authorEmail')}
+                  valueLink={this.linkState('form.authorEmail')}
                   label={ this.getIntlMessage('global.hidden_email') }
                   help={ this.getIntlMessage('comment.email_info') }
                   groupClassName={this.getGroupStyle('authorEmail')}
@@ -183,7 +190,7 @@ const CommentForm = React.createClass({
                 />
                 <Button ref="anonymousComment"
                   disabled={this.state.isSubmitting}
-                  onClick={this.state.isSubmitting ? null : this.create.bind(null, this)}
+                  onClick={this.state.isSubmitting ? null : this.create}
                   bsStyle="primary"
                 >
                   {this.state.isSubmitting
@@ -199,12 +206,12 @@ const CommentForm = React.createClass({
   },
 
   renderCommentButton() {
-    if (this.state.expanded || this.state.body.length >= 1) {
-      if (this.props.user) {
+    if (this.state.expanded || this.state.form.body.length >= 1) {
+      if (!this.props.anonymous) {
         return (
           <Button ref="loggedInComment"
             disabled={this.state.isSubmitting}
-            onClick={this.state.isSubmitting ? null : this.create.bind(null, this)}
+            onClick={this.state.isSubmitting ? null : this.create}
             bsStyle="primary"
           >
             {this.state.isSubmitting
@@ -225,14 +232,14 @@ const CommentForm = React.createClass({
     });
     return (
       <div className={classes}>
-        <UserAvatar user={this.props.user} className="pull-left" />
+        <UserAvatar user={LoginStore.user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock" onBlur={() => this.expand(false)}>
-          <form ref="form">
+          <form ref={(c) => this.form = c}>
             <Input
               type="textarea"
               name="body"
               ref="body"
-              valueLink={this.linkState('body')}
+              valueLink={this.linkState('form.body')}
               rows="2"
               onFocus={this.expand.bind(this, true)}
               placeholder={this.getIntlMessage('comment.write')}

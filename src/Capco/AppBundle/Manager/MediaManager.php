@@ -22,6 +22,7 @@ class MediaManager
         $media->setContext('default');
         $media->setEnabled(true);
         $this->mediaManager->save($media, false);
+
         return $media;
     }
 }
