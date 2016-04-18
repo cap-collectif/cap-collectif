@@ -71,6 +71,7 @@ Feature: Users
         "username": "user2",
         "email": "user2@test.com",
         "plainPassword": "supersecureuserpass",
+        "captcha": "fakekey",
         "userType": 1,
         "zipcode": "99999"
       }

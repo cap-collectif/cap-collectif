@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import mailcheck from 'mailcheck';
 import ReCAPTCHA from 'react-google-recaptcha';
 import FormMixin from '../../../utils/FormMixin';
@@ -11,6 +12,8 @@ import domains from './email_domains';
 
 const RegistrationForm = React.createClass({
   propTypes: {
+    features: PropTypes.object.isRequired,
+    user_types: PropTypes.array.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     onValidationFailure: PropTypes.func,
     onSubmitSuccess: PropTypes.func,
@@ -34,6 +37,8 @@ const RegistrationForm = React.createClass({
         plainPassword: '',
         charte: false,
         captcha: '',
+        zipcode: '',
+        userType: '',
       },
       suggestedEmail: null,
       errors: {
@@ -42,16 +47,24 @@ const RegistrationForm = React.createClass({
         plainPassword: [],
         charte: [],
         captcha: [],
+        zipcode: [],
+        userType: [],
       },
     };
   },
 
   componentWillReceiveProps(nextProps) {
-    const { isSubmitting, onSubmitSuccess, onSubmitFailure, onValidationFailure } = this.props;
+    const { isSubmitting, onSubmitSuccess, onSubmitFailure, onValidationFailure, features } = this.props;
     if (!isSubmitting && nextProps.isSubmitting) {
       if (this.isValid()) {
         const form = JSON.parse(JSON.stringify(this.state.form));
         delete form.charte;
+        if (!features.user_type) {
+          delete form.userType;
+        }
+        if (!features.zipcode_at_register) {
+          delete form.zipcode;
+        }
         return UserActions
           .register(form)
           .then((response) => {
@@ -131,8 +144,27 @@ const RegistrationForm = React.createClass({
   },
 
   render() {
+    const { features, user_types } = this.props;
     return (
       <form id="registration-form">
+        {
+          features.user_type &&
+            <Input
+              id="_user_type"
+              type="select"
+              valueLink={this.linkState('form.userType')}
+              label={this.getIntlMessage('registration.type')}
+              groupClassName={this.getGroupStyle('userType')}
+              errors={this.renderFormErrors('userType')}
+            >
+              <option value="" disabled selected>
+                {this.getIntlMessage('global.select')}
+              </option>
+              {
+                user_types.map((type) => <option key={type.id} value={type.id}>{type.name}</option>)
+              }
+            </Input>
+        }
         <Input
           id="_username"
           type="text"
@@ -167,6 +199,17 @@ const RegistrationForm = React.createClass({
           groupClassName={this.getGroupStyle('plainPassword')}
           errors={this.renderFormErrors('plainPassword')}
         />
+        {
+          features.zipcode_at_register &&
+            <Input
+              id="_zipcode"
+              type="text"
+              valueLink={this.linkState('form.zipcode')}
+              label={this.getIntlMessage('global.zipcode') + ' *'}
+              groupClassName={this.getGroupStyle('zipcode')}
+              errors={this.renderFormErrors('zipcode')}
+            />
+        }
         <Input
           id="_charte"
           type="checkbox"
@@ -188,4 +231,11 @@ const RegistrationForm = React.createClass({
 
 });
 
-export default RegistrationForm;
+const mapStateToProps = (state) => {
+  return {
+    features: state.features,
+    user_types: state.user_types,
+  };
+};
+
+export default connect(mapStateToProps)(RegistrationForm);

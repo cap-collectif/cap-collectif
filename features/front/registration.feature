@@ -1,44 +1,46 @@
+@registration
 Feature: Registration
 
   @database @javascript
-  Scenario: Anonymous wants to register with user type
-    Given feature "registration" is enabled
-    And feature "user_type" is enabled
+  Scenario: Anonymous wants to register with user type and zipcode
+    Given feature "registration", "user_type" and "zipcode_at_register" are enabled
     And I visited "home page"
-    When I follow "Inscription"
+    When I press "Inscription"
     And I fill in the following:
-    | sonata_user_registration_form_username             | Naruto42             |
-    | sonata_user_registration_form_email                | naruto42@gmail.com   |
-    | sonata_user_registration_form_plainPassword        | narutoisthebest      |
-    And I select "Citoyen" from "sonata_user_registration_form_userType"
-    And I check "sonata_user_registration_form_isTermsAccepted"
+    | _username             | Naruto42             |
+    | _email                | naruto42@gmail.com   |
+    | _password             | narutoisthebest      |
+    | _zipcode              | 94123                |
+    And I select "Citoyen" from "_user_type"
+    And I check "_charte"
     And I press "S'inscrire"
-    Then I should see "Merci ! Votre compte a bien été créé."
-    And I should see "Pour finaliser la création de votre compte, merci de cliquer sur le lien que nous venons de vous envoyer par e-mail à l'adresse naruto42@gmail.com."
+    Then I wait 3 seconds
+    Then I can see I am logged in as "Naruto42"
 
   @database @javascript
   Scenario: Anonymous wants to register
     Given feature "registration" is enabled
     And I visited "home page"
-    When I follow "Inscription"
+    When I press "Inscription"
     And I fill in the following:
-      | sonata_user_registration_form_username             | Naruto42             |
-      | sonata_user_registration_form_email                | naruto42@gmail.com   |
-      | sonata_user_registration_form_plainPassword        | narutoisthebest      |
-    And I check "sonata_user_registration_form_isTermsAccepted"
+      | _username             | Naruto42             |
+      | _email                | naruto42@gmail.com   |
+      | _password             | narutoisthebest      |
+    And I check "_charte"
     And I press "S'inscrire"
-    Then I should see "Merci ! Votre compte a bien été créé."
-    And I should see "Pour finaliser la création de votre compte, merci de cliquer sur le lien que nous venons de vous envoyer par e-mail à l'adresse naruto42@gmail.com."
+    Then I wait 3 seconds
+    Then I can see I am logged in as "Naruto42"
 
   @javascript @security
   Scenario: Anonymous wants to register with every possible errors
-    Given feature "registration" is enabled
+    Given feature "registration", "user_type" and "zipcode_at_register" are enabled
     And I visited "home page"
-    When I follow "Inscription"
+    When I press "Inscription"
     And I fill in the following:
-    | sonata_user_registration_form_username             | p                    |
-    | sonata_user_registration_form_email                | poupouil.com         |
-    | sonata_user_registration_form_plainPassword        | 1234                 |
+    | _username             | p                    |
+    | _email                | poupouil.com         |
+    | _password             | 1234                 |
+    | _zipcode              | 94                   |
     And I press "S'inscrire"
     Then I should see "Le nom doit faire au moins 2 caractères."
     And I should see "Cet email n'est pas valide."

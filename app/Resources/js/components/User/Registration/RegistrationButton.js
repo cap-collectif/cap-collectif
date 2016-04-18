@@ -35,7 +35,7 @@ const RegistrationButton = React.createClass({
           bsStyle="primary"
           className="navbar-btn btn--registration"
         >
-          { this.getIntlMessage('global.register') }
+          { this.getIntlMessage('global.registration') }
         </Button>
         <RegistrationModal
           show={this.state.show}

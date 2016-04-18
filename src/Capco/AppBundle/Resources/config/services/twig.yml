@@ -17,6 +17,12 @@ services:
     tags:
       - { name: twig.extension }
 
+  capco.twig.user_type:
+    class: Capco\AppBundle\Twig\UserTypeExtension
+    arguments: [@capco.user_type.repository]
+    tags:
+      - { name: twig.extension }
+
   capco.twig.media:
     class: Capco\AppBundle\Twig\MediaExtension
     arguments: [@service_container]

@@ -11,6 +11,14 @@ use Capco\UserBundle\Entity\UserType;
  */
 class UserTypeRepository extends EntityRepository
 {
+    public function findAllToArray()
+    {
+      $qb = $this->createQueryBuilder('ut')
+          ->select('ut.name as name, ut.id as id')
+      ;
+      return $qb->getQuery()->getArrayResult();
+    }
+
     public function getUserTypesWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
         $qb = $this->createQueryBuilder('ut')
