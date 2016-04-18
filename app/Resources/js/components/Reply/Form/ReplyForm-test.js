@@ -133,30 +133,10 @@ describe('<ReplyForm />', () => {
       {...IntlData}
     />);
     const component = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'select'));
-    expect(component).to.have.length(1);
+    expect(component).to.have.lengthOf(1);
     expect(component.prop('type')).to.equal(form.fields[3].type);
     expect(component.prop('label')).to.equal(form.fields[3].question + ' (facultatif)');
     expect(component.prop('id')).to.equal('reply-' + form.fields[3].id);
     expect(component.prop('help')).to.be.equal(form.fields[3].helpText);
-  });
-
-  it('should render disabled fields when form is disabled', () => {
-    const wrapper = shallow(<ReplyForm
-      form={form}
-      isSubmitting={isSubmitting}
-      onSubmitSuccess={handleSubmitSuccess}
-      onSubmitFailure={handleFailure}
-      onValidationFailure={handleFailure}
-      disabled
-      {...IntlData}
-    />);
-    const disabledInputs = wrapper.findWhere(n => (n.type() === Input && n.prop('disabled') === true));
-    expect(disabledInputs).to.have.length(2);
-    const disabledCheckboxes = wrapper.findWhere(n => (n.type() === Checkbox && n.prop('disabled') === true));
-    expect(disabledCheckboxes).to.have.length(1);
-    const disabledRadios = wrapper.findWhere(n => (n.type() === Radio && n.prop('disabled') === true));
-    expect(disabledRadios).to.have.length(1);
-    const enabledFields = wrapper.findWhere(n => ((n.type() === Input || n.type === Checkbox || n.type === Radio) && n.prop('disabled') === false));
-    expect(enabledFields).to.have.length(0);
   });
 });

@@ -4,6 +4,10 @@ capco_admin:
   prefix:   /
 
 # API
+
+capco_api_login_check:
+  path: /api/login_check
+
 capco_api_synthesis:
   resource: "@CapcoAppBundle/Controller/Api/SynthesisController.php"
   type: rest
@@ -11,62 +15,62 @@ capco_api_synthesis:
 
 capco_api_ideas:
   resource: "@CapcoAppBundle/Controller/Api/IdeasController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_comments:
   resource: "@CapcoAppBundle/Controller/Api/CommentsController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_features:
   resource: "@CapcoAppBundle/Controller/Api/FeaturesController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_districts:
   resource: "@CapcoAppBundle/Controller/Api/DistrictsController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_users:
   resource: "@CapcoAppBundle/Controller/Api/UsersController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_events:
   resource: "@CapcoAppBundle/Controller/Api/EventsController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_posts:
   resource: "@CapcoAppBundle/Controller/Api/PostsController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_consultation_steps:
   resource: "@CapcoAppBundle/Controller/Api/ConsultationStepsController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_selection_steps:
   resource: "@CapcoAppBundle/Controller/Api/SelectionStepsController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_opinions:
   resource: "@CapcoAppBundle/Controller/Api/OpinionsController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_opinion_types:
   resource: "@CapcoAppBundle/Controller/Api/OpinionTypesController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_projects:
   resource: "@CapcoAppBundle/Controller/Api/ProjectsController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_questionnaires:
@@ -76,37 +80,37 @@ capco_api_questionnaires:
 
 capco_api_proposal_forms:
   resource: "@CapcoAppBundle/Controller/Api/ProposalFormsController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_proposals:
   resource: "@CapcoAppBundle/Controller/Api/ProposalsController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_themes:
   resource: "@CapcoAppBundle/Controller/Api/ThemesController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_statuses:
   resource: "@CapcoAppBundle/Controller/Api/StatusesController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_arguments:
   resource: "@CapcoAppBundle/Controller/Api/ArgumentsController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_sources:
   resource: "@CapcoAppBundle/Controller/Api/SourcesController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_categories:
   resource: "@CapcoAppBundle/Controller/Api/CategoriesController.php"
-  type: rest
+  type: annotation
   prefix: /api
 
 capco_api_replies:
@@ -115,7 +119,6 @@ capco_api_replies:
   prefix: /api
 
 # App
-
 capco_app:
     resource: "@CapcoAppBundle/Controller/Site"
     type:     annotation
@@ -125,14 +128,40 @@ capco_profile_edit:
     path:      /profile/edit-profile
     defaults:  { _controller: SonataUserBundle:ProfileFOSUser1:editProfile }
 
-sonata_user_change_password:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
-    prefix: /profile
+capco_change_password:
+    path:      /profile/change-password
+    defaults:  { _controller: SonataUserBundle:ChangePasswordFOSUser1:changePassword }
+
+fos_user_resetting_request:
+    path: /resetting/request
+    defaults:  { _controller: SonataUserBundle:ResettingFOSUser1:request }
+
+fos_user_resetting_reset:
+    path: /resetting/reset
+    defaults:  { _controller: SonataUserBundle:ResettingFOSUser1:reset }
+
+fos_user_resetting_send_email:
+    path: /resetting/send-email
+    defaults:  { _controller: SonataUserBundle:ResettingFOSUser1:sendEmail }
+
+fos_user_resetting_check_email:
+    path: /resetting/check-email
+    defaults:  { _controller: SonataUserBundle:ResettingFOSUser1:checkEmail }
 
 capco_user:
     resource: "@CapcoUserBundle/Controller/"
     type: annotation
     prefix: /
+
+fos_user_registration_check_email:
+    path: /check-email
+    defaults:
+      _controller: SonataUserBundle:RegistrationFOSUser1:checkEmail
+
+fos_user_security_logout:
+    path: /logout
+    defaults:
+      _controller: SonataUserBundle:SecurityFOSUser1:logout
 
 # sonata admin...
 admin:
@@ -142,26 +171,6 @@ admin:
 _sonata_admin:
     resource: .
     type: sonata_admin
-    prefix: /admin
-
-# sonata user bundle
-sonata_user_security:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
-
-sonata_user_resetting:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
-    prefix: /resetting
-
-sonata_user_profile:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
-    prefix: /profile
-
-sonata_user_register:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
-    prefix: /register
-
-sonata_user:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /admin
 
 # sonata media
@@ -175,16 +184,7 @@ _imagine:
     type:     imagine
 
 #HWIOAuthBundle routes
-
-hwi_oauth_security:
-    resource: "@CapcoUserBundle/Resources/config/routing.xml"
-    prefix: /login
-
-hwi_oauth_connect:
-    resource: "@CapcoUserBundle/Resources/config/routing.xml"
-    prefix: /login
-
-hwi_oauth_redirect:
+hwi_oauth:
     resource: "@CapcoUserBundle/Resources/config/routing.xml"
     prefix: /login
 
@@ -193,9 +193,6 @@ facebook_login:
 
 google_login:
     path: /login/check-google
-
-nous_citoyens_login:
-    path: /login/check-nous-citoyens
 
 api_login_check:
     path: /api/login_check

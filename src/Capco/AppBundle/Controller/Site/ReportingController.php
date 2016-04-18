@@ -26,18 +26,18 @@ class ReportingController extends Controller
      */
     public function reportingOpinionVersionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $versionSlug, Request $request)
     {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
         $version = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->findOneBySlug($versionSlug);
 
-        if ($version == null) {
+        if (!$version) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        if (false == $opinion->canDisplay()) {
+        if (!$opinion->canDisplay()) {
             throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
@@ -96,17 +96,17 @@ class ReportingController extends Controller
      */
     public function reportingOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
 
-        if ($opinion == null) {
+        if (!$opinion) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        if (false == $opinion->canDisplay()) {
+        if (!$opinion->canDisplay()) {
             throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
@@ -115,10 +115,11 @@ class ReportingController extends Controller
         $project = $currentStep->getProject();
 
         $reporting = new Reporting();
-        $form = $this->createForm(new ReportingType(), $reporting);
+        $form = $this->createForm(ReportingType::class, $reporting);
 
         if ($request->getMethod() == 'POST') {
-            if ($form->handleRequest($request)->isValid()) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $reporting->setOpinion($opinion);
                 $reporting->setReporter($this->getUser());
@@ -127,18 +128,14 @@ class ReportingController extends Controller
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('reporting.success'));
 
-                return $this->redirect(
-                    $this->generateUrl(
-                        'app_project_show_opinion',
-                        [
-                            'projectSlug' => $project->getSlug(),
-                            'stepSlug' => $currentStep->getSlug(),
-                            'opinionTypeSlug' => $opinionType->getSlug(),
-                            'opinionSlug' => $opinion->getSlug(),
-                        ]
-                    )
-                );
+                return $this->redirect($this->generateUrl('app_project_show_opinion', [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $currentStep->getSlug(),
+                    'opinionTypeSlug' => $opinionType->getSlug(),
+                    'opinionSlug' => $opinion->getSlug(),
+                ]));
             } else {
+                dump($form->getErrors(true, true));
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));
             }
         }

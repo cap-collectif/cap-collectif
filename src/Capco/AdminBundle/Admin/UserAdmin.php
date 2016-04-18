@@ -126,13 +126,13 @@ class UserAdmin extends BaseAdmin
             ->add('timezone')
             ->end()
             ->with('Social')
-            ->add('facebook_url', 'url')
+            ->add('facebookUrl', 'url')
             ->add('facebook_id')
             ->add('facebook_access_token')
-            ->add('google_url', 'url')
+            ->add('googleUrl', 'url')
             ->add('google_id')
             ->add('google_access_token')
-            ->add('twitter_url', 'url')
+            ->add('twitterUrl', 'url')
             ->add('twitter_id')
             ->add('twitter_access_token')
             ->end()
@@ -221,9 +221,9 @@ class UserAdmin extends BaseAdmin
             ->add('phone', null, ['required' => false])
             ->end()
             ->with('Social')
-            ->add('facebook_url', null, ['required' => false])
-            ->add('google_url', null, ['required' => false])
-            ->add('twitter_url', null, ['required' => false])
+            ->add('facebookUrl', null, ['required' => false])
+            ->add('googleUrl', null, ['required' => false])
+            ->add('twitterUrl', null, ['required' => false])
             ->end()
             ->end()
         ;
@@ -233,10 +233,6 @@ class UserAdmin extends BaseAdmin
                 ->tab('Security')
                 ->with('Status')
                 ->add('locked', null, ['required' => false])
-                ->add('isTermsAccepted', null, [
-                    'required' => false,
-                    'data' => true,
-                ])
                 ->add('expired', null, ['required' => false])
                 ->add('enabled', null, ['required' => false])
                 ->add('credentialsExpired', null, ['required' => false])
@@ -269,11 +265,6 @@ class UserAdmin extends BaseAdmin
                 ->end()
             ;
         }
-    }
-
-    public function prePersist($user)
-    {
-        $user->setIsTermsAccepted(true);
     }
 
     public function getTemplate($name)

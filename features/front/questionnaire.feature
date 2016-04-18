@@ -26,14 +26,14 @@ Feature: Questionnaire
   Scenario: Anonymous user wants to add a reply to a questionnaire
     Given I go to a questionnaire step
     Then I should see "Vous devez être connecté pour répondre à ce questionnaire."
-    And the questionnaire form should be disabled
+    And I should not see the questionnaire form
 
   @javascript @security
   Scenario: Logged in user wants to add a reply to a closed questionnaire step
     Given I am logged in as user
     When I go to a closed questionnaire step
     Then I should see "Questionnaire terminé"
-    And the questionnaire form should be disabled
+    And I should not see the questionnaire form
 
   @javascript @database
   Scenario: Logged in user wants to add another reply when multiple replies is allowed
@@ -49,7 +49,7 @@ Feature: Questionnaire
     Given I am logged in as admin
     When I go to a questionnaire step with no multiple replies allowed
     Then I should see "Vous avez déjà répondu à ce questionnaire."
-    And the questionnaire form should be disabled
+    And I should not see the questionnaire form
 
   ## Replies list
 

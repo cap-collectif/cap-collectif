@@ -4,7 +4,7 @@ import LoginStore from '../../../stores/LoginStore';
 import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
 import ProposalVoteForm from './ProposalVoteForm';
-import LoginButton from '../../Utils/LoginButton';
+import LoginButton from '../../User/Login/LoginButton';
 import ProposalVoteBoxMessage from './ProposalVoteBoxMessage';
 import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 

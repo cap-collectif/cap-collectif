@@ -18,7 +18,6 @@ class Manager
         'idea_trash',
         'login_facebook',
         'login_gplus',
-        'login_nous_citoyens',
         'members_list',
         'newsletter',
         'projects_form',
