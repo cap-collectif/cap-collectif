@@ -42,7 +42,14 @@
 <div id="app-wrapper">
   {{ redux_store('appStore', {
     'features': features_list(),
-    'user': {},
+    'user': app.user
+      ? {
+          'username': app.user.username,
+          'isEmailConfirmed': app.user.isEmailConfirmed,
+          'isAdmin': app.user.isAdmin,
+          'email': app.user.email,
+        }
+      : null,
   }) }}
     {% block mainContent %}{% endblock %}
 </div>

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
-import FeatureStore from '../../../stores/FeatureStore';
+import { connect } from 'react-redux';
 import RegistrationModal from './RegistrationModal';
 
 const RegistrationButton = React.createClass({
+  propTypes: {
+    features: PropTypes.object.isRequired,
+  },
   mixins: [IntlMixin],
 
   getInitialState() {
@@ -22,7 +25,7 @@ const RegistrationButton = React.createClass({
   },
 
   render() {
-    if (!FeatureStore.isActive('registration')) {
+    if (!this.props.features.registration) {
       return null;
     }
     return (
@@ -44,4 +47,8 @@ const RegistrationButton = React.createClass({
 
 });
 
-export default RegistrationButton;
+const mapStateToProps = (state) => {
+  return { features: state.features };
+};
+
+export default connect(mapStateToProps)(RegistrationButton);

@@ -17,6 +17,18 @@ services:
     tags:
       - { name: twig.extension }
 
+  capco.twig.media:
+    class: Capco\AppBundle\Twig\MediaExtension
+    arguments: [@service_container]
+    tags:
+      - { name: twig.extension }
+
+  capco.twig.navigation:
+    class: Capco\AppBundle\Twig\NavigationExtension
+    arguments: [@capco.menu_item.resolver]
+    tags:
+      - { name: twig.extension }
+
   capco.twig.default_avatar:
     class: %capco.twig.default_avatar.class%
     arguments:

@@ -83,32 +83,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
-     * @Template("CapcoAppBundle:Default:navigation.html.twig")
-     */
-    public function navigationAction($pathInfo = null)
-    {
-        $headerLinks = $this->get('capco.menu_item.resolver')->getEnabledMenuItemsWithChildren(MenuItem::TYPE_HEADER);
-
-        $user = $this->getUser()
-            ? [
-                'username' => $this->getUser()->getUsername(),
-                'isAdmin' => $this->getUser()->isAdmin(),
-              ]
-            : null
-        ;
-        $props = [
-          'user' => $user
-        ];
-
-        return [
-            'props' => $props,
-            'pathInfo' => $pathInfo,
-            'headerLinks' => $headerLinks,
-        ];
-    }
-
-    /**
      * @Route("/get_api_token", name="app_get_api_token")
      */
     public function getTokenAction()

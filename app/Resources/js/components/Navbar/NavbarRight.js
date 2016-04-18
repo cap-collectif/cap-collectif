@@ -34,22 +34,20 @@ const NavbarRight = React.createClass({
           ? <NavDropdown eventKey={3} title={user.username} id="navbar-username">
               {
                 user.isAdmin
-                ? <MenuItem eventKey={3.1} href="/admin">
+                ? <MenuItem key={3.1} eventKey={3.1} href="/admin">
                     { this.getIntlMessage('navbar.admin') }
                   </MenuItem>
                 : null
               }
-              <MenuItem eventKey={3.2}>
-                <a href="/profile">{ this.getIntlMessage('navbar.profile') }</a>
+              <MenuItem key={3.2} eventKey={3.2} href="/profile">
+                { this.getIntlMessage('navbar.profile') }
               </MenuItem>
-              <MenuItem eventKey={3.3}>
-                <a href="/profile/edit-profile">{ this.getIntlMessage('navbar.user_settings') }</a>
+              <MenuItem key={3.3} eventKey={3.3} href="/profile/edit-profile">
+                { this.getIntlMessage('navbar.user_settings') }
               </MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey={3.3} id="logout-button">
-                <a onClick={this.logout} role="button">
+              <MenuItem key={3.4} divider />
+              <MenuItem key={3.5} eventKey={3.5} id="logout-button" onClick={this.logout}>
                   { this.getIntlMessage('global.logout') }
-                </a>
               </MenuItem>
             </NavDropdown>
           : <span>
@@ -65,7 +63,10 @@ const NavbarRight = React.createClass({
 });
 
 const mapStateToProps = (state) => {
-  return { features: state.features };
+  return {
+    features: state.features,
+    user: state.user,
+  };
 };
 
 export default connect(mapStateToProps)(NavbarRight);
