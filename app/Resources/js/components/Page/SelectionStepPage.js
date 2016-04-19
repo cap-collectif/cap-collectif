@@ -14,6 +14,7 @@ import StepPageHeader from '../Steps/Page/StepPageHeader';
 
 const SelectionStepPage = React.createClass({
   propTypes: {
+    proposals: React.PropTypes.array.isRequired,
     themes: React.PropTypes.array.isRequired,
     statuses: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
@@ -24,25 +25,22 @@ const SelectionStepPage = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
+    ProposalActions.initProposals(this.props.proposals, this.props.count);
     ProposalActions.initProposalVotes(this.props.step.creditsLeft);
     ProposalActions.initSortOrder(this.props.step.defaultOrder);
     return {
       proposals: ProposalStore.proposals,
-      proposalsCount: this.props.count,
+      proposalsCount: ProposalStore.proposalsCount,
       currentPage: ProposalStore.currentPage,
       creditsLeft: ProposalVoteStore.creditsLeft,
       randomOrder: ProposalStore.order === 'random',
-      isLoading: true,
+      isLoading: false,
     };
   },
 
   componentWillMount() {
     ProposalStore.addChangeListener(this.onChange);
     ProposalVoteStore.addChangeListener(this.onVoteChange);
-  },
-
-  componentDidMount() {
-    this.loadProposals();
   },
 
   componentDidUpdate(prevProps, prevState) {

@@ -37,14 +37,7 @@
         </div>
     {% endif %}
 
-    <div
-        id="render-selection-step-page"
-        data-count="{{ proposalsCount }}"
-        data-step="{{ step|escape }}"
-        data-themes='{{ themes|escape }}'
-        data-statuses='{{ statuses|escape }}'
-        data-districts='{{ districts|escape }}'
-        data-types='{{ types|escape }}'
-    >
-    </div>
+    {{ react_intl_component('SelectionStepPageApp', {
+        'props': props,
+    }) }}
 {% endblock %}

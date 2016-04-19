@@ -75,4 +75,11 @@ class DistrictAdmin extends Admin
             ])
         ;
     }
+
+    public function getFeatures()
+    {
+        return [
+            'districts',
+        ];
+    }
 }

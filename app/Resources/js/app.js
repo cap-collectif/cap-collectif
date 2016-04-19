@@ -8,9 +8,7 @@ import CommentSection from './components/Comment/CommentSection';
 import OpinionPage from './components/Opinion/OpinionPage';
 import AuthService from './services/AuthService';
 import FeatureService from './services/FeatureService';
-import CollectStepPage from './components/Page/CollectStepPage';
 import QuestionnaireStepPage from './components/Page/QuestionnaireStepPage';
-import SelectionStepPage from './components/Page/SelectionStepPage';
 import ProposalPage from './components/Proposal/Page/ProposalPage';
 import ProposalVoteBasketWidget from './components/Proposal/Vote/ProposalVoteBasketWidget';
 import ProposalsUserVotesPage from './components/Project/Votes/ProposalsUserVotesPage';
@@ -86,22 +84,6 @@ AuthService
       );
     }
 
-    if ($('#render-collect-step-page').length) {
-      ReactDOM.render(
-        <CollectStepPage
-          step={$('#render-collect-step-page').data('step').step}
-          count={$('#render-collect-step-page').data('count')}
-          form={$('#render-collect-step-page').data('form').form}
-          themes={$('#render-collect-step-page').data('themes').themes}
-          districts={$('#render-collect-step-page').data('districts').districts}
-          types={$('#render-collect-step-page').data('types').types}
-          statuses={$('#render-collect-step-page').data('statuses').statuses}
-          {...IntlData}
-        />,
-        document.getElementById('render-collect-step-page')
-      );
-    }
-
     if ($('#render-questionnaire-step-page').length) {
       ReactDOM.render(
           <QuestionnaireStepPage
@@ -112,21 +94,6 @@ AuthService
               {...IntlData}
           />,
           document.getElementById('render-questionnaire-step-page')
-      );
-    }
-
-    if ($('#render-selection-step-page').length) {
-      ReactDOM.render(
-        <SelectionStepPage
-          count={$('#render-selection-step-page').data('count')}
-          step={$('#render-selection-step-page').data('step').step}
-          themes={$('#render-selection-step-page').data('themes').themes}
-          districts={$('#render-selection-step-page').data('districts').districts}
-          types={$('#render-selection-step-page').data('types').types}
-          statuses={$('#render-selection-step-page').data('statuses').statuses}
-          {...IntlData}
-        />,
-        document.getElementById('render-selection-step-page')
       );
     }
 

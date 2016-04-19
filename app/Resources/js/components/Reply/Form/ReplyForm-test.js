@@ -82,7 +82,7 @@ describe('<ReplyForm />', () => {
     const component = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'text'));
     expect(component).to.have.lengthOf(1);
     expect(component.prop('type')).to.equal(form.fields[0].type);
-    expect(component.prop('label')).to.equal(form.fields[0].question + ' *');
+    expect(component.prop('label')).to.equal(form.fields[0].question);
     expect(component.prop('id')).to.equal('reply-' + form.fields[0].id);
     expect(component.prop('help')).to.be.empty;
   });
@@ -135,7 +135,7 @@ describe('<ReplyForm />', () => {
     const component = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'select'));
     expect(component).to.have.lengthOf(1);
     expect(component.prop('type')).to.equal(form.fields[3].type);
-    expect(component.prop('label')).to.equal(form.fields[3].question);
+    expect(component.prop('label')).to.equal(form.fields[3].question + ' (facultatif)');
     expect(component.prop('id')).to.equal('reply-' + form.fields[3].id);
     expect(component.prop('help')).to.be.equal(form.fields[3].helpText);
   });

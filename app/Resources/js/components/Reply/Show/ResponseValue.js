@@ -20,7 +20,10 @@ const ResponseValue = React.createClass({
       if (response.value.other) {
         labels.push(response.value.other);
       }
-      return <span>{labels.join(', ')}</span>;
+      return labels.length > 0
+        ? <span>{labels.join(', ')}</span>
+        : <span>{this.getIntlMessage('reply.show.response.no_value')}</span>
+      ;
     }
     return <span>{response.value}</span>;
   },

@@ -20,7 +20,7 @@ class QuestionnairePage extends Page
         'user replies' => '#user-replies',
         'user reply' => '#user-replies .reply',
         'user reply modal' => '.reply__modal--show',
-        'user first reply link' => '#user-replies .reply:first-child .btn',
+        'user first reply link' => '#user-replies .reply:first-child',
         'reply buttons' => '.reply__buttons',
         'edit reply button' => '.reply__edit-btn',
         'submit edited reply button' => '.reply__confirm-edit-btn',

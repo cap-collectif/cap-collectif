@@ -66,6 +66,4 @@ sub vcl_recv {
       unset req.http.Cookie;
     }
   }
-
-  return (hash);
 }

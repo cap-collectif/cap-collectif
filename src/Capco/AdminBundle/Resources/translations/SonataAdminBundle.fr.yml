@@ -632,12 +632,12 @@ admin:
       nb_opinions_to_display: Nombre de propositions dans l'aperçu du classement
       nb_versions_to_display: Nombre de modifications dans l'aperçu du classement
       no_proposal_form: Aucun formulaire
-      no_questionnaire: Aucun formulaire
+      no_questionnaire: Aucun questionnaire
       position: Position
       project: Projet
       proposal_form: Formulaire
       proposals: Propositions sélectionnées
-      questionnaire: Formulaire
+      questionnaire: Questionnaire
       start_at: Commence
       statuses: Statuts
       synthesis: Synthèse

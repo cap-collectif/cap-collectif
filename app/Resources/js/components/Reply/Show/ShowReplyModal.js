@@ -17,8 +17,8 @@ const ShowReplyModal = React.createClass({
   mixins: [IntlMixin],
 
   onChange() {
+    this.props.onClose();
     ReplyActions.loadUserReplies(this.props.form.id);
-    this.onClose();
   },
 
   render() {
@@ -39,8 +39,14 @@ const ShowReplyModal = React.createClass({
                 message={this.getIntlMessage('reply.show.link')}
                 date={
                   <FormattedDate
-                    value={moment(reply.created_at)}
+                    value={moment(reply.createdAt)}
                     day="numeric" month="long" year="numeric"
+                  />
+                }
+                time={
+                  <FormattedDate
+                    value={moment(reply.createdAt)}
+                    hour="numeric" minute="numeric"
                   />
                 }
             />

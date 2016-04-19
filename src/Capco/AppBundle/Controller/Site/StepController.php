@@ -272,50 +272,27 @@ class StepController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $stepJson = $serializer->serialize([
-            'step' => $step,
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
-
-        $proposalsCount = $step->getProposalForm()
-            ? $em
-                ->getRepository('CapcoAppBundle:Proposal')
-                ->countPublishedForForm($step->getProposalForm())
-            : 0
+        $searchResults = $this
+            ->get('capco.search.resolver')
+            ->searchProposals(1, 50, null, null, ['proposalForm' => $step->getProposalForm()->getId()])
         ;
 
-        $types = $serializer->serialize([
-            'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Default']));
-
-        $districts = $serializer->serialize([
-            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Districts']));
-
-        $themes = $serializer->serialize([
-            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Themes']));
-
-        $form = $step->getProposalForm()
-            ? $serializer->serialize([
-                'form' => $step->getProposalForm(),
-            ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'Questions']))
-            : null
-        ;
-
-        $statuses = $serializer->serialize([
+        $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),
-        ], 'json', SerializationContext::create()->setGroups(['Statuses']));
+            'form' => $step->getProposalForm(),
+            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
+            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
+            'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
+            'step' => $step,
+            'count' => $searchResults['count'],
+            'proposals' => $searchResults['proposals']
+        ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'Themes', 'Districts', 'Default', 'Steps', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
 
         $response = $this->render('CapcoAppBundle:Step:collect.html.twig', [
             'project' => $project,
             'currentStep' => $step,
-            'proposalsCount' => $proposalsCount,
-            'step' => $stepJson,
-            'themes' => $themes,
-            'statuses' => $statuses,
-            'districts' => $districts,
-            'types' => $types,
-            'form' => $form,
+            'proposalsCount' => $searchResults['count'],
+            'props' => $props,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
@@ -413,40 +390,38 @@ class StepController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $proposalsCount = $em
-            ->getRepository('CapcoAppBundle:Proposal')
-            ->countPublishedForSelectionStep($step)
+        $searchResults = $this
+            ->get('capco.search.resolver')
+            ->searchProposals(1, 50, $step->getDefaultSort(), null, ['selectionStep' => $step->getId()])
         ;
 
-        $types = $serializer->serialize([
-            'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Default']));
+        $user = $this->getUser();
 
-        $districts = $serializer->serialize([
-            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Districts']));
+        if ($user) {
+            $searchResults['proposals'] = $this
+                ->get('capco.proposal_votes.resolver')
+                ->addVotesToProposalsForSelectionStepAndUser(
+                    $searchResults['proposals'],
+                    $step,
+                    $user
+                )
+            ;
+        }
 
-        $themes = $serializer->serialize([
-            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Themes']));
-
-        $statuses = $serializer->serialize([
-            'statuses' => $em->getRepository('CapcoAppBundle:Status')->getByProject($project),
-        ], 'json', SerializationContext::create()->setGroups(['Statuses']));
-
-        $stepJson = $serializer->serialize([
+        $props = $serializer->serialize([
             'step' => $step,
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
+            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
+            'statuses' => $em->getRepository('CapcoAppBundle:Status')->getByProject($project),
+            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
+            'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
+            'proposals' => $searchResults['proposals'],
+            'count' => $searchResults['count'],
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Statuses', 'Themes', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias']));
 
         $response = $this->render('CapcoAppBundle:Step:selection.html.twig', [
             'project' => $project,
             'currentStep' => $step,
-            'step' => $stepJson,
-            'proposalsCount' => $proposalsCount,
-            'themes' => $themes,
-            'statuses' => $statuses,
-            'districts' => $districts,
-            'types' => $types,
+            'props' => $props,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

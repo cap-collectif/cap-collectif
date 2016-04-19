@@ -77,12 +77,6 @@ Feature: Questionnaire
 #    And I submit my edited reply
 #    Then I should see "Votre réponse a bien été modifiée."
 
-#  @javascript @security
-#  Scenario: Logged in user wants to edit a reply when he is not the author
-#    Given I am logged in as user
-#    When I go to a questionnaire step
-#    Then I should not see the edit reply button
-
 #  @javascript security
 #  Scenario: logged in user wants to edit a reply when edition is not allowed
 #    Given I am logged in as admin
@@ -106,9 +100,3 @@ Feature: Questionnaire
     And I confirm reply deletion
     Then I should see "Votre réponse a bien été supprimée."
     And I should not see my reply anymore
-
-#  @javascript @security
-#  Scenario: Logged in user wants to remove a reply when he is not the author
-#    Given I am logged in as user
-#    When I go to a questionnaire step
-#    Then I should not see the delete reply button

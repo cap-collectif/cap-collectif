@@ -147,10 +147,18 @@ const ReplyForm = React.createClass({
   },
 
   render() {
+    const optional = this.getIntlMessage('global.form.optional');
     return (
       <form id="reply-form" ref="form">
-        <FormattedHTMLMessage message={this.props.form.description} />
-        <hr />
+        {
+          this.props.form.description
+          ? <div>
+            <hr />
+            <FormattedHTMLMessage message={this.props.form.description} />
+            <hr />
+          </div>
+          : null
+        }
         {
           this.props.form.fields.map((field) => {
             const key = field.slug;
@@ -168,6 +176,7 @@ const ReplyForm = React.createClass({
                     renderFormErrors={this.renderFormErrors}
                     onChange={this.onChange}
                     values={this.state.form}
+                    labelClassName="h4"
                   />
                 );
 
@@ -181,6 +190,7 @@ const ReplyForm = React.createClass({
                     getGroupStyle={this.getGroupStyle}
                     renderFormErrors={this.renderFormErrors}
                     onChange={this.onChange}
+                    labelClassName="h4"
                   />
                 );
 
@@ -191,12 +201,13 @@ const ReplyForm = React.createClass({
                     ref={c => this['field-' + field.id] = c}
                     id={'reply-' + field.id}
                     type={inputType}
-                    label={field.question + (field.required ? ' *' : '')}
+                    label={field.question + (field.required ? '' : optional)}
                     help={field.helpText}
                     groupClassName={this.getGroupStyle(field.id)}
                     valueLink={this.linkState('form.' + field.id)}
                     errors={this.renderFormErrors(field.id)}
                     defaultValue=""
+                    labelClassName="h4"
                   >
                     <option value="" disabled>{this.getIntlMessage('global.select')}</option>
                     {
@@ -214,12 +225,13 @@ const ReplyForm = React.createClass({
                     key={key}
                     id={'reply-' + field.id}
                     type={inputType}
-                    label={field.question + (field.required ? ' *' : '')}
+                    label={field.question + (field.required ? '' : optional)}
                     help={field.helpText}
                     groupClassName={this.getGroupStyle(field.id)}
                     valueLink={this.linkState('form.' + field.id)}
                     errors={this.renderFormErrors(field.id)}
                     placeholder={this.getIntlMessage('reply.your_response')}
+                    labelClassName="h4"
                   />
                 );
             }

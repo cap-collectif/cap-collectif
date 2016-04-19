@@ -203,7 +203,11 @@ const ProposalForm = React.createClass({
   render() {
     return (
       <form id="proposal-form" ref="form">
-        <FormattedHTMLMessage message={this.props.form.description} />
+        {
+          this.props.form.description
+          ? <FormattedHTMLMessage message={this.props.form.description} />
+          : null
+        }
         <Input
           id="proposal_title"
           type="text"

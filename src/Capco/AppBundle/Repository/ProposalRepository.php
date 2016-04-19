@@ -164,7 +164,7 @@ class ProposalRepository extends EntityRepository
             ->setParameter('proposalForm', $form)
         ;
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return intval($qb->getQuery()->getSingleScalarResult());
     }
 
     public function countPublishedForSelectionStep(SelectionStep $step)
@@ -179,7 +179,7 @@ class ProposalRepository extends EntityRepository
             ->setParameter('stepId', $step->getId())
         ;
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return intval($qb->getQuery()->getSingleScalarResult());
     }
 
     /**

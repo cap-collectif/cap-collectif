@@ -1,12 +1,13 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import { LOGIN_USER, LOGOUT_USER } from '../constants/LoginConstants';
+import LocalStorageService from '../services/LocalStorageService';
 
 export default {
 
   loginUser: (jwt, user) => {
     const data = JSON.parse(user);
-    localStorage.setItem('jwt', jwt);
-    localStorage.setItem('user', JSON.stringify(data));
+    LocalStorageService.set('jwt', jwt);
+    LocalStorageService.set('user', data);
 
     AppDispatcher.dispatch({
       actionType: LOGIN_USER,
@@ -16,8 +17,8 @@ export default {
   },
 
   logoutUser: () => {
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('user');
+    LocalStorageService.remove('jwt');
+    LocalStorageService.remove('user');
 
     AppDispatcher.dispatch({
       actionType: LOGOUT_USER,

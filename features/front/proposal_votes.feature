@@ -9,11 +9,11 @@ Feature: Proposal votes
     And I go to a selection step with simple vote enabled
     And the proposal has 3 votes
     When I click the proposal vote button
-    Then the proposal should have 4 votes
     And I should see "Merci, votre vote a bien été pris en compte."
+    Then the proposal should have 4 votes
     Then I click the proposal unvote button
-    Then the proposal should have 3 votes
     And I should see "Merci, votre vote a bien été supprimé."
+    Then the proposal should have 3 votes
 
   @javascript @database @elasticsearch
   Scenario: Anonymous user wants to vote for a proposal in a selection step with a comment

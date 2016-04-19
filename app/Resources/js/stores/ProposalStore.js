@@ -7,6 +7,7 @@ import {
   INIT_PROPOSALS_ORDER,
   SUBMIT_PROPOSAL,
   VALIDATION_FAILURE,
+  INIT_PROPOSALS,
 
   CREATE_PROPOSAL_SUCCESS,
   CREATE_PROPOSAL_FAILURE,
@@ -55,6 +56,11 @@ class ProposalStore extends BaseStore {
           : action.order
         ;
         this.emitChange();
+        break;
+      case INIT_PROPOSALS:
+        this._proposals = action.proposals;
+        this._proposalsCount = action.count;
+        this._isProposalListSync = true;
         break;
       case RECEIVE_PROPOSALS:
         this._proposals = action.proposals;

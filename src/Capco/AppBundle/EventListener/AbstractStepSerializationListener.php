@@ -52,6 +52,11 @@ class AbstractStepSerializationListener extends AbstractSerializationListener
                 'class' => 'Capco\AppBundle\Entity\Steps\SynthesisStep',
                 'method' => 'onPostAbstractStep',
             ],
+            [
+                'event' => 'serializer.post_serialize',
+                'class' => 'Capco\AppBundle\Entity\Steps\QuestionnaireStep',
+                'method' => 'onPostAbstractStep',
+            ],
         ];
     }
 

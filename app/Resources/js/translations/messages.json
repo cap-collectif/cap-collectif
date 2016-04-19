@@ -176,6 +176,9 @@
     "filter_popular": "Populaires",
     "filter_random": "Tri al\u00e9atoire",
     "filter_votes": "Vot\u00e9s",
+    "form": {
+      "optional": " (facultatif)"
+    },
     "fullname": "Nom complet *",
     "hidden_email": "Adresse \u00e9lectronique (cach\u00e9e) *",
     "insert": "Ins\u00e9rer",
@@ -481,12 +484,11 @@
       }
     },
     "show": {
-      "link": "Réponse du {date}",
-      "one_link": "Voir ma réponse",
+      "link": "Réponse du {date} à {time}",
       "response": {
         "no_value": "Non répondu"
       },
-      "title": "Voir mes réponses"
+      "title": "{num, plural, =0{Aucune réponse} one{Voir ma réponse} other{Voir mes réponses}}"
     },
     "user_has_reply": {
       "error": "Vous ne pouvez remplir ce formulaire qu'une fois",

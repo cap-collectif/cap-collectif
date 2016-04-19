@@ -1,6 +1,6 @@
 import React from 'react';
 import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
-import { Button } from 'react-bootstrap';
+import { ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
 import ShowReplyModal from './ShowReplyModal';
 
@@ -8,15 +8,8 @@ const ReplyModalLink = React.createClass({
   propTypes: {
     reply: React.PropTypes.object.isRequired,
     form: React.PropTypes.object.isRequired,
-    label: React.PropTypes.string,
   },
   mixins: [IntlMixin],
-
-  getDefaultProps() {
-    return {
-      label: null,
-    };
-  },
 
   getInitialState() {
     return {
@@ -40,28 +33,29 @@ const ReplyModalLink = React.createClass({
     const { reply, form } = this.props;
 
     return (
-      <p className="reply" id={'reply-link-' + reply.id }>
-        <Button onClick={this.showModal} bsStyle="link">
-          {
-            this.props.label
-            || <FormattedMessage
-                message={this.getIntlMessage('reply.show.link')}
-                date={
-                  <FormattedDate
-                    value={moment(reply.created_at)}
-                    day="numeric" month="long" year="numeric"
-                  />
-                }
+      <ListGroupItem className="reply" id={'reply-link-' + reply.id } onClick={this.showModal}>
+        <FormattedMessage
+          message={this.getIntlMessage('reply.show.link')}
+          date={
+            <FormattedDate
+              value={moment(reply.createdAt)}
+              day="numeric" month="long" year="numeric"
             />
           }
-        </Button>
+          time={
+            <FormattedDate
+              value={moment(reply.createdAt)}
+              hour="numeric" minute="numeric"
+            />
+          }
+        />
         <ShowReplyModal
           show={this.state.showModal}
           onClose={this.hideModal}
           reply={reply}
           form={form}
         />
-      </p>
+      </ListGroupItem>
     );
   },
 

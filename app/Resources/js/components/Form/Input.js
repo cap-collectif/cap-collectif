@@ -1,8 +1,21 @@
 import React from 'react';
 import Editor from './Editor';
+import autosize from 'autosize';
 import { Input as ReactBootstrapInput } from 'react-bootstrap';
 
 export default class Input extends ReactBootstrapInput {
+
+  componentDidUpdate() {
+    if (this.props.type === 'textarea') {
+      autosize(this.getInputDOMNode());
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.type === 'textarea') {
+      autosize.destroy(this.getInputDOMNode());
+    }
+  }
 
   renderErrors() {
     return this.props.errors
@@ -23,6 +36,14 @@ export default class Input extends ReactBootstrapInput {
     return super.renderInput();
   }
 
+  renderImage() {
+    if (this.props.image) {
+      return (
+        <img src={this.props.image} />
+      );
+    }
+  }
+
   renderChildren() {
     return !this.isCheckboxOrRadio()
       ? [
@@ -34,6 +55,7 @@ export default class Input extends ReactBootstrapInput {
           ),
           this.renderIcon(),
         ]),
+        this.renderImage(),
         this.renderErrors(),
       ]
       : this.renderWrapper([
@@ -44,6 +66,7 @@ export default class Input extends ReactBootstrapInput {
         ),
         this.renderErrors(),
         this.renderHelp(),
+        this.renderImage(),
       ])
     ;
   }
@@ -57,4 +80,5 @@ Input.PropTypes = {
 Input.defaultProps = {
   errors: null,
   labelClassName: 'h5',
+  image: null,
 };

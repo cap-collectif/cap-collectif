@@ -1,6 +1,7 @@
 import React from 'react';
-import { IntlMixin } from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import ReplyModalLink from './Show/ReplyModalLink';
+import { ListGroup } from 'react-bootstrap';
 
 const UserReplies = React.createClass({
   propTypes: {
@@ -17,18 +18,25 @@ const UserReplies = React.createClass({
 
     return (
       <div id="user-replies" className="block">
-        {
-          replies.length > 1
-          ? <h3>{this.getIntlMessage('reply.show.title')}</h3>
-          : null
-        }
+        <h3>
+          <FormattedMessage
+            message={this.getIntlMessage('reply.show.title')}
+            num={replies.length}
+          />
+        </h3>
+        <ListGroup>
         {
           replies.map((reply, index) => {
             return (
-              <ReplyModalLink key={index} reply={reply} form={form} label={replies.length === 1 ? this.getIntlMessage('reply.show.one_link') : null} />
+              <ReplyModalLink
+                key={index}
+                reply={reply}
+                form={form}
+              />
             );
           })
         }
+        </ListGroup>
       </div>
     );
   },

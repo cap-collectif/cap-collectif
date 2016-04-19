@@ -5,30 +5,30 @@
     <script type="text/javascript">
         $(document).ready( function() {
 
-          const typeField = $("#{{ admin.uniqid }}_type");
-          const allowOtherLabel = $("#sonata-ba-field-container-{{ admin.uniqid }}_otherAllowed label");
-          const allowOtherField = $("#sonata-ba-field-container-{{ admin.uniqid }}_otherAllowed .sonata-ba-field > div");
+            const typeField = $("#{{ admin.uniqid }}_type");
+            const allowOtherLabel = $("#sonata-ba-field-container-{{ admin.uniqid }}_otherAllowed label");
+            const allowOtherField = $("#sonata-ba-field-container-{{ admin.uniqid }}_otherAllowed .sonata-ba-field > div");
 
-          function toggleAllowOtherField(show) {
-            if (show) {
-              allowOtherLabel.removeClass('hidden');
-              allowOtherField.removeClass('hidden');
-            } else {
-              allowOtherLabel.addClass('hidden');
-              allowOtherField.addClass('hidden');
+            function toggleAllowOtherField(show) {
+                if (show) {
+                  allowOtherLabel.removeClass('hidden');
+                  allowOtherField.removeClass('hidden');
+                } else {
+                  allowOtherLabel.addClass('hidden');
+                  allowOtherField.addClass('hidden');
+                }
             }
-          }
 
-          const initialValue = typeField.val();
-          toggleAllowOtherField(initialValue === "3" || initialValue === "5");
+            const initialValue = typeField.val();
+            toggleAllowOtherField(initialValue === "3" || initialValue === "5");
 
-           typeField.on('change', function(e) {
-              if(e.target.value === "3" || e.target.value === "5") {
+            typeField.on('change', function(e) {
+                if(e.target.value === "3" || e.target.value === "5") {
                 toggleAllowOtherField(true);
-              } else {
+                } else {
                 toggleAllowOtherField(false);
-              }
-           });
+                }
+            });
         });
     </script>
 {% endblock %}

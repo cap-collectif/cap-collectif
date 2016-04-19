@@ -4,6 +4,7 @@ import { IntlMixin } from 'react-intl';
 import RadioGroup from 'react-radio';
 import Input from './Input';
 import Other from './Other';
+import classNames from 'classnames';
 
 const Radio = React.createClass({
   propTypes: {
@@ -13,12 +14,14 @@ const Radio = React.createClass({
     renderFormErrors: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
+    labelClassName: PropTypes.string,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       disabled: false,
+      labelClassName: '',
     };
   },
 
@@ -52,13 +55,24 @@ const Radio = React.createClass({
     const field = this.props.field;
     const fieldName = 'choices-for-field-' + field.id;
 
+    const labelClasses = {
+      'control-label': true,
+    };
+    labelClasses[this.props.labelClassName] = true;
+
+    const optional = this.getIntlMessage('global.form.optional');
+
     return (
       <div
         className={'form-group ' + this.props.getGroupStyle(field.id)}
         id={this.props.id}
       >
-        <label className="control-label h5">{field.question + (field.required ? ' *' : '')}</label>
-        <span className="help-block">{field.helpText}</span>
+        <label className={classNames(labelClasses)}>
+          {field.question + (field.required ? '' : optional)}
+        </label>
+        <span className="help-block">
+          {field.helpText}
+        </span>
         <RadioGroup
           ref={c => this.radioGroup = c}
           name={fieldName}
@@ -75,7 +89,9 @@ const Radio = React.createClass({
                   type="radio"
                   label={choice.label}
                   value={choice.label}
+                  help={choice.description}
                   disabled={this.props.disabled}
+                  image={choice.image ? choice.image.url : null}
                 />
               );
             })

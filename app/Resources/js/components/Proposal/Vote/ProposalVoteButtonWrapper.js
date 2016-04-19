@@ -21,6 +21,26 @@ const ProposalVoteButtonWrapper = React.createClass({
     };
   },
 
+  getInitialState() {
+    return {
+      anonymous: !LoginStore.isLoggedIn(),
+    };
+  },
+
+  componentWillMount() {
+    LoginStore.addChangeListener(this.onChange);
+  },
+
+  componentWillUnmount() {
+    LoginStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    this.setState({
+      anonymous: !LoginStore.isLoggedIn(),
+    });
+  },
+
   selectionStepIsOpen() {
     return this.props.selectionStep && this.props.selectionStep.open;
   },
@@ -43,7 +63,7 @@ const ProposalVoteButtonWrapper = React.createClass({
       );
     }
 
-    if (LoginStore.isLoggedIn()) {
+    if (!this.state.anonymous) {
       return (
         <VoteButtonOverlay
             tooltipId={'vote-tooltip-proposal-' + this.props.proposal.id}

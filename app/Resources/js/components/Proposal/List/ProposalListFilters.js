@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import { Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-const ProposalListFilters = React.createClass({
+export const ProposalListFilters = React.createClass({
   propTypes: {
     id: React.PropTypes.number.isRequired,
-    fetchFrom: React.PropTypes.string,
-    onChange: React.PropTypes.func.isRequired,
-    theme: React.PropTypes.array.isRequired,
-    type: React.PropTypes.array.isRequired,
-    district: React.PropTypes.array.isRequired,
-    status: React.PropTypes.array.isRequired,
-    orderByVotes: React.PropTypes.bool,
+    fetchFrom: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    theme: PropTypes.array.isRequired,
+    type: PropTypes.array.isRequired,
+    district: PropTypes.array.isRequired,
+    status: PropTypes.array.isRequired,
+    orderByVotes: PropTypes.bool,
+    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -42,6 +44,11 @@ const ProposalListFilters = React.createClass({
     if (this.props.orderByVotes) {
       this.orders.push('votes');
     }
+    this.updateFilters();
+  },
+
+  componentWillReceiveProps() {
+    this.updateFilters();
   },
 
   componentDidUpdate(prevProps, prevState) {
@@ -63,7 +70,18 @@ const ProposalListFilters = React.createClass({
   },
 
   orders: ['random', 'last', 'old', 'comments'],
-  filters: ['theme', 'status', 'type', 'district'],
+  filters: ['status', 'type', 'district', 'theme'],
+
+  updateFilters() {
+    const filters = ['status', 'type'];
+    if (this.props.features.districts) {
+      filters.push('district');
+    }
+    if (this.props.features.themes) {
+      filters.push('theme');
+    }
+    this.filters = filters;
+  },
 
   handleOrderChange(ev) {
     const order = ev.target.value;
@@ -142,4 +160,8 @@ const ProposalListFilters = React.createClass({
 
 });
 
-export default ProposalListFilters;
+const mapStateToProps = (state) => {
+  return { features: state.features };
+};
+
+export default connect(mapStateToProps, null, null, { pure: false })(ProposalListFilters);

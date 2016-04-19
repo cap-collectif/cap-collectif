@@ -18,6 +18,7 @@ import {
   DELETE_PROPOSAL_SUCCESS,
   DELETE_PROPOSAL_FAILURE,
 
+  INIT_PROPOSALS,
   INIT_PROPOSAL_VOTES,
   INIT_VOTABLE_STEPS,
   INIT_PROPOSALS_ORDER,
@@ -47,6 +48,14 @@ export default {
     AppDispatcher.dispatch({
       actionType: INIT_PROPOSAL,
       proposal: proposal,
+    });
+  },
+
+  initProposals: (proposals, count) => {
+    AppDispatcher.dispatch({
+      actionType: INIT_PROPOSALS,
+      proposals: proposals,
+      count: count,
     });
   },
 

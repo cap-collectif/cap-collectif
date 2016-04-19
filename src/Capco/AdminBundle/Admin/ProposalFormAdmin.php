@@ -30,6 +30,7 @@ class ProposalFormAdmin extends Admin
             ->add('description', 'ckeditor', [
                 'label' => 'admin.fields.proposal_form.description',
                 'config_name' => 'admin_editor',
+                'required' => false,
             ])
             ->end()
         ;

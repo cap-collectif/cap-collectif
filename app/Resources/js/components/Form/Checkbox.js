@@ -3,6 +3,7 @@ import { IntlMixin } from 'react-intl';
 import CheckboxGroup from 'react-checkbox-group';
 import Input from './Input';
 import Other from './Other';
+import classNames from 'classnames';
 
 const Checkbox = React.createClass({
   propTypes: {
@@ -12,12 +13,14 @@ const Checkbox = React.createClass({
     onChange: PropTypes.func.isRequired,
     renderFormErrors: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
+    labelClassName: PropTypes.string,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       disabled: false,
+      labelClassName: '',
     };
   },
 
@@ -59,19 +62,31 @@ const Checkbox = React.createClass({
     const field = this.props.field;
     const fieldName = 'choices-for-field-' + field.id;
 
+    const labelClasses = {
+      'control-label': true,
+    };
+    labelClasses[this.props.labelClassName] = true;
+
+    const optional = this.getIntlMessage('global.form.optional');
+
     return (
       <div
         className={'form-group ' + this.props.getGroupStyle(field.id)}
         id={this.props.id}
       >
-        <label className="control-label h5">{field.question + (field.required ? ' *' : '')}</label>
-        <span className="help-block">{field.helpText}</span>
+        <label className={classNames(labelClasses)}>
+          {field.question + (field.required ? '' : optional)}
+        </label>
+        <span className="help-block">
+          {field.helpText}
+        </span>
         <CheckboxGroup
           id={fieldName}
           ref={'choices'}
           name={fieldName}
           value={this.state.value}
           onChange={this.onChange}
+          className="input-choices"
         >
           {
             this.props.field.choices.map((choice) => {
@@ -86,6 +101,7 @@ const Checkbox = React.createClass({
                     value={choice.label}
                     help={choice.description}
                     disabled={this.props.disabled}
+                    image={choice.image ? choice.image.url : null}
                   />
                 </div>
               );

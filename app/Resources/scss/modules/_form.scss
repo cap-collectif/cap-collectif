@@ -23,11 +23,15 @@ Hack form button - radio check
 
 .form-group.has-warning {
   margin-bottom: 5px;
+
+  .input-choices {
+    background-color: $warning-bg;
+  }
 }
 
 .help-block,
 .error-block {
-  font-size: 85%;
+  font-size: 14px;
   margin-top: 0;
   margin-bottom: 5px;
 }
