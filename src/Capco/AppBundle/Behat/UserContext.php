@@ -70,7 +70,7 @@ class UserContext extends DefaultContext
     public function iCanAccessAdminInNavbar()
     {
       $this->navigationContext->getPage('HomePage')->openUserDropdown();
-      $this->assertElementContainsText('#navbar-user-dropdown', 'Administration');
+      $this->assertElementContainsText('.open.dropdown > ul', 'Administration');
     }
 
     /**
