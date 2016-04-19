@@ -6,7 +6,7 @@ import NavbarRight from './NavbarRight';
 const Navbar = React.createClass({
   propTypes: {
     logo: PropTypes.string,
-    headers: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -23,8 +23,8 @@ const Navbar = React.createClass({
             <div className="skip-links-container">
                 <div className="container">
                     <ul className="skip-links-list clearfix">
-                        <li><a href="#navbar">Aller au menu</a></li>
-                        <li><a href="#main">Aller au contenu</a></li>
+                        <li><a href="#navbar">{ this.getIntlMessage('navbar.skip_links.menu') }</a></li>
+                        <li><a href="#main">{ this.getIntlMessage('navbar.skip_links.content') }</a></li>
                     </ul>
                 </div>
             </div>
@@ -32,14 +32,14 @@ const Navbar = React.createClass({
         <div className="container">
           <Navigation.Header>
             <Navigation.Brand href="/" id="home">
-              <img src={this.props.logo} title={'menu.homepage'} alt={'menu.homepage'} />
+              <img src={this.props.logo} title={this.getIntlMessage('navbar.homepage')} alt={this.getIntlMessage('navbar.homepage')} />
             </Navigation.Brand>
             <Navigation.Toggle />
           </Navigation.Header>
           <Navigation.Collapse>
               <Nav id="navbar-content">
                 {
-                  this.props.headers.map((header, index) => {
+                  this.props.items.map((header, index) => {
                     if (header.hasEnabledFeature) {
                       if (header.children.length > 0) {
                         return (

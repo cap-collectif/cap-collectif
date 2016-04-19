@@ -1,3 +1,4 @@
+@blog
 Feature: Blog
 
 Background:

@@ -43,7 +43,7 @@ sub vcl_recv {
     return (pass); # disable static files cache in dev
   }
 
-  if (req.http.host ~ "capco.dev") {
+  if (req.http.host == "capco.dev") {
     return (pass);
   }
   ## End DEV only

@@ -241,12 +241,6 @@
     "versions": "{num, plural, =0{0 modification} one{# modification} other{# modifications}}",
     "votes": "{num, plural, =0{0 vote} one{# vote} other{# votes}}"
   },
-  "navbar": {
-    "search": "Rechercher",
-    "admin": "Administration",
-    "profile": "Mon profil",
-    "user_settings": "Mes préférences"
-  },
   "opinion": {
     "add_new_source": "Proposer une source",
     "add_new_version": "Proposer une modification",
@@ -593,6 +587,17 @@
       "closed": "Termin\u00e9",
       "future": "\u00c0 venir",
       "open": "En cours"
+    }
+  },
+  "navbar": {
+    "search": "Rechercher",
+    "admin": "Administration",
+    "profile": "Mon profil",
+    "user_settings": "Mes préférences",
+    "homepage": "Accueil",
+    "skip_links": {
+      "menu": "Aller au menu",
+      "content": "Aller au contenu"
     }
   },
   "vote": {
