@@ -5,6 +5,7 @@ import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
 import LoginActions from '../../actions/LoginActions';
+import UserAvatar from '../User/UserAvatar';
 
 const NavbarRight = React.createClass({
   propTypes: {
@@ -13,8 +14,16 @@ const NavbarRight = React.createClass({
   },
   mixins: [IntlMixin],
 
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
+
   logout() {
+    // suppress jwt
     LoginActions.logoutUser();
+    // We redirect to /logout page to invalidate session on the server
     window.location.href = window.location.protocol + '//' + window.location.host + '/logout';
   },
 
@@ -31,7 +40,19 @@ const NavbarRight = React.createClass({
         }
         {
           user
-          ? <NavDropdown eventKey={3} title={user.username} id="navbar-username">
+          ? <NavDropdown
+              eventKey={3}
+              title={
+                <span>
+                  <UserAvatar user={user} size={34} style={{ marginRight: '10px' }} anchor={false} />
+                  <span className="hidden-xs">
+                    { user.username }
+                  </span>
+                </span>
+              }
+              className="navbar__dropdown"
+              id="navbar-username"
+            >
               {
                 user.isAdmin
                 ? <MenuItem key={3.1} eventKey={3.1} href="/admin">

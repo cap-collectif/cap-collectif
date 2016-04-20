@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
 
-const GoogleLoginButton = React.createClass({
+export const GoogleLoginButton = React.createClass({
   displayName: 'GoogleLoginButton',
   propTypes: {
     features: PropTypes.object.isRequired,
@@ -16,7 +15,7 @@ const GoogleLoginButton = React.createClass({
     return (
       <a
        href={'/login/google?_destination=' + window.location.href}
-       title="Sign in with Google"
+       title={this.getIntlMessage('global.login_social.google')}
        className="btn login__social-btn login__social-btn--googleplus"
       >{this.getIntlMessage('global.login_social.google')}</a>
     );
@@ -24,8 +23,4 @@ const GoogleLoginButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return { features: state.features };
-};
-
-export default connect(mapStateToProps)(GoogleLoginButton);
+export default GoogleLoginButton;

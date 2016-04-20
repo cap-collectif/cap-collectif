@@ -4,7 +4,7 @@ import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import RegistrationModal from './RegistrationModal';
 
-const RegistrationButton = React.createClass({
+export const RegistrationButton = React.createClass({
   propTypes: {
     features: PropTypes.object.isRequired,
   },

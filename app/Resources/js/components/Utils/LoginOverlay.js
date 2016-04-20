@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import LoginStore from '../../stores/LoginStore';
+import { connect } from 'react-redux';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import LoginModal from '../User/Login/LoginModal';
 import RegistrationModal from '../User/Registration/RegistrationModal';
 
-const LoginOverlay = React.createClass({
+export const LoginOverlay = React.createClass({
   propTypes: {
+    user: PropTypes.object,
+    features: PropTypes.object.isRequired,
     children: PropTypes.element.isRequired,
     enabled: PropTypes.bool,
   },
@@ -14,6 +16,7 @@ const LoginOverlay = React.createClass({
 
   getDefaultProps() {
     return {
+      user: null,
       enabled: true,
     };
   },
@@ -43,8 +46,8 @@ const LoginOverlay = React.createClass({
 
   // We add Popover if user is not connected
   render() {
-    const { children, enabled } = this.props;
-    if (!enabled || LoginStore.isLoggedIn()) {
+    const { user, features, children, enabled } = this.props;
+    if (!enabled || user) {
       return children;
     }
 
@@ -54,14 +57,17 @@ const LoginOverlay = React.createClass({
         <OverlayTrigger trigger="focus" placement="top" overlay={
           <Popover id="login-popover" title={this.getIntlMessage('vote.popover.title')}>
             <p>{ this.getIntlMessage('vote.popover.body') }</p>
-            <p>
-              <Button
-                onClick={this.handleRegistrationClick}
-                className="center-block"
-              >
-              { this.getIntlMessage('global.registration') }
-              </Button>
-            </p>
+            {
+              features.registration &&
+              <p>
+                <Button
+                  onClick={this.handleRegistrationClick}
+                  className="center-block"
+                >
+                { this.getIntlMessage('global.registration') }
+                </Button>
+              </p>
+            }
             <p>
               <Button
                 onClick={this.handleLoginClick}
@@ -90,4 +96,11 @@ const LoginOverlay = React.createClass({
 
 });
 
-export default LoginOverlay;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    features: state.features,
+  };
+};
+
+export default connect(mapStateToProps)(LoginOverlay);

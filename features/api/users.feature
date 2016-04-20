@@ -63,7 +63,7 @@ Feature: Users
     Then the JSON response status code should be 201
 
     @security
-    Scenario: Anonymous API client wants to register but data not allowed
+    Scenario: Anonymous API client wants to register with additional data
       Given feature "registration" is enabled
       When I send a POST request to "/api/users" with json:
       """

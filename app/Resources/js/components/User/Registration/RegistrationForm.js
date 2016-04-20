@@ -10,7 +10,7 @@ import FlashMessages from '../../Utils/FlashMessages';
 import Input from '../../Form/Input';
 import domains from './email_domains';
 
-const RegistrationForm = React.createClass({
+export const RegistrationForm = React.createClass({
   propTypes: {
     features: PropTypes.object.isRequired,
     user_types: PropTypes.array.isRequired,
@@ -67,12 +67,13 @@ const RegistrationForm = React.createClass({
         }
         return UserActions
           .register(form)
-          .then((response) => {
-            if (response.user) {
-              UserActions.login({ _username: form.email, _password: form.plainPassword });
-              this.setState(this.getInitialState());
-              return onSubmitSuccess();
-            }
+          .then(() => {
+            UserActions.login({ _username: form.email, _password: form.plainPassword });
+            this.setState(this.getInitialState());
+            return onSubmitSuccess();
+          })
+          .catch((error) => {
+            const response = error.response;
             if (response.errors) {
               const errors = this.state.errors;
               if (response.errors.children.email.errors && response.errors.children.email.errors.length > 0) {
@@ -114,6 +115,7 @@ const RegistrationForm = React.createClass({
     email: {
       min: { value: 2, message: 'registration.constraints.email.min' },
       max: { value: 128, message: 'registration.constraints.email.max' },
+      email: { message: 'registration.constraints.email.invalid' },
       notBlank: { message: 'global.constraints.notBlank' },
     },
     plainPassword: {
@@ -122,7 +124,7 @@ const RegistrationForm = React.createClass({
       notBlank: { message: 'global.constraints.notBlank' },
     },
     charte: {
-      isTrue: { message: 'global.constraints.notBlank' },
+      isTrue: { message: 'registration.constraints.charte.check' },
     },
     // captcha: {
     //   notBlank: { message: 'global.constraints.notBlank' },

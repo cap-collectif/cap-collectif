@@ -5,9 +5,11 @@ const status = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+  return response.json().then((res) => {
+    const error = new Error(response.statusText);
+    error.response = res;
+    throw error;
+  });
 };
 
 const json = (response) => response ? response.json() : {};
@@ -53,16 +55,6 @@ class Fetcher {
       body: JSON.stringify(body),
     })
     .then(status);
-  }
-
-  postWithoutStatusCheck(uri, body) {
-    return fetch(config.api + uri, {
-      method: 'post',
-      headers: createHeaders(),
-      beforeSend: addAuthorization,
-      body: JSON.stringify(body),
-    })
-    .then(json);
   }
 
   put(uri, body) {

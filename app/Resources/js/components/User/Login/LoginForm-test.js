@@ -14,7 +14,7 @@ describe('<LoginForm />', () => {
     onSubmitFailure: () => {},
   };
 
-  it('renders a form with inputs and a captcha', () => {
+  it('renders a form with inputs', () => {
     const wrapper = shallow(<LoginForm {...props} />);
     expect(wrapper.find('form')).to.have.length(1);
     expect(wrapper.find('form').prop('id')).to.equal('login-form');

@@ -3,7 +3,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import EmailNotConfirmedAlert from './EmailNotConfirmedAlert';
+import { EmailNotConfirmedAlert } from './EmailNotConfirmedAlert';
 import IntlData from '../../translations/FR';
 
 describe('<EmailNotConfirmedAlert />', () => {

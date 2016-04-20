@@ -135,7 +135,6 @@ class ReportingController extends Controller
                     'opinionSlug' => $opinion->getSlug(),
                 ]));
             } else {
-                dump($form->getErrors(true, true));
                 $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('reporting.error'));
             }
         }

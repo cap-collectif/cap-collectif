@@ -2,7 +2,7 @@
 Feature: Email
 
   @security
-  Scenario: Registration is disabled and API client wants resend an email
+  Scenario: Registration is disabled and API client wants to resend an email
     When I send a POST request to "/api/resend-email-confirmation"
     Then the JSON response status code should be 404
     And the JSON response should match:
@@ -56,7 +56,7 @@ Feature: Email
     """
     {
       "code": 400,
-      "message": "Email already send 1 minute ago.",
+      "message": "Email already sent less than a minute ago.",
       "errors":null
     }
     """
@@ -86,7 +86,7 @@ Feature: Email
     """
     {
       "code": 400,
-      "message": "Email already send 1 minute ago.",
+      "message": "Email already sent less than a minute ago.",
       "errors":null
     }
     """

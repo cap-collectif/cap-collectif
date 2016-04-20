@@ -341,23 +341,27 @@
        "invalid": "Veuillez valider que vous n'êtes pas un robot."
      },
      "username": {
-       "min": "Votre nom doit faire au moins 2 caractères",
-       "max": "Votre nom doit faire moins de 128 caractères"
+       "min": "Le nom doit faire au moins 2 caractères.",
+       "max": "Le nom doit faire moins de 128 caractères."
      },
      "email": {
        "min": "Votre email doit faire au moins 2 caractères",
        "max": "Votre email doit faire moins de 128 caractères",
+       "invalid": "Cet email n'est pas valide.",
        "already_used": "Cette adresse électronique est déjà utilisée."
      },
+     "charte": {
+       "check": "Veuillez cocher la case pour accepter la charte."
+     },
      "password": {
-       "min": "Votre mot de passe doit faire au moins 8 caractères",
-       "max": "Votre mot de passe doit faire moins de 128 caractères"
+       "min": "Le mot de passe doit faire au moins 8 caractères.",
+       "max": "Le mot de passe doit faire moins de 128 caractères."
      }
    }
   },
   "user": {
     "confirm": {
-      "email": "Merci de confirmer votre adresse e-mail :",
+      "email": "Merci de confirmer votre adresse e-mail : <strong>{email}</strong>",
       "sent": "Un nouveau mail de confirmation a été envoyé !",
       "sending": "Envoi en cours...",
       "update": "Mettre à jour l'adresse email",

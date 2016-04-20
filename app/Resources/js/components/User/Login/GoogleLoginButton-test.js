@@ -12,19 +12,16 @@ describe('<GoogleLoginButton />', () => {
   };
 
   it('renders nothing if login_gplus is not activate', () => {
-    GoogleLoginButton.__Rewire__('FeatureStore', {
-      isActive: () => false,
-    });
-    const wrapper = shallow(<GoogleLoginButton {...props} />);
+    const wrapper = shallow(<GoogleLoginButton features={{ 'login_gplus': false }} {...props} />);
     expect(wrapper.children()).to.have.length(0);
   });
 
   it('renders a button if feature is active', () => {
-    GoogleLoginButton.__Rewire__('FeatureStore', {
-      isActive: () => true,
-    });
-    const wrapper = shallow(<GoogleLoginButton {...props} />);
+    const wrapper = shallow(<GoogleLoginButton features={{ 'login_gplus': true }} {...props} />);
     expect(wrapper.find('a')).to.have.length(1);
-    expect(wrapper.find('a').html()).to.equal('<a href="/login/google?_destination=about:blank" title="Sign in with Google" class="btn login__social-btn login__social-btn--googleplus">Se connecter avec Google</a>');
+    expect(wrapper.find('a').prop('href')).to.equal('/login/google?_destination=about:blank');
+    expect(wrapper.find('a').prop('title')).to.equal('Se connecter avec Google');
+    expect(wrapper.find('a').prop('className')).to.equal('btn login__social-btn login__social-btn--googleplus');
+    expect(wrapper.find('a').text()).to.equal('Se connecter avec Google');
   });
 });

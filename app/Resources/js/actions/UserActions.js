@@ -24,6 +24,6 @@ export default {
   },
 
   register: (data) => {
-    return Fetcher.postWithoutStatusCheck('/users', data);
+    return Fetcher.post('/users', data);
   },
 };

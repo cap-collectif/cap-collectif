@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
 
 const FacebookLoginButton = React.createClass({
@@ -16,16 +15,14 @@ const FacebookLoginButton = React.createClass({
     return (
       <a
        href={'/login/facebook?_destination=' + window.location.href}
-       title="Sign in with Facebook"
+       title={this.getIntlMessage('global.login_social.facebook')}
        className="btn login__social-btn login__social-btn--facebook"
-      >{this.getIntlMessage('global.login_social.facebook')}</a>
+      >
+        { this.getIntlMessage('global.login_social.facebook') }
+      </a>
     );
   },
 
 });
 
-const mapStateToProps = (state) => {
-  return { features: state.features };
-};
-
-export default connect(mapStateToProps)(FacebookLoginButton);
+export default FacebookLoginButton;

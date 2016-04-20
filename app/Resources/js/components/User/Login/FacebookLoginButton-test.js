@@ -12,19 +12,16 @@ describe('<FacebookLoginButton />', () => {
   };
 
   it('renders nothing if login_facebook is not activated', () => {
-    FacebookLoginButton.__Rewire__('FeatureStore', {
-      isActive: () => false,
-    });
-    const wrapper = shallow(<FacebookLoginButton {...props} />);
+    const wrapper = shallow(<FacebookLoginButton features={{ 'login_facebook': false }} {...props} />);
     expect(wrapper.children()).to.have.length(0);
   });
 
   it('renders a button if feature is active', () => {
-    FacebookLoginButton.__Rewire__('FeatureStore', {
-      isActive: () => true,
-    });
-    const wrapper = shallow(<FacebookLoginButton {...props} />);
+    const wrapper = shallow(<FacebookLoginButton features={{ 'login_facebook': true }} {...props} />);
     expect(wrapper.find('a')).to.have.length(1);
-    expect(wrapper.find('a').html()).to.equal('<a href="/login/facebook?_destination=about:blank" title="Sign in with Facebook" class="btn login__social-btn login__social-btn--facebook">Se connecter avec Facebook</a>');
+    expect(wrapper.find('a').prop('href')).to.equal('/login/facebook?_destination=about:blank');
+    expect(wrapper.find('a').prop('title')).to.equal('Se connecter avec Facebook');
+    expect(wrapper.find('a').prop('className')).to.equal('btn login__social-btn login__social-btn--facebook');
+    expect(wrapper.find('a').text()).to.equal('Se connecter avec Facebook');
   });
 });

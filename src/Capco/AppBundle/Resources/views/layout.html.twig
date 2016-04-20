@@ -48,6 +48,11 @@
           'isEmailConfirmed': app.user.isEmailConfirmed,
           'isAdmin': app.user.isAdmin,
           'email': app.user.email,
+          'media': app.user.Media
+          ? {
+              'url': media_public_url(app.user.Media, 'default_avatar')
+            }
+          : null
         }
       : null,
     'user_types': user_type_list(),

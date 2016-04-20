@@ -3,17 +3,18 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import RegistrationForm from './RegistrationForm';
+import { RegistrationForm } from './RegistrationForm';
 import IntlData from '../../../translations/FR';
 
 describe('<RegistrationForm />', () => {
   const props = {
     ...IntlData,
     isSubmitting: false,
+    user_types: [],
   };
 
   it('renders a form with inputs and a captcha', () => {
-    const wrapper = shallow(<RegistrationForm {...props} />);
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} {...props} />);
     expect(wrapper.find('form')).to.have.length(1);
     expect(wrapper.find('form').prop('id')).to.equal('registration-form');
     expect(wrapper.find('Input')).to.have.length(4);
@@ -22,7 +23,7 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders a username input', () => {
-    const wrapper = shallow(<RegistrationForm {...props} />);
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} {...props} />);
     const input = wrapper.find('Input').first();
     expect(input.prop('id')).to.equal('_username');
     expect(input.prop('autoFocus')).to.equal(true);
@@ -33,7 +34,7 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders an email input', () => {
-    const wrapper = shallow(<RegistrationForm {...props} />);
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} {...props} />);
     const input = wrapper.find('Input').at(1);
     expect(input.prop('id')).to.equal('_email');
     expect(input.prop('type')).to.equal('text');
@@ -43,7 +44,7 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders a password input', () => {
-    const wrapper = shallow(<RegistrationForm {...props} />);
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} {...props} />);
     const input = wrapper.find('Input').at(2);
     expect(input.prop('id')).to.equal('_password');
     expect(input.prop('type')).to.equal('password');
@@ -53,7 +54,7 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders a charte checkbox', () => {
-    const wrapper = shallow(<RegistrationForm {...props} />);
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} {...props} />);
     const input = wrapper.find('Input').at(3);
     expect(input.prop('id')).to.equal('_charte');
     expect(input.prop('type')).to.equal('checkbox');

@@ -91,9 +91,9 @@ const ProposalVoteForm = React.createClass({
             this.props.onSubmitSuccess();
           })
           .catch((error) => {
-            if (error.response) {
-              this.setServerErrors(error.response);
-            }
+            this.setState({
+              serverErrors: error.response.errors,
+            });
             this.props.onSubmitFailure();
           })
         ;

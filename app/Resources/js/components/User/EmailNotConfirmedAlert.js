@@ -1,14 +1,20 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Alert, Button } from 'react-bootstrap';
 import Fetcher from '../../services/Fetcher';
 
-const EmailNotConfirmedAlert = React.createClass({
+export const EmailNotConfirmedAlert = React.createClass({
   propTypes: {
     user: PropTypes.object,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
 
   getInitialState() {
     return {
@@ -39,7 +45,10 @@ const EmailNotConfirmedAlert = React.createClass({
     return (
       <Alert bsStyle="warning" id="alert-email-not-confirmed">
         <div className="container">
-          <p>{ this.getIntlMessage('user.confirm.email') } <strong>{ user.email }</strong>.</p>
+          <FormattedHTMLMessage
+            message={this.getIntlMessage('user.confirm.email')}
+            email={user.email}
+          />
           <p style={{ marginBottom: 0 }}>
             {
               confirmationSent

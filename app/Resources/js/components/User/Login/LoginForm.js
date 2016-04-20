@@ -35,7 +35,6 @@ const LoginForm = React.createClass({
           this.setState({ hasError: true });
           this.props.onSubmitFailure();
         });
-      return;
     }
   },
 

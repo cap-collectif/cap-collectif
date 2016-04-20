@@ -115,7 +115,7 @@ class UsersController extends FOSRestController
         }
         // security against mass click email resend
         if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
-          throw new BadRequestHttpException('Email already send 1 minute ago.');
+          throw new BadRequestHttpException('Email already sent less than a minute ago.');
         }
 
         $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
