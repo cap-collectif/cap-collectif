@@ -115,7 +115,7 @@ export const RegistrationForm = React.createClass({
     email: {
       min: { value: 2, message: 'registration.constraints.email.min' },
       max: { value: 128, message: 'registration.constraints.email.max' },
-      email: { message: 'registration.constraints.email.invalid' },
+      isEmail: { message: 'registration.constraints.email.invalid' },
       notBlank: { message: 'global.constraints.notBlank' },
     },
     plainPassword: {
@@ -222,6 +222,7 @@ export const RegistrationForm = React.createClass({
         />
         <div className={this.getGroupStyle('captcha')}>
           <ReCAPTCHA
+            style={{ transform: 'scale(0.85)', transformOrigin: '0 0' }}
             sitekey="6LctYxsTAAAAANsAl06GxNeV5xGaPjy5jbDe-J8M"
             onChange={this.handleCaptchaChange}
           />

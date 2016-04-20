@@ -40,7 +40,7 @@ const RegistrationModal = React.createClass({
         animation={false}
         show={show}
         onHide={onClose}
-        dialogClassName="w335"
+        bsSize="small"
         aria-labelledby="contained-modal-title-lg"
       >
         <Modal.Header closeButton>

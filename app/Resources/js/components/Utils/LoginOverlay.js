@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import LoginModal from '../User/Login/LoginModal';
 import RegistrationModal from '../User/Registration/RegistrationModal';
+import FeatureStore from '../../stores/FeatureStore';
 
-export const LoginOverlay = React.createClass({
+const LoginOverlay = React.createClass({
   propTypes: {
     user: PropTypes.object,
-    features: PropTypes.object.isRequired,
     children: PropTypes.element.isRequired,
     enabled: PropTypes.bool,
   },
@@ -46,7 +45,7 @@ export const LoginOverlay = React.createClass({
 
   // We add Popover if user is not connected
   render() {
-    const { user, features, children, enabled } = this.props;
+    const { user, children, enabled } = this.props;
     if (!enabled || user) {
       return children;
     }
@@ -58,7 +57,7 @@ export const LoginOverlay = React.createClass({
           <Popover id="login-popover" title={this.getIntlMessage('vote.popover.title')}>
             <p>{ this.getIntlMessage('vote.popover.body') }</p>
             {
-              features.registration &&
+              FeatureStore.isActive('registration') &&
               <p>
                 <Button
                   onClick={this.handleRegistrationClick}
@@ -96,11 +95,5 @@ export const LoginOverlay = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-    features: state.features,
-  };
-};
 
-export default connect(mapStateToProps)(LoginOverlay);
+export default LoginOverlay;

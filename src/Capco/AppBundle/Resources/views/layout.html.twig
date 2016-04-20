@@ -41,6 +41,7 @@
 
 <div id="app-wrapper">
   {{ redux_store('appStore', {
+    'baseUrl': app.request.schemeAndHttpHost,
     'features': features_list(),
     'user': app.user
       ? {

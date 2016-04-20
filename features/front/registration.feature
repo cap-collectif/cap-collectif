@@ -14,7 +14,7 @@ Feature: Registration
     And I select "Citoyen" from "_user_type"
     And I check "_charte"
     And I press "S'inscrire"
-    Then I wait 3 seconds
+    Then I wait 4 seconds
     Then I can see I am logged in as "Naruto42"
 
   @database @javascript
@@ -28,7 +28,7 @@ Feature: Registration
       | _password             | narutoisthebest      |
     And I check "_charte"
     And I press "S'inscrire"
-    Then I wait 3 seconds
+    Then I wait 4 seconds
     Then I can see I am logged in as "Naruto42"
 
   @javascript @security

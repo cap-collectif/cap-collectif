@@ -32,7 +32,7 @@ services:
 
   capco.contribution.manager:
     class: Capco\AppBundle\Manager\ContributionManager
-    arguments: [@capco.notify_manager, @doctrine.orm.entity_manager]
+    arguments: [@doctrine.orm.entity_manager]
 
   ## Toggle
   capco.toggle.manager:

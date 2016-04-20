@@ -3,13 +3,12 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { LoginOverlay } from './LoginOverlay';
+import LoginOverlay from './LoginOverlay';
 import IntlData from '../../translations/FR';
 
 describe('<LoginOverlay />', () => {
   const props = {
     ...IntlData,
-    features: { registration: false },
   };
 
   it('renders children if not enabled', () => {

@@ -5,7 +5,6 @@ namespace spec\Capco\AppBundle\Manager;
 use PhpSpec\ObjectBehavior;
 
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Manager\Notify;
 use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Opinion;
@@ -19,10 +18,9 @@ use Doctrine\Orm\EntityManager;
 
 class ContributionManagerSpec extends ObjectBehavior
 {
-
-    function let(Notify $notifier, EntityManager $em)
+    function let(EntityManager $em)
     {
-        $this->beConstructedWith($notifier, $em);
+        $this->beConstructedWith($em);
     }
 
     function it_is_initializable()
@@ -30,8 +28,10 @@ class ContributionManagerSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Manager\ContributionManager');
     }
 
-    function it_can_depublish_contribution_of_a_user(User $user, OpinionVote $vote, Proposal $proposal, Opinion $opinion, OpinionVersion $version, Idea $idea, Comment $comment, Argument $argument, Source $source)
+    function it_can_depublish_contribution_of_a_user(EntityManager $em, User $user, OpinionVote $vote, Proposal $proposal, Opinion $opinion, OpinionVersion $version, Idea $idea, Comment $comment, Argument $argument, Source $source)
     {
+      $this->beConstructedWith($em);
+
       $user->getVotes()->willReturn([$vote]);
 
       $proposal->setEnabled(false)->willReturn($proposal);
@@ -55,9 +55,9 @@ class ContributionManagerSpec extends ObjectBehavior
       $source->setIsEnabled(false)->willReturn($source);
       $user->getSources()->willReturn([$source]);
 
+      $em->remove($vote)->shouldBeCalled();
+
       $this->depublishContributions($user);
 
-      $this->notifier->sendDepublishContributionEmail(true)->shouldHaveBeenCalled();
-      $this->em->remove($vote)->shouldHaveBeenCalled();
     }
 }

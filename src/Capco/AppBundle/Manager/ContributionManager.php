@@ -3,14 +3,12 @@
 namespace Capco\AppBundle\Manager;
 
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Manager\Notify;
 use Doctrine\ORM\EntityManager;
 
 class ContributionManager
 {
-    public function __construct(Notify $notifier, EntityManager $em)
+    public function __construct(EntityManager $em)
     {
-      $this->notifier = $notifier;
       $this->em = $em;
     }
 
