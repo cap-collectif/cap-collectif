@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aa41736b93fc9bb5de70cb89a6184fa8",
-    "content-hash": "a41a593dd2670f29bd794372bfc2547b",
+    "hash": "5ba08648639bd2e7ac8a106611b156f4",
+    "content-hash": "31c6cf7d775bd20cf474ea192bc091f5",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1366,6 +1366,7 @@
                 "http-client",
                 "psr-7"
             ],
+            "abandoned": "php-http/httplug",
             "time": "2015-08-12 09:35:40"
         },
         {
@@ -2106,7 +2107,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84"
+                "reference": "3b7f7bffd546d40ee40054ac2d1264492cbe6286"
             },
             "dist": {
                 "type": "zip",
@@ -2877,7 +2878,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -5377,12 +5378,15 @@
             "require-dev": {
                 "aws/aws-sdk-php": "~2.7",
                 "doctrine/mongodb-odm": "~1.0",
+                "friendsofsymfony/rest-bundle": "^1.7.4|~2.0",
                 "jackalope/jackalope-doctrine-dbal": "~1.1",
+                "nelmio/api-doc-bundle": "~2.11",
                 "sonata-project/admin-bundle": "~2.3",
+                "sonata-project/block-bundle": "^2.3.7",
                 "sonata-project/datagrid-bundle": "~2.2",
                 "sonata-project/doctrine-orm-admin-bundle": "~2.3",
                 "sonata-project/formatter-bundle": "~2.2",
-                "sonata-project/seo-bundle": "^1.1.5",
+                "sonata-project/seo-bundle": "^1.1.5|~2.0",
                 "symfony/phpunit-bridge": "~2.7|~3.0"
             },
             "suggest": {
@@ -5430,7 +5434,7 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2015-05-29 10:20:08"
+            "time": "2016-02-29 17:54:52"
         },
         {
             "name": "sonata-project/notification-bundle",
@@ -5520,7 +5524,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/e1e021a30ca0693e181e17f4bf5636d0e300330f",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/9f7df77921116127600deefa840346c6451a4eb5",
                 "reference": "e1e021a30ca0693e181e17f4bf5636d0e300330f",
                 "shasum": ""
             },

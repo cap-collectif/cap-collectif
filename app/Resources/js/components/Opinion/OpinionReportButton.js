@@ -45,7 +45,7 @@ const OpinionReportButton = React.createClass({
         <LoginOverlay>
           <Button
             className="opinion__action--report pull-right btn--outline btn-dark-gray"
-            href={reported ? null : this.props.opinion._links.report}
+            href={reported || !LoginStore.isLoggedIn() ? null : this.props.opinion._links.report}
             active={reported}
           >
             <i className="cap cap-flag-1"></i>

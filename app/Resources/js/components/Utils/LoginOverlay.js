@@ -54,7 +54,7 @@ const LoginOverlay = React.createClass({
     const { showRegistration, showLogin } = this.state;
     return (
      <span>
-        <OverlayTrigger trigger="focus" placement="top" overlay={
+        <OverlayTrigger trigger="click" rootClose placement="top" overlay={
           <Popover id="login-popover" title={this.getIntlMessage('vote.popover.title')}>
             <p>{ this.getIntlMessage('vote.popover.body') }</p>
             {
