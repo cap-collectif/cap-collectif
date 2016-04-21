@@ -7,6 +7,7 @@ import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
 import Radio from '../../Form/Radio';
 import Checkbox from '../../Form/Checkbox';
+import Ranking from '../../Form/Ranking';
 import ReplyActions from '../../../actions/ReplyActions';
 
 const ReplyForm = React.createClass({
@@ -230,6 +231,20 @@ const ReplyForm = React.createClass({
                       })
                     }
                   </Input>
+                );
+
+              case 'ranking':
+                return (
+                  <Ranking
+                    key={key}
+                    ref={c => this['field-' + field.id] = c}
+                    id={'reply-' + field.id}
+                    field={field}
+                    getGroupStyle={this.getGroupStyle}
+                    renderFormErrors={this.renderFormErrors}
+                    onChange={this.onChange}
+                    labelClassName="h4"
+                  />
                 );
 
               default:

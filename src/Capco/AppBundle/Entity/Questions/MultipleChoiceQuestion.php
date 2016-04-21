@@ -37,6 +37,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
         self::QUESTION_TYPE_RADIO => 'question.types.radio',
         self::QUESTION_TYPE_SELECT => 'question.types.select',
         self::QUESTION_TYPE_CHECKBOX => 'question.types.checkbox',
+        self::QUESTION_TYPE_RANKING => 'question.types.ranking',
     ];
 
     public function __construct()

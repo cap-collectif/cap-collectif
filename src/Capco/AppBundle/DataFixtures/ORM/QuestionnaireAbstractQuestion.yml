@@ -31,3 +31,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: @questionnaire3
     question: @simplequestion5
     position: 1
+  qaq9:
+    questionnaire: @questionnaire1
+    question: @multiplequestion4
+    position: 5

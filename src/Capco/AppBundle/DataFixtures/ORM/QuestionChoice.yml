@@ -32,3 +32,12 @@ Capco\AppBundle\Entity\QuestionChoice:
   questionchoice11:
     title: Pas assez fort (Mon sonotone est en panne)
     position: 3
+  questionchoice12:
+      title: Choix 1
+      position: 1
+  questionchoice13:
+    title: Choix 2
+    position: 2
+  questionchoice14:
+    title: Choix 3
+    position: 3

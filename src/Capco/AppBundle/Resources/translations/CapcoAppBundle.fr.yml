@@ -1185,6 +1185,7 @@ question:
     radio: Boutons radio (une seule réponse possible)
     select: Liste déroulante (une seule réponse possible)
     checkbox: Cases à cocher (plusieurs réponses possibles)
+    ranking: Vote avec classement (plusieurs réponses possibles)
 
 search:
   title: Rechercher sur le site

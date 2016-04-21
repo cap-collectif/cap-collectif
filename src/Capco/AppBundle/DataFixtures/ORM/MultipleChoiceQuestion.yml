@@ -22,3 +22,10 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     required: false
     type: 4
     randomQuestionChoices: true
+  multiplequestion4:
+    title: Classez vos choix
+    helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
+    questionChoices: [@questionchoice12, @questionchoice13, @questionchoice14]
+    required: false
+    type: 6
+    randomQuestionChoices: true

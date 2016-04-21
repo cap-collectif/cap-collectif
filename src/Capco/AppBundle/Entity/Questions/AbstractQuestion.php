@@ -37,6 +37,7 @@ abstract class AbstractQuestion
     const QUESTION_TYPE_RADIO = 3;
     const QUESTION_TYPE_SELECT = 4;
     const QUESTION_TYPE_CHECKBOX = 5;
+    const QUESTION_TYPE_RANKING = 6;
 
     public static $questionTypesInputs = [
         self::QUESTION_TYPE_SIMPLE_TEXT => 'text',
@@ -45,6 +46,7 @@ abstract class AbstractQuestion
         self::QUESTION_TYPE_RADIO => 'radio',
         self::QUESTION_TYPE_SELECT => 'select',
         self::QUESTION_TYPE_CHECKBOX => 'checkbox',
+        self::QUESTION_TYPE_RANKING => 'ranking',
     ];
 
     public static $questionTypesLabels = [];
@@ -88,6 +90,7 @@ abstract class AbstractQuestion
     /**
      * @var string
      * @Assert\NotNull()
+     * @Assert\Range(min=1, max=6)
      * @ORM\Column(name="type", nullable=false)
      */
     protected $type;
