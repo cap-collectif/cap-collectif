@@ -2,16 +2,21 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import ReplyForm from './ReplyForm';
 import SubmitButton from '../../Form/SubmitButton';
-import LoginStore from '../../../stores/LoginStore';
-import { Alert } from 'react-bootstrap';
 import ReplyActions from '../../../actions/ReplyActions';
 
 const ReplyCreateForm = React.createClass({
+  displayName: 'ReplyCreateForm',
   propTypes: {
     form: PropTypes.object.isRequired,
-    userReplies: PropTypes.array.isRequired,
+    disabled: PropTypes.bool,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      disabled: false,
+    };
+  },
 
   getInitialState() {
     return {
@@ -43,24 +48,6 @@ const ReplyCreateForm = React.createClass({
 
   render() {
     const { form } = this.props;
-    if (!form.contribuable) {
-      return null;
-    }
-    if (!LoginStore.isLoggedIn()) {
-      return (
-        <Alert bsStyle="warning">
-            <strong>{this.getIntlMessage('reply.not_logged_in.error')}</strong>
-        </Alert>
-      );
-    }
-    if (this.props.userReplies.length > 0 && !form.multipleRepliesAllowed) {
-      return (
-        <Alert bsStyle="warning">
-            <strong>{this.getIntlMessage('reply.user_has_reply.reason')}</strong>
-            <p>{this.getIntlMessage('reply.user_has_reply.error')}</p>
-        </Alert>
-      );
-    }
     return (
       <div id="create-reply-form">
         <ReplyForm
@@ -70,11 +57,13 @@ const ReplyCreateForm = React.createClass({
           onSubmitSuccess={this.handleSubmitSuccess}
           onSubmitFailure={this.handleFailure}
           onValidationFailure={this.handleFailure}
+          disabled={this.props.disabled}
         />
         <SubmitButton
           id="submit-create-reply"
           isSubmitting={this.state.isSubmitting}
           onSubmit={this.handleSubmit}
+          disabled={this.props.disabled}
         />
     </div>
     );

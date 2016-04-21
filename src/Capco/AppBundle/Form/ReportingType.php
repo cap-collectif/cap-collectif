@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Entity\Reporting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ReportingType extends AbstractType
 {
@@ -27,13 +26,6 @@ class ReportingType extends AbstractType
                 'label' => 'reporting.form.body',
             ])
         ;
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults([
-            'csrf_protection' => false,
-        ]);
     }
 
     /**

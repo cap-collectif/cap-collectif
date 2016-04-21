@@ -33,7 +33,7 @@ Scenario: Can not create an idea from homepage when idea creation is disabled
 
 # Create
 
-@javascript @database
+@database
 Scenario: Can create an idea when logged in
   Given feature "themes" is enabled
   And feature "idea_creation" is enabled
@@ -59,7 +59,7 @@ Scenario: Can not create an idea when not logged in
   Then I should see "Se connecter"
 
 # Update
-@javascript @database
+@database
 Scenario: Author of an idea loose their votes when updating it
   Given I am logged in as user
   And I visited "ideas page"
@@ -73,14 +73,14 @@ Scenario: Author of an idea loose their votes when updating it
   Then I should see "Merci ! Votre idée a bien été modifiée."
   And I should not see "1 vote"
 
-@javascript
+@parallel-scenario
 Scenario: Non author of an idea wants to update it
   Given I am logged in as admin
   And I visited "ideas page"
   And I follow "Dernière idée"
   Then I should not see "Modifier" in the ".pull-right" element
 
-@javascript
+@parallel-scenario
 Scenario: Author of an idea try to update without checking the confirm checkbox
   Given I am logged in as user
   And I visited "ideas page"
@@ -196,7 +196,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
     When I follow "Soutenir avec mon compte"
     Then I should see "Se connecter"
 
-  @javascript @database
+  @database
   Scenario: Logged in user wants to vote
    Given I am logged in as user
    And I visited "idea page" with:
@@ -217,7 +217,6 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
     When I follow "Voir la corbeille"
     Then I should see "Se connecter"
 
-  @javascript
   Scenario: Ideas trash display correct number of elements
     Given feature "idea_trash" is enabled
     And I am logged in as user

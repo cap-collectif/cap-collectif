@@ -3,29 +3,29 @@ imports:
 
 framework:
   test: ~
+  # session:
+  #   storage_id: session.storage.mock_file
   profiler:
     collect: false
-
 
 web_profiler:
   toolbar: false
   intercept_redirects: false
 
-services:
-    # We disable captcha validation
-    capco.recaptcha.validator:
-          class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
-          arguments: [@request_stack, '%recaptcha_private_key%', false]
-          tags:
-              - { name: validator.constraint_validator, alias: recaptcha.validator }
+swiftmailer:
+  mailers:
+    default:
+      disable_delivery: true
+    service:
+      disable_delivery: true
 
-# monolog:
-#     handlers:
-#         main:
-#             type:   stream
-#             path:   php://stderr
-#             level:  warning
-#         file:
-#             type: stream
-#             path: %kernel.logs_dir%/test.log
-#             level: debug
+monolog:
+    handlers:
+        main:
+            type:   stream
+            path:   php://stderr
+            level:  warning
+        file:
+            type: stream
+            path: %kernel.logs_dir%/test.log
+            level: debug

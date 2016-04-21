@@ -12,14 +12,6 @@
     "Modernizr": true,
     "jQuery": true
   },
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true,
-      "experimentalObjectRestSpread": true,
-    }
-  },
   "rules": {
     "no-confusing-arrow": 0,
     "no-nested-ternary": 0,

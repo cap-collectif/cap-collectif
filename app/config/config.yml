@@ -102,7 +102,7 @@ doctrine:
           Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface: Capco\UserBundle\Entity\User
 
 swiftmailer:
-    default_mailer: "%swiftmailer_service%"
+    default_mailer: default
     mailers:
         default:
             transport: "%mailer_transport%"
@@ -110,11 +110,12 @@ swiftmailer:
             port: "%mailer_port%"
             username: "%mailer_user%"
             password: "%mailer_password%"
-        mailcatcher:
+        service:
+            transport: "%mailer_transport%"
             host: "%mailer_host%"
             port: "%mailer_port%"
-            username: ~
-            password: ~
+            username: "%mailer_user%"
+            password: "%mailer_password%"
 
 # Stof\DoctrineExtensionBundle configuration
 stof_doctrine_extensions:
@@ -163,7 +164,6 @@ hwi_oauth:
     connect:
         account_connector: my_user_provider
     firewall_names: [main]
-    target_path_parameter: _destination
     fosub:
         username_iterations: 30
         properties:
@@ -268,30 +268,20 @@ fos_rest:
     view:
         view_response_listener: true
         failed_validation: HTTP_BAD_REQUEST
-        empty_content: 204
         formats:
             jsonp: true
             json: true
             xml: false
             rss: false
         templating_formats:
-            html: true
-        force_redirects:
-            html: true
+          html: true
     format_listener:
-        enabled: true
         rules:
-            - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: false }
+            - { path: ^/api, fallback_format: json }
             - { path: ^/, stop: true }
-    # versioning: false
     body_listener:
-        enabled: true
         decoders:
             json: fos_rest.decoder.json
-        # array_normalizer:
-        #     service: fos_rest.normalizer.camel_keys_with_leading_underscore
-        #     forms: true
-        # throw_exception_on_unsupported_content_type: false
     body_converter:
         enabled: true
         validate: true
@@ -301,24 +291,14 @@ fos_rest:
     serializer:
         serialize_null: true
     exception:
-        enabled: true
         codes:
-            'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': 400
-            'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': 401
-            'Symfony\Component\Security\Core\Exception\AuthenticationException': 401
-            'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': 403
-            'Symfony\Component\Security\Core\Exception\AccessDeniedException': 403
-            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': 404
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
-            'Doctrine\ORM\OptimisticLockException': 409
+            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': 404
+            'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
         messages:
-            'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': true
-            'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': true
-            'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': true
-            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': true
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
-            'Symfony\Component\Security\Core\Exception\AccessDeniedException': true
-            'Symfony\Component\Security\Core\Exception\AuthenticationException': true
+            'Symfony\Component\HttpKernel\Exception\HttpException': true
+            'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': true
 
 lexik_jwt_authentication:
     private_key_path: %jwt_private_key_path%

@@ -14,7 +14,7 @@ Feature: Ideas
   Scenario: Non admin wants to get voters of an idea
     Given I am logged in to api as user
     When I send a GET request to "/api/ideas/1/voters"
-    Then the JSON response status code should be 401
+    Then the JSON response status code should be 403
 
   @parallel-scenario
   Scenario: Admin wants to get voters of an idea
@@ -33,3 +33,4 @@ Feature: Ideas
       ]
     }
     """
+

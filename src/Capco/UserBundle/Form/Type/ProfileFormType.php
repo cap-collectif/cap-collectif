@@ -18,17 +18,17 @@ class ProfileFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('twitterUrl', null, [
+            ->add('twitter_url', null, [
                 'label' => 'user.profile.edit.twitter',
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
             ])
-            ->add('facebookUrl', null, [
+            ->add('facebook_url', null, [
                 'label' => 'user.profile.edit.facebook',
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
             ])
-            ->add('googleUrl', null, [
+            ->add('google_url', null, [
                 'label' => 'user.profile.edit.gplus',
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,

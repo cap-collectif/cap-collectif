@@ -1,5 +1,4 @@
 import LoginActions from '../actions/LoginActions';
-import LocalStorageService from './LocalStorageService.js';
 
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -15,10 +14,6 @@ function json(response) {
 class AuthService {
 
   login() {
-    if (LocalStorageService.isValid('jwt') && LocalStorageService.isValid('user')) {
-      LoginActions.cachedLoginUser();
-      return Promise.resolve();
-    }
     return fetch(window.location.protocol + '//' + window.location.host + '/get_api_token', {
       method: 'get',
       credentials: 'same-origin',

@@ -15,6 +15,7 @@ import ProposalsUserVotesPage from './components/Project/Votes/ProposalsUserVote
 import ProjectStatsPage from './components/Project/Stats/ProjectStatsPage';
 import AlertBox from './components/Alert/AlertBox';
 import StepInfos from './components/Steps/Page/StepInfos';
+import ProposalList from './components/Proposal/List/ProposalList';
 
 FeatureService.load();
 
@@ -143,6 +144,17 @@ AuthService
           {...IntlData}
         />,
         document.getElementById('render-opinion-version')
+      );
+    }
+
+    if ($('#render-proposals-list').length) {
+      ReactDOM.render(
+        <ProposalList
+          proposals={$('#render-proposals-list').data('proposals').proposals}
+          showAllVotes={$('#render-proposals-list').data('show-all-votes')}
+          {...IntlData}
+        />,
+        document.getElementById('render-proposals-list')
       );
     }
   }

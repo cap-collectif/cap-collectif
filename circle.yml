@@ -29,7 +29,9 @@ test:
         - fab testing.qa.behat:fast_failure=false,profile=javascript
         - fab testing.qa.checkcs
     post:
-        - docker stop $(docker ps -a -q) && fab testing.circle.save_logs
+        - docker ps
+        - docker stop $(docker ps -a -q)
+        - fab testing.circle.save_logs
 
 deployment:
     preprod:

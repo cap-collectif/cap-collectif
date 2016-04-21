@@ -136,23 +136,6 @@ Feature: Events comments
     }
     """
     Then the JSON response status code should be 400
-    And the JSON response should match:
-    """
-    {
-      "code": 400,
-      "message": "Validation Failed",
-      "errors": {
-        "children": {
-          "body":[],
-          "parent":[],
-          "authorName":{
-            "errors":["comment.create.no_author_error"]
-          },
-          "authorEmail":[]
-        }
-      }
-    }
-    """
 
   ### Logged
 

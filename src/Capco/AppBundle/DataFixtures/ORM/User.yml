@@ -10,7 +10,7 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser2
-        confirmationToken: ~
+        isTermsAccepted: true
 
     user2:
         username: sfavot
@@ -24,10 +24,10 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser1
         city: Antony
+        isTermsAccepted: true
         website: www.sfavot.fr
         biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
         vip: true
-        confirmationToken: ~
 
     user3:
         username: xlacot
@@ -40,7 +40,7 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser3
-        confirmationToken: ~
+        isTermsAccepted: true
 
     user4:
         username: admin
@@ -53,8 +53,8 @@ Capco\UserBundle\Entity\User:
         Media: null
         roles:
          - 'ROLE_ADMIN'
+        isTermsAccepted: true
         vip: true
-        confirmationToken: ~
 
     user5:
         username: user
@@ -67,7 +67,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: user
         roles:
          - 'ROLE_USER'
-        confirmationToken: ~
+        isTermsAccepted: true
 
     user_drupal:
         __construct: ['drupal']
@@ -78,7 +78,6 @@ Capco\UserBundle\Entity\User:
         email: drupal@gmail.com
         enabled: true
         password: $S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU
-        confirmationToken: ~
 
     user{6..500}:
         username: <username()>
@@ -90,7 +89,7 @@ Capco\UserBundle\Entity\User:
         password: <password()>
         roles:
          - 'ROLE_USER'
-        confirmationToken: ~
+        isTermsAccepted: true
 
     user501:
         username: spyl
@@ -103,8 +102,8 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser4
+        isTermsAccepted: true
         vip: true
-        confirmationToken: ~
 
     user502:
         username: welcomattic
@@ -117,8 +116,8 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser5
+        isTermsAccepted: true
         vip: true
-        confirmationToken: ~
 
     user503:
         username: disabled
@@ -131,8 +130,8 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_USER'
         Media: @MediaUser1
+        isTermsAccepted: true
         vip: false
-        confirmationToken: ~
 
     user504:
         username: user avec un nom très long comme par exemple conseil régional de machin truc
@@ -145,48 +144,5 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_USER'
         Media: null
-        vip: true
-        confirmationToken: ~
-
-    user_not_confirmed:
-        username: user_not_confirmed
-        firstname: user_not_confirmed
-        lastname: user_not_confirmed
-        email: user_not_confirmed@test.com
-        enabled: true
-        userType: @UserType1
-        plainPassword: user_not_confirmed
-        roles:
-         - 'ROLE_USER'
-        Media: null
-        confirmationToken: azertyuiop
-
-    user_not_confirmed_to_be_expired:
-        username: user_not_confirmed_to_be_expired
-        firstname: user_not_confirmed_to_be_expired
-        lastname: user_not_confirmed_to_be_expired
-        email: user_not_confirmed_to_be_expired@test.com
-        enabled: true
-        expired: false
-        expiresAt: <dateTimeBetween('-10 days', '-2 days')>
-        userType: @UserType1
-        plainPassword: user_not_confirmed_to_be_expired
-        roles:
-         - 'ROLE_USER'
-        Media: null
-        confirmationToken: qsdfghjklm
-
-    user_expired:
-        username: user_expired
-        firstname: user_expired
-        lastname: user_expired
-        email: user_expired@test.com
-        enabled: false
-        expired: true
-        expiresAt: ~
-        userType: @UserType1
-        plainPassword: user_expired
-        roles:
-         - 'ROLE_USER'
-        Media: null
-        confirmationToken: wxcvbn
+        isTermsAccepted: true
+        vip: truen

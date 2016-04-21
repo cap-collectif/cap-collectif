@@ -1,7 +1,7 @@
 @opinions
 Feature: Opinions
 
-  @javascript @database
+  @database
   Scenario: Can create an opinion of contribuable type in opened project
     Given I am logged in as user
     And I visited "consultation page" with:
@@ -14,7 +14,7 @@ Feature: Opinions
     And I press "Publier"
     Then I should see "Merci ! Votre proposition a bien été enregistrée."
 
-  @javascript @security
+  @security
   Scenario: Can not create an opinion of non-contribuable type
     Given I am logged in as user
     And I visited "consultation page" with:
@@ -22,7 +22,7 @@ Feature: Opinions
       | stepSlug    | collecte-des-avis                |
     Then I should not see "Proposer" in the "#opinions--le-probleme-constate-1" element
 
-  @javascript @security
+  @security
   Scenario: Can not create an opinion in closed project
     Given I am logged in as user
     And I visited "consultation page" with:
@@ -31,14 +31,13 @@ Feature: Opinions
     Then I should see "Consultation terminée. Merci à tous d'avoir contribué."
     And I should not see "Proposer"
 
-  @javascript @security
+  @security
   Scenario: Can not create an opinion when not logged in
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     When I follow "btn-add--les-causes-1"
-    # TODO no popover until refonte...
-    Then I should be on "homepage"
+    Then I should see "Connection form" on "login page"
 
   @javascript @database
   Scenario: Logged in user can report an opinion

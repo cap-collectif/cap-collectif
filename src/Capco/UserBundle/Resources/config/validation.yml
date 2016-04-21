@@ -8,16 +8,19 @@ Capco\UserBundle\Entity\User:
     plainPassword:
       - NotBlank: { message: password.blank, groups: [registration] }
       - Length: { min: 8, max: 128, minMessage: password.minMessage, groups: [registration] }
+    isTermsAccepted:
+      - NotNull: { message: charte.blank, groups: [registration] }
+      - "IsTrue": { message: charte.blank, groups: [registration] }
     email:
       - NotBlank: { message: email.blank, groups: [registration, profile] }
       - Email: { checkMX: true, message: email.invalid, groups: [registration, profile] }
-    twitterUrl:
+    twitter_url:
       - Url: { groups: [profile] }
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: twitter, groups: [profile] }
-    facebookUrl:
+    facebook_url:
       - Url: { groups: [profile] }
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: facebook, groups: [profile] }
-    googleUrl:
+    google_url:
       - Url: { groups: [profile] }
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: gplus, groups: [profile] }
     Media:
