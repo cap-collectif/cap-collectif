@@ -4,6 +4,8 @@ import CollectStepPageApp from './startup/CollectStepPageApp';
 import SelectionStepPageApp from './startup/SelectionStepPageApp';
 import NavbarApp from './startup/NavbarAppClient';
 import EmailNotConfirmedApp from './startup/EmailNotConfirmedAppClient';
+import NewOpinionApp from './startup/NewOpinionAppClient';
+import NewIdeaApp from './startup/NewIdeaAppClient';
 import appStore from '../js/stores/AppStore';
 
 const register = ReactOnRails.register;
@@ -15,3 +17,5 @@ register({ CollectStepPageApp });
 register({ SelectionStepPageApp });
 register({ NavbarApp });
 register({ EmailNotConfirmedApp });
+register({ NewOpinionApp });
+register({ NewIdeaApp });

@@ -4,6 +4,7 @@ import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import LoginModal from '../User/Login/LoginModal';
 import RegistrationModal from '../User/Registration/RegistrationModal';
 import FeatureStore from '../../stores/FeatureStore';
+import LoginStore from '../../stores/LoginStore';
 
 const LoginOverlay = React.createClass({
   propTypes: {
@@ -46,7 +47,7 @@ const LoginOverlay = React.createClass({
   // We add Popover if user is not connected
   render() {
     const { user, children, enabled } = this.props;
-    if (!enabled || user) {
+    if (!enabled || user || LoginStore.isLoggedIn()) {
       return children;
     }
 
@@ -61,7 +62,7 @@ const LoginOverlay = React.createClass({
               <p>
                 <Button
                   onClick={this.handleRegistrationClick}
-                  className="center-block"
+                  className="center-block btn-block"
                 >
                 { this.getIntlMessage('global.registration') }
                 </Button>
@@ -71,7 +72,7 @@ const LoginOverlay = React.createClass({
               <Button
                 onClick={this.handleLoginClick}
                 bsStyle="success"
-                className="center-block"
+                className="center-block btn-block"
               >
               { this.getIntlMessage('global.login') }
               </Button>

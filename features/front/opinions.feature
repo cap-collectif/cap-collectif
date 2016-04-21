@@ -36,9 +36,8 @@ Feature: Opinions
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    When I follow "btn-add--les-causes-1"
-    # TODO no popover until refonte...
-    Then I should be on "homepage"
+    When I press "btn-add--les-causes-1"
+    Then I should see "Connectez vous pour contribuer"
 
   @javascript @database
   Scenario: Logged in user can report an opinion

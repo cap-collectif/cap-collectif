@@ -45,7 +45,7 @@ snc_redis:
     session:
         client: session
         ttl: 1209600 # Two weeks
-        prefix: "%kernel.environment%"
+        prefix: "%kernel.environment%" # required for multi environments
 
 twig:
     debug: "%kernel.debug%"

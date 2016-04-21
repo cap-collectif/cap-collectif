@@ -5,7 +5,10 @@ frontend:
             paths:    true
             snippets: true
     extensions:
-        Behat\Symfony2Extension: ~
+        Behat\Symfony2Extension:
+          kernel:
+              env: test
+              debug: false
         Tonic\Behat\ParallelScenarioExtension: ~
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp

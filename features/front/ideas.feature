@@ -52,11 +52,12 @@ Scenario: Can not create an idea from ideas page when feature idea_creation is d
   Given I visited "ideas page"
   Then I should not see "Proposer une idée"
 
+@javascript
 Scenario: Can not create an idea when not logged in
   Given feature "idea_creation" is enabled
   And I visited "ideas page"
-  When I follow "Proposer une idée"
-  Then I should see "Se connecter"
+  When I press "Proposer une idée"
+  Then I should see "pour contribuer"
 
 # Update
 @javascript @database
@@ -189,12 +190,12 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
    Then I should see "Merci ! Votre vote a bien été pris en compte."
    And I should see "Dupont" in the "#ideaVotesModal" element
 
-  @parallel-scenario
-  Scenario: Anonymous user wants to vote with his account
-    Given I visited "idea page" with:
-      | slug | ideacommentable |
-    When I follow "Soutenir avec mon compte"
-    Then I should see "Se connecter"
+  # @parallel-scenario
+  # Scenario: Anonymous user wants to vote with his account
+  #   Given I visited "idea page" with:
+  #     | slug | ideacommentable |
+  #   When I follow "Soutenir avec mon compte"
+  #   Then I should see "Se connecter"
 
   @javascript @database
   Scenario: Logged in user wants to vote
@@ -215,7 +216,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
     Given feature "idea_trash" is enabled
     And I visited "ideas page"
     When I follow "Voir la corbeille"
-    Then I should see "Se connecter"
+    # Then I should see "Se connecter"
 
   @javascript
   Scenario: Ideas trash display correct number of elements
