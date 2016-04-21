@@ -70,6 +70,11 @@
     {% endif %}
 
     <div class="container container--custom">
+        <h2>{{ 'user.profile.show.replies' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% include '@CapcoUser/Profile/replies.html.twig' %}
+    </div>
+
+    <div class="container container--custom">
         <h2>{{ 'user.profile.show.votes' | trans({}, 'CapcoAppBundle') }}</h2>
         {% include '@CapcoUser/Profile/votes.html.twig' %}
     </div>
