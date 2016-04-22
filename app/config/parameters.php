@@ -16,12 +16,10 @@ $container->setParameter('database_password', null);
 $container->setParameter('elasticsearch_host', getenv_default('elasticsearch_host', '127.0.0.1'));
 $container->setParameter('redis_host', getenv_default('redis_host', '127.0.0.1'));
 
-$container->setParameter('swiftmailer_service', getenv_default('swiftmailer_service', 'default'));
-$container->setParameter('mailer_transport', getenv_default('mailer_transport', 'smtp'));
-$container->setParameter('mailer_user', getenv_default('mailer_user', 'maxime@cap-collectif.com'));
-$container->setParameter('mailer_password', getenv_default('mailer_password', '***REMOVED***'));
-$container->setParameter('mailer_host', getenv_default('mailer_host', '***REMOVED***'));
-$container->setParameter('mailer_port', getenv_default('mailer_port', 587));
+$container->setParameter('mailer_user', getenv_default('mailer_user', null));
+$container->setParameter('mailer_password', getenv_default('mailer_password', null));
+$container->setParameter('mailer_host', getenv_default('mailer_host', 'mailcatchersmtp'));
+$container->setParameter('mailer_port', getenv_default('mailer_port', 25));
 
 $container->setParameter('locale', getenv_default('locale', 'fr'));
 $container->setParameter('secret', getenv_default('secret', '***REMOVED***'));

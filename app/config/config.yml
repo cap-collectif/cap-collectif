@@ -103,19 +103,14 @@ doctrine:
           Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface: Capco\UserBundle\Entity\User
 
 swiftmailer:
-    default_mailer: "%swiftmailer_service%"
+    default_mailer: default
     mailers:
         default:
-            transport: "%mailer_transport%"
+            transport: smtp
             host: "%mailer_host%"
             port: "%mailer_port%"
             username: "%mailer_user%"
             password: "%mailer_password%"
-        mailcatcher:
-            host: "%mailer_host%"
-            port: "%mailer_port%"
-            username: ~
-            password: ~
 
 # Stof\DoctrineExtensionBundle configuration
 stof_doctrine_extensions:

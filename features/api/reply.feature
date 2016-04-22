@@ -2,7 +2,7 @@
 Feature: Reply Restful Api
   As an API client
 
-  @parallel-scenario
+  @parallel-scenario @elasticsearch
   Scenario: Anonymous API client wants to get one reply
     When I send a GET request to "/api/questionnaires/1/replies/1"
     Then the JSON response should match:
@@ -48,7 +48,7 @@ Feature: Reply Restful Api
     }
     """
 
-  @parallel-scenario
+  @parallel-scenario @elasticsearch
   Scenario: Logged in API client wants to get his replies
     Given I am logged in to api as admin
     When I send a GET request to "/api/questionnaires/1/replies"
@@ -99,7 +99,7 @@ Feature: Reply Restful Api
     }
     """
 
-  @database
+  @database @elasticsearch
   Scenario: Logged in API client wants to add a reply
     Given I am logged in to api as user
     When I send a POST request to "/api/questionnaires/1/replies" with json:
@@ -119,7 +119,7 @@ Feature: Reply Restful Api
     """
     Then the JSON response status code should be 201
 
-  @security
+  @security @elasticsearch
   Scenario: Anonymous API client wants to add a reply
     Given I send a POST request to "/api/questionnaires/1/replies" with json:
     """
@@ -138,7 +138,7 @@ Feature: Reply Restful Api
     """
     Then the JSON response status code should be 401
 
-  @security
+  @security @elasticsearch
   Scenario: Logged in API client wants to add a reply without a required response
     Given I am logged in to api as user
     When I send a POST request to "/api/questionnaires/1/replies" with json:
@@ -165,7 +165,7 @@ Feature: Reply Restful Api
     }
     """
 
-  @security
+  @security @elasticsearch
   Scenario: Logged in API client wants to add a reply to closed questionnaire step
     Given I am logged in to api as user
     And I send a POST request to "/api/questionnaires/3/replies" with json:
@@ -193,7 +193,7 @@ Feature: Reply Restful Api
     }
     """
 
-  @database
+  @database @elasticsearch
   Scenario: Logged in API client wants to add another reply when multiple replies is allowed
     Given I am logged in to api as admin
     When I send a POST request to "/api/questionnaires/1/replies" with json:
@@ -213,7 +213,7 @@ Feature: Reply Restful Api
     """
     Then the JSON response status code should be 201
 
-  @security
+  @security @elasticsearch
   Scenario: Logged in API client wants to add another reply when multiple replies is not allowed
     Given I am logged in to api as admin
     Given I send a POST request to "/api/questionnaires/2/replies" with json:
@@ -337,13 +337,13 @@ Feature: Reply Restful Api
     }
     """
 
-  @database
+  @database @elasticsearch
   Scenario: logged in API client wants to remove a reply
     Given I am logged in to api as admin
     When I send a DELETE request to "api/questionnaires/1/replies/2"
     Then the JSON response status code should be 204
 
-  @security
+  @security @elasticsearch
   Scenario: logged in API client wants to remove a reply when he is not the author
     Given I am logged in to api as user
     When I send a DELETE request to "api/questionnaires/1/replies/2"

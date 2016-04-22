@@ -6,6 +6,9 @@ framework:
   profiler:
     collect: false
 
+qandidate_toggle:
+    redis_namespace: feature_toggle_test
+
 web_profiler:
   toolbar: false
   intercept_redirects: false

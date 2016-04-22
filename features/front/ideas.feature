@@ -6,6 +6,7 @@ Background:
 
 # Themes
 
+@javascript
 Scenario: Can see no ideas in empty theme
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -13,6 +14,7 @@ Scenario: Can see no ideas in empty theme
   Then I should see "Il n'y a aucune idée pour le moment."
   And I should see 0 ".media--macro" elements
 
+@javascript
 Scenario: Can see ideas in not empty theme
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -20,6 +22,7 @@ Scenario: Can see ideas in not empty theme
   Then I should not see "Il n'y a aucune idée pour le moment."
   And I should see 3 ".media--macro" elements
 
+@javascript
 Scenario: Can not create an idea from theme when idea creation is disabled
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -94,7 +97,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
 
 # Comments
 
-  @parallel-scenario
+  @javascript
   Scenario: Can not comment an uncommentable idea
     Given I visited "idea page" with:
      | slug | ideanotcommentable |
@@ -167,7 +170,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
 
 # Votes
 
- @database
+ @javascript
  Scenario: Anonymous user wants to vote anonymously
   Given I visited "idea page" with:
     | slug | ideacommentable |
@@ -179,7 +182,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
   Then I should see "Merci ! Votre vote a bien été pris en compte."
   And I should see "Anonyme" in the "#ideaVotesModal" element
 
-  @database
+  @javascript @database
   Scenario: Anonymous user wants to vote
    Given I visited "idea page" with:
      | slug | ideacommentable |

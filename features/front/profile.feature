@@ -19,15 +19,6 @@ Feature: Profile
     Then I should see "Votre profil a été mis à jour"
 
   @javascript @database
-  Scenario: Logged in user wants to change his username to a username too short
-    Given I am logged in as user
-    And I visited "edit profile page"
-    And I fill in the following:
-      | sonata_user_profile_form_username | u   |
-    And I press "Enregistrer les modifications"
-    Then I should see "Le nom doit faire au moins 2 caractères."
-
-  @javascript @database
   Scenario: Logged in user wants to change his password with a wrong current password
     Given I am logged in as user
     And I visited "change password page"

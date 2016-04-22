@@ -3,8 +3,6 @@ application:
     ports:
         - "80:80"
     environment:
-        SYMFONY_MAILER_HOST: mailcatchersmtp
-        SYMFONY_MAILER_PORT: 25
         SYMFONY_DATABASE_HOST: database
         SYMFONY_ELASTICSEARCH_HOST: elasticsearch
         SYMFONY_REDIS_HOST: redis
