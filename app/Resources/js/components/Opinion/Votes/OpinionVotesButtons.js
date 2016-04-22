@@ -27,8 +27,8 @@ const OpinionVotesButtons = React.createClass({
     return (
       <ButtonToolbar className="opinion__votes__buttons">
         <OpinionVotesButton opinion={opinion} value={1} />
-        <OpinionVotesButton opinion={opinion} value={0} />
-        <OpinionVotesButton opinion={opinion} value={-1} />
+        <OpinionVotesButton style={{ marginLeft: 5 }} opinion={opinion} value={0} />
+        <OpinionVotesButton style={{ marginLeft: 5 }} opinion={opinion} value={-1} />
       </ButtonToolbar>
     );
   },

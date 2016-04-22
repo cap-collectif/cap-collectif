@@ -189,8 +189,8 @@
     "loading": "Chargement...",
     "login": "Connexion",
     "login_social": {
-      "facebook": "Se connecter avec Facebook",
-      "google": "Se connecter avec Google"
+      "facebook": "Se connecter via Facebook",
+      "google": "Se connecter via Google"
     },
     "modal": {
       "report": {
@@ -331,7 +331,7 @@
   "registration": {
    "username": "Nom complet",
    "charte": "J'ai lu et j'accepte la charte.",
-   "type": "Vous êtes :",
+   "type": "Votre statut :",
    "zipcode": "Code postal",
    "help": {
      "username": "Votre nom sera rendu public sur le site."
@@ -363,7 +363,7 @@
   "user": {
     "confirm": {
       "email": "Merci de confirmer votre adresse email : <strong>{email}</strong>",
-      "sent": "Un nouveau email de confirmation a été envoyé.",
+      "sent": "Un nouvel email de confirmation a été envoyé.",
       "sending": "Envoi en cours...",
       "update": "Mettre à jour l'adresse email",
       "resend": "Renvoyer la confirmation"

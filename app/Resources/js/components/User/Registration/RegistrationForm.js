@@ -155,7 +155,7 @@ export const RegistrationForm = React.createClass({
               id="_user_type"
               type="select"
               valueLink={this.linkState('form.userType')}
-              label={this.getIntlMessage('registration.type')}
+              label={this.getIntlMessage('registration.type') + ' (facultatif)'}
               groupClassName={this.getGroupStyle('userType')}
               errors={this.renderFormErrors('userType')}
             >
@@ -172,7 +172,7 @@ export const RegistrationForm = React.createClass({
           type="text"
           autoFocus
           valueLink={this.linkState('form.username')}
-          label={this.getIntlMessage('registration.username') + ' *'}
+          label={this.getIntlMessage('registration.username')}
           groupClassName={this.getGroupStyle('username')}
           errors={this.renderFormErrors('username')}
           help={this.getIntlMessage('registration.help.username')}
@@ -182,7 +182,7 @@ export const RegistrationForm = React.createClass({
           ref={c => this._email = c}
           type="text"
           valueLink={this.linkState('form.email')}
-          label={this.getIntlMessage('global.email') + ' *'}
+          label={this.getIntlMessage('global.email')}
           groupClassName={this.getGroupStyle('email')}
           errors={this.renderFormErrors('email')}
           onBlur={this.checkMail}
@@ -197,7 +197,7 @@ export const RegistrationForm = React.createClass({
           id="_password"
           type="password"
           valueLink={this.linkState('form.plainPassword')}
-          label={this.getIntlMessage('global.password') + ' *'}
+          label={this.getIntlMessage('global.password')}
           groupClassName={this.getGroupStyle('plainPassword')}
           errors={this.renderFormErrors('plainPassword')}
         />
@@ -207,7 +207,7 @@ export const RegistrationForm = React.createClass({
               id="_zipcode"
               type="text"
               valueLink={this.linkState('form.zipcode')}
-              label={this.getIntlMessage('registration.zipcode') + ' *'}
+              label={this.getIntlMessage('registration.zipcode') + ' (facultatif)'}
               groupClassName={this.getGroupStyle('zipcode')}
               errors={this.renderFormErrors('zipcode')}
             />

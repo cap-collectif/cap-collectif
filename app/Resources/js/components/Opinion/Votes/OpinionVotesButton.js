@@ -9,10 +9,17 @@ import { Button } from 'react-bootstrap';
 
 const OpinionVotesButton = React.createClass({
   propTypes: {
+    style: React.PropTypes.object,
     opinion: React.PropTypes.object.isRequired,
     value: React.PropTypes.oneOf([-1, 0, 1]).isRequired,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      style: {},
+    };
+  },
 
   isVersion() {
     return !!this.props.opinion.parent;
@@ -82,7 +89,10 @@ const OpinionVotesButton = React.createClass({
     const data = this.data[this.props.value];
     return (
       <LoginOverlay>
-        <Button bsStyle={data.style} className="btn--outline"
+        <Button
+          style={this.props.style}
+          bsStyle={data.style}
+          className="btn--outline"
           onClick={this.voteAction}
           active={this.isCurrentVote()}
           aria-label={this.isCurrentVote() ? this.getIntlMessage('vote.aria_label_active.' + data.str) : this.getIntlMessage('vote.aria_label.' + data.str)}
