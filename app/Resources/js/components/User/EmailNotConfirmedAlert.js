@@ -55,13 +55,12 @@ export const EmailNotConfirmedAlert = React.createClass({
             message={this.getIntlMessage('user.confirm.email')}
             email={user.email}
           />
-          <p style={{ marginBottom: 0 }}>
-            {
+          {
               confirmationSent
-              ? <Button bsStyle="primary" disabled>
+              ? <Button style={{ marginLeft: 15 }} bsStyle="primary" disabled>
                   { this.getIntlMessage('user.confirm.sent') }
                 </Button>
-              : <Button
+              : <Button style={{ marginLeft: 15 }}
                   disabled={resendingConfirmation}
                   onClick={resendingConfirmation ? null : this.handleResend}
                 >
@@ -71,9 +70,8 @@ export const EmailNotConfirmedAlert = React.createClass({
                     : this.getIntlMessage('user.confirm.resend')
                   }
                 </Button>
-            }
-            <a className="small" style={{ marginLeft: 10 }} href="/profile/edit-profile">{ this.getIntlMessage('user.confirm.update') }</a>
-          </p>
+          }
+          <Button style={{ marginLeft: 15 }} href="/profile/edit-profile">{ this.getIntlMessage('user.confirm.update') }</Button>
         </div>
       </Alert>
     );
