@@ -27,7 +27,7 @@ export const EmailNotConfirmedAlert = React.createClass({
     this.setState({ resendingConfirmation: true });
     Fetcher
       .post('/resend-email-confirmation', {})
-      .then(() => {
+      .finally(() => {
         this.setState({
           resendingConfirmation: false,
           confirmationSent: true,

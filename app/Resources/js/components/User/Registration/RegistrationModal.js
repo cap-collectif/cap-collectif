@@ -4,7 +4,8 @@ import { IntlMixin } from 'react-intl';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import RegistrationForm from './RegistrationForm';
-import LoginSocialButtons from '../Login/LoginSocialButtons';
+import { LoginSocialButtons } from '../Login/LoginSocialButtons';
+import FeatureStore from '../../../stores/FeatureStore.js';
 
 const RegistrationModal = React.createClass({
   propTypes: {
@@ -49,7 +50,10 @@ const RegistrationModal = React.createClass({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <LoginSocialButtons />
+          <LoginSocialButtons features={{
+            login_facebook: FeatureStore.isActive('login_facebook'),
+            login_gplus: FeatureStore.isActive('login_gplus'),
+          }} />
           <RegistrationForm
             isSubmitting={isSubmitting}
             onSubmitFailure={this.stopSubmit}
