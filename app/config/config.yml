@@ -144,6 +144,9 @@ fos_user:
     change_password:
         form:
             type: capco_user_change_password
+    resetting:
+        email:
+          template: CapcoUserBundle:Resetting:email.txt.twig
 
 services:
     twig.extension.text:

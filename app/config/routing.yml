@@ -145,7 +145,7 @@ fos_user_resetting_request:
     defaults:  { _controller: SonataUserBundle:ResettingFOSUser1:request }
 
 fos_user_resetting_reset:
-    path: /resetting/reset
+    path: /resetting/reset/{token}
     defaults:  { _controller: SonataUserBundle:ResettingFOSUser1:reset }
 
 fos_user_resetting_send_email:
