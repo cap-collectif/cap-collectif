@@ -178,7 +178,16 @@
     "filter_random": "Tri al\u00e9atoire",
     "filter_votes": "Vot\u00e9s",
     "form": {
-      "optional": " (facultatif)"
+      "optional": " (facultatif)",
+      "ranking": {
+        "choiceBox": {
+          "placeholder": "Faites glisser et déposez vos choix sur cet emplacement.",
+          "title": "Votre classement"
+        },
+        "pickBox": {
+          "title": "Choix disponibles"
+        }
+      }
     },
     "forgot_password": "Mot de passe oublié ?",
     "fullname": "Nom complet *",
@@ -545,7 +554,7 @@
       "response": {
         "no_value": "Non répondu"
       },
-      "title": "{num, plural, =0{Aucune réponse} one{Voir ma réponse} other{Voir mes réponses}}"
+      "title": "{num, plural, =0{Aucune réponse} one{Ma réponse} other{Mes réponses}}"
     },
     "user_has_reply": {
       "error": "Vous ne pouvez remplir ce formulaire qu'une fois",

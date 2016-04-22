@@ -80,7 +80,8 @@ Feature: Questionnaire Restful Api
             },
             @...@
           ]
-        }
+        },
+        @...@
       ]
     }
     """

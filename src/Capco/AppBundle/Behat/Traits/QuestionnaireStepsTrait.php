@@ -168,6 +168,27 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeNbElementOnPage(0, $userReplySelector);
     }
 
+    /**
+     * I click one ranking choice right arrow.
+     *
+     * @Then I click one ranking choice right arrow
+     */
+    public function iClickOneRankingChoiceRightArrow()
+    {
+        $this->navigationContext->getPage('questionnaire page')->clickFirstRankingChoiceRightArrow();
+        $this->iWait(1);
+    }
+
+    /**
+     * The ranking choice should be in the choice box.
+     *
+     * @Then the ranking choice should be in the choice box
+     */
+    public function theRankingChoiceShouldBeInTheChoiceBox()
+    {
+        $this->assertElementContainsText('.ranking__choice-box__choices', '1. Choix 1');
+    }
+
     // *************************************************************** Edition *********************************************************************
 
     /**

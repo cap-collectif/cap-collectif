@@ -1,39 +1,82 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
-import { ItemTypes } from '../../constants/RankingConstants';
 import { DragSource } from 'react-dnd';
+import { ITEM_TYPE } from '../../constants/RankingConstants';
+import RankingArrows from './RankingArrows';
+import classNames from 'classnames';
 
 const itemSource = {
   beginDrag(props) {
-    return {};
-  }
-}
+    return {
+      id: props.item.id,
+    };
+  },
 
-collect: (connect, monitor) => {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  }
-}
+  canDrag(props) {
+    return !props.disabled;
+  },
+};
 
 const RankingItem = React.createClass({
+  displayName: 'RankingItem',
   propTypes: {
     id: PropTypes.string.isRequired,
-    choice: PropTypes.object.isRequired,
+    item: PropTypes.object.isRequired,
+    position: PropTypes.number,
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
+    arrowFunctions: PropTypes.object,
+    disabled: PropTypes.bool.isRequired,
   },
-  mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      position: null,
+    };
+  },
 
   render() {
-    const { id, choice, connectDragSource, isDragging } = this.props;
+    const { id, item, position, isDragging, connectDragSource, arrowFunctions, disabled } = this.props;
+    const opacity = isDragging ? 0.5 : 1;
+    const classes = classNames({
+      'ranking__item': true,
+      'list-group-item': true,
+      'disabled': disabled,
+    });
     return connectDragSource(
-      <div className="ranking__item" id={id}>
-        {choice.label}
+      <div className={classes} id={id} style={{ opacity: opacity }}>
+        <div style={{ marginBottom: '5px' }}>
+          <div className="ranking__item__label-block">
+            <span className="ranking__item__icon hidden-xs">
+              <i className="cap cap-cursor-move"></i>
+            </span>
+            <span className="ranking__item__label">
+              { position ? (position + '. ') : null}
+              { item.label }
+            </span>
+          </div>
+        </div>
+        {
+          item.description
+          ? <p className="excerpt small ranking__item__description">{item.description}</p>
+          : null
+        }
+        {
+          item.image
+          ? <div><img className="ranking__item__image" src={item.image.url} /></div>
+          : null
+        }
+        <RankingArrows
+          item={item}
+          arrowFunctions={arrowFunctions}
+          disabled={disabled}
+        />
       </div>
     );
   },
 
 });
 
-export default DragSource(ItemTypes.ITEM, itemSource, collect)(RankingItem);
+export default DragSource(ITEM_TYPE, itemSource, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging(),
+}))(RankingItem);

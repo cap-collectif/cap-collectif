@@ -9,7 +9,7 @@ Feature: Questionnaire
   Scenario: Logged in user wants to add a reply to a questionnaire
     Given I am logged in as user
     And I go to a questionnaire step
-    And I fill the questionnaire form
+    When I fill the questionnaire form
     And I submit my reply
     Then I should see "Merci ! Votre réponse a bien été enregistrée."
     And I should see my reply
@@ -28,9 +28,16 @@ Feature: Questionnaire
   Scenario: Logged in user wants to add a reply to a questionnaire without filling the required questions
     Given I am logged in as user
     And I go to a questionnaire step
-    And I fill the questionnaire form without the required questions
+    When I fill the questionnaire form without the required questions
     And I submit my reply
     Then I should see "Ce champ est obligatoire."
+
+  @javascript @database
+  Scenario: Logged in user wants to answer with a ranking
+    Given I am logged in as user
+    And I go to a questionnaire step
+    When I click one ranking choice right arrow
+    Then the ranking choice should be in the choice box
 
   @javascript @security
   Scenario: Anonymous user wants to add a reply to a questionnaire

@@ -26,11 +26,17 @@ class QuestionnairePage extends Page
         'submit edited reply button' => '.reply__confirm-edit-btn',
         'delete reply button' => '.reply__delete-btn',
         'confirm delete reply button' => '.reply__confirm-delete-btn',
+        'first ranking choice right arrow' => '.ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right'
     ];
 
     public function submitReply()
     {
         $this->getElement('submit reply button')->click();
+    }
+
+    public function clickFirstRankingChoiceRightArrow()
+    {
+        $this->getElement('first ranking choice right arrow')->click();
     }
 
     public function getSubmitReplyButtonSelector()

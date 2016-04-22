@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import LoginModal from './LoginModal';
 
 const LoginButton = React.createClass({
+  propTypes: {
+    bsStyle: PropTypes.string,
+    className: PropTypes.string,
+  },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      bsStyle: 'default',
+      className: '',
+    };
+  },
 
   getInitialState() {
     return {
@@ -21,11 +32,13 @@ const LoginButton = React.createClass({
   },
 
   render() {
+    const { bsStyle, className } = this.props;
     return (
       <span>
         <Button
+          bsStyle={bsStyle}
           onClick={this.handleClick}
-          className="btn-darkest-gray navbar-btn btn--connection"
+          className={className}
         >
         { this.getIntlMessage('global.login') }
         </Button>

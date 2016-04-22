@@ -1,22 +1,43 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { ListGroupItem } from 'react-bootstrap';
+import { DropTarget } from 'react-dnd';
+import { ITEM_TYPE } from '../../constants/RankingConstants';
+
+const spotTarget = {
+
+  drop(props, monitor) {
+    props.onDrop(monitor.getItem());
+  },
+};
 
 const RankingSpot = React.createClass({
+  displayName: 'RankingSpot',
   propTypes: {
-    children: PropTypes.object.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
+    isOver: PropTypes.bool.isRequired,
+    onDrop: PropTypes.func.isRequired,
+    canDrop: PropTypes.bool.isRequired,
+    children: PropTypes.element,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { id } = this.props;
-    return (
-      <ListGroupItem className="ranking__spot">
+    const { connectDropTarget, isOver, canDrop } = this.props;
+    const color = isOver && canDrop ? '#eee' : 'transparent';
+    return connectDropTarget(
+      <div
+        className="ranking__spot"
+        style={{ backgroundColor: color }}
+      >
         {this.props.children}
-      </ListGroupItem>
+      </div>
     );
   },
 
 });
 
-export default RankingSpot;
+export default DropTarget(ITEM_TYPE, spotTarget, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  canDrop: monitor.canDrop(),
+}))(RankingSpot);

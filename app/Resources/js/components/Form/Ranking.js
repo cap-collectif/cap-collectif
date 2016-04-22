@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import RankingBlock from './RankingBlock';
 
 const Ranking = React.createClass({
+  displayName: 'Ranking',
   propTypes: {
     id: PropTypes.string.isRequired,
     field: PropTypes.object.isRequired,
@@ -22,23 +23,18 @@ const Ranking = React.createClass({
     };
   },
 
-  onChange(e, value) {
-    this.reverseOnChange(value, e);
-  },
-
-  reverseOnChange(value, e) {
-  },
-
-  empty() {
+  handleRankingChange(ranking) {
+    const values = Array.from(ranking, item => item.label);
+    this.props.onChange(this.props.field, values);
   },
 
   render() {
-    const { field, id, labelClassName, getGroupStyle } = this.props;
+    const { field, id, labelClassName, getGroupStyle, disabled } = this.props;
 
-    const labelClasses = {
+    const labelClasses = classNames({
       'control-label': true,
-    };
-    labelClasses[labelClassName] = true;
+      [labelClassName]: true,
+    });
 
     const optional = this.getIntlMessage('global.form.optional');
 
@@ -47,15 +43,20 @@ const Ranking = React.createClass({
         className={'form-group ' + getGroupStyle(field.id)}
         id={id}
       >
-        <label className={classNames(labelClasses)}>
+        <label className={labelClasses}>
           {field.question + (field.required ? '' : optional)}
         </label>
-        <span className="help-block">
-          {field.helpText}
-        </span>
+        {
+          field.helpText
+          ? <span className="help-block">
+            {field.helpText}
+          </span>
+          : null
+        }
         <RankingBlock
           field={field}
-          pickBoxItems={field.choices}
+          disabled={disabled}
+          onRankingChange={this.handleRankingChange}
         />
         {this.props.renderFormErrors(field.id)}
       </div>

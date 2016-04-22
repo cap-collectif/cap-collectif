@@ -81,6 +81,15 @@ Hack form button - radio check
     color: $warning-text;
   }
 
+  .ranking__choice-box__placeholder {
+    background-color: $warning-bg;
+    color: $warning-text;
+  }
+
+  .ranking__choice-box__choices {
+    border-color: $warning-text;
+  }
+
 
 }
 
@@ -105,5 +114,67 @@ Hack form button - radio check
 
 .ranking__spot {
   width: 100%;
-  height: 100%;
+  min-height: 45px;
+}
+
+.ranking__item {
+  cursor: move;
+  background-color: #F5F5F5;
+  margin-bottom: 5px !important;
+}
+
+.ranking__item.disabled {
+  cursor: auto;
+  opacity: 0.5;
+}
+
+.ranking__choice-box {
+  position: relative;
+}
+
+.ranking__pick-box__choices {
+  border: 1px dashed lightgrey;
+}
+
+.ranking__choice-box__choices {
+  border: 1px dashed lightgrey;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.ranking__choice-box__placeholder {
+  color: gray;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 30px;
+  text-align: center;
+  z-index: 0;
+}
+
+.ranking__item__icon {
+  margin-right: 5px;
+  color: gray
+}
+
+.ranking__item__arrows {
+  margin-top: 10px;
+}
+
+.ranking__item__image {
+  max-width: 100%;
+}
+
+@media (max-width: $screen-sm-max) {
+  .ranking__item__arrows {
+
+    .ranking__item__arrow {
+      padding: 10px 14px;
+      border-radius: 0;
+    }
+  }
 }

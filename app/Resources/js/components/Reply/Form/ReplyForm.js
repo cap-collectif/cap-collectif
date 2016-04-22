@@ -41,7 +41,7 @@ const ReplyForm = React.createClass({
       });
 
       if (field.required) {
-        if (field.type === 'checkbox') {
+        if (field.type === 'checkbox' || field.type === 'ranking') {
           this.formValidationRules[field.id] = {
             notEmpty: { message: 'reply.constraints.field_mandatory' },
           };
@@ -163,13 +163,11 @@ const ReplyForm = React.createClass({
     return (
       <form id="reply-form" ref="form">
         {
-          this.props.form.description
-          ? <div>
-            <hr />
+          this.props.form.description &&
+          <div>
             <FormattedHTMLMessage message={this.props.form.description} />
             <hr />
           </div>
-          : null
         }
         {
           this.props.form.fields.map((field) => {
@@ -244,6 +242,7 @@ const ReplyForm = React.createClass({
                     renderFormErrors={this.renderFormErrors}
                     onChange={this.onChange}
                     labelClassName="h4"
+                    disabled={disabled}
                   />
                 );
 

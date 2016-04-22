@@ -5,7 +5,7 @@ import StepPageHeader from '../Steps/Page/StepPageHeader';
 import ReplyCreateFormWrapper from '../Reply/Form/ReplyCreateFormWrapper';
 import ReplyStore from '../../stores/ReplyStore';
 import ReplyActions from '../../actions/ReplyActions';
-import UserReplies from '..//Reply/UserReplies';
+import UserReplies from '../Reply/UserReplies';
 
 const QuestionnaireStepPage = React.createClass({
   propTypes: {

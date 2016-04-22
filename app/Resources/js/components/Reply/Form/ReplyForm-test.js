@@ -8,6 +8,7 @@ import ReplyForm from './ReplyForm';
 import Input from '../../Form/Input';
 import Checkbox from '../../Form/Checkbox';
 import Radio from '../../Form/Radio';
+import Ranking from '../../Form/Ranking';
 
 describe('<ReplyForm />', () => {
   const form = {
@@ -54,6 +55,19 @@ describe('<ReplyForm />', () => {
       {
         id: 13,
         type: 'select',
+        slug: 'nelson-monfort-parle-t-il',
+        question: 'Nelson Monfort parle-t-il:',
+        helpText: 'Merci de répondre sincèrement',
+        required: false,
+        choices: [
+          { id: 28, label: 'Pas assez fort (Mon sonotone est en panne)' },
+          { id: 29, label: 'Assez fort (Mon sonotone est mal réglé)' },
+          { id: 30, label: 'Trop fort (Mon sonotone est tout neuf)' },
+        ],
+      },
+      {
+        id: 14,
+        type: 'ranking',
         slug: 'nelson-monfort-parle-t-il',
         question: 'Nelson Monfort parle-t-il:',
         helpText: 'Merci de répondre sincèrement',
@@ -140,6 +154,23 @@ describe('<ReplyForm />', () => {
     expect(component.prop('help')).to.be.equal(form.fields[3].helpText);
   });
 
+  it('should render a Ranking component with right props', () => {
+    const wrapper = shallow(<ReplyForm
+      form={form}
+      isSubmitting={isSubmitting}
+      onSubmitSuccess={handleSubmitSuccess}
+      onSubmitFailure={handleFailure}
+      onValidationFailure={handleFailure}
+      {...IntlData}
+    />);
+    const component = wrapper.find('Ranking');
+    expect(component).to.have.length(1);
+    expect(component.prop('id')).to.equal('reply-' + form.fields[4].id);
+    expect(component.prop('field')).to.be.equal(form.fields[4]);
+    expect(component.prop('onChange')).to.be.a('function');
+    expect(component.prop('labelClassName')).to.equal('h4');
+  });
+
   it('should render disabled fields when form is disabled', () => {
     const wrapper = shallow(<ReplyForm
       form={form}
@@ -158,5 +189,7 @@ describe('<ReplyForm />', () => {
     expect(disabledRadios).to.have.length(1);
     const enabledFields = wrapper.findWhere(n => ((n.type() === Input || n.type === Checkbox || n.type === Radio) && n.prop('disabled') === false));
     expect(enabledFields).to.have.length(0);
+    const disabledRanking = wrapper.findWhere(n => (n.type() === Ranking && n.prop('disabled') === true));
+    expect(disabledRanking).to.have.length(1);
   });
 });

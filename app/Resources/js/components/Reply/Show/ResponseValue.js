@@ -15,6 +15,18 @@ const ResponseValue = React.createClass({
     if (response.field.type === 'editor') {
       return <FormattedHTMLMessage message={response.value} />;
     }
+    if (response.field.type === 'ranking') {
+      return response.value.labels.length > 0
+        ? <ol>
+          {
+            response.value.labels.map((label, index) => {
+              return <li key={index}>{label}</li>;
+            })
+          }
+        </ol>
+        : <span>{this.getIntlMessage('reply.show.response.no_value')}</span>
+      ;
+    }
     if (typeof response.value === 'object') {
       const labels = response.value.labels;
       if (response.value.other) {

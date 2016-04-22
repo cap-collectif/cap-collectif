@@ -18,7 +18,7 @@ const UserReplies = React.createClass({
 
     return (
       <div id="user-replies" className="block">
-        <h3>
+        <h3 className="h4">
           <FormattedMessage
             message={this.getIntlMessage('reply.show.title')}
             num={replies.length}
@@ -37,6 +37,7 @@ const UserReplies = React.createClass({
           })
         }
         </ListGroup>
+        <hr />
       </div>
     );
   },

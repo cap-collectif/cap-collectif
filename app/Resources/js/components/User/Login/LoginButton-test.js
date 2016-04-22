@@ -8,6 +8,7 @@ import IntlData from '../../../translations/FR';
 
 describe('<LoginButton />', () => {
   const props = {
+    className: 'btn-darkest-gray navbar-btn btn--connection',
     ...IntlData,
   };
 

@@ -1,3 +1,1 @@
-export const ItemTypes = {
-  ITEM: 'item',
-}
+export const ITEM_TYPE = 'ITEM';

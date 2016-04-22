@@ -3,6 +3,7 @@ import { IntlMixin } from 'react-intl';
 import ReplyCreateForm from './ReplyCreateForm';
 import LoginStore from '../../../stores/LoginStore';
 import { Alert } from 'react-bootstrap';
+import LoginButton from '../../User/Login/LoginButton';
 
 const ReplyCreateFormWrapper = React.createClass({
   propTypes: {
@@ -28,6 +29,7 @@ const ReplyCreateFormWrapper = React.createClass({
           form.contribuable && !LoginStore.isLoggedIn()
           ? <Alert bsStyle="warning">
             <strong>{this.getIntlMessage('reply.not_logged_in.error')}</strong>
+            <span style={{ marginLeft: '10px' }}><LoginButton bsStyle="primary" /></span>
           </Alert>
           : form.contribuable && this.props.userReplies.length > 0 && !form.multipleRepliesAllowed
             ? <Alert bsStyle="warning">

@@ -35,9 +35,12 @@ Capco\AppBundle\Entity\QuestionChoice:
   questionchoice12:
       title: Choix 1
       position: 1
+      description: Description
   questionchoice13:
     title: Choix 2
     position: 2
+    description: Description
+    image: @MediaProject1
   questionchoice14:
-    title: Choix 3
+    title: Choix 3 avec un titre très long pour le test du rendu
     position: 3
