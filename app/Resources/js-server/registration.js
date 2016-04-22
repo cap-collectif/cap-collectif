@@ -1,5 +1,5 @@
 import ReactOnRails from 'react-on-rails';
-import ProjectsListApp from '../js/ProjectsListAppClient';
+import ProjectsListApp from '../js/startup/ProjectsListAppClient';
 import CollectStepPageApp from '../js/startup/CollectStepPageApp';
 import SelectionStepPageApp from '../js/startup/SelectionStepPageApp';
 import NavbarApp from '../js/startup/NavbarAppClient';
