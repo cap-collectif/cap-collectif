@@ -79,7 +79,8 @@
         "limenius/react-bundle": "^0.8.4",
         "google/recaptcha": "^1.1",
         "gfreeau/get-jwt-bundle": "^1.0",
-        "friendsofsymfony/rest-bundle": "^1.6"
+        "friendsofsymfony/rest-bundle": "^1.6",
+        "mattketmo/email-checker": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

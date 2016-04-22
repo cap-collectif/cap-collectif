@@ -63,6 +63,37 @@ Feature: Users
     Then the JSON response status code should be 201
 
     @security
+    Scenario: Anonymous API client wants to register with throwable email
+      Given feature "registration" is enabled
+      When I send a POST request to "/api/users" with json:
+      """
+      {
+        "username": "user2",
+        "email": "user2@yopmail.com",
+        "plainPassword": "supersecureuserpass",
+        "captcha": "blabla"
+      }
+      """
+      Then the JSON response status code should be 400
+      Then the JSON response should match:
+      """
+      {
+        "code":400,
+        "message":"Validation Failed",
+        "errors":{
+          "children":{
+            "username":[],
+            "email":{
+              "errors": ["email.throwable"]
+            },
+            "plainPassword":[],
+            "captcha":[]
+          }
+        }
+      }
+      """
+
+    @security
     Scenario: Anonymous API client wants to register with additional data
       Given feature "registration" is enabled
       When I send a POST request to "/api/users" with json:

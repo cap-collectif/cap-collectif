@@ -348,6 +348,7 @@
        "min": "Votre email doit faire au moins 2 caractères",
        "max": "Votre email doit faire moins de 128 caractères",
        "invalid": "Cet email n'est pas valide.",
+       "throwable": "Ce fournisseur d'adresse électronique n'est pas accepté sur ce site, car il n'est pas considéré comme fiable. Veuillez utiliser une autre adresse.",
        "already_used": "Cette adresse électronique est déjà utilisée."
      },
      "charte": {

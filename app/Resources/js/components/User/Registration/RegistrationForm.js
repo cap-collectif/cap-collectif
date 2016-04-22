@@ -77,7 +77,7 @@ export const RegistrationForm = React.createClass({
             if (response.errors) {
               const errors = this.state.errors;
               if (response.errors.children.email.errors && response.errors.children.email.errors.length > 0) {
-                errors.email = ['registration.constraints.email.already_used'];
+                errors.email = Array.from(response.errors.children.email.errors, string => 'registration.constraints.' + string);
               }
               if (response.errors.children.captcha.errors && response.errors.children.captcha.errors.length > 0) {
                 errors.captcha = ['registration.constraints.captcha.invalid'];

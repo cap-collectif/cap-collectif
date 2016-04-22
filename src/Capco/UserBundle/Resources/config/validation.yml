@@ -11,6 +11,7 @@ Capco\UserBundle\Entity\User:
     email:
       - NotBlank: { message: email.blank, groups: [registration, profile] }
       - Email: { checkMX: true, message: email.invalid, groups: [registration, profile] }
+      - EmailChecker\Constraints\NotThrowawayEmail: { message: email.throwable, groups: [registration, profile] }
     twitterUrl:
       - Url: { groups: [profile] }
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: twitter, groups: [profile] }
