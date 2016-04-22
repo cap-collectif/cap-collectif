@@ -34,22 +34,21 @@ describe('<EmailNotConfirmedAlert />', () => {
 
   it('renders a button to resend confirmation', () => {
     const wrapper = shallow(<EmailNotConfirmedAlert {...props} user={userWithNotConfirmedEmail} />);
-    expect(wrapper.find('Button')).to.have.length(1);
-    expect(wrapper.find('Button').prop('disabled')).to.equal(false);
-    expect(wrapper.find('Button').prop('onClick')).to.be.a('function');
+    expect(wrapper.find('Button').first().prop('disabled')).to.equal(false);
+    expect(wrapper.find('Button').first().prop('onClick')).to.be.a('function');
   });
 
   it('renders a disabled button when resending', () => {
     const wrapper = shallow(<EmailNotConfirmedAlert {...props} user={userWithNotConfirmedEmail} />);
     wrapper.setState({ resendingConfirmation: true });
-    expect(wrapper.find('Button').prop('onClick')).to.be.null;
-    expect(wrapper.find('Button').prop('disabled')).to.equal(true);
+    expect(wrapper.find('Button').first().prop('onClick')).to.be.null;
+    expect(wrapper.find('Button').first().prop('disabled')).to.equal(true);
   });
 
   it('renders a disabled button when resending is done', () => {
     const wrapper = shallow(<EmailNotConfirmedAlert {...props} user={userWithNotConfirmedEmail} />);
     wrapper.setState({ confirmationSent: true });
-    expect(wrapper.find('Button').prop('bsStyle')).to.equal('primary');
-    expect(wrapper.find('Button').prop('disabled')).to.equal(true);
+    expect(wrapper.find('Button').first().prop('bsStyle')).to.equal('primary');
+    expect(wrapper.find('Button').first().prop('disabled')).to.equal(true);
   });
 });
