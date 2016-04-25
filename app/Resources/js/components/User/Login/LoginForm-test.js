@@ -36,9 +36,8 @@ describe('<LoginForm />', () => {
     const input = wrapper.find('Input').last();
     expect(input.prop('id')).to.equal('_password');
     expect(input.prop('type')).to.equal('password');
-    expect(shallow(input.prop('label')).html()).to.equal('<span>Mot de passe<span class="pull-right"><a href="/resetting/request">Mot de passe oublié ?</a></span></span>');
+    expect(input.prop('label')).to.equal('Mot de passe');
     expect(input.prop('help')).to.not.exist;
     expect(input.prop('labelClassName')).to.equal('w100 h5');
   });
-
 });

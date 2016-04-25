@@ -20,8 +20,8 @@ describe('<FacebookLoginButton />', () => {
     const wrapper = shallow(<FacebookLoginButton features={{ 'login_facebook': true }} {...props} />);
     expect(wrapper.find('a')).to.have.length(1);
     expect(wrapper.find('a').prop('href')).to.equal('/login/facebook?_destination=about:blank');
-    expect(wrapper.find('a').prop('title')).to.equal('Se connecter avec Facebook');
+    expect(wrapper.find('a').prop('title')).to.equal('Se connecter via Facebook');
     expect(wrapper.find('a').prop('className')).to.equal('btn login__social-btn login__social-btn--facebook');
-    expect(wrapper.find('a').text()).to.equal('Se connecter avec Facebook');
+    expect(wrapper.find('a').text()).to.equal('Se connecter via Facebook');
   });
 });
