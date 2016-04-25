@@ -3,7 +3,7 @@ import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
 
-const NewIdeaButton = React.createClass({
+const ProjectTrashButton = React.createClass({
   propTypes: {
     link: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
@@ -21,12 +21,15 @@ const NewIdeaButton = React.createClass({
     const { link, label, user } = this.props;
     return (
       <LoginOverlay user={user}>
-        <div className="col-xs-12  col-sm-3  col-md-3  col-lg-2  filter__down">
-            <a
-              href={user ? link : null}
-              className="form-control  btn  btn-primary"><i className="cap cap-add-1" /> {label}
-            </a>
-        </div>
+        <a
+          id="trash-link"
+          href={user !== null ? link : null}
+        >
+          <p className="navbar__step-title">
+              <i className="cap cap-bin-2-1" />
+              { label } <i className="pull-right excerpt cap-arrow-66" />
+          </p>
+        </a>
       </LoginOverlay>
     );
   },
@@ -37,4 +40,4 @@ const mapStateToProps = (state) => {
   return { user: state.user };
 };
 
-export default connect(mapStateToProps)(NewIdeaButton);
+export default connect(mapStateToProps)(ProjectTrashButton);

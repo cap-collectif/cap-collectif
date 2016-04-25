@@ -6,6 +6,7 @@ import NavbarApp from './startup/NavbarAppClient';
 import EmailNotConfirmedApp from './startup/EmailNotConfirmedAppClient';
 import NewOpinionApp from './startup/NewOpinionAppClient';
 import NewIdeaApp from './startup/NewIdeaAppClient';
+import ProjectTrashButtonApp from './startup/ProjectTrashButtonApp';
 import appStore from '../js/stores/AppStore';
 
 const register = ReactOnRails.register;
@@ -19,3 +20,4 @@ register({ NavbarApp });
 register({ EmailNotConfirmedApp });
 register({ NewOpinionApp });
 register({ NewIdeaApp });
+register({ ProjectTrashButtonApp });

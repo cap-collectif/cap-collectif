@@ -1,23 +1,30 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
-import LoginStore from '../../stores/LoginStore';
 
 const NewOpinionButton = React.createClass({
   propTypes: {
     slug: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    user: PropTypes.object,
   },
   mixins: [IntlMixin],
 
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
+
   render() {
-    const { slug, link, label } = this.props;
+    const { slug, link, label, user } = this.props;
     return (
-      <LoginOverlay>
+      <LoginOverlay user={user}>
         <a
           id={'btn-add--' + slug}
-          href={LoginStore.isLoggedIn() ? link : '#'}
+          href={user ? link : null}
           className="btn btn-primary"
         >
           <i className="cap cap-add-1" />
@@ -29,4 +36,8 @@ const NewOpinionButton = React.createClass({
 
 });
 
-export default NewOpinionButton;
+const mapStateToProps = (state) => {
+  return { user: state.user };
+};
+
+export default connect(mapStateToProps)(NewOpinionButton);

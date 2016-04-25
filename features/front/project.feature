@@ -160,14 +160,16 @@ Feature: Project
       | stepSlug    | collecte-des-avis                |
     Then I should not see "Corbeille"
 
-  @javascript  
+  @javascript @test
   Scenario: Can not access trash if not logged in
     Given feature "project_trash" is enabled
     And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    When I follow "Corbeille"
-    Then I should see "Se connecter"
+    And I should see "Corbeille"
+    When I follow "trash-link"
+    And I wait 10 seconds
+    Then I should see "Connectez-vous pour contribuer"
 
   @javascript
   Scenario: Project trash display correct numbers of elements

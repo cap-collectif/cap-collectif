@@ -48,7 +48,7 @@ const LoginOverlay = React.createClass({
     const { user, children, enabled } = this.props;
     const { showRegistration, showLogin } = this.state;
 
-    if (!enabled || user || LoginStore.isLoggedIn()) {
+    if (!enabled || user !== null || LoginStore.isLoggedIn()) {
       return children;
     }
 
