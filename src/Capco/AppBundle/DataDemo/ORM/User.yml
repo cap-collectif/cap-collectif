@@ -7,4 +7,4 @@ Capco\UserBundle\Entity\User:
         plainPassword: ***REMOVED***
         roles:
          - 'ROLE_SUPER_ADMIN'
-        confirmationToken: ~
+        isTermsAccepted: true

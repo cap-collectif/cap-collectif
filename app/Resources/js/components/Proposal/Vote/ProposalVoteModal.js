@@ -3,7 +3,7 @@ import { IntlMixin } from 'react-intl';
 import { Modal } from 'react-bootstrap';
 import ProposalVoteBox from './ProposalVoteBox';
 import CloseButton from '../../Form/CloseButton';
-import RegisterButton from '../../User/Registration/RegistrationButton';
+import RegisterButton from '../../Utils/RegisterButton';
 
 const ProposalVoteModal = React.createClass({
   propTypes: {

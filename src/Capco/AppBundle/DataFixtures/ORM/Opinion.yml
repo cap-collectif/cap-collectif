@@ -52,6 +52,9 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user3
         OpinionType: @opinionType9
+
+# Project 2
+
     opinion{6..40}:
         step: @cstep1
         title: Opinion <current()>
@@ -107,6 +110,8 @@ Capco\AppBundle\Entity\Opinion:
         Author: @user2
         OpinionType: @opinionType12
 
+# Project 3
+
     opinion54:
         step: @cstep3
         title: Opinion 54
@@ -137,6 +142,9 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: @user2
         OpinionType: @opinionType10
+
+
+# Project 5
 
     opinion57:
         step: @cstep5

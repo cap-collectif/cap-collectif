@@ -5,19 +5,15 @@ frontend:
             paths:    true
             snippets: true
     extensions:
-        Behat\Symfony2Extension:
-          kernel:
-              env: test
-              debug: false
+        Behat\Symfony2Extension: ~
         Tonic\Behat\ParallelScenarioExtension: ~
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp
-            purge_before_scenario: true
         SensioLabs\Behat\PageObjectExtension:
             namespaces:
                 page: [ Capco\AppBundle\Behat\Page ]
         Behat\MinkExtension:
-            base_url: 'http://capco.test'
+            base_url: 'http://capco.test/'
             sessions:
                default:
                    symfony2: ~
@@ -40,7 +36,6 @@ javascript:
     extensions:
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp
-            purge_before_scenario: true
         Behat\Symfony2Extension:
             kernel:
                 env: test
@@ -49,7 +44,7 @@ javascript:
             namespaces:
                 page: [ Capco\AppBundle\Behat\Page ]
         Behat\MinkExtension:
-            base_url: 'http://capco.test'
+            base_url: 'http://capco.test/'
             # browser_name: firefox
             browser_name: chrome
             sessions:
@@ -66,7 +61,7 @@ javascript:
                 - Capco\AppBundle\Behat\NavigationContext
                 - Alex\MailCatcher\Behat\MailCatcherContext
             filters:
-                tags: "@javascript&&~@event_registration"
+                tags: "@javascript"
 
 commands:
     formatters:
@@ -77,9 +72,6 @@ commands:
     extensions:
         Tonic\Behat\ParallelScenarioExtension: ~
         Behat\Symfony2Extension: ~
-        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-            url: http://mailcatchersmtp
-            purge_before_scenario: true
     suites:
         commands:
             paths: [ %paths.base%/features/commands ]
@@ -87,7 +79,6 @@ commands:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext
                 - Capco\AppBundle\Behat\CommandContext
-                - Alex\MailCatcher\Behat\MailCatcherContext
 
 api:
     formatters:
@@ -100,7 +91,6 @@ api:
         Behat\Symfony2Extension: ~
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp
-            purge_before_scenario: true
     suites:
         api:
             paths: [ %paths.base%/features/api ]

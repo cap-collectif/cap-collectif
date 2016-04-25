@@ -1,0 +1,80 @@
+{% extends "CapcoUserBundle::layout.html.twig" %}
+
+{% block canonical_link %}{{ url('capco_user_register') }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ 'user.register.title'|trans({}, 'CapcoAppBundle') }}
+{% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1 class="h2  h--no-border">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block fos_user_content %}
+    {% include "CapcoUserBundle:Registration:register_content.html.twig" %}
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+    {{ parent()}}
+    <script>
+        const domains = [
+            '9online.fr',
+            'aliceadsl.fr',
+            'aol.fr',
+            'aol.com',
+            'bbox.fr',
+            'cap-collectif.com',
+            'club-internet.fr',
+            'democratieouverte.org',
+            'free.fr',
+            'gmail.com',
+            'googlemail.com',
+            'hotmail.com',
+            'hotmail.fr',
+            'icloud.com',
+            'jolicode.com',
+            'laposte.net',
+            'live.com',
+            'live.fr',
+            'me.com',
+            'msn.com',
+            'msn.fr',
+            'neuf.fr',
+            'numericable.com',
+            'numericable.fr',
+            'orange.fr',
+            'outlook.com',
+            'outlook.fr',
+            'sfr.fr',
+            'voila.fr',
+            'wanadoo.fr',
+            'yahoo.com',
+            'yahoo.fr',
+        ];
+        var lastSuggestion = "";
+        $('#sonata_user_registration_form_email').on('blur', function() {
+            var self = $(this);
+            $(this).mailcheck({
+                domains: domains,
+                suggested: function(element, suggestion) {
+                    $('.js-email-correction').parent().hide();
+                    self.after('<p class="registration__help">{{ "global.helper.typo"|trans({}, "CapcoAppBundle") }} <a href="#" class="js-email-correction">'+suggestion.full+'</a> ?</p>');
+                    lastSuggestion = suggestion.full;
+                },
+                empty: function (element) {
+                    $('.js-email-correction').parent().hide();
+                    self.after('');
+                }
+            });
+        });
+
+        $(document).on('click', '.js-email-correction', function() {
+            $('#sonata_user_registration_form_email').val(lastSuggestion);
+            $(this).parent().hide();
+        });
+    </script>
+{% endblock %}

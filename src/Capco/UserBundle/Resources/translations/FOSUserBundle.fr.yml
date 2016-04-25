@@ -3,8 +3,6 @@ resetting:
     email: Adresse électronique
     invalid_email: %email% n'est pas une adresse électronique valide.
   check_email: Si un compte est associé à l'adresse %email%, vous recevrez un e-mail avec un lien pour réinitialiser votre mot de passe.
-  email:
-    message: "Bonjour %username% !<br><br>Pour réinitialiser votre mot de passe, merci de vous rendre sur <a href='%confirmationUrl%'>%confirmationUrl%</a><br><br>Cordialement,<br>L'équipe.<br>"
 
 form:
   no_type: Sélectionner un statut
@@ -12,3 +10,4 @@ form:
 registration:
   email:
     subject: %sitename% — Confirmez votre adresse électronique
+

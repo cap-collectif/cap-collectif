@@ -1,10 +1,13 @@
 import { createStore } from 'redux';
-import LocalStorageService from '../services/LocalStorageService';
 
 export default function configureStore(props) {
-  if (props.user === null) {
-    LocalStorageService.remove('jwt');
-    LocalStorageService.remove('user');
-  }
-  return createStore(() => props);
+  // This is how we get initial props from Symfony into redux.
+  const { features, user } = props;
+
+  const initialState = {
+    features,
+    user,
+  };
+
+  return createStore(() => initialState);
 }

@@ -1,6 +1,6 @@
 Feature: Profile
 
-  @javascript @database
+  @database
   Scenario: Logged in user wants to change his username
     Given I am logged in as user
     And I visited "edit profile page"
@@ -9,7 +9,7 @@ Feature: Profile
     And I press "Enregistrer les modifications"
     Then I should see "Votre profil a été mis à jour"
 
-  @javascript @database
+  @database
   Scenario: Logged in user wants to change his user type
     Given feature "user_type" is enabled
     And I am logged in as user
@@ -18,7 +18,16 @@ Feature: Profile
     And I press "Enregistrer les modifications"
     Then I should see "Votre profil a été mis à jour"
 
-  @javascript @database
+  @database
+  Scenario: Logged in user wants to change his username to a username too short
+    Given I am logged in as user
+    And I visited "edit profile page"
+    And I fill in the following:
+      | sonata_user_profile_form_username | u   |
+    And I press "Enregistrer les modifications"
+    Then I should see "Le nom doit faire au moins 2 caractères."
+
+  @database
   Scenario: Logged in user wants to change his password with a wrong current password
     Given I am logged in as user
     And I visited "change password page"
@@ -30,7 +39,6 @@ Feature: Profile
     Then I should see "Ceci n'est pas votre mot de passe."
     And I should see "Les deux mots de passe ne sont pas identiques."
 
-  @javascript @database
   Scenario: Logged in user wants to change his password to a too short password
     Given I am logged in as user
     And I visited "change password page"
@@ -41,7 +49,7 @@ Feature: Profile
     And I press "Enregistrer les modifications"
     And I should see "Le nouveau mot de passe est trop court."
 
-  @javascript @database
+  @database
   Scenario: Logged in user wants to change his password
     Given I am logged in as user
     And I visited "change password page"
@@ -51,3 +59,6 @@ Feature: Profile
       | fos_user_change_password_form_new_second       | toto12345   |
     And I press "Enregistrer les modifications"
     Then I should see "Votre mot de passe a bien été modifié."
+
+
+

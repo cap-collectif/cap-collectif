@@ -55,6 +55,7 @@ RUN apt-get update && \
     rm -rf /tmp/* && \
     fetch --nohooks --no-history v8 && \
     cd v8 && \
+    # git pull origin && \
     gclient sync --nohooks && \
     export GYP_DEFINES="use_system_icu=1" && \
     export GYPFLAGS="-Dv8_use_external_startup_data=0 -Dclang=0" && \

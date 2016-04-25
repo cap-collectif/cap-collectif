@@ -28,14 +28,10 @@ web_profiler_extra:
 
 monolog:
     handlers:
-        file:
-            type: rotating_file
-            path: "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
         main:
-            type: stream
-            path: php://stderr
-            level: info
+            type:   stream
+            path:   php://stderr
+            level:  info
         console:
             type:   console
             bubble: false

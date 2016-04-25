@@ -7,7 +7,7 @@
             <div class="box  col-xs-12  col-sm-9">
                 <h1 class="profile__name">{{ user.userName }}
                     {% if app.user == user %}
-                        <a href="{{ path('capco_profile_edit') }}" class="btn btn-primary pull-right">{{ 'user.edition'| trans({}, 'CapcoAppBundle') }}</a>
+                        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary pull-right">{{ 'user.edition'| trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
                 </h1>
                 <p>{{ user.biography }}</p>
@@ -101,6 +101,12 @@
                     </a>
                 </li>
                 {% endif %}
+                <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_replies' %}active{% endif %}">
+                    <a href="{{ path('capco_user_profile_show_replies', {'slug': user.slug}) }}">
+                        <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.replies'|trans({}, 'CapcoAppBundle') }}</h2>
+                        <p class="profile__value__number">{{ user.repliesCount }}</p>
+                    </a>
+                </li>
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_votes' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_votes', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.votes'|trans({}, 'CapcoAppBundle') }}</h2>

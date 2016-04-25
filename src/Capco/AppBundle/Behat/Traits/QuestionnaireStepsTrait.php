@@ -103,21 +103,13 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * The questionnaire form should be disabled.
+     * I should not see the questionnaire form.
      *
-     * @Then the questionnaire form should be disabled
+     * @Then I should not see the questionnaire form
      */
-    public function theQuestionnaireFormShouldBeDisabled()
+    public function iShouldNotSeeTheQuestionnaireForm()
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', 'input');
-        foreach ($inputs as $input) {
-            \PHPUnit_Framework_TestCase::assertTrue($input->hasAttribute('disabled'));
-        }
-        $textareas = $this->getSession()->getPage()->findAll('css', 'textarea');
-        foreach ($textareas as $textarea) {
-            \PHPUnit_Framework_TestCase::assertTrue($textarea->hasAttribute('disabled'));
-        }
-        $this->elementHasAttribute($this->getCurrentPage()->getSubmitReplyButtonSelector(), 'disabled');
+        $this->iShouldNotSeeElementOnPage('questionnaire form', 'questionnaire page');
     }
 
     /**

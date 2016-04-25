@@ -49,10 +49,9 @@
         <div class="filter  block">
             <div class="row">
                 {% if is_feature_enabled('idea_creation') %}
-                    {{ react_intl_component('NewIdeaApp', {'props': {
-                        'link': path('app_idea_create'),
-                        'label': 'idea.create.button'|trans({}, 'CapcoAppBundle'),
-                    }})}}
+                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-2  filter__down">
+                        <a href="{{ path('app_idea_create') }}" class="form-control  btn  btn-primary"><i class="cap cap-add-1"></i> {{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a>
+                    </div>
                 {% endif %}
 
                 {{ form_start(form) }}

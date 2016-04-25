@@ -10,6 +10,7 @@ def fix_environment_variables_with_lxc():
     with open('app/config/parameters.yml', 'w') as yaml_file:
         yaml_file.write(yaml.dump({
             'parameters': {
+                'mailer_host': 'mailcatchersmtp',
                 'database_host': 'database',
                 'elasticsearch_host': 'elasticsearch',
                 'redis_host': 'redis',
