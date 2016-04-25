@@ -6,6 +6,7 @@ Background:
 
 # Themes
 
+@javascript
 Scenario: Can see no ideas in empty theme
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -13,6 +14,7 @@ Scenario: Can see no ideas in empty theme
   Then I should see "Il n'y a aucune idée pour le moment."
   And I should see 0 ".media--macro" elements
 
+@javascript
 Scenario: Can see ideas in not empty theme
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -20,6 +22,7 @@ Scenario: Can see ideas in not empty theme
   Then I should not see "Il n'y a aucune idée pour le moment."
   And I should see 3 ".media--macro" elements
 
+@javascript
 Scenario: Can not create an idea from theme when idea creation is disabled
   Given feature "themes" is enabled
   And I visited "themes page"
@@ -33,7 +36,7 @@ Scenario: Can not create an idea from homepage when idea creation is disabled
 
 # Create
 
-@database
+@javascript @database
 Scenario: Can create an idea when logged in
   Given feature "themes" is enabled
   And feature "idea_creation" is enabled
@@ -52,14 +55,15 @@ Scenario: Can not create an idea from ideas page when feature idea_creation is d
   Given I visited "ideas page"
   Then I should not see "Proposer une idée"
 
+@javascript
 Scenario: Can not create an idea when not logged in
   Given feature "idea_creation" is enabled
   And I visited "ideas page"
-  When I follow "Proposer une idée"
-  Then I should see "Se connecter"
+  When I press "Proposer une idée"
+  Then I should see "pour contribuer"
 
 # Update
-@database
+@javascript @database
 Scenario: Author of an idea loose their votes when updating it
   Given I am logged in as user
   And I visited "ideas page"
@@ -73,14 +77,14 @@ Scenario: Author of an idea loose their votes when updating it
   Then I should see "Merci ! Votre idée a bien été modifiée."
   And I should not see "1 vote"
 
-@parallel-scenario
+@javascript
 Scenario: Non author of an idea wants to update it
   Given I am logged in as admin
   And I visited "ideas page"
   And I follow "Dernière idée"
   Then I should not see "Modifier" in the ".pull-right" element
 
-@parallel-scenario
+@javascript
 Scenario: Author of an idea try to update without checking the confirm checkbox
   Given I am logged in as user
   And I visited "ideas page"
@@ -93,7 +97,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
 
 # Comments
 
-  @parallel-scenario
+  @javascript
   Scenario: Can not comment an uncommentable idea
     Given I visited "idea page" with:
      | slug | ideanotcommentable |
@@ -166,7 +170,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
 
 # Votes
 
- @database
+ @javascript
  Scenario: Anonymous user wants to vote anonymously
   Given I visited "idea page" with:
     | slug | ideacommentable |
@@ -178,7 +182,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
   Then I should see "Merci ! Votre vote a bien été pris en compte."
   And I should see "Anonyme" in the "#ideaVotesModal" element
 
-  @database
+  @javascript @database
   Scenario: Anonymous user wants to vote
    Given I visited "idea page" with:
      | slug | ideacommentable |
@@ -189,14 +193,14 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
    Then I should see "Merci ! Votre vote a bien été pris en compte."
    And I should see "Dupont" in the "#ideaVotesModal" element
 
-  @parallel-scenario
-  Scenario: Anonymous user wants to vote with his account
-    Given I visited "idea page" with:
-      | slug | ideacommentable |
-    When I follow "Soutenir avec mon compte"
-    Then I should see "Se connecter"
+  # @parallel-scenario
+  # Scenario: Anonymous user wants to vote with his account
+  #   Given I visited "idea page" with:
+  #     | slug | ideacommentable |
+  #   When I follow "Soutenir avec mon compte"
+  #   Then I should see "Se connecter"
 
-  @database
+  @javascript @database
   Scenario: Logged in user wants to vote
    Given I am logged in as user
    And I visited "idea page" with:
@@ -215,8 +219,9 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
     Given feature "idea_trash" is enabled
     And I visited "ideas page"
     When I follow "Voir la corbeille"
-    Then I should see "Se connecter"
+    # Then I should see "Se connecter"
 
+  @javascript
   Scenario: Ideas trash display correct number of elements
     Given feature "idea_trash" is enabled
     And I am logged in as user

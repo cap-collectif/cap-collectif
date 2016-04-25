@@ -23,35 +23,35 @@ class MenuItemResolver
      */
     public function getEnabledMenuItemsWithChildren($menu)
     {
-        if (null !== $menu) {
-            $parents = $this->repository->getParentItems($menu);
-            $children = $this->repository->getChildItems($menu);
-            $links = [];
-
-            foreach ($parents as $parent) {
-                $links[$parent->getId()] = [
-                    'title' => $parent->getTitle(),
-                    'link' => $parent->getLink(),
-                    'hasEnabledFeature' => $this->manager->containsEnabledFeature($parent->getAssociatedFeatures()),
-                    'children' => [],
-                ];
-            }
-
-            foreach ($children as $child) {
-                if (array_key_exists($child->getParent()->getId(), $links)) {
-                    $links[$child->getParent()->getId()]['children'][] = [
-                        'id' => $child->getId(),
-                        'title' => $child->getTitle(),
-                        'link' => $child->getLink(),
-                        'hasEnabledFeature' => $this->manager->containsEnabledFeature($child->getAssociatedFeatures()),
-                    ];
-                }
-            }
-
-            return $links;
+        if (!$menu) {
+          return [];
         }
 
-        return [];
+        $parents = $this->repository->getParentItems($menu);
+        $children = $this->repository->getChildItems($menu);
+        $links = [];
+
+        foreach ($parents as $parent) {
+            $navs = [];
+            foreach ($children as $child) {
+              if ($child->getParent()->getId() === $parent->getId()) {
+                $navs[] = [
+                    'id' => $child->getId(),
+                    'title' => $child->getTitle(),
+                    'link' => $child->getLink(),
+                    'hasEnabledFeature' => $this->manager->containsEnabledFeature($child->getAssociatedFeatures()),
+                ];
+              }
+            }
+            $links[] = [
+                'id' => $parent->getId(),
+                'title' => $parent->getTitle(),
+                'link' => $parent->getLink(),
+                'hasEnabledFeature' => $this->manager->containsEnabledFeature($parent->getAssociatedFeatures()),
+                'children' => $navs,
+            ];
+        }
+        return $links;
     }
 
     public function hasEnabledFeatures($menuItem)

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 
 import StepPageHeader from '../Steps/Page/StepPageHeader';
-import ReplyCreateFormWrapper from '../Reply/Form/ReplyCreateFormWrapper';
+import ReplyCreateForm from '../Reply/Form/ReplyCreateForm';
 import ReplyStore from '../../stores/ReplyStore';
 import ReplyActions from '../../actions/ReplyActions';
 import UserReplies from '..//Reply/UserReplies';
@@ -47,10 +47,12 @@ const QuestionnaireStepPage = React.createClass({
           replies={this.state.userReplies}
           form={this.props.form}
         />
-        <ReplyCreateFormWrapper
-          form={this.props.form}
-          userReplies={this.state.userReplies}
-        />
+        <div>
+          <ReplyCreateForm
+            form={this.props.form}
+            userReplies={this.state.userReplies}
+          />
+        </div>
       </div>
     );
   },

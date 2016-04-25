@@ -33,11 +33,6 @@ class QuestionnairePage extends Page
         $this->getElement('submit reply button')->click();
     }
 
-    public function getSubmitReplyButtonSelector()
-    {
-        return $this->getSelector('submit reply button');
-    }
-
     public function submitEditedReply()
     {
         $this->getElement('submit edited reply button')->click();

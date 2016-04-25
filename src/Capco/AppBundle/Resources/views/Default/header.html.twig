@@ -1,38 +1,9 @@
-<nav id="main-navbar" class="navbar navbar-default navbar-fixed-top">
+{{ react_intl_component('NavbarApp', {'props':
+  {
+    'logo': media_public_url(capco_site_image_media('image.logo'), 'default_logo'),
+    'items': headers_list(),
+  }}
+)}}
 
-    <div class="skip-links js-skip-links" role="banner">
-        <div class="skip-links-container">
-            <div class="container">
-                <ul class="skip-links-list clearfix">
-                    <li><a href="#navbar">Aller au menu</a></li>
-                    <li><a href="#main">Aller au contenu</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-
-        {# Navbar brand and toggle  #}
-        <div id="navbar" class="navbar-header" tabindex="-1">
-            {% set logo = capco_site_image_media('image.logo') %}
-            {% if(logo != null) %}
-                <a id="home" class="navbar-brand" href="{{ path('app_homepage' )}}">
-                    {% thumbnail logo, 'logo' with {'title': 'menu.homepage'|trans({}, 'CapcoAppBundle'), 'alt': 'menu.homepage'|trans({}, 'CapcoAppBundle')} %}
-                </a>
-            {% endif %}
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse">
-                <span class="navbar__toggle-icon">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </span>
-                <span class="navbar__toggle-label">{{ 'global.menu.title'|trans({}, 'CapcoAppBundle') }}</span>
-            </button>
-        </div>
-        {{ render(controller('CapcoAppBundle:Site/Default:navigation', { pathInfo: app.request.pathInfo })) }}
-    </div>
-</nav>
-
+{{ react_intl_component('EmailNotConfirmedApp') }}
 <div id="render-alert-box" style="position: fixed; width: 60%; left: 20%; z-index: 1030;"></div>

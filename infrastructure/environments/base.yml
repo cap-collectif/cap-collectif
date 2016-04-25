@@ -3,7 +3,6 @@ application:
     ports:
         - "80:80"
     environment:
-        SYMFONY_MAILER_HOST: mailcatchersmtp
         SYMFONY_DATABASE_HOST: database
         SYMFONY_ELASTICSEARCH_HOST: elasticsearch
         SYMFONY_REDIS_HOST: redis
@@ -48,6 +47,9 @@ seleniumhub:
 
 mailcatcher:
   image: jderusse/mailcatcher:latest
+  ports:
+    - "25:25"
+    - "1080:80"
 
 chrome:
    image: selenium/node-chrome-debug:2.47.1

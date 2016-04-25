@@ -70,6 +70,17 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
+    public function findUsersThatJustExpired()
+    {
+      $qb = $this->createQueryBuilder('u');
+      $qb
+          ->andwhere('u.expired = false')
+          ->andWhere('u.expiresAt IS NOT NULL')
+          ->andWhere('u.expiresAt < CURRENT_DATE()')
+        ;
+      return $qb->getQuery()->getResult();
+    }
+
     public function findProjectOpinionContributorsWithCount(Project $project)
     {
         $qb = $this->createQueryBuilder('u')

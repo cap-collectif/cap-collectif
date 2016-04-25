@@ -30,11 +30,13 @@
                         </ul>
                     </div>
                 {% endif %}
-                {% if opinionType is defined and opinionType.isEnabled == true and currentStep.canContribute and currentStep.canContribute %}
-                    <a id="btn-add--{{ opinionType.slug }}" href="{{ path('app_project_new_opinion' ,{'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug } ) }}" class="btn  btn-primary">
-                        <i class="cap cap-add-1"></i>
-                        <span class="hidden-xs">{{ buttonLabel | trans({}, 'CapcoAppBundle') }}</span>
-                    </a>
+                {% if opinionType is defined and opinionType.isEnabled and currentStep.canContribute and currentStep.canContribute %}
+                  {{ react_intl_component('NewOpinionApp', {'props': {
+                    'slug': opinionType.slug,
+                    'link': path('app_project_new_opinion', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug }),
+                    'label': buttonLabel | trans({}, 'CapcoAppBundle')
+                    }})
+                   }}
                 {% endif %}
             </div>
         {% endif %}

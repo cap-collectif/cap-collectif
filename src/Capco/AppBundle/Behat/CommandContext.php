@@ -57,7 +57,7 @@ class CommandContext implements KernelAwareContext
     }
 
     /**
-     * @Then I should see :content
+     * @Then I should see :content in output
      */
     public function iShouldSee($content)
     {

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
@@ -7,10 +7,9 @@ import QuillToolbar from './QuillToolbar';
 
 const Editor = React.createClass({
   propTypes: {
-    valueLink: PropTypes.object.isRequired,
-    id: PropTypes.string,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
+    valueLink: React.PropTypes.object.isRequired,
+    id: React.PropTypes.string,
+    className: React.PropTypes.string,
   },
   mixins: [IntlMixin],
 
@@ -18,7 +17,6 @@ const Editor = React.createClass({
     return {
       id: '',
       className: '',
-      disabled: false,
     };
   },
 
@@ -69,20 +67,9 @@ const Editor = React.createClass({
 
   render() {
     const classes = {
-      'editor': !this.props.disabled,
-      'form-control': this.props.disabled,
+      'editor': true,
       [this.props.className]: true,
     };
-    if (this.props.disabled) {
-      return (
-        <textarea
-          id={this.props.id}
-          className={classNames(classes)}
-          disabled
-        >
-        </textarea>
-      );
-    }
     return (
       <div id={this.props.id} className={classNames(classes)}>
         <QuillToolbar ref="toolbar" />

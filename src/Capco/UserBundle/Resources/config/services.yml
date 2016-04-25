@@ -1,10 +1,6 @@
-parameters:
-  my_user_provider.class: Capco\UserBundle\Security\Core\User\UserProvider
-
 services:
   my_user_provider:
-      class: "%my_user_provider.class%"
-      #this is the place where the properties are passed to the UserProvider - see config.yml
+      class: Capco\UserBundle\Security\Core\User\UserProvider
       arguments: [@fos_user.user_manager,{facebook: facebook_id, google: google_id}]
 
   capco_user.registration.form.type:
@@ -31,8 +27,14 @@ services:
       tags:
           - { name: form.type, alias: capco_user_change_password }
 
-  capco.user_type.repository:
-      class:           Capco\UserBundle\Repository\UserTypeRepository
-      factory_service: doctrine.orm.entity_manager
-      factory_method:  getRepository
-      arguments:       ['CapcoUserBundle:UserType']
+  # We override default security services:
+  security.authentication.success_handler:
+      class:  Capco\UserBundle\Handler\AuthenticationSuccessHandler
+      arguments:  ["@security.http_utils", {}]
+      tags:
+          - { name: 'monolog.logger', channel: 'security' }
+  security.authentication.failure_handler:
+      class:  Capco\UserBundle\Handler\AuthenticationFailureHandler
+      arguments:  ["@http_kernel", "@security.http_utils", {}, "@logger"]
+      tags:
+          - { name: 'monolog.logger', channel: 'security' }

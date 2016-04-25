@@ -19,7 +19,7 @@ use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Util\Codes;
+use Symfony\Component\HttpFoundation\Response;
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
@@ -340,7 +340,7 @@ class ProposalsController extends FOSRestController
             return $proposal;
         }
 
-        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+        $view = $this->view($form->getErrors(true), Response::HTTP_BAD_REQUEST);
 
         return $view;
     }

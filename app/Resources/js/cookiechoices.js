@@ -9,11 +9,11 @@ var cookieChoices = function() {
     var dismissLinkId = 'cookieChoiceDismiss';
 
     function _createHeaderElement(cookieText, dismissText, linkText, linkHref) {
-      var butterBarStyles = 'width:100%;' +
-          'margin:0;padding:4px;text-align:center;';
+      var butterBarStyles = 'margin-bottom:0;text-align:center;';
 
       var cookieConsentElement = document.createElement('div');
       cookieConsentElement.id = cookieConsentId;
+      cookieConsentElement.className = 'alert alert-info';
       cookieConsentElement.style.cssText = butterBarStyles;
       cookieConsentElement.appendChild(_createConsentText(cookieText));
 
@@ -33,7 +33,7 @@ var cookieChoices = function() {
     }
 
     function _createConsentText(cookieText) {
-      var consentText = document.createElement('p');
+      var consentText = document.createElement('span');
       _setElementText(consentText, cookieText);
       return consentText;
     }

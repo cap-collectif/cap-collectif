@@ -49,3 +49,9 @@ services:
     arguments: []
     tags:
       - { name: form.type, alias: argument }
+
+  capco.form.registration:
+      class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
+      arguments: [@capco.toggle.manager]
+      tags:
+        - { name: form.type, alias: registration }
