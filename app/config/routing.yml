@@ -126,7 +126,7 @@ capco_app:
 
 # Dummy route for sonata
 sonata_user_profile_show:
-  path: /profile/redirect-show
+  path: /profile/redirect-sonata-show
   defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: capco_user_profile_show
@@ -134,7 +134,7 @@ sonata_user_profile_show:
 
 # Dummy route for fos
 fos_user_profile_show:
-  path: /profile/redirect-show
+  path: /profile/redirect-fos-show
   defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: capco_user_profile_show
