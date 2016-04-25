@@ -37,31 +37,19 @@ class CommentType extends AbstractType
         }
 
         $builder
-            ->add('body', 'textarea', [
-                'required' => true,
-                'label' => 'comment.form.body',
-                'translation_domain' => 'CapcoAppBundle',
-            ])
+            ->add('body', 'textarea', ['required' => true])
         ;
 
         if ($this->action === 'create') {
             $builder
-                ->add('parent', null, [
-                    'required' => false,
-                ])
+                ->add('parent', null, ['required' => false])
             ;
         }
 
-        if (null == $this->user) {
+        if (!$this->user) {
             $builder
-                ->add('authorName', null, [
-                    'required' => true,
-                    'translation_domain' => 'CapcoAppBundle',
-                ])
-                ->add('authorEmail', 'email', [
-                    'required' => true,
-                    'translation_domain' => 'CapcoAppBundle',
-                ])
+                ->add('authorName', null, ['required' => true])
+                ->add('authorEmail', null, ['required' => true])
             ;
         }
     }

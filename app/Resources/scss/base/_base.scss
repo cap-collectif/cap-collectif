@@ -18,6 +18,10 @@ body {
   }
 }
 
+.w100 {
+  width: 100%;
+}
+
 .main {
   background-color: $main-bg;
 
@@ -620,6 +624,10 @@ svg.avatar {
   height: 60px;
   margin-top: -60px;
   visibility: hidden;
+}
+
+#alert-email-not-confirmed {
+  margin-bottom: 0;
 }
 
 @media print {

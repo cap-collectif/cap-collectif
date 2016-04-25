@@ -10,7 +10,7 @@ use Capco\AppBundle\Form\ReportingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -74,7 +74,7 @@ class ArgumentsController extends FOSRestController
      * @Get("opinions/{opinionId}/versions/{versionId}/arguments")
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @QueryParam(name="type", requirements="(0|1)", default=null)
+     * @QueryParam(name="type", requirements="(0|1)", nullable=true)
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
      * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos"})
      */
@@ -208,7 +208,7 @@ class ArgumentsController extends FOSRestController
     public function putOpinionArgumentAction(Request $request, Opinion $opinion, Argument $argument)
     {
         if ($this->getUser() !== $argument->getAuthor()) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         if ($argument->getOpinion() != $opinion) {
@@ -246,7 +246,7 @@ class ArgumentsController extends FOSRestController
     public function putOpinionVersionArgumentAction(Request $request, Opinion $opinion, OpinionVersion $version, Argument $argument)
     {
         if ($this->getUser() !== $argument->getAuthor()) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         if ($argument->getOpinionVersion() != $version) {
@@ -287,7 +287,7 @@ class ArgumentsController extends FOSRestController
     public function deleteOpinionArgumentAction(Opinion $opinion, Argument $argument)
     {
         if ($this->getUser() !== $argument->getAuthor()) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         if ($argument->getOpinion() != $opinion) {
@@ -315,7 +315,7 @@ class ArgumentsController extends FOSRestController
     public function deleteOpinionVersionArgumentAction(Opinion $opinion, OpinionVersion $version, Argument $argument)
     {
         if ($this->getUser() !== $argument->getAuthor()) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         if ($argument->getOpinionVersion() !== $version) {
@@ -408,7 +408,7 @@ class ArgumentsController extends FOSRestController
     public function postOpinionArgumentReportAction(Request $request, Opinion $opinion, Argument $argument)
     {
         if ($this->getUser() === $argument->getAuthor()) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         if ($argument->getOpinion() != $opinion) {
@@ -429,7 +429,7 @@ class ArgumentsController extends FOSRestController
     public function postOpinionVersionArgumentReportAction(Request $request, Opinion $opinion, OpinionVersion $version, Argument $argument)
     {
         if ($this->getUser() === $argument->getAuthor()) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         if ($argument->getOpinionVersion() !== $version) {

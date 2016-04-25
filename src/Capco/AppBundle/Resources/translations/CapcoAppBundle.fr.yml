@@ -822,12 +822,13 @@ user:
   register:
     confirmation_message:
       hello: Bonjour %username%,
-      thanks: Merci de vous être inscrit sur %sitename%. Veuillez cliquer sur le lien ci-dessous pour valider votre adresse électronique et vous connecter à la plateforme :
+      thanks: Merci de vous être inscrit sur %sitename%.
+      please: Veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique :
       validate: <a href="%url%"><strong>Confirmer mon adresse électronique</strong></a>
-      participate: Après vous être connecté, vous pourrez voter, contribuer et compléter votre profil.
-      question: Si vous avez des questions concernant votre compte ou tout autre sujet, n'hésitez pas à nous contacter à cette adresse <a href="mailto:%email%">%email%</a> ou en répondant à ce courriel.
+      participate: A l'aide de votre compte, vous pourrez voter, contribuer et éditer votre profil.
+      question: Si vous avez des questions concernant votre compte ou tout autre sujet, n'hésitez pas à nous contacter à cette adresse <a href="mailto:%email%">%email%</a>.
       bye: Bonne participation !
-      footer1: Vous recevez ce courriel parce que vous avez créé un compte sur %sitename%.
+      footer1: Vous recevez ce courriel parce que vous vous êtes inscrit sur %sitename%.
       footer2: Ce message vous a été adressé automatiquement par <a href="http://www.cap-collectif.com">Cap Collectif</a>.
     title: Inscription à la plateforme
     social:
@@ -1235,3 +1236,17 @@ search:
       user: Membre
 
 'User account is disabled.': Ce compte n'est pas activé.
+
+email:
+  expire_user:
+      subject_no_contrib: %sitename% — Votre compte a expiré
+      subject_with_contrib: %sitename% — Votre compte a expiré et vos contenus ont été supprimés
+      hello: Bonjour %username%,
+      info_no_contrib: Nous sommes au regret de vous annoncer que votre compte a expiré, car celui-ci n'a pas été vérifié dans un délai de 48 heures.
+      info_with_contrib: Nous sommes au regret de vous annoncer que votre compte a expiré et que vos contenus ont été supprimés, car votre compte n'a pas été vérifié dans un délai de 48 heures.
+      reactivate: Si vous souhaitez tout de même participer, veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique et réactiver votre compte :
+      confirm: <a href="%url%"><strong>Confirmer mon adresse électronique et réactiver mon compte</strong></a>
+      after_no_contrib: Après avoir réactivé votre compte, vous pourrez de nouveau vous connecter, voter et contribuer.
+      after_with_contrib: Après avoir réactivé votre compte, vous pourrez de nouveau vous connecter, voter et contribuer. En revanche, les contenus supprimés ne seront pas restaurés.
+      question: Si vous avez des questions concernant votre compte ou tout autre sujet, n'hésitez pas à nous contacter à cette adresse %email%.
+      done: Bien cordialement,

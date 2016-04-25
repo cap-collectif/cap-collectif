@@ -11,101 +11,54 @@ security:
         ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN]
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
         SONATA:
-            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT  # if you are using acl then this line must be commented
+            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT # if you are using acl then this line must be commented
 
     providers:
-        fos_userbundle:
+        fos_userbundle: # will be used as the default provider
             id: capco_user.user_provider.email
 
     firewalls:
         dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        admin:
-            pattern:            /admin(.*)
-            context:            user
-            form_login:
-                provider:       fos_userbundle
-                login_path:     /admin/login
-                use_forward:    false
-                check_path:     /admin/login_check
-                failure_path:   null
-            logout:
-                path:           /admin/logout
-            anonymous:          true
-
         api_login:
-            pattern:  ^/api/login
-            provider: fos_userbundle
+            pattern: ^/api/login_check
             stateless: true
-            anonymous: true
-            context:         user
-            form_login:
-                check_path:               /api/login_check
-                username_parameter:       username
-                password_parameter:       password
-                success_handler:          lexik_jwt_authentication.handler.authentication_success
-                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
-                require_previous_session: false
+            gfreeau_get_jwt: ~ # form_login is never stateless, that's why we use this bundle
 
         api:
-            pattern:   ^/api
-            provider: fos_userbundle
+            pattern: ^/api
             stateless: true
             anonymous: true
-            context:   user
             lexik_jwt:
                 authorization_header:
                     enabled: true
                     prefix: Bearer
                 query_parameter:
-                    enabled: true
-                    name: bearer
+                    enabled: false
         main:
-            pattern:             ^/
+            pattern: ^/
+            anonymous: true
             form_login:
-                provider:       fos_userbundle
-                csrf_provider:  form.csrf_provider
-                login_path:     /login
-                check_path:     /login_check
-                use_forward:    false
-                failure_path:   null
+                check_path: /login_check
+                require_previous_session: false
             oauth:
                 resource_owners:
-                    facebook: "/login/check-facebook"
-                    google:   "/login/check-google"
-                    nous_citoyens:  "/login/check-nous-citoyens"
-                login_path: /login
+                    facebook: /login/check-facebook
+                    google: /login/check-google
+                login_path: /
                 oauth_user_provider:
                     service: my_user_provider
             remember_me:
-                key: %remember_secret%
-                lifetime: 31536000
-                path: /
-                domain: ~
+              always_remember_me: true
+              key: %remember_secret%
+              lifetime: 31536000
+              path: /
+              domain: ~
             logout:
               path: /logout
               target: /
-            anonymous: true
-            context: user
 
     access_control:
-        # URL of FOSUserBundle which need to be available to anonymous users
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        # Admin login page needs to be accessed without credential
-        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        # Api
-        - { path: ^/api,       role: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        # Secured part of the site
-        # This config requires being logged for the whole site and having the admin role for the admin part.
-        # Change these rules to adapt them to your needs
-        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
-        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }

@@ -7,8 +7,6 @@ imports:
     - { resource: services/forms.yml }
 
 parameters:
-  capco.notify.manager.class: Capco\AppBundle\Manager\Notify
-  capco.toggle.manager.class: Capco\AppBundle\Toggle\Manager
   traits:
     selflinkable:
       interfaces:
@@ -29,12 +27,16 @@ services:
 
   ## Service Notify - send mail
   capco.notify_manager:
-    class:     %capco.notify.manager.class%
-    arguments: [@mailer, @swiftmailer.mailer.service, @templating, @translator, @capco.site_parameter.resolver, @router, @capco.url.resolver, @validator, {confirmation.template: %fos_user.registration.confirmation.template%, resetting.template: %fos_user.resetting.email.template%}]
+    class: Capco\AppBundle\Manager\Notify
+    arguments: [@mailer, @templating, @translator, @capco.site_parameter.resolver, @router, @capco.url.resolver, @validator, {confirmation.template: %fos_user.registration.confirmation.template%, resetting.template: %fos_user.resetting.email.template%}]
+
+  capco.contribution.manager:
+    class: Capco\AppBundle\Manager\ContributionManager
+    arguments: [@doctrine.orm.entity_manager]
 
   ## Toggle
   capco.toggle.manager:
-    class:     %capco.toggle.manager.class%
+    class: Capco\AppBundle\Toggle\Manager
     arguments: [@qandidate.toggle.manager, @qandidate.toggle.user_context_factory ]
 
   capco.event.helper:

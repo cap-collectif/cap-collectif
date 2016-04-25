@@ -16,9 +16,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class NotifySpec extends ObjectBehavior
 {
 
-    function let(\Swift_Mailer $mailer, \Swift_Mailer $mailer2, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, ValidatorInterface $validator)
+    function let(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, ValidatorInterface $validator)
     {
-        $this->beConstructedWith($mailer, $mailer2, $templating, $translator, $resolver, $router, $urlResolver, $validator, ['confirmation.template' => null, 'resetting.template' => null]);
+        $this->beConstructedWith($mailer, $templating, $translator, $resolver, $router, $urlResolver, $validator, ['confirmation.template' => null, 'resetting.template' => null]);
     }
 
 

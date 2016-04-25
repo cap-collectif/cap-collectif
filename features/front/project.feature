@@ -64,6 +64,7 @@ Feature: Project
     And I should not see "Stratégie technologique de l'Etat et services publics"
     And I should not see "Projet vide"
 
+  @javascript
   Scenario: Project should contain allowed types only
     Given I am logged in as user
     And I visited "consultation page" with:
@@ -151,6 +152,7 @@ Feature: Project
     When I try to download "projets/strategie-technologique-de-l-etat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
     Then I should see "Désolé, cette page n'existe pas (404)"
 
+  @javascript
   Scenario: Can not access trash if feature is disabled
     Given I am logged in as user
     And I visited "consultation page" with:
@@ -158,15 +160,17 @@ Feature: Project
       | stepSlug    | collecte-des-avis                |
     Then I should not see "Corbeille"
 
+  @javascript
   Scenario: Can not access trash if not logged in
     Given feature "project_trash" is enabled
     And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    When I follow "Corbeille"
-    Then I should see "Se connecter"
+    And I should see "Corbeille"
+    When I click the "#trash-link" element
+    Then I should see "Connectez-vous pour contribuer"
 
-  @parallel-wait
+  @javascript
   Scenario: Project trash display correct numbers of elements
     Given feature "project_trash" is enabled
     And I am logged in as user

@@ -3,8 +3,8 @@ Feature: Newsletter
   Background:
     Given feature "newsletter" is enabled
 
-@database
-Scenario: Can subscribe to the Newsletter
+  @database @javascript
+  Scenario: Can subscribe to the Newsletter
   Given I visited "home page"
   When I fill in the following:
     | capco_appbundle_newslettersubscription_email  | iwantsomenews@gmail.com  |

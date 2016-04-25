@@ -1,3 +1,4 @@
+
 <?php
 
 use Symfony\Component\HttpKernel\Kernel;
@@ -13,6 +14,10 @@ class AppKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
+
+            // Redis
+            new Snc\RedisBundle\SncRedisBundle(),
+
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
@@ -59,9 +64,6 @@ class AppKernel extends Kernel
             // feature activation / deactivation
             new Qandidate\Bundle\ToggleBundle\QandidateToggleBundle(),
 
-            // Redis
-            new Snc\RedisBundle\SncRedisBundle(),
-
             // typography concerns
             new Joli\TypoBundle\JoliTypoBundle(),
 
@@ -81,6 +83,7 @@ class AppKernel extends Kernel
             new \FOS\RestBundle\FOSRestBundle(),
             new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new \Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+            new Gfreeau\Bundle\GetJWTBundle\GfreeauGetJWTBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 
             // Server side Js rendering

@@ -1,14 +1,23 @@
 import ReactOnRails from 'react-on-rails';
-import ProjectsListApp from './ProjectsListAppServer';
+import ProjectsListApp from '../js/startup/ProjectsListAppClient';
 import CollectStepPageApp from '../js/startup/CollectStepPageApp';
 import SelectionStepPageApp from '../js/startup/SelectionStepPageApp';
-import configureStore from '../js/stores/AppStore';
-const appStore = configureStore;
+import NavbarApp from '../js/startup/NavbarAppClient';
+import EmailNotConfirmedApp from '../js/startup/EmailNotConfirmedAppClient';
+import NewOpinionApp from '../js/startup/NewOpinionAppClient';
+import NewIdeaApp from '../js/startup/NewIdeaAppClient';
+import ProjectTrashButtonApp from '../js/startup/ProjectTrashButtonApp';
+import appStore from '../js/stores/AppStore';
 
 const register = ReactOnRails.register;
 const registerStore = ReactOnRails.registerStore;
 
 registerStore({ appStore });
 register({ ProjectsListApp });
-register({ CollectStepPageApp })
+register({ CollectStepPageApp });
 register({ SelectionStepPageApp });
+register({ NavbarApp });
+register({ EmailNotConfirmedApp });
+register({ NewOpinionApp });
+register({ NewIdeaApp });
+register({ ProjectTrashButtonApp });

@@ -16,7 +16,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Util\Codes;
+use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -64,6 +64,7 @@ class SynthesisController extends FOSRestController
      *
      * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses")
+     * @View(statusCode=201, serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function createSynthesisAction(Request $request)
     {
@@ -71,19 +72,12 @@ class SynthesisController extends FOSRestController
         $form = $this->createForm(new SynthesisForm(), $synthesis);
         $form->submit($request->request->all(), false);
 
-        if ($form->isValid()) {
-            $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
-            $view = $this->view($synthesis, Codes::HTTP_CREATED);
-            $view->setSerializationContext(SerializationContext::create()->setGroups(['SynthesisDetails', 'Elements']));
-            $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-            $view->setHeader('Location', $url);
-
-            return $view;
+        if (!$form->isValid()) {
+          return $form;
         }
 
-        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
-
-        return $view;
+        $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
+        return $synthesis;
     }
 
     /**
@@ -101,11 +95,7 @@ class SynthesisController extends FOSRestController
      * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses/from-consultation-step/{id}")
      * @ParamConverter("consultationStep", options={"mapping": {"id": "id"}})
-     *
-     * @param Request          $request
-     * @param ConsultationStep $consultationStep
-     *
-     * @return \FOS\RestBundle\View\View
+     * @View(statusCode=201, serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function createSynthesisFromConsultationStepAction(Request $request, ConsultationStep $consultationStep)
     {
@@ -113,19 +103,12 @@ class SynthesisController extends FOSRestController
         $form = $this->createForm(new SynthesisForm(), $synthesis);
         $form->submit($request->request->all(), false);
 
-        if ($form->isValid()) {
-            $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
-            $view = $this->view($synthesis, Codes::HTTP_CREATED);
-            $view->setSerializationContext(SerializationContext::create()->setGroups(['SynthesisDetails', 'Elements']));
-            $url = $this->generateUrl('get_synthesis', ['id' => $synthesis->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-            $view->setHeader('Location', $url);
-
-            return $view;
+        if (!$form->isValid()) {
+            return $form;
         }
 
-        $view = $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
-
-        return $view;
+        $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
+        return $synthesis;
     }
 
     /**

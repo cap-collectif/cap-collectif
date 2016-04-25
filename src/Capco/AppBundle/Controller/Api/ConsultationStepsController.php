@@ -14,7 +14,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Util\Codes;
+use Symfony\Component\HttpFoundation\Response;
 use Capco\AppBundle\Entity\OpinionAppendix;
 
 class ConsultationStepsController extends FOSRestController
@@ -91,6 +91,6 @@ class ConsultationStepsController extends FOSRestController
             return $opinion;
         }
 
-        return $this->view($form->getErrors(true), Codes::HTTP_BAD_REQUEST);
+        return $this->view($form->getErrors(true), Response::HTTP_BAD_REQUEST);
     }
 }

@@ -1,5 +1,7 @@
+@contact
 Feature: Contact
 
+@javascript
 Scenario: User wants to send a message via contact page
   Given I visited "contact page"
   When I fill in the following:
@@ -9,6 +11,7 @@ Scenario: User wants to send a message via contact page
   And I press "Envoyer"
   Then I should see "Merci ! Votre message a bien été envoyé."
 
+@javascript
 Scenario: User wants to send a message via contact page with wrong email
   Given I visited "contact page"
   When I fill in the following:
@@ -18,6 +21,7 @@ Scenario: User wants to send a message via contact page with wrong email
   And I press "Envoyer"
   Then I should see "Cette valeur n'est pas une adresse email valide."
 
+@javascript
 Scenario: User wants to send a message via contact page without filling fields
   Given I visited "contact page"
   When I press "Envoyer"

@@ -270,4 +270,3 @@ Feature: Arguments
     Given I am logged in to api as admin
     When I send a POST request to "/api/opinions/57/versions/1/arguments/4/reports" with a valid report json
     Then the JSON response status code should be 201
-

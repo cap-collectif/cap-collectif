@@ -5,6 +5,7 @@ namespace Capco\UserBundle\Controller;
 use Capco\AppBundle\Entity\Argument;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Capco\UserBundle\Entity\User;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,13 +20,10 @@ class ProfileController extends BaseController
     /**
      * @Route("/", name="capco_user_profile_show")
      * @Template()
+     * @Security("has_role('ROLE_USER')")
      */
     public function showAction()
     {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            throw $this->createAccessDeniedException();
-        }
-
         $doctrine = $this->getDoctrine();
         $serializer = $this->get('jms_serializer');
         $user = $this->get('security.token_storage')->getToken()->getUser();
@@ -50,7 +48,7 @@ class ProfileController extends BaseController
         ;
         $proposals = $serializer->serialize([
             'proposals' => $proposalsRaw,
-        ], 'json', SerializationContext::create()->setGroups(["Proposals", "ProposalResponses", "UsersInfos", "UserMedias"]));
+        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
 
         $replies = $this
@@ -109,7 +107,7 @@ class ProfileController extends BaseController
         ;
         $proposals = $serializer->serialize([
             'proposals' => $proposalsRaw,
-        ], 'json', SerializationContext::create()->setGroups(["Proposals", "ProposalResponses", "UsersInfos", "UserMedias"]));
+        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
         $replies = $this
             ->get('doctrine.orm.entity_manager')
@@ -218,7 +216,7 @@ class ProfileController extends BaseController
         ;
         $proposals = $serializer->serialize([
             'proposals' => $proposalsRaw,
-        ], 'json', SerializationContext::create()->setGroups(["Proposals", "ProposalResponses", "UsersInfos", "UserMedias"]));
+        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
 
         return [

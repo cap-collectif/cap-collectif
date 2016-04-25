@@ -38,10 +38,10 @@ class HomepageController extends Controller
 
                 if ($form->isValid()) {
                     // TODO: move this to a unique constraint in form instead
-                    $alreadyExists = $em->getRepository('CapcoAppBundle:NewsletterSubscription')
-                                        ->findOneByEmail($subscription->getEmail());
+                    $email = $em->getRepository('CapcoAppBundle:NewsletterSubscription')
+                                ->findOneByEmail($subscription->getEmail());
 
-                    if (null != $alreadyExists) {
+                    if ($email) {
                         $flashBag->add('info', $translator->trans('homepage.newsletter.already_subscribed'));
                     } else {
                         $em->persist($subscription);
