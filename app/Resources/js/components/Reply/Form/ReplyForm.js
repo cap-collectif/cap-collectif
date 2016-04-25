@@ -17,6 +17,7 @@ const ReplyForm = React.createClass({
     onSubmitSuccess: PropTypes.func.isRequired,
     onSubmitFailure: PropTypes.func.isRequired,
     reply: PropTypes.object,
+    disabled: PropTypes.bool,
   },
   mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
@@ -25,6 +26,7 @@ const ReplyForm = React.createClass({
       reply: {
         responses: [],
       },
+      disabled: false,
     };
   },
 
@@ -57,7 +59,7 @@ const ReplyForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isSubmitting && !this.props.isSubmitting) {
+    if (!this.props.disabled && nextProps.isSubmitting && !this.props.isSubmitting) {
       const {
         onSubmitSuccess,
         onSubmitFailure,
@@ -148,6 +150,7 @@ const ReplyForm = React.createClass({
 
   render() {
     const optional = this.getIntlMessage('global.form.optional');
+    const { disabled } = this.props;
     return (
       <form id="reply-form" ref="form">
         {
@@ -177,6 +180,7 @@ const ReplyForm = React.createClass({
                     onChange={this.onChange}
                     values={this.state.form}
                     labelClassName="h4"
+                    disabled={disabled}
                   />
                 );
 
@@ -191,6 +195,7 @@ const ReplyForm = React.createClass({
                     renderFormErrors={this.renderFormErrors}
                     onChange={this.onChange}
                     labelClassName="h4"
+                    disabled={disabled}
                   />
                 );
 
@@ -208,6 +213,7 @@ const ReplyForm = React.createClass({
                     errors={this.renderFormErrors(field.id)}
                     defaultValue=""
                     labelClassName="h4"
+                    disabled={disabled}
                   >
                     <option value="" disabled>{this.getIntlMessage('global.select')}</option>
                     {
@@ -232,6 +238,7 @@ const ReplyForm = React.createClass({
                     errors={this.renderFormErrors(field.id)}
                     placeholder={this.getIntlMessage('reply.your_response')}
                     labelClassName="h4"
+                    disabled={disabled}
                   />
                 );
             }

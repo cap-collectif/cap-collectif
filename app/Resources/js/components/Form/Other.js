@@ -64,10 +64,10 @@ const Other = React.createClass({
     const fieldName = 'choices-for-field-' + field.id;
 
     return (
-      <Row className="checkbox--other">
+      <Row id={'reply-' + field.id + '_choice-other'} className="checkbox--other">
         <Col xs={2} md={1}>
           <Input
-            id={field.id + '-choice-other'}
+            id={'reply-' + field.id + '_choice-other--check'}
             name={fieldName}
             type={this.props.field.type}
             label={this.getIntlMessage('reply.other')}
@@ -78,6 +78,7 @@ const Other = React.createClass({
         </Col>
         <Col xs={10} md={11}>
           <Input
+            id={'reply-' + field.id + '_choice-other--field'}
             ref={c => this.textField = c}
             type="text"
             bsSize="small"
