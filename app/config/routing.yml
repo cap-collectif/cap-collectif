@@ -132,6 +132,14 @@ sonata_user_profile_show:
         route: capco_user_profile_show
         permanent: true
 
+# Dummy route for fos
+fos_user_profile_show:
+  path: /profile/redirect-show
+  defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: capco_user_profile_show
+        permanent: true
+
 capco_profile_edit:
     path:      /profile/edit-profile
     defaults:  { _controller: SonataUserBundle:ProfileFOSUser1:editProfile }
