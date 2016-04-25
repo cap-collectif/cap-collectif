@@ -50,7 +50,7 @@ class ProfileController extends BaseController
         ;
         $proposals = $serializer->serialize([
             'proposals' => $proposalsRaw,
-        ], 'json', SerializationContext::create()->setGroups(["Proposals", "ProposalResponses", "UsersInfos", "UserMedias"]));
+        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
 
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
@@ -100,7 +100,7 @@ class ProfileController extends BaseController
         ;
         $proposals = $serializer->serialize([
             'proposals' => $proposalsRaw,
-        ], 'json', SerializationContext::create()->setGroups(["Proposals", "ProposalResponses", "UsersInfos", "UserMedias"]));
+        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
@@ -201,7 +201,7 @@ class ProfileController extends BaseController
         ;
         $proposals = $serializer->serialize([
             'proposals' => $proposalsRaw,
-        ], 'json', SerializationContext::create()->setGroups(["Proposals", "ProposalResponses", "UsersInfos", "UserMedias"]));
+        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
 
         return [

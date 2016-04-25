@@ -16,10 +16,11 @@ $container->setParameter('database_password', null);
 $container->setParameter('elasticsearch_host', getenv_default('elasticsearch_host', '127.0.0.1'));
 $container->setParameter('redis_host', getenv_default('redis_host', '127.0.0.1'));
 
-$container->setParameter('mailer_user', getenv_default('mailer_user', null));
-$container->setParameter('mailer_password', getenv_default('mailer_password', null));
-$container->setParameter('mailer_host', getenv_default('mailer_host', 'mailcatchersmtp'));
-$container->setParameter('mailer_port', getenv_default('mailer_port', 25));
+$container->setParameter('mailer_transport', getenv_default('mailer_transport', 'smtp'));
+$container->setParameter('mailer_user', getenv_default('mailer_user', 'maxime@cap-collectif.com'));
+$container->setParameter('mailer_password', getenv_default('mailer_password', '***REMOVED***'));
+$container->setParameter('mailer_host', getenv_default('mailer_host', '***REMOVED***'));
+$container->setParameter('mailer_port', getenv_default('mailer_port', 587));
 
 $container->setParameter('locale', getenv_default('locale', 'fr'));
 $container->setParameter('secret', getenv_default('secret', '***REMOVED***'));
@@ -29,6 +30,8 @@ $container->setParameter('facebook_app_id', getenv_default('facebook_app_id', '*
 $container->setParameter('facebook_app_secret', getenv_default('facebook_app_secret', '***REMOVED***'));
 $container->setParameter('google_app_id', getenv_default('google_app_id', '***REMOVED***'));
 $container->setParameter('google_app_secret', getenv_default('google_app_secret', '***REMOVED***'));
+$container->setParameter('nous_citoyens_app_id', getenv_default('nous_citoyens_app_id', 'xxx'));
+$container->setParameter('nous_citoyens_app_secret', getenv_default('nous_citoyens_app_secret', 'xxx'));
 
 $container->setParameter('shield_login', getenv_default('shield_login', '***REMOVED***'));
 $container->setParameter('shield_pwd', getenv_default('shield_pwd', '***REMOVED***'));
@@ -47,5 +50,3 @@ $container->setParameter('assets_version', getenv_default('assets_version', 'v1'
 $container->setParameter('server_version', getenv_default('server_version', '5.6'));
 
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
-
-$container->setParameter('recaptcha_private_key', getenv_default('recaptcha_private_key', '***REMOVED***'));

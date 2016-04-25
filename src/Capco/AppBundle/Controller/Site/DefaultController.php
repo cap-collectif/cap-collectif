@@ -45,7 +45,7 @@ class DefaultController extends Controller
                     ->setFrom($data['email'])
                     ->setReplyTo($data['email'])
                 ;
-                $this->get('mailer')->send($message);
+                $this->get('swiftmailer.mailer.service')->send($message);
                 $this->get('session')->getFlashBag()->add('success', 'contact.email.sent_success');
 
                 return $this->redirect($this->generateUrl('app_homepage'));
@@ -83,29 +83,38 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
+     * @Template("CapcoAppBundle:Default:navigation.html.twig")
+     */
+    public function navigationAction($pathInfo = null)
+    {
+        $headerLinks = $this->get('capco.menu_item.resolver')->getEnabledMenuItemsWithChildren(MenuItem::TYPE_HEADER);
+
+        return [
+            'pathInfo' => $pathInfo,
+            'headerLinks' => $headerLinks,
+        ];
+    }
+
+    /**
      * @Route("/get_api_token", name="app_get_api_token")
      */
     public function getTokenAction()
     {
-        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            return new JsonResponse([
-              'error' => 'You are not authenticated.'
-            ], 401);
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            return new JsonResponse(['error' => 'You are not authenticated.'], 401);
         }
 
         $user = $this->getUser();
+
         $token = $this->get('lexik_jwt_authentication.jwt_manager')
                       ->create($user);
 
-        $json = $this->get('jms_serializer')->serialize(
-            $user,
-            'json',
-            SerializationContext::create()->setGroups(['Default', 'Users', 'UsersInfos'])
-        );
+        $userData = $this->get('jms_serializer')->serialize($user, 'json', SerializationContext::create()->setGroups(['Default', 'Users', 'UsersInfos']));
 
         return new JsonResponse([
             'token' => $token,
-            'user' => $json,
+            'user' => $userData,
         ]);
     }
 }

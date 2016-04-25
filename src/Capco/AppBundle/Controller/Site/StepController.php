@@ -285,7 +285,7 @@ class StepController extends Controller
             'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
             'step' => $step,
             'count' => $searchResults['count'],
-            'proposals' => $searchResults['proposals']
+            'proposals' => $searchResults['proposals'],
         ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'Themes', 'Districts', 'Default', 'Steps', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
 
         $response = $this->render('CapcoAppBundle:Step:collect.html.twig', [

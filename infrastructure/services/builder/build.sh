@@ -7,7 +7,7 @@ if [ "$PRODUCTION" ]; then
   # We install vendors with composer
   # We don't use `--no-scripts` or `--no-plugins` because a script in a composer plugin
   # will generate the file vendor/ocramius/package-versions/src/PackageVersions/Versions.php
-  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-progress --ignore-platform-reqs
+  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-progress
   # We build bootstrap.php.cache in the `var` directory
   php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var
 
@@ -21,7 +21,7 @@ if [ "$PRODUCTION" ]; then
 else
   echo "Building for development"
   # Symfony deps
-  composer install --prefer-dist --no-interaction --ignore-platform-reqs
+  composer install --prefer-dist --no-interaction
   composer dump-autoload
 
   # Frontend deps

@@ -101,8 +101,7 @@ class ApplicationContext extends UserContext
      */
     public function clearLocalStorage()
     {
-        $this->getSession()->getDriver()->evaluateScript('window.sessionStorage.clear();');
-        $this->getSession()->getDriver()->evaluateScript('window.localStorage.clear();');
+        $this->getSession()->getDriver()->evaluateScript('localStorage.clear();');
     }
 
     /**
@@ -145,19 +144,11 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @Given feature :featureA is enabled
-     * @Given features :featureA, :featureB are enabled
-     * @Given features :featureA, :featureB, :featureC are enabled
+     * @Given feature :feature is enabled
      */
-    public function featureIsEnabled($featureA, $featureB = null, $featureC = null)
+    public function featureIsEnabled($feature)
     {
-        $this->getService('capco.toggle.manager')->activate($featureA);
-        if ($featureB) {
-          $this->getService('capco.toggle.manager')->activate($featureB);
-          if ($featureC) {
-            $this->getService('capco.toggle.manager')->activate($featureC);
-          }
-        }
+        $this->getService('capco.toggle.manager')->activate($feature);
     }
 
     /**

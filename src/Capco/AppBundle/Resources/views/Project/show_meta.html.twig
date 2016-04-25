@@ -76,12 +76,12 @@
                 {% endif %}
                 {% if showTrash %}
                     <li {% if currentStep == 'trash_step' %} class="active" {% endif %}>
-                        {{ react_intl_component('ProjectTrashButtonApp', {'props': {
-                            'link': path('app_project_show_trashed', {'projectSlug': project.slug }),
-                            'label': 'project.show.meta.info.trash'|trans({}, 'CapcoAppBundle'),
-                            }}
-                          )
-                        }}
+                        <a href="{{ path('app_project_show_trashed', {
+                            'projectSlug': project.slug }) }}">
+                            <p class="navbar__step-title">
+                                <i class="cap cap-bin-2-1"></i> {{ 'project.show.meta.info.trash'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i>
+                            </p>
+                        </a>
                     </li>
                 {% endif %}
             </ul>

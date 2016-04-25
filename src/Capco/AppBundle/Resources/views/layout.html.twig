@@ -41,22 +41,8 @@
 
 <div id="app-wrapper">
   {{ redux_store('appStore', {
-    'baseUrl': app.request.schemeAndHttpHost,
     'features': features_list(),
-    'user': app.user
-      ? {
-          'username': app.user.username,
-          'isEmailConfirmed': app.user.isEmailConfirmed,
-          'isAdmin': app.user.isAdmin,
-          'email': app.user.email,
-          'media': app.user.Media
-          ? {
-              'url': media_public_url(app.user.Media, 'default_avatar')
-            }
-          : null
-        }
-      : null,
-    'user_types': user_type_list(),
+    'user': {},
   }) }}
     {% block mainContent %}{% endblock %}
 </div>

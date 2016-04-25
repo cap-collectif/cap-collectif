@@ -23,7 +23,6 @@ fos_user:
         short: "[-Inf,Inf]L'adresse e-mail est trop courte."
         long: "[-Inf,Inf]L'adresse e-mail est trop longue."
         invalid: L'adresse e-mail est invalide.
-        throwable: Ce fournisseur d'adresse électronique n'est pas accepté sur ce site, car il n'est pas considéré comme fiable. Veuillez utiliser une autre adresse.
     password:
         blank: Entrez un mot de passe s'il vous plait.
         short: "[-Inf,Inf]Le mot de passe est trop court."

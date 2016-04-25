@@ -745,6 +745,7 @@ capco:
     login_facebook: Authentification avec Facebook
     login_gplus: Authentification avec Google+
     login_twitter: Authentification avec Twitter
+    login_nous_citoyens: Authentification avec Nous Citoyens
     shield_mode: Protection du site par mot de passe
     user_type: Demander le type de profil
     members_list: Liste des membres

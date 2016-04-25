@@ -1,4 +1,3 @@
-@events
 Feature: Events
 
 Background:

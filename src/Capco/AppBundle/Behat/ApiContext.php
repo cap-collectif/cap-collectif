@@ -13,7 +13,6 @@ use GuzzleHttp\Client;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
-use PHPUnit_Framework_Assert as PHPUnit;
 
 class ApiContext extends ApplicationContext
 {
@@ -31,7 +30,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * @When I am logged in to api as admin
+     * @When /^I am logged in to api as admin$/
      */
     public function iAmLoggedInToApiAsAdmin()
     {
@@ -39,7 +38,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * @When I am logged in to api as user
+     * @When /^I am logged in to api as user$/
      */
     public function iAmLoggedInToApiAsUser()
     {
@@ -47,15 +46,7 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * @When I am logged in to api as user_not_confirmed
-     */
-    public function iAmLoggedInToApiAsUserNotConfirmed()
-    {
-        $this->createAuthenticatedClient('user_not_confirmed@test.com', 'user_not_confirmed');
-    }
-
-    /**
-     * @When I am logged in to api as xlacot
+     * @When /^I am logged in to api as xlacot$/
      */
     public function iAmLoggedInToApiAsXlacot()
     {
@@ -82,9 +73,6 @@ class ApiContext extends ApplicationContext
             'POST',
             '/api/login_check',
             [
-                'headers' => [
-                  'X-Requested-With' => 'XMLHttpRequest',
-                ],
                 'body' => [
                     'username' => $username,
                     'password' => $password,
@@ -94,7 +82,6 @@ class ApiContext extends ApplicationContext
         $response = $this->client->send($request);
         $this->token = $response->json()['token'];
     }
-
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid source json$/
@@ -209,7 +196,6 @@ EOF;
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
             ],
         ]);
         $this->response = $this->client->send($request);
@@ -224,7 +210,7 @@ EOF;
      */
     public function theJsonResponseStatusCodeShouldBe($code)
     {
-        PHPUnit::assertSame(
+        \PHPUnit_Framework_Assert::assertSame(
             intval($code),
             intval($this->response->getStatusCode()),
             (string) $this->response->getBody()
@@ -236,11 +222,11 @@ EOF;
      */
     public function theJsonResponseShouldMatch(PyStringNode $pattern)
     {
-        $this->response->json(); // check if json
-        $body = (string) $this->response->getBody();
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
-        PHPUnit::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError());
+        $this->response->json(); // check if json
+        $body = (string) $this->response->getBody();
+        \PHPUnit_Framework_Assert::assertTrue($matcher->match($body, $pattern->getRaw()), $body.' => '.$matcher->getError());
     }
 
     /**
@@ -383,7 +369,7 @@ EOF;
             }
         }
 
-        PHPUnit::assertTrue($logExists);
+        \PHPUnit_Framework_Assert::assertTrue($logExists);
     }
 
     /**
@@ -435,7 +421,7 @@ EOF;
                 $max = 100000;
                 $pinned = false;
             }
-            PHPUnit::assertGreaterThanOrEqual($comment['votes_count'], $max);
+            \PHPUnit_Framework_Assert::assertGreaterThanOrEqual($comment['votes_count'], $max);
             $max = $comment['votes_count'];
         }
     }
