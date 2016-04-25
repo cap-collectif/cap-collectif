@@ -21,8 +21,13 @@ Capco\AppBundle\Entity\Questionnaire:
     modifyAllowed:
       expose: true
       type: boolean
-      groups: [Questionnaire]
+      groups: [Questionnaires]
       serialized_name: isModifyAllowed
+    anonymousAllowed:
+      expose: true
+      type: boolean
+      groups: [Questionnaires]
+      serialized_name: anonymousAllowed
   virtual_properties:
     canContribute:
       serialized_name: contribuable

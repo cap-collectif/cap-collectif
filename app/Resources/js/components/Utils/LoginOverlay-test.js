@@ -38,5 +38,4 @@ describe('<LoginOverlay />', () => {
     expect(wrapper.find('OverlayTrigger')).to.have.length(1);
     expect(wrapper.find('OverlayTrigger').html()).to.equal('<div class="foo" aria-describedby="login-popover"></div>');
   });
-
 });

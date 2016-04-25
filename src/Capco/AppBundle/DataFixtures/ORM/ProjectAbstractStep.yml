@@ -90,12 +90,16 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
   pas24:
     step: @questionnairestep1
     project: @p8
-    position: 1
+    position: 2
   pas25:
     step: @questionnairestep2
     project: @p8
-    position: 2
+    position: 3
   pas26:
     step: @questionnairestep3
     project: @p8
-    position: 3
+    position: 4
+  pas27:
+    step: @pstep2
+    project: @p8
+    position: 1

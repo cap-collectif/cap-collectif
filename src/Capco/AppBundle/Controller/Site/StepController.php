@@ -356,11 +356,6 @@ class StepController extends Controller
           'replies' => $userRepliesRaw,
       ], 'json', SerializationContext::create()->setGroups(['Replies', 'UsersInfos', 'UserMedias']));
 
-        $repliesCount = $em
-            ->getRepository('CapcoAppBundle:Reply')
-            ->countPublishedForQuestionnaire($step->getQuestionnaire())
-        ;
-
         $stepJson = $serializer->serialize([
             'step' => $step,
         ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));

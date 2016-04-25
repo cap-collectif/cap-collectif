@@ -19,17 +19,18 @@ class MediaExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-          'media_public_url' => new \Twig_Function_Method($this, 'getMediaUrl')
+          'media_public_url' => new \Twig_Function_Method($this, 'getMediaUrl'),
         ];
     }
 
     public function getMediaUrl($media, $format)
     {
         if (!$media) {
-          return null;
+            return;
         }
 
         $provider = $this->container->get($media->getProviderName());
+
         return $provider->generatePublicUrl($media, $format);
     }
 }

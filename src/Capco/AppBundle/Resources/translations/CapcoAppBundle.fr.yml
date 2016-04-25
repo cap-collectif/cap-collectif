@@ -351,6 +351,7 @@ project:
     connections: "]-Inf, 1] %count% proposition liée | ]1,Inf[ %count% propositions liées"
     contributions_no_nb: "]-Inf, 1] contribution | ]1,Inf[ contributions"
     contributors:
+      anonymous: "]-Inf, 1] dont 1 anonyme | ]1,Inf[ dont %count% anonymes"
       title: Participants
     contributors_nb: "]-Inf, 1] participant | ]1,Inf[ participants"
     end_at: Date de fin : %date%

@@ -37,6 +37,14 @@ class ReplyType extends AbstractType
                 'required' => false,
             ])
         ;
+
+        if ($options['anonymousAllowed']) {
+            $builder
+                ->add('private', null, [
+                    'required' => false,
+                ])
+            ;
+        }
     }
 
     /**
@@ -48,6 +56,7 @@ class ReplyType extends AbstractType
             'data_class' => 'Capco\AppBundle\Entity\Reply',
             'csrf_protection' => false,
             'cascade_validation' => true,
+            'anonymousAllowed' => false,
         ]);
     }
 

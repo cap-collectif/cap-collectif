@@ -57,7 +57,15 @@
 
     <div class="block">
         <h2 class="h2">{{ 'step.presentation.contributors.title'|trans({}, 'CapcoAppBundle') }}
-            <span class="small excerpt">{{ project.participantsCount }}</span>
+            <span class="small excerpt">
+                {{ project.participantsCount }}
+                {%  set anonymousCount = project.participantsCount - (contributors | length) %}
+                {% if anonymousCount > 0 %}
+                    {% transchoice anonymousCount with {'%count': anonymousCount} from 'CapcoAppBundle' %}
+                    project.show.contributors.anonymous
+                    {% endtranschoice %}
+                {% endif %}
+            </span>
             {% if is_feature_enabled('share_buttons') %}
                 <a class="btn btn-primary pull-right" href="mailto:?body={{ project | capco_first_step_link(true) | escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
                     <i class="cap cap-user-add-2"></i>

@@ -3,11 +3,9 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\SiteParameter\Resolver as SiteParameterResolver;
 
 class ApiRegistrationFormType extends AbstractType
 {

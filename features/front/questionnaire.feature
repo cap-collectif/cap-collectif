@@ -12,7 +12,17 @@ Feature: Questionnaire
     And I fill the questionnaire form
     And I submit my reply
     Then I should see "Merci ! Votre réponse a bien été enregistrée."
-    And I should see my replies
+    And I should see my reply
+
+  @javascript @database
+  Scenario: Logged in user wants to add a private reply to a questionnaire
+    Given I am logged in as user
+    And I go to a questionnaire step
+    And I fill the questionnaire form
+    And I check the reply private checkbox
+    And I submit my reply
+    Then I should see "Merci ! Votre réponse a bien été enregistrée."
+    And I should see my anonymous reply
 
   @javascript @security
   Scenario: Logged in user wants to add a reply to a questionnaire without filling the required questions
@@ -42,7 +52,7 @@ Feature: Questionnaire
     And I fill the questionnaire form
     And I submit my reply
     Then I should see "Merci ! Votre réponse a bien été enregistrée."
-    And I should see my replies
+    And I should see my reply
 
   @javascript @security
   Scenario: Logged in user wants to add another reply when multiple replies is not allowed
@@ -57,7 +67,7 @@ Feature: Questionnaire
   Scenario: Logged in user wants to see the list of his replies
     Given I am logged in as admin
     When I go to a questionnaire step
-    Then I should see my replies
+    Then I should see my reply
 
   @javascript
   Scenario: Logged in user wants to see his reply

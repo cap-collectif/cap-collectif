@@ -26,3 +26,6 @@ Capco\AppBundle\Entity\Reply:
     enabled:
       expose: true
       groups: [Replies]
+    private:
+      expose: true
+      groups: [Replies]

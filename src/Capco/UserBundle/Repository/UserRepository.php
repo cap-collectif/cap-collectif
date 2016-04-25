@@ -72,13 +72,14 @@ class UserRepository extends EntityRepository
 
     public function findUsersThatJustExpired()
     {
-      $qb = $this->createQueryBuilder('u');
-      $qb
+        $qb = $this->createQueryBuilder('u');
+        $qb
           ->andwhere('u.expired = false')
           ->andWhere('u.expiresAt IS NOT NULL')
           ->andWhere('u.expiresAt < CURRENT_DATE()')
         ;
-      return $qb->getQuery()->getResult();
+
+        return $qb->getQuery()->getResult();
     }
 
     public function findProjectOpinionContributorsWithCount(Project $project)
@@ -112,11 +113,12 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findProjectReplyContributorsWithCount(Project $project)
+    public function findProjectReplyContributorsWithCount(Project $project, $excludePrivate = false)
     {
+        $replyWith = $excludePrivate ? '(replies.enabled = 1 AND replies.private = 0)' : 'replies.enabled = 1';
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct replies) as replies_count')
-            ->leftJoin('u.replies', 'replies', 'WITH', 'replies.enabled = 1')
+            ->leftJoin('u.replies', 'replies', 'WITH', $replyWith)
             ->leftJoin('replies.questionnaire', 'questionnaire')
             ->leftJoin('questionnaire.step', 'step', 'WITH', 'step.isEnabled = 1')
             ->leftJoin('step.projectAbstractStep', 'pas')

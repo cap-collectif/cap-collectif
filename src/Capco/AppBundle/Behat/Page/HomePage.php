@@ -26,10 +26,10 @@ class HomePage extends Page
         $this->getElement('Login button')->click();
     }
 
-    public  function openUserDropdown()
+    public function openUserDropdown()
     {
-      $this->getElement('Logged user dropdown')->click();
-      sleep(1);
+        $this->getElement('Logged user dropdown')->click();
+        sleep(1);
     }
 
     public function clickLogout()

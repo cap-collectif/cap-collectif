@@ -19,6 +19,7 @@ class ConfirmationController extends Controller
 
         if (!$user) {
             $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.already_enabled');
+
             return $response;
         }
 

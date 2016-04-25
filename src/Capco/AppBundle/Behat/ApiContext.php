@@ -95,7 +95,6 @@ class ApiContext extends ApplicationContext
         $this->token = $response->json()['token'];
     }
 
-
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid source json$/
      */

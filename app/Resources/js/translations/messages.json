@@ -518,10 +518,14 @@
     "delete": {
       "confirm": "Voulez-vous vraiment supprimer votre réponse ?"
     },
+    "form": {
+      "private": "Rendre ma participation anonyme"
+    },
     "not_logged_in": {
       "error": "Vous devez être connecté pour répondre à ce questionnaire."
     },
     "other": "Autre",
+    "private": "(anonyme)",
     "request": {
       "create": {
         "failure": "Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.",

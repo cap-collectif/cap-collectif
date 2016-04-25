@@ -89,6 +89,12 @@ class Questionnaire
     private $modifyAllowed;
 
     /**
+     * @var bool
+     * @ORM\Column(name="anonymous_allowed", type="boolean", nullable=false)
+     */
+    private $anonymousAllowed = false;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -381,6 +387,26 @@ class Questionnaire
     public function setModifyAllowed($modifyAllowed)
     {
         $this->modifyAllowed = $modifyAllowed;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAnonymousAllowed()
+    {
+        return $this->anonymousAllowed;
+    }
+
+    /**
+     * @param bool $anonymousAllowed
+     *
+     * @return $this
+     */
+    public function setAnonymousAllowed($anonymousAllowed)
+    {
+        $this->anonymousAllowed = $anonymousAllowed;
 
         return $this;
     }

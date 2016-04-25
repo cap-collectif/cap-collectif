@@ -37,7 +37,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.repliesCount =
-            (select count(r.id) from CapcoAppBundle:Reply r where r.author = u AND r.enabled = 1 group by r.author)');
+            (select count(r.id) from CapcoAppBundle:Reply r where r.author = u AND r.enabled = 1 AND r.private = 0 group by r.author)');
         $query->execute();
 
         $query = $em->createQuery('update CapcoUserBundle:User u set u.proposalVotesCount =

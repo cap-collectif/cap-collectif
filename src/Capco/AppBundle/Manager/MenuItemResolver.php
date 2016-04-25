@@ -24,7 +24,7 @@ class MenuItemResolver
     public function getEnabledMenuItemsWithChildren($menu)
     {
         if (!$menu) {
-          return [];
+            return [];
         }
 
         $parents = $this->repository->getParentItems($menu);
@@ -34,14 +34,14 @@ class MenuItemResolver
         foreach ($parents as $parent) {
             $navs = [];
             foreach ($children as $child) {
-              if ($child->getParent()->getId() === $parent->getId()) {
-                $navs[] = [
+                if ($child->getParent()->getId() === $parent->getId()) {
+                    $navs[] = [
                     'id' => $child->getId(),
                     'title' => $child->getTitle(),
                     'link' => $child->getLink(),
                     'hasEnabledFeature' => $this->manager->containsEnabledFeature($child->getAssociatedFeatures()),
                 ];
-              }
+                }
             }
             $links[] = [
                 'id' => $parent->getId(),
@@ -51,6 +51,7 @@ class MenuItemResolver
                 'children' => $navs,
             ];
         }
+
         return $links;
     }
 

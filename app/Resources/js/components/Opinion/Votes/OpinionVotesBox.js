@@ -26,7 +26,7 @@ const OpinionVotesBox = React.createClass({
 
   showVotesButtons() {
     const widgetType = this.getOpinionType().voteWidgetType;
-    return widgetType !== VOTE_WIDGET_DISABLED;
+    return widgetType !== VOTE_WIDGET_DISABLED && this.isContribuable();
   },
 
   showPiechart() {
@@ -60,7 +60,7 @@ const OpinionVotesBox = React.createClass({
         }
         <Row>
           <Col sm={12} md={8} style={{ paddingTop: '15px' }}>
-            <OpinionVotesButtons show={this.showVotesButtons()} disabled={!this.isContribuable()} opinion={opinion} />
+            <OpinionVotesButtons show={this.showVotesButtons()} opinion={opinion} />
             <OpinionVotesBar opinion={opinion} />
           </Col>
           {

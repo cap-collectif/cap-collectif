@@ -22,7 +22,7 @@ class ReCaptchaValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if ($this->enabled && !$this->recaptcha->verify($value, $this->request->getClientIp())->isSuccess()) {
-           $this->context->buildViolation($constraint->message)->addViolation();
+            $this->context->buildViolation($constraint->message)->addViolation();
         }
     }
 }

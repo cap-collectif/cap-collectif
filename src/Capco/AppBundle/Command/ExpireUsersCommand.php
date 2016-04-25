@@ -26,13 +26,13 @@ class ExpireUsersCommand extends ContainerAwareCommand
                     ->findUsersThatJustExpired();
 
         foreach ($users as $user) {
-          $contributionDeleted = $container->get('capco.contribution.manager')->depublishContributions($user);
-          $user->setExpired(true);
-          $user->setExpiresAt(null);
-          $em->flush();
-          $notifier->sendExpiredUserEmail($user, $contributionDeleted);
+            $contributionDeleted = $container->get('capco.contribution.manager')->depublishContributions($user);
+            $user->setExpired(true);
+            $user->setExpiresAt(null);
+            $em->flush();
+            $notifier->sendExpiredUserEmail($user, $contributionDeleted);
         }
 
-        $output->writeln(count($users) . ' user(s) expired.');
+        $output->writeln(count($users).' user(s) expired.');
     }
 }

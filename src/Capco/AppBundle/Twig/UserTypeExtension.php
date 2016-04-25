@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Repository\UserTypeRepository;
 
 class UserTypeExtension extends \Twig_Extension

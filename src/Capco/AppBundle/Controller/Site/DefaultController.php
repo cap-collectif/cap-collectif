@@ -89,7 +89,7 @@ class DefaultController extends Controller
     {
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             return new JsonResponse([
-              'error' => 'You are not authenticated.'
+              'error' => 'You are not authenticated.',
             ], 401);
         }
 

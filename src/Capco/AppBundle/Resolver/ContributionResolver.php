@@ -27,7 +27,7 @@ class ContributionResolver
         $argumentsContributors = $this->repository->findProjectArgumentContributorsWithCount($project);
         $opinionsContributors = $this->repository->findProjectOpinionContributorsWithCount($project);
         $proposalsContributors = $this->repository->findProjectProposalContributorsWithCount($project);
-        $repliesContributors = $this->repository->findProjectReplyContributorsWithCount($project);
+        $repliesContributors = $this->repository->findProjectReplyContributorsWithCount($project, $excludePrivate);
         $versionsContributors = $this->repository->findProjectVersionContributorsWithCount($project);
 
         // Fetch voters

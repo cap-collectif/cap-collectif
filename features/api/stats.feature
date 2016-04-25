@@ -38,7 +38,7 @@ Feature: Stats
 
   @parallel-scenario
   Scenario: Anonymous API client wants to get themes stats for a collect step
-    When I send a GET request to "/api/project_stats/20?key=themes"
+    When I send a GET request to "/api/project_stats/21?key=themes"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
@@ -59,7 +59,7 @@ Feature: Stats
 
   @security
   Scenario: Anonymous API client wants to get votes stats for a collect step
-    When I send a GET request to "/api/project_stats/20?key=votes"
+    When I send a GET request to "/api/project_stats/21?key=votes"
     Then the JSON response status code should be 400
     And the JSON response should match:
     """

@@ -44,7 +44,8 @@ Feature: Reply Restful Api
           "updated_at": "@string@.isDateTime()"
         },
         @...@
-      ]
+      ],
+      "private": @boolean@
     }
     """
 
@@ -93,7 +94,8 @@ Feature: Reply Restful Api
               "updated_at": "@string@.isDateTime()"
             },
             @...@
-          ]
+          ],
+          "private": @boolean@
         }
       ]
     }
@@ -115,6 +117,27 @@ Feature: Reply Restful Api
           "value": [2, 3]
         }
       ]
+    }
+    """
+    Then the JSON response status code should be 201
+
+  @database @elasticsearch
+  Scenario: Logged in API client wants to add an anonymous reply
+    Given I am logged in to api as user
+    When I send a POST request to "/api/questionnaires/1/replies" with json:
+    """
+    {
+      "responses": [
+        {
+          "question": 2,
+          "value": "Je pense que c'est la ville parfaite pour organiser les JO"
+        },
+        {
+          "question": 6,
+          "value": [2, 3]
+        }
+      ],
+      "private": true
     }
     """
     Then the JSON response status code should be 201

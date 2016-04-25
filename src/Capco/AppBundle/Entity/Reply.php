@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Traits\PrivatableTrait;
 
 /**
  * Reply.
@@ -22,6 +23,7 @@ class Reply
 {
     use TimestampableTrait;
     use EnableTrait;
+    use PrivatableTrait;
 
     /**
      * @var int

@@ -113,7 +113,7 @@ class RepliesController extends FOSRestController
             ->setEnabled(true)
         ;
 
-        $form = $this->createForm('reply', $reply);
+        $form = $this->createForm('reply', $reply, ['anonymousAllowed' => $questionnaire->isAnonymousAllowed()]);
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {

@@ -49,6 +49,10 @@ const ReplyModalLink = React.createClass({
             />
           }
         />
+        {
+          reply.private &&
+          <span>{' ' + this.getIntlMessage('reply.private')}</span>
+        }
         <ShowReplyModal
           show={this.state.showModal}
           onClose={this.hideModal}

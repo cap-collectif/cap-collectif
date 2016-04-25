@@ -9,53 +9,45 @@ class ContributionManager
 {
     public function __construct(EntityManager $em)
     {
-      $this->em = $em;
+        $this->em = $em;
     }
 
     public function depublishContributions(User $user)
     {
-      $contributionsDeletedCount = 0;
-      foreach ($user->getOpinions() as $opinion)
-      {
-        $opinion->setIsEnabled(false);
-        $contributionsDeletedCount++;
-      }
-      foreach ($user->getVotes() as $vote)
-      {
-        $this->em->remove($vote);
-        $contributionsDeletedCount++;
-      }
-      foreach ($user->getOpinionVersions() as $version)
-      {
-        $version->setEnabled(false);
-        $contributionsDeletedCount++;
-      }
-      foreach ($user->getIdeas() as $idea)
-      {
-        $idea->setIsEnabled(false);
-        $contributionsDeletedCount++;
-      }
-      foreach ($user->getComments() as $comment)
-      {
-        $comment->setIsEnabled(false);
-        $contributionsDeletedCount++;
-      }
-      foreach ($user->getArguments() as $argument)
-      {
-        $argument->setIsEnabled(false);
-        $contributionsDeletedCount++;
-      }
-      foreach ($user->getSources() as $source)
-      {
-        $source->setIsEnabled(false);
-        $contributionsDeletedCount++;
-      }
-      foreach ($user->getProposals() as $proposal)
-      {
-        $proposal->setEnabled(false);
-        $contributionsDeletedCount++;
-      }
+        $contributionsDeletedCount = 0;
+        foreach ($user->getOpinions() as $opinion) {
+            $opinion->setIsEnabled(false);
+            ++$contributionsDeletedCount;
+        }
+        foreach ($user->getVotes() as $vote) {
+            $this->em->remove($vote);
+            ++$contributionsDeletedCount;
+        }
+        foreach ($user->getOpinionVersions() as $version) {
+            $version->setEnabled(false);
+            ++$contributionsDeletedCount;
+        }
+        foreach ($user->getIdeas() as $idea) {
+            $idea->setIsEnabled(false);
+            ++$contributionsDeletedCount;
+        }
+        foreach ($user->getComments() as $comment) {
+            $comment->setIsEnabled(false);
+            ++$contributionsDeletedCount;
+        }
+        foreach ($user->getArguments() as $argument) {
+            $argument->setIsEnabled(false);
+            ++$contributionsDeletedCount;
+        }
+        foreach ($user->getSources() as $source) {
+            $source->setIsEnabled(false);
+            ++$contributionsDeletedCount;
+        }
+        foreach ($user->getProposals() as $proposal) {
+            $proposal->setEnabled(false);
+            ++$contributionsDeletedCount;
+        }
 
-      return $contributionsDeletedCount > 0;
+        return $contributionsDeletedCount > 0;
     }
 }

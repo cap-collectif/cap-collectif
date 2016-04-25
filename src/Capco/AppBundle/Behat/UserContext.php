@@ -11,9 +11,9 @@ class UserContext extends DefaultContext
      */
     public function iLogout()
     {
-      $home = $this->navigationContext->getPage('HomePage');
-      $home->clickLogout();
-      sleep(2);
+        $home = $this->navigationContext->getPage('HomePage');
+        $home->clickLogout();
+        sleep(2);
     }
 
     /**
@@ -61,7 +61,7 @@ class UserContext extends DefaultContext
      */
     public function iCanSeeIamLoggedInAs($username)
     {
-      $this->assertElementContainsText('#navbar-username', $username);
+        $this->assertElementContainsText('#navbar-username', $username);
     }
 
     /**
@@ -69,8 +69,8 @@ class UserContext extends DefaultContext
      */
     public function iCanAccessAdminInNavbar()
     {
-      $this->navigationContext->getPage('HomePage')->openUserDropdown();
-      $this->assertElementContainsText('.open.dropdown > ul', 'Administration');
+        $this->navigationContext->getPage('HomePage')->openUserDropdown();
+        $this->assertElementContainsText('.open.dropdown > ul', 'Administration');
     }
 
     /**
@@ -78,9 +78,9 @@ class UserContext extends DefaultContext
      */
     public function iOpenLoginModal()
     {
-      $this->navigationContext->iVisitedPage('HomePage');
-      $home = $this->navigationContext->getPage('HomePage');
-      $home->openLoginModal();
+        $this->navigationContext->iVisitedPage('HomePage');
+        $home = $this->navigationContext->getPage('HomePage');
+        $home->openLoginModal();
     }
 
     private function logInWith($email, $pwd)
@@ -97,8 +97,8 @@ class UserContext extends DefaultContext
      */
     public function iShouldBeAskedToConfirmMyEmail($email)
     {
-      $this->assertSession()->elementExists('css', '#alert-email-not-confirmed');
-      $this->assertElementContainsText('#alert-email-not-confirmed', $email);
+        $this->assertSession()->elementExists('css', '#alert-email-not-confirmed');
+        $this->assertElementContainsText('#alert-email-not-confirmed', $email);
     }
 
     /**
@@ -106,7 +106,7 @@ class UserContext extends DefaultContext
      */
     public function iShouldNotBeAskedToConfirmMyEmail()
     {
-      $this->assertSession()->elementNotExists('css', '#alert-email-not-confirmed');
+        $this->assertSession()->elementNotExists('css', '#alert-email-not-confirmed');
     }
 
     /**

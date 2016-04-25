@@ -109,18 +109,18 @@ Feature: Project
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "138 contributions"
+    Then I should see "164 contributions"
     And I hover over the "#contributions-counter-pill" element
     And I wait 1 seconds
-    And I should see "26 propositions"
-    And I should see "80 arguments"
+    And I should see "32 propositions"
+    And I should see "100 arguments"
     And I should see "32 sources"
 
   Scenario: Project header should display correct number of participants
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "21 participants"
+    Then I should see "19 participants"
 
   @javascript
   Scenario: Can download a project in xslx format
@@ -168,7 +168,7 @@ Feature: Project
       | stepSlug    | collecte-des-avis                |
     And I should see "Corbeille"
     When I click the "#trash-link" element
-    Then I should see "Connectez-vous pour contribuer"
+    Then I should see "Vous devez être connecté pour réaliser cette action."
 
   @javascript
   Scenario: Project trash display correct numbers of elements
@@ -178,8 +178,8 @@ Feature: Project
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     When I follow "Corbeille"
-    Then I should see 128 ".opinion__list .opinion" elements
-    And I should see "128" in the "span.badge" element
+    Then I should see 100 ".opinion__list .opinion" elements
+    And I should see "100" in the "span.badge" element
 
   Scenario: I should not see opinion types menu when only one type is allowed
     Given I visited "consultation page" with:

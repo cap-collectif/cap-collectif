@@ -80,27 +80,27 @@ class Notify implements MailerInterface
 
     public function sendExpiredUserEmail(UserInterface $user, $contributionsDeleted)
     {
-      $template = $contributionsDeleted
+        $template = $contributionsDeleted
         ? 'CapcoAppBundle:Mail:notifyExpiredWithContributions.html.twig'
         : 'CapcoAppBundle:Mail:notifyExpiredNoContributions.html.twig'
       ;
-      $subjectString = $contributionsDeleted
+        $subjectString = $contributionsDeleted
         ? 'email.expire_user.subject_with_contrib'
         : 'email.expire_user.subject_no_contrib'
       ;
-      $subject = $this->translator->trans($subjectString, ['%sitename%' => $this->resolver->getValue('global.site.fullname')],'CapcoAppBundle');
-      $url = $this->router->generate('capco_user_confirmation_email', [
-        'token' => $user->getConfirmationToken()
+        $subject = $this->translator->trans($subjectString, ['%sitename%' => $this->resolver->getValue('global.site.fullname')], 'CapcoAppBundle');
+        $url = $this->router->generate('capco_user_confirmation_email', [
+        'token' => $user->getConfirmationToken(),
       ], true);
-      $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
-      $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
+        $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
+        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
 
-      $rendered = $this->templating->render($template, [
+        $rendered = $this->templating->render($template, [
         'user' => $user,
         'url' => $url,
         'email' => $this->resolver->getValue('admin.mail.notifications.receive_address'),
       ]);
-      $this->sendEmail($user->getEmail(), $fromAddress, $fromName, $rendered, $subject);
+        $this->sendEmail($user->getEmail(), $fromAddress, $fromName, $rendered, $subject);
     }
 
     // FOS User emails
@@ -108,7 +108,7 @@ class Notify implements MailerInterface
     {
         $template = $this->parameters['confirmation.template'];
         $url = $this->router->generate('capco_user_confirmation_email', [
-          'token' => $user->getConfirmationToken()
+          'token' => $user->getConfirmationToken(),
         ], true);
         $rendered = $this->templating->render($template, [
             'user' => $user,

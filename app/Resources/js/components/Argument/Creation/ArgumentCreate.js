@@ -84,7 +84,6 @@ const ArgumentCreate = React.createClass({
   },
 
   render() {
-    const disabled = !this.props.opinion.isContribuable;
     return (
       <div className="opinion__body box">
         <div className="opinion__data">
@@ -102,13 +101,12 @@ const ArgumentCreate = React.createClass({
                 groupClassName={this.getGroupStyle('body')}
                 labelClassName="sr-only"
                 errors={this.renderFormErrors('body')}
-                disabled={disabled}
               />
             </LoginOverlay>
             {LoginStore.isLoggedIn()
               ? <Button
-                  disabled={this.state.isSubmitting || disabled}
-                  onClick={this.state.isSubmitting || disabled ? null : this.create}
+                  disabled={this.state.isSubmitting}
+                  onClick={this.state.isSubmitting ? null : this.create.bind(null, this)}
                   bsStyle="primary"
               >
                 {this.state.isSubmitting

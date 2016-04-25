@@ -501,6 +501,7 @@ admin:
       questions: Questions
       add_question: Ajouter une question
     questionnaire:
+      anonymous_allowed: Autoriser les réponses anonymes
       title: Titre
       description: Description
       updated_at: Mise à jour

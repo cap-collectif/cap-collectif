@@ -56,8 +56,8 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Reply')
             ->findBy([
                 'author' => $user,
+                'private' => false,
             ]);
-        ;
 
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
@@ -114,8 +114,8 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Reply')
             ->findBy([
                 'author' => $user,
+                'private' => false,
             ]);
-        ;
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getPublicVotesByUser($user);
@@ -241,8 +241,8 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Reply')
             ->findBy([
                 'author' => $user,
+                'private' => false,
             ]);
-        ;
 
         return [
             'user' => $user,

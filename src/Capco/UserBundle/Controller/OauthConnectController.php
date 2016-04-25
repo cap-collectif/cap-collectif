@@ -100,5 +100,4 @@ class OauthConnectController extends ConnectController
 
         return parent::redirectToServiceAction($request, $service);
     }
-
 }

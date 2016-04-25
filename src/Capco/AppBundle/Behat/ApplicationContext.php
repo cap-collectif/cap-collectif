@@ -153,10 +153,10 @@ class ApplicationContext extends UserContext
     {
         $this->getService('capco.toggle.manager')->activate($featureA);
         if ($featureB) {
-          $this->getService('capco.toggle.manager')->activate($featureB);
-          if ($featureC) {
-            $this->getService('capco.toggle.manager')->activate($featureC);
-          }
+            $this->getService('capco.toggle.manager')->activate($featureB);
+            if ($featureC) {
+                $this->getService('capco.toggle.manager')->activate($featureC);
+            }
         }
     }
 

@@ -55,6 +55,7 @@ const ReplyForm = React.createClass({
     return {
       form,
       errors: {},
+      private: false,
     };
   },
 
@@ -67,6 +68,7 @@ const ReplyForm = React.createClass({
       } = this.props;
       if (this.isValid()) {
         const responses = [];
+        const data = {};
         Object.keys(this.state.form).map((key) => {
           const response = { question: key };
 
@@ -93,8 +95,13 @@ const ReplyForm = React.createClass({
           responses.push(response);
         });
 
+        data.responses = responses;
+        if (this.props.form.anonymousAllowed) {
+          data.private = this.state.private;
+        }
+
         return ReplyActions
-          .add(this.props.form.id, { responses })
+          .add(this.props.form.id, data)
           .then(onSubmitSuccess)
           .catch(onSubmitFailure);
       }
@@ -135,6 +142,7 @@ const ReplyForm = React.createClass({
     });
     this.setState({
       form: form,
+      private: false,
     });
   },
 
@@ -243,6 +251,20 @@ const ReplyForm = React.createClass({
                 );
             }
           })
+        }
+        {
+          this.props.form.anonymousAllowed
+            ? <div>
+              <hr style={{ marginBottom: '30px' }} />
+              <Input
+                type="checkbox"
+                name="reply-private"
+                checkedLink={this.linkState('private')}
+                label={this.getIntlMessage('reply.form.private')}
+                disabled={disabled}
+              />
+            </div>
+            : null
         }
       </form>
     );

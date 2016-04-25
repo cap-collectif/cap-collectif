@@ -59,8 +59,7 @@ Scenario: Can not create an idea from ideas page when feature idea_creation is d
 Scenario: Can not create an idea when not logged in
   Given feature "idea_creation" is enabled
   And I visited "ideas page"
-  When I press "Proposer une idée"
-  Then I should see "pour contribuer"
+  Then I should not see "Proposer une idée"
 
 # Update
 @javascript @database

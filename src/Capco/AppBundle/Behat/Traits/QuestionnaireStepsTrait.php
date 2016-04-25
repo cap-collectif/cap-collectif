@@ -92,6 +92,16 @@ trait QuestionnaireStepsTrait
     }
 
     /**
+     * I check the reply private checkbox.
+     *
+     * @When I check the reply private checkbox
+     */
+    public function iCheckTheReplyPrivateCheckbox()
+    {
+        $this->checkOption('reply-private');
+    }
+
+    /**
      * I submit my reply.
      *
      * @When I submit my reply
@@ -121,15 +131,29 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I should see my replies.
+     * I should see my reply.
      *
-     * @Then I should see my replies
+     * @Then I should see my reply
      */
-    public function iShouldSeeMyReplies()
+    public function iShouldSeeMyReply()
     {
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
         $userReplySelector = $this->navigationContext->getPage('questionnaire page')->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
+        $this->assertElementNotContainsText($userReplySelector, '(anonyme)');
+    }
+
+    /**
+     * I should see my anonymous reply.
+     *
+     * @Then I should see my anonymous reply
+     */
+    public function iShouldSeeMyAnonymousReply()
+    {
+        $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
+        $userReplySelector = $this->navigationContext->getPage('questionnaire page')->getSelectorForUserReply();
+        $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
+        $this->assertElementContainsText($userReplySelector, '(anonyme)');
     }
 
     /**

@@ -12,11 +12,7 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
-use FOS\RestBundle\View\View as RestView;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UsersController extends FOSRestController
 {
@@ -74,7 +70,6 @@ class UsersController extends FOSRestController
      *
      * @Post("/users", defaults={"_feature_flags" = "registration"})
      * @View(statusCode=201, serializerGroups={})
-     *
      */
     public function postUserAction(Request $request)
     {
@@ -111,11 +106,11 @@ class UsersController extends FOSRestController
     {
         $user = $this->getUser();
         if ($user->isEmailConfirmed()) {
-          throw new BadRequestHttpException('Already confirmed.');
+            throw new BadRequestHttpException('Already confirmed.');
         }
         // security against mass click email resend
         if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
-          throw new BadRequestHttpException('Email already sent less than a minute ago.');
+            throw new BadRequestHttpException('Email already sent less than a minute ago.');
         }
 
         $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
