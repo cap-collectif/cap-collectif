@@ -80,7 +80,8 @@
         "google/recaptcha": "^1.1",
         "gfreeau/get-jwt-bundle": "^1.0",
         "friendsofsymfony/rest-bundle": "^1.6",
-        "mattketmo/email-checker": "^1.5"
+        "mattketmo/email-checker": "^1.5",
+        "vresh/twilio-bundle": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -360,3 +360,12 @@ limenius_react:
         trace: false
         # Location of the server bundle, that contains React and React on Rails.
         server_bundle_path: "%kernel.root_dir%/../web/js/server-bundle.js"
+
+vresh_twilio:
+    # Your Account SID and token from www.twilio.com/user/account
+    sid: '%twilio_sid%'
+    authToken: '%twilio_token%'
+    # Twilio API version
+    version: '2010-04-01'
+    # Number of times to retry failed requests
+    retryAttempts: 3
