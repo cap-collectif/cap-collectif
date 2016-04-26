@@ -320,13 +320,6 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        if (!$step->getQuestionnaire()) {
-            return $this->render('CapcoAppBundle:Step:questionnaire.html.twig', [
-                'project' => $project,
-                'currentStep' => $step,
-            ]);
-        }
-
         foreach ($step->getQuestionnaire()->getRealQuestions() as $question) {
             if ($question instanceof MultipleChoiceQuestion) {
                 if ($question->isRandomQuestionChoices()) {

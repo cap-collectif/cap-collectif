@@ -49,7 +49,7 @@ const LoginForm = React.createClass({
           : null
         }
         <Input
-          type="text"
+          type="email"
           autoFocus
           valueLink={this.linkState('form._username')}
           id="_username"

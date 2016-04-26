@@ -443,7 +443,6 @@ step:
       future:
         text: L'étape de questionnaire débutera le %date%.
         title: Questionnaire à venir.
-    no_form: Aucun questionnaire associé à cette étape.
   status:
     closed: Terminé
     open: En cours
