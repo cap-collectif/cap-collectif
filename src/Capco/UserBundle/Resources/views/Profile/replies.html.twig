@@ -1,0 +1,12 @@
+{% if replies | length > 0 %}
+    <ul class="list-group">
+        {% for reply in replies %}
+            {% include 'CapcoUserBundle:Profile:blockReply.html.twig' with {'reply': reply, 'classes': 'block  block--bordered  box'} only %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <div class="project__empty-block  text-center">
+        <p class="icon  cap-bubble-star-2"></p>
+        <p>{{ 'user.profile.show.no_replies'|trans({}, 'CapcoAppBundle') }}</p>
+    </div>
+{% endif %}

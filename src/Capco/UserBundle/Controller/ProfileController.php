@@ -51,6 +51,14 @@ class ProfileController extends BaseController
         ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
 
+        $replies = $this
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:Reply')
+            ->findBy([
+                'author' => $user,
+            ]);
+        ;
+
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getPublicVotesByUser($user);
@@ -65,6 +73,7 @@ class ProfileController extends BaseController
             'ideas' => $ideas,
             'proposals' => $proposals,
             'proposalsCount' => $proposalsCount,
+            'replies' => $replies,
             'sources' => $sources,
             'comments' => $comments,
             'votes' => $votes,
@@ -100,6 +109,13 @@ class ProfileController extends BaseController
             'proposals' => $proposalsRaw,
         ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
+        $replies = $this
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:Reply')
+            ->findBy([
+                'author' => $user,
+            ]);
+        ;
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getPublicVotesByUser($user);
@@ -114,6 +130,7 @@ class ProfileController extends BaseController
             'ideas' => $ideas,
             'proposals' => $proposals,
             'proposalsCount' => $proposalsCount,
+            'replies' => $replies,
             'sources' => $sources,
             'comments' => $comments,
             'votes' => $votes,
@@ -206,6 +223,30 @@ class ProfileController extends BaseController
             'user' => $user,
             'proposals' => $proposals,
             'proposalsCount' => $proposalsCount,
+        ];
+    }
+
+    /**
+     * @Route("/{slug}/replies", name="capco_user_profile_show_replies")
+     * @Template("CapcoUserBundle:Profile:showUserReplies.html.twig")
+     *
+     * @param User $user
+     *
+     * @return array
+     */
+    public function showRepliesAction(User $user)
+    {
+        $replies = $this
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:Reply')
+            ->findBy([
+                'author' => $user,
+            ]);
+        ;
+
+        return [
+            'user' => $user,
+            'replies' => $replies,
         ];
     }
 
