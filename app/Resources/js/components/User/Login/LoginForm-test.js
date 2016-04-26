@@ -19,11 +19,11 @@ describe('<LoginForm />', () => {
     expect(wrapper.find('Input')).to.have.length(2);
   });
 
-  it('renders a username input', () => {
+  it('renders an email input', () => {
     const wrapper = shallow(<LoginForm {...props} />);
     const input = wrapper.find('Input').first();
     expect(input.prop('id')).to.equal('_username');
-    expect(input.prop('type')).to.equal('text');
+    expect(input.prop('type')).to.equal('email');
     expect(input.prop('autoFocus')).to.equal(true);
     expect(input.prop('label')).to.equal('Adresse électronique');
     expect(input.prop('labelClassName')).to.equal('h5');
