@@ -220,3 +220,18 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_USER'
         Media: null
         confirmationToken: wxcvbn
+
+    user_without_phone:
+        username: user_without_phone
+        firstname: user_without_phone
+        lastname: user_without_phone
+        email: user_without_phone@test.com
+        enabled: true
+        expired: false
+        expiresAt: ~
+        userType: @UserType1
+        plainPassword: user_without_phone
+        roles:
+         - 'ROLE_USER'
+        Media: null
+        confirmationToken: ~

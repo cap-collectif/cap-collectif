@@ -117,4 +117,31 @@ class UsersController extends FOSRestController
         $user->setEmailConfirmationSentAt(new \DateTime());
         $this->getDoctrine()->getManager()->flush();
     }
+
+    /**
+     * @Post("/send-sms-confirmation", defaults={"_feature_flags" = "registration"})
+     * @Security("has_role('ROLE_USER')")
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postResendSmsConfirmationAction()
+    {
+        $user = $this->getUser();
+        if ($user->isSmsConfirmed()) {
+          throw new BadRequestHttpException('Already confirmed.');
+        }
+
+        if (!$user->getPhone()) {
+          throw new BadRequestHttpException('No phone.');
+        }
+
+        // security against mass click sms resend
+        if ($user->getSmsConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
+          throw new BadRequestHttpException('Sms already sent less than a minute ago.');
+        }
+
+        $this->get('sms.service')->confirm($user);
+
+        $user->setSmsConfirmationSentAt(new \DateTime());
+        $this->getDoctrine()->getManager()->flush();
+    }
 }

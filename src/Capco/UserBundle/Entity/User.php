@@ -239,6 +239,9 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $emailConfirmationSentAt = null;
 
+    protected $smsConfirmationSentAt = null;
+    protected $smsConfirmationCode = null;
+
     protected $alertExpirationSent = false;
 
     public function __construct($encoder = null)
@@ -986,6 +989,30 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setEmailConfirmationSentAt(\DateTime $date = null)
     {
         $this->emailConfirmationSentAt = $date;
+
+        return $this;
+    }
+
+    public function getSmsConfirmationSentAt()
+    {
+      return $this->smsConfirmationSentAt;
+    }
+
+    public function setSmsConfirmationSentAt(\DateTime $date = null)
+    {
+        $this->smsConfirmationSentAt = $date;
+
+        return $this;
+    }
+
+    public function getSmsConfirmationCode()
+    {
+      return $this->smsConfirmationCode;
+    }
+
+    public function setSmsConfirmationCode($code = null)
+    {
+        $this->smsConfirmationCode = $code;
 
         return $this;
     }
