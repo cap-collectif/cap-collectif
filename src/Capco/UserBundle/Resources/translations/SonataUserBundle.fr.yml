@@ -17,6 +17,7 @@ form:
   label_user_type: Type de profil
   label_vip: VIP
   label_zip_code: Code postal
+  label_expires_at: Date d'expiration
 
 gender:
   female: Femme

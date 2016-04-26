@@ -234,6 +234,9 @@ class UserAdmin extends BaseAdmin
                 ->with('Status')
                 ->add('locked', null, ['required' => false])
                 ->add('expired', null, ['required' => false])
+                ->add('expiresAt', 'sonata_type_datetime_picker', [
+                    'required' => false,
+                ])
                 ->add('enabled', null, ['required' => false])
                 ->add('credentialsExpired', null, ['required' => false])
                 ->end()

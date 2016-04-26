@@ -27,7 +27,7 @@ class ResettingFOSUser1Controller extends BaseController
         /** @var $user UserInterface */
         $user = $this->container->get('fos_user.user_manager')->findUserByEmail($email);
 
-        if (null !== $user && !$user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
+        if (null !== $user && !$user->isExpired() && !$user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
             if (null === $user->getConfirmationToken()) {
                 /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
                 $tokenGenerator = $this->container->get('fos_user.util.token_generator');
