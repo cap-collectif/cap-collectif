@@ -230,10 +230,8 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->andWhere('pas.project = :project')
-            ->andWhere('o.isTrashed = :trashed OR o.isEnabled = :disabled')
+            ->andWhere('o.isTrashed = true')
             ->setParameter('project', $project)
-            ->setParameter('trashed', true)
-            ->setParameter('disabled', false)
             ->orderBy('o.trashedAt', 'DESC');
 
         return $qb->getQuery()->getResult();
