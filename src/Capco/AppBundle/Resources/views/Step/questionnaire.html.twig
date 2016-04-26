@@ -38,12 +38,20 @@
         </div>
     {% endif %}
 
-    <div
-        id="render-questionnaire-step-page"
-        data-step='{{ step|escape }}'
-        data-form='{{ form|escape }}'
-        data-user-replies='{{ userReplies }}'
-    >
-    </div>
+    {% if step is not defined or form is not defined or userReplies is not defined %}
+        <div>
+            <p>
+                {{ 'step.questionnaire.no_form' | trans({}, 'CapcoAppBundle') }}
+            </p>
+        </div>
+    {% else %}
+        <div
+            id="render-questionnaire-step-page"
+            data-step='{{ step|escape }}'
+            data-form='{{ form|escape }}'
+            data-user-replies='{{ userReplies }}'
+        >
+        </div>
+    {% endif %}
 
 {% endblock %}
