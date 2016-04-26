@@ -62,7 +62,7 @@ const LoginForm = React.createClass({
           labelClassName="w100 h5"
           label={this.getIntlMessage('global.password')}
         />
-        <a className="h6 btn btn-link" href="/resetting/request">{this.getIntlMessage('global.forgot_password')}</a>
+        <a className="small" href="/resetting/request">{this.getIntlMessage('global.forgot_password')}</a>
       </div>
     );
   },
