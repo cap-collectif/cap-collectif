@@ -40,7 +40,7 @@ const LoginForm = React.createClass({
 
   render() {
     return (
-      <form id="login-form" ref={form => this.form = form}>
+      <div>
         {
           this.state.hasError
           ? <Alert bsStyle="danger">
@@ -63,7 +63,7 @@ const LoginForm = React.createClass({
           label={this.getIntlMessage('global.password')}
         />
         <a className="h6 btn btn-link" href="/resetting/request">{this.getIntlMessage('global.forgot_password')}</a>
-      </form>
+      </div>
     );
   },
 

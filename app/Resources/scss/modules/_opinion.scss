@@ -245,7 +245,7 @@
   }
 
   // Special case : vote (for profile only)
-  &.opinion--vote, &.opinion--reply {
+  &.opinion--vote {
     @extend .opinion--argument;
     background-color: $white;
   }

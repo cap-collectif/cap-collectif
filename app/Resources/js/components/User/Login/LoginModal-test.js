@@ -23,4 +23,10 @@ describe('<LoginModal />', () => {
     expect(wrapper.find('Modal')).to.have.length(1);
     expect(wrapper.find('Modal').prop('show')).to.equal(true);
   });
+
+  it('renders a form', () => {
+    const wrapper = shallow(<LoginModal show {...props} />);
+    expect(wrapper.find('form')).to.have.length(1);
+    expect(wrapper.find('form').prop('id')).to.equal('login-form');
+  });
 });
