@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Answer;
 use Capco\AppBundle\Entity\ProposalVote;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Response;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -13,6 +15,7 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -137,6 +140,7 @@ class ProjectDownloadResolver
     protected $templating;
     protected $translator;
     protected $urlResolver;
+    protected $headers;
     protected $data;
 
     public function __construct(EntityManager $em, TwigEngine $templating, TranslatorInterface $translator, UrlResolver $urlResolver)
@@ -145,10 +149,34 @@ class ProjectDownloadResolver
         $this->templating = $templating;
         $this->translator = $translator;
         $this->urlResolver = $urlResolver;
+        $this->headers = [
+            'published' => [],
+            'unpublished' => [],
+        ];
         $this->data = [
             'published' => [],
             'unpublished' => [],
         ];
+    }
+
+    public function getQuestionnaireStepHeaders(QuestionnaireStep $step)
+    {
+        $headers = [
+            'published' => [
+                'id',
+                'created',
+                'anonymous',
+            ],
+            'unpublished' => [],
+        ];
+
+        if ($step->getQuestionnaire()) {
+            foreach ($step->getQuestionnaire()->getRealQuestions() as $question) {
+                $headers['published'][] = ['label' => $question->getTitle(), 'raw' => true];
+            }
+        }
+
+        return $headers;
     }
 
     public function getContent(AbstractStep $step, $format)
@@ -161,17 +189,17 @@ class ProjectDownloadResolver
             throw new \Exception('Wrong format');
         }
 
-        $data = [];
-        $headers = [];
-
         if ($step instanceof ConsultationStep) {
+            $this->headers = $this->consultationHeaders;
             $data = $this->getConsultationStepData($step);
-            $headers = $this->consultationHeaders;
         } elseif ($step instanceof CollectStep) {
+            $this->headers = $this->collectHeaders;
             $data = $this->getCollectStepData($step);
-            $headers = $this->collectHeaders;
+        } elseif ($step instanceof QuestionnaireStep) {
+            $this->headers = $this->getQuestionnaireStepHeaders($step);
+            $data = $this->getQuestionnaireStepData($step);
         } else {
-            throw new \Exception('Step must be of type collect or consultation');
+            throw new \Exception('Step must be of type collect, questionnaire or consultation');
         }
 
         $title = $step->getProject() ? $step->getProject()->getTitle() + '_' : '';
@@ -182,7 +210,7 @@ class ProjectDownloadResolver
                 'title' => $title,
                 'format' => $format,
                 'sheets' => $this->sheets,
-                'headers' => $headers,
+                'headers' => $this->headers,
                 'data' => $data,
                 'locale' => $this->translator->getLocale(),
             ]
@@ -258,6 +286,32 @@ class ProjectDownloadResolver
         return $this->data;
     }
 
+    public function getQuestionnaireStepData(QuestionnaireStep $questionnaireStep)
+    {
+        $this->data = [
+            'published' => [],
+            'unpublished' => [],
+        ];
+
+        $replies = [];
+
+        if ($questionnaireStep->getQuestionnaire()) {
+            // Replies
+            $replies = $this->em
+                ->getRepository('CapcoAppBundle:Reply')
+                ->findBy(
+                    [
+                        'questionnaire' => $questionnaireStep->getQuestionnaire(),
+                        'enabled' => true,
+                    ]
+                );
+        }
+
+        $this->getRepliesData($replies);
+
+        return $this->data;
+    }
+
     public function getProposalsData($proposals)
     {
         foreach ($proposals as $proposal) {
@@ -320,6 +374,15 @@ class ProjectDownloadResolver
         foreach ($votes as $vote) {
             if ($vote->isConfirmed()) {
                 $this->addItemToData($this->getVoteItem($vote), $vote->getRelatedEntity()->isPublished());
+            }
+        }
+    }
+
+    public function getRepliesData($replies)
+    {
+        foreach ($replies as $reply) {
+            if ($reply->isEnabled()) {
+                $this->addItemToData($this->getReplyItem($reply), true);
             }
         }
     }
@@ -593,6 +656,28 @@ class ProjectDownloadResolver
         ];
     }
 
+    private function getReplyItem(Reply $reply)
+    {
+        $item = [
+            'id' => $reply->getId(),
+            'created' => $this->dateToString($reply->getCreatedAt()),
+            'anonymous' => $this->booleanToString($reply->isPrivate()),
+        ];
+
+        foreach ($reply->getResponses() as $response) {
+            $question = $response->getQuestion();
+            $item[$question->getTitle()] = $this->getResponseValue($response);
+        }
+        
+        foreach ($this->headers['published'] as $header) {
+            if (is_array($header) && !array_key_exists($header['label'], $item)) {
+                $item[$header['label']] = '';
+            }
+        }
+
+        return $item;
+    }
+
     private function getVoteValue($vote)
     {
         if (method_exists($vote, 'getValue')) {
@@ -630,6 +715,19 @@ class ProjectDownloadResolver
     private function calculateScore($ok, $mitigated, $nok)
     {
         return $ok - $nok;
+    }
+
+    private function getResponseValue(Response $response)
+    {
+        $originalValue = $response->getValue();
+        if (is_array($originalValue)) {
+            $values = $originalValue['labels'];
+            if ($originalValue['other']) {
+                $values[] = $originalValue['other'];
+            }
+            return join(', ', $values);
+        }
+        return $originalValue;
     }
 
     private function getOpinionContent(Opinion $opinion)
