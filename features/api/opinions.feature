@@ -38,12 +38,20 @@ Feature: Opinions
         "step": {
           "id": @integer@,
           "projectId": @integer@,
+          "position": @integer@,
           "counters": {
             "remainingDays": @integer@,
             "contributions": @integer@,
             "contributors": @integer@,
             "votes": @integer@
-          }
+          },
+          "open": @boolean@,
+          "title": @string@,
+          "enabled": @boolean@,
+          "startAt": "@string@.isDateTime()",
+          "endAt": "@string@.isDateTime()",
+          "body": @string@,
+          "status": @string@
         },
 
         "argumentsCount": @integer@,

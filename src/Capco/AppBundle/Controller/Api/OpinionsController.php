@@ -41,7 +41,7 @@ class OpinionsController extends FOSRestController
      *
      * @Get("/opinions/{id}")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne"})
-     * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias", "Steps"})
      */
     public function getOpinionAction(Opinion $opinion)
     {
