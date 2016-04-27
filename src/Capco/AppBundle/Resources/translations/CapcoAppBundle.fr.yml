@@ -1245,19 +1245,11 @@ email:
       subject_no_contrib: %sitename% — Votre compte a expiré
       subject_with_contrib: %sitename% — Votre compte a expiré et vos contenus ont été supprimés
       hello: Bonjour %username%,
-      info_no_contrib: Nous sommes au regret de vous annoncer que votre compte a expiré, car celui-ci n'a pas été vérifié dans un délai de 72 heures.
-      info_with_contrib: Nous sommes au regret de vous annoncer que votre compte a expiré et que vos contenus ont été supprimés, car votre compte n'a pas été vérifié dans un délai de 72 heures.
+      info_no_contrib: Nous sommes au regret de vous annoncer que votre compte a expiré, car celui-ci n'a pas été vérifié dans un délai de 48 heures.
+      info_with_contrib: Nous sommes au regret de vous annoncer que votre compte a expiré et que vos contenus ont été supprimés, car votre compte n'a pas été vérifié dans un délai de 48 heures.
       reactivate: Si vous souhaitez tout de même participer, veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique et réactiver votre compte :
       confirm: <a href="%url%"><strong>Confirmer mon adresse électronique et réactiver mon compte</strong></a>
       after_no_contrib: Après avoir réactivé votre compte, vous pourrez de nouveau vous connecter, voter et contribuer.
       after_with_contrib: Après avoir réactivé votre compte, vous pourrez de nouveau vous connecter, voter et contribuer. En revanche, les contenus supprimés ne seront pas restaurés.
-      question: Si vous avez des questions concernant votre compte ou tout autre sujet, n'hésitez pas à nous contacter à cette adresse %email%.
-      done: Bien cordialement,
-  alert_expire_user:
-      subject: %sitename% —  Rappel : Vous n'avez pas encore confirmé votre adresse email
-      hello: Bonjour %username%,
-      info: Merci de vous être inscrit sur %sitename%.
-      click: Veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique :
-      confirm: <a href="%url%"><strong>Confirmer mon adresse électronique</strong></a>
       question: Si vous avez des questions concernant votre compte ou tout autre sujet, n'hésitez pas à nous contacter à cette adresse %email%.
       done: Bien cordialement,

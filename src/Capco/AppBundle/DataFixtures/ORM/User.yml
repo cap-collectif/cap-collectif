@@ -168,7 +168,7 @@ Capco\UserBundle\Entity\User:
         email: user_not_confirmed_to_be_expired@test.com
         enabled: true
         expired: false
-        expiresAt: <date('now')>
+        expiresAt: <dateTimeBetween('-10 days', '-2 days')>
         userType: @UserType1
         plainPassword: user_not_confirmed_to_be_expired
         roles:
@@ -190,21 +190,6 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_USER'
         Media: null
         confirmationToken: oklmoklm
-
-    user_not_confirmed_to_be_expired_in_24_hours:
-        username: user_not_confirmed_to_be_expired_in_24_hours
-        firstname: user_not_confirmed_to_be_expired_in_24_hours
-        lastname: user_not_confirmed_to_be_expired_in_24_hours
-        email: user_not_confirmed_to_be_expired_in_24_hours@test.com
-        enabled: true
-        expired: false
-        expiresAt: <dateTimeBetween('+1 days', '+1 days')>
-        userType: @UserType1
-        plainPassword: user_not_confirmed_to_be_expired_in_24_hours
-        roles:
-         - 'ROLE_USER'
-        Media: null
-        confirmationToken: qsdfgsqdqsdsqdsqdhjkldsqdsqdsqdqsdm
 
     user_expired:
         username: user_expired

@@ -239,8 +239,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $emailConfirmationSentAt = null;
 
-    protected $alertExpirationSent = false;
-
     public function __construct($encoder = null)
     {
         parent::__construct();
@@ -962,18 +960,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setVip($vip)
     {
         $this->vip = $vip;
-
-        return $this;
-    }
-
-    public function isAlertExpirationSent()
-    {
-        return $this->alertExpirationSent;
-    }
-
-    public function setAlertExpirationSent($alertExpirationSent)
-    {
-        $this->alertExpirationSent = $alertExpirationSent;
 
         return $this;
     }

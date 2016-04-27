@@ -76,21 +76,7 @@ class UserRepository extends EntityRepository
         $qb
           ->andwhere('u.expired = false')
           ->andWhere('u.expiresAt IS NOT NULL')
-          ->andWhere('u.expiresAt < :now')
-          ->setParameter('now', new \DateTime())
-        ;
-      return $qb->getQuery()->getResult();
-    }
-
-    public function findUsersThatWillExpireIn24Hours()
-    {
-      $qb = $this->createQueryBuilder('u');
-      $qb
-          ->andwhere('u.expired = false')
-          ->andWhere('u.expiresAt IS NOT NULL')
-          ->andWhere('u.expiresAt < :tomorrow')
-          ->andWhere('u.alertExpirationSent = false')
-          ->setParameter('tomorrow', new \DateTime('+1 day'))
+          ->andWhere('u.expiresAt < CURRENT_DATE()')
         ;
 
         return $qb->getQuery()->getResult();
