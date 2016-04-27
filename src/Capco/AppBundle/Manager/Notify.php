@@ -78,6 +78,26 @@ class Notify implements MailerInterface
         }
     }
 
+    public function sendAlertExpirationUserEmail(UserInterface $user)
+    {
+      $template = 'CapcoAppBundle:Mail:alertExpirationUser.html.twig';
+      $sitename = $this->resolver->getValue('global.site.fullname');
+      $subject = $this->translator->trans('email.alert_expire_user.subject', ['%sitename%' => $sitename],'CapcoAppBundle');
+      $url = $this->router->generate('capco_user_confirmation_email', [
+        'token' => $user->getConfirmationToken()
+      ], true);
+      $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
+      $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
+
+      $rendered = $this->templating->render($template, [
+        'user' => $user,
+        'url' => $url,
+        'sitename' => $sitename,
+        'email' => $this->resolver->getValue('admin.mail.notifications.receive_address'),
+      ]);
+      $this->sendEmail($user->getEmail(), $fromAddress, $fromName, $rendered, $subject);
+    }
+
     public function sendExpiredUserEmail(UserInterface $user, $contributionsDeleted)
     {
         $template = $contributionsDeleted

@@ -1,10 +1,5 @@
 {% if projectsCount > 0 %}
-    <div
-        id="render-projects-list"
-        data-projects='{{ projects | escape }}'
-    >
-        <p class="text-center">{{ 'global.loading' | trans({}, 'CapcoAppBundle') }}</p>
-    </div>
+    {{ react_intl_component('ProjectsListApp', {'props': projectsProps}) }}
 {% else %}
     <div class="project__empty-block  text-center">
         <p class="icon  cap-bubble-star-2"></p>
