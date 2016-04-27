@@ -123,7 +123,7 @@ class UsersController extends FOSRestController
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */
-    public function postResendSmsConfirmationAction()
+    public function postSendSmsConfirmationAction()
     {
         $user = $this->getUser();
         if ($user->isSmsConfirmed()) {
@@ -142,6 +142,31 @@ class UsersController extends FOSRestController
         $this->get('sms.service')->confirm($user);
 
         $user->setSmsConfirmationSentAt(new \DateTime());
+        $this->getDoctrine()->getManager()->flush();
+    }
+
+    /**
+     * @Post("/sms-confirmation", defaults={"_feature_flags" = "registration"})
+     * @Security("has_role('ROLE_USER')")
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postSmsConfirmationAction($code)
+    {
+        $user = $this->getUser();
+        if ($user->isSmsConfirmed()) {
+          throw new BadRequestHttpException('Already confirmed.');
+        }
+
+        if (!$user->getSmsCode()) {
+          throw new BadRequestHttpException('Ask a confirmation message before.');
+        }
+
+        if ($code != $user->getSmsCode()) {
+          throw new BadRequestHttpException('Wrong code.');
+        }
+
+        $user->setSmsConfirmed(true);
+        $user->setSmsConfirmationSentAt(null);
         $this->getDoctrine()->getManager()->flush();
     }
 }

@@ -25,7 +25,7 @@ services:
 
   sms.service:
     class: Capco\AppBundle\Sms\SmsService
-    arguments: [@twilio.sms_sender, %twilio_phone%]
+    arguments: [@twilio.sms_sender, %twilio_number%]
 
   capco.doctrine.subscriber.dynamic_relation:
     class: Capco\AppBundle\EventListener\DynamicRelationSubscriber

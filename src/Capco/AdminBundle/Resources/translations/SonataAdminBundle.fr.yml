@@ -759,6 +759,7 @@ capco:
     versions: Modifications
     votes_evolution: "Graphe d'évolution des votes"
     zipcode_at_register: Demander le code postal
+    sms_confirmation: Vérification des comptes par SMS
 
 action_enable: Activer
 action_disable: Désactiver
