@@ -61,7 +61,7 @@
     {% if capco_comment_can_add(post) or (capco_comment_can_show(post) and post.commentsCount > 0) %}
         <div class="container  container--custom  container--thinner">
             {% if capco_comment_can_show(post) %}
-                <div id="render-post-comments" data-post="{{ post.id }}"></div>
+                {{ react_intl_component('CommentSectionApp', {'props': props}) }}
             {% endif %}
         </div>
     {% endif %}

@@ -136,8 +136,8 @@ const ReplyForm = React.createClass({
   emptyForm() {
     const form = {};
     this.props.form.fields.forEach((field) => {
-      form[field.id] = (field.type === 'checkbox' || field.type === 'ranking') ? [] : '';
-      if (field.type === 'checkbox' || field.type === 'radio' || field.type === 'ranking') {
+      form[field.id] = field.type === 'checkbox' ? [] : '';
+      if (field.type === 'checkbox' || field.type === 'radio') {
         this['field-' + field.id].empty();
       }
     });

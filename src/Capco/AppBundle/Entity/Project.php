@@ -833,7 +833,7 @@ class Project
 
         foreach ($this->steps as $pas) {
             $step = $pas->getStep();
-            if ($step->isConsultationStep() || $step->isCollectStep() || $step->isQuestionnaireStep()) {
+            if ($step->isConsultationStep() || $step->isCollectStep()) {
                 $steps[] = $pas;
             }
         }

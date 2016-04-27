@@ -54,25 +54,18 @@ class ProjectController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $votableSteps = $serializer->serialize([
+        $props = $serializer->serialize([
             'votableSteps' => $this
                 ->get('capco.proposal_votes.resolver')
                 ->getVotableStepsForProject($project),
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
-
-        $districts = $serializer->serialize([
             'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Districts']));
-
-        $themes = $serializer->serialize([
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Themes']));
+            'projectId' => $project->getId(),
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Districts', 'Themes']));
 
         $response = $this->render('CapcoAppBundle:Project:show_user_votes.html.twig', [
             'project' => $project,
-            'themes' => $themes,
-            'districts' => $districts,
-            'votableSteps' => $votableSteps,
+            'props' => $props,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
@@ -96,25 +89,21 @@ class ProjectController extends Controller
         $serializer = $this->get('jms_serializer');
         $em = $this->get('doctrine.orm.entity_manager');
 
-        $steps = $serializer->serialize([
-            'steps' => $this
-                ->get('capco.project_stats.resolver')
-                ->getStepsWithStatsForProject($project),
-        ], 'json', SerializationContext::create());
+        $steps = $this
+            ->get('capco.project_stats.resolver')
+            ->getStepsWithStatsForProject($project)
+        ;
 
-        $districts = $serializer->serialize([
-            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Districts']));
-
-        $themes = $serializer->serialize([
+        $props = $serializer->serialize([
+            'projectId' => $project->getId(),
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Themes']));
+            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
+            'steps' => $steps,
+        ], 'json', SerializationContext::create()->setGroups(['Themes', 'Districts']));
 
         $response = $this->render('CapcoAppBundle:Project:show_stats.html.twig', [
             'project' => $project,
-            'steps' => $steps,
-            'districts' => $districts,
-            'themes' => $themes,
+            'props' => $props,
             'currentStep' => 'stats_step',
         ]);
 
@@ -346,8 +335,6 @@ class ProjectController extends Controller
             ]);
         }
 
-        $themesActivated = $toggleManager->isActive('themes');
-
         if ($request->getMethod() == 'POST' && $formActivated) {
             $form->handleRequest($request);
 
@@ -374,7 +361,7 @@ class ProjectController extends Controller
         $serializer = $this->get('jms_serializer');
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('projects.pagination');
         $projectsRaw = $em->getRepository('CapcoAppBundle:Project')->getSearchResults($pagination, $page, $theme, $sort, $term);
-        $props = $this->get('jms_serializer')->serialize([
+        $props = $serializer->serialize([
             'projects' => $projectsRaw,
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
 
@@ -403,29 +390,27 @@ class ProjectController extends Controller
      * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:votes_widget.html.twig")
      *
-     * @param $max
-     * @param $offset
+     * @param Project $project
      *
      * @return array
      */
     public function showVotesWidgetAction(Project $project)
     {
         $serializer = $this->get('jms_serializer');
-        $votableSteps = $serializer->serialize([
+
+        $props = $serializer->serialize([
             'votableSteps' => $this
                 ->get('capco.proposal_votes.resolver')
                 ->getVotableStepsForProject($project),
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
-        $image = $serializer->serialize([
             'image' => $this
-            ->get('capco.site_image.resolver')
-            ->getMedia('image.votes_bar'),
-        ], 'json', SerializationContext::create());
+                ->get('capco.site_image.resolver')
+                ->getMedia('image.votes_bar'),
+            'votesPageUrl' => $this->get('router')->generate('app_project_show_user_votes', ['projectSlug' => $project->getSlug()], true),
+            'projectId' => $project->getId(),
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
 
         return [
-            'votableSteps' => $votableSteps,
-            'project' => $project,
-            'image' => $image,
+            'props' => $props,
         ];
     }
 }

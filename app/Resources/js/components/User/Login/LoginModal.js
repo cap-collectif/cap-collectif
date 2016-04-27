@@ -4,12 +4,13 @@ import { IntlMixin } from 'react-intl';
 import CloseButton from '../../Form/CloseButton';
 import LoginForm from './LoginForm';
 import { LoginSocialButtons } from './LoginSocialButtons';
-import FeatureStore from '../../../stores/FeatureStore';
+import { connect } from 'react-redux';
 
-const LoginModal = React.createClass({
+export const LoginModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
+    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -47,8 +48,8 @@ const LoginModal = React.createClass({
           </Modal.Header>
           <Modal.Body>
             <LoginSocialButtons features={{
-              login_facebook: FeatureStore.isActive('login_facebook'),
-              login_gplus: FeatureStore.isActive('login_gplus'),
+              login_facebook: this.props.features.login_facebook,
+              login_gplus: this.props.features.login_gplus,
             }} />
             <LoginForm
               isSubmitting={this.state.isSubmitting}
@@ -77,4 +78,10 @@ const LoginModal = React.createClass({
 
 });
 
-export default LoginModal;
+const mapStateToProps = (state) => {
+  return {
+    features: state.features,
+  };
+};
+
+export default connect(mapStateToProps)(LoginModal);

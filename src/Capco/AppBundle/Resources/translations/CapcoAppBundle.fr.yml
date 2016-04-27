@@ -1083,7 +1083,6 @@ project_download:
     published: Contenu publié
     unpublished: Contenu à la corbeille
   label:
-    anonymous: Anonyme
     answer: Réponse officielle
     arguments_nok: Arguments contre
     arguments_ok: Arguments pour
@@ -1129,7 +1128,7 @@ project_download:
       vote: Vote
     link:
       media: Fichier
-    no: Non
+    no: Contre
     non_applicable: n/a
     related:
       argument: Argument "%id%"
@@ -1141,7 +1140,7 @@ project_download:
       mitige: Mitigé
       nok: Contre
       ok: Pour
-    yes: Oui
+    yes: Pour
 
 votes:
   none: Il n'y a pas de votes.

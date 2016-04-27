@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import OpinionActions from '../../../actions/OpinionActions';
-import LoginStore from '../../../stores/LoginStore';
 import { Modal, Button } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
+import { connect } from 'react-redux';
 
 const OpinionDelete = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
+    opinion: PropTypes.object.isRequired,
+    user: PropTypes.object,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
 
   getInitialState() {
     return {
@@ -53,10 +60,10 @@ const OpinionDelete = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    if (this.props.opinion.author === null || !LoginStore.isLoggedIn()) {
+    if (this.props.opinion.author === null || !this.props.user) {
       return false;
     }
-    return LoginStore.user.uniqueId === this.props.opinion.author.uniqueId;
+    return this.props.user.uniqueId === this.props.opinion.author.uniqueId;
   },
 
   render() {
@@ -111,4 +118,10 @@ const OpinionDelete = React.createClass({
 
 });
 
-export default OpinionDelete;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(OpinionDelete);

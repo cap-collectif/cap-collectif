@@ -4,6 +4,7 @@ import { IntlMixin } from 'react-intl';
 import { Modal, Button, Grid, Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
 import autosize from 'autosize';
 import classNames from 'classnames';
+import { hashHistory } from 'react-router';
 
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import ArrayHelper from '../../../services/ArrayHelper';
@@ -123,7 +124,7 @@ const DivideModal = React.createClass({
       },
     };
     SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
-    this.transitionTo('inbox', { 'type': 'new' });
+    hashHistory.push('inbox', { 'type': 'new' });
   },
 
 
@@ -143,11 +144,11 @@ const DivideModal = React.createClass({
 
   renderCreateButton() {
     if (this.state.selectedText) {
-      return <Button bsStyle="success" className="division__create-element" onClick={this.createFromSelection.bind(null, this)}>{this.getIntlMessage('edition.action.divide.create_button')}</Button>;
+      return <Button bsStyle="success" className="division__create-element" onClick={this.createFromSelection}>{this.getIntlMessage('synthesis.edition.action.divide.create_button')}</Button>;
     }
     return (
-      <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={<Popover id="divide-modal-help-popover" title={this.getIntlMessage('edition.action.divide.help.title')}>{this.getIntlMessage('edition.action.divide.help.message')}</Popover>}>
-        <Button bsStyle="success" className="division__create-element">{this.getIntlMessage('edition.action.divide.create_button')}</Button>
+      <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={<Popover id="divide-modal-help-popover" title={this.getIntlMessage('synthesis.edition.action.divide.help.title')}>{this.getIntlMessage('synthesis.edition.action.divide.help.message')}</Popover>}>
+        <Button bsStyle="success" className="division__create-element">{this.getIntlMessage('synthesis.edition.action.divide.create_button')}</Button>
       </OverlayTrigger>
     );
   },
@@ -233,14 +234,14 @@ const DivideModal = React.createClass({
       <div>
         <Modal bsSize="large" show={this.props.show} onHide={this.hide} animation={false} dialogClassName={modalClasses}>
           <Modal.Header closeButton>
-            <Modal.Title>{this.getIntlMessage('edition.action.divide.title')}</Modal.Title>
+            <Modal.Title>{this.getIntlMessage('synthesis.edition.action.divide.title')}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {this.renderContent()}
           </Modal.Body>
           <Modal.Footer>
-            <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('edition.action.divide.btn_cancel')}</Button>
-            <Button bsStyle="primary" type="submit" onClick={this.divide.bind(null, this)}>{this.getIntlMessage('edition.action.divide.btn_submit')}</Button>
+            <Button type="button" onClick={this.hide}>{this.getIntlMessage('synthesis.edition.action.divide.btn_cancel')}</Button>
+            <Button bsStyle="primary" type="submit" onClick={this.divide.bind(null, this)}>{this.getIntlMessage('synthesis.edition.action.divide.btn_submit')}</Button>
           </Modal.Footer>
         </Modal>
         {this.renderPublishModal()}

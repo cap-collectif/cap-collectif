@@ -1,51 +1,33 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import LoginOverlay from '../Utils/LoginOverlay';
-import LoginStore from '../../stores/LoginStore';
-import FeatureStore from '../../stores/FeatureStore';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 
 const OpinionReportButton = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
+    opinion: PropTypes.object.isRequired,
+    features: PropTypes.object.isRequired,
+    user: PropTypes.object,
   },
   mixins: [IntlMixin],
 
-  getInitialState() {
-    return {
-      reporting: FeatureStore.isActive('reporting'),
-    };
-  },
-
-  componentWillMount() {
-    FeatureStore.addChangeListener(this.onChange);
-  },
-
-  componentWillUnmount() {
-    FeatureStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    this.setState({
-      reporting: FeatureStore.isActive('reporting'),
-    });
-  },
-
   isTheUserTheAuthor() {
-    if (this.props.opinion.author === null || !LoginStore.isLoggedIn()) {
+    if (this.props.opinion.author === null || !this.props.user) {
       return false;
     }
-    return LoginStore.user.uniqueId === this.props.opinion.author.uniqueId;
+    return this.props.user.uniqueId === this.props.opinion.author.uniqueId;
   },
 
   render() {
-    const reported = this.props.opinion.has_user_reported;
-    if (this.state.reporting && !this.isTheUserTheAuthor()) {
+    const { features, opinion, user } = this.props;
+    const reported = opinion.has_user_reported;
+    if (features.reporting && !this.isTheUserTheAuthor()) {
       return (
-        <LoginOverlay>
+        <LoginOverlay features={features} user={user}>
           <Button
             className="opinion__action--report pull-right btn--outline btn-dark-gray"
-            href={reported || !LoginStore.isLoggedIn() ? null : this.props.opinion._links.report}
+            href={reported || !user ? null : opinion._links.report}
             active={reported}
           >
             <i className="cap cap-flag-1"></i>
@@ -60,4 +42,11 @@ const OpinionReportButton = React.createClass({
 
 });
 
-export default OpinionReportButton;
+const mapStateToProps = (state) => {
+  return {
+    features: state.features,
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(OpinionReportButton);

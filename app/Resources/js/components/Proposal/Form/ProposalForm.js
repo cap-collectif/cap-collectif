@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
@@ -6,19 +6,20 @@ import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
-import FeatureStore from '../../../stores/FeatureStore';
+import { connect } from 'react-redux';
 
 const ProposalForm = React.createClass({
   propTypes: {
-    form: React.PropTypes.object.isRequired,
-    themes: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
-    isSubmitting: React.PropTypes.bool.isRequired,
-    onValidationFailure: React.PropTypes.func,
-    onSubmitSuccess: React.PropTypes.func,
-    onSubmitFailure: React.PropTypes.func,
-    mode: React.PropTypes.string,
-    proposal: React.PropTypes.object,
+    form: PropTypes.object.isRequired,
+    themes: PropTypes.array.isRequired,
+    districts: PropTypes.array.isRequired,
+    isSubmitting: PropTypes.bool.isRequired,
+    onValidationFailure: PropTypes.func,
+    onSubmitSuccess: PropTypes.func,
+    onSubmitFailure: PropTypes.func,
+    mode: PropTypes.string,
+    proposal: PropTypes.object,
+    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
@@ -57,13 +58,7 @@ const ProposalForm = React.createClass({
         theme: [],
         district: [],
       },
-      showThemes: FeatureStore.isActive('themes'),
-      showDistricts: FeatureStore.isActive('districts'),
     };
-  },
-
-  componentWillMount() {
-    FeatureStore.addChangeListener(this.onChange);
   },
 
   componentDidMount() {
@@ -80,6 +75,8 @@ const ProposalForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    this.updateThemeConstraint();
+    this.updateDistrictConstraint();
     if (!this.props.isSubmitting && nextProps.isSubmitting === true) {
       if (this.isValid()) {
         const form = this.state.form;
@@ -93,10 +90,10 @@ const ProposalForm = React.createClass({
           });
         });
         form.responses = responses;
-        if (!this.state.showThemes) {
+        if (!this.props.features.themes) {
           delete form.theme;
         }
-        if (!this.state.showDistricts) {
+        if (!this.props.features.districts) {
           delete form.district;
         }
         if (this.props.mode === 'edit') {
@@ -127,19 +124,6 @@ const ProposalForm = React.createClass({
     }
   },
 
-  componentWillUnmount() {
-    FeatureStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    this.setState({
-      showThemes: FeatureStore.isActive('themes'),
-      showDistricts: FeatureStore.isActive('districts'),
-    });
-    this.updateThemeConstraint();
-    this.updateDistrictConstraint();
-  },
-
   getInitialFormAnswers() {
     const custom = {};
     this.props.form.fields.map((field) => {
@@ -162,7 +146,7 @@ const ProposalForm = React.createClass({
   },
 
   updateThemeConstraint() {
-    if (this.state.showThemes) {
+    if (this.props.features.themes) {
       this.formValidationRules.theme = {
         minValue: { value: 0, message: 'proposal.constraints.theme' },
       };
@@ -172,7 +156,7 @@ const ProposalForm = React.createClass({
   },
 
   updateDistrictConstraint() {
-    if (this.state.showDistricts) {
+    if (this.props.features.districts) {
       this.formValidationRules.district = {
         minValue: { value: 0, message: 'proposal.constraints.district' },
       };
@@ -219,7 +203,7 @@ const ProposalForm = React.createClass({
         />
 
         {
-          this.state.showThemes
+          this.props.features.themes
             ? <Input
               id="proposal_theme"
               type="select"
@@ -245,7 +229,7 @@ const ProposalForm = React.createClass({
         }
 
         {
-          this.state.showDistricts
+          this.props.features.districts
               ? <Input
                 id="proposal_district"
                 type="select"
@@ -305,4 +289,10 @@ const ProposalForm = React.createClass({
 
 });
 
-export default ProposalForm;
+const mapStateToProps = (state) => {
+  return {
+    features: state.features,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalForm);

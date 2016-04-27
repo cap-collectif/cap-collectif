@@ -4,7 +4,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
-import ReplyCreateFormWrapper from './ReplyCreateFormWrapper';
+import { ReplyCreateFormWrapper } from './ReplyCreateFormWrapper';
 
 describe('<ReplyCreateFormWrapper />', () => {
   const formContribuable = {
@@ -21,12 +21,10 @@ describe('<ReplyCreateFormWrapper />', () => {
   const userReplies = [{}];
 
   it('should render an alert an a disabled form when form is contribuable and user is not logged in', () => {
-    ReplyCreateFormWrapper.__Rewire__('LoginStore', {
-      isLoggedIn: () => {return false;},
-    });
     const wrapper = shallow(<ReplyCreateFormWrapper
       form={formContribuable}
       userReplies={userReplies}
+      user={null}
       {...IntlData}
     />);
     const alert = wrapper.find('Alert');
@@ -40,12 +38,10 @@ describe('<ReplyCreateFormWrapper />', () => {
   });
 
   it('should render an alert an a disabled form when form is contribuable and doesn\'t allow multiple votes and user has already votes', () => {
-    ReplyCreateFormWrapper.__Rewire__('LoginStore', {
-      isLoggedIn: () => {return true;},
-    });
     const wrapper = shallow(<ReplyCreateFormWrapper
       form={formContribuableWithoutMultipleVotes}
       userReplies={userReplies}
+      user={{}}
       {...IntlData}
     />);
     const alert = wrapper.find('Alert');
@@ -59,12 +55,10 @@ describe('<ReplyCreateFormWrapper />', () => {
   });
 
   it('should no alert an a disabled form when form is not contribuable', () => {
-    ReplyCreateFormWrapper.__Rewire__('LoginStore', {
-      isLoggedIn: () => {return true;},
-    });
     const wrapper = shallow(<ReplyCreateFormWrapper
       form={formNotContribuable}
       userReplies={userReplies}
+      user={{}}
       {...IntlData}
     />);
     const alert = wrapper.find('Alert');
@@ -75,12 +69,10 @@ describe('<ReplyCreateFormWrapper />', () => {
   });
 
   it('should render no alert an an enabled form', () => {
-    ReplyCreateFormWrapper.__Rewire__('LoginStore', {
-      isLoggedIn: () => {return true;},
-    });
     const wrapper = shallow(<ReplyCreateFormWrapper
       form={formContribuable}
       userReplies={userReplies}
+      user={{}}
       {...IntlData}
     />);
     const alert = wrapper.find('Alert');

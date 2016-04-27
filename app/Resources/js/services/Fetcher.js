@@ -1,5 +1,6 @@
 import config from '../config';
-import LoginStore from '../stores/LoginStore';
+import AuthService from './AuthService';
+import LocalStorageService from './LocalStorageService';
 
 const status = (response) => {
   if (response.status >= 200 && response.status < 300) {
@@ -20,8 +21,8 @@ const createHeaders = () => {
     'Content-Type': 'application/json',
   };
 
-  if (LoginStore.jwt !== null) {
-    headers.Authorization = 'Bearer ' + LoginStore.jwt;
+  if (LocalStorageService.isValid('jwt')) {
+    headers.Authorization = 'Bearer ' + LocalStorageService.get('jwt');
   }
 
   return headers;
@@ -29,8 +30,8 @@ const createHeaders = () => {
 
 // If shield mode is activated, Safari will override the Authorization header, so we need this
 const addAuthorization = (req) => {
-  if (LoginStore.jwt !== null) {
-    const header = 'Bearer ' + LoginStore.jwt;
+  if (LocalStorageService.isValid('jwt')) {
+    const header = 'Bearer ' + LocalStorageService.get('jwt');
     req.setRequestHeader('Authorization', header);
   }
 };
@@ -38,42 +39,58 @@ const addAuthorization = (req) => {
 class Fetcher {
 
   get(uri) {
-    return fetch(config.api + uri, {
-      method: 'get',
-      headers: createHeaders(),
-      beforeSend: addAuthorization,
-    })
-    .then(status)
-    .then(json);
+    return AuthService.login()
+      .then(() => {
+        return fetch(config.api + uri, {
+          method: 'get',
+          headers: createHeaders(),
+          beforeSend: addAuthorization,
+        })
+          .then(status)
+          .then(json);
+      })
+    ;
   }
 
   post(uri, body) {
-    return fetch(config.api + uri, {
-      method: 'post',
-      headers: createHeaders(),
-      beforeSend: addAuthorization,
-      body: JSON.stringify(body),
-    })
-    .then(status);
+    return AuthService.login()
+      .then(() => {
+        return fetch(config.api + uri, {
+          method: 'post',
+          headers: createHeaders(),
+          beforeSend: addAuthorization,
+          body: JSON.stringify(body),
+        })
+          .then(status);
+      })
+    ;
   }
 
   put(uri, body) {
-    return fetch(config.api + uri, {
-      method: 'put',
-      headers: createHeaders(),
-      beforeSend: addAuthorization,
-      body: JSON.stringify(body),
-    })
-    .then(status);
+    return AuthService.login()
+      .then(() => {
+        return fetch(config.api + uri, {
+          method: 'put',
+          headers: createHeaders(),
+          beforeSend: addAuthorization,
+          body: JSON.stringify(body),
+        })
+          .then(status);
+      })
+    ;
   }
 
   delete(uri) {
-    return fetch(config.api + uri, {
-      method: 'delete',
-      headers: createHeaders(),
-      beforeSend: addAuthorization,
-    })
-    .then(status);
+    return AuthService.login()
+      .then(() => {
+        return fetch(config.api + uri, {
+          method: 'delete',
+          headers: createHeaders(),
+          beforeSend: addAuthorization,
+        })
+          .then(status);
+      })
+    ;
   }
 
 }

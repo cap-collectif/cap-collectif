@@ -82,10 +82,6 @@ const RankingBlock = React.createClass({
     };
   },
 
-  reset() {
-    this.setState(this.getInitialState());
-  },
-
   render() {
     const { field, connectDropTarget, disabled } = this.props;
     const { items, choicesHeight } = this.state;

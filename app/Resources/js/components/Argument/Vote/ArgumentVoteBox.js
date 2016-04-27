@@ -1,6 +1,5 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import LoginStore from '../../../stores/LoginStore';
 import ArgumentActions from '../../../actions/ArgumentActions';
 import ArgumentVoteButton from './ArgumentVoteButton';
 
@@ -26,13 +25,6 @@ const ArgumentVoteBox = React.createClass({
     ArgumentActions.deleteVote(this.props.argument.id);
   },
 
-  isTheUserTheAuthor() {
-    if (this.props.argument.author === null || !LoginStore.isLoggedIn()) {
-      return false;
-    }
-    return LoginStore.user.uniqueId === this.props.argument.author.uniqueId;
-  },
-
   render() {
     const { hasVoted } = this.state;
     const { argument } = this.props;
@@ -43,7 +35,7 @@ const ArgumentVoteBox = React.createClass({
       <span>
         <form style={{ display: 'inline-block' }}>
           <ArgumentVoteButton
-            disabled={!argument.isContribuable || this.isTheUserTheAuthor()}
+            argument={argument}
             hasVoted={showVoted}
             onClick={showVoted ? this.deleteVote : this.vote}
           />

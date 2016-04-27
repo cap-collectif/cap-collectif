@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
 import { IntlMixin } from 'react-intl';
-import LoginStore from '../../../stores/LoginStore';
 import ProposalPageHeader from './ProposalPageHeader';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageAnswer from './ProposalPageAnswer';
@@ -13,17 +12,19 @@ import ProposalStore from '../../../stores/ProposalStore';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteSidebar from '../Vote/ProposalVoteSidebar';
+import { connect } from 'react-redux';
 import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
 const ProposalPage = React.createClass({
   propTypes: {
-    form: React.PropTypes.object.isRequired,
-    proposal: React.PropTypes.object.isRequired,
-    themes: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
-    votes: React.PropTypes.array.isRequired,
-    votableStep: React.PropTypes.object,
-    userHasVote: React.PropTypes.bool,
+    form: PropTypes.object.isRequired,
+    proposal: PropTypes.object.isRequired,
+    themes: PropTypes.array.isRequired,
+    districts: PropTypes.array.isRequired,
+    votes: PropTypes.array.isRequired,
+    votableStep: PropTypes.object,
+    userHasVote: PropTypes.bool,
+    user: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -31,6 +32,7 @@ const ProposalPage = React.createClass({
     return {
       votableStep: null,
       userHasVote: false,
+      user: null,
     };
   },
 
@@ -58,7 +60,7 @@ const ProposalPage = React.createClass({
   },
 
   onVoteChange() {
-    if (LoginStore.isLoggedIn()) {
+    if (this.props.user) {
       this.setState({
         userHasVote: ProposalVoteStore.userHasVote,
         creditsLeft: ProposalVoteStore.creditsLeft,
@@ -164,4 +166,10 @@ const ProposalPage = React.createClass({
 
 });
 
-export default ProposalPage;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalPage);

@@ -247,9 +247,17 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
+        $serializer = $this->get('jms_serializer');
+
+        $props = $serializer->serialize([
+            'synthesis_id' => $step->getSynthesis()->getId(),
+            'mode' => 'view',
+        ], 'json', SerializationContext::create());
+
         return [
             'project' => $project,
             'currentStep' => $step,
+            'props' => $props,
         ];
     }
 
@@ -352,27 +360,19 @@ class StepController extends Controller
                 )
             ;
         }
-        $userReplies = $serializer->serialize([
-          'replies' => $userRepliesRaw,
-      ], 'json', SerializationContext::create()->setGroups(['Replies', 'UsersInfos', 'UserMedias']));
 
-        $stepJson = $serializer->serialize([
+        $props = $serializer->serialize([
             'step' => $step,
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
-
-        $formJson = $step->getQuestionnaire()
-            ? $serializer->serialize([
-                'form' => $step->getQuestionnaire(),
-            ], 'json', SerializationContext::create()->setGroups(['Questionnaires', 'Questions']))
-            : null
+            'form' => $step->getQuestionnaire() ? $step->getQuestionnaire() : null,
+            'userReplies' => $userRepliesRaw,
+        ], 'json', SerializationContext::create()
+            ->setGroups(['Questionnaires', 'Questions', 'Steps', 'UserVotes', 'Replies', 'UsersInfos', 'UserMedias']))
         ;
 
         $response = $this->render('CapcoAppBundle:Step:questionnaire.html.twig', [
             'project' => $project,
             'currentStep' => $step,
-            'step' => $stepJson,
-            'form' => $formJson,
-            'userReplies' => $userReplies,
+            'props' => $props,
         ]);
 
         return $response;
@@ -461,9 +461,17 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
+        $serializer = $this->get('jms_serializer');
+
+        $props = $serializer->serialize([
+            'synthesis_id' => $step->getSynthesis()->getId(),
+            'mode' => 'edit',
+        ], 'json', SerializationContext::create());
+
         return [
             'project' => $project,
             'currentStep' => $step,
+            'props' => $props,
         ];
     }
 
@@ -489,14 +497,14 @@ class StepController extends Controller
 
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
-        $stepJson = $serializer->serialize([
+        $stepProps = $serializer->serialize([
             'step' => $currentStep,
         ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
 
         $response = $this->render('CapcoAppBundle:Consultation:show.html.twig', [
             'project' => $project,
             'currentStep' => $currentStep,
-            'step' => $stepJson,
+            'stepProps' => $stepProps,
             'nav' => $nav,
         ]);
 

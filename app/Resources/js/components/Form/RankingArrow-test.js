@@ -3,7 +3,6 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import IntlData from '../../translations/FR';
 import RankingArrow from './RankingArrow';
 
 const onClick = () => {};

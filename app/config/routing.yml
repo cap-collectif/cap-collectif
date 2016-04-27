@@ -23,11 +23,6 @@ capco_api_comments:
   type: annotation
   prefix: /api
 
-capco_api_features:
-  resource: "@CapcoAppBundle/Controller/Api/FeaturesController.php"
-  type: annotation
-  prefix: /api
-
 capco_api_districts:
   resource: "@CapcoAppBundle/Controller/Api/DistrictsController.php"
   type: annotation

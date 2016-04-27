@@ -5,12 +5,13 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import RegistrationForm from './RegistrationForm';
 import { LoginSocialButtons } from '../Login/LoginSocialButtons';
-import FeatureStore from '../../../stores/FeatureStore.js';
+import { connect } from 'react-redux';
 
 const RegistrationModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
+    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -51,8 +52,8 @@ const RegistrationModal = React.createClass({
         </Modal.Header>
         <Modal.Body>
           <LoginSocialButtons features={{
-            login_facebook: FeatureStore.isActive('login_facebook'),
-            login_gplus: FeatureStore.isActive('login_gplus'),
+            login_facebook: this.props.features.login_facebook,
+            login_gplus: this.props.features.login_gplus,
           }} />
           <RegistrationForm
             isSubmitting={isSubmitting}
@@ -76,4 +77,10 @@ const RegistrationModal = React.createClass({
 
 });
 
-export default RegistrationModal;
+const mapStateToProps = (state) => {
+  return {
+    features: state.features,
+  };
+};
+
+export default connect(mapStateToProps)(RegistrationModal);

@@ -22,7 +22,7 @@ const ViewTree = React.createClass({
     return {
       settings: SynthesisStore.settings,
       elements: [],
-      expanded: [],
+      expanded: {},
       isLoading: true,
     };
   },
@@ -96,11 +96,11 @@ const ViewTree = React.createClass({
             {
               expanded
               ? <FormattedMessage
-                  message={this.getIntlMessage('readmore.hide')}
+                  message={this.getIntlMessage('synthesis.readmore.hide')}
                   title={element.title}
               />
               : <FormattedMessage
-                  message={this.getIntlMessage('readmore.show')}
+                  message={this.getIntlMessage('synthesis.readmore.show')}
                   title={element.title}
               />
             }
@@ -130,7 +130,7 @@ const ViewTree = React.createClass({
                     element={element}
                     parent={parent}
                     settings={SynthesisDisplayRules.getMatchingSettingsForElement(element, this.state.settings)}
-                    onExpandElement={this.toggleExpand.bind(null, element)}
+                    onExpandElement={() => this.toggleExpand(element)}
                   />
                   {this.renderTreeItems(element.children, element)}
                   {this.renderCaret(element)}

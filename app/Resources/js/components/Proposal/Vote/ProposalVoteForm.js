@@ -1,27 +1,29 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import Input from '../../Form/Input';
-import LoginStore from '../../../stores/LoginStore';
+import { connect } from 'react-redux';
 
 const ProposalVoteForm = React.createClass({
   propTypes: {
-    proposal: React.PropTypes.object.isRequired,
-    selectionStepId: React.PropTypes.number.isRequired,
-    isSubmitting: React.PropTypes.bool.isRequired,
-    onValidationFailure: React.PropTypes.func.isRequired,
-    onSubmitSuccess: React.PropTypes.func.isRequired,
-    onSubmitFailure: React.PropTypes.func.isRequired,
-    userHasVote: React.PropTypes.bool,
+    proposal: PropTypes.object.isRequired,
+    selectionStepId: PropTypes.number.isRequired,
+    isSubmitting: PropTypes.bool.isRequired,
+    onValidationFailure: PropTypes.func.isRequired,
+    onSubmitSuccess: PropTypes.func.isRequired,
+    onSubmitFailure: PropTypes.func.isRequired,
+    userHasVote: PropTypes.bool,
+    user: PropTypes.object,
   },
   mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
       userHasVote: false,
+      user: null,
     };
   },
 
@@ -44,7 +46,7 @@ const ProposalVoteForm = React.createClass({
   },
 
   componentDidMount() {
-    if (!LoginStore.isLoggedIn()) {
+    if (!this.props.user) {
       this.formValidationRules = {
         username: {
           min: { value: 2, message: 'proposal.vote.constraints.username' },
@@ -61,7 +63,7 @@ const ProposalVoteForm = React.createClass({
   componentWillReceiveProps(nextProps) {
     if (!this.props.isSubmitting && nextProps.isSubmitting) {
       if (this.isValid()) {
-        if (LoginStore.isLoggedIn() && this.props.userHasVote) {
+        if (this.props.user && this.props.userHasVote) {
           ProposalActions
             .deleteVote(this.props.selectionStepId, this.props.proposal.id, this.props.proposal.estimation)
             .then(() => {
@@ -75,7 +77,7 @@ const ProposalVoteForm = React.createClass({
           return;
         }
         const data = this.state.form;
-        if (LoginStore.isLoggedIn()) {
+        if (this.props.user) {
           delete data.username;
           delete data.email;
         }
@@ -115,7 +117,7 @@ const ProposalVoteForm = React.createClass({
   },
 
   render() {
-    const anonymous = !LoginStore.isLoggedIn();
+    const anonymous = !this.props.user;
     const userHasVote = this.props.userHasVote;
 
     return (
@@ -186,4 +188,10 @@ const ProposalVoteForm = React.createClass({
 
 });
 
-export default ProposalVoteForm;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalVoteForm);

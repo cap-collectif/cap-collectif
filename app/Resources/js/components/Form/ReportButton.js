@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
-import LoginStore from '../../stores/LoginStore';
-import FeatureStore from '../../stores/FeatureStore';
 import LoginOverlay from '../Utils/LoginOverlay';
+import { connect } from 'react-redux';
 
 
 const ReportButton = React.createClass({
   propTypes: {
-    url: React.PropTypes.string.isRequired,
-    author: React.PropTypes.object,
-    hasReported: React.PropTypes.bool,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-    id: React.PropTypes.string,
+    url: PropTypes.string.isRequired,
+    author: PropTypes.object,
+    hasReported: PropTypes.bool,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    id: PropTypes.string,
+    user: PropTypes.object,
+    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -25,38 +26,19 @@ const ReportButton = React.createClass({
       className: '',
       style: {},
       id: 'report-button',
+      user: null,
     };
-  },
-
-  getInitialState() {
-    return {
-      reporting: FeatureStore.isActive('reporting'),
-    };
-  },
-
-  componentWillMount() {
-    FeatureStore.addChangeListener(this.onChange);
-  },
-
-  componentWillUnmount() {
-    FeatureStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    this.setState({
-      reporting: FeatureStore.isActive('reporting'),
-    });
   },
 
   canReport() {
-    return this.state.reporting && !this.isTheUserTheAuthor();
+    return this.props.features.reporting && !this.isTheUserTheAuthor();
   },
 
   isTheUserTheAuthor() {
-    if (this.props.author === null || !LoginStore.isLoggedIn()) {
+    if (this.props.author === null || !this.props.user) {
       return false;
     }
-    return LoginStore.user.uniqueId === this.props.author.uniqueId;
+    return this.props.user.uniqueId === this.props.author.uniqueId;
   },
 
   render() {
@@ -67,8 +49,9 @@ const ReportButton = React.createClass({
         'btn--outline': true,
       };
 
+      const { user, features } = this.props;
       return (
-        <LoginOverlay>
+        <LoginOverlay user={user} features={features}>
           <Button
             id={this.props.id}
             href={this.props.url}
@@ -88,4 +71,11 @@ const ReportButton = React.createClass({
 
 });
 
-export default ReportButton;
+const mapStateToProps = (state) => {
+  return {
+    features: state.features,
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(ReportButton);

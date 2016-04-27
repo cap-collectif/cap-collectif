@@ -50,7 +50,7 @@ const ProjectStatsPage = React.createClass({
               {
                 this.props.steps.map((step, index) => {
                   return (
-                    <NavItem key={index} eventKey={index}>
+                    <NavItem key={step.id} eventKey={index}>
                       {step.title}
                     </NavItem>
                   );

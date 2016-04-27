@@ -39,7 +39,7 @@ const MainNavbarSearch = React.createClass({
         <form onSubmit={this.submit}>
           <Input
             type="text"
-            placeholder={this.getIntlMessage('edition.navbar.search')}
+            placeholder={this.getIntlMessage('synthesis.edition.navbar.search')}
             buttonAfter={searchButton}
             valueLink={this.linkState('searchTerm')}
           />

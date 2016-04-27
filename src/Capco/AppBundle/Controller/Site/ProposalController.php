@@ -36,20 +36,6 @@ class ProposalController extends Controller
             ->getFirstVotableStepForProposal($proposal)
         ;
 
-        $votableStep = $serializer->serialize([
-            'votableStep' => $firstVotableStep,
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
-
-        $proposalJson = $serializer->serialize(
-            ['proposal' => $proposal],
-            'json',
-            SerializationContext::create()
-                ->setSerializeNull(true)
-                ->setGroups([
-                    'Proposals', 'UsersInfos', 'UserMedias', 'ProposalUserData', 'Themes', 'Steps',
-                ])
-        );
-
         $userHasVote = false;
         if ($this->getUser() && $firstVotableStep) {
             $userVote = $em
@@ -66,33 +52,35 @@ class ProposalController extends Controller
             }
         }
 
-        $districts = $serializer->serialize([
-            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Districts']));
-
-        $themes = $serializer->serialize([
-            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
-        ], 'json', SerializationContext::create()->setGroups(['Themes']));
-
-        $form = $serializer->serialize([
-            'form' => $currentStep->getProposalForm(),
-        ], 'json', SerializationContext::create()->setGroups(['ProposalForms', 'Questions']));
-
-        $votes = $serializer->serialize([
+        $props = $serializer->serialize([
+            'proposal' => $proposal,
             'votes' => $em->getRepository('CapcoAppBundle:ProposalVote')->getVotesForProposal($proposal, 6),
-        ], 'json', SerializationContext::create()->setGroups(['ProposalVotes', 'UsersInfos', 'UserMedias']));
+            'form' => $currentStep->getProposalForm(),
+            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
+            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
+            'votableStep' => $firstVotableStep,
+            'userHasVote' => $userHasVote,
+        ], 'json', SerializationContext::create()
+            ->setSerializeNull(true)
+            ->setGroups([
+                'ProposalVotes',
+                'UsersInfos', 'UserMedias',
+                'ProposalForms',
+                'Questions',
+                'Themes',
+                'Districts',
+                'Proposals',
+                'ProposalUserData',
+                'Steps',
+                'UserVotes',
+            ]))
+        ;
 
         $response = $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,
             'currentStep' => $currentStep,
             'proposalTitle' => $proposal->getTitle(),
-            'proposal' => $proposalJson,
-            'themes' => $themes,
-            'districts' => $districts,
-            'form' => $form,
-            'votes' => $votes,
-            'votableStep' => $votableStep,
-            'userHasVote' => $userHasVote,
+            'props' => $props,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

@@ -1,5 +1,4 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
-import LoginStore from '../stores/LoginStore';
 import Fetcher from '../services/Fetcher';
 import {
   RECEIVE_OPINION,
@@ -61,11 +60,11 @@ export default {
     ;
   },
 
-  vote: (data, opinion, parent, successMessage = 'opinion.request.create_vote.success', errorMessage = 'opinion.request.failure') => {
+  vote: (data, opinion, parent, user, successMessage = 'opinion.request.create_vote.success', errorMessage = 'opinion.request.failure') => {
     AppDispatcher.dispatch({
       actionType: CREATE_OPINION_VOTE,
       value: data.value,
-      user: LoginStore.user,
+      user: user,
     });
     const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
     return Fetcher
@@ -85,10 +84,10 @@ export default {
     });
   },
 
-  deleteVote: (opinion, parent, successMessage = 'opinion.request.delete_vote.success', errorMessage = 'opinion.request.failure') => {
+  deleteVote: (opinion, parent, user, successMessage = 'opinion.request.delete_vote.success', errorMessage = 'opinion.request.failure') => {
     AppDispatcher.dispatch({
       actionType: DELETE_OPINION_VOTE,
-      user: LoginStore.user,
+      user: user,
     });
     const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
     return Fetcher

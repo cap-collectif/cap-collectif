@@ -51,7 +51,6 @@ exports.config = {
           'app/Resources/js/modernizr.js',
         ],
         'js/app.js': [
-          'app/Resources/js/synthesis.js',
           'app/Resources/js/app.js',
           'app/Resources/js/**/**/*.json',
           'app/Resources/js/**/**/*.js',
