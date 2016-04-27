@@ -23,6 +23,15 @@ const Ranking = React.createClass({
     };
   },
 
+  empty() {
+    //   ¯\_(ツ)_/¯
+    this.rankingBlock
+      .getDecoratedComponentInstance()
+      .getDecoratedComponentInstance()
+      .reset()
+    ;
+  },
+
   handleRankingChange(ranking) {
     const values = Array.from(ranking, item => item.label);
     this.props.onChange(this.props.field, values);
@@ -54,6 +63,7 @@ const Ranking = React.createClass({
           : null
         }
         <RankingBlock
+          ref={c => this.rankingBlock = c}
           field={field}
           disabled={disabled}
           onRankingChange={this.handleRankingChange}
