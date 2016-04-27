@@ -86,7 +86,7 @@ class ThemeController extends Controller
         }
         $maxProjectsDisplayed = 12;
         $serializer = $this->get('jms_serializer');
-        $props = $serializer->serialize([
+        $projects = $serializer->serialize([
             'projects' => $this
                 ->get('doctrine.orm.entity_manager')
                 ->getRepository('CapcoAppBundle:Project')
@@ -96,7 +96,7 @@ class ThemeController extends Controller
         return [
             'theme' => $theme,
             'maxProjectsDisplayed' => $maxProjectsDisplayed,
-            'props' => $props,
+            'projects' => $projects,
         ];
     }
 
