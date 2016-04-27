@@ -32,7 +32,7 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Project')
             ->getByUser($user)
         ;
-        $projects = $serializer->serialize([
+        $projectsProps = $serializer->serialize([
             'projects' => $projectsRaw,
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
         $projectsCount = count($projectsRaw);
@@ -65,7 +65,7 @@ class ProfileController extends BaseController
 
         return [
             'user' => $user,
-            'projects' => $projects,
+            'projectsProps' => $projectsProps,
             'projectsCount' => $projectsCount,
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'versions' => $versions,
@@ -93,7 +93,7 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Project')
             ->getByUser($user)
         ;
-        $projects = $serializer->serialize([
+        $projectsProps = $serializer->serialize([
             'projects' => $projectsRaw,
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
         $projectsCount = count($projectsRaw);
@@ -122,7 +122,7 @@ class ProfileController extends BaseController
 
         return [
             'user' => $user,
-            'projects' => $projects,
+            'projectsProps' => $projectsProps,
             'projectsCount' => $projectsCount,
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'versions' => $versions,
@@ -154,14 +154,14 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Project')
             ->getByUser($user)
         ;
-        $projects = $serializer->serialize([
+        $projectsProps = $serializer->serialize([
             'projects' => $projectsRaw,
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
         $projectsCount = count($projectsRaw);
 
         return [
             'user' => $user,
-            'projects' => $projects,
+            'projectsProps' => $projectsProps,
             'projectsCount' => $projectsCount,
         ];
     }
