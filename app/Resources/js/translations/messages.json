@@ -371,7 +371,7 @@
   },
   "user": {
     "confirm": {
-      "email": "Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 72 heures. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>",
+      "email": "Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 72 heures pour conserver l'accès à votre compte. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>",
       "sent": "Un nouvel email de confirmation a été envoyé.",
       "sending": "Envoi en cours...",
       "update": "Mettre à jour l'adresse email",

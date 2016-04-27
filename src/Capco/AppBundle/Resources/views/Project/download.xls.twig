@@ -21,8 +21,12 @@
             {% xlsrow %}
                 {% for header in headers[sheet] %}
                     {% xlscell {'style': {'font': {'bold': true} } } %}
-                        {% set label = 'project_download.label.' ~ header %}
-                        {{ label | trans({}, 'CapcoAppBundle') | raw }}
+                        {% if header is iterable and header.raw %}
+                            {{ header.label }}
+                        {% else %}
+                            {% set label = 'project_download.label.' ~ header %}
+                            {{ label | trans({}, 'CapcoAppBundle') | raw }}
+                        {% endif %}
                     {% endxlscell %}
                 {% endfor %}
             {% endxlsrow %}
@@ -30,8 +34,9 @@
             {% for item in data[sheet] %}
                 {% xlsrow %}
                     {% for header in headers[sheet] %}
+                        {% set key = header is iterable ? header.label : header %}
                         {% xlscell %}
-                            {{ item[header] | raw }}
+                            {{ item[key] | raw }}
                         {% endxlscell %}
                     {% endfor %}
                 {% endxlsrow %}

@@ -51,20 +51,20 @@ export const EmailNotConfirmedAlert = React.createClass({
     return (
       <Alert bsStyle="warning" id="alert-email-not-confirmed">
         <div className="container">
-          <div className="col-md-6">
+          <div className="col-md-7" style={{ marginBottom: 5 }}>
           <FormattedHTMLMessage
             message={this.getIntlMessage('user.confirm.email')}
             email={user.email}
             link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
           />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-5">
           {
               confirmationSent
-              ? <Button style={{ marginRight: 15 }} bsStyle="primary" disabled>
+              ? <Button style={{ marginRight: 15, marginBottom: 5 }} bsStyle="primary" disabled>
                   { this.getIntlMessage('user.confirm.sent') }
                 </Button>
-              : <Button style={{ marginRight: 15 }}
+              : <Button style={{ marginRight: 15, marginBottom: 5 }}
                   disabled={resendingConfirmation}
                   onClick={resendingConfirmation ? null : this.handleResend}
                 >
@@ -75,7 +75,7 @@ export const EmailNotConfirmedAlert = React.createClass({
                   }
                 </Button>
           }
-          <Button href="/profile/edit-profile">{ this.getIntlMessage('user.confirm.update') }</Button>
+          <Button style={{ marginBottom: 5 }} href="/profile/edit-profile">{ this.getIntlMessage('user.confirm.update') }</Button>
           </div>
         </div>
       </Alert>
