@@ -202,6 +202,16 @@ class StepAdmin extends Admin
                 ])
             ;
         }
+        
+        if ($subject instanceof QuestionnaireStep) {
+          $formMapper
+              ->add('verification', 'choice', [
+                  'label' => 'admin.fields.argument.verification',
+                  'choices' => QuestionnaireStep::$verificationLabels,
+              ])
+            ;
+        }
+
         $formMapper->end();
 
         if ($subject instanceof CollectStep) {

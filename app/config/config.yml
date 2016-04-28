@@ -74,6 +74,8 @@ doctrine:
         server_version: "%server_version%"
         types:
             json: Sonata\Doctrine\Types\JsonType
+        mapping_types:
+            enum: string
     orm:
         auto_generate_proxy_classes: true
         auto_mapping: true

@@ -43,7 +43,10 @@
                             <div class="form-group">
                                 {{ form_errors(form.email) }}
                                 {{ form_label(form.email, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                                <div class="col-sm-9">{{ form_widget(form.email) }}</div>
+                                <div class="col-sm-9">
+                                  {{ form_widget(form.email) }}
+                                  <p class="help-block">{{ "user.profile.edit.email_help" | trans({}, 'CapcoAppBundle')}}</p>
+                                </div>
                             </div>
 
                             {% if is_feature_enabled("user_type") %}

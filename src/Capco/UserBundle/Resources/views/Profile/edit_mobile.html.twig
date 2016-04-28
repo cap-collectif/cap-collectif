@@ -1,0 +1,29 @@
+{% extends "CapcoUserBundle::layout.html.twig" %}
+
+{% block title %} {{ parent() }} - {{ "user.profile.show.jumbotron" | trans({}, 'CapcoAppBundle')}} {% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
+        <div class="container">
+            <h1 class="h2  h--no-border">{{ "user.profile.show.jumbotron" | trans({}, 'CapcoAppBundle')}}</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block fos_user_content %}
+    <div class="container  container--custom">
+        <div class="row">
+
+            {% include '@CapcoUser/Profile/action.html.twig' %}
+
+            <div class="col-xs-12 col-sm-8 col-md-9">
+                <div class="block--bordered  block--first-mobile">
+                    <div class="box">
+                        <h4 class="h4">{{ "user.profile.title" | trans({}, 'CapcoAppBundle')}}</h4>
+                    </div>
+                    <hr class="hr--no-margin"/>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock fos_user_content %}

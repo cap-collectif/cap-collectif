@@ -15,6 +15,18 @@ use Capco\AppBundle\Entity\Questionnaire;
  */
 class QuestionnaireStep extends AbstractStep
 {
+    const VERIFICATION_NONE = 'none';
+    const VERIFICATION_SMS = 'sms';
+    public static $verificationLabels = [
+        self::VERIFICATION_NONE => 'step.verification.none',
+        self::VERIFICATION_SMS => 'step.verification.sms',
+    ];
+
+    /**
+     * @ORM\Column(type="string", columnDefinition="ENUM('none', 'sms')")
+     */
+    private $verification = 'none';
+
     /**
      * @var int
      *
@@ -77,6 +89,21 @@ class QuestionnaireStep extends AbstractStep
     public function getRepliesCount()
     {
         return $this->repliesCount;
+    }
+
+    public function setVerification($verification)
+    {
+        if (!in_array($verification, array(self::VERIFICATION_NONE, self::VERIFICATION_SMS))) {
+            throw new \InvalidArgumentException("Invalid verification.");
+        }
+        $this->verification = $verification;
+
+        return $this;
+    }
+
+    public function getVerification()
+    {
+        return $this->verification;
     }
 
     /**
