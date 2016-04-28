@@ -21,7 +21,7 @@ services:
 
   twilio.sms_sender:
     class: Capco\AppBundle\Sms\TwilioSmsSender
-    arguments: [@twilio.api]
+    arguments: ['%twilio_sid%', '%twilio_token%']
 
   sms.service:
     class: Capco\AppBundle\Sms\SmsService

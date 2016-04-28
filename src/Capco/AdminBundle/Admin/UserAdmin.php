@@ -238,10 +238,17 @@ class UserAdmin extends BaseAdmin
                     'required' => false,
                 ])
                 ->add('enabled', null, ['required' => false])
-                ->add('credentialsExpired', null, ['required' => false])
-                ->end()
+            ;
 
-                // Roles
+            if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('sms_confirmation')) {
+              $formMapper
+                ->add('smsConfirmed', null, ['required' => false])
+              ;
+            }
+
+            // Roles
+            $formMapper
+                ->end()
                 ->with('Roles')
                 ->add('vip', null, [
                     'required' => false,

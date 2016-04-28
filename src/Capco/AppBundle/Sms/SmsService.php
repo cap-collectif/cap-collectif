@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Toggle;
+namespace Capco\AppBundle\Sms;
 
 use Capco\UserBundle\Entity\User;
 

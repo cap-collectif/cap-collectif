@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -97,6 +98,32 @@ class UsersController extends FOSRestController
         return ['user' => $user];
     }
 
+
+    /**
+     * @Put("/users/me")
+     * @Security("has_role('ROLE_USER')")
+     * @View(statusCode=200, serializerGroups={})
+     */
+    public function putMeAction(Request $request)
+    {
+        $user = $this->getUser();
+        $previousPhone = $user->getPhone();
+
+        $form = $this->createForm('api_user_profile', $user);
+        $form->submit($request->request->all(), false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        // If phone is updated we have to make sure it's sms confirmed again
+        if ($previousPhone != null && $previousPhone != $user->getPhone()) {
+          $user->setSmsConfirmed(false);
+        }
+
+        $this->get('doctrine.orm.entity_manager')->flush();
+    }
+
     /**
      * @Post("/resend-email-confirmation", defaults={"_feature_flags" = "registration"})
      * @Security("has_role('ROLE_USER')")
@@ -119,7 +146,7 @@ class UsersController extends FOSRestController
     }
 
     /**
-     * @Post("/send-sms-confirmation", defaults={"_feature_flags" = "registration"})
+     * @Post("/send-sms-confirmation", defaults={"_feature_flags" = "sms_confirmation"})
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */
@@ -146,22 +173,22 @@ class UsersController extends FOSRestController
     }
 
     /**
-     * @Post("/sms-confirmation", defaults={"_feature_flags" = "registration"})
+     * @Post("/sms-confirmation", defaults={"_feature_flags" = "sms_confirmation"})
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */
-    public function postSmsConfirmationAction($code)
+    public function postSmsConfirmationAction(Request $request)
     {
         $user = $this->getUser();
         if ($user->isSmsConfirmed()) {
           throw new BadRequestHttpException('Already confirmed.');
         }
 
-        if (!$user->getSmsCode()) {
+        if (!$user->getSmsConfirmationCode()) {
           throw new BadRequestHttpException('Ask a confirmation message before.');
         }
 
-        if ($code != $user->getSmsCode()) {
+        if ($request->request->get('code') != $user->getSmsConfirmationCode()) {
           throw new BadRequestHttpException('Wrong code.');
         }
 

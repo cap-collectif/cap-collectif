@@ -88,9 +88,6 @@ class AppKernel extends Kernel
 
             // Server side Js rendering
             new Limenius\ReactBundle\LimeniusReactBundle(),
-
-            // SMS
-            new Vresh\TwilioBundle\VreshTwilioBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

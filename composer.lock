@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7e54902f1a64a24f13e3c3cf9ca397d5",
-    "content-hash": "2b46d7884230c7ff0455a9e7158a21e3",
+    "hash": "2037b6f28afefc060362067b7b7278a2",
+    "content-hash": "aa2cb75e496608a76262eef52c3004d8",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5576,7 +5576,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/bccb224a83c9bf5eecb7108932bc14fdd05d8cd7",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/66fb8d5a01b56c5b30a26045d9014331fca82191",
                 "reference": "e1e021a30ca0693e181e17f4bf5636d0e300330f",
                 "shasum": ""
             },
@@ -6733,52 +6733,6 @@
                 "twilio"
             ],
             "time": "2016-01-29 00:19:22"
-        },
-        {
-            "name": "vresh/twilio-bundle",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fridolin-koch/VreshTwilioBundle.git",
-                "reference": "9fe3db7097ef5eb23bf1520acbb682605b1fcbe1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fridolin-koch/VreshTwilioBundle/zipball/9fe3db7097ef5eb23bf1520acbb682605b1fcbe1",
-                "reference": "9fe3db7097ef5eb23bf1520acbb682605b1fcbe1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "symfony/framework-bundle": "~2.1|~3.0",
-                "twilio/sdk": ">=4.0.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.1",
-                "satooshi/php-coveralls": "~1.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Vresh\\TwilioBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fridolin Koch",
-                    "email": "info@fridokoch.de"
-                }
-            ],
-            "description": "A simple Symfony 2, 3 bundle for the official sdk provided by Twilio.",
-            "homepage": "https://github.com/fridolin-koch/VreshTwilioBundle",
-            "keywords": [
-                "twilio"
-            ],
-            "time": "2016-02-06 10:31:30"
         },
         {
             "name": "willdurand/geocoder",

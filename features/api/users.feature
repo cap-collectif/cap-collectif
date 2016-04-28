@@ -140,3 +140,16 @@ Feature: Users
       }
       """
       Then the JSON response status code should be 201
+
+  @database @test
+  Scenario: API client wants to update his phone
+    Given I am logged in to api as user
+    When I send a PUT request to "/api/users/me" with json:
+    """
+    {
+      "phone": "+33628353289"
+    }
+    """
+    Then the JSON response status code should be 204
+    And "user" phone number should be "+33628353289"
+    And "user" should not be sms confirmed

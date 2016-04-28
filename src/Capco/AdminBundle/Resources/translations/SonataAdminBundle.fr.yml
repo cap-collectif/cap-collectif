@@ -81,6 +81,11 @@ admin.label.settings.modules: Fonctionnalités
 admin.label.settings.notifications: Notifications
 admin.label.settings.shield_mode: Mode bouclier
 
+step:
+  verification:
+    none: Non
+    sms: Oui, par SMS
+
 # Messages
 admin:
   help:
@@ -536,6 +541,8 @@ admin:
       name: Nom
       color: Couleur
       position: Position
+    step:
+      verification: Demander la vérification des comptes
     recent_contributions:
       actions: Actions
       author: Auteur

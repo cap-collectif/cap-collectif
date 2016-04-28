@@ -202,12 +202,13 @@ class StepAdmin extends Admin
                 ])
             ;
         }
-        
-        if ($subject instanceof QuestionnaireStep) {
+
+        if ($subject instanceof QuestionnaireStep && $this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('sms_confirmation')) {
           $formMapper
               ->add('verification', 'choice', [
-                  'label' => 'admin.fields.argument.verification',
+                  'label' => 'admin.fields.step.verification',
                   'choices' => QuestionnaireStep::$verificationLabels,
+                  'translation_domain' => 'SonataAdminBundle',
               ])
             ;
         }

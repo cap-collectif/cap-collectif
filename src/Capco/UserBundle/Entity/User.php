@@ -241,6 +241,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $smsConfirmationSentAt = null;
     protected $smsConfirmationCode = null;
+    protected $smsConfirmed = false;
 
     protected $alertExpirationSent = false;
 
@@ -1013,6 +1014,18 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setSmsConfirmationCode($code = null)
     {
         $this->smsConfirmationCode = $code;
+
+        return $this;
+    }
+
+    public function isSmsConfirmed()
+    {
+        return $this->smsConfirmed;
+    }
+
+    public function setSmsConfirmed($smsConfirmed)
+    {
+        $this->smsConfirmed = $smsConfirmed;
 
         return $this;
     }

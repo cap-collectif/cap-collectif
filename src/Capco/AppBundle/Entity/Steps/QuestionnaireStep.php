@@ -126,6 +126,11 @@ class QuestionnaireStep extends AbstractStep
         return $this->questionnaire;
     }
 
+    public function isSmsConfirmationRequired()
+    {
+      return $this->verification === self::VERIFICATION_NONE;
+    }
+
     /**
      * @param Questionnaire $questionnaire
      *
