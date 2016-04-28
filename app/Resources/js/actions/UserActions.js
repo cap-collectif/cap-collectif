@@ -31,6 +31,10 @@ export default {
     return Fetcher.post('/send-sms-confirmation');
   },
 
+  sendSmsCode: (data) => {
+    return Fetcher.post('/sms-confirmation', data);
+  },
+
   register: (data) => {
     return Fetcher.post('/users', data);
   },

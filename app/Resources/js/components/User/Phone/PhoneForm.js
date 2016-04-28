@@ -43,7 +43,7 @@ const PhoneForm = React.createClass({
 
   render() {
     return (
-      <form>
+      <form style={{ maxWidth: '350px' }}>
         <Input
           type="phone"
           addonBefore="+33"
