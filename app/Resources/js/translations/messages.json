@@ -381,14 +381,27 @@
   },
   "phone": {
     "confirm": {
+      "constraints": {
+        "code": "Le code est composé d'exactemment 6 chiffres."
+      },
       "infos": "<strong>Ajouter votre numéro de téléphone</strong><br /> allons envoyer un code de vérification à ce numéro. Des frais relatifs aux SMS peuvent s'appliquer.",
-      "sent": "Nous vous avons envoyé un code au {phone}. Entrez-le ci-dessous afin de vérifier votre numéro.",
+      "sent": "Nous vous avons envoyé un code au <strong>{phone}</strong>. Entrez-le ci-dessous afin de vérifier votre numéro.",
       "ask_new": "Demander un nouveau code de validation",
       "check_your_phone": "Consultez votre téléphone",
       "phone": "Mobile",
+      "code_invalid": "Le code semble erroné, veuillez réessayer.",
+      "validate": "Valider le numéro",
       "alert": {
         "received": "Code de confirmation envoyé.",
         "wait_for_new": "Merci de patienter 1 minute avant de demander un nouveau code."
+      }
+    }
+  },
+  "profile": {
+    "constraints": {
+      "phone": {
+        "already_used": "Ce numéro est déjà utilisé sur un autre compte",
+        "invalid": "Le numéro renseigné semble incorrect"
       }
     }
   },

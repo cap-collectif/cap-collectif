@@ -39,11 +39,12 @@ const PhoneModal = React.createClass({
     this.setState({ isSubmitting: false });
   },
 
-  resendSmsCode() {
+  resendSmsCode(e) {
+    e.preventDefault();
     UserActions
       .sendConfirmSms()
       .then(() => {
-        this.setState({ alert: { type: 'success', message: 'phone.confirm.alert.receive' } });
+        this.setState({ alert: { type: 'success', message: this.getIntlMessage('phone.confirm.alert.received') } });
       })
       .catch((err) => {
         let message = err.response.message;
@@ -86,7 +87,7 @@ const PhoneModal = React.createClass({
             }
             {
               smsSentToNumber
-               ? <FormattedMessage
+               ? <FormattedHTMLMessage
                     message={this.getIntlMessage('phone.confirm.sent')}
                     phone={smsSentToNumber}
                  />
@@ -105,7 +106,7 @@ const PhoneModal = React.createClass({
             }
             {
               smsSentToNumber &&
-              <a onClick={this.resendSmsCode}>
+              <a onClick={this.resendSmsCode} href>
                 {this.getIntlMessage('phone.confirm.ask_new')}
               </a>
             }
