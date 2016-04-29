@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
+import { Modal, Button, Alert } from 'react-bootstrap';
+import { IntlMixin, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import CloseButton from '../../Form/CloseButton';
 import PhoneForm from './PhoneForm';
 import SmsCodeForm from './SmsCodeForm';
+import UserActions from '../../../actions/UserActions';
 
 const PhoneModal = React.createClass({
   propTypes: {
@@ -16,11 +17,12 @@ const PhoneModal = React.createClass({
     return {
       isSubmitting: false,
       smsSentToNumber: null,
+      alert: null,
     };
   },
 
-  onSubmitSuccess() {
-    this.setState({ smsSentToNumber: '+12345678' });
+  onSubmitSuccess(phone) {
+    this.setState({ smsSentToNumber: phone });
     this.stopSubmit();
   },
 
@@ -37,8 +39,27 @@ const PhoneModal = React.createClass({
     this.setState({ isSubmitting: false });
   },
 
+  resendSmsCode() {
+    UserActions
+      .sendConfirmSms()
+      .then(() => {
+        this.setState({ alert: { type: 'success', message: 'phone.confirm.alert.receive' } });
+      })
+      .catch((err) => {
+        let message = err.response.message;
+        if (message === 'Sms already sent less than a minute ago.') {
+          message = this.getIntlMessage('phone.confirm.alert.wait_for_new');
+        }
+        this.setState({ alert: { type: 'danger', message: message } });
+      });
+  },
+
+  handleAlertDismiss() {
+    this.setState({ alert: null });
+  },
+
   render() {
-    const { isSubmitting, smsSentToNumber } = this.state;
+    const { isSubmitting, smsSentToNumber, alert } = this.state;
     const { onClose, show } = this.props;
     return (
       <Modal
@@ -50,36 +71,43 @@ const PhoneModal = React.createClass({
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
               {
-                !smsSentToNumber ? 'Mobile' : 'Consultez votre téléphone'
+                smsSentToNumber
+                ? this.getIntlMessage('phone.confirm.check_your_phone')
+                : this.getIntlMessage('phone.confirm.phone')
               }
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {
-              !smsSentToNumber
-               ? <p>
-                   <strong>Ajouter votre numéro de téléphone</strong>
-                   <br />
-                   Nous allons envoyer un code de vérification à ce numéro. Des frais relatifs aux SMS peuvent s'appliquer.
-                 </p>
-              : <p>
-                  Nous vous avons envoyé un code au Numéro de tel. Entrez-le ci-dessous afin de vérifier votre numéro.
-                </p>
+              alert &&
+              <Alert bsStyle={alert.type} onDismiss={this.handleAlertDismiss}>
+                {alert.message}
+              </Alert>
             }
             {
-              !smsSentToNumber
-              ? <PhoneForm
+              smsSentToNumber
+               ? <FormattedMessage
+                    message={this.getIntlMessage('phone.confirm.sent')}
+                    phone={smsSentToNumber}
+                 />
+              : <FormattedHTMLMessage message={this.getIntlMessage('phone.confirm.infos')} />
+            }
+            {
+              smsSentToNumber
+              ? <SmsCodeForm
+                  onSubmitSuccess={this.onCodeSuccess}
+                />
+              : <PhoneForm
                   isSubmitting={isSubmitting}
                   onSubmitFailure={this.stopSubmit}
                   onSubmitSuccess={this.onSubmitSuccess}
                 />
-              : <SmsCodeForm
-                  onSubmitSuccess={this.onCodeSuccess}
-                />
             }
             {
               smsSentToNumber &&
-              <a>Demander un nouveau code de validation</a>
+              <a onClick={this.resendSmsCode}>
+                {this.getIntlMessage('phone.confirm.ask_new')}
+              </a>
             }
           </Modal.Body>
           <Modal.Footer>
@@ -94,7 +122,7 @@ const PhoneModal = React.createClass({
               >
                 {isSubmitting
                   ? this.getIntlMessage('global.loading')
-                  : <span>Continuer</span>
+                  : this.getIntlMessage('global.continue')
                 }
               </Button>
             }

@@ -143,6 +143,7 @@
     "constraints": {
       "notBlank": "Cette valeur ne doit pas \u00eatre vide."
     },
+    "continue": "Continuer",
     "content": "Contenu",
     "counters": {
       "contributions": "{num, plural, =0{contribution} one{contribution} other{contributions}}",
@@ -376,6 +377,19 @@
       "sending": "Envoi en cours...",
       "update": "Mettre à jour l'adresse email",
       "resend": "Renvoyer la confirmation"
+    }
+  },
+  "phone": {
+    "confirm": {
+      "infos": "<strong>Ajouter votre numéro de téléphone</strong><br /> allons envoyer un code de vérification à ce numéro. Des frais relatifs aux SMS peuvent s'appliquer.",
+      "sent": "Nous vous avons envoyé un code au {phone}. Entrez-le ci-dessous afin de vérifier votre numéro.",
+      "ask_new": "Demander un nouveau code de validation",
+      "check_your_phone": "Consultez votre téléphone",
+      "phone": "Mobile",
+      "alert": {
+        "received": "Code de confirmation envoyé.",
+        "wait_for_new": "Merci de patienter 1 minute avant de demander un nouveau code."
+      }
     }
   },
   "project": {

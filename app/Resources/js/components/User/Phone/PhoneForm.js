@@ -30,8 +30,8 @@ const PhoneForm = React.createClass({
           UserActions
             .sendConfirmSms()
             .then(() => {
+              this.props.onSubmitSuccess(form.phone);
               this.setState(this.getInitialState());
-              this.props.onSubmitSuccess();
             });
         })
         .catch(() => {
