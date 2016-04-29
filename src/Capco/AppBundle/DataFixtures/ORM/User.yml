@@ -71,7 +71,7 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_USER'
         confirmationToken: ~
         smsConfirmed: true
-        phone: '+33175492871'
+        phone: '+33135492871'
 
     user_drupal:
         __construct: ['drupal']

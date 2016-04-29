@@ -3,6 +3,7 @@ import { IntlMixin } from 'react-intl';
 import UserActions from '../../../actions/UserActions';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import Input from '../../Form/Input';
+import FormMixin from '../../../utils/FormMixin';
 
 const PhoneForm = React.createClass({
   propTypes: {
@@ -10,12 +11,15 @@ const PhoneForm = React.createClass({
     onSubmitSuccess: PropTypes.func.isRequired,
     onSubmitFailure: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getInitialState() {
     return {
       form: {
         phone: '',
+      },
+      errors: {
+        phone: [],
       },
     };
   },
@@ -34,9 +38,10 @@ const PhoneForm = React.createClass({
               this.setState(this.getInitialState());
             });
         })
-        .catch(() => {
-          this.setState({ hasError: true });
+        .catch((error) => {
+          this.setState({ errors: error.response.errors });
           this.props.onSubmitFailure();
+          return onValidationFailure();
         });
     }
   },
