@@ -3,7 +3,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { LoginOverlay } from './LoginOverlay';
+import LoginOverlay from './LoginOverlay';
 import IntlData from '../../translations/FR';
 
 describe('<LoginOverlay />', () => {
@@ -13,7 +13,7 @@ describe('<LoginOverlay />', () => {
 
   it('renders children if not enabled', () => {
     const wrapper = shallow(
-      <LoginOverlay enabled={false} features={{ registration: true }} {...props}>
+      <LoginOverlay enabled={false} {...props}>
         <div className="foo" />
       </LoginOverlay>
     );
@@ -22,7 +22,7 @@ describe('<LoginOverlay />', () => {
 
   it('renders children if user is logged', () => {
     const wrapper = shallow(
-      <LoginOverlay enabled user={{}} features={{ registration: true }} {...props}>
+      <LoginOverlay enabled user={{}} {...props}>
         <div className="foo" />
       </LoginOverlay>
     );
@@ -31,7 +31,7 @@ describe('<LoginOverlay />', () => {
 
   it('renders popover if user is not logged', () => {
     const wrapper = shallow(
-      <LoginOverlay enabled user={null} features={{ registration: true }} {...props}>
+      <LoginOverlay enabled user={null} {...props}>
         <div className="foo" />
       </LoginOverlay>
     );

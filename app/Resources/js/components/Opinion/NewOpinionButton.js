@@ -9,7 +9,6 @@ const NewOpinionButton = React.createClass({
     link: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     user: PropTypes.object,
-    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -20,9 +19,9 @@ const NewOpinionButton = React.createClass({
   },
 
   render() {
-    const { slug, link, label, user, features } = this.props;
+    const { slug, link, label, user } = this.props;
     return (
-      <LoginOverlay user={user} features={features}>
+      <LoginOverlay user={user}>
         <a
           id={'btn-add--' + slug}
           href={user ? link : null}
@@ -38,10 +37,7 @@ const NewOpinionButton = React.createClass({
 });
 
 const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-    features: state.features,
-  };
+  return { user: state.user };
 };
 
 export default connect(mapStateToProps)(NewOpinionButton);

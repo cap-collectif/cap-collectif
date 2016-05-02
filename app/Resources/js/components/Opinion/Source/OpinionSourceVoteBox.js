@@ -1,21 +1,14 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
+import LoginStore from '../../../stores/LoginStore';
 import SourceActions from '../../../actions/SourceActions';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
-import { connect } from 'react-redux';
 
 const OpinionSourceVoteBox = React.createClass({
   propTypes: {
-    source: PropTypes.object.isRequired,
-    user: PropTypes.object,
+    source: React.PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
-
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
 
   getInitialState() {
     return {
@@ -34,10 +27,10 @@ const OpinionSourceVoteBox = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    if (this.props.source.author === null || !this.props.user) {
+    if (this.props.source.author === null || !LoginStore.isLoggedIn()) {
       return false;
     }
-    return this.props.user.uniqueId === this.props.source.author.uniqueId;
+    return LoginStore.user.uniqueId === this.props.source.author.uniqueId;
   },
 
   render() {
@@ -65,10 +58,4 @@ const OpinionSourceVoteBox = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(OpinionSourceVoteBox);
+export default OpinionSourceVoteBox;

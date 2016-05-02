@@ -16,6 +16,7 @@ class AuthService {
 
   login() {
     if (LocalStorageService.isValid('jwt') && LocalStorageService.isValid('user')) {
+      LoginActions.cachedLoginUser();
       return Promise.resolve();
     }
     return fetch(window.location.protocol + '//' + window.location.host + '/get_api_token', {
@@ -29,10 +30,10 @@ class AuthService {
     .then(status)
     .then(json)
     .then((data) => {
-      return data.token && data.user
-        ? LoginActions.loginUser(data.token, data.user)
-        : this.logout()
-      ;
+      LoginActions.loginUser(data.token, data.user);
+    })
+    .catch(() => {
+      LoginActions.logoutUser();
     });
   }
 

@@ -1,30 +1,43 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
+import FeatureStore from '../../stores/FeatureStore';
+import LoginStore from '../../stores/LoginStore';
 
 const CommentReport = React.createClass({
   propTypes: {
-    comment: PropTypes.object,
-    user: PropTypes.object,
-    features: PropTypes.object.isRequired,
+    comment: React.PropTypes.object,
   },
   mixins: [IntlMixin],
 
-  getDefaultProps() {
+  getInitialState() {
     return {
-      user: null,
+      reporting: FeatureStore.isActive('reporting'),
     };
   },
 
+  componentWillMount() {
+    FeatureStore.addChangeListener(this.onChange);
+  },
+
+  componentWillUnmount() {
+    FeatureStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    this.setState({
+      reporting: FeatureStore.isActive('reporting'),
+    });
+  },
+
   isTheUserTheAuthor() {
-    if (this.props.comment.author === null || !this.props.user) {
+    if (this.props.comment.author === null || !LoginStore.isLoggedIn()) {
       return false;
     }
-    return this.props.user.uniqueId === this.props.comment.author.uniqueId;
+    return LoginStore.user.uniqueId === this.props.comment.author.uniqueId;
   },
 
   render() {
-    if (this.props.features.reporting && !this.isTheUserTheAuthor()) {
+    if (this.state.reporting && !this.isTheUserTheAuthor()) {
       if (this.props.comment.has_user_reported) {
         return (
           <button disabled="disabled" className="btn btn-xs btn-dark-gray">
@@ -48,11 +61,4 @@ const CommentReport = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.features,
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(CommentReport);
+export default CommentReport;

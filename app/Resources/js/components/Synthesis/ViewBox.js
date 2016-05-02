@@ -1,23 +1,16 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
 import ViewTree from './View/ViewTree';
-import { connect } from 'react-redux';
+import LoginStore from '../../stores/LoginStore';
 
 const ViewBox = React.createClass({
   propTypes: {
-    synthesis: PropTypes.object.isRequired,
-    user: PropTypes.object,
+    synthesis: React.PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
-
   render() {
-    if (this.props.synthesis.enabled || (this.props.user && this.props.user.vip)) {
+    if (this.props.synthesis.enabled || (LoginStore.user && LoginStore.user.vip)) {
       return (
         <div className="synthesis__view">
           <ViewTree synthesis={this.props.synthesis} />
@@ -29,10 +22,4 @@ const ViewBox = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(ViewBox);
+export default ViewBox;

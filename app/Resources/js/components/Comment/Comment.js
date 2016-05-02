@@ -10,6 +10,7 @@ import CommentEdit from './CommentEdit';
 import CommentAnswers from './CommentAnswers';
 import CommentForm from './CommentForm';
 import CommentActions from '../../actions/CommentActions';
+import LoginStore from '../../stores/LoginStore';
 
 const Comment = React.createClass({
   propTypes: {
@@ -45,6 +46,13 @@ const Comment = React.createClass({
     return CommentActions.create(this.props.uri, this.props.object, data);
   },
 
+  isTheUserTheAuthor() {
+    if (this.props.comment.author === null || !LoginStore.isLoggedIn()) {
+      return false;
+    }
+    return LoginStore.user.uniqueId === this.props.comment.author.uniqueId;
+  },
+
   render() {
     const comment = this.props.comment;
     const classes = classNames({
@@ -65,7 +73,7 @@ const Comment = React.createClass({
             </div>
             <CommentBody comment={comment} />
             <div className="comment__buttons">
-              <CommentVoteButton comment={comment} />
+              <CommentVoteButton comment={comment} userIsAuthor={this.isTheUserTheAuthor()} />
               {' '}
               {this.props.root
                 ? <a onClick={this.answer.bind(this)} className="btn btn-xs btn-dark-gray btn--outline">

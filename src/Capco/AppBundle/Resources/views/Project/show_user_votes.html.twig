@@ -9,5 +9,12 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-    {{ react_intl_component('ProposalsUserVotesPageApp', { 'props': props }) }}
+
+    <div id="render-proposals-user-votes-page"
+         data-themes='{{ themes|escape }}'
+         data-districts='{{ districts|escape }}'
+         data-votable-steps='{{ votableSteps|escape }}'
+         data-project-id='{{ project.id|escape }}'
+    ></div>
+
 {% endblock %}

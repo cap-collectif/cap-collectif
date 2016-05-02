@@ -1,34 +1,25 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
+import LoginStore from '../../../stores/LoginStore';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import { Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
 
 const ProposalCreateButton = React.createClass({
   propTypes: {
-    handleClick: PropTypes.func.isRequired,
-    disabled: PropTypes.bool.isRequired,
-    user: PropTypes.object,
-    features: PropTypes.object.isRequired,
+    handleClick: React.PropTypes.func.isRequired,
+    disabled: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
-
   onClick() {
-    if (!this.props.disabled && this.props.user) {
+    if (!this.props.disabled && LoginStore.isLoggedIn()) {
       this.props.handleClick();
     }
   },
 
   render() {
-    const { user, features } = this.props;
     return (
-      <LoginOverlay user={user} features={features}>
+      <LoginOverlay>
         <Button id="add-proposal" disabled={this.props.disabled} bsStyle="primary" onClick={() => this.onClick()}>
           <i className="cap cap-add-1"></i>
           { ' ' + this.getIntlMessage('proposal.add')}
@@ -39,11 +30,4 @@ const ProposalCreateButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.features,
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(ProposalCreateButton);
+export default ProposalCreateButton;

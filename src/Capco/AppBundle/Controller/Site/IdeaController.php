@@ -18,7 +18,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Capco\AppBundle\Event\AbstractVoteChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\CommentChangedEvent;
-use JMS\Serializer\SerializationContext;
 
 class IdeaController extends Controller
 {
@@ -350,18 +349,10 @@ class IdeaController extends Controller
             }
         }
 
-        $serializer = $this->get('jms_serializer');
-
-        $props = $serializer->serialize([
-            'object' => $idea->getId(),
-            'uri' => 'ideas',
-        ], 'json', SerializationContext::create());
-
         return [
             'idea' => $idea,
             'votes' => $votes,
             'form' => $form->createView(),
-            'props' => $props,
         ];
     }
 }

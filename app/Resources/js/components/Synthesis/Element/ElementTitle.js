@@ -35,7 +35,7 @@ const ElementTitle = React.createClass({
     if (this.props.element.body) {
       return this.props.element.body.substr(0, 140) + '...';
     }
-    return this.getIntlMessage('synthesis.common.elements.default_title');
+    return this.getIntlMessage('common.elements.default_title');
   },
 
   render() {

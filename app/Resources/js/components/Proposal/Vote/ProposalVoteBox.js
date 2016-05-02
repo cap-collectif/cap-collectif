@@ -1,26 +1,25 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
+import LoginStore from '../../../stores/LoginStore';
 import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
 import ProposalVoteForm from './ProposalVoteForm';
 import LoginButton from '../../User/Login/LoginButton';
 import ProposalVoteBoxMessage from './ProposalVoteBoxMessage';
-import { connect } from 'react-redux';
 import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 
 const ProposalVoteBox = React.createClass({
   propTypes: {
-    proposal: PropTypes.object.isRequired,
-    selectionStep: PropTypes.object.isRequired,
-    userHasVote: PropTypes.bool,
-    creditsLeft: PropTypes.number,
-    className: PropTypes.string,
-    formWrapperClassName: PropTypes.string,
-    onSubmit: PropTypes.func,
-    onSubmitSuccess: PropTypes.func,
-    onSubmitFailure: PropTypes.func,
-    onValidationFailure: PropTypes.func,
-    user: PropTypes.object,
+    proposal: React.PropTypes.object.isRequired,
+    selectionStep: React.PropTypes.object.isRequired,
+    userHasVote: React.PropTypes.bool,
+    creditsLeft: React.PropTypes.number,
+    className: React.PropTypes.string,
+    formWrapperClassName: React.PropTypes.string,
+    onSubmit: React.PropTypes.func,
+    onSubmitSuccess: React.PropTypes.func,
+    onSubmitFailure: React.PropTypes.func,
+    onValidationFailure: React.PropTypes.func,
   },
   mixins: [IntlMixin],
 
@@ -34,7 +33,6 @@ const ProposalVoteBox = React.createClass({
       onSubmitSuccess: () => {},
       onSubmitFailure: () => {},
       onValidationFailure: () => {},
-      user: null,
     };
   },
 
@@ -73,31 +71,31 @@ const ProposalVoteBox = React.createClass({
   },
 
   userHasVote() {
-    return this.props.user && this.props.userHasVote;
+    return LoginStore.isLoggedIn() && this.props.userHasVote;
   },
 
   userHasEnoughCredits() {
-    if (this.props.user && !this.userHasVote() && this.props.creditsLeft !== null && this.props.proposal.estimation !== null) {
+    if (LoginStore.isLoggedIn() && !this.userHasVote() && this.props.creditsLeft !== null && this.props.proposal.estimation !== null) {
       return this.props.creditsLeft >= this.props.proposal.estimation;
     }
     return true;
   },
 
   displayForm() {
-    return this.props.selectionStep.open && (this.props.selectionStep.voteType === VOTE_TYPE_SIMPLE || (this.props.user && this.userHasEnoughCredits()));
+    return this.props.selectionStep.open && (this.props.selectionStep.voteType === VOTE_TYPE_SIMPLE || (LoginStore.isLoggedIn() && this.userHasEnoughCredits()));
   },
 
   disableSubmitButton() {
-    return !this.props.selectionStep.open || (this.props.user && this.props.selectionStep.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
+    return !this.props.selectionStep.open || (LoginStore.isLoggedIn() && this.props.selectionStep.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
   },
 
   render() {
     return (
       <div className={this.props.className}>
         {
-          this.props.user
+          LoginStore.isLoggedIn()
             ? <UserPreview
-                user={this.props.user}
+                user={LoginStore.user}
                 style={{ padding: '0', marginBottom: '0', fontSize: '18px' }}
             />
             : null
@@ -134,7 +132,7 @@ const ProposalVoteBox = React.createClass({
           loginOverlay={this.props.selectionStep.voteType === VOTE_TYPE_BUDGET}
         />
         {
-          !this.props.user && this.props.selectionStep.voteType !== VOTE_TYPE_BUDGET && this.props.selectionStep.open
+          !LoginStore.isLoggedIn() && this.props.selectionStep.voteType !== VOTE_TYPE_BUDGET && this.props.selectionStep.open
           ? <div>
             <p
               className="text-center excerpt"
@@ -155,10 +153,4 @@ const ProposalVoteBox = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(ProposalVoteBox);
+export default ProposalVoteBox;

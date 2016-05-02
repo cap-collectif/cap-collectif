@@ -57,7 +57,7 @@ const ElementBlock = React.createClass({
 
   renderDate() {
     if (!Modernizr.intl) {
-      return this.getIntlMessage('synthesis.common.elements.no_source_date');
+      return this.getIntlMessage('common.elements.no_source_date');
     }
     if (this.props.element.linkedDataCreation) {
       return <FormattedDate value={moment(this.props.element.linkedDataCreation)} day="numeric" month="long" year="numeric" />;

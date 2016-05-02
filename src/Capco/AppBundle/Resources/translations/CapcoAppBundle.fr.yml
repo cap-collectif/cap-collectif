@@ -377,6 +377,7 @@ project:
       read_less: Replier
       read_more: Lire la suite
       remaining_days: "]-Inf, 1] jour restant | ]1,Inf[ jours restants"
+      repliesCount: "]-Inf, 1] %count% réponses | ]1,Inf[ %count% réponses"
       step:
         title: Étapes
       sourcesCount: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
@@ -1083,6 +1084,7 @@ project_download:
     published: Contenu publié
     unpublished: Contenu à la corbeille
   label:
+    anonymous: Anonyme
     answer: Réponse officielle
     arguments_nok: Arguments contre
     arguments_ok: Arguments pour
@@ -1128,7 +1130,7 @@ project_download:
       vote: Vote
     link:
       media: Fichier
-    no: Contre
+    no: Non
     non_applicable: n/a
     related:
       argument: Argument "%id%"
@@ -1140,7 +1142,7 @@ project_download:
       mitige: Mitigé
       nok: Contre
       ok: Pour
-    yes: Pour
+    yes: Oui
 
 votes:
   none: Il n'y a pas de votes.

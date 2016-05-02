@@ -21,5 +21,7 @@
 {% endblock %}
 
 {% block content %}
-    {{ react_intl_component('OpinionPageApp', {'props': {'opinionId': opinion.id, 'versionId': version.id} }) }}
+   <div id="render-opinion-version" data-version="{{ version.id }}" data-opinion="{{ opinion.id }}" data-reporting-enabled={{ is_feature_enabled('reporting') ? "true" : "false" }}>
+       <p class="text-center">{{ 'global.loading' | trans({}, 'CapcoAppBundle') }}</p>
+   </div>
 {% endblock %}

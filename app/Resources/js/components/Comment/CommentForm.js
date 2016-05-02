@@ -1,11 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
-import { connect } from 'react-redux';
 
 import UserAvatar from '../User/UserAvatar';
+import LoginStore from '../../stores/LoginStore';
 import FlashMessages from '../Utils/FlashMessages';
 import ValidatorMixin from '../../utils/ValidatorMixin';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
@@ -15,17 +15,15 @@ import { Row, Col, Button } from 'react-bootstrap';
 
 const CommentForm = React.createClass({
   propTypes: {
-    isAnswer: PropTypes.bool,
-    focus: PropTypes.bool,
-    comment: PropTypes.func,
-    user: PropTypes.object,
+    isAnswer: React.PropTypes.bool,
+    focus: React.PropTypes.bool,
+    comment: React.PropTypes.func,
   },
   mixins: [IntlMixin, DeepLinkStateMixin, ValidatorMixin],
 
   getDefaultProps() {
     return {
       isAnswer: false,
-      user: null,
     };
   },
 
@@ -43,7 +41,7 @@ const CommentForm = React.createClass({
     if (this.props.focus) {
       ReactDOM.findDOMNode(this.refs.body).focus();
     }
-    const constraints = !!this.props.user
+    const constraints = LoginStore.isLoggedIn()
       ? {
         body: {
           notBlank: { message: 'comment.constraints.body' },
@@ -110,7 +108,7 @@ const CommentForm = React.createClass({
       const data = {
         body: this.state.body,
       };
-      if (!this.props.user) {
+      if (!LoginStore.isLoggedIn()) {
         data.authorName = this.state.authorName;
         data.authorEmail = this.state.authorEmail;
       }
@@ -135,7 +133,7 @@ const CommentForm = React.createClass({
   },
 
   renderAnonymous() {
-    if (!this.props.user) {
+    if (!LoginStore.isLoggedIn()) {
       return (
         <div>
           <Row>
@@ -200,7 +198,7 @@ const CommentForm = React.createClass({
 
   renderCommentButton() {
     if (this.state.expanded || this.state.body.length >= 1) {
-      if (this.props.user) {
+      if (LoginStore.isLoggedIn()) {
         return (
           <Button ref="loggedInComment"
             disabled={this.state.isSubmitting}
@@ -225,8 +223,8 @@ const CommentForm = React.createClass({
     });
     return (
       <div className={classes}>
-        <UserAvatar user={this.props.user} className="pull-left" />
-        <div className="opinion__data" ref="commentBlock" onBlur={() => this.expand(false)}>
+        <UserAvatar user={LoginStore.user} className="pull-left" />
+        <div className="opinion__data" ref="commentBlock" onBlur={this.expand.bind(this, false)}>
           <form ref="form">
             <Input
               type="textarea"
@@ -248,10 +246,4 @@ const CommentForm = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(CommentForm);
+export default CommentForm;

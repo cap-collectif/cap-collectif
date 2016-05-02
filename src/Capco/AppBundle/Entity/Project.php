@@ -777,6 +777,21 @@ class Project
     }
 
     /**
+     * @return int
+     */
+    public function getTotalRepliesCount()
+    {
+        $count = 0;
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isQuestionnaireStep()) {
+                $count += ($step->getStep()->getRepliesCount());
+            }
+        }
+
+        return $count;
+    }
+
+    /**
      * @return mixed|null
      */
     public function getFirstStep()
@@ -833,7 +848,7 @@ class Project
 
         foreach ($this->steps as $pas) {
             $step = $pas->getStep();
-            if ($step->isConsultationStep() || $step->isCollectStep()) {
+            if ($step->isConsultationStep() || $step->isCollectStep() || $step->isQuestionnaireStep()) {
                 $steps[] = $pas;
             }
         }

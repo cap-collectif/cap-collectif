@@ -1,22 +1,20 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import autosize from 'autosize';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import LoginStore from '../../../stores/LoginStore';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import ValidatorMixin from '../../../utils/ValidatorMixin';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArgumentActions from '../../../actions/ArgumentActions';
 import Input from '../../Form/Input';
-import { connect } from 'react-redux';
 
 const ArgumentCreate = React.createClass({
   propTypes: {
-    type: PropTypes.string.isRequired,
-    opinion: PropTypes.object.isRequired,
-    user: PropTypes.object,
-    features: PropTypes.object.isRequired,
+    type: React.PropTypes.string.isRequired,
+    opinion: React.PropTypes.object.isRequired,
   },
   mixins: [IntlMixin, DeepLinkStateMixin, ValidatorMixin],
 
@@ -86,13 +84,12 @@ const ArgumentCreate = React.createClass({
   },
 
   render() {
-    const { user, features } = this.props;
     const disabled = !this.props.opinion.isContribuable;
     return (
       <div className="opinion__body box">
         <div className="opinion__data">
           <form id={'argument-form--' + this.props.type} ref="form">
-            <LoginOverlay user={user} features={features}>
+            <LoginOverlay>
               <Input
                 id={'arguments-body-' + this.props.type}
                 type="textarea"
@@ -108,7 +105,7 @@ const ArgumentCreate = React.createClass({
                 disabled={disabled}
               />
             </LoginOverlay>
-            {user
+            {LoginStore.isLoggedIn()
               ? <Button
                   disabled={this.state.isSubmitting || disabled}
                   onClick={this.state.isSubmitting || disabled ? null : this.create}
@@ -129,11 +126,4 @@ const ArgumentCreate = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.features,
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(ArgumentCreate);
+export default ArgumentCreate;

@@ -16,7 +16,7 @@ const props = {
 };
 
 const item1 = { id: 1 };
-const item2 = { id: 2 };
+const item2 = { id: 2 }
 
 const itemsList = [
   item1,
@@ -79,4 +79,6 @@ describe('<RankingBox />', () => {
     expect(items.last().prop('id')).to.equal('reply-42_choice-2');
     expect(items.last().prop('disabled')).to.equal(true);
   });
+
+  
 });

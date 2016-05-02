@@ -36,7 +36,7 @@ const ChildrenModal = React.createClass({
     return (
     <Modal show={this.props.show} onHide={this.hide} animation={false}>
       <Modal.Header closeButton>
-        <Modal.Title>{this.getIntlMessage('synthesis.view.childrenModal.title')}</Modal.Title>
+        <Modal.Title>{this.getIntlMessage('view.childrenModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Loader show={this.state.isLoading}>
@@ -51,7 +51,7 @@ const ChildrenModal = React.createClass({
         </Loader>
       </Modal.Body>
       <Modal.Footer>
-        <Button type="button" bsStyle="primary" onClick={this.hide}>{this.getIntlMessage('synthesis.view.childrenModal.close')}</Button>
+        <Button type="button" bsStyle="primary" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('view.childrenModal.close')}</Button>
       </Modal.Footer>
     </Modal>
     );

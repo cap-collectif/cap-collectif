@@ -1,25 +1,16 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
+import LoginStore from '../../../stores/LoginStore';
 import UserAvatar from '../../User/UserAvatar';
 import { Nav, NavDropdown, MenuItem } from 'react-bootstrap';
-import { connect } from 'react-redux';
 
-export const MainNavbarUser = React.createClass({
+const MainNavbarUser = React.createClass({
   displayName: 'MainNavbarUser',
-  propTypes: {
-    user: PropTypes.object,
-  },
   mixins: [IntlMixin],
 
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
-
   render() {
-    const user = this.props.user;
-    if (user) {
+    if (LoginStore.isLoggedIn()) {
+      const user = LoginStore.user;
       const dropdownTitle = (
         <span>
           <UserAvatar user={user} size={34} style={{ marginRight: '10px' }} anchor={false} />
@@ -39,19 +30,19 @@ export const MainNavbarUser = React.createClass({
             {
               user.isAdmin
               ? <MenuItem eventKey="1" href="/admin">
-                {this.getIntlMessage('synthesis.edition.navbar.user.admin')}
+                {this.getIntlMessage('edition.navbar.user.admin')}
               </MenuItem>
               : null
             }
-            <MenuItem eventKey="2" href="/profile">
-              {this.getIntlMessage('synthesis.edition.navbar.user.profile')}
+            <MenuItem eventKey="2" href={user._links.profile}>
+              {this.getIntlMessage('edition.navbar.user.profile')}
             </MenuItem>
-            <MenuItem eventKey="3" href="/profile/edit-profile">
-              {this.getIntlMessage('synthesis.edition.navbar.user.settings')}
+            <MenuItem eventKey="3" href={user._links.settings}>
+              {this.getIntlMessage('edition.navbar.user.settings')}
             </MenuItem>
             <MenuItem divider />
             <MenuItem eventKey="4" href="/logout">
-              {this.getIntlMessage('synthesis.edition.navbar.user.logout')}
+              {this.getIntlMessage('edition.navbar.user.logout')}
             </MenuItem>
           </NavDropdown>
         </Nav>
@@ -62,10 +53,4 @@ export const MainNavbarUser = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(MainNavbarUser);
+export default MainNavbarUser;

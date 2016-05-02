@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
+import LoginStore from '../../stores/LoginStore';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import ArgumentVoteBox from './Vote/ArgumentVoteBox';
 import ArgumentEditModal from './Edition/ArgumentEditModal';
@@ -10,7 +11,7 @@ import DeleteButton from '../Form/DeleteButton';
 
 const ArgumentButtons = React.createClass({
   propTypes: {
-    argument: PropTypes.object.isRequired,
+    argument: React.PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -19,6 +20,13 @@ const ArgumentButtons = React.createClass({
       isEditing: false,
       isDeleting: false,
     };
+  },
+
+  isTheUserTheAuthor() {
+    if (this.props.argument.author === null || !LoginStore.isLoggedIn()) {
+      return false;
+    }
+    return LoginStore.user.uniqueId === this.props.argument.author.uniqueId;
   },
 
   openEditModal() {
@@ -73,8 +81,8 @@ const ArgumentButtons = React.createClass({
       />
       {' '}
       <ShareButtonDropdown
-        id={'arg-' + argument.id + '-share-button'}
-        url={argument._links.show}
+        id={'arg-' + this.props.argument.id + '-share-button'}
+        url={this.props.argument._links.show}
         className="argument__btn--share btn-dark-gray btn--outline btn btn-xs"
       />
     </div>

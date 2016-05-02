@@ -1,29 +1,23 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
+
+import LoginStore from '../../../stores/LoginStore';
 import OpinionVotesButton from './OpinionVotesButton';
 import { ButtonToolbar } from 'react-bootstrap';
-import { connect } from 'react-redux';
 
 const OpinionVotesButtons = React.createClass({
   propTypes: {
-    opinion: PropTypes.object.isRequired,
-    show: PropTypes.bool.isRequired,
-    disabled: PropTypes.bool.isRequired,
-    user: PropTypes.object,
+    opinion: React.PropTypes.object.isRequired,
+    show: React.PropTypes.bool.isRequired,
+    disabled: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
-
   isTheUserTheAuthor() {
-    if (this.props.opinion.author === null || !this.props.user) {
+    if (this.props.opinion.author === null || !LoginStore.isLoggedIn()) {
       return false;
     }
-    return this.props.user.uniqueId === this.props.opinion.author.uniqueId;
+    return LoginStore.user.uniqueId === this.props.opinion.author.uniqueId;
   },
 
   render() {
@@ -42,10 +36,4 @@ const OpinionVotesButtons = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(OpinionVotesButtons);
+export default OpinionVotesButtons;

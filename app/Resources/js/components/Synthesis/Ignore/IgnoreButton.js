@@ -2,7 +2,6 @@ import React from 'react';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import { Button, Modal } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage } from 'react-intl';
-import { hashHistory } from 'react-router';
 
 const IgnoreButton = React.createClass({
   propTypes: {
@@ -40,7 +39,7 @@ const IgnoreButton = React.createClass({
       'published': false,
     };
     SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
-    hashHistory.push('inbox', { 'type': 'new' });
+    this.transitionTo('inbox', { 'type': 'new' });
   },
 
   renderConfirmButton() {
@@ -56,15 +55,15 @@ const IgnoreButton = React.createClass({
       <Modal show={this.state.showConfirmModal} onHide={this.hideConfirmModal} animation={false} dialogClassName="modal--confirm">
         <Modal.Header closeButton>
           <Modal.Title>
-          <FormattedMessage message={this.getIntlMessage('synthesis.edition.action.confirm_ignore.title')} name={this.props.element.title} />
+          <FormattedMessage message={this.getIntlMessage('edition.action.confirm_ignore.title')} name={this.props.element.title} />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {this.getIntlMessage('synthesis.edition.action.confirm_ignore.body')}
+          {this.getIntlMessage('edition.action.confirm_ignore.body')}
         </Modal.Body>
         <Modal.Footer>
-          <Button type="button" className="modal--confirm__cancel" onClick={this.hideConfirmModal}>{this.getIntlMessage('synthesis.edition.action.confirm_ignore.btn_cancel')}</Button>
-          <Button className="modal--confirm__submit" bsStyle="primary" type="submit" onClick={this.ignore}>{this.getIntlMessage('synthesis.edition.action.confirm_ignore.btn_submit')}</Button>
+          <Button type="button" className="modal--confirm__cancel" onClick={this.hideConfirmModal}>{this.getIntlMessage('edition.action.confirm_ignore.btn_cancel')}</Button>
+          <Button className="modal--confirm__submit" bsStyle="primary" type="submit" onClick={this.ignore.bind(null, this)}>{this.getIntlMessage('edition.action.confirm_ignore.btn_submit')}</Button>
         </Modal.Footer>
       </Modal>
     );

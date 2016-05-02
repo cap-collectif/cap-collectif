@@ -3,6 +3,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import IntlData from '../../translations/FR';
 import RankingArrows from './RankingArrows';
 
 const arrowFunctions = {

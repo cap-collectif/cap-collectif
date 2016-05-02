@@ -1,15 +1,14 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import ReplyCreateForm from './ReplyCreateForm';
+import LoginStore from '../../../stores/LoginStore';
 import { Alert } from 'react-bootstrap';
 import LoginButton from '../../User/Login/LoginButton';
-import { connect } from 'react-redux';
 
-export const ReplyCreateFormWrapper = React.createClass({
+const ReplyCreateFormWrapper = React.createClass({
   propTypes: {
     form: PropTypes.object.isRequired,
     userReplies: PropTypes.array.isRequired,
-    user: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -17,7 +16,7 @@ export const ReplyCreateFormWrapper = React.createClass({
     const { form, userReplies } = this.props;
     return (
       !form.contribuable
-      || !this.props.user
+      || !LoginStore.isLoggedIn()
       || (userReplies.length > 0 && !form.multipleRepliesAllowed)
     );
   },
@@ -27,7 +26,7 @@ export const ReplyCreateFormWrapper = React.createClass({
     return (
       <div>
         {
-          form.contribuable && !this.props.user
+          form.contribuable && !LoginStore.isLoggedIn()
           ? <Alert bsStyle="warning">
             <strong>{this.getIntlMessage('reply.not_logged_in.error')}</strong>
             <span style={{ marginLeft: '10px' }}><LoginButton bsStyle="primary" /></span>
@@ -45,10 +44,4 @@ export const ReplyCreateFormWrapper = React.createClass({
   },
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(ReplyCreateFormWrapper);
+export default ReplyCreateFormWrapper;

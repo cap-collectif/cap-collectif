@@ -1,22 +1,20 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import LoginOverlay from '../Utils/LoginOverlay';
-import { connect } from 'react-redux';
+import LoginStore from '../../stores/LoginStore';
 
 const SubmitButton = React.createClass({
   propTypes: {
-    id: PropTypes.string.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    label: PropTypes.string,
-    bsStyle: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    disabled: PropTypes.bool,
-    loginOverlay: PropTypes.bool,
-    user: PropTypes.object,
-    features: PropTypes.object.isRequired,
+    id: React.PropTypes.string.isRequired,
+    onSubmit: React.PropTypes.func.isRequired,
+    isSubmitting: React.PropTypes.bool.isRequired,
+    label: React.PropTypes.string,
+    bsStyle: React.PropTypes.string,
+    className: React.PropTypes.string,
+    style: React.PropTypes.object,
+    disabled: React.PropTypes.bool,
+    loginOverlay: React.PropTypes.bool,
   },
   mixins: [IntlMixin],
 
@@ -28,22 +26,20 @@ const SubmitButton = React.createClass({
       style: {},
       disabled: false,
       loginOverlay: false,
-      user: null,
     };
   },
 
   onClick() {
-    if ((!this.props.user && this.props.loginOverlay) || this.props.isSubmitting) {
+    if ((!LoginStore.isLoggedIn() && this.props.loginOverlay) || this.props.isSubmitting) {
       return;
     }
     this.props.onSubmit();
   },
 
   render() {
-    const { user, features } = this.props;
     const disabled = this.props.isSubmitting || this.props.disabled;
     return (
-      <LoginOverlay user={user} features={features} enabled={this.props.loginOverlay}>
+      <LoginOverlay enabled={this.props.loginOverlay}>
         <Button
           id={this.props.id}
           disabled={disabled}
@@ -63,11 +59,4 @@ const SubmitButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-    features: state.features,
-  };
-};
-
-export default connect(mapStateToProps)(SubmitButton);
+export default SubmitButton;

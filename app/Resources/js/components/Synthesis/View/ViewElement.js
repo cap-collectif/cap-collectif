@@ -32,7 +32,7 @@ const ViewElement = React.createClass({
     return (
       <Tooltip>
         <FormattedMessage
-          message={this.getIntlMessage('synthesis.percentage.tooltip')}
+          message={this.getIntlMessage('percentage.tooltip')}
           contributions={contributions}
           scoreSign={score < 0 ? '-' : '+'}
           score={Math.abs(score)}
@@ -82,7 +82,7 @@ const ViewElement = React.createClass({
           />
           <p style={{ textAlign: 'center' }}>
             <FormattedMessage
-              message={this.getIntlMessage('synthesis.vote.total')}
+              message={this.getIntlMessage('vote.total')}
               nb={(votes[-1] || 0) + (votes[0] || 0) + (votes[1] || 0)}
             />
           </p>
@@ -97,7 +97,7 @@ const ViewElement = React.createClass({
       return (
         <div className="synthesis__element__counters">
           <FormattedMessage
-            message={this.getIntlMessage('synthesis.counter.contributions')}
+            message={this.getIntlMessage('counter.contributions')}
             nb={this.props.element.publishedChildrenCount}
           />
           {this.props.element.linkedDataUrl
@@ -106,7 +106,7 @@ const ViewElement = React.createClass({
                 href={this.props.element.linkedDataUrl}
                 onClick={this.openOriginalContribution}
             >
-              {this.getIntlMessage('synthesis.counter.link')}
+              {this.getIntlMessage('counter.link')}
             </a>
             : null
           }

@@ -113,7 +113,7 @@ const ElementsSearch = React.createClass({
       return (
         <div className="synthesis__list--empty  text-center">
           <p className="icon  cap-bubble-attention-6"></p>
-          <p>{this.getIntlMessage('synthesis.edition.list.none')}</p>
+          <p>{this.getIntlMessage('edition.list.none')}</p>
         </div>
       );
     }
@@ -122,8 +122,8 @@ const ElementsSearch = React.createClass({
   renderLoadMore() {
     if (!this.state.isLoading && (this.state.limit < this.state.count || this.state.isLoadingMore)) {
       return (
-        <button className="btn btn-block btn-dark-grey" ref="loadMore" data-loading-text={this.getIntlMessage('synthesis.common.loading')} onClick={this.loadMore.bind(this)}>
-          { this.getIntlMessage('synthesis.common.elements.more') }
+        <button className="btn btn-block btn-dark-grey" ref="loadMore" data-loading-text={this.getIntlMessage('common.loading')} onClick={this.loadMore.bind(this)}>
+          { this.getIntlMessage('common.elements.more') }
         </button>
       );
     }

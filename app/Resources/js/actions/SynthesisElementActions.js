@@ -17,7 +17,7 @@ const idOf = (val) => {
   return val;
 };
 
-const updateElementFromData = (synthesis, element, data, successMessage = 'synthesis.common.success.update_success', errorMessage = 'synthesis.common.errors.update_error') => {
+const updateElementFromData = (synthesis, element, data, successMessage = 'common.success.update_success', errorMessage = 'common.errors.update_error') => {
   return Fetcher
     .put(`/syntheses/${synthesis}/elements/${element}`, data)
     .then(() => {
@@ -36,7 +36,7 @@ const updateElementFromData = (synthesis, element, data, successMessage = 'synth
     });
 };
 
-const createElementFromData = (synthesis, data, successMessage = 'synthesis.common.success.update_success', errorMessage = 'synthesis.common.errors.update_error') => {
+const createElementFromData = (synthesis, data, successMessage = 'common.success.update_success', errorMessage = 'common.errors.update_error') => {
   return Fetcher
     .post(`/syntheses/${synthesis}/elements`, data)
     .then((response) => {
@@ -87,7 +87,7 @@ export default {
     if (data.parent) {
       data.parent = idOf(data.parent);
     }
-    createElementFromData(synthesis, data, 'synthesis.common.success.create_success', 'synthesis.common.errors.create_error');
+    createElementFromData(synthesis, data, 'common.success.create_success', 'common.errors.create_error');
   },
 
   loadElementFromServer: (synthesis, element) => {
@@ -215,7 +215,7 @@ export default {
         elementId: element,
       });
     }
-    updateElementFromData(synthesis, element, data, 'synthesis.common.success.archive_success', 'synthesis.common.errors.archive_error');
+    updateElementFromData(synthesis, element, data, 'common.success.archive_success', 'common.errors.archive_error');
   },
 
   expandTreeItem(type, elementId, expanded) {

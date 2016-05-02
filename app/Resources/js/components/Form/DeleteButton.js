@@ -1,16 +1,15 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
+import LoginStore from '../../stores/LoginStore';
 
 const DeleteButton = React.createClass({
   propTypes: {
-    author: PropTypes.object,
-    onClick: PropTypes.func.isRequired,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    id: PropTypes.string,
-    user: PropTypes.object,
+    author: React.PropTypes.object,
+    onClick: React.PropTypes.func.isRequired,
+    className: React.PropTypes.string,
+    style: React.PropTypes.object,
+    id: React.PropTypes.string,
   },
   mixins: [IntlMixin],
 
@@ -20,7 +19,6 @@ const DeleteButton = React.createClass({
       className: '',
       style: null,
       id: 'delete-button',
-      user: null,
     };
   },
 
@@ -29,10 +27,10 @@ const DeleteButton = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    if (this.props.author === null || !this.props.user) {
+    if (this.props.author === null || !LoginStore.isLoggedIn()) {
       return false;
     }
-    return this.props.user.uniqueId === this.props.author.uniqueId;
+    return LoginStore.user.uniqueId === this.props.author.uniqueId;
   },
 
   render() {
@@ -60,10 +58,4 @@ const DeleteButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(DeleteButton);
+export default DeleteButton;

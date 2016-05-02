@@ -51,7 +51,7 @@ const TopMenu = React.createClass({
     return (
       <LinkContainer to={item.link} key={index}>
         <NavItem className={menuItemClass} id={menuItemId}>
-            <i style={{ fontSize: '25px' }} className={'cap ' + item.icon + ' ' + iconClass}></i> <span className="hidden-sm">{this.getIntlMessage('synthesis.edition.topMenu.' + item.label)}</span>
+            <i style={{ fontSize: '25px' }} className={'cap ' + item.icon + ' ' + iconClass}></i> <span className="hidden-sm">{this.getIntlMessage('edition.topMenu.' + item.label)}</span>
         </NavItem>
       </LinkContainer>
     );

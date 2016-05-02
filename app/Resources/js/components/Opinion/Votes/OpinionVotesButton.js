@@ -1,20 +1,18 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
 
 import OpinionActions from '../../../actions/OpinionActions';
 import LoginOverlay from '../../Utils/LoginOverlay';
+import LoginStore from '../../../stores/LoginStore';
 import { Button } from 'react-bootstrap';
 
-export const OpinionVotesButton = React.createClass({
+const OpinionVotesButton = React.createClass({
   propTypes: {
-    style: PropTypes.object,
-    opinion: PropTypes.object.isRequired,
-    value: PropTypes.oneOf([-1, 0, 1]).isRequired,
-    disabled: PropTypes.bool,
-    user: PropTypes.object,
-    features: PropTypes.object.isRequired,
+    style: React.PropTypes.object,
+    opinion: React.PropTypes.object.isRequired,
+    value: React.PropTypes.oneOf([-1, 0, 1]).isRequired,
+    disabled: React.PropTypes.bool,
   },
   mixins: [IntlMixin],
 
@@ -34,25 +32,23 @@ export const OpinionVotesButton = React.createClass({
   },
 
   vote() {
-    const { user, opinion, value } = this.props;
     if (this.isVersion()) {
-      OpinionActions.vote({ value: value }, opinion.id, opinion.parent.id, user);
+      OpinionActions.vote({ value: this.props.value }, this.props.opinion.id, this.props.opinion.parent.id);
     } else {
-      OpinionActions.vote({ value: value }, opinion.id, null, user);
+      OpinionActions.vote({ value: this.props.value }, this.props.opinion.id);
     }
   },
 
   deleteVote() {
-    const { user, opinion } = this.props;
     if (this.isVersion()) {
-      OpinionActions.deleteVote(opinion.id, opinion.parent.id, user);
+      OpinionActions.deleteVote(this.props.opinion.id, this.props.opinion.parent.id);
     } else {
-      OpinionActions.deleteVote(opinion.id, null, user);
+      OpinionActions.deleteVote(this.props.opinion.id);
     }
   },
 
   voteAction() {
-    if (!this.props.user || this.props.disabled) {
+    if (!LoginStore.isLoggedIn() || this.props.disabled) {
       return null;
     }
     return this.isCurrentVote() ? this.deleteVote() : this.vote();
@@ -93,9 +89,8 @@ export const OpinionVotesButton = React.createClass({
       return null;
     }
     const data = this.data[this.props.value];
-    const { user, features } = this.props;
     return (
-      <LoginOverlay user={user} features={features}>
+      <LoginOverlay>
         <Button
           style={this.props.style}
           bsStyle={data.style}
@@ -114,11 +109,4 @@ export const OpinionVotesButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.features,
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(OpinionVotesButton);
+export default OpinionVotesButton;

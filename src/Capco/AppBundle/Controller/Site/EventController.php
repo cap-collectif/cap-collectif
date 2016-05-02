@@ -13,7 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Form\EventRegistrationType;
-use JMS\Serializer\SerializationContext;
 
 class EventController extends Controller
 {
@@ -158,18 +157,7 @@ class EventController extends Controller
             }
         }
 
-        $serializer = $this->get('jms_serializer');
-
-        $props = $serializer->serialize([
-            'object' => $event->getId(),
-            'uri' => 'events',
-        ], 'json', SerializationContext::create());
-
-        return [
-            'form' => $form->createView(),
-            'event' => $event,
-            'props' => $props,
-        ];
+        return ['form' => $form->createView(), 'event' => $event];
     }
 
     /**

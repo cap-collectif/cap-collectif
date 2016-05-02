@@ -84,6 +84,7 @@ const ProjectStatsModal = React.createClass({
           animation={false}
           show={this.state.showModal}
           onHide={this.hideModal}
+          bsSize="medium"
           aria-labelledby={id + '-title'}
         >
           <Modal.Header closeButton>

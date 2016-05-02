@@ -17,12 +17,13 @@
 {% endblock %}
 
 {% block mainContent %}
-    {{ react_intl_component('SynthesisEditBoxApp', {'props': props, 'rendering': 'client_side'}) }}
+    <div id="render-synthesis-edit-box" data-mode="edit" data-synthesis="{{ currentStep.synthesis.id }}"></div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
         App.pieChart();
+        var Synthesis = require('Resources/js/synthesis');
     </script>
 {% endblock %}

@@ -70,7 +70,7 @@ const SynthesisBox = React.createClass({
         );
       }
       return (
-        <p>{this.getIntlMessage('synthesis.common.errors.incorrect_mode')}</p>
+        <p>{this.getIntlMessage('common.errors.incorrect_mode')}</p>
       );
     }
   },
