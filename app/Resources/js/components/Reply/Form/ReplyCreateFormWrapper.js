@@ -62,8 +62,10 @@ export const ReplyCreateFormWrapper = React.createClass({
         {
           form.contribuable && LoginStore.isLoggedIn() && !LoginStore.user.isSmsConfirmed &&
           <Alert bsStyle="warning">
-            <strong>Veuillez vérifier votre compte par SMS pour participer.</strong>
-            <span style={{ marginLeft: '10px' }}><Button onClick={this.openPhoneModal}>Vérifier mon compte</Button></span>
+            <strong>{ this.getIntlMessage('phone.please_verify') }</strong>
+            <span style={{ marginLeft: '10px' }}>
+              <Button onClick={this.openPhoneModal}>{ this.getIntlMessage('phone.check')}</Button>
+            </span>
           </Alert>
         }
         <ReplyCreateForm form={form} disabled={this.formIsDisabled()} />

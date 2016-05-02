@@ -83,7 +83,7 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/edit-mobile", name="capco_profile_edit_mobile")
-     * @Template("CapcoUserBundle:Profile:edit_profile.html.twig")
+     * @Template("CapcoUserBundle:Profile:edit_mobile.html.twig")
      * @Security("has_role('ROLE_USER')")
      */
     public function editProfileMobileAction()

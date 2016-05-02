@@ -395,7 +395,9 @@
         "received": "Code de confirmation envoyé.",
         "wait_for_new": "Merci de patienter 1 minute avant de demander un nouveau code."
       }
-    }
+    },
+    "please_verify": "Veuillez vérifier votre compte par SMS pour participer.",
+    "check": "Vérifier mon compte"
   },
   "profile": {
     "constraints": {
