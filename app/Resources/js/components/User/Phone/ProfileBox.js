@@ -6,7 +6,16 @@ import SmsCodeForm from './SmsCodeForm';
 import UserActions from '../../../actions/UserActions';
 
 const PhoneModal = React.createClass({
+  propTypes: {
+    user: PropTypes.object,
+  },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
 
   getInitialState() {
     return {
@@ -54,6 +63,7 @@ const PhoneModal = React.createClass({
   },
 
   render() {
+    const { user } = this.props;
     const { isSubmitting, smsSentToNumber, alert } = this.state;
     const header = smsSentToNumber
         ? this.getIntlMessage('phone.confirm.check_your_phone')
@@ -80,6 +90,10 @@ const PhoneModal = React.createClass({
               <Alert bsStyle={alert.type} onDismiss={this.handleAlertDismiss}>
                 {alert.message}
               </Alert>
+            }
+            {
+              user.phone &&
+              <FormattedHTMLMessage message={this.getIntlMessage('phone.confirm.infos')} />
             }
             {
               smsSentToNumber
