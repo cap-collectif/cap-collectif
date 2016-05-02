@@ -1,12 +1,9 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import ReplyCreateForm from './ReplyCreateForm';
-<<<<<<< HEAD
-import { Alert } from 'react-bootstrap';
 import LoginButton from '../../User/Login/LoginButton';
 import { connect } from 'react-redux';
 import { Alert, Button } from 'react-bootstrap';
-import LoginButton from '../../User/Login/LoginButton';
 import PhoneModal from '../../User/Phone/PhoneModal';
 
 export const ReplyCreateFormWrapper = React.createClass({
@@ -33,7 +30,7 @@ export const ReplyCreateFormWrapper = React.createClass({
   },
 
   formIsDisabled() {
-    const { form, userReplies } = this.props;
+    const { form, userReplies, user } = this.props;
     return (
       !form.contribuable
       || !this.props.user
@@ -43,7 +40,7 @@ export const ReplyCreateFormWrapper = React.createClass({
   },
 
   render() {
-    const { form } = this.props;
+    const { form, user } = this.props;
     return (
       <div>
         {
@@ -60,7 +57,7 @@ export const ReplyCreateFormWrapper = React.createClass({
             : null
         }
         {
-          form.contribuable && LoginStore.isLoggedIn() && !LoginStore.user.isSmsConfirmed &&
+          form.contribuable && user && !user.isSmsConfirmed &&
           <Alert bsStyle="warning">
             <strong>{ this.getIntlMessage('phone.please_verify') }</strong>
             <span style={{ marginLeft: '10px' }}>
