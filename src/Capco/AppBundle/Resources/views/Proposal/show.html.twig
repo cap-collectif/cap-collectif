@@ -9,15 +9,5 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-
-    <div id="render-proposal-page"
-         data-proposal='{{ proposal|escape }}'
-         data-form='{{ form|escape }}'
-         data-themes='{{ themes|escape }}'
-         data-districts='{{ districts|escape }}'
-         data-votes='{{ votes|escape }}'
-         data-votable-step='{{ votableStep|escape }}'
-         data-user-has-vote='{{ userHasVote }}'
-    ></div>
-
+    {{ react_intl_component('ProposalPageApp', {'props': props}) }}
 {% endblock %}

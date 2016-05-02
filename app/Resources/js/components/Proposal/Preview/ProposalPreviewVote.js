@@ -1,23 +1,25 @@
-import React from 'react';
-import LoginStore from '../../../stores/LoginStore';
+import React, { PropTypes } from 'react';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import { VOTE_TYPE_DISABLED, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
+import { connect } from 'react-redux';
 
 const ProposalPreviewVote = React.createClass({
   propTypes: {
-    proposal: React.PropTypes.object.isRequired,
-    selectionStep: React.PropTypes.object,
-    creditsLeft: React.PropTypes.number,
-    userHasVote: React.PropTypes.bool.isRequired,
-    onVoteChange: React.PropTypes.func.isRequired,
+    proposal: PropTypes.object.isRequired,
+    selectionStep: PropTypes.object,
+    creditsLeft: PropTypes.number,
+    userHasVote: PropTypes.bool.isRequired,
+    onVoteChange: PropTypes.func.isRequired,
+    user: PropTypes.object,
   },
 
   getDefaultProps() {
     return {
       selectionStep: null,
       creditsLeft: null,
+      user: null,
     };
   },
 
@@ -64,7 +66,7 @@ const ProposalPreviewVote = React.createClass({
   },
 
   voteAction() {
-    if (!LoginStore.isLoggedIn()) {
+    if (!this.props.user) {
       this.toggleModal(true);
       return;
     }
@@ -91,7 +93,7 @@ const ProposalPreviewVote = React.createClass({
           onClick={this.voteAction}
         />
         {
-          !LoginStore.isLoggedIn() && this.anonymousCanVote()
+          !this.props.user && this.anonymousCanVote()
             ? <ProposalVoteModal
                 proposal={this.props.proposal}
                 selectionStep={selectionStep}
@@ -106,4 +108,10 @@ const ProposalPreviewVote = React.createClass({
 
 });
 
-export default ProposalPreviewVote;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalPreviewVote);

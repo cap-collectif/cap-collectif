@@ -11,6 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Capco\AppBundle\Form\PostSearchType;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Project;
+use JMS\Serializer\SerializationContext;
 
 class BlogController extends Controller
 {
@@ -90,8 +91,16 @@ class BlogController extends Controller
             throw new NotFoundHttpException('Could not find a published article for this slug.');
         }
 
+        $serializer = $this->get('jms_serializer');
+
+        $props = $serializer->serialize([
+            'object' => $post->getId(),
+            'uri' => 'posts',
+        ], 'json', SerializationContext::create());
+
         return [
             'post' => $post,
+            'props' => $props,
         ];
     }
 }

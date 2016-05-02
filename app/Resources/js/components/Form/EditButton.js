@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
-import LoginStore from '../../stores/LoginStore';
+import { connect } from 'react-redux';
 
 const EditButton = React.createClass({
   propTypes: {
-    author: React.PropTypes.object,
-    onClick: React.PropTypes.func.isRequired,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-    editable: React.PropTypes.bool,
-    id: React.PropTypes.string,
+    author: PropTypes.object,
+    onClick: PropTypes.func.isRequired,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    editable: PropTypes.bool,
+    id: PropTypes.string,
+    user: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -21,6 +22,7 @@ const EditButton = React.createClass({
       style: null,
       editable: true,
       id: 'edit-button',
+      user: null,
     };
   },
 
@@ -29,10 +31,10 @@ const EditButton = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    if (this.props.author === null || !LoginStore.isLoggedIn()) {
+    if (this.props.author === null || !this.props.user) {
       return false;
     }
-    return LoginStore.user.uniqueId === this.props.author.uniqueId;
+    return this.props.user.uniqueId === this.props.author.uniqueId;
   },
 
   render() {
@@ -60,4 +62,10 @@ const EditButton = React.createClass({
 
 });
 
-export default EditButton;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(EditButton);

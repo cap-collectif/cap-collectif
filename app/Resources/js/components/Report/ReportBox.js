@@ -1,16 +1,17 @@
-import React from 'react';
-import LoginStore from '../../stores/LoginStore';
-import FeatureStore from '../../stores/FeatureStore';
+import React, { PropTypes } from 'react';
 import ReportModal from './ReportModal';
 import ReportButton from './ReportButton';
+import { connect } from 'react-redux';
 
 const ReportBox = React.createClass({
   propTypes: {
-    reported: React.PropTypes.bool,
-    onReport: React.PropTypes.func.isRequired,
-    author: React.PropTypes.object,
-    buttonBsSize: React.PropTypes.string,
-    buttonClassName: React.PropTypes.string,
+    reported: PropTypes.bool,
+    onReport: PropTypes.func.isRequired,
+    author: PropTypes.object,
+    buttonBsSize: PropTypes.string,
+    buttonClassName: PropTypes.string,
+    user: PropTypes.object,
+    features: PropTypes.object.isRequired,
   },
 
   getDefaultProps() {
@@ -19,28 +20,14 @@ const ReportBox = React.createClass({
       author: null,
       buttonBsSize: 'md',
       buttonClassName: '',
+      user: null,
     };
   },
 
   getInitialState() {
     return {
-      reportingEnabled: FeatureStore.isActive('reporting'),
       isReporting: false,
     };
-  },
-
-  componentWillMount() {
-    FeatureStore.addChangeListener(this.onChange);
-  },
-
-  componentWillUnmount() {
-    FeatureStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    this.setState({
-      reportingEnabled: FeatureStore.isActive('reporting'),
-    });
   },
 
   openReportModal() {
@@ -52,10 +39,10 @@ const ReportBox = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    if (this.props.author === null || !LoginStore.isLoggedIn()) {
+    if (this.props.author === null || !this.props.user) {
       return false;
     }
-    return LoginStore.user.uniqueId === this.props.author.uniqueId;
+    return this.props.user.uniqueId === this.props.author.uniqueId;
   },
 
   report(data) {
@@ -65,8 +52,8 @@ const ReportBox = React.createClass({
   },
 
   render() {
-    const { reportingEnabled, isReporting } = this.state;
-    if (LoginStore.isLoggedIn() && !this.isTheUserTheAuthor() && reportingEnabled) {
+    const { isReporting } = this.state;
+    if (this.props.user && !this.isTheUserTheAuthor() && this.props.features.reporting) {
       return (
         <span>
           <ReportButton
@@ -88,4 +75,11 @@ const ReportBox = React.createClass({
 
 });
 
-export default ReportBox;
+const mapStateToProps = (state) => {
+  return {
+    features: state.features,
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(ReportBox);

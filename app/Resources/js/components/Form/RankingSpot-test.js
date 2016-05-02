@@ -30,5 +30,4 @@ describe('<RankingSpot />', () => {
     const spot = wrapper.find('.ranking__spot');
     expect(spot.prop('style').backgroundColor).to.equal('#eee');
   });
-  
 });

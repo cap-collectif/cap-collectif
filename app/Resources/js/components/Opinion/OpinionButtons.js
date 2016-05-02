@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
-import LoginStore from '../../stores/LoginStore';
 import OpinionVersionForm from './OpinionVersionForm';
 import OpinionReportButton from './OpinionReportButton';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -10,9 +10,16 @@ import OpinionDelete from './Delete/OpinionDelete';
 
 const OpinionButtons = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
+    opinion: PropTypes.object.isRequired,
+    user: PropTypes.object,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
 
   isVersion() {
     return !!this.props.opinion.parent;
@@ -23,10 +30,10 @@ const OpinionButtons = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    if (this.props.opinion.author === null || !LoginStore.isLoggedIn()) {
+    if (this.props.opinion.author === null || !this.props.user) {
       return false;
     }
-    return LoginStore.user.uniqueId === this.props.opinion.author.uniqueId;
+    return this.props.user.uniqueId === this.props.opinion.author.uniqueId;
   },
 
   renderEditButton() {
@@ -70,4 +77,11 @@ const OpinionButtons = React.createClass({
 
 });
 
-export default OpinionButtons;
+const mapStateToProps = (state) => {
+  return {
+    features: state.features,
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(OpinionButtons);

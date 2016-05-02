@@ -11,7 +11,7 @@ const QuestionnaireStepPage = React.createClass({
   propTypes: {
     step: PropTypes.object.isRequired,
     form: PropTypes.object.isRequired,
-    userReplies: PropTypes.array,
+    userReplies: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 

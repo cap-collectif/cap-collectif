@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import LoginStore from '../../../stores/LoginStore';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 const OpinionLinkCreateButton = React.createClass({
   propTypes: {
-    handleClick: React.PropTypes.func.isRequired,
+    handleClick: PropTypes.func.isRequired,
+    user: PropTypes.object,
+    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
+
   render() {
+    const { user, features } = this.props;
     return (
-      <LoginOverlay>
-        <Button id="link-form__add" bsStyle="primary" onClick={LoginStore.isLoggedIn() ? this.props.handleClick : null}>
+      <LoginOverlay user={user} features={features}>
+        <Button id="link-form__add" bsStyle="primary" onClick={user ? this.props.handleClick : null}>
           <i className="cap cap-add-1"></i>
           { ' ' + this.getIntlMessage('opinion.link.add_new')}
         </Button>
@@ -23,4 +32,11 @@ const OpinionLinkCreateButton = React.createClass({
 
 });
 
-export default OpinionLinkCreateButton;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    features: state.features,
+  };
+};
+
+export default connect(mapStateToProps)(OpinionLinkCreateButton);

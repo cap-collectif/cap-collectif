@@ -10,12 +10,12 @@ const SecondNavbar = React.createClass({
     return (
       <Navbar fixedTop fluid className="synthesis__second-navbar">
         <NavbarBrand>
-          {this.getIntlMessage('edition.navbar.second.brand')}
+          {this.getIntlMessage('synthesis.edition.navbar.second.brand')}
         </NavbarBrand>
         <Nav pullRight>
           <LinkContainer to={'/preview'}>
             <NavItem>
-              {this.getIntlMessage('edition.navbar.second.preview')}
+              {this.getIntlMessage('synthesis.edition.navbar.second.preview')}
             </NavItem>
           </LinkContainer>
         </Nav>

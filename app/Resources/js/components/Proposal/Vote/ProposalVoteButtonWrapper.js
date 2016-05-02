@@ -1,44 +1,27 @@
-import React from 'react';
-import LoginStore from '../../../stores/LoginStore';
+import React, { PropTypes } from 'react';
 import ProposalVoteButton from './ProposalVoteButton';
 import VoteButtonOverlay from './VoteButtonOverlay';
 import { VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import LoginOverlay from '../../Utils/LoginOverlay';
+import { connect } from 'react-redux';
 
 const ProposalVoteButtonWrapper = React.createClass({
   propTypes: {
-    proposal: React.PropTypes.object.isRequired,
-    selectionStep: React.PropTypes.object,
-    creditsLeft: React.PropTypes.number,
-    onClick: React.PropTypes.func.isRequired,
-    userHasVote: React.PropTypes.bool.isRequired,
+    proposal: PropTypes.object.isRequired,
+    selectionStep: PropTypes.object,
+    creditsLeft: PropTypes.number,
+    onClick: PropTypes.func.isRequired,
+    userHasVote: PropTypes.bool.isRequired,
+    user: PropTypes.object,
+    features: PropTypes.object.isRequired,
   },
 
   getDefaultProps() {
     return {
       selectionStep: null,
       creditsLeft: null,
+      user: null,
     };
-  },
-
-  getInitialState() {
-    return {
-      anonymous: !LoginStore.isLoggedIn(),
-    };
-  },
-
-  componentWillMount() {
-    LoginStore.addChangeListener(this.onChange);
-  },
-
-  componentWillUnmount() {
-    LoginStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    this.setState({
-      anonymous: !LoginStore.isLoggedIn(),
-    });
   },
 
   selectionStepIsOpen() {
@@ -53,25 +36,26 @@ const ProposalVoteButtonWrapper = React.createClass({
   },
 
   render() {
-    if (this.props.selectionStep && this.props.selectionStep.voteType === VOTE_TYPE_SIMPLE) {
+    const { user, features, selectionStep, userHasVote, onClick, proposal } = this.props;
+    if (selectionStep && selectionStep.voteType === VOTE_TYPE_SIMPLE) {
       return (
         <ProposalVoteButton
-          userHasVote={this.props.userHasVote}
-          onClick={this.props.onClick}
+          userHasVote={userHasVote}
+          onClick={onClick}
           disabled={!this.selectionStepIsOpen()}
         />
       );
     }
 
-    if (!this.state.anonymous) {
+    if (user) {
       return (
         <VoteButtonOverlay
-            tooltipId={'vote-tooltip-proposal-' + this.props.proposal.id}
+            tooltipId={'vote-tooltip-proposal-' + proposal.id}
             show={!this.userHasEnoughCredits()}
         >
           <ProposalVoteButton
-            userHasVote={this.props.userHasVote}
-            onClick={this.props.onClick}
+            userHasVote={userHasVote}
+            onClick={onClick}
             disabled={!this.selectionStepIsOpen() || !this.userHasEnoughCredits()}
           />
         </VoteButtonOverlay>
@@ -79,10 +63,10 @@ const ProposalVoteButtonWrapper = React.createClass({
     }
 
     return (
-      <LoginOverlay>
+      <LoginOverlay user={user} features={features}>
         <ProposalVoteButton
-          userHasVote={this.props.userHasVote}
-          onClick={this.props.onClick}
+          userHasVote={userHasVote}
+          onClick={onClick}
           disabled={!this.selectionStepIsOpen()}
         />
       </LoginOverlay>
@@ -91,4 +75,11 @@ const ProposalVoteButtonWrapper = React.createClass({
 
 });
 
-export default ProposalVoteButtonWrapper;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    features: state.features,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalVoteButtonWrapper);

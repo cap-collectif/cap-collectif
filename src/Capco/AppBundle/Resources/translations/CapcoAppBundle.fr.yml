@@ -377,7 +377,6 @@ project:
       read_less: Replier
       read_more: Lire la suite
       remaining_days: "]-Inf, 1] jour restant | ]1,Inf[ jours restants"
-      repliesCount: "]-Inf, 1] %count% réponses | ]1,Inf[ %count% réponses"
       step:
         title: Étapes
       sourcesCount: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"

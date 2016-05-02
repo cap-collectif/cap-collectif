@@ -98,7 +98,7 @@ const SideMenu = React.createClass({
     return (
       <LinkContainer to="/folder_manager">
         <NavItem className="menu__link" bsStyle="link">
-          <i className="cap cap-baloon"></i> {this.getIntlMessage('edition.sideMenu.contributions')}
+          <i className="cap cap-baloon"></i> {this.getIntlMessage('synthesis.edition.sideMenu.contributions')}
         </NavItem>
       </LinkContainer>
     );
@@ -125,7 +125,7 @@ const SideMenu = React.createClass({
   renderCreateButton() {
     return (
       <NavItem className="menu__link menu__action" onClick={this.showCreateModal.bind(null, this)}>
-          <i className="cap cap-folder-add"></i> {this.getIntlMessage('edition.action.create.label')}
+          <i className="cap cap-folder-add"></i> {this.getIntlMessage('synthesis.edition.action.create.label')}
       </NavItem>
     );
   },
@@ -134,7 +134,7 @@ const SideMenu = React.createClass({
     return (
       <LinkContainer to="/folder-manager">
         <NavItem className="menu__link menu__action">
-          <i className="cap cap-folder-edit"></i> {this.getIntlMessage('edition.action.manage.label')}
+          <i className="cap cap-folder-edit"></i> {this.getIntlMessage('synthesis.edition.action.manage.label')}
         </NavItem>
       </LinkContainer>
     );

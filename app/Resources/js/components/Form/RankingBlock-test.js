@@ -62,5 +62,4 @@ describe('<RankingBlock />', () => {
     expect(lastBox.prop('moveItem')).to.be.a('function');
     expect(lastBox.prop('disabled')).to.equal(false);
   });
-  
 });

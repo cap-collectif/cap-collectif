@@ -131,7 +131,7 @@
                 <div id="comments" class="anchor-offset container  container--thinner container--custom">
 
                     {% if capco_comment_can_show(idea) %}
-                        <div id="render-idea-comments" data-idea="{{ idea.id }}"></div>
+                        {{ react_intl_component('CommentSectionApp', {'props': props}) }}
                     {% endif %}
 
                 </div>

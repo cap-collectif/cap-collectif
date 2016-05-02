@@ -18,6 +18,9 @@ module.exports = {
         NODE_ENV: JSON.stringify(nodeEnv),
       },
     }),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
   ],
   module: {
     loaders: [

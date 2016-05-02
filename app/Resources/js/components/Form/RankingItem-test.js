@@ -60,9 +60,9 @@ describe('<RankingItem />', () => {
     expect(description.text()).to.equal('Description');
     const image = wrapper.find('.ranking__item__image');
     expect(image).to.have.lengthOf(1);
-    expect(image.prop('src')).to.equal('test.png')
+    expect(image.prop('src')).to.equal('test.png');
   });
-  
+
   it('should render transparent item when dragged', () => {
     const wrapper = shallow(<OriginalComponent {...props} item={item} disabled={false} isDragging />);
     const container = wrapper.find('.ranking__item');
@@ -91,5 +91,4 @@ describe('<RankingItem />', () => {
     const image = wrapper.find('.ranking__item__image');
     expect(image).to.have.lengthOf(0);
   });
-  
 });

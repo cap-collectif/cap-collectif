@@ -35,7 +35,7 @@ const ElementsFinder = React.createClass({
   getRootElement() {
     return [{
       id: 'root',
-      title: this.getIntlMessage('edition.finder.root'),
+      title: this.getIntlMessage('synthesis.edition.finder.root'),
       displayType: 'root',
       children: this.props.elements,
     }];

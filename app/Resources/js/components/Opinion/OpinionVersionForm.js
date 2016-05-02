@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
-import LoginStore from '../../stores/LoginStore';
 import FormMixin from '../../utils/FormMixin';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import FlashMessages from '../Utils/FlashMessages';
 import Input from '../Form/Input';
+import { connect } from 'react-redux';
 
 const OpinionVersionForm = React.createClass({
   propTypes: {
-    opinionId: React.PropTypes.number.isRequired,
-    opinionBody: React.PropTypes.string,
-    version: React.PropTypes.object,
-    mode: React.PropTypes.string,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-    isContribuable: React.PropTypes.bool,
+    opinionId: PropTypes.number.isRequired,
+    opinionBody: PropTypes.string,
+    version: PropTypes.object,
+    mode: PropTypes.string,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    isContribuable: PropTypes.bool,
+    user: PropTypes.object,
+    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
@@ -28,6 +30,7 @@ const OpinionVersionForm = React.createClass({
       isContribuable: false,
       className: '',
       style: {},
+      user: null,
     };
   },
 
@@ -155,7 +158,7 @@ const OpinionVersionForm = React.createClass({
   renderButton() {
     if (this.props.mode === 'create') {
       return (
-        <Button bsStyle="primary" onClick={LoginStore.isLoggedIn() ? () => this.show() : null}>
+        <Button bsStyle="primary" onClick={this.props.user ? () => this.show() : null}>
           <i className="cap cap-add-1"></i>
           { ' ' + this.getIntlMessage('opinion.add_new_version')}
         </Button>
@@ -169,18 +172,18 @@ const OpinionVersionForm = React.createClass({
   },
 
   render() {
-    const style = this.props.style;
-    if (!this.props.style.display) {
+    const { style, className, user, features, mode } = this.props;
+    if (!style.display) {
       style.display = 'inline-block';
     }
     return (
-      <div className={this.props.className} style={style}>
-        {this.isContribuable() ? <LoginOverlay children={this.renderButton()} /> : null}
+      <div className={className} style={style}>
+        {this.isContribuable() ? <LoginOverlay user={user} features={features} children={this.renderButton()} /> : null}
         <Modal
           {...this.props}
           animation={false}
           show={this.state.showModal}
-          onHide={this.close.bind(null, this)}
+          onHide={this.close}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
@@ -197,7 +200,7 @@ const OpinionVersionForm = React.createClass({
             </div>
             <form>
 
-              { this.props.mode === 'edit'
+              { mode === 'edit'
                 ? <div className="alert alert-warning edit-confirm-alert">
                     <Input
                       name="confirm"
@@ -251,7 +254,7 @@ const OpinionVersionForm = React.createClass({
             >
               {this.state.isSubmitting
                 ? this.getIntlMessage('global.loading')
-                : (this.props.mode === 'create'
+                : (mode === 'create'
                   ? this.getIntlMessage('global.publish')
                   : this.getIntlMessage('global.edit')
                 )
@@ -265,4 +268,11 @@ const OpinionVersionForm = React.createClass({
 
 });
 
-export default OpinionVersionForm;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    features: state.features,
+  };
+};
+
+export default connect(mapStateToProps)(OpinionVersionForm);

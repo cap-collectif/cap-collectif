@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 
 const CommentVoteButton = React.createClass({
   propTypes: {
     comment: React.PropTypes.object,
-    userIsAuthor: React.PropTypes.bool,
+    user: PropTypes.object,
   },
   mixins: [IntlMixin],
 
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
+
+  isTheUserTheAuthor() {
+    const { comment, user } = this.props;
+    if (comment.author === null || !user) {
+      return false;
+    }
+    return user.uniqueId === comment.author.uniqueId;
+  },
+
   renderFormOrDisabled() {
-    if (this.props.userIsAuthor) {
+    if (this.isTheUserTheAuthor()) {
       return (
         <button disabled="disabled" className="btn btn-dark-gray btn-xs">
           <i className="cap-hand-like-2"></i>
@@ -56,4 +71,10 @@ const CommentVoteButton = React.createClass({
 
 });
 
-export default CommentVoteButton;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(CommentVoteButton);

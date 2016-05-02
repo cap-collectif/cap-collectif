@@ -38,13 +38,6 @@
     {% elseif currentStep.synthesis.enabled == false and ( app.user == null or app.user.vip == false) %}
         <p class="excerpt">{{ 'synthesis.show.not_enabled' | trans({}, 'CapcoAppBundle') }}</p>
     {% else %}
-        <div id="render-synthesis-view-box" data-synthesis="{{ currentStep.synthesis.id }}"></div>
+        {{ react_intl_component('SynthesisViewBoxApp', {'props': props}) }}
     {% endif %}
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        var Synthesis = require('Resources/js/synthesis');
-    </script>
 {% endblock %}

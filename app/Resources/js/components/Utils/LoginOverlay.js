@@ -3,12 +3,12 @@ import { IntlMixin } from 'react-intl';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import LoginModal from '../User/Login/LoginModal';
 import RegistrationModal from '../User/Registration/RegistrationModal';
-import LoginStore from '../../stores/LoginStore';
 
-const LoginOverlay = React.createClass({
+export const LoginOverlay = React.createClass({
   propTypes: {
     user: PropTypes.object,
     children: PropTypes.element.isRequired,
+    features: PropTypes.object.isRequired,
     enabled: PropTypes.bool,
   },
   mixins: [IntlMixin],
@@ -45,10 +45,10 @@ const LoginOverlay = React.createClass({
 
   // We add Popover if user is not connected
   render() {
-    const { user, children, enabled } = this.props;
+    const { user, children, enabled, features } = this.props;
     const { showRegistration, showLogin } = this.state;
 
-    if (!enabled || user !== null || LoginStore.isLoggedIn()) {
+    if (!enabled || user) {
       return children;
     }
 
@@ -57,15 +57,15 @@ const LoginOverlay = React.createClass({
       : <Popover ref={c => this.popover = c} id="login-popover" title={this.getIntlMessage('vote.popover.title')}>
         <p>{ this.getIntlMessage('vote.popover.body') }</p>
         {
-          // FeatureStore.isActive('registration') &&
-          // <p>
-          //   <Button
-          //     onClick={this.handleRegistrationClick}
-          //     className="center-block btn-block"
-          //   >
-          //   { this.getIntlMessage('global.registration') }
-          //   </Button>
-          // </p>
+          features.registration &&
+          <p>
+            <Button
+              onClick={this.handleRegistrationClick}
+                className="center-block btn-block"
+            >
+              { this.getIntlMessage('global.registration') }
+            </Button>
+          </p>
         }
         <p>
           <Button

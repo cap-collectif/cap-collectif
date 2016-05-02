@@ -1,27 +1,35 @@
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
-import LoginStore from '../../../stores/LoginStore';
 import LoginOverlay from '../../Utils/LoginOverlay';
+import { connect } from 'react-redux';
 
 const OpinionSourceVoteButton = React.createClass({
   propTypes: {
     disabled: PropTypes.bool.isRequired,
     hasVoted: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
+    user: PropTypes.object,
+    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
+
   render() {
-    const { disabled, hasVoted, onClick } = this.props;
+    const { disabled, hasVoted, onClick, user, features } = this.props;
     return (
-      <LoginOverlay>
+      <LoginOverlay user={user} features={features}>
         <Button
           disabled={disabled}
           bsStyle={hasVoted ? 'danger' : 'success'}
           className={'source__btn--vote' + (hasVoted ? '' : ' btn--outline')}
           bsSize="xsmall"
-          onClick={LoginStore.isLoggedIn() ? onClick : null}
+          onClick={this.props.user ? onClick : null}
         >
           {hasVoted
             ? <span>{this.getIntlMessage('vote.cancel')}</span>
@@ -38,4 +46,11 @@ const OpinionSourceVoteButton = React.createClass({
 
 });
 
-export default OpinionSourceVoteButton;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    features: state.features,
+  };
+};
+
+export default connect(mapStateToProps)(OpinionSourceVoteButton);

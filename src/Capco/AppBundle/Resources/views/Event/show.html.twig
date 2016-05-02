@@ -127,7 +127,7 @@
                 {% if capco_comment_can_add(event) or (capco_comment_can_show(event) and event.commentsCount > 0) %}
                     <div class="container  container--thinner  container--custom">
                         {% if capco_comment_can_show(event) %}
-                            <div id="render-event-comments" data-event="{{ event.id }}"></div>
+                            {{ react_intl_component('CommentSectionApp', {'props': props}) }}
                         {% endif %}
                     </div>
                 {% endif %}
