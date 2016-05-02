@@ -13,8 +13,18 @@ describe('<RegistrationForm />', () => {
     user_types: [],
   };
 
+  const parameters = {
+    'signin.cgu.name': 'la charte',
+    'signin.cgu.link': '/charte',
+  };
+
+  const noParameters = {
+    'signin.cgu.name': null,
+    'signin.cgu.link': null,
+  };
+
   it('renders a form with inputs and a captcha', () => {
-    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} {...props} />);
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={parameters} {...props} />);
     expect(wrapper.find('form')).to.have.length(1);
     expect(wrapper.find('form').prop('id')).to.equal('registration-form');
     expect(wrapper.find('Input')).to.have.length(4);
@@ -23,7 +33,7 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders a username input', () => {
-    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} {...props} />);
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={parameters} {...props} />);
     const input = wrapper.find('Input').first();
     expect(input.prop('id')).to.equal('_username');
     expect(input.prop('autoFocus')).to.equal(true);
@@ -34,7 +44,7 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders an email input', () => {
-    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} {...props} />);
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={parameters} {...props} />);
     const input = wrapper.find('Input').at(1);
     expect(input.prop('id')).to.equal('_email');
     expect(input.prop('type')).to.equal('text');
@@ -44,7 +54,7 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders a password input', () => {
-    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} {...props} />);
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={parameters} {...props} />);
     const input = wrapper.find('Input').at(2);
     expect(input.prop('id')).to.equal('_password');
     expect(input.prop('type')).to.equal('password');
@@ -53,13 +63,19 @@ describe('<RegistrationForm />', () => {
     expect(input.prop('labelClassName')).to.equal('h5');
   });
 
-  it('renders a charte checkbox', () => {
-    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} {...props} />);
+  it('renders a charte checkbox when parameters are specified', () => {
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={parameters} {...props} />);
     const input = wrapper.find('Input').at(3);
     expect(input.prop('id')).to.equal('_charte');
+    expect(wrapper.find('Input').someWhere(n => n.prop('id') === '_charte')).to.equal(true);
     expect(input.prop('type')).to.equal('checkbox');
-    expect(input.prop('label')).to.equal('J\'ai lu et j\'accepte la charte.');
     expect(input.prop('help')).to.not.exist;
     expect(input.prop('labelClassName')).to.equal('h5');
+  });
+
+  it('does not render a charte checkbox when parameters are not specified', () => {
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={noParameters} {...props} />);
+    const input = wrapper.find('Input').at(3);
+    expect(wrapper.find('Input').someWhere(n => n.prop('id') === '_charte')).to.equal(false);
   });
 });

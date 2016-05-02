@@ -197,10 +197,6 @@
     "links": "{num, plural, =0{0 proposition li\u00e9e} one{# proposition li\u00e9e} other{# propositions li\u00e9es}}",
     "loading": "Chargement...",
     "login": "Connexion",
-    "login_social": {
-      "facebook": "Se connecter via Facebook",
-      "google": "Se connecter via Google"
-    },
     "modal": {
       "report": {
         "form": {
@@ -338,36 +334,38 @@
     }
   },
   "registration": {
-   "username": "Nom complet",
-   "charte": "J'ai lu et j'accepte la charte.",
-   "type": "Votre statut :",
-   "zipcode": "Code postal",
-   "help": {
+    "facebook": "S'inscrire via Facebook",
+    "google": "S'inscrire via Google",
+    "username": "Nom complet",
+    "charte": "J'ai lu et j'accepte {link}.",
+    "type": "Votre statut :",
+    "zipcode": "Code postal",
+    "help": {
      "username": "Votre nom sera rendu public sur le site."
-   },
-   "constraints": {
-     "captcha": {
-       "invalid": "Veuillez valider que vous n'êtes pas un robot."
-     },
-     "username": {
-       "min": "Le nom doit faire au moins 2 caractères.",
-       "max": "Le nom doit faire moins de 128 caractères."
-     },
-     "email": {
-       "min": "Votre email doit faire au moins 2 caractères",
-       "max": "Votre email doit faire moins de 128 caractères",
-       "invalid": "Cet email n'est pas valide.",
-       "throwable": "Ce fournisseur d'adresse électronique n'est pas accepté sur ce site, car il n'est pas considéré comme fiable. Veuillez utiliser une autre adresse.",
-       "already_used": "Cette adresse électronique est déjà utilisée."
-     },
-     "charte": {
-       "check": "Veuillez cocher la case pour accepter la charte."
-     },
-     "password": {
-       "min": "Le mot de passe doit faire au moins 8 caractères.",
-       "max": "Le mot de passe doit faire moins de 128 caractères."
-     }
-   }
+    },
+    "constraints": {
+      "captcha": {
+        "invalid": "Veuillez valider que vous n'êtes pas un robot."
+      },
+      "username": {
+        "min": "Le nom doit faire au moins 2 caractères.",
+        "max": "Le nom doit faire moins de 128 caractères."
+      },
+      "email": {
+        "min": "Votre email doit faire au moins 2 caractères",
+        "max": "Votre email doit faire moins de 128 caractères",
+        "invalid": "Cet email n'est pas valide.",
+        "throwable": "Ce fournisseur d'adresse électronique n'est pas accepté sur ce site, car il n'est pas considéré comme fiable. Veuillez utiliser une autre adresse.",
+        "already_used": "Cette adresse électronique est déjà utilisée."
+      },
+      "charte": {
+        "check": "Veuillez cocher la case pour accepter la charte."
+      },
+      "password": {
+        "min": "Le mot de passe doit faire au moins 8 caractères.",
+        "max": "Le mot de passe doit faire moins de 128 caractères."
+      }
+    }
   },
   "user": {
     "confirm": {
@@ -799,5 +797,10 @@
       "signin": "Inscription",
       "title": "Connectez-vous pour contribuer"
     }
+  },
+  "login": {
+    "facebook": "Se connecter via Facebook",
+    "google": "Se connecter via Google",
+    "or": "OU"
   }
 }

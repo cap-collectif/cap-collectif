@@ -236,19 +236,19 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameterLoginTop:
         keyname: login.text.top
         category: pages.login
-        value: ''
+        value: 'Je suis un texte'
         position: 250
         type: 1
     SiteParameterLoginBottom:
         keyname: login.text.bottom
         category: pages.login
-        value: ''
+        value: 'Et moi aussi'
         position: 251
         type: 1
     SiteParameterSigninTop:
         keyname: signin.text.top
         category: pages.registration
-        value: ''
+        value: 'Allez viens'
         position: 252
         type: 1
     SiteParameterSignBottom:
