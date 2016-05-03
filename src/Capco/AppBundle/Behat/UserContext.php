@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Entity\EventRegistration;
-use PHPUnit_Framework_Assert as PHPUnit;
 
 class UserContext extends DefaultContext
 {
@@ -108,44 +107,6 @@ class UserContext extends DefaultContext
     public function iShouldNotBeAskedToConfirmMyEmail()
     {
         $this->assertSession()->elementNotExists('css', '#alert-email-not-confirmed');
-    }
-
-    /**
-     * @Then :username phone number should be :phone
-     */
-    public function phoneNumberShouldBe($username, $phone)
-    {
-        $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
-        PHPUnit::assertSame($user->getPhone(), $phone);
-    }
-
-    /**
-     * @Then :username should not be sms confirmed
-     */
-    public function smsConfirmedShouldBeFalse($username)
-    {
-        $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
-        PHPUnit::assertFalse($user->isSmsConfirmed());
-    }
-
-    /**
-     * @Then :username should have an sms code to confirm
-     */
-    public function shouldHaveAnSmsCodeToConfirm($username)
-    {
-        $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
-        PHPUnit::assertNotNull($user->getSmsConfirmationCode());
-        PHPUnit::assertTrue(is_int($user->getSmsConfirmationCode()));
-        PHPUnit::assertEquals(strlen((string)$user->getSmsConfirmationCode()), 6);
-    }
-
-    /**
-     * @Then :username should be sms confirmed
-     */
-    public function shouldBeSmsConfirmed($username)
-    {
-        $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
-        PHPUnit::assertTrue($user->isSmsConfirmed());
     }
 
     /**

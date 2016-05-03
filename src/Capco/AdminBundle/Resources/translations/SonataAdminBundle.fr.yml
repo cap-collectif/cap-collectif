@@ -81,11 +81,6 @@ admin.label.settings.modules: Fonctionnalités
 admin.label.settings.notifications: Notifications
 admin.label.settings.shield_mode: Mode bouclier
 
-step:
-  verification:
-    none: Non
-    sms: Oui, par SMS
-
 # Messages
 admin:
   help:
@@ -541,8 +536,6 @@ admin:
       name: Nom
       color: Couleur
       position: Position
-    step:
-      verification: Demander la vérification des comptes
     recent_contributions:
       actions: Actions
       author: Auteur
@@ -766,7 +759,6 @@ capco:
     versions: Modifications
     votes_evolution: "Graphe d'évolution des votes"
     zipcode_at_register: Demander le code postal
-    sms_confirmation: Vérification des comptes par SMS
 
 action_enable: Activer
 action_disable: Désactiver
