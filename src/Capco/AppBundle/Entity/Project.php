@@ -777,6 +777,21 @@ class Project
     }
 
     /**
+     * @return int
+     */
+    public function getTotalRepliesCount()
+    {
+        $count = 0;
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isQuestionnaireStep()) {
+                $count += ($step->getStep()->getRepliesCount());
+            }
+        }
+
+        return $count;
+    }
+
+    /**
      * @return mixed|null
      */
     public function getFirstStep()
