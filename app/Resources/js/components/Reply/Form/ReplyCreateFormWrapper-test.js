@@ -30,7 +30,7 @@ describe('<ReplyCreateFormWrapper />', () => {
     const alert = wrapper.find('Alert');
     expect(alert).to.have.length(1);
     expect(alert.prop('bsStyle')).to.equal('warning');
-    expect(alert.childAt(0).html()).to.equal('<strong>Vous devez être inscrit et connecté pour répondre à ce questionnaire.</strong>');
+    expect(alert.childAt(0).html()).to.equal('<strong>Vous devez être connecté pour répondre à ce questionnaire.</strong>');
     const form = wrapper.find('ReplyCreateForm');
     expect(form).to.have.length(1);
     expect(form.prop('form')).to.equal(formContribuable);

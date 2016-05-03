@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
+use Capco\AdminBundle\Form\QuestionValidationRuleType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -57,6 +58,11 @@ class QuestionAdmin extends Admin
                     'edit' => 'inline',
                     'inline' => 'table',
                     'sortable' => 'position',
+                ])
+                ->add('validationRule', QuestionValidationRuleType::class, [
+                    'required' => false,
+                    'label' => 'admin.fields.question.validation_rule',
+                    'translation_domain' => 'SonataAdminBundle',
                 ])
                 ->add('randomQuestionChoices', null, [
                     'label' => 'admin.fields.question.random_question_choices',

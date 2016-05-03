@@ -107,10 +107,6 @@ class RepliesController extends FOSRestController
             }
         }
 
-        if ($questionnaire->isPhoneConfirmationRequired() && !$user->isPhoneConfirmed()) {
-            throw new BadRequestHttpException('You must confirm your account via sms to post a reply.');
-        }
-
         $reply = (new Reply())
             ->setAuthor($user)
             ->setQuestionnaire($questionnaire)

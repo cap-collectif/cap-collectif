@@ -21,8 +21,6 @@ global:
   helper:
     typo: Vouliez-vous dire
 
-sms:
-  content: "%sitename% : Votre code de confirmation es %code%."
 #Errors
 error:
   404:
@@ -863,15 +861,13 @@ user:
       username: Nom
       media: Image
       email: Adresse électronique
-      email_help: Votre adresse électronique n'apparaitra jamais sur votre profil public.
       birthday: Date de naissance
       address: Adresse
       address2: Complément d'adresse
       zip_code: Code postal
       city: Ville
       neighborhood: Quartier
-      account: Profil public
-      mobile: Mobile
+      account: Compte
       password: Mot de passe
       submit: Enregistrer les modifications
       gender: Genre
@@ -1243,6 +1239,12 @@ search:
       source: Source
       theme: Thème
       user: Membre
+questionnaire:
+  validation:
+    type:
+      equal: Sélectionner exactement
+      max: Sélectionner au maximum
+      min: Sélectionner au minium
 
 'User account is disabled.': Ce compte n'est pas activé.
 
