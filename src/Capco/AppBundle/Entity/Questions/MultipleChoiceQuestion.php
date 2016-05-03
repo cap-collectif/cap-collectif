@@ -42,7 +42,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
 
     /**
      * @var bool
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="has_validation_rule")
      */
     protected $hasValidationRule = false;
 
