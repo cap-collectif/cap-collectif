@@ -5,7 +5,6 @@ const FacebookLoginButton = React.createClass({
   displayName: 'FacebookLoginButton',
   propTypes: {
     features: PropTypes.object.isRequired,
-    prefix: PropTypes.string.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -13,14 +12,13 @@ const FacebookLoginButton = React.createClass({
     if (!this.props.features.login_facebook) {
       return null;
     }
-    const label = this.props.prefix + 'facebook';
     return (
       <a
        href={'/login/facebook?_destination=' + window.location.href}
-       title={this.getIntlMessage(label)}
+       title={this.getIntlMessage('global.login_social.facebook')}
        className="btn login__social-btn login__social-btn--facebook"
       >
-        { this.getIntlMessage(label) }
+        { this.getIntlMessage('global.login_social.facebook') }
       </a>
     );
   },

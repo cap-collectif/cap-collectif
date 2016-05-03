@@ -7,8 +7,15 @@ import RegistrationModal from './RegistrationModal';
 export const RegistrationButton = React.createClass({
   propTypes: {
     features: PropTypes.object.isRequired,
+    style: PropTypes.object,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      style: {},
+    };
+  },
 
   getInitialState() {
     return {
@@ -29,7 +36,7 @@ export const RegistrationButton = React.createClass({
       return null;
     }
     return (
-      <span>
+      <span style={this.props.style}>
         <Button
           onClick={this.handleClick}
           bsStyle="primary"

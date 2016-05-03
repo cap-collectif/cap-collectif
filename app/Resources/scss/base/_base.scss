@@ -649,21 +649,3 @@ svg.avatar {
     color: $color;
   }
 }
-
-.smart-fade {
-  position: relative;
-  line-height: 1.2em;
-  height: 3.6em;
-  overflow: hidden;
-
-  &:after {
-    content: "";
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 50%;
-    height: 1.2em;
-    background: linear-gradient(to right, transparent, white 50%);
-  }
-}

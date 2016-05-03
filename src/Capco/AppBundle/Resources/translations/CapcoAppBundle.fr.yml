@@ -21,6 +21,8 @@ global:
   helper:
     typo: Vouliez-vous dire
 
+sms:
+  content: "%sitename% : Votre code de confirmation es %code%."
 #Errors
 error:
   404:
@@ -377,7 +379,6 @@ project:
       read_less: Replier
       read_more: Lire la suite
       remaining_days: "]-Inf, 1] jour restant | ]1,Inf[ jours restants"
-      repliesCount: "]-Inf, 1] %count% réponses | ]1,Inf[ %count% réponses"
       step:
         title: Étapes
       sourcesCount: "]-Inf, 1] %count% source | ]1,Inf[ %count% sources"
@@ -861,13 +862,15 @@ user:
       username: Nom
       media: Image
       email: Adresse électronique
+      email_help: Votre adresse électronique n'apparaitra jamais sur votre profil public.
       birthday: Date de naissance
       address: Adresse
       address2: Complément d'adresse
       zip_code: Code postal
       city: Ville
       neighborhood: Quartier
-      account: Compte
+      account: Profil public
+      mobile: Mobile
       password: Mot de passe
       submit: Enregistrer les modifications
       gender: Genre

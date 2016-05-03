@@ -18,6 +18,8 @@ form:
   label_vip: VIP
   label_zip_code: Code postal
   label_expires_at: Date d'expiration
+  label_phone_confirmed: Compte vérifié par SMS
+
 
 gender:
   female: Femme
