@@ -10,9 +10,6 @@
             <li role="presentation" class="{% if app.request.attributes.get('_route') == 'capco_profile_edit' %}active{% endif %} ">
                 <a href="{{ path('capco_profile_edit') }}">{{ 'user.profile.edit.account' | trans({}, 'CapcoAppBundle') }}</a>
             </li>
-            <li role="presentation" class="{% if app.request.attributes.get('_route') == 'capco_profile_edit_mobile' %}active{% endif %} ">
-                <a href="{{ path('capco_profile_edit_mobile') }}">{{ 'user.profile.edit.mobile' | trans({}, 'CapcoAppBundle') }}</a>
-            </li>
             <li role="presentation" class="{% if app.request.attributes.get('_route') == 'capco_change_password' %}active{% endif %} ">
                 <a href="{{ path('capco_change_password') }}">{{ 'user.profile.edit.password' | trans({}, 'CapcoAppBundle') }}</a>
             </li>

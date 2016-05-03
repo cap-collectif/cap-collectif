@@ -32,6 +32,22 @@ Feature: Questionnaire
     And I submit my reply
     Then I should see "Ce champ est obligatoire."
 
+  @javascript @security
+  Scenario: Logged in user wants to add a reply to a questionnaire with not enough choices for required question
+    Given I am logged in as user
+    And I go to a questionnaire step
+    When I fill the questionnaire form with not enough choices for required question
+    And I submit my reply
+    Then I should see "Vous devez sélectionner exactement 3 réponses."
+
+  @javascript @security
+  Scenario: Logged in user wants to add a reply to a questionnaire with not enough choices for optional question
+    Given I am logged in as user
+    And I go to a questionnaire step
+    When I fill the questionnaire form with not enough choices for optional question
+    And I submit my reply
+    Then I should see "Vous devez sélectionner au moins 2 réponses."
+
   @javascript @database
   Scenario: Logged in user wants to answer with a ranking
     Given I am logged in as user
@@ -42,7 +58,7 @@ Feature: Questionnaire
   @javascript @security
   Scenario: Anonymous user wants to add a reply to a questionnaire
     Given I go to a questionnaire step
-    Then I should see "Vous devez être inscrit et connecté pour répondre à ce questionnaire."
+    Then I should see "Vous devez être connecté pour répondre à ce questionnaire."
     And the questionnaire form should be disabled
 
   @javascript @security

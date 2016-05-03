@@ -79,12 +79,37 @@ trait QuestionnaireStepsTrait
         $this->selectOption('reply-8', 'Pas assez fort (Mon sonotone est en panne)');
     }
 
+    /**
+     * I fill the questionnaire form with not enough choices for required question.
+     *
+     * @When I fill the questionnaire form with not enough choices for required question
+     */
+    public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
+    {
+        $this->fillField('reply-2', 'Je pense que c\'est la ville parfaite pour organiser les JO');
+        $this->checkOption('reply-6_choice-1');
+        $this->checkOption('reply-6_choice-3');
+    }
+
+    /**
+     * I fill the questionnaire form with not enough choices for optional question.
+     *
+     * @When I fill the questionnaire form with not enough choices for optional question
+     */
+    public function iFillTheQuestionnaireFormWithNotEnoughChoicesForOptionalQuestion()
+    {
+        $this->fillQuestionnaireForm();
+        $this->iClickOneRankingChoiceRightArrow();
+
+    }
+
     protected function fillQuestionnaireForm($edition = false)
     {
         $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
         if (!$edition) {
             $this->fillField('reply-2', 'Je pense que c\'est la ville parfaite pour organiser les JO');
             $this->checkOption('reply-6_choice-1');
+            $this->checkOption('reply-6_choice-2');
             $this->checkOption('reply-6_choice-3');
         } else {
             $this->fillField('reply-2', 'En fait c\'est nul, je ne veux pas des JO à Paris');

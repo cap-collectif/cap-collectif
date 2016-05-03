@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Questions;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule;
 
 /**
  * MultipleChoiceQuestion.
@@ -32,6 +33,18 @@ class MultipleChoiceQuestion extends AbstractQuestion
      * @ORM\Column(name="other_allowed", type="boolean", nullable=false)
      */
     protected $otherAllowed = false;
+
+    /**
+     * @var MultipleChoiceQuestionValidationRule
+     * @ORM\Embedded(class="MultipleChoiceQuestionValidationRule", columnPrefix="validation_")
+     */
+    protected $validationRule;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", name="has_validation_rule")
+     */
+    protected $hasValidationRule = false;
 
     public static $questionTypesLabels = [
         self::QUESTION_TYPE_RADIO => 'question.types.radio',
@@ -156,6 +169,29 @@ class MultipleChoiceQuestion extends AbstractQuestion
     public function setOtherAllowed($otherAllowed)
     {
         $this->otherAllowed = $otherAllowed;
+
+        return $this;
+    }
+
+    /**
+     * @return MultipleChoiceQuestionValidationRule
+     */
+    public function getValidationRule()
+    {
+        return $this->hasValidationRule ? $this->validationRule : null;
+    }
+
+    /**
+     * @param MultipleChoiceQuestionValidationRule $validationRule
+     * @return $this
+     */
+    public function setValidationRule(MultipleChoiceQuestionValidationRule $validationRule = null)
+    {
+        if (!$validationRule->getType() || !$validationRule->getNumber()) {
+            $validationRule = null;
+        }
+        $this->validationRule = $validationRule;
+        $this->hasValidationRule = $validationRule ? true : false;
 
         return $this;
     }
