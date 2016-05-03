@@ -187,6 +187,9 @@ class MultipleChoiceQuestion extends AbstractQuestion
      */
     public function setValidationRule(MultipleChoiceQuestionValidationRule $validationRule = null)
     {
+        if (!$validationRule->getType() || !$validationRule->getNumber()) {
+            $validationRule = null;
+        }
         $this->validationRule = $validationRule;
         $this->hasValidationRule = $validationRule ? true : false;
 

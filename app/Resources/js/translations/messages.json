@@ -519,6 +519,9 @@
   "reply": {
     "add": "Répondre au questionnaire",
     "constraints": {
+      "choices_equal": "Vous devez sélectionner exactement {nb} réponses.",
+      "choices_max": "Vous devez sélectionner au maximum {nb} réponses.",
+      "choices_min": "Vous devez sélectionner au moins {nb} réponses.",
       "field_mandatory": "Ce champ est obligatoire."
     },
     "count": "{num, plural, =0{0 réponse} one{# réponse} other{# réponses}}",

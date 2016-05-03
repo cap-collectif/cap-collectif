@@ -189,6 +189,33 @@ Feature: Reply Restful Api
     """
 
   @security @elasticsearch
+  Scenario: Logged in API client wants to add a reply with not enough choices for field with validation rules
+    Given I am logged in to api as user
+    When I send a POST request to "/api/questionnaires/1/replies" with json:
+    """
+    {
+      "responses": [
+        {
+          "question": 6,
+          "value": [2]
+        }
+      ]
+    }
+    """
+    Then the JSON response status code should be 400
+    And the JSON response should match:
+    """
+    {
+      "code": 400,
+      "message": "Validation Failed",
+      "errors": {
+        "errors": ["Vous devez sélectionner au moins 3 réponses."],
+        "children": @...@
+      }
+    }
+    """
+
+  @security @elasticsearch
   Scenario: Logged in API client wants to add a reply to closed questionnaire step
     Given I am logged in to api as user
     And I send a POST request to "/api/questionnaires/3/replies" with json:

@@ -59,11 +59,6 @@ class QuestionAdmin extends Admin
                     'inline' => 'table',
                     'sortable' => 'position',
                 ])
-                ->add('validationRule', QuestionValidationRuleType::class, [
-                    'required' => false,
-                    'label' => 'admin.fields.question.validation_rule',
-                    'translation_domain' => 'SonataAdminBundle',
-                ])
                 ->add('randomQuestionChoices', null, [
                     'label' => 'admin.fields.question.random_question_choices',
                     'required' => false,
@@ -74,9 +69,15 @@ class QuestionAdmin extends Admin
                     'label_attr' => ['class' => 'hidden'],
                     'attr' => ['class' => 'hidden'],
                 ])
+                ->end()
+                ->with('admin.fields.question.group_validation')
+                ->add('validationRule', QuestionValidationRuleType::class, [
+                    'required' => false,
+                    'label' => 'admin.fields.question.validation_rule',
+                    'translation_domain' => 'SonataAdminBundle',
+                ])
+                ->end()
             ;
-
-            $formMapper->end();
         }
     }
 

@@ -526,6 +526,7 @@ admin:
       other_allowed: Champ "Autre" autorisé
       group_content: Question
       group_question_choices: Choix de réponse
+      group_validation: Règles de validation
       validation_rule: Nombre de réponses acceptées
     question_choice:
       title: Titre
