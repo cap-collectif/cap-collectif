@@ -13,7 +13,7 @@ const ProjectPreviewThemes = React.createClass({
     const { project, features } = this.props;
     if (features.themes && project.themes.length > 0) {
       return (
-        <span className="excerpt">
+        <div className="excerpt project__preview__themes smart-fade small">
           {
             project.themes.map((theme, index) => {
               if (theme.enabled) {
@@ -35,7 +35,7 @@ const ProjectPreviewThemes = React.createClass({
               }
             })
           }
-        </span>
+        </div>
       );
     }
     return null;

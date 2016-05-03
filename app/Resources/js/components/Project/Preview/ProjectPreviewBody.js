@@ -15,11 +15,11 @@ const ProjectPreviewBody = React.createClass({
       <div className="box project__preview__body">
         <div>
           <ProjectPreviewThemes project={project} />
-          <h2 className="h4 project__preview__title">
-            <a href={project._links.show}>
-              {project.title}
-            </a>
-          </h2>
+            <h2 className="h4 project__preview__title smart-fade">
+              <a href={project._links.show}>
+                {project.title}
+              </a>
+            </h2>
         </div>
         <ProjectPreviewProgressBar project={project} />
       </div>

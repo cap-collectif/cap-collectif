@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Alert } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
@@ -7,11 +7,12 @@ import RegistrationForm from './RegistrationForm';
 import { LoginSocialButtons } from '../Login/LoginSocialButtons';
 import { connect } from 'react-redux';
 
-const RegistrationModal = React.createClass({
+export const RegistrationModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     features: PropTypes.object.isRequired,
+    parameters: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -36,7 +37,9 @@ const RegistrationModal = React.createClass({
 
   render() {
     const { isSubmitting } = this.state;
-    const { onClose, show } = this.props;
+    const { onClose, show, parameters } = this.props;
+    const textTop = parameters['signin.text.top'];
+    const textBottom = parameters['signin.text.bottom'];
     return (
       <Modal
         animation={false}
@@ -51,16 +54,31 @@ const RegistrationModal = React.createClass({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <LoginSocialButtons features={{
-            login_facebook: this.props.features.login_facebook,
-            login_gplus: this.props.features.login_gplus,
-          }} />
+          {
+            textTop &&
+            <Alert bsStyle="info" className="text-center">
+              {textTop}
+            </Alert>
+          }
+          <LoginSocialButtons
+            features={{
+              login_facebook: this.props.features.login_facebook,
+              login_gplus: this.props.features.login_gplus,
+            }}
+            prefix="registration."
+          />
           <RegistrationForm
             isSubmitting={isSubmitting}
             onSubmitFailure={this.stopSubmit}
             onValidationFailure={this.stopSubmit}
             onSubmitSuccess={this.handleSubmitSuccess}
           />
+          {
+            textBottom &&
+            <div className="text-center small excerpt" style={{ marginTop: '15px' }}>
+              {textBottom}
+            </div>
+          }
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
@@ -80,6 +98,7 @@ const RegistrationModal = React.createClass({
 const mapStateToProps = (state) => {
   return {
     features: state.features,
+    parameters: state.parameters,
   };
 };
 
