@@ -15,6 +15,7 @@ Feature: Questionnaire Restful Api
       "multipleRepliesAllowed" : @boolean@,
       "isModifyAllowed": @boolean@,
       "anonymousAllowed": @boolean@,
+      "smsConfirmationRequired": @boolean@,
       "fields": [
         {
           "id": @integer@,

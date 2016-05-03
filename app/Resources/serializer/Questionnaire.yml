@@ -37,3 +37,7 @@ Capco\AppBundle\Entity\Questionnaire:
       serialized_name: fields
       type: array
       groups: [Questionnaires, Questions]
+    isSmsConfirmationRequired:
+      serialized_name: smsConfirmationRequired
+      type: boolean
+      groups: [Questionnaires]

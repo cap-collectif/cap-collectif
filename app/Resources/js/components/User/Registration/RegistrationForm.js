@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import mailcheck from 'mailcheck';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -14,7 +14,6 @@ export const RegistrationForm = React.createClass({
   propTypes: {
     features: PropTypes.object.isRequired,
     user_types: PropTypes.array.isRequired,
-    parameters: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     onValidationFailure: PropTypes.func,
     onSubmitSuccess: PropTypes.func,
@@ -147,16 +146,7 @@ export const RegistrationForm = React.createClass({
   },
 
   render() {
-    const { features, user_types, parameters } = this.props;
-    const cguName = parameters['signin.cgu.name'];
-    const cguLink = parameters['signin.cgu.link'];
-    const cguLabel = cguName && cguLink
-      ? <FormattedHTMLMessage
-        message={this.getIntlMessage('registration.charte')}
-        link={<a href={cguLink}>{cguName}</a>}
-      />
-      : null
-    ;
+    const { features, user_types } = this.props;
     return (
       <form id="registration-form">
         {
@@ -222,17 +212,14 @@ export const RegistrationForm = React.createClass({
               errors={this.renderFormErrors('zipcode')}
             />
         }
-        {
-          cguLabel &&
-            <Input
-              id="_charte"
-              type="checkbox"
-              valueLink={this.linkState('form.charte')}
-              label={cguLabel}
-              groupClassName={this.getGroupStyle('charte')}
-              errors={this.renderFormErrors('charte')}
-            />
-        }
+        <Input
+          id="_charte"
+          type="checkbox"
+          valueLink={this.linkState('form.charte')}
+          label={this.getIntlMessage('registration.charte')}
+          groupClassName={this.getGroupStyle('charte')}
+          errors={this.renderFormErrors('charte')}
+        />
         <div className={this.getGroupStyle('captcha')}>
           <ReCAPTCHA
             style={{ transform: 'scale(0.85)', transformOrigin: '0 0' }}
@@ -251,7 +238,6 @@ const mapStateToProps = (state) => {
   return {
     features: state.features,
     user_types: state.user_types,
-    parameters: state.parameters,
   };
 };
 

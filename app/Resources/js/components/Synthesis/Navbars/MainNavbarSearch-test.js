@@ -4,7 +4,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import MainNavbarSearch from './MainNavbarSearch';
-import IntlData from '../../../translations/FR';
+import IntlData from '../../../translations/Synthesis/FR';
 
 describe('<MainNavbarSearch />', () => {
   const context = { router: {} };

@@ -101,6 +101,34 @@ Feature: Reply Restful Api
     }
     """
 
+  @security @elasticsearch @test
+  Scenario: Logged in API client wants to add a reply
+    Given I am logged in to api as user_with_phone_not_sms_confirmed
+    When I send a POST request to "/api/questionnaires/1/replies" with json:
+    """
+    {
+      "responses": [
+        {
+          "question": 2,
+          "value": "Je pense que c'est la ville parfaite pour organiser les JO"
+        },
+        {
+          "question": 6,
+          "value": [2, 3]
+        }
+      ]
+    }
+    """
+    Then the JSON response status code should be 400
+    And the JSON response should match:
+    """
+    {
+      "code": 400,
+      "message": "You must confirm your accoun by sms to post a reply.",
+      "errors": null
+    }
+    """
+
   @database @elasticsearch
   Scenario: Logged in API client wants to add a reply
     Given I am logged in to api as user

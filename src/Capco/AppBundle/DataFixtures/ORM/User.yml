@@ -55,6 +55,8 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_ADMIN'
         vip: true
         confirmationToken: ~
+        smsConfirmed: true
+        phone: '+33675492871'
 
     user5:
         username: user
@@ -68,6 +70,8 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_USER'
         confirmationToken: ~
+        smsConfirmed: true
+        phone: '+33135492871'
 
     user_drupal:
         __construct: ['drupal']
@@ -220,3 +224,51 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_USER'
         Media: null
         confirmationToken: wxcvbn
+
+    user_without_phone:
+        username: user_without_phone
+        firstname: user_without_phone
+        lastname: user_without_phone
+        email: user_without_phone@test.com
+        enabled: true
+        expired: false
+        expiresAt: ~
+        userType: @UserType1
+        plainPassword: user_without_phone
+        roles:
+         - 'ROLE_USER'
+        Media: null
+        confirmationToken: ~
+
+    user_with_phone_not_sms_confirmed:
+        username: user_with_phone_not_sms_confirmed
+        firstname: user_with_phone_not_sms_confirmed
+        lastname: user_with_phone_not_sms_confirmed
+        email: user_with_phone_not_sms_confirmed@test.com
+        enabled: true
+        expired: false
+        expiresAt: ~
+        userType: @UserType1
+        plainPassword: user_with_phone_not_sms_confirmed
+        roles:
+         - 'ROLE_USER'
+        Media: null
+        confirmationToken: ~
+        phone: '+33628353289'
+
+    user_with_code_not_sms_confirmed:
+        username: user_with_code_not_sms_confirmed
+        firstname: user_with_code_not_sms_confirmed
+        lastname: user_with_code_not_sms_confirmed
+        email: user_with_code_not_sms_confirmed@test.com
+        enabled: true
+        expired: false
+        expiresAt: ~
+        userType: @UserType1
+        plainPassword: user_with_code_not_sms_confirmed
+        roles:
+         - 'ROLE_USER'
+        Media: null
+        confirmationToken: ~
+        phone: '+33628232323'
+        smsConfirmationCode: 123456

@@ -113,6 +113,10 @@
         <field name="vip" column="vip" type="boolean" />
         <field name="emailConfirmationSentAt" column="email_confirmation_sent_at" type="datetime" nullable="true" />
 
+        <field name="smsConfirmationCode" column="sms_confirmation_code" type="integer" nullable="true" />
+        <field name="smsConfirmationSentAt" column="sms_confirmation_sent_at" type="datetime" nullable="true" />
+        <field name="smsConfirmed" column="sms_confirmed" type="boolean" nullable="false" />
+
     </entity>
 
 </doctrine-mapping>
