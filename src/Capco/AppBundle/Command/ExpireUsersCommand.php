@@ -21,17 +21,16 @@ class ExpireUsersCommand extends ContainerAwareCommand
         $container = $this->getApplication()->getKernel()->getContainer();
         $em = $container->get('doctrine.orm.entity_manager');
         $notifier = $container->get('capco.notify_manager');
-        $manager = $container->get('capco.contribution.manager');
 
         $users = $em->getRepository('CapcoUserBundle:User')
                     ->findUsersThatJustExpired();
 
         foreach ($users as $user) {
-          $contributionDeleted = $manager->depublishContributions($user);
-          $user->setExpired(true);
-          $user->setExpiresAt(null);
-          $em->flush();
-          $notifier->sendExpiredUserEmail($user, $contributionDeleted);
+            $contributionDeleted = $container->get('capco.contribution.manager')->depublishContributions($user);
+            $user->setExpired(true);
+            $user->setExpiresAt(null);
+            $em->flush();
+            $notifier->sendExpiredUserEmail($user, $contributionDeleted);
         }
 
         $output->writeln(count($users).' user(s) expired.');

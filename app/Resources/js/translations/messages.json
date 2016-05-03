@@ -143,7 +143,6 @@
     "constraints": {
       "notBlank": "Cette valeur ne doit pas \u00eatre vide."
     },
-    "continue": "Continuer",
     "content": "Contenu",
     "counters": {
       "contributions": "{num, plural, =0{contribution} one{contribution} other{contributions}}",
@@ -377,34 +376,6 @@
       "sending": "Envoi en cours...",
       "update": "Mettre à jour l'adresse email",
       "resend": "Renvoyer la confirmation"
-    }
-  },
-  "phone": {
-    "confirm": {
-      "constraints": {
-        "code": "Le code est composé d'exactemment 6 chiffres."
-      },
-      "infos": "<strong>Ajouter votre numéro de téléphone</strong><br /> Un code de vérification sera envoyé à ce numéro.",
-      "sent": "Nous vous avons envoyé un code au <strong>{phone}</strong>. Entrez-le ci-dessous afin de vérifier votre numéro.",
-      "ask_new": "Demander un nouveau code de validation",
-      "check_your_phone": "Consultez votre téléphone",
-      "phone": "Mobile",
-      "code_invalid": "Le code semble erroné, veuillez réessayer.",
-      "validate": "Valider le numéro",
-      "alert": {
-        "received": "Code de confirmation envoyé.",
-        "wait_for_new": "Merci de patienter 1 minute avant de demander un nouveau code."
-      }
-    },
-    "please_verify": "Veuillez vérifier votre compte par SMS pour participer.",
-    "check": "Vérifier mon compte"
-  },
-  "profile": {
-    "constraints": {
-      "phone": {
-        "already_used": "Ce numéro est déjà utilisé sur un autre compte",
-        "invalid": "Le numéro renseigné semble incorrect"
-      }
     }
   },
   "project": {
@@ -790,7 +761,7 @@
     "search": "Rechercher",
     "admin": "Administration",
     "profile": "Mon profil",
-    "user_settings": "Paramètres",
+    "user_settings": "Mes préférences",
     "homepage": "Accueil",
     "skip_links": {
       "menu": "Aller au menu",

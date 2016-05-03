@@ -50,11 +50,6 @@ services:
     tags:
       - { name: form.type, alias: argument }
 
-  capco.form.profile:
-      class: Capco\UserBundle\Form\Type\ApiProfileFormType
-      tags:
-        - { name: form.type, alias: api_user_profile }
-
   capco.form.registration:
       class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
       arguments: [@capco.toggle.manager]
