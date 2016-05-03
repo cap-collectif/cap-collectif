@@ -88,8 +88,6 @@ class AppKernel extends Kernel
 
             // Server side Js rendering
             new Limenius\ReactBundle\LimeniusReactBundle(),
-
-            new Misd\PhoneNumberBundle\MisdPhoneNumberBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

@@ -2,7 +2,6 @@ parameters:
   capco.twig.comment.class: Capco\AppBundle\Twig\CommentExtension
   capco.twig.default_avatar.class: Capco\AppBundle\Twig\DefaultAvatarExtension
   capco.twig.event_helper.class: Capco\AppBundle\Twig\EventExtension
-  capco.twig.feature_toggle.class: Capco\AppBundle\Twig\FeatureToggleExtension
   capco.twig.idea_helper.class: Capco\AppBundle\Twig\IdeaExtension
   capco.twig.menu_url.class: Capco\AppBundle\Twig\MenuLinkExtension
   capco.twig.site_color.class: Capco\AppBundle\Twig\SiteColorExtension
@@ -48,9 +47,9 @@ services:
     tags:
       - { name: twig.extension }
 
-  capco.twig.feature_toggle:
-    class:     %capco.twig.feature_toggle.class%
-    arguments: [@capco.toggle.manager]
+  capco.twig.parameters:
+    class:     Capco\AppBundle\Twig\ParametersExtension
+    arguments: [@capco.toggle.manager, @capco.site_parameter.resolver]
     tags:
       - { name: twig.extension }
 

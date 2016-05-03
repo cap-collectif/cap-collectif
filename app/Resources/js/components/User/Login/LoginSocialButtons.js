@@ -7,8 +7,15 @@ import GoogleLoginButton from './GoogleLoginButton';
 export const LoginSocialButtons = React.createClass({
   propTypes: {
     features: PropTypes.object.isRequired,
+    prefix: PropTypes.string,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      prefix: 'login.',
+    };
+  },
 
   render() {
     const { features } = this.props;
@@ -17,10 +24,10 @@ export const LoginSocialButtons = React.createClass({
     }
     return (
       <div>
-        <FacebookLoginButton features={features} />
-        <GoogleLoginButton features={features} />
+        <FacebookLoginButton {...this.props} />
+        <GoogleLoginButton {...this.props} />
         <p className="p--centered">
-          <span>OU</span>
+          <span>{this.getIntlMessage('login.or')}</span>
         </p>
       </div>
     );

@@ -391,11 +391,6 @@ class Questionnaire
         return $this;
     }
 
-    public function isSmsConfirmationRequired()
-    {
-        return $this->step->isSmsConfirmationRequired();
-    }
-
     /**
      * @return bool
      */

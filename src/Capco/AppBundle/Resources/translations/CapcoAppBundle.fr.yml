@@ -860,15 +860,13 @@ user:
       username: Nom
       media: Image
       email: Adresse électronique
-      email_help: Votre adresse électronique n'apparaitra jamais sur votre profil public.
       birthday: Date de naissance
       address: Adresse
       address2: Complément d'adresse
       zip_code: Code postal
       city: Ville
       neighborhood: Quartier
-      account: Profil public
-      mobile: Mobile
+      account: Compte
       password: Mot de passe
       submit: Enregistrer les modifications
       gender: Genre
