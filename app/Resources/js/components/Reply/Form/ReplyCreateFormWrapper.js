@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import ReplyCreateForm from './ReplyCreateForm';
-import { Alert } from 'react-bootstrap';
 import LoginButton from '../../User/Login/LoginButton';
 import { connect } from 'react-redux';
+import { Alert, Button } from 'react-bootstrap';
+import PhoneModal from '../../User/Phone/PhoneModal';
 
 export const ReplyCreateFormWrapper = React.createClass({
   propTypes: {
@@ -13,17 +14,33 @@ export const ReplyCreateFormWrapper = React.createClass({
   },
   mixins: [IntlMixin],
 
+  getInitialState() {
+    return {
+      showPhoneModal: false,
+    };
+  },
+
+  openPhoneModal() {
+    this.setState({ showPhoneModal: true });
+  },
+
+
+  closePhoneModal() {
+    this.setState({ showPhoneModal: false });
+  },
+
   formIsDisabled() {
-    const { form, userReplies } = this.props;
+    const { form, userReplies, user } = this.props;
     return (
       !form.contribuable
       || !this.props.user
+      || (form.smsConfirmationRequired && !user.isSmsConfirmed)
       || (userReplies.length > 0 && !form.multipleRepliesAllowed)
     );
   },
 
   render() {
-    const { form } = this.props;
+    const { form, user } = this.props;
     return (
       <div>
         {
@@ -39,7 +56,20 @@ export const ReplyCreateFormWrapper = React.createClass({
             </Alert>
             : null
         }
+        {
+          form.contribuable && user && !user.isSmsConfirmed &&
+          <Alert bsStyle="warning">
+            <strong>{ this.getIntlMessage('phone.please_verify') }</strong>
+            <span style={{ marginLeft: '10px' }}>
+              <Button onClick={this.openPhoneModal}>{ this.getIntlMessage('phone.check')}</Button>
+            </span>
+          </Alert>
+        }
         <ReplyCreateForm form={form} disabled={this.formIsDisabled()} />
+        <PhoneModal
+          show={this.state.showPhoneModal}
+          onClose={this.closePhoneModal}
+        />
       </div>
     );
   },
