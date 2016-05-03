@@ -89,7 +89,7 @@ const PhoneForm = React.createClass({
           valueLink={this.linkState('form.phone')}
           id="_phone"
           disabled={this.state.form.phone === this.props.initialValue}
-          label={'Numéro de téléphone'}
+          label={this.getIntlMessage('global.phone')}
           groupClassName={this.getGroupStyle('phone')}
           errors={this.renderFormErrors('phone')}
         />
