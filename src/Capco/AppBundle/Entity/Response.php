@@ -7,14 +7,12 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * Response.
  *
  * @ORM\Table(name="response")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ResponseRepository")
- * @CapcoAssert\HasRequiredNumberOfChoices()
  */
 class Response
 {

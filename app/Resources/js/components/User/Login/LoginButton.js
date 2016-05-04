@@ -7,6 +7,7 @@ const LoginButton = React.createClass({
   propTypes: {
     bsStyle: PropTypes.string,
     className: PropTypes.string,
+    style: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -14,6 +15,7 @@ const LoginButton = React.createClass({
     return {
       bsStyle: 'default',
       className: '',
+      style: {},
     };
   },
 
@@ -32,9 +34,9 @@ const LoginButton = React.createClass({
   },
 
   render() {
-    const { bsStyle, className } = this.props;
+    const { style, bsStyle, className } = this.props;
     return (
-      <span>
+      <span style={style}>
         <Button
           bsStyle={bsStyle}
           onClick={this.handleClick}

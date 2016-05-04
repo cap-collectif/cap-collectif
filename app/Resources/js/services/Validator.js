@@ -8,84 +8,75 @@ class Validator {
   getErrors() {
     const errors = [];
     Object.keys(this.rules).map((rule) => {
-      const message = {
-        message: this.rules[rule].message,
-        params: this.rules[rule].messageParams || [],
-      };
       switch (rule) {
         case 'min':
           if (!this.min(this.rules[rule].value)) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'minHtml':
           if (!this.minHtml(this.rules[rule].value)) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'max':
           if (!this.max(this.rules[rule].value)) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'isEqual':
           if (!this.isEqual(this.rules[rule].value)) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'notEqual':
           if (!this.notEqual(this.rules[rule].value)) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'isEmail':
           if (!this.isEmail()) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'isUrl':
           if (!this.isUrl()) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'notNull':
           if (!this.notNull()) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'notBlank':
           if (!this.notBlank()) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'notBlankHtml':
           if (!this.notBlankHtml()) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'notEmpty':
           if (!this.notEmpty()) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'isTrue':
           if (!this.isTrue()) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'minValue':
           if (!this.minValue(this.rules[rule].value)) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         case 'maxValue':
           if (!this.maxValue(this.rules[rule].value)) {
-            errors.push(message);
-          }
-          break;
-        case 'length':
-          if (!this.equalLength(this.rules[rule].value)) {
-            errors.push(message);
+            errors.push(this.rules[rule].message);
           }
           break;
         default:
@@ -151,10 +142,6 @@ class Validator {
 
   maxValue(value) {
     return !this.value || this.value <= value;
-  }
-
-  equalLength(value) {
-    return !this.value || this.value.length === value;
   }
 
 }

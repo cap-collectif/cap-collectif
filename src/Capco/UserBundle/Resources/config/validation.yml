@@ -1,6 +1,7 @@
 Capco\UserBundle\Entity\User:
   constraints:
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: email, message: already_used_email, groups: [registration, profile] }
+    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: phone, message: already_used_phone, groups: [registration, profile] }
   properties:
     username:
       - NotBlank: { message: username.blank, groups: [registration, profile] }
@@ -27,6 +28,8 @@ Capco\UserBundle\Entity\User:
       - Url: { groups: [profile] }
     zipCode:
       - Length: { min: 0, max: 10, minMessage: user.register.invalid_zip_code, maxMessage: user.register.invalid_zip_code, groups: [profile] }
+    phone:
+      - Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber: { groups: [registration, profile] }
 
 Capco\UserBundle\Entity\UserType:
   constraints:

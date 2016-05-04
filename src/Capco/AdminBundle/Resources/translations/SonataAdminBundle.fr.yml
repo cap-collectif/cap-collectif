@@ -81,6 +81,11 @@ admin.label.settings.modules: Fonctionnalités
 admin.label.settings.notifications: Notifications
 admin.label.settings.shield_mode: Mode bouclier
 
+step:
+  verification:
+    none: Non
+    sms: Oui, par SMS
+
 # Messages
 admin:
   help:
@@ -526,8 +531,6 @@ admin:
       other_allowed: Champ "Autre" autorisé
       group_content: Question
       group_question_choices: Choix de réponse
-      group_validation: Règles de validation
-      validation_rule: Nombre de réponses acceptées
     question_choice:
       title: Titre
       description: Description
@@ -538,6 +541,8 @@ admin:
       name: Nom
       color: Couleur
       position: Position
+    step:
+      verification: Demander la vérification des comptes
     recent_contributions:
       actions: Actions
       author: Auteur
@@ -679,9 +684,6 @@ admin:
       name: Type
       updated_at: Mise à jour
       created_at: Création
-    validation_rule:
-      number: Nombre
-      type: Règle de validation
     video:
       title: Titre
       is_enabled: Publié
@@ -764,6 +766,7 @@ capco:
     versions: Modifications
     votes_evolution: "Graphe d'évolution des votes"
     zipcode_at_register: Demander le code postal
+    phone_confirmation: Vérification des comptes par SMS
 
 action_enable: Activer
 action_disable: Désactiver
