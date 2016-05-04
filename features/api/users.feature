@@ -141,7 +141,21 @@ Feature: Users
       """
       Then the JSON response status code should be 201
 
-  @database @test
+  @security
+  Scenario: API client wants to update his phone
+    When I send a PUT request to "/api/users/me" with json:
+    """
+    {
+      "phone": "+33628353290"
+    }
+    """
+    Then the JSON response status code should be 401
+    Then the JSON response should match:
+    """
+    {"code":401,"message":"Invalid credentials"}
+    """
+
+  @database
   Scenario: API client wants to update his phone
     Given I am logged in to api as user
     When I send a PUT request to "/api/users/me" with json:
@@ -154,7 +168,7 @@ Feature: Users
     And "user" phone number should be "+33628353290"
     And "user" should not be sms confirmed
 
-    @security @test
+    @security
     Scenario: API client wants to update his phone
       Given I am logged in to api as user
       When I send a PUT request to "/api/users/me" with json:
