@@ -33,18 +33,17 @@ const Ranking = React.createClass({
   },
 
   handleRankingChange(ranking) {
-    const values = Array.from(ranking, item => item.label);
+    const values = [];
+    ranking.map(item => values.push(item.label));
     this.props.onChange(this.props.field, values);
   },
 
   render() {
     const { field, id, labelClassName, getGroupStyle, disabled } = this.props;
-
     const labelClasses = classNames({
       'control-label': true,
       [labelClassName]: true,
     });
-
     const optional = this.getIntlMessage('global.form.optional');
 
     return (

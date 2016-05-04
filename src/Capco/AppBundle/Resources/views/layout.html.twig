@@ -41,7 +41,6 @@
 
 <div id="app-wrapper">
   {{ redux_store('appStore', {
-    'baseUrl': '//' ~ app.request.host,
     'features': features_list(),
     'parameters': site_parameters_list(),
     'user': app.user

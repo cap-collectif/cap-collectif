@@ -41,7 +41,7 @@ services:
 
   capco.menu_item.resolver:
     class: %capco.menu_item.resolver.class%
-    arguments: [@capco.menu_item.repository, @capco.toggle.manager]
+    arguments: [@capco.menu_item.repository, @capco.toggle.manager, @router, @validator]
 
   capco.opinion_types.resolver:
       class: %capco.opinion_types.resolver.class%

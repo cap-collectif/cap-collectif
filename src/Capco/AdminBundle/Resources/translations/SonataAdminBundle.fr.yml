@@ -531,6 +531,8 @@ admin:
       other_allowed: Champ "Autre" autorisé
       group_content: Question
       group_question_choices: Choix de réponse
+      group_validation: Règles de validation
+      validation_rule: Nombre de réponses acceptées
     question_choice:
       title: Titre
       description: Description
@@ -683,6 +685,9 @@ admin:
       name: Type
       updated_at: Mise à jour
       created_at: Création
+    validation_rule:
+      number: Nombre
+      type: Règle de validation
     video:
       title: Titre
       is_enabled: Publié

@@ -26,13 +26,13 @@ const RankingArrows = React.createClass({
     return (
       <ButtonGroup className="ranking__item__arrows">
         {
-          Object.keys(arrowFunctions).filter(key => arrowFunctions[key] !== null).map((key) => {
+          Object.keys(arrowFunctions).map((key) => {
             return (
               <RankingArrow
                 key={key}
-                onClick={() => arrowFunctions[key](item)}
+                onClick={arrowFunctions[key] ? () => arrowFunctions[key](item) : null}
                 type={key}
-                disabled={disabled}
+                disabled={disabled || !arrowFunctions[key]}
               />
             );
           })

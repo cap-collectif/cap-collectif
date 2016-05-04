@@ -60,9 +60,7 @@ const ShowReplyModal = React.createClass({
                   <label>
                     {response.field.question}
                   </label>
-                  <p>
-                    <ResponseValue response={response} />
-                  </p>
+                  <ResponseValue response={response} />
                 </div>
               );
             })

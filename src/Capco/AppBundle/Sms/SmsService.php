@@ -26,9 +26,8 @@ class SmsService
         $user->setSmsConfirmationCode($code);
         $message = $this->translator->trans('sms.content', [
           '%code%' => $code,
-          '%sitename%' => $this->sitename
+          '%sitename%' => $this->sitename,
         ], 'CapcoAppBundle');
         $this->sender->send($this->number, $user->getPhone(), $message);
     }
-
 }
