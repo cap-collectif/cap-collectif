@@ -188,7 +188,8 @@
         },
         "pickBox": {
           "title": "Choix disponibles"
-        }
+        },
+        "select": "Sélectionner"
       }
     },
     "forgot_password": "Mot de passe oublié ?",
