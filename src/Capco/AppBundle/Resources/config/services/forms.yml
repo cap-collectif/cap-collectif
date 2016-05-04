@@ -24,13 +24,13 @@ services:
 
   capco.form.reply:
     class: Capco\AppBundle\Form\ReplyType
-    arguments: [@capco.form.transformer.entity_to_id, @capco.toggle.manager, @capco.abstract_question.repository]
+    arguments: [@capco.form.transformer.entity_to_id, @capco.toggle.manager]
     tags:
       - { name: form.type, alias: reply }
 
   capco.form.response:
     class: Capco\AppBundle\Form\ResponseType
-    arguments: [@capco.form.transformer.entity_to_id, @capco.abstract_question.repository]
+    arguments: [@capco.form.transformer.entity_to_id]
     tags:
       - { name: form.type, alias: response }
 

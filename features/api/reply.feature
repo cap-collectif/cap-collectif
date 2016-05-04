@@ -2,7 +2,7 @@
 Feature: Reply Restful Api
   As an API client
 
-  @parallel-scenario @elasticsearch
+  @elasticsearch
   Scenario: Anonymous API client wants to get one reply
     When I send a GET request to "/api/questionnaires/1/replies/1"
     Then the JSON response should match:
@@ -49,7 +49,7 @@ Feature: Reply Restful Api
     }
     """
 
-  @parallel-scenario @elasticsearch
+  @elasticsearch
   Scenario: Logged in API client wants to get his replies
     Given I am logged in to api as admin
     When I send a GET request to "/api/questionnaires/1/replies"
@@ -142,7 +142,9 @@ Feature: Reply Restful Api
         },
         {
           "question": 6,
-          "value": [2, 3]
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
         }
       ]
     }
@@ -162,7 +164,9 @@ Feature: Reply Restful Api
         },
         {
           "question": 6,
-          "value": [2, 3]
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
         }
       ],
       "private": true
@@ -182,7 +186,9 @@ Feature: Reply Restful Api
         },
         {
           "question": 6,
-          "value": [2, 3]
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
         }
       ]
     }
@@ -198,7 +204,9 @@ Feature: Reply Restful Api
       "responses": [
         {
           "question": 6,
-          "value": [2, 3]
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
         }
       ]
     }
@@ -217,6 +225,107 @@ Feature: Reply Restful Api
     """
 
   @security @elasticsearch
+  Scenario: Logged in API client wants to add a reply with not enough choices for required field with validation rules
+    Given I am logged in to api as user
+    When I send a POST request to "/api/questionnaires/1/replies" with json:
+    """
+    {
+      "responses": [
+        {
+          "question": 2,
+          "value": "Je pense que c'est la ville parfaite pour organiser les JO"
+        },
+        {
+          "question": 6,
+          "value": {
+            "labels": ["Athlétisme"]
+          }
+        }
+      ]
+    }
+    """
+    Then the JSON response status code should be 400
+    And the JSON response should match:
+    """
+    {
+      "code": 400,
+      "message": "Validation Failed",
+      "errors": {
+        "children": {
+          "responses": {
+            "children": [
+              @...@,
+              {
+                "children": {
+                  "value": {
+                    "errors": ["Vous devez sélectionner exactement 3 réponses."]
+                  },
+                  "question": []
+                }
+              }
+            ]
+          },
+          "private": []
+        }
+      }
+    }
+    """
+
+  @security @elasticsearch
+  Scenario: Logged in API client wants to add a reply with not enough choices for optional field with validation rules
+    Given I am logged in to api as user
+    When I send a POST request to "/api/questionnaires/1/replies" with json:
+    """
+    {
+      "responses": [
+        {
+          "question": 2,
+          "value": "Je pense que c'est la ville parfaite pour organiser les JO"
+        },
+        {
+          "question": 6,
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
+        },
+        {
+          "question": 9,
+          "value": {
+            "labels": ["Choix 1"]
+          }
+        }
+      ]
+    }
+    """
+    Then the JSON response status code should be 400
+    And the JSON response should match:
+    """
+    {
+      "code": 400,
+      "message": "Validation Failed",
+      "errors": {
+        "children": {
+          "responses": {
+            "children": [
+              @...@,
+              {
+                "children": {
+                  "value": {
+                    "errors": ["Vous devez sélectionner au moins 2 réponses."]
+                  },
+                  "question": []
+                }
+              },
+              @...@
+            ]
+          },
+          "private": []
+        }
+      }
+    }
+    """
+
+  @security @elasticsearch
   Scenario: Logged in API client wants to add a reply to closed questionnaire step
     Given I am logged in to api as user
     And I send a POST request to "/api/questionnaires/3/replies" with json:
@@ -229,7 +338,9 @@ Feature: Reply Restful Api
         },
         {
           "question": 6,
-          "value": [2, 3]
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
         }
       ]
     }
@@ -257,7 +368,9 @@ Feature: Reply Restful Api
         },
         {
           "question": 6,
-          "value": [2, 3]
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
         }
       ]
     }
@@ -277,7 +390,9 @@ Feature: Reply Restful Api
         },
         {
           "question": 6,
-          "value": [2, 3]
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
         }
       ]
     }
@@ -292,7 +407,7 @@ Feature: Reply Restful Api
     }
     """
 
-  @database
+  @database @elasticsearch
   Scenario: logged in API client wants to edit a reply
     Given I am logged in to api as admin
     When I send a PUT request to "api/questionnaires/1/replies/2" with json:
@@ -305,14 +420,16 @@ Feature: Reply Restful Api
         },
         {
           "question": 6,
-          "value": [2, 3]
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
         }
       ]
     }
     """
     Then the JSON response status code should be 200
 
-  @security
+  @security @elasticsearch
   Scenario: logged in API client wants to edit a reply when he is not the author
     Given I am logged in to api as user
     When I send a PUT request to "api/questionnaires/1/replies/2" with json:
@@ -325,14 +442,16 @@ Feature: Reply Restful Api
         },
         {
           "question": 6,
-          "value": [2, 3]
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
         }
       ]
     }
     """
     Then the JSON response status code should be 403
 
-  @security
+  @security @elasticsearch
   Scenario: logged in API client wants to edit a reply when edition is not allowed
     Given I am logged in to api as admin
     When I send a PUT request to "api/questionnaires/2/replies/3" with json:
@@ -345,7 +464,9 @@ Feature: Reply Restful Api
         },
         {
           "question": 6,
-          "value": [2, 3]
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
         }
       ]
     }
@@ -360,7 +481,7 @@ Feature: Reply Restful Api
     }
     """
 
-  @security
+  @security @elasticsearch
   Scenario: Logged in API client wants to edit a reply in a closed questionnaire step
     Given I am logged in to api as admin
     And I send a PUT request to "/api/questionnaires/3/replies/3" with json:
@@ -373,7 +494,9 @@ Feature: Reply Restful Api
         },
         {
           "question": 6,
-          "value": [2, 3]
+          "value": {
+            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
+          }
         }
       ]
     }
