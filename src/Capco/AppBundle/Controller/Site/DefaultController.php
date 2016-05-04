@@ -97,8 +97,15 @@ class DefaultController extends Controller
         $token = $this->get('lexik_jwt_authentication.jwt_manager')
                       ->create($user);
 
+        $json = $this->get('jms_serializer')->serialize(
+            $user,
+            'json',
+            SerializationContext::create()->setGroups(['Default', 'Users', 'UsersInfos'])
+        );
+
         return new JsonResponse([
             'token' => $token,
+            'user' => $json,
         ]);
     }
 }
