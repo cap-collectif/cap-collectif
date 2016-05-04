@@ -127,7 +127,7 @@ class QuestionnaireStep extends AbstractStep
 
     public function isPhoneConfirmationRequired()
     {
-      return $this->verification === self::VERIFICATION_SMS;
+        return $this->verification === self::VERIFICATION_SMS;
     }
 
     /**

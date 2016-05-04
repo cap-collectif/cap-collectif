@@ -131,3 +131,13 @@ Capco\AppBundle\Entity\MenuItem:
     position: 2
     menu: 1
     parent: @MenuItem5
+
+  MenuItem15:
+    title: Lien externe
+    link: www.google.fr
+    isEnabled: 1
+    isDeletable: 1
+    isFullyModifiable: 1
+    position: 3
+    menu: 1
+    parent: @MenuItem5

@@ -541,6 +541,8 @@ admin:
       name: Nom
       color: Couleur
       position: Position
+    step:
+      verification: Demander la vérification des comptes
     recent_contributions:
       actions: Actions
       author: Auteur
@@ -652,7 +654,6 @@ admin:
       updated_at: Mise à jour
       votesHelpText: Informations à propos du vote
       vote_type: Type de vote
-      verification: Demander la vérification des comptes
     synthesis:
       enabled: Publiée
       editable: Éditable

@@ -204,7 +204,7 @@ class StepAdmin extends Admin
         }
 
         if ($subject instanceof QuestionnaireStep && $this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('phone_confirmation')) {
-          $formMapper
+            $formMapper
               ->add('verification', 'choice', [
                   'label' => 'admin.fields.step.verification',
                   'choices' => QuestionnaireStep::$verificationLabels,

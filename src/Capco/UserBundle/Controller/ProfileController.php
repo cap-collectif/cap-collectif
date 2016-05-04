@@ -88,7 +88,6 @@ class ProfileController extends BaseController
      */
     public function editProfileMobileAction()
     {
-
     }
 
     /**

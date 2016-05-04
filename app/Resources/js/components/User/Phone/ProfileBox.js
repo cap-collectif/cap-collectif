@@ -109,6 +109,10 @@ export const ProfileBox = React.createClass({
               </Alert>
             }
             {
+              user.phone && !smsSentToNumber &&
+              <FormattedHTMLMessage message={this.getIntlMessage('phone.update.infos')} />
+            }
+            {
               smsSentToNumber &&
                 <FormattedHTMLMessage
                     message={this.getIntlMessage('phone.confirm.sent')}
