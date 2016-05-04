@@ -1,6 +1,12 @@
 import './registration';
 require('fancybox')($);
 
+// Fix recaptcha with bootstrap modal on IE
+// See: http://stackoverflow.com/questions/27886618/problems-with-new-google-recaptcha-in-ie-when-inside-modal-or-dialog
+if (/MSIE|Trident/.test(window.navigator.userAgent)) {
+  $.fn.modal.Constructor.prototype.enforceFocus = () => { };
+}
+
 // Our global App for symfony
 const App = (($) => {
   const equalheight = (container) => {

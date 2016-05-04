@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -98,6 +99,31 @@ class UsersController extends FOSRestController
     }
 
     /**
+     * @Put("/users/me")
+     * @Security("has_role('ROLE_USER')")
+     * @View(statusCode=200, serializerGroups={})
+     */
+    public function putMeAction(Request $request)
+    {
+        $user = $this->getUser();
+        $previousPhone = $user->getPhone();
+
+        $form = $this->createForm('api_user_profile', $user);
+        $form->submit($request->request->all(), false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        // If phone is updated we have to make sure it's sms confirmed again
+        if ($previousPhone != null && $previousPhone != $user->getPhone()) {
+            $user->setPhoneConfirmed(false);
+        }
+
+        $this->get('doctrine.orm.entity_manager')->flush();
+    }
+
+    /**
      * @Post("/resend-email-confirmation", defaults={"_feature_flags" = "registration"})
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
@@ -115,6 +141,59 @@ class UsersController extends FOSRestController
 
         $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
         $user->setEmailConfirmationSentAt(new \DateTime());
+        $this->getDoctrine()->getManager()->flush();
+    }
+
+    /**
+     * @Post("/send-sms-confirmation", defaults={"_feature_flags" = "phone_confirmation"})
+     * @Security("has_role('ROLE_USER')")
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postSendSmsConfirmationAction()
+    {
+        $user = $this->getUser();
+        if ($user->isPhoneConfirmed()) {
+            throw new BadRequestHttpException('Already confirmed.');
+        }
+
+        if (!$user->getPhone()) {
+            throw new BadRequestHttpException('No phone.');
+        }
+
+        // security against mass click sms resend
+        if ($user->getSmsConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
+            throw new BadRequestHttpException('sms_already_sent_recently');
+        }
+
+        $this->get('sms.service')->confirm($user);
+
+        $user->setSmsConfirmationSentAt(new \DateTime());
+        $this->getDoctrine()->getManager()->flush();
+    }
+
+    /**
+     * @Post("/sms-confirmation", defaults={"_feature_flags" = "phone_confirmation"})
+     * @Security("has_role('ROLE_USER')")
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postSmsConfirmationAction(Request $request)
+    {
+        $user = $this->getUser();
+        if ($user->isPhoneConfirmed()) {
+            throw new BadRequestHttpException('Already confirmed.');
+        }
+
+        if (!$user->getSmsConfirmationCode()) {
+            throw new BadRequestHttpException('Ask a confirmation message before.');
+        }
+
+        if ($request->request->get('code') != $user->getSmsConfirmationCode()) {
+            throw new BadRequestHttpException('sms_code_invalid');
+        }
+
+        $user->setPhoneConfirmed(true);
+        $user->setSmsConfirmationSentAt(null);
+        $user->setSmsConfirmationCode(null);
         $this->getDoctrine()->getManager()->flush();
     }
 }

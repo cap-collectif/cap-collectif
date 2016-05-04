@@ -49,3 +49,8 @@ $container->setParameter('server_version', getenv_default('server_version', '5.6
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
 
 $container->setParameter('recaptcha_private_key', getenv_default('recaptcha_private_key', '***REMOVED***'));
+
+// Twilio test credentials (no charge)
+$container->setParameter('twilio_sid', getenv_default('twilio_sid', '***REMOVED***'));
+$container->setParameter('twilio_token', getenv_default('twilio_token', '***REMOVED***'));
+$container->setParameter('twilio_number', getenv_default('twilio_number', '+***REMOVED***'));

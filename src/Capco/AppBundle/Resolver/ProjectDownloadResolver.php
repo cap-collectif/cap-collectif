@@ -668,7 +668,7 @@ class ProjectDownloadResolver
             $question = $response->getQuestion();
             $item[$question->getTitle()] = $this->getResponseValue($response);
         }
-        
+
         foreach ($this->headers['published'] as $header) {
             if (is_array($header) && !array_key_exists($header['label'], $item)) {
                 $item[$header['label']] = '';
@@ -725,8 +725,10 @@ class ProjectDownloadResolver
             if ($originalValue['other']) {
                 $values[] = $originalValue['other'];
             }
-            return join(', ', $values);
+
+            return implode(', ', $values);
         }
+
         return $originalValue;
     }
 

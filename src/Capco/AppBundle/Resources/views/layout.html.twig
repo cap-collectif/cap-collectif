@@ -41,13 +41,14 @@
 
 <div id="app-wrapper">
   {{ redux_store('appStore', {
-    'baseUrl': app.request.schemeAndHttpHost,
     'features': features_list(),
     'parameters': site_parameters_list(),
     'user': app.user
       ? {
           'username': app.user.username,
           'isEmailConfirmed': app.user.isEmailConfirmed,
+          'isPhoneConfirmed': app.user.isPhoneConfirmed,
+          'phone': app.user.phone,
           'isAdmin': app.user.isAdmin,
           'email': app.user.email,
           'media': app.user.Media
@@ -72,6 +73,5 @@
         {{ client_js|raw }}
     {% endif %}
 {% endblock %}
-
 </body>
 </html>

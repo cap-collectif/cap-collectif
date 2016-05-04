@@ -2,19 +2,15 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Symfony\Component\Routing\Router;
-use Symfony\Component\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Constraints\Url;
+use Capco\AppBundle\Manager\MenuItemResolver;
 
 class MenuLinkExtension extends \Twig_Extension
 {
-    protected $router;
-    protected $validator;
+    protected $resolver;
 
-    public function __construct(Router $router, ValidatorInterface $validator)
+    public function __construct(MenuItemResolver $resolver)
     {
-        $this->router = $router;
-        $this->validator = $validator;
+        $this->resolver = $resolver;
     }
 
     /**
@@ -36,20 +32,6 @@ class MenuLinkExtension extends \Twig_Extension
 
     public function getMenuUrl($url)
     {
-        if ('/' === $url) {
-            return $this->router->generate('app_homepage');
-        }
-
-        $constraint = new Url();
-        $errorList = $this->validator->validate(
-            $url,
-            $constraint
-        );
-
-        if (count($errorList) == 0) {
-            return $url;
-        }
-
-        return $this->router->generate('capco_app_cms', ['url' => $url]);
+        return $this->resolver->getMenuUrl($url);
     }
 }

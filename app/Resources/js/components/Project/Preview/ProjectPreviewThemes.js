@@ -38,7 +38,9 @@ const ProjectPreviewThemes = React.createClass({
         </div>
       );
     }
-    return null;
+    return (
+      <div className="excerpt project__preview__themes smart-fade small"></div>
+    );
   },
 
 });

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 use Capco\AppBundle\Entity\Questionnaire;
 
@@ -15,6 +16,19 @@ use Capco\AppBundle\Entity\Questionnaire;
  */
 class QuestionnaireStep extends AbstractStep
 {
+    const VERIFICATION_NONE = 'none';
+    const VERIFICATION_SMS = 'sms';
+    public static $verificationLabels = [
+        self::VERIFICATION_NONE => 'step.verification.none',
+        self::VERIFICATION_SMS => 'step.verification.sms',
+    ];
+
+    /**
+     * @ORM\Column(type="string", columnDefinition="ENUM('none', 'sms')")
+     * @Assert\Choice(choices = {"none", "sms"})
+     */
+    private $verification = 'none';
+
     /**
      * @var int
      *
@@ -79,6 +93,18 @@ class QuestionnaireStep extends AbstractStep
         return $this->repliesCount;
     }
 
+    public function setVerification($verification)
+    {
+        $this->verification = $verification;
+
+        return $this;
+    }
+
+    public function getVerification()
+    {
+        return $this->verification;
+    }
+
     /**
      * @param int $repliesCount
      *
@@ -97,6 +123,11 @@ class QuestionnaireStep extends AbstractStep
     public function getQuestionnaire()
     {
         return $this->questionnaire;
+    }
+
+    public function isPhoneConfirmationRequired()
+    {
+        return $this->verification === self::VERIFICATION_SMS;
     }
 
     /**
