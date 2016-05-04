@@ -90,7 +90,7 @@ abstract class AbstractQuestion
     /**
      * @var string
      * @Assert\NotNull()
-     * @Assert\Range(min=1, max=6)
+     * @Assert\Range(min=0, max=6)
      * @ORM\Column(name="type", nullable=false)
      */
     protected $type;

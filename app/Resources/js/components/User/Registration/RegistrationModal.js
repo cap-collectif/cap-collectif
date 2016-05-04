@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Modal, Alert } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import RegistrationForm from './RegistrationForm';
@@ -57,7 +57,7 @@ export const RegistrationModal = React.createClass({
           {
             textTop &&
             <Alert bsStyle="info" className="text-center">
-              {textTop}
+              <FormattedHTMLMessage message={textTop} />
             </Alert>
           }
           <LoginSocialButtons
@@ -76,7 +76,7 @@ export const RegistrationModal = React.createClass({
           {
             textBottom &&
             <div className="text-center small excerpt" style={{ marginTop: '15px' }}>
-              {textBottom}
+              <FormattedHTMLMessage message={textBottom} />
             </div>
           }
         </Modal.Body>

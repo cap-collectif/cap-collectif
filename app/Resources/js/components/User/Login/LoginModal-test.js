@@ -41,9 +41,11 @@ describe('<LoginModal />', () => {
     expect(topText).to.have.length(1);
     expect(topText.prop('className')).to.equal('text-center');
     expect(topText.prop('bsStyle')).to.equal('info');
-    expect(topText.children().first().text()).to.equal(parametersWithTexts['login.text.top']);
+    const topMessage = topText.find('FormattedHTMLMessage');
+    expect(topMessage.prop('message')).to.equal(parametersWithTexts['login.text.top']);
     const bottomText = wrapper.find('.text-center.small.excerpt');
     expect(bottomText).to.have.length(1);
-    expect(bottomText.text()).to.equal(parametersWithTexts['login.text.bottom']);
+    const bottomMessage = bottomText.find('FormattedHTMLMessage');
+    expect(bottomMessage.prop('message')).to.equal(parametersWithTexts['login.text.bottom']);
   });
 });
