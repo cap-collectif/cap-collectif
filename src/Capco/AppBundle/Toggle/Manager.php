@@ -25,7 +25,6 @@ class Manager
         'share_buttons',
         'shield_mode',
         'registration',
-        'phone_confirmation',
         'reporting',
         'themes',
         'districts',

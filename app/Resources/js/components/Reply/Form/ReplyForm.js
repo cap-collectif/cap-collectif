@@ -40,17 +40,48 @@ const ReplyForm = React.createClass({
         form[response.field.id] = response.value;
       });
 
+      let fieldRules = {};
+
       if (field.required) {
         if (field.type === 'checkbox' || field.type === 'ranking') {
-          this.formValidationRules[field.id] = {
+          fieldRules = {
             notEmpty: { message: 'reply.constraints.field_mandatory' },
           };
         } else {
-          this.formValidationRules[field.id] = {
+          fieldRules = {
             notBlank: { message: 'reply.constraints.field_mandatory' },
           };
         }
       }
+      if (field.validationRule) {
+        const rule = field.validationRule;
+        switch (rule.type) {
+          case 'min':
+            fieldRules.min = {
+              message: 'reply.constraints.choices_min',
+              messageParams: { nb: rule.number },
+              value: rule.number,
+            };
+            break;
+          case 'max':
+            fieldRules.max = {
+              message: 'reply.constraints.choices_max',
+              messageParams: { nb: rule.number },
+              value: rule.number,
+            };
+            break;
+          case 'equal':
+            fieldRules.length = {
+              message: 'reply.constraints.choices_equal',
+              messageParams: { nb: rule.number },
+              value: rule.number,
+            };
+            break;
+          default:
+            break;
+        }
+      }
+      this.formValidationRules[field.id] = fieldRules;
     });
 
     return {

@@ -23,8 +23,7 @@
       "delete": {
         "argument": "Votre argument a bien \u00e9t\u00e9 supprim\u00e9.",
         "source": "La source a bien \u00e9t\u00e9 supprim\u00e9e.",
-        "vote": "Votre vote a bien \u00e9t\u00e9 supprim\u00e9.",
-        "phone": "Le numéro de téléphone a bien été supprimé."
+        "vote": "Votre vote a bien \u00e9t\u00e9 supprim\u00e9."
       },
       "report": {
         "argument": "Merci ! L'argument a bien \u00e9t\u00e9 signal\u00e9.",
@@ -144,7 +143,6 @@
     "constraints": {
       "notBlank": "Cette valeur ne doit pas \u00eatre vide."
     },
-    "continue": "Continuer",
     "content": "Contenu",
     "counters": {
       "contributions": "{num, plural, =0{contribution} one{contribution} other{contributions}}",
@@ -217,7 +215,6 @@
       "label": "\u00c9pingl\u00e9",
       "tooltip": "Ce commentaire a \u00e9t\u00e9 \u00e9pingl\u00e9 par l'administrateur."
     },
-    "phone": "Numéro de téléphone",
     "preview": "Aper\u00e7u",
     "publish": "Publier",
     "login_me": "Se connecter",
@@ -379,37 +376,6 @@
       "resend": "Renvoyer la confirmation"
     }
   },
-  "phone": {
-    "ask_delete": "Supprimer ce numéro de téléphone",
-    "confirm": {
-      "constraints": {
-        "code": "Le code est composé d'exactement 6 chiffres."
-      },
-      "code": "Code de vérification",
-      "ok": "Numéro de téléphone validé",
-      "infos": "<strong>Ajouter votre numéro de téléphone.</strong><br />Un code de vérification sera envoyé à ce numéro.",
-      "sent": "Nous vous avons envoyé un code au <strong>{phone}</strong>. Entrez-le ci-dessous afin de vérifier votre numéro.",
-      "ask_new": "Demander un nouveau code de validation",
-      "check_your_phone": "Consultez votre téléphone",
-      "phone": "Mobile",
-      "code_invalid": "Le code semble erroné, veuillez réessayer.",
-      "validate": "Valider le numéro",
-      "alert": {
-        "received": "Code de confirmation envoyé.",
-        "wait_for_new": "Merci de patienter 1 minute avant de demander un nouveau code."
-      }
-    },
-    "please_verify": "Veuillez vérifier votre compte par SMS pour participer.",
-    "check": "Vérifier mon compte"
-  },
-  "profile": {
-    "constraints": {
-      "phone": {
-        "already_used": "Ce numéro est déjà utilisé sur un autre compte",
-        "invalid": "Le numéro renseigné semble incorrect"
-      }
-    }
-  },
   "project": {
     "preview": {
       "counters": {
@@ -553,6 +519,9 @@
   "reply": {
     "add": "Répondre au questionnaire",
     "constraints": {
+      "choices_equal": "Vous devez sélectionner exactement {nb} réponses.",
+      "choices_max": "Vous devez sélectionner au maximum {nb} réponses.",
+      "choices_min": "Vous devez sélectionner au moins {nb} réponses.",
       "field_mandatory": "Ce champ est obligatoire."
     },
     "count": "{num, plural, =0{0 réponse} one{# réponse} other{# réponses}}",
@@ -563,7 +532,7 @@
       "private": "Rendre ma participation anonyme"
     },
     "not_logged_in": {
-      "error": "Vous devez être inscrit et connecté pour répondre à ce questionnaire."
+      "error": "Vous devez être connecté pour répondre à ce questionnaire."
     },
     "other": "Autre",
     "private": "(anonyme)",
@@ -793,7 +762,7 @@
     "search": "Rechercher",
     "admin": "Administration",
     "profile": "Mon profil",
-    "user_settings": "Paramètres",
+    "user_settings": "Mes préférences",
     "homepage": "Accueil",
     "skip_links": {
       "menu": "Aller au menu",

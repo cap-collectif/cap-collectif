@@ -77,7 +77,6 @@ class ProfileFormType extends AbstractType
             ])
             ->remove('lastname')
             ->remove('firstname')
-            ->remove('phone')
             ->add('gender', 'sonata_user_gender', [
                 'required' => true,
                 'translation_domain' => 'SonataUserBundle',

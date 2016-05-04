@@ -55,30 +55,6 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * @When I am logged in to api as user_with_phone_not_phone_confirmed
-     */
-    public function iAmLoggedInToApiAsUserWithPhoneNotPhoneConfirmed()
-    {
-        $this->createAuthenticatedClient('user_with_phone_not_phone_confirmed@test.com', 'user_with_phone_not_phone_confirmed');
-    }
-
-    /**
-     * @When I am logged in to api as user_without_phone
-     */
-    public function iAmLoggedInToApiAsUserWithoutPhone()
-    {
-        $this->createAuthenticatedClient('user_without_phone@test.com', 'user_without_phone');
-    }
-
-    /**
-     * @When I am logged in to api as user_with_code_not_phone_confirmed
-     */
-    public function iAmLoggedInToApiAsUserWithSmsCode()
-    {
-        $this->createAuthenticatedClient('user_with_code_not_phone_confirmed@test.com', 'user_with_code_not_phone_confirmed');
-    }
-
-    /**
      * @When I am logged in to api as xlacot
      */
     public function iAmLoggedInToApiAsXlacot()
