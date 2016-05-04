@@ -361,7 +361,6 @@ class ProjectController extends Controller
         $serializer = $this->get('jms_serializer');
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('projects.pagination');
         $projectsRaw = $em->getRepository('CapcoAppBundle:Project')->getSearchResults($pagination, $page, $theme, $sort, $term);
-        $count = $em->getRepository('CapcoAppBundle:Project')->countPublished();
         $props = $serializer->serialize([
             'projects' => $projectsRaw,
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
@@ -369,12 +368,12 @@ class ProjectController extends Controller
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
         if ($pagination !== null && $pagination !== 0) {
-            $nbPage = ceil($count) / $pagination;
+            $nbPage = ceil(count($projectsRaw) / $pagination);
         }
 
         $parameters = [
             'props' => $props,
-            'count' => $count,
+            'count' => count($projectsRaw),
             'page' => $page,
             'nbPage' => $nbPage,
         ];

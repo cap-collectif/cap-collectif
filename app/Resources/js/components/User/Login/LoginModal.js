@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button, Alert } from 'react-bootstrap';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import CloseButton from '../../Form/CloseButton';
 import LoginForm from './LoginForm';
 import { LoginSocialButtons } from './LoginSocialButtons';
@@ -53,7 +53,7 @@ export const LoginModal = React.createClass({
             {
               textTop &&
               <Alert bsStyle="info" className="text-center">
-                <FormattedHTMLMessage message={textTop} />
+                {textTop}
               </Alert>
             }
             <LoginSocialButtons features={{
@@ -68,7 +68,7 @@ export const LoginModal = React.createClass({
             {
               textBottom &&
               <div className="text-center small excerpt" style={{ marginTop: '15px' }}>
-                <FormattedHTMLMessage message={textBottom} />
+                {textBottom}
               </div>
             }
           </Modal.Body>

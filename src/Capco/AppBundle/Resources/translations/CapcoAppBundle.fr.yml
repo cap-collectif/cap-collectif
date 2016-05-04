@@ -22,7 +22,7 @@ global:
     typo: Vouliez-vous dire
 
 sms:
-  content: "%sitename% : Votre code de confirmation es %code%."
+  content: "%sitename% : Votre code de confirmation est %code%."
 #Errors
 error:
   404:

@@ -399,9 +399,6 @@
         "wait_for_new": "Merci de patienter 1 minute avant de demander un nouveau code."
       }
     },
-    "update": {
-      "infos": "<strong>Mettre à jour votre numéro de téléphone.</strong><br />Si vous mettez à jour votre numéro de téléphone, nous enverrons un code de vérification à ce numéro."
-    },
     "please_verify": "Veuillez vérifier votre compte par SMS pour participer.",
     "check": "Vérifier mon compte"
   },
