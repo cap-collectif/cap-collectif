@@ -5,6 +5,7 @@ namespace Capco\UserBundle\Form\Type;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Capco\AppBundle\Toggle\Manager;
 
 class ApiProfileFormType extends AbstractType
 {

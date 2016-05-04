@@ -136,7 +136,7 @@ class UserContext extends DefaultContext
         $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
         PHPUnit::assertNotNull($user->getSmsConfirmationCode());
         PHPUnit::assertTrue(is_int($user->getSmsConfirmationCode()));
-        PHPUnit::assertEquals(strlen((string) $user->getSmsConfirmationCode()), 6);
+        PHPUnit::assertEquals(strlen((string)$user->getSmsConfirmationCode()), 6);
     }
 
     /**

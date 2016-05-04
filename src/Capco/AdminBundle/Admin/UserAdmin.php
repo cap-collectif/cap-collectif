@@ -241,7 +241,7 @@ class UserAdmin extends BaseAdmin
             ;
 
             if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('phone_confirmation')) {
-                $formMapper
+              $formMapper
                 ->add('phoneConfirmed', null, ['required' => false])
               ;
             }

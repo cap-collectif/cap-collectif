@@ -61,7 +61,7 @@ services:
 
   capco.twig.menu_url:
     class: %capco.twig.menu_url.class%
-    arguments: [ @capco.menu_item.resolver ]
+    arguments: [ @router, @validator ]
     tags:
       - { name: twig.extension }
 

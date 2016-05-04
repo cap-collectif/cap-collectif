@@ -41,6 +41,7 @@
 
 <div id="app-wrapper">
   {{ redux_store('appStore', {
+    'baseUrl': '//' ~ app.request.host,
     'features': features_list(),
     'parameters': site_parameters_list(),
     'user': app.user
@@ -73,6 +74,5 @@
         {{ client_js|raw }}
     {% endif %}
 {% endblock %}
-
 </body>
 </html>

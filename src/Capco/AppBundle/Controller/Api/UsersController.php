@@ -98,6 +98,7 @@ class UsersController extends FOSRestController
         return ['user' => $user];
     }
 
+
     /**
      * @Put("/users/me")
      * @Security("has_role('ROLE_USER')")
@@ -117,7 +118,7 @@ class UsersController extends FOSRestController
 
         // If phone is updated we have to make sure it's sms confirmed again
         if ($previousPhone != null && $previousPhone != $user->getPhone()) {
-            $user->setPhoneConfirmed(false);
+          $user->setPhoneConfirmed(false);
         }
 
         $this->get('doctrine.orm.entity_manager')->flush();
@@ -153,16 +154,16 @@ class UsersController extends FOSRestController
     {
         $user = $this->getUser();
         if ($user->isPhoneConfirmed()) {
-            throw new BadRequestHttpException('Already confirmed.');
+          throw new BadRequestHttpException('Already confirmed.');
         }
 
         if (!$user->getPhone()) {
-            throw new BadRequestHttpException('No phone.');
+          throw new BadRequestHttpException('No phone.');
         }
 
         // security against mass click sms resend
         if ($user->getSmsConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
-            throw new BadRequestHttpException('sms_already_sent_recently');
+          throw new BadRequestHttpException('sms_already_sent_recently');
         }
 
         $this->get('sms.service')->confirm($user);
@@ -180,15 +181,15 @@ class UsersController extends FOSRestController
     {
         $user = $this->getUser();
         if ($user->isPhoneConfirmed()) {
-            throw new BadRequestHttpException('Already confirmed.');
+          throw new BadRequestHttpException('Already confirmed.');
         }
 
         if (!$user->getSmsConfirmationCode()) {
-            throw new BadRequestHttpException('Ask a confirmation message before.');
+          throw new BadRequestHttpException('Ask a confirmation message before.');
         }
 
         if ($request->request->get('code') != $user->getSmsConfirmationCode()) {
-            throw new BadRequestHttpException('sms_code_invalid');
+          throw new BadRequestHttpException('sms_code_invalid');
         }
 
         $user->setPhoneConfirmed(true);

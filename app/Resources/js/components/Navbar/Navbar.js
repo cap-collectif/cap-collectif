@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import { Navbar as Navigation, Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import NavbarRight from './NavbarRight';
 
 const Navbar = React.createClass({
   propTypes: {
+    baseUrl: PropTypes.string,
     logo: PropTypes.string,
     items: PropTypes.array.isRequired,
   },
@@ -17,6 +19,7 @@ const Navbar = React.createClass({
   },
 
   render() {
+    const { baseUrl } = this.props;
     return (
       <Navigation id="main-navbar" className="navbar navbar-default navbar-fixed-top">
         <div className="skip-links js-skip-links" role="banner">
@@ -51,7 +54,7 @@ const Navbar = React.createClass({
                                     <MenuItem
                                       key={childIndex}
                                       eventKey={index + childIndex}
-                                      href={child.link}
+                                      href={baseUrl + '/' + child.link}
                                     >
                                       {child.title}
                                     </MenuItem>
@@ -67,7 +70,7 @@ const Navbar = React.createClass({
                         <NavItem
                           key={index}
                           eventKey={index}
-                          href={header.link}
+                          href={header.link === '/' ? '/' : baseUrl + '/' + header.link}
                         >
                         {header.title}
                         </NavItem>
@@ -86,4 +89,10 @@ const Navbar = React.createClass({
 
 });
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    baseUrl: state.baseUrl,
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

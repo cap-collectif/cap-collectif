@@ -67,7 +67,6 @@ class ParametersExtension extends \Twig_Extension
             $value = $this->siteParameterResolver->getValue($key);
             $exposedParameters[$key] = $value && strlen($value) > 0 ? $value : null;
         }
-
         return $exposedParameters;
     }
 }
