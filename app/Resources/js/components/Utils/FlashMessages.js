@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Alert } from 'react-bootstrap';
 
 const FlashMessages = React.createClass({
@@ -26,14 +26,7 @@ const FlashMessages = React.createClass({
 
   renderText(message) {
     if (this.props.translate) {
-      if (typeof message === 'string') {
-        return this.getIntlMessage(message);
-      }
-      return (
-        <FormattedMessage
-          message={this.getIntlMessage(message.message)}
-          {...message.params}
-        />);
+      return this.getIntlMessage(message);
     }
     return message;
   },
@@ -52,9 +45,9 @@ const FlashMessages = React.createClass({
       );
     }
     return (
-      <p key={index} className="error-block" style={this.props.style}>
+      <span key={index} className="error-block" style={this.props.style}>
         {this.renderText(message)}
-      </p>
+      </span>
     );
   },
 

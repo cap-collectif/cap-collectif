@@ -391,6 +391,11 @@ class Questionnaire
         return $this;
     }
 
+    public function isPhoneConfirmationRequired()
+    {
+        return $this->step && $this->step->isPhoneConfirmationRequired();
+    }
+
     /**
      * @return bool
      */

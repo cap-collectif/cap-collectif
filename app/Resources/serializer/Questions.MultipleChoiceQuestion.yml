@@ -16,7 +16,3 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
       serialized_name: choices
       groups: [Questions]
       type: array
-    validationRule:
-      expose: true
-      serialized_name: validationRule
-      groups: [Questions]

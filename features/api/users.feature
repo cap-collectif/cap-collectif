@@ -140,3 +140,39 @@ Feature: Users
       }
       """
       Then the JSON response status code should be 201
+
+  @database @test
+  Scenario: API client wants to update his phone
+    Given I am logged in to api as user
+    When I send a PUT request to "/api/users/me" with json:
+    """
+    {
+      "phone": "+33628353290"
+    }
+    """
+    Then the JSON response status code should be 204
+    And "user" phone number should be "+33628353290"
+    And "user" should not be sms confirmed
+
+    @security @test
+    Scenario: API client wants to update his phone
+      Given I am logged in to api as user
+      When I send a PUT request to "/api/users/me" with json:
+      """
+      {
+        "phone": "+33"
+      }
+      """
+      Then the JSON response status code should be 400
+      Then the JSON response should match:
+      """
+      {
+        "code":400,
+        "message": "Validation Failed",
+        "errors": {
+          "children":{
+            "phone": {"errors": ["Cette valeur n'est pas un numéro de téléphone valide."]}
+          }
+        }
+      }
+      """

@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import LoginOverlay from '../Utils/LoginOverlay';
 import { connect } from 'react-redux';
 
-
 const ReportButton = React.createClass({
   propTypes: {
     url: PropTypes.string.isRequired,
