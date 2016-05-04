@@ -10,10 +10,10 @@ const ResponseValue = React.createClass({
   render() {
     const { response } = this.props;
     if (!response.value || (Array.isArray(response.value) && !response.value.length)) {
-      return <p>{this.getIntlMessage('reply.show.response.no_value')}</p>;
+      return <span>{this.getIntlMessage('reply.show.response.no_value')}</span>;
     }
     if (response.field.type === 'editor') {
-      return <p><FormattedHTMLMessage message={response.value} /></p>;
+      return <FormattedHTMLMessage message={response.value} />;
     }
     if (response.field.type === 'ranking') {
       return response.value.labels.length > 0
@@ -24,7 +24,7 @@ const ResponseValue = React.createClass({
             })
           }
         </ol>
-        : <p>{this.getIntlMessage('reply.show.response.no_value')}</p>
+        : <span>{this.getIntlMessage('reply.show.response.no_value')}</span>
       ;
     }
     if (typeof response.value === 'object') {
@@ -33,11 +33,11 @@ const ResponseValue = React.createClass({
         labels.push(response.value.other);
       }
       return labels.length > 0
-        ? <p>{labels.join(', ')}</p>
-        : <p>{this.getIntlMessage('reply.show.response.no_value')}</p>
+        ? <span>{labels.join(', ')}</span>
+        : <span>{this.getIntlMessage('reply.show.response.no_value')}</span>
       ;
     }
-    return <p>{response.value}</p>;
+    return <span>{response.value}</span>;
   },
 
 });

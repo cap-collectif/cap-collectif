@@ -78,9 +78,7 @@ export const RegistrationForm = React.createClass({
             if (response.errors) {
               const errors = this.state.errors;
               if (response.errors.children.email.errors && response.errors.children.email.errors.length > 0) {
-                const emailErrors = [];
-                response.errors.children.email.errors.map(string => emailErrors.push('registration.constraints.' + string));
-                errors.email = emailErrors;
+                errors.email = Array.from(response.errors.children.email.errors, string => 'registration.constraints.' + string);
               }
               if (response.errors.children.captcha.errors && response.errors.children.captcha.errors.length > 0) {
                 errors.captcha = ['registration.constraints.captcha.invalid'];

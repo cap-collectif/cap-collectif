@@ -27,7 +27,6 @@ class RepliesController extends FOSRestController
      *
      * @param Request       $request
      * @param Questionnaire $questionnaire
-     * @return array
      */
     public function getUserRepliesByFormAction(Request $request, Questionnaire $questionnaire)
     {
@@ -60,7 +59,6 @@ class RepliesController extends FOSRestController
      * @View(statusCode=200, serializerGroups={"Replies", "UsersInfos", "UserMedias", "Steps"})
      *
      * @param Reply $reply
-     * @return Reply
      */
     public function getReplyAction(Reply $reply)
     {
@@ -88,7 +86,6 @@ class RepliesController extends FOSRestController
      * @param Questionnaire $questionnaire
      *
      * @throws BadRequestHttpException
-     * @return Reply
      */
     public function postReplyAction(Request $request, Questionnaire $questionnaire)
     {
@@ -164,7 +161,6 @@ class RepliesController extends FOSRestController
      *
      * @throws AccessDeniedException
      * @throws BadRequestHttpException
-     * @return Reply
      */
     public function putReplyAction(Request $request, Questionnaire $questionnaire, Reply $reply)
     {
@@ -215,7 +211,6 @@ class RepliesController extends FOSRestController
      * @param Reply         $reply
      *
      * @throws BadRequestHttpException
-     * @return array
      */
     public function deleteReplyAction(Questionnaire $questionnaire, Reply $reply)
     {

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,11 +13,13 @@ class ReplyType extends AbstractType
 {
     protected $transformer;
     protected $toggleManager;
+    protected $questionRepository;
 
-    public function __construct(EntityToIdTransformer $transformer, Manager $toggleManager)
+    public function __construct(EntityToIdTransformer $transformer, Manager $toggleManager, AbstractQuestionRepository $questionRepository)
     {
         $this->transformer = $transformer;
         $this->toggleManager = $toggleManager;
+        $this->questionRepository = $questionRepository;
     }
 
     /**
@@ -30,7 +33,7 @@ class ReplyType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => false,
                 'by_reference' => false,
-                'type' => new ResponseType($this->transformer),
+                'type' => new ResponseType($this->transformer, $this->questionRepository),
                 'required' => false,
             ])
         ;

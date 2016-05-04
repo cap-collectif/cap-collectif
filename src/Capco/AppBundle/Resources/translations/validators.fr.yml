@@ -75,10 +75,5 @@ argument:
 comment:
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
 
-response:
-  equal: Vous devez sélectionner exactement %nb% réponses.
-  max: Vous devez sélectionner au maximu %nb% réponses.
-  min: Vous devez sélectionner au moins %nb% réponses.
-
 source:
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.

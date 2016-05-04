@@ -1243,12 +1243,6 @@ search:
       source: Source
       theme: Thème
       user: Membre
-questionnaire:
-  validation:
-    type:
-      equal: Sélectionner exactement
-      max: Sélectionner au maximum
-      min: Sélectionner au minium
 
 'User account is disabled.': Ce compte n'est pas activé.
 

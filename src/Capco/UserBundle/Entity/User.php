@@ -996,7 +996,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getSmsConfirmationSentAt()
     {
-        return $this->smsConfirmationSentAt;
+      return $this->smsConfirmationSentAt;
     }
 
     public function setSmsConfirmationSentAt(\DateTime $date = null)
@@ -1008,7 +1008,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getSmsConfirmationCode()
     {
-        return $this->smsConfirmationCode;
+      return $this->smsConfirmationCode;
     }
 
     public function setSmsConfirmationCode($code = null)

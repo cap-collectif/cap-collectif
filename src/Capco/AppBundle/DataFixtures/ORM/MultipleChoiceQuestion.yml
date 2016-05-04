@@ -1,9 +1,3 @@
-Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule (local):
-  validationRule1:
-    __construct: { create: [equal, 3] }
-  validationRule2:
-    __construct: { create: [min, 2] }
-
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestion1:
     title: Pour quel type d'épreuve êtes vous prêt à acheter des places ?
@@ -13,7 +7,6 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     type: 5 # checkbox
     randomQuestionChoices: false
     otherAllowed: true
-    validationRule: @validationRule1
   multiplequestion2:
     title: Quel est ton athlète favori ?
     helpText: Un seul choix possible
@@ -36,4 +29,3 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     required: false
     type: 6
     randomQuestionChoices: true
-    validationRule: @validationRule2

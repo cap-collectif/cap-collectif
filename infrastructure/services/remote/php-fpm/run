@@ -64,4 +64,4 @@ echo "Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &
 
 echo "php-fpm is ready to boot after $(( SECONDS - start )) seconds!"
-exec /usr/sbin/php-fpm7.0 -y /etc/service/php-fpm/fpm.conf -O
+exec /usr/sbin/php-fpm7.0 --fpm-config /etc/service/php-fpm/fpm.conf --force-stderr
