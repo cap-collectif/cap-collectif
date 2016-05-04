@@ -34,9 +34,7 @@ const Ranking = React.createClass({
 
   handleRankingChange(ranking) {
     const values = [];
-    ranking.map(item => {
-      values.push(item.label);
-    });
+    ranking.map(item => values.push(item.label));
     this.props.onChange(this.props.field, values);
   },
 

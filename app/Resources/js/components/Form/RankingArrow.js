@@ -7,14 +7,15 @@ const RankingArrow = React.createClass({
   displayName: 'RankingArrow',
   propTypes: {
     type: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
     disabled: PropTypes.bool,
   },
-  mixins: [ IntlMixin ],
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       disabled: false,
+      onClick: null,
     };
   },
 

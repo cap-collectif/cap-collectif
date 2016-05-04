@@ -38,7 +38,7 @@ const ResponseValue = React.createClass({
       ;
     }
     return <p>{response.value}</p>;
-r  },
+  },
 
 });
 
