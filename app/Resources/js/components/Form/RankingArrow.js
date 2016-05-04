@@ -22,7 +22,7 @@ const RankingArrow = React.createClass({
     const { type, onClick, disabled } = this.props;
     const classes = classNames({
       'cap': true,
-      'cap-arrow-65': type === 'left',
+      'cap-delete-1': type === 'left',
       'cap-arrow-2-1': type === 'right',
       'cap-arrow-67': type === 'down',
       'cap-arrow-68': type === 'up',

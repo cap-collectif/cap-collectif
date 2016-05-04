@@ -37,9 +37,9 @@ const RankingBox = React.createClass({
               right: (it) => moveItem('choiceBox', spotsNb, it),
             }
             : {
-              left: (it) => moveItem('pickBox', spotsNb, it),
               up: i > 0 ? (it) => moveItem('choiceBox', i - 1, it) : null,
               down: i < (items.length - 1) ? (it) => moveItem('choiceBox', i + 1, it) : null,
+              left: (it) => moveItem('pickBox', spotsNb, it),
             };
             return (
               <RankingSpot
