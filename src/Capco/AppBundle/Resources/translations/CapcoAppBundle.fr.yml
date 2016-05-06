@@ -1270,7 +1270,7 @@ email:
   alert_expire_user:
       subject: %sitename% —  Rappel : Vous n'avez pas encore confirmé votre adresse email
       hello: Bonjour %username%,
-      info: Merci de vous être inscrit sur %sitename%.
+      info: Merci pour votre inscription sur %sitename%.
       click: Veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique :
       confirm: <a href="%url%"><strong>Confirmer mon adresse électronique</strong></a>
       question: Si vous avez des questions concernant votre compte ou tout autre sujet, n'hésitez pas à nous contacter à cette adresse %email%.
