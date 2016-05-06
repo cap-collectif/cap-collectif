@@ -1105,6 +1105,7 @@ project_download:
     id: Identifiant
     link: Lien
     nbVotes: Nombre de votes
+    phone: Numéro de téléphone
     related_object: Lié à :
     score: Score
     sources: Sources

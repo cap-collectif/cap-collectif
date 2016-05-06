@@ -128,7 +128,7 @@
                 'id': 'project-' ~ project.slug,
             } only %}
 
-            {% if project.exportable %}
+            {% if project.exportable and is_granted('ROLE_ADMIN') %}
                 {% include 'CapcoAppBundle:Project:download_button.html.twig' with {'project': project} only %}
             {% endif %}
         </div>
