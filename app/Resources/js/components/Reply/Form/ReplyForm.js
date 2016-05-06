@@ -117,10 +117,11 @@ const ReplyForm = React.createClass({
               choicesLabels.push(choice.label);
             });
 
-            const other = this.state.form[key].find((value, i) => {
+            let other = null;
+            this.state.form[key].map((value, i) => {
               if (choicesLabels.indexOf(value) === -1) {
                 this.state.form[key].splice(i, 1);
-                return true;
+                other = value;
               }
             });
             response.value = other ? { labels: this.state.form[key], other: other } : { labels: this.state.form[key] };
