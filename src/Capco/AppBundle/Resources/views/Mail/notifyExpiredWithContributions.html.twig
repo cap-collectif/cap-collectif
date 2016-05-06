@@ -23,6 +23,9 @@
         <p>
             {{ 'email.expire_user.done'|trans({}, 'CapcoAppBundle') }}
         </p>
+        <p>
+            {{ 'email.expire_user.footer'|trans({'%sitename%': sitename}, 'CapcoAppBundle') }}
+        </p>
     {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}

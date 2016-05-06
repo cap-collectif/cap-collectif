@@ -62,7 +62,7 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=100)
      * @Assert\NotBlank()
      */
     private $title;
