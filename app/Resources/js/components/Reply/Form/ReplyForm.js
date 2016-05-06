@@ -105,8 +105,11 @@ const ReplyForm = React.createClass({
           const response = { question: key };
 
           if (Array.isArray(this.state.form[key])) {
-            const currentField = this.props.form.fields.find((field) => {
-              return String(field.id) === key;
+            let currentField = null;
+            this.props.form.fields.map((field) => {
+              if (String(field.id) === key) {
+                currentField = field;
+              }
             });
 
             const choicesLabels = [];
