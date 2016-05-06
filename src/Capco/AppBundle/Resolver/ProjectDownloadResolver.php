@@ -730,7 +730,7 @@ class ProjectDownloadResolver
                 $values[] = $originalValue['other'];
             }
 
-            return implode(', ', $values);
+            return implode('; ', $values);
         }
 
         return $originalValue;
