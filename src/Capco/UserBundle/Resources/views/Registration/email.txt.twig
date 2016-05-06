@@ -28,7 +28,7 @@
                 <p>{{ 'user.register.confirmation_message.bye'|trans({}, 'CapcoAppBundle') }}</p>
                 <hr />
                 <p>{{ 'user.register.confirmation_message.footer1'|trans({'%sitename%': sitename}, 'CapcoAppBundle') }}</p>
-                <p>{{ 'user.register.confirmation_message.footer2'|trans({'%sitename%': sitename}, 'CapcoAppBundle') }}</p>
+                <p>{{ 'user.register.confirmation_message.footer2'|trans({'%sitename%': '<a href="' ~ url('app_homepage') ~ '">' ~ sitename ~ '</a>'}, 'CapcoAppBundle') }}</p>
             </td>
         </tr>
     </table>
