@@ -726,7 +726,7 @@ class ProjectDownloadResolver
         $originalValue = $response->getValue();
         if (is_array($originalValue)) {
             $values = $originalValue['labels'];
-            if (array_key_exists('other', $originalValue) && $originalValue['other']) {
+            if ($originalValue['other']) {
                 $values[] = $originalValue['other'];
             }
 

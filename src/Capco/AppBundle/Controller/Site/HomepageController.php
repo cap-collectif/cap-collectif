@@ -91,7 +91,7 @@ class HomepageController extends Controller
     }
 
     /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
      */
     public function popularIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
@@ -106,7 +106,7 @@ class HomepageController extends Controller
     }
 
     /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
      */
     public function lastIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
@@ -121,7 +121,7 @@ class HomepageController extends Controller
     }
 
     /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProposals.html.twig")
      */
     public function lastProposalsAction($max = 4, $offset = 0, $section = null, $alt = null)
@@ -147,7 +147,7 @@ class HomepageController extends Controller
     }
 
     /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastThemes.html.twig")
      */
     public function lastThemesAction($max = 4, $offset = 0, $section = null, $alt = null)
@@ -162,7 +162,7 @@ class HomepageController extends Controller
     }
 
     /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastPosts.html.twig")
      */
     public function lastPostsAction($max = 3, $offset = 0, $section = null, $alt = null)
@@ -177,7 +177,7 @@ class HomepageController extends Controller
     }
 
     /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProjects.html.twig")
      *
      * @param int  $max
@@ -208,7 +208,7 @@ class HomepageController extends Controller
     }
 
     /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Cache(smaxage="60", public=true)
      *
      * @param $max
      * @param $offset

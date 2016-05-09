@@ -26,7 +26,7 @@ use JMS\Serializer\SerializationContext;
 class StepController extends Controller
 {
     /**
-     * @Cache(maxage="120", smaxage="60", public="true")
+     * @Cache(smaxage="60", public=true)
      * @Route("/project/{projectSlug}/step/{stepSlug}", name="app_project_show_step")
      * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
@@ -315,7 +315,7 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/questionnaire/{stepSlug}", name="app_project_show_questionnaire")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\QuestionnaireStep", options={"mapping" = {"stepSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
-     * @Cache(maxage="120", smaxage="60", public="true")
+     * @Cache(smaxage="60", public=true)
      *
      * @param Project           $project
      * @param QuestionnaireStep $step
@@ -382,6 +382,8 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/selection/{stepSlug}", name="app_project_show_selection")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\SelectionStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @Cache(smaxage="60", public=true)
+     * @Template("CapcoAppBundle:Step:selection.html.twig")
      */
     public function showSelectionStepAction(Project $project, SelectionStep $step)
     {
@@ -420,18 +422,11 @@ class StepController extends Controller
             'count' => $searchResults['count'],
         ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Statuses', 'Themes', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias']));
 
-        $response = $this->render('CapcoAppBundle:Step:selection.html.twig', [
+        return [
             'project' => $project,
             'currentStep' => $step,
             'props' => $props,
-        ]);
-
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
-            $response->setPublic();
-            $response->setSharedMaxAge(60);
-        }
-
-        return $response;
+        ];
     }
 
     /**
