@@ -56,6 +56,9 @@ export const ProfileBox = React.createClass({
         if (message === 'sms_already_sent_recently') {
           message = this.getIntlMessage('phone.confirm.alert.wait_for_new');
         }
+        if (message === 'sms_failed_to_send') {
+          message = this.getIntlMessage('phone.confirm.alert.failed_to_send');
+        }
         this.setState({ alert: { type: 'danger', message: message } });
       });
   },

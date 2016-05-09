@@ -397,6 +397,7 @@
       "validate": "Valider le numéro",
       "alert": {
         "received": "Code de confirmation envoyé.",
+        "failed_to_send": "Une erreur est survenue lors de l'envoi du SMS à ce numéro de téléphone. Veuillez réessayer avec un autre numéro.",
         "wait_for_new": "Merci de patienter 1 minute avant de demander un nouveau code."
       }
     },

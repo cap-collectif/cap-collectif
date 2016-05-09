@@ -165,7 +165,11 @@ class UsersController extends FOSRestController
             throw new BadRequestHttpException('sms_already_sent_recently');
         }
 
-        $this->get('sms.service')->confirm($user);
+        try {
+          $this->get('sms.service')->confirm($user);
+        } catch (\Services_Twilio_RestException $e) {
+          throw new BadRequestHttpException('sms_failed_to_send');
+        }
 
         $user->setSmsConfirmationSentAt(new \DateTime());
         $this->getDoctrine()->getManager()->flush();
