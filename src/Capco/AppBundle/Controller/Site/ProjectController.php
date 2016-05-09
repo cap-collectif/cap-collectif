@@ -157,7 +157,6 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/download/{format}", name="app_project_download")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/download/{format}", name="app_consultation_download")
-     * @Security("has_role('ROLE_ADMIN')")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={"mapping": {"stepSlug": "slug"}})
      *
