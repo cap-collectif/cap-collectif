@@ -9,4 +9,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class QuestionnaireStepRepository extends EntityRepository
 {
+    /**
+     * Get one by slug.
+     *
+     * @param $slug
+     *
+     * @return mixed
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOne($slug)
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->addSelect('q', 'qaq', 'qt', 'qr', 'qtr')
+            ->leftJoin('s.questionnaire', 'q')
+            ->leftJoin('q.questions', 'qaq')
+            ->leftJoin('q.replies', 'qr')
+            ->leftJoin('qaq.question', 'qt')
+            ->leftJoin('qt.responses', 'qtr')
+            ->andWhere('s.slug = :slug')
+            ->setParameter('slug', $slug);
+
+        return $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
