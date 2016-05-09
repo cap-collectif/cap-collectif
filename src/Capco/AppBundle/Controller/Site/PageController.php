@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 /**
  * @Route("/pages")
@@ -17,26 +18,18 @@ class PageController extends Controller
      * @Route("/{slug}", name="app_page_show")
      * @ParamConverter("page", class="CapcoAppBundle:Page", options={"mapping": {"slug": "slug"}})
      * @Template("CapcoAppBundle:Page:show.html.twig")
+     * @Cache(smaxage="60", public="true")
      *
      * @param Page $page
-     *
-     * @return array
      */
     public function showAction(Page $page)
     {
-        if ($page->getIsEnabled() == false) {
+        if (!$page->getIsEnabled()) {
             throw $this->createNotFoundException($this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        $response = $this->render('CapcoAppBundle:Page:show.html.twig', [
+        return [
             'page' => $page,
         ]);
-
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
-            $response->setPublic();
-            $response->setSharedMaxAge(60);
-        }
-
-        return $response;
     }
 }

@@ -47,7 +47,6 @@ export const RegistrationModal = React.createClass({
         onHide={onClose}
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
-        enforceFocus={false}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
