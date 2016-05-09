@@ -21,10 +21,9 @@ class QuestionnaireStepRepository extends EntityRepository
     public function getOne($slug)
     {
         $qb = $this->createQueryBuilder('s')
-            ->addSelect('q', 'qaq', 'qt', 'qr', 'qtr')
+            ->addSelect('q', 'qaq', 'qt', 'qtr')
             ->leftJoin('s.questionnaire', 'q')
             ->leftJoin('q.questions', 'qaq')
-            ->leftJoin('q.replies', 'qr')
             ->leftJoin('qaq.question', 'qt')
             ->leftJoin('qt.responses', 'qtr')
             ->andWhere('s.slug = :slug')
