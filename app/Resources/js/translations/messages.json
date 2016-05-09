@@ -389,7 +389,7 @@
       "code": "Code de vérification",
       "ok": "Numéro de téléphone validé",
       "infos": "<strong>Ajouter votre numéro de téléphone.</strong><br />Un code de vérification sera envoyé à ce numéro.",
-      "sent": "Nous vous avons envoyé un code au <strong>{phone}</strong>. Entrez-le ci-dessous afin de vérifier votre numéro.",
+      "sent": "Nous vous avons envoyé un code au <strong>{phone}</strong>. Entrez-le ci-dessous afin de vérifier votre numéro. Attention, en période de forte affluence, le message peut mettre du temps à arriver.",
       "ask_new": "Demander un nouveau code de validation",
       "check_your_phone": "Consultez votre téléphone",
       "phone": "Mobile",
