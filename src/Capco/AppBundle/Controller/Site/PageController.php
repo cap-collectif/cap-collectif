@@ -30,6 +30,6 @@ class PageController extends Controller
 
         return [
             'page' => $page,
-        ]);
+        ];
     }
 }
