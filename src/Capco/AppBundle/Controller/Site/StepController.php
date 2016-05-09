@@ -229,6 +229,7 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}", name="app_consultation_show_synthesis")
      * @Template("CapcoAppBundle:Step:synthesis.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @Cache(smaxage="60", public=true)
      *
      * @param $projectSlug
      * @param SynthesisStep $step
