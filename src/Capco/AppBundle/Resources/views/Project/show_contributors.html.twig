@@ -23,7 +23,7 @@
                 {{ project.participantsCount }}
                 {%  set anonymousCount = project.participantsCount - (contributors | length) %}
                 {% if anonymousCount > 0 %}
-                    {% transchoice anonymousCount with {'%count': anonymousCount} from 'CapcoAppBundle' %}
+                    {% transchoice anonymousCount with {'%count%': anonymousCount} from 'CapcoAppBundle' %}
                         project.show.contributors.anonymous
                     {% endtranschoice %}
                 {% endif %}
