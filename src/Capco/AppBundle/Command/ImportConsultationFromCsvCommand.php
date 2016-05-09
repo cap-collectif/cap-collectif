@@ -214,19 +214,19 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 } else {
                     $appendix = $opinion->getAppendices()[0];
                 }
-                $appendix->setBody('<p>'.$row['contexte'].'</p>');
+                $appendix->setBody('<p>'.nl2br(htmlspecialchars($row['contexte'])).'</p>');
             }
             $progress->advance(1);
         }
+
+        $em->flush();
+        $progress->finish();
 
         $output->writeln(
             '<info>'
             .count($opinions).
             ' opinions successfully created.</info>'
         );
-
-        $em->flush();
-        $progress->finish();
     }
 
     protected function getOpinions()

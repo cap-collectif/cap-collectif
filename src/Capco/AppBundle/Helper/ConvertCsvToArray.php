@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Helper;
 
 class ConvertCsvToArray
 {
-    public function convert($filename, $delimiter = ';')
+    public function convert($filename, $delimiter = ',')
     {
         if (!file_exists($filename) || !is_readable($filename)) {
             return false;
