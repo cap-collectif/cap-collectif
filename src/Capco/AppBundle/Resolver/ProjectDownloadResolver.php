@@ -164,6 +164,8 @@ class ProjectDownloadResolver
         $headers = [
             'published' => [
                 'id',
+                'author',
+                'phone',
                 'created',
                 'anonymous',
             ],
@@ -660,6 +662,8 @@ class ProjectDownloadResolver
     {
         $item = [
             'id' => $reply->getId(),
+            'author' => $reply->getAuthor()->getUsername(),
+            'phone' => $reply->getAuthor()->getPhone() ? $reply->getAuthor()->getPhone() : '',
             'created' => $this->dateToString($reply->getCreatedAt()),
             'anonymous' => $this->booleanToString($reply->isPrivate()),
         ];
@@ -726,7 +730,7 @@ class ProjectDownloadResolver
                 $values[] = $originalValue['other'];
             }
 
-            return implode(', ', $values);
+            return implode('; ', $values);
         }
 
         return $originalValue;

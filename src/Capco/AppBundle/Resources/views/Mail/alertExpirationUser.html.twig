@@ -18,6 +18,9 @@
     <p>
         {{ 'email.alert_expire_user.done'|trans({}, 'CapcoAppBundle') }}
     </p>
+    <p>
+        {{ 'email.alert_expire_user.footer'|trans({'%sitename%': '<a href="' ~ url('app_homepage') ~ '">' ~ sitename ~ '</a>'}, 'CapcoAppBundle')|raw }}
+    </p>
     {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}
