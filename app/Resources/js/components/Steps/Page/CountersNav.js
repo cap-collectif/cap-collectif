@@ -60,26 +60,26 @@ const CountersNav = React.createClass({
       'counters-nav': true,
       'counters-nav--bordered': this.props.bordered,
     });
-    // if (Object.keys(counters).length > 0) {
-    //   return (
-    //     <Nav className={classes} bsStyle="pills" justified>
-    //       {
-    //         Object.keys(counters).map((key, index) => {
-    //           if (this.countersData[key]) {
-    //             return (
-    //               <CounterNavItem
-    //                 key={index}
-    //                 counter={counters[key]}
-    //                 icon={this.countersData[key].icon}
-    //                 label={this.getIntlMessage(this.countersData[key].label)}
-    //               />
-    //             );
-    //           }
-    //         })
-    //       }
-    //     </Nav>
-    //   );
-    // }
+    if (Object.keys(counters).length > 0) {
+      return (
+        <Nav className={classes} bsStyle="pills" justified>
+          {
+            Object.keys(counters).map((key, index) => {
+              if (this.countersData[key]) {
+                return (
+                  <CounterNavItem
+                    key={index}
+                    counter={counters[key]}
+                    icon={this.countersData[key].icon}
+                    label={this.getIntlMessage(this.countersData[key].label)}
+                  />
+                );
+              }
+            })
+          }
+        </Nav>
+      );
+    }
     return null;
   },
 
