@@ -50,8 +50,8 @@ const PhoneForm = React.createClass({
         })
         .catch((error) => {
           const response = error.response;
-          if (response.errors) {
-            const errors = this.state.errors;
+          const errors = this.state.errors;
+          if (response.errors !== null) {
             if (response.errors.children.phone.errors && response.errors.children.phone.errors.length > 0) {
               if (response.errors.children.phone.errors[0] === 'already_used_phone') {
                 errors.phone = ['profile.constraints.phone.already_used'];
@@ -59,8 +59,10 @@ const PhoneForm = React.createClass({
                 errors.phone = ['profile.constraints.phone.invalid'];
               }
             }
-            this.setState({ errors: errors });
+          } else if (response.message === 'sms_failed_to_send') {
+            errors.phone = [this.getIntlMessage('phone.confirm.alert.failed_to_send')];
           }
+          this.setState({ errors: errors });
           this.props.onSubmitFailure();
         });
     }
