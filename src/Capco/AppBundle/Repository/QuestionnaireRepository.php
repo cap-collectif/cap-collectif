@@ -22,9 +22,9 @@ class QuestionnaireRepository extends EntityRepository
     public function getOne($id)
     {
         $qb = $this->createQueryBuilder('q')
-            ->addSelect('q', 'r', 'qst')
-            ->leftJoin('q.replies', 'r')
-            ->leftJoin('q.questions', 'qst')
+            ->addSelect('q', 'qaq', 'qt')
+            ->leftJoin('q.questions', 'qaq')
+            ->leftJoin('qaq.question', 'qt')
             ->andWhere('q.id = :id')
             ->setParameter('id', $id)
         ;

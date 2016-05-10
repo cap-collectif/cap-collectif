@@ -827,7 +827,7 @@ user:
   register:
     confirmation_message:
       hello: Bonjour %username%,
-      thanks: Merci de vous être inscrit sur %sitename%.
+      thanks: Merci de votre inscription sur %sitename%.
       please: Veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique :
       validate: <a href="%url%"><strong>Confirmer mon adresse électronique</strong></a>
       participate: A l'aide de votre compte, vous pourrez voter, contribuer et éditer votre profil.
