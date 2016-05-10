@@ -22,6 +22,11 @@ sub vcl_recv {
     set req.http.X-Forwarded-Port = "80";
   }
 
+  # Only cache GET or HEAD requests. This makes sure the POST requests are always passed.
+  if (req.method != "GET" && req.method != "HEAD") {
+    return (pass);
+  }
+
   # Remove all cookies except the session ID.
   if (req.http.Cookie) {
     set req.http.Cookie = ";" + req.http.Cookie;

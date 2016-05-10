@@ -19,7 +19,7 @@ form:
   label_zip_code: Code postal
   label_expires_at: Date d'expiration
   label_phone_confirmed: Compte vérifié par SMS
-
+  label_confirmation_token: Code de vérification par email
 
 gender:
   female: Femme

@@ -238,6 +238,7 @@ class UserAdmin extends BaseAdmin
                     'required' => false,
                 ])
                 ->add('enabled', null, ['required' => false])
+                ->add('confirmationToken', null, ['required' => false])
             ;
 
             if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('phone_confirmation')) {
