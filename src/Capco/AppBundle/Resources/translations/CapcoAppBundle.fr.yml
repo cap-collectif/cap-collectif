@@ -22,7 +22,7 @@ global:
     typo: Vouliez-vous dire
 
 sms:
-  content: "%sitename% : Votre code de confirmation est %code%."
+  content: "%sitename% : Votre code de confirmation est %code%. Répondez STOP pour annuler."
 #Errors
 error:
   404:
@@ -827,7 +827,7 @@ user:
   register:
     confirmation_message:
       hello: Bonjour %username%,
-      thanks: Merci de votre inscription sur %sitename%.
+      thanks: Merci de vous être inscrit sur %sitename%.
       please: Veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique :
       validate: <a href="%url%"><strong>Confirmer mon adresse électronique</strong></a>
       participate: A l'aide de votre compte, vous pourrez voter, contribuer et éditer votre profil.
