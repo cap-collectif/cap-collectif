@@ -101,7 +101,7 @@ Feature: Reply Restful Api
     }
     """
 
-  @security @elasticsearch @test
+  @security @elasticsearch
   Scenario: Logged in API client wants to add a reply
     Given I am logged in to api as user_with_phone_not_phone_confirmed
     When I send a POST request to "/api/questionnaires/1/replies" with json:

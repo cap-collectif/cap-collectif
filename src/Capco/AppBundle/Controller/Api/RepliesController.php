@@ -130,14 +130,6 @@ class RepliesController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
         $em->persist($reply);
         $em->flush();
-
-        // If not present, es listener will take some time to execute the refresh
-        // and, next time replies will be fetched, the set of data will be outdated.
-        // Keep in mind that refresh should usually not be triggered manually.
-        /*$index = $this->get('fos_elastica.index');
-        $index->refresh();*/
-
-        return $reply;
     }
 
     /**
