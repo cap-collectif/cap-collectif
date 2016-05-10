@@ -168,6 +168,7 @@ class UsersController extends FOSRestController
         try {
           $this->get('sms.service')->confirm($user);
         } catch (\Services_Twilio_RestException $e) {
+          $this->get('logger')->error($e->getMessage());
           throw new BadRequestHttpException('sms_failed_to_send');
         }
 
