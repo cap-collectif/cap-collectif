@@ -20,7 +20,7 @@ class ContactType extends AbstractType
             ->add('email', 'email', [
                 'label' => 'contact.form.email',
                 'required' => true,
-                'constraints' => [new NotBlank(['message' => 'contact.no_email']), new Email(['checkMX' => true])],
+                'constraints' => [new NotBlank(['message' => 'contact.no_email']), new Email()],
             ])
             ->add('message', 'textarea', [
                 'label' => 'contact.form.message',

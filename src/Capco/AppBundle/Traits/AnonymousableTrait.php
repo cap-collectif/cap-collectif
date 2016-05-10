@@ -14,7 +14,7 @@ trait AnonymousableTrait
 
     /**
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
-     * @Assert\Email(checkMX = true)
+     * @Assert\Email()
      */
     private $email;
 

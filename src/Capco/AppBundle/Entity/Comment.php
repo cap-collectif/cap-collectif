@@ -109,7 +109,7 @@ abstract class Comment implements VotableInterface, HasAuthorInterface
      * @var
      *
      * @ORM\Column(name="author_email", type="string", nullable=true)
-     * @Assert\Email(checkMX = true, message="comment.create.invalid_email_error")
+     * @Assert\Email(message="comment.create.invalid_email_error")
      */
     protected $authorEmail;
 

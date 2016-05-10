@@ -26,7 +26,7 @@ Scenario: Cron wants to expire users
       And 1 mail should be sent
       And I open mail with subject "Cap-Collectif — Rappel : Vous n'avez pas encore confirmé votre adresse email"
       And I should see "Bonjour user_not_confirmed_to_be_expired_in_24_hours," in mail
-      And I should see "Merci de votre inscription sur Cap-Collectif." in mail
+      And I should see "Merci de vous être inscrit sur Cap-Collectif." in mail
       And I should see "Veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique :" in mail
       And I should see "Confirmer mon adresse électronique" in mail
       And I should see "/email-confirmation/qsdfgsqdqsdsqdsqdhjkldsqdsqdsqdqsdm" in mail

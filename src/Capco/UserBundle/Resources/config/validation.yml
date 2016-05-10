@@ -11,7 +11,7 @@ Capco\UserBundle\Entity\User:
       - Length: { min: 8, max: 128, minMessage: password.minMessage, groups: [registration] }
     email:
       - NotBlank: { message: email.blank, groups: [registration, profile] }
-      - Email: { checkMX: true, message: email.invalid, groups: [registration, profile] }
+      - Email: { message: email.invalid, groups: [registration, profile] }
       - EmailChecker\Constraints\NotThrowawayEmail: { message: email.throwable, groups: [registration, profile] }
     twitterUrl:
       - Url: { groups: [profile] }
