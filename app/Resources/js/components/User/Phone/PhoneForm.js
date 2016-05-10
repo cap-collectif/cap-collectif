@@ -50,7 +50,7 @@ const PhoneForm = React.createClass({
             .catch((err) => {
               if (err.response.message === 'sms_failed_to_send') {
                 const errors = this.state.errors;
-                errors.phone = [this.getIntlMessage('phone.confirm.alert.failed_to_send')];
+                errors.phone = ['phone.confirm.alert.failed_to_send'];
                 this.setState({ errors: errors });
               } else {
                 this.setState(this.getInitialState());
