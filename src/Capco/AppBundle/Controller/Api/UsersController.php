@@ -161,7 +161,7 @@ class UsersController extends FOSRestController
         }
 
         // security against mass click sms resend
-        if ($user->getSmsConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
+        if ($user->getSmsConfirmationSentAt() > (new \DateTime())->modify('- 3 minutes')) {
             throw new BadRequestHttpException('sms_already_sent_recently');
         }
 
