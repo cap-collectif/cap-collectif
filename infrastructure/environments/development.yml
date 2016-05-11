@@ -14,10 +14,10 @@ application:
         - blackfire:blackfire
 
 blackfire:
-    restart: always
-    image: blackfire/blackfire
+    image: blackfire/blackfire:latest
     environment:
-        - BLACKFIRE_SERVER_ID=eeb5e6cc-acbd-4966-9c67-8d836b26b066
+        - BLACKFIRE_LOG_LEVEL=4
+        - BLACKFIRE_SERVER_ID=c5118c2f-055f-4385-9c8a-ac31955ffb20
         - BLACKFIRE_SERVER_TOKEN=***REMOVED***
 
 elasticsearch:
@@ -36,10 +36,10 @@ chrome:
         - "5900:5900"
 
 # You can also test on a different browser
-firefox:
-  image: selenium/node-firefox-debug:latest
-  links:
-    - seleniumhub:hub
-    - application:application
-  ports:
-    - "5901:5900"
+# firefox:
+#   image: selenium/node-firefox-debug:latest
+#   links:
+#     - seleniumhub:hub
+#     - application:application
+#   ports:
+#     - "5901:5900"

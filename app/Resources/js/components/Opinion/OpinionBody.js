@@ -1,8 +1,8 @@
 import React from 'react';
 import { Well } from 'react-bootstrap';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
-import FormattedText from '../../services/FormattedText';
+import Validator from '../../services/Validator';
 
 const OpinionBody = React.createClass({
   propTypes: {
@@ -20,22 +20,18 @@ const OpinionBody = React.createClass({
     if (this.isVersion()) {
       return (
         <div>
-          {opinion.comment !== null && FormattedText.strip(opinion.comment).length
+          {opinion.comment !== null && (new Validator(opinion.comment)).notBlankHtml()
             ? <div>
                 <p className="control-label h5">
                   {this.getIntlMessage('opinion.version_comment')}
                 </p>
                 <Well bsSize="small">
-                  <div>
-                    <FormattedHTMLMessage message={opinion.comment} />
-                  </div>
+                  <div dangerouslySetInnerHTML={{ __html: opinion.comment }} />
                 </Well>
               </div>
             : null
           }
-          <div className="diff">
-            <FormattedHTMLMessage message={opinion.diff} />
-          </div>
+          <div className="diff" dangerouslySetInnerHTML={{ __html: opinion.diff }} />
         </div>
       );
     }

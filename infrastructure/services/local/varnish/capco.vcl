@@ -34,6 +34,10 @@ sub vcl_recv {
   }
 
   # DEV only
+  if (req.http.X-Blackfire-Query) {
+    return (pass);
+  }
+
   if (req.method == "BAN") {
     ban("req.http.host == " + req.http.host);
     return(synth(200, "Ban added"));
