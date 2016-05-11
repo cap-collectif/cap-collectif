@@ -19,8 +19,8 @@ class DiffGenerator
     public function generate(HasDiffInterface $entity)
     {
         if ($entity instanceof OpinionVersion) {
-            $oldText = $entity->getParent()->getBody();
-            $newText = $entity->getBody();
+            $oldText = html_entity_decode($entity->getParent()->getBody());
+            $newText = html_entity_decode($entity->getBody());
             $diff = $this->diffService->diff($oldText, $newText);
             $entity->setDiff($diff);
 
@@ -28,8 +28,8 @@ class DiffGenerator
         }
 
         if ($entity instanceof OpinionModal) {
-            $oldText = $entity->getBefore();
-            $newText = $entity->getAfter();
+            $oldText = html_entity_decode($entity->getBefore());
+            $newText = html_entity_decode($entity->getAfter());
             $diff = $this->diffService->diff($oldText, $newText);
             $entity->setDiff($diff);
 
