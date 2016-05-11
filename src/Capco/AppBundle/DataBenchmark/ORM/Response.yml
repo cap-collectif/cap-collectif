@@ -1,9 +1,0 @@
-Capco\AppBundle\Entity\Response:
-  response9:
-    question: @simplequestion2
-    reply: @reply1
-    value: Trop bien ! On va voir de supers athlètes à Paris !
-  response10:
-    question: @multiplequestion1
-    reply: @reply1
-    value: {"labels":["Athlétisme","Sports collectifs"],"other":null}
