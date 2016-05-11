@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\Steps\QuestionnaireStep:
+  questionnairestep1:
+    title: Questionnaire des JO 2024
+    body: <p><text(1000)></p>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
+    verification: 'sms'
