@@ -274,6 +274,7 @@
     },
     "header": {
       "article": "Article",
+      "back": "Retour",
       "opinion": "Proposition",
       "version": "Modification"
     },
