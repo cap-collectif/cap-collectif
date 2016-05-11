@@ -9,6 +9,11 @@ backend default {
 # Called at the beginning of a request, after the complete request has been received and parsed.
 sub vcl_recv {
 
+  # Delete cookie for static files
+  if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css)$") {
+    unset req.http.Cookie;
+  }
+
   # Ensure that the Symfony Router generates URLs correctly with Varnish
   if (req.http.X-Forwarded-Proto == "https" ) {
     set req.http.X-Forwarded-Port = "443";
@@ -35,11 +40,6 @@ sub vcl_recv {
 
   # Disable cache for development
   if (req.http.host == "capco.dev") {
-    return (pass);
-  }
-
-  # Disable cache on static files
-  if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css)$") {
     return (pass);
   }
   ## End local docker only

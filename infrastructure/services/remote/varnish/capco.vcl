@@ -9,11 +9,10 @@ backend default {
 # Called at the beginning of a request, after the complete request has been received and parsed.
 sub vcl_recv {
 
-  # Prod only
+  # Delete cookie for static files
   if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css)$") {
     unset req.http.Cookie;
   }
-  # End Prod only
 
   # Ensure that the Symfony Router generates URLs correctly with Varnish
   if (req.http.X-Forwarded-Proto == "https" ) {
