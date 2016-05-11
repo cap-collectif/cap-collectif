@@ -1,7 +1,7 @@
 {% for opinionType in opinionTypesWithUserOpinions %}
     <div class="block block--bordered">
         <div class="opinion opinion--{{ opinionType.color }} opinion--default">
-            <div class="opinion__header opinion__header--mobile-centered" style="height: 44px">
+            <div class="opinion__header opinion__header--mobile-centered">
                 <h3 class="pull-left  h4  opinion__header__title"> {{ opinionType.title }} <span class="badge">{{ opinionType.Opinions|length }}</span></h3>
             </div>
         </div>
