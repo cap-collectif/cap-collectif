@@ -208,7 +208,7 @@ ivory_ck_editor:
             language: fr
             skin: minimalist
             extraPlugins: autolink,autogrow
-            extraAllowedContent: "a[!href,_src,target,class]"
+            extraAllowedContent: "a[!href,_src,target,class],iframe[data-type]"
         empty_editor:
             removePlugins: 'toolbar,elementspath,resize'
             language: fr
