@@ -73,11 +73,11 @@ RUN apt-get update && \
     apt-get clean all
 
 # Install blackfire PHP Probe
-RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
-    && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
-    && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp \
-    && mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so \
-    && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > /etc/php/7.0/fpm/conf.d/blackfire.ini
+RUN curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/70 && \
+    tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
+    mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so && \
+    echo "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > /etc/php/7.0/fpm/conf.d/20-blackfire.ini && \
+    echo "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > /etc/php/7.0/cli/conf.d/20-blackfire.ini
 
 # Install nginx, mysql client and redis client
 RUN apt-get update && \

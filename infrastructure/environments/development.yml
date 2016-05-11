@@ -13,6 +13,7 @@ application:
         - mailcatcher:mailcatchersmtp
         - blackfire:blackfire
 
+# Blackfire Agent
 blackfire:
     image: blackfire/blackfire:latest
     environment:
