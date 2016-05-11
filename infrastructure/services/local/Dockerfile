@@ -53,8 +53,9 @@ RUN apt-get update && \
     export PATH=/usr/local/depot_tools:$PATH && \
     cd /tmp && \
     rm -rf /tmp/* && \
-    fetch --nohooks --no-history v8 && \
+    fetch --nohooks v8 && \
     cd v8 && \
+    git checkout 4.9.385.28 && \
     gclient sync --nohooks && \
     export GYP_DEFINES="use_system_icu=1" && \
     export GYPFLAGS="-Dv8_use_external_startup_data=0 -Dclang=0" && \

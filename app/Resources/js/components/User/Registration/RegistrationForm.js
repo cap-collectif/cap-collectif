@@ -79,7 +79,13 @@ export const RegistrationForm = React.createClass({
               const errors = this.state.errors;
               if (response.errors.children.email.errors && response.errors.children.email.errors.length > 0) {
                 const emailErrors = [];
-                response.errors.children.email.errors.map(string => emailErrors.push('registration.constraints.' + string));
+                response.errors.children.email.errors.map(string => {
+                  if (string === 'already_used_email') {
+                    emailErrors.push('registration.constraints.email.already_used');
+                  } else {
+                    emailErrors.push('registration.constraints.' + string);
+                  }
+                });
                 errors.email = emailErrors;
               }
               if (response.errors.children.captcha.errors && response.errors.children.captcha.errors.length > 0) {
