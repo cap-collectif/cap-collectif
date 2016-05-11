@@ -1,7 +1,7 @@
 {{ react_intl_component('NavbarApp', {'props':
     {
         'logo': media_public_url(capco_site_image_media('image.logo'), 'default_logo'),
-        'items': headers_list(),
+        'items': headers_list(app.request.pathInfo),
     }}
 )}}
 
