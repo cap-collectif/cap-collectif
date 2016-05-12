@@ -31,8 +31,8 @@ class NavigationExtension extends \Twig_Extension
        ];
     }
 
-    public function getHeaders()
+    public function getHeaders($currentUrl = null)
     {
-        return $this->menuResolver->getEnabledMenuItemsWithChildren(MenuItem::TYPE_HEADER);
+        return $this->menuResolver->getEnabledMenuItemsWithChildren(MenuItem::TYPE_HEADER, $currentUrl);
     }
 }

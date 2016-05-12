@@ -28,7 +28,7 @@ class MenuItemResolver
      *
      * @return array
      */
-    public function getEnabledMenuItemsWithChildren($menu)
+    public function getEnabledMenuItemsWithChildren($menu, $currentUrl = null)
     {
         if (!$menu) {
             return [];
@@ -42,20 +42,24 @@ class MenuItemResolver
             $navs = [];
             foreach ($children as $child) {
                 if ($child->getParent()->getId() === $parent->getId()) {
+                    $link = $this->getMenuUrl($child->getLink());
                     $navs[] = [
                         'id' => $child->getId(),
                         'title' => $child->getTitle(),
-                        'link' => $this->getMenuUrl($child->getLink()),
+                        'link' => $link,
                         'hasEnabledFeature' => $this->manager->containsEnabledFeature($child->getAssociatedFeatures()),
+                        'active' => $this->urlMatchCurrent($link, $currentUrl),
                     ];
                 }
             }
+            $link = $this->getMenuUrl($parent->getLink());
             $links[] = [
                 'id' => $parent->getId(),
                 'title' => $parent->getTitle(),
-                'link' => $this->getMenuUrl($parent->getLink()),
+                'link' => $link,
                 'hasEnabledFeature' => $this->manager->containsEnabledFeature($parent->getAssociatedFeatures()),
                 'children' => $navs,
+                'active' => $this->urlMatchCurrent($link, $currentUrl),
             ];
         }
 
@@ -65,6 +69,14 @@ class MenuItemResolver
     public function hasEnabledFeatures($menuItem)
     {
         return $this->manager->containsEnabledFeature($menuItem->getAssociatedFeatures());
+    }
+
+    public function urlMatchCurrent($link = null, $current = null) {
+        if (!$link || !$current) {
+            return false;
+        }
+        $fixedLink = '/' . $link;
+        return $link === $current || substr($current, -strlen($fixedLink)) === $fixedLink;
     }
 
     public function getMenuUrl($url)
