@@ -34,12 +34,6 @@ monolog:
         buffered:
             type: buffer
             handler: swift
-        swift:
-            type: swift_mailer
-            from_email: error@cap-collectif.com
-            to_email: [adavid@jolicode.com]
-            subject: An error occurred
-            level: debug
         console:
             type: console
             bubble: false
