@@ -59,12 +59,16 @@ class RepliesController extends FOSRestController
      * @ParamConverter("reply", options={"mapping": {"reply_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"Replies", "UsersInfos", "UserMedias", "Steps"})
      * @Cache(smaxage="120", public=true)
+     * @Security("has_role('ROLE_USER')")
      *
      * @param Reply $reply
      * @return Reply
      */
     public function getReplyAction(Reply $reply)
     {
+        if ($reply->getAuthor() !== $this->getUser()) {
+            throw new AccessDeniedException();
+        }
         return $reply;
     }
 
