@@ -8,7 +8,6 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class QuestionnairesController extends FOSRestController
 {
@@ -27,7 +26,6 @@ class QuestionnairesController extends FOSRestController
      * @Get("/questionnaires/{id}")
      * @ParamConverter("questionnaire", options={"mapping": {"id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"Questionnaires", "Questions"})
-     * @Cache(smaxage="120", public=true)
      *
      * @param Questionnaire $questionnaire
      *

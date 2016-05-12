@@ -12,7 +12,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -27,6 +27,7 @@ class RepliesController extends FOSRestController
      *
      * @param Request       $request
      * @param Questionnaire $questionnaire
+     * @return array
      */
     public function getUserRepliesByFormAction(Request $request, Questionnaire $questionnaire)
     {
@@ -57,7 +58,6 @@ class RepliesController extends FOSRestController
      * @Get("/questionnaires/{questionnaire_id}/replies/{reply_id}")
      * @ParamConverter("reply", options={"mapping": {"reply_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"Replies", "UsersInfos", "UserMedias", "Steps"})
-     * @Cache(smaxage="120", public=true)
      *
      * @param Reply $reply
      * @return Reply
