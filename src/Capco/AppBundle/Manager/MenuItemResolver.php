@@ -71,11 +71,13 @@ class MenuItemResolver
         return $this->manager->containsEnabledFeature($menuItem->getAssociatedFeatures());
     }
 
-    public function urlMatchCurrent($link = null, $current = null) {
+    public function urlMatchCurrent($link = null, $current = null)
+    {
         if (!$link || !$current) {
             return false;
         }
-        $fixedLink = '/' . $link;
+        $fixedLink = '/'.$link;
+
         return $link === $current || substr($current, -strlen($fixedLink)) === $fixedLink;
     }
 
