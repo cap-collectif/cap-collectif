@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class HasRequiredNumberOfChoices extends Constraint
 {
-
     public function validatedBy()
     {
         return get_class($this).'Validator';

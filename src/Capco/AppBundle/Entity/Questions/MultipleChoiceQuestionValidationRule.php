@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * MultipleChoiceQuestionValidationRule
+ * MultipleChoiceQuestionValidationRule.
  *
  * @ORM\Embeddable
  *
@@ -35,13 +35,16 @@ final class MultipleChoiceQuestionValidationRule
     private $number;
 
     // Private constructor to ensure objects immutability
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     public static function create($type, $number)
     {
-        $rule = new MultipleChoiceQuestionValidationRule();
+        $rule = new self();
         $rule->type = $type;
         $rule->number = $number;
+
         return $rule;
     }
 
