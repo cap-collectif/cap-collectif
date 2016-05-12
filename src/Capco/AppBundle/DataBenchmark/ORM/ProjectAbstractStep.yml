@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
+  pas1:
+    step: @questionnaireStep1
+    project: @project1
+    position: 1
