@@ -19,6 +19,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ProjectDownloadResolver
@@ -123,6 +124,8 @@ class ProjectDownloadResolver
 
     public function getContent(AbstractStep $step, $format)
     {
+        $stopwatch = new Stopwatch();
+        $stopwatch->start('get content');
         if (null == $step) {
             throw new NotFoundHttpException('Step not found');
         }
@@ -144,6 +147,7 @@ class ProjectDownloadResolver
             throw new \Exception('Step must be of type collect, questionnaire or consultation');
         }
 
+        $stopwatch->lap('get content');
         $title = $step->getProject() ? $step->getProject()->getTitle() . '_' : '';
         $title .= $step->getTitle();
 
@@ -156,6 +160,17 @@ class ProjectDownloadResolver
                 'locale' => $this->translator->getLocale(),
             ]
         );
+
+        $endEvent = $stopwatch->stop('get content');
+        dump('total done in : ' . (int)($endEvent->getDuration()/60000) . '.' . round(($endEvent->getDuration() % 60000)/1000));
+        dump('using: ' . $endEvent->getMemory()/1000000 . ' Mb');
+        $periods = $endEvent->getPeriods();
+        $fetching = $periods[0];
+        dump('fetching in ' . (int)($fetching->getDuration()/60000) . '.' . round(($fetching->getDuration() % 60000)/1000));
+        dump('using: '.$fetching->getMemory()/1000000 . ' Mb');
+        $rendering = $periods[1];
+        dump('rendering in ' . (int)($rendering->getDuration()/60000) . '.' . + round(($rendering->getDuration() % 60000)/1000));
+        dump('using: '.$rendering->getMemory()/1000000 . ' Mb');
 
         return $content;
     }
@@ -656,7 +671,7 @@ class ProjectDownloadResolver
                 $values[] = $originalValue['other'];
             }
 
-            return implode('; ', $values);
+            return implode(';', $values);
         }
 
         return $originalValue;
