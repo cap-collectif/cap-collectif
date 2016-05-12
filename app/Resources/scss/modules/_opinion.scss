@@ -30,8 +30,8 @@
 
   // Header of opinion blocks
   .opinion__header {
+    padding: 2px 15px;
     height: 44px;
-    padding: 3px 15px;
     border-bottom: 1px solid $border-color;
 
     .opinion__header__title {
@@ -40,7 +40,7 @@
     }
 
     .opinion__header__back {
-      margin: 12px 0 3px;
+      margin: 3px 0 3px;
     }
 
     .opinion__header__filter {
@@ -59,6 +59,9 @@
 
     &.opinion__header--centered {
       text-align: center;
+      .opinion__header__title {
+        display: inline-block;
+      }
     }
 
     &.opinion__header--mobile-centered {

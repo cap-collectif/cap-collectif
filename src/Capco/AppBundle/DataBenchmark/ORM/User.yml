@@ -1,0 +1,11 @@
+Capco\UserBundle\Entity\User:
+    user{1..5000}:
+        username: <current()>
+        firstname: <current()>
+        lastname: <current()>
+        email (unique): <email()>
+        enabled: true
+        userType: ~
+        password: <password()>
+        confirmationToken: ~
+        phoneConfirmed: true

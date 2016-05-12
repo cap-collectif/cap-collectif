@@ -32,9 +32,7 @@ const Navbar = React.createClass({
         <div className="container">
           <Navigation.Header>
             <Navigation.Brand href="/" id="home">
-              <a href="/">
-                <img src={this.props.logo} title={this.getIntlMessage('navbar.homepage')} alt={this.getIntlMessage('navbar.homepage')} />
-              </a>
+              <img src={this.props.logo} title={this.getIntlMessage('navbar.homepage')} alt={this.getIntlMessage('navbar.homepage')} />
             </Navigation.Brand>
             <Navigation.Toggle />
           </Navigation.Header>
@@ -54,7 +52,6 @@ const Navbar = React.createClass({
                                       key={childIndex}
                                       eventKey={index + childIndex}
                                       href={child.link}
-                                      active={child.active}
                                     >
                                       {child.title}
                                     </MenuItem>
@@ -71,7 +68,6 @@ const Navbar = React.createClass({
                           key={index}
                           eventKey={index}
                           href={header.link}
-                          active={header.active}
                         >
                         {header.title}
                         </NavItem>

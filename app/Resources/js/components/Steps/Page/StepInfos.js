@@ -14,9 +14,6 @@ const StepInfos = React.createClass({
     const { step } = this.props;
     const counters = step.counters;
     const body = step.body;
-    if (!body) {
-      return null;
-    }
     return (
       <div className="step__infos block block--bordered">
         <CountersNav counters={counters} bordered={!!body} />
