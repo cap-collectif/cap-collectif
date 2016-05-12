@@ -24,6 +24,7 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
         if (!$input->getOption('force')) {
             $output->writeln('This command will clear your databse and populate it with lots of data, if you\'re sure that you want those data, go ahead and add --force');
             $output->writeln('Please set the --force option to run this command');
+
             return;
         }
 

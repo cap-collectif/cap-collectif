@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class RepliesController extends FOSRestController
 {
@@ -60,6 +61,7 @@ class RepliesController extends FOSRestController
      * @Cache(smaxage="120", public=true)
      *
      * @param Reply $reply
+     *
      * @return Reply
      */
     public function getReplyAction(Reply $reply)
@@ -88,6 +90,7 @@ class RepliesController extends FOSRestController
      * @param Questionnaire $questionnaire
      *
      * @throws BadRequestHttpException
+     *
      * @return Reply
      */
     public function postReplyAction(Request $request, Questionnaire $questionnaire)
@@ -156,6 +159,7 @@ class RepliesController extends FOSRestController
      *
      * @throws AccessDeniedException
      * @throws BadRequestHttpException
+     *
      * @return Reply
      */
     public function putReplyAction(Request $request, Questionnaire $questionnaire, Reply $reply)
@@ -207,6 +211,7 @@ class RepliesController extends FOSRestController
      * @param Reply         $reply
      *
      * @throws BadRequestHttpException
+     *
      * @return array
      */
     public function deleteReplyAction(Questionnaire $questionnaire, Reply $reply)
