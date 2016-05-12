@@ -24,21 +24,17 @@ class HasRequiredNumberOfChoicesValidator extends ConstraintValidator
             }
             if ($rule->getType() === 'min' && $valueLength < $rule->getNumber()) {
                 $this->context->addViolationAt('value', 'response.min', ['%nb%' => $rule->getNumber()], null);
-
                 return;
             }
             if ($rule->getType() === 'max' && $valueLength > $rule->getNumber()) {
                 $this->context->addViolationAt('value', 'response.max', ['%nb%' => $rule->getNumber()], null);
-
                 return;
             }
             if ($rule->getType() === 'equal' && $valueLength !== $rule->getNumber()) {
                 $this->context->addViolationAt('value', 'response.equal', ['%nb%' => $rule->getNumber()], null);
-
                 return;
             }
         }
-
         return;
     }
 }

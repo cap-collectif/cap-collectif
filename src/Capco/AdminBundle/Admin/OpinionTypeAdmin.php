@@ -226,15 +226,15 @@ class OpinionTypeAdmin extends Admin
 
     public function postUpdate($object)
     {
-        $this->verifyTree($object);
+        $this->verifyTree();
     }
 
     public function postRemove($object)
     {
-        $this->verifyTree($object);
+        $this->verifyTree();
     }
 
-    public function verifyTree($object)
+    public function verifyTree()
     {
         $em = $this->getConfigurationPool()
             ->getContainer()
@@ -245,10 +245,6 @@ class OpinionTypeAdmin extends Admin
         ;
         $repo->verify();
         $repo->recover();
-        if ($object && $object->getParent()) {
-            $repo->reorder($object->getParent(), 'position');
-        }
-
         $em->flush();
     }
 }
