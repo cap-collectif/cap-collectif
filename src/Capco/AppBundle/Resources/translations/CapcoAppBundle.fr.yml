@@ -1084,6 +1084,9 @@ video:
 
 # project download
 project_download:
+  sheets:
+    published: Contenu publié
+    unpublished: Contenu à la corbeille
   label:
     anonymous: Anonyme
     answer: Réponse officielle

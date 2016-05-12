@@ -19,7 +19,6 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ProjectDownloadResolver
@@ -36,54 +35,105 @@ class ProjectDownloadResolver
         'csv' => 'text/csv',
     ];
 
+    protected $sheets = [
+        'published',
+        'unpublished',
+    ];
+
     protected $consultationHeaders = [
-        'id',
-        'author',
-        'author_id',
-        'user_type',
-        'created',
-        'updated',
-        'title',
-        'content_type',
-        'category',
-        'related_object',
-        'content',
-        'link',
-        'score',
-        'total_votes',
-        'votes_ok',
-        'votes_mitigated',
-        'votes_nok',
-        'sources',
-        'total_arguments',
-        'arguments_ok',
-        'arguments_nok',
-        'trashed',
-        'trashed_date',
-        'trashed_reason',
+        'published' => [
+            'id',
+            'author',
+            'author_id',
+            'user_type',
+            'created',
+            'updated',
+            'title',
+            'content_type',
+            'category',
+            'related_object',
+            'content',
+            'link',
+            'score',
+            'total_votes',
+            'votes_ok',
+            'votes_mitigated',
+            'votes_nok',
+            'sources',
+            'total_arguments',
+            'arguments_ok',
+            'arguments_nok',
+        ],
+        'unpublished' => [
+            'id',
+            'author',
+            'author_id',
+            'user_type',
+            'created',
+            'updated',
+            'title',
+            'content_type',
+            'category',
+            'related_object',
+            'content',
+            'link',
+            'score',
+            'total_votes',
+            'votes_ok',
+            'votes_mitigated',
+            'votes_nok',
+            'sources',
+            'total_arguments',
+            'arguments_ok',
+            'arguments_nok',
+            'trashed',
+            'trashed_date',
+            'trashed_reason',
+        ],
     ];
 
     protected $collectHeaders = [
-        'id',
-        'title',
-        'content_type',
-        'author',
-        'author_id',
-        'author_email',
-        'user_type',
-        'content',
-        'theme',
-        'district',
-        'status',
-        'estimation',
-        'answer',
-        'nbVotes',
-        'created',
-        'updated',
-        'link',
-        'trashed',
-        'trashed_date',
-        'trashed_reason',
+        'published' => [
+            'id',
+            'title',
+            'content_type',
+            'author',
+            'author_id',
+            'author_email',
+            'user_type',
+            'content',
+            'theme',
+            'district',
+            'status',
+            'estimation',
+            'answer',
+            'nbVotes',
+            'created',
+            'updated',
+            'link',
+        ],
+        'unpublished' => [
+            'id',
+            'title',
+            'content_type',
+            'author',
+            'author_id',
+            'author_email',
+            'user_type',
+            'content',
+            'theme',
+            'district',
+            'status',
+            'estimation',
+            'answer',
+            'nbVotes',
+            'created',
+            'updated',
+            'link',
+            'trashed',
+            'trashed_date',
+            'trashed_reason',
+        ],
     ];
 
     protected $em;
@@ -99,23 +149,32 @@ class ProjectDownloadResolver
         $this->templating = $templating;
         $this->translator = $translator;
         $this->urlResolver = $urlResolver;
-        $this->headers = [];
-        $this->data = [];
+        $this->headers = [
+            'published' => [],
+            'unpublished' => [],
+        ];
+        $this->data = [
+            'published' => [],
+            'unpublished' => [],
+        ];
     }
 
     public function getQuestionnaireStepHeaders(QuestionnaireStep $step)
     {
         $headers = [
-            'id',
-            'author',
-            'phone',
-            'created',
-            'anonymous',
+            'published' => [
+                'id',
+                'author',
+                'phone',
+                'created',
+                'anonymous',
+            ],
+            'unpublished' => [],
         ];
 
         if ($step->getQuestionnaire()) {
             foreach ($step->getQuestionnaire()->getRealQuestions() as $question) {
-                $headers[] = ['label' => $question->getTitle(), 'raw' => true];
+                $headers['published'][] = ['label' => $question->getTitle(), 'raw' => true];
             }
         }
 
@@ -124,8 +183,6 @@ class ProjectDownloadResolver
 
     public function getContent(AbstractStep $step, $format)
     {
-        $stopwatch = new Stopwatch();
-        $stopwatch->start('get content');
         if (null == $step) {
             throw new NotFoundHttpException('Step not found');
         }
@@ -147,30 +204,19 @@ class ProjectDownloadResolver
             throw new \Exception('Step must be of type collect, questionnaire or consultation');
         }
 
-        $stopwatch->lap('get content');
-        $title = $step->getProject() ? $step->getProject()->getTitle() . '_' : '';
+        $title = $step->getProject() ? $step->getProject()->getTitle() + '_' : '';
         $title .= $step->getTitle();
 
         $content = $this->templating->render('CapcoAppBundle:Project:download.xls.twig',
             [
                 'title' => $title,
                 'format' => $format,
+                'sheets' => $this->sheets,
                 'headers' => $this->headers,
                 'data' => $data,
                 'locale' => $this->translator->getLocale(),
             ]
         );
-
-        $endEvent = $stopwatch->stop('get content');
-        dump('total done in : ' . (int)($endEvent->getDuration()/60000) . '.' . round(($endEvent->getDuration() % 60000)/1000));
-        dump('using: ' . $endEvent->getMemory()/1000000 . ' Mb');
-        $periods = $endEvent->getPeriods();
-        $fetching = $periods[0];
-        dump('fetching in ' . (int)($fetching->getDuration()/60000) . '.' . round(($fetching->getDuration() % 60000)/1000));
-        dump('using: '.$fetching->getMemory()/1000000 . ' Mb');
-        $rendering = $periods[1];
-        dump('rendering in ' . (int)($rendering->getDuration()/60000) . '.' . + round(($rendering->getDuration() % 60000)/1000));
-        dump('using: '.$rendering->getMemory()/1000000 . ' Mb');
 
         return $content;
     }
@@ -188,16 +234,23 @@ class ProjectDownloadResolver
     /*
      * Add item in correct section
      */
-    public function addItemToData($item)
+    public function addItemToData($item, $published)
     {
-        $this->data[] = $item;
+        if ($published) {
+            $this->data['published'][] = $item;
+        } else {
+            $this->data['unpublished'][] = $item;
+        }
     }
 
     // ********************************** Generate data items **************************************
 
     public function getConsultationStepData(ConsultationStep $consultationStep)
     {
-        $this->data = [];
+        $this->data = [
+            'published' => [],
+            'unpublished' => [],
+        ];
 
         // Fetch data
         $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getEnabledByConsultationStep($consultationStep);
@@ -220,12 +273,15 @@ class ProjectDownloadResolver
 
     public function getCollectStepData(CollectStep $collectStep)
     {
-        $this->data = [];
+        $this->data = [
+            'published' => [],
+            'unpublished' => [],
+        ];
 
         // Proposals
         $proposals = $this->em
             ->getRepository('CapcoAppBundle:Proposal')
-            ->getEnabledByProposalForm($collectStep->getProposalForm());
+            ->getEnabledByProposalForm($collectStep->getProposalForm(), 0, null);
 
         $this->getProposalsData($proposals);
 
@@ -234,7 +290,10 @@ class ProjectDownloadResolver
 
     public function getQuestionnaireStepData(QuestionnaireStep $questionnaireStep)
     {
-        $this->data = [];
+        $this->data = [
+            'published' => [],
+            'unpublished' => [],
+        ];
 
         $replies = [];
 
@@ -259,7 +318,7 @@ class ProjectDownloadResolver
     {
         foreach ($proposals as $proposal) {
             if ($proposal->isEnabled()) {
-                $this->addItemToData($this->getProposalItem($proposal));
+                $this->addItemToData($this->getProposalItem($proposal), !$proposal->getIsTrashed());
                 $this->getProposalVotesData($proposal->getVotes());
             }
         }
@@ -269,7 +328,7 @@ class ProjectDownloadResolver
     {
         foreach ($votes as $vote) {
             if ($vote->isConfirmed()) {
-                $this->addItemToData($this->getProposalVoteItem($vote));
+                $this->addItemToData($this->getProposalVoteItem($vote), true);
             }
         }
     }
@@ -278,7 +337,7 @@ class ProjectDownloadResolver
     {
         foreach ($opinions as $opinion) {
             if ($opinion->getIsEnabled()) {
-                $this->addItemToData($this->getOpinionItem($opinion));
+                $this->addItemToData($this->getOpinionItem($opinion), $opinion->isPublished());
             }
         }
     }
@@ -287,7 +346,7 @@ class ProjectDownloadResolver
     {
         foreach ($versions as $version) {
             if ($version->isEnabled()) {
-                $this->addItemToData($this->getOpinionVersionItem($version));
+                $this->addItemToData($this->getOpinionVersionItem($version), $version->isPublished());
             }
         }
     }
@@ -296,7 +355,7 @@ class ProjectDownloadResolver
     {
         foreach ($arguments as $argument) {
             if ($argument->getIsEnabled()) {
-                $this->addItemToData($this->getArgumentItem($argument));
+                $this->addItemToData($this->getArgumentItem($argument), $argument->isPublished());
                 $this->getVotesData($argument->getVotes());
             }
         }
@@ -306,7 +365,7 @@ class ProjectDownloadResolver
     {
         foreach ($sources as $source) {
             if ($source->getIsEnabled()) {
-                $this->addItemToData($this->getSourceItem($source));
+                $this->addItemToData($this->getSourceItem($source), $source->isPublished());
                 $this->getVotesData($source->getVotes());
             }
         }
@@ -316,7 +375,7 @@ class ProjectDownloadResolver
     {
         foreach ($votes as $vote) {
             if ($vote->isConfirmed()) {
-                $this->addItemToData($this->getVoteItem($vote));
+                $this->addItemToData($this->getVoteItem($vote), $vote->getRelatedEntity()->isPublished());
             }
         }
     }
@@ -325,7 +384,7 @@ class ProjectDownloadResolver
     {
         foreach ($replies as $reply) {
             if ($reply->isEnabled()) {
-                $this->addItemToData($this->getReplyItem($reply));
+                $this->addItemToData($this->getReplyItem($reply), true);
             }
         }
     }
@@ -353,7 +412,7 @@ class ProjectDownloadResolver
             'author_id' => $authorId,
             'author_email' => $authorEmail,
             'user_type' => $authorType,
-            'trashed' => $this->booleanToString(!$proposal->isPublished()),
+            'trashed' => $this->booleanToString($proposal->getIsTrashed()),
             'trashed_date' => $this->dateToString($proposal->getTrashedAt()),
             'trashed_reason' => $proposal->getTrashedReason(),
             'theme' => $proposal->getTheme() ? $proposal->getTheme()->getTitle() : '',
@@ -387,7 +446,7 @@ class ProjectDownloadResolver
             'author_id' => $authorId,
             'author_email' => $authorEmail,
             'user_type' => $authorType,
-            'trashed' => $this->booleanToString(!$proposal->isPublished()),
+            'trashed' => $na,
             'trashed_date' => $na,
             'trashed_reason' => $na,
             'theme' => $proposal->getTheme() ? $proposal->getTheme()->getTitle() : '',
@@ -429,7 +488,7 @@ class ProjectDownloadResolver
             'total_arguments' => $opinion->getArgumentsCount(),
             'arguments_ok' => $opinion->getArgumentsCountByType('yes'),
             'arguments_nok' => $opinion->getArgumentsCountByType('no'),
-            'trashed' => $this->booleanToString(!$opinion->isPublished()),
+            'trashed' => $this->booleanToString($opinion->getIsTrashed()),
             'trashed_date' => $this->dateToString($opinion->getTrashedAt()),
             'trashed_reason' => $opinion->getTrashedReason(),
         ];
@@ -466,7 +525,7 @@ class ProjectDownloadResolver
             'total_arguments' => $version->getArgumentsCount(),
             'arguments_ok' => $version->getArgumentsCountByType('yes'),
             'arguments_nok' => $version->getArgumentsCountByType('no'),
-            'trashed' => $this->booleanToString(!$version->isPublished()),
+            'trashed' => $this->booleanToString($version->getIsTrashed()),
             'trashed_date' => $this->dateToString($version->getTrashedAt()),
             'trashed_reason' => $version->getTrashedReason(),
         ];
@@ -514,7 +573,7 @@ class ProjectDownloadResolver
             'total_arguments' => $na,
             'arguments_ok' => $na,
             'arguments_nok' => $na,
-            'trashed' => $this->booleanToString(!$argument->isPublished()),
+            'trashed' => $this->booleanToString($argument->getIsTrashed()),
             'trashed_date' => $this->dateToString($argument->getTrashedAt()),
             'trashed_reason' => $argument->getTrashedReason(),
         ];
@@ -557,7 +616,7 @@ class ProjectDownloadResolver
             'total_arguments' => $na,
             'arguments_ok' => $na,
             'arguments_nok' => $na,
-            'trashed' => $this->booleanToString(!$source->isPublished()),
+            'trashed' => $this->booleanToString($source->getIsTrashed()),
             'trashed_date' => $this->dateToString($source->getTrashedAt()),
             'trashed_reason' => $source->getTrashedReason(),
         ];
@@ -593,7 +652,7 @@ class ProjectDownloadResolver
             'total_arguments' => $na,
             'arguments_ok' => $na,
             'arguments_nok' => $na,
-            'trashed' => $this->booleanToString(!$vote->getRelatedEntity()->isPublished()),
+            'trashed' => $na,
             'trashed_date' => $na,
             'trashed_reason' => $na,
         ];
@@ -671,7 +730,7 @@ class ProjectDownloadResolver
                 $values[] = $originalValue['other'];
             }
 
-            return implode(';', $values);
+            return implode('; ', $values);
         }
 
         return $originalValue;

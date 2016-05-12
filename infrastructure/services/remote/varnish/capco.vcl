@@ -10,7 +10,7 @@ backend default {
 sub vcl_recv {
 
   # Delete cookie for static files
-  if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css)$") {
+  if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css|woff|ott)$") {
     unset req.http.Cookie;
   }
 

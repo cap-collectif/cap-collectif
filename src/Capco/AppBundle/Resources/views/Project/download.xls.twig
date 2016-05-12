@@ -6,38 +6,44 @@
         'font': {'size': '12', 'name': 'Arial'}
     },
 } %}
-    {% xlssheet {
-        'columnDimension': {
-            'default': {
-                'width': 20,
+
+    {% for sheet in sheets %}
+
+        {% set title =  'project_download.sheets.' ~ sheet %}
+        {% xlssheet title | trans({}, 'CapcoAppBundle') {
+            'columnDimension': {
+                'default': {
+                    'width': 20,
+                },
             },
-        },
-    } %}
+        } %}
 
-        {% xlsrow %}
-            {% for header in headers %}
-                {% xlscell {'style': {'font': {'bold': true} } } %}
-                    {% if header is iterable and header.raw %}
-                        {{ header.label }}
-                    {% else %}
-                        {% set label = 'project_download.label.' ~ header %}
-                        {{ label | trans({}, 'CapcoAppBundle') | raw }}
-                    {% endif %}
-                {% endxlscell %}
-            {% endfor %}
-        {% endxlsrow %}
-
-        {% for item in data %}
             {% xlsrow %}
-                {% for header in headers %}
-                    {% set key = header is iterable ? header.label : header %}
-                    {% xlscell %}
-                        {{ item[key] | raw }}
+                {% for header in headers[sheet] %}
+                    {% xlscell {'style': {'font': {'bold': true} } } %}
+                        {% if header is iterable and header.raw %}
+                            {{ header.label }}
+                        {% else %}
+                            {% set label = 'project_download.label.' ~ header %}
+                            {{ label | trans({}, 'CapcoAppBundle') | raw }}
+                        {% endif %}
                     {% endxlscell %}
                 {% endfor %}
             {% endxlsrow %}
-        {% endfor %}
 
-    {% endxlssheet %}
+            {% for item in data[sheet] %}
+                {% xlsrow %}
+                    {% for header in headers[sheet] %}
+                        {% set key = header is iterable ? header.label : header %}
+                        {% xlscell %}
+                            {{ item[key] | raw }}
+                        {% endxlscell %}
+                    {% endfor %}
+                {% endxlsrow %}
+            {% endfor %}
+
+        {% endxlssheet %}
+
+    {% endfor %}
 
 {% endxlsdocument %}
