@@ -298,6 +298,8 @@ class OpinionRepository extends EntityRepository
      * @param string $opinionsSort
      *
      * @return Paginator
+     *
+     * @internal param $opinionType
      */
     public function getByOpinionTypeAndConsultationStepOrdered(ConsultationStep $step, $opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'positions')
     {

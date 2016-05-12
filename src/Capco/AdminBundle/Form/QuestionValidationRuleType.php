@@ -5,7 +5,9 @@ namespace Capco\AdminBundle\Form;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
+use Symfony\Component\Form\Exception;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class QuestionValidationRuleType extends AbstractType implements DataMapperInterface
@@ -59,8 +61,11 @@ class QuestionValidationRuleType extends AbstractType implements DataMapperInter
         ]);
     }
 
+
     public function getName()
     {
         return 'question_validation_rule';
     }
+
+
 }

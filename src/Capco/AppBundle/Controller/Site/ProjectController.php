@@ -369,7 +369,7 @@ class ProjectController extends Controller
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
         if ($pagination !== null && $pagination !== 0) {
-            $nbPage = ceil($count / $pagination);
+            $nbPage = ceil($count/ $pagination);
         }
 
         $parameters = [
