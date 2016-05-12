@@ -1,0 +1,17 @@
+Capco\AppBundle\Entity\QuestionChoice:
+  questionchoice1:
+    title: Choix 1
+    position: 1
+    description: Description
+  questionchoice2:
+    title: Choix 2
+    position: 2
+    description: Description
+  questionchoice3:
+    title: Choix 3
+    position: 3
+    description: Description
+  questionchoice4:
+    title: Choix 4
+    position: 4
+    description: Description
