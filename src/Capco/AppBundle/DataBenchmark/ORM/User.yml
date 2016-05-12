@@ -3,10 +3,9 @@ Capco\UserBundle\Entity\User:
         username: <current()>
         firstname: <current()>
         lastname: <current()>
-        email: user<current()>@yopmail.com
+        email (unique): <email()>
         enabled: true
         userType: ~
-        salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
-        password: $2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe
+        password: <password()>
         confirmationToken: ~
         phoneConfirmed: true

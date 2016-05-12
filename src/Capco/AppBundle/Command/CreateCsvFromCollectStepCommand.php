@@ -33,15 +33,14 @@ class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
             ->findAll()
         ;
 
-        $fs = new FileSystem();
         $format = $input->getArgument('format') ?: 'csv';
 
         foreach ($steps as $cs) {
-            $content = $resolver->getContent($cs, $format);
+            $writer = $resolver->getContent($cs, $format);
             $date = (new \DateTime())->format('Y-m-d');
             $filename = $date.'_'.$cs->getProject()->getSlug().'_'.$cs->getSlug().'.'.$format;
             $path = $this->getContainer()->getParameter('kernel.root_dir');
-            $fs->dumpFile($path.'/../web/export/'.$filename, $content);
+            $writer->save($path.'/../web/export/'.$filename);
             $output->writeln('The export file "'.$filename.'" has been created.');
         }
     }

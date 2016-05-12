@@ -82,7 +82,8 @@
         "friendsofsymfony/rest-bundle": "^1.6",
         "mattketmo/email-checker": "^1.5",
         "twilio/sdk": "^4.10",
-        "misd/phone-number-bundle": "^1.1"
+        "misd/phone-number-bundle": "^1.1",
+        "liuggio/excelbundle": "~2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

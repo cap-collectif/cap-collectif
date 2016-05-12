@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Questions;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule;
 
 /**
  * MultipleChoiceQuestion.
@@ -183,7 +184,6 @@ class MultipleChoiceQuestion extends AbstractQuestion
 
     /**
      * @param MultipleChoiceQuestionValidationRule $validationRule
-     *
      * @return $this
      */
     public function setValidationRule(MultipleChoiceQuestionValidationRule $validationRule = null)

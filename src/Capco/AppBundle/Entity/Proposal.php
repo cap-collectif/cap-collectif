@@ -557,4 +557,12 @@ class Proposal implements CommentableInterface, VotableInterface
     {
         $this->likers->removeElement($liker);
     }
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->enabled && !$this->isTrashed;
+    }
 }

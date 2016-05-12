@@ -22,7 +22,6 @@ class Manager
         'newsletter',
         'projects_form',
         'project_trash',
-        'search',
         'share_buttons',
         'shield_mode',
         'registration',

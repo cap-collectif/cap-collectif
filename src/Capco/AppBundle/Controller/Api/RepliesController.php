@@ -12,7 +12,6 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -28,6 +27,7 @@ class RepliesController extends FOSRestController
      *
      * @param Request       $request
      * @param Questionnaire $questionnaire
+     * @return array
      */
     public function getUserRepliesByFormAction(Request $request, Questionnaire $questionnaire)
     {
@@ -58,18 +58,12 @@ class RepliesController extends FOSRestController
      * @Get("/questionnaires/{questionnaire_id}/replies/{reply_id}")
      * @ParamConverter("reply", options={"mapping": {"reply_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"Replies", "UsersInfos", "UserMedias", "Steps"})
-     * @Cache(smaxage="120", public=true)
-     * @Security("has_role('ROLE_USER')")
      *
      * @param Reply $reply
-     *
      * @return Reply
      */
     public function getReplyAction(Reply $reply)
     {
-        if ($reply->getAuthor() !== $this->getUser()) {
-            throw new AccessDeniedException();
-        }
         return $reply;
     }
 
@@ -94,7 +88,6 @@ class RepliesController extends FOSRestController
      * @param Questionnaire $questionnaire
      *
      * @throws BadRequestHttpException
-     *
      * @return Reply
      */
     public function postReplyAction(Request $request, Questionnaire $questionnaire)
@@ -163,7 +156,6 @@ class RepliesController extends FOSRestController
      *
      * @throws AccessDeniedException
      * @throws BadRequestHttpException
-     *
      * @return Reply
      */
     public function putReplyAction(Request $request, Questionnaire $questionnaire, Reply $reply)
@@ -215,7 +207,6 @@ class RepliesController extends FOSRestController
      * @param Reply         $reply
      *
      * @throws BadRequestHttpException
-     *
      * @return array
      */
     public function deleteReplyAction(Questionnaire $questionnaire, Reply $reply)
