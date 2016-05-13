@@ -71,9 +71,6 @@ class AppKernel extends Kernel
             new \CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
             new \Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 
-            // Excel files generation
-            new MewesK\TwigExcelBundle\MewesKTwigExcelBundle(),
-
             // NewRelic
             new Ekino\Bundle\NewRelicBundle\EkinoNewRelicBundle(),
 
@@ -90,6 +87,8 @@ class AppKernel extends Kernel
             new Limenius\ReactBundle\LimeniusReactBundle(),
 
             new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
+
+            // Excel files generation
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
         ];
 

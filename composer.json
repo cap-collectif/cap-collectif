@@ -66,7 +66,6 @@
         "willdurand/geocoder": "~3.0",
         "tilleuls/ckeditor-sonata-media-bundle": "~1.0",
         "egeloen/ckeditor-bundle": "~3.0",
-        "mewesk/twig-excel-bundle": "~2.0",
         "friendsofsymfony/elastica-bundle": "dev-master#f583cc5842d1fc2cb42d963f97b7b67f208be0f7",
         "jms/serializer-bundle": "~1.0",
         "jms/serializer": "dev-fix/2-nested-serializer-calls as 1.0.0",
