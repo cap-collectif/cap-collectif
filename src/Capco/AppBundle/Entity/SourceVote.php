@@ -5,9 +5,9 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ArgumentVote.
+ * SourceVote.
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class SourceVote extends AbstractVote

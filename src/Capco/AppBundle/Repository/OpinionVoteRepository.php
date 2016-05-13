@@ -30,10 +30,7 @@ class OpinionVoteRepository extends EntityRepository
             ->setParameter('step', $step)
             ->orderBy('v.updatedAt', 'ASC');
 
-        return $qb
-            ->getQuery()
-            ->getResult()
-        ;
+        return $qb->getQuery()->getResult();
     }
 
     /**
@@ -43,7 +40,7 @@ class OpinionVoteRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getAllByOpinion(Opinion $opinion)
+    public function getAllByOpinion($opinionId, $asArray = false)
     {
         $qb = $this->getIsConfirmedQueryBuilder()
             ->addSelect('u', 'ut', 'o')
@@ -51,10 +48,10 @@ class OpinionVoteRepository extends EntityRepository
             ->leftJoin('u.userType', 'ut')
             ->leftJoin('v.opinion', 'o')
             ->andWhere('v.opinion = :opinion')
-            ->setParameter('opinion', $opinion)
+            ->setParameter('opinion', $opinionId)
             ->orderBy('v.updatedAt', 'ASC');
 
-        return $qb->getQuery()->getResult();
+        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
     protected function getIsConfirmedQueryBuilder()

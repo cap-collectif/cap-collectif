@@ -70,6 +70,7 @@ class RepliesController extends FOSRestController
         if ($reply->getAuthor() !== $this->getUser()) {
             throw new AccessDeniedException();
         }
+
         return $reply;
     }
 

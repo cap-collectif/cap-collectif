@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ArgumentVote.
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class ArgumentVote extends AbstractVote

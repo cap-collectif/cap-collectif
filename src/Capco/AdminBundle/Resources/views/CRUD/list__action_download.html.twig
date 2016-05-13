@@ -2,7 +2,7 @@
 {% if steps | length > 0 %}
 
     {% if steps | length == 1 %}
-        <a href="" class="btn btn-default btn-sm view_link" data-toggle="modal" data-target="#download-project-modal-{{ steps[0].step.id }}">
+        <a href="{{ path('app_project_download', {'stepSlug': steps[0].step.slug, 'projectSlug': object.slug}) }}" class="btn btn-default btn-sm view_link" >
             <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }}
         </a>
     {% else %}
@@ -13,7 +13,7 @@
             <ul class="dropdown-menu" role="menu" style="position: absolute; top: 100%;">
                 {% for pas in steps %}
                     <li class="small">
-                        <a data-toggle="modal" data-target="#download-project-modal-{{ pas.step.id }}">
+                        <a href="{{ path('app_project_download', {'stepSlug': pas.step.slug, 'projectSlug': object.slug}) }}" >
                             {{ 'project.download.step' | trans({'%position%': pas.position, '%title%': pas.step.title}, 'CapcoAppBundle') }}
                         </a>
                     </li>
@@ -21,35 +21,5 @@
             </ul>
         </div>
     {% endif %}
-
-    {% for pas in steps %}
-        <div class="modal fade modal--custom" id="download-project-modal-{{ pas.step.id }}" tabindex="-1" role="dialog" aria-labelledby="{{ 'project.download.modal.title' | trans({'%title%': pas.step.title}, 'CapcoAppBundle') }}" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="downloadModalLabel">{{ 'project.download.modal.title' | trans({'%title%': pas.step.title}, 'CapcoAppBundle') }}</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>{{ 'project.download.modal.body' | trans({}, 'CapcoAppBundle') }}</p>
-                        <a class="btn  btn-default" href="{{ path('app_project_download', {'format': 'xls', 'stepSlug': pas.step.slug, 'projectSlug': object.slug}) }}">
-                            {{ 'project.download.modal.button' | trans({'%format%': 'XLS'}, 'CapcoAppBundle') }}
-                        </a>
-                        <a class="btn  btn-default" href="{{ path('app_project_download', {'format': 'xlsx', 'stepSlug': pas.step.slug, 'projectSlug': object.slug}) }}">
-                            {{ 'project.download.modal.button' | trans({'%format%': 'XLSX'}, 'CapcoAppBundle') }}
-                        </a>
-                        <a class="btn  btn-default" href="{{ path('app_project_download', {'format': 'csv', 'stepSlug': pas.step.slug, 'projectSlug': object.slug}) }}">
-                            {{ 'project.download.modal.button' | trans({'%format%': 'CSV'}, 'CapcoAppBundle') }}
-                        </a>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                            {{ 'project.download.modal.cancel' | trans({}, 'CapcoAppBundle') }}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
 
 {% endif %}

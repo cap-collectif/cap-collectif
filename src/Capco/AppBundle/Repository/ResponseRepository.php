@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class ResponseRepository extends EntityRepository
 {
+    public function getByReplyAsArray($replyId)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->addSelect('question')
+            ->leftJoin('r.question', 'question')
+            ->andWhere('r.reply = :reply')
+            ->setParameter('reply', $replyId)
+        ;
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }

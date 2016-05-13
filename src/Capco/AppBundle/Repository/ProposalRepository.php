@@ -315,22 +315,28 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getEnabledByProposalForm(ProposalForm $proposalForm)
+    public function getEnabledByProposalForm(ProposalForm $proposalForm, $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('author', 'amedia', 'theme', 'status', 'district', 'responses', 'questions')
+            ->addSelect('author', 'ut', 'amedia', 'theme', 'status', 'district', 'responses', 'questions', 'votes', 'votesaut', 'votesautut', 'answer', 'answeraut')
             ->leftJoin('proposal.author', 'author')
+            ->leftJoin('author.userType', 'ut')
             ->leftJoin('author.Media', 'amedia')
             ->leftJoin('proposal.theme', 'theme')
             ->leftJoin('proposal.district', 'district')
             ->leftJoin('proposal.status', 'status')
             ->leftJoin('proposal.responses', 'responses')
             ->leftJoin('responses.question', 'questions')
+            ->leftJoin('proposal.votes', 'votes')
+            ->leftJoin('votes.user', 'votesaut')
+            ->leftJoin('votesaut.userType', 'votesautut')
+            ->leftJoin('proposal.answer', 'answer')
+            ->leftJoin('answer.author', 'answeraut')
             ->andWhere('proposal.proposalForm = :proposalForm')
             ->setParameter('proposalForm', $proposalForm)
         ;
 
-        return $qb->getQuery()->getResult();
+        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
     public function getProposalsWithCostsForStep(CollectStep $step, $limit = null)

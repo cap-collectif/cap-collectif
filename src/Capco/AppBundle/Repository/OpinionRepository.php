@@ -382,24 +382,22 @@ class OpinionRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getEnabledByConsultationStep($step)
+    public function getEnabledByConsultationStep($step, $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder('o')
-            ->addSelect('ot', 'aut', 'ut', 'app', 'args', 'argsAuthor')
+            ->addSelect('ot', 'aut', 'ut', 'app', 'apptype', 'args')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.userType', 'ut')
             ->leftJoin('o.appendices', 'app')
+            ->leftJoin('app.appendixType', 'apptype')
             ->leftJoin('o.arguments', 'args')
-            ->leftJoin('args.Author', 'argsAuthor')
             ->andWhere('o.step = :step')
             ->setParameter('step', $step)
             ->addOrderBy('o.updatedAt', 'DESC')
         ;
 
-        return $qb
-            ->getQuery()
-            ->getResult();
+        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
     /**

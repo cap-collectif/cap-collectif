@@ -46,4 +46,16 @@ class ReplyRepository extends EntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
+
+    public function getEnabledByQuestionnaireAsArray(Questionnaire $questionnaire)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('author')
+            ->leftJoin('reply.author', 'author')
+            ->andWhere('reply.questionnaire = :questionnaire')
+            ->setParameter('questionnaire', $questionnaire)
+        ;
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }

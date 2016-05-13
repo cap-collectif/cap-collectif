@@ -13,8 +13,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -155,19 +156,17 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/download/{format}", name="app_project_download")
-     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/download/{format}", name="app_consultation_download")
+     * @Route("/projects/{projectSlug}/step/{stepSlug}/download", name="app_project_download")
      * @Security("has_role('ROLE_ADMIN')")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={"mapping": {"stepSlug": "slug"}})
      *
      * @param Project      $project
      * @param AbstractStep $step
-     * @param $format
      *
      * @return Response $response
      */
-    public function downloadAction(Project $project, AbstractStep $step, $format)
+    public function downloadAction(Project $project, AbstractStep $step)
     {
         if (!$project || !$step) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
@@ -177,18 +176,31 @@ class ProjectController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('project.error.not_exportable', [], 'CapcoAppBundle'));
         }
 
-        $resolver = $this->get('capco.project.download.resolver');
-        $content = $resolver->getContent($step, $format);
+        $path = $this->container->getParameter('kernel.root_dir').'/../web/export/';
+        $filename = '';
+        if ($step->getProject()) {
+            $filename .= $step->getProject()->getSlug().'_';
+        }
+        $filename .= $step->getSlug().'.csv';
 
-        if (!$content) {
-            throw new NotFoundHttpException('Wrong format');
+        $request = $this->get('request_stack')->getCurrentRequest();
+        if (!file_exists($path.$filename)) {
+            $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('project.download.not_yet_generated', [], 'CapcoAppBundle'));
+
+            return $this->redirect($request->headers->get('referer'));
         }
 
-        $response = new Response($content);
-        $contentType = $resolver->getContentType($format);
-        $filename = $project->getSlug().'_'.$step->getSlug().'.'.$format;
-        $response->headers->set('Content-Type', $contentType);
-        $response->headers->set('Content-Disposition', 'attachment;filename='.$filename);
+        $resolver = $this->get('capco.project.download.resolver');
+        $date = (new \DateTime())->format('Y-m-d');
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+
+        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
+        $response = new BinaryFileResponse($path.$filename);
+        $response->headers->set('X-Accel-Redirect', '/export/'.$filename);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT, $date.'_'.$filename
+        );
+        $response->headers->set('Content-Type', 'text/csv');
 
         return $response;
     }

@@ -3,6 +3,9 @@
 1-59/2 * * * * /usr/bin/timeout 1m php -d memory_limit=512M /var/www/bin/console capco:compute:projects-counters --env=prod
 0 * * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:expire-users --env=prod
 0 * * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:alert-users-that-will-expire --env=prod
-#0 4 * * * /usr/bin/timeout 2h php -d memory_limit=2048 -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:update --env=prod
-#0 3 * * * /usr/bin/timeout 2h php -d memory_limit=2048 -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:counters --env=prod
+#0 4 * * * /usr/bin/timeout 2h php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:update --env=prod
+#0 3 * * * /usr/bin/timeout 2h php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:counters --env=prod
+0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation --env=prod
+0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire --env=prod
+0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:collect --env=prod
 # Don't remove the empty line at the end of this file. It is required to run the cron job

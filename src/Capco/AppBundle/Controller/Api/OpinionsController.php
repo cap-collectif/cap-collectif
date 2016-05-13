@@ -127,7 +127,7 @@ class OpinionsController extends FOSRestController
     {
         $em = $this->get('doctrine.orm.entity_manager');
         $votes = $em->getRepository('CapcoAppBundle:OpinionVote')
-            ->getAllByOpinion($opinion);
+            ->getAllByOpinion($opinion->getId());
 
         return [
             'votes' => $votes,
@@ -541,7 +541,7 @@ class OpinionsController extends FOSRestController
     {
         $em = $this->get('doctrine.orm.entity_manager');
         $votes = $em->getRepository('CapcoAppBundle:OpinionVersionVote')
-            ->getAllByVersion($version);
+            ->getAllByVersion($version->getId());
 
         return [
             'votes' => $votes,

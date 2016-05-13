@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
 
 class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
 {
@@ -28,9 +27,8 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
         ;
 
         foreach ($steps as $cs) {
-            $writer = $resolver->getContent($cs, 'csv');
-            $date = (new \DateTime())->format('Y-m-d');
-            $filename = $date.'_';
+            $writer = $resolver->getContent($cs);
+            $filename = '';
             if ($cs->getProject()) {
                 $filename .= $cs->getProject()->getSlug().'_';
             }

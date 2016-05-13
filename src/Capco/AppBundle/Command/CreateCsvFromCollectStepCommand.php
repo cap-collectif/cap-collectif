@@ -5,8 +5,6 @@ namespace Capco\AppBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Console\Input\InputArgument;
 
 class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
 {
@@ -15,11 +13,6 @@ class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
         $this
             ->setName('capco:export:collect')
             ->setDescription('Create csv file from collect step data')
-            ->addArgument(
-                'format',
-                InputArgument::OPTIONAL,
-                'Please provide the format of the file you want to export.'
-            )
         ;
     }
 
@@ -33,12 +26,13 @@ class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
             ->findAll()
         ;
 
-        $format = $input->getArgument('format') ?: 'csv';
-
         foreach ($steps as $cs) {
-            $writer = $resolver->getContent($cs, $format);
-            $date = (new \DateTime())->format('Y-m-d');
-            $filename = $date.'_'.$cs->getProject()->getSlug().'_'.$cs->getSlug().'.'.$format;
+            $writer = $resolver->getContent($cs);
+            $filename = '';
+            if ($cs->getProject()) {
+                $filename .= $cs->getProject()->getSlug().'_';
+            }
+            $filename .= $cs->getSlug().'.csv';
             $path = $this->getContainer()->getParameter('kernel.root_dir');
             $writer->save($path.'/../web/export/'.$filename);
             $output->writeln('The export file "'.$filename.'" has been created.');

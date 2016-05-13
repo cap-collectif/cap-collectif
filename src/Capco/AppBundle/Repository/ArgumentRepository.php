@@ -168,10 +168,10 @@ class ArgumentRepository extends EntityRepository
      *
      * @return array
      */
-    public function getEnabledByConsultationStep($step)
+    public function getEnabledByConsultationStep($step, $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('o', 'ov', 'aut', 'votes', 'vauthor')
+            ->addSelect('o', 'ov', 'ovo', 'aut', 'votes', 'vauthor')
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('a.votes', 'votes')
             ->leftJoin('votes.user', 'vauthor')
@@ -186,8 +186,47 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('step', $step)
             ->addOrderBy('a.updatedAt', 'DESC');
 
-        return $qb->getQuery()
-            ->getResult();
+        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get all by opinion.
+     *
+     * @param $opinionId
+     *
+     * @return mixed
+     */
+    public function getAllByOpinion($opinionId, $asArray = false)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('aut', 'ut')
+            ->leftJoin('a.Author', 'aut')
+            ->leftJoin('aut.userType', 'ut')
+            ->andWhere('a.opinion = :opinion')
+            ->setParameter('opinion', $opinionId)
+        ;
+
+        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get all by version.
+     *
+     * @param $versionId
+     *
+     * @return mixed
+     */
+    public function getAllByVersion($versionId, $asArray = false)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('aut', 'ut')
+            ->leftJoin('a.Author', 'aut')
+            ->leftJoin('aut.userType', 'ut')
+            ->andWhere('a.opinionVersion = :version')
+            ->setParameter('version', $versionId)
+        ;
+
+        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
     /**

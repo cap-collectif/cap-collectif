@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\Answer;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Response;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -47,12 +46,14 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
         foreach ($responses as $row) {
             $author = $em->getRepository('CapcoUserBundle:User')->findOneBy(['email' => $row['email']]);
             if (!$author) {
-                $output->writeln('Author ' . $row['email'] . ' does not exist. Create it manually before importing.');
+                $output->writeln('Author '.$row['email'].' does not exist. Create it manually before importing.');
+
                 return 1;
             }
             $questionnaire = $em->getRepository('CapcoAppBundle:Questionnaire')->find($row['questionnaire_id']);
             if (!$questionnaire) {
-                $output->writeln('Questionnaire ' . $row['questionnaire_id'] . ' does not exist. Create it manually before importing.');
+                $output->writeln('Questionnaire '.$row['questionnaire_id'].' does not exist. Create it manually before importing.');
+
                 return 1;
             }
             $reply = $em->getRepository('CapcoAppBundle:Reply')->findOneBy([

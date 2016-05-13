@@ -31,6 +31,50 @@ class SourceRepository extends EntityRepository
         ;
     }
 
+    /**
+     * Get all by opinion.
+     *
+     * @param $opinionId
+     *
+     * @return mixed
+     */
+    public function getAllByOpinion($opinionId, $asArray = false)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('aut', 'ut', 'cat', 'media')
+            ->leftJoin('s.Author', 'aut')
+            ->leftJoin('aut.userType', 'ut')
+            ->leftJoin('s.Category', 'cat')
+            ->leftJoin('s.Media', 'media')
+            ->andWhere('s.Opinion = :opinion')
+            ->setParameter('opinion', $opinionId)
+        ;
+
+        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get all by version.
+     *
+     * @param $versionId
+     *
+     * @return mixed
+     */
+    public function getAllByVersion($versionId, $asArray = false)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('aut', 'ut', 'cat', 'media')
+            ->leftJoin('s.Author', 'aut')
+            ->leftJoin('aut.userType', 'ut')
+            ->leftJoin('s.Category', 'cat')
+            ->leftJoin('s.Media', 'media')
+            ->andWhere('s.opinionVersion = :version')
+            ->setParameter('version', $versionId)
+        ;
+
+        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
+    }
+
     public function getArrayById($id)
     {
         $qb = $this->createQueryBuilder('s')
@@ -200,7 +244,7 @@ class SourceRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getEnabledByConsultationStep(ConsultationStep $step)
+    public function getEnabledByConsultationStep(ConsultationStep $step, $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'ov', 'aut', 'votes')
@@ -218,7 +262,7 @@ class SourceRepository extends EntityRepository
             ->setParameter('step', $step)
             ->orderBy('s.updatedAt', 'DESC');
 
-        return $qb->getQuery()->getResult();
+        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
     /**

@@ -2,19 +2,19 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * OpinionVersionVoteRepository.
+ * ArgumentVoteRepository.
  */
-class OpinionVersionVoteRepository extends EntityRepository
+class ArgumentVoteRepository extends EntityRepository
 {
     /**
      * Get enabled by consultation step.
      *
      * @param $step
+     * @param $asArray
      *
      * @return mixed
      */
@@ -24,33 +24,38 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
-            ->leftJoin('v.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'o')
-            ->andWhere('o.step = :step')
-            ->andWhere('ov.enabled = 1')
-            ->andWhere('o.isEnabled = 1')
+            ->leftJoin('v.argument', 'arg')
+            ->leftJoin('arg.opinion', 'o')
+            ->leftJoin('arg.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+            ->andWhere('
+                (arg.opinion IS NOT NULL AND o.step = :step AND o.isEnabled = 1)
+                OR
+                (arg.opinionVersion IS NOT NULL AND ovo.step = :step AND ov.enabled = 1 AND ovo.isEnabled = 1)'
+            )
             ->setParameter('step', $step)
-            ->orderBy('v.updatedAt', 'ASC');
+        ;
 
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
     /**
-     * Get all by version.
+     * Get all by argument.
      *
-     * @param $versionId
+     * @param $version
      *
      * @return mixed
      */
-    public function getAllByVersion($versionId, $asArray = false)
+    public function getAllByArgument($argumentId, $asArray = false)
     {
         $qb = $this->getIsConfirmedQueryBuilder()
             ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
-            ->andWhere('v.opinionVersion = :version')
-            ->setParameter('version', $versionId)
-            ->orderBy('v.updatedAt', 'ASC');
+            ->andWhere('v.argument = :argument')
+            ->setParameter('argument', $argumentId)
+            ->orderBy('v.updatedAt', 'ASC')
+        ;
 
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
