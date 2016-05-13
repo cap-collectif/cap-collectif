@@ -100,7 +100,6 @@ trait QuestionnaireStepsTrait
     {
         $this->fillQuestionnaireForm();
         $this->iClickOneRankingChoiceRightArrow();
-
     }
 
     protected function fillQuestionnaireForm($edition = false)

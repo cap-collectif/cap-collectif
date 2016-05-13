@@ -20,25 +20,13 @@ monolog:
             max_files: 10  # max number of log files to keep
         main:
             type: fingers_crossed
-            handler: grouped
+            handler: streamed
             action_level: error
             excluded_404s:
                 - ^/
-        grouped:
-            type: group
-            members: [streamed, buffered]
         streamed:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.error.log"
-            level: debug
-        buffered:
-            type: buffer
-            handler: swift
-        swift:
-            type: swift_mailer
-            from_email: error@cap-collectif.com
-            to_email: [adavid@jolicode.com]
-            subject: An error occurred
             level: debug
         console:
             type: console

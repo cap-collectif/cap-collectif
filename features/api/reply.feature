@@ -3,8 +3,9 @@ Feature: Reply Restful Api
   As an API client
 
   @elasticsearch
-  Scenario: Anonymous API client wants to get one reply
-    When I send a GET request to "/api/questionnaires/1/replies/1"
+  Scenario: Logged in API client wants to get one of his replies
+    Given I am logged in to api as admin
+    When I send a GET request to "/api/questionnaires/1/replies/2"
     Then the JSON response should match:
     """
     {
@@ -48,6 +49,17 @@ Feature: Reply Restful Api
       "private": @boolean@
     }
     """
+
+  @elasticsearch @security
+  Scenario: Anonymous API client wants to get one reply
+    When I send a GET request to "/api/questionnaires/1/replies/2"
+    Then the JSON response status code should be 401
+
+  @elasticsearch @security
+  Scenario: Logged in API client wants to get one reply when he's not the author
+    Given I am logged in to api as user
+    When I send a GET request to "/api/questionnaires/1/replies/2"
+    Then the JSON response status code should be 403
 
   @elasticsearch
   Scenario: Logged in API client wants to get his replies

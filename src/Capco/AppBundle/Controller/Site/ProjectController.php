@@ -258,11 +258,10 @@ class ProjectController extends Controller
      * @Route("/consultations/{projectSlug}/participants/{page}", name="app_consultation_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1} )
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_contributors.html.twig")
+     * @Cache(smaxage="120", public=true)
      *
      * @param $page
      * @param $project
-     *
-     * @return array
      */
     public function showContributorsAction(Project $project, $page)
     {
@@ -370,7 +369,7 @@ class ProjectController extends Controller
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
         if ($pagination !== null && $pagination !== 0) {
-            $nbPage = ceil($count/ $pagination);
+            $nbPage = ceil($count / $pagination);
         }
 
         $parameters = [
