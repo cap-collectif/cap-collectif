@@ -17,10 +17,11 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(nodeEnv),
       },
+      __SERVER__: true,
     }),
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+    }),
   ],
   module: {
     loaders: [
