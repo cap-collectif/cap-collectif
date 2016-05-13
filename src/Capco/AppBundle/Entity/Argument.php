@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\IsPublishableInterface;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,7 +19,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements VotableInterface
+class Argument implements VotableInterface, IsPublishableInterface
 {
     use ValidableTrait;
     use VotableOkTrait;

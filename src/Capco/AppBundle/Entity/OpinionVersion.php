@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\IsPublishableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -25,7 +26,7 @@ use Capco\AppBundle\Model\HasDiffInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVersionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionVersion implements VotableInterface, HasDiffInterface
+class OpinionVersion implements VotableInterface, HasDiffInterface, IsPublishableInterface
 {
     use TrashableTrait;
     use EnableTrait;

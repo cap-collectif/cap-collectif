@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\IsPublishableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
@@ -24,7 +25,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Opinion implements SelfLinkableInterface, VotableInterface
+class Opinion implements SelfLinkableInterface, VotableInterface, IsPublishableInterface
 {
     use TrashableTrait;
     use SluggableTitleTrait;
