@@ -33,7 +33,12 @@ module.exports = {
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           screw_ie8: true,
+          warnings: false,
         },
+        comments: false,
+        sourceMap: false,
+        mangle: true,
+        minimize: true,
       }),
 
       // A plugin for a more aggressive chunk merging strategy

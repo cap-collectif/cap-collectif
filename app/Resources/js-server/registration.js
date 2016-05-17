@@ -24,12 +24,10 @@ import appStore from '../js/stores/AppStore';
 const register = ReactOnRails.register;
 const registerStore = ReactOnRails.registerStore;
 
-// ((global) => {
-  global.clearTimeout = global.clearTimeout || function () {};
-  global.setTimeout = global.setTimeout || function () {};
-  global.setInterval = global.setInterval || function () {};
-  // }(this));
-
+const emptyFunction = () => {};
+global.clearTimeout = global.clearTimeout || emptyFunction;
+global.setTimeout = global.setTimeout || emptyFunction;
+global.setInterval = global.setInterval || emptyFunction;
 
 registerStore({ appStore });
 register({ ProjectsListApp });
