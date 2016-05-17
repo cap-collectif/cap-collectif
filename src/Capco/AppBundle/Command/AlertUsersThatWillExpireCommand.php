@@ -26,9 +26,9 @@ class AlertUsersThatWillExpireCommand extends ContainerAwareCommand
                     ->findUsersThatWillExpireIn24Hours();
 
         foreach ($users as $user) {
-            $notifier->sendAlertExpirationUserEmail($user);
             $user->setAlertExpirationSent(true);
             $em->flush();
+            $notifier->sendAlertExpirationUserEmail($user);
         }
 
         $output->writeln(count($users).' user(s) alerted.');
