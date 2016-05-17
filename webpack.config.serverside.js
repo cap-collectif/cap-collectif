@@ -22,6 +22,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
     }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
     ...devBuild ? [] : [
       // Search for equal or similar files and deduplicate them in the output
       // https://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
