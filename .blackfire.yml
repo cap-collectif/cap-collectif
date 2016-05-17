@@ -1,24 +1,8 @@
 tests:
-    "Production settings":
-        path: "/.*"                                 # run the assertions for all HTTP requests
-        assertions:
-          - "metrics.twig.compile.count == 0"
-          - "metrics.symfony.config_check.count == 0"
-          - "(metrics.doctrine.annotations.read.count + metrics.doctrine.dql.parsed.count + metrics.doctrine.entities.metadata.count) == 0"
-          - "metrics.assetic.controller.calls.count == 0"
     "Pages should be fast enough":
         path: "/.*"                                 # run the assertions for all HTTP requests
         assertions:
             - "main.wall_time < 100ms"              # wall clock time is less than 100ms
-    "Pages should not read yaml":
-        path: "/.*"                                 # run the assertions for all HTTP requests
-        assertions:
-            - "metrics.symfony.yaml.reads.count == 0"
-    "Pages should not send mail synchronously":
-        path: "/.*"
-        assertions:
-            - "metrics.emails.sent.count == 0"
-
     "Commands should be fast enough":
         command: ".*"                               # run the assertions for all CLI commands
         assertions:

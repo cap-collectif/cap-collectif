@@ -24,8 +24,6 @@ import appStore from '../js/stores/AppStore';
 const register = ReactOnRails.register;
 const registerStore = ReactOnRails.registerStore;
 
-window.__SERVER__ = false;
-
 registerStore({ appStore });
 register({ ProjectsListApp });
 register({ CollectStepPageApp });
