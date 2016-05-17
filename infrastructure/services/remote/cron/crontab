@@ -1,7 +1,7 @@
 */5 * * * * php -d memory_limit=512M /var/www/bin/console capco:compute:counters --env=prod
 */2 * * * * php -d memory_limit=512M /var/www/bin/console capco:compute:rankings --env=prod
 1-59/2 * * * * php -d memory_limit=512M /var/www/bin/console capco:compute:projects-counters --env=prod
-#* */12 * * * php -d memory_limit=512M /var/www/bin/console capco:expire-users --env=prod
+* */12 * * * php -d memory_limit=512M /var/www/bin/console capco:expire-users --env=prod
 #* */12 * * * php -d memory_limit=512M /var/www/bin/console capco:alert-users-that-will-expire --env=prod
 #* * * * * php -d memory_limit=2048 -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:update --env=prod
 #* * * * * php -d memory_limit=2048 -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:counters --env=prod

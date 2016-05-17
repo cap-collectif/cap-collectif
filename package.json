@@ -10,7 +10,8 @@
     "build": "NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
     "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
-    "build-server-bundle": "./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
+    "build-server-bundle": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
+    "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js && ./node_modules/jscs/bin/jscs app/Resources/js/translations/*.js",
     "lint": "./node_modules/eslint/bin/eslint.js --cache --fix  app/Resources/js && ./node_modules/jscs/bin/jscs --fix app/Resources/js/translations/*.js"
   },

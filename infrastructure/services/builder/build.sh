@@ -14,10 +14,10 @@ if [ "$PRODUCTION" ]; then
   # Frontend deps
   npm --quiet --no-color install --production
   bower install --config.interactive=false --allow-root --config.storage.cache=/home/capco/.cache/bower
-  NODE_ENV=production npm run build:prod
+  npm run build:prod
 
   # Server side rendering deps
-  NODE_ENV=production npm run build-server-bundle
+  npm run build-server-bundle:prod
 else
   echo "Building for development"
   # Symfony deps

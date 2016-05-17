@@ -17,14 +17,35 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(nodeEnv),
       },
+      __SERVER__: true,
     }),
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+    }),
+    ...devBuild ? [] : [
+      // Search for equal or similar files and deduplicate them in the output
+      // https://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
+      new webpack.optimize.DedupePlugin(),
+
+      // Minimize all JavaScript output of chunks
+      // https://github.com/mishoo/UglifyJS2#compressor-options
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          screw_ie8: true,
+        },
+      }),
+
+      // A plugin for a more aggressive chunk merging strategy
+      // https://webpack.github.io/docs/list-of-plugins.html#aggressivemergingplugin
+      new webpack.optimize.AggressiveMergingPlugin(),
+    ],
   ],
   module: {
     loaders: [
       { test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/ },
     ],
+    // Shut off warnings about using pre-built javascript files
+    // as Quill.js unfortunately ships one as its `main`.
+    noParse: /node_modules\/quill\/dist/,
   },
 };

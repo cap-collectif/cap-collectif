@@ -87,6 +87,9 @@ const RankingBlock = React.createClass({
   },
 
   render() {
+    if (__SERVER__) {
+      return <span />;
+    }
     const { field, connectDropTarget, disabled } = this.props;
     const { items, choicesHeight } = this.state;
     const spotsNb = field.choices.length;
