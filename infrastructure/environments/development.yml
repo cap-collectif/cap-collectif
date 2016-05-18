@@ -1,6 +1,8 @@
 application:
     environment:
         DOCKER_GID: 100
+        BLACKFIRE_SERVER_ID: c5118c2f-055f-4385-9c8a-ac31955ffb20
+        BLACKFIRE_SERVER_TOKEN: ***REMOVED***
     volumes:
         - ../../:/var/www
         - /var/run/docker.sock:/var/run/docker.sock
@@ -11,15 +13,6 @@ application:
         - redis:redis
         - seleniumhub:selenium
         - mailcatcher:mailcatchersmtp
-        - blackfire:blackfire
-
-# Blackfire Agent
-blackfire:
-    image: blackfire/blackfire:latest
-    environment:
-        - BLACKFIRE_LOG_LEVEL=4
-        - BLACKFIRE_SERVER_ID=c5118c2f-055f-4385-9c8a-ac31955ffb20
-        - BLACKFIRE_SERVER_TOKEN=***REMOVED***
 
 elasticsearch:
     image: elasticsearch:1.7.3

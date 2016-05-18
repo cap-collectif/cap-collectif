@@ -89,9 +89,14 @@ def save_fixtures_image(tag='latest', publish='false'):
         local('docker push capco/fixtures')
 
 @task(environments=['local'])
-def blackfire_curl(params):
+def blackfire_curl(url):
     "Blackfire curl"
-    local('docker run -it --rm -e BLACKFIRE_CLIENT_ID=***REMOVED*** -e BLACKFIRE_CLIENT_TOKEN=***REMOVED*** blackfire/blackfire blackfire curl ' + params)
+    local('docker exec -i capco_application_1 blackfire --client-id="***REMOVED***" --client-token="***REMOVED***" curl ' + url)
+
+@task(environments=['local'])
+def blackfire_run(cli):
+    "Blackfire run"
+    local('docker exec -i capco_application_1 blackfire --client-id="***REMOVED***" --client-token="***REMOVED***" run ' + cli)
 
 @task(environments=['local'])
 def setup_git_hooks():

@@ -32,6 +32,10 @@ const PhoneModal = React.createClass({
     this.props.onClose();
   },
 
+  askChangeNumber() {
+    this.setState(this.getInitialState());
+  },
+
   handleSubmit() {
     this.setState({ isSubmitting: true });
   },
@@ -111,9 +115,15 @@ const PhoneModal = React.createClass({
             }
             {
               smsSentToNumber &&
-              <Button style={{ paddingLeft: 0 }} onClick={this.resendSmsCode} bsStyle="link" disabled={isResending}>
-                {this.getIntlMessage('phone.confirm.ask_new')}
-              </Button>
+              <div>
+                <Button style={{ paddingLeft: 0 }} onClick={this.resendSmsCode} bsStyle="link" disabled={isResending}>
+                  {this.getIntlMessage('phone.confirm.ask_new')}
+                </Button>
+                { ' • ' }
+                <Button style={{ paddingLeft: 0 }} onClick={this.askChangeNumber} bsStyle="link">
+                  {this.getIntlMessage('phone.confirm.ask_change_number')}
+                </Button>
+              </div>
             }
           </Modal.Body>
           <Modal.Footer>

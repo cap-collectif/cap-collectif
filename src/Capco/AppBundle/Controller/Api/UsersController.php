@@ -118,9 +118,11 @@ class UsersController extends FOSRestController
         // If phone is updated we have to make sure it's sms confirmed again
         if ($previousPhone != null && $previousPhone != $user->getPhone()) {
             $user->setPhoneConfirmed(false);
+            // TODO: security breach user can send unlimited sms if he change his number
+            $user->setSmsConfirmationSentAt(null);
         }
 
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $this->getDoctrine()->getManager()->flush();
     }
 
     /**
@@ -161,7 +163,7 @@ class UsersController extends FOSRestController
         }
 
         // security against mass click sms resend
-        if ($user->getSmsConfirmationSentAt() > (new \DateTime())->modify('- 3 minutes')) {
+        if ($user->getSmsConfirmationSentAt() && $user->getSmsConfirmationSentAt() > (new \DateTime())->modify('- 3 minutes')) {
             throw new BadRequestHttpException('sms_already_sent_recently');
         }
 

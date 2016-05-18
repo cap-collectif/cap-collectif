@@ -76,8 +76,14 @@ RUN apt-get update && \
 RUN curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/70 && \
     tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
     mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so && \
-    echo "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > /etc/php/7.0/fpm/conf.d/20-blackfire.ini && \
-    echo "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > /etc/php/7.0/cli/conf.d/20-blackfire.ini
+    echo "extension=blackfire.so\nblackfire.agent_socket=tcp://0.0.0.0:8707" > /etc/php/7.0/fpm/conf.d/20-blackfire.ini && \
+    echo "extension=blackfire.so\nblackfire.agent_socket=tcp://0.0.0.0:8707" > /etc/php/7.0/cli/conf.d/20-blackfire.ini
+
+# Install blackfire agent to profile CLI and url
+RUN curl -s https://packagecloud.io/gpg.key | apt-key add - && \
+    echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
+    apt-get update && \
+    apt-get install blackfire-agent
 
 # Install nginx, mysql client and redis client
 RUN apt-get update && \
@@ -107,6 +113,7 @@ COPY nginx/run                  /etc/service/nginx/run
 COPY php-fpm/run                /etc/service/php-fpm/run
 COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
+COPY blackfire/run              /etc/service/blackfire/run
 
 # Configuration
 COPY nginx/nginx.conf           /etc/nginx/nginx.conf
