@@ -116,7 +116,7 @@ const PhoneModal = React.createClass({
             {
               smsSentToNumber &&
               <div>
-                <Button style={{ paddingLeft: 0 }} onClick={this.resendSmsCode} bsStyle="link" disabled={isResending}>
+                <Button style={{ paddingLeft: 0, paddingRight: 0 }} onClick={this.resendSmsCode} bsStyle="link" disabled={isResending}>
                   {this.getIntlMessage('phone.confirm.ask_new')}
                 </Button>
                 { ' • ' }

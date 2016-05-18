@@ -1,56 +1,62 @@
 <?php
 
-if (!function_exists('getenv_default')) {
-    function getenv_default($key, $default = null)
-    {
-        return getenv('SYMFONY_'.strtoupper(str_replace('.', '__', $key))) ?: $default;
-    }
+if (!function_exists('setOverridableParameter')) {
+  function setOverridableParameter($container, $param, $default, $envVar)
+  {
+      $container->setParameter($param, getenv($envVar) ?: $default);
+  }
 }
 
-$container->setParameter('database_driver', getenv_default('database_driver', 'pdo_mysql'));
-$container->setParameter('database_host', getenv_default('database_host', '127.0.0.1'));
-$container->setParameter('database_port', getenv_default('database_port', 3306));
-$container->setParameter('database_name', getenv_default('database_name', 'symfony'));
-$container->setParameter('database_user', getenv_default('database_user', 'root'));
-$container->setParameter('database_password', null);
-$container->setParameter('elasticsearch_host', getenv_default('elasticsearch_host', '127.0.0.1'));
-$container->setParameter('redis_host', getenv_default('redis_host', '127.0.0.1'));
+// We use a database container in dev/test
+setOverridableParameter($container, 'database_driver', 'pdo_mysql', 'SYMFONY_DATABASE_DRIVER');
+setOverridableParameter($container, 'database_host', '127.0.0.1', 'SYMFONY_DATABASE_HOST');
+setOverridableParameter($container, 'database_port', 3306, 'SYMFONY_DATABASE_PORT');
+setOverridableParameter($container, 'database_name', 'symfony', 'SYMFONY_DATABASE_NAME');
+setOverridableParameter($container, 'database_user', 'root', 'SYMFONY_DATABASE_USER');
+setOverridableParameter($container, 'database_password', null, 'SYMFONY_DATABASE_PASSWORD');
+setOverridableParameter($container, 'database_server_version', '5.6', 'SYMFONY_DATABASE_SERVER_VERSION');
 
-$container->setParameter('mailer_user', getenv_default('mailer_user', null));
-$container->setParameter('mailer_password', getenv_default('mailer_password', null));
-$container->setParameter('mailer_host', getenv_default('mailer_host', 'mailcatchersmtp'));
-$container->setParameter('mailer_port', getenv_default('mailer_port', 25));
+// We use an elasticsearch container in dev/test
+setOverridableParameter($container, 'elasticsearch_host', '127.0.0.1', 'SYMFONY_ELASTICSEARCH_HOST');
 
-$container->setParameter('locale', getenv_default('locale', 'fr'));
-$container->setParameter('secret', getenv_default('secret', '***REMOVED***'));
-$container->setParameter('use_assetic_controller', getenv_default('use_assetic_controller', true));
+// We use a redis container in dev/test
+setOverridableParameter($container, 'redis_host', '127.0.0.1', 'SYMFONY_REDIS_HOST');
 
-$container->setParameter('facebook_app_id', getenv_default('facebook_app_id', '***REMOVED***'));
-$container->setParameter('facebook_app_secret', getenv_default('facebook_app_secret', '***REMOVED***'));
-$container->setParameter('google_app_id', getenv_default('google_app_id', '***REMOVED***'));
-$container->setParameter('google_app_secret', getenv_default('google_app_secret', '***REMOVED***'));
+// We use mailcatcher in dev/test
+setOverridableParameter($container, 'mailer_user', null, 'SYMFONY_MAILER_USER');
+setOverridableParameter($container, 'mailer_password', null, 'SYMFONY_MAILER_PASSWORD');
+setOverridableParameter($container, 'mailer_host', 'mailcatchersmtp', 'SYMFONY_MAILER_HOST');
+setOverridableParameter($container, 'mailer_port', 25, 'SYMFONY_MAILER_PORT');
 
-$container->setParameter('shield_login', getenv_default('shield_login', '***REMOVED***'));
-$container->setParameter('shield_pwd', getenv_default('shield_pwd', '***REMOVED***'));
+setOverridableParameter($container, 'locale', 'fr', 'SYMFONY_LOCALE');
+setOverridableParameter($container, 'secret', '***REMOVED***', 'SYMFONY_SECRET');
+setOverridableParameter($container, 'use_assetic_controller', true, 'SYMFONY_USE_ASSETIC_CONTROLLER');
 
-$container->setParameter('jwt_private_key_path', getenv_default('jwt_private_key_path', '%kernel.root_dir%/var/jwt/private.pem'));
-$container->setParameter('jwt_public_key_path', getenv_default('jwt_public_key_path', '%kernel.root_dir%/var/jwt/public.pem'));
-$container->setParameter('jwt_key_pass_phrase', getenv_default('jwt_key_pass_phrase', 'iamapassphrase'));
-$container->setParameter('jwt_token_ttl', getenv_default('jwt_token_ttl', 86400));
+// Social credentials
+setOverridableParameter($container, 'facebook_app_id', '***REMOVED***', 'SYMFONY_FACEBOOK_APP_ID');
+setOverridableParameter($container, 'facebook_app_secret', '***REMOVED***', 'SYMFONY_FACEBOOK_APP_SECRET');
+setOverridableParameter($container, 'google_app_id', '***REMOVED***', 'SYMFONY_GOOGLE_APP_ID');
+setOverridableParameter($container, 'google_app_secret', '***REMOVED***', 'SYMFONY_GOOGLE_APP_SECRET');
 
-$container->setParameter('language_analyzer', getenv_default('language_analyzer', 'french'));
+// Backdoor for shield
+setOverridableParameter($container, 'shield_login', '***REMOVED***', 'SYMFONY_SHIELD_LOGIN');
+setOverridableParameter($container, 'shield_pwd', '***REMOVED***', 'SYMFONY_SHIELD_PWD');
 
-$container->setParameter('remember_secret', getenv_default('remember_secret', '***REMOVED***'));
+setOverridableParameter($container, 'jwt_token_ttl', 86400, 'SYMFONY_JWT_TOKEN_TTL');
+setOverridableParameter($container, 'language_analyzer', 'french', 'SYMFONY_LANGUAGE_ANALYZER');
+setOverridableParameter($container, 'remember_secret', '***REMOVED***', 'SYMFONY_REMEMBER_SECRET');
 
-$container->setParameter('router.request_context.host', getenv_default('router.request_context.host', 'capco.dev'));
-$container->setParameter('assets_version', getenv_default('assets_version', 'v1'));
-$container->setParameter('server_version', getenv_default('server_version', '5.6'));
+// Used to fix URLs when indexing in ES
+setOverridableParameter($container, 'router.request_context.host', 'capco.dev', 'SYMFONY_ROUTER__REQUEST_CONTEXT__HOST');
 
-$container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
+// set at every deployment
+setOverridableParameter($container, 'assets_version', 'v1', 'SYMFONY_ASSETS_VERSION');
 
-$container->setParameter('recaptcha_private_key', getenv_default('recaptcha_private_key', '***REMOVED***'));
+setOverridableParameter($container, 'recaptcha_private_key', '***REMOVED***', 'SYMFONY_RECAPTCHA_PRIVATE_KEY');
 
 // Twilio test credentials (no charge)
-$container->setParameter('twilio_sid', getenv_default('twilio_sid', '***REMOVED***'));
-$container->setParameter('twilio_token', getenv_default('twilio_token', '***REMOVED***'));
-$container->setParameter('twilio_number', getenv_default('twilio_number', '+***REMOVED***'));
+setOverridableParameter($container, 'twilio_sid', '***REMOVED***', 'SYMFONY_TWILIO_SID');
+setOverridableParameter($container, 'twilio_token', '***REMOVED***', 'SYMFONY_TWILIO_TOKEN');
+setOverridableParameter($container, 'twilio_number', '+***REMOVED***', 'SYMFONY_TWILIO_NUMBER');
+
+$container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');

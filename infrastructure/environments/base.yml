@@ -4,9 +4,9 @@ application:
         - "80:80"
     environment:
         SYMFONY_DATABASE_HOST: database
+        SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
         SYMFONY_ELASTICSEARCH_HOST: elasticsearch
         SYMFONY_REDIS_HOST: redis
-        SYMFONY_SERVER_VERSION: 5.5.46-0+deb8u1
     volumes_from:
         - applicationdata
     links:

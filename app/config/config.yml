@@ -72,7 +72,7 @@ doctrine:
         user: "%database_user%"
         password: "%database_password%"
         charset: UTF8
-        server_version: "%server_version%"
+        server_version: "%database_server_version%"
         types:
             json: Sonata\Doctrine\Types\JsonType
         mapping_types:
@@ -323,10 +323,10 @@ fos_rest:
             'Symfony\Component\Security\Core\Exception\AuthenticationException': true
 
 lexik_jwt_authentication:
-    private_key_path: %jwt_private_key_path%
-    public_key_path:  %jwt_public_key_path%
-    pass_phrase:      %jwt_key_pass_phrase%
-    token_ttl:        %jwt_token_ttl%
+    private_key_path: %kernel.root_dir%/var/jwt/private.pem
+    public_key_path:  %kernel.root_dir%/var/jwt/public.pem
+    pass_phrase: iamapassphrase
+    token_ttl: %jwt_token_ttl%
     user_identity_field: email
 
 jms_serializer:
