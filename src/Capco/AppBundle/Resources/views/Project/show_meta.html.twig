@@ -79,7 +79,9 @@
                         {{ react_intl_component('ProjectTrashButtonApp', {'props': {
                             'link': path('app_project_show_trashed', {'projectSlug': project.slug }),
                             'label': 'project.show.meta.info.trash'|trans({}, 'CapcoAppBundle'),
-                            }}
+                            },
+                            'rendering': app.user ? 'client_side' : 'client_side'
+                            }
                           )
                         }}
                     </li>

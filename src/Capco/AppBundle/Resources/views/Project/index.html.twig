@@ -85,7 +85,11 @@
         </div>
         {% endif %}
 
-        {{ react_intl_component('ProjectsListApp', {'props': props}) }}
+        {{ react_intl_component('ProjectsListApp', {
+            'props': props,
+            'rendering': 'client_side'
+           })
+        }}
 
         {% set route, params = 'app_project', {} %}
         {% if is_feature_enabled('projects_form') and form is defined %}

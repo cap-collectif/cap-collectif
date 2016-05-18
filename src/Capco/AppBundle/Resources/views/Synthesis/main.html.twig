@@ -17,7 +17,11 @@
 {% endblock %}
 
 {% block mainContent %}
-    {{ react_intl_component('SynthesisEditBoxApp', {'props': props, 'rendering': 'client_side'}) }}
+    {{ react_intl_component('SynthesisEditBoxApp', {
+        'props': props,
+        'rendering': 'client_side',
+       })
+    }}
 {% endblock %}
 
 {% block javascripts %}

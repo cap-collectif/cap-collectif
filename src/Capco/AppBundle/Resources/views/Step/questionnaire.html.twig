@@ -45,7 +45,11 @@
             </p>
         </div>
     {% else %}
-        {{ react_intl_component('QuestionnaireStepPageApp', {'props': props, 'rendering': app.user ? 'client_side' : 'both'}) }}
+        {{ react_intl_component('QuestionnaireStepPageApp', {
+            'props': props,
+            'rendering': app.user ? 'client_side' : 'client_side',
+           })
+        }}
     {% endif %}
 
 {% endblock %}

@@ -21,5 +21,9 @@
 {% endblock %}
 
 {% block content %}
-    {{ react_intl_component('OpinionPageApp', {'props': {'opinionId': opinion.id, 'versionId': version.id} }) }}
+    {{ react_intl_component('OpinionPageApp', {
+      'props': {'opinionId': opinion.id, 'versionId': version.id}
+      'rendering': 'client_side',
+      )}
+    }}
 {% endblock %}
