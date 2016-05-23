@@ -128,9 +128,6 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesisAction(Synthesis $synthesis)
     {
-        if (!$synthesis->isEnabled() && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
-        }
         return $synthesis;
     }
 
@@ -176,7 +173,6 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
-     * @Security("has_role('ROLE_ADMIN')")
      * @Get("/syntheses/{id}/updated")
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"SynthesisDetails", "Elements"})
      */
@@ -214,7 +210,7 @@ class SynthesisController extends FOSRestController
         $offset = $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
 
-        if (($type !== 'published' || !$synthesis->isEnabled()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($type !== 'published' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
 
@@ -248,7 +244,7 @@ class SynthesisController extends FOSRestController
         $depth = $paramFetcher->get('depth');
         $parent = $paramFetcher->get('parent');
 
-        if (($type !== 'published' || !$synthesis->isEnabled()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($type !== 'published' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
 
@@ -279,7 +275,7 @@ class SynthesisController extends FOSRestController
     public function countSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
         $type = $paramFetcher->get('type');
-        if (($type !== 'published' || !$synthesis->isEnabled()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($type !== 'published' && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
 
@@ -299,15 +295,11 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}")
-     * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
-    public function getSynthesisElementAction(Synthesis $synthesis, SynthesisElement $element)
+    public function getSynthesisElementAction($synthesis_id, SynthesisElement $element)
     {
-        if ((!$synthesis->isEnabled() || !$element->isPublished()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
-        }
         return $element;
     }
 

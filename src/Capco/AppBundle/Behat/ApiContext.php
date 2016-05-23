@@ -273,24 +273,6 @@ EOF;
      */
     public function thereIsASynthesisWithIdAndElements($id, TableNode $elementsIds)
     {
-        $this->createSynthesisWithElements($id, $elementsIds);
-    }
-
-    /**
-     * There is a synthesis with id and published elements.
-     *
-     * @Given there is a synthesis with id :id and published elements:
-     */
-    public function thereIsASynthesisWithIdAndPublishedElements($id, TableNode $elementsIds)
-    {
-        $this->createSynthesisWithElements($id, $elementsIds, true);
-    }
-
-    /**
-     * Create a synthesis with elements
-     */
-    private function createSynthesisWithElements($id, TableNode $elementsIds, $published = false)
-    {
         $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id);
         $author = $this->getService('fos_user.user_manager')->findOneBy(['slug' => 'sfavot']);
 
@@ -322,7 +304,6 @@ EOF;
                 $element->setNotation(4);
                 $element->setVotes(['-1' => 21, '0' => 12, '1' => 43]);
                 $element->setAuthor($author);
-                $element->setPublished($published);
 
                 // Set id
                 $element->setId($elId);
@@ -341,7 +322,7 @@ EOF;
     }
 
     /**
-     * There is a synthesis with id based on consultation step.
+     * There is a synthesis with id base on consultation step.
      *
      * @Given there is a synthesis with id :sid based on consultation step :csId
      */
