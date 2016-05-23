@@ -565,8 +565,15 @@ Feature: Synthesis
     """
 
   @database
-  Scenario: API client wants to get a synthesis element
+  Scenario: API client wants to get a synthesis element that is not published
     Given there is a synthesis with id "42" and elements:
+      | 43 |
+    And I send a GET request to "/api/syntheses/42/elements/43"
+    Then the JSON response status code should be 403
+
+  @database
+  Scenario: API client wants to get a synthesis element that is published
+    Given there is a synthesis with id "42" and published elements:
       | 43 |
     And I send a GET request to "/api/syntheses/42/elements/43"
     Then the JSON response should match:

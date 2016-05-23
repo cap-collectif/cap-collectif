@@ -93,7 +93,6 @@ class StepAdmin extends Admin
             ->add('startAt', 'sonata_type_datetime_picker', [
                 'label' => 'admin.fields.step.start_at',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'dp_use_current' => false,
                 'attr' => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
@@ -102,7 +101,6 @@ class StepAdmin extends Admin
             ->add('endAt', 'sonata_type_datetime_picker', [
                 'label' => 'admin.fields.step.end_at',
                 'format' => 'dd/MM/yyyy HH:mm',
-                'dp_use_current' => false,
                 'attr' => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
