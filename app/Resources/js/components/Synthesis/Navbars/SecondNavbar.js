@@ -18,6 +18,11 @@ const SecondNavbar = React.createClass({
               {this.getIntlMessage('synthesis.edition.navbar.second.preview')}
             </NavItem>
           </LinkContainer>
+          <LinkContainer to={'/settings'}>
+            <NavItem>
+              <i className="cap cap-setting-gear"></i>
+            </NavItem>
+          </LinkContainer>
         </Nav>
       </Navbar>
     );

@@ -6,6 +6,8 @@ import { Router, hashHistory, IndexRoute, Route } from 'react-router';
 import ElementsInbox from '../components/Synthesis/Inbox/ElementsInbox';
 import ElementsSearch from '../components/Synthesis/ElementsSearch';
 import FolderManager from '../components/Synthesis/FolderManager';
+import Settings from '../components/Synthesis/Settings/Settings';
+import DisplaySettings from '../components/Synthesis/Settings/DisplaySettings';
 import EditElement from '../components/Synthesis/Edit/EditElement';
 import Preview from '../components/Synthesis/View/Preview';
 
@@ -18,6 +20,12 @@ const mainNode = (props) => {
   const redirectToDefaultInbox = (nextState, replace) => {
     replace({
       pathname: '/inbox/new',
+    });
+  };
+
+  const redirectToFirstSettings = (nextState, replace) => {
+    replace({
+      pathname: '/settings/display',
     });
   };
 
@@ -48,6 +56,10 @@ const mainNode = (props) => {
           <Route path="folder-manager" component={FolderManager} />
           <Route path="element/:element_id" component={EditElement} />
           <Route path="preview" component={Preview} />
+          <Route path="settings" component={Settings} >
+            <IndexRoute component={Settings} onEnter={redirectToFirstSettings} />
+            <Route path="display" component={DisplaySettings} />
+          </Route>
         </Route>
       </Router>
     </Provider>

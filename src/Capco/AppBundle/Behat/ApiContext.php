@@ -466,6 +466,31 @@ EOF;
     }
 
     /**
+     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with synthesis display rules json$/
+     */
+    public function iSendUpdateSynthesisDisplayRulesRequest($method, $url)
+    {
+        $json = <<< EOF
+        {
+            "rules": [
+                {
+                    "level": 0,
+                    "type": "folder",
+                    "display": "title"
+                },
+                {
+                    "level": 0,
+                    "type": "contribution",
+                    "display": "progress"
+                }
+            ]
+        }
+EOF;
+
+        $this->iSendARequestWithJson($method, $url, $json);
+    }
+
+    /**
      * @Then the comments should be ordered by popularity
      */
     public function commentsOrderedByPopularity()

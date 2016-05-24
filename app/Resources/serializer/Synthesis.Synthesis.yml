@@ -16,6 +16,10 @@ Capco\AppBundle\Entity\Synthesis\Synthesis:
       type: ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>
       expose: true
       groups: [Syntheses, SynthesisDetails, Elements]
+    displayRules:
+      expose: true
+      groups: [Syntheses, SynthesisDetails]
+      serialized_name: displayRules
   relations:
     -
       rel: self

@@ -1193,9 +1193,6 @@ cnil:
 confidentialite.title: Confidentialité
 
 synthesis:
-  show:
-    not_enabled: La synthèse est en cours de rédaction et sera bientôt disponible.
-    no_synthesis: La synthèse n'a pas encore été rédigée. Elle sera disponible prochainement.
   edit:
     button: Éditer
     no_synthesis: Aucune synthèse associée à cette étape.

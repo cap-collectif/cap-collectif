@@ -408,4 +408,26 @@ class SynthesisController extends FOSRestController
 
         return $logs;
     }
+
+    /**
+     * Update synthesis disaply rules.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Update synthesis dispaly rules",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when synthesis is not found",
+     *  }
+     * )
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Put("/syntheses/{synthesis_id}/display")
+     * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     */
+    public function updateSynthesisDisplayRulesAction(Request $request, Synthesis $synthesis)
+    {
+        $synthesis->setDisplayRules($request->request->get('rules'));
+        return;
+    }
 }

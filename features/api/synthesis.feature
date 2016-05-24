@@ -1135,3 +1135,11 @@ Feature: Synthesis
       }
     }
     """
+  @database
+  Scenario: Admin wants to update synthesis display rules
+    Given I am logged in to api as admin
+    And there is a synthesis with id "42" and elements:
+      | 43 |
+    And I send a PUT request to "api/syntheses/42/display" with synthesis display rules json
+    Then the JSON response status code should be 200
+

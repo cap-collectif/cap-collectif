@@ -72,6 +72,12 @@ class Synthesis
      */
     private $deletedAt;
 
+    /**
+     * @var string
+     * @ORM\Column(name="display_rules", type="json", nullable=true)
+     */
+    private $displayRules;
+
     public function __construct()
     {
         $this->elements = new ArrayCollection();
@@ -214,6 +220,25 @@ class Synthesis
     public function setDeletedAt($deletedAt)
     {
         $this->deletedAt = $deletedAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayRules()
+    {
+        return $this->displayRules;
+    }
+
+    /**
+     * @param string $displayRules
+     * @return $this
+     */
+    public function setDisplayRules($displayRules)
+    {
+        $this->displayRules = $displayRules;
+
+        return $this;
     }
 
     // ************************* Lifecycle ***********************************
