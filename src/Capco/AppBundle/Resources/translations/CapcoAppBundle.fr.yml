@@ -1164,8 +1164,13 @@ idea_vote:
 
 dates:
   full_day: Le %date% à %time%
-  part_day: Le %date% de %start_time% à %end_time%
-  between: Du %start% au %end%
+  full_day_no_time: Le %date%
+  part_day_start: Le %date% de %start_time%
+  part_day_end: à %end_time%
+  between_start: Du %start% à %start_time%
+  between_start_no_time: Du %start%
+  between_end: au %end% à %end_time%
+  between_end_no_time: au %end%
 
 cnil:
   message: Les cookies assurent le bon fonctionnement de nos services. En utilisant ces derniers, vous acceptez l'utilisation des cookies.
