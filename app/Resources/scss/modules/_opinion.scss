@@ -64,14 +64,6 @@
     &.opinion__header--mobile-centered {
       @media (max-width: $screen-xs-max) {
         text-align: center;
-
-        .opinion__header__title {
-          display: inline-block;
-        }
-        .opinion__header__filter {
-          margin-top: 0;
-          text-align: inherit;
-        }
       }
     }
 
@@ -81,10 +73,12 @@
       .opinion__header__title,
       .opinion__header__filter {
         float: none !important;
+        display: block;
       }
       .opinion__header__filter {
         margin-bottom: 10px;
-        margin-top: -40px;
+        float: none !important;
+        display: inline-block;
       }
     }
   }

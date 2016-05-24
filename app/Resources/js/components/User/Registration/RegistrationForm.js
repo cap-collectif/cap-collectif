@@ -3,7 +3,6 @@ import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import mailcheck from 'mailcheck';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import UserActions from '../../../actions/UserActions';
@@ -166,33 +165,6 @@ export const RegistrationForm = React.createClass({
       />
       : null
     ;
-    const emailLabel = <span>
-      {this.getIntlMessage('global.email')}
-      <OverlayTrigger rootClose placement="top"
-        overlay={
-          <Tooltip id="registration-email-tooltip">
-            { this.getIntlMessage('registration.tooltip.email') }
-          </Tooltip>
-        }
-      >
-        <i style={{ fontSize: '20px', color: '#999', paddingLeft: '15px', top: '-2px' }} className="pull-right cap cap-information"></i>
-      </OverlayTrigger>
-    </span>;
-    const passwordLabel = <span>
-      {this.getIntlMessage('registration.password')}
-      <OverlayTrigger rootClose placement="top"
-                      overlay={
-          <Tooltip id="registration-password-tooltip">
-            { this.getIntlMessage('registration.tooltip.password') }
-          </Tooltip>
-        }
-      >
-        <i style={{ fontSize: '20px', color: '#999', paddingLeft: '15px', top: '-2px' }} className="pull-right cap cap-information"></i>
-      </OverlayTrigger>
-    </span>;
-    const typeLabel = <span>
-      {this.getIntlMessage('registration.type')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-    </span>;
     return (
       <form id="registration-form">
         {
@@ -201,12 +173,12 @@ export const RegistrationForm = React.createClass({
               id="_user_type"
               type="select"
               valueLink={this.linkState('form.userType')}
-              label={typeLabel}
+              label={this.getIntlMessage('registration.type') + ' (facultatif)'}
               groupClassName={this.getGroupStyle('userType')}
               errors={this.renderFormErrors('userType')}
             >
               <option value="" disabled selected>
-                {this.getIntlMessage('registration.select.type')}
+                {this.getIntlMessage('global.select')}
               </option>
               {
                 user_types.map((type) => <option key={type.id} value={type.id}>{type.name}</option>)
@@ -221,14 +193,14 @@ export const RegistrationForm = React.createClass({
           label={this.getIntlMessage('registration.username')}
           groupClassName={this.getGroupStyle('username')}
           errors={this.renderFormErrors('username')}
+          help={this.getIntlMessage('registration.help.username')}
         />
         <Input
           id="_email"
           ref={c => this._email = c}
           type="text"
           valueLink={this.linkState('form.email')}
-          label={emailLabel}
-          labelClassName="h5 label--no-margin"
+          label={this.getIntlMessage('global.email')}
           groupClassName={this.getGroupStyle('email')}
           errors={this.renderFormErrors('email')}
           onBlur={this.checkMail}
@@ -243,8 +215,7 @@ export const RegistrationForm = React.createClass({
           id="_password"
           type="password"
           valueLink={this.linkState('form.plainPassword')}
-          label={passwordLabel}
-          labelClassName="h5 label--no-margin"
+          label={this.getIntlMessage('global.password')}
           groupClassName={this.getGroupStyle('plainPassword')}
           errors={this.renderFormErrors('plainPassword')}
         />
