@@ -404,7 +404,7 @@ project:
     trashed:
       none: Aucun élèment dans la corbeille.
       short_name: Corbeille
-      text: La corbeille contient des contributions signalées comme abusives par les utilisateurs et validées par l'auteur.
+      text: La corbeille garantit la transparence du processus de consultation. Elle contient les contributions qui ne respectent pas la charte et qui ont donc fait l’objet d’une modération.
       title: Corbeille
   sort:
     contributions_nb: Nombre de contributions
