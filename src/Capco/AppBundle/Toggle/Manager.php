@@ -20,6 +20,7 @@ class Manager
         'login_gplus',
         'members_list',
         'newsletter',
+        'profiles',
         'projects_form',
         'project_trash',
         'search',

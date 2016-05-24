@@ -18,7 +18,7 @@ use JMS\Serializer\SerializationContext;
 class ProfileController extends BaseController
 {
     /**
-     * @Route("/", name="capco_user_profile_show")
+     * @Route("/", name="capco_user_profile_show", defaults={"_feature_flags" = "profiles"})
      * @Template()
      * @Security("has_role('ROLE_USER')")
      */
@@ -91,7 +91,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}", name="capco_user_profile_show_all")
+     * @Route("/{slug}", name="capco_user_profile_show_all", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:show.html.twig")
      */
     public function showUserAction(User $user)
@@ -148,7 +148,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/projects", name="capco_user_profile_show_projects")
+     * @Route("/{slug}/projects", name="capco_user_profile_show_projects", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserProjects.html.twig")
      *
      * @param User $user
@@ -176,7 +176,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/opinions", name="capco_user_profile_show_opinions")
+     * @Route("/{slug}/opinions", name="capco_user_profile_show_opinions", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserOpinions.html.twig")
      *
      * @param User $user
@@ -194,7 +194,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/versions", name="capco_user_profile_show_opinions_versions")
+     * @Route("/{slug}/versions", name="capco_user_profile_show_opinions_versions", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserOpinionVersions.html.twig")
      */
     public function showOpinionVersionsAction(User $user)
@@ -208,7 +208,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/proposals", name="capco_user_profile_show_proposals")
+     * @Route("/{slug}/proposals", name="capco_user_profile_show_proposals", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserProposals.html.twig")
      *
      * @param User $user
@@ -236,7 +236,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/replies", name="capco_user_profile_show_replies")
+     * @Route("/{slug}/replies", name="capco_user_profile_show_replies", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserReplies.html.twig")
      *
      * @param User $user
@@ -260,7 +260,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/arguments", name="capco_user_profile_show_arguments")
+     * @Route("/{slug}/arguments", name="capco_user_profile_show_arguments", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserArguments.html.twig")
      */
     public function showArgumentsAction(User $user)
@@ -275,7 +275,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/ideas", name="capco_user_profile_show_ideas", defaults={"_feature_flags" = "ideas"})
+     * @Route("/{slug}/ideas", name="capco_user_profile_show_ideas", defaults={"_feature_flags" = "ideas,profiles"})
      * @Template("CapcoUserBundle:Profile:showUserIdeas.html.twig")
      */
     public function showIdeasAction(User $user)
@@ -289,7 +289,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/sources", name="capco_user_profile_show_sources")
+     * @Route("/{slug}/sources", name="capco_user_profile_show_sources", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserSources.html.twig")
      */
     public function showSourcesAction(User $user)
@@ -303,7 +303,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/comments", name="capco_user_profile_show_comments")
+     * @Route("/{slug}/comments", name="capco_user_profile_show_comments", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserComments.html.twig")
      */
     public function showCommentsAction(User $user)
@@ -317,7 +317,7 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/votes", name="capco_user_profile_show_votes")
+     * @Route("/{slug}/votes", name="capco_user_profile_show_votes", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserVotes.html.twig")
      */
     public function showVotesAction(User $user)
@@ -328,18 +328,5 @@ class ProfileController extends BaseController
             'user' => $user,
             'votes' => $votes,
         ];
-    }
-
-    /**
-     * Deprecated route, in order to harmonise real user profile stuff urls.
-     *
-     * @Route("/user/{slug}", name="capco_user_profile_show_all_old")
-     */
-    public function showUserOldAction(User $user)
-    {
-        return new RedirectResponse(
-            $this->generateUrl('capco_user_profile_show_all', ['slug' => $user->getSlug()]),
-            Response::HTTP_MOVED_PERMANENTLY
-        );
     }
 }
