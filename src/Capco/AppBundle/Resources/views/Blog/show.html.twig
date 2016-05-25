@@ -61,7 +61,11 @@
     {% if capco_comment_can_add(post) or (capco_comment_can_show(post) and post.commentsCount > 0) %}
         <div class="container  container--custom  container--thinner">
             {% if capco_comment_can_show(post) %}
-                {{ react_intl_component('CommentSectionApp', {'props': props}) }}
+                {{ react_intl_component('CommentSectionApp', {
+                    'props': props,
+                    'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
+                   })
+                }}
             {% endif %}
         </div>
     {% endif %}

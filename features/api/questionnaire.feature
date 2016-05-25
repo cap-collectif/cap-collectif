@@ -13,6 +13,7 @@ Feature: Questionnaire Restful Api
       "description": @string@,
       "contribuable": @boolean@,
       "multipleRepliesAllowed" : @boolean@,
+      "isModifyAllowed": @boolean@,
       "anonymousAllowed": @boolean@,
       "phoneConfirmationRequired": @boolean@,
       "fields": [

@@ -55,6 +55,10 @@ class QuestionnaireAdmin extends Admin
                     'label' => 'admin.fields.questionnaire.multiple_replies_allowed',
                     'required' => false,
                 ])
+                ->add('modifyAllowed', null, [
+                    'label' => 'admin.fields.questionnaire.modify_allowed',
+                    'required' => false,
+                ])
                 ->add('anonymousAllowed', null, [
                     'label' => 'admin.fields.questionnaire.anonymous_allowed',
                     'required' => false,

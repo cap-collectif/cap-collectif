@@ -10,7 +10,11 @@
             <p>{{ section.body | raw }}</p>
         {% endif %}
 
-        {{ react_intl_component('ProjectsListApp', {'props': props}) }}
+        {{ react_intl_component('ProjectsListApp', {
+          'props': props,
+          'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
+          })
+        }}
 
         {% if count > max %}
             <a href="{{ path('app_project') }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>

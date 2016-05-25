@@ -49,10 +49,14 @@
         <div class="filter  block">
             <div class="row">
                 {% if is_feature_enabled('idea_creation') %}
-                    {{ react_intl_component('NewIdeaApp', {'props': {
+                    {{ react_intl_component('NewIdeaApp', {
+                      'props': {
                         'link': path('app_idea_create'),
                         'label': 'idea.create.button'|trans({}, 'CapcoAppBundle'),
-                    }})}}
+                      },
+                      'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
+                      })
+                    }}
                 {% endif %}
 
                 {{ form_start(form) }}

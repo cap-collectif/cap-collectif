@@ -59,16 +59,12 @@ export const ProfileBox = React.createClass({
         if (message === 'sms_failed_to_send') {
           message = this.getIntlMessage('phone.confirm.alert.failed_to_send');
         }
-        this.setState({ alert: { type: 'danger', message: message }, isSubmitting: false });
+        this.setState({ alert: { type: 'danger', message: message } });
       });
   },
 
   handleAlertDismiss() {
     this.setState({ alert: null });
-  },
-
-  askChangeNumber() {
-    this.setState(this.getInitialState());
   },
 
   deletePhone(e) {
@@ -153,15 +149,9 @@ export const ProfileBox = React.createClass({
             }
             {
               smsSentToNumber &&
-              <span>
-                <Button style={{ paddingLeft: 0, paddingRight: 0 }} onClick={this.resendSmsCode} bsStyle="link">
-                  {this.getIntlMessage('phone.confirm.ask_new')}
-                </Button>
-                { ' • ' }
-                <Button style={{ paddingLeft: 0 }} onClick={this.askChangeNumber} bsStyle="link">
-                  {this.getIntlMessage('phone.confirm.ask_change_number')}
-                </Button>
-              </span>
+              <Button style={{ paddingLeft: 0 }} onClick={this.resendSmsCode} bsStyle="link">
+                {this.getIntlMessage('phone.confirm.ask_new')}
+              </Button>
             }
       </Panel>
     );

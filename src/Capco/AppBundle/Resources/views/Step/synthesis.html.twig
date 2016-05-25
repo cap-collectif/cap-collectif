@@ -38,6 +38,10 @@
     {% elseif currentStep.synthesis.enabled == false and ( app.user == null or app.user.vip == false) %}
         <p class="excerpt">{{ 'synthesis.show.not_enabled' | trans({}, 'CapcoAppBundle') }}</p>
     {% else %}
-        {{ react_intl_component('SynthesisViewBoxApp', {'props': props}) }}
+        {{ react_intl_component('SynthesisViewBoxApp', {
+            'props': props,
+            'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
+           })
+        }}
     {% endif %}
 {% endblock %}

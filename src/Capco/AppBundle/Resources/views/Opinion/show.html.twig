@@ -19,5 +19,9 @@
 {% endblock %}
 
 {% block content %}
-    {{ react_intl_component('OpinionPageApp', {'props': {'opinionId': opinion.id} }) }}
+    {{ react_intl_component('OpinionPageApp', {
+      'props': {'opinionId': opinion.id},
+      'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
+      )}
+    }}
 {% endblock %}

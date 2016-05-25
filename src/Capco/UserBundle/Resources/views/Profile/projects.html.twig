@@ -1,5 +1,9 @@
 {% if projectsCount > 0 %}
-    {{ react_intl_component('ProjectsListApp', {'props': projectsProps}) }}
+    {{ react_intl_component('ProjectsListApp', {
+      'props': projectsProps,
+      'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
+      })
+    }}
 {% else %}
     <div class="project__empty-block  text-center">
         <p class="icon  cap-bubble-star-2"></p>

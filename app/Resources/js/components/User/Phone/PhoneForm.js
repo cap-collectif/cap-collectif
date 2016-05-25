@@ -58,7 +58,6 @@ const PhoneForm = React.createClass({
               } else {
                 this.setState(this.getInitialState());
               }
-              this.props.onSubmitFailure();
             });
         })
         .catch((error) => {

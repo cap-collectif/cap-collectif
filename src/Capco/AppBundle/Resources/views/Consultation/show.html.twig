@@ -37,7 +37,11 @@
     {% block content %}
         <h2 class="h2">{{ currentStep.title }}</h2>
 
-        {{ react_intl_component('StepInfosApp', {'props': stepProps}) }}
+        {{ react_intl_component('StepInfosApp', {
+            'props': stepProps,
+            'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
+           })
+        }}
 
         {{ render(controller('CapcoAppBundle:Site/Opinion:showOpinions', {'project': project.id, 'currentStep': currentStep})) }}
     {% endblock %}
