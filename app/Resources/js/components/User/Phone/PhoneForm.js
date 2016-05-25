@@ -48,12 +48,9 @@ const PhoneForm = React.createClass({
               this.setState(this.getInitialState());
             })
             .catch((err) => {
-              const errors = this.state.errors;
               if (err.response.message === 'sms_failed_to_send') {
+                const errors = this.state.errors;
                 errors.phone = ['phone.confirm.alert.failed_to_send'];
-                this.setState({ errors: errors });
-              } else if (err.response.message === 'sms_already_sent_recently') {
-                errors.phone = ['phone.confirm.alert.wait_for_new'];
                 this.setState({ errors: errors });
               } else {
                 this.setState(this.getInitialState());

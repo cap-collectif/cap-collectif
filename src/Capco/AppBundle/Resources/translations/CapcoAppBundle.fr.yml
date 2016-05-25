@@ -2,7 +2,8 @@
 global:
   alert:
     close: Fermer
-    already_enabled: Votre compte a déjà été activé
+    already_email_confirmed: Votre adresse électronique a déjà été confirmée avec succès.
+    email_confirmed: Merci, votre adresse électronique a été confirmée avec succès.
   capco_powered: Propulsé par %startlink%Cap Collectif%endlink%
   edited: Modifié le %date%
   form:

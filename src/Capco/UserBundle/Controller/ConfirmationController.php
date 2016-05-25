@@ -18,7 +18,7 @@ class ConfirmationController extends Controller
         $response = new RedirectResponse($this->container->get('router')->generate('app_homepage'));
 
         if (!$user) {
-            $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.already_enabled');
+            $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.already_email_confirmed');
 
             return $response;
         }
@@ -35,6 +35,8 @@ class ConfirmationController extends Controller
             $user,
             $response
         );
+
+        $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed');
 
         return $response;
     }
