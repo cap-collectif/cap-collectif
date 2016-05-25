@@ -517,6 +517,7 @@ admin:
       questions: Questions
       add_question: Ajouter une question
       multiple_replies_allowed: Autoriser plusieurs réponses par utilisateur
+      acknowledge_replies: Accuser la participation par email
     question:
       title: Titre
       help_text: Texte d'aide

@@ -140,6 +140,7 @@ Feature: Reply Restful Api
       "errors": null
     }
     """
+    And 1 mail should be sent
 
   @database @elasticsearch
   Scenario: Logged in API client wants to add a reply

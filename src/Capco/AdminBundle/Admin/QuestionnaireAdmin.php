@@ -59,6 +59,10 @@ class QuestionnaireAdmin extends Admin
                     'label' => 'admin.fields.questionnaire.anonymous_allowed',
                     'required' => false,
                 ])
+                ->add('acknowledgeReplies', null, [
+                    'label' => 'admin.fields.questionnaire.acknowledge_replies',
+                    'required' => false,
+                ])
             ->end()
         ;
     }
