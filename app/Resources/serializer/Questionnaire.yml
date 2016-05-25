@@ -18,11 +18,6 @@ Capco\AppBundle\Entity\Questionnaire:
       type: boolean
       groups: [Questionnaires]
       serialized_name: multipleRepliesAllowed
-    modifyAllowed:
-      expose: true
-      type: boolean
-      groups: [Questionnaires]
-      serialized_name: isModifyAllowed
     anonymousAllowed:
       expose: true
       type: boolean

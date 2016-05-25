@@ -17,11 +17,7 @@
 {% endblock %}
 
 {% block mainContent %}
-    {{ react_intl_component('SynthesisEditBoxApp', {
-        'props': props,
-        'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-       })
-    }}
+    {{ react_intl_component('SynthesisEditBoxApp', {'props': props, 'rendering': 'client_side'}) }}
 {% endblock %}
 
 {% block javascripts %}

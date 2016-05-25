@@ -464,36 +464,6 @@ Feature: Reply Restful Api
     Then the JSON response status code should be 403
 
   @security @elasticsearch
-  Scenario: logged in API client wants to edit a reply when edition is not allowed
-    Given I am logged in to api as admin
-    When I send a PUT request to "api/questionnaires/2/replies/3" with json:
-    """
-    {
-      "responses": [
-        {
-          "question": 2,
-          "value": "En fait c'est nul, je ne veux pas des JO à Paris"
-        },
-        {
-          "question": 6,
-          "value": {
-            "labels": ["Athlétisme", "Natation", "Sports collectifs"]
-          }
-        }
-      ]
-    }
-    """
-    Then the JSON response status code should be 400
-    And the JSON response should match:
-    """
-    {
-      "code": 400,
-      "message": "Reply modification is not allowed for this questionnaire.",
-      "errors": @null@
-    }
-    """
-
-  @security @elasticsearch
   Scenario: Logged in API client wants to edit a reply in a closed questionnaire step
     Given I am logged in to api as admin
     And I send a PUT request to "/api/questionnaires/3/replies/3" with json:

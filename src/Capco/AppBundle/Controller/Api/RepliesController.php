@@ -173,10 +173,6 @@ class RepliesController extends FOSRestController
             throw new BadRequestHttpException('This reply is no longer editable.');
         }
 
-        if (!$questionnaire->isModifyAllowed()) {
-            throw new BadRequestHttpException('Reply modification is not allowed for this questionnaire.');
-        }
-
         if ($this->getUser() !== $reply->getAuthor()) {
             throw new AccessDeniedException();
         }

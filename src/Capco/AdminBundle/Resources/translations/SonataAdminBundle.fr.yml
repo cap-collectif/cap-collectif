@@ -517,7 +517,6 @@ admin:
       questions: Questions
       add_question: Ajouter une question
       multiple_replies_allowed: Autoriser plusieurs réponses par utilisateur
-      modify_allowed: Autoriser la modification des réponses
     question:
       title: Titre
       help_text: Texte d'aide
@@ -771,7 +770,6 @@ capco:
     votes_evolution: "Graphe d'évolution des votes"
     zipcode_at_register: Demander le code postal
     phone_confirmation: Vérification des comptes par SMS
-    server_side_rendering: Rendu serveur
 
 action_enable: Activer
 action_disable: Désactiver

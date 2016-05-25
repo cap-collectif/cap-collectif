@@ -84,12 +84,6 @@ class Questionnaire
 
     /**
      * @var bool
-     * @ORM\Column(name="modify_allowed", type="boolean", nullable=true)
-     */
-    private $modifyAllowed;
-
-    /**
-     * @var bool
      * @ORM\Column(name="anonymous_allowed", type="boolean", nullable=false)
      */
     private $anonymousAllowed = false;
@@ -367,26 +361,6 @@ class Questionnaire
     public function setMultipleRepliesAllowed($multipleRepliesAllowed)
     {
         $this->multipleRepliesAllowed = $multipleRepliesAllowed;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isModifyAllowed()
-    {
-        return $this->modifyAllowed;
-    }
-
-    /**
-     * @param bool $modifyAllowed
-     *
-     * @return $this
-     */
-    public function setModifyAllowed($modifyAllowed)
-    {
-        $this->modifyAllowed = $modifyAllowed;
 
         return $this;
     }

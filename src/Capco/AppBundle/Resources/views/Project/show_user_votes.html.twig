@@ -9,9 +9,5 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-    {{ react_intl_component('ProposalsUserVotesPageApp', {
-        'props': props,
-        'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-       })
-    }}
+    {{ react_intl_component('ProposalsUserVotesPageApp', { 'props': props }) }}
 {% endblock %}
