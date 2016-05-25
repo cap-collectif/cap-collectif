@@ -5,9 +5,13 @@
             <div>
                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': proposal.Author, 'classes': '', 'link_classes': 'pull-left proposal__avatar'} only %}
                 <div class="proposal__author">
-                    <a href="{{ path('capco_user_profile_show_all', {'slug': proposal.Author.slug}) }}">
+                    {% if is_feature_enabled('profiles') %}
+                        <a href="{{ path('capco_user_profile_show_all', {'slug': proposal.Author.slug}) }}">
+                            {{ proposal.Author.username }}
+                        </a>
+                    {% else %}
                         {{ proposal.Author.username }}
-                    </a>
+                    {% endif %}
                     <p class="excerpt small proposal__date">
                         {{ proposal.createdAt | localizeddate('long', 'none') }}
                     </p>

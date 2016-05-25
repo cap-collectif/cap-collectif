@@ -867,27 +867,30 @@ user:
   edition: Édition
   profile:
     title: Profil
+    account_title: Compte
+    password_title: Modifier mon mot de passe
     edit:
+      email: Adresse électronique
       twitter: Lien Twitter
       facebook: Lien Facebook
       gplus: Lien Google+
       username: Nom
       media: Image
-      email: Adresse électronique
-      email_help: Votre adresse électronique n'apparaitra jamais sur votre profil public.
       birthday: Date de naissance
       address: Adresse
       address2: Complément d'adresse
       zip_code: Code postal
       city: Ville
       neighborhood: Quartier
-      account: Profil public
+      profile: Profil public
+      account: Compte
       mobile: Mobile
       password: Mot de passe
       submit: Enregistrer les modifications
       gender: Genre
       no_user_type: Sélectionner un statut
       user_type: Type de profil
+      jumbotron: Paramètres
     show:
       all: Contributions
       arguments: Arguments
@@ -895,7 +898,7 @@ user:
       facebook: Facebook
       gplus: Google+
       ideas: Idées
-      jumbotron: Compte
+      jumbotron: Profil
       no_ideas: Il n'y a pas d'idées.
       no_opinions: Il n'y a pas de propositions.
       no_opinions_versions: Il n'y a pas de modifications.

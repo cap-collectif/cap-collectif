@@ -3,12 +3,15 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\UserBundle\Form\Type\AccountFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Capco\UserBundle\Entity\User;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
+use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializationContext;
 
@@ -88,6 +91,67 @@ class ProfileController extends BaseController
      */
     public function editProfileMobileAction()
     {
+    }
+
+    /**
+     * @Route("/edit-account", name="capco_profile_edit_account")
+     * @Template("CapcoUserBundle:Profile:edit_account.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function editAccountAction(Request $request)
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw $this->createAccessDeniedException('This user does not have access to this section.');
+        }
+
+        $form = $this->createForm(new AccountFormType(), $user);
+
+        if ('POST' == $request->getMethod()) {
+            $form->submit($request);
+            $userManager = $this->get('sonata.user.user_manager');
+
+            if ($form->isValid()) {
+                $userManager->updateUser($user);
+
+                $this->setFlash('sonata_user_success', 'profile.flash.updated');
+            }
+
+            // Reloads the user to reset its username. This is needed when the
+            // username or password have been changed to avoid issues with the
+            // security layer.
+            $userManager->reloadUser($user);
+        }
+
+        return [
+            'form' => $form->createView(),
+        ];
+    }
+
+    /**
+     * @Route("/edit-profile", name="capco_profile_edit", defaults={"_feature_flags" = "profiles"})
+     * @Template("CapcoUserBundle:Profile:edit_profile.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function editProfileAction()
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw $this->createAccessDeniedException('This user does not have access to this section.');
+        }
+
+        $form = $this->get('sonata.user.profile.form');
+        $form->remove('email');
+        $formHandler = $this->get('sonata.user.profile.form.handler');
+
+        $process = $formHandler->process($user);
+        if ($process) {
+            $this->setFlash('sonata_user_success', 'profile.flash.updated');
+        }
+
+        return [
+            'form' => $form->createView(),
+        ];
     }
 
     /**

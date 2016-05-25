@@ -6,7 +6,11 @@
         <div class="opinion__data">
             <p class="h5  opinion__user">
                 {% if null != author %}
-                    <a href="{{ path('capco_user_profile_show_all', {'slug': author.slug}) }}">{{ author.username }}</a>
+                    {% if is_feature_enabled('profiles') %}
+                        <a href="{{ path('capco_user_profile_show_all', {'slug': author.slug}) }}">{{ author.username }}</a>
+                    {% else %}
+                        {{ author.username }}
+                    {% endif %}
                 {% else %}
                     {{ comment.authorName }}
                 {% endif %}

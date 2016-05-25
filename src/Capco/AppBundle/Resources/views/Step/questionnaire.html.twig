@@ -12,8 +12,10 @@
     {% if project.Cover %}
         <meta property="og:image" content="{% path project.Cover, 'blockHeader' %}" />
     {% endif %}
-    <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
-    <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+    {% if is_feature_enabled('profiles') %}
+        <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+        <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+    {% endif %}
 
 {% endblock %}
 

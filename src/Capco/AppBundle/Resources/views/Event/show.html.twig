@@ -34,7 +34,11 @@
                         {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': event.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                         <div class="media-body">
                             <p class="media--aligned  excerpt">
-                                <a href="{{ path('capco_user_profile_show_all', {'slug': event.Author.slug}) }}">{{ event.Author.username }}</a>
+                                {% if is_feature_enabled('profiles') %}
+                                    <a href="{{ path('capco_user_profile_show_all', {'slug': event.Author.slug}) }}">{{ event.Author.username }}</a>
+                                {% else %}
+                                    {{ event.Author.username }}
+                                {% endif %}
                                 {% if is_feature_enabled('themes') and event.themes | length > 0 %}
                                     {{ 'event.show.in_theme'|trans({}, 'CapcoAppBundle') }}
                                     {% for theme in event.themes %}
@@ -148,9 +152,13 @@
                                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': app.user, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                                 <div class="media-body">
                                     <p class="media--aligned  excerpt">
-                                        <a href="{{ path('capco_user_profile_show_all', {'slug': app.user.slug}) }}">
+                                        {% if is_feature_enabled('profiles') %}
+                                            <a href="{{ path('capco_user_profile_show_all', {'slug': app.user.slug}) }}">
+                                                {{ app.user.username }}
+                                            </a>
+                                        {% else %}
                                             {{ app.user.username }}
-                                        </a>
+                                        {% endif %}
                                     </p>
                                 </div>
                             </div>

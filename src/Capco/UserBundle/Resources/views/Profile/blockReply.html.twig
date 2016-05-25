@@ -3,7 +3,11 @@
         {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': reply.author, 'link_classes': 'pull-left'} only %}
         <div class="opinion__data">
             <p class="opinion__user h5">
-                <a href="{{ path('capco_user_profile_show_all', {'slug': reply.author.slug}) }}">{{ reply.author.username }}</a>
+                {% if is_feature_enabled('profiles') %}
+                    <a href="{{ path('capco_user_profile_show_all', {'slug': reply.author.slug}) }}">{{ reply.author.username }}</a>
+                {% else %}
+                    {{ reply.author.username }}
+                {% endif %}
                 {{ 'reply.has_replied' | trans({}, 'CapcoAppBundle') }}
                 {% if reply.questionnaire.step %}
                     <a href="{{ path('app_project_show_questionnaire', {

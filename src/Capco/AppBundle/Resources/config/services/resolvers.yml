@@ -91,7 +91,7 @@ services:
 
   capco.url.resolver:
       class: %capco.url.resolver.class%
-      arguments: [@router]
+      arguments: [@router, @capco.toggle.manager]
 
   capco.vote.resolver:
     class: %capco.vote.resolver.class%

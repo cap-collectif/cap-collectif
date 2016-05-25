@@ -1,10 +1,6 @@
 {% extends "CapcoUserBundle::layout.html.twig" %}
 
-{% block canonical_link %}{{ url('capco_change_password') }}{% endblock %}
-
-{% block title %}
-    {{ parent() }} - {{ 'change_password.submit'|trans({}, 'FOSUserBundle') }}
-{% endblock %}
+{% block title %} {{ parent() }} - {{ "user.profile.show.jumbotron" | trans({}, 'CapcoAppBundle')}} {% endblock %}
 
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
@@ -14,6 +10,15 @@
     </div>
 {% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  <script>
+    window.localStorage.removeItem('jwt');
+    window.localStorage.removeItem('user');
+  </script>
+{% endblock %}
+
+
 {% block fos_user_content %}
     <div class="container  container--custom">
         <div class="row">
@@ -22,37 +27,23 @@
 
             <div class="col-xs-12 col-sm-8 col-md-9">
                 <div class="block--bordered  block--first-mobile">
-
                     <div class="box">
-                        <h4 class="h4">{{ "user.profile.password_title" | trans({}, 'CapcoAppBundle')}}</h4>
+                        <h4 class="h4">{{ "user.profile.account_title" | trans({}, 'CapcoAppBundle')}}</h4>
                     </div>
-
                     <hr class="hr--no-margin"/>
-
-                    <form action="{{ path('capco_change_password') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal settings__form" role="form">
+                    <form action="{{ path('capco_profile_edit_account') }}" method="POST" enctype="multipart/form-data" class="form-horizontal settings__form" role="form">
                         <div class="box">
-
                             {{ form_errors(form) }}
 
                             <div class="form-group">
-                                {{ form_errors(form.current_password) }}
-                                {{ form_label(form.current_password, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                                <div class="col-sm-9">{{ form_widget(form.current_password) }}</div>
+                                {{ form_errors(form.email) }}
+                                {{ form_label(form.email, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">
+                                  {{ form_widget(form.email) }}
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                {{ form_errors(form.new.first) }}
-                                {{ form_label(form.new.first, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                                <div class="col-sm-9">{{ form_widget(form.new.first) }}</div>
-                            </div>
-
-                            <div class="form-group">
-                                {{ form_errors(form.new.second) }}
-                                {{ form_label(form.new.second, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                                <div class="col-sm-9">{{ form_widget(form.new.second) }}</div>
-                            </div>
-
-                            {{ form_rest(form) }}
+                            {{ form_widget(form._token) }}
 
                         </div>
 
@@ -65,9 +56,7 @@
                                 </div>
                             </div>
                         </div>
-
                     </form>
-
                 </div>
             </div> <!-- col-xs-12 col-sm-8 col-md-9 -->
         </div> <!-- row -->

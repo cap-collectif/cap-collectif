@@ -13,16 +13,19 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Routing\Router;
 
 class UrlResolver
 {
     protected $router;
+    protected $manager;
 
-    public function __construct(Router $router)
+    public function __construct(Router $router, Manager $manager)
     {
         $this->router = $router;
+        $this->manager = $manager;
     }
 
     public function generateOpinionOrProposalRoute($object, $absolute)
@@ -127,7 +130,10 @@ class UrlResolver
         }
 
         if ($object instanceof User && $object->getSlug()) {
-            return $this->router->generate('capco_user_profile_show_all', ['slug' => $object->getSlug()], $absolute);
+            return $this->manager->isActive('profiles')
+                ? $this->router->generate('capco_user_profile_show_all', ['slug' => $object->getSlug()], $absolute)
+                : null
+            ;
         }
 
         if (false !== $url = $this->generateOpinionOrProposalRoute($object, $absolute)) {

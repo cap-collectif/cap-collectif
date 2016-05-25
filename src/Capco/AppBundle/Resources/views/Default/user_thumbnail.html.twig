@@ -17,7 +17,11 @@
         <div class="media-body">
             <p class="{% if user is not null and not private %}media-heading{% else %}media--aligned{% endif %} media--macro__user  small">
                 {% if user is not null and not private %}
-                    <a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">{{ username }}</a>
+                    {% if is_feature_enabled('profiles') %}
+                        <a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">{{ username }}</a>
+                    {% else %}
+                        {{ username }}
+                    {% endif %}
                 {% else %}
                     {{ username }}
                 {% endif %}

@@ -38,11 +38,6 @@ class ProfileFormType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true,
             ])
-            ->add('email', null, [
-                'label' => 'user.profile.edit.email',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => true,
-            ])
             ->add('address', null, [
                 'label' => 'user.profile.edit.address',
                 'translation_domain' => 'CapcoAppBundle',

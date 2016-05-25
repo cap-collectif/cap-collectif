@@ -2,7 +2,13 @@
     <div class="media  media--macro idea  block  block--bordered {% if idea.author.isVip %}bg-vip{% endif %}">
         {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': idea.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
         <div class="media-body">
-            <p class="media-heading  media--macro__user small"><a href="{{ path('capco_user_profile_show_all', {'slug': idea.Author.slug}) }}">{{ idea.Author.username }}</a></p>
+            <p class="media-heading  media--macro__user small">
+                {% if is_feature_enabled('profiles') %}
+                    <a href="{{ path('capco_user_profile_show_all', {'slug': idea.Author.slug}) }}">{{ idea.Author.username }}</a>
+                {% else %}
+                    {{ idea.Author.username }}
+                {% endif %}
+            </p>
             <p class="idea__date">
                 {{ idea.createdAt | localizeddate('long', 'none') }}
             </p>

@@ -8,6 +8,7 @@ export const MainNavbarUser = React.createClass({
   displayName: 'MainNavbarUser',
   propTypes: {
     user: PropTypes.object,
+    features: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -43,10 +44,14 @@ export const MainNavbarUser = React.createClass({
               </MenuItem>
               : null
             }
-            <MenuItem eventKey="2" href="/profile">
-              {this.getIntlMessage('synthesis.edition.navbar.user.profile')}
-            </MenuItem>
-            <MenuItem eventKey="3" href="/profile/edit-profile">
+            {
+              this.props.features.profiles
+              ? <MenuItem eventKey="2" href="/profile">
+                {this.getIntlMessage('synthesis.edition.navbar.user.profile')}
+              </MenuItem>
+              : null
+            }
+            <MenuItem eventKey="3" href={'/profile/' + (features.profiles ? 'edit-profile' : 'edit-account')}>
               {this.getIntlMessage('synthesis.edition.navbar.user.settings')}
             </MenuItem>
             <MenuItem divider />
@@ -65,6 +70,7 @@ export const MainNavbarUser = React.createClass({
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    features: state.features,
   };
 };
 

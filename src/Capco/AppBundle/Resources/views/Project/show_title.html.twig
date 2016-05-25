@@ -68,7 +68,11 @@
                     <p class="media--aligned  excerpt">
                         {% spaceless %}
                             {{ 'project.show.published_by' | trans({}, 'CapcoAppBundle') }}
-                            <a href="{{ path('capco_user_profile_show_all', {'slug': project.Author.slug}) }}">{{ project.Author.username }}</a>
+                            {% if is_feature_enabled('profiles') %}
+                                <a href="{{ path('capco_user_profile_show_all', {'slug': project.Author.slug}) }}">{{ project.Author.username }}</a>
+                            {% else %}
+                                {{ project.Author.username }}
+                            {% endif %}
                             {% if is_feature_enabled('themes') and project.themes | length > 0 %}
                                 {{ 'project.show.in_theme' | trans({}, 'CapcoAppBundle') }}
                                 {% for theme in project.themes %}

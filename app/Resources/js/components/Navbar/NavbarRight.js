@@ -60,10 +60,14 @@ const NavbarRight = React.createClass({
                   </MenuItem>
                 : null
               }
-              <MenuItem key={3.2} eventKey={3.2} href="/profile">
-                { this.getIntlMessage('navbar.profile') }
-              </MenuItem>
-              <MenuItem key={3.3} eventKey={3.3} href="/profile/edit-profile">
+              {
+                features.profiles
+                ? <MenuItem key={3.2} eventKey={3.2} href="/profile">
+                  { this.getIntlMessage('navbar.profile') }
+                </MenuItem>
+                : null
+              }
+              <MenuItem key={3.3} eventKey={3.3} href={'/profile/' + (features.profiles ? 'edit-profile' : 'edit-account')}>
                 { this.getIntlMessage('navbar.user_settings') }
               </MenuItem>
               <MenuItem key={3.4} divider />

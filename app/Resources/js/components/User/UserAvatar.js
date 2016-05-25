@@ -43,7 +43,7 @@ const UserAvatar = React.createClass({
       onMouseOver: this.props.onMouseOver,
       onMouseOut: this.props.onMouseOut,
     };
-    if (this.props.user && this.props.user._links && this.props.anchor) {
+    if (this.props.user && this.props.user._links && this.props.user._links.profile && this.props.anchor) {
       return (
         <a {...funcProps} className={this.props.className} style={this.props.style} href={this.props.user._links.profile}>
           { this.renderAvatar() }

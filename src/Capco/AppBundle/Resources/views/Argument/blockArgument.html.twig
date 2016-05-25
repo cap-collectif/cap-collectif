@@ -8,9 +8,15 @@
         {% endif %}
         <div class="opinion__data">
             <p class="h5  opinion__user">
-                <a href="{{ path('capco_user_profile_show_all', {'slug': argument.Author.slug}) }}">
-                    {{ argument.Author.username }}
-                </a>
+                {% if is_feature_enabled('profiles') %}
+                    <a href="{{ path('capco_user_profile_show_all', {'slug': argument.Author.slug}) }}">
+                        {{ argument.Author.username }}
+                    </a>
+                {% else %}
+                    <span>
+                        {{ argument.Author.username }}
+                    </span>
+                {% endif %}
                 {% if profile is defined %}
                     <span class="label  label--right {% if argument.type == 0 %}label-danger{% elseif argument.type == 1 %}label-success{% endif %}">
                         {{ argumentsLabels[argument.type] | trans({}, 'CapcoAppBundle') | capitalize }}

@@ -137,7 +137,7 @@ fos_user_profile_show:
 
 capco_profile_edit:
     path:      /profile/edit-profile
-    defaults:  { _controller: SonataUserBundle:ProfileFOSUser1:editProfile }
+    defaults:  { _controller: CapcoUserBundle:Profile:editProfile }
 
 capco_change_password:
     path:      /profile/change-password

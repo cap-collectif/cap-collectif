@@ -3,7 +3,11 @@
         {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': vote.user, 'link_classes': 'pull-left'} only %}
         <div class="opinion__data">
             <p class="opinion__user h5">
-                <a href="{{ path('capco_user_profile_show_all', {'slug': vote.user.slug}) }}">{{ vote.user.username }}</a>
+                {% if is_feature_enabled('profiles') %}
+                    <a href="{{ path('capco_user_profile_show_all', {'slug': vote.user.slug}) }}">{{ vote.user.username }}</a>
+                {% else %}
+                    {{ vote.user.username }}
+                {% endif %}
                 {{ 'votes.has_voted' | trans({}, 'CapcoAppBundle') }}
                 <a href="{{ capco_vote_object_url(vote) }}">{{ capco_vote_object(vote) }}</a>
             </p>

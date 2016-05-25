@@ -75,7 +75,7 @@ export const EmailNotConfirmedAlert = React.createClass({
                   }
                 </Button>
           }
-          <Button style={{ marginBottom: 5 }} href="/profile/edit-profile">{ this.getIntlMessage('user.confirm.update') }</Button>
+          <Button style={{ marginBottom: 5 }} href="/profile/edit-account">{ this.getIntlMessage('user.confirm.update') }</Button>
           </div>
         </div>
       </Alert>

@@ -6,7 +6,13 @@
             {% if user != null %}
                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': user, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                 <div class="media-body">
-                    <p class="media--aligned  excerpt"><a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">{{ user.username }}</a></p>
+                    <p class="media--aligned  excerpt">
+                        {% if is_feature_enabled('profiles') %}
+                            <a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">{{ user.username }}</a>
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                    </p>
                 </div>
             {% endif %}
         </div>
