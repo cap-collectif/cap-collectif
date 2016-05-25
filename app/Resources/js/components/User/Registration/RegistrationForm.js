@@ -9,6 +9,7 @@ import UserActions from '../../../actions/UserActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import Input from '../../Form/Input';
 import domains from './email_domains';
+import AppDispatcher from '../../../dispatchers/AppDispatcher';
 
 export const RegistrationForm = React.createClass({
   propTypes: {
@@ -69,6 +70,10 @@ export const RegistrationForm = React.createClass({
         return UserActions
           .register(form)
           .then(() => {
+            AppDispatcher.dispatch({
+              actionType: 'UPDATE_ALERT',
+              alert: { bsStyle: 'success', content: 'alert.success.add.user' },
+            });
             UserActions.login({ _username: form.email, _password: form.plainPassword });
             this.setState(this.getInitialState());
             return onSubmitSuccess();

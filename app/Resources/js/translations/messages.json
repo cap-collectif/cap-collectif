@@ -18,6 +18,7 @@
       "add": {
         "argument": "Merci ! Votre argument a bien \u00e9t\u00e9 enregistr\u00e9.",
         "source": "Merci ! La source a bien \u00e9t\u00e9 ajout\u00e9e.",
+        "user": "Merci, votre compte a été créé avec succès.",
         "vote": "Merci ! Votre vote a bien \u00e9t\u00e9 pris en compte."
       },
       "delete": {
