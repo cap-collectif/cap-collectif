@@ -47,7 +47,7 @@
     {% else %}
         {{ react_intl_component('QuestionnaireStepPageApp', {
             'props': props,
-            'rendering': app.user ? 'client_side' : 'client_side',
+            'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
            })
         }}
     {% endif %}

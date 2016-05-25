@@ -39,7 +39,7 @@
 
         {{ react_intl_component('StepInfosApp', {
             'props': stepProps,
-            'rendering': 'client_side'
+            'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
            })
         }}
 

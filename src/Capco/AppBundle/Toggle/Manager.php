@@ -32,6 +32,7 @@ class Manager
         'districts',
         'user_type',
         'votes_evolution',
+        'server_side_rendering',
         'zipcode_at_register',
     ];
 

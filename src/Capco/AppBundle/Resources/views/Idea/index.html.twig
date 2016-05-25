@@ -54,7 +54,7 @@
                         'link': path('app_idea_create'),
                         'label': 'idea.create.button'|trans({}, 'CapcoAppBundle'),
                       },
-                      'rendering': 'client_side',
+                      'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
                       })
                     }}
                 {% endif %}

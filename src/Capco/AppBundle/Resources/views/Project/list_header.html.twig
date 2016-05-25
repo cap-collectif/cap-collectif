@@ -37,7 +37,7 @@
                       'link': path('app_project_new_opinion', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug }),
                       'label': buttonLabel | trans({}, 'CapcoAppBundle')
                     },
-                    'rendering': 'client_side',
+                    'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
                     })
                    }}
                 {% endif %}

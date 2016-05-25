@@ -56,7 +56,7 @@
         {% if projectsCount > 0 %}
             {{ react_intl_component('ProjectsListApp', {
                 'props': props,
-                'rendering': 'client_side',
+                'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
               })
             }}
             {% if projectsCount > maxProjectsDisplayed %}

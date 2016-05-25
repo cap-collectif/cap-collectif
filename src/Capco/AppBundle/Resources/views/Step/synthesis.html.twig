@@ -40,7 +40,7 @@
     {% else %}
         {{ react_intl_component('SynthesisViewBoxApp', {
             'props': props,
-            'rendering': 'client_side',
+            'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
            })
         }}
     {% endif %}

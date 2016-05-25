@@ -11,7 +11,7 @@
 {% block body %}
     {{ react_intl_component('ProposalsUserVotesPageApp', {
         'props': props,
-        'rendering': 'client_side'
+        'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
        })
     }}
 {% endblock %}
