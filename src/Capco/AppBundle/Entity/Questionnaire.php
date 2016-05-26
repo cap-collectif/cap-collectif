@@ -90,12 +90,6 @@ class Questionnaire
     private $anonymousAllowed = false;
 
     /**
-     * @var bool
-     * @ORM\Column(name="acknowledge_replies", type="boolean", nullable=false)
-     */
-    private $acknowledgeReplies = false;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -393,25 +387,6 @@ class Questionnaire
     public function setAnonymousAllowed($anonymousAllowed)
     {
         $this->anonymousAllowed = $anonymousAllowed;
-
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isAcknowledgeReplies()
-    {
-        return $this->acknowledgeReplies;
-    }
-
-    /**
-     * @param boolean $acknowledgeReplies
-     * @return $this
-     */
-    public function setAcknowledgeReplies($acknowledgeReplies)
-    {
-        $this->acknowledgeReplies = $acknowledgeReplies;
 
         return $this;
     }

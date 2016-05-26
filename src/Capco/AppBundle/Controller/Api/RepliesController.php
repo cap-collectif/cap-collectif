@@ -138,10 +138,6 @@ class RepliesController extends FOSRestController
         $em->persist($reply);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($user);
-        
-        if ($questionnaire->isAcknowledgeReplies()) {
-            $this->get('capco.notify_manager')->acknowledgeUserReply($questionnaire->getStep()->getProject(), $reply);
-        }
     }
 
     /**

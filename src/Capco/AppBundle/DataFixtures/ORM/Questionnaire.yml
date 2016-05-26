@@ -5,7 +5,6 @@ Capco\AppBundle\Entity\Questionnaire:
     step: @questionnairestep1
     multipleRepliesAllowed: true
     anonymousAllowed: true
-    acknowledgeReplies: true
   questionnaire2:
     title: Questionnaire de test
     description: <p><text(100)></p>

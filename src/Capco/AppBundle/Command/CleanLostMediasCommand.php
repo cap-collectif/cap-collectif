@@ -15,6 +15,7 @@ class CleanLostMediasCommand extends ContainerAwareCommand
             ->setName('capco:clean:lost-medias')
             ->setDescription('Remove all user media that are not available anymore')
             ->addOption('force', false, InputOption::VALUE_NONE, 'set this option to force the operation')
+            ->addOption('dry-run', false, InputOption::VALUE_NONE, 'set this option to show medias that will be deleted')
         ;
     }
 
@@ -50,11 +51,12 @@ class CleanLostMediasCommand extends ContainerAwareCommand
             }
         }
 
-        foreach ($mediasToRemove as $media) {
+        if (!$input->getOption('dry-run')) {
+          foreach ($mediasToRemove as $media) {
             $em->remove($media);
-        }
-        $em->flush();
-
-        $output->writeln(count($mediasToRemove).' medias have been removed.');
+          }
+          $em->flush();
+          $output->writeln(count($mediasToRemove).' medias have been removed.');
+       }
     }
 }

@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\Manager;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
@@ -299,27 +297,5 @@ class Notify implements MailerInterface
         );
 
         $this->sendEmail($proposal->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
-    }
-
-    public function acknowledgeUserReply(Project $project, Reply $reply)
-    {
-        $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
-        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-
-        $subject = $this->translator->trans(
-            'reply.acknowledgement.subject', [
-            '%sitename%' => $this->resolver->getValue('global.site.fullname'),
-        ], 'CapcoAppBundle');
-        $template = 'CapcoAppBundle:Mail:acknowledgeReply.html.twig';
-        $body = $this->templating->render(
-            $template,
-            [
-                'project' => $project,
-                'reply' => $reply,
-                'sitename' => $this->resolver->getValue('global.site.fullname'),
-            ]
-        );
-
-        $this->sendEmail($reply->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
     }
 }

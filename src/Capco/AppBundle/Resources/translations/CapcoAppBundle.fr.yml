@@ -266,15 +266,6 @@ proposal:
 # Reply
 reply:
   has_replied: a répondu au questionnaire
-  acknowledgement:
-    subject: '%sitename% - Accusé de réception de votre participation'
-    hello: Bonjour %username%,
-    thx: Merci d'avoir participé au projet %projectname% sur %sitename%.
-    replies: Nous accusons réception de votre participation dont les réponses étaient les suivantes :
-    done: Cordialement,
-    footer1: Vous recevez ce courriel parce que vous êtes inscrit sur %sitename%.
-    footer2: 'Ce message vous a été adressé automatiquement par %sitename% via <a href="http://www.cap-collectif.com">Cap Collectif</a>.'
-    no_value: Non répondu.
 
 #Theme
 theme:
