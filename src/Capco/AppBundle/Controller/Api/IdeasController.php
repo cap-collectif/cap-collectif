@@ -155,6 +155,8 @@ class IdeasController extends FOSRestController
         $em->persist($idea);
         $em->flush();
 
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+
         return $idea;
     }
 
@@ -220,6 +222,8 @@ class IdeasController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
         $em->remove($idea);
         $em->flush();
+
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**
@@ -272,6 +276,8 @@ class IdeasController extends FOSRestController
         $em->persist($vote);
         $em->flush();
 
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+
         return $vote;
     }
 
@@ -300,6 +306,8 @@ class IdeasController extends FOSRestController
 
         $em->remove($vote);
         $em->flush();
+
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**
