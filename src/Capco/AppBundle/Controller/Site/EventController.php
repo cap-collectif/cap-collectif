@@ -130,18 +130,8 @@ class EventController extends Controller
     {
         $eventHelper = $this->container->get('capco.event.helper');
 
-        $serializer = $this->get('jms_serializer');
-
-        $props = $serializer->serialize([
-            'object' => $event->getId(),
-            'uri' => 'events',
-        ], 'json', SerializationContext::create());
-
         if (!$eventHelper->isRegistrationPossible($event)) {
-            return [
-                'event' => $event,
-                'props' => $props,
-            ];
+            return ['event' => $event];
         }
 
         $user = $this->getUser();
@@ -167,6 +157,13 @@ class EventController extends Controller
                 return $this->redirect($this->generateUrl('app_event_show', ['slug' => $event->getSlug()]));
             }
         }
+
+        $serializer = $this->get('jms_serializer');
+
+        $props = $serializer->serialize([
+            'object' => $event->getId(),
+            'uri' => 'events',
+        ], 'json', SerializationContext::create());
 
         return [
             'form' => $form->createView(),

@@ -33,6 +33,7 @@ su capco <<'EOF'
 cd /var/www
 php bin/console cache:warmup --no-debug --no-optional-warmers --env=prod --no-interaction
 php bin/console assets:install --symlink --env=prod --no-interaction
+chmod -R 777 var
 EOF
 
 VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod --no-interaction 2>&1`
