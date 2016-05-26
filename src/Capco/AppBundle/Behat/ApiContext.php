@@ -287,7 +287,7 @@ EOF;
     }
 
     /**
-     * Create a synthesis with elements
+     * Create a synthesis with elements.
      */
     private function createSynthesisWithElements($id, TableNode $elementsIds, $published = false)
     {

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Answer;
-use Capco\AppBundle\Entity\ProposalVote;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Response;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -167,7 +166,7 @@ class ProjectDownloadResolver
         // Proposals
         $proposals = $this->em
             ->getRepository('CapcoAppBundle:Proposal')
-            ->getEnabledByProposalForm($collectStep->getProposalForm() ,true);
+            ->getEnabledByProposalForm($collectStep->getProposalForm(), true);
 
         $this->getProposalsData($proposals);
 
@@ -687,7 +686,7 @@ class ProjectDownloadResolver
         if (count($opinion['appendices']) > 0) {
             $body .= "\n".$this->translator->trans('project_download.values.appendices.title', [], 'CapcoAppBundle');
             foreach ($opinion['appendices'] as $app) {
-                $body .= "\n".$app['appendixType']['title'] . ' :';
+                $body .= "\n".$app['appendixType']['title'].' :';
                 $body .= "\n".$this->formatText($app['body']);
             }
         }

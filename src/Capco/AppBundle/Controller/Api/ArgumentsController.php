@@ -141,7 +141,6 @@ class ArgumentsController extends FOSRestController
 
         $this->get('doctrine.orm.entity_manager')->persist($argument);
         $this->get('doctrine.orm.entity_manager')->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return $argument;
     }
@@ -195,7 +194,6 @@ class ArgumentsController extends FOSRestController
 
         $this->get('doctrine.orm.entity_manager')->persist($argument);
         $this->get('doctrine.orm.entity_manager')->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return $argument;
     }
@@ -304,7 +302,6 @@ class ArgumentsController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
         $em->remove($argument);
         $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**
@@ -337,7 +334,6 @@ class ArgumentsController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
         $em->remove($argument);
         $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**
@@ -376,7 +372,6 @@ class ArgumentsController extends FOSRestController
         $this->getDoctrine()->getManager()->persist($vote);
         $this->getDoctrine()->getManager()->persist($argument);
         $this->getDoctrine()->getManager()->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**
@@ -401,7 +396,6 @@ class ArgumentsController extends FOSRestController
         $argument->decrementVotesCount();
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**

@@ -111,7 +111,6 @@ class PostsController extends FOSRestController
         $post->setCommentsCount($post->getCommentsCount() + 1);
         $this->getDoctrine()->getManager()->persist($comment);
         $this->getDoctrine()->getManager()->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($user);
         $this->get('event_dispatcher')->dispatch(
             CapcoAppBundleEvents::COMMENT_CHANGED,
             new CommentChangedEvent($comment, 'add')

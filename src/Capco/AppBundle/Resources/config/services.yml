@@ -57,10 +57,6 @@ services:
   capco.idea.helper:
     class: Capco\AppBundle\Helper\IdeaHelper
 
-  redis_storage.helper:
-    class: Capco\AppBundle\Helper\RedisStorageHelper
-    arguments: [@snc_redis.default]
-
   capco.project.helper:
     class: Capco\AppBundle\Helper\ProjectHelper
     arguments: [@capco.project.repository, @capco.abstract_step.repository]

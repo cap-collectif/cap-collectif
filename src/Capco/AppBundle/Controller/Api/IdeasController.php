@@ -149,7 +149,6 @@ class IdeasController extends FOSRestController
         );
 
         $this->getDoctrine()->getManager()->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($user);
     }
 
     /**

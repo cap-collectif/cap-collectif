@@ -10,7 +10,8 @@
     "CKEDITOR": true,
     "document": true,
     "Modernizr": true,
-    "jQuery": true
+    "jQuery": true,
+    "__SERVER__": true
   },
   "parserOptions": {
     "ecmaVersion": 6,
