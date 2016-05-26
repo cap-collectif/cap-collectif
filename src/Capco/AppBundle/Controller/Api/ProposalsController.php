@@ -164,6 +164,7 @@ class ProposalsController extends FOSRestController
 
         $em->persist($proposal);
         $em->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         // If not present, es listener will take some time to execute the refresh
         // and, next time proposals will be fetched, the set of data will be outdated.
@@ -262,6 +263,8 @@ class ProposalsController extends FOSRestController
         $proposal->setCommentsCount($proposal->getCommentsCount() + 1);
         $this->getDoctrine()->getManager()->persist($comment);
         $this->getDoctrine()->getManager()->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+
         $this->get('event_dispatcher')->dispatch(
             CapcoAppBundleEvents::COMMENT_CHANGED,
             new CommentChangedEvent($comment, 'add')
@@ -382,6 +385,7 @@ class ProposalsController extends FOSRestController
 
         $em->remove($proposal);
         $em->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         $this->get('event_dispatcher')->dispatch(
             CapcoAppBundleEvents::PROPOSAL_DELETED,

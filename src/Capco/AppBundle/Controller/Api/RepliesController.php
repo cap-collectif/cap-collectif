@@ -135,9 +135,9 @@ class RepliesController extends FOSRestController
             return $form;
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
         $em->persist($reply);
         $em->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($user);
     }
 
     /**
@@ -228,6 +228,7 @@ class RepliesController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->remove($reply);
         $em->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($user);
 
         // If not present, es listener will take some time to execute the refresh
         // and, next time proposals will be fetched, the set of data will be outdated.

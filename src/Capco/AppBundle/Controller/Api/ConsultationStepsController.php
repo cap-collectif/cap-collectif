@@ -87,6 +87,7 @@ class ConsultationStepsController extends FOSRestController
 
             $em->persist($opinion);
             $em->flush();
+            $this->get('redis_storage.helper')->recomputeUserCounters($user);
 
             return $opinion;
         }
