@@ -46,7 +46,7 @@ const OpinionBox = React.createClass({
     return (
       <div className="block block--bordered opinion__details">
         <div className={colorClass}>
-          <div className="opinion__header opinion__header--centered" style={{ height: 'auto'}}>
+          <div className="opinion__header opinion__header--centered" style={{ height: 'auto' }}>
             <a className="pull-left btn btn-default opinion__header__back" href={backLink}>
               <i className="cap cap-arrow-1-1"></i>
               <span className="hidden-xs hidden-sm"> {this.getIntlMessage('opinion.header.back')}</span>

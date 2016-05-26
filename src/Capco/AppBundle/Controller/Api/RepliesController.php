@@ -113,7 +113,7 @@ class RepliesController extends FOSRestController
             ->getRepository('CapcoAppBundle:Reply')
             ->getOneForUserAndQuestionnaire($questionnaire, $user)
           ;
-            if (!!$previousReply) {
+            if ((bool) $previousReply) {
                 throw new BadRequestHttpException('Only one reply by user is allowed for this questionnaire.');
             }
         }

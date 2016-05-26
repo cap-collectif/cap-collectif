@@ -57,7 +57,7 @@ describe('<RankingArrows />', () => {
     expect(buttonGroup.hasClass('ranking__item__arrows')).to.equal(true);
     expect(buttonGroup.find('RankingArrow')).to.have.lengthOf(2);
     const rightArrow = buttonGroup.find('RankingArrow').first();
-    expect(rightArrow.prop('onClick')).to.equal(null)
+    expect(rightArrow.prop('onClick')).to.equal(null);
     expect(rightArrow.prop('type')).to.equal('right');
     expect(rightArrow.prop('disabled')).to.equal(true);
     const leftArrow = buttonGroup.find('RankingArrow').last();

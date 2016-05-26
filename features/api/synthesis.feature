@@ -569,7 +569,7 @@ Feature: Synthesis
     Given there is a synthesis with id "42" and elements:
       | 43 |
     And I send a GET request to "/api/syntheses/42/elements/43"
-    Then the JSON response status code should be 403
+    Then the JSON response status code should be 401
 
   @database
   Scenario: API client wants to get a synthesis element that is published
@@ -582,7 +582,7 @@ Feature: Synthesis
       "childrenCount": 0,
       "has_linked_data": false,
       "id": "43",
-      "published": false,
+      "published": true,
       "created_at": "@string@.isDateTime()",
       "updated_at": "@string@.isDateTime()",
       "archived": false,
@@ -1105,7 +1105,8 @@ Feature: Synthesis
 
   @database
   Scenario: After updating an opinion, I want to get the updated synthesis
-    Given there is a synthesis with id "48" based on consultation step 2
+    Given I am logged in to api as admin
+    And there is a synthesis with id "48" based on consultation step 2
     And I do nothing for 2 seconds
     When I update opinion 51 with values:
       | title | Je suis le nouveau titre |
