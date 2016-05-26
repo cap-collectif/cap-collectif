@@ -141,6 +141,8 @@ Feature: Reply Restful Api
     }
     """
     And 1 mail should be sent
+    And I open mail with subject "Cap-Collectif — Accusé de réception de votre participation"
+    Then I should see "Nous accusons réception de votre participation dont les réponses étaient les suivantes :" in mail
 
   @database @elasticsearch
   Scenario: Logged in API client wants to add a reply
