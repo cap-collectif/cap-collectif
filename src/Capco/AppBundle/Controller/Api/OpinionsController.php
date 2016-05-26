@@ -102,6 +102,7 @@ class OpinionsController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
         $em->remove($opinion);
         $em->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return;
     }
@@ -226,6 +227,7 @@ class OpinionsController extends FOSRestController
         $opinion->decrementVotesCountByType($vote->getValue());
         $this->get('doctrine.orm.entity_manager')->remove($vote);
         $this->get('doctrine.orm.entity_manager')->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**
@@ -348,6 +350,7 @@ class OpinionsController extends FOSRestController
             $opinion->setVersionsCount($opinion->getVersionsCount() + 1);
             $this->getDoctrine()->getManager()->persist($opinionVersion);
             $this->getDoctrine()->getManager()->flush();
+            $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
             return $opinionVersion;
         }
@@ -433,6 +436,7 @@ class OpinionsController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
         $em->remove($opinionVersion);
         $em->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return;
     }
@@ -648,6 +652,7 @@ class OpinionsController extends FOSRestController
         $version->decrementVotesCountByType($vote->getValue());
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**

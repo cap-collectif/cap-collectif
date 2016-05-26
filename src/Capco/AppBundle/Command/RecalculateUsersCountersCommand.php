@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 
 class RecalculateUsersCountersCommand extends ContainerAwareCommand
 {
+    public $force;
     public $em;
     public $redis;
 
@@ -24,9 +25,18 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         ;
     }
 
-    protected function executeOnlyChangesFromLastRun($dql, $redisKey)
+    protected function compute($dql)
     {
-      $ids = $this->redis->lrange($redisKey, 0, -1);
+      if ($this->force) {
+        $this->em->createQuery($dql)->execute();
+      } else {
+        $this->executeOnlyChangesFromLastRun($dql);
+      }
+    }
+
+    protected function executeOnlyChangesFromLastRun($dql, $redisKey = 'recalculate_user_counters')
+    {
+      $ids = $this->redis->smembers($redisKey);
       if ($ids && count($ids) > 0) {
           $dql.= ' where u.id in (:ids)';
           $query = $this->em->createQuery($dql)->setParameter('ids', $ids);
@@ -41,7 +51,7 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
       if ($force) {
         $this->em->createQuery($dql)->execute();
       } else {
-        $this->executeOnlyChangesFromLastRun($dql, 'recompute_replies_count');
+        $this->executeOnlyChangesFromLastRun($dql);
       }
     }
 
@@ -53,11 +63,14 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         $em = $this->em;
         $this->redis = $container->get('snc_redis.default');
 
-        $this->recalculateUserRepliesCounters($force);
+        $this->compute('update CapcoUserBundle:User u set u.repliesCount = (select count(r.id) from CapcoAppBundle:Reply r where r.author = u AND r.enabled = 1 AND r.private = 0 group by r.author)');
 
-        $query = $em->createQuery('update CapcoUserBundle:User u set u.projectsCount =
-            (select count(p.id) from CapcoAppBundle:Project p where p.Author = u AND p.isEnabled = 1 group by p.Author)');
-        $query->execute();
+        // Recalculate admin projects count
+        $em
+          ->createQuery('update CapcoUserBundle:User u set u.projectsCount = (select count(p.id) from CapcoAppBundle:Project p where p.Author = u AND p.isEnabled = 1 group by p.Author) where u.roles like :role')
+          ->setParameter('role', '%"ROLE_SUPER_ADMIN"%')
+          ->execute()
+        ;
 
         if ($force || $em->createQuery('SELECT COUNT(idea.id) FROM CapcoAppBundle:Idea idea')->getSingleScalarResult() > 0) {
             $query = $em->createQuery('update CapcoUserBundle:User u set u.ideasCount =

@@ -58,6 +58,7 @@ class SourcesController extends FOSRestController
 
         $this->get('doctrine.orm.entity_manager')->persist($source);
         $this->get('doctrine.orm.entity_manager')->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return $source;
     }
@@ -102,6 +103,7 @@ class SourcesController extends FOSRestController
 
         $this->get('doctrine.orm.entity_manager')->persist($source);
         $this->get('doctrine.orm.entity_manager')->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return $source;
     }
@@ -223,6 +225,7 @@ class SourcesController extends FOSRestController
         $source->incrementVotesCount();
         $em->persist($vote);
         $em->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**
@@ -250,6 +253,7 @@ class SourcesController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
         $em->remove($source);
         $em->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**
@@ -282,6 +286,7 @@ class SourcesController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
         $em->remove($source);
         $em->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**
@@ -311,6 +316,7 @@ class SourcesController extends FOSRestController
         $source->decrementVotesCount();
         $em->remove($vote);
         $em->flush();
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
     /**
