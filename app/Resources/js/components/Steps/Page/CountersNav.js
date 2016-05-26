@@ -1,8 +1,8 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-// import { Nav } from 'react-bootstrap';
-// import CounterNavItem from './CounterNavItem';
-// import classNames from 'classnames';
+import { Nav } from 'react-bootstrap';
+import CounterNavItem from './CounterNavItem';
+import classNames from 'classnames';
 
 const CountersNav = React.createClass({
   displayName: 'CountersNav',
@@ -55,11 +55,11 @@ const CountersNav = React.createClass({
   },
 
   render() {
-    // const { counters } = this.props;
-    /* const classes = classNames({
+    const { counters } = this.props;
+    const classes = classNames({
       'counters-nav': true,
       'counters-nav--bordered': this.props.bordered,
-    });*/
+    });
     // if (Object.keys(counters).length > 0) {
     //   return (
     //     <Nav className={classes} bsStyle="pills" justified>

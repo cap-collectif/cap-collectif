@@ -113,7 +113,7 @@ class RepliesController extends FOSRestController
             ->getRepository('CapcoAppBundle:Reply')
             ->getOneForUserAndQuestionnaire($questionnaire, $user)
           ;
-            if ((bool) $previousReply) {
+            if (!!$previousReply) {
                 throw new BadRequestHttpException('Only one reply by user is allowed for this questionnaire.');
             }
         }
@@ -135,9 +135,10 @@ class RepliesController extends FOSRestController
             return $form;
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
         $em->persist($reply);
         $em->flush();
+
+        $this->get('snc_redis.default')->lpush('recompute_replies_count', $user->getId());
     }
 
     /**
@@ -228,6 +229,8 @@ class RepliesController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->remove($reply);
         $em->flush();
+
+        $this->get('snc_redis.default')->lpush('recompute_replies_count', $this->getUser()->getId());
 
         // If not present, es listener will take some time to execute the refresh
         // and, next time proposals will be fetched, the set of data will be outdated.

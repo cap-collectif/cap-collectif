@@ -75,6 +75,7 @@ describe('<RegistrationForm />', () => {
 
   it('does not render a charte checkbox when parameters are not specified', () => {
     const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={noParameters} {...props} />);
+    const input = wrapper.find('Input').at(3);
     expect(wrapper.find('Input').someWhere(n => n.prop('id') === '_charte')).to.equal(false);
   });
 });

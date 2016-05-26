@@ -15,7 +15,7 @@ describe('<LoginModal />', () => {
   const parametersWithTexts = {
     'login.text.top': 'Texte du haut',
     'login.text.bottom': 'Texte du bas',
-  };
+  }
 
   it('renders hidden modal if not shown', () => {
     const wrapper = shallow(<LoginModal show={false} features={{}} parameters={{}} {...props} />);

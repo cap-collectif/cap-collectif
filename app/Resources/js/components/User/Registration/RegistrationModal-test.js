@@ -16,7 +16,7 @@ describe('<RegistrationModal />', () => {
   const parametersWithTexts = {
     'signin.text.top': 'Texte du haut',
     'signin.text.bottom': 'Texte du bas',
-  };
+  }
 
   it('renders hidden modal if not shown', () => {
     const wrapper = shallow(<RegistrationModal show={false} features={{}} parameters={{}} {...props} />);

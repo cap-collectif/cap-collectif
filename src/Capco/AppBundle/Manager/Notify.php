@@ -114,12 +114,10 @@ class Notify implements MailerInterface
       ], true);
         $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-        $sitename = $this->resolver->getValue('global.site.fullname');
 
         $rendered = $this->templating->render($template, [
         'user' => $user,
         'url' => $url,
-        'sitename' => $sitename,
         'email' => $this->resolver->getValue('admin.mail.notifications.receive_address'),
       ]);
         $this->sendEmail($user->getEmail(), $fromAddress, $fromName, $rendered, $subject);
