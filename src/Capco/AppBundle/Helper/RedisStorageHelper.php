@@ -14,9 +14,11 @@ class RedisStorageHelper
         $this->redis = $redis;
     }
 
-    public function recomputeUserCounters(User $user)
+    public function recomputeUserCounters(User $user = null)
     {
-        $this->redis->sadd('recalculate_user_counters', $user->getId());
+        if ($user) {
+            $this->redis->sadd('recalculate_user_counters', $user->getId());
+        }
     }
 
 }
