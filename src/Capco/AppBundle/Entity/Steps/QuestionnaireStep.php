@@ -45,7 +45,7 @@ class QuestionnaireStep extends AbstractStep
 
     /**
      * @var Questionnaire
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", mappedBy="step", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", mappedBy="step", cascade={"persist"})
      */
     private $questionnaire = null;
 
@@ -139,6 +139,8 @@ class QuestionnaireStep extends AbstractStep
     {
         if ($questionnaire) {
             $questionnaire->setStep($this);
+        } else {
+            $this->questionnaire->setStep(null);
         }
         $this->questionnaire = $questionnaire;
 
