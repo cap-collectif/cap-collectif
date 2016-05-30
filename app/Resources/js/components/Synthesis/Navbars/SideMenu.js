@@ -45,20 +45,11 @@ const SideMenu = React.createClass({
   },
 
   onChange() {
-    if (SynthesisElementStore.isFetchingTree || SynthesisElementStore.isInboxSync.notIgnoredTree) {
-      this.setState({
-        navItems: SynthesisElementStore.elements.notIgnoredTree,
-        expanded: SynthesisElementStore.expandedItems.nav,
-        selectedId: SynthesisElementStore.selectedNavItem,
-        isLoading: false,
-      });
-      return;
-    }
-
     this.setState({
-      isLoading: true,
-    }, () => {
-      this.loadElementsTreeFromServer();
+      navItems: SynthesisElementStore.elements.notIgnoredTree,
+      expanded: SynthesisElementStore.expandedItems.nav,
+      selectedId: SynthesisElementStore.selectedNavItem,
+      isLoading: false,
     });
   },
 

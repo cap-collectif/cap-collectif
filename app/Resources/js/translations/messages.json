@@ -33,7 +33,8 @@
       },
       "update": {
         "argument": "Merci ! Votre argument a bien \u00e9t\u00e9 mis \u00e0 jour.",
-        "source": "Merci ! Votre source a bien \u00e9t\u00e9 modifi\u00e9e."
+        "source": "Merci ! Votre source a bien \u00e9t\u00e9 modifi\u00e9e.",
+        "synthesis_display": "Merci ! Vos modifications ont bien été enregistrées."
       }
     }
   },
@@ -222,6 +223,7 @@
     "phone": "Numéro de téléphone",
     "preview": "Aper\u00e7u",
     "publish": "Publier",
+    "save": "Enregistrer",
     "login_me": "Se connecter",
     "login_failed": "Email ou mot de passe incorrect.",
     "logout": "Déconnexion",
@@ -690,7 +692,8 @@
         },
         "second":{
           "brand":"Synthèse (Version beta)",
-          "preview":"Voir un aperçu"
+          "inbox": "Boîte de réception",
+          "preview":"Voir le rendu"
         },
         "filter":{
           "oldest":"Les plus anciens",
@@ -777,6 +780,16 @@
           "btn_cancel":"Annuler",
           "btn_submit":"Ignorer"
         }
+      }
+    },
+    "settings": {
+      "display": {
+        "level": "Niveau des propositions",
+        "level_constraints": "Le niveau des propositions doit être compris entre 0 et 5.",
+        "level_help": "Définissez le niveau dans l'arborescence des premières contributions, le premier niveau étant 0."
+      },
+      "menu": {
+        "display": "Rendu"
       }
     },
     "vote":{

@@ -70,9 +70,6 @@ const fetchElementById = (synthesis, element) => {
       return true;
     })
     .catch(() => {
-      AppDispatcher.dispatch({
-        actionType: Actions.RECEIVE_ELEMENT_FAILURE,
-      });
       return false;
     });
 };
@@ -121,10 +118,6 @@ export default {
   },
 
   loadElementsTreeFromServer: (synthesis, type, parent = null) => {
-    AppDispatcher.dispatch({
-      actionType: Actions.RECEIVE_ELEMENTS,
-      type: type + 'Tree',
-    });
     let url = `/syntheses/${synthesis}/elements/tree?type=${type}&depth=${NAV_DEPTH}`;
     url += parent ? `&parent=${parent}` : '';
     Fetcher
@@ -139,10 +132,6 @@ export default {
         return true;
       })
       .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: Actions.RECEIVE_ELEMENTS_FAILURE,
-          type: type + 'Tree',
-        });
         return false;
       });
   },

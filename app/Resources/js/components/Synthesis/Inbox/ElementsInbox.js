@@ -58,21 +58,11 @@ const ElementsInbox = React.createClass({
   },
 
   onChange() {
-    if (SynthesisElementStore.isProcessing || SynthesisElementStore.isInboxSync[this.props.params.type]) {
-      this.setState({
-        elements: SynthesisElementStore.elements[this.props.params.type],
-        count: SynthesisElementStore.counts[this.props.params.type],
-        isLoading: false,
-        isLoadingMore: false,
-      });
-      this.resetLoadMoreButton();
-      return;
-    }
-
     this.setState({
-      isLoading: true,
-    }, () => {
-      this.loadElementsByTypeFromServer();
+      elements: SynthesisElementStore.elements[this.props.params.type],
+      count: SynthesisElementStore.counts[this.props.params.type],
+      isLoading: false,
+      isLoadingMore: false,
     });
   },
 
@@ -98,7 +88,11 @@ const ElementsInbox = React.createClass({
       isLoadingMore: true,
       limit: this.state.limit + Pagination,
     }, () => {
-      this.loadElementsByTypeFromServer();
+      this.loadElementsByTypeFromServer()
+        .then(() => {
+          this.resetLoadMoreButton();
+        })
+      ;
     });
   },
 

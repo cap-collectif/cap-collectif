@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import Fetcher from '../../services/Fetcher';
 import ViewBox from './ViewBox';
 import EditBox from './EditBox';
 import FlashMessages from '../Utils/FlashMessages';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
+import SynthesisStore from '../../stores/SynthesisStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
+import SynthesisActions from '../../actions/SynthesisActions';
 
 const SynthesisBox = React.createClass({
   propTypes: {
-    mode: React.PropTypes.string.isRequired,
-    synthesis_id: React.PropTypes.string.isRequired,
-    children: React.PropTypes.object,
+    mode: PropTypes.string.isRequired,
+    synthesis_id: PropTypes.string.isRequired,
+    children: PropTypes.object,
+    sideMenu: PropTypes.bool,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      sideMenu: false,
+    };
+  },
 
   getInitialState() {
     return {
@@ -26,31 +34,29 @@ const SynthesisBox = React.createClass({
   },
 
   componentWillMount() {
-    SynthesisElementStore.addChangeListener(this.onChange);
+    SynthesisElementStore.addChangeListener(this.onElementsChange);
+    SynthesisStore.addChangeListener(this.onSynthesisChange);
   },
 
   componentDidMount() {
-    this.loadSynthesisFromServer();
+    SynthesisActions.load(this.props.synthesis_id);
   },
 
   componentWillUnmount() {
-    SynthesisElementStore.removeChangeListener(this.onChange);
+    SynthesisElementStore.removeChangeListener(this.onElementsChange);
+    SynthesisStore.removeChangeListener(this.onSynthesisChange);
   },
 
-  onChange() {
+  onElementsChange() {
     this.setState({
       messages: SynthesisElementStore.messages,
     });
   },
 
-  loadSynthesisFromServer() {
-    Fetcher
-      .get('/syntheses/' + this.props.synthesis_id)
-      .then((data) => {
-        this.setState({
-          'synthesis': data,
-        });
-      });
+  onSynthesisChange() {
+    this.setState({
+      synthesis: SynthesisStore.synthesis,
+    });
   },
 
   dismissMessage(message, type) {
@@ -66,7 +72,7 @@ const SynthesisBox = React.createClass({
       }
       if (this.props.mode === 'edit') {
         return (
-          <EditBox synthesis={this.state.synthesis} children={this.props.children} />
+          <EditBox synthesis={this.state.synthesis} children={this.props.children} sideMenu={this.props.sideMenu} />
         );
       }
       return (

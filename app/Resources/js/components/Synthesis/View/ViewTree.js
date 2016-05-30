@@ -40,19 +40,10 @@ const ViewTree = React.createClass({
   },
 
   onChange() {
-    if (SynthesisElementStore.isFetchingTree || SynthesisElementStore.isInboxSync.publishedTree) {
-      this.setState({
-        elements: SynthesisElementStore.elements.publishedTree,
-        expanded: SynthesisElementStore.expandedItems.view,
-        isLoading: false,
-      });
-      return;
-    }
-
     this.setState({
-      isLoading: true,
-    }, () => {
-      this.loadElementsTreeFromServer();
+      elements: SynthesisElementStore.elements.publishedTree,
+      expanded: SynthesisElementStore.expandedItems.view,
+      isLoading: false,
     });
   },
 
@@ -74,14 +65,16 @@ const ViewTree = React.createClass({
     if (!element) {
       return true;
     }
-    return SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'expanded') || this.state.expanded[element.id];
+    const displayRules = this.props.synthesis.displayRules || {};
+    return SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'expanded', displayRules) || this.state.expanded[element.id];
   },
 
   renderCaret(element) {
-    if (SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'childrenInModal')) {
+    const displayRules = this.props.synthesis.displayRules || {};
+    if (SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'childrenInModal', displayRules)) {
       return null;
     }
-    if (SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'expanded')) {
+    if (SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'expanded', displayRules)) {
       return null;
     }
     const expanded = this.state.expanded[element.id] || false;
@@ -113,9 +106,10 @@ const ViewTree = React.createClass({
   },
 
   renderTreeItems(elements, parent = null) {
-    if (this.isElementExpanded(parent) && elements && !SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenInModal')) {
+    const displayRules = this.props.synthesis.displayRules || {};
+    if (this.isElementExpanded(parent) && elements && !SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenInModal', displayRules)) {
       const orderedElements =
-        SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'foldersOrderedByCount')
+        SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'foldersOrderedByCount', displayRules)
           ? ArrayHelper.sortArrayByField(elements, 'childrenElementsNb', false, 'DESC')
           : ArrayHelper.sortArrayByField(elements, 'title', true)
       ;
@@ -129,7 +123,7 @@ const ViewTree = React.createClass({
                     key={element.id}
                     element={element}
                     parent={parent}
-                    settings={SynthesisDisplayRules.getMatchingSettingsForElement(element, this.state.settings)}
+                    settings={SynthesisDisplayRules.getMatchingSettingsForElement(element, this.state.settings, displayRules)}
                     onExpandElement={() => this.toggleExpand(element)}
                   />
                   {this.renderTreeItems(element.children, element)}

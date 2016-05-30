@@ -13,6 +13,11 @@ const SecondNavbar = React.createClass({
           {this.getIntlMessage('synthesis.edition.navbar.second.brand')}
         </NavbarBrand>
         <Nav pullRight>
+          <LinkContainer to={'/inbox'}>
+            <NavItem>
+              {this.getIntlMessage('synthesis.edition.navbar.second.inbox')}
+            </NavItem>
+          </LinkContainer>
           <LinkContainer to={'/preview'}>
             <NavItem>
               {this.getIntlMessage('synthesis.edition.navbar.second.preview')}

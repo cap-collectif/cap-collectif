@@ -125,8 +125,8 @@ export const DISPLAY_SETTINGS = [
   {
     conditions: [
       {
-        type: 'level',
-        value: 3,
+        type: 'contributions_level_delta',
+        value: 0,
       },
       {
         type: 'display_type',
@@ -179,8 +179,8 @@ export const DISPLAY_SETTINGS = [
   {
     conditions: [
       {
-        type: 'level',
-        value: 3,
+        type: 'contributions_level_delta',
+        value: 0,
       },
       {
         type: 'display_type',
@@ -203,8 +203,8 @@ export const DISPLAY_SETTINGS = [
   {
     conditions: [
       {
-        type: 'level',
-        value: 4,
+        type: 'contributions_level_delta',
+        value: 1,
       },
       {
         type: 'display_type',
@@ -242,8 +242,8 @@ export const DISPLAY_SETTINGS = [
   {
     conditions: [
       {
-        type: 'level',
-        value: 5,
+        type: 'contributions_level_delta',
+        value: 2,
       },
       {
         type: 'display_type',

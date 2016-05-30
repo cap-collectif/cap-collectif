@@ -41,7 +41,7 @@ const UpdateModal = React.createClass({
   },
 
   componentDidMount() {
-    this.fetchElements();
+    this.loadElementsTreeFromServer();
   },
 
   componentWillReceiveProps(nextProps) {
@@ -62,7 +62,10 @@ const UpdateModal = React.createClass({
   },
 
   onChange() {
-    this.fetchElements();
+    this.setState({
+      elements: SynthesisElementStore.elements.notIgnoredTree,
+      isLoading: false,
+    });
   },
 
   getElementParentId() {
@@ -131,24 +134,6 @@ const UpdateModal = React.createClass({
     this.setState({
       expanded: expanded,
     });
-  },
-
-  fetchElements() {
-    if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.notIgnoredTree) {
-        this.setState({
-          elements: SynthesisElementStore.elements.notIgnoredTree,
-          isLoading: false,
-        });
-        return;
-      }
-
-      this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadElementsTreeFromServer();
-      });
-    }
   },
 
   loadElementsTreeFromServer() {

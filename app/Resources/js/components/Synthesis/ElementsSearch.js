@@ -46,7 +46,11 @@ const ElementsSearch = React.createClass({
         isLoading: true,
         limit: Pagination,
       }, () => {
-        this.loadElementsByTermFromServer(nextProps.params.term);
+        this.loadElementsByTermFromServer(nextProps.params.term)
+          .then(() => {
+            this.resetLoadMoreButton();
+          })
+        ;
       });
     }
   },
@@ -56,24 +60,12 @@ const ElementsSearch = React.createClass({
   },
 
   onChange() {
-    if (!SynthesisElementStore.isProcessing) {
-      if (SynthesisElementStore.isInboxSync.search) {
-        this.setState({
-          elements: SynthesisElementStore.elements.search,
-          count: SynthesisElementStore.counts.search,
-          isLoading: false,
-          isLoadingMore: false,
-        });
-        this.resetLoadMoreButton();
-        return;
-      }
-
-      this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadElementsByTermFromServer();
-      });
-    }
+    this.setState({
+      elements: SynthesisElementStore.elements.search,
+      count: SynthesisElementStore.counts.search,
+      isLoading: false,
+      isLoadingMore: false,
+    });
   },
 
   resetLoadMoreButton() {

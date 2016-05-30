@@ -146,23 +146,12 @@ const PublishModal = React.createClass({
   },
 
   fetchElements() {
-    if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.notIgnoredTree) {
-        this.setState({
-          elements: SynthesisElementStore.elements.notIgnoredTree,
-          expanded: SynthesisElementStore.expandedItems.nav,
-          selectedId: SynthesisElementStore.selectedNavItem,
-          isLoading: false,
-        });
-        return;
-      }
-
-      this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadElementsTreeFromServer();
-      });
-    }
+    this.setState({
+      elements: SynthesisElementStore.elements.notIgnoredTree,
+      expanded: SynthesisElementStore.expandedItems.nav,
+      selectedId: SynthesisElementStore.selectedNavItem,
+      isLoading: false,
+    });
   },
 
   loadElementsTreeFromServer() {

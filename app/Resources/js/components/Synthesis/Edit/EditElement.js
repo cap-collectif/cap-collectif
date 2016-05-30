@@ -55,17 +55,10 @@ const EditElement = React.createClass({
   },
 
   onChange() {
-    if (!SynthesisElementStore.isProcessing) {
-      if (SynthesisElementStore.isElementSync) {
-        this.setState({
-          element: SynthesisElementStore.element,
-          isLoading: false,
-        });
-        return;
-      }
-
-      this.loadElementFromServer();
-    }
+    this.setState({
+      element: SynthesisElementStore.element,
+      isLoading: false,
+    });
   },
 
   togglePublishModal(value) {

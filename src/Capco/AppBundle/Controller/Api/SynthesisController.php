@@ -424,10 +424,12 @@ class SynthesisController extends FOSRestController
      * @Security("has_role('ROLE_ADMIN')")
      * @Put("/syntheses/{synthesis_id}/display")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
+     * @View(serializerGroups={"Syntheses", "Elements"})
      */
     public function updateSynthesisDisplayRulesAction(Request $request, Synthesis $synthesis)
     {
         $synthesis->setDisplayRules($request->request->get('rules'));
-        return;
+        $this->get('doctrine.orm.entity_manager')->flush();
+        return $synthesis;
     }
 }

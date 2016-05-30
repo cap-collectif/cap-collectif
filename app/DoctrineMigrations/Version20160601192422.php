@@ -4,12 +4,21 @@ namespace Application\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20160524130057 extends AbstractMigration
+class Version20160601192422 extends AbstractMigration implements ContainerAwareInterface
 {
+    protected $container;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     /**
      * @param Schema $schema
      */
@@ -20,6 +29,19 @@ class Version20160524130057 extends AbstractMigration
 
         $this->addSql('ALTER TABLE synthesis ADD display_rules LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json)\'');
     }
+
+    public function postUp(Schema $schema)
+    {
+        $em = $this->container->get('doctrine.orm.entity_manager');
+        $syntheses = $em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->findAll();
+        foreach ($syntheses as $synthesis) {
+            $synthesis->setDisplayRules([
+                'level' => 3
+            ]);
+        }
+        $em->flush();
+    }
+
 
     /**
      * @param Schema $schema

@@ -31,7 +31,7 @@ const FolderManager = React.createClass({
   },
 
   componentDidMount() {
-    this.fetchElements();
+    this.loadElementsTreeFromServer();
   },
 
   componentWillUnmount() {
@@ -39,7 +39,10 @@ const FolderManager = React.createClass({
   },
 
   onChange() {
-    this.fetchElements();
+    this.setState({
+      elements: SynthesisElementStore.elements.notIgnoredTree,
+      isLoading: false,
+    });
   },
 
   toggleExpand(element) {
@@ -51,24 +54,6 @@ const FolderManager = React.createClass({
     this.setState({
       expanded: expanded,
     });
-  },
-
-  fetchElements() {
-    if (!SynthesisElementStore.isFetchingTree) {
-      if (SynthesisElementStore.isInboxSync.notIgnoredTree) {
-        this.setState({
-          elements: SynthesisElementStore.elements.notIgnoredTree,
-          isLoading: false,
-        });
-        return;
-      }
-
-      this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadElementsTreeFromServer();
-      });
-    }
   },
 
   loadElementsTreeFromServer() {

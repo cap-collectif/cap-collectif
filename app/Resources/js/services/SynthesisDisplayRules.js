@@ -2,21 +2,23 @@ import { ALLOWED_RULES } from '../constants/SynthesisDisplayConstants';
 
 class SynthesisDisplayRules {
 
-  getMatchingSettingsForElement(element, settings) {
+  getMatchingSettingsForElement(element, settings, synthesisRules) {
     const matching = settings.filter((setting) => {
-      return this.isElementMatchingConditions(setting.conditions, element) && this.areRulesAllowed(setting.rules);
+      return this.isElementMatchingConditions(setting.conditions, element, synthesisRules) && this.areRulesAllowed(setting.rules);
     });
     return matching;
   }
 
-  isElementMatchingConditions(conditions, element) {
+  isElementMatchingConditions(conditions, element, synthesisRules) {
     return conditions.every((condition) => {
-      return this.isElementMatchingCondition(condition, element);
+      return this.isElementMatchingCondition(condition, element, synthesisRules);
     });
   }
 
-  isElementMatchingCondition(condition, element) {
+  isElementMatchingCondition(condition, element, synthesisRules) {
+    const contributionsLevel = parseInt(synthesisRules.level) || 0;
     switch (condition.type) {
+      case 'contributions_level_delta': return element.level === contributionsLevel + condition.value;
       case 'level': return element.level === condition.value;
       case 'display_type': return element.displayType === condition.value;
       default: return false;
@@ -62,11 +64,11 @@ class SynthesisDisplayRules {
     });
   }
 
-  getValueForRuleAndElement(element, allSettings, category, name) {
+  getValueForRuleAndElement(element, allSettings, category, name, synthesisRules) {
     if (!element) {
       return false;
     }
-    const settings = this.getMatchingSettingsForElement(element, allSettings);
+    const settings = this.getMatchingSettingsForElement(element, allSettings, synthesisRules);
     return settings.some((setting) => {
       return setting.rules.some((rule) => {
         if (rule.category === category && rule.name === name) {
