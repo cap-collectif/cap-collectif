@@ -376,6 +376,10 @@ $dark-red: #A94442;
     color: $black;
   }
 
+  .tree__item.published > .tree__item__content {
+    color: $green;
+  }
+
   .elements-tree__item-icon {
     margin: 0 5px;
   }

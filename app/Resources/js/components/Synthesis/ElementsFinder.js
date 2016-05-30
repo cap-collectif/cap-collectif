@@ -64,9 +64,13 @@ const ElementsFinder = React.createClass({
         <ul className={'tree__list tree--level-' + level}>
           {
             elements.map((element) => {
+              const classes = classNames({
+                'tree__item': true,
+                'published': element.published,
+              });
               if (!this.props.hiddenElementId || element.id !== this.props.hiddenElementId) {
                 return (
-                  <li key={element.id} className="tree__item">
+                  <li key={element.id} className={classes} >
                     {this.renderTreeItemContent(element)}
                     {this.renderTreeItems(element.children, level + 1, this.props.expanded[element.id])}
                   </li>

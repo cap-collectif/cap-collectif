@@ -294,7 +294,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         $separator = addcslashes($config['path_separator'], '%');
         $path = $config['path'];
         $qb = $this->createQueryBuilder('se')
-            ->select('se.id', 'se.level', 'se.path', 'se.displayType', 'se.title', 'se.body', 'se.description', 'COUNT(c.id) as childrenCount')
+            ->select('se.id', 'se.level', 'se.path', 'se.displayType', 'se.title', 'se.body', 'se.description', 'se.published', 'COUNT(c.id) as childrenCount')
             ->leftJoin('se.children', 'c', 'WITH', $this->getOnClauseForChildren($type))
         ;
         if ($type === 'published') {
