@@ -41,7 +41,7 @@ const ElementsFinder = React.createClass({
     }];
   },
 
-  toggleExpand(element) {
+  toggleExpand(event, element) {
     event.stopPropagation();
     if (element.childrenCount !== element.children.length) {
       SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, this.props.type, element.id);
@@ -89,7 +89,7 @@ const ElementsFinder = React.createClass({
       'selected': this.props.selectedId === element.id,
     });
     return (
-      <div id={'element-' + element.id} className={classes} onClick={this.select.bind(this, element)}>
+      <div id={'element-' + element.id} className={classes} onClick={() => this.select(element)}>
         {this.renderItemCaret(element)}
         {element.id === 'root'
           ? <ElementIcon className="tree__item__icon" element={element} />
@@ -108,7 +108,7 @@ const ElementsFinder = React.createClass({
     });
     if (element.childrenCount > 0) {
       return (
-        <i className={classes} onClick={this.toggleExpand.bind(this, element)}></i>
+        <i className={classes} onClick={(ev) => this.toggleExpand(ev, element)}></i>
       );
     }
   },
