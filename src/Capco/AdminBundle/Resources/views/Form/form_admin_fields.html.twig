@@ -1,5 +1,13 @@
 {% extends 'SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig' %}
 
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    {% if type != 'file' %}
+        {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
+    {% endif %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}{% if value is iterable %}value="{{ value | json_encode() }}" {% else %}value="{{ value }}" {% endif %}{% endif %}/>
+{% endblock form_widget_simple %}
+
 {% block checkbox_row -%}
     <div class=""></div>
     {{ block('choice_row') }}

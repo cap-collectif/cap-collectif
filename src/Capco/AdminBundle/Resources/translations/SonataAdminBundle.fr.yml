@@ -43,6 +43,7 @@ admin.label.question: Question
 admin.label.question_choice: Choix
 admin.label.opinion: Consultation / Propositions
 admin.label.reply: Questionnaire / Réponses
+admin.label.response: Réponse à une question
 admin.label.opinion_type: Éléments de structure
 admin.label.opinion_version: Modifications
 admin.label.page: Pages statiques
@@ -560,12 +561,14 @@ admin:
       updated_at: Mise à jour
       questionnaire_step: Étape de questionnaire
       questionnaire: Questionnaire
+      private: Anonyme
       project: Projet participatif
       responses: Réponses
       enabled: Publié
       id: ID
       group_content: Réponse
       group_publication: Options de publication
+      group_responses: Réponses
     reporting:
       argument: Argument
       body: Motif
@@ -582,6 +585,9 @@ admin:
       type: Type de contenu
       updated_at: Mise à jour
       version: Modification
+    response:
+      question: Question
+      value: Réponse
     section:
       title: Titre
       position: Position

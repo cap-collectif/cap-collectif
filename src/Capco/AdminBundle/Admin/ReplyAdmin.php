@@ -2,10 +2,12 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class ReplyAdmin extends Admin
@@ -87,6 +89,21 @@ class ReplyAdmin extends Admin
                     'label' => 'admin.fields.reply.enabled',
                     'required' => false,
                 ])
+                ->add('private', null, [
+                    'label' => 'admin.fields.reply.private',
+                    'required' => false,
+                ])
+            ->end()
+            ->with('admin.fields.reply.group_responses')
+                ->add('responses', 'sonata_type_collection', [
+                    'label' => 'admin.fields.reply.responses',
+                    'required' => false,
+                    'btn_add' => false,
+                    'by_reference' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                ])
             ->end()
         ;
     }
@@ -109,4 +126,24 @@ class ReplyAdmin extends Admin
             ])
         ;
     }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('create');
+    }
+
+    public function preUpdate($object)
+    {
+        $responses = new ArrayCollection();
+        foreach ($object->getResponses() as $response) {
+            $decodedValue = json_decode($response->getValue());
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $response->setValue($decodedValue);
+            }
+            $responses->add($response);
+        }
+        $object->setResponses($responses);
+    }
+
+
 }

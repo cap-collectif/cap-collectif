@@ -387,3 +387,11 @@ services:
         - {name: sonata.admin, manager_type: orm, label: admin.label.step}
       calls:
         - [ setTranslationDomain, [SonataAdminBundle]]
+
+  capco_admin.admin.response:
+      class: Capco\AdminBundle\Admin\ResponseAdmin
+      arguments: [~, Capco\AppBundle\Entity\Response, SonataAdminBundle:CRUD]
+      tags:
+        - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.response}
+      calls:
+        - [ setTranslationDomain, [SonataAdminBundle]]

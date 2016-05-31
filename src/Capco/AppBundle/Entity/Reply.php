@@ -54,7 +54,7 @@ class Reply
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Response", mappedBy="reply", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Response", mappedBy="reply", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $responses;
 
@@ -131,7 +131,7 @@ class Reply
     public function addResponse(Response $response)
     {
         if (!$this->responses->contains($response)) {
-            $this->responses[] = $response;
+            $this->responses->add($response);
             $response->setReply($this);
         }
 
@@ -142,10 +142,13 @@ class Reply
      * Remove response.
      *
      * @param Response $response
+     *
+     * @return Reply
      */
     public function removeResponse(Response $response)
     {
         $this->responses->removeElement($response);
+        return $this;
     }
 
     /**
