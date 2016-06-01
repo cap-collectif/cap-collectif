@@ -24,10 +24,11 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_SUPER_ADMIN'
         Media: @MediaUser1
         city: Antony
-        website: www.sfavot.fr
+        website: http://www.sfavot.fr
         biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
         vip: true
         confirmationToken: ~
+        phoneConfirmed: true
 
     user3:
         username: xlacot
