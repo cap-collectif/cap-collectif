@@ -472,18 +472,7 @@ EOF;
     {
         $json = <<< EOF
         {
-            "rules": [
-                {
-                    "level": 0,
-                    "type": "folder",
-                    "display": "title"
-                },
-                {
-                    "level": 0,
-                    "type": "contribution",
-                    "display": "progress"
-                }
-            ]
+            "level": 1
         }
 EOF;
 

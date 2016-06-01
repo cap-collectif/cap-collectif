@@ -15,6 +15,9 @@ Feature: Synthesis
       {
         "id": @string@,
         "elements": @array@,
+        "displayRules": {
+          "level": 0
+        },
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/')" },
           "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
@@ -48,7 +51,10 @@ Feature: Synthesis
             "history": { "href": "/api/syntheses/42/elements/43/history" }
           }
         }
-      ]
+      ],
+      "displayRules": {
+        "level": 0
+      }
     }
     """
 
@@ -69,6 +75,9 @@ Feature: Synthesis
       "enabled": true,
       "editable": true,
       "elements": [],
+      "displayRules": {
+        "level": 0
+      },
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/')" },
         "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
@@ -137,6 +146,9 @@ Feature: Synthesis
         },
         @...@
       ],
+      "displayRules": {
+        "level": 0
+      },
       "_links": {
         "self": { "href": "@string@.startsWith('/api/syntheses/')" },
         "elements": { "href": "@string@.startsWith('/api/syntheses/').endsWith('/elements')" }
@@ -182,6 +194,9 @@ Feature: Synthesis
           }
         }
       ],
+      "displayRules": {
+        "level": 0
+      },
       "_links": {
         "self": { "href": "/api/syntheses/42" },
         "elements": { "href": "/api/syntheses/42/elements" }
@@ -459,6 +474,7 @@ Feature: Synthesis
         "description": @null@,
         "childrenCount": 0,
         "votes": [],
+        "published": true,
         "publishedChildrenCount": 0,
         "publishedParentChildrenCount": 0,
         "childrenScore": 0,
@@ -480,6 +496,7 @@ Feature: Synthesis
         "description": @null@,
         "childrenCount": 0,
         "votes": [],
+        "published": true,
         "publishedChildrenCount": 0,
         "publishedParentChildrenCount": 0,
         "childrenScore": 0,
@@ -509,6 +526,7 @@ Feature: Synthesis
         "displayType": @string@,
         "title": @string@,
         "body": @string@,
+        "published": true,
         "description": @null@,
         "childrenCount": @integer@,
         "children": [
@@ -519,6 +537,7 @@ Feature: Synthesis
             "displayType": @string@,
             "title": @string@,
             "body": @string@,
+            "published": @boolean@,
             "description": @null@,
             "childrenCount": @integer@,
             "children": [@...@]
@@ -545,6 +564,7 @@ Feature: Synthesis
         "title": @string@,
         "body": @string@,
         "description": @null@,
+        "published": true,
         "childrenCount": @integer@,
         "children": [
           {
@@ -553,6 +573,7 @@ Feature: Synthesis
             "path": @string@,
             "displayType": @string@,
             "title": @string@,
+            "published": @boolean@,
             "body": @string@,
             "description": @null@,
             "childrenCount": @integer@,
@@ -1117,6 +1138,9 @@ Feature: Synthesis
       "id": "48",
       "enabled": true,
       "editable": true,
+      "displayRules": {
+        "level": 0
+      },
       "elements": [
         @...@,
         {

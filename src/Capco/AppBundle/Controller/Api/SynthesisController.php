@@ -414,7 +414,7 @@ class SynthesisController extends FOSRestController
      *
      * @ApiDoc(
      *  resource=true,
-     *  description="Update synthesis dispaly rules",
+     *  description="Update synthesis display rules",
      *  statusCodes={
      *    200 = "Returned when successful",
      *    404 = "Returned when synthesis is not found",
