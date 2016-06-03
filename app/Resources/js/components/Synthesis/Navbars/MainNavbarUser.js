@@ -19,7 +19,7 @@ export const MainNavbarUser = React.createClass({
   },
 
   render() {
-    const user = this.props.user;
+    const { user, features } = this.props;
     if (user) {
       const dropdownTitle = (
         <span>
@@ -45,7 +45,7 @@ export const MainNavbarUser = React.createClass({
               : null
             }
             {
-              this.props.features.profiles
+              features.profiles
               ? <MenuItem eventKey="2" href="/profile">
                 {this.getIntlMessage('synthesis.edition.navbar.user.profile')}
               </MenuItem>

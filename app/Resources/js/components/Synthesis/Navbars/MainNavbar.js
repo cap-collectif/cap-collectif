@@ -11,6 +11,7 @@ const MainNavbar = React.createClass({
     return (
       <Navbar fixedTop fluid className="synthesis__main-navbar">
         <MainNavbarHeader />
+        <MainNavbarUser />
         <MainNavbarSearch />
       </Navbar>
     );
