@@ -599,7 +599,7 @@ class ProjectDownloadResolver
         $item = [
             'id' => $reply['id'],
             'author' => $reply['author']['username'],
-            'phone' => $reply['author']['phone'] ? $reply['author']['phone'] : '',
+            'phone' => $reply['author']['phone'] ? (string) $reply['author']['phone'] : '',
             'created' => $this->dateToString($reply['createdAt']),
             'anonymous' => $this->booleanToString($reply['private']),
         ];
