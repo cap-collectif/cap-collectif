@@ -40,9 +40,17 @@
         </div>
     {% endif %}
 
-    {{ react_intl_component('CollectStepPageApp', {
-        'props': props,
-        'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-    }) }}
+    {% if currentStep.proposalForm is null %}
+        <div>
+            <p>
+                {{ 'step.collect.no_form' | trans({}, 'CapcoAppBundle') }}
+            </p>
+        </div>
+    {% else %}
+        {{ react_intl_component('CollectStepPageApp', {
+            'props': props,
+            'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
+        }) }}
+    {% endif %}
 
 {% endblock %}

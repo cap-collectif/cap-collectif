@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
-import UserLink from '../User/UserLink';
 
 const OpinionInfos = React.createClass({
   propTypes: {
@@ -55,7 +54,11 @@ const OpinionInfos = React.createClass({
 
   renderAuthorName() {
     if (this.props.opinion.author) {
-      return <UserLink user={this.props.opinion.author} />;
+      return (
+        <a href={this.props.opinion.author._links.profile}>
+          { this.props.opinion.author.username }
+        </a>
+      );
     }
 
     return <span>{ this.props.opinion.author_name }</span>;
