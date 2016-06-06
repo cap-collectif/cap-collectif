@@ -2,6 +2,7 @@ import React from 'react';
 import { IntlMixin, FormattedDate } from 'react-intl';
 import moment from 'moment';
 import PinnedLabel from '../Utils/PinnedLabel';
+import UserLink from '../User/UserLink';
 
 const CommentInfos = React.createClass({
   propTypes: {
@@ -50,18 +51,7 @@ const CommentInfos = React.createClass({
 
   renderAuthorName() {
     if (this.props.comment.author) {
-      if (this.props.comment.author._links.profile) {
-        return (
-          <a href={this.props.comment.author._links.profile}>
-            { this.props.comment.author.username }
-          </a>
-        );
-      }
-      return (
-        <span>
-          { this.props.comment.author.username }
-        </span>
-      );
+      <UserLink user={this.props.comment.author} />
     }
 
     return <span>{ this.props.comment.author_name }</span>;
