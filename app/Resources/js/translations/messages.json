@@ -344,12 +344,17 @@
   "registration": {
     "facebook": "S'inscrire via Facebook",
     "google": "S'inscrire via Google",
-    "username": "Nom complet",
+    "username": "Nom ou pseudonyme",
     "charte": "J'ai lu et j'accepte {link}.",
-    "type": "Votre statut :",
+    "type": "Statut",
     "zipcode": "Code postal",
-    "help": {
-     "username": "Votre nom sera rendu public sur le site."
+    "password": "Créez un mot de passe",
+    "select": {
+      "type": "Je suis..."
+    },
+    "tooltip": {
+      "email": "Vous recevrez un e-mail contenant un lien permettant de confirmer qu'il s'agit bien de votre adresse.",
+      "password": "Le mot de passe doit comporter au moins huit caractères."
     },
     "constraints": {
       "captcha": {

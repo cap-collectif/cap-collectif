@@ -852,8 +852,7 @@ user:
       gplus: S'inscrire avec Google+
     or: OU
     username:
-      username: Nom complet *
-      is_public: Votre nom sera rendu public sur le site.
+      username: Nom ou pseudonyme *
     email: Adresse électronique *
     password: Mot de passe *
     user_type: Vous êtes :
