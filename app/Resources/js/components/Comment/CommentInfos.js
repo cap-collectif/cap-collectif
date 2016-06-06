@@ -50,10 +50,17 @@ const CommentInfos = React.createClass({
 
   renderAuthorName() {
     if (this.props.comment.author) {
+      if (this.props.comment.author._links.profile) {
+        return (
+          <a href={this.props.comment.author._links.profile}>
+            { this.props.comment.author.username }
+          </a>
+        );
+      }
       return (
-        <a href={this.props.comment.author._links.profile}>
+        <span>
           { this.props.comment.author.username }
-        </a>
+        </span>
       );
     }
 

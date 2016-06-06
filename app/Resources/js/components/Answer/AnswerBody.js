@@ -19,9 +19,15 @@ const AnswerBody = React.createClass({
                 <UserAvatar className="pull-left" user={answer.author} style={{ paddingRight: '10px' }} />
                 <div className="media-body">
                   <p className="media-heading media--macro__user  small" style={{ marginBottom: '0' }}>
-                    <a href={answer.author._links.profile}>
-                      { answer.author.username }
-                    </a>
+                    {
+                      answer.author._links.profile
+                      ? <a href={answer.author._links.profile}>
+                        { answer.author.username }
+                      </a>
+                      : <span>
+                        { answer.author.username }
+                      </span>
+                    }
                   </p>
                   <span className="small excerpt">
                     <FormattedDate

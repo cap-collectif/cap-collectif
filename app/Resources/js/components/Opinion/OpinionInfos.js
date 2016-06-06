@@ -54,10 +54,17 @@ const OpinionInfos = React.createClass({
 
   renderAuthorName() {
     if (this.props.opinion.author) {
+      if (this.props.opinion.author._links.profile) {
+        return (
+          <a href={this.props.opinion.author._links.profile}>
+            { this.props.opinion.author.username }
+          </a>
+        );
+      }
       return (
-        <a href={this.props.opinion.author._links.profile}>
+        <span>
           { this.props.opinion.author.username }
-        </a>
+        </span>
       );
     }
 
