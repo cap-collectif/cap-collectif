@@ -73,7 +73,13 @@ class IdeaRepository extends EntityRepository
                 ->setMaxResults($nbByPage);
         }
 
-        return new Paginator($query);
+        $result = new Paginator($query);
+        $ideas = [];
+        foreach ($result as $idea) {
+            $ideas[] = $idea;
+        }
+
+        return $ideas;
     }
 
     /**
@@ -83,12 +89,17 @@ class IdeaRepository extends EntityRepository
      */
     public function countTrashed()
     {
-        return $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(i)')
-            ->andWhere('i.isTrashed = :trashed')
-            ->setParameter('trashed', true)
+        $qb = $this->getIsEnabledQueryBuilder()
+          ->select('COUNT(i)')
+          ->andWhere('i.isTrashed = :trashed')
+          ->setParameter('trashed', true)
+        ;
+
+        return intval(
+          $qb
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        );
     }
 
     /**
@@ -98,12 +109,17 @@ class IdeaRepository extends EntityRepository
      */
     public function countPublished()
     {
-        return $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(i)')
-            ->andWhere('i.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
+        $qb = $this->getIsEnabledQueryBuilder()
+          ->select('COUNT(i)')
+          ->andWhere('i.isTrashed = :notTrashed')
+          ->setParameter('notTrashed', false)
+        ;
+
+        return intval(
+          $qb
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        );
     }
 
     /**
@@ -115,12 +131,17 @@ class IdeaRepository extends EntityRepository
      */
     public function countByUser($user)
     {
-        return $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(i)')
-            ->andWhere('i.Author = :author')
-            ->setParameter('author', $user)
+        $qb = $this->getIsEnabledQueryBuilder()
+          ->select('COUNT(i)')
+          ->andWhere('i.Author = :author')
+          ->setParameter('author', $user)
+        ;
+
+        return intval(
+          $qb
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        );
     }
 
     /**
@@ -151,9 +172,14 @@ class IdeaRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        $result = new Paginator($qb);
+
+        $ideas = [];
+        foreach ($result as $idea) {
+            $ideas[] = $idea;
+        }
+
+        return $ideas;
     }
 
     /**
@@ -184,23 +210,30 @@ class IdeaRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        $result = new Paginator($qb);
+
+        $ideas = [];
+        foreach ($result as $idea) {
+            $ideas[] = $idea;
+        }
+
+        return $ideas;
     }
 
     /**
      * Get ideas depending on theme and search term, ordered by sort criteria.
      *
-     * @param int  $nbByPage
-     * @param int  $page
-     * @param null $theme
-     * @param null $sort
-     * @param null $term
+     * @param int    $pagination
+     * @param int    $page
+     * @param int    $from
+     * @param int    $to
+     * @param string $themeId
+     * @param string $sort
+     * @param string $term
      *
-     * @return Paginator
+     * @return array
      */
-    public function getSearchResults($nbByPage = 8, $page = 1, $theme = null, $sort = 'last', $term = null)
+    public function getSearchResults($pagination = null, $page = 1, $from = null, $to = null, $themeId = null, $sort = 'last', $term = null)
     {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -217,9 +250,9 @@ class IdeaRepository extends EntityRepository
             ->andWhere('i.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false);
 
-        if ($theme !== null && $theme !== Theme::FILTER_ALL) {
-            $qb->andWhere('t.slug = :theme')
-                ->setParameter('theme', $theme)
+        if ($themeId !== null) {
+            $qb->andWhere('t.id = :themeId')
+                ->setParameter('themeId', $themeId)
             ;
         }
 
@@ -229,11 +262,21 @@ class IdeaRepository extends EntityRepository
             ;
         }
 
+        if ($from) {
+            $qb->andWhere('i.createdAt >= :from')
+                ->setParameter('from', $from);
+        }
+
+        if ($to) {
+            $qb->andWhere('i.createdAt <= :to')
+                ->setParameter('to', $to);
+        }
+
         if ($sort === 'last') {
-            $qb->orderBy('i.updatedAt', 'DESC');
+            $qb->orderBy('i.createdAt', 'DESC');
             $qb->addOrderBy('i.votesCount', 'DESC');
         } elseif ($sort === 'old') {
-            $qb->orderBy('i.updatedAt', 'ASC');
+            $qb->orderBy('i.createdAt', 'ASC');
             $qb->addOrderBy('i.votesCount', 'DESC');
         } elseif ($sort === 'popular') {
             $qb->orderBy('i.votesCount', 'DESC');
@@ -245,23 +288,31 @@ class IdeaRepository extends EntityRepository
 
         $query = $qb->getQuery();
 
-        if ($nbByPage > 0) {
-            $query->setFirstResult(($page - 1) * $nbByPage)
-                ->setMaxResults($nbByPage);
+        if ($pagination > 0) {
+            $query->setFirstResult(($page - 1) * $pagination)
+                ->setMaxResults($pagination);
         }
 
-        return new Paginator($query);
+        $results = new Paginator($query);
+        $ideas = [];
+        foreach ($results as $idea) {
+            $ideas[] = $idea;
+        }
+
+        return $ideas;
     }
 
     /**
      * Count search results.
      *
-     * @param null $themeSlug
-     * @param null $term
+     * @param string $from
+     * @param string $to
+     * @param null   $themeId
+     * @param null   $term
      *
      * @return mixed
      */
-    public function countSearchResults($themeSlug = null, $term = null)
+    public function countSearchResults($from = null, $to = null, $themeId = null, $term = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(i.id)')
@@ -270,9 +321,9 @@ class IdeaRepository extends EntityRepository
             ->setParameter('notTrashed', false)
         ;
 
-        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
-            $qb->andWhere('t.slug = :themeSlug')
-                ->setParameter('themeSlug', $themeSlug)
+        if ($themeId !== null) {
+            $qb->andWhere('t.id = :themeId')
+                ->setParameter('themeId', $themeId)
             ;
         }
 
@@ -282,10 +333,21 @@ class IdeaRepository extends EntityRepository
             ;
         }
 
-        return $qb
+        if ($from) {
+            $qb->andWhere('i.createdAt >= :from')
+                ->setParameter('from', $from);
+        }
+
+        if ($to) {
+            $qb->andWhere('i.createdAt <= :to')
+                ->setParameter('to', $to);
+        }
+
+        return intval(
+          $qb
             ->getQuery()
             ->getSingleScalarResult()
-        ;
+        );
     }
 
     /**
@@ -324,7 +386,7 @@ class IdeaRepository extends EntityRepository
     {
         $query = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't', 'media', 'v', 'c', 'cr')
-            ->leftJoin('i.Media', 'media')
+            ->leftJoin('i.media', 'media')
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('i.theme', 't')
@@ -353,7 +415,7 @@ class IdeaRepository extends EntityRepository
     {
         $query = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't', 'media', 'c', 'cr')
-            ->leftJoin('i.Media', 'media')
+            ->leftJoin('i.media', 'media')
             ->leftJoin('i.Author', 'a')
             ->leftJoin('a.Media', 'm')
             ->leftJoin('i.theme', 't')
@@ -367,26 +429,6 @@ class IdeaRepository extends EntityRepository
             ->getQuery();
 
         return $query->getOneOrNullResult();
-    }
-
-    /**
-     * Get Ideas.
-     */
-    public function getEnabledWith($from = null, $to = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder();
-
-        if ($from) {
-            $qb->andWhere('i.createdAt >= :from')
-               ->setParameter('from', $from);
-        }
-
-        if ($to) {
-            $qb->andWhere('i.createdAt <= :to')
-               ->setParameter('to', $to);
-        }
-
-        return $qb->getQuery()->getResult();
     }
 
     /**
@@ -420,10 +462,14 @@ class IdeaRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute()
-        ;
+        $result = new Paginator($qb);
+
+        $ideas = [];
+        foreach ($result as $idea) {
+            $ideas[] = $idea;
+        }
+
+        return $ideas;
     }
 
     protected function getIsEnabledQueryBuilder()

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import UserAvatar from '../User/UserAvatar';
@@ -13,10 +13,11 @@ import CommentActions from '../../actions/CommentActions';
 
 const Comment = React.createClass({
   propTypes: {
-    uri: React.PropTypes.string,
-    object: React.PropTypes.number,
-    comment: React.PropTypes.object,
-    root: React.PropTypes.bool,
+    uri: PropTypes.string,
+    object: PropTypes.number,
+    comment: PropTypes.object,
+    root: PropTypes.bool,
+    onVote: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -65,10 +66,10 @@ const Comment = React.createClass({
             </div>
             <CommentBody comment={comment} />
             <div className="comment__buttons">
-              <CommentVoteButton comment={comment} />
+              <CommentVoteButton comment={comment} onVote={this.props.onVote} />
               {' '}
               {this.props.root
-                ? <a onClick={this.answer.bind(this)} className="btn btn-xs btn-dark-gray btn--outline">
+                ? <a onClick={this.answer} className="btn btn-xs btn-dark-gray btn--outline">
                     <i className="cap-reply-mail-2"></i>
                     { ' ' }
                     { this.getIntlMessage('global.answer') }
@@ -84,11 +85,11 @@ const Comment = React.createClass({
           </div>
           <div className="comment-answers-block">
             {this.props.root
-              ? <CommentAnswers comments={comment.answers} />
+              ? <CommentAnswers onVote={this.props.onVote} comments={comment.answers} />
               : null
             }
             {this.state.answerFormShown
-              ? <CommentForm comment={this.comment.bind(this)} focus={this.state.answerFormFocus} isAnswer />
+              ? <CommentForm comment={this.comment} focus={this.state.answerFormFocus} isAnswer />
               : null
             }
           </div>

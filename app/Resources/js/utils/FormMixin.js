@@ -4,7 +4,6 @@ const FormMixin = { // This will be easy to use as an higher-order Component
 
   isValid() {
     let isValid = true;
-
     Object.keys(this.formValidationRules).map((key) => {
       if (!this.validate(key)) {
         isValid = false;

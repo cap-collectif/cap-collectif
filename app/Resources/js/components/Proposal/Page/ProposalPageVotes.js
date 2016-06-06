@@ -3,7 +3,7 @@ import { Row, Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import UserBox from '../../User/UserBox';
-import ProposalAllVotesModal from '../Vote/ProposalAllVotesModal';
+import AllVotesModal from '../../Votes/AllVotesModal';
 import ProposalActions from '../../../actions/ProposalActions';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
 import { PROPOSAL_VOTES_TO_SHOW } from '../../../constants/ProposalConstants';
@@ -107,7 +107,7 @@ const ProposalPageVotes = React.createClass({
           </Button>
           : null
         }
-        <ProposalAllVotesModal
+        <AllVotesModal
           votes={this.state.votes}
           onToggleModal={this.toggleModal}
           showModal={this.state.showModal}

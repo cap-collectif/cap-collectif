@@ -6,7 +6,6 @@ use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\IsTrue;
 
 class CommentType extends AbstractType
 {
@@ -25,17 +24,6 @@ class CommentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($this->action === 'edit') {
-            $builder
-                ->add('confirm', 'checkbox', [
-                    'mapped' => false,
-                    'label' => 'comment.form.confirm',
-                    'required' => true,
-                    'constraints' => [new IsTrue(['message' => 'comment.votes_not_confirmed'])],
-                ])
-            ;
-        }
-
         $builder
             ->add('body', 'textarea', ['required' => true])
         ;

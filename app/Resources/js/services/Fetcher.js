@@ -28,6 +28,16 @@ const createHeaders = () => {
   return headers;
 };
 
+const createFormDataHeaders = () => {
+  const headers = {};
+
+  if (LocalStorageService.isValid('jwt')) {
+    headers.Authorization = 'Bearer ' + LocalStorageService.get('jwt');
+  }
+
+  return headers;
+};
+
 // If shield mode is activated, Safari will override the Authorization header, so we need this
 const addAuthorization = (req) => {
   if (LocalStorageService.isValid('jwt')) {
@@ -48,6 +58,20 @@ class Fetcher {
         })
           .then(status)
           .then(json);
+      })
+    ;
+  }
+
+  postFormData(uri, body) {
+    return AuthService.login()
+      .then(() => {
+        return fetch(config.api + uri, {
+          method: 'post',
+          headers: createFormDataHeaders(),
+          beforeSend: addAuthorization,
+          body: body,
+        })
+          .then(status);
       })
     ;
   }

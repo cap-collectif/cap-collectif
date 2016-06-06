@@ -547,7 +547,7 @@ trait OpinionStepsTrait
      *
      * @When I edit my source
      */
-    public function iEditMySOurce()
+    public function iEditMySource()
     {
         $page = $this->getCurrentPage();
         $votesCount = $page->getSourceVotesCount();
@@ -572,7 +572,7 @@ trait OpinionStepsTrait
         \PHPUnit_Framework_Assert::assertNotEquals(0, $votesCount, 'Source has no votes from the begining, test will not be conclusive.');
         $page->clickSourceEditButton();
         $this->iWait(1);
-        $page->fillSOurceBodyField();
+        $page->fillSourceBodyField();
         $page->submitSourceEditForm();
         $this->iWait(1);
     }

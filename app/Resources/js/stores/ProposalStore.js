@@ -6,8 +6,8 @@ import {
   INIT_PROPOSAL,
   INIT_PROPOSALS_ORDER,
   SUBMIT_PROPOSAL,
-  VALIDATION_FAILURE,
   INIT_PROPOSALS,
+  PROPOSAL_VALIDATION_FAILURE,
 
   CREATE_PROPOSAL_SUCCESS,
   CREATE_PROPOSAL_FAILURE,
@@ -78,7 +78,7 @@ class ProposalStore extends BaseStore {
         this._isProcessing = true;
         this.emitChange();
         break;
-      case VALIDATION_FAILURE:
+      case PROPOSAL_VALIDATION_FAILURE:
         this._isProcessing = false;
         this.emitChange();
         break;
