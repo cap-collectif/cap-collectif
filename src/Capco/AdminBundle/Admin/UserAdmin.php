@@ -83,6 +83,9 @@ class UserAdmin extends BaseAdmin
             ->add('email')
             ->add('enabled')
             ->add('locked')
+            ->add('phone', null, [
+                'translation_domain' => 'SonataAdminBundle',
+            ])
         ;
     }
 

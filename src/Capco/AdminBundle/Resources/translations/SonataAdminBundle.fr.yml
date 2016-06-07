@@ -846,3 +846,5 @@ questionnaire_step: Étape de questionnaire
 
 simple_question: Question simple
 multiple_choice_question: Question à choix multiple
+filter:
+  label_phone: Numéro de téléphone
