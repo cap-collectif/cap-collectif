@@ -23,9 +23,6 @@ use Sonata\ClassificationBundle\Entity\BaseCategory as BaseCategory;
  */
 class Category extends BaseCategory
 {
-    /**
-     * @var int
-     */
     protected $id;
 
     /**
