@@ -439,6 +439,7 @@ step:
       future:
         text: L'étape de dépôt débutera le %date%.
         title: Dépôt à venir.
+    no_form: Aucun formulaire de dépôt associé à cette étape.
   presentation:
     participe: Participer
     posts:
