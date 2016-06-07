@@ -42,6 +42,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-runtime": "^6.6.1",
     "babel-template": "^6.5.0",
+    "bootstrap-accessibility-plugin": "^1.0.2",
     "bower": "^1.7.7",
     "brunch": "https://github.com/spyl94/brunch/tarball/6f20a214104f8db7842365b6063c18ebc65134f9",
     "classnames": "^2.2.3",

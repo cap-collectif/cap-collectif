@@ -3,7 +3,7 @@ import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import mailcheck from 'mailcheck';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import UserActions from '../../../actions/UserActions';
@@ -171,59 +171,18 @@ export const RegistrationForm = React.createClass({
       />
       : null
     ;
-    const emailLabel = (
-      <span>
-        {this.getIntlMessage('global.email')}
-        <OverlayTrigger rootClose placement="top"
-          overlay={
-            <Tooltip id="registration-email-tooltip">
-              { this.getIntlMessage('registration.tooltip.email') }
-            </Tooltip>
-          }
-        >
-          <i style={{ fontSize: '20px', color: '#999', paddingLeft: '15px', top: '-2px' }} className="pull-right cap cap-information"></i>
-        </OverlayTrigger>
-      </span>
-    );
-    const passwordLabel = (
-      <span>
-        {this.getIntlMessage('registration.password')}
-        <OverlayTrigger rootClose placement="top"
-                        overlay={
-            <Tooltip id="registration-password-tooltip">
-              { this.getIntlMessage('registration.tooltip.password') }
-            </Tooltip>
-          }
-        >
-          <i style={{ fontSize: '20px', color: '#999', paddingLeft: '15px', top: '-2px' }} className="pull-right cap cap-information"></i>
-        </OverlayTrigger>
-      </span>
-    );
     const typeLabel = (
       <span>
         {this.getIntlMessage('registration.type')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
       </span>
     );
+    const zipcodeLabel = (
+      <span>
+        {this.getIntlMessage('registration.zipcode')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
+      </span>
+    );
     return (
       <form id="registration-form">
-        {
-          features.user_type &&
-            <Input
-              id="_user_type"
-              type="select"
-              valueLink={this.linkState('form.userType')}
-              label={typeLabel}
-              groupClassName={this.getGroupStyle('userType')}
-              errors={this.renderFormErrors('userType')}
-            >
-              <option value="" disabled selected>
-                {this.getIntlMessage('registration.select.type')}
-              </option>
-              {
-                user_types.map((type) => <option key={type.id} value={type.id}>{type.name}</option>)
-              }
-            </Input>
-        }
         <Input
           id="_username"
           type="text"
@@ -233,39 +192,75 @@ export const RegistrationForm = React.createClass({
           groupClassName={this.getGroupStyle('username')}
           errors={this.renderFormErrors('username')}
         />
-        <Input
-          id="_email"
-          ref={c => this._email = c}
-          type="text"
-          valueLink={this.linkState('form.email')}
-          label={emailLabel}
-          labelClassName="h5 label--no-margin"
-          groupClassName={this.getGroupStyle('email')}
-          errors={this.renderFormErrors('email')}
-          onBlur={this.checkMail}
-        />
+        <OverlayTrigger rootClose placement="right"
+                        overlay={
+          <Popover id="registration-email-tooltip">
+            { this.getIntlMessage('registration.tooltip.email') }
+          </Popover>
+        }
+        >
+            <Input
+              id="_email"
+              ref={c => this._email = c}
+              type="text"
+              valueLink={this.linkState('form.email')}
+              label={this.getIntlMessage('global.email')}
+              labelClassName="h5 label--no-margin"
+              groupClassName={this.getGroupStyle('email')}
+              errors={this.renderFormErrors('email')}
+              onBlur={this.checkMail}
+              help={this.getIntlMessage('registration.tooltip.email')}
+            />
+        </OverlayTrigger>
         {this.state.suggestedEmail
           ? <p className="registration__help">
-              { this.getIntlMessage('global.typo') } <a onClick={this.setSuggestedEmail} className="js-email-correction">{ this.state.suggestedEmail }</a> ?
-            </p>
+            { this.getIntlMessage('global.typo') } <a onClick={this.setSuggestedEmail} className="js-email-correction">{ this.state.suggestedEmail }</a> ?
+          </p>
           : null
         }
-        <Input
-          id="_password"
-          type="password"
-          valueLink={this.linkState('form.plainPassword')}
-          label={passwordLabel}
-          labelClassName="h5 label--no-margin"
-          groupClassName={this.getGroupStyle('plainPassword')}
-          errors={this.renderFormErrors('plainPassword')}
-        />
+        <OverlayTrigger rootClose placement="right"
+                        overlay={
+          <Popover id="registration-email-tooltip">
+            { this.getIntlMessage('registration.tooltip.password') }
+          </Popover>
+        }
+        >
+          <Input
+            id="_password"
+            type="password"
+            valueLink={this.linkState('form.plainPassword')}
+            label={this.getIntlMessage('registration.password')}
+            labelClassName="h5 label--no-margin"
+            groupClassName={this.getGroupStyle('plainPassword')}
+            errors={this.renderFormErrors('plainPassword')}
+            help={this.getIntlMessage('registration.tooltip.password')}
+          />
+        </OverlayTrigger>
+        {
+          features.user_type &&
+          <Input
+            id="_user_type"
+            type="select"
+            valueLink={this.linkState('form.userType')}
+            label={typeLabel}
+            groupClassName={this.getGroupStyle('userType')}
+            errors={this.renderFormErrors('userType')}
+          >
+            <option value="" disabled selected>
+              {this.getIntlMessage('registration.select.type')}
+            </option>
+            {
+              user_types.map((type) => <option key={type.id} value={type.id}>{type.name}</option>)
+            }
+          </Input>
+        }
         {
           features.zipcode_at_register &&
             <Input
               id="_zipcode"
               type="text"
               valueLink={this.linkState('form.zipcode')}
-              label={this.getIntlMessage('registration.zipcode') + ' (facultatif)'}
+              label={zipcodeLabel}
               groupClassName={this.getGroupStyle('zipcode')}
               errors={this.renderFormErrors('zipcode')}
             />
