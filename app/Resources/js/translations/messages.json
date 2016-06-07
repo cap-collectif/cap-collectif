@@ -3,43 +3,36 @@
     "danger": {
       "add": {
         "argument": "Toutes nos excuses, un probl\u00e8me est survenu lors de la cr\u00e9ation de l'argument. R\u00e9essayez plus tard.",
-        "idea": "Toutes nos excuses, un problème est survenu lors de la création de l'idée. Réessayez plus tard.",
         "source": "Toutes nos excuses, un probl\u00e8me est survenu lors de l'ajout de la source. R\u00e9essayez plus tard.",
-        "vote": "Toutes nos excuses, un probl\u00e8me est survenu lors de l'ajout de votre vote. R\u00e9essayez plus tard."
+        "vote": "Toutes nos excuses, un probl\u00e8me est survenu lors de l'ajout votre vote. R\u00e9essayez plus tard."
       },
       "delete": {
-        "idea": "Toutes nos excuses, un problème est survenu lors de la suppression de votre idée. Réessayez plus tard.",
         "vote": "Toutes nos excuses, un probl\u00e8me est survenu lors de la suppression votre vote. R\u00e9essayez plus tard."
       },
       "update": {
         "argument": "Toutes nos excuses, un probl\u00e8me est survenu lors de la mise \u00e0 jour de votre argument. R\u00e9essayez plus tard.",
-        "idea": "Toutes nos excuses, un problème est survenu lors de la mise à jour de votre idée. Réessayez plus tard.",
         "source": "Toutes nos excuses, un probl\u00e8me est survenu lors de l'\u00e9dition de votre source. R\u00e9essayez plus tard."
       }
     },
     "success": {
       "add": {
         "argument": "Merci ! Votre argument a bien \u00e9t\u00e9 enregistr\u00e9.",
-        "idea": "Merci ! Votre idée a bien été enregistrée.",
         "source": "Merci ! La source a bien \u00e9t\u00e9 ajout\u00e9e.",
         "user": "Merci, votre compte a été créé avec succès.",
         "vote": "Merci ! Votre vote a bien \u00e9t\u00e9 pris en compte."
       },
       "delete": {
         "argument": "Votre argument a bien \u00e9t\u00e9 supprim\u00e9.",
-        "idea": "Votre idée a bien été supprimée.",
         "source": "La source a bien \u00e9t\u00e9 supprim\u00e9e.",
         "vote": "Votre vote a bien \u00e9t\u00e9 supprim\u00e9.",
         "phone": "Le numéro de téléphone a bien été supprimé."
       },
       "report": {
         "argument": "Merci ! L'argument a bien \u00e9t\u00e9 signal\u00e9.",
-        "idea": "Merci ! L'idée a bien été signalée.",
         "source": "Merci ! La source a bien \u00e9t\u00e9 signal\u00e9e."
       },
       "update": {
         "argument": "Merci ! Votre argument a bien \u00e9t\u00e9 mis \u00e0 jour.",
-        "idea": "Merci ! Votre idée a bien été modifiée.",
         "source": "Merci ! Votre source a bien \u00e9t\u00e9 modifi\u00e9e.",
         "synthesis_display": "Merci ! Vos modifications ont bien été enregistrées."
       }
@@ -180,7 +173,6 @@
     "filter_f_comments": "Les plus comment\u00e9es",
     "filter_f_last": "Les plus r\u00e9centes",
     "filter_f_old": "Les plus anciennes",
-    "filter_f_popular": "Les plus populaires",
     "filter_f_random": "Tri al\u00e9atoire",
     "filter_f_votes": "Les plus vot\u00e9es",
     "filter_favorable": "Favorables",
@@ -205,12 +197,6 @@
     "forgot_password": "Mot de passe oublié ?",
     "fullname": "Nom complet *",
     "hidden_email": "Adresse \u00e9lectronique (cach\u00e9e) *",
-    "image_uploader": {
-      "btn": "Ouvrir l'explorateur de fichier",
-      "delete": "Supprimer mon image",
-      "dropzone": "Glissez-déposez votre image ici ou cliquez pour sélectionner une image.",
-      "preview": "Aperçu de l'image"
-    },
     "insert": "Ins\u00e9rer",
     "link": "Lien *",
     "links": "{num, plural, =0{0 proposition li\u00e9e} one{# proposition li\u00e9e} other{# propositions li\u00e9es}}",
@@ -266,85 +252,6 @@
     "typo": "Vouliez vous dire",
     "versions": "{num, plural, =0{0 modification} one{# modification} other{# modifications}}",
     "votes": "{num, plural, =0{0 vote} one{# vote} other{# votes}}"
-  },
-  "idea": {
-    "add": "Proposer une idée",
-    "appendices": {
-      "trashed": {
-        "button": "Voir la corbeille",
-        "nb": "{num, plural, =0{Aucune idée à la corbeille} one{# idée à la corbeille} other{# idées à la corbeille}}",
-        "title": "Corbeille des idées"
-      }
-    },
-    "body": "Description",
-    "confirm": "En modifiant mon idée, je comprends que les votes qui lui sont associés seront réinitialisés.",
-    "constraints": {
-      "body": "Le contenu de l'idée doit faire au moins 2 caractères.",
-      "confirm": "Merci de confirmer la perte de vos votes pour continuer.",
-      "object": "L'objectif de l'idée doit faire au moins 2 caractères.",
-      "url": "Veuillez entrer une URL valide.",
-      "title": "Le titre de l'idée doit faire au moins 2 caractères.",
-      "theme": "Vous devez sélectionner un thème."
-    },
-    "delete": {
-      "confirm": "Voulez-vous vraiment supprimer l'idée \"{title}\" ?"
-    },
-    "form": {
-      "body": "Contenu",
-      "object": "Objectif",
-      "media": "Image",
-      "select_theme": "Sélectionnez un thème",
-      "theme": "Thème",
-      "title": "Titre",
-      "url": "Site web",
-      "url_help": "Indiquez un site proposant des informations complémentaires.",
-      "url_placeholder": "http://"
-    },
-    "header": {
-      "comments": "{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}",
-      "infos": "{user} dans {theme} le {created}",
-      "infos_no_theme": "{user} le {created}",
-      "trashed": "Dans la corbeille",
-      "votes": "{num, plural, =0{0 vote} one{# vote} other{# votes}}"
-    },
-    "no_result": "Il n'y a aucune idée.",
-    "object": "Objectif",
-    "preview": {
-      "counters": {
-        "comments": "{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}",
-        "votes": "{num, plural, =0{0 vote} one{# vote} other{# votes}}"
-      },
-      "trashed": "Dans la corbeille"
-    },
-    "search": "Rechercher une idée",
-    "trashed": {
-      "date": "Mis à la corbeille le {date}",
-      "no_reason": "Motif non renseigné.",
-      "reason": "Motif de la modération"
-    },
-    "url": "Informations complémentaires",
-    "vote": {
-      "add": "Voter pour",
-      "constraints": {
-        "email": "Veuillez entrer une adresse email valide",
-        "username": "Le nom doit faire au moins 2 caractères."
-      },
-      "count": "{num, plural, =0{0 vote} one{# vote} other{# votes}}",
-      "count_no_nb": "{count, plural, =0{vote} one{vote} other{votes}}",
-      "delete": "Annuler mon vote",
-      "form": {
-        "comment": "Commentaire",
-        "comment_placeholder": "Pourquoi soutenez-vous cette idée ? (optionnel)",
-        "email": "Adresse électronique",
-        "private": "Voter de manière anonyme",
-        "username": "Nom"
-      },
-      "hide": "Masquer",
-      "modal": {
-        "title": "Voter"
-      },
-      "show_more": "Voir tous les votes"
-    }
   },
   "opinion": {
     "add_new_source": "Proposer une source",
@@ -621,7 +528,7 @@
       "district": "S\u00e9lectionnez un quartier",
       "theme": "S\u00e9lectionnez un th\u00e8me"
     },
-    "theme": "Thème",
+    "theme": "Theme",
     "title": "Titre",
     "trashed": {
       "label": "Proposition dans la corbeille.",
@@ -931,7 +838,6 @@
       "ok": "Vous avez d\u00e9clar\u00e9 \u00eatre d'accord avec cette proposition"
     },
     "cancel": "Annuler mon vote",
-    "count": "{count, plural, =0{0 vote} one{# vote} other{# votes}}",
     "count_no_nb": "{count, plural, =0{vote} one{vote} other{votes}}",
     "evolution": {
       "date": "Date",

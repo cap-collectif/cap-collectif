@@ -38,7 +38,8 @@ describe('<RegistrationForm />', () => {
     expect(input.prop('id')).to.equal('_username');
     expect(input.prop('autoFocus')).to.equal(true);
     expect(input.prop('type')).to.equal('text');
-    expect(input.prop('label')).to.equal('Nom ou pseudonyme');
+    expect(input.prop('label')).to.equal('Nom complet');
+    expect(input.prop('help')).to.equal('Votre nom sera rendu public sur le site.');
     expect(input.prop('labelClassName')).to.equal('h5');
   });
 
@@ -47,8 +48,9 @@ describe('<RegistrationForm />', () => {
     const input = wrapper.find('Input').at(1);
     expect(input.prop('id')).to.equal('_email');
     expect(input.prop('type')).to.equal('text');
+    expect(input.prop('label')).to.equal('Adresse électronique');
     expect(input.prop('help')).to.not.exist;
-    expect(input.prop('labelClassName')).to.equal('h5 label--no-margin');
+    expect(input.prop('labelClassName')).to.equal('h5');
   });
 
   it('renders a password input', () => {
@@ -56,8 +58,9 @@ describe('<RegistrationForm />', () => {
     const input = wrapper.find('Input').at(2);
     expect(input.prop('id')).to.equal('_password');
     expect(input.prop('type')).to.equal('password');
+    expect(input.prop('label')).to.equal('Mot de passe');
     expect(input.prop('help')).to.not.exist;
-    expect(input.prop('labelClassName')).to.equal('h5 label--no-margin');
+    expect(input.prop('labelClassName')).to.equal('h5');
   });
 
   it('renders a charte checkbox when parameters are specified', () => {

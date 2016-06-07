@@ -55,7 +55,7 @@
         {% set projectsCount = theme.projects | length %}
         {% if projectsCount > 0 %}
             {{ react_intl_component('ProjectsListApp', {
-                'props': projectProps,
+                'props': props,
                 'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
               })
             }}
@@ -71,12 +71,7 @@
         <div class="container  container--custom">
             <h2 class="h2">{{ 'theme.show.ideas.title'|trans({}, 'CapcoAppBundle') }}
                 {% if is_feature_enabled('idea_creation') %}
-                    <div
-                        style="display: inline-block"
-                        class="pull-right"
-                    >
-                        {{ react_intl_component('IdeaCreateApp', {'props': ideaCreationProps}) }}
-                    </div>
+                    <a class="pull-right  btn  btn-primary" href="{{ path('app_idea_create') }}">{{ 'idea.create.button'|trans({}, 'CapcoAppBundle') }}</a>
                 {% endif %}
             </h2>
             {{ render(controller('CapcoAppBundle:Site/Theme:lastIdeas', {'theme': theme})) }}
@@ -85,4 +80,19 @@
 
     {% include 'CapcoAppBundle:Theme:appendices.html.twig' %}
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            App.equalheight('.theme');
+            App.equalheight('.media--macro');
+        });
+
+        $(window).on('resize', function() {
+            App.resized('.theme');
+            App.resized('.media--macro');
+        });
+    </script>
 {% endblock %}

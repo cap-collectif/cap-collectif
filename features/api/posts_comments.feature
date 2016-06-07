@@ -1,4 +1,3 @@
-@posts_comments
 Feature: Posts comments
 
 ## List Comments

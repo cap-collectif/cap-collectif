@@ -158,6 +158,15 @@ const App = (($) => {
     }
   };
 
+  const initPopovers = (triggers, options) => {
+    const $triggers = $(triggers);
+    $triggers.attr('tabindex', '0');
+    $triggers.popover(options).on('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+  };
+
   const makeSidebar = (options) => {
     // Fix containers
     const containers = options.container + ' .container';
@@ -181,6 +190,35 @@ const App = (($) => {
     });
   };
 
+  const hideableMessageAndCheckbox = (options) => {
+    const messageDiv = options.message;
+    const messageField = messageDiv + ' textarea';
+    const checkboxDiv = options.checkbox;
+    const checkboxField = checkboxDiv + ' input[type="checkbox"]';
+    let oldVal = null;
+
+    $(messageField).on('change keyup paste', (e) => {
+      const currentVal = $(e.currentTarget).val();
+      if (currentVal === oldVal) {
+        return;
+      }
+      oldVal = currentVal;
+      if (currentVal) {
+        $(checkboxDiv).addClass('hidden');
+        return;
+      }
+      $(checkboxDiv).removeClass('hidden');
+    });
+
+    $(checkboxField).on('change', (e) => {
+      if ($(e.currentTarget).prop('checked')) {
+        $(messageDiv).addClass('hidden');
+        return;
+      }
+      $(messageDiv).removeClass('hidden');
+    });
+  };
+
   const skipLinks = () => {
     $('.js-skip-links a').on('focus', () => {
       $('.js-skip-links').addClass('active');
@@ -201,8 +239,10 @@ const App = (($) => {
     externalLinks: externalLinks,
     showMap: showMap,
     navbarAutocollapse: navbarAutocollapse,
+    initPopovers: initPopovers,
     makeSidebar: makeSidebar,
     carousel: carousel,
+    hideableMessageAndCheckbox: hideableMessageAndCheckbox,
     customModal: customModal,
     skipLinks: skipLinks,
   };

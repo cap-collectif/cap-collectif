@@ -2,8 +2,6 @@
 
 namespace spec\Capco\AppBundle\Helper;
 
-use Capco\AppBundle\Entity\IdeaVote;
-use Capco\AppBundle\Entity\Reporting;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Doctrine\Common\Collections\ArrayCollection;
