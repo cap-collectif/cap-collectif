@@ -45,7 +45,7 @@ class ConsultationStepsController extends FOSRestController
             ->setIsEnabled(true)
         ;
 
-        $form = $this->createForm('opinion', $opinion);
+        $form = $this->createForm('opinion', $opinion, ['action' => 'create']);
         $form->submit($request->request->all());
 
         $consultationStepType = $step->getConsultationStepType();

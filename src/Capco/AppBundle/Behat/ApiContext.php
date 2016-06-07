@@ -173,41 +173,7 @@ EOF;
     {
         $json = <<< EOF
         {
-            "body": "Je suis un argument modifié.",
-            "confirm": true
-        }
-EOF;
-
-        $this->iSendARequestWithJson($method, $url, $json);
-    }
-
-    /**
-     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid idea json$/
-     */
-    public function iSendIdeaRequest($method, $url)
-    {
-        $json = <<< EOF
-        {
-            "title": "Ma nouvelle idée",
-            "object": "Tester",
-            "body": "Coucou, je suis une idée !",
-            "url": "http://www.google.fr"
-        }
-EOF;
-
-        $this->iSendARequestWithJson($method, $url, $json);
-    }
-
-    /**
-     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid idea update json$/
-     */
-    public function iSendUpdateIdeaRequest($method, $url)
-    {
-        $json = <<< EOF
-        {
-            "title": "Nouveau titre de l'idée.",
-            "object": "Tester",
-            "body": "Coucou, je suis une idée !"
+            "body": "Je suis un argument modifié."
         }
 EOF;
 

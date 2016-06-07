@@ -1,197 +1,105 @@
 @ideas
 Feature: Ideas
 
-  Background:
-    Given feature "ideas" is enabled
+Background:
+  Given feature "ideas" is enabled
 
 # Themes
 
-  @javascript
-  Scenario: Can see no ideas in empty theme
-    Given feature "themes" is enabled
-    When I go to an empty theme page
-    Then I should see "Il n'y a aucune idée dans ce thème pour le moment. Soyez le premier à en proposer une !"
-    Then there should be 0 ideas
+@javascript
+Scenario: Can see no ideas in empty theme
+  Given feature "themes" is enabled
+  And I visited "themes page"
+  When I follow "Thème vide"
+  Then I should see "Il n'y a aucune idée pour le moment."
+  And I should see 0 ".media--macro" elements
 
-  @javascript
-  Scenario: Can see ideas in not empty theme
-    Given feature "themes" is enabled
-    When I go to a theme page
-    Then I should not see "Il n'y a aucune idée dans ce thème pour le moment. Soyez le premier à en proposer une !"
-    And there should be 3 ideas
+@javascript
+Scenario: Can see ideas in not empty theme
+  Given feature "themes" is enabled
+  And I visited "themes page"
+  When I follow "Immobilier"
+  Then I should not see "Il n'y a aucune idée pour le moment."
+  And I should see 3 ".media--macro" elements
+
+@javascript
+Scenario: Can not create an idea from theme when idea creation is disabled
+  Given feature "themes" is enabled
+  And I visited "themes page"
+  When I follow "Immobilier"
 
 # Homepage
 
-  @javascript
-  Scenario: User wants to see ideas on the homepage
-    When I go to the homepage
-    Then there should be 4 ideas
-    And I should see "Voir toutes les idées"
-
-# List
-
-  @javascript
-  Scenario: Anonymous user wants to see ideas and apply filters
-    Given feature "themes" is enabled
-    And I go to the ideas page
-    Then there should be 8 ideas
-    And I change the ideas theme filter
-    Then there should be 1 ideas
-
-  @javascript
-  Scenario: Anonymous user wants to see ideas and sort them
-    Given I go to the ideas page
-    Then ideas should be ordered by date
-    When I sort ideas by comments
-    Then ideas should be ordered by comments
-
-  @javascript
-  Scenario: Anonymous user wants to see ideas and search by term
-    Given I go to the ideas page
-    Then there should be 8 ideas
-    When I search for ideas with terms "dernière"
-    Then there should be 1 ideas
-    And ideas should be filtered by terms
+Scenario: Can not create an idea from homepage when idea creation is disabled
+  Given I visited "home page"
+  Then I should not see "Proposer une idée"
 
 # Create
 
-  @database @javascript
-  Scenario: Logged in user wants to create an idea
-    Given feature "idea_creation" is enabled
-    And I am logged in as user
-    When I go to the ideas page
-    When I click the idea create button
-    And I fill the idea create form
-    And I submit the new idea
-    Then I should see "Merci ! Votre idée a bien été enregistrée."
-    And I should see my new idea
+@javascript @database
+Scenario: Can create an idea when logged in
+  Given feature "themes" is enabled
+  And feature "idea_creation" is enabled
+  And I am logged in as user
+  And I visited "ideas page"
+  When I follow "Proposer une idée"
+  And I fill in the following:
+    | capco_appbundle_idea_title     | Titre                     |
+    | capco_appbundle_idea_body      | Description de mon idée   |
+    | capco_appbundle_idea_object    | Objectif de mon idée      |
+  And I select "Immobilier" from "capco_appbundle_idea_theme"
+  And I press "Publier"
+  Then I should see "Merci ! Votre idée a bien été enregistrée."
 
-  @database @javascript
-  Scenario: Logged in user wants to create an idea with a theme
-    Given feature "idea_creation" is enabled
-    And feature "themes" is enabled
-    And I am logged in as user
-    When I go to the ideas page
-    And I click the idea create button
-    And I fill the idea create form with a theme
-    And I submit the new idea
-    Then I should see "Merci ! Votre idée a bien été enregistrée."
-    And I should see my new idea
+Scenario: Can not create an idea from ideas page when feature idea_creation is disabled
+  Given I visited "ideas page"
+  Then I should not see "Proposer une idée"
 
-  @javascript
-  Scenario: Can not create an idea from ideas page when feature idea_creation is disabled
-    Given I go to the ideas page
-    Then I should not see the idea create button
-
-  @javascript
-  Scenario: Anonymous user wants to create an idea
-    Given feature "idea_creation" is enabled
-    When I go to the ideas page
-    And I click the idea create button
-    Then I should see "Vous devez être connecté pour réaliser cette action."
-
-  @javascript
-  Scenario: Logged in user wants to create an idea from a theme
-    Given feature "themes" is enabled
-    And feature "idea_creation" is enabled
-    And I am logged in as user
-    When I go to an empty theme page
-    And I click the idea create button
-    Then the theme should be selected in the idea form
-    And I fill the idea create form with a theme
-    And I submit the new idea
-
-  @javascript
-  Scenario: Anonymous user wants to create an idea from a theme
-    Given feature "themes" is enabled
-    And feature "idea_creation" is enabled
-    When I go to an empty theme page
-    And I click the idea create button
-    Then I should see "Vous devez être connecté pour réaliser cette action."
-
-  @javascript
-  Scenario: Can not create an idea from theme when idea creation is disabled
-    Given feature "themes" is enabled
-    When I go to an empty theme page
-    Then I should not see the idea create button
+@javascript
+Scenario: Can not create an idea when not logged in
+  Given feature "idea_creation" is enabled
+  And I visited "ideas page"
+  Then I should not see "Proposer une idée"
 
 # Update
+@javascript @database
+Scenario: Author of an idea loose their votes when updating it
+  Given I am logged in as user
+  And I visited "ideas page"
+  And I follow "Dernière idée"
+  And I should see "1 vote" in the ".idea__votes-nb" element
+  When I follow "Modifier"
+  And I fill in the following:
+    | capco_appbundle_ideaupdatetype_body      | Je modifie mon idée !   |
+  And I check "capco_appbundle_ideaupdatetype_confirm"
+  And I press "Modifier"
+  Then I should see "Merci ! Votre idée a bien été modifiée."
+  And I should not see "1 vote"
 
-  @javascript @database
-  Scenario: Author of an idea loose their votes when updating it
-    Given I am logged in as user
-    When I go to an idea with votes
-    And I click the idea edit button
-    And I edit my idea
-    And I submit my edited idea
-    Then my idea should have been modified
-    And my idea should have lost its votes
+@javascript
+Scenario: Non author of an idea wants to update it
+  Given I am logged in as admin
+  And I visited "ideas page"
+  And I follow "Dernière idée"
+  Then I should not see "Modifier" in the ".pull-right" element
 
-  @javascript
-  Scenario: Non author of an idea wants to update it
-    Given I am logged in as admin
-    When I go to an idea with votes
-    Then I should not see the idea edit button
-
-  @javascript
-  Scenario: Author of an idea try to update without checking the confirm checkbox
-    Given I am logged in as user
-    When I go to an idea with votes
-    And I click the idea edit button
-    And I edit my idea without confirming my votes lost
-    And I submit my edited idea
-    Then I should see "Merci de confirmer la perte de vos votes pour continuer."
-
-# Delete
-
-  @javascript @database
-  Scenario: Author of an idea wants to delete it
-    Given I am logged in as user
-    And I go to the ideas page
-    And I go to an idea with votes
-    When I delete my idea
-    Then I should not see my idea anymore
-
-  @javascript
-  Scenario: Non author of an idea wants to delete it
-    Given I am logged in as admin
-    And I go to an idea with votes
-    Then I should not see the idea delete button
-
-# Reporting
-
-  @javascript @database
-  Scenario: Logged in user wants to report an idea
-    Given feature "reporting" is enabled
-    And I am logged in as admin
-    And I go to an idea with votes
-    When I click the idea report button
-    And I fill the reporting form from the modal
-    And I submit the reporting form from the modal
-    Then I should see "Merci ! L'idée a bien été signalée."
-
-  @javascript
-  Scenario: Logged in user wants to report his own idea
-    Given feature "reporting" is enabled
-    And I am logged in as user
-    When I go to an idea with votes
-    Then I should not see the idea report button
-
-# Sharing
-
-  @javascript @database
-  Scenario: Anonymous user wants to share an idea
-    Given I go to an idea with votes
-    When I click the share idea button
-    Then I should see the share dropdown
-    And I click the share link button
-    Then I should see the share link modal
+@javascript
+Scenario: Author of an idea try to update without checking the confirm checkbox
+  Given I am logged in as user
+  And I visited "ideas page"
+  And I follow "Dernière idée"
+  When I follow "Modifier"
+  And I fill in the following:
+    | capco_appbundle_ideaupdatetype_body      | Je modifie mon idée !   |
+  And I press "Modifier"
+  Then I should see "Merci de confirmer la perte de vos votes pour continuer."
 
 # Comments
 
   @javascript
   Scenario: Can not comment an uncommentable idea
-    When I go to an idea not commentable
+    Given I visited "idea page" with:
+     | slug | ideanotcommentable |
     Then I should not see "Commenter"
 
   ## Add a comment
@@ -199,7 +107,7 @@ Feature: Ideas
   @database @javascript
   Scenario: Anonymous wants to comment an idea
     Given I visited "idea page" with:
-      | slug | ideacommentable |
+     | slug | ideacommentable |
     And I wait 1 seconds
     And I fill in the following:
       | body        | J'ai un truc à dire de la part de Naruto |
@@ -216,7 +124,7 @@ Feature: Ideas
   Scenario: Logged in user wants to comment an idea
     Given I am logged in as user
     Given I visited "idea page" with:
-      | slug | ideacommentable |
+     | slug | ideacommentable |
     And I wait 1 seconds
     And I fill in the following:
       | body        | J'ai un truc à dire avec mon compte |
@@ -229,7 +137,7 @@ Feature: Ideas
   @database @javascript
   Scenario: Anonymous wants to comment an idea without email
     Given I visited "idea page" with:
-      | slug | ideacommentable |
+     | slug | ideacommentable |
     And I wait 1 seconds
     And I fill in the following:
       | body        | J'ai un truc à dire mais pas le droit |
@@ -261,87 +169,54 @@ Feature: Ideas
 
 # Votes
 
-  @javascript @database
-  Scenario: Logged in user wants to vote and unvote for an idea with a comment
-    Given I am logged in as user
-    And I go to an idea with votes
-    And the idea has 2 votes
-    When I add an idea vote comment
-    And I submit the idea vote form
-    And I should see "Merci ! Votre vote a bien été pris en compte."
-    Then the idea should have 3 votes
-    And I should see my comment in the idea comments list
-    And I should see my vote in the idea votes list
-    And I submit the idea vote form
-    And I should see "Votre vote a bien été supprimé."
-    Then the idea should have 2 votes
-    And I should not see my vote in the idea votes list
+ @javascript
+ Scenario: Anonymous user wants to vote anonymously
+  Given I visited "idea page" with:
+    | slug | ideacommentable |
+  When I fill in the following:
+    | capco_app_idea_vote_username | Dupont           |
+    | capco_app_idea_vote_email    | dupont@gmail.com |
+  And I check "capco_app_idea_vote_private"
+  And I press "capco_app_idea_vote_submit"
+  Then I should see "Merci ! Votre vote a bien été pris en compte."
+  And I should see "Anonyme" in the "#ideaVotesModal" element
 
   @javascript @database
-  Scenario: Logged in user wants to vote for an idea anonymously
-    Given I am logged in as user
-    And I go to an idea with votes
-    And the idea has 2 votes
-    When I check the idea vote private checkbox
-    And I submit the idea vote form
-    Then the idea should have 3 votes
-    And I should see my anonymous vote in the idea votes list
-    And I should see "Merci ! Votre vote a bien été pris en compte."
+  Scenario: Anonymous user wants to vote
+   Given I visited "idea page" with:
+     | slug | ideacommentable |
+   When I fill in the following:
+     | capco_app_idea_vote_username | Dupont           |
+     | capco_app_idea_vote_email    | dupont@gmail.com |
+   And I press "capco_app_idea_vote_submit"
+   Then I should see "Merci ! Votre vote a bien été pris en compte."
+   And I should see "Dupont" in the "#ideaVotesModal" element
+
+  # @parallel-scenario
+  # Scenario: Anonymous user wants to vote with his account
+  #   Given I visited "idea page" with:
+  #     | slug | ideacommentable |
+  #   When I follow "Soutenir avec mon compte"
+  #   Then I should see "Se connecter"
 
   @javascript @database
-  Scenario: Anonymous user wants to vote for an idea with a comment
-    Given I go to an idea with votes
-    And the idea has 2 votes
-    And the idea has 0 comments
-    When I fill the idea vote form
-    And I add an idea vote comment
-    And I submit the idea vote form
-    Then the idea should have 3 votes
-    And I should see my comment in the idea comments list
-    And I should see my not logged in vote in the idea votes list
-    And I should see "Merci ! Votre vote a bien été pris en compte."
-
-  @javascript @database
-  Scenario: Anonymous user wants to vote for an idea anonymously
-    Given I go to an idea with votes
-    And the idea has 2 votes
-    When I fill the idea vote form
-    And I check the idea vote private checkbox
-    And I submit the idea vote form
-    Then the idea should have 3 votes
-    And I should see my anonymous vote in the idea votes list
-    And I should see "Merci ! Votre vote a bien été pris en compte."
-
-  @javascript @security
-  Scenario: Anonymous user wants to vote twice with the same email
-    Given I go to an idea with votes
-    And the idea has 2 votes
-    When I fill the idea vote form with already used email
-    And I submit the idea vote form
-    Then I should see "Vous avez déjà voté pour cette idée."
-    And the idea should have 2 votes
-
-  @javascript @security
-  Scenario: Anonymous user wants to vote with an email already associated to an account
-    Given I go to an idea with votes
-    And the idea has 2 votes
-    When I fill the idea vote form with a registered email
-    And I submit the idea vote form
-    Then I should see "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette idée."
-    And the idea should have 2 votes
+  Scenario: Logged in user wants to vote
+   Given I am logged in as user
+   And I visited "idea page" with:
+     | slug | ideacommentable |
+   When I press "capco_app_idea_vote_submit"
+   Then I should see "Merci ! Votre vote a bien été pris en compte."
+   And I should see "user" in the "#ideaVotesModal" element
 
 # Trash
-
-  @javascript
+  @parallel-scenario
   Scenario: Can not access trash if feature is disabled
-    Given I am logged in as user
-    And I go to the ideas page
+    Given I visited "ideas page"
     Then I should not see "Corbeille des idées"
 
-  @javascript
   Scenario: Can not access trash if not logged in
     Given feature "idea_trash" is enabled
-    And I go to the ideas page
+    And I visited "ideas page"
     When I follow "Voir la corbeille"
     # Then I should see "Se connecter"
 
@@ -349,6 +224,6 @@ Feature: Ideas
   Scenario: Ideas trash display correct number of elements
     Given feature "idea_trash" is enabled
     And I am logged in as user
-    And I go to the ideas page
-    And I click the ideas trash link
-    Then there should be 8 ideas
+    And I visited "ideas page"
+    When I follow "Voir la corbeille"
+    Then I should see 11 ".media--macro" elements

@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 
 const ReportButton = React.createClass({
   propTypes: {
-    id: PropTypes.string,
     reported: PropTypes.bool.isRequired,
     className: PropTypes.string,
     onClick: PropTypes.func.isRequired,
@@ -19,7 +18,6 @@ const ReportButton = React.createClass({
 
   getDefaultProps() {
     return {
-      id: 'report-button',
       className: '',
       bsSize: 'md',
       user: null,
@@ -27,7 +25,7 @@ const ReportButton = React.createClass({
   },
 
   render() {
-    const { reported, className, onClick, bsSize, user, features, id } = this.props;
+    const { reported, className, onClick, bsSize, user, features } = this.props;
     const classes = {
       'btn--outline': true,
       'btn-dark-gray': true,
@@ -36,7 +34,6 @@ const ReportButton = React.createClass({
     return (
       <LoginOverlay user={user} features={features}>
         <Button
-          id={id}
           bsSize={bsSize}
           className={classNames(classes)}
           onClick={reported ? null : onClick}

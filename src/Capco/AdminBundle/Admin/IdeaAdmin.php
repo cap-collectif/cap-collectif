@@ -150,7 +150,7 @@ class IdeaAdmin extends Admin
                 'label' => 'admin.fields.idea.body',
                 'config_name' => 'admin_editor',
             ])
-            ->add('media', 'sonata_type_model_list', [
+            ->add('Media', 'sonata_type_model_list', [
                 'label' => 'admin.fields.idea.media',
                 'required' => false,
             ], [
@@ -202,7 +202,7 @@ class IdeaAdmin extends Admin
             ->add('Author', null, [
                 'label' => 'admin.fields.idea.author',
             ])
-            ->add('media', 'sonata_media_type', [
+            ->add('Media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Idea:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'admin.fields.idea.media',

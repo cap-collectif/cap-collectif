@@ -8,7 +8,6 @@ import CommentActions from '../../actions/CommentActions';
 import CommentStore from '../../stores/CommentStore';
 import Loader from '../Utils/Loader';
 import FlashMessages from '../Utils/FlashMessages';
-import LoginStore from '../../stores/LoginStore';
 
 const MessagePagination = 10;
 
@@ -33,13 +32,11 @@ const CommentSection = React.createClass({
         'errors': [],
         'success': [],
       },
-      anonymous: true,
     };
   },
 
   componentWillMount() {
     CommentStore.addChangeListener(this.onChange);
-    LoginStore.addChangeListener(this.onLoginChange);
   },
 
   componentDidMount() {
@@ -54,7 +51,6 @@ const CommentSection = React.createClass({
 
   componentWillUnmount() {
     CommentStore.removeChangeListener(this.onChange);
-    LoginStore.removeChangeListener(this.onLoginChange);
   },
 
   onChange() {
@@ -78,12 +74,6 @@ const CommentSection = React.createClass({
       isLoading: true,
     }, () => {
       this.loadCommentsFromServer();
-    });
-  },
-
-  onLoginChange() {
-    this.setState({
-      anonymous: !LoginStore.isLoggedIn(),
     });
   },
 
@@ -165,11 +155,10 @@ const CommentSection = React.createClass({
           { this.renderFilter() }
         </Row>
         <Loader show={this.state.isLoading} />
-        <CommentForm comment={this.comment} anonymous={this.state.anonymous} focus={false} />
+        <CommentForm comment={this.comment} focus={false} />
         <CommentList {...this.props}
           comments={this.state.comments}
           root
-          onVote={this.loadCommentsFromServer}
         />
         { this.renderLoadMore() }
       </div>

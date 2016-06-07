@@ -9,8 +9,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Form\CommentType as CommentForm;
 use Capco\AppBundle\CapcoAppBundleEvents;
+use Capco\AppBundle\Event\AbstractVoteChangedEvent;
 
 class CommentController extends Controller
 {
@@ -116,6 +118,76 @@ class CommentController extends Controller
         return [
             'comments' => $comments,
         ];
+    }
+
+    /**
+     * @Route("/secure/comments/{commentId}/vote", name="app_comment_vote")
+     *
+     * @param $commentId
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @throws AccessDeniedException
+     */
+    public function voteOnCommentAction($commentId, Request $request)
+    {
+        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+        }
+
+        $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:Comment')->getOneById($commentId);
+
+        if ($comment == null) {
+            throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', [], 'CapcoAppBundle'));
+        }
+
+        if (!$comment->canVote()) {
+            throw new AccessDeniedException($this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
+        }
+
+        $user = $this->getUser();
+
+        if ($request->getMethod() == 'POST') {
+            $em = $this->getDoctrine()->getManager();
+
+            $commentVote = new CommentVote();
+            $commentVote->setUser($user);
+
+            $userVote = $em->getRepository('CapcoAppBundle:CommentVote')->findOneBy([
+                'user' => $user,
+                'comment' => $comment,
+            ]);
+
+            if ($userVote != null) {
+                $commentVote = $userVote;
+            }
+
+            if ($userVote == null) {
+                $commentVote->setComment($comment);
+                $em->persist($commentVote);
+                $this->get('event_dispatcher')->dispatch(
+                    CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
+                    new AbstractVoteChangedEvent($commentVote, 'add')
+                );
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.vote.add_success'));
+            } else {
+                $em->remove($commentVote);
+                $this->get('event_dispatcher')->dispatch(
+                    CapcoAppBundleEvents::ABSTRACT_VOTE_CHANGED,
+                    new AbstractVoteChangedEvent($commentVote, 'remove')
+                );
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('comment.vote.remove_success'));
+            }
+        }
+
+        $url = $this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment);
+
+        return $this->redirect($url);
     }
 
     /**

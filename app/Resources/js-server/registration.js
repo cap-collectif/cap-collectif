@@ -19,10 +19,6 @@ import ProposalVoteBasketWidgetApp from '../js/startup/ProposalVoteBasketWidgetA
 import AlertBoxApp from '../js/startup/AlertBoxApp';
 import StepInfosApp from '../js/startup/StepInfosApp';
 import ProposalsUserVotesPageApp from '../js/startup/ProposalsUserVotesPageApp';
-import IdeasIndexPageApp from './IdeasIndexPageAppServer';
-import IdeaPageApp from './IdeaPageAppServer';
-import IdeasListApp from './IdeasListAppServer';
-import IdeaCreateApp from './IdeaCreateAppServer';
 import appStore from '../js/stores/AppStore';
 
 const register = ReactOnRails.register;
@@ -54,7 +50,3 @@ register({ AlertBoxApp });
 register({ StepInfosApp });
 register({ ProposalsUserVotesPageApp });
 register({ PhoneProfileApp });
-register({ IdeasIndexPageApp });
-register({ IdeasListApp });
-register({ IdeaPageApp });
-register({ IdeaCreateApp });

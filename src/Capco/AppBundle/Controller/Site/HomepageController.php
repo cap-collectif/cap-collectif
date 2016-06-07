@@ -96,15 +96,10 @@ class HomepageController extends Controller
      */
     public function popularIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
-        $serializer = $this->get('jms_serializer');
-        $ideasRaw = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getPopular($max, $offset);
-        $props = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'Themes', 'UsersInfos']));
+        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getPopular($max, $offset);
 
         return [
-            'props' => $props,
-            'nbIdeas' => count($ideasRaw),
+            'ideas' => $ideas,
             'section' => $section,
             'alt' => $alt,
         ];
@@ -116,15 +111,10 @@ class HomepageController extends Controller
      */
     public function lastIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
-        $serializer = $this->get('jms_serializer');
-        $ideasRaw = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
-        $props = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'Themes', 'UsersInfos']));
+        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
 
         return [
-            'props' => $props,
-            'nbIdeas' => count($ideasRaw),
+            'ideas' => $ideas,
             'section' => $section,
             'alt' => $alt,
         ];

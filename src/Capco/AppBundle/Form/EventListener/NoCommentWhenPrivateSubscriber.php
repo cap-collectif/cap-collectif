@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Form\EventListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormError;
 
 class NoCommentWhenPrivateSubscriber implements EventSubscriberInterface
 {
@@ -21,7 +20,7 @@ class NoCommentWhenPrivateSubscriber implements EventSubscriberInterface
             $comment = $form->get('comment')->getData();
             $private = $form->get('private')->getData();
             if (!empty($comment) && $private == true) {
-                $form['private']->addError(new FormError('You can not add a comment when voting anonymously.'));
+                $form['anonymous']->addError(new FormError('proposal.vote.no_comment_when_private_error'));
             }
         }
     }

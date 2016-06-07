@@ -43,14 +43,7 @@ class ProfileController extends BaseController
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
-        $ideasRaw = $doctrine
-            ->getRepository('CapcoAppBundle:Idea')
-            ->getByUser($user)
-        ;
-        $ideas = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'Themes']));
-        $ideasCount = count($ideasRaw);
+        $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
 
         $proposalsRaw = $doctrine
             ->getRepository('CapcoAppBundle:Proposal')
@@ -80,8 +73,7 @@ class ProfileController extends BaseController
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'versions' => $versions,
             'arguments' => $arguments,
-            'ideasProps' => $ideas,
-            'ideasCount' => $ideasCount,
+            'ideas' => $ideas,
             'proposals' => $proposals,
             'proposalsCount' => $proposalsCount,
             'replies' => $replies,
@@ -181,16 +173,7 @@ class ProfileController extends BaseController
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
-
-        $ideasRaw = $doctrine
-            ->getRepository('CapcoAppBundle:Idea')
-            ->getByUser($user)
-        ;
-        $ideas = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'Themes']));
-        $ideasCount = count($ideasRaw);
-
+        $ideas = $doctrine->getRepository('CapcoAppBundle:Idea')->getByUser($user);
         $proposalsRaw = $doctrine
             ->getRepository('CapcoAppBundle:Proposal')
             ->getByUser($user)
@@ -217,8 +200,7 @@ class ProfileController extends BaseController
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'versions' => $versions,
             'arguments' => $arguments,
-            'ideasProps' => $ideas,
-            'ideasCount' => $ideasCount,
+            'ideas' => $ideas,
             'proposals' => $proposals,
             'proposalsCount' => $proposalsCount,
             'replies' => $replies,
@@ -362,21 +344,11 @@ class ProfileController extends BaseController
      */
     public function showIdeasAction(User $user)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $serializer = $this->get('jms_serializer');
-        $ideasRaw = $em
-            ->getRepository('CapcoAppBundle:Idea')
-            ->getByUser($user)
-        ;
-        $ideas = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'Themes']));
-        $ideasCount = count($ideasRaw);
+        $ideas = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getByUser($user);
 
         return [
             'user' => $user,
-            'ideasProps' => $ideas,
-            'ideasCount' => $ideasCount,
+            'ideas' => $ideas,
         ];
     }
 
