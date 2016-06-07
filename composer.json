@@ -31,7 +31,7 @@
         "symfony/symfony": "~2.8.4",
         "doctrine/orm": "^2.4.8",
         "doctrine/dbal": "^2.4.4",
-        "doctrine/doctrine-bundle": "~1.6",
+        "doctrine/doctrine-bundle": "1.6.3",
         "twig/extensions": "~1.0",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.11",
@@ -82,7 +82,8 @@
         "mattketmo/email-checker": "^1.5",
         "twilio/sdk": "^4.10",
         "misd/phone-number-bundle": "^1.1",
-        "liuggio/excelbundle": "~2.0"
+        "liuggio/excelbundle": "~2.0",
+        "ocramius/proxy-manager": "2.0.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -94,7 +95,6 @@
         "sensiolabs/behat-page-object-extension": "dev-master#0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
         "bossa/phpspec2-expect": "^1.0",
         "phpspec/phpspec": "~2.5",
-        "ocramius/proxy-manager": "^2.0",
         "guzzlehttp/guzzle": "~5.0",
         "coduo/php-matcher": "~2.0",
         "docker-php/docker-php": "^1.22",

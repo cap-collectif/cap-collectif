@@ -1,11 +1,11 @@
-
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9fe0e2add25d0f5c11e020258751faa1",
+    "hash": "630af78ae9f0a3c00bb64001866dbac3",
+    "content-hash": "e997223fe532ccb7d864e4c0295da99d",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -629,16 +629,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "1.6.2",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "e9c2ccf573b59b7cea566390f34254fed3c20ed9"
+                "reference": "fd51907c6c76acaa8a5234822a4f901c1500afc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/e9c2ccf573b59b7cea566390f34254fed3c20ed9",
-                "reference": "e9c2ccf573b59b7cea566390f34254fed3c20ed9",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/fd51907c6c76acaa8a5234822a4f901c1500afc1",
+                "reference": "fd51907c6c76acaa8a5234822a4f901c1500afc1",
                 "shasum": ""
             },
             "require": {
@@ -655,13 +655,14 @@
                 "phpunit/phpunit": "~4",
                 "satooshi/php-coveralls": "~0.6.1",
                 "symfony/phpunit-bridge": "~2.7|~3.0",
+                "symfony/property-info": "~2.8|~3.0",
                 "symfony/validator": "~2.2|~3.0",
                 "symfony/yaml": "~2.2|~3.0",
                 "twig/twig": "~1.10"
             },
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle.",
-                "symfony/web-profiler-bundle": "to use the data collector"
+                "symfony/web-profiler-bundle": "To use the data collector."
             },
             "type": "symfony-bundle",
             "extra": {
@@ -704,7 +705,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2016-01-10 17:21:44"
+            "time": "2016-04-21 19:55:56"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -2170,11 +2171,11 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "3b7f7bffd546d40ee40054ac2d1264492cbe6286"
+                "reference": "4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/3b7f7bffd546d40ee40054ac2d1264492cbe6286",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84",
                 "reference": "4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84",
                 "shasum": ""
             },
@@ -3351,64 +3352,6 @@
             "time": "2016-01-25 17:12:39"
         },
         {
-            "name": "mewesk/twig-excel-bundle",
-            "version": "2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/MewesK/TwigExcelBundle.git",
-                "reference": "8dc65247dc7e33846581e2006b69002efb178eb3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/MewesK/TwigExcelBundle/zipball/8dc65247dc7e33846581e2006b69002efb178eb3",
-                "reference": "8dc65247dc7e33846581e2006b69002efb178eb3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5",
-                "phpoffice/phpexcel": "~1.8.1",
-                "symfony/framework-bundle": "~2.7|~3.0"
-            },
-            "require-dev": {
-                "mpdf/mpdf": "~6.0",
-                "sensio/framework-extra-bundle": "~3.0",
-                "symfony/symfony": "~2.7|~3.0"
-            },
-            "suggest": {
-                "mpdf/mpdf": "~6.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "MewesK\\TwigExcelBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mewes Kochheim",
-                    "email": "mewes@kochheim.de"
-                }
-            ],
-            "description": "This Symfony2 bundle provides a PhpExcel integration for Twig",
-            "homepage": "https://github.com/MewesK/TwigExcelBundle",
-            "keywords": [
-                "PHPExcel",
-                "excel",
-                "symfony",
-                "twig"
-            ],
-            "time": "2016-02-27 16:09:27"
-        },
-        {
             "name": "michelf/php-markdown",
             "version": "1.6.0",
             "source": {
@@ -3889,21 +3832,21 @@
         },
         {
             "name": "ocramius/proxy-manager",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/ProxyManager.git",
-                "reference": "6c89b7bd6039d8047b1473e2074cb56baa4bc15d"
+                "reference": "001e730968f17cb36816ad68914994341d16e029"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/ProxyManager/zipball/6c89b7bd6039d8047b1473e2074cb56baa4bc15d",
-                "reference": "6c89b7bd6039d8047b1473e2074cb56baa4bc15d",
+                "url": "https://api.github.com/repos/Ocramius/ProxyManager/zipball/001e730968f17cb36816ad68914994341d16e029",
+                "reference": "001e730968f17cb36816ad68914994341d16e029",
                 "shasum": ""
             },
             "require": {
                 "ocramius/package-versions": "^1.0",
-                "php": "~7.0",
+                "php": "7.0.0 - 7.0.5 || ^7.0.7",
                 "zendframework/zend-code": "~3.0"
             },
             "require-dev": {
@@ -3949,7 +3892,7 @@
                 "proxy pattern",
                 "service proxies"
             ],
-            "time": "2016-02-08 13:50:05"
+            "time": "2016-05-27 01:59:56"
         },
         {
             "name": "org_heigl/hyphenator",
@@ -5599,7 +5542,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/a9671d98f51b7b983808879f9e787ad277dfc40a",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
                 "reference": "5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
                 "shasum": ""
             },
@@ -8592,6 +8535,64 @@
                 "windows"
             ],
             "time": "2016-03-22 20:13:26"
+        },
+        {
+            "name": "mewesk/twig-excel-bundle",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MewesK/TwigExcelBundle.git",
+                "reference": "8dc65247dc7e33846581e2006b69002efb178eb3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MewesK/TwigExcelBundle/zipball/8dc65247dc7e33846581e2006b69002efb178eb3",
+                "reference": "8dc65247dc7e33846581e2006b69002efb178eb3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "phpoffice/phpexcel": "~1.8.1",
+                "symfony/framework-bundle": "~2.7|~3.0"
+            },
+            "require-dev": {
+                "mpdf/mpdf": "~6.0",
+                "sensio/framework-extra-bundle": "~3.0",
+                "symfony/symfony": "~2.7|~3.0"
+            },
+            "suggest": {
+                "mpdf/mpdf": "~6.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MewesK\\TwigExcelBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mewes Kochheim",
+                    "email": "mewes@kochheim.de"
+                }
+            ],
+            "description": "This Symfony2 bundle provides a PhpExcel integration for Twig",
+            "homepage": "https://github.com/MewesK/TwigExcelBundle",
+            "keywords": [
+                "PHPExcel",
+                "excel",
+                "symfony",
+                "twig"
+            ],
+            "time": "2016-02-27 16:09:27"
         },
         {
             "name": "myclabs/deep-copy",
