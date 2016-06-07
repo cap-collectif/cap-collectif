@@ -1,33 +1,21 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import CommentActions from '../../actions/CommentActions';
 import { connect } from 'react-redux';
 
 const CommentVoteButton = React.createClass({
   propTypes: {
-    comment: PropTypes.object,
+    comment: React.PropTypes.object,
     user: PropTypes.object,
-    onVote: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
-  deleteVote() {
-    CommentActions.deleteVote(this.props.comment.id)
-      .then(() => {
-        this.props.onVote();
-      })
-    ;
+  getDefaultProps() {
+    return {
+      user: null,
+    };
   },
 
-  vote() {
-    CommentActions.vote(this.props.comment.id)
-      .then(() => {
-        this.props.onVote();
-      })
-    ;
-  },
-
-  userIsAuthor() {
+  isTheUserTheAuthor() {
     const { comment, user } = this.props;
     if (comment.author === null || !user) {
       return false;
@@ -36,7 +24,7 @@ const CommentVoteButton = React.createClass({
   },
 
   renderFormOrDisabled() {
-    if (this.userIsAuthor()) {
+    if (this.isTheUserTheAuthor()) {
       return (
         <button disabled="disabled" className="btn btn-dark-gray btn-xs">
           <i className="cap-hand-like-2"></i>
@@ -46,20 +34,24 @@ const CommentVoteButton = React.createClass({
       );
     }
 
-    return this.renderVoteButton();
+    return (
+      <form method="POST" style={{ display: 'inline-block' }} action={this.props.comment._links.vote}>
+        { this.renderVoteButton() }
+      </form>
+    );
   },
 
   renderVoteButton() {
     if (this.props.comment.has_user_voted) {
       return (
-        <button className="btn btn-danger btn-xs" onClick={this.deleteVote}>
+        <button className="btn btn-danger btn-xs">
           { this.getIntlMessage('comment.vote.remove') }
         </button>
       );
     }
 
     return (
-      <button className="btn btn-success btn--outline btn-xs" onClick={this.vote}>
+      <button className="btn btn-success btn--outline btn-xs">
         <i className="cap-hand-like-2"></i>
         { ' ' }
         { this.getIntlMessage('comment.vote.submit') }

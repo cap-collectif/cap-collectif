@@ -129,18 +129,7 @@ services:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.question_choice.serialization_listener:
-    class: Capco\AppBundle\EventListener\QuestionChoiceSerializationListener
-    arguments: [@sonata.media.twig.extension]
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
-
-  capco.idea.serialization_listener:
-     class: Capco\AppBundle\EventListener\IdeaSerializationListener
-     arguments: [@router, @security.token_storage, @sonata.media.twig.extension, @capco.idea.helper]
-     tags:
-       - { name: "jms_serializer.event_subscriber" }
-
-  capco.idea_vote.serialization_listener:
-      class: Capco\AppBundle\EventListener\IdeaVoteSerializationListener
+      class: Capco\AppBundle\EventListener\QuestionChoiceSerializationListener
+      arguments: [@sonata.media.twig.extension]
       tags:
         - { name: "jms_serializer.event_subscriber" }

@@ -9,8 +9,8 @@ export default class PaginationItem extends React.Component {
     });
     return (
       <li className={classes}>
-        <span className="page-item__wrapper" aria-label={this.props.ariaLabel || this.props.label || this.props.page} onClick={this.props.onSelect}>
-          <span className="page-item__label" aria-hidden="true">
+        <span aria-label={this.props.ariaLabel || this.props.label || this.props.page} onClick={this.props.onSelect}>
+          <span aria-hidden="true">
             {this.props.label || this.props.page}
           </span>
         </span>
@@ -34,5 +34,3 @@ PaginationItem.defaultProps = {
   label: null,
   ariaLabel: null,
 };
-
-PaginationItem.displayName = 'PaginationItem';

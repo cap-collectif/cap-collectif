@@ -33,6 +33,7 @@ class CommentSerializationListener extends AbstractSerializationListener
         $event->getVisitor()->addData(
             '_links',
             [
+                'vote' => $this->router->generate('app_comment_vote', ['commentId' => $comment->getId()], true),
                 'edit' => $this->router->generate('app_comment_edit', ['commentId' => $comment->getId()], true),
                 'report' => $this->router->generate('app_report_comment', ['commentId' => $comment->getId()], true),
             ]

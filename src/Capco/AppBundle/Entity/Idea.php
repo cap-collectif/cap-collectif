@@ -5,10 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
-use Capco\MediaBundle\Entity\Media;
-use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -29,7 +26,6 @@ class Idea implements CommentableInterface, VotableInterface, HasAuthorInterface
     use CommentableTrait;
     use ValidableTrait;
     use VotableOkTrait;
-    use TimestampableTrait;
 
     public static $sortCriterias = [
         'last' => 'idea.sort.last',
@@ -96,6 +92,14 @@ class Idea implements CommentableInterface, VotableInterface, HasAuthorInterface
     /**
      * @var \DateTime
      *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"title", "body", "Theme", "Author", "Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
@@ -144,7 +148,7 @@ class Idea implements CommentableInterface, VotableInterface, HasAuthorInterface
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
      */
-    private $media;
+    private $Media;
 
     /**
      * @var string
@@ -295,6 +299,26 @@ class Idea implements CommentableInterface, VotableInterface, HasAuthorInterface
     }
 
     /**
+     * Get createdAt.
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Get updatedAt.
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
      * @return mixed
      */
     public function getTheme()
@@ -324,11 +348,9 @@ class Idea implements CommentableInterface, VotableInterface, HasAuthorInterface
     /**
      * @param mixed $Author
      */
-    public function setAuthor(User $Author)
+    public function setAuthor($Author)
     {
         $this->Author = $Author;
-
-        return $this;
     }
 
     /**
@@ -336,15 +358,15 @@ class Idea implements CommentableInterface, VotableInterface, HasAuthorInterface
      */
     public function getMedia()
     {
-        return $this->media;
+        return $this->Media;
     }
 
     /**
      * @param mixed $media
      */
-    public function setMedia(Media $media)
+    public function setMedia($media)
     {
-        $this->media = $media;
+        $this->Media = $media;
     }
 
     /**

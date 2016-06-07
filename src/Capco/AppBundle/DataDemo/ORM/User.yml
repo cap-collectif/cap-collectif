@@ -8,4 +8,3 @@ Capco\UserBundle\Entity\User:
         roles:
          - 'ROLE_SUPER_ADMIN'
         confirmationToken: ~
-        phone: +33000000000

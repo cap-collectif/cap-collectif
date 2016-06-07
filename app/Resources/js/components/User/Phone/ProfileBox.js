@@ -136,7 +136,6 @@ export const ProfileBox = React.createClass({
               : <PhoneForm
                   ref={c => this.form = c}
                   isSubmitting={isSubmitting}
-                  onSubmit={this.handleSubmit}
                   onSubmitFailure={this.stopSubmit}
                   onSubmitSuccess={this.onSubmitSuccess}
                   initialValue={user.isPhoneConfirmed ? user.phone.slice(3, user.phone.length) : null}

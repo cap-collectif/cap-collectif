@@ -30,7 +30,7 @@ monolog:
     handlers:
         file:
             type: rotating_file
-            path: "%kernel.logs_dir%/dev.log"
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
         main:
             type: stream

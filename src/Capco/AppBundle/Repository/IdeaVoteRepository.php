@@ -50,20 +50,4 @@ class IdeaVoteRepository extends EntityRepository
             ->getQuery()
             ->getArrayResult();
     }
-
-    public function getVotesForIdea(Idea $idea, $limit = null, $offset = 0)
-    {
-        $qb = $this->createQueryBuilder('iv')
-            ->where('iv.idea = :idea')
-            ->setParameter('idea', $idea)
-            ->addOrderBy('iv.createdAt', 'DESC')
-        ;
-
-        if ($limit) {
-            $qb->setMaxResults($limit);
-            $qb->setFirstResult($offset);
-        }
-
-        return $qb->getQuery()->getResult();
-    }
 }

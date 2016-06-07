@@ -13,19 +13,16 @@ export default class Pagination extends React.Component {
   }
 
   render() {
-    const { current, displayedPages, nbPages } = this.props;
-    const offset = Math.floor(displayedPages / 2);
-    let firstNumber = current - offset;
-    const lastNumber = firstNumber + displayedPages - 1;
-    firstNumber += nbPages - lastNumber < 0 ? nbPages - lastNumber : 0;
+    const offset = Math.floor(this.props.displayedPages / 2);
+    let firstNumber = this.props.current - offset;
+    const lastNumber = firstNumber + this.props.displayedPages - 1;
+    firstNumber += this.props.nbPages - lastNumber < 0 ? this.props.nbPages - lastNumber : 0;
     firstNumber = firstNumber > 0 ? firstNumber : 1;
-    const pages = Array.apply(0, new Array(displayedPages)).filter((x, y) => {
-      return y + firstNumber <= nbPages;
+    const displayedPages = Array.apply(0, Array(this.props.displayedPages)).filter((x, y) => {
+      return y + firstNumber <= this.props.nbPages;
     }).map((x, y) => {
       return y + firstNumber;
     });
-    const prev = current > 1 ? current - 1 : 1;
-    const next = current < nbPages ? current + 1 : nbPages;
 
     return (
       <div className="pagination--custom  text-center">
@@ -33,12 +30,11 @@ export default class Pagination extends React.Component {
           {
             this.props.showFirst
             ? <PaginationItem
-                id="first-page-item"
                 page={1}
                 onSelect={this.onSelect.bind(null, 1)}
                 label="&laquo;"
                 ariaLabel="Page 1"
-                disabled={current < 2}
+                disabled={this.props.current < 2}
                 active={false}
             />
             : null
@@ -46,27 +42,25 @@ export default class Pagination extends React.Component {
           {
             this.props.showPrev
               ? <PaginationItem
-                  id="prev-page-item"
-                  page={prev}
-                  onSelect={this.onSelect.bind(null, prev)}
+                  page={this.props.current - 1}
+                  onSelect={this.onSelect.bind(null, this.props.current - 1)}
                   label="&lsaquo;"
-                  ariaLabel={'Page ' + prev}
-                  disabled={current < 2}
+                  ariaLabel={'Page ' + this.props.current - 1}
+                  disabled={this.props.current < 2}
                   active={false}
               />
               : null
           }
           {
-            pages.map((page, index) => {
+            displayedPages.map((page, index) => {
               return (
                 <PaginationItem
-                  id={'page-item-' + page}
                   page={page}
                   key={index}
                   onSelect={this.onSelect.bind(null, page)}
                   ariaLabel={'Page ' + page}
                   disabled={false}
-                  active={current === page}
+                  active={this.props.current === page}
                 />
               );
             })
@@ -74,12 +68,11 @@ export default class Pagination extends React.Component {
           {
             this.props.showNext
               ? <PaginationItem
-                  id="next-page-item"
-                  page={next}
-                  onSelect={this.onSelect.bind(null, next)}
+                  page={this.props.current + 1}
+                  onSelect={this.onSelect.bind(null, this.props.current + 1)}
                   label="&rsaquo;"
-                  ariaLabel={'Page ' + next}
-                  disabled={current > (nbPages - 1)}
+                  ariaLabel={'Page ' + this.props.current + 1}
+                  disabled={this.props.current > (this.props.nbPages - 1)}
                   active={false}
               />
               : null
@@ -87,12 +80,11 @@ export default class Pagination extends React.Component {
           {
             this.props.showLast
               ? <PaginationItem
-                  id="last-page-item"
-                  page={nbPages}
-                  onSelect={this.onSelect.bind(null, nbPages)}
+                  page={this.props.nbPages}
+                  onSelect={this.onSelect.bind(null, this.props.nbPages)}
                   label="&raquo;"
-                  ariaLabel={'Page ' + nbPages}
-                  disabled={current > (nbPages - 1)}
+                  ariaLabel={'Page ' + this.props.nbPages}
+                  disabled={this.props.current > (this.props.nbPages - 1)}
                   active={false}
               />
               : null
@@ -122,5 +114,3 @@ Pagination.defaultProps = {
   showPrev: true,
   showNext: true,
 };
-
-Pagination.displayName = 'Pagination';

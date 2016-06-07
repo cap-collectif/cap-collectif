@@ -150,11 +150,11 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I change the proposals theme filter.
+     * I change the theme filter.
      *
-     * @When I change the proposals theme filter
+     * @When I change the theme filter
      */
-    public function iChangeTheProposalsThemeFilter()
+    public function iChangeTheThemeFilter()
     {
         $this->selectOption('proposal-filter-theme', 'Justice');
         $this->iWait(2);

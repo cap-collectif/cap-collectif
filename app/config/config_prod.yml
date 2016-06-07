@@ -10,15 +10,15 @@ doctrine:
        metadata_cache_driver: apc
        result_cache_driver: apc
        query_cache_driver: apc
-       auto_generate_proxy_classes: true # not the best production setting but otherwise cache:warmup fail
+       auto_generate_proxy_classes: true
 
 monolog:
     handlers:
         file:
             type: rotating_file
-            path: "%kernel.logs_dir%/prod.warning.log"
-            level: warning
-            max_files: 10
+            path: "%kernel.logs_dir%/prod.log"
+            level: debug
+            max_files: 10  # max number of log files to keep
         main:
             type: fingers_crossed
             handler: streamed
@@ -27,7 +27,7 @@ monolog:
                 - ^/
         streamed:
             type: stream
-            path: "%kernel.logs_dir%/prod.error.log"
+            path: "%kernel.logs_dir%/%kernel.environment%.error.log"
             level: debug
         console:
             type: console

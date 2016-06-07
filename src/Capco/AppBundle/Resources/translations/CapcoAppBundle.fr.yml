@@ -111,6 +111,10 @@ idea:
     search: Rechercher
     text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
     appendices:
+      trashed:
+        title: Corbeille des idées
+        number: "]-Inf, 0] Aucune idée à la corbeille. | {1} 1 idée à la corbeille. | ]1,Inf[ %count% idées à la corbeille."
+        button: Voir la corbeille
       index:
         title: Boîte à idées
         number: "]-Inf, 0] Aucune idée publiée. | {1} 1 idée publiée. | ]1,Inf[ %count% idées publiées."
@@ -137,6 +141,7 @@ idea:
       no_reason: Motif non renseigné.
       date: Mis à la corbeille le %date%
   create:
+    button: Proposer une idée
     title: Proposer une idée
     submit: Publier
     cancel: Annuler
@@ -189,8 +194,20 @@ idea:
   report:
     submit: Signaler
     reported: Signalé
-  none: Il n'y a aucune idée pour le moment. Soyez le premier à %startLink%proposer une idée%endLink% !
-  none_in_theme: Il n'y a aucune idée dans ce thème pour le moment. Soyez le premier à en proposer une !
+  searchform:
+    term: Terme
+    theme: Thème
+    search: Rechercher
+    sort: 'Trier :'
+    all_themes: Tous les thèmes
+    no_result:  Il n'y a aucune idée.
+  sort:
+    last: Les plus récentes
+    old: Les plus anciennes
+    popular: Les plus soutenues
+    comments: Les plus commentées
+  none: Il n'y a aucune idée pour le moment. Soyez le premier à %startlink%proposer une idée%endlink%.
+  none_no_create: Il n'y a aucune idée pour le moment.
   error:
     no_contribute: Impossible de contribuer sur cette idée.
     not_author: Impossible de modifier cette idée car vous n'en êtes pas l'auteur.

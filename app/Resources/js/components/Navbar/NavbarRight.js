@@ -75,11 +75,11 @@ const NavbarRight = React.createClass({
                   { this.getIntlMessage('global.logout') }
               </MenuItem>
             </NavDropdown>
-          : <span>
+          : <li>
               <RegistrationButton />
-              { ' ' }
-              <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
-            </span>
+            { ' ' }
+            <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
+          </li>
         }
       </Nav>
     );

@@ -1,7 +1,6 @@
 import React from 'react';
 import Editor from './Editor';
 import autosize from 'autosize';
-import ImageUpload from './ImageUpload';
 import { Input as ReactBootstrapInput } from 'react-bootstrap';
 
 export default class Input extends ReactBootstrapInput {
@@ -32,10 +31,6 @@ export default class Input extends ReactBootstrapInput {
   renderInput() {
     if (this.props.type && this.props.type === 'editor') {
       return <Editor id={this.props.id} className={this.props.className} valueLink={this.props.valueLink} disabled={this.props.disabled} />;
-    }
-
-    if (this.props.type && this.props.type === 'image') {
-      return <ImageUpload id={this.props.id} className={this.props.className} valueLink={this.props.valueLink} preview={this.props.image} />;
     }
 
     return super.renderInput();
@@ -80,7 +75,6 @@ export default class Input extends ReactBootstrapInput {
 
 Input.PropTypes = {
   errors: React.PropTypes.node,
-  image: React.PropTypes.string,
 };
 
 Input.defaultProps = {
