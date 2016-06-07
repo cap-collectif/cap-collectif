@@ -368,4 +368,12 @@ class ConsultationStep extends AbstractStep
     {
         return $this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount + $this->opinionVersionsCount + $this->trashedOpinionVersionsCount + $this->sourcesCount + $this->trashedSourceCount;
     }
+    
+    public function getLabelTitle() {
+        $label = $this->getTitle();
+        if ($this->getProject()) {
+            $label = $this->getProject()->getTitle() . ' - ' . $label;
+        }
+        return $label;
+    }
 }
