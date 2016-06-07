@@ -281,21 +281,14 @@ class StepController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $proposalForm = $step->getProposalForm();
-
-        $searchResults = $proposalForm
-            ? $this
-                ->get('capco.search.resolver')
-                ->searchProposals(1, 50, null, null, ['proposalForm' => $proposalForm->getId()])
-            : [
-                'count' => 0,
-                'proposals' => [],
-            ]
+        $searchResults = $this
+            ->get('capco.search.resolver')
+            ->searchProposals(1, 50, null, null, ['proposalForm' => $step->getProposalForm()->getId()])
         ;
 
         $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),
-            'form' => $proposalForm,
+            'form' => $step->getProposalForm(),
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
             'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
             'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
