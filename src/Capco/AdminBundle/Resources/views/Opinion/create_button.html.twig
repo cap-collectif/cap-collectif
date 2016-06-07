@@ -1,0 +1,14 @@
+{% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
+    {% if consultationStepTypes | length > 0 %}
+        {% for consultationStepType, opinionTypes in consultationStepTypes %}
+            <li>
+                <span class="dropdown-header">
+                    {{ consultationStepType }}
+                </span>
+            </li>
+            {% for html in opinionTypes %}
+                {{ html | raw }}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+{% endif %}

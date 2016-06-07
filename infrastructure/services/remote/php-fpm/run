@@ -30,10 +30,9 @@ echo "Mysql is ready after $(( SECONDS - start )) seconds!"
 
 echo "Warming up cache and install bundle assets after $(( SECONDS - start )) seconds..."
 su capco <<'EOF'
-cd /var/www
-php bin/console cache:warmup --no-debug --no-optional-warmers --env=prod --no-interaction
+rm -rf var/cache/prod
+php bin/console cache:warmup --no-debug --env=prod --no-interaction
 php bin/console assets:install --symlink --env=prod --no-interaction
-chmod -R 777 var
 EOF
 
 VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod --no-interaction 2>&1`
@@ -52,7 +51,7 @@ else
       echo "No migrations to execute."
   else
     echo "Migrating an existing database..."
-    php bin/console doctrine:migrations:migrate --env=prod --no-interaction
+    su capco -c "php bin/console doctrine:migrations:migrate --env=prod --no-interaction"
     if [ $? -eq 1 ]; then
       echo "Database migration failed... Exiting" >&2
       exit 1

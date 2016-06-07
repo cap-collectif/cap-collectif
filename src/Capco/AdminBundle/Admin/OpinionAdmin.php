@@ -172,7 +172,6 @@ class OpinionAdmin extends Admin
                 ->add('step', null, [
                     'label' => 'admin.fields.opinion.step',
                     'query_builder' => $this->createQueryBuilderForStep(),
-                    'property' => 'labelTitle',
                     'required' => true,
                 ])
             ->end()
