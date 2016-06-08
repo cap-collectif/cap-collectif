@@ -93,7 +93,7 @@ Feature: Proposals
     Then I should see "Dépôt terminé. Merci à tous d'avoir contribué."
     And the create proposal button should be disabled
 
-  @javascript @security
+  @javascript @security @elasticsearch
   Scenario: Anonymous user wants to create a proposal
     Given I go to an open collect step
     When I click the create proposal button

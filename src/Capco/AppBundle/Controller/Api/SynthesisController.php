@@ -430,6 +430,7 @@ class SynthesisController extends FOSRestController
     {
         $synthesis->setDisplayRules($request->request->get('rules'));
         $this->get('doctrine.orm.entity_manager')->flush();
+
         return $synthesis;
     }
 }

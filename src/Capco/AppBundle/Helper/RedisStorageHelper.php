@@ -20,5 +20,4 @@ class RedisStorageHelper
             $this->redis->sadd('recalculate_user_counters', $user->getId());
         }
     }
-
 }

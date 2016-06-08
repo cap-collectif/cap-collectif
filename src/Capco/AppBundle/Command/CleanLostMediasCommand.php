@@ -52,11 +52,11 @@ class CleanLostMediasCommand extends ContainerAwareCommand
         }
 
         if (!$input->getOption('dry-run')) {
-          foreach ($mediasToRemove as $media) {
-            $em->remove($media);
-          }
-          $em->flush();
-          $output->writeln(count($mediasToRemove).' medias have been removed.');
-       }
+            foreach ($mediasToRemove as $media) {
+                $em->remove($media);
+            }
+            $em->flush();
+            $output->writeln(count($mediasToRemove).' medias have been removed.');
+        }
     }
 }

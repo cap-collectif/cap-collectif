@@ -3,7 +3,6 @@
 namespace Capco\MediaBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseMedia as BaseMedia;
 
 class Media extends BaseMedia

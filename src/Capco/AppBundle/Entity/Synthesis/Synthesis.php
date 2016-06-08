@@ -76,7 +76,7 @@ class Synthesis
      * @var string
      * @ORM\Column(name="display_rules", type="json", nullable=true)
      */
-    private $displayRules = [ 'level' => 0 ];
+    private $displayRules = ['level' => 0];
 
     public function __construct()
     {
@@ -232,6 +232,7 @@ class Synthesis
 
     /**
      * @param string $displayRules
+     *
      * @return $this
      */
     public function setDisplayRules($displayRules)

@@ -303,7 +303,7 @@ class OpinionController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('opinion.error.not_author', [], 'CapcoAppBundle'));
         }
 
-        $form = $this->createForm('opinion', $opinion);
+        $form = $this->createForm('opinion', $opinion, ['actionType' => 'edit']);
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 

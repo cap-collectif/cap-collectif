@@ -250,8 +250,8 @@ class UserAdmin extends BaseAdmin
                     'required' => false,
                     'read_only' => true,
                     'attr' => [
-                        'disabled'  => true,
-                      ]
+                        'disabled' => true,
+                      ],
                   ])
               ;
             }

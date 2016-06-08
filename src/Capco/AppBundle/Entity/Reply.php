@@ -148,6 +148,7 @@ class Reply
     public function removeResponse(Response $response)
     {
         $this->responses->removeElement($response);
+
         return $this;
     }
 

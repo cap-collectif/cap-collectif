@@ -398,7 +398,7 @@ class Questionnaire
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isAcknowledgeReplies()
     {
@@ -406,7 +406,8 @@ class Questionnaire
     }
 
     /**
-     * @param boolean $acknowledgeReplies
+     * @param bool $acknowledgeReplies
+     *
      * @return $this
      */
     public function setAcknowledgeReplies($acknowledgeReplies)

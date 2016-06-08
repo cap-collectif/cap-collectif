@@ -1,5 +1,8 @@
 Feature: Profile
 
+  Background:
+    Given feature "profiles" is enabled
+
   @javascript @database
   Scenario: Logged in user wants to change his username
     Given I am logged in as user

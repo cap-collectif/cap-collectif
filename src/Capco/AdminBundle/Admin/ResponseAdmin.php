@@ -3,10 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class ResponseAdmin extends Admin
@@ -36,5 +33,4 @@ class ResponseAdmin extends Admin
     {
         $collection->clearExcept(['edit', 'delete']);
     }
-
 }

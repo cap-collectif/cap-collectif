@@ -206,7 +206,7 @@ Feature: Ideas
     """
     Then the JSON response status code should be 201
 
-  @security @fail
+  @security
   Scenario: Logged in API client wants to vote for an idea with a comment and anonymously
     Given I am logged in to api as user
     When I send a POST request to "/api/ideas/5/votes" with json:

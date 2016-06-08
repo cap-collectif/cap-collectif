@@ -10,9 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Capco\UserBundle\Entity\User;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
 use Sonata\UserBundle\Model\UserInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializationContext;
 
 /**

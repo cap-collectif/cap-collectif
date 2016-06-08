@@ -27,20 +27,20 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
 
     protected function compute($dql)
     {
-      if ($this->force) {
-        $this->em->createQuery($dql)->execute();
-      } else {
-        $this->executeOnlyChangesFromLastRun($dql);
-      }
+        if ($this->force) {
+            $this->em->createQuery($dql)->execute();
+        } else {
+            $this->executeOnlyChangesFromLastRun($dql);
+        }
     }
 
     protected function executeOnlyChangesFromLastRun($dql)
     {
-      if ($this->ids && count($this->ids) > 0) {
-          $dql.= ' where u.id in (:ids)';
-          $query = $this->em->createQuery($dql)->setParameter('ids', $this->ids);
-          $query->execute();
-      }
+        if ($this->ids && count($this->ids) > 0) {
+            $dql .= ' where u.id in (:ids)';
+            $query = $this->em->createQuery($dql)->setParameter('ids', $this->ids);
+            $query->execute();
+        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

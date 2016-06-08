@@ -27,7 +27,7 @@ class UserSerializationListener extends AbstractSerializationListener
     public function onPostUserSerialize(ObjectEvent $event)
     {
         $user = $event->getObject();
-        
+
         $links = [
             'settings' => $this->router->generate('capco_profile_edit', [], true),
         ];

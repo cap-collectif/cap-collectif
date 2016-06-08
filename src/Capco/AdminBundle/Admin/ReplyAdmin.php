@@ -144,6 +144,4 @@ class ReplyAdmin extends Admin
         }
         $object->setResponses($responses);
     }
-
-
 }
