@@ -1,110 +1,88 @@
-parameters:
-  capco.comment.resolver.class: Capco\AppBundle\Manager\CommentResolver
-  capco.project.download.resolver.class: Capco\AppBundle\Resolver\ProjectDownloadResolver
-  capco.contribution.resolver.class: Capco\AppBundle\Resolver\ContributionResolver
-  capco.event.resolver.class: Capco\AppBundle\Resolver\EventResolver
-  capco.highlighted.resolver.class: Capco\AppBundle\Resolver\HighlightedContentResolver
-  capco.menu_item.resolver.class: Capco\AppBundle\Manager\MenuItemResolver
-  capco.opinion_types.resolver.class: Capco\AppBundle\Resolver\OpinionTypesResolver
-  capco.search.resolver.class: Capco\AppBundle\Resolver\SearchResolver
-  capco.section.resolver.class: Capco\AppBundle\Resolver\SectionResolver
-  capco.site_color.resolver.class: Capco\AppBundle\SiteColor\Resolver
-  capco.site_image.resolver.class: Capco\AppBundle\SiteImage\Resolver
-  capco.site_parameter.resolver.class: Capco\AppBundle\SiteParameter\Resolver
-  capco.step.resolver.class: Capco\AppBundle\Resolver\StepResolver
-  capco.twig.highlighted_resolver.class: Capco\AppBundle\Twig\HighlightedContentExtension
-  capco.twig.section_resolver.class: Capco\AppBundle\Twig\SectionExtension
-  capco.url.resolver.class: Capco\AppBundle\Resolver\UrlResolver
-  capco.vote.resolver.class: Capco\AppBundle\Resolver\VoteResolver
-  capco.proposal.resolver.class: Capco\AppBundle\Resolver\ProposalResolver
-
 services:
   capco.comment.resolver:
-    class: %capco.comment.resolver.class%
-    arguments: [@doctrine.orm.entity_manager, @router, @capco.url.resolver]
+    class: Capco\AppBundle\Manager\CommentResolver
+    arguments: ['@doctrine.orm.entity_manager', '@router', '@capco.url.resolver']
 
   capco.project.download.resolver:
-    class: %capco.project.download.resolver.class%
-    arguments: [@doctrine.orm.entity_manager, @translator, @capco.url.resolver, @phpexcel]
+    class: Capco\AppBundle\Resolver\ProjectDownloadResolver
+    arguments: ['@doctrine.orm.entity_manager', '@translator', '@capco.url.resolver', '@phpexcel']
 
   capco.contribution.resolver:
-    class: %capco.contribution.resolver.class%
-    arguments: [@capco.user.repository]
+    class: Capco\AppBundle\Resolver\ContributionResolver
+    arguments: ['@capco.user.repository']
 
   capco.event.resolver:
-    class: %capco.event.resolver.class%
-    arguments: [@capco.event.repository]
+    class: Capco\AppBundle\Resolver\EventResolver
+    arguments: ['@capco.event.repository']
 
   capco.highlighted.resolver:
-    class: %capco.highlighted.resolver.class%
-    arguments: [@capco.highlighted.repository, @capco.toggle.manager]
+    class: Capco\AppBundle\Resolver\HighlightedContentResolver
+    arguments: ['@capco.highlighted.repository', '@capco.toggle.manager']
 
   capco.menu_item.resolver:
-    class: %capco.menu_item.resolver.class%
-    arguments: [@capco.menu_item.repository, @capco.toggle.manager, @router, @validator]
+    class: Capco\AppBundle\Manager\MenuItemResolver
+    arguments: ['@capco.menu_item.repository', '@capco.toggle.manager', '@router', '@validator']
 
   capco.opinion_types.resolver:
-      class: %capco.opinion_types.resolver.class%
-      arguments: [@capco.opinion_type.repository, @capco.opinion.repository, @router]
+      class: Capco\AppBundle\Resolver\OpinionTypesResolver
+      arguments: ['@capco.opinion_type.repository', '@capco.opinion.repository', '@router']
 
   capco.search.resolver:
-    class: %capco.search.resolver.class%
-    arguments: [@fos_elastica.index, @fos_elastica.elastica_to_model_transformer.collection.app]
+    class: Capco\AppBundle\Resolver\SearchResolver
+    arguments: ['@fos_elastica.index', '@fos_elastica.elastica_to_model_transformer.collection.app']
 
   capco.section.resolver:
-    class: %capco.section.resolver.class%
-    arguments: [@capco.section.repository, @capco.toggle.manager]
+    class: Capco\AppBundle\Resolver\SectionResolver
+    arguments: ['@capco.section.repository', '@capco.toggle.manager']
 
   capco.site_color.resolver:
-    class: %capco.site_color.resolver.class%
-    arguments:
-      - @capco.site_color.repository
-      - @logger
+    class: Capco\AppBundle\SiteColor\Resolver
+    arguments: ['@capco.site_color.repository', '@logger']
 
   capco.site_image.resolver:
-    class: %capco.site_image.resolver.class%
-    arguments:
-      - @capco.site_image.repository
-      - @logger
+    class: Capco\AppBundle\SiteImage\Resolver
+    arguments: ['@capco.site_image.repository', '@logger']
 
   capco.site_parameter.resolver:
-    class: %capco.site_parameter.resolver.class%
-    arguments:
-      - @capco.site_parameter.repository
-      - @logger
+    class: Capco\AppBundle\SiteParameter\Resolver
+    arguments: ['@capco.site_parameter.repository', '@logger']
 
   capco.step.resolver:
-    class: %capco.step.resolver.class%
-    arguments: [@capco.url.resolver]
+    class: Capco\AppBundle\Resolver\StepResolver
+    arguments: ['@capco.url.resolver']
 
   capco.twig.highlighted_resolver:
-    class: %capco.twig.highlighted_resolver.class%
-    arguments: [@capco.highlighted.resolver]
+    class: Capco\AppBundle\Twig\HighlightedContentExtension
+    arguments: ['@capco.highlighted.resolver']
     tags:
       - { name: twig.extension }
 
   capco.twig.section_resolver:
-    class: %capco.twig.section_resolver.class%
-    arguments: [@capco.section.resolver]
+    class: Capco\AppBundle\Twig\SectionExtension
+    arguments: ['@capco.section.resolver']
     tags:
       - { name: twig.extension }
 
   capco.url.resolver:
-      class: %capco.url.resolver.class%
-      arguments: [@router, @capco.toggle.manager]
+      class: Capco\AppBundle\Resolver\UrlResolver
+      arguments: ['@router', '@capco.toggle.manager']
 
   capco.vote.resolver:
-    class: %capco.vote.resolver.class%
-    arguments: [@router, @capco.url.resolver]
+    class: Capco\AppBundle\Resolver\VoteResolver
+    arguments: ['@router', '@capco.url.resolver']
 
   capco.proposal.resolver:
-    class: %capco.proposal.resolver.class%
-    arguments: [@capco.url.resolver]
+    class: Capco\AppBundle\Resolver\ProposalResolver
+    arguments: ['@capco.url.resolver']
 
   capco.proposal_votes.resolver:
     class: Capco\AppBundle\Resolver\ProposalVotesResolver
-    arguments: [@capco.proposal_vote.repository, @capco.selection_step.repository]
+    arguments: ['@capco.proposal_vote.repository', '@capco.selection_step.repository']
 
   capco.project_stats.resolver:
-      class: Capco\AppBundle\Resolver\ProjectStatsResolver
-      arguments: [@capco.selection_step.repository, @capco.collect_step.repository, @capco.theme.repository, @capco.district.repository, @capco.user_type.repository, @capco.proposal.repository, @capco.proposal_vote.repository]
+    class: Capco\AppBundle\Resolver\ProjectStatsResolver
+    arguments: ['@capco.selection_step.repository', '@capco.collect_step.repository', '@capco.theme.repository', '@capco.district.repository', '@capco.user_type.repository', '@capco.proposal.repository', '@capco.proposal_vote.repository']
+
+  capco.media.manager:
+    class: Capco\AppBundle\Manager\MediaManager
+    arguments: ['@sonata.media.manager.media']
