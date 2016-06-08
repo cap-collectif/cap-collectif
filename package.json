@@ -65,7 +65,7 @@
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^0.14.8",
-    "react-google-recaptcha": "^0.5.2",
+    "react-dropzone": "^3.3.4",
     "react-intl": "1.2.0",
     "react-on-rails": "^5.2.0",
     "react-radio": "^2.1.1",

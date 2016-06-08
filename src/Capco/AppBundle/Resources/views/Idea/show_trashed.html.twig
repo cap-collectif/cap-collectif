@@ -43,34 +43,17 @@
 
     <div class="container">
 
-        <div class="row">
-            {% if ideas|length > 0 %}
-                {% for idea in ideas %}
-                    {% include '@CapcoApp/Idea/blockIdea.html.twig' with {'idea': idea} only %}
-                {% endfor %}
-            {% else %}
-                <p>
-                    {{ 'idea.trashed.none'|trans({}, 'CapcoAppBundle') }}
-                </p>
-            {% endif %}
-        </div>
+        {% if trashedIdeasNb > 0 %}
+            {{ react_intl_component('IdeasListApp', {'props': props}) }}
+        {% else %}
+            <p>
+                {{ 'idea.trashed.none'|trans({}, 'CapcoAppBundle') }}
+            </p>
+        {% endif %}
 
         {% set route, params = 'app_idea_trashed', {} %}
         {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 
     </div>
 
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        $(window).on('load', function() {
-            App.equalheight('.media--macro');
-        });
-
-        $(window).on('resize', function() {
-            App.resized('.media--macro');
-        });
-    </script>
 {% endblock %}

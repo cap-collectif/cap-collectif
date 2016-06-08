@@ -1,10 +1,10 @@
 import React from 'react';
 import { Modal, Row } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage } from 'react-intl';
-import CloseButton from '../../Form/CloseButton';
-import UserBox from '../../User/UserBox';
+import CloseButton from '../Form/CloseButton';
+import UserBox from '../User/UserBox';
 
-const ProposalAllVotesModal = React.createClass({
+const AllVotesModal = React.createClass({
   propTypes: {
     votes: React.PropTypes.array.isRequired,
     showModal: React.PropTypes.bool.isRequired,
@@ -32,8 +32,8 @@ const ProposalAllVotesModal = React.createClass({
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
             <FormattedMessage
-              message={this.getIntlMessage('proposal.vote.count')}
-              num={this.props.votes.length}
+              message={this.getIntlMessage('vote.count')}
+              count={this.props.votes.length}
             />
           </Modal.Title>
         </Modal.Header>
@@ -58,4 +58,4 @@ const ProposalAllVotesModal = React.createClass({
 
 });
 
-export default ProposalAllVotesModal;
+export default AllVotesModal;

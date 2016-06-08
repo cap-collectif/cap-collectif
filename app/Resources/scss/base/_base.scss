@@ -167,11 +167,6 @@ h2, .h2 {
   margin-top: 30px;
 }
 
-div > h2:first-child {
-  margin-top: 0;
-}
-
-
 h3, .h3 {
   color: $brand-color-2;
 }
@@ -665,5 +660,29 @@ svg.avatar {
     width: 50%;
     height: 1.2em;
     background: linear-gradient(to right, transparent, white 50%);
+  }
+}
+
+.image-uploader__dropzone {
+  width:200px;
+  height:200px;
+  margin-top: 20px;
+  border-width:2px;
+  border-color:#666;
+  border-style:dashed;
+  border-radius:5px;
+}
+
+.image-uploader__dropzone-label {
+  padding: 15px;
+}
+
+.image-uploader__btn {
+  margin-top: 15px;
+}
+
+.image-uploader__preview {
+  img {
+    max-width: 100%;
   }
 }
