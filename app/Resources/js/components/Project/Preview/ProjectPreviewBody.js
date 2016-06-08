@@ -12,7 +12,7 @@ const ProjectPreviewBody = React.createClass({
 
   render() {
     const { project } = this.props;
-    const tooltip = <Tooltip id={'project-' + project.id + '-tooltip'} >{project.title}</Tooltip>;
+    const tooltip = <Tooltip>{project.title}</Tooltip>;
     return (
       <div className="box project__preview__body">
         <div>
