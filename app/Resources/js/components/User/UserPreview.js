@@ -5,6 +5,7 @@ import UserAvatar from './UserAvatar';
 import UserLink from './UserLink';
 
 const UserPreview = React.createClass({
+  displayName: 'UserPreview',
   propTypes: {
     user: React.PropTypes.object,
     username: React.PropTypes.string,

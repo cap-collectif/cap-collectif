@@ -154,7 +154,7 @@ Feature: Arguments
 
   ## Delete from version
 
-  @javascript @security @database
+  @javascript @database
   Scenario: Author of an argument on a version wants to delete it
     Given I am logged in as user
     And I go to a version

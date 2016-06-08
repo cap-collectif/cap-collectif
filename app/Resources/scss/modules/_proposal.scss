@@ -8,7 +8,7 @@ $statuses:
 ;
 
 .proposal__author {
-  height: 50px;
+  height: 60px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -22,13 +22,6 @@ $statuses:
 
 .proposal__title {
   margin: 0 auto;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.2em;
-  max-height: 3.6em;
 }
 
 .proposal__infos {

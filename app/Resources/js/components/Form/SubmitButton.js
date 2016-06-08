@@ -5,6 +5,7 @@ import LoginOverlay from '../Utils/LoginOverlay';
 import { connect } from 'react-redux';
 
 const SubmitButton = React.createClass({
+  displayName: 'SubmitButton',
   propTypes: {
     id: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,

@@ -1,36 +1,30 @@
-parameters:
-  capco.email_belongs_not.validator.class: Capco\AppBundle\Validator\Constraints\EmailDoesNotBelongToUserValidator
-  capco.end_after_start.validator.class: Capco\AppBundle\Validator\Constraints\EndAfterStartValidator
-  capco.has_theme_if_activated.validator.class: Capco\AppBundle\Validator\Constraints\HasThemeIfActivatedValidator
-  capco.has_district_if_activated.validator.class: Capco\AppBundle\Validator\Constraints\HasDistrictIfActivatedValidator
-
 services:
   capco.already_vote.validator:
     class: Capco\AppBundle\Validator\Constraints\DidNotAlreadyVoteValidator
-    arguments: [@doctrine.orm.entity_manager]
+    arguments: ['@doctrine.orm.entity_manager']
     tags:
       - { name: validator.constraint_validator, alias: already_vote.validator }
 
   capco.email_belongs_not.validator:
-    class: %capco.email_belongs_not.validator.class%
-    arguments: [@fos_user.user_manager]
+    class: Capco\AppBundle\Validator\Constraints\EmailDoesNotBelongToUserValidator
+    arguments: ['@fos_user.user_manager']
     tags:
       - { name: validator.constraint_validator, alias: email_belongs_not.validator }
 
   capco.end_after_start.validator:
-    class: %capco.end_after_start.validator.class%
+    class: Capco\AppBundle\Validator\Constraints\EndAfterStartValidator
     tags:
       - { name: validator.constraint_validator, alias: end_after_start.validator }
 
   capco.has_theme_if_activated.validator:
-    class: %capco.has_theme_if_activated.validator.class%
-    arguments: [@capco.toggle.manager]
+    class: Capco\AppBundle\Validator\Constraints\HasThemeIfActivatedValidator
+    arguments: ['@capco.toggle.manager']
     tags:
       - { name: validator.constraint_validator, alias: has_theme_if_activated.validator }
 
   capco.has_district_if_activated.validator:
-    class: %capco.has_district_if_activated.validator.class%
-    arguments: [@capco.toggle.manager]
+    class: Capco\AppBundle\Validator\Constraints\HasDistrictIfActivatedValidator
+    arguments: ['@capco.toggle.manager']
     tags:
       - { name: validator.constraint_validator, alias: has_district_if_activated.validator }
 
@@ -41,13 +35,13 @@ services:
 
   capco.unlisted_email.validator:
     class: Capco\AppBundle\Validator\Constraints\HasUnlistedEmailValidator
-    arguments: [@doctrine.orm.entity_manager]
+    arguments: ['@doctrine.orm.entity_manager']
     tags:
       - { name: validator.constraint_validator, alias: unlisted_email.validator }
 
   capco.has_enough_credits.validator:
       class: Capco\AppBundle\Validator\Constraints\HasEnoughCreditsToVoteValidator
-      arguments: [@capco.proposal_votes.resolver]
+      arguments: ['@capco.proposal_votes.resolver']
       tags:
         - { name: validator.constraint_validator, alias: has_enough_credits.validator }
 

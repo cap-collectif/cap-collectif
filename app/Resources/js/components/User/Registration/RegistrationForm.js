@@ -171,33 +171,39 @@ export const RegistrationForm = React.createClass({
       />
       : null
     ;
-    const emailLabel = <span>
-      {this.getIntlMessage('global.email')}
-      <OverlayTrigger rootClose placement="top"
-        overlay={
-          <Tooltip id="registration-email-tooltip">
-            { this.getIntlMessage('registration.tooltip.email') }
-          </Tooltip>
-        }
-      >
-        <i style={{ fontSize: '20px', color: '#999', paddingLeft: '15px', top: '-2px' }} className="pull-right cap cap-information"></i>
-      </OverlayTrigger>
-    </span>;
-    const passwordLabel = <span>
-      {this.getIntlMessage('registration.password')}
-      <OverlayTrigger rootClose placement="top"
-                      overlay={
-          <Tooltip id="registration-password-tooltip">
-            { this.getIntlMessage('registration.tooltip.password') }
-          </Tooltip>
-        }
-      >
-        <i style={{ fontSize: '20px', color: '#999', paddingLeft: '15px', top: '-2px' }} className="pull-right cap cap-information"></i>
-      </OverlayTrigger>
-    </span>;
-    const typeLabel = <span>
-      {this.getIntlMessage('registration.type')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-    </span>;
+    const emailLabel = (
+      <span>
+        {this.getIntlMessage('global.email')}
+        <OverlayTrigger rootClose placement="top"
+          overlay={
+            <Tooltip id="registration-email-tooltip">
+              { this.getIntlMessage('registration.tooltip.email') }
+            </Tooltip>
+          }
+        >
+          <i style={{ fontSize: '20px', color: '#999', paddingLeft: '15px', top: '-2px' }} className="pull-right cap cap-information"></i>
+        </OverlayTrigger>
+      </span>
+    );
+    const passwordLabel = (
+      <span>
+        {this.getIntlMessage('registration.password')}
+        <OverlayTrigger rootClose placement="top"
+                        overlay={
+            <Tooltip id="registration-password-tooltip">
+              { this.getIntlMessage('registration.tooltip.password') }
+            </Tooltip>
+          }
+        >
+          <i style={{ fontSize: '20px', color: '#999', paddingLeft: '15px', top: '-2px' }} className="pull-right cap cap-information"></i>
+        </OverlayTrigger>
+      </span>
+    );
+    const typeLabel = (
+      <span>
+        {this.getIntlMessage('registration.type')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
+      </span>
+    );
     return (
       <form id="registration-form">
         {

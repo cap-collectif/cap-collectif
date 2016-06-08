@@ -15,7 +15,7 @@ const ProposalPreviewBody = React.createClass({
 
     return (
       <div className="proposal__body" >
-        <h2 className="h4 proposal__title">
+        <h2 className="h4 proposal__title smart-fade">
           <a href={proposal._links.show}>{proposal.title}</a>
         </h2>
         <div className="proposal__infos">

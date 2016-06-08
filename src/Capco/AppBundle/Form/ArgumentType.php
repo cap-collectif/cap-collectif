@@ -5,7 +5,9 @@ namespace Capco\AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvents;
 
 class ArgumentType extends AbstractType
 {
@@ -15,13 +17,19 @@ class ArgumentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($options['action'] === 'edit') {
+        if ($options['actionType'] === 'edit') {
             $builder
                 ->add('confirm', 'checkbox', [
                     'mapped' => false,
                     'required' => true,
-                    'constraints' => [new IsTrue(['message' => 'argument.votes_not_confirmed'])],
                 ])
+                ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+                    $form = $event->getForm();
+                    $confirm = $form->get('confirm')->getData();
+                    if (empty($confirm)) {
+                        $form['confirm']->addError(new FormError('argument.votes_not_confirmed'));
+                    }
+                })
             ;
         }
 
@@ -43,8 +51,10 @@ class ArgumentType extends AbstractType
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\Argument',
             'csrf_protection' => false,
-            'action' => 'create',
+            'actionType' => 'create',
         ]);
+        $resolver->setRequired('actionType');
+        $resolver->setAllowedValues('actionType', ['create', 'edit']);
     }
 
     /**

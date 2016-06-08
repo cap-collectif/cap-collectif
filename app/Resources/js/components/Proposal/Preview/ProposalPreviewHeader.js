@@ -2,13 +2,12 @@ import React from 'react';
 import moment from 'moment';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
-import { IntlMixin, FormattedDate } from 'react-intl';
+import { FormattedDate } from 'react-intl';
 
 const ProposalPreviewHeader = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const proposal = this.props.proposal;

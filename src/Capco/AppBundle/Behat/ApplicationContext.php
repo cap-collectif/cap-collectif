@@ -14,6 +14,7 @@ use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
+use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
 use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
@@ -28,7 +29,7 @@ class ApplicationContext extends UserContext
 {
     protected $headers;
     protected $dbContainer;
-    protected $currentPage;
+    protected $currentPage = 'home page';
 
     use CommentStepsTrait;
     use IdeaStepsTrait;
@@ -39,6 +40,7 @@ class ApplicationContext extends UserContext
     use ReportingStepsTrait;
     use SharingStepsTrait;
     use SynthesisStepsTrait;
+    use ThemeStepsTrait;
 
     /**
      * @BeforeScenario
@@ -373,11 +375,48 @@ class ApplicationContext extends UserContext
         \PHPUnit_Framework_TestCase::assertTrue($element->hasAttribute($attribute));
     }
 
-    private function visitPageWithParams($page, $params)
+    /**
+     * Checks that option from select with specified id|name|label|value is selected.
+     *
+     * @Then /^the "(?P<option>(?:[^"]|\\")*)" option from "(?P<select>(?:[^"]|\\")*)" (?:is|should be) selected/
+     * @Then /^the option "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)" (?:is|should be) selected$/
+     * @Then /^"(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)" (?:is|should be) selected$/
+     */
+    public function optionIsSelectedInSelect($option, $select)
+    {
+        $selectField = $this->getSession()->getPage()->findField($select);
+        if (null === $selectField) {
+            throw new ElementNotFoundException($this->getSession(), 'select field', 'id|name|label|value', $select);
+        }
+
+        $optionField = $selectField->find('named', array(
+            'option',
+            $option,
+        ));
+
+        if (null === $optionField) {
+            throw new ElementNotFoundException($this->getSession(), 'select option field', 'id|name|label|value', $option);
+        }
+
+        if (!$optionField->isSelected()) {
+            throw new ExpectationException('Select option field with value|text "'.$option.'" is not selected in the select "'.$select.'"', $this->getSession());
+        }
+    }
+
+    private function visitPageWithParams($page, $params = [])
     {
         $this->currentPage = $page;
         $this->navigationContext->getPage($page)->open($params);
         $this->iWait(2);
+    }
+
+    /**
+     * @override Given /^(?:|I )am on (?:|the )homepage$/
+     * @override When /^(?:|I )go to (?:|the )homepage$/
+     */
+    public function iAmOnHomepage()
+    {
+        $this->visitPageWithParams('home page');
     }
 
     private function getCurrentPage()
