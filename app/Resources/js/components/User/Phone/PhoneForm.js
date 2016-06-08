@@ -9,6 +9,7 @@ import FormMixin from '../../../utils/FormMixin';
 const PhoneForm = React.createClass({
   propTypes: {
     isSubmitting: PropTypes.bool.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     onSubmitSuccess: PropTypes.func.isRequired,
     onSubmitFailure: PropTypes.func.isRequired,
     initialValue: PropTypes.string,
@@ -95,7 +96,7 @@ const PhoneForm = React.createClass({
 
   render() {
     return (
-      <form style={{ maxWidth: '350px' }}>
+      <form style={{ maxWidth: '350px' }} onSubmit={(e) => {e.preventDefault(); this.props.onSubmit();}}>
         <Input
           type="text"
           addonBefore="+33"

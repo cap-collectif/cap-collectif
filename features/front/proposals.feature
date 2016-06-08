@@ -9,7 +9,7 @@ Feature: Proposals
     Given feature "districts" is enabled
     And I go to an open collect step
     Then there should be 6 proposals
-    And I change the theme filter
+    And I change the proposals theme filter
     Then there should be 5 proposals
 
   @javascript @elasticsearch
@@ -38,7 +38,7 @@ Feature: Proposals
     Then there should be 6 proposals
     When I sort proposals by comments
     And I search for proposals with terms "bibliothèque banc"
-    And I change the theme filter
+    And I change the proposals theme filter
     Then there should be 2 proposals
     Then proposals should be filtered by theme and terms and sorted by comments
 
@@ -161,7 +161,7 @@ Feature: Proposals
   Scenario: Anonymous user wants to see proposals in a selection step and apply filters
     Given I go to a selection step with simple vote enabled
     Then there should be 3 proposals
-    And I change the theme filter
+    And I change the proposals theme filter
     Then there should be 2 proposals
 
   @javascript @elasticsearch

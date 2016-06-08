@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import Comment from './Comment';
 
 const CommentList = React.createClass({
   propTypes: {
-    root: React.PropTypes.bool,
-    comments: React.PropTypes.array.isRequired,
+    root: PropTypes.bool,
+    comments: PropTypes.array.isRequired,
+    onVote: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -31,6 +32,7 @@ const CommentList = React.createClass({
                 key={comment.id}
                 comment={comment}
                 root={this.props.root}
+                onVote={this.props.onVote}
               />
             );
           })

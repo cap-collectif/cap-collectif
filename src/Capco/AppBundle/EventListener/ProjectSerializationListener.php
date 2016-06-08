@@ -8,6 +8,7 @@ use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializationContext;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class ProjectSerializationListener extends AbstractSerializationListener
 {
