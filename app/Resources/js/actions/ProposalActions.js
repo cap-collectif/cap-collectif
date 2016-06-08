@@ -10,7 +10,7 @@ import {
 
   INIT_PROPOSAL,
   SUBMIT_PROPOSAL,
-  PROPOSAL_VALIDATION_FAILURE,
+  VALIDATION_FAILURE,
   CREATE_PROPOSAL_SUCCESS,
   CREATE_PROPOSAL_FAILURE,
   UPDATE_PROPOSAL_SUCCESS,
@@ -206,7 +206,7 @@ export default {
 
   validationFailure: () => {
     AppDispatcher.dispatch({
-      actionType: PROPOSAL_VALIDATION_FAILURE,
+      actionType: VALIDATION_FAILURE,
     });
   },
 

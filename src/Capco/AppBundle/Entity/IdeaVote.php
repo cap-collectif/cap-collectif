@@ -19,8 +19,6 @@ class IdeaVote extends AbstractVote
     use \Capco\AppBundle\Traits\AnonymousableTrait;
     use \Capco\AppBundle\Traits\PrivatableTrait;
 
-    const ANONYMOUS = 'ANONYMOUS';
-
     /**
      * @var
      *

@@ -1,5 +1,9 @@
-{% if ideasCount > 0 %}
-    {{ react_intl_component('IdeasListApp', {'props': ideasProps}) }}
+{% if ideas|length > 0 %}
+    <div class="row">
+        {% for idea in ideas %}
+            {% include 'CapcoAppBundle:Idea:blockIdea.html.twig' with {'idea': idea} only %}
+        {% endfor %}
+    </div>
 {% else %}
     <div class="project__empty-block  text-center">
         <p class="icon  cap-bubble-star-2"></p>

@@ -51,13 +51,13 @@ class OpinionPage extends Page
         'source create link field' => '#source-form #sourceLink',
         'source create category select' => '#source-form #sourceCategory',
         'source create submit button' => '#confirm-opinion-source-create',
-        'source edit button' => '#source-25 .source__btn--edit',
+        'source edit button' => '#source-12 .source__btn--edit',
         'source edit body field' => '#source-form #sourceBody .ql-editor',
         'source edit confirm checkbox' => '#source-form #sourceEditCheck',
         'source edit submit button' => '#confirm-opinion-source-update',
-        'source delete button' => '#source-25 .source__btn--delete',
+        'source delete button' => '#source-12 .source__btn--delete',
         'source confirm delete button' => '#confirm-opinion-source-delete',
-        'source report button' => '#source-25 .source__btn--report',
+        'source report button' => '#source-12 .source__btn--report',
     ];
 
     public function clickSourcesTab()
