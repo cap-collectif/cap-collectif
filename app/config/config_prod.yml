@@ -16,9 +16,9 @@ monolog:
     handlers:
         file:
             type: rotating_file
-            path: "%kernel.logs_dir%/prod.log"
-            level: debug
-            max_files: 10  # max number of log files to keep
+            path: "%kernel.logs_dir%/prod.warning.log"
+            level: warning
+            max_files: 10
         main:
             type: fingers_crossed
             handler: streamed
@@ -27,7 +27,7 @@ monolog:
                 - ^/
         streamed:
             type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%.error.log"
+            path: "%kernel.logs_dir%/prod.error.log"
             level: debug
         console:
             type: console
