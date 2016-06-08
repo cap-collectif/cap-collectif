@@ -1,4 +1,3 @@
-@comments
 Feature: Comments
 
   @parallel-scenario

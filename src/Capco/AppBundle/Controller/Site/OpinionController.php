@@ -168,7 +168,7 @@ class OpinionController extends Controller
         $opinion->setIsEnabled(true);
         $opinion->setStep($currentStep);
 
-        $form = $this->createForm('opinion', $opinion);
+        $form = $this->createForm('opinion', $opinion, ['action' => 'create']);
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
@@ -303,7 +303,7 @@ class OpinionController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('opinion.error.not_author', [], 'CapcoAppBundle'));
         }
 
-        $form = $this->createForm('opinion', $opinion);
+        $form = $this->createForm('opinion', $opinion, ['action' => 'edit']);
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 

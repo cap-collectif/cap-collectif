@@ -60,15 +60,3 @@ services:
       arguments: [@capco.toggle.manager]
       tags:
         - { name: form.type, alias: registration }
-
-  capco.form.idea:
-    class: Capco\AppBundle\Form\IdeaType
-    arguments: [@capco.toggle.manager]
-    tags:
-      - { name: form.type, alias: idea }
-
-  capco.form.idea_vote:
-    class: Capco\AppBundle\Form\IdeaVoteType
-    arguments: [@security.token_storage]
-    tags:
-      - { name: form.type, alias: idea_vote }

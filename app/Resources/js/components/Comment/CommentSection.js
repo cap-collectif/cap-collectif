@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage } from 'react-intl';
@@ -8,15 +8,13 @@ import CommentActions from '../../actions/CommentActions';
 import CommentStore from '../../stores/CommentStore';
 import Loader from '../Utils/Loader';
 import FlashMessages from '../Utils/FlashMessages';
-import { connect } from 'react-redux';
 
 const MessagePagination = 10;
 
 const CommentSection = React.createClass({
   propTypes: {
-    uri: PropTypes.string,
-    object: PropTypes.number,
-    user: PropTypes.object,
+    uri: React.PropTypes.string,
+    object: React.PropTypes.number,
   },
   mixins: [IntlMixin],
 
@@ -157,11 +155,10 @@ const CommentSection = React.createClass({
           { this.renderFilter() }
         </Row>
         <Loader show={this.state.isLoading} />
-        <CommentForm comment={this.comment} user={this.props.user} focus={false} />
+        <CommentForm comment={this.comment} focus={false} />
         <CommentList {...this.props}
           comments={this.state.comments}
           root
-          onVote={this.loadCommentsFromServer}
         />
         { this.renderLoadMore() }
       </div>
@@ -170,10 +167,4 @@ const CommentSection = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(CommentSection);
+export default CommentSection;

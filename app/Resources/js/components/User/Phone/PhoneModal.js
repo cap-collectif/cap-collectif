@@ -109,6 +109,7 @@ const PhoneModal = React.createClass({
                 />
               : <PhoneForm
                   isSubmitting={isSubmitting}
+                  onSubmit={this.handleSubmit}
                   onSubmitFailure={this.stopSubmit}
                   onSubmitSuccess={this.onSubmitSuccess}
                 />

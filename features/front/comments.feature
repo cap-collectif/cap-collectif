@@ -14,6 +14,7 @@ Scenario: Author of a comment loose their votes when updating it
   When I follow "Modifier"
   And I fill in the following:
     | body      | Je modifie mon commentaire !   |
+  And I check "confirm"
   And I press "Modifier"
   Then I should see "Merci ! Votre commentaire a bien été modifié."
   And I wait 1 seconds
@@ -27,6 +28,19 @@ Scenario: Non author of a comment wants to update it
     | slug | troisieme-idee |
   And I wait 1 seconds
   Then I should not see "Modifier"
+
+  @javascript
+Scenario: Author of a comment try to update it without checking the confirm checkbox
+  Given feature "ideas" is enabled
+  And I am logged in as user
+  And I visited "idea page" with:
+    | slug | troisieme-idee |
+  And I wait 1 seconds
+  When I follow "Modifier"
+  And I fill in the following:
+    | body      | Je modifie mon commentaire !   |
+  And I press "Modifier"
+  Then I should not see "Merci ! Votre commentaire a bien été modifié."
 
   @javascript
   Scenario: Anonymous user wants to see pinned and vip comments on top of the comments list

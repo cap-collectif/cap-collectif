@@ -255,6 +255,7 @@ Feature: Synthesis
             },
             "vip": true,
             "_links": {
+              "profile": @string@,
               "settings": @string@
             }
           },
@@ -315,6 +316,7 @@ Feature: Synthesis
             },
             "vip": true,
             "_links": {
+              "profile": @string@,
               "settings": @string@
             }
           },
@@ -614,6 +616,7 @@ Feature: Synthesis
         },
         "vip": true,
         "_links": {
+          "profile": @string@,
           "settings": @string@
         }
       },
@@ -769,6 +772,7 @@ Feature: Synthesis
         },
         "vip": true,
         "_links": {
+          "profile": @string@,
           "settings": @string@
         }
       },

@@ -4,6 +4,7 @@
 
 {% set jumbotron_title = capco_site_parameter_value('ideas.jumbotron.title') %}
 {% set jumbotron_body = capco_site_parameter_value('ideas.jumbotron.body') %}
+{% set content_body = capco_site_parameter_value('ideas.content.body') %}
 
 {% block metaTags %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
@@ -37,5 +38,102 @@
 {% endblock %}
 
 {% block body %}
-    {{ react_intl_component('IdeasIndexPageApp', {'props': props}) }}
+
+    <div class="container  container--custom">
+        {% if null != content_body %}
+            {{ content_body|raw }}
+        {% endif %}
+    </div>
+
+    <div class="container  container--custom">
+        <div class="filter  block">
+            <div class="row">
+                {% if is_feature_enabled('idea_creation') %}
+                    {{ react_intl_component('NewIdeaApp', {
+                      'props': {
+                        'link': path('app_idea_create'),
+                        'label': 'idea.create.button'|trans({}, 'CapcoAppBundle'),
+                      },
+                      'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
+                      })
+                    }}
+                {% endif %}
+
+                {{ form_start(form) }}
+                    {{ form_errors(form) }}
+
+                    {% if is_feature_enabled('themes') %}
+                        <div class="col-xs-12  col-sm-3  col-md-3  col-lg-4  filter__down">
+                            {{ form_label(form.theme, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                            {{ form_errors(form.theme) }}
+                            {{ form_widget(form.theme, {'attr':{"class":"form-control"} }) }}
+                        </div>
+                    {% endif %}
+
+                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3  filter__down">
+                        <div class="formgroup--inline">
+                            {{ form_label(form.sort, null, {'label_attr':{"class":"control-label"} }) }}
+                            <span class="formgroup--inline__control">
+                                {{ form_errors(form.sort) }}
+                                {{ form_widget(form.sort, {'attr':{"class":"form-control"} }) }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div role="form" class="col-xs-12  col-sm-3  col-md-3  col-lg-3  filter__down">
+                        {{ form_label(form.term, null, {'label_attr':{"class":"control-label sr-only"} }) }}
+                        <div class="input-group filter__search">
+                            {{ form_errors(form.term) }}
+                            {{ form_widget(form.term, {'attr':{"class":"form-control", "placeholder": 'idea.searchform.search'|trans({}, 'CapcoAppBundle')} }) }}
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn  btn-default"> <i class="cap cap-magnifier"></i><span class="sr-only">{{ 'idea.searchform.search'|trans({}, 'CapcoAppBundle') }}</span></button>
+                            </span>
+                        </div>
+                    </div>
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+
+        {% if ideas|length > 0 %}
+            <div class="row">
+                {% for idea in ideas %}
+                    {% include '@CapcoApp/Idea/blockIdea.html.twig' with {'idea': idea} only %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="block">
+                {{ 'idea.searchform.no_result'|trans({}, 'CapcoAppBundle') }}
+            </p>
+        {% endif %}
+
+        {% set theme = form.vars.data.theme is null ? 'all' : form.vars.data.theme.slug %}
+        {% if form.vars.data.sort is not null or theme != 'all' %}
+            {% if form.vars.data.term is not null %}
+                {% set route, params =  'app_idea_search_term', {'sort': form.vars.data.sort, 'theme': theme, 'term': form.vars.data.term } %}
+            {% else %}
+                {% set route, params =  'app_idea_search', {'sort': form.vars.data.sort, 'theme': theme } %}
+            {% endif %}
+        {% else %}
+            {% set route, params =  'app_idea', {} %}
+        {% endif %}
+        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+
+    </div>
+
+    {% if is_feature_enabled('idea_trash') %}
+    <div class="container  container--custom  appendices__container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 col-md-offset-4 text-center  appendices__item  box">
+                <h2 class="h4">{{ 'idea.index.appendices.trashed.title'|trans({}, 'CapcoAppBundle') }}</h2>
+                <p class="excerpt">{% transchoice trashedIdeasNb with {'%count%': trashedIdeasNb} from 'CapcoAppBundle' %}
+                    idea.index.appendices.trashed.number
+                {% endtranschoice %}</p>
+                <p><a href="{{ path('app_idea_trashed') }}" class="btn  btn-primary  btn--outline">{{ 'idea.index.appendices.trashed.button'|trans({}, 'CapcoAppBundle') }}</a></p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
 {% endblock %}

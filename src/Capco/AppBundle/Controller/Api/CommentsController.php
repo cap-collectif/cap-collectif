@@ -2,20 +2,12 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\CommentVote;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class CommentsController extends FOSRestController
 {
@@ -47,82 +39,5 @@ class CommentsController extends FOSRestController
         return [
             'count' => count($comments),
         ];
-    }
-
-    /**
-     * Vote on comment.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Vote on comment",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *  }
-     * )
-     *
-     * @Security("has_role('ROLE_USER')")
-     * @Post("/comments/{commentId}/votes")
-     * @ParamConverter("comment", options={"mapping": {"commentId": "id"}})
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postCommentVoteAction(Comment $comment)
-    {
-        $user = $this->getUser();
-        $em = $this->get('doctrine.orm.entity_manager');
-        $previousVote = $em
-            ->getRepository('CapcoAppBundle:CommentVote')
-            ->findOneBy(['user' => $user, 'comment' => $comment]);
-
-        if ($previousVote) {
-            throw new BadRequestHttpException('Already voted.');
-        }
-
-        if (!$comment->canVote()) {
-            throw new AccessDeniedHttpException($this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
-        }
-
-        $vote = (new CommentVote())
-            ->setConfirmed(true)
-            ->setComment($comment)
-            ->setUser($user)
-        ;
-
-        $comment->incrementVotesCount();
-        $em->persist($vote);
-        $em->flush();
-    }
-
-    /**
-     * Delete vote on comment.
-     * 
-     * Vote on comment
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Delete vote on comment",
-     *  statusCodes={
-     *    204 = "Returned when successful",
-     *  }
-     * )
-     * 
-     * @Security("has_role('ROLE_USER')")
-     * @Delete("/comments/{commentId}/votes")
-     * @ParamConverter("comment", options={"mapping": {"commentId": "id"}})
-     * @View()
-     */
-    public function deleteCommentVoteAction(Comment $comment)
-    {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $vote = $em
-            ->getRepository('CapcoAppBundle:CommentVote')
-            ->findOneBy(['user' => $this->getUser(), 'comment' => $comment]);
-
-        if (!$vote) {
-            throw new BadRequestHttpException('You have not voted for this comment.');
-        }
-
-        $comment->decrementVotesCount();
-        $em->remove($vote);
-        $em->flush();
     }
 }
