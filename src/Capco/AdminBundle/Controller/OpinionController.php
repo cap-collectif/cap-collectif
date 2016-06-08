@@ -430,7 +430,8 @@ class OpinionController extends Controller
 
                         return
                             '<a href="'.$url.'">'
-                                .$levelIndicator.$node['title']
+                            .'<i class="fa fa-plus-circle" style="margin-right: 10px"></i>'
+                            .$levelIndicator.$node['title']
                             .'</a>'
                         ;
                     },
