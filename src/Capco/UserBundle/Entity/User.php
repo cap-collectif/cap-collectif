@@ -936,6 +936,62 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this;
     }
 
+    public function setProposals($proposals)
+    {
+        $this->proposals = $proposals;
+
+        return $this;
+    }
+
+    public function setOpinions($opinions)
+    {
+        $this->opinions = $opinions;
+
+        return $this;
+    }
+
+    public function setOpinionVersions($versions)
+    {
+        $this->opinionVersions = $versions;
+
+        return $this;
+    }
+
+    public function setIdeas($ideas)
+    {
+        $this->ideas = $ideas;
+
+        return $this;
+    }
+
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+
+        return $this;
+    }
+
+    public function setArguments($arguments)
+    {
+        $this->arguments = $arguments;
+
+        return $this;
+    }
+
+    public function setSources($sources)
+    {
+        $this->sources = $sources;
+
+        return $this;
+    }
+
+    public function setReplies($replies)
+    {
+        $this->replies = $replies;
+
+        return $this;
+    }
+
     /**
      * @return mixed
      */
@@ -1059,6 +1115,21 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
             UserInterface::GENDER_FEMALE => 'gender.female',
             UserInterface::GENDER_MALE => 'gender.male',
         ];
+    }
+
+    public function getContributions()
+    {
+      return array_merge(
+        $this->getOpinions(),
+        $this->getOpinionVersions(),
+        $this->getVotes(),
+        $this->getComments(),
+        $this->getIdeas(),
+        $this->getArguments(),
+        $this->getSources(),
+        $this->getProposals(),
+        $this->getReplies()
+      );
     }
 
     public function getContributionsCount()

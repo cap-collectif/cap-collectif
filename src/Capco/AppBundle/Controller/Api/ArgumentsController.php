@@ -367,7 +367,6 @@ class ArgumentsController extends FOSRestController
         }
 
         $vote
-            ->setConfirmed(true)
             ->setArgument($argument)
             ->setUser($user)
         ;

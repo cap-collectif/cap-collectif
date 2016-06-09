@@ -180,7 +180,6 @@ class OpinionsController extends FOSRestController
         }
 
         $vote
-            ->setConfirmed(true)
             ->setOpinion($opinion)
             ->setUser($user)
         ;
@@ -601,7 +600,6 @@ class OpinionsController extends FOSRestController
         }
 
         $vote
-            ->setConfirmed(true)
             ->setOpinionVersion($version)
             ->setUser($user)
         ;

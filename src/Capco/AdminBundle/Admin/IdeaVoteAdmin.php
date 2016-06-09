@@ -43,9 +43,6 @@ class IdeaVoteAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('confirmed', null, [
-                'label' => 'admin.fields.idea_vote.confirmed',
-            ])
             ->add('idea', 'sonata_type_model', [
                 'label' => 'admin.fields.idea_vote.idea',
             ])

@@ -28,6 +28,7 @@ class ConfirmationController extends Controller
         $user->setExpired(false);
         $user->setExpiresAt(null);
         $user->setLastLogin(new \DateTime());
+        $this->get('contribution_manager')->republishContributions($user);
         $manager->updateUser($user);
 
         $this->get('fos_user.security.login_manager')->loginUser(

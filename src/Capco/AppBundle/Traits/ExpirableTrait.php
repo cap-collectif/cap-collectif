@@ -9,7 +9,7 @@ trait ExpirableTrait
     /**
      * @ORM\Column(name="expired", type="boolean", nullable=false)
      */
-    private $expired;
+    private $expired = false;
 
     /**
      * @return mixed

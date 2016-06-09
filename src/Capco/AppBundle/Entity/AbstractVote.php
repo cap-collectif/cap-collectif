@@ -6,7 +6,6 @@ use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\ConfirmableTrait;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
 
@@ -14,7 +13,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  * Class AbstractVote.
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractVoteRepository")
- * @ORM\Table(name="votes",indexes={@ORM\Index(name="idx_voter_confirmed", columns={"voter_id", "confirmed"})})
+* @ORM\Table(name="votes",indexes={})
  * @ORM\HasLifecycleCallbacks()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "voteType", type = "string")
@@ -30,7 +29,6 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  */
 abstract class AbstractVote implements Contribution, HasAuthorInterface
 {
-    use ConfirmableTrait;
     use ExpirableTrait;
 
     /**
@@ -68,7 +66,6 @@ abstract class AbstractVote implements Contribution, HasAuthorInterface
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
-        $this->setConfirmed(true);
     }
 
     /**

@@ -217,7 +217,6 @@ class SourcesController extends FOSRestController
         }
 
         $vote
-            ->setConfirmed(true)
             ->setSource($source)
             ->setUser($user)
         ;

@@ -12,46 +12,23 @@ class ContributionManager
         $this->em = $em;
     }
 
-    public function depublishContributions(User $user)
+    public function republishContributions(User $user)
     {
-        $contributionsExpiredCount = 0;
-        foreach ($user->getOpinions() as $opinion) {
-            $opinion->setExpired(true);
-            ++$contributionsExpiredCount;
-        }
-        foreach ($user->getVotes() as $vote) {
-            $vote->setExpired(true);
-            ++$contributionsExpiredCount;
-        }
-        foreach ($user->getOpinionVersions() as $version) {
-            $version->setExpired(true);
-            ++$contributionsExpiredCount;
-        }
-        foreach ($user->getIdeas() as $idea) {
-            $idea->setExpired(true);
-            ++$contributionsExpiredCount;
-        }
-        foreach ($user->getComments() as $comment) {
-            $comment->setExpired(true);
-            ++$contributionsExpiredCount;
-        }
-        foreach ($user->getArguments() as $argument) {
-            $argument->setExpired(true);
-            ++$contributionsExpiredCount;
-        }
-        foreach ($user->getSources() as $source) {
-            $source->setExpired(true);
-            ++$contributionsExpiredCount;
-        }
-        foreach ($user->getProposals() as $proposal) {
-            $proposal->setExpired(true);
-            ++$contributionsExpiredCount;
-        }
-        foreach ($user->getReplies() as $reply) {
-            $reply->setExpired(true);
-            ++$contributionsExpiredCount;
+        $contributions = $user->getContributions();
+        foreach ($contributions as $contribution) {
+            $contribution->setExpired(false);
         }
 
-        return $contributionsExpiredCount > 0;
+        return count($contributions) > 0;
+    }
+
+    public function depublishContributions(User $user)
+    {
+        $contributions = $user->getContributions();
+        foreach ($contributions as $contribution) {
+            $contribution->setExpired(true);
+        }
+
+        return count($contributions) > 0;
     }
 }
