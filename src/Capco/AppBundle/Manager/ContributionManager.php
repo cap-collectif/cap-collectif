@@ -14,40 +14,44 @@ class ContributionManager
 
     public function depublishContributions(User $user)
     {
-        $contributionsDeletedCount = 0;
+        $contributionsExpiredCount = 0;
         foreach ($user->getOpinions() as $opinion) {
-            $opinion->setIsEnabled(false);
-            ++$contributionsDeletedCount;
+            $opinion->setExpired(true);
+            ++$contributionsExpiredCount;
         }
         foreach ($user->getVotes() as $vote) {
-            $this->em->remove($vote);
-            ++$contributionsDeletedCount;
+            $vote->setExpired(true);
+            ++$contributionsExpiredCount;
         }
         foreach ($user->getOpinionVersions() as $version) {
-            $version->setEnabled(false);
-            ++$contributionsDeletedCount;
+            $version->setExpired(true);
+            ++$contributionsExpiredCount;
         }
         foreach ($user->getIdeas() as $idea) {
-            $idea->setIsEnabled(false);
-            ++$contributionsDeletedCount;
+            $idea->setExpired(true);
+            ++$contributionsExpiredCount;
         }
         foreach ($user->getComments() as $comment) {
-            $comment->setIsEnabled(false);
-            ++$contributionsDeletedCount;
+            $comment->setExpired(true);
+            ++$contributionsExpiredCount;
         }
         foreach ($user->getArguments() as $argument) {
-            $argument->setIsEnabled(false);
-            ++$contributionsDeletedCount;
+            $argument->setExpired(true);
+            ++$contributionsExpiredCount;
         }
         foreach ($user->getSources() as $source) {
-            $source->setIsEnabled(false);
-            ++$contributionsDeletedCount;
+            $source->setExpired(true);
+            ++$contributionsExpiredCount;
         }
         foreach ($user->getProposals() as $proposal) {
-            $proposal->setEnabled(false);
-            ++$contributionsDeletedCount;
+            $proposal->setExpired(true);
+            ++$contributionsExpiredCount;
+        }
+        foreach ($user->getReplies() as $reply) {
+            $reply->setExpired(true);
+            ++$contributionsExpiredCount;
         }
 
-        return $contributionsDeletedCount > 0;
+        return $contributionsExpiredCount > 0;
     }
 }

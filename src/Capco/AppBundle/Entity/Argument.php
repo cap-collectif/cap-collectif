@@ -11,6 +11,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * Argument.
@@ -19,10 +21,11 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements VotableInterface, IsPublishableInterface
+class Argument implements Contribution, VotableInterface, IsPublishableInterface
 {
     use ValidableTrait;
     use VotableOkTrait;
+    use ExpirableTrait;
 
     const TYPE_AGAINST = 0;
     const TYPE_FOR = 1;
