@@ -190,8 +190,9 @@ class ProposalRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder($alias = 'proposal')
     {
         return $this->createQueryBuilder($alias)
-            ->andWhere($alias.'.enabled = :enabled')
-            ->setParameter('enabled', true);
+            ->andWhere($alias.'.enabled = true')
+            ->andWhere($alias.'.expired = false')
+          ;
     }
 
     /**

@@ -16,8 +16,7 @@ class AbstractVoteRepository extends EntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
-            ->andWhere('v.confirmed = :confirmed')
-            ->setParameter('confirmed', true)
+            ->andWhere('v.expired = false')
             ->addOrderBy('v.updatedAt', 'ASC');
 
         if (in_array($objectType, ['opinion', 'opinionVersion'])) {
@@ -58,7 +57,7 @@ class AbstractVoteRepository extends EntityRepository
      */
     public function getOneById($id)
     {
-        return $this->getIsConfirmedQueryBuilder()
+        return $this->getQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'r')
             ->leftJoin('v.user', 'aut')
             ->leftJoin('aut.Media', 'm')
@@ -77,7 +76,7 @@ class AbstractVoteRepository extends EntityRepository
      */
     public function getPublicVotesByUser($user)
     {
-        $qb = $this->getIsConfirmedQueryBuilder()
+        $qb = $this->getQueryBuilder()
             ->addSelect('u', 'm')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.Media', 'm')
@@ -100,8 +99,8 @@ class AbstractVoteRepository extends EntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
-            ->andWhere('v.confirmed = :confirmed')
-            ->setParameter('confirmed', true);
+            ->andWhere('v.expired = false')
+        ;
 
         if (in_array($objectType, ['opinion', 'opinionVersion'])) {
             $qb->addSelect('v.value')
@@ -117,10 +116,10 @@ class AbstractVoteRepository extends EntityRepository
         return $result ? $result['value'] : null;
     }
 
-    protected function getIsConfirmedQueryBuilder()
+    protected function getQueryBuilder()
     {
         return $this->createQueryBuilder('v')
-            ->andWhere('v.confirmed = :confirmed')
-            ->setParameter('confirmed', true);
+            ->andWhere('v.expired = false')
+        ;
     }
 }

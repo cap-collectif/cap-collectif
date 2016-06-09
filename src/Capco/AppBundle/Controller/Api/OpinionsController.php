@@ -40,7 +40,11 @@ class OpinionsController extends FOSRestController
      * )
      *
      * @Get("/opinions/{id}")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne"})
+     * @ParamConverter("opinion", options={
+     *  "mapping": {"id": "id"},
+     *  "repository_method": "getOne",
+     *  "map_method_signature" = true
+     * })
      * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias", "Steps"})
      */
     public function getOpinionAction(Opinion $opinion)
@@ -120,7 +124,11 @@ class OpinionsController extends FOSRestController
      * )
      *
      * @Get("/opinions/{id}/votes")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne"})
+     * @ParamConverter("opinion", options={
+     *  "mapping": {"id": "id"},
+     *  "repository_method": "getOne",
+     *  "map_method_signature" = true
+     * })
      * @Cache(smaxage="60", public=true)
      * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */

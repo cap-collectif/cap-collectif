@@ -1119,7 +1119,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getContributions()
     {
-      return array_merge(
+      $types = [
         $this->getOpinions(),
         $this->getOpinionVersions(),
         $this->getVotes(),
@@ -1129,7 +1129,14 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->getSources(),
         $this->getProposals(),
         $this->getReplies()
-      );
+      ];
+      $contributions = [];
+      foreach ($types as $type) {
+        foreach ($type as $contribution) {
+          $contributions[] = $contribution;
+        }
+      }
+      return $contributions;
     }
 
     public function getContributionsCount()

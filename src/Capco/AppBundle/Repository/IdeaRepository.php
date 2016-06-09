@@ -475,7 +475,8 @@ class IdeaRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
+            ->andWhere('i.isEnabled = true')
+            ->andWhere('i.expired = false')
+        ;
     }
 }

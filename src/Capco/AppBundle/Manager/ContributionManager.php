@@ -14,21 +14,21 @@ class ContributionManager
 
     public function republishContributions(User $user)
     {
-        $contributions = $user->getContributions();
-        foreach ($contributions as $contribution) {
+        $republishedCount = 0;
+        foreach ($user->getContributions() as $contribution) {
             $contribution->setExpired(false);
+            $republishedCount++;
         }
-
-        return count($contributions) > 0;
+        return $republishedCount > 0;
     }
 
     public function depublishContributions(User $user)
     {
-        $contributions = $user->getContributions();
-        foreach ($contributions as $contribution) {
+        $expiredCount = 0;
+        foreach ($user->getContributions() as $contribution) {
             $contribution->setExpired(true);
+            $expiredCount++;
         }
-
-        return count($contributions) > 0;
+        return $expiredCount > 0;
     }
 }

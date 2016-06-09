@@ -25,7 +25,7 @@ class SourcesController extends FOSRestController
 {
     /**
      * @Post("/opinions/{id}/sources")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne"})
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature" = true})
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201)
      */

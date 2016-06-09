@@ -39,7 +39,11 @@ class ArgumentsController extends FOSRestController
      * )
      *
      * @Get("/opinions/{id}/arguments")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne"})
+     * @ParamConverter("opinion", options={
+     *  "repository_method": "getOne",
+     *  "mapping": {"id": "id"},
+     *  "map_method_signature" = true
+     * })
      * @QueryParam(name="type", requirements="(0|1)", default=null)
      * @QueryParam(name="order", requirements="(old|last|popular)", default="last")
      * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos"})
