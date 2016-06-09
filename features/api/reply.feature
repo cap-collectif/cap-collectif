@@ -164,7 +164,7 @@ Feature: Reply Restful Api
     Then the JSON response status code should be 201
     And 1 mail should be sent
     And I open mail with subject "Cap-Collectif - Accusé de réception de votre participation"
-    Then I should see "Nous accusons réception de votre participation. Vos réponses étaient les suivantes :" in mail
+    Then I should see "Nous accusons réception de votre participation dont les réponses étaient les suivantes :" in mail
 
   @database @elasticsearch
   Scenario: Logged in API client wants to add an anonymous reply
