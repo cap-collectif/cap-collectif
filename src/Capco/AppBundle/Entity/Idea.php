@@ -16,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * Idea.
@@ -24,12 +26,13 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\IdeaRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Idea implements CommentableInterface, VotableInterface, HasAuthorInterface
+class Idea implements Contribution, CommentableInterface, VotableInterface, HasAuthorInterface
 {
     use CommentableTrait;
     use ValidableTrait;
     use VotableOkTrait;
     use TimestampableTrait;
+    use ExpirableTrait;
 
     public static $sortCriterias = [
         'last' => 'idea.sort.last',

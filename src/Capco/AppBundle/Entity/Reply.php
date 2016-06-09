@@ -11,6 +11,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\PrivatableTrait;
+use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * Reply.
@@ -19,11 +21,12 @@ use Capco\AppBundle\Traits\PrivatableTrait;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class Reply
+class Reply implements Contribution
 {
     use TimestampableTrait;
     use EnableTrait;
     use PrivatableTrait;
+    use ExpirableTrait;
 
     /**
      * @var int

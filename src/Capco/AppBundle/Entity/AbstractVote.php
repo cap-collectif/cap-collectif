@@ -7,6 +7,8 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\ConfirmableTrait;
+use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * Class AbstractVote.
@@ -26,9 +28,10 @@ use Capco\AppBundle\Traits\ConfirmableTrait;
  *      "proposal"        = "ProposalVote"
  * })
  */
-abstract class AbstractVote implements HasAuthorInterface
+abstract class AbstractVote implements Contribution, HasAuthorInterface
 {
     use ConfirmableTrait;
+    use ExpirableTrait;
 
     /**
      * @var int
