@@ -31,14 +31,13 @@
         {% if false == comment.canContribute %}
             <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap-hand-like-2"></i> {{ 'comment.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
         {% else %}
-            <form method="POST" style="display: inline-block;" action="{{ path('app_comment_vote', {'commentId': comment.id } ) }}">
+            <span>
                 {% if comment.userHasVote(currentUser) %}
-                    <button class="btn  btn-danger  btn-xs">{{ 'comment.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
+                    <button class="btn  btn-danger  btn-xs disabled">{{ 'comment.vote.delete'|trans({}, 'CapcoAppBundle') }}</button>
                 {% else %}
-                    <button class="btn  btn-success  btn--outline  btn-xs"><i class="cap-hand-like-2"></i> {{ 'comment.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                    <button class="btn  btn-success  btn--outline  btn-xs disabled"><i class="cap-hand-like-2"></i> {{ 'comment.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
                 {% endif %}
-                <input type="hidden" name="_csrf_token" value="{{ token }}">
-            </form>
+            </span>
         {% endif %}
         <span class="opinion__votes-nb">{{ comment.votesCount }}</span>
 

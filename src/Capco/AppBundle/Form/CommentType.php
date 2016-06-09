@@ -6,16 +6,15 @@ use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 class CommentType extends AbstractType
 {
     private $user;
-    private $action;
 
-    public function __construct(User $user = null, $action = 'create')
+    public function __construct(User $user = null)
     {
         $this->user = $user;
-        $this->action = $action;
     }
 
     /**
@@ -24,11 +23,22 @@ class CommentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if ($options['actionType'] === 'edit') {
+            $builder
+                ->add('confirm', 'checkbox', [
+                    'mapped' => false,
+                    'label' => 'opinion.form.confirm',
+                    'required' => true,
+                    'constraints' => [new IsTrue(['message' => 'opinion.votes_not_confirmed'])],
+                ])
+            ;
+        }
+        
         $builder
             ->add('body', 'textarea', ['required' => true])
         ;
 
-        if ($this->action === 'create') {
+        if ($options['actionType'] === 'create') {
             $builder
                 ->add('parent', null, ['required' => false])
             ;
@@ -51,6 +61,7 @@ class CommentType extends AbstractType
             'data_class' => 'Capco\AppBundle\Entity\Comment',
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
+            'actionType' => 'create',
         ]);
     }
 

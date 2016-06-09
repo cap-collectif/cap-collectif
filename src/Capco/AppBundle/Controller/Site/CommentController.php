@@ -152,7 +152,7 @@ class CommentController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('comment.error.not_author', [], 'CapcoAppBundle'));
         }
 
-        $form = $this->createForm(new CommentForm($userCurrent, 'edit'), $comment);
+        $form = $this->createForm(new CommentForm($userCurrent), $comment, ['actionType' => 'edit']);
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
