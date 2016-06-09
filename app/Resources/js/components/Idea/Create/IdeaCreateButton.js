@@ -20,7 +20,7 @@ export const IdeaCreateButton = React.createClass({
 
   render() {
     return (
-      <LoginOverlay features={this.props.features}>
+      <LoginOverlay features={this.props.features} user={this.props.user}>
         <Button
           id="idea-create-button"
           bsStyle="primary"

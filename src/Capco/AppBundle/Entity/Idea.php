@@ -342,7 +342,7 @@ class Idea implements CommentableInterface, VotableInterface, HasAuthorInterface
     /**
      * @param mixed $media
      */
-    public function setMedia(Media $media)
+    public function setMedia(Media $media = null)
     {
         $this->media = $media;
     }
