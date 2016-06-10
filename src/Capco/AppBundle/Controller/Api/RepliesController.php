@@ -229,10 +229,14 @@ class RepliesController extends FOSRestController
             throw $this->createNotFoundException('Reply not found');
         }
 
+        if (!$questionnaire->canContribute()) {
+            throw new BadRequestHttpException('This reply is no longer deletable.');
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($reply);
         $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($user);
+        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         // If not present, es listener will take some time to execute the refresh
         // and, next time proposals will be fetched, the set of data will be outdated.

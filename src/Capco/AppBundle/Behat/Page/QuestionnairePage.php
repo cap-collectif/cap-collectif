@@ -59,6 +59,11 @@ class QuestionnairePage extends Page
         return $this->getSelector('reply buttons');
     }
 
+    public function getDeleteReplyButtonSelector()
+    {
+        return $this->getSelector('delete reply button');
+    }
+
     public function clickDeleteReplyButton()
     {
         $this->getElement('delete reply button')->click();

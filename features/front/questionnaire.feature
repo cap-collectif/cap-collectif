@@ -133,3 +133,10 @@ Feature: Questionnaire
     And I confirm reply deletion
     Then I should see "Votre réponse a bien été supprimée."
     And I should not see my reply anymore
+
+  @javascript @security
+  Scenario: Logged in user wants to remove a reply in a closed questionnaire step
+    Given I am logged in as admin
+    When I go to a closed questionnaire step
+    And I click on my first reply
+    Then I should not see the delete reply button

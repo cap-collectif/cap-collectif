@@ -17,3 +17,9 @@ Capco\AppBundle\Entity\Reply:
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
     enabled: true
+  reply4:
+    author: @user4
+    questionnaire: @questionnaire3
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
+    enabled: true

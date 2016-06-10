@@ -210,7 +210,7 @@ trait QuestionnaireStepsTrait
      */
     public function theRankingChoiceShouldBeInTheChoiceBox()
     {
-        $this->assertElementContainsText('.ranking__choice-box__choices', '1. Choix 1');
+        $this->assertElementContainsText('.ranking__choice-box__choices', '1. Choix');
     }
 
     // *************************************************************** Edition *********************************************************************
@@ -289,8 +289,8 @@ trait QuestionnaireStepsTrait
      */
     public function iShouldNotSeeTheDeleteReplyButton()
     {
-        $replyButtonsSelector = $this->navigationContext->getPage('questionnaire page')->getReplyButtonsSelector();
-        $this->assertElementNotContainsText($replyButtonsSelector, 'Supprimer');
+        $deleteButtonSelector = $this->navigationContext->getPage('questionnaire page')->getDeleteReplyButtonSelector();
+        $this->assertElementNotOnPage($deleteButtonSelector);
     }
 
     /**

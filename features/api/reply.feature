@@ -497,13 +497,27 @@ Feature: Reply Restful Api
     """
 
   @database @elasticsearch
-  Scenario: logged in API client wants to remove a reply
+  Scenario: Logged in API client wants to remove a reply
     Given I am logged in to api as admin
     When I send a DELETE request to "api/questionnaires/1/replies/2"
     Then the JSON response status code should be 204
 
   @security @elasticsearch
-  Scenario: logged in API client wants to remove a reply when he is not the author
+  Scenario: Logged in API client wants to remove a reply when he is not the author
     Given I am logged in to api as user
     When I send a DELETE request to "api/questionnaires/1/replies/2"
     Then the JSON response status code should be 403
+
+  @security @elasticsearch
+  Scenario: Logged in API client wants to remove a reply in a closed questionnaire step
+    Given I am logged in to api as admin
+    And I send a DELETE request to "/api/questionnaires/3/replies/3"
+    Then the JSON response status code should be 400
+    And the JSON response should match:
+    """
+    {
+      "code": 400,
+      "message": "This reply is no longer deletable.",
+      "errors": @null@
+    }
+    """
