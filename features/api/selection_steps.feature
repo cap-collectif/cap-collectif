@@ -144,6 +144,10 @@ Feature: Selection steps
             "name": @string@,
             "color": @string@
           },
+          "category": {
+            "id": @integer@,
+            "name": @string@
+          },
           "author": @...@,
           "proposalForm": {
             "id": @integer@

@@ -101,6 +101,12 @@ class Proposal implements CommentableInterface, VotableInterface
     private $status = null;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalCategory", cascade={"persist"}, inversedBy="proposals")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $category = null;
+
+    /**
      * @var string
      *
      * @Assert\NotNull()
@@ -263,6 +269,26 @@ class Proposal implements CommentableInterface, VotableInterface
     public function setStatus(Status $status = null)
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return ProposalCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param ProposalCategory $category
+     *
+     * @return $this
+     */
+    public function setCategory(ProposalCategory $category = null)
+    {
+        $this->category = $category;
 
         return $this;
     }

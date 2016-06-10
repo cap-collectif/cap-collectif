@@ -16,8 +16,10 @@ export const ProposalListFilters = React.createClass({
     type: PropTypes.array.isRequired,
     district: PropTypes.array.isRequired,
     status: PropTypes.array.isRequired,
+    category: PropTypes.array.isRequired,
     orderByVotes: PropTypes.bool,
     features: PropTypes.object.isRequired,
+    showThemes: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -32,7 +34,6 @@ export const ProposalListFilters = React.createClass({
     return {
       order: ProposalStore.order,
       filters: ProposalStore.filters,
-      isLoading: true,
     };
   },
 
@@ -70,17 +71,21 @@ export const ProposalListFilters = React.createClass({
   },
 
   orders: ['random', 'last', 'old', 'comments'],
-  filters: ['status', 'type', 'district', 'theme'],
+  filters: ['status', 'type', 'district', 'theme', 'category'],
 
   updateFilters() {
     const filters = ['status', 'type'];
     if (this.props.features.districts) {
       filters.push('district');
     }
-    if (this.props.features.themes) {
+    if (this.props.features.themes && this.props.showThemes) {
       filters.push('theme');
     }
+    if (this.props.category.length > 0) {
+      filters.push('category');
+    }
     this.filters = filters;
+    this.forceUpdate();
   },
 
   handleOrderChange(ev) {

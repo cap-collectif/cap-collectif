@@ -159,7 +159,8 @@ Feature: Proposals
 
   @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a selection step and apply filters
-    Given I go to a selection step with simple vote enabled
+    Given feature "themes" is enabled
+    When I go to a selection step with simple vote enabled
     Then there should be 3 proposals
     And I change the proposals theme filter
     Then there should be 2 proposals

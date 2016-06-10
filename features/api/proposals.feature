@@ -30,6 +30,10 @@ Feature: Proposal Restful Api
           "name": @string@,
           "color": @string@
         },
+        "category": {
+          "id": @integer@,
+          "name": @string@
+        },
         "author": {
           "username": @string@,
           "displayName": @string@,
@@ -138,6 +142,10 @@ Feature: Proposal Restful Api
             "name": @string@,
             "color": @string@
           },
+          "category": {
+            "id": @integer@,
+            "name": @string@
+          },
           "author": @...@,
           "proposalForm": {
             "id": @integer@
@@ -199,6 +207,10 @@ Feature: Proposal Restful Api
             "id": @integer@,
             "name": @string@,
             "color": @string@
+          },
+          "category": {
+            "id": @integer@,
+            "name": @string@
           },
           "author": @...@,
           "proposalForm": {

@@ -299,6 +299,7 @@ class StepController extends Controller
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
             'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
             'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
+            'categories' => $proposalForm ? $proposalForm->getCategories() : [],
             'step' => $step,
             'count' => $searchResults['count'],
             'proposals' => $searchResults['proposals'],
@@ -422,14 +423,26 @@ class StepController extends Controller
             ;
         }
 
+        $form = count($searchResults['proposals']) > 0
+            ? $em
+                ->getRepository('CapcoAppBundle:ProposalForm')
+                ->find($searchResults['proposals'][0]['proposalForm']['id'])
+            : null
+        ;
+
+        $showThemes = $form ? $form->isUsingThemes() : false;
+        $categories = $form ? $form->getCategories() : [];
+
         $props = $serializer->serialize([
             'step' => $step,
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
             'statuses' => $em->getRepository('CapcoAppBundle:Status')->getByProject($project),
             'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
             'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
+            'categories' => $categories,
             'proposals' => $searchResults['proposals'],
             'count' => $searchResults['count'],
+            'showThemes' => $showThemes,
         ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Statuses', 'Themes', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias']));
 
         return [

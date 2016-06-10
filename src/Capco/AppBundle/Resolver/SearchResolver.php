@@ -257,6 +257,9 @@ class SearchResolver
         if (array_key_exists('type', $providedFilters) && $providedFilters['type'] > 0) {
             $filters['author.user_type.id'] = $providedFilters['type'];
         }
+        if (array_key_exists('category', $providedFilters) && $providedFilters['category'] > 0) {
+            $filters['category.id'] = $providedFilters['category'];
+        }
 
         // Search
         $results = $this->searchAll(

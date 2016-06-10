@@ -15,6 +15,7 @@ Feature: ProposalForm Restful Api
   "themeHelpText": @string@,
   "districtHelpText": @string@,
   "isContribuable": true,
+  "usingThemes": @boolean@,
   "fields": [
     {
       "id": @integer@,

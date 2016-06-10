@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 
 import ProposalStore from '../../stores/ProposalStore';
@@ -14,13 +14,14 @@ import StepPageHeader from '../Steps/Page/StepPageHeader';
 
 const CollectStepPage = React.createClass({
   propTypes: {
-    step: React.PropTypes.object.isRequired,
-    count: React.PropTypes.number.isRequired,
-    form: React.PropTypes.object.isRequired,
-    themes: React.PropTypes.array.isRequired,
-    statuses: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
-    types: React.PropTypes.array.isRequired,
+    step: PropTypes.object.isRequired,
+    count: PropTypes.number.isRequired,
+    form: PropTypes.object.isRequired,
+    themes: PropTypes.array.isRequired,
+    statuses: PropTypes.array.isRequired,
+    districts: PropTypes.array.isRequired,
+    types: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -95,6 +96,7 @@ const CollectStepPage = React.createClass({
           form={this.props.form}
           themes={this.props.themes}
           districts={this.props.districts}
+          categories={this.props.categories}
         />
         <ProposalListFilters
           id={this.props.form.id}
@@ -102,12 +104,14 @@ const CollectStepPage = React.createClass({
           district={this.props.districts}
           type={this.props.types}
           status={this.props.statuses}
+          category={this.props.categories}
           onChange={() => this.handleFilterOrOrderChange()}
+          showThemes={this.props.form.usingThemes}
         />
         <br />
         <Loader show={this.state.isLoading}>
           <div>
-            <ProposalList proposals={this.state.proposals} />
+            <ProposalList proposals={this.state.proposals} showThemes={this.props.form.usingThemes} />
             {
               showPagination
               ? <Pagination

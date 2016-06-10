@@ -255,6 +255,7 @@
       "submit": "Signaler"
     },
     "select": "Choisir une valeur",
+    "select_category": "Toutes les catégories",
     "select_district": "Tous les quartiers",
     "select_status": "Tous les statuts",
     "select_theme": "Tous les th\u00e8mes",
@@ -570,8 +571,10 @@
   "proposal": {
     "add": "Faire une proposition",
     "body": "Description",
+    "category": "Catégorie",
     "constraints": {
       "body": "La description de la proposition doit faire au moins 2 caract\u00e8res.",
+      "category": "Sélectionnez une catégorie",
       "district": "S\u00e9lectionnez un quartier",
       "field_mandatory": "Ce champ est obligatoire.",
       "theme": "S\u00e9lectionnez un th\u00e8me",
@@ -618,6 +621,7 @@
     },
     "search": "Rechercher une proposition",
     "select": {
+      "category": "Sélectionnez une catégorie",
       "district": "S\u00e9lectionnez un quartier",
       "theme": "S\u00e9lectionnez un th\u00e8me"
     },

@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\ProposalCategory:
+    pCategory1:
+        name: Aménagement
+        form: @proposalform1
+    pCategory2:
+        name: Politique
+        form: @proposalform1

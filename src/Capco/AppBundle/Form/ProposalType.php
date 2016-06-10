@@ -37,7 +37,7 @@ class ProposalType extends AbstractType
             ])
         ;
 
-        if ($this->toggleManager->isActive('themes')) {
+        if ($this->toggleManager->isActive('themes') && $options['usingThemes']) {
             $builder
                 ->add('theme', null, [
                     'required' => true,
@@ -48,6 +48,14 @@ class ProposalType extends AbstractType
         if ($this->toggleManager->isActive('districts')) {
             $builder
                 ->add('district', null, [
+                    'required' => true,
+                ])
+            ;
+        }
+
+        if ($options['withCategories']) {
+            $builder
+                ->add('category', null, [
                     'required' => true,
                 ])
             ;
@@ -74,6 +82,8 @@ class ProposalType extends AbstractType
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
+            'usingThemes' => false,
+            'withCategories' => false,
         ]);
     }
 

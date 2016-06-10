@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import ProposalStore from '../../stores/ProposalStore';
 import ProposalVoteStore from '../../stores/ProposalVoteStore';
@@ -14,13 +14,15 @@ import StepPageHeader from '../Steps/Page/StepPageHeader';
 
 const SelectionStepPage = React.createClass({
   propTypes: {
-    proposals: React.PropTypes.array.isRequired,
-    themes: React.PropTypes.array.isRequired,
-    statuses: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
-    types: React.PropTypes.array.isRequired,
-    step: React.PropTypes.object.isRequired,
-    count: React.PropTypes.number.isRequired,
+    proposals: PropTypes.array.isRequired,
+    themes: PropTypes.array.isRequired,
+    statuses: PropTypes.array.isRequired,
+    districts: PropTypes.array.isRequired,
+    types: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
+    step: PropTypes.object.isRequired,
+    count: PropTypes.number.isRequired,
+    showThemes: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -111,8 +113,10 @@ const SelectionStepPage = React.createClass({
           district={this.props.districts}
           type={this.props.types}
           status={this.props.statuses}
+          category={this.props.categories}
           onChange={() => this.handleFilterOrOrderChange()}
           orderByVotes={this.props.step.voteType !== VOTE_TYPE_DISABLED}
+          showThemes={this.props.showThemes}
         />
         <br />
         <Loader show={this.state.isLoading}>
@@ -121,6 +125,7 @@ const SelectionStepPage = React.createClass({
               proposals={this.state.proposals}
               selectionStep={this.props.step}
               creditsLeft={this.state.creditsLeft}
+              showThemes={this.props.showThemes}
             />
             {
               showPagination

@@ -1,0 +1,31 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block form %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            const usingThemesField = $("input#{{ admin.uniqid }}_usingThemes");
+            const themeHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_themeHelpText");
+
+            function toggleThemeHelpTextField(show) {
+                if (show) {
+                  themeHelpTextField.removeClass('hidden');
+                } else {
+                  themeHelpTextField.addClass('hidden');
+                }
+            }
+
+            const initialValue = usingThemesField.prop('checked');
+            console.log(usingThemesField);
+            console.log(usingThemesField.prop('checked'));
+            toggleThemeHelpTextField(initialValue);
+
+            usingThemesField.on('ifChanged', function(e) {
+                $(e.target).iCheck('update');
+                toggleThemeHelpTextField($(e.target).prop('checked'));
+
+            });
+        });
+    </script>
+{% endblock %}
