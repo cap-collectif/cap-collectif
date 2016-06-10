@@ -117,8 +117,8 @@ export default {
       });
   },
 
-  loadElementsTreeFromServer: (synthesis, type, parent = null, depth = NAV_DEPTH) => {
-    let url = `/syntheses/${synthesis}/elements/tree?type=${type}&depth=${depth}`;
+  loadElementsTreeFromServer: (synthesis, type, parent = null) => {
+    let url = `/syntheses/${synthesis}/elements/tree?type=${type}&depth=${NAV_DEPTH}`;
     url += parent ? `&parent=${parent}` : '';
     Fetcher
       .get(url)

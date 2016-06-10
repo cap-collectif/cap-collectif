@@ -1,7 +1,6 @@
 import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { NAV_DEPTH } from '../../../constants/SynthesisElementConstants';
 
 import ViewElement from './ViewElement';
 import Loader from '../../Utils/Loader';
@@ -49,17 +48,17 @@ const ViewTree = React.createClass({
   },
 
   toggleExpand(element) {
-    const { synthesis } = this.props;
     if (element.childrenCount !== element.children.length) {
-      this.loadElementsTreeFromServer(element.id);
+      SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, 'published', element.id);
     }
     SynthesisElementActions.expandTreeItem('view', element.id, !this.state.expanded[element.id]);
   },
 
-  loadElementsTreeFromServer(parent = null) {
-    const { synthesis } = this.props;
-    const depth = synthesis.displayRules && synthesis.displayRules.level ? parseInt(synthesis.displayRules.level, 10) : 0;
-    SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'published', parent, depth > 2 ? depth - 1 : depth + NAV_DEPTH - 1);
+  loadElementsTreeFromServer() {
+    SynthesisElementActions.loadElementsTreeFromServer(
+      this.props.synthesis.id,
+      'published'
+    );
   },
 
   isElementExpanded(element) {

@@ -4,15 +4,9 @@ import ViewTree from './ViewTree';
 
 const Preview = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object,
+    synthesis: React.PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
-
-  getDefaultProps() {
-    return {
-      synthesis: {},
-    };
-  },
 
   render() {
     return (
