@@ -1,3 +1,4 @@
+@proposal_forms
 Feature: ProposalForm Restful Api
   As an API client
 
@@ -14,6 +15,7 @@ Feature: ProposalForm Restful Api
   "descriptionHelpText": @string@,
   "themeHelpText": @string@,
   "districtHelpText": @string@,
+  "categoryHelpText": @string@,
   "isContribuable": true,
   "usingThemes": @boolean@,
   "fields": [
