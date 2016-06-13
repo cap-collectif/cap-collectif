@@ -10,6 +10,7 @@ import FormMixin from '../../utils/FormMixin';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 import Input from '../Form/Input';
 import { Row, Col, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 const CommentForm = React.createClass({
   propTypes: {
@@ -252,4 +253,8 @@ const CommentForm = React.createClass({
 
 });
 
-export default CommentForm;
+const mapStateToProps = (state) => {
+  return { user: state.user };
+};
+
+export default connect(mapStateToProps)(CommentForm);

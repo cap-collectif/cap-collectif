@@ -16,7 +16,6 @@ const CommentSection = React.createClass({
   propTypes: {
     uri: PropTypes.string,
     object: PropTypes.number,
-    user: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -157,7 +156,7 @@ const CommentSection = React.createClass({
           { this.renderFilter() }
         </Row>
         <Loader show={this.state.isLoading} />
-        <CommentForm comment={this.comment} user={this.props.user} focus={false} />
+        <CommentForm comment={this.comment} focus={false} />
         <CommentList {...this.props}
           comments={this.state.comments}
           root
@@ -170,10 +169,4 @@ const CommentSection = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps)(CommentSection);
+export default CommentSection;
