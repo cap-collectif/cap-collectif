@@ -306,10 +306,12 @@ class Proposal implements CommentableInterface, VotableInterface
      *
      * @return $this
      */
-    public function setTheme(Theme $theme)
+    public function setTheme(Theme $theme = null)
     {
         $this->theme = $theme;
-        $theme->addProposal($this);
+        if (!!$theme) {
+            $theme->addProposal($this);
+        }
 
         return $this;
     }
