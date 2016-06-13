@@ -44,6 +44,11 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
         'popularity' => 'argument.sort.popularity',
     ];
 
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
+    }
+
     /**
      * @var int
      *

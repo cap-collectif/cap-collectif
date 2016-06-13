@@ -27,6 +27,8 @@ class Version20160609113823 extends AbstractMigration
         $this->addSql('ALTER TABLE proposal ADD expired TINYINT(1) NOT NULL');
         $this->addSql('ALTER TABLE reply ADD expired TINYINT(1) NOT NULL');
         $this->addSql('ALTER TABLE source ADD expired TINYINT(1) NOT NULL');
+        $this->addSql('DROP INDEX idx_voter_confirmed ON votes');
+        $this->addSql('ALTER TABLE votes DROP confirmed');
     }
 
     /**
@@ -46,5 +48,7 @@ class Version20160609113823 extends AbstractMigration
         $this->addSql('ALTER TABLE reply DROP expired');
         $this->addSql('ALTER TABLE source DROP expired');
         $this->addSql('ALTER TABLE votes DROP expired');
+        $this->addSql('ALTER TABLE votes ADD confirmed TINYINT(1) NOT NULL');
+        $this->addSql('CREATE INDEX idx_voter_confirmed ON votes (voter_id, confirmed)');
     }
 }

@@ -190,6 +190,11 @@ class Source implements Contribution, VotableInterface, IsPublishableInterface
         return 'New source';
     }
 
+    public function isIndexable()
+    {
+      return $this->getIsEnabled() && !$this->isExpired();
+    }
+
     /**
      * Get id.
      *

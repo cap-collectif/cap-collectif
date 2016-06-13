@@ -173,6 +173,11 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         $this->likers = new ArrayCollection();
     }
 
+    public function isIndexable()
+    {
+      return $this->enabled && !$this->expired;
+    }
+
     public function __toString()
     {
         if ($this->getId()) {

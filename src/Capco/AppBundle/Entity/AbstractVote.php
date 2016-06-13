@@ -31,6 +31,11 @@ abstract class AbstractVote implements Contribution, HasAuthorInterface
 {
     use ExpirableTrait;
 
+    public function isIndexable()
+    {
+        return !$this->isExpired();
+    }
+
     /**
      * @var int
      *

@@ -184,6 +184,11 @@ class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, 
         return 'New opinion';
     }
 
+    public function isIndexable()
+    {
+        return $this->getIsEnabled() && !$this->isExpired();
+    }
+
     /**
      * Get id.
      *

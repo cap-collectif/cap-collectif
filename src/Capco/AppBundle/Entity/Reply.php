@@ -74,6 +74,11 @@ class Reply implements Contribution
         $this->responses = new ArrayCollection();
     }
 
+    public function isIndexable()
+    {
+        return false;
+    }
+
     /**
      * Get id.
      *

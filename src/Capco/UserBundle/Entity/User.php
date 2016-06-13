@@ -8,8 +8,9 @@ use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\MediaBundle\Entity\Media;
+use Capco\AppBundle\Model\IndexableInterface;
 
-class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface
+class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface, IndexableInterface
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
@@ -259,6 +260,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->sources = new ArrayCollection();
         $this->proposals = new ArrayCollection();
         $this->replies = new ArrayCollection();
+    }
+
+    public function isIndexable()
+    {
+        return $this->isEnabled();
     }
 
     // for EncoderAwareInterface

@@ -183,6 +183,11 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
         return 'New idea';
     }
 
+    public function isIndexable()
+    {
+      return $this->getIsEnabled() && !$this->isExpired();
+    }
+
     /**
      * Get id.
      *

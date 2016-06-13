@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Model;
 
-interface Contribution extends ExpirableInterface
+interface Contribution extends ExpirableInterface, IndexableInterface
 {
+
 }

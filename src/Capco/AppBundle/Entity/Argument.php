@@ -147,6 +147,11 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         $this->updatedAt = new \DateTime();
     }
 
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
+    }
+
     public function __toString()
     {
         if ($this->id) {
