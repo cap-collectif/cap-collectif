@@ -209,7 +209,6 @@ export const RegistrationForm = React.createClass({
               groupClassName={this.getGroupStyle('email')}
               errors={this.renderFormErrors('email')}
               onBlur={this.checkMail}
-              help={this.getIntlMessage('registration.tooltip.email')}
             />
         </OverlayTrigger>
         {this.state.suggestedEmail
@@ -233,7 +232,6 @@ export const RegistrationForm = React.createClass({
             labelClassName="h5 label--no-margin"
             groupClassName={this.getGroupStyle('plainPassword')}
             errors={this.renderFormErrors('plainPassword')}
-            help={this.getIntlMessage('registration.tooltip.password')}
           />
         </OverlayTrigger>
         {
