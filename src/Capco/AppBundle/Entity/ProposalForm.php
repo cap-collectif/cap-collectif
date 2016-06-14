@@ -108,6 +108,24 @@ class ProposalForm
     private $usingThemes = false;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="theme_mandatory", type="boolean")
+     */
+    private $themeMandatory = false;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="using_categories", type="boolean")
+     */
+    private $usingCategories = false;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="category_mandatory", type="boolean")
+     */
+    private $categoryMandatory = false;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -404,6 +422,63 @@ class ProposalForm
     public function setUsingThemes($usingThemes)
     {
         $this->usingThemes = $usingThemes;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isThemeMandatory()
+    {
+        return $this->themeMandatory;
+    }
+
+    /**
+     * @param boolean $themeMandatory
+     * @return $this
+     */
+    public function setThemeMandatory($themeMandatory)
+    {
+        $this->themeMandatory = $themeMandatory;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isUsingCategories()
+    {
+        return $this->usingCategories;
+    }
+
+    /**
+     * @param boolean $usingCategories
+     * @return $this
+     */
+    public function setUsingCategories($usingCategories)
+    {
+        $this->usingCategories = $usingCategories;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isCategoryMandatory()
+    {
+        return $this->categoryMandatory;
+    }
+
+    /**
+     * @param boolean $categoryMandatory
+     * @return $this
+     */
+    public function setCategoryMandatory($categoryMandatory)
+    {
+        $this->categoryMandatory = $categoryMandatory;
 
         return $this;
     }

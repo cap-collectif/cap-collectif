@@ -28,6 +28,7 @@ class ProposalType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $form = $options['proposalForm'];
         $builder
             ->add('title', null, [
                 'required' => true,
@@ -37,10 +38,10 @@ class ProposalType extends AbstractType
             ])
         ;
 
-        if ($this->toggleManager->isActive('themes') && $options['usingThemes']) {
+        if ($this->toggleManager->isActive('themes') && $form && $form->isUsingThemes()) {
             $builder
                 ->add('theme', null, [
-                    'required' => true,
+                    'required' => $form && $form->isThemeMandatory(),
                 ])
             ;
         }
@@ -53,10 +54,10 @@ class ProposalType extends AbstractType
             ;
         }
 
-        if ($options['withCategories']) {
+        if ($form && $form->isUsingCategories() && count($form->getCategories()) > 0) {
             $builder
                 ->add('category', null, [
-                    'required' => true,
+                    'required' => $form && $form->isCategoryMandatory(),
                 ])
             ;
         }
@@ -82,8 +83,7 @@ class ProposalType extends AbstractType
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
-            'usingThemes' => false,
-            'withCategories' => false,
+            'proposalForm' => null,
         ]);
     }
 

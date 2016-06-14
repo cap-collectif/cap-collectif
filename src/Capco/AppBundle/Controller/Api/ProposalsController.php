@@ -156,8 +156,7 @@ class ProposalsController extends FOSRestController
         }
 
         $form = $this->createForm('proposal', $proposal, [
-            'usingThemes' => $proposalForm->isUsingThemes(),
-            'withCategories' => count($proposalForm->getCategories()) > 0,
+            'proposalForm' => $proposalForm,
         ]);
         $form->submit($request->request->all());
 
@@ -337,8 +336,7 @@ class ProposalsController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
 
         $form = $this->createForm('proposal', $proposal, [
-            'usingThemes' => $proposalForm->isUsingThemes(),
-            'withCategories' => count($proposalForm->getCategories()) > 0,
+            'proposalForm' => $proposalForm,
         ]);
         $form->submit($request->request->all(), false);
 

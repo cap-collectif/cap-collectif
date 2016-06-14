@@ -43,6 +43,21 @@ Capco\AppBundle\Entity\ProposalForm:
           type: boolean
           groups: [ProposalForms]
           serialized_name: usingThemes
+        usingCategories:
+          expose: true
+          type: boolean
+          groups: [ProposalForms]
+          serialized_name: usingCategories
+        themeMandatory:
+          expose: true
+          type: boolean
+          groups: [ProposalForms]
+          serialized_name: themeMandatory
+        categoryMandatory:
+          expose: true
+          type: boolean
+          groups: [ProposalForms]
+          serialized_name: categoryMandatory
     virtual_properties:
         canContribute:
             serialized_name: isContribuable

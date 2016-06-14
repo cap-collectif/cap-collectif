@@ -18,6 +18,9 @@ Feature: ProposalForm Restful Api
   "categoryHelpText": @string@,
   "isContribuable": true,
   "usingThemes": @boolean@,
+  "themeMandatory": @boolean@,
+  "usingCategories": @boolean@,
+  "categoryMandatory": @boolean@,
   "fields": [
     {
       "id": @integer@,

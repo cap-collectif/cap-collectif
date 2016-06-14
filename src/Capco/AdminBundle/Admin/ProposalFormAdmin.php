@@ -35,16 +35,30 @@ class ProposalFormAdmin extends Admin
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $formMapper->add('usingThemes', null, [
-                'label' => 'admin.fields.proposal_form.using_themes',
-                'required' => false,
-            ]);
+            $formMapper
+                ->add('usingThemes', null, [
+                    'label' => 'admin.fields.proposal_form.using_themes',
+                    'required' => false,
+                ])
+                ->add('themeMandatory', null, [
+                    'label' => 'admin.fields.proposal_form.theme_mandatory',
+                    'required' => false,
+                ])
+            ;
         }
 
         $formMapper
+            ->add('usingCategories', null, [
+                'label' => 'admin.fields.proposal_form.using_categories',
+                'required' => false,
+            ])
+            ->add('categoryMandatory', null, [
+                'label' => 'admin.fields.proposal_form.category_mandatory',
+                'required' => false,
+            ])
             ->end()
 
-            ->with('admin.fields.proposal_form.group_categories')
+            ->with('admin.fields.proposal_form.group_categories', ['class' => 'col-md-12 categories-hideable'])
             ->add('categories', 'sonata_type_collection', [
                 'label' => 'admin.fields.proposal_form.categories',
                 'by_reference' => false,

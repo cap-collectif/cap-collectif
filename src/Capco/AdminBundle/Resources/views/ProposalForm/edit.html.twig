@@ -7,23 +7,47 @@
 
             const usingThemesField = $("input#{{ admin.uniqid }}_usingThemes");
             const themeHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_themeHelpText");
+            const themeMandatoryField = $("#sonata-ba-field-container-{{ admin.uniqid }}_themeMandatory");
 
-            function toggleThemeHelpTextField(show) {
+            const usingCategoriesField = $("input#{{ admin.uniqid }}_usingCategories");
+            const categoryHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_categoryHelpText");
+            const categoryMandatoryField = $("#sonata-ba-field-container-{{ admin.uniqid }}_categoryMandatory");
+            const categoriesGroup = $(".categories-hideable");
+
+            function toggleThemesField(show) {
                 if (show) {
-                  themeHelpTextField.removeClass('hidden');
+                    themeHelpTextField.removeClass('hidden');
+                    themeMandatoryField.removeClass('hidden');
                 } else {
-                  themeHelpTextField.addClass('hidden');
+                    themeHelpTextField.addClass('hidden');
+                    themeMandatoryField.addClass('hidden');
                 }
             }
 
-            const initialValue = usingThemesField.prop('checked');
-            console.log(usingThemesField);
-            console.log(usingThemesField.prop('checked'));
-            toggleThemeHelpTextField(initialValue);
+            function toggleCategoriesField(show) {
+                if (show) {
+                    categoryHelpTextField.removeClass('hidden');
+                    categoryMandatoryField.removeClass('hidden');
+                    categoriesGroup.removeClass('hidden');
+                } else {
+                    categoryHelpTextField.addClass('hidden');
+                    categoryMandatoryField.addClass('hidden');
+                    categoriesGroup.addClass('hidden');
+                }
+            }
+
+            toggleThemesField(usingThemesField.prop('checked'));
+            toggleCategoriesField(usingCategoriesField.prop('checked'));
 
             usingThemesField.on('ifChanged', function(e) {
                 $(e.target).iCheck('update');
-                toggleThemeHelpTextField($(e.target).prop('checked'));
+                toggleThemesField($(e.target).prop('checked'));
+
+            });
+
+            usingCategoriesField.on('ifChanged', function(e) {
+                $(e.target).iCheck('update');
+                toggleCategoriesField($(e.target).prop('checked'));
 
             });
         });

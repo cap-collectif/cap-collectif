@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20160613153829 extends AbstractMigration
+class Version20160614152608 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -23,7 +23,7 @@ class Version20160613153829 extends AbstractMigration
         $this->addSql('ALTER TABLE proposal ADD category_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE proposal ADD CONSTRAINT FK_BFE5947212469DE2 FOREIGN KEY (category_id) REFERENCES proposal_category (id) ON DELETE SET NULL');
         $this->addSql('CREATE INDEX IDX_BFE5947212469DE2 ON proposal (category_id)');
-        $this->addSql('ALTER TABLE proposal_form ADD category_help_text VARCHAR(255) DEFAULT NULL, ADD using_themes TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE proposal_form ADD category_help_text VARCHAR(255) DEFAULT NULL, ADD using_themes TINYINT(1) NOT NULL, ADD theme_mandatory TINYINT(1) NOT NULL, ADD using_categories TINYINT(1) NOT NULL, ADD category_mandatory TINYINT(1) NOT NULL');
     }
 
     /**
@@ -38,6 +38,6 @@ class Version20160613153829 extends AbstractMigration
         $this->addSql('DROP TABLE proposal_category');
         $this->addSql('DROP INDEX IDX_BFE5947212469DE2 ON proposal');
         $this->addSql('ALTER TABLE proposal DROP category_id');
-        $this->addSql('ALTER TABLE proposal_form DROP category_help_text, DROP using_themes');
+        $this->addSql('ALTER TABLE proposal_form DROP category_help_text, DROP using_themes, DROP theme_mandatory, DROP using_categories, DROP category_mandatory');
     }
 }

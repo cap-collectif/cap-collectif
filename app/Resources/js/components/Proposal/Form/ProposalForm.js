@@ -157,7 +157,7 @@ const ProposalForm = React.createClass({
   },
 
   updateThemeConstraint() {
-    if (this.props.features.themes && this.props.form.usingThemes) {
+    if (this.props.features.themes && this.props.form.usingThemes && this.props.form.themeMandatory) {
       this.formValidationRules.theme = {
         minValue: { value: 0, message: 'proposal.constraints.theme' },
       };
@@ -177,7 +177,7 @@ const ProposalForm = React.createClass({
   },
 
   updateCategoryConstraint() {
-    if (this.props.categories.length) {
+    if (this.props.categories.length && this.props.form.usingCategories && this.props.form.categoryMandatory) {
       this.formValidationRules.category = {
         minValue: { value: 0, message: 'proposal.constraints.category' },
       };
@@ -206,11 +206,12 @@ const ProposalForm = React.createClass({
   },
 
   render() {
+    const { form, features, themes, districts, categories } = this.props;
     return (
       <form id="proposal-form" ref="form">
         {
           this.props.form.description
-          ? <FormattedHTMLMessage message={this.props.form.description} />
+          ? <FormattedHTMLMessage message={form.description} />
           : null
         }
         <Input
@@ -224,20 +225,20 @@ const ProposalForm = React.createClass({
         />
 
         {
-          this.props.features.themes && this.props.form.usingThemes
+          features.themes && form.usingThemes
             ? <Input
               id="proposal_theme"
               type="select"
               ref="theme"
               valueLink={this.linkState('form.theme')}
-              label={this.getIntlMessage('proposal.theme') + ' *'}
+              label={this.getIntlMessage('proposal.theme') + (form.themeMandatory ? ' *' : '')}
               groupClassName={this.getGroupStyle('theme')}
               errors={this.renderFormErrors('theme')}
-              help={this.props.form.themeHelpText}
+              help={form.themeHelpText}
             >
               <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
               {
-                this.props.themes.map((theme) => {
+                themes.map((theme) => {
                   return (
                     <option key={theme.id} value={theme.id}>
                       {theme.title}
@@ -250,20 +251,20 @@ const ProposalForm = React.createClass({
         }
 
         {
-          this.props.categories.length > 0
+          categories.length > 0 && form.usingCategories
           && <Input
             id="proposal_category"
             type="select"
             ref="category"
             valueLink={this.linkState('form.category')}
-            label={this.getIntlMessage('proposal.category') + ' *'}
+            label={this.getIntlMessage('proposal.category') + (form.categoryMandatory ? ' *' : '')}
             groupClassName={this.getGroupStyle('category')}
             errors={this.renderFormErrors('category')}
-            help={this.props.form.categoryHelpText}
+            help={form.categoryHelpText}
           >
             <option value={-1} disabled>{this.getIntlMessage('proposal.select.category')}</option>
             {
-              this.props.categories.map((category) => {
+              categories.map((category) => {
                 return (
                   <option key={category.id} value={category.id}>
                     {category.name}
@@ -275,7 +276,7 @@ const ProposalForm = React.createClass({
         }
 
         {
-          this.props.features.districts
+          features.districts
           && <Input
             id="proposal_district"
             type="select"
@@ -284,11 +285,11 @@ const ProposalForm = React.createClass({
             label={this.getIntlMessage('proposal.district') + ' *'}
             groupClassName={this.getGroupStyle('district')}
             errors={this.renderFormErrors('district')}
-            help={this.props.form.districtHelpText}
+            help={form.districtHelpText}
           >
             <option value={-1} disabled>{this.getIntlMessage('proposal.select.district')}</option>
             {
-              this.props.districts.map((district) => {
+              districts.map((district) => {
                 return (
                     <option key={district.id} value={district.id}>
                       {district.name}
@@ -306,11 +307,11 @@ const ProposalForm = React.createClass({
         groupClassName={this.getGroupStyle('body')}
         errors={this.renderFormErrors('body')}
         valueLink={this.linkState('form.body')}
-        help={this.props.form.descriptionHelpText}
+        help={form.descriptionHelpText}
       />
 
       {
-        this.props.form.fields.map((field) => {
+        form.fields.map((field) => {
           const key = 'custom-' + field.id;
           const label = field.question + (field.required ? ' *' : '');
           return (
