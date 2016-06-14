@@ -1,11 +1,13 @@
 global:
   already_voted: Vous avez déjà voté.
-  no_theme_when_activated: Vous devez choisir un thème.
   is_not_social_netwotk_url: Veuillez entrer un lien valide.
   is_not_facebook_url: Veuillez entrer un lien Facebook valide.
   is_not_twitter_url: Veuillez entrer un lien Twitter valide.
   is_not_google_url: Veuillez entrer un lien Google+ valide.
   missing_required_responses: Veuillez répondre à toutes les questions obligatoires.
+  no_category_when_mandatory: Vous devez spécifier une catégorie.
+  no_theme_when_activated: Vous devez choisir un thème.
+  no_theme_when_mandatory: Vous devez spécifier un thème.
 
 contact:
   no_name: Veuillez renseigner votre nom pour continuer.

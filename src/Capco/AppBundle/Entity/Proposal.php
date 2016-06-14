@@ -28,6 +28,8 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="proposal.missing_required_responses", formField="proposalForm")
+ * @CapcoAssert\HasThemeIfMandatory()
+ * @CapcoAssert\HasCategoryIfMandatory()
  */
 class Proposal implements CommentableInterface, VotableInterface
 {
@@ -83,7 +85,6 @@ class Proposal implements CommentableInterface, VotableInterface
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     * @CapcoAssert\HasThemeIfActivated()
      */
     private $theme = null;
 

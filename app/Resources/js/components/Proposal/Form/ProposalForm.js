@@ -98,13 +98,13 @@ const ProposalForm = React.createClass({
           });
         });
         form.responses = responses;
-        if (!this.props.features.themes) {
+        if (!this.props.features.themes || !form.usingThemes) {
           delete form.theme;
         }
         if (!this.props.features.districts) {
           delete form.district;
         }
-        if(this.props.categories.length === 0) {
+        if(this.props.categories.length === 0 || form.usingCategories) {
           delete form.category;
         }
         if (this.props.mode === 'edit') {
