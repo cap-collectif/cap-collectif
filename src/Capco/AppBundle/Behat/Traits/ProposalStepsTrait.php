@@ -325,6 +325,7 @@ trait ProposalStepsTrait
         }
         $this->fillFields($tableNode);
         $this->selectOption('proposal_district', 'Beaulieu');
+        $this->selectOption('proposal_category', 'Politique');
         if ($theme) {
             $this->selectOption('proposal_theme', 'Justice');
         }
