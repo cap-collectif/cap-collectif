@@ -7,6 +7,8 @@ admin:
       send_address: Adresse électronique d'envoi des notifications
 
 blog:
+  content:
+    body: Description
   jumbotron:
     body: Accroche
     title: Titre

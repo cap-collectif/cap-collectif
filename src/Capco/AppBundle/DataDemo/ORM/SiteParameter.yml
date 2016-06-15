@@ -224,6 +224,12 @@ Capco\AppBundle\Entity\SiteParameter:
         value: Blog
         position: 770
         type: 0
+    SiteParameterBlogDescription:
+        keyname: blog.content.body
+        category: pages.blog
+        value: ''
+        position: 771
+        type: 1
 
     SiteParameterScript:
         keyname: global.site.embed_js

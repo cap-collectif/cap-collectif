@@ -4,11 +4,12 @@
 
 {% set jumbotron_title = capco_site_parameter_value('blog.jumbotron.title') %}
 {% set jumbotron_body = capco_site_parameter_value('blog.jumbotron.body') %}
+{% set content_body = capco_site_parameter_value('blog.content.body') %}
 
 {% block metaTags %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       (jumbotron_title ?: 'blog.page_title'|trans({}, 'CapcoAppBundle')),
-        'description': jumbotron_body|striptags,
+        'description': (jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
         'url':         url('app_blog')
     } only %}
 {% endblock %}
@@ -39,6 +40,9 @@
 {% block body %}
 
     <div class="container  container--custom">
+        {% if null != content_body %}
+            {{ content_body|raw }}
+        {% endif %}
     </div>
 
     <div class="container  container--custom">
