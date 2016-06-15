@@ -109,11 +109,11 @@ const SelectionStepPage = React.createClass({
         <ProposalListFilters
           id={this.props.step.id}
           fetchFrom="selectionStep"
-          theme={this.props.themes}
-          district={this.props.districts}
-          type={this.props.types}
-          status={this.props.statuses}
-          category={this.props.categories}
+          themes={this.props.themes}
+          districts={this.props.districts}
+          types={this.props.types}
+          statuses={this.props.statuses}
+          categories={this.props.categories}
           onChange={() => this.handleFilterOrOrderChange()}
           orderByVotes={this.props.step.voteType !== VOTE_TYPE_DISABLED}
           showThemes={this.props.showThemes}

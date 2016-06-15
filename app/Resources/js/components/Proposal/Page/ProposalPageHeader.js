@@ -24,9 +24,8 @@ const ProposalPageHeader = React.createClass({
   },
 
   render() {
-    const proposal = this.props.proposal;
+    const { proposal, showThemes } = this.props;
     const votesCount = proposal.votesCount;
-    const { showThemes } = this.props;
 
     const createdDate = (
       <FormattedDate

@@ -29,6 +29,10 @@ class ProposalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $form = $options['proposalForm'];
+        if (!$form) {
+            throw new \Exception('A proposal form is needed to create or update a proposal.');
+        }
+
         $builder
             ->add('title', null, [
                 'required' => true,
@@ -38,10 +42,10 @@ class ProposalType extends AbstractType
             ])
         ;
 
-        if ($this->toggleManager->isActive('themes') && $form && $form->isUsingThemes()) {
+        if ($this->toggleManager->isActive('themes') && $form->isUsingThemes()) {
             $builder
                 ->add('theme', null, [
-                    'required' => $form && $form->isThemeMandatory(),
+                    'required' => $form->isThemeMandatory(),
                 ])
             ;
         }
@@ -54,10 +58,10 @@ class ProposalType extends AbstractType
             ;
         }
 
-        if ($form && $form->isUsingCategories() && count($form->getCategories()) > 0) {
+        if ($form->isUsingCategories() && count($form->getCategories()) > 0) {
             $builder
                 ->add('category', null, [
-                    'required' => $form && $form->isCategoryMandatory(),
+                    'required' => $form->isCategoryMandatory(),
                 ])
             ;
         }

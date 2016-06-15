@@ -5,8 +5,7 @@ Feature: Proposals
 
   @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a collect step and apply filters
-    Given feature "themes" is enabled
-    Given feature "districts" is enabled
+    Given features themes, districts are enabled
     And I go to an open collect step
     Then there should be 6 proposals
     And I change the proposals theme filter
@@ -31,8 +30,7 @@ Feature: Proposals
 
   @javascript @elasticsearch
   Scenario: Anonymous user combine search, filters and sorting on proposals in a collect step
-    Given feature "themes" is enabled
-    Given feature "districts" is enabled
+    Given features themes, districts are enabled
     And I am logged in as user
     And I go to an open collect step
     Then there should be 6 proposals
@@ -64,8 +62,7 @@ Feature: Proposals
 
   @database @javascript @elasticsearch
   Scenario: Logged in user wants to create a proposal with theme
-    Given feature "themes" is enabled
-    And feature "districts" is enabled
+    Given features themes, districts are enabled
     And I am logged in as user
     And I go to an open collect step
     Then there should be 6 proposals

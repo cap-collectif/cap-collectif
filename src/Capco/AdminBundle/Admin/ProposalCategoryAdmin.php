@@ -26,28 +26,4 @@ class ProposalCategoryAdmin extends Admin
             ])
         ;
     }
-
-    // Fields to be shown on show page
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-    }
-
-    // Fields to be shown on filter forms
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-    }
-
-    // Fields to be shown on lists
-    /**
-     * @param ListMapper $listMapper
-     */
-    protected function configureListFields(ListMapper $listMapper)
-    {
-    }
 }

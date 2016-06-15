@@ -104,7 +104,7 @@ const ProposalForm = React.createClass({
         if (!this.props.features.districts) {
           delete form.district;
         }
-        if(this.props.categories.length === 0 || form.usingCategories) {
+        if (this.props.categories.length === 0 || form.usingCategories) {
           delete form.category;
         }
         if (this.props.mode === 'edit') {
@@ -208,7 +208,7 @@ const ProposalForm = React.createClass({
   render() {
     const { form, features, themes, districts, categories } = this.props;
     return (
-      <form id="proposal-form" ref="form">
+      <form id="proposal-form">
         {
           this.props.form.description
           ? <FormattedHTMLMessage message={form.description} />
@@ -217,7 +217,6 @@ const ProposalForm = React.createClass({
         <Input
           id="proposal_title"
           type="text"
-          ref="title"
           valueLink={this.linkState('form.title')}
           label={this.getIntlMessage('proposal.title') + ' *'}
           groupClassName={this.getGroupStyle('title')}
@@ -229,7 +228,6 @@ const ProposalForm = React.createClass({
             ? <Input
               id="proposal_theme"
               type="select"
-              ref="theme"
               valueLink={this.linkState('form.theme')}
               label={this.getIntlMessage('proposal.theme') + (form.themeMandatory ? ' *' : '')}
               groupClassName={this.getGroupStyle('theme')}
@@ -255,7 +253,6 @@ const ProposalForm = React.createClass({
           && <Input
             id="proposal_category"
             type="select"
-            ref="category"
             valueLink={this.linkState('form.category')}
             label={this.getIntlMessage('proposal.category') + (form.categoryMandatory ? ' *' : '')}
             groupClassName={this.getGroupStyle('category')}
@@ -280,7 +277,6 @@ const ProposalForm = React.createClass({
           && <Input
             id="proposal_district"
             type="select"
-            ref="district"
             valueLink={this.linkState('form.district')}
             label={this.getIntlMessage('proposal.district') + ' *'}
             groupClassName={this.getGroupStyle('district')}

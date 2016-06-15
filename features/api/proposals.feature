@@ -178,10 +178,10 @@ Feature: Proposal Restful Api
     {
       "terms": null,
       "filters": {
-        "theme": 2,
-        "type": 1,
-        "status": 1,
-        "district": 1
+        "themes": 2,
+        "types": 1,
+        "statuses": 1,
+        "districts": 1
       }
     }
     """
@@ -366,8 +366,7 @@ Feature: Proposal Restful Api
   @security
   Scenario: Logged in API client wants to add a proposal with no category when mandatory
     Given I am logged in to api as user
-    Given feature themes is enabled
-    Given feature districts is enabled
+    And features themes, districts are enabled
     When I send a POST request to "/api/proposal_forms/1/proposals" with json:
     """
     {

@@ -59,4 +59,4 @@ const mapStateToProps = (state) => {
   return { features: state.features };
 };
 
-export default connect(mapStateToProps, null, null, { pure: false })(ProposalPreviewBody);
+export default connect(mapStateToProps)(ProposalPreviewBody);

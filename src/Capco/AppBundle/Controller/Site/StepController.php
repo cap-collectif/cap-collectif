@@ -423,12 +423,7 @@ class StepController extends Controller
             ;
         }
 
-        $form = count($searchResults['proposals']) > 0
-            ? $em
-                ->getRepository('CapcoAppBundle:ProposalForm')
-                ->find($searchResults['proposals'][0]['proposalForm']['id'])
-            : null
-        ;
+        $form = $step->getProposalForm();
 
         $showThemes = $form ? $form->isUsingThemes() : false;
         $categories = $form ? $form->getCategories() : [];

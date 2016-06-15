@@ -100,11 +100,11 @@ const CollectStepPage = React.createClass({
         />
         <ProposalListFilters
           id={this.props.form.id}
-          theme={this.props.themes}
-          district={this.props.districts}
-          type={this.props.types}
-          status={this.props.statuses}
-          category={this.props.categories}
+          themes={this.props.themes}
+          districts={this.props.districts}
+          types={this.props.types}
+          statuses={this.props.statuses}
+          categories={this.props.categories}
           onChange={() => this.handleFilterOrOrderChange()}
           showThemes={this.props.form.usingThemes}
         />

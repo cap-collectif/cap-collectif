@@ -125,7 +125,7 @@ Feature: Selection steps
     """
       {
         "filters": {
-          "theme": 2
+          "themes": 2
         }
       }
       """

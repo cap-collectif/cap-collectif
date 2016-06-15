@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Command;
+namespace Capco\AppBundle\Command\Migrations;
 
 use Capco\AppBundle\Entity\Category;
 use Capco\AppBundle\Entity\ProposalCategory;
@@ -32,10 +32,10 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
             $output->writeln('This command will permanently alter some data in your project, if you\'re sure you want to execute this migration, go ahead and add --force');
             $output->writeln('Please set the --force option to run this command');
 
-            return;
+            return 1;
         }
 
-        $this->migrate($input, $output);
+        return $this->migrate($input, $output);
     }
 
     private function migrate(InputInterface $input, OutputInterface $output)
@@ -89,6 +89,8 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
         $em->flush();
 
         $output->writeln('Migration executed, ' . $count . ' categories created.');
+
+        return 0;
 
     }
 }
