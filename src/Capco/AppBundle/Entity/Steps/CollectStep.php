@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Status;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -23,12 +24,6 @@ class CollectStep extends AbstractStep
     private $proposalForm = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Status", mappedBy="step", cascade={"persist"}, orphanRemoval=true)
-     * @ORM\OrderBy({"position" = "ASC"})
-     **/
-    private $statuses;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="proposals_count", type="integer")
@@ -42,36 +37,15 @@ class CollectStep extends AbstractStep
      */
     private $contributorsCount = 0;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
+     * @ORM\Column(name="default_status_id", nullable=true)
+     */
+    private $defaultStatus = null;
+
     public function __construct()
     {
         parent::__construct();
-
-        $this->statuses = new ArrayCollection();
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getStatuses()
-    {
-        return $this->statuses;
-    }
-
-    public function addStatus($status)
-    {
-        if (!$this->statuses->contains($status)) {
-            $this->statuses->add($status);
-            $status->setStep($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStatus($status)
-    {
-        $this->statuses->removeElement($status);
-
-        return $this;
     }
 
     /**
@@ -114,16 +88,19 @@ class CollectStep extends AbstractStep
         return $this;
     }
 
-    // **************************** Custom methods *******************************
-
-    public function getType()
+    /**
+     * @return mixed
+     */
+    public function getDefaultStatus()
     {
-        return 'collect';
+        return $this->defaultStatus;
     }
 
-    public function isCollectStep()
+    public function setDefaultStatus(Status $defaultStatus = null)
     {
-        return true;
+        $this->defaultStatus = $defaultStatus;
+
+        return $this;
     }
 
     /**
@@ -147,5 +124,17 @@ class CollectStep extends AbstractStep
         $this->proposalForm = $proposalForm;
 
         return $this;
+    }
+
+    // **************************** Custom methods *******************************
+
+    public function getType()
+    {
+        return 'collect';
+    }
+
+    public function isCollectStep()
+    {
+        return true;
     }
 }

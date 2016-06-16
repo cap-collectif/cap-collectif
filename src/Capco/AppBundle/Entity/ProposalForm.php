@@ -381,9 +381,6 @@ class ProposalForm
         return $this;
     }
 
-    /**
-     * @return ArrayCollection
-     */
     public function getCategories()
     {
         return $this->categories;
@@ -504,5 +501,15 @@ class ProposalForm
         $this->categoryHelpText = $categoryHelpText;
 
         return $this;
+    }
+
+    public function getLabelTitle()
+    {
+        $label = $this->getTitle();
+        if ($this->getStep()) {
+            $label = $this->getStep()->getTitle().' - '.$label;
+        }
+
+        return $label;
     }
 }

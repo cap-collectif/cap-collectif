@@ -1,87 +1,99 @@
-global:
-  already_voted: Vous avez déjà voté.
-  is_not_social_netwotk_url: Veuillez entrer un lien valide.
-  is_not_facebook_url: Veuillez entrer un lien Facebook valide.
-  is_not_twitter_url: Veuillez entrer un lien Twitter valide.
-  is_not_google_url: Veuillez entrer un lien Google+ valide.
-  missing_required_responses: Veuillez répondre à toutes les questions obligatoires.
-  no_category_when_mandatory: Vous devez spécifier une catégorie.
-  no_theme_when_activated: Vous devez choisir un thème.
-  no_theme_when_mandatory: Vous devez spécifier un thème.
+argument:
+  body:
+    max_length: "Les arguments sont limités à {{ limit }} caractères. Soyez plus concis ou publiez une nouvelle proposition."
+    min_length: "L'argument doit faire au moins {{ limit }} caractères."
+  votes_not_confirmed: "Merci de confirmer la perte de vos votes pour continuer."
+
+charte:
+  blank: "Veuillez cocher la case pour accepter la charte."
+
+comment:
+  votes_not_confirmed: "Merci de confirmer la perte de vos votes pour continuer."
 
 contact:
-  no_name: Veuillez renseigner votre nom pour continuer.
-  no_email: Veuillez renseigner votre adresse électronique pour continuer.
-  no_message: Oups, vous avez oublié de nous écrire un message !
+  no_email: "Veuillez renseigner votre adresse électronique pour continuer."
+  no_message: "Oups, vous avez oublié de nous écrire un message !"
+  no_name: "Veuillez renseigner votre nom pour continuer."
+
+date:
+  end_before_start: "La date de fin ne peut pas être antérieure à la date de début."
+
+email:
+  blank: "Veuillez saisir votre adresse électronique."
+  email_belongs_to_user: "Cette adresse électronique est déjà associée à un compte."
+  invalid: "Cet email n'est pas valide."
 
 event_registration:
   create:
-    listed_email: Cette adresse électronique a déjà été utilisée pour s'inscrire à l'évènement.
-    no_user_error: Erreur : vous devez vous connecter ou renseigner un nom et une adresse électronique valide pour pouvoir vous inscrire.
-    invalid_email_error: Erreur : L'adresse électronique est invalide.
-    email_belongs_to_user: Cette adresse électronique est déjà associée à un compte. Cliquez sur "M'inscrire avec mon compte" pour vous inscrire à cet évènement.
+    email_belongs_to_user: "Cette adresse électronique est déjà associée à un compte. Cliquez sur \"M'inscrire avec mon compte\" pour vous inscrire à cet évènement."
+    invalid_email_error: "Erreur : L'adresse électronique est invalide."
+    listed_email: "Cette adresse électronique a déjà été utilisée pour s'inscrire à l'évènement."
+    no_user_error: "Erreur : vous devez vous connecter ou renseigner un nom et une adresse électronique valide pour pouvoir vous inscrire."
 
-project:
-  multiple_consultation_steps: Il ne peut y avoir qu'une étape de consultation par projet.
-
-proposal:
-  missing_required_responses: Veuillez répondre à toutes les questions obligatoires pour soumettre cette proposition.
-  vote:
-    already_voted: Vous avez déjà voté pour cette proposition.
-    email_belongs_to_user: Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition.
-    not_enough_credits: Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition.
-
-reply:
-  missing_required_responses: Veuillez répondre à toutes les questions obligatoires pour soumettre votre réponse.
+global:
+  already_voted: "Vous avez déjà voté."
+  is_not_collect_nor_selection_step: "L'étape sélectionnée doit être de type collecte ou sélection."
+  is_not_facebook_url: "Veuillez entrer un lien Facebook valide."
+  is_not_google_url: "Veuillez entrer un lien Google+ valide."
+  is_not_social_netwotk_url: "Veuillez entrer un lien valide."
+  is_not_twitter_url: "Veuillez entrer un lien Twitter valide."
+  missing_required_responses: "Veuillez répondre à toutes les questions obligatoires."
+  no_category_when_mandatory: "Vous devez spécifier une catégorie."
+  no_theme_when_activated: "Vous devez choisir un thème."
+  no_theme_when_mandatory: "Vous devez spécifier un thème."
 
 idea:
   vote:
-    already_voted: Vous avez déjà voté pour cette idée.
-    email_belongs_to_user: Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette idée.
+    already_voted: "Vous avez déjà voté pour cette idée."
+    email_belongs_to_user: "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette idée."
 
-date:
-  end_before_start: La date de fin ne peut pas être antérieure à la date de début.
+
+opinion:
+  votes_not_confirmed: "Merci de confirmer la perte de vos votes pour continuer."
 
 password:
-  minMessage: Le mot de passe doit faire au moins 8 caractères.
-  blank: Veuillez saisir un mot de passe.
+  blank: "Veuillez saisir un mot de passe."
+  minMessage: "Le mot de passe doit faire au moins 8 caractères."
 
-username:
-  minMessage: Le nom doit faire au moins 2 caractères.
-  blank: Veuillez saisir votre nom complet.
+project:
+  multiple_consultation_steps: "Il ne peut y avoir qu'une étape de consultation par projet."
 
-email:
-  invalid: Cet email n'est pas valide.
-  blank: Veuillez saisir votre adresse électronique.
-  email_belongs_to_user: Cette adresse électronique est déjà associée à un compte.
+proposal:
+  missing_required_responses: "Veuillez répondre à toutes les questions obligatoires pour soumettre cette proposition."
+  more_than_one_selection_per_step: "Vous ne pouvez ajouter qu'une sélection par étape et par proposition."
+  vote:
+    already_voted: "Vous avez déjà voté pour cette proposition."
+    email_belongs_to_user: "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition."
+    not_enough_credits: "Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition."
 
-charte:
-  blank: Veuillez cocher la case pour accepter la charte.
+reply:
+  missing_required_responses: "Veuillez répondre à toutes les questions obligatoires pour soumettre votre réponse."
 
-synthesis:
-  consultation_step:
-    is_not_set: Vous devez spécifier une étape de consultation.
+response:
+  equal: "Vous devez sélectionner exactement %nb% réponses."
+  max: "Vous devez sélectionner au maximu %nb% réponses."
+  min: "Vous devez sélectionner au moins %nb% réponses."
 
 opinion:
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
   wrong_appendices: Appendices must correspond to the opinion type.
 
-argument:
-  votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
-  body:
-    min_length: L'argument doit faire au moins {{ limit }} caractères.
-    max_length: Les arguments sont limités à {{ limit }} caractères. Soyez plus concis ou publiez une nouvelle proposition.
+selection:
+  status_does_not_belong_to_selection_step: "Le statut sélectionné n'appartient pas à l'étape de sélection choisie."
 
-comment:
-  votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
-
-response:
-  equal: Vous devez sélectionner exactement %nb% réponses.
-  max: Vous devez sélectionner au maximu %nb% réponses.
-  min: Vous devez sélectionner au moins %nb% réponses.
+selection_step:
+  more_than_one_selection_per_proposal: "Vous ne pouvez ajouter qu'une sélection par étape et par proposition."
 
 source:
-  votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
+  votes_not_confirmed: "Merci de confirmer la perte de vos votes pour continuer."
+
+synthesis:
+  consultation_step:
+    is_not_set: "Vous devez spécifier une étape de consultation."
+
+username:
+  blank: "Veuillez saisir votre nom complet."
+  minMessage: "Le nom doit faire au moins 2 caractères."
 
 vote:
-  no_comment_when_private_error: Vous ne pouvez pas poster de commentaire en tant qu'anonyme.
+  no_comment_when_private_error: "Vous ne pouvez pas poster de commentaire en tant qu'anonyme."

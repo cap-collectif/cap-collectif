@@ -146,13 +146,8 @@ class ProposalsController extends FOSRestController
             ->setEnabled(true)
         ;
 
-        $defaultStatuses = $this->getDoctrine()->getManager()
-            ->getRepository('CapcoAppBundle:Status')
-            ->getByCollectStep($proposalForm->getStep())
-        ;
-
-        if ($defaultStatuses && !empty($defaultStatuses)) {
-            $proposal->setStatus($defaultStatuses[0]);
+        if ($proposalForm->getStep() && $defaultStatus = $proposalForm->getStep()->getDefaultStatus()) {
+            $proposal->setStatus($defaultStatus);
         }
 
         $form = $this->createForm('proposal', $proposal, [

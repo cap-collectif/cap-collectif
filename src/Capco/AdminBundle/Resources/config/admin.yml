@@ -404,3 +404,9 @@ services:
         - {name: sonata.admin, manager_type: orm, label: admin.label.proposal_category}
       calls:
         - [ setTranslationDomain, [SonataAdminBundle]]
+
+  capco_admin.admin.selection:
+      class: Capco\AdminBundle\Admin\SelectionAdmin
+      arguments: [~, Capco\AppBundle\Entity\Selection, SonataAdminBundle:CRUD]
+      tags:
+        - {name: sonata.admin, manager_type: orm, label: admin.label.selection}

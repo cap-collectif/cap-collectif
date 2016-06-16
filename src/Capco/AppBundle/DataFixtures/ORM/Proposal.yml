@@ -11,7 +11,6 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district1'
     status: '@status1'
     answer: '@answer3'
-    selectionSteps: ['@selectionStep1']
     createdAt: <(new \DateTime('2015-01-01'))>
     answer: '@answer4'
     likers: ['@user1', '@user2']
@@ -29,7 +28,6 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme3'
     district: '@district2'
     status: '@status2'
-    selectionSteps: ['@selectionStep1', '@selectionStep2']
     createdAt: <(new \DateTime('2015-02-01'))>
     likers: ['@user504']
     category: '@pCategory1'
@@ -46,7 +44,6 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district4'
     status: '@status1'
-    selectionSteps: ['@selectionStep1']
     createdAt: <(new \DateTime('2015-03-01'))>
     category: '@pCategory2'
   proposal4:
@@ -99,7 +96,6 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 2999999
-    selectionSteps: ['@selectionStep4', '@selectionStep5']
   proposal8:
     title: Proposition pas chère
     body: |
@@ -113,7 +109,6 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 100
-    selectionSteps: ['@selectionStep4', '@selectionStep5']
   proposal9:
     title: Proposition gratuite
     body: |
@@ -126,7 +121,6 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district3'
     status: '@status1'
-    selectionSteps: ['@selectionStep4', '@selectionStep5']
   proposal10:
     title: Proposition pas encore votable
     body: |
@@ -140,7 +134,6 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 100
-    selectionSteps: ['@selectionStep6']
   proposal11:
     title: Proposition plus votable
     body: |
@@ -154,4 +147,3 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 100
-    selectionSteps: ['@selectionStep3']

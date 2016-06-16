@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 export const ProposalListFilters = React.createClass({
   propTypes: {
-    id: React.PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
     fetchFrom: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     themes: PropTypes.array.isRequired,

@@ -1,0 +1,17 @@
+Capco\AppBundle\Entity\Selection:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: integer
+      groups: [Proposals, SelectionSteps]
+    proposal:
+      expose: true
+      groups: [Proposals, SelectionSteps]
+    selectionStep:
+      expose: true
+      groups: [Proposals, SelectionSteps]
+      serialized_name: selectionStep
+    status:
+      expose: true
+      groups: [Proposals, SelectionSteps]

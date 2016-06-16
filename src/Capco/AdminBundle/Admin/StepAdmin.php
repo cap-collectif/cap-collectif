@@ -166,19 +166,6 @@ class StepAdmin extends Admin
                     'label' => 'admin.fields.step.body',
                     'required' => false,
                 ])
-                ->add('proposals', 'sonata_type_model_autocomplete', [
-                    'label' => 'admin.fields.step.proposals',
-                    'required' => false,
-                    'property' => 'title',
-                    'multiple' => true,
-                    'route' => [
-                        'name' => 'capco_admin_proposals_autocomplete',
-                        'parameters' => [
-                            'projectId' => $projectId,
-                            '_sonata_admin' => $this->getCode(),
-                        ],
-                    ],
-                ])
                 ->add('defaultSort', 'choice', [
                     'label' => 'admin.fields.step.default_sort',
                     'choices' => SelectionStep::$sortLabels,
@@ -210,15 +197,25 @@ class StepAdmin extends Admin
                     'required' => true,
                     'help' => 'admin.help.step.vote_type',
                 ])
+                ->add('budget', 'money', [
+                    'currency' => 'EUR',
+                    'label' => 'admin.fields.step.budget',
+                    'required' => false,
+                ])
                 ->add('votesHelpText', 'ckeditor', [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.votesHelpText',
                     'required' => false,
                 ])
-                ->add('budget', 'money', [
-                    'currency' => 'EUR',
-                    'label' => 'admin.fields.step.budget',
-                    'required' => false,
+                ->end()
+                ->with('admin.fields.step.group_selections')
+                ->add('selections', 'sonata_type_collection', [
+                    'label' => 'admin.fields.step.proposals',
+                    'by_reference' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'link_parameters' => ['projectId' => $projectId],
                 ])
                 ->end()
             ;
@@ -262,6 +259,37 @@ class StepAdmin extends Admin
                 ->end()
             ;
         }
+
+        if ($subject instanceof CollectStep || $subject instanceof SelectionStep) {
+            $formMapper
+                ->with('admin.fields.step.group_statuses')
+                ->add('statuses', 'sonata_type_collection', [
+                    'label' => 'admin.fields.step.statuses',
+                    'by_reference' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ])
+            ;
+
+            if ($subject instanceof CollectStep) {
+                $formMapper
+                    ->add('defaultStatus', 'sonata_type_model', [
+                        'label' => 'admin.fields.step.default_status',
+                        'query' => $this->createQueryForDefaultStatus(),
+                        'by_reference' => false,
+                        'required' => false,
+                        'class' => 'Capco\AppBundle\Entity\Status',
+                        'empty_value' => 'admin.fields.step.default_status_none',
+                    ])
+                ;
+            }
+
+            $formMapper
+                ->end()
+            ;
+        }
     }
 
     private function createQueryForProposalForms()
@@ -288,6 +316,21 @@ class StepAdmin extends Admin
             ->getRepository('CapcoAppBundle:Questionnaire')
             ->createQueryBuilder('q')
             ->where('q.step IS NULL OR q.step = :step')
+            ->setParameter('step', $subject)
+        ;
+
+        return $qb->getQuery();
+    }
+
+    private function createQueryForDefaultStatus()
+    {
+        $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
+        $qb = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:Status')
+            ->createQueryBuilder('s')
+            ->where('s.step = :step')
             ->setParameter('step', $subject)
         ;
 

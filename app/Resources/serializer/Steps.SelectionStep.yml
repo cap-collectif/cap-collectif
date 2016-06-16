@@ -20,3 +20,6 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         type: string
         groups: [Steps]
         serialized_name: defaultOrder
+      statuses:
+        expose: true
+        groups: [Steps, Statuses]

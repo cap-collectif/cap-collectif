@@ -431,7 +431,7 @@ class StepController extends Controller
         $props = $serializer->serialize([
             'step' => $step,
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
-            'statuses' => $em->getRepository('CapcoAppBundle:Status')->getByProject($project),
+            'statuses' => $step->getStatuses(),
             'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
             'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
             'categories' => $categories,

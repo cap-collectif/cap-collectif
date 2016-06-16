@@ -32,6 +32,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="proposal.missing_required_responses", formField="proposalForm")
  * @CapcoAssert\HasThemeIfMandatory()
  * @CapcoAssert\HasCategoryIfMandatory()
+ * @CapcoAssert\HasOnlyOneSelectionPerStep()
  */
 class Proposal implements Contribution, CommentableInterface, VotableInterface
 {
@@ -147,10 +148,9 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", inversedBy="proposals", cascade={"persist"})
-     * @ORM\JoinTable(name="selectionstep_proposal")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Selection", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
      */
-    private $selectionSteps;
+    private $selections;
 
     /**
      * @var
@@ -176,7 +176,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         $this->responses = new ArrayCollection();
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
-        $this->selectionSteps = new ArrayCollection();
+        $this->selections = new ArrayCollection();
         $this->likers = new ArrayCollection();
     }
 
@@ -478,38 +478,24 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this;
     }
 
-    /**
-     * Add selection step.
-     *
-     * @param SelectionStep $selectionStep
-     *
-     * @return SelectionStep
-     */
-    public function addSelectionStep(SelectionStep $selectionStep)
+    public function addSelection(Selection $selection)
     {
-        if (!$this->selectionSteps->contains($selectionStep)) {
-            $this->selectionSteps[] = $selectionStep;
+        if (!$this->selections->contains($selection)) {
+            $this->selections[] = $selection;
+            $selection->setProposal($this);
         }
 
         return $this;
     }
 
-    /**
-     * Remove selectionStep.
-     *
-     * @param SelectionStep $selectionStep
-     */
-    public function removeSelectionStep(SelectionStep $selectionStep)
+    public function removeSelection(Selection $selection)
     {
-        $this->selectionSteps->removeElement($selectionStep);
+        $this->selections->removeElement($selection);
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getSelectionSteps()
+    public function getSelections()
     {
-        return $this->selectionSteps;
+        return $this->selections;
     }
 
     // CommentableInterface methods implementation
@@ -601,5 +587,32 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     public function isPublished()
     {
         return $this->enabled && !$this->isTrashed;
+    }
+
+    public function getSelectionSteps()
+    {
+        $steps = [];
+        foreach ($this->selections as $selection) {
+            $steps[] = $selection->getSelectionStep();
+        }
+        return $steps;
+    }
+
+    public function getProjectId()
+    {
+        if ($this->getProposalForm() && $this->getProposalForm()->getStep() && $this->getProposalForm()->getStep()->getProject()) {
+            return $this->getProposalForm()->getStep()->getProjectId();
+        }
+        return null;
+    }
+
+    public function getSelectionStepsIds() {
+        $ids = array_filter(array_map(function ($value) {
+            return $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null;
+        }, $this->getSelections()->getValues()),
+            function ($value) {
+                return $value !== null;
+        });
+        return $ids;
     }
 }

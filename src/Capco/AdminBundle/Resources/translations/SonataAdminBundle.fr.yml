@@ -465,10 +465,12 @@ admin:
       created_at: Création
       district: Quartier
       enabled: Publié
-      form: Formulaire
+      form: Étape de dépôt
       group_content: Proposition
       group_publication: Options de publication
-      group_selection: Sélections et réponse officielle
+      group_collect: Dépôt
+      group_selection: Sélection
+      group_answer: Réponse officielle
       help:
         annotation: Cette annotation ne sera pas visible sur le site.
         estimation: L'estimation sera affichée en euros.
@@ -612,6 +614,10 @@ admin:
       created_at: Création
       updated_at: Mise à jour
       collect_step: Étape de collecte
+    selection:
+      proposal: Proposition
+      selection_step: Étape
+      status: Statut
     site_image:
       title: Description
       media: Image
@@ -651,9 +657,12 @@ admin:
       budget: Budget alloué
       created_at: Création
       default_sort: Tri des propositions par défaut
+      default_status: Attribuer un statut par défaut
+      default_status_none: Aucun
       end_at: Termine
       group_general: Général
       group_form: Formulaire
+      group_selections: Sélection
       group_statuses: Statuts
       group_votes: Votes
       is_enabled: Publié

@@ -3,7 +3,9 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Traits\DateHelperTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -140,11 +142,19 @@ abstract class AbstractStep
     private $updatedAt;
 
     /**
+     * Needed for sonata admin :(
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Status", mappedBy="step", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
+     */
+    private $statuses;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
+        $this->statuses = new ArrayCollection();
     }
 
     public function __toString()
@@ -330,6 +340,31 @@ abstract class AbstractStep
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getStatuses()
+    {
+        return $this->statuses;
+    }
+
+    public function addStatus(Status $status)
+    {
+        if (!$this->statuses->contains($status)) {
+            $this->statuses->add($status);
+            $status->setStep($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatus(Status $status)
+    {
+        $this->statuses->removeElement($status);
+
+        return $this;
     }
 
     // ************************* Custom methods *********************

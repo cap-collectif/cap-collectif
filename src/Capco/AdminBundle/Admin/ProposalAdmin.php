@@ -27,9 +27,8 @@ class ProposalAdmin extends Admin
         $projectId = null;
 
         if ($subject && $subject->getId()) {
-            $project = $subject->getStep()->getProject();
-            if ($project) {
-                $projectId = $project->getId();
+            if ($subject->getProjectId()) {
+                $projectId = $subject->getProjectId();
             }
         } else {
             $projectId = $this->getRequest()->get('projectId');
@@ -57,9 +56,6 @@ class ProposalAdmin extends Admin
                 'required' => true,
                 'property' => 'username',
             ])
-            ->add('proposalForm', null, [
-                'label' => 'admin.fields.proposal.form',
-            ])
             ->add('theme', 'sonata_type_model', [
                 'label' => 'admin.fields.proposal.theme',
                 'required' => false,
@@ -78,13 +74,6 @@ class ProposalAdmin extends Admin
                 'required' => false,
                 'empty_value' => 'admin.fields.proposal.no_district',
                 'btn_add' => false,
-            ])
-            ->add('status', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.status',
-                'required' => false,
-                'empty_value' => 'admin.fields.proposal.no_status',
-                'btn_add' => false,
-                'help' => 'admin.fields.proposal.help.status',
             ])
             ->add('estimation', 'money', [
                 'currency' => 'EUR',
@@ -133,31 +122,51 @@ class ProposalAdmin extends Admin
                 ])
             ->end()
 
+            // Collect
+            ->with('admin.fields.proposal.group_collect')
+            ->add('proposalForm', null, [
+                'label' => 'admin.fields.proposal.form',
+                'property' => 'labelTitle',
+            ])
+            ->add('status', 'sonata_type_model', [
+                'label' => 'admin.fields.proposal.status',
+                'required' => false,
+                'empty_value' => 'admin.fields.proposal.no_status',
+                'btn_add' => false,
+                'help' => 'admin.fields.proposal.help.status',
+                'query' => $this->createQueryForCollectStatus(),
+            ])
+            ->end()
+        ;
+
+        // Sélection
+        $projectId = $this->getPersistentParameter('projectId');
+        if ($projectId) {
+            $formMapper
+                ->with('admin.fields.proposal.group_selection')
+                ->add('selections', 'sonata_type_collection', [
+                    'label' => 'admin.fields.proposal.selection_steps',
+                    'by_reference' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'link_parameters' => ['projectId' => $projectId],
+                ])
+                ->end()
+            ;
+        }
+
+        $formMapper
             // Answer
-            ->with('admin.fields.proposal.group_selection')
+            ->with('admin.fields.proposal.group_answer')
             ->add('answer', 'sonata_type_model_list', [
                 'label' => 'admin.fields.proposal.answer',
                 'btn_list' => false,
                 'required' => false,
                 'help' => 'admin.fields.proposal.help.answer',
             ])
+            ->end()
         ;
-
-        $projectId = $this->getPersistentParameter('projectId');
-        if ($projectId) {
-            $formMapper
-                ->add('selectionSteps', 'sonata_type_model', [
-                    'label' => 'admin.fields.proposal.selection_steps',
-                    'query' => $this->createQueryForSelectionSteps(),
-                    'btn_add' => false,
-                    'by_reference' => false,
-                    'required' => false,
-                    'multiple' => true,
-                ])
-            ;
-        }
-
-        $formMapper->end();
     }
 
     // Fields to be shown on lists
@@ -296,32 +305,12 @@ class ProposalAdmin extends Admin
         ;
     }
 
-    private function createQueryForSelectionSteps()
-    {
-        $projectId = $this->getPersistentParameter('projectId');
-        if (!$projectId) {
-            return;
-        }
-
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:Steps\SelectionStep')
-            ->createQueryBuilder('ss')
-            ->leftJoin('ss.projectAbstractStep', 'pas')
-            ->leftJoin('pas.project', 'p')
-            ->andWhere('p.id = :projectId')
-            ->setParameter('projectId', $projectId)
-        ;
-
-        return $qb->getQuery();
-    }
-
     private function createQueryForCategories()
     {
+        $proposalFormId = 0;
         $subject = $this->getSubject();
-        if (!$subject->getId()) {
-            return new ArrayCollection();
+        if ($subject->getId()) {
+            $proposalFormId = $subject->getProposalForm()->getId();
         }
 
         $qb = $this->getConfigurationPool()
@@ -331,7 +320,28 @@ class ProposalAdmin extends Admin
             ->createQueryBuilder('pc')
             ->leftJoin('pc.form', 'form')
             ->andWhere('form.id = :formId')
-            ->setParameter('formId', $subject->getProposalForm()->getId())
+            ->setParameter('formId', $proposalFormId)
+        ;
+
+        return $qb->getQuery();
+    }
+
+    private function createQueryForCollectStatus()
+    {
+        $collectStepId = 0;
+        $subject = $this->getSubject();
+        if ($subject->getId()) {
+            $collectStepId = $subject->getProposalForm()->getStep()->getId();
+        }
+
+        $qb = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:Status')
+            ->createQueryBuilder('s')
+            ->leftJoin('s.step', 'step')
+            ->andWhere('step.id = :stepId')
+            ->setParameter('stepId', $collectStepId)
         ;
 
         return $qb->getQuery();

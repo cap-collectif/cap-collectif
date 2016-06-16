@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\ColorableTrait;
@@ -9,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * Status.
@@ -74,8 +76,9 @@ class Status
     protected $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep", inversedBy="statuses", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="statuses", cascade={"persist"})
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+     * @CapcoAssert\IsCollectOrSelectionStep()
      */
     private $step;
 
@@ -134,7 +137,7 @@ class Status
         return $this->step;
     }
 
-    public function setStep(CollectStep $step)
+    public function setStep(AbstractStep $step)
     {
         $this->step = $step;
 

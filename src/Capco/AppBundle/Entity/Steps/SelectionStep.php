@@ -6,11 +6,14 @@ use Capco\AppBundle\Entity\Proposal;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Entity\Selection;
 
 /**
  * Class SelectionStep.
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionStepRepository")
+ * @CapcoAssert\HasOnlyOneSelectionPerProposal()
  */
 class SelectionStep extends AbstractStep
 {
@@ -35,10 +38,9 @@ class SelectionStep extends AbstractStep
     ];
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="selectionSteps", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Selection", mappedBy="selectionStep", cascade={"persist"}, orphanRemoval=true)
      */
-    private $proposals;
+    private $selections;
 
     /**
      * @Assert\Choice(choices={0,1,2})
@@ -77,43 +79,27 @@ class SelectionStep extends AbstractStep
     public function __construct()
     {
         parent::__construct();
-        $this->proposals = new ArrayCollection();
+        $this->selections = new ArrayCollection();
     }
 
-    /**
-     * @return mixed
-     */
-    public function getProposals()
+    public function addSelection(Selection $selection)
     {
-        return $this->proposals;
-    }
-
-    /**
-     * Add proposal.
-     *
-     * @param Proposal $proposal
-     *
-     * @return Proposal
-     */
-    public function addProposal(Proposal $proposal)
-    {
-        if (!$this->proposals->contains($proposal)) {
-            $this->proposals[] = $proposal;
-            $proposal->addSelectionStep($this);
+        if (!$this->selections->contains($selection)) {
+            $this->selections[] = $selection;
+            $selection->setSelectionStep($this);
         }
 
         return $this;
     }
 
-    /**
-     * Remove proposal.
-     *
-     * @param Proposal $proposal
-     */
-    public function removeProposal(Proposal $proposal)
+    public function removeSelection(Selection $selection)
     {
-        $this->proposals->removeElement($proposal);
-        $proposal->removeSelectionStep($this);
+        $this->selections->removeElement($selection);
+    }
+
+    public function getSelections()
+    {
+        return $this->selections;
     }
 
     /**
@@ -278,10 +264,29 @@ class SelectionStep extends AbstractStep
 
     public function getProposalForm()
     {
-        if (count($this->getProposals())) {
-            return $this->getProposals()[0]->getProposalForm();
+        if (count($this->getSelections())) {
+            return $this->getSelections()[0]->getProposal()->getProposalForm();
         }
 
         return;
+    }
+
+    public function getProposals()
+    {
+        $proposals = [];
+        foreach ($this->selections as $selection) {
+            $proposals[] = $selection->getProposal();
+        }
+        return $proposals;
+    }
+
+    public function getProposalsIds() {
+        $ids = array_filter(array_map(function ($value) {
+            return $value->getProposal() ? $value->getProposal()->getId() : null;
+        }, $this->getSelections()->getValues()),
+            function ($value) {
+                return $value !== null;
+            });
+        return $ids;
     }
 }

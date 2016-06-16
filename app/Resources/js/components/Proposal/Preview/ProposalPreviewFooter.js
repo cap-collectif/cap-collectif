@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
-import classNames from 'classnames';
 
 const ProposalPreviewFooter = React.createClass({
   propTypes: {
-    proposal: React.PropTypes.object.isRequired,
-    selectionStepId: React.PropTypes.number,
-    showVotes: React.PropTypes.bool,
-    votesDelta: React.PropTypes.number.isRequired,
+    proposal: PropTypes.object.isRequired,
+    selectionStepId: PropTypes.number,
+    showVotes: PropTypes.bool,
+    votesDelta: PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -19,21 +18,14 @@ const ProposalPreviewFooter = React.createClass({
   },
 
   render() {
-    const proposal = this.props.proposal;
-    const statusClasses = {
-      'proposal__status': true,
-      'status--default': !proposal.status,
-    };
-    if (proposal.status) {
-      statusClasses['status--' + proposal.status.color] = true;
-    }
-    const votesCount = this.props.selectionStepId
-      ? proposal.votesCountBySelectionSteps[this.props.selectionStepId]
-        ? proposal.votesCountBySelectionSteps[this.props.selectionStepId] + this.props.votesDelta
-        : 0 + this.props.votesDelta
+    const { proposal, selectionStepId, votesDelta, showVotes } = this.props;
+    const votesCount = selectionStepId
+      ? proposal.votesCountBySelectionSteps[selectionStepId]
+        ? proposal.votesCountBySelectionSteps[selectionStepId] + votesDelta
+        : 0 + votesDelta
       : proposal.votesCount
     ;
-    const counterWidth = this.props.showVotes ? '50%' : '100%';
+    const counterWidth = showVotes ? '50%' : '100%';
 
     return (
       <div className="proposal__footer">
@@ -50,8 +42,8 @@ const ProposalPreviewFooter = React.createClass({
             </div>
           </div>
           {
-            this.props.showVotes
-            ? <div className="proposal__counter proposal__counter--votes" style={{ width: counterWidth, borderLeft: '1px solid #ccc' }}>
+            showVotes
+            && <div className="proposal__counter proposal__counter--votes" style={{ width: counterWidth, borderLeft: '1px solid #ccc' }}>
                 <div className="proposal__counter__value" >
                   {votesCount}
                 </div>
@@ -62,14 +54,6 @@ const ProposalPreviewFooter = React.createClass({
                   />
                 </div>
               </div>
-            : null
-          }
-        </div>
-        <div className={classNames(statusClasses)}>
-          {
-            proposal.status
-            ? proposal.status.name
-            : this.getIntlMessage('proposal.no_status')
           }
         </div>
       </div>

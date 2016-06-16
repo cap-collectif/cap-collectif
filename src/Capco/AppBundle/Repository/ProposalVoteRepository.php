@@ -17,7 +17,7 @@ class ProposalVoteRepository extends EntityRepository
     {
         $ids = array_map(function ($value) {
             return $value->getId();
-        }, $proposal->getSelectionSteps()->getValues());
+        }, $proposal->getSelectionSteps());
 
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id) as votesCount', 'ss.id as selectionStep')

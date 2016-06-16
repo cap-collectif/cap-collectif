@@ -240,13 +240,16 @@ class SearchResolver
         $filters['isTrashed'] = false;
         $filters['enabled'] = true;
         if (array_key_exists('selectionStep', $providedFilters)) {
-            $filters['selectionSteps.id'] = $providedFilters['selectionStep'];
+            $filters['selections.selectionStep.id'] = $providedFilters['selectionStep'];
         }
         if (array_key_exists('proposalForm', $providedFilters)) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
         if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses'] > 0) {
             $filters['status.id'] = $providedFilters['statuses'];
+        }
+        if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses'] > 0) {
+            $filters['selections.status.id'] = $providedFilters['selectionStatuses'];
         }
         if (array_key_exists('districts', $providedFilters) && $providedFilters['districts'] > 0) {
             $filters['district.id'] = $providedFilters['districts'];

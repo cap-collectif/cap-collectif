@@ -1,5 +1,4 @@
 import BaseStore from './BaseStore';
-import LocalStorageService from '../services/LocalStorageService';
 import {
   RECEIVE_PROPOSALS,
   RECEIVE_PROPOSAL,
@@ -38,8 +37,8 @@ class ProposalStore extends BaseStore {
     this._isProposalSync = false;
     this._isProposalListSync = false;
     this._isProcessing = false;
-    this._order = LocalStorageService.get('proposals_order') || 'random';
-    this._filters = LocalStorageService.get('proposals_filters') || {};
+    this._order = 'random';
+    this._filters = {};
     this._terms = null;
     this._currentPage = 1;
   }
@@ -51,10 +50,7 @@ class ProposalStore extends BaseStore {
         this._isProposalSync = true;
         break;
       case INIT_PROPOSALS_ORDER:
-        this._order = LocalStorageService.get('proposals_order')
-          ? LocalStorageService.get('proposals_order')
-          : action.order
-        ;
+        this._order = action.order;
         this.emitChange();
         break;
       case INIT_PROPOSALS:

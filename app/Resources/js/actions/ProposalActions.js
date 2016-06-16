@@ -1,7 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
 import ProposalStore from '../stores/ProposalStore';
-import LocalStorageService from '../services/LocalStorageService';
 import {
   RECEIVE_PROPOSAL,
   RECEIVE_PROPOSAL_VOTES,
@@ -179,7 +178,6 @@ export default {
       actionType: CHANGE_ORDER,
       order: newOrder,
     });
-    LocalStorageService.set('proposals_order', ProposalStore.order);
   },
 
   changeSearchTerms: (terms) => {
@@ -195,7 +193,6 @@ export default {
       filter: filterName,
       value: value,
     });
-    LocalStorageService.set('proposals_filters', ProposalStore.filters);
   },
 
   submit: () => {

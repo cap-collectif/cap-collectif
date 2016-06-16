@@ -1,6 +1,6 @@
 fos_elastica:
   clients:
-    default: { host: %elasticsearch_host%, port: 9200 }
+    default: { host: '%elasticsearch_host%', port: 9200 }
   serializer: ~
   indexes:
     app:
@@ -38,11 +38,11 @@ fos_elastica:
             slug:
               index: not_analyzed
             username:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               fields:
                 std: { type: string, analyzer: standard }
             biography:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
@@ -106,7 +106,7 @@ fos_elastica:
           _all: { enabled: false }
           mappings:
             title:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
@@ -137,7 +137,7 @@ fos_elastica:
           _all: { enabled: false }
           mappings:
             body:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
@@ -165,7 +165,7 @@ fos_elastica:
           _all: { enabled: false }
           mappings:
             title:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
           persistence:
             driver: orm
@@ -181,7 +181,7 @@ fos_elastica:
           _all: { enabled: false }
           mappings:
             title:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
@@ -219,7 +219,7 @@ fos_elastica:
           _all: { enabled: false }
           mappings:
             title:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
@@ -258,7 +258,7 @@ fos_elastica:
             groups: [Proposals, Themes, UsersInfos]
           mappings:
             title:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
@@ -309,7 +309,7 @@ fos_elastica:
               properties:
                 id:
                   type: long
-            selectionSteps:
+            selections:
               type: object
               properties:
                 id:
@@ -367,7 +367,7 @@ fos_elastica:
           _all: { enabled: false }
           mappings:
             title:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
             slug:
               index: not_analyzed
@@ -399,7 +399,7 @@ fos_elastica:
           _all: { enabled: false }
           mappings:
             title:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
@@ -433,12 +433,12 @@ fos_elastica:
           _all: { enabled: false }
           mappings:
             title:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
             abstract:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
@@ -481,14 +481,14 @@ fos_elastica:
           _all: { enabled: false }
           mappings:
             title:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
             body:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
@@ -504,6 +504,44 @@ fos_elastica:
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Source
+            provider: ~
+            listener: ~
+            finder: ~
+        # Selection
+        selection:
+          serializer:
+            groups: [Proposals, SelectionSteps]
+          _all: { enabled: false }
+          mappings:
+            status:
+              type: object
+              properties:
+                id:
+                  type: long
+            selectionStep:
+              type: object
+              properties:
+                id:
+                  type: long
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\Status
+            provider: ~
+            listener: ~
+            finder: ~
+        # Selection Step
+        consultationStep:
+          indexable_callback: isIndexable
+          serializer:
+            groups: [SelectionSteps]
+          _all: { enabled: false }
+          mappings:
+            title:
+              analyzer: '%language_analyzer%'
+              index_options: offsets
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\Steps\SelectionStep
             provider: ~
             listener: ~
             finder: ~
@@ -545,14 +583,14 @@ fos_elastica:
           _all: { enabled: false }
           mappings:
             title:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
             teaser:
-              analyzer: %language_analyzer%
+              analyzer: '%language_analyzer%'
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }

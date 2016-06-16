@@ -8,6 +8,7 @@ import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
+import ProposalStatus from './ProposalStatus';
 import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
 const ProposalPreview = React.createClass({
@@ -70,6 +71,10 @@ const ProposalPreview = React.createClass({
               </div>
             </div>
           </div>
+          <ProposalStatus
+            proposal={proposal}
+            selectionStepId={selectionStep ? selectionStep.id : null}
+          />
           <ProposalPreviewFooter
             proposal={proposal}
             showVotes={this.props.showAllVotes || voteType !== VOTE_TYPE_DISABLED}

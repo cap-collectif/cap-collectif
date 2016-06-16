@@ -14,7 +14,7 @@ class SelectionStepRepository extends AbstractStepRepository
     {
         $ids = array_map(function ($value) {
             return $value->getId();
-        }, $proposal->getSelectionSteps()->getValues());
+        }, $proposal->getSelectionSteps());
 
         $qb = $this->getEnabledQueryBuilder();
         $expr = $qb->expr();
