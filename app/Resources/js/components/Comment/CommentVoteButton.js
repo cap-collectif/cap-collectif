@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import CommentActions from '../../actions/CommentActions';
+import LoginOverlay from '../Utils/LoginOverlay';
 import { connect } from 'react-redux';
 
 const CommentVoteButton = React.createClass({
   propTypes: {
     comment: PropTypes.object,
     user: PropTypes.object,
+    features: PropTypes.object,
     onVote: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
@@ -29,7 +31,7 @@ const CommentVoteButton = React.createClass({
 
   userIsAuthor() {
     const { comment, user } = this.props;
-    if (comment.author === null || !user) {
+    if (!comment.author || !user) {
       return false;
     }
     return user.uniqueId === comment.author.uniqueId;
@@ -50,7 +52,9 @@ const CommentVoteButton = React.createClass({
   },
 
   renderVoteButton() {
-    if (this.props.comment.has_user_voted) {
+    const { user, features, comment } = this.props;
+
+    if (comment.has_user_voted) {
       return (
         <button className="btn btn-danger btn-xs" onClick={this.deleteVote}>
           { this.getIntlMessage('comment.vote.remove') }
@@ -59,11 +63,13 @@ const CommentVoteButton = React.createClass({
     }
 
     return (
-      <button className="btn btn-success btn--outline btn-xs" onClick={this.vote}>
-        <i className="cap-hand-like-2"></i>
-        { ' ' }
-        { this.getIntlMessage('comment.vote.submit') }
-      </button>
+      <LoginOverlay user={user} features={features}>
+        <button className="btn btn-success btn--outline btn-xs" onClick={user ? this.vote : null}>
+          <i className="cap-hand-like-2"></i>
+          { ' ' }
+          { this.getIntlMessage('comment.vote.submit') }
+        </button>
+      </LoginOverlay>
     );
   },
 
@@ -82,6 +88,7 @@ const CommentVoteButton = React.createClass({
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    features: state.features,
   };
 };
 

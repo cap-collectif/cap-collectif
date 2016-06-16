@@ -30,7 +30,7 @@ const NavbarRight = React.createClass({
   render() {
     const { user, features } = this.props;
     return (
-      <Nav pullRight style={{ marginRight: 0 }}>
+      <Nav pullRight>
         {
           features.search
           ? <NavItem eventKey={1} className="navbar__search" href="/search">
