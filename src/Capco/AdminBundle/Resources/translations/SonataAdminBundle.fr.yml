@@ -8,6 +8,8 @@ admin.global:
   tree_mode: Arboresence
   unpublish: La contribution a bien été dépubliée.
   validate: La contribution a bien été validée.
+  expired: Expiré
+
 
 # Dashboard groups
 admin.group.project: Projets participatifs

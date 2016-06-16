@@ -86,6 +86,13 @@ class IdeaVoteAdmin extends Admin
             ->add('user', 'sonata_type_model', [
                     'label' => 'admin.fields.idea_vote.user',
             ])
+            ->add('expired', null, [
+                'label' => 'admin.global.expired',
+                'read_only' => true,
+                'attr' => [
+                  'disabled' => true
+                ]
+            ])
             ->add('createdAt', null, [
                     'label' => 'admin.fields.idea_vote.created_at',
             ])

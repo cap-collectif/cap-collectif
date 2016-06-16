@@ -160,6 +160,13 @@ class IdeaAdmin extends Admin
                     'provider' => 'sonata.media.provider.image',
                 ],
             ])
+            ->add('expired', null, [
+                'label' => 'admin.global.expired',
+                'read_only' => true,
+                'attr' => [
+                  'disabled' => true
+                ]
+            ])
             ->add('isTrashed', null, [
                 'label' => 'admin.fields.idea.is_trashed',
                 'required' => false,
