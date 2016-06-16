@@ -181,7 +181,7 @@ class ProjectController extends Controller
         if ($step->getProject()) {
             $filename .= $step->getProject()->getSlug().'_';
         }
-        $filename .= $step->getSlug().'.csv';
+        $filename .= $step->getSlug().'.xls';
 
         $request = $this->get('request_stack')->getCurrentRequest();
         if (!file_exists($path.$filename)) {
@@ -200,7 +200,9 @@ class ProjectController extends Controller
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT, $date.'_'.$filename
         );
-        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
+        $response->headers->set('Pragma', 'public');
+        $response->headers->set('Cache-Control', 'maxage=1');
 
         return $response;
     }

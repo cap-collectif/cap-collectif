@@ -32,7 +32,7 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
             if ($cs->getProject()) {
                 $filename .= $cs->getProject()->getSlug().'_';
             }
-            $filename .= $cs->getSlug().'.csv';
+            $filename .= $cs->getSlug().'.xls';
             $path = $this->getContainer()->getParameter('kernel.root_dir');
             $writer->save($path.'/../web/export/'.$filename);
             $output->writeln('The export file "'.$filename.'" has been created.');

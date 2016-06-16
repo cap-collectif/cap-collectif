@@ -122,24 +122,6 @@ Feature: Project
       | stepSlug    | collecte-des-avis                |
     Then I should see "19 participants"
 
-  @javascript
-  Scenario: Can download a project in xslx format
-    Given I visited "home page"
-    When I try to download "projects/croissance-innovation-disruption/consultation/collecte-des-avis/download/xlsx"
-    Then I should see in the header "Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-
-  @javascript
-  Scenario: Can download a project in csv format
-    Given I visited "home page"
-    When I try to download "projects/croissance-innovation-disruption/consultation/collecte-des-avis/download/csv"
-    Then I should see in the header "Content-Type: text/csv; charset=UTF-8"
-
-  @javascript
-  Scenario: Can download a project in xls format
-    Given I visited "home page"
-    When I try to download "projects/croissance-innovation-disruption/consultation/collecte-des-avis/download/xls"
-    Then I should see in the header "Content-Type: application/vnd.ms-excel"
-
   Scenario: Can not have access to download if export is disabled
     Given I visited "consultation page" with:
       | projectSlug   | strategie-technologique-de-l-etat-et-services-publics |
