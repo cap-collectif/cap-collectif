@@ -804,7 +804,7 @@ class ProjectDownloadResolver
             ++$currentRow;
         }
         // create the writer
-        $writer = $this->phpexcel->createWriter($phpExcelObject, 'Excel5');
+        $writer = $this->phpexcel->createWriter($phpExcelObject, 'CSV');
 
         return $writer;
     }
