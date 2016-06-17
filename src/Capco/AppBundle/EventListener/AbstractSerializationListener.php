@@ -18,11 +18,14 @@ abstract class AbstractSerializationListener implements EventSubscriberInterface
         if (!$exclusionStrategy) {
             return [];
         }
+	      if (get_class($exclusionStrategy) == 'JMS\Serializer\Exclusion\DisjunctExclusionStrategy') {
+            $reflectionClass = new \ReflectionClass('JMS\Serializer\Exclusion\DisjunctExclusionStrategy');
+            $reflectionProperty = $reflectionClass->getProperty('delegates');
+            $reflectionProperty->setAccessible(true);
+            $exclusionStrategy = $reflectionProperty->getValue($exclusionStrategy)->get(1);
+	      }
 
         $reflectionClass = new \ReflectionClass('JMS\Serializer\Exclusion\GroupsExclusionStrategy');
-        if (!$reflectionClass->hasProperty('groups')) {
-          return [];
-        }
         $reflectionProperty = $reflectionClass->getProperty('groups');
         $reflectionProperty->setAccessible(true);
 
