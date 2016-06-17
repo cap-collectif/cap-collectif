@@ -798,7 +798,7 @@ class ProjectDownloadResolver
             $currentColumn = $startColumn;
             for ($i = 0; $i < $nbCols; ++$i) {
                 $headerKey = is_array($headers[$i]) ? $headers[$i]['label'] : $headers[$i];
-                $sheet->setCellValueExplicit($currentColumn.$currentRow, $row[$headerKey]);
+                $sheet->setCellValue($currentColumn.$currentRow, $row[$headerKey]);
                 ++$currentColumn;
             }
             ++$currentRow;
