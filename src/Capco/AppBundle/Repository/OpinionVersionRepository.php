@@ -278,10 +278,8 @@ class OpinionVersionRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder($alias = 'o')
     {
-        return $this
-            ->createQueryBuilder($alias)
+        return $this->createQueryBuilder($alias)
             ->andWhere($alias.'.enabled = true')
-            ->andWhere($alias.'.expired = false')
         ;
     }
 

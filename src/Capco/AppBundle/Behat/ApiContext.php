@@ -47,6 +47,14 @@ class ApiContext extends ApplicationContext
     }
 
     /**
+     * @Given I am logged in to api as sfavot
+     */
+    public function iAmLoggedInToApiAsSfavot()
+    {
+        $this->createAuthenticatedClient('sfavot@test.com', 'toto');
+    }
+
+    /**
      * @When I am logged in to api as user_not_confirmed
      */
     public function iAmLoggedInToApiAsUserNotConfirmed()

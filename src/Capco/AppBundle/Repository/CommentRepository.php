@@ -122,8 +122,7 @@ class CommentRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.isEnabled = true')
-            ->andWhere('c.expired = false')
-        ;
+            ->andWhere('c.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true);
     }
 }

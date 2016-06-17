@@ -19,8 +19,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * Proposal.
@@ -31,7 +29,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="proposal.missing_required_responses", formField="proposalForm")
  */
-class Proposal implements Contribution, CommentableInterface, VotableInterface
+class Proposal implements CommentableInterface, VotableInterface
 {
     use CommentableTrait;
     use TimestampableTrait;
@@ -41,7 +39,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     use SluggableTitleTrait;
     use SoftDeleteableEntity;
     use AnswerableTrait;
-    use ExpirableTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -171,11 +168,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         $this->updatedAt = new \Datetime();
         $this->selectionSteps = new ArrayCollection();
         $this->likers = new ArrayCollection();
-    }
-
-    public function isIndexable()
-    {
-      return $this->enabled && !$this->expired;
     }
 
     public function __toString()

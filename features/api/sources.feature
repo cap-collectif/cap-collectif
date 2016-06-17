@@ -122,7 +122,7 @@ Feature: Sources
 
   @database
   Scenario: Logged in API client wants to update his source
-    Given I am logged in to api as user
+    Given I am logged in to api as sfavot
     When I send a PUT request to "/api/opinions/57/versions/1/sources/15" with a valid source json
     Then the JSON response status code should be 200
 
@@ -163,7 +163,7 @@ Feature: Sources
 
   @database
   Scenario: Logged in API client wants to delete his source
-    Given I am logged in to api as user
+    Given I am logged in to api as sfavot
     When I send a DELETE request to "/api/opinions/57/versions/1/sources/15"
     Then the JSON response status code should be 204
 
@@ -225,17 +225,17 @@ Feature: Sources
   # OpinionVersion
   @security
   Scenario: Anonymous API client wants to add a report
-    When I send a POST request to "/api/opinions/57/versions/1/sources/15/reports" with a valid report json
+    When I send a POST request to "/api/opinions/57/versions/1/sources/8/reports" with a valid report json
     Then the JSON response status code should be 401
 
   @security
   Scenario: Logged in API client wants to report his source
     Given I am logged in to api as user
-    When I send a POST request to "/api/opinions/57/versions/1/sources/15/reports" with a valid report json
+    When I send a POST request to "/api/opinions/57/versions/1/sources/8/reports" with a valid report json
     Then the JSON response status code should be 403
 
   @database
   Scenario: Logged in API client wants to report a source
     Given I am logged in to api as admin
-    When I send a POST request to "/api/opinions/57/versions/1/sources/15/reports" with a valid report json
+    When I send a POST request to "/api/opinions/57/versions/1/sources/8/reports" with a valid report json
     Then the JSON response status code should be 201

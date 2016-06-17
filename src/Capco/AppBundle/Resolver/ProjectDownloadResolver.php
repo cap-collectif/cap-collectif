@@ -207,7 +207,9 @@ class ProjectDownloadResolver
     public function getProposalVotesData($votes, $proposal)
     {
         foreach ($votes as $vote) {
-            $this->addItemToData($this->getProposalVoteItem($vote, $proposal));
+            if ($vote['confirmed']) {
+                $this->addItemToData($this->getProposalVoteItem($vote, $proposal));
+            }
         }
     }
 
@@ -306,7 +308,9 @@ class ProjectDownloadResolver
     public function getVotesData($votes, $entity)
     {
         foreach ($votes as $vote) {
-            $this->addItemToData($this->getVoteItem($vote, $entity));
+            if ($vote['confirmed']) {
+                $this->addItemToData($this->getVoteItem($vote, $entity));
+            }
         }
     }
 

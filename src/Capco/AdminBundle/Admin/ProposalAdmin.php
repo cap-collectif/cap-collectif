@@ -108,13 +108,6 @@ class ProposalAdmin extends Admin
                     'label' => 'admin.fields.proposal.enabled',
                     'required' => false,
                 ])
-                ->add('expired', null, [
-                    'label' => 'admin.global.expired',
-                    'read_only' => true,
-                    'attr' => [
-                      'disabled' => true
-                    ]
-                ])
                 ->add('isTrashed', null, [
                     'label' => 'admin.fields.proposal.isTrashed',
                     'required' => false,
