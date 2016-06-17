@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
@@ -11,12 +11,11 @@ import ProposalResponse from './ProposalResponse';
 
 const ProposalPageContent = React.createClass({
   propTypes: {
-    proposal: PropTypes.object.isRequired,
-    form: PropTypes.object.isRequired,
-    themes: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired,
-    className: PropTypes.string,
+    proposal: React.PropTypes.object.isRequired,
+    form: React.PropTypes.object.isRequired,
+    themes: React.PropTypes.array.isRequired,
+    districts: React.PropTypes.array.isRequired,
+    className: React.PropTypes.string,
   },
   mixins: [IntlMixin],
 
@@ -92,7 +91,6 @@ const ProposalPageContent = React.createClass({
           form={this.props.form}
           themes={this.props.themes}
           districts={this.props.districts}
-          categories={this.props.categories}
           show={this.state.showEditModal}
           onToggleModal={this.toggleEditModal}
         />

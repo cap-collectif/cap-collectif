@@ -30,10 +30,6 @@ Feature: Proposal Restful Api
           "name": @string@,
           "color": @string@
         },
-        "category": {
-          "id": @integer@,
-          "name": @string@
-        },
         "author": {
           "username": @string@,
           "displayName": @string@,
@@ -142,10 +138,6 @@ Feature: Proposal Restful Api
             "name": @string@,
             "color": @string@
           },
-          "category": {
-            "id": @integer@,
-            "name": @string@
-          },
           "author": @...@,
           "proposalForm": {
             "id": @integer@
@@ -178,10 +170,10 @@ Feature: Proposal Restful Api
     {
       "terms": null,
       "filters": {
-        "themes": 2,
-        "types": 1,
-        "statuses": 1,
-        "districts": 1
+        "theme": 2,
+        "type": 1,
+        "status": 1,
+        "district": 1
       }
     }
     """
@@ -207,10 +199,6 @@ Feature: Proposal Restful Api
             "id": @integer@,
             "name": @string@,
             "color": @string@
-          },
-          "category": {
-            "id": @integer@,
-            "name": @string@
           },
           "author": @...@,
           "proposalForm": {
@@ -249,7 +237,6 @@ Feature: Proposal Restful Api
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "district": 1,
       "theme": 1,
-      "category": 1,
       "responses": [
         {
           "question": 1,
@@ -276,7 +263,6 @@ Feature: Proposal Restful Api
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "district": 1,
       "theme": 1,
-      "category": 1,
       "responses": [
         {
           "question": 3,
@@ -299,7 +285,6 @@ Feature: Proposal Restful Api
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "district": 1,
       "theme": 1,
-      "category": 1,
       "responses": [
         {
           "question": 1,
@@ -335,7 +320,6 @@ Feature: Proposal Restful Api
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "district": 1,
       "theme": 1,
-      "category": 1,
       "responses": [
         {
           "question": 1,
@@ -357,44 +341,6 @@ Feature: Proposal Restful Api
       "errors": {
           "errors": [
             "Veuillez répondre à toutes les questions obligatoires pour soumettre cette proposition."
-          ],
-          "children": @...@
-      }
-    }
-    """
-
-  @security
-  Scenario: Logged in API client wants to add a proposal with no category when mandatory
-    Given I am logged in to api as user
-    And features themes, districts are enabled
-    When I send a POST request to "/api/proposal_forms/1/proposals" with json:
-    """
-    {
-      "title": "Acheter un sauna pour Capco",
-      "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-      "district": 1,
-      "theme": 1,
-      "responses": [
-        {
-          "question": 1,
-          "value": "Mega important"
-        },
-        {
-          "question": 3,
-          "value": "Réponse à la question obligatoire"
-        }
-      ]
-    }
-    """
-    Then the JSON response status code should be 400
-    And the JSON response should match:
-    """
-    {
-      "code": 400,
-      "message": "Validation Failed",
-      "errors": {
-          "errors": [
-            "Vous devez spécifier une catégorie."
           ],
           "children": @...@
       }

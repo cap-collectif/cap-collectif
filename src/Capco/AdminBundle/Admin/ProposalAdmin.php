@@ -3,7 +3,6 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Proposal;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -65,13 +64,6 @@ class ProposalAdmin extends Admin
                 'required' => false,
                 'empty_value' => 'admin.fields.proposal.no_theme',
                 'btn_add' => false,
-            ])
-            ->add('category', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.category',
-                'required' => false,
-                'empty_value' => 'admin.fields.proposal.no_category',
-                'btn_add' => false,
-                'query' => $this->createQueryForCategories(),
             ])
             ->add('district', 'sonata_type_model', [
                 'label' => 'admin.fields.proposal.district',
@@ -165,9 +157,6 @@ class ProposalAdmin extends Admin
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.proposal.title',
             ])
-            ->addIdentifier('category', null, [
-                'label' => 'admin.fields.proposal.category',
-            ])
             ->add('enabled', null, [
                 'editable' => true,
                 'label' => 'admin.fields.proposal.enabled',
@@ -206,9 +195,6 @@ class ProposalAdmin extends Admin
             ])
             ->add('status', null, [
                 'label' => 'admin.fields.proposal.status',
-            ])
-            ->add('category', null, [
-                'label' => 'admin.fields.proposal.category',
             ])
             ->add('estimation', null, [
                 'label' => 'admin.fields.proposal.estimation',
@@ -260,9 +246,6 @@ class ProposalAdmin extends Admin
             ->add('theme', null, [
                 'label' => 'admin.fields.proposal.theme',
             ])
-            ->add('category', null, [
-                'label' => 'admin.fields.proposal.category',
-            ])
             ->add('district', null, [
                 'label' => 'admin.fields.proposal.district',
             ])
@@ -305,26 +288,6 @@ class ProposalAdmin extends Admin
             ->leftJoin('pas.project', 'p')
             ->andWhere('p.id = :projectId')
             ->setParameter('projectId', $projectId)
-        ;
-
-        return $qb->getQuery();
-    }
-
-    private function createQueryForCategories()
-    {
-        $subject = $this->getSubject();
-        if (!$subject->getId()) {
-            return new ArrayCollection();
-        }
-
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:ProposalCategory')
-            ->createQueryBuilder('pc')
-            ->leftJoin('pc.form', 'form')
-            ->andWhere('form.id = :formId')
-            ->setParameter('formId', $subject->getProposalForm()->getId())
         ;
 
         return $qb->getQuery();

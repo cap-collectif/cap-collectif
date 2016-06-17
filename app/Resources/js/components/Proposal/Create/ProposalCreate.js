@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
 import ProposalCreateButton from './ProposalCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
@@ -10,10 +10,9 @@ import { Modal } from 'react-bootstrap';
 
 const ProposalCreate = React.createClass({
   propTypes: {
-    form: PropTypes.object.isRequired,
-    themes: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired,
+    form: React.PropTypes.object.isRequired,
+    themes: React.PropTypes.array.isRequired,
+    districts: React.PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -83,7 +82,6 @@ const ProposalCreate = React.createClass({
               isSubmitting={this.state.isSubmitting}
               onValidationFailure={this.handleValidationFailure.bind(null, this)}
               onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
-              categories={this.props.categories}
             />
           </Modal.Body>
           <Modal.Footer>

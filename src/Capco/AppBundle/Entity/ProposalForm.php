@@ -9,7 +9,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Entity\ProposalCategory;
 
 /**
  * ProposalForm.
@@ -59,12 +58,6 @@ class ProposalForm
     private $questions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalCategory", mappedBy="form", cascade={"persist"}, orphanRemoval=true)
-     * @ORM\OrderBy({"name" = "ASC"})
-     **/
-    private $categories;
-
-    /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
      * @ORM\Column(name="updated_at", type="datetime")
@@ -96,43 +89,12 @@ class ProposalForm
     private $districtHelpText;
 
     /**
-     * @var string
-     * @ORM\Column(name="category_help_text", type="string", length=255, nullable=true)
-     */
-    private $categoryHelpText;
-
-    /**
-     * @var boolean
-     * @ORM\Column(name="using_themes", type="boolean")
-     */
-    private $usingThemes = false;
-
-    /**
-     * @var boolean
-     * @ORM\Column(name="theme_mandatory", type="boolean")
-     */
-    private $themeMandatory = false;
-
-    /**
-     * @var boolean
-     * @ORM\Column(name="using_categories", type="boolean")
-     */
-    private $usingCategories = false;
-
-    /**
-     * @var boolean
-     * @ORM\Column(name="category_mandatory", type="boolean")
-     */
-    private $categoryMandatory = false;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->questions = new ArrayCollection();
         $this->updatedAt = new \Datetime();
-        $this->categories = new ArrayCollection();
     }
 
     public function __toString()
@@ -378,126 +340,6 @@ class ProposalForm
     public function setDistrictHelpText($districtHelpText)
     {
         $this->districtHelpText = $districtHelpText;
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(ProposalCategory $category)
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->setForm($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(ProposalCategory $category)
-    {
-        $this->categories->removeElement($category);
-
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isUsingThemes()
-    {
-        return $this->usingThemes;
-    }
-
-    /**
-     * @param boolean $usingThemes
-     * @return $this
-     */
-    public function setUsingThemes($usingThemes)
-    {
-        $this->usingThemes = $usingThemes;
-
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isThemeMandatory()
-    {
-        return $this->themeMandatory;
-    }
-
-    /**
-     * @param boolean $themeMandatory
-     * @return $this
-     */
-    public function setThemeMandatory($themeMandatory)
-    {
-        $this->themeMandatory = $themeMandatory;
-
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isUsingCategories()
-    {
-        return $this->usingCategories;
-    }
-
-    /**
-     * @param boolean $usingCategories
-     * @return $this
-     */
-    public function setUsingCategories($usingCategories)
-    {
-        $this->usingCategories = $usingCategories;
-
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isCategoryMandatory()
-    {
-        return $this->categoryMandatory;
-    }
-
-    /**
-     * @param boolean $categoryMandatory
-     * @return $this
-     */
-    public function setCategoryMandatory($categoryMandatory)
-    {
-        $this->categoryMandatory = $categoryMandatory;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCategoryHelpText()
-    {
-        return $this->categoryHelpText;
-    }
-
-    /**
-     * @param string $categoryHelpText
-     * @return $this
-     */
-    public function setCategoryHelpText($categoryHelpText)
-    {
-        $this->categoryHelpText = $categoryHelpText;
 
         return $this;
     }

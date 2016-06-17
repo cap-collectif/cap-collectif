@@ -28,11 +28,6 @@ class ProposalType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $form = $options['proposalForm'];
-        if (!$form) {
-            throw new \Exception('A proposal form is needed to create or update a proposal.');
-        }
-
         $builder
             ->add('title', null, [
                 'required' => true,
@@ -42,10 +37,10 @@ class ProposalType extends AbstractType
             ])
         ;
 
-        if ($this->toggleManager->isActive('themes') && $form->isUsingThemes()) {
+        if ($this->toggleManager->isActive('themes')) {
             $builder
                 ->add('theme', null, [
-                    'required' => $form->isThemeMandatory(),
+                    'required' => true,
                 ])
             ;
         }
@@ -54,14 +49,6 @@ class ProposalType extends AbstractType
             $builder
                 ->add('district', null, [
                     'required' => true,
-                ])
-            ;
-        }
-
-        if ($form->isUsingCategories() && count($form->getCategories()) > 0) {
-            $builder
-                ->add('category', null, [
-                    'required' => $form->isCategoryMandatory(),
                 ])
             ;
         }
@@ -87,7 +74,6 @@ class ProposalType extends AbstractType
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
-            'proposalForm' => null,
         ]);
     }
 

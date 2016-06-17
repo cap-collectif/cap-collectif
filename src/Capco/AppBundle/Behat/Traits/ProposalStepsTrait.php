@@ -34,7 +34,7 @@ trait ProposalStepsTrait
         'stepSlug' => 'fermee',
     ];
     protected static $proposalWithSimpleVoteParams = [
-        'projectSlug' => 'budget-participatif-rennes',
+        'projectSlug' => 'projet-avec-budget',
         'stepSlug' => 'collecte-des-propositions',
         'proposalSlug' => 'renovation-du-gymnase',
     ];
@@ -156,7 +156,7 @@ trait ProposalStepsTrait
      */
     public function iChangeTheProposalsThemeFilter()
     {
-        $this->selectOption('proposal-filter-themes', 'Justice');
+        $this->selectOption('proposal-filter-theme', 'Justice');
         $this->iWait(2);
     }
 
@@ -325,7 +325,6 @@ trait ProposalStepsTrait
         }
         $this->fillFields($tableNode);
         $this->selectOption('proposal_district', 'Beaulieu');
-        $this->selectOption('proposal_category', 'Politique');
         if ($theme) {
             $this->selectOption('proposal_theme', 'Justice');
         }
