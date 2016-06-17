@@ -20,6 +20,9 @@ abstract class AbstractSerializationListener implements EventSubscriberInterface
         }
 
         $reflectionClass = new \ReflectionClass('JMS\Serializer\Exclusion\GroupsExclusionStrategy');
+        if (!$reflectionClass->hasProperty('groups')) {
+          return [];
+        }
         $reflectionProperty = $reflectionClass->getProperty('groups');
         $reflectionProperty->setAccessible(true);
 
