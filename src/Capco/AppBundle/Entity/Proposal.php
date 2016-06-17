@@ -28,6 +28,8 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="proposal.missing_required_responses", formField="proposalForm")
+ * @CapcoAssert\HasThemeIfMandatory()
+ * @CapcoAssert\HasCategoryIfMandatory()
  */
 class Proposal implements CommentableInterface, VotableInterface
 {
@@ -83,7 +85,6 @@ class Proposal implements CommentableInterface, VotableInterface
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     * @CapcoAssert\HasThemeIfActivated()
      */
     private $theme = null;
 
@@ -99,6 +100,12 @@ class Proposal implements CommentableInterface, VotableInterface
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $status = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalCategory", cascade={"persist"}, inversedBy="proposals")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $category = null;
 
     /**
      * @var string
@@ -268,6 +275,26 @@ class Proposal implements CommentableInterface, VotableInterface
     }
 
     /**
+     * @return ProposalCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param ProposalCategory $category
+     *
+     * @return $this
+     */
+    public function setCategory(ProposalCategory $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
      * @return Theme
      */
     public function getTheme()
@@ -280,10 +307,12 @@ class Proposal implements CommentableInterface, VotableInterface
      *
      * @return $this
      */
-    public function setTheme(Theme $theme)
+    public function setTheme(Theme $theme = null)
     {
         $this->theme = $theme;
-        $theme->addProposal($this);
+        if ($theme) {
+            $theme->addProposal($this);
+        }
 
         return $this;
     }

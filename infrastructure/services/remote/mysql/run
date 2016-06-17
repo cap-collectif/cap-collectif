@@ -11,5 +11,4 @@ fi
 
 chown -R mysql:mysql /var/lib/mysql
 
-# We start mysqld normally or perform a rollback in case of pending transactions
-exec mysqld_safe || mysqld_safe --tc-heuristic-recover=ROLLBACK
+exec mysqld_safe

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
@@ -9,12 +9,13 @@ import { Modal } from 'react-bootstrap';
 
 const ProposalEditModal = React.createClass({
   propTypes: {
-    form: React.PropTypes.object.isRequired,
-    themes: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
-    proposal: React.PropTypes.object.isRequired,
-    show: React.PropTypes.bool.isRequired,
-    onToggleModal: React.PropTypes.func.isRequired,
+    form: PropTypes.object.isRequired,
+    themes: PropTypes.array.isRequired,
+    districts: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
+    proposal: PropTypes.object.isRequired,
+    show: PropTypes.bool.isRequired,
+    onToggleModal: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -83,6 +84,7 @@ const ProposalEditModal = React.createClass({
               form={this.props.form}
               themes={this.props.themes}
               districts={this.props.districts}
+              categories={this.props.categories}
               isSubmitting={this.state.isSubmitting}
               onValidationFailure={this.handleValidationFailure.bind(null, this)}
               onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}

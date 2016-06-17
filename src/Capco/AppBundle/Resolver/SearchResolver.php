@@ -245,17 +245,20 @@ class SearchResolver
         if (array_key_exists('proposalForm', $providedFilters)) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
-        if (array_key_exists('status', $providedFilters) && $providedFilters['status'] > 0) {
-            $filters['status.id'] = $providedFilters['status'];
+        if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses'] > 0) {
+            $filters['status.id'] = $providedFilters['statuses'];
         }
-        if (array_key_exists('district', $providedFilters) && $providedFilters['district'] > 0) {
-            $filters['district.id'] = $providedFilters['district'];
+        if (array_key_exists('districts', $providedFilters) && $providedFilters['districts'] > 0) {
+            $filters['district.id'] = $providedFilters['districts'];
         }
-        if (array_key_exists('theme', $providedFilters) && $providedFilters['theme'] > 0) {
-            $filters['theme.id'] = $providedFilters['theme'];
+        if (array_key_exists('themes', $providedFilters) && $providedFilters['themes'] > 0) {
+            $filters['theme.id'] = $providedFilters['themes'];
         }
-        if (array_key_exists('type', $providedFilters) && $providedFilters['type'] > 0) {
-            $filters['author.user_type.id'] = $providedFilters['type'];
+        if (array_key_exists('types', $providedFilters) && $providedFilters['types'] > 0) {
+            $filters['author.user_type.id'] = $providedFilters['types'];
+        }
+        if (array_key_exists('categories', $providedFilters) && $providedFilters['categories'] > 0) {
+            $filters['category.id'] = $providedFilters['categories'];
         }
 
         // Search

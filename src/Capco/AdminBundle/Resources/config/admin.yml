@@ -105,6 +105,7 @@ services:
       - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.proposal_form}
     calls:
       - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTemplate, [edit, CapcoAdminBundle:ProposalForm:edit.html.twig]]
 
   capco_admin.admin.question:
     class: Capco\AdminBundle\Admin\QuestionAdmin
@@ -393,5 +394,13 @@ services:
       arguments: [~, Capco\AppBundle\Entity\Response, SonataAdminBundle:CRUD]
       tags:
         - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.response}
+      calls:
+        - [ setTranslationDomain, [SonataAdminBundle]]
+
+  capco_admin.admin.proposal_category:
+      class: Capco\AdminBundle\Admin\ProposalCategoryAdmin
+      arguments: [~, Capco\AppBundle\Entity\ProposalCategory, SonataAdminBundle:CRUD]
+      tags:
+        - {name: sonata.admin, manager_type: orm, label: admin.label.proposal_category}
       calls:
         - [ setTranslationDomain, [SonataAdminBundle]]

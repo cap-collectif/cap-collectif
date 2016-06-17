@@ -1116,8 +1116,6 @@ project_download:
     votes_mitigated: Votes mitigés
     votes_nok: Votes contre
     votes_ok: Votes pour
-  sheet:
-    title: Contributions
   values:
     appendices:
       title: Éléments de contexte

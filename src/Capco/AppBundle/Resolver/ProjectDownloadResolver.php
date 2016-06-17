@@ -778,7 +778,6 @@ class ProjectDownloadResolver
         ;
         $phpExcelObject->setActiveSheetIndex(0);
         $sheet = $phpExcelObject->getActiveSheet();
-        $sheet->setTitle($this->translator->trans('project_download.sheet.title', [], 'CapcoAppBundle'));
         $nbCols = count($headers);
         // Add headers
         list($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString('A1');
@@ -799,7 +798,7 @@ class ProjectDownloadResolver
             $currentColumn = $startColumn;
             for ($i = 0; $i < $nbCols; ++$i) {
                 $headerKey = is_array($headers[$i]) ? $headers[$i]['label'] : $headers[$i];
-                $sheet->setCellValue($currentColumn.$currentRow, $row[$headerKey]);
+                $sheet->setCellValueExplicit($currentColumn.$currentRow, $row[$headerKey]);
                 ++$currentColumn;
             }
             ++$currentRow;

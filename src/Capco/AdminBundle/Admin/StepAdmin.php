@@ -257,7 +257,8 @@ class StepAdmin extends Admin
                     'inline' => 'table',
                     'sortable' => 'position',
                 ])
-                ->end();
+                ->end()
+            ;
         }
     }
 

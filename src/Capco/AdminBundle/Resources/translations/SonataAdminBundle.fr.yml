@@ -457,6 +457,7 @@ admin:
       author_id: Id de l'auteur
       author_type: Type d'auteur
       body: Contenu
+      category: Catégorie
       collect_step: Étape de collecte
       comments: Commentaires
       created_at: Création
@@ -476,6 +477,7 @@ admin:
       isTrashed: Dans la corbeille
       likers: Coup(s) de coeur
       link: Lien
+      no_category: Aucune catégorie
       no_district: Aucun quartier
       no_status: Aucun statut
       no_theme: Aucun thème
@@ -489,23 +491,32 @@ admin:
       title: Titre
       trashedReason: Raison de la mise dans la corbeille
       updated_at: Mise à jour
+    proposal_category:
+      name: Nom
     proposal_form:
-      title: Titre
-      description: Description
-      updated_at: Mise à jour
+      add_question: Ajouter une question
+      categories: Catégories
+      category_help_text: Texte d'aide pour le champ Catégorie.
+      category_mandatory: Saisie de la catégorie obligatoire
       created_at: Création
-      title_help_text: Texte d'aide pour le champ Titre.
-      help_text_title_help_text: Le champ Titre est présent par défaut.
+      description: Description
       description_help_text: Texte d'aide pour le champ Description.
-      help_text_description_help_text: Le champ Description est présent par défaut.
-      theme_help_text: Texte d'aide pour le champ Thème.
-      help_text_theme_help_text: Le champ Thème est présent par défaut.
       district_help_text: Texte d'aide pour le champ Quartier.
-      help_text_district_help_text: Le champ Quartier est présent par défaut.
+      group_categories: Catégories
       group_general: Formulaire
       group_questions: Questions
+      group_help_texts: Textes d'aide
+      help_text_description_help_text: Le champ Description est présent par défaut.
+      help_text_district_help_text: Le champ Quartier est présent par défaut.
+      help_text_title_help_text: Le champ Titre est présent par défaut.
       questions: Questions
-      add_question: Ajouter une question
+      theme_help_text: Texte d'aide pour le champ Thème.
+      theme_mandatory: Saisie du thème obligatoire
+      title: Titre
+      title_help_text: Texte d'aide pour le champ Titre.
+      updated_at: Mise à jour
+      using_categories: Demander la saisie d'une catégorie
+      using_themes: Demander la saisie d'un thème
     questionnaire:
       anonymous_allowed: Autoriser les réponses anonymes
       title: Titre

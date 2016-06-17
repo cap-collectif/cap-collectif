@@ -155,7 +155,9 @@ class ProposalsController extends FOSRestController
             $proposal->setStatus($defaultStatuses[0]);
         }
 
-        $form = $this->createForm('proposal', $proposal);
+        $form = $this->createForm('proposal', $proposal, [
+            'proposalForm' => $proposalForm,
+        ]);
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {
@@ -333,7 +335,9 @@ class ProposalsController extends FOSRestController
 
         $em = $this->get('doctrine.orm.entity_manager');
 
-        $form = $this->createForm('proposal', $proposal);
+        $form = $this->createForm('proposal', $proposal, [
+            'proposalForm' => $proposalForm,
+        ]);
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
