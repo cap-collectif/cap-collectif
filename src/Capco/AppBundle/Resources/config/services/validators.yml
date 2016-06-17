@@ -40,24 +40,13 @@ services:
       - { name: validator.constraint_validator, alias: unlisted_email.validator }
 
   capco.has_enough_credits.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasEnoughCreditsToVoteValidator
-    arguments: ['@capco.proposal_votes.resolver']
-    tags:
-      - { name: validator.constraint_validator, alias: has_enough_credits.validator }
+      class: Capco\AppBundle\Validator\Constraints\HasEnoughCreditsToVoteValidator
+      arguments: ['@capco.proposal_votes.resolver']
+      tags:
+        - { name: validator.constraint_validator, alias: has_enough_credits.validator }
 
   capco.recaptcha.validator:
-    class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
-    arguments: [@request_stack, '%recaptcha_private_key%']
-    tags:
-        - { name: validator.constraint_validator, alias: recaptcha.validator }
-
-  capco.has_theme_if_mandatory.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasThemeIfMandatoryValidator
-    arguments: ['@capco.toggle.manager']
-    tags:
-      - { name: validator.constraint_validator, alias: has_theme_if_mandatory.validator }
-
-  capco.has_category_if_mandatory.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasCategoryIfMandatoryValidator
-    tags:
-      - { name: validator.constraint_validator, alias: has_category_if_mandatory.validator }
+        class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
+        arguments: [@request_stack, '%recaptcha_private_key%']
+        tags:
+            - { name: validator.constraint_validator, alias: recaptcha.validator }

@@ -109,7 +109,7 @@ Feature: Project
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "148 contributions"
+    Then I should see "164 contributions"
     And I hover over the "#contributions-counter-pill" element
     And I wait 1 seconds
     And I should see "30 propositions"

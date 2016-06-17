@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import ProposalPreview from '../Preview/ProposalPreview';
@@ -6,11 +6,10 @@ import { Row } from 'react-bootstrap';
 
 const ProposalList = React.createClass({
   propTypes: {
-    proposals: PropTypes.array.isRequired,
-    selectionStep: PropTypes.object,
-    creditsLeft: PropTypes.number,
-    showAllVotes: PropTypes.bool,
-    showThemes: PropTypes.bool,
+    proposals: React.PropTypes.array.isRequired,
+    selectionStep: React.PropTypes.object,
+    creditsLeft: React.PropTypes.number,
+    showAllVotes: React.PropTypes.bool,
   },
   mixins: [IntlMixin],
 
@@ -19,7 +18,6 @@ const ProposalList = React.createClass({
       creditsLeft: null,
       selectionStep: null,
       showAllVotes: false,
-      showThemes: false,
     };
   },
 
@@ -44,7 +42,6 @@ const ProposalList = React.createClass({
                 selectionStep={this.props.selectionStep}
                 creditsLeft={this.props.creditsLeft}
                 showAllVotes={this.props.showAllVotes}
-                showThemes={this.props.showThemes}
               />
             );
           })

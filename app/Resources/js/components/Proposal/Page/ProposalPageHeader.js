@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
 import { Label } from 'react-bootstrap';
 import classNames from 'classnames';
@@ -10,10 +10,9 @@ import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 
 const ProposalPageHeader = React.createClass({
   propTypes: {
-    proposal: PropTypes.object.isRequired,
-    className: PropTypes.string,
-    showNullEstimation: PropTypes.bool.isRequired,
-    showThemes: PropTypes.bool.isRequired,
+    proposal: React.PropTypes.object.isRequired,
+    className: React.PropTypes.string,
+    showNullEstimation: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -24,7 +23,7 @@ const ProposalPageHeader = React.createClass({
   },
 
   render() {
-    const { proposal, showThemes } = this.props;
+    const proposal = this.props.proposal;
     const votesCount = proposal.votesCount;
 
     const createdDate = (
@@ -94,32 +93,29 @@ const ProposalPageHeader = React.createClass({
             </div>
           </li>
           {proposal.status
-            && <li style={{ fontSize: 26, paddingTop: 5 }}>
+            ? <li style={{ fontSize: 26, paddingTop: 5 }}>
                 <Label bsSize="large" bsStyle={proposal.status.color}>{proposal.status.name}</Label>
               </li>
+            : null
           }
         </ul>
         <div className="proposal__infos">
           {
-            showThemes && proposal.theme
-              && <span className="proposal__info">
+            proposal.theme
+              ? <span className="proposal__info">
                 <i className="cap cap-tag-1-1"></i>
                 <a href={proposal.theme._links.show}>
                   {proposal.theme.title}
                 </a>
               </span>
-          }
-          {
-            proposal.category
-            && <span className="proposal__info">
-              <i className="cap cap-tag-1-1"></i>{proposal.category.name}
-            </span>
+              : null
           }
           {
             proposal.district
-            && <span className="proposal__info">
+            ? <span className="proposal__info">
               <i className="cap cap-marker-1-1"></i>{proposal.district.name}
             </span>
+            : null
           }
           <ProposalDetailEstimation proposal={proposal} showNullEstimation={this.props.showNullEstimation} />
           <ProposalDetailLikers proposal={proposal} />

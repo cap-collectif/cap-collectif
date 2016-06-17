@@ -98,13 +98,14 @@ const ProposalPageVotes = React.createClass({
         </Row>
         {
           moreVotes
-          && <Button
+          ? <Button
               bsStyle="primary"
               onClick={this.showModal}
               className="btn--outline"
           >
             {this.getIntlMessage('proposal.vote.show_more')}
           </Button>
+          : null
         }
         <AllVotesModal
           votes={this.state.votes}
