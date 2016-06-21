@@ -72,3 +72,5 @@ show:
   label_zip_code: Code postal
 
 "Gender": Civilité
+
+global.alert.email_confirmed_with_republish: Merci, votre compte a bien été confirmé et votre contenu republié avec succès

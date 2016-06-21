@@ -325,7 +325,8 @@ class SourceRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
+            ->andWhere('s.isEnabled = true')
+            ->andWhere('s.expired = false')
+        ;
     }
 }

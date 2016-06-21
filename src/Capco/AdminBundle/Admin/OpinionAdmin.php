@@ -199,6 +199,13 @@ class OpinionAdmin extends Admin
                     'label' => 'admin.fields.opinion.pinned_long',
                     'required' => false,
                 ])
+                ->add('expired', null, [
+                    'label' => 'admin.global.expired',
+                    'read_only' => true,
+                    'attr' => [
+                      'disabled' => true
+                    ]
+                ])
                 ->add('isTrashed', null, [
                     'label' => 'admin.fields.opinion.is_trashed',
                     'required' => false,

@@ -659,7 +659,7 @@ svg.avatar {
     right: 0;
     width: 50%;
     height: 1.2em;
-    background: linear-gradient(to right, transparent, white 50%);
+    background: linear-gradient(to right, rgba(255,255,255,0), white 50%);
   }
 }
 

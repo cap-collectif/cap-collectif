@@ -47,7 +47,7 @@ class OpinionRepository extends EntityRepository
         ;
     }
 
-    public function getOne($id)
+    public function getOne(string $id)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 'ot', 's', 'appendix', 'childConnections', 'parentConnections')
@@ -253,10 +253,9 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('s.project', 'c')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->andWhere('c.isEnabled = :enabled')
-            ->andWhere('s.isEnabled = :enabled')
+            ->andWhere('c.isEnabled = true')
+            ->andWhere('s.isEnabled = true')
             ->andWhere('o.Author = :author')
-            ->setParameter('enabled', true)
             ->setParameter('author', $user)
             ->orderBy('o.createdAt', 'DESC');
 
@@ -276,11 +275,10 @@ class OpinionRepository extends EntityRepository
             ->select('COUNT(o) as totalOpinions')
             ->leftJoin('o.step', 's')
             ->leftJoin('s.project', 'c')
-            ->andWhere('s.isEnabled = :enabled')
-            ->andWhere('c.isEnabled = :enabled')
-            ->andWhere('o.isEnabled = :enabled')
+            ->andWhere('s.isEnabled = true')
+            ->andWhere('c.isEnabled = true')
+            ->andWhere('o.isEnabled = true')
             ->andWhere('o.Author = :author')
-            ->setParameter('enabled', true)
             ->setParameter('author', $user);
 
         return $qb
@@ -315,10 +313,9 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('aut.Media', 'm')
             ->andWhere('o.step = :step')
             ->andWhere('ot.id = :opinionType')
-            ->andWhere('o.isTrashed = :notTrashed')
+            ->andWhere('o.isTrashed = false')
             ->setParameter('step', $step)
             ->setParameter('opinionType', $opinionTypeId)
-            ->setParameter('notTrashed', false)
             ->addOrderBy('o.pinned', 'DESC')
         ;
 
@@ -414,9 +411,8 @@ class OpinionRepository extends EntityRepository
             ->innerJoin('o.step', 's')
             ->innerJoin('s.projectAbstractStep', 'cas')
             ->innerJoin('cas.project', 'c')
-            ->andWhere('o.isTrashed = :trashed')
+            ->andWhere('o.isTrashed = false')
             ->andWhere('cas.project = :project')
-            ->setParameter('trashed', false)
             ->setParameter('project', $project)
         ;
 
@@ -438,7 +434,8 @@ class OpinionRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder($alias = 'o')
     {
         return $this->createQueryBuilder($alias)
-            ->andWhere($alias.'.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
+            ->andWhere($alias.'.isEnabled = true')
+            ->andWhere($alias.'.expired = false')
+        ;
     }
 }

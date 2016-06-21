@@ -1,0 +1,55 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block form %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            const usingThemesField = $("input#{{ admin.uniqid }}_usingThemes");
+            const themeHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_themeHelpText");
+            const themeMandatoryField = $("#sonata-ba-field-container-{{ admin.uniqid }}_themeMandatory");
+
+            const usingCategoriesField = $("input#{{ admin.uniqid }}_usingCategories");
+            const categoryHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_categoryHelpText");
+            const categoryMandatoryField = $("#sonata-ba-field-container-{{ admin.uniqid }}_categoryMandatory");
+            const categoriesGroup = $(".categories-hideable");
+
+            function toggleThemesField(show) {
+                if (show) {
+                    themeHelpTextField.removeClass('hidden');
+                    themeMandatoryField.removeClass('hidden');
+                } else {
+                    themeHelpTextField.addClass('hidden');
+                    themeMandatoryField.addClass('hidden');
+                }
+            }
+
+            function toggleCategoriesField(show) {
+                if (show) {
+                    categoryHelpTextField.removeClass('hidden');
+                    categoryMandatoryField.removeClass('hidden');
+                    categoriesGroup.removeClass('hidden');
+                } else {
+                    categoryHelpTextField.addClass('hidden');
+                    categoryMandatoryField.addClass('hidden');
+                    categoriesGroup.addClass('hidden');
+                }
+            }
+
+            toggleThemesField(usingThemesField.prop('checked'));
+            toggleCategoriesField(usingCategoriesField.prop('checked'));
+
+            usingThemesField.on('ifChanged', function(e) {
+                $(e.target).iCheck('update');
+                toggleThemesField($(e.target).prop('checked'));
+
+            });
+
+            usingCategoriesField.on('ifChanged', function(e) {
+                $(e.target).iCheck('update');
+                toggleCategoriesField($(e.target).prop('checked'));
+
+            });
+        });
+    </script>
+{% endblock %}

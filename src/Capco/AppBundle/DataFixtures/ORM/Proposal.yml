@@ -5,16 +5,17 @@ Capco\AppBundle\Entity\Proposal:
        <p><text(100)></p>
     enabled: true
     isTrashed: false
-    author: @user502
-    proposalForm: @proposalform1
-    theme: @theme2
-    district: @district1
-    status: @status1
-    answer: @answer3
-    selectionSteps: [@selectionStep1]
+    author: '@user502'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district1'
+    status: '@status1'
+    answer: '@answer3'
+    selectionSteps: ['@selectionStep1']
     createdAt: <(new \DateTime('2015-01-01'))>
-    answer: @answer4
-    likers: [@user1, @user2]
+    answer: '@answer4'
+    likers: ['@user1', '@user2']
+    category: '@pCategory2'
   proposal2:
     title: Rénovation du gymnase
     body: |
@@ -23,14 +24,15 @@ Capco\AppBundle\Entity\Proposal:
     rating: 4
     annotation: Lancer l'appel d'offre
     isTrashed: false
-    author: @user5
-    proposalForm: @proposalform1
-    theme: @theme3
-    district: @district2
-    status: @status2
-    selectionSteps: [@selectionStep1, @selectionStep2]
+    author: '@user5'
+    proposalForm: '@proposalform1'
+    theme: '@theme3'
+    district: '@district2'
+    status: '@status2'
+    selectionSteps: ['@selectionStep1', '@selectionStep2']
     createdAt: <(new \DateTime('2015-02-01'))>
-    likers: [@user504]
+    likers: ['@user504']
+    category: '@pCategory1'
   proposal3:
     title: Installation de bancs sur la place de la mairie
     body: |
@@ -39,13 +41,14 @@ Capco\AppBundle\Entity\Proposal:
     rating: 3
     annotation: Vérifier les normes de sécurité
     isTrashed: false
-    author: @user502
-    proposalForm: @proposalform1
-    theme: @theme2
-    district: @district4
-    status: @status1
-    selectionSteps: [@selectionStep1]
+    author: '@user502'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district4'
+    status: '@status1'
+    selectionSteps: ['@selectionStep1']
     createdAt: <(new \DateTime('2015-03-01'))>
+    category: '@pCategory2'
   proposal4:
     title: Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
     body: |
@@ -54,10 +57,10 @@ Capco\AppBundle\Entity\Proposal:
     rating: 1
     annotation: Renvoyer l'idée à l'église
     isTrashed: false
-    author: @user7
-    proposalForm: @proposalform1
-    theme: @theme2
-    district: @district2
+    author: '@user7'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district2'
   proposal5:
     title: Proposition à la corbeille
     body: |
@@ -65,11 +68,11 @@ Capco\AppBundle\Entity\Proposal:
     enabled: true
     isTrashed: true
     rating: 1
-    author: @user7
-    proposalForm: @proposalform1
-    theme: @theme4
-    district: @district3
-    status: @status3
+    author: '@user7'
+    proposalForm: '@proposalform1'
+    theme: '@theme4'
+    district: '@district3'
+    status: '@status3'
     trashedReason: "Pub"
   proposal6:
     title: Proposition dépubliée
@@ -78,11 +81,11 @@ Capco\AppBundle\Entity\Proposal:
     enabled: false
     isTrashed: false
     rating: 3
-    author: @user4
-    proposalForm: @proposalform1
-    theme: @theme2
-    district: @district3
-    status: @status1
+    author: '@user4'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
   proposal7:
     title: Proposition très chère
     body: |
@@ -90,13 +93,13 @@ Capco\AppBundle\Entity\Proposal:
     enabled: true
     isTrashed: false
     rating: 3
-    author: @user4
-    proposalForm: @proposalform3
-    theme: @theme2
-    district: @district3
-    status: @status1
+    author: '@user4'
+    proposalForm: '@proposalform3'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
     estimation: 2999999
-    selectionSteps: [@selectionStep4, @selectionStep5]
+    selectionSteps: ['@selectionStep4', '@selectionStep5']
   proposal8:
     title: Proposition pas chère
     body: |
@@ -104,13 +107,13 @@ Capco\AppBundle\Entity\Proposal:
     enabled: true
     isTrashed: false
     rating: 3
-    author: @user4
-    proposalForm: @proposalform3
-    theme: @theme2
-    district: @district3
-    status: @status1
+    author: '@user4'
+    proposalForm: '@proposalform3'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
     estimation: 100
-    selectionSteps: [@selectionStep4, @selectionStep5]
+    selectionSteps: ['@selectionStep4', '@selectionStep5']
   proposal9:
     title: Proposition gratuite
     body: |
@@ -118,12 +121,12 @@ Capco\AppBundle\Entity\Proposal:
     enabled: true
     isTrashed: false
     rating: 3
-    author: @user4
-    proposalForm: @proposalform3
-    theme: @theme2
-    district: @district3
-    status: @status1
-    selectionSteps: [@selectionStep4, @selectionStep5]
+    author: '@user4'
+    proposalForm: '@proposalform3'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
+    selectionSteps: ['@selectionStep4', '@selectionStep5']
   proposal10:
     title: Proposition pas encore votable
     body: |
@@ -131,13 +134,13 @@ Capco\AppBundle\Entity\Proposal:
     enabled: true
     isTrashed: false
     rating: 3
-    author: @user4
-    proposalForm: @proposalform1
-    theme: @theme2
-    district: @district3
-    status: @status1
+    author: '@user4'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
     estimation: 100
-    selectionSteps: [@selectionStep6]
+    selectionSteps: ['@selectionStep6']
   proposal11:
     title: Proposition plus votable
     body: |
@@ -145,10 +148,10 @@ Capco\AppBundle\Entity\Proposal:
     enabled: true
     isTrashed: false
     rating: 3
-    author: @user4
-    proposalForm: @proposalform1
-    theme: @theme2
-    district: @district3
-    status: @status1
+    author: '@user4'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
     estimation: 100
-    selectionSteps: [@selectionStep3]
+    selectionSteps: ['@selectionStep3']

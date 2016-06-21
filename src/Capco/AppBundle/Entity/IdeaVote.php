@@ -35,9 +35,7 @@ class IdeaVote extends AbstractVote
     public function __construct(Idea $idea = null)
     {
         parent::__construct();
-
         $this->idea = $idea;
-        $this->setConfirmed(false);
     }
 
     public function __toString()

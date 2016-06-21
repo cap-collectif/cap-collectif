@@ -30,7 +30,7 @@ trait VotableOkTrait
     {
         if ($user != null) {
             foreach ($this->votes as $vote) {
-                if ($vote->getUser() == $user && $vote->isConfirmed()) {
+                if ($vote->getUser() == $user) {
                     return true;
                 }
             }

@@ -69,6 +69,13 @@ class ArgumentVoteAdmin extends Admin
             ->add('user', 'sonata_type_model', [
                 'label' => 'admin.fields.argument_vote.voter',
             ])
+            ->add('expired', null, [
+                'label' => 'admin.global.expired',
+                'read_only' => true,
+                'attr' => [
+                  'disabled' => true
+                ]
+            ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.argument_vote.created_at',
             ])

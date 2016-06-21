@@ -12,42 +12,23 @@ class ContributionManager
         $this->em = $em;
     }
 
+    public function republishContributions(User $user)
+    {
+        $republishedCount = 0;
+        foreach ($user->getContributions() as $contribution) {
+            $contribution->setExpired(false);
+            $republishedCount++;
+        }
+        return $republishedCount > 0;
+    }
+
     public function depublishContributions(User $user)
     {
-        $contributionsDeletedCount = 0;
-        foreach ($user->getOpinions() as $opinion) {
-            $opinion->setIsEnabled(false);
-            ++$contributionsDeletedCount;
+        $expiredCount = 0;
+        foreach ($user->getContributions() as $contribution) {
+            $contribution->setExpired(true);
+            $expiredCount++;
         }
-        foreach ($user->getVotes() as $vote) {
-            $this->em->remove($vote);
-            ++$contributionsDeletedCount;
-        }
-        foreach ($user->getOpinionVersions() as $version) {
-            $version->setEnabled(false);
-            ++$contributionsDeletedCount;
-        }
-        foreach ($user->getIdeas() as $idea) {
-            $idea->setIsEnabled(false);
-            ++$contributionsDeletedCount;
-        }
-        foreach ($user->getComments() as $comment) {
-            $comment->setIsEnabled(false);
-            ++$contributionsDeletedCount;
-        }
-        foreach ($user->getArguments() as $argument) {
-            $argument->setIsEnabled(false);
-            ++$contributionsDeletedCount;
-        }
-        foreach ($user->getSources() as $source) {
-            $source->setIsEnabled(false);
-            ++$contributionsDeletedCount;
-        }
-        foreach ($user->getProposals() as $proposal) {
-            $proposal->setEnabled(false);
-            ++$contributionsDeletedCount;
-        }
-
-        return $contributionsDeletedCount > 0;
+        return $expiredCount > 0;
     }
 }
