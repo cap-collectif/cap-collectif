@@ -8,6 +8,7 @@ import CommentActions from '../../actions/CommentActions';
 import CommentStore from '../../stores/CommentStore';
 import Loader from '../Utils/Loader';
 import FlashMessages from '../Utils/FlashMessages';
+import { connect } from 'react-redux';
 
 const MessagePagination = 10;
 

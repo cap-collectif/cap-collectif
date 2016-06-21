@@ -171,7 +171,7 @@ class EventRepository extends EntityRepository
         if ($offset) {
             $qb->setFirstResult($offset);
         }
-
+        
         return new Paginator($qb, $fetchJoin = true);
     }
 

@@ -21,9 +21,9 @@ class UserRepository extends EntityRepository
     public function findProjectSourceContributorsWithCount(Project $project)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-          select u.id, count(distinct s) as sources_count
-          from CapcoUserBundle:User u
+        $query = $em->createQuery(
+         'SELECT u.id, count(distinct s) as sources_count
+          FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Source s WITH s.Author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
@@ -32,10 +32,10 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           LEFT JOIN ovo.step ovostep
           LEFT JOIN ovostep.projectAbstractStep ovopas
-          WHERE s.isEnabled = 1 AND (
-            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND opas.project = :project)
+          WHERE s.isEnabled = 1 AND s.expired = 0 AND (
+            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND opas.project = :project)
             OR
-            (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovopas.project = :project)
+            (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovopas.project = :project)
           )
           GROUP BY u.id
         ')
@@ -47,8 +47,8 @@ class UserRepository extends EntityRepository
     public function findProjectArgumentContributorsWithCount(Project $project)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-          select u.id, count(distinct a) as arguments_count
+        $query = $em->createQuery(
+          'SELECT u.id, count(distinct a) as arguments_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Argument a WITH a.Author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
@@ -58,10 +58,10 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           LEFT JOIN ovo.step ovostep
           LEFT JOIN ovostep.projectAbstractStep ovopas
-          WHERE a.isEnabled = 1 AND (
-            (a.opinion IS NOT NULL AND o.isEnabled = 1 AND opas.project = :project)
+          WHERE a.isEnabled = 1 AND a.expired = 0 AND (
+            (a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND opas.project = :project)
             OR
-            (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovopas.project = :project)
+            (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovopas.project = :project)
           )
           GROUP BY u.id
         ')
@@ -101,7 +101,7 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions) as opinions_count')
-            ->leftJoin('u.opinions', 'opinions', 'WITH', 'opinions.isEnabled = 1')
+            ->leftJoin('u.opinions', 'opinions', 'WITH', 'opinions.isEnabled = 1 AND opinions.expired = 0')
             ->leftJoin('opinions.step', 'step', 'WITH', 'step.isEnabled = 1')
             ->leftJoin('step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
@@ -116,7 +116,7 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct proposals) as proposals_count')
-            ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.enabled = 1')
+            ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.enabled = 1 AND proposals.expired = 0')
             ->leftJoin('proposals.proposalForm', 'proposalForm')
             ->leftJoin('proposalForm.step', 'step', 'WITH', 'step.isEnabled = 1')
             ->leftJoin('step.projectAbstractStep', 'pas')
@@ -149,8 +149,8 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct versions) as versions_count')
-            ->leftJoin('u.opinionVersions', 'versions', 'WITH', 'versions.enabled = 1')
-            ->leftJoin('versions.parent', 'opinions', 'WITH', 'opinions.isEnabled = 1')
+            ->leftJoin('u.opinionVersions', 'versions', 'WITH', 'versions.enabled = 1 AND versions.expired = 0')
+            ->leftJoin('versions.parent', 'opinions', 'WITH', 'opinions.isEnabled = 1 AND opinions.expired = 0')
             ->leftJoin('opinions.step', 'step', 'WITH', 'step.isEnabled = 1')
             ->leftJoin('step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
@@ -165,8 +165,8 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions_votes) as opinions_votes_count')
-            ->leftJoin('CapcoAppBundle:OpinionVote', 'opinions_votes', 'WITH', 'opinions_votes.user = u AND opinions_votes.confirmed = 1')
-            ->leftJoin('opinions_votes.opinion', 'opinions_votes_opinion', 'WITH', 'opinions_votes_opinion.isEnabled = 1')
+            ->leftJoin('CapcoAppBundle:OpinionVote', 'opinions_votes', 'WITH', 'opinions_votes.user = u AND opinions_votes.expired = 0')
+            ->leftJoin('opinions_votes.opinion', 'opinions_votes_opinion', 'WITH', 'opinions_votes_opinion.isEnabled = 1 AND opinions_votes_opinion.expired = 0')
             ->leftJoin('opinions_votes_opinion.step', 'opinions_votes_opinion_step', 'WITH', 'opinions_votes_opinion_step.isEnabled = 1')
             ->leftJoin('opinions_votes_opinion_step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
@@ -181,9 +181,9 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct versions_votes) as versions_votes_count')
-            ->leftJoin('CapcoAppBundle:OpinionVersionVote', 'versions_votes', 'WITH', 'versions_votes.user = u AND versions_votes.confirmed = 1')
-            ->leftJoin('versions_votes.opinionVersion', 'versions_votes_version', 'WITH', 'versions_votes_version.enabled = 1')
-            ->leftJoin('versions_votes_version.parent', 'versions_votes_version_parent', 'WITH', 'versions_votes_version_parent.isEnabled = 1')
+            ->leftJoin('CapcoAppBundle:OpinionVersionVote', 'versions_votes', 'WITH', 'versions_votes.user = u AND versions_votes.expired = 0')
+            ->leftJoin('versions_votes.opinionVersion', 'versions_votes_version', 'WITH', 'versions_votes_version.enabled = 1 AND versions_votes_version.expired = 0')
+            ->leftJoin('versions_votes_version.parent', 'versions_votes_version_parent', 'WITH', 'versions_votes_version_parent.isEnabled = 1 AND versions_votes_version_parent.expired = 0')
             ->leftJoin('versions_votes_version_parent.step', 'versions_votes_version_step', 'WITH', 'versions_votes_version_step.isEnabled = 1')
             ->leftJoin('versions_votes_version_step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
@@ -197,17 +197,20 @@ class UserRepository extends EntityRepository
     public function findProjectArgumentVotersWithCount(Project $project)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-          select u.id, count(distinct av) as arguments_votes_count
-          from CapcoUserBundle:User u
+        $query = $em->createQuery(
+         'SELECT u.id, count(distinct av) as arguments_votes_count
+          FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ArgumentVote av WITH av.user = u
           LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE av.user = u AND av.confirmed = 1 AND a.isEnabled = 1 AND ((a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :project) OR (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :project))
-          GROUP BY av.user
-        ')
+          WHERE av.user = u AND a.isEnabled = 1 AND a.expired = 0 AND (
+            (a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :project)
+            OR
+            (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovo.step = :project)
+          )
+          GROUP BY av.user')
         ->setParameter('project', $project);
 
         return $query->getResult();
@@ -216,15 +219,19 @@ class UserRepository extends EntityRepository
     public function findProjectSourceVotersWithCount(Project $project)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-          select u.id, count(distinct sv) as sources_votes_count
-          from CapcoUserBundle:User u
+        $query = $em->createQuery(
+          'SELECT u.id, count(distinct sv) as sources_votes_count
+          FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
           LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE sv.user = u AND sv.confirmed = 1 AND s.isEnabled = 1 AND ((s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :project) OR (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :project))
+          WHERE sv.user = u AND s.isEnabled = 1 AND (
+            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :project)
+            OR
+            (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovo.step = :project)
+          )
           GROUP BY sv.user
         ')
             ->setParameter('project', $project);
@@ -236,14 +243,13 @@ class UserRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
         $voteWith = $excludePrivate ? '(pv.user = u AND pv.private = 0)' : 'pv.user = u';
-        $rawQuery = '
-          select u.id, count(distinct pv) as proposals_votes_count
+        $rawQuery = 'SELECT u.id, count(distinct pv) as proposals_votes_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ProposalVote pv WITH '.$voteWith.'
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
           LEFT JOIN pv.selectionStep s
           LEFT JOIN s.projectAbstractStep pas
-          WHERE pv.user = u AND pv.confirmed = 1 AND p.enabled = 1 AND pas.project = :project
+          WHERE pv.user = u AND p.enabled = 1 AND p.expired = 0 AND pas.project = :project
           GROUP BY pv.user
         ';
         $query = $em->createQuery($rawQuery)
@@ -292,17 +298,16 @@ class UserRepository extends EntityRepository
     public function findConsultationStepSourceContributorsWithCount(ConsultationStep $step)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-          select u.id, count(distinct s) as sources_count
+        $query = $em->createQuery('SELECT u.id, count(distinct s) as sources_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Source s WITH s.Author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE s.isEnabled = 1 AND (
-            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step)
+          WHERE s.isEnabled = 1 AND s.expired = 0 AND (
+            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :step)
             OR
-            (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step)
+            (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovo.step = :step)
           )
           GROUP BY u.id
         ')
@@ -314,17 +319,16 @@ class UserRepository extends EntityRepository
     public function findConsultationStepArgumentContributorsWithCount(ConsultationStep $step)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-          select u.id, count(distinct a) as arguments_count
-          from CapcoUserBundle:User u
+        $query = $em->createQuery('SELECT u.id, count(distinct a) as arguments_count
+          FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Argument a WITH a.Author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE a.isEnabled = 1 AND (
-            (a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step)
+          WHERE a.isEnabled = 1 AND a.expired = 0 AND (
+            (a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :step)
             OR
-            (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step)
+            (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovo.step = :step)
           )
           GROUP BY u.id
         ')
@@ -337,7 +341,7 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions) as opinions_count')
-            ->leftJoin('u.opinions', 'opinions', 'WITH', 'opinions.isEnabled = 1')
+            ->leftJoin('u.opinions', 'opinions', 'WITH', 'opinions.isEnabled = 1 AND opinions.expired = 0')
             ->where('opinions.step = :step')
             ->groupBy('u.id')
             ->setParameter('step', $step)
@@ -350,7 +354,7 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct proposals) as proposals_count')
-            ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.enabled = 1')
+            ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.enabled = 1 AND proposals.expired = 0')
             ->leftJoin('proposals.proposalForm', 'proposalForm')
             ->where('proposalForm.step = :step')
             ->groupBy('u.id')
@@ -364,7 +368,7 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct replies) as replies_count')
-            ->leftJoin('u.replies', 'replies', 'WITH', 'replies.enabled = 1')
+            ->leftJoin('u.replies', 'replies', 'WITH', 'replies.enabled = 1 AND replies.expired = 0')
             ->leftJoin('replies.questionnaire', 'questionnaire')
             ->where('questionnaire.step = :step')
             ->groupBy('u.id')
@@ -378,8 +382,8 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct versions) as versions_count')
-            ->leftJoin('u.opinionVersions', 'versions', 'WITH', 'versions.enabled = 1')
-            ->leftJoin('versions.parent', 'opinions', 'WITH', 'opinions.isEnabled = 1')
+            ->leftJoin('u.opinionVersions', 'versions', 'WITH', 'versions.enabled = 1 AND versions.expired = 0')
+            ->leftJoin('versions.parent', 'opinions', 'WITH', 'opinions.isEnabled = 1 AND opinions.expired = 0')
             ->where('opinions.step = :step')
             ->groupBy('u.id')
             ->setParameter('step', $step)
@@ -392,8 +396,8 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions_votes) as opinions_votes_count')
-            ->leftJoin('CapcoAppBundle:OpinionVote', 'opinions_votes', 'WITH', 'opinions_votes.user = u AND opinions_votes.confirmed = 1')
-            ->leftJoin('opinions_votes.opinion', 'opinions_votes_opinion', 'WITH', 'opinions_votes_opinion.isEnabled = 1')
+            ->leftJoin('CapcoAppBundle:OpinionVote', 'opinions_votes', 'WITH', 'opinions_votes.user = u AND opinions_votes.expired = 0')
+            ->leftJoin('opinions_votes.opinion', 'opinions_votes_opinion', 'WITH', 'opinions_votes_opinion.isEnabled = 1 AND opinions_votes_opinion.expired = 0')
             ->where('opinions_votes_opinion.step = :step')
             ->groupBy('u.id')
             ->setParameter('step', $step)
@@ -406,9 +410,9 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct versions_votes) as versions_votes_count')
-            ->leftJoin('CapcoAppBundle:OpinionVersionVote', 'versions_votes', 'WITH', 'versions_votes.user = u AND versions_votes.confirmed = 1')
-            ->leftJoin('versions_votes.opinionVersion', 'versions_votes_version', 'WITH', 'versions_votes_version.enabled = 1')
-            ->leftJoin('versions_votes_version.parent', 'versions_votes_version_parent', 'WITH', 'versions_votes_version_parent.isEnabled = 1')
+            ->leftJoin('CapcoAppBundle:OpinionVersionVote', 'versions_votes', 'WITH', 'versions_votes.user = u AND versions_votes.expired = 0')
+            ->leftJoin('versions_votes.opinionVersion', 'versions_votes_version', 'WITH', 'versions_votes_version.enabled = 1 AND versions_votes_version.expired = 0')
+            ->leftJoin('versions_votes_version.parent', 'versions_votes_version_parent', 'WITH', 'versions_votes_version_parent.isEnabled = 1 AND versions_votes_version_parent.expired = 0')
             ->where('versions_votes_version_parent.step = :step')
             ->groupBy('u.id')
             ->setParameter('step', $step)
@@ -420,15 +424,19 @@ class UserRepository extends EntityRepository
     public function findConsultationStepArgumentVotersWithCount(ConsultationStep $step)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-          select u.id, count(distinct av) as arguments_votes_count
+        $query = $em->createQuery(
+          'SELECT u.id, count(distinct av) as arguments_votes_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ArgumentVote av WITH av.user = u
           LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE av.user = u AND av.confirmed = 1 AND a.isEnabled = 1 AND ((a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step) OR (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step))
+          WHERE av.user = u AND a.isEnabled = 1 AND a.expired = 0 AND (
+            (a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :step)
+            OR
+            (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovo.step = :step)
+          )
           GROUP BY av.user
         ')
             ->setParameter('step', $step);
@@ -439,15 +447,19 @@ class UserRepository extends EntityRepository
     public function findConsultationStepSourceVotersWithCount(ConsultationStep $step)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-          select u.id, count(distinct sv) as sources_votes_count
-          from CapcoUserBundle:User u
+        $query = $em->createQuery(
+          'SELECT u.id, count(distinct sv) as sources_votes_count
+          FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
           LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE sv.user = u AND sv.confirmed = 1 AND s.isEnabled = 1 AND ((s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step) OR (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step))
+          WHERE sv.user = u AND s.isEnabled = 1 AND s.expired = 0 AND (
+            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :step)
+            OR
+            (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovo.step = :step)
+          )
           GROUP BY sv.user
         ')
             ->setParameter('step', $step);
@@ -458,12 +470,12 @@ class UserRepository extends EntityRepository
     public function findSelectionStepProposalVotersWithCount(SelectionStep $step)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('
-          select u.id, count(distinct pv) as proposals_votes_count
-          from CapcoUserBundle:User u
+        $query = $em->createQuery(
+         'SELECT u.id, count(distinct pv) as proposals_votes_count
+          FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ProposalVote pv WITH (pv.user = u AND pv.selectionStep = :step)
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
-          WHERE pv.user = u AND pv.confirmed = 1 AND p.enabled = 1
+          WHERE pv.user = u AND pv.expired = 0 AND p.enabled = 1 AND p.expired = 0
           GROUP BY pv.user
         ')
             ->setParameter('step', $step);

@@ -12,12 +12,14 @@ export const ProposalListFilters = React.createClass({
     id: React.PropTypes.number.isRequired,
     fetchFrom: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    theme: PropTypes.array.isRequired,
-    type: PropTypes.array.isRequired,
-    district: PropTypes.array.isRequired,
-    status: PropTypes.array.isRequired,
+    themes: PropTypes.array.isRequired,
+    types: PropTypes.array.isRequired,
+    districts: PropTypes.array.isRequired,
+    statuses: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
     orderByVotes: PropTypes.bool,
     features: PropTypes.object.isRequired,
+    showThemes: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -32,7 +34,8 @@ export const ProposalListFilters = React.createClass({
     return {
       order: ProposalStore.order,
       filters: ProposalStore.filters,
-      isLoading: true,
+      displayedFilters: ['statuses', 'types', 'districts', 'themes', 'categories'],
+      displayedOrders: ['random', 'last', 'old', 'comments'],
     };
   },
 
@@ -42,13 +45,15 @@ export const ProposalListFilters = React.createClass({
 
   componentDidMount() {
     if (this.props.orderByVotes) {
-      this.orders.push('votes');
+      const orders = this.state.displayedOrders;
+      orders.push('votes');
+      this.setState({displayedOrders: orders});
     }
-    this.updateFilters();
+    this.updateDisplayedFilters();
   },
 
   componentWillReceiveProps() {
-    this.updateFilters();
+    this.updateDisplayedFilters();
   },
 
   componentDidUpdate(prevProps, prevState) {
@@ -69,18 +74,18 @@ export const ProposalListFilters = React.createClass({
     });
   },
 
-  orders: ['random', 'last', 'old', 'comments'],
-  filters: ['status', 'type', 'district', 'theme'],
-
-  updateFilters() {
-    const filters = ['status', 'type'];
+  updateDisplayedFilters() {
+    const filters = ['statuses', 'types'];
     if (this.props.features.districts) {
-      filters.push('district');
+      filters.push('districts');
     }
-    if (this.props.features.themes) {
-      filters.push('theme');
+    if (this.props.features.themes && this.props.showThemes) {
+      filters.push('themes');
     }
-    this.filters = filters;
+    if (this.props.categories.length > 0) {
+      filters.push('categories');
+    }
+    this.setState({displayedFilters: filters});
   },
 
   handleOrderChange(ev) {
@@ -89,7 +94,7 @@ export const ProposalListFilters = React.createClass({
   },
 
   handleFilterChange(filterName) {
-    const value = this.refs[filterName].getValue();
+    const value = this[filterName].getValue();
     ProposalActions.changeFilterValue(filterName, value);
     this.reload();
   },
@@ -110,7 +115,7 @@ export const ProposalListFilters = React.createClass({
             value={this.state.order || 'random'}
           >
             {
-              this.orders.map((choice) => {
+              this.state.displayedOrders.map((choice) => {
                 return (
                   <option key={choice} value={choice}>
                     {this.getIntlMessage('global.filter_f_' + choice)}
@@ -126,13 +131,13 @@ export const ProposalListFilters = React.createClass({
       </Row>
       <Row>
         {
-          this.filters.map((filterName, index) => {
+          this.state.displayedFilters.map((filterName, index) => {
             return (
               <Col xs={12} md={6} key={index}>
                 <Input
                   type="select"
                   id={'proposal-filter-' + filterName}
-                  ref={filterName}
+                  ref={(c) => this[filterName] = c}
                   onChange={this.handleFilterChange.bind(this, filterName)}
                   value={this.state.filters[filterName] || 0}
                 >

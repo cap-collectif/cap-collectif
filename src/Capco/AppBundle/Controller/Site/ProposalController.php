@@ -58,6 +58,7 @@ class ProposalController extends Controller
             'form' => $currentStep->getProposalForm(),
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
             'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
+            'categories' => $currentStep->getProposalForm() ? $currentStep->getProposalForm()->getCategories() : [],
             'votableStep' => $firstVotableStep,
             'userHasVote' => $userHasVote,
         ], 'json', SerializationContext::create()
@@ -70,6 +71,7 @@ class ProposalController extends Controller
                 'Themes',
                 'Districts',
                 'Proposals',
+                'ProposalCategories',
                 'ProposalUserData',
                 'Steps',
                 'UserVotes',

@@ -2,24 +2,18 @@ Capco\AppBundle\Entity\CommentVote:
   evCommentVote{1..150}:
     comment: @evComment<numberBetween(1, 50)>
     user: @user<numberBetween(1, 5)>
-    confirmed: true
   iCommentVote{2..50}:
     comment: @iComment<current()>
     user: @user1
-    confirmed: true
   iCommentVote51:
     comment: @iComment2
     user: @user2
-    confirmed: true
   iCommentVote52:
     comment: @iComment2
     user: @user3
-    confirmed: true
   iCommentVote{53..55}:
       comment: @iComment151
       user: @user<numberBetween(1, 5)>
-      confirmed: true
   pCommentVote{1..150}:
     comment: @pComment<numberBetween(1, 50)>
     user: @user<numberBetween(1, 5)>
-    confirmed: true

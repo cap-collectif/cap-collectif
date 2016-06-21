@@ -36,7 +36,7 @@ const RankingSpot = React.createClass({
 
 });
 
-export default DropTarget(ITEM_TYPE, spotTarget, (connect, monitor) => ({ // eslint-disable-line new-cap
+export default DropTarget(ITEM_TYPE, spotTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop(),

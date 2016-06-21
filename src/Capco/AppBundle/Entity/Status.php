@@ -80,7 +80,7 @@ class Status
     private $step;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="status", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="status", cascade={"persist"})
      */
     private $proposals;
 

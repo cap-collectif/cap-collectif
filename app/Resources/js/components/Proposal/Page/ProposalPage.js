@@ -21,10 +21,12 @@ const ProposalPage = React.createClass({
     proposal: PropTypes.object.isRequired,
     themes: PropTypes.array.isRequired,
     districts: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
     votes: PropTypes.array.isRequired,
     votableStep: PropTypes.object,
     userHasVote: PropTypes.bool,
     user: PropTypes.object,
+    features: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -33,6 +35,7 @@ const ProposalPage = React.createClass({
       votableStep: null,
       userHasVote: false,
       user: null,
+      features: null,
     };
   },
 
@@ -118,6 +121,7 @@ const ProposalPage = React.createClass({
                 proposal={proposal}
                 className={containersClassName}
                 showNullEstimation={this.props.votableStep && this.props.votableStep.voteType === VOTE_TYPE_BUDGET}
+                showThemes={this.props.features.themes && this.props.form.usingThemes}
               />
               <ProposalPageAnswer
                 answer={proposal.answer}
@@ -128,6 +132,7 @@ const ProposalPage = React.createClass({
                 form={this.props.form}
                 themes={this.props.themes}
                 districts={this.props.districts}
+                categories={this.props.categories}
                 className={containersClassName}
               />
               <ProposalPageVotes
@@ -169,6 +174,7 @@ const ProposalPage = React.createClass({
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    features: state.features,
   };
 };
 

@@ -18,6 +18,8 @@ use Capco\UserBundle\Entity\User;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\HasDiffInterface;
+use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * Opinion Version.
@@ -26,7 +28,7 @@ use Capco\AppBundle\Model\HasDiffInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVersionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionVersion implements VotableInterface, HasDiffInterface, IsPublishableInterface
+class OpinionVersion implements Contribution, VotableInterface, HasDiffInterface, IsPublishableInterface
 {
     use TrashableTrait;
     use EnableTrait;
@@ -36,6 +38,7 @@ class OpinionVersion implements VotableInterface, HasDiffInterface, IsPublishabl
     use ValidableTrait;
     use AnswerableTrait;
     use DiffableTrait;
+    use ExpirableTrait;
 
     /**
      * @var int
@@ -117,6 +120,11 @@ class OpinionVersion implements VotableInterface, HasDiffInterface, IsPublishabl
         $this->sources = new ArrayCollection();
         $this->votes = new ArrayCollection();
         $this->reports = new ArrayCollection();
+    }
+
+    public function isIndexable()
+    {
+      return $this->isEnabled() && !$this->isExpired();
     }
 
     public function getReports()

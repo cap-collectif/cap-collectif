@@ -5,7 +5,7 @@
   &:hover {
     background-color: #F6F6F6;
     .idea__title:after {
-      background: linear-gradient(to right, transparent, #F6F6F6 50%);
+      background: linear-gradient(to right, rgba(255,255,255,0), #F6F6F6 50%);
     }
   }
 

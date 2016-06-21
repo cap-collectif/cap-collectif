@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Model\IndexableInterface;
 
 /**
  * Post.
@@ -16,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Post implements CommentableInterface
+class Post implements CommentableInterface, IndexableInterface
 {
     use CommentableTrait;
 
@@ -132,6 +133,11 @@ class Post implements CommentableInterface
         $this->projects = new ArrayCollection();
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
+    }
+
+    public function isIndexable()
+    {
+        return $this->getIsPublished();
     }
 
     public function __toString()

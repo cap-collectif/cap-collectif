@@ -32,11 +32,44 @@ class ProposalFormAdmin extends Admin
                 'config_name' => 'admin_editor',
                 'required' => false,
             ])
-            ->end()
         ;
 
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $formMapper
+                ->add('usingThemes', null, [
+                    'label' => 'admin.fields.proposal_form.using_themes',
+                    'required' => false,
+                ])
+                ->add('themeMandatory', null, [
+                    'label' => 'admin.fields.proposal_form.theme_mandatory',
+                    'required' => false,
+                ])
+            ;
+        }
+
         $formMapper
-            ->with('admin.fields.proposal_form.group_questions')
+            ->add('usingCategories', null, [
+                'label' => 'admin.fields.proposal_form.using_categories',
+                'required' => false,
+            ])
+            ->add('categoryMandatory', null, [
+                'label' => 'admin.fields.proposal_form.category_mandatory',
+                'required' => false,
+            ])
+            ->end()
+
+            ->with('admin.fields.proposal_form.group_categories', ['class' => 'col-md-12 categories-hideable'])
+            ->add('categories', 'sonata_type_collection', [
+                'label' => 'admin.fields.proposal_form.categories',
+                'by_reference' => false,
+                'required' => false,
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
+            ])
+            ->end()
+
+            ->with('admin.fields.proposal_form.group_help_texts')
             ->add('titleHelpText', null, [
                 'label' => 'admin.fields.proposal_form.title_help_text',
                 'required' => false,
@@ -49,16 +82,6 @@ class ProposalFormAdmin extends Admin
             ])
         ;
 
-        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $formMapper
-               ->add('themeHelpText', null, [
-                   'label' => 'admin.fields.proposal_form.theme_help_text',
-                   'required' => false,
-                   'help' => 'admin.fields.proposal_form.help_text_theme_help_text',
-               ])
-           ;
-        }
-
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('districts')) {
             $formMapper
                 ->add('districtHelpText', null, [
@@ -69,7 +92,22 @@ class ProposalFormAdmin extends Admin
             ;
         }
 
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $formMapper
+                ->add('themeHelpText', null, [
+                    'label' => 'admin.fields.proposal_form.theme_help_text',
+                    'required' => false,
+                ])
+            ;
+        }
+
         $formMapper
+            ->add('categoryHelpText', null, [
+                'label' => 'admin.fields.proposal_form.category_help_text',
+                'required' => false,
+            ])
+            ->end()
+            ->with('admin.fields.proposal_form.group_questions')
             ->add('questions', 'sonata_type_collection', [
                 'label' => 'admin.fields.proposal_form.questions',
                 'by_reference' => false,

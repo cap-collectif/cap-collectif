@@ -28,6 +28,7 @@ class ConfirmationController extends Controller
         $user->setExpired(false);
         $user->setExpiresAt(null);
         $user->setLastLogin(new \DateTime());
+        $hasRepublishedContributions = $this->get('capco.contribution.manager')->republishContributions($user);
         $manager->updateUser($user);
 
         $this->get('fos_user.security.login_manager')->loginUser(
@@ -36,7 +37,11 @@ class ConfirmationController extends Controller
             $response
         );
 
-        $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed');
+        if ($hasRepublishedContributions) {
+          $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed_with_republish');
+        } else {
+          $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed');
+        }
 
         return $response;
     }

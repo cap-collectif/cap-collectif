@@ -5,7 +5,7 @@ import moment from 'moment';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
-import Linkify from 'react-linkify';
+import AutoLinkText from '../Utils/AutoLinkText';
 
 const ArgumentItem = React.createClass({
   propTypes: {
@@ -47,7 +47,7 @@ const ArgumentItem = React.createClass({
             {this.renderDate()}
           </div>
           <p className="opinion__text">
-            <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
+            <AutoLinkText text={argument.body} />
           </p>
           <ArgumentButtons
             argument={argument}

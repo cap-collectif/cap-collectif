@@ -51,7 +51,7 @@ const CommentInfos = React.createClass({
 
   renderAuthorName() {
     if (this.props.comment.author) {
-      return <UserLink user={this.props.comment.author} />;
+      <UserLink user={this.props.comment.author} />
     }
 
     return <span>{ this.props.comment.author_name }</span>;

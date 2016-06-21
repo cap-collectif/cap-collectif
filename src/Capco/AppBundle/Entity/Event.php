@@ -10,6 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Model\IndexableInterface;
 
 /**
  * Event.
@@ -19,7 +20,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\EndAfterStart()
  */
-class Event implements CommentableInterface
+class Event implements CommentableInterface, IndexableInterface
 {
     use DateHelperTrait;
     use CommentableTrait;
@@ -205,6 +206,11 @@ class Event implements CommentableInterface
         } else {
             return 'New event';
         }
+    }
+
+    public function isIndexable()
+    {
+      return $this->getIsEnabled();
     }
 
     /**
