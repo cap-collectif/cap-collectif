@@ -51,7 +51,7 @@ class ApiContext extends ApplicationContext
      */
     public function iAmLoggedInToApiAsSfavot()
     {
-        $this->createAuthenticatedClient('sfavot@test.com', 'toto');
+        $this->createAuthenticatedClient('sfavot@jolicode.com', 'toto');
     }
 
     /**

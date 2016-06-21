@@ -76,7 +76,7 @@ const RankingItem = React.createClass({
 
 });
 
-export default DragSource(ITEM_TYPE, itemSource, (connect, monitor) => ({
+export default DragSource(ITEM_TYPE, itemSource, (connect, monitor) => ({ // eslint-disable-line new-cap
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging(),
 }))(RankingItem);

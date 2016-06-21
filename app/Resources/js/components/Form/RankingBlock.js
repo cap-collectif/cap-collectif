@@ -148,6 +148,6 @@ const RankingBlock = React.createClass({
 
 });
 
-export default DragDropContext(HTML5Backend)(DropTarget(ITEM_TYPE, itemTarget, connect => ({
+export default DragDropContext(HTML5Backend)(DropTarget(ITEM_TYPE, itemTarget, connect => ({ // eslint-disable-line new-cap
   connectDropTarget: connect.dropTarget(),
 }))(RankingBlock));

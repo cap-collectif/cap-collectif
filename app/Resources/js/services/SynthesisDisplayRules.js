@@ -16,7 +16,7 @@ class SynthesisDisplayRules {
   }
 
   isElementMatchingCondition(condition, element, synthesisRules) {
-    const contributionsLevel = parseInt(synthesisRules.level) || 0;
+    const contributionsLevel = parseInt(synthesisRules.level, 10) || 0;
     switch (condition.type) {
       case 'contributions_level_delta': return element.level === contributionsLevel + condition.value;
       case 'level': return element.level === condition.value;

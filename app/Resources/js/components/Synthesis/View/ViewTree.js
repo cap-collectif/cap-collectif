@@ -49,7 +49,6 @@ const ViewTree = React.createClass({
   },
 
   toggleExpand(element) {
-    const { synthesis } = this.props;
     if (element.childrenCount !== element.children.length) {
       this.loadElementsTreeFromServer(element.id);
     }
