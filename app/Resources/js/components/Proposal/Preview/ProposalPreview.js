@@ -16,6 +16,7 @@ const ProposalPreview = React.createClass({
     selectionStep: React.PropTypes.object,
     creditsLeft: React.PropTypes.number,
     showAllVotes: React.PropTypes.bool,
+    showThemes: React.PropTypes.bool,
   },
   mixins: [IntlMixin],
 
@@ -24,6 +25,7 @@ const ProposalPreview = React.createClass({
       selectionStep: null,
       creditsLeft: null,
       showAllVotes: false,
+      showThemes: false,
     };
   },
 
@@ -56,6 +58,7 @@ const ProposalPreview = React.createClass({
             <ProposalPreviewBody
               proposal={proposal}
               showNullEstimation={voteType === VOTE_TYPE_BUDGET}
+              showThemes={this.props.showThemes}
             />
             <div className="proposal__buttons text-center" >
               <div>

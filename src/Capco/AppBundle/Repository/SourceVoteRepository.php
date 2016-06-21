@@ -20,7 +20,7 @@ class SourceVoteRepository extends EntityRepository
      */
     public function getEnabledByConsultationStep(ConsultationStep $step, $asArray = false)
     {
-        $qb = $this->getIsConfirmedQueryBuilder()
+        $qb = $this->getQueryBuilder()
             ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
@@ -48,7 +48,7 @@ class SourceVoteRepository extends EntityRepository
      */
     public function getAllBySource($sourceId, $asArray = false)
     {
-        $qb = $this->getIsConfirmedQueryBuilder()
+        $qb = $this->getQueryBuilder()
             ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
@@ -60,10 +60,10 @@ class SourceVoteRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
-    protected function getIsConfirmedQueryBuilder()
+    protected function getQueryBuilder()
     {
         return $this->createQueryBuilder('v')
-            ->andWhere('v.confirmed = :confirmed')
-            ->setParameter('confirmed', true);
+                    ->andWhere('v.expired = false')
+        ;
     }
 }

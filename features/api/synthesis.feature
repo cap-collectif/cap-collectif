@@ -16,7 +16,7 @@ Feature: Synthesis
         "id": @string@,
         "elements": @array@,
         "displayRules": {
-          "level": @integer@
+          "level": 0
         },
         "_links": {
           "self": { "href": "@string@.startsWith('/api/syntheses/')" },
@@ -1162,3 +1162,4 @@ Feature: Synthesis
       | 43 |
     And I send a PUT request to "api/syntheses/42/display" with synthesis display rules json
     Then the JSON response status code should be 200
+

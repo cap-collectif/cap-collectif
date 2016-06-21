@@ -245,7 +245,6 @@ class IdeasController extends FOSRestController
             ->setIpAddress($request->getClientIp())
             ->setUser($user)
             ->setIdea($idea)
-            ->setConfirmed(true)
         ;
 
         $form = $this->createForm('idea_vote', $vote, ['commentable' => $idea->getIsCommentable()]);

@@ -30,7 +30,7 @@ fos_elastica:
       types:
       # User
         user:
-          indexable_callback: isEnabled
+          indexable_callback: isIndexable
           serializer:
             groups: [UsersInfos]
           _all: { enabled: false }
@@ -59,7 +59,7 @@ fos_elastica:
             finder: ~
         # Argument
         argument:
-          indexable_callback: getIsEnabled
+          indexable_callback: isIndexable
           serializer:
             groups: [Opinions, OpinionVersions]
           _all: { enabled: false }
@@ -100,7 +100,7 @@ fos_elastica:
             finder: ~
         # Project
         project:
-          indexable_callback: getIsEnabled
+          indexable_callback: isIndexable
           serializer:
             groups: [Opinions, OpinionVersions]
           _all: { enabled: false }
@@ -131,7 +131,7 @@ fos_elastica:
             finder: ~
         # Comment
         comment:
-          indexable_callback: getIsEnabled
+          indexable_callback: isIndexable
           serializer:
             groups: [Comments]
           _all: { enabled: false }
@@ -159,7 +159,7 @@ fos_elastica:
             finder: ~
         # Consultation Step
         consultationStep:
-          indexable_callback: getIsEnabled
+          indexable_callback: isIndexable
           serializer:
             groups: [ConsultationSteps]
           _all: { enabled: false }
@@ -175,7 +175,7 @@ fos_elastica:
             finder: ~
         # Event
         event:
-          indexable_callback: getIsEnabled
+          indexable_callback: isIndexable
           serializer:
             groups: [Events]
           _all: { enabled: false }
@@ -213,7 +213,7 @@ fos_elastica:
             finder: ~
         # Idea
         idea:
-          indexable_callback: getIsEnabled
+          indexable_callback: isIndexable
           serializer:
             groups: [Ideas]
           _all: { enabled: false }
@@ -252,7 +252,7 @@ fos_elastica:
             finder: ~
         # Proposal
         proposal:
-          indexable_callback: isEnabled
+          indexable_callback: isIndexable
           _all: { enabled: false }
           serializer:
             groups: [Proposals, Themes, UsersInfos]
@@ -296,6 +296,14 @@ fos_elastica:
                 name:
                   type: string
                   index: not_analyzed
+            category:
+              type: object
+              properties:
+                id:
+                  type: long
+                name:
+                  type: string
+                  index: not_analyzed
             theme:
               type: object
               properties:
@@ -319,7 +327,7 @@ fos_elastica:
             finder: ~
         # Proposal vote
         proposalVote:
-          indexable_callback: isConfirmed
+          indexable_callback: isIndexable
           _all: { enabled: false }
           serializer:
             groups: [ProposalVotes]
@@ -353,7 +361,7 @@ fos_elastica:
             finder: ~
         # Opinion
         opinion:
-          indexable_callback: getIsEnabled
+          indexable_callback: isIndexable
           serializer:
             groups: [Opinions]
           _all: { enabled: false }
@@ -385,7 +393,7 @@ fos_elastica:
             finder: ~
         # OpinionVersion
         opinionVersion:
-          indexable_callback: isEnabled
+          indexable_callback: isIndexable
           serializer:
             groups: [OpinionVersions]
           _all: { enabled: false }
@@ -419,7 +427,7 @@ fos_elastica:
             finder: ~
         # Post
         post:
-          indexable_callback: getIsPublished
+          indexable_callback: isIndexable
           serializer:
             groups: [Posts]
           _all: { enabled: false }
@@ -467,7 +475,7 @@ fos_elastica:
             finder: ~
         # Source
         source:
-          indexable_callback: getIsEnabled
+          indexable_callback: isIndexable
           serializer:
             groups: [Opinions]
           _all: { enabled: false }
@@ -515,9 +523,23 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
+        # Category
+        category:
+          serializer:
+            groups: [ProposalCategories]
+          _all: { enabled: false }
+          mappings:
+            name:
+              index: not_analyzed
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\ProposalCategory
+            provider: ~
+            listener: ~
+            finder: ~
         # Theme
         theme:
-          indexable_callback: getIsEnabled
+          indexable_callback: isIndexable
           serializer:
             groups: [Themes]
           _all: { enabled: false }

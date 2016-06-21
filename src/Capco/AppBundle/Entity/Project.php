@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Model\IndexableInterface;
 
 /**
  * Project.
@@ -15,7 +16,7 @@ use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Project
+class Project implements IndexableInterface
 {
     const FILTER_ALL = 'all';
 
@@ -49,6 +50,11 @@ class Project
         self::OPINION_TERM_OPINION => 'project.opinion_term.opinion',
         self::OPINION_TERM_ARTICLE => 'project.opinion_term.article',
     ];
+
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
+    }
 
     /**
      * @var int

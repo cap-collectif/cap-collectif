@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import ProposalCreate from '../Proposal/Create/ProposalCreate';
 
 const CollectStepPageHeader = React.createClass({
   propTypes: {
-    count: React.PropTypes.number,
-    form: React.PropTypes.object.isRequired,
-    themes: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
+    count: PropTypes.number,
+    form: PropTypes.object.isRequired,
+    themes: PropTypes.array.isRequired,
+    districts: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -29,6 +30,7 @@ const CollectStepPageHeader = React.createClass({
             form={this.props.form}
             themes={this.props.themes}
             districts={this.props.districts}
+            categories={this.props.categories}
           />
         </span>
       </h3>

@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Reply;
 
 use Doctrine\Orm\EntityManager;
 
@@ -28,36 +29,72 @@ class ContributionManagerSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Manager\ContributionManager');
     }
 
-    function it_can_depublish_contribution_of_a_user(EntityManager $em, User $user, OpinionVote $vote, Proposal $proposal, Opinion $opinion, OpinionVersion $version, Idea $idea, Comment $comment, Argument $argument, Source $source)
+    function it_can_depublish_contributions_of_a_user(EntityManager $em, User $user, OpinionVote $vote, Proposal $proposal, Opinion $opinion, OpinionVersion $version, Idea $idea, Comment $comment, Argument $argument, Source $source, Reply $reply)
     {
       $this->beConstructedWith($em);
+      $proposal->setExpired(true)->willReturn($proposal);
+      $opinion->setExpired(true)->willReturn($opinion);
+      $version->setExpired(true)->willReturn($version);
+      $idea->setExpired(true)->willReturn($idea);
+      $comment->setExpired(true)->willReturn($comment);
+      $argument->setExpired(true)->willReturn($argument);
+      $source->setExpired(true)->willReturn($source);
+      $reply->setExpired(true)->willReturn($reply);
 
-      $user->getVotes()->willReturn([$vote]);
+      $user->getContributions()->willReturn([
+        $vote,
+        $proposal,
+        $opinion,
+        $version,
+        $idea,
+        $comment,
+        $argument,
+        $source,
+        $reply
+      ]);
 
-      $proposal->setEnabled(false)->willReturn($proposal);
-      $user->getProposals()->willReturn([$proposal]);
+      $this->depublishContributions($user)->shouldReturn(true);
+    }
 
-      $opinion->setIsEnabled(false)->willReturn($opinion);
-      $user->getOpinions()->willReturn([$opinion]);
+    function it_can_depublish_contribution_of_a_user_with_nothing(EntityManager $em, User $user)
+    {
+      $this->beConstructedWith($em);
+      $user->getContributions()->willReturn([]);
 
-      $version->setEnabled(false)->willReturn($version);
-      $user->getOpinionVersions()->willReturn([$version]);
+      $this->depublishContributions($user)->shouldReturn(false);
+    }
 
-      $idea->setIsEnabled(false)->willReturn($idea);
-      $user->getIdeas()->willReturn([$idea]);
+    function it_can_republish_contributions_of_a_user(EntityManager $em, User $user, OpinionVote $vote, Proposal $proposal, Opinion $opinion, OpinionVersion $version, Idea $idea, Comment $comment, Argument $argument, Source $source, Reply $reply)
+    {
+      $this->beConstructedWith($em);
+      $proposal->setExpired(false)->willReturn($proposal);
+      $opinion->setExpired(false)->willReturn($opinion);
+      $version->setExpired(false)->willReturn($version);
+      $idea->setExpired(false)->willReturn($idea);
+      $comment->setExpired(false)->willReturn($comment);
+      $argument->setExpired(false)->willReturn($argument);
+      $source->setExpired(false)->willReturn($source);
+      $reply->setExpired(false)->willReturn($reply);
 
-      $comment->setIsEnabled(false)->willReturn($comment);
-      $user->getComments()->willReturn([$comment]);
+      $user->getContributions()->willReturn([
+        $vote,
+        $proposal,
+        $opinion,
+        $version,
+        $idea,
+        $comment,
+        $argument,
+        $source,
+        $reply
+      ]);
 
-      $argument->setIsEnabled(false)->willReturn($argument);
-      $user->getArguments()->willReturn([$argument]);
+      $this->republishContributions($user)->shouldReturn(true);
+    }
 
-      $source->setIsEnabled(false)->willReturn($source);
-      $user->getSources()->willReturn([$source]);
-
-      $em->remove($vote)->shouldBeCalled();
-
-      $this->depublishContributions($user);
-
+    function it_can_republish_contribution_of_a_user_with_nothing(EntityManager $em, User $user)
+    {
+      $this->beConstructedWith($em);
+      $user->getContributions()->willReturn([]);
+      $this->republishContributions($user)->shouldReturn(false);
     }
 }

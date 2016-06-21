@@ -63,7 +63,8 @@ class PostCommentRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
+            ->andWhere('c.isEnabled = true')
+            ->andWhere('c.expired = false')
+          ;
     }
 }

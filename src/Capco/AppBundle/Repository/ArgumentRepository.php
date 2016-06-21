@@ -69,9 +69,8 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('a.votes', 'v')
-            ->andWhere('a.isTrashed = :notTrashed')
+            ->andWhere('a.isTrashed = false')
             ->andWhere('a.opinion = :opinion')
-            ->setParameter('notTrashed', false)
             ->setParameter('opinion', $opinion)
         ;
 
@@ -179,9 +178,9 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
             ->andWhere('
-                (a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step)
+                (a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :step)
                 OR
-                (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step)
+                (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovo.step = :step)
             ')
             ->setParameter('step', $step)
             ->addOrderBy('a.updatedAt', 'DESC');
@@ -300,11 +299,11 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->andWhere('a.Author = :author')
-            ->andWhere('o.isEnabled = :enabled')
-            ->andWhere('s.isEnabled = :enabled')
-            ->andWhere('c.isEnabled = :enabled')
+            ->andWhere('o.isEnabled = true')
+            ->andWhere('s.isEnabled = true')
+            ->andWhere('c.isEnabled = true')
             ->setParameter('author', $user)
-            ->setParameter('enabled', true);
+          ;
 
         return $qb
             ->getQuery()
@@ -336,13 +335,10 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('a.votes', 'v')
             ->addSelect('v')
             ->andWhere('a.Author = :author')
+            ->andWhere('o.isEnabled = true')
+            ->andWhere('s.isEnabled = true')
+            ->andWhere('p.isEnabled = true')
             ->setParameter('author', $user)
-            ->andWhere('o.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-            ->andWhere('s.isEnabled = :stepEnabled')
-            ->setParameter('stepEnabled', true)
-            ->andWhere('p.isEnabled = :projectEnabled')
-            ->setParameter('projectEnabled', true)
             ->getQuery()
             ->getResult();
     }
@@ -350,7 +346,8 @@ class ArgumentRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
+            ->andWhere('a.isEnabled = true')
+            ->andWhere('a.expired = false')
+        ;
     }
 }
