@@ -1,5 +1,5 @@
 import React from 'react';
-import AutoLinkText from '../Utils/AutoLinkText';
+import Linkify from 'react-linkify';
 import { IntlMixin } from 'react-intl';
 
 const CommentBody = React.createClass({
@@ -62,7 +62,7 @@ const CommentBody = React.createClass({
     return (
       <div className="opinion__text">
         { this.renderTrashedLabel() }
-        <AutoLinkText text={this.generateText()} />
+        <Linkify properties={{ className: 'external-link' }}>{this.generateText()}</Linkify>
         { this.renderReadMoreOrLess() }
       </div>
     );

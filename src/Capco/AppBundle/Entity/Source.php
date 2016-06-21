@@ -11,8 +11,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * Source.
@@ -21,7 +19,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Source implements Contribution, VotableInterface, IsPublishableInterface
+class Source implements VotableInterface, IsPublishableInterface
 {
     const TYPE_FOR = 1;
     const LINK = 0;
@@ -34,7 +32,6 @@ class Source implements Contribution, VotableInterface, IsPublishableInterface
 
     use ValidableTrait;
     use VotableOkTrait;
-    use ExpirableTrait;
 
     /**
      * @var int
@@ -188,11 +185,6 @@ class Source implements Contribution, VotableInterface, IsPublishableInterface
         }
 
         return 'New source';
-    }
-
-    public function isIndexable()
-    {
-      return $this->getIsEnabled() && !$this->isExpired();
     }
 
     /**

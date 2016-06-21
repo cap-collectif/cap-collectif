@@ -17,9 +17,8 @@ class ReplyRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('reply')
-            ->andWhere('reply.enabled = true')
-            ->andWhere('reply.expired = false')
-          ;
+            ->andWhere('reply.enabled = :enabled')
+            ->setParameter('enabled', true);
     }
 
     public function countPublishedForQuestionnaire(Questionnaire $questionnaire)

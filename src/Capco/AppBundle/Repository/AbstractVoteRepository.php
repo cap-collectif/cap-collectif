@@ -16,7 +16,8 @@ class AbstractVoteRepository extends EntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
-            ->andWhere('v.expired = false')
+            ->andWhere('v.confirmed = :confirmed')
+            ->setParameter('confirmed', true)
             ->addOrderBy('v.updatedAt', 'ASC');
 
         if (in_array($objectType, ['opinion', 'opinionVersion'])) {
@@ -57,7 +58,7 @@ class AbstractVoteRepository extends EntityRepository
      */
     public function getOneById($id)
     {
-        return $this->getQueryBuilder()
+        return $this->getIsConfirmedQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'r')
             ->leftJoin('v.user', 'aut')
             ->leftJoin('aut.Media', 'm')
@@ -76,7 +77,7 @@ class AbstractVoteRepository extends EntityRepository
      */
     public function getPublicVotesByUser($user)
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getIsConfirmedQueryBuilder()
             ->addSelect('u', 'm')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.Media', 'm')
@@ -99,8 +100,8 @@ class AbstractVoteRepository extends EntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
-            ->andWhere('v.expired = false')
-        ;
+            ->andWhere('v.confirmed = :confirmed')
+            ->setParameter('confirmed', true);
 
         if (in_array($objectType, ['opinion', 'opinionVersion'])) {
             $qb->addSelect('v.value')
@@ -116,10 +117,10 @@ class AbstractVoteRepository extends EntityRepository
         return $result ? $result['value'] : null;
     }
 
-    protected function getQueryBuilder()
+    protected function getIsConfirmedQueryBuilder()
     {
         return $this->createQueryBuilder('v')
-            ->andWhere('v.expired = false')
-        ;
+            ->andWhere('v.confirmed = :confirmed')
+            ->setParameter('confirmed', true);
     }
 }

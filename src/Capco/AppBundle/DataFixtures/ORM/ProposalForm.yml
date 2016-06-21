@@ -7,11 +7,6 @@ Capco\AppBundle\Entity\ProposalForm:
     themeHelpText: Sélectionnez un thème
     districtHelpText: Sélectionnez un quartier
     descriptionHelpText: Décrivez votre proposition
-    categoryHelpText: Sélectionnez une catégorie.
-    usingThemes: true
-    usingCategories: true
-    themeMandatory: false
-    categoryMandatory: true
   proposalform2:
     title: Formulaire de collecte
     description: <text(100)>

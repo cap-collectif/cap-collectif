@@ -11,8 +11,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\PrivatableTrait;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * Reply.
@@ -21,12 +19,11 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class Reply implements Contribution
+class Reply
 {
     use TimestampableTrait;
     use EnableTrait;
     use PrivatableTrait;
-    use ExpirableTrait;
 
     /**
      * @var int
@@ -72,11 +69,6 @@ class Reply implements Contribution
     {
         $this->updatedAt = new \Datetime();
         $this->responses = new ArrayCollection();
-    }
-
-    public function isIndexable()
-    {
-        return false;
     }
 
     /**

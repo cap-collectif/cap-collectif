@@ -32,10 +32,6 @@ Feature: Selection steps
             "name": @string@,
             "color": @string@
           },
-          "category": {
-            "id": @integer@,
-            "name": @string@
-          },
           "author": @...@,
           "proposalForm": {
             "id": @integer@
@@ -91,10 +87,6 @@ Feature: Selection steps
             "name": @string@,
             "color": @string@
           },
-          "category": {
-            "id": @integer@,
-            "name": @string@
-          },
           "author": @...@,
           "proposalForm": {
             "id": @integer@
@@ -125,7 +117,7 @@ Feature: Selection steps
     """
       {
         "filters": {
-          "themes": 2
+          "theme": 2
         }
       }
       """
@@ -151,10 +143,6 @@ Feature: Selection steps
             "id": @integer@,
             "name": @string@,
             "color": @string@
-          },
-          "category": {
-            "id": @integer@,
-            "name": @string@
           },
           "author": @...@,
           "proposalForm": {

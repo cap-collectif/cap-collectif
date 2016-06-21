@@ -33,7 +33,7 @@ class CommentType extends AbstractType
                 ])
             ;
         }
-        
+
         $builder
             ->add('body', 'textarea', ['required' => true])
         ;

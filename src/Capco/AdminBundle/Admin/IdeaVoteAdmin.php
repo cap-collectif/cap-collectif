@@ -43,6 +43,9 @@ class IdeaVoteAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
+            ->add('confirmed', null, [
+                'label' => 'admin.fields.idea_vote.confirmed',
+            ])
             ->add('idea', 'sonata_type_model', [
                 'label' => 'admin.fields.idea_vote.idea',
             ])
@@ -85,13 +88,6 @@ class IdeaVoteAdmin extends Admin
             ])
             ->add('user', 'sonata_type_model', [
                     'label' => 'admin.fields.idea_vote.user',
-            ])
-            ->add('expired', null, [
-                'label' => 'admin.global.expired',
-                'read_only' => true,
-                'attr' => [
-                  'disabled' => true
-                ]
             ])
             ->add('createdAt', null, [
                     'label' => 'admin.fields.idea_vote.created_at',

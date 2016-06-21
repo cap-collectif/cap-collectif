@@ -275,12 +275,4 @@ class SelectionStep extends AbstractStep
     {
         return $this->voteType === self::VOTE_TYPE_BUDGET;
     }
-
-    public function getProposalForm()
-    {
-        if (count($this->getProposals())) {
-            return $this->getProposals()[0]->getProposalForm();
-        }
-        return null;
-    }
 }

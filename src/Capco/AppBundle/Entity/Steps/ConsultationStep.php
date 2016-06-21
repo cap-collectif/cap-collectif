@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Entity\Steps;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation as Serializer;
-use Capco\AppBundle\Model\IndexableInterface;
 
 /**
  * Class ConsultationStep.
@@ -13,14 +12,8 @@ use Capco\AppBundle\Model\IndexableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationStepRepository")
  * @Serializer\ExclusionPolicy("all")
  */
-class ConsultationStep extends AbstractStep implements IndexableInterface
+class ConsultationStep extends AbstractStep
 {
-
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
-
     /**
      * @var int
      *

@@ -1,20 +1,17 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
-import { connect } from 'react-redux';
 
 const ProposalPreviewBody = React.createClass({
   propTypes: {
-    proposal: PropTypes.object.isRequired,
-    showNullEstimation: PropTypes.bool.isRequired,
-    showThemes: PropTypes.bool.isRequired,
-    features: PropTypes.object.isRequired,
+    proposal: React.PropTypes.object.isRequired,
+    showNullEstimation: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { proposal, showThemes, showNullEstimation, features } = this.props;
+    const proposal = this.props.proposal;
 
     return (
       <div className="proposal__body" >
@@ -22,27 +19,21 @@ const ProposalPreviewBody = React.createClass({
           <a href={proposal._links.show}>{proposal.title}</a>
         </h2>
         <div className="proposal__infos">
-          {
-            features.themes && showThemes && proposal.theme
-            && <div className="proposal__info">
+          {proposal.theme
+            ? <div className="proposal__info">
                 <i className="cap cap-tag-1-1"></i>{proposal.theme.title}
               </div>
+            : null
           }
-          {
-            proposal.category
-            && <div className="proposal__info">
-              <i className="cap cap-tag-1-1"></i>{proposal.category.name}
-            </div>
-          }
-          {
-            features.districts && proposal.district
-            && <div className="proposal__info">
-              <i className="cap cap-marker-1-1"></i>{proposal.district.name}
-            </div>
+          {proposal.district
+            ? <div className="proposal__info">
+                <i className="cap cap-marker-1-1"></i>{proposal.district.name}
+              </div>
+            : null
           }
           <ProposalDetailEstimation
             proposal={proposal}
-            showNullEstimation={showNullEstimation}
+            showNullEstimation={this.props.showNullEstimation}
           />
           <ProposalDetailLikers
             proposal={proposal}
@@ -54,9 +45,4 @@ const ProposalPreviewBody = React.createClass({
 
 });
 
-
-const mapStateToProps = (state) => {
-  return { features: state.features };
-};
-
-export default connect(mapStateToProps)(ProposalPreviewBody);
+export default ProposalPreviewBody;

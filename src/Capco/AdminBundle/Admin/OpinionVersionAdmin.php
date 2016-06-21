@@ -136,13 +136,6 @@ class OpinionVersionAdmin extends Admin
                     'label' => 'admin.fields.opinion_version.is_enabled',
                     'required' => false,
                 ])
-                ->add('expired', null, [
-                    'label' => 'admin.global.expired',
-                    'read_only' => true,
-                    'attr' => [
-                      'disabled' => true
-                    ]
-                ])
                 ->add('isTrashed', null, [
                     'label' => 'admin.fields.opinion_version.is_trashed',
                     'required' => false,

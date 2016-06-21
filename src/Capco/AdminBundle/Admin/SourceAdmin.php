@@ -136,13 +136,6 @@ class SourceAdmin extends Admin
                     'placeholder' => 'http://www.cap-collectif.com/',
                 ],
             ])
-            ->add('expired', null, [
-                'label' => 'admin.global.expired',
-                'read_only' => true,
-                'attr' => [
-                  'disabled' => true
-                ]
-            ])
             ->add('isTrashed', null, [
                 'label' => 'admin.fields.source.is_trashed',
                 'required' => false,

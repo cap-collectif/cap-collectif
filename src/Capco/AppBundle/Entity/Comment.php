@@ -13,8 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * Class Comment.
@@ -32,22 +30,16 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  * })
  * @CapcoAssert\HasAuthor
  */
-abstract class Comment implements Contribution, VotableInterface, HasAuthorInterface
+abstract class Comment implements VotableInterface, HasAuthorInterface
 {
     use ValidableTrait;
     use VotableOkTrait;
     use PinnableTrait;
-    use ExpirableTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
         'popularity' => 'argument.sort.popularity',
     ];
-
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
 
     /**
      * @var int

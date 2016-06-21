@@ -110,13 +110,14 @@ class Notify implements MailerInterface
         ? 'email.expire_user.subject_with_contrib'
         : 'email.expire_user.subject_no_contrib'
       ;
-        $subject = $this->translator->trans($subjectString, ['%sitename%' => $this->resolver->getValue('global.site.fullname')], 'CapcoAppBundle');
+        $sitename = $this->resolver->getValue('global.site.fullname');
+
+        $subject = $this->translator->trans($subjectString, ['%sitename%' => $sitename], 'CapcoAppBundle');
         $url = $this->router->generate('capco_user_confirmation_email', [
         'token' => $user->getConfirmationToken(),
       ], true);
         $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-        $sitename = $this->resolver->getValue('global.site.fullname');
 
         $rendered = $this->templating->render($template, [
         'user' => $user,
