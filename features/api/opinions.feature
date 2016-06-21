@@ -6,7 +6,6 @@ Feature: Opinions
   @parallel-scenario
   Scenario: Anonymous API client wants to retrieve an opinion
     When I send a GET request to "/api/opinions/57"
-    Then the JSON response status code should be 200
     Then the JSON response should match:
     """
     {

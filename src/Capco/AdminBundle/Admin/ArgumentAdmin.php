@@ -125,13 +125,6 @@ class ArgumentAdmin extends Admin
                     'rows' => 10,
                 ],
             ])
-            ->add('expired', null, [
-                'label' => 'admin.global.expired',
-                'read_only' => true,
-                'attr' => [
-                  'disabled' => true
-                ]
-            ])
             ->add('isTrashed', null, [
                 'label' => 'admin.fields.argument.is_trashed',
                 'required' => false,

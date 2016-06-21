@@ -19,8 +19,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * Proposal.
@@ -30,10 +28,8 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="proposal.missing_required_responses", formField="proposalForm")
- * @CapcoAssert\HasThemeIfMandatory()
- * @CapcoAssert\HasCategoryIfMandatory()
  */
-class Proposal implements Contribution, CommentableInterface, VotableInterface
+class Proposal implements CommentableInterface, VotableInterface
 {
     use CommentableTrait;
     use TimestampableTrait;
@@ -43,7 +39,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     use SluggableTitleTrait;
     use SoftDeleteableEntity;
     use AnswerableTrait;
-    use ExpirableTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -88,6 +83,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @CapcoAssert\HasThemeIfActivated()
      */
     private $theme = null;
 
@@ -103,12 +99,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $status = null;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalCategory", cascade={"persist"}, inversedBy="proposals")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     */
-    private $category = null;
 
     /**
      * @var string
@@ -178,11 +168,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         $this->updatedAt = new \Datetime();
         $this->selectionSteps = new ArrayCollection();
         $this->likers = new ArrayCollection();
-    }
-
-    public function isIndexable()
-    {
-      return $this->enabled && !$this->expired;
     }
 
     public function __toString()
@@ -283,26 +268,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     }
 
     /**
-     * @return ProposalCategory
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param ProposalCategory $category
-     *
-     * @return $this
-     */
-    public function setCategory(ProposalCategory $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
      * @return Theme
      */
     public function getTheme()
@@ -315,12 +280,10 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
      *
      * @return $this
      */
-    public function setTheme(Theme $theme = null)
+    public function setTheme(Theme $theme)
     {
         $this->theme = $theme;
-        if ($theme) {
-            $theme->addProposal($this);
-        }
+        $theme->addProposal($this);
 
         return $this;
     }

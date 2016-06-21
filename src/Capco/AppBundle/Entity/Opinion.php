@@ -17,8 +17,6 @@ use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * Opinion.
@@ -27,7 +25,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, IsPublishableInterface
+class Opinion implements SelfLinkableInterface, VotableInterface, IsPublishableInterface
 {
     use TrashableTrait;
     use SluggableTitleTrait;
@@ -36,7 +34,6 @@ class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, 
     use SelfLinkableTrait;
     use AnswerableTrait;
     use PinnableTrait;
-    use ExpirableTrait;
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
@@ -182,11 +179,6 @@ class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, 
         }
 
         return 'New opinion';
-    }
-
-    public function isIndexable()
-    {
-        return $this->getIsEnabled() && !$this->isExpired();
     }
 
     /**

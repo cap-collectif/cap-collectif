@@ -25,7 +25,7 @@ class SourcesController extends FOSRestController
 {
     /**
      * @Post("/opinions/{id}/sources")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature" = true})
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne"})
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201)
      */
@@ -217,6 +217,7 @@ class SourcesController extends FOSRestController
         }
 
         $vote
+            ->setConfirmed(true)
             ->setSource($source)
             ->setUser($user)
         ;

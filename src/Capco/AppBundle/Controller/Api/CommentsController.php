@@ -82,6 +82,7 @@ class CommentsController extends FOSRestController
         }
 
         $vote = (new CommentVote())
+            ->setConfirmed(true)
             ->setComment($comment)
             ->setUser($user)
         ;
@@ -93,7 +94,7 @@ class CommentsController extends FOSRestController
 
     /**
      * Delete vote on comment.
-     *
+     * 
      * Vote on comment
      *
      * @ApiDoc(
@@ -103,7 +104,7 @@ class CommentsController extends FOSRestController
      *    204 = "Returned when successful",
      *  }
      * )
-     *
+     * 
      * @Security("has_role('ROLE_USER')")
      * @Delete("/comments/{commentId}/votes")
      * @ParamConverter("comment", options={"mapping": {"commentId": "id"}})

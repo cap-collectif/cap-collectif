@@ -20,7 +20,7 @@ class OpinionVoteRepository extends EntityRepository
      */
     public function getEnabledByConsultationStep(ConsultationStep $step)
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getIsConfirmedQueryBuilder()
             ->addSelect('u', 'ut', 'o')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
@@ -42,7 +42,7 @@ class OpinionVoteRepository extends EntityRepository
      */
     public function getAllByOpinion($opinionId, $asArray = false)
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getIsConfirmedQueryBuilder()
             ->addSelect('u', 'ut', 'o')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
@@ -54,10 +54,10 @@ class OpinionVoteRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
-    protected function getQueryBuilder()
+    protected function getIsConfirmedQueryBuilder()
     {
         return $this->createQueryBuilder('v')
-            ->andWhere('v.expired = false')
-          ;
+            ->andWhere('v.confirmed = :confirmed')
+            ->setParameter('confirmed', true);
     }
 }

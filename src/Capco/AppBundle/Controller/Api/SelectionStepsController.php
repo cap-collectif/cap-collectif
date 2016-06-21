@@ -118,6 +118,7 @@ class SelectionStepsController extends FOSRestController
             ->setUser($user)
             ->setProposal($proposal)
             ->setSelectionStep($selectionStep)
+            ->setConfirmed(true)
         ;
 
         $form = $this->createForm('proposal_vote', $vote);

@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Model\IndexableInterface;
 
 /**
  * Theme.
@@ -14,7 +13,7 @@ use Capco\AppBundle\Model\IndexableInterface;
  * @ORM\Table(name="theme")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ThemeRepository")
  */
-class Theme implements IndexableInterface
+class Theme
 {
     const STATUS_CLOSED = 0;
     const STATUS_OPENED = 1;
@@ -164,11 +163,6 @@ class Theme implements IndexableInterface
         }
 
         return 'New theme';
-    }
-
-    public function isIndexable()
-    {
-       return $this->getIsEnabled();
     }
 
     /**
