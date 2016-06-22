@@ -36,7 +36,7 @@ services:
   ## Service Notify - send mail
   capco.notify_manager:
     class: Capco\AppBundle\Manager\Notify
-    arguments: [@mailer, @templating, @translator, @capco.site_parameter.resolver, @router, @capco.url.resolver, @validator, {confirmation.template: %fos_user.registration.confirmation.template%, resetting.template: %fos_user.resetting.email.template%}]
+    arguments: [@mailer, @templating, @translator, @capco.site_parameter.resolver, @router, @capco.url.resolver, @validator, {confirmation.template: %fos_user.registration.confirmation.template%, resetting.template: %fos_user.resetting.email.template%, disable_delivery: %disable_mail_delivery%}]
 
   capco.contribution.manager:
     class: Capco\AppBundle\Manager\ContributionManager

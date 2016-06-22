@@ -59,4 +59,7 @@ setOverridableParameter($container, 'twilio_sid', '***REMOVED***', 'SYMFONY_TWIL
 setOverridableParameter($container, 'twilio_token', '***REMOVED***', 'SYMFONY_TWILIO_TOKEN');
 setOverridableParameter($container, 'twilio_number', '+***REMOVED***', 'SYMFONY_TWILIO_NUMBER');
 
+// Disable mail delivery
+setOverridableParameter($container, 'disable_mail_delivery', 'false', 'SYMFONY_DISABLE_MAIL_DELIVERY');
+
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');

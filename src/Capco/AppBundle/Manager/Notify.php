@@ -75,7 +75,7 @@ class Notify implements MailerInterface
 
     public function sendEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
     {
-        if ($this->emailsAreValid($to, $fromAddress)) {
+        if ($this->emailsAreValid($to, $fromAddress) && !filter_var($this->parameters['disable_delivery'], FILTER_VALIDATE_BOOLEAN)) {
             $this->mailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
         }
     }
