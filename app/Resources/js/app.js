@@ -140,7 +140,7 @@ const App = (($) => {
       $('#navbar-content').append(
         '<li class="hideshow dropdown">'
         + '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + label + ' <span class="caret"></span></a>'
-        + '<ul class="dropdown-menu">' + menuHtml + '</ul>'
+        + '<ul class="dropdown-menu" role="menu">' + menuHtml + '</ul>'
         + '</li>'
       );
 
