@@ -47,7 +47,7 @@ export const ProposalListFilters = React.createClass({
     if (this.props.orderByVotes) {
       const orders = this.state.displayedOrders;
       orders.push('votes');
-      this.setState({displayedOrders: orders});
+      this.setState({ displayedOrders: orders }); // eslint-disable-line react/no-did-mount-set-state
     }
     this.updateDisplayedFilters();
   },
@@ -85,7 +85,7 @@ export const ProposalListFilters = React.createClass({
     if (this.props.categories.length > 0) {
       filters.push('categories');
     }
-    this.setState({displayedFilters: filters});
+    this.setState({ displayedFilters: filters });
   },
 
   handleOrderChange(ev) {

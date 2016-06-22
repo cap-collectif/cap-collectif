@@ -28,7 +28,7 @@ const ProjectStatsModal = React.createClass({
     };
   },
 
-  componentWillMount() {
+  componentDidMount() {
     this.loadData();
   },
 

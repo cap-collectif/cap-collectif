@@ -98,6 +98,7 @@ Scenario: Admin wants to publish an element with note
   And I click the publish element button
   And I give a note to the synthesis element
   And I confirm element publication
+  And I wait 1 seconds
   Then I should see "L'élément a été traité avec succès."
   And I should see the synthesis element in the archived inbox
   When I click on a synthesis element

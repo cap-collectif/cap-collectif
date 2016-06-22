@@ -98,6 +98,7 @@ class UserContext extends DefaultContext
      */
     public function iShouldBeAskedToConfirmMyEmail($email)
     {
+        $this->getSession()->wait(3000, "$('#alert-email-not-confirmed').length > 0");
         $this->assertSession()->elementExists('css', '#alert-email-not-confirmed');
         $this->assertElementContainsText('#alert-email-not-confirmed', $email);
     }

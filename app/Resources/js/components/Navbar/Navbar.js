@@ -52,7 +52,6 @@ const Navbar = React.createClass({
                                   return (
                                     <MenuItem
                                       key={childIndex}
-                                      eventKey={index + childIndex}
                                       href={child.link}
                                       active={child.active}
                                     >
@@ -69,7 +68,6 @@ const Navbar = React.createClass({
                       return (
                         <NavItem
                           key={index}
-                          eventKey={index}
                           href={header.link}
                           active={header.active}
                         >
