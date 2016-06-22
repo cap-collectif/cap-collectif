@@ -27,7 +27,7 @@ const ProjectStatsFilters = React.createClass({
             onChange={this.props.onThemeChange}
           >
             <option value="0">
-              {this.getIntlMessage('global.select_theme')}
+              {this.getIntlMessage('global.select_themes')}
             </option>
             {
               this.props.themes.map((theme) => {

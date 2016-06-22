@@ -78,7 +78,6 @@ export const LoginOverlay = React.createClass({
         </p>
       </Popover>
     ;
-
     return (
      <span>
         <OverlayTrigger trigger="click" rootClose placement="top" overlay={popover}>
