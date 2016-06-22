@@ -85,7 +85,7 @@ export const IdeasListFilters = React.createClass({
             value={this.state.theme || '0'}
           >
             <option value="0">
-              {this.getIntlMessage('global.select_themes')}
+              {this.getIntlMessage('global.select_theme')}
             </option>
             {
               this.props.themes.map((theme) => {

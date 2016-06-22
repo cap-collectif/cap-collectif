@@ -30,9 +30,6 @@ const IdeasIndexPage = React.createClass({
   },
 
   getInitialState() {
-    IdeaActions.setPagination(this.props.pagination);
-    IdeaActions.initCounts(this.props.count, this.props.countTrashed);
-    IdeaActions.initIdeas(this.props.ideas);
     return {
       ideas: IdeaStore.ideas,
       count: IdeaStore.count,
@@ -43,6 +40,9 @@ const IdeasIndexPage = React.createClass({
 
   componentWillMount() {
     IdeaStore.addChangeListener(this.onChange);
+    IdeaActions.setPagination(this.props.pagination);
+    IdeaActions.initCounts(this.props.count, this.props.countTrashed);
+    IdeaActions.initIdeas(this.props.ideas);
   },
 
   componentDidUpdate(prevProps, prevState) {

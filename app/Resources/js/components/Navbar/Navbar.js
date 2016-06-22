@@ -71,7 +71,7 @@ const Navbar = React.createClass({
                           href={header.link}
                           active={header.active}
                         >
-                        {header.title}
+                        { header.title}
                         </NavItem>
                       );
                     }

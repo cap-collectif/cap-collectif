@@ -19,7 +19,6 @@ const IdeaPage = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
-    IdeaActions.initIdea(this.props.idea, this.props.votes);
     return {
       idea: IdeaStore.idea,
       expandSidebar: false,
@@ -29,6 +28,7 @@ const IdeaPage = React.createClass({
 
   componentWillMount() {
     IdeaStore.addChangeListener(this.onChange);
+    IdeaActions.initIdea(this.props.idea, this.props.votes);
   },
 
   componentWillUnmount() {
@@ -88,18 +88,16 @@ const IdeaPage = React.createClass({
               />
             </Col>
             {
-              showSidebar
-              ? <div id="sidebar-overlay" className={overlayClassName} />
-              : null
+              showSidebar &&
+                 <div id="sidebar-overlay" className={overlayClassName} />
             }
             {
-              showSidebar
-              ? <IdeaSidebar
-                  idea={idea}
-                  expanded={this.state.expandSidebar}
-                  onToggleExpand={this.toggleSidebarExpand}
-              />
-              : null
+              showSidebar &&
+                <IdeaSidebar
+                    idea={idea}
+                    expanded={this.state.expandSidebar}
+                    onToggleExpand={this.toggleSidebarExpand}
+                />
             }
           </Row>
         </div>

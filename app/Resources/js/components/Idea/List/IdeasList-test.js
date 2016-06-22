@@ -8,8 +8,8 @@ import IdeasList from './IdeasList';
 import IdeaListItem from './IdeaListItem';
 
 const ideas = [
-  {},
-  {},
+  { id: 1 },
+  { id: 2 },
 ];
 
 describe('<IdeasList />', () => {

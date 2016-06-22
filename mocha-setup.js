@@ -18,7 +18,7 @@ global.navigator = {
 
 const error = console.error;
 console.error = function(warning) {
-  if (/(Invalid prop|Failed propType|Failed Context Types)/.test(warning)) {
+  if (/(Invalid prop|Failed propType|Failed Context Types|Each child in an array|setState)/.test(warning)) {
     throw new Error(warning);
   }
   error.apply(console, arguments);

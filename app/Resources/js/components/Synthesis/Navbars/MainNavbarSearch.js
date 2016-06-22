@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Navbar, Input, Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
@@ -6,7 +6,7 @@ import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 const MainNavbarSearch = React.createClass({
   displayName: 'MainNavbarSearch',
   contextTypes: {
-    router: React.PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin, DeepLinkStateMixin],
 
@@ -35,7 +35,7 @@ const MainNavbarSearch = React.createClass({
       </Button>
     );
     return (
-      <Navbar.Form pullRight >
+      <Navbar.Form pullRight>
         <form onSubmit={this.submit}>
           <Input
             type="text"
