@@ -48,7 +48,7 @@ const ProjectStatsFilters = React.createClass({
             onChange={this.props.onDistrictChange}
           >
             <option value="0">
-              {this.getIntlMessage('global.select_district')}
+              {this.getIntlMessage('global.select_districts')}
             </option>
             {
               this.props.districts.map((district) => {
