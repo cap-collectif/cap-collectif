@@ -98,7 +98,7 @@ class SelectionStepsController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
 
         // Check if proposal is in step
-        if (!$proposal->getSelectionSteps()->contains($selectionStep)) {
+        if (!in_array($selectionStep, $proposal->getSelectionSteps())) {
             throw new BadRequestHttpException('This proposal is not associated to this selection step.');
         }
 
@@ -173,7 +173,7 @@ class SelectionStepsController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
 
         // Check if proposal is in step
-        if (!$proposal->getSelectionSteps()->contains($selectionStep)) {
+        if (!in_array($selectionStep, $proposal->getSelectionSteps())) {
             throw new BadRequestHttpException('This proposal is not associated to this selection step.');
         }
 

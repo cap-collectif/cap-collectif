@@ -102,9 +102,10 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.theme', 'theme')
             ->leftJoin('proposal.district', 'district')
             ->leftJoin('proposal.status', 'status')
-            ->leftJoin('proposal.selectionSteps', 'selectionSteps')
+            ->leftJoin('proposal.selections', 'selections')
+            ->leftJoin('selections.selectionStep', 'selectionStep')
             ->andWhere('proposal.isTrashed = :notTrashed')
-            ->andWhere('selectionSteps.id = :stepId')
+            ->andWhere('selectionStep.id = :stepId')
             ->setParameter('notTrashed', false)
             ->setParameter('stepId', $step->getId())
         ;
@@ -172,9 +173,10 @@ class ProposalRepository extends EntityRepository
         $qb = $this
             ->getIsEnabledQueryBuilder()
             ->select('COUNT(proposal.id) as proposalsCount')
-            ->leftJoin('proposal.selectionSteps', 'selectionSteps')
+            ->leftJoin('proposal.selections', 'selections')
+            ->leftJoin('selections.selectionStep', 'selectionStep')
             ->andWhere('proposal.isTrashed = :notTrashed')
-            ->andWhere('selectionSteps.id = :stepId')
+            ->andWhere('selectionStep.id = :stepId')
             ->setParameter('notTrashed', false)
             ->setParameter('stepId', $step->getId())
         ;
@@ -369,8 +371,9 @@ class ProposalRepository extends EntityRepository
                 WHERE ss.id = :stepId
                 AND pvp.id = proposal.id
             ) as value')
-            ->leftJoin('proposal.selectionSteps', 'selectionSteps')
-            ->andWhere('selectionSteps.id = :stepId')
+            ->leftJoin('proposal.selections', 'selections')
+            ->leftJoin('selections.selectionStep', 'selectionStep')
+            ->andWhere('selectionStep.id = :stepId')
             ->setParameter('stepId', $step->getId())
         ;
 
@@ -415,7 +418,8 @@ class ProposalRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder('p')
             ->select('COUNT(p.id)')
-            ->leftJoin('p.selectionSteps', 'ss')
+            ->leftJoin('p.selections', 'selections')
+            ->leftJoin('selections.selectionStep', 'ss')
             ->andWhere('ss.id = :stepId')
             ->setParameter('stepId', $step->getId())
         ;

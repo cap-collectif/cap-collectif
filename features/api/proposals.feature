@@ -71,20 +71,29 @@ Feature: Proposal Restful Api
           },
           @...@
         ],
-        "selectionSteps": [
+        "selections": [
           {
-            "projectId": @integer@,
-            "position": @integer@,
             "id": @integer@,
-            "title": @string@,
-            "enabled": @boolean@,
-            "startAt": "@string@.isDateTime()",
-            "endAt": "@string@.isDateTime()",
-            "voteType": @integer@,
-            "votesHelpText": @string@,
-            "open": @boolean@,
-            "budget": @...@,
-            "body": @string@
+            "selectionStep": {
+              "id": @integer@,
+              "projectId": @integer@,
+              "position": @integer@,
+              "title": @string@,
+              "enabled": @boolean@,
+              "startAt": "@string@.isDateTime()",
+              "endAt": "@string@.isDateTime()",
+              "voteType": @integer@,
+              "votesHelpText": @string@,
+              "open": @boolean@,
+              "budget": @...@,
+              "body": @string@
+            },
+            "status": {
+              "id": @integer@,
+              "color": @string@,
+              "name": @string@
+            },
+            "proposal": @...@
           }
         ],
         "comments_count": @integer@,
@@ -152,7 +161,7 @@ Feature: Proposal Restful Api
           },
           "comments": @...@,
           "responses": @...@,
-          "selectionSteps": @...@,
+          "selections": @...@,
           "comments_count": @integer@,
           "created_at": "@string@.isDateTime()",
           "votesCount": @integer@,
@@ -218,7 +227,7 @@ Feature: Proposal Restful Api
           },
           "comments": @...@,
           "responses": @...@,
-          "selectionSteps": @...@,
+          "selections": @...@,
           "comments_count": @integer@,
           "created_at": "@string@.isDateTime()",
           "enabled": @boolean@,
