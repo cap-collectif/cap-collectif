@@ -1,13 +1,11 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import { IntlMixin } from 'react-intl';
 
 const ProposalStatus = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
     selectionStepId: PropTypes.number,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -19,7 +17,7 @@ const ProposalStatus = React.createClass({
     const { proposal, selectionStepId } = this.props;
     if (selectionStepId) {
       const selection = proposal.selections.filter((sel) => {
-        return sel.selectionStep.id === selectionStepId;
+        return sel.step.id === selectionStepId;
       });
       if (selection.length > 0) {
         return selection[0].status;

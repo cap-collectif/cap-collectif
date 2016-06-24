@@ -29,7 +29,7 @@ const SelectionStepPage = React.createClass({
   getInitialState() {
     ProposalActions.initProposals(this.props.proposals, this.props.count);
     ProposalActions.initProposalVotes(this.props.step.creditsLeft);
-    ProposalActions.initSortOrder(this.props.step.defaultOrder);
+    ProposalActions.changeOrder(this.props.step.defaultOrder);
     return {
       proposals: ProposalStore.proposals,
       proposalsCount: ProposalStore.proposalsCount,

@@ -240,7 +240,7 @@ class SearchResolver
         $filters['isTrashed'] = false;
         $filters['enabled'] = true;
         if (array_key_exists('selectionStep', $providedFilters)) {
-            $filters['selections.selectionStep.id'] = $providedFilters['selectionStep'];
+            $filters['selections.step.id'] = $providedFilters['selectionStep'];
         }
         if (array_key_exists('proposalForm', $providedFilters)) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];

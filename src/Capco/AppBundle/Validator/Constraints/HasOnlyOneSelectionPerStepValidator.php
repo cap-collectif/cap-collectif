@@ -10,7 +10,7 @@ class HasOnlyOneSelectionPerStepValidator extends ConstraintValidator
     public function validate($protocol, Constraint $constraint)
     {
         $selectionSteps = $protocol->getSelectionStepsIds();
-        if ($this->has_dupes($selectionSteps)) {
+        if ($this->hasDupes($selectionSteps)) {
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath('selections')
@@ -19,8 +19,8 @@ class HasOnlyOneSelectionPerStepValidator extends ConstraintValidator
         }
     }
 
-    private function has_dupes($array){
-        $dupe_array = array();
+    private function hasDupes($array){
+        $dupe_array = [];
         foreach( $array as $val) {
             if (in_array($val, $dupe_array)) {
                 return true;

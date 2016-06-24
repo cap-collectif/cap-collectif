@@ -3,7 +3,6 @@ import {
   RECEIVE_PROPOSALS,
   RECEIVE_PROPOSAL,
   INIT_PROPOSAL,
-  INIT_PROPOSALS_ORDER,
   SUBMIT_PROPOSAL,
   INIT_PROPOSALS,
   PROPOSAL_VALIDATION_FAILURE,
@@ -48,10 +47,6 @@ class ProposalStore extends BaseStore {
       case INIT_PROPOSAL:
         this._proposal = action.proposal;
         this._isProposalSync = true;
-        break;
-      case INIT_PROPOSALS_ORDER:
-        this._order = action.order;
-        this.emitChange();
         break;
       case INIT_PROPOSALS:
         this._proposals = action.proposals;

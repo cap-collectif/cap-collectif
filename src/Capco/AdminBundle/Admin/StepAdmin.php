@@ -249,6 +249,7 @@ class StepAdmin extends Admin
                 ->add('selections', 'sonata_type_collection', [
                     'label' => 'admin.fields.step.selections',
                     'by_reference' => false,
+                    'help' => 'admin.help.step.selections',
                 ], [
                     'edit' => 'inline',
                     'inline' => 'table',

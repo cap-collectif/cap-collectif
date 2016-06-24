@@ -73,8 +73,7 @@ Feature: Proposal Restful Api
         ],
         "selections": [
           {
-            "id": @integer@,
-            "selectionStep": {
+            "step": {
               "id": @integer@,
               "projectId": @integer@,
               "position": @integer@,

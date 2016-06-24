@@ -111,6 +111,7 @@ admin:
     site_parameter:
       js: Rajoutez ici un ou plusieurs scripts entourés par leurs balises < script >.
     step:
+      selections: "<span class=\"capco--sonata-ba-field-help\"><i class=\"fa fa-exclamation-triangle\"></i>&nbsp;Vous devez mettre à jour le projet participatif avant d'appliquer de nouveaux statuts sur les propositions sélectionnées ci-dessus.</span>"
       vote_type: Dans le cas d'un vote selon le budget, vous devez renseigner le budget de l'étape et les estimations de chacune des propositions concernées.
     synthesis:
       consultation_step: La création d'une nouvelle synthèse à partir d'une étape de consultation peut prendre un peu de temps, toutes les contributions étant exportées vers l'outil de synthèse. Pas d'inquiétude, cela est tout à fait normal.
