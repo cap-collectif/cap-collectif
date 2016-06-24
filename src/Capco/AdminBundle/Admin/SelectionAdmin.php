@@ -23,7 +23,7 @@ class SelectionAdmin extends Admin
         $projectId = null;
         $selectionStepId = null;
 
-        if ($this->hasParentFieldDescription() && $this->getParentFieldDescription()->getAdmin()->getSubject()) {
+        if ($this->hasParentFieldDescription() && $this->getParentFieldDescription()->getAdmin()->getSubject() && $this->getParentFieldDescription()->getAdmin()->getSubject()->getId()) {
             $projectId = $this->getParentFieldDescription()->getAdmin()->getSubject()->getProjectId();
         } elseif ($subject && $subject->getProposal()) {
             $projectId = $subject->getProposal()->getProjectId();
@@ -31,6 +31,10 @@ class SelectionAdmin extends Admin
 
         if ($subject && $subject->getSelectionStep()) {
             $selectionStepId = $subject->getSelectionStep()->getId();
+        }
+
+        if (!$projectId) {
+            $projectId = $this->getRequest()->get('projectId');
         }
 
         return [
@@ -71,13 +75,6 @@ class SelectionAdmin extends Admin
                 'label' => 'admin.fields.selection.proposal',
                 'required' => false,
                 'property' => 'title',
-                'route' => [
-                    'name' => 'capco_admin_proposals_autocomplete',
-                    'parameters' => [
-                        'projectId' => $this->getPersistentParameter('projectId'),
-                        '_sonata_admin' => $this->getCode(),
-                    ],
-                ],
                 'callback' => function ($admin, $property, $value) {
                     $this->createQueryForProposals(
                         $admin,

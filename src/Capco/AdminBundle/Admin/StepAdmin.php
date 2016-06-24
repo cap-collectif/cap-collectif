@@ -118,7 +118,9 @@ class StepAdmin extends Admin
                     'required' => false,
                 ])
             ;
-        } elseif ($subject instanceof ConsultationStep) {
+        }
+
+        if ($subject instanceof ConsultationStep) {
             $formMapper
                 ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
@@ -187,6 +189,7 @@ class StepAdmin extends Admin
 
         $formMapper->end();
 
+
         if ($subject instanceof SelectionStep) {
             $formMapper
                 ->with('admin.fields.step.group_votes')
@@ -208,9 +211,43 @@ class StepAdmin extends Admin
                     'required' => false,
                 ])
                 ->end()
+            ;
+        }
+
+        if ($subject instanceof CollectStep || $subject instanceof SelectionStep) {
+            $formMapper
+                ->with('admin.fields.step.group_statuses')
+                ->add('statuses', 'sonata_type_collection', [
+                    'label' => 'admin.fields.step.statuses',
+                    'by_reference' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ])
+            ;
+
+            if ($subject instanceof CollectStep) {
+                $formMapper
+                    ->add('defaultStatus', 'sonata_type_model', [
+                        'label' => 'admin.fields.step.default_status',
+                        'query' => $this->createQueryForDefaultStatus(),
+                        'by_reference' => false,
+                        'required' => false,
+                        'class' => 'Capco\AppBundle\Entity\Status',
+                        'empty_value' => 'admin.fields.step.default_status_none',
+                    ])
+                ;
+            }
+
+            $formMapper->end();
+        }
+
+        if ($subject instanceof SelectionStep) {
+            $formMapper
                 ->with('admin.fields.step.group_selections')
                 ->add('selections', 'sonata_type_collection', [
-                    'label' => 'admin.fields.step.proposals',
+                    'label' => 'admin.fields.step.selections',
                     'by_reference' => false,
                 ], [
                     'edit' => 'inline',
@@ -256,37 +293,6 @@ class StepAdmin extends Admin
                     'required' => false,
                     'empty_value' => 'admin.fields.step.no_questionnaire',
                 ])
-                ->end()
-            ;
-        }
-
-        if ($subject instanceof CollectStep || $subject instanceof SelectionStep) {
-            $formMapper
-                ->with('admin.fields.step.group_statuses')
-                ->add('statuses', 'sonata_type_collection', [
-                    'label' => 'admin.fields.step.statuses',
-                    'by_reference' => false,
-                ], [
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'sortable' => 'position',
-                ])
-            ;
-
-            if ($subject instanceof CollectStep) {
-                $formMapper
-                    ->add('defaultStatus', 'sonata_type_model', [
-                        'label' => 'admin.fields.step.default_status',
-                        'query' => $this->createQueryForDefaultStatus(),
-                        'by_reference' => false,
-                        'required' => false,
-                        'class' => 'Capco\AppBundle\Entity\Status',
-                        'empty_value' => 'admin.fields.step.default_status_none',
-                    ])
-                ;
-            }
-
-            $formMapper
                 ->end()
             ;
         }

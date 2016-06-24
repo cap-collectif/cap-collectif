@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\District;
+use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Status;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
@@ -46,6 +47,9 @@ class ElasticaListener implements EventSubscriber
             foreach ($entity->getProposals() as $proposal) {
                 $this->objectPersisterProposal->replaceOne($proposal);
             }
+        }
+        if ($entity instanceof Selection) {
+            $this->objectPersisterProposal->replaceOne($entity->getProposal());
         }
     }
 }

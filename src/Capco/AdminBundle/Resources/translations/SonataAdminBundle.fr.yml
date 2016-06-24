@@ -615,7 +615,7 @@ admin:
       updated_at: Mise à jour
       collect_step: Étape de collecte
     selection:
-      proposal: Proposition
+      proposal: Titre de la proposition
       selection_step: Étape
       status: Statut
     site_image:
@@ -657,12 +657,12 @@ admin:
       budget: Budget alloué
       created_at: Création
       default_sort: Tri des propositions par défaut
-      default_status: Attribuer un statut par défaut
+      default_status: Statut par défaut
       default_status_none: Aucun
       end_at: Termine
       group_general: Général
       group_form: Formulaire
-      group_selections: Sélection
+      group_selections: Propositions
       group_statuses: Statuts
       group_votes: Votes
       is_enabled: Publié
@@ -673,8 +673,8 @@ admin:
       position: Position
       project: Projet
       proposal_form: Formulaire
-      proposals: Propositions sélectionnées
       questionnaire: Questionnaire
+      selections: Sélection
       start_at: Commence
       statuses: Statuts
       synthesis: Synthèse
