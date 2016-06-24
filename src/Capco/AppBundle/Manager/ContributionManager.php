@@ -31,30 +31,4 @@ class ContributionManager
         }
         return $expiredCount > 0;
     }
-
-    public function createOpinionForType(OpinionType $type) : Opinion
-    {
-      $opinion = new Opinion();
-      $opinion->setOpinionType($type);
-      $opinionTypeAppendixTypes = $this->em->getRepository('CapcoAppBundle:OpinionTypeAppendixType')->findBy(['opinionType' => $type]);
-      foreach ($opinionTypeAppendixTypes as $appendexType) {
-        $app = new OpinionAppendix();
-        $app->setAppendixType($otat->getAppendixType());
-        $opinion->addAppendice($app);
-      }
-
-      foreach ($appendices as $appendix) {
-        if ($appendix->getAppendixType() == $otat->getAppendixType()) {
-            $found = true;
-        }
-      }
-      if (!$found) {
-        $app = new OpinionAppendix();
-        $app->setAppendixType($otat->getAppendixType());
-        $app->setOpinion($opinion);
-        $opinion->addAppendice($app);
-      }
-      }
-    }
-
 }

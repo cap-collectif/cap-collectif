@@ -32,7 +32,6 @@ exports.config = {
           'bower_components/jquery/dist/jquery.js',
           'bower_components/Readmore.js/readmore.min.js',
           'bower_components/ckeditor/ckeditor.js',
-          'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
 
           // safari polyfills
           'bower_components/es6-promise/promise.js',
