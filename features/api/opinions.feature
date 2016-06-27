@@ -117,6 +117,56 @@ Feature: Opinions
     }
     """
 
+## Create
+
+  @security
+  Scenario: Anonymous API client wants to add an opinion
+    When I send a POST request to "/api/projects/5/steps/5/opinion_types/10/opinions" with a valid opinion json
+    Then the JSON response status code should be 401
+
+  @security
+  Scenario: logged in API client wants to add an opinion to a not enabled opinionType
+    Given I am logged in to api as user
+    When I send a POST request to "/api/projects/1/steps/4/opinion_types/1/opinions" with a valid opinion json
+    Then the JSON response status code should be 400
+    And the JSON response should match:
+    """
+    {
+      "code": 400,
+      "message": "This opinionType is not enabled.",
+      "errors": @null@
+    }
+    """
+
+  @database
+  Scenario: logged in API client wants to add an opinion
+    Given I am logged in to api as user
+    When I send a POST request to "/api/projects/5/steps/5/opinion_types/10/opinions" with a valid opinion json
+    Then the JSON response status code should be 201
+
+  @database
+  Scenario: logged in API client wants to add an opinion with appendices
+    Given I am logged in to api as user
+    When I send a POST request to "/api/projects/5/steps/5/opinion_types/7/opinions" with json:
+    """
+    {
+      "title": "Nouveau titre",
+      "body": "Mes modifications blablabla",
+      "appendices": [
+        {
+          "appendixType": 1,
+          "body": "Voici mon exposé des motifs"
+        },
+        {
+          "appendixType": 2,
+          "body": "Voici mon étude d'impact"
+        }
+      ]
+    }
+    """
+    Then the JSON response status code should be 201
+
+
 ## Vote
 
   Scenario: Anonymous API client wants to get all votes of an opinion
