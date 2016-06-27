@@ -4,6 +4,7 @@ global:
     close: Fermer
     already_email_confirmed: Votre adresse électronique a déjà été confirmée avec succès.
     email_confirmed: Merci, votre adresse électronique a été confirmée avec succès.
+    email_confirmed_with_republish: Merci, votre compte a bien été confirmé et votre contenu republié avec succès.
   capco_powered: Propulsé par %startlink%Cap Collectif%endlink%
   edited: Modifié le %date%
   form:
@@ -318,7 +319,7 @@ project:
       button: Format %format%
       cancel: Fermer
       title: Exporter l'étape de consultation "%title%"
-    not_yet_generated: L'export est en cours de génération, veuillez réessayer dans une quinzaine de minutes.
+    not_yet_generated: L'export est en cours de génération, veuillez réessayer dans une heure.
     step: Étape %position% : "%title%"
   error:
     not_exportable: Impossible de télécharger cette étape de consultation.
