@@ -11,7 +11,6 @@ global:
     mandatory: Ce champ est obligatoire.
   menu:
     title: Menu
-    see_more: Plus
     search: Rechercher
   loading: Chargement...
   pagination:
@@ -319,7 +318,7 @@ project:
       button: Format %format%
       cancel: Fermer
       title: Exporter l'étape de consultation "%title%"
-    not_yet_generated: L'export est en cours de génération, veuillez réessayer dans une quinzaine de minutes.
+    not_yet_generated: L'export est en cours de génération, veuillez réessayer dans une heure.
     step: Étape %position% : "%title%"
   error:
     not_exportable: Impossible de télécharger cette étape de consultation.
@@ -678,7 +677,7 @@ opinion:
     favorable: Les plus favorables
     last: Les plus récents
     old: Les plus anciens
-    positions: Ordre de publication
+    positions: Tri ordonné puis aléatoire
     random: Tri aléatoire
     sort_by: Trier "%name%" selon "%sortOrder%"
     sorted_by: Trié selon "%sortOrder%"

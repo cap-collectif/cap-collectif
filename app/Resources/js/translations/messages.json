@@ -228,6 +228,9 @@
     },
     "more": "Voir plus",
     "name": "Nom ",
+    "navbar": {
+      "see_more": "Plus"
+    },
     "or": "OU",
     "password": "Mot de passe",
     "pinned": {
@@ -351,8 +354,6 @@
     "add_new_source": "Proposer une source",
     "add_new_version": "Proposer une modification",
     "add_new_version_infos": "Merci d'examiner les modifications existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !",
-    "add_new": "Proposer",
-    "add_new_infos": "Merci d'examiner les propositions en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !",
     "appendices": {
       "hide": "Masquer {title}.",
       "show": "Afficher {title}"

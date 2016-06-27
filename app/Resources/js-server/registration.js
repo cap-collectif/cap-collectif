@@ -23,6 +23,7 @@ import IdeasIndexPageApp from '../js/startup/IdeasIndexPageApp';
 import IdeaPageApp from '../js/startup/IdeaPageApp';
 import IdeasListApp from '../js/startup/IdeasListApp';
 import IdeaCreateApp from '../js/startup/IdeaCreateApp';
+import ShareButtonDropdownApp from '../js/startup/ShareButtonDropdownApp';
 import appStore from '../js/stores/AppStore';
 
 const register = ReactOnRails.register;
@@ -58,3 +59,4 @@ register({ IdeasIndexPageApp });
 register({ IdeasListApp });
 register({ IdeaPageApp });
 register({ IdeaCreateApp });
+register({ ShareButtonDropdownApp });
