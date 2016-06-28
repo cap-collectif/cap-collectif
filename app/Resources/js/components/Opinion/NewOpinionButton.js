@@ -5,9 +5,7 @@ import LoginOverlay from '../Utils/LoginOverlay';
 
 const NewOpinionButton = React.createClass({
   propTypes: {
-    slug: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    opinionType: PropTypes.object.isRequired,
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
@@ -19,18 +17,29 @@ const NewOpinionButton = React.createClass({
     };
   },
 
+  getInitialState() {
+    return {
+      modal: false,
+    };
+  },
+
+  openModal() {
+    this.setState({ modal: true });
+  },
+
   render() {
-    const { slug, link, label, user, features } = this.props;
+    const { user, features, opinionType } = this.props;
     return (
       <LoginOverlay user={user} features={features}>
         <a
-          id={'btn-add--' + slug}
-          href={user ? link : null}
+          id={'btn-add--' + opinionType.slug}
+          onClick={user ? this.openModal : null}
           className="btn btn-primary"
         >
           <i className="cap cap-add-1" />
-          <span className="hidden-xs">{label}</span>
+          <span className="hidden-xs">Creation</span>
         </a>
+        <OpinionCreateModal opinionType={opinionType} show={this.state.modal} />
       </LoginOverlay>
     );
   },
@@ -39,8 +48,8 @@ const NewOpinionButton = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
-    features: state.features,
+    user: state.default.user,
+    features: state.default.features,
   };
 };
 

@@ -99,7 +99,7 @@ export const IdeaPageHeaderInfos = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    features: state.features,
+    features: state.default.features,
   };
 };
 
