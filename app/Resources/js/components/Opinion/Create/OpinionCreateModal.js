@@ -45,7 +45,7 @@ const OpinionCreateModal = React.createClass({
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            { this.getIntlMessage('opinion.create') }
+            { this.getIntlMessage('opinion.add_new') }
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

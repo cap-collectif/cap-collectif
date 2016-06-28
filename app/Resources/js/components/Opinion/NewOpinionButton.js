@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
+import OpinionCreateModal from './Create/OpinionCreateModal';
 
 const NewOpinionButton = React.createClass({
   propTypes: {
@@ -30,6 +31,7 @@ const NewOpinionButton = React.createClass({
   render() {
     const { user, features, opinionType } = this.props;
     return (
+      <span>
       <LoginOverlay user={user} features={features}>
         <a
           id={'btn-add--' + opinionType.slug}
@@ -39,8 +41,13 @@ const NewOpinionButton = React.createClass({
           <i className="cap cap-add-1" />
           <span className="hidden-xs">Creation</span>
         </a>
-        <OpinionCreateModal opinionType={opinionType} show={this.state.modal} />
       </LoginOverlay>
+      <OpinionCreateModal
+        opinionType={opinionType}
+        show={this.state.modal}
+        onClose={() => {}}
+      />
+      </span>
     );
   },
 

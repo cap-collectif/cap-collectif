@@ -33,8 +33,7 @@
                 {% if opinionType is defined and opinionType.isEnabled and currentStep.canContribute and currentStep.canContribute %}
                   {{ react_intl_component('NewOpinionApp', {
                     'props': {
-                      'slug': opinionType.slug,
-                      'link': path('app_project_new_opinion', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug }),
+                      'opinionType': opinionType,
                       'label': buttonLabel | trans({}, 'CapcoAppBundle')
                     },
                     'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
