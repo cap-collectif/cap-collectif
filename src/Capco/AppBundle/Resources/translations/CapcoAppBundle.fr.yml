@@ -319,7 +319,7 @@ project:
       button: Format %format%
       cancel: Fermer
       title: Exporter l'étape de consultation "%title%"
-    not_yet_generated: L'export est en cours de génération, veuillez réessayer dans une heure.
+    not_yet_generated: L'export est en cours de génération, veuillez réessayer dans une quinzaine de minutes.
     step: Étape %position% : "%title%"
   error:
     not_exportable: Impossible de télécharger cette étape de consultation.
@@ -678,7 +678,7 @@ opinion:
     favorable: Les plus favorables
     last: Les plus récents
     old: Les plus anciens
-    positions: Tri ordonné puis aléatoire
+    positions: Ordre de publication
     random: Tri aléatoire
     sort_by: Trier "%name%" selon "%sortOrder%"
     sorted_by: Trié selon "%sortOrder%"
