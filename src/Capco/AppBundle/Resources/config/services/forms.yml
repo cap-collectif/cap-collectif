@@ -12,6 +12,7 @@ services:
 
   capco.form.opinion:
     class: Capco\AppBundle\Form\OpinionType
+    arguments: [@capco.form.transformer.entity_to_id]
     tags:
       - { name: form.type, alias: opinion }
 

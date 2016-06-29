@@ -7,9 +7,7 @@ import QuillToolbar from './QuillToolbar';
 
 const Editor = React.createClass({
   propTypes: {
-    valueLink: PropTypes.object, // deprecated way
-    value: PropTypes.any, // redux-form
-    onChange: PropTypes.func, // redux-form
+    valueLink: PropTypes.object.isRequired,
     id: PropTypes.string,
     className: PropTypes.string,
     disabled: PropTypes.bool,
@@ -55,23 +53,13 @@ const Editor = React.createClass({
         theme: 'snow',
       });
 
-      if (this.props.valueLink) { // deprecated
-        const defaultValue = this.props.valueLink.value;
-        if (defaultValue) {
-          this._editor.setHTML(defaultValue);
-        }
-        this._editor.on('text-change', () => {
-          this.props.valueLink.requestChange(this._editor.getHTML());
-        });
-      } else {
-        const defaultValue = this.props.value;
-        if (defaultValue) {
-          this._editor.setHTML(defaultValue);
-        }
-        this._editor.on('text-change', () => {
-          this.props.onChange(this._editor.getHTML());
-        });
+      const defaultValue = this.props.valueLink.value;
+      if (defaultValue) {
+        this._editor.setHTML(defaultValue);
       }
+      this._editor.on('text-change', () => {
+        this.props.valueLink.requestChange(this._editor.getHTML());
+      });
     }
   },
 
