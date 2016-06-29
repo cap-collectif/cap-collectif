@@ -10,27 +10,30 @@
         {% if filter is not defined or filter == true %}
             <div class="pull-right  opinion__header__filter">
                 {% if opinions_count > 1 %}
-                    {%  set filterId = 'filter_' ~ opinionType.slug %}
-                    <select id="{{ filterId }}" class="form-control" style="margin-left: 15px;" onchange="{{ "window.location.href = document.getElementById('" ~ filterId ~ "')[document.getElementById('" ~ filterId ~ "').selectedIndex].dataset.url;" }}">
-                        <option>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="{{ 'opinion.sort.label_sr' | trans({'%name%': opinionType.title ~ " " ~ opinionType.subtitle}, 'CapcoAppBundle') }}">
                             {% if opinionsSort is defined %}
                                 {{ 'opinion.sort.sorted_by' | trans({'%sortOrder%': ('opinion.sort.' ~ opinionsSort) | trans({}, 'CapcoAppBundle')}, 'CapcoAppBundle') }}
                             {% else %}
                                 {{ 'opinion.sort.label' | trans({}, 'CapcoAppBundle') }}
                             {% endif %}
-                        </option>
-                        {% for opinionSortOrderKey, opinionSortOrder in opinionSortOrders %}
-                            <option data-url="{{ path('app_consultation_show_opinions_sorted', {projectSlug: project.slug, stepSlug: currentStep.slug, opinionTypeSlug: opinionType.slug, opinionsSort: opinionSortOrderKey}) }}">
-                                {{ opinionSortOrder | trans({}, 'CapcoAppBundle') }}
-                            </option>
-                        {% endfor %}
-                    </select>
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            {% for opinionSortOrderKey, opinionSortOrder in opinionSortOrders %}
+                                <li>
+                                    <a
+                                        href="{{ path('app_consultation_show_opinions_sorted', {projectSlug: project.slug, stepSlug: currentStep.slug, opinionTypeSlug: opinionType.slug, opinionsSort: opinionSortOrderKey}) }}"
+                                        title="{{ 'opinion.sort.sort_by' | trans({'%name%': opinionType.title ~ ' ' ~ opinionType.subtitle, '%sortOrder%': ('opinion.sort.' ~ opinionSortOrderKey) | trans({}, 'CapcoAppBundle')}, 'CapcoAppBundle') }}"
+                                        >{{ opinionSortOrder | trans({}, 'CapcoAppBundle') }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 {% endif %}
                 {% if opinionType is defined and opinionType.isEnabled and currentStep.canContribute and currentStep.canContribute %}
                   {{ react_intl_component('NewOpinionApp', {
                     'props': {
-                      'slug': opinionType.slug,
-                      'link': path('app_project_new_opinion', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug }),
+                      'opinionType': opinionTypeProps,
                       'label': buttonLabel | trans({}, 'CapcoAppBundle')
                     },
                     'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',

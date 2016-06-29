@@ -333,7 +333,7 @@ admin:
       color: Couleur
       created_at: Création
       comment_system: Type de commentaire
-      default_filter: Tri par défaut
+      default_filter: Filtre par défaut
       group_info: Catégorie
       group_options: Options
       group_votes: Votes
