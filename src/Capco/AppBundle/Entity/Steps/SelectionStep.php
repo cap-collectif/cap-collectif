@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
-use Capco\AppBundle\Entity\Proposal;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -277,16 +276,19 @@ class SelectionStep extends AbstractStep
         foreach ($this->selections as $selection) {
             $proposals[] = $selection->getProposal();
         }
+
         return $proposals;
     }
 
-    public function getProposalsIds() {
+    public function getProposalsIds()
+    {
         $ids = array_filter(array_map(function ($value) {
             return $value->getProposal() ? $value->getProposal()->getId() : null;
         }, $this->getSelections()->getValues()),
             function ($value) {
                 return $value !== null;
             });
+
         return $ids;
     }
 }

@@ -3,7 +3,6 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Proposal;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;

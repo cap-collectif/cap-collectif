@@ -9,7 +9,6 @@ use Capco\AppBundle\Traits\ColorableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**

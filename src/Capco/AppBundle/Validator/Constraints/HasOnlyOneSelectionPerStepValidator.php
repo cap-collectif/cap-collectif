@@ -19,14 +19,16 @@ class HasOnlyOneSelectionPerStepValidator extends ConstraintValidator
         }
     }
 
-    private function hasDupes($array){
+    private function hasDupes($array)
+    {
         $dupe_array = [];
-        foreach( $array as $val) {
+        foreach ($array as $val) {
             if (in_array($val, $dupe_array)) {
                 return true;
             }
             $dupe_array[] = $val;
         }
+
         return false;
     }
 }

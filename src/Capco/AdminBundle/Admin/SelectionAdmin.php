@@ -39,7 +39,7 @@ class SelectionAdmin extends Admin
 
         return [
             'projectId' => $projectId,
-            'selectionStepId' =>$selectionStepId,
+            'selectionStepId' => $selectionStepId,
         ];
     }
 
@@ -116,6 +116,7 @@ class SelectionAdmin extends Admin
             ->andWhere('p.id = :projectId')
             ->setParameter('projectId', $projectId)
         ;
+
         return $qb->getQuery();
     }
 
@@ -160,7 +161,7 @@ class SelectionAdmin extends Admin
             ->andWhere('step.id = :stepId')
             ->setParameter('stepId', $selectionStepId)
         ;
+
         return $qb->getQuery();
     }
-
 }

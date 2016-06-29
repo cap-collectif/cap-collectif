@@ -142,7 +142,8 @@ abstract class AbstractStep
     private $updatedAt;
 
     /**
-     * Used only by CollectStep and SelectionStep but needs to be here for sonata admin :(
+     * Used only by CollectStep and SelectionStep but needs to be here for sonata admin :(.
+     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Status", mappedBy="step", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */

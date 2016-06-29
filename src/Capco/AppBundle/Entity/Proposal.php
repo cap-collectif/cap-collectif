@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
@@ -595,6 +594,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         foreach ($this->selections as $selection) {
             $steps[] = $selection->getSelectionStep();
         }
+
         return $steps;
     }
 
@@ -603,16 +603,19 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         if ($this->getProposalForm() && $this->getProposalForm()->getStep() && $this->getProposalForm()->getStep()->getProject()) {
             return $this->getProposalForm()->getStep()->getProjectId();
         }
-        return null;
+
+        return;
     }
 
-    public function getSelectionStepsIds() {
+    public function getSelectionStepsIds()
+    {
         $ids = array_filter(array_map(function ($value) {
             return $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null;
         }, $this->getSelections()->getValues()),
             function ($value) {
                 return $value !== null;
         });
+
         return $ids;
     }
 }
