@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { reduxForm, Field } from 'redux-form';
-import Input from '../../Form/Input';
+import { reduxForm, Field as ReduxFormField } from 'redux-form';
+import Field from '../../Form/Field';
 
 const validate = values => {
   const errors = {};
@@ -18,19 +18,6 @@ const labels = {
   title: 'opinion.title',
   body: 'opinion.body',
 };
-
-const renderField = props => (
-    <Input
-      type={props.type}
-      labelClassName={''}
-      label={props.label}
-      placeholder={props.placeholder || props.label}
-      errors={(props.touched && props.error) ? props.error : null}
-      bsStyle={props.touched ? (props.error ? 'error' : 'success') : null}
-      hasFeedback={props.touched}
-      {...props}
-    />
-);
 
 const OpinionForm = React.createClass({
   propTypes: {
@@ -49,13 +36,13 @@ const OpinionForm = React.createClass({
       {
         fields.map((field, index) => {
           return (
-            <Field
+            <ReduxFormField
               key={index}
               autoFocus={index === 0}
               label={this.getIntlMessage(labels[field.name])}
               name={field.name}
               type={field.type}
-              component={renderField}
+              component={Field}
               placeholder={field.name}
             />
           );
