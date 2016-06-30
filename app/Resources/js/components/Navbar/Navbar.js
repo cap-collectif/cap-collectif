@@ -30,6 +30,12 @@ const Navbar = React.createClass({
     this.autocollapseNavbar();
   },
 
+  componentDidUpdate() {
+    if (window.innerWidth > 768 && window.height > 50) {
+      this.autocollapseNavbar();
+    }
+  },
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.autocollapseNavbar);
   },
