@@ -58,7 +58,7 @@ const ViewTree = React.createClass({
   loadElementsTreeFromServer(parent = null) {
     const { synthesis } = this.props;
     const depth = synthesis.displayRules && synthesis.displayRules.level ? parseInt(synthesis.displayRules.level, 10) : 0;
-    SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'published', parent, depth > 2 ? depth - 1 : depth + NAV_DEPTH - 1);
+    SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'published', parent, depth > 2 ? depth : depth + NAV_DEPTH);
   },
 
   isElementExpanded(element) {

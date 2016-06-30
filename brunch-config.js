@@ -32,7 +32,18 @@ exports.config = {
           'bower_components/jquery/dist/jquery.js',
           'bower_components/Readmore.js/readmore.min.js',
           'bower_components/ckeditor/ckeditor.js',
-          'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
+
+          // Bootstrap js modules
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js',
 
           // safari polyfills
           'bower_components/es6-promise/promise.js',

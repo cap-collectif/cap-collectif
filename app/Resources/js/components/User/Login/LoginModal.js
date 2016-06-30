@@ -95,8 +95,8 @@ export const LoginModal = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    features: state.default.features,
-    parameters: state.default.parameters,
+    features: state.features,
+    parameters: state.parameters,
   };
 };
 
