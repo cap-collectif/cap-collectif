@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
-import { Navbar as Navigation, Nav } from 'react-bootstrap';
+import { Navbar as Navigation, Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import NavbarRight from './NavbarRight';
-import NavbarItem from './NavbarItem';
 
 const Navbar = React.createClass({
   propTypes: {
@@ -18,74 +16,7 @@ const Navbar = React.createClass({
     };
   },
 
-  getInitialState() {
-    return {
-      items: this.props.items,
-      moreItems: [],
-    };
-  },
-
-  componentDidMount() {
-    window.addEventListener('resize', this.autocollapseNavbar);
-    this.autocollapseNavbar();
-  },
-
-  componentDidUpdate() {
-    if (window.innerWidth > 768 && window.height > 50) {
-      this.autocollapseNavbar();
-    }
-  },
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.autocollapseNavbar);
-  },
-
-  getPixelsWidth(component) {
-    const width = component ? ReactDOM.findDOMNode(component).clientWidth : 0;
-    return parseInt(width, 10);
-  },
-
-  autocollapseNavbar() {
-    const tempItems = this.state.items.concat(this.state.moreItems);
-    let items = [];
-    const moreItems = [];
-    if (window.innerWidth > 768) { // Only applied to window from sm size (otherwise menu is collapsed)
-      const containerWidth = this.getPixelsWidth(this.container) - 30; // Minus padding
-      const seeMoreDropdownWidth = this.getPixelsWidth(this.seeMoreDropdown) || 75; // Approximate size of menu item
-      const headerWidth = this.getPixelsWidth(this.header);
-      const navrightWidth = this.getPixelsWidth(this.navright.getWrappedInstance());
-      const occupiedWidth = headerWidth + navrightWidth + seeMoreDropdownWidth + 30; // + 30px just in case
-      const maxWidth = containerWidth - occupiedWidth;
-      let width = 0;
-      tempItems.map((item) => {
-        width += this.getPixelsWidth(this['item-' + item.id]);
-        if (maxWidth < width) {
-          moreItems.push(item);
-        } else {
-          items.push(item);
-        }
-      });
-    } else {
-      items = tempItems;
-    }
-
-    this.setState({
-      items: items,
-      moreItems: moreItems,
-    });
-  },
-
   render() {
-    const { logo } = this.props;
-    const { items, moreItems } = this.state;
-    const moreItem = moreItems.length > 0
-    ? {
-      id: 'see-more',
-      title: this.getIntlMessage('global.navbar.see_more'),
-      hasEnabledFeature: true,
-      children: moreItems,
-    }
-    : null;
     return (
       <Navigation id="main-navbar" className="navbar navbar-default navbar-fixed-top">
         <div className="skip-links js-skip-links" role="banner">
@@ -98,38 +29,59 @@ const Navbar = React.createClass({
                 </div>
             </div>
         </div>
-        <div className="container" ref={ (c) => this.container = c }>
-          <Navigation.Header >
-            <Navigation.Brand href="/" id="home" ref={ (c) => this.header = c }>
-              <a href="/" >
-                <img src={logo} title={this.getIntlMessage('navbar.homepage')} alt={this.getIntlMessage('navbar.homepage')} />
+        <div className="container">
+          <Navigation.Header>
+            <Navigation.Brand href="/" id="home">
+              <a href="/">
+                <img src={this.props.logo} title={this.getIntlMessage('navbar.homepage')} alt={this.getIntlMessage('navbar.homepage')} />
               </a>
             </Navigation.Brand>
             <Navigation.Toggle />
-          </Navigation.Header >
+          </Navigation.Header>
           <Navigation.Collapse>
-            <Nav id="navbar-content">
-              {
-                items.map((header, index) => {
-                  return (
-                    <NavbarItem
-                      key={index}
-                      item={header}
-                      ref={(c) => this['item-' + header.id] = c}
-                    />
-                  );
-                })
-              }
-              {
-                moreItem
-                && <NavbarItem
-                  item={moreItem}
-                  ref={(c) => this.seeMoreDropdown = c}
-                  className="navbar-dropdown-more"
-                />
-              }
+              <Nav id="navbar-content">
+                {
+                  this.props.items.map((header, index) => {
+                    if (header.hasEnabledFeature) {
+                      if (header.children.length > 0) {
+                        return (
+                          <NavDropdown key={index} eventKey={index} title={header.title} id="basic-nav-dropdown">
+                            {
+                              header.children.map((child, childIndex) => {
+                                if (child.hasEnabledFeature) {
+                                  return (
+                                    <MenuItem
+                                      key={childIndex}
+                                      eventKey={index + ((childIndex + 1) / 10)}
+                                      href={child.link}
+                                      active={child.active}
+                                    >
+                                      {child.title}
+                                    </MenuItem>
+                                  );
+                                }
+                                return null;
+                              })
+                            }
+                          </NavDropdown>
+                        );
+                      }
+                      return (
+                        <NavItem
+                          key={index}
+                          eventKey={index}
+                          href={header.link}
+                          active={header.active}
+                        >
+                        {header.title}
+                        </NavItem>
+                      );
+                    }
+                    return null;
+                  })
+                }
               </Nav>
-              <NavbarRight ref={ (c) => this.navright = c } />
+              <NavbarRight />
           </Navigation.Collapse>
         </div>
       </Navigation>

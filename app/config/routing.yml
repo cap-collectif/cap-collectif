@@ -58,6 +58,11 @@ capco_api_opinions:
   type: annotation
   prefix: /api
 
+capco_api_opinion_links:
+  resource: "@CapcoAppBundle/Controller/Api/OpinionLinksController.php"
+  type: annotation
+  prefix: /api
+
 capco_api_opinion_types:
   resource: "@CapcoAppBundle/Controller/Api/OpinionTypesController.php"
   type: annotation

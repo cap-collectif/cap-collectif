@@ -11,10 +11,14 @@ services:
       - { name: form.type_extension, alias: sonata_media_type }
 
   capco.form.opinion:
-    class: Capco\AppBundle\Form\OpinionType
-    arguments: [@capco.form.transformer.entity_to_id]
+    class: Capco\AppBundle\Form\OpinionForm
     tags:
       - { name: form.type, alias: opinion }
+
+  capco.form.opinion_link:
+    class: Capco\AppBundle\Form\OpinionLinkForm
+    tags:
+      - { name: form.type, alias: opinion_link }
 
   capco.form.proposal:
     class: Capco\AppBundle\Form\ProposalType
