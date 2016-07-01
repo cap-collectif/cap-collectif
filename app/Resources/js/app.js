@@ -118,46 +118,6 @@ const App = (($) => {
     });
   };
 
-  const navbarAutocollapse = (label) => {
-    $('#navbar-content').append($('#navbar-content li.hideshow ul').html());
-    $('#navbar-content li.hideshow').remove();
-
-    if (window.matchMedia('(min-width: 768px)').matches) {
-      const occupiedWidth = $('.navbar-header').width() + $('.navbar-right').width() + 80;
-      const maxWidth = $('#main-navbar > .container').width() - occupiedWidth;
-      let menuHtml = '';
-
-      let width = 0;
-      $('#navbar-content').children().each((index, el) => {
-        width += $(el).outerWidth(true);
-        if (maxWidth < width) {
-          // Get outer html of children element
-          menuHtml += $(el).clone().wrap('<div>').parent().html();
-          $(el).remove();
-        }
-      });
-
-      $('#navbar-content').append(
-        '<li class="hideshow dropdown">'
-        + '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + label + ' <span class="caret"></span></a>'
-        + '<ul class="dropdown-menu" role="menu">' + menuHtml + '</ul>'
-        + '</li>'
-      );
-
-      $('#navbar-content li.hideshow').on('click', '.dropdown-menu', (e) => {
-        if ($(e.currentTarget).parent().is('.open')) {
-          e.stopPropagation();
-        }
-      });
-
-      if (menuHtml === '') {
-        $('#navbar-content li.hideshow').hide();
-      } else {
-        $('#navbar-content li.hideshow').show();
-      }
-    }
-  };
-
   const makeSidebar = (options) => {
     // Fix containers
     const containers = options.container + ' .container';
@@ -200,7 +160,6 @@ const App = (($) => {
     video: video,
     externalLinks: externalLinks,
     showMap: showMap,
-    navbarAutocollapse: navbarAutocollapse,
     makeSidebar: makeSidebar,
     carousel: carousel,
     customModal: customModal,

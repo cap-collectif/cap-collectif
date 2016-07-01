@@ -124,13 +124,16 @@
             </li>
         </ul>
 
-        <div style="margin-top: 15px">
+        <div style="margin-top: 15px" class="share-button-wrapper">
 
-            {% include 'CapcoAppBundle:Block:share_button.html.twig' with {
-                'url': project | capco_first_step_link(true),
-                'title': project.title,
-                'id': 'project-' ~ project.slug,
-            } only %}
+            {{ react_intl_component('ShareButtonDropdownApp', {
+                'props': {
+                    'url': project | capco_first_step_link(true),
+                    'title': project.title,
+                    'id': 'project-' ~ project.slug,
+                }
+            })
+            }}
 
             {% if project.exportable and is_granted('ROLE_ADMIN') %}
                 {% include 'CapcoAppBundle:Project:download_button.html.twig' with {'project': project} only %}
