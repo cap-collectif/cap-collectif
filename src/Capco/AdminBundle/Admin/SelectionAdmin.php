@@ -29,7 +29,9 @@ class SelectionAdmin extends Admin
             $projectId = $subject->getProposal()->getProjectId();
         }
 
-        if ($subject && $subject->getSelectionStep()) {
+        if ($this->getRequest()->get('selectionStepId')) {
+            $selectionStepId = $this->getRequest()->get('selectionStepId');
+        } elseif ($subject && $subject->getSelectionStep() && !property_exists($subject->getSelectionStep(), '__isInitialized__')) {
             $selectionStepId = $subject->getSelectionStep()->getId();
         }
 
@@ -150,17 +152,22 @@ class SelectionAdmin extends Admin
         $datagrid->setValue($property, null, $value);
     }
 
-    private function createQueryForStatuses($selectionStepId = 0)
+    private function createQueryForStatuses($selectionStepId = null)
     {
         $qb = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:Status')
             ->createQueryBuilder('s')
-            ->leftJoin('s.step', 'step')
-            ->andWhere('step.id = :stepId')
-            ->setParameter('stepId', $selectionStepId)
         ;
+
+        if ($selectionStepId) {
+            $qb
+                ->leftJoin('s.step', 'step')
+                ->andWhere('step.id = :stepId')
+                ->setParameter('stepId', $selectionStepId)
+            ;
+        }
 
         return $qb->getQuery();
     }

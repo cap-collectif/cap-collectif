@@ -253,7 +253,10 @@ class StepAdmin extends Admin
                 ], [
                     'edit' => 'inline',
                     'inline' => 'table',
-                    'link_parameters' => ['projectId' => $projectId],
+                    'link_parameters' => [
+                        'projectId' => $projectId,
+                        'selectionStepId' => $this->getSubject()->getId(),
+                    ],
                 ])
                 ->end()
             ;

@@ -6,23 +6,22 @@ import { shallow } from 'enzyme';
 import ProposalStatus from './ProposalStatus';
 
 describe('<ProposalStatus />', () => {
-
   const proposal = {
     status: {
       name: 'Coucou',
-      color: 'success'
+      color: 'success',
     },
     selections: [
       {
         step: {
-          id: 42
+          id: 42,
         },
         status: {
           name: 'Hello',
-          color: 'danger'
-        }
-      }
-    ]
+          color: 'danger',
+        },
+      },
+    ],
   };
 
   it('should render a status', () => {

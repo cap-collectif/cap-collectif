@@ -7,13 +7,12 @@ import ProposalPreviewFooter from './ProposalPreviewFooter';
 import IntlData from '../../../translations/FR';
 
 describe('<ProposalPreviewFooter />', () => {
-
   const proposal = {
     comments_count: 3,
     votesCount: 8,
     votesCountBySelectionSteps: {
       42: 5,
-    }
+    },
   };
 
   const props = {
