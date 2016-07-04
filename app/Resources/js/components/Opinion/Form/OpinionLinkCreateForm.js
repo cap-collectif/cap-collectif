@@ -19,6 +19,14 @@ const OpinionLinkCreateForm = React.createClass({
     };
   },
 
+  submit() {
+    this.form.submit();
+  },
+
+  isValid() {
+    return this.form.valid;
+  },
+
   handleSubmit(data) {
     const { opinion, onSubmitSuccess, onFailure, availableTypes } = this.props;
     const { currentType } = this.state;

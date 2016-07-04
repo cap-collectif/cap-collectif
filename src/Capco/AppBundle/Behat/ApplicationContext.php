@@ -138,15 +138,14 @@ class ApplicationContext extends UserContext
         }
     }
 
-
-    /**
-     * @Then I should be redirected to :url
-     */
+     /**
+      * @Then I should be redirected to :url
+      */
      public function assertRedirect($url)
      {
-       $this->getSession()->wait(1000);
+         $this->getSession()->wait(1000);
 
-       $this->assertPageAddress($url);
+         $this->assertPageAddress($url);
      }
 
     /**

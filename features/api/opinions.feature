@@ -297,5 +297,3 @@ Feature: Opinions
     # delete
     When I send a DELETE request to "/api/opinions/57/votes"
     Then the JSON response status code should be 204
-
-    

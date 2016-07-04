@@ -210,7 +210,7 @@ class Event implements CommentableInterface, IndexableInterface
 
     public function isIndexable()
     {
-      return $this->getIsEnabled();
+        return $this->getIsEnabled();
     }
 
     /**

@@ -281,6 +281,7 @@ class SelectionStep extends AbstractStep
         if (count($this->getProposals())) {
             return $this->getProposals()[0]->getProposalForm();
         }
-        return null;
+
+        return;
     }
 }

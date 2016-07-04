@@ -53,6 +53,14 @@ const OpinionEditForm = React.createClass({
     ;
   },
 
+  submit() {
+    this.form.submit();
+  },
+
+  isValid() {
+    return this.form.valid;
+  },
+
   render() {
     const { opinion, onFailure } = this.props;
     const dynamicsInitialValues = {};

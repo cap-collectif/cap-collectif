@@ -144,34 +144,34 @@ EOF;
         $this->iSendARequestWithJson($method, $url, $json);
     }
 
-    /**
-     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid opinion json$/
-     */
+     /**
+      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid opinion json$/
+      */
      public function iSendOpinionRequest($method, $url)
      {
-       $json = <<< EOF
+         $json = <<< EOF
        {
          "title": "Nouveau titre",
          "body": "Mes modifications blablabla"
        }
 EOF;
-       $this->iSendARequestWithJson($method, $url, $json);
+         $this->iSendARequestWithJson($method, $url, $json);
      }
 
-      /**
-       * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid link opinion json$/
-       */
+       /**
+        * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid link opinion json$/
+        */
        public function iSendOpinionLinkRequest($method, $url)
        {
-         $json = <<< EOF
+           $json = <<< EOF
          {
            "title": "Nouveau titre",
            "body": "Mes modifications blablabla",
            "OpinionType": 9
          }
 EOF;
-        $this->iSendARequestWithJson($method, $url, $json);
-    }
+           $this->iSendARequestWithJson($method, $url, $json);
+       }
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid report json$/

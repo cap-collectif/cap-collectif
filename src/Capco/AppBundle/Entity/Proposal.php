@@ -182,7 +182,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
 
     public function isIndexable()
     {
-      return $this->enabled && !$this->expired;
+        return $this->enabled && !$this->expired;
     }
 
     public function __toString()

@@ -37,6 +37,14 @@ const OpinionCreateForm = React.createClass({
     ;
   },
 
+  submit() {
+    this.form.submit();
+  },
+
+  isValid() {
+    return this.form.valid;
+  },
+
   render() {
     if (!this.props.opinionType) return;
     const dynamicsField = this.props.opinionType.appendixTypes.map((type) => {

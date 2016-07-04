@@ -20,8 +20,8 @@ const OpinionEditModal = React.createClass({
   },
 
   handleSubmit() {
-    if (this.form.form.valid) {
-      this.form.form.submit();
+    if (this.form.isValid()) {
+      this.form.submit();
       this.setState({ isSubmitting: true });
     }
   },

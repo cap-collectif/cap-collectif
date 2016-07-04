@@ -27,14 +27,13 @@ const OpinionCreateModal = React.createClass({
     Fetcher
       .get(`/opinion_types/${this.props.opinionTypeId}`)
       .then((data) => {
-        console.log(data);
         this.setState({ opinionType: data });
       });
   },
 
   handleSubmit() {
-    if (this.form.form.valid) {
-      this.form.form.submit();
+    if (this.form.isValid()) {
+      this.form.submit();
       this.setState({ isSubmitting: true });
     }
   },
@@ -49,7 +48,7 @@ const OpinionCreateModal = React.createClass({
   },
 
   render() {
-    const { isSubmitting } = this.state;
+    const { isSubmitting, opinionType } = this.state;
     const { onClose, show, stepId, projectId } = this.props;
     return (
       <Modal
@@ -74,7 +73,7 @@ const OpinionCreateModal = React.createClass({
             ref={c => this.form = c}
             projectId={projectId}
             stepId={stepId}
-            opinionType={this.state.opinionType}
+            opinionType={opinionType}
             onSubmitSuccess={this.handleSubmitSuccess}
             onFailure={this.stopSubmit}
           />

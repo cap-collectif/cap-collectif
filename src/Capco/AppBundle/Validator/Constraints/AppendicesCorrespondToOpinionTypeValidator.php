@@ -4,8 +4,6 @@ namespace Capco\AppBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 
 class AppendicesCorrespondToOpinionTypeValidator extends ConstraintValidator
 {
@@ -13,7 +11,7 @@ class AppendicesCorrespondToOpinionTypeValidator extends ConstraintValidator
     {
         $appendices = $opinion->getAppendices();
         if ($appendices->isEmpty()) {
-          return;
+            return;
         }
 
         $opinionType = $opinion->getOpinionType();
@@ -27,6 +25,7 @@ class AppendicesCorrespondToOpinionTypeValidator extends ConstraintValidator
                 $at = $appendix->getAppendixType();
                 if (!$at || !$opinionTypeappendixTypesIds->contains($at->getId())) {
                     $this->context->addViolationAt('appendices', $constraint->message);
+
                     return;
                 }
             }
