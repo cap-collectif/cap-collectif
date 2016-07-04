@@ -97,8 +97,8 @@ class ReplyAdmin extends Admin
                     'label' => 'admin.global.expired',
                     'read_only' => true,
                     'attr' => [
-                      'disabled' => true,
-                    ],
+                      'disabled' => true
+                    ]
                 ])
             ->end()
             ->with('admin.fields.reply.group_responses')

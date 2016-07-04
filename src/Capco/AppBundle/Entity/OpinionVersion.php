@@ -124,7 +124,7 @@ class OpinionVersion implements Contribution, VotableInterface, HasDiffInterface
 
     public function isIndexable()
     {
-        return $this->isEnabled() && !$this->isExpired();
+      return $this->isEnabled() && !$this->isExpired();
     }
 
     public function getReports()

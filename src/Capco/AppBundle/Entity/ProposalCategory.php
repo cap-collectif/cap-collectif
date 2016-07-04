@@ -2,9 +2,11 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 
 /**
  * Category.
@@ -61,7 +63,7 @@ class ProposalCategory
         if ($this->id) {
             return $this->getName();
         }
-
+        
         return 'New category';
     }
 
@@ -82,7 +84,7 @@ class ProposalCategory
     {
         return $this->name;
     }
-
+    
     public function setName(string $name)
     {
         $this->name = $name;
@@ -111,7 +113,6 @@ class ProposalCategory
      * Add proposal.
      *
      * @param Proposal $proposal
-     *
      * @return $this
      */
     public function addProposal(Proposal $proposal)
@@ -127,13 +128,11 @@ class ProposalCategory
      * Remove proposal.
      *
      * @param Proposal $proposal
-     *
      * @return $this
      */
     public function removeProposal(Proposal $proposal)
     {
         $this->proposals->removeElement($proposal);
-
         return $this;
     }
 }

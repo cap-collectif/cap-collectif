@@ -89,9 +89,9 @@ const NavbarRight = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    features: state.default.features,
-    user: state.default.user,
+    features: state.features,
+    user: state.user,
   };
 };
 
-export default connect(mapStateToProps)(NavbarRight);
+export default connect(mapStateToProps, null, null, { withRef: true })(NavbarRight);
