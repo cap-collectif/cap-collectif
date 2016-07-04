@@ -740,9 +740,7 @@ class Event implements CommentableInterface, IndexableInterface
 
     public function isFuture()
     {
-        $now = new \DateTime();
-
-        return $this->startAt > $now;
+        return $this->startAt > new \DateTime();
     }
 
     // ************************** Lifecycle **************************************
