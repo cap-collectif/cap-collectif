@@ -16,7 +16,7 @@ Feature: Opinions Links
 
           "versions_count": @integer@,
           "sources_count": @integer@,
-          "arguments_count": @integer@,
+          "argumentsCount": @integer@,
           "connections_count": @integer@,
           "votes_total": @integer@,
           "votes_nok": @integer@,
@@ -32,7 +32,6 @@ Feature: Opinions Links
 
           "_links": {
             "show": @string@,
-            "edit": @string@,
             "report": @string@,
             "type": @string@
           }

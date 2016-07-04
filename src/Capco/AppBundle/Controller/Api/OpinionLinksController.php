@@ -46,7 +46,11 @@ class OpinionLinksController extends FOSRestController
      * )
      *
      * @Post("/opinions/{id}/links")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
+     * @ParamConverter("opinion", options={
+     *  "mapping": {"id": "id"},
+     *  "repository_method": "getOne",
+     *  "map_method_signature" = true
+     * })
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */
@@ -60,20 +64,12 @@ class OpinionLinksController extends FOSRestController
             throw new BadRequestHttpException('This step is not contribuable.');
         }
 
-        if ($type->getConsultationStepType() != $step->getConsultationStepType()) {
-            throw new BadRequestHttpException('Not linked to this opinionType.');
-        }
-
         if (!$type->getIsEnabled()) {
             throw new BadRequestHttpException('This opinion type is not enabled.');
         }
 
         if (!$type->isLinkable()) {
             throw new BadRequestHttpException('This opinion type is not linkable.');
-        }
-
-        if ($opinion->getOpinionType() != $type) {
-            throw new BadRequestHttpException('Not linked to this opinionType.');
         }
 
         $link = (new Opinion())

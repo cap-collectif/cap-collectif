@@ -298,45 +298,4 @@ Feature: Opinions
     When I send a DELETE request to "/api/opinions/57/votes"
     Then the JSON response status code should be 204
 
-### Links
-
-    Scenario: API client wants to list links of an opinion
-    When I send a GET request to "/api/opinions/60/links"
-    Then the JSON response should match:
-    """
-    {
-      "links": [
-        {
-          "id": @integer@,
-          "title": @string@,
-
-          "created_at": "@string@.isDateTime()",
-          "updated_at": "@string@.isDateTime()",
-
-          "versions_count": @integer@,
-          "sources_count": @integer@,
-          "argumentsCount": @integer@,
-          "connections_count": @integer@,
-          "votes_total": @integer@,
-          "votes_nok": @integer@,
-          "votes_ok": @integer@,
-          "votes_mitige": @integer@,
-
-          "author": @...@,
-
-          "type": @...@,
-
-          "user_vote": @null@,
-          "has_user_reported": @boolean@,
-
-          "_links": {
-            "show": @string@,
-            "edit": @string@,
-            "report": @string@,
-            "type": @string@
-          }
-        },
-        @...@
-      ]
-    }
-    """
+    
