@@ -5,15 +5,11 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersionVote;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Capco\AppBundle\Form\OpinionVersionType;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -81,90 +77,6 @@ class OpinionsController extends FOSRestController
             'opinionTerm' => $project->getOpinionTerm(),
         ];
     }
-
-
-    /**
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Create an opinion.",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    404 = "Returned when opinion not found",
-     *  }
-     * )
-     *
-     * @Post("/projects/{projectId}/steps/{stepId}/opinion_types/{typeId}/opinions")
-     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
-     * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
-     * @ParamConverter("type", options={"mapping": {"typeId": "id"}})
-     * @Security("has_role('ROLE_USER')")
-     * @View(statusCode=201, serializerGroups={})
-     */
-     public function postOpinionAction(Request $request, Project $project, ConsultationStep $step, OpinionType $type)
-     {
-        if (!$step->canContribute()) {
-          throw new BadRequestHttpException('This step is not contribuable.');
-        }
-
-        if (!$type->getIsEnabled()) {
-          throw new BadRequestHttpException('This opinionType is not enabled.');
-        }
-
-        $opinion = (new Opinion())
-          ->setAuthor($this->getUser())
-          ->setStep($step)
-          ->setIsEnabled(true)
-          ->setOpinionType($type)
-          ;
-
-          $form = $this->createForm('opinion', $opinion);
-          $form->submit($request->request->all(), false);
-
-          if (!$form->isValid()) {
-            return $form;
-          }
-
-          $em = $this->get('doctrine.orm.entity_manager');
-          $em->persist($opinion);
-          $em->flush();
-
-          return $opinion;
-    }
-
-    /**
-    * @Put("/opinions/{id}")
-    * @ParamConverter("opinion", options={
-    *  "mapping": {"id": "id"},
-    *  "repository_method": "getOne",
-    *  "map_method_signature" = true
-    * })
-    * @Security("has_role('ROLE_USER')")
-    * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
-    */
-   public function putOpinionAction(Request $request, Opinion $opinion)
-   {
-       if ($this->getUser() !== $opinion->getAuthor()) {
-           throw new AccessDeniedHttpException();
-       }
-
-       if (!$opinion->canContribute()) {
-           throw new BadRequestHttpException('Uncontribuable opinion.');
-       }
-
-       $form = $this->createForm('opinion', $opinion);
-       $form->submit($request->request->all(), false);
-
-       if (!$form->isValid()) {
-           return $form;
-       }
-
-       $opinion->resetVotes();
-       $opinion->setValidated(false);
-       $this->get('doctrine.orm.entity_manager')->flush();
-
-       return $opinion;
-   }
-
 
     /**
      * Delete an opinion.
@@ -747,5 +659,35 @@ class OpinionsController extends FOSRestController
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+    }
+
+    /**
+     * Get all links of an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get all links of an opinion",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when opinion not found",
+     *  }
+     * )
+     *
+     * @Get("/opinions/{id}/links")
+     * @ParamConverter("opinion", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature" = true})
+     * @QueryParam(name="filter", requirements="(old|last)", default="last")
+     * @View(statusCode=200, serializerGroups={"OpinionLinkPreviews", "UsersInfos", "OpinionTypeDetails"})
+     */
+    public function cgetOpinionLinksAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
+    {
+        $filter = $paramFetcher->get('filter');
+
+        if (!$opinion) {
+            throw $this->createNotFoundException('The opinion does not exist');
+        }
+
+        return [
+            'links' => $opinion->getConnections($filter),
+        ];
     }
 }

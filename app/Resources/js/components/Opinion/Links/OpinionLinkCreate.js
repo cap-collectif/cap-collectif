@@ -4,7 +4,7 @@ import OpinionLinkCreateButton from './OpinionLinkCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import OpinionLinkCreateInfos from './OpinionLinkCreateInfos';
-import OpinionLinkCreateForm from './../Form/OpinionLinkCreateForm';
+import OpinionForm from './../Form/OpinionForm';
 import OpinionTypeActions from '../../../actions/OpinionTypeActions';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
 import { Modal } from 'react-bootstrap';
@@ -36,10 +36,7 @@ const OpinionLinkCreate = React.createClass({
   },
 
   handleSubmit() {
-    if (this.form.form.valid) {
-      this.form.form.submit();
-      this.setState({ isSubmitting: true });
-    }
+    this.setState({ isSubmitting: true });
   },
 
   close() {
@@ -78,20 +75,22 @@ const OpinionLinkCreate = React.createClass({
           </Modal.Header>
           <Modal.Body>
             <OpinionLinkCreateInfos opinion={this.props.opinion} />
-            <OpinionLinkCreateForm
-              ref={c => this.form = c}
+            <OpinionForm
+              action="create"
               opinion={this.props.opinion}
               availableTypes={this.state.availableTypes}
-              onFailure={this.handleFailure}
-              onSubmitSuccess={this.handleSubmitSuccess}
+              isSubmitting={this.state.isSubmitting}
+              onValidationFailure={this.handleFailure.bind(null, this)}
+              onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
+              onSubmitFailure={this.handleFailure.bind(null, this)}
             />
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={this.close} />
+            <CloseButton onClose={this.close.bind(null, this)} />
             <SubmitButton
               id="confirm-opinion-link-create"
               isSubmitting={this.state.isSubmitting}
-              onSubmit={this.handleSubmit}
+              onSubmit={this.handleSubmit.bind(null, this)}
             />
           </Modal.Footer>
         </Modal>

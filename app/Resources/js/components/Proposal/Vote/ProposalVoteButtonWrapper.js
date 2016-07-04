@@ -77,8 +77,8 @@ const ProposalVoteButtonWrapper = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    user: state.default.user,
-    features: state.default.features,
+    user: state.user,
+    features: state.features,
   };
 };
 
