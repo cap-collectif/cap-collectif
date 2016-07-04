@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import OpinionVersionForm from './OpinionVersionForm';
 import OpinionReportButton from './OpinionReportButton';
-import { ButtonToolbar, Button } from 'react-bootstrap';
+import { ButtonToolbar } from 'react-bootstrap';
 import OpinionDelete from './Delete/OpinionDelete';
+import OpinionEditButton from './OpinionEditButton';
 
 const OpinionButtons = React.createClass({
   propTypes: {
@@ -51,9 +52,10 @@ const OpinionButtons = React.createClass({
         );
       }
       return (
-        <Button className="opinion__action--edit pull-right btn--outline btn-dark-gray" href={this.props.opinion._links.edit}>
-          <i className="cap cap-pencil-1"></i> {this.getIntlMessage('global.edit')}
-        </Button>
+        <OpinionEditButton
+            className="opinion__action--edit pull-right btn--outline btn-dark-gray"
+            opinion={this.props.opinion}
+        />
       );
     }
   },
@@ -79,8 +81,8 @@ const OpinionButtons = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    features: state.features,
-    user: state.user,
+    features: state.default.features,
+    user: state.default.user,
   };
 };
 

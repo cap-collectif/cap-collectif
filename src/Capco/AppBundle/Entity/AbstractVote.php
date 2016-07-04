@@ -13,7 +13,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  * Class AbstractVote.
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractVoteRepository")
-* @ORM\Table(name="votes",indexes={})
+ * @ORM\Table(name="votes",indexes={})
  * @ORM\HasLifecycleCallbacks()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "voteType", type = "string")

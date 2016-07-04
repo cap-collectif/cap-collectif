@@ -9,7 +9,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Entity\ProposalCategory;
 
 /**
  * ProposalForm.
@@ -102,25 +101,25 @@ class ProposalForm
     private $categoryHelpText;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="using_themes", type="boolean")
      */
     private $usingThemes = false;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="theme_mandatory", type="boolean")
      */
     private $themeMandatory = false;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="using_categories", type="boolean")
      */
     private $usingCategories = false;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="category_mandatory", type="boolean")
      */
     private $categoryMandatory = false;
@@ -408,7 +407,7 @@ class ProposalForm
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isUsingThemes()
     {
@@ -416,7 +415,8 @@ class ProposalForm
     }
 
     /**
-     * @param boolean $usingThemes
+     * @param bool $usingThemes
+     *
      * @return $this
      */
     public function setUsingThemes($usingThemes)
@@ -427,7 +427,7 @@ class ProposalForm
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isThemeMandatory()
     {
@@ -435,7 +435,8 @@ class ProposalForm
     }
 
     /**
-     * @param boolean $themeMandatory
+     * @param bool $themeMandatory
+     *
      * @return $this
      */
     public function setThemeMandatory($themeMandatory)
@@ -446,7 +447,7 @@ class ProposalForm
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isUsingCategories()
     {
@@ -454,7 +455,8 @@ class ProposalForm
     }
 
     /**
-     * @param boolean $usingCategories
+     * @param bool $usingCategories
+     *
      * @return $this
      */
     public function setUsingCategories($usingCategories)
@@ -465,7 +467,7 @@ class ProposalForm
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isCategoryMandatory()
     {
@@ -473,7 +475,8 @@ class ProposalForm
     }
 
     /**
-     * @param boolean $categoryMandatory
+     * @param bool $categoryMandatory
+     *
      * @return $this
      */
     public function setCategoryMandatory($categoryMandatory)
@@ -493,6 +496,7 @@ class ProposalForm
 
     /**
      * @param string $categoryHelpText
+     *
      * @return $this
      */
     public function setCategoryHelpText($categoryHelpText)

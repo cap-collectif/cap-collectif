@@ -85,7 +85,7 @@ export const EmailNotConfirmedAlert = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
+    user: state.default.user,
   };
 };
 
