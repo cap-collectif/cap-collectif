@@ -20,11 +20,11 @@ const OpinionLinkCreateForm = React.createClass({
   },
 
   submit() {
-    this.form.submit();
+    this.form.form.submit();
   },
 
   isValid() {
-    return this.form.valid;
+    return this.form.form.valid;
   },
 
   handleSubmit(data) {

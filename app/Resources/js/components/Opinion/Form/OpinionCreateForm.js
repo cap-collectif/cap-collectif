@@ -29,7 +29,7 @@ const OpinionCreateForm = React.createClass({
         .post(`/projects/${projectId}/steps/${stepId}/opinion_types/${opinionType.id}/opinions`, form)
         .then(json)
         .then((opinion) => {
-          this.form.reset();
+          this.form.form.reset();
           onSubmitSuccess();
           window.location.href = opinion._links.show;
         })
@@ -38,17 +38,18 @@ const OpinionCreateForm = React.createClass({
   },
 
   submit() {
-    this.form.submit();
+    this.form.form.submit();
   },
 
   isValid() {
-    return this.form.valid;
+    return this.form.form.valid;
   },
 
   render() {
-    if (!this.props.opinionType) return;
-    const dynamicsField = this.props.opinionType.appendixTypes.map((type) => {
-      return { name: type.title, type: 'editor' };
+    const { opinionType, onFailure } = this.props;
+    if (!opinionType) return;
+    const dynamicsField = opinionType.appendixTypes.map((type) => {
+      return { name: type.title, label: type.title, type: 'editor', id: 'appendix_' + type.id };
     });
     return (
       <OpinionForm
@@ -56,12 +57,12 @@ const OpinionCreateForm = React.createClass({
         validate={defaultValidation}
         ref={c => this.form = c}
         onSubmit={this.handleSubmit}
-        onSubmitFail={this.props.onFailure}
+        onSubmitFail={onFailure}
         fields={[
-          { name: 'title', type: 'text', id: 'opinion_title' },
-          { name: 'body', type: 'editor', id: 'opinion_body' },
+          { name: 'title', label: 'title', type: 'text', id: 'opinion_title' },
+          { name: 'body', label: 'body', type: 'editor', id: 'opinion_body' },
         ].concat(dynamicsField)
-      }
+        }
       />
     );
   },

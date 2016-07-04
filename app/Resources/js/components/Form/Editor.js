@@ -58,7 +58,7 @@ const Editor = React.createClass({
       this._editor.getModule('keyboard').removeHotkeys(9);
 
       if (this.props.valueLink) {
-        console.log('This is deprecated please use redux-form instead of valueLink.'); // eslint-disable-line no-console
+        console.warn('This is deprecated please use redux-form instead of valueLink.'); // eslint-disable-line no-console
         const defaultValue = this.props.valueLink.value;
         if (defaultValue) {
           this._editor.setHTML(defaultValue);

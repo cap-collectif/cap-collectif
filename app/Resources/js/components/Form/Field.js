@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import Input from './Input';
 
-const Field = React.createClass({
+export const Field = React.createClass({
   propTypes: {
     type: PropTypes.oneOf(['text', 'editor', 'select', 'checkbox']).isRequired,
     label: PropTypes.string.isRequired,

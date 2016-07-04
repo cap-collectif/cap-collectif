@@ -54,11 +54,11 @@ const OpinionEditForm = React.createClass({
   },
 
   submit() {
-    this.form.submit();
+    this.form.form.submit();
   },
 
   isValid() {
-    return this.form.valid;
+    return this.form.form.valid;
   },
 
   render() {
@@ -75,9 +75,9 @@ const OpinionEditForm = React.createClass({
         onSubmit={this.handleSubmit}
         onSubmitFail={onFailure}
         fields={[
-          { name: 'check', type: 'checkbox', id: 'opinion_check', divClassName: 'alert alert-warning edit-confirm-alert' },
-          { name: 'title', type: 'text', id: 'opinion_title' },
-          { name: 'body', type: 'editor', id: 'opinion_body' },
+          { name: 'check', label: 'check', type: 'checkbox', id: 'opinion_check', divClassName: 'alert alert-warning edit-confirm-alert' },
+          { name: 'title', label: 'name', type: 'text', id: 'opinion_title' },
+          { name: 'body', label: 'body', type: 'editor', id: 'opinion_body' },
         ].concat(opinion.appendices.map((a, i) => { return { name: a.type.title, type: 'editor', id: 'opinion_appendix-' + (i + 1) }; }))
       }
       initialValues={$.extend(
