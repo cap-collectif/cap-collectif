@@ -7,10 +7,7 @@ import QuillToolbar from './QuillToolbar';
 
 const Editor = React.createClass({
   propTypes: {
-    valueLink: PropTypes.object, // deprecated way
-    value: PropTypes.any, // redux-form
-    onChange: PropTypes.func, // redux-form
-    onBlur: PropTypes.func, // redux-form
+    valueLink: PropTypes.object.isRequired,
     id: PropTypes.string,
     className: PropTypes.string,
     disabled: PropTypes.bool,
@@ -55,31 +52,14 @@ const Editor = React.createClass({
         styles: false,
         theme: 'snow',
       });
-      this._editor.getModule('keyboard').removeHotkeys(9);
 
-      if (this.props.valueLink) {
-        console.warn('This is deprecated please use redux-form instead of valueLink.'); // eslint-disable-line no-console
-        const defaultValue = this.props.valueLink.value;
-        if (defaultValue) {
-          this._editor.setHTML(defaultValue);
-        }
-        this._editor.on('text-change', () => {
-          this.props.valueLink.requestChange(this._editor.getHTML());
-        });
-      } else {
-        const defaultValue = this.props.value;
-        if (defaultValue) {
-          this._editor.setHTML(defaultValue);
-        }
-        this._editor.on('selection-change', (range) => {
-          if (!range) {
-            this.props.onBlur(this._editor.getHTML());
-          }
-        });
-        this._editor.on('text-change', () => {
-          this.props.onChange(this._editor.getHTML());
-        });
+      const defaultValue = this.props.valueLink.value;
+      if (defaultValue) {
+        this._editor.setHTML(defaultValue);
       }
+      this._editor.on('text-change', () => {
+        this.props.valueLink.requestChange(this._editor.getHTML());
+      });
     }
   },
 

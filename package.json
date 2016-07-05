@@ -76,7 +76,6 @@
     "react-router-bootstrap": "^0.20.1",
     "readmore": "0.0.2",
     "redux": "^3.4.0",
-    "redux-form": "^6.0.0-rc.2",
     "sass-brunch": "^2.6.2",
     "sinon": "^1.17.3",
     "uglify-js-brunch": "^2.0.1",

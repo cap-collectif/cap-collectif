@@ -74,7 +74,7 @@ class Category
         if ($this->id) {
             return $this->getTitle();
         }
-
+        
         return 'New category';
     }
 

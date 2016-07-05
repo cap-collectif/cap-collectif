@@ -128,7 +128,7 @@ export const IdeasListFilters = React.createClass({
 });
 
 const mapStateToProps = (state) => {
-  return { features: state.default.features };
+  return { features: state.features };
 };
 
 export default connect(mapStateToProps)(IdeasListFilters);

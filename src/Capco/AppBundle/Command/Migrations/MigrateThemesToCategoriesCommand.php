@@ -88,8 +88,9 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
         $form->setCategoryMandatory(true);
         $em->flush();
 
-        $output->writeln('Migration executed, '.$count.' categories created.');
+        $output->writeln('Migration executed, ' . $count . ' categories created.');
 
         return 0;
+
     }
 }

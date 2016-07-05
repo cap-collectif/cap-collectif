@@ -47,6 +47,12 @@
 
 .media--user-thumbnail {
 
+  .media--macro__user {
+    line-height: 20px;
+    margin-bottom: 0;
+    height: 40px;
+  }
+
   .media-heading {
     padding-top: 0;
     height: 22px;
@@ -56,9 +62,5 @@
   .media-body {
     height: auto;
     word-break: break-word;
-  }
-
-  .media--aligned {
-    margin-bottom: 0;
   }
 }

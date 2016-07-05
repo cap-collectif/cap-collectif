@@ -210,7 +210,7 @@ class Event implements CommentableInterface, IndexableInterface
 
     public function isIndexable()
     {
-        return $this->getIsEnabled();
+      return $this->getIsEnabled();
     }
 
     /**
@@ -740,7 +740,9 @@ class Event implements CommentableInterface, IndexableInterface
 
     public function isFuture()
     {
-        return $this->startAt > new \DateTime();
+        $now = new \DateTime();
+
+        return $this->startAt > $now;
     }
 
     // ************************** Lifecycle **************************************
