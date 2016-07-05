@@ -15,6 +15,7 @@ use Capco\AppBundle\Model\IndexableInterface;
  */
 class ConsultationStep extends AbstractStep implements IndexableInterface
 {
+
     public function isIndexable()
     {
         return $this->getIsEnabled();

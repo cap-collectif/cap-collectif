@@ -147,13 +147,11 @@
     "back": "Retour",
     "cancel": "Annuler",
     "change": "Changer",
-    "create": "Créer",
     "close": "Fermer",
     "comment": "Commentaire",
     "comments": "{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}",
     "constraints": {
-      "notBlank": "Cette valeur ne doit pas \u00eatre vide.",
-      "check": "Veuillez cocher cette case."
+      "notBlank": "Cette valeur ne doit pas \u00eatre vide."
     },
     "continue": "Continuer",
     "content": "Contenu",
@@ -230,6 +228,9 @@
     },
     "more": "Voir plus",
     "name": "Nom ",
+    "navbar": {
+      "see_more": "Plus"
+    },
     "or": "OU",
     "password": "Mot de passe",
     "pinned": {
@@ -353,8 +354,6 @@
     "add_new_source": "Proposer une source",
     "add_new_version": "Proposer une modification",
     "add_new_version_infos": "Merci d'examiner les modifications existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !",
-    "add_new": "Proposer",
-    "add_new_infos": "Merci d'examiner les propositions en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !",
     "appendices": {
       "hide": "Masquer {title}.",
       "show": "Afficher {title}"
@@ -373,7 +372,6 @@
       "title": "Modification(s) propos\u00e9e(s)",
       "tooltip": "Voir les modifications"
     },
-    "edit_check": "En modifiant ma proposition, je comprends que les votes qui lui sont associés seront réinitialisés.",
     "header": {
       "article": "Article",
       "back": "Retour",

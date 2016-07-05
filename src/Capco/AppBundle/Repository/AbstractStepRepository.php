@@ -16,7 +16,7 @@ class AbstractStepRepository extends EntityRepository
      *
      * @return array
      */
-    public function getByProject($slug)
+    public function getByProjectSlug(string $slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('p', 'pas')
