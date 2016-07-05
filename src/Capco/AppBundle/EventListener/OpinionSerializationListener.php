@@ -105,12 +105,6 @@ class OpinionSerializationListener extends AbstractSerializationListener
                     'opinionTypeSlug' => $opinionType->getSlug(),
                     'opinionSlug' => $opinion->getSlug(),
                 ], true),
-                'edit' => $this->router->generate('app_project_edit_opinion', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                ], true),
                 'report' => $this->router->generate('app_report_opinion', [
                     'projectSlug' => $project->getSlug(),
                     'stepSlug' => $step->getSlug(),

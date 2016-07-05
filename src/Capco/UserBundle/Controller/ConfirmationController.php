@@ -38,9 +38,9 @@ class ConfirmationController extends Controller
         );
 
         if ($hasRepublishedContributions) {
-          $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed_with_republish');
+            $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed_with_republish');
         } else {
-          $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed');
+            $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed');
         }
 
         return $response;

@@ -17,8 +17,9 @@ class ContributionManager
         $republishedCount = 0;
         foreach ($user->getContributions() as $contribution) {
             $contribution->setExpired(false);
-            $republishedCount++;
+            ++$republishedCount;
         }
+
         return $republishedCount > 0;
     }
 
@@ -27,8 +28,9 @@ class ContributionManager
         $expiredCount = 0;
         foreach ($user->getContributions() as $contribution) {
             $contribution->setExpired(true);
-            $expiredCount++;
+            ++$expiredCount;
         }
+
         return $expiredCount > 0;
     }
 }

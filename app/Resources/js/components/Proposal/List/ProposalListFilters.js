@@ -166,7 +166,7 @@ export const ProposalListFilters = React.createClass({
 });
 
 const mapStateToProps = (state) => {
-  return { features: state.features };
+  return { features: state.default.features };
 };
 
 export default connect(mapStateToProps, null, null, { pure: false })(ProposalListFilters);
