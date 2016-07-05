@@ -5,7 +5,7 @@
   ],
   "env": {
     "test": {
-      "plugins": ["rewire", "transform-react-display-name"]
+      "plugins": ["rewire"]
     },
   }
 }
