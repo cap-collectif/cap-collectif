@@ -73,64 +73,54 @@
     }
   }
 
-  // CSS from bootstrap dropdown menu
-  .dropdown-menu > .nav-dropdown-section > li > a {
-    display: block;
-    padding: 3px 20px;
-    clear: both;
-    line-height: 1.42857;
-    color: #000000;
-    white-space: nowrap;
-  }
+  // Auto collapse (desktop or tablet view only)
 
-  .dropdown-menu > .nav-dropdown-section {
-    display: block;
-    border-bottom: 1px solid #ffffff;
-    border-top: 1px solid #ffffff;
-    padding-top: 9px;
-    padding-bottom: 9px;
-
-    &:first-child {
-      border-top: none;
-      padding-top: 0;
-    }
-
-    &:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-  }
-
-  .dropdown-menu > .nav-dropdown-section + .nav-dropdown-section {
-    border-top: none;
-  }
-
-  .dropdown-menu > .nav-dropdown-section + li {
-    margin-top: 9px;
-  }
-
-  .dropdown-menu > .nav-dropdown-section > .dropdown-header {
-    opacity: 0.5;
-    font-size: 14px;
-  }
-
-  .dropdown-menu > .nav-dropdown-section:first-child > li.divider:first-child,
-  .dropdown-menu > .nav-dropdown-section:last-child > li.divider:last-child {
-    display: none;
-  }
-
-
-  .dropdown-menu > .nav-dropdown-section > li > a:hover,
-  .dropdown-menu > .nav-dropdown-section > li > a:focus {
-    text-decoration: none;
-  }
-
-  #navbar-content li.navbar-dropdown-more {
+  #navbar-content li.hideshow {
     position: relative;
 
     ul {
       position: absolute;
-      left: 0;
+      left: 0px;
+    }
+
+    // Sub dropdown
+    li.dropdown {
+      position: relative;
+
+      .caret {
+        display: none;
+      }
+
+      & > .dropdown-menu {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+      }
+
+      &:hover > .dropdown-menu,
+      &:active > .dropdown-menu {
+        display: block;
+      }
+
+      & > a:after {
+        display: block;
+        content: "";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: $border-color;
+        margin-top: 5px;
+        margin-right: -10px;
+      }
+
+      &:hover > a:after {
+        border-left-color: $white;
+      }
     }
   }
 }

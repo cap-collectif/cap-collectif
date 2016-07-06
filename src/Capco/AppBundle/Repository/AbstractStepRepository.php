@@ -16,7 +16,7 @@ class AbstractStepRepository extends EntityRepository
      *
      * @return array
      */
-    public function getByProjectSlug(string $slug)
+    public function getByProject($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('p', 'pas')
@@ -24,7 +24,7 @@ class AbstractStepRepository extends EntityRepository
             ->leftJoin('pas.project', 'p')
             ->andWhere('p.slug = :project')
             ->setParameter('project', $slug)
-            ->addOrderBy('pas.position', 'ASC')
+            ->addOrderBy('pas.position', 'DESC')
         ;
 
         return $qb

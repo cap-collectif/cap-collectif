@@ -22,7 +22,7 @@ class ProjectHelper
 
     public function getAbstractSteps(Project $project)
     {
-        return $this->stepRepository->getByProjectSlug($project->getSlug());
+        return $this->stepRepository->getByProject($project->getSlug());
     }
 
     public function getPreviousSteps(AbstractStep $step)

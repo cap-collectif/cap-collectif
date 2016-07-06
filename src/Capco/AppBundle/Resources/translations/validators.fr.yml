@@ -64,6 +64,7 @@ synthesis:
 
 opinion:
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
+  wrong_appendices: Appendices must correspond to the opinion type.
 
 argument:
   votes_not_confirmed: Merci de confirmer la perte de vos votes pour continuer.
