@@ -192,7 +192,7 @@ class Source implements Contribution, VotableInterface, IsPublishableInterface
 
     public function isIndexable()
     {
-      return $this->getIsEnabled() && !$this->isExpired();
+        return $this->getIsEnabled() && !$this->isExpired();
     }
 
     /**

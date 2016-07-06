@@ -98,8 +98,8 @@ export const RegistrationModal = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    features: state.features,
-    parameters: state.parameters,
+    features: state.default.features,
+    parameters: state.default.parameters,
   };
 };
 

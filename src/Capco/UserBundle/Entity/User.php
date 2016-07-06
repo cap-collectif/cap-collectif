@@ -25,9 +25,10 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     ];
 
     // used as a lifecycleCallback
-    public function sanitizePhoneNumber() {
+    public function sanitizePhoneNumber()
+    {
         if ($this->phone) {
-          $this->phone = '+' . preg_replace('/[^0-9]/', '', $this->phone);
+            $this->phone = '+'.preg_replace('/[^0-9]/', '', $this->phone);
         }
     }
 
@@ -1125,7 +1126,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getContributions()
     {
-      $types = [
+        $types = [
         $this->getOpinions(),
         $this->getOpinionVersions(),
         $this->getVotes(),
@@ -1134,15 +1135,16 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->getArguments(),
         $this->getSources(),
         $this->getProposals(),
-        $this->getReplies()
+        $this->getReplies(),
       ];
-      $contributions = [];
-      foreach ($types as $type) {
-        foreach ($type as $contribution) {
-          $contributions[] = $contribution;
+        $contributions = [];
+        foreach ($types as $type) {
+            foreach ($type as $contribution) {
+                $contributions[] = $contribution;
+            }
         }
-      }
-      return $contributions;
+
+        return $contributions;
     }
 
     public function getContributionsCount()

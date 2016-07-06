@@ -50,14 +50,11 @@
             </div>
         {% endif %}
 
-        {{ react_intl_component('ShareButtonDropdownApp', {
-                'props': {
-                    'url': url('app_blog_show', {'slug': post.slug}),
-                    'title': post.title,
-                    'id': 'post-' ~ post.slug,
-                }
-            })
-        }}
+        {% include 'CapcoAppBundle:Block:share_button.html.twig' with {
+            'url': url('app_blog_show', {'slug': post.slug}),
+            'title': post.title,
+            'id': 'post-' ~ post.slug,
+        } only %}
 
     </div>
 
