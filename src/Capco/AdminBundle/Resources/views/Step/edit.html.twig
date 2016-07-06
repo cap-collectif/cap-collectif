@@ -1,0 +1,38 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block form %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            const voteTypeField = $("#{{ admin.uniqid }}_voteType");
+            const votesHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_votesHelpText");
+            const budgetField = $("#sonata-ba-field-container-{{ admin.uniqid }}_budget");
+
+            function toggleVotesHelpTextField(show) {
+                if (show) {
+                    votesHelpTextField.removeClass('hidden');
+                } else {
+                    votesHelpTextField.addClass('hidden');
+                }
+            }
+
+            function toggleBudgetField(show) {
+                if (show) {
+                    budgetField.removeClass('hidden');
+                } else {
+                    budgetField.addClass('hidden');
+                }
+            }
+
+            const initialValue = voteTypeField.val();
+            toggleVotesHelpTextField(initialValue === "1" || initialValue === "2");
+            toggleBudgetField(initialValue === "2");
+
+            voteTypeField.on('change', function(e) {
+                toggleVotesHelpTextField(e.target.value === "1" || e.target.value === "2");
+                toggleBudgetField(e.target.value === "2");
+            });
+        });
+    </script>
+{% endblock %}

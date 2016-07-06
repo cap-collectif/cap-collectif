@@ -16,7 +16,7 @@ class SelectionStepRepository extends AbstractStepRepository
             return $value->getId();
         }, $proposal->getSelectionSteps()->getValues());
 
-        $qb = $this->createQueryBuilder('ss');
+        $qb = $this->getEnabledQueryBuilder();
         $expr = $qb->expr();
         $qb->leftJoin('ss.projectAbstractStep', 'pas')
             ->where('ss.id in (:ids)')
@@ -30,7 +30,7 @@ class SelectionStepRepository extends AbstractStepRepository
 
     public function getVotableStepsForProject(Project $project, $asArray = false)
     {
-        $qb = $this->createQueryBuilder('ss');
+        $qb = $this->getEnabledQueryBuilder();
         $expr = $qb->expr();
         $qb
             ->leftJoin('ss.projectAbstractStep', 'pas')
@@ -43,5 +43,12 @@ class SelectionStepRepository extends AbstractStepRepository
         $query = $qb->getQuery();
 
         return $asArray ? $query->getArrayResult() : $query->getResult();
+    }
+
+    private function getEnabledQueryBuilder()
+    {
+        return $qb = $this->createQueryBuilder('ss')
+            ->where('ss.isEnabled = 1')
+        ;
     }
 }

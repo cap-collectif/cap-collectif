@@ -168,7 +168,7 @@ class Theme implements IndexableInterface
 
     public function isIndexable()
     {
-        return $this->getIsEnabled();
+       return $this->getIsEnabled();
     }
 
     /**
