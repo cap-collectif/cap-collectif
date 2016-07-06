@@ -54,7 +54,9 @@ const OpinionVotesBox = React.createClass({
     return (
       <div className="opinion__votes__box">
         {
-          helpText && <p className="h4" style={{ marginBottom: '0' }}>{helpText}</p>
+          helpText
+          ? <p className="h4" style={{ marginBottom: '0' }}>{helpText}</p>
+          : null
         }
         <Row>
           <Col sm={12} md={8} style={{ paddingTop: '15px' }}>

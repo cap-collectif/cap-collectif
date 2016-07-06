@@ -66,14 +66,15 @@ const OpinionPage = React.createClass({
     return (
       <div className="has-chart">
         <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
-        <Loader show={this.state.isLoading}>
-          {this.state.opinion
-            && <OpinionBox {...this.props} rankingThreshold={this.state.rankingThreshold} opinionTerm={this.state.opinionTerm} opinion={this.state.opinion} />
-          }
-          {this.state.opinion
-            && <OpinionTabs {...this.props} opinion={this.state.opinion} />
-          }
-        </Loader>
+        <Loader show={this.state.isLoading} />
+        {!this.state.isLoading && this.state.opinion
+          ? <OpinionBox {...this.props} rankingThreshold={this.state.rankingThreshold} opinionTerm={this.state.opinionTerm} opinion={this.state.opinion} />
+          : null
+        }
+        {!this.state.isLoading && this.state.opinion
+          ? <OpinionTabs {...this.props} opinion={this.state.opinion} />
+          : null
+        }
       </div>
     );
   },

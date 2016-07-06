@@ -11,8 +11,9 @@ Feature: Opinions
     And I fill in the following:
       | opinion_title | Titre                           |
       | opinion_body  | Description de ma proposition   |
-    And I press "Publier"
-    Then I should see "Merci ! Votre proposition a bien été enregistrée."
+    And I press "confirm-opinion-create"
+    Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes-1/titre"
+    # Then I should see "Merci ! Votre proposition a bien été enregistrée."
 
   @javascript @security
   Scenario: Can not create an opinion of non-contribuable type
@@ -63,7 +64,7 @@ Feature: Opinions
       | opinionSlug      | opinion-3                        |
     And I wait 1 seconds
     And I should see "1 vote" in the ".opinion__votes" element
-    When I follow "Modifier"
+    When I press "Modifier"
     And I wait 1 seconds
     And I fill in the following:
       | opinion_body | Je modifie ma proposition !   |
@@ -102,16 +103,17 @@ Feature: Opinions
     Then I should see "0 proposition liée"
     When I go on the connections tab
     And I press "Ajouter une proposition liée"
-    And I wait 2 seconds
-    And I select "Section 1" from "opinion_type"
+    And I wait 1 seconds
+    And I select "Section 1" from "opinionType"
     And I fill in the following:
       | opinion_title      | Titre                           |
       | opinion_body       | Description de ma proposition   |
       | opinion_appendix-1 | Exposay                         |
     And I press "confirm-opinion-link-create"
-    And I wait 2 seconds
-    Then I should see "1 proposition liée"
-    And I should see "Titre" in the "#links-list" element
+    Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/section-1-ouverture-des-donnees-publiques/titre"
+    And I should see "1 proposition liée"
+    And I go on the connections tab
+    And I should see "Article 1" in the "#links-list" element
 
   @javascript
   Scenario: Anonymous user wants to see all votes of an opinion
@@ -123,8 +125,8 @@ Feature: Opinions
   Scenario: Anonymous user wants to share an opinion
     Given I go to an opinion with versions
     When I click the share opinion button
-    Then I should see the opinion share dropdown
-    And I click the opinion share link button
+    Then I should see the share dropdown
+    And I click the share link button
     Then I should see the share link modal
 
   @javascript

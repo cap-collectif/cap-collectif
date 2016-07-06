@@ -333,7 +333,7 @@ admin:
       color: Couleur
       created_at: Création
       comment_system: Type de commentaire
-      default_filter: Tri par défaut
+      default_filter: Filtre par défaut
       group_info: Catégorie
       group_options: Options
       group_votes: Votes
@@ -655,7 +655,6 @@ admin:
       group_general: Général
       group_form: Formulaire
       group_statuses: Statuts
-      group_votes: Votes
       is_enabled: Publié
       nb_opinions_to_display: Nombre de propositions dans l'aperçu du classement
       nb_versions_to_display: Nombre de modifications dans l'aperçu du classement

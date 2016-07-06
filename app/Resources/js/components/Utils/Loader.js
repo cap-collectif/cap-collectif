@@ -1,13 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
 
 const Loader = React.createClass({
   propTypes: {
-    show: PropTypes.bool,
-    children: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.arrayOf(PropTypes.node),
-    ]),
+    show: React.PropTypes.bool,
+    children: React.PropTypes.node,
   },
   mixins: [IntlMixin],
 
@@ -19,8 +16,7 @@ const Loader = React.createClass({
   },
 
   render() {
-    const { children, show } = this.props;
-    if (show) {
+    if (this.props.show) {
       return (
         <div className="row">
           <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
@@ -29,10 +25,7 @@ const Loader = React.createClass({
         </div>
       );
     }
-    return Array.isArray(children)
-      ? <div>{children}</div>
-      : children
-    ;
+    return this.props.children;
   },
 
 });

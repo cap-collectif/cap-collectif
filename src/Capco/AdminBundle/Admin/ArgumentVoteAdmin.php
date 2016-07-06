@@ -73,8 +73,8 @@ class ArgumentVoteAdmin extends Admin
                 'label' => 'admin.global.expired',
                 'read_only' => true,
                 'attr' => [
-                  'disabled' => true
-                ]
+                  'disabled' => true,
+                ],
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.argument_vote.created_at',
