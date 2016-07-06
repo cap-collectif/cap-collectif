@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class AppendicesCorrespondToOpinionType extends Constraint
 {
-    public $message = 'Appendices must correspond to the opinion type.';
+    public $message = 'opinion.wrong_appendices';
 
     public function validatedBy()
     {

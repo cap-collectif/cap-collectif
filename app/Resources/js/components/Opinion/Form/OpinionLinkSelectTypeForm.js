@@ -25,7 +25,7 @@ export const OpinionLinkSelectTypeForm = React.createClass({
       <form>
         <ReduxFormField
           autoFocus
-          label={'Type'}
+          label={this.getIntlMessage('opinion.link.select_type')}
           name={'opinionType'}
           type={'select'}
           component={Field}

@@ -391,6 +391,7 @@
         "title": "Quel est l'objet de votre proposition ?",
         "type": "Quel est le type de votre proposition ?"
       },
+      "select_type": "Type",
       "info": "Votre proposition sera li\u00e9e \u00e0 :",
       "infos": "Merci d'examiner les propositions existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !",
       "type": "Type de proposition*"

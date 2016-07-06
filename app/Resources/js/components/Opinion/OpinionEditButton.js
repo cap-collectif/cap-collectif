@@ -27,7 +27,7 @@ const OpinionEditButton = React.createClass({
     const { opinion } = this.props;
     return (
       <span>
-        <Button onClick={this.openModal}>
+        <Button className="opinion__action--edit pull-right btn--outline btn-dark-gray" onClick={this.openModal}>
           <i className="cap cap-pencil-1"></i> {this.getIntlMessage('global.edit')}
         </Button>
         { ' ' }

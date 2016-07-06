@@ -10,6 +10,7 @@ const NewOpinionButton = React.createClass({
     opinionTypeId: PropTypes.number.isRequired,
     stepId: PropTypes.number.isRequired,
     projectId: PropTypes.number.isRequired,
+    label: PropTypes.string.isRequired,
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
@@ -36,7 +37,7 @@ const NewOpinionButton = React.createClass({
   },
 
   render() {
-    const { user, features, opinionTypeSlug, opinionTypeId, projectId, stepId } = this.props;
+    const { label, user, features, opinionTypeSlug, opinionTypeId, projectId, stepId } = this.props;
     return (
       <span>
       <LoginOverlay user={user} features={features}>
@@ -46,7 +47,7 @@ const NewOpinionButton = React.createClass({
           className="btn btn-primary"
         >
           <i className="cap cap-add-1" />
-          <span className="hidden-xs">Creation</span>
+          <span className="hidden-xs">{label}</span>
         </a>
       </LoginOverlay>
       <OpinionCreateModal
