@@ -24,7 +24,7 @@ class AbstractStepRepository extends EntityRepository
             ->leftJoin('pas.project', 'p')
             ->andWhere('p.slug = :project')
             ->setParameter('project', $slug)
-            ->addOrderBy('pas.position', 'DESC')
+            ->addOrderBy('pas.position', 'ASC')
         ;
 
         return $qb
