@@ -254,7 +254,7 @@ const CommentForm = React.createClass({
 });
 
 const mapStateToProps = (state) => {
-  return { user: state.default.user };
+  return { user: state.user };
 };
 
 export default connect(mapStateToProps)(CommentForm);

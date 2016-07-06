@@ -90,8 +90,8 @@ class IdeaVoteAdmin extends Admin
                 'label' => 'admin.global.expired',
                 'read_only' => true,
                 'attr' => [
-                  'disabled' => true,
-                ],
+                  'disabled' => true
+                ]
             ])
             ->add('createdAt', null, [
                     'label' => 'admin.fields.idea_vote.created_at',

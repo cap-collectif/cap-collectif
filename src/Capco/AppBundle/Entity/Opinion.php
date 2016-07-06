@@ -10,7 +10,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
@@ -27,7 +26,6 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  * @ORM\Table(name="opinion",indexes={@ORM\Index(name="idx_enabled", columns={"id", "enabled"})})
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  * @ORM\HasLifecycleCallbacks()
- * @CapcoAssert\AppendicesCorrespondToOpinionType()
  */
 class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, IsPublishableInterface
 {
@@ -380,7 +378,7 @@ class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, 
     /**
      * @param mixed $OpinionType
      */
-    public function setOpinionType(OpinionType $OpinionType)
+    public function setOpinionType($OpinionType)
     {
         $this->OpinionType = $OpinionType;
 
@@ -570,7 +568,7 @@ class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, 
         return $this->appendices;
     }
 
-    public function setAppendices(ArrayCollection $appendices)
+    public function setAppendices($appendices)
     {
         $this->appendices = $appendices;
 

@@ -40,7 +40,7 @@ const UserPreview = React.createClass({
       <div className={classNames(classes)} style={this.props.style}>
         <UserAvatar user={user} className="pull-left" />
         <div className="media-body">
-          <p className="media--aligned media--macro__user  small">
+          <p className="media--macro__user  small">
             {
               user
               ? <UserLink user={user} />
