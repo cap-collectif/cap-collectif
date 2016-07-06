@@ -313,10 +313,12 @@ class ProjectController extends Controller
     {
         $em = $this->getDoctrine();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOneBySlugWithStepsAndEventsAndPosts($projectSlug);
+        $projectSteps = $em->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
 
         return [
             'project' => $project,
             'currentStep' => $currentStepSlug,
+            'projectSteps' => $projectSteps,
         ];
     }
 

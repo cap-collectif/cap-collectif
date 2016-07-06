@@ -290,9 +290,9 @@ export const RegistrationForm = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    features: state.default.features,
-    user_types: state.default.user_types,
-    parameters: state.default.parameters,
+    features: state.features,
+    user_types: state.user_types,
+    parameters: state.parameters,
   };
 };
 
