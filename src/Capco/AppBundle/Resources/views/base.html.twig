@@ -43,7 +43,11 @@
 
         $(window).on('load', function() {
             App.externalLinks();
+            App.navbarAutocollapse("{{ 'global.menu.see_more' | trans({}, 'CapcoAppBundle') }}");
             App.skipLinks();
+        });
+        $(window).on('resize', function() {
+            App.navbarAutocollapse("{{ 'global.menu.see_more' | trans({}, 'CapcoAppBundle') }}");
         });
         $(function () {
           $('[data-toggle="tooltip"]').tooltip();

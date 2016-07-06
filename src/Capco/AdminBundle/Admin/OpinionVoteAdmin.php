@@ -98,8 +98,8 @@ class OpinionVoteAdmin extends Admin
                 'label' => 'admin.global.expired',
                 'read_only' => true,
                 'attr' => [
-                  'disabled' => true
-                ]
+                  'disabled' => true,
+                ],
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.opinion_vote.updated_at',

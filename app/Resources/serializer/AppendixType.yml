@@ -4,6 +4,7 @@ Capco\AppBundle\Entity\AppendixType:
         id:
             expose: true
             type: integer
+            groups: [Opinions, OpinionVersions]
         title:
             expose: true
             type: string

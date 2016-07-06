@@ -26,12 +26,12 @@ class ProjectHelperSpec extends ObjectBehavior
       $step->getProject()->willReturn($project);
       $step->getPosition()->willReturn(10);
 
-      $stepRepo->getByProjectSlug('project-1')->willReturn([$step]);
+      $stepRepo->getByProject('project-1')->willReturn([$step]);
       $this->getPreviousSteps($step)->shouldReturn([]);
 
       $stepA->getPosition()->willReturn(1);
       $stepB->getPosition()->willReturn(2);
-      $stepRepo->getByProjectSlug('project-1')->willReturn([$stepA, $stepB, $step]);
+      $stepRepo->getByProject('project-1')->willReturn([$stepA, $stepB, $step]);
       $this->getPreviousSteps($step)->shouldReturn([$stepA, $stepB]);
 
       $stepA->getPosition()->willReturn(1);

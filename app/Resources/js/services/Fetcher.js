@@ -13,7 +13,7 @@ const status = (response) => {
   });
 };
 
-const json = (response) => response ? response.json() : {};
+export const json = (response) => response ? response.json() : {};
 
 const createHeaders = () => {
   const headers = {
