@@ -25,7 +25,7 @@ export const Field = React.createClass({
 
   render() {
     const { disableValidation, touched, error, label, placeholder, type, name, divClassName } = this.props;
-    const check = !!(touched && !disableValidation);
+    const check = touched && !disableValidation;
     const input = (
       <Input
         type={type}

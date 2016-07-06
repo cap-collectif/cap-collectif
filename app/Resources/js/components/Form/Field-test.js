@@ -64,4 +64,11 @@ describe('<Field />', () => {
     expect(wrapper.prop('bsStyle')).to.be.null;
     expect(wrapper.prop('hasFeedback')).to.be.false;
   });
+
+  it('renders a div around <Input /> element', () => {
+    const wrapper = shallow(<Field {...defaultProps} divClassName="myclassName" />);
+    expect(wrapper.is('div')).to.be.true;
+    expect(wrapper.prop('className')).to.equal('myclassName');
+    expect(wrapper.find('Input').length).to.equal(1);
+  });
 });
