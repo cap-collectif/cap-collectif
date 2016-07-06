@@ -5,7 +5,6 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
@@ -75,16 +74,15 @@ class SelectionAdmin extends Admin
         $formMapper
             ->add('proposal', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.selection.proposal',
-                'required' => false,
+                'required' => true,
                 'property' => 'title',
-                'callback' => function ($admin, $property, $value) {
-                    $this->createQueryForProposals(
-                        $admin,
-                        $property,
-                        $value,
-                        $this->getPersistentParameter('projectId')
-                    );
-                },
+                'route' => [
+                    'name' => 'capco_admin_proposals_autocomplete',
+                    'parameters' => [
+                        'projectId' => $this->getPersistentParameter('projectId'),
+                        '_sonata_admin' => $this->getCode(),
+                    ],
+                ],
                 'disabled' => $parentAdminCode === 'capco_admin.admin.proposal',
             ])
              ->add('status', 'sonata_type_model', [
@@ -120,36 +118,6 @@ class SelectionAdmin extends Admin
         ;
 
         return $qb->getQuery();
-    }
-
-    private function createQueryForProposals(AdminInterface $admin, $property, $value, $projectId = 0)
-    {
-        $datagrid = $admin->getDatagrid();
-        $qb = $datagrid->getQuery();
-        $usedProposals = null;
-        if ((!$this->getSubject() || !$this->getSubject()->getId()) && $this->hasParentFieldDescription() && $parentObject = $this->getParentFieldDescription()->getAdmin()->getSubject()) {
-            if ($parentObject instanceof SelectionStep) {
-                $usedProposals = $parentObject->getProposalsId();
-            }
-        }
-
-        if ($projectId) {
-            $qb
-                ->leftJoin('p.proposalForm', 'pf')
-                ->leftJoin('pf.step', 's')
-                ->leftJoin('s.projectAbstractStep', 'pas')
-                ->leftJoin('pas.project', 'p')
-                ->andWhere('p.id = :projectId')
-                ->setParameter('projectId', $projectId)
-            ;
-        }
-        if ($usedProposals) {
-            $qb->andWhere('p.id NOT IN (:usedProposals)')
-                ->setParameter('usedProposals', $usedProposals)
-            ;
-        }
-
-        $datagrid->setValue($property, null, $value);
     }
 
     private function createQueryForStatuses($selectionStepId = null)

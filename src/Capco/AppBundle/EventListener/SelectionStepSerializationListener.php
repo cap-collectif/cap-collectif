@@ -39,7 +39,7 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
     public function onPostSelectionStep(ObjectEvent $event)
     {
         $step = $event->getObject();
-        $project = $step->getProjectAbstractStep()->getProject();
+        $project = $step->getProject();
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
 
@@ -81,13 +81,20 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
 
         $event->getVisitor()->addData('counters', $counters);
 
-        $event->getVisitor()->addData(
-            '_links', [
-                'show' => $this->router->generate('app_project_show_selection', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                ], true),
-            ]
-        );
+        if ($project) {
+            $event->getVisitor()->addData(
+                '_links',
+                [
+                    'show' => $this->router->generate(
+                        'app_project_show_selection',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $step->getSlug(),
+                        ],
+                        true
+                    ),
+                ]
+            );
+        }
     }
 }

@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\ColorableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -92,6 +93,7 @@ class Status
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
+        $this->proposals = new ArrayCollection();
     }
 
     public function __toString()

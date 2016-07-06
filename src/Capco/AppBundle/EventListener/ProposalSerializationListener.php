@@ -35,33 +35,48 @@ class ProposalSerializationListener extends AbstractSerializationListener
     {
         $proposal = $event->getObject();
         $step = $proposal->getStep();
-        $project = $step->getProjectAbstractStep()->getProject();
+        $project = $step->getProject();
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
 
-        $showUrl = $this->router->generate('app_project_show_proposal', [
-            'proposalSlug' => $proposal->getSlug(),
-            'projectSlug' => $project->getSlug(),
-            'stepSlug' => $step->getSlug(),
-        ], true);
-        $reportUrl = $this->router->generate('app_report_proposal', [
-            'projectSlug' => $project->getSlug(),
-            'stepSlug' => $step->getSlug(),
-            'proposalSlug' => $proposal->getSlug(),
-        ], true);
+        if ($project) {
+            $showUrl = $this->router->generate(
+                'app_project_show_proposal',
+                [
+                    'proposalSlug' => $proposal->getSlug(),
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                ],
+                true
+            );
+            $reportUrl = $this->router->generate(
+                'app_report_proposal',
+                [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                    'proposalSlug' => $proposal->getSlug(),
+                ],
+                true
+            );
 
-        $indexUrl = $this->router->generate('app_project_show_collect', [
-            'projectSlug' => $project->getSlug(),
-            'stepSlug' => $step->getSlug(),
-        ], true);
+            $indexUrl = $this->router->generate(
+                'app_project_show_collect',
+                [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                ],
+                true
+            );
 
-        $event->getVisitor()->addData(
-            '_links', [
-                'show' => $showUrl,
-                'index' => $indexUrl,
-                'report' => $reportUrl,
-            ]
-        );
+            $event->getVisitor()->addData(
+                '_links',
+                [
+                    'show' => $showUrl,
+                    'index' => $indexUrl,
+                    'report' => $reportUrl,
+                ]
+            );
+        }
 
         $votesCount = $this->proposalVoteRepository
             ->getCountsByStepsForProposal($proposal);

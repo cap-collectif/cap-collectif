@@ -33,8 +33,6 @@ class SourceSerializationListener extends AbstractSerializationListener
         $source = $event->getObject();
         $opinion = $source->getLinkedOpinion();
         $opinionType = $opinion->getOpinionType();
-        $step = $opinion->getStep();
-        $project = $step->getProjectAbstractStep()->getProject();
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
 

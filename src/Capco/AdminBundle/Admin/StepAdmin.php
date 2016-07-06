@@ -189,7 +189,6 @@ class StepAdmin extends Admin
 
         $formMapper->end();
 
-
         if ($subject instanceof SelectionStep) {
             $formMapper
                 ->with('admin.fields.step.group_votes')

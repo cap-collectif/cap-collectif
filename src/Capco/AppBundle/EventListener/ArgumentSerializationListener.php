@@ -36,8 +36,7 @@ class ArgumentSerializationListener extends AbstractSerializationListener
         $opinion = $argument->getLinkedOpinion();
         $opinionType = $opinion ? $opinion->getOpinionType() : null;
         $step = $opinion ? $opinion->getStep() : null;
-        $pas = $step ? $step->getProjectAbstractStep() : null;
-        $project = $pas ? $pas->getProject() : null;
+        $project = $step ? $step->getProject() : null;
 
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
@@ -50,29 +49,40 @@ class ArgumentSerializationListener extends AbstractSerializationListener
             );
         }
 
-        $parent = $argument->getParent();
-        if ($parent instanceof Opinion) {
-            $showUrl = $this->router->generate('app_project_show_opinion', [
-                'projectSlug' => $project->getSlug(),
-                'stepSlug' => $step->getSlug(),
-                'opinionTypeSlug' => $opinionType->getSlug(),
-                'opinionSlug' => $parent->getSlug(),
-            ], true).'#arg-'.$argument->getId();
-        } elseif ($parent instanceof OpinionVersion) {
-            $showUrl = $this->router->generate('app_project_show_opinion_version', [
-                'projectSlug' => $project->getSlug(),
-                'stepSlug' => $step->getSlug(),
-                'opinionTypeSlug' => $opinionType->getSlug(),
-                'opinionSlug' => $opinion->getSlug(),
-                'versionSlug' => $parent->getSlug(),
-            ], true).'#arg-'.$argument->getId();
-        }
+        if ($project) {
+            $parent = $argument->getParent();
+            if ($parent instanceof Opinion) {
+                $showUrl = $this->router->generate(
+                        'app_project_show_opinion',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $step->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                            'opinionSlug' => $parent->getSlug(),
+                        ],
+                        true
+                    ).'#arg-'.$argument->getId();
+            } elseif ($parent instanceof OpinionVersion) {
+                $showUrl = $this->router->generate(
+                        'app_project_show_opinion_version',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $step->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                            'opinionSlug' => $opinion->getSlug(),
+                            'versionSlug' => $parent->getSlug(),
+                        ],
+                        true
+                    ).'#arg-'.$argument->getId();
+            }
 
-        $event->getVisitor()->addData(
-            '_links', [
-                'show' => $showUrl,
-            ]
-        );
+            $event->getVisitor()->addData(
+                '_links',
+                [
+                    'show' => $showUrl,
+                ]
+            );
+        }
 
         $event->getVisitor()->addData(
             'hasUserVoted', $user === 'anon.' ? false : $argument->userHasVote($user)

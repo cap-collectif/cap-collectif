@@ -112,7 +112,10 @@ services:
   capco.elastica.listener:
     class: Capco\AppBundle\EventListener\ElasticaListener
     arguments:
-       - @fos_elastica.object_persister.app.proposal
+      - '@fos_elastica.object_persister.app.proposal'
+      - '@fos_elastica.object_persister.app.selection'
+    calls:
+      - [ setContainer, [ @service_container ] ]
     tags:
        - { name: doctrine.event_subscriber, connection: default }
 

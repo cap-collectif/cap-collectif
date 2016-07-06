@@ -1,156 +1,130 @@
 services:
   capco.abstract_vote.repository:
     class: Capco\AppBundle\Repository\AbstractVoteRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:AbstractVote']
 
   capco.abstract_question.repository:
     class: Capco\AppBundle\Repository\AbstractQuestionRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Questions\AbstractQuestion']
 
   capco.blog.post.repository:
     class: Capco\AppBundle\Repository\PostRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Post']
 
   capco.collect_step.repository:
     class: Capco\AppBundle\Repository\CollectStepRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\CollectStep']
 
   capco.consultation_step_type.repository:
     class: Capco\AppBundle\Repository\ConsultationStepTypeRepository
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\ConsultationStepType']
 
   capco.district.repository:
     class: Capco\AppBundle\Repository\DistrictRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:District']
 
   capco.event.repository:
     class: Capco\AppBundle\Repository\EventRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Event']
 
   capco.highlighted.repository:
     class: Capco\AppBundle\Repository\HighlightedContentRepository
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:HighlightedContent']
 
   capco.menu_item.repository:
     class: Capco\AppBundle\Repository\MenuItemRepository
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:MenuItem']
 
   capco.opinion.repository:
     class: Capco\AppBundle\Repository\OpinionRepository
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Opinion']
 
   capco.opinion_type.repository:
     class: Capco\AppBundle\Repository\OpinionTypeRepository
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:OpinionType']
 
   capco.proposal.repository:
     class: Capco\AppBundle\Repository\ProposalRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Proposal']
 
   capco.proposal_vote.repository:
     class: Capco\AppBundle\Repository\ProposalVoteRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProposalVote']
 
   capco.question_choice.repository:
     class: Capco\AppBundle\Repository\QuestionChoiceRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:QuestionChoice']
 
   capco.response.repository:
     class: Capco\AppBundle\Repository\ResponseRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Response']
 
   capco.section.repository:
     class: Capco\AppBundle\Repository\SectionRepository
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Section']
 
   capco.selection_step.repository:
     class: Capco\AppBundle\Repository\SelectionStepRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\SelectionStep']
 
   capco.site_color.repository:
     class: Capco\AppBundle\Repository\SiteColorRepository
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:SiteColor']
 
   capco.site_image.repository:
     class: Capco\AppBundle\Repository\SiteImageRepository
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:SiteImage']
 
   capco.site_parameter.repository:
     class: Capco\AppBundle\Repository\SiteParameterRepository
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:SiteParameter']
 
   capco.theme.repository:
     class: Capco\AppBundle\Repository\ThemeRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Theme']
 
   capco.user_type.repository:
     class:           Capco\UserBundle\Repository\UserTypeRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method:  getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments:       ['CapcoUserBundle:UserType']
 
   capco.user.repository:
     class: Capco\UserBundle\Repository\UserRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoUserBundle:User']
 
   capco.video.repository:
     class: Capco\AppBundle\Repository\VideoRepository
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Video']
 
   capco.project.repository:
-        class:           Capco\AppBundle\Repository\ProjectRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method:  getRepository
-        arguments:       ['CapcoAppBundle:Project']
+    class:           Capco\AppBundle\Repository\ProjectRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:       ['CapcoAppBundle:Project']
 
   capco.abstract_step.repository:
     class: Capco\AppBundle\Entity\Steps\AbstractStep
-    factory_service: doctrine.orm.default_entity_manager
-    factory_method: getRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\AbstractStep']

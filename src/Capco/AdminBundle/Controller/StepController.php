@@ -32,7 +32,7 @@ class StepController extends CRUDController
 
         return $this->retrieveAutocompleteItems($request, [
             'enabled' => 1,
-            'isTrashed' => 2,
+            'isTrashed' => 0,
             'proposalForm__step__projectAbstractStep__project' => $projectId,
         ]);
     }

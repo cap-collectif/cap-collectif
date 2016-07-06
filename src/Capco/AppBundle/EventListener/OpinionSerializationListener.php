@@ -50,34 +50,49 @@ class OpinionSerializationListener extends AbstractSerializationListener
         $opinion = $version->getParent();
         $opinionType = $opinion->getOpinionType();
         $step = $opinion->getStep();
-        $project = $step->getProjectAbstractStep()->getProject();
+        $project = $step->getProject();
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
 
-        $event->getVisitor()->addData(
-            '_links', [
-                'show' => $this->router->generate('app_project_show_opinion_version', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'versionSlug' => $version->getSlug(),
-                ], true),
-                'report' => $this->router->generate('app_report_opinion_version', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'versionSlug' => $version->getSlug(),
-                ], true),
-                'parent' => $this->router->generate('app_consultation_show_opinion', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                ], true),
-            ]
-        );
+        if ($project) {
+            $event->getVisitor()->addData(
+                '_links',
+                [
+                    'show' => $this->router->generate(
+                        'app_project_show_opinion_version',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $step->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                            'opinionSlug' => $opinion->getSlug(),
+                            'versionSlug' => $version->getSlug(),
+                        ],
+                        true
+                    ),
+                    'report' => $this->router->generate(
+                        'app_report_opinion_version',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $step->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                            'opinionSlug' => $opinion->getSlug(),
+                            'versionSlug' => $version->getSlug(),
+                        ],
+                        true
+                    ),
+                    'parent' => $this->router->generate(
+                        'app_consultation_show_opinion',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $step->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                            'opinionSlug' => $opinion->getSlug(),
+                        ],
+                        true
+                    ),
+                ]
+            );
+        }
 
         $event->getVisitor()->addData(
             'user_vote', $user === 'anon.' ? null : $this->voteRepository->getByObjectUser('opinionVersion', $version, $user)
@@ -93,31 +108,46 @@ class OpinionSerializationListener extends AbstractSerializationListener
         $opinion = $event->getObject();
         $opinionType = $opinion->getOpinionType();
         $step = $opinion->getStep();
-        $project = $step->getProjectAbstractStep()->getProject();
+        $project = $step->getProjectAbstractStep() ? $step->getProjectAbstractStep()->getProject() : null;
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
 
-        $event->getVisitor()->addData(
-            '_links', [
-                'show' => $this->router->generate('app_project_show_opinion', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                ], true),
-                'report' => $this->router->generate('app_report_opinion', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                ], true),
-                'type' => $this->router->generate('app_consultation_show_opinions', [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                ], true),
-            ]
-        );
+        if ($project) {
+            $event->getVisitor()->addData(
+                '_links',
+                [
+                    'show' => $this->router->generate(
+                        'app_project_show_opinion',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $step->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                            'opinionSlug' => $opinion->getSlug(),
+                        ],
+                        true
+                    ),
+                    'report' => $this->router->generate(
+                        'app_report_opinion',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $step->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                            'opinionSlug' => $opinion->getSlug(),
+                        ],
+                        true
+                    ),
+                    'type' => $this->router->generate(
+                        'app_consultation_show_opinions',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $step->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                        ],
+                        true
+                    ),
+                ]
+            );
+        }
 
         $event->getVisitor()->addData(
             'user_vote', $user === 'anon.' ? null : $this->voteRepository->getByObjectUser('opinion', $opinion, $user)
