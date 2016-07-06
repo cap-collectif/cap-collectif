@@ -68,10 +68,11 @@ Feature: Opinions
     And I wait 1 seconds
     And I fill in the following:
       | opinion_body | Je modifie ma proposition !   |
-    And I check "opinion_confirm"
-    And I press "Modifier"
+    And I check "opinion_check"
+    And I press "confirm-opinion-update"
+    Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux-1/opinion-3"
     And I wait 1 seconds
-    Then I should see "Merci ! Votre proposition a bien été modifiée."
+    # Then I should see "Merci ! Votre proposition a bien été modifiée."
     And I should see "0 vote" in the ".opinion__votes" element
 
   @javascript @security
@@ -111,6 +112,7 @@ Feature: Opinions
       | opinion_appendix-1 | Exposay                         |
     And I press "confirm-opinion-link-create"
     Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/section-1-ouverture-des-donnees-publiques/titre"
+    And I wait 1 seconds
     And I should see "1 proposition liée"
     And I go on the connections tab
     And I should see "Article 1" in the "#links-list" element
