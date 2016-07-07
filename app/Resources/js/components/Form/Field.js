@@ -10,7 +10,7 @@ const Field = React.createClass({
     input: PropTypes.shape({
       divClassName: PropTypes.string,
       disableValidation: PropTypes.bool,
-      type: PropTypes.oneOf(['text', 'editor', 'select', 'checkbox']).isRequired,
+      type: PropTypes.oneOf(['text', 'editor', 'select', 'checkbox', 'password']).isRequired,
       label: PropTypes.string.isRequired,
       placeholder: PropTypes.string,
       id: PropTypes.string.isRequired,

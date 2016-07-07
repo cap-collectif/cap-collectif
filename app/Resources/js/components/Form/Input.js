@@ -3,6 +3,7 @@ import Editor from './Editor';
 import autosize from 'autosize';
 import ImageUpload from './ImageUpload';
 import { Input as ReactBootstrapInput } from 'react-bootstrap';
+import Captcha from './Captcha';
 
 export default class Input extends ReactBootstrapInput {
 
@@ -34,6 +35,10 @@ export default class Input extends ReactBootstrapInput {
       return <Editor {...this.props} />;
     }
 
+    if (this.props.type && this.props.type === 'captcha') {
+      return <Captcha {...this.props} />;
+    }
+
     if (this.props.type && this.props.type === 'image') {
       return <ImageUpload id={this.props.id} className={this.props.className} valueLink={this.props.valueLink} preview={this.props.image} />;
     }
@@ -58,7 +63,7 @@ export default class Input extends ReactBootstrapInput {
           this.renderInputGroup(
             this.renderInput()
           ),
-          this.renderIcon(),
+          this.props.type !== 'captcha' && this.renderIcon(),
         ]),
         this.renderImage(),
         this.renderErrors(),
