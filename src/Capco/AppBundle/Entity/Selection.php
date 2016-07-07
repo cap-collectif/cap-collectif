@@ -13,6 +13,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  *
  * @ORM\Entity()
  * @ORM\Table(name="selection")
+ * @ORM\HasLifecycleCallbacks
  * @CapcoAssert\StatusBelongsToSelectionStep()
  */
 class Selection
@@ -83,5 +84,17 @@ class Selection
         $this->status = $status;
 
         return $this;
+    }
+
+    // ********************* Lifecycle ***************************************
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function preRemove()
+    {
+        if ($this->getProposal()) {
+            $this->getProposal()->removeSelection($this);
+        }
     }
 }
