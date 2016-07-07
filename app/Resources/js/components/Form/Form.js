@@ -33,7 +33,7 @@ export const Form = React.createClass({
         fields.map((field, index) => {
           const children = field.options ?
           [
-            field.default_option_label && <option key={0} value="">{field.default_option_label}</option>,
+            field.defaultOptionLabel && <option key={0} value="">{field.defaultOptionLabel}</option>,
           ].concat(
             field.options.map((opt, i) => <option key={i + 1} value={opt.value}>{opt.label}</option>)
           ) : null;

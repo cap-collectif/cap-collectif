@@ -93,7 +93,7 @@ export const RegistrationForm = React.createClass({
             {this.getIntlMessage('registration.type')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
           </span>
         ),
-        default_option_label: this.getIntlMessage('registration.select.type'),
+        defaultOptionLabel: this.getIntlMessage('registration.select.type'),
         options: user_types.map((type) => { return { value: type.id, label: type.name }; }),
       });
     }
