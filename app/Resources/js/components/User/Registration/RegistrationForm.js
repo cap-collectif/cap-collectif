@@ -2,10 +2,8 @@ import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
-// import mailcheck from 'mailcheck';
 // import { OverlayTrigger, Popover } from 'react-bootstrap';
 import UserActions from '../../../actions/UserActions';
-// import domains from './email_domains';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import Form from '../../Form/Form';
 
@@ -81,21 +79,6 @@ export const RegistrationForm = React.createClass({
     this.props.onSubmitFail();
   },
 
-  // setSuggestedEmail() {
-  //   const form = JSON.parse(JSON.stringify(this.state.form));
-  //   form.email = this.state.suggestedEmail;
-  //   this.setState({ form: form, suggestedEmail: null });
-  // },
-  //
-  // checkMail() {
-  //   mailcheck.run({
-  //     email: this._email.refs.input.value,
-  //     domains: domains,
-  //     suggested: suggestion => this.setState({ suggestedEmail: suggestion.full }),
-  //     empty: () => this.setState({ suggestedEmail: null }),
-  //   });
-  // },
-
   render() {
     const { features, user_types, parameters, onSubmitSuccess } = this.props;
     const cguName = parameters['signin.cgu.name'];
@@ -118,7 +101,7 @@ export const RegistrationForm = React.createClass({
     if (features.zipcode_at_register) {
       dynamicsField.push({
         id: '_zipcode',
-        name: '_zipcode',
+        name: 'zipcode',
         type: 'text',
         label: (
           <span>
@@ -145,7 +128,7 @@ export const RegistrationForm = React.createClass({
           {
             name: 'email',
             label: this.getIntlMessage('global.email'),
-            type: 'text',
+            type: 'email',
             id: '_email',
             popover: {
               id: 'registration-email-tooltip',

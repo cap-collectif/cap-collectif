@@ -4,12 +4,36 @@ import autosize from 'autosize';
 import ImageUpload from './ImageUpload';
 import { Input as ReactBootstrapInput } from 'react-bootstrap';
 import Captcha from './Captcha';
+import mailcheck from 'mailcheck';
+import domains from '../../utils/email_domains';
 
 export default class Input extends ReactBootstrapInput {
 
-  componentDidUpdate() {
+  constructor() {
+    super();
+    this.state = { suggestion: null };
+  }
+
+  setSuggestion() {
+    this.props.onChange(this.state.suggestion);
+  }
+
+  checkMail() {
+    mailcheck.run({
+      email: this.props.value,
+      domains: domains,
+      suggested: suggestion => this.setState({ suggestion: suggestion.full }),
+      empty: () => this.setState({ suggestion: null }),
+    });
+  }
+
+  componentDidUpdate(prevProps) {
     if (this.props.type === 'textarea') {
       autosize(this.getInputDOMNode());
+    }
+    if (this.props.type === 'email' && prevProps.value !== this.props.value) {
+      this.checkMail();
+      console.log(this.state);
     }
   }
 
@@ -17,6 +41,14 @@ export default class Input extends ReactBootstrapInput {
     if (this.props.type === 'textarea') {
       autosize.destroy(this.getInputDOMNode());
     }
+  }
+
+  renderSuggestion() {
+    return this.state.suggestion &&
+        <p className="registration__help">
+          Vouliez vous dire <a href={'#'} onClick={this.setSuggestion.bind(this)} className="js-email-correction">{ this.state.suggestion }</a> ?
+        </p>
+    ;
   }
 
   renderErrors() {
@@ -63,8 +95,9 @@ export default class Input extends ReactBootstrapInput {
           this.renderInputGroup(
             this.renderInput()
           ),
-          this.props.type !== 'captcha' && this.renderIcon(),
+          this.props.type !== 'captcha' && this.renderIcon(), // no feedbacks for captcha
         ]),
+        this.renderSuggestion(),
         this.renderImage(),
         this.renderErrors(),
       ]
