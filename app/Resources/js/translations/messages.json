@@ -231,6 +231,9 @@
     },
     "more": "Voir plus",
     "name": "Nom ",
+    "navbar": {
+      "see_more": "Plus"
+    },
     "or": "OU",
     "password": "Mot de passe",
     "pinned": {

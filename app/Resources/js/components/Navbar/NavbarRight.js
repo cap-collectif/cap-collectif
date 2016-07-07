@@ -94,4 +94,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(NavbarRight);
+export default connect(mapStateToProps, null, null, { withRef: true })(NavbarRight);

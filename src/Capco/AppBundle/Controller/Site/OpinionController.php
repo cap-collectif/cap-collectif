@@ -116,7 +116,7 @@ class OpinionController extends Controller
         $currentStep = $opinion->getStep();
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinionJoinUserReports($opinion, $this->getUser());
 
-        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProject($projectSlug);
+        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
 
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 
@@ -229,7 +229,7 @@ class OpinionController extends Controller
         $currentUrl = $this->generateUrl('app_project_show_opinion', ['projectSlug' => $projectSlug, 'stepSlug' => $stepSlug, 'opinionTypeSlug' => $opinionTypeSlug, 'opinionSlug' => $opinionSlug]);
         $currentStep = $opinion->getStep();
 
-        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProject($projectSlug);
+        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
 
         $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
 

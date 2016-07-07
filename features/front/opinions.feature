@@ -127,8 +127,8 @@ Feature: Opinions
   Scenario: Anonymous user wants to share an opinion
     Given I go to an opinion with versions
     When I click the share opinion button
-    Then I should see the share dropdown
-    And I click the share link button
+    Then I should see the opinion share dropdown
+    And I click the opinion share link button
     Then I should see the share link modal
 
   @javascript
