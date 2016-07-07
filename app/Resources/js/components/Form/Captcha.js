@@ -3,8 +3,8 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 const Captcha = React.createClass({
   propTypes: {
-    value: PropTypes.any, // redux-form
-    onChange: PropTypes.func, // redux-form
+    value: PropTypes.any,
+    onChange: PropTypes.func.isRequired,
   },
 
   render() {

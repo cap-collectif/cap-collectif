@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
-// import { OverlayTrigger, Popover } from 'react-bootstrap';
 import UserActions from '../../../actions/UserActions';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import Form from '../../Form/Form';
@@ -87,7 +86,7 @@ export const RegistrationForm = React.createClass({
     if (features.user_type) {
       dynamicsField.push({
         id: '_user_type',
-        name: 'user_type',
+        name: 'userType',
         type: 'select',
         label: (
           <span>
@@ -132,7 +131,7 @@ export const RegistrationForm = React.createClass({
             id: '_email',
             popover: {
               id: 'registration-email-tooltip',
-              message: 'registration.tooltip.email',
+              message: this.getIntlMessage('registration.tooltip.email'),
             },
           },
           {
@@ -142,7 +141,7 @@ export const RegistrationForm = React.createClass({
             id: '_password',
             popover: {
               id: 'registration-password-tooltip',
-              message: 'registration.tooltip.password',
+              message: this.getIntlMessage('registration.tooltip.password'),
             },
           },
         ]

@@ -87,6 +87,7 @@
     "babel-plugin-rewire": "^1.0.0-rc-2",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.4.2",
+    "chai-subset": "^1.2.2",
     "enzyme": "^2.2.0",
     "eslint": "^2.13.1",
     "eslint-brunch": "^3.5.0",

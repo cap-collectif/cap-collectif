@@ -2,7 +2,7 @@ import React from 'react';
 import Editor from './Editor';
 import autosize from 'autosize';
 import ImageUpload from './ImageUpload';
-import { Input as ReactBootstrapInput } from 'react-bootstrap';
+import { OverlayTrigger, Popover, Input as ReactBootstrapInput } from 'react-bootstrap';
 import Captcha from './Captcha';
 import mailcheck from 'mailcheck';
 import domains from '../../utils/email_domains';
@@ -33,7 +33,6 @@ export default class Input extends ReactBootstrapInput {
     }
     if (this.props.type === 'email' && prevProps.value !== this.props.value) {
       this.checkMail();
-      console.log(this.state);
     }
   }
 
@@ -63,16 +62,33 @@ export default class Input extends ReactBootstrapInput {
   }
 
   renderInput() {
-    if (this.props.type && this.props.type === 'editor') {
+    const { type, popover } = this.props;
+    if (type && type === 'editor') {
       return <Editor {...this.props} />;
     }
 
-    if (this.props.type && this.props.type === 'captcha') {
+    if (type && type === 'captcha') {
       return <Captcha {...this.props} />;
     }
 
-    if (this.props.type && this.props.type === 'image') {
+    if (type && type === 'image') {
       return <ImageUpload id={this.props.id} className={this.props.className} valueLink={this.props.valueLink} preview={this.props.image} />;
+    }
+
+    if (popover) {
+      return (
+        <OverlayTrigger placement="right"
+          overlay={
+            <Popover id={ popover.id }>
+              { popover.message }
+            </Popover>
+          }
+        >
+        {
+           super.renderInput()
+        }
+        </OverlayTrigger>
+      );
     }
 
     return super.renderInput();

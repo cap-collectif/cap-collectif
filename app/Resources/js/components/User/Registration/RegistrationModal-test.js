@@ -34,9 +34,7 @@ describe('<RegistrationModal />', () => {
     const wrapper = shallow(<RegistrationModal show features={{}} parameters={{}} {...props} />);
     const form = wrapper.find(RegistrationForm);
     expect(form).to.have.length(1);
-    expect(form.prop('isSubmitting')).to.equal(wrapper.state('isSubmitting'));
-    expect(form.prop('onSubmitFailure')).to.be.a('function');
-    expect(form.prop('onValidationFailure')).to.be.a('function');
+    expect(form.prop('onSubmitFail')).to.be.a('function');
     expect(form.prop('onSubmitSuccess')).to.be.a('function');
   });
 
