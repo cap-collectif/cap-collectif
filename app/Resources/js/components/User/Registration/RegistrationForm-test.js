@@ -20,7 +20,10 @@ describe('<RegistrationForm />', () => {
       'signin.cgu.name': 'la charte',
       'signin.cgu.link': '/charte',
     },
-    features: { 'user_type': false, 'zipcode_at_register': false },
+    features: {
+      'user_type': false,
+      'zipcode_at_register': false,
+    },
   };
 
   it('renders a form with inputs and a captcha', () => {
@@ -54,7 +57,7 @@ describe('<RegistrationForm />', () => {
         id: '_email',
         popover: {
           id: 'registration-email-tooltip',
-          message: 'registration.tooltip.email',
+          message: 'Vous recevrez un e-mail contenant un lien permettant de confirmer qu\'il s\'agit bien de votre adresse.',
         },
       }
     );
@@ -70,10 +73,30 @@ describe('<RegistrationForm />', () => {
         id: '_password',
         popover: {
           id: 'registration-password-tooltip',
-          message: 'registration.tooltip.password',
+          message: 'Le mot de passe doit comporter au moins huit caractères.',
         },
       }
     );
+  });
+
+  it('renders a user_type select', () => {
+    const wrapper = shallow(<RegistrationForm {...props} user_types={[{ id: 1, name: 'type_1' }]} features={{ user_type: true, zipcode_at_register: false }} />);
+    const select = wrapper.find('ReduxForm').prop('fields')[3];
+    expect(select).to.containSubset(
+      {
+        name: 'userType',
+        type: 'select',
+        id: '_user_type',
+        options: [
+          {
+            label: 'type_1',
+            value: 1,
+          },
+        ],
+        default_option_label: 'Je suis...',
+      }
+    );
+    expect(select.label).to.be.a.symbol;
   });
 
   it('renders a charte checkbox', () => {
