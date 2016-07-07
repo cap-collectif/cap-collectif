@@ -128,7 +128,7 @@ class QuestionnaireAbstractQuestion
      *
      * @return $this
      */
-    public function setProposalForm(ProposalForm $proposalForm)
+    public function setProposalForm(ProposalForm $proposalForm = null)
     {
         $this->proposalForm = $proposalForm;
 
