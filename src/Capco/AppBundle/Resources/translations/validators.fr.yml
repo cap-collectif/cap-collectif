@@ -47,10 +47,6 @@ idea:
     already_voted: "Vous avez déjà voté pour cette idée."
     email_belongs_to_user: "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette idée."
 
-
-opinion:
-  votes_not_confirmed: "Merci de confirmer la perte de vos votes pour continuer."
-
 password:
   blank: "Veuillez saisir un mot de passe."
   minMessage: "Le mot de passe doit faire au moins 8 caractères."
