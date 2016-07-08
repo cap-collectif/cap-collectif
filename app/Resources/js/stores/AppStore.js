@@ -1,6 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import LocalStorageService from '../services/LocalStorageService';
+import { reducer as reportReducer } from '../redux/modules/report';
 
 export default function configureStore(props) {
   if (props.user === null) {
@@ -9,6 +10,7 @@ export default function configureStore(props) {
 
   const reducers = {
     default: () => props,
+    report: reportReducer,
     form: formReducer,
   };
 

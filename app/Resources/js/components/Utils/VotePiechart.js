@@ -18,8 +18,8 @@ const VotePiechart = React.createClass({
       ok: 0,
       nok: 0,
       mitige: 0,
-      height: '100%',
-      width: '100%',
+      height: undefined,
+      width: undefined,
       top: 0,
       left: 0,
     };
@@ -30,7 +30,7 @@ const VotePiechart = React.createClass({
     if (!__SERVER__ && ok + mitige + nok > 0) {
       const Chart = require('react-google-charts').Chart;
       return (
-        <div className="opinion__chart" style={{ textAlign: 'center' }}>
+        <div className="opinion__chart">
         <Chart
           chartType="PieChart"
           data={[

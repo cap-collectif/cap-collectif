@@ -2,9 +2,12 @@ import React, { PropTypes } from 'react';
 import ReportModal from './ReportModal';
 import ReportButton from './ReportButton';
 import { connect } from 'react-redux';
+import { openModal } from '../../redux/modules/report';
 
 const ReportBox = React.createClass({
   propTypes: {
+    dispatch: PropTypes.func.isRequired,
+    showModal: PropTypes.bool.isRequired,
     reported: PropTypes.bool,
     onReport: PropTypes.func.isRequired,
     author: PropTypes.object,
@@ -26,49 +29,32 @@ const ReportBox = React.createClass({
     };
   },
 
-  getInitialState() {
-    return {
-      isReporting: false,
-    };
-  },
-
-  openReportModal() {
-    this.setState({ isReporting: true });
-  },
-
-  closeReportModal() {
-    this.setState({ isReporting: false });
-  },
-
-  isTheUserTheAuthor() {
-    if (this.props.author === null || !this.props.user) {
-      return false;
-    }
-    return this.props.user.uniqueId === this.props.author.uniqueId;
-  },
-
-  report(data) {
-    return this.props.onReport(data)
-      .then(this.closeReportModal)
-    ;
-  },
-
   render() {
-    const { isReporting } = this.state;
-    if (this.props.user && !this.isTheUserTheAuthor() && this.props.features.reporting) {
+    const {
+      onReport,
+      dispatch,
+      showModal,
+      buttonId,
+      reported,
+      buttonBsSize,
+      buttonClassName,
+      user,
+      author,
+      features,
+    } = this.props;
+    if (features.reporting && user && user.uniqueId !== author.uniqueId) {
       return (
         <span>
           <ReportButton
-            id={this.props.buttonId}
-            reported={this.props.reported}
-            onClick={this.openReportModal}
-            bsSize={this.props.buttonBsSize}
-            className={this.props.buttonClassName}
+            id={buttonId}
+            reported={reported}
+            onClick={() => dispatch(openModal())}
+            bsSize={buttonBsSize}
+            className={buttonClassName}
           />
           <ReportModal
-            show={isReporting}
-            onClose={this.closeReportModal}
-            onSubmit={this.report}
+            show={showModal}
+            onSubmit={onReport}
           />
         </span>
       );
@@ -82,6 +68,7 @@ const mapStateToProps = (state) => {
   return {
     features: state.default.features,
     user: state.default.user,
+    showModal: state.report.showModal,
   };
 };
 

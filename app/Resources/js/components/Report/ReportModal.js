@@ -1,71 +1,51 @@
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
-
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import ReportForm from './ReportForm';
+import { closeModal } from '../../redux/modules/report';
 
 const ReportModal = React.createClass({
   propTypes: {
+    dispatch: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     show: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
-  getInitialState() {
-    return {
-      isSubmitting: false,
-    };
-  },
-
-  handleValidationSucess(data) {
-    this.props.onSubmit(data)
-        .then(() => {
-          this.setState({ isSubmitting: false });
-        });
-  },
-
-  handleSubmit() {
-    this.setState({ isSubmitting: true });
-  },
-
-  handleFailure() {
-    this.setState({ isSubmitting: false });
-  },
-
   render() {
-    const { isSubmitting } = this.state;
-    const { onClose, show } = this.props;
+    const { dispatch, isLoading, show } = this.props;
     return (
       <Modal
         animation={false}
         show={show}
-        onHide={onClose}
+        onHide={() => dispatch(closeModal())}
         bsSize="large"
         aria-labelledby="contained-modal-title-lg"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg">
-            {this.getIntlMessage('global.modal.report.title')}
-          </Modal.Title>
+          <Modal.Title
+            id="contained-modal-title-lg"
+            children={this.getIntlMessage('global.modal.report.title')}
+          />
         </Modal.Header>
         <Modal.Body>
           <ReportForm
-            isSubmitting={isSubmitting}
-            onValidationFailure={this.handleFailure}
-            onValidationSuccess={this.handleValidationSucess}
+            ref={c => this.form = c}
+            onSubmit={this.props.onSubmit}
           />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton onClose={onClose} />
+          <CloseButton onClose={() => dispatch(closeModal())} />
           <SubmitButton
             id="confirm-opinion-source-report"
             className="report-button-submit"
             label="global.report.submit"
-            isSubmitting={isSubmitting}
-            onSubmit={this.handleSubmit}
+            isSubmitting={isLoading}
+            onSubmit={() => this.form.form.submit()}
           />
         </Modal.Footer>
       </Modal>
@@ -74,4 +54,10 @@ const ReportModal = React.createClass({
 
 });
 
-export default ReportModal;
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.report.isLoading,
+  };
+};
+
+export default connect(mapStateToProps)(ReportModal);
