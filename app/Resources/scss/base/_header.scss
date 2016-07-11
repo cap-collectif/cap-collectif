@@ -83,32 +83,6 @@
     white-space: nowrap;
   }
 
-  .dropdown-menu > .nav-dropdown-section {
-    display: block;
-    border-bottom: 1px solid #ffffff;
-    border-top: 1px solid #ffffff;
-    padding-top: 9px;
-    padding-bottom: 9px;
-
-    &:first-child {
-      border-top: none;
-      padding-top: 0;
-    }
-
-    &:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-  }
-
-  .dropdown-menu > .nav-dropdown-section + .nav-dropdown-section {
-    border-top: none;
-  }
-
-  .dropdown-menu > .nav-dropdown-section + li {
-    margin-top: 9px;
-  }
-
   .dropdown-menu > .nav-dropdown-section > .dropdown-header {
     opacity: 0.5;
     font-size: 14px;

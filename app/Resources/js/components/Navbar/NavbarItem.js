@@ -28,6 +28,7 @@ const NavbarItem = React.createClass({
         if (isChild) {
           return (
             <span className="nav-dropdown-section">
+              <MenuItem divider />
               <MenuItem
                 ref={refCallback}
                 header
@@ -49,6 +50,7 @@ const NavbarItem = React.createClass({
                   );
                 })
               }
+              <MenuItem divider />
             </span>
           );
         }

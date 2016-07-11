@@ -56,9 +56,9 @@ class ConsultationStepExtractor
      *
      * @return bool|Synthesis
      */
-    public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep = null)
+    public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep)
     {
-        if (!$consultationStep) {
+        if ($consultationStep === null) {
             return false;
         }
 

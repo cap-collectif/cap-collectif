@@ -189,6 +189,6 @@ Hack form button - radio check
   }
 }
 
-.label--no-margin {
-  margin-bottom: -1px;
+.has-feedback label.h5 ~ .form-control-feedback {
+    top: 35px;
 }

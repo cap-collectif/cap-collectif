@@ -8,9 +8,10 @@ const Field = React.createClass({
     touched: PropTypes.bool.isRequired,
     error: PropTypes.node,
     input: PropTypes.shape({
+      labelClassName: PropTypes.string,
       divClassName: PropTypes.string,
       disableValidation: PropTypes.bool,
-      type: PropTypes.oneOf(['text', 'editor', 'select', 'checkbox']).isRequired,
+      type: PropTypes.oneOf(['text', 'editor', 'select', 'checkbox', 'password', 'captcha', 'email']).isRequired,
       label: PropTypes.string.isRequired,
       placeholder: PropTypes.string,
       id: PropTypes.string.isRequired,
@@ -23,13 +24,13 @@ const Field = React.createClass({
 
   render() {
     const { touched, error } = this.props;
-    const { disableValidation, label, placeholder, type, name, divClassName } = this.props.input;
+    const { disableValidation, label, placeholder, type, name, divClassName, labelClassName } = this.props.input;
     const check = touched && !disableValidation;
     const input = (
       <Input
         type={type}
         name={name}
-        labelClassName={''}
+        labelClassName={labelClassName || ''}
         label={label}
         placeholder={placeholder || null}
         errors={(check && error) ? this.getIntlMessage(error) : null}
