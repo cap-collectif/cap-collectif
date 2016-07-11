@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\CommentVote;
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Form\ReportingType;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -11,6 +13,7 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -123,5 +126,36 @@ class CommentsController extends FOSRestController
         $comment->decrementVotesCount();
         $em->remove($vote);
         $em->flush();
+    }
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     * @Post("/comments/{commentId}/reports")
+     * @ParamConverter("comment", options={"mapping": {"commentId": "id"}})
+     * @View(statusCode=201, serializerGroups={"Default"})
+     */
+    public function postCommentReportAction(Request $request, Comment $comment)
+    {
+        if ($this->getUser() === $comment->getAuthor()) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $report = (new Reporting())
+            ->setReporter($this->getUser())
+            ->setComment($comment)
+        ;
+
+        $form = $this->createForm(new ReportingType(), $report, ['csrf_protection' => false]);
+        $form->submit($request->request->all(), false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $this->get('doctrine.orm.entity_manager')->persist($report);
+        $this->get('doctrine.orm.entity_manager')->flush();
+        $this->get('capco.notify_manager')->sendNotifyMessage($report);
+
+        return $report;
     }
 }

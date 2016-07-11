@@ -6,7 +6,7 @@ import ProposalEditModal from '../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
 import EditButton from '../../Form/EditButton';
 import DeleteButton from '../../Form/DeleteButton';
-import ReportButton from '../../Form/ReportButton';
+import ProposalReportButton from './ProposalReportButton';
 import ProposalResponse from './ProposalResponse';
 
 const ProposalPageContent = React.createClass({
@@ -64,13 +64,7 @@ const ProposalPageContent = React.createClass({
             url={proposal._links.show}
             title={proposal.title}
           />
-          <ReportButton
-            id="proposal-report-button"
-            author={proposal.author}
-            url={proposal._links.report}
-            hasReported={proposal.hasUserReported}
-            style={{ marginLeft: '15px' }}
-          />
+          <ProposalReportButton proposal={proposal} />
           <div className="pull-right">
             <EditButton
               id="proposal-edit-button"

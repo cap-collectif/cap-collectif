@@ -8,6 +8,8 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -745,5 +747,67 @@ class OpinionsController extends FOSRestController
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+    }
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     * @Post("/opinions/{opinionId}/reports")
+     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
+     * @View(statusCode=201, serializerGroups={"Default"})
+     */
+    public function postOpinionReportAction(Request $request, Opinion $opinion)
+    {
+        if ($this->getUser() === $opinion->getAuthor()) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $report = (new Reporting())
+            ->setReporter($this->getUser())
+            ->setOpinion($opinion)
+        ;
+
+        $form = $this->createForm(new ReportingType(), $report, ['csrf_protection' => false]);
+        $form->submit($request->request->all(), false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $this->get('doctrine.orm.entity_manager')->persist($report);
+        $this->get('doctrine.orm.entity_manager')->flush();
+        $this->get('capco.notify_manager')->sendNotifyMessage($report);
+
+        return $report;
+    }
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     * @Post("/versions/{versionId}/reports")
+     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
+     * @View(statusCode=201, serializerGroups={"Default"})
+     */
+    public function postOpinionVersionReportAction(Request $request, OpinionVersion $version)
+    {
+        if ($this->getUser() === $version->getAuthor()) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $report = (new Reporting())
+            ->setReporter($this->getUser())
+            ->setOpinionVersion($version)
+        ;
+
+        $form = $this->createForm(new ReportingType(), $report, ['csrf_protection' => false]);
+        $form->submit($request->request->all(), false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $this->get('doctrine.orm.entity_manager')->persist($report);
+        $this->get('doctrine.orm.entity_manager')->flush();
+        $this->get('capco.notify_manager')->sendNotifyMessage($report);
+
+        return $report;
     }
 }

@@ -34,7 +34,6 @@ class CommentSerializationListener extends AbstractSerializationListener
             '_links',
             [
                 'edit' => $this->router->generate('app_comment_edit', ['commentId' => $comment->getId()], true),
-                'report' => $this->router->generate('app_report_comment', ['commentId' => $comment->getId()], true),
             ]
         );
 

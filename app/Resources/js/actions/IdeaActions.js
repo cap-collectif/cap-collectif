@@ -24,8 +24,6 @@ import {
   DELETE_IDEA_VOTE_SUCCESS,
   DELETE_IDEA_VOTE_FAILURE,
 
-  REPORT_IDEA_SUCCESS,
-
   RECEIVE_IDEAS,
   RECEIVE_IDEA,
   RECEIVE_IDEA_VOTES,
@@ -301,21 +299,6 @@ export default {
         });
         return false;
       });
-  },
-
-  report: (idea, data) => {
-    return Fetcher
-      .post(`/ideas/${idea}/reports`, data)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: REPORT_IDEA_SUCCESS,
-        });
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.report.idea' },
-        });
-      })
-      ;
   },
 
 };

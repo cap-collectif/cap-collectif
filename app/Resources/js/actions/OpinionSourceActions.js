@@ -90,15 +90,4 @@ export default {
       });
   },
 
-  report: (opinion, source, data) => {
-    return Fetcher
-      .post(`/${baseUrl(opinion)}/${opinion.id}/sources/${source}/reports`, data)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.report.source' },
-        });
-      });
-  },
-
 };

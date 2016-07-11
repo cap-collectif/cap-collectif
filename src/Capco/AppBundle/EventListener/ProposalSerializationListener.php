@@ -49,15 +49,6 @@ class ProposalSerializationListener extends AbstractSerializationListener
                 ],
                 true
             );
-            $reportUrl = $this->router->generate(
-                'app_report_proposal',
-                [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'proposalSlug' => $proposal->getSlug(),
-                ],
-                true
-            );
 
             $indexUrl = $this->router->generate(
                 'app_project_show_collect',
@@ -73,7 +64,6 @@ class ProposalSerializationListener extends AbstractSerializationListener
                 [
                     'show' => $showUrl,
                     'index' => $indexUrl,
-                    'report' => $reportUrl,
                 ]
             );
         }

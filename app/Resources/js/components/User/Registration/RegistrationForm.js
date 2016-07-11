@@ -21,7 +21,7 @@ export const validate = values => {
     errors.charte = 'registration.constraints.charte.check';
   }
   if (!values.captcha && (window && window.location.host !== 'capco.test')) {
-    errors.captcha = 'global.constraints.notBlank';
+    errors.captcha = 'registration.constraints.captcha.invalid';
   }
   return errors;
 };

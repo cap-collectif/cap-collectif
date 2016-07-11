@@ -36,11 +36,6 @@ class OpinionSerializationListener extends AbstractSerializationListener
                 'class' => 'Capco\AppBundle\Entity\Opinion',
                 'method' => 'onPostOpinion',
             ],
-            [
-                'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\OpinionType',
-                'method' => 'onPostOpinionType',
-            ],
         ];
     }
 
@@ -60,17 +55,6 @@ class OpinionSerializationListener extends AbstractSerializationListener
                 [
                     'show' => $this->router->generate(
                         'app_project_show_opinion_version',
-                        [
-                            'projectSlug' => $project->getSlug(),
-                            'stepSlug' => $step->getSlug(),
-                            'opinionTypeSlug' => $opinionType->getSlug(),
-                            'opinionSlug' => $opinion->getSlug(),
-                            'versionSlug' => $version->getSlug(),
-                        ],
-                        true
-                    ),
-                    'report' => $this->router->generate(
-                        'app_report_opinion_version',
                         [
                             'projectSlug' => $project->getSlug(),
                             'stepSlug' => $step->getSlug(),
@@ -126,16 +110,6 @@ class OpinionSerializationListener extends AbstractSerializationListener
                         ],
                         true
                     ),
-                    'report' => $this->router->generate(
-                        'app_report_opinion',
-                        [
-                            'projectSlug' => $project->getSlug(),
-                            'stepSlug' => $step->getSlug(),
-                            'opinionTypeSlug' => $opinionType->getSlug(),
-                            'opinionSlug' => $opinion->getSlug(),
-                        ],
-                        true
-                    ),
                     'type' => $this->router->generate(
                         'app_consultation_show_opinions',
                         [
@@ -164,9 +138,5 @@ class OpinionSerializationListener extends AbstractSerializationListener
                 ]
             );
         }
-    }
-
-    public function onPostOpinionType(ObjectEvent $event)
-    {
     }
 }

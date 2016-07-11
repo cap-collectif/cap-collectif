@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import ReportBox from '../../Report/ReportBox';
-import IdeaActions from '../../../actions/IdeaActions';
+import { submitIdeaReport } from '../../../redux/modules/report';
 
 const IdeaReportButton = React.createClass({
   propTypes: {
-    idea: React.PropTypes.object.isRequired,
-    buttonId: React.PropTypes.string,
+    dispatch: PropTypes.func.isRequired,
+    idea: PropTypes.object.isRequired,
+    buttonId: PropTypes.string,
   },
 
   getDefaultProps() {
@@ -15,14 +17,15 @@ const IdeaReportButton = React.createClass({
   },
 
   report(data) {
-    return IdeaActions.report(this.props.idea.id, data);
+    const { idea, dispatch } = this.props;
+    return submitIdeaReport(idea.id, data, dispatch);
   },
 
   render() {
-    const { idea } = this.props;
+    const { idea, buttonId } = this.props;
     return (
       <ReportBox
-        buttonId={this.props.buttonId}
+        buttonId={buttonId}
         reported={idea.userHasReport}
         onReport={this.report}
         author={idea.author}
@@ -33,4 +36,4 @@ const IdeaReportButton = React.createClass({
 
 });
 
-export default IdeaReportButton;
+export default connect()(IdeaReportButton);

@@ -5,7 +5,7 @@ import UserAvatar from '../User/UserAvatar';
 import CommentInfos from './CommentInfos';
 import CommentBody from './CommentBody';
 import CommentVoteButton from './CommentVoteButton';
-import CommentReport from './CommentReport';
+import CommentReportButton from './CommentReportButton';
 import CommentEdit from './CommentEdit';
 import CommentAnswers from './CommentAnswers';
 import CommentForm from './CommentForm';
@@ -77,7 +77,7 @@ const Comment = React.createClass({
                 : null
               }
               {' '}
-              <CommentReport comment={comment} />
+              <CommentReportButton comment={comment} />
               {' '}
               <CommentEdit comment={comment} />
               {' '}
