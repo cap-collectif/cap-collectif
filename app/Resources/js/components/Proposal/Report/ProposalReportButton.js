@@ -11,19 +11,18 @@ const ProposalReportButton = React.createClass({
 
   handleReport(data) {
     const { proposal, dispatch } = this.props;
-    return submitProposalReport(proposal.id, data, dispatch);
+    return submitProposalReport(proposal, data, dispatch);
   },
 
   render() {
     const { proposal } = this.props;
     return (
         <ReportBox
-          style={{ marginLeft: '15px' }}
+          buttonStyle={{ marginLeft: '15px' }}
           id="proposal-report-button"
           reported={proposal.hasUserReported}
           onReport={this.handleReport}
           author={proposal.author}
-          buttonBsSize="xs"
           buttonClassName="proposal__btn--report"
         />
     );

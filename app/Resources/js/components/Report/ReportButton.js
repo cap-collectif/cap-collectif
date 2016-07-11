@@ -11,6 +11,7 @@ const ReportButton = React.createClass({
     reported: PropTypes.bool.isRequired,
     className: PropTypes.string,
     onClick: PropTypes.func.isRequired,
+    style: PropTypes.object,
     bsSize: PropTypes.string,
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
@@ -21,13 +22,14 @@ const ReportButton = React.createClass({
     return {
       id: 'report-button',
       className: '',
+      style: {},
       bsSize: null,
       user: null,
     };
   },
 
   render() {
-    const { reported, className, onClick, bsSize, user, features, id } = this.props;
+    const { reported, className, onClick, bsSize, user, features, id, style } = this.props;
     const classes = {
       'btn--outline': true,
       'btn-dark-gray': true,
@@ -37,6 +39,7 @@ const ReportButton = React.createClass({
       <LoginOverlay user={user} features={features}>
         <Button
           id={id}
+          style={style}
           bsSize={bsSize}
           className={classNames(classes)}
           onClick={reported ? null : onClick}

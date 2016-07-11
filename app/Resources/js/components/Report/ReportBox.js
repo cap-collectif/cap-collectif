@@ -11,6 +11,7 @@ const ReportBox = React.createClass({
     reported: PropTypes.bool,
     onReport: PropTypes.func.isRequired,
     author: PropTypes.object,
+    buttonStyle: PropTypes.object,
     buttonBsSize: PropTypes.string,
     buttonClassName: PropTypes.string,
     user: PropTypes.object,
@@ -20,6 +21,7 @@ const ReportBox = React.createClass({
 
   getDefaultProps() {
     return {
+      buttonStyle: {},
       buttonId: 'report-button',
       reported: false,
       author: null,
@@ -41,6 +43,7 @@ const ReportBox = React.createClass({
       user,
       author,
       features,
+      buttonStyle,
     } = this.props;
     if (features.reporting && user && user.uniqueId !== author.uniqueId) {
       return (
@@ -50,6 +53,7 @@ const ReportBox = React.createClass({
             reported={reported}
             onClick={() => dispatch(openModal())}
             bsSize={buttonBsSize}
+            style={buttonStyle}
             className={buttonClassName}
           />
           <ReportModal

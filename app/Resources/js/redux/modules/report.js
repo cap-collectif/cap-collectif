@@ -1,4 +1,3 @@
-import REPORT_IDEA_SUCCESS from '../../constants/IdeaConstants';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher from '../../services/Fetcher';
@@ -39,7 +38,7 @@ const stopLoading = () => {
   };
 };
 
-const submitReport = (url, data, dispatch, successMessage, successFluxAction = null) => {
+const submitReport = (url, data, dispatch, successMessage) => {
   dispatch(startLoading());
   return new Promise((resolve, reject) => {
     Fetcher
@@ -51,11 +50,6 @@ const submitReport = (url, data, dispatch, successMessage, successFluxAction = n
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: successMessage },
         });
-        if (successFluxAction) {
-          FluxDispatcher.dispatch({
-            actionType: successFluxAction,
-          });
-        }
         resolve();
       })
       .catch(() => {
@@ -70,8 +64,7 @@ export const submitIdeaReport = (idea, data, dispatch) => {
     `/ideas/${idea}/reports`,
     data,
     dispatch,
-    'alert.success.report.idea',
-    REPORT_IDEA_SUCCESS
+    'alert.success.report.idea'
   );
 };
 
