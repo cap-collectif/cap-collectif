@@ -1,173 +1,288 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { SubmissionError } from 'redux-form';
+import mailcheck from 'mailcheck';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
+import FormMixin from '../../../utils/FormMixin';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import UserActions from '../../../actions/UserActions';
+import FlashMessages from '../../Utils/FlashMessages';
+import Input from '../../Form/Input';
+import domains from './email_domains';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import Form from '../../Form/Form';
-
-export const validate = values => {
-  const errors = {};
-  if (!values.username || values.username.length < 2) {
-    errors.username = 'registration.constraints.username.min';
-  }
-  if (!values.email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'registration.constraints.email.invalid';
-  }
-  if (!values.plainPassword || values.plainPassword.length < 8) {
-    errors.plainPassword = 'registration.constraints.password.min';
-  }
-  if (!values.charte) {
-    errors.charte = 'registration.constraints.charte.check';
-  }
-  if (!values.captcha) {
-    errors.captcha = 'global.constraints.notBlank';
-  }
-  return errors;
-};
-
 
 export const RegistrationForm = React.createClass({
   propTypes: {
     features: PropTypes.object.isRequired,
     user_types: PropTypes.array.isRequired,
     parameters: PropTypes.object.isRequired,
-    onSubmitSuccess: PropTypes.func.isRequired,
-    onSubmitFail: PropTypes.func.isRequired,
+    isSubmitting: PropTypes.bool.isRequired,
+    onValidationFailure: PropTypes.func,
+    onSubmitSuccess: PropTypes.func,
+    onSubmitFailure: PropTypes.func,
   },
-  mixins: [IntlMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
-  handleSubmit(values) {
-    const form = Object.assign({}, values);
-    delete form.charte;
-    return new Promise((resolve, reject) => {
-      UserActions
-      .register(form)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: { bsStyle: 'success', content: 'alert.success.add.user' },
-        });
-        UserActions.login({ _username: values.email, _password: values.plainPassword });
-        resolve();
-      })
-      .catch((error) => {
-        const response = error.response;
-        const errors = { _error: 'Registration failed !' };
-        if (response.errors) {
-          if (response.errors.children.email.errors && response.errors.children.email.errors.length > 0) {
-            response.errors.children.email.errors.map(string => {
-              if (string === 'already_used_email') {
-                errors.email = 'registration.constraints.email.already_used';
-              } else {
-                errors.email = 'registration.constraints.' + string;
-              }
-            });
-          }
-          if (response.errors.children.captcha.errors && response.errors.children.captcha.errors.length > 0) {
-            errors.captcha = 'registration.constraints.captcha.invalid';
-          }
-          reject(new SubmissionError(errors));
+  getDefaultProps() {
+    return {
+      onSubmitSuccess: () => {},
+      onSubmitFailure: () => {},
+      onValidationFailure: () => {},
+    };
+  },
+
+  getInitialState() {
+    return {
+      form: {
+        username: '',
+        email: '',
+        plainPassword: '',
+        charte: false,
+        captcha: '',
+        zipcode: '',
+        userType: '',
+      },
+      suggestedEmail: null,
+      errors: {
+        username: [],
+        email: [],
+        plainPassword: [],
+        charte: [],
+        captcha: [],
+        zipcode: [],
+        userType: [],
+      },
+    };
+  },
+
+  componentWillReceiveProps(nextProps) {
+    const { isSubmitting, onSubmitSuccess, onSubmitFailure, onValidationFailure, features } = this.props;
+    if (!isSubmitting && nextProps.isSubmitting) {
+      if (this.isValid()) {
+        const form = JSON.parse(JSON.stringify(this.state.form));
+        delete form.charte;
+        if (!features.user_type) {
+          delete form.userType;
         }
-      });
+        if (!features.zipcode_at_register) {
+          delete form.zipcode;
+        }
+        return UserActions
+          .register(form)
+          .then(() => {
+            AppDispatcher.dispatch({
+              actionType: 'UPDATE_ALERT',
+              alert: { bsStyle: 'success', content: 'alert.success.add.user' },
+            });
+            UserActions.login({ _username: form.email, _password: form.plainPassword });
+            this.setState(this.getInitialState());
+            return onSubmitSuccess();
+          })
+          .catch((error) => {
+            const response = error.response;
+            if (response.errors) {
+              const errors = this.state.errors;
+              if (response.errors.children.email.errors && response.errors.children.email.errors.length > 0) {
+                const emailErrors = [];
+                response.errors.children.email.errors.map(string => {
+                  if (string === 'already_used_email') {
+                    emailErrors.push('registration.constraints.email.already_used');
+                  } else {
+                    emailErrors.push('registration.constraints.' + string);
+                  }
+                });
+                errors.email = emailErrors;
+              }
+              if (response.errors.children.captcha.errors && response.errors.children.captcha.errors.length > 0) {
+                errors.captcha = ['registration.constraints.captcha.invalid'];
+              }
+              this.setState({ errors: errors });
+              return onValidationFailure();
+            }
+            return onSubmitFailure();
+          });
+      }
+      return onValidationFailure();
+    }
+  },
+
+  setSuggestedEmail() {
+    const form = JSON.parse(JSON.stringify(this.state.form));
+    form.email = this.state.suggestedEmail;
+    this.setState({ form: form, suggestedEmail: null });
+  },
+
+  checkMail() {
+    mailcheck.run({
+      email: this._email.refs.input.value,
+      domains: domains,
+      suggested: suggestion => this.setState({ suggestedEmail: suggestion.full }),
+      empty: () => this.setState({ suggestedEmail: null }),
     });
   },
+  formValidationRules: {
+    username: {
+      min: { value: 2, message: 'registration.constraints.username.min' },
+      max: { value: 128, message: 'registration.constraints.username.max' },
+      notBlank: { message: 'global.constraints.notBlank' },
+    },
+    email: {
+      min: { value: 2, message: 'registration.constraints.email.min' },
+      max: { value: 128, message: 'registration.constraints.email.max' },
+      isEmail: { message: 'registration.constraints.email.invalid' },
+      notBlank: { message: 'global.constraints.notBlank' },
+    },
+    plainPassword: {
+      min: { value: 8, message: 'registration.constraints.password.min' },
+      max: { value: 128, message: 'registration.constraints.password.max' },
+      notBlank: { message: 'global.constraints.notBlank' },
+    },
+    charte: {
+      isTrue: { message: 'registration.constraints.charte.check' },
+    },
+    // captcha: {
+    //   notBlank: { message: 'global.constraints.notBlank' },
+    // },
+  },
 
-  handleSubmitFail() {
-    window.grecaptcha.reset();
-    this.props.onSubmitFail();
+  handleCaptchaChange(value) {
+    const form = JSON.parse(JSON.stringify(this.state.form));
+    form.captcha = value;
+    this.setState({ form: form });
+  },
+
+  renderFormErrors(field) {
+    const errors = this.getErrorsMessages(field);
+    if (errors.length === 0) {
+      return null;
+    }
+    return <FlashMessages errors={errors} form />;
   },
 
   render() {
-    const { features, user_types, parameters, onSubmitSuccess } = this.props;
+    const { features, user_types, parameters } = this.props;
     const cguName = parameters['signin.cgu.name'];
     const cguLink = parameters['signin.cgu.link'];
-    const dynamicsField = [];
-    if (features.user_type) {
-      dynamicsField.push({
-        id: '_user_type',
-        name: 'userType',
-        type: 'select',
-        label: (
-          <span>
-            {this.getIntlMessage('registration.type')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-          </span>
-        ),
-        defaultOptionLabel: this.getIntlMessage('registration.select.type'),
-        options: user_types.map((type) => { return { value: type.id, label: type.name }; }),
-      });
-    }
-    if (features.zipcode_at_register) {
-      dynamicsField.push({
-        id: '_zipcode',
-        name: 'zipcode',
-        type: 'text',
-        label: (
-          <span>
-            {this.getIntlMessage('registration.zipcode')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-          </span>
-        ),
-      });
-    }
-    return (
-      <Form
-        form="registration-form"
-        validate={validate}
-        ref={c => this.form = c}
-        onSubmit={this.handleSubmit}
-        onSubmitFail={this.handleSubmitFail}
-        onSubmitSuccess={onSubmitSuccess}
-        fields={[
-          {
-            name: 'username',
-            label: this.getIntlMessage('registration.username'),
-            className: 'control-label h5',
-            type: 'text',
-            id: '_username',
-          },
-          {
-            name: 'email',
-            label: this.getIntlMessage('global.email'),
-            className: 'control-label h5',
-            type: 'email',
-            id: '_email',
-            popover: {
-              id: 'registration-email-tooltip',
-              message: this.getIntlMessage('registration.tooltip.email'),
-            },
-          },
-          {
-            name: 'plainPassword',
-            label: this.getIntlMessage('registration.password'),
-            type: 'password',
-            id: '_password',
-            popover: {
-              id: 'registration-password-tooltip',
-              message: this.getIntlMessage('registration.tooltip.password'),
-            },
-          },
-        ]
-        .concat(dynamicsField)
-        .concat([
-          {
-            id: '_charte',
-            name: 'charte',
-            type: 'checkbox',
-            label: (
-              <FormattedHTMLMessage
-                message={this.getIntlMessage('registration.charte')}
-                link={<a className="external-link" href={cguLink}>{cguName}</a>}
-              />
-            ),
-          },
-          {
-            id: '_captcha',
-            name: 'captcha',
-            type: 'captcha',
-          },
-        ])
-        }
+    const cguLabel = cguName && cguLink
+      ? <FormattedHTMLMessage
+        message={this.getIntlMessage('registration.charte')}
+        link={<a href={cguLink}>{cguName}</a>}
       />
+      : null
+    ;
+    const typeLabel = (
+      <span>
+        {this.getIntlMessage('registration.type')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
+      </span>
+    );
+    const zipcodeLabel = (
+      <span>
+        {this.getIntlMessage('registration.zipcode')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
+      </span>
+    );
+    return (
+      <form id="registration-form">
+        <Input
+          id="_username"
+          type="text"
+          autoFocus
+          valueLink={this.linkState('form.username')}
+          label={this.getIntlMessage('registration.username')}
+          groupClassName={this.getGroupStyle('username')}
+          errors={this.renderFormErrors('username')}
+        />
+        <OverlayTrigger rootClose placement="right"
+                        overlay={
+          <Popover id="registration-email-tooltip">
+            { this.getIntlMessage('registration.tooltip.email') }
+          </Popover>
+        }
+        >
+            <Input
+              id="_email"
+              ref={c => this._email = c}
+              type="text"
+              valueLink={this.linkState('form.email')}
+              label={this.getIntlMessage('global.email')}
+              labelClassName="h5 label--no-margin"
+              groupClassName={this.getGroupStyle('email')}
+              errors={this.renderFormErrors('email')}
+              onBlur={this.checkMail}
+            />
+        </OverlayTrigger>
+        {this.state.suggestedEmail
+          ? <p className="registration__help">
+            { this.getIntlMessage('global.typo') } <a onClick={this.setSuggestedEmail} className="js-email-correction">{ this.state.suggestedEmail }</a> ?
+          </p>
+          : null
+        }
+        <OverlayTrigger rootClose placement="right"
+                        overlay={
+          <Popover id="registration-email-tooltip">
+            { this.getIntlMessage('registration.tooltip.password') }
+          </Popover>
+        }
+        >
+          <Input
+            id="_password"
+            type="password"
+            valueLink={this.linkState('form.plainPassword')}
+            label={this.getIntlMessage('registration.password')}
+            labelClassName="h5 label--no-margin"
+            groupClassName={this.getGroupStyle('plainPassword')}
+            errors={this.renderFormErrors('plainPassword')}
+          />
+        </OverlayTrigger>
+        {
+          features.user_type &&
+          <Input
+            id="_user_type"
+            type="select"
+            valueLink={this.linkState('form.userType')}
+            label={typeLabel}
+            groupClassName={this.getGroupStyle('userType')}
+            errors={this.renderFormErrors('userType')}
+          >
+            <option value="" disabled selected>
+              {this.getIntlMessage('registration.select.type')}
+            </option>
+            {
+              user_types.map((type) => <option key={type.id} value={type.id}>{type.name}</option>)
+            }
+          </Input>
+        }
+        {
+          features.zipcode_at_register &&
+            <Input
+              id="_zipcode"
+              type="text"
+              valueLink={this.linkState('form.zipcode')}
+              label={zipcodeLabel}
+              groupClassName={this.getGroupStyle('zipcode')}
+              errors={this.renderFormErrors('zipcode')}
+            />
+        }
+        {
+          cguLabel &&
+            <Input
+              id="_charte"
+              type="checkbox"
+              valueLink={this.linkState('form.charte')}
+              label={cguLabel}
+              groupClassName={this.getGroupStyle('charte')}
+              errors={this.renderFormErrors('charte')}
+            />
+        }
+        <div className={this.getGroupStyle('captcha')}>
+          <ReCAPTCHA
+            style={{ transform: 'scale(0.85)', transformOrigin: '0 0' }}
+            sitekey="6LctYxsTAAAAANsAl06GxNeV5xGaPjy5jbDe-J8M"
+            onChange={this.handleCaptchaChange}
+          />
+          {this.renderFormErrors('captcha')}
+        </div>
+      </form>
     );
   },
 
@@ -181,4 +296,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null, null, { withRef: true })(RegistrationForm);
+export default connect(mapStateToProps)(RegistrationForm);

@@ -24,7 +24,6 @@ export const RegistrationModal = React.createClass({
 
   handleSubmit() {
     this.setState({ isSubmitting: true });
-    this.form.getWrappedInstance().form.submit();
   },
 
   stopSubmit() {
@@ -51,7 +50,9 @@ export const RegistrationModal = React.createClass({
         enforceFocus={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg" children={this.getIntlMessage('global.register')} />
+          <Modal.Title id="contained-modal-title-lg">
+            {this.getIntlMessage('global.register')}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {
@@ -68,8 +69,9 @@ export const RegistrationModal = React.createClass({
             prefix="registration."
           />
           <RegistrationForm
-            ref={(c) => this.form = c}
-            onSubmitFail={this.stopSubmit}
+            isSubmitting={isSubmitting}
+            onSubmitFailure={this.stopSubmit}
+            onValidationFailure={this.stopSubmit}
             onSubmitSuccess={this.handleSubmitSuccess}
           />
           {

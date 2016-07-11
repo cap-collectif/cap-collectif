@@ -1,114 +1,77 @@
 /* eslint-env mocha */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
+import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { RegistrationForm } from './RegistrationForm';
 import IntlData from '../../../translations/FR';
-import chai from 'chai';
-import chaiSubset from 'chai-subset';
-
-chai.use(chaiSubset);
-const expect = chai.expect;
 
 describe('<RegistrationForm />', () => {
   const props = {
     ...IntlData,
-    onSubmitSuccess: () => {},
-    onSubmitFail: () => {},
+    isSubmitting: false,
     user_types: [],
-    parameters: {
-      'signin.cgu.name': 'la charte',
-      'signin.cgu.link': '/charte',
-    },
-    features: {
-      'user_type': false,
-      'zipcode_at_register': false,
-    },
+  };
+
+  const parameters = {
+    'signin.cgu.name': 'la charte',
+    'signin.cgu.link': '/charte',
+  };
+
+  const noParameters = {
+    'signin.cgu.name': null,
+    'signin.cgu.link': null,
   };
 
   it('renders a form with inputs and a captcha', () => {
-    const wrapper = shallow(<RegistrationForm {...props} />);
-    expect(wrapper.find('ReduxForm')).to.have.length(1);
-    expect(wrapper.find('ReduxForm').prop('form')).to.equal('registration-form');
-    expect(wrapper.find('ReduxForm').prop('fields')).to.have.length(5);
-    // expect(wrapper.find('AsyncScriptLoader')).to.have.length(1);
-    // expect(wrapper.fi  nd('AsyncScriptLoader').prop('sitekey')).to.equal('6LctYxsTAAAAANsAl06GxNeV5xGaPjy5jbDe-J8M');
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={parameters} {...props} />);
+    expect(wrapper.find('form')).to.have.length(1);
+    expect(wrapper.find('form').prop('id')).to.equal('registration-form');
+    expect(wrapper.find('Input')).to.have.length(4);
+    expect(wrapper.find('AsyncScriptLoader')).to.have.length(1);
+    expect(wrapper.find('AsyncScriptLoader').prop('sitekey')).to.equal('6LctYxsTAAAAANsAl06GxNeV5xGaPjy5jbDe-J8M');
   });
 
   it('renders a username input', () => {
-    const wrapper = shallow(<RegistrationForm {...props} />);
-    expect(wrapper.find('ReduxForm').prop('fields')).to.contains(
-      {
-        name: 'username',
-        label: 'Nom ou pseudonyme',
-        type: 'text',
-        id: '_username',
-      }
-    );
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={parameters} {...props} />);
+    const input = wrapper.find('Input').first();
+    expect(input.prop('id')).to.equal('_username');
+    expect(input.prop('autoFocus')).to.equal(true);
+    expect(input.prop('type')).to.equal('text');
+    expect(input.prop('label')).to.equal('Nom ou pseudonyme');
+    expect(input.prop('labelClassName')).to.equal('h5');
   });
 
   it('renders an email input', () => {
-    const wrapper = shallow(<RegistrationForm {...props} />);
-    expect(wrapper.find('ReduxForm').prop('fields')).to.contains(
-      {
-        name: 'email',
-        label: 'Adresse électronique',
-        type: 'email',
-        id: '_email',
-        popover: {
-          id: 'registration-email-tooltip',
-          message: 'Vous recevrez un e-mail contenant un lien permettant de confirmer qu\'il s\'agit bien de votre adresse.',
-        },
-      }
-    );
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={parameters} {...props} />);
+    const input = wrapper.find('Input').at(1);
+    expect(input.prop('id')).to.equal('_email');
+    expect(input.prop('type')).to.equal('text');
+    expect(input.prop('help')).to.not.exist;
+    expect(input.prop('labelClassName')).to.equal('h5 label--no-margin');
   });
 
   it('renders a password input', () => {
-    const wrapper = shallow(<RegistrationForm {...props} />);
-    expect(wrapper.find('ReduxForm').prop('fields')).to.contains(
-      {
-        name: 'plainPassword',
-        label: 'Créez un mot de passe',
-        type: 'password',
-        id: '_password',
-        popover: {
-          id: 'registration-password-tooltip',
-          message: 'Le mot de passe doit comporter au moins huit caractères.',
-        },
-      }
-    );
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={parameters} {...props} />);
+    const input = wrapper.find('Input').at(2);
+    expect(input.prop('id')).to.equal('_password');
+    expect(input.prop('type')).to.equal('password');
+    expect(input.prop('help')).to.not.exist;
+    expect(input.prop('labelClassName')).to.equal('h5 label--no-margin');
   });
 
-  it('renders a user_type select', () => {
-    const wrapper = shallow(<RegistrationForm {...props} user_types={[{ id: 1, name: 'type_1' }]} features={{ user_type: true, zipcode_at_register: false }} />);
-    const select = wrapper.find('ReduxForm').prop('fields')[3];
-    expect(select).to.containSubset(
-      {
-        name: 'userType',
-        type: 'select',
-        id: '_user_type',
-        options: [
-          {
-            label: 'type_1',
-            value: 1,
-          },
-        ],
-        defaultOptionLabel: 'Je suis...',
-      }
-    );
-    expect(select.label).to.be.a.symbol;
+  it('renders a charte checkbox when parameters are specified', () => {
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={parameters} {...props} />);
+    const input = wrapper.find('Input').at(3);
+    expect(input.prop('id')).to.equal('_charte');
+    expect(wrapper.find('Input').someWhere(n => n.prop('id') === '_charte')).to.equal(true);
+    expect(input.prop('type')).to.equal('checkbox');
+    expect(input.prop('help')).to.not.exist;
+    expect(input.prop('labelClassName')).to.equal('h5');
   });
 
-  it('renders a charte checkbox', () => {
-    const wrapper = shallow(<RegistrationForm {...props} />);
-    const checkbox = wrapper.find('ReduxForm').prop('fields')[3];
-    expect(checkbox).to.containSubset(
-      {
-        name: 'charte',
-        type: 'checkbox',
-        id: '_charte',
-      }
-    );
-    expect(checkbox.label).to.be.a.symbol;
+  it('does not render a charte checkbox when parameters are not specified', () => {
+    const wrapper = shallow(<RegistrationForm features={{ 'user_type': false, 'zipcode_at_register': false }} parameters={noParameters} {...props} />);
+    expect(wrapper.find('Input').someWhere(n => n.prop('id') === '_charte')).to.equal(false);
   });
 });
