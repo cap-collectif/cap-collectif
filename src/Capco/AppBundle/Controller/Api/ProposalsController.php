@@ -6,6 +6,8 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Event\ProposalEvent;
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Form\ReportingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -398,5 +400,36 @@ class ProposalsController extends FOSRestController
         $index->refresh();
 
         return [];
+    }
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     * @Post("/proposals/{proposal_id}/reports")
+     * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @View(statusCode=201, serializerGroups={"Default"})
+     */
+    public function postProposalReportAction(Request $request, Proposal $proposal)
+    {
+        if ($this->getUser() === $proposal->getAuthor()) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $report = (new Reporting())
+            ->setReporter($this->getUser())
+            ->setProposal($proposal)
+        ;
+
+        $form = $this->createForm(new ReportingType(), $report, ['csrf_protection' => false]);
+        $form->submit($request->request->all(), false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $this->get('doctrine.orm.entity_manager')->persist($report);
+        $this->get('doctrine.orm.entity_manager')->flush();
+        $this->get('capco.notify_manager')->sendNotifyMessage($report);
+
+        return $report;
     }
 }

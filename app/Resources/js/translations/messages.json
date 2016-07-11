@@ -33,9 +33,13 @@
         "phone": "Le numéro de téléphone a bien été supprimé."
       },
       "report": {
-        "argument": "Merci ! L'argument a bien \u00e9t\u00e9 signal\u00e9.",
+        "argument": "Merci ! L'argument a bien été signalé.",
+        "comment": "Merci ! Le commentaire a bien été signalé.",
         "idea": "Merci ! L'idée a bien été signalée.",
-        "source": "Merci ! La source a bien \u00e9t\u00e9 signal\u00e9e."
+        "opinion": "Merci ! La proposition a bien été signalée.",
+        "version": "Merci ! La proposition a bien été signalée.",
+        "proposal": "Merci ! La proposition a bien été signalée.",
+        "source": "Merci ! La source a bien été signalée."
       },
       "update": {
         "argument": "Merci ! Votre argument a bien \u00e9t\u00e9 mis \u00e0 jour.",

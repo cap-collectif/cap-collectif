@@ -1,4 +1,5 @@
 import REPORT_IDEA_SUCCESS from '../../constants/IdeaConstants';
+import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher from '../../services/Fetcher';
 
@@ -46,6 +47,10 @@ const submitReport = (url, data, dispatch, successMessage, successFluxAction = n
       .then(() => {
         dispatch(stopLoading());
         dispatch(closeModal());
+        FluxDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: { bsStyle: 'success', content: successMessage },
+        });
         if (successFluxAction) {
           FluxDispatcher.dispatch({
             actionType: successFluxAction,
@@ -83,7 +88,8 @@ export const submitArgumentReport = (opinion, argument, data, dispatch) => {
   return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}/reports`,
     data,
-    dispatch
+    dispatch,
+    'alert.success.report.argument'
   );
 };
 
@@ -91,7 +97,8 @@ export const submitOpinionReport = (opinion, data, dispatch) => {
   return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/reports`,
     data,
-    dispatch
+    dispatch,
+    'alert.success.report.opinion'
   );
 };
 
@@ -99,7 +106,8 @@ export const submitCommentReport = (comment, data, dispatch) => {
   return submitReport(
     `/comments/${comment.id}/reports`,
     data,
-    dispatch
+    dispatch,
+    'alert.success.report.comment'
   );
 };
 
@@ -107,7 +115,8 @@ export const submitProposalReport = (proposal, data, dispatch) => {
   return submitReport(
     `/proposals/${proposal.id}/reports`,
     data,
-    dispatch
+    dispatch,
+    'alert.success.report.proposal'
   );
 };
 

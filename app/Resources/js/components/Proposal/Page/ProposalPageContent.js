@@ -6,7 +6,7 @@ import ProposalEditModal from '../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
 import EditButton from '../../Form/EditButton';
 import DeleteButton from '../../Form/DeleteButton';
-import ProposalReportButton from './ProposalReportButton';
+import ProposalReportButton from '../Report/ProposalReportButton';
 import ProposalResponse from './ProposalResponse';
 
 const ProposalPageContent = React.createClass({

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import ReportBox from '../Report/ReportBox';
-import { submitProposalReport } from '../../redux/modules/report';
+import ReportBox from '../../Report/ReportBox';
+import { submitProposalReport } from '../../../redux/modules/report';
 
 const ProposalReportButton = React.createClass({
   propTypes: {
