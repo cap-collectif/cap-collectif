@@ -121,12 +121,14 @@ export const RegistrationForm = React.createClass({
           {
             name: 'username',
             label: this.getIntlMessage('registration.username'),
+            className: 'control-label h5',
             type: 'text',
             id: '_username',
           },
           {
             name: 'email',
             label: this.getIntlMessage('global.email'),
+            className: 'control-label h5',
             type: 'email',
             id: '_email',
             popover: {
