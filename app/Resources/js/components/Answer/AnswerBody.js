@@ -5,6 +5,7 @@ import UserLink from '../User/UserLink';
 import moment from 'moment';
 
 const AnswerBody = React.createClass({
+  displayName: 'AnswerBody',
   propTypes: {
     answer: React.PropTypes.object.isRequired,
   },

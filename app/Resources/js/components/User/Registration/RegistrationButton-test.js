@@ -20,7 +20,7 @@ describe('<RegistrationButton />', () => {
     const wrapper = shallow(<RegistrationButton features={{ 'registration': true }} {...props} />);
     expect(wrapper.find('Button')).to.have.length(1);
     expect(wrapper.find('Button').prop('bsStyle')).to.equal('primary');
-    expect(wrapper.find('Button').prop('className')).to.equal('navbar-btn btn--registration');
+    expect(wrapper.find('Button').prop('className')).to.equal('navbar-btn btn--registration ');
     expect(wrapper.find('Button').prop('onClick')).to.be.a('function');
   });
 });

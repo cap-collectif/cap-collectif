@@ -32,7 +32,7 @@ const CommentBody = React.createClass({
       text += ' ';
     }
 
-    return text.replace(/\r?\n/g, '<br />');
+    return text.replace(/\r?\n/g, '<br/>');
   },
 
   expand(expanded) {

@@ -2,6 +2,7 @@ import React from 'react';
 import { IntlMixin, FormattedNumber } from 'react-intl';
 
 const ProposalDetailEstimation = React.createClass({
+  displayName: 'ProposalDetailEstimation',
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     showNullEstimation: React.PropTypes.bool.isRequired,

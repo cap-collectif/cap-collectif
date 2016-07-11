@@ -7,6 +7,7 @@ import LoginButton from '../../User/Login/LoginButton';
 import ProposalVoteBoxMessage from './ProposalVoteBoxMessage';
 import { connect } from 'react-redux';
 import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
+import RegistrationButton from '../../User/Registration/RegistrationButton';
 
 const ProposalVoteBox = React.createClass({
   propTypes: {
@@ -126,7 +127,7 @@ const ProposalVoteBox = React.createClass({
           id="confirm-proposal-vote"
           isSubmitting={this.state.isSubmitting}
           onSubmit={this.handleSubmit}
-          label={this.props.userHasVote ? 'proposal.vote.delete' : 'proposal.vote.add'}
+          label="proposal.vote.confirm"
           bsStyle={(!this.props.userHasVote || this.state.isSubmitting) ? 'success' : 'danger'}
           className="btn-block"
           style={{ marginTop: '10px' }}
@@ -136,15 +137,20 @@ const ProposalVoteBox = React.createClass({
         {
           !this.props.user && this.props.selectionStep.voteType !== VOTE_TYPE_BUDGET && this.props.selectionStep.open
           ? <div>
-            <p
-              className="text-center excerpt"
-              style={{ margin: '10px 0 0' }}
-            >
-              {this.getIntlMessage('global.or')}
+            <p className="excerpt p--lined">
+              <span>{this.getIntlMessage('global.or')}</span>
+            </p>
+            <p className="text-center excerpt">
+              {this.getIntlMessage('proposal.vote.authenticate')}
             </p>
             <LoginButton
               label="proposal.vote.vote_with_my_account"
               className="btn-block"
+            />
+            <RegistrationButton
+              className="btn-block"
+              bsStyle="default"
+              style={{ marginTop: '10px', display: 'block' }}
             />
           </div>
           : null

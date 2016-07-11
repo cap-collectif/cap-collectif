@@ -9,6 +9,7 @@ import ProposalVoteStore from '../../../stores/ProposalVoteStore';
 import { PROPOSAL_VOTES_TO_SHOW } from '../../../constants/ProposalConstants';
 
 const ProposalPageVotes = React.createClass({
+  displayName: 'ProposalPageVotes',
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
     votes: React.PropTypes.array.isRequired,
@@ -73,7 +74,7 @@ const ProposalPageVotes = React.createClass({
     const moreVotes = this.state.votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
 
     if (!this.state.votesCount) {
-      return null;
+      return <p>{this.getIntlMessage('proposal.vote.none')}</p>;
     }
 
     const classes = {

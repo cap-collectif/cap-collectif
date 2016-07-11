@@ -1,18 +1,34 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Modal } from 'react-bootstrap';
 import ProposalVoteBox from './ProposalVoteBox';
 import CloseButton from '../../Form/CloseButton';
-import RegisterButton from '../../User/Registration/RegistrationButton';
 
 const ProposalVoteModal = React.createClass({
+  displayName: 'ProposalVoteModal',
   propTypes: {
-    proposal: React.PropTypes.object.isRequired,
-    selectionStep: React.PropTypes.object.isRequired,
-    showModal: React.PropTypes.bool.isRequired,
-    onToggleModal: React.PropTypes.func.isRequired,
+    proposal: PropTypes.object.isRequired,
+    selectionStep: PropTypes.object.isRequired,
+    showModal: PropTypes.bool.isRequired,
+    onToggleModal: PropTypes.func.isRequired,
+    userHasVote: PropTypes.bool,
+    creditsLeft: PropTypes.number,
+    onVoteChange: PropTypes.func,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      userHasVote: false,
+      creditsLeft: null,
+      onVoteChange: () => {},
+    };
+  },
+
+  onSubmitSuccess() {
+    this.close();
+    this.props.onVoteChange();
+  },
 
   close() {
     this.props.onToggleModal(false);
@@ -23,11 +39,12 @@ const ProposalVoteModal = React.createClass({
   },
 
   render() {
+    const { showModal, proposal, selectionStep, userHasVote, creditsLeft } = this.props;
     return (
       <Modal
         animation={false}
-        show={this.props.showModal}
-        onHide={this.close.bind(null, this)}
+        show={showModal}
+        onHide={this.close}
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
       >
@@ -38,14 +55,15 @@ const ProposalVoteModal = React.createClass({
         </Modal.Header>
         <Modal.Body>
           <ProposalVoteBox
-            proposal={this.props.proposal}
-            selectionStep={this.props.selectionStep}
-            onSubmitSuccess={this.close}
+            proposal={proposal}
+            selectionStep={selectionStep}
+            onSubmitSuccess={this.onSubmitSuccess}
+            userHasVote={userHasVote}
+            creditsLeft={creditsLeft}
           />
         </Modal.Body>
         <Modal.Footer>
-          <RegisterButton className="pull-left" />
-          <CloseButton className="pull-right" onClose={this.close.bind(null, this)} />
+          <CloseButton className="pull-right" onClose={this.close} />
         </Modal.Footer>
       </Modal>
     );

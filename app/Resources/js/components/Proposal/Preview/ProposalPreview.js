@@ -36,9 +36,9 @@ const ProposalPreview = React.createClass({
     };
   },
 
-  onVoteChange(value) {
+  onVoteChange() {
     this.setState({
-      userHasVote: value,
+      userHasVote: !this.state.userHasVote,
     });
   },
 

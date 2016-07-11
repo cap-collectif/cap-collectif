@@ -9,6 +9,7 @@ import OpinionSourceBox from './Source/OpinionSourceBox';
 import VoteLinechart from '../Utils/VoteLinechart';
 import OpinionLinksBox from './Links/OpinionLinksBox';
 import OpinionSourceStore from '../../stores/OpinionSourceStore';
+import { scrollToAnchor } from '../../services/ScrollToAnchor';
 
 const OpinionTabs = React.createClass({
   propTypes: {
@@ -29,15 +30,6 @@ const OpinionTabs = React.createClass({
   },
 
   componentDidMount() {
-    const scrollToAnchor = () => {
-      const hash = window.location.hash;
-      if (hash) {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView(false);
-        }
-      }
-    };
     setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
   },
 
@@ -153,7 +145,7 @@ const OpinionTabs = React.createClass({
       return (
         <Tabs defaultActiveKey={this.getDefaultKey()} animation={false}>
           { this.isVersionable()
-            ? <Tab
+            && <Tab
                 id="opinion__versions"
                 className="opinion-tabs"
                 eventKey={'versions'}
@@ -161,10 +153,9 @@ const OpinionTabs = React.createClass({
             >
               {this.renderVersionsContent()}
             </Tab>
-            : null
           }
           { this.isCommentable()
-            ? <Tab
+            && <Tab
                 id="opinion__arguments"
                 className="opinion-tabs"
                 eventKey={'arguments'}
@@ -172,10 +163,9 @@ const OpinionTabs = React.createClass({
             >
               <ArgumentsBox {...this.props} />
             </Tab>
-            : null
           }
           { this.isSourceable()
-            ? <Tab
+            && <Tab
                 id="opinion__sources"
                 className="opinion-tabs"
                 eventKey={'sources'}
@@ -183,10 +173,9 @@ const OpinionTabs = React.createClass({
             >
               <OpinionSourceBox {...this.props} />
             </Tab>
-            : null
           }
           { this.hasStatistics()
-            ? <Tab
+            && <Tab
                 id="opinion__votesevolution"
                 className="opinion-tabs"
                 eventKey={'votesevolution'}
@@ -194,10 +183,9 @@ const OpinionTabs = React.createClass({
             >
               <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />
             </Tab>
-            : null
           }
           { this.isLinkable()
-            ? <Tab
+            && <Tab
                 id="opinion__links"
                 className="opinion-tabs"
                 eventKey={'links'}
@@ -205,7 +193,6 @@ const OpinionTabs = React.createClass({
             >
               <OpinionLinksBox {...this.props} />
             </Tab>
-            : null
           }
         </Tabs>
       );
