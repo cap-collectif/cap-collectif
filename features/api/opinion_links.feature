@@ -32,7 +32,6 @@ Feature: Opinions Links
 
           "_links": {
             "show": @string@,
-            "report": @string@,
             "type": @string@
           }
         },

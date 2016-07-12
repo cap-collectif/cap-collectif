@@ -34,7 +34,6 @@ Feature: Opinions Versions
             },
             "_links": {
               "show": @string@,
-              "report": @string@,
               "type": @string@
             },
             "user_vote": @null@,
@@ -59,7 +58,6 @@ Feature: Opinions Versions
 
           "_links": {
             "show": @string@,
-            "report": @string@,
             "parent": @string@
           },
 
@@ -119,7 +117,6 @@ Feature: Opinions Versions
           "_links": {
             "show": @string@,
             "edit": @string@,
-            "report": @string@,
             "type": @string@
           },
           "user_vote": @null@,
@@ -138,7 +135,6 @@ Feature: Opinions Versions
         },
         "_links": {
           "show": @string@,
-          "report": @string@,
           "parent": @string@
         },
         "user_vote": @null@,

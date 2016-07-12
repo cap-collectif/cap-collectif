@@ -109,7 +109,6 @@ Feature: Opinions
         "_links": {
           "show": @string@,
           "edit": @string@,
-          "report": @string@,
           "type": @string@
         }
       },

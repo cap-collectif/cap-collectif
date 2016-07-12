@@ -112,8 +112,7 @@ Feature: Proposal Restful Api
         "likers": @array@,
         "_links": {
           "show": @string@,
-          "index": @string@,
-          "report": @string@
+          "index": @string@
         }
       },
       "userHasVote": false,
@@ -426,3 +425,16 @@ Feature: Proposal Restful Api
     Given I am logged in to api as user
     When I send a DELETE request to "api/proposal_forms/1/proposals/2"
     Then the JSON response status code should be 204
+
+  # Report
+
+  @database
+  Scenario: Anonymous API client wants to report a proposal
+    When I send a POST request to "/api/proposals/1/reports" with a valid report json
+    Then the JSON response status code should be 401
+
+  @database
+  Scenario: Logged in API client wants to report an proposal
+    Given I am logged in to api as admin
+    When I send a POST request to "/api/proposals/1/reports" with a valid report json
+    Then the JSON response status code should be 201

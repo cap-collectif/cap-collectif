@@ -37,8 +37,7 @@ Feature: Proposals comments
           "is_trashed": @boolean@,
           "_links": {
             "vote": @string@,
-            "edit": @string@,
-            "report": @string@
+            "edit": @string@
           },
           "has_user_reported": @boolean@,
           "has_user_voted": @boolean@,
