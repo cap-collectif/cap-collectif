@@ -24,7 +24,7 @@ class IdeaPage extends Page
         'idea edit form submit button' => '#confirm-idea-edit',
         'idea delete button' => '#idea-delete-button',
         'idea confirm deletion button' => '#confirm-idea-delete',
-        'idea report button' => '#idea-report-button',
+        'idea report button' => '.idea__btn--report',
         'idea vote button' => '#idea-vote-button',
         'comments list' => '.idea__comments',
         'first vote' => '.idea__vote:nth-child(1)',

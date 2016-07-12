@@ -45,7 +45,7 @@ Feature: Opinions
     Given feature "reporting" is enabled
     And I am logged in as admin
     And I go to an opinion
-    When I follow "Signaler"
+    When I press "Signaler"
     And I wait 1 seconds
     And I fill in the following:
       | capco_app_reporting_status | 1                       |

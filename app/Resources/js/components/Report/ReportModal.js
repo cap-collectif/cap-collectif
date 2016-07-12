@@ -40,8 +40,7 @@ const ReportModal = React.createClass({
         <Modal.Footer>
           <CloseButton onClose={() => dispatch(closeModal())} />
           <SubmitButton
-            id="confirm-opinion-source-report"
-            className="report-button-submit"
+            id="report-button-submit"
             label="global.report.submit"
             isSubmitting={isLoading}
             onSubmit={() => this.form.form.submit()}

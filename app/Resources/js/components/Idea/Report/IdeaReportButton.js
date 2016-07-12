@@ -8,13 +8,6 @@ export const IdeaReportButton = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     idea: PropTypes.object.isRequired,
-    buttonId: PropTypes.string,
-  },
-
-  getDefaultProps() {
-    return {
-      buttonId: 'idea-report-button',
-    };
   },
 
   report(data) {
@@ -23,11 +16,10 @@ export const IdeaReportButton = React.createClass({
   },
 
   render() {
-    const { idea, buttonId } = this.props;
+    const { idea } = this.props;
     return (
       <ReportBox
         id={'idea-' + idea.id}
-        buttonId={buttonId}
         reported={idea.userHasReport}
         onReport={this.report}
         author={idea.author}

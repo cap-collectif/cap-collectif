@@ -166,8 +166,8 @@ Feature: Ideas
     And I am logged in as admin
     And I go to an idea with votes
     When I click the idea report button
-    And I fill the reporting form from the modal
-    And I submit the reporting form from the modal
+    And I fill the reporting form
+    And I submit the reporting form
     Then I should see "Merci ! L'idée a bien été signalée."
 
   @javascript

@@ -79,6 +79,6 @@ Feature: Source
     And I go to an opinion
     And I go on the sources tab
     And I click the source report button
-    And I fill the reporting form from the modal
-    And I submit the reporting form from the modal
+    And I fill the reporting form
+    And I submit the reporting form
     Then I should see "Merci ! La source a bien été signalée."
