@@ -6,7 +6,6 @@ import { shallow } from 'enzyme';
 import ProposalPageAnswer from './ProposalPageAnswer';
 
 describe('<ProposalPageAnswer />', () => {
-  
   const answer = {
     author: {
       vip: false,
@@ -19,7 +18,7 @@ describe('<ProposalPageAnswer />', () => {
     },
     title: 'Titre',
   };
-  
+
   const answerWithVipAuthor = {
     author: {
       vip: true,

@@ -11,12 +11,14 @@ export const RegistrationButton = React.createClass({
     user: PropTypes.object,
     className: PropTypes.string,
     bsStyle: PropTypes.string,
+    buttonStyle: PropTypes.object,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       style: {},
+      buttonStyle: {},
       user: null,
       className: '',
       bsStyle: 'primary',
@@ -44,6 +46,7 @@ export const RegistrationButton = React.createClass({
     return (
       <span style={this.props.style}>
         <Button
+          style={this.props.buttonStyle}
           onClick={this.handleClick}
           bsStyle={this.props.bsStyle}
           className={'navbar-btn btn--registration ' + this.props.className}

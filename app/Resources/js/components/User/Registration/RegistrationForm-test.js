@@ -14,6 +14,7 @@ describe('<RegistrationForm />', () => {
   const props = {
     dispatch: () => {},
     ...IntlData,
+    dispatch: () => {},
     onSubmitSuccess: () => {},
     onSubmitFail: () => {},
     user_types: [],

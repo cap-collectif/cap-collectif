@@ -6,7 +6,6 @@ import { shallow } from 'enzyme';
 import ProposalPageMetadata from './ProposalPageMetadata';
 
 describe('<ProposalPageMetadata />', () => {
-
   const proposal = {
     title: 'Titre',
     category: {
@@ -32,7 +31,7 @@ describe('<ProposalPageMetadata />', () => {
   };
 
   it('should render proposal page metadata', () => {
-    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories={true} showDistricts={true} showNullEstimation={true} />);
+    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories showDistricts showNullEstimation />);
     const mainDiv = wrapper.find('div.proposal__page__metadata');
     expect(mainDiv).to.have.length(1);
     const secondDiv = mainDiv.find('div.proposal__infos');
@@ -42,12 +41,12 @@ describe('<ProposalPageMetadata />', () => {
     const category = infos.first();
     expect(category.prop('className')).to.equal('proposal__info proposal__info--category');
     const catIcon = category.find('i');
-    expect(catIcon.prop('className')).to.equal('cap cap-tag-1-1');
+    expect(catIcon.prop('className')).to.equal('cap cap-tag-1-1 icon--blue');
     expect(category.children().last().text()).to.equal('Nom de la catégorie');
     const district = infos.last();
     expect(district.prop('className')).to.equal('proposal__info proposal__info--district');
     const distIcon = district.find('i');
-    expect(distIcon.prop('className')).to.equal('cap cap-marker-1-1');
+    expect(distIcon.prop('className')).to.equal('cap cap-marker-1-1 icon--blue');
     expect(district.children().last().text()).to.equal('Nom du quartier');
     const estimation = secondDiv.find('ProposalDetailEstimation');
     expect(estimation.prop('proposal')).to.equal(proposal);
@@ -58,28 +57,28 @@ describe('<ProposalPageMetadata />', () => {
   });
 
   it('should not render category if specified not to', () => {
-    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories={false} showDistricts={true} showNullEstimation={true} />);
+    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories={false} showDistricts showNullEstimation />);
     const infos = wrapper.find('div.proposal__info');
     expect(infos).to.have.length(1);
     expect(wrapper.find('div.proposal__info--category')).to.have.length(0);
   });
 
   it('should not render category if proposal has none', () => {
-    const wrapper = shallow(<ProposalPageMetadata proposal={proposalWithoutCategory} showCategories={true} showDistricts={true} showNullEstimation={true} />);
+    const wrapper = shallow(<ProposalPageMetadata proposal={proposalWithoutCategory} showCategories showDistricts showNullEstimation />);
     const infos = wrapper.find('div.proposal__info');
     expect(infos).to.have.length(1);
     expect(wrapper.find('div.proposal__info--category')).to.have.length(0);
   });
 
   it('should not render district if specified not to', () => {
-    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories={true} showDistricts={false} showNullEstimation={true} />);
+    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories showDistricts={false} showNullEstimation />);
     const infos = wrapper.find('div.proposal__info');
     expect(infos).to.have.length(1);
     expect(wrapper.find('div.proposal__info--district')).to.have.length(0);
   });
 
   it('should not render district if proposal has none', () => {
-    const wrapper = shallow(<ProposalPageMetadata proposal={proposalWithoutDistrict} showCategories={true} showDistricts={true} showNullEstimation={true} />);
+    const wrapper = shallow(<ProposalPageMetadata proposal={proposalWithoutDistrict} showCategories showDistricts showNullEstimation />);
     const infos = wrapper.find('div.proposal__info');
     expect(infos).to.have.length(1);
     expect(wrapper.find('div.proposal__info--district')).to.have.length(0);

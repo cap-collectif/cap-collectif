@@ -653,8 +653,8 @@
     },
     "vote": {
       "add": "Voter pour",
-      "authenticate": "Authentifiez-vous pour voter",
-      "confirm": "Valider",
+      "authenticated": "Voter avec mon compte",
+      "confirm": "Valider mon vote",
       "constraints": {
         "email": "Veuillez entrer une adresse email valide",
         "username": "Le nom doit faire au moins 2 caract\u00e8res."
@@ -674,6 +674,7 @@
         "title": "Voter pour"
       },
       "must_log_in": "Vous devez vous connecter pour pouvoir voter pour cette proposition.",
+      "non_authenticated": "Voter sans créer de compte",
       "none": "Aucun vote",
       "not_enough_credits": "Pas assez de cr\u00e9dits.",
       "not_enough_credits_text": "D\u00e9s\u00e9lectionnez un projet ou s\u00e9lectionnez un projet moins co\u00fbteux.",

@@ -6,10 +6,9 @@ import { shallow } from 'enzyme';
 import { ProposalPage } from './ProposalPage';
 import IntlData from '../../../translations/FR';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
-import { VOTE_TYPE_SIMPLE, VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_SIMPLE, VOTE_TYPE_DISABLED } from '../../../constants/ProposalConstants';
 
 describe('<ProposalPage />', () => {
-
   const props = {
     form: {
       usingThemes: true,
@@ -22,7 +21,7 @@ describe('<ProposalPage />', () => {
     features: {
       themes: true,
       districts: false,
-    }
+    },
   };
 
   const proposalNoVotes = {
@@ -150,7 +149,7 @@ describe('<ProposalPage />', () => {
     expect(proposalPageVotes).to.have.length(1);
     expect(proposalPageVotes.prop('proposal')).to.equal(proposalWithVotes);
     expect(proposalPageVotes.prop('votes')).to.equal(props.votes);
-    const proposalVoteModal = tabContainer.find('ProposalVoteModal');
+    const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');
     expect(proposalVoteModal).to.have.length(1);
     expect(proposalVoteModal.prop('proposal')).to.equal(proposalWithVotes);
     expect(proposalVoteModal.prop('selectionStep')).to.equal(votableStepSimple);
@@ -173,7 +172,7 @@ describe('<ProposalPage />', () => {
     const tabContent = tabContainer.find(Tab.Content);
     const tabPanes = tabContent.find(Tab.Pane);
     expect(tabPanes).to.have.length(2);
-    const proposalVoteModal = tabContainer.find('ProposalVoteModal');
+    const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');
     expect(proposalVoteModal).to.have.length(0);
   });
 
@@ -185,7 +184,7 @@ describe('<ProposalPage />', () => {
     };
     wrapper.setState(newState);
     const tabContainer = wrapper.find(Tab.Container);
-    const proposalVoteModal = tabContainer.find('ProposalVoteModal');
+    const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');
     expect(proposalVoteModal).to.have.length(0);
   });
 
@@ -197,7 +196,7 @@ describe('<ProposalPage />', () => {
     };
     wrapper.setState(newState);
     const tabContainer = wrapper.find(Tab.Container);
-    const proposalVoteModal = tabContainer.find('ProposalVoteModal');
+    const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');
     expect(proposalVoteModal).to.have.length(0);
   });
 });

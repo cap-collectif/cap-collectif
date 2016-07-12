@@ -7,7 +7,7 @@ const ProposalVoteButton = React.createClass({
   propTypes: {
     disabled: PropTypes.bool.isRequired,
     userHasVote: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
     onMouseOver: PropTypes.func,
     onMouseOut: PropTypes.func,
     onFocus: PropTypes.func,
@@ -20,6 +20,7 @@ const ProposalVoteButton = React.createClass({
   getDefaultProps() {
     return {
       disabled: false,
+      onClick: null,
       onMouseOver: () => {},
       onMouseOut: () => {},
       onFocus: () => {},

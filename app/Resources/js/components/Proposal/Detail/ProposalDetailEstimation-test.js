@@ -13,18 +13,18 @@ describe('<ProposalDetailEstimation />', () => {
     estimation: null,
   };
 
-  it('should render a span with class proposal__info when estimation is not null', () => {
+  it('should render a div with class proposal__info when estimation is not null', () => {
     const wrapper = shallow(<ProposalDetailEstimation proposal={proposal} showNullEstimation={false} />);
-    expect(wrapper.find('span.proposal__info')).to.have.length(1);
+    expect(wrapper.find('div.proposal__info')).to.have.length(1);
   });
 
-  it('should render a span with class proposal_info when estimation is null and showNullEstimation is true', () => {
+  it('should render a div with class proposal_info when estimation is null and showNullEstimation is true', () => {
     const wrapper = shallow(<ProposalDetailEstimation proposal={proposalWithNullEstimation} showNullEstimation />);
-    expect(wrapper.find('span.proposal__info')).to.have.length(1);
+    expect(wrapper.find('div.proposal__info')).to.have.length(1);
   });
 
-  it('should not render a span with class proposal_info when estimation is null and showNullEstimation is false', () => {
+  it('should not render a div with class proposal_info when estimation is null and showNullEstimation is false', () => {
     const wrapper = shallow(<ProposalDetailEstimation proposal={proposalWithNullEstimation} showNullEstimation={false} />);
-    expect(wrapper.find('span.proposal__info')).to.not.exists;
+    expect(wrapper.find('div.proposal__info')).to.not.exists;
   });
 });

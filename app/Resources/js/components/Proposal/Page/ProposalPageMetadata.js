@@ -21,13 +21,13 @@ const ProposalPageMetadata = React.createClass({
           {
             showCategories && proposal.category
             && <div className="proposal__info proposal__info--category">
-              <i className="cap cap-tag-1-1"></i>{proposal.category.name}
+              <i className="cap cap-tag-1-1 icon--blue"></i>{proposal.category.name}
             </div>
           }
           {
             showDistricts && proposal.district
             && <div className="proposal__info proposal__info--district">
-              <i className="cap cap-marker-1-1"></i>{proposal.district.name}
+              <i className="cap cap-marker-1-1 icon--blue"></i>{proposal.district.name}
             </div>
           }
           <ProposalDetailEstimation

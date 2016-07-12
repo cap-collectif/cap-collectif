@@ -102,7 +102,7 @@ export const ProposalPage = React.createClass({
   },
 
   getDefaultKey() {
-    const hash = window ? window.location.hash : null;
+    const hash = typeof window !== 'undefined' ? window.location.hash : null;
     if (hash) {
       return this.getHashKey(hash);
     }

@@ -7,7 +7,6 @@ import ProposalPageHeader from './ProposalPageHeader';
 import IntlData from '../../../translations/FR';
 
 describe('<ProposalPageHeader />', () => {
-
   const proposal = {
     theme: {
       title: 'Titre du thème',
@@ -27,7 +26,7 @@ describe('<ProposalPageHeader />', () => {
   };
 
   it('should render a proposal header', () => {
-    const wrapper = shallow(<ProposalPageHeader proposal={proposal} showThemes={true} {...props} {...IntlData} />);
+    const wrapper = shallow(<ProposalPageHeader proposal={proposal} showThemes {...props} {...IntlData} />);
     const mainDiv = wrapper.find('div.proposal__header');
     expect(mainDiv).to.have.length(1);
     const theme = mainDiv.children().find('p').first();
@@ -57,7 +56,7 @@ describe('<ProposalPageHeader />', () => {
   });
 
   it('should not render theme if proposal has none', () => {
-    const wrapper = shallow(<ProposalPageHeader proposal={proposalWithoutTheme} showThemes={true} {...props} {...IntlData} />);
+    const wrapper = shallow(<ProposalPageHeader proposal={proposalWithoutTheme} showThemes {...props} {...IntlData} />);
     const mainDiv = wrapper.find('div.proposal__header');
     const theme = mainDiv.find('p');
     expect(theme).to.have.length(1);
@@ -71,7 +70,7 @@ describe('<ProposalPageHeader />', () => {
   });
 
   it('should render a div with specified classes', () => {
-    const wrapper = shallow(<ProposalPageHeader proposal={proposal} showThemes={true} className="css-class" {...props} {...IntlData} />);
+    const wrapper = shallow(<ProposalPageHeader proposal={proposal} showThemes className="css-class" {...props} {...IntlData} />);
     const mainDiv = wrapper.find('div.proposal__header.css-class');
     expect(mainDiv).to.have.length(1);
   });
