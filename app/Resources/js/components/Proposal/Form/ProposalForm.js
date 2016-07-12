@@ -98,13 +98,13 @@ const ProposalForm = React.createClass({
           });
         });
         form.responses = responses;
-        if (!this.props.features.themes || !this.props.form.usingThemes) {
+        if (!this.props.features.themes || !this.props.form.usingThemes || form.theme === -1) {
           delete form.theme;
         }
-        if (!this.props.features.districts) {
+        if (!this.props.features.districts || form.district === -1) {
           delete form.district;
         }
-        if (this.props.categories.length === 0 || !this.props.form.usingCategories) {
+        if (this.props.categories.length === 0 || !this.props.form.usingCategories || form.category === -1) {
           delete form.category;
         }
         if (this.props.mode === 'edit') {
