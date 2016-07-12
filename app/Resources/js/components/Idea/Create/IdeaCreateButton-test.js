@@ -7,12 +7,9 @@ import { IdeaCreateButton } from './IdeaCreateButton';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import IntlData from '../../../translations/FR';
 
-const user = {};
-const features = {};
-
 describe('<IdeaCreateButton />', () => {
   it('should render a login overlay with a button', () => {
-    const wrapper = shallow(<IdeaCreateButton user={user} features={features} handleClick={() => {}} {...IntlData} />);
+    const wrapper = shallow(<IdeaCreateButton handleClick={() => {}} {...IntlData} />);
     const overlay = wrapper.find(LoginOverlay);
     expect(overlay).to.have.length(1);
     const button = overlay.find('Button');

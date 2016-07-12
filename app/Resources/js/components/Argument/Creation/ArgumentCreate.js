@@ -16,7 +16,6 @@ const ArgumentCreate = React.createClass({
     type: PropTypes.string.isRequired,
     opinion: PropTypes.object.isRequired,
     user: PropTypes.object,
-    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin, DeepLinkStateMixin, ValidatorMixin],
 
@@ -86,13 +85,13 @@ const ArgumentCreate = React.createClass({
   },
 
   render() {
-    const { user, features } = this.props;
+    const { user } = this.props;
     const disabled = !this.props.opinion.isContribuable;
     return (
       <div className="opinion__body box">
         <div className="opinion__data">
           <form id={'argument-form--' + this.props.type} ref="form">
-            <LoginOverlay user={user} features={features}>
+            <LoginOverlay>
               <Input
                 id={'arguments-body-' + this.props.type}
                 type="textarea"
@@ -131,7 +130,6 @@ const ArgumentCreate = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    features: state.default.features,
     user: state.default.user,
   };
 };

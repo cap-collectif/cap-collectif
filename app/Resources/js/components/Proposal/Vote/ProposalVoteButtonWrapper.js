@@ -13,7 +13,6 @@ const ProposalVoteButtonWrapper = React.createClass({
     onClick: PropTypes.func.isRequired,
     userHasVote: PropTypes.bool.isRequired,
     user: PropTypes.object,
-    features: PropTypes.object.isRequired,
   },
 
   getDefaultProps() {
@@ -36,7 +35,7 @@ const ProposalVoteButtonWrapper = React.createClass({
   },
 
   render() {
-    const { user, features, selectionStep, userHasVote, onClick, proposal } = this.props;
+    const { user, selectionStep, userHasVote, onClick, proposal } = this.props;
     if (selectionStep && selectionStep.voteType === VOTE_TYPE_SIMPLE) {
       return (
         <ProposalVoteButton
@@ -63,7 +62,7 @@ const ProposalVoteButtonWrapper = React.createClass({
     }
 
     return (
-      <LoginOverlay user={user} features={features}>
+      <LoginOverlay>
         <ProposalVoteButton
           userHasVote={userHasVote}
           onClick={onClick}
@@ -78,7 +77,6 @@ const ProposalVoteButtonWrapper = React.createClass({
 const mapStateToProps = (state) => {
   return {
     user: state.default.user,
-    features: state.default.features,
   };
 };
 

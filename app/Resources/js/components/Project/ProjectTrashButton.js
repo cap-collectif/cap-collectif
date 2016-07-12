@@ -8,7 +8,6 @@ const ProjectTrashButton = React.createClass({
     link: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     user: PropTypes.object,
-    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -19,12 +18,12 @@ const ProjectTrashButton = React.createClass({
   },
 
   render() {
-    const { link, label, user, features } = this.props;
+    const { link, label, user } = this.props;
     return (
-      <LoginOverlay user={user} features={features}>
+      <LoginOverlay>
         <a
           id="trash-link"
-          href={user !== null ? link : null}
+          href={user ? link : null}
           style={{ display: 'block', borderColor: 'transparent !important' }}
         >
           <p className="navbar__step-title">
@@ -41,7 +40,6 @@ const ProjectTrashButton = React.createClass({
 const mapStateToProps = (state) => {
   return {
     user: state.default.user,
-    features: state.default.features,
   };
 };
 

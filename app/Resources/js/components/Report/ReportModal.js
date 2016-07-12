@@ -8,6 +8,7 @@ import ReportForm from './ReportForm';
 import { closeModal } from '../../redux/modules/report';
 
 const ReportModal = React.createClass({
+  displayName: 'ReportModal',
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,

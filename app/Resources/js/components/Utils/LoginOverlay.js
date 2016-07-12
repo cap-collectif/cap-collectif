@@ -1,10 +1,12 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, cloneElement } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import LoginModal from '../User/Login/LoginModal';
 import RegistrationModal from '../User/Registration/RegistrationModal';
 
 export const LoginOverlay = React.createClass({
+  displayName: 'LoginOverlay',
   propTypes: {
     user: PropTypes.object,
     children: PropTypes.element.isRequired,
@@ -81,7 +83,7 @@ export const LoginOverlay = React.createClass({
     return (
      <span>
         <OverlayTrigger trigger="click" rootClose placement="top" overlay={popover}>
-        { children }
+        { cloneElement(children, { onClick: null }) }
        </OverlayTrigger>
        <LoginModal
          show={showLogin}
@@ -97,5 +99,11 @@ export const LoginOverlay = React.createClass({
 
 });
 
+const mapStateToProps = (state) => {
+  return {
+    features: state.default.features,
+    user: state.default.user,
+  };
+};
 
-export default LoginOverlay;
+export default connect(mapStateToProps)(LoginOverlay);

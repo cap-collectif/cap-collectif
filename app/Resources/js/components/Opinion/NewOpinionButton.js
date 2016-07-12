@@ -11,16 +11,8 @@ const NewOpinionButton = React.createClass({
     stepId: PropTypes.number.isRequired,
     projectId: PropTypes.number.isRequired,
     label: PropTypes.string.isRequired,
-    user: PropTypes.object,
-    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
-
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
 
   getInitialState() {
     return {
@@ -37,13 +29,13 @@ const NewOpinionButton = React.createClass({
   },
 
   render() {
-    const { label, user, features, opinionTypeSlug, opinionTypeId, projectId, stepId } = this.props;
+    const { label, opinionTypeSlug, opinionTypeId, projectId, stepId } = this.props;
     return (
       <span>
-      <LoginOverlay user={user} features={features}>
+      <LoginOverlay>
         <a
           id={'btn-add--' + opinionTypeSlug}
-          onClick={user ? this.openModal : null}
+          onClick={this.openModal}
           className="btn btn-primary"
         >
           <i className="cap cap-add-1" />
@@ -63,11 +55,4 @@ const NewOpinionButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.default.user,
-    features: state.default.features,
-  };
-};
-
-export default connect(mapStateToProps)(NewOpinionButton);
+export default NewOpinionButton;

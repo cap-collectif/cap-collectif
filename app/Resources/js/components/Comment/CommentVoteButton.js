@@ -8,7 +8,6 @@ const CommentVoteButton = React.createClass({
   propTypes: {
     comment: PropTypes.object,
     user: PropTypes.object,
-    features: PropTypes.object,
     onVote: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
@@ -52,7 +51,7 @@ const CommentVoteButton = React.createClass({
   },
 
   renderVoteButton() {
-    const { user, features, comment } = this.props;
+    const { comment } = this.props;
 
     if (comment.has_user_voted) {
       return (
@@ -63,8 +62,8 @@ const CommentVoteButton = React.createClass({
     }
 
     return (
-      <LoginOverlay user={user} features={features}>
-        <button className="btn btn-success btn--outline btn-xs" onClick={user ? this.vote : null}>
+      <LoginOverlay>
+        <button className="btn btn-success btn--outline btn-xs" onClick={this.vote}>
           <i className="cap-hand-like-2"></i>
           { ' ' }
           { this.getIntlMessage('comment.vote.submit') }
@@ -88,7 +87,6 @@ const CommentVoteButton = React.createClass({
 const mapStateToProps = (state) => {
   return {
     user: state.default.user,
-    features: state.default.features,
   };
 };
 

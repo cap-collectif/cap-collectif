@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import Form from '../Form/Form';
 
-const validate = values => {
+const validate = ({ status, body }) => {
   const errors = {};
-  if (!values.status) {
+  if (!status) {
     errors.status = 'source.constraints.category';
   }
-  if (!values.body || values.body.replace(/<\/?[^>]+(>|$)/g, '').length < 2) {
+  if (!body || body.replace(/<\/?[^>]+(>|$)/g, '').length < 2) {
     errors.body = 'source.constraints.body';
   }
   return errors;

@@ -4,12 +4,12 @@ import ReportButton from './ReportButton';
 import { connect } from 'react-redux';
 import { openModal } from '../../redux/modules/report';
 
-const ReportBox = React.createClass({
+export const ReportBox = React.createClass({
   displayName: 'ReportBox',
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     showModal: PropTypes.bool.isRequired,
-    reported: PropTypes.bool,
+    reported: PropTypes.bool.isRequired,
     onReport: PropTypes.func.isRequired,
     author: PropTypes.object,
     buttonStyle: PropTypes.object,
@@ -24,7 +24,6 @@ const ReportBox = React.createClass({
     return {
       buttonStyle: {},
       buttonId: 'report-button',
-      reported: false,
       author: null,
       buttonBsSize: null,
       buttonClassName: '',
@@ -46,7 +45,7 @@ const ReportBox = React.createClass({
       features,
       buttonStyle,
     } = this.props;
-    if (features.reporting && user && user.uniqueId !== author.uniqueId) {
+    if (features.reporting && (!user || user.uniqueId !== author.uniqueId)) {
       return (
         <span>
           <ReportButton

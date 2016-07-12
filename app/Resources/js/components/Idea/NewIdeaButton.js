@@ -8,7 +8,6 @@ const NewIdeaButton = React.createClass({
     link: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     user: PropTypes.object,
-    features: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -19,9 +18,9 @@ const NewIdeaButton = React.createClass({
   },
 
   render() {
-    const { link, label, user, features } = this.props;
+    const { link, user, label } = this.props;
     return (
-      <LoginOverlay user={user} features={features}>
+      <LoginOverlay>
         <div className="col-xs-12  col-sm-3  col-md-3  col-lg-2  filter__down">
             <a
               href={user ? link : null}
@@ -37,7 +36,6 @@ const NewIdeaButton = React.createClass({
 const mapStateToProps = (state) => {
   return {
     user: state.default.user,
-    features: state.default.features,
   };
 };
 

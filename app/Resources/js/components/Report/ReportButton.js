@@ -3,9 +3,9 @@ import LoginOverlay from '../Utils/LoginOverlay';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 
-const ReportButton = React.createClass({
+export const ReportButton = React.createClass({
+  displayName: 'ReportButton',
   propTypes: {
     id: PropTypes.string,
     reported: PropTypes.bool.isRequired,
@@ -13,8 +13,6 @@ const ReportButton = React.createClass({
     onClick: PropTypes.func.isRequired,
     style: PropTypes.object,
     bsSize: PropTypes.string,
-    user: PropTypes.object,
-    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -24,19 +22,18 @@ const ReportButton = React.createClass({
       className: '',
       style: {},
       bsSize: null,
-      user: null,
     };
   },
 
   render() {
-    const { reported, className, onClick, bsSize, user, features, id, style } = this.props;
+    const { reported, className, onClick, bsSize, id, style } = this.props;
     const classes = {
       'btn--outline': true,
       'btn-dark-gray': true,
     };
     classes[className] = true;
     return (
-      <LoginOverlay user={user} features={features}>
+      <LoginOverlay>
         <Button
           id={id}
           style={style}
@@ -59,11 +56,4 @@ const ReportButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.default.features,
-    user: state.default.user,
-  };
-};
-
-export default connect(mapStateToProps)(ReportButton);
+export default ReportButton;

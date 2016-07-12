@@ -10,7 +10,6 @@ const ArgumentVoteButton = React.createClass({
     onClick: PropTypes.func.isRequired,
     argument: PropTypes.object.isRequired,
     user: PropTypes.object,
-    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -23,15 +22,15 @@ const ArgumentVoteButton = React.createClass({
   },
 
   render() {
-    const { hasVoted, onClick, user, features, argument } = this.props;
+    const { hasVoted, onClick, argument } = this.props;
     return (
-      <LoginOverlay user={user} features={features}>
+      <LoginOverlay>
         <Button
           disabled={!argument.isContribuable || this.isTheUserTheAuthor()}
           bsStyle={hasVoted ? 'danger' : 'success'}
           className={'argument__btn--vote' + (hasVoted ? '' : ' btn--outline')}
           bsSize="xsmall"
-          onClick={user ? onClick : null}
+          onClick={onClick}
         >
           {hasVoted
             ? <span>{this.getIntlMessage('vote.cancel')}</span>
@@ -50,7 +49,6 @@ const ArgumentVoteButton = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    features: state.default.features,
     user: state.default.user,
   };
 };

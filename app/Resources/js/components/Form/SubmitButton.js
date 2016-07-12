@@ -17,7 +17,6 @@ const SubmitButton = React.createClass({
     disabled: PropTypes.bool,
     loginOverlay: PropTypes.bool,
     user: PropTypes.object,
-    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -34,17 +33,17 @@ const SubmitButton = React.createClass({
   },
 
   onClick() {
-    if ((!this.props.user && this.props.loginOverlay) || this.props.isSubmitting) {
-      return;
+    if (this.props.loginOverlay || this.props.isSubmitting) {
+      return null;
     }
     this.props.onSubmit();
   },
 
   render() {
-    const { user, features } = this.props;
-    const disabled = this.props.isSubmitting || this.props.disabled;
+    const { loginOverlay, isSubmitting } = this.props;
+    const disabled = isSubmitting || this.props.disabled;
     return (
-      <LoginOverlay user={user} features={features} enabled={this.props.loginOverlay}>
+      <LoginOverlay enabled={loginOverlay}>
         <Button
           id={this.props.id}
           disabled={disabled}
@@ -67,7 +66,6 @@ const SubmitButton = React.createClass({
 const mapStateToProps = (state) => {
   return {
     user: state.default.user,
-    features: state.default.features,
   };
 };
 

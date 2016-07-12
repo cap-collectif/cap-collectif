@@ -89,7 +89,7 @@
     "chai": "^3.5.0",
     "chai-enzyme": "^0.4.2",
     "chai-subset": "^1.2.2",
-    "enzyme": "^2.2.0",
+    "enzyme": "^2.4.1",
     "eslint": "^2.13.1",
     "eslint-brunch": "^3.5.0",
     "eslint-config-airbnb": "^6.2.0",
