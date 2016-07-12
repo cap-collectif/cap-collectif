@@ -6,17 +6,20 @@ export const OPEN_MODAL = 'report/OPEN_MODAL';
 export const CLOSE_MODAL = 'report/CLOSE_MODAL';
 export const START_LOADING = 'report/START_LOADING';
 export const STOP_LOADING = 'report/STOP_LOADING';
+export const ADD_REPORTED = 'report/ADD_REPORTED';
 
 const baseUrl = (opinion) => opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
 
 const initialState = {
-  showModal: false,
+  currentReportingModal: null,
   isLoading: false,
+  elements: [],
 };
 
-export const openModal = () => {
+export const openModal = (id) => {
   return {
     type: OPEN_MODAL,
+    payload: { id },
   };
 };
 
@@ -38,12 +41,19 @@ const stopLoading = () => {
   };
 };
 
+const addReported = () => {
+  return {
+    type: ADD_REPORTED,
+  };
+};
+
 const submitReport = (url, data, dispatch, successMessage) => {
   dispatch(startLoading());
   return new Promise((resolve, reject) => {
     Fetcher
       .post(url, data)
       .then(() => {
+        dispatch(addReported());
         dispatch(stopLoading());
         dispatch(closeModal());
         FluxDispatcher.dispatch({
@@ -114,15 +124,19 @@ export const submitProposalReport = (proposal, data, dispatch) => {
 };
 
 export const reducer = (state = initialState, action) => {
+  console.log(action);
   switch (action.type) {
     case START_LOADING:
       return Object.assign({}, state, { isLoading: true });
     case STOP_LOADING:
       return Object.assign({}, state, { isLoading: false });
     case OPEN_MODAL:
-      return Object.assign({}, state, { showModal: true });
+      return Object.assign({}, state, { currentReportingModal: action.payload.id });
     case CLOSE_MODAL:
-      return Object.assign({}, state, { showModal: false });
+      return Object.assign({}, state, { currentReportingModal: null });
+    case ADD_REPORTED: {
+      return { ...state, elements: [...state.elements, state.currentReportingModal] };
+    }
     default:
       return state;
   }

@@ -20,6 +20,7 @@ const OpinionReportButton = React.createClass({
     const { opinion } = this.props;
     return (
       <ReportBox
+        id={'opinion-' + opinion.id}
         reported={opinion.has_user_reported}
         onReport={this.handleReport}
         author={opinion.author}

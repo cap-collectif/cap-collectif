@@ -45,7 +45,7 @@ const ReportForm = React.createClass({
             id: 'reportBody',
             name: 'body',
             label: this.getIntlMessage('global.modal.report.form.body'),
-            type: 'editor',
+            type: 'textarea',
           },
         ]
       }

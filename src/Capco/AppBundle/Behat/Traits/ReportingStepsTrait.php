@@ -21,14 +21,12 @@ trait ReportingStepsTrait
     }
 
     /**
-     * I fill the reporting form from the modal.
-     *
      * @When I fill the reporting form from the modal
      */
     public function iFillTheReportingFormFromTheModal()
     {
         $this->fillField('reportBody', 'Pas terrible tout ça...');
-        $this->selectOption('reportType', 'Contenu à caractère sexuel');
+        // $this->selectOption('reportType', 'Contenu à caractère sexuel');
     }
 
     /**

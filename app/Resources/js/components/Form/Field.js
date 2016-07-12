@@ -11,7 +11,7 @@ const Field = React.createClass({
       labelClassName: PropTypes.string,
       divClassName: PropTypes.string,
       disableValidation: PropTypes.bool,
-      type: PropTypes.oneOf(['text', 'editor', 'select', 'checkbox', 'password', 'captcha', 'email']).isRequired,
+      type: PropTypes.oneOf(['text', 'textarea', 'editor', 'select', 'checkbox', 'password', 'captcha', 'email']).isRequired,
       label: PropTypes.string.isRequired,
       placeholder: PropTypes.string,
       id: PropTypes.string.isRequired,

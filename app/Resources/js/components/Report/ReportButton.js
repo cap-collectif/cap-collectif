@@ -2,12 +2,13 @@ import React, { PropTypes } from 'react';
 import LoginOverlay from '../Utils/LoginOverlay';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
 
 export const ReportButton = React.createClass({
   displayName: 'ReportButton',
   propTypes: {
-    id: PropTypes.string,
+    id: PropTypes.string.isRequired,
     reported: PropTypes.bool.isRequired,
     className: PropTypes.string,
     onClick: PropTypes.func.isRequired,
@@ -18,7 +19,6 @@ export const ReportButton = React.createClass({
 
   getDefaultProps() {
     return {
-      id: 'report-button',
       className: '',
       style: {},
       bsSize: null,
@@ -35,12 +35,13 @@ export const ReportButton = React.createClass({
     return (
       <LoginOverlay>
         <Button
-          id={id}
+          id={'report-' + id + '-button'}
           style={style}
           bsSize={bsSize}
           className={classNames(classes)}
           onClick={reported ? null : onClick}
           active={reported}
+          disabled={reported}
         >
           <i className="cap cap-flag-1"></i>
           { ' ' }
@@ -56,4 +57,10 @@ export const ReportButton = React.createClass({
 
 });
 
-export default ReportButton;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    reported: ownProps.reported || state.report.elements.includes(ownProps.id),
+  };
+};
+
+export default connect(mapStateToProps)(ReportButton);

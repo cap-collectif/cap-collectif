@@ -7,6 +7,7 @@ import { openModal } from '../../redux/modules/report';
 export const ReportBox = React.createClass({
   displayName: 'ReportBox',
   propTypes: {
+    id: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired,
     showModal: PropTypes.bool.isRequired,
     reported: PropTypes.bool.isRequired,
@@ -17,13 +18,11 @@ export const ReportBox = React.createClass({
     buttonClassName: PropTypes.string,
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
-    buttonId: PropTypes.string,
   },
 
   getDefaultProps() {
     return {
       buttonStyle: {},
-      buttonId: 'report-button',
       author: null,
       buttonBsSize: null,
       buttonClassName: '',
@@ -33,10 +32,10 @@ export const ReportBox = React.createClass({
 
   render() {
     const {
+      id,
       onReport,
       dispatch,
       showModal,
-      buttonId,
       reported,
       buttonBsSize,
       buttonClassName,
@@ -49,14 +48,15 @@ export const ReportBox = React.createClass({
       return (
         <span>
           <ReportButton
-            id={buttonId}
+            id={id}
             reported={reported}
-            onClick={() => dispatch(openModal())}
+            onClick={() => dispatch(openModal(id))}
             bsSize={buttonBsSize}
             style={buttonStyle}
             className={buttonClassName}
           />
           <ReportModal
+            id={id}
             show={showModal}
             onSubmit={onReport}
           />
@@ -68,11 +68,11 @@ export const ReportBox = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     features: state.default.features,
     user: state.default.user,
-    showModal: state.report.showModal,
+    showModal: state.report.currentReportingModal === ownProps.id,
   };
 };
 

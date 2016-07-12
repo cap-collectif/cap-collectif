@@ -18,25 +18,23 @@ const ReportModal = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    const { dispatch, isLoading, show } = this.props;
+    const { dispatch, isLoading, show, onSubmit } = this.props;
     return (
       <Modal
-        animation={false}
         show={show}
         onHide={() => dispatch(closeModal())}
-        bsSize="large"
-        aria-labelledby="contained-modal-title-lg"
+        aria-labelledby="report-modal-title-lg"
       >
         <Modal.Header closeButton>
           <Modal.Title
-            id="contained-modal-title-lg"
+            id="report-modal-title-lg"
             children={this.getIntlMessage('global.modal.report.title')}
           />
         </Modal.Header>
         <Modal.Body>
           <ReportForm
             ref={c => this.form = c}
-            onSubmit={this.props.onSubmit}
+            onSubmit={onSubmit}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -55,9 +53,9 @@ const ReportModal = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    isLoading: state.report.isLoading,
+    isLoading: state.report.currentReportingModal === ownProps.id && state.report.isLoading,
   };
 };
 
