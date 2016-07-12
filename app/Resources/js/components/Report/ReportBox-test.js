@@ -9,6 +9,7 @@ import IntlData from '../../translations/FR';
 describe('<ReportBox />', () => {
   const defaultProps = {
     ...IntlData,
+    id: 'opinion-1',
     dispatch: () => {},
     showModal: false,
     onReport: () => {},
@@ -21,9 +22,9 @@ describe('<ReportBox />', () => {
 
   it('renders a report button and a modal', () => {
     const wrapper = shallow(<ReportBox {...defaultProps} />);
-    const button = wrapper.find('ReportButton');
+    const button = wrapper.find('Connect(ReportButton)');
     expect(button).to.have.length(1);
-    expect(button.prop('id')).to.equal('report-button');
+    expect(button.prop('id')).to.equal(defaultProps.id);
     expect(button.prop('reported')).to.equal(defaultProps.reported);
     expect(button.prop('onClick')).to.be.a.function;
     expect(button.prop('bsSize')).to.equal(null);
@@ -42,7 +43,7 @@ describe('<ReportBox />', () => {
 
   it('renders a ReportButton if not logged in', () => {
     const wrapper = shallow(<ReportBox {...defaultProps} user={null} />);
-    const button = wrapper.find('ReportButton');
+    const button = wrapper.find('Connect(ReportButton)');
     expect(button).to.have.length(1);
   });
 

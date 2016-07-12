@@ -1,19 +1,19 @@
 /* eslint-env mocha */
 import { expect } from 'chai';
 import { reducer } from './report';
-import { OPEN_MODAL, CLOSE_MODAL, START_LOADING, STOP_LOADING } from './report';
+import { OPEN_MODAL, CLOSE_MODAL, START_LOADING, STOP_LOADING, ADD_REPORTED } from './report';
 
 describe('Report Reducer', () => {
   it('Should handle OPEN_MODAL', () => {
-    const initialState = { showModal: false };
-    const newState = reducer(initialState, { type: OPEN_MODAL });
-    expect(newState).to.eql({ showModal: true });
+    const initialState = { currentReportingModal: null };
+    const newState = reducer(initialState, { type: OPEN_MODAL, payload: { id: 'lola' } });
+    expect(newState).to.eql({ currentReportingModal: 'lola' });
   });
 
   it('Should handle CLOSE_MODAL', () => {
-    const initialState = { showModal: true };
+    const initialState = { currentReportingModal: 'lalaa' };
     const newState = reducer(initialState, { type: CLOSE_MODAL });
-    expect(newState).to.eql({ showModal: false });
+    expect(newState).to.eql({ currentReportingModal: null });
   });
 
   it('Should handle START_LOADING', () => {
@@ -26,5 +26,11 @@ describe('Report Reducer', () => {
     const initialState = { isLoading: true };
     const newState = reducer(initialState, { type: STOP_LOADING });
     expect(newState).to.eql({ isLoading: false });
+  });
+
+  it('Should handle ADD_REPORTED', () => {
+    const initialState = { currentReportingModal: 'foo', elements: ['bar'] };
+    const newState = reducer(initialState, { type: ADD_REPORTED });
+    expect(newState).to.eql({ currentReportingModal: 'foo', elements: ['bar', 'foo'] });
   });
 });

@@ -9,6 +9,7 @@ import IntlData from '../../translations/FR';
 describe('<ReportButton />', () => {
   const defaultProps = {
     ...IntlData,
+    id: 'opinion-1',
     user: {},
     reported: false,
     onClick: () => {},
@@ -18,7 +19,7 @@ describe('<ReportButton />', () => {
     const button = shallow(<ReportButton {...defaultProps} />)
                     .find('Connect(LoginOverlay)')
                     .find('Button');
-    expect(button.prop('id')).to.equal('report-button');
+    expect(button.prop('id')).to.equal('report-opinion-1-button');
     expect(button.prop('onClick')).to.be.a.function;
     expect(button.prop('bsSize')).to.equal(null);
     expect(button.prop('style')).to.deep.equal({});

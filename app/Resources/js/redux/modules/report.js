@@ -124,7 +124,6 @@ export const submitProposalReport = (proposal, data, dispatch) => {
 };
 
 export const reducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case START_LOADING:
       return Object.assign({}, state, { isLoading: true });
