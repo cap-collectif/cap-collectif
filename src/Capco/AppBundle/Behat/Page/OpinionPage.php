@@ -40,7 +40,7 @@ class OpinionPage extends Page
         'argument votes counter' => '#arg-1 .opinion__votes-nb',
         'argument vote button' => '#arg-1 .argument__btn--vote',
         'argument vote button in closed step' => '#arg-207 .argument__btn--vote',
-        'argument report button' => '#arg-1 .argument__btn--report',
+        'argument report button' => '#report-argument-1-button',
         // Sources
         'sources list' => '#sources-list',
         'add source button' => '#source-form__add',

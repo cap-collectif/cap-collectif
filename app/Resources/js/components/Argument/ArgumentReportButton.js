@@ -19,7 +19,7 @@ const ArgumentReportButton = React.createClass({
     const { argument } = this.props;
     return (
         <ReportBox
-          id={'argument' + argument.id}
+          id={'argument-' + argument.id}
           reported={argument.hasUserReported}
           onReport={this.handleReport}
           author={argument.author}

@@ -122,9 +122,6 @@ export const RegistrationForm = React.createClass({
         onSubmit={this.handleSubmit}
         onSubmitFail={this.handleSubmitFail}
         onSubmitSuccess={onSubmitSuccess}
-        initialValues={() => {
-          return window && window.location.host === 'capco.test/' ? { captcha: 'onlyfortest' } : {};
-        }}
         fields={[
           {
             name: 'username',
