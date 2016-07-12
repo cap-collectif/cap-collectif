@@ -5,10 +5,10 @@ import Form from '../Form/Form';
 const validate = ({ status, body }) => {
   const errors = {};
   if (!status) {
-    errors.status = 'source.constraints.category';
+    errors.status = 'global.constraints.notBlank';
   }
   if (!body || body.replace(/<\/?[^>]+(>|$)/g, '').length < 2) {
-    errors.body = 'source.constraints.body';
+    errors.body = 'global.constraints.notBlank';
   }
   return errors;
 };
@@ -32,7 +32,7 @@ const ReportForm = React.createClass({
             name: 'status',
             label: this.getIntlMessage('global.modal.report.form.status'),
             type: 'select',
-            disabledOptionLabel: 'global.select',
+            defaultOptionLabel: this.getIntlMessage('global.select'),
             options: [
               { value: 0, label: this.getIntlMessage('reporting.status.sexual') },
               { value: 1, label: this.getIntlMessage('reporting.status.offending') },
