@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import Form from '../../Form/Form';
 
-export const defaultValidation = values => {
+export const defaultValidation = ({ title, body }) => {
   const errors = {};
-  if (!values.title || values.title.length < 2) {
+  if (!title || title.length < 2) {
     errors.title = 'opinion.constraints.title';
   }
-  if (!values.body || values.body.replace(/<\/?[^>]+(>|$)/g, '').length < 2) {
+  if (!body || body.replace(/<\/?[^>]+(>|$)/g, '').length < 2) {
     errors.body = 'opinion.constraints.body';
   }
   return errors;

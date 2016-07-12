@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { openModal } from '../../redux/modules/report';
 
 const ReportBox = React.createClass({
+  displayName: 'ReportBox',
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     showModal: PropTypes.bool.isRequired,

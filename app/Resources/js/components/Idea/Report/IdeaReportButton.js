@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import ReportBox from '../../Report/ReportBox';
 import { submitIdeaReport } from '../../../redux/modules/report';
 
-const IdeaReportButton = React.createClass({
+export const IdeaReportButton = React.createClass({
+  displayName: 'IdeaReportButton',
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     idea: PropTypes.object.isRequired,

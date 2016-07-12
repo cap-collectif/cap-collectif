@@ -2,10 +2,10 @@ import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher from '../../services/Fetcher';
 
-const OPEN_MODAL = 'report/OPEN_MODAL';
-const CLOSE_MODAL = 'report/CLOSE_MODAL';
-const START_LOADING = 'report/START_LOADING';
-const STOP_LOADING = 'report/STOP_LOADING';
+export const OPEN_MODAL = 'report/OPEN_MODAL';
+export const CLOSE_MODAL = 'report/CLOSE_MODAL';
+export const START_LOADING = 'report/START_LOADING';
+export const STOP_LOADING = 'report/STOP_LOADING';
 
 const baseUrl = (opinion) => opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
 
