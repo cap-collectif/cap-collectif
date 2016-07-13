@@ -10,16 +10,16 @@ const ProposalCreateButton = React.createClass({
   },
   mixins: [IntlMixin],
 
-  onClick() {
-    if (!this.props.disabled) {
-      this.props.handleClick();
-    }
-  },
-
   render() {
+    const { disabled, handleClick } = this.props;
     return (
       <LoginOverlay>
-        <Button id="add-proposal" disabled={this.props.disabled} bsStyle="primary" onClick={this.onClick}>
+        <Button
+          id="add-proposal"
+          disabled={this.props.disabled}
+          bsStyle="primary"
+          onClick={disabled ? null : handleClick}
+        >
           <i className="cap cap-add-1"></i>
           { ' ' + this.getIntlMessage('proposal.add')}
         </Button>

@@ -166,18 +166,6 @@ Feature: Opinions
     """
     Then the JSON response status code should be 201
 
-    @database @xss
-    Scenario: malicious logged in API client wants to add an opinion with js code
-      Given I am logged in to api as user
-      When I send a POST request to "/api/projects/5/steps/5/opinion_types/10/opinions" with json:
-      """
-      {
-        "title": "Nouveau titre<script>alert('XSS')</script>",
-        "body": "test xss<script>alert('XSS')</script>"
-      }
-      """
-      Then the JSON response status code should be 2011
-
     @security
     Scenario: logged in API client wants to add an opinion with an appendixType from a wrong opinionType
       Given I am logged in to api as user

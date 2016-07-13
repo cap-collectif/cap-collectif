@@ -12,12 +12,12 @@ export const ReportBox = React.createClass({
     showModal: PropTypes.bool.isRequired,
     reported: PropTypes.bool.isRequired,
     onReport: PropTypes.func.isRequired,
+    features: PropTypes.object.isRequired,
+    user: PropTypes.object,
     author: PropTypes.object,
     buttonStyle: PropTypes.object,
     buttonBsSize: PropTypes.string,
     buttonClassName: PropTypes.string,
-    user: PropTypes.object,
-    features: PropTypes.object.isRequired,
   },
 
   getDefaultProps() {
