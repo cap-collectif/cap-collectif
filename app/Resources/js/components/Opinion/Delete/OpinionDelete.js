@@ -27,15 +27,11 @@ const OpinionDelete = React.createClass({
   },
 
   showModal() {
-    this.setState({
-      showModal: true,
-    });
+    this.setState({ showModal: true });
   },
 
   hideModal() {
-    this.setState({
-      hideModal: true,
-    });
+    this.setState({ hideModal: true });
   },
 
   isVersion() {
@@ -68,6 +64,7 @@ const OpinionDelete = React.createClass({
 
   render() {
     if (this.isTheUserTheAuthor()) {
+      const { showModal, isSubmitting } = this.state;
       return (
         <div>
           <Button
@@ -80,7 +77,7 @@ const OpinionDelete = React.createClass({
           </Button>
           <Modal
             animation={false}
-            show={this.state.showModal}
+            show={showModal}
             onHide={this.hideModal}
             bsSize="large"
             aria-labelledby="contained-modal-title-lg"
@@ -102,7 +99,7 @@ const OpinionDelete = React.createClass({
               <CloseButton onClose={this.hideModal} />
               <SubmitButton
                 id="confirm-opinion-delete"
-                isSubmitting={this.state.isSubmitting}
+                isSubmitting={isSubmitting}
                 onSubmit={this.delete}
                 label="global.remove"
                 bsStyle="danger"

@@ -7,7 +7,7 @@ const validate = ({ status, body }) => {
   if (!status) {
     errors.status = 'global.constraints.notBlank';
   }
-  if (!body || body.replace(/<\/?[^>]+(>|$)/g, '').length < 2) {
+  if (!body || body.length < 2) {
     errors.body = 'global.constraints.notBlank';
   }
   return errors;
@@ -20,12 +20,13 @@ const ReportForm = React.createClass({
   mixins: [IntlMixin],
 
   render() {
+    const { onSubmit } = this.props;
     return (
       <Form
         form="report-form"
         ref={c => this.form = c}
         validate={validate}
-        onSubmit={this.props.onSubmit}
+        onSubmit={onSubmit}
         fields={[
           {
             id: 'reportType',

@@ -15,5 +15,9 @@ export default function configureStore(props) {
   };
 
   const reducer = combineReducers(reducers);
-  return createStore(reducer);
+  return createStore(
+    reducer,
+    undefined,
+    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+  );
 }

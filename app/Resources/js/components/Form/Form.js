@@ -10,6 +10,7 @@ export const Form = React.createClass({
     fields: PropTypes.array.isRequired,
     translations: PropTypes.object,
     handleSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -21,14 +22,14 @@ export const Form = React.createClass({
     const {
       form,
       fields,
-      handleSubmit,
+      onSubmit,
       translations,
     } = this.props;
     for (const field of fields) {
       field.label = translations[field.label] ? this.getIntlMessage(translations[field.label]) : field.label;
     }
     return (
-      <form id={form} onSubmit={handleSubmit}>
+      <form id={form} onSubmit={onSubmit}>
       {
         fields.map((field, index) => {
           const children = field.options ?

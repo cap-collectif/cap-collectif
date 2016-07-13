@@ -16,7 +16,6 @@ const SubmitButton = React.createClass({
     style: PropTypes.object,
     disabled: PropTypes.bool,
     loginOverlay: PropTypes.bool,
-    user: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -28,7 +27,6 @@ const SubmitButton = React.createClass({
       style: {},
       disabled: false,
       loginOverlay: false,
-      user: null,
     };
   },
 
@@ -46,6 +44,7 @@ const SubmitButton = React.createClass({
       <LoginOverlay enabled={loginOverlay}>
         <Button
           id={this.props.id}
+          type="submit"
           disabled={disabled}
           onClick={this.onClick}
           bsStyle={this.props.bsStyle}
@@ -63,10 +62,4 @@ const SubmitButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.default.user,
-  };
-};
-
-export default connect(mapStateToProps)(SubmitButton);
+export default SubmitButton;

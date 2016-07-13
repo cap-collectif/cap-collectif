@@ -1,3 +1,6 @@
+import moment from 'moment';
+moment.locale('fr');
+
 import ReactOnRails from 'react-on-rails';
 import ProjectsListApp from '../js/startup/ProjectsListAppClient';
 import CollectStepPageApp from '../js/startup/CollectStepPageApp';
