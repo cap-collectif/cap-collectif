@@ -24,7 +24,7 @@ class ProposalPage extends Page
         'delete proposal button' => '#proposal-delete-button',
         'confirm delete proposal button' => '#confirm-proposal-delete',
         'confirm edit proposal button' => '#confirm-proposal-edit',
-        'report proposal button' => '#proposal-report-button',
+        'report proposal button' => '.proposal__btn--report',
         'proposal buttons' => '.proposal__content .proposal__buttons',
         'share button' => '#proposal-share-button',
     ];

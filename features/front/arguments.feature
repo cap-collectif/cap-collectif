@@ -240,12 +240,12 @@ Feature: Arguments
     And I go to an opinion
     And I should not see the argument report button
 
-  @javascript @database @fixme
+  @javascript @database
   Scenario: Non author of an argument can report it
     Given feature "reporting" is enabled
     And I am logged in as admin
     And I go to an opinion
     And I click the argument report button
-    And I fill the reporting form from the modal
-    And I submit the reporting form from the modal
+    And I fill the reporting form
+    And I submit the reporting form
     Then I should see "Merci ! L'argument a bien été signalé."

@@ -15,7 +15,6 @@ const props = {
       displayName: 'user',
     },
   },
-  buttonId: 'btn-id',
 };
 
 describe('<IdeaReportButton />', () => {
@@ -23,7 +22,6 @@ describe('<IdeaReportButton />', () => {
     const wrapper = shallow(<IdeaReportButton {...props} {...IntlData} />);
     const reportBox = wrapper.find('Connect(ReportBox)');
     expect(reportBox).to.have.length(1);
-    expect(reportBox.prop('buttonId')).to.equal(props.buttonId);
     expect(reportBox.prop('reported')).to.equal(props.idea.userHasReport);
     expect(reportBox.prop('onReport')).to.be.a.function;
     expect(reportBox.prop('author')).to.equal(props.idea.author);

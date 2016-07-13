@@ -12,6 +12,7 @@ const expect = chai.expect;
 
 describe('<RegistrationForm />', () => {
   const props = {
+    dispatch: () => {},
     ...IntlData,
     onSubmitSuccess: () => {},
     onSubmitFail: () => {},
