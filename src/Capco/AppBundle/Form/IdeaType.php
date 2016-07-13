@@ -35,7 +35,7 @@ class IdeaType extends AbstractType
         }
 
         $builder
-            ->add('body', null, [
+            ->add('body', 'purified_textarea', [
                 'required' => true,
             ])
             ->add('object', null, [

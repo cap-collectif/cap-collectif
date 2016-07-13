@@ -16,8 +16,8 @@ class OpinionVersionType extends AbstractType
     {
         $builder
             ->add('title', null, ['required' => true])
-            ->add('body', null, ['required' => true])
-            ->add('comment', null, ['required' => true])
+            ->add('body', 'purified_textarea', ['required' => true])
+            ->add('comment', 'purified_textarea', ['required' => true])
         ;
     }
 

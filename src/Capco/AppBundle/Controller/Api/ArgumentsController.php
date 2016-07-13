@@ -134,7 +134,7 @@ class ArgumentsController extends FOSRestController
             ->setUpdatedAt(new \Datetime())
         ;
 
-        $form = $this->createForm('argument', $argument, ['actionType' => 'create']);
+        $form = $this->createForm('argument', $argument);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -188,7 +188,7 @@ class ArgumentsController extends FOSRestController
             ->setUpdatedAt(new \Datetime())
         ;
 
-        $form = $this->createForm('argument', $argument, ['actionType' => 'create']);
+        $form = $this->createForm('argument', $argument);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -225,7 +225,7 @@ class ArgumentsController extends FOSRestController
             throw new BadRequestHttpException('Uncontributable argument');
         }
 
-        $form = $this->createForm('argument', $argument, ['actionType' => 'edit']);
+        $form = $this->createForm('argument', $argument);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -267,7 +267,7 @@ class ArgumentsController extends FOSRestController
             throw new BadRequestHttpException('Uncontributable argument');
         }
 
-        $form = $this->createForm('argument', $argument, ['actionType' => 'edit']);
+        $form = $this->createForm('argument', $argument);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

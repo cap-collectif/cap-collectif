@@ -16,7 +16,7 @@ class ReportingType extends AbstractType
                 'required' => true,
                 'choices' => Reporting::$statusesLabels,
             ])
-            ->add('body', 'textarea', ['required' => true])
+            ->add('body', 'purified_textarea', ['required' => true])
         ;
     }
 

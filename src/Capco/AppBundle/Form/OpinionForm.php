@@ -12,7 +12,7 @@ class OpinionForm extends AbstractType
     {
         $builder
             ->add('title', 'text', ['required' => true])
-            ->add('body', 'text', ['required' => true])
+            ->add('body', 'purified_textarea', ['required' => true])
             ->add('appendices', 'collection', [
                 'type' => new AppendixType(),
                 'required' => false,

@@ -15,19 +15,11 @@ class AppendixType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('body', 'ckeditor', [
-                'label' => false,
+            ->add('body', 'purified_textarea', [
                 'required' => false,
-                'config_name' => 'user_editor',
             ])
             ->add('appendixType', null, [
                 'required' => true,
-                'attr' => [
-                    'class' => 'hidden',
-                ],
-                'label_attr' => [
-                    'class' => 'hidden',
-                ],
             ])
         ;
     }

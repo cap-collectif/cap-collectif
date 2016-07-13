@@ -88,6 +88,9 @@ class AppKernel extends Kernel
 
             new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
 
+            // Secure agains XSS
+            new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
+
             // Excel files generation
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
         ];

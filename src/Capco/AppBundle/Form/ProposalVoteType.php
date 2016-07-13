@@ -37,7 +37,7 @@ class ProposalVoteType extends AbstractType
         }
 
         $builder
-            ->add('comment', 'textarea', [
+            ->add('comment', 'purified_textarea', [
                 'required' => false,
                 'mapped' => false,
             ])

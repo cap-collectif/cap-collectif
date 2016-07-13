@@ -35,7 +35,7 @@ class CommentType extends AbstractType
         }
 
         $builder
-            ->add('body', 'textarea', ['required' => true])
+            ->add('body', 'purified_textarea', ['required' => true])
         ;
 
         if ($options['actionType'] === 'create') {

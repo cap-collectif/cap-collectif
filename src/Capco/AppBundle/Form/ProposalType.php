@@ -37,7 +37,7 @@ class ProposalType extends AbstractType
             ->add('title', null, [
                 'required' => true,
             ])
-            ->add('body', null, [
+            ->add('body', 'purified_textarea', [
                 'required' => true,
             ])
         ;

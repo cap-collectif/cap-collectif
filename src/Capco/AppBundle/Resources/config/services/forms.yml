@@ -1,5 +1,11 @@
 services:
 
+  capco.form.type.purified_textarea:
+    class: Capco\AppBundle\Form\Type\PurifiedTextareaType
+    arguments: [@capco.form.transformer.html_purifier]
+    tags:
+      - { name: form.type, alias: purified_textarea }
+
   capco.help_extension:
     class: Capco\AppBundle\Form\Extension\HelpExtension
     tags:
@@ -50,7 +56,6 @@ services:
 
   capco.form.argument:
     class: Capco\AppBundle\Form\ArgumentType
-    arguments: []
     tags:
       - { name: form.type, alias: argument }
 

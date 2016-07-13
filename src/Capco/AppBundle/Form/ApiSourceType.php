@@ -12,7 +12,7 @@ class ApiSourceType extends AbstractType
     {
         $builder
             ->add('title', 'text', ['required' => true])
-            ->add('body', 'textarea', ['required' => true])
+            ->add('body', 'purified_textarea', ['required' => true])
             ->add('Category', null, ['required' => true])
             ->add('link', 'url', [
                 'required' => true,

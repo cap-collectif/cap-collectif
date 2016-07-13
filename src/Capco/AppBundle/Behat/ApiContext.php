@@ -210,8 +210,7 @@ EOF;
     {
         $json = <<< EOF
         {
-            "body": "Je suis un argument modifié.",
-            "confirm": true
+            "body": "Je suis un argument modifié."
         }
 EOF;
 
