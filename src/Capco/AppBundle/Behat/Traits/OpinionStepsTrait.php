@@ -67,13 +67,13 @@ trait OpinionStepsTrait
     // ************************************ Opinion **************************************************
 
     /**
-     * Go to an opinion.
-     *
      * @When I go to an opinion
      */
     public function iGoToAnOpinion()
     {
         $this->visitPageWithParams('opinion page', self::$opinion);
+        $this->iWait(2);
+        $this->assertSession()->pageTextContains('Opinion 2');
     }
 
     protected function opinionPageIsOpen()
@@ -456,14 +456,11 @@ trait OpinionStepsTrait
     }
 
     /**
-     * I click the argument report button.
-     *
      * @When I click the argument report button
      */
     public function iClickTheArgumentReportButton()
     {
         $this->getCurrentPage()->clickArgumentReportButton();
-        $this->iWait(1);
     }
 
     // ************************************** Sources ***************************************************

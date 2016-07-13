@@ -45,13 +45,9 @@ Feature: Opinions
     Given feature "reporting" is enabled
     And I am logged in as admin
     And I go to an opinion
-    When I press "Signaler"
-    And I wait 1 seconds
-    And I fill in the following:
-      | capco_app_reporting_status | 1                       |
-      | capco_app_reporting_body   | Pas terrible tout ça... |
-    And I press "Signaler"
-    And I wait 1 seconds
+    When I click the "#report-opinion-2-button" element
+    And I fill the reporting form
+    And I submit the reporting form
     Then I should see "Merci ! Votre signalement a bien été pris en compte."
 
   @javascript @database

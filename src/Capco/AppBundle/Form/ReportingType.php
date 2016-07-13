@@ -9,23 +9,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ReportingType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('status', 'choice', [
+                'required' => true,
                 'choices' => Reporting::$statusesLabels,
-                'translation_domain' => 'CapcoAppBundle',
-                'label' => 'reporting.form.status',
-                'empty_value' => 'reporting.empty_value',
             ])
-            ->add('body', 'textarea', [
-                'translation_domain' => 'CapcoAppBundle',
-                'label' => 'reporting.form.body',
-            ])
+            ->add('body', 'textarea', ['required' => true])
         ;
     }
 
@@ -36,11 +27,8 @@ class ReportingType extends AbstractType
         ]);
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName() : string
     {
-        return 'capco_app_reporting';
+        return 'reporting_type';
     }
 }
