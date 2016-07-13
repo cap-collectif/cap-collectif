@@ -25,7 +25,7 @@ class IdeaVoteType extends AbstractType
     {
         if ($this->tokenStorage->getToken()->getUser()) {
             $builder
-                ->add('username', null, [
+                ->add('username', 'purified_text', [
                     'required' => true,
                 ])
                 ->add('email', 'email', [
@@ -38,7 +38,7 @@ class IdeaVoteType extends AbstractType
             $builder
                 ->add(
                     'comment',
-                    'textarea',
+                    'purified_textarea',
                     [
                         'required' => false,
                         'mapped' => false,

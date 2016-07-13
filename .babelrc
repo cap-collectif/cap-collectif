@@ -4,6 +4,9 @@
     "add-module-exports",
   ],
   "env": {
+    "prod": {
+      "compact": true
+    },
     "test": {
       "plugins": ["rewire"]
     },

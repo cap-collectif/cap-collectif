@@ -23,7 +23,7 @@ class IdeaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, [
+            ->add('title', 'purified_text', [
                 'required' => true,
             ])
         ;

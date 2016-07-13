@@ -12,7 +12,7 @@ class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text', [
+        $builder->add('name', 'purified_text', [
                 'label' => 'contact.form.name',
                 'required' => true,
                 'constraints' => [new NotBlank(['message' => 'contact.no_name'])],

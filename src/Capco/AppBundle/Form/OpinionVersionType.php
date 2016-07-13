@@ -15,7 +15,7 @@ class OpinionVersionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, ['required' => true])
+            ->add('title', 'purified_text', ['required' => true])
             ->add('body', 'purified_textarea', ['required' => true])
             ->add('comment', 'purified_textarea', ['required' => true])
         ;

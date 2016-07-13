@@ -1,5 +1,11 @@
 services:
 
+  capco.form.type.purified_text:
+    class: Capco\AppBundle\Form\Type\PurifiedTextType
+    arguments: [@capco.form.transformer.html_purifier]
+    tags:
+      - { name: form.type, alias: purified_text }
+
   capco.form.type.purified_textarea:
     class: Capco\AppBundle\Form\Type\PurifiedTextareaType
     arguments: [@capco.form.transformer.html_purifier]

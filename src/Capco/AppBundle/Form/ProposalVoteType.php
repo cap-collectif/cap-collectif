@@ -25,13 +25,11 @@ class ProposalVoteType extends AbstractType
     {
         if ($this->tokenStorage->getToken()->getUser()) {
             $builder
-                ->add('username', null, [
+                ->add('username', 'purified_text', [
                     'required' => true,
-                    'translation_domain' => 'CapcoAppBundle',
                 ])
                 ->add('email', 'email', [
                     'required' => true,
-                    'translation_domain' => 'CapcoAppBundle',
                 ])
             ;
         }
@@ -53,7 +51,6 @@ class ProposalVoteType extends AbstractType
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\ProposalVote',
             'csrf_protection' => false,
-            'translation_domain' => 'CapcoAppBundle',
         ]);
     }
 

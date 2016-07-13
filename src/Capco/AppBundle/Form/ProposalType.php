@@ -34,7 +34,7 @@ class ProposalType extends AbstractType
         }
 
         $builder
-            ->add('title', null, [
+            ->add('title', 'purified_text', [
                 'required' => true,
             ])
             ->add('body', 'purified_textarea', [

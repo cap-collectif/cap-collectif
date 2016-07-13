@@ -46,7 +46,7 @@ class CommentType extends AbstractType
 
         if (!$this->user) {
             $builder
-                ->add('authorName', null, ['required' => true])
+                ->add('authorName', 'purified_text', ['required' => true])
                 ->add('authorEmail', null, ['required' => true])
             ;
         }

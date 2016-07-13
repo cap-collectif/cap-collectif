@@ -11,7 +11,7 @@ class OpinionForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', ['required' => true])
+            ->add('title', 'purified_text', ['required' => true])
             ->add('body', 'purified_textarea', ['required' => true])
             ->add('appendices', 'collection', [
                 'type' => new AppendixType(),
