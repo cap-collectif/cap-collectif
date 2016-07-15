@@ -20,7 +20,7 @@ export const validate = values => {
   if (!values.charte) {
     errors.charte = 'registration.constraints.charte.check';
   }
-  if (!values.captcha) {
+  if (!values.captcha && (window && window.location.host !== 'capco.test')) {
     errors.captcha = 'global.constraints.notBlank';
   }
   return errors;

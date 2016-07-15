@@ -24,6 +24,7 @@ describe('<RegistrationForm />', () => {
       'user_type': false,
       'zipcode_at_register': false,
     },
+    dispatch: () => {},
   };
 
   it('renders a form with inputs and a captcha', () => {
