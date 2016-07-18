@@ -74,8 +74,6 @@ trait OpinionStepsTrait
     {
         $this->visitPageWithParams('opinion page', self::$opinion);
         $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.') > -1");
-        $errors = $this->getSession()->getDriver()->evaluateScript("return window.jsErrors");
-        var_dump($errors);
     }
 
     protected function opinionPageIsOpen()

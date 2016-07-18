@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Behat\Traits;
 
-use Behat\Gherkin\Node\TableNode;
-
 trait ReportingStepsTrait
 {
     /**

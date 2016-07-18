@@ -34,7 +34,7 @@ Capco\AppBundle\Entity\Proposal:
   proposal3:
     title: Installation de bancs sur la place de la mairie
     body: |
-       <p><text(100)></p>
+       <p>On va en faire un beau gymnase, promis :)</p>
     enabled: true
     rating: 3
     annotation: Vérifier les normes de sécurité

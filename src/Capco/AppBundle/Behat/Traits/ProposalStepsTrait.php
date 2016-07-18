@@ -100,6 +100,7 @@ trait ProposalStepsTrait
     public function iGoToAProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithSimpleVoteParams);
+        $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
     }
 
     protected function proposalPageIsOpen()

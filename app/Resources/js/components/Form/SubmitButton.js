@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import LoginOverlay from '../Utils/LoginOverlay';
-import { connect } from 'react-redux';
 
 const SubmitButton = React.createClass({
   displayName: 'SubmitButton',
