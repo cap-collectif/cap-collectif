@@ -16,8 +16,7 @@ Capco\AppBundle\Entity\Opinion:
         step: @cstep1
         title: Opinion 2
         body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
+             <p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>
         isEnabled: true
         isTrashed: false
         Author: @user1

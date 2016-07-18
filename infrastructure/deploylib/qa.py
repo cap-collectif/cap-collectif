@@ -63,8 +63,8 @@ def behat(fast_failure='true', profile=False, tags='false', feature='false', par
 
 
 @task(environments=['local'])
-def view(port='5900'):
-    local('echo "secret" | open vnc://`docker-machine ip dinghy`::' + port)
+def view():
+    local('echo "secret" | open vnc://`docker-machine ip dinghy`')
 
 
 @task(environments=['local'])

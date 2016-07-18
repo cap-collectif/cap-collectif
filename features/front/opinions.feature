@@ -40,7 +40,7 @@ Feature: Opinions
     When I click the "#btn-add--les-causes-1" element
     Then I should see "Connectez-vous pour contribuer"
 
-  @javascript @database
+  @javascript @database @fix
   Scenario: Logged in user can report an opinion
     Given feature "reporting" is enabled
     And I am logged in as admin

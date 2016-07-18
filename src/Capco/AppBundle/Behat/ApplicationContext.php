@@ -43,6 +43,41 @@ class ApplicationContext extends UserContext
     use ThemeStepsTrait;
 
     /**
+     * @AfterScenario
+     */
+    protected function lookForJSErrors(AfterStepScope $scope)
+    {
+      $scenario = $scope->getScenario();
+      if ($scenario->hasTag('javascript')) {
+        try {
+            $errors = $driver->evaluateScript("return window.jsErrors");
+        } catch (\Exception $e) {
+            // output where the error occurred for debugging purposes
+            echo $this->scenarioData;
+            throw $e;
+        }
+
+        if (!$errors || empty($errors)) {
+           return;
+        }
+
+        $file = sprintf("%s:%d", $scope->getFeature()->getFile(), $scope->getStep()->getLine());
+        $message = sprintf("Found %d javascript error%s", count($errors), count($errors) > 0 ? 's' : '');
+
+        echo '-------------------------------------------------------------' . PHP_EOL;
+        echo $file . PHP_EOL;
+        echo $message . PHP_EOL;
+        echo '-------------------------------------------------------------' . PHP_EOL;
+
+        foreach ($errors as $index => $error) {
+           echo sprintf("   #%d: %s", $index, $error) . PHP_EOL;
+        }
+
+        throw new \Exception($message);
+      }
+    }
+
+    /**
      * @BeforeScenario
      */
     public function reset($scope)

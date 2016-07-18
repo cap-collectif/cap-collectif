@@ -1,6 +1,11 @@
 import './registration';
 require('fancybox')($);
 
+window.jsErrors = [];
+window.onerror = (errorMessage) => {
+  window.jsErrors[window.jsErrors.length] = errorMessage;
+};
+
 // Our global App for symfony
 const App = (($) => {
   const equalheight = (container) => {
