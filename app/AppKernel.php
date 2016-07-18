@@ -88,7 +88,7 @@ class AppKernel extends Kernel
 
             new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
 
-            // Secure agains XSS
+            // Secure our forms against XSS
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
 
             // Excel files generation
