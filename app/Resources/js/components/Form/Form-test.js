@@ -18,13 +18,13 @@ describe('<Form />', () => {
       },
     ],
     form: 'test-form',
-    handleSubmit: () => {},
+    onSubmit: () => {},
   };
 
   it('renders a <form /> element', () => {
     const wrapper = shallow(<Form {...defaultProps} />);
     expect(wrapper.find('form').is('#test-form')).to.be.true;
-    expect(wrapper.find('form').prop('onSubmit')).to.equal(defaultProps.handleSubmit);
+    expect(wrapper.find('form').prop('onSubmit')).to.equal(defaultProps.onSubmit);
   });
 
   it('renders no submit button', () => {

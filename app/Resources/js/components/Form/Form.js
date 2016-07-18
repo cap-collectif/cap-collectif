@@ -9,7 +9,6 @@ export const Form = React.createClass({
     form: PropTypes.string.isRequired,
     fields: PropTypes.array.isRequired,
     translations: PropTypes.object,
-    handleSubmit: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
