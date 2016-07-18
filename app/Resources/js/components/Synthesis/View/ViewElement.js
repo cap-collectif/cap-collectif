@@ -30,7 +30,7 @@ const ViewElement = React.createClass({
 
   getPercentageTooltip(contributions, score, percentage) {
     return (
-      <Tooltip id="synthesis-percentage">
+      <Tooltip>
         <FormattedMessage
           message={this.getIntlMessage('synthesis.percentage.tooltip')}
           contributions={contributions}
