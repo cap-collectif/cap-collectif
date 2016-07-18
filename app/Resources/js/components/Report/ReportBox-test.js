@@ -18,6 +18,7 @@ describe('<ReportBox />', () => {
     features: { reporting: true },
     user: { uniqueId: 'michel' },
     author: { uniqueId: 'pierre' },
+    buttonClassName: 'test-button-classNAme',
   };
 
   it('renders a report button and a modal', () => {
@@ -29,7 +30,7 @@ describe('<ReportBox />', () => {
     expect(button.prop('onClick')).to.be.a.function;
     expect(button.prop('bsSize')).to.equal(null);
     expect(button.prop('style')).to.deep.equal({});
-    expect(button.prop('className')).to.equal('');
+    expect(button.prop('className')).to.equal(defaultProps.buttonClassName);
     const modal = wrapper.find('Connect(ReportModal)');
     expect(modal).to.have.length(1);
     expect(modal.prop('show')).to.equal(defaultProps.show);

@@ -10,6 +10,7 @@ trait OpinionStepsTrait
         'opinionTypeSlug' => 'les-causes-1',
         'opinionSlug' => 'opinion-2',
     ];
+
     protected static $opinionInClosedStep = [
         'projectSlug' => 'strategie-technologique-de-l-etat-et-services-publics',
         'stepSlug' => 'collecte-des-avis-pour-une-meilleur-strategie',
@@ -72,7 +73,7 @@ trait OpinionStepsTrait
     public function iGoToAnOpinion()
     {
         $this->visitPageWithParams('opinion page', self::$opinion);
-        $this->iWait(2);
+        $this->iWait(3);
         $this->assertSession()->pageTextContains('Opinion 2');
     }
 

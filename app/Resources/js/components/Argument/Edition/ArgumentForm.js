@@ -36,8 +36,9 @@ const ArgumentForm = React.createClass({
       if (this.isValid()) {
         const { argument, onSubmitSuccess, onSubmitFailure } = this.props;
         const opinion = ArgumentStore.opinion;
-        const data = this.state.form;
+        const data = Object.assign({}, this.state.form);
         data.type = argument.type;
+        delete data.confirm;
 
         return ArgumentActions
           .update(opinion, argument.id, data)
