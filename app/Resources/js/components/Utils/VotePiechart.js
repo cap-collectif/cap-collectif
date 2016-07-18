@@ -32,6 +32,7 @@ const VotePiechart = React.createClass({
       return (
         <Chart
           chartType="PieChart"
+          className="opinion__chart"
           data={[
               [{ type: 'string' }, { type: 'number' }],
               [this.getIntlMessage('vote.ok'), ok],
