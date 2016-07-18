@@ -140,7 +140,7 @@ Feature: Proposals
     When I click the report proposal button
     And I fill the reporting form
     And I submit the reporting form
-    Then I should see "Merci ! Votre signalement a bien été pris en compte."
+    Then I should see "Merci ! La proposition a bien été signalée."
 
   # Sharing
 

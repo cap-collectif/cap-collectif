@@ -40,7 +40,7 @@ Feature: Opinions
     When I click the "#btn-add--les-causes-1" element
     Then I should see "Connectez-vous pour contribuer"
 
-  @javascript @database @fix
+  @javascript @database
   Scenario: Logged in user can report an opinion
     Given feature "reporting" is enabled
     And I am logged in as admin
@@ -48,7 +48,7 @@ Feature: Opinions
     When I click the "#report-opinion-2-button" element
     And I fill the reporting form
     And I submit the reporting form
-    Then I should see "Merci ! Votre signalement a bien été pris en compte."
+    Then I should see "Merci ! La proposition a bien été signalée."
 
   @javascript @database
   Scenario: Author of an opinion loose their votes when updating it
