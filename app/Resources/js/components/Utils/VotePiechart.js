@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { Chart } from 'react-google-charts';
 
 const VotePiechart = React.createClass({
   propTypes: {
@@ -29,6 +28,7 @@ const VotePiechart = React.createClass({
   render() {
     const { ok, mitige, nok, left, top, height, width } = this.props;
     if (!__SERVER__ && ok + mitige + nok > 0) {
+      const Chart = require('react-google-charts').Chart;
       return (
         <Chart
           chartType="PieChart"
