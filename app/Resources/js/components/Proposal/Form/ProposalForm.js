@@ -48,13 +48,15 @@ const ProposalForm = React.createClass({
   },
 
   getInitialState() {
+    const { proposal } = this.props;
+    console.log(proposal);
     return {
       form: {
-        title: this.props.proposal.title,
-        body: this.props.proposal.body,
-        theme: this.props.proposal.theme.id,
-        district: this.props.proposal.district.id,
-        category: this.props.proposal.category.id,
+        title: proposal.title,
+        body: proposal.body,
+        theme: proposal.theme ? proposal.theme.id : -1,
+        district: proposal.district ? proposal.district.id : -1,
+        category: proposal.category ? proposal.category.id : -1,
       },
       custom: this.getInitialFormAnswers(),
       errors: {

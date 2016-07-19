@@ -31,7 +31,7 @@ const OpinionDelete = React.createClass({
   },
 
   hideModal() {
-    this.setState({ hideModal: true });
+    this.setState({ showModal: false });
   },
 
   isVersion() {
