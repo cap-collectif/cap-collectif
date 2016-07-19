@@ -12,7 +12,7 @@ const Field = React.createClass({
       divClassName: PropTypes.string,
       disableValidation: PropTypes.bool,
       type: PropTypes.oneOf(['text', 'textarea', 'editor', 'select', 'checkbox', 'password', 'captcha', 'email']).isRequired,
-      label: PropTypes.string.isRequired,
+      label: PropTypes.string,
       placeholder: PropTypes.string,
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
@@ -31,7 +31,7 @@ const Field = React.createClass({
         type={type}
         name={name}
         labelClassName={labelClassName || ''}
-        label={label}
+        label={label || null}
         placeholder={placeholder || null}
         errors={(check && error) ? this.getIntlMessage(error) : null}
         bsStyle={check ? (error ? 'error' : 'success') : null}

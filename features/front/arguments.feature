@@ -233,7 +233,7 @@ Feature: Arguments
 
   # Reporting
 
-  @javascript @database @fixme
+  @javascript @database
   Scenario: Non author of an argument can report it
     Given feature "reporting" is enabled
     And I am logged in as admin
