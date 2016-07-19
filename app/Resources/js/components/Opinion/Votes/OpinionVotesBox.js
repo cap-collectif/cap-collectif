@@ -66,7 +66,8 @@ const OpinionVotesBox = React.createClass({
               ? <Col sm={12} md={4}>
                 <VotePiechart
                   top={20}
-                  height={180}
+                  height={'180px'}
+                  width={'200px'}
                   ok={opinion.votes_ok}
                   nok={opinion.votes_nok}
                   mitige={opinion.votes_mitige}

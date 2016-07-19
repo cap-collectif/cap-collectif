@@ -75,7 +75,7 @@ const ViewElement = React.createClass({
         <div className="synthesis__element__votes">
           <VotePiechart
             top={20}
-            height={180}
+            height="180px"
             ok={votes[1] || 0}
             nok={votes[-1] || 0}
             mitige={votes[0] || 0}

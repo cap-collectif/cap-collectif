@@ -6,8 +6,8 @@ const VotePiechart = React.createClass({
     ok: PropTypes.number,
     nok: PropTypes.number,
     mitige: PropTypes.number,
-    height: PropTypes.number,
-    width: PropTypes.number,
+    height: PropTypes.string,
+    width: PropTypes.string,
     top: PropTypes.number,
     left: PropTypes.number,
   },
@@ -30,15 +30,17 @@ const VotePiechart = React.createClass({
     if (!__SERVER__ && ok + mitige + nok > 0) {
       const Chart = require('react-google-charts').Chart;
       return (
+        <div className="opinion__chart">
         <Chart
           chartType="PieChart"
-          className="opinion__chart"
           data={[
               [{ type: 'string' }, { type: 'number' }],
               [this.getIntlMessage('vote.ok'), ok],
               [this.getIntlMessage('vote.mitige'), mitige],
               [this.getIntlMessage('vote.nok'), nok],
           ]}
+          height={height}
+          width={width}
           options={{
             legend: 'none',
             chartArea: {
@@ -49,13 +51,13 @@ const VotePiechart = React.createClass({
             },
             colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
             pieSliceText: 'value',
-            height: height,
-            width: width,
             backgroundColor: 'transparent',
           }}
         />
+        </div>
       );
     }
+    return null;
   },
 });
 
