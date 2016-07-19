@@ -9,6 +9,9 @@ backend default {
 # Called at the beginning of a request, after the complete request has been received and parsed.
 sub vcl_recv {
 
+  # https://httpoxy.org/#fix-now
+  unset req.http.proxy;
+
   # Delete cookie for static files
   if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css|woff|ott)$") {
     unset req.http.Cookie;
