@@ -5,6 +5,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import MainNavbarSearch from './MainNavbarSearch';
 import IntlData from '../../../translations/FR';
+import { Navbar, Input } from 'react-bootstrap';
 
 describe('<MainNavbarSearch />', () => {
   const context = { router: {} };
@@ -12,7 +13,7 @@ describe('<MainNavbarSearch />', () => {
     const wrapper = shallow(<MainNavbarSearch {...IntlData} />,
       { context }
     );
-    expect(wrapper.find('NavbarForm')).to.have.length(1);
-    expect(wrapper.find('Input')).to.have.length(1);
+    expect(wrapper.find(Navbar.Form)).to.have.length(1);
+    expect(wrapper.find(Input)).to.have.length(1);
   });
 });

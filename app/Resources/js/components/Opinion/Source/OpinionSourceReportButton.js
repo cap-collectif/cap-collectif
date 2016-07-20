@@ -1,18 +1,15 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import ReportBox from '../../Report/ReportBox';
+import OpinionSourceActions from '../../../actions/OpinionSourceActions';
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
-import { submitSourceReport } from '../../../redux/modules/report';
 
 const OpinionSourceReportButton = React.createClass({
   propTypes: {
-    dispatch: PropTypes.func.isRequired,
-    source: PropTypes.object.isRequired,
+    source: React.PropTypes.object.isRequired,
   },
 
-  handleReport(data) {
-    const { source, dispatch } = this.props;
-    return submitSourceReport(OpinionSourceStore.opinion, source.id, data, dispatch);
+  report(data) {
+    return OpinionSourceActions.report(OpinionSourceStore.opinion, this.props.source.id, data);
   },
 
   render() {
@@ -21,7 +18,7 @@ const OpinionSourceReportButton = React.createClass({
       <ReportBox
         id={'source-' + source.id}
         reported={source.has_user_reported}
-        onReport={this.handleReport}
+        onReport={this.report}
         author={source.author}
         buttonBsSize="xs"
         buttonClassName="source__btn--report"
@@ -31,4 +28,4 @@ const OpinionSourceReportButton = React.createClass({
 
 });
 
-export default connect()(OpinionSourceReportButton);
+export default OpinionSourceReportButton;

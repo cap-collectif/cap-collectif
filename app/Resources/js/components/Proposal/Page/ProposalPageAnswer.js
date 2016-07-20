@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import AnswerBody from '../../Answer/AnswerBody';
 
 const ProposalPageAnswer = React.createClass({
   propTypes: {
-    answer: React.PropTypes.object,
-    className: React.PropTypes.string,
+    answer: PropTypes.object,
+    className: PropTypes.string,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
+      answer: null,
       className: '',
     };
   },
@@ -23,18 +24,15 @@ const ProposalPageAnswer = React.createClass({
     }
     const classes = {
       'bg-vip': answer.author && answer.author.vip,
+      'block': true,
       [this.props.className]: true,
     };
     return (
       <div className={classNames(classes)}>
-        <div className="block">
-          {
-            answer.title
-            ? <h2 className="h2">{answer.title}</h2>
-            : null
-          }
-          <AnswerBody answer={answer} />
-        </div>
+        {
+          answer.title && <h2 className="h2">{answer.title}</h2>
+        }
+        <AnswerBody answer={answer} />
       </div>
     );
   },

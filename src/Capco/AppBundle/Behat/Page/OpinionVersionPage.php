@@ -22,8 +22,8 @@ class OpinionVersionPage extends Page
         'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',
         'share button' => 'opinion-share-button',
         // Tabs
-        'sources tab' => '#opinion__sources___tab',
-        'arguments tab' => '#opinion__arguments___tab',
+        'sources tab' => '#opinion-page-tabs-tab-sources',
+        'arguments tab' => '#opinion-page-tabs-tab-arguments',
         // Arguments
         'argument yes field' => '#argument-form--yes textarea',
         'argument yes button' => '#argument-form--yes button',

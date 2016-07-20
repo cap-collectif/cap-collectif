@@ -153,20 +153,6 @@ Capco\UserBundle\Entity\User:
         vip: true
         confirmationToken: ~
 
-    user505:
-        username: ptondereau
-        firstname: Pierre
-        lastname: Tondereau
-        email: pierre@cap-collectif.com
-        enabled: true
-        userType: @UserType1
-        plainPassword: toto
-        roles:
-         - 'ROLE_USER'
-        Media: @MediaUser5
-        vip: true
-        confirmationToken: ~
-
     user_not_confirmed:
         username: user_not_confirmed
         firstname: user_not_confirmed

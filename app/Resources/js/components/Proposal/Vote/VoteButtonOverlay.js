@@ -1,12 +1,12 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 const VoteButtonOverlay = React.createClass({
   propTypes: {
     children: React.PropTypes.element.isRequired,
     show: React.PropTypes.bool.isRequired,
-    tooltipId: React.PropTypes.string.isRequired,
+    popoverId: React.PropTypes.string.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -18,9 +18,9 @@ const VoteButtonOverlay = React.createClass({
 
     return (
       <OverlayTrigger placement="top" overlay={
-        <Tooltip id={this.props.tooltipId}>
-          {this.getIntlMessage('proposal.vote.not_enough_credits')}
-        </Tooltip>
+        <Popover id={this.props.popoverId} title={this.getIntlMessage('proposal.vote.not_enough_credits')}>
+          {this.getIntlMessage('proposal.vote.not_enough_credits_text')}
+        </Popover>
       }>
         {this.props.children}
       </OverlayTrigger>
