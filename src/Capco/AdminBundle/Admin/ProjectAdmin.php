@@ -237,10 +237,18 @@ class ProjectAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $showMapper
-            ->with('admin.fields.project.general',   ['class' => 'col-md-3'])->end()
-            ->with('admin.fields.project.proposals', ['class' => 'col-md-9'])->end()
-        ;
+        if($this->getSubject()->getTotalProposalsCount()) {
+            $showMapper->with('admin.fields.project.general', ['class' => 'col-md-4'])->end();
+
+            $showMapper->with('admin.fields.project.proposals', ['class' => 'col-md-8'])
+                ->add('proposals', null, [
+                    'label' => false,
+                    'template' => 'CapcoAdminBundle:Project:proposals_show_field.html.twig',
+                ])
+                ->end();
+        } else {
+            $showMapper->with('admin.fields.project.general')->end();
+        }
 
         $showMapper
             ->with('admin.fields.project.general')
@@ -301,14 +309,6 @@ class ProjectAdmin extends Admin
             ])
             ->end()
         ;
-
-        $showMapper
-            ->with('admin.fields.project.proposals')
-            ->add('proposals', null, [
-                'label' => false,
-                'template' => 'CapcoAdminBundle:Project:proposals_show_field.html.twig',
-            ])
-            ->end();
     }
 
     // For mosaic view
@@ -324,5 +324,10 @@ class ProjectAdmin extends Admin
         }
 
         return parent::getObjectMetadata($object);
+    }
+
+    private function createQueryForProposals()
+    {
+
     }
 }

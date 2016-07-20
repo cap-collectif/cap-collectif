@@ -2,13 +2,13 @@ services:
 
   capco.form.type.purified_text:
     class: Capco\AppBundle\Form\Type\PurifiedTextType
-    arguments: ["@capco.form.transformer.html_purifier"]
+    arguments: [@capco.form.transformer.html_purifier]
     tags:
       - { name: form.type, alias: purified_text }
 
   capco.form.type.purified_textarea:
     class: Capco\AppBundle\Form\Type\PurifiedTextareaType
-    arguments: ["@capco.form.transformer.html_purifier"]
+    arguments: [@capco.form.transformer.html_purifier]
     tags:
       - { name: form.type, alias: purified_textarea }
 
@@ -34,31 +34,31 @@ services:
 
   capco.form.proposal:
     class: Capco\AppBundle\Form\ProposalType
-    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager", "@capco.abstract_question.repository"]
+    arguments: [@capco.form.transformer.entity_to_id, @capco.toggle.manager, @capco.abstract_question.repository]
     tags:
       - { name: form.type, alias: proposal }
 
   capco.form.reply:
     class: Capco\AppBundle\Form\ReplyType
-    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager"]
+    arguments: [@capco.form.transformer.entity_to_id, @capco.toggle.manager]
     tags:
       - { name: form.type, alias: reply }
 
   capco.form.response:
     class: Capco\AppBundle\Form\ResponseType
-    arguments: ["@capco.form.transformer.entity_to_id"]
+    arguments: [@capco.form.transformer.entity_to_id]
     tags:
       - { name: form.type, alias: response }
 
   capco.form.proposal_vote:
       class: Capco\AppBundle\Form\ProposalVoteType
-      arguments: ["@security.token_storage"]
+      arguments: [@security.token_storage]
       tags:
         - { name: form.type, alias: proposal_vote }
 
   capco.form.transformer.entity_to_id:
     class: Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer
-    arguments: ["@doctrine.orm.entity_manager"]
+    arguments: [@doctrine.orm.entity_manager]
 
   capco.form.argument:
     class: Capco\AppBundle\Form\ArgumentType
@@ -72,18 +72,18 @@ services:
 
   capco.form.registration:
       class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
-      arguments: ["@capco.toggle.manager"]
+      arguments: [@capco.toggle.manager]
       tags:
         - { name: form.type, alias: registration }
 
   capco.form.idea:
     class: Capco\AppBundle\Form\IdeaType
-    arguments: ["@capco.toggle.manager"]
+    arguments: [@capco.toggle.manager]
     tags:
       - { name: form.type, alias: idea }
 
   capco.form.idea_vote:
     class: Capco\AppBundle\Form\IdeaVoteType
-    arguments: ["@security.token_storage"]
+    arguments: [@security.token_storage]
     tags:
       - { name: form.type, alias: idea_vote }

@@ -25,7 +25,7 @@ services:
 
   sms.service:
     class: Capco\AppBundle\Sms\SmsService
-    arguments: ["@twilio.sms_sender", "%twilio_number%", "@capco.site_parameter.resolver", "@translator"]
+    arguments: [@twilio.sms_sender, %twilio_number%, @capco.site_parameter.resolver, @translator]
 
   capco.doctrine.subscriber.dynamic_relation:
     class: Capco\AppBundle\EventListener\DynamicRelationSubscriber
@@ -36,42 +36,42 @@ services:
   ## Service Notify - send mail
   capco.notify_manager:
     class: Capco\AppBundle\Manager\Notify
-    arguments: ["@mailer", "@templating", "@translator", "@capco.site_parameter.resolver", "@router", "@capco.url.resolver", "@validator", {confirmation.template: "%fos_user.registration.confirmation.template%", resetting.template: "%fos_user.resetting.email.template%", disable_delivery: "%disable_mail_delivery%"}]
+    arguments: [@mailer, @templating, @translator, @capco.site_parameter.resolver, @router, @capco.url.resolver, @validator, {confirmation.template: %fos_user.registration.confirmation.template%, resetting.template: %fos_user.resetting.email.template%, disable_delivery: %disable_mail_delivery%}]
 
   capco.contribution.manager:
     class: Capco\AppBundle\Manager\ContributionManager
-    arguments: ["@doctrine.orm.entity_manager"]
+    arguments: [@doctrine.orm.entity_manager]
 
   ## Toggle
   capco.toggle.manager:
     class: Capco\AppBundle\Toggle\Manager
-    arguments: ["@qandidate.toggle.manager", "@qandidate.toggle.user_context_factory" ]
+    arguments: [@qandidate.toggle.manager, @qandidate.toggle.user_context_factory ]
 
   capco.event.helper:
     class: Capco\AppBundle\Helper\EventHelper
 
   capco.diff.generator:
     class: Capco\AppBundle\Generator\DiffGenerator
-    arguments: ["@caxy.html_diff"]
+    arguments: [@caxy.html_diff]
 
   capco.idea.helper:
     class: Capco\AppBundle\Helper\IdeaHelper
 
   redis_storage.helper:
     class: Capco\AppBundle\Helper\RedisStorageHelper
-    arguments: ["@snc_redis.default"]
+    arguments: [@snc_redis.default]
 
   capco.project.helper:
     class: Capco\AppBundle\Helper\ProjectHelper
-    arguments: ["@capco.project.repository", "@capco.abstract_step.repository"]
+    arguments: [@capco.project.repository, @capco.abstract_step.repository]
 
   capco.step.helper:
     class: Capco\AppBundle\Helper\StepHelper
-    arguments: ["@capco.project.helper"]
+    arguments: [@capco.project.helper]
 
   capco.vote.subscriber:
     class: Capco\AppBundle\EventListener\VoteSubscriber
-    arguments: ["@doctrine.orm.entity_manager"]
+    arguments: [@doctrine.orm.entity_manager]
     tags:
       - { name: "kernel.event_subscriber" }
 
@@ -82,33 +82,33 @@ services:
 
   capco.proposal.subscriber:
     class: Capco\AppBundle\EventListener\ProposalSubscriber
-    arguments: ["@doctrine.orm.entity_manager", "@capco.notify_manager"]
+    arguments: [@doctrine.orm.entity_manager, @capco.notify_manager]
     tags:
       - { name: "kernel.event_subscriber" }
 
   capco.synthesis.log_manager:
     class: Capco\AppBundle\Manager\LogManager
-    arguments: ["@translator", "@fos_user.user_manager", "@doctrine.orm.entity_manager"]
+    arguments: [@translator, @fos_user.user_manager, @doctrine.orm.entity_manager]
 
 
   capco.synthesis.synthesis_handler:
     class: Capco\AppBundle\Synthesis\Handler\SynthesisHandler
-    arguments: ["@doctrine.orm.entity_manager", "@capco.synthesis.consultation_step_extractor"]
+    arguments: [@doctrine.orm.entity_manager, @capco.synthesis.consultation_step_extractor]
 
   capco.synthesis.synthesis_element_handler:
     class: Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler
-    arguments: ["@doctrine.orm.entity_manager", "@capco.synthesis.log_manager"]
+    arguments: [@doctrine.orm.entity_manager, @capco.synthesis.log_manager]
 
   capco.synthesis.consultation_step_extractor:
     class: Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor
-    arguments: ["@doctrine.orm.entity_manager", "@translator", "@router", "@capco.opinion_types.resolver", "@capco.url.resolver"]
+    arguments: [@doctrine.orm.entity_manager, @translator, @router, @capco.opinion_types.resolver, @capco.url.resolver]
 
   capco.react_intl_render.twig:
     class: Capco\AppBundle\Twig\ReactIntlRenderExtension
-    arguments: ["@limenius_react.render_extension", "%kernel.root_dir%/Resources/js/translations/messages.json"]
+    arguments: [@limenius_react.render_extension, %kernel.root_dir%/Resources/js/translations/messages.json]
     tags:
       - { name: "twig.extension" }
 
   capco.form.transformer.html_purifier:
     class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
-    arguments: ["@exercise_html_purifier.default"]
+    arguments: [@exercise_html_purifier.default]

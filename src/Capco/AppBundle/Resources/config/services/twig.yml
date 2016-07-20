@@ -11,93 +11,93 @@ parameters:
 
 services:
   capco.twig.comment:
-    class: "%capco.twig.comment.class%"
-    arguments: ["@capco.comment.resolver"]
+    class: %capco.twig.comment.class%
+    arguments: [@capco.comment.resolver]
     tags:
       - { name: twig.extension }
 
   capco.twig.user_type:
     class: Capco\AppBundle\Twig\UserTypeExtension
-    arguments: ["@capco.user_type.repository"]
+    arguments: [@capco.user_type.repository]
     tags:
       - { name: twig.extension }
 
   capco.twig.media:
     class: Capco\AppBundle\Twig\MediaExtension
-    arguments: ["@service_container"]
+    arguments: [@service_container]
     tags:
       - { name: twig.extension }
 
   capco.twig.navigation:
     class: Capco\AppBundle\Twig\NavigationExtension
-    arguments: ["@capco.menu_item.resolver"]
+    arguments: [@capco.menu_item.resolver]
     tags:
       - { name: twig.extension }
 
   capco.twig.default_avatar:
-    class: "%capco.twig.default_avatar.class%"
+    class: %capco.twig.default_avatar.class%
     arguments:
-      - "@capco.site_image.resolver"
+      - @capco.site_image.resolver
     tags:
       - { name: twig.extension }
 
   capco.twig.event_helper:
-    class: "%capco.twig.event_helper.class%"
-    arguments: ["@capco.event.helper"]
+    class: %capco.twig.event_helper.class%
+    arguments: [@capco.event.helper]
     tags:
       - { name: twig.extension }
 
   capco.twig.parameters:
     class:     Capco\AppBundle\Twig\ParametersExtension
-    arguments: ["@capco.toggle.manager", "@capco.site_parameter.resolver"]
+    arguments: [@capco.toggle.manager, @capco.site_parameter.resolver]
     tags:
       - { name: twig.extension }
 
   capco.twig.idea_helper:
-    class: "%capco.twig.idea_helper.class%"
-    arguments: ["@capco.idea.helper"]
+    class: %capco.twig.idea_helper.class%
+    arguments: [@capco.idea.helper]
     tags:
       - { name: twig.extension }
 
   capco.twig.menu_url:
-    class: "%capco.twig.menu_url.class%"
-    arguments: [ "@capco.menu_item.resolver" ]
+    class: %capco.twig.menu_url.class%
+    arguments: [ @capco.menu_item.resolver ]
     tags:
       - { name: twig.extension }
 
   capco.twig.site_color:
-    class: "%capco.twig.site_color.class%"
-    arguments: [ "@capco.site_color.resolver" ]
+    class: %capco.twig.site_color.class%
+    arguments: [ @capco.site_color.resolver ]
     tags:
       - { name: twig.extension }
 
   capco.twig.site_image:
-    class: "%capco.twig.site_image.class%"
-    arguments: [ "@capco.site_image.resolver" ]
+    class: %capco.twig.site_image.class%
+    arguments: [ @capco.site_image.resolver ]
     tags:
       - { name: twig.extension }
 
   capco.twig.site_parameter:
-    class: "%capco.twig.site_parameter.class%"
-    arguments: [ "@capco.site_parameter.resolver" ]
+    class: %capco.twig.site_parameter.class%
+    arguments: [ @capco.site_parameter.resolver ]
     tags:
       - { name: twig.extension }
 
   capco.twig.steps:
     class:     Capco\AppBundle\Twig\StepsExtension
-    arguments: ["@capco.step.resolver", "@capco.step.helper"]
+    arguments: [@capco.step.resolver, @capco.step.helper]
     tags:
       - { name: twig.extension }
 
   capco.twig.url:
-    class: "%capco.twig.url.class%"
-    arguments: ["@capco.url.resolver"]
+    class: %capco.twig.url.class%
+    arguments: [@capco.url.resolver]
     tags:
       - { name: twig.extension }
 
   capco.twig.vote:
     class: Capco\AppBundle\Twig\VoteExtension
-    arguments: ["@capco.vote.resolver", "@capco.proposal_votes.resolver"]
+    arguments: [@capco.vote.resolver, @capco.proposal_votes.resolver]
     tags:
       - { name: twig.extension }
 
@@ -108,6 +108,6 @@ services:
 
   capco.twig.stats:
       class: Capco\AppBundle\Twig\StatsExtension
-      arguments: ["@capco.project_stats.resolver"]
+      arguments: [@capco.project_stats.resolver]
       tags:
         - { name: twig.extension }

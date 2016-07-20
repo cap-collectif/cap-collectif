@@ -5,7 +5,7 @@ services:
 
   capco.project.download.resolver:
     class: Capco\AppBundle\Resolver\ProjectDownloadResolver
-    arguments: ['@doctrine.orm.entity_manager', '@translator', '@capco.url.array.resolver', '@phpexcel']
+    arguments: ['@doctrine.orm.entity_manager', '@translator', '@capco.url.resolver', '@phpexcel']
 
   capco.contribution.resolver:
     class: Capco\AppBundle\Resolver\ContributionResolver
@@ -66,10 +66,6 @@ services:
   capco.url.resolver:
       class: Capco\AppBundle\Resolver\UrlResolver
       arguments: ['@router', '@capco.toggle.manager']
-
-  capco.url.array.resolver:
-      class: Capco\AppBundle\Resolver\UrlArrayResolver
-      arguments: ['@router']
 
   capco.vote.resolver:
     class: Capco\AppBundle\Resolver\VoteResolver

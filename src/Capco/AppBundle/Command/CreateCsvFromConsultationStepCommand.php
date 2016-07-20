@@ -12,7 +12,8 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
     {
         $this
             ->setName('capco:export:consultation')
-            ->setDescription('Create csv file from consultation step data');
+            ->setDescription('Create csv file from consultation step data')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -22,7 +23,8 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
         $steps = $this->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
-            ->findAll();
+            ->findAll()
+        ;
 
         foreach ($steps as $cs) {
             $writer = $resolver->getContent($cs);

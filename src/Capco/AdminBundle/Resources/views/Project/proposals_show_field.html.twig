@@ -1,5 +1,5 @@
 <table class="table">
-    {% if admin.collectStep is not null %}
+    {% if admin.collectStep is defined and admin.collectStep is not null %}
         {% set proposals = admin.collectStep.proposalForm.proposals %}
         <th>{{ 'admin.fields.project.proposals_table.title'|trans({}, 'SonataAdminBundle') }}</th>
         <th>{{ 'admin.fields.project.proposals_table.author'|trans({}, 'SonataAdminBundle') }}</th>
