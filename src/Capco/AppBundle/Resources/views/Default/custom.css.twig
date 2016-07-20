@@ -510,10 +510,10 @@
         background-color: {{ menuBgHover | raw }};
     }
 
-    #main-navbar .btn--connection {
-        background-color: {{ menuText | raw }};
-        color: {{ menuBg | raw }};
-        border-color: {{ menuBg | raw }};
+    .btn--connection,  {
+        background-color: {{ menuText | raw }} !important;
+        color: {{ menuBg | raw }} !important;
+        border-color: {{ menuBg | raw }} !important;
     }
 
     .search__choice-panel .radio label {
