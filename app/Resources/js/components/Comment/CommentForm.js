@@ -229,7 +229,7 @@ const CommentForm = React.createClass({
       'comment-answer-form': this.props.isAnswer,
     });
     return (
-      <div className={classes}>
+      <div className={classes} style={{ padding: '5px' }}>
         <UserAvatar user={this.props.user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock" onBlur={() => this.expand(false)}>
           <form ref={(c) => this.form = c}>

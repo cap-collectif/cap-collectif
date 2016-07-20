@@ -205,7 +205,6 @@ a.excerpt {
   position: relative;
   margin: 15px auto;
   text-align: center;
-  color: $dark-gray;
   &:after {
     content: "";
     position: absolute;
@@ -220,7 +219,7 @@ a.excerpt {
     position: relative;
     padding: 0 10px;
     font-weight: bold;
-    background-color: $white;
+    background-color: white;
     max-width: 60%;
     display: inline-block;
     z-index: 2;
@@ -689,4 +688,44 @@ svg.avatar {
 
 .share-button-wrapper div {
   display: inline-block;
+}
+
+.tabs__pills ul {
+  border-bottom: 0;
+}
+
+.tabs__pills {
+  border-bottom: 1px solid $border-color;
+
+  .container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .tabs__pill {
+    float: none;
+    display: inline-block;
+    text-align: center;
+
+    a {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    &.active .badge {
+      color: white;
+      background-color: #777777;
+    }
+
+    &.active a,
+    &.active a:hover,
+    &.active a:focus,
+    a:focus,
+    a:hover {
+      color: $black;
+      background-color: $white;
+      @include border-radius(0px);
+      @include box-shadow(0 -3px 0 $brand-primary inset);
+    }
+  }
 }

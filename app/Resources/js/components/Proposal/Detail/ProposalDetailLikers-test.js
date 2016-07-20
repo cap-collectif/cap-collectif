@@ -51,4 +51,9 @@ describe('<ProposalDetailLikers />', () => {
     expect(label).to.have.length(1);
     expect(label.prop('likers')).to.equal(proposalWithLikers.likers);
   });
+
+  it('should render a div with class proposal__info when specified', () => {
+    const wrapper = shallow(<ProposalDetailLikers componentClass="div" proposal={proposalWithLikers} />);
+    expect(wrapper.find('div.proposal__info')).to.have.length(1);
+  });
 });

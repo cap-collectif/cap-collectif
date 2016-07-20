@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Tab } from 'react-bootstrap';
+import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import ArgumentStore from '../../stores/ArgumentStore';
 import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
@@ -9,6 +9,7 @@ import OpinionSourceBox from './Source/OpinionSourceBox';
 import VoteLinechart from '../Utils/VoteLinechart';
 import OpinionLinksBox from './Links/OpinionLinksBox';
 import OpinionSourceStore from '../../stores/OpinionSourceStore';
+import { scrollToAnchor } from '../../services/ScrollToAnchor';
 
 const OpinionTabs = React.createClass({
   propTypes: {
@@ -29,15 +30,6 @@ const OpinionTabs = React.createClass({
   },
 
   componentDidMount() {
-    const scrollToAnchor = () => {
-      const hash = window.location.hash;
-      if (hash) {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView(false);
-        }
-      }
-    };
     setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
   },
 
@@ -151,63 +143,93 @@ const OpinionTabs = React.createClass({
       // at least two tabs
 
       return (
-        <Tabs defaultActiveKey={this.getDefaultKey()} animation={false}>
-          { this.isVersionable()
-            ? <Tab
-                id="opinion__versions"
-                className="opinion-tabs"
-                eventKey={'versions'}
-                title={<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />}
-            >
-              {this.renderVersionsContent()}
-            </Tab>
-            : null
-          }
-          { this.isCommentable()
-            ? <Tab
-                id="opinion__arguments"
-                className="opinion-tabs"
-                eventKey={'arguments'}
-                title={<FormattedMessage message={this.getArgumentsTrad()} num={this.state.argumentsCount} />}
-            >
-              <ArgumentsBox {...this.props} />
-            </Tab>
-            : null
-          }
-          { this.isSourceable()
-            ? <Tab
-                id="opinion__sources"
-                className="opinion-tabs"
-                eventKey={'sources'}
-                title={<FormattedMessage message={this.getIntlMessage('global.sources')} num={this.state.sources_count} />}
-            >
-              <OpinionSourceBox {...this.props} />
-            </Tab>
-            : null
-          }
-          { this.hasStatistics()
-            ? <Tab
-                id="opinion__votesevolution"
-                className="opinion-tabs"
-                eventKey={'votesevolution'}
-                title={<FormattedMessage message={this.getIntlMessage('vote.evolution.tab')} />}
-            >
-              <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />
-            </Tab>
-            : null
-          }
-          { this.isLinkable()
-            ? <Tab
-                id="opinion__links"
-                className="opinion-tabs"
-                eventKey={'links'}
-                title={<FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />}
-            >
-              <OpinionLinksBox {...this.props} />
-            </Tab>
-            : null
-          }
-        </Tabs>
+        <Tab.Container
+          id="opinion-page-tabs"
+          defaultActiveKey={this.getDefaultKey()}
+          animation={false}
+        >
+          <div>
+            <Nav bsStyle="tabs">
+              {
+                this.isVersionable()
+                && <NavItem
+                  eventKey="versions"
+                  className="opinion-tabs"
+                >
+                  <FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />
+                </NavItem>
+              }
+              {
+                this.isCommentable()
+                && <NavItem
+                  className="opinion-tabs"
+                  eventKey="arguments"
+                >
+                  <FormattedMessage message={this.getArgumentsTrad()} num={this.state.argumentsCount} />
+                </NavItem>
+              }
+              {
+                this.isSourceable()
+                && <NavItem
+                  className="opinion-tabs"
+                  eventKey="sources"
+                >
+                  <FormattedMessage message={this.getIntlMessage('global.sources')} num={this.state.sources_count} />
+                </NavItem>
+              }
+              {
+                this.hasStatistics()
+                && <NavItem
+                  className="opinion-tabs"
+                  eventKey="votesevolution"
+                >
+                  <FormattedMessage message={this.getIntlMessage('vote.evolution.tab')} />
+                </NavItem>
+              }
+              {
+                this.isLinkable()
+                && <NavItem
+                  className="opinion-tabs"
+                  eventKey="links"
+                >
+                  <FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />
+                </NavItem>
+              }
+            </Nav>
+            <Tab.Content animation={false}>
+              {
+                this.isVersionable()
+                && <Tab.Pane eventKey="versions">
+                  {this.renderVersionsContent()}
+                </Tab.Pane>
+              }
+              {
+                this.isCommentable()
+                && <Tab.Pane eventKey="arguments">
+                  <ArgumentsBox {...this.props} />
+                </Tab.Pane>
+              }
+              {
+                this.isSourceable()
+                && <Tab.Pane eventKey="sources">
+                  <OpinionSourceBox {...this.props} />
+                </Tab.Pane>
+              }
+              {
+                this.hasStatistics()
+                && <Tab.Pane eventKey="votesevolution">
+                  <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />
+                </Tab.Pane>
+              }
+              {
+                this.isLinkable()
+                && <Tab.Pane eventKey="links" >
+                  <OpinionLinksBox {...this.props} />
+                </Tab.Pane>
+              }
+            </Tab.Content>
+          </div>
+        </Tab.Container>
       );
     }
 
