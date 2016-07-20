@@ -92,11 +92,11 @@ class ProposalAdmin extends Admin
                 'required' => false,
                 'help' => 'admin.fields.proposal.help.annotation',
             ])
-            ->add('likers', 'sonata_type_model', [
+            ->add('likers', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.proposal.likers',
+                'property' => 'username',
                 'multiple' => true,
                 'required' => false,
-                'btn_add' => false,
             ])
             ->end()
 

@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import CommentSection from '../../Comment/CommentSection';
 
 const ProposalPageComments = React.createClass({
-  displayName: 'ProposalPageComments',
   propTypes: {
     id: React.PropTypes.number.isRequired,
     form: React.PropTypes.object.isRequired,

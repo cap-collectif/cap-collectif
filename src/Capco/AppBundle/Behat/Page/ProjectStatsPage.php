@@ -22,8 +22,8 @@ class ProjectStatsPage extends Page
         'user type stats items' => '#stats-23-userTypes .stats__list__row',
         'costs stats items' => '#stats-23-costs .stats__list__row',
         'votes stats items' => '#stats-9-votes .stats__list__row',
-        'theme filter select' => '#stats-9-votes #stats-filter-themes',
-        'district filter select' => '#stats-9-votes #stats-filter-districts',
+        'theme filter select' => '#stats-9-votes .stats__filter--themes',
+        'district filter select' => '#stats-9-votes .stats__filter--districts',
     ];
 
     public function getThemeStatsItemsSelector()

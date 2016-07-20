@@ -6,7 +6,6 @@ import LoginOverlay from '../../Utils/LoginOverlay';
 import { connect } from 'react-redux';
 
 const ProposalVoteButtonWrapper = React.createClass({
-  displayName: 'ProposalVoteButtonWrapper',
   propTypes: {
     proposal: PropTypes.object.isRequired,
     selectionStep: PropTypes.object,
@@ -14,8 +13,6 @@ const ProposalVoteButtonWrapper = React.createClass({
     onClick: PropTypes.func.isRequired,
     userHasVote: PropTypes.bool.isRequired,
     user: PropTypes.object,
-    style: PropTypes.object,
-    className: PropTypes.string,
   },
 
   getDefaultProps() {
@@ -23,8 +20,6 @@ const ProposalVoteButtonWrapper = React.createClass({
       selectionStep: null,
       creditsLeft: null,
       user: null,
-      style: {},
-      className: '',
     };
   },
 
@@ -40,15 +35,13 @@ const ProposalVoteButtonWrapper = React.createClass({
   },
 
   render() {
-    const { user, selectionStep, userHasVote, onClick, proposal, style, className } = this.props;
+    const { user, selectionStep, userHasVote, onClick, proposal } = this.props;
     if (selectionStep && selectionStep.voteType === VOTE_TYPE_SIMPLE) {
       return (
         <ProposalVoteButton
           userHasVote={userHasVote}
           onClick={onClick}
           disabled={!this.selectionStepIsOpen()}
-          style={style}
-          className={className}
         />
       );
     }
@@ -56,15 +49,13 @@ const ProposalVoteButtonWrapper = React.createClass({
     if (user) {
       return (
         <VoteButtonOverlay
-            popoverId={'vote-tooltip-proposal-' + proposal.id}
+            tooltipId={'vote-tooltip-proposal-' + proposal.id}
             show={!this.userHasEnoughCredits()}
         >
           <ProposalVoteButton
             userHasVote={userHasVote}
-            onClick={this.userHasEnoughCredits() ? onClick : null}
+            onClick={onClick}
             disabled={!this.selectionStepIsOpen() || !this.userHasEnoughCredits()}
-            style={style}
-            className={className}
           />
         </VoteButtonOverlay>
       );
@@ -74,10 +65,8 @@ const ProposalVoteButtonWrapper = React.createClass({
       <LoginOverlay>
         <ProposalVoteButton
           userHasVote={userHasVote}
-          onClick={null}
+          onClick={onClick}
           disabled={!this.selectionStepIsOpen()}
-          style={style}
-          className={className}
         />
       </LoginOverlay>
     );

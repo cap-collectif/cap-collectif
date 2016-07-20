@@ -119,12 +119,6 @@ const ProposalVoteForm = React.createClass({
   render() {
     const anonymous = !this.props.user;
     const userHasVote = this.props.userHasVote;
-    const commentLabel = (
-      <span>
-        {this.getIntlMessage('proposal.vote.form.comment')}
-        <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-      </span>
-    );
 
     return (
       <form ref="form">
@@ -133,42 +127,45 @@ const ProposalVoteForm = React.createClass({
 
         {
           anonymous
-          && <Input
+          ? <Input
               type="text"
               name="proposal-vote__username"
               valueLink={this.linkState('form.username')}
               ref="username"
-              label={this.getIntlMessage('proposal.vote.form.username')}
+              label={this.getIntlMessage('proposal.vote.form.username') + ' *'}
               groupClassName={this.getGroupStyle('username')}
               errors={this.renderFormErrors('username')}
           />
+          : null
         }
 
         {
           anonymous
-          && <Input
+          ? <Input
               type="text"
               name="proposal-vote__email"
               valueLink={this.linkState('form.email')}
               ref="email"
-              label={this.getIntlMessage('proposal.vote.form.email')}
+              label={this.getIntlMessage('proposal.vote.form.email') + ' *'}
               groupClassName={this.getGroupStyle('email')}
               errors={this.renderFormErrors('email')}
           />
+          : null
         }
 
         {
           (!this.state.form.private && (anonymous || !userHasVote))
-            && <Input
+            ? <Input
               type="textarea"
               name="proposal-vote__comment"
               valueLink={this.linkState('form.comment')}
               ref="comment"
-              label={commentLabel}
+              label={this.getIntlMessage('proposal.vote.form.comment')}
               placeholder={this.getIntlMessage('proposal.vote.form.comment_placeholder')}
               groupClassName={this.getGroupStyle('comment')}
               errors={this.renderFormErrors('comment')}
             />
+            : null
         }
 
         {

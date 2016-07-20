@@ -16,10 +16,10 @@ class OpinionPage extends Page
 
     public $elements = [
         // Tabs
-        'sources tab' => '#opinion-page-tabs-tab-sources',
-        'arguments tab' => '#opinion-page-tabs-tab-arguments',
-        'connections tab' => '#opinion-page-tabs-tab-links',
-        'votes evolution tab' => '#opinion-page-tabs-tab-votesevolution',
+        'sources tab' => '#opinion__sources___tab',
+        'arguments tab' => '#opinion__arguments___tab',
+        'connections tab' => '#opinion__links___tab',
+        'votes evolution tab' => '#opinion__votesevolution___tab',
         // Opinion
         'show all votes button' => '#opinion-votes-show-all',
         'votes in modal' => '.opinion__votes__more__modal .opinion__votes__userbox',

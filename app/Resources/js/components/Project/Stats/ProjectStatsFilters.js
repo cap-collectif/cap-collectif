@@ -1,7 +1,6 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import { Row, Col } from 'react-bootstrap';
-import Input from '../../Form/Input';
+import { Input, Row, Col } from 'react-bootstrap';
 
 const ProjectStatsFilters = React.createClass({
   propTypes: {
@@ -22,8 +21,8 @@ const ProjectStatsFilters = React.createClass({
       <Row className="stats__filters">
         <Col xs={12} md={6}>
           <Input
-            id="stats-filter-themes"
             type="select"
+            className="stats__filter--themes"
             ref="themes"
             onChange={this.props.onThemeChange}
           >
@@ -43,8 +42,8 @@ const ProjectStatsFilters = React.createClass({
         </Col>
         <Col xs={12} md={6}>
           <Input
-            id="stats-filter-districts"
             type="select"
+            className="stats__filter--districts"
             ref="districts"
             onChange={this.props.onDistrictChange}
           >

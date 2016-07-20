@@ -113,9 +113,6 @@ class CRUDController extends Controller
         }
 
         foreach ($conditions as $field => $value) {
-            if (!$datagrid->hasFilter($field)) {
-                throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $field, get_class($targetAdmin)));
-            }
             $datagrid->setValue($field, null, $value);
         }
 
