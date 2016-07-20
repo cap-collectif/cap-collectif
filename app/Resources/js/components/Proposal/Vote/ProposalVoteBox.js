@@ -70,7 +70,7 @@ const ProposalVoteBox = React.createClass({
               </Col>
               <Col xs={12} sm={6}>
                 <LoginButton
-                  className="btn-block btn--connection"
+                  className="btn-darkest-gray btn-block btn--connection"
                 />
               </Col>
             </Row>
