@@ -190,7 +190,11 @@ class ProjectController extends Controller
             return $this->redirect($request->headers->get('referer'));
         }
 
-        $resolver = $this->get('capco.project.download.resolver');
+        // saving xls
+        $this->get('capco.project.download.resolver')
+            ->getContent($step)
+            ->save($path.$filename);
+
         $date = (new \DateTime())->format('Y-m-d');
         $request = $this->container->get('request_stack')->getCurrentRequest();
 

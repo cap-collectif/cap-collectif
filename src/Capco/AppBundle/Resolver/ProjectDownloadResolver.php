@@ -108,6 +108,12 @@ class ProjectDownloadResolver
         return $headers;
     }
 
+    /**
+     * @param AbstractStep $step
+     *
+     * @return \PHPExcel_Writer_IWriter
+     * @throws \Exception
+     */
     public function getContent(AbstractStep $step)
     {
         if (null == $step) {
