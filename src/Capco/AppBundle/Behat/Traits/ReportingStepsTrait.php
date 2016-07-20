@@ -20,6 +20,6 @@ trait ReportingStepsTrait
     public function iSubmitTheReportingFormFromTheModal()
     {
         $this->getSession()->getPage()->find('css', '#report-button-submit')->click();
-        $this->iWait(1);
+        $this->iWait(2);
     }
 }
