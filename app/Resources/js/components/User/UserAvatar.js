@@ -2,7 +2,6 @@ import React from 'react';
 import DefaultAvatar from './DefaultAvatar';
 
 const UserAvatar = React.createClass({
-  displayName: 'UserAvatar',
   propTypes: {
     user: React.PropTypes.object,
     size: React.PropTypes.number,

@@ -8,10 +8,8 @@ import EditButton from '../../Form/EditButton';
 import DeleteButton from '../../Form/DeleteButton';
 import ProposalReportButton from '../Report/ProposalReportButton';
 import ProposalResponse from './ProposalResponse';
-import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 
 const ProposalPageContent = React.createClass({
-  displayName: 'ProposalPageContent',
   propTypes: {
     proposal: PropTypes.object.isRequired,
     form: PropTypes.object.isRequired,
@@ -19,18 +17,12 @@ const ProposalPageContent = React.createClass({
     districts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     className: PropTypes.string,
-    selectionStep: PropTypes.object,
-    creditsLeft: PropTypes.number,
-    userHasVote: PropTypes.bool.isRequired,
-    onVote: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       className: '',
-      selectionStep: null,
-      creditsLeft: null,
     };
   },
 
@@ -50,22 +42,10 @@ const ProposalPageContent = React.createClass({
   },
 
   render() {
-    const {
-      proposal,
-      className,
-      form,
-      themes,
-      districts,
-      categories,
-      userHasVote,
-      selectionStep,
-      creditsLeft,
-      onVote,
-    } = this.props;
-    const { showEditModal, showDeleteModal } = this.state;
+    const proposal = this.props.proposal;
     const classes = {
       'proposal__content': true,
-      [className]: true,
+      [this.props.className]: true,
     };
     return (
       <div className={classNames(classes)}>
@@ -79,49 +59,41 @@ const ProposalPageContent = React.createClass({
           })
         }
         <div className="block proposal__buttons">
-          <ProposalVoteButtonWrapper
-            selectionStep={selectionStep}
-            proposal={proposal}
-            creditsLeft={creditsLeft}
-            userHasVote={userHasVote}
-            onClick={onVote}
-          />
           <ShareButtonDropdown
             id="proposal-share-button"
             url={proposal._links.show}
             title={proposal.title}
-            style={{ marginLeft: '15px' }}
           />
           <ProposalReportButton proposal={proposal} />
           <div className="pull-right">
             <EditButton
               id="proposal-edit-button"
-              author={proposal.author}
+              author={this.props.proposal.author}
               onClick={this.toggleEditModal.bind(null, true)}
-              editable={form.isContribuable}
+              editable={this.props.form.isContribuable}
             />
             <DeleteButton
               id="proposal-delete-button"
-              author={proposal.author}
+              author={this.props.proposal.author}
               onClick={this.toggleDeleteModal.bind(null, true)}
               style={{ marginLeft: '15px' }}
-              deletable={form.isContribuable}
+              deletable={this.props.form.isContribuable}
             />
           </div>
         </div>
         <ProposalEditModal
-          proposal={proposal}
-          form={form}
-          themes={themes}
-          districts={districts}
-          categories={categories}
-          show={showEditModal}
+          proposal={this.props.proposal}
+          form={this.props.form}
+          themes={this.props.themes}
+          districts={this.props.districts}
+          categories={this.props.categories}
+          show={this.state.showEditModal}
           onToggleModal={this.toggleEditModal}
         />
         <ProposalDeleteModal
-          proposal={proposal}
-          form={form}
-          show={showDeleteModal}
+          proposal={this.props.proposal}
+          form={this.props.form}
+          show={this.state.showDeleteModal}
           onToggleModal={this.toggleDeleteModal}
         />
       </div>

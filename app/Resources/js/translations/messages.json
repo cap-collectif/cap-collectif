@@ -86,7 +86,6 @@
     }
   },
   "comment": {
-    "add": "Commenter",
     "constraints": {
       "author_email": "Cette valeur n'est pas une adresse email valide.",
       "author_name": "Votre nom doit faire au moins 2 caract\u00e8res",
@@ -640,11 +639,6 @@
       "district": "S\u00e9lectionnez un quartier",
       "theme": "S\u00e9lectionnez un th\u00e8me"
     },
-    "tabs": {
-      "content": "Présentation",
-      "comments": "Commentaires",
-      "votes": "Votes"
-    },
     "theme": "Thème",
     "title": "Titre",
     "trashed": {
@@ -653,8 +647,6 @@
     },
     "vote": {
       "add": "Voter pour",
-      "authenticated": "Voter avec mon compte",
-      "confirm": "Valider mon vote",
       "constraints": {
         "email": "Veuillez entrer une adresse email valide",
         "username": "Le nom doit faire au moins 2 caract\u00e8res."
@@ -664,20 +656,17 @@
       "delete": "Annuler mon vote",
       "form": {
         "comment": "Commentaire",
-        "comment_placeholder": "Pourquoi soutenez-vous ce projet ?",
+        "comment_placeholder": "Pourquoi soutenez-vous ce projet ? (optionnel)",
         "email": "Adresse \u00e9lectronique",
-        "private": "Rendre mon vote anonyme",
+        "private": "Voter de mani\u00e8re anonyme",
         "username": "Nom"
       },
       "hide": "Masquer",
       "modal": {
-        "title": "Voter pour"
+        "title": "Voter"
       },
       "must_log_in": "Vous devez vous connecter pour pouvoir voter pour cette proposition.",
-      "non_authenticated": "Voter sans créer de compte",
-      "none": "Aucun vote",
-      "not_enough_credits": "Pas assez de cr\u00e9dits.",
-      "not_enough_credits_text": "D\u00e9s\u00e9lectionnez un projet ou s\u00e9lectionnez un projet moins co\u00fbteux.",
+      "not_enough_credits": "Pas assez de cr\u00e9dits. D\u00e9s\u00e9lectionnez un projet ou s\u00e9lectionnez un projet moins co\u00fbteux.",
       "show_more": "Voir tous les votes",
       "step_closed": "L'\u00e9tape de s\u00e9lection est termin\u00e9e, merci pour votre participation.",
       "step_not_yet_open": "L'\u00e9tape de s\u00e9lection n'est pas encore ouverte aux votes. Revenez plus tard !",
@@ -949,7 +938,6 @@
     }
   },
   "vote": {
-    "add": "Voter",
     "aria_label": {
       "mitige": "Souhaitez-vous d\u00e9clarer \u00eatre mitig\u00e9 sur cette proposition ?",
       "nok": "Souhaitez-vous d\u00e9clarer ne pas \u00eatre d'accord avec cette proposition ?",

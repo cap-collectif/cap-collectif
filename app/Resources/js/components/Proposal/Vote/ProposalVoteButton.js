@@ -1,58 +1,52 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
 
 const ProposalVoteButton = React.createClass({
   propTypes: {
-    disabled: PropTypes.bool.isRequired,
-    userHasVote: PropTypes.bool.isRequired,
-    onClick: PropTypes.func,
-    onMouseOver: PropTypes.func,
-    onMouseOut: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    style: PropTypes.object,
-    className: PropTypes.string,
+    disabled: React.PropTypes.bool.isRequired,
+    userHasVote: React.PropTypes.bool.isRequired,
+    onClick: React.PropTypes.func.isRequired,
+    onMouseOver: React.PropTypes.func,
+    onMouseOut: React.PropTypes.func,
+    onFocus: React.PropTypes.func,
+    onBlur: React.PropTypes.func,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       disabled: false,
-      onClick: null,
       onMouseOver: () => {},
       onMouseOut: () => {},
       onFocus: () => {},
       onBlur: () => {},
-      style: {},
-      className: '',
     };
   },
 
   render() {
-    const { style, className, userHasVote, disabled, onMouseOver, onMouseOut, onFocus, onBlur, onClick } = this.props;
-    const bsStyle = userHasVote ? 'danger' : 'success';
-    let classes = classNames({
+    const style = this.props.userHasVote ? 'danger' : 'success';
+    const classes = classNames({
       'proposal__preview__vote': true,
-      'disabled': disabled,
+      'btn--outline': !this.props.userHasVote,
+      'disabled': this.props.disabled,
     });
-    classes += ' ' + className;
-    const onClickAction = disabled ? null : onClick;
+    const onClick = this.props.disabled ? null : this.props.onClick;
     return (
       <Button
-        bsStyle={bsStyle}
+        bsStyle={style}
         className={classes}
-        style={style}
-        onClick={onClickAction}
-        active={userHasVote}
-        onMouseOver={onMouseOver}
-        onMouseOut={onMouseOut}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        style={{ width: '100%' }}
+        onClick={onClick}
+        active={this.props.userHasVote}
+        onMouseOver={this.props.onMouseOver}
+        onMouseOut={this.props.onMouseOut}
+        onFocus={this.props.onFocus}
+        onBlur={this.props.onBlur}
       >
         {
-          userHasVote
+          this.props.userHasVote
             ? this.getIntlMessage('proposal.vote.delete')
             : this.getIntlMessage('proposal.vote.add')
         }

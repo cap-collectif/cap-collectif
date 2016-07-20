@@ -61,7 +61,7 @@
     "process-env-brunch": "^1.4.4-d",
     "quill": "^0.20.1",
     "react": "^0.14.8",
-    "react-bootstrap": "^0.29.5",
+    "react-bootstrap": "^0.28.5",
     "react-checkbox-group": "^0.3.2",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",

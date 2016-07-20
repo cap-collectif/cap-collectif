@@ -5,40 +5,24 @@ import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
 import ProposalDetailLikersTooltipLabel from './ProposalDetailLikersTooltipLabel';
 
 const ProposalDetailLikers = React.createClass({
-  displayName: 'ProposalDetailLikers',
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    componentClass: PropTypes.oneOf(['div', 'span']),
   },
   mixins: [IntlMixin],
 
-  getDefaultProps() {
-    return {
-      componentClass: 'span',
-    };
-  },
-
-  renderContent() {
+  render() {
     const { proposal } = this.props;
-    return (
-      <OverlayTrigger placement="top" overlay={
+    if (proposal.likers.length > 0) {
+      return (
+        <span className="proposal__info">
+          <OverlayTrigger placement="top" overlay={
             <Tooltip id={'proposal-' + proposal.id + '-likers-tooltip-'}>
               <ProposalDetailLikersTooltipLabel likers={proposal.likers} />
             </Tooltip>
           }>
-        <ProposalDetailLikersLabel likers={proposal.likers} />
-      </OverlayTrigger>
-    );
-  },
-
-  render() {
-    const { proposal, componentClass } = this.props;
-    let Component = componentClass;
-    if (proposal.likers.length > 0) {
-      return (
-        <Component className="proposal__info">
-          {this.renderContent()}
-        </Component>
+            <ProposalDetailLikersLabel likers={proposal.likers} />
+          </OverlayTrigger>
+        </span>
       );
     }
 

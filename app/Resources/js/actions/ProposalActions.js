@@ -290,7 +290,7 @@ export default {
       });
   },
 
-  vote: (selectionStep, proposal, estimation = null, data = {}, successMessage = 'proposal.request.vote.success') => {
+  vote: (selectionStep, proposal, estimation = null, data = {}, successMessage = 'proposal.request.vote.success', errorMessage = 'proposal.request.vote.failure') => {
     const hasComment = data.comment && data.comment.length > 0;
     AppDispatcher.dispatch({
       actionType: CREATE_PROPOSAL_VOTE,
@@ -321,6 +321,10 @@ export default {
       AppDispatcher.dispatch({
         actionType: CREATE_PROPOSAL_VOTE_FAILURE,
         estimation: estimation,
+      });
+      AppDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: { bsStyle: 'warning', content: errorMessage },
       });
       if (hasComment) {
         AppDispatcher.dispatch({

@@ -858,26 +858,4 @@ trait ProposalStepsTrait
     {
         $this->assertFirstProposalVoteContains('test');
     }
-
-    /**
-     * @When I go to the proposal votes tab
-     */
-    public function iGoToTheProposalVotesTab()
-    {
-        $page = $this->getCurrentPage();
-        $this->getSession()->wait(3000, "$('".$page->getSelector('votes tab')."').length > 0");
-        $page->clickVotesTab();
-        $this->iWait(1);
-    }
-
-    /**
-     * @When I go to the proposal comments tab
-     */
-    public function iGoToTheProposalCommentsTab()
-    {
-        $page = $this->getCurrentPage();
-        $this->getSession()->wait(3000, "$('".$page->getSelector('comments tab')."').length > 0");
-        $page->clickCommentsTab();
-        $this->iWait(1);
-    }
 }

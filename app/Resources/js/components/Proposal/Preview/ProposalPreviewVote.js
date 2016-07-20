@@ -66,15 +66,19 @@ const ProposalPreviewVote = React.createClass({
   },
 
   voteAction() {
-    if (!this.props.user || !this.props.userHasVote) {
+    if (!this.props.user) {
       this.toggleModal(true);
       return;
     }
-    this.deleteVote();
+    if (this.props.userHasVote) {
+      this.deleteVote();
+    } else {
+      this.vote();
+    }
   },
 
   render() {
-    const { selectionStep, onVoteChange } = this.props;
+    const { selectionStep } = this.props;
     if (!selectionStep || selectionStep.voteType === VOTE_TYPE_DISABLED) {
       return null;
     }
@@ -87,15 +91,17 @@ const ProposalPreviewVote = React.createClass({
           creditsLeft={this.props.creditsLeft}
           userHasVote={this.props.userHasVote}
           onClick={this.voteAction}
-          style={{ width: '100%' }}
         />
-        <ProposalVoteModal
-          proposal={this.props.proposal}
-          selectionStep={selectionStep}
-          showModal={this.state.showModal}
-          onToggleModal={this.toggleModal}
-          onVoteChange={onVoteChange}
-        />
+        {
+          !this.props.user && this.anonymousCanVote()
+            ? <ProposalVoteModal
+                proposal={this.props.proposal}
+                selectionStep={selectionStep}
+                showModal={this.state.showModal}
+                onToggleModal={this.toggleModal}
+            />
+            : null
+        }
       </div>
     );
   },

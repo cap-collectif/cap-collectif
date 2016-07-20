@@ -1,23 +1,21 @@
 import React, { PropTypes } from 'react';
-import { Row, Col, Tab, Nav, NavItem } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+import classNames from 'classnames';
 import { IntlMixin } from 'react-intl';
 import ProposalPageHeader from './ProposalPageHeader';
-import ProposalPageAlert from './ProposalPageAlert';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageAnswer from './ProposalPageAnswer';
+import ProposalPageAlert from './ProposalPageAlert';
 import ProposalPageVotes from './ProposalPageVotes';
 import ProposalPageComments from './ProposalPageComments';
-import ProposalVoteModal from '../Vote/ProposalVoteModal';
-import ProposalPageMetadata from './ProposalPageMetadata';
-import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
-import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
 import ProposalActions from '../../../actions/ProposalActions';
+import ProposalVoteSidebar from '../Vote/ProposalVoteSidebar';
 import { connect } from 'react-redux';
-import { scrollToAnchor } from '../../../services/ScrollToAnchor';
+import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
-export const ProposalPage = React.createClass({
+const ProposalPage = React.createClass({
   propTypes: {
     form: PropTypes.object.isRequired,
     proposal: PropTypes.object.isRequired,
@@ -28,7 +26,7 @@ export const ProposalPage = React.createClass({
     votableStep: PropTypes.object,
     userHasVote: PropTypes.bool,
     user: PropTypes.object,
-    features: PropTypes.object.isRequired,
+    features: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -36,8 +34,8 @@ export const ProposalPage = React.createClass({
     return {
       votableStep: null,
       userHasVote: false,
-      creditsLeft: null,
       user: null,
+      features: null,
     };
   },
 
@@ -50,7 +48,7 @@ export const ProposalPage = React.createClass({
       proposal: ProposalStore.proposal,
       userHasVote: ProposalVoteStore.userHasVote,
       creditsLeft: ProposalVoteStore.creditsLeft,
-      showVotesModal: false,
+      expandSidebar: false,
     };
   },
 
@@ -59,23 +57,9 @@ export const ProposalPage = React.createClass({
     ProposalVoteStore.addChangeListener(this.onVoteChange);
   },
 
-  componentDidMount() {
-    setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
-  },
-
   componentWillUnmount() {
     ProposalStore.removeChangeListener(this.onChange);
     ProposalVoteStore.removeChangeListener(this.onVoteChange);
-  },
-
-  onChange() {
-    if (ProposalStore.isProposalSync) {
-      this.setState({
-        proposal: ProposalStore.proposal,
-      });
-      return;
-    }
-    this.loadProposal();
   },
 
   onVoteChange() {
@@ -87,60 +71,15 @@ export const ProposalPage = React.createClass({
     }
   },
 
-  getHashKey(hash) {
-    let key = null;
-    if (hash.indexOf('content') !== -1) {
-      key = 'content';
-    }
-    if (hash.indexOf('comments') !== -1) {
-      key = 'comments';
-    }
-    if (hash.indexOf('votes') !== -1) {
-      key = 'votes';
-    }
-    return key;
-  },
-
-  getDefaultKey() {
-    const hash = typeof window !== 'undefined' ? window.location.hash : null;
-    if (hash) {
-      return this.getHashKey(hash);
-    }
-    return 'content';
-  },
-
-  toggleVotesModal(value) {
-    this.setState({
-      showVotesModal: value,
-    });
-  },
-
-  vote() {
-    ProposalActions
-      .vote(
-        this.props.votableStep.id,
-        this.props.proposal.id,
-        this.props.proposal.estimation
-      )
-    ;
-  },
-
-  deleteVote() {
-    ProposalActions
-      .deleteVote(
-        this.props.votableStep.id,
-        this.props.proposal.id,
-        this.props.proposal.estimation
-      )
-    ;
-  },
-
-  voteAction() {
-    if (!this.props.user || !this.state.userHasVote) {
-      this.toggleVotesModal(true);
+  onChange() {
+    if (ProposalStore.isProposalSync) {
+      this.setState({
+        proposal: ProposalStore.proposal,
+      });
       return;
     }
-    this.deleteVote();
+
+    this.loadProposal();
   },
 
   loadProposal() {
@@ -150,116 +89,82 @@ export const ProposalPage = React.createClass({
     );
   },
 
+  toggleSidebarExpand() {
+    this.setState({
+      expandSidebar: !this.state.expandSidebar,
+    });
+  },
+
   render() {
-    const { proposal, userHasVote, creditsLeft, showVotesModal } = this.state;
-    const { form, themes, districts, categories, votes, votableStep, features } = this.props;
-    const showVotes = !!votableStep && votableStep.voteType !== VOTE_TYPE_DISABLED;
-    const showVotesTab = proposal.votesCount > 0 || showVotes;
+    const proposal = this.state.proposal;
+    const showSidebar = !!this.props.votableStep && this.props.votableStep.voteType !== VOTE_TYPE_DISABLED;
+    const wrapperClassName = classNames({
+      'container': showSidebar,
+      'sidebar__container': showSidebar,
+    });
+    const containersClassName = classNames({
+      'container': !showSidebar,
+      'container--thinner': !showSidebar,
+      'container--custom': true,
+      'container--with-sidebar': showSidebar,
+    });
+    const overlayClassName = classNames({
+      'sidebar__darkened-overlay': this.state.expandSidebar,
+    });
     return (
       <div>
-        <ProposalPageAlert proposal={proposal} />
-        <ProposalPageHeader
-          proposal={proposal}
-          className="container container--custom"
-          showThemes={features.themes && form.usingThemes}
-          userHasVote={userHasVote}
-          onVote={this.voteAction}
-          selectionStep={votableStep}
-          creditsLeft={creditsLeft}
-        />
-        <Tab.Container
-          id="proposal-page-tabs"
-          defaultActiveKey={this.getDefaultKey()}
-          className="container--custom"
-        >
-          <div>
-            <div className="tabs__pills">
-              <div className="container">
-                <Nav bsStyle="pills" style={{ display: 'inline-block' }}>
-                  <NavItem eventKey="content" className="tabs__pill">
-                    {this.getIntlMessage('proposal.tabs.content')}
-                  </NavItem>
-                  <NavItem eventKey="comments" className="tabs__pill">
-                    {this.getIntlMessage('proposal.tabs.comments')}
-                    <span className="badge">{proposal.comments_count}</span>
-                  </NavItem>
-                  {
-                    showVotesTab
-                    && <NavItem eventKey="votes" className="tabs__pill">
-                      {this.getIntlMessage('proposal.tabs.votes')}
-                      <span className="badge">{proposal.votesCount}</span>
-                    </NavItem>
-                  }
-                </Nav>
-                <ProposalVoteButtonWrapper
-                  selectionStep={votableStep}
-                  proposal={proposal}
-                  creditsLeft={creditsLeft}
-                  userHasVote={userHasVote}
-                  onClick={this.voteAction}
-                  style={{ marginTop: '10px' }}
-                  className="pull-right hidden-xs"
-                />
-              </div>
-            </div>
-            <div className="container">
-              <Tab.Content animation={false}>
-                <Tab.Pane eventKey="content">
-                  <Row>
-                    <Col xs={12} sm={9}>
-                      <ProposalPageAnswer
-                        answer={proposal.answer}
-                      />
-                      <ProposalPageContent
-                        proposal={proposal}
-                        form={form}
-                        themes={themes}
-                        districts={districts}
-                        categories={categories}
-                        userHasVote={userHasVote}
-                        selectionStep={votableStep}
-                        creditsLeft={creditsLeft}
-                        onVote={this.voteAction}
-                      />
-                    </Col>
-                    <Col xs={12} sm={3}>
-                      <ProposalPageMetadata
-                        proposal={proposal}
-                        showDistricts={features.districts}
-                        showCategories={form.usingCategories}
-                        showNullEstimation={!!votableStep && votableStep.voteType === VOTE_TYPE_BUDGET}
-                      />
-                    </Col>
-                  </Row>
-                </Tab.Pane>
-                <Tab.Pane eventKey="comments">
-                  <ProposalPageComments
-                    form={form}
-                    id={proposal.id}
-                  />
-                </Tab.Pane>
-                {
-                  showVotesTab
-                  && <Tab.Pane eventKey="votes">
-                    <ProposalPageVotes
-                      proposal={proposal}
-                      votes={votes}
-                    />
-                  </Tab.Pane>
-                }
-              </Tab.Content>
-            </div>
-            {
-              showVotes
-              && <ProposalVoteModal
+        <div id="sidebar-container" className={wrapperClassName}>
+          <Row>
+            <Col xs={12} sm={showSidebar ? 9 : 12}>
+              <ProposalPageAlert proposal={proposal} />
+              <ProposalPageHeader
                 proposal={proposal}
-                selectionStep={votableStep}
-                showModal={showVotesModal}
-                onToggleModal={this.toggleVotesModal}
+                className={containersClassName}
+                showNullEstimation={this.props.votableStep && this.props.votableStep.voteType === VOTE_TYPE_BUDGET}
+                showThemes={this.props.features.themes && this.props.form.usingThemes}
               />
+              <ProposalPageAnswer
+                answer={proposal.answer}
+                className={containersClassName}
+              />
+              <ProposalPageContent
+                proposal={proposal}
+                form={this.props.form}
+                themes={this.props.themes}
+                districts={this.props.districts}
+                categories={this.props.categories}
+                className={containersClassName}
+              />
+              <ProposalPageVotes
+                proposal={proposal}
+                votes={this.props.votes}
+                className={containersClassName}
+              />
+              <ProposalPageComments
+                form={this.props.form}
+                id={proposal.id}
+                className={containersClassName}
+              />
+            </Col>
+            {
+              showSidebar
+              ? <div id="sidebar-overlay" className={overlayClassName} />
+              : null
             }
-          </div>
-        </Tab.Container>
+            {
+              showSidebar
+              ? <ProposalVoteSidebar
+                  proposal={proposal}
+                  votableStep={this.props.votableStep}
+                  userHasVote={this.state.userHasVote}
+                  expanded={this.state.expandSidebar}
+                  onToggleExpand={this.toggleSidebarExpand}
+                  creditsLeft={this.state.creditsLeft}
+              />
+              : null
+            }
+          </Row>
+        </div>
       </div>
     );
   },

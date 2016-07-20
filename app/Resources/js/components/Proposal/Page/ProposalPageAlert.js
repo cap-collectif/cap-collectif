@@ -3,7 +3,6 @@ import { Alert } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 
 const ProposalPageAlert = React.createClass({
-  displayName: 'ProposalPageAlert',
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
   },

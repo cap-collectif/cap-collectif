@@ -15,11 +15,10 @@ class ProposalPage extends Page
     protected $path = '/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}';
 
     protected $elements = [
-        'proposal votes counter' => '#proposal-page-tabs-tab-votes .badge',
-        'proposal comments counter' => '#proposal-page-tabs-tab-comments .badge',
+        'proposal votes counter' => '.proposal__info--votes .value',
+        'proposal comments counter' => '.proposal__info--comments .value',
         'comments list' => '.proposal__comments',
         'first vote' => '.proposal__vote:nth-child(1)',
-        'proposal vote button' => '.tabs__pills .proposal__preview__vote',
         'proposal vote form submit button' => '#confirm-proposal-vote',
         'edit proposal button' => '#proposal-edit-button',
         'delete proposal button' => '#proposal-delete-button',
@@ -28,13 +27,16 @@ class ProposalPage extends Page
         'report proposal button' => '.proposal__btn--report',
         'proposal buttons' => '.proposal__content .proposal__buttons',
         'share button' => '#proposal-share-button',
-        'votes tab' => '#proposal-page-tabs-tab-votes',
-        'comments tab' => '#proposal-page-tabs-tab-comments',
     ];
 
     public function getVoteButtonSelector($id)
     {
         return $this->getSelector('proposal vote form submit button');
+    }
+
+    public function getVoteButton($id)
+    {
+        return $this->getElement('proposal vote form submit button');
     }
 
     public function getVotesCounter()
@@ -65,21 +67,6 @@ class ProposalPage extends Page
     public function getFirstVoteSelector()
     {
         return $this->getSelector('first vote');
-    }
-
-    public function getVoteButton()
-    {
-        return $this->getElement('proposal vote button');
-    }
-
-    public function clickVoteButton()
-    {
-        $this->getVoteButton()->click();
-    }
-
-    public function getVoteButtonLabel()
-    {
-        return $this->getVoteButton()->getText();
     }
 
     public function submitProposalVoteForm()
@@ -120,15 +107,5 @@ class ProposalPage extends Page
     public function clickShareButton()
     {
         $this->getElement('share button')->click();
-    }
-
-    public function clickVotesTab()
-    {
-        $this->getElement('votes tab')->click();
-    }
-
-    public function clickCommentsTab()
-    {
-        $this->getElement('comments tab')->click();
     }
 }

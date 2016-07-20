@@ -8,20 +8,12 @@ export const RegistrationButton = React.createClass({
   propTypes: {
     features: PropTypes.object.isRequired,
     style: PropTypes.object,
-    user: PropTypes.object,
-    className: PropTypes.string,
-    bsStyle: PropTypes.string,
-    buttonStyle: PropTypes.object,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       style: {},
-      buttonStyle: {},
-      user: null,
-      className: '',
-      bsStyle: 'primary',
     };
   },
 
@@ -40,16 +32,15 @@ export const RegistrationButton = React.createClass({
   },
 
   render() {
-    if (!this.props.features.registration || !!this.props.user) {
+    if (!this.props.features.registration) {
       return null;
     }
     return (
       <span style={this.props.style}>
         <Button
-          style={this.props.buttonStyle}
           onClick={this.handleClick}
-          bsStyle={this.props.bsStyle}
-          className={'navbar-btn btn--registration ' + this.props.className}
+          bsStyle="primary"
+          className="navbar-btn btn--registration"
         >
           { this.getIntlMessage('global.registration') }
         </Button>
@@ -64,10 +55,7 @@ export const RegistrationButton = React.createClass({
 });
 
 const mapStateToProps = (state) => {
-  return {
-    features: state.default.features,
-    user: state.default.user,
-  };
+  return { features: state.default.features };
 };
 
 export default connect(mapStateToProps)(RegistrationButton);

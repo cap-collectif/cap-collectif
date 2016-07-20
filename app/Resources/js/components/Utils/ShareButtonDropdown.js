@@ -1,15 +1,14 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
 import { MenuItem, DropdownButton, Modal } from 'react-bootstrap';
 
 const ShareButtonDropdown = React.createClass({
   propTypes: {
-    id: PropTypes.string,
-    title: PropTypes.string,
-    url: PropTypes.string.isRequired,
-    className: PropTypes.string,
-    bsStyle: PropTypes.string,
-    style: PropTypes.object,
+    id: React.PropTypes.string,
+    title: React.PropTypes.string,
+    url: React.PropTypes.string.isRequired,
+    className: React.PropTypes.string,
+    bsStyle: React.PropTypes.string,
   },
   mixins: [IntlMixin],
 
@@ -18,7 +17,6 @@ const ShareButtonDropdown = React.createClass({
       id: 'share-button',
       className: '',
       title: '',
-      style: {},
     };
   },
 
@@ -94,31 +92,29 @@ const ShareButtonDropdown = React.createClass({
   },
 
   render() {
-    const { style, id, bsStyle, className, title, url } = this.props;
     return (
       <div className="share-button-dropdown">
         <DropdownButton
-          id={id}
-          bsStyle={bsStyle}
-          className={className + ' dropdown--custom'}
-          style={style}
+          id={this.props.id}
+          bsStyle={this.props.bsStyle}
+          className={this.props.className + ' dropdown--custom'}
           title={
             <span><i className="cap cap-link"></i> {this.getIntlMessage('global.share')}</span>
           }
         >
-          <MenuItem eventKey="1" onSelect={this.facebook}>
+          <MenuItem eventKey="1" onSelect={this.facebook.bind(null, this)}>
             <i className="cap cap-facebook"></i> {this.getIntlMessage('share.facebook')}
           </MenuItem>
-          <MenuItem eventKey="2" onSelect={this.twitter}>
+          <MenuItem eventKey="2" onSelect={this.twitter.bind(null, this)}>
             <i className="cap cap-twitter"></i> {this.getIntlMessage('share.twitter')}
           </MenuItem>
-          <MenuItem eventKey="3" onSelect={this.googleplus}>
+          <MenuItem eventKey="3" onSelect={this.googleplus.bind(null, this)}>
             <i className="cap cap-gplus"></i> {this.getIntlMessage('share.googleplus')}
           </MenuItem>
-          <MenuItem eventKey="4" href={`mailto:?subject=${title}&body=${url}`}>
+          <MenuItem eventKey="4" href={`mailto:?subject=${this.props.title}&body=${this.props.url}`}>
             <i className="cap cap-mail-2-1"></i> {this.getIntlMessage('share.mail')}
           </MenuItem>
-          <MenuItem eventKey="4" onSelect={this.showModal}>
+          <MenuItem eventKey="4" onSelect={this.showModal.bind(null, this)}>
             <i className="cap cap-link-1"></i> {this.getIntlMessage('share.link')}
           </MenuItem>
         </DropdownButton>

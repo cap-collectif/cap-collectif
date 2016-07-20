@@ -2,7 +2,7 @@ import React from 'react';
 import Editor from './Editor';
 import autosize from 'autosize';
 import ImageUpload from './ImageUpload';
-import { OverlayTrigger, Popover, Input as ReactBootstrapInput, FormGroup } from 'react-bootstrap';
+import { OverlayTrigger, Popover, Input as ReactBootstrapInput } from 'react-bootstrap';
 import Captcha from './Captcha';
 import mailcheck from 'mailcheck';
 import domains from '../../utils/email_domains';
@@ -100,19 +100,6 @@ export default class Input extends ReactBootstrapInput {
         <img src={this.props.image} />
       );
     }
-  }
-
-  renderFormGroup(children) {
-    const props = Object.assign({}, this.props);
-    if (this.props.id) {
-      props.controlId = this.props.id;
-      delete props.id;
-    }
-    return (
-      <FormGroup {...props} >
-        {children}
-      </FormGroup>
-    );
   }
 
   renderChildren() {

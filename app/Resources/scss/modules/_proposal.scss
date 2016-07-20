@@ -28,31 +28,22 @@ $statuses:
   font-size: 85%;
 }
 
+.proposal__header > .proposal__infos {
+  font-size: 100%;
+  margin-top: 15px;
+  .proposal__info {
+    margin-right: 20px;
+  }
+}
+
 .proposal__info {
-  padding-top: 5px;
+  margin-top: 5px;
   padding-left: 5px;
   max-height: 36px;
   word-break: break-word;
   overflow: hidden;
   .cap {
     padding-right: 5px;
-  }
-}
-
-.proposal__page__metadata .proposal__infos {
-  background-color: #f6f6f6;
-  padding: 10px;
-  font-size: 100%;
-
-  .proposal__info {
-    padding-top: 10px;
-    .cap {
-      font-size: 22px;
-    }
-  }
-
-  .proposal__info:first-child {
-    padding-top: 0;
   }
 }
 
@@ -265,8 +256,4 @@ $statuses:
       top: 120px;
     }
   }
-}
-
-#proposal-page-tabs > .container {
-  padding-top: 20px;
 }
