@@ -35,7 +35,6 @@ const ProposalVoteButton = React.createClass({
     const bsStyle = userHasVote ? 'danger' : 'success';
     let classes = classNames({
       'proposal__preview__vote': true,
-      'btn--outline': !userHasVote,
       'disabled': disabled,
     });
     classes += ' ' + className;
