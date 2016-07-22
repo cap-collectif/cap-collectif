@@ -14,7 +14,6 @@
                   return response.json();
                 })
                 .then(function(step) {
-                  console.log(step);
                   var select2 = $("#s2id_{{ admin.uniqid }}_selections_0_status");
                   var select = $("#s2id_{{ admin.uniqid }}_selections_0_status + select");
                   var html = step.statuses.map(function(status) {
