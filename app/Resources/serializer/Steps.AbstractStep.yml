@@ -39,6 +39,9 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
       expose: true
       type: string
       groups: [Steps]
+    statuses:
+      expose: true
+      groups: [SelectionSteps]
   virtual_properties:
     getProjectId:
       expose: true

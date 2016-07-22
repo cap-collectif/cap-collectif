@@ -81,6 +81,7 @@ services:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.proposal}
     calls:
       - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTemplate, [edit, CapcoAdminBundle:Proposal:edit.html.twig]]
 
   capco_admin.admin.reply:
     class: Capco\AdminBundle\Admin\ReplyAdmin

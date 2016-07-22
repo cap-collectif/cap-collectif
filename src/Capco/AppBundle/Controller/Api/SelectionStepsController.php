@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -23,6 +24,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class SelectionStepsController extends FOSRestController
 {
+
+  /**
+   * @Get("/selection_steps/{selection_step_id}")
+   * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
+   * @View(statusCode=200, serializerGroups={"Statuses", "Steps", "SelectionSteps"})
+   */
+   public function getBySelectionStepAction(SelectionStep $selectionStep)
+   {
+      return $selectionStep;
+   }
+
     /**
      * @Post("/selection_steps/{selection_step_id}/proposals/search")
      * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
