@@ -2,19 +2,15 @@
 
 namespace Capco\AppBundle\UrlResolver;
 
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\UrlResolver\Specifications\HasSlug;
 use Capco\AppBundle\UrlResolver\Strategies\RouteResolverInterface;
+use Capco\AppBundle\UrlResolver\Strategies\SimpleEntityStrategy;
+use Capco\AppBundle\UrlResolver\Strategies\WithParentStrategy;
 use Symfony\Component\Routing\Router;
 
 class Resolver
 {
-    /**
-     * SF Router.
-     *
-     * @var Router
-     */
-    protected $router;
-
     /**
      * Entity to generate.
      *
@@ -28,6 +24,13 @@ class Resolver
      * @var RouteResolverInterface
      */
     protected $resolver;
+
+    /**
+     * SF Router.
+     *
+     * @var Router
+     */
+    protected $router;
 
     /**
      * Resolver constructor.
@@ -54,12 +57,13 @@ class Resolver
             return 'n/a';
         }
 
+        if($this->entity instanceof Source || $this->entity instanceof Argument) {
+            $this->setStrategy(new WithParentStrategy($this->router));
+        } else {
+            $this->setStrategy(new SimpleEntityStrategy($this->router));
+        }
+
         return $this->resolver->resolve($entity);
-    }
-
-    protected function wireStrategy()
-    {
-
     }
 
     protected function setStrategy(RouteResolverInterface $resolver)

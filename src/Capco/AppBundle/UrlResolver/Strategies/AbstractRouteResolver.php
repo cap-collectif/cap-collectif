@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\UrlResolver\Strategies;
 
 
+use Symfony\Component\Routing\Router;
+
 abstract class AbstractRouteResolver implements RouteResolverInterface
 {
     /**
@@ -11,6 +13,30 @@ abstract class AbstractRouteResolver implements RouteResolverInterface
      * @var RouteResolverInterface
      */
     protected $subResolver;
+
+    /**
+     * Current entity.
+     *
+     * @var mixed
+     */
+    protected $entity;
+
+    /**
+     * SF Router.
+     *
+     * @var Router
+     */
+    protected $router;
+
+    /**
+     * AbstractRouteResolver constructor.
+     *
+     * @param Router $router
+     */
+    public function __construct(Router $router)
+    {
+        $this->router = $router;
+    }
 
     /**
      * {@inheritdoc}

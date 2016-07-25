@@ -67,7 +67,7 @@ services:
       class: Capco\AppBundle\Resolver\UrlResolver
       arguments: ['@router', '@capco.toggle.manager']
 
-  capco.url.generator:
+  capco.url.resolvers:
       class: Capco\AppBundle\UrlResolver\Resolver
       arguments: ['@router']
 

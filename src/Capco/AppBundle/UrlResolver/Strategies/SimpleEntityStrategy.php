@@ -2,18 +2,12 @@
 
 namespace Capco\AppBundle\UrlResolver\Strategies;
 
-
+use Capco\AppBundle\Resolver\StepResolver;
+use Capco\AppBundle\UrlResolver\Factories\SimpleRouteFactory;
 use Capco\AppBundle\UrlResolver\Specifications\IsStep;
 
 class SimpleEntityStrategy extends AbstractRouteResolver
 {
-    /**
-     * Current entity.
-     *
-     * @var mixed
-     */
-    protected $entity;
-
     /**
      * {@inheritdoc}
      */
@@ -21,13 +15,15 @@ class SimpleEntityStrategy extends AbstractRouteResolver
     {
         $this->entity = $entity;
 
-        if (!$this->isStep()) {
-            return; // TODO
+        if ($this->isStep()) {
+            $this->setSubResolver(new StepStrategy($this->router));
+
+            return $this->subResolver->resolve($entity);
         }
 
-        $this->setSubResolver(new StepStrategy());
+        $route = (new SimpleRouteFactory())->createRoute($this->entity);
 
-        return $this->subResolver->resolve($entity);
+        return $this->router->generate($route->getName(), $route->getParameters(), $route->getPath());
     }
 
     /**

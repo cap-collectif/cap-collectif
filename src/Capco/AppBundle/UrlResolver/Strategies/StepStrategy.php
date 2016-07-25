@@ -2,11 +2,16 @@
 
 namespace Capco\AppBundle\UrlResolver\Strategies;
 
+use Capco\AppBundle\UrlResolver\Factories\StepRouteFactory;
 
-class StepStrategy implements RouteResolverInterface
+class StepStrategy extends AbstractRouteResolver
 {
     public function resolve($entity)
     {
-        // TODO: Implement resolve() method.
+        $this->entity = $entity;
+
+        $route = (new StepRouteFactory())->createRoute($this->entity);
+
+        return $this->router->generate($route->getName(), $route->getParameters(), $route->getPath());
     }
 }

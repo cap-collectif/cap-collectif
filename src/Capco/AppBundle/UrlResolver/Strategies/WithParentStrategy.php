@@ -2,16 +2,11 @@
 
 namespace Capco\AppBundle\UrlResolver\Strategies;
 
-
+use Capco\AppBundle\UrlResolver\Factories\WithParentRouteFactory;
 use Capco\AppBundle\UrlResolver\Specifications\HasParent;
 
 class WithParentStrategy extends AbstractRouteResolver
 {
-    /**
-     * @var mixed
-     */
-    protected $entity;
-
     /**
      * {@inheritdoc}
      */
@@ -19,13 +14,13 @@ class WithParentStrategy extends AbstractRouteResolver
     {
         $this->entity = $entity;
 
-        if ($this->hasParent()) {
-            throw new \LogicException('No parent for an entity which needs a parent.');
+        if (!$this->hasParent()) {
+            throw new \LogicException('Entity has no parent!');
         }
 
-        $this->setSubResolver(new SimpleEntityStrategy());
+        $route = (new WithParentRouteFactory())->createRoute($this->entity);
 
-        return $this->subResolver->resolve($entity);
+        return $this->router->generate($route->getName(), $route->getParameters(), $route->getPath());
     }
 
     /**

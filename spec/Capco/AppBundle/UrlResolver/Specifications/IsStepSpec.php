@@ -15,7 +15,7 @@ class IsStepSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\UrlResolver\Specifications\IsStep');
     }
 
-    function it_should_detect_if_it_is_a_spec(AbstractStep $step, Event $event)
+    function it_should_detect_if_it_is_a_step(AbstractStep $step, Event $event)
     {
         $this->isSatisfiedBy($step)->shouldReturn(true);
         $this->isSatisfiedBy($event)->shouldReturn(false);
