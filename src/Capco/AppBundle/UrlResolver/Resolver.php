@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\UrlResolver;
 
-
+use Capco\AppBundle\UrlResolver\Specifications\HasParent;
+use Capco\AppBundle\UrlResolver\Specifications\HasSlug;
+use Capco\AppBundle\UrlResolver\Strategies\RouteResolverInterface;
 use Symfony\Component\Routing\Router;
 
 class Resolver
@@ -20,6 +22,13 @@ class Resolver
      * @var mixed
      */
     protected $entity;
+
+    /**
+     * Strategy to adopt.
+     *
+     * @var RouteResolverInterface
+     */
+    protected $resolver;
 
     /**
      * Resolver constructor.
@@ -41,11 +50,31 @@ class Resolver
     public function route($entity): string
     {
         $this->entity = $entity;
+
+        if ($this->hasSlug()) {
+            return 'n/a';
+        }
+
+        return $this->resolver->resolve();
     }
 
-    protected function detectEntity()
+    protected function wireStrategy()
     {
 
     }
 
+    protected function setStrategy(RouteResolverInterface $resolver)
+    {
+        $this->resolver = $resolver;
+    }
+
+    /**
+     * Check if entity has a slug.
+     *
+     * @return bool
+     */
+    private function hasSlug(): bool
+    {
+        return (new HasSlug())->isSatisfiedBy($this->entity);
+    }
 }

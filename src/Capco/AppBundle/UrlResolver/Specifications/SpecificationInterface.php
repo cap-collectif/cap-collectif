@@ -34,5 +34,5 @@ interface SpecificationInterface
      *
      * @return void
      */
-    public function needParent();
+    public function hasParent();
 }

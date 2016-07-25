@@ -33,14 +33,14 @@ abstract class AbstractSpecification implements SpecificationInterface
      */
     public function isStep(SpecificationInterface $spec)
     {
-        return new IsStep($this, $spec);
+        return new IsStep($spec);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function needParent()
+    public function hasParent()
     {
-        return new NeedParent($this);
+        return new HasParent();
     }
 }
