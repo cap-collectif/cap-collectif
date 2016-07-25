@@ -8,24 +8,6 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 class IsStep extends AbstractSpecification
 {
     /**
-     * Chained specification.
-     *
-     * @var SpecificationInterface
-     */
-    protected $spec;
-
-    /**
-     * IsStep constructor.
-     *
-     * @param SpecificationInterface $spec
-     */
-    public function __construct(SpecificationInterface $spec)
-    {
-        $this->spec = $spec;
-    }
-
-
-    /**
      * Checks if given item meets all criteria.
      *
      * @param $entity
@@ -34,9 +16,6 @@ class IsStep extends AbstractSpecification
      */
     public function isSatisfiedBy($entity): bool
     {
-        return (
-            $entity instanceof AbstractStep
-            && $this->spec->isSatisfiedBy($entity)
-        );
+        return $entity instanceof AbstractStep;
     }
 }

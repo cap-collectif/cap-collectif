@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\UrlResolver;
 
-use Capco\AppBundle\UrlResolver\Specifications\HasParent;
 use Capco\AppBundle\UrlResolver\Specifications\HasSlug;
 use Capco\AppBundle\UrlResolver\Strategies\RouteResolverInterface;
 use Symfony\Component\Routing\Router;
@@ -55,7 +54,7 @@ class Resolver
             return 'n/a';
         }
 
-        return $this->resolver->resolve();
+        return $this->resolver->resolve($entity);
     }
 
     protected function wireStrategy()
