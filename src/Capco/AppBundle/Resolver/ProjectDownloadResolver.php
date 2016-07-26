@@ -26,6 +26,7 @@ class ProjectDownloadResolver
         'id',
         'author',
         'author_id',
+        'author_email',
         'user_type',
         'created',
         'updated',
@@ -74,16 +75,20 @@ class ProjectDownloadResolver
 
     protected $em;
     protected $translator;
-    protected $urlResolver;
+    protected $urlArrayResolver;
     protected $phpexcel;
     protected $headers;
     protected $data;
 
-    public function __construct(EntityManager $em, TranslatorInterface $translator, UrlResolver $urlResolver, Factory $phpexcel)
-    {
+    public function __construct(
+        EntityManager $em,
+        TranslatorInterface $translator,
+        UrlArrayResolver $urlArrayResolver,
+        Factory $phpexcel
+    ) {
         $this->em = $em;
         $this->translator = $translator;
-        $this->urlResolver = $urlResolver;
+        $this->urlArrayResolver = $urlArrayResolver;
         $this->phpexcel = $phpexcel;
         $this->headers = [];
         $this->data = [];
@@ -108,7 +113,7 @@ class ProjectDownloadResolver
         return $headers;
     }
 
-    public function getContent(AbstractStep $step)
+    public function getContent(AbstractStep $step): \PHPExcel_Writer_IWriter
     {
         if (null == $step) {
             throw new NotFoundHttpException('Step not found');
@@ -149,8 +154,22 @@ class ProjectDownloadResolver
         $this->data = [];
 
         // Fetch data
-        $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getEnabledByConsultationStep($consultationStep, true);
-        $versions = $this->em->getRepository('CapcoAppBundle:OpinionVersion')->getEnabledByConsultationStep($consultationStep, true);
+        $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getEnabledByConsultationStep(
+            $consultationStep,
+            true
+        );
+        $versions = $this->em->getRepository('CapcoAppBundle:OpinionVersion')->getEnabledByConsultationStep(
+            $consultationStep,
+            true
+        );
+
+        foreach ($opinions as &$opinion) {
+            $opinion['Step'] = $consultationStep;
+        }
+
+        foreach ($versions as &$version) {
+            $version['Step'] = $consultationStep;
+        }
 
         // Create items from data
         $this->getOpinionsData($opinions);
@@ -185,8 +204,7 @@ class ProjectDownloadResolver
                 ->getRepository('CapcoAppBundle:Reply')
                 ->getEnabledByQuestionnaireAsArray(
                     $questionnaireStep->getQuestionnaire()
-                )
-            ;
+                );
         }
 
         $this->getRepliesData($replies);
@@ -220,16 +238,13 @@ class ProjectDownloadResolver
                 $this->addItemToData($this->getOpinionItem($opinion));
                 $votes = $this->em
                     ->getRepository('CapcoAppBundle:OpinionVote')
-                    ->getAllByOpinion($opinion['id'], true)
-                ;
+                    ->getAllByOpinion($opinion['id'], true);
                 $arguments = $this->em
                     ->getRepository('CapcoAppBundle:Argument')
-                    ->getAllByOpinion($opinion['id'], true)
-                ;
+                    ->getAllByOpinion($opinion['id'], true);
                 $sources = $this->em
                     ->getRepository('CapcoAppBundle:Source')
-                    ->getAllByOpinion($opinion['id'], true)
-                ;
+                    ->getAllByOpinion($opinion['id'], true);
                 $this->getVotesData($votes, $opinion);
                 $this->getArgumentsData($arguments, $opinion);
                 $this->getSourcesData($sources, $opinion);
@@ -246,16 +261,13 @@ class ProjectDownloadResolver
                 $this->addItemToData($this->getOpinionVersionItem($version));
                 $votes = $this->em
                     ->getRepository('CapcoAppBundle:OpinionVersionVote')
-                    ->getAllByVersion($version['id'], true)
-                ;
+                    ->getAllByVersion($version['id'], true);
                 $arguments = $this->em
                     ->getRepository('CapcoAppBundle:Argument')
-                    ->getAllByVersion($version['id'], true)
-                ;
+                    ->getAllByVersion($version['id'], true);
                 $sources = $this->em
                     ->getRepository('CapcoAppBundle:Source')
-                    ->getAllByVersion($version['id'], true)
-                ;
+                    ->getAllByVersion($version['id'], true);
                 $this->getVotesData($votes, $version);
                 $this->getArgumentsData($arguments, $version);
                 $this->getSourcesData($sources, $version);
@@ -270,14 +282,12 @@ class ProjectDownloadResolver
                 $argument['published'] = $argument['isEnabled'] && !$argument['isTrashed']
                     && ($parent['entity_type'] === 'opinion'
                         ? $parent['isEnabled'] && !$parent['isTrashed']
-                        : $parent['enabled'] && !$parent['isTrashed'] && $parent['parent']['isEnabled'] && !$parent['parent']['isTrashed'])
-                ;
+                        : $parent['enabled'] && !$parent['isTrashed'] && $parent['parent']['isEnabled'] && !$parent['parent']['isTrashed']);
                 $argument['entity_type'] = 'argument';
                 $this->addItemToData($this->getArgumentItem($argument, $parent));
                 $votes = $this->em
                     ->getRepository('CapcoAppBundle:ArgumentVote')
-                    ->getAllByArgument($argument['id'], true)
-                ;
+                    ->getAllByArgument($argument['id'], true);
                 $this->getVotesData($votes, $argument);
             }
         }
@@ -290,14 +300,12 @@ class ProjectDownloadResolver
                 $source['published'] = $source['isEnabled'] && !$source['isTrashed'] &&
                     ($parent['entity_type'] === 'opinion'
                         ? $parent['isEnabled'] && !$parent['isTrashed']
-                        : $parent['enabled'] && !$parent['isTrashed'] && $parent['parent']['isEnabled'] && !$parent['parent']['isTrashed'])
-                ;
+                        : $parent['enabled'] && !$parent['isTrashed'] && $parent['parent']['isEnabled'] && !$parent['parent']['isTrashed']);
                 $source['entity_type'] = 'source';
                 $this->addItemToData($this->getSourceItem($source, $parent));
                 $votes = $this->em
                     ->getRepository('CapcoAppBundle:SourceVote')
-                    ->getAllBySource($source['id'], true)
-                ;
+                    ->getAllBySource($source['id'], true);
                 $this->getVotesData($votes, $source);
             }
         }
@@ -316,8 +324,7 @@ class ProjectDownloadResolver
             if ($reply['enabled']) {
                 $responses = $this->em
                     ->getRepository('CapcoAppBundle:Response')
-                    ->getByReplyAsArray($reply['id'])
-                ;
+                    ->getByReplyAsArray($reply['id']);
                 $this->addItemToData($this->getReplyItem($reply, $responses));
             }
         }
@@ -329,7 +336,11 @@ class ProjectDownloadResolver
     {
         $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
         $author = $proposal['author'];
-        $authorName = $author ? $author['username'] : $this->translator->trans('project_download.values.user_removed', [], 'CapcoAppBundle');
+        $authorName = $author ? $author['username'] : $this->translator->trans(
+            'project_download.values.user_removed',
+            [],
+            'CapcoAppBundle'
+        );
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorEmail = $author ? $author['email'] : $na;
@@ -337,11 +348,17 @@ class ProjectDownloadResolver
         return $item = [
             'id' => $proposal['id'],
             'title' => $proposal['title'],
-            'content_type' => $this->translator->trans('project_download.values.content_type.proposal', [], 'CapcoAppBundle'),
+            'content_type' => $this->translator->trans(
+                'project_download.values.content_type.proposal',
+                [],
+                'CapcoAppBundle'
+            ),
             'content' => $this->getProposalContent($proposal),
-            'link' => $this->urlResolver->getObjectUrl($proposal, true),
+            'link' => $na,
             'created' => $this->dateToString($proposal['createdAt']),
-            'updated' => $proposal['updatedAt'] != $proposal['createdAt'] ? $this->dateToString($proposal['updatedAt']) : null,
+            'updated' => $proposal['updatedAt'] != $proposal['createdAt'] ? $this->dateToString(
+                $proposal['updatedAt']
+            ) : null,
             'author' => $authorName,
             'author_id' => $authorId,
             'author_email' => $authorEmail,
@@ -370,9 +387,13 @@ class ProjectDownloadResolver
         return $item = [
             'id' => $vote['id'],
             'title' => $proposal['title'],
-            'content_type' => $this->translator->trans('project_download.values.content_type.vote', [], 'CapcoAppBundle'),
+            'content_type' => $this->translator->trans(
+                'project_download.values.content_type.vote',
+                [],
+                'CapcoAppBundle'
+            ),
             'content' => $na,
-            'link' => $this->urlResolver->getObjectUrl($proposal, true),
+            'link' => $na,
             'created' => $this->dateToString($vote['createdAt']),
             'updated' => $na,
             'author' => $authorName,
@@ -395,24 +416,40 @@ class ProjectDownloadResolver
     {
         $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
         $author = $opinion['Author'];
-        $authorName = $author ? $author['username'] : $this->translator->trans('project_download.values.user_removed', [], 'CapcoAppBundle');
+        $authorName = $author ? $author['username'] : $this->translator->trans(
+            'project_download.values.user_removed',
+            [],
+            'CapcoAppBundle'
+        );
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
+        $authorMail = $author['email'] ?? $na;
 
         return $item = [
             'id' => $opinion['id'],
             'title' => $opinion['title'],
-            'content_type' => $this->translator->trans('project_download.values.content_type.opinion', [], 'CapcoAppBundle'),
+            'content_type' => $this->translator->trans(
+                'project_download.values.content_type.opinion',
+                [],
+                'CapcoAppBundle'
+            ),
             'related_object' => $na,
             'category' => $this->getOpinionParents($opinion),
             'content' => $this->getOpinionContent($opinion),
-            'link' => $na,
+            'link' => $this->urlArrayResolver->getRoute($opinion),
             'created' => $this->dateToString($opinion['createdAt']),
-            'updated' => $opinion['updatedAt'] != $opinion['createdAt'] ? $this->dateToString($opinion['updatedAt']) : null,
+            'updated' => $opinion['updatedAt'] != $opinion['createdAt'] ? $this->dateToString(
+                $opinion['updatedAt']
+            ) : null,
             'author' => $authorName,
             'author_id' => $authorId,
+            'author_email' => $authorMail,
             'user_type' => $authorType,
-            'score' => $this->calculateScore($opinion['votesCountOk'], $opinion['votesCountMitige'], $opinion['votesCountNok']),
+            'score' => $this->calculateScore(
+                $opinion['votesCountOk'],
+                $opinion['votesCountMitige'],
+                $opinion['votesCountNok']
+            ),
             'total_votes' => $opinion['votesCountOk'] + $opinion['votesCountMitige'] + $opinion['votesCountNok'],
             'votes_ok' => $opinion['votesCountOk'],
             'votes_mitigated' => $opinion['votesCountMitige'],
@@ -432,24 +469,44 @@ class ProjectDownloadResolver
         $opinion = $version['parent'];
         $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
         $author = $version['author'];
-        $authorName = $author ? $author['username'] : $this->translator->trans('project_download.values.user_removed', [], 'CapcoAppBundle');
+        $authorName = $author ? $author['username'] : $this->translator->trans(
+            'project_download.values.user_removed',
+            [],
+            'CapcoAppBundle'
+        );
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
+        $authorMail = $author['email'] ?? $na;
 
         return $item = [
             'id' => $version['id'],
             'title' => $version['title'],
-            'content_type' => $this->translator->trans('project_download.values.content_type.version', [], 'CapcoAppBundle'),
-            'related_object' => $this->translator->trans('project_download.values.related.opinion', ['%id%' => $opinion['id']], 'CapcoAppBundle'),
+            'content_type' => $this->translator->trans(
+                'project_download.values.content_type.version',
+                [],
+                'CapcoAppBundle'
+            ),
+            'related_object' => $this->translator->trans(
+                'project_download.values.related.opinion',
+                ['%id%' => $opinion['id']],
+                'CapcoAppBundle'
+            ),
             'category' => $this->getOpinionParents($opinion),
             'content' => $this->formatText($version['body']),
-            'link' => $na,
+            'link' => $this->urlArrayResolver->getRoute($opinion),
             'created' => $this->dateToString($version['createdAt']),
-            'updated' => $version['updatedAt'] != $version['createdAt'] ? $this->dateToString($version['updatedAt']) : null,
+            'updated' => $version['updatedAt'] != $version['createdAt'] ? $this->dateToString(
+                $version['updatedAt']
+            ) : null,
             'author' => $authorName,
             'author_id' => $authorId,
+            'author_email' => $authorMail,
             'user_type' => $authorType,
-            'score' => $this->calculateScore($version['votesCountOk'], $version['votesCountMitige'], $version['votesCountNok']),
+            'score' => $this->calculateScore(
+                $version['votesCountOk'],
+                $version['votesCountMitige'],
+                $version['votesCountNok']
+            ),
             'total_votes' => $version['votesCountOk'] + $version['votesCountMitige'] + $version['votesCountNok'],
             'votes_ok' => $version['votesCountOk'],
             'votes_mitigated' => $version['votesCountMitige'],
@@ -470,20 +527,31 @@ class ProjectDownloadResolver
         $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
         $contentType = $opinionType['commentSystem'] === OpinionType::COMMENT_SYSTEM_OK
             ? $this->translator->trans('project_download.values.content_type.simple_argument', [], 'CapcoAppBundle')
-            : $this->translator->trans('project_download.values.content_type.argument', [], 'CapcoAppBundle')
-        ;
+            : $this->translator->trans('project_download.values.content_type.argument', [], 'CapcoAppBundle');
         $category = $opinionType['commentSystem'] === OpinionType::COMMENT_SYSTEM_OK
             ? $na
-            : $this->translator->trans(Argument::$argumentTypesLabels[$argument['type']], [], 'CapcoAppBundle')
-        ;
+            : $this->translator->trans(Argument::$argumentTypesLabels[$argument['type']], [], 'CapcoAppBundle');
         $relatedObject = $parent['entity_type'] === 'version'
-            ? $this->translator->trans('project_download.values.related.version', ['%id%' => $parent['id']], 'CapcoAppBundle')
-            : $this->translator->trans('project_download.values.related.opinion', ['%id%' => $parent['id']], 'CapcoAppBundle')
-        ;
+            ? $this->translator->trans(
+                'project_download.values.related.version',
+                ['%id%' => $parent['id']],
+                'CapcoAppBundle'
+            )
+            : $this->translator->trans(
+                'project_download.values.related.opinion',
+                ['%id%' => $parent['id']],
+                'CapcoAppBundle'
+            );
         $author = $argument['Author'];
-        $authorName = $author ? $author['username'] : $this->translator->trans('project_download.values.user_removed', [], 'CapcoAppBundle');
+        $authorName = $author ? $author['username'] : $this->translator->trans(
+            'project_download.values.user_removed',
+            [],
+            'CapcoAppBundle'
+        );
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
+        $authorMail = $author['email'] ?? $na;
+
         $item = [
             'id' => $argument['id'],
             'title' => $na,
@@ -493,9 +561,12 @@ class ProjectDownloadResolver
             'content' => $this->formatText($argument['body']),
             'link' => $na,
             'created' => $this->dateToString($argument['createdAt']),
-            'updated' => $argument['updatedAt'] != $argument['createdAt'] ? $this->dateToString($argument['updatedAt']) : null,
+            'updated' => $argument['updatedAt'] != $argument['createdAt'] ? $this->dateToString(
+                $argument['updatedAt']
+            ) : null,
             'author' => $authorName,
             'author_id' => $authorId,
+            'author_email' => $authorMail,
             'user_type' => $authorType,
             'score' => $this->calculateScore($argument['votesCount'], 0, 0),
             'total_votes' => $argument['votesCount'],
@@ -517,27 +588,46 @@ class ProjectDownloadResolver
     private function getSourceItem(array $source, $parent)
     {
         $relatedObject = $parent['entity_type'] === 'version'
-            ? $this->translator->trans('project_download.values.related.version', ['%id%' => $parent['id']], 'CapcoAppBundle')
-            : $this->translator->trans('project_download.values.related.opinion', ['%id%' => $parent['id']], 'CapcoAppBundle')
-        ;
+            ? $this->translator->trans(
+                'project_download.values.related.version',
+                ['%id%' => $parent['id']],
+                'CapcoAppBundle'
+            )
+            : $this->translator->trans(
+                'project_download.values.related.opinion',
+                ['%id%' => $parent['id']],
+                'CapcoAppBundle'
+            );
         $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
         $author = $source['Author'];
-        $authorName = $author ? $author['username'] : $this->translator->trans('project_download.values.user_removed', [], 'CapcoAppBundle');
+        $authorName = $author ? $author['username'] : $this->translator->trans(
+            'project_download.values.user_removed',
+            [],
+            'CapcoAppBundle'
+        );
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
+        $authorMail = $author['email'] ?? $na;
 
         return $item = [
             'id' => $source['id'],
             'title' => $source['title'],
-            'content_type' => $this->translator->trans('project_download.values.content_type.source', [], 'CapcoAppBundle'),
+            'content_type' => $this->translator->trans(
+                'project_download.values.content_type.source',
+                [],
+                'CapcoAppBundle'
+            ),
             'category' => $source['Category']['title'],
             'related_object' => $relatedObject,
             'content' => $this->formatText($source['body']),
             'link' => $this->getSourceLink($source),
             'created' => $this->dateToString($source['createdAt']),
-            'updated' => $source['updatedAt'] != $source['createdAt'] ? $this->dateToString($source['updatedAt']) : null,
+            'updated' => $source['updatedAt'] != $source['createdAt'] ? $this->dateToString(
+                $source['updatedAt']
+            ) : null,
             'author' => $authorName,
             'author_id' => $authorId,
+            'author_email' => $authorMail,
             'user_type' => $authorType,
             'score' => $this->calculateScore($source['votesCount'], 0, 0),
             'total_votes' => $source['votesCount'],
@@ -558,14 +648,23 @@ class ProjectDownloadResolver
     {
         $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
         $author = $vote['user'];
-        $authorName = $author ? $author['username'] : $this->translator->trans('project_download.values.user_removed', [], 'CapcoAppBundle');
+        $authorName = $author ? $author['username'] : $this->translator->trans(
+            'project_download.values.user_removed',
+            [],
+            'CapcoAppBundle'
+        );
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
+        $authorMail = $author['email'] ?? $na;
 
         return $item = [
             'id' => '',
             'title' => $na,
-            'content_type' => $this->translator->trans('project_download.values.content_type.vote', [], 'CapcoAppBundle'),
+            'content_type' => $this->translator->trans(
+                'project_download.values.content_type.vote',
+                [],
+                'CapcoAppBundle'
+            ),
             'related_object' => $this->getVoteObject($entity),
             'category' => $this->getVoteValue($vote),
             'content' => $na,
@@ -574,6 +673,7 @@ class ProjectDownloadResolver
             'updated' => $na,
             'author' => $authorName,
             'author_id' => $authorId,
+            'author_email' => $authorMail,
             'user_type' => $authorType,
             'score' => $na,
             'total_votes' => $na,
@@ -595,7 +695,7 @@ class ProjectDownloadResolver
         $item = [
             'id' => $reply['id'],
             'author' => $reply['author']['username'],
-            'phone' => $reply['author']['phone'] ? (string) $reply['author']['phone'] : '',
+            'phone' => $reply['author']['phone'] ? (string)$reply['author']['phone'] : '',
             'created' => $this->dateToString($reply['createdAt']),
             'anonymous' => $this->booleanToString($reply['private']),
         ];
@@ -643,16 +743,32 @@ class ProjectDownloadResolver
     private function getVoteObject(array $object)
     {
         if ($object['entity_type'] === 'opinion') {
-            return $this->translator->trans('project_download.values.related.opinion', ['%id%' => $object['id']], 'CapcoAppBundle');
+            return $this->translator->trans(
+                'project_download.values.related.opinion',
+                ['%id%' => $object['id']],
+                'CapcoAppBundle'
+            );
         }
         if ($object['entity_type'] === 'opinionVersion') {
-            return $this->translator->trans('project_download.values.related.version', ['%id%' => $object['id']], 'CapcoAppBundle');
+            return $this->translator->trans(
+                'project_download.values.related.version',
+                ['%id%' => $object['id']],
+                'CapcoAppBundle'
+            );
         }
         if ($object['entity_type'] === 'argument') {
-            return $this->translator->trans('project_download.values.related.argument', ['%id%' => $object['id']], 'CapcoAppBundle');
+            return $this->translator->trans(
+                'project_download.values.related.argument',
+                ['%id%' => $object['id']],
+                'CapcoAppBundle'
+            );
         }
         if ($object['entity_type'] === 'source') {
-            return $this->translator->trans('project_download.values.related.source', ['%id%' => $object['id']], 'CapcoAppBundle');
+            return $this->translator->trans(
+                'project_download.values.related.source',
+                ['%id%' => $object['id']],
+                'CapcoAppBundle'
+            );
         }
     }
 
@@ -770,8 +886,7 @@ class ProjectDownloadResolver
     {
         $phpExcelObject = $this->phpexcel->createPHPExcelObject();
         $phpExcelObject->getProperties()
-            ->setTitle($title)
-        ;
+            ->setTitle($title);
         $phpExcelObject->setActiveSheetIndex(0);
         $sheet = $phpExcelObject->getActiveSheet();
         $sheet->setTitle($this->translator->trans('project_download.sheet.title', [], 'CapcoAppBundle'));
