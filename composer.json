@@ -84,7 +84,8 @@
         "misd/phone-number-bundle": "^1.1",
         "liuggio/excelbundle": "~2.0",
         "ocramius/proxy-manager": "2.0.2",
-        "exercise/htmlpurifier-bundle": "^0.2.3"
+        "exercise/htmlpurifier-bundle": "^0.2.3",
+        "gedmo/doctrine-extensions": "^2.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
