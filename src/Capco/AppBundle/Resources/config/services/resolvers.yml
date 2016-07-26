@@ -69,7 +69,7 @@ services:
 
   capco.url.array.resolver:
       class: Capco\AppBundle\Resolver\UrlArrayResolver
-      arguments: ['@router', '@capco.toggle.manager']
+      arguments: ['@router']
 
   capco.vote.resolver:
     class: Capco\AppBundle\Resolver\VoteResolver

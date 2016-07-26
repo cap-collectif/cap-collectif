@@ -246,12 +246,4 @@ class UrlResolver
 
         return '';
     }
-
-    /**
-     * @return Router
-     */
-    public function getRouter(): Router
-    {
-        return $this->router;
-    }
 }

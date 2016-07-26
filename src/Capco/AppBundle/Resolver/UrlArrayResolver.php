@@ -2,85 +2,78 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Toggle\Manager;
-use Capco\UserBundle\Entity\User;
 use Symfony\Component\Routing\Router;
 
 class UrlArrayResolver
 {
     protected $router;
-    protected $manager;
+    protected $referenceType;
 
-    public function __construct(Router $router, Manager $manager)
+    public function __construct(Router $router)
     {
         $this->router = $router;
-        $this->manager = $manager;
     }
 
-    public function generateOpinionOrProposalRoute(array $array, $absolute)
+    public function getRoute(array $array, int $referenceType = 0): string
     {
         if (!isset($array['entity_type'])) {
             return 'n/a';
         }
 
+        $this->referenceType = $referenceType;
+
         if ($array['entity_type'] == 'opinion') {
-            return $this->router->generate(
-                'app_project_show_opinion',
-                [
-                    'projectSlug' => $array['Step']->getProject()->getSlug(),
-                    'stepSlug' => $array['Step']->getSlug(),
-                    'opinionTypeSlug' => $array['OpinionType']['slug'],
-                    'opinionSlug' => $array['slug'],
-                ],
-                $absolute
-            );
+            return $this->getOpinionRoute($array);
         }
 
         if ($array['entity_type'] == 'opinionVersion') {
-            return $this->router->generate(
-                'app_project_show_opinion_version',
-                [
-                    'projectSlug' => $array['Step']->getProject()->getSlug(),
-                    'stepSlug' => $array['Step']->getSlug(),
-                    'opinionTypeSlug' => $array['OpinionType']['slug'],
-                    'opinionSlug' => $array['parent']['slug'],
-                    'versionSlug' => $array['slug'],
-                ],
-                $absolute
-            );
+            return $this->getOpinionVersionRoute($array);
         }
 
         if ($array['entity_type'] === 'proposal') {
-            return $this->router->generate(
-                'app_project_show_proposal',
-                [
-                    'projectSlug' => $array['Step']->getProject()->getSlug(),
-                    'stepSlug' => $array['Step']->getSlug(),
-                    'proposalSlug' => $array['slug'],
-                ],
-                $absolute
-            );
+            return $this->getProposalRoute($array);
         }
-
-        return false;
     }
 
-    /**
-     * @return Router
-     */
-    public function getRouter(): Router
+    protected function getProposalRoute(array $proposal): string
     {
-        return $this->router;
+        return $this->router->generate(
+            'app_project_show_proposal',
+            [
+                'projectSlug' => $proposal['Step']->getProject()->getSlug(),
+                'stepSlug' => $proposal['Step']->getSlug(),
+                'proposalSlug' => $proposal['slug'],
+            ],
+            $this->referenceType
+        );
+    }
+
+    protected function getOpinionRoute(array $opinion): string
+    {
+        return $this->router->generate(
+            'app_project_show_opinion',
+            [
+                'projectSlug' => $opinion['Step']->getProject()->getSlug(),
+                'stepSlug' => $opinion['Step']->getSlug(),
+                'opinionTypeSlug' => $opinion['OpinionType']['slug'],
+                'opinionSlug' => $opinion['slug'],
+            ],
+            $this->referenceType
+        );
+    }
+
+    protected function getOpinionVersionRoute(array $version): string
+    {
+        return $this->router->generate(
+            'app_project_show_opinion_version',
+            [
+                'projectSlug' => $version['Step']->getProject()->getSlug(),
+                'stepSlug' => $version['Step']->getSlug(),
+                'opinionTypeSlug' => $version['OpinionType']['slug'],
+                'opinionSlug' => $version['parent']['slug'],
+                'versionSlug' => $version['slug'],
+            ],
+            $this->referenceType
+        );
     }
 }

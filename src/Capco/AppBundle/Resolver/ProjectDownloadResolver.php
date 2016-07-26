@@ -113,13 +113,7 @@ class ProjectDownloadResolver
         return $headers;
     }
 
-    /**
-     * @param AbstractStep $step
-     *
-     * @return \PHPExcel_Writer_IWriter
-     * @throws \Exception
-     */
-    public function getContent(AbstractStep $step)
+    public function getContent(AbstractStep $step): \PHPExcel_Writer_IWriter
     {
         if (null == $step) {
             throw new NotFoundHttpException('Step not found');
@@ -442,7 +436,7 @@ class ProjectDownloadResolver
             'related_object' => $na,
             'category' => $this->getOpinionParents($opinion),
             'content' => $this->getOpinionContent($opinion),
-            'link' => $this->urlArrayResolver->generateOpinionOrProposalRoute($opinion, 0),
+            'link' => $this->urlArrayResolver->getRoute($opinion),
             'created' => $this->dateToString($opinion['createdAt']),
             'updated' => $opinion['updatedAt'] != $opinion['createdAt'] ? $this->dateToString(
                 $opinion['updatedAt']
@@ -499,7 +493,7 @@ class ProjectDownloadResolver
             ),
             'category' => $this->getOpinionParents($opinion),
             'content' => $this->formatText($version['body']),
-            'link' => $this->urlArrayResolver->generateOpinionOrProposalRoute($opinion, 0),
+            'link' => $this->urlArrayResolver->getRoute($opinion),
             'created' => $this->dateToString($version['createdAt']),
             'updated' => $version['updatedAt'] != $version['createdAt'] ? $this->dateToString(
                 $version['updatedAt']
@@ -844,20 +838,6 @@ class ProjectDownloadResolver
         }
 
         return implode(' - ', array_reverse($parents));
-    }
-
-    private function getOpinionParentSlug(array $opinion): string
-    {
-        $opinionType = $this->em->getRepository('CapcoAppBundle:OpinionType')->find($opinion['OpinionType']['id']);
-        $parents = [$opinionType->getSlug()];
-
-        $current = $opinionType;
-        while ($current->getParent()) {
-            $current = $current->getParent();
-            $parents[] = $current->getSlug();
-        }
-
-        return implode('/', array_reverse($parents));
     }
 
     private function getSourceLink($source)
