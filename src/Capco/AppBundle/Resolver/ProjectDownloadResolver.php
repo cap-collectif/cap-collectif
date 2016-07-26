@@ -354,7 +354,7 @@ class ProjectDownloadResolver
                 'CapcoAppBundle'
             ),
             'content' => $this->getProposalContent($proposal),
-            'link' => $this->urlResolver->getObjectUrl($proposal, true),
+            'link' => $na,
             'created' => $this->dateToString($proposal['createdAt']),
             'updated' => $proposal['updatedAt'] != $proposal['createdAt'] ? $this->dateToString(
                 $proposal['updatedAt']
@@ -393,7 +393,7 @@ class ProjectDownloadResolver
                 'CapcoAppBundle'
             ),
             'content' => $na,
-            'link' => $this->urlResolver->getObjectUrl($proposal, true),
+            'link' => $na,
             'created' => $this->dateToString($vote['createdAt']),
             'updated' => $na,
             'author' => $authorName,
