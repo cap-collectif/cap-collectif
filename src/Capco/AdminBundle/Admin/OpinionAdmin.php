@@ -42,6 +42,9 @@ class OpinionAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('id', null, [
+                'label' => 'admin.fields.opinion.id',
+            ])
             ->add('title', null, [
                 'label' => 'admin.fields.opinion.title',
             ])
@@ -85,6 +88,9 @@ class OpinionAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
+            ->add('id', 'integer', [
+                'label' => 'admin.project.opinion.id',
+            ])
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.opinion.title',
             ])

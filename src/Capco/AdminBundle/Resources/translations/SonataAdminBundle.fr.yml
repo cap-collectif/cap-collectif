@@ -302,6 +302,7 @@ admin:
       is_enabled: Abonné
       created_at: Création
     opinion:
+      id: Id
       group_content: Proposition
       group_appendices: Contexte
       group_publication: Options de publication
