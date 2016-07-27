@@ -221,7 +221,7 @@ class OpinionTypeAdmin extends Admin
 
     public function postPersist($object)
     {
-        $this->verifyTree();
+        $this->verifyTree($object);
     }
 
     public function postUpdate($object)
@@ -240,15 +240,16 @@ class OpinionTypeAdmin extends Admin
             ->getContainer()
             ->get('doctrine.orm.entity_manager')
         ;
-        $repo = $em
-            ->getRepository('CapcoAppBundle:OpinionType')
-        ;
-        $repo->verify();
-        $repo->recover();
-        if ($object && $object->getParent()) {
-            $repo->reorder($object->getParent(), 'position');
+        $repo = $em->getRepository('CapcoAppBundle:OpinionType');
+
+        if (is_array($repo->verify())) { // we have errors
+            $repo->recover();
+            $em->flush(); // important: flush recovered nodes
         }
 
-        $em->flush();
+        if ($object->getParent()) {
+            $repo->reorder($object->getParent(), 'position');
+            $em->flush();
+        }
     }
 }
