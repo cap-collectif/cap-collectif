@@ -6,6 +6,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Capco\AppBundle\Entity\Project;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Elastica\Query\Match;
+use Elastica\Query\BoolQuery;
+use Elastica\Query\Term;
+use Elastica\Query;
 
 class StepController extends CRUDController
 {
@@ -14,26 +20,32 @@ class StepController extends CRUDController
      *
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/project/{projectId}/proposals_autocomplete", name="capco_admin_proposals_autocomplete")
-     *
-     * @param Request $request
-     * @param null    $projectId
-     *
-     * @return JsonResponse
+     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      */
-    public function retrieveProposalsAutocompleteItemsAction(Request $request, $projectId = null)
+    public function retrieveProposalsAutocompleteItemsAction(Request $request, Project $project)
     {
-        if (!$projectId) {
-            return new JsonResponse([
-                'status' => 'OK',
-                'more' => false,
-                'items' => [],
-            ]);
-        }
+        $titleQuery = new Match();
+        $titleQuery->setFieldQuery('title.autocomplete', $request->query->get('q'));
+        $titleQuery->setFieldParam('title.autocomplete', 'analyzer', 'standard');
 
-        return $this->retrieveAutocompleteItems($request, [
-            'enabled' => 1,
-            'isTrashed' => 0,
-            'proposalForm__step__projectAbstractStep__project' => $projectId,
+        $boolQuery = new BoolQuery();
+        $boolQuery->addMust($titleQuery);
+        $boolQuery->addMust(new Term([
+          'proposalForm.id' => $project->getFirstStep()->getProposalForm()->getId()
+        ]));
+
+        $query = new Query($boolQuery);
+        $query->setFields(['id', 'title']);
+        $results = $this->get('fos_elastica.index.app.proposal')->search($query);
+
+        $items = array_map(function($result) {
+            return [ 'id' => $result->getData()['id'], 'label' => $result->getData()['title'] ];
+        }, $results->getResults());
+
+        return new JsonResponse([
+            'status' => 'OK',
+            'more' => false,
+            'items' => $items,
         ]);
     }
 }

@@ -20,12 +20,20 @@ fos_elastica:
               french_stemmer:
                 type: stemmer
                 language: light_french
+              autocomplete_filter:
+                type: edge_ngram
+                min_gram: 1
+                max_gram: 20
             analyzer: # We define custom analyzers for html content
               analyse_html_french:
                 type: custom
                 char_filter: [html_strip]
                 tokenizer: standard
                 filter: [lowercase, french_elision, french_stop, french_stemmer]
+              autocomplete:
+                type: custom
+                tokenizer: standard
+                filter: [lowercase, autocomplete_filter]
       finder: ~
       types:
       # User
@@ -262,6 +270,7 @@ fos_elastica:
               index_options: offsets
               fields:
                 std: { type: string, analyzer: standard }
+                autocomplete: { type: string, analyzer: autocomplete }
             slug:
               index: not_analyzed
             body:
