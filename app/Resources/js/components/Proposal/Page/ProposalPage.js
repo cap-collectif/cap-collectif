@@ -9,6 +9,7 @@ import ProposalPageVotes from './ProposalPageVotes';
 import ProposalPageComments from './ProposalPageComments';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalPageMetadata from './ProposalPageMetadata';
+import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalStore from '../../../stores/ProposalStore';
@@ -206,7 +207,7 @@ export const ProposalPage = React.createClass({
               <Tab.Content animation={false}>
                 <Tab.Pane eventKey="content">
                   <Row>
-                    <Col xs={12} sm={9}>
+                    <Col xs={12} sm={8}>
                       <ProposalPageAnswer
                         answer={proposal.answer}
                       />
@@ -222,12 +223,16 @@ export const ProposalPage = React.createClass({
                         onVote={this.voteAction}
                       />
                     </Col>
-                    <Col xs={12} sm={3}>
+                    <Col xs={12} sm={4}>
                       <ProposalPageMetadata
                         proposal={proposal}
                         showDistricts={features.districts}
                         showCategories={form.usingCategories}
                         showNullEstimation={!!votableStep && votableStep.voteType === VOTE_TYPE_BUDGET}
+                      />
+                      <br />
+                      <ProposalPageAdvancement
+                        proposal={proposal}
                       />
                     </Col>
                   </Row>

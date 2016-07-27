@@ -40,28 +40,9 @@
 <body>
 
 <div id="app-wrapper">
-  {{ redux_store('appStore', {
-    'features': features_list(),
-    'parameters': site_parameters_list(),
-    'user': app.user
-      ? {
-          'username': app.user.username,
-          'isEmailConfirmed': app.user.isEmailConfirmed,
-          'isPhoneConfirmed': app.user.isPhoneConfirmed,
-          'phone': app.user.phone,
-          'isAdmin': app.user.isAdmin,
-          'email': app.user.email,
-          'media': app.user.Media
-          ? {
-              'url': media_public_url(app.user.Media, 'default_avatar')
-            }
-          : null,
-          'displayName': app.user.username,
-          'uniqueId': app.user.slug,
-        }
-      : null,
-    'user_types': user_type_list(),
-  }) }}
+    {% block reduxStore %}
+      {% include '@CapcoApp/redux_store.html.twig' %}
+    {% endblock %}
     {% block mainContent %}{% endblock %}
 </div>
 

@@ -14,6 +14,8 @@ Object.keys(document.defaultView).forEach((property) => {
   }
 });
 
+import 'babel-polyfill';
+
 global.navigator = {
   userAgent: 'node.js',
 };

@@ -115,6 +115,9 @@ describe('<ProposalPage />', () => {
     expect(proposalMetadata.prop('showDistricts')).to.equal(false);
     expect(proposalMetadata.prop('showCategories')).to.equal(false);
     expect(proposalMetadata.prop('showNullEstimation')).to.equal(false);
+    const proposalAdvancement = contentTabPane.find('ProposalPageAdvancement');
+    expect(proposalAdvancement).to.have.length(1);
+    expect(proposalAdvancement.prop('proposal')).to.equal(proposalNoVotes);
     const commentsTabPane = tabPanes.last();
     expect(commentsTabPane.prop('eventKey')).to.equal('comments');
     const proposalComments = commentsTabPane.find('ProposalPageComments');

@@ -54,6 +54,8 @@ describe('<ProposalPageMetadata />', () => {
     const likers = secondDiv.find('ProposalDetailLikers');
     expect(likers.prop('proposal')).to.equal(proposal);
     expect(likers.prop('componentClass')).to.equal('div');
+    const avdancement = secondDiv.find('ProposalDetailEstimation');
+    expect(avdancement.prop('proposal')).to.equal(proposal);
   });
 
   it('should not render category if specified not to', () => {

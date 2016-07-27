@@ -46,6 +46,8 @@ abstract class AbstractStep
 {
     use DateHelperTrait;
 
+    abstract public function getType();
+
     /**
      * @var array
      */
@@ -424,11 +426,6 @@ abstract class AbstractStep
     public function canContribute()
     {
         return $this->getProject()->canContribute() && $this->isEnabled && $this->isOpen();
-    }
-
-    public function getType()
-    {
-        return;
     }
 
     public function isConsultationStep()

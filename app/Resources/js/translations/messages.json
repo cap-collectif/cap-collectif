@@ -601,6 +601,9 @@
     },
     "description": "Description",
     "details": "D\u00e9tails",
+    "detail":  {
+      "advancement": "État d'avancement"
+    },
     "district": "Quartier",
     "empty": "Aucune proposition",
     "infos": {

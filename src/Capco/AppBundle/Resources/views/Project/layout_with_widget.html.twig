@@ -3,6 +3,46 @@
 {% set showVotesWidget = capco_has_votable_step_not_future(project) and is_granted('ROLE_USER') %}
 {% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
 
+{% block reduxStore %}
+  {% set projectSteps = [] %}
+  {% for step in project.steps %}
+      {% set stepStatuses = [] %}
+      {% for status in step.step.statuses %}
+        {%
+          set stepStatuses = stepStatuses|merge([
+            {
+              'id': status.id,
+              'name': status.name
+            }
+          ])
+        %}
+      {% endfor %}
+      {%
+      set projectSteps = projectSteps|merge([{
+        'id': step.step.id,
+        'title': step.step.title,
+        'startAt': step.step.startAt|localizeddate('medium', 'none'),
+        'endAt': step.step.endAt|localizeddate('medium', 'none'),
+        'position': step.step.position,
+        'type': step.step.getType(),
+        'statuses': stepStatuses
+      }])
+      %}
+  {% endfor %}
+  {% set state = {
+    'project': {
+      'currentProjectById': project.id,
+      'projects': {
+        (project.id) : {
+          'slug': project.slug,
+          'steps': projectSteps
+        }
+      }
+    }
+  } %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'data' : state} %}
+{% endblock %}
+
 {% block mainContent %}
 
     {% if showVotesWidget %}
