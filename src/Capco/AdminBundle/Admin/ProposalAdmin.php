@@ -208,6 +208,9 @@ class ProposalAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('id', null, [
+                'label' => 'admin.fields.proposal.id',
+            ])
             ->add('title', null, [
                 'label' => 'admin.fields.proposal.title',
             ])
