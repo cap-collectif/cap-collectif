@@ -89,7 +89,7 @@ class OpinionAdmin extends Admin
 
         $listMapper
             ->add('id', 'integer', [
-                'label' => 'admin.project.opinion.id',
+                'label' => 'admin.fields.opinion.id',
             ])
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.opinion.title',
