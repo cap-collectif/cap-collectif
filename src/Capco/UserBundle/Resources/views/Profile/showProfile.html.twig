@@ -39,24 +39,31 @@
     <div class="profile__values">
         <div class="container">
             <ul class="nav  nav-pills">
+                {% if user.getContributionsCount() > 0 %}
                 <li class="profile__value {% if (app.request.attributes.get('_route') in ['capco_user_profile_show_all', 'capco_user_profile_show']) %}active{% endif %} ">
                     <a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.all'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="profile__value__number">{{ user.getContributionsCount() }}</p>
                     </a>
                 </li>
+                {% endif %}
+                {% if user.projectsCount > 0 %}
                 <li class="profile__value {% if (app.request.attributes.get('_route') == 'capco_user_profile_show_projects') %}active{% endif %} ">
                     <a href="{{ path('capco_user_profile_show_projects', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.projects'|trans({}, 'CapcoAppBundle') }}</h2>
-                        <p class="profile__value__number">{{ user.projectsCount() }}</p>
+                        <p class="profile__value__number">{{ user.projectsCount }}</p>
                     </a>
                 </li>
+                {% endif %}
+                {% if user.opinionsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_opinions' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_opinions', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.opinions'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="profile__value__number">{{ user.opinionsCount }}</p>
                     </a>
                 </li>
+                {% endif %}
+                {% if user.opinionVersionsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_opinions_versions' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_opinions_versions', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">
@@ -67,25 +74,32 @@
                         </p>
                     </a>
                 </li>
+                {% endif %}
+                {% if user.argumentsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_arguments' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_arguments', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.arguments'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="profile__value__number">{{ user.argumentsCount }}</p>
                     </a>
                 </li>
+                {% endif %}
+                {% if user.sourcesCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_sources' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_sources', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.sources'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="profile__value__number">{{ user.sourcesCount }}</p>
                     </a>
                 </li>
+                {% endif %}
+                {% if user.proposalsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_proposals' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_proposals', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.proposals'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="profile__value__number">{{ user.proposalsCount }}</p>
                     </a>
                 </li>
-                {% if is_feature_enabled('ideas') %}
+                {% endif %}
+                {% if is_feature_enabled('ideas') and user.ideasCount > 0 %}
                     <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_ideas' %}active{% endif %}">
                         <a href="{{ path('capco_user_profile_show_ideas', {'slug': user.slug}) }}">
                             <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.ideas'|trans({}, 'CapcoAppBundle') }}</h2>
@@ -93,7 +107,7 @@
                         </a>
                     </li>
                 {% endif %}
-                {% if is_feature_enabled('ideas') or is_feature_enabled('calendar') or is_feature_enabled('blog') %}
+                {% if (is_feature_enabled('ideas') or is_feature_enabled('calendar') or is_feature_enabled('blog')) and user.commentsCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_comments' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_comments', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.comments'|trans({}, 'CapcoAppBundle') }}</h2>
@@ -101,18 +115,22 @@
                     </a>
                 </li>
                 {% endif %}
+                {% if user.repliesCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_replies' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_replies', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.replies'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="profile__value__number">{{ user.repliesCount }}</p>
                     </a>
                 </li>
+                {% endif %}
+                {% if user.votesCount > 0 %}
                 <li class="profile__value {% if app.request.attributes.get('_route') == 'capco_user_profile_show_votes' %}active{% endif %}">
                     <a href="{{ path('capco_user_profile_show_votes', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.votes'|trans({}, 'CapcoAppBundle') }}</h2>
                         <p class="profile__value__number">{{ user.votesCount }}</p>
                     </a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>
