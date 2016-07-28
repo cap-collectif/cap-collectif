@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -210,4 +211,10 @@ const IdeaForm = React.createClass({
 
 });
 
-export default IdeaForm;
+const mapStateToProps = (state) => {
+  return {
+    themes: state.default.themes,
+  };
+};
+
+export default connect(mapStateToProps)(IdeaForm);

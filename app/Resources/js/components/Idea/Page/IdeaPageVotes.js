@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Row, Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
-import IdeaStore from '../../../stores/IdeaStore';
-import { IDEA_VOTES_TO_SHOW } from '../../../constants/IdeaConstants';
+
+const IDEA_VOTES_PREVIEW = 8;
 
 const IdeaPageVotes = React.createClass({
   propTypes: {
-    idea: React.PropTypes.object.isRequired,
-    votes: React.PropTypes.array.isRequired,
-    className: React.PropTypes.string,
+    dispatch: PropTypes.func.isRequired,
+    idea: PropTypes.object.isRequired,
+    className: PropTypes.string,
   },
   mixins: [IntlMixin],
 
@@ -22,30 +23,13 @@ const IdeaPageVotes = React.createClass({
   },
 
   getInitialState() {
-    const {
-      idea,
-      votes,
-    } = this.props;
     return {
-      votes: votes,
-      votesCount: idea.votesCount,
       showModal: false,
     };
   },
 
-  componentWillMount() {
-    IdeaStore.addChangeListener(this.onChange);
-  },
+  componentDidMount() {
 
-  componentWillUnmount() {
-    IdeaStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    this.setState({
-      votes: IdeaStore.votes,
-      votesCount: IdeaStore.votesCount,
-    });
   },
 
   showModal() {
@@ -59,25 +43,26 @@ const IdeaPageVotes = React.createClass({
   },
 
   render() {
-    const { className } = this.props;
-    const votesToDisplay = this.state.votes.slice(0, IDEA_VOTES_TO_SHOW);
-    const moreVotes = this.state.votesCount - IDEA_VOTES_TO_SHOW > 0;
+    const { idea, className } = this.props;
+    const { showModal } = this.state;
+    const votesToDisplay = idea.votes.slice(0, IDEA_VOTES_PREVIEW);
+    const hasMoreVotes = idea.votesCount - IDEA_VOTES_PREVIEW > 0;
 
-    if (!this.state.votesCount) {
+    if (!idea.votesCount) {
       return null;
     }
 
     const classes = {
-      idea__votes: true,
+      'idea__votes': true,
+      [className]: true,
     };
-    classes[className] = true;
 
     return (
       <div id="votes" className={classNames(classes)}>
         <h2>
           <FormattedMessage
             message={this.getIntlMessage('idea.vote.count')}
-            num={this.state.votesCount}
+            num={idea.votesCount}
           />
         </h2>
         <Row>
@@ -88,20 +73,19 @@ const IdeaPageVotes = React.createClass({
           }
         </Row>
         {
-          moreVotes
-          ? <Button
+          hasMoreVotes &&
+          <Button
               bsStyle="primary"
               onClick={this.showModal}
               className="btn--outline idea__votes__show-more"
           >
             {this.getIntlMessage('idea.vote.show_more')}
           </Button>
-          : null
         }
         <AllVotesModal
-          votes={this.state.votes}
+          votes={idea.votes}
           onToggleModal={this.toggleModal}
-          showModal={this.state.showModal}
+          showModal={showModal}
         />
       </div>
     );
@@ -109,4 +93,4 @@ const IdeaPageVotes = React.createClass({
 
 });
 
-export default IdeaPageVotes;
+export default connect()(IdeaPageVotes);

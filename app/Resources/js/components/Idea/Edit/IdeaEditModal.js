@@ -7,7 +7,6 @@ import { Modal } from 'react-bootstrap';
 
 const IdeaEditModal = React.createClass({
   propTypes: {
-    themes: React.PropTypes.array.isRequired,
     idea: React.PropTypes.object.isRequired,
     show: React.PropTypes.bool.isRequired,
     onToggleModal: React.PropTypes.func.isRequired,
@@ -66,7 +65,6 @@ const IdeaEditModal = React.createClass({
           </Modal.Header>
           <Modal.Body>
             <IdeaEditForm
-              themes={themes}
               isSubmitting={this.state.isSubmitting}
               onSubmitSuccess={this.handleSubmitSuccess}
               onValidationFailure={this.handleFailure}

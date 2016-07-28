@@ -1,6 +1,5 @@
 export const DEFAULT_IDEAS_PAGINATION = 8;
 export const SET_IDEAS_PAGINATION = 'SET_IDEAS_PAGINATION';
-export const IDEA_VOTES_TO_SHOW = 6;
 export const INIT_IDEAS_COUNTS = 'INIT_IDEAS_COUNTS';
 export const INIT_IDEA = 'INIT_IDEA';
 export const INIT_IDEAS = 'INIT_IDEAS';

@@ -3,7 +3,6 @@ import {
   DEFAULT_IDEAS_PAGINATION,
   SET_IDEAS_PAGINATION,
   INIT_IDEAS_COUNTS,
-  INIT_IDEA,
   INIT_IDEAS,
 
   CHANGE_IDEAS_PAGE,
@@ -41,12 +40,6 @@ class IdeaStore extends BaseStore {
 
   _registerToActions(action) {
     switch (action.actionType) {
-      case INIT_IDEA:
-        this._idea = action.idea;
-        this._votes = action.votes;
-        this._votesCount = action.idea.votesCount;
-        this.emitChange();
-        break;
       case SET_IDEAS_PAGINATION:
         this._pagination = action.pagination;
         this.emitChange();

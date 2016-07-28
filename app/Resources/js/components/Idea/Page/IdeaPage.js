@@ -1,48 +1,24 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
 import { IntlMixin } from 'react-intl';
-import IdeaStore from '../../../stores/IdeaStore';
-import IdeaActions from '../../../actions/IdeaActions';
 import IdeaSidebar from '../Sidebar/IdeaSidebar';
 import IdeaPageHeader from './IdeaPageHeader';
 import IdeaPageBody from './IdeaPageBody';
 import IdeaPageVotes from './IdeaPageVotes';
 import IdeaPageComments from './IdeaPageComments';
 
-const IdeaPage = React.createClass({
+export const IdeaPage = React.createClass({
   propTypes: {
-    idea: React.PropTypes.object.isRequired,
-    themes: React.PropTypes.array.isRequired,
-    votes: React.PropTypes.array.isRequired,
+    idea: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
   getInitialState() {
     return {
-      idea: IdeaStore.idea,
       expandSidebar: false,
-
     };
-  },
-
-  componentWillMount() {
-    const {
-      idea,
-      votes,
-    } = this.props;
-    IdeaStore.addChangeListener(this.onChange);
-    IdeaActions.initIdea(idea, votes);
-  },
-
-  componentWillUnmount() {
-    IdeaStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    this.setState({
-      idea: IdeaStore.idea,
-    });
   },
 
   toggleSidebarExpand() {
@@ -52,11 +28,8 @@ const IdeaPage = React.createClass({
   },
 
   render() {
-    const {
-      themes,
-      votes,
-    } = this.props;
-    const { idea } = this.state;
+    const { idea } = this.props;
+    const { expandSidebar } = this.state;
     const showSidebar = idea.canContribute;
     const wrapperClassName = classNames({
       container: showSidebar,
@@ -69,7 +42,7 @@ const IdeaPage = React.createClass({
       'container--with-sidebar': showSidebar,
     });
     const overlayClassName = classNames({
-      'sidebar__darkened-overlay': this.state.expandSidebar,
+      'sidebar__darkened-overlay': expandSidebar,
     });
     return (
       <div>
@@ -82,12 +55,10 @@ const IdeaPage = React.createClass({
               />
               <IdeaPageBody
                 idea={idea}
-                themes={themes}
                 className={containersClassName}
               />
               <IdeaPageVotes
                 idea={idea}
-                votes={votes}
                 className={containersClassName}
               />
               <IdeaPageComments
@@ -103,7 +74,7 @@ const IdeaPage = React.createClass({
               showSidebar &&
                 <IdeaSidebar
                     idea={idea}
-                    expanded={this.state.expandSidebar}
+                    expanded={expandSidebar}
                     onToggleExpand={this.toggleSidebarExpand}
                 />
             }
@@ -115,4 +86,10 @@ const IdeaPage = React.createClass({
 
 });
 
-export default IdeaPage;
+const mapStateToProps = (state) => {
+  return {
+    idea: state.idea.ideas[state.idea.currentIdeaById],
+  };
+};
+
+export default connect(mapStateToProps)(IdeaPage);

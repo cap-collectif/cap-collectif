@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Modal, Row } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
@@ -6,9 +6,9 @@ import UserBox from '../User/UserBox';
 
 const AllVotesModal = React.createClass({
   propTypes: {
-    votes: React.PropTypes.array.isRequired,
-    showModal: React.PropTypes.bool.isRequired,
-    onToggleModal: React.PropTypes.func.isRequired,
+    votes: PropTypes.array.isRequired,
+    showModal: PropTypes.bool.isRequired,
+    onToggleModal: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -31,7 +31,7 @@ const AllVotesModal = React.createClass({
       <Modal
         animation={false}
         show={showModal}
-        onHide={this.close.bind(null, this)}
+        onHide={this.close}
         bsSize="large"
         aria-labelledby="contained-modal-title-lg"
       >
@@ -46,15 +46,13 @@ const AllVotesModal = React.createClass({
         <Modal.Body>
           <Row>
             {
-              votes.map((vote, index) => {
-                return <UserBox key={index} user={vote.user} username={vote.username} />;
-              })
+              votes.map((vote, key) => <UserBox key={key} user={vote.user} username={vote.username} />)
             }
           </Row>
         </Modal.Body>
         <Modal.Footer>
           <CloseButton
-            onClose={this.close.bind(null, this)}
+            onClose={this.close}
             label="global.close"
           />
         </Modal.Footer>

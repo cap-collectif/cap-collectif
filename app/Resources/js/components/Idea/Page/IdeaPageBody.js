@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import classNames from 'classnames';
 import IdeaPageTrashBlock from './IdeaPageTrashBlock';
@@ -6,8 +6,7 @@ import IdeaPageButtons from './IdeaPageButtons';
 
 const IdeaPageBody = React.createClass({
   propTypes: {
-    themes: React.PropTypes.array.isRequired,
-    idea: React.PropTypes.object.isRequired,
+    idea: PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },
   mixins: [IntlMixin],
@@ -21,7 +20,6 @@ const IdeaPageBody = React.createClass({
   render() {
     const {
       idea,
-      themes,
       className,
     } = this.props;
 
@@ -75,7 +73,7 @@ const IdeaPageBody = React.createClass({
 
         <IdeaPageTrashBlock idea={idea} />
 
-        <IdeaPageButtons idea={idea} themes={themes} />
+        <IdeaPageButtons idea={idea} />
       </div>
     );
   },

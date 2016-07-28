@@ -1,4 +1,4 @@
-{% extends '@CapcoApp/Idea/index.html.twig' %}
+{% extends '@CapcoApp/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_idea_show', {'slug': idea.slug}) }}{% endblock %}
 
@@ -17,6 +17,18 @@
 {% endblock %}
 
 {% block jumbotron %}{% endblock %}
+
+{% block reduxStore %}
+  {% set initialState = {
+    'idea': {
+      'currentIdeaById': idea.id,
+      'ideas': {
+        (idea.id) : props
+      }
+    }
+  } %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState} %}
+{% endblock %}
 
 {% block body %}
     {{ react_intl_component('IdeaPageApp', {'props': props}) }}

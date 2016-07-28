@@ -6,13 +6,12 @@ import { connect } from 'react-redux';
 
 const IdeaEditForm = React.createClass({
   propTypes: {
-    themes: React.PropTypes.array.isRequired,
-    themeId: React.PropTypes.number,
-    isSubmitting: React.PropTypes.bool.isRequired,
-    onValidationFailure: React.PropTypes.func,
-    onSubmitSuccess: React.PropTypes.func,
-    onSubmitFailure: React.PropTypes.func,
-    idea: React.PropTypes.object,
+    themeId: PropTypes.number,
+    isSubmitting: PropTypes.bool.isRequired,
+    onValidationFailure: PropTypes.func,
+    onSubmitSuccess: PropTypes.func,
+    onSubmitFailure: PropTypes.func,
+    idea: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
@@ -79,7 +78,9 @@ const IdeaEditForm = React.createClass({
 
 });
 const mapStateToProps = (state) => {
-  return { features: state.default.features };
+  return {
+    features: state.default.features,
+  };
 };
 
 export default connect(mapStateToProps)(IdeaEditForm);

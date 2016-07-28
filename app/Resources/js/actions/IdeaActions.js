@@ -26,7 +26,6 @@ import {
 
   RECEIVE_IDEAS,
   RECEIVE_IDEA,
-  RECEIVE_IDEA_VOTES,
 } from '../constants/IdeaConstants';
 import {
   CREATE_COMMENT_SUCCESS,
@@ -222,19 +221,6 @@ export default {
         return false;
       })
     ;
-  },
-
-  loadVotes: (idea) => {
-    Fetcher
-      .get(`/ideas/${idea}/votes`)
-      .then((result) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_IDEA_VOTES,
-          votes: result.votes,
-          votesCount: result.count,
-        });
-        return true;
-      });
   },
 
   vote: (idea, data = {}) => {

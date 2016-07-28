@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
 import EditButton from '../../Form/EditButton';
 import DeleteButton from '../../Form/DeleteButton';
@@ -8,8 +8,7 @@ import IdeaDeleteModal from '../Delete/IdeaDeleteModal';
 
 const IdeaPageButtons = React.createClass({
   propTypes: {
-    themes: React.PropTypes.array.isRequired,
-    idea: React.PropTypes.object.isRequired,
+    idea: PropTypes.object.isRequired,
   },
 
   getInitialState() {
@@ -36,10 +35,7 @@ const IdeaPageButtons = React.createClass({
   },
 
   render() {
-    const {
-      idea,
-      themes,
-    } = this.props;
+    const { idea } = this.props;
 
     return (
       <div className="block idea__buttons">
@@ -69,7 +65,6 @@ const IdeaPageButtons = React.createClass({
         </div>
         <IdeaEditModal
           idea={idea}
-          themes={themes}
           show={this.state.showEditModal}
           onToggleModal={this.toggleEditModal}
         />

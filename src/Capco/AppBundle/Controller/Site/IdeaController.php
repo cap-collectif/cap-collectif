@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class IdeaController extends Controller
 {
@@ -102,19 +103,18 @@ class IdeaController extends Controller
 
         $idea = $em->getRepository('CapcoAppBundle:Idea')->getOneJoinUserReports($slug, $this->getUser());
 
-        if (!$idea || false === $idea->canDisplay()) {
+        if (!$idea || !$idea->canDisplay()) {
             throw $this->createNotFoundException($translator->trans('idea.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        $props = $serializer->serialize([
-            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
-            'idea' => $idea,
-            'votes' => $em->getRepository('CapcoAppBundle:IdeaVote')->getVotesForIdea($idea, 6),
-        ], 'json', SerializationContext::create()->setGroups(['Themes', 'Ideas', 'IdeaVotes', 'UsersInfos', 'UserMedias']));
+        $previewedVotes = $em->getRepository('CapcoAppBundle:IdeaVote')->getVotesForIdea($idea, 8);
+        $idea->setVotes(new ArrayCollection($previewedVotes));
+
+        $props = $serializer->serialize($idea, 'json', SerializationContext::create()->setGroups(['Ideas', 'IdeaVotes', 'UsersInfos', 'UserMedias']));
 
         return [
             'idea' => $idea,
-            'props' => $props,
+            'props' => json_decode($props, true),
         ];
     }
 }
