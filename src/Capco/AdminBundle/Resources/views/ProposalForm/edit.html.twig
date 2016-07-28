@@ -5,10 +5,6 @@
     <script type="text/javascript">
         $(document).ready( function() {
 
-            $(document).on('click', '#sonata-ba-field-container-{{ admin.uniqid }}_questions .sonata-ba-action', function() {
-              $('ul > li:nth-child(2)').hide();
-            });
-
             const usingThemesField = $("input#{{ admin.uniqid }}_usingThemes");
             const themeHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_themeHelpText");
             const themeMandatoryField = $("#sonata-ba-field-container-{{ admin.uniqid }}_themeMandatory");

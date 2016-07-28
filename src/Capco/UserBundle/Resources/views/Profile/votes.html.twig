@@ -1,12 +1,5 @@
-{% if votes|length > 0 %}
-    <ul class="media-list">
-        {% for vote in votes %}
-            {% include 'CapcoUserBundle:Profile:blockVote.html.twig' with {'vote': vote, 'profile': true, 'classes': 'block  block--bordered  box'} only %}
-        {% endfor %}
-    </ul>
-{% else %}
-    <div class="project__empty-block  text-center">
-        <p class="icon  cap-bubble-star-2"></p>
-        <p>{{ 'votes.none'|trans({}, 'CapcoAppBundle') }}</p>
-    </div>
-{% endif %}
+<ul class="media-list">
+    {% for vote in votes %}
+        {% include 'CapcoUserBundle:Profile:blockVote.html.twig' with {'vote': vote, 'profile': true, 'classes': 'block  block--bordered  box'} only %}
+    {% endfor %}
+</ul>

@@ -1,8 +1,5 @@
-{% if ideasCount > 0 %}
-    {{ react_intl_component('IdeasListApp', {'props': ideasProps}) }}
-{% else %}
-    <div class="project__empty-block  text-center">
-        <p class="icon  cap-bubble-star-2"></p>
-        <p>{{ 'user.profile.show.no_ideas'|trans({}, 'CapcoAppBundle') }}</p>
-    </div>
-{% endif %}
+{{ react_intl_component('IdeasListApp', {
+        'props': ideasProps,
+        'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
+    })
+}}
