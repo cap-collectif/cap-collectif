@@ -54,9 +54,8 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Proposal')
             ->getByUser($user)
         ;
-        $proposalsProps = $serializer->serialize([
+        $proposals = $serializer->serialize([
             'proposals' => $proposalsRaw,
-            'showAllVotes' => true
         ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
 
@@ -81,7 +80,7 @@ class ProfileController extends BaseController
             'arguments' => $arguments,
             'ideasProps' => $ideas,
             'ideasCount' => $ideasCount,
-            'proposalsProps' => $proposalsProps,
+            'proposals' => $proposals,
             'proposalsCount' => $proposalsCount,
             'replies' => $replies,
             'sources' => $sources,
@@ -194,9 +193,8 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Proposal')
             ->getByUser($user)
         ;
-        $proposalsProps = $serializer->serialize([
+        $proposals = $serializer->serialize([
             'proposals' => $proposalsRaw,
-            'showAllVotes' => true
         ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
         $replies = $this
@@ -219,7 +217,7 @@ class ProfileController extends BaseController
             'arguments' => $arguments,
             'ideasProps' => $ideas,
             'ideasCount' => $ideasCount,
-            'proposalsProps' => $proposalsProps,
+            'proposals' => $proposals,
             'proposalsCount' => $proposalsCount,
             'replies' => $replies,
             'sources' => $sources,
@@ -305,15 +303,14 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Proposal')
             ->getByUser($user)
         ;
-        $proposalProps = $serializer->serialize([
+        $proposals = $serializer->serialize([
             'proposals' => $proposalsRaw,
-            'showAllVotes' => true
         ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
 
         return [
             'user' => $user,
-            'proposalsProps' => $proposalProps,
+            'proposals' => $proposals,
             'proposalsCount' => $proposalsCount,
         ];
     }

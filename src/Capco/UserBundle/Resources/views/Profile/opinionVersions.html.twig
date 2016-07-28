@@ -1,3 +1,4 @@
+{% if versions|length > 0 %}
 <div class="block block--bordered">
     <ul class="media-list  opinion__list">
         {% for version in versions %}
@@ -9,3 +10,9 @@
         {% endfor %}
     </ul>
 </div>
+{% else %}
+    <div class="project__empty-block text-center">
+        <p class="icon cap-bubble-attention-6"></p>
+        <p>{{ 'user.profile.show.no_opinions_versions'|trans({}, 'CapcoAppBundle') }}</p>
+    </div>
+{% endif %}

@@ -1,5 +1,14 @@
-{{ react_intl_component('ProposalListApp', {
-        'props': proposalsProps,
-        'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-    })
-}}
+{% if proposalsCount > 0 %}
+    <div
+            id="render-proposals-list"
+            data-proposals='{{ proposals | escape }}'
+            data-show-all-votes=1
+    >
+        <p class="text-center">{{ 'global.loading' | trans({}, 'CapcoAppBundle') }}</p>
+    </div>
+{% else %}
+    <div class="project__empty-block  text-center">
+        <p class="icon  cap-bubble-star-2"></p>
+        <p>{{ 'user.profile.show.no_proposals'|trans({}, 'CapcoAppBundle') }}</p>
+    </div>
+{% endif %}
