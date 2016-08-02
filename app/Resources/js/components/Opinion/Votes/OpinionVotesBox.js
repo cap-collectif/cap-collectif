@@ -34,18 +34,8 @@ const OpinionVotesBox = React.createClass({
     return this.props.opinion.votes.length > 0 && widgetType === VOTE_WIDGET_BOTH;
   },
 
-  show() {
-    const widgetType = this.getOpinionType().voteWidgetType;
-    const { opinion } = this.props;
-    return widgetType !== VOTE_WIDGET_DISABLED && (
-        this.isContribuable()
-        || opinion.votes.length > 0
-        || this.getOpinionType().votesThreshold
-      );
-  },
-
   render() {
-    if (!this.show()) {
+    if (this.getOpinionType().voteWidgetType === VOTE_WIDGET_DISABLED) {
       return null;
     }
     const { opinion } = this.props;
@@ -58,12 +48,12 @@ const OpinionVotesBox = React.createClass({
         }
         <Row>
           <Col sm={12} md={8} style={{ paddingTop: '15px' }}>
-            <OpinionVotesButtons show={this.showVotesButtons()} disabled={!this.isContribuable()} opinion={opinion} />
+            <OpinionVotesButtons show disabled={!this.isContribuable()} opinion={opinion} />
             <OpinionVotesBar opinion={opinion} />
           </Col>
           {
-            this.showPiechart()
-              ? <Col sm={12} md={4}>
+            this.showPiechart() &&
+              <Col sm={12} md={4}>
                 <VotePiechart
                   top={20}
                   height={'180px'}
@@ -73,7 +63,6 @@ const OpinionVotesBox = React.createClass({
                   mitige={opinion.votes_mitige}
                 />
               </Col>
-              : null
           }
         </Row>
       </div>
