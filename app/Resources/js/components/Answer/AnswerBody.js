@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedDate } from 'react-intl';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
@@ -7,7 +7,7 @@ import moment from 'moment';
 const AnswerBody = React.createClass({
   displayName: 'AnswerBody',
   propTypes: {
-    answer: React.PropTypes.object.isRequired,
+    answer: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
