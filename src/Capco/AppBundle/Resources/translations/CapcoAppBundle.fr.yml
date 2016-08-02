@@ -864,7 +864,7 @@ user:
       address2: Complément d'adresse
       zip_code: Code postal
       city: Ville
-      neighborhood: Quartier
+      neighborhood: Localisation
       profile: Profil public
       account: Compte
       mobile: Mobile
@@ -1093,7 +1093,7 @@ project_download:
     content: Contenu
     content_type: Type de contenu
     created: Création
-    district: Quartier
+    district: Localisation
     enabled: Publié
     estimation: Estimation financière
     id: Identifiant

@@ -267,7 +267,7 @@
     },
     "select": "Choisir une valeur",
     "select_categories": "Toutes les catégories",
-    "select_districts": "Tous les quartiers",
+    "select_districts": "Toutes les localisations",
     "select_statuses": "Tous les statuts",
     "select_themes": "Tous les th\u00e8mes",
     "select_types": "Tous les contributeurs",
@@ -550,7 +550,7 @@
       },
       "list": {
         "costs": "R\u00e9partition des co\u00fbts par proposition",
-        "districts": "R\u00e9partition par quartiers",
+        "districts": "R\u00e9partition par localisations",
         "themes": "R\u00e9partition par th\u00e8mes",
         "userTypes": "R\u00e9partition par profil de l'auteur",
         "votes": "R\u00e9partition des votes par propositions"
@@ -590,7 +590,7 @@
     "constraints": {
       "body": "La description de la proposition doit faire au moins 2 caract\u00e8res.",
       "category": "Merci de sélectionner une catégorie.",
-      "district": "Merci de s\u00e9lectionner un quartier.",
+      "district": "Merci de s\u00e9lectionner une localisation.",
       "field_mandatory": "Ce champ est obligatoire.",
       "theme": "Merci de s\u00e9lectionner un th\u00e8me.",
       "title": "Le titre de la proposition doit faire au moins 2 caract\u00e8res."
@@ -604,7 +604,7 @@
     "detail":  {
       "advancement": "État d'avancement"
     },
-    "district": "Quartier",
+    "district": "Localisation",
     "empty": "Aucune proposition",
     "infos": {
       "header": "{user}, le {createdDate}"
@@ -640,7 +640,7 @@
     "search": "Rechercher une proposition",
     "select": {
       "category": "Sélectionnez une catégorie",
-      "district": "S\u00e9lectionnez un quartier",
+      "district": "S\u00e9lectionnez une localisation",
       "theme": "S\u00e9lectionnez un th\u00e8me"
     },
     "tabs": {

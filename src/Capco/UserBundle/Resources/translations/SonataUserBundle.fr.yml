@@ -11,7 +11,7 @@ form:
   label_is_terms_accepted: Termes acceptés
   label_locked: Verrouillé
   label_media: Avatar
-  label_neighborhood: Quartier
+  label_neighborhood: Localisation
   label_real_roles: Rôles
   label_twitter_url: Lien Twitter
   label_user_type: Type de profil
@@ -62,7 +62,7 @@ show:
   label_google_access_token: Jeton d'accès Google+
   label_google_id: Id Google+
   label_google_url: Lien Google+
-  label_neighborhood: Quartier
+  label_neighborhood: Localisation
   label_twitter_access_token: Jeton d'accès Twitter
   label_twitter_id: Id Twitter
   label_twitter_url: Lien Twitter

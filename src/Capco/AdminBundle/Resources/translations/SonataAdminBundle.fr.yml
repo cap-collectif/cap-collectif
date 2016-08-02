@@ -50,7 +50,7 @@ admin.label.opinion_type: Éléments de structure
 admin.label.opinion_version: Modifications
 admin.label.page: Pages statiques
 admin.label.post: Articles
-admin.label.district: Quartiers
+admin.label.district: Localisation
 admin.label.recent_contributions: Contributions à traiter
 admin.label.recent_posts: "Derniers articles"
 admin.label.reporting: Signalements
@@ -465,7 +465,7 @@ admin:
       collect_step: Étape de collecte
       comments: Commentaires
       created_at: Création
-      district: Quartier
+      district: Localisation
       enabled: Publié
       form: Étape de dépôt
       group_content: Proposition
@@ -484,7 +484,7 @@ admin:
       likers: Coup(s) de coeur
       link: Lien
       no_category: Aucune catégorie
-      no_district: Aucun quartier
+      no_district: Aucune localisation
       no_status: Aucun statut
       no_theme: Aucun thème
       project: Projet
@@ -507,13 +507,13 @@ admin:
       created_at: Création
       description: Description
       description_help_text: Texte d'aide pour le champ Description.
-      district_help_text: Texte d'aide pour le champ Quartier.
+      district_help_text: Texte d'aide pour le champ Localisation.
       group_categories: Catégories
       group_general: Formulaire
       group_questions: Questions
       group_help_texts: Textes d'aide
       help_text_description_help_text: Le champ Description est présent par défaut.
-      help_text_district_help_text: Le champ Quartier est présent par défaut.
+      help_text_district_help_text: Le champ Localisation est présent par défaut.
       help_text_title_help_text: Le champ Titre est présent par défaut.
       questions: Questions
       theme_help_text: Texte d'aide pour le champ Thème.
@@ -783,7 +783,7 @@ capco:
     newsletter: Lettre d'information
     ideas: Idées
     themes: Thèmes
-    districts: Quartiers
+    districts: Localisations
     registration: Inscription
     login_facebook: Authentification avec Facebook
     login_gplus: Authentification avec Google+
