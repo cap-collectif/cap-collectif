@@ -27,8 +27,7 @@ class OpinionController extends Controller
      */
     public function showOpinionsAction(Project $project, ConsultationStep $currentStep)
     {
-        $tree = $this->get('capco.opinion_types.resolver')
-            ->getGroupedOpinionsForStep($currentStep);
+        $tree = $this->get('capco.opinion_types.resolver')->getGroupedOpinionsForStep($currentStep);
 
         return [
             'blocks' => $tree,
@@ -54,8 +53,6 @@ class OpinionController extends Controller
      * @param $page
      * @param Request $request
      * @param $opinionsSort
-     *
-     * @return array
      */
     public function showByTypeAction(Project $project, ConsultationStep $currentStep, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
     {
@@ -80,8 +77,6 @@ class OpinionController extends Controller
         $opinions = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:Opinion')
             ->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType->getId(), 10, $page, $filter);
-        $nav = $this->get('capco.opinion_types.resolver')
-            ->getNavForStep($currentStep);
 
         return [
             'currentUrl' => $currentUrl,
@@ -93,7 +88,6 @@ class OpinionController extends Controller
             'opinionsSort' => $filter,
             'opinionSortOrders' => Opinion::$sortCriterias,
             'currentStep' => $currentStep,
-            'nav' => $nav,
             'currentRoute' => $request->get('_route'),
         ];
     }
@@ -118,8 +112,6 @@ class OpinionController extends Controller
 
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
 
-        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
-
         return [
             'version' => $version,
             'currentStep' => $currentStep,
@@ -128,7 +120,6 @@ class OpinionController extends Controller
             'sources' => $sources,
             'opinionType' => $opinion->getOpinionType(),
             'votes' => $opinion->getVotes(),
-            'nav' => $nav,
         ];
     }
 
@@ -215,7 +206,6 @@ class OpinionController extends Controller
      * @param $opinionSlug
      * @param Request $request
      *
-     * @return array
      * @Template("CapcoAppBundle:Opinion:show.html.twig")
      */
     public function showOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
@@ -231,8 +221,6 @@ class OpinionController extends Controller
 
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
 
-        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
-
         return [
             'currentUrl' => $currentUrl,
             'currentStep' => $currentStep,
@@ -240,7 +228,6 @@ class OpinionController extends Controller
             'opinion' => $opinion,
             'opinionType' => $opinion->getOpinionType(),
             'project_steps' => $steps,
-            'nav' => $nav,
         ];
     }
 

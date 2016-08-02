@@ -56,7 +56,7 @@ class ProfileController extends BaseController
         ;
         $proposalsProps = $serializer->serialize([
             'proposals' => $proposalsRaw,
-            'showAllVotes' => true
+            'showAllVotes' => true,
         ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
 
@@ -196,7 +196,7 @@ class ProfileController extends BaseController
         ;
         $proposalsProps = $serializer->serialize([
             'proposals' => $proposalsRaw,
-            'showAllVotes' => true
+            'showAllVotes' => true,
         ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
         $replies = $this
@@ -307,7 +307,7 @@ class ProfileController extends BaseController
         ;
         $proposalProps = $serializer->serialize([
             'proposals' => $proposalsRaw,
-            'showAllVotes' => true
+            'showAllVotes' => true,
         ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
 

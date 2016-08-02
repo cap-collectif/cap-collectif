@@ -184,7 +184,7 @@ class ProjectController extends Controller
         $filename .= $step->getSlug().'.xls';
 
         $request = $this->get('request_stack')->getCurrentRequest();
-        
+
         if (!file_exists($path.$filename)) {
             $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('project.download.not_yet_generated', [], 'CapcoAppBundle'));
 

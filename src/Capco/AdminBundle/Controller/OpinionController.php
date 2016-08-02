@@ -416,28 +416,7 @@ class OpinionController extends Controller
 
         foreach ($opinionTypes as $root) {
             $ct = $root->getConsultationStepType()->getTitle();
-            $consultationStepTypes[$ct][] = $otRepo
-                ->childrenHierarchy($root, false, [
-                    'decorate' => true,
-                    'rootOpen' => '',
-                    'rootClose' => '',
-                    'nodeDecorator' => function ($node) {
-                        $url = $this->admin->generateUrl('create', ['opinion_type' => $node['id']]);
-                        $levelIndicator = ' ';
-                        for ($i = 0; $i < $node['level']; ++$i) {
-                            $levelIndicator = '-'.$levelIndicator;
-                        }
-
-                        return
-                            '<a href="'.$url.'">'
-                            .'<i class="fa fa-plus-circle" style="margin-right: 10px"></i>'
-                            .$levelIndicator.$node['title']
-                            .'</a>'
-                        ;
-                    },
-                    'childSort' => ['field' => 'position', 'dir' => 'asc'],
-                ], true)
-            ;
+            $consultationStepTypes[$ct] = $otRepo->childrenHierarchy($root);
         }
 
         return $consultationStepTypes;

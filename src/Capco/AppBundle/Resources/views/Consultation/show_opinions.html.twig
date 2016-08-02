@@ -38,15 +38,15 @@
             </div>
         {% endif %}
 
-        {% if block.children|length %}
-            {{ _self.display_child(block.children, depth + 1, currentStep, project, opinionSortOrders) }}
+        {% if block.__children is defined and block.__children|length %}
+            {{ _self.display_child(block.__children, depth + 1, currentStep, project, opinionSortOrders) }}
         {% endif %}
 
     {% endfor %}
 {% endmacro %}
 
 {% if blocks|length > 0 %}
-    {{ tree.display_child(blocks, 0, currentStep, project, opinionSortOrders) }}
+  {{ tree.display_child(blocks, 0, currentStep, project, opinionSortOrders) }}
 {% else %}
     <div class="project__empty-block  text-center">
         <p class="icon  cap-bubble-attention-6"></p>

@@ -24,15 +24,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class SelectionStepsController extends FOSRestController
 {
-
-  /**
-   * @Get("/selection_steps/{selection_step_id}")
-   * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
-   * @View(statusCode=200, serializerGroups={"Statuses", "Steps", "SelectionSteps"})
-   */
+    /**
+    * @Get("/selection_steps/{selection_step_id}")
+    * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
+    * @View(statusCode=200, serializerGroups={"Statuses", "Steps", "SelectionSteps"})
+    */
    public function getBySelectionStepAction(SelectionStep $selectionStep)
    {
-      return $selectionStep;
+       return $selectionStep;
    }
 
     /**

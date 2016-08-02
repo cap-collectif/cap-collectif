@@ -9,7 +9,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * OpinionType.
  *
- * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="opinion_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeRepository")
  */
@@ -75,8 +74,6 @@ class OpinionType
     private $slug;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
@@ -184,34 +181,10 @@ class OpinionType
     protected $appendixTypes;
 
     /**
-     * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="children", cascade={"persist"})
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $parent = null;
-
-    /**
-     * @Gedmo\TreeLeft
-     * @ORM\Column(type="integer")
-     */
-    private $lft;
-    /**
-     * @Gedmo\TreeRight
-     * @ORM\Column(type="integer")
-     */
-    private $rgt;
-
-    /**
-     * @Gedmo\TreeRoot
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    protected $root;
-
-    /**
-     * @Gedmo\TreeLevel
-     * @ORM\Column(name="lvl", type="integer")
-     */
-    protected $level;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="parent", cascade={"persist"})
@@ -612,44 +585,11 @@ class OpinionType
         return $this->parent;
     }
 
-    /**
-     * @param mixed $parent
-     */
-    public function setParent($parent)
+    public function setParent(OpinionType $parent = null)
     {
         $this->parent = $parent;
-    }
 
-    /**
-     * @return mixed
-     */
-    public function getLft()
-    {
-        return $this->lft;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRgt()
-    {
-        return $this->rgt;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRoot()
-    {
-        return $this->root;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLevel()
-    {
-        return $this->level;
+        return $this;
     }
 
     /**

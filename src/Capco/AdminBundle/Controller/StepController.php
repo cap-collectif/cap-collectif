@@ -31,15 +31,15 @@ class StepController extends CRUDController
         $boolQuery = new BoolQuery();
         $boolQuery->addMust($titleQuery);
         $boolQuery->addMust(new Term([
-          'proposalForm.id' => $project->getFirstStep()->getProposalForm()->getId()
+          'proposalForm.id' => $project->getFirstStep()->getProposalForm()->getId(),
         ]));
 
         $query = new Query($boolQuery);
         $query->setFields(['id', 'title']);
         $results = $this->get('fos_elastica.index.app.proposal')->search($query);
 
-        $items = array_map(function($result) {
-            return [ 'id' => $result->getData()['id'], 'label' => $result->getData()['title'] ];
+        $items = array_map(function ($result) {
+            return ['id' => $result->getData()['id'], 'label' => $result->getData()['title']];
         }, $results->getResults());
 
         return new JsonResponse([

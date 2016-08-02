@@ -26,18 +26,10 @@ class OpinionTypeAdmin extends Admin
             $consultationStepTypeId = $this->getParentFieldDescription()->getAdmin()->getSubject()->getId();
         } elseif ($subject && $subject->getConsultationStepType()) {
             $consultationStepTypeId = $subject->getConsultationStepType()->getId();
-        } elseif ($subject && $subject->getRoot()) {
-            $root = $this
-                ->getConfigurationPool()
-                ->getContainer()
-                ->get('doctrine.orm.entity_manager')
-                ->getRepository('CapcoAppBundle:OpinionType')
-                ->find($subject->getRoot())
-            ;
-            if ($root) {
-                $cst = $root->getConsultationStepType();
-                $consultationStepTypeId = $cst ? $cst->getId() : null;
-            }
+        } elseif ($subject && $subject->getParent()) {
+            $root = $subject->getParent();
+            $cst = $root->getConsultationStepType();
+            $consultationStepTypeId = $cst ? $cst->getId() : null;
         }
 
         if ($consultationStepTypeId === null) {
@@ -170,20 +162,15 @@ class OpinionTypeAdmin extends Admin
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:OpinionType')
             ->createQueryBuilder('ot')
-            ->where('ot.root IN (
-                SELECT ot2.id
-                FROM CapcoAppBundle:OpinionType ot2
-                LEFT JOIN ot2.consultationStepType ct
-                WHERE ot2.parent IS NULL
-                AND ct.id = ?0
-            )')
-            ->setParameter(0, $consultationStepTypeId)
+            ->leftJoin('ot.consultationStepType', 'consultationStepType')
+            ->where('consultationStepType.id = :consultationStepTypeId')
+            ->setParameter('consultationStepTypeId', $consultationStepTypeId)
         ;
 
         if ($this->getSubject()->getId()) {
             $qb
-                ->andWhere('ot.id != ?1')
-                ->setParameter(1, $this->getSubject()->getId())
+                ->andWhere('ot.id != :otId')
+                ->setParameter('otId', $this->getSubject()->getId())
             ;
         }
 
@@ -216,40 +203,6 @@ class OpinionTypeAdmin extends Admin
                     ->find($consultationStepTypeId);
                 $type->setConsultationStepType($consultationStepType);
             }
-        }
-    }
-
-    public function postPersist($object)
-    {
-        $this->verifyTree($object);
-    }
-
-    public function postUpdate($object)
-    {
-        $this->verifyTree($object);
-    }
-
-    public function postRemove($object)
-    {
-        $this->verifyTree($object);
-    }
-
-    public function verifyTree($object)
-    {
-        $em = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine.orm.entity_manager')
-        ;
-        $repo = $em->getRepository('CapcoAppBundle:OpinionType');
-
-        if (is_array($repo->verify())) { // we have errors
-            $repo->recover();
-            $em->flush(); // important: flush recovered nodes
-        }
-
-        if ($object->getParent()) {
-            $repo->reorder($object->getParent(), 'position');
-            $em->flush();
         }
     }
 }

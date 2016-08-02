@@ -508,8 +508,6 @@ class StepController extends Controller
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        $nav = $this->get('capco.opinion_types.resolver')->getNavForStep($currentStep);
-
         $stepProps = $serializer->serialize([
             'step' => $currentStep,
         ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
@@ -518,7 +516,6 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $currentStep,
             'stepProps' => $stepProps,
-            'nav' => $nav,
         ]);
 
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {

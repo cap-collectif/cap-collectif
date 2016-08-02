@@ -321,38 +321,30 @@ class OpinionAdmin extends Admin
 
     private function createQueryBuilderForStep()
     {
-        $opinionTypeId = $this->getPersistentParameter('opinion_type');
-
-        if (!$opinionTypeId) {
-            return;
+        if (!$this->getPersistentParameter('opinion_type')) {
+          return null;
         }
-
-        $root = $this->getConfigurationPool()
+        
+        $em = $this->getConfigurationPool()
             ->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:OpinionType')
-            ->createQueryBuilder('ot')
-            ->where('ot.id IN (SELECT ot2.root FROM CapcoAppBundle:OpinionType ot2 WHERE ot2.id = ?0)')
-            ->setParameter(0, $opinionTypeId)
-            ->getQuery()
-            ->getOneOrNullResult();
+            ->get('doctrine.orm.entity_manager');
 
-        if (!$root) {
+        $opinionType = $em
+            ->getRepository('CapcoAppBundle:OpinionType')
+            ->find($this->getPersistentParameter('opinion_type'));
+
+        if (!$opinionType) {
             throw new \Exception('Invalid opinion type.');
         }
 
-        $consultationStepType = $root->getConsultationStepType();
+        $consultationStepType = $opinionType->getConsultationStepType();
 
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine.orm.entity_manager')
+        return $em
             ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
             ->createQueryBuilder('cs')
-            ->where('cs.consultationStepType = ?0')
-            ->setParameter(0, $consultationStepType)
+            ->where('cs.consultationStepType = :stepType')
+            ->setParameter('stepType', $consultationStepType)
         ;
-
-        return $qb;
     }
 
     public function getTemplate($name)

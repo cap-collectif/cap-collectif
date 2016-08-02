@@ -110,21 +110,12 @@ class ConsultationStepTypeAdmin extends Admin
     private function createQueryForOpinionTypes()
     {
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
-        $qb = $this->getConfigurationPool()
+
+        return $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:OpinionType')
-            ->getRootNodesQueryBuilder('position', 'ASC');
-
-        if ($subject) {
-            $qb
-                ->andWhere('node.consultationStepType = :ct')
-                ->setParameter('ct', $subject);
-        } else {
-            $qb->andWhere('node.consultationStepType IS NULL');
-        }
-
-        return $qb->getQuery();
+            ->getOrderedRootNodesQuery($subject);
     }
 
     public function getTemplate($name)

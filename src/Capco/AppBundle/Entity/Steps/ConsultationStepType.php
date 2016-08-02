@@ -172,13 +172,13 @@ class ConsultationStepType
      */
     public function getRootOpinionTypes()
     {
-        $ots = [];
-        foreach ($this->opinionTypes as $ot) {
-            if ($ot->getLevel() === 0) {
-                $ots[] = $ot;
+        $roots = [];
+        foreach ($this->opinionTypes as $opinionType) {
+            if (!$opinionType->getParent()) {
+                $roots[] = $opinionType;
             }
         }
 
-        return $ots;
+        return $roots;
     }
 }

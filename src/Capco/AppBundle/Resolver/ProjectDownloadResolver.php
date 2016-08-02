@@ -71,8 +71,6 @@ class ProjectDownloadResolver
         'trashed',
         'trashed_date',
         'trashed_reason',
-        'annotation',
-        'note',
     ];
 
     protected $em;
@@ -346,8 +344,6 @@ class ProjectDownloadResolver
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorEmail = $author ? $author['email'] : $na;
-        $annotation = $proposal['annotation'] ?? $na;
-        $note = $proposal['rating'] ?? '';
 
         return $item = [
             'id' => $proposal['id'],
@@ -376,8 +372,6 @@ class ProjectDownloadResolver
             'estimation' => $proposal['estimation'] ? $proposal['estimation'].' €' : '',
             'answer' => $proposal['answer'] ? $this->getProposalAnswer($proposal['answer']) : '',
             'nbVotes' => $proposal['votesCount'] ? $proposal['votesCount'] : 0,
-            'annotation' => $annotation,
-            'note' => $note,
         ];
     }
 
@@ -389,8 +383,6 @@ class ProjectDownloadResolver
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorEmail = $author ? $author['email'] : $vote['email'];
-        $annotation = $vote['annotation'] ?? $na;
-        $note = $vote['rating'] ?? '';
 
         return $item = [
             'id' => $vote['id'],
@@ -417,8 +409,6 @@ class ProjectDownloadResolver
             'estimation' => $na,
             'answer' => $na,
             'nbVotes' => $na,
-            'annotation' => $annotation,
-            'note' => $note,
         ];
     }
 
@@ -705,7 +695,7 @@ class ProjectDownloadResolver
         $item = [
             'id' => $reply['id'],
             'author' => $reply['author']['username'],
-            'phone' => $reply['author']['phone'] ? (string)$reply['author']['phone'] : '',
+            'phone' => $reply['author']['phone'] ? (string) $reply['author']['phone'] : '',
             'created' => $this->dateToString($reply['createdAt']),
             'anonymous' => $this->booleanToString($reply['private']),
         ];

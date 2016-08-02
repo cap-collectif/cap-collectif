@@ -13,6 +13,23 @@
 {% endspaceless %}
 {% endblock %}
 
+
+{% macro createOpinionForType(opinionType) %}
+  <li>
+    <a href="{{ url('admin_capco_app_opinion_create', {'opinion_type': opinionType.id}) }}">
+      <i class="fa fa-plus-circle" style="margin-right: 10px"></i>
+      {{ opinionType.title }}
+    </a>
+  </li>
+  {% if opinionType.__children | length > 0 %}
+    <ul>
+    {% for child in opinionType.__children %}
+     {{ _self.createOpinionForType(child) }}
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
 {% block list_table %}
     {{ parent() }}
     <div class="modal fade" id="opinion-create-modal" tabindex="-1" role="dialog">
@@ -31,9 +48,11 @@
                                         {{ consultationStepType }}
                                     </span>
                                 </li>
-                                {% for html in opinionTypes %}
-                                    {{ html | raw }}
+                                <ul>
+                                {% for opinionType in opinionTypes %}
+                                  {{ _self.createOpinionForType(opinionType )}}
                                 {% endfor %}
+                                </ul>
                             {% endfor %}
                         </ul>
                     {% endif %}

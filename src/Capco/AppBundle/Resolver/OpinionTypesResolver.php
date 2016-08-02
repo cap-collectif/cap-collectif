@@ -20,76 +20,22 @@ class OpinionTypesResolver
         $this->opinionTypeRepo = $opinionTypeRepo;
         $this->opinionRepo = $opinionRepo;
         $this->router = $router;
-        $this->opinionTypeRepo->setChildrenIndex('children');
-    }
-
-    public function getNavForStep(ConsultationStep $step)
-    {
-        $ct = $step->getConsultationStepType();
-
-        if ($ct === null) {
-            return [];
-        }
-
-        $url = $this->router->generate('app_project_show_consultation', ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()]);
-
-        $options = [
-            'decorate' => true,
-            'rootOpen' => '<ul class="nav">',
-            'rootClose' => '</ul>',
-            'nodeDecorator' => function ($node) use ($url) {
-                $link = $url.'#opinion-type--'.$node['slug'];
-                $levelClass = 'nav--level-'.$node['level'];
-
-                return
-                    '<a class='.$levelClass.' href="'.$link.'">'
-                    .'<i class="fa fa-plus-circle"></i>'
-                    .$node['title']
-                    .'</a>'
-                    ;
-            },
-            'childSort' => ['field' => 'position', 'dir' => 'asc'],
-        ];
-
-        $nav = '';
-
-        foreach ($ct->getRootOpinionTypes() as $root) {
-            $nav .= $this->opinionTypeRepo->childrenHierarchy($root, false, $options, true);
-        }
-
-        return $nav;
-    }
-
-    public function getHierarchyForConsultationStepType(ConsultationStepType $ct, $options = [])
-    {
-        if ($ct === null) {
-            return [];
-        }
-
-        $opinionTypes = [];
-        foreach ($ct->getRootOpinionTypes() as $root) {
-            $opinionTypes = array_merge(
-                $opinionTypes,
-                $this->opinionTypeRepo->childrenHierarchy($root, false, $options, true)
-            );
-        }
-
-        return $opinionTypes;
     }
 
     public function getGroupedOpinionsForStep(ConsultationStep $step, $limit = 5, $page = 1)
     {
-        $tree = $this->getHierarchyForConsultationStepType($step->getConsultationStepType());
+        $roots = $step->getConsultationStepType()->getRootOpinionTypes();
 
         $build = function ($tree) use (&$build, &$step, &$limit, &$page) {
             $childrenTree = [];
-            foreach ($tree as $node) {
+            foreach ($tree as $type) {
+                $node = $this->opinionTypeRepo->getAsArrayById($type->getId());
                 $node['opinions'] = $this->opinionRepo
-                    ->getByOpinionTypeAndConsultationStepOrdered($step, $node['id'], $limit, $page, $node['defaultFilter'])
+                    ->getByOpinionTypeAndConsultationStepOrdered($step, $type->getId(), $limit, $page, $type->getDefaultFilter())
                 ;
                 $node['total_opinions_count'] = count($node['opinions']);
-                if (count($node['children']) > 0) {
-                    $node['children'] = $build($node['children']);
+                if ($type->getChildren()->count() > 0) {
+                    $node['__children'] = $build($type->getChildren());
                 }
                 $childrenTree[] = $node;
             }
@@ -97,7 +43,7 @@ class OpinionTypesResolver
             return $childrenTree;
         };
 
-        return $build($tree);
+        return $build($roots);
     }
 
     public function getAllForConsultationStepType(ConsultationStepType $ct)

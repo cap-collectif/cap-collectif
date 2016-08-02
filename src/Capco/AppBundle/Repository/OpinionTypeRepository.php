@@ -4,13 +4,63 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStepType;
-use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
-
+use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\OpinionType;
+use Doctrine\ORM\Query;
 /**
  * OpinionTypeRepository.
  */
-class OpinionTypeRepository extends NestedTreeRepository
+class OpinionTypeRepository extends EntityRepository
 {
+    public function childrenHierarchy(OpinionType $parent)
+    {
+        $children = $this->getChildrens($parent);
+        foreach ($children as &$child) {
+            $child['__children'] = $this->childrenHierarchy($this->find($child['id']));
+        }
+
+        return $children;
+    }
+
+    public function getAsArrayById(int $id)
+    {
+        $qb = $this->createQueryBuilder('ot')
+          ->where('ot.id = :id')
+          ->setParameter('id', $id)
+    ;
+
+        return $qb->getQuery()->getSingleResult(Query::HYDRATE_ARRAY);
+    }
+
+    public function getChildrens(OpinionType $parent)
+    {
+        $qb = $this->createQueryBuilder('ot')
+          ->andWhere('ot.parent = :parent')
+          ->orderBy('ot.position', 'ASC')
+          ->setParameter('parent', $parent)
+    ;
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function getOrderedRootNodesQuery(ConsultationStepType $stepType = null)
+    {
+        $qb = $this->createQueryBuilder('ot')
+              ->andWhere('ot.parent is NULL')
+              ->orderBy('ot.position', 'ASC')
+        ;
+
+        if ($stepType) {
+            $qb
+                ->andWhere('ot.consultationStepType = :ct')
+                ->setParameter('ct', $stepType);
+        } else {
+            $qb->andWhere('ot.consultationStepType IS NULL');
+        }
+
+        return $qb->getQuery();
+    }
+
     /**
      * Get all opinionTypes with opinions for user.
      *
