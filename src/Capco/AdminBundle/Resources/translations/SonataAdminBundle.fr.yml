@@ -50,7 +50,7 @@ admin.label.opinion_type: Éléments de structure
 admin.label.opinion_version: Modifications
 admin.label.page: Pages statiques
 admin.label.post: Articles
-admin.label.district: Localisation
+admin.label.district: Localisations
 admin.label.recent_contributions: Contributions à traiter
 admin.label.recent_posts: "Derniers articles"
 admin.label.reporting: Signalements
