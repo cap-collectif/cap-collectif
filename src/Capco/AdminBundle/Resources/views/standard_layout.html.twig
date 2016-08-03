@@ -1,20 +1,22 @@
 {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	<link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
+    {{ parent() }}
+    <link href="{{ asset('css/jquery.minicolors.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block javascripts %}
-	{{ parent() }}
-	<script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
-	<script type="text/javascript">
-		$(window).on('load', function() {
-			$('.minicolors-input').minicolors({
-				theme: 'bootstrap'
-			});
-		});
-	</script>
+    {{ parent() }}
+    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/jquery.minicolors.js') }}"></script>
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('.minicolors-input').minicolors({
+                theme: 'bootstrap'
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block logo %}
