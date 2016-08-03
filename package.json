@@ -60,12 +60,12 @@
     "moment": "^2.11.2",
     "process-env-brunch": "^1.4.4-d",
     "quill": "^0.20.1",
-    "react": "^0.14.8",
+    "react": "^15.3.0",
     "react-bootstrap": "^0.29.5",
-    "react-checkbox-group": "^0.3.2",
+    "react-checkbox-group": "https://github.com/spyl94/react-checkbox-group/tarball/296721a62a682c5e441bdd449704550b69257af9",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
-    "react-dom": "^0.14.8",
+    "react-dom": "^15.3.0",
     "react-dropzone": "^3.3.4",
     "react-google-charts": "^1.0.2",
     "react-google-recaptcha": "^0.5.2",
@@ -86,7 +86,6 @@
     "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
-    "babel-plugin-rewire": "^1.0.0-rc-2",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.4.2",
     "chai-subset": "^1.2.2",
@@ -100,6 +99,6 @@
     "fb-flo-brunch": "^1.7.22",
     "jscs": "^2.9.0",
     "mocha": "^2.4.5",
-    "react-addons-test-utils": "^0.14.8"
+    "react-addons-test-utils": "^15.3.0"
   }
 }

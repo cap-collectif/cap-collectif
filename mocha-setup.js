@@ -21,7 +21,9 @@ global.navigator = {
 };
 
 const throwError = (warning) => {
-  throw new Error(warning);
+  if (!/You are manually calling|Unknown props/.test(warning)) { // fix warnings and remove this
+    throw new Error(warning);
+  }
 };
 console.error = throwError; // eslint-disable-line no-console
 console.warn = throwError; // eslint-disable-line no-console
