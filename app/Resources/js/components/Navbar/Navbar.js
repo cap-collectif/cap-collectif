@@ -42,7 +42,7 @@ const Navbar = React.createClass({
     const tempItems = this.state.items.concat(this.state.moreItems);
     let items = [];
     const moreItems = [];
-    if (window.innerWidth > 768) { // Only applied to window from sm size (otherwise menu is collapsed)
+    if (window.innerWidth >= 768) { // Only applied to window from sm size (otherwise menu is collapsed)
       const containerWidth = this.getPixelsWidth(this.container) - 30; // Minus padding
       const seeMoreDropdownWidth = this.getPixelsWidth(this.seeMoreDropdown) || 75; // Approximate size of menu item
       const headerWidth = this.getPixelsWidth(this.header);
@@ -66,8 +66,7 @@ const Navbar = React.createClass({
       items: items,
       moreItems: moreItems,
     }, () => {
-      const width = navigator.userAgent.match(/iPad/i) ? screen.width : window.innerWidth;
-      if (width >= 768 && ReactDOM.findDOMNode(this.container).clientHeight > 53) { // 53 => 50px (navbar height) + 3px margin (just in case)
+      if (window.innerWidth >= 768 && ReactDOM.findDOMNode(this.container).clientHeight > 53) { // 53 => 50px (navbar height) + 3px margin (just in case)
         this.autocollapseNavbar();
       }
     });
