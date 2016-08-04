@@ -1,4 +1,3 @@
-/* @flow */
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';

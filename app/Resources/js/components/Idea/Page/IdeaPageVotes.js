@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { fetchIdeaVotes } from '../../../redux/modules/idea';
 import { Row, Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { IntlMixin, FormattedMessage } from 'react-intl';
@@ -8,9 +9,9 @@ import AllVotesModal from '../../Votes/AllVotesModal';
 
 const IDEA_VOTES_PREVIEW = 8;
 
-const IdeaPageVotes = React.createClass({
+export const IdeaPageVotes = React.createClass({
   propTypes: {
-    dispatch: PropTypes.func.isRequired,
+    fetchIdeaVotes: PropTypes.func.isRequired,
     idea: PropTypes.object.isRequired,
     className: PropTypes.string,
   },
@@ -29,7 +30,7 @@ const IdeaPageVotes = React.createClass({
   },
 
   componentDidMount() {
-
+    this.props.fetchIdeaVotes(this.props.idea);
   },
 
   showModal() {
@@ -93,4 +94,10 @@ const IdeaPageVotes = React.createClass({
 
 });
 
-export default connect()(IdeaPageVotes);
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchIdeaVotes: (idea) => dispatch(fetchIdeaVotes(idea)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(IdeaPageVotes);

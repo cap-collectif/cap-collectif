@@ -6,7 +6,7 @@ import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
 import Input from '../../Form/Input';
 
-const IdeaForm = React.createClass({
+export const IdeaForm = React.createClass({
   propTypes: {
     themes: PropTypes.array.isRequired,
     themeId: PropTypes.number,

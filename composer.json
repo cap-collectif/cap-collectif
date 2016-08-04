@@ -53,7 +53,7 @@
         "sonata-project/admin-bundle": "~2.3@dev",
         "sonata-project/doctrine-orm-admin-bundle": "~2.3@dev",
         "sonata-project/block-bundle": "~2.2",
-        "sonata-project/media-bundle": "dev-master#5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
+        "sonata-project/media-bundle": "dev-master#2c655a5673af10964ffc032fc451bbb2dcc98819",
         "sonata-project/user-bundle": "~2.2@dev",
         "sonata-project/datagrid-bundle": "~2.2@dev",
         "sonata-project/exporter": "~1.4",

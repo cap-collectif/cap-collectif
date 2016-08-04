@@ -79,6 +79,7 @@
     "readmore": "0.0.2",
     "redux": "^3.4.0",
     "redux-form": "6.0.0-rc.3",
+    "redux-saga": "^0.11.0",
     "sass-brunch": "2.6.2",
     "sinon": "^1.17.3",
     "uglify-js-brunch": "^2.0.1",

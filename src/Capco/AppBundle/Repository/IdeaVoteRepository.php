@@ -48,6 +48,18 @@ class IdeaVoteRepository extends EntityRepository
             ->getArrayResult();
     }
 
+    public function getVotesCountForIdea(Idea $idea)
+    {
+        $qb = $this->createQueryBuilder('iv');
+
+        $qb->select('count(iv.id)')
+            ->where('iv.idea = :idea')
+            ->setParameter('idea', $idea)
+        ;
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function getVotesForIdea(Idea $idea, $limit = null, $offset = 0)
     {
         $qb = $this->createQueryBuilder('iv')

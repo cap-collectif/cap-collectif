@@ -110,7 +110,11 @@ class IdeaController extends Controller
         $previewedVotes = $em->getRepository('CapcoAppBundle:IdeaVote')->getVotesForIdea($idea, 8);
         $idea->setVotes(new ArrayCollection($previewedVotes));
 
-        $props = $serializer->serialize($idea, 'json', SerializationContext::create()->setGroups(['Ideas', 'IdeaVotes', 'UsersInfos', 'UserMedias']));
+        $props = $serializer->serialize(
+          $idea,
+          'json',
+          SerializationContext::create()->setSerializeNull(true)->setGroups(['Ideas', 'UsersInfos', 'UserMedias'])
+        );
 
         return [
             'idea' => $idea,

@@ -100,19 +100,31 @@ class IdeasController extends FOSRestController
     /**
      * @Get("/ideas/{id}/votes")
      * @ParamConverter("idea", options={"mapping": {"id": "id"}})
+     * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
+     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @View(serializerGroups={"IdeaVotes", "UsersInfos", "UserMedias"})
      */
-    public function getIdeaVotesAction(Idea $idea)
+    public function getIdeaVotesAction(Idea $idea, ParamFetcherInterface $paramFetcher)
     {
+        $limit = $paramFetcher->get('limit');
+        $offset = $paramFetcher->get('offset');
+
         $votes = $this
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:IdeaVote')
-            ->getVotesForIdea($idea)
+            ->getVotesForIdea($idea, $limit, $offset)
+        ;
+
+        $count = $this
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:IdeaVote')
+            ->getVotesCountForIdea($idea)
         ;
 
         return [
             'votes' => $votes,
-            'count' => count($votes),
+            'count' => $count,
+            'hasMore' => $count > $offset + $limit,
         ];
     }
 

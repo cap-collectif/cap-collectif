@@ -4,20 +4,16 @@ Capco\AppBundle\Entity\IdeaVote:
     id:
       expose: true
       type: integer
-      groups: [IdeaVotes]
-    idea:
-      expose: true
-      type: Capco\AppBundle\Entity\Idea
-      groups: [IdeaVotes]
+      groups: [Ideas, IdeaVotes]
     user:
       expose: true
       type: Capco\UserBundle\Entity\User
-      groups: [IdeaVotes]
+      groups: [Ideas, IdeaVotes]
     username:
       expose: true
       type: string
-      groups: [IdeaVotes]
+      groups: [Ideas, IdeaVotes]
     private:
       expose: true
       type: boolean
-      groups: [IdeaVotes]
+      groups: [Ideas, IdeaVotes]

@@ -1,11 +1,12 @@
+
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d80c2c59c87f500cf3b560d5e2d66252",
-    "content-hash": "6b46a44e06d14f0e90180114dada5c4b",
+    "hash": "d0ca78d6c03ed2338bfb3fea82c97cfa",
+    "content-hash": "fc5a0e6cb7d0c43c8dd72f8884944f1e",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2217,27 +2218,26 @@
         },
         {
             "name": "hwi/oauth-bundle",
-            "version": "dev-master",
-            "target-dir": "HWI/Bundle/OAuthBundle",
+            "version": "0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84"
+                "reference": "2554f2b2947d1614d9e8b04800967b175b0afd8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84",
-                "reference": "4d7e7a02d18bb8ba59bada20cfb49a1b9ec0df84",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/2554f2b2947d1614d9e8b04800967b175b0afd8a",
+                "reference": "2554f2b2947d1614d9e8b04800967b175b0afd8a",
                 "shasum": ""
             },
             "require": {
                 "kriswallsmith/buzz": "~0.13",
                 "php": ">=5.3.3",
-                "symfony/form": "~2.3|~3.0",
-                "symfony/framework-bundle": "~2.3|~3.0",
-                "symfony/options-resolver": "~2.3|~3.0",
-                "symfony/security-bundle": "~2.3|~3.0",
-                "symfony/yaml": "~2.3|~3.0"
+                "symfony/form": "~2.3",
+                "symfony/framework-bundle": "~2.3",
+                "symfony/options-resolver": "~2.3",
+                "symfony/security-bundle": "~2.3",
+                "symfony/yaml": "~2.3"
             },
             "conflict": {
                 "twig/twig": "<1.12"
@@ -2245,6 +2245,7 @@
             "require-dev": {
                 "doctrine/orm": "~2.3",
                 "friendsofsymfony/user-bundle": "~1.3|~2.0",
+                "phpunit/phpunit": "~4.8|~5.0",
                 "symfony/phpunit-bridge": "~2.7",
                 "symfony/property-access": "~2.3",
                 "symfony/twig-bundle": "~2.3",
@@ -2263,43 +2264,49 @@
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "HWI\\Bundle\\OAuthBundle\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Alexander",
-                    "email": "iam.asm89@gmail.com"
+                    "name": "Contributors",
+                    "homepage": "https://github.com/hwi/HWIOAuthBundle/contributors"
                 },
                 {
                     "name": "Joseph Bielawski",
                     "email": "stloyd@gmail.com"
                 },
                 {
-                    "name": "Geoffrey Bachelet",
-                    "email": "geoffrey.bachelet@gmail.com"
+                    "name": "Alexander",
+                    "email": "iam.asm89@gmail.com"
                 },
                 {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/hwi/HWIOAuthBundle/contributors"
+                    "name": "Geoffrey Bachelet",
+                    "email": "geoffrey.bachelet@gmail.com"
                 }
             ],
             "description": "Support for authenticating users using both OAuth1.0a and OAuth2 in Symfony2.",
             "homepage": "http://github.com/hwi/HWIOAuthBundle",
             "keywords": [
                 "37signals",
+                "Authentication",
+                "Deezer",
+                "EVE Online",
                 "amazon",
-                "authentication",
+                "auth0",
+                "azure",
                 "bitbucket",
                 "bitly",
                 "box",
                 "bufferapp",
                 "dailymotion",
                 "deviantart",
+                "discogs",
                 "disqus",
                 "dropbox",
                 "eventbrite",
@@ -2319,14 +2326,22 @@
                 "oauth1",
                 "oauth2",
                 "odnoklassniki",
+                "paypal",
                 "qq",
+                "reddit",
+                "runkeeper",
                 "salesforce",
                 "security",
                 "sensio connect",
                 "sina weibo",
+                "slack",
+                "sound cloud",
                 "spotify",
                 "stack exchange",
                 "stereomood",
+                "strava",
+                "toshl",
+                "trakt",
                 "trello",
                 "twitch",
                 "twitter",
@@ -2334,13 +2349,12 @@
                 "wechat",
                 "windows live",
                 "wordpress",
+                "xing",
                 "yahoo",
-                "yandex"
+                "yandex",
+                "youtube"
             ],
-            "support": {
-                "source": "https://github.com/spyl94/HWIOAuthBundle/tree/master"
-            },
-            "time": "2016-04-07 12:17:53"
+            "time": "2016-07-27 14:43:30"
         },
         {
             "name": "igorw/get-in",
@@ -5588,49 +5602,46 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34"
+                "url": "https://github.com/spyl94/SonataMediaBundle.git",
+                "reference": "2c655a5673af10964ffc032fc451bbb2dcc98819"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
-                "reference": "5b7da8ae4ef7cbaad971094b6d6a07dcfe67dd34",
+                "url": "https://api.github.com/repos/spyl94/SonataMediaBundle/zipball/2c655a5673af10964ffc032fc451bbb2dcc98819",
+                "reference": "2c655a5673af10964ffc032fc451bbb2dcc98819",
                 "shasum": ""
             },
             "require": {
-                "imagine/imagine": "~0.3",
-                "jms/serializer-bundle": "~0.11|~1.0",
-                "knplabs/gaufrette": "^0.1.6",
-                "kriswallsmith/buzz": "~0.6",
-                "sonata-project/classification-bundle": "~2.3",
-                "sonata-project/core-bundle": "^2.3.10",
+                "friendsofsymfony/rest-bundle": "~1.1",
+                "imagine/imagine": "*@stable",
+                "jms/serializer-bundle": "~1.0",
+                "knplabs/gaufrette": ">=0.1.6",
+                "kriswallsmith/buzz": "0.*",
+                "nelmio/api-doc-bundle": "~2.4",
+                "sonata-project/classification-bundle": "dev-master",
+                "sonata-project/core-bundle": "~2.2",
                 "sonata-project/doctrine-extensions": "~1.0",
                 "sonata-project/easy-extends-bundle": "~2.1",
                 "sonata-project/intl-bundle": "~2.2",
                 "sonata-project/notification-bundle": "~2.2",
-                "symfony/framework-bundle": "~2.3|~3.0"
-            },
-            "conflict": {
-                "jms/serializer": "<0.13",
-                "sonata-project/block-bundle": "<2.2.8",
-                "sonata-project/seo-bundle": "<1.1.5"
+                "symfony/symfony": "~2.3"
             },
             "require-dev": {
                 "aws/aws-sdk-php": "~2.7",
-                "doctrine/mongodb-odm": "~1.0",
+                "doctrine/mongodb-odm": "~1.0@dev",
                 "jackalope/jackalope-doctrine-dbal": "~1.1",
-                "sonata-project/admin-bundle": "~2.3",
-                "sonata-project/datagrid-bundle": "~2.2",
-                "sonata-project/doctrine-orm-admin-bundle": "~2.3",
-                "sonata-project/formatter-bundle": "~2.2",
-                "sonata-project/seo-bundle": "^1.1.5",
-                "symfony/phpunit-bridge": "~2.7|~3.0"
+                "sonata-project/admin-bundle": "~2.3@dev",
+                "sonata-project/core-bundle": "~2.3,>=2.3.1",
+                "sonata-project/datagrid-bundle": "~2.2@dev",
+                "sonata-project/doctrine-orm-admin-bundle": "~2.3@dev",
+                "sonata-project/formatter-bundle": "~2.2@dev",
+                "sonata-project/seo-bundle": "~1.1"
             },
             "suggest": {
                 "liip/imagine-bundle": "~0.9",
                 "rackspace/php-opencloud": "~1.6",
                 "sonata-project/doctrine-orm-admin-bundle": "~2.3",
-                "sonata-project/seo-bundle": "^1.1.5",
+                "sonata-project/seo-bundle": "~1.1",
                 "tilleuls/ckeditor-sonata-mediabundle": "~1.0"
             },
             "type": "symfony-bundle",
@@ -5644,19 +5655,18 @@
                     "Sonata\\MediaBundle\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Sonata Community",
-                    "homepage": "https://github.com/sonata-project/SonataMediaBundle/contributors"
-                },
-                {
                     "name": "Thomas Rabaix",
                     "email": "thomas.rabaix@sonata-project.org",
                     "homepage": "https://sonata-project.org"
+                },
+                {
+                    "name": "Sonata Community",
+                    "homepage": "https://github.com/sonata-project/SonataMediaBundle/contributors"
                 }
             ],
             "description": "Symfony SonataMediaBundle",
@@ -5671,7 +5681,10 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2015-05-29 10:20:08"
+            "support": {
+                "source": "https://github.com/spyl94/SonataMediaBundle/tree/master"
+            },
+            "time": "2016-04-21 16:19:23"
         },
         {
             "name": "sonata-project/notification-bundle",
@@ -9143,6 +9156,7 @@
                 "plugin",
                 "psr7"
             ],
+            "abandoned": "php-http/client-common",
             "time": "2016-01-29 19:55:38"
         },
         {
@@ -10720,7 +10734,6 @@
         "sonata-project/user-bundle": 20,
         "sonata-project/datagrid-bundle": 20,
         "sonata-project/classification-bundle": 20,
-        "hwi/oauth-bundle": 20,
         "jolicode/jolitypo-bundle": 0,
         "friendsofsymfony/elastica-bundle": 20,
         "jms/serializer": 20,

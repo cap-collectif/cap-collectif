@@ -126,13 +126,13 @@ export const submitProposalReport = (proposal, data, dispatch) => {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case START_LOADING:
-      return Object.assign({}, state, { isLoading: true });
+      return { ...state, isLoading: true };
     case STOP_LOADING:
-      return Object.assign({}, state, { isLoading: false });
+      return { ...state, isLoading: false };
     case OPEN_MODAL:
-      return Object.assign({}, state, { currentReportingModal: action.payload.id });
+      return { ...state, currentReportingModal: action.payload.id };
     case CLOSE_MODAL:
-      return Object.assign({}, state, { currentReportingModal: null });
+      return { ...state, currentReportingModal: null };
     case ADD_REPORTED: {
       return { ...state, elements: [...state.elements, state.currentReportingModal] };
     }

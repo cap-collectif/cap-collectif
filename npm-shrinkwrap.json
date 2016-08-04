@@ -4508,6 +4508,11 @@
       "from": "redux-form@6.0.0-rc.3",
       "resolved": "https://registry.npmjs.org/redux-form/-/redux-form-6.0.0-rc.3.tgz"
     },
+    "redux-saga": {
+      "version": "0.11.0",
+      "from": "redux-saga@latest",
+      "resolved": "https://registry.npmjs.org/redux-saga/-/redux-saga-0.11.0.tgz"
+    },
     "regenerate": {
       "version": "1.3.1",
       "from": "regenerate@>=1.2.1 <2.0.0",

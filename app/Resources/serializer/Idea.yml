@@ -75,7 +75,7 @@ Capco\AppBundle\Entity\Idea:
       groups: [Ideas]
     votes:
       expose: true
-      groups: [IdeaVotes]
+      groups: [Ideas]
     votesCount:
       expose: true
       groups: [Ideas]

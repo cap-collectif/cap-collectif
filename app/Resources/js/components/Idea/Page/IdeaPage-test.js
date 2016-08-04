@@ -4,7 +4,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
-import IdeaPage from './IdeaPage';
+import { IdeaPage } from './IdeaPage';
 import IdeaPageHeader from './IdeaPageHeader';
 import IdeaPageBody from './IdeaPageBody';
 import IdeaPageVotes from './IdeaPageVotes';

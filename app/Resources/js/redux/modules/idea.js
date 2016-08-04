@@ -1,41 +1,63 @@
 import Fetcher from '../../services/Fetcher';
+import { takeEvery } from 'redux-saga';
+import { call, put } from 'redux-saga/effects';
+import _ from 'lodash';
 
-export const VOTES_LOADED = 'idea/VOTES_LOADED';
+export const VOTES_FETCH_REQUESTED = 'idea/VOTES_FETCH_REQUESTED';
+export const VOTES_FETCH_SUCCEEDED = 'idea/VOTES_FETCH_SUCCEEDED';
 
 const initialState = {
   currentIdeaById: null,
   ideas: [],
 };
 
-const votesLoaded = (votes) => {
+export const fetchIdeaVotes = (idea) => {
   return {
-    type: VOTES_LOADED,
+    type: VOTES_FETCH_REQUESTED,
     payload: {
-      votes: votes,
+      idea,
     },
   };
 };
 
-export const loadAllVotes = (idea, dispatch) => {
-  return new Promise((resolve, reject) => {
-    Fetcher
-      .get(`/ideas/${idea}/votes`)
-      .then((result) => {
-        dispatch(votesLoaded(result.votes));
-        resolve();
-      })
-      .catch(() => {
-        console.error('Failed to load votes.'); // eslint-disable-line no-console
-        reject({ _error: 'Failed to submit report!' });
-      });
-  });
-};
+function* fetchAllVotes(action) {
+  try {
+    let hasMore = true;
+    let iterationCount = 0;
+    const votesPerIteration = 50;
+    while (hasMore) {
+      const result = yield call(
+        Fetcher.get,
+        `/ideas/${action.payload.idea.id}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
+      );
+      hasMore = result.hasMore;
+      iterationCount++;
+      yield put({ type: VOTES_FETCH_SUCCEEDED, votes: result.votes, ideaId: action.payload.idea.id });
+    }
+  } catch (e) {
+    console.error('Failed to load votes.'); // eslint-disable-line no-console
+  }
+}
 
+export function* saga() {
+  yield* takeEvery(VOTES_FETCH_REQUESTED, fetchAllVotes);
+}
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case VOTES_LOADED:
-      // return Object.assign({}, state, { i: action.payload.id });
+    case VOTES_FETCH_SUCCEEDED: {
+      const votes = state.ideas[action.ideaId].votes;
+      for (const vote of action.votes) {
+        votes.push(vote);
+      }
+      const ideas = {
+        [action.ideaId]: { ...state.ideas[action.ideaId], votes: _.uniqWith(votes, _.isEqual) },
+      };
+      return {
+        ...state,
+        ideas,
+      };
+    }
     default:
       return state;
   }
