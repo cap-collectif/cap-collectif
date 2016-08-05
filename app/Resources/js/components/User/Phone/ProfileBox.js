@@ -59,7 +59,7 @@ export const ProfileBox = React.createClass({
         if (message === 'sms_failed_to_send') {
           message = this.getIntlMessage('phone.confirm.alert.failed_to_send');
         }
-        this.setState({ alert: { type: 'danger', message: message }, isSubmitting: false });
+        this.setState({ alert: { type: 'danger', message }, isSubmitting: false });
       });
   },
 

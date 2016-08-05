@@ -40,10 +40,10 @@ const RankingItem = React.createClass({
     const classes = classNames({
       'ranking__item': true,
       'list-group-item': true,
-      'disabled': disabled,
+      disabled,
     });
     return connectDragSource(
-      <div className={classes} id={id} style={{ opacity: opacity }}>
+      <div className={classes} id={id} style={{ opacity }}>
         <div style={{ marginBottom: '5px' }}>
           <div className="ranking__item__label-block">
             <span className="ranking__item__icon hidden-xs">

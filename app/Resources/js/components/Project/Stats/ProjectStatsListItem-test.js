@@ -13,7 +13,7 @@ describe('<ProjectStatsListItem />', () => {
   };
 
   const props = {
-    item: item,
+    item,
     showPercentage: true,
     isCurrency: false,
   };

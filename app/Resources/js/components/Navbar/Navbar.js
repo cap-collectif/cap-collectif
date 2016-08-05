@@ -63,8 +63,8 @@ const Navbar = React.createClass({
     }
 
     this.setState({
-      items: items,
-      moreItems: moreItems,
+      items,
+      moreItems,
     }, () => {
       if (window.innerWidth >= 768 && ReactDOM.findDOMNode(this.container).clientHeight > 53) { // 53 => 50px (navbar height) + 3px margin (just in case)
         this.autocollapseNavbar();

@@ -60,7 +60,7 @@ const PhoneModal = React.createClass({
         if (message === 'sms_failed_to_send') {
           message = this.getIntlMessage('phone.confirm.alert.failed_to_send');
         }
-        this.setState({ isResending: false, alert: { type: 'danger', message: message } });
+        this.setState({ isResending: false, alert: { type: 'danger', message } });
       });
   },
 

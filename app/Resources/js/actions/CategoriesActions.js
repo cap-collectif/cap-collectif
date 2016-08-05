@@ -10,7 +10,7 @@ export default {
       .then((categories) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_CATEGORIES,
-          categories: categories,
+          categories,
         });
         return true;
       });

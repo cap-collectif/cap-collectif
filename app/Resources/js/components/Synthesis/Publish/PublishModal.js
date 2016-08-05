@@ -89,7 +89,7 @@ const PublishModal = React.createClass({
 
   setNotation(notation) {
     this.setState({
-      notation: notation,
+      notation,
     });
   },
 
@@ -141,7 +141,7 @@ const PublishModal = React.createClass({
     const expanded = this.state.expanded;
     expanded[element.id] = !this.state.expanded[element.id];
     this.setState({
-      expanded: expanded,
+      expanded,
     });
   },
 

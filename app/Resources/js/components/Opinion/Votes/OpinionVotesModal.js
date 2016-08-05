@@ -28,7 +28,7 @@ const OpinionVotesModal = React.createClass({
       .then((votes) => {
         this.setState({
           isLoading: false,
-          votes: votes,
+          votes,
         });
       })
     ;

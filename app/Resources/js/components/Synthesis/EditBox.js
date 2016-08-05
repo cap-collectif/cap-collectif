@@ -30,11 +30,11 @@ const EditBox = React.createClass({
                 <div className="col--right col-xs-12 block--mobile">
                   <TopMenu synthesis={synthesis} />
                   <div className="synthesis__content">
-                    { React.cloneElement(children, { synthesis: synthesis }) }
+                    { React.cloneElement(children, { synthesis }) }
                   </div>
                 </div>
               </div>
-              : React.cloneElement(children, { synthesis: synthesis })
+              : React.cloneElement(children, { synthesis })
             }
           </div>
         </div>

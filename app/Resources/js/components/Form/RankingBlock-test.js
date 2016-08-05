@@ -15,7 +15,7 @@ const field = {
 const props = {
   connectDropTarget: c => c,
   onRankingChange: () => {},
-  field: field,
+  field,
   ...IntlData,
 };
 

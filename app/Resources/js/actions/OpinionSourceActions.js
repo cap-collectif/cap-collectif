@@ -22,8 +22,8 @@ export default {
           actionType: RECEIVE_SOURCES,
           sources: data.sources,
           count: data.count,
-          opinion: opinion,
-          filter: filter,
+          opinion,
+          filter,
         });
         return true;
       });

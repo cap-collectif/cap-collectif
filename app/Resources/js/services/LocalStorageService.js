@@ -29,7 +29,7 @@ class LocalStorageService {
       return;
     }
     const cache = {
-      data: data,
+      data,
       timestamp: new Date().getTime(),
     };
     localStorage.setItem(key, JSON.stringify(cache));

@@ -132,7 +132,7 @@ const UpdateModal = React.createClass({
     const expanded = this.state.expanded;
     expanded[element.id] = !this.state.expanded[element.id];
     this.setState({
-      expanded: expanded,
+      expanded,
     });
   },
 

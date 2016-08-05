@@ -154,17 +154,17 @@ const App = (($) => {
   };
 
   return {
-    equalheight: equalheight,
-    resized: resized,
-    pieChart: pieChart,
-    checkButton: checkButton,
-    video: video,
-    externalLinks: externalLinks,
-    showMap: showMap,
-    makeSidebar: makeSidebar,
-    carousel: carousel,
-    customModal: customModal,
-    skipLinks: skipLinks,
+    equalheight,
+    resized,
+    pieChart,
+    checkButton,
+    video,
+    externalLinks,
+    showMap,
+    makeSidebar,
+    carousel,
+    customModal,
+    skipLinks,
   };
 })(jQuery);
 

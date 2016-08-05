@@ -24,8 +24,8 @@ export default {
           actionType: RECEIVE_ARGUMENTS,
           arguments: data.arguments,
           count: data.count,
-          type: type,
-          opinion: opinion,
+          type,
+          opinion,
         });
         return true;
       });
@@ -34,8 +34,8 @@ export default {
   changeSortOrder(type, order) {
     AppDispatcher.dispatch({
       actionType: CHANGE_ARGUMENTS_SORT_ORDER,
-      type: type,
-      order: order,
+      type,
+      order,
     });
   },
 

@@ -52,10 +52,10 @@ const PhoneForm = React.createClass({
               const errors = this.state.errors;
               if (err.response.message === 'sms_failed_to_send') {
                 errors.phone = ['phone.confirm.alert.failed_to_send'];
-                this.setState({ errors: errors });
+                this.setState({ errors });
               } else if (err.response.message === 'sms_already_sent_recently') {
                 errors.phone = ['phone.confirm.alert.wait_for_new'];
-                this.setState({ errors: errors });
+                this.setState({ errors });
               } else {
                 this.setState(this.getInitialState());
               }
@@ -73,7 +73,7 @@ const PhoneForm = React.createClass({
                 errors.phone = ['profile.constraints.phone.invalid'];
               }
             }
-            this.setState({ errors: errors });
+            this.setState({ errors });
           }
           this.props.onSubmitFailure();
         });

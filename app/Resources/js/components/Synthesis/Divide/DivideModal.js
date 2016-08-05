@@ -73,7 +73,7 @@ const DivideModal = React.createClass({
   selectText() {
     const selectedText = this.getSelectedText(ReactDOM.findDOMNode(this.refs.originalText));
     this.setState({
-      selectedText: selectedText,
+      selectedText,
     });
   },
 
@@ -82,7 +82,7 @@ const DivideModal = React.createClass({
     if (body && body !== '') {
       const newElement = {
         'title': null,
-        'body': body,
+        body,
         'archived': false,
         'published': false,
         'parent': this.props.element.parent,
@@ -101,7 +101,7 @@ const DivideModal = React.createClass({
     let newElements = this.state.newElements;
     newElements = ArrayHelper.addElementToArray(newElements, element, 'body');
     this.setState({
-      newElements: newElements,
+      newElements,
       selectedText: null,
     });
   },
@@ -110,7 +110,7 @@ const DivideModal = React.createClass({
     let newElements = this.state.newElements;
     newElements = ArrayHelper.removeElementFromArray(newElements, element, 'body');
     this.setState({
-      newElements: newElements,
+      newElements,
     });
   },
 

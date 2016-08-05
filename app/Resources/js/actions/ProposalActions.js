@@ -45,30 +45,30 @@ export default {
   initProposal: (proposal) => {
     AppDispatcher.dispatch({
       actionType: INIT_PROPOSAL,
-      proposal: proposal,
+      proposal,
     });
   },
 
   initProposals: (proposals, count) => {
     AppDispatcher.dispatch({
       actionType: INIT_PROPOSALS,
-      proposals: proposals,
-      count: count,
+      proposals,
+      count,
     });
   },
 
   initProposalVotes: (creditsLeft, userHasVote = false) => {
     AppDispatcher.dispatch({
       actionType: INIT_PROPOSAL_VOTES,
-      creditsLeft: creditsLeft,
-      userHasVote: userHasVote,
+      creditsLeft,
+      userHasVote,
     });
   },
 
   initVotableSteps: (votableSteps) => {
     AppDispatcher.dispatch({
       actionType: INIT_VOTABLE_STEPS,
-      votableSteps: votableSteps,
+      votableSteps,
     });
   },
 
@@ -161,7 +161,7 @@ export default {
   changePage: (page) => {
     AppDispatcher.dispatch({
       actionType: CHANGE_PAGE,
-      page: page,
+      page,
     });
   },
 
@@ -175,7 +175,7 @@ export default {
   changeSearchTerms: (terms) => {
     AppDispatcher.dispatch({
       actionType: CHANGE_SEARCH_TERMS,
-      terms: terms,
+      terms,
     });
   },
 
@@ -183,7 +183,7 @@ export default {
     AppDispatcher.dispatch({
       actionType: CHANGE_FILTERS,
       filter: filterName,
-      value: value,
+      value,
     });
   },
 
@@ -294,10 +294,10 @@ export default {
     const hasComment = data.comment && data.comment.length > 0;
     AppDispatcher.dispatch({
       actionType: CREATE_PROPOSAL_VOTE,
-      proposal: proposal,
-      selectionStep: selectionStep,
-      estimation: estimation,
-      hasComment: hasComment,
+      proposal,
+      selectionStep,
+      estimation,
+      hasComment,
     });
     return Fetcher
     .post(`/selection_steps/${selectionStep}/proposals/${proposal}/votes`, data)
@@ -320,7 +320,7 @@ export default {
     .catch((error) => {
       AppDispatcher.dispatch({
         actionType: CREATE_PROPOSAL_VOTE_FAILURE,
-        estimation: estimation,
+        estimation,
       });
       if (hasComment) {
         AppDispatcher.dispatch({
@@ -335,9 +335,9 @@ export default {
   deleteVote: (selectionStep, proposal, estimation = null, successMessage = 'proposal.request.delete_vote.success', errorMessage = 'proposal.request.delete_vote.failure') => {
     AppDispatcher.dispatch({
       actionType: DELETE_PROPOSAL_VOTE,
-      proposal: proposal,
-      selectionStep: selectionStep,
-      estimation: estimation,
+      proposal,
+      selectionStep,
+      estimation,
     });
     return Fetcher
       .delete(`/selection_steps/${selectionStep}/proposals/${proposal}/votes`)
@@ -354,7 +354,7 @@ export default {
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_VOTE_FAILURE,
-          estimation: estimation,
+          estimation,
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,

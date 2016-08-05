@@ -49,7 +49,7 @@ const SmsCodeForm = React.createClass({
           const errors = this.state.errors;
           if (response.message === 'sms_code_invalid') {
             errors.code = ['phone.confirm.code_invalid'];
-            this.setState({ errors: errors, isSubmitting: false });
+            this.setState({ errors, isSubmitting: false });
           }
         });
     }

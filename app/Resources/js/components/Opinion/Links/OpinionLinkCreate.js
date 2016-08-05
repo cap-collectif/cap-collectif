@@ -27,7 +27,7 @@ const OpinionLinkCreate = React.createClass({
     OpinionTypeActions
       .getAvailableTypes(this.props.opinion.type.id)
       .then((availableTypes) => {
-        this.setState({ 'availableTypes': availableTypes });
+        this.setState({ availableTypes });
       });
   },
 

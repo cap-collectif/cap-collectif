@@ -292,7 +292,7 @@ class SynthesisElementStore extends BaseStore {
       const id = splitted.slice(splitted.length - 5, splitted.length).join('-');
       const item = {
         'title': title || null,
-        'id': id,
+        id,
       };
       items.push(item);
     });

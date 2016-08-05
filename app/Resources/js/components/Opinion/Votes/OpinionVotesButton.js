@@ -36,9 +36,9 @@ export const OpinionVotesButton = React.createClass({
   vote() {
     const { user, opinion, value } = this.props;
     if (this.isVersion()) {
-      OpinionActions.vote({ value: value }, opinion.id, opinion.parent.id, user);
+      OpinionActions.vote({ value }, opinion.id, opinion.parent.id, user);
     } else {
-      OpinionActions.vote({ value: value }, opinion.id, null, user);
+      OpinionActions.vote({ value }, opinion.id, null, user);
     }
   },
 

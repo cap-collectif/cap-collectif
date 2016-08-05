@@ -16,7 +16,7 @@ describe('<ProposalPreviewFooter />', () => {
   };
 
   const props = {
-    proposal: proposal,
+    proposal,
     votesDelta: 1,
     ...IntlData,
   };

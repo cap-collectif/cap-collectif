@@ -37,7 +37,7 @@ const CommentBody = React.createClass({
 
   expand(expanded) {
     this.setState({
-      expanded: expanded,
+      expanded,
     });
   },
 

@@ -47,7 +47,7 @@ const RankingBlock = React.createClass({
     items[list].splice(index, 1);
     items[atList].splice(atIndex, 0, item);
     this.setState({
-      items: items,
+      items,
     }, () => {
       this.props.onRankingChange(this.state.items.choiceBox);
       this.recalculateChoicesHeight();
@@ -76,7 +76,7 @@ const RankingBlock = React.createClass({
       });
     });
     return {
-      item: item,
+      item,
       list: itemList,
       index: itemIndex,
     };

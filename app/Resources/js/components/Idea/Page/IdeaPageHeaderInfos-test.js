@@ -71,7 +71,7 @@ describe('<IdeaPageHeaderInfos />', () => {
     const messages = wrapper.find('FormattedMessage');
     expect(messages).to.have.length(2);
     const themeLink = <a href={ideaWithTheme.theme._links.show}>{ideaWithTheme.theme.title}</a>;
-    expect(messages.find({ themeLink: themeLink })).to.have.length(0);
+    expect(messages.find({ themeLink })).to.have.length(0);
   });
 
   it('it should render comments number when idea is commentable', () => {

@@ -43,7 +43,7 @@ const createElementFromData = (synthesis, data, successMessage = 'synthesis.comm
       response.json().then((element) => {
         AppDispatcher.dispatch({
           actionType: Actions.CREATE_ELEMENT_SUCCESS,
-          element: element,
+          element,
           message: successMessage,
         });
         return true;
@@ -127,7 +127,7 @@ export default {
           actionType: Actions.RECEIVE_ELEMENTS_SUCCESS,
           type: `${type}Tree`,
           elements: data,
-          parent: parent,
+          parent,
         });
         return true;
       })
@@ -142,7 +142,7 @@ export default {
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: Actions.RECEIVE_COUNT,
-          type: type,
+          type,
           count: data.count,
         });
         return true;
@@ -210,24 +210,24 @@ export default {
   expandTreeItem(type, elementId, expanded) {
     AppDispatcher.dispatch({
       actionType: Actions.EXPAND_TREE_ITEM,
-      elementId: elementId,
-      expanded: expanded,
-      type: type,
+      elementId,
+      expanded,
+      type,
     });
   },
 
   selectNavItem(elementId) {
     AppDispatcher.dispatch({
       actionType: Actions.SELECT_NAV_ITEM,
-      elementId: elementId,
+      elementId,
     });
   },
 
   dismissMessage(message, type) {
     AppDispatcher.dispatch({
       actionType: DISMISS_MESSAGE,
-      message: message,
-      type: type,
+      message,
+      type,
     });
   },
 

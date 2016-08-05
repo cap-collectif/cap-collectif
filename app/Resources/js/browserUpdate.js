@@ -66,7 +66,7 @@ function getBrowser(ua_str) {
     if (/linux|x11|unix|bsd/.test(ua) && n=="o" && v>12)
         donotnotify="Opera12Linux";
 
-    if (n=="x") return {n:"x",v:v||0,t:names[n],donotnotify:donotnotify};
+    if (n=="x") return {n:"x",v:v||0,t:names[n],donotnotify};
 
 
     if (n=="so") {
@@ -85,7 +85,7 @@ function getBrowser(ua_str) {
         else if (v>3) v=7;
         else v=9;
     }
-    return {n:n,v:v,t:`${names[n]} ${v}`,donotnotify:donotnotify};
+    return {n,v,t:`${names[n]} ${v}`,donotnotify};
 }
 
 this.op.browser=getBrowser();

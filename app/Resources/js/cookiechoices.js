@@ -103,8 +103,8 @@ var cookieChoices = function() {
     }
 
     return {
-        showCookieConsentBar: showCookieConsentBar,
-        showCookieConsentDialog: showCookieConsentDialog,
+        showCookieConsentBar,
+        showCookieConsentDialog,
     };
 };
 

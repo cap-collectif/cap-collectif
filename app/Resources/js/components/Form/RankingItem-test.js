@@ -32,7 +32,7 @@ const itemWithoutImage = {
 const props = {
   id: 'id',
   connectDragSource: (cp) => { return cp;},
-  arrowFunctions: arrowFunctions,
+  arrowFunctions,
 };
 
 const OriginalComponent = RankingItem.DecoratedComponent;

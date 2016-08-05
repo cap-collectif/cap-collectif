@@ -124,7 +124,7 @@ const ReplyForm = React.createClass({
                 other = value;
               }
             });
-            response.value = other ? { labels: this.state.form[key], other: other } : { labels: this.state.form[key] };
+            response.value = other ? { labels: this.state.form[key], other } : { labels: this.state.form[key] };
           } else {
             response.value = this.state.form[key];
           }
@@ -151,14 +151,14 @@ const ReplyForm = React.createClass({
       form[field.id] = value;
     }
     this.setState({
-      form: form,
+      form,
     });
   },
 
   getResponseForField(id) {
     const index = ArrayHelper.getElementIndexFromArray(
       this.props.reply.responses,
-      { field: { id: id } },
+      { field: { id } },
       'field',
       'id'
     );
@@ -177,7 +177,7 @@ const ReplyForm = React.createClass({
       }
     });
     this.setState({
-      form: form,
+      form,
       private: false,
     });
   },

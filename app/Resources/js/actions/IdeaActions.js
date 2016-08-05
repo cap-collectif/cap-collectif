@@ -39,30 +39,30 @@ export default {
   initIdea: (idea, votes) => {
     AppDispatcher.dispatch({
       actionType: INIT_IDEA,
-      idea: idea,
-      votes: votes,
+      idea,
+      votes,
     });
   },
 
   initIdeas: (ideas) => {
     AppDispatcher.dispatch({
       actionType: INIT_IDEAS,
-      ideas: ideas,
+      ideas,
     });
   },
 
   setPagination: (pagination) => {
     AppDispatcher.dispatch({
       actionType: SET_IDEAS_PAGINATION,
-      pagination: pagination,
+      pagination,
     });
   },
 
   initCounts: (count = 0, countTrashed = 0) => {
     AppDispatcher.dispatch({
       actionType: INIT_IDEAS_COUNTS,
-      count: count,
-      countTrashed: countTrashed,
+      count,
+      countTrashed,
     });
   },
 
@@ -99,28 +99,28 @@ export default {
   changePage: (page) => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_PAGE,
-      page: page,
+      page,
     });
   },
 
   changeOrder: (order) => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_ORDER,
-      order: order,
+      order,
     });
   },
 
   changeTheme: (theme) => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_THEME,
-      theme: theme,
+      theme,
     });
   },
 
   changeSearchTerms: (terms) => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_SEARCH_TERMS,
-      terms: terms,
+      terms,
     });
   },
 
@@ -244,7 +244,7 @@ export default {
       .then(() => {
         AppDispatcher.dispatch({
           actionType: CREATE_IDEA_VOTE_SUCCESS,
-          hasComment: hasComment,
+          hasComment,
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,

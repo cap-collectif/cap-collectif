@@ -69,7 +69,7 @@ class Fetcher {
           method: 'post',
           headers: createFormDataHeaders(),
           beforeSend: addAuthorization,
-          body: body,
+          body,
         })
           .then(status);
       })

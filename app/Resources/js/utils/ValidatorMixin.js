@@ -19,13 +19,13 @@ const ValidatorMixin = {
     const fields = {};
     $.each(rules, (key, constraints) => {
       fields[key] = {
-        constraints: constraints,
+        constraints,
         errors: [],
       };
     });
     this.setState({
       form: this.refs[ref],
-      fields: fields,
+      fields,
     });
   },
 
@@ -54,7 +54,7 @@ const ValidatorMixin = {
         const fields = this.state.fields;
         fields[ref].errors = errors;
         this.setState({
-          fields: fields,
+          fields,
         });
         return errors.length === 0;
       }

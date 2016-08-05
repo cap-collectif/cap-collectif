@@ -37,7 +37,7 @@ const ProjectPreviewProgressBar = React.createClass({
                 <ProjectPreviewProgressBarItem
                   key={index}
                   step={step}
-                  style={{ width: width }}
+                  style={{ width }}
                 />
               );
             })

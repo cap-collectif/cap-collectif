@@ -94,7 +94,7 @@ const ProposalForm = React.createClass({
         Object.keys(custom).map((key) => {
           const question = key.split('-')[1];
           responses.push({
-            question: question,
+            question,
             value: custom[key],
           });
         });
@@ -147,7 +147,7 @@ const ProposalForm = React.createClass({
   getResponseForField(id) {
     const index = ArrayHelper.getElementIndexFromArray(
       this.props.proposal.responses,
-      { field: { id: id } },
+      { field: { id } },
       'field',
       'id'
     );

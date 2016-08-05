@@ -44,8 +44,8 @@ const VotePiechart = React.createClass({
           options={{
             legend: 'none',
             chartArea: {
-              left: left,
-              top: top,
+              left,
+              top,
               width: '100%',
               height: '85%',
             },

@@ -21,7 +21,7 @@ export default class Input extends ReactBootstrapInput {
   checkMail() {
     mailcheck.run({
       email: this.props.value,
-      domains: domains,
+      domains,
       suggested: suggestion => this.setState({ suggestion: suggestion.full }),
       empty: () => this.setState({ suggestion: null }),
     });
