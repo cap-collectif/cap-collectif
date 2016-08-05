@@ -102,11 +102,11 @@ export const OpinionVotesButton = React.createClass({
           className="btn--outline"
           onClick={this.voteAction}
           active={this.isCurrentVote()}
-          aria-label={this.isCurrentVote() ? this.getIntlMessage('vote.aria_label_active.' + data.str) : this.getIntlMessage('vote.aria_label.' + data.str)}
+          aria-label={this.isCurrentVote() ? this.getIntlMessage(`vote.aria_label_active.${data.str}`) : this.getIntlMessage(`vote.aria_label.${data.str}`)}
           disabled={this.props.disabled}
         >
           <i className={data.icon}></i>
-          { ' ' + this.getIntlMessage('vote.' + data.str) }
+          { ` ${this.getIntlMessage(`vote.${data.str}`)}` }
         </Button>
       </LoginOverlay>
     );

@@ -40,6 +40,6 @@ describe('<ImageUpload />', () => {
 
   it('should show the provided classes', () => {
     const wrapper = shallow(<ImageUpload valueLink={valueLink} className={className} {...IntlData} />);
-    expect(wrapper.find('Row').prop('className')).to.equal('image-uploader ' + className);
+    expect(wrapper.find('Row').prop('className')).to.equal(`image-uploader ${className}`);
   });
 });

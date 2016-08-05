@@ -70,7 +70,7 @@ const ProposalForm = React.createClass({
 
   componentDidMount() {
     this.props.form.fields.map((field) => {
-      const ref = 'custom-' + field.id;
+      const ref = `custom-${field.id}`;
       if (field.required) {
         this.formValidationRules[ref] = {
           notBlank: { message: 'proposal.constraints.field_mandatory' },
@@ -139,7 +139,7 @@ const ProposalForm = React.createClass({
   getInitialFormAnswers() {
     const custom = {};
     this.props.form.fields.map((field) => {
-      custom['custom-' + field.id] = this.getResponseForField(field.id);
+      custom[`custom-${field.id}`] = this.getResponseForField(field.id);
     });
     return custom;
   },
@@ -208,7 +208,7 @@ const ProposalForm = React.createClass({
 
   render() {
     const { form, features, themes, districts, categories } = this.props;
-    const optional = <span className="excerpt">{' ' + this.getIntlMessage('global.form.optional')}</span>;
+    const optional = <span className="excerpt">{` ${this.getIntlMessage('global.form.optional')}`}</span>;
     const themeLabel = (
       <span>
         {this.getIntlMessage('proposal.theme')}
@@ -322,7 +322,7 @@ const ProposalForm = React.createClass({
 
       {
         form.fields.map((field) => {
-          const key = 'custom-' + field.id;
+          const key = `custom-${field.id}`;
           const label = (
             <span>
               {field.question}
@@ -332,11 +332,11 @@ const ProposalForm = React.createClass({
           return (
             <Input
               key={key}
-              id={'proposal_' + key}
+              id={`proposal_${key}`}
               type={field.type}
               label={label}
               groupClassName={this.getGroupStyle(key)}
-              valueLink={this.linkState('custom.' + key)}
+              valueLink={this.linkState(`custom.${key}`)}
               help={field.helpText}
               errors={this.renderFormErrors(key)}
             />

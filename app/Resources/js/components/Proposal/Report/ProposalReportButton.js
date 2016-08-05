@@ -18,7 +18,7 @@ const ProposalReportButton = React.createClass({
     const { proposal } = this.props;
     return (
         <ReportBox
-          id={'proposal-' + proposal.id}
+          id={`proposal-${proposal.id}`}
           buttonStyle={{ marginLeft: '15px' }}
           reported={proposal.hasUserReported}
           onReport={this.handleReport}

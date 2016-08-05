@@ -28,7 +28,7 @@ const ProjectPreviewProgressBar = React.createClass({
     const { project } = this.props;
     const nbSteps = project.steps.length;
     if (nbSteps > 0) {
-      const width = 100 / nbSteps + '%';
+      const width = `${100 / nbSteps}%`;
       return (
         <div className="thumbnail__steps-bar">
           {
@@ -43,7 +43,7 @@ const ProjectPreviewProgressBar = React.createClass({
             })
           }
           <span className="thumbnail__steps-bar__percentage">
-            {this.getCompletedStepsPercentage() + '%'}
+            {`${this.getCompletedStepsPercentage()}%`}
           </span>
         </div>
       );

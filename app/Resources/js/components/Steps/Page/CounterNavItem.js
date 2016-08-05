@@ -17,7 +17,7 @@ const CounterNavItem = React.createClass({
         <div className="text-center">
           <i className={icon}></i>
           {' '}
-          <span className="value">{counter + ' '}</span>
+          <span className="value">{`${counter} `}</span>
           <span className="excerpt category">
             <FormattedMessage
               message={label}

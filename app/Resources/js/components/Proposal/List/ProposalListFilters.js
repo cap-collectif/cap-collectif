@@ -118,7 +118,7 @@ export const ProposalListFilters = React.createClass({
               this.state.displayedOrders.map((choice) => {
                 return (
                   <option key={choice} value={choice}>
-                    {this.getIntlMessage('global.filter_f_' + choice)}
+                    {this.getIntlMessage(`global.filter_f_${choice}`)}
                   </option>
                 );
               })
@@ -136,13 +136,13 @@ export const ProposalListFilters = React.createClass({
               <Col xs={12} md={6} key={index}>
                 <Input
                   type="select"
-                  id={'proposal-filter-' + filterName}
+                  id={`proposal-filter-${filterName}`}
                   ref={(c) => this[filterName] = c}
                   onChange={this.handleFilterChange.bind(this, filterName)}
                   value={this.state.filters[filterName] || 0}
                 >
                   <option value="0">
-                    {this.getIntlMessage('global.select_' + filterName)}
+                    {this.getIntlMessage(`global.select_${filterName}`)}
                   </option>
                   {
                     this.props[filterName].map((choice) => {

@@ -21,7 +21,7 @@ describe('<PaginationItem />', () => {
     expect(itemWrapper.prop('onClick')).to.equal(props.onSelect);
     expect(itemWrapper.prop('aria-label')).to.equal(props.page);
     const itemLabel = wrapper.find('.page-item__label');
-    expect(itemLabel.text()).to.equal('' + props.page);
+    expect(itemLabel.text()).to.equal(`${props.page}`);
   });
 
   it('should render a disabled pagination item when specified', () => {

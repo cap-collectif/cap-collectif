@@ -33,7 +33,7 @@ const ReplyModalLink = React.createClass({
     const { reply, form } = this.props;
 
     return (
-      <ListGroupItem className="reply" id={'reply-link-' + reply.id } onClick={this.showModal}>
+      <ListGroupItem className="reply" id={`reply-link-${reply.id}` } onClick={this.showModal}>
         <FormattedMessage
           message={this.getIntlMessage('reply.show.link')}
           date={
@@ -51,7 +51,7 @@ const ReplyModalLink = React.createClass({
         />
         {
           reply.private &&
-          <span>{' ' + this.getIntlMessage('reply.private')}</span>
+          <span>{` ${this.getIntlMessage('reply.private')}`}</span>
         }
         <ShowReplyModal
           show={this.state.showModal}

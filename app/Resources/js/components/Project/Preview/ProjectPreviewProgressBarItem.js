@@ -28,7 +28,7 @@ const ProjectPreviewProgressBarItem = React.createClass({
     });
     const popover = (
       <Popover
-        id={'step-popover-' + step.id}
+        id={`step-popover-${step.id}`}
         title={
           <FormattedMessage
             message={this.getIntlMessage('project.preview.popover.title')}

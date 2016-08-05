@@ -22,7 +22,7 @@ const createHeaders = () => {
   };
 
   if (LocalStorageService.isValid('jwt')) {
-    headers.Authorization = 'Bearer ' + LocalStorageService.get('jwt');
+    headers.Authorization = `Bearer ${LocalStorageService.get('jwt')}`;
   }
 
   return headers;
@@ -32,7 +32,7 @@ const createFormDataHeaders = () => {
   const headers = {};
 
   if (LocalStorageService.isValid('jwt')) {
-    headers.Authorization = 'Bearer ' + LocalStorageService.get('jwt');
+    headers.Authorization = `Bearer ${LocalStorageService.get('jwt')}`;
   }
 
   return headers;
@@ -41,7 +41,7 @@ const createFormDataHeaders = () => {
 // If shield mode is activated, Safari will override the Authorization header, so we need this
 const addAuthorization = (req) => {
   if (LocalStorageService.isValid('jwt')) {
-    const header = 'Bearer ' + LocalStorageService.get('jwt');
+    const header = `Bearer ${LocalStorageService.get('jwt')}`;
     req.setRequestHeader('Authorization', header);
   }
 };

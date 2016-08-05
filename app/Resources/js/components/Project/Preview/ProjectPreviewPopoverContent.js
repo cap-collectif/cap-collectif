@@ -18,7 +18,7 @@ const ProjectPreviewPopoverContent = React.createClass({
         {
           step.status
             ? <p className="label label-default">
-              {this.getIntlMessage('step.status.' + step.status)}
+              {this.getIntlMessage(`step.status.${step.status}`)}
             </p>
             : null
         }

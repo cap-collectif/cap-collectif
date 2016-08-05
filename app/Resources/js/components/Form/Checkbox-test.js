@@ -30,7 +30,7 @@ describe('<Checkbox />', () => {
   it('should render a CheckboxGroup component with right props', () => {
     const wrapper = shallow(<Checkbox
       field={field}
-      id={'reply-' + field.id}
+      id={`reply-${field.id}`}
       onChange={emptyFunction}
       getGroupStyle={emptyFunction}
       renderFormErrors={emptyFunction}
@@ -38,7 +38,7 @@ describe('<Checkbox />', () => {
       {...IntlData}
     />);
     expect(wrapper.find(CheckboxGroup)).to.have.lengthOf(1);
-    expect(wrapper.find(CheckboxGroup).prop('name')).to.equal('choices-for-field-' + field.id);
+    expect(wrapper.find(CheckboxGroup).prop('name')).to.equal(`choices-for-field-${field.id}`);
     expect(wrapper.find(CheckboxGroup).prop('value')).to.be.a('array');
     expect(wrapper.find(CheckboxGroup).prop('onChange')).to.be.a('function');
   });
@@ -46,7 +46,7 @@ describe('<Checkbox />', () => {
   it('should render a CheckboxGroup component with 4 Input components inside', () => {
     const wrapper = shallow(<Checkbox
       field={field}
-      id={'reply-' + field.id}
+      id={`reply-${field.id}`}
       onChange={emptyFunction}
       getGroupStyle={emptyFunction}
       renderFormErrors={emptyFunction}
@@ -54,8 +54,8 @@ describe('<Checkbox />', () => {
       {...IntlData}
     />);
     expect(wrapper.find(CheckboxGroup).find(Input)).to.have.lengthOf(4);
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('id')).to.equal('reply-11_choice-' + field.choices[0].id);
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('name')).to.equal('choices-for-field-' + field.id);
+    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('id')).to.equal(`reply-11_choice-${field.choices[0].id}`);
+    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('name')).to.equal(`choices-for-field-${field.id}`);
     expect(wrapper.find(CheckboxGroup).find(Input).first().prop('type')).to.equal('checkbox');
     expect(wrapper.find(CheckboxGroup).find(Input).first().prop('label')).to.equal(field.choices[0].label);
     expect(wrapper.find(CheckboxGroup).find(Input).first().prop('value')).to.equal(field.choices[0].label);
@@ -64,7 +64,7 @@ describe('<Checkbox />', () => {
   it('should render a CheckboxGroup component with an Other component inside', () => {
     const wrapper = shallow(<Checkbox
       field={field}
-      id={'reply-' + field.id}
+      id={`reply-${field.id}`}
       onChange={emptyFunction}
       getGroupStyle={emptyFunction}
       renderFormErrors={emptyFunction}

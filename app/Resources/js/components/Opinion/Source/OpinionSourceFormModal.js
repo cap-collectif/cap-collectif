@@ -67,7 +67,7 @@ const OpinionSourceFormModal = React.createClass({
         <Modal.Footer>
           <CloseButton onClose={onClose} />
             <SubmitButton
-              id={'confirm-opinion-source-' + action}
+              id={`confirm-opinion-source-${action}`}
               label={action === 'create' ? 'global.publish' : 'global.edit'}
               isSubmitting={isSubmitting}
               onSubmit={this.handleSubmit.bind(null, this)}

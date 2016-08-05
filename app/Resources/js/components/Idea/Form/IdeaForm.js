@@ -126,7 +126,7 @@ const IdeaForm = React.createClass({
           type="text"
           ref="title"
           valueLink={this.linkState('form.title')}
-          label={this.getIntlMessage('idea.form.title') + ' *'}
+          label={`${this.getIntlMessage('idea.form.title')} *`}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
         />
@@ -138,7 +138,7 @@ const IdeaForm = React.createClass({
               type="select"
               ref="theme"
               valueLink={this.linkState('form.theme')}
-              label={this.getIntlMessage('idea.form.theme') + ' *'}
+              label={`${this.getIntlMessage('idea.form.theme')} *`}
               groupClassName={this.getGroupStyle('theme')}
               errors={this.renderFormErrors('theme')}
             >
@@ -159,7 +159,7 @@ const IdeaForm = React.createClass({
       <Input
         id="idea_body"
         type="editor"
-        label={this.getIntlMessage('idea.form.body') + ' *'}
+        label={`${this.getIntlMessage('idea.form.body')} *`}
         groupClassName={this.getGroupStyle('body')}
         errors={this.renderFormErrors('body')}
         valueLink={this.linkState('form.body')}
@@ -168,7 +168,7 @@ const IdeaForm = React.createClass({
       <Input
         id="idea_object"
         type="editor"
-        label={this.getIntlMessage('idea.form.object') + ' *'}
+        label={`${this.getIntlMessage('idea.form.object')} *`}
         groupClassName={this.getGroupStyle('object')}
         errors={this.renderFormErrors('object')}
         valueLink={this.linkState('form.object')}

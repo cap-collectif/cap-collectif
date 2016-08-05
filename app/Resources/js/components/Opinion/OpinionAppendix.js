@@ -61,7 +61,7 @@ const OpinionAppendix = React.createClass({
             }
         >
           {this.renderCaret()}
-          {' ' + appendix.type.title}
+          {` ${appendix.type.title}`}
         </Button>
         {this.renderContent()}
       </div>

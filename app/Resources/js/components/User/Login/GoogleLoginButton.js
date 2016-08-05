@@ -13,10 +13,10 @@ export const GoogleLoginButton = React.createClass({
     if (!this.props.features.login_gplus) {
       return null;
     }
-    const label = this.props.prefix + 'google';
+    const label = `${this.props.prefix}google`;
     return (
       <a
-       href={'/login/google?_destination=' + window.location.href}
+       href={`/login/google?_destination=${window.location.href}`}
        title={this.getIntlMessage(label)}
        className="btn login__social-btn login__social-btn--googleplus"
       >{this.getIntlMessage(label)}</a>

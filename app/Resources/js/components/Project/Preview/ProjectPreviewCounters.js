@@ -19,7 +19,7 @@ const ProjectPreviewCounters = React.createClass({
   render() {
     const { project } = this.props;
     const nbCounters = this.getNbCounters();
-    const counterWidth = 100 / nbCounters + '%';
+    const counterWidth = `${100 / nbCounters}%`;
     return (
       <div className="thumbnail__numbers">
         <ProjectPreviewCounter

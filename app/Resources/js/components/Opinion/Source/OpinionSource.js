@@ -23,7 +23,7 @@ const OpinionSource = React.createClass({
       'bg-vip': source.author && source.author.vip,
     });
     return (
-      <li className={classes} id={'source-' + source.id}>
+      <li className={classes} id={`source-${source.id}`}>
         <Row>
           <Col xs={12}>
             <div className="opinion__body box">

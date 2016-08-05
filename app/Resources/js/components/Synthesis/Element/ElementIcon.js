@@ -17,12 +17,12 @@ const ElementIcon = React.createClass({
 
   render() {
     if (this.props.element.displayType) {
-      const classes = classNames({
-        'cap': true,
+      const classes = `${classNames({
+        cap: true,
         'cap-baloon': this.props.element.displayType === 'contribution',
         'cap-folder-2': this.props.element.displayType === 'folder',
         'cap-book-1': this.props.element.displayType === 'root',
-      }) + ' ' + this.props.className;
+      })} ${this.props.className}`;
       return (
         <i className={classes}></i>
       );

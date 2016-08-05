@@ -21,7 +21,7 @@ const OpinionSourceAddButton = React.createClass({
           onClick={disabled ? null : handleClick}
         >
           <i className="cap cap-add-1"></i>
-          { ' ' + this.getIntlMessage('opinion.add_new_source')}
+          { ` ${this.getIntlMessage('opinion.add_new_source')}`}
         </Button>
       </LoginOverlay>
     );

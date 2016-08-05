@@ -17,7 +17,7 @@ const ArgumentsBox = React.createClass({
 
   renderArgumentsForType(type) {
     return (
-      <div id={'arguments-col--' + type} >
+      <div id={`arguments-col--${type}`} >
         <div className="opinion opinion--add-argument block block--bordered">
           <ArgumentCreate type={type} {...this.props} />
         </div>

@@ -58,22 +58,21 @@ class CustomDiff extends Diff {
     const diff = this.diff(escapeChars(oldValue), escapeChars(newValue));
     // All text has been replaced
     if (everythingHasChanged(diff)) {
-      return '<del style="color: red; text-decoration: line-through">' + oldValue + '</del>'
-        + '<ins style="color: green;">' + newValue + '</ins>';
+      return `<del style="color: red; text-decoration: line-through">${oldValue}</del><ins style="color: green;">${newValue}</ins>`;
     }
     // Add style
     diff.forEach((part) => {
       const diffColor = part.added ? 'green' : part.removed ? 'red' : 'grey';
       const decoration = part.removed ? 'line-through' : 'none';
       const htmlTag = part.removed ? 'del' : part.added ? 'ins' : 'span';
-      const open = '<' + htmlTag + ' style="color: ' + diffColor + '; text-decoration: ' + decoration + '">';
-      const close = '</' + htmlTag + '>';
-      const content = part.value.replace(/<parend>/g, close + '<parend>' + open);
+      const open = `<${htmlTag} style="color: ${diffColor}; text-decoration: ${decoration}">`;
+      const close = `</${htmlTag}>`;
+      const content = part.value.replace(/<parend>/g, `${close}<parend>${open}`);
       const styledPart = open + content + close;
       prettyDiff += styledPart;
     });
     // Put <p> back
-    return '<p>' + prettyDiff.replace(/<parend>/g, '</p><p>') + '</p>';
+    return `<p>${prettyDiff.replace(/<parend>/g, '</p><p>')}</p>`;
   }
 
 }

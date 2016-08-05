@@ -25,7 +25,7 @@ const ShowReplyModal = React.createClass({
     const { reply, form, show, onClose } = this.props;
     return (
       <Modal
-        id={'show-reply-modal-' + reply.id}
+        id={`show-reply-modal-${reply.id}`}
         className="reply__modal--show"
         animation={false}
         onHide={onClose}

@@ -61,7 +61,7 @@ export const RegistrationForm = React.createClass({
               if (string === 'already_used_email') {
                 errors.email = 'registration.constraints.email.already_used';
               } else {
-                errors.email = 'registration.constraints.' + string;
+                errors.email = `registration.constraints.${string}`;
               }
             });
           }

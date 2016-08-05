@@ -94,12 +94,12 @@ var cookieChoices = function() {
       // Set the cookie expiry to one year after today.
       var expiryDate = new Date();
       expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-      document.cookie = cookieName + '=y; expires=' + expiryDate.toGMTString();
+      document.cookie = `${cookieName}=y; expires=${expiryDate.toGMTString()}`;
     }
 
     function _shouldDisplayConsent() {
       // Display the header only if the cookie has not been set.
-      return !document.cookie.match(new RegExp(cookieName + '=([^;]+)'));
+      return !document.cookie.match(new RegExp(`${cookieName}=([^;]+)`));
     }
 
     return {

@@ -19,7 +19,7 @@ export const IdeaReportButton = React.createClass({
     const { idea } = this.props;
     return (
       <ReportBox
-        id={'idea-' + idea.id}
+        id={`idea-${idea.id}`}
         reported={idea.userHasReport}
         onReport={this.report}
         author={idea.author}

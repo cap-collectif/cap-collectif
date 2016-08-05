@@ -22,7 +22,7 @@ const ProposalDetailLikers = React.createClass({
     const { proposal } = this.props;
     return (
       <OverlayTrigger placement="top" overlay={
-            <Tooltip id={'proposal-' + proposal.id + '-likers-tooltip-'}>
+            <Tooltip id={`proposal-${proposal.id}-likers-tooltip-`}>
               <ProposalDetailLikersTooltipLabel likers={proposal.likers} />
             </Tooltip>
           }>

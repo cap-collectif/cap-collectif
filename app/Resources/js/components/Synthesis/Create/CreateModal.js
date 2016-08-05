@@ -136,7 +136,7 @@ const CreateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('synthesis.edition.action.create.name.label')}
+          {` ${this.getIntlMessage('synthesis.edition.action.create.name.label')}`}
         </h2>
         <Input type="text" id="new_element_title" name="new_element[title]" className="new-element__title" placeholder={this.getIntlMessage('synthesis.edition.action.create.name.placeholder')} valueLink={this.linkState('name')} />
       </div>
@@ -147,7 +147,7 @@ const CreateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('synthesis.edition.action.create.description.label')}
+          {` ${this.getIntlMessage('synthesis.edition.action.create.description.label')}`}
         </h2>
         <Input type="textarea" id="new_element_description" name="new_element[description]" className="new-element__title" valueLink={this.linkState('description')} />
       </div>
@@ -158,8 +158,8 @@ const CreateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('synthesis.edition.action.create.parent.label')}
-          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('synthesis.edition.action.create.optional')}</span>
+          {` ${this.getIntlMessage('synthesis.edition.action.create.parent.label')}`}
+          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage('synthesis.edition.action.create.optional')}`}</span>
         </h2>
         {this.renderParentFinder()}
       </div>

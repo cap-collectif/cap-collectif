@@ -20,7 +20,7 @@ const CommentReportButton = React.createClass({
     const { comment } = this.props;
     return (
         <ReportBox
-          id={'comment-' + comment.id}
+          id={`comment-${comment.id}`}
           reported={comment.has_user_reported}
           onReport={this.handleReport}
           author={comment.author}

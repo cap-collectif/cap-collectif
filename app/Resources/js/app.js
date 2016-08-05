@@ -121,7 +121,7 @@ const App = (($) => {
 
   const makeSidebar = (options) => {
     // Fix containers
-    const containers = options.container + ' .container';
+    const containers = `${options.container} .container`;
     $(options.container).addClass('container  sidebar__container');
     $(containers).removeClass('container  container--thinner').addClass('container--with-sidebar');
 

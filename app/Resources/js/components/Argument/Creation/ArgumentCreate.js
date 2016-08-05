@@ -90,17 +90,17 @@ const ArgumentCreate = React.createClass({
     return (
       <div className="opinion__body box">
         <div className="opinion__data">
-          <form id={'argument-form--' + this.props.type} ref="form">
+          <form id={`argument-form--${this.props.type}`} ref="form">
             <LoginOverlay>
               <Input
-                id={'arguments-body-' + this.props.type}
+                id={`arguments-body-${this.props.type}`}
                 type="textarea"
                 rows="2"
                 name="body"
                 ref="body"
                 valueLink={this.linkState('body')}
-                label={this.getIntlMessage('argument.' + this.props.type + '.add')}
-                placeholder={this.getIntlMessage('argument.' + this.props.type + '.add')}
+                label={this.getIntlMessage(`argument.${this.props.type}.add`)}
+                placeholder={this.getIntlMessage(`argument.${this.props.type}.add`)}
                 groupClassName={this.getGroupStyle('body')}
                 labelClassName="sr-only"
                 errors={this.renderFormErrors('body')}

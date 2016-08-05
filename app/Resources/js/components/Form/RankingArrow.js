@@ -32,7 +32,7 @@ const RankingArrow = React.createClass({
       <Button
         disabled={disabled}
         onClick={disabled ? null : onClick}
-        className={'ranking__item__arrow ranking__item__arrow--' + type}
+        className={`ranking__item__arrow ranking__item__arrow--${type}`}
       >
         {
           type === 'right' &&

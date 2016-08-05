@@ -146,7 +146,7 @@ const CommentForm = React.createClass({
           <Row>
             <Col sm={12} md={6}>
               <p>{ this.getIntlMessage('comment.with_my_account') }</p>
-              <a className="btn btn-primary" href={window.location.protocol + '//' + window.location.host + '/login'} >
+              <a className="btn btn-primary" href={`${window.location.protocol}//${window.location.host}/login`} >
                 { this.getIntlMessage('global.login') }
               </a>
               <h5>{ this.getIntlMessage('comment.why_create_account') }</h5>

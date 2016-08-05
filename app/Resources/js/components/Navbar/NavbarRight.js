@@ -24,7 +24,7 @@ const NavbarRight = React.createClass({
     // suppress jwt
     LoginActions.logoutUser();
     // We redirect to /logout page to invalidate session on the server
-    window.location.href = window.location.protocol + '//' + window.location.host + '/logout';
+    window.location.href = `${window.location.protocol}//${window.location.host}/logout`;
   },
 
   render() {
@@ -67,7 +67,7 @@ const NavbarRight = React.createClass({
                 </MenuItem>
                 : null
               }
-              <MenuItem key={3.3} eventKey={3.3} href={'/profile/' + (features.profiles ? 'edit-profile' : 'edit-account')}>
+              <MenuItem key={3.3} eventKey={3.3} href={`/profile/${features.profiles ? 'edit-profile' : 'edit-account'}`}>
                 { this.getIntlMessage('navbar.user_settings') }
               </MenuItem>
               <MenuItem key={3.4} divider />

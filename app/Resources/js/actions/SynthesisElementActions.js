@@ -125,7 +125,7 @@ export default {
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: Actions.RECEIVE_ELEMENTS_SUCCESS,
-          type: type + 'Tree',
+          type: `${type}Tree`,
           elements: data,
           parent: parent,
         });

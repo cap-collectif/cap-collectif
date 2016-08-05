@@ -73,7 +73,7 @@ const ArgumentButtons = React.createClass({
       />
       {' '}
       <ShareButtonDropdown
-        id={'arg-' + argument.id + '-share-button'}
+        id={`arg-${argument.id}-share-button`}
         url={argument._links.show}
         className="argument__btn--share btn-dark-gray btn--outline btn btn-xs"
       />

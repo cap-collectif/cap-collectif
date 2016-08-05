@@ -32,7 +32,7 @@ const ProposalStatus = React.createClass({
       'proposal__status': true,
     };
     if (status) {
-      statusClasses['status--' + status.color] = true;
+      statusClasses[`status--${status.color}`] = true;
     }
 
     return (

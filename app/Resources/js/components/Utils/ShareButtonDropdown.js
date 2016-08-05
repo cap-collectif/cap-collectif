@@ -100,7 +100,7 @@ const ShareButtonDropdown = React.createClass({
         <DropdownButton
           id={id}
           bsStyle={bsStyle}
-          className={className + ' dropdown--custom'}
+          className={`${className} dropdown--custom`}
           style={style}
           title={
             <span><i className="cap cap-link"></i> {this.getIntlMessage('global.share')}</span>

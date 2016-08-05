@@ -38,7 +38,7 @@ const PhoneForm = React.createClass({
     if (nextProps.isSubmitting) {
       const form = JSON.parse(JSON.stringify(this.state.form));
       form.phone = form.phone.replace(/((?![0-9]).)/g, '');
-      form.phone = '+33' + (form.phone.charAt(0) === '0' ? form.phone.substring(1) : form.phone);
+      form.phone = `+33${form.phone.charAt(0) === '0' ? form.phone.substring(1) : form.phone}`;
       UserActions
         .update(form)
         .then(() => {

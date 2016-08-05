@@ -35,7 +35,7 @@ export const ReportButton = React.createClass({
     return (
       <LoginOverlay>
         <Button
-          id={'report-' + id + '-button'}
+          id={`report-${id}-button`}
           style={style}
           bsSize={bsSize}
           className={classNames(classes)}

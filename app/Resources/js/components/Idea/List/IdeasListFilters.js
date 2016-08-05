@@ -111,7 +111,7 @@ export const IdeasListFilters = React.createClass({
             this.orders.map((choice) => {
               return (
                 <option key={choice} value={choice}>
-                  {this.getIntlMessage('global.filter_f_' + choice)}
+                  {this.getIntlMessage(`global.filter_f_${choice}`)}
                 </option>
               );
             })

@@ -37,7 +37,7 @@ const ArgumentItem = React.createClass({
       'bg-vip': argument.author && argument.author.vip,
     });
     return (
-      <li className={classes} id={'arg-' + argument.id}>
+      <li className={classes} id={`arg-${argument.id}`}>
         <div className="opinion__body box">
           <UserAvatar user={argument.author} className="pull-left" />
           <div className="opinion__data">

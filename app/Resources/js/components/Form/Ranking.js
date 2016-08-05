@@ -48,7 +48,7 @@ const Ranking = React.createClass({
 
     return (
       <div
-        className={'form-group ' + getGroupStyle(field.id)}
+        className={`form-group ${getGroupStyle(field.id)}`}
         id={id}
       >
         <label className={labelClasses}>

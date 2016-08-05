@@ -47,7 +47,7 @@ describe('<ProposalPreviewFooter />', () => {
     const votesCounter = countersDiv.find('div.proposal__counter--votes');
     expect(votesCounter).to.have.length(1);
     const expectedVotes = proposal.votesCount;
-    expect(votesCounter.find('.proposal__counter__value').text()).to.equal('' + expectedVotes);
+    expect(votesCounter.find('.proposal__counter__value').text()).to.equal(`${expectedVotes}`);
   });
 
   it('should render a footer with comment and votes counters when selection step is specified', () => {
@@ -63,7 +63,7 @@ describe('<ProposalPreviewFooter />', () => {
     const votesCounter = countersDiv.find('div.proposal__counter--votes');
     expect(votesCounter).to.have.length(1);
     const expectedVotes = proposal.votesCountBySelectionSteps[42] + props.votesDelta;
-    expect(votesCounter.find('.proposal__counter__value').text()).to.equal('' + expectedVotes);
+    expect(votesCounter.find('.proposal__counter__value').text()).to.equal(`${expectedVotes}`);
   });
 
   it('should render a footer with comment and votes counters when selection step votes are not specified', () => {
@@ -79,6 +79,6 @@ describe('<ProposalPreviewFooter />', () => {
     const votesCounter = countersDiv.find('div.proposal__counter--votes');
     expect(votesCounter).to.have.length(1);
     const expectedVotes = props.votesDelta;
-    expect(votesCounter.find('.proposal__counter__value').text()).to.equal('' + expectedVotes);
+    expect(votesCounter.find('.proposal__counter__value').text()).to.equal(`${expectedVotes}`);
   });
 });

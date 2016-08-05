@@ -9,8 +9,8 @@ export default class DefaultAvatar extends React.Component {
         xmlns="http://www.w3.org/2000/svg"
         x="0px"
         y="0px"
-        width={this.props.size + 'px'}
-        height={this.props.size + 'px'}
+        width={`${this.props.size}px`}
+        height={`${this.props.size}px`}
         viewBox="0 0 200 200"
         enableBackground="new 0 0 200 200"
       >

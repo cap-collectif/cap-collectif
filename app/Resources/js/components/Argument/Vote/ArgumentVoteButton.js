@@ -28,7 +28,7 @@ const ArgumentVoteButton = React.createClass({
         <Button
           disabled={!argument.isContribuable || this.isTheUserTheAuthor()}
           bsStyle={hasVoted ? 'danger' : 'success'}
-          className={'argument__btn--vote' + (hasVoted ? '' : ' btn--outline')}
+          className={`argument__btn--vote${hasVoted ? '' : ' btn--outline'}`}
           bsSize="xsmall"
           onClick={onClick}
         >

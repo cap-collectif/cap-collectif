@@ -78,7 +78,7 @@ const OpinionEditForm = React.createClass({
           { name: 'check', label: 'check', type: 'checkbox', id: 'opinion_check', divClassName: 'alert alert-warning edit-confirm-alert' },
           { name: 'title', label: 'title', type: 'text', id: 'opinion_title' },
           { name: 'body', label: 'body', type: 'editor', id: 'opinion_body' },
-        ].concat(opinion.appendices.map((a, i) => { return { label: a.type.title, name: a.type.title, type: 'editor', id: 'opinion_appendix-' + (i + 1) }; }))}
+        ].concat(opinion.appendices.map((a, i) => { return { label: a.type.title, name: a.type.title, type: 'editor', id: `opinion_appendix-${i + 1}` }; }))}
         initialValues={$.extend({},
           { title: opinion.title,
             body: opinion.body,

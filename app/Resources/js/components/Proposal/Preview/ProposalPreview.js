@@ -53,7 +53,7 @@ const ProposalPreview = React.createClass({
 
     return (
       <Col componentClass="li" xs={12} sm={6} md={4}>
-        <div id={'proposal-' + proposal.id} className="block block--bordered proposal__preview">
+        <div id={`proposal-${proposal.id}`} className="block block--bordered proposal__preview">
           <div className={classes}>
             <ProposalPreviewHeader proposal={proposal} />
             <ProposalPreviewBody

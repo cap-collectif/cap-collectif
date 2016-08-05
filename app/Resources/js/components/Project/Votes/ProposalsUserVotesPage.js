@@ -59,7 +59,7 @@ const ProposalsUserVotesPage = React.createClass({
                             <i className="cap cap-arrow-1-1"></i>
                             <span> {this.getIntlMessage('project.votes.back')}</span>
                           </a>
-                        {step.title + ' '}
+                        {`${step.title} `}
                         {
                           step.voteType === VOTE_TYPE_BUDGET
                             ? this.getIntlMessage('project.votes.type.budget')

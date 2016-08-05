@@ -7,7 +7,7 @@ export default {
 
   create: (uri, object, data, successMessage = 'comment.submit_success', errorMessage = 'comment.submit_error') => {
     return Fetcher
-    .post('/' + uri + '/' + object + '/comments', data)
+    .post(`/${uri}/${object}/comments`, data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: CREATE_COMMENT_SUCCESS,
@@ -26,10 +26,7 @@ export default {
 
   loadFromServer: (uri, object, offset, limit, filter) => {
     Fetcher
-    .get('/' + uri + '/' + object +
-         '/comments?offset=' + offset +
-         '&limit=' + limit +
-         '&filter=' + filter
+    .get(`/${uri}/${object}/comments?offset=${offset}&limit=${limit}&filter=${filter}`
     )
     .then((data) => {
       data.actionType = RECEIVE_COMMENTS;

@@ -49,8 +49,8 @@ describe('<Other />', () => {
     />);
     const radioComponent = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'radio'));
     expect(radioComponent).to.have.length(1);
-    expect(radioComponent.prop('id')).to.equal('reply-' + radioField.id + '_choice-other--check');
-    expect(radioComponent.prop('name')).to.equal('choices-for-field-' + radioField.id);
+    expect(radioComponent.prop('id')).to.equal(`reply-${radioField.id}_choice-other--check`);
+    expect(radioComponent.prop('name')).to.equal(`choices-for-field-${radioField.id}`);
     expect(radioComponent.prop('type')).to.equal('radio');
     expect(radioComponent.prop('checked')).to.be.a('boolean');
     expect(radioComponent.prop('disabled')).to.be.a('boolean');
@@ -58,7 +58,7 @@ describe('<Other />', () => {
 
     const textComponent = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'text'));
     expect(textComponent).to.have.length(1);
-    expect(textComponent.prop('id')).to.equal('reply-' + radioField.id + '_choice-other--field');
+    expect(textComponent.prop('id')).to.equal(`reply-${radioField.id}_choice-other--field`);
     expect(textComponent.prop('type')).to.equal('text');
     expect(textComponent.prop('bsSize')).to.equal('small');
     expect(textComponent.prop('placeholder')).to.be.a('string');
@@ -75,8 +75,8 @@ describe('<Other />', () => {
     />);
     const checkboxComponent = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'checkbox'));
     expect(checkboxComponent).to.have.length(1);
-    expect(checkboxComponent.prop('id')).to.equal('reply-' + checkboxField.id + '_choice-other--check');
-    expect(checkboxComponent.prop('name')).to.equal('choices-for-field-' + checkboxField.id);
+    expect(checkboxComponent.prop('id')).to.equal(`reply-${checkboxField.id}_choice-other--check`);
+    expect(checkboxComponent.prop('name')).to.equal(`choices-for-field-${checkboxField.id}`);
     expect(checkboxComponent.prop('type')).to.equal('checkbox');
     expect(checkboxComponent.prop('checked')).to.be.a('boolean');
     expect(checkboxComponent.prop('disabled')).to.be.a('boolean');
@@ -84,7 +84,7 @@ describe('<Other />', () => {
 
     const textComponent = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'text'));
     expect(textComponent).to.have.length(1);
-    expect(textComponent.prop('id')).to.equal('reply-' + checkboxField.id + '_choice-other--field');
+    expect(textComponent.prop('id')).to.equal(`reply-${checkboxField.id}_choice-other--field`);
     expect(textComponent.prop('type')).to.equal('text');
     expect(textComponent.prop('bsSize')).to.equal('small');
     expect(textComponent.prop('placeholder')).to.be.a('string');

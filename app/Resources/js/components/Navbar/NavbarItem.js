@@ -54,7 +54,7 @@ const NavbarItem = React.createClass({
         }
         return (
           <NavDropdown
-            id={'navbar-dropdown-' + item.id}
+            id={`navbar-dropdown-${item.id}`}
             title={item.title}
             ref={refCallback}
             className={className}

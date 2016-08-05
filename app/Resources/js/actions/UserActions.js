@@ -3,7 +3,7 @@ import Fetcher from '../services/Fetcher';
 export default {
 
   login: (data) => {
-    return fetch(window.location.protocol + '//' + window.location.host + '/login_check', {
+    return fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
       method: 'post',
       body: JSON.stringify(data),
       credentials: 'include',

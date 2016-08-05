@@ -188,7 +188,7 @@ const ViewElement = React.createClass({
         <div className="synthesis__element">
           <OverlayTrigger placement="top" overlay={tooltip}>
             <div className="synthesis__element__bar">
-              <span className="synthesis__element__bar__value" style={{ width: percentage + '%' }} />
+              <span className="synthesis__element__bar__value" style={{ width: `${percentage}%` }} />
               {this.renderTitle()}
             </div>
           </OverlayTrigger>

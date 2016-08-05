@@ -32,7 +32,7 @@ const ReplyModalButtons = React.createClass({
       <span className="pull-left reply__buttons">
         {
           form.contribuable && <DeleteButton
-            id={'reply-delete-button' + reply.id}
+            id={`reply-delete-button${reply.id}`}
             className="reply__delete-btn"
             author={reply.author}
             onClick={this.toggleDeleteModal.bind(null, true)}

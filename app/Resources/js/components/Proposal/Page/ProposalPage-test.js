@@ -82,7 +82,7 @@ describe('<ProposalPage />', () => {
     expect(commentsItem.prop('eventKey')).to.equal('comments');
     expect(commentsItem.prop('className')).to.equal('tabs__pill');
     expect(commentsItem.children().first().text()).to.equal('Commentaires');
-    expect(commentsItem.find('.badge').text()).to.equal('' + proposalNoVotes.comments_count);
+    expect(commentsItem.find('.badge').text()).to.equal(`${proposalNoVotes.comments_count}`);
     const voteButtonWrapper = tabsPills.find('Connect(ProposalVoteButtonWrapper)');
     expect(voteButtonWrapper).to.have.length(1);
     expect(voteButtonWrapper.prop('selectionStep')).to.equal(null);
@@ -142,7 +142,7 @@ describe('<ProposalPage />', () => {
     expect(votesItem.prop('eventKey')).to.equal('votes');
     expect(votesItem.prop('className')).to.equal('tabs__pill');
     expect(votesItem.children().first().text()).to.equal('Votes');
-    expect(votesItem.find('.badge').text()).to.equal('' + proposalWithVotes.votesCount);
+    expect(votesItem.find('.badge').text()).to.equal(`${proposalWithVotes.votesCount}`);
     const tabContent = tabContainer.find(Tab.Content);
     const tabPanes = tabContent.find(Tab.Pane);
     expect(tabPanes).to.have.length(3);

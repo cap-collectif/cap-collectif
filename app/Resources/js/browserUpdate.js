@@ -26,9 +26,9 @@ this.op.reminderClosed=op.reminderClosed||(24*7);
 this.op.onshow = op.onshow||function(o){};
 this.op.onclick = op.onclick||function(o){};
 this.op.onclose = op.onclose||function(o){};
-this.op.url= op.url||"//browser-update.org/update-browser.html#"+jsv+":"+(location.hostname||"x");
+this.op.url= op.url||`//browser-update.org/update-browser.html#${jsv}:${location.hostname||"x"}`;
 if (op.l)
-  this.op.url= op.url||"//browser-update.org/"+ll+"/update-browser.html#"+jsv+":"+(location.hostname||"x");
+  this.op.url= op.url||`//browser-update.org/${ll}/update-browser.html#${jsv}:${location.hostname||"x"}`;
 this.op.pageurl = op.pageurl || window.location.hostname || "unknown";
 this.op.newwindow=(op.newwindow!==false);
 
@@ -85,7 +85,7 @@ function getBrowser(ua_str) {
         else if (v>3) v=7;
         else v=9;
     }
-    return {n:n,v:v,t:names[n]+" "+v,donotnotify:donotnotify};
+    return {n:n,v:v,t:`${names[n]} ${v}`,donotnotify:donotnotify};
 }
 
 this.op.browser=getBrowser();
@@ -95,12 +95,12 @@ if (!this.op.test && (!this.op.browser || !this.op.browser.n || this.op.browser.
 
 if (!this.op.test  && Math.round(Math.random()*5000)<1) {
     var i = new Image();
-    i.src="//browser-update.org/viewcount.php?n="+this.op.browser.n+"&v="+this.op.browser.v + "&p="+ escape(this.op.pageurl) + "&jsv="+jsv+ "&inv="+this.op.v+"&vs="+myvs.i+","+myvs.f+","+myvs.o+","+myvs.s;
+    i.src=`//browser-update.org/viewcount.php?n=${this.op.browser.n}&v=${this.op.browser.v}&p=${escape(this.op.pageurl)}&jsv=${jsv}&inv=${this.op.v}&vs=${myvs.i},${myvs.f},${myvs.o},${myvs.s}`;
 }
 
 function setCookie(hours) {
     var d = new Date(new Date().getTime() +1000*3600*hours);
-    document.cookie = 'browserupdateorg=pause; expires='+d.toGMTString()+'; path=/';
+    document.cookie = `browserupdateorg=pause; expires=${d.toGMTString()}; path=/`;
 }
 if (this.op.reminder>0) {
     setCookie(this.op.reminder);
@@ -108,7 +108,7 @@ if (this.op.reminder>0) {
 
 var languages = "xx,jp,sl,id,uk,rm,da,ca,sv,hu,fa,gl";
 if (languages.indexOf(ll)>0)
-    this.op.url="//browser-update.org/update.html#"+jsv+"@"+(location.hostname||"x");
+    this.op.url=`//browser-update.org/update.html#${jsv}@${location.hostname||"x"}`;
 var tar="";
 if (this.op.newwindow)
     tar=' target="_blank"';
@@ -200,27 +200,27 @@ else if (ll=="ar")
 
 if (op.text)
     t = op.text;
-if (op["text_"+ll])
-    t = op["text_"+ll];
+if (op[`text_${ll}`])
+    t = op[`text_${ll}`];
 
-this.op.text=busprintf(t,this.op.browser.t,' href="'+this.op.url+'"'+tar);
+this.op.text=busprintf(t,this.op.browser.t,` href="${this.op.url}"${tar}`);
 
 var div = document.createElement("div");
 this.op.div = div;
 div.id="buorg";
 div.className="buorg";
-div.innerHTML= '<div>' + this.op.text + '<div id="buorgclose">&times;</div></div>';
+div.innerHTML= `<div>${this.op.text}<div id="buorgclose">&times;</div></div>`;
 
 var sheet = document.createElement("style");
-var style = ".buorg {position:absolute;position:fixed;z-index:111111;\
+var style = `.buorg {position:absolute;position:fixed;z-index:111111;\
 width:100%; top:0px; left:0px; \
 border-bottom:1px solid #A29330; \
-background:#FDF2AB no-repeat 13px center url(//browser-update.org/img/small/"+this.op.browser.n+".png);\
+background:#FDF2AB no-repeat 13px center url(//browser-update.org/img/small/${this.op.browser.n}.png);\
 text-align:left; cursor:pointer; \
 font-family: Arial,Helvetica,sans-serif; color:#000; font-size: 12px;}\
 .buorg div { padding:5px 36px 5px 40px; } \
 .buorg a,.buorg a:visited  {color:#E25600; text-decoration: underline;}\
-#buorgclose { position: absolute; right: 6px; top:-2px; height: 20px; width: 12px; font-weight: bold;font-size:18px; padding:0; }";
+#buorgclose { position: absolute; right: 6px; top:-2px; height: 20px; width: 12px; font-weight: bold;font-size:18px; padding:0; }`;
 document.body.insertBefore(div,document.body.firstChild);
 document.getElementsByTagName("head")[0].appendChild(sheet);
 try {
@@ -258,7 +258,7 @@ catch(e) {}
 
 var hm=document.getElementsByTagName("html")[0]||document.body;
 this.op.bodymt = hm.style.marginTop;
-hm.style.marginTop = (div.clientHeight)+"px";
+hm.style.marginTop = `${div.clientHeight}px`;
 (function(me) {
             document.getElementById("buorgclose").onclick = function(e) {
                 var e = e || window.event;

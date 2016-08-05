@@ -55,7 +55,7 @@ const ProposalDetailAdvancementStep = React.createClass({
               status &&
                 <Label bsStyle={status.color} style={{ marginTop: '5px' }}>
                   {
-                    status.name.length > 25 ? status.name.substr(0, 25) + '...' : status.name
+                    status.name.length > 25 ? `${status.name.substr(0, 25)}...` : status.name
                   }
                 </Label>
             }

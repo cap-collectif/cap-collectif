@@ -86,7 +86,7 @@ const SmsCodeForm = React.createClass({
             valueLink={this.linkState('form.code')}
             id="_code"
             label={this.getIntlMessage('phone.confirm.code')}
-            groupClassName={this.getGroupStyle('code') + ' form-group--no-margin'}
+            groupClassName={`${this.getGroupStyle('code')} form-group--no-margin`}
             errors={this.renderFormErrors('code')}
           />
       </form>

@@ -68,7 +68,7 @@ const ProjectStatsModal = React.createClass({
   },
 
   render() {
-    const id = 'project-stats-modal-' + this.props.stepId + '-' + this.props.type;
+    const id = `project-stats-modal-${this.props.stepId}-${this.props.type}`;
     return (
       <div>
         <Button
@@ -80,14 +80,14 @@ const ProjectStatsModal = React.createClass({
           {this.getIntlMessage('project.stats.display.all')}
         </Button>
         <Modal
-          id={'stats-modal-' + this.props.stepId + '-' + this.props.type}
+          id={`stats-modal-${this.props.stepId}-${this.props.type}`}
           animation={false}
           show={this.state.showModal}
           onHide={this.hideModal}
-          aria-labelledby={id + '-title'}
+          aria-labelledby={`${id}-title`}
         >
           <Modal.Header closeButton>
-            <Modal.Title id={id + '-title'}>
+            <Modal.Title id={`${id}-title`}>
               <i className={this.props.icon}></i> {this.getIntlMessage(this.props.label)}
             </Modal.Title>
           </Modal.Header>

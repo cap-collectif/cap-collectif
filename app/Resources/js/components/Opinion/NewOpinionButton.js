@@ -33,7 +33,7 @@ const NewOpinionButton = React.createClass({
       <span>
       <LoginOverlay>
         <a
-          id={'btn-add--' + opinionTypeSlug}
+          id={`btn-add--${opinionTypeSlug}`}
           onClick={this.openModal}
           className="btn btn-primary"
         >

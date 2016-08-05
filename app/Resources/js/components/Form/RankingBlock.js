@@ -55,7 +55,7 @@ const RankingBlock = React.createClass({
   },
 
   recalculateChoicesHeight() {
-    const height = $(ReactDOM.findDOMNode(this.choiceBox)).height() + 'px';
+    const height = `${$(ReactDOM.findDOMNode(this.choiceBox)).height()}px`;
     this.setState({
       choicesHeight: height,
     });
@@ -133,7 +133,7 @@ const RankingBlock = React.createClass({
                 items.choiceBox.length === 0
                   ? <div
                     className="hidden-xs ranking__choice-box__placeholder"
-                    style={{ height: (spotsNb * 45) + 'px' }}
+                    style={{ height: `${spotsNb * 45}px` }}
                   >
                     <span>{this.getIntlMessage('global.form.ranking.choiceBox.placeholder')}</span>
                   </div>

@@ -50,7 +50,7 @@ const RankingItem = React.createClass({
               <i className="cap cap-cursor-move"></i>
             </span>
             <span className="ranking__item__label">
-              { position ? (position + '. ') : null}
+              { position ? (`${position}. `) : null}
               { item.label }
             </span>
           </div>

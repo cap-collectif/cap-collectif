@@ -97,7 +97,7 @@ describe('<ReplyForm />', () => {
     expect(component).to.have.lengthOf(1);
     expect(component.prop('type')).to.equal(form.fields[0].type);
     expect(component.prop('label')).to.equal(form.fields[0].question);
-    expect(component.prop('id')).to.equal('reply-' + form.fields[0].id);
+    expect(component.prop('id')).to.equal(`reply-${form.fields[0].id}`);
     expect(component.prop('help')).to.be.empty;
   });
 
@@ -112,7 +112,7 @@ describe('<ReplyForm />', () => {
       {...IntlData}
     />);
     expect(wrapper.find(Checkbox)).to.have.lengthOf(1);
-    expect(wrapper.find(Checkbox).prop('id')).to.equal('reply-' + form.fields[1].id);
+    expect(wrapper.find(Checkbox).prop('id')).to.equal(`reply-${form.fields[1].id}`);
     expect(wrapper.find(Checkbox).prop('field')).to.eql(form.fields[1]);
     expect(wrapper.find(Checkbox).prop('onChange')).to.be.a('function');
     expect(wrapper.find(Checkbox).prop('getGroupStyle')).to.be.a('function');
@@ -130,7 +130,7 @@ describe('<ReplyForm />', () => {
       {...IntlData}
     />);
     expect(wrapper.find(Radio)).to.have.lengthOf(1);
-    expect(wrapper.find(Radio).prop('id')).to.equal('reply-' + form.fields[2].id);
+    expect(wrapper.find(Radio).prop('id')).to.equal(`reply-${form.fields[2].id}`);
     expect(wrapper.find(Radio).prop('field')).to.eql(form.fields[2]);
     expect(wrapper.find(Checkbox).prop('onChange')).to.be.a('function');
     expect(wrapper.find(Checkbox).prop('getGroupStyle')).to.be.a('function');
@@ -149,8 +149,8 @@ describe('<ReplyForm />', () => {
     const component = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'select'));
     expect(component).to.have.length(1);
     expect(component.prop('type')).to.equal(form.fields[3].type);
-    expect(component.prop('label')).to.equal(form.fields[3].question + ' (facultatif)');
-    expect(component.prop('id')).to.equal('reply-' + form.fields[3].id);
+    expect(component.prop('label')).to.equal(`${form.fields[3].question} (facultatif)`);
+    expect(component.prop('id')).to.equal(`reply-${form.fields[3].id}`);
     expect(component.prop('help')).to.be.equal(form.fields[3].helpText);
   });
 
@@ -165,7 +165,7 @@ describe('<ReplyForm />', () => {
     />);
     const component = wrapper.find('Ranking');
     expect(component).to.have.length(1);
-    expect(component.prop('id')).to.equal('reply-' + form.fields[4].id);
+    expect(component.prop('id')).to.equal(`reply-${form.fields[4].id}`);
     expect(component.prop('field')).to.be.equal(form.fields[4]);
     expect(component.prop('onChange')).to.be.a('function');
     expect(component.prop('labelClassName')).to.equal('h4');

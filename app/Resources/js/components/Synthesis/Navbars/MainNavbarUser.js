@@ -51,7 +51,7 @@ export const MainNavbarUser = React.createClass({
               </MenuItem>
               : null
             }
-            <MenuItem eventKey="3" href={'/profile/' + (features.profiles ? 'edit-profile' : 'edit-account')}>
+            <MenuItem eventKey="3" href={`/profile/${features.profiles ? 'edit-profile' : 'edit-account'}`}>
               {this.getIntlMessage('synthesis.edition.navbar.user.settings')}
             </MenuItem>
             <MenuItem divider />

@@ -89,7 +89,7 @@ class Validator {
           }
           break;
         default:
-          throw new Error('The rule ' + rule + ' does not exist in Validator.');
+          throw new Error(`The rule ${rule} does not exist in Validator.`);
       }
     });
     return errors;

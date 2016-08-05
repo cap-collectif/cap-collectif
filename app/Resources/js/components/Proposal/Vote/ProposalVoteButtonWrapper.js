@@ -56,7 +56,7 @@ const ProposalVoteButtonWrapper = React.createClass({
     if (user) {
       return (
         <VoteButtonOverlay
-            popoverId={'vote-tooltip-proposal-' + proposal.id}
+            popoverId={`vote-tooltip-proposal-${proposal.id}`}
             show={!this.userHasEnoughCredits()}
         >
           <ProposalVoteButton

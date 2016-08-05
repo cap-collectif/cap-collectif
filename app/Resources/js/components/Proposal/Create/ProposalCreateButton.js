@@ -21,7 +21,7 @@ const ProposalCreateButton = React.createClass({
           onClick={disabled ? null : handleClick}
         >
           <i className="cap cap-add-1"></i>
-          { ' ' + this.getIntlMessage('proposal.add')}
+          { ` ${this.getIntlMessage('proposal.add')}`}
         </Button>
       </LoginOverlay>
     );

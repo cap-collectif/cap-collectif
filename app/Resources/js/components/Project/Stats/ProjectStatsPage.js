@@ -70,7 +70,7 @@ const ProjectStatsPage = React.createClass({
                       type={key}
                       stepId={selectedStep.id}
                       data={selectedStep.stats[key]}
-                      label={'project.stats.list.' + key}
+                      label={`project.stats.list.${key}`}
                       icon={icons[key]}
                       isCurrency={key === 'costs'}
                       showFilters={key === 'votes'}

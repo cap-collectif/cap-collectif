@@ -75,7 +75,7 @@ const ProjectStatsList = React.createClass({
     const { data } = this.state;
 
     return (
-      <div className="block" id={'stats-' + this.props.stepId + '-' + this.props.type}>
+      <div className="block" id={`stats-${this.props.stepId}-${this.props.type}`}>
         <ProjectStatsFilters
           themes={this.props.themes}
           districts={this.props.districts}
@@ -86,10 +86,10 @@ const ProjectStatsList = React.createClass({
         <ListGroup className="stats__list">
           <ListGroupItem className="stats__list__header">
             <i className={this.props.icon}></i> {this.getIntlMessage(this.props.label)}
-            <span id={'step-stats-display-' + this.props.stepId} className="pull-right excerpt stats__buttons">
+            <span id={`step-stats-display-${this.props.stepId}`} className="pull-right excerpt stats__buttons">
               <Button
                 bsStyle="link"
-                id={'step-stats-display-' + this.props.stepId + '-number'}
+                id={`step-stats-display-${this.props.stepId}-number`}
                 active={!this.state.showPercentage}
                 onClick={this.showPercentage.bind(this, false)}
               >
@@ -98,7 +98,7 @@ const ProjectStatsList = React.createClass({
               <span>/</span>
               <Button
                 bsStyle="link"
-                id={'step-stats-display-' + this.props.stepId + '-percentage'}
+                id={`step-stats-display-${this.props.stepId}-percentage`}
                 active={this.state.showPercentage}
                 onClick={this.showPercentage.bind(this, true)}
               >

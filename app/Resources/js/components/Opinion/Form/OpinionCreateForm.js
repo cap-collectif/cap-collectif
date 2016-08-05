@@ -49,7 +49,7 @@ const OpinionCreateForm = React.createClass({
     const { opinionType, onFailure } = this.props;
     if (!opinionType) return;
     const dynamicsField = opinionType.appendixTypes.map((type) => {
-      return { name: type.title, label: type.title, type: 'editor', id: 'appendix_' + type.id };
+      return { name: type.title, label: type.title, type: 'editor', id: `appendix_${type.id}` };
     });
     return (
       <OpinionForm

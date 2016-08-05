@@ -49,7 +49,7 @@ export const RegistrationButton = React.createClass({
           style={this.props.buttonStyle}
           onClick={this.handleClick}
           bsStyle={this.props.bsStyle}
-          className={'navbar-btn btn--registration ' + this.props.className}
+          className={`navbar-btn btn--registration ${this.props.className}`}
         >
           { this.getIntlMessage('global.registration') }
         </Button>

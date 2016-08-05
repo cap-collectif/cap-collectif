@@ -74,10 +74,10 @@ const ArgumentList = React.createClass({
     if (this.state.arguments.length > 1) {
       return (
         <Col xs={12} sm={6} md={6} className="block--first-mobile">
-          <label className="sr-only" htmlFor={'filter-arguments-' + this.props.type}>
-            {this.getIntlMessage('argument.filter.' + this.props.type)}
+          <label className="sr-only" htmlFor={`filter-arguments-${this.props.type}`}>
+            {this.getIntlMessage(`argument.filter.${this.props.type}`)}
           </label>
-          <select id={'filter-arguments-' + this.props.type} ref="filter" className="form-control pull-right" value={this.state.order} onChange={() => this.updateSelectedValue()}>
+          <select id={`filter-arguments-${this.props.type}`} ref="filter" className="form-control pull-right" value={this.state.order} onChange={() => this.updateSelectedValue()}>
             <option value="last">{this.getIntlMessage('global.filter_last')}</option>
             <option value="old">{this.getIntlMessage('global.filter_old')}</option>
             <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
@@ -89,7 +89,7 @@ const ArgumentList = React.createClass({
 
   render() {
     return (
-      <div id={'opinion__arguments--' + this.props.type} className="block--tablet block--bordered">
+      <div id={`opinion__arguments--${this.props.type}`} className="block--tablet block--bordered">
         <Row className="opinion__arguments__header">
           <Col xs={12} sm={6} md={6}>
             <h4 className="opinion__header__title">

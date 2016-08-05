@@ -53,7 +53,7 @@ const Radio = React.createClass({
 
   render() {
     const field = this.props.field;
-    const fieldName = 'choices-for-field-' + field.id;
+    const fieldName = `choices-for-field-${field.id}`;
 
     const labelClasses = {
       'control-label': true,
@@ -64,7 +64,7 @@ const Radio = React.createClass({
 
     return (
       <div
-        className={'form-group ' + this.props.getGroupStyle(field.id)}
+        className={`form-group ${this.props.getGroupStyle(field.id)}`}
         id={this.props.id}
       >
         <label className={classNames(labelClasses)}>
@@ -80,11 +80,11 @@ const Radio = React.createClass({
         >
           {
             this.props.field.choices.map((choice) => {
-              const choiceKey = 'choice-' + choice.id;
+              const choiceKey = `choice-${choice.id}`;
               return (
                 <Input
                   key={choiceKey}
-                  id={this.props.id + '_' + choiceKey}
+                  id={`${this.props.id}_${choiceKey}`}
                   name={fieldName}
                   type="radio"
                   label={choice.label}

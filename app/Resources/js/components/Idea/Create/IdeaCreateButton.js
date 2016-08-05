@@ -19,7 +19,7 @@ export const IdeaCreateButton = React.createClass({
           className="form-control"
         >
           <i className="cap cap-add-1"></i>
-          { ' ' + this.getIntlMessage('idea.add')}
+          { ` ${this.getIntlMessage('idea.add')}`}
         </Button>
       </LoginOverlay>
     );

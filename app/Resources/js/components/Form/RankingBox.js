@@ -51,7 +51,7 @@ const RankingBox = React.createClass({
                   ? <RankingItem
                     key={item.id}
                     item={item}
-                    id={'reply-' + fieldId + '_choice-' + item.id}
+                    id={`reply-${fieldId}_choice-${item.id}`}
                     arrowFunctions={arrowFunctions}
                     disabled={disabled}
                     position={listType === 'choiceBox' ? i + 1 : null}

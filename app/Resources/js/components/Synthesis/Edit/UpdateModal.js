@@ -147,7 +147,7 @@ const UpdateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('synthesis.edition.action.update.field.title')}
+          {` ${this.getIntlMessage('synthesis.edition.action.update.field.title')}`}
         </h2>
         <Input type="text" id="update_element_title" name="update_element[title]" className="update-element__title" valueLink={this.linkState('title')} />
       </div>
@@ -158,7 +158,7 @@ const UpdateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('synthesis.edition.action.update.field.description')}
+          {` ${this.getIntlMessage('synthesis.edition.action.update.field.description')}`}
         </h2>
         <Input type="textarea" id="update_element_description" name="update_element[description]" className="update-element__description" valueLink={this.linkState('description')} />
       </div>
@@ -169,7 +169,7 @@ const UpdateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('synthesis.edition.action.update.field.parent')}
+          {` ${this.getIntlMessage('synthesis.edition.action.update.field.parent')}`}
         </h2>
         {this.renderParentFinder()}
       </div>

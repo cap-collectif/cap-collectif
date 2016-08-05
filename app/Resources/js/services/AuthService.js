@@ -18,7 +18,7 @@ class AuthService {
     if (LocalStorageService.isValid('jwt')) {
       return Promise.resolve();
     }
-    return fetch(window.location.protocol + '//' + window.location.host + '/get_api_token', {
+    return fetch(`${window.location.protocol}//${window.location.host}/get_api_token`, {
       method: 'get',
       credentials: 'same-origin',
       headers: {

@@ -61,7 +61,7 @@ const ElementsFinder = React.createClass({
   renderTreeItems(elements, level, expanded = false) {
     if (expanded && elements) {
       return (
-        <ul className={'tree__list tree--level-' + level}>
+        <ul className={`tree__list tree--level-${level}`}>
           {
             elements.map((element) => {
               const classes = classNames({
@@ -89,7 +89,7 @@ const ElementsFinder = React.createClass({
       'selected': this.props.selectedId === element.id,
     });
     return (
-      <div id={'element-' + element.id} className={classes} onClick={() => this.select(element)}>
+      <div id={`element-${element.id}`} className={classes} onClick={() => this.select(element)}>
         {this.renderItemCaret(element)}
         {element.id === 'root'
           ? <ElementIcon className="tree__item__icon" element={element} />

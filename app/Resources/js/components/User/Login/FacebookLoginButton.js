@@ -13,10 +13,10 @@ const FacebookLoginButton = React.createClass({
     if (!this.props.features.login_facebook) {
       return null;
     }
-    const label = this.props.prefix + 'facebook';
+    const label = `${this.props.prefix}facebook`;
     return (
       <a
-       href={'/login/facebook?_destination=' + window.location.href}
+       href={`/login/facebook?_destination=${window.location.href}`}
        title={this.getIntlMessage(label)}
        className="btn login__social-btn login__social-btn--facebook"
       >

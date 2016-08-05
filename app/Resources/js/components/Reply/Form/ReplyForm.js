@@ -173,7 +173,7 @@ const ReplyForm = React.createClass({
     this.props.form.fields.forEach((field) => {
       form[field.id] = (field.type === 'checkbox' || field.type === 'ranking') ? [] : '';
       if (field.type === 'checkbox' || field.type === 'radio' || field.type === 'ranking') {
-        this['field-' + field.id].empty();
+        this[`field-${field.id}`].empty();
       }
     });
     this.setState({
@@ -214,8 +214,8 @@ const ReplyForm = React.createClass({
                 return (
                   <Checkbox
                     key={key}
-                    ref={c => this['field-' + field.id] = c}
-                    id={'reply-' + field.id}
+                    ref={c => this[`field-${field.id}`] = c}
+                    id={`reply-${field.id}`}
                     field={field}
                     getGroupStyle={this.getGroupStyle}
                     renderFormErrors={this.renderFormErrors}
@@ -230,8 +230,8 @@ const ReplyForm = React.createClass({
                 return (
                   <Radio
                     key={key}
-                    ref={c => this['field-' + field.id] = c}
-                    id={'reply-' + field.id}
+                    ref={c => this[`field-${field.id}`] = c}
+                    id={`reply-${field.id}`}
                     field={field}
                     getGroupStyle={this.getGroupStyle}
                     renderFormErrors={this.renderFormErrors}
@@ -245,13 +245,13 @@ const ReplyForm = React.createClass({
                 return (
                   <Input
                     key={key}
-                    ref={c => this['field-' + field.id] = c}
-                    id={'reply-' + field.id}
+                    ref={c => this[`field-${field.id}`] = c}
+                    id={`reply-${field.id}`}
                     type={inputType}
                     label={field.question + (field.required ? '' : optional)}
                     help={field.helpText}
                     groupClassName={this.getGroupStyle(field.id)}
-                    valueLink={this.linkState('form.' + field.id)}
+                    valueLink={this.linkState(`form.${field.id}`)}
                     errors={this.renderFormErrors(field.id)}
                     defaultValue=""
                     labelClassName="h4"
@@ -270,8 +270,8 @@ const ReplyForm = React.createClass({
                 return (
                   <Ranking
                     key={key}
-                    ref={c => this['field-' + field.id] = c}
-                    id={'reply-' + field.id}
+                    ref={c => this[`field-${field.id}`] = c}
+                    id={`reply-${field.id}`}
                     field={field}
                     getGroupStyle={this.getGroupStyle}
                     renderFormErrors={this.renderFormErrors}
@@ -284,14 +284,14 @@ const ReplyForm = React.createClass({
               default:
                 return (
                   <Input
-                    ref={c => this['field-' + field.id] = c}
+                    ref={c => this[`field-${field.id}`] = c}
                     key={key}
-                    id={'reply-' + field.id}
+                    id={`reply-${field.id}`}
                     type={inputType}
                     label={field.question + (field.required ? '' : optional)}
                     help={field.helpText}
                     groupClassName={this.getGroupStyle(field.id)}
-                    valueLink={this.linkState('form.' + field.id)}
+                    valueLink={this.linkState(`form.${field.id}`)}
                     errors={this.renderFormErrors(field.id)}
                     placeholder={this.getIntlMessage('reply.your_response')}
                     labelClassName="h4"

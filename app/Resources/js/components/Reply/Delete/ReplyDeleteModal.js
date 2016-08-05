@@ -47,7 +47,7 @@ const ReplyDeleteModal = React.createClass({
     return (
       <div>
         <Modal
-          id={'delete-reply-modal-' + this.props.reply.id}
+          id={`delete-reply-modal-${this.props.reply.id}`}
           className="reply__modal--delete"
           animation={false}
           show={this.props.show}
@@ -68,7 +68,7 @@ const ReplyDeleteModal = React.createClass({
           <Modal.Footer>
             <CloseButton onClose={this.close} />
             <SubmitButton
-              id={'reply-confirm-delete-button' + this.props.reply.id}
+              id={`reply-confirm-delete-button${this.props.reply.id}`}
               className="reply__confirm-delete-btn"
               isSubmitting={this.state.isSubmitting}
               onSubmit={this.handleSubmit}

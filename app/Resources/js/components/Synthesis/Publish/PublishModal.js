@@ -165,7 +165,7 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('synthesis.edition.action.publish.field.title')}
+          {` ${this.getIntlMessage('synthesis.edition.action.publish.field.title')}`}
         </h2>
         <Input type="text" id="publish_element_title" name="publish_element[title]" className="publish-element__title" valueLink={this.linkState('title')} />
       </div>
@@ -176,7 +176,7 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('synthesis.edition.action.publish.field.parent')}
+          {` ${this.getIntlMessage('synthesis.edition.action.publish.field.parent')}`}
         </h2>
         {this.renderParentFinder()}
       </div>
@@ -203,8 +203,8 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('synthesis.edition.action.publish.field.notation')}
-          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('synthesis.edition.action.publish.optional')}</span>
+          {` ${this.getIntlMessage('synthesis.edition.action.publish.field.notation')}`}
+          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage('synthesis.edition.action.publish.optional')}`}</span>
         </h2>
         <NotationButtons notation={this.state.notation} onChange={this.setNotation} block />
         <p className="small excerpt action__help">{this.getIntlMessage('synthesis.edition.action.publish.help.notation')}</p>
@@ -216,8 +216,8 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('synthesis.edition.action.publish.field.comment')}
-          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('synthesis.edition.action.publish.optional')}</span>
+          {` ${this.getIntlMessage('synthesis.edition.action.publish.field.comment')}`}
+          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage('synthesis.edition.action.publish.optional')}`}</span>
         </h2>
         <form id="publish_element" name="publish_element">
           <Input type="textarea" id="publish_element_comment" name="publish_element[comment]" className="publish-element__comment" valueLink={this.linkState('comment')} />
@@ -230,8 +230,8 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {' ' + this.getIntlMessage('synthesis.edition.action.publish.field.description')}
-          <span className="small excerpt action__title-right">{'\t' + this.getIntlMessage('synthesis.edition.action.publish.optional')}</span>
+          {` ${this.getIntlMessage('synthesis.edition.action.publish.field.description')}`}
+          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage('synthesis.edition.action.publish.optional')}`}</span>
         </h2>
         <form id="publish_element" name="publish_element">
           <Input type="textarea" id="publish_element_description" name="publish_element[description]" className="publish-element__description" valueLink={this.linkState('description')} />

@@ -9,7 +9,7 @@
         }
 
         this.each(function () {
-            if ($('#piechart-' + $(this).data('pie-id')).length) {
+            if ($(`#piechart-${$(this).data('pie-id')}`).length) {
 
                 var pie_chart;
                 var options;
@@ -29,7 +29,7 @@
                     pieSliceText: 'value',
                     backgroundColor: 'transparent'
                 };
-                pie_chart = new google.visualization.PieChart(document.getElementById('piechart-' + $(this).data('pie-id')));
+                pie_chart = new google.visualization.PieChart(document.getElementById(`piechart-${$(this).data('pie-id')}`));
                 pie_chart.draw(data, options);
             }
         });

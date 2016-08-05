@@ -87,7 +87,7 @@ const OpinionVersionForm = React.createClass({
       .then((version) => {
         this.setState(this.getInitialState());
         this.close();
-        window.location.href = window.location.href + '/versions/' + version.slug;
+        window.location.href = `${window.location.href}/versions/${version.slug}`;
         return true;
       })
       .catch(() => {
@@ -160,7 +160,7 @@ const OpinionVersionForm = React.createClass({
       return (
         <Button bsStyle="primary" onClick={this.props.user ? () => this.show() : null}>
           <i className="cap cap-add-1"></i>
-          { ' ' + this.getIntlMessage('opinion.add_new_version')}
+          { ` ${this.getIntlMessage('opinion.add_new_version')}`}
         </Button>
       );
     }

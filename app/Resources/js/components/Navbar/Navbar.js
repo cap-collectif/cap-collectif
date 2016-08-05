@@ -51,7 +51,7 @@ const Navbar = React.createClass({
       const maxWidth = containerWidth - occupiedWidth;
       let width = 0;
       tempItems.map((item) => {
-        width += this.getPixelsWidth(this['item-' + item.id]);
+        width += this.getPixelsWidth(this[`item-${item.id}`]);
         if (maxWidth < width) {
           moreItems.push(item);
         } else {
@@ -112,7 +112,7 @@ const Navbar = React.createClass({
                     <NavbarItem
                       key={index}
                       item={header}
-                      ref={(c) => this['item-' + header.id] = c}
+                      ref={(c) => this[`item-${header.id}`] = c}
                     />
                   );
                 })

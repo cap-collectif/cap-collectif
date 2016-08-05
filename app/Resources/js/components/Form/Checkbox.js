@@ -35,7 +35,7 @@ const Checkbox = React.createClass({
     const values = [];
 
     checkboxes.forEach((checkbox) => {
-      if (checkbox.id !== this.props.field.id + '-choice-other' && checkbox.checked) {
+      if (checkbox.id !== `${this.props.field.id}-choice-other` && checkbox.checked) {
         values.push(checkbox.value);
       }
     });
@@ -60,7 +60,7 @@ const Checkbox = React.createClass({
 
   render() {
     const field = this.props.field;
-    const fieldName = 'choices-for-field-' + field.id;
+    const fieldName = `choices-for-field-${field.id}`;
 
     const labelClasses = {
       'control-label': true,
@@ -71,7 +71,7 @@ const Checkbox = React.createClass({
 
     return (
       <div
-        className={'form-group ' + this.props.getGroupStyle(field.id)}
+        className={`form-group ${this.props.getGroupStyle(field.id)}`}
         id={this.props.id}
       >
         <label className={classNames(labelClasses)}>
@@ -90,11 +90,11 @@ const Checkbox = React.createClass({
         >
           {
             this.props.field.choices.map((choice) => {
-              const choiceKey = 'choice-' + choice.id;
+              const choiceKey = `choice-${choice.id}`;
               return (
                 <div key={choiceKey}>
                   <Input
-                    id={this.props.id + '_' + choiceKey}
+                    id={`${this.props.id}_${choiceKey}`}
                     name={fieldName}
                     type="checkbox"
                     label={choice.label}

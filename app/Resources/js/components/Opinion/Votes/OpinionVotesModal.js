@@ -52,7 +52,7 @@ const OpinionVotesModal = React.createClass({
     return (
       <span>
         <span id="opinion-votes-show-all" onClick={this.show} className="opinion__votes__more__link text-center">
-          {'+' + moreVotes}
+          {`+${moreVotes}`}
         </span>
         <Modal
           animation={false}

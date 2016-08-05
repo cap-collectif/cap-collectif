@@ -11,7 +11,7 @@ export default {
 
   load: (synthesis) => {
     Fetcher
-      .get('/syntheses/' + synthesis)
+      .get(`/syntheses/${synthesis}`)
       .then((data) => {
         AppDispatcher.dispatch({
           actionType: Actions.RECEIVE_SYNTHESIS,
