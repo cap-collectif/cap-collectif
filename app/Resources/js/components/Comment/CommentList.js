@@ -23,7 +23,7 @@ const CommentList = React.createClass({
     });
 
     return (
-      <ul className={classes}>
+      <ul id="comments" className={classes}>
         {
           this.props.comments.map((comment) => {
             return (
