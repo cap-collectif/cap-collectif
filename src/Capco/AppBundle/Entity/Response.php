@@ -14,6 +14,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  *
  * @ORM\Table(name="response")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ResponseRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasRequiredNumberOfChoices()
  */
 class Response
@@ -49,7 +50,8 @@ class Response
      * @var AbstractQuestion
      *
      * @Assert\NotNull()
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="responses", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="responses",
+     *                                                                                  cascade={"persist"})
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private $question;
@@ -163,5 +165,15 @@ class Response
         $this->reply = $reply;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PreFlush()
+     */
+    public function updateProposalTimestamp()
+    {
+        if ($this->getUpdatedAt() && $this->getProposal()) {
+            $this->getProposal()->setUpdatedAt(new \DateTime());
+        }
     }
 }

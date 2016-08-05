@@ -65,8 +65,8 @@ class ProposalForm
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "body"})
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @Gedmo\Timestampable(on="change", field={"title", "description"})
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
 
@@ -130,7 +130,6 @@ class ProposalForm
     public function __construct()
     {
         $this->questions = new ArrayCollection();
-        $this->updatedAt = new \Datetime();
         $this->categories = new ArrayCollection();
     }
 

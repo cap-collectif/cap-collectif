@@ -97,6 +97,8 @@ class QuestionAdmin extends Admin
                 $qc->setQuestion($question);
             }
         }
+
+        $question->updateTimestamp();
     }
 
     protected function configureRoutes(RouteCollection $collection)

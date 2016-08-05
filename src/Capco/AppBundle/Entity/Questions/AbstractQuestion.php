@@ -6,6 +6,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -83,9 +84,19 @@ abstract class AbstractQuestion
     /**
      * Needed by sonata admin.
      *
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="question", orphanRemoval=true, cascade={"persist", "remove"})
+     * @var QuestionnaireAbstractQuestion
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="question",
+     *                                                                                              orphanRemoval=true,
+     *                                                                                              cascade={"persist",
+     *                                                                                              "remove"})
      */
     protected $questionnaireAbstractQuestion;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    protected $updatedAt;
 
     /**
      * @var string
@@ -293,5 +304,14 @@ abstract class AbstractQuestion
         $question = $this->getQuestion();
 
         return $question ? $question->getId() : null;
+    }
+
+    public function updateTimestamp()
+    {
+        $now = new \DateTime();
+
+        $this->setUpdatedAt($now);
+
+        $this->getQuestionnaireAbstractQuestion()->getProposalForm()->setUpdatedAt($now);
     }
 }
