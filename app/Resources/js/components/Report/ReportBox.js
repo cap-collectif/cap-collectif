@@ -44,7 +44,7 @@ export const ReportBox = React.createClass({
       features,
       buttonStyle,
     } = this.props;
-    if (features.reporting && (!user || user.uniqueId !== author.uniqueId)) {
+    if (features.reporting && (!user || !author || user.uniqueId !== author.uniqueId)) {
       return (
         <span>
           <ReportButton
