@@ -31,6 +31,7 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
         php7.0-imagick \
         php7.0-intl \
         php7.0-mysql \
+        php7.0-zip \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
