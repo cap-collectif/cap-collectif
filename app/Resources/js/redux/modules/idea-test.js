@@ -9,21 +9,19 @@ describe('Idea Reducer', () => {
         1: { votes: [] },
       },
     };
+    const votes = [
+        { username: 'paul' },
+        { username: 'popo' },
+    ];
     const newState = reducer(initialState, {
       type: VOTES_FETCH_SUCCEEDED,
       ideaId: 1,
-      votes: [
-          { username: 'paul' },
-          { username: 'popo' },
-      ],
+      votes,
     });
     expect(newState).to.eql({
       ideas: {
         1: {
-          votes: [
-            { username: 'paul' },
-            { username: 'popo' },
-          ],
+          votes,
         },
       },
     });

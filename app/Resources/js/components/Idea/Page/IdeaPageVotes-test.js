@@ -6,9 +6,9 @@ import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import { IdeaPageVotes, IDEA_VOTES_PREVIEW } from './IdeaPageVotes';
 
+const fetchIdeaVotes = () => {};
 const idea = {
   id: 1,
-  fetchIdeaVotes: () => {},
   votesCount: 2,
   votes: [
     {},
@@ -18,14 +18,12 @@ const idea = {
 
 const ideaWithNoVotes = {
   id: 1,
-  fetchIdeaVotes: () => {},
   votesCount: 0,
   votes: [],
 };
 
 const ideaWithLoadsOfVotes = {
   id: 1,
-  fetchIdeaVotes: () => {},
   votesCount: IDEA_VOTES_PREVIEW + 3,
   votes: [
     {},
@@ -45,12 +43,24 @@ const ideaWithLoadsOfVotes = {
 
 describe('<IdeaPageVotes />', () => {
   it('it should render nothing when idea has no votes', () => {
-    const wrapper = shallow(<IdeaPageVotes idea={ideaWithNoVotes} {...IntlData} />);
+    const wrapper = shallow(
+      <IdeaPageVotes
+        fetchIdeaVotes={fetchIdeaVotes}
+        idea={ideaWithNoVotes}
+        {...IntlData}
+      />
+    );
     expect(wrapper.children()).to.have.length(0);
   });
 
   it('it should render as many votes as provided', () => {
-    const wrapper = shallow(<IdeaPageVotes idea={idea} {...IntlData} />);
+    const wrapper = shallow(
+      <IdeaPageVotes
+        fetchIdeaVotes={fetchIdeaVotes}
+        idea={idea}
+        {...IntlData}
+      />
+    );
     expect(wrapper.find('.idea__votes')).to.have.length(1);
     expect(wrapper.find('h2')).to.have.length(1);
     const messages = wrapper.find('FormattedMessage');
@@ -67,7 +77,13 @@ describe('<IdeaPageVotes />', () => {
   });
 
   it('it should render show more button when idea has too much votes', () => {
-    const wrapper = shallow(<IdeaPageVotes idea={ideaWithLoadsOfVotes} {...IntlData} />);
+    const wrapper = shallow(
+      <IdeaPageVotes
+        fetchIdeaVotes={fetchIdeaVotes}
+        idea={ideaWithLoadsOfVotes}
+        {...IntlData}
+      />
+    );
     expect(wrapper.find('.idea__votes__show-more')).to.have.length(1);
   });
 });
