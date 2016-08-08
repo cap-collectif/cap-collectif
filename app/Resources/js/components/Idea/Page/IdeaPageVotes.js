@@ -68,7 +68,7 @@ const IdeaPageVotes = React.createClass({
     classes[this.props.className] = true;
 
     return (
-      <div className={classNames(classes)}>
+      <div id="votes" className={classNames(classes)}>
         <h2>
           <FormattedMessage
             message={this.getIntlMessage('idea.vote.count')}
