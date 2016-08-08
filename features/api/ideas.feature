@@ -405,6 +405,17 @@ Feature: Ideas
     }
     """
 
+  Scenario: Anonymous API client wants get votes
+    When I send a GET request to "/api/ideas/5/votes?offset=0&limit=50"
+    Then the JSON response should match:
+    """
+    {
+      "votes": @...@,
+      "count": @integer@,
+      "hasMore": @boolean@
+    }
+    """
+
 ## Report
 
   # Report from opinion
