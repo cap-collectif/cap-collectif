@@ -7,7 +7,7 @@ import { IntlMixin, FormattedMessage } from 'react-intl';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
 
-const IDEA_VOTES_PREVIEW = 8;
+export const IDEA_VOTES_PREVIEW = 8;
 
 export const IdeaPageVotes = React.createClass({
   propTypes: {

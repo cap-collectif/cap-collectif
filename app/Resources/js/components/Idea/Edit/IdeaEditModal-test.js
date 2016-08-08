@@ -20,7 +20,6 @@ describe('<IdeaEditModal />', () => {
     expect(modal).to.have.length(1);
     const form = modal.find('Connect(IdeaEditForm)');
     expect(form).to.have.length(1);
-    expect(form.prop('themes')).to.equal(props.themes);
     expect(form.prop('isSubmitting')).to.equal(wrapper.state('isSubmitting'));
     expect(form.prop('onSubmitSuccess')).to.be.a('function');
     expect(form.prop('onValidationFailure')).to.be.a('function');

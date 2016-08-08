@@ -5,7 +5,7 @@ const nodeEnv = devBuild ? 'development' : 'production';
 
 module.exports = {
   context: __dirname,
-  entry: './app/Resources/js-server/registration.js',
+  entry: ['babel-polyfill', './app/Resources/js-server/registration.js'],
   output: {
     filename: 'web/js/server-bundle.js',
   },

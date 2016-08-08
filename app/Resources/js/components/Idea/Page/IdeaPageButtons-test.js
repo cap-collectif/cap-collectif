@@ -51,7 +51,6 @@ describe('<IdeaPageButtons />', () => {
     const editModal = wrapper.find(IdeaEditModal);
     expect(editModal).to.have.length(1);
     expect(editModal.prop('idea')).to.equal(props.idea);
-    expect(editModal.prop('themes')).to.equal(props.themes);
     expect(editModal.prop('show')).to.equal(wrapper.state('showEditModal'));
     expect(editModal.prop('onToggleModal')).to.be.a('function');
     const deleteModal = wrapper.find(IdeaDeleteModal);
