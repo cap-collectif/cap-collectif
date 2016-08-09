@@ -48,7 +48,7 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case VOTES_FETCH_SUCCEEDED: {
       let votes = state.ideas[action.ideaId].votes;
-      if (votes.length <= 8) {
+      if (votes.length <= VOTES_PREVIEW_COUNT) {
         votes = []; // we remove preview votes
       }
       for (const vote of action.votes) {
