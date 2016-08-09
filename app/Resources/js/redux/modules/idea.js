@@ -1,8 +1,8 @@
 import Fetcher from '../../services/Fetcher';
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
-import _ from 'lodash';
 
+export const VOTES_PREVIEW_COUNT = 8;
 export const VOTES_FETCH_REQUESTED = 'idea/VOTES_FETCH_REQUESTED';
 export const VOTES_FETCH_SUCCEEDED = 'idea/VOTES_FETCH_SUCCEEDED';
 export const VOTES_FETCH_FAILED = 'idea/VOTES_FETCH_FAILED';
@@ -47,12 +47,15 @@ export function* saga() {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case VOTES_FETCH_SUCCEEDED: {
-      const votes = state.ideas[action.ideaId].votes;
+      let votes = state.ideas[action.ideaId].votes;
+      if (votes.length <= 8) {
+        votes = []; // we remove preview votes
+      }
       for (const vote of action.votes) {
         votes.push(vote);
       }
       const ideas = {
-        [action.ideaId]: { ...state.ideas[action.ideaId], votes: _.uniqWith(votes, _.isEqual) },
+        [action.ideaId]: { ...state.ideas[action.ideaId], votes },
       };
       return {
         ...state,

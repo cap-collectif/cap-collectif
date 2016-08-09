@@ -1,13 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchIdeaVotes } from '../../../redux/modules/idea';
+import { fetchIdeaVotes, VOTES_PREVIEW_COUNT } from '../../../redux/modules/idea';
 import { Row, Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
-
-export const IDEA_VOTES_PREVIEW = 8;
 
 export const IdeaPageVotes = React.createClass({
   propTypes: {
@@ -46,8 +44,8 @@ export const IdeaPageVotes = React.createClass({
   render() {
     const { idea, className } = this.props;
     const { showModal } = this.state;
-    const votesToDisplay = idea.votes.slice(0, IDEA_VOTES_PREVIEW);
-    const hasMoreVotes = idea.votesCount - IDEA_VOTES_PREVIEW > 0;
+    const votesToDisplay = idea.votes.slice(0, VOTES_PREVIEW_COUNT);
+    const hasMoreVotes = idea.votesCount - VOTES_PREVIEW_COUNT > 0;
 
     if (!idea.votesCount) {
       return null;

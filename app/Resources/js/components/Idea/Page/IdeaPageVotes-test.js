@@ -4,7 +4,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
-import { IdeaPageVotes, IDEA_VOTES_PREVIEW } from './IdeaPageVotes';
+import { IdeaPageVotes } from './IdeaPageVotes';
 
 const fetchIdeaVotes = () => {};
 const idea = {
@@ -24,7 +24,7 @@ const ideaWithNoVotes = {
 
 const ideaWithLoadsOfVotes = {
   id: 1,
-  votesCount: IDEA_VOTES_PREVIEW + 3,
+  votesCount: 11,
   votes: [
     {},
     {},
