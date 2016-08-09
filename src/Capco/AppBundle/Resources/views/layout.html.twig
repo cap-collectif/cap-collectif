@@ -49,10 +49,6 @@
 {% block javascripts %}
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    {% set client_js = capco_site_parameter_value('global.site.embed_js') %}
-    {% if null != client_js %}
-        {{ client_js|raw }}
-    {% endif %}
 {% endblock %}
 </body>
 </html>
