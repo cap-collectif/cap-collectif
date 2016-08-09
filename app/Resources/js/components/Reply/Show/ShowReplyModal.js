@@ -17,8 +17,12 @@ const ShowReplyModal = React.createClass({
   mixins: [IntlMixin],
 
   onChange() {
-    this.props.onClose();
-    ReplyActions.loadUserReplies(this.props.form.id);
+    const {
+      form,
+      onClose,
+    } = this.props;
+    onClose();
+    ReplyActions.loadUserReplies(form.id);
   },
 
   render() {

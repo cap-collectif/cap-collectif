@@ -13,15 +13,18 @@ const OpinionVotesBox = React.createClass({
   mixins: [IntlMixin],
 
   getOpinionType() {
-    return this.isVersion() ? this.props.opinion.parent.type : this.props.opinion.type;
+    const { opinion } = this.props;
+    return this.isVersion() ? opinion.parent.type : opinion.type;
   },
 
   isVersion() {
-    return this.props.opinion && this.props.opinion.parent;
+    const { opinion } = this.props;
+    return opinion && opinion.parent;
   },
 
   isContribuable() {
-    return this.isVersion() ? this.props.opinion.parent.isContribuable : this.props.opinion.isContribuable;
+    const { opinion } = this.props;
+    return this.isVersion() ? opinion.parent.isContribuable : opinion.isContribuable;
   },
 
   showVotesButtons() {
@@ -30,8 +33,9 @@ const OpinionVotesBox = React.createClass({
   },
 
   showPiechart() {
+    const { opinion } = this.props;
     const widgetType = this.getOpinionType().voteWidgetType;
-    return this.props.opinion.votes.length > 0 && widgetType === VOTE_WIDGET_BOTH;
+    return opinion.votes.length > 0 && widgetType === VOTE_WIDGET_BOTH;
   },
 
   render() {

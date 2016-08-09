@@ -43,11 +43,12 @@ const ProposalVoteModal = React.createClass({
   },
 
   handleSubmitSuccess() {
+    const { onVoteChange } = this.props;
     this.setState({
       isSubmitting: false,
     });
     this.close();
-    this.props.onVoteChange();
+    onVoteChange();
   },
 
   handleSubmitFailure() {
@@ -63,26 +64,45 @@ const ProposalVoteModal = React.createClass({
   },
 
   userHasEnoughCredits() {
-    if (this.props.user && !this.props.userHasVote && this.props.creditsLeft !== null && this.props.proposal.estimation !== null) {
-      return this.props.creditsLeft >= this.props.proposal.estimation;
+    const {
+      creditsLeft,
+      proposal,
+      user,
+      userHasVote,
+    } = this.props;
+    if (user && !userHasVote && creditsLeft !== null && proposal.estimation !== null) {
+      return creditsLeft >= proposal.estimation;
     }
     return true;
   },
 
   disableSubmitButton() {
-    return !this.props.selectionStep.open || (this.props.user && this.props.selectionStep.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
+    const {
+      selectionStep,
+      user,
+    } = this.props;
+    return !selectionStep.open || (user && selectionStep.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
   },
 
   close() {
-    this.props.onToggleModal(false);
+    const { onToggleModal } = this.props;
+    onToggleModal(false);
   },
 
   show() {
-    this.props.onToggleModal(true);
+    const { onToggleModal } = this.props;
+    onToggleModal(true);
   },
 
   render() {
-    const { showModal, proposal, selectionStep, userHasVote, creditsLeft } = this.props;
+    const {
+      showModal,
+      proposal,
+      selectionStep,
+      userHasVote,
+      creditsLeft,
+      user,
+    } = this.props;
     return (
       <Modal
         animation={false}
@@ -106,7 +126,7 @@ const ProposalVoteModal = React.createClass({
             onSubmitSuccess={this.handleSubmitSuccess}
             onSubmitFailure={this.handleSubmitFailure}
             onValidationFailure={this.handleValidationFailure}
-            user={this.props.user}
+            user={user}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -116,10 +136,10 @@ const ProposalVoteModal = React.createClass({
             isSubmitting={this.state.isSubmitting}
             onSubmit={this.handleSubmit}
             label="proposal.vote.confirm"
-            bsStyle={(!this.props.userHasVote || this.state.isSubmitting) ? 'success' : 'danger'}
+            bsStyle={(!userHasVote || this.state.isSubmitting) ? 'success' : 'danger'}
             style={{ marginLeft: '10px' }}
             disabled={this.disableSubmitButton()}
-            loginOverlay={this.props.selectionStep.voteType === VOTE_TYPE_BUDGET}
+            loginOverlay={selectionStep.voteType === VOTE_TYPE_BUDGET}
           />
         </Modal.Footer>
       </Modal>

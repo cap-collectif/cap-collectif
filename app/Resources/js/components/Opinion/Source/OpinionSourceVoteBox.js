@@ -18,26 +18,33 @@ const OpinionSourceVoteBox = React.createClass({
   },
 
   getInitialState() {
+    const { source } = this.props;
     return {
-      hasVoted: this.props.source.has_user_voted,
+      hasVoted: source.has_user_voted,
     };
   },
 
   vote() {
+    const { source } = this.props;
     this.setState({ hasVoted: true });
-    SourceActions.addVote(this.props.source.id);
+    SourceActions.addVote(source.id);
   },
 
   deleteVote() {
+    const { source } = this.props;
     this.setState({ hasVoted: false });
-    SourceActions.deleteVote(this.props.source.id);
+    SourceActions.deleteVote(source.id);
   },
 
   isTheUserTheAuthor() {
-    if (this.props.source.author === null || !this.props.user) {
+    const {
+      source,
+      user,
+    } = this.props;
+    if (source.author === null || !user) {
       return false;
     }
-    return this.props.user.uniqueId === this.props.source.author.uniqueId;
+    return user.uniqueId === source.author.uniqueId;
   },
 
   render() {

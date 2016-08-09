@@ -8,9 +8,10 @@ const CommentEdit = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (this.props.comment.can_edit) {
+    const { comment } = this.props;
+    if (comment.can_edit) {
       return (
-        <a href={this.props.comment._links.edit} className="btn btn-dark-gray btn--outline btn-xs">
+        <a href={comment._links.edit} className="btn btn-dark-gray btn--outline btn-xs">
           <i className="cap cap-pencil-1"></i>
           { this.getIntlMessage('comment.update.button') }
         </a>

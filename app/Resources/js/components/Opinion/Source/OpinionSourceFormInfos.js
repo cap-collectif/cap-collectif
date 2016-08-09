@@ -8,7 +8,8 @@ const OpinionSourceFormInfos = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (this.props.action === 'update') {
+    const { action } = this.props;
+    if (action === 'update') {
       return null;
     }
 

@@ -16,7 +16,7 @@ const ProposalCreateButton = React.createClass({
       <LoginOverlay>
         <Button
           id="add-proposal"
-          disabled={this.props.disabled}
+          disabled={disabled}
           bsStyle="primary"
           onClick={disabled ? null : handleClick}
         >

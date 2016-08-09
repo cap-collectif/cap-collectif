@@ -11,21 +11,26 @@ const ProjectStatsListItem = React.createClass({
   mixins: [IntlMixin],
 
   getFormattedValue() {
-    if (this.props.showPercentage) {
-      return `${this.props.item.percentage}%`;
+    const {
+      isCurrency,
+      item,
+      showPercentage,
+    } = this.props;
+    if (showPercentage) {
+      return `${item.percentage}%`;
     }
 
-    if (this.props.isCurrency) {
+    if (isCurrency) {
       return (
         <FormattedNumber
           minimumFractionDigits={0}
-          value={this.props.item.value || 0}
+          value={item.value || 0}
           style="currency"
           currency="EUR"
         />
       );
     }
-    return this.props.item.value;
+    return item.value;
   },
 
   render() {

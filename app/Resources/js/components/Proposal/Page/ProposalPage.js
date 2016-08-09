@@ -43,10 +43,15 @@ export const ProposalPage = React.createClass({
   },
 
   getInitialState() {
-    if (this.props.votableStep) {
-      ProposalActions.initProposalVotes(this.props.votableStep.creditsLeft, !!this.props.userHasVote);
+    const {
+      proposal,
+      userHasVote,
+      votableStep,
+    } = this.props;
+    if (votableStep) {
+      ProposalActions.initProposalVotes(votableStep.creditsLeft, !!userHasVote);
     }
-    ProposalActions.initProposal(this.props.proposal);
+    ProposalActions.initProposal(proposal);
     return {
       proposal: ProposalStore.proposal,
       userHasVote: ProposalVoteStore.userHasVote,
@@ -80,7 +85,8 @@ export const ProposalPage = React.createClass({
   },
 
   onVoteChange() {
-    if (this.props.user) {
+    const { user } = this.props;
+    if (user) {
       this.setState({
         userHasVote: ProposalVoteStore.userHasVote,
         creditsLeft: ProposalVoteStore.creditsLeft,
@@ -117,27 +123,36 @@ export const ProposalPage = React.createClass({
   },
 
   vote() {
+    const {
+      proposal,
+      votableStep,
+    } = this.props;
     ProposalActions
       .vote(
-        this.props.votableStep.id,
-        this.props.proposal.id,
-        this.props.proposal.estimation
+        votableStep.id,
+        proposal.id,
+        proposal.estimation
       )
     ;
   },
 
   deleteVote() {
+    const {
+      proposal,
+      votableStep,
+    } = this.props;
     ProposalActions
       .deleteVote(
-        this.props.votableStep.id,
-        this.props.proposal.id,
-        this.props.proposal.estimation
+        votableStep.id,
+        proposal.id,
+        proposal.estimation
       )
     ;
   },
 
   voteAction() {
-    if (!this.props.user || !this.state.userHasVote) {
+    const { user } = this.props;
+    if (!user || !this.state.userHasVote) {
       this.toggleVotesModal(true);
       return;
     }
@@ -145,8 +160,9 @@ export const ProposalPage = React.createClass({
   },
 
   loadProposal() {
+    const { form } = this.props;
     ProposalActions.getOne(
-      this.props.form.id,
+      form.id,
       this.state.proposal.id
     );
   },

@@ -36,7 +36,11 @@ const ProposalListSearch = React.createClass({
   },
 
   reload() {
-    ProposalActions.load(this.props.fetchFrom, this.props.id);
+    const {
+      fetchFrom,
+      id,
+    } = this.props;
+    ProposalActions.load(fetchFrom, id);
   },
 
   renderSearchButton() {

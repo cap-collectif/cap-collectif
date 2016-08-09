@@ -30,6 +30,11 @@ const VoteLinechart = React.createClass({
   },
 
   initChart() {
+    const {
+      height,
+      history,
+      width,
+    } = this.props;
     const AreaChart = google.visualization.AreaChart;
     const DataTable = google.visualization.arrayToDataTable;
     const lines = [[
@@ -39,7 +44,7 @@ const VoteLinechart = React.createClass({
       { type: 'number', label: this.getIntlMessage('vote.evolution.ok') },
     ]];
 
-    $.each(this.props.history, (i, row) => {
+    $.each(history, (i, row) => {
       lines.push([
         new Date(1000 * parseInt(row[0], 10)),
         row[1],
@@ -53,8 +58,8 @@ const VoteLinechart = React.createClass({
       vAxis: { title: this.getIntlMessage('vote.evolution.vaxis'), minValue: 0 },
       isStacked: true,
       colors: ['#d9534f', '#f0ad4e', '#5cb85c'],
-      height: this.props.height,
-      width: this.props.width,
+      height: height,
+      width: width,
       legend: { position: 'top', maxLines: 3 },
       theme: 'maximized',
     };

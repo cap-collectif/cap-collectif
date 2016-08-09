@@ -24,8 +24,9 @@ const OpinionLinkCreate = React.createClass({
   },
 
   componentDidMount() {
+    const { opinion } = this.props;
     OpinionTypeActions
-      .getAvailableTypes(this.props.opinion.type.id)
+      .getAvailableTypes(opinion.type.id)
       .then((availableTypes) => {
         this.setState({ availableTypes });
       });
@@ -51,13 +52,15 @@ const OpinionLinkCreate = React.createClass({
   },
 
   handleSubmitSuccess() {
+    const { opinion } = this.props;
     this.close();
     this.setState({ isSubmitting: false });
-    OpinionLinkActions.load(this.props.opinion.id, 'last');
+    OpinionLinkActions.load(opinion.id, 'last');
   },
 
   render() {
-    if (!this.props.opinion.isContribuable) {
+    const { opinion } = this.props;
+    if (!opinion.isContribuable) {
       return null;
     }
 
@@ -77,10 +80,10 @@ const OpinionLinkCreate = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <OpinionLinkCreateInfos opinion={this.props.opinion} />
+            <OpinionLinkCreateInfos opinion={opinion} />
             <OpinionLinkCreateForm
               ref={c => this.form = c}
-              opinion={this.props.opinion}
+              opinion={opinion}
               availableTypes={this.state.availableTypes}
               onFailure={this.handleFailure}
               onSubmitSuccess={this.handleSubmitSuccess}

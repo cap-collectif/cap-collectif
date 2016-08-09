@@ -10,19 +10,22 @@ const ArgumentVoteBox = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
+    const { argument } = this.props;
     return {
-      hasVoted: this.props.argument.hasUserVoted,
+      hasVoted: argument.hasUserVoted,
     };
   },
 
   vote() {
+    const { argument } = this.props;
     this.setState({ hasVoted: true });
-    ArgumentActions.addVote(this.props.argument.id);
+    ArgumentActions.addVote(argument.id);
   },
 
   deleteVote() {
+    const { argument } = this.props;
     this.setState({ hasVoted: false });
-    ArgumentActions.deleteVote(this.props.argument.id);
+    ArgumentActions.deleteVote(argument.id);
   },
 
   render() {

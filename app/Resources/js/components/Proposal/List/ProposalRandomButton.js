@@ -10,15 +10,19 @@ const ProposalRandomButton = React.createClass({
   mixins: [IntlMixin],
 
   render() {
+    const {
+      isLoading,
+      onClick,
+    } = this.props;
     return (
       <div className="pagination--custom  text-center">
         <Button
           bsStyle="primary"
-          disabled={this.props.isLoading}
-          onClick={this.props.onClick}
+          disabled={isLoading}
+          onClick={onClick}
         >
           {
-            this.props.isLoading
+            isLoading
             ? this.getIntlMessage('global.loading')
             : this.getIntlMessage('proposal.random_search')
           }

@@ -69,7 +69,8 @@ const ProposalForm = React.createClass({
   },
 
   componentDidMount() {
-    this.props.form.fields.map((field) => {
+    const { form } = this.props;
+    form.fields.map((field) => {
       const ref = `custom-${field.id}`;
       if (field.required) {
         this.formValidationRules[ref] = {
@@ -83,10 +84,20 @@ const ProposalForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    const {
+      categories,
+      features,
+      isSubmitting,
+      mode,
+      onSubmitFailure,
+      onSubmitSuccess,
+      onValidationFailure,
+      proposal,
+    } = this.props;
     this.updateThemeConstraint();
     this.updateDistrictConstraint();
     this.updateCategoryConstraint();
-    if (!this.props.isSubmitting && nextProps.isSubmitting === true) {
+    if (!isSubmitting && nextProps.isSubmitting === true) {
       if (this.isValid()) {
         const form = this.state.form;
         const responses = [];
@@ -99,24 +110,24 @@ const ProposalForm = React.createClass({
           });
         });
         form.responses = responses;
-        if (!this.props.features.themes || !this.props.form.usingThemes || form.theme === -1) {
+        if (!features.themes || !this.props.form.usingThemes || form.theme === -1) {
           delete form.theme;
         }
-        if (!this.props.features.districts || form.district === -1) {
+        if (!features.districts || form.district === -1) {
           delete form.district;
         }
-        if (this.props.categories.length === 0 || !this.props.form.usingCategories || form.category === -1) {
+        if (categories.length === 0 || !this.props.form.usingCategories || form.category === -1) {
           delete form.category;
         }
-        if (this.props.mode === 'edit') {
+        if (mode === 'edit') {
           ProposalActions
-            .update(this.props.form.id, this.props.proposal.id, form)
+            .update(this.props.form.id, proposal.id, form)
             .then(() => {
               this.setState(this.getInitialState());
-              this.props.onSubmitSuccess();
+              onSubmitSuccess();
             })
             .catch(() => {
-              this.props.onSubmitFailure();
+              onSubmitFailure();
             });
           return;
         }
@@ -124,41 +135,47 @@ const ProposalForm = React.createClass({
           .add(this.props.form.id, form)
           .then(() => {
             this.setState(this.getInitialState());
-            this.props.onSubmitSuccess();
+            onSubmitSuccess();
           })
           .catch(() => {
-            this.props.onSubmitFailure();
+            onSubmitFailure();
           });
         return;
       }
 
-      this.props.onValidationFailure();
+      onValidationFailure();
     }
   },
 
   getInitialFormAnswers() {
+    const { form } = this.props;
     const custom = {};
-    this.props.form.fields.map((field) => {
+    form.fields.map((field) => {
       custom[`custom-${field.id}`] = this.getResponseForField(field.id);
     });
     return custom;
   },
 
   getResponseForField(id) {
+    const { proposal } = this.props;
     const index = ArrayHelper.getElementIndexFromArray(
-      this.props.proposal.responses,
+      proposal.responses,
       { field: { id } },
       'field',
       'id'
     );
     if (index > -1) {
-      return this.props.proposal.responses[index].value;
+      return proposal.responses[index].value;
     }
     return '';
   },
 
   updateThemeConstraint() {
-    if (this.props.features.themes && this.props.form.usingThemes && this.props.form.themeMandatory) {
+    const {
+      features,
+      form,
+    } = this.props;
+    if (features.themes && form.usingThemes && form.themeMandatory) {
       this.formValidationRules.theme = {
         minValue: { value: 0, message: 'proposal.constraints.theme' },
       };
@@ -168,7 +185,8 @@ const ProposalForm = React.createClass({
   },
 
   updateDistrictConstraint() {
-    if (this.props.features.districts) {
+    const { features } = this.props;
+    if (features.districts) {
       this.formValidationRules.district = {
         minValue: { value: 0, message: 'proposal.constraints.district' },
       };
@@ -178,7 +196,11 @@ const ProposalForm = React.createClass({
   },
 
   updateCategoryConstraint() {
-    if (this.props.categories.length && this.props.form.usingCategories && this.props.form.categoryMandatory) {
+    const {
+      categories,
+      form,
+    } = this.props;
+    if (categories.length && form.usingCategories && form.categoryMandatory) {
       this.formValidationRules.category = {
         minValue: { value: 0, message: 'proposal.constraints.category' },
       };
@@ -224,7 +246,7 @@ const ProposalForm = React.createClass({
     return (
       <form id="proposal-form">
         {
-          this.props.form.description
+          form.description
           ? <FormattedHTMLMessage message={form.description} />
           : null
         }

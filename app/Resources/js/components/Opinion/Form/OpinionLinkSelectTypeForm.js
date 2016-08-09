@@ -14,8 +14,12 @@ export const OpinionLinkSelectTypeForm = React.createClass({
   mixins: [IntlMixin],
 
   componentDidUpdate(prevProps) {
-    if (prevProps && prevProps.opinionType && prevProps.opinionType !== this.props.opinionType) {
-      this.props.onChange(parseInt(this.props.opinionType, 10));
+    const {
+      onChange,
+      opinionType,
+    } = this.props;
+    if (prevProps && prevProps.opinionType && prevProps.opinionType !== opinionType) {
+      onChange(parseInt(opinionType, 10));
     }
   },
 

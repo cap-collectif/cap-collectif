@@ -9,9 +9,10 @@ const OpinionSourceFormModalTitle = React.createClass({
   mixins: [IntlMixin],
 
   render() {
+    const { action } = this.props;
     return (
       <Modal.Title id="contained-modal-title-lg">
-        {this.props.action === 'create'
+        {action === 'create'
           ? this.getIntlMessage('source.add')
           : this.getIntlMessage('source.update')
         }

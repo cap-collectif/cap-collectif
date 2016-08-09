@@ -28,12 +28,18 @@ const IdeaCreateForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.isSubmitting && nextProps.isSubmitting) {
-      const { onSubmitSuccess, onSubmitFailure } = this.props;
+    const {
+      onSubmitSuccess,
+      onSubmitFailure,
+      features,
+      isSubmitting,
+      onValidationFailure,
+    } = this.props;
+    if (!isSubmitting && nextProps.isSubmitting) {
       const ideaForm = this.ideaForm;
       if (ideaForm.isValid()) {
         const form = ideaForm.state.form;
-        if (!this.props.features.themes) {
+        if (!features.themes) {
           delete form.theme;
         }
         if (form.media === false) {
@@ -58,16 +64,17 @@ const IdeaCreateForm = React.createClass({
         ;
       }
 
-      this.props.onValidationFailure();
+      onValidationFailure();
     }
   },
 
   render() {
+    const { features } = this.props;
     return (
       <IdeaForm
         ref={(c) => this.ideaForm = c}
         {...this.props}
-        showThemes={this.props.features.themes}
+        showThemes={features.themes}
       />
     );
   },

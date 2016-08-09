@@ -55,7 +55,8 @@ const ArgumentList = React.createClass({
   },
 
   getNumericType() {
-    return this.props.type === 'no' ? 0 : 1;
+    const { type } = this.props;
+    return type === 'no' ? 0 : 1;
   },
 
   updateSelectedValue() {
@@ -64,20 +65,22 @@ const ArgumentList = React.createClass({
   },
 
   loadArguments() {
+    const { opinion } = this.props;
     ArgumentActions.load(
-      this.props.opinion,
+      opinion,
       this.state.type
     );
   },
 
   renderFilter() {
+    const { type } = this.props;
     if (this.state.arguments.length > 1) {
       return (
         <Col xs={12} sm={6} md={6} className="block--first-mobile">
-          <label className="sr-only" htmlFor={`filter-arguments-${this.props.type}`}>
-            {this.getIntlMessage(`argument.filter.${this.props.type}`)}
+          <label className="sr-only" htmlFor={`filter-arguments-${type}`}>
+            {this.getIntlMessage(`argument.filter.${type}`)}
           </label>
-          <select id={`filter-arguments-${this.props.type}`} ref="filter" className="form-control pull-right" value={this.state.order} onChange={() => this.updateSelectedValue()}>
+          <select id={`filter-arguments-${type}`} ref="filter" className="form-control pull-right" value={this.state.order} onChange={() => this.updateSelectedValue()}>
             <option value="last">{this.getIntlMessage('global.filter_last')}</option>
             <option value="old">{this.getIntlMessage('global.filter_old')}</option>
             <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
@@ -88,14 +91,15 @@ const ArgumentList = React.createClass({
   },
 
   render() {
+    const { type } = this.props;
     return (
-      <div id={`opinion__arguments--${this.props.type}`} className="block--tablet block--bordered">
+      <div id={`opinion__arguments--${type}`} className="block--tablet block--bordered">
         <Row className="opinion__arguments__header">
           <Col xs={12} sm={6} md={6}>
             <h4 className="opinion__header__title">
-              {this.props.type === 'simple'
+              {type === 'simple'
                 ? <FormattedMessage message={this.getIntlMessage('argument.simple.list')} num={this.state.count} />
-                : this.props.type === 'yes'
+                : type === 'yes'
                   ? <FormattedMessage message={this.getIntlMessage('argument.yes.list')} num={this.state.count} />
                   : <FormattedMessage message={this.getIntlMessage('argument.no.list')} num={this.state.count} />
               }
@@ -107,10 +111,10 @@ const ArgumentList = React.createClass({
           ? <ul className="media-list opinion__list">
             {
               this.state.arguments.map((argument) => {
-                if ((this.props.type === 'yes' || this.props.type === 'simple') && argument.type === 1) {
+                if ((type === 'yes' || type === 'simple') && argument.type === 1) {
                   return <ArgumentItem key={argument.id} argument={argument} />;
                 }
-                if (this.props.type === 'no' && argument.type === 0) {
+                if (type === 'no' && argument.type === 0) {
                   return <ArgumentItem key={argument.id} argument={argument} />;
                 }
               })

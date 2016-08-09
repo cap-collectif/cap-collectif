@@ -26,7 +26,8 @@ const QuestionnaireStepPage = React.createClass({
   },
 
   componentDidMount() {
-    ReplyActions.initUserReplies(this.props.userReplies);
+    const { userReplies } = this.props;
+    ReplyActions.initUserReplies(userReplies);
   },
 
   componentWillUnmount() {
@@ -40,15 +41,19 @@ const QuestionnaireStepPage = React.createClass({
   },
 
   render() {
+    const {
+      form,
+      step,
+    } = this.props;
     return (
       <div>
-        <StepPageHeader step={this.props.step} />
+        <StepPageHeader step={step} />
         <UserReplies
           replies={this.state.userReplies}
-          form={this.props.form}
+          form={form}
         />
         <ReplyCreateFormWrapper
-          form={this.props.form}
+          form={form}
           userReplies={this.state.userReplies}
         />
       </div>

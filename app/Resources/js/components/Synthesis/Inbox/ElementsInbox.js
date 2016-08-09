@@ -43,7 +43,8 @@ const ElementsInbox = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.type !== this.props.params.type) {
+    const { params } = this.props;
+    if (nextProps.params.type !== params.type) {
       this.setState({
         isLoading: true,
         limit: Pagination,
@@ -58,9 +59,10 @@ const ElementsInbox = React.createClass({
   },
 
   onChange() {
+    const { params } = this.props;
     this.setState({
-      elements: SynthesisElementStore.elements[this.props.params.type],
-      count: SynthesisElementStore.counts[this.props.params.type],
+      elements: SynthesisElementStore.elements[params.type],
+      count: SynthesisElementStore.counts[params.type],
       isLoading: false,
       isLoadingMore: false,
     });
@@ -74,8 +76,9 @@ const ElementsInbox = React.createClass({
   },
 
   loadElementsByTypeFromServer(type = this.props.params.type) {
+    const { synthesis } = this.props;
     SynthesisElementActions.loadElementsFromServer(
-      this.props.synthesis.id,
+      synthesis.id,
       type,
       this.state.offset,
       this.state.limit

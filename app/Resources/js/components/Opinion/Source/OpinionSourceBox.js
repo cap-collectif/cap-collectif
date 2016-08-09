@@ -58,8 +58,9 @@ const OpinionSourceBox = React.createClass({
   },
 
   loadSourcesFromServer() {
+    const { opinion } = this.props;
     this.setState({ isLoading: true });
-    OpinionSourceActions.load(this.props.opinion, this.state.filter);
+    OpinionSourceActions.load(opinion, this.state.filter);
   },
 
   loadCategoriesFromServer() {

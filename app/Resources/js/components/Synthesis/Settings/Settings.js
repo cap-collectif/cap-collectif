@@ -17,13 +17,17 @@ const Settings = React.createClass({
   },
 
   render() {
+    const {
+      children,
+      synthesis,
+    } = this.props;
     return (
       <div className="row">
         <div className="col--left col--scrollable col-xs-12 block--mobile">
           <SettingsSideMenu />
         </div>
         <div className="col--right col-xs-12 block--mobile synthesis__settings">
-          { React.cloneElement(this.props.children, { synthesis: this.props.synthesis }) }
+          { React.cloneElement(children, { synthesis: synthesis }) }
         </div>
       </div>
     );

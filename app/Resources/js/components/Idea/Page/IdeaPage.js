@@ -27,8 +27,12 @@ const IdeaPage = React.createClass({
   },
 
   componentWillMount() {
+    const {
+      idea,
+      votes,
+    } = this.props;
     IdeaStore.addChangeListener(this.onChange);
-    IdeaActions.initIdea(this.props.idea, this.props.votes);
+    IdeaActions.initIdea(idea, votes);
   },
 
   componentWillUnmount() {
@@ -48,14 +52,18 @@ const IdeaPage = React.createClass({
   },
 
   render() {
+    const {
+      themes,
+      votes,
+    } = this.props;
     const { idea } = this.state;
     const showSidebar = idea.canContribute;
     const wrapperClassName = classNames({
-      'container': showSidebar,
-      'sidebar__container': showSidebar,
+      container: showSidebar,
+      sidebar__container: showSidebar,
     });
     const containersClassName = classNames({
-      'container': !showSidebar,
+      container: !showSidebar,
       'container--thinner': !showSidebar,
       'container--custom': true,
       'container--with-sidebar': showSidebar,
@@ -74,12 +82,12 @@ const IdeaPage = React.createClass({
               />
               <IdeaPageBody
                 idea={idea}
-                themes={this.props.themes}
+                themes={themes}
                 className={containersClassName}
               />
               <IdeaPageVotes
                 idea={idea}
-                votes={this.props.votes}
+                votes={votes}
                 className={containersClassName}
               />
               <IdeaPageComments

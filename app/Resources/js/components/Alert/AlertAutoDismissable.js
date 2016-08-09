@@ -11,9 +11,14 @@ const AlertAutoDismissable = React.createClass({
   mixins: [IntlMixin],
 
   render() {
+    const {
+      bsStyle,
+      children,
+      onDismiss,
+    } = this.props;
     return (
-      <Alert className="text-center" bsStyle={this.props.bsStyle} onDismiss={this.props.onDismiss} dismissAfter={10000}>
-        {this.props.children}
+      <Alert className="text-center" bsStyle={bsStyle} onDismiss={onDismiss} dismissAfter={10000}>
+        {children}
       </Alert>
     );
   },

@@ -13,7 +13,7 @@ const OpinionLink = React.createClass({
   render() {
     const { link } = this.props;
     const classes = classNames({
-      'opinion': true,
+      opinion: true,
       'block--bordered': true,
       'bg-vip': link.author && link.author.vip,
     });

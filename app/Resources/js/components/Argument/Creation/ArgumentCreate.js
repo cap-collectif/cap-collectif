@@ -42,10 +42,15 @@ const ArgumentCreate = React.createClass({
   },
 
   getNumericType() {
-    return this.props.type === 'no' ? 0 : 1;
+    const { type } = this.props;
+    return type === 'no' ? 0 : 1;
   },
 
   create() {
+    const {
+      opinion,
+      type,
+    } = this.props;
     this.setState({ submitted: true }, () => {
       if (!this.isValid()) {
         return;
@@ -55,15 +60,15 @@ const ArgumentCreate = React.createClass({
 
       const data = {
         body: this.state.body,
-        type: this.props.type === 'yes' || this.props.type === 'simple' ? 1 : 0,
+        type: type === 'yes' || type === 'simple' ? 1 : 0,
       };
 
       ArgumentActions
-        .add(this.props.opinion, data)
+        .add(opinion, data)
         .then(() => {
           this.setState(this.getInitialState());
           autosize.destroy(ReactDOM.findDOMNode(this.refs.body));
-          ArgumentActions.load(this.props.opinion, this.state.type);
+          ArgumentActions.load(opinion, this.state.type);
           return true;
         })
         .catch(() => {
@@ -73,7 +78,8 @@ const ArgumentCreate = React.createClass({
   },
 
   isVersion() {
-    return !!this.props.opinion.parent;
+    const { opinion } = this.props;
+    return !!opinion.parent;
   },
 
   renderFormErrors(field) {
@@ -85,22 +91,26 @@ const ArgumentCreate = React.createClass({
   },
 
   render() {
-    const { user } = this.props;
-    const disabled = !this.props.opinion.isContribuable;
+    const {
+      user,
+      opinion,
+      type,
+    } = this.props;
+    const disabled = !opinion.isContribuable;
     return (
       <div className="opinion__body box">
         <div className="opinion__data">
-          <form id={`argument-form--${this.props.type}`} ref="form">
+          <form id={`argument-form--${type}`} ref="form">
             <LoginOverlay>
               <Input
-                id={`arguments-body-${this.props.type}`}
+                id={`arguments-body-${type}`}
                 type="textarea"
                 rows="2"
                 name="body"
                 ref="body"
                 valueLink={this.linkState('body')}
-                label={this.getIntlMessage(`argument.${this.props.type}.add`)}
-                placeholder={this.getIntlMessage(`argument.${this.props.type}.add`)}
+                label={this.getIntlMessage(`argument.${type}.add`)}
+                placeholder={this.getIntlMessage(`argument.${type}.add`)}
                 groupClassName={this.getGroupStyle('body')}
                 labelClassName="sr-only"
                 errors={this.renderFormErrors('body')}

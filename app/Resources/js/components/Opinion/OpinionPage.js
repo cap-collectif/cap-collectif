@@ -56,9 +56,13 @@ const OpinionPage = React.createClass({
   },
 
   loadOpinion() {
+    const {
+      opinionId,
+      versionId,
+    } = this.props;
     OpinionActions.loadOpinion(
-      this.props.opinionId,
-      this.props.versionId
+      opinionId,
+      versionId
     );
   },
 

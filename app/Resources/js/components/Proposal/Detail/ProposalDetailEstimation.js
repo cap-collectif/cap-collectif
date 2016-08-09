@@ -10,8 +10,9 @@ const ProposalDetailEstimation = React.createClass({
   mixins: [IntlMixin],
 
   render() {
+    const { showNullEstimation } = this.props;
     const proposal = this.props.proposal;
-    const estimation = !proposal.estimation && this.props.showNullEstimation ? 0 : proposal.estimation;
+    const estimation = !proposal.estimation && showNullEstimation ? 0 : proposal.estimation;
 
     return estimation !== null && typeof estimation !== 'undefined'
       ? <div className="proposal__info">

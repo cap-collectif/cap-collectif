@@ -11,7 +11,8 @@ const OpinionBody = React.createClass({
   mixins: [IntlMixin],
 
   isVersion() {
-    return !!this.props.opinion.parent;
+    const { opinion } = this.props;
+    return !!opinion.parent;
   },
 
   render() {

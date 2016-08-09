@@ -36,7 +36,10 @@ const IdeaPageButtons = React.createClass({
   },
 
   render() {
-    const { idea } = this.props;
+    const {
+      idea,
+      themes,
+    } = this.props;
 
     return (
       <div className="block idea__buttons">
@@ -66,7 +69,7 @@ const IdeaPageButtons = React.createClass({
         </div>
         <IdeaEditModal
           idea={idea}
-          themes={this.props.themes}
+          themes={themes}
           show={this.state.showEditModal}
           onToggleModal={this.toggleEditModal}
         />

@@ -15,12 +15,14 @@ export default class Input extends ReactBootstrapInput {
   }
 
   setSuggestion() {
-    this.props.onChange(this.state.suggestion);
+    const { onChange } = this.props;
+    onChange(this.state.suggestion);
   }
 
   checkMail() {
+    const { value } = this.props;
     mailcheck.run({
-      email: this.props.value,
+      email: value,
       domains,
       suggested: suggestion => this.setState({ suggestion: suggestion.full }),
       empty: () => this.setState({ suggestion: null }),
@@ -28,16 +30,21 @@ export default class Input extends ReactBootstrapInput {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.type === 'textarea') {
+    const {
+      type,
+      value,
+    } = this.props;
+    if (type === 'textarea') {
       autosize(this.getInputDOMNode());
     }
-    if (this.props.type === 'email' && prevProps.value !== this.props.value) {
+    if (type === 'email' && prevProps.value !== value) {
       this.checkMail();
     }
   }
 
   componentWillUnmount() {
-    if (this.props.type === 'textarea') {
+    const { type } = this.props;
+    if (type === 'textarea') {
       autosize.destroy(this.getInputDOMNode());
     }
   }
@@ -51,10 +58,11 @@ export default class Input extends ReactBootstrapInput {
   }
 
   renderErrors() {
-    return this.props.errors
+    const { errors } = this.props;
+    return errors
       ? (
           <span className="error-block" key="error">
-            {this.props.errors}
+            {errors}
           </span>
         )
       : null
@@ -62,7 +70,14 @@ export default class Input extends ReactBootstrapInput {
   }
 
   renderInput() {
-    const { type, popover } = this.props;
+    const {
+      type,
+      popover,
+      className,
+      id,
+      image,
+      valueLink,
+    } = this.props;
     if (type && type === 'editor') {
       return <Editor {...this.props} />;
     }
@@ -72,7 +87,7 @@ export default class Input extends ReactBootstrapInput {
     }
 
     if (type && type === 'image') {
-      return <ImageUpload id={this.props.id} className={this.props.className} valueLink={this.props.valueLink} preview={this.props.image} />;
+      return <ImageUpload id={id} className={className} valueLink={valueLink} preview={image} />;
     }
 
     if (popover) {
@@ -95,17 +110,19 @@ export default class Input extends ReactBootstrapInput {
   }
 
   renderImage() {
-    if (this.props.image) {
+    const { image } = this.props;
+    if (image) {
       return (
-        <img src={this.props.image} />
+        <img src={image} />
       );
     }
   }
 
   renderFormGroup(children) {
+    const { id } = this.props;
     const props = Object.assign({}, this.props);
-    if (this.props.id) {
-      props.controlId = this.props.id;
+    if (id) {
+      props.controlId = id;
       delete props.id;
     }
     return (
@@ -116,6 +133,7 @@ export default class Input extends ReactBootstrapInput {
   }
 
   renderChildren() {
+    const { type } = this.props;
     return !this.isCheckboxOrRadio()
       ? [
         this.renderLabel(),
@@ -124,7 +142,7 @@ export default class Input extends ReactBootstrapInput {
           this.renderInputGroup(
             this.renderInput()
           ),
-          this.props.type !== 'captcha' && this.renderIcon(), // no feedbacks for captcha
+          type !== 'captcha' && this.renderIcon(), // no feedbacks for captcha
         ]),
         this.renderSuggestion(),
         this.renderImage(),

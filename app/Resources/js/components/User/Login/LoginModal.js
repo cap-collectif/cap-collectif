@@ -32,7 +32,12 @@ export const LoginModal = React.createClass({
 
   render() {
     const { isSubmitting } = this.state;
-    const { onClose, show, parameters } = this.props;
+    const {
+      onClose,
+      show,
+      parameters,
+      features,
+    } = this.props;
     const textTop = parameters['login.text.top'];
     const textBottom = parameters['login.text.bottom'];
     return (
@@ -57,8 +62,8 @@ export const LoginModal = React.createClass({
               </Alert>
             }
             <LoginSocialButtons features={{
-              login_facebook: this.props.features.login_facebook,
-              login_gplus: this.props.features.login_gplus,
+              login_facebook: features.login_facebook,
+              login_gplus: features.login_gplus,
             }} />
             <LoginForm
               isSubmitting={this.state.isSubmitting}

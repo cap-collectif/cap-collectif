@@ -7,7 +7,8 @@ const ProposalResponse = React.createClass({
   },
 
   isHTML() {
-    return /<[a-z][\s\S]*>/i.test(this.props.response.value);
+    const { response } = this.props;
+    return /<[a-z][\s\S]*>/i.test(response.value);
   },
 
   render() {

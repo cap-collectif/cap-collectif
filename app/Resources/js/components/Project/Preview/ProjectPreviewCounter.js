@@ -18,8 +18,13 @@ const ProjectPreviewCounter = React.createClass({
   },
 
   render() {
-    const { value, label, style } = this.props;
-    if (value > 0 || this.props.showZero) {
+    const {
+      value,
+      label,
+      style,
+      showZero,
+    } = this.props;
+    if (value > 0 || showZero) {
       return (
         <div className="thumbnail__number-block" style={style}>
             <div className="thumbnail__number">

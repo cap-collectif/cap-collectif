@@ -12,7 +12,8 @@ const ArgumentsBox = React.createClass({
   mixins: [IntlMixin],
 
   getCommentSystem() {
-    return this.props.opinion.parent ? this.props.opinion.parent.type.commentSystem : this.props.opinion.type.commentSystem;
+    const { opinion } = this.props;
+    return opinion.parent ? opinion.parent.type.commentSystem : opinion.type.commentSystem;
   },
 
   renderArgumentsForType(type) {

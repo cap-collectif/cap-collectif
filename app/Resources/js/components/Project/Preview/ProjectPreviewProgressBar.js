@@ -9,15 +9,17 @@ const ProjectPreviewProgressBar = React.createClass({
   mixins: [IntlMixin],
 
   getCompletedStepsNb() {
-    const completedSteps = this.props.project.steps.filter((step) => {
+    const { project } = this.props;
+    const completedSteps = project.steps.filter((step) => {
       return step.status === 'closed';
     });
     return completedSteps.length;
   },
 
   getCompletedStepsPercentage() {
+    const { project } = this.props;
     const completedStepsNb = this.getCompletedStepsNb();
-    const total = this.props.project.steps.length;
+    const total = project.steps.length;
     const percentage = completedStepsNb > 0 && total > 0
       ? completedStepsNb / total * 100
       : 0;

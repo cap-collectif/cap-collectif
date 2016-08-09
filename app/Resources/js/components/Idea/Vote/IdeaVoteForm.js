@@ -38,11 +38,13 @@ const IdeaVoteForm = React.createClass({
   },
 
   componentDidMount() {
-    this.updateAnonymousConstraints(this.props.anonymous);
+    const { anonymous } = this.props;
+    this.updateAnonymousConstraints(anonymous);
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.anonymous !== this.props.anonymous) {
+    const { anonymous } = this.props;
+    if (nextProps.anonymous !== anonymous) {
       this.updateAnonymousConstraints(nextProps.anonymous);
     }
   },
@@ -70,7 +72,11 @@ const IdeaVoteForm = React.createClass({
   formValidationRules: {},
 
   userHasVote() {
-    return !this.props.anonymous && this.props.idea.userHasVote;
+    const {
+      anonymous,
+      idea,
+    } = this.props;
+    return !anonymous && idea.userHasVote;
   },
 
   renderFormErrors(field) {

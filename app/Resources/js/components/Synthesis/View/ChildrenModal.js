@@ -13,8 +13,9 @@ const ChildrenModal = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
+    const { elements } = this.props;
     return {
-      isLoading: this.props.elements.length === 0,
+      isLoading: elements.length === 0,
     };
   },
 
@@ -25,23 +26,29 @@ const ChildrenModal = React.createClass({
   },
 
   show() {
-    this.props.toggle(true);
+    const { toggle } = this.props;
+    toggle(true);
   },
 
   hide() {
-    this.props.toggle(false);
+    const { toggle } = this.props;
+    toggle(false);
   },
 
   render() {
+    const {
+      elements,
+      show,
+    } = this.props;
     return (
-    <Modal show={this.props.show} onHide={this.hide} animation={false}>
+    <Modal show={show} onHide={this.hide} animation={false}>
       <Modal.Header closeButton>
         <Modal.Title>{this.getIntlMessage('synthesis.view.childrenModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Loader show={this.state.isLoading}>
           <ElementsList
-            elements={this.props.elements}
+            elements={elements}
             showBreadcrumb={false}
             showStatus={false}
             showNotation={false}

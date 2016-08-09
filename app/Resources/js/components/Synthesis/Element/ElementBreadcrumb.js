@@ -23,7 +23,7 @@ const ElementBreadcrumb = React.createClass({
         const title = splitted.slice(0, splitted.length - 5).join('-');
         const id = splitted.slice(splitted.length - 5, splitted.length).join('-');
         const item = {
-          'title': title || null,
+          title: title || null,
           id,
         };
         items.push(item);
@@ -42,22 +42,24 @@ const ElementBreadcrumb = React.createClass({
   },
 
   renderBreadCrumbItem(element, index) {
+    const { link } = this.props;
     return (
       <span key={index} className="element__breadcrumb-item">
         <span className="element__breadcrumb-arrow"> > </span>
-        <ElementTitle element={element} link={this.props.link} />
+        <ElementTitle element={element} link={link} />
       </span>
     );
   },
 
   render() {
-    const items = this.getElementBreadcrumbItems(this.props.element);
+    const { element } = this.props;
+    const items = this.getElementBreadcrumbItems(element);
     return (
       <p className="element__breadcrumb">
         <i className="cap cap-folder-2"></i>
         {
-          items.map((element, index) => {
-            return this.renderBreadCrumbItem(element, index);
+          items.map((item, index) => {
+            return this.renderBreadCrumbItem(item, index);
           })
           }
       </p>

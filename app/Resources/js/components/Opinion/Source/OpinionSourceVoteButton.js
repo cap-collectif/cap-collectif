@@ -29,7 +29,7 @@ const OpinionSourceVoteButton = React.createClass({
           bsStyle={hasVoted ? 'danger' : 'success'}
           className={`source__btn--vote${hasVoted ? '' : ' btn--outline'}`}
           bsSize="xsmall"
-          onClick={this.props.user ? onClick : null}
+          onClick={user ? onClick : null}
         >
           {hasVoted
             ? <span>{this.getIntlMessage('vote.cancel')}</span>

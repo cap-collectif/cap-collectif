@@ -10,10 +10,14 @@ export const GoogleLoginButton = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (!this.props.features.login_gplus) {
+    const {
+      features,
+      prefix,
+    } = this.props;
+    if (!features.login_gplus) {
       return null;
     }
-    const label = `${this.props.prefix}google`;
+    const label = `${prefix}google`;
     return (
       <a
        href={`/login/google?_destination=${window.location.href}`}

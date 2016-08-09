@@ -32,14 +32,15 @@ const OpinionSourceAdd = React.createClass({
   },
 
   render() {
+    const { disabled } = this.props;
     return (
       <div>
         <OpinionSourceAddButton
-          disabled={this.props.disabled}
+          disabled={disabled}
           handleClick={this.show.bind(null, this)}
         />
         {
-          !this.props.disabled
+          !disabled
           ? <OpinionSourceFormModal show={this.state.showModal} onClose={this.close} />
           : null
         }

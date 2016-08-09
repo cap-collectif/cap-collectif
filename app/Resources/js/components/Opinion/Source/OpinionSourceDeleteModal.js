@@ -22,11 +22,15 @@ const OpinionSourceDeleteModal = React.createClass({
   },
 
   handleSubmit() {
+    const {
+      onClose,
+      source,
+    } = this.props;
     this.setState({ isSubmitting: true });
     OpinionSourceActions
-      .delete(OpinionSourceStore.opinion, this.props.source.id)
+      .delete(OpinionSourceStore.opinion, source.id)
       .then(() => {
-        this.props.onClose();
+        onClose();
         this.setState({ isSubmitting: false });
         OpinionSourceActions.load(OpinionSourceStore.opinion, 'last');
       })

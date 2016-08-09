@@ -15,8 +15,9 @@ const OpinionLinksBox = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
+    const { opinion } = this.props;
     return {
-      links: this.props.opinion.connections || [],
+      links: opinion.connections || [],
       isLoading: false,
       filter: 'last',
     };
@@ -27,8 +28,9 @@ const OpinionLinksBox = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
+    const { opinion } = this.props;
     if (this.state.filter !== prevState.filter) {
-      OpinionLinkActions.load(this.props.opinion.id, this.state.filter);
+      OpinionLinkActions.load(opinion.id, this.state.filter);
     }
   },
 

@@ -18,18 +18,24 @@ const Filter = React.createClass({
   },
 
   render() {
-    if (this.props.show) {
+    const {
+      onChange,
+      show,
+      value,
+      values,
+    } = this.props;
+    if (show) {
       return (
         <select
           className="form-control pull-right"
-          value={this.props.value}
-          onChange={this.props.onChange}
+          value={value}
+          onChange={onChange}
         >
           {
-            this.props.values.map((value, index) => {
+            values.map((val, index) => {
               return (
-                <option value={value} key={index}>
-                  {this.getIntlMessage(`global.filter_${value}`)}
+                <option value={val} key={index}>
+                  {this.getIntlMessage(`global.filter_${val}`)}
                 </option>
               );
             })

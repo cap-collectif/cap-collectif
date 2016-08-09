@@ -21,7 +21,7 @@ const OpinionAnswer = React.createClass({
       return null;
     }
     const classes = classNames({
-      'opinion__answer': true,
+      opinion__answer: true,
       'bg-vip': answer.author && answer.author.vip,
     });
     return (

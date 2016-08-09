@@ -29,8 +29,9 @@ const FormMixin = { // This will be easy to use as an higher-order Component
   },
 
   getGroupStyle(field) {
+    const { isSubmitting } = this.props;
     return this.getErrorsMessages(field).length > 0 ?
-      'has-warning' : this.props.isSubmitting ?
+      'has-warning' : isSubmitting ?
       'has-success' : ''
     ;
   },

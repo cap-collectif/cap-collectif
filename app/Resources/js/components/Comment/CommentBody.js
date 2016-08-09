@@ -15,16 +15,18 @@ const CommentBody = React.createClass({
   },
 
   textShouldBeTruncated() {
-    return this.props.comment.body.length > 400;
+    const { comment } = this.props;
+    return comment.body.length > 400;
   },
 
   generateText() {
+    const { comment } = this.props;
     let text = '';
 
     if (!this.textShouldBeTruncated() || this.state.expanded) {
-      text = this.props.comment.body;
+      text = comment.body;
     } else {
-      text = this.props.comment.body.substr(0, 400);
+      text = comment.body.substr(0, 400);
       text = text.substr(0, Math.min(text.length, text.lastIndexOf(' ')));
       if (text.indexOf('.', text.length - 1) === -1) {
         text += '...';
@@ -48,7 +50,8 @@ const CommentBody = React.createClass({
   },
 
   renderTrashedLabel() {
-    if (this.props.comment.isTrashed) {
+    const { comment } = this.props;
+    if (comment.isTrashed) {
       return (
         <span className="label label-default">
           { this.getIntlMessage('comment.trashed.label') }

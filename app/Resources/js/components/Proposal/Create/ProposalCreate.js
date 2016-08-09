@@ -43,8 +43,9 @@ const ProposalCreate = React.createClass({
   },
 
   handleSubmitSuccess() {
+    const { form } = this.props;
     this.close();
-    ProposalActions.load('form', this.props.form.id);
+    ProposalActions.load('form', form.id);
   },
 
   handleValidationFailure() {
@@ -60,9 +61,15 @@ const ProposalCreate = React.createClass({
   },
 
   render() {
+    const {
+      categories,
+      districts,
+      form,
+      themes,
+    } = this.props;
     return (
       <div>
-        <ProposalCreateButton disabled={!this.props.form.isContribuable} handleClick={this.show.bind(null, this)} />
+        <ProposalCreateButton disabled={!form.isContribuable} handleClick={this.show.bind(null, this)} />
         <Modal
           animation={false}
           show={this.state.showModal}
@@ -77,13 +84,13 @@ const ProposalCreate = React.createClass({
           </Modal.Header>
           <Modal.Body>
             <ProposalForm
-              form={this.props.form}
-              themes={this.props.themes}
-              districts={this.props.districts}
+              form={form}
+              themes={themes}
+              districts={districts}
               isSubmitting={this.state.isSubmitting}
               onValidationFailure={this.handleValidationFailure.bind(null, this)}
               onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
-              categories={this.props.categories}
+              categories={categories}
             />
           </Modal.Body>
           <Modal.Footer>

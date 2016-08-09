@@ -17,14 +17,17 @@ const OpinionUserVote = React.createClass({
   },
 
   render() {
-    const { vote } = this.props;
+    const {
+      vote,
+      style,
+    } = this.props;
     return (
       <OverlayTrigger placement="top" overlay={
           <Tooltip id={`opinion-vote-tooltip-${vote.id}`}>
             {vote.user.displayName}
           </Tooltip>
         }>
-        <UserAvatar user={vote.user} style={this.props.style} />
+        <UserAvatar user={vote.user} style={style} />
       </OverlayTrigger>
     );
   },

@@ -26,7 +26,10 @@ const IdeaForm = React.createClass({
   },
 
   getInitialState() {
-    const { idea } = this.props;
+    const {
+      idea,
+      themeId,
+    } = this.props;
     return {
       form: {
         title: idea ? idea.title : '',
@@ -34,7 +37,7 @@ const IdeaForm = React.createClass({
         object: idea ? idea.object : '',
         url: idea ? idea.url : '',
         media: null,
-        theme: idea ? idea.theme.id : this.props.themeId,
+        theme: idea ? idea.theme.id : themeId,
         confirm: !!!idea,
       },
       errors: {
@@ -54,7 +57,8 @@ const IdeaForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.showThemes !== this.props.showThemes) {
+    const { showThemes } = this.props;
+    if (nextProps.showThemes !== showThemes) {
       this.updateThemeConstraint();
     }
   },
@@ -64,7 +68,8 @@ const IdeaForm = React.createClass({
   },
 
   updateThemeConstraint() {
-    if (this.props.showThemes) {
+    const { showThemes } = this.props;
+    if (showThemes) {
       this.formValidationRules.theme = {
         minValue: { value: 0, message: 'idea.constraints.theme' },
       };
@@ -103,7 +108,11 @@ const IdeaForm = React.createClass({
   },
 
   render() {
-    const { idea } = this.props;
+    const {
+      idea,
+      showThemes,
+      themes,
+    } = this.props;
     return (
       <form id="idea-form" ref="form">
         {idea
@@ -132,7 +141,7 @@ const IdeaForm = React.createClass({
         />
 
         {
-          this.props.showThemes
+          showThemes
             ? <Input
               id="idea_theme"
               type="select"
@@ -144,7 +153,7 @@ const IdeaForm = React.createClass({
             >
               <option value={-1} disabled>{this.getIntlMessage('idea.form.select_theme')}</option>
               {
-                this.props.themes.map((theme) => {
+                themes.map((theme) => {
                   return (
                     <option key={theme.id} value={theme.id}>
                       {theme.title}

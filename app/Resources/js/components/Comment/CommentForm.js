@@ -46,18 +46,23 @@ const CommentForm = React.createClass({
   },
 
   componentDidMount() {
-    if (this.props.focus) {
+    const {
+      focus,
+      user,
+    } = this.props;
+    if (focus) {
       ReactDOM.findDOMNode(this.refs.body).focus();
     }
-    this.updateConstraints(!this.props.user);
+    this.updateConstraints(!user);
   },
 
   componentWillReceiveProps(nextProps) {
+    const { user } = this.props;
     if (nextProps.focus) {
       ReactDOM.findDOMNode(this.refs.body).focus();
-      this.setState({ 'expanded': true });
+      this.setState({ expanded: true });
     }
-    if (nextProps.user !== this.props.user) {
+    if (nextProps.user !== user) {
       this.updateConstraints(!nextProps.user);
     }
   },
@@ -67,8 +72,9 @@ const CommentForm = React.createClass({
   },
 
   getFormClasses() {
+    const { isAnswer } = this.props;
     return classNames({
-      'comment-answer-form': this.props.isAnswer,
+      'comment-answer-form': isAnswer,
     });
   },
 
@@ -104,10 +110,14 @@ const CommentForm = React.createClass({
         return;
       }
     }
-    this.setState({ 'expanded': newState });
+    this.setState({ expanded: newState });
   },
 
   create() {
+    const {
+      comment,
+      user,
+    } = this.props;
     this.setState({ submitted: true }, () => {
       if (!this.isValid()) {
         return;
@@ -115,12 +125,12 @@ const CommentForm = React.createClass({
 
       this.setState({ isSubmitting: true });
       const data = this.state.form;
-      if (this.props.user) {
+      if (user) {
         delete data.authorName;
         delete data.authorEmail;
       }
 
-      this.props.comment(data)
+      comment(data)
       .then(() => {
         this.setState(this.getInitialState());
         autosize.destroy(ReactDOM.findDOMNode(this.refs.body));
@@ -140,7 +150,8 @@ const CommentForm = React.createClass({
   },
 
   renderAnonymous() {
-    if (!this.props.user) {
+    const { user } = this.props;
+    if (!user) {
       return (
         <div>
           <Row>
@@ -204,8 +215,9 @@ const CommentForm = React.createClass({
   },
 
   renderCommentButton() {
+    const { user } = this.props;
     if (this.state.expanded || this.state.form.body.length >= 1) {
-      if (this.props.user) {
+      if (user) {
         return (
           <Button ref="loggedInComment"
             disabled={this.state.isSubmitting}
@@ -225,12 +237,16 @@ const CommentForm = React.createClass({
   },
 
   render() {
+    const {
+      isAnswer,
+      user,
+    } = this.props;
     const classes = classNames({
-      'comment-answer-form': this.props.isAnswer,
+      'comment-answer-form': isAnswer,
     });
     return (
       <div className={classes} style={{ padding: '5px' }}>
-        <UserAvatar user={this.props.user} className="pull-left" />
+        <UserAvatar user={user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock" onBlur={() => this.expand(false)}>
           <form ref={(c) => this.form = c}>
             <Input

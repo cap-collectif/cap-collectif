@@ -32,11 +32,12 @@ const ReplyForm = React.createClass({
   },
 
   getInitialState() {
+    const { reply } = this.props;
     const form = {};
     this.props.form.fields.forEach((field) => {
       form[field.id] = field.type === 'checkbox' ? [] : '';
 
-      this.props.reply.responses.map((response) => {
+      reply.responses.map((response) => {
         form[response.field.id] = response.value;
       });
 
@@ -92,12 +93,15 @@ const ReplyForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.disabled && nextProps.isSubmitting && !this.props.isSubmitting) {
-      const {
-        onSubmitSuccess,
-        onSubmitFailure,
-        onValidationFailure,
-      } = this.props;
+    const {
+      onSubmitSuccess,
+      onSubmitFailure,
+      onValidationFailure,
+      disabled,
+      form,
+      isSubmitting,
+    } = this.props;
+    if (!disabled && nextProps.isSubmitting && !isSubmitting) {
       if (this.isValid()) {
         const responses = [];
         const data = {};
@@ -106,7 +110,7 @@ const ReplyForm = React.createClass({
 
           if (Array.isArray(this.state.form[key])) {
             let currentField = null;
-            this.props.form.fields.map((field) => {
+            form.fields.map((field) => {
               if (String(field.id) === key) {
                 currentField = field;
               }
@@ -132,12 +136,12 @@ const ReplyForm = React.createClass({
         });
 
         data.responses = responses;
-        if (this.props.form.anonymousAllowed) {
+        if (form.anonymousAllowed) {
           data.private = this.state.private;
         }
 
         return ReplyActions
-          .add(this.props.form.id, data)
+          .add(form.id, data)
           .then(onSubmitSuccess)
           .catch(onSubmitFailure);
       }
@@ -156,14 +160,15 @@ const ReplyForm = React.createClass({
   },
 
   getResponseForField(id) {
+    const { reply } = this.props;
     const index = ArrayHelper.getElementIndexFromArray(
-      this.props.reply.responses,
+      reply.responses,
       { field: { id } },
       'field',
       'id'
     );
     if (index > -1) {
-      return this.props.reply.responses[index].value;
+      return reply.responses[index].value;
     }
     return '';
   },
@@ -194,18 +199,21 @@ const ReplyForm = React.createClass({
 
   render() {
     const optional = this.getIntlMessage('global.form.optional');
-    const { disabled } = this.props;
+    const {
+      disabled,
+      form,
+    } = this.props;
     return (
       <form id="reply-form" ref="form">
         {
-          this.props.form.description &&
+          form.description &&
           <div>
-            <FormattedHTMLMessage message={this.props.form.description} />
+            <FormattedHTMLMessage message={form.description} />
             <hr />
           </div>
         }
         {
-          this.props.form.fields.map((field) => {
+          form.fields.map((field) => {
             const key = field.slug;
             const inputType = field.type || 'text';
 
@@ -302,7 +310,7 @@ const ReplyForm = React.createClass({
           })
         }
         {
-          this.props.form.anonymousAllowed
+          form.anonymousAllowed
             ? <div>
               <hr style={{ marginBottom: '30px' }} />
               <Input

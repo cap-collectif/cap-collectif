@@ -41,13 +41,20 @@ const ProposalDetailLikersLabel = React.createClass({
   },
 
   render() {
+    const {
+      likers,
+      onBlur,
+      onFocus,
+      onMouseOut,
+      onMouseOver,
+    } = this.props;
     const funcProps = {
-      onFocus: this.props.onFocus,
-      onBlur: this.props.onBlur,
-      onMouseOver: this.props.onMouseOver,
-      onMouseOut: this.props.onMouseOut,
+      onFocus: onFocus,
+      onBlur: onBlur,
+      onMouseOver: onMouseOver,
+      onMouseOut: onMouseOut,
     };
-    const { likers } = this.props;
+
     if (likers.length > 0) {
       return (
         <span {...funcProps}>

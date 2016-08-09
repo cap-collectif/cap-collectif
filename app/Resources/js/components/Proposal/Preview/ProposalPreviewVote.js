@@ -30,7 +30,8 @@ const ProposalPreviewVote = React.createClass({
   },
 
   anonymousCanVote() {
-    return this.props.selectionStep && this.props.selectionStep.voteType === VOTE_TYPE_SIMPLE;
+    const { selectionStep } = this.props;
+    return selectionStep && selectionStep.voteType === VOTE_TYPE_SIMPLE;
   },
 
   toggleModal(value) {
@@ -40,33 +41,47 @@ const ProposalPreviewVote = React.createClass({
   },
 
   vote() {
+    const {
+      onVoteChange,
+      proposal,
+      selectionStep,
+    } = this.props;
     ProposalActions
       .vote(
-        this.props.selectionStep.id,
-        this.props.proposal.id,
-        this.props.proposal.estimation
+        selectionStep.id,
+        proposal.id,
+        proposal.estimation
       )
       .then(() => {
-        this.props.onVoteChange(true);
+        onVoteChange(true);
       })
     ;
   },
 
   deleteVote() {
+    const {
+      onVoteChange,
+      proposal,
+      selectionStep,
+    } = this.props;
     ProposalActions
       .deleteVote(
-        this.props.selectionStep.id,
-        this.props.proposal.id,
-        this.props.proposal.estimation
+        selectionStep.id,
+        proposal.id,
+        proposal.estimation
       )
       .then(() => {
-        this.props.onVoteChange(false);
+        onVoteChange(false);
       })
     ;
   },
 
   voteAction() {
-    if (!this.props.user || !this.props.userHasVote) {
+    const {
+      user,
+      userHasVote,
+    } = this.props;
+    if (!user || !userHasVote) {
       this.toggleModal(true);
       return;
     }
@@ -74,7 +89,13 @@ const ProposalPreviewVote = React.createClass({
   },
 
   render() {
-    const { selectionStep, onVoteChange } = this.props;
+    const {
+      selectionStep,
+      onVoteChange,
+      creditsLeft,
+      proposal,
+      userHasVote,
+    } = this.props;
     if (!selectionStep || selectionStep.voteType === VOTE_TYPE_DISABLED) {
       return null;
     }
@@ -83,14 +104,14 @@ const ProposalPreviewVote = React.createClass({
       <div>
         <ProposalVoteButtonWrapper
           selectionStep={selectionStep}
-          proposal={this.props.proposal}
-          creditsLeft={this.props.creditsLeft}
-          userHasVote={this.props.userHasVote}
+          proposal={proposal}
+          creditsLeft={creditsLeft}
+          userHasVote={userHasVote}
           onClick={this.voteAction}
           style={{ width: '100%' }}
         />
         <ProposalVoteModal
-          proposal={this.props.proposal}
+          proposal={proposal}
           selectionStep={selectionStep}
           showModal={this.state.showModal}
           onToggleModal={this.toggleModal}

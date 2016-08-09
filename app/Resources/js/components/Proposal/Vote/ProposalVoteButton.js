@@ -34,7 +34,7 @@ const ProposalVoteButton = React.createClass({
     const { style, className, userHasVote, disabled, onMouseOver, onMouseOut, onFocus, onBlur, onClick } = this.props;
     const bsStyle = userHasVote ? 'danger' : 'success';
     let classes = classNames({
-      'proposal__preview__vote': true,
+      proposal__preview__vote: true,
       disabled,
     });
     classes += ` ${className}`;

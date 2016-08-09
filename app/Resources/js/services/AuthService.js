@@ -22,7 +22,7 @@ class AuthService {
       method: 'get',
       credentials: 'same-origin',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
     })

@@ -19,9 +19,13 @@ const StepPreview = React.createClass({
   },
 
   render() {
+    const {
+      className,
+      votes,
+    } = this.props;
     const step = this.props.step;
     return (
-      <li className={this.props.className}>
+      <li className={className}>
         <div>
           <div className="navbar__step-nb">{step.position}</div>
           <div className="navbar__step">
@@ -39,17 +43,17 @@ const StepPreview = React.createClass({
               : null
             }
             {
-              this.props.votes === null
+              votes === null
               ? null
               : <p style={{ marginTop: '5px' }}>
                   <span className="nb--highlighted">
-                    {this.props.votes}
+                    {votes}
                   </span>
                   <span className="excerpt">
                     {' '}
                     <FormattedMessage
                       message={this.getIntlMessage('vote.count_no_nb')}
-                      count={this.props.votes}
+                      count={votes}
                     />
                   </span>
               </p>

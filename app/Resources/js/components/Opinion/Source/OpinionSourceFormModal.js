@@ -33,7 +33,8 @@ const OpinionSourceFormModal = React.createClass({
   },
 
   handleSubmitSuccess() {
-    this.props.onClose();
+    const { onClose } = this.props;
+    onClose();
     this.setState({ isSubmitting: false });
     OpinionSourceActions.load(OpinionSourceStore.opinion, 'last');
   },

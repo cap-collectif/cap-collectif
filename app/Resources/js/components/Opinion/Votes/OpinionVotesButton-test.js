@@ -32,25 +32,25 @@ describe('<OpinionVotesButton />', () => {
   it('should render a green button when value is 1 and vote type is both', () => {
     const wrapper = shallow(<OpinionVotesButton opinion={opinionVoteBoth} value={1} features={{}} {...IntlData} />);
     expect(wrapper.find('Button')).to.have.length(1);
-    expect(wrapper.find({ 'bsStyle': 'success' })).to.have.length(1);
+    expect(wrapper.find({ bsStyle: 'success' })).to.have.length(1);
   });
 
   it('should render an orange button when value is 0 and vote type is both', () => {
     const wrapper = shallow(<OpinionVotesButton opinion={opinionVoteBoth} value={0} features={{}} {...IntlData} />);
     expect(wrapper.find('Button')).to.have.length(1);
-    expect(wrapper.find({ 'bsStyle': 'warning' })).to.have.length(1);
+    expect(wrapper.find({ bsStyle: 'warning' })).to.have.length(1);
   });
 
   it('should render a red button when value is -1 and vote type is both', () => {
     const wrapper = shallow(<OpinionVotesButton opinion={opinionVoteBoth} value={-1} features={{}} {...IntlData} />);
     expect(wrapper.find('Button')).to.have.length(1);
-    expect(wrapper.find({ 'bsStyle': 'danger' })).to.have.length(1);
+    expect(wrapper.find({ bsStyle: 'danger' })).to.have.length(1);
   });
 
   it('should render a green button when value is 1 and vote type is simple', () => {
     const wrapper = shallow(<OpinionVotesButton opinion={opinionVoteSimple} value={1} features={{}} {...IntlData} />);
     expect(wrapper.find('Button')).to.have.length(1);
-    expect(wrapper.find({ 'bsStyle': 'success' })).to.have.length(1);
+    expect(wrapper.find({ bsStyle: 'success' })).to.have.length(1);
   });
 
   it('should not render a button when value is 0 and vote type is simple', () => {

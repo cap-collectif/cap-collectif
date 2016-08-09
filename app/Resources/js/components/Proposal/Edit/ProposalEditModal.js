@@ -40,11 +40,13 @@ const ProposalEditModal = React.createClass({
   },
 
   close() {
-    this.props.onToggleModal(false);
+    const { onToggleModal } = this.props;
+    onToggleModal(false);
   },
 
   show() {
-    this.props.onToggleModal(true);
+    const { onToggleModal } = this.props;
+    onToggleModal(true);
   },
 
   handleSubmit() {
@@ -65,11 +67,19 @@ const ProposalEditModal = React.createClass({
   },
 
   render() {
+    const {
+      categories,
+      districts,
+      form,
+      proposal,
+      show,
+      themes,
+    } = this.props;
     return (
       <div>
         <Modal
           animation={false}
-          show={this.props.show}
+          show={show}
           onHide={this.close.bind(null, this)}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
@@ -81,15 +91,15 @@ const ProposalEditModal = React.createClass({
           </Modal.Header>
           <Modal.Body>
             <ProposalForm
-              form={this.props.form}
-              themes={this.props.themes}
-              districts={this.props.districts}
-              categories={this.props.categories}
+              form={form}
+              themes={themes}
+              districts={districts}
+              categories={categories}
               isSubmitting={this.state.isSubmitting}
               onValidationFailure={this.handleValidationFailure.bind(null, this)}
               onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
               mode="edit"
-              proposal={this.props.proposal}
+              proposal={proposal}
             />
           </Modal.Body>
           <Modal.Footer>

@@ -43,24 +43,33 @@ const ViewElement = React.createClass({
   },
 
   openOriginalContribution() {
-    window.open(this.props.element.linkedDataUrl);
+    const { element } = this.props;
+    window.open(element.linkedDataUrl);
     return false;
   },
 
   toggleChildrenModal(value) {
-    this.props.onExpandElement(this.props.element);
+    const {
+      element,
+      onExpandElement,
+    } = this.props;
+    onExpandElement(element);
     this.setState({
       showChildrenModal: value,
     });
   },
 
   renderAuthor() {
-    if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'author')) {
+    const {
+      element,
+      settings,
+    } = this.props;
+    if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'author')) {
       return (
         <div className="synthesis__element__author">
           <UserAvatar className="pull-left" style={{ marginRight: '15px', marginTop: '15px' }} />
           <span>
-            {this.props.element.authorName}
+            {element.authorName}
           </span>
         </div>
       );
@@ -69,8 +78,12 @@ const ViewElement = React.createClass({
   },
 
   renderPieChart() {
-    const votes = this.props.element.votes;
-    if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'piechart')) {
+    const {
+      element,
+      settings,
+    } = this.props;
+    const votes = element.votes;
+    if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'piechart')) {
       return (
         <div className="synthesis__element__votes">
           <VotePiechart
@@ -94,17 +107,21 @@ const ViewElement = React.createClass({
   },
 
   renderCounters() {
-    if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'counters')) {
+    const {
+      element,
+      settings,
+    } = this.props;
+    if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'counters')) {
       return (
         <div className="synthesis__element__counters">
           <FormattedMessage
             message={this.getIntlMessage('synthesis.counter.contributions')}
-            nb={this.props.element.publishedChildrenCount}
+            nb={element.publishedChildrenCount}
           />
-          {this.props.element.linkedDataUrl
+          {element.linkedDataUrl
             ? <a
                 style={{ marginLeft: '15px' }}
-                href={this.props.element.linkedDataUrl}
+                href={element.linkedDataUrl}
                 onClick={this.openOriginalContribution}
             >
               {this.getIntlMessage('synthesis.counter.link')}
@@ -118,10 +135,14 @@ const ViewElement = React.createClass({
   },
 
   renderSubtitle() {
-    if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'subtitle') && this.props.element.subtitle) {
+    const {
+      element,
+      settings,
+    } = this.props;
+    if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'subtitle') && element.subtitle) {
       return (
         <p className="small excerpt">
-          {this.props.element.subtitle}
+          {element.subtitle}
         </p>
       );
     }
@@ -129,14 +150,19 @@ const ViewElement = React.createClass({
   },
 
   renderPercentage() {
-    if (SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'percentage') && this.props.parent) {
+    const {
+      element,
+      parent,
+      settings,
+    } = this.props;
+    if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'percentage') && parent) {
       let percentage = Math.round(
-        (this.props.element.childrenElementsNb / this.props.parent.childrenElementsNb) * 1000
+        (element.childrenElementsNb / parent.childrenElementsNb) * 1000
       ) / 10;
       percentage = percentage > 0 ? percentage : 0;
       const tooltip = this.getPercentageTooltip(
-        this.props.element.publishedChildrenCount,
-        this.props.element.childrenScore,
+        element.publishedChildrenCount,
+        element.childrenScore,
         percentage
       );
       return (
@@ -151,37 +177,46 @@ const ViewElement = React.createClass({
   },
 
   renderDescription() {
-    if (this.props.element.description) {
+    const { element } = this.props;
+    if (element.description) {
       return (
         <p className="synthesis__element__description">
-          {this.props.element.description}
+          {element.description}
         </p>
       );
     }
   },
 
   renderTitle() {
-    const childrenModal = SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'childrenInModal');
+    const {
+      element,
+      settings,
+    } = this.props;
+    const childrenModal = SynthesisDisplayRules.getValueForRule(settings, 'display', 'childrenInModal');
     return (
       <ElementTitle
         className="element__title"
-        element={this.props.element}
+        element={element}
         hasLink={false}
-        style={SynthesisDisplayRules.buildStyle(this.props.settings)}
+        style={SynthesisDisplayRules.buildStyle(settings)}
         onClick={childrenModal ? this.toggleChildrenModal.bind(null, true) : null}
       />
     );
   },
 
   renderAsProgressBar() {
-    if (this.props.parent) {
+    const {
+      element,
+      parent,
+    } = this.props;
+    if (parent) {
       let percentage = Math.round(
-        (this.props.element.childrenElementsNb / this.props.parent.parentChildrenElementsNb) * 1000
+        (element.childrenElementsNb / parent.parentChildrenElementsNb) * 1000
       ) / 10;
       percentage = percentage > 0 ? percentage : 0;
       const tooltip = this.getPercentageTooltip(
-        this.props.element.publishedChildrenCount,
-        this.props.element.childrenScore,
+        element.publishedChildrenCount,
+        element.childrenScore,
         percentage
       );
       return (
@@ -199,12 +234,16 @@ const ViewElement = React.createClass({
   },
 
   render() {
+    const {
+      element,
+      settings,
+    } = this.props;
     return (
-      <div className="synthesis__element" style={SynthesisDisplayRules.buildStyle(this.props.settings, 'containerStyle')}>
+      <div className="synthesis__element" style={SynthesisDisplayRules.buildStyle(settings, 'containerStyle')}>
         {this.renderAuthor()}
-        <div style={SynthesisDisplayRules.buildStyle(this.props.settings)}>
+        <div style={SynthesisDisplayRules.buildStyle(settings)}>
           {
-            SynthesisDisplayRules.getValueForRule(this.props.settings, 'display', 'asProgressBar')
+            SynthesisDisplayRules.getValueForRule(settings, 'display', 'asProgressBar')
               ? this.renderAsProgressBar()
               : <p>
                   {this.renderTitle()}
@@ -216,7 +255,7 @@ const ViewElement = React.createClass({
         {this.renderCounters()}
         {this.renderPieChart()}
         {this.renderDescription()}
-        <ChildrenModal elements={this.props.element.children} show={this.state.showChildrenModal} toggle={this.toggleChildrenModal} />
+        <ChildrenModal elements={element.children} show={this.state.showChildrenModal} toggle={this.toggleChildrenModal} />
       </div>
     );
   },

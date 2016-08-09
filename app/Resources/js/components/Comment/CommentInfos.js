@@ -11,6 +11,7 @@ const CommentInfos = React.createClass({
   mixins: [IntlMixin],
 
   renderDate() {
+    const { comment } = this.props;
     if (!Modernizr.intl) {
       return null;
     }
@@ -18,7 +19,7 @@ const CommentInfos = React.createClass({
     return (
       <span className="excerpt">
         <FormattedDate
-            value={moment(this.props.comment.created_at)}
+            value={moment(comment.created_at)}
             day="numeric" month="long" year="numeric"
             hour="numeric" minute="numeric"
         />
@@ -27,11 +28,12 @@ const CommentInfos = React.createClass({
   },
 
   renderEditionDate() {
+    const { comment } = this.props;
     if (!Modernizr.intl) {
       return null;
     }
 
-    if (moment(this.props.comment.updated_at).diff(this.props.comment.created_at, 'seconds') <= 1) {
+    if (moment(comment.updated_at).diff(comment.created_at, 'seconds') <= 1) {
       return null;
     }
 
@@ -41,7 +43,7 @@ const CommentInfos = React.createClass({
         { this.getIntlMessage('comment.edited') }
         { ' ' }
         <FormattedDate
-            value={moment(this.props.comment.updated_at)}
+            value={moment(comment.updated_at)}
             day="numeric" month="long" year="numeric"
             hour="numeric" minute="numeric"
         />
@@ -50,21 +52,23 @@ const CommentInfos = React.createClass({
   },
 
   renderAuthorName() {
-    if (this.props.comment.author) {
-      return <UserLink user={this.props.comment.author} />;
+    const { comment } = this.props;
+    if (comment.author) {
+      return <UserLink user={comment.author} />;
     }
 
-    return <span>{ this.props.comment.author_name }</span>;
+    return <span>{ comment.author_name }</span>;
   },
 
   render() {
+    const { comment } = this.props;
     return (
       <p className="h5  opinion__user">
         {this.renderAuthorName()}
         {'  '}
         {this.renderDate()}
         {this.renderEditionDate()}
-        <PinnedLabel show={this.props.comment.pinned} />
+        <PinnedLabel show={comment.pinned} />
       </p>
     );
   },

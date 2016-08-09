@@ -22,11 +22,13 @@ const ReplyEditModal = React.createClass({
   },
 
   close() {
-    this.props.onToggleModal(false);
+    const { onToggleModal } = this.props;
+    onToggleModal(false);
   },
 
   show() {
-    this.props.onToggleModal(true);
+    const { onToggleModal } = this.props;
+    onToggleModal(true);
   },
 
   handleSubmit() {
@@ -49,14 +51,19 @@ const ReplyEditModal = React.createClass({
   },
 
   render() {
-    if (!this.props.form.contribuable) {
+    const {
+      form,
+      reply,
+      show,
+    } = this.props;
+    if (!form.contribuable) {
       return null;
     }
     return (
       <div>
         <Modal
           animation={false}
-          show={this.props.show}
+          show={show}
           onHide={this.close}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
@@ -69,8 +76,8 @@ const ReplyEditModal = React.createClass({
           <Modal.Body>
           <div id="edit-reply-form">
             <ReplyForm
-              form={this.props.form}
-              reply={this.props.reply}
+              form={form}
+              reply={reply}
               isSubmitting={this.state.isSubmitting}
               onSubmitSuccess={this.handleSubmitSuccess}
               onSubmitFailure={this.handleFailure}

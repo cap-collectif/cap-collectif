@@ -44,15 +44,16 @@ const OpinionVersionsBox = React.createClass({
   },
 
   loadVersionsFromServer() {
-    this.setState({ 'isLoading': true });
+    const { opinionId } = this.props;
+    this.setState({ isLoading: true });
 
     Fetcher
-    .get(`/opinions/${this.props.opinionId}/versions?offset=${this.state.offset}&filter=${this.state.filter}`)
+    .get(`/opinions/${opinionId}/versions?offset=${this.state.offset}&filter=${this.state.filter}`)
     .then((data) => {
       this.setState({
-        'isLoading': false,
-        'versions': data.versions,
-        'rankingThreshold': data.rankingThreshold,
+        isLoading: false,
+        versions: data.versions,
+        rankingThreshold: data.rankingThreshold,
       });
       return true;
     });

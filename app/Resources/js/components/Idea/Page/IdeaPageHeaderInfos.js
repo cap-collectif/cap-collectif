@@ -12,7 +12,10 @@ export const IdeaPageHeaderInfos = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    const { idea } = this.props;
+    const {
+      idea,
+      features,
+    } = this.props;
 
     const createdDate = (
       <FormattedDate
@@ -26,7 +29,7 @@ export const IdeaPageHeaderInfos = React.createClass({
         day="numeric" month="long" year="numeric" hour="numeric" minute="numeric"
       />
     );
-    const themeLink = idea.theme && this.props.features.themes
+    const themeLink = idea.theme && features.themes
       ? (
         <a href={idea.theme._links.show}>
           {idea.theme.title}

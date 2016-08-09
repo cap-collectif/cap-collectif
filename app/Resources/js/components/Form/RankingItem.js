@@ -38,7 +38,7 @@ const RankingItem = React.createClass({
     const { id, item, position, isDragging, connectDragSource, arrowFunctions, disabled } = this.props;
     const opacity = isDragging ? 0.5 : 1;
     const classes = classNames({
-      'ranking__item': true,
+      ranking__item: true,
       'list-group-item': true,
       disabled,
     });

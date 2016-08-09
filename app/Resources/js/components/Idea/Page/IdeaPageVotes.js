@@ -22,9 +22,13 @@ const IdeaPageVotes = React.createClass({
   },
 
   getInitialState() {
+    const {
+      idea,
+      votes,
+    } = this.props;
     return {
-      votes: this.props.votes,
-      votesCount: this.props.idea.votesCount,
+      votes: votes,
+      votesCount: idea.votesCount,
       showModal: false,
     };
   },
@@ -55,6 +59,7 @@ const IdeaPageVotes = React.createClass({
   },
 
   render() {
+    const { className } = this.props;
     const votesToDisplay = this.state.votes.slice(0, IDEA_VOTES_TO_SHOW);
     const moreVotes = this.state.votesCount - IDEA_VOTES_TO_SHOW > 0;
 
@@ -63,9 +68,9 @@ const IdeaPageVotes = React.createClass({
     }
 
     const classes = {
-      'idea__votes': true,
+      idea__votes: true,
     };
-    classes[this.props.className] = true;
+    classes[className] = true;
 
     return (
       <div id="votes" className={classNames(classes)}>

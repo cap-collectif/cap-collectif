@@ -27,9 +27,14 @@ const SelectionStepPage = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
-    ProposalActions.initProposals(this.props.proposals, this.props.count);
-    ProposalActions.initProposalVotes(this.props.step.creditsLeft);
-    ProposalActions.changeOrder(this.props.step.defaultOrder);
+    const {
+      count,
+      proposals,
+      step,
+    } = this.props;
+    ProposalActions.initProposals(proposals, count);
+    ProposalActions.initProposalVotes(step.creditsLeft);
+    ProposalActions.changeOrder(step.defaultOrder);
     return {
       proposals: ProposalStore.proposals,
       proposalsCount: ProposalStore.proposalsCount,
@@ -78,10 +83,11 @@ const SelectionStepPage = React.createClass({
   },
 
   loadProposals() {
+    const { step } = this.props;
     this.setState({
       isLoading: true,
     });
-    ProposalActions.load('selectionStep', this.props.step.id);
+    ProposalActions.load('selectionStep', step.id);
   },
 
   handleFilterOrOrderChange() {
@@ -94,12 +100,21 @@ const SelectionStepPage = React.createClass({
   },
 
   render() {
+    const {
+      categories,
+      districts,
+      showThemes,
+      statuses,
+      step,
+      themes,
+      types,
+    } = this.props;
     const nbPages = Math.ceil(this.state.proposalsCount / PROPOSAL_PAGINATION);
     const showRandomButton = nbPages > 1 && this.state.randomOrder;
     const showPagination = nbPages > 1 && !this.state.randomOrder;
     return (
       <div>
-        <StepPageHeader step={this.props.step} />
+        <StepPageHeader step={step} />
         <h3 className="h3" style={{ marginBottom: '15px' }}>
           <FormattedMessage
             message={this.getIntlMessage('proposal.count')}
@@ -107,25 +122,25 @@ const SelectionStepPage = React.createClass({
           />
         </h3>
         <ProposalListFilters
-          id={this.props.step.id}
+          id={step.id}
           fetchFrom="selectionStep"
-          themes={this.props.themes}
-          districts={this.props.districts}
-          types={this.props.types}
-          statuses={this.props.statuses}
-          categories={this.props.categories}
+          themes={themes}
+          districts={districts}
+          types={types}
+          statuses={statuses}
+          categories={categories}
           onChange={() => this.handleFilterOrOrderChange()}
-          orderByVotes={this.props.step.voteType !== VOTE_TYPE_DISABLED}
-          showThemes={this.props.showThemes}
+          orderByVotes={step.voteType !== VOTE_TYPE_DISABLED}
+          showThemes={showThemes}
         />
         <br />
         <Loader show={this.state.isLoading}>
           <div>
             <ProposalList
               proposals={this.state.proposals}
-              selectionStep={this.props.step}
+              selectionStep={step}
               creditsLeft={this.state.creditsLeft}
-              showThemes={this.props.showThemes}
+              showThemes={showThemes}
             />
             {
               showPagination

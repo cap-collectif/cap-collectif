@@ -13,17 +13,25 @@ const CommentVoteButton = React.createClass({
   mixins: [IntlMixin],
 
   deleteVote() {
-    CommentActions.deleteVote(this.props.comment.id)
+    const {
+      comment,
+      onVote,
+    } = this.props;
+    CommentActions.deleteVote(comment.id)
       .then(() => {
-        this.props.onVote();
+        onVote();
       })
     ;
   },
 
   vote() {
-    CommentActions.vote(this.props.comment.id)
+    const {
+      comment,
+      onVote,
+    } = this.props;
+    CommentActions.vote(comment.id)
       .then(() => {
-        this.props.onVote();
+        onVote();
       })
     ;
   },
@@ -73,11 +81,12 @@ const CommentVoteButton = React.createClass({
   },
 
   render() {
+    const { comment } = this.props;
     return (
       <span>
         { this.renderFormOrDisabled() }
         { ' ' }
-        <span className="opinion__votes-nb">{ this.props.comment.votes_count }</span>
+        <span className="opinion__votes-nb">{ comment.votes_count }</span>
       </span>
     );
   },

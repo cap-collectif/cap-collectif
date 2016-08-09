@@ -11,7 +11,8 @@ const OpinionVotesBar = React.createClass({
   mixins: [IntlMixin],
 
   getOpinionType() {
-    return this.props.opinion.parent ? this.props.opinion.parent.type : this.props.opinion.type;
+    const { opinion } = this.props;
+    return opinion.parent ? opinion.parent.type : opinion.type;
   },
 
   render() {

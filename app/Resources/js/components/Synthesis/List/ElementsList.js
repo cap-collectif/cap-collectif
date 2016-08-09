@@ -25,23 +25,31 @@ const ElementsList = React.createClass({
   },
 
   render() {
-    if (this.props.elements.length < 1) {
+    const {
+      elements,
+      hasLink,
+      linkType,
+      showBreadcrumb,
+      showNotation,
+      showStatus,
+    } = this.props;
+    if (elements.length < 1) {
       return null;
     }
 
     return (
       <Nav stacked className="synthesis__list">
         {
-          this.props.elements.map((element) => {
+          elements.map((element) => {
             return (
               <ElementListItem
                 key={element.id}
                 element={element}
-                showBreadcrumb={this.props.showBreadcrumb}
-                showStatus={this.props.showStatus}
-                showNotation={this.props.showNotation}
-                hasLink={this.props.hasLink}
-                linkType={this.props.linkType}
+                showBreadcrumb={showBreadcrumb}
+                showStatus={showStatus}
+                showNotation={showNotation}
+                hasLink={hasLink}
+                linkType={linkType}
               />
             );
           })

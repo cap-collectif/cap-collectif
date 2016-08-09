@@ -21,9 +21,15 @@ const IdeaCreateVoteForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    const { idea, anonymous } = this.props;
+    const {
+      idea,
+      anonymous,
+      isSubmitting,
+      onFailure,
+      onSubmitSuccess,
+    } = this.props;
     const ideaVoteForm = this.ideaVoteForm;
-    if (!this.props.isSubmitting && nextProps.isSubmitting) {
+    if (!isSubmitting && nextProps.isSubmitting) {
       if (ideaVoteForm.isValid()) {
         const data = ideaVoteForm.state.form;
         if (!anonymous) {
@@ -37,19 +43,19 @@ const IdeaCreateVoteForm = React.createClass({
           .vote(idea.id, data)
           .then(() => {
             ideaVoteForm.reinitState();
-            this.props.onSubmitSuccess();
+            onSubmitSuccess();
           })
           .catch((error) => {
             if (error.response) {
               this.setServerErrors(error.response);
             }
-            this.props.onFailure();
+            onFailure();
           })
         ;
         return;
       }
 
-      this.props.onFailure();
+      onFailure();
     }
   },
 
@@ -61,12 +67,16 @@ const IdeaCreateVoteForm = React.createClass({
   },
 
   render() {
+    const {
+      anonymous,
+      idea,
+    } = this.props;
     return (
       <IdeaVoteForm
         ref={(c) => this.ideaVoteForm = c}
-        idea={this.props.idea}
+        idea={idea}
         serverErrors={this.state.serverErrors}
-        anonymous={this.props.anonymous}
+        anonymous={anonymous}
       />
     );
   },

@@ -18,8 +18,12 @@ export const IdeasIndexFooter = React.createClass({
   },
 
   render() {
-    const { trashUrl, countTrashed } = this.props;
-    if (!this.props.features.idea_trash || !trashUrl) {
+    const {
+      trashUrl,
+      countTrashed,
+      features,
+    } = this.props;
+    if (!features.idea_trash || !trashUrl) {
       return null;
     }
     return (

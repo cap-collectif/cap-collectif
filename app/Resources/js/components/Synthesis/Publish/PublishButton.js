@@ -10,7 +10,11 @@ const PublishButton = React.createClass({
   mixins: [IntlMixin],
 
   click() {
-    this.props.onModal(true, this.props.element);
+    const {
+      element,
+      onModal,
+    } = this.props;
+    onModal(true, element);
   },
 
   render() {

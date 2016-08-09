@@ -27,8 +27,9 @@ const OpinionEditModal = React.createClass({
   },
 
   handleSubmitSuccess() {
+    const { onClose } = this.props;
     this.setState({ isSubmitting: false });
-    this.props.onClose();
+    onClose();
   },
 
   stopSubmit() {

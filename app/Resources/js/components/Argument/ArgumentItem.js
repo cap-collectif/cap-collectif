@@ -32,7 +32,7 @@ const ArgumentItem = React.createClass({
   render() {
     const argument = this.props.argument;
     const classes = classNames({
-      'opinion': true,
+      opinion: true,
       'opinion--argument': true,
       'bg-vip': argument.author && argument.author.vip,
     });

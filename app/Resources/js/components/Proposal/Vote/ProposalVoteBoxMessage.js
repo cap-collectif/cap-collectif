@@ -19,16 +19,22 @@ const ProposalVoteBoxMessage = React.createClass({
   },
 
   getMessage() {
-    if (!this.props.enoughCredits && !this.props.submitting) {
+    const {
+      enoughCredits,
+      selectionStep,
+      submitting,
+      user,
+    } = this.props;
+    if (!enoughCredits && !submitting) {
       return this.getIntlMessage('proposal.vote.not_enough_credits');
     }
-    if (this.props.selectionStep.status === 'future') {
+    if (selectionStep.status === 'future') {
       return this.getIntlMessage('proposal.vote.step_not_yet_open');
     }
-    if (this.props.selectionStep.status === 'closed') {
+    if (selectionStep.status === 'closed') {
       return this.getIntlMessage('proposal.vote.step_closed');
     }
-    if (this.props.selectionStep.voteType === VOTE_TYPE_BUDGET && !this.props.user) {
+    if (selectionStep.voteType === VOTE_TYPE_BUDGET && !user) {
       return this.getIntlMessage('proposal.vote.must_log_in');
     }
     return null;

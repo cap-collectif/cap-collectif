@@ -12,17 +12,19 @@ const OpinionInfos = React.createClass({
   mixins: [IntlMixin],
 
   isVersion() {
-    return !!this.props.opinion.parent;
+    const { opinion } = this.props;
+    return !!opinion.parent;
   },
 
   renderDate() {
+    const { opinion } = this.props;
     if (!Modernizr.intl) {
       return null;
     }
     return (
       <span className="excerpt">
         <FormattedDate
-            value={moment(this.props.opinion.created_at)}
+            value={moment(opinion.created_at)}
             day="numeric" month="long" year="numeric"
             hour="numeric" minute="numeric"
         />
@@ -31,11 +33,12 @@ const OpinionInfos = React.createClass({
   },
 
   renderEditionDate() {
+    const { opinion } = this.props;
     if (!Modernizr.intl) {
       return null;
     }
 
-    if (moment(this.props.opinion.updated_at).diff(this.props.opinion.created_at, 'seconds') <= 1) {
+    if (moment(opinion.updated_at).diff(opinion.created_at, 'seconds') <= 1) {
       return null;
     }
 
@@ -45,7 +48,7 @@ const OpinionInfos = React.createClass({
         { this.getIntlMessage('global.edited') }
         { ' ' }
         <FormattedDate
-          value={moment(this.props.opinion.updated_at)}
+          value={moment(opinion.updated_at)}
           day="numeric" month="long" year="numeric"
           hour="numeric" minute="numeric"
         />
@@ -54,32 +57,37 @@ const OpinionInfos = React.createClass({
   },
 
   renderAuthorName() {
-    if (this.props.opinion.author) {
-      return <UserLink user={this.props.opinion.author} />;
+    const { opinion } = this.props;
+    if (opinion.author) {
+      return <UserLink user={opinion.author} />;
     }
 
-    return <span>{ this.props.opinion.author_name }</span>;
+    return <span>{ opinion.author_name }</span>;
   },
 
   renderRankingLabel() {
+    const {
+      opinionTerm,
+      rankingThreshold,
+    } = this.props;
     const opinion = this.props.opinion;
-    if (this.props.rankingThreshold !== null && opinion.ranking !== null && opinion.ranking <= this.props.rankingThreshold) {
+    if (rankingThreshold !== null && opinion.ranking !== null && opinion.ranking <= rankingThreshold) {
       return (
         <span className="opinion__label opinion__label--green">
           <i className="cap cap-trophy"></i>
           {this.isVersion()
             ? <FormattedMessage
                 message={this.getIntlMessage('opinion.ranking.versions')}
-                max={this.props.rankingThreshold}
+                max={rankingThreshold}
             />
-            : this.props.opinionTerm === 0
+            : opinionTerm === 0
               ? <FormattedMessage
                   message={this.getIntlMessage('opinion.ranking.opinions')}
-                  max={this.props.rankingThreshold}
+                  max={rankingThreshold}
               />
               : <FormattedMessage
                   message={this.getIntlMessage('opinion.ranking.articles')}
-                  max={this.props.rankingThreshold}
+                  max={rankingThreshold}
               />
           }
         </span>

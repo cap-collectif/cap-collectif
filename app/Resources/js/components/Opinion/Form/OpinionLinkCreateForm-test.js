@@ -25,7 +25,7 @@ describe('<OpinionLinkCreateForm />', () => {
     const wrapper = shallow(<OpinionLinkCreateForm {...props} />);
     const form1 = wrapper.find('ReduxForm');
     expect(form1.prop('options')).to.equal(props.availableTypes);
-    expect(form1.prop('initialValues')).to.eql({ 'opinionType': 1337 });
+    expect(form1.prop('initialValues')).to.eql({ opinionType: 1337 });
     const form2 = wrapper.find('OpinionForm');
     expect(form2.prop('form')).to.equal('opinion-link-create-form');
     expect(form2.prop('validate')).to.equal(defaultValidation);

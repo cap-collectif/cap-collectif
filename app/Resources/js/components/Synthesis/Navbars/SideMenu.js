@@ -79,8 +79,9 @@ const SideMenu = React.createClass({
   },
 
   loadElementsTreeFromServer() {
+    const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(
-      this.props.synthesis.id,
+      synthesis.id,
       'notIgnored'
     );
   },
@@ -96,12 +97,13 @@ const SideMenu = React.createClass({
   },
 
   renderTree() {
+    const { synthesis } = this.props;
     if (this.state.isLoading) {
       return <Loader show={this.state.isLoading} />;
     }
     return (
       <ElementsFinder
-        synthesis={this.props.synthesis}
+        synthesis={synthesis}
         elements={this.state.navItems}
         expanded={this.state.expanded}
         selectedId={this.state.selectedId}
@@ -132,6 +134,7 @@ const SideMenu = React.createClass({
   },
 
   render() {
+    const { synthesis } = this.props;
     return (
       <div className="synthesis__side-menu">
         <div className="menu__tree">
@@ -141,7 +144,7 @@ const SideMenu = React.createClass({
           {this.renderCreateButton()}
           {this.renderManageButton()}
         </Nav>
-        <CreateModal synthesis={this.props.synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} elements={this.state.navItems} selectedId={this.state.selectedId} />
+        <CreateModal synthesis={synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} elements={this.state.navItems} selectedId={this.state.selectedId} />
       </div>
     );
   },

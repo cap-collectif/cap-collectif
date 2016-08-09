@@ -41,7 +41,8 @@ const ElementsSearch = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.term !== this.props.params.term) {
+    const { params } = this.props;
+    if (nextProps.params.term !== params.term) {
       this.setState({
         isLoading: true,
         limit: Pagination,
@@ -76,8 +77,9 @@ const ElementsSearch = React.createClass({
   },
 
   loadElementsByTermFromServer(term = this.props.params.term) {
+    const { synthesis } = this.props;
     SynthesisElementActions.loadElementsByTermFromServer(
-      this.props.synthesis.id,
+      synthesis.id,
       term,
       this.state.offset,
       this.state.limit

@@ -28,9 +28,10 @@ const RankingBlock = React.createClass({
   },
 
   getInitialState() {
+    const { field } = this.props;
     return {
       items: {
-        pickBox: this.props.field.choices,
+        pickBox: field.choices,
         choiceBox: [],
       },
       choicesHeight: 'auto',
@@ -42,6 +43,7 @@ const RankingBlock = React.createClass({
   },
 
   moveItem(atList, atIndex, it) {
+    const { onRankingChange } = this.props;
     const { item, list, index } = this.findItem(it.id);
     const items = JSON.parse(JSON.stringify(this.state.items));
     items[list].splice(index, 1);
@@ -49,7 +51,7 @@ const RankingBlock = React.createClass({
     this.setState({
       items,
     }, () => {
-      this.props.onRankingChange(this.state.items.choiceBox);
+      onRankingChange(this.state.items.choiceBox);
       this.recalculateChoicesHeight();
     });
   },

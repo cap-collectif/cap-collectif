@@ -22,7 +22,8 @@ const Comment = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
-    if (this.props.comment.answers.length > 0) {
+    const { comment } = this.props;
+    if (comment.answers.length > 0) {
       return {
         answerFormShown: true,
         answerFormFocus: false,
@@ -42,19 +43,28 @@ const Comment = React.createClass({
   },
 
   comment(data) {
-    data.parent = this.props.comment.id;
-    return CommentActions.create(this.props.uri, this.props.object, data);
+    const {
+      comment,
+      object,
+      uri,
+    } = this.props;
+    data.parent = comment.id;
+    return CommentActions.create(uri, object, data);
   },
 
   render() {
+    const {
+      onVote,
+      root,
+    } = this.props;
     const comment = this.props.comment;
     const classes = classNames({
-      'opinion': true,
+      opinion: true,
       'opinion--comment': true,
     });
     const contentClasses = classNames({
       'bg-vip': comment.author && comment.author.vip,
-      'opinion__content': true,
+      opinion__content: true,
     });
     return (
       <li className={classes} >
@@ -66,9 +76,9 @@ const Comment = React.createClass({
             </div>
             <CommentBody comment={comment} />
             <div className="comment__buttons">
-              <CommentVoteButton comment={comment} onVote={this.props.onVote} />
+              <CommentVoteButton comment={comment} onVote={onVote} />
               {' '}
-              {this.props.root
+              {root
                 ? <a onClick={this.answer} className="btn btn-xs btn-dark-gray btn--outline">
                     <i className="cap-reply-mail-2"></i>
                     { ' ' }
@@ -84,8 +94,8 @@ const Comment = React.createClass({
             </div>
           </div>
           <div className="comment-answers-block">
-            {this.props.root
-              ? <CommentAnswers onVote={this.props.onVote} comments={comment.answers} />
+            {root
+              ? <CommentAnswers onVote={onVote} comments={comment.answers} />
               : null
             }
             {this.state.answerFormShown

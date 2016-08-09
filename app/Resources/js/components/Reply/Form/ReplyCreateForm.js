@@ -31,13 +31,14 @@ const ReplyCreateForm = React.createClass({
   },
 
   handleSubmitSuccess() {
+    const { form } = this.props;
     this.setState({
       isSubmitting: false,
     });
-    if (this.props.form.multipleRepliesAllowed) {
+    if (form.multipleRepliesAllowed) {
       this.replyForm.emptyForm();
     }
-    ReplyActions.loadUserReplies(this.props.form.id);
+    ReplyActions.loadUserReplies(form.id);
   },
 
   handleFailure() {
@@ -47,7 +48,10 @@ const ReplyCreateForm = React.createClass({
   },
 
   render() {
-    const { form } = this.props;
+    const {
+      form,
+      disabled,
+    } = this.props;
     return (
       <div id="create-reply-form">
         <ReplyForm
@@ -57,13 +61,13 @@ const ReplyCreateForm = React.createClass({
           onSubmitSuccess={this.handleSubmitSuccess}
           onSubmitFailure={this.handleFailure}
           onValidationFailure={this.handleFailure}
-          disabled={this.props.disabled}
+          disabled={disabled}
         />
         <SubmitButton
           id="submit-create-reply"
           isSubmitting={this.state.isSubmitting}
           onSubmit={this.handleSubmit}
-          disabled={this.props.disabled}
+          disabled={disabled}
         />
     </div>
     );

@@ -29,22 +29,24 @@ const ElementBlock = React.createClass({
   },
 
   renderAuthor() {
-    if (this.props.element.author) {
+    const { element } = this.props;
+    if (element.author) {
       return (
-        <span><UserLink user={this.props.element.author} /> • </span>
+        <span><UserLink user={element.author} /> • </span>
       );
     }
   },
 
   renderStatus() {
-    if (this.props.element.division) {
+    const { element } = this.props;
+    if (element.division) {
       return (
         <i className="element__status cap icon--orange cap-scissor-1"></i>
       );
     }
 
-    if (this.props.element.archived) {
-      if (this.props.element.published) {
+    if (element.archived) {
+      if (element.published) {
         return (
           <i className="element__status cap icon--green cap-tag-1"></i>
         );
@@ -56,16 +58,24 @@ const ElementBlock = React.createClass({
   },
 
   renderDate() {
+    const { element } = this.props;
     if (!Modernizr.intl) {
       return this.getIntlMessage('synthesis.common.elements.no_source_date');
     }
-    if (this.props.element.linkedDataCreation) {
-      return <FormattedDate value={moment(this.props.element.linkedDataCreation)} day="numeric" month="long" year="numeric" />;
+    if (element.linkedDataCreation) {
+      return <FormattedDate value={moment(element.linkedDataCreation)} day="numeric" month="long" year="numeric" />;
     }
-    return <FormattedDate value={moment(this.props.element.updated_at)} day="numeric" month="long" year="numeric" />;
+    return <FormattedDate value={moment(element.updated_at)} day="numeric" month="long" year="numeric" />;
   },
 
   render() {
+    const {
+      hasLink,
+      linkType,
+      showBreadcrumb,
+      showNotation,
+      showStatus,
+    } = this.props;
     const element = this.props.element;
     return (
       <div className="element">
@@ -74,20 +84,20 @@ const ElementBlock = React.createClass({
           <p className="element__metadata">
             {this.renderAuthor()} {this.renderDate()}
             {
-              this.props.showNotation
+              showNotation
                 ? <ElementNotation element={element} />
                 : null
             }
           </p>
-          <ElementTitle element={element} linkType={this.props.linkType} hasLink={this.props.hasLink} className="element__title" />
+          <ElementTitle element={element} linkType={linkType} hasLink={hasLink} className="element__title" />
           {
-            this.props.showBreadcrumb
+            showBreadcrumb
               ? <ElementBreadcrumb element={element} />
               : null
           }
         </div>
         {
-          this.props.showStatus
+          showStatus
             ? this.renderStatus()
             : null
         }

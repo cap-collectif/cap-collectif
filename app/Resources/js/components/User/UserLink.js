@@ -3,13 +3,16 @@ import React, { PropTypes, Component } from 'react';
 export default class UserLink extends Component {
 
   render() {
-    const { user } = this.props;
+    const {
+      user,
+      className,
+    } = this.props;
     const url = user && user._links && user._links.profile ? user._links.profile : null;
     const username = user && user.displayName ? user.displayName : 'Utilisateur supprimé';
     if (url) {
-      return <a className={this.props.className} href={url}>{username}</a>;
+      return <a className={className} href={url}>{username}</a>;
     }
-    return <span className={this.props.className}>{username}</span>;
+    return <span className={className}>{username}</span>;
   }
 }
 

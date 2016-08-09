@@ -12,10 +12,10 @@ const IdeaPreview = React.createClass({
   render() {
     const { idea } = this.props;
     const classes = classNames({
-      'idea__preview': true,
-      'block': true,
+      idea__preview: true,
+      block: true,
       'block--bordered': true,
-      'box': true,
+      box: true,
       'bg-vip': idea.author.vip,
     });
     return (

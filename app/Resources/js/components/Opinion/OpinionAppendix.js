@@ -10,8 +10,9 @@ const OpinionAppendix = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
+    const { expanded } = this.props;
     return {
-      expanded: this.props.expanded !== 'undefined' ? this.props.expanded : false,
+      expanded: expanded !== 'undefined' ? expanded : false,
     };
   },
 

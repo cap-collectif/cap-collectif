@@ -35,11 +35,15 @@ const OpinionVersionForm = React.createClass({
   },
 
   getInitialState() {
+    const {
+      opinionBody,
+      version,
+    } = this.props;
     return {
       form: {
-        title: this.props.version ? this.props.version.title : '',
-        body: this.props.version ? this.props.version.body : this.props.opinionBody,
-        comment: this.props.version ? this.props.version.comment : null,
+        title: version ? version.title : '',
+        body: version ? version.body : opinionBody,
+        comment: version ? version.comment : null,
       },
       errors: {
         title: [],
@@ -53,11 +57,15 @@ const OpinionVersionForm = React.createClass({
   },
 
   componentDidMount() {
+    const {
+      mode,
+      opinionBody,
+    } = this.props;
     this.formValidationRules.body = {
-      notEqual: { value: this.props.opinionBody, message: 'opinion.version.body_error' },
+      notEqual: { value: opinionBody, message: 'opinion.version.body_error' },
     };
 
-    if (this.props.mode === 'edit') {
+    if (mode === 'edit') {
       this.formValidationRules.confirm = {
         isTrue: { message: 'opinion.version.confirm_error' },
       };
@@ -73,6 +81,7 @@ const OpinionVersionForm = React.createClass({
   },
 
   create() {
+    const { opinionId } = this.props;
     this.setState({
       submitted: true,
     }, () => {
@@ -83,7 +92,7 @@ const OpinionVersionForm = React.createClass({
       this.setState({ isSubmitting: true });
 
       OpinionActions
-      .createVersion(this.props.opinionId, this.state.form)
+      .createVersion(opinionId, this.state.form)
       .then((version) => {
         this.setState(this.getInitialState());
         this.close();
@@ -97,6 +106,10 @@ const OpinionVersionForm = React.createClass({
   },
 
   update() {
+    const {
+      opinionId,
+      version,
+    } = this.props;
     this.setState({ submitted: true }, () => {
       if (!this.isValid()) {
         return;
@@ -111,7 +124,7 @@ const OpinionVersionForm = React.createClass({
       };
 
       OpinionActions
-        .updateVersion(this.props.opinionId, this.props.version.id, data)
+        .updateVersion(opinionId, version.id, data)
         .then(() => {
           this.setState(this.getInitialState());
           this.close();
@@ -125,15 +138,17 @@ const OpinionVersionForm = React.createClass({
   },
 
   isContribuable() {
-    return this.props.isContribuable;
+    const { isContribuable } = this.props;
+    return isContribuable;
   },
 
 
   handleSubmit() {
+    const { mode } = this.props;
     if (this.state.isSubmitting) {
       return;
     }
-    if (this.props.mode === 'create') {
+    if (mode === 'create') {
       this.create();
       return;
     }
@@ -156,9 +171,13 @@ const OpinionVersionForm = React.createClass({
   },
 
   renderButton() {
-    if (this.props.mode === 'create') {
+    const {
+      mode,
+      user,
+    } = this.props;
+    if (mode === 'create') {
       return (
-        <Button bsStyle="primary" onClick={this.props.user ? () => this.show() : null}>
+        <Button bsStyle="primary" onClick={user ? () => this.show() : null}>
           <i className="cap cap-add-1"></i>
           { ` ${this.getIntlMessage('opinion.add_new_version')}`}
         </Button>

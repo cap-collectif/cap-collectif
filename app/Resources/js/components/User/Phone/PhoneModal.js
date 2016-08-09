@@ -28,8 +28,9 @@ const PhoneModal = React.createClass({
   },
 
   onCodeSuccess() {
+    const { onClose } = this.props;
     window.location.reload();
-    this.props.onClose();
+    onClose();
   },
 
   askChangeNumber() {

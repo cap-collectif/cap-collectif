@@ -9,11 +9,13 @@ const OpinionAppendices = React.createClass({
   mixins: [IntlMixin],
 
   isVersion() {
-    return !!this.props.opinion.parent;
+    const { opinion } = this.props;
+    return !!opinion.parent;
   },
 
   hasAppendices() {
-    const appendices = this.isVersion() ? this.props.opinion.parent.appendices : this.props.opinion.appendices;
+    const { opinion } = this.props;
+    const appendices = this.isVersion() ? opinion.parent.appendices : opinion.appendices;
     if (!appendices) {
       return false;
     }

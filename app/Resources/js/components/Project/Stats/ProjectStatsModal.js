@@ -21,10 +21,11 @@ const ProjectStatsModal = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
+    const { data } = this.props;
     return {
       showModal: false,
       isLoading: true,
-      data: this.props.data,
+      data: data,
     };
   },
 
@@ -33,18 +34,28 @@ const ProjectStatsModal = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.theme !== nextProps.theme || this.props.district !== nextProps.district) {
+    const {
+      district,
+      theme,
+    } = this.props;
+    if (theme !== nextProps.theme || district !== nextProps.district) {
       this.loadData();
     }
   },
 
   loadData() {
+    const {
+      district,
+      stepId,
+      theme,
+      type,
+    } = this.props;
     ProjectStatsActions.load(
-      this.props.stepId,
-      this.props.type,
+      stepId,
+      type,
       null,
-      this.props.theme,
-      this.props.district
+      theme,
+      district
     )
       .then((response) => {
         this.setState({
@@ -68,7 +79,15 @@ const ProjectStatsModal = React.createClass({
   },
 
   render() {
-    const id = `project-stats-modal-${this.props.stepId}-${this.props.type}`;
+    const {
+      icon,
+      isCurrency,
+      label,
+      showPercentage,
+      stepId,
+      type,
+    } = this.props;
+    const id = `project-stats-modal-${stepId}-${type}`;
     return (
       <div>
         <Button
@@ -80,7 +99,7 @@ const ProjectStatsModal = React.createClass({
           {this.getIntlMessage('project.stats.display.all')}
         </Button>
         <Modal
-          id={`stats-modal-${this.props.stepId}-${this.props.type}`}
+          id={`stats-modal-${stepId}-${type}`}
           animation={false}
           show={this.state.showModal}
           onHide={this.hideModal}
@@ -88,7 +107,7 @@ const ProjectStatsModal = React.createClass({
         >
           <Modal.Header closeButton>
             <Modal.Title id={`${id}-title`}>
-              <i className={this.props.icon}></i> {this.getIntlMessage(this.props.label)}
+              <i className={icon}></i> {this.getIntlMessage(label)}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -100,8 +119,8 @@ const ProjectStatsModal = React.createClass({
                       <ProjectStatsListItem
                         key={index}
                         item={row}
-                        showPercentage={this.props.showPercentage}
-                        isCurrency={this.props.isCurrency}
+                        showPercentage={showPercentage}
+                        isCurrency={isCurrency}
                       />
                     );
                   })

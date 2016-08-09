@@ -46,7 +46,8 @@ const ProposalVoteForm = React.createClass({
   },
 
   componentDidMount() {
-    if (!this.props.user) {
+    const { user } = this.props;
+    if (!user) {
       this.formValidationRules = {
         username: {
           min: { value: 2, message: 'proposal.vote.constraints.username' },
@@ -61,48 +62,58 @@ const ProposalVoteForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.isSubmitting && nextProps.isSubmitting) {
+    const {
+      isSubmitting,
+      onSubmitFailure,
+      onSubmitSuccess,
+      onValidationFailure,
+      proposal,
+      selectionStepId,
+      user,
+      userHasVote,
+    } = this.props;
+    if (!isSubmitting && nextProps.isSubmitting) {
       if (this.isValid()) {
-        if (this.props.user && this.props.userHasVote) {
+        if (user && userHasVote) {
           ProposalActions
-            .deleteVote(this.props.selectionStepId, this.props.proposal.id, this.props.proposal.estimation)
+            .deleteVote(selectionStepId, proposal.id, proposal.estimation)
             .then(() => {
               this.setState(this.getInitialState());
-              this.props.onSubmitSuccess();
+              onSubmitSuccess();
             })
             .catch(() => {
-              this.props.onSubmitFailure();
+              onSubmitFailure();
             })
           ;
           return;
         }
         const data = this.state.form;
-        if (this.props.user) {
+        if (user) {
           delete data.username;
           delete data.email;
         }
         ProposalActions
           .vote(
-            this.props.selectionStepId,
-            this.props.proposal.id,
-            this.props.proposal.estimation,
+            selectionStepId,
+            proposal.id,
+            proposal.estimation,
             data
           )
           .then(() => {
             this.setState(this.getInitialState());
-            this.props.onSubmitSuccess();
+            onSubmitSuccess();
           })
           .catch((error) => {
             this.setState({
               serverErrors: error.response.errors,
             });
-            this.props.onSubmitFailure();
+            onSubmitFailure();
           })
         ;
         return;
       }
 
-      this.props.onValidationFailure();
+      onValidationFailure();
     }
   },
 
@@ -117,7 +128,8 @@ const ProposalVoteForm = React.createClass({
   },
 
   render() {
-    const anonymous = !this.props.user;
+    const { user } = this.props;
+    const anonymous = !user;
     const userHasVote = this.props.userHasVote;
     const commentLabel = (
       <span>

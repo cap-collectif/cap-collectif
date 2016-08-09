@@ -28,7 +28,15 @@ const ProposalPageHeader = React.createClass({
   },
 
   render() {
-    const { proposal, showThemes, userHasVote, creditsLeft, selectionStep, onVote } = this.props;
+    const {
+      proposal,
+      showThemes,
+      userHasVote,
+      creditsLeft,
+      selectionStep,
+      onVote,
+      className,
+    } = this.props;
 
     const createdDate = (
       <FormattedDate
@@ -44,9 +52,9 @@ const ProposalPageHeader = React.createClass({
     );
 
     const classes = {
-      'proposal__header': true,
+      proposal__header: true,
     };
-    classes[this.props.className] = true;
+    classes[className] = true;
 
     return (
       <div className={classNames(classes)}>

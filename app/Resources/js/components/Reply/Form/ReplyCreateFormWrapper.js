@@ -34,24 +34,28 @@ export const ReplyCreateFormWrapper = React.createClass({
     const { form, userReplies, user } = this.props;
     return (
       !form.contribuable
-      || !this.props.user
+      || !user
       || (form.phoneConfirmationRequired && !user.isPhoneConfirmed)
       || (userReplies.length > 0 && !form.multipleRepliesAllowed)
     );
   },
 
   render() {
-    const { form, user } = this.props;
+    const {
+      form,
+      user,
+      userReplies,
+    } = this.props;
     return (
       <div>
         {
-          form.contribuable && !this.props.user
+          form.contribuable && !user
           ? <Alert bsStyle="warning" className="text-center">
             <strong>{this.getIntlMessage('reply.not_logged_in.error')}</strong>
             <RegistrationButton bsStyle="primary" style={{ marginLeft: '10px' }} />
             <LoginButton style={{ marginLeft: 5 }} />
           </Alert>
-          : form.contribuable && this.props.userReplies.length > 0 && !form.multipleRepliesAllowed
+          : form.contribuable && userReplies.length > 0 && !form.multipleRepliesAllowed
             ? <Alert bsStyle="warning">
               <strong>{this.getIntlMessage('reply.user_has_reply.reason')}</strong>
               <p>{this.getIntlMessage('reply.user_has_reply.error')}</p>

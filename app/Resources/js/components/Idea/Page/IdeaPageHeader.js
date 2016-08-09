@@ -18,12 +18,15 @@ const IdeaPageHeader = React.createClass({
   },
 
   render() {
-    const { idea } = this.props;
+    const {
+      idea,
+      className,
+    } = this.props;
 
     const classes = {
-      'idea__header': true,
+      idea__header: true,
     };
-    classes[this.props.className] = true;
+    classes[className] = true;
 
     return (
       <div className={classNames(classes)}>

@@ -13,14 +13,16 @@ export const ProposalDetailAdvancement = React.createClass({
   mixins: [IntlMixin],
 
   getStatus(step) {
+    const { proposal } = this.props;
     return step.type === 'collect'
-      ? this.props.proposal.status || null
+      ? proposal.status || null
       : this.getSelectionStatus(step)
     ;
   },
 
   getSelectionStatus(step) {
-    for (const selection of this.props.proposal.selections) {
+    const { proposal } = this.props;
+    for (const selection of proposal.selections) {
       if (step.id === selection.step.id) {
         return selection.status;
       }

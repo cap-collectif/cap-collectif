@@ -32,13 +32,19 @@ export const RegistrationModal = React.createClass({
   },
 
   handleSubmitSuccess() {
+    const { onClose } = this.props;
     this.stopSubmit();
-    this.props.onClose();
+    onClose();
   },
 
   render() {
     const { isSubmitting } = this.state;
-    const { onClose, show, parameters } = this.props;
+    const {
+      onClose,
+      show,
+      parameters,
+      features,
+    } = this.props;
     const textTop = parameters['signin.text.top'];
     const textBottom = parameters['signin.text.bottom'];
     return (
@@ -62,8 +68,8 @@ export const RegistrationModal = React.createClass({
           }
           <LoginSocialButtons
             features={{
-              login_facebook: this.props.features.login_facebook,
-              login_gplus: this.props.features.login_gplus,
+              login_facebook: features.login_facebook,
+              login_gplus: features.login_gplus,
             }}
             prefix="registration."
           />

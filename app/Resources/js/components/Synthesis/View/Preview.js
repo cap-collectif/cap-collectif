@@ -15,9 +15,10 @@ const Preview = React.createClass({
   },
 
   render() {
+    const { synthesis } = this.props;
     return (
       <div className="synthesis__view" style={{ paddingTop: '30px' }}>
-        <ViewTree synthesis={this.props.synthesis} />
+        <ViewTree synthesis={synthesis} />
       </div>
     );
   },

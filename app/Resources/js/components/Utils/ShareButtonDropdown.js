@@ -29,26 +29,30 @@ const ShareButtonDropdown = React.createClass({
   },
 
   getEncodedUrl() {
-    return encodeURIComponent(this.props.url);
+    const { url } = this.props;
+    return encodeURIComponent(url);
   },
 
   facebook() {
+    const { title } = this.props;
     this.openSharer(
-      `http://www.facebook.com/sharer.php?u=${this.getEncodedUrl()}&t=${this.props.title}`,
+      `http://www.facebook.com/sharer.php?u=${this.getEncodedUrl()}&t=${title}`,
       'Facebook'
     );
   },
 
   twitter() {
+    const { title } = this.props;
     this.openSharer(
-      `https://twitter.com/share?url=${this.getEncodedUrl()}&text=${this.props.title}`,
+      `https://twitter.com/share?url=${this.getEncodedUrl()}&text=${title}`,
       'Twitter'
     );
   },
 
   googleplus() {
+    const { title } = this.props;
     this.openSharer(
-      `https://plus.google.com/share?url=${this.getEncodedUrl()}&title=${this.props.title}`,
+      `https://plus.google.com/share?url=${this.getEncodedUrl()}&title=${title}`,
       'Google+'
     );
   },
@@ -78,15 +82,19 @@ const ShareButtonDropdown = React.createClass({
   },
 
   renderModal() {
+    const {
+      title,
+      url,
+    } = this.props;
     return (
       <Modal show={this.state.show} onHide={this.hideModal} animation={false} dialogClassName="modal--custom modal--share-link">
         <Modal.Header closeButton>
           <Modal.Title>{this.getIntlMessage('share.link')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className="excerpt">{this.props.title}</p>
+          <p className="excerpt">{title}</p>
           <textarea title={this.getIntlMessage('share.link')} readOnly rows="3">
-            {this.props.url}
+            {url}
           </textarea>
         </Modal.Body>
       </Modal>

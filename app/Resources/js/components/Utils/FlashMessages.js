@@ -25,7 +25,8 @@ const FlashMessages = React.createClass({
   },
 
   renderText(message) {
-    if (this.props.translate) {
+    const { translate } = this.props;
+    if (translate) {
       if (typeof message === 'string') {
         return this.getIntlMessage(message);
       }
@@ -39,36 +40,45 @@ const FlashMessages = React.createClass({
   },
 
   renderMessage(index, message, type) {
-    if (!this.props.form) {
+    const {
+      form,
+      onDismissMessage,
+      style,
+    } = this.props;
+    if (!form) {
       return (
         <Alert
           key={index}
           bsStyle={type}
-          style={this.props.style}
-          onDismiss={this.props.onDismissMessage ? this.props.onDismissMessage.bind(null, message, type) : null}
+          style={style}
+          onDismiss={onDismissMessage ? onDismissMessage.bind(null, message, type) : null}
         >
           <p>{this.renderText(message)}</p>
         </Alert>
       );
     }
     return (
-      <p key={index} className="error-block" style={this.props.style}>
+      <p key={index} className="error-block" style={style}>
         {this.renderText(message)}
       </p>
     );
   },
 
   render() {
-    if (this.props.errors.length > 0 || this.props.success.length > 0) {
+    const {
+      errors,
+      success,
+    } = this.props;
+    if (errors.length > 0 || success.length > 0) {
       return (
         <div className="flashmessages">
           {
-            this.props.errors.map((message, index) => {
+            errors.map((message, index) => {
               return this.renderMessage(index, message, 'warning');
             })
           }
           {
-            this.props.success.map((message, index) => {
+            success.map((message, index) => {
               return this.renderMessage(index, message, 'success');
             })
           }

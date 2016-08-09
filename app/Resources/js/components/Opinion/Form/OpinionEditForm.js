@@ -44,7 +44,7 @@ const OpinionEditForm = React.createClass({
       appendices,
     };
     return Fetcher
-        .put(`/opinions/${this.props.opinion.id}`, form)
+        .put(`/opinions/${opinion.id}`, form)
         .then(json)
         .then((opinionUpdated) => {
           window.location.href = opinionUpdated._links.show;

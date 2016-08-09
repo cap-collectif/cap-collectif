@@ -10,7 +10,11 @@ const OpinionVersionList = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (this.props.versions.length === 0) {
+    const {
+      rankingThreshold,
+      versions,
+    } = this.props;
+    if (versions.length === 0) {
       return (
         <p className="text-center">
           <i className="cap-32 cap-baloon-1"></i>
@@ -23,8 +27,8 @@ const OpinionVersionList = React.createClass({
     return (
       <ul className="media-list" style={{ marginTop: '20px' }}>
         {
-          this.props.versions.map((version) => {
-            return <OpinionVersion key={version.id} version={version} rankingThreshold={this.props.rankingThreshold} />;
+          versions.map((version) => {
+            return <OpinionVersion key={version.id} version={version} rankingThreshold={rankingThreshold} />;
           })
         }
       </ul>

@@ -29,8 +29,8 @@ const CommentSection = React.createClass({
       offset: 0,
       limit: MessagePagination,
       messages: {
-        'errors': [],
-        'success': [],
+        errors: [],
+        success: [],
       },
     };
   },
@@ -78,7 +78,11 @@ const CommentSection = React.createClass({
   },
 
   comment(data) {
-    return CommentActions.create(this.props.uri, this.props.object, data);
+    const {
+      object,
+      uri,
+    } = this.props;
+    return CommentActions.create(uri, object, data);
   },
 
   updateSelectedValue() {
@@ -90,9 +94,13 @@ const CommentSection = React.createClass({
   },
 
   loadCommentsFromServer() {
+    const {
+      object,
+      uri,
+    } = this.props;
     CommentActions.loadFromServer(
-      this.props.uri,
-      this.props.object,
+      uri,
+      object,
       this.state.offset,
       this.state.limit,
       this.state.filter

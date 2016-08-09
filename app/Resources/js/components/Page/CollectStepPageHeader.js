@@ -19,18 +19,25 @@ const CollectStepPageHeader = React.createClass({
   },
 
   render() {
+    const {
+      categories,
+      count,
+      districts,
+      form,
+      themes,
+    } = this.props;
     return (
       <h3 className="h3" style={{ marginBottom: '15px' }}>
         <FormattedMessage
           message={this.getIntlMessage('proposal.count')}
-          num={this.props.count}
+          num={count}
         />
         <span className="pull-right">
           <ProposalCreate
-            form={this.props.form}
-            themes={this.props.themes}
-            districts={this.props.districts}
-            categories={this.props.categories}
+            form={form}
+            themes={themes}
+            districts={districts}
+            categories={categories}
           />
         </span>
       </h3>

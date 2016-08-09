@@ -35,6 +35,10 @@ const PhoneForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    const {
+      onSubmitFailure,
+      onSubmitSuccess,
+    } = this.props;
     if (nextProps.isSubmitting) {
       const form = JSON.parse(JSON.stringify(this.state.form));
       form.phone = form.phone.replace(/((?![0-9]).)/g, '');
@@ -45,7 +49,7 @@ const PhoneForm = React.createClass({
           UserActions
             .sendConfirmSms()
             .then(() => {
-              this.props.onSubmitSuccess(form.phone);
+              onSubmitSuccess(form.phone);
               this.setState(this.getInitialState());
             })
             .catch((err) => {
@@ -59,7 +63,7 @@ const PhoneForm = React.createClass({
               } else {
                 this.setState(this.getInitialState());
               }
-              this.props.onSubmitFailure();
+              onSubmitFailure();
             });
         })
         .catch((error) => {
@@ -75,7 +79,7 @@ const PhoneForm = React.createClass({
             }
             this.setState({ errors });
           }
-          this.props.onSubmitFailure();
+          onSubmitFailure();
         });
     }
   },
@@ -95,15 +99,19 @@ const PhoneForm = React.createClass({
   },
 
   render() {
+    const {
+      initialValue,
+      onSubmit,
+    } = this.props;
     return (
-      <form style={{ maxWidth: '350px' }} onSubmit={(e) => {e.preventDefault(); this.props.onSubmit();}}>
+      <form style={{ maxWidth: '350px' }} onSubmit={(e) => {e.preventDefault(); onSubmit();}}>
         <Input
           type="text"
           addonBefore="+33"
           autoFocus
           valueLink={this.linkState('form.phone')}
           id="_phone"
-          disabled={this.state.form.phone === this.props.initialValue}
+          disabled={this.state.form.phone === initialValue}
           label={this.getIntlMessage('global.phone')}
           groupClassName={this.getGroupStyle('phone')}
           errors={this.renderFormErrors('phone')}

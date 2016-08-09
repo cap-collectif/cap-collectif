@@ -16,7 +16,8 @@ const ProposalsUserVotesPage = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
-    ProposalActions.initVotableSteps(this.props.votableSteps);
+    const { votableSteps } = this.props;
+    ProposalActions.initVotableSteps(votableSteps);
     return {
       votableSteps: ProposalVoteStore.votableSteps,
     };
@@ -31,13 +32,14 @@ const ProposalsUserVotesPage = React.createClass({
   },
 
   onVotesChange() {
+    const { projectId } = this.props;
     if (ProposalVoteStore.isVotableStepsSync) {
       this.setState({
         votableSteps: ProposalVoteStore.votableSteps,
       });
       return;
     }
-    ProposalActions.loadVotableSteps(this.props.projectId);
+    ProposalActions.loadVotableSteps(projectId);
   },
 
   render() {

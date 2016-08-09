@@ -24,20 +24,24 @@ const UserPreview = React.createClass({
   },
 
   render() {
+    const {
+      className,
+      style,
+    } = this.props;
     const user = this.props.user;
     const username = this.props.username === 'ANONYMOUS' ? this.getIntlMessage('global.anonymous') : this.props.username;
     if (!user && !username) {
       return null;
     }
     const classes = {
-      'media': true,
+      media: true,
       'media--user-thumbnail': true,
-      'box': true,
-      [this.props.className]: true,
+      box: true,
+      [className]: true,
     };
 
     return (
-      <div className={classNames(classes)} style={this.props.style}>
+      <div className={classNames(classes)} style={style}>
         <UserAvatar user={user} className="pull-left" />
         <div className="media-body">
           <p className="media--macro__user  small">

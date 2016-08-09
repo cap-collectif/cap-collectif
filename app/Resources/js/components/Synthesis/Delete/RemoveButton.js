@@ -10,7 +10,11 @@ const RemoveButton = React.createClass({
   mixins: [IntlMixin],
 
   click() {
-    this.props.onRemove(this.props.element);
+    const {
+      element,
+      onRemove,
+    } = this.props;
+    onRemove(element);
   },
 
   render() {

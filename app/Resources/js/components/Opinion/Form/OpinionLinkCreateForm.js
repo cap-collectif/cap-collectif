@@ -14,8 +14,9 @@ const OpinionLinkCreateForm = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
+    const { availableTypes } = this.props;
     return {
-      currentType: this.props.availableTypes[0],
+      currentType: availableTypes[0],
     };
   },
 
@@ -77,7 +78,7 @@ const OpinionLinkCreateForm = React.createClass({
         <OpinionLinkSelectTypeForm
           onChange={this.handleTypeChanged}
           options={availableTypes}
-          initialValues={{ 'opinionType': currentType.id }}
+          initialValues={{ opinionType: currentType.id }}
         />
         <OpinionForm
           form="opinion-link-create-form"

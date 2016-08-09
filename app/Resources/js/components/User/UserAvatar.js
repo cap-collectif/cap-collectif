@@ -30,30 +30,41 @@ const UserAvatar = React.createClass({
   },
 
   renderAvatar() {
+    const { user } = this.props;
     const size = `${this.props.size}px`;
-    if (this.props.user && this.props.user.media) {
-      return <img src={this.props.user.media.url} className="img-circle" style={{ width: size, height: size }} />;
+    if (user && user.media) {
+      return <img src={user.media.url} className="img-circle" style={{ width: size, height: size }} />;
     }
     return <DefaultAvatar size={this.props.size} />;
   },
 
   render() {
+    const {
+      anchor,
+      className,
+      onBlur,
+      onFocus,
+      onMouseOut,
+      onMouseOver,
+      style,
+      user,
+    } = this.props;
     const funcProps = {
-      onBlur: this.props.onBlur,
-      onFocus: this.props.onFocus,
-      onMouseOver: this.props.onMouseOver,
-      onMouseOut: this.props.onMouseOut,
+      onBlur: onBlur,
+      onFocus: onFocus,
+      onMouseOver: onMouseOver,
+      onMouseOut: onMouseOut,
     };
-    if (this.props.user && this.props.user._links && this.props.user._links.profile && this.props.anchor) {
+    if (user && user._links && user._links.profile && anchor) {
       return (
-        <a {...funcProps} className={this.props.className} style={this.props.style} href={this.props.user._links.profile}>
+        <a {...funcProps} className={className} style={style} href={user._links.profile}>
           { this.renderAvatar() }
         </a>
       );
     }
 
     return (
-      <span {...funcProps} className={this.props.className} style={this.props.style} >
+      <span {...funcProps} className={className} style={style} >
         { this.renderAvatar() }
       </span>
     );

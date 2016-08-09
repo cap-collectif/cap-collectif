@@ -39,7 +39,8 @@ const EditElement = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.element_id !== this.props.params.element_id) {
+    const { params } = this.props;
+    if (nextProps.params.element_id !== params.element_id) {
       this.setState({
         isLoading: true,
       }, () => {
@@ -76,8 +77,9 @@ const EditElement = React.createClass({
   },
 
   loadElementFromServer(id = this.props.params.element_id) {
+    const { synthesis } = this.props;
     SynthesisElementActions.loadElementFromServer(
-      this.props.synthesis.id,
+      synthesis.id,
       id
     );
   },
@@ -119,11 +121,12 @@ const EditElement = React.createClass({
   },
 
   renderElementButtons() {
+    const { synthesis } = this.props;
     return (
       <div className="element__actions box text-center">
         <PublishButton element={this.state.element} onModal={this.togglePublishModal} />
         <DivideButton element={this.state.element} onModal={this.toggleDivideModal} />
-        <IgnoreButton synthesis={this.props.synthesis} element={this.state.element} />
+        <IgnoreButton synthesis={synthesis} element={this.state.element} />
       </div>
     );
   },
@@ -157,19 +160,21 @@ const EditElement = React.createClass({
   },
 
   renderPublishModal() {
+    const { synthesis } = this.props;
     const element = this.state.element;
     if (!this.state.isLoading && element) {
       return (
-        <PublishModal synthesis={this.props.synthesis} element={element} show={this.state.showPublishModal} toggle={this.togglePublishModal} />
+        <PublishModal synthesis={synthesis} element={element} show={this.state.showPublishModal} toggle={this.togglePublishModal} />
       );
     }
   },
 
   renderDivideModal() {
+    const { synthesis } = this.props;
     const element = this.state.element;
     if (!this.state.isLoading && element) {
       return (
-        <DivideModal synthesis={this.props.synthesis} element={element} show={this.state.showDivideModal} toggle={this.toggleDivideModal} />
+        <DivideModal synthesis={synthesis} element={element} show={this.state.showDivideModal} toggle={this.toggleDivideModal} />
       );
     }
   },

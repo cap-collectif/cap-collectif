@@ -32,9 +32,15 @@ const ArgumentForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isSubmitting && !this.props.isSubmitting) {
+    const {
+      argument,
+      onSubmitSuccess,
+      onSubmitFailure,
+      isSubmitting,
+      onValidationFailure,
+    } = this.props;
+    if (nextProps.isSubmitting && !isSubmitting) {
       if (this.isValid()) {
-        const { argument, onSubmitSuccess, onSubmitFailure } = this.props;
         const opinion = ArgumentStore.opinion;
         const data = Object.assign({}, this.state.form);
         data.type = argument.type;
@@ -47,7 +53,7 @@ const ArgumentForm = React.createClass({
         ;
       }
 
-      this.props.onValidationFailure();
+      onValidationFailure();
     }
   },
 

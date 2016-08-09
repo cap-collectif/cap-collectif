@@ -9,7 +9,8 @@ const OpinionLinkList = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (this.props.links.length === 0) {
+    const { links } = this.props;
+    if (links.length === 0) {
       return (
         <p className="text-center">
           <i className="cap-32 cap-baloon-1"></i>
@@ -22,7 +23,7 @@ const OpinionLinkList = React.createClass({
     return (
       <ul id="links-list" className="media-list" style={{ marginTop: '20px' }}>
         {
-          this.props.links.map((link) => {
+          links.map((link) => {
             return <OpinionLink {...this.props} key={link.id} link={link} />;
           })
         }

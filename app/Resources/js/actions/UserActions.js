@@ -8,7 +8,7 @@ export default {
       body: JSON.stringify(data),
       credentials: 'include',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
       },

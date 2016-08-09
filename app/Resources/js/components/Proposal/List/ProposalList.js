@@ -24,27 +24,34 @@ const ProposalList = React.createClass({
   },
 
   render() {
-    if (this.props.proposals.length === 0) {
+    const {
+      creditsLeft,
+      proposals,
+      selectionStep,
+      showAllVotes,
+      showThemes,
+    } = this.props;
+    if (proposals.length === 0) {
       return <p>{ this.getIntlMessage('proposal.empty') }</p>;
     }
 
     const classes = classNames({
       'media-list': true,
-      'opinion__list': true,
+      opinion__list: true,
     });
 
     return (
       <Row componentClass="ul" className={classes}>
         {
-          this.props.proposals.map((proposal) => {
+          proposals.map((proposal) => {
             return (
               <ProposalPreview
                 key={proposal.id}
                 proposal={proposal}
-                selectionStep={this.props.selectionStep}
-                creditsLeft={this.props.creditsLeft}
-                showAllVotes={this.props.showAllVotes}
-                showThemes={this.props.showThemes}
+                selectionStep={selectionStep}
+                creditsLeft={creditsLeft}
+                showAllVotes={showAllVotes}
+                showThemes={showThemes}
               />
             );
           })

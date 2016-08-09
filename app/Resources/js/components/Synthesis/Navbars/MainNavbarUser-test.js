@@ -24,7 +24,7 @@ describe('<MainNavbarUser />', () => {
     },
   };
   const features = {
-    'profiles': true,
+    profiles: true,
   };
 
   it('should render nothing when user is not logged in', () => {

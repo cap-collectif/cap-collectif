@@ -10,7 +10,8 @@ const DivideButton = React.createClass({
   mixins: [IntlMixin],
 
   click() {
-    this.props.onModal(true);
+    const { onModal } = this.props;
+    onModal(true);
   },
 
   render() {

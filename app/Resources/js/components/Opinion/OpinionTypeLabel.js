@@ -4,7 +4,8 @@ import { Label } from 'react-bootstrap';
 export default class OpinionTypeLabel extends React.Component {
 
   render() {
-    return <Label>{this.props.type.title}</Label>;
+    const { type } = this.props;
+    return <Label>{type.title}</Label>;
   }
 }
 

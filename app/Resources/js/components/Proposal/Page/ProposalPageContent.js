@@ -64,7 +64,7 @@ const ProposalPageContent = React.createClass({
     } = this.props;
     const { showEditModal, showDeleteModal } = this.state;
     const classes = {
-      'proposal__content': true,
+      proposal__content: true,
       [className]: true,
     };
     return (

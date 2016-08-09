@@ -34,10 +34,11 @@ const mainNode = (props) => {
       children: React.PropTypes.object.isRequired,
     },
     render() {
-      const showSideMenu = this.props.children.type.displayName !== 'Settings';
+      const { children } = this.props;
+      const showSideMenu = children.type.displayName !== 'Settings';
       return (
         <SynthesisBox
-          children={this.props.children}
+          children={children}
           {...props}
           sideMenu={showSideMenu}
         />

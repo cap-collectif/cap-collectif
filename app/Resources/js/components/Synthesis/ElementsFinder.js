@@ -33,46 +33,57 @@ const ElementsFinder = React.createClass({
   },
 
   getRootElement() {
+    const { elements } = this.props;
     return [{
       id: 'root',
       title: this.getIntlMessage('synthesis.edition.finder.root'),
       displayType: 'root',
-      children: this.props.elements,
+      children: elements,
     }];
   },
 
   toggleExpand(event, element) {
+    const {
+      onExpand,
+      synthesis,
+      type,
+    } = this.props;
     event.stopPropagation();
     if (element.childrenCount !== element.children.length) {
-      SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, this.props.type, element.id);
+      SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, type, element.id);
     }
-    if (typeof this.props.onExpand === 'function') {
-      this.props.onExpand(element);
+    if (typeof onExpand === 'function') {
+      onExpand(element);
     }
     return false;
   },
 
   select(element) {
-    if (typeof this.props.onSelect === 'function') {
-      this.props.onSelect(element);
+    const { onSelect } = this.props;
+    if (typeof onSelect === 'function') {
+      onSelect(element);
     }
   },
 
-  renderTreeItems(elements, level, expanded = false) {
-    if (expanded && elements) {
+  renderTreeItems(elements, level, expand = false) {
+    const {
+      expanded,
+      hiddenElementId,
+    } = this.props;
+    if (expand && elements) {
       return (
         <ul className={`tree__list tree--level-${level}`}>
           {
             elements.map((element) => {
               const classes = classNames({
-                'tree__item': true,
-                'published': element.published,
+                tree__item: true,
+                published: element.published,
               });
-              if (!this.props.hiddenElementId || element.id !== this.props.hiddenElementId) {
+              if (!hiddenElementId || element.id !== hiddenElementId) {
                 return (
                   <li key={element.id} className={classes} >
                     {this.renderTreeItemContent(element)}
-                    {this.renderTreeItems(element.children, level + 1, this.props.expanded[element.id])}
+                    {this.renderTreeItems(element.children, level + 1, expanded[element.id])}
                   </li>
                 );
               }
@@ -84,9 +95,10 @@ const ElementsFinder = React.createClass({
   },
 
   renderTreeItemContent(element) {
+    const { selectedId } = this.props;
     const classes = classNames({
-      'tree__item__content': true,
-      'selected': this.props.selectedId === element.id,
+      tree__item__content: true,
+      selected: selectedId === element.id,
     });
     return (
       <div id={`element-${element.id}`} className={classes} onClick={() => this.select(element)}>
@@ -101,10 +113,11 @@ const ElementsFinder = React.createClass({
   },
 
   renderItemCaret(element) {
+    const { expanded } = this.props;
     const classes = classNames({
-      'tree__item__caret': true,
-      'cap-arrow-67': this.props.expanded[element.id],
-      'cap-arrow-66': !this.props.expanded[element.id],
+      tree__item__caret: true,
+      'cap-arrow-67': expanded[element.id],
+      'cap-arrow-66': !expanded[element.id],
     });
     if (element.childrenCount > 0) {
       return (

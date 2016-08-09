@@ -46,8 +46,9 @@ const FolderManager = React.createClass({
   },
 
   toggleExpand(element) {
+    const { synthesis } = this.props;
     if (element.childrenCount !== element.children.length) {
-      SynthesisElementActions.loadElementsTreeFromServer(this.props.synthesis.id, 'notIgnored', element.id);
+      SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored', element.id);
     }
     const expanded = this.state.expanded;
     expanded[element.id] = !this.state.expanded[element.id];
@@ -57,18 +58,20 @@ const FolderManager = React.createClass({
   },
 
   loadElementsTreeFromServer() {
+    const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(
-      this.props.synthesis.id,
+      synthesis.id,
       'notIgnored'
     );
   },
 
   renderButtons(element) {
+    const { synthesis } = this.props;
     if (element.displayType === 'folder') {
       return (
         <div className="pull-right">
-          <UpdateButton synthesis={this.props.synthesis} element={element} />
-          <IgnoreButton synthesis={this.props.synthesis} element={element} />
+          <UpdateButton synthesis={synthesis} element={element} />
+          <IgnoreButton synthesis={synthesis} element={element} />
         </div>
       );
     }
@@ -77,7 +80,7 @@ const FolderManager = React.createClass({
 
   renderItemCaret(element) {
     const classes = classNames({
-      'tree__item__caret': true,
+      tree__item__caret: true,
       'cap-arrow-67': this.state.expanded[element.id],
       'cap-arrow-66': !this.state.expanded[element.id],
     });

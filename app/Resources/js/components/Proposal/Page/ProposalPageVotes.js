@@ -24,9 +24,13 @@ const ProposalPageVotes = React.createClass({
   },
 
   getInitialState() {
+    const {
+      proposal,
+      votes,
+    } = this.props;
     return {
-      votes: this.props.votes,
-      votesCount: this.props.proposal.votesCount,
+      votes: votes,
+      votesCount: proposal.votesCount,
       showModal: false,
     };
   },
@@ -56,7 +60,8 @@ const ProposalPageVotes = React.createClass({
   },
 
   loadProposalVotes() {
-    ProposalActions.loadProposalVotes(this.props.proposal.proposalForm.id, this.props.proposal.id);
+    const { proposal } = this.props;
+    ProposalActions.loadProposalVotes(proposal.proposalForm.id, proposal.id);
   },
 
   showModal() {
@@ -70,6 +75,7 @@ const ProposalPageVotes = React.createClass({
   },
 
   render() {
+    const { className } = this.props;
     const votesToDisplay = this.state.votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
     const moreVotes = this.state.votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
 
@@ -78,9 +84,9 @@ const ProposalPageVotes = React.createClass({
     }
 
     const classes = {
-      'proposal__votes': true,
+      proposal__votes: true,
     };
-    classes[this.props.className] = true;
+    classes[className] = true;
 
     return (
       <div className={classNames(classes)}>

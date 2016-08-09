@@ -22,9 +22,10 @@ const ProjectStatsList = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
+    const { data } = this.props;
     return {
       showPercentage: false,
-      data: this.props.data,
+      data: data,
       theme: 0,
       district: 0,
     };
@@ -56,9 +57,13 @@ const ProjectStatsList = React.createClass({
 
 
   reloadData() {
+    const {
+      stepId,
+      type,
+    } = this.props;
     ProjectStatsActions.load(
-      this.props.stepId,
-      this.props.type,
+      stepId,
+      type,
       DEFAULT_STATS_PAGINATION,
       this.state.theme,
       this.state.district
@@ -72,24 +77,34 @@ const ProjectStatsList = React.createClass({
   },
 
   render() {
+    const {
+      districts,
+      icon,
+      isCurrency,
+      label,
+      showFilters,
+      stepId,
+      themes,
+      type,
+    } = this.props;
     const { data } = this.state;
 
     return (
-      <div className="block" id={`stats-${this.props.stepId}-${this.props.type}`}>
+      <div className="block" id={`stats-${stepId}-${type}`}>
         <ProjectStatsFilters
-          themes={this.props.themes}
-          districts={this.props.districts}
+          themes={themes}
+          districts={districts}
           onThemeChange={this.changeTheme}
           onDistrictChange={this.changeDistrict}
-          showFilters={this.props.showFilters}
+          showFilters={showFilters}
         />
         <ListGroup className="stats__list">
           <ListGroupItem className="stats__list__header">
-            <i className={this.props.icon}></i> {this.getIntlMessage(this.props.label)}
-            <span id={`step-stats-display-${this.props.stepId}`} className="pull-right excerpt stats__buttons">
+            <i className={icon}></i> {this.getIntlMessage(label)}
+            <span id={`step-stats-display-${stepId}`} className="pull-right excerpt stats__buttons">
               <Button
                 bsStyle="link"
-                id={`step-stats-display-${this.props.stepId}-number`}
+                id={`step-stats-display-${stepId}-number`}
                 active={!this.state.showPercentage}
                 onClick={this.showPercentage.bind(this, false)}
               >
@@ -98,7 +113,7 @@ const ProjectStatsList = React.createClass({
               <span>/</span>
               <Button
                 bsStyle="link"
-                id={`step-stats-display-${this.props.stepId}-percentage`}
+                id={`step-stats-display-${stepId}-percentage`}
                 active={this.state.showPercentage}
                 onClick={this.showPercentage.bind(this, true)}
               >
@@ -114,7 +129,7 @@ const ProjectStatsList = React.createClass({
                   key={index}
                   item={row}
                   showPercentage={this.state.showPercentage}
-                  isCurrency={this.props.isCurrency}
+                  isCurrency={isCurrency}
                 />
               );
             })
@@ -126,13 +141,13 @@ const ProjectStatsList = React.createClass({
         {
           data.total > data.values.length
             ? <ProjectStatsModal
-                type={this.props.type}
-                stepId={this.props.stepId}
+                type={type}
+                stepId={stepId}
                 data={data}
-                label={this.props.label}
-                icon={this.props.icon}
+                label={label}
+                icon={icon}
                 showPercentage={this.state.showPercentage}
-                isCurrency={this.props.isCurrency}
+                isCurrency={isCurrency}
                 theme={this.state.theme}
                 district={this.state.district}
             />

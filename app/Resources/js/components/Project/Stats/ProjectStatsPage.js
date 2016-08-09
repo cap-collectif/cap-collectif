@@ -33,13 +33,18 @@ const ProjectStatsPage = React.createClass({
   },
 
   render() {
+    const {
+      districts,
+      steps,
+      themes,
+    } = this.props;
     const icons = this.listIcons;
-    const selectedStep = this.props.steps[this.state.selectedStepIndex];
+    const selectedStep = steps[this.state.selectedStepIndex];
     return (
       <div>
         <h2>{this.getIntlMessage('project.stats.title')}</h2>
         {
-          this.props.steps.length > 1
+          steps.length > 1
           ? <Nav
               bsStyle="pills"
               justified
@@ -48,7 +53,7 @@ const ProjectStatsPage = React.createClass({
               className="block"
           >
               {
-                this.props.steps.map((step, index) => {
+                steps.map((step, index) => {
                   return (
                     <NavItem key={step.id} eventKey={index}>
                       {step.title}
@@ -74,8 +79,8 @@ const ProjectStatsPage = React.createClass({
                       icon={icons[key]}
                       isCurrency={key === 'costs'}
                       showFilters={key === 'votes'}
-                      themes={this.props.themes}
-                      districts={this.props.districts}
+                      themes={themes}
+                      districts={districts}
                     />
                   );
                 })

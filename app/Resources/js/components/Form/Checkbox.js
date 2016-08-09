@@ -31,11 +31,15 @@ const Checkbox = React.createClass({
   },
 
   onChange(e) {
+    const {
+      field,
+      onChange,
+    } = this.props;
     const checkboxes = Array.from(this.refs.choices.getCheckboxes());
     const values = [];
 
     checkboxes.forEach((checkbox) => {
-      if (checkbox.id !== `${this.props.field.id}-choice-other` && checkbox.checked) {
+      if (checkbox.id !== `${field.id}-choice-other` && checkbox.checked) {
         values.push(checkbox.value);
       }
     });
@@ -44,7 +48,7 @@ const Checkbox = React.createClass({
       values.push(e.target.value);
     }
 
-    this.props.onChange(this.props.field, values);
+    onChange(field, values);
   },
 
   empty() {
@@ -59,20 +63,27 @@ const Checkbox = React.createClass({
   },
 
   render() {
+    const {
+      disabled,
+      getGroupStyle,
+      id,
+      labelClassName,
+      renderFormErrors,
+    } = this.props;
     const field = this.props.field;
     const fieldName = `choices-for-field-${field.id}`;
 
     const labelClasses = {
       'control-label': true,
     };
-    labelClasses[this.props.labelClassName] = true;
+    labelClasses[labelClassName] = true;
 
     const optional = this.getIntlMessage('global.form.optional');
 
     return (
       <div
-        className={`form-group ${this.props.getGroupStyle(field.id)}`}
-        id={this.props.id}
+        className={`form-group ${getGroupStyle(field.id)}`}
+        id={id}
       >
         <label className={classNames(labelClasses)}>
           {field.question + (field.required ? '' : optional)}
@@ -94,13 +105,13 @@ const Checkbox = React.createClass({
               return (
                 <div key={choiceKey}>
                   <Input
-                    id={`${this.props.id}_${choiceKey}`}
+                    id={`${id}_${choiceKey}`}
                     name={fieldName}
                     type="checkbox"
                     label={choice.label}
                     value={choice.label}
                     help={choice.description}
-                    disabled={this.props.disabled}
+                    disabled={disabled}
                     image={choice.image ? choice.image.url : null}
                   />
                 </div>
@@ -113,12 +124,12 @@ const Checkbox = React.createClass({
                 ref={c => this.other = c}
                 field={this.props.field}
                 onChange={this.onChange}
-                disabled={this.props.disabled}
+                disabled={disabled}
               />
             : null
           }
         </CheckboxGroup>
-        {this.props.renderFormErrors(field.id)}
+        {renderFormErrors(field.id)}
       </div>
     );
   },

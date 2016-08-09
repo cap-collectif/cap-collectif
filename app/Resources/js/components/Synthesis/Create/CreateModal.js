@@ -25,16 +25,21 @@ const CreateModal = React.createClass({
   },
 
   getInitialState() {
+    const {
+      elements,
+      selectedId,
+    } = this.props;
     return {
       name: null,
-      parent: this.getElementInTreeById(this.props.elements, this.props.selectedId),
+      parent: this.getElementInTreeById(elements, selectedId),
       expanded: this.getExpandedBasedOnSelectedId(),
       description: null,
     };
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedId !== this.props.selectedId) {
+    const { selectedId } = this.props;
+    if (nextProps.selectedId !== selectedId) {
       this.setState({
         parent: this.getElementInTreeById(nextProps.elements, nextProps.selectedId),
         expanded: this.getExpandedBasedOnSelectedId(),
@@ -43,12 +48,16 @@ const CreateModal = React.createClass({
   },
 
   getExpandedBasedOnSelectedId() {
+    const {
+      elements,
+      selectedId,
+    } = this.props;
     const expanded = {
       root: true,
     };
-    if (this.props.elements && this.props.selectedId !== 'root') {
-      expanded[this.props.selectedId] = true;
-      const element = this.getElementInTreeById(this.props.elements, this.props.selectedId);
+    if (elements && selectedId !== 'root') {
+      expanded[selectedId] = true;
+      const element = this.getElementInTreeById(elements, selectedId);
       if (element) {
         element.path.split(',').map((id) => {
           expanded[id] = true;
@@ -105,31 +114,37 @@ const CreateModal = React.createClass({
   },
 
   show() {
-    this.props.toggle(true);
+    const { toggle } = this.props;
+    toggle(true);
   },
 
   hide() {
+    const { toggle } = this.props;
     this.setState({
       name: null,
       description: null,
     });
-    this.props.toggle(false);
+    toggle(false);
   },
 
   create() {
+    const {
+      process,
+      synthesis,
+    } = this.props;
     this.hide();
     const element = {
-      'archived': true,
-      'published': true,
-      'title': this.state.name,
-      'description': this.state.description,
-      'parent': this.state.parent,
+      archived: true,
+      published: true,
+      title: this.state.name,
+      description: this.state.description,
+      parent: this.state.parent,
     };
-    if (typeof this.props.process === 'function') {
-      this.props.process(element);
+    if (typeof process === 'function') {
+      process(element);
       return;
     }
-    SynthesisElementActions.create(this.props.synthesis.id, element);
+    SynthesisElementActions.create(synthesis.id, element);
   },
 
   renderName() {
@@ -167,11 +182,15 @@ const CreateModal = React.createClass({
   },
 
   renderParentFinder() {
+    const {
+      elements,
+      synthesis,
+    } = this.props;
     const parentId = this.state.parent ? this.state.parent.id : 'root';
     return (
       <ElementsFinder
-        synthesis={this.props.synthesis}
-        elements={this.props.elements}
+        synthesis={synthesis}
+        elements={elements}
         type="notIgnored"
         expanded={this.state.expanded}
         selectedId={parentId}
@@ -182,8 +201,9 @@ const CreateModal = React.createClass({
   },
 
   render() {
+    const { show } = this.props;
     return (
-    <Modal show={this.props.show} onHide={this.hide} animation={false} dialogClassName="modal--create">
+    <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--create">
       <Modal.Header closeButton>
         <Modal.Title>{this.getIntlMessage('synthesis.edition.action.create.title')}</Modal.Title>
       </Modal.Header>

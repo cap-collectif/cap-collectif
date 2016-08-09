@@ -12,17 +12,22 @@ const VoteButtonOverlay = React.createClass({
 
   // We add tooltip if user has not enough credits
   render() {
-    if (!this.props.show) {
-      return this.props.children;
+    const {
+      children,
+      popoverId,
+      show,
+    } = this.props;
+    if (!show) {
+      return children;
     }
 
     return (
       <OverlayTrigger placement="top" overlay={
-        <Popover id={this.props.popoverId} title={this.getIntlMessage('proposal.vote.not_enough_credits')}>
+        <Popover id={popoverId} title={this.getIntlMessage('proposal.vote.not_enough_credits')}>
           {this.getIntlMessage('proposal.vote.not_enough_credits_text')}
         </Popover>
       }>
-        {this.props.children}
+        {children}
       </OverlayTrigger>
     );
   },

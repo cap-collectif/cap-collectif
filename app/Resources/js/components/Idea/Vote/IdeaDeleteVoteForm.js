@@ -15,31 +15,40 @@ const IdeaDeleteVoteForm = React.createClass({
   mixins: [IntlMixin],
 
   componentWillReceiveProps(nextProps) {
-    const { idea } = this.props;
+    const {
+      idea,
+      isSubmitting,
+      onFailure,
+      onSubmitSuccess,
+    } = this.props;
     const ideaVoteForm = this.ideaVoteForm;
-    if (!this.props.isSubmitting && nextProps.isSubmitting) {
+    if (!isSubmitting && nextProps.isSubmitting) {
       if (ideaVoteForm.isValid()) {
         IdeaActions
           .deleteVote(idea.id)
           .then(() => {
             ideaVoteForm.reinitState();
-            this.props.onSubmitSuccess();
+            onSubmitSuccess();
           })
-          .catch(this.props.onFailure)
+          .catch(onFailure)
         ;
         return;
       }
 
-      this.props.onFailure();
+      onFailure();
     }
   },
 
   render() {
+    const {
+      anonymous,
+      idea,
+    } = this.props;
     return (
       <IdeaVoteForm
         ref={(c) => this.ideaVoteForm = c}
-        idea={this.props.idea}
-        anonymous={this.props.anonymous}
+        idea={idea}
+        anonymous={anonymous}
       />
     );
   },

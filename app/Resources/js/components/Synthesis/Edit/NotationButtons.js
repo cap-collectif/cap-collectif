@@ -11,9 +11,10 @@ const NotationButtons = React.createClass({
   mixins: [IntlMixin],
 
   getNotationStarsClasses() {
+    const { notation } = this.props;
     const classes = [];
     for (let i = 0; i < 5; i++) {
-      if (i < this.props.notation) {
+      if (i < notation) {
         classes[i] = 'active';
       }
     }
@@ -21,16 +22,18 @@ const NotationButtons = React.createClass({
   },
 
   note(value) {
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(value);
+    const { onChange } = this.props;
+    if (typeof onChange === 'function') {
+      onChange(value);
     }
   },
 
   render() {
+    const { block } = this.props;
     const classes = this.getNotationStarsClasses();
     return (
       <div className="element__action">
-        <Button bsSize="large" className="element__action-notation" block={this.props.block}>
+        <Button bsSize="large" className="element__action-notation" block={block}>
           <a className={classes[4]} id="notation-button-5" onClick={this.note.bind(this, 5)}>
             <i className="cap cap-star-1-1"></i>
           </a>

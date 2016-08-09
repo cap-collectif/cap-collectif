@@ -34,13 +34,17 @@ const IgnoreButton = React.createClass({
   },
 
   ignore() {
+    const {
+      element,
+      synthesis,
+    } = this.props;
     this.hideConfirmModal();
     const data = {
-      'archived': true,
-      'published': false,
+      archived: true,
+      published: false,
     };
-    SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
-    hashHistory.push('inbox', { 'type': 'new' });
+    SynthesisElementActions.update(synthesis.id, element.id, data);
+    hashHistory.push('inbox', { type: 'new' });
   },
 
   renderConfirmButton() {
@@ -52,11 +56,12 @@ const IgnoreButton = React.createClass({
   },
 
   renderConfirmModal() {
+    const { element } = this.props;
     return (
       <Modal show={this.state.showConfirmModal} onHide={this.hideConfirmModal} animation={false} dialogClassName="modal--confirm">
         <Modal.Header closeButton>
           <Modal.Title>
-          <FormattedMessage message={this.getIntlMessage('synthesis.edition.action.confirm_ignore.title')} name={this.props.element.title} />
+          <FormattedMessage message={this.getIntlMessage('synthesis.edition.action.confirm_ignore.title')} name={element.title} />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

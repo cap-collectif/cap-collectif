@@ -14,7 +14,14 @@ const ProjectStatsFilters = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (!this.props.showFilters) {
+    const {
+      districts,
+      onDistrictChange,
+      onThemeChange,
+      showFilters,
+      themes,
+    } = this.props;
+    if (!showFilters) {
       return null;
     }
 
@@ -25,13 +32,13 @@ const ProjectStatsFilters = React.createClass({
             id="stats-filter-themes"
             type="select"
             ref="themes"
-            onChange={this.props.onThemeChange}
+            onChange={onThemeChange}
           >
             <option value="0">
               {this.getIntlMessage('global.select_themes')}
             </option>
             {
-              this.props.themes.map((theme) => {
+              themes.map((theme) => {
                 return (
                   <option key={theme.id} value={theme.id}>
                     {theme.title}
@@ -46,13 +53,13 @@ const ProjectStatsFilters = React.createClass({
             id="stats-filter-districts"
             type="select"
             ref="districts"
-            onChange={this.props.onDistrictChange}
+            onChange={onDistrictChange}
           >
             <option value="0">
               {this.getIntlMessage('global.select_districts')}
             </option>
             {
-              this.props.districts.map((district) => {
+              districts.map((district) => {
                 return (
                   <option key={district.id} value={district.id}>
                     {district.name}

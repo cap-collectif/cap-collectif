@@ -23,12 +23,13 @@ const OpinionPreview = React.createClass({
   },
 
   render() {
+    const { rankingThreshold } = this.props;
     const opinion = this.props.opinion;
     return (
       <div className="opinion__body box">
         <UserAvatar user={opinion.author} className="pull-left" />
         <div className="opinion__data">
-          <OpinionInfos rankingThreshold={this.props.rankingThreshold} opinion={opinion} />
+          <OpinionInfos rankingThreshold={rankingThreshold} opinion={opinion} />
           <OpinionPreviewTitle {...this.props} />
           <OpinionPreviewCounters {...this.props} />
         </div>

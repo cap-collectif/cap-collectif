@@ -10,9 +10,10 @@ const OpinionLinkCreateButton = React.createClass({
   mixins: [IntlMixin],
 
   render() {
+    const { handleClick } = this.props;
     return (
       <LoginOverlay>
-        <Button id="link-form__add" bsStyle="primary" onClick={this.props.handleClick}>
+        <Button id="link-form__add" bsStyle="primary" onClick={handleClick}>
           <i className="cap cap-add-1"></i>
           { ` ${this.getIntlMessage('opinion.link.add_new')}`}
         </Button>

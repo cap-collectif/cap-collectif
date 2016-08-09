@@ -29,26 +29,36 @@ const DeleteButton = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    if (this.props.author === null || !this.props.user) {
+    const {
+      author,
+      user,
+    } = this.props;
+    if (author === null || !user) {
       return false;
     }
-    return this.props.user.uniqueId === this.props.author.uniqueId;
+    return user.uniqueId === author.uniqueId;
   },
 
   render() {
+    const {
+      className,
+      id,
+      onClick,
+      style,
+    } = this.props;
     if (this.isDeletable()) {
       const classes = {
-        'btn': true,
+        btn: true,
         'btn-danger': true,
         'btn--outline': true,
       };
-      classes[this.props.className] = true;
+      classes[className] = true;
 
       return (
         <button
-          id={this.props.id}
-          style={this.props.style} className={classNames(classes)}
-          onClick={() => this.props.onClick()}
+          id={id}
+          style={style} className={classNames(classes)}
+          onClick={() => onClick()}
         >
             <i className="cap cap-bin-2"></i>
           { ` ${this.getIntlMessage('global.remove')}`}

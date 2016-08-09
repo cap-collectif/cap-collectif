@@ -14,9 +14,10 @@ const DisplaySettings = React.createClass({
   mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getInitialState() {
+    const { synthesis } = this.props;
     return {
       isSaving: false,
-      form: this.props.synthesis.displayRules || {
+      form: synthesis.displayRules || {
         level: 1,
       },
       errors: {
@@ -33,15 +34,16 @@ const DisplaySettings = React.createClass({
   },
 
   updateSettings() {
+    const { synthesis } = this.props;
     if (this.isValid()) {
       this.setState({
         isSaving: true,
       });
       SynthesisActions.updateDisplaySettings(
-        this.props.synthesis.id,
+        synthesis.id,
         { rules: this.state.form }
       ).then(() => {
-        SynthesisActions.load(this.props.synthesis.id);
+        SynthesisActions.load(synthesis.id);
         this.setState({
           isSaving: false,
         });

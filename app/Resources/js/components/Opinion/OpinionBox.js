@@ -20,22 +20,29 @@ const OpinionBox = React.createClass({
   },
 
   getOpinionType() {
-    return this.isVersion() ? this.props.opinion.parent.type : this.props.opinion.type;
+    const { opinion } = this.props;
+    return this.isVersion() ? opinion.parent.type : opinion.type;
   },
 
   getBoxLabel() {
+    const { opinionTerm } = this.props;
     return this.isVersion() ? 'opinion.header.version'
-      : this.props.opinionTerm === 0
+      : opinionTerm === 0
         ? 'opinion.header.opinion'
         : 'opinion.header.article'
     ;
   },
 
   isVersion() {
-    return this.props.opinion && this.props.opinion.parent;
+    const { opinion } = this.props;
+    return opinion && opinion.parent;
   },
 
   render() {
+    const {
+      opinionTerm,
+      rankingThreshold,
+    } = this.props;
     const opinion = this.props.opinion;
     const color = this.getOpinionType().color;
     const backLink = this.isVersion() ? opinion.parent._links.show : opinion._links.type;
@@ -58,7 +65,7 @@ const OpinionBox = React.createClass({
               <p className="small excerpt" style={{ marginTop: '5px' }}>{parentTitle}</p>
             </h2>
           </div>
-          <OpinionPreview rankingThreshold={this.props.rankingThreshold} opinionTerm={this.props.opinionTerm} opinion={opinion} link={false} />
+          <OpinionPreview rankingThreshold={rankingThreshold} opinionTerm={opinionTerm} opinion={opinion} link={false} />
         </div>
         <OpinionAppendices opinion={opinion} />
         <div className="opinion__description">

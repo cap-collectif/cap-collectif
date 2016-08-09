@@ -23,8 +23,9 @@ const ImageUpload = React.createClass({
   },
 
   getInitialState() {
+    const { preview } = this.props;
     return {
-      preview: this.props.preview,
+      preview: preview,
       delete: false,
     };
   },
@@ -38,13 +39,14 @@ const ImageUpload = React.createClass({
   },
 
   onDrop(files) {
+    const { valueLink } = this.props;
     const file = files.length > 0 ? files[0] : null;
     if (file) {
       this.setState({
         delete: false,
       }, () => {
         this.uncheckDelete();
-        this.props.valueLink.requestChange(file);
+        valueLink.requestChange(file);
       });
     }
   },
@@ -54,13 +56,14 @@ const ImageUpload = React.createClass({
   },
 
   onToggleDelete() {
+    const { valueLink } = this.props;
     const deleteValue = this._deleteCheckbox.getChecked();
     this.setState({
       delete: deleteValue,
       preview: null,
     });
     if (deleteValue) {
-      this.props.valueLink.requestChange(false);
+      valueLink.requestChange(false);
     }
   },
 
@@ -72,12 +75,17 @@ const ImageUpload = React.createClass({
   },
 
   render() {
+    const {
+      className,
+      id,
+      preview,
+    } = this.props;
     const classes = {
       'image-uploader': true,
-      [this.props.className]: true,
+      [className]: true,
     };
     return (
-      <Row id={this.props.id} className={classNames(classes)}>
+      <Row id={id} className={classNames(classes)}>
         <Col xs={12} sm={4}>
           <Dropzone ref="dropzone" onDrop={this.onDrop} multiple={false} accept="image/*" className="image-uploader__dropzone">
             <div className="image-uploader__dropzone-label">
@@ -100,7 +108,7 @@ const ImageUpload = React.createClass({
             }
           </div>
           {
-            this.state.preview || this.props.preview
+            this.state.preview || preview
             ? <Input
               type="checkbox"
               name="image-uploader__delete"

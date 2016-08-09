@@ -20,17 +20,25 @@ const OpinionVotesButtons = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    if (this.props.opinion.author === null || !this.props.user) {
+    const {
+      opinion,
+      user,
+    } = this.props;
+    if (opinion.author === null || !user) {
       return false;
     }
-    return this.props.user.uniqueId === this.props.opinion.author.uniqueId;
+    return user.uniqueId === opinion.author.uniqueId;
   },
 
   render() {
-    if (!this.props.show) {
+    const {
+      opinion,
+      disabled,
+      show,
+    } = this.props;
+    if (!show) {
       return null;
     }
-    const { opinion, disabled } = this.props;
     return (
       <ButtonToolbar className="opinion__votes__buttons">
         <OpinionVotesButton disabled={disabled} opinion={opinion} value={1} />

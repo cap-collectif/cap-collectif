@@ -12,11 +12,11 @@ const ProjectCover = React.createClass({
   render() {
     const { project } = this.props;
     const linkClasses = classNames({
-      'bg__wrapper': !project.cover,
+      bg__wrapper: !project.cover,
     });
     const divClasses = classNames({
-      'play': !!project.video,
-      'project__preview__cover': true,
+      play: !!project.video,
+      project__preview__cover: true,
     });
     return (
       <div className={divClasses}>

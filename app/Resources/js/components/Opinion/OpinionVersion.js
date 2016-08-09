@@ -12,9 +12,10 @@ const OpinionVersion = React.createClass({
   },
 
   render() {
+    const { rankingThreshold } = this.props;
     const version = this.props.version;
     const classes = classNames({
-      'opinion': true,
+      opinion: true,
       'block--bordered': true,
       'has-chart': true,
       'bg-vip': version.author && version.author.vip,
@@ -23,7 +24,7 @@ const OpinionVersion = React.createClass({
       <li className={classes}>
         <Row>
           <Col xs={12} sm={8} md={9} lg={10}>
-            <OpinionPreview opinion={version} rankingThreshold={this.props.rankingThreshold} />
+            <OpinionPreview opinion={version} rankingThreshold={rankingThreshold} />
           </Col>
           <Col sm={4} md={3} lg={2} className="hidden-xs">
             <VotePiechart top={10} height={'90px'} width={'145px'} ok={version.votes_ok} nok={version.votes_nok} mitige={version.votes_mitige} />

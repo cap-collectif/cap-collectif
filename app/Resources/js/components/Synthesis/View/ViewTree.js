@@ -62,15 +62,17 @@ const ViewTree = React.createClass({
   },
 
   isElementExpanded(element) {
+    const { synthesis } = this.props;
     if (!element) {
       return true;
     }
-    const displayRules = this.props.synthesis.displayRules || {};
+    const displayRules = synthesis.displayRules || {};
     return SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'expanded', displayRules) || this.state.expanded[element.id];
   },
 
   renderCaret(element) {
-    const displayRules = this.props.synthesis.displayRules || {};
+    const { synthesis } = this.props;
+    const displayRules = synthesis.displayRules || {};
     if (SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'childrenInModal', displayRules)) {
       return null;
     }
@@ -106,7 +108,8 @@ const ViewTree = React.createClass({
   },
 
   renderTreeItems(elements, parent = null) {
-    const displayRules = this.props.synthesis.displayRules || {};
+    const { synthesis } = this.props;
+    const displayRules = synthesis.displayRules || {};
     if (this.isElementExpanded(parent) && elements && !SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenInModal', displayRules)) {
       const orderedElements =
         SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'foldersOrderedByCount', displayRules)

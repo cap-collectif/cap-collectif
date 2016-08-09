@@ -13,52 +13,64 @@ const VotesBar = React.createClass({
   mixins: [IntlMixin],
 
   renderBar() {
-    const bar = <ProgressBar style={{ marginBottom: '5px' }} bsStyle="success" max={this.props.max} now={this.props.value} label="%(percent)s%" />;
-    if (this.props.helpText) {
+    const {
+      helpText,
+      max,
+      value,
+    } = this.props;
+    const bar = <ProgressBar style={{ marginBottom: '5px' }} bsStyle="success" max={max} now={value} label="%(percent)s%" />;
+    if (helpText) {
       return this.renderOverlay(bar);
     }
     return bar;
   },
 
   renderIcon() {
-    if (this.props.helpText) {
+    const { helpText } = this.props;
+    if (helpText) {
       const icon = <i style={{ fontSize: '24px', color: '#999', paddingLeft: '15px', top: '-5px' }} className="pull-right cap cap-information"></i>;
       return this.renderOverlay(icon);
     }
   },
 
   renderDoneNb() {
+    const { value } = this.props;
     return (
       <p className="small excerpt" style={{ marginBottom: '5px' }}>
-        <FormattedMessage message={this.getIntlMessage('opinion.progress.done')} num={this.props.value} />
+        <FormattedMessage message={this.getIntlMessage('opinion.progress.done')} num={value} />
       </p>
     );
   },
 
   renderLeftNb() {
-    const left = this.props.max - this.props.value;
+    const {
+      max,
+      value,
+    } = this.props;
+    const left = max - value;
     if (left > 0) {
       return (
         <p className="small excerpt">
-          <FormattedMessage message={this.getIntlMessage('opinion.progress.left')} left={left} max={this.props.max} />
+          <FormattedMessage message={this.getIntlMessage('opinion.progress.left')} left={left} max={max} />
           {this.renderIcon()}
         </p>
       );
     }
     return (
       <p className="small excerpt">
-        <FormattedMessage message={this.getIntlMessage('opinion.progress.reached')} with={this.props.value} />
+        <FormattedMessage message={this.getIntlMessage('opinion.progress.reached')} with={value} />
         {this.renderIcon()}
       </p>
     );
   },
 
   renderOverlay(children) {
+    const { helpText } = this.props;
     return (
       <OverlayTrigger rootClose placement="top"
         overlay={
           <Tooltip id="votes-bar-tooltip">
-            { this.props.helpText }
+            { helpText }
           </Tooltip>
         }
       >
@@ -68,9 +80,13 @@ const VotesBar = React.createClass({
   },
 
   render() {
-    if (this.props.max > 0) {
+    const {
+      max,
+      style,
+    } = this.props;
+    if (max > 0) {
       return (
-        <div style={this.props.style} className="progression">
+        <div style={style} className="progression">
           {this.renderDoneNb()}
           {this.renderBar()}
           {this.renderLeftNb()}

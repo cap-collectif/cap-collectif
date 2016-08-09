@@ -10,10 +10,14 @@ const CommentAnswers = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (this.props.comments) {
+    const {
+      comments,
+      onVote,
+    } = this.props;
+    if (comments) {
       return (
         <div>
-          <CommentList comments={this.props.comments} onVote={this.props.onVote} root={false} />
+          <CommentList comments={comments} onVote={onVote} root={false} />
         </div>
       );
     }

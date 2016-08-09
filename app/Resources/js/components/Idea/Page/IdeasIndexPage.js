@@ -39,10 +39,16 @@ const IdeasIndexPage = React.createClass({
   },
 
   componentWillMount() {
+    const {
+      count,
+      countTrashed,
+      ideas,
+      pagination,
+    } = this.props;
     IdeaStore.addChangeListener(this.onChange);
-    IdeaActions.setPagination(this.props.pagination);
-    IdeaActions.initCounts(this.props.count, this.props.countTrashed);
-    IdeaActions.initIdeas(this.props.ideas);
+    IdeaActions.setPagination(pagination);
+    IdeaActions.initCounts(count, countTrashed);
+    IdeaActions.initIdeas(ideas);
   },
 
   componentDidUpdate(prevProps, prevState) {
@@ -83,15 +89,20 @@ const IdeasIndexPage = React.createClass({
   },
 
   render() {
+    const {
+      description,
+      themes,
+      trashUrl,
+    } = this.props;
     const currentPage = IdeaStore.currentPage;
     const pagination = IdeaStore.pagination;
     const nbPages = Math.ceil(this.state.count / pagination);
     return (
       <div>
-        <IdeasIndexHeader description={this.props.description} />
+        <IdeasIndexHeader description={description} />
         <div className="container container--custom">
           <IdeasListFilters
-            themes={this.props.themes}
+            themes={themes}
             onChange={this.handleThemeOrOrderChange}
           />
           <br />
@@ -104,7 +115,7 @@ const IdeasIndexPage = React.createClass({
             />
           </Loader>
         </div>
-        <IdeasIndexFooter trashUrl={this.props.trashUrl} countTrashed={this.state.countTrashed} />
+        <IdeasIndexFooter trashUrl={trashUrl} countTrashed={this.state.countTrashed} />
       </div>
     );
   },

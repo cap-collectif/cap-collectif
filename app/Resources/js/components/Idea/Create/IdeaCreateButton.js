@@ -10,12 +10,13 @@ export const IdeaCreateButton = React.createClass({
   mixins: [IntlMixin],
 
   render() {
+    const { handleClick } = this.props;
     return (
       <LoginOverlay>
         <Button
           id="idea-create-button"
           bsStyle="primary"
-          onClick={this.props.handleClick}
+          onClick={handleClick}
           className="form-control"
         >
           <i className="cap cap-add-1"></i>

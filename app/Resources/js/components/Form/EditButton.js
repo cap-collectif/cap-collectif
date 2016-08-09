@@ -27,30 +27,41 @@ const EditButton = React.createClass({
   },
 
   isEditable() {
-    return this.props.editable && this.isTheUserTheAuthor();
+    const { editable } = this.props;
+    return editable && this.isTheUserTheAuthor();
   },
 
   isTheUserTheAuthor() {
-    if (this.props.author === null || !this.props.user) {
+    const {
+      author,
+      user,
+    } = this.props;
+    if (author === null || !user) {
       return false;
     }
-    return this.props.user.uniqueId === this.props.author.uniqueId;
+    return user.uniqueId === author.uniqueId;
   },
 
   render() {
+    const {
+      className,
+      id,
+      onClick,
+      style,
+    } = this.props;
     if (this.isEditable()) {
       const classes = {
-        'btn': true,
+        btn: true,
         'btn-dark-gray': true,
         'btn--outline': true,
       };
 
       return (
         <button
-          id={this.props.id}
-          style={this.props.style}
-          className={classNames(classes, this.props.className)}
-          onClick={() => this.props.onClick()}
+          id={id}
+          style={style}
+          className={classNames(classes, className)}
+          onClick={() => onClick()}
         >
             <i className="cap cap-pencil-1"></i>
           { ` ${this.getIntlMessage('global.edit')}`}

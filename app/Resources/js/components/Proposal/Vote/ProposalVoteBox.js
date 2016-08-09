@@ -38,25 +38,50 @@ const ProposalVoteBox = React.createClass({
   },
 
   userHasVote() {
-    return this.props.user && this.props.userHasVote;
+    const {
+      user,
+      userHasVote,
+    } = this.props;
+    return user && userHasVote;
   },
 
   userHasEnoughCredits() {
-    if (this.props.user && !this.userHasVote() && this.props.creditsLeft !== null && this.props.proposal.estimation !== null) {
-      return this.props.creditsLeft >= this.props.proposal.estimation;
+    const {
+      creditsLeft,
+      proposal,
+      user,
+    } = this.props;
+    if (user && !this.userHasVote() && creditsLeft !== null && proposal.estimation !== null) {
+      return creditsLeft >= proposal.estimation;
     }
     return true;
   },
 
   displayForm() {
-    return this.props.selectionStep.open && (this.props.selectionStep.voteType === VOTE_TYPE_SIMPLE || (this.props.user && this.userHasEnoughCredits()));
+    const {
+      selectionStep,
+      user,
+    } = this.props;
+    return selectionStep.open && (selectionStep.voteType === VOTE_TYPE_SIMPLE || (user && this.userHasEnoughCredits()));
   },
 
   render() {
+    const {
+      className,
+      formWrapperClassName,
+      isSubmitting,
+      onSubmitFailure,
+      onSubmitSuccess,
+      onValidationFailure,
+      proposal,
+      selectionStep,
+      user,
+      userHasVote,
+    } = this.props;
     return (
-      <div className={this.props.className}>
+      <div className={className}>
         {
-          !this.props.user && this.props.selectionStep.voteType !== VOTE_TYPE_BUDGET && this.props.selectionStep.open
+          !user && selectionStep.voteType !== VOTE_TYPE_BUDGET && selectionStep.open
           && <div>
             <p className="text-center small" style={{ fontWeight: 'bold' }}>
               {this.getIntlMessage('proposal.vote.authenticated')}
@@ -80,32 +105,32 @@ const ProposalVoteBox = React.createClass({
           </div>
         }
         {
-          this.props.user
+          user
           ? <UserPreview
-            user={this.props.user}
+            user={user}
             style={{ padding: '0', marginBottom: '0', fontSize: '18px' }}
           />
           : <p className="text-center small" style={{ marginBottom: '0', fontWeight: 'bold' }}>
             {this.getIntlMessage('proposal.vote.non_authenticated')}
           </p>
         }
-        <div className={this.props.formWrapperClassName}>
+        <div className={formWrapperClassName}>
           {
             this.displayForm()
               && <ProposalVoteForm
-              proposal={this.props.proposal}
-              selectionStepId={this.props.selectionStep.id}
-              isSubmitting={this.props.isSubmitting}
-              onValidationFailure={this.props.onValidationFailure}
-              onSubmitSuccess={this.props.onSubmitSuccess}
-              onSubmitFailure={this.props.onSubmitFailure}
-              userHasVote={this.props.userHasVote}
+              proposal={proposal}
+              selectionStepId={selectionStep.id}
+              isSubmitting={isSubmitting}
+              onValidationFailure={onValidationFailure}
+              onSubmitSuccess={onSubmitSuccess}
+              onSubmitFailure={onSubmitFailure}
+              userHasVote={userHasVote}
             />
           }
           <ProposalVoteBoxMessage
             enoughCredits={this.userHasEnoughCredits()}
-            submitting={this.props.isSubmitting}
-            selectionStep={this.props.selectionStep}
+            submitting={isSubmitting}
+            selectionStep={selectionStep}
           />
         </div>
       </div>

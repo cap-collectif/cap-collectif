@@ -23,9 +23,10 @@ const OpinionCreateModal = React.createClass({
     };
   },
 
-  componentDidMount() { // Todo: remove this, everything should be passed as props
+  componentDidMount() {
+    const { opinionTypeId } = this.props;// Todo: remove this, everything should be passed as props
     Fetcher
-      .get(`/opinion_types/${this.props.opinionTypeId}`)
+      .get(`/opinion_types/${opinionTypeId}`)
       .then((data) => {
         this.setState({ opinionType: data });
       });
@@ -39,8 +40,9 @@ const OpinionCreateModal = React.createClass({
   },
 
   handleSubmitSuccess() {
+    const { onClose } = this.props;
     this.setState({ isSubmitting: false });
-    this.props.onClose();
+    onClose();
   },
 
   stopSubmit() {

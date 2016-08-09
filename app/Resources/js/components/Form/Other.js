@@ -29,11 +29,12 @@ const Other = React.createClass({
   },
 
   onType(e) {
+    const { onChange } = this.props;
     this.setState({
       value: e.target.value,
       checked: true,
     });
-    this.props.onChange(e, this.state.value);
+    onChange(e, this.state.value);
   },
 
   onCheckUncheck(e) {
@@ -60,6 +61,7 @@ const Other = React.createClass({
   },
 
   render() {
+    const { disabled } = this.props;
     const field = this.props.field;
     const fieldName = `choices-for-field-${field.id}`;
 
@@ -73,7 +75,7 @@ const Other = React.createClass({
             label={this.getIntlMessage('reply.other')}
             checked={this.state.checked}
             onChange={this.onCheckUncheck}
-            disabled={this.props.disabled}
+            disabled={disabled}
           />
         </Col>
         <Col xs={10} md={11}>
@@ -84,7 +86,7 @@ const Other = React.createClass({
             bsSize="small"
             onChange={this.onType}
             placeholder={this.getIntlMessage('reply.your_response')}
-            disabled={this.props.disabled}
+            disabled={disabled}
           />
         </Col>
       </Row>

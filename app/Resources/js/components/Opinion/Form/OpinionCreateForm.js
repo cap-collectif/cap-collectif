@@ -15,7 +15,7 @@ const OpinionCreateForm = React.createClass({
 
   handleSubmit(data) {
     const { opinionType, projectId, stepId, onSubmitSuccess, onFailure } = this.props;
-    const appendices = this.props.opinionType.appendixTypes
+    const appendices = opinionType.appendixTypes
       .filter((type) => data[type.title] && data[type.title].length > 0)
       .map((type) => {
         return { appendixType: type.id, body: data[type.title] };

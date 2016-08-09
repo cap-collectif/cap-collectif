@@ -9,7 +9,8 @@ const OpinionSourceList = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (this.props.sources.length === 0) {
+    const { sources } = this.props;
+    if (sources.length === 0) {
       return (
         <p className="text-center">
           <i className="cap-32 cap-baloon-1"></i>
@@ -22,7 +23,7 @@ const OpinionSourceList = React.createClass({
     return (
       <ul id="sources-list" className="media-list" style={{ marginTop: '20px' }}>
         {
-          this.props.sources.map((source) => {
+          sources.map((source) => {
             return (
               <OpinionSource
                 {...this.props}

@@ -45,8 +45,9 @@ const UpdateModal = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    const { element } = this.props;
     if (nextProps.element) {
-      if (!this.props.element || this.props.element.id !== nextProps.element.id) {
+      if (!element || element.id !== nextProps.element.id) {
         this.setState({
           parentId: this.getElementParentId(nextProps.element),
           title: nextProps.element.title,
@@ -69,7 +70,8 @@ const UpdateModal = React.createClass({
   },
 
   getElementParentId() {
-    const parents = this.props.element.path.split('|');
+    const { element } = this.props;
+    const parents = element.path.split('|');
     if (parents.length < 2) {
       return null;
     }
@@ -103,29 +105,35 @@ const UpdateModal = React.createClass({
   },
 
   hide() {
-    this.props.toggle(false);
+    const { toggle } = this.props;
+    toggle(false);
   },
 
   show() {
-    this.props.toggle(true);
+    const { toggle } = this.props;
+    toggle(true);
   },
 
   update() {
+    const {
+      process,
+      synthesis,
+    } = this.props;
     this.hide();
     const data = {
-      'parent': this.state.parentId,
-      'title': this.state.title,
-      'description': this.state.description,
+      parent: this.state.parentId,
+      title: this.state.title,
+      description: this.state.description,
     };
-    if (typeof this.props.process === 'function') {
+    if (typeof process === 'function') {
       const element = this.props.element;
       element.parent = data.parent;
       element.title = data.title;
       element.description = data.description;
-      this.props.process(element);
+      process(element);
       return;
     }
-    SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
+    SynthesisElementActions.update(synthesis.id, this.props.element.id, data);
   },
 
   expandItem(element) {
@@ -137,8 +145,9 @@ const UpdateModal = React.createClass({
   },
 
   loadElementsTreeFromServer() {
+    const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(
-      this.props.synthesis.id,
+      synthesis.id,
       'notIgnored'
     );
   },
@@ -177,24 +186,29 @@ const UpdateModal = React.createClass({
   },
 
   renderParentFinder() {
+    const {
+      element,
+      synthesis,
+    } = this.props;
     const parentId = this.state.parentId || 'root';
     return (
       <ElementsFinder
-        synthesis={this.props.synthesis}
+        synthesis={synthesis}
         type="notIgnored"
         elements={this.state.elements}
         expanded={this.state.expanded}
         selectedId={parentId}
         onSelect={this.setParent}
         onExpand={this.expandItem}
-        hiddenElementId={this.props.element.id}
+        hiddenElementId={element.id}
       />
     );
   },
 
   render() {
+    const { show } = this.props;
     return (
-      <Modal show={this.props.show} onHide={this.hide} animation={false} dialogClassName="modal--update">
+      <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--update">
         <Modal.Header closeButton>
           <Modal.Title>{this.getIntlMessage('synthesis.edition.action.update.title')}</Modal.Title>
         </Modal.Header>

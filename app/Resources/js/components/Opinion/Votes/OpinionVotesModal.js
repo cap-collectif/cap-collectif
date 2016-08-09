@@ -21,8 +21,9 @@ const OpinionVotesModal = React.createClass({
   },
 
   componentDidMount() {
-    const opinionId = this.props.opinion.parent ? this.props.opinion.parent.id : this.props.opinion.id;
-    const versionId = this.props.opinion.parent ? this.props.opinion.id : null;
+    const { opinion } = this.props;
+    const opinionId = opinion.parent ? opinion.parent.id : opinion.id;
+    const versionId = opinion.parent ? opinion.id : null;
     OpinionActions
       .loadAllVotes(opinionId, versionId)
       .then((votes) => {

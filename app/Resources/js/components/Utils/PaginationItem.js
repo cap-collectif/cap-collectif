@@ -3,15 +3,23 @@ import classNames from 'classnames';
 
 export default class PaginationItem extends React.Component {
   render() {
+    const {
+      active,
+      ariaLabel,
+      disabled,
+      label,
+      onSelect,
+      page,
+    } = this.props;
     const classes = classNames({
-      disabled: this.props.disabled,
-      active: this.props.active,
+      disabled: disabled,
+      active: active,
     });
     return (
       <li className={classes}>
-        <span className="page-item__wrapper" aria-label={this.props.ariaLabel || this.props.label || this.props.page} onClick={this.props.onSelect}>
+        <span className="page-item__wrapper" aria-label={ariaLabel || label || page} onClick={onSelect}>
           <span className="page-item__label" aria-hidden="true">
-            {this.props.label || this.props.page}
+            {label || page}
           </span>
         </span>
       </li>

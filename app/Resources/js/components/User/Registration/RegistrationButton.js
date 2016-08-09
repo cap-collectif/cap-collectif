@@ -40,16 +40,24 @@ export const RegistrationButton = React.createClass({
   },
 
   render() {
-    if (!this.props.features.registration || !!this.props.user) {
+    const {
+      bsStyle,
+      buttonStyle,
+      className,
+      features,
+      style,
+      user,
+    } = this.props;
+    if (!features.registration || !!user) {
       return null;
     }
     return (
-      <span style={this.props.style}>
+      <span style={style}>
         <Button
-          style={this.props.buttonStyle}
+          style={buttonStyle}
           onClick={this.handleClick}
-          bsStyle={this.props.bsStyle}
-          className={`navbar-btn btn--registration ${this.props.className}`}
+          bsStyle={bsStyle}
+          className={`navbar-btn btn--registration ${className}`}
         >
           { this.getIntlMessage('global.registration') }
         </Button>

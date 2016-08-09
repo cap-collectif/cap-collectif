@@ -29,9 +29,10 @@ export const IdeasListFilters = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
+    const { onChange } = this.props;
     if (prevState && (prevState.order !== this.state.order || prevState.theme !== this.state.theme)) {
       this.reload();
-      this.props.onChange();
+      onChange();
     }
   },
 
@@ -66,17 +67,22 @@ export const IdeasListFilters = React.createClass({
   },
 
   render() {
+    const {
+      features,
+      onChange,
+      themes,
+    } = this.props;
     return (
     <Row className="filter">
       {
-        this.props.features.idea_creation
+        features.idea_creation
         ? <Col xs={12} sm={3} lg={2}>
-            <IdeaCreate themes={this.props.themes} className="form-group" />
+            <IdeaCreate themes={themes} className="form-group" />
           </Col>
         : null
       }
       {
-        this.props.features.themes
+        features.themes
         ? <Col xs={12} sm={3}>
           <Input
             type="select"
@@ -88,7 +94,7 @@ export const IdeasListFilters = React.createClass({
               {this.getIntlMessage('global.select_themes')}
             </option>
             {
-              this.props.themes.map((theme) => {
+              themes.map((theme) => {
                 return (
                   <option key={theme.id} value={theme.id}>
                     {theme.title}
@@ -119,7 +125,7 @@ export const IdeasListFilters = React.createClass({
         </Input>
       </Col>
       <Col xs={12} sm={3} lg={4}>
-        <IdeasListSearch onChange={this.props.onChange} />
+        <IdeasListSearch onChange={onChange} />
       </Col>
     </Row>
     );

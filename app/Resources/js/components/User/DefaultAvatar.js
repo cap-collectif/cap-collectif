@@ -2,15 +2,19 @@ import React from 'react';
 
 export default class DefaultAvatar extends React.Component {
   render() {
+    const {
+      className,
+      size,
+    } = this.props;
     return (
       <svg
-        className={this.props.className}
+        className={className}
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         x="0px"
         y="0px"
-        width={`${this.props.size}px`}
-        height={`${this.props.size}px`}
+        width={`${size}px`}
+        height={`${size}px`}
         viewBox="0 0 200 200"
         enableBackground="new 0 0 200 200"
       >

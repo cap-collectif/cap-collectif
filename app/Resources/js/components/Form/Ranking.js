@@ -33,13 +33,24 @@ const Ranking = React.createClass({
   },
 
   handleRankingChange(ranking) {
+    const {
+      field,
+      onChange,
+    } = this.props;
     const values = [];
     ranking.map(item => values.push(item.label));
-    this.props.onChange(this.props.field, values);
+    onChange(field, values);
   },
 
   render() {
-    const { field, id, labelClassName, getGroupStyle, disabled } = this.props;
+    const {
+      field,
+      id,
+      labelClassName,
+      getGroupStyle,
+      disabled,
+      renderFormErrors,
+    } = this.props;
     const labelClasses = classNames({
       'control-label': true,
       [labelClassName]: true,
@@ -67,7 +78,7 @@ const Ranking = React.createClass({
           disabled={disabled}
           onRankingChange={this.handleRankingChange}
         />
-        {this.props.renderFormErrors(field.id)}
+        {renderFormErrors(field.id)}
       </div>
     );
   },

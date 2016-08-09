@@ -18,9 +18,10 @@ const OpinionTabs = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
+    const { opinion } = this.props;
     return {
-      sources_count: this.props.opinion.sources_count,
-      argumentsCount: this.props.opinion.argumentsCount,
+      sources_count: opinion.sources_count,
+      argumentsCount: opinion.argumentsCount,
     };
   },
 
@@ -92,7 +93,8 @@ const OpinionTabs = React.createClass({
   },
 
   getType() {
-    return this.props.opinion.parent ? this.props.opinion.parent.type : this.props.opinion.type;
+    const { opinion } = this.props;
+    return opinion.parent ? opinion.parent.type : opinion.type;
   },
 
   isLinkable() {
@@ -115,23 +117,27 @@ const OpinionTabs = React.createClass({
   },
 
   isVersion() {
-    return !!this.props.opinion.parent;
+    const { opinion } = this.props;
+    return !!opinion.parent;
   },
 
   hasStatistics() {
-    return !!this.props.opinion.history;
+    const { opinion } = this.props;
+    return !!opinion.history;
   },
 
   isContribuable() {
-    return this.props.opinion.isContribuable;
+    const { opinion } = this.props;
+    return opinion.isContribuable;
   },
 
   renderVersionsContent() {
+    const { opinion } = this.props;
     return (
       <OpinionVersionsBox
         isContribuable={this.isContribuable()}
-        opinionId={this.props.opinion.id}
-        opinionBody={this.props.opinion.body}
+        opinionId={opinion.id}
+        opinionBody={opinion.body}
       />
     );
   },

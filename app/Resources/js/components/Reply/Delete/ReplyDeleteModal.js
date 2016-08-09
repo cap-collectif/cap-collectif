@@ -22,12 +22,17 @@ const ReplyDeleteModal = React.createClass({
   },
 
   handleSubmit() {
+    const {
+      form,
+      onDelete,
+      reply,
+    } = this.props;
     this.setState({ isSubmitting: true });
     ReplyActions
-      .delete(this.props.form.id, this.props.reply.id)
+      .delete(form.id, reply.id)
       .then(() => {
         this.close();
-        this.props.onDelete();
+        onDelete();
       })
       .catch(() => {
         this.setState({ isSubmitting: false });
@@ -36,21 +41,27 @@ const ReplyDeleteModal = React.createClass({
   },
 
   close() {
-    this.props.onToggleModal(false);
+    const { onToggleModal } = this.props;
+    onToggleModal(false);
   },
 
   show() {
-    this.props.onToggleModal(true);
+    const { onToggleModal } = this.props;
+    onToggleModal(true);
   },
 
   render() {
+    const {
+      reply,
+      show,
+    } = this.props;
     return (
       <div>
         <Modal
-          id={`delete-reply-modal-${this.props.reply.id}`}
+          id={`delete-reply-modal-${reply.id}`}
           className="reply__modal--delete"
           animation={false}
-          show={this.props.show}
+          show={show}
           onHide={this.close}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
@@ -68,7 +79,7 @@ const ReplyDeleteModal = React.createClass({
           <Modal.Footer>
             <CloseButton onClose={this.close} />
             <SubmitButton
-              id={`reply-confirm-delete-button${this.props.reply.id}`}
+              id={`reply-confirm-delete-button${reply.id}`}
               className="reply__confirm-delete-btn"
               isSubmitting={this.state.isSubmitting}
               onSubmit={this.handleSubmit}

@@ -9,7 +9,8 @@ const ElementNotation = React.createClass({
   mixins: [IntlMixin],
 
   getNotationStarsClasses() {
-    const notation = this.props.element.notation;
+    const { element } = this.props;
+    const notation = element.notation;
     const classes = [];
     for (let i = 0; i < 5; i++) {
       if (i < notation) {
@@ -20,7 +21,8 @@ const ElementNotation = React.createClass({
   },
 
   render() {
-    if (this.props.element.notation !== null) {
+    const { element } = this.props;
+    if (element.notation !== null) {
       const classes = this.getNotationStarsClasses();
       return (
         <span className="element__notation">

@@ -22,6 +22,10 @@ const OpinionBodyDiffModal = React.createClass({
   },
 
   render() {
+    const {
+      link,
+      modal,
+    } = this.props;
     return (
       <span>
         <OverlayTrigger
@@ -33,19 +37,19 @@ const OpinionBodyDiffModal = React.createClass({
           }
         >
           <a onClick={() => this.open()}>
-            {this.props.link}
+            {link}
           </a>
         </OverlayTrigger>
         <Modal show={this.state.showModal} onHide={() => this.close()}>
           <Modal.Header closeButton>
-            <Modal.Title>{this.props.modal.title}</Modal.Title>
+            <Modal.Title>{modal.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <b>{this.getIntlMessage('opinion.diff.title')}</b>
             <p className="small excerpt">
               {this.getIntlMessage('opinion.diff.infos')}
             </p>
-            <div className="diff" dangerouslySetInnerHTML={{ __html: this.props.modal.diff }} />
+            <div className="diff" dangerouslySetInnerHTML={{ __html: modal.diff }} />
           </Modal.Body>
           <Modal.Footer>
             <Button bsStyle="primary" onClick={() => this.close()}>{this.getIntlMessage('global.close')}</Button>

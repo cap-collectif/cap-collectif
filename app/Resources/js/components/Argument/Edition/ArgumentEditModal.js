@@ -31,9 +31,13 @@ const ArgumentEditModal = React.createClass({
   },
 
   handleSubmitSuccess() {
-    this.props.onClose();
+    const {
+      argument,
+      onClose,
+    } = this.props;
+    onClose();
     this.setState({ isSubmitting: false });
-    ArgumentActions.load(ArgumentStore.opinion, this.props.argument.type);
+    ArgumentActions.load(ArgumentStore.opinion, argument.type);
   },
 
   render() {

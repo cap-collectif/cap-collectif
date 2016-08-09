@@ -35,19 +35,26 @@ const IdeaEditModal = React.createClass({
   },
 
   close() {
-    this.props.onToggleModal(false);
+    const { onToggleModal } = this.props;
+    onToggleModal(false);
   },
 
   show() {
-    this.props.onToggleModal(true);
+    const { onToggleModal } = this.props;
+    onToggleModal(true);
   },
 
   render() {
+    const {
+      idea,
+      show,
+      themes,
+    } = this.props;
     return (
       <div>
         <Modal
           animation={false}
-          show={this.props.show}
+          show={show}
           onHide={this.close}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
@@ -59,12 +66,12 @@ const IdeaEditModal = React.createClass({
           </Modal.Header>
           <Modal.Body>
             <IdeaEditForm
-              themes={this.props.themes}
+              themes={themes}
               isSubmitting={this.state.isSubmitting}
               onSubmitSuccess={this.handleSubmitSuccess}
               onValidationFailure={this.handleFailure}
               onSubmitFailure={this.handleFailure}
-              idea={this.props.idea}
+              idea={idea}
             />
           </Modal.Body>
           <Modal.Footer>

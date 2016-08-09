@@ -39,10 +39,15 @@ const OpinionSourceForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    const {
+      opinion,
+      source,
+      onSubmitSuccess,
+      onSubmitFailure,
+      onValidationFailure,
+    } = this.props;
     if (nextProps.isSubmitting) {
       if (this.isValid()) {
-        const { opinion, source, onSubmitSuccess, onSubmitFailure } = this.props;
-
         const tmpFixData = this.state.form;
         tmpFixData.Category = parseInt(tmpFixData.category, 10);
         delete tmpFixData.category;
@@ -66,7 +71,7 @@ const OpinionSourceForm = React.createClass({
         ;
       }
 
-      this.props.onValidationFailure();
+      onValidationFailure();
     }
   },
 

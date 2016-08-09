@@ -8,6 +8,7 @@ const OpinionLinkCreateInfos = React.createClass({
   mixins: [IntlMixin],
 
   render() {
+    const { opinion } = this.props;
     return (
       <div>
         <div className="modal-top bg-info">
@@ -18,8 +19,8 @@ const OpinionLinkCreateInfos = React.createClass({
         <p>
           { this.getIntlMessage('opinion.link.info') }
           { ' ' }
-          <a href={this.props.opinion._links.show}>
-            { this.props.opinion.title }
+          <a href={opinion._links.show}>
+            { opinion.title }
           </a>
         </p>
       </div>

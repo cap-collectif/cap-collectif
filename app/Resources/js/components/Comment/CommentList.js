@@ -12,27 +12,32 @@ const CommentList = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (this.props.comments.length === 0) {
+    const {
+      comments,
+      onVote,
+      root,
+    } = this.props;
+    if (comments.length === 0) {
       return <ul></ul>;
     }
 
     const classes = classNames({
       'media-list': true,
-      'opinion__list': true,
-      'comment-answers': !this.props.root,
+      opinion__list: true,
+      'comment-answers': !root,
     });
 
     return (
       <ul id="comments" className={classes}>
         {
-          this.props.comments.map((comment) => {
+          comments.map((comment) => {
             return (
               <Comment
                 {...this.props}
                 key={comment.id}
                 comment={comment}
-                root={this.props.root}
-                onVote={this.props.onVote}
+                root={root}
+                onVote={onVote}
               />
             );
           })

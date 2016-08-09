@@ -16,9 +16,13 @@ const CloseButton = React.createClass({
   },
 
   render() {
+    const {
+      label,
+      onClose,
+    } = this.props;
     return (
-      <Button onClick={this.props.onClose}>
-        { this.getIntlMessage(this.props.label) }
+      <Button onClick={onClose}>
+        { this.getIntlMessage(label) }
       </Button>
     );
   },

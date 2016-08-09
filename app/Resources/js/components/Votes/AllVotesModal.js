@@ -13,18 +13,24 @@ const AllVotesModal = React.createClass({
   mixins: [IntlMixin],
 
   close() {
-    this.props.onToggleModal(false);
+    const { onToggleModal } = this.props;
+    onToggleModal(false);
   },
 
   show() {
-    this.props.onToggleModal(true);
+    const { onToggleModal } = this.props;
+    onToggleModal(true);
   },
 
   render() {
+    const {
+      showModal,
+      votes,
+    } = this.props;
     return (
       <Modal
         animation={false}
-        show={this.props.showModal}
+        show={showModal}
         onHide={this.close.bind(null, this)}
         bsSize="large"
         aria-labelledby="contained-modal-title-lg"
@@ -33,14 +39,14 @@ const AllVotesModal = React.createClass({
           <Modal.Title id="contained-modal-title-lg">
             <FormattedMessage
               message={this.getIntlMessage('vote.count')}
-              count={this.props.votes.length}
+              count={votes.length}
             />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row>
             {
-              this.props.votes.map((vote, index) => {
+              votes.map((vote, index) => {
                 return <UserBox key={index} user={vote.user} username={vote.username} />;
               })
             }

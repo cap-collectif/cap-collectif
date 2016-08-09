@@ -24,38 +24,47 @@ const ElementTitle = React.createClass({
   },
 
   openOriginalContribution() {
-    window.open(this.props.element.linkedDataUrl);
+    const { element } = this.props;
+    window.open(element.linkedDataUrl);
     return false;
   },
 
   renderTitle() {
-    if (this.props.element.title) {
-      return this.props.element.title;
+    const { element } = this.props;
+    if (element.title) {
+      return element.title;
     }
-    if (this.props.element.body) {
-      return `${this.props.element.body.substr(0, 140)}...`;
+    if (element.body) {
+      return `${element.body.substr(0, 140)}...`;
     }
     return this.getIntlMessage('synthesis.common.elements.default_title');
   },
 
   render() {
-    const className = this.props.className + (this.props.onClick ? ' btn btn-link' : '');
-    if (!this.props.hasLink) {
+    const {
+      element,
+      hasLink,
+      linkType,
+      onClick,
+      style,
+    } = this.props;
+    const className = this.props.className + (onClick ? ' btn btn-link' : '');
+    if (!hasLink) {
       return (
-        <span style={this.props.style} className={className} onClick={this.props.onClick} >
+        <span style={style} className={className} onClick={onClick} >
           {this.renderTitle()}
         </span>
       );
     }
-    if (this.props.linkType === 'edition') {
+    if (linkType === 'edition') {
       return (
-        <Link style={this.props.style} to={`/element/${this.props.element.id}`} className={this.props.className}>
+        <Link style={style} to={`/element/${element.id}`} className={this.props.className}>
           {this.renderTitle()}
         </Link>
       );
     }
     return (
-      <a style={this.props.style} href={this.props.element.linkedDataUrl} className={this.props.className} onClick={this.openOriginalContribution}>
+      <a style={style} href={element.linkedDataUrl} className={this.props.className} onClick={this.openOriginalContribution}>
         {this.renderTitle()}
       </a>
     );

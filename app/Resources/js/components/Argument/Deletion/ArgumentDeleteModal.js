@@ -22,13 +22,17 @@ const ArgumentDeleteModal = React.createClass({
   },
 
   handleSubmit() {
+    const {
+      argument,
+      onClose,
+    } = this.props;
     this.setState({ isSubmitting: true });
     ArgumentActions
-      .delete(ArgumentStore.opinion, this.props.argument.id)
+      .delete(ArgumentStore.opinion, argument.id)
       .then(() => {
-        this.props.onClose();
+        onClose();
         this.setState({ isSubmitting: false });
-        ArgumentActions.load(ArgumentStore.opinion, this.props.argument.type);
+        ArgumentActions.load(ArgumentStore.opinion, argument.type);
       })
       .catch(() => {
         this.setState({ isSubmitting: false });

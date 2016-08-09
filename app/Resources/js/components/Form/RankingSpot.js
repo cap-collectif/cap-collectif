@@ -22,14 +22,19 @@ const RankingSpot = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    const { connectDropTarget, isOver, canDrop } = this.props;
+    const {
+      connectDropTarget,
+      isOver,
+      canDrop,
+      children,
+    } = this.props;
     const color = isOver && canDrop ? '#eee' : 'transparent';
     return connectDropTarget(
       <div
         className="ranking__spot"
         style={{ backgroundColor: color }}
       >
-        {this.props.children}
+        {children}
       </div>
     );
   },

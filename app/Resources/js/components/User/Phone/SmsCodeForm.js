@@ -34,6 +34,7 @@ const SmsCodeForm = React.createClass({
   },
 
   handleSubmit(e) {
+    const { onSubmitSuccess } = this.props;
     e.preventDefault();
     if (this.isValid()) {
       const form = JSON.parse(JSON.stringify(this.state.form));
@@ -42,7 +43,7 @@ const SmsCodeForm = React.createClass({
         .sendSmsCode(form)
         .then(() => {
           this.setState(this.getInitialState());
-          this.props.onSubmitSuccess();
+          onSubmitSuccess();
         })
         .catch((error) => {
           const response = error.response;

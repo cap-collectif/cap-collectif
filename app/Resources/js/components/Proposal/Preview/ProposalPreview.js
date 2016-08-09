@@ -31,8 +31,9 @@ const ProposalPreview = React.createClass({
   },
 
   getInitialState() {
+    const { proposal } = this.props;
     return {
-      userHasVote: this.props.proposal.userHasVote || false,
+      userHasVote: proposal.userHasVote || false,
     };
   },
 
@@ -43,10 +44,15 @@ const ProposalPreview = React.createClass({
   },
 
   render() {
-    const { proposal, selectionStep } = this.props;
+    const {
+      proposal,
+      selectionStep,
+      showAllVotes,
+      showThemes,
+    } = this.props;
     const voteType = selectionStep ? selectionStep.voteType : 0;
     const classes = classNames({
-      'box': true,
+      box: true,
       'bg-vip': proposal.author && proposal.author.vip,
     });
     const { userHasVote } = this.state;
@@ -59,7 +65,7 @@ const ProposalPreview = React.createClass({
             <ProposalPreviewBody
               proposal={proposal}
               showNullEstimation={voteType === VOTE_TYPE_BUDGET}
-              showThemes={this.props.showThemes}
+              showThemes={showThemes}
             />
             <div className="proposal__buttons text-center" >
               <div>
@@ -77,7 +83,7 @@ const ProposalPreview = React.createClass({
           />
           <ProposalPreviewFooter
             proposal={proposal}
-            showVotes={this.props.showAllVotes || voteType !== VOTE_TYPE_DISABLED}
+            showVotes={showAllVotes || voteType !== VOTE_TYPE_DISABLED}
             votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, userHasVote)}
             selectionStepId={selectionStep ? selectionStep.id : null}
           />

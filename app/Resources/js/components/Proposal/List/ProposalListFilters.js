@@ -44,7 +44,8 @@ export const ProposalListFilters = React.createClass({
   },
 
   componentDidMount() {
-    if (this.props.orderByVotes) {
+    const { orderByVotes } = this.props;
+    if (orderByVotes) {
       const orders = this.state.displayedOrders;
       orders.push('votes');
       this.setState({ displayedOrders: orders }); // eslint-disable-line react/no-did-mount-set-state
@@ -57,9 +58,10 @@ export const ProposalListFilters = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
+    const { onChange } = this.props;
     if (prevState && (prevState.order !== this.state.order || prevState.filters !== this.state.filters)) {
       this.reload();
-      this.props.onChange();
+      onChange();
     }
   },
 
@@ -75,14 +77,19 @@ export const ProposalListFilters = React.createClass({
   },
 
   updateDisplayedFilters() {
+    const {
+      categories,
+      features,
+      showThemes,
+    } = this.props;
     const filters = ['statuses', 'types'];
-    if (this.props.features.districts) {
+    if (features.districts) {
       filters.push('districts');
     }
-    if (this.props.features.themes && this.props.showThemes) {
+    if (features.themes && showThemes) {
       filters.push('themes');
     }
-    if (this.props.categories.length > 0) {
+    if (categories.length > 0) {
       filters.push('categories');
     }
     this.setState({ displayedFilters: filters });
@@ -100,10 +107,18 @@ export const ProposalListFilters = React.createClass({
   },
 
   reload() {
-    ProposalActions.load(this.props.fetchFrom, this.props.id);
+    const {
+      fetchFrom,
+      id,
+    } = this.props;
+    ProposalActions.load(fetchFrom, id);
   },
 
   render() {
+    const {
+      fetchFrom,
+      id,
+    } = this.props;
     return (
     <div>
       <Row>
@@ -126,7 +141,7 @@ export const ProposalListFilters = React.createClass({
           </Input>
         </Col>
         <Col xs={12} md={6}>
-          <ProposalListSearch fetchFrom={this.props.fetchFrom} id={this.props.id} />
+          <ProposalListSearch fetchFrom={fetchFrom} id={id} />
         </Col>
       </Row>
       <Row>

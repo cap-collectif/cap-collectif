@@ -27,10 +27,14 @@ const UpdateButton = React.createClass({
   },
 
   render() {
+    const {
+      element,
+      synthesis,
+    } = this.props;
     return (
       <div className="element__action">
         <Button bsSize="large" type="button" className="element__action-publish" onClick={this.showUpdateModal.bind(null, this)}><i className="cap cap-pencil-1"></i></Button>
-        <UpdateModal synthesis={this.props.synthesis} element={this.props.element} show={this.state.showUpdateModal} toggle={this.toggleUpdateModal} />
+        <UpdateModal synthesis={synthesis} element={element} show={this.state.showUpdateModal} toggle={this.toggleUpdateModal} />
       </div>
     );
   },

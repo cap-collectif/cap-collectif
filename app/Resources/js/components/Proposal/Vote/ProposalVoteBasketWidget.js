@@ -25,9 +25,10 @@ const ProposalVoteBasketWidget = React.createClass({
   },
 
   getInitialState() {
+    const { votableSteps } = this.props;
     return {
-      selectedStepId: this.props.votableSteps[0].id,
-      votableSteps: this.props.votableSteps,
+      selectedStepId: votableSteps[0].id,
+      votableSteps: votableSteps,
     };
   },
 
@@ -36,7 +37,8 @@ const ProposalVoteBasketWidget = React.createClass({
   },
 
   componentDidMount() {
-    ProposalActions.initVotableSteps(this.props.votableSteps);
+    const { votableSteps } = this.props;
+    ProposalActions.initVotableSteps(votableSteps);
   },
 
   componentWillUnmount() {
@@ -44,16 +46,21 @@ const ProposalVoteBasketWidget = React.createClass({
   },
 
   onChange() {
+    const { projectId } = this.props;
     if (ProposalVoteStore.isVotableStepsSync) {
       this.setState({
         votableSteps: ProposalVoteStore.votableSteps,
       });
       return;
     }
-    ProposalActions.loadVotableSteps(this.props.projectId);
+    ProposalActions.loadVotableSteps(projectId);
   },
 
   render() {
+    const {
+      image,
+      votesPageUrl,
+    } = this.props;
     const selectedStep = ArrayHelper.getElementFromArray(
       this.state.votableSteps,
       parseInt(this.state.selectedStepId, 10)
@@ -68,10 +75,10 @@ const ProposalVoteBasketWidget = React.createClass({
     return (
       <Navbar fixedTop className="proposal-vote__widget">
         {
-          this.props.image
+          image
           ? <Navbar.Header>
             <Navbar.Brand>
-              <img className="widget__image" src={this.props.image.url} />
+              <img className="widget__image" src={image.url} />
             </Navbar.Brand>
             <Navbar.Toggle>
               <i
@@ -179,7 +186,7 @@ const ProposalVoteBasketWidget = React.createClass({
           <Button
             bsStyle="default"
             className="widget__button navbar-btn pull-right"
-            href={this.props.votesPageUrl}
+            href={votesPageUrl}
           >
             {this.getIntlMessage('proposal.details') }
           </Button>

@@ -18,7 +18,10 @@ const ProjectPreviewProgressBarItem = React.createClass({
   },
 
   render() {
-    const { step } = this.props;
+    const {
+      step,
+      style,
+    } = this.props;
     const position = step.position;
     const classes = classNames({
       'thumbnail__steps-bar__item': true,
@@ -47,7 +50,7 @@ const ProjectPreviewProgressBarItem = React.createClass({
       placement="top"
       overlay={popover}
     >
-      <span className={classes} style={this.props.style} />
+      <span className={classes} style={style} />
     </OverlayTrigger>
     );
   },

@@ -25,20 +25,28 @@ const ElementListItem = React.createClass({
   },
 
   render() {
+    const {
+      element,
+      hasLink,
+      linkType,
+      showBreadcrumb,
+      showNotation,
+      showStatus,
+    } = this.props;
     const classes = classNames({
       'synthesis__list-item': true,
-      'box': true,
-      'archived': this.props.element.archived,
+      box: true,
+      archived: element.archived,
     });
     return (
       <li className={classes}>
         <ElementBlock
-          element={this.props.element}
-          showBreadcrumb={this.props.showBreadcrumb}
-          showStatus={this.props.showStatus}
-          showNotation={this.props.showNotation}
-          hasLink={this.props.hasLink}
-          linkType={this.props.linkType}
+          element={element}
+          showBreadcrumb={showBreadcrumb}
+          showStatus={showStatus}
+          showNotation={showNotation}
+          hasLink={hasLink}
+          linkType={linkType}
         />
       </li>
     );

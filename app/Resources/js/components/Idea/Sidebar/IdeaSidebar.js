@@ -13,13 +13,17 @@ const IdeaSidebar = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    const { idea } = this.props;
+    const {
+      idea,
+      expanded,
+      onToggleExpand,
+    } = this.props;
     if (!idea.canContribute) {
       return null;
     }
     const wrapperClassName = classNames({
       'sidebar-hideable': true,
-      'sidebar-hidden-small': !this.props.expanded,
+      'sidebar-hidden-small': !expanded,
     });
 
     return (
@@ -34,13 +38,13 @@ const IdeaSidebar = React.createClass({
         <Button
           block
           className="sidebar-toggle sidebar-hideable sidebar-hidden-large btn--no-radius"
-          bsStyle={idea.userHasVote || this.props.expanded ? 'danger' : 'success'}
+          bsStyle={idea.userHasVote || expanded ? 'danger' : 'success'}
           bsSize="large"
-          onClick={this.props.onToggleExpand}
+          onClick={onToggleExpand}
         >
           {
             this.getIntlMessage(
-              this.props.expanded
+              expanded
                 ? 'idea.vote.hide'
                 : idea.userHasVote
                   ? 'idea.vote.delete'

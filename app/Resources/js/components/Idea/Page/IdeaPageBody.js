@@ -19,12 +19,16 @@ const IdeaPageBody = React.createClass({
   },
 
   render() {
-    const { idea, themes } = this.props;
+    const {
+      idea,
+      themes,
+      className,
+    } = this.props;
 
     const classes = {
-      'idea__body': true,
+      idea__body: true,
     };
-    classes[this.props.className] = true;
+    classes[className] = true;
 
     return (
       <div className={classNames(classes)}>

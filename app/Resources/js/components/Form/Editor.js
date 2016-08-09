@@ -26,10 +26,17 @@ const Editor = React.createClass({
   },
 
   componentDidMount() {
-    if (!this.props.disabled) {
+    const {
+      disabled,
+      onBlur,
+      onChange,
+      value,
+      valueLink,
+    } = this.props;
+    if (!disabled) {
       this._editor = new Quill(ReactDOM.findDOMNode(this.refs.editor), {
         modules: {
-          'toolbar': {
+          toolbar: {
             container: ReactDOM.findDOMNode(this.refs.toolbar),
           },
           'image-tooltip': {
@@ -57,27 +64,27 @@ const Editor = React.createClass({
       });
       this._editor.getModule('keyboard').removeHotkeys(9);
 
-      if (this.props.valueLink) {
+      if (valueLink) {
         console.warn('This is deprecated please use redux-form instead of valueLink.'); // eslint-disable-line no-console
-        const defaultValue = this.props.valueLink.value;
+        const defaultValue = valueLink.value;
         if (defaultValue) {
           this._editor.setHTML(defaultValue);
         }
         this._editor.on('text-change', () => {
-          this.props.valueLink.requestChange(this._editor.getHTML());
+          valueLink.requestChange(this._editor.getHTML());
         });
       } else {
-        const defaultValue = this.props.value;
+        const defaultValue = value;
         if (defaultValue) {
           this._editor.setHTML(defaultValue);
         }
         this._editor.on('selection-change', (range) => {
           if (!range) {
-            this.props.onBlur(this._editor.getHTML());
+            onBlur(this._editor.getHTML());
           }
         });
         this._editor.on('text-change', () => {
-          this.props.onChange(this._editor.getHTML());
+          onChange(this._editor.getHTML());
         });
       }
     }
@@ -90,15 +97,20 @@ const Editor = React.createClass({
   },
 
   render() {
+    const {
+      className,
+      disabled,
+      id,
+    } = this.props;
     const classes = {
-      'editor': !this.props.disabled,
-      'form-control': this.props.disabled,
-      [this.props.className]: true,
+      editor: !disabled,
+      'form-control': disabled,
+      [className]: true,
     };
-    if (this.props.disabled) {
+    if (disabled) {
       return (
         <textarea
-          id={this.props.id}
+          id={id}
           className={classNames(classes)}
           disabled
         >
@@ -106,7 +118,7 @@ const Editor = React.createClass({
       );
     }
     return (
-      <div id={this.props.id} className={classNames(classes)}>
+      <div id={id} className={classNames(classes)}>
         <QuillToolbar ref="toolbar" />
         <div ref="editor" style={{ position: 'static' }} />
       </div>

@@ -9,11 +9,20 @@ export default class Pagination extends React.Component {
   }
 
   onSelect(newPage) {
-    this.props.onChange(newPage);
+    const { onChange } = this.props;
+    onChange(newPage);
   }
 
   render() {
-    const { current, displayedPages, nbPages } = this.props;
+    const {
+      current,
+      displayedPages,
+      nbPages,
+      showFirst,
+      showLast,
+      showNext,
+      showPrev,
+    } = this.props;
     const offset = Math.floor(displayedPages / 2);
     let firstNumber = current - offset;
     const lastNumber = firstNumber + displayedPages - 1;
@@ -31,7 +40,7 @@ export default class Pagination extends React.Component {
       <div className="pagination--custom  text-center">
         <ul className="pagination">
           {
-            this.props.showFirst
+            showFirst
             ? <PaginationItem
                 id="first-page-item"
                 page={1}
@@ -44,7 +53,7 @@ export default class Pagination extends React.Component {
             : null
           }
           {
-            this.props.showPrev
+            showPrev
               ? <PaginationItem
                   id="prev-page-item"
                   page={prev}
@@ -72,7 +81,7 @@ export default class Pagination extends React.Component {
             })
           }
           {
-            this.props.showNext
+            showNext
               ? <PaginationItem
                   id="next-page-item"
                   page={next}
@@ -85,7 +94,7 @@ export default class Pagination extends React.Component {
               : null
           }
           {
-            this.props.showLast
+            showLast
               ? <PaginationItem
                   id="last-page-item"
                   page={nbPages}

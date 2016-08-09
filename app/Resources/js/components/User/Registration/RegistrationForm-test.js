@@ -22,8 +22,8 @@ describe('<RegistrationForm />', () => {
       'signin.cgu.link': '/charte',
     },
     features: {
-      'user_type': false,
-      'zipcode_at_register': false,
+      user_type: false,
+      zipcode_at_register: false,
     },
   };
 

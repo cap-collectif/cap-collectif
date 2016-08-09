@@ -38,9 +38,10 @@ const IdeaCreate = React.createClass({
   },
 
   handleSubmitSuccess() {
+    const { themeId } = this.props;
     this.close();
     this.setState({ isSubmitting: false });
-    if (this.props.themeId !== -1) {
+    if (themeId !== -1) {
       location.reload();
     }
     IdeaActions.load();
@@ -55,8 +56,13 @@ const IdeaCreate = React.createClass({
   },
 
   render() {
+    const {
+      className,
+      themeId,
+      themes,
+    } = this.props;
     return (
-      <div className={this.props.className}>
+      <div className={className}>
         <IdeaCreateButton
           handleClick={this.show}
         />
@@ -74,8 +80,8 @@ const IdeaCreate = React.createClass({
           </Modal.Header>
           <Modal.Body>
             <IdeaCreateForm
-              themes={this.props.themes}
-              themeId={this.props.themeId}
+              themes={themes}
+              themeId={themeId}
               isSubmitting={this.state.isSubmitting}
               onSubmitSuccess={this.handleSubmitSuccess}
               onValidationFailure={this.handleFailure}

@@ -28,8 +28,9 @@ const DivideModal = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
+    const { element } = this.props;
     return {
-      newElements: this.props.element.division ? this.props.element.division.elements : [],
+      newElements: element.division ? element.division.elements : [],
       currentElement: null,
       showPublishModal: false,
       selectedText: null,
@@ -56,11 +57,13 @@ const DivideModal = React.createClass({
     return null;
   },
   show() {
-    this.props.toggle(true);
+    const { toggle } = this.props;
+    toggle(true);
   },
 
   hide() {
-    this.props.toggle(false);
+    const { toggle } = this.props;
+    toggle(false);
   },
 
   togglePublishModal(value, element = null) {
@@ -78,14 +81,15 @@ const DivideModal = React.createClass({
   },
 
   createFromSelection() {
+    const { element } = this.props;
     const body = this.state.selectedText;
     if (body && body !== '') {
       const newElement = {
-        'title': null,
+        title: null,
         body,
-        'archived': false,
-        'published': false,
-        'parent': this.props.element.parent,
+        archived: false,
+        published: false,
+        parent: element.parent,
       };
       this.addElement(newElement);
       this.togglePublishModal(true, newElement);
@@ -115,16 +119,20 @@ const DivideModal = React.createClass({
   },
 
   divide() {
+    const {
+      element,
+      synthesis,
+    } = this.props;
     this.hide();
     const data = {
-      'archived': true,
-      'published': false,
-      'division': {
-        'elements': this.state.newElements,
+      archived: true,
+      published: false,
+      division: {
+        elements: this.state.newElements,
       },
     };
-    SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
-    hashHistory.push('inbox', { 'type': 'new' });
+    SynthesisElementActions.update(synthesis.id, element.id, data);
+    hashHistory.push('inbox', { type: 'new' });
   },
 
 
@@ -211,11 +219,12 @@ const DivideModal = React.createClass({
   },
 
   renderPublishModal() {
+    const { synthesis } = this.props;
     const element = this.state.currentElement;
     if (element) {
       return (
         <PublishModal
-          synthesis={this.props.synthesis}
+          synthesis={synthesis}
           element={element}
           show={this.state.showPublishModal}
           toggle={this.togglePublishModal}
@@ -226,13 +235,14 @@ const DivideModal = React.createClass({
   },
 
   render() {
+    const { show } = this.props;
     const modalClasses = classNames({
       'modal--divide': true,
-      'hidden': this.state.showPublishModal,
+      hidden: this.state.showPublishModal,
     });
     return (
       <div>
-        <Modal bsSize="large" show={this.props.show} onHide={this.hide} animation={false} dialogClassName={modalClasses}>
+        <Modal bsSize="large" show={show} onHide={this.hide} animation={false} dialogClassName={modalClasses}>
           <Modal.Header closeButton>
             <Modal.Title>{this.getIntlMessage('synthesis.edition.action.divide.title')}</Modal.Title>
           </Modal.Header>

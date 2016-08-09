@@ -35,34 +35,41 @@ const OpinionDelete = React.createClass({
   },
 
   isVersion() {
-    return !!this.props.opinion.parent;
+    const { opinion } = this.props;
+    return !!opinion.parent;
   },
 
   delete() {
+    const { opinion } = this.props;
     this.setState({ isSubmitting: true });
     if (this.isVersion()) {
-      OpinionActions.deleteVersion(this.props.opinion.id, this.props.opinion.parent.id)
+      OpinionActions.deleteVersion(opinion.id, opinion.parent.id)
         .then(() => {
-          window.location.href = this.props.opinion._links.parent;
+          window.location.href = opinion._links.parent;
         })
       ;
     } else {
-      OpinionActions.deleteOpinion(this.props.opinion.id)
+      OpinionActions.deleteOpinion(opinion.id)
         .then(() => {
-          window.location.href = this.props.opinion._links.type;
+          window.location.href = opinion._links.type;
         })
       ;
     }
   },
 
   isTheUserTheAuthor() {
-    if (this.props.opinion.author === null || !this.props.user) {
+    const {
+      opinion,
+      user,
+    } = this.props;
+    if (opinion.author === null || !user) {
       return false;
     }
-    return this.props.user.uniqueId === this.props.opinion.author.uniqueId;
+    return user.uniqueId === opinion.author.uniqueId;
   },
 
   render() {
+    const { opinion } = this.props;
     if (this.isTheUserTheAuthor()) {
       const { showModal, isSubmitting } = this.state;
       return (
@@ -91,7 +98,7 @@ const OpinionDelete = React.createClass({
               <p>
                 <FormattedMessage
                   message={this.getIntlMessage('opinion.delete.confirm')}
-                  title={this.props.opinion.title}
+                  title={opinion.title}
                 />
               </p>
             </Modal.Body>

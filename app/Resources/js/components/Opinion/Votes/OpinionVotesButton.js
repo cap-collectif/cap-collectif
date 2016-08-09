@@ -26,11 +26,16 @@ export const OpinionVotesButton = React.createClass({
   },
 
   isVersion() {
-    return !!this.props.opinion.parent;
+    const { opinion } = this.props;
+    return !!opinion.parent;
   },
 
   isCurrentVote() {
-    return this.props.value === this.props.opinion.user_vote;
+    const {
+      opinion,
+      value,
+    } = this.props;
+    return value === opinion.user_vote;
   },
 
   vote() {
@@ -52,20 +57,27 @@ export const OpinionVotesButton = React.createClass({
   },
 
   voteAction() {
-    if (!this.props.user || this.props.disabled) {
+    const {
+      disabled,
+      user,
+    } = this.props;
+    if (!user || disabled) {
       return null;
     }
     return this.isCurrentVote() ? this.deleteVote() : this.vote();
   },
 
   voteIsEnabled() {
-    const { opinion } = this.props;
+    const {
+      opinion,
+      value,
+    } = this.props;
     const voteType = this.isVersion() ? opinion.parent.type.voteWidgetType : opinion.type.voteWidgetType;
     if (voteType === VOTE_WIDGET_BOTH) {
       return true;
     }
     if (voteType === VOTE_WIDGET_SIMPLE) {
-      return this.props.value === 1;
+      return value === 1;
     }
     return false;
   },
@@ -76,12 +88,12 @@ export const OpinionVotesButton = React.createClass({
       str: 'nok',
       icon: 'cap cap-hand-unlike-2-1',
     },
-    '0': {
+    0: {
       style: 'warning',
       str: 'mitige',
       icon: 'cap cap-hand-like-2 icon-rotate',
     },
-    '1': {
+    1: {
       style: 'success',
       str: 'ok',
       icon: 'cap cap-hand-like-2-1',
@@ -92,18 +104,24 @@ export const OpinionVotesButton = React.createClass({
     if (!this.voteIsEnabled()) {
       return null;
     }
-    const data = this.data[this.props.value];
-    const { user, features } = this.props;
+    const {
+      user,
+      features,
+      disabled,
+      style,
+      value,
+    } = this.props;
+    const data = this.data[value];
     return (
       <LoginOverlay user={user} features={features}>
         <Button
-          style={this.props.style}
+          style={style}
           bsStyle={data.style}
           className="btn--outline"
           onClick={this.voteAction}
           active={this.isCurrentVote()}
           aria-label={this.isCurrentVote() ? this.getIntlMessage(`vote.aria_label_active.${data.str}`) : this.getIntlMessage(`vote.aria_label.${data.str}`)}
-          disabled={this.props.disabled}
+          disabled={disabled}
         >
           <i className={data.icon}></i>
           { ` ${this.getIntlMessage(`vote.${data.str}`)}` }

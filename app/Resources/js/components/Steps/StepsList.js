@@ -17,15 +17,20 @@ const StepsList = React.createClass({
   },
 
   render() {
-    if (this.props.steps.length === 0) {
+    const {
+      steps,
+      style,
+      votes,
+    } = this.props;
+    if (steps.length === 0) {
       return null;
     }
     return (
-      <div className="navbar--sub" style={this.props.style}>
+      <div className="navbar--sub" style={style}>
         <ul className="nav">
           {
-            this.props.steps.map((step) => {
-              return <StepPreview key={step.id} step={step} votes={this.props.votes[step.id]} />;
+            steps.map((step) => {
+              return <StepPreview key={step.id} step={step} votes={votes[step.id]} />;
             })
           }
         </ul>

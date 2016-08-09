@@ -17,15 +17,19 @@ const IdeaPageComments = React.createClass({
   },
 
   render() {
+    const {
+      className,
+      id,
+    } = this.props;
     const classes = {
-      'idea__comments': true,
-      [this.props.className]: true,
+      idea__comments: true,
+      [className]: true,
     };
     return (
       <div className={classNames(classes)}>
         <CommentSection
           uri="ideas"
-          object={this.props.id}
+          object={id}
         />
       </div>
     );

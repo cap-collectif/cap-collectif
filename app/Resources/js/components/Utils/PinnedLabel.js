@@ -9,7 +9,8 @@ const PinnedLabel = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (this.props.show) {
+    const { show } = this.props;
+    if (show) {
       return (
       <OverlayTrigger
         placement="top"

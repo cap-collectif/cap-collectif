@@ -20,11 +20,12 @@ const IdeaDeleteModal = React.createClass({
   },
 
   handleSubmit() {
+    const { idea } = this.props;
     this.setState({ isSubmitting: true });
     IdeaActions
-      .delete(this.props.idea.id)
+      .delete(idea.id)
       .then(() => {
-        window.location.href = this.props.idea._links.index;
+        window.location.href = idea._links.index;
       })
       .catch(() => {
         this.setState({ isSubmitting: false });
@@ -33,19 +34,25 @@ const IdeaDeleteModal = React.createClass({
   },
 
   close() {
-    this.props.onToggleModal(false);
+    const { onToggleModal } = this.props;
+    onToggleModal(false);
   },
 
   show() {
-    this.props.onToggleModal(true);
+    const { onToggleModal } = this.props;
+    onToggleModal(true);
   },
 
   render() {
+    const {
+      idea,
+      show,
+    } = this.props;
     return (
       <div>
         <Modal
           animation={false}
-          show={this.props.show}
+          show={show}
           onHide={this.close}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
@@ -59,7 +66,7 @@ const IdeaDeleteModal = React.createClass({
             <p>
               <FormattedMessage
                 message={this.getIntlMessage('idea.delete.confirm')}
-                title={this.props.idea.title}
+                title={idea.title}
               />
             </p>
           </Modal.Body>

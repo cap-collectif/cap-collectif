@@ -10,10 +10,14 @@ const FacebookLoginButton = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    if (!this.props.features.login_facebook) {
+    const {
+      features,
+      prefix,
+    } = this.props;
+    if (!features.login_facebook) {
       return null;
     }
-    const label = `${this.props.prefix}facebook`;
+    const label = `${prefix}facebook`;
     return (
       <a
        href={`/login/facebook?_destination=${window.location.href}`}

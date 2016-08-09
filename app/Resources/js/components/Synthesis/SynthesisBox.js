@@ -39,7 +39,8 @@ const SynthesisBox = React.createClass({
   },
 
   componentDidMount() {
-    SynthesisActions.load(this.props.synthesis_id);
+    const { synthesis_id } = this.props;
+    SynthesisActions.load(synthesis_id);
   },
 
   componentWillUnmount() {
@@ -64,15 +65,20 @@ const SynthesisBox = React.createClass({
   },
 
   renderBoxMode() {
+    const {
+      children,
+      mode,
+      sideMenu,
+    } = this.props;
     if (this.state.synthesis !== null) {
-      if (this.props.mode === 'view') {
+      if (mode === 'view') {
         return (
           <ViewBox synthesis={this.state.synthesis} />
         );
       }
-      if (this.props.mode === 'edit') {
+      if (mode === 'edit') {
         return (
-          <EditBox synthesis={this.state.synthesis} children={this.props.children} sideMenu={this.props.sideMenu} />
+          <EditBox synthesis={this.state.synthesis} children={children} sideMenu={sideMenu} />
         );
       }
       return (

@@ -11,32 +11,32 @@ class SynthesisElementStore extends BaseStore {
     this._element = null;
     this._currentId = null;
     this._elements = {
-      'new': [],
-      'archived': [],
-      'published': [],
-      'unpublished': [],
-      'all': [],
-      'publishedTree': [],
-      'notIgnoredTree': [],
-      'fromDivision': [],
-      'search': [],
+      new: [],
+      archived: [],
+      published: [],
+      unpublished: [],
+      all: [],
+      publishedTree: [],
+      notIgnoredTree: [],
+      fromDivision: [],
+      search: [],
     };
     this._counts = {
-      'new': 0,
-      'archived': 0,
-      'published': 0,
-      'unpublished': 0,
-      'all': 0,
-      'publishedTree': 0,
-      'notIgnoredTree': 0,
-      'fromDivision': 0,
-      'search': 0,
+      new: 0,
+      archived: 0,
+      published: 0,
+      unpublished: 0,
+      all: 0,
+      publishedTree: 0,
+      notIgnoredTree: 0,
+      fromDivision: 0,
+      search: 0,
     };
     this._expandedItems = {
-      'nav': {
+      nav: {
         root: true,
       },
-      'view': {
+      view: {
         root: true,
       },
     };
@@ -291,7 +291,7 @@ class SynthesisElementStore extends BaseStore {
       const title = splitted.slice(0, splitted.length - 5).join('-');
       const id = splitted.slice(splitted.length - 5, splitted.length).join('-');
       const item = {
-        'title': title || null,
+        title: title || null,
         id,
       };
       items.push(item);

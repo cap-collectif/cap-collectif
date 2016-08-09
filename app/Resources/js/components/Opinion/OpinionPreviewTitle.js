@@ -12,19 +12,24 @@ export default class OpinionPreviewTitle extends React.Component {
   }
 
   render() {
+    const {
+      link,
+      opinion,
+      showTypeLabel,
+    } = this.props;
     return (
       <h3 className="opinion__title">
-        {this.props.showTypeLabel
+        {showTypeLabel
           ? <OpinionTypeLabel type={this.getType()} />
           : null
         }
-        {this.props.showTypeLabel
+        {showTypeLabel
           ? ' '
           : null
         }
-        {this.props.link
-          ? <a href={this.props.opinion._links.show}>{ this.props.opinion.title }</a>
-          : this.props.opinion.title
+        {link
+          ? <a href={opinion._links.show}>{ opinion.title }</a>
+          : opinion.title
         }
       </h3>
     );

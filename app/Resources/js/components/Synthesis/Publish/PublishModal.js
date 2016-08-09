@@ -49,8 +49,9 @@ const PublishModal = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    const { element } = this.props;
     if (nextProps.element) {
-      if (!this.props.element || this.props.element.id !== nextProps.element.id) {
+      if (!element || element.id !== nextProps.element.id) {
         this.setState({
           notation: nextProps.element.notation,
           parent: nextProps.element.parent,
@@ -103,25 +104,31 @@ const PublishModal = React.createClass({
   },
 
   hide() {
-    this.props.toggle(false);
+    const { toggle } = this.props;
+    toggle(false);
   },
 
   show() {
-    this.props.toggle(true);
+    const { toggle } = this.props;
+    toggle(true);
   },
 
   publish() {
+    const {
+      process,
+      synthesis,
+    } = this.props;
     this.hide();
     const data = {
-      'archived': true,
-      'published': true,
-      'notation': this.state.notation ? this.state.notation : 0,
-      'parent': this.state.parent,
-      'comment': this.state.comment,
-      'description': this.state.description,
-      'title': this.state.title,
+      archived: true,
+      published: true,
+      notation: this.state.notation ? this.state.notation : 0,
+      parent: this.state.parent,
+      comment: this.state.comment,
+      description: this.state.description,
+      title: this.state.title,
     };
-    if (typeof this.props.process === 'function') {
+    if (typeof process === 'function') {
       const element = this.props.element;
       element.archived = data.archived;
       element.published = data.published;
@@ -130,11 +137,11 @@ const PublishModal = React.createClass({
       element.comment = data.comment;
       element.description = data.description;
       element.title = data.title;
-      this.props.process(element);
+      process(element);
       return;
     }
-    SynthesisElementActions.update(this.props.synthesis.id, this.props.element.id, data);
-    hashHistory.push('inbox', { 'type': 'new' });
+    SynthesisElementActions.update(synthesis.id, this.props.element.id, data);
+    hashHistory.push('inbox', { type: 'new' });
   },
 
   expandItem(element) {
@@ -155,8 +162,9 @@ const PublishModal = React.createClass({
   },
 
   loadElementsTreeFromServer() {
+    const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(
-      this.props.synthesis.id,
+      synthesis.id,
       'notIgnored'
     );
   },
@@ -184,17 +192,21 @@ const PublishModal = React.createClass({
   },
 
   renderParentFinder() {
+    const {
+      element,
+      synthesis,
+    } = this.props;
     const parentId = this.state.parent ? this.state.parent.id : 'root';
     return (
       <ElementsFinder
-        synthesis={this.props.synthesis}
+        synthesis={synthesis}
         type="notIgnored"
         elements={this.state.elements}
         expanded={this.state.expanded}
         selectedId={parentId}
         onSelect={this.setParent}
         onExpand={this.expandItem}
-        hiddenElementId={this.props.element.id}
+        hiddenElementId={element.id}
       />
     );
   },
@@ -241,8 +253,9 @@ const PublishModal = React.createClass({
   },
 
   render() {
+    const { show } = this.props;
     return (
-      <Modal show={this.props.show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
+      <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
         <Modal.Header closeButton>
           <Modal.Title>{this.getIntlMessage('synthesis.edition.action.publish.title')}</Modal.Title>
         </Modal.Header>

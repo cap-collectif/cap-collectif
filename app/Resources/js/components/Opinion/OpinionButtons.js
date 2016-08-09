@@ -23,21 +23,28 @@ const OpinionButtons = React.createClass({
   },
 
   isVersion() {
-    return !!this.props.opinion.parent;
+    const { opinion } = this.props;
+    return !!opinion.parent;
   },
 
   isContribuable() {
-    return this.isVersion() ? this.props.opinion.parent.isContribuable : this.props.opinion.isContribuable;
+    const { opinion } = this.props;
+    return this.isVersion() ? opinion.parent.isContribuable : opinion.isContribuable;
   },
 
   isTheUserTheAuthor() {
-    if (this.props.opinion.author === null || !this.props.user) {
+    const {
+      opinion,
+      user,
+    } = this.props;
+    if (opinion.author === null || !user) {
       return false;
     }
-    return this.props.user.uniqueId === this.props.opinion.author.uniqueId;
+    return user.uniqueId === opinion.author.uniqueId;
   },
 
   renderEditButton() {
+    const { opinion } = this.props;
     if (this.isContribuable() && this.isTheUserTheAuthor()) {
       if (this.isVersion()) {
         return (
@@ -45,8 +52,8 @@ const OpinionButtons = React.createClass({
             className="pull-right"
             style={{ marginLeft: '5px' }}
             mode="edit"
-            opinionId={this.props.opinion.parent.id}
-            version={this.props.opinion}
+            opinionId={opinion.parent.id}
+            version={opinion}
             isContribuable
           />
         );
@@ -54,7 +61,7 @@ const OpinionButtons = React.createClass({
       return (
         <OpinionEditButton
             className="opinion__action--edit pull-right btn--outline btn-dark-gray"
-            opinion={this.props.opinion}
+            opinion={opinion}
         />
       );
     }

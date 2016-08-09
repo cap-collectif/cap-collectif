@@ -50,11 +50,16 @@ export const IdeaVoteBox = React.createClass({
   },
 
   reloadVotes() {
-    IdeaActions.loadVotes(this.props.idea.id);
+    const { idea } = this.props;
+    IdeaActions.loadVotes(idea.id);
   },
 
   userHasVote() {
-    return this.props.user && this.props.idea.userHasVote;
+    const {
+      idea,
+      user,
+    } = this.props;
+    return user && idea.userHasVote;
   },
 
   render() {

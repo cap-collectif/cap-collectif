@@ -17,10 +17,14 @@ const ViewBox = React.createClass({
   },
 
   render() {
-    if (this.props.synthesis.enabled || (this.props.user && this.props.user.vip)) {
+    const {
+      synthesis,
+      user,
+    } = this.props;
+    if (synthesis.enabled || (user && user.vip)) {
       return (
         <div className="synthesis__view">
-          <ViewTree synthesis={this.props.synthesis} />
+          <ViewTree synthesis={synthesis} />
         </div>
       );
     }

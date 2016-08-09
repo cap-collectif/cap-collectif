@@ -24,16 +24,20 @@ const LoginForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    const {
+      onSubmitFailure,
+      onSubmitSuccess,
+    } = this.props;
     if (nextProps.isSubmitting) {
       UserActions
         .login(this.state.form)
         .then(() => {
           this.setState(this.getInitialState());
-          this.props.onSubmitSuccess();
+          onSubmitSuccess();
         })
         .catch(() => {
           this.setState({ hasError: true });
-          this.props.onSubmitFailure();
+          onSubmitFailure();
         });
     }
   },

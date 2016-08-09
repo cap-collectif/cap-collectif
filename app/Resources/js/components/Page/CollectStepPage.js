@@ -26,9 +26,10 @@ const CollectStepPage = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
+    const { count } = this.props;
     return {
       proposals: ProposalStore.proposals,
-      proposalsCount: this.props.count,
+      proposalsCount: count,
       currentPage: ProposalStore.currentPage,
       isLoading: true,
       randomOrder: ProposalStore.order === 'random',
@@ -69,10 +70,11 @@ const CollectStepPage = React.createClass({
   },
 
   loadProposals() {
+    const { form } = this.props;
     this.setState({
       isLoading: true,
     });
-    ProposalActions.load('form', this.props.form.id);
+    ProposalActions.load('form', form.id);
   },
 
   handleFilterOrOrderChange() {
@@ -85,33 +87,42 @@ const CollectStepPage = React.createClass({
   },
 
   render() {
+    const {
+      categories,
+      districts,
+      form,
+      statuses,
+      step,
+      themes,
+      types,
+    } = this.props;
     const nbPages = Math.ceil(this.state.proposalsCount / PROPOSAL_PAGINATION);
     const showPagination = nbPages > 1 && !this.state.randomOrder;
     const showRandomButton = nbPages > 1 && this.state.randomOrder;
     return (
       <div>
-        <StepPageHeader step={this.props.step} />
+        <StepPageHeader step={step} />
         <CollectStepPageHeader
           count={this.state.proposalsCount}
-          form={this.props.form}
-          themes={this.props.themes}
-          districts={this.props.districts}
-          categories={this.props.categories}
+          form={form}
+          themes={themes}
+          districts={districts}
+          categories={categories}
         />
         <ProposalListFilters
-          id={this.props.form.id}
-          themes={this.props.themes}
-          districts={this.props.districts}
-          types={this.props.types}
-          statuses={this.props.statuses}
-          categories={this.props.categories}
+          id={form.id}
+          themes={themes}
+          districts={districts}
+          types={types}
+          statuses={statuses}
+          categories={categories}
           onChange={() => this.handleFilterOrOrderChange()}
-          showThemes={this.props.form.usingThemes}
+          showThemes={form.usingThemes}
         />
         <br />
         <Loader show={this.state.isLoading}>
           <div>
-            <ProposalList proposals={this.state.proposals} showThemes={this.props.form.usingThemes} />
+            <ProposalList proposals={this.state.proposals} showThemes={form.usingThemes} />
             {
               showPagination
               ? <Pagination
