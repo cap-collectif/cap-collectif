@@ -47,7 +47,6 @@ const IdeaEditModal = React.createClass({
     const {
       idea,
       show,
-      themes,
     } = this.props;
     return (
       <div>

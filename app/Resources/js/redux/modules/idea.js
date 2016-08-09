@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 export const VOTES_FETCH_REQUESTED = 'idea/VOTES_FETCH_REQUESTED';
 export const VOTES_FETCH_SUCCEEDED = 'idea/VOTES_FETCH_SUCCEEDED';
+export const VOTES_FETCH_FAILED = 'idea/VOTES_FETCH_FAILED';
 
 const initialState = {
   currentIdeaById: null,
@@ -20,7 +21,7 @@ export const fetchIdeaVotes = (idea) => {
   };
 };
 
-function* fetchAllVotes(action) {
+export function* fetchAllVotes(action) {
   try {
     let hasMore = true;
     let iterationCount = 0;
@@ -35,7 +36,7 @@ function* fetchAllVotes(action) {
       yield put({ type: VOTES_FETCH_SUCCEEDED, votes: result.votes, ideaId: action.payload.idea.id });
     }
   } catch (e) {
-    console.error('Failed to load votes.'); // eslint-disable-line no-console
+    yield put({ type: VOTES_FETCH_FAILED });
   }
 }
 
@@ -58,6 +59,9 @@ export const reducer = (state = initialState, action) => {
         ideas,
       };
     }
+    case VOTES_FETCH_FAILED:
+      console.log(VOTES_FETCH_FAILED); // eslint-disable-line no-console
+      break;
     default:
       return state;
   }
