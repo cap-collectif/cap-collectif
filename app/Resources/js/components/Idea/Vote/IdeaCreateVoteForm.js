@@ -30,6 +30,7 @@ export const IdeaCreateVoteForm = React.createClass({
       isSubmitting,
       onFailure,
       onSubmitSuccess,
+      dispatch,
     } = this.props;
     const ideaVoteForm = this.ideaVoteForm;
     if (!isSubmitting && nextProps.isSubmitting) {
@@ -45,7 +46,8 @@ export const IdeaCreateVoteForm = React.createClass({
         IdeaActions
           .vote(idea.id, data)
           .then(() => {
-            this.props.dispatch(voteSuccess(idea.id, data.comment && data.comment.length > 0));
+            dispatch(voteSuccess(idea.id, data.comment && data.comment.length > 0));
+            dispatch(fetchIdeaVotes(idea));
             ideaVoteForm.reinitState();
             onSubmitSuccess();
           })

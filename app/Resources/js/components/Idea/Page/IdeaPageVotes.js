@@ -28,7 +28,7 @@ export const IdeaPageVotes = React.createClass({
   },
 
   componentDidMount() {
-    this.props.fetchIdeaVotes(this.props.idea);
+    this.props.fetchIdeaVotes(this.props.idea.id);
   },
 
   showModal() {
@@ -94,7 +94,7 @@ export const IdeaPageVotes = React.createClass({
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchIdeaVotes: (idea) => dispatch(fetchIdeaVotes(idea)),
+    fetchIdeaVotes: (ideaId) => dispatch(fetchIdeaVotes(ideaId)),
   };
 }
 

@@ -21,12 +21,10 @@ export const deleteVoteSuccess = (ideaId) => {
   };
 };
 
-export const fetchIdeaVotes = (idea) => {
+export const fetchIdeaVotes = (ideaId) => {
   return {
     type: VOTES_FETCH_REQUESTED,
-    payload: {
-      idea,
-    },
+    ideaId,
   };
 };
 
@@ -46,11 +44,11 @@ export function* fetchAllVotes(action) {
     while (hasMore) {
       const result = yield call(
         Fetcher.get,
-        `/ideas/${action.payload.idea.id}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
+        `/ideas/${action.ideaId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
       );
       hasMore = result.hasMore;
       iterationCount++;
-      yield put({ type: VOTES_FETCH_SUCCEEDED, votes: result.votes, ideaId: action.payload.idea.id });
+      yield put({ type: VOTES_FETCH_SUCCEEDED, votes: result.votes, ideaId: action.ideaId });
     }
   } catch (e) {
     yield put({ type: VOTES_FETCH_FAILED });
