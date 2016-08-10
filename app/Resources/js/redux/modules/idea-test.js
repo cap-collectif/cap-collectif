@@ -1,6 +1,13 @@
 /* eslint-env mocha */
 import { expect } from 'chai';
-import { reducer, fetchAllVotes, VOTES_FETCH_SUCCEEDED, VOTES_FETCH_FAILED } from './idea';
+import {
+  reducer,
+  fetchAllVotes,
+  DELETE_VOTE_SUCCEEDED,
+  VOTES_FETCH_SUCCEEDED,
+  VOTES_FETCH_FAILED,
+  VOTE_SUCCEEDED,
+ } from './idea';
 import { call, put } from 'redux-saga/effects';
 import Fetcher from '../../services/Fetcher';
 
@@ -24,6 +31,60 @@ describe('Idea Reducer', () => {
       ideas: {
         1: {
           votes,
+        },
+      },
+    });
+  });
+  it('Should handle VOTE_SUCCEEDED', () => {
+    const initialState = {
+      ideas: {
+        1: { votesCount: 1, commentsCount: 1 },
+      },
+    };
+    const newStateWithComment = reducer(initialState, {
+      type: VOTE_SUCCEEDED,
+      ideaId: 1,
+      hasComment: true,
+    });
+    const newStateWithoutComment = reducer(initialState, {
+      type: VOTE_SUCCEEDED,
+      ideaId: 1,
+      hasComment: false,
+    });
+    expect(newStateWithComment).to.eql({
+      ideas: {
+        1: {
+          votesCount: 2,
+          userHasVote: true,
+          commentsCount: 2,
+        },
+      },
+    });
+    expect(newStateWithoutComment).to.eql({
+      ideas: {
+        1: {
+          votesCount: 2,
+          userHasVote: true,
+          commentsCount: 1,
+        },
+      },
+    });
+  });
+  it('Should handle DELETE_VOTE_SUCCEEDED', () => {
+    const initialState = {
+      ideas: {
+        1: { votesCount: 1 },
+      },
+    };
+    const newState = reducer(initialState, {
+      type: DELETE_VOTE_SUCCEEDED,
+      ideaId: 1,
+    });
+    expect(newState).to.eql({
+      ideas: {
+        1: {
+          votesCount: 0,
+          userHasVote: false,
         },
       },
     });

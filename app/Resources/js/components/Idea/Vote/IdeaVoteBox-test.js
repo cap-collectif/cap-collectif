@@ -50,7 +50,7 @@ describe('<IdeaVoteBox />', () => {
   it('should render the delete idea vote form with user avatar when user is logged in and has voted', () => {
     const wrapper = shallow(<IdeaVoteBox {...propsWithVote} user={user} {...IntlData} />);
     expect(wrapper.find('UserPreview')).to.have.length(1);
-    expect(wrapper.find('IdeaDeleteVoteForm')).to.have.length(1);
+    expect(wrapper.find('Connect(IdeaDeleteVoteForm)')).to.have.length(1);
     expect(wrapper.find(SubmitButton)).to.have.length(1);
   });
 });

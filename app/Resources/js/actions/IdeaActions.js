@@ -19,8 +19,6 @@ import {
   DELETE_IDEA_FAILURE,
 
   CREATE_IDEA_VOTE_FAILURE,
-  DELETE_IDEA_VOTE_SUCCESS,
-  DELETE_IDEA_VOTE_FAILURE,
 
   RECEIVE_IDEAS,
 } from '../constants/IdeaConstants';
@@ -240,18 +238,12 @@ export default {
       .delete(`/ideas/${idea}/votes`)
       .then(() => {
         AppDispatcher.dispatch({
-          actionType: DELETE_IDEA_VOTE_SUCCESS,
-        });
-        AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'alert.success.delete.vote' },
         });
         return true;
       })
       .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: DELETE_IDEA_VOTE_FAILURE,
-        });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'warning', content: 'alert.danger.delete.vote' },
