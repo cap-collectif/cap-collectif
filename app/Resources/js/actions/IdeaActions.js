@@ -4,7 +4,6 @@ import IdeaStore from '../stores/IdeaStore';
 import {
   SET_IDEAS_PAGINATION,
   INIT_IDEAS_COUNTS,
-  INIT_IDEA,
   INIT_IDEAS,
 
   CHANGE_IDEAS_PAGE,
@@ -19,13 +18,11 @@ import {
   DELETE_IDEA_SUCCESS,
   DELETE_IDEA_FAILURE,
 
-  CREATE_IDEA_VOTE_SUCCESS,
   CREATE_IDEA_VOTE_FAILURE,
   DELETE_IDEA_VOTE_SUCCESS,
   DELETE_IDEA_VOTE_FAILURE,
 
   RECEIVE_IDEAS,
-  RECEIVE_IDEA,
 } from '../constants/IdeaConstants';
 import {
   CREATE_COMMENT_SUCCESS,
@@ -34,14 +31,6 @@ import {
 import { UPDATE_ALERT } from '../constants/AlertConstants';
 
 export default {
-
-  initIdea: (idea, votes) => {
-    AppDispatcher.dispatch({
-      actionType: INIT_IDEA,
-      idea,
-      votes,
-    });
-  },
 
   initIdeas: (ideas) => {
     AppDispatcher.dispatch({
@@ -121,18 +110,6 @@ export default {
       actionType: CHANGE_IDEAS_SEARCH_TERMS,
       terms,
     });
-  },
-
-  getOne: (idea) => {
-    Fetcher
-      .get(`/ideas/${idea}`)
-      .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_IDEA,
-          idea: data.idea,
-        });
-        return true;
-      });
   },
 
   add: (data) => {
@@ -228,10 +205,6 @@ export default {
     return Fetcher
       .post(`/ideas/${idea}/votes`, data)
       .then(() => {
-        AppDispatcher.dispatch({
-          actionType: CREATE_IDEA_VOTE_SUCCESS,
-          hasComment,
-        });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'alert.success.add.vote' },
