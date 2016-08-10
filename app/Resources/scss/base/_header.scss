@@ -133,6 +133,15 @@
       left: 0;
     }
   }
+
+  #navbar-content .nav-dropdown-section {
+    margin: 9px 0;
+  }
+
+  #navbar-content .dropdown-menu > .nav-dropdown-section {
+      border-bottom: 1px solid #e5e5e5;
+      border-top: 1px solid #e5e5e5;
+  }
 }
 
 /* ===============================================================
