@@ -121,7 +121,7 @@ Feature: Proposal Restful Api
           "body": @string@,
           "author": @...@
         },
-        "votesCountBySelectionSteps": @...@,
+        "votesCountBySteps": @...@,
         "hasUserReported": @boolean@,
         "likers": @array@,
         "_links": {
@@ -268,7 +268,7 @@ Feature: Proposal Restful Api
           "body": @string@,
           "author": @...@
         },
-        "votesCountBySelectionSteps": @...@,
+        "votesCountBySteps": @...@,
         "hasUserReported": @boolean@,
         "likers": @array@,
         "_links": {
@@ -415,7 +415,7 @@ Feature: Proposal Restful Api
           "body": @string@,
           "author": @...@
         },
-        "votesCountBySelectionSteps": @...@,
+        "votesCountBySteps": @...@,
         "hasUserReported": @boolean@,
         "likers": @array@,
         "_links": {
@@ -475,7 +475,7 @@ Feature: Proposal Restful Api
           "isTrashed": @boolean@,
           "title": @string@,
           "answer": @...@,
-          "votesCountBySelectionSteps": @...@,
+          "votesCountBySteps": @...@,
           "likers": @array@,
           "_links": @...@
         },
@@ -524,7 +524,7 @@ Feature: Proposal Restful Api
           "enabled": @boolean@,
           "isTrashed": @boolean@,
           "title": @string@,
-          "votesCountBySelectionSteps": @...@,
+          "votesCountBySteps": @...@,
           "likers": @array@,
           "_links": @...@
         },
@@ -604,7 +604,7 @@ Feature: Proposal Restful Api
           "isTrashed": @boolean@,
           "title": @string@,
           "answer": @...@,
-          "votesCountBySelectionSteps": @...@,
+          "votesCountBySteps": @...@,
           "likers": @array@,
           "_links": @...@
         }

@@ -137,7 +137,7 @@ const SelectionStepPage = React.createClass({
           <div>
             <ProposalList
               proposals={this.state.proposals}
-              selectionStep={step}
+              step={step}
               creditsLeft={this.state.creditsLeft}
               showThemes={showThemes}
             />

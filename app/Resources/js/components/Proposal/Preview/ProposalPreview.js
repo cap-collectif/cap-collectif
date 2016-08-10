@@ -15,7 +15,7 @@ import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/Proposa
 const ProposalPreview = React.createClass({
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
-    selectionStep: React.PropTypes.object,
+    step: React.PropTypes.object.isRequired,
     creditsLeft: React.PropTypes.number,
     showAllVotes: React.PropTypes.bool,
     showThemes: React.PropTypes.bool,
@@ -24,7 +24,7 @@ const ProposalPreview = React.createClass({
 
   getDefaultProps() {
     return {
-      selectionStep: null,
+      step: null,
       creditsLeft: null,
       showAllVotes: false,
       showThemes: false,
@@ -47,11 +47,11 @@ const ProposalPreview = React.createClass({
   render() {
     const {
       proposal,
-      selectionStep,
+      step,
       showAllVotes,
       showThemes,
     } = this.props;
-    const voteType = selectionStep ? selectionStep.voteType : 0;
+    const voteType = step ? step.voteType : 0;
     const classes = classNames({
       box: true,
       'bg-vip': proposal.author && proposal.author.vip,
@@ -90,11 +90,15 @@ const ProposalPreview = React.createClass({
               </div>
             }
           </div>
+          <ProposalStatus
+            proposal={proposal}
+            selectionStepId={step ? step.id : null}
+          />
           <ProposalPreviewFooter
             proposal={proposal}
             showVotes={(showAllVotes || voteType !== VOTE_TYPE_DISABLED) && selectionStep.voteThreshold === 0}
             votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, userHasVote)}
-            selectionStepId={selectionStep ? selectionStep.id : null}
+            stepId={step ? step.id : null}
           />
           <ProposalStatus
             proposal={proposal}

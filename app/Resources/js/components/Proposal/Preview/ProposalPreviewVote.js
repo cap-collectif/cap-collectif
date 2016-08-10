@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 const ProposalPreviewVote = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    selectionStep: PropTypes.object,
+    step: PropTypes.object,
     creditsLeft: PropTypes.number,
     userHasVote: PropTypes.bool.isRequired,
     onVoteChange: PropTypes.func.isRequired,
@@ -17,7 +17,7 @@ const ProposalPreviewVote = React.createClass({
 
   getDefaultProps() {
     return {
-      selectionStep: null,
+      step: null,
       creditsLeft: null,
       user: null,
     };
@@ -30,8 +30,8 @@ const ProposalPreviewVote = React.createClass({
   },
 
   anonymousCanVote() {
-    const { selectionStep } = this.props;
-    return selectionStep && selectionStep.voteType === VOTE_TYPE_SIMPLE;
+    const { step } = this.props;
+    return step && step.voteType === VOTE_TYPE_SIMPLE;
   },
 
   toggleModal(value) {
@@ -44,11 +44,11 @@ const ProposalPreviewVote = React.createClass({
     const {
       onVoteChange,
       proposal,
-      selectionStep,
+      step,
     } = this.props;
     ProposalActions
       .vote(
-        selectionStep.id,
+        step,
         proposal.id,
         proposal.estimation
       )
@@ -62,18 +62,18 @@ const ProposalPreviewVote = React.createClass({
     const {
       onVoteChange,
       proposal,
-      selectionStep,
+      step,
     } = this.props;
     ProposalActions
-      .deleteVote(
-        selectionStep.id,
-        proposal.id,
-        proposal.estimation
-      )
-      .then(() => {
-        onVoteChange(false);
-      })
-    ;
+        .deleteVote(
+          step,
+          proposal.id,
+          proposal.estimation
+        )
+        .then(() => {
+          onVoteChange(false);
+        })
+      ;
   },
 
   voteAction() {
@@ -90,20 +90,20 @@ const ProposalPreviewVote = React.createClass({
 
   render() {
     const {
-      selectionStep,
+      step,
       onVoteChange,
       creditsLeft,
       proposal,
       userHasVote,
     } = this.props;
-    if (!selectionStep || selectionStep.voteType === VOTE_TYPE_DISABLED) {
+    if (!step || step.voteType === VOTE_TYPE_DISABLED) {
       return null;
     }
 
     return (
       <div>
         <ProposalVoteButtonWrapper
-          selectionStep={selectionStep}
+          selectionStep={step}
           proposal={proposal}
           creditsLeft={creditsLeft}
           userHasVote={userHasVote}
@@ -112,7 +112,7 @@ const ProposalPreviewVote = React.createClass({
         />
         <ProposalVoteModal
           proposal={proposal}
-          selectionStep={selectionStep}
+          selectionStep={step}
           showModal={this.state.showModal}
           onToggleModal={this.toggleModal}
           onVoteChange={onVoteChange}

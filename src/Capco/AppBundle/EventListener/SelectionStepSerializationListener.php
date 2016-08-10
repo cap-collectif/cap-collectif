@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Resolver\ProposalVotesResolver;
+use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializationContext;
@@ -13,14 +13,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class SelectionStepSerializationListener extends AbstractSerializationListener
 {
     private $tokenStorage;
-    private $proposalVotesResolver;
+    private $proposalStepVotesResolver;
     protected $serializer;
     protected $router;
 
-    public function __construct(TokenStorageInterface $tokenStorage, ProposalVotesResolver $proposalVotesResolver, Serializer $serializer, RouterInterface $router)
+    public function __construct(TokenStorageInterface $tokenStorage, ProposalStepVotesResolver $proposalStepVotesResolver, Serializer $serializer, RouterInterface $router)
     {
         $this->tokenStorage = $tokenStorage;
-        $this->proposalVotesResolver = $proposalVotesResolver;
+        $this->proposalStepVotesResolver = $proposalStepVotesResolver;
         $this->serializer = $serializer;
         $this->router = $router;
     }
@@ -45,17 +45,17 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
 
         if ($user !== 'anon.' && $this->eventHasGroup($event, 'UserVotes')) {
             $event->getVisitor()->addData(
-                'creditsLeft', $this->proposalVotesResolver->getCreditsLeftForUser($user, $step)
+                'creditsLeft', $this->proposalStepVotesResolver->getCreditsLeftForUser($user, $step)
             );
             $event->getVisitor()->addData(
-                'userVotesCount', $this->proposalVotesResolver->getVotesCountForUserInSelectionStep($user, $step)
+                'userVotesCount', $this->proposalStepVotesResolver->getVotesCountForUserInSelectionStep($user, $step)
             );
 
             $userVotes = $this->serializer->serialize([
                 'data' => $this
-                    ->proposalVotesResolver
+                    ->proposalStepVotesResolver
                     ->getVotesForUserInSelectionStep($user, $step),
-            ], 'json', SerializationContext::create()->setGroups(['ProposalVotes', 'Proposals', 'Steps', 'UsersInfos']));
+            ], 'json', SerializationContext::create()->setGroups(['ProposalSelectionVotes', 'Proposals', 'Steps', 'UsersInfos']));
             $event->getVisitor()->addData('userVotes', json_decode($userVotes, true)['data']);
         }
 

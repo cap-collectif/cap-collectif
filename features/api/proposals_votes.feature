@@ -4,7 +4,7 @@ Feature: Proposal Votes Restful Api
 
   @parallel-scenario
   Scenario: Anonymous API client wants to get all votes for a proposal
-    When I send a GET request to "/api/proposal_forms/1/proposals/2/votes"
+    When I send a GET request to "/api/steps/6/proposals/4/votes"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """

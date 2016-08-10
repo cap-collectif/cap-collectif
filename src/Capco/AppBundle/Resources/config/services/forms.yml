@@ -56,11 +56,17 @@ services:
     tags:
       - { name: form.type, alias: media_response }
 
-  capco.form.proposal_vote:
-      class: Capco\AppBundle\Form\ProposalVoteType
+  capco.form.proposal_selection_vote:
+      class: Capco\AppBundle\Form\ProposalSelectionVoteType
       arguments: ["@security.token_storage"]
       tags:
-        - { name: form.type, alias: proposal_vote }
+        - { name: form.type, alias: proposal_selection_vote }
+
+  capco.form.proposal_collect_vote:
+      class: Capco\AppBundle\Form\ProposalCollectVoteType
+      arguments: ["@security.token_storage"]
+      tags:
+        - { name: form.type, alias: proposal_collect_vote }
 
   capco.form.transformer.entity_to_id:
     class: Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer

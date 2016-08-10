@@ -80,12 +80,12 @@ services:
     arguments: ['@capco.url.resolver']
 
   capco.proposal_votes.resolver:
-    class: Capco\AppBundle\Resolver\ProposalVotesResolver
-    arguments: ['@capco.proposal_vote.repository', '@capco.selection_step.repository']
+    class: Capco\AppBundle\Resolver\ProposalStepVotesResolver
+    arguments: ['@capco.proposal_selection_vote.repository', '@capco.selection_step.repository', '@capco.proposal_collect_vote.repository', '@capco.collect_step.repository']
 
   capco.project_stats.resolver:
     class: Capco\AppBundle\Resolver\ProjectStatsResolver
-    arguments: ['@capco.selection_step.repository', '@capco.collect_step.repository', '@capco.theme.repository', '@capco.district.repository', '@capco.user_type.repository', '@capco.proposal.repository', '@capco.proposal_vote.repository']
+    arguments: ['@capco.selection_step.repository', '@capco.collect_step.repository', '@capco.theme.repository', '@capco.district.repository', '@capco.user_type.repository', '@capco.proposal.repository', '@capco.proposal_selection_vote.repository']
 
   capco.media.manager:
     class: Capco\AppBundle\Manager\MediaManager

@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 export const ProposalList = React.createClass({
   propTypes: {
     proposals: PropTypes.array.isRequired,
-    selectionStep: PropTypes.object,
+    step: PropTypes.object.isRequired,
     creditsLeft: PropTypes.number,
     showAllVotes: PropTypes.bool,
     showThemes: PropTypes.bool,
@@ -20,7 +20,7 @@ export const ProposalList = React.createClass({
   getDefaultProps() {
     return {
       creditsLeft: null,
-      selectionStep: null,
+      step: null,
       showAllVotes: false,
       showThemes: false,
       user: null,
@@ -31,6 +31,8 @@ export const ProposalList = React.createClass({
     const {
       creditsLeft,
       selectionStep,
+      proposals,
+      step,
       showAllVotes,
       showThemes,
     } = this.props;
@@ -99,6 +101,18 @@ export const ProposalList = React.createClass({
               }
             </Row>
           </VisibilityBox>
+          proposals.map((proposal) => {
+            return (
+              <ProposalPreview
+                key={proposal.id}
+                proposal={proposal}
+                step={step}
+                creditsLeft={creditsLeft}
+                showAllVotes={showAllVotes}
+                showThemes={showThemes}
+              />
+            );
+          })
         }
       </div>
     );

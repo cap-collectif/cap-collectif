@@ -461,10 +461,10 @@ step:
       future:
         text: L'étape débutera le %date%.
         title: Étape à venir.
-    vote_type:
-      budget: Vote selon le budget
-      disabled: Désactivé
-      simple: Vote simple
+  vote_type:
+    budget: Vote selon le budget
+    disabled: Désactivé
+    simple: Vote simple
 
 simple_argument:
   count: "%count% avis"

@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Capco\AppBundle\Resolver\ProposalVotesResolver;
+use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -10,7 +10,7 @@ class HasEnoughCreditsToVoteValidator extends ConstraintValidator
 {
     private $resolver;
 
-    public function __construct(ProposalVotesResolver $resolver)
+    public function __construct(ProposalStepVotesResolver $resolver)
     {
         $this->resolver = $resolver;
     }

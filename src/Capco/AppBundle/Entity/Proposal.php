@@ -12,8 +12,8 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\MediaBundle\Entity\Media;
+use Doctrine\Common\Collections\Collection;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,8 +26,6 @@ use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 
 /**
- * Proposal.
- *
  * @ORM\Table(name="proposal")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
  * @ORM\HasLifecycleCallbacks()
@@ -38,12 +36,11 @@ use Capco\AppBundle\Traits\IdTrait;
  * @CapcoAssert\HasCategoryIfMandatory()
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
  */
-class Proposal implements Contribution, CommentableInterface, VotableInterface
+class Proposal implements Contribution, CommentableInterface
 {
     use IdTrait;
     use CommentableTrait;
     use TimestampableTrait;
-    use VotableOkTrait;
     use EnableTrait;
     use TrashableTrait;
     use SluggableTitleTrait;
@@ -166,8 +163,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     private $progressSteps;
 
     /**
-     * @var
-     *
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
@@ -175,11 +170,24 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     private $media;
 
     /**
-     * Constructor.
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSelectionVote", mappedBy="proposal", cascade={"persist"})
      */
+    private $selectionVotes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalCollectVote", mappedBy="proposal", cascade={"persist"})
+     */
+    private $collectVotes;
+
+    /**
+     * @ORM\Column(name="votes_count", type="integer")
+     */
+    protected $votesCount = 0;
+
     public function __construct()
     {
-        $this->votes = new ArrayCollection();
+        $this->selectionVotes = new ArrayCollection();
+        $this->collectVotes = new ArrayCollection();
         $this->reports = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->responses = new ArrayCollection();
@@ -585,29 +593,117 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this->progressSteps;
     }
 
-    public function setProgressSteps(ArrayCollection $progressSteps) : self
+    public function setProgressSteps(Collection $progressSteps) : self
     {
         $this->progressSteps = $progressSteps;
 
         return $this;
     }
 
-    public function addProgressStep(ProgressStep $progressStep) : self
+    public function resetVotes()
     {
-        if (!$this->progressSteps->contains($progressStep)) {
-            $this->progressSteps->add($progressStep);
-            $progressStep->setProposal($this);
+        foreach ($this->selectionVotes as $vote) {
+            $this->removeVote($vote);
+        }
+        foreach ($this->collectVotes as $vote) {
+            $this->removeVote($vote);
+        }
+        $this->votesCount = 0;
+
+        return $this;
+    }
+
+    public function userHasVote(User $user = null)
+    {
+        if ($user != null) {
+            foreach ($this->selectionVotes as $vote) {
+                if ($vote->getUser() == $user) {
+                    return true;
+                }
+            }
+            foreach ($this->collectVotes as $vote) {
+                if ($vote->getUser() == $user) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public function getSelectionVotes()
+    {
+        return $this->selectionVotes;
+    }
+
+    public function setSelectionVotes(Collection $votes)
+    {
+        $this->selectionVotes = $votes;
+
+        return $this;
+    }
+
+    public function getCollectVotes()
+    {
+        return $this->collectVotes;
+    }
+
+    public function setCollectVotes(Collection $collectVotes): self
+    {
+        $this->collectVotes = $collectVotes;
+
+        return $this;
+    }
+
+    public function addSelectionVote(ProposalSelectionVote $selectionVote): self
+    {
+        if (!$this->selectionVotes->contains($selectionVote)) {
+            $this->selectionVotes->add($selectionVote);
         }
 
         return $this;
     }
 
-    public function removeProgressStep(ProgressStep $progressStep) : self
+    public function removeSelectionVote(ProposalSelectionVote $vote): self
+    {
+        if ($this->selectionVotes->contains($vote)) {
+            $this->selectionVotes->removeElement($vote);
+        }
+
+        return $this;
+    }
+
+    public function addCollectVote(ProposalCollectVote $vote): self
+    {
+        if (!$this->collectVotes->contains($vote)) {
+            $this->collectVotes->add($vote);
+        }
+
+        return $this;
+    }
+
+    public function addProgressStep(ProgressStep $progressStep): self
+    {
+        if (!$this->progressSteps->contains($progressStep)) {
+            $this->progressSteps->add($progressStep);
+            $progressStep->setProposal($this);
+        }
+        return $this;
+    }
+
+    public function removeCollectVote(ProposalCollectVote $vote): self
+    {
+        if ($this->collectVotes->contains($vote)) {
+            $this->collectVotes->removeElement($vote);
+        }
+        return $this;
+    }
+
+    public function removeProgressStep(ProgressStep $progressStep): self
     {
         if ($this->progressSteps->contains($progressStep)) {
             $this->progressSteps->removeElement($progressStep);
         }
-
         return $this;
     }
 

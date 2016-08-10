@@ -9,7 +9,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\DistrictRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\ProposalVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\UserBundle\Repository\UserTypeRepository;
@@ -22,9 +22,9 @@ class ProjectStatsResolver
     protected $districtRepo;
     protected $userTypeRepo;
     protected $proposalRepo;
-    protected $proposalVoteRepo;
+    protected $proposalSelectionVoteRepo;
 
-    public function __construct(SelectionStepRepository $selectionStepRepo, CollectStepRepository $collectStepRepo, ThemeRepository $themeRepo, DistrictRepository $districtRepo, UserTypeRepository $userTypeRepo, ProposalRepository $proposalRepo, ProposalVoteRepository $proposalVoteRepo)
+    public function __construct(SelectionStepRepository $selectionStepRepo, CollectStepRepository $collectStepRepo, ThemeRepository $themeRepo, DistrictRepository $districtRepo, UserTypeRepository $userTypeRepo, ProposalRepository $proposalRepo, ProposalSelectionVoteRepository $proposalSelectionVoteRepo)
     {
         $this->selectionStepRepo = $selectionStepRepo;
         $this->collectStepRepo = $collectStepRepo;
@@ -32,7 +32,7 @@ class ProjectStatsResolver
         $this->districtRepo = $districtRepo;
         $this->userTypeRepo = $userTypeRepo;
         $this->proposalRepo = $proposalRepo;
-        $this->proposalVoteRepo = $proposalVoteRepo;
+        $this->proposalSelectionVoteRepo = $proposalSelectionVoteRepo;
     }
 
     public function getStepsWithStatsForProject(Project $project)
@@ -191,7 +191,7 @@ class ProjectStatsResolver
 
     public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
     {
-        return $this->proposalVoteRepo
+        return $this->proposalSelectionVoteRepo
             ->getVotesCountForSelectionStep($step, $themeId, $districtId)
         ;
     }

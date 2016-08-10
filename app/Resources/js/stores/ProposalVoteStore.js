@@ -21,9 +21,9 @@ class ProposalVoteStore extends BaseStore {
     super();
     this.register(this._registerToActions.bind(this));
     this._creditsLeft = 0;
-    this._proposalVotes = [];
+    this._proposalVotesByStepIds = {};
     this._votableSteps = [];
-    this._votesCount = 0;
+    this._votesCountByStepId = {};
     this._userHasVote = false;
     this._isProposalVotesListSync = false;
     this._isVotableStepsSync = false;
@@ -49,9 +49,10 @@ class ProposalVoteStore extends BaseStore {
         this.emitChange();
         break;
       case RECEIVE_PROPOSAL_VOTES:
-        this._proposalVotes = action.votes;
+
+        this._proposalVotesByStepIds = { ...this._proposalVotesByStepIds, [action.stepId]: action.votes };
         this._isProposalVotesListSync = true;
-        this._votesCount = action.votesCount;
+        this._votesCountByStepId = { ...this._votesCountByStepId, [action.stepId]: action.votesCount };
         this.emitChange();
         break;
       case RECEIVE_VOTABLE_STEPS:
@@ -107,16 +108,16 @@ class ProposalVoteStore extends BaseStore {
     return this._creditsLeft;
   }
 
-  get proposalVotes() {
-    return this._proposalVotes;
+  proposalVotesByStepId(id) {
+    return this._proposalVotesByStepIds[id] || [];
   }
 
   get votableSteps() {
     return this._votableSteps;
   }
 
-  get votesCount() {
-    return this._votesCount;
+  votesCountByStepId(id) {
+    return this._votesCountByStepId[id] || 0;
   }
 
   get isProposalVotesListSync() {

@@ -205,7 +205,7 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         )');
 
         $this->compute('UPDATE CapcoUserBundle:User u set u.proposalVotesCount = (
-          SELECT count(pv.id) from CapcoAppBundle:ProposalVote pv
+          SELECT count(pv.id) from CapcoAppBundle:ProposalSelectionVote pv
           INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
           WHERE pv.user = u AND pv.expired = 0 AND pv.private = 0 AND p.enabled = 1
           GROUP BY pv.user

@@ -3,7 +3,9 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Repository\AbstractResponseRepository;
-use Capco\AppBundle\Repository\ProposalVoteRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Repository\ResponseRepository;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
@@ -16,25 +18,21 @@ class ProposalSerializationListener extends AbstractSerializationListener
 {
     private $router;
     private $tokenStorage;
-    private $proposalVoteRepository;
+    private $proposalSelectionVoteRepository;
+    private $proposalCollectVoteRepository;
     private $responseRepository;
     private $mediaExtension;
     protected $serializer;
 
-    public function __construct(
-        RouterInterface $router,
-        TokenStorageInterface $tokenStorage,
-        ProposalVoteRepository $proposalVoteRepository,
-        AbstractResponseRepository $responseRepository,
-        MediaExtension $mediaExtension,
-        Serializer $serializer
-    ) {
+    public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage, ProposalSelectionVoteRepository $proposalSelectionVoteRepository, ResponseRepository $responseRepository, Serializer $serializer, ProposalCollectVoteRepository $proposalCollectVoteRepository)
+    {
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
-        $this->proposalVoteRepository = $proposalVoteRepository;
+        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->responseRepository = $responseRepository;
         $this->mediaExtension = $mediaExtension;
         $this->serializer = $serializer;
+        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
     }
 
     public static function getSubscribedEvents()
@@ -85,12 +83,15 @@ class ProposalSerializationListener extends AbstractSerializationListener
             );
         }
 
-        $votesCount = $this->proposalVoteRepository
-            ->getCountsByStepsForProposal($proposal);
+        $selectionVotesCount = $this->proposalSelectionVoteRepository
+            ->getCountsByProposalGroupedBySteps($proposal);
+
+        $collectVotesCount = $this->proposalCollectVoteRepository
+            ->getCountsByProposalGroupedBySteps($proposal);
 
         $event->getVisitor()->addData(
-            'votesCountBySelectionSteps',
-            $votesCount
+            'votesCountBySteps',
+            $selectionVotesCount + $collectVotesCount
         );
 
         $userIsAuthorOrAdmin = $user !== 'anon.' && ($user->getId() === $proposal->getAuthor()->getId() || $user->isAdmin());

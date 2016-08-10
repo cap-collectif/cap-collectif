@@ -334,40 +334,6 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
-        # Proposal vote
-        # proposalVote:
-          # indexable_callback: isIndexable
-          # _all: { enabled: false }
-          # serializer:
-            # groups: [ProposalVotes]
-          # mappings:
-            # user:
-              # type: object
-              # properties:
-                # slug:
-                  # index: not_analyzed
-            # createdAt:
-              # type: date
-              # fields:
-                # std: { type: string, analyzer: standard }
-            # updatedAt:
-              # type: date
-            # proposal:
-              # type: object
-              # properties:
-                # id:
-                  # type: long
-            # selectionStep:
-              # type: object
-              # properties:
-                # id:
-                  # type: long
-          # persistence:
-            # driver: orm
-            # model: Capco\AppBundle\Entity\ProposalVote
-            # provider: ~
-            # listener: ~
-            # finder: ~
        # Opinion
         opinion:
           indexable_callback: isIndexable
@@ -539,7 +505,7 @@ fos_elastica:
             listener: ~
             finder: ~
         # Selection Step
-        consultationStep:
+        selectionStep:
           indexable_callback: isIndexable
           serializer:
             groups: [SelectionSteps]
@@ -551,6 +517,22 @@ fos_elastica:
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Steps\SelectionStep
+            provider: ~
+            listener: ~
+            finder: ~
+        # Collect Step
+        collectStep:
+          indexable_callback: isIndexable
+          serializer:
+            groups: [CollectSteps]
+          _all: { enabled: false }
+          mappings:
+            title:
+              analyzer: '%language_analyzer%'
+              index_options: offsets
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\Steps\CollectStep
             provider: ~
             listener: ~
             finder: ~

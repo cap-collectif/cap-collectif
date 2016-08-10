@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 const ProposalVoteForm = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    selectionStepId: PropTypes.number.isRequired,
+    selectionStep: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     onValidationFailure: PropTypes.func.isRequired,
     onSubmitSuccess: PropTypes.func.isRequired,
@@ -68,7 +68,7 @@ const ProposalVoteForm = React.createClass({
       onSubmitSuccess,
       onValidationFailure,
       proposal,
-      selectionStepId,
+      selectionStep,
       user,
       userHasVote,
     } = this.props;
@@ -76,15 +76,15 @@ const ProposalVoteForm = React.createClass({
       if (this.isValid()) {
         if (user && userHasVote) {
           ProposalActions
-            .deleteVote(selectionStepId, proposal.id, proposal.estimation)
-            .then(() => {
-              this.setState(this.getInitialState());
-              onSubmitSuccess();
-            })
-            .catch(() => {
-              onSubmitFailure();
-            })
-          ;
+                .deleteVote(selectionStep, proposal.id, proposal.estimation)
+                .then(() => {
+                  this.setState(this.getInitialState());
+                  onSubmitSuccess();
+                })
+                .catch(() => {
+                  onSubmitFailure();
+                })
+            ;
           return;
         }
         const data = this.state.form;
@@ -93,23 +93,23 @@ const ProposalVoteForm = React.createClass({
           delete data.email;
         }
         ProposalActions
-          .vote(
-            selectionStepId,
-            proposal.id,
-            proposal.estimation,
-            data
-          )
-          .then(() => {
-            this.setState(this.getInitialState());
-            onSubmitSuccess();
-          })
-          .catch((error) => {
-            this.setState({
-              serverErrors: error.response.errors,
-            });
-            onSubmitFailure();
-          })
-        ;
+            .vote(
+              selectionStep,
+              proposal.id,
+              proposal.estimation,
+              data
+            )
+            .then(() => {
+              this.setState(this.getInitialState());
+              onSubmitSuccess();
+            })
+            .catch((error) => {
+              this.setState({
+                serverErrors: error.response.errors,
+              });
+              onSubmitFailure();
+            })
+          ;
         return;
       }
 

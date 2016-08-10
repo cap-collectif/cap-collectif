@@ -24,6 +24,7 @@ sonata_admin:
                     - capco_admin.admin.source
                     - capco_admin.admin.idea
                     - capco_admin.admin.comment
+                    - capco_admin.admin.proposal_collect_vote
             admin.group.content:
                 items:
                     - capco_admin.admin.highlighted

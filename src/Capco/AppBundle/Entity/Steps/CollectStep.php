@@ -4,14 +4,29 @@ namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Traits\VoteTypeTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Model\IndexableInterface;
 
 /**
  * @ORM\Table(name="collect_step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CollectStepRepository")
  */
-class CollectStep extends AbstractStep
+class CollectStep extends AbstractStep implements IndexableInterface
 {
+    use VoteTypeTrait;
+
+    public static $sort = ['old', 'last', 'votes', 'comments', 'random'];
+
+    public static $sortLabels = [
+        'comments' => 'step.sort.comments',
+        'last' => 'step.sort.last',
+        'old' => 'step.sort.old',
+        'random' => 'step.sort.random',
+        'votes' => 'step.sort.votes',
+    ];
+
     /**
      * @var ProposalForm
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="step", cascade={"persist", "remove"})
@@ -44,6 +59,17 @@ class CollectStep extends AbstractStep
      * @var bool
      */
     private $private = 0;
+
+    /**
+     * @ORM\Column(name="votes_count", type="integer")
+     */
+    private $votesCount = 0;
+
+    /**
+     * @ORM\Column(name="default_sort", type="string", nullable=false)
+     * @Assert\Choice(choices={"old","last","votes","comments","random"})
+     */
+    private $defaultSort = 'random';
 
     public function __construct()
     {
@@ -136,6 +162,62 @@ class CollectStep extends AbstractStep
     public function setPrivate(bool $private)
     {
         $this->private = $private;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefaultSort()
+    {
+        return $this->defaultSort;
+    }
+
+    /**
+     * @param mixed $defaultSort
+     *
+     * @return $this
+     */
+    public function setDefaultSort($defaultSort)
+    {
+        $this->defaultSort = $defaultSort;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVotesCount()
+    {
+        if (!$this->votesCount) {
+            return 0;
+        }
+
+        return $this->votesCount;
+    }
+
+    /**
+     * @param mixed $votesCount
+     *
+     * @return $this
+     */
+    public function setVotesCount($votesCount)
+    {
+        $this->votesCount = $votesCount;
+
+        return $this;
+    }
+
+    public function incrementVotesCount()
+    {
+        ++$this->votesCount;
+
+        return $this;
+    }
+
+    public function decrementVotesCount()
+    {
+        --$this->votesCount;
 
         return $this;
     }
@@ -150,5 +232,10 @@ class CollectStep extends AbstractStep
     public function isCollectStep()
     {
         return true;
+    }
+
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
     }
 }

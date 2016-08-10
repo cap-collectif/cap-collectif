@@ -692,6 +692,7 @@ admin:
       group_statuses: Statuts
       group_votes: Votes
       is_enabled: Publié
+      is_enabled_votes: Activer le vote sur les propositions
       nb_opinions_to_display: Nombre de propositions dans l'aperçu du classement
       nb_versions_to_display: Nombre de modifications dans l'aperçu du classement
       no_proposal_form: Aucun formulaire

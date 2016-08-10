@@ -321,7 +321,7 @@ class ProposalRepository extends EntityRepository
     public function getEnabledByProposalForm(ProposalForm $proposalForm, $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('author', 'ut', 'amedia', 'theme', 'status', 'district', 'responses', 'questions', 'votes', 'votesaut', 'votesautut', 'answer', 'answeraut')
+            ->addSelect('author', 'ut', 'amedia', 'theme', 'status', 'district', 'responses', 'questions', 'selectionVotes', 'votesaut', 'votesautut', 'answer', 'answeraut')
             ->leftJoin('proposal.author', 'author')
             ->leftJoin('author.userType', 'ut')
             ->leftJoin('author.Media', 'amedia')
@@ -330,8 +330,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.status', 'status')
             ->leftJoin('proposal.responses', 'responses')
             ->leftJoin('responses.question', 'questions')
-            ->leftJoin('proposal.votes', 'votes')
-            ->leftJoin('votes.user', 'votesaut')
+            ->leftJoin('proposal.selectionVotes', 'selectionVotes')
+            ->leftJoin('selectionVotes.user', 'votesaut')
             ->leftJoin('votesaut.userType', 'votesautut')
             ->leftJoin('proposal.answer', 'answer')
             ->leftJoin('answer.author', 'answeraut')
@@ -365,7 +365,7 @@ class ProposalRepository extends EntityRepository
             ->select('proposal.title as name')
             ->addSelect('(
                 SELECT COUNT(pv.id) as pvCount
-                FROM CapcoAppBundle:ProposalVote pv
+                FROM CapcoAppBundle:ProposalSelectionVote pv
                 LEFT JOIN pv.proposal as pvp
                 LEFT JOIN pv.selectionStep ss
                 WHERE ss.id = :stepId

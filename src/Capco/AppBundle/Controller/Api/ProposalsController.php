@@ -3,8 +3,14 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Event\ProposalEvent;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Helper\ArrayHelper;
@@ -26,6 +32,7 @@ use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Swarrot\Broker\Message;
 
@@ -65,7 +72,22 @@ class ProposalsController extends FOSRestController
         // Filters
         $providedFilters['proposalForm'] = $proposalForm->getId();
 
-        return $this->get('capco.search.resolver')->searchProposals($page, $pagination, $order, $terms, $providedFilters);
+        $results = $this->get('capco.search.resolver')->searchProposals($page, $pagination, $order, $terms, $providedFilters);
+
+        $user = $this->getUser();
+
+        if ($user) {
+            $results['proposals'] = $this
+                ->get('capco.proposal_votes.resolver')
+                ->addVotesToProposalsForCollectStepAndUser(
+                    $results['proposals'],
+                    $proposalForm->getStep(),
+                    $user
+                )
+            ;
+        }
+
+        return $results;
     }
 
     /**
@@ -98,7 +120,7 @@ class ProposalsController extends FOSRestController
         $userHasVote = false;
         if ($this->getUser() && $firstVotableStep) {
             $userVote = $em
-                ->getRepository('CapcoAppBundle:ProposalVote')
+                ->getRepository('CapcoAppBundle:ProposalSelectionVote')
                 ->findOneBy(
                     [
                         'selectionStep' => $firstVotableStep,
@@ -315,23 +337,28 @@ class ProposalsController extends FOSRestController
     }
 
     /**
-     * @Get("/proposal_forms/{form}/proposals/{proposal}/votes")
-     * @ParamConverter("form", options={"mapping": {"form": "id"}})
+     * @Get("/steps/{step}/proposals/{proposal}/votes")
+     * @ParamConverter("step", options={"mapping": {"step": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
-     * @View(serializerGroups={"ProposalVotes", "UsersInfos", "UserMedias"})
+     * @View(serializerGroups={"ProposalSelectionVotes", "UsersInfos", "UserMedias", "ProposalCollectVotes"})
      *
-     * @param ProposalForm $form
+     * @param AbstractStep $step
      * @param Proposal     $proposal
      *
      * @return array
      */
-    public function getAllProposalVotesAction(ProposalForm $form, Proposal $proposal)
+    public function getAllProposalVotesAction(AbstractStep $step, Proposal $proposal)
     {
-        $votes = $this
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:ProposalVote')
-            ->getVotesForProposal($proposal)
-        ;
+        switch (true) {
+            case $step instanceof CollectStep:
+                $votes = $this->getDoctrine()->getRepository(ProposalCollectVote::class)->getVotesForProposalByStepId($proposal, $step->getId());
+                break;
+            case $step instanceof SelectionStep:
+                $votes = $this->getDoctrine()->getRepository(ProposalSelectionVote::class)->getVotesForProposalByStepId($proposal, $step->getId());
+                break;
+            default:
+                throw new NotFoundHttpException();
+        }
 
         return [
             'votes' => $votes,

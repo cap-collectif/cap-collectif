@@ -12,6 +12,8 @@ const ProposalPageVotes = React.createClass({
   displayName: 'ProposalPageVotes',
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
+    stepId: React.PropTypes.number.isRequired,
+    votes: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },
   mixins: [IntlMixin],
@@ -25,9 +27,10 @@ const ProposalPageVotes = React.createClass({
   getInitialState() {
     const {
       proposal,
+      votes,
     } = this.props;
     return {
-      votes: proposal.votes,
+      votes,
       votesCount: proposal.votesCount,
       showModal: false,
     };
@@ -48,8 +51,8 @@ const ProposalPageVotes = React.createClass({
   onChange() {
     if (ProposalVoteStore.isProposalVotesListSync) {
       this.setState({
-        votes: ProposalVoteStore.proposalVotes,
-        votesCount: ProposalVoteStore.votesCount,
+        votes: ProposalVoteStore.proposalVotesByStepId(this.props.stepId),
+        votesCount: ProposalVoteStore.votesCountByStepId(this.props.stepId),
       });
       return;
     }
@@ -58,8 +61,8 @@ const ProposalPageVotes = React.createClass({
   },
 
   loadProposalVotes() {
-    const { proposal } = this.props;
-    ProposalActions.loadProposalVotes(proposal.proposalForm.id, proposal.id);
+    const { proposal, stepId } = this.props;
+    ProposalActions.loadProposalVotes(stepId, proposal.id);
   },
 
   showModal() {

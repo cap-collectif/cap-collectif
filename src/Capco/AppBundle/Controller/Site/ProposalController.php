@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProposalCollectVote;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -36,7 +38,7 @@ class ProposalController extends Controller
         $userHasVote = false;
         if ($this->getUser() && $firstVotableStep) {
             $userVote = $em
-                ->getRepository('CapcoAppBundle:ProposalVote')
+                ->getRepository('CapcoAppBundle:ProposalSelectionVote')
                 ->findOneBy([
                     'selectionStep' => $firstVotableStep,
                     'user' => $this->getUser(),
@@ -49,7 +51,9 @@ class ProposalController extends Controller
 
         $proposalForm = $currentStep->getProposalForm();
         $props = $serializer->serialize([
+            'proposal' => $proposal,
             'form' => $proposalForm,
+            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
             'votableStep' => $firstVotableStep,
             'userHasVote' => $userHasVote,
@@ -67,14 +71,18 @@ class ProposalController extends Controller
             ]))
         ;
 
-        $previewedVotes = $em->getRepository('CapcoAppBundle:ProposalVote')->getVotesForProposal($proposal, 6);
-        $proposal->setVotes(new ArrayCollection($previewedVotes));
+        $previewedSelectionVotes = $this->getDoctrine()->getRepository(ProposalSelectionVote::class)->getVotesForProposalByStepId($proposal, $currentStep->getId(), 6);
+        $proposal->setSelectionVotes(new ArrayCollection($previewedSelectionVotes));
+
+        $previewedCollectVotes = $this->getDoctrine()->getRepository(ProposalCollectVote::class)->getVotesForProposalByStepId($proposal, $currentStep->getId(), 6);
+        $proposal->setCollectVotes(new ArrayCollection($previewedCollectVotes));
 
         $proposalSerialized = $serializer->serialize($proposal, 'json',
           SerializationContext::create()
             ->setSerializeNull(true)
             ->setGroups([
-                'ProposalVotes',
+                'ProposalSelectionVotes',
+                'ProposalCollectVotes',
                 'UsersInfos',
                 'UserMedias',
                 'Proposals',

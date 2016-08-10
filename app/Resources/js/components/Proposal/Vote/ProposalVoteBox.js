@@ -119,7 +119,7 @@ const ProposalVoteBox = React.createClass({
             this.displayForm()
               && <ProposalVoteForm
               proposal={proposal}
-              selectionStepId={selectionStep.id}
+              selectionStep={selectionStep}
               isSubmitting={isSubmitting}
               onValidationFailure={onValidationFailure}
               onSubmitSuccess={onSubmitSuccess}

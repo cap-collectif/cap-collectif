@@ -144,7 +144,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         $em->createQuery('UPDATE CapcoAppBundle:Proposal p set p.votesCount = (
           select count(pv.id)
-          from CapcoAppBundle:ProposalVote pv
+          from CapcoAppBundle:ProposalSelectionVote pv
           where pv.proposal = p AND pv.expired = 0 group by pv.proposal
         )')->execute();
 
@@ -310,10 +310,9 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         }
 
         // ****************************** Selection steps counters **************************************
-
         $em->createQuery('UPDATE CapcoAppBundle:Steps\SelectionStep ss set ss.votesCount = (
           select count(pv.id)
-          from CapcoAppBundle:ProposalVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
+          from CapcoAppBundle:ProposalSelectionVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
           where pv.selectionStep = ss AND pv.expired = 0 AND p.enabled = 1 group by pv.selectionStep
         )')->execute();
 

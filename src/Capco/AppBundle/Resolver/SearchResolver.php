@@ -221,7 +221,7 @@ class SearchResolver
                 break;
             case 'votes':
                 $sortField = $providedFilters['selectionStep']
-                    ? 'votesCountBySelectionSteps.'.$providedFilters['selectionStep']
+                    ? 'votesCountBySteps.'.$providedFilters['selectionStep']
                     : 'created_at'
                 ;
                 $sortOrder = 'desc';

@@ -17,6 +17,7 @@ describe('<ProposalPage />', () => {
     themes: [],
     districts: [],
     categories: [],
+    steps: [],
     votes: [],
     features: {
       themes: true,
@@ -160,9 +161,6 @@ describe('<ProposalPage />', () => {
     expect(tabPanes).to.have.length(4);
     const votesTabPane = tabPanes.at(2);
     expect(votesTabPane.prop('eventKey')).to.equal('votes');
-    const proposalPageVotes = votesTabPane.find('ProposalPageVotes');
-    expect(proposalPageVotes).to.have.length(1);
-    expect(proposalPageVotes.props()).to.eql({ className: '', proposal: proposalWithVotes });
     const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');
     expect(proposalVoteModal).to.have.length(1);
     expect(proposalVoteModal.props()).to.contains({

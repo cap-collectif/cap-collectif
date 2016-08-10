@@ -2,8 +2,9 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 
 import ProposalStore from '../../stores/ProposalStore';
+import ProposalVoteStore from '../../stores/ProposalVoteStore';
 import ProposalActions from '../../actions/ProposalActions';
-import { PROPOSAL_PAGINATION } from '../../constants/ProposalConstants';
+import { VOTE_TYPE_DISABLED, PROPOSAL_PAGINATION } from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
@@ -53,6 +54,7 @@ const CollectStepPage = React.createClass({
 
   componentWillUnmount() {
     ProposalStore.removeChangeListener(this.onChange);
+    ProposalVoteStore.removeChangeListener(this.onVoteChange);
   },
 
   onChange() {
@@ -118,6 +120,7 @@ const CollectStepPage = React.createClass({
           statuses={statuses}
           categories={categories}
           onChange={() => this.handleFilterOrOrderChange()}
+          orderByVotes={step.voteType !== VOTE_TYPE_DISABLED}
           showThemes={form.usingThemes}
         />
         <br />
@@ -127,7 +130,11 @@ const CollectStepPage = React.createClass({
               this.state.proposals.length === 0 && !step.isPrivate
               ? <p className={{ 'p--centered': true }} style={{ 'margin-bottom': '40px' }}>{ this.getIntlMessage('proposal.empty') }</p>
               : <VisibilityBox enabled={step.isPrivate}>
-                <ProposalList proposals={this.state.proposals} showThemes={form.usingThemes} />
+                <ProposalList
+                  proposals={this.state.proposals}
+                  step={step}
+                  showThemes={form.usingThemes}
+                />
               </VisibilityBox>
             }
             {

@@ -25,6 +25,7 @@ export const ProposalPage = React.createClass({
     form: PropTypes.object.isRequired,
     proposal: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
+    steps: React.PropTypes.array.isRequired,
     votableStep: PropTypes.object,
     userHasVote: PropTypes.bool,
     user: PropTypes.object,
@@ -43,10 +44,10 @@ export const ProposalPage = React.createClass({
 
   getInitialState() {
     const {
-      proposal,
-      userHasVote,
-      votableStep,
-    } = this.props;
+        proposal,
+        userHasVote,
+        votableStep,
+        } = this.props;
     if (votableStep) {
       ProposalActions.initProposalVotes(votableStep.creditsLeft, !!userHasVote);
     }
@@ -123,29 +124,29 @@ export const ProposalPage = React.createClass({
 
   vote() {
     const {
-      proposal,
-      votableStep,
-    } = this.props;
+        proposal,
+        votableStep,
+        } = this.props;
     ProposalActions
-      .vote(
-        votableStep.id,
-        proposal.id,
-        proposal.estimation
-      )
+        .vote(
+            votableStep.id,
+            proposal.id,
+            proposal.estimation
+        )
     ;
   },
 
   deleteVote() {
     const {
-      proposal,
-      votableStep,
-    } = this.props;
+        proposal,
+        votableStep,
+        } = this.props;
     ProposalActions
-      .deleteVote(
-        votableStep.id,
-        proposal.id,
-        proposal.estimation
-      )
+        .deleteVote(
+            votableStep.id,
+            proposal.id,
+            proposal.estimation
+        )
     ;
   },
 
@@ -161,77 +162,102 @@ export const ProposalPage = React.createClass({
   loadProposal() {
     const { form } = this.props;
     ProposalActions.getOne(
-      form.id,
-      this.state.proposal.id
+        form.id,
+        this.state.proposal.id
     );
   },
 
   render() {
     const { proposal, userHasVote, creditsLeft, showVotesModal } = this.state;
-    const { form, categories, votableStep, features } = this.props;
+    const { form, categories, votableStep, features, steps } = this.props;
     const showVotes = !!votableStep && votableStep.voteType !== VOTE_TYPE_DISABLED;
     const showVotesTab = proposal.votesCount > 0 || showVotes;
+    const stepsFiltered = steps.filter((step) => step.type === 'selection' || step.type === 'collect');
     return (
-      <div>
-        <ProposalPageAlert proposal={proposal} />
-        <ProposalPageHeader
-          proposal={proposal}
-          className="container container--custom"
-          showThemes={features.themes && form.usingThemes}
-          userHasVote={userHasVote}
-          onVote={this.voteAction}
-          selectionStep={votableStep}
-          creditsLeft={creditsLeft}
-        />
-        <Tab.Container
-          id="proposal-page-tabs"
-          defaultActiveKey={this.getDefaultKey()}
-          className="container--custom"
-        >
-          <div>
-            <div className="tabs__pills">
-              <div className="container">
-                <Nav bsStyle="pills" style={{ display: 'inline-block' }}>
-                  <NavItem eventKey="content" className="tabs__pill">
-                    {this.getIntlMessage('proposal.tabs.content')}
-                  </NavItem>
-                  <NavItem eventKey="comments" className="tabs__pill">
-                    {this.getIntlMessage('proposal.tabs.comments')}
-                    <span className="badge">{proposal.comments_count}</span>
-                  </NavItem>
-                  {
-                    showVotesTab
-                    && <NavItem eventKey="votes" className="tabs__pill">
-                      {this.getIntlMessage('proposal.tabs.votes')}
-                      <span className="badge">{proposal.votesCount}</span>
+        <div>
+          <ProposalPageAlert proposal={proposal} />
+          <ProposalPageHeader
+              proposal={proposal}
+              className="container container--custom"
+              showThemes={features.themes && form.usingThemes}
+              userHasVote={userHasVote}
+              onVote={this.voteAction}
+              selectionStep={votableStep}
+              creditsLeft={creditsLeft}
+          />
+          <Tab.Container
+              id="proposal-page-tabs"
+              defaultActiveKey={this.getDefaultKey()}
+              className="container--custom"
+          >
+            <div>
+              <div className="tabs__pills">
+                <div className="container">
+                  <Nav bsStyle="pills" style={{ display: 'inline-block' }}>
+                    <NavItem eventKey="content" className="tabs__pill">
+                      {this.getIntlMessage('proposal.tabs.content')}
                     </NavItem>
-                  }
-                  <NavItem eventKey="blog" className="tabs__pill">
-                    {this.getIntlMessage('proposal.tabs.blog')}
-                    <span className="badge">{proposal.postsCount}</span>
-                  </NavItem>
-                </Nav>
-                <ProposalVoteButtonWrapper
-                  selectionStep={votableStep}
-                  proposal={proposal}
-                  creditsLeft={creditsLeft}
-                  userHasVote={userHasVote}
-                  onClick={this.voteAction}
-                  style={{ marginTop: '10px' }}
-                  className="pull-right hidden-xs"
-                />
+                    <NavItem eventKey="comments" className="tabs__pill">
+                      {this.getIntlMessage('proposal.tabs.comments')}
+                      <span className="badge">{proposal.comments_count}</span>
+                    </NavItem>
+                    {
+                      showVotesTab
+                      && <NavItem eventKey="votes" className="tabs__pill">
+                        {this.getIntlMessage('proposal.tabs.votes')}
+                        <span className="badge">{proposal.votesCount}</span>
+                      </NavItem>
+                    }
+                    <NavItem eventKey="blog" className="tabs__pill">
+                      {this.getIntlMessage('proposal.tabs.blog')}
+                      <span className="badge">{proposal.postsCount}</span>
+                    </NavItem>
+                  </Nav>
+                  <ProposalVoteButtonWrapper
+                      selectionStep={votableStep}
+                      proposal={proposal}
+                      creditsLeft={creditsLeft}
+                      userHasVote={userHasVote}
+                      onClick={this.voteAction}
+                      style={{ marginTop: '10px' }}
+                      className="pull-right hidden-xs"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="container">
-              <Tab.Content animation={false}>
-                <Tab.Pane eventKey="content">
-                  <Row>
-                    <Col xs={12} sm={8}>
-                      <ProposalPageAnswer
-                        answer={proposal.answer}
-                      />
-                      <ProposalPageContent
-                        proposal={proposal}
+              <div className="container">
+                <Tab.Content animation={false}>
+                  <Tab.Pane eventKey="content">
+                    <Row>
+                      <Col xs={12} sm={8}>
+                        <ProposalPageAnswer
+                            answer={proposal.answer}
+                        />
+                        <ProposalPageContent
+                            proposal={proposal}
+                            form={form}
+                            categories={categories}
+                            userHasVote={userHasVote}
+                            selectionStep={votableStep}
+                            creditsLeft={creditsLeft}
+                            onVote={this.voteAction}
+                        />
+                      </Col>
+                      <Col xs={12} sm={4}>
+                        <ProposalPageMetadata
+                            proposal={proposal}
+                            showDistricts={features.districts}
+                            showCategories={form.usingCategories}
+                            showNullEstimation={!!votableStep && votableStep.voteType === VOTE_TYPE_BUDGET}
+                        />
+                        <br />
+                        <ProposalPageAdvancement
+                            proposal={proposal}
+                        />
+                      </Col>
+                    </Row>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="comments">
+                    <ProposalPageComments
                         form={form}
                         categories={categories}
                         userHasVote={userHasVote}
@@ -271,26 +297,53 @@ export const ProposalPage = React.createClass({
                   && <Tab.Pane eventKey="votes">
                     <ProposalPageVotes
                       proposal={proposal}
+                      id={proposal.id}
                     />
                   </Tab.Pane>
-                }
-                <Tab.Pane eventKey="blog">
-                  <ProposalPageBlog />
-                </Tab.Pane>
-              </Tab.Content>
+                  {
+                    showVotesTab
+                    && <Tab.Pane eventKey="votes">
+                        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                          <Row className="clearfix">
+                            <Nav bsStyle="pills">
+                              {
+                                stepsFiltered.map((step, index) => {
+                                  return <NavItem key={index} eventKey={step.id}>{step.title} <span className="badge">{proposal.votesCountBySteps[step.id]}</span></NavItem>;
+                                })
+                              }
+                            </Nav>
+                            <Tab.Content animation={false}>
+                              {
+                                stepsFiltered.map((step, index) => {
+                                  return (
+                                    <Tab.Pane key={index} eventKey={step.id}>
+                                      <ProposalPageVotes stepId={step.id} proposal={proposal} votes={step.type === 'selection' ? proposal.selectionVotes : proposal.collectVotes} />
+                                    </Tab.Pane>
+                                  );
+                                })
+                              }
+                            </Tab.Content>
+                          </Row>
+                        </Tab.Container>
+                      </Tab.Pane>
+                  }
+                  <Tab.Pane eventKey="blog">
+                    <ProposalPageBlog />
+                  </Tab.Pane>
+                </Tab.Content>
+              </div>
+              {
+                showVotes
+                && <ProposalVoteModal
+                    proposal={proposal}
+                    selectionStep={votableStep}
+                    showModal={showVotesModal}
+                    onToggleModal={this.toggleVotesModal}
+                />
+              }
             </div>
-            {
-              showVotes
-              && <ProposalVoteModal
-                proposal={proposal}
-                selectionStep={votableStep}
-                showModal={showVotesModal}
-                onToggleModal={this.toggleVotesModal}
-              />
-            }
-          </div>
-        </Tab.Container>
-      </div>
+          </Tab.Container>
+        </div>
     );
   },
 
@@ -301,6 +354,7 @@ const mapStateToProps = (state) => {
     user: state.default.user,
     features: state.default.features,
     proposal: state.proposal.proposals[state.proposal.currentProposalById],
+    steps: state.project.projects[state.project.currentProjectById].steps,
   };
 };
 

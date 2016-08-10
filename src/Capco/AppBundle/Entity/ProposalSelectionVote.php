@@ -7,16 +7,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
- * ProposalVote.
+ * ProposalSelectionVote.
  *
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalVoteRepository")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalSelectionVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasAnonymousOrUser()
  * @CapcoAssert\EmailDoesNotBelongToUser(message="proposal.vote.email_belongs_to_user")
- * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalVote", objectPath="proposal")
+ * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalSelectionVote", objectPath="proposal")
  * @CapcoAssert\HasEnoughCreditsToVote()
  */
-class ProposalVote extends AbstractVote
+class ProposalSelectionVote extends AbstractVote
 {
     use \Capco\AppBundle\Traits\AnonymousableTrait;
     use \Capco\AppBundle\Traits\PrivatableTrait;
@@ -26,7 +26,7 @@ class ProposalVote extends AbstractVote
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="votes", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selectionVotes", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $proposal;
@@ -55,7 +55,7 @@ class ProposalVote extends AbstractVote
     public function setProposal(Proposal $proposal)
     {
         $this->proposal = $proposal;
-        $proposal->addVote($this);
+        $proposal->addSelectionVote($this);
 
         return $this;
     }
@@ -93,7 +93,7 @@ class ProposalVote extends AbstractVote
     public function deleteVote()
     {
         if ($this->proposal != null) {
-            $this->proposal->removeVote($this);
+            $this->proposal->removeSelectionVote($this);
         }
     }
 }

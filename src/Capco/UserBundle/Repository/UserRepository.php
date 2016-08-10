@@ -245,7 +245,7 @@ class UserRepository extends EntityRepository
         $voteWith = $excludePrivate ? '(pv.user = u AND pv.private = 0)' : 'pv.user = u';
         $rawQuery = 'SELECT u.id, count(distinct pv) as proposals_votes_count
           from CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:ProposalVote pv WITH '.$voteWith.'
+          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH '.$voteWith.'
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
           LEFT JOIN pv.selectionStep s
           LEFT JOIN s.projectAbstractStep pas
@@ -473,7 +473,7 @@ class UserRepository extends EntityRepository
         $query = $em->createQuery(
          'SELECT u.id, count(distinct pv) as proposals_votes_count
           FROM CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:ProposalVote pv WITH (pv.user = u AND pv.selectionStep = :step)
+          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH (pv.user = u AND pv.selectionStep = :step)
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
           WHERE pv.user = u AND pv.expired = 0 AND p.enabled = 1 AND p.expired = 0
           GROUP BY pv.user

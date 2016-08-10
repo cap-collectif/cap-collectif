@@ -9,11 +9,11 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * ProposalRepository.
+ * ProposalSelectionVoteRepository.
  */
-class ProposalVoteRepository extends EntityRepository
+class ProposalSelectionVoteRepository extends EntityRepository
 {
-    public function getCountsByStepsForProposal(Proposal $proposal)
+    public function getCountsByProposalGroupedBySteps(Proposal $proposal)
     {
         $ids = array_map(function ($value) {
             return $value->getId();
@@ -27,27 +27,29 @@ class ProposalVoteRepository extends EntityRepository
             ->groupBy('pv.selectionStep')
         ;
         $results = $qb->getQuery()->getResult();
-        $counts = [];
+        $votesBySteps = [];
 
         foreach ($results as $result) {
-            $counts[$result['selectionStep']] = intval($result['votesCount']);
+            $votesBySteps[$result['selectionStep']] = intval($result['votesCount']);
         }
 
         foreach ($ids as $id) {
-            if (!array_key_exists($id, $counts)) {
-                $counts[$id] = 0;
+            if (!array_key_exists($id, $votesBySteps)) {
+                $votesBySteps[$id] = 0;
             }
         }
 
-        return $counts;
+        return $votesBySteps;
     }
 
-    public function getVotesForProposal(Proposal $proposal, $limit = null, $offset = 0)
+    public function getVotesForProposalByStepId(Proposal $proposal, $step, $limit = null, $offset = 0)
     {
         $qb = $this->createQueryBuilder('pv')
             ->leftJoin('pv.selectionStep', 'ss')
             ->where('pv.proposal = :proposal')
             ->setParameter('proposal', $proposal)
+            ->andWhere('ss.id = :step')
+            ->setParameter('step', $step)
             ->addOrderBy('pv.createdAt', 'DESC')
         ;
 
@@ -92,7 +94,7 @@ class ProposalVoteRepository extends EntityRepository
         return intval($qb->getQuery()->getSingleScalarResult());
     }
 
-    public function getVotesForUserInStep(User $user, SelectionStep $step)
+    public function InCollectStep(User $user, SelectionStep $step)
     {
         $qb = $this->createQueryBuilder('pv')
             ->where('pv.user = :user')

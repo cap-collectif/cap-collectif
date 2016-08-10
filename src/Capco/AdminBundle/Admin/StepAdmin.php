@@ -230,6 +230,20 @@ class StepAdmin extends Admin
             ;
         }
 
+        if ($subject instanceof CollectStep) {
+            $formMapper
+                ->with('admin.fields.step.group_votes')
+                ->add('voteType', 'choice', [
+                    'label' => 'admin.fields.step.vote_type',
+                    'choices' => CollectStep::$voteTypeLabels,
+                    'translation_domain' => 'CapcoAppBundle',
+                    'required' => true,
+                    'help' => 'admin.help.step.vote_type',
+                ])
+                ->end()
+            ;
+        }
+
         if ($subject instanceof CollectStep || $subject instanceof SelectionStep) {
             $formMapper
                 ->with('admin.fields.step.group_statuses')

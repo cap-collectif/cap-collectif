@@ -48,6 +48,11 @@ capco_api_selection_steps:
   type: annotation
   prefix: /api
 
+capco_api_collect_steps:
+  resource: "@CapcoAppBundle/Controller/Api/CollectStepsController.php"
+  type: annotation
+  prefix: /api
+
 capco_api_opinions:
   resource: "@CapcoAppBundle/Controller/Api/OpinionsController.php"
   type: annotation

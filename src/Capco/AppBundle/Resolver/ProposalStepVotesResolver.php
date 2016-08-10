@@ -4,27 +4,36 @@ namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalVote;
+use Capco\AppBundle\Entity\ProposalCollectVote;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Repository\ProposalVoteRepository;
+use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\UserBundle\Entity\User;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ProposalVotesResolver
+class ProposalStepVotesResolver
 {
-    protected $proposalVoteRepository;
+    protected $proposalSelectionVoteRepository;
     protected $selectionStepRepository;
+    protected $proposalCollectVoteRepository;
+    protected $collectStepRepository;
 
-    public function __construct(ProposalVoteRepository $proposalVoteRepository, SelectionStepRepository $selectionStepRepository)
+    public function __construct(ProposalSelectionVoteRepository $proposalSelectionVoteRepository, SelectionStepRepository $selectionStepRepository, ProposalCollectVoteRepository $proposalCollectVoteRepository, CollectStepRepository $collectStepRepository)
     {
-        $this->proposalVoteRepository = $proposalVoteRepository;
+        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->selectionStepRepository = $selectionStepRepository;
+        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
+        $this->collectStepRepository = $collectStepRepository;
     }
 
     public function addVotesToProposalsForSelectionStepAndUser(array $proposals, SelectionStep $selectionStep, User $user)
     {
         $usersVotesForSelectionStep = $this
-            ->proposalVoteRepository
+            ->proposalSelectionVoteRepository
             ->findBy(
                 [
                     'selectionStep' => $selectionStep,
@@ -40,9 +49,28 @@ class ProposalVotesResolver
         return $results;
     }
 
-    public function proposalHasVote($proposal, $usersVotesForSelectionStep)
+    public function addVotesToProposalsForCollectStepAndUser(array $proposals, CollectStep $collectStep, User $user)
     {
-        foreach ($usersVotesForSelectionStep as $vote) {
+        $usersVotesForCollectStep = $this
+            ->proposalCollectVoteRepository
+            ->findBy(
+                [
+                    'collectStep' => $collectStep,
+                    'user' => $user,
+                ]
+            );
+        $results = [];
+        foreach ($proposals as $proposal) {
+            $proposal['userHasVote'] = $this->proposalHasVote($proposal, $usersVotesForCollectStep);
+            $results[] = $proposal;
+        }
+
+        return $results;
+    }
+
+    public function proposalHasVote($proposal, $usersVotesForStep)
+    {
+        foreach ($usersVotesForStep as $vote) {
             if ($vote->getProposal()->getId() === $proposal['id']) {
                 return true;
             }
@@ -51,43 +79,49 @@ class ProposalVotesResolver
         return false;
     }
 
-    public function voteIsPossible(ProposalVote $vote)
+    private function checkIntanceOfProposalVote($vote)
     {
-        $selectionStep = $vote->getSelectionStep();
+        switch (true) {
+            case $vote instanceof ProposalSelectionVote:
+                $step = $vote->getSelectionStep();
+                $connected = $this->proposalSelectionVoteRepository->findBy(['selectionStep' => $step, 'user' => $vote->getUser()]);
+                $anonymous = $this->proposalSelectionVoteRepository->findBy(['selectionStep' => $step, 'email' => $vote->getEmail()]);
+                break;
+            case $vote instanceof ProposalCollectVote:
+                $step = $vote->getCollectStep();
+                $connected = $this->proposalCollectVoteRepository->findBy(['collectStep' => $step, 'user' => $vote->getUser()]);
+                $anonymous = $this->proposalCollectVoteRepository->findBy(['collectStep' => $step, 'email' => $vote->getEmail()]);
+                break;
+            default:
+                throw new NotFoundHttpException();
+        }
+
         $proposal = $vote->getProposal();
         $otherVotes = [];
         if ($vote->getUser()) {
-            $otherVotes = $this
-                ->proposalVoteRepository
-                ->findBy(
-                    [
-                        'selectionStep' => $selectionStep,
-                        'user' => $vote->getUser(),
-                    ]
-                )
-            ;
+            $otherVotes = $connected;
         } elseif ($vote->getEmail()) {
-            $otherVotes = $this
-                ->proposalVoteRepository
-                ->findBy(
-                    [
-                        'selectionStep' => $selectionStep,
-                        'email' => $vote->getEmail(),
-                    ]
-                )
-            ;
+            $otherVotes = $anonymous;
         }
 
-        if (!$selectionStep->isVotable()) {
+        if (!$step->isVotable()) {
             return false;
         }
-        if ($selectionStep->isBudgetVotable() && $selectionStep->getBudget()) {
-            $left = $selectionStep->getBudget() - $this->getAmountSpentForVotes($otherVotes);
 
-            return $left >= $proposal->getEstimation();
+        if ($vote instanceof ProposalSelectionVote) {
+            if ($step->isBudgetVotable() && $step->getBudget()) {
+                $left = $step->getBudget() - $this->getAmountSpentForVotes($otherVotes);
+
+                return $left >= $proposal->getEstimation();
+            }
         }
 
         return true;
+    }
+
+    public function voteIsPossible($vote)
+    {
+        return $this->checkIntanceOfProposalVote($vote);
     }
 
     public function getAmountSpentForVotes(array $votes)
@@ -103,7 +137,7 @@ class ProposalVotesResolver
     public function getSpentCreditsForUser(User $user, SelectionStep $selectionStep)
     {
         $votes = $this
-            ->proposalVoteRepository
+            ->proposalSelectionVoteRepository
             ->findBy(
                 [
                     'selectionStep' => $selectionStep,
@@ -193,7 +227,7 @@ class ProposalVotesResolver
     public function getVotesCountForUserInSelectionStep(User $user, SelectionStep $step)
     {
         return $this
-            ->proposalVoteRepository
+            ->proposalSelectionVoteRepository
             ->countForUserAndStep($user, $step)
         ;
     }
@@ -201,8 +235,8 @@ class ProposalVotesResolver
     public function getVotesForUserInSelectionStep(User $user, SelectionStep $step)
     {
         return $this
-            ->proposalVoteRepository
-            ->getVotesForUserInStep($user, $step)
+            ->proposalSelectionVoteRepository
+            ->InCollectStep($user, $step)
         ;
     }
 }

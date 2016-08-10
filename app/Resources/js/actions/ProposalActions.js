@@ -131,14 +131,15 @@ export default {
     ;
   },
 
-  loadProposalVotes: (proposalForm, proposal) => {
+  loadProposalVotes: (step, proposal) => {
     Fetcher
-      .get(`/proposal_forms/${proposalForm}/proposals/${proposal}/votes`)
+      .get(`/steps/${step}/proposals/${proposal}/votes`)
       .then((result) => {
         AppDispatcher.dispatch({
           actionType: RECEIVE_PROPOSAL_VOTES,
           votes: result.votes,
           votesCount: result.count,
+          stepId: step,
         });
         return true;
       });
@@ -311,57 +312,118 @@ export default {
       });
   },
 
-  vote: (selectionStep, proposal, estimation = null, data = {}, successMessage = 'proposal.request.vote.success') => {
+  vote: (step, proposal, estimation = null, data = {}, successMessage = 'proposal.request.vote.success') => {
     const hasComment = data.comment && data.comment.length > 0;
     AppDispatcher.dispatch({
       actionType: CREATE_PROPOSAL_VOTE,
       proposal,
-      selectionStep,
+      step,
       estimation,
       hasComment,
     });
+    if (step.step_type === 'selection') {
+      return Fetcher
+      .post(`/selection_steps/${step.id}/proposals/${proposal}/votes`, data)
+      .then(() => {
+        AppDispatcher.dispatch({
+          actionType: CREATE_PROPOSAL_VOTE_SUCCESS,
+        });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: { bsStyle: 'success', content: successMessage },
+        });
+        if (hasComment) {
+          AppDispatcher.dispatch({
+            actionType: CREATE_COMMENT_SUCCESS,
+            message: 'comment.submit_success',
+          });
+        }
+        return true;
+      })
+      .catch((error) => {
+        AppDispatcher.dispatch({
+          actionType: CREATE_PROPOSAL_VOTE_FAILURE,
+          estimation,
+        });
+        if (hasComment) {
+          AppDispatcher.dispatch({
+            actionType: CREATE_COMMENT_FAILURE,
+            message: 'comment.submit_error',
+          });
+        }
+        throw error;
+      });
+    }
+
     return Fetcher
-    .post(`/selection_steps/${selectionStep}/proposals/${proposal}/votes`, data)
-    .then(() => {
-      AppDispatcher.dispatch({
-        actionType: CREATE_PROPOSAL_VOTE_SUCCESS,
-      });
-      AppDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: successMessage },
-      });
-      if (hasComment) {
+      .post(`/collect_steps/${step.id}/proposals/${proposal}/votes`, data)
+      .then(() => {
         AppDispatcher.dispatch({
-          actionType: CREATE_COMMENT_SUCCESS,
-          message: 'comment.submit_success',
+          actionType: CREATE_PROPOSAL_VOTE_SUCCESS,
         });
-      }
-      return true;
-    })
-    .catch((error) => {
-      AppDispatcher.dispatch({
-        actionType: CREATE_PROPOSAL_VOTE_FAILURE,
-        estimation,
-      });
-      if (hasComment) {
         AppDispatcher.dispatch({
-          actionType: CREATE_COMMENT_FAILURE,
-          message: 'comment.submit_error',
+          actionType: UPDATE_ALERT,
+          alert: { bsStyle: 'success', content: successMessage },
         });
-      }
-      throw error;
-    });
+        if (hasComment) {
+          AppDispatcher.dispatch({
+            actionType: CREATE_COMMENT_SUCCESS,
+            message: 'comment.submit_success',
+          });
+        }
+        return true;
+      })
+      .catch((error) => {
+        AppDispatcher.dispatch({
+          actionType: CREATE_PROPOSAL_VOTE_FAILURE,
+          estimation,
+        });
+        if (hasComment) {
+          AppDispatcher.dispatch({
+            actionType: CREATE_COMMENT_FAILURE,
+            message: 'comment.submit_error',
+          });
+        }
+        throw error;
+      });
   },
 
-  deleteVote: (selectionStep, proposal, estimation = null, successMessage = 'proposal.request.delete_vote.success', errorMessage = 'proposal.request.delete_vote.failure') => {
+  deleteVote: (step, proposal, estimation = null, successMessage = 'proposal.request.delete_vote.success', errorMessage = 'proposal.request.delete_vote.failure') => {
     AppDispatcher.dispatch({
       actionType: DELETE_PROPOSAL_VOTE,
       proposal,
-      selectionStep,
+      step,
       estimation,
     });
+
+    if (step.step_type === 'selection') {
+      return Fetcher
+          .delete(`/selection_steps/${step.id}/proposals/${proposal}/votes`)
+          .then(() => {
+            AppDispatcher.dispatch({
+              actionType: DELETE_PROPOSAL_VOTE_SUCCESS,
+            });
+            AppDispatcher.dispatch({
+              actionType: UPDATE_ALERT,
+              alert: { bsStyle: 'success', content: successMessage },
+            });
+            return true;
+          })
+          .catch(() => {
+            AppDispatcher.dispatch({
+              actionType: DELETE_PROPOSAL_VOTE_FAILURE,
+              estimation,
+            });
+            AppDispatcher.dispatch({
+              actionType: UPDATE_ALERT,
+              alert: { bsStyle: 'warning', content: errorMessage },
+            });
+            return false;
+          });
+    }
+
     return Fetcher
-      .delete(`/selection_steps/${selectionStep}/proposals/${proposal}/votes`)
+      .delete(`/collect_steps/${step.id}/proposals/${proposal}/votes`)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_PROPOSAL_VOTE_SUCCESS,
@@ -384,5 +446,4 @@ export default {
         return false;
       });
   },
-
 };
