@@ -241,7 +241,7 @@ class IdeasController extends FOSRestController
     /**
      * @Post("/ideas/{id}/votes", defaults={"_feature_flags" = "ideas"})
      * @ParamConverter("idea", options={"mapping": {"id": "id"}})
-     * @View(statusCode=201, serializerGroups={})
+     * @View(statusCode=201, serializerGroups={"IdeaVotes", "UsersInfos", "UserMedias"})
      */
     public function postIdeaVoteAction(Request $request, Idea $idea)
     {
@@ -296,7 +296,7 @@ class IdeasController extends FOSRestController
      * @Security("has_role('ROLE_USER')")
      * @Delete("/ideas/{id}/votes", defaults={"_feature_flags" = "ideas"})
      * @ParamConverter("idea", options={"mapping": {"id": "id"}})
-     * @View()
+     * @View(statusCode=200, serializerGroups={"IdeaVotes", "UsersInfos", "UserMedias"})
      */
     public function deleteIdeaVoteAction(Idea $idea)
     {
@@ -319,6 +319,8 @@ class IdeasController extends FOSRestController
         $em->flush();
 
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+
+        return $vote;
     }
 
     /**

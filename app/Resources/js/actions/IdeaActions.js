@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
-import Fetcher from '../services/Fetcher';
+import Fetcher, { json } from '../services/Fetcher';
 import IdeaStore from '../stores/IdeaStore';
 import {
   SET_IDEAS_PAGINATION,
@@ -202,7 +202,8 @@ export default {
     const hasComment = data.comment && data.comment.length > 0;
     return Fetcher
       .post(`/ideas/${idea}/votes`, data)
-      .then(() => {
+      .then(json)
+      .then((vote) => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'alert.success.add.vote' },
@@ -213,7 +214,7 @@ export default {
             message: 'comment.submit_success',
           });
         }
-        return true;
+        return vote;
       })
       .catch((error) => {
         AppDispatcher.dispatch({
@@ -236,12 +237,13 @@ export default {
   deleteVote: (idea) => {
     return Fetcher
       .delete(`/ideas/${idea}/votes`)
-      .then(() => {
+      .then(json)
+      .then((vote) => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'alert.success.delete.vote' },
         });
-        return true;
+        return vote;
       })
       .catch(() => {
         AppDispatcher.dispatch({

@@ -38,37 +38,20 @@ describe('Idea Reducer', () => {
   it('Should handle VOTE_SUCCEEDED', () => {
     const initialState = {
       ideas: {
-        1: { votesCount: 1, commentsCount: 1, votes: [] },
+        1: { votesCount: 1, votes: [{ id: 1 }] },
       },
     };
-    const newStateWithComment = reducer(initialState, {
+    const newState = reducer(initialState, {
       type: VOTE_SUCCEEDED,
       ideaId: 1,
-      vote: { comment: 'lalala' },
-      user: { id: 1 },
+      vote: { id: 2 },
     });
-    const newStateWithoutComment = reducer(initialState, {
-      type: VOTE_SUCCEEDED,
-      ideaId: 1,
-      vote: { comment: '' },
-    });
-    expect(newStateWithComment).to.eql({
+    expect(newState).to.eql({
       ideas: {
         1: {
           votesCount: 2,
           userHasVote: true,
-          commentsCount: 2,
-          votes: [],
-        },
-      },
-    });
-    expect(newStateWithoutComment).to.eql({
-      ideas: {
-        1: {
-          votesCount: 2,
-          userHasVote: true,
-          commentsCount: 1,
-          votes: [],
+          votes: [{ id: 2 }, { id: 1 }],
         },
       },
     });
@@ -76,18 +59,37 @@ describe('Idea Reducer', () => {
   it('Should handle DELETE_VOTE_SUCCEEDED', () => {
     const initialState = {
       ideas: {
-        1: { votesCount: 1 },
+        1: { votesCount: 2, votes: [
+          { user: { unidId: 'user' }, private: false },
+          { private: true },
+        ] },
       },
     };
-    const newState = reducer(initialState, {
+    let newState = reducer(initialState, {
       type: DELETE_VOTE_SUCCEEDED,
       ideaId: 1,
+      vote: { user: { unidId: 'user' } },
     });
     expect(newState).to.eql({
       ideas: {
         1: {
-          votesCount: 0,
+          votesCount: 1,
           userHasVote: false,
+          votes: [{ private: true }],
+        },
+      },
+    });
+    newState = reducer(initialState, {
+      type: DELETE_VOTE_SUCCEEDED,
+      ideaId: 1,
+      vote: { private: true },
+    });
+    expect(newState).to.eql({
+      ideas: {
+        1: {
+          votesCount: 1,
+          userHasVote: false,
+          votes: [{ user: { unidId: 'user' }, private: false }],
         },
       },
     });
@@ -114,6 +116,6 @@ describe('Idea Sagas', () => {
     );
     expect(generator.next().value).to.eql(call(Fetcher.get, '/ideas/1/votes?offset=50&limit=50'));
 
-    expect(generator.throw().value).to.eql(put({ type: VOTES_FETCH_FAILED }));
+    expect(generator.throw({}).value).to.eql(put({ type: VOTES_FETCH_FAILED, error: {} }));
   });
 });

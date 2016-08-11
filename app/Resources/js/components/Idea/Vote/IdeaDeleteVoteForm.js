@@ -30,16 +30,14 @@ export const IdeaDeleteVoteForm = React.createClass({
       if (ideaVoteForm.isValid()) {
         IdeaActions
           .deleteVote(idea.id)
-          .then(() => {
-            dispatch(deleteVoteSucceeded(idea.id));
-            ideaVoteForm.reinitState();
+          .then((vote) => {
+            dispatch(deleteVoteSucceeded(idea.id, vote));
             onSubmitSuccess();
           })
           .catch(onFailure)
         ;
         return;
       }
-
       onFailure();
     }
   },
