@@ -30,12 +30,11 @@ export const fetchIdeaVotes = (ideaId) => {
   };
 };
 
-export const voteSuccess = (ideaId, vote, user) => {
+export const voteSuccess = (ideaId, vote) => {
   return {
     type: VOTE_SUCCEEDED,
     ideaId,
     vote,
-    user,
   };
 };
 

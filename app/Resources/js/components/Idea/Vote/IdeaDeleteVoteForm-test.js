@@ -7,6 +7,7 @@ import IntlData from '../../../translations/FR';
 import { IdeaDeleteVoteForm } from './IdeaDeleteVoteForm';
 
 const props = {
+  dispatch: () => {},
   idea: {},
   isSubmitting: false,
   onSubmitSuccess: () => {},
