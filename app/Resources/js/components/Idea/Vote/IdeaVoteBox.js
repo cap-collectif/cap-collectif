@@ -4,6 +4,7 @@ import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
 import IdeaCreateVoteForm from './IdeaCreateVoteForm';
 import IdeaDeleteVoteForm from './IdeaDeleteVoteForm';
+import IdeaActions from '../../../actions/IdeaActions';
 import { connect } from 'react-redux';
 
 export const IdeaVoteBox = React.createClass({
@@ -39,12 +40,18 @@ export const IdeaVoteBox = React.createClass({
     this.setState({
       isSubmitting: false,
     });
+    this.reloadVotes();
   },
 
   handleFailure() {
     this.setState({
       isSubmitting: false,
     });
+  },
+
+  reloadVotes() {
+    const { idea } = this.props;
+    IdeaActions.loadVotes(idea.id);
   },
 
   userHasVote() {
@@ -61,8 +68,7 @@ export const IdeaVoteBox = React.createClass({
     return (
       <div className={className}>
         {
-          user &&
-            <UserPreview
+          user && <UserPreview
               user={user}
               style={{ padding: '0', marginBottom: '0', fontSize: '18px' }}
             />

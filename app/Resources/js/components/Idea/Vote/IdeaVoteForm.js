@@ -65,6 +65,10 @@ const IdeaVoteForm = React.createClass({
     }
   },
 
+  reinitState() {
+    this.setState(this.getInitialState);
+  },
+
   formValidationRules: {},
 
   userHasVote() {
@@ -85,7 +89,6 @@ const IdeaVoteForm = React.createClass({
 
   render() {
     const { anonymous, serverErrors, idea } = this.props;
-    const { form } = this.state;
 
     return (
       <form ref={(c) => this.form = c}>
@@ -93,8 +96,8 @@ const IdeaVoteForm = React.createClass({
         <FlashMessages errors={serverErrors} translate={false} />
 
         {
-          anonymous &&
-          <Input
+          anonymous
+            ? <Input
             id="idea-vote-username"
             type="text"
             name="idea-vote__username"
@@ -103,6 +106,7 @@ const IdeaVoteForm = React.createClass({
             groupClassName={this.getGroupStyle('username')}
             errors={this.renderFormErrors('username')}
           />
+            : null
         }
 
         {
@@ -120,8 +124,8 @@ const IdeaVoteForm = React.createClass({
         }
 
         {
-          idea.commentable && !form.private && (anonymous || !this.userHasVote()) &&
-            <Input
+          (idea.commentable && !this.state.form.private && (anonymous || !this.userHasVote()))
+            ? <Input
               id="idea-vote-comment"
               type="textarea"
               name="idea-vote__comment"
@@ -131,10 +135,11 @@ const IdeaVoteForm = React.createClass({
               groupClassName={this.getGroupStyle('comment')}
               errors={this.renderFormErrors('comment')}
             />
+            : null
         }
 
         {
-          ((form.comment && form.comment.length > 0) || (!anonymous && this.userHasVote()))
+          (this.state.form.comment.length > 0 || (!anonymous && this.userHasVote()))
             ? null
             : <Input
               id="idea-vote-private"

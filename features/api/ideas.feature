@@ -181,24 +181,8 @@ Feature: Ideas
     }
     """
     Then the JSON response status code should be 201
-    And the JSON response should match:
-    """
-    {
-      "user": @...@,
-      "private": false,
-      "username": ""
-    }
-    """
     And I send a DELETE request to "/api/ideas/5/votes"
-    Then the JSON response status code should be 200
-    And the JSON response should match:
-    """
-    {
-      "user": @...@,
-      "private": false,
-      "username": ""
-    }
-    """
+    Then the JSON response status code should be 204
 
   @database
   Scenario: Logged in API client wants to vote for an idea anonymously

@@ -14,7 +14,7 @@ class OpinionTypeRepository extends EntityRepository
 {
     public function childrenHierarchy(OpinionType $parent)
     {
-        $children = $this->getChildrens($parent);
+        $children = $this->getChildren($parent);
         foreach ($children as &$child) {
             $child['__children'] = $this->childrenHierarchy($this->find($child['id']));
         }
@@ -32,7 +32,7 @@ class OpinionTypeRepository extends EntityRepository
         return $qb->getQuery()->getSingleResult(Query::HYDRATE_ARRAY);
     }
 
-    public function getChildrens(OpinionType $parent)
+    public function getChildren(OpinionType $parent)
     {
         $qb = $this->createQueryBuilder('ot')
           ->andWhere('ot.parent = :parent')
@@ -101,7 +101,7 @@ class OpinionTypeRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('ot')
             ->addSelect('o', 's', 'cas', 'p')
-            ->Join('ot.Opinions', 'o')
+            ->join('ot.Opinions', 'o')
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')

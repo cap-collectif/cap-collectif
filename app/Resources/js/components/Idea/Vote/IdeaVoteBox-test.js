@@ -23,7 +23,7 @@ describe('<IdeaVoteBox />', () => {
   it('should render the create idea vote form with no user avatar when user is not logged in', () => {
     const wrapper = shallow(<IdeaVoteBox {...props} user={null} {...IntlData} />);
     expect(wrapper.find('UserPreview')).to.have.length(0);
-    const form = wrapper.find('Connect(IdeaCreateVoteForm)');
+    const form = wrapper.find('IdeaCreateVoteForm');
     expect(form).to.have.length(1);
     expect(form.prop('idea')).to.equal(props.idea);
     expect(form.prop('isSubmitting')).to.equal(wrapper.state('isSubmitting'));
@@ -43,14 +43,14 @@ describe('<IdeaVoteBox />', () => {
   it('should render the create idea vote form with user avatar when user is logged in', () => {
     const wrapper = shallow(<IdeaVoteBox {...props} user={user} {...IntlData} />);
     expect(wrapper.find('UserPreview')).to.have.length(1);
-    expect(wrapper.find('Connect(IdeaCreateVoteForm)')).to.have.length(1);
+    expect(wrapper.find('IdeaCreateVoteForm')).to.have.length(1);
     expect(wrapper.find(SubmitButton)).to.have.length(1);
   });
 
   it('should render the delete idea vote form with user avatar when user is logged in and has voted', () => {
     const wrapper = shallow(<IdeaVoteBox {...propsWithVote} user={user} {...IntlData} />);
     expect(wrapper.find('UserPreview')).to.have.length(1);
-    expect(wrapper.find('Connect(IdeaDeleteVoteForm)')).to.have.length(1);
+    expect(wrapper.find('IdeaDeleteVoteForm')).to.have.length(1);
     expect(wrapper.find(SubmitButton)).to.have.length(1);
   });
 });

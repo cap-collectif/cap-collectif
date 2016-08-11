@@ -217,4 +217,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null, null, { withRef: true })(IdeaForm);
+export default connect(mapStateToProps)(IdeaForm);

@@ -1,14 +1,11 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
 import IdeaActions from '../../../actions/IdeaActions';
 import IdeaVoteForm from './IdeaVoteForm';
-import { voteSuccess } from '../../../redux/modules/idea';
 
-export const IdeaCreateVoteForm = React.createClass({
+const IdeaCreateVoteForm = React.createClass({
   displayName: 'IdeaCreateVoteForm',
   propTypes: {
-    dispatch: PropTypes.func.isRequired,
     idea: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     onSubmitSuccess: PropTypes.func.isRequired,
@@ -30,7 +27,6 @@ export const IdeaCreateVoteForm = React.createClass({
       isSubmitting,
       onFailure,
       onSubmitSuccess,
-      dispatch,
     } = this.props;
     const ideaVoteForm = this.ideaVoteForm;
     if (!isSubmitting && nextProps.isSubmitting) {
@@ -45,8 +41,8 @@ export const IdeaCreateVoteForm = React.createClass({
         }
         IdeaActions
           .vote(idea.id, data)
-          .then((vote) => {
-            dispatch(voteSuccess(idea.id, vote));
+          .then(() => {
+            ideaVoteForm.reinitState();
             onSubmitSuccess();
           })
           .catch((error) => {
@@ -87,4 +83,4 @@ export const IdeaCreateVoteForm = React.createClass({
 
 });
 
-export default connect()(IdeaCreateVoteForm);
+export default IdeaCreateVoteForm;

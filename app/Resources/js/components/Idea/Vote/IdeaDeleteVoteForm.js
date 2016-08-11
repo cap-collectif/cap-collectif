@@ -1,14 +1,11 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
 import IdeaActions from '../../../actions/IdeaActions';
 import IdeaVoteForm from './IdeaVoteForm';
-import { deleteVoteSucceeded } from '../../../redux/modules/idea';
 
-export const IdeaDeleteVoteForm = React.createClass({
+const IdeaDeleteVoteForm = React.createClass({
   displayName: 'IdeaDeleteVoteForm',
   propTypes: {
-    dispatch: PropTypes.func.isRequired,
     idea: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     onSubmitSuccess: PropTypes.func.isRequired,
@@ -23,21 +20,21 @@ export const IdeaDeleteVoteForm = React.createClass({
       isSubmitting,
       onFailure,
       onSubmitSuccess,
-      dispatch,
     } = this.props;
     const ideaVoteForm = this.ideaVoteForm;
     if (!isSubmitting && nextProps.isSubmitting) {
       if (ideaVoteForm.isValid()) {
         IdeaActions
           .deleteVote(idea.id)
-          .then((vote) => {
-            dispatch(deleteVoteSucceeded(idea.id, vote));
+          .then(() => {
+            ideaVoteForm.reinitState();
             onSubmitSuccess();
           })
           .catch(onFailure)
         ;
         return;
       }
+
       onFailure();
     }
   },
@@ -58,4 +55,4 @@ export const IdeaDeleteVoteForm = React.createClass({
 
 });
 
-export default connect()(IdeaDeleteVoteForm);
+export default IdeaDeleteVoteForm;
