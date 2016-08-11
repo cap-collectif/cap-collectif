@@ -10,14 +10,7 @@ import {
   CHANGE_IDEAS_ORDER,
   CHANGE_IDEAS_THEME,
 
-  CREATE_IDEA_VOTE_SUCCESS,
-  DELETE_IDEA_VOTE_SUCCESS,
-
-  REPORT_IDEA_SUCCESS,
-
   RECEIVE_IDEAS,
-  RECEIVE_IDEA,
-  RECEIVE_IDEA_VOTES,
 } from '../constants/IdeaConstants';
 
 class IdeaStore extends BaseStore {
@@ -28,7 +21,6 @@ class IdeaStore extends BaseStore {
     this._ideas = [];
     this._count = 0;
     this._countTrashed = 0;
-    this._idea = null;
     this._pagination = DEFAULT_IDEAS_PAGINATION;
     this._currentPage = 1;
     this._terms = null;
@@ -59,15 +51,6 @@ class IdeaStore extends BaseStore {
         this._countTrashed = action.countTrashed;
         this.emitChange();
         break;
-      case RECEIVE_IDEA:
-        this._idea = action.idea;
-        this.emitChange();
-        break;
-      case RECEIVE_IDEA_VOTES:
-        this._votes = action.votes;
-        this._votesCount = action.votesCount;
-        this.emitChange();
-        break;
       case CHANGE_IDEAS_PAGE:
         this._currentPage = action.page;
         this.emitChange();
@@ -87,23 +70,6 @@ class IdeaStore extends BaseStore {
         this._currentPage = 1;
         this.emitChange();
         break;
-      case CREATE_IDEA_VOTE_SUCCESS:
-        this._idea.userHasVote = true;
-        this._idea.votesCount++;
-        if (action.hasComment) {
-          this._idea.commentsCount++;
-        }
-        this.emitChange();
-        break;
-      case DELETE_IDEA_VOTE_SUCCESS:
-        this._idea.userHasVote = false;
-        this._idea.votesCount--;
-        this.emitChange();
-        break;
-      case REPORT_IDEA_SUCCESS:
-        this._idea.userHasReport = true;
-        this.emitChange();
-        break;
       default: break;
     }
   }
@@ -118,10 +84,6 @@ class IdeaStore extends BaseStore {
 
   get countTrashed() {
     return this._countTrashed;
-  }
-
-  get idea() {
-    return this._idea;
   }
 
   get pagination() {
@@ -144,13 +106,6 @@ class IdeaStore extends BaseStore {
     return this._theme;
   }
 
-  get votes() {
-    return this._votes;
-  }
-
-  get votesCount() {
-    return this._votesCount;
-  }
 }
 
 export default new IdeaStore();

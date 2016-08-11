@@ -36,7 +36,7 @@ const IdeaEditForm = React.createClass({
       onValidationFailure,
     } = this.props;
     if (!isSubmitting && nextProps.isSubmitting) {
-      const ideaForm = this.ideaForm;
+      const ideaForm = this.ideaForm.getWrappedInstance();
       if (ideaForm.isValid()) {
         const form = ideaForm.state.form;
         if (!features.themes) {

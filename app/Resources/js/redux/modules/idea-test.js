@@ -1,6 +1,13 @@
 /* eslint-env mocha */
 import { expect } from 'chai';
-import { reducer, fetchAllVotes, VOTES_FETCH_SUCCEEDED, VOTES_FETCH_FAILED } from './idea';
+import {
+  reducer,
+  fetchAllVotes,
+  DELETE_VOTE_SUCCEEDED,
+  VOTES_FETCH_SUCCEEDED,
+  VOTES_FETCH_FAILED,
+  VOTE_SUCCEEDED,
+ } from './idea';
 import { call, put } from 'redux-saga/effects';
 import Fetcher from '../../services/Fetcher';
 
@@ -28,16 +35,71 @@ describe('Idea Reducer', () => {
       },
     });
   });
+  it('Should handle VOTE_SUCCEEDED', () => {
+    const initialState = {
+      ideas: {
+        1: { votesCount: 1, votes: [{ id: 1 }] },
+      },
+    };
+    const newState = reducer(initialState, {
+      type: VOTE_SUCCEEDED,
+      ideaId: 1,
+      vote: { id: 2 },
+    });
+    expect(newState).to.eql({
+      ideas: {
+        1: {
+          votesCount: 2,
+          userHasVote: true,
+          votes: [{ id: 2 }, { id: 1 }],
+        },
+      },
+    });
+  });
+  it('Should handle DELETE_VOTE_SUCCEEDED', () => {
+    const initialState = {
+      ideas: {
+        1: { votesCount: 2, votes: [
+          { user: { unidId: 'user' }, private: false },
+          { private: true },
+        ] },
+      },
+    };
+    let newState = reducer(initialState, {
+      type: DELETE_VOTE_SUCCEEDED,
+      ideaId: 1,
+      vote: { user: { unidId: 'user' } },
+    });
+    expect(newState).to.eql({
+      ideas: {
+        1: {
+          votesCount: 1,
+          userHasVote: false,
+          votes: [{ private: true }],
+        },
+      },
+    });
+    newState = reducer(initialState, {
+      type: DELETE_VOTE_SUCCEEDED,
+      ideaId: 1,
+      vote: { private: true },
+    });
+    expect(newState).to.eql({
+      ideas: {
+        1: {
+          votesCount: 1,
+          userHasVote: false,
+          votes: [{ user: { unidId: 'user' }, private: false }],
+        },
+      },
+    });
+  });
 });
 
 describe('Idea Sagas', () => {
   it('Should fetchAllVotes', () => {
     const generator = fetchAllVotes({
-      payload: {
-        idea: {
-          id: 1,
-        },
-      },
+      ideaId: 1,
     });
 
     const votes = [];
@@ -54,6 +116,6 @@ describe('Idea Sagas', () => {
     );
     expect(generator.next().value).to.eql(call(Fetcher.get, '/ideas/1/votes?offset=50&limit=50'));
 
-    expect(generator.throw().value).to.eql(put({ type: VOTES_FETCH_FAILED }));
+    expect(generator.throw({}).value).to.eql(put({ type: VOTES_FETCH_FAILED, error: {} }));
   });
 });
