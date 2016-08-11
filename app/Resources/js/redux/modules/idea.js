@@ -14,10 +14,11 @@ const initialState = {
   ideas: [],
 };
 
-export const deleteVoteSuccess = (ideaId) => {
+export const deleteVoteSuccess = (ideaId, user) => {
   return {
     type: DELETE_VOTE_SUCCEEDED,
     ideaId,
+    user,
   };
 };
 
@@ -28,11 +29,12 @@ export const fetchIdeaVotes = (ideaId) => {
   };
 };
 
-export const voteSuccess = (ideaId, hasComment) => {
+export const voteSuccess = (ideaId, vote, user) => {
   return {
     type: VOTE_SUCCEEDED,
     ideaId,
-    hasComment,
+    vote,
+    user,
   };
 };
 
@@ -78,13 +80,22 @@ export const reducer = (state = initialState, action) => {
       };
     }
     case VOTE_SUCCEEDED: {
+      const hasComment = action.vote.comment && action.vote.comment.length > 0;
+      const vote = {
+        id: 1201721720172012,
+        username: action.vote.username,
+        private: action.vote.private,
+        user: action.user,
+      };
+      const idea = state.ideas[action.ideaId];
       const ideas = {
         [action.ideaId]: {
-          ...state.ideas[action.ideaId],
+          ...idea,
           ...{
+            votes: idea.votes.unshift(vote),
             userHasVote: true,
-            votesCount: state.ideas[action.ideaId].votesCount + 1,
-            commentsCount: state.ideas[action.ideaId].commentsCount + (action.hasComment ? 1 : 0),
+            votesCount: idea.votesCount + 1,
+            commentsCount: idea.commentsCount + (hasComment ? 1 : 0),
           },
         },
       };
@@ -95,6 +106,7 @@ export const reducer = (state = initialState, action) => {
         [action.ideaId]: {
           ...state.ideas[action.ideaId],
           ...{
+            votes: state.ideas[action.ideaId].votes,
             userHasVote: false,
             votesCount: state.ideas[action.ideaId].votesCount - 1,
           },

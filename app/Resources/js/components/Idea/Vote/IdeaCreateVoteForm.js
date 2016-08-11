@@ -8,6 +8,7 @@ import { voteSuccess } from '../../../redux/modules/idea';
 export const IdeaCreateVoteForm = React.createClass({
   displayName: 'IdeaCreateVoteForm',
   propTypes: {
+    user: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
     idea: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
@@ -16,6 +17,12 @@ export const IdeaCreateVoteForm = React.createClass({
     anonymous: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
 
   getInitialState() {
     return {
@@ -31,6 +38,7 @@ export const IdeaCreateVoteForm = React.createClass({
       onFailure,
       onSubmitSuccess,
       dispatch,
+      user,
     } = this.props;
     const ideaVoteForm = this.ideaVoteForm;
     if (!isSubmitting && nextProps.isSubmitting) {
@@ -46,8 +54,7 @@ export const IdeaCreateVoteForm = React.createClass({
         IdeaActions
           .vote(idea.id, data)
           .then(() => {
-            dispatch(voteSuccess(idea.id, data.comment && data.comment.length > 0));
-            dispatch(fetchIdeaVotes(idea));
+            dispatch(voteSuccess(idea.id, data, user));
             ideaVoteForm.reinitState();
             onSubmitSuccess();
           })
@@ -89,4 +96,10 @@ export const IdeaCreateVoteForm = React.createClass({
 
 });
 
-export default connect()(IdeaCreateVoteForm);
+const mapStateToProps = (state) => {
+  return {
+    user: state.default.user,
+  };
+};
+
+export default connect(mapStateToProps)(IdeaCreateVoteForm);

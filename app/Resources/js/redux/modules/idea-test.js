@@ -38,18 +38,19 @@ describe('Idea Reducer', () => {
   it('Should handle VOTE_SUCCEEDED', () => {
     const initialState = {
       ideas: {
-        1: { votesCount: 1, commentsCount: 1 },
+        1: { votesCount: 1, commentsCount: 1, votes: [] },
       },
     };
     const newStateWithComment = reducer(initialState, {
       type: VOTE_SUCCEEDED,
       ideaId: 1,
-      hasComment: true,
+      vote: { comment: 'lalala' },
+      user: { id: 1 },
     });
     const newStateWithoutComment = reducer(initialState, {
       type: VOTE_SUCCEEDED,
       ideaId: 1,
-      hasComment: false,
+      vote: { comment: '' },
     });
     expect(newStateWithComment).to.eql({
       ideas: {
@@ -57,6 +58,7 @@ describe('Idea Reducer', () => {
           votesCount: 2,
           userHasVote: true,
           commentsCount: 2,
+          votes: [],
         },
       },
     });
@@ -66,6 +68,7 @@ describe('Idea Reducer', () => {
           votesCount: 2,
           userHasVote: true,
           commentsCount: 1,
+          votes: [],
         },
       },
     });
@@ -94,11 +97,7 @@ describe('Idea Reducer', () => {
 describe('Idea Sagas', () => {
   it('Should fetchAllVotes', () => {
     const generator = fetchAllVotes({
-      payload: {
-        idea: {
-          id: 1,
-        },
-      },
+      ideaId: 1,
     });
 
     const votes = [];

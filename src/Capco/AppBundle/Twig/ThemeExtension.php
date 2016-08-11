@@ -21,12 +21,17 @@ class ThemeExtension extends \Twig_Extension
     public function getFunctions() : array
     {
         return [
-            new \Twig_SimpleFunction('list_themes', [$this, 'listThemes']),
+            new \Twig_SimpleFunction('themes_list', [$this, 'listThemes']),
         ];
     }
 
     public function listThemes()
     {
-        return $this->themeRepo->findAll();
+        $themes = $this->themeRepo->findBy(['isEnabled' => true]);
+        $list = [];
+        foreach ($themes as $theme) {
+          $list[] = ['id' => $theme->getId(), 'title' => $theme->getTitle()];
+        }
+        return $list;
     }
 }
