@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import LoginOverlay from '../Utils/LoginOverlay';
+import { connect } from 'react-redux';
 
 const SubmitButton = React.createClass({
   displayName: 'SubmitButton',
@@ -15,6 +16,7 @@ const SubmitButton = React.createClass({
     style: PropTypes.object,
     disabled: PropTypes.bool,
     loginOverlay: PropTypes.bool,
+    user: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -34,8 +36,9 @@ const SubmitButton = React.createClass({
       isSubmitting,
       loginOverlay,
       onSubmit,
+      user,
     } = this.props;
-    if (loginOverlay || isSubmitting) {
+    if ((loginOverlay && !user) || isSubmitting) {
       return null;
     }
     onSubmit();
@@ -74,4 +77,10 @@ const SubmitButton = React.createClass({
 
 });
 
-export default SubmitButton;
+const mapStateToProps = (state) => {
+  return {
+    user: state.default.user,
+  };
+};
+
+export default connect(mapStateToProps)(SubmitButton);
