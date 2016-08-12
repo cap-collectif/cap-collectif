@@ -148,6 +148,8 @@ const OpinionTabs = React.createClass({
     if (this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() + this.isLinkable() > 1) {
       // at least two tabs
 
+      const marginTop = { 'margin-top': '20px' };
+
       return (
         <Tab.Container
           id="opinion-page-tabs"
@@ -205,31 +207,31 @@ const OpinionTabs = React.createClass({
             <Tab.Content animation={false}>
               {
                 this.isVersionable()
-                && <Tab.Pane eventKey="versions">
+                && <Tab.Pane eventKey="versions" style={marginTop}>
                   {this.renderVersionsContent()}
                 </Tab.Pane>
               }
               {
                 this.isCommentable()
-                && <Tab.Pane eventKey="arguments">
+                && <Tab.Pane eventKey="arguments" style={marginTop}>
                   <ArgumentsBox {...this.props} />
                 </Tab.Pane>
               }
               {
                 this.isSourceable()
-                && <Tab.Pane eventKey="sources">
+                && <Tab.Pane eventKey="sources" style={marginTop}>
                   <OpinionSourceBox {...this.props} />
                 </Tab.Pane>
               }
               {
                 this.hasStatistics()
-                && <Tab.Pane eventKey="votesevolution">
+                && <Tab.Pane eventKey="votesevolution" style={marginTop}>
                   <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />
                 </Tab.Pane>
               }
               {
                 this.isLinkable()
-                && <Tab.Pane eventKey="links" >
+                && <Tab.Pane eventKey="links" style={{ 'margin-top': '20px' }} >
                   <OpinionLinksBox {...this.props} />
                 </Tab.Pane>
               }
