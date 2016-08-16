@@ -27,8 +27,8 @@
   .container-fluid > .navbar-header,
   .container > .navbar-collapse,
   .container > .navbar-header {
-    margin-right: 0;
     margin-left: 0;
+    margin-right: 0;
   }
 
   & > .container .navbar-brand {
@@ -39,8 +39,8 @@
     padding: 5px;
     img {
       height: 100%;
-      width: auto;
       vertical-align: middle;
+      width: auto;
     }
   }
 
@@ -57,8 +57,8 @@
     .navbar-brand {
       max-width: 50%;
       & > img {
-        width: 100%;
         height: auto;
+        width: 100%;
       }
     }
 
@@ -73,25 +73,31 @@
     }
   }
 
+  //Fix for scroll when the navigation is too large
+  .dropdown-menu {
+    height: auto;
+    max-height: 350px;
+    overflow-x: hidden;
+  }
+
   // CSS from bootstrap dropdown menu
   .dropdown-menu > .nav-dropdown-section > li > a {
-    display: block;
-    padding: 3px 20px;
     clear: both;
+    color: #000;
+    display: block;
     line-height: 1.42857;
-    color: #000000;
+    padding: 3px 20px;
     white-space: nowrap;
   }
 
   .dropdown-menu > .nav-dropdown-section {
+    border-bottom: 0;
+    border-top: 0;
     display: block;
-    //border-bottom: 1px solid #ffffff;
-    //border-top: 1px solid #ffffff;
-
   }
 
   .dropdown-menu > .nav-dropdown-section + .nav-dropdown-section {
-    border-top: none;
+    border-top: 0;
   }
 
   .dropdown-menu > .nav-dropdown-section + li {
@@ -99,8 +105,8 @@
   }
 
   .dropdown-menu > .nav-dropdown-section > .dropdown-header {
-    opacity: 0.5;
     font-size: 14px;
+    opacity: .5;
   }
 
   .dropdown-menu > .nav-dropdown-section:first-child > li.divider:first-child,
@@ -117,31 +123,36 @@
     position: relative;
 
     ul {
-      position: absolute;
       left: 0;
+      position: absolute;
     }
   }
 
   #navbar-content .nav-dropdown-section {
-    margin: 9px 0;
+    margin: 0;
   }
 
   #navbar-content .dropdown-menu > .nav-dropdown-section {
-    border-bottom: 1px solid #e5e5e5;
-    border-top: 1px solid #e5e5e5;
-    padding-top: 9px;
+    border-bottom: 1px solid #e7e7e7;
     padding-bottom: 9px;
+    padding-top: 9px;
 
     &:first-child {
-      border-top: none;
+      border-top: 0;
       padding-top: 0;
     }
 
     &:last-child {
-      border-bottom: none;
+      border-bottom: 0;
       padding-bottom: 0;
     }
   }
+
+  #navbar-content .dropdown-menu > li + .nav-dropdown-section {
+    border-top: 1px solid #e7e7e7;
+    margin-top: 9px;
+  }
+
 }
 
 /* ===============================================================
@@ -236,15 +247,15 @@ $backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
 }
 
 .skip-links-list {
-  width: 100%;
-  padding: 0px;
-  margin: 0px;
   list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 
   li {
-    float: left;
-    font-size: 12px;
     color: #000;
+    font-size: 12px;
+    float: left;
 
     &:hover {
       color: $brand-primary;
