@@ -626,7 +626,6 @@ Feature: Proposal Restful Api
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-      "district": 1,
       "theme": 1,
       "category": 1,
       "responses": [
@@ -653,7 +652,6 @@ Feature: Proposal Restful Api
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-      "district": 1,
       "theme": 1,
       "category": 1,
       "responses": [
@@ -676,7 +674,6 @@ Feature: Proposal Restful Api
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-      "district": 1,
       "theme": 1,
       "category": 1,
       "responses": [
@@ -712,7 +709,6 @@ Feature: Proposal Restful Api
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-      "district": 1,
       "theme": 1,
       "category": 1,
       "responses": [
@@ -751,7 +747,6 @@ Feature: Proposal Restful Api
     {
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
-      "district": 1,
       "theme": 1,
       "responses": [
         {

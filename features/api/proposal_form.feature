@@ -19,6 +19,8 @@ Feature: ProposalForm Restful Api
   "isContribuable": true,
   "usingThemes": @boolean@,
   "themeMandatory": @boolean@,
+  "usingDistrict": @boolean@,
+  "districtMandatory": @boolean@,
   "usingCategories": @boolean@,
   "categoryMandatory": @boolean@,
   "fields": [

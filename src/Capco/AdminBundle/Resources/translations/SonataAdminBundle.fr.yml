@@ -530,11 +530,13 @@ admin:
       questions: Questions
       theme_help_text: Texte d'aide pour le champ Thème.
       theme_mandatory: Saisie du thème obligatoire
+      district_mandatory: Saisie de la localisation obligatoire
       title: Titre
       title_help_text: Texte d'aide pour le champ Titre.
       updated_at: Mise à jour
       using_categories: Demander la saisie d'une catégorie
       using_themes: Demander la saisie d'un thème
+      using_district: Demander la localisation
     questionnaire:
       anonymous_allowed: Autoriser les réponses anonymes
       title: Titre

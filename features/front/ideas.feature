@@ -41,6 +41,7 @@ Feature: Ideas
   @javascript
   Scenario: Anonymous user wants to see ideas and sort them
     Given I go to the ideas page
+    When I sort ideas by date
     Then ideas should be ordered by date
     When I sort ideas by comments
     Then ideas should be ordered by comments

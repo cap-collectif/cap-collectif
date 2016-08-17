@@ -22,12 +22,6 @@ services:
     tags:
       - { name: validator.constraint_validator, alias: has_theme_if_activated.validator }
 
-  capco.has_district_if_activated.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasDistrictIfActivatedValidator
-    arguments: ['@capco.toggle.manager']
-    tags:
-      - { name: validator.constraint_validator, alias: has_district_if_activated.validator }
-
   capco.is_social_network_url.validator:
     class: Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrlValidator
     tags:
@@ -71,3 +65,9 @@ services:
     class: Capco\AppBundle\Validator\Constraints\ProjectStepDoNotOverlapValidator
     tags:
       - { name: validator.constraint_validator, alias: project_step_do_not_overlap.validator }
+
+  capco.has_district_if_mandatory.validator:
+    class: Capco\AppBundle\Validator\Constraints\HasDistrictIfMandatoryValidator
+    arguments: ['@capco.toggle.manager']
+    tags:
+      - { name: validator.constraint_validator, alias: has_district_if_mandatory.validator }

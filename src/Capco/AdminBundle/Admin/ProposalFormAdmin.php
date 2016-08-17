@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class ProposalFormAdmin extends Admin
@@ -30,6 +31,14 @@ class ProposalFormAdmin extends Admin
             ->add('description', 'ckeditor', [
                 'label' => 'admin.fields.proposal_form.description',
                 'config_name' => 'admin_editor',
+                'required' => false,
+            ])
+            ->add('usingDistrict', CheckboxType::class, [
+                'label' => 'admin.fields.proposal_form.using_district',
+                'required' => false,
+            ])
+            ->add('districtMandatory', CheckboxType::class, [
+                'label' => 'admin.fields.proposal_form.district_mandatory',
                 'required' => false,
             ])
         ;
@@ -81,16 +90,6 @@ class ProposalFormAdmin extends Admin
                 'help' => 'admin.fields.proposal_form.help_text_description_help_text',
             ])
         ;
-
-        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('districts')) {
-            $formMapper
-                ->add('districtHelpText', null, [
-                    'label' => 'admin.fields.proposal_form.district_help_text',
-                    'required' => false,
-                    'help' => 'admin.fields.proposal_form.help_text_district_help_text',
-                ])
-            ;
-        }
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper

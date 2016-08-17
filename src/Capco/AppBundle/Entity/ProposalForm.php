@@ -118,6 +118,18 @@ class ProposalForm
     private $categoryMandatory = false;
 
     /**
+     * @var bool
+     * @ORM\Column(name="district_mandatory", type="boolean")
+     */
+    private $districtMandatory = false;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="using_district", type="boolean")
+     */
+    private $usingDistrict = false;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -417,6 +429,30 @@ class ProposalForm
     public function setThemeMandatory($themeMandatory)
     {
         $this->themeMandatory = $themeMandatory;
+
+        return $this;
+    }
+
+    public function isDistrictMandatory(): bool
+    {
+        return $this->districtMandatory;
+    }
+
+    public function setDistrictMandatory(bool $districtMandatory): self
+    {
+        $this->districtMandatory = $districtMandatory;
+
+        return $this;
+    }
+
+    public function isUsingDistrict(): bool
+    {
+        return $this->usingDistrict;
+    }
+
+    public function setUsingDistrict(bool $usingDistrict): self
+    {
+        $this->usingDistrict = $usingDistrict;
 
         return $this;
     }

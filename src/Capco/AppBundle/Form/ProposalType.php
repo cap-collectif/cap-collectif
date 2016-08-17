@@ -50,10 +50,10 @@ class ProposalType extends AbstractType
             ;
         }
 
-        if ($this->toggleManager->isActive('districts')) {
+        if ($this->toggleManager->isActive('districts') && $form->isUsingDistrict()) {
             $builder
                 ->add('district', null, [
-                    'required' => true,
+                    'required' => $form->isDistrictMandatory(),
                 ])
             ;
         }

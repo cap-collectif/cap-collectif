@@ -48,6 +48,11 @@ Capco\AppBundle\Entity\ProposalForm:
           type: boolean
           groups: [ProposalForms]
           serialized_name: usingCategories
+        usingDistrict:
+          expose: true
+          type: boolean
+          groups: [ProposalForms]
+          serialized_name: usingDistrict
         themeMandatory:
           expose: true
           type: boolean
@@ -58,6 +63,11 @@ Capco\AppBundle\Entity\ProposalForm:
           type: boolean
           groups: [ProposalForms]
           serialized_name: categoryMandatory
+        districtMandatory:
+          expose: true
+          type: boolean
+          groups: [ProposalForms]
+          serialized_name: districtMandatory
     virtual_properties:
         canContribute:
             serialized_name: isContribuable

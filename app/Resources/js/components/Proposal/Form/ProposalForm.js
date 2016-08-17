@@ -114,7 +114,7 @@ const ProposalForm = React.createClass({
         if (!features.themes || !this.props.form.usingThemes || form.theme === -1) {
           delete form.theme;
         }
-        if (!features.districts || form.district === -1) {
+        if (!features.districts || form.district === -1 || !this.props.form.usingDistrict) {
           delete form.district;
         }
         if (categories.length === 0 || !this.props.form.usingCategories || form.category === -1) {
@@ -186,8 +186,8 @@ const ProposalForm = React.createClass({
   },
 
   updateDistrictConstraint() {
-    const { features } = this.props;
-    if (features.districts) {
+    const { features, form } = this.props;
+    if (features.districts && form.usingDistrict && form.districtMandatory) {
       this.formValidationRules.district = {
         minValue: { value: 0, message: 'proposal.constraints.district' },
       };
@@ -242,6 +242,12 @@ const ProposalForm = React.createClass({
       <span>
         {this.getIntlMessage('proposal.category')}
         {!form.categoryMandatory && optional}
+      </span>
+    );
+    const districtLabel = (
+      <span>
+        {this.getIntlMessage('proposal.district')}
+        {!form.districtMandatory && optional}
       </span>
     );
     return (
@@ -310,12 +316,12 @@ const ProposalForm = React.createClass({
         }
 
         {
-          features.districts
+          features.districts && form.usingDistrict
           && <Input
             id="proposal_district"
             type="select"
             valueLink={this.linkState('form.district')}
-            label={this.getIntlMessage('proposal.district')}
+            label={districtLabel}
             groupClassName={this.getGroupStyle('district')}
             errors={this.renderFormErrors('district')}
             help={form.districtHelpText}

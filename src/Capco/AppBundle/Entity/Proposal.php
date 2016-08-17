@@ -32,6 +32,7 @@ use Capco\AppBundle\Traits\IdTrait;
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="proposal.missing_required_responses", formField="proposalForm")
+ * @CapcoAssert\HasDistrictIfMandatory()
  * @CapcoAssert\HasThemeIfMandatory()
  * @CapcoAssert\HasCategoryIfMandatory()
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
@@ -89,7 +90,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District", inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(name="district_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     * @CapcoAssert\HasDistrictIfActivated()
      */
     private $district = null;
 
