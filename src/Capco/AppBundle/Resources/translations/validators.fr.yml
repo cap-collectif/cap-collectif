@@ -42,6 +42,7 @@ global:
   no_theme_when_activated: "Vous devez choisir un thème."
   no_theme_when_mandatory: "Vous devez spécifier un thème."
   only_one_realisation_step: "Il ne peut y avoir seulement une étape de sélection autorisant les étapes d'avancement."
+  steps_do_not_overlap: "Les étapes ne doivent pas se chevaucher dans le temps."
 
 idea:
   vote:

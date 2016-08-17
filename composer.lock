@@ -7926,20 +7926,23 @@
         },
         {
             "name": "bossa/phpspec2-expect",
-            "version": "1.0.3",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BossaConsulting/phpspec2-expect.git",
-                "reference": "f3a80b7fa743b8a1078a7e320bd3e8b8b6283780"
+                "reference": "eb74c740bd89fdca47eb4e0b5615bbf044413fd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/f3a80b7fa743b8a1078a7e320bd3e8b8b6283780",
-                "reference": "f3a80b7fa743b8a1078a7e320bd3e8b8b6283780",
+                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/eb74c740bd89fdca47eb4e0b5615bbf044413fd3",
+                "reference": "eb74c740bd89fdca47eb4e0b5615bbf044413fd3",
                 "shasum": ""
             },
             "require": {
-                "phpspec/phpspec": "~2.0"
+                "phpspec/phpspec": "~3.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.4"
             },
             "type": "library",
             "autoload": {
@@ -7968,7 +7971,7 @@
                 "spec",
                 "specification"
             ],
-            "time": "2014-09-12 09:25:51"
+            "time": "2016-07-25 11:37:09"
         },
         {
             "name": "clue/stream-filter",
@@ -8633,6 +8636,64 @@
                 "windows"
             ],
             "time": "2016-03-22 20:13:26"
+        },
+        {
+            "name": "mewesk/twig-excel-bundle",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MewesK/TwigExcelBundle.git",
+                "reference": "8dc65247dc7e33846581e2006b69002efb178eb3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MewesK/TwigExcelBundle/zipball/8dc65247dc7e33846581e2006b69002efb178eb3",
+                "reference": "8dc65247dc7e33846581e2006b69002efb178eb3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "phpoffice/phpexcel": "~1.8.1",
+                "symfony/framework-bundle": "~2.7|~3.0"
+            },
+            "require-dev": {
+                "mpdf/mpdf": "~6.0",
+                "sensio/framework-extra-bundle": "~3.0",
+                "symfony/symfony": "~2.7|~3.0"
+            },
+            "suggest": {
+                "mpdf/mpdf": "~6.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MewesK\\TwigExcelBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mewes Kochheim",
+                    "email": "mewes@kochheim.de"
+                }
+            ],
+            "description": "This Symfony2 bundle provides a PhpExcel integration for Twig",
+            "homepage": "https://github.com/MewesK/TwigExcelBundle",
+            "keywords": [
+                "PHPExcel",
+                "excel",
+                "symfony",
+                "twig"
+            ],
+            "time": "2016-02-27 16:09:27"
         },
         {
             "name": "myclabs/deep-copy",
@@ -9322,36 +9383,36 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "2.5.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "385ecb015e97c13818074f1517928b24d4a26067"
+                "reference": "400ecda31b1203369b004c8937c43105e7078667"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/385ecb015e97c13818074f1517928b24d4a26067",
-                "reference": "385ecb015e97c13818074f1517928b24d4a26067",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/400ecda31b1203369b004c8937c43105e7078667",
+                "reference": "400ecda31b1203369b004c8937c43105e7078667",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.1",
                 "ext-tokenizer": "*",
-                "php": ">=5.3.3",
-                "phpspec/php-diff": "~1.0.0",
-                "phpspec/prophecy": "~1.4",
-                "sebastian/exporter": "~1.0",
-                "symfony/console": "~2.3|~3.0",
-                "symfony/event-dispatcher": "~2.1|~3.0",
-                "symfony/finder": "~2.1|~3.0",
-                "symfony/process": "^2.6|~3.0",
-                "symfony/yaml": "~2.1|~3.0"
+                "php": "^5.6 || ^7.0",
+                "phpspec/php-diff": "^1.0.0",
+                "phpspec/prophecy": "^1.5",
+                "sebastian/exporter": "^1.0",
+                "symfony/console": "^2.7 || ^3.0",
+                "symfony/event-dispatcher": "^2.7 || ^3.0",
+                "symfony/finder": "^2.7 || ^3.0",
+                "symfony/process": "^2.7 || ^3.0",
+                "symfony/yaml": "^2.7 || ^3.0"
             },
             "require-dev": {
-                "behat/behat": "^3.0.11",
-                "bossa/phpspec2-expect": "~1.0",
-                "phpunit/phpunit": "~4.4",
-                "symfony/filesystem": "~2.1|~3.0"
+                "behat/behat": "^3.1",
+                "ciaranmcnulty/versionbasedtestskipper": "^0.2.1",
+                "phpunit/phpunit": "^5.3",
+                "symfony/filesystem": "^3.0"
             },
             "suggest": {
                 "phpspec/nyan-formatters": "~1.0 – Adds Nyan formatters"
@@ -9362,7 +9423,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -9383,9 +9444,13 @@
                 {
                     "name": "Marcello Duarte",
                     "homepage": "http://marcelloduarte.net/"
+                },
+                {
+                    "name": "Ciaran McNulty",
+                    "homepage": "https://ciaranmcnulty.com/"
                 }
             ],
-            "description": "Specification-oriented BDD framework for PHP 5.3+",
+            "description": "Specification-oriented BDD framework for PHP 5.6+",
             "homepage": "http://phpspec.net/",
             "keywords": [
                 "BDD",
@@ -9396,7 +9461,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2016-03-20 20:34:32"
+            "time": "2016-08-12 14:52:30"
         },
         {
             "name": "phpspec/prophecy",
@@ -10712,6 +10777,8 @@
         "snc/redis-bundle": 20,
         "caxy/htmldiff-bundle": 20,
         "sensiolabs/behat-page-object-extension": 20,
+        "bossa/phpspec2-expect": 20,
+        "phpspec/phpspec": 20,
         "tonicforhealth/behat-parallel-scenario": 20
     },
     "prefer-stable": false,

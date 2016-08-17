@@ -132,6 +132,7 @@ class Project implements IndexableInterface
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Steps\ProjectAbstractStep", mappedBy="project",  cascade={"persist", "remove"}, orphanRemoval = true)
      * @ORM\OrderBy({"position" = "ASC"})
      * @CapcoAssert\HasOnlyOneSelectionStepAllowingProgressSteps()
+     * @CapcoAssert\ProjectStepDoNotOverlapConstraint()
      */
     private $steps;
 
