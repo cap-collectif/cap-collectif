@@ -397,15 +397,16 @@ class OpinionController extends Controller
 
     public function getConsultationStepTypes()
     {
-        $opinionTypes = $this->get('doctrine.orm.entity_manager')
+        $rootOpinionTypes = $this->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:OpinionType')
             ->createQueryBuilder('ot')
+            ->select('ot', 'ct')
             ->leftJoin('ot.consultationStepType', 'ct')
-            ->where('ot.consultationStepType IS NOT NULL')
-            ->andWhere('ot.parent IS NULL')
+            ->andWhere('ot.consultationStepType is not null')
+            ->andWhere('ot.parent is null')
             ->orderBy('ct.id', 'asc')
             ->getQuery()
-            ->getResult()
+            ->getArrayResult()
         ;
 
         $otRepo = $this->get('doctrine.orm.entity_manager')
@@ -414,9 +415,14 @@ class OpinionController extends Controller
 
         $consultationStepTypes = [];
 
-        foreach ($opinionTypes as $root) {
-            $ct = $root->getConsultationStepType()->getTitle();
-            $consultationStepTypes[$ct] = $otRepo->childrenHierarchy($root);
+        foreach ($rootOpinionTypes as $root) {
+            $ct = $root['consultationStepType']['title'];
+            $root['__children'] = $otRepo->childrenHierarchy($otRepo->find($root['id']));
+            if (array_key_exists($ct, $consultationStepTypes) && is_array($consultationStepTypes[$ct])) {
+              $consultationStepTypes[$ct][] = $root;
+            } else {
+              $consultationStepTypes[$ct] = [$root];
+            }
         }
 
         return $consultationStepTypes;
