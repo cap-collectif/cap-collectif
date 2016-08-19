@@ -31,11 +31,9 @@ const IdeaPageBody = React.createClass({
     return (
       <div className={classNames(classes)}>
         {
-          idea.media
-          ? <img id="idea-media" src={idea.media.url} className="block img-responsive" />
-          : null
+          idea.media &&
+            <img id="idea-media" src={idea.media.url} role="presentation" className="block img-responsive" />
         }
-
         <div className="block" id="idea-body">
           <h2 className="h2">
             {this.getIntlMessage('idea.body')}

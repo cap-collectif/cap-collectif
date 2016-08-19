@@ -31,7 +31,7 @@ const itemWithoutImage = {
 
 const props = {
   id: 'id',
-  connectDragSource: (cp) => { return cp;},
+  connectDragSource: (cp) => { return cp; },
   arrowFunctions,
 };
 

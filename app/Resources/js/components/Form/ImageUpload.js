@@ -102,9 +102,8 @@ const ImageUpload = React.createClass({
           </p>
           <div className="image-uploader__preview text-center">
             {
-              this.state.preview
-                ? <img src={this.state.preview} />
-                : null
+              this.state.preview &&
+                <img role="presentation" src={this.state.preview} />
             }
           </div>
           {

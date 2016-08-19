@@ -60,10 +60,8 @@ const ShowReplyModal = React.createClass({
           {
             reply.responses.map((response, index) => {
               return (
-                <div key={index} className="form-group">
-                  <label>
-                    {response.field.question}
-                  </label>
+                <div key={index}>
+                  {response.field.question}
                   <ResponseValue response={response} />
                 </div>
               );

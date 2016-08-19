@@ -102,7 +102,7 @@ const CommentForm = React.createClass({
   expand(newState) {
     if (!newState) {
       const $block = $(ReactDOM.findDOMNode(this.refs.commentBlock));
-      if (event.relatedTarget && ($(event.relatedTarget).is($block) || $block.has($(event.relatedTarget)).length)) {
+      if (event.relatedTarget && ($(event.relatedTarget).is($block) || $block.has($(event.relatedTarget)).length)) { // eslint-disable-line no-undef
         return; // clicked on an element inside comment block
       }
       if (this.state.form.body.length === 0) {
@@ -181,8 +181,8 @@ const CommentForm = React.createClass({
                   id="authorName"
                   name="authorName"
                   valueLink={this.linkState('form.authorName')}
-                  label={ this.getIntlMessage('global.fullname') }
-                  help={ this.getIntlMessage('comment.public_name') }
+                  label={this.getIntlMessage('global.fullname')}
+                  help={this.getIntlMessage('comment.public_name')}
                   groupClassName={this.getGroupStyle('authorName')}
                   errors={this.renderFormErrors('authorName')}
                 />
@@ -192,8 +192,8 @@ const CommentForm = React.createClass({
                   id="authorEmail"
                   name="authorEmail"
                   valueLink={this.linkState('form.authorEmail')}
-                  label={ this.getIntlMessage('global.hidden_email') }
-                  help={ this.getIntlMessage('comment.email_info') }
+                  label={this.getIntlMessage('global.hidden_email')}
+                  help={this.getIntlMessage('comment.email_info')}
                   groupClassName={this.getGroupStyle('authorEmail')}
                   errors={this.renderFormErrors('authorEmail')}
                 />

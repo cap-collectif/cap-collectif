@@ -68,7 +68,7 @@ const DivideModal = React.createClass({
 
   togglePublishModal(value, element = null) {
     this.setState({
-      currentElement: !!element ? element : this.state.currentElement,
+      currentElement: element || this.state.currentElement,
       showPublishModal: value,
     });
   },

@@ -1,14 +1,22 @@
 {
   "extends": "airbnb",
   "plugins": [
+    "import",
     "react",
     "mocha"
   ],
   "globals": {
     "$": true,
+    "screen": true,
     "google": true,
     "CKEDITOR": true,
     "document": true,
+    "window": true,
+    "FormData": true,
+    "location": true,
+    "File": true,
+    "localStorage": true,
+    "fetch": true,
     "Modernizr": true,
     "jQuery": true,
     "__SERVER__": true
@@ -22,8 +30,19 @@
     }
   },
   "rules": {
+    "react/no-find-dom-node": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/no-string-refs": 0,
+    "react/jsx-first-prop-new-line": 0,
+    "react/self-closing-comp": 0,
+    "react/jsx-indent": 0,
+    "import/imports-first": 0,
+    "import/prefer-default-export": 0,
+    "react/jsx-filename-extension": 0,
+    "no-underscore-dangle": 0,
     "no-confusing-arrow": 0,
     "no-nested-ternary": 0,
+    "react/require-extension": 0,
     "react/prefer-es6-class": 0,
     "react/jsx-closing-bracket-location": 0,
     "react/prefer-stateless-function": 0,

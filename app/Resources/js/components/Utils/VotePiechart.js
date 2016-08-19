@@ -28,7 +28,7 @@ const VotePiechart = React.createClass({
   render() {
     const { ok, mitige, nok, left, top, height, width } = this.props;
     if (!__SERVER__ && ok + mitige + nok > 0) {
-      const Chart = require('react-google-charts').Chart;
+      const Chart = require('react-google-charts').Chart; // eslint-disable-line
       return (
         <div className="opinion__chart" style={{ textAlign: 'center' }}>
         <Chart

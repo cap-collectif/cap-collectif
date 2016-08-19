@@ -56,14 +56,12 @@ const RankingItem = React.createClass({
           </div>
         </div>
         {
-          item.description
-          ? <p className="excerpt small ranking__item__description">{item.description}</p>
-          : null
+          item.description &&
+            <p className="excerpt small ranking__item__description">{item.description}</p>
         }
         {
-          item.image
-          ? <div><img className="ranking__item__image" src={item.image.url} /></div>
-          : null
+          item.image &&
+            <div><img className="ranking__item__image" role="presentation" src={item.image.url} /></div>
         }
         <RankingArrows
           item={item}

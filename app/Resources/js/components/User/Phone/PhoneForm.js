@@ -104,7 +104,7 @@ const PhoneForm = React.createClass({
       onSubmit,
     } = this.props;
     return (
-      <form style={{ maxWidth: '350px' }} onSubmit={(e) => {e.preventDefault(); onSubmit();}}>
+      <form style={{ maxWidth: '350px' }} onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
         <Input
           type="text"
           addonBefore="+33"

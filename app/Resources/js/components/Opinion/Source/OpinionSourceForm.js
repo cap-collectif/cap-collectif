@@ -26,7 +26,7 @@ const OpinionSourceForm = React.createClass({
         title: source ? source.title : '',
         body: source ? source.body : '',
         category: source ? source.category.id : null,
-        check: !!!source,
+        check: !source,
       },
       errors: {
         link: [],

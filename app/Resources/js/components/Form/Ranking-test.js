@@ -24,7 +24,7 @@ describe('<Ranking />', () => {
   const props = {
     id: 'ranking',
     labelClassName: 'label-class',
-    getGroupStyle: () => {return '';},
+    getGroupStyle: () => { return ''; },
     renderFormErrors: () => {},
     onChange: () => {},
     ...IntlData,

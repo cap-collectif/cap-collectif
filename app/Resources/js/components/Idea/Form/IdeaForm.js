@@ -39,7 +39,7 @@ export const IdeaForm = React.createClass({
         url: idea ? idea.url : '',
         media: null,
         theme: idea ? idea.theme.id : themeId,
-        confirm: !!!idea,
+        confirm: !!!idea, // eslint-disable-line no-extra-boolean-cast
       },
       errors: {
         title: [],

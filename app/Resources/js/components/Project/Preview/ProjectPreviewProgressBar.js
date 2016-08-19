@@ -21,7 +21,7 @@ const ProjectPreviewProgressBar = React.createClass({
     const completedStepsNb = this.getCompletedStepsNb();
     const total = project.steps.length;
     const percentage = completedStepsNb > 0 && total > 0
-      ? completedStepsNb / total * 100
+      ? (completedStepsNb / total) * 100
       : 0;
     return Math.round(percentage);
   },

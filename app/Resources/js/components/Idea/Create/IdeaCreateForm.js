@@ -45,7 +45,7 @@ const IdeaCreateForm = React.createClass({
         if (form.media === false) {
           form.delete_media = true;
           delete form.media;
-        } else if (!form.media || !form.media instanceof File) {
+        } else if (!form.media || !(form.media instanceof File)) {
           delete form.media;
         }
         delete form.confirm;

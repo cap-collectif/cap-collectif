@@ -20,7 +20,14 @@ describe('<OpinionLinkSelectTypeForm />', () => {
 
   it('renders a form', () => {
     const wrapper = shallow(<OpinionLinkSelectTypeForm {...props} />);
-    const form = wrapper.find('Connect').shallow().find('Form').shallow().find('Connect').shallow().shallow();
+    const form = wrapper
+        .find('Connect')
+        .shallow()
+        .find('Form')
+        .shallow()
+        .find('Connect')
+        .shallow()
+        .shallow();
     expect(form.is('form')).to.be.true;
     const field = form.find('Field');
     expect(field.length).to.equal(1);

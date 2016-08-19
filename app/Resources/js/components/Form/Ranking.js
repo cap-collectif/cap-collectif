@@ -62,7 +62,7 @@ const Ranking = React.createClass({
         className={`form-group ${getGroupStyle(field.id)}`}
         id={id}
       >
-        <label className={labelClasses}>
+        <label htmlFor={id} className={labelClasses}>
           {field.question + (field.required ? '' : optional)}
         </label>
         {

@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import './registration';
+
 require('fancybox')($);
 
 // Our global App for symfony
@@ -52,7 +53,7 @@ const App = (($) => {
   };
 
   const pieChart = () => {
-    if (typeof(google) !== 'undefined') {
+    if (typeof (google) !== 'undefined') {
       google.load('visualization', '1', { packages: ['corechart'] });
       google.setOnLoadCallback(() => {
         $('.has-chart').googleCharts();

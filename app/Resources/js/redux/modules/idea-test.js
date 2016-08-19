@@ -59,10 +59,13 @@ describe('Idea Reducer', () => {
   it('Should handle DELETE_VOTE_SUCCEEDED', () => {
     const initialState = {
       ideas: {
-        1: { votesCount: 2, votes: [
-          { user: { unidId: 'user' }, private: false },
-          { private: true },
-        ] },
+        1: {
+          votesCount: 2,
+          votes: [
+            { user: { unidId: 'user' }, private: false },
+            { private: true },
+          ],
+        },
       },
     };
     let newState = reducer(initialState, {

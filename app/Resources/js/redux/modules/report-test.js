@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 import { expect } from 'chai';
-import { reducer } from './report';
-import { OPEN_MODAL, CLOSE_MODAL, START_LOADING, STOP_LOADING, ADD_REPORTED } from './report';
+import { reducer, OPEN_MODAL, CLOSE_MODAL, START_LOADING, STOP_LOADING, ADD_REPORTED } from './report';
 
 describe('Report Reducer', () => {
   it('Should handle OPEN_MODAL', () => {

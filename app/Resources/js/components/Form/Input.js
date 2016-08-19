@@ -52,7 +52,7 @@ export default class Input extends ReactBootstrapInput {
   renderSuggestion() {
     return this.state.suggestion &&
         <p className="registration__help">
-          Vouliez vous dire <a href={'#'} onClick={this.setSuggestion.bind(this)} className="js-email-correction">{ this.state.suggestion }</a> ?
+          Vouliez vous dire <a href={'#email-correction'} onClick={this.setSuggestion.bind(this)} className="js-email-correction">{ this.state.suggestion }</a> ?
         </p>
     ;
   }
@@ -94,7 +94,7 @@ export default class Input extends ReactBootstrapInput {
       return (
         <OverlayTrigger placement="right"
           overlay={
-            <Popover id={ popover.id }>
+            <Popover id={popover.id}>
               { popover.message }
             </Popover>
           }
@@ -113,7 +113,7 @@ export default class Input extends ReactBootstrapInput {
     const { image } = this.props;
     if (image) {
       return (
-        <img src={image} />
+        <img role="presentation" src={image} />
       );
     }
   }

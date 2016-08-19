@@ -78,7 +78,7 @@ const ProposalVoteBasketWidget = React.createClass({
           image
           ? <Navbar.Header>
             <Navbar.Brand>
-              <img className="widget__image" src={image.url} />
+              <img className="widget__image" role="presentation" src={image.url} />
             </Navbar.Brand>
             <Navbar.Toggle>
               <i

@@ -25,7 +25,7 @@ export default class Pagination extends React.Component {
     } = this.props;
     const offset = Math.floor(displayedPages / 2);
     let firstNumber = current - offset;
-    const lastNumber = firstNumber + displayedPages - 1;
+    const lastNumber = (firstNumber + displayedPages) - 1;
     firstNumber += nbPages - lastNumber < 0 ? nbPages - lastNumber : 0;
     firstNumber = firstNumber > 0 ? firstNumber : 1;
     const pages = Array.apply(0, new Array(displayedPages)).filter((x, y) => {

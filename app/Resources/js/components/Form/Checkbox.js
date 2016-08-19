@@ -85,7 +85,7 @@ const Checkbox = React.createClass({
         className={`form-group ${getGroupStyle(field.id)}`}
         id={id}
       >
-        <label className={classNames(labelClasses)}>
+        <label htmlFor={fieldName} className={classNames(labelClasses)}>
           {field.question + (field.required ? '' : optional)}
         </label>
         <span className="help-block">

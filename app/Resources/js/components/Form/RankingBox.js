@@ -44,7 +44,7 @@ const RankingBox = React.createClass({
             return (
               <RankingSpot
                 key={i}
-                onDrop={ (it) => moveItem(listType, i, it)}
+                onDrop={(it) => moveItem(listType, i, it)}
               >
                 {
                   item

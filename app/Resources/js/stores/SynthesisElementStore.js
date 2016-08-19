@@ -101,10 +101,8 @@ class SynthesisElementStore extends BaseStore {
           this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, element);
           this._elements.published = ArrayHelper.addElementToArray(this._elements.published, element);
           this._elements.unpublished = ArrayHelper.removeElementFromArray(this._elements.unpublished, element);
-        } else {
-          if (element) {
-            this.removeElementFromTree(element);
-          }
+        } else if (element) {
+          this.removeElementFromTree(element);
         }
         if (this._element && action.elementId === this._element.id) {
         // Apply changes to element
@@ -265,7 +263,6 @@ class SynthesisElementStore extends BaseStore {
       parentInTree.children = ArrayHelper.addElementToArray(children, element);
       parentInTree.childrenCount = parentInTree.children.length;
     }
-    element.parent = parent;
   }
 
   getElementInTreeById(tree, id) {
