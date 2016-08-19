@@ -15,6 +15,7 @@ const ProjectCover = React.createClass({
       bg__wrapper: !project.cover,
     });
     const divClasses = classNames({
+      play: !!project.video,
       project__preview__cover: true,
     });
     return (

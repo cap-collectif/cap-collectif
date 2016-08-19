@@ -1,5 +1,5 @@
 {
-  "extends": "jolicode",
+  "extends": "airbnb",
   "plugins": [
     "react",
     "mocha"
@@ -14,7 +14,7 @@
     "__SERVER__": true
   },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 7,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true,
