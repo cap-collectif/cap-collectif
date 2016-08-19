@@ -50,7 +50,7 @@ const ReportForm = React.createClass({
           },
         ]
       }
-    />
+      />
   );
   },
 

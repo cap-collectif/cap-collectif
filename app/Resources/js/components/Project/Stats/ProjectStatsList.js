@@ -25,7 +25,7 @@ const ProjectStatsList = React.createClass({
     const { data } = this.props;
     return {
       showPercentage: false,
-      data: data,
+      data,
       theme: 0,
       district: 0,
     };

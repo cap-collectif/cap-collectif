@@ -50,10 +50,10 @@ const UserAvatar = React.createClass({
       user,
     } = this.props;
     const funcProps = {
-      onBlur: onBlur,
-      onFocus: onFocus,
-      onMouseOver: onMouseOver,
-      onMouseOut: onMouseOut,
+      onBlur,
+      onFocus,
+      onMouseOver,
+      onMouseOut,
     };
     if (user && user._links && user._links.profile && anchor) {
       return (

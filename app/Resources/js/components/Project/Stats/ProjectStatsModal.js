@@ -25,7 +25,7 @@ const ProjectStatsModal = React.createClass({
     return {
       showModal: false,
       isLoading: true,
-      data: data,
+      data,
     };
   },
 

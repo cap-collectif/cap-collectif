@@ -49,10 +49,10 @@ const ProposalDetailLikersLabel = React.createClass({
       onMouseOver,
     } = this.props;
     const funcProps = {
-      onFocus: onFocus,
-      onBlur: onBlur,
-      onMouseOver: onMouseOver,
-      onMouseOut: onMouseOut,
+      onFocus,
+      onBlur,
+      onMouseOver,
+      onMouseOut,
     };
 
     if (likers.length > 0) {

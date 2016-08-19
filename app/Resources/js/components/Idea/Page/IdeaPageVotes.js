@@ -52,7 +52,7 @@ export const IdeaPageVotes = React.createClass({
     }
 
     const classes = {
-      'idea__votes': true,
+      idea__votes: true,
       [className]: true,
     };
 

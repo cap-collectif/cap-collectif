@@ -120,7 +120,7 @@ export const ProfileBox = React.createClass({
                 <FormattedHTMLMessage
                     message={this.getIntlMessage('phone.confirm.sent')}
                     phone={smsSentToNumber}
-                 />
+                />
             }
             {
               !smsSentToNumber && !user.phone &&
@@ -132,7 +132,7 @@ export const ProfileBox = React.createClass({
               smsSentToNumber
               ? <SmsCodeForm
                   onSubmitSuccess={this.onCodeSuccess}
-                />
+              />
               : <PhoneForm
                   ref={c => this.form = c}
                   isSubmitting={isSubmitting}
@@ -140,7 +140,7 @@ export const ProfileBox = React.createClass({
                   onSubmitFailure={this.stopSubmit}
                   onSubmitSuccess={this.onSubmitSuccess}
                   initialValue={user.isPhoneConfirmed ? user.phone.slice(3, user.phone.length) : null}
-                />
+              />
             }
             {
               user.isPhoneConfirmed && !isUpdating &&

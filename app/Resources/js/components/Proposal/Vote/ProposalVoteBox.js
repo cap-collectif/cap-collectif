@@ -125,7 +125,7 @@ const ProposalVoteBox = React.createClass({
               onSubmitSuccess={onSubmitSuccess}
               onSubmitFailure={onSubmitFailure}
               userHasVote={userHasVote}
-            />
+              />
           }
           <ProposalVoteBoxMessage
             enoughCredits={this.userHasEnoughCredits()}

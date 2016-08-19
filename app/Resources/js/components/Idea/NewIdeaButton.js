@@ -24,7 +24,8 @@ const NewIdeaButton = React.createClass({
         <div className="col-xs-12  col-sm-3  col-md-3  col-lg-2  filter__down">
             <a
               href={user ? link : null}
-              className="form-control  btn  btn-primary"><i className="cap cap-add-1" /> {label}
+              className="form-control  btn  btn-primary"
+            ><i className="cap cap-add-1" /> {label}
             </a>
         </div>
       </LoginOverlay>

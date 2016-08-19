@@ -67,7 +67,7 @@ export const EmailNotConfirmedAlert = React.createClass({
               : <Button style={{ marginRight: 15, marginBottom: 5 }}
                   disabled={resendingConfirmation}
                   onClick={resendingConfirmation ? null : this.handleResend}
-                >
+              >
                   {
                     resendingConfirmation
                     ? this.getIntlMessage('user.confirm.sending')

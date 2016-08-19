@@ -100,20 +100,20 @@ const PhoneModal = React.createClass({
                ? <FormattedHTMLMessage
                     message={this.getIntlMessage('phone.confirm.sent')}
                     phone={smsSentToNumber}
-                 />
+               />
               : <FormattedHTMLMessage message={this.getIntlMessage('phone.confirm.infos')} />
             }
             {
               smsSentToNumber
               ? <SmsCodeForm
                   onSubmitSuccess={this.onCodeSuccess}
-                />
+              />
               : <PhoneForm
                   isSubmitting={isSubmitting}
                   onSubmit={this.handleSubmit}
                   onSubmitFailure={this.stopSubmit}
                   onSubmitSuccess={this.onSubmitSuccess}
-                />
+              />
             }
             {
               smsSentToNumber &&

@@ -29,7 +29,7 @@ const ProposalPageVotes = React.createClass({
       votes,
     } = this.props;
     return {
-      votes: votes,
+      votes,
       votesCount: proposal.votesCount,
       showModal: false,
     };

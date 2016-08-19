@@ -27,7 +27,7 @@ const Settings = React.createClass({
           <SettingsSideMenu />
         </div>
         <div className="col--right col-xs-12 block--mobile synthesis__settings">
-          { React.cloneElement(children, { synthesis: synthesis }) }
+          { React.cloneElement(children, { synthesis }) }
         </div>
       </div>
     );

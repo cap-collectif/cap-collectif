@@ -125,7 +125,7 @@ const Checkbox = React.createClass({
                 field={this.props.field}
                 onChange={this.onChange}
                 disabled={disabled}
-              />
+            />
             : null
           }
         </CheckboxGroup>

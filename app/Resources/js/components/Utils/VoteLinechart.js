@@ -58,8 +58,8 @@ const VoteLinechart = React.createClass({
       vAxis: { title: this.getIntlMessage('vote.evolution.vaxis'), minValue: 0 },
       isStacked: true,
       colors: ['#d9534f', '#f0ad4e', '#5cb85c'],
-      height: height,
-      width: width,
+      height,
+      width,
       legend: { position: 'top', maxLines: 3 },
       theme: 'maximized',
     };

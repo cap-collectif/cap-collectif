@@ -28,7 +28,7 @@ const ProposalVoteBasketWidget = React.createClass({
     const { votableSteps } = this.props;
     return {
       selectedStepId: votableSteps[0].id,
-      votableSteps: votableSteps,
+      votableSteps,
     };
   },
 
@@ -83,7 +83,8 @@ const ProposalVoteBasketWidget = React.createClass({
             <Navbar.Toggle>
               <i
                 style={{ fontSize: '24px' }}
-                className="cap cap-information-1">
+                className="cap cap-information-1"
+              >
               </i>
             </Navbar.Toggle>
             <li className="navbar-text widget__progress-bar hidden visible-xs">

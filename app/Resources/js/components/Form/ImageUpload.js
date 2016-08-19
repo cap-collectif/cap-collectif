@@ -25,7 +25,7 @@ const ImageUpload = React.createClass({
   getInitialState() {
     const { preview } = this.props;
     return {
-      preview: preview,
+      preview,
       delete: false,
     };
   },

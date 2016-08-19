@@ -21,7 +21,7 @@ const Navbar = React.createClass({
   getInitialState() {
     const { items } = this.props;
     return {
-      items: items,
+      items,
       moreItems: [],
     };
   },

@@ -52,7 +52,7 @@ const NavbarRight = React.createClass({
               }
               className="navbar__dropdown"
               id="navbar-username"
-            >
+          >
               {
                 user.isAdmin
                 ? <MenuItem key={3.1} eventKey={3.1} href="/admin">

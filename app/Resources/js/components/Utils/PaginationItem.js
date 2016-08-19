@@ -12,8 +12,8 @@ export default class PaginationItem extends React.Component {
       page,
     } = this.props;
     const classes = classNames({
-      disabled: disabled,
-      active: active,
+      disabled,
+      active,
     });
     return (
       <li className={classes}>
