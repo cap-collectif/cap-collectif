@@ -5,7 +5,7 @@
 
 {% block reduxStore %}
   {% set projectSteps = [] %}
-  {% for step in project.steps if step.isEnabled %}
+  {% for step in project.steps if step.step.isEnabled %}
       {% set stepStatuses = [] %}
       {% for status in step.step.statuses %}
         {%
