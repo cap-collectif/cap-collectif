@@ -10,6 +10,10 @@ trait ProposalStepsTrait
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
     ];
+    protected static $collectStepOpenPrivateParams = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'collecte-des-propositions-privee',
+    ];
     protected static $collectStepClosedParams = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions-fermee',
@@ -64,6 +68,16 @@ trait ProposalStepsTrait
     public function iGoToAnOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepOpenParams);
+    }
+
+    /**
+     * Go to a private open collect step page.
+     *
+     * @When I go to a private open collect step
+     */
+    public function iGoToAPrivateOpenCollectStep()
+    {
+        $this->visitPageWithParams('collect page', self::$collectStepOpenPrivateParams);
     }
 
     protected function openCollectStepIsOpen()
@@ -145,7 +159,7 @@ trait ProposalStepsTrait
      */
     public function thereShouldBeNbProposals($nb)
     {
-        $this->assertPageContainsText($nb.' propositions');
+        $this->assertPageContainsText($nb.$nb > 1 ? ' propositions' : 'proposition');
         $proposalSelector = $this->getCurrentPage()->getProposalSelector();
         $this->assertNumElements($nb, $proposalSelector);
     }

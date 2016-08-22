@@ -322,9 +322,9 @@ class OpinionAdmin extends Admin
     private function createQueryBuilderForStep()
     {
         if (!$this->getPersistentParameter('opinion_type')) {
-          return null;
+            return;
         }
-        
+
         $em = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine.orm.entity_manager');

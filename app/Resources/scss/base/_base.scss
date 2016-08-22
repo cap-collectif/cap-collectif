@@ -729,3 +729,12 @@ svg.avatar {
     }
   }
 }
+
+.PrivateList {
+  &__box {
+    background-color: $light-gray;
+    padding: 30px 25px 0 25px;
+    border: 1px lightgrey solid;
+    border-radius: 5px;
+  }
+}

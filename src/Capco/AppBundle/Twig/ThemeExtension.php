@@ -30,8 +30,9 @@ class ThemeExtension extends \Twig_Extension
         $themes = $this->themeRepo->findBy(['isEnabled' => true]);
         $list = [];
         foreach ($themes as $theme) {
-          $list[] = ['id' => $theme->getId(), 'title' => $theme->getTitle()];
+            $list[] = ['id' => $theme->getId(), 'title' => $theme->getTitle()];
         }
+
         return $list;
     }
 }

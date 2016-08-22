@@ -462,7 +462,7 @@ admin:
       author_type: Type d'auteur
       body: Contenu
       category: Catégorie
-      collect_step: Étape de collecte
+      collect_step: Étape de dépôt
       comments: Commentaires
       created_at: Création
       district: Localisation
@@ -615,7 +615,7 @@ admin:
       enabled: Publié
       created_at: Création
       updated_at: Mise à jour
-      collect_step: Étape de collecte
+      collect_step: Étape de dépôt
     selection:
       proposal: Titre de la proposition
       selection_step: Étape
@@ -686,6 +686,7 @@ admin:
       votesHelpText: Informations à propos du vote
       vote_type: Type de vote
       verification: Demander la vérification des comptes
+      private: Seuls les auteurs peuvent voir leur(s) proposition(s)
     synthesis:
       enabled: Publiée
       editable: Éditable
@@ -861,7 +862,7 @@ post_comment: un commentaire sur un article
 proposal_comment: un commentaire sur une proposition
 
 other_step: Autre étape
-collect_step: Étape de collecte
+collect_step: Étape de dépôt
 consultation_step: Étape de consultation
 presentation_step: Étape de présentation
 synthesis_step: Étape de synthèse

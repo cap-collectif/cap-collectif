@@ -42,6 +42,13 @@ class CollectStep extends AbstractStep
      */
     private $defaultStatus = null;
 
+    /**
+     * @ORM\Column(name="private", type="boolean", nullable=false)
+     *
+     * @var bool
+     */
+    private $private = 0;
+
     public function __construct()
     {
         parent::__construct();
@@ -121,6 +128,18 @@ class CollectStep extends AbstractStep
             $proposalForm->setStep($this);
         }
         $this->proposalForm = $proposalForm;
+
+        return $this;
+    }
+
+    public function isPrivate(): bool
+    {
+        return $this->private;
+    }
+
+    public function setPrivate(bool $private)
+    {
+        $this->private = $private;
 
         return $this;
     }

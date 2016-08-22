@@ -183,9 +183,9 @@ class ProjectDownloadResolver
     public function getCollectStepData(CollectStep $collectStep)
     {
         if (!$collectStep->getProposalForm()) {
-          return [];
+            return [];
         }
-        
+
         $this->data = [];
 
         // Proposals

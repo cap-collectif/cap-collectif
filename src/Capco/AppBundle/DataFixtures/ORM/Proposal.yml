@@ -147,3 +147,29 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 100
+  proposal12:
+    title: Proposition plus votable
+    body: |
+         <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: '@user5'
+    proposalForm: '@proposalform4'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status7'
+    estimation: 100
+  proposal13:
+    title: Proposition plus votable
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: '@user5'
+    proposalForm: '@proposalform4'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
+    estimation: 100

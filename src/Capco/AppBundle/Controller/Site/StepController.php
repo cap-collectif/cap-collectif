@@ -283,15 +283,18 @@ class StepController extends Controller
 
         $proposalForm = $step->getProposalForm();
 
-        $searchResults = $proposalForm
-            ? $this
-                ->get('capco.search.resolver')
-                ->searchProposals(1, 50, null, null, ['proposalForm' => $proposalForm->getId()])
-            : [
-                'count' => 0,
-                'proposals' => [],
-            ]
-        ;
+        $searchResults = ['proposals' => [], 'count' => 0];
+
+        if ($proposalForm) {
+            $filters = ['proposalForm' => $proposalForm->getId()];
+
+            if ($step->isPrivate() && $this->getUser()) {
+                $filters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
+            } elseif (!$step->isPrivate()) {
+                $searchResults = $this->get('capco.search.resolver')
+                    ->searchProposals(1, 50, null, null, $filters);
+            }
+        }
 
         $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),

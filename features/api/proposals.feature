@@ -179,6 +179,70 @@ Feature: Proposal Restful Api
     """
 
   @elasticsearch
+  Scenario: Logged in API client wants to get all proposals from a ProposalForm with a private step
+    Given I am logged in to api as user
+    When I send a POST request to "/api/proposal_forms/4/proposals/search?page=1&pagination=50&order=old" with json:
+    """
+    {}
+    """
+    Then the JSON response should match:
+    """
+    {
+      "proposals": [
+        {
+          "id": @integer@,
+          "body": @string@,
+          "updated_at": "@string@.isDateTime()",
+          "theme": @...@,
+          "district": @...@,
+          "status": @...@,
+          "author": {
+            "username": "user",
+            "displayName": "user",
+            "uniqueId": "user",
+            "isAdmin": false,
+            "user_type": @...@,
+            "vip": false
+          },
+          "proposalForm": {
+            "id": @integer@
+          },
+          "comments": @...@,
+          "responses": @...@,
+          "selections": @...@,
+          "comments_count": @integer@,
+          "created_at": "@string@.isDateTime()",
+          "votesCount": @integer@,
+          "enabled": @boolean@,
+          "isTrashed": @boolean@,
+          "title": @string@,
+          "votesCountBySelectionSteps": @...@,
+          "likers": @array@,
+          "_links": @...@
+        },
+        @...@
+      ],
+      "count": 2,
+      "order": "old"
+    }
+    """
+
+  @elasticsearch
+  Scenario: Anonymous API client wants to get all proposals from a ProposalForm with a private step
+    When I send a POST request to "/api/proposal_forms/4/proposals/search?page=1&pagination=50&order=old" with json:
+    """
+    {}
+    """
+    Then the JSON response should match:
+    """
+    {
+      "proposals": [],
+      "count": 0,
+      "order": "old"
+    }
+    """
+
+  @elasticsearch
   Scenario: Anonymous API client wants to get proposals from a ProposalForm with filters
     When I send a POST request to "/api/proposal_forms/1/proposals/search" with json:
     """

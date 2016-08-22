@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\Steps\CollectStep:
+    exclusion_policy: ALL
+    properties:
+      private:
+        expose: true
+        serialized_name: isPrivate
+        groups: [Steps]
+      user:
+        expose: true

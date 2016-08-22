@@ -606,6 +606,11 @@
     },
     "district": "Localisation",
     "empty": "Aucune proposition",
+    "private": {
+      "show_login": "Connectez-vous pour consulter ou modifier vos propositions déjà déposées",
+      "message": "Visible uniquement par vous et l'administrateur",
+      "empty": "Vous n'avez pas encore déposé de propositions."
+    },
     "infos": {
       "header": "{user}, le {createdDate}"
     },

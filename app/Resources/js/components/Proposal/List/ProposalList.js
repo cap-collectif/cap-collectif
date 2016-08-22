@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import ProposalPreview from '../Preview/ProposalPreview';
 import { Row } from 'react-bootstrap';
 
-const ProposalList = React.createClass({
+export const ProposalList = React.createClass({
   propTypes: {
     proposals: PropTypes.array.isRequired,
     selectionStep: PropTypes.object,
@@ -31,13 +31,14 @@ const ProposalList = React.createClass({
       showAllVotes,
       showThemes,
     } = this.props;
+
     if (proposals.length === 0) {
-      return <p>{ this.getIntlMessage('proposal.empty') }</p>;
+      return (<p className={classNames({ 'p--centered': true })} style={{ 'margin-bottom': '40px' }}>{ this.getIntlMessage('proposal.private.empty') }</p>);
     }
 
     const classes = classNames({
       'media-list': true,
-      opinion__list: true,
+      'opinion__list': true,
     });
 
     return (
@@ -59,7 +60,6 @@ const ProposalList = React.createClass({
       </Row>
     );
   },
-
 });
 
 export default ProposalList;

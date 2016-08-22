@@ -11,6 +11,7 @@ import Pagination from '../Utils/Pagination';
 import CollectStepPageHeader from './CollectStepPageHeader';
 import ProposalRandomButton from '../Proposal/List/ProposalRandomButton';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
+import VisibilityBox from '../Utils/VisibilityBox';
 
 const CollectStepPage = React.createClass({
   propTypes: {
@@ -122,7 +123,13 @@ const CollectStepPage = React.createClass({
         <br />
         <Loader show={this.state.isLoading}>
           <div>
-            <ProposalList proposals={this.state.proposals} showThemes={form.usingThemes} />
+            {
+              this.state.proposals.length === 0 && !step.isPrivate
+              ? <p className={{ 'p--centered': true }} style={{ 'margin-bottom': '40px' }}>{ this.getIntlMessage('proposal.empty') }</p>
+              : <VisibilityBox enabled={step.isPrivate}>
+                <ProposalList proposals={this.state.proposals} showThemes={form.usingThemes} />
+              </VisibilityBox>
+            }
             {
               showPagination
               ? <Pagination

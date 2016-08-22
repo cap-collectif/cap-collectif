@@ -14,6 +14,7 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class StepAdmin extends Admin
 {
@@ -237,6 +238,18 @@ class StepAdmin extends Admin
                         'empty_value' => 'admin.fields.step.default_status_none',
                     ])
                 ;
+
+                $formMapper->end();
+
+                $formMapper->with('admin.fields.step.group_selections')
+                    ->add(
+                        'private',
+                        CheckboxType::class,
+                        [
+                            'label' => 'admin.fields.step.private',
+                            'required' => false,
+                        ]
+                    );
             }
 
             $formMapper->end();

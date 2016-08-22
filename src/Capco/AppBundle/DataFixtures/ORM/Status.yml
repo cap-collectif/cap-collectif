@@ -29,3 +29,8 @@ Capco\AppBundle\Entity\Status:
     position: 1
     step: '@selectionStep2'
     color: success
+  status7:
+    name: En cours
+    position: 0
+    step: '@collectstep4'
+    color: info

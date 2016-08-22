@@ -49,11 +49,19 @@ class ProposalsController extends FOSRestController
         $page = intval($paramFetcher->get('page'));
         $pagination = intval($paramFetcher->get('pagination'));
         $order = $paramFetcher->get('order');
+        $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
+
+        if ($proposalForm->getStep()->isPrivate()) {
+            if (!$this->getUser()) {
+                return ['proposals' => [], 'count' => 0, 'order' => $order];
+            }
+
+            $providedFilters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
+        }
 
         $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
 
         // Filters
-        $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
         $providedFilters['proposalForm'] = $proposalForm->getId();
 
         return $this->get('capco.search.resolver')->searchProposals($page, $pagination, $order, $terms, $providedFilters);
@@ -76,6 +84,8 @@ class ProposalsController extends FOSRestController
      * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias", "Themes", "ProposalUserData", "Steps"})
      *
      * @param Proposal $proposal
+     *
+     * @return array
      */
     public function getProposalAction(Proposal $proposal)
     {

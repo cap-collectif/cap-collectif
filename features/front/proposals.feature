@@ -2,7 +2,6 @@
 Feature: Proposals
 
   # Collect step : See proposals with filters, sorting and search term
-
   @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a collect step and apply filters
     Given features themes, districts are enabled
@@ -10,6 +9,17 @@ Feature: Proposals
     Then there should be 6 proposals
     And I change the proposals theme filter
     Then there should be 5 proposals
+
+  @javascript @elasticsearch
+  Scenario: Anonymous user wants to see proposals in a private collect step
+    Given I go to a private open collect step
+    Then there should be 0 proposals
+
+  @javascript @elasticsearch
+  Scenario: Logged in user wants to see its proposals in a private collect step
+     Given I am logged in as user
+     And I go to a private open collect step
+     Then there should be 2 proposals
 
   @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a collect step and sort them
