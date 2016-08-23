@@ -174,9 +174,14 @@ admin:
       is_published: Publié
       media: Photo
       themes: Thèmes
+      proposals: Propositions (budget)
       projects: Projets participatifs
       is_commentable: Commentable
       comments_count: Nombre de commentaires
+      displayedOnHomepage: Afficher sur la page d'accueil
+      group_content: Contenu
+      group_meta: Métadonnées
+      group_linked_content: Contenu(s) lié(s)
     category:
       title: Titre
       sources: Sources

@@ -33,9 +33,9 @@ class PostAdmin extends Admin
         }
 
         $datagridMapper
-            ->add('proposals', null, [
-              'label' => 'admin.fields.blog_post.proposals',
-            ])
+            ->add('proposals', 'doctrine_orm_model_autocomplete', [
+              'label' => 'admin.fields.blog_post.proposals'
+            ], null, [ 'property' => 'title' ])
             ->add('projects', null, [
                 'label' => 'admin.fields.blog_post.projects',
             ])
@@ -59,7 +59,9 @@ class PostAdmin extends Admin
             ])
             ->add('Authors', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.blog_post.authors',
-            ], null, [
+            ],
+            null,
+            [
                 'property' => 'username',
             ])
         ;
@@ -124,7 +126,15 @@ class PostAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+
+      $formMapper
+          ->with('admin.fields.blog_post.group_content', ['class' => 'col-md-12'])->end()
+          ->with('admin.fields.blog_post.group_meta',    ['class' => 'col-md-6'])->end()
+          ->with('admin.fields.blog_post.group_linked_content', ['class' => 'col-md-6'])->end()
+      ;
+
         $formMapper
+            ->with('admin.fields.blog_post.group_content')
             ->add('title', null, [
                 'label' => 'admin.fields.blog_post.title',
             ])
@@ -133,42 +143,6 @@ class PostAdmin extends Admin
                 'property' => 'username',
                 'multiple' => true,
                 'required' => false,
-            ])
-        ;
-
-        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $formMapper->add('themes', 'sonata_type_model', [
-                'label' => 'admin.fields.blog_post.themes',
-                'required' => false,
-                'multiple' => true,
-                'by_reference' => false,
-            ]);
-        }
-
-        $formMapper
-            ->add('proposals', 'sonata_type_model', [
-              'label' => 'admin.fields.blog_post.proposals',
-              'required' => false,
-              'multiple' => true,
-              'by_reference' => false,
-            ])
-            ->add('projects', 'sonata_type_model', [
-                'label' => 'admin.fields.blog_post.projects',
-                'required' => false,
-                'multiple' => true,
-                'by_reference' => false,
-            ])
-            ->add('isPublished', null, [
-                'label' => 'admin.fields.blog_post.is_published',
-                'required' => false,
-            ])
-            ->add('publishedAt', 'sonata_type_datetime_picker', [
-                'required' => false,
-                'label' => 'admin.fields.blog_post.published_at',
-                'format' => 'dd/MM/yyyy HH:mm',
-                'attr' => [
-                    'data-date-format' => 'DD/MM/YYYY HH:mm',
-                ],
             ])
             ->add('abstract', null, [
                 'label' => 'admin.fields.blog_post.abstract',
@@ -181,6 +155,51 @@ class PostAdmin extends Admin
                 'link_parameters' => [
                     'context' => 'default',
                     'hide_context' => true,
+                ],
+            ])
+        ;
+
+        $formMapper
+            ->end()
+            ->with('admin.fields.blog_post.group_linked_content')
+            ->add('proposals', 'sonata_type_model_autocomplete', [
+              'property' => 'title',
+              'label' => 'admin.fields.blog_post.proposals',
+              'required' => false,
+              'multiple' => true,
+              'by_reference' => false,
+            ])
+            ->add('projects', 'sonata_type_model', [
+                'label' => 'admin.fields.blog_post.projects',
+                'required' => false,
+                'multiple' => true,
+                'by_reference' => false,
+            ])
+      ;
+
+      if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+          $formMapper
+            ->add('themes', 'sonata_type_model', [
+              'label' => 'admin.fields.blog_post.themes',
+              'required' => false,
+              'multiple' => true,
+              'by_reference' => false,
+          ]);
+      }
+
+      $formMapper
+          ->end()
+          ->with('admin.fields.blog_post.group_meta')
+            ->add('isPublished', null, [
+                'label' => 'admin.fields.blog_post.is_published',
+                'required' => false,
+            ])
+            ->add('publishedAt', 'sonata_type_datetime_picker', [
+                'required' => false,
+                'label' => 'admin.fields.blog_post.published_at',
+                'format' => 'dd/MM/yyyy HH:mm',
+                'attr' => [
+                    'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
             ])
             ->add('isCommentable', null, [

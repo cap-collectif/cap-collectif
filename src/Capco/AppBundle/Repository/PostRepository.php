@@ -35,12 +35,13 @@ class PostRepository extends EntityRepository
         }
 
         $qb = $this->getIsPublishedQueryBuilder('p')
-            ->addSelect('a', 'm', 't', 'c')
+            ->addSelect('a', 'm', 't', 'c', 'proposal')
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.Media', 'm')
-            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = :enabled')
-            ->setParameter('enabled', true)
+            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
+            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
+            ->leftJoin('p.proposals', 'proposal')
+            ->where('p.displayedOnHomepage = true')
             ->orderBy('p.publishedAt', 'DESC')
         ;
 
@@ -59,7 +60,8 @@ class PostRepository extends EntityRepository
         $query = $qb->getQuery();
 
         if ($nbByPage > 0) {
-            $query->setFirstResult(($page - 1) * $nbByPage)
+            $query
+                ->setFirstResult(($page - 1) * $nbByPage)
                 ->setMaxResults($nbByPage);
         }
 

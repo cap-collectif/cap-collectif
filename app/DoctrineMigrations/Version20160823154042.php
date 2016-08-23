@@ -24,6 +24,11 @@ class Version20160823154042 extends AbstractMigration
         $this->addSql('ALTER TABLE blog_post ADD dislay_on_homepage TINYINT(1) NOT NULL');
     }
 
+    public function postUp(Schema $schema)
+    {
+        $this->connection->update('blog_post', ['dislay_on_homepage' => true], ['is_published' => true]);
+    }
+
     /**
      * @param Schema $schema
      */
