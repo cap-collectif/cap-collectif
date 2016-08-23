@@ -33,6 +33,9 @@ class PostAdmin extends Admin
         }
 
         $datagridMapper
+            ->add('proposals', null, [
+              'label' => 'admin.fields.blog_post.proposals',
+            ])
             ->add('projects', null, [
                 'label' => 'admin.fields.blog_post.projects',
             ])
@@ -143,6 +146,12 @@ class PostAdmin extends Admin
         }
 
         $formMapper
+            ->add('proposals', 'sonata_type_model', [
+              'label' => 'admin.fields.blog_post.proposals',
+              'required' => false,
+              'multiple' => true,
+              'by_reference' => false,
+            ])
             ->add('projects', 'sonata_type_model', [
                 'label' => 'admin.fields.blog_post.projects',
                 'required' => false,
@@ -177,6 +186,10 @@ class PostAdmin extends Admin
             ->add('isCommentable', null, [
                 'label' => 'admin.fields.blog_post.is_commentable',
                 'required' => false,
+            ])
+            ->add('displayedOnHomepage', null, [
+              'label' => 'admin.fields.blog_post.displayedOnHomepage',
+              'required' => false,
             ])
         ;
     }

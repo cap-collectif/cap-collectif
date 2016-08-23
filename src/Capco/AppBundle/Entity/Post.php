@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Model\IndexableInterface;
-
+use Doctrine\Common\Collections\Collection;
 /**
  * Post.
  *
@@ -67,6 +67,11 @@ class Post implements CommentableInterface, IndexableInterface
     private $isPublished = false;
 
     /**
+     * @ORM\Column(name="dislay_on_homepage", type="boolean")
+     */
+    private $displayedOnHomepage = true;
+
+    /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
@@ -103,11 +108,16 @@ class Post implements CommentableInterface, IndexableInterface
     private $themes;
 
     /**
-     * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="posts", cascade={"persist"})
      * @ORM\JoinTable(name="project_post")
      */
     private $projects;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="posts", cascade={"persist"})
+     * @ORM\JoinTable(name="proposal_post")
+     */
+    private $proposals;
 
     /**
      * @var
@@ -131,6 +141,7 @@ class Post implements CommentableInterface, IndexableInterface
         $this->comments = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->projects = new ArrayCollection();
+        $this->proposals = new ArrayCollection();
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
     }
@@ -144,9 +155,9 @@ class Post implements CommentableInterface, IndexableInterface
     {
         if ($this->id) {
             return $this->getTitle();
-        } else {
-            return 'New post';
         }
+
+        return 'New post';
     }
 
     /**
@@ -279,8 +290,20 @@ class Post implements CommentableInterface, IndexableInterface
         return $this->isPublished;
     }
 
+    public function setDisplayedOnHomepage(bool $displayedOnHomepage) : Post
+    {
+        $this->displayedOnHomepage = $displayedOnHomepage;
+
+        return $this;
+    }
+
+    public function isDisplayedOnHomepage() : bool
+    {
+        return $this->displayedOnHomepage;
+    }
+
     /**
-     * Set createdAt.
+     * Set createdAt.@
      *
      * @param \DateTime $createdAt
      *
@@ -507,6 +530,31 @@ class Post implements CommentableInterface, IndexableInterface
     {
         $this->projects->removeElement($project);
         $project->removePost($this);
+
+        return $this;
+    }
+
+    public function getProposals() : Collection
+    {
+        return $this->proposals;
+    }
+
+    public function addProposal(Proposal $proposal) : Post
+    {
+        if (!$this->proposals->contains($proposal)) {
+            $this->proposals->add($proposal);
+            $proposal->addPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProposal(Proposal $proposal) : Post
+    {
+        if ($this->proposals->contains($proposal)) {
+            $this->proposals->removeElement($proposal);
+            $proposal->removePost($this);
+        }
 
         return $this;
     }

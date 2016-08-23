@@ -38,12 +38,12 @@ admin.label.highlighted: A la une
 admin.label.idea: Idées
 admin.label.menu_item: Navigation
 admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
-admin.label.proposal: Budget / Propositions
+admin.label.proposal: Propositions (budget)
 admin.label.proposal_form: Budget / Formulaire
 admin.label.questionnaire: Questionnaire
 admin.label.question: Question
 admin.label.question_choice: Choix
-admin.label.opinion: Consultation / Propositions
+admin.label.opinion: Propositions (consultation)
 admin.label.reply: Questionnaire / Réponses
 admin.label.response: Réponse à une question
 admin.label.opinion_type: Éléments de structure
@@ -595,8 +595,8 @@ admin:
       idea: Idée
       is_archived: Traité
       object: Contribution
-      opinion: Consultation / Proposition
-      proposal: Budget / Proposition
+      opinion: Proposition (budget)
+      proposal: Proposition (consultation)
       reporter: Auteur
       source: Source
       status: Type de problème
