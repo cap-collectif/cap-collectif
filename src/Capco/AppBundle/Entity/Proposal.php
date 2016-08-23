@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ProgressStep;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
@@ -165,6 +167,12 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     protected $likers;
 
     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Steps\ProgressStep", mappedBy="proposals", cascade={"persist"})
+     */
+    private $progressSteps;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -177,6 +185,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         $this->updatedAt = new \Datetime();
         $this->selections = new ArrayCollection();
         $this->likers = new ArrayCollection();
+        $this->progressSteps = new ArrayCollection();
     }
 
     public function isIndexable()
@@ -386,7 +395,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     }
 
     /**
-     * @return CollectStep
+     * @return null|CollectStep
      */
     public function getStep()
     {
@@ -617,5 +626,35 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         });
 
         return $ids;
+    }
+
+    public function getProgressSteps(): ArrayCollection
+    {
+        return $this->progressSteps;
+    }
+
+    public function setProgressSteps(ArrayCollection $progressSteps) : self
+    {
+        $this->progressSteps = $progressSteps;
+
+        return $this;
+    }
+
+    public function addProgressStep(ProgressStep $progressStep) : self
+    {
+        if (!$this->progressSteps->contains($progressStep)) {
+            $this->progressSteps->add($progressStep);
+        }
+
+        return $this;
+    }
+
+    public function removeProgressStep(ProgressStep $progressStep) : self
+    {
+        if ($this->progressSteps->contains($progressStep)) {
+            $this->progressSteps->removeElement($progressStep);
+        }
+
+        return $this;
     }
 }

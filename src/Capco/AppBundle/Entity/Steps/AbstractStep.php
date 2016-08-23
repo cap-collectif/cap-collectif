@@ -29,6 +29,8 @@ use JMS\Serializer\Annotation as Serializer;
  *      "ranking"       = "RankingStep",
  *      "selection"     = "SelectionStep",
  *      "questionnaire" = "QuestionnaireStep",
+ *      "realisation"   = "RealisationStep",
+ *      "progress"      = "ProgressStep",
  * })
  * @Serializer\ExclusionPolicy("all")
  * @Serializer\Discriminator(field = "step_type", map = {
@@ -40,6 +42,7 @@ use JMS\Serializer\Annotation as Serializer;
  *      "ranking"       = "Capco\AppBundle\Entity\Steps\RankingStep",
  *      "selection"     = "Capco\AppBundle\Entity\Steps\SelectionStep",
  *      "questionnaire" = "Capco\AppBundle\Entity\Steps\QuestionnaireStep",
+ *      "realisation" = "Capco\AppBundle\Entity\Steps\RealisationStep",
  * })
  */
 abstract class AbstractStep
@@ -68,6 +71,7 @@ abstract class AbstractStep
         'ranking' => 'step.types.ranking',
         'selection' => 'step.types.selection',
         'questionnaire' => 'step.types.questionnaire',
+        'realisation' => 'step.types.realisation',
     ];
 
     /**
@@ -464,6 +468,11 @@ abstract class AbstractStep
     }
 
     public function isSelectionStep()
+    {
+        return false;
+    }
+
+    public function isRealisationStep() : bool
     {
         return false;
     }

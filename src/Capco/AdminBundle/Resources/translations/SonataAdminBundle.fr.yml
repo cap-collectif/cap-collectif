@@ -415,6 +415,7 @@ admin:
       group_opinion_types: Structure
       group_ranking: Classements
       group_steps: Étapes
+      group_realistation: Réalisations
       is_enabled: Publié
       opened_at: Ouvert
       opening_status: Statut
@@ -883,3 +884,5 @@ filter:
 
 Project List: Liste des projets
 Dashboard: Tableau de bord
+realisation:
+  empty: Veuillez créer une étape de type "Réalisation" sur le projet pour pouvoir créer des étapes
