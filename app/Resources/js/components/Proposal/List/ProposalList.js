@@ -38,7 +38,7 @@ export const ProposalList = React.createClass({
 
     const classes = classNames({
       'media-list': true,
-      'opinion__list': true,
+      opinion__list: true,
     });
 
     return (

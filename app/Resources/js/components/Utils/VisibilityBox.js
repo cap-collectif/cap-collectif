@@ -37,8 +37,8 @@ export const VisibilityBox = React.createClass({
       );
     }
 
-    const rootClasses = classNames({ 'PrivateList': true });
-    const boxClasses = classNames({ 'PrivateList__box': true });
+    const rootClasses = classNames({ PrivateList: true });
+    const boxClasses = classNames({ PrivateList__box: true });
 
     return (
       <div className={rootClasses}>
