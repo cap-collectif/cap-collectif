@@ -173,6 +173,7 @@ class PostAdmin extends Admin
                 'label' => 'admin.fields.blog_post.projects',
                 'required' => false,
                 'multiple' => true,
+                'btn_add' => false,
                 'by_reference' => false,
             ])
       ;
@@ -183,6 +184,7 @@ class PostAdmin extends Admin
               'label' => 'admin.fields.blog_post.themes',
               'required' => false,
               'multiple' => true,
+              'btn_add' => false,
               'by_reference' => false,
           ]);
       }
@@ -190,10 +192,6 @@ class PostAdmin extends Admin
       $formMapper
           ->end()
           ->with('admin.fields.blog_post.group_meta')
-            ->add('isPublished', null, [
-                'label' => 'admin.fields.blog_post.is_published',
-                'required' => false,
-            ])
             ->add('publishedAt', 'sonata_type_datetime_picker', [
                 'required' => false,
                 'label' => 'admin.fields.blog_post.published_at',
@@ -201,6 +199,10 @@ class PostAdmin extends Admin
                 'attr' => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
+            ])
+            ->add('isPublished', null, [
+                'label' => 'admin.fields.blog_post.is_published',
+                'required' => false,
             ])
             ->add('isCommentable', null, [
                 'label' => 'admin.fields.blog_post.is_commentable',
