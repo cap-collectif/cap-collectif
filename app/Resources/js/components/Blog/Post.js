@@ -18,7 +18,7 @@ export const Post = React.createClass({
           <a href={post._links.show} className="pull-left" alt="Post 8">
               {
                 post.media
-                ? <img src={post.media} role="presentation" />
+                ? <img src={post.media.url} role="presentation" />
                 : <div className="bg--post  media-object">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="110px" height="110px" viewBox="-146.5 -110.5 335.5 301.5" enableBackground="new -146.5 -110.5 335.5 301.5" xmlSpace="preserve" style={{ margin: '0 auto', display: 'block ' }}>
                         <line fill="none" stroke="#FFFFFF" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="-51.639" y1="-51.638" x2="51.913" y2="-51.638" />

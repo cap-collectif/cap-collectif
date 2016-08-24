@@ -8,6 +8,7 @@ Capco\AppBundle\Entity\Post:
         Media:
             expose: true
             groups: [Posts, PostDetails]
+            serialized_name: media
         title:
             expose: true
             type: string
