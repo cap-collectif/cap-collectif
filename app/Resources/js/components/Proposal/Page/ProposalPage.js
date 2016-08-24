@@ -268,7 +268,7 @@ export const ProposalPage = React.createClass({
                   </Tab.Pane>
                 }
                 <Tab.Pane eventKey="blog">
-                  <ProposalPageBlog proposal={proposal} />
+                  <ProposalPageBlog />
                 </Tab.Pane>
               </Tab.Content>
             </div>

@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
 import Post from '../../Blog/Post';
@@ -21,17 +20,24 @@ const ProposalPageBlog = React.createClass({
   render() {
     const { proposal } = this.props;
     const { posts } = proposal;
+    if (!posts || posts.length === 0) {
+      return <p>Aucune actualité</p>;
+    }
     return (
-      <div>
-        <Row>
+        <ul className="media-list">
           {
-            posts && posts.map((post, index) => <Post post={post} key={index} />)
+            posts.map((post, index) => <Post post={post} key={index} />)
           }
-        </Row>
-      </div>
+        </ul>
     );
   },
 
 });
 
-export default connect()(ProposalPageBlog);
+const mapStateToProps = (state) => {
+  return {
+    proposal: state.proposal.proposals[state.proposal.currentProposalById],
+  };
+};
+
+export default connect(mapStateToProps)(ProposalPageBlog);

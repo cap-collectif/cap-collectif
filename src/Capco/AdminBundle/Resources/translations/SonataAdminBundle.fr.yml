@@ -178,10 +178,10 @@ admin:
       projects: Projets participatifs
       is_commentable: Autoriser les commentaires
       comments_count: Nombre de commentaires
-      displayedOnHomepage: Afficher sur la page d'accueil
+      displayedOnBlog: Afficher sur la page d'accueil
       group_content: Contenu
       group_meta: Options de publication
-      group_linked_content: Contenu(s) lié(s)
+      group_linked_content: Emplacements
     category:
       title: Titre
       sources: Sources

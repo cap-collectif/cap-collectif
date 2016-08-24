@@ -151,6 +151,8 @@
     "answer": "R\u00e9pondre",
     "arguments": "{num, plural, =0{0 argument} one{# argument} other{# arguments}}",
     "back": "Retour",
+    "byAuthor": "par {author}",
+    "byDate": "Le {date}",
     "cancel": "Annuler",
     "change": "Changer",
     "create": "Créer",

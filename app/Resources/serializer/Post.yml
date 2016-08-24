@@ -5,6 +5,9 @@ Capco\AppBundle\Entity\Post:
             expose: true
             type: integer
             groups: [Posts, PostDetails]
+        Media:
+            expose: true
+            groups: [Posts, PostDetails]
         title:
             expose: true
             type: string
@@ -25,6 +28,9 @@ Capco\AppBundle\Entity\Post:
             expose: true
             groups: [Posts, PostDetails]
             serialized_name: authors
+        themes:
+            expose: true
+            groups: [Posts, PostDetails]
     virtual_properties:
         getAbstractOrBeginningOfTheText:
             serialized_name: abstract

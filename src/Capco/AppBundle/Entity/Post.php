@@ -67,9 +67,9 @@ class Post implements CommentableInterface, IndexableInterface
     private $isPublished = false;
 
     /**
-     * @ORM\Column(name="dislay_on_homepage", type="boolean")
+     * @ORM\Column(name="dislayed_on_blog", type="boolean")
      */
-    private $displayedOnHomepage = true;
+    private $displayedOnBlog = true;
 
     /**
      * @var \DateTime
@@ -290,16 +290,16 @@ class Post implements CommentableInterface, IndexableInterface
         return $this->isPublished;
     }
 
-    public function setDisplayedOnHomepage(bool $displayedOnHomepage) : Post
+    public function setdisplayedOnBlog(bool $displayedOnBlog) : Post
     {
-        $this->displayedOnHomepage = $displayedOnHomepage;
+        $this->displayedOnBlog = $displayedOnBlog;
 
         return $this;
     }
 
-    public function isDisplayedOnHomepage() : bool
+    public function isdisplayedOnBlog() : bool
     {
-        return $this->displayedOnHomepage;
+        return $this->displayedOnBlog;
     }
 
     /**
@@ -583,7 +583,7 @@ class Post implements CommentableInterface, IndexableInterface
 
     public function getAbstractOrBeginningOfTheText()
     {
-        return $this->abstract ?? substr($this->body, 0, 300) . '[...]';
+        return $this->abstract ?? substr(strip_tags($this->body), 0, 300) . '[...]';
     }
 
     // ************************** Lifecycle **************************************

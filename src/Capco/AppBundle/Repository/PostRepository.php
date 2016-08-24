@@ -59,7 +59,7 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
             ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
             ->leftJoin('p.proposals', 'proposal')
-            ->andWhere('p.displayedOnHomepage = true')
+            ->andWhere('p.displayedOnBlog = true')
             ->orderBy('p.publishedAt', 'DESC')
         ;
 

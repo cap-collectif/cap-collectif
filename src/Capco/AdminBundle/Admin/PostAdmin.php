@@ -129,8 +129,8 @@ class PostAdmin extends Admin
 
       $formMapper
           ->with('admin.fields.blog_post.group_content', ['class' => 'col-md-12'])->end()
-          ->with('admin.fields.blog_post.group_meta',    ['class' => 'col-md-6'])->end()
           ->with('admin.fields.blog_post.group_linked_content', ['class' => 'col-md-6'])->end()
+          ->with('admin.fields.blog_post.group_meta',    ['class' => 'col-md-6'])->end()
       ;
 
         $formMapper
@@ -161,14 +161,20 @@ class PostAdmin extends Admin
 
         $formMapper
             ->end()
-            ->with('admin.fields.blog_post.group_linked_content')
-            ->add('proposals', 'sonata_type_model_autocomplete', [
-              'property' => 'title',
-              'label' => 'admin.fields.blog_post.proposals',
-              'required' => false,
-              'multiple' => true,
-              'by_reference' => false,
-            ])
+            ->with('admin.fields.blog_post.group_linked_content');
+
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            $formMapper
+              ->add('themes', 'sonata_type_model', [
+                'label' => 'admin.fields.blog_post.themes',
+                'required' => false,
+                'multiple' => true,
+                'btn_add' => false,
+                'by_reference' => false,
+            ]);
+        }
+
+        $formMapper
             ->add('projects', 'sonata_type_model', [
                 'label' => 'admin.fields.blog_post.projects',
                 'required' => false,
@@ -176,18 +182,18 @@ class PostAdmin extends Admin
                 'btn_add' => false,
                 'by_reference' => false,
             ])
-      ;
-
-      if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-          $formMapper
-            ->add('themes', 'sonata_type_model', [
-              'label' => 'admin.fields.blog_post.themes',
+            ->add('proposals', 'sonata_type_model_autocomplete', [
+              'property' => 'title',
+              'label' => 'admin.fields.blog_post.proposals',
               'required' => false,
               'multiple' => true,
-              'btn_add' => false,
               'by_reference' => false,
-          ]);
-      }
+            ])
+            ->add('displayedOnBlog', null, [
+              'label' => 'admin.fields.blog_post.displayedOnBlog',
+              'required' => false,
+            ])
+      ;
 
       $formMapper
           ->end()
@@ -207,10 +213,6 @@ class PostAdmin extends Admin
             ->add('isCommentable', null, [
                 'label' => 'admin.fields.blog_post.is_commentable',
                 'required' => false,
-            ])
-            ->add('displayedOnHomepage', null, [
-              'label' => 'admin.fields.blog_post.displayedOnHomepage',
-              'required' => false,
             ])
         ;
     }
