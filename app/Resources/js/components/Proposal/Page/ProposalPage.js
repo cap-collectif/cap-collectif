@@ -23,10 +23,7 @@ export const ProposalPage = React.createClass({
   propTypes: {
     form: PropTypes.object.isRequired,
     proposal: PropTypes.object.isRequired,
-    themes: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
-    votes: PropTypes.array.isRequired,
     votableStep: PropTypes.object,
     userHasVote: PropTypes.bool,
     user: PropTypes.object,
@@ -170,7 +167,7 @@ export const ProposalPage = React.createClass({
 
   render() {
     const { proposal, userHasVote, creditsLeft, showVotesModal } = this.state;
-    const { form, themes, districts, categories, votes, votableStep, features } = this.props;
+    const { form, categories, votableStep, features } = this.props;
     const showVotes = !!votableStep && votableStep.voteType !== VOTE_TYPE_DISABLED;
     const showVotesTab = proposal.votesCount > 0 || showVotes;
     return (
@@ -235,8 +232,6 @@ export const ProposalPage = React.createClass({
                       <ProposalPageContent
                         proposal={proposal}
                         form={form}
-                        themes={themes}
-                        districts={districts}
                         categories={categories}
                         userHasVote={userHasVote}
                         selectionStep={votableStep}
@@ -269,7 +264,6 @@ export const ProposalPage = React.createClass({
                   && <Tab.Pane eventKey="votes">
                     <ProposalPageVotes
                       proposal={proposal}
-                      votes={votes}
                     />
                   </Tab.Pane>
                 }
@@ -299,6 +293,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.default.user,
     features: state.default.features,
+    proposal: state.proposal.proposals[state.proposal.currentProposalById],
   };
 };
 

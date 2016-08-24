@@ -1,33 +1,31 @@
 import React, { PropTypes } from 'react';
 import { Row } from 'react-bootstrap';
-import { IntlMixin, FormattedMessage } from 'react-intl';
-import Post from './Post';
+import { connect } from 'react-redux';
+import { IntlMixin } from 'react-intl';
+import Post from '../../Blog/Post';
+import { fetchProposalPosts } from '../../../redux/modules/proposal';
 
 const ProposalPageBlog = React.createClass({
   displayName: 'ProposalPageBlog',
   propTypes: {
     proposal: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   componentDidMount() {
-    this.loadProposalBlogPosts();
+    const { dispatch, proposal } = this.props;
+    dispatch(fetchProposalPosts(proposal.id));
   },
 
   render() {
     const { proposal } = this.props;
-    const { votesCount, posts } = proposal;
+    const { posts } = proposal;
     return (
       <div>
-        <h2>
-          <FormattedMessage
-            message={this.getIntlMessage('proposal.vote.count')}
-            num={votesCount}
-          />
-        </h2>
         <Row>
           {
-            posts.map((post, index) => <Post post={post} key={index} />)
+            posts && posts.map((post, index) => <Post post={post} key={index} />)
           }
         </Row>
       </div>
@@ -36,4 +34,4 @@ const ProposalPageBlog = React.createClass({
 
 });
 
-export default ProposalPageBlog;
+export default connect()(ProposalPageBlog);
