@@ -35,13 +35,12 @@ class PostRepository extends EntityRepository
         }
 
         $qb = $this->getIsPublishedQueryBuilder('p')
-            ->addSelect('a', 'm', 't', 'c', 'proposal')
+            ->addSelect('a', 'm', 't', 'c')
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.Media', 'm')
-            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
-            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
-            ->leftJoin('p.proposals', 'proposal')
-            ->andWhere('p.displayedOnHomepage = true')
+            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :enabled')
+            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = :enabled')
+            ->setParameter('enabled', true)
             ->orderBy('p.publishedAt', 'DESC')
         ;
 
@@ -60,8 +59,7 @@ class PostRepository extends EntityRepository
         $query = $qb->getQuery();
 
         if ($nbByPage > 0) {
-            $query
-                ->setFirstResult(($page - 1) * $nbByPage)
+            $query->setFirstResult(($page - 1) * $nbByPage)
                 ->setMaxResults($nbByPage);
         }
 
@@ -83,14 +81,16 @@ class PostRepository extends EntityRepository
         ;
 
         if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
-            $qb->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
+            $qb->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
+                ->setParameter('tEnabled', true)
                 ->andWhere('t.slug = :theme')
                 ->setParameter('theme', $themeSlug)
             ;
         }
 
         if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
-            $qb->innerJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
+            $qb->innerJoin('p.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
+                ->setParameter('cEnabled', true)
                 ->andWhere('c.slug = :project')
                 ->setParameter('project', $projectSlug)
             ;
@@ -179,9 +179,11 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('a.Media', 'am')
             ->leftJoin('p.Media', 'm')
-            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
-            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
+            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
+            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
             ->andWhere('p.slug = :slug')
+            ->setParameter('tEnabled', true)
+            ->setParameter('cEnabled', true)
             ->setParameter('slug', $slug)
             ->orderBy('p.publishedAt', 'DESC')
         ;
@@ -212,8 +214,9 @@ class PostRepository extends EntityRepository
     protected function getIsPublishedQueryBuilder($alias = 'p')
     {
         return $this->createQueryBuilder($alias)
-            ->andWhere($alias.'.isPublished = true')
+            ->andWhere($alias.'.isPublished = :isPublished')
             ->andWhere($alias.'.publishedAt <= :now')
+            ->setParameter('isPublished', true)
             ->setParameter('now', new \DateTime());
     }
 }

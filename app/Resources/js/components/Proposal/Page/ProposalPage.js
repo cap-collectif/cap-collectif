@@ -6,7 +6,6 @@ import ProposalPageAlert from './ProposalPageAlert';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageAnswer from './ProposalPageAnswer';
 import ProposalPageVotes from './ProposalPageVotes';
-import ProposalPageBlog from './ProposalPageBlog';
 import ProposalPageComments from './ProposalPageComments';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalPageMetadata from './ProposalPageMetadata';
@@ -208,10 +207,6 @@ export const ProposalPage = React.createClass({
                       <span className="badge">{proposal.votesCount}</span>
                     </NavItem>
                   }
-                  <NavItem eventKey="blog" className="tabs__pill">
-                    {this.getIntlMessage('proposal.tabs.blog')}
-                    <span className="badge">{proposal.postsCount || 0}</span>
-                  </NavItem>
                 </Nav>
                 <ProposalVoteButtonWrapper
                   selectionStep={votableStep}
@@ -273,9 +268,6 @@ export const ProposalPage = React.createClass({
                     />
                   </Tab.Pane>
                 }
-                <Tab.Pane eventKey="blog">
-                  <ProposalPageBlog proposal={proposal} />
-                </Tab.Pane>
               </Tab.Content>
             </div>
             {

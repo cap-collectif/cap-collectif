@@ -38,12 +38,12 @@ admin.label.highlighted: A la une
 admin.label.idea: Idées
 admin.label.menu_item: Navigation
 admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
-admin.label.proposal: Propositions (budget)
+admin.label.proposal: Budget / Propositions
 admin.label.proposal_form: Budget / Formulaire
 admin.label.questionnaire: Questionnaire
 admin.label.question: Question
 admin.label.question_choice: Choix
-admin.label.opinion: Propositions (consultation)
+admin.label.opinion: Consultation / Propositions
 admin.label.reply: Questionnaire / Réponses
 admin.label.response: Réponse à une question
 admin.label.opinion_type: Éléments de structure
@@ -174,14 +174,9 @@ admin:
       is_published: Publié
       media: Photo
       themes: Thèmes
-      proposals: Propositions (budget)
       projects: Projets participatifs
-      is_commentable: Autoriser les commentaires
+      is_commentable: Commentable
       comments_count: Nombre de commentaires
-      displayedOnHomepage: Afficher sur la page d'accueil
-      group_content: Contenu
-      group_meta: Options de publication
-      group_linked_content: Contenu(s) lié(s)
     category:
       title: Titre
       sources: Sources
@@ -600,8 +595,8 @@ admin:
       idea: Idée
       is_archived: Traité
       object: Contribution
-      opinion: Proposition (budget)
-      proposal: Proposition (consultation)
+      opinion: Consultation / Proposition
+      proposal: Budget / Proposition
       reporter: Auteur
       source: Source
       status: Type de problème
@@ -879,3 +874,6 @@ simple_question: Question simple
 multiple_choice_question: Question à choix multiple
 filter:
   label_phone: Numéro de téléphone
+
+Project List: Liste des projets
+Dashboard: Tableau de bord
