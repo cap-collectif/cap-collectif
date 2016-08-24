@@ -23,4 +23,22 @@ class ResponseRepository extends EntityRepository
 
         return $qb->getQuery()->getArrayResult();
     }
+
+    public function getByProposal(int $proposalId, bool $showPrivate = false)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->addSelect('question')
+            ->leftJoin('r.question', 'question')
+            ->andWhere('r.proposal = :proposal')
+            ->setParameter('proposal', $proposalId)
+        ;
+
+        if (!$showPrivate) {
+            $qb
+                ->andWhere('question.private = false')
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

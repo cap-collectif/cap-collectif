@@ -100,7 +100,7 @@ class HomepageController extends Controller
         $ideasRaw = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getPopular($max, $offset);
         $props = $serializer->serialize([
             'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'ThemeDetails', 'UsersInfos']));
+        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'Themes', 'UsersInfos']));
 
         return [
             'props' => $props,

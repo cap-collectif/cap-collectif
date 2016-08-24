@@ -4,13 +4,13 @@ Capco\AppBundle\Entity\Theme:
     id:
       expose: true
       type: integer
-      groups: [ThemeDetails]
+      groups: [Themes]
     title:
       expose: true
       type: string
-      groups: [Themes, ThemeDetails]
+      groups: [Themes]
     isEnabled:
       expose: true
       type: boolean
-      groups: [ThemeDetails]
+      groups: [Themes]
       serialized_name: enabled

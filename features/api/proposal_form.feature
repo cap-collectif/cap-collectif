@@ -26,7 +26,8 @@ Feature: ProposalForm Restful Api
       "id": @integer@,
       "type": @string@,
       "helpText": @string@,
-      "required": @...@,
+      "required": @boolean@,
+      "private": @boolean@,
       "question": @string@,
       "slug": @string@
     },
@@ -35,6 +36,7 @@ Feature: ProposalForm Restful Api
       "type": @string@,
       "helpText": @string@,
       "required": true,
+      "private": @boolean@,
       "question": @string@,
       "slug": @string@
     }

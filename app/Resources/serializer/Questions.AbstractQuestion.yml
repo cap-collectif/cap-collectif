@@ -27,7 +27,10 @@ Capco\AppBundle\Entity\Questions\AbstractQuestion:
     required:
       expose: true
       type: boolean
-      serialized_name: required
+      groups: [Questions, Proposals, Replies]
+    private:
+      expose: true
+      type: boolean
       groups: [Questions, Proposals, Replies]
   virtual_properties:
     getInputType:

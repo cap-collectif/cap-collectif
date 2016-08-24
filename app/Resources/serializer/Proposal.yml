@@ -18,10 +18,6 @@ Capco\AppBundle\Entity\Proposal:
       type: Capco\UserBundle\Entity\User
       serialized_name: author
       groups: [Proposals]
-    responses:
-      expose: true
-      serialized_name: responses
-      groups: [Proposals]
     commentsCount:
       expose: true
       type: integer
@@ -86,6 +82,4 @@ Capco\AppBundle\Entity\Proposal:
       expose: true
       groups: [Proposals]
       serialized_name: votesCount
-    votes:
-      expose: true
-      groups: [ProposalVotes]
+
