@@ -4,28 +4,29 @@ Capco\AppBundle\Entity\Post:
         id:
             expose: true
             type: integer
-            groups: [Posts]
+            groups: [Posts, PostDetails]
         title:
             expose: true
             type: string
-            groups: [Posts]
+            groups: [Posts, PostDetails]
         body:
             expose: true
             type: string
-            groups: [Posts]
-        abstract:
-            expose: true
-            type: string
-            groups: [Posts]
+            groups: [PostDetails]
         createdAt:
             expose: true
             type: DateTime
-            groups: [Posts]
+            groups: [Posts, PostDetails]
         updatedAt:
             expose: true
             type: DateTime
-            groups: [Posts]
-        is_published:
+            groups: [Posts, PostDetails]
+        Authors:
             expose: true
-            type: boolean
+            groups: [Posts, PostDetails]
+            serialized_name: authors
+    virtual_properties:
+        getAbstractOrBeginningOfTheText:
+            serialized_name: abstract
+            type: string
             groups: [Posts]
