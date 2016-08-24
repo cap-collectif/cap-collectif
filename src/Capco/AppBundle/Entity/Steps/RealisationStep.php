@@ -45,4 +45,9 @@ class RealisationStep extends AbstractStep
     {
         return 'realisation';
     }
+
+    public function isRealisationStep() : bool
+    {
+        return true;
+    }
 }

@@ -168,7 +168,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Steps\ProgressStep", mappedBy="proposals", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Steps\ProgressStep", mappedBy="proposal", cascade={"persist"})
      */
     private $progressSteps;
 

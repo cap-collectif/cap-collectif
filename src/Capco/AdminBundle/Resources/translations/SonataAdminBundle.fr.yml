@@ -876,6 +876,7 @@ synthesis_step: Étape de synthèse
 ranking_step: Étape de classement
 selection_step: Étape de sélection
 questionnaire_step: Étape de questionnaire
+realisation_step: Étape de réalisation
 
 simple_question: Question simple
 multiple_choice_question: Question à choix multiple

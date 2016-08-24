@@ -44,20 +44,14 @@ class ProgressStep
     private $endAt= null;
 
     /**
-     * @var ArrayCollection
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="progressSteps", cascade={"persist"})
      */
-    private $proposals = null;
+    private $proposal = null;
 
     /**
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
-
-    public function __construct()
-    {
-        $this->proposals = new ArrayCollection();
-    }
 
     public function getDefaultStatus() : Status
     {
@@ -119,23 +113,14 @@ class ProgressStep
         return $this;
     }
 
-    public function getProposals() : ArrayCollection
+    public function getProposal() : Proposal
     {
-        return $this->proposals;
+        return $this->proposal;
     }
 
-    public function addProposal(Proposal $proposal) : self
+    public function setProposal(Proposal $proposal) : self
     {
-        if (!$this->proposals->contains($proposal)) {
-            $this->proposals->add($proposal);
-        }
-
-        return $this;
-    }
-
-    public function removeProposal(Proposal $proposal) : self
-    {
-        $this->proposals->removeElement($proposal);
+        $this->proposal = $proposal;
 
         return $this;
     }
