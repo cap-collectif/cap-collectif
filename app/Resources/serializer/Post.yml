@@ -29,3 +29,4 @@ Capco\AppBundle\Entity\Post:
             expose: true
             type: boolean
             groups: [Posts]
+            serialized_name: published
