@@ -1026,9 +1026,10 @@ comment:
     all_fields_mandatory: Tous les champs sont obligatoires.
     submit: Commenter
     success: Merci ! Votre commentaire a bien été enregistré.
-    no_author_error: Erreur : vous devez vous connecter ou renseigner un nom et une adresse électronique valide pour pouvoir publier un commentaire.
-    no_body_error: Erreur : vous devez spécifier un contenu pour pouvoir publier un commentaire.
-    invalid_email_error: Erreur : L'adresse électronique est invalide.
+    only_one_realisation_step: Il ne peut y avoir qu'une seule étape de réalisation
+    no_author_error: "Erreur : vous devez vous connecter ou renseigner un nom et une adresse électronique valide pour pouvoir publier un commentaire."
+    no_body_error: "Erreur : vous devez spécifier un contenu pour pouvoir publier un commentaire."
+    invalid_email_error: "Erreur : L'adresse électronique est invalide."
   update:
     page_title: Modifier un commentaire
     button: Modifier

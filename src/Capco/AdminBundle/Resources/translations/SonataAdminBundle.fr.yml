@@ -479,6 +479,8 @@ admin:
       group_collect: Dépôt
       group_selection: Sélection
       group_answer: Réponse officielle
+      group_progress: Réalisation
+      no_realisation_step: Veuillez créer une étape de type "Réalisation" sur le projet pour pouvoir créer des étapes
       help:
         annotation: Cette annotation ne sera pas visible sur le site.
         estimation: L'estimation sera affichée en euros.
@@ -885,5 +887,3 @@ filter:
 
 Project List: Liste des projets
 Dashboard: Tableau de bord
-realisation:
-  empty: Veuillez créer une étape de type "Réalisation" sur le projet pour pouvoir créer des étapes
