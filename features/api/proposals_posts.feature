@@ -3,7 +3,6 @@ Feature: Proposal posts
 
 ## List Comments
 
-  @parallel-scenario
   Scenario: API client wants to list comments of a proposal
     When I send a GET request to "/api/proposals/1/posts"
     Then the JSON response should match:
@@ -15,23 +14,19 @@ Feature: Proposal posts
           "id": @integer@,
           "title": @string@,
           "abstract": @string@,
-          "body": @string@,
+          "media": @null@,
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
-          "authors": [
+          "themes": [
             {
-              "username": @string@,
-              "displayName": @string@,
-              "isAdmin": @boolean@,
-              "uniqueId": @string@,
-              "media": @...@,
+              "title": @string@,
               "_links": {
-                "profile": @string@,
-                "settings": @string@
+                "show": @string@
               }
             },
             @...@
           ],
+          "authors": @array@,
           "_links": {
             "show": @string@
           }

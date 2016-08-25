@@ -63,5 +63,6 @@ Capco\AppBundle\Entity\Post:
       publishedAt: <dateTimeBetween('-100 days', '-10 days')>
       Authors:
           - @user<numberBetween(1,5)>
+      themes: [@theme1, @theme2]
       Media: null
       proposals: [@proposal1]
