@@ -10,8 +10,6 @@ import { Modal } from 'react-bootstrap';
 const ProposalEditModal = React.createClass({
   propTypes: {
     form: PropTypes.object.isRequired,
-    themes: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     proposal: PropTypes.object.isRequired,
     show: PropTypes.bool.isRequired,
@@ -69,11 +67,9 @@ const ProposalEditModal = React.createClass({
   render() {
     const {
       categories,
-      districts,
       form,
       proposal,
       show,
-      themes,
     } = this.props;
     return (
       <div>
@@ -92,8 +88,6 @@ const ProposalEditModal = React.createClass({
           <Modal.Body>
             <ProposalForm
               form={form}
-              themes={themes}
-              districts={districts}
               categories={categories}
               isSubmitting={this.state.isSubmitting}
               onValidationFailure={this.handleValidationFailure.bind(null, this)}

@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Proposal;
 
 /**
  * PostRepository.
@@ -15,6 +16,38 @@ use Capco\AppBundle\Entity\Project;
  */
 class PostRepository extends EntityRepository
 {
+
+    private function createPublishedPostsByProposalQB(Proposal $proposal)
+    {
+      return $this->getIsPublishedQueryBuilder()
+          ->leftJoin('p.proposals', 'proposal')
+          ->andWhere('proposal.id = :id')
+          ->setParameter('id', $proposal->getId())
+        ;
+    }
+    public function getPublishedPostsByProposal(Proposal $proposal)
+    {
+      return $this->createPublishedPostsByProposalQB($proposal)
+          ->addSelect('a', 'm', 't')
+          ->leftJoin('p.Authors', 'a')
+          ->leftJoin('p.Media', 'm')
+          ->leftJoin('p.themes', 't')
+          ->addOrderBy('p.publishedAt', 'DESC')
+          ->setParameter('id', $proposal->getId())
+          ->getQuery()
+          ->getResult()
+        ;
+    }
+
+    public function countPublishedPostsByProposal(Proposal $proposal)
+    {
+      return $this->createPublishedPostsByProposalQB($proposal)
+          ->select('count(p.id)')
+          ->getQuery()
+          ->getSingleScalarResult()
+        ;
+    }
+
     /**
      * Get posts depending on theme and project.
      *
@@ -35,12 +68,13 @@ class PostRepository extends EntityRepository
         }
 
         $qb = $this->getIsPublishedQueryBuilder('p')
-            ->addSelect('a', 'm', 't', 'c')
+            ->addSelect('a', 'm', 't', 'c', 'proposal')
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.Media', 'm')
-            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = :enabled')
-            ->setParameter('enabled', true)
+            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
+            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
+            ->leftJoin('p.proposals', 'proposal')
+            ->andWhere('p.displayedOnBlog = true')
             ->orderBy('p.publishedAt', 'DESC')
         ;
 
@@ -59,7 +93,8 @@ class PostRepository extends EntityRepository
         $query = $qb->getQuery();
 
         if ($nbByPage > 0) {
-            $query->setFirstResult(($page - 1) * $nbByPage)
+            $query
+                ->setFirstResult(($page - 1) * $nbByPage)
                 ->setMaxResults($nbByPage);
         }
 
@@ -81,16 +116,14 @@ class PostRepository extends EntityRepository
         ;
 
         if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
-            $qb->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
-                ->setParameter('tEnabled', true)
+            $qb->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
                 ->andWhere('t.slug = :theme')
                 ->setParameter('theme', $themeSlug)
             ;
         }
 
         if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
-            $qb->innerJoin('p.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
-                ->setParameter('cEnabled', true)
+            $qb->innerJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
                 ->andWhere('c.slug = :project')
                 ->setParameter('project', $projectSlug)
             ;
@@ -179,11 +212,9 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('a.Media', 'am')
             ->leftJoin('p.Media', 'm')
-            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
-            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
+            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
+            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
             ->andWhere('p.slug = :slug')
-            ->setParameter('tEnabled', true)
-            ->setParameter('cEnabled', true)
             ->setParameter('slug', $slug)
             ->orderBy('p.publishedAt', 'DESC')
         ;
@@ -214,9 +245,8 @@ class PostRepository extends EntityRepository
     protected function getIsPublishedQueryBuilder($alias = 'p')
     {
         return $this->createQueryBuilder($alias)
-            ->andWhere($alias.'.isPublished = :isPublished')
+            ->andWhere($alias.'.isPublished = true')
             ->andWhere($alias.'.publishedAt <= :now')
-            ->setParameter('isPublished', true)
             ->setParameter('now', new \DateTime());
     }
 }

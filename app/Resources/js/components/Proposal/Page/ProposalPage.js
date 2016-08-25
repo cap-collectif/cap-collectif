@@ -6,6 +6,7 @@ import ProposalPageAlert from './ProposalPageAlert';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageAnswer from './ProposalPageAnswer';
 import ProposalPageVotes from './ProposalPageVotes';
+import ProposalPageBlog from './ProposalPageBlog';
 import ProposalPageComments from './ProposalPageComments';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalPageMetadata from './ProposalPageMetadata';
@@ -22,10 +23,7 @@ export const ProposalPage = React.createClass({
   propTypes: {
     form: PropTypes.object.isRequired,
     proposal: PropTypes.object.isRequired,
-    themes: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
-    votes: PropTypes.array.isRequired,
     votableStep: PropTypes.object,
     userHasVote: PropTypes.bool,
     user: PropTypes.object,
@@ -169,7 +167,7 @@ export const ProposalPage = React.createClass({
 
   render() {
     const { proposal, userHasVote, creditsLeft, showVotesModal } = this.state;
-    const { form, themes, districts, categories, votes, votableStep, features } = this.props;
+    const { form, categories, votableStep, features } = this.props;
     const showVotes = !!votableStep && votableStep.voteType !== VOTE_TYPE_DISABLED;
     const showVotesTab = proposal.votesCount > 0 || showVotes;
     return (
@@ -207,6 +205,10 @@ export const ProposalPage = React.createClass({
                       <span className="badge">{proposal.votesCount}</span>
                     </NavItem>
                   }
+                  <NavItem eventKey="blog" className="tabs__pill">
+                    {this.getIntlMessage('proposal.tabs.blog')}
+                    <span className="badge">{proposal.postsCount}</span>
+                  </NavItem>
                 </Nav>
                 <ProposalVoteButtonWrapper
                   selectionStep={votableStep}
@@ -230,8 +232,6 @@ export const ProposalPage = React.createClass({
                       <ProposalPageContent
                         proposal={proposal}
                         form={form}
-                        themes={themes}
-                        districts={districts}
                         categories={categories}
                         userHasVote={userHasVote}
                         selectionStep={votableStep}
@@ -264,10 +264,12 @@ export const ProposalPage = React.createClass({
                   && <Tab.Pane eventKey="votes">
                     <ProposalPageVotes
                       proposal={proposal}
-                      votes={votes}
                     />
                   </Tab.Pane>
                 }
+                <Tab.Pane eventKey="blog">
+                  <ProposalPageBlog />
+                </Tab.Pane>
               </Tab.Content>
             </div>
             {
@@ -291,6 +293,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.default.user,
     features: state.default.features,
+    proposal: state.proposal.proposals[state.proposal.currentProposalById],
   };
 };
 

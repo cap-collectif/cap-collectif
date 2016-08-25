@@ -3,10 +3,22 @@
 {% block canonical_link %}{{ '' }}{% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ proposalTitle }}
+    {{ parent() }} - {{ proposal.title }}
 {% endblock %}
 
 {% block jumbotron %}{% endblock %}
+
+{% block reduxStore %}
+  {% set initialState = {
+    'proposal': {
+      'currentProposalById': proposal.id,
+      'proposals': {
+        (proposal.id) : proposalSerialized
+      }
+    }
+  } %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'data' : state|merge(initialState)} %}
+{% endblock %}
 
 {% block body %}
     {{ react_intl_component('ProposalPageApp', {

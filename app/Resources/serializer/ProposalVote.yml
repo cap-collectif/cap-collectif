@@ -10,10 +10,6 @@ Capco\AppBundle\Entity\ProposalVote:
       type: Capco\AppBundle\Entity\Steps\SelectionStep
       groups: [ProposalVotes]
       serialized_name: selectionStep
-    proposal:
-      expose: true
-      type: Capco\AppBundle\Entity\Proposal
-      groups: [ProposalVotes]
     user:
       expose: true
       type: Capco\UserBundle\Entity\User
