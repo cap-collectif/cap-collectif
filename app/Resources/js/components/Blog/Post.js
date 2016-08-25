@@ -44,9 +44,14 @@ export const Post = React.createClass({
             <p className="excerpt  media--news__meta">
               {
                 post.themes.map((theme, i) =>
-                  <a key={i} href={theme._links.show}>
-                    <span className="label label-default">{theme.title}</span>
-                  </a>
+                  <span key={i}>
+                    <a key={i} href={theme._links.show}>
+                      <span className="label label-default">{theme.title}</span>
+                    </a>
+                    {
+                        post.themes.length > i && ' '
+                    }
+                  </span>
                 )
               }
               <FormattedMessage
@@ -64,12 +69,15 @@ export const Post = React.createClass({
                     author={
                       <span>
                       {
-                        post.authors.map(author =>
-                        <span>
+                        post.authors.map((author, i) =>
+                        <span key={i}>
                           {
                             features.profiles
                               ? <a href={author._links.profile}>{author.displayName}</a>
                               : author.displayName
+                          }
+                          {
+                              post.authors.length > i + 1 && ', '
                           }
                         </span>
                       )

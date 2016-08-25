@@ -311,7 +311,7 @@ class ProposalsController extends FOSRestController
     /**
      * @Get("/proposals/{proposal}/posts")
      * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
-     * @View(serializerGroups={"Posts", "UsersInfos", "UserMedias"})
+     * @View(serializerGroups={"Posts", "UsersInfos", "UserMedias", "Themes"})
      * @Cache(smaxage="60", public=true)
      */
     public function getProposalPostsAction(Proposal $proposal)

@@ -80,7 +80,7 @@ class ProposalController extends Controller
         ;
 
         $proposalSerializedAsArray = json_decode($proposalSerialized, true);
-        $proposalSerializedAsArray['postsCount'] = $em->getRepository('CapcoAppBundle:Post')->countPublishedPostsByProposal();
+        $proposalSerializedAsArray['postsCount'] = $em->getRepository('CapcoAppBundle:Post')->countPublishedPostsByProposal($proposal);
 
         return $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,
