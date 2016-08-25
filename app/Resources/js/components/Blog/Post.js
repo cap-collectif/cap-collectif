@@ -44,7 +44,7 @@ export const Post = React.createClass({
             <p className="excerpt  media--news__meta">
               {
                 post.themes.map((theme, i) =>
-                  <a key={i} href={theme.url}>
+                  <a key={i} href={theme._links.show}>
                     <span className="label label-default">{theme.title}</span>
                   </a>
                 )
