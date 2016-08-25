@@ -6,7 +6,7 @@ Background:
 
 Scenario: Anonymous wants to list published posts
   And I visited "blog page"
-  Then I should see 8 ".media--news" elements
+  Then I should see 10 ".media--news" elements
 
 @javascript @elasticsearch
 Scenario: Posts can be filtered by projects

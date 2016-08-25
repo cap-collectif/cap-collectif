@@ -67,7 +67,7 @@ class Post implements CommentableInterface, IndexableInterface
     private $isPublished = false;
 
     /**
-     * @ORM\Column(name="dislayed_on_blog", type="boolean")
+     * @ORM\Column(name="dislayed_on_blog", type="boolean", nullable=false)
      */
     private $displayedOnBlog = true;
 
@@ -114,7 +114,7 @@ class Post implements CommentableInterface, IndexableInterface
     private $projects;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="posts", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", cascade={"persist"})
      * @ORM\JoinTable(name="proposal_post")
      */
     private $proposals;

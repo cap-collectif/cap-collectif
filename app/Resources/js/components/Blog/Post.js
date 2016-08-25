@@ -70,16 +70,16 @@ export const Post = React.createClass({
                       <span>
                       {
                         post.authors.map((author, i) =>
-                        <span key={i}>
-                          {
-                            features.profiles
-                              ? <a href={author._links.profile}>{author.displayName}</a>
-                              : author.displayName
-                          }
-                          {
+                          <span key={i}>
+                            {
+                              features.profiles
+                                ? <a href={author._links.profile}>{author.displayName}</a>
+                                : author.displayName
+                            }
+                            {
                               post.authors.length > i + 1 && ', '
-                          }
-                        </span>
+                            }
+                          </span>
                       )
                      }
                      </span>
