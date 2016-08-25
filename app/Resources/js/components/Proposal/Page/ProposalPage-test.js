@@ -124,9 +124,6 @@ describe('<ProposalPage />', () => {
     expect(proposalComments).to.have.length(1);
     expect(proposalComments.prop('form')).to.equal(props.form);
     expect(proposalComments.prop('id')).to.equal(proposalNoVotes.id);
-    const proposalBlog = contentTabPane.find('ProposalPageBlog');
-    expect(proposalBlog).to.have.length(1);
-    expect(proposalBlog.props()).to.equal({ proposal: proposalNoVotes });
   });
 
   it('should render a vote tab and a vote modal if votable step is specified', () => {

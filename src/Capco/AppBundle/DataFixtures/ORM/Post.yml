@@ -49,19 +49,3 @@ Capco\AppBundle\Entity\Post:
       Media: null
       projects: [@p2]
       themes: [@theme2]
-
-  post{11..15}:
-      title: Post <current()>
-      abstract: <text(150)>
-      body: |
-           <h2><text(10)></h2>
-           <p><text(500)></p>
-           <h2><text(10)></h2>
-           <h3><text(10)></h3>
-           <p><text(300)></p>
-      isPublished: true
-      publishedAt: <dateTimeBetween('-100 days', '-10 days')>
-      Authors:
-          - @user<numberBetween(1,5)>
-      Media: null
-      proposals: [@proposal1]

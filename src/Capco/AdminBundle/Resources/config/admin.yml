@@ -50,7 +50,7 @@ services:
     calls:
       - [ setTranslationDomain, [SonataAdminBundle]]
 
-  capco_admin.admin.opinionTypeAppendixType:
+  capco_admin.admin.opinion_type_appendix_type:
     class: Capco\AdminBundle\Admin\OpinionTypeAppendixTypeAdmin
     arguments: [~, Capco\AppBundle\Entity\OpinionTypeAppendixType, SonataAdminBundle:CRUD]
     tags:
