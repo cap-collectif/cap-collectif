@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
-import Truncate from 'react-truncate';
 
 const ProposalDetailLikersLabel = React.createClass({
   propTypes: {
@@ -24,7 +23,11 @@ const ProposalDetailLikersLabel = React.createClass({
   getLabelText() {
     const { likers } = this.props;
     if (likers.length === 1) {
-      return <Truncate>{likers[0].displayName}</Truncate>;
+      const name = likers[0].displayName;
+      if (name.length > 28) {
+        return `${name.substring(0, 28)}...`;
+      }
+      return name;
     }
     if (likers.length > 1) {
       return (

@@ -76,7 +76,6 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.0.0",
     "react-router-bootstrap": "^0.20.1",
-    "react-truncate": "^1.1.2",
     "readmore": "0.0.2",
     "redux": "^3.4.0",
     "redux-form": "6.0.0-rc.3",
