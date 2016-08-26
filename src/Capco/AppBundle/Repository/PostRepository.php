@@ -151,6 +151,7 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.Media', 'm')
             ->leftJoin('p.projects', 'c')
             ->leftJoin('p.themes', 't')
+            ->andWhere('p.displayedOnBlog = true')
             ->addOrderBy('p.publishedAt', 'DESC')
         ;
 

@@ -170,15 +170,15 @@ admin:
       body: Contenu
       updated_at: Mise à jour
       created_at: Création
-      published_at: Date de Publication
+      published_at: Date de publication
       is_published: Publié
       media: Photo
-      themes: Thèmes
-      proposals: Propositions (budget)
-      projects: Projets participatifs
+      themes: Thème(s)
+      proposals: Proposition(s) d'une étape de dépôt
+      projects: Projet(s) participatif(s
       is_commentable: Autoriser les commentaires
       comments_count: Nombre de commentaires
-      displayedOnBlog: Afficher sur la page d'accueil
+      displayedOnBlog: Intégrer au flux d'actualités
       group_content: Contenu
       group_meta: Options de publication
       group_linked_content: Emplacements
