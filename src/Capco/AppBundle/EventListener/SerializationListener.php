@@ -8,6 +8,7 @@ use JMS\Serializer\Serializer;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Capco\AppBundle\Entity\Post;
 
 class SerializationListener extends AbstractSerializationListener
 {
@@ -34,9 +35,10 @@ class SerializationListener extends AbstractSerializationListener
     public function onPostMediaSerialize(ObjectEvent $event)
     {
         try {
+            $type = $event->getObject() instanceof Post ? 'post' : 'avatar';
             $event->getVisitor()->addData(
                 'url',
-                $this->mediaExtension->path($event->getObject(), 'avatar')
+                $this->mediaExtension->path($event->getObject(), $type)
             );
         } catch (RouteNotFoundException $e) {
             // Avoid some SonataMedia problems
@@ -45,40 +47,26 @@ class SerializationListener extends AbstractSerializationListener
 
     public function onPostLogSerialize(ObjectEvent $event)
     {
-        $context = $event->getContext();
-        $context->attributes->get('groups')->map(
-            function (array $groups) use ($event) {
-                if (in_array('LogDetails', $groups)) {
-                    $log = $event->getObject();
-                    $event->getVisitor()->addData(
-                        'sentences',
-                        $this->logManager->getSentencesForLog($log)
-                    );
-                }
-            }
-        );
+        if ($this->eventHasGroup($event, 'LogDetails')) {
+          $event->getVisitor()->addData(
+              'sentences',
+              $this->logManager->getSentencesForLog($event->getObject())
+          );
+        }
     }
 
     public function onPostElementSerialize(ObjectEvent $event)
     {
-        $context = $event->getContext();
-        $context->attributes->get('groups')->map(
-            function (array $groups) use ($event) {
-                if (in_array('LogDetails', $groups)) {
-                    $element = $event->getObject();
-                    $context = new SerializationContext();
-                    $context->setGroups(['LogDetails']);
-                    $serializedLogs = $this->serializer->serialize(
-                        $this->logManager->getLogEntries($element),
-                        'json',
-                        $context
-                    );
-                    $event->getVisitor()->addData(
-                        'logs',
-                        json_decode($serializedLogs)
-                    );
-                }
-            }
-        );
+        if ($this->eventHasGroup($event, 'LogDetails')) {
+            $serializedLogs = $this->serializer->serialize(
+                $this->logManager->getLogEntries($event->getObject()),
+                'json',
+                (new SerializationContext())->setGroups(['LogDetails'])
+            );
+            $event->getVisitor()->addData(
+                'logs',
+                json_decode($serializedLogs)
+            );
+        }
     }
 }

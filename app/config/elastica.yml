@@ -223,7 +223,7 @@ fos_elastica:
         idea:
           indexable_callback: isIndexable
           serializer:
-            groups: [Ideas]
+            groups: [Ideas, ThemeDetails]
           _all: { enabled: false }
           mappings:
             title:
@@ -263,7 +263,7 @@ fos_elastica:
           indexable_callback: isIndexable
           _all: { enabled: false }
           serializer:
-            groups: [Proposals, Themes, UsersInfos]
+            groups: [Proposals, ThemeDetails, UsersInfos]
           mappings:
             title:
               analyzer: '%language_analyzer%'
@@ -368,7 +368,7 @@ fos_elastica:
             provider: ~
             listener: ~
             finder: ~
-        # Opinion
+       # Opinion
         opinion:
           indexable_callback: isIndexable
           serializer:
@@ -588,7 +588,7 @@ fos_elastica:
         theme:
           indexable_callback: isIndexable
           serializer:
-            groups: [Themes]
+            groups: [ThemeDetails]
           _all: { enabled: false }
           mappings:
             title:

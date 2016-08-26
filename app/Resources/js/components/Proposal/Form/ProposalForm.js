@@ -375,6 +375,8 @@ const ProposalForm = React.createClass({
 const mapStateToProps = (state) => {
   return {
     features: state.default.features,
+    themes: state.default.themes,
+    districts: state.default.districts,
   };
 };
 

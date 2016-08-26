@@ -6,7 +6,7 @@ Background:
 
 Scenario: Anonymous wants to list published posts
   And I visited "blog page"
-  Then I should see 8 ".media--news" elements
+  Then I should see 10 ".media--news" elements
 
 @javascript @elasticsearch
 Scenario: Posts can be filtered by projects
@@ -21,7 +21,7 @@ Scenario: Post can be filtered by theme
   And feature "themes" is enabled
   And I visited "blog page"
   And I select "Justice" from "capco_app_search_blog_theme"
-  Then I should see 3 ".media--news" elements
+  Then I should see 8 ".media--news" elements
   And I should see "Post 8"
   And I should not see "Post 2"
 
