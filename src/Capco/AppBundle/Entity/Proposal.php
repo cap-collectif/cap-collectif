@@ -643,6 +643,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     {
         if (!$this->progressSteps->contains($progressStep)) {
             $this->progressSteps->add($progressStep);
+            $progressStep->setProposal($this);
         }
 
         return $this;

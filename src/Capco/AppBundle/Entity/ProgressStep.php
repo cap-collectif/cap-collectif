@@ -121,6 +121,7 @@ class ProgressStep
     public function setProposal(Proposal $proposal) : self
     {
         $this->proposal = $proposal;
+        $proposal->addProgressStep($this);
 
         return $this;
     }
