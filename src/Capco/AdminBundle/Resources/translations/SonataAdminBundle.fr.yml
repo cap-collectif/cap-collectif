@@ -38,12 +38,12 @@ admin.label.highlighted: A la une
 admin.label.idea: Idées
 admin.label.menu_item: Navigation
 admin.label.newsletter_subscription: "Inscrits à la lettre d'information"
-admin.label.proposal: Budget / Propositions
+admin.label.proposal: Propositions (budget)
 admin.label.proposal_form: Budget / Formulaire
 admin.label.questionnaire: Questionnaire
 admin.label.question: Question
 admin.label.question_choice: Choix
-admin.label.opinion: Consultation / Propositions
+admin.label.opinion: Propositions (consultation)
 admin.label.reply: Questionnaire / Réponses
 admin.label.response: Réponse à une question
 admin.label.opinion_type: Éléments de structure
@@ -170,13 +170,18 @@ admin:
       body: Contenu
       updated_at: Mise à jour
       created_at: Création
-      published_at: Date de Publication
+      published_at: Date de publication
       is_published: Publié
       media: Photo
-      themes: Thèmes
-      projects: Projets participatifs
-      is_commentable: Commentable
+      themes: Thème(s)
+      proposals: Proposition(s) d'une étape de dépôt
+      projects: Projet(s) participatif(s)
+      is_commentable: Autoriser les commentaires
       comments_count: Nombre de commentaires
+      displayedOnBlog: Intégrer au flux d'actualités
+      group_content: Contenu
+      group_meta: Options de publication
+      group_linked_content: Emplacements
     category:
       title: Titre
       sources: Sources
@@ -539,7 +544,6 @@ admin:
     question:
       title: Titre
       help_text: Texte d'aide
-      private: Visible uniquement par l'utilisateur et l'administrateur
       required: Champ obligatoire
       position: Position
       type: Format de réponse
@@ -596,8 +600,8 @@ admin:
       idea: Idée
       is_archived: Traité
       object: Contribution
-      opinion: Consultation / Proposition
-      proposal: Budget / Proposition
+      opinion: Proposition (budget)
+      proposal: Proposition (consultation)
       reporter: Auteur
       source: Source
       status: Type de problème

@@ -12,7 +12,6 @@ const ProposalPageVotes = React.createClass({
   displayName: 'ProposalPageVotes',
   propTypes: {
     proposal: React.PropTypes.object.isRequired,
-    votes: React.PropTypes.array.isRequired,
     className: React.PropTypes.string,
   },
   mixins: [IntlMixin],
@@ -26,10 +25,9 @@ const ProposalPageVotes = React.createClass({
   getInitialState() {
     const {
       proposal,
-      votes,
     } = this.props;
     return {
-      votes,
+      votes: proposal.votes,
       votesCount: proposal.votesCount,
       showModal: false,
     };

@@ -40,12 +40,7 @@ services:
 
   capco.proposal.serialization_listener:
     class: Capco\AppBundle\EventListener\ProposalSerializationListener
-    arguments:
-      - "@router"
-      - "@security.token_storage"
-      - "@capco.proposal_vote.repository"
-      - "@capco.response.repository"
-      - "@jms_serializer"
+    arguments: ["@router", "@security.token_storage", "@capco.proposal_vote.repository"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
@@ -68,6 +63,12 @@ services:
   capco.user.serialization_listener:
     class: Capco\AppBundle\EventListener\UserSerializationListener
     arguments: ["@router", "@capco.toggle.manager"]
+    tags:
+      - { name: "jms_serializer.event_subscriber" }
+
+  capco.post.serialization_listener:
+    class: Capco\AppBundle\EventListener\PostSerializationListener
+    arguments: ["@router"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 

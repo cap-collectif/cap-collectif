@@ -1,12 +1,10 @@
 import React from 'react';
-import { FormattedHTMLMessage, IntlMixin } from 'react-intl';
-import ProposalPrivateField from '../ProposalPrivateField';
+import { FormattedHTMLMessage } from 'react-intl';
 
 const ProposalResponse = React.createClass({
   propTypes: {
     response: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   isHTML() {
     const { response } = this.props;
@@ -18,8 +16,8 @@ const ProposalResponse = React.createClass({
     if (!response.value || response.value.length === 0) {
       return null;
     }
-    const value = (
-      <div>
+    return (
+      <div className="block">
         <h2 className="h2">{ response.field.question }</h2>
         {
           this.isHTML()
@@ -27,13 +25,6 @@ const ProposalResponse = React.createClass({
           : <p>{response.value}</p>
         }
       </div>
-    );
-    return (
-      <ProposalPrivateField
-        show={response.field.private}
-        children={value}
-        divClassName="block"
-      />
     );
   },
 

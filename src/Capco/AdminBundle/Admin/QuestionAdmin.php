@@ -45,10 +45,6 @@ class QuestionAdmin extends Admin
                     'label' => 'admin.fields.question.required',
                     'required' => false,
                 ])
-                ->add('private', null, [
-                    'label' => 'admin.fields.question.private',
-                    'required' => false,
-                ])
             ->end()
         ;
 

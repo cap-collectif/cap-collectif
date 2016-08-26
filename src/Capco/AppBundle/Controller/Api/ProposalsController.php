@@ -13,6 +13,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -81,7 +82,7 @@ class ProposalsController extends FOSRestController
      *
      * @Get("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
-     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias", "Themes", "ProposalUserData", "Steps"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias", "ThemeDetails", "ProposalUserData", "Steps"})
      *
      * @param Proposal $proposal
      *
@@ -304,6 +305,30 @@ class ProposalsController extends FOSRestController
             'count' => count($votes),
         ];
     }
+
+
+
+    /**
+     * @Get("/proposals/{proposal}/posts")
+     * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
+     * @View(serializerGroups={"Posts", "UsersInfos", "UserMedias", "Themes"})
+     * @Cache(smaxage="60", public=true)
+     */
+    public function getProposalPostsAction(Proposal $proposal)
+    {
+        $posts = $this
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('CapcoAppBundle:Post')
+            ->getPublishedPostsByProposal($proposal)
+        ;
+
+        return [
+            'posts' => $posts,
+        ];
+    }
+
+
+
 
     /**
      * Update a proposal.

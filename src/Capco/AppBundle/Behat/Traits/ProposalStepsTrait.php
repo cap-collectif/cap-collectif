@@ -299,29 +299,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should see the proposal private field
-     *
-     * @Then I should see the proposal private field
-     */
-    public function iShouldSeeTheProposalPrivateField()
-    {
-        $this->assertPageContainsText("Visible uniquement par vous et l'administrateur");
-        $this->assertPageContainsText("Evaluez l'importance de votre proposition");
-        $this->assertPageContainsText("souhaitable");
-    }
-
-    /**
-     * I should not see the proposal private field
-     *
-     * @Then I should not see the proposal private field
-     */
-    public function iShouldNotSeeTheProposalPrivateField()
-    {
-        $this->assertPageNotContainsText("Visible uniquement par vous et l'administrateur");
-        $this->assertPageNotContainsText("Evaluez l'importance de votre proposition");
-    }
-
-    /**
      * I fill the proposal form.
      *
      * @When I fill the proposal form
