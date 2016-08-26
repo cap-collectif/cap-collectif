@@ -90,7 +90,7 @@ trait IdeaStepsTrait
         $option = $this->getCurrentPage()->getSelectedSortingOption();
         \PHPUnit_Framework_Assert::assertEquals('last', $option);
         $this->ideaBeforeIdea(
-            'Troisième idée',
+            'ideaNotCommentable',
             'ideaCommentable'
         );
     }
@@ -106,7 +106,7 @@ trait IdeaStepsTrait
         \PHPUnit_Framework_Assert::assertEquals('comments', $option);
         $this->ideaBeforeIdea(
             'ideaCommentable',
-            'Troisième idée'
+            'Idée avec un titre très très long pour voir comment ça rend dans la preview'
         );
     }
 
