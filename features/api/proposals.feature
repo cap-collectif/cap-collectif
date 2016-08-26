@@ -778,7 +778,7 @@ Feature: Proposal Restful Api
   @database
   Scenario: logged in API client wants to edit a proposal
     Given I am logged in to api as user
-    When I send a PUT request to "api/proposal_forms/1/proposals/2" with json:
+    When I send a POST request to "api/proposal_forms/1/proposals/2" with json:
     """
     {
       "title": "Acheter un sauna par personne pour Capco",

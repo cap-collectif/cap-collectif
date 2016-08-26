@@ -65,6 +65,10 @@ const ProposalPageContent = React.createClass({
     };
     return (
       <div className={classNames(classes)}>
+        {
+          proposal.media &&
+          <img id="proposal-media" src={proposal.media.url} role="presentation" className="block img-responsive" />
+        }
         <div className="block">
           <h2 className="h2">{ this.getIntlMessage('proposal.description') }</h2>
           <div dangerouslySetInnerHTML={{ __html: proposal.body }} />

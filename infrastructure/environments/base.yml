@@ -2,7 +2,6 @@ application:
     build: ../services/local
     ports:
         - "80:80"
-        - "15672:15672"
     environment:
         SYMFONY_DATABASE_HOST: database
         SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1

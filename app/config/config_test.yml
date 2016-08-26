@@ -1,10 +1,6 @@
 imports:
     - { resource: config_dev.yml }
 
-# do not publish rabbitmq messages
-parameters:
-    swarrot.publisher.class: Swarrot\SwarrotBundle\Broker\BlackholePublisher
-
 framework:
   test: ~
   profiler:

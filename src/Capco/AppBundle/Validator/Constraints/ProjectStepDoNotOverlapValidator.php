@@ -29,7 +29,7 @@ class ProjectStepDoNotOverlapValidator extends ConstraintValidator
         // Convert a ProjectAbstractStep collection to an AbstractStep collection with phpspec fallback
         // https://github.com/phpspec/phpspec/issues/991
         // TODO: Fixme by removing ProjectAbstractStep and use an AbstractStep collection instead
-        $steps = $value instanceof Collection ? $value->map(function($pas) { return $pas->getStep(); }) : new ArrayCollection($value);
+        $steps = $value instanceof Collection ? $value->map(function ($pas) { return $pas->getStep(); }) : new ArrayCollection($value);
 
         if ($steps && $steps->count() > 1 && !$this->stepsDoNotOverlap($steps)) {
             $this->context

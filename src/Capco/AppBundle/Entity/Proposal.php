@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
@@ -11,6 +10,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -163,6 +163,15 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $progressSteps;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @Assert\Valid()
+     */
+    private $media;
 
     /**
      * Constructor.
@@ -424,6 +433,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     public function removeSelection(Selection $selection): self
     {
         $this->selections->removeElement($selection);
+
         return $this;
     }
 
@@ -590,5 +600,21 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this->getProposalForm()->getStep()->getProject()->getSteps()->exists(function ($key, $step) {
             return $step->getStep()->isSelectionStep() && $step->getStep()->isAllowingProgressSteps();
         });
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    /**
+     * @param mixed $media
+     */
+    public function setMedia(Media $media = null)
+    {
+        $this->media = $media;
     }
 }

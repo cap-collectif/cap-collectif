@@ -38,7 +38,7 @@ class OpinionVoteRepository extends EntityRepository
         $qb = $this->getQueryBuilder();
 
         if ($asArray) {
-          $qb
+            $qb
             ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
@@ -63,14 +63,14 @@ class OpinionVoteRepository extends EntityRepository
 
     public function getVotesCountByOpinion(Opinion $opinion)
     {
-      $qb = $this->createQueryBuilder('ov');
+        $qb = $this->createQueryBuilder('ov');
 
-      $qb->select('count(ov.id)')
+        $qb->select('count(ov.id)')
           ->where('ov.opinion = :opinion')
           ->setParameter('opinion', $opinion)
       ;
 
-      return (int) $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getQueryBuilder()

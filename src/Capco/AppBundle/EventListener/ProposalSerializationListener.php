@@ -7,6 +7,8 @@ use Capco\AppBundle\Repository\ResponseRepository;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
+use Sonata\MediaBundle\Twig\Extension\MediaExtension;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -16,14 +18,22 @@ class ProposalSerializationListener extends AbstractSerializationListener
     private $tokenStorage;
     private $proposalVoteRepository;
     private $responseRepository;
+    private $mediaExtension;
     protected $serializer;
 
-    public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage, ProposalVoteRepository $proposalVoteRepository, ResponseRepository $responseRepository, Serializer $serializer)
-    {
+    public function __construct(
+        RouterInterface $router,
+        TokenStorageInterface $tokenStorage,
+        ProposalVoteRepository $proposalVoteRepository,
+        ResponseRepository $responseRepository,
+        MediaExtension $mediaExtension,
+        Serializer $serializer
+    ) {
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
         $this->proposalVoteRepository = $proposalVoteRepository;
         $this->responseRepository = $responseRepository;
+        $this->mediaExtension = $mediaExtension;
         $this->serializer = $serializer;
     }
 
@@ -98,6 +108,18 @@ class ProposalSerializationListener extends AbstractSerializationListener
             'responses',
             json_decode($serializedResponses, true)
         );
+
+        if ($proposal->getMedia()) {
+            try {
+                $event->getVisitor()->addData(
+                    'media', [
+                        'url' => $this->mediaExtension->path($proposal->getMedia(), 'idea'),
+                    ]
+                );
+            } catch (RouteNotFoundException $e) {
+                // Avoid some SonataMedia problems
+            }
+        }
 
         if (isset($this->getIncludedGroups($event)['ProposalUserData'])) {
             $event->getVisitor()->addData(

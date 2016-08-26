@@ -2,21 +2,21 @@
     $Social block
 ================================================================*/
 .social__icons {
-  @include ul-list-inline();
+    @include ul-list-inline();
 
-  li {
-    width: auto;
-    min-width: 90px;
-    text-align: center;
-    margin-top: 10px;
-    vertical-align: top;
+    li {
+        vertical-align: top;
+        width: auto;
+        min-width: 90px;
+        text-align: center;
+        margin-top: 10px;
 
-    a {
-      display: block;
+        a {
+            display: block;
+        }
     }
-  }
 }
 
 .social__icon {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }

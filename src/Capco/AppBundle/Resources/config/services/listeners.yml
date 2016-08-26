@@ -45,6 +45,7 @@ services:
       - "@security.token_storage"
       - "@capco.proposal_vote.repository"
       - "@capco.response.repository"
+      - "@sonata.media.twig.extension"
       - "@jms_serializer"
     tags:
       - { name: "jms_serializer.event_subscriber" }
