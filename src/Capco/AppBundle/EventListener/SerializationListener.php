@@ -35,6 +35,10 @@ class SerializationListener extends AbstractSerializationListener
 
     private function getImageFormat(SerializationContext $context)
     {
+      if ($context->getVisitingStack()->isEmpty()) {
+        return 'avatar';
+      }
+
       $parent = $context->getVisitingStack()->top();
       switch (true) {
         case $parent instanceof Post:
