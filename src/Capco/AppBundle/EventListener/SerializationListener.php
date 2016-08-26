@@ -9,6 +9,7 @@ use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Capco\AppBundle\Entity\Post;
+use Capco\UserBundle\Entity\User;
 
 class SerializationListener extends AbstractSerializationListener
 {
@@ -32,13 +33,25 @@ class SerializationListener extends AbstractSerializationListener
         ];
     }
 
+    private function getImageFormat(SerializationContext $context)
+    {
+      $parent = $context->getVisitingStack()->top();
+      switch (true) {
+        case $parent instanceof Post:
+          return 'post';
+        case $parent instanceof User:
+          return 'avatar';
+        default:
+          return 'avatar';
+      }
+    }
+
     public function onPostMediaSerialize(ObjectEvent $event)
     {
         try {
-            $type = $event->getObject() instanceof Post ? 'post' : 'avatar';
             $event->getVisitor()->addData(
                 'url',
-                $this->mediaExtension->path($event->getObject(), $type)
+                $this->mediaExtension->path($event->getObject(), $this->getImageFormat($event->getContext()))
             );
         } catch (RouteNotFoundException $e) {
             // Avoid some SonataMedia problems
