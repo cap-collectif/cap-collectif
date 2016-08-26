@@ -57,6 +57,7 @@ class ProposalController extends Controller
             ->setSerializeNull(true)
             ->setGroups([
                 'Categories',
+                'UserVotes',
                 'ProposalForms',
                 'Questions',
                 'Steps',

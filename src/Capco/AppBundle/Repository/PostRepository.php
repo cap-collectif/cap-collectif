@@ -39,9 +39,9 @@ class PostRepository extends EntityRepository
         ;
     }
 
-    public function countPublishedPostsByProposal(Proposal $proposal)
+    public function countPublishedPostsByProposal(Proposal $proposal) : int
     {
-      return $this->createPublishedPostsByProposalQB($proposal)
+      return (int) $this->createPublishedPostsByProposalQB($proposal)
           ->select('count(p.id)')
           ->getQuery()
           ->getSingleScalarResult()
