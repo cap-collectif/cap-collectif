@@ -151,8 +151,6 @@
     "answer": "R\u00e9pondre",
     "arguments": "{num, plural, =0{0 argument} one{# argument} other{# arguments}}",
     "back": "Retour",
-    "byAuthor": "par {author}",
-    "byDate": "Le {date}",
     "cancel": "Annuler",
     "change": "Changer",
     "create": "Créer",
@@ -620,7 +618,6 @@
       "count": "{num, plural, one{# coup de coeur} other{# coups de coeur}}",
       "label": "Coup de coeur de {user}"
     },
-    "no_posts": "Aucune actualité",
     "no_status": "Aucun statut",
     "random_search": "Afficher d'autres propositions",
     "request": {
@@ -652,7 +649,6 @@
       "theme": "S\u00e9lectionnez un th\u00e8me"
     },
     "tabs": {
-      "blog": "Actualités",
       "content": "Présentation",
       "comments": "Commentaires",
       "votes": "Votes"

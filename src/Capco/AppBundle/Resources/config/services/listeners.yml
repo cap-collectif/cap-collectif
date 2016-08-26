@@ -66,12 +66,6 @@ services:
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
-  capco.post.serialization_listener:
-    class: Capco\AppBundle\EventListener\PostSerializationListener
-    arguments: ["@router"]
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
-
   capco.synthesis.synthesis_listener:
     class: Capco\AppBundle\EventListener\SynthesisLoggableListener
     calls:
