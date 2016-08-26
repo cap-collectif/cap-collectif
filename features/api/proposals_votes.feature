@@ -12,7 +12,6 @@ Feature: Proposal Votes Restful Api
       "votes": [
         {
           "user": @...@,
-          "proposal": @...@,
           "selectionStep": @...@,
           "username": @string@,
           "private": @boolean@

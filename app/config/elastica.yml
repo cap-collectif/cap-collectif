@@ -223,7 +223,7 @@ fos_elastica:
         idea:
           indexable_callback: isIndexable
           serializer:
-            groups: [Ideas]
+            groups: [Ideas, ThemeDetails]
           _all: { enabled: false }
           mappings:
             title:
