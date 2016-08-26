@@ -38,7 +38,7 @@ Feature: Ideas
     And I change the ideas theme filter
     Then there should be 1 ideas
 
-  @javascript @fixme
+  @javascript
   Scenario: Anonymous user wants to see ideas and sort them
     Given I go to the ideas page
     Then ideas should be ordered by date
