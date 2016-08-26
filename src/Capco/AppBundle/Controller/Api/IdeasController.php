@@ -88,7 +88,7 @@ class IdeasController extends FOSRestController
      *
      * @Get("/ideas/{id}", defaults={"_feature_flags" = "ideas"}))
      * @ParamConverter("idea", options={"mapping": {"id": "id"}})
-     * @View(statusCode=200, serializerGroups={"Ideas", "Themes", "UsersInfos"})
+     * @View(statusCode=200, serializerGroups={"Ideas", "ThemeDetails", "UsersInfos"})
      */
     public function getIdeaAction(Idea $idea)
     {

@@ -1,37 +1,35 @@
 @proposal_posts
 Feature: Proposal posts
 
-## List Comments
-
-  Scenario: API client wants to list comments of a proposal
+  Scenario: API client wants to list posts of a proposal
     When I send a GET request to "/api/proposals/1/posts"
-    Then the JSON response should match:
+    Then the JSON response status code should be 200
+    And the JSON response should match:
     """
     {
-      "posts":
-      [
-        {
-          "id": @integer@,
-          "title": @string@,
-          "abstract": @string@,
-          "media": @null@,
-          "created_at": "@string@.isDateTime()",
-          "updated_at": "@string@.isDateTime()",
-          "themes": [
-            {
-              "title": @string@,
-              "_links": {
+      "posts": [
+      {
+        "abstract": @string@,
+        "id": @integer@,
+        "title": @string@,
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "media": @null@,
+        "themes": [
+          {
+            "title": @string@,
+            "_links": {
                 "show": @string@
-              }
-            },
-            @...@
-          ],
-          "authors": @array@,
-          "_links": {
+            }
+          },
+          @...@
+        ],
+        "authors": @...@,
+        "_links": {
             "show": @string@
-          }
-        },
-        @...@
+        }
+      },
+      @...@
       ]
     }
     """
