@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ProgressStep;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
@@ -168,7 +167,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Steps\ProgressStep", mappedBy="proposal", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist"})
      */
     private $progressSteps;
 
@@ -628,7 +627,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $ids;
     }
 
-    public function getProgressSteps(): ArrayCollection
+    public function getProgressSteps()
     {
         return $this->progressSteps;
     }
@@ -656,5 +655,12 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         }
 
         return $this;
+    }
+
+    public function hasRealisationStep() : bool
+    {
+        return $this->getProposalForm()->getStep()->getProject()->getSteps()->exists(function ($key, $step) {
+            return $step->getStep()->isRealisationStep();
+        });
     }
 }

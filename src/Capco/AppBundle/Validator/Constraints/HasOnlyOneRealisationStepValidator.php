@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -11,8 +11,8 @@ class HasOnlyOneRealisationStepValidator extends ConstraintValidator
     /**
      * Checks if the passed value is valid.
      *
-     * @param ArrayCollection $value      The value that should be validated
-     * @param Constraint      $constraint The constraint for the validation
+     * @param PersistentCollection $value      The value that should be validated
+     * @param Constraint           $constraint The constraint for the validation
      *
      * @return bool
      */
@@ -23,6 +23,7 @@ class HasOnlyOneRealisationStepValidator extends ConstraintValidator
                 ->buildViolation($constraint->message)
                 ->atPath('project')
                 ->addViolation();
+
             return false;
         }
 
@@ -31,8 +32,10 @@ class HasOnlyOneRealisationStepValidator extends ConstraintValidator
 
     public function hasRealisationStep($steps) : bool
     {
-        return $steps->exists(function($key, $step) {
-            return $step->getStep()->isRealisationStep();
-        });
+        return $steps->filter(
+            function ($step) {
+                return $step->getStep()->isRealisationStep();
+            }
+        )->count() > 1;
     }
 }

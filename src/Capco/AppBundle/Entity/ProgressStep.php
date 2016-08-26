@@ -1,10 +1,8 @@
 <?php
 
-namespace Capco\AppBundle\Entity\Steps;
+namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Status;
-use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Traits\PositionableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -15,6 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProgressStep
 {
+    use PositionableTrait;
+
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -77,7 +77,7 @@ class ProgressStep
         return $this;
     }
 
-    public function getTitle() : string
+    public function getTitle()
     {
         return $this->title;
     }
@@ -89,7 +89,7 @@ class ProgressStep
         return $this;
     }
 
-    public function getStartAt() : \DateTime
+    public function getStartAt()
     {
         return $this->startAt;
     }
@@ -101,7 +101,7 @@ class ProgressStep
         return $this;
     }
 
-    public function getEndAt() : \DateTime
+    public function getEndAt()
     {
         return $this->endAt;
     }
@@ -113,7 +113,7 @@ class ProgressStep
         return $this;
     }
 
-    public function getProposal() : Proposal
+    public function getProposal()
     {
         return $this->proposal;
     }
@@ -125,7 +125,7 @@ class ProgressStep
         return $this;
     }
 
-    public function isEnabled() : bool
+    public function isEnabled()
     {
         return $this->isEnabled;
     }

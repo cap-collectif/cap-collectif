@@ -157,12 +157,9 @@ class ProposalAdmin extends Admin
         }
 
         // Progress Step
-        /** @var Proposal $currentProposal */
-        $currentProposal = $this->getSubject();
-
-        if ($currentProposal->getStep()) {
-            $formMapper->with('admin.fields.project.group_progress')
-                ->add('steps', 'sonata_type_collection', [
+        if ($this->getSubject()->hasRealisationStep()) {
+            $formMapper->with('admin.fields.project.progress_steps')
+                ->add('progressSteps', 'sonata_type_collection', [
                     'label' => 'admin.fields.project.steps',
                     'by_reference' => false,
                     'required' => false,

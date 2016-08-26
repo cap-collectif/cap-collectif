@@ -64,6 +64,7 @@ admin.label.step: Étape
 admin.label.theme: Thèmes
 admin.label.user_type: Types de profil
 admin.label.video: Vidéos
+admin.label.progress_step: Étapes de réalisation
 
 admin.label.pages.blog: Actualités
 admin.label.pages.projects: Projets participatifs
@@ -431,6 +432,7 @@ admin:
       steps: Étapes
       step_position: Position de l'étape
       step_title: Titre de l'étape
+      progress_steps: Étapes de réalisation
       teaser: Accroche
       title: Titre
       themes: Thèmes
@@ -455,6 +457,9 @@ admin:
       steps: Étapes
       steps_add: Choisissez le type d'étape
       steps_delete: Supprimer l'étape
+    progress_step:
+      title: Titre
+      position: Position
     questionnaire_abstractquestion:
       position: Position
       questions: Questions

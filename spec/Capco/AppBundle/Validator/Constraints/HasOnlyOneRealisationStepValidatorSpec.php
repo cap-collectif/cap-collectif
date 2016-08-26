@@ -2,8 +2,6 @@
 
 namespace spec\Capco\AppBundle\Validator\Constraints;
 
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\RealisationStep;
 use Capco\AppBundle\Validator\Constraints\HasOnlyOneRealisationStep;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
@@ -22,10 +20,12 @@ class HasOnlyOneRealisationStepValidatorSpec extends ObjectBehavior
         HasOnlyOneRealisationStep $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $builder,
-        ArrayCollection $arrayCollection
+        ArrayCollection $arrayCollection,
+        ArrayCollection $filteredCollection
     )
     {
-        $arrayCollection->exists(Argument::type('Closure'))->willReturn(true);
+        $arrayCollection->filter(Argument::type('Closure'))->willReturn($filteredCollection);
+        $filteredCollection->count()->willReturn(2);
 
         $this->initialize($context);
         $builder->addViolation()->shouldBeCalled();
@@ -39,10 +39,12 @@ class HasOnlyOneRealisationStepValidatorSpec extends ObjectBehavior
         HasOnlyOneRealisationStep $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $builder,
-        ArrayCollection $arrayCollection
+        ArrayCollection $arrayCollection,
+        ArrayCollection $filteredCollection
     )
     {
-        $arrayCollection->exists(Argument::type('Closure'))->willReturn(false);
+        $arrayCollection->filter(Argument::type('Closure'))->willReturn($filteredCollection);
+        $filteredCollection->count()->willReturn(1);
 
         $this->initialize($context);
         $builder->addViolation()->shouldNotBeCalled();
