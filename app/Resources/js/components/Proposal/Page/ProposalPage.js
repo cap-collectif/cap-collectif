@@ -51,8 +51,8 @@ export const ProposalPage = React.createClass({
     }
     ProposalActions.initProposal(proposal);
     return {
-      proposal: ProposalStore.proposal,
-      userHasVote: ProposalVoteStore.userHasVote,
+      proposal,
+      userHasVote: !!userHasVote,
       creditsLeft: ProposalVoteStore.creditsLeft,
       showVotesModal: false,
     };
