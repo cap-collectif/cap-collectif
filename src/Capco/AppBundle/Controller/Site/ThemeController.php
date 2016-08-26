@@ -93,12 +93,12 @@ class ThemeController extends Controller
                 ->get('doctrine.orm.entity_manager')
                 ->getRepository('CapcoAppBundle:Project')
                 ->getLastByTheme($theme->getId(), $maxProjectsDisplayed, 0),
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
 
         $ideaCreationProps = $serializer->serialize([
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
             'themeId' => $theme->getId(),
-        ], 'json', SerializationContext::create()->setGroups(['Themes']));
+        ], 'json', SerializationContext::create()->setGroups(['ThemeDetails']));
 
         return [
             'theme' => $theme,
@@ -124,7 +124,7 @@ class ThemeController extends Controller
         $ideasRaw = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
         $props = $serializer->serialize([
             'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'Themes', 'UsersInfos']));
+        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'ThemeDetails', 'UsersInfos']));
 
         return [
             'props' => $props,

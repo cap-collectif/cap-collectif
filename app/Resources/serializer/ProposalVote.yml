@@ -14,6 +14,10 @@ Capco\AppBundle\Entity\ProposalVote:
       expose: true
       type: Capco\UserBundle\Entity\User
       groups: [ProposalVotes]
+    proposal:
+      expose: true
+      type: Capco\AppBundle\Entity\Proposal
+      groups: [ProposalVotes]
     username:
       expose: true
       type: string

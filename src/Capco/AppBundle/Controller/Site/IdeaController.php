@@ -34,7 +34,7 @@ class IdeaController extends Controller
         $trashedIdeasNb = $em->getRepository('CapcoAppBundle:Idea')->countTrashed();
         $props = $serializer->serialize([
             'ideas' => $em->getRepository('CapcoAppBundle:Idea')->getTrashed($pagination, $page),
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'Themes', 'UsersInfos']));
+        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'ThemeDetails', 'UsersInfos']));
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
@@ -79,7 +79,7 @@ class IdeaController extends Controller
             'ideas' => $em->getRepository('CapcoAppBundle:Idea')->getSearchResults($pagination, 1, null, null, null, 'last', null),
             'trashUrl' => $this->get('router')->generate('app_idea_trashed', [], true),
             'description' => $this->get('capco.site_parameter.resolver')->getValue('ideas.content.body'),
-        ], 'json', SerializationContext::create()->setGroups(['Themes', 'Ideas', 'UsersInfos']));
+        ], 'json', SerializationContext::create()->setGroups(['ThemeDetails', 'Ideas', 'UsersInfos']));
 
         return [
             'props' => $props,
