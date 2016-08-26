@@ -24,7 +24,7 @@ export const ProposalPageBlog = React.createClass({
       return <p>{this.getIntlMessage('proposal.no_posts')}</p>;
     }
     return (
-        <ul className="media-list" style={{ marginTop: 50 }}>
+        <ul className="media-list" style={{ marginTop: 30 }}>
           {
             posts.map((post, index) => <Post post={post} key={index} />)
           }

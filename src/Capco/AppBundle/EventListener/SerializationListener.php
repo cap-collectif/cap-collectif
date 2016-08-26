@@ -59,27 +59,40 @@ class SerializationListener extends AbstractSerializationListener
     }
 
     public function onPostLogSerialize(ObjectEvent $event)
-    {
-        if ($this->eventHasGroup($event, 'LogDetails')) {
-          $event->getVisitor()->addData(
-              'sentences',
-              $this->logManager->getSentencesForLog($event->getObject())
-          );
-        }
-    }
-
-    public function onPostElementSerialize(ObjectEvent $event)
-    {
-        if ($this->eventHasGroup($event, 'LogDetails')) {
-            $serializedLogs = $this->serializer->serialize(
-                $this->logManager->getLogEntries($event->getObject()),
-                'json',
-                (new SerializationContext())->setGroups(['LogDetails'])
-            );
-            $event->getVisitor()->addData(
-                'logs',
-                json_decode($serializedLogs)
+        {
+            $context = $event->getContext();
+            $context->attributes->get('groups')->map(
+                function (array $groups) use ($event) {
+                    if (in_array('LogDetails', $groups)) {
+                        $log = $event->getObject();
+                        $event->getVisitor()->addData(
+                            'sentences',
+                            $this->logManager->getSentencesForLog($log)
+                        );
+                    }
+                }
             );
         }
-    }
+        public function onPostElementSerialize(ObjectEvent $event)
+        {
+            $context = $event->getContext();
+            $context->attributes->get('groups')->map(
+                function (array $groups) use ($event) {
+                    if (in_array('LogDetails', $groups)) {
+                        $element = $event->getObject();
+                        $context = new SerializationContext();
+                        $context->setGroups(['LogDetails']);
+                        $serializedLogs = $this->serializer->serialize(
+                            $this->logManager->getLogEntries($element),
+                            'json',
+                            $context
+                        );
+                        $event->getVisitor()->addData(
+                            'logs',
+                            json_decode($serializedLogs)
+                        );
+                    }
+                }
+            );
+        }
 }
