@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Validator\Constraints;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class HasOnlyOneRealisationStepValidator extends ConstraintValidator
 {
@@ -32,10 +33,11 @@ class HasOnlyOneRealisationStepValidator extends ConstraintValidator
 
     public function hasRealisationStep($steps) : bool
     {
-        return $steps->filter(
+        return count(array_filter(
+            $steps,
             function ($step) {
                 return $step->getStep()->isRealisationStep();
             }
-        )->count() > 1;
+        )) > 1;
     }
 }
