@@ -5,6 +5,7 @@ import LocalStorageService from '../services/LocalStorageService';
 import { reducer as reportReducer } from '../redux/modules/report';
 import { reducer as projectReducer } from '../redux/modules/project';
 import { reducer as ideaReducer, saga as ideaSaga } from '../redux/modules/idea';
+import { reducer as proposalReducer, saga as proposalSaga } from '../redux/modules/proposal';
 
 export default function configureStore(initialState) {
   if (initialState.default.user === null) {
@@ -16,6 +17,7 @@ export default function configureStore(initialState) {
   const reducers = {
     default: () => initialState.default,
     idea: ideaReducer,
+    proposal: proposalReducer,
     project: projectReducer,
     report: reportReducer,
     form: formReducer,
@@ -32,6 +34,7 @@ export default function configureStore(initialState) {
   );
 
   sagaMiddleware.run(ideaSaga);
+  sagaMiddleware.run(proposalSaga);
 
   return store;
 }

@@ -15,8 +15,6 @@ const ProposalPageContent = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
     form: PropTypes.object.isRequired,
-    themes: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     className: PropTypes.string,
     selectionStep: PropTypes.object,
@@ -54,8 +52,6 @@ const ProposalPageContent = React.createClass({
       proposal,
       className,
       form,
-      themes,
-      districts,
       categories,
       userHasVote,
       selectionStep,
@@ -112,8 +108,6 @@ const ProposalPageContent = React.createClass({
         <ProposalEditModal
           proposal={proposal}
           form={form}
-          themes={themes}
-          districts={districts}
           categories={categories}
           show={showEditModal}
           onToggleModal={this.toggleEditModal}

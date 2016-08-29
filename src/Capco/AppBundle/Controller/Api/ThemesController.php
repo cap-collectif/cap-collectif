@@ -22,7 +22,7 @@ class ThemesController extends FOSRestController
      * )
      *
      * @Get("/themes")
-     * @View(statusCode=200, serializerGroups={"Themes"})
+     * @View(statusCode=200, serializerGroups={"ThemeDetails"})
      *
      * @return array
      */

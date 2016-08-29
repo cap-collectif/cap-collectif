@@ -35,7 +35,7 @@ class ProfileController extends BaseController
         ;
         $projectsProps = $serializer->serialize([
             'projects' => $projectsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
         $projectsCount = count($projectsRaw);
 
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
@@ -47,7 +47,7 @@ class ProfileController extends BaseController
         ;
         $ideas = $serializer->serialize([
             'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'Themes']));
+        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'ThemeDetails']));
         $ideasCount = count($ideasRaw);
 
         $proposalsRaw = $doctrine
@@ -175,7 +175,7 @@ class ProfileController extends BaseController
         ;
         $projectsProps = $serializer->serialize([
             'projects' => $projectsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
         $projectsCount = count($projectsRaw);
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
@@ -187,7 +187,7 @@ class ProfileController extends BaseController
         ;
         $ideas = $serializer->serialize([
             'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'Themes']));
+        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'ThemeDetails']));
         $ideasCount = count($ideasRaw);
 
         $proposalsRaw = $doctrine
@@ -247,7 +247,7 @@ class ProfileController extends BaseController
         ;
         $projectsProps = $serializer->serialize([
             'projects' => $projectsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
         $projectsCount = count($projectsRaw);
 
         return [
@@ -371,7 +371,7 @@ class ProfileController extends BaseController
         ;
         $ideas = $serializer->serialize([
             'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'Themes']));
+        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'ThemeDetails']));
         $ideasCount = count($ideasRaw);
 
         return [
