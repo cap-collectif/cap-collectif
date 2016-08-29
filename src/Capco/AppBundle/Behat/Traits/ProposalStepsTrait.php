@@ -299,7 +299,7 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should see the proposal private field
+     * I should see the proposal private field.
      *
      * @Then I should see the proposal private field
      */
@@ -307,11 +307,11 @@ trait ProposalStepsTrait
     {
         $this->assertPageContainsText("Visible uniquement par vous et l'administrateur");
         $this->assertPageContainsText("Evaluez l'importance de votre proposition");
-        $this->assertPageContainsText("souhaitable");
+        $this->assertPageContainsText('souhaitable');
     }
 
     /**
-     * I should not see the proposal private field
+     * I should not see the proposal private field.
      *
      * @Then I should not see the proposal private field
      */

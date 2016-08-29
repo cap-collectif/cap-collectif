@@ -215,7 +215,7 @@ abstract class AbstractQuestion
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPrivate(): bool
     {
@@ -223,7 +223,8 @@ abstract class AbstractQuestion
     }
 
     /**
-     * @param boolean $private
+     * @param bool $private
+     *
      * @return $this
      */
     public function setPrivate(bool $private)

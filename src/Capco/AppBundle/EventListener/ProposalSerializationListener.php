@@ -89,7 +89,6 @@ class ProposalSerializationListener extends AbstractSerializationListener
             ->getByProposal($proposal, $userIsAuthorOrAdmin)
         ;
 
-
         $serializedResponses = $this->serializer->serialize(
             $responses,
             'json',

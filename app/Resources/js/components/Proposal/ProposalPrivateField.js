@@ -26,7 +26,7 @@ const ProposalPrivateField = React.createClass({
             <i className="cap cap-lock-2"></i>
             {this.getIntlMessage('global.form.private')}
           </p>
-          <div className={'well ' + divClassName} style={{ padding: '5px' }}>
+          <div className={`well ${divClassName}`} style={{ padding: '5px' }}>
             {children}
           </div>
         </div>

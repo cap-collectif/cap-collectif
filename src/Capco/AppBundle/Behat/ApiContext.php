@@ -3,7 +3,6 @@
 /**
  * @Copyright 2015 Aurélien David a.k.a "PretentiouSpyl" <adavid@jolicode.com>
  */
-
 namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
