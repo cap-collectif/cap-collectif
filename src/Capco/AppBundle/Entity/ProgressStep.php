@@ -96,4 +96,16 @@ class ProgressStep
 
         return $this;
     }
+
+    public function setProposal(Proposal $proposal) : self
+    {
+      $this->proposal = $proposal;
+
+      return $this;
+    }
+
+    public function getProposal() : Proposal
+    {
+      return $this->proposal;
+    }
 }
