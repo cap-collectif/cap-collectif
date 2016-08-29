@@ -63,7 +63,7 @@ class ProgressStep
 
     public function getTitle() : string
     {
-        return $this->title;
+        return $this->title ?? '';
     }
 
     public function setTitle($title) : self
@@ -93,18 +93,6 @@ class ProgressStep
     public function setEndAt(\DateTime $endAt) : self
     {
         $this->endAt = $endAt;
-
-        return $this;
-    }
-
-    public function getProposal() : Proposal
-    {
-        return $this->proposal;
-    }
-
-    public function setProposal(Proposal $proposal) : self
-    {
-        $this->proposal = $proposal;
 
         return $this;
     }

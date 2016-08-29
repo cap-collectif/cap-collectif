@@ -46,7 +46,6 @@ class ProgressStepAdmin extends Admin
                 'required' => false,
             ])
         ;
-        ;
     }
 
     protected function configureRoutes(RouteCollection $collection)
