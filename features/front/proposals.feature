@@ -67,7 +67,7 @@ Feature: Proposals
     And I fill the proposal form
     And I submit the create proposal form
     Then I should see "Merci ! Votre proposition a bien été créée."
-    Then there should be 7 proposals
+    And there should be 7 proposals
     And I should see my new proposal
 
   @database @javascript @elasticsearch
@@ -139,6 +139,30 @@ Feature: Proposals
     And I go to a proposal
     Then I should not see the delete proposal button
 
+  # Proposal page
+
+  @javascript @database
+  Scenario: Anonymous user should not see private fields on a proposal
+    Given I go to a proposal
+    Then I should not see the proposal private field
+
+  @javascript @database
+  Scenario: Non author should not see private fields on a proposal
+    Given I am logged in as drupal
+    When I go to a proposal
+    Then I should not see the proposal private field
+
+  @javascript @database
+  Scenario: Logged in user should see private fields on his proposal
+    Given I am logged in as user
+    And I go to a proposal
+    Then I should see the proposal private field
+
+  @javascript @database
+  Scenario: Admin should see private fields on a proposal
+    Given I am logged in as admin
+    And I go to a proposal
+    Then I should see the proposal private field
 
   # Reporting
 

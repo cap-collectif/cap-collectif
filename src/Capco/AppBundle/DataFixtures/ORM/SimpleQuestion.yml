@@ -4,6 +4,7 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     helpText: Décrivez l'importance de votre proposition avec un adjectif (ex: indispensable, souhaitable ...)
     required: false
     type: 0 # one line text
+    private: true
   simplequestion2:
     title: Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?
     required: true

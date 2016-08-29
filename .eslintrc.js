@@ -30,7 +30,6 @@ module.exports = {
     }
   },
   rules: {
-    'import/no-named-as-default': 'off',
     'import/imports-first': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',

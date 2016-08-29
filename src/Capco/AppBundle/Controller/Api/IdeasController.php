@@ -43,7 +43,7 @@ class IdeasController extends FOSRestController
      * @QueryParam(name="from", nullable=true)
      * @QueryParam(name="to", nullable=true)
      * @QueryParam(name="order", requirements="(old|last|comments|popular)", default="last")
-     * @View(statusCode=200, serializerGroups={"Ideas", "ThemeDetails", "UsersInfos"})
+     * @View(statusCode=200, serializerGroups={"Ideas", "Themes", "UsersInfos"})
      */
     public function getIdeasAction(Request $request, ParamFetcherInterface $paramFetcher)
     {
@@ -88,7 +88,7 @@ class IdeasController extends FOSRestController
      *
      * @Get("/ideas/{id}", defaults={"_feature_flags" = "ideas"}))
      * @ParamConverter("idea", options={"mapping": {"id": "id"}})
-     * @View(statusCode=200, serializerGroups={"Ideas", "ThemeDetails", "UsersInfos"})
+     * @View(statusCode=200, serializerGroups={"Ideas", "Themes", "UsersInfos"})
      */
     public function getIdeaAction(Idea $idea)
     {

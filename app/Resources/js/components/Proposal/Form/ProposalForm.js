@@ -7,6 +7,7 @@ import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
 import { connect } from 'react-redux';
+import ProposalPrivateField from '../ProposalPrivateField';
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -351,7 +352,7 @@ const ProposalForm = React.createClass({
               {!field.required && optional}
             </span>
           );
-          return (
+          const input = (
             <Input
               key={key}
               id={`proposal_${key}`}
@@ -361,6 +362,12 @@ const ProposalForm = React.createClass({
               valueLink={this.linkState(`custom.${key}`)}
               help={field.helpText}
               errors={this.renderFormErrors(key)}
+            />
+          );
+          return (
+            <ProposalPrivateField
+              show={field.private}
+              children={input}
             />
           );
         })
@@ -375,8 +382,6 @@ const ProposalForm = React.createClass({
 const mapStateToProps = (state) => {
   return {
     features: state.default.features,
-    themes: state.default.themes,
-    districts: state.default.districts,
   };
 };
 

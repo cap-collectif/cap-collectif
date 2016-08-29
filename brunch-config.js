@@ -95,6 +95,7 @@ exports.config = {
   plugins: {
     babel: {
       babelrc: true,
+      ignore: [/^(bower_components|node_modules)/],
     },
     sass: {
       mode: 'native',

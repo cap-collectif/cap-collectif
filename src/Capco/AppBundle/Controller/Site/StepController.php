@@ -306,7 +306,7 @@ class StepController extends Controller
             'step' => $step,
             'count' => $searchResults['count'],
             'proposals' => $searchResults['proposals'],
-        ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'ThemeDetails', 'Districts', 'Default', 'Steps', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
+        ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'Themes', 'Districts', 'Default', 'Steps', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
 
         $response = $this->render('CapcoAppBundle:Step:collect.html.twig', [
             'project' => $project,
@@ -441,7 +441,7 @@ class StepController extends Controller
             'proposals' => $searchResults['proposals'],
             'count' => $searchResults['count'],
             'showThemes' => $showThemes,
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Statuses', 'ThemeDetails', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias']));
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Statuses', 'Themes', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias']));
 
         return [
             'project' => $project,

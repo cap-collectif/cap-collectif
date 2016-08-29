@@ -34,7 +34,7 @@ class ProjectController extends Controller
                 ->get('doctrine.orm.entity_manager')
                 ->getRepository('CapcoAppBundle:Project')
                 ->getLastPublished($max, $offset),
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
 
         return [
             'props' => $props,
@@ -62,7 +62,7 @@ class ProjectController extends Controller
             'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
             'projectId' => $project->getId(),
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Districts', 'ThemeDetails']));
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Districts', 'Themes']));
 
         $response = $this->render('CapcoAppBundle:Project:show_user_votes.html.twig', [
             'project' => $project,
@@ -100,7 +100,7 @@ class ProjectController extends Controller
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
             'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
             'steps' => $steps,
-        ], 'json', SerializationContext::create()->setGroups(['ThemeDetails', 'Districts']));
+        ], 'json', SerializationContext::create()->setGroups(['Themes', 'Districts']));
 
         $response = $this->render('CapcoAppBundle:Project:show_stats.html.twig', [
             'project' => $project,
@@ -380,7 +380,7 @@ class ProjectController extends Controller
         $count = $em->getRepository('CapcoAppBundle:Project')->countPublished();
         $props = $serializer->serialize([
             'projects' => $projectsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Proposal;
 
 /**
  * ResponseRepository.
@@ -22,5 +23,23 @@ class ResponseRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getArrayResult();
+    }
+
+    public function getByProposal(Proposal $proposal, bool $showPrivate = false)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->addSelect('question')
+            ->leftJoin('r.question', 'question')
+            ->andWhere('r.proposal = :proposal')
+            ->setParameter('proposal', $proposal->getId())
+        ;
+
+        if (!$showPrivate) {
+            $qb
+                ->andWhere('question.private = false')
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }

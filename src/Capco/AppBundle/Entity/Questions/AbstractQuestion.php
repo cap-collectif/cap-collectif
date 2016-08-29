@@ -98,6 +98,12 @@ abstract class AbstractQuestion
     protected $updatedAt;
 
     /**
+     * @var bool
+     * @ORM\Column(name="private", type="boolean", nullable=false)
+     */
+    private $private = false;
+
+    /**
      * @var string
      * @Assert\NotNull()
      * @Assert\Range(min=0, max=6)
@@ -204,6 +210,25 @@ abstract class AbstractQuestion
     public function setQuestionnaireAbstractQuestion($questionnaireAbstractQuestion)
     {
         $this->questionnaireAbstractQuestion = $questionnaireAbstractQuestion;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPrivate(): bool
+    {
+        return $this->private;
+    }
+
+    /**
+     * @param boolean $private
+     * @return $this
+     */
+    public function setPrivate(bool $private)
+    {
+        $this->private = $private;
 
         return $this;
     }
