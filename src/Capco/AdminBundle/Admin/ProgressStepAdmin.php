@@ -23,9 +23,6 @@ class ProgressStepAdmin extends Admin
     {
         $formMapper
             ->with('admin.fields.step.group_general')
-            ->add('position', null, [
-                'label' => 'admin.fields.progress_step.position',
-            ])
             ->add('title', null, [
                 'label' => 'admin.fields.step.title',
                 'required' => true,
@@ -46,10 +43,6 @@ class ProgressStepAdmin extends Admin
                 'attr' => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
-                'required' => false,
-            ])
-            ->add('isEnabled', null, [
-                'label' => 'admin.fields.step.is_enabled',
                 'required' => false,
             ])
         ;

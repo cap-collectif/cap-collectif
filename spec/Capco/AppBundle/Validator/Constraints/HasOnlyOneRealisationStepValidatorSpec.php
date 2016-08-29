@@ -32,15 +32,12 @@ class HasOnlyOneRealisationStepValidatorSpec extends ObjectBehavior
         $realisationStep1->isRealisationStep()->willReturn(true);
         $realisationStep2->isRealisationStep()->willReturn(true);
 
-        $pas1->getStep()->willReturn($realisationStep1);
-        $pas2->getStep()->willReturn($realisationStep2);
-
         $builder->addViolation()->shouldBeCalled();
         $builder->atPath('project')->willReturn($builder)->shouldBeCalled();
         $context->buildViolation($constraint->message)->willReturn($builder)->shouldBeCalled();
 
         $this->initialize($context);
-        $this->validate([$pas1, $pas2], $constraint)->shouldReturn(false);
+        $this->validate([$realisationStep1, $realisationStep2], $constraint)->shouldReturn(false);
     }
 
     function it_should_not_add_violation_if_there_is_no_more_than_one_realisation_for_a_given_project(
@@ -55,13 +52,10 @@ class HasOnlyOneRealisationStepValidatorSpec extends ObjectBehavior
       $realisationStep->isRealisationStep()->willReturn(true);
       $randomStep->isRealisationStep()->willReturn(false);
 
-      $pas1->getStep()->willReturn($realisationStep);
-      $pas2->getStep()->willReturn($randomStep);
-
       $context->buildViolation($constraint->message)->shouldNotBeCalled();
 
       $this->initialize($context);
-      $this->validate([$pas1, $pas2], $constraint)->shouldReturn(true);
+      $this->validate([$realisationStep, $randomStep], $constraint)->shouldReturn(true);
     }
 
 }

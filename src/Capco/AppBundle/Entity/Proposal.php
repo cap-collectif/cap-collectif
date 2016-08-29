@@ -166,7 +166,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     protected $likers;
 
     /**
-     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist"})
      */
     private $progressSteps;
@@ -627,7 +626,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $ids;
     }
 
-    public function getProgressSteps()
+    public function getProgressSteps() : ArrayCollection
     {
         return $this->progressSteps;
     }
@@ -643,7 +642,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     {
         if (!$this->progressSteps->contains($progressStep)) {
             $this->progressSteps->add($progressStep);
-            $progressStep->setProposal($this);
         }
 
         return $this;

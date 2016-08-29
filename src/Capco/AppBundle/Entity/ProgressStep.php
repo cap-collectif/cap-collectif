@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Traits\PositionableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -13,8 +12,6 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class ProgressStep
 {
-    use PositionableTrait;
-
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -23,46 +20,33 @@ class ProgressStep
     private $id;
 
     /**
-     * @ORM\Column(name="title", type="string")
+     * @ORM\Column(name="title", type="string", nullable=false)
      */
     private $title;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
-     * @ORM\Column(name="default_status_id", nullable=true)
+     * @ORM\Column(name="start_at", type="datetime", nullable=false)
      */
-    private $defaultStatus = null;
-
-    /**
-     * @ORM\Column(name="start_at", type="datetime", nullable=true)
-     */
-    private $startAt = null;
+    private $startAt;
 
     /**
      * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
-    private $endAt= null;
+    private $endAt = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="progressSteps", cascade={"persist"})
      */
-    private $proposal = null;
+    private $proposal;
 
-    /**
-     * @ORM\Column(name="is_enabled", type="boolean")
-     */
-    private $isEnabled = true;
-
-    public function getDefaultStatus() : Status
+    public function __construct()
     {
-        return $this->defaultStatus;
+        $this->startAt = new \DateTime();
     }
 
-    public function setDefaultStatus(Status $defaultStatus = null) : self
+    public function getStatus() : string
     {
-        $this->defaultStatus = $defaultStatus;
-
-        return $this;
+        return 'en cours';
     }
 
     public function getId() : int
@@ -77,7 +61,7 @@ class ProgressStep
         return $this;
     }
 
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
@@ -89,7 +73,7 @@ class ProgressStep
         return $this;
     }
 
-    public function getStartAt()
+    public function getStartAt() : \DateTime
     {
         return $this->startAt;
     }
@@ -113,7 +97,7 @@ class ProgressStep
         return $this;
     }
 
-    public function getProposal()
+    public function getProposal() : Proposal
     {
         return $this->proposal;
     }
@@ -121,13 +105,7 @@ class ProgressStep
     public function setProposal(Proposal $proposal) : self
     {
         $this->proposal = $proposal;
-        $proposal->addProgressStep($this);
 
         return $this;
-    }
-
-    public function isEnabled()
-    {
-        return $this->isEnabled;
     }
 }

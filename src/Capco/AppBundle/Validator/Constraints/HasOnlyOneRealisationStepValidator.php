@@ -6,20 +6,18 @@ use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class HasOnlyOneRealisationStepValidator extends ConstraintValidator
 {
-    /**
-     * Checks if the passed value is valid.
-     *
-     * @param PersistentCollection $value      The value that should be validated
-     * @param Constraint           $constraint The constraint for the validation
-     *
-     * @return bool
-     */
     public function validate($value, Constraint $constraint) : bool
     {
-        if ($this->hasRealisationStep($value)) {
+        // Convert a ProjectAbstractStep collection to an AbstractStep collection with phpspec fallback
+        // https://github.com/phpspec/phpspec/issues/991
+        // TODO: Fixme by removing ProjectAbstractStep and use an AbstractStep collection instead
+        $steps = $value instanceof Collection ? $value->map(function($pas) { return $pas->getStep(); }) : new ArrayCollection($value);
+
+        if ($this->hasRealisationStep($steps)) {
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath('project')
@@ -31,13 +29,12 @@ class HasOnlyOneRealisationStepValidator extends ConstraintValidator
         return true;
     }
 
-    public function hasRealisationStep($steps) : bool
+    public function hasRealisationStep(ArrayCollection $steps) : bool
     {
-        return count(array_filter(
-            $steps,
+        return $steps->filter(
             function ($step) {
-                return $step->getStep()->isRealisationStep();
+                return $step->isRealisationStep();
             }
-        )) > 1;
+        )->count() > 1;
     }
 }
