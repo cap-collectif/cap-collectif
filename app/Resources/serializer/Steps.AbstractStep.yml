@@ -11,6 +11,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
       ranking: Capco\AppBundle\Entity\Steps\RankingStep
       selection: Capco\AppBundle\Entity\Steps\SelectionStep
       questionnaire: Capco\AppBundle\Entity\Steps\QuestionnaireStep
+      realisation: Capco\AppBundle\Entity\Steps\RealisationStep
   properties:
     id:
       expose: true

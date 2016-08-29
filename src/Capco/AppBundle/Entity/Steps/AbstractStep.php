@@ -29,19 +29,7 @@ use JMS\Serializer\Annotation as Serializer;
  *      "ranking"       = "RankingStep",
  *      "selection"     = "SelectionStep",
  *      "questionnaire" = "QuestionnaireStep",
- *      "realisation"   = "RealisationStep",
- * })
- * @Serializer\ExclusionPolicy("all")
- * @Serializer\Discriminator(field = "step_type", map = {
- *      "consultation"  = "Capco\AppBundle\Entity\Steps\ConsultationStep",
- *      "presentation"  = "Capco\AppBundle\Entity\Steps\PresentationStep",
- *      "other"         = "Capco\AppBundle\Entity\Steps\OtherStep",
- *      "collect"       = "Capco\AppBundle\Entity\Steps\CollectStep",
- *      "synthesis"     = "Capco\AppBundle\Entity\Steps\SynthesisStep",
- *      "ranking"       = "Capco\AppBundle\Entity\Steps\RankingStep",
- *      "selection"     = "Capco\AppBundle\Entity\Steps\SelectionStep",
- *      "questionnaire" = "Capco\AppBundle\Entity\Steps\QuestionnaireStep",
- *      "realisation"   = "Capco\AppBundle\Entity\Steps\RealisationStep",
+ *      "realisation"   = "RealisationStep"
  * })
  */
 abstract class AbstractStep

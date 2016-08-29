@@ -90,7 +90,7 @@ class ProgressStep
         return $this->endAt;
     }
 
-    public function setEndAt(\DateTime $endAt) : self
+    public function setEndAt(\DateTime $endAt = null) : self
     {
         $this->endAt = $endAt;
 
