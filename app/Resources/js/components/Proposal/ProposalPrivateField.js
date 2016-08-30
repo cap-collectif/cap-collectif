@@ -22,11 +22,11 @@ const ProposalPrivateField = React.createClass({
     if (show) {
       return (
         <div>
-          <p className="excerpt">
+          <p className="excerpt small">
             <i className="cap cap-lock-2"></i>
             {this.getIntlMessage('global.form.private')}
           </p>
-          <div className={`well ${divClassName}`} style={{ padding: '5px' }}>
+          <div className={`well proposal__private-field ${divClassName}`}>
             {children}
           </div>
         </div>

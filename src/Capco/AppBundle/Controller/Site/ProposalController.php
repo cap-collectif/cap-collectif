@@ -56,7 +56,7 @@ class ProposalController extends Controller
         ], 'json', SerializationContext::create()
             ->setSerializeNull(true)
             ->setGroups([
-                'Categories',
+                'ProposalCategories',
                 'UserVotes',
                 'ProposalForms',
                 'Questions',
