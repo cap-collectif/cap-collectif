@@ -3,12 +3,10 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Table(name="progress_step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProgressStepRepository")
- * @Serializer\ExclusionPolicy("all")
  */
 class ProgressStep
 {

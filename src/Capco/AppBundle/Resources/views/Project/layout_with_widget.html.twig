@@ -23,6 +23,7 @@
       'endAt': step.step.endAt|localizeddate('medium', 'none'),
       'position': step.step.position,
       'type': step.step.getType(),
+      'showProgressSteps': step.step.allowingProgressSteps|default(false),
       'statuses': stepStatuses
     }])
     %}

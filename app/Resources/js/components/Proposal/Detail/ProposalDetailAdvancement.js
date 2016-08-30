@@ -70,7 +70,7 @@ export const ProposalDetailAdvancement = React.createClass({
                 roundColor={roundColor}
                 borderColor={index + 1 === displayedSteps.length ? null : (displayedSteps[index + 1].isCurrent || displayedSteps[index + 1].isPast ? '#5cb85c' : '#d9d9d9')}
                 children={
-                  step.type === 'realisation' &&
+                  step.showProgressSteps &&
                     <div style={{ marginLeft: 30 }}>
                       {
                         proposal.progressSteps.map((progressStep, i) =>

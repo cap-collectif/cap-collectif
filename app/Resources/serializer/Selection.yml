@@ -11,3 +11,4 @@ Capco\AppBundle\Entity\Selection:
     status:
       expose: true
       groups: [Proposals, SelectionSteps]
+      

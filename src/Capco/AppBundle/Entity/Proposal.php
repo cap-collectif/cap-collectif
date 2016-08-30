@@ -658,10 +658,10 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this;
     }
 
-    public function hasRealisationStep() : bool
+    public function canHaveProgessSteps() : bool
     {
         return $this->getProposalForm()->getStep()->getProject()->getSteps()->exists(function ($key, $step) {
-            return $step->getStep()->isRealisationStep();
+            return $step->getStep()->isSelectionStep() && $step->getStep()->isAllowingProgressSteps();
         });
     }
 }

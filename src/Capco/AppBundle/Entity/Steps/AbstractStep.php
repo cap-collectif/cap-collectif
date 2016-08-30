@@ -29,7 +29,6 @@ use JMS\Serializer\Annotation as Serializer;
  *      "ranking"       = "RankingStep",
  *      "selection"     = "SelectionStep",
  *      "questionnaire" = "QuestionnaireStep",
- *      "realisation"   = "RealisationStep"
  * })
  */
 abstract class AbstractStep
@@ -455,11 +454,6 @@ abstract class AbstractStep
     }
 
     public function isSelectionStep()
-    {
-        return false;
-    }
-
-    public function isRealisationStep() : bool
     {
         return false;
     }

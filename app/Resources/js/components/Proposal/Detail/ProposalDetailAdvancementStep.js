@@ -50,8 +50,13 @@ const ProposalDetailAdvancementStep = React.createClass({
             <div>{ step.title }</div>
             <div className="excerpt small">
               {step.startAt}
-              { ' - ' }
-              {step.endAt}
+              {
+                step.endAt &&
+                  <span>
+                    { ' - ' }
+                    { step.endAt }
+                  </span>
+              }
             </div>
             {
               status &&

@@ -129,11 +129,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\AbstractStep']
 
-  capco.realisation_step.repository:
-    class: Capco\AppBundle\Entity\Steps\RealisationStep
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Steps\RealisationStep']
-
   capco.progress_step.repository:
     class: Capco\AppBundle\Repository\ProgressStepRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

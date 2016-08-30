@@ -45,3 +45,10 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     endAt: <dateTimeBetween('+11 days', '+20 days')>
     body: <p><text(1000)></p>
     voteType: 1
+  selectionStep7:
+    title: Réalisation
+    isEnabled: true
+    allowingProgressSteps: true
+    startAt: <dateTimeBetween('+1 days', '+10 days')>
+    body: <p><text(1000)></p>
+    voteType: 0
