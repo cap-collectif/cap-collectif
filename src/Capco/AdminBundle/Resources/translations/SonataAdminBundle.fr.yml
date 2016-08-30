@@ -485,7 +485,6 @@ admin:
       group_selection: Sélection
       group_answer: Réponse officielle
       group_progress: Réalisation
-      no_realisation_step: Veuillez créer une étape de type "Réalisation" sur le projet pour pouvoir créer des étapes
       help:
         annotation: Cette annotation ne sera pas visible sur le site.
         estimation: L'estimation sera affichée en euros.
@@ -883,7 +882,6 @@ synthesis_step: Étape de synthèse
 ranking_step: Étape de classement
 selection_step: Étape de sélection
 questionnaire_step: Étape de questionnaire
-realisation_step: Étape de réalisation
 
 simple_question: Question simple
 multiple_choice_question: Question à choix multiple

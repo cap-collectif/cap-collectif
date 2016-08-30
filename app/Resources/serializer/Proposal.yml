@@ -71,6 +71,10 @@ Capco\AppBundle\Entity\Proposal:
       expose: true
       groups: [Proposals]
       serialized_name: proposalForm
+    progressSteps:
+      expose: true
+      groups: [Proposals]
+      serialized_name: progressSteps
     selections:
       expose: true
       groups: [Proposals]

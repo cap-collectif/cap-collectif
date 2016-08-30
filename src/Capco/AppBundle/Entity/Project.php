@@ -137,7 +137,7 @@ class Project implements IndexableInterface
      *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Steps\ProjectAbstractStep", mappedBy="project",  cascade={"persist", "remove"}, orphanRemoval = true)
      * @ORM\OrderBy({"position" = "ASC"})
-     * @CapcoAssert\HasOnlyOneRealisationStep()
+     * @CapcoAssert\HasOnlyOneSelectionStepAllowingProgressSteps()
      */
     private $steps;
 

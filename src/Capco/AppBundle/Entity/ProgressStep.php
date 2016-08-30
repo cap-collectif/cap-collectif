@@ -44,11 +44,6 @@ class ProgressStep
         $this->startAt = new \DateTime();
     }
 
-    public function getStatus() : string
-    {
-        return 'en cours';
-    }
-
     public function getId() : int
     {
         return $this->id;

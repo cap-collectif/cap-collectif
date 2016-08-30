@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class HasOnlyOneRealisationStep extends Constraint
+class HasOnlyOneSelectionStepAllowingProgressSteps extends Constraint
 {
     public $message = 'global.only_one_realisation_step';
 

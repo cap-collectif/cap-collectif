@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { IntlMixin, FormattedDate } from 'react-intl';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
 import { connect } from 'react-redux';
 import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
+import moment from 'moment';
 
 export const ProposalDetailAdvancement = React.createClass({
   displayName: 'ProposalDetailAdvancement',
@@ -68,6 +69,26 @@ export const ProposalDetailAdvancement = React.createClass({
                 status={step.isCurrent ? this.getStatus(step) : null}
                 roundColor={roundColor}
                 borderColor={index + 1 === displayedSteps.length ? null : (displayedSteps[index + 1].isCurrent || displayedSteps[index + 1].isPast ? '#5cb85c' : '#d9d9d9')}
+                children={
+                  step.type === 'realisation' &&
+                    <div style={{ marginLeft: 30 }}>
+                      {
+                        proposal.progressSteps.map((progressStep, i) =>
+                          <ProposalDetailAdvancementStep
+                            key={i}
+                            step={{
+                              title: progressStep.title,
+                              startAt: <FormattedDate value={moment(progressStep.startAt)} day="numeric" month="long" year="numeric" />,
+                              endAt: progressStep.endAt ? <FormattedDate value={moment(progressStep.endAt)} day="numeric" month="long" year="numeric" /> : null,
+                            }}
+                            status={null}
+                            roundColor={'#d9d9d9'}
+                            borderColor={i + 1 === proposal.progressSteps.length ? null : '#d9d9d9'}
+                          />
+                        )
+                      }
+                    </div>
+                }
               />
             );
           })

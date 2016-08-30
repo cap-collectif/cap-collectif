@@ -8,7 +8,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class HasOnlyOneRealisationStepValidator extends ConstraintValidator
+class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint) : bool
     {
@@ -17,7 +17,7 @@ class HasOnlyOneRealisationStepValidator extends ConstraintValidator
         // TODO: Fixme by removing ProjectAbstractStep and use an AbstractStep collection instead
         $steps = $value instanceof Collection ? $value->map(function($pas) { return $pas->getStep(); }) : new ArrayCollection($value);
 
-        if ($this->hasRealisationStep($steps)) {
+        if ($this->hasMoreThanOneSelectionStepAllowingProgressSteps($steps)) {
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath('project')
@@ -29,11 +29,11 @@ class HasOnlyOneRealisationStepValidator extends ConstraintValidator
         return true;
     }
 
-    public function hasRealisationStep(ArrayCollection $steps) : bool
+    public function hasMoreThanOneSelectionStepAllowingProgressSteps(ArrayCollection $steps) : bool
     {
         return $steps->filter(
             function ($step) {
-                return $step->isRealisationStep();
+                return $step->isSelectionStep() && $step->isAllowingProgressSteps();
             }
         )->count() > 1;
     }

@@ -1,4 +1,0 @@
-Capco\AppBundle\Entity\Steps\RealisationStep:
-  realisationstep1:
-    title: Réalisation
-    startAt: <dateTimeBetween('+40 days', '+ 80 days')>

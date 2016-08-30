@@ -1,0 +1,14 @@
+Capco\AppBundle\Entity\ProgressStep:
+  exclusion_policy: ALL
+  properties:
+    title:
+      expose: true
+      groups: [Proposals]
+    startAt:
+      expose: true
+      groups: [Proposals]
+      serialized_name: startAt
+    endAt:
+      expose: true
+      groups: [Proposals]
+      serialized_name: endAt

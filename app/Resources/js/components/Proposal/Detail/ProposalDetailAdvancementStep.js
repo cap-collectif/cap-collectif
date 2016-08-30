@@ -8,11 +8,13 @@ const ProposalDetailAdvancementStep = React.createClass({
     roundColor: PropTypes.string.isRequired,
     status: PropTypes.object,
     borderColor: PropTypes.string,
+    children: PropTypes.element,
   },
 
   render() {
-    const { borderColor, roundColor, step, status } = this.props;
+    const { borderColor, roundColor, step, status, children } = this.props;
     return (
+        <span>
         <div
           style={
             borderColor
@@ -62,6 +64,8 @@ const ProposalDetailAdvancementStep = React.createClass({
           </div>
           <br />
         </div>
+          { children }
+        </span>
       );
   },
 
