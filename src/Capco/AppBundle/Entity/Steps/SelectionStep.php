@@ -69,6 +69,12 @@ class SelectionStep extends AbstractStep
      */
     private $budget = null;
 
+
+    /**
+     * @ORM\Column(name="allowing_progess_steps", type="boolean", nullable=false)
+     */
+    private $allowingProgressSteps = false;
+
     /**
      * @ORM\Column(name="default_sort", type="string", nullable=false)
      * @Assert\Choice(choices={"old","last","votes","comments","random"})
@@ -235,6 +241,18 @@ class SelectionStep extends AbstractStep
     public function setDefaultSort($defaultSort)
     {
         $this->defaultSort = $defaultSort;
+
+        return $this;
+    }
+
+    public function isAllowingProgressSteps() : bool
+    {
+        return $this->allowingProgressSteps;
+    }
+
+    public function setAllowingProgressSteps(bool $allowingProgressSteps) : self
+    {
+        $this->allowingProgressSteps = $allowingProgressSteps;
 
         return $this;
     }
