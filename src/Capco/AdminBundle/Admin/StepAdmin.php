@@ -368,41 +368,6 @@ class StepAdmin extends Admin
         $collection->clearExcept(['create', 'edit', 'delete']);
     }
 
-    public function prePersist($step)
-    {
-        if ($step instanceof SynthesisStep) {
-            //$this->manageEmbeddedSynthesis($step);
-        }
-    }
-
-    public function preUpdate($step)
-    {
-        if ($step instanceof SynthesisStep) {
-            //$this->manageEmbeddedSynthesis($step);
-        }
-    }
-
-    protected function manageEmbeddedSynthesis($step)
-    {
-        // Cycle through each field
-        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
-            // detect embedded Admin that manage Synthesis
-            if ($fieldDescription->getType() === 'sonata_type_admin' &&
-                ($associationMapping = $fieldDescription->getAssociationMapping()) &&
-                $associationMapping['targetEntity'] === 'Capco\AppBundle\Entity\Synthesis\Synthesis'
-            ) {
-                $getter = 'get'.$fieldName;
-                $setter = 'set'.$fieldName;
-
-                /** @var Synthesis $synthesis */
-                $synthesis = $step->$getter();
-                if ($synthesis) {
-                    $this->getConfigurationPool()->getContainer()->get('capco.synthesis.synthesis_handler')->createOrUpdateElementsFromSource($synthesis);
-                }
-            }
-        }
-    }
-
     public function getTemplate($name)
     {
         if ($name === 'edit') {

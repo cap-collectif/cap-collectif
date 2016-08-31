@@ -165,7 +165,6 @@ class ProposalAdmin extends Admin
                 ], [
                     'edit' => 'inline',
                     'inline' => 'table',
-                    'sortable' => 'position',
                 ])
                 ->end();
         }
