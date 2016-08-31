@@ -8,7 +8,7 @@ const ProposalDetailAdvancementStep = React.createClass({
     roundColor: PropTypes.string.isRequired,
     status: PropTypes.object,
     borderColor: PropTypes.string,
-    children: PropTypes.element,
+    children: PropTypes.node,
   },
 
   render() {

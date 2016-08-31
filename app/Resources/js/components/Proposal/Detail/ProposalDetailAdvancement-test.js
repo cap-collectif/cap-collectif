@@ -20,6 +20,7 @@ describe('<ProposalDetailAdvancement />', () => {
         },
       },
     ],
+    progressSteps: [],
   };
   const project = {
     steps: [
