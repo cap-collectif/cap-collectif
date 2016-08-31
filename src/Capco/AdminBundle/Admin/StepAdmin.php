@@ -175,6 +175,10 @@ class StepAdmin extends Admin
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
                 ])
+              ->add('allowingProgressSteps', null, [
+                  'label' => 'admin.fields.step.allowingProgressSteps',
+                  'required' => false,
+                ])
             ;
         }
 
