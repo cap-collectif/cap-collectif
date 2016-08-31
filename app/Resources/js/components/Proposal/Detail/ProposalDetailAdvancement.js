@@ -47,11 +47,15 @@ const generateProgressStepsWithColorAndStatus = (progressSteps) => {
 
     if (progressStep.title === stepConsideredCurrent.title) {
       if (moment(progressStep.startAt) > moment()) {
-        props.status = { name: 'A venir', color: 'default' };
+        props.status = { name: 'A venir', color: 'info' };
+        props.roundColor = bootstrapToHex('info');
       } else if (progressStep.endAt && moment(progressStep.endAt) < moment()) {
         props.status = { name: 'Terminé', color: 'success' };
+        props.roundColor = bootstrapToHex('success');
       } else {
         props.status = { name: 'En cours', color: 'warning' };
+        props.roundColor = bootstrapToHex('warning');
+        props.borderColor = grey;
       }
       isPastCurrent = true;
     }
