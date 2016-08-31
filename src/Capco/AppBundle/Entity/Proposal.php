@@ -167,7 +167,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     protected $likers;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $progressSteps;
 
