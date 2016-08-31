@@ -441,7 +441,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
      *
      * @return $this
      */
-    public function setResponses(ArrayCollection $responses)
+    public function setResponses(Collection $responses)
     {
         $this->responses = $responses;
         foreach ($responses as $response) {

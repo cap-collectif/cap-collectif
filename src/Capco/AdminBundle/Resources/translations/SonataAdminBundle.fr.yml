@@ -674,7 +674,7 @@ admin:
       default_sort: Tri des propositions par défaut
       default_status: Statut par défaut
       default_status_none: Aucun
-      allowingProgressSteps: Autoriser les étapes d'avancements sur cette étape
+      allowingProgressSteps: Afficher les étapes de réalisation
       end_at: Termine
       group_general: Général
       group_form: Formulaire
