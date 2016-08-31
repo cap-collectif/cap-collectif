@@ -85,7 +85,7 @@ Feature: Stats
 
   @security
   Scenario: Anonymous API client wants to get votes stats for a collect step filtered by theme
-    When I send a GET request to "/api/project_stats/20?key=districts&theme=1"
+    When I send a GET request to "/api/project_stats/22?key=districts&theme=1"
     Then the JSON response status code should be 400
     And the JSON response should match:
     """
