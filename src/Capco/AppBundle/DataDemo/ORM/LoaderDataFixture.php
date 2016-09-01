@@ -2,10 +2,26 @@
 
 namespace Capco\AppBundle\DataDemo\ORM;
 
-use Hautelook\AliceBundle\Doctrine\DataFixtures\AbstractLoader;
+use Hautelook\AliceBundle\Alice\DataFixtureLoader;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoaderDataFixture extends AbstractLoader
+class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInterface
 {
+    protected function getProcessors()
+    {
+        return [
+            new MediaProcessor($this->container),
+        ];
+    }
+
+    public function getOrder()
+    {
+        return 2;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getFixtures()
     {
         return [

@@ -44,7 +44,7 @@
 
         "doctrine/doctrine-fixtures-bundle": "~2.3",
         "stof/doctrine-extensions-bundle": "~1.2",
-        "hautelook/alice-bundle": "^1.3",
+        "hautelook/alice-bundle": "~0.2",
 
         "elao/web-profiler-extra-bundle": "~2.3",
 
@@ -88,9 +88,7 @@
         "misd/phone-number-bundle": "^1.1",
         "liuggio/excelbundle": "~2.0",
         "ocramius/proxy-manager": "2.0.2",
-        "exercise/htmlpurifier-bundle": "^0.2.3",
-        "doctrine/data-fixtures": "1.1.1",
-        "nelmio/alice": "^2.2"
+        "exercise/htmlpurifier-bundle": "^0.2.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

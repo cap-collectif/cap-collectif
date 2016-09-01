@@ -2,11 +2,27 @@
 
 namespace Capco\AppBundle\DataFixtures\ORM;
 
-use Hautelook\AliceBundle\Doctrine\DataFixtures\AbstractLoader;
+use Hautelook\AliceBundle\Alice\DataFixtureLoader;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoaderDataFixture extends AbstractLoader
+class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInterface
 {
-    public function getFixtures()
+    protected function getProcessors()
+    {
+        return [
+            new MediaProcessor($this->container),
+        ];
+    }
+
+    public function getOrder()
+    {
+        return 2;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getFixtures()
     {
         return [
             __DIR__.'/MediaContext.yml',
@@ -79,7 +95,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__.'/ProposalVote.yml',
             __DIR__.'/ProgressStep.yml',
             __DIR__.'/ProposalComment.yml',
-            
+
             __DIR__.'/Post.yml',
             __DIR__.'/PostComment.yml',
             __DIR__.'/Event.yml',
@@ -90,6 +106,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__.'/Video.yml',
             __DIR__.'/Section.yml',
             __DIR__.'/HighlightedContent.yml',
+
         ];
     }
 }

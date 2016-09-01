@@ -2,10 +2,19 @@
 
 namespace Capco\AppBundle\DataBenchmark\ORM;
 
-use Hautelook\AliceBundle\Doctrine\DataFixtures\AbstractLoader;
+use Hautelook\AliceBundle\Alice\DataFixtureLoader;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoaderDataFixture extends AbstractLoader
+class LoaderDataFixture extends DataFixtureLoader implements OrderedFixtureInterface
 {
+    public function getOrder()
+    {
+        return 1;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getFixtures()
     {
         return [

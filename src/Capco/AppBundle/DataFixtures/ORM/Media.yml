@@ -2,75 +2,144 @@ Capco\MediaBundle\Entity\Media:
 
     # projects
     MediaProject1:
-        binaryContent: project-1.jpg
-        name: Titre du média
+        binaryContent: ../files/project-1.jpg
+        enabled:       true
+        name:          Titre du média
+        context:       '@MediaContext1'
+
     MediaProject2:
-        binaryContent: project-2.jpg
+        binaryContent: ../files/project-2.jpg
+        enabled:       true
         name:          Titre du média 2
+        context:       '@MediaContext1'
+
     MediaProject3:
-        binaryContent: project-3.jpg
+        binaryContent: ../files/project-3.jpg
+        enabled:       true
         name:          Titre du média 2
+        context:       '@MediaContext1'
+
     MediaProjectImageVideo:
-        binaryContent: project-image-video.jpg
+        binaryContent: ../files/project-image-video.jpg
+        enabled:       true
         name:          Titre du média 2
+        context:       '@MediaContext1'
+
     # projects
     MediaIdea1:
-        binaryContent: idea-1.jpg
+        binaryContent: ../files/idea-1.jpg
+        enabled:       true
         name:          Titre du média
+        context:       '@MediaContext1'
+
     MediaIdea2:
-        binaryContent: idea-2.jpg
+        binaryContent: ../files/idea-2.jpg
+        enabled:       true
         name:          Titre du média 2
+        context:       '@MediaContext1'
+
+
     # users
     MediaUser1:
-        binaryContent: user/sfavot.jpg
+        binaryContent: ../files/user/sfavot.jpg
+        enabled:       true
         name:          Suzanne Favot
+        context:       '@MediaContext1'
+
     MediaUser2:
-        binaryContent: user/lbrunet.jpg
+        binaryContent: ../files/user/lbrunet.jpg
+        enabled:       true
         name:          Laurent Brunet
+        context:       '@MediaContext1'
+
     MediaUser3:
-        binaryContent: user/xlacot.jpg
+        binaryContent: ../files/user/xlacot.jpg
+        enabled:       true
         name:          Xavier Lacot
+        context:       '@MediaContext1'
+
     MediaUser4:
-        binaryContent: user/spyl.jpg
+        binaryContent: ../files/user/spyl.jpg
+        enabled:       true
         name:          Spyl
+        context:       '@MediaContext1'
+
     MediaUser5:
-        binaryContent: user/welcomattic.jpg
+        binaryContent: ../files/user/welcomattic.jpg
+        enabled:       true
         name:          Welcomattic
+        context:       '@MediaContext1'
+
     #SiteImages
     Logo:
-        binaryContent: logo.png
+        binaryContent: ../files/logo.png
+        enabled:       true
         name:          Logo
+        context:       '@MediaContext1'
+
     header:
-        binaryContent: header.jpg
+        binaryContent: ../files/header.jpg
+        enabled:       true
         name:          Header
+        context:       '@MediaContext1'
+
     picto:
-        binaryContent: picto.png
+        binaryContent: ../files/picto.png
+        enabled:       true
         name:          Picto
+        context:       '@MediaContext1'
+
     # Social Network
     MediaFlickr:
-        binaryContent: social/flickr.png
+        binaryContent: ../files/social/flickr.png
+        enabled:       true
         name:          Flickr
+        context:       '@MediaContext1'
+
     MediaFacebook:
-        binaryContent: social/facebook.png
+        binaryContent: ../files/social/facebook.png
+        enabled:       true
         name:          Facebook
+        context:       '@MediaContext1'
+
     MediaGooglePlus:
-        binaryContent: social/google_plus.png
+        binaryContent: ../files/social/google_plus.png
+        enabled:       true
         name:          Google
+        context:       '@MediaContext1'
+
     MediaLinkedIn:
-        binaryContent: social/linkedIn.png
+        binaryContent: ../files/social/linkedIn.png
+        enabled:       true
         name:          LinkedIn
+        context:       '@MediaContext1'
+
     MediaRSS:
-        binaryContent: social/rss.png
+        binaryContent: ../files/social/rss.png
+        enabled:       true
         name:          RSS
+        context:       '@MediaContext1'
+
     MediaTwitter:
-        binaryContent: social/twitter.png
+        binaryContent: ../files/social/twitter.png
+        enabled:       true
         name:          Twitter
+        context:       '@MediaContext1'
+
     MediaCapcoSite:
-        binaryContent: social/capco.png
+        binaryContent: ../files/social/capco.png
+        enabled:       true
         name:          Capco
+        context:       '@MediaContext1'
+
     MediaAvatar:
-        binaryContent: default_avatar.jpg
+        binaryContent: ../files/default_avatar.jpg
+        enabled: true
         name: Avatar
+        context: '@MediaContext1'
+
     MediaVotesBar:
-        binaryContent: votes_bar_image.png
+        binaryContent: ../files/votes_bar_image.png
+        enabled: true
         name: Image de la barre de votes
+        context: '@MediaContext1'

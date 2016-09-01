@@ -43,7 +43,7 @@ class ArgumentSerializationListener extends AbstractSerializationListener
 
         $showUrl = '';
 
-        if (!$opinion || !$opinionType || !$step) {
+        if (!$opinion || !$opinionType || !$step || !$project) {
             throw new \Exception(
                 'Error during serialization of argument '.$argument->getId()
             );
