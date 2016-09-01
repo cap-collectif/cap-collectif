@@ -7,11 +7,11 @@ Capco\AppBundle\Entity\OpinionVersion:
              <p><text(300)></p>
         enabled: true
         isTrashed: false
-        author: @user5
-        parent: @opinion57
+        author: '@user5'
+        parent: '@opinion57'
         comment: bououh
         ranking: <numberBetween(1,5)>
-        answer: @answer2
+        answer: '@answer2'
     version2:
         title: Modification 2
         body: |
@@ -19,8 +19,8 @@ Capco\AppBundle\Entity\OpinionVersion:
              <p><text(300)></p>
         enabled: true
         isTrashed: false
-        author: @user2
-        parent: @opinion57
+        author: '@user2'
+        parent: '@opinion57'
         comment: bououh
         ranking: <numberBetween(1,5)>
     version3:
@@ -30,8 +30,8 @@ Capco\AppBundle\Entity\OpinionVersion:
              <p><text(300)></p>
         enabled: true
         isTrashed: false
-        author: @user2
-        parent: @opinion57
+        author: '@user2'
+        parent: '@opinion57'
         comment: bououh
         ranking: <numberBetween(1,5)>
     version{4...10}:
@@ -41,8 +41,8 @@ Capco\AppBundle\Entity\OpinionVersion:
              <p><text(300)></p>
         enabled: true
         isTrashed: true
-        author: @user2
-        parent: @opinion<numberBetween(57,59)>
+        author: '@user2'
+        parent: '@opinion<numberBetween(57,59)>'
         comment: Coeur avec les doigts !
         ranking: <numberBetween(1,5)>
     version11:
@@ -52,5 +52,5 @@ Capco\AppBundle\Entity\OpinionVersion:
              <p><text(300)></p>
         enabled: true
         isTrashed: false
-        author: @user5
-        parent: @opinion51
+        author: '@user5'
+        parent: '@opinion51'

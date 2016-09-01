@@ -8,10 +8,10 @@ Capco\AppBundle\Entity\Idea:
           <h3>mon titre numéro 2</h3>
           <p><text(300)></p>
     object: <p><text(300)></p>
-    Theme: @theme1
-    Author: @user1
+    Theme: '@theme1'
+    Author: '@user1'
     isTrashed: false
-    media: @MediaIdea1
+    media: '@MediaIdea1'
     isCommentable: false
 
   Idea2:
@@ -23,10 +23,10 @@ Capco\AppBundle\Entity\Idea:
         <h3>mon titre numéro 2</h3>
         <p><text(300)></p>
     object: <p><text(300)></p>
-    Theme: @theme2
-    Author: @user5
+    Theme: '@theme2'
+    Author: '@user5'
     isTrashed: false
-    media: @MediaIdea2
+    media: '@MediaIdea2'
 
   Idea3:
     title: Troisième idée
@@ -37,8 +37,8 @@ Capco\AppBundle\Entity\Idea:
         <h3>mon titre</h3>
         <p><text(300)></p>
     object: <p><text(300)></p>
-    Theme: @theme3
-    Author: @user3
+    Theme: '@theme3'
+    Author: '@user3'
     createdAt: <(new \DateTime('2016-08-21'))>
     isTrashed: false
 
@@ -50,8 +50,8 @@ Capco\AppBundle\Entity\Idea:
           <p><text(500)></p>
           <h3>Un autre titre</h3>
           <p><text(300)></p>
-    Theme: @theme1
-    Author: @user5
+    Theme: '@theme1'
+    Author: '@user5'
     isTrashed: false
 
   Idea{5..20}:
@@ -63,8 +63,8 @@ Capco\AppBundle\Entity\Idea:
           <h3><text(10)></h3>
           <p><text(300)></p>
     object: <p><text(300)></p>
-    Theme: @theme3
-    Author: @user*
+    Theme: '@theme3'
+    Author: '@user*'
     isTrashed: <boolean()>
 
   Idea21:
@@ -76,8 +76,8 @@ Capco\AppBundle\Entity\Idea:
           <h3>Un autre titre</h3>
           <p><text(300)></p>
     object: <p>Objet</p>
-    Theme: @theme1
-    Author: @user5
+    Theme: '@theme1'
+    Author: '@user5'
     isTrashed: false
 
   Idea22:
@@ -89,6 +89,6 @@ Capco\AppBundle\Entity\Idea:
           <h3>Un autre titre</h3>
           <p><text(300)></p>
     object: <p>Objet</p>
-    Theme: @theme1
-    Author: @user1
+    Theme: '@theme1'
+    Author: '@user1'
     isTrashed: true

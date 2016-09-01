@@ -5,11 +5,11 @@ Capco\UserBundle\Entity\User:
         lastname: Brunet
         email: lbrunet@jolicode.com
         enabled: true
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: @MediaUser2
+        Media: '@MediaUser2'
         confirmationToken: ~
 
     user2:
@@ -18,11 +18,11 @@ Capco\UserBundle\Entity\User:
         lastname: Favot
         email: sfavot@jolicode.com
         enabled: true
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: @MediaUser1
+        Media: '@MediaUser1'
         city: Antony
         website: http://www.sfavot.fr
         biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
@@ -36,7 +36,7 @@ Capco\UserBundle\Entity\User:
         lastname: Lacot
         email: xlacot@jolicode.com
         enabled: true
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
@@ -49,7 +49,7 @@ Capco\UserBundle\Entity\User:
         lastname: authentifier
         email: admin@test.com
         enabled: true
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: admin
         Media: null
         roles:
@@ -65,7 +65,7 @@ Capco\UserBundle\Entity\User:
         lastname: authentifier
         email: user@test.com
         enabled: true
-        userType: @UserType1
+        userType: '@UserType1'
         Media: null
         plainPassword: user
         roles:
@@ -77,7 +77,7 @@ Capco\UserBundle\Entity\User:
     user_drupal:
         __construct: ['drupal']
         username: drupal
-        userType: @UserType1
+        userType: '@UserType1'
         firstname: toto
         lastname: toto
         email: drupal@gmail.com
@@ -91,7 +91,7 @@ Capco\UserBundle\Entity\User:
         lastname: <lastname()>
         email: <email()>
         enabled: true
-        userType: @UserType1
+        userType: '@UserType1'
         password: <password()>
         roles:
          - 'ROLE_USER'
@@ -103,11 +103,11 @@ Capco\UserBundle\Entity\User:
         lastname: David
         email: adavid@jolicode.com
         enabled: true
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: @MediaUser4
+        Media: '@MediaUser4'
         vip: true
         confirmationToken: ~
 
@@ -117,11 +117,11 @@ Capco\UserBundle\Entity\User:
         lastname: Santostefano
         email: msantostefano@jolicode.com
         enabled: true
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: capco
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: @MediaUser5
+        Media: '@MediaUser5'
         vip: true
         confirmationToken: ~
 
@@ -131,11 +131,11 @@ Capco\UserBundle\Entity\User:
         lastname: disabled
         email: disabled@test.com
         enabled: false
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: disabled
         roles:
          - 'ROLE_USER'
-        Media: @MediaUser1
+        Media: '@MediaUser1'
         vip: false
         confirmationToken: ~
 
@@ -145,7 +145,7 @@ Capco\UserBundle\Entity\User:
         lastname: nom
         email: conseilregional@test.com
         enabled: true
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: monsupermotdepassetropsafe
         roles:
          - 'ROLE_USER'
@@ -159,11 +159,11 @@ Capco\UserBundle\Entity\User:
         lastname: Tondereau
         email: pierre@cap-collectif.com
         enabled: true
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: toto
         roles:
          - 'ROLE_USER'
-        Media: @MediaUser5
+        Media: '@MediaUser5'
         vip: true
         confirmationToken: ~
 
@@ -173,7 +173,7 @@ Capco\UserBundle\Entity\User:
         lastname: user_not_confirmed
         email: user_not_confirmed@test.com
         enabled: true
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: user_not_confirmed
         roles:
          - 'ROLE_USER'
@@ -188,7 +188,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         expired: false
         expiresAt: <date('now')>
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: user_not_confirmed_to_be_expired
         roles:
          - 'ROLE_USER'
@@ -203,7 +203,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         expired: false
         expiresAt: <dateTimeBetween('-10 days', '-2 days')>
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: user_not_confirmed_with_contributions_to_be_expired
         roles:
          - 'ROLE_USER'
@@ -218,7 +218,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         expired: false
         expiresAt: <dateTimeBetween('+1 days', '+1 days')>
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: user_not_confirmed_to_be_expired_in_24_hours
         roles:
          - 'ROLE_USER'
@@ -233,7 +233,7 @@ Capco\UserBundle\Entity\User:
         enabled: false
         expired: true
         expiresAt: ~
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: user_expired
         roles:
          - 'ROLE_USER'
@@ -248,7 +248,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         expired: false
         expiresAt: ~
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: user_without_phone
         roles:
          - 'ROLE_USER'
@@ -263,7 +263,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         expired: false
         expiresAt: ~
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: user_with_phone_not_phone_confirmed
         roles:
          - 'ROLE_USER'
@@ -279,7 +279,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         expired: false
         expiresAt: ~
-        userType: @UserType1
+        userType: '@UserType1'
         plainPassword: user_with_code_not_phone_confirmed
         roles:
          - 'ROLE_USER'

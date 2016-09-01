@@ -1,107 +1,107 @@
 Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
   pas1:
-    step: @cstep1
-    project: @p1
+    step: '@cstep1'
+    project: '@p1'
     position: 2
   pas2:
-    step: @cstep2
-    project: @p2
+    step: '@cstep2'
+    project: '@p2'
     position: 1
   pas3:
-    step: @cstep3
-    project: @p3
+    step: '@cstep3'
+    project: '@p3'
     position: 1
   pas4:
-    step: @cstep4
-    project: @p4
+    step: '@cstep4'
+    project: '@p4'
     position: 1
   pas5:
-    step: @ostep1
-    project: @p1
+    step: '@ostep1'
+    project: '@p1'
     position: 3
   pas6:
-    step: @ostep2
-    project: @p2
+    step: '@ostep2'
+    project: '@p2'
     position: 2
   pas7:
-    step: @ostep3
-    project: @p3
+    step: '@ostep3'
+    project: '@p3'
     position: 2
   pas8:
-    step: @pstep1
-    project: @p1
+    step: '@pstep1'
+    project: '@p1'
     position: 1
   pas9:
-    step: @sstep1
-    project: @p2
+    step: '@sstep1'
+    project: '@p2'
     position: 3
   pas10:
-    step: @cstep5
-    project: @p5
+    step: '@cstep5'
+    project: '@p5'
     position: 1
   pas11:
-    step: @sstep2
-    project: @p5
+    step: '@sstep2'
+    project: '@p5'
     position: 2
   pas13:
-    step: @rstep1
-    project: @p1
+    step: '@rstep1'
+    project: '@p1'
     position: 4
   pas14:
-    step: @rstep2
-    project: @p5
+    step: '@rstep2'
+    project: '@p5'
     position: 4
   pas15:
-    step: @collectstep1
-    project: @p6
+    step: '@collectstep1'
+    project: '@p6'
     position: 1
   pas16:
-    step: @collectstep2
-    project: @p6
+    step: '@collectstep2'
+    project: '@p6'
     position: 3
   pas17:
-    step: @selectionStep1
-    project: @p6
+    step: '@selectionStep1'
+    project: '@p6'
     position: 4
   pas18:
-    step: @selectionStep2
-    project: @p6
+    step: '@selectionStep2'
+    project: '@p6'
     position: 5
   pas19:
-    step: @selectionStep3
-    project: @p6
+    step: '@selectionStep3'
+    project: '@p6'
     position: 6
   pas20:
-    step: @collectstep3
-    project: @p7
+    step: '@collectstep3'
+    project: '@p7'
     position: 1
   pas21:
-    step: @selectionStep4
-    project: @p7
+    step: '@selectionStep4'
+    project: '@p7'
     position: 2
   pas22:
-    step: @selectionStep5
-    project: @p7
+    step: '@selectionStep5'
+    project: '@p7'
     position: 3
   pas23:
-    step: @selectionStep6
-    project: @p6
+    step: '@selectionStep6'
+    project: '@p6'
     position: 6
   pas24:
-    step: @questionnairestep1
-    project: @p8
+    step: '@questionnairestep1'
+    project: '@p8'
     position: 2
   pas25:
-    step: @questionnairestep2
-    project: @p8
+    step: '@questionnairestep2'
+    project: '@p8'
     position: 3
   pas26:
-    step: @questionnairestep3
-    project: @p8
+    step: '@questionnairestep3'
+    project: '@p8'
     position: 4
   pas27:
     step: @pstep2
-    project: @p8
+    project: '@p8'
     position: 1
   pas28:
     step: "@collectstep4"

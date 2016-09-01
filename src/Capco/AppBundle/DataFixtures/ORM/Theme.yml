@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\Theme:
             <p><text(1000)></p>
             <h3>un thème pas comme les autres</h3>
             <p><text(500)></p>
-        Author: @user4
+        Author: '@user4'
     theme2:
         title: Justice
         teaser: <sentence(3)>
@@ -22,8 +22,8 @@ Capco\AppBundle\Entity\Theme:
               <p><text(1000)></p>
               <h3>un thème important</h3>
               <p><text(500)></p>
-        Author: @user4
-        Media: @MediaProject1
+        Author: '@user4'
+        Media: '@MediaProject1'
     theme3:
         title: Transport
         teaser: <sentence(3)>
@@ -35,8 +35,8 @@ Capco\AppBundle\Entity\Theme:
               <p><text(100)></p>
               <h3>un troisième thème pratique</h3>
               <p><text(500)></p>
-        Author: @user4
-        Media: @MediaProject2
+        Author: '@user4'
+        Media: '@MediaProject2'
     theme4:
         title: Thème vide
         teaser: <sentence(3)>
@@ -45,4 +45,4 @@ Capco\AppBundle\Entity\Theme:
         status: 2
         body: |
               <p><text(500)></p>
-        Author: @user4
+        Author: '@user4'
