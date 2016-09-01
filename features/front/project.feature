@@ -109,18 +109,18 @@ Feature: Project
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "164 contributions"
+    Then I should see "157 contributions"
     And I hover over the "#contributions-counter-pill" element
     And I wait 1 seconds
     And I should see "32 propositions"
-    And I should see "100 arguments"
+    And I should see "93 arguments"
     And I should see "32 sources"
 
   Scenario: Project header should display correct number of participants
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "19 participants"
+    Then I should see "21 participants"
 
   Scenario: Can not have access to download if export is disabled
     Given I visited "consultation page" with:
