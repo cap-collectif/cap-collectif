@@ -43,12 +43,12 @@ echo "Cache and assets are ready after $(( SECONDS - start )) seconds..."
 VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod --no-interaction 2>&1`
 database=`echo "$VERSIONS" | grep -o "Unknown database" | wc -l`
 if [ "$database" != "0" ]; then
-    echo "Creating a new database with production data..."
+    echo "Creating a new database with base data..."
     su capco <<'EOF'
 php bin/console doctrine:database:create --env=prod --no-interaction
 php bin/console doctrine:schema:create --env=prod --no-interaction
 php bin/console doctrine:migrations:version --add --all --env=prod --no-interaction
-php bin/console capco:load-prod-data --force --env=prod --no-interaction
+php bin/console capco:load-base-data --force --env=prod --no-interaction
 EOF
 else
   migrations=`echo "$VERSIONS" | grep -o "not migrated" | wc -l`

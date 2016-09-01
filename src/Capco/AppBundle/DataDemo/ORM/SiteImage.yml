@@ -1,0 +1,31 @@
+Capco\AppBundle\Entity\SiteImage:
+    SiteImage1:
+        keyname: image.logo
+        category: settings.appearance
+        media: @Logo
+        isEnabled: true
+        position: 1
+    SiteImage2:
+        keyname: image.header
+        category: pages.homepage
+        media: @header
+        isEnabled: true
+        position: 2
+    SiteImage3:
+        keyname: image.picto
+        category: pages.homepage
+        media: @picto
+        isEnabled: true
+        position: 3
+    SiteImage4:
+        keyname: image.default_avatar
+        category: settings.appearance
+        media: null
+        isEnabled: false
+        position: 4
+    SiteImage5:
+        keyname: image.votes_bar
+        category: settings.appearance
+        media: @MediaVotesBar
+        isEnabled: true
+        position: 5

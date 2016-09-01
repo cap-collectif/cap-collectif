@@ -124,10 +124,8 @@ class ReinitCommand extends ContainerAwareCommand
 
     protected function loadFixtures(OutputInterface $output)
     {
-        $command = $this->getApplication()->find('hautelook_alice:doctrine:fixtures:load');
-        $input = new ArrayInput([
-          '-e' => 'dev',
-        ]);
+        $command = $this->getApplication()->find('doctrine:fixtures:load');
+        $input = new ArrayInput(['']);
         $input->setInteractive(false);
         $command->run($input, $output);
     }

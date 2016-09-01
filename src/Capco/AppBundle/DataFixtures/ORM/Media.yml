@@ -1,0 +1,145 @@
+Capco\MediaBundle\Entity\Media:
+
+    # projects
+    MediaProject1:
+        binaryContent: ../files/project-1.jpg
+        enabled:       true
+        name:          Titre du média
+        context:       '@MediaContext1'
+
+    MediaProject2:
+        binaryContent: ../files/project-2.jpg
+        enabled:       true
+        name:          Titre du média 2
+        context:       '@MediaContext1'
+
+    MediaProject3:
+        binaryContent: ../files/project-3.jpg
+        enabled:       true
+        name:          Titre du média 2
+        context:       '@MediaContext1'
+
+    MediaProjectImageVideo:
+        binaryContent: ../files/project-image-video.jpg
+        enabled:       true
+        name:          Titre du média 2
+        context:       '@MediaContext1'
+
+    # projects
+    MediaIdea1:
+        binaryContent: ../files/idea-1.jpg
+        enabled:       true
+        name:          Titre du média
+        context:       '@MediaContext1'
+
+    MediaIdea2:
+        binaryContent: ../files/idea-2.jpg
+        enabled:       true
+        name:          Titre du média 2
+        context:       '@MediaContext1'
+
+
+    # users
+    MediaUser1:
+        binaryContent: ../files/user/sfavot.jpg
+        enabled:       true
+        name:          Suzanne Favot
+        context:       '@MediaContext1'
+
+    MediaUser2:
+        binaryContent: ../files/user/lbrunet.jpg
+        enabled:       true
+        name:          Laurent Brunet
+        context:       '@MediaContext1'
+
+    MediaUser3:
+        binaryContent: ../files/user/xlacot.jpg
+        enabled:       true
+        name:          Xavier Lacot
+        context:       '@MediaContext1'
+
+    MediaUser4:
+        binaryContent: ../files/user/spyl.jpg
+        enabled:       true
+        name:          Spyl
+        context:       '@MediaContext1'
+
+    MediaUser5:
+        binaryContent: ../files/user/welcomattic.jpg
+        enabled:       true
+        name:          Welcomattic
+        context:       '@MediaContext1'
+
+    #SiteImages
+    Logo:
+        binaryContent: ../files/logo.png
+        enabled:       true
+        name:          Logo
+        context:       '@MediaContext1'
+
+    header:
+        binaryContent: ../files/header.jpg
+        enabled:       true
+        name:          Header
+        context:       '@MediaContext1'
+
+    picto:
+        binaryContent: ../files/picto.png
+        enabled:       true
+        name:          Picto
+        context:       '@MediaContext1'
+
+    # Social Network
+    MediaFlickr:
+        binaryContent: ../files/social/flickr.png
+        enabled:       true
+        name:          Flickr
+        context:       '@MediaContext1'
+
+    MediaFacebook:
+        binaryContent: ../files/social/facebook.png
+        enabled:       true
+        name:          Facebook
+        context:       '@MediaContext1'
+
+    MediaGooglePlus:
+        binaryContent: ../files/social/google_plus.png
+        enabled:       true
+        name:          Google
+        context:       '@MediaContext1'
+
+    MediaLinkedIn:
+        binaryContent: ../files/social/linkedIn.png
+        enabled:       true
+        name:          LinkedIn
+        context:       '@MediaContext1'
+
+    MediaRSS:
+        binaryContent: ../files/social/rss.png
+        enabled:       true
+        name:          RSS
+        context:       '@MediaContext1'
+
+    MediaTwitter:
+        binaryContent: ../files/social/twitter.png
+        enabled:       true
+        name:          Twitter
+        context:       '@MediaContext1'
+
+    MediaCapcoSite:
+        binaryContent: ../files/social/capco.png
+        enabled:       true
+        name:          Capco
+        context:       '@MediaContext1'
+
+    MediaAvatar:
+        binaryContent: ../files/default_avatar.jpg
+        enabled: true
+        name: Avatar
+        context: '@MediaContext1'
+
+    MediaVotesBar:
+        binaryContent: ../files/votes_bar_image.png
+        enabled: true
+        name: Image de la barre de votes
+        context: '@MediaContext1'
