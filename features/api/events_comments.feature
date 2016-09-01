@@ -117,7 +117,7 @@ Feature: Events comments
     When I send a POST request to "/api/events/1/comments" with json:
     """
     {
-      "parent": 232,
+      "parent": 210,
       "authorName": "Kéké",
       "authorEmail": "vivele94@gmail.com",
       "body": "Ma super réponse"
@@ -171,7 +171,7 @@ Feature: Events comments
     When I send a POST request to "/api/events/1/comments" with json:
     """
     {
-      "parent": 232,
+      "parent": 210,
       "body": "Oh oui j'ose :-P"
     }
     """
@@ -180,7 +180,7 @@ Feature: Events comments
   @security
   Scenario: logged in API client wants to add a comment by hacking
     Given I am logged in to api as user
-    When I send a POST request to "/api/events/1/comments" with json:
+    When I send a POST request to "/api/events/2/comments" with json:
     """
     {
       "parent": 1,
