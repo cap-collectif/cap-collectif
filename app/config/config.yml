@@ -129,7 +129,7 @@ stof_doctrine_extensions:
 
 hautelook_alice:
     locale: fr_FR
-    loading_limit: 10
+    loading_limit: 1
 
 fos_user:
     db_driver:      orm
