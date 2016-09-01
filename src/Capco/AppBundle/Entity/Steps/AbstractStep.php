@@ -415,7 +415,7 @@ abstract class AbstractStep
      */
     public function canContribute()
     {
-        return $this->getProject()->canContribute() && $this->isEnabled && $this->isOpen();
+        return $this->getProject() && $this->getProject()->canContribute() && $this->isEnabled && $this->isOpen();
     }
 
     public function isConsultationStep()

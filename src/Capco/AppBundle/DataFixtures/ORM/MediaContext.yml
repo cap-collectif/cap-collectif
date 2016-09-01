@@ -1,10 +1,10 @@
 Capco\ClassificationBundle\Entity\Context:
   MediaContext1:
     id: default
-    name: Default
+    name: default
     enabled: true
 
   MediaContext2:
     id: sources
-    name: Sources
+    name: sources
     enabled: true
