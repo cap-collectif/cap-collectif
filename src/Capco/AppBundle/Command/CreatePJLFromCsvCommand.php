@@ -238,9 +238,9 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->getApplication()
-             ->find('capco:load-base-data')
+             ->find('capco:load-prod-data')
              ->run(new ArrayInput([
-                    'command' => 'capco:load-base-data',
+                    'command' => 'capco:load-prod-data',
                     '--force' => true,
                 ]), $output);
 

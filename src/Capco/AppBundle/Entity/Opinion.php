@@ -671,13 +671,13 @@ class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, 
      */
     public function canDisplay()
     {
-        return $this->isEnabled && $this->step->canDisplay();
+        return $this->isEnabled && $this->step && $this->step->canDisplay();
     }
 
     /**
      * @return bool
      */
-    public function canContribute()
+    public function canContribute(): bool
     {
         return $this->isEnabled && !$this->isTrashed && $this->step->canContribute();
     }

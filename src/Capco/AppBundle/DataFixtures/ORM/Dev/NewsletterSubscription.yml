@@ -1,0 +1,4 @@
+Capco\AppBundle\Entity\NewsletterSubscription:
+    NewsSub{1..10}:
+        email: <email()>
+        isEnabled: <boolean()>

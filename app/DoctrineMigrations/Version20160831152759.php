@@ -20,7 +20,7 @@ class Version20160831152759 extends AbstractMigration
 
         $this->addSql('CREATE TABLE progress_step (id INT AUTO_INCREMENT NOT NULL, proposal_id INT DEFAULT NULL, title VARCHAR(255) NOT NULL, start_at DATETIME NOT NULL, end_at DATETIME DEFAULT NULL, INDEX IDX_4330D1F5F4792058 (proposal_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE progress_step ADD CONSTRAINT FK_4330D1F5F4792058 FOREIGN KEY (proposal_id) REFERENCES proposal (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE step ADD allowing_progess_steps TINYINT(1) DEFAULT 0');
+        $this->addSql('ALTER TABLE step ADD allowing_progess_steps TINYINT(1) DEFAULT NULL');
     }
 
     /**

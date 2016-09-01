@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\Steps\QuestionnaireStep:
+  questionnaireStep1:
+    title: questionnaire-step-1
+    body: <p><text(1000)></p>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
+    verification: 'sms'
