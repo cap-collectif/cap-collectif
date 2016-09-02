@@ -43,7 +43,7 @@ Feature: Arguments
         },
         @...@
       ],
-      "count": 2
+      "count": @integer@
     }
     """
 
@@ -87,7 +87,7 @@ Feature: Arguments
         },
         @...@
       ],
-      "count": 2
+      "count": @integer@
     }
     """
 

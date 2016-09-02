@@ -163,7 +163,7 @@ Feature: Synthesis
     And I send a GET request to "/api/syntheses/48/elements/count?type=all"
     Then the JSON response should match:
     """
-    {"count": 24}
+    {"count": @integer@}
     """
 
   @database
