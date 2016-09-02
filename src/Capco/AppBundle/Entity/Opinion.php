@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Model\IsPublishableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -31,6 +32,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  */
 class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, IsPublishableInterface
 {
+    use IdTrait;
     use TrashableTrait;
     use SluggableTitleTrait;
     use VotableOkNokMitigeTrait;
@@ -49,15 +51,6 @@ class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, 
         'votes' => 'opinion.sort.votes',
         'comments' => 'opinion.sort.comments',
     ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
 
     /**
      * @var bool
@@ -189,24 +182,6 @@ class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, 
     public function isIndexable()
     {
         return $this->getIsEnabled() && !$this->isExpired();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**

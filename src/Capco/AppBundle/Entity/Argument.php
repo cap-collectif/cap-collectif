@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
@@ -23,6 +24,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  */
 class Argument implements Contribution, VotableInterface, IsPublishableInterface
 {
+    use IdTrait;
     use ValidableTrait;
     use VotableOkTrait;
     use ExpirableTrait;
@@ -42,15 +44,6 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         self::TYPE_AGAINST => 'argument.show.type.against',
         self::TYPE_SIMPLE => 'argument.show.type.simple',
     ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -154,29 +147,11 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
 
     public function __toString()
     {
-        if ($this->id) {
+        if ($this->getId()) {
             return $this->getBodyExcerpt(50);
         }
 
         return 'New argument';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**

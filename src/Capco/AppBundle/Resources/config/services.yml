@@ -116,3 +116,4 @@ services:
   alice.processor.media:
     class: Capco\AppBundle\DataFixtures\Processor\MediaProcessor
     tags: [ { name: hautelook_alice.alice.processor } ]
+    arguments: ["@doctrine.orm.entity_manager"]

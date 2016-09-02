@@ -3,6 +3,7 @@ Capco\AppBundle\Entity\Opinion:
 # Project 1
 
     opinion1:
+        id: 1
         step: '@cstep1'
         title: Opinion 1
         body: |
@@ -13,6 +14,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: '@user1'
         OpinionType: '@opinionType8'
     opinion2:
+        id: 2
         step: '@cstep1'
         title: Opinion 2
         body: |
@@ -22,6 +24,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: '@user1'
         OpinionType: '@opinionType9'
     opinion3:
+        id: 3
         step: '@cstep1'
         title: Opinion 3
         body: |
@@ -32,6 +35,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: '@user5'
         OpinionType: '@opinionType10'
     opinion4:
+        id: 4
         step: '@cstep1'
         title: Opinion 4
         body: |
@@ -42,6 +46,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: '@user2'
         OpinionType: '@opinionType10'
     opinion5:
+        id: 5
         step: '@cstep1'
         title: Opinion sans sources
         body: |
@@ -52,6 +57,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: '@user3'
         OpinionType: '@opinionType9'
     opinion{6..40}:
+        id: <current()>
         step: '@cstep1'
         title: Opinion <current()>
         body: |
@@ -63,6 +69,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: '@user<numberBetween(1, 50)>'
         OpinionType: '@opinionType<numberBetween(9, 10)>'
     opinion{41..50}:
+        id: <current()>
         step: '@cstep1'
         title: Opinion <current()>
         body: |
@@ -75,6 +82,7 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: '@opinionType<numberBetween(9, 10)>'
 
     opinion51:
+        id: 51
         step: '@cstep2'
         title: Opinion 51
         body: |
@@ -86,6 +94,7 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: '@opinionType12'
 
     opinion52:
+        id: 52
         step: '@cstep2'
         title: Opinion 52
         body: Contenu de ma super opinion !
@@ -96,6 +105,7 @@ Capco\AppBundle\Entity\Opinion:
         updatedAt: <dateTimeBetween('+40 days', '+60 days')>
 
     opinion53:
+        id: 53
         step: '@cstep2'
         title: Opinion 53
         body: |
@@ -107,6 +117,7 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: '@opinionType12'
 
     opinion54:
+        id: 54
         step: '@cstep3'
         title: Opinion 54
         body: |
@@ -116,7 +127,9 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: '@user5'
         OpinionType: '@opinionType8'
+
     opinion55:
+        id: 55
         step: '@cstep3'
         title: Opinion 55
         body: |
@@ -127,6 +140,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: '@user4'
         OpinionType: '@opinionType9'
     opinion56:
+        id: 56
         step: '@cstep3'
         title: Opinion 56
         body: |
@@ -138,6 +152,7 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: '@opinionType10'
 
     opinion57:
+        id: 57
         step: '@cstep5'
         title: Article 1
         body: |
@@ -150,6 +165,7 @@ Capco\AppBundle\Entity\Opinion:
         Author: '@user2'
 
     opinion58:
+        id: 58
         step: '@cstep5'
         title: Article 3
         body: |
@@ -162,6 +178,7 @@ Capco\AppBundle\Entity\Opinion:
         position: 3
 
     opinion59:
+        id: 59
         step: '@cstep5'
         title: Article 2
         body: |
@@ -174,6 +191,7 @@ Capco\AppBundle\Entity\Opinion:
         position: 2
 
     opinion60:
+        id: 60
         step: '@cstep5'
         title: Article
         body: |
@@ -187,6 +205,7 @@ Capco\AppBundle\Entity\Opinion:
         answer: '@answer1'
 
     opinion61:
+        id: 61
         step: '@cstep5'
         title: Lié à article
         body: |
@@ -200,6 +219,7 @@ Capco\AppBundle\Entity\Opinion:
         position: 1
 
     opinion62:
+        id: 62
         step: '@cstep5'
         title: Très lié à article
         createdAt: <dateTimeBetween('+1 days', '+10 days')>

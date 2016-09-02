@@ -79,7 +79,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__.'/ProposalVote.yml',
             __DIR__.'/ProgressStep.yml',
             __DIR__.'/ProposalComment.yml',
-            
+
             __DIR__.'/Post.yml',
             __DIR__.'/PostComment.yml',
             __DIR__.'/Event.yml',

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * @ORM\Table(name="progress_step")
@@ -10,12 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgressStep
 {
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @ORM\Column(name="title", type="string", nullable=false)
@@ -41,18 +37,6 @@ class ProgressStep
     public function __construct()
     {
         $this->startAt = new \DateTime();
-    }
-
-    public function getId() : int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id) : self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getTitle() : string

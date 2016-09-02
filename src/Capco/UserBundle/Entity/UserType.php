@@ -2,17 +2,16 @@
 
 namespace Capco\UserBundle\Entity;
 
+use Capco\AppBundle\Traits\IdTrait;
+
 /**
  * UserType.
  */
 class UserType
 {
-    const FILTER_ALL = 'all';
+    use IdTrait;
 
-    /**
-     * @var int
-     */
-    private $id;
+    const FILTER_ALL = 'all';
 
     /**
      * @var string
@@ -36,11 +35,7 @@ class UserType
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getName();
-        } else {
-            return 'New user type';
-        }
+        return $this->getId() ? $this->getName() : 'New user type';
     }
 
     /**
@@ -49,16 +44,6 @@ class UserType
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
