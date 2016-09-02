@@ -71,7 +71,7 @@ class SelectionStep extends AbstractStep
 
 
     /**
-     * @ORM\Column(name="allowing_progess_steps", type="boolean", nullable=false)
+     * @ORM\Column(name="allowing_progess_steps", type="boolean")
      */
     private $allowingProgressSteps = false;
 
