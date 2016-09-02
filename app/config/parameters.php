@@ -63,3 +63,4 @@ setOverridableParameter($container, 'twilio_number', '+***REMOVED***', 'SYMFONY_
 setOverridableParameter($container, 'disable_mail_delivery', 'false', 'SYMFONY_DISABLE_MAIL_DELIVERY');
 
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
+$container->setParameter('google_maps_key', '***REMOVED***');

@@ -209,7 +209,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}"></script>
     <script type="text/javascript">
         $(window).on('load', function() {
             App.showMap('.map-canvas');

@@ -58,6 +58,7 @@ twig:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
     globals:
         facebook_app_id: %facebook_app_id%
+        google_maps_key: '%google_maps_key%'
 
 ekino_new_relic:
     enabled:          true
