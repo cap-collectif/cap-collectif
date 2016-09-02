@@ -129,8 +129,8 @@ stof_doctrine_extensions:
             tree: true
 
 hautelook_alice:
-    locale: fr_FR   # default
-    seed: 1         # default
+    locale: fr_FR
+    loading_limit: 1
 
 fos_user:
     db_driver:      orm

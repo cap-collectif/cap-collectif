@@ -1,0 +1,16 @@
+Capco\AppBundle\Entity\Category:
+    Category1:
+        title: Études
+        isEnabled: true
+    Category2:
+        title: Politique
+        isEnabled: true
+    Category3:
+        title: Commerces
+        isEnabled: true
+    Category4:
+        title: Financements
+        isEnabled: true
+    Category5:
+        title: Transports
+        isEnabled: true

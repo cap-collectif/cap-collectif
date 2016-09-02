@@ -112,3 +112,7 @@ services:
   capco.form.transformer.html_purifier:
     class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
     arguments: ["@exercise_html_purifier.default"]
+
+  alice.processor.media:
+    class: Capco\AppBundle\DataFixtures\Processor\MediaProcessor
+    tags: [ { name: hautelook_alice.alice.processor } ]

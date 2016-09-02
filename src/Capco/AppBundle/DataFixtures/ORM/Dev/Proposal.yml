@@ -1,0 +1,175 @@
+Capco\AppBundle\Entity\Proposal:
+  proposal1:
+    title: Ravalement de la façade de la bibliothèque municipale
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    author: '@user502'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district1'
+    status: '@status1'
+    answer: '@answer3'
+    createdAt: <(new \DateTime('2015-01-01'))>
+    answer: '@answer4'
+    likers: ['@user1', '@user2']
+    category: '@pCategory2'
+  proposal2:
+    title: Rénovation du gymnase
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    rating: 4
+    annotation: Lancer l'appel d'offre
+    isTrashed: false
+    author: '@user5'
+    proposalForm: '@proposalform1'
+    theme: '@theme3'
+    district: '@district2'
+    status: '@status2'
+    createdAt: <(new \DateTime('2015-02-01'))>
+    likers: ['@user504']
+    category: '@pCategory1'
+  proposal3:
+    title: Installation de bancs sur la place de la mairie
+    body: |
+       <p>On va en faire un beau gymnase, promis :)</p>
+    enabled: true
+    rating: 3
+    annotation: Vérifier les normes de sécurité
+    isTrashed: false
+    author: '@user502'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district4'
+    status: '@status1'
+    createdAt: <(new \DateTime('2015-03-01'))>
+    category: '@pCategory2'
+  proposal4:
+    title: Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    rating: 1
+    annotation: Renvoyer l'idée à l'église
+    isTrashed: false
+    author: '@user7'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district2'
+  proposal5:
+    title: Proposition à la corbeille
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: true
+    rating: 1
+    author: '@user7'
+    proposalForm: '@proposalform1'
+    theme: '@theme4'
+    district: '@district3'
+    status: '@status3'
+    trashedReason: "Pub"
+  proposal6:
+    title: Proposition dépubliée
+    body: |
+       <p><text(100)></p>
+    enabled: false
+    isTrashed: false
+    rating: 3
+    author: '@user4'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
+  proposal7:
+    title: Proposition très chère
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: '@user4'
+    proposalForm: '@proposalform3'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
+    estimation: 2999999
+  proposal8:
+    title: Proposition pas chère
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: '@user4'
+    proposalForm: '@proposalform3'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
+    estimation: 100
+  proposal9:
+    title: Proposition gratuite
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: '@user4'
+    proposalForm: '@proposalform3'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
+  proposal10:
+    title: Proposition pas encore votable
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: '@user4'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
+    estimation: 100
+  proposal11:
+    title: Proposition plus votable
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: '@user4'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
+    estimation: 100
+  proposal12:
+    title: Proposition plus votable
+    body: |
+         <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: '@user5'
+    proposalForm: '@proposalform4'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status7'
+    estimation: 100
+  proposal13:
+    title: Proposition plus votable
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    rating: 3
+    author: '@user5'
+    proposalForm: '@proposalform4'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
+    estimation: 100
