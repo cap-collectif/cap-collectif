@@ -72,13 +72,12 @@ class ReinitCommand extends ContainerAwareCommand
         if (!$input->getOption('no-toggles')) {
             $this->loadToggles($output);
         }
-        $this->recalculateCounters($output);
-        $this->recalculateProjectsCounters($output);
-        $this->recalculateRankings($output);
-        $this->updateSyntheses($output);
         if (!$input->getOption('no-es-populate')) {
             $this->populateElastica($output);
         }
+        $this->recalculateCounters($output);
+        $this->recalculateCounters($output);
+        $this->updateSyntheses($output);
 
         $output->writeln('Reinit completed');
 
@@ -95,14 +94,14 @@ class ReinitCommand extends ContainerAwareCommand
     protected function createDatabase(OutputInterface $output)
     {
         $command = $this->getApplication()->find('doctrine:database:create');
-        $input = new ArrayInput(['']);
+        $input = new ArrayInput([]);
         $command->run($input, $output);
     }
 
     protected function createSchema(OutputInterface $output)
     {
         $command = $this->getApplication()->find('doctrine:schema:create');
-        $input = new ArrayInput(['']);
+        $input = new ArrayInput([]);
         $command->run($input, $output);
     }
 
@@ -111,7 +110,6 @@ class ReinitCommand extends ContainerAwareCommand
         $command = $this->getApplication()->find('doctrine:database:drop');
         $input = new ArrayInput([
             '--force' => true,
-            '',
         ]);
         $command->run($input, $output);
         $connection = $this->getApplication()->getKernel()->getContainer()->get('doctrine')->getConnection();
@@ -137,7 +135,6 @@ class ReinitCommand extends ContainerAwareCommand
         $command = $this->getApplication()->find('capco:reset-feature-flags');
         $input = new ArrayInput([
             '--force' => true,
-            '',
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
@@ -146,23 +143,26 @@ class ReinitCommand extends ContainerAwareCommand
     protected function recalculateCounters(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:compute:counters');
-        $input = new ArrayInput(['']);
+        $input = new ArrayInput([
+          '--force' => true,
+        ]);
         $input->setInteractive(false);
         $command->run($input, $output);
-    }
 
-    protected function recalculateProjectsCounters(OutputInterface $output)
-    {
+        $command = $this->getApplication()->find('capco:compute:users-counters');
+        $input = new ArrayInput([
+          '--force' => true,
+        ]);
+        $input->setInteractive(false);
+        $command->run($input, $output);
+
         $command = $this->getApplication()->find('capco:compute:projects-counters');
-        $input = new ArrayInput(['']);
+        $input = new ArrayInput([]);
         $input->setInteractive(false);
         $command->run($input, $output);
-    }
 
-    protected function recalculateRankings(OutputInterface $output)
-    {
         $command = $this->getApplication()->find('capco:compute:rankings');
-        $input = new ArrayInput(['']);
+        $input = new ArrayInput([]);
         $input->setInteractive(false);
         $command->run($input, $output);
     }
@@ -170,17 +170,17 @@ class ReinitCommand extends ContainerAwareCommand
     protected function updateSyntheses(OutputInterface $output)
     {
         $command = $this->getApplication()->find('capco:syntheses:update');
-        $input = new ArrayInput(['']);
+        $input = new ArrayInput([]);
         $input->setInteractive(false);
         $command->run($input, $output);
 
         $command = $this->getApplication()->find('capco:syntheses:fix-urls');
-        $input = new ArrayInput(['']);
+        $input = new ArrayInput([]);
         $input->setInteractive(false);
         $command->run($input, $output);
 
         $command = $this->getApplication()->find('capco:syntheses:counters');
-        $input = new ArrayInput(['']);
+        $input = new ArrayInput([]);
         $input->setInteractive(false);
         $command->run($input, $output);
     }
@@ -191,7 +191,6 @@ class ReinitCommand extends ContainerAwareCommand
         $input = new ArrayInput([
             '--quiet' => true,
             '--no-debug' => true,
-            '',
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
@@ -202,7 +201,6 @@ class ReinitCommand extends ContainerAwareCommand
         $command = $this->getApplication()->find('doctrine:migration:migrate');
         $input = new ArrayInput([
             '--no-interaction' => true,
-            '',
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
@@ -214,7 +212,6 @@ class ReinitCommand extends ContainerAwareCommand
         $input = new ArrayInput([
             '--add' => true,
             '--all' => true,
-            '',
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
