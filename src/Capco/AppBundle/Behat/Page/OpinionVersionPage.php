@@ -39,7 +39,7 @@ class OpinionVersionPage extends Page
         'argument confirm delete button' => '#confirm-argument-delete',
         'argument votes counter' => '#arg-204 .opinion__votes-nb',
         'argument vote button' => '#arg-204 .argument__btn--vote',
-        'argument vote button in closed step' => '#arg-210 .argument__btn--vote',
+        'argument vote button in closed step' => '#arg-212 .argument__btn--vote',
         'argument report button' => '#arg-204 .argument__btn--report',
         // Sources
         'sources add' => '#source-form__add',
