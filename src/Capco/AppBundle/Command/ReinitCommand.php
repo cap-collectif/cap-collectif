@@ -72,10 +72,10 @@ class ReinitCommand extends ContainerAwareCommand
         if (!$input->getOption('no-toggles')) {
             $this->loadToggles($output);
         }
+        $this->recalculateCounters($output);
         if (!$input->getOption('no-es-populate')) {
             $this->populateElastica($output);
         }
-        $this->recalculateCounters($output);
         $this->recalculateCounters($output);
         $this->updateSyntheses($output);
 
