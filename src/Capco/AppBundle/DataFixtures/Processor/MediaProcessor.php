@@ -4,15 +4,9 @@ namespace Capco\AppBundle\DataFixtures\Processor;
 
 use Nelmio\Alice\ProcessorInterface;
 use Capco\MediaBundle\Entity\Media;
-use Capco\ClassificationBundle\Entity\Context;
 
 class MediaProcessor implements ProcessorInterface
 {
-    public function __construct($em)
-    {
-        $this->em = $em;
-    }
-
     public function preProcess($object)
     {
         if ($object instanceof Media) {
@@ -22,10 +16,6 @@ class MediaProcessor implements ProcessorInterface
             $object->setContext('default');
             return $object;
         }
-        if (!($object instanceof Context) && $object->getId()) {
-          $metadata = $this->em->getClassMetaData(get_class($object));
-          $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
-        }
     }
 
     /**
@@ -33,6 +23,6 @@ class MediaProcessor implements ProcessorInterface
      */
     public function postProcess($object)
     {
-      
+
     }
 }
