@@ -36,13 +36,13 @@ def lint():
 
 @task(environments=['local', 'testing'])
 def phpspec():
-    "Run Unit Tests"
+    "Run PHP Unit Tests"
     env.service_command('./bin/phpspec run --no-code-generation', 'application', env.www_app)
 
 
 @task(environments=['local', 'testing'])
 def mocha():
-    "Run Mocha Tests"
+    "Run JS Unit Tests"
     env.compose_run('npm test', 'builder', '.', no_deps=True)
 
 
