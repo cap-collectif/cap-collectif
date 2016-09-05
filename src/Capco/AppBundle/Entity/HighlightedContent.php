@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * HighlightedContent.
@@ -21,14 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class HighlightedContent
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @ORM\Column(name="position", type="integer")
@@ -38,16 +32,6 @@ abstract class HighlightedContent
     abstract public function getMedia();
     abstract public function getType();
     abstract public function getAssociatedFeatures();
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Get position.

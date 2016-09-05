@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * @ORM\Table(name="opinion_appendices")
@@ -12,14 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OpinionAppendix
 {
+    use IdTrait;
     use TimestampableTrait;
-
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @ORM\Column(name="body", type="text", nullable=true)
@@ -52,23 +47,7 @@ class OpinionAppendix
 
     public function __toString()
     {
-        if ($this->id) {
-            return (string) $this->id;
-        }
-
-        return 'New OpinionAppendix';
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
+        return (string) $this->getId() ?? 'New OpinionAppendix';
     }
 
     public function getBody()

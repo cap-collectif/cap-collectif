@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * @ORM\Table(name="appendix_type")
@@ -14,15 +15,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class AppendixType
 {
+    use IdTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
-
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @ORM\Column(name="help", type="text")
@@ -49,23 +44,7 @@ class AppendixType
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        }
-
-        return 'New AppendixType';
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
+        return $this->getId() ? $this->getTitle() : 'New AppendixType';
     }
 
     /**

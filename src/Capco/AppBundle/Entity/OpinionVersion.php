@@ -20,6 +20,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\HasDiffInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Opinion Version.
@@ -30,6 +31,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  */
 class OpinionVersion implements Contribution, VotableInterface, HasDiffInterface, IsPublishableInterface
 {
+    use IdTrait;
     use TrashableTrait;
     use EnableTrait;
     use SluggableTitleTrait;
@@ -39,15 +41,6 @@ class OpinionVersion implements Contribution, VotableInterface, HasDiffInterface
     use AnswerableTrait;
     use DiffableTrait;
     use ExpirableTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
 
     /**
      * @var string
@@ -148,18 +141,9 @@ class OpinionVersion implements Contribution, VotableInterface, HasDiffInterface
         return $this;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        }
-
-        return 'New opinion version';
+        return $this->getId() ? $this->getTitle() : 'New opinion version';
     }
 
     public function getBody()

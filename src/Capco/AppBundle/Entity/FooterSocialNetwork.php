@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * FooterSocialNetwork.
@@ -15,6 +16,7 @@ use Capco\AppBundle\Traits\PositionableTrait;
 class FooterSocialNetwork
 {
     use PositionableTrait;
+    use IdTrait;
 
     public static $socialIcons = [
         'link-1' => 'Site externe',
@@ -31,15 +33,6 @@ class FooterSocialNetwork
         'flickr' => 'Flickr',
         'tumblr' => 'Tumblr',
    ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -95,21 +88,7 @@ class FooterSocialNetwork
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        }
-
-        return 'New footer social network';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getTitle() : 'New footer social network';
     }
 
     /**

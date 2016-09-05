@@ -6,6 +6,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * District.
@@ -17,15 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class District
 {
     use TimestampableTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @var string
@@ -55,19 +48,7 @@ class District
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getName();
-        }
-
-        return 'New district';
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getName() : 'New district';
     }
 
     /**

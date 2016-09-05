@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Status.
@@ -21,6 +22,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 class Status
 {
+    use IdTrait;
     use TimestampableTrait;
     use PositionableTrait;
     use ColorableTrait;
@@ -50,15 +52,6 @@ class Status
         self::WARNING => 'statuses.labels.warning',
         self::DANGER => 'statuses.labels.danger',
     ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -98,19 +91,7 @@ class Status
 
     public function __toString()
     {
-        if ($this->getId()) {
-            return $this->getName();
-        }
-
-        return 'New status';
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getName() : 'New status';
     }
 
     /**

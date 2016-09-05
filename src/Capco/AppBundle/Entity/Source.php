@@ -13,6 +13,7 @@ use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Source.
@@ -23,6 +24,8 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  */
 class Source implements Contribution, VotableInterface, IsPublishableInterface
 {
+    use IdTrait;
+
     const TYPE_FOR = 1;
     const LINK = 0;
     const FILE = 1;
@@ -35,15 +38,6 @@ class Source implements Contribution, VotableInterface, IsPublishableInterface
     use ValidableTrait;
     use VotableOkTrait;
     use ExpirableTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -193,26 +187,6 @@ class Source implements Contribution, VotableInterface, IsPublishableInterface
     public function isIndexable()
     {
         return $this->getIsEnabled() && !$this->isExpired();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**

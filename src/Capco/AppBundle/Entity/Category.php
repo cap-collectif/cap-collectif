@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Category.
@@ -14,15 +15,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Category
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
+    use IdTrait;
+    
     /**
      * @var string
      *
@@ -71,21 +65,7 @@ class Category
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        }
-
-        return 'New category';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getTitle() : 'New category';
     }
 
     /**

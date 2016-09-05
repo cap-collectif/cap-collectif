@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Response.
@@ -19,16 +20,8 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 class Response
 {
+    use IdTrait;
     use TimestampableTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var Proposal
@@ -75,16 +68,6 @@ class Response
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

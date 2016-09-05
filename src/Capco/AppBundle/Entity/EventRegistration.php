@@ -7,7 +7,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-
+use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\PrivatableTrait;
+use Capco\AppBundle\Traits\AnonymousableTrait;
+use Capco\AppBundle\Traits\ConfirmableTrait;
 /**
  * Class EventRegistration.
  *
@@ -19,18 +22,10 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 class EventRegistration
 {
-    use \Capco\AppBundle\Traits\ConfirmableTrait;
-    use \Capco\AppBundle\Traits\AnonymousableTrait;
-    use \Capco\AppBundle\Traits\PrivatableTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use ConfirmableTrait;
+    use AnonymousableTrait;
+    use PrivatableTrait;
+    use IdTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Event", inversedBy="registrations", cascade={"persist"})
@@ -64,16 +59,6 @@ class EventRegistration
         $this->event = $event;
         $this->updatedAt = new \Datetime();
         $this->confirmed = false;
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

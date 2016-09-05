@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Category.
@@ -14,16 +15,8 @@ use Capco\AppBundle\Traits\TimestampableTrait;
  */
 class ProposalCategory
 {
+    use IdTrait;
     use TimestampableTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -58,21 +51,7 @@ class ProposalCategory
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getName();
-        }
-
-        return 'New category';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getName() : 'New category';
     }
 
     /**

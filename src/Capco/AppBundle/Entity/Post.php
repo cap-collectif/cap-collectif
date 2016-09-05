@@ -10,6 +10,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Model\IndexableInterface;
 use Doctrine\Common\Collections\Collection;
+use Capco\AppBundle\Traits\IdTrait;
+
 /**
  * Post.
  *
@@ -20,15 +22,7 @@ use Doctrine\Common\Collections\Collection;
 class Post implements CommentableInterface, IndexableInterface
 {
     use CommentableTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @var string
@@ -153,21 +147,7 @@ class Post implements CommentableInterface, IndexableInterface
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        }
-
-        return 'New post';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getTitle() : 'New post';
     }
 
     /**

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * SocialNetwork.
@@ -13,14 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class SocialNetwork
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @var string
@@ -76,11 +70,7 @@ class SocialNetwork
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        } else {
-            return 'New social network';
-        }
+        return $this->getId() ? $this->getTitle() : 'New social network';
     }
 
     /**
@@ -89,16 +79,6 @@ class SocialNetwork
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

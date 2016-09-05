@@ -15,6 +15,7 @@ use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Class Comment.
@@ -38,6 +39,7 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     use VotableOkTrait;
     use PinnableTrait;
     use ExpirableTrait;
+    use IdTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
@@ -48,15 +50,6 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     {
         return $this->getIsEnabled();
     }
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
 
     /**
      * @var string
@@ -167,21 +160,7 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getBodyExcerpt(50);
-        }
-
-        return 'New comment';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getBodyExcerpt(50) : 'New comment';
     }
 
     /**

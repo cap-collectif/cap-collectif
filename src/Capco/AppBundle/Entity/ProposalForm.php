@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * ProposalForm.
@@ -18,17 +19,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class ProposalForm
 {
+    use IdTrait;
     use TimestampableTrait;
     use SluggableTitleTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -135,21 +128,7 @@ class ProposalForm
 
     public function __toString()
     {
-        if ($this->getId()) {
-            return $this->getTitle();
-        }
-
-        return 'New ProposalForm';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getTitle() : 'New ProposalForm';
     }
 
     /**

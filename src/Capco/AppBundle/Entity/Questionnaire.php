@@ -9,6 +9,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Questionnaire.
@@ -18,17 +19,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Questionnaire
 {
+    use IdTrait;
     use TimestampableTrait;
     use SluggableTitleTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -106,21 +99,7 @@ class Questionnaire
 
     public function __toString()
     {
-        if ($this->getId()) {
-            return $this->getTitle();
-        }
-
-        return 'New Questionnaire';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getTitle() : 'New Questionnaire';
     }
 
     /**

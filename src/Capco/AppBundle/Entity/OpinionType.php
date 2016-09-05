@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * OpinionType.
@@ -14,15 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OpinionType
 {
-    public static $colorsType = [
-        'red' => 'opinion_type.colors.red',
-        'green' => 'opinion_type.colors.green',
-        'blue' => 'opinion_type.colors.blue',
-        'orange' => 'opinion_type.colors.orange',
-        'bluedark' => 'opinion_type.colors.bluedark',
-        'white' => 'opinion_type.colors.white',
-        'default' => 'opinion_type.colors.default',
-    ];
+    use IdTrait;
 
     const VOTE_WIDGET_DISABLED = 0;
     const VOTE_WIDGET_OK = 1;
@@ -43,15 +36,6 @@ class OpinionType
         self::COMMENT_SYSTEM_OK => 'opinion_type.comment_system.ok',
         self::COMMENT_SYSTEM_BOTH => 'opinion_type.comment_system.both',
     ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -208,21 +192,7 @@ class OpinionType
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        }
-
-        return 'New opinion type';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getTitle() : 'New opinion type';
     }
 
     /**

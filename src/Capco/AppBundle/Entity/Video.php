@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Idea.
@@ -15,19 +16,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Video
 {
+    use IdTrait;
+
     public static $colorButtonPlay = [
         'white' => 'video.colors.white',
         'black' => 'video.colors.black',
     ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -119,21 +113,7 @@ class Video
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        } else {
-            return 'New video';
-        }
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getTitle() : 'New video';
     }
 
     /**

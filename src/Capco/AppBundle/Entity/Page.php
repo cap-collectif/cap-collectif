@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Page.
@@ -14,14 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Page
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @var string
@@ -81,23 +75,9 @@ class Page
      */
     private $media;
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        } else {
-            return 'New page';
-        }
+        return $this->getId() ? $this->getTitle() : 'New page';
     }
 
     /**

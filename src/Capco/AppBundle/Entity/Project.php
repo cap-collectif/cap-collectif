@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Model\IndexableInterface;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Project.
@@ -19,6 +20,8 @@ use Capco\AppBundle\Model\IndexableInterface;
  */
 class Project implements IndexableInterface
 {
+    use IdTrait;
+
     const FILTER_ALL = 'all';
 
     const SORT_ORDER_PUBLISHED_AT = 0;
@@ -56,15 +59,6 @@ class Project implements IndexableInterface
     {
         return $this->getIsEnabled();
     }
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -226,21 +220,7 @@ class Project implements IndexableInterface
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        } else {
-            return 'New project';
-        }
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getTitle() : 'New project';
     }
 
     /**

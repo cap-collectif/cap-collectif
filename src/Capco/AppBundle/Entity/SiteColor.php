@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * SiteImage.
@@ -13,14 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class SiteColor
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @var string
@@ -80,21 +74,7 @@ class SiteColor
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getKeyname();
-        }
-
-        return 'New color';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getKeyname() : 'New color';
     }
 
     /**

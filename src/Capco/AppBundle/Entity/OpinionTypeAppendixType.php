@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * @ORM\Table(name="opinion_type_appendix_type")
@@ -13,14 +14,8 @@ use Capco\AppBundle\Traits\PositionableTrait;
  */
 class OpinionTypeAppendixType
 {
+    use IdTrait;
     use PositionableTrait;
-
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @Gedmo\SortableGroup
@@ -38,23 +33,7 @@ class OpinionTypeAppendixType
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->id;
-        }
-
-        return 'New OpinionTypeAppendixType';
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
+        return $this->getId() ?? 'New OpinionTypeAppendixType';
     }
 
     public function getOpinionType()

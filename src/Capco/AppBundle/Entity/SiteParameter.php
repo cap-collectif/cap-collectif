@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * SiteParameter.
@@ -13,6 +14,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class SiteParameter
 {
+    use IdTrait;
+
     const TYPE_SIMPLE_TEXT = 0;
     const TYPE_RICH_TEXT = 1;
     const TYPE_INTEGER = 2;
@@ -34,15 +37,6 @@ class SiteParameter
         'tel' => self::TYPE_TEL_NB,
         'boolean' => self::TYPE_BOOLEAN,
     ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -100,11 +94,7 @@ class SiteParameter
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getKeyname();
-        }
-
-        return 'New parameter';
+        return $this->getId() ? $this->getKeyname() : 'New parameter';
     }
 
     /**
@@ -114,16 +104,6 @@ class SiteParameter
     {
         $this->updatedAt = new \Datetime();
         $this->type = self::TYPE_SIMPLE_TEXT;
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

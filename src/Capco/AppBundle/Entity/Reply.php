@@ -13,6 +13,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Reply.
@@ -23,19 +24,11 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  */
 class Reply implements Contribution
 {
+    use IdTrait;
     use TimestampableTrait;
     use EnableTrait;
     use PrivatableTrait;
     use ExpirableTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -77,16 +70,6 @@ class Reply implements Contribution
     public function isIndexable()
     {
         return false;
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

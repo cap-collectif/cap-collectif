@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Model\IndexableInterface;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Theme.
@@ -16,6 +17,8 @@ use Capco\AppBundle\Model\IndexableInterface;
  */
 class Theme implements IndexableInterface
 {
+    use IdTrait;
+
     const STATUS_CLOSED = 0;
     const STATUS_OPENED = 1;
     const STATUS_FUTURE = 2;
@@ -33,14 +36,6 @@ class Theme implements IndexableInterface
         self::STATUS_OPENED => 'theme.show.status.opened',
         self::STATUS_FUTURE => 'theme.show.status.future',
     ];
-
-    /**
-     * @var int
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -159,26 +154,12 @@ class Theme implements IndexableInterface
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        }
-
-        return 'New theme';
+        return $this->getId() ? $this->getTitle() : 'New theme';
     }
 
     public function isIndexable()
     {
         return $this->getIsEnabled();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

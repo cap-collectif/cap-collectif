@@ -22,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Proposal.
@@ -37,6 +38,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  */
 class Proposal implements Contribution, CommentableInterface, VotableInterface
 {
+    use IdTrait;
     use CommentableTrait;
     use TimestampableTrait;
     use VotableOkTrait;
@@ -48,15 +50,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     use ExpirableTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -194,19 +187,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
 
     public function __toString()
     {
-        if ($this->getId()) {
-            return $this->getTitle();
-        }
-
-        return 'New proposal';
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? $this->getTitle() : 'New proposal';
     }
 
     /**

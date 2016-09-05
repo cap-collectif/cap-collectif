@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Section.
@@ -15,6 +16,8 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
  */
 class Section
 {
+    use IdTrait;
+
     public static $fieldsForType = [
         'highlight' => [
             'title' => true,
@@ -89,15 +92,6 @@ class Section
             'nbObjects' => false,
         ],
     ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -186,27 +180,7 @@ class Section
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        }
-
-        return 'New section';
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
+        return $this->getId() ? $this->getTitle() : 'New section';
     }
 
     /**

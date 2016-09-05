@@ -18,6 +18,7 @@ use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Idea.
@@ -33,6 +34,7 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     use VotableOkTrait;
     use TimestampableTrait;
     use ExpirableTrait;
+    use IdTrait;
 
     public static $sortCriterias = [
         'last' => 'idea.sort.last',
@@ -40,15 +42,6 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
         'popular' => 'idea.sort.popular',
         'comments' => 'idea.sort.comments',
     ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -176,26 +169,12 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        }
-
-        return 'New idea';
+        return $this->getId() ? $this->getTitle() : 'New idea';
     }
 
     public function isIndexable()
     {
         return $this->getIsEnabled() && !$this->isExpired();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

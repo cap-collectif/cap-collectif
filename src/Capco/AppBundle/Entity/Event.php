@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Model\IndexableInterface;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Event.
@@ -24,15 +25,7 @@ class Event implements CommentableInterface, IndexableInterface
 {
     use DateHelperTrait;
     use CommentableTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use IdTrait;
 
     /**
      * @var string
@@ -201,26 +194,12 @@ class Event implements CommentableInterface, IndexableInterface
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        } else {
-            return 'New event';
-        }
+        return $this->getId() ? $this->getTitle() : 'New event';
     }
 
     public function isIndexable()
     {
         return $this->getIsEnabled();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

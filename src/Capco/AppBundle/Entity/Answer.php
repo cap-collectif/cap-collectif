@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Answer.
@@ -18,15 +19,7 @@ class Answer
 {
     use TimestampableTrait;
     use HasAuthorTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use IdTrait;
 
     /**
      * @var \DateTime
@@ -59,24 +52,6 @@ class Answer
         }
 
         return 'Answer';
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**

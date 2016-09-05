@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Class AbstractVote.
@@ -30,20 +31,12 @@ use Capco\AppBundle\Traits\ExpirableTrait;
 abstract class AbstractVote implements Contribution, HasAuthorInterface
 {
     use ExpirableTrait;
+    use IdTrait;
 
     public function isIndexable()
     {
         return !$this->isExpired();
     }
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var \DateTime
@@ -71,16 +64,6 @@ abstract class AbstractVote implements Contribution, HasAuthorInterface
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

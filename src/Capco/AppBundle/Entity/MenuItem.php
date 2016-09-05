@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * MenuItem.
@@ -13,6 +14,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class MenuItem
 {
+    use IdTrait;
+
     const TYPE_HEADER = 1;
     const TYPE_FOOTER = 2;
 
@@ -20,15 +23,6 @@ class MenuItem
         self::TYPE_HEADER => 'menu.type.header',
         self::TYPE_FOOTER => 'menu.type.footer',
     ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -118,11 +112,7 @@ class MenuItem
 
     public function __toString()
     {
-        if ($this->id) {
-            return $this->getTitle();
-        } else {
-            return 'New menu item';
-        }
+        return $this->getId() ? $this->getTitle() : 'New menu item';
     }
 
     /**
@@ -132,16 +122,6 @@ class MenuItem
     {
         $this->updatedAt = new \Datetime();
         $this->associatedFeatures = null;
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

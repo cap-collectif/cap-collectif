@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Reporting.
@@ -15,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Reporting
 {
+    use IdTrait;
+
     const SIGNALEMENT_SEX = 0;
     const SIGNALEMENT_OFF = 1;
     const SIGNALEMENT_SPAM = 2;
@@ -28,15 +31,6 @@ class Reporting
         self::SIGNALEMENT_OFF_TOPIC => 'reporting.status.off_topic',
         self::SIGNALEMENT_SEX => 'reporting.status.sexual',
     ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var int
@@ -146,21 +140,7 @@ class Reporting
 
     public function __toString()
     {
-        if ($this->id) {
-            return 'Signalement de '.$this->getRelatedObject();
-        }
-
-        return 'Signalement';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->getId() ? 'Signalement de '.$this->getRelatedObject() : 'Signalement';
     }
 
     /**

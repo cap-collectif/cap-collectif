@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * QuestionChoice.
@@ -16,17 +17,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class QuestionChoice
 {
+    use IdTrait;
     use SluggableTitleTrait;
     use PositionableTrait;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -53,21 +46,7 @@ class QuestionChoice
 
     public function __toString()
     {
-        if ($this->title) {
-            return $this->title;
-        }
-
-        return 'New QuestionChoice';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->title ?? 'New QuestionChoice';
     }
 
     /**

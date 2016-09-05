@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\AppBundle\Model\HasDiffInterface;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * @ORM\Table(name="opinion_modals")
@@ -14,16 +15,10 @@ use Capco\AppBundle\Model\HasDiffInterface;
  */
 class OpinionModal implements HasDiffInterface
 {
+    use IdTrait;
     use TimestampableTrait;
     use SluggableTitleTrait;
     use DiffableTrait;
-
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @ORM\Column(name="modal_key", type="text", nullable=false)
@@ -45,18 +40,6 @@ class OpinionModal implements HasDiffInterface
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $opinion;
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     public function getKey()
     {
