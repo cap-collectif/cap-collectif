@@ -562,7 +562,7 @@ class Post implements CommentableInterface, IndexableInterface
 
     public function getAbstractOrBeginningOfTheText()
     {
-        return $this->abstract ?? substr(strip_tags($this->body), 0, 300).'[...]';
+        return $this->abstract ?? substr(strip_tags($this->body), 0, 300).'[&hellip;]';
     }
 
     // ************************** Lifecycle **************************************

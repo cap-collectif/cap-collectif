@@ -147,11 +147,7 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
 
     public function __toString()
     {
-        if ($this->getId()) {
-            return $this->getBodyExcerpt(50);
-        }
-
-        return 'New argument';
+        return $this->getId() ? $this->getBodyExcerpt(50) : 'New argument';
     }
 
     /**
