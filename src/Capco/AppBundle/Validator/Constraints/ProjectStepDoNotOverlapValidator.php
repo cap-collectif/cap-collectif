@@ -4,33 +4,19 @@ namespace Capco\AppBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class ProjectStepDoNotOverlapValidator extends ConstraintValidator
 {
-    private function stepsDoNotOverlap($steps)
+    private function stepsDoNotOverlap(Collection $steps)
     {
-        foreach ($steps as $ps) {
-            $step = $ps->getStep();
-
-            if ($step) {
-                $startAt = $step->getStartAt();
-                $endAt = $step->getEndAt();
-
-                foreach ($steps as $value) {
-                    $currentStep = $value->getStep();
-
-                    if ($currentStep) {
-                        $currentStartAt = $currentStep->getStartAt();
-                        $currentEndAt = $currentStep->getEndAt();
-
-                        if ($step != $currentStep) {
-                            if (($currentEndAt < $startAt) || ($currentStartAt > $endAt)) {
-                                continue;
-                            } else {
-                                return false;
-                            }
-                        }
-                    }
+        foreach ($steps as $step) {
+            $startAt = $step->getStartAt();
+            $endAt = $step->getEndAt();
+            foreach ($steps as $currentStep) {
+                if ($step != $currentStep && $currentStep->getEndAt() >= $startAt && $currentStep->getStartAt() <= $endAt) {
+                    return false;
                 }
             }
         }
@@ -38,23 +24,18 @@ class ProjectStepDoNotOverlapValidator extends ConstraintValidator
         return true;
     }
 
-    /**
-     * @param $steps
-     * @param Constraint $constraint
-     *
-     * @return bool
-     */
-    public function validate($steps, Constraint $constraint)
+    public function validate($value, Constraint $constraint)
     {
+        // Convert a ProjectAbstractStep collection to an AbstractStep collection with phpspec fallback
+        // https://github.com/phpspec/phpspec/issues/991
+        // TODO: Fixme by removing ProjectAbstractStep and use an AbstractStep collection instead
+        $steps = $value instanceof Collection ? $value->map(function($pas) { return $pas->getStep(); }) : new ArrayCollection($value);
+
         if ($steps && count($steps) > 1 && !$this->stepsDoNotOverlap($steps)) {
             $this->context
                 ->buildViolation($constraint->message)
                 ->addViolation()
             ;
-
-            return false;
         }
-
-        return true;
     }
 }

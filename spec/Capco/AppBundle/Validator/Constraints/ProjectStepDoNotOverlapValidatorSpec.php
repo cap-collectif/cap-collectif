@@ -23,16 +23,13 @@ class ProjectStepDoNotOverlapValidatorSpec extends ObjectBehavior
     ) {
         $context->buildViolation($constraint->message)->shouldNotBeCalled();
         $this->initialize($context);
-        $steps = new ArrayCollection([]);
-        $this->validate($steps, $constraint)->shouldReturn(true);
+        $this->validate([], $constraint);
     }
 
     public function it_should_not_validate_if_steps_overlap(
         ConstraintViolationBuilderInterface $builder,
         ProjectStepDoNotOverlapConstraint $constraint,
         ExecutionContextInterface $context,
-        ProjectAbstractStep $projectAbstractStepA,
-        ProjectAbstractStep $projectAbstractStepB,
         AbstractStep $collectStep,
         AbstractStep $selectionStep
     ) {
@@ -42,26 +39,20 @@ class ProjectStepDoNotOverlapValidatorSpec extends ObjectBehavior
         $selectionStep->getStartAt()->willReturn((new \DateTime())->modify('+1 day'));
         $selectionStep->getEndAt()->willReturn((new \DateTime())->modify('+1 weeks'));
 
-        $projectAbstractStepA->getStep()->willReturn($collectStep);
-        $projectAbstractStepB->getStep()->willReturn($selectionStep);
-
         $context->buildViolation($constraint->message)->willReturn($builder)->shouldBeCalled();
         $this->initialize($context);
         $this->validate(
             [
-              $projectAbstractStepA,
-              $projectAbstractStepB,
+              $collectStep,
+              $selectionStep,
             ],
            $constraint
-        )->shouldReturn(false);
+        );
     }
 
     public function it_should_validate_if_steps_do_not_overlap(
         ProjectStepDoNotOverlapConstraint $constraint,
         ExecutionContextInterface $context,
-        ProjectAbstractStep $projectAbstractStepA,
-        ProjectAbstractStep $projectAbstractStepB,
-        ProjectAbstractStep $projectAbstractStepC,
         AbstractStep $collectStep,
         AbstractStep $selectionStep,
         AbstractStep $selectionStep2
@@ -75,19 +66,15 @@ class ProjectStepDoNotOverlapValidatorSpec extends ObjectBehavior
         $selectionStep2->getStartAt()->willReturn((new \DateTime())->modify('-1 day'));
         $selectionStep2->getEndAt()->willReturn((new \DateTime())->modify('-1 second'));
 
-        $projectAbstractStepA->getStep()->willReturn($collectStep);
-        $projectAbstractStepB->getStep()->willReturn($selectionStep);
-        $projectAbstractStepC->getStep()->willReturn($selectionStep2);
-
         $context->buildViolation($constraint->message)->shouldNotBeCalled();
         $this->initialize($context);
         $this->validate(
             [
-                $projectAbstractStepA,
-                $projectAbstractStepB,
-                $projectAbstractStepC,
+                $collectStep,
+                $selectionStep,
+                $selectionStep2,
             ],
            $constraint
-        )->shouldReturn(true);
+        );
     }
 }
