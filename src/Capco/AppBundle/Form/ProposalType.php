@@ -22,10 +22,6 @@ class ProposalType extends AbstractType
         $this->questionRepository = $questionRepository;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $form = $options['proposalForm'];
@@ -34,36 +30,20 @@ class ProposalType extends AbstractType
         }
 
         $builder
-            ->add('title', 'purified_text', [
-                'required' => true,
-            ])
-            ->add('body', 'purified_textarea', [
-                'required' => true,
-            ])
+            ->add('title', 'purified_text', ['required' => true])
+            ->add('body', 'purified_textarea', ['required' => true])
         ;
 
         if ($this->toggleManager->isActive('themes') && $form->isUsingThemes()) {
-            $builder
-                ->add('theme', null, [
-                    'required' => $form->isThemeMandatory(),
-                ])
-            ;
+            $builder->add('theme');
         }
 
         if ($this->toggleManager->isActive('districts') && $form->isUsingDistrict()) {
-            $builder
-                ->add('district', null, [
-                    'required' => $form->isDistrictMandatory(),
-                ])
-            ;
+            $builder->add('district');
         }
 
-        if ($form->isUsingCategories() && count($form->getCategories()) > 0) {
-            $builder
-                ->add('category', null, [
-                    'required' => $form->isCategoryMandatory(),
-                ])
-            ;
+        if ($form->isUsingCategories() && $form->getCategories()->count() > 0) {
+            $builder->add('category');
         }
 
         $builder
@@ -77,9 +57,6 @@ class ProposalType extends AbstractType
         ;
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([

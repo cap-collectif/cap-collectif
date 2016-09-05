@@ -321,12 +321,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this->district;
     }
 
-    /**
-     * @param District $district
-     *
-     * @return $this
-     */
-    public function setDistrict(District $district)
+    public function setDistrict(District $district): self
     {
         $this->district = $district;
         $district->addProposal($this);
@@ -334,62 +329,36 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getAuthor()
     {
         return $this->author;
     }
 
-    /**
-     * @param User $author
-     *
-     * @return $this
-     */
-    public function setAuthor(User $author)
+    public function setAuthor(User $author): self
     {
         $this->author = $author;
 
         return $this;
     }
 
-    /**
-     * @return ProposalForm
-     */
     public function getProposalForm()
     {
         return $this->proposalForm;
     }
 
-    /**
-     * @param ProposalForm $proposalForm
-     *
-     * @return $this
-     */
-    public function setProposalForm(ProposalForm $proposalForm)
+    public function setProposalForm(ProposalForm $proposalForm): self
     {
         $this->proposalForm = $proposalForm;
 
         return $this;
     }
 
-    /**
-     * @return null|CollectStep
-     */
     public function getStep()
     {
         return $this->proposalForm ? $this->proposalForm->getStep() : null;
     }
 
-    /**
-     * Add response.
-     *
-     * @param Response $response
-     *
-     * @return Proposal
-     */
-    public function addResponse(Response $response)
+    public function addResponse(Response $response): self
     {
         if (!$this->responses->contains($response)) {
             $this->responses[] = $response;
@@ -399,30 +368,19 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this;
     }
 
-    /**
-     * Remove response.
-     *
-     * @param Response $response
-     */
-    public function removeResponse(Response $response)
+    public function removeResponse(Response $response): self
     {
         $this->responses->removeElement($response);
+
+        return $this;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getResponses()
+    public function getResponses(): Collection
     {
         return $this->responses;
     }
 
-    /**
-     * @param ArrayCollection $responses
-     *
-     * @return $this
-     */
-    public function setResponses(Collection $responses)
+    public function setResponses(Collection $responses): self
     {
         $this->responses = $responses;
         foreach ($responses as $response) {
@@ -432,20 +390,12 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getReports()
+    public function getReports(): Collection
     {
         return $this->reports;
     }
 
-    /**
-     * @param Reporting $report
-     *
-     * @return $this
-     */
-    public function addReport(Reporting $report)
+    public function addReport(Reporting $report): self
     {
         if (!$this->reports->contains($report)) {
             $this->reports->add($report);
@@ -454,19 +404,14 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this;
     }
 
-    /**
-     * @param Reporting $report
-     *
-     * @return $this
-     */
-    public function removeReport(Reporting $report)
+    public function removeReport(Reporting $report): self
     {
         $this->reports->removeElement($report);
 
         return $this;
     }
 
-    public function addSelection(Selection $selection)
+    public function addSelection(Selection $selection): self
     {
         if (!$this->selections->contains($selection)) {
             $this->selections[] = $selection;
@@ -476,12 +421,13 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this;
     }
 
-    public function removeSelection(Selection $selection)
+    public function removeSelection(Selection $selection): self
     {
         $this->selections->removeElement($selection);
+        return $this;
     }
 
-    public function getSelections()
+    public function getSelections(): Collection
     {
         return $this->selections;
     }
