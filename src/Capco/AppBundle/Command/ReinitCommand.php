@@ -142,29 +142,17 @@ class ReinitCommand extends ContainerAwareCommand
 
     protected function recalculateCounters(OutputInterface $output)
     {
-        $command = $this->getApplication()->find('capco:compute:counters');
-        $input = new ArrayInput([
-          '--force' => true,
-        ]);
-        $input->setInteractive(false);
-        $command->run($input, $output);
-
-        $command = $this->getApplication()->find('capco:compute:users-counters');
-        $input = new ArrayInput([
-          '--force' => true,
-        ]);
-        $input->setInteractive(false);
-        $command->run($input, $output);
-
-        $command = $this->getApplication()->find('capco:compute:projects-counters');
-        $input = new ArrayInput([]);
-        $input->setInteractive(false);
-        $command->run($input, $output);
-
-        $command = $this->getApplication()->find('capco:compute:rankings');
-        $input = new ArrayInput([]);
-        $input->setInteractive(false);
-        $command->run($input, $output);
+        $commands = [
+          'capco:compute:users-counters' => ['--force' => true],
+          'capco:compute:counters' => ['--force' => true],
+          'capco:compute:projects-counters' => [],
+          'capco:compute:rankings' => [],
+        ];
+        foreach ($commands as $key => $value) {
+          $input = new ArrayInput($value);
+          $input->setInteractive(false);
+          $this->getApplication()->find($key)->run($input, $output);
+        }
     }
 
     protected function updateSyntheses(OutputInterface $output)
