@@ -149,9 +149,9 @@ class ReinitCommand extends ContainerAwareCommand
           'capco:compute:rankings' => [],
         ];
         foreach ($commands as $key => $value) {
-          $input = new ArrayInput($value);
-          $input->setInteractive(false);
-          $this->getApplication()->find($key)->run($input, $output);
+            $input = new ArrayInput($value);
+            $input->setInteractive(false);
+            $this->getApplication()->find($key)->run($input, $output);
         }
     }
 
