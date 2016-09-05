@@ -21,27 +21,27 @@ class HasDistrictIfMandatoryValidatorSpec extends ObjectBehavior
 
      public function it_should_validate_if_proposal_hasdistrict(
          Manager $manager,
+         ExecutionContextInterface $context,
          HasDistrictIfMandatory $constraint,
          Proposal $proposal,
          District $district
      ) {
+         $proposal->getDistrict()->willReturn($district)->shouldBeCalled();
+
+         $context->buildViolation($constraint->message)->shouldNotBeCalled();
          $this->beConstructedWith($manager);
-
-        $proposal->getDistrict()->willReturn($district)->shouldBeCalled();
-
-        $this->validate($proposal, $constraint)->shouldReturn(true);
-
+         $this->initialize($context);
+         $this->validate($proposal, $constraint);
      }
 
     public function it_should_not_validate_if_proposal_hasnodistrict_and_districtismandatory_and_feature_isactive(
         Manager $manager,
         HasDistrictIfMandatory $constraint,
-         ExecutionContextInterface $context,
+        ExecutionContextInterface $context,
         Proposal $proposal,
-         ProposalForm $proposalForm,
+        ProposalForm $proposalForm,
         ConstraintViolationBuilderInterface $builder
     ) {
-        $this->beConstructedWith($manager);
 
         $proposalForm->isUsingDistrict()->willReturn(true)->shouldBeCalled();
         $proposalForm->isDistrictMandatory()->willReturn(true)->shouldBeCalled();
@@ -49,11 +49,11 @@ class HasDistrictIfMandatoryValidatorSpec extends ObjectBehavior
         $proposal->getDistrict()->willReturn(null)->shouldBeCalled();
         $manager->isActive('districts')->willReturn(true)->shouldBeCalled();
 
+        $this->beConstructedWith($manager);
         $this->initialize($context);
         $builder->addViolation()->shouldBeCalled();
         $context->buildViolation($constraint->message)->willReturn($builder)->shouldBeCalled();
 
-        $this->validate($proposal, $constraint)->shouldReturn(false);
-
+        $this->validate($proposal, $constraint);
     }
 }

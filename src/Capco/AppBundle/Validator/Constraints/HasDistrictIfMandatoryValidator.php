@@ -18,7 +18,7 @@ class HasDistrictIfMandatoryValidator extends ConstraintValidator
     public function validate($object, Constraint $constraint)
     {
         if ($object->getDistrict()) {
-            return true;
+            return;
         }
 
         $form = $object->getProposalForm();
@@ -28,10 +28,6 @@ class HasDistrictIfMandatoryValidator extends ConstraintValidator
                 ->buildViolation($constraint->message)
                 ->addViolation()
             ;
-
-            return false;
         }
-
-        return true;
     }
 }
