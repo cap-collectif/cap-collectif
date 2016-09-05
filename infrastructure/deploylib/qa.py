@@ -22,7 +22,7 @@ def check_cs():
     "Check code style"
     env.compose_run('npm run checkcs', 'builder', '.', no_deps=True)
     env.compose_run('pep8 infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
-    env.service_command('php bin/console lint:twig app/', 'application', env.www_app)
+    env.service_command('php bin/console lint:twig app src', 'application', env.www_app)
     env.compose_run('php-cs-fixer fix --level=symfony --dry-run --diff src', 'builder', '.', no_deps=True)
 
 
