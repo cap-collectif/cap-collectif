@@ -306,8 +306,6 @@ class ProposalsController extends FOSRestController
         ];
     }
 
-
-
     /**
      * @Get("/proposals/{proposal}/posts")
      * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
@@ -326,9 +324,6 @@ class ProposalsController extends FOSRestController
             'posts' => $posts,
         ];
     }
-
-
-
 
     /**
      * Update a proposal.

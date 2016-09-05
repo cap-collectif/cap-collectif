@@ -14,6 +14,7 @@ class MediaProcessor implements ProcessorInterface
             $object->setEnabled(true);
             $object->setProviderName('sonata.media.provider.image');
             $object->setContext('default');
+
             return $object;
         }
     }
@@ -23,6 +24,5 @@ class MediaProcessor implements ProcessorInterface
      */
     public function postProcess($object)
     {
-
     }
 }

@@ -16,7 +16,7 @@ use Capco\AppBundle\Traits\IdTrait;
 class Category
 {
     use IdTrait;
-    
+
     /**
      * @var string
      *

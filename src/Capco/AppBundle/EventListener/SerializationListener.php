@@ -35,12 +35,12 @@ class SerializationListener extends AbstractSerializationListener
 
     private function getImageFormat(SerializationContext $context)
     {
-      if ($context->getVisitingStack()->isEmpty()) {
-        return 'avatar';
-      }
+        if ($context->getVisitingStack()->isEmpty()) {
+            return 'avatar';
+        }
 
-      $parent = $context->getVisitingStack()->top();
-      switch (true) {
+        $parent = $context->getVisitingStack()->top();
+        switch (true) {
         case $parent instanceof Post:
           return 'post';
         case $parent instanceof User:
@@ -63,9 +63,9 @@ class SerializationListener extends AbstractSerializationListener
     }
 
     public function onPostLogSerialize(ObjectEvent $event)
-        {
-            $context = $event->getContext();
-            $context->attributes->get('groups')->map(
+    {
+        $context = $event->getContext();
+        $context->attributes->get('groups')->map(
                 function (array $groups) use ($event) {
                     if (in_array('LogDetails', $groups)) {
                         $log = $event->getObject();
@@ -76,11 +76,11 @@ class SerializationListener extends AbstractSerializationListener
                     }
                 }
             );
-        }
-        public function onPostElementSerialize(ObjectEvent $event)
-        {
-            $context = $event->getContext();
-            $context->attributes->get('groups')->map(
+    }
+    public function onPostElementSerialize(ObjectEvent $event)
+    {
+        $context = $event->getContext();
+        $context->attributes->get('groups')->map(
                 function (array $groups) use ($event) {
                     if (in_array('LogDetails', $groups)) {
                         $element = $event->getObject();
@@ -98,5 +98,5 @@ class SerializationListener extends AbstractSerializationListener
                     }
                 }
             );
-        }
+    }
 }

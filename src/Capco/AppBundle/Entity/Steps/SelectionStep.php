@@ -69,7 +69,6 @@ class SelectionStep extends AbstractStep
      */
     private $budget = null;
 
-
     /**
      * @ORM\Column(name="allowing_progess_steps", type="boolean")
      */

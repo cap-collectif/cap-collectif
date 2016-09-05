@@ -11,6 +11,7 @@ use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Traits\AnonymousableTrait;
 use Capco\AppBundle\Traits\ConfirmableTrait;
+
 /**
  * Class EventRegistration.
  *

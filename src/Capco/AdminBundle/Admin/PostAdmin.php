@@ -34,8 +34,8 @@ class PostAdmin extends Admin
 
         $datagridMapper
             ->add('proposals', 'doctrine_orm_model_autocomplete', [
-              'label' => 'admin.fields.blog_post.proposals'
-            ], null, [ 'property' => 'title' ])
+              'label' => 'admin.fields.blog_post.proposals',
+            ], null, ['property' => 'title'])
             ->add('projects', null, [
                 'label' => 'admin.fields.blog_post.projects',
             ])
@@ -126,8 +126,7 @@ class PostAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-
-      $formMapper
+        $formMapper
           ->with('admin.fields.blog_post.group_content', ['class' => 'col-md-12'])->end()
           ->with('admin.fields.blog_post.group_linked_content', ['class' => 'col-md-6'])->end()
           ->with('admin.fields.blog_post.group_meta',    ['class' => 'col-md-6'])->end()
@@ -195,7 +194,7 @@ class PostAdmin extends Admin
             ])
       ;
 
-      $formMapper
+        $formMapper
           ->end()
           ->with('admin.fields.blog_post.group_meta')
             ->add('publishedAt', 'sonata_type_datetime_picker', [

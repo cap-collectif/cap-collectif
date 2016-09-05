@@ -16,10 +16,9 @@ use Capco\AppBundle\Entity\Proposal;
  */
 class PostRepository extends EntityRepository
 {
-
     private function createPublishedPostsByProposalQB(Proposal $proposal)
     {
-      return $this->getIsPublishedQueryBuilder()
+        return $this->getIsPublishedQueryBuilder()
           ->leftJoin('p.proposals', 'proposal')
           ->andWhere('proposal.id = :id')
           ->setParameter('id', $proposal->getId())
@@ -27,7 +26,7 @@ class PostRepository extends EntityRepository
     }
     public function getPublishedPostsByProposal(Proposal $proposal)
     {
-      return $this->createPublishedPostsByProposalQB($proposal)
+        return $this->createPublishedPostsByProposalQB($proposal)
           ->addSelect('a', 'm', 't')
           ->leftJoin('p.Authors', 'a')
           ->leftJoin('p.Media', 'm')
@@ -41,7 +40,7 @@ class PostRepository extends EntityRepository
 
     public function countPublishedPostsByProposal(Proposal $proposal) : int
     {
-      return (int) $this->createPublishedPostsByProposalQB($proposal)
+        return (int) $this->createPublishedPostsByProposalQB($proposal)
           ->select('count(p.id)')
           ->getQuery()
           ->getSingleScalarResult()

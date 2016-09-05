@@ -283,7 +283,7 @@ class Post implements CommentableInterface, IndexableInterface
     }
 
     /**
-     * Set createdAt.@
+     * Set createdAt.@.
      *
      * @param \DateTime $createdAt
      *
@@ -560,10 +560,9 @@ class Post implements CommentableInterface, IndexableInterface
         return $this->isPublished;
     }
 
-
     public function getAbstractOrBeginningOfTheText()
     {
-        return $this->abstract ?? substr(strip_tags($this->body), 0, 300) . '[...]';
+        return $this->abstract ?? substr(strip_tags($this->body), 0, 300).'[...]';
     }
 
     // ************************** Lifecycle **************************************

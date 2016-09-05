@@ -17,8 +17,8 @@ class FixedIdsProcessor implements ProcessorInterface
     public function preProcess($object)
     {
         if (!($object instanceof Context) && $object->getId()) {
-          $metadata = $this->em->getClassMetaData(get_class($object));
-          $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
+            $metadata = $this->em->getClassMetaData(get_class($object));
+            $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
         }
     }
 
@@ -27,6 +27,5 @@ class FixedIdsProcessor implements ProcessorInterface
      */
     public function postProcess($object)
     {
-
     }
 }

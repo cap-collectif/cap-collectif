@@ -77,13 +77,13 @@ class ProgressStep
 
     public function setProposal(Proposal $proposal) : self
     {
-      $this->proposal = $proposal;
+        $this->proposal = $proposal;
 
-      return $this;
+        return $this;
     }
 
     public function getProposal() : Proposal
     {
-      return $this->proposal;
+        return $this->proposal;
     }
 }
