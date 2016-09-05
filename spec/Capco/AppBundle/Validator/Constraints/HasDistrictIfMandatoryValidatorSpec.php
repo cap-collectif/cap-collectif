@@ -43,7 +43,6 @@ class HasDistrictIfMandatoryValidatorSpec extends ObjectBehavior
         ConstraintViolationBuilderInterface $builder
     ) {
 
-        $proposalForm->isUsingDistrict()->willReturn(true)->shouldBeCalled();
         $proposalForm->isDistrictMandatory()->willReturn(true)->shouldBeCalled();
         $proposal->getProposalForm()->willReturn($proposalForm)->shouldBeCalled();
         $proposal->getDistrict()->willReturn(null)->shouldBeCalled();

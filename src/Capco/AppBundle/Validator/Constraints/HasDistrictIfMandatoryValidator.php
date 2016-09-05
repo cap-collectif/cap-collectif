@@ -21,9 +21,7 @@ class HasDistrictIfMandatoryValidator extends ConstraintValidator
             return;
         }
 
-        $form = $object->getProposalForm();
-
-        if ($this->toggleManager->isActive('districts') && $form && $form->isUsingDistrict() && $form->isDistrictMandatory()) {
+        if ($this->toggleManager->isActive('districts') && $object->getProposalForm()->isDistrictMandatory()) {
             $this->context
                 ->buildViolation($constraint->message)
                 ->addViolation()
