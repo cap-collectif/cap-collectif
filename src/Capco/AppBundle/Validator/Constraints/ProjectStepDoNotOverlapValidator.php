@@ -31,7 +31,7 @@ class ProjectStepDoNotOverlapValidator extends ConstraintValidator
         // TODO: Fixme by removing ProjectAbstractStep and use an AbstractStep collection instead
         $steps = $value instanceof Collection ? $value->map(function($pas) { return $pas->getStep(); }) : new ArrayCollection($value);
 
-        if ($steps && count($steps) > 1 && !$this->stepsDoNotOverlap($steps)) {
+        if ($steps && $steps->count() > 1 && !$this->stepsDoNotOverlap($steps)) {
             $this->context
                 ->buildViolation($constraint->message)
                 ->addViolation()
