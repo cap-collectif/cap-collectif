@@ -616,7 +616,7 @@ Feature: Proposal Restful Api
 
     # Create proposal
 
-  @plop
+  @database
   Scenario: Logged in API client wants to add a proposal (with no value for not required response)
     Given I am logged in to api as user
     Given feature themes is enabled
