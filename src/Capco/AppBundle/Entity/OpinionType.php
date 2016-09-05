@@ -17,6 +17,16 @@ class OpinionType
 {
     use IdTrait;
 
+    public static $colorsType = [
+       'red' => 'opinion_type.colors.red',
+       'green' => 'opinion_type.colors.green',
+       'blue' => 'opinion_type.colors.blue',
+       'orange' => 'opinion_type.colors.orange',
+       'bluedark' => 'opinion_type.colors.bluedark',
+       'white' => 'opinion_type.colors.white',
+       'default' => 'opinion_type.colors.default',
+   ];
+
     const VOTE_WIDGET_DISABLED = 0;
     const VOTE_WIDGET_OK = 1;
     const VOTE_WIDGET_BOTH = 2;
