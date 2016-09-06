@@ -11,40 +11,38 @@ capcobot = {
 
 
 @task(environments=['local', 'testing'])
-def checkcs():
+def check_deps():
+    "Check dependencies"
+    env.compose_run('composer validate', 'builder', '.', no_deps=True)
+    env.service_command('bin/console security:check', 'application', env.www_app)
+
+
+@task(environments=['local', 'testing'])
+def check_cs():
     "Check code style"
-    env.compose_run('php-cs-fixer fix --level=symfony --dry-run --diff src || echo ""', 'builder', '.', no_deps=True)
     env.compose_run('npm run checkcs', 'builder', '.', no_deps=True)
     env.compose_run('pep8 infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
-    env.service_command('php bin/console lint:twig app/', 'application', env.www_app)
+    env.service_command('php bin/console lint:twig app src', 'application', env.www_app)
+    env.compose_run('php-cs-fixer fix --level=symfony --dry-run --diff src', 'builder', '.', no_deps=True)
 
 
 @task(environments=['local'])
 def lint():
     "Lint"
-    env.compose_run('php-cs-fixer fix --level=symfony --diff src || echo ""', 'builder', '.', no_deps=True)
+    env.compose_run('php-cs-fixer fix --level=symfony --diff src || echo true', 'builder', '.', no_deps=True)
     env.compose_run('npm run lint', 'builder', '.', no_deps=True)
     env.compose_run('autopep8 --in-place --aggressive --aggressive infrastructure/deploylib/* --ignore=E501', 'builder', '.', no_deps=True)
 
 
-@task(environments=['local'])
-def fix_cs_file(file, dry_run=False):
-    "Fix code style for one file"
-    if dry_run:
-        env.compose_run('php-cs-fixer fix --config-file=.php_cs --dry-run --diff %s' % file, 'builder', 'capco', no_deps=True)
-    else:
-        env.compose_run('php-cs-fixer fix --config-file=.php_cs %s' % file, 'builder', 'capco', no_deps=True)
-
-
 @task(environments=['local', 'testing'])
 def phpspec():
-    "Run Unit Tests"
+    "Run PHP Unit Tests"
     env.service_command('./bin/phpspec run --no-code-generation', 'application', env.www_app)
 
 
 @task(environments=['local', 'testing'])
 def mocha():
-    "Run Mocha Tests"
+    "Run JS Unit Tests"
     env.compose_run('npm test', 'builder', '.', no_deps=True)
 
 

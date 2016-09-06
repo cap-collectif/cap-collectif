@@ -8635,64 +8635,6 @@
             "time": "2016-03-22 20:13:26"
         },
         {
-            "name": "mewesk/twig-excel-bundle",
-            "version": "2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/MewesK/TwigExcelBundle.git",
-                "reference": "8dc65247dc7e33846581e2006b69002efb178eb3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/MewesK/TwigExcelBundle/zipball/8dc65247dc7e33846581e2006b69002efb178eb3",
-                "reference": "8dc65247dc7e33846581e2006b69002efb178eb3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5",
-                "phpoffice/phpexcel": "~1.8.1",
-                "symfony/framework-bundle": "~2.7|~3.0"
-            },
-            "require-dev": {
-                "mpdf/mpdf": "~6.0",
-                "sensio/framework-extra-bundle": "~3.0",
-                "symfony/symfony": "~2.7|~3.0"
-            },
-            "suggest": {
-                "mpdf/mpdf": "~6.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "MewesK\\TwigExcelBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mewes Kochheim",
-                    "email": "mewes@kochheim.de"
-                }
-            ],
-            "description": "This Symfony2 bundle provides a PhpExcel integration for Twig",
-            "homepage": "https://github.com/MewesK/TwigExcelBundle",
-            "keywords": [
-                "PHPExcel",
-                "excel",
-                "symfony",
-                "twig"
-            ],
-            "time": "2016-02-27 16:09:27"
-        },
-        {
             "name": "myclabs/deep-copy",
             "version": "1.5.0",
             "source": {
