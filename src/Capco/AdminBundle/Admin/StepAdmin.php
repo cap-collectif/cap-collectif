@@ -200,7 +200,7 @@ class StepAdmin extends Admin
                 ->with('admin.fields.step.group_votes')
                 ->add('voteType', 'choice', [
                     'label' => 'admin.fields.step.vote_type',
-                    'choices' => SelectionStep::$voteTypeLabels,
+                    'choices' => SelectionStep::getVoteTypeLabels(),
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
                     'help' => 'admin.help.step.vote_type',
@@ -235,7 +235,7 @@ class StepAdmin extends Admin
                 ->with('admin.fields.step.group_votes')
                 ->add('voteType', 'choice', [
                     'label' => 'admin.fields.step.vote_type',
-                    'choices' => CollectStep::$voteTypeLabels,
+                    'choices' => CollectStep::getVoteTypeLabels(),
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
                     'help' => 'admin.help.step.vote_type',

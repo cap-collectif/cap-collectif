@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
@@ -116,12 +117,7 @@ class Proposal implements Contribution, CommentableInterface
     private $comments;
 
     /**
-<<<<<<< HEAD
-     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="proposal", cascade={"persist", "remove"})
-=======
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Response", mappedBy="proposal", cascade={"persist", "remove"})
->>>>>>> add typehint
      */
     private $responses;
 
@@ -524,8 +520,6 @@ class Proposal implements Contribution, CommentableInterface
         foreach ($this->collectVotes as $vote) {
             $this->removeVote($vote);
         }
-        $this->votesCount = 0;
-
         return $this;
     }
 

@@ -142,12 +142,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           where cv.comment = c AND cv.expired = 0 group by cv.comment
         )')->execute();
 
-        $em->createQuery('UPDATE CapcoAppBundle:Proposal p set p.votesCount = (
-          select count(pv.id)
-          from CapcoAppBundle:ProposalSelectionVote pv
-          where pv.proposal = p AND pv.expired = 0 group by pv.proposal
-        )')->execute();
-
         // **************************************** Comments counters ***************************************
 
         $em->createQuery('UPDATE CapcoAppBundle:Idea i set i.commentsCount = (

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 trait VoteTypeTrait
 {
@@ -10,7 +11,7 @@ trait VoteTypeTrait
     public static $VOTE_TYPE_SIMPLE = 1;
     public static $VOTE_TYPE_BUDGET = 2;
 
-    static function voteTypeLabels() {
+    static function getVoteTypeLabels() {
         return [
             self::$VOTE_TYPE_DISABLED => 'step.vote_type.disabled',
             self::$VOTE_TYPE_SIMPLE => 'step.vote_type.simple',
@@ -24,32 +25,24 @@ trait VoteTypeTrait
      */
     private $voteType = 0;
 
-    /**
-     * @return mixed
-     */
-    public function getVoteType()
+    public function getVoteType(): int
     {
         return $this->voteType;
     }
 
-    /**
-     * @param mixed $voteType
-     *
-     * @return $this
-     */
-    public function setVoteType($voteType)
+    public function setVoteType(int $voteType): self
     {
         $this->voteType = $voteType;
 
         return $this;
     }
 
-    public function isVotable()
+    public function isVotable(): bool
     {
         return $this->voteType !== self::$VOTE_TYPE_DISABLED;
     }
 
-    public function isBudgetVotable()
+    public function isBudgetVotable(): bool
     {
         return $this->voteType === self::$VOTE_TYPE_BUDGET;
     }
