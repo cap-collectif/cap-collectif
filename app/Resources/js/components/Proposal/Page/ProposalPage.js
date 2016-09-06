@@ -47,7 +47,7 @@ export const ProposalPage = React.createClass({
         proposal,
         userHasVote,
         votableStep,
-        } = this.props;
+      } = this.props;
     if (votableStep) {
       ProposalActions.initProposalVotes(votableStep.creditsLeft, !!userHasVote);
     }
@@ -214,7 +214,7 @@ export const ProposalPage = React.createClass({
                     </NavItem>
                   </Nav>
                   <ProposalVoteButtonWrapper
-                      selectionStep={votableStep}
+                      step={votableStep}
                       proposal={proposal}
                       creditsLeft={creditsLeft}
                       userHasVote={userHasVote}
@@ -336,7 +336,7 @@ export const ProposalPage = React.createClass({
                 showVotes
                 && <ProposalVoteModal
                     proposal={proposal}
-                    selectionStep={votableStep}
+                    step={votableStep}
                     showModal={showVotesModal}
                     onToggleModal={this.toggleVotesModal}
                 />

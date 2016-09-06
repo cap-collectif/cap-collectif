@@ -11,7 +11,7 @@ const ProposalVoteModal = React.createClass({
   displayName: 'ProposalVoteModal',
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    selectionStep: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
     showModal: PropTypes.bool.isRequired,
     onToggleModal: PropTypes.func.isRequired,
     userHasVote: PropTypes.bool,
@@ -78,10 +78,10 @@ const ProposalVoteModal = React.createClass({
 
   disableSubmitButton() {
     const {
-      selectionStep,
+      step,
       user,
     } = this.props;
-    return !selectionStep.open || (user && selectionStep.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
+    return !step.open || (user && step.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
   },
 
   close() {
@@ -98,7 +98,7 @@ const ProposalVoteModal = React.createClass({
     const {
       showModal,
       proposal,
-      selectionStep,
+      step,
       userHasVote,
       creditsLeft,
       user,
@@ -119,7 +119,7 @@ const ProposalVoteModal = React.createClass({
         <Modal.Body>
           <ProposalVoteBox
             proposal={proposal}
-            selectionStep={selectionStep}
+            step={step}
             userHasVote={userHasVote}
             creditsLeft={creditsLeft}
             isSubmitting={this.state.isSubmitting}
@@ -139,7 +139,7 @@ const ProposalVoteModal = React.createClass({
             bsStyle={(!userHasVote || this.state.isSubmitting) ? 'success' : 'danger'}
             style={{ marginLeft: '10px' }}
             disabled={this.disableSubmitButton()}
-            loginOverlay={selectionStep.voteType === VOTE_TYPE_BUDGET}
+            loginOverlay={step.voteType === VOTE_TYPE_BUDGET}
           />
         </Modal.Footer>
       </Modal>

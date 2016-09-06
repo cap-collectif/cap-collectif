@@ -9,7 +9,7 @@ const ProposalVoteButtonWrapper = React.createClass({
   displayName: 'ProposalVoteButtonWrapper',
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    selectionStep: PropTypes.object,
+    step: PropTypes.object,
     creditsLeft: PropTypes.number,
     onClick: PropTypes.func.isRequired,
     userHasVote: PropTypes.bool.isRequired,
@@ -20,7 +20,7 @@ const ProposalVoteButtonWrapper = React.createClass({
 
   getDefaultProps() {
     return {
-      selectionStep: null,
+      step: null,
       creditsLeft: null,
       user: null,
       style: {},
@@ -28,9 +28,9 @@ const ProposalVoteButtonWrapper = React.createClass({
     };
   },
 
-  selectionStepIsOpen() {
-    const { selectionStep } = this.props;
-    return selectionStep && selectionStep.open;
+  voteThresholdReached() {
+    const { step, proposal } = this.props;
+    return step && step.voteThreshold <= proposal.votesCount;
   },
 
   userHasEnoughCredits() {
@@ -46,13 +46,13 @@ const ProposalVoteButtonWrapper = React.createClass({
   },
 
   render() {
-    const { user, selectionStep, userHasVote, onClick, proposal, style, className } = this.props;
-    if (selectionStep && selectionStep.voteType === VOTE_TYPE_SIMPLE) {
+    const { user, step, userHasVote, onClick, proposal, style, className } = this.props;
+    if (step && step.voteType === VOTE_TYPE_SIMPLE) {
       return (
         <ProposalVoteButton
           userHasVote={userHasVote}
           onClick={onClick}
-          disabled={!this.selectionStepIsOpen()}
+          disabled={!step.open}
           style={style}
           className={className}
         />
@@ -67,8 +67,8 @@ const ProposalVoteButtonWrapper = React.createClass({
         >
           <ProposalVoteButton
             userHasVote={userHasVote}
-            onClick={this.userHasEnoughCredits() ? onClick : null}
-            disabled={!this.selectionStepIsOpen() || !this.userHasEnoughCredits()}
+            onClick={onClick}
+            disabled={!(step && step.open) || !this.userHasEnoughCredits()}
             style={style}
             className={className}
           />
@@ -80,8 +80,7 @@ const ProposalVoteButtonWrapper = React.createClass({
       <LoginOverlay>
         <ProposalVoteButton
           userHasVote={userHasVote}
-          onClick={null}
-          disabled={!this.selectionStepIsOpen()}
+          disabled={!(step && step.open)}
           style={style}
           className={className}
         />
