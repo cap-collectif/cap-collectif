@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 
 class ProposalRepository extends EntityRepository
 {
-    public function getByUser(User $user): Collection
+    public function getByUser(User $user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('district', 'status', 'theme', 'form', 'step')
@@ -158,7 +158,7 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getLast(int $limit = 1, int $offset = 0): Collection
+    public function getLast(int $limit = 1, int $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author', 'amedia', 'theme', 'status', 'district')
@@ -216,7 +216,7 @@ class ProposalRepository extends EntityRepository
         ;
     }
 
-    public function getTrashedOrUnpublishedByProject(Project $project): Collection
+    public function getTrashedOrUnpublishedByProject(Project $project)
     {
         $qb = $this->createQueryBuilder('p')
             ->addSelect('f', 's', 'aut', 'm', 'theme', 'status', 'district')
