@@ -190,7 +190,7 @@ class Proposal implements Contribution, CommentableInterface
 
     public function getBody(): string
     {
-        return $this->body;
+        return $this->body ?? '';
     }
 
     public function setBody(string $body): self
@@ -278,7 +278,7 @@ class Proposal implements Contribution, CommentableInterface
         return $this;
     }
 
-    public function getAuthor(): User
+    public function getAuthor()
     {
         return $this->author;
     }
@@ -290,7 +290,7 @@ class Proposal implements Contribution, CommentableInterface
         return $this;
     }
 
-    public function getProposalForm(): ProposalForm
+    public function getProposalForm()
     {
         return $this->proposalForm;
     }
