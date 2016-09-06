@@ -31,7 +31,7 @@ class SelectionStepRepository extends AbstractStepRepository
         $expr = $qb->expr();
         $qb
             ->leftJoin('ss.projectAbstractStep', 'pas')
-            ->andWhere($expr->neq('ss.voteType', SelectionStep::VOTE_TYPE_DISABLED))
+            ->andWhere($expr->neq('ss.voteType', SelectionStep::$VOTE_TYPE_DISABLED))
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)
             ->orderBy('pas.position')
