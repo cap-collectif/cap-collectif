@@ -51,30 +51,23 @@ class Proposal implements Contribution, CommentableInterface
     public static $ratings = [1, 2, 3, 4, 5];
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank()
      */
     private $body;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="rating", type="integer", nullable=true)
      */
     private $rating;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="annotation", type="text", nullable=true)
      */
     private $annotation;
@@ -104,32 +97,31 @@ class Proposal implements Contribution, CommentableInterface
     private $category = null;
 
     /**
-     * @var string
-     *
      * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     protected $author;
 
     /**
-     * @var ProposalForm
-     *
      * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="proposals")
-     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     protected $proposalForm;
 
     /**
-     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalComment", mappedBy="proposal", cascade={"persist", "remove"})
      */
     private $comments;
 
     /**
+<<<<<<< HEAD
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="proposal", cascade={"persist", "remove"})
+=======
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Response", mappedBy="proposal", cascade={"persist", "remove"})
+>>>>>>> add typehint
      */
     private $responses;
 
@@ -139,19 +131,16 @@ class Proposal implements Contribution, CommentableInterface
     protected $reports;
 
     /**
-     * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Selection", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
      */
     private $selections;
 
     /**
-     * @var
      * @ORM\Column(name="estimation", type="float", nullable=true)
      */
     private $estimation = null;
 
     /**
-     * @var
      * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinTable(name="user_favorite_proposal")
      */
@@ -179,11 +168,6 @@ class Proposal implements Contribution, CommentableInterface
      */
     private $collectVotes;
 
-    /**
-     * @ORM\Column(name="votes_count", type="integer")
-     */
-    protected $votesCount = 0;
-
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -198,7 +182,7 @@ class Proposal implements Contribution, CommentableInterface
         $this->progressSteps = new ArrayCollection();
     }
 
-    public function isIndexable()
+    public function isIndexable(): bool
     {
         return $this->enabled && !$this->expired;
     }
@@ -208,120 +192,72 @@ class Proposal implements Contribution, CommentableInterface
         return $this->getId() ? $this->getTitle() : 'New proposal';
     }
 
-    /**
-     * @return string
-     */
-    public function getBody()
+    public function getBody(): string
     {
         return $this->body;
     }
 
-    /**
-     * @param string $body
-     *
-     * @return $this
-     */
-    public function setBody($body)
+    public function setBody(string $body): self
     {
         $this->body = $body;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getRating()
     {
         return $this->rating;
     }
 
-    /**
-     * @param int $rating
-     *
-     * @return $this
-     */
-    public function setRating($rating)
+    public function setRating(int $rating = null)
     {
         $this->rating = $rating;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getAnnotation()
     {
         return $this->annotation;
     }
 
-    /**
-     * @param string $annotation
-     *
-     * @return $this
-     */
-    public function setAnnotation($annotation)
+    public function setAnnotation(string $annotation = null): self
     {
         $this->annotation = $annotation;
 
         return $this;
     }
 
-    /**
-     * @return Status
-     */
     public function getStatus()
     {
         return $this->status;
     }
 
-    /**
-     * @param Status $status
-     *
-     * @return $this
-     */
-    public function setStatus(Status $status = null)
+    public function setStatus(Status $status = null): self
     {
         $this->status = $status;
 
         return $this;
     }
 
-    /**
-     * @return ProposalCategory
-     */
     public function getCategory()
     {
         return $this->category;
     }
 
-    /**
-     * @param ProposalCategory $category
-     *
-     * @return $this
-     */
-    public function setCategory(ProposalCategory $category = null)
+    public function setCategory(ProposalCategory $category = null): self
     {
         $this->category = $category;
 
         return $this;
     }
 
-    /**
-     * @return Theme
-     */
     public function getTheme()
     {
         return $this->theme;
     }
 
-    /**
-     * @param Theme $theme
-     *
-     * @return $this
-     */
-    public function setTheme(Theme $theme = null)
+    public function setTheme(Theme $theme = null): self
     {
         $this->theme = $theme;
         if ($theme) {
@@ -331,23 +267,22 @@ class Proposal implements Contribution, CommentableInterface
         return $this;
     }
 
-    /**
-     * @return District
-     */
     public function getDistrict()
     {
         return $this->district;
     }
 
-    public function setDistrict(District $district): self
+    public function setDistrict(District $district = null): self
     {
         $this->district = $district;
-        $district->addProposal($this);
+        if ($district) {
+          $district->addProposal($this);
+        }
 
         return $this;
     }
 
-    public function getAuthor()
+    public function getAuthor(): User
     {
         return $this->author;
     }
@@ -359,7 +294,7 @@ class Proposal implements Contribution, CommentableInterface
         return $this;
     }
 
-    public function getProposalForm()
+    public function getProposalForm(): ProposalForm
     {
         return $this->proposalForm;
     }
@@ -451,19 +386,12 @@ class Proposal implements Contribution, CommentableInterface
         return $this->selections;
     }
 
-    // CommentableInterface methods implementation
-    /**
-     * @return string
-     */
-    public function getClassName()
+    public function getClassName(): string
     {
         return 'Proposal';
     }
 
-    /**
-     * @return bool
-     */
-    public function canDisplay()
+    public function canDisplay(): bool
     {
         return $this->enabled && !$this->isTrashed && $this->getStep()->canDisplay();
     }
@@ -486,17 +414,17 @@ class Proposal implements Contribution, CommentableInterface
     /**
      * @return bool
      */
-    public function canContribute()
+    public function canContribute(): bool
     {
         return $this->enabled && !$this->isTrashed && $this->getStep()->canContribute();
     }
 
-    public function canComment()
+    public function canComment(): bool
     {
         return $this->enabled && !$this->isTrashed && $this->getIsCommentable();
     }
 
-    public function userHasReport(User $user)
+    public function userHasReport(User $user): bool
     {
         foreach ($this->reports as $report) {
             if ($report->getReporter() == $user) {
@@ -507,35 +435,24 @@ class Proposal implements Contribution, CommentableInterface
         return false;
     }
 
-    /**
-     * @return float
-     */
     public function getEstimation()
     {
         return $this->estimation;
     }
 
-    /**
-     * @param float $estimation
-     *
-     * @return $this
-     */
-    public function setEstimation($estimation)
+    public function setEstimation(float $estimation = null): self
     {
         $this->estimation = $estimation;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLikers()
+    public function getLikers(): Collection
     {
         return $this->likers;
     }
 
-    public function addLiker(User $liker)
+    public function addLiker(User $liker): self
     {
         if (!$this->likers->contains($liker)) {
             $this->likers[] = $liker;
@@ -544,20 +461,19 @@ class Proposal implements Contribution, CommentableInterface
         return $this;
     }
 
-    public function removeLiker(User $liker)
+    public function removeLiker(User $liker): self
     {
         $this->likers->removeElement($liker);
+
+        return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isPublished()
+    public function isPublished(): bool
     {
         return $this->enabled && !$this->isTrashed;
     }
 
-    public function getSelectionSteps()
+    public function getSelectionSteps(): array
     {
         $steps = [];
         foreach ($this->selections as $selection) {
@@ -576,7 +492,7 @@ class Proposal implements Contribution, CommentableInterface
         return;
     }
 
-    public function getSelectionStepsIds()
+    public function getSelectionStepsIds(): array
     {
         $ids = array_filter(array_map(function ($value) {
             return $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null;
@@ -600,7 +516,7 @@ class Proposal implements Contribution, CommentableInterface
         return $this;
     }
 
-    public function resetVotes()
+    public function resetVotes(): self
     {
         foreach ($this->selectionVotes as $vote) {
             $this->removeVote($vote);
@@ -613,7 +529,7 @@ class Proposal implements Contribution, CommentableInterface
         return $this;
     }
 
-    public function userHasVote(User $user = null)
+    public function userHasVote(User $user = null): bool
     {
         if ($user != null) {
             foreach ($this->selectionVotes as $vote) {
@@ -631,7 +547,7 @@ class Proposal implements Contribution, CommentableInterface
         return false;
     }
 
-    public function getSelectionVotes()
+    public function getSelectionVotes(): Collection
     {
         return $this->selectionVotes;
     }
@@ -643,7 +559,7 @@ class Proposal implements Contribution, CommentableInterface
         return $this;
     }
 
-    public function getCollectVotes()
+    public function getCollectVotes(): Collection
     {
         return $this->collectVotes;
     }
@@ -707,7 +623,7 @@ class Proposal implements Contribution, CommentableInterface
         return $this;
     }
 
-    public function canHaveProgessSteps() : bool
+    public function canHaveProgessSteps(): bool
     {
         return $this->getProposalForm()->getStep()->getProject()->getSteps()->exists(function ($key, $step) {
             return $step->getStep()->isSelectionStep() && $step->getStep()->isAllowingProgressSteps();
