@@ -28,22 +28,17 @@ class CollectStep extends AbstractStep implements IndexableInterface
     ];
 
     /**
-     * @var ProposalForm
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="step", cascade={"persist", "remove"})
      */
     private $proposalForm = null;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="proposals_count", type="integer")
+     * @ORM\Column(name="proposals_count", type="integer", nullable=false)
      */
     private $proposalsCount = 0;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="contributors_count", type="integer")
+     * @ORM\Column(name="contributors_count", type="integer", nullable=false)
      */
     private $contributorsCount = 0;
 
@@ -55,15 +50,8 @@ class CollectStep extends AbstractStep implements IndexableInterface
 
     /**
      * @ORM\Column(name="private", type="boolean", nullable=false)
-     *
-     * @var bool
      */
-    private $private = 0;
-
-    /**
-     * @ORM\Column(name="votes_count", type="integer")
-     */
-    private $votesCount = 0;
+    private $private = false;
 
     /**
      * @ORM\Column(name="default_sort", type="string", nullable=false)
@@ -71,80 +59,48 @@ class CollectStep extends AbstractStep implements IndexableInterface
      */
     private $defaultSort = 'random';
 
-    public function __construct()
+    public function getProposalsCount(): int
     {
-        parent::__construct();
+        return $this->proposalsCount ?? 0;
     }
 
-    /**
-     * @return int
-     */
-    public function getProposalsCount()
-    {
-        return $this->proposalsCount;
-    }
-
-    /**
-     * @param int $proposalsCount
-     *
-     * @return $this
-     */
-    public function setProposalsCount($proposalsCount)
+    public function setProposalsCount(int $proposalsCount): self
     {
         $this->proposalsCount = $proposalsCount;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getContributorsCount()
+    public function getContributorsCount(): int
     {
-        return $this->contributorsCount;
+        return $this->contributorsCount ?? 0;
     }
 
-    /**
-     * @param int $contributorsCount
-     *
-     * @return $this
-     */
-    public function setContributorsCount($contributorsCount)
+    public function setContributorsCount(int $contributorsCount): self
     {
         $this->contributorsCount = $contributorsCount;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDefaultStatus()
     {
         return $this->defaultStatus;
     }
 
-    public function setDefaultStatus(Status $defaultStatus = null)
+    public function setDefaultStatus(Status $defaultStatus = null): self
     {
         $this->defaultStatus = $defaultStatus;
 
         return $this;
     }
 
-    /**
-     * @return ProposalForm
-     */
     public function getProposalForm()
     {
         return $this->proposalForm;
     }
 
-    /**
-     * @param ProposalForm $proposalForm
-     *
-     * @return $this
-     */
-    public function setProposalForm(ProposalForm $proposalForm = null)
+    public function setProposalForm(ProposalForm $proposalForm = null): self
     {
         if ($proposalForm) {
             $proposalForm->setStep($this);
@@ -159,65 +115,21 @@ class CollectStep extends AbstractStep implements IndexableInterface
         return $this->private;
     }
 
-    public function setPrivate(bool $private)
+    public function setPrivate(bool $private): self
     {
         $this->private = $private;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDefaultSort()
+    public function getDefaultSort(): string
     {
         return $this->defaultSort;
     }
 
-    /**
-     * @param mixed $defaultSort
-     *
-     * @return $this
-     */
-    public function setDefaultSort($defaultSort)
+    public function setDefaultSort(string $defaultSort): self
     {
         $this->defaultSort = $defaultSort;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVotesCount()
-    {
-        if (!$this->votesCount) {
-            return 0;
-        }
-
-        return $this->votesCount;
-    }
-
-    /**
-     * @param mixed $votesCount
-     *
-     * @return $this
-     */
-    public function setVotesCount($votesCount)
-    {
-        $this->votesCount = $votesCount;
-
-        return $this;
-    }
-
-    public function incrementVotesCount()
-    {
-        ++$this->votesCount;
-
-        return $this;
-    }
-
-    public function decrementVotesCount()
-    {
-        --$this->votesCount;
 
         return $this;
     }
@@ -229,12 +141,12 @@ class CollectStep extends AbstractStep implements IndexableInterface
         return 'collect';
     }
 
-    public function isCollectStep()
+    public function isCollectStep(): bool
     {
         return true;
     }
 
-    public function isIndexable()
+    public function isIndexable(): bool
     {
         return $this->getIsEnabled();
     }

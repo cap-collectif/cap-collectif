@@ -2,13 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
- * ProposalCollectVote.
- *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalCollectVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasAnonymousOrUser()
@@ -24,55 +23,35 @@ class ProposalCollectVote extends AbstractVote
     const ANONYMOUS = 'ANONYMOUS';
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="collectVotes", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $proposal;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep", cascade={"persist"})
      * @ORM\JoinColumn(name="collect_step_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $collectStep;
 
-    /**
-     * @return mixed
-     */
-    public function getCollectStep()
+    public function getCollectStep(): CollectStep
     {
         return $this->collectStep;
     }
 
-    /**
-     * @param CollectStep $collectStep
-     *
-     * @return ProposalCollectVote
-     */
-    public function setCollectStep(CollectStep $collectStep) :ProposalCollectVote
+    public function setCollectStep(CollectStep $collectStep): self
     {
         $this->collectStep = $collectStep;
 
         return $this;
     }
 
-    /**
-     * @return Proposal
-     */
-    public function getProposal()
+    public function getProposal(): Proposal
     {
         return $this->proposal;
     }
 
-    /**
-     * @param Proposal $proposal
-     *
-     * @return ProposalCollectVote
-     */
-    public function setProposal(Proposal $proposal) :ProposalCollectVote
+    public function setProposal(Proposal $proposal): self
     {
         $this->proposal = $proposal;
         $proposal->addCollectVote($this);
@@ -85,15 +64,11 @@ class ProposalCollectVote extends AbstractVote
         return $this->proposal;
     }
 
-    // *************************** Lifecycle **********************************
-
     /**
      * @ORM\PreRemove
      */
     public function deleteVote()
     {
-        if ($this->proposal) {
-            $this->proposal->removeCollectVote($this);
-        }
+        $this->proposal->removeCollectVote($this);
     }
 }

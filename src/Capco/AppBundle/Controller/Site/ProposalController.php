@@ -51,9 +51,7 @@ class ProposalController extends Controller
 
         $proposalForm = $currentStep->getProposalForm();
         $props = $serializer->serialize([
-            'proposal' => $proposal,
             'form' => $proposalForm,
-            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
             'votableStep' => $firstVotableStep,
             'userHasVote' => $userHasVote,

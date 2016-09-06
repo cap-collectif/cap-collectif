@@ -2,13 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
- * ProposalSelectionVote.
- *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalSelectionVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasAnonymousOrUser()
@@ -24,35 +23,23 @@ class ProposalSelectionVote extends AbstractVote
     const ANONYMOUS = 'ANONYMOUS';
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selectionVotes", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $proposal;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", cascade={"persist"})
      * @ORM\JoinColumn(name="selection_step_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $selectionStep;
 
-    /**
-     * @return Proposal
-     */
-    public function getProposal()
+    public function getProposal(): Proposal
     {
         return $this->proposal;
     }
 
-    /**
-     * @param Proposal $proposal
-     *
-     * @return $this
-     */
-    public function setProposal(Proposal $proposal)
+    public function setProposal(Proposal $proposal): self
     {
         $this->proposal = $proposal;
         $proposal->addSelectionVote($this);
@@ -60,20 +47,12 @@ class ProposalSelectionVote extends AbstractVote
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSelectionStep()
+    public function getSelectionStep(): SelectionStep
     {
         return $this->selectionStep;
     }
 
-    /**
-     * @param SelectionStep $selectionStep
-     *
-     * @return $this
-     */
-    public function setSelectionStep(SelectionStep $selectionStep)
+    public function setSelectionStep(SelectionStep $selectionStep): self
     {
         $this->selectionStep = $selectionStep;
 
@@ -85,15 +64,11 @@ class ProposalSelectionVote extends AbstractVote
         return $this->proposal;
     }
 
-    // *************************** Lifecycle **********************************
-
     /**
      * @ORM\PreRemove
      */
     public function deleteVote()
     {
-        if ($this->proposal != null) {
-            $this->proposal->removeSelectionVote($this);
-        }
+        $this->proposal->removeSelectionVote($this);
     }
 }

@@ -25,8 +25,8 @@ use Capco\AppBundle\Traits\IdTrait;
  *      "opinionVersion"    = "OpinionVersionVote",
  *      "argument"          = "ArgumentVote",
  *      "source"            = "SourceVote",
- *      "ProposalSelection" = "ProposalSelectionVote",
- *      "ProposalCollect"   = "ProposalCollectVote",
+ *      "proposalSelection" = "ProposalSelectionVote",
+ *      "proposalCollect"   = "ProposalCollectVote",
  * })
  */
 abstract class AbstractVote implements Contribution, HasAuthorInterface

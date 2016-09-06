@@ -111,10 +111,6 @@ class CollectStepsController extends FOSRestController
             return $form;
         }
 
-        $proposal->incrementVotesCount();
-        $collectStep->incrementVotesCount();
-        $collectStep->getProject()->incrementVotesCount();
-
         if ($form->has('comment') && null != ($content = $form->get('comment')->getData())) {
             $comment = new ProposalComment();
             $comment
@@ -174,10 +170,6 @@ class CollectStepsController extends FOSRestController
         if (!$vote) {
             throw new BadRequestHttpException('You have not voted for this proposal in this selection step.');
         }
-
-        $proposal->decrementVotesCount();
-        $collectStep->getProject()->decrementVotesCount();
-        $collectStep->decrementVotesCount();
 
         $em->remove($vote);
         $em->flush();

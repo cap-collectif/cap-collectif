@@ -20,6 +20,11 @@ trait VoteTypeTrait
     }
 
     /**
+     * @ORM\Column(name="votes_count", type="integer")
+     */
+    private $votesCount = 0;
+
+    /**
      * @Assert\Choice(choices={0,1,2})
      * @ORM\Column(name="vote_type", type="integer")
      */
@@ -45,5 +50,31 @@ trait VoteTypeTrait
     public function isBudgetVotable(): bool
     {
         return $this->voteType === self::$VOTE_TYPE_BUDGET;
+    }
+
+    public function getVotesCount(): int
+    {
+        return $this->votesCount ?? 0;
+    }
+
+    public function setVotesCount(int $votesCount): self
+    {
+        $this->votesCount = $votesCount;
+
+        return $this;
+    }
+
+    public function incrementVotesCount(): self
+    {
+        ++$this->votesCount;
+
+        return $this;
+    }
+
+    public function decrementVotesCount(): self
+    {
+        --$this->votesCount;
+
+        return $this;
     }
 }

@@ -610,22 +610,6 @@ class Project implements IndexableInterface
         $this->votesCount = $votesCount;
     }
 
-    public function incrementVotesCount()
-    {
-        ++$this->votesCount;
-
-        return $this;
-    }
-
-    public function decrementVotesCount()
-    {
-        if ($this->votesCount > 0) {
-            --$this->votesCount;
-        }
-
-        return $this;
-    }
-
     /**
      * @return int
      */

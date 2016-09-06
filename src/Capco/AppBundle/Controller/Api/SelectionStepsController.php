@@ -41,10 +41,6 @@ class SelectionStepsController extends FOSRestController
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|votes|comments|random)", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
-     *
-     * @param Request               $request
-     * @param SelectionStep         $selectionStep
-     * @param ParamFetcherInterface $paramFetcher
      */
     public function getProposalsBySelectionStepAction(Request $request, SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
     {
@@ -142,10 +138,6 @@ class SelectionStepsController extends FOSRestController
             return $this->view($form->getErrors(true, true), Response::HTTP_BAD_REQUEST);
         }
 
-        $proposal->incrementVotesCount();
-        $selectionStep->incrementVotesCount();
-        $selectionStep->getProject()->incrementVotesCount();
-
         if ($form->has('comment') && null != ($content = $form->get('comment')->getData())) {
             $comment = new ProposalComment();
             $comment
@@ -205,10 +197,6 @@ class SelectionStepsController extends FOSRestController
         if (!$vote) {
             throw new BadRequestHttpException('You have not voted for this proposal in this selection step.');
         }
-
-        $proposal->decrementVotesCount();
-        $selectionStep->decrementVotesCount();
-        $selectionStep->getProject()->decrementVotesCount();
 
         $em->remove($vote);
         $em->flush();

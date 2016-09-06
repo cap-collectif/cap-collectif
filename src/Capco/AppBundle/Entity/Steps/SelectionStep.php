@@ -46,18 +46,11 @@ class SelectionStep extends AbstractStep implements IndexableInterface
     private $selections;
 
     /**
-     * @ORM\Column(name="votes_count", type="integer")
-     */
-    private $votesCount = 0;
-
-    /**
      * @ORM\Column(name="votes_help_text", type="string", nullable=true)
      */
     private $votesHelpText = null;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="contributors_count", type="integer")
      */
     private $contributorsCount = 0;
@@ -189,30 +182,6 @@ class SelectionStep extends AbstractStep implements IndexableInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getVotesCount()
-    {
-        if (!$this->votesCount) {
-            return 0;
-        }
-
-        return $this->votesCount;
-    }
-
-    /**
-     * @param mixed $votesCount
-     *
-     * @return $this
-     */
-    public function setVotesCount($votesCount)
-    {
-        $this->votesCount = $votesCount;
-
-        return $this;
-    }
-
     public function isAllowingProgressSteps(): bool
     {
         return $this->allowingProgressSteps;
@@ -225,26 +194,12 @@ class SelectionStep extends AbstractStep implements IndexableInterface
         return $this;
     }
 
-    public function incrementVotesCount()
-    {
-        ++$this->votesCount;
-
-        return $this;
-    }
-
-    public function decrementVotesCount()
-    {
-        --$this->votesCount;
-
-        return $this;
-    }
-
     public function getType()
     {
         return 'selection';
     }
 
-    public function isSelectionStep()
+    public function isSelectionStep(): bool
     {
         return true;
     }
@@ -297,7 +252,7 @@ class SelectionStep extends AbstractStep implements IndexableInterface
         return !$this->isProposalsHidden() || $this->getStartAt() <= new \DateTime();
     }
 
-    public function isIndexable()
+    public function isIndexable(): bool
     {
         return $this->getIsEnabled();
     }
