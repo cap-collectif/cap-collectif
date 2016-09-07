@@ -22,7 +22,12 @@ class ProposalStepVotesResolver
     protected $proposalCollectVoteRepository;
     protected $collectStepRepository;
 
-    public function __construct(ProposalSelectionVoteRepository $proposalSelectionVoteRepository, SelectionStepRepository $selectionStepRepository, ProposalCollectVoteRepository $proposalCollectVoteRepository, CollectStepRepository $collectStepRepository)
+    public function __construct(
+      ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+      SelectionStepRepository $selectionStepRepository,
+      ProposalCollectVoteRepository $proposalCollectVoteRepository,
+      CollectStepRepository $collectStepRepository
+      )
     {
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->selectionStepRepository = $selectionStepRepository;
@@ -163,10 +168,17 @@ class ProposalStepVotesResolver
 
     public function getVotableStepsForProposal(Proposal $proposal)
     {
-        return $this
+        $votableSteps = new ArrayCollection();
+        $collectStep = $proposal->getProposalForm()->getStep();
+        if ($collectStep->isVotable()) {
+            $votableSteps->add($collectStep);
+        }
+        $votablesSteps->concat(
+          $this
             ->selectionStepRepository
             ->getVotableStepsForProposal($proposal)
-        ;
+        );
+        return $votableSteps;
     }
 
     public function getVotableStepsForProject(Project $project)

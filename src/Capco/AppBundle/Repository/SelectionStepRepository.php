@@ -6,9 +6,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Project;
 
-/**
- * SelectionStepRepository.
- */
 class SelectionStepRepository extends AbstractStepRepository
 {
     public function getVotableStepsForProposal(Proposal $proposal)
