@@ -14,7 +14,7 @@ use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class ProposalStepVotesResolver
 {
