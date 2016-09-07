@@ -34,7 +34,7 @@ linters:
     style: loud # silent, loud
 
   DebugStatement:
-    enabled: false #disable
+    enabled: true
 
   DeclarationOrder:
     enabled: false
@@ -46,7 +46,7 @@ linters:
     enabled: true
 
   ElsePlacement:
-    enabled: false #disable
+    enabled: true
     style: same_line # or 'new_line'
 
   EmptyLineBetweenBlocks:
