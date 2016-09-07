@@ -4,57 +4,57 @@
 
 // Choice expanded
 .search__choice-panel {
-  .radio {
-    margin-top: 7px;
-    margin-bottom: 0;
-  }
-  .radio input {
-    display: none;
-  }
-  .radio label {
-    padding-left: 0;
-    color: $link-color;
-
-    &:hover,
-    &:active,
-    &.active,
-    &:focus {
-      text-decoration: underline;
-      color: $link-hover-color;
+    .radio {
+        margin-top: 7px;
+        margin-bottom: 0;
     }
-  }
+    .radio input {
+        display: none;
+    }
+    .radio label {
+        padding-left: 0;
+        color: $link-color;
 
-  .radio:first-child {
-    margin-top: 0;
-  }
+        &:hover,
+        &:active,
+        &.active,
+        &:focus {
+            text-decoration: underline;
+            color: $link-hover-color;
+        }
+    }
+
+    .radio:first-child {
+        margin-top: 0;
+    }
 }
 
 .search__results {
-  list-style-type: none;
-  padding-left: 0;
+    list-style-type: none;
+    padding-left: 0;
 
-  li {
-    padding-top: 5px;
-  }
+    li {
+        padding-top: 5px;
+    }
 
-  li:first-child {
-    padding-top: 0;
-  }
+    li:first-child {
+        padding-top: 0;
+    }
 }
 
 .search-result__title {
-  line-height: normal;
+    line-height: normal;
 }
 
 .search-result__type {
-  margin-right: 5px;
+    margin-right: 5px;
 }
 
 .search-result__date {
-  padding-left: 10px;
+    padding-left: 10px;
 }
 
 // Highlighted results
 .search__highlight {
-  font-weight: bold;
+    font-weight: bold;
 }

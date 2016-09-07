@@ -3,155 +3,155 @@
 ================================================================*/
 
 #main-navbar {
-  // Search button
-  a.navbar__search {
-    color: $white;
-    font-size: larger;
-    padding: 11px 12px 12px;
-    display: inline-block;
-
-    &:hover,
-    &:focus,
-    &:active,
-    &.active {
-      text-decoration: none;
-    }
-  }
-
-  .navbar__dropdown > a {
-    padding: 8px 15px;
-  }
-
-  //Fix for mobile view
-  .container-fluid > .navbar-collapse,
-  .container-fluid > .navbar-header,
-  .container > .navbar-collapse,
-  .container > .navbar-header {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  & > .container .navbar-brand {
-    margin-left: 0;
-  }
-
-  .navbar-brand {
-    padding: 5px;
-    img {
-      height: 100%;
-      vertical-align: middle;
-      width: auto;
-    }
-  }
-
-  .navbar__toggle-icon,
-  .navbar__toggle-label {
-    display: inline-block;
-  }
-  .navbar__toggle-label {
-    padding-left: 5px;
-  }
-
-  @media (max-width: $screen-xs-max) {
-    min-height: $navbar-collapsed-height;
-    .navbar-brand {
-      max-width: 50%;
-      & > img {
-        height: auto;
-        width: 100%;
-      }
-    }
-
+    // Search button
     a.navbar__search {
-      display: block;
-      font-size: 16px;
-      margin: -6px -15px;
+        color: $white;
+        font-size: larger;
+        padding: 11px 12px 12px;
+        display: inline-block;
 
-      span {
-        display: inline !important;
-      }
-    }
-  }
-
-  //Fix for scroll when the navigation is too large
-  .dropdown-menu {
-    height: auto;
-    max-height: 350px;
-    overflow-x: hidden;
-  }
-
-  // CSS from bootstrap dropdown menu
-  .dropdown-menu > .nav-dropdown-section > li > a {
-    clear: both;
-    color: #000;
-    display: block;
-    line-height: 1.42857;
-    padding: 3px 20px;
-    white-space: nowrap;
-  }
-
-  .dropdown-menu > .nav-dropdown-section {
-    border-bottom: 0;
-    border-top: 0;
-    display: block;
-  }
-
-  .dropdown-menu > .nav-dropdown-section + .nav-dropdown-section {
-    border-top: 0;
-  }
-
-  .dropdown-menu > .nav-dropdown-section + li {
-    margin-top: 9px;
-  }
-
-  .dropdown-menu > .nav-dropdown-section > .dropdown-header {
-    font-size: 14px;
-    opacity: .5;
-  }
-
-  .dropdown-menu > .nav-dropdown-section:first-child > li.divider:first-child,
-  .dropdown-menu > .nav-dropdown-section:last-child > li.divider:last-child {
-    display: none;
-  }
-
-  .dropdown-menu > .nav-dropdown-section > li > a:hover,
-  .dropdown-menu > .nav-dropdown-section > li > a:focus {
-    text-decoration: none;
-  }
-
-  #navbar-content li.navbar-dropdown-more {
-    position: relative;
-
-    ul {
-      left: 0;
-      position: absolute;
-    }
-  }
-
-  #navbar-content .nav-dropdown-section {
-    margin: 0;
-  }
-
-  #navbar-content .dropdown-menu > .nav-dropdown-section {
-    border-bottom: 1px solid #e7e7e7;
-    padding-bottom: 9px;
-    padding-top: 9px;
-
-    &:first-child {
-      border-top: 0;
-      padding-top: 0;
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+            text-decoration: none;
+        }
     }
 
-    &:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
+    .navbar__dropdown > a {
+        padding: 8px 15px;
     }
-  }
 
-  #navbar-content .dropdown-menu > li + .nav-dropdown-section {
-    border-top: 1px solid #e7e7e7;
-    margin-top: 9px;
-  }
+    //Fix for mobile view
+    .container-fluid > .navbar-collapse,
+    .container-fluid > .navbar-header,
+    .container > .navbar-collapse,
+    .container > .navbar-header {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    & > .container .navbar-brand {
+        margin-left: 0;
+    }
+
+    .navbar-brand {
+        padding: 5px;
+        img {
+            height: 100%;
+            vertical-align: middle;
+            width: auto;
+        }
+    }
+
+    .navbar__toggle-icon,
+    .navbar__toggle-label {
+        display: inline-block;
+    }
+    .navbar__toggle-label {
+        padding-left: 5px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+        min-height: $navbar-collapsed-height;
+        .navbar-brand {
+            max-width: 50%;
+            & > img {
+                height: auto;
+                width: 100%;
+            }
+        }
+
+        a.navbar__search {
+            display: block;
+            font-size: 16px;
+            margin: -6px -15px;
+
+            span {
+                display: inline !important;
+            }
+        }
+    }
+
+    //Fix for scroll when the navigation is too large
+    .dropdown-menu {
+        height: auto;
+        max-height: 350px;
+        overflow-x: hidden;
+    }
+
+    // CSS from bootstrap dropdown menu
+    .dropdown-menu > .nav-dropdown-section > li > a {
+        clear: both;
+        color: #000;
+        display: block;
+        line-height: 1.42857;
+        padding: 3px 20px;
+        white-space: nowrap;
+    }
+
+    .dropdown-menu > .nav-dropdown-section {
+        border-bottom: 0;
+        border-top: 0;
+        display: block;
+    }
+
+    .dropdown-menu > .nav-dropdown-section + .nav-dropdown-section {
+        border-top: 0;
+    }
+
+    .dropdown-menu > .nav-dropdown-section + li {
+        margin-top: 9px;
+    }
+
+    .dropdown-menu > .nav-dropdown-section > .dropdown-header {
+        font-size: 14px;
+        opacity: .5;
+    }
+
+    .dropdown-menu > .nav-dropdown-section:first-child > li.divider:first-child,
+    .dropdown-menu > .nav-dropdown-section:last-child > li.divider:last-child {
+        display: none;
+    }
+
+    .dropdown-menu > .nav-dropdown-section > li > a:hover,
+    .dropdown-menu > .nav-dropdown-section > li > a:focus {
+        text-decoration: none;
+    }
+
+    #navbar-content li.navbar-dropdown-more {
+        position: relative;
+
+        ul {
+            left: 0;
+            position: absolute;
+        }
+    }
+
+    #navbar-content .nav-dropdown-section {
+        margin: 0;
+    }
+
+    #navbar-content .dropdown-menu > .nav-dropdown-section {
+        border-bottom: 1px solid #e7e7e7;
+        padding-bottom: 9px;
+        padding-top: 9px;
+
+        &:first-child {
+            border-top: 0;
+            padding-top: 0;
+        }
+
+        &:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    #navbar-content .dropdown-menu > li + .nav-dropdown-section {
+        border-top: 1px solid #e7e7e7;
+        margin-top: 9px;
+    }
 
 }
 
@@ -159,115 +159,115 @@
     $Jumbotron
 ================================================================*/
 .jumbotron--custom {
-  padding: 30px;
-  margin-bottom: 0;
-  @media (max-width: $screen-xs-max) {
-    padding: 15px;
-  }
-
-  h2, .h2,
-  h1, .h1 {
-    font-size: 36px;
-    padding-top: 0;
-    margin-bottom: 15px;
-    margin-top: 0;
+    padding: 30px;
+    margin-bottom: 0;
     @media (max-width: $screen-xs-max) {
-      margin-bottom: 5px;
+        padding: 15px;
     }
 
-    &:only-child {
-      margin-bottom: 0;
+    h2, .h2,
+    h1, .h1 {
+        font-size: 36px;
+        padding-top: 0;
+        margin-bottom: 15px;
+        margin-top: 0;
+        @media (max-width: $screen-xs-max) {
+            margin-bottom: 5px;
+        }
+
+        &:only-child {
+            margin-bottom: 0;
+        }
     }
-  }
 }
 
 $backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
 @each $bg in $backgrounds {
-  $name: nth($bg, 1);
-  $color: nth($bg, 2);
-  $text: set-link-text-color($color);
+    $name: nth($bg, 1);
+    $color: nth($bg, 2);
+    $text: set-link-text-color($color);
 
-  .jumbotron--bg-#{$name} {
-    background-color: $color;
-    color: $text;
-    h1, h2, h3, h4, a, a:hover {
-      color: $text;
-      border-color: $text;
+    .jumbotron--bg-#{$name} {
+        background-color: $color;
+        color: $text;
+        h1, h2, h3, h4, a, a:hover {
+            color: $text;
+            border-color: $text;
+        }
     }
-  }
 }
 
 .jumbotron--small p {
-  font-size: 17px;
+    font-size: 17px;
 }
 
 .home-page .jumbotron--custom {
-  h1, .h1 {
-    font-size: 63px;
-  }
-  @media (max-width: $screen-xs-max) {
     h1, .h1 {
-      font-size: 40px;
-      word-wrap: break-word;
+        font-size: 63px;
     }
-  }
+    @media (max-width: $screen-xs-max) {
+        h1, .h1 {
+            font-size: 40px;
+            word-wrap: break-word;
+        }
+    }
 }
 
 .jumbotron--bg-1 {
-  position: relative;
-  p {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 0;
-  }
-  p:first-child {
-    padding-top: 0;
-  }
-  p:last-child {
-    padding-bottom: 0;
-  }
+    position: relative;
+    p {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 0;
+    }
+    p:first-child {
+        padding-top: 0;
+    }
+    p:last-child {
+        padding-bottom: 0;
+    }
 }
 
 .jumbotron--bg-2 {
-  border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
 }
 
 .skip-links {
-  overflow: hidden;
-  width: 100%;
-  height: 0px;
+    overflow: hidden;
+    width: 100%;
+    height: 0px;
 
-  &.active {
-    height: auto;
-  }
+    &.active {
+        height: auto;
+    }
 }
 
 .skip-links-container {
-  border-bottom: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
 }
 
 .skip-links-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 
-  li {
-    color: #000;
-    font-size: 12px;
-    float: left;
+    li {
+        color: #000;
+        font-size: 12px;
+        float: left;
 
-    &:hover {
-      color: $brand-primary;
+        &:hover {
+            color: $brand-primary;
+        }
+
+        a {
+            display: inline-block;
+            padding-top: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            text-decoration: underline;
+            color: inherit;
+        }
     }
-
-    a {
-      display: inline-block;
-      padding-top: 10px;
-      padding-right: 10px;
-      padding-bottom: 10px;
-      text-decoration: underline;
-      color: inherit;
-    }
-  }
 }

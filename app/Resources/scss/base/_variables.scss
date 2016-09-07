@@ -22,7 +22,7 @@ $brand-color-2: #1abc9c;
 
 // = Base
 // -----------------------------
-$font-size-base:  16px;
+$font-size-base: 16px;
 $body-bg: $brand-color-2;
 $main-bg: #fff;
 $alt-section: #ebebeb;
@@ -35,11 +35,8 @@ $navbar-collapsed-height: 60px;
 
 // = Titles
 // -------------------------------
-$titles:
-	//nb  padding-top  margin-bottom
-	(h1 60px 30px)
-	(h2 60px 30px)
-	(h3 40px 10px);
+$titles: //nb  padding-top  margin-bottom
+                (h1 60px 30px) (h2 60px 30px) (h3 40px 10px);
 
 // = Custom jumbotron
 // -----------------------------
@@ -57,24 +54,9 @@ $custom-filter-background: $white;
 
 // = Custom buttons
 // -----------------------------
-$btns-custom:
-  (custom-1 $white $brand-color-1)
-  (custom-2 $brand-color-1 $white)
-  (dark-gray $dark-gray $white)
-  (light-gray $light-gray $black)
-  (darkest-gray $darkest-gray $white);
+$btns-custom: (custom-1 $white $brand-color-1) (custom-2 $brand-color-1 $white) (dark-gray $dark-gray $white) (light-gray $light-gray $black) (darkest-gray $darkest-gray $white);
 
-$btns-outline:
-  ("default" $btn-default-color $btn-default-color $btn-default-bg)
-  (success $btn-success-bg $btn-success-bg $btn-default-bg)
-  (info $btn-info-bg $btn-info-bg $btn-default-bg)
-  (warning $btn-warning-bg $btn-warning-bg $btn-default-bg)
-  (danger $btn-danger-bg $btn-danger-bg $btn-default-bg)
-  (custom-1 $white $white $brand-color-1)
-  (custom-2 $brand-color-1 $brand-color-1 $white)
-  (primary $btn-primary-bg $btn-primary-bg $btn-default-bg)
-  (dark-gray $dark-gray $dark-gray $white)
-  (light-gray $light-gray $light-gray $black);
+$btns-outline: ("default" $btn-default-color $btn-default-color $btn-default-bg) (success $btn-success-bg $btn-success-bg $btn-default-bg) (info $btn-info-bg $btn-info-bg $btn-default-bg) (warning $btn-warning-bg $btn-warning-bg $btn-default-bg) (danger $btn-danger-bg $btn-danger-bg $btn-default-bg) (custom-1 $white $white $brand-color-1) (custom-2 $brand-color-1 $brand-color-1 $white) (primary $btn-primary-bg $btn-primary-bg $btn-default-bg) (dark-gray $dark-gray $dark-gray $white) (light-gray $light-gray $light-gray $black);
 
 // = Custom form
 // -----------------------------
@@ -93,38 +75,16 @@ $custom-video-play: 50px;
 
 // = Social Colors
 // ------------------------------
-$social-colors:
-  // name color icon
-  (facebook #3b5998 "e")
-  (twitter #55acee "h")
-  (googleplus #d73d32 "m")
-  (linkedin #1279B3 "f")
-  (nouscitoyens #1086b4 "\e00b")
-  (rss #FDAC61 "g");
+$social-colors: // name color icon
+                (facebook #3b5998 "e") (twitter #55acee "h") (googleplus #d73d32 "m") (linkedin #1279B3 "f") (nouscitoyens #1086b4 "\e00b") (rss #FDAC61 "g");
 
 // = Opinion types
 // -------------------------------
-$opinion-types:
-  ("primary" $brand-color-2)
-  ("default" #f5f5f5)
-  ("red" #f2dede)
-  ("orange" #fcf8e3)
-  ("blue" #d9edf7)
-  ("bluedark" darken(#d9edf7, 15%))
-  ("green" #dff0d8)
-  ("white" #fff)
-  ("gray" $gray-primary)
-  ("light-gray", $light-gray)
-  (source $brand-primary)
-  (idee $light-gray)
-  (project $light-gray);
+$opinion-types: ("primary" $brand-color-2) ("default" #f5f5f5) ("red" #f2dede) ("orange" #fcf8e3) ("blue" #d9edf7) ("bluedark" darken(#d9edf7, 15%)) ("green" #dff0d8) ("white" #fff) ("gray" $gray-primary) ("light-gray", $light-gray) (source $brand-primary) (idee $light-gray) (project $light-gray);
 
 // = Opinion labels
 // -------------------------------
-$opinion-labels:
-  ("blue" #5bc0de)
-  ("green" #5cb85c)
-;
+$opinion-labels: ("blue" #5bc0de) ("green" #5cb85c);
 
 // = Form feedback
 // -------------------------------
@@ -140,9 +100,4 @@ $votes-widget-btn-bg: #ffffff;
 $votes-widget-btn-text: #000000;
 
 // = Icons color
-$icons-colors:
-  (red #e2264d)
-  (yellow #ffff00)
-  (blue #5bc0de)
-  (green  #5cb85c)
-  (black #000000);
+$icons-colors: (red #e2264d) (yellow #ffff00) (blue #5bc0de) (green #5cb85c) (black #000000);

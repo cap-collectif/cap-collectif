@@ -86,7 +86,7 @@ linters:
     filename_extension: false
 
   Indentation:
-    enabled: false #disable
+    enabled: true
     allow_non_nested_indentation: false
     character: space # or 'tab'
     width: 4
