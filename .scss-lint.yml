@@ -9,7 +9,7 @@ exclude:
 
 linters:
   BangFormat:
-    enabled: false #disable
+    enabled: true
     space_before_bang: true
     space_after_bang: false
 
