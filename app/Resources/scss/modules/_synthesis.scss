@@ -710,7 +710,7 @@ $dark-red: #A94442;
 // ********************************* Utils **********************************************
 
 // Colors
-$items-colors: (#0000ff $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) ($black $black);
+$items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) ($black $black);
 
 @each $icolor in $items-colors {
     $name: nth($icolor, 1);
@@ -785,7 +785,7 @@ $items-colors: (#0000ff $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray
             height: 100%;
             background-color: $light-gray;
         }
-        
+
         .element__title {
             position: relative;
             z-index: 1000;

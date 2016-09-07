@@ -65,7 +65,7 @@ linters:
     present: true
 
   HexLength:
-    enabled: false #disable
+    enabled: true
     style: short # or 'long'
 
   HexNotation:

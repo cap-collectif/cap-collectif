@@ -7,13 +7,13 @@
 $white: #fff;
 $black: #000;
 $gray-primary: #c0c0c0;
-$excerpt: #999999;
+$excerpt: #999;
 $light-gray: #f6f6f6;
-$dark-gray: #999999;
+$dark-gray: #999;
 $darkest-gray: #3E4149;
 $dark-blue: #2a6496;
 $light-blue: #428bca;
-$excerpt: #999999;
+$excerpt: #999;
 
 // = Brand colors
 // -----------------------------
@@ -60,9 +60,9 @@ $btns-outline: ("default" $btn-default-color $btn-default-color $btn-default-bg)
 
 // = Custom form
 // -----------------------------
-$custom-form-border: #00cc66;
+$custom-form-border: #0c6;
 $custom-form-bg: #fff;
-$custom-form-legend: #00cc66;
+$custom-form-legend: $custom-form-border;
 
 // = Custom calendar event
 // -----------------------------
@@ -94,10 +94,10 @@ $success-text: #5cb85c;
 
 // = Proposal votes widget
 $votes-widget-bg: #f6f6f6;
-$votes-widget-text: #777777;
+$votes-widget-text: #777;
 $votes-widget-border: #e7e7e7;
-$votes-widget-btn-bg: #ffffff;
-$votes-widget-btn-text: #000000;
+$votes-widget-btn-bg: #fff;
+$votes-widget-btn-text: $black;
 
 // = Icons color
-$icons-colors: (#ff0000 #e2264d) (#ffff00 #ffff00) (#0000ff #5bc0de) (#008000 #5cb85c) (#000000 #000000);
+$icons-colors: (#f00 #e2264d) (#ff0 #ff0) (#00f #5bc0de) (#008000 #5cb85c) ($black $black);
