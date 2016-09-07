@@ -11,7 +11,7 @@ const ProposalVoteModal = React.createClass({
   displayName: 'ProposalVoteModal',
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired,
+    step: PropTypes.object,
     showModal: PropTypes.bool.isRequired,
     onToggleModal: PropTypes.func.isRequired,
     userHasVote: PropTypes.bool,
@@ -24,6 +24,7 @@ const ProposalVoteModal = React.createClass({
   getDefaultProps() {
     return {
       user: null,
+      step: null,
       userHasVote: false,
       creditsLeft: null,
       onVoteChange: () => {},
@@ -81,7 +82,7 @@ const ProposalVoteModal = React.createClass({
       step,
       user,
     } = this.props;
-    return !step.open || (user && step.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
+    return !step || !step.open || (user && step.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
   },
 
   close() {
@@ -139,7 +140,7 @@ const ProposalVoteModal = React.createClass({
             bsStyle={(!userHasVote || this.state.isSubmitting) ? 'success' : 'danger'}
             style={{ marginLeft: '10px' }}
             disabled={this.disableSubmitButton()}
-            loginOverlay={step.voteType === VOTE_TYPE_BUDGET}
+            loginOverlay={step && step.voteType === VOTE_TYPE_BUDGET}
           />
         </Modal.Footer>
       </Modal>

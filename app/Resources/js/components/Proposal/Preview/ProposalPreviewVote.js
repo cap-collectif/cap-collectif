@@ -112,7 +112,7 @@ const ProposalPreviewVote = React.createClass({
         />
         <ProposalVoteModal
           proposal={proposal}
-          selectionStep={step}
+          step={step}
           showModal={this.state.showModal}
           onToggleModal={this.toggleModal}
           onVoteChange={onVoteChange}

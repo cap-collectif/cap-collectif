@@ -165,7 +165,7 @@ describe('<ProposalPage />', () => {
     expect(proposalVoteModal).to.have.length(1);
     expect(proposalVoteModal.props()).to.contains({
       proposal: proposalWithVotes,
-      selectionStep: votableStepSimple,
+      step: votableStepSimple,
       showModal: false,
     });
     expect(proposalVoteModal.prop('onToggleModal')).to.be.a('function');
