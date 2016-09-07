@@ -6,6 +6,7 @@ exclude:
   - './node_modules/**/*'
   - './web/**'
   - './vendor/**'
+  - './bower_components/**'
 
 linters:
   BangFormat:
@@ -54,13 +55,13 @@ linters:
     ignore_single_line_blocks: true
 
   EmptyRule:
-    enabled: false #disable
+    enabled: true
 
   ExtendDirective:
     enabled: false
 
   FinalNewline:
-    enabled: false #disable
+    enabled: true
     present: true
 
   HexLength:
