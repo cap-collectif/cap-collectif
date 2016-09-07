@@ -13,14 +13,18 @@ Capco\AppBundle\Entity\ProposalForm:
     themeMandatory: false
     categoryMandatory: true
   proposalform2:
-    title: Formulaire de collecte
+    title: Formulaire de la collecte 2
     description: <text(100)>
     step: "@collectstep2"
   proposalform3:
-    title: Formulaire de collecte
+    title: Formulaire de la collecte 3
     description: <text(100)>
     step: "@collectstep3"
   proposalform4:
-    title: Formulaire de collecte
+    title: Formulaire de la collecte 4
     description: <text(100)>
     step: "@collectstep4"
+  proposalform5:
+    title: Formulaire de la collecte 5
+    description: <text(100)>
+    step: "@collectstep5"
