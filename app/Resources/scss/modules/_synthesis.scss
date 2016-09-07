@@ -229,7 +229,7 @@ $dark-red: #A94442;
     }
 
     .nav {
-        border-bottom: none;
+        border-bottom: 0;
     }
 
     .menu__item {
@@ -240,7 +240,7 @@ $dark-red: #A94442;
         & > a {
             margin-right: 0;
             @include border-radius(0 !important);
-            border: none;
+            border: 0;
             color: $black;
             border-top: 2px solid transparent;
         }
@@ -249,8 +249,8 @@ $dark-red: #A94442;
         border-top: 1px solid transparent;
     }
     .menu__item.active > a {
-        border-left: none;
-        border-right: none;
+        border-left: 0;
+        border-right: 0;
     }
     .menu__item:first-child > a {
         border-left: 1px solid $light-gray;
@@ -312,7 +312,7 @@ $dark-red: #A94442;
 // Global
 .synthesis__tree {
     border: 1px solid $light-gray;
-    border-top: none;
+    border-top: 0;
 }
 
 .tree__list {
@@ -344,7 +344,7 @@ $dark-red: #A94442;
 
 // In menu
 .menu__tree .synthesis__tree {
-    border: none;
+    border: 0;
     padding-top: 15px;
 
     .tree__item__content:not(#element-root) {
@@ -662,7 +662,7 @@ $dark-red: #A94442;
             width: 100%;
             resize: none;
             background-color: inherit;
-            border: none;
+            border: 0;
         }
     }
 
@@ -680,7 +680,7 @@ $dark-red: #A94442;
             background-color: $lightest-gray;
             padding: 15px;
             &:first-child {
-                border-top: none;
+                border-top: 0;
             }
 
             .element__actions {
