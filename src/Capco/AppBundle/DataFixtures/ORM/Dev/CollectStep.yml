@@ -24,3 +24,9 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     endAt: <dateTimeBetween('-28 days', '-10 days')>
     private: true
     voteType: 0
+  collectstep5:
+    title: Collecte des propositions avec vote simple
+    body: <p><text(1000)></p>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('+28 days', '+50 days')>
+    voteType: 1
