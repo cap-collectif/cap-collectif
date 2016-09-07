@@ -1,5 +1,6 @@
 Capco\AppBundle\Entity\Proposal:
   proposal1:
+    id: 1
     title: Ravalement de la façade de la bibliothèque municipale
     body: |
        <p><text(100)></p>
@@ -16,6 +17,7 @@ Capco\AppBundle\Entity\Proposal:
     likers: ['@user1', '@user2']
     category: '@pCategory2'
   proposal2:
+    id: 2
     title: Rénovation du gymnase
     body: |
        <p><text(100)></p>
@@ -32,6 +34,7 @@ Capco\AppBundle\Entity\Proposal:
     likers: ['@user504']
     category: '@pCategory1'
   proposal3:
+    id: 3
     title: Installation de bancs sur la place de la mairie
     body: |
        <p>On va en faire un beau gymnase, promis :)</p>
@@ -47,6 +50,7 @@ Capco\AppBundle\Entity\Proposal:
     createdAt: <(new \DateTime('2015-03-01'))>
     category: '@pCategory2'
   proposal4:
+    id: 4
     title: Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
     body: |
        <p><text(100)></p>
@@ -59,6 +63,7 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district2'
   proposal5:
+    id: 5
     title: Proposition à la corbeille
     body: |
        <p><text(100)></p>
@@ -72,6 +77,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status3'
     trashedReason: "Pub"
   proposal6:
+    id: 6
     title: Proposition dépubliée
     body: |
        <p><text(100)></p>
@@ -84,6 +90,7 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
   proposal7:
+    id: 7
     title: Proposition très chère
     body: |
        <p><text(100)></p>
@@ -97,6 +104,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 2999999
   proposal8:
+    id: 8
     title: Proposition pas chère
     body: |
        <p><text(100)></p>
@@ -110,6 +118,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
   proposal9:
+    id: 9
     title: Proposition gratuite
     body: |
        <p><text(100)></p>
@@ -122,6 +131,7 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
   proposal10:
+    id: 10
     title: Proposition pas encore votable
     body: |
        <p><text(100)></p>
@@ -135,6 +145,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
   proposal11:
+    id: 11
     title: Proposition plus votable
     body: |
        <p><text(100)></p>
@@ -148,6 +159,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
   proposal12:
+    id: 12
     title: Proposition plus votable
     body: |
          <p><text(100)></p>
@@ -161,6 +173,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status7'
     estimation: 100
   proposal13:
+    id: 13
     title: Proposition plus votable
     body: |
        <p><text(100)></p>
@@ -169,6 +182,19 @@ Capco\AppBundle\Entity\Proposal:
     rating: 3
     author: '@user5'
     proposalForm: '@proposalform4'
+    theme: '@theme2'
+    district: '@district3'
+    status: '@status1'
+    estimation: 100
+  proposal14:
+    id: 14
+    title: Mon super projet
+    body: |
+       <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    author: '@user1'
+    proposalForm: '@proposalform5'
     theme: '@theme2'
     district: '@district3'
     status: '@status1'

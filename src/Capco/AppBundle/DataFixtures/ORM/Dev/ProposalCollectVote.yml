@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\ProposalCollectVote:
+  proposalCollectVote{1...50}:
+    proposal: '@proposal14'
+    collectStep: '@collectstep5'
+    user: '@user<current()>'
