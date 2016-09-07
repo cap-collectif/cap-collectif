@@ -42,6 +42,7 @@
 
             &:hover {
                 background-color: darken($color, 10%);
+                
                 &:before {
                     background-color: darken($subcolor, 10%);
                 }

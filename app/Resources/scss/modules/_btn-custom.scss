@@ -29,6 +29,7 @@ body .btn:focus {
         &.btn-#{$name} {
             border: 1px solid $border;
             color: $bg;
+            
             &:hover,
             &.active {
                 background-color: $bg;

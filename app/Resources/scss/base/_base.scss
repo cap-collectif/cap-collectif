@@ -69,6 +69,7 @@ body {
     .container--alt {
         @extend .container--bg;
         color: $black;
+
         &:after {
             background-color: $alt-section;
             border-bottom: 1px solid $border-color;
@@ -83,6 +84,7 @@ body {
 
 .main .container--custom:nth-of-type(odd) {
     @extend .container--alt;
+
     .section-clear {
         clear: both;
     }
@@ -102,6 +104,7 @@ body {
 
 .block {
     margin-bottom: 30px;
+
     @media (max-width: $screen-xs-max) {
         margin-bottom: 15px;
     }
@@ -127,6 +130,7 @@ body {
     @media (max-width: $screen-sm-max) {
         margin-top: 30px;
     }
+
     @extend .block--first-mobile;
 }
 
@@ -140,6 +144,7 @@ body {
     @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
         margin-bottom: 30px;
     }
+
     @extend .block--mobile;
 }
 
@@ -207,6 +212,7 @@ a.excerpt {
     position: relative;
     margin: 15px auto;
     text-align: center;
+
     &:after {
         content: "";
         position: absolute;
@@ -217,6 +223,7 @@ a.excerpt {
         height: 1px;
         z-index: 1;
     }
+
     span {
         position: relative;
         padding: 0 10px;
@@ -232,6 +239,7 @@ a.excerpt {
     margin: 15px auto;
     text-align: center;
     color: $dark-gray;
+
     span {
         padding: 0 10px;
         max-width: 60%;
@@ -347,6 +355,7 @@ a.excerpt {
 
 .pagination--custom {
     height: 36px;
+
     li {
         float: left;
     }
@@ -396,6 +405,7 @@ a.excerpt {
         width: 100%;
         text-align: left;
         color: #333;
+
         &:hover {
             text-decoration: none;
             color: #262626;
@@ -417,6 +427,7 @@ a.excerpt {
     .modal-title {
         margin: 0;
     }
+
     textarea {
         width: 100%;
         font-size: 13px;
@@ -450,6 +461,7 @@ div.embeddedContent {
 
 .btgrid [class*="col-"] {
     margin-bottom: 15px;
+
     @media (min-width: $screen-md-min) {
         margin-bottom: 30px;
     }
@@ -510,17 +522,21 @@ div.embeddedContent {
         height: 100%;
         width: 100%;
     }
+
     .col-xs-height {
         display: table-cell;
         float: none;
         height: 100%;
     }
+
     .col-xs-top {
         vertical-align: top;
     }
+
     .col-xs-middle {
         vertical-align: middle;
     }
+
     .col-xs-bottom {
         vertical-align: bottom;
     }
@@ -533,17 +549,21 @@ div.embeddedContent {
         height: 100%;
         width: 100%;
     }
+
     .col-sm-height {
         display: table-cell;
         float: none;
         height: 100%;
     }
+
     .col-sm-top {
         vertical-align: top;
     }
+
     .col-sm-middle {
         vertical-align: middle;
     }
+
     .col-sm-bottom {
         vertical-align: bottom;
     }
@@ -556,17 +576,21 @@ div.embeddedContent {
         height: 100%;
         width: 100%;
     }
+
     .col-md-height {
         display: table-cell;
         float: none;
         height: 100%;
     }
+
     .col-md-top {
         vertical-align: top;
     }
+
     .col-md-middle {
         vertical-align: middle;
     }
+
     .col-md-bottom {
         vertical-align: bottom;
     }
@@ -579,17 +603,21 @@ div.embeddedContent {
         height: 100%;
         width: 100%;
     }
+
     .col-lg-height {
         display: table-cell;
         float: none;
         height: 100%;
     }
+
     .col-lg-top {
         vertical-align: top;
     }
+
     .col-lg-middle {
         vertical-align: middle;
     }
+
     .col-lg-bottom {
         vertical-align: bottom;
     }
@@ -597,10 +625,13 @@ div.embeddedContent {
 
 .nav-center {
     text-align: center;
+
     ul.nav {
         display: inline-block;
+
         li {
             display: inline;
+
             a {
                 float: left;
             }

@@ -27,6 +27,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     max-height: 36px;
     word-break: break-word;
     overflow: hidden;
+
     .cap {
         padding-right: 5px;
     }
@@ -39,6 +40,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 
     .proposal__info {
         padding-top: 10px;
+
         .cap {
             font-size: 22px;
         }
@@ -198,22 +200,28 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     .proposal-vote__widget {
         margin-top: $navbar-collapsed-height;
         height: auto;
+
         .container {
             padding-top: 0;
             padding-bottom: 0;
         }
+
         .widget__image {
             margin-right: 10px;
         }
+
         & > .container .navbar-brand {
             margin-left: 15px !important;
         }
+
         .widget__progress-bar {
             width: auto;
         }
+
         .progress {
             margin-bottom: 0;
         }
+
         .navbar-toggle {
             padding: 0;
             border: 0;
@@ -222,17 +230,21 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
             cursor: pointer;
             margin-left: 10px;
         }
+
         .widget__counter__select {
             width: auto;
             margin-right: 0;
         }
+
         .widget__counter__value .form-group {
             margin-bottom: 0;
         }
+
         .navbar-nav {
             margin-top: 0;
             margin-bottom: 0;
         }
+
         .widget__button {
             float: none !important;
             margin-left: 0;
@@ -249,11 +261,13 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     body {
         padding-top: $navbar-height * 2;
     }
+
     @media (max-width: $screen-xs-max) {
         body {
             padding-top: $navbar-height + $navbar-collapsed-height;
         }
     }
+    
     @media (min-width: $screen-md-min) {
         .sidebar {
             top: 120px;

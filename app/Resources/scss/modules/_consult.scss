@@ -24,8 +24,10 @@
 
     & > li > a {
         padding: 0;
+
         &:hover {
             background-color: inherit;
+
             .category {
                 color: $brand-primary;
             }
@@ -40,6 +42,7 @@
     li i {
         font-size: 18px;
         color: $black;
+
         &:hover, &:active {
             color: $black;
         }
@@ -69,6 +72,7 @@
     border-top: 1px solid $border-color;
     border-bottom: 1px solid $border-color;
     margin-top: 15px;
+
     li .value {
         color: $black;
         font-size: 24px;
@@ -90,9 +94,11 @@
     color: $dark-gray;
     font-weight: bold;
     padding: 30px 15px;
+
     @media (max-width: $screen-xs-max) {
         padding: 35px 15px;
     }
+
     .icon {
         font-size: 80px;
         margin-bottom: 0;
@@ -103,6 +109,7 @@
     color: $dark-gray;
     font-weight: bold;
     padding: 15px 15px;
+    
     .icon {
         font-size: 40px;
         margin-bottom: 0;

@@ -9,6 +9,7 @@
 
     .container {
         padding: 30px;
+
         @media(max-width: $screen-xs-max) {
             padding: 15px;
         }
@@ -51,6 +52,7 @@
 
         .container {
             padding: 0 30px;
+
             @media (max-width: $screen-xs-max) {
                 padding: 0 15px;
             }
@@ -77,10 +79,12 @@
 
     .capco-powered {
         font-size: 13px;
+
         a {
             color: inherit;
             text-decoration: underline;
         }
+        
         .cap {
             position: relative;
             right: 2px;

@@ -75,6 +75,7 @@
                 float: none !important;
                 display: block;
             }
+
             .opinion__header__filter {
                 margin-bottom: 10px;
                 float: none !important;
@@ -124,6 +125,7 @@
             a {
                 color: $black;
             }
+
             a:hover {
                 color: $link-color;
             }
@@ -150,6 +152,7 @@
             padding-top: 0;
             margin-bottom: 0;
         }
+
         .btn, .opinion__votes-nb {
             margin-top: 10px;
         }
@@ -176,6 +179,7 @@
                 margin-right: 0;
             }
         }
+
         textarea {
             resize: vertical;
         }
@@ -184,15 +188,19 @@
     // Special cases : add an argument
     &.opinion--add-argument {
         background-color: $light-gray;
+
         .form-group {
             margin: 0;
         }
+
         textarea {
             resize: vertical;
         }
+
         button {
             margin-top: 10px;
         }
+
         button:first-child {
             margin-right: 10px;
         }
@@ -202,17 +210,21 @@
     &.opinion--argument {
         background-color: $light-gray;
         position: relative;
+
         .opinion__text {
             padding-top: 10px;
             margin-bottom: 0;
         }
+
         .btn,
         .opinion__votes {
             margin-top: 10px;
         }
+
         .opinion__user {
             margin-bottom: 0;
         }
+
         .opinion__votes {
             display: inline-block;
             border: 1px solid $gray-primary;
@@ -242,10 +254,12 @@
     // Special case : source
     &.opinion--source {
         margin-top: 0;
+
         .media-heading {
             margin-top: 0;
         }
     }
+
     &.opinion--source:hover {
         background-color: $white;
     }
@@ -315,9 +329,11 @@
         .opinion__text {
             word-break: break-word;
         }
+
         &:first-child {
             padding-top: 15px;
         }
+
         &:last-child {
             margin-bottom: 10px;
         }
@@ -330,6 +346,7 @@
         .media-list {
             padding-top: 30px;
             padding-left: 40px;
+
             @media (max-width: $screen-xs-max) {
                 padding-top: 15px;
             }
@@ -369,6 +386,7 @@
         .opinion__action-buttons {
             float: none !important;
         }
+
         .opinion__vote-group {
             margin-top: 10px;
         }
@@ -376,6 +394,7 @@
 
     .vote-form {
         display: inline-block;
+
         > div {
             display: inline-block;
         }
@@ -403,9 +422,11 @@
         margin-left: -15px;
         margin-right: -15px;
         border-bottom: 1px solid $border-color;
+
         .opinion__attachment {
             padding: 15px;
             border-top: 1px solid $border-color;
+            
             &:hover {
                 background-color: $light-gray;
                 text-decoration: none;

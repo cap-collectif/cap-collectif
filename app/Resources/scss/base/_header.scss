@@ -37,6 +37,7 @@
 
     .navbar-brand {
         padding: 5px;
+
         img {
             height: 100%;
             vertical-align: middle;
@@ -48,14 +49,17 @@
     .navbar__toggle-label {
         display: inline-block;
     }
+
     .navbar__toggle-label {
         padding-left: 5px;
     }
 
     @media (max-width: $screen-xs-max) {
         min-height: $navbar-collapsed-height;
+
         .navbar-brand {
             max-width: 50%;
+
             & > img {
                 height: auto;
                 width: 100%;
@@ -161,6 +165,7 @@
 .jumbotron--custom {
     padding: 30px;
     margin-bottom: 0;
+
     @media (max-width: $screen-xs-max) {
         padding: 15px;
     }
@@ -171,6 +176,7 @@
         padding-top: 0;
         margin-bottom: 15px;
         margin-top: 0;
+
         @media (max-width: $screen-xs-max) {
             margin-bottom: 5px;
         }
@@ -190,6 +196,7 @@ $backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
     .jumbotron--bg-#{$name} {
         background-color: $color;
         color: $text;
+
         h1, h2, h3, h4, a, a:hover {
             color: $text;
             border-color: $text;
@@ -205,6 +212,7 @@ $backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
     h1, .h1 {
         font-size: 63px;
     }
+
     @media (max-width: $screen-xs-max) {
         h1, .h1 {
             font-size: 40px;
@@ -215,14 +223,17 @@ $backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
 
 .jumbotron--bg-1 {
     position: relative;
+
     p {
         padding-top: 10px;
         padding-bottom: 10px;
         margin-bottom: 0;
     }
+
     p:first-child {
         padding-top: 0;
     }
+    
     p:last-child {
         padding-bottom: 0;
     }
