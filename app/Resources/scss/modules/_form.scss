@@ -144,11 +144,11 @@ Hack form button - radio check
 }
 
 .ranking__pick-box__choices {
-    border: 1px dashed lightgrey;
+    border: 1px dashed #d3d3d3;
 }
 
 .ranking__choice-box__choices {
-    border: 1px dashed lightgrey;
+    border: 1px dashed #d3d3d3;
     position: absolute;
     top: 0;
     left: 0;
@@ -157,7 +157,7 @@ Hack form button - radio check
 }
 
 .ranking__choice-box__placeholder {
-    color: gray;
+    color: #808080;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -169,7 +169,7 @@ Hack form button - radio check
 
 .ranking__item__icon {
     margin-right: 5px;
-    color: gray
+    color: #808080
 }
 
 .ranking__item__arrows {

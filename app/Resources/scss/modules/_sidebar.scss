@@ -62,7 +62,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: black;
+        background-color: $black;
         z-index: 1001;
         @include opacity(0.6);
     }
@@ -83,4 +83,3 @@
         width: $container-lg*0.25;
     }
 }
-

@@ -113,7 +113,7 @@ body {
 }
 
 .block--bordered {
-    background-color: white;
+    background-color: $white;
     border: 1px solid $border-color;
 }
 
@@ -221,7 +221,7 @@ a.excerpt {
         position: relative;
         padding: 0 10px;
         font-weight: bold;
-        background-color: white;
+        background-color: $white;
         max-width: 60%;
         display: inline-block;
         z-index: 2;
@@ -664,7 +664,7 @@ svg.avatar {
         right: 0;
         width: 50%;
         height: 1.2em;
-        background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%);
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), $white 50%);
     }
 }
 
@@ -719,7 +719,7 @@ svg.avatar {
         }
 
         &.active .badge {
-            color: white;
+            color: $white;
             background-color: #777777;
         }
 
@@ -740,7 +740,7 @@ svg.avatar {
     &__box {
         background-color: $light-gray;
         padding: 30px 25px 0 25px;
-        border: 1px lightgrey solid;
+        border: 1px #d3d3d3 solid;
         border-radius: 5px;
     }
 }

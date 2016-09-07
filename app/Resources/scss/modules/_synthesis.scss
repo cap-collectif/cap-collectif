@@ -479,7 +479,7 @@ $dark-red: #A94442;
         font-size: 16px;
 
         &.active {
-            color: orange;
+            color: #ffa500;
         }
     }
 }
@@ -489,10 +489,10 @@ $dark-red: #A94442;
 .synthesis__element-panel {
 
     .panel-title {
-        color: black;
+        color: $black;
 
         a, a.active {
-            color: black;
+            color: $black;
         }
     }
 
@@ -588,11 +588,11 @@ $dark-red: #A94442;
         }
 
         &.active {
-            color: orange;
+            color: #ffa500;
         }
 
         &:hover, &:focus {
-            color: orange !important;
+            color: #ffa500 !important;
             cursor: pointer;
 
             i.cap:before {
@@ -600,7 +600,7 @@ $dark-red: #A94442;
             }
 
             & ~ a {
-                color: orange !important;
+                color: #ffa500 !important;
 
                 i.cap:before {
                     content: "<";
@@ -693,7 +693,7 @@ $dark-red: #A94442;
 // ********************************* Utils **********************************************
 
 // Colors
-$items-colors: (blue $blue) (green $green) (orange $orange) (gray $gray) (black $black);
+$items-colors: (#0000ff $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) ($black $black);
 
 @each $icolor in $items-colors {
     $name: nth($icolor, 1);

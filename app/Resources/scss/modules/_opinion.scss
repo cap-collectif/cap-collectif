@@ -35,7 +35,7 @@
         border-bottom: 1px solid $border-color;
 
         .opinion__header__title {
-            color: black;
+            color: $black;
             margin: 10px 0 10px;
         }
 
@@ -122,7 +122,7 @@
         .opinion__title,
         .opinion__user {
             a {
-                color: black;
+                color: $black;
             }
             a:hover {
                 color: $link-color;
@@ -134,7 +134,7 @@
         }
 
         .opinion__title {
-            color: black;
+            color: $black;
             font-size: $font-size-base;
             margin: 0 0 5px;
             font-weight: normal;
@@ -166,7 +166,7 @@
 
     // Special case : current opinion
     &.opinion--current:hover {
-        background-color: white;
+        background-color: $white;
     }
 
     // Special case : add an comment
@@ -247,7 +247,7 @@
         }
     }
     &.opinion--source:hover {
-        background-color: white;
+        background-color: $white;
     }
 }
 
@@ -497,7 +497,7 @@
 
 .nb-votes {
     display: inline-block;
-    border: 1px solid silver;
+    border: 1px solid #c0c0c0;
     font-size: 12px;
     line-height: 1.5;
     padding: 1px 5px;

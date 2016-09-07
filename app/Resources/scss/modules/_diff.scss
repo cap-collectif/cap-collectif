@@ -3,14 +3,14 @@
 ================================================================*/
 
 .diff {
-    color: grey;
+    color: #808080;
     text-decoration: none;
     del {
-        color: red;
+        color: #ff0000;
         text-decoration: line-through;
     }
     ins {
-        color: green;
+        color: #008000;
         text-decoration: none;
     }
 }
