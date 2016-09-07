@@ -174,11 +174,13 @@ class ProposalStepVotesResolver
         if ($collectStep->isVotable()) {
             $votableSteps->add($collectStep);
         }
-        $votableSteps->concat(
-          $this
-            ->selectionStepRepository
-            ->getVotableStepsForProposal($proposal)
-        );
+        $selectionSteps = $this
+          ->selectionStepRepository
+          ->getVotableStepsForProposal($proposal)
+        ;
+        foreach ($selectionSteps as $step) {
+          $votableSteps->add($step);
+        }
         return $votableSteps;
     }
 
