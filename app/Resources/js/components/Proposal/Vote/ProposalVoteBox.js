@@ -11,7 +11,7 @@ import { Row, Col } from 'react-bootstrap';
 const ProposalVoteBox = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    selectionStep: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
     userHasVote: PropTypes.bool,
     creditsLeft: PropTypes.number,
     className: PropTypes.string,
@@ -59,10 +59,10 @@ const ProposalVoteBox = React.createClass({
 
   displayForm() {
     const {
-      selectionStep,
+      step,
       user,
     } = this.props;
-    return selectionStep.open && (selectionStep.voteType === VOTE_TYPE_SIMPLE || (user && this.userHasEnoughCredits()));
+    return step.open && (step.voteType === VOTE_TYPE_SIMPLE || (user && this.userHasEnoughCredits()));
   },
 
   render() {
@@ -74,14 +74,14 @@ const ProposalVoteBox = React.createClass({
       onSubmitSuccess,
       onValidationFailure,
       proposal,
-      selectionStep,
+      step,
       user,
       userHasVote,
     } = this.props;
     return (
       <div className={className}>
         {
-          !user && selectionStep.voteType !== VOTE_TYPE_BUDGET && selectionStep.open
+          !user && step.voteType !== VOTE_TYPE_BUDGET && step.open
           && <div>
             <p className="text-center small" style={{ fontWeight: 'bold' }}>
               {this.getIntlMessage('proposal.vote.authenticated')}
@@ -119,7 +119,7 @@ const ProposalVoteBox = React.createClass({
             this.displayForm()
               && <ProposalVoteForm
               proposal={proposal}
-              selectionStep={selectionStep}
+              step={step}
               isSubmitting={isSubmitting}
               onValidationFailure={onValidationFailure}
               onSubmitSuccess={onSubmitSuccess}
@@ -130,7 +130,7 @@ const ProposalVoteBox = React.createClass({
           <ProposalVoteBoxMessage
             enoughCredits={this.userHasEnoughCredits()}
             submitting={isSubmitting}
-            selectionStep={selectionStep}
+            step={step}
           />
         </div>
       </div>

@@ -17,7 +17,7 @@ const ProposalPageContent = React.createClass({
     form: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
     className: PropTypes.string,
-    selectionStep: PropTypes.object,
+    step: PropTypes.object,
     creditsLeft: PropTypes.number,
     userHasVote: PropTypes.bool.isRequired,
     onVote: PropTypes.func.isRequired,
@@ -27,7 +27,7 @@ const ProposalPageContent = React.createClass({
   getDefaultProps() {
     return {
       className: '',
-      selectionStep: null,
+      step: null,
       creditsLeft: null,
     };
   },
@@ -54,7 +54,7 @@ const ProposalPageContent = React.createClass({
       form,
       categories,
       userHasVote,
-      selectionStep,
+      step,
       creditsLeft,
       onVote,
     } = this.props;
@@ -80,7 +80,7 @@ const ProposalPageContent = React.createClass({
         }
         <div className="block proposal__buttons">
           <ProposalVoteButtonWrapper
-            selectionStep={selectionStep}
+            step={step}
             proposal={proposal}
             creditsLeft={creditsLeft}
             userHasVote={userHasVote}

@@ -103,7 +103,7 @@ const ProposalPreviewVote = React.createClass({
     return (
       <div>
         <ProposalVoteButtonWrapper
-          selectionStep={step}
+          step={step}
           proposal={proposal}
           creditsLeft={creditsLeft}
           userHasVote={userHasVote}

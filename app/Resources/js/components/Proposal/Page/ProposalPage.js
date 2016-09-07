@@ -182,7 +182,7 @@ export const ProposalPage = React.createClass({
               showThemes={features.themes && form.usingThemes}
               userHasVote={userHasVote}
               onVote={this.voteAction}
-              selectionStep={votableStep}
+              step={votableStep}
               creditsLeft={creditsLeft}
           />
           <Tab.Container
@@ -237,7 +237,7 @@ export const ProposalPage = React.createClass({
                             form={form}
                             categories={categories}
                             userHasVote={userHasVote}
-                            selectionStep={votableStep}
+                            step={votableStep}
                             creditsLeft={creditsLeft}
                             onVote={this.voteAction}
                         />

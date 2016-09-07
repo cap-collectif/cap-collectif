@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 const ProposalVoteForm = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    selectionStep: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     onValidationFailure: PropTypes.func.isRequired,
     onSubmitSuccess: PropTypes.func.isRequired,
@@ -68,7 +68,7 @@ const ProposalVoteForm = React.createClass({
       onSubmitSuccess,
       onValidationFailure,
       proposal,
-      selectionStep,
+      step,
       user,
       userHasVote,
     } = this.props;
@@ -76,7 +76,7 @@ const ProposalVoteForm = React.createClass({
       if (this.isValid()) {
         if (user && userHasVote) {
           ProposalActions
-                .deleteVote(selectionStep, proposal.id, proposal.estimation)
+                .deleteVote(step, proposal.id, proposal.estimation)
                 .then(() => {
                   this.setState(this.getInitialState());
                   onSubmitSuccess();
@@ -94,7 +94,7 @@ const ProposalVoteForm = React.createClass({
         }
         ProposalActions
             .vote(
-              selectionStep,
+              step,
               proposal.id,
               proposal.estimation,
               data

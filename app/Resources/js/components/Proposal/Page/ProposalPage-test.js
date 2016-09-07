@@ -60,7 +60,7 @@ describe('<ProposalPage />', () => {
       className: 'container container--custom',
       showThemes: true,
       userHasVote: state.userHasVote,
-      selectionStep: null,
+      step: null,
       creditsLeft: state.creditsLeft,
     });
     expect(header.prop('onVote')).to.be.a('function');
@@ -91,7 +91,7 @@ describe('<ProposalPage />', () => {
     const voteButtonWrapper = tabsPills.find('Connect(ProposalVoteButtonWrapper)');
     expect(voteButtonWrapper).to.have.length(1);
     expect(voteButtonWrapper.props()).to.contains({
-      selectionStep: null,
+      step: null,
       proposal: proposalNoVotes,
       creditsLeft: state.creditsLeft,
       userHasVote: state.userHasVote,
@@ -112,7 +112,7 @@ describe('<ProposalPage />', () => {
       form: props.form,
       categories: props.categories,
       userHasVote: state.userHasVote,
-      selectionStep: null,
+      step: null,
       creditsLeft: state.creditsLeft,
     });
     expect(proposalContent.prop('onVote')).to.be.a('function');
