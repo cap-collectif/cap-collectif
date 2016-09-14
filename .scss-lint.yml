@@ -73,7 +73,7 @@ linters:
     style: lowercase # or 'uppercase'
 
   HexValidation:
-    enabled: false #disable
+    enabled: true
 
   IdSelector:
     enabled: false
@@ -82,7 +82,7 @@ linters:
     enabled: false
 
   ImportPath:
-    enabled: false #disable
+    enabled: true
     leading_underscore: false
     filename_extension: false
 
