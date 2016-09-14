@@ -276,18 +276,18 @@ linters:
     enabled: true
 
   SpaceAfterComma:
-    enabled: false #disable
+    enabled: true
     style: one_space # or 'no_space', or 'at_least_one_space'
 
   SpaceAfterPropertyColon:
-    enabled: false #disable
+    enabled: true
     style: one_space # or 'no_space', or 'at_least_one_space', or 'aligned'
 
   SpaceAfterPropertyName:
-    enabled: false #disable
+    enabled: true
 
   SpaceAfterVariableName:
-    enabled: false #disable
+    enabled: true
 
   SpaceAroundOperator:
     enabled: false #disable
