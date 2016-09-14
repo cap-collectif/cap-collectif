@@ -54,7 +54,7 @@
         a:hover {
             color: $black;
             background-color: $white;
-            @include border-radius(0px);
+            @include border-radius(0);
             @include box-shadow(0 -3px 0 $brand-primary inset);
         }
     }

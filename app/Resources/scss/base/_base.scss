@@ -91,7 +91,7 @@ body {
 }
 
 .main .container--custom:last-of-type:after {
-    border-bottom: 0px;
+    border-bottom: 0;
 }
 
 .profile-page .main {
@@ -254,8 +254,8 @@ a.excerpt {
 
 .pull-abs {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
 }
 
 .pull-rel {
@@ -472,7 +472,7 @@ div.embeddedContent {
 }
 
 .edit-confirm-alert {
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 
 // Same heights bootstrap columns
@@ -764,7 +764,7 @@ svg.avatar {
         a:hover {
             color: $black;
             background-color: $white;
-            @include border-radius(0px);
+            @include border-radius(0);
             @include box-shadow(0 -3px 0 $brand-primary inset);
         }
     }

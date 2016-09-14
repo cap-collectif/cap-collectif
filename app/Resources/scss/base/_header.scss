@@ -255,7 +255,7 @@ $backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
 .skip-links {
     overflow: hidden;
     width: 100%;
-    height: 0px;
+    height: 0;
 
     &.active {
         height: auto;
