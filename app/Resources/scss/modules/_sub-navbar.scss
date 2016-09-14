@@ -33,7 +33,8 @@
                 background-color: $light-gray;
             }
 
-            &:hover a, &:hover > div {
+            &:hover a,
+            &:hover > div {
                 background-color: $light-gray;
             }
         }
@@ -82,7 +83,7 @@
             padding-top: 0;
             padding-bottom: 5px;
         }
-        
+
         .navbar__step {
             margin-left: 0;
         }

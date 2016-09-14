@@ -8,9 +8,10 @@
         margin-top: 0;
     }
 
-    & div.radio, & div.checkbox {
+    & div.radio,
+    & div.checkbox {
         margin: 0;
-        
+
         & label span {
             height: 20px;
             display: inline-block;

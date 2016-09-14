@@ -86,7 +86,8 @@ Hack form button - radio check
         border: 1px solid $warning-text;;
     }
 
-    input[type="checkbox"] + span, input[type="radio"] + span {
+    input[type="checkbox"] + span,
+    input[type="radio"] + span {
         color: $darkest-gray;
     }
 

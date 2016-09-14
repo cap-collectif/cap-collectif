@@ -273,7 +273,7 @@ linters:
     allow_single_line_rule_sets: true
 
   SingleLinePerSelector:
-    enabled: false #disable
+    enabled: true
 
   SpaceAfterComma:
     enabled: false #disable

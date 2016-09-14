@@ -12,7 +12,8 @@
 }
 
 .checkbox[disabled="disabled"] {
-    label, ins {
+    label,
+    ins {
         cursor: not-allowed;
     }
 }

@@ -64,7 +64,8 @@
     min-height: 380px;
 }
 
-.carousel .img-responsive, .carousel .bg__wrapper {
+.carousel .img-responsive,
+.carousel .bg__wrapper {
     margin-bottom: 15px;
 }
 
@@ -76,12 +77,14 @@
     background-color: transparent;
 }
 
-.carousel-sidebar .nav > li.active > a, .carousel-sidebar .nav > li.active:focus > a {
+.carousel-sidebar .nav > li.active > a,
+.carousel-sidebar .nav > li.active:focus > a {
     background: transparent;
     border-left-color: $brand-color-2;
 }
 
-.carousel-sidebar .nav .nav > .active > a, .carousel-sidebar .nav .nav > .active:hover > a,
+.carousel-sidebar .nav .nav > .active > a,
+.carousel-sidebar .nav .nav > .active:hover > a,
 .carousel-sidebar .nav .nav > .active:focus > a {
     padding-left: 28px;
 }
@@ -90,6 +93,7 @@
     display: block;
 }
 
-.carousel-inner .item img, .carousel-inner .item span.bg__wrapper {
+.carousel-inner .item img,
+.carousel-inner .item span.bg__wrapper {
     border: 1px solid $border-color;
 }

@@ -170,8 +170,10 @@
         padding: 15px;
     }
 
-    h2, .h2,
-    h1, .h1 {
+    h2,
+    .h2,
+    h1,
+    .h1 {
         font-size: 36px;
         padding-top: 0;
         margin-bottom: 15px;
@@ -197,7 +199,12 @@ $backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
         background-color: $color;
         color: $text;
 
-        h1, h2, h3, h4, a, a:hover {
+        h1,
+        h2,
+        h3,
+        h4,
+        a,
+        a:hover {
             color: $text;
             border-color: $text;
         }
@@ -209,12 +216,14 @@ $backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
 }
 
 .home-page .jumbotron--custom {
-    h1, .h1 {
+    h1,
+    .h1 {
         font-size: 63px;
     }
 
     @media (max-width: $screen-xs-max) {
-        h1, .h1 {
+        h1,
+        .h1 {
             font-size: 40px;
             word-wrap: break-word;
         }

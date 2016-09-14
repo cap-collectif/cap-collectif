@@ -25,7 +25,8 @@
         }
     }
 
-    &:before, &:after {
+    &:before,
+    &:after {
         content: "";
         display: table;
     }

@@ -22,7 +22,7 @@
             display: table-cell;
             padding-left: 10px;
         }
-        
+
         select,
         input {
             width: 100%;
@@ -42,7 +42,8 @@
     }
 
     @media (max-width: $screen-xs-max) {
-        form .filter__down, form .filter__down-sm {
+        form .filter__down,
+        form .filter__down-sm {
             margin-top: 10px;
         }
     }

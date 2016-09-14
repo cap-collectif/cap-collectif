@@ -153,7 +153,8 @@
             margin-bottom: 0;
         }
 
-        .btn, .opinion__votes-nb {
+        .btn,
+        .opinion__votes-nb {
             margin-top: 10px;
         }
 
@@ -246,7 +247,8 @@
     }
 
     // Special case : vote (for profile only)
-    &.opinion--vote, &.opinion--reply {
+    &.opinion--vote,
+    &.opinion--reply {
         @extend .opinion--argument;
         background-color: $white;
     }

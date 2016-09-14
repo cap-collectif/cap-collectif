@@ -504,7 +504,8 @@ $dark-red: #a94442;
     .panel-title {
         color: $black;
 
-        a, a.active {
+        a,
+        a.active {
             color: $black;
         }
     }
@@ -605,7 +606,8 @@ $dark-red: #a94442;
             color: #ffa500;
         }
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             color: #ffa500 !important;
             cursor: pointer;
 
