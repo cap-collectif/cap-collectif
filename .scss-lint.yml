@@ -101,7 +101,7 @@ linters:
     force_nesting: true
 
   NameFormat:
-    enabled: false #disable
+    enabled: true
     allow_leading_underscore: false
     convention: hyphenated_lowercase # or 'camel_case', or 'snake_case', or a regex pattern
 
@@ -229,13 +229,13 @@ linters:
     separate_groups: false
 
   PropertySpelling:
-    enabled: false #disable
+    enabled: true
     extra_properties:
       - composes
     disabled_properties: []
 
   PropertyUnits:
-    enabled: false #disable
+    enabled: true
     global: [
       'ch', 'em', 'ex', 'rem',                 # Font-relative lengths
       'cm', 'in', 'mm', 'pc', 'pt', 'px', 'q', # Absolute lengths
@@ -257,7 +257,7 @@ linters:
     allow_element_with_id: false
 
   SelectorDepth:
-    enabled: false #disable
+    enabled: true
     max_depth: 5
 
   SelectorFormat:
