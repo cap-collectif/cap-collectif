@@ -54,7 +54,7 @@ body {
     }
 
     .container--bg:after {
-        content: '';
+        content: "";
         display: block;
         position: absolute;
         top: 0;
@@ -277,7 +277,7 @@ a.excerpt {
 
 // Show a play icon on top of images
 .play:before {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     top: 50%;
@@ -318,7 +318,7 @@ a.excerpt {
     &:after {
         padding-top: 66.67%;
         display: block;
-        content: '';
+        content: "";
     }
 }
 

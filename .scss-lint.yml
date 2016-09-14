@@ -303,8 +303,8 @@ linters:
     spaces: 0
 
   StringQuotes:
-    enabled: false #disable
-    style: single_quotes # or single_quotes, double_quotes
+    enabled: true
+    style: double_quotes # or single_quotes, double_quotes
 
   TrailingSemicolon:
     enabled: false #disable
