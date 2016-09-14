@@ -22,13 +22,13 @@
 
 [data-icon]:before {
     font-family: "cap-collectif" !important;
-    content: attr(data-icon);
     font-style: normal !important;
-    font-weight: normal !important;
     font-variant: normal !important;
+    font-weight: normal !important;
+    line-height: 1;
+    content: attr(data-icon);
     text-transform: none !important;
     speak: none;
-    line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -37,11 +37,11 @@
 [class*=" cap-"]:before {
     font-family: "cap-collectif" !important;
     font-style: normal !important;
-    font-weight: normal !important;
     font-variant: normal !important;
+    font-weight: normal !important;
+    line-height: 1;
     text-transform: none !important;
     speak: none;
-    line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

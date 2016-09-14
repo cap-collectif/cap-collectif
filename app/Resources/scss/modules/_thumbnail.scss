@@ -15,9 +15,9 @@
     }
 
     .project__preview__cover {
-        height: 175px;
-        width: 100%;
         overflow: hidden;
+        width: 100%;
+        height: 175px;
 
         img {
             width: 100%;
@@ -30,9 +30,9 @@
     }
 
     .project__preview__themes {
-        line-height: 15px;
-        height: 30px;
         overflow: hidden;
+        height: 30px;
+        line-height: 15px;
 
         &:after {
             height: 15px;
@@ -40,10 +40,10 @@
     }
 
     .project__preview__title {
-        line-height: 25px;
+        overflow: hidden;
         height: 75px;
         margin-top: 10px;
-        overflow: hidden;
+        line-height: 25px;
 
         &:after {
             height: 25px;
@@ -70,8 +70,8 @@
         }
 
         .thumbnail__steps-bar__item {
-            height: 100%;
             display: inline-block;
+            height: 100%;
             border-left: 1px solid #f6f6f6;
             background-color: $brand-success;
 
@@ -94,10 +94,10 @@
     }
 
     .thumbnail__numbers {
-        background-color: #f6f6f6;
-        padding: 5px;
-        border-top: 1px solid #ddd;
         height: 55px;
+        padding: 5px;
+        background-color: #f6f6f6;
+        border-top: 1px solid #ddd;
 
         .thumbnail__number-block {
             display: inline-block;

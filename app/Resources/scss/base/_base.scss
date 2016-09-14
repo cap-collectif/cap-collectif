@@ -54,16 +54,16 @@ body {
     }
 
     .container--bg:after {
-        content: "";
-        display: block;
         position: absolute;
+        z-index: -1;
         top: 0;
-        bottom: 0;
         right: 0;
+        bottom: 0;
         left: 0;
+        display: block;
+        content: "";
         margin-left: -200%;
         margin-right: -200%;
-        z-index: -1;
     }
 
     .container--alt {
@@ -116,8 +116,8 @@ body {
 }
 
 .block--bordered {
-    background-color: $white;
     border: 1px solid $border-color;
+    background-color: $white;
 }
 
 .block--first-mobile {
@@ -207,9 +207,9 @@ a.excerpt {
 }
 
 .nb-bordered {
-    border: 1px solid $gray-primary;
-    padding: 6px 12px;
     vertical-align: middle;
+    padding: 6px 12px;
+    border: 1px solid $gray-primary;
 }
 
 .p--lined {
@@ -218,37 +218,37 @@ a.excerpt {
     text-align: center;
 
     &:after {
-        content: "";
         position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        background-color: $border-color;
-        height: 1px;
         z-index: 1;
+        top: 50%;
+        right: 0;
+        left: 0;
+        height: 1px;
+        background-color: $border-color;
+        content: "";
     }
 
     span {
         position: relative;
-        padding: 0 10px;
-        font-weight: bold;
-        background-color: $white;
-        max-width: 60%;
-        display: inline-block;
         z-index: 2;
+        display: inline-block;
+        max-width: 60%;
+        padding: 0 10px;
+        background-color: $white;
+        font-weight: bold;
     }
 }
 
 .p--centered {
     margin: 15px auto;
-    text-align: center;
     color: $dark-gray;
+    text-align: center;
 
     span {
-        padding: 0 10px;
-        max-width: 60%;
-        display: inline-block;
         z-index: 2;
+        display: inline-block;
+        max-width: 60%;
+        padding: 0 10px;
     }
 }
 
@@ -271,20 +271,20 @@ a.excerpt {
 
 // Class .play
 .play {
-    display: block;
     position: relative;
+    display: block;
 }
 
 // Show a play icon on top of images
 .play:before {
-    content: "";
-    display: block;
     position: absolute;
+    z-index: 1000;
     top: 50%;
     left: 50%;
+    display: block;
+    content: "";
     margin-top: -($custom-video-play / 2);
     margin-left: -($custom-video-play / 2);
-    z-index: 1000;
     @include triangle($white, 'left', $custom-video-play);
 }
 
@@ -308,8 +308,8 @@ a.excerpt {
 .bg__wrapper {
     position: relative;
     top: 0;
-    bottom: 0;
     right: 0;
+    bottom: 0;
     left: 0;
     display: inline-block;
     width: 100%;
@@ -329,12 +329,12 @@ a.excerpt {
 }
 
 .bg--default {
-    background-color: $brand-color-2;
     position: absolute;
     top: 0;
-    bottom: 0;
     right: 0;
+    bottom: 0;
     left: 0;
+    background-color: $brand-color-2;
 }
 
 @media (max-width: $screen-xs-max) {
@@ -345,9 +345,9 @@ a.excerpt {
 
 // Icon circled
 .icon--circled {
-    color: $black;
-    background-color: $white;
     padding: 5px 7px;
+    background-color: $white;
+    color: $black;
     @include border-radius(50%);
 }
 
@@ -391,8 +391,8 @@ a.excerpt {
 
 // Custom dropdown
 .dropdown--custom {
-    display: inline-block;
     position: static;
+    display: inline-block;
 
     .dropdown-menu {
         position: absolute;
@@ -403,17 +403,17 @@ a.excerpt {
     }
 
     li button {
+        width: 100%;
         padding: 3px 20px;
+        color: #333;
         font-weight: 400;
         line-height: 1.42857;
-        width: 100%;
         text-align: left;
-        color: #333;
 
         &:hover {
-            text-decoration: none;
-            color: #262626;
             background-color: #f5f5f5;
+            color: #262626;
+            text-decoration: none;
         }
     }
 
@@ -444,8 +444,8 @@ a.excerpt {
 }
 
 .col-centered {
-    display: inline-block;
     float: none;
+    display: inline-block;
     margin-right: -4px;
 }
 
@@ -497,13 +497,13 @@ div.embeddedContent {
 .row-height {
     display: table;
     table-layout: fixed;
-    height: 100%;
     width: 100%;
+    height: 100%;
 }
 
 .col-height {
-    display: table-cell;
     float: none;
+    display: table-cell;
     height: 100%;
 }
 
@@ -523,13 +523,13 @@ div.embeddedContent {
     .row-xs-height {
         display: table;
         table-layout: fixed;
-        height: 100%;
         width: 100%;
+        height: 100%;
     }
 
     .col-xs-height {
-        display: table-cell;
         float: none;
+        display: table-cell;
         height: 100%;
     }
 
@@ -550,13 +550,13 @@ div.embeddedContent {
     .row-sm-height {
         display: table;
         table-layout: fixed;
-        height: 100%;
         width: 100%;
+        height: 100%;
     }
 
     .col-sm-height {
-        display: table-cell;
         float: none;
+        display: table-cell;
         height: 100%;
     }
 
@@ -577,13 +577,13 @@ div.embeddedContent {
     .row-md-height {
         display: table;
         table-layout: fixed;
-        height: 100%;
         width: 100%;
+        height: 100%;
     }
 
     .col-md-height {
-        display: table-cell;
         float: none;
+        display: table-cell;
         height: 100%;
     }
 
@@ -604,13 +604,13 @@ div.embeddedContent {
     .row-lg-height {
         display: table;
         table-layout: fixed;
-        height: 100%;
         width: 100%;
+        height: 100%;
     }
 
     .col-lg-height {
-        display: table-cell;
         float: none;
+        display: table-cell;
         height: 100%;
     }
 
@@ -654,10 +654,10 @@ svg.avatar {
 
 .anchor-offset:before {
     display: block;
-    content: "";
-    height: 60px;
-    margin-top: -60px;
     visibility: hidden;
+    height: 60px;
+    content: "";
+    margin-top: -60px;
 }
 
 #alert-email-not-confirmed {
@@ -686,18 +686,18 @@ svg.avatar {
 
 .smart-fade {
     position: relative;
-    line-height: 1.2em;
-    height: 3.6em;
     overflow: hidden;
+    height: 3.6em;
+    line-height: 1.2em;
 
     &:after {
-        content: "";
-        text-align: right;
         position: absolute;
-        bottom: 0;
         right: 0;
+        bottom: 0;
         width: 50%;
         height: 1.2em;
+        text-align: right;
+        content: "";
         background: linear-gradient(to right, rgba(255, 255, 255, 0), $white 50%);
     }
 }
@@ -706,9 +706,9 @@ svg.avatar {
     width: 200px;
     height: 200px;
     margin-top: 20px;
-    border-width: 2px;
     border-color: #666;
     border-style: dashed;
+    border-width: 2px;
     border-radius: 5px;
 }
 
@@ -753,8 +753,8 @@ svg.avatar {
         }
 
         &.active .badge {
-            color: $white;
             background-color: #777;
+            color: $white;
         }
 
         &.active a,
@@ -762,8 +762,8 @@ svg.avatar {
         &.active a:focus,
         a:focus,
         a:hover {
-            color: $black;
             background-color: $white;
+            color: $black;
             @include border-radius(0);
             @include box-shadow(0 -3px 0 $brand-primary inset);
         }
@@ -772,10 +772,10 @@ svg.avatar {
 
 .PrivateList {
     &__box {
-        background-color: $light-gray;
         padding: 30px 25px 0;
         border: 1px #d3d3d3 solid;
         border-radius: 5px;
+        background-color: $light-gray;
     }
 }
 

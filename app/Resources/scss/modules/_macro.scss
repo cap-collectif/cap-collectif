@@ -26,8 +26,8 @@
     }
 
     .media-heading {
-        max-height: 43px;
         overflow: hidden;
+        max-height: 43px;
         padding-top: 5px;
         margin-bottom: 0;
     }
@@ -38,8 +38,8 @@
 
     .media__content h2 {
         margin-top: 10px;
-        height: 58px;
         overflow: hidden;
+        height: 58px;
     }
 }
 
@@ -48,15 +48,15 @@
 .media--user-thumbnail {
 
     .media--macro__user {
-        line-height: 20px;
         margin-bottom: 0;
         height: 40px;
+        line-height: 20px;
     }
 
     .media-heading {
         padding-top: 0;
-        height: 22px;
         overflow: hidden;
+        height: 22px;
     }
 
     .media-body {

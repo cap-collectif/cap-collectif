@@ -26,13 +26,13 @@
 
 .color-swatches .infos h4 {
     margin-bottom: 5px;
-    font-weight: 700;
     font-size: 14px;
+    font-weight: 700;
 }
 
 .color-swatches .infos p {
-    font-size: 12px;
     margin: 0;
+    font-size: 12px;
     @extend .excerpt;
 }
 

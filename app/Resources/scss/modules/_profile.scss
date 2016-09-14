@@ -16,10 +16,10 @@
     position: relative;
 
     .profile__picture img {
+        box-sizing: border-box;
+        width: auto;
         max-width: 100%;
         height: auto;
-        width: auto;
-        box-sizing: border-box;
     }
 
     .profile__name {
@@ -52,8 +52,8 @@
         &.active a,
         &.active a:hover,
         a:hover {
-            color: $black;
             background-color: $white;
+            color: $black;
             @include border-radius(0);
             @include box-shadow(0 -3px 0 $brand-primary inset);
         }

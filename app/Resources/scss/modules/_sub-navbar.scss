@@ -2,18 +2,18 @@
     $SUB-NAVBAR
 ================================================================*/
 .navbar--sub {
-    font-size: 15px;
-    background-color: $white;
     border: 1px solid $border-color;
+    background-color: $white;
     margin-bottom: 0;
+    font-size: 15px;
 
     .nav {
 
         li {
-            overflow: hidden;
-            border-top: 1px solid $border-color;
-            width: 100%;
             position: relative;
+            overflow: hidden;
+            width: 100%;
+            border-top: 1px solid $border-color;
 
             & > div {
                 position: relative;
@@ -41,9 +41,9 @@
     }
 
     .navbar__step-nb {
-        font-size: 25px;
-        color: $brand-primary;
         float: left;
+        color: $brand-primary;
+        font-size: 25px;
         padding-bottom: 0;
     }
 

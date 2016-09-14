@@ -65,8 +65,8 @@
             li {
                 @include inline-block();
                 height: 45px;
-                line-height: 45px;
                 color: set-link-text-color($custom-footer-links);
+                line-height: 45px;
 
                 & a {
                     padding: 0 5px;
@@ -87,8 +87,8 @@
 
         .cap {
             position: relative;
-            right: 2px;
             top: 5px;
+            right: 2px;
         }
     }
 
@@ -98,8 +98,8 @@
 
             li a {
                 @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-base, $line-height-base, $border-radius-base);
-                font-size: 25px;
                 display: block;
+                font-size: 25px;
 
                 &:hover {
                     text-decoration: none;

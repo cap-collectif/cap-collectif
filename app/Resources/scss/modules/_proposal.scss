@@ -1,8 +1,8 @@
 $statuses: (primary $brand-primary $white) (success $brand-success $white) (info $brand-info $white) (warning $brand-warning $white) (danger $brand-danger $white) (default $dark-gray $white);
 
 .proposal__author {
-    height: 60px;
     overflow: hidden;
+    height: 60px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -22,11 +22,11 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposal__info {
+    overflow: hidden;
+    max-height: 36px;
     padding-top: 5px;
     padding-left: 5px;
-    max-height: 36px;
     word-break: break-word;
-    overflow: hidden;
 
     .cap {
         padding-right: 5px;
@@ -34,8 +34,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposal__page__metadata .proposal__infos {
-    background-color: #f6f6f6;
     padding: 10px;
+    background-color: #f6f6f6;
     font-size: 100%;
 
     .proposal__info {
@@ -52,18 +52,18 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposal__status {
-    padding: 5px 0;
     display: block;
+    padding: 5px 0;
     margin: 10px 0;
 }
 
 .proposal__preview .proposal__status {
-    text-align: center;
+    overflow: hidden;
+    height: 32px;
     padding: 5px;
     margin: 0;
     color: $white;
-    height: 32px;
-    overflow: hidden;
+    text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
 
@@ -73,21 +73,21 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
         $color: nth($status, 3);
 
         &.status--#{$name} {
-            color: $color;
             background-color: $bg;
+            color: $color;
         }
     }
 }
 
 .proposal__counters {
-    background-color: $lightest-gray;
     padding: 5px;
+    background-color: $lightest-gray;
     border-top: 1px solid $border-color;
 }
 
 .proposal__counter {
-    width: 100%;
     display: inline-block;
+    width: 100%;
     text-align: center;
 }
 
@@ -134,17 +134,17 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposal__votes .proposal__vote .media--aligned {
-    line-height: 1.5em;
     height: 3em;
+    line-height: 1.5em;
 }
 
 // Vote widget
 
 .proposal-vote__widget {
     margin-top: $navbar-height;
-    height: $navbar-height;
-    overflow: hidden;
     z-index: 1020;
+    overflow: hidden;
+    height: $navbar-height;
     border-color: $votes-widget-border;
     background-color: $votes-widget-bg;
 
@@ -154,8 +154,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 
     li {
-        margin: 0;
         padding: 15px;
+        margin: 0;
     }
 
     .widget__counter {
@@ -189,10 +189,10 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 
     .widget__image {
-        height: auto;
         width: auto;
-        padding: 5px;
+        height: auto;
         max-height: 50px;
+        padding: 5px;
     }
 }
 

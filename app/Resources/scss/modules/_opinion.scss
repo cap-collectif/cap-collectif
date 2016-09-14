@@ -3,8 +3,8 @@
 ================================================================*/
 .opinion {
 
-    font-size: 15px;
     background-color: $white;
+    font-size: 15px;
 
     &:hover {
         background-color: $light-gray;
@@ -35,8 +35,8 @@
         border-bottom: 1px solid $border-color;
 
         .opinion__header__title {
-            color: $black;
             margin: 10px 0;
+            color: $black;
         }
 
         .opinion__header__back {
@@ -100,8 +100,8 @@
         }
 
         .opinion__user {
-            margin: 0 0 5px;
             position: relative;
+            margin: 0 0 5px;
 
             &.excerpt {
                 a {
@@ -112,8 +112,8 @@
 
         .label--abs {
             position: absolute;
-            left: auto;
             top: auto;
+            left: auto;
         }
 
         .label--right {
@@ -136,9 +136,9 @@
         }
 
         .opinion__title {
+            margin: 0 0 5px;
             color: $black;
             font-size: $font-size-base;
-            margin: 0 0 5px;
             font-weight: normal;
         }
 
@@ -160,11 +160,11 @@
 
         .opinion__votes-nb {
             display: inline-block;
+            vertical-align: middle;
+            padding: 1px 5px;
             border: 1px solid $gray-primary;
             font-size: 12px;
             line-height: 1.5;
-            padding: 1px 5px;
-            vertical-align: middle;
         }
     }
 
@@ -209,8 +209,8 @@
 
     // Special case : argument
     &.opinion--argument {
-        background-color: $light-gray;
         position: relative;
+        background-color: $light-gray;
 
         .opinion__text {
             padding-top: 10px;
@@ -228,11 +228,11 @@
 
         .opinion__votes {
             display: inline-block;
+            vertical-align: middle;
+            padding: 1px 5px;
             border: 1px solid $gray-primary;
             font-size: 12px;
             line-height: 1.5;
-            padding: 1px 5px;
-            vertical-align: middle;
         }
 
         &.opinion--argument--white {
@@ -277,8 +277,8 @@
     }
 
     .sources__btn {
-        display: inline-block;
         float: right;
+        display: inline-block;
         margin-right: 15px;
         margin-bottom: 0;
     }
@@ -500,8 +500,8 @@
     border-bottom: 1px solid $border-color;
 
     .opinion__header__title {
-        font-size: 16px;
         margin: 7px 0;
+        font-size: 16px;
     }
 }
 
@@ -520,11 +520,11 @@
 
 .nb-votes {
     display: inline-block;
+    vertical-align: middle;
+    padding: 1px 5px;
     border: 1px solid #c0c0c0;
     font-size: 12px;
     line-height: 1.5;
-    padding: 1px 5px;
-    vertical-align: middle;
 }
 
 .opinion__appendix__title:hover,
@@ -576,8 +576,8 @@
             color: $color;
 
             i {
-                color: $text;
                 background-color: $color;
+                color: $text;
             }
         }
     }
@@ -602,13 +602,13 @@
 }
 
 .opinion__votes__more__link {
-    background-color: $brand-color-1;
-    color: $white;
     @include border-radius(50%);
     display: inline-block;
+    vertical-align: middle;
     width: 45px;
     height: 45px;
-    vertical-align: middle;
+    background-color: $brand-color-1;
+    color: $white;
     line-height: 45px;
     cursor: pointer;
 }

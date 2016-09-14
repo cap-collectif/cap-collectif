@@ -6,9 +6,9 @@
 .consultation__nav {
 
     li > a {
+        padding: 5px 15px;
         color: $black;
         font-size: 16px;
-        padding: 5px 15px;
         padding-left: 90px;
     }
 
@@ -40,8 +40,8 @@
     }
 
     li i {
-        font-size: 18px;
         color: $black;
+        font-size: 18px;
 
         &:hover,
         &:active {
@@ -92,9 +92,9 @@
 
 // Empty consultation
 .project__empty-block {
+    padding: 30px 15px;
     color: $dark-gray;
     font-weight: bold;
-    padding: 30px 15px;
 
     @media (max-width: $screen-xs-max) {
         padding: 35px 15px;
@@ -107,9 +107,9 @@
 }
 
 .opinion-type__empty-block {
+    padding: 15px;
     color: $dark-gray;
     font-weight: bold;
-    padding: 15px;
 
     .icon {
         font-size: 40px;
