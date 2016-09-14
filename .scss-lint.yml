@@ -313,22 +313,22 @@ linters:
     enabled: true
 
   TrailingZero:
-    enabled: false #disable
+    enabled: true
 
   TransitionAll:
     enabled: false
 
   UnnecessaryMantissa:
-    enabled: false #disable
+    enabled: true
 
   UnnecessaryParentReference:
     enabled: false
 
   UrlFormat:
-    enabled: false #disable
+    enabled: true
 
   UrlQuotes:
-    enabled: false #disable
+    enabled: true
 
   VariableForProperty:
     enabled: false
