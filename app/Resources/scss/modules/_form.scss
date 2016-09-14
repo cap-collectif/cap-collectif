@@ -9,7 +9,7 @@ Hack form button - radio check
     position: absolute;
     z-index: -1;
     opacity: 0;
-    filter: alpha(opacity=0);
+    filter: alpha(opacity = 0);
 }
 
 [data-toggle=buttons] > .btn > .checkbox,

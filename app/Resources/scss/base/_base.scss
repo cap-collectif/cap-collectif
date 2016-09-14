@@ -282,8 +282,8 @@ a.excerpt {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -($custom-video-play/2);
-    margin-left: -($custom-video-play/2);
+    margin-top: -($custom-video-play / 2);
+    margin-left: -($custom-video-play / 2);
     z-index: 1000;
     @include triangle($white, 'left', $custom-video-play);
 }

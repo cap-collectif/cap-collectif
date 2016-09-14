@@ -59,7 +59,7 @@
     .sidebar-hidden-small {
         display: none;
     }
-    
+
     .sidebar__darkened-overlay {
         display: block;
         position: absolute;
@@ -78,13 +78,13 @@
         position: fixed;
         left: 50%;
         top: 70px;
-        width: $container-md*0.25;
+        width: $container-md * 0.25;
         @include translate(100%, 0);
     }
 }
 
 @media (min-width: $screen-lg-min) {
     .sidebar {
-        width: $container-lg*0.25;
+        width: $container-lg * 0.25;
     }
 }
