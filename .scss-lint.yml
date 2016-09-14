@@ -269,7 +269,7 @@ linters:
     allowed_shorthands: [1, 2, 3]
 
   SingleLinePerProperty:
-    enabled: false #disable
+    enabled: true
     allow_single_line_rule_sets: true
 
   SingleLinePerSelector:
