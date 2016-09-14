@@ -17,7 +17,7 @@ const ProposalPageMetadata = React.createClass({
     const { proposal, showCategories, showDistricts, showNullEstimation } = this.props;
     return (
         <div>
-          { (showCategories && proposal.category) || (showDistricts && proposal.district)
+          { ((showCategories && proposal.category) || (showDistricts && proposal.district))
           && <div className="proposal__page__metadata">
             <div className="proposal__infos">
               {
