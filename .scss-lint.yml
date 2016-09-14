@@ -307,7 +307,7 @@ linters:
     style: double_quotes # or single_quotes, double_quotes
 
   TrailingSemicolon:
-    enabled: false #disable
+    enabled: true
 
   TrailingWhitespace:
     enabled: false #disable
