@@ -36,7 +36,7 @@
 
         .opinion__header__title {
             color: $black;
-            margin: 10px 0 10px;
+            margin: 10px 0;
         }
 
         .opinion__header__back {
@@ -426,7 +426,7 @@
         .opinion__attachment {
             padding: 15px;
             border-top: 1px solid $border-color;
-            
+
             &:hover {
                 background-color: $light-gray;
                 text-decoration: none;

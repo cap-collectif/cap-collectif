@@ -456,7 +456,7 @@ img {
 }
 
 div.embeddedContent {
-    margin: 15px 0 15px;
+    margin: 15px 0;
 }
 
 .btgrid [class*="col-"] {
@@ -769,7 +769,7 @@ svg.avatar {
 .PrivateList {
     &__box {
         background-color: $light-gray;
-        padding: 30px 25px 0 25px;
+        padding: 30px 25px 0;
         border: 1px #d3d3d3 solid;
         border-radius: 5px;
     }

@@ -265,7 +265,7 @@ linters:
     convention: hyphenated_lowercase # 'camel_case'  # or 'strict_BEM', or 'hyphenated_BEM', or 'snake_case', or 'hyphenated_lowercase', or a regex pattern
 
   Shorthand:
-    enabled: false #disable
+    enabled: true
     allowed_shorthands: [1, 2, 3]
 
   SingleLinePerProperty:
