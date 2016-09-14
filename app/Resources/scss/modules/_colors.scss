@@ -67,7 +67,7 @@ $color-swatches:
         .light {
             background-color: $color;
         }
-        
+
         .dark {
             background-color: darken($color, 10%);
         }

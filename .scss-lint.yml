@@ -310,7 +310,7 @@ linters:
     enabled: true
 
   TrailingWhitespace:
-    enabled: false #disable
+    enabled: true
 
   TrailingZero:
     enabled: false #disable

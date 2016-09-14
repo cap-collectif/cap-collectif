@@ -267,7 +267,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
             padding-top: $navbar-height + $navbar-collapsed-height;
         }
     }
-    
+
     @media (min-width: $screen-md-min) {
         .sidebar {
             top: 120px;
