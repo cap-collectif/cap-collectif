@@ -110,7 +110,7 @@
 
     .dropdown-menu > .nav-dropdown-section > .dropdown-header {
         font-size: 14px;
-        opacity: .5;
+        opacity: 0.5;
     }
 
     .dropdown-menu > .nav-dropdown-section:first-child > li.divider:first-child,
@@ -233,7 +233,7 @@ $backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
     p:first-child {
         padding-top: 0;
     }
-    
+
     p:last-child {
         padding-bottom: 0;
     }
