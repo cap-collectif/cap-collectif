@@ -10,7 +10,7 @@ describe('<ProposalPreviewFooter />', () => {
   const proposal = {
     comments_count: 3,
     votesCount: 1,
-    votesCountBySteps: {
+    votesCountByStepId: {
       42: 5,
     },
   };
@@ -63,7 +63,7 @@ describe('<ProposalPreviewFooter />', () => {
     expect(commentsCounter.find('.proposal__counter__value').text()).to.equal('3');
     const votesCounter = countersDiv.find('div.proposal__counter--votes');
     expect(votesCounter).to.have.length(1);
-    const expectedVotes = proposal.votesCountBySteps[42] + props.votesDelta;
+    const expectedVotes = proposal.votesCountByStepId[42] + props.votesDelta;
     expect(votesCounter.find('.proposal__counter__value').text()).to.equal(`${expectedVotes}`);
   });
 

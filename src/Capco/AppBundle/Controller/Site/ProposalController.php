@@ -54,7 +54,6 @@ class ProposalController extends Controller
             'form' => $proposalForm,
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
             'votableStep' => $firstVotableStep,
-            'userHasVote' => $userHasVote,
         ], 'json', SerializationContext::create()
             ->setSerializeNull(true)
             ->setGroups([
@@ -66,6 +65,7 @@ class ProposalController extends Controller
                 'ThemeDetails',
                 'UserMedias',
                 'VoteThreshold',
+                'Default', // force step_type serialization
             ]))
         ;
 

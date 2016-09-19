@@ -74,7 +74,7 @@ class CollectStepsController extends FOSRestController
      * @Post("/collect_steps/{collect_step_id}/proposals/{proposal_id}/votes")
      * @ParamConverter("collectStep", options={"mapping": {"collect_step_id": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
-     * @View(statusCode=201)
+     * @View(statusCode=200, serializerGroups={"ProposalCollectVotes", "UserMedias"})
      */
     public function voteOnProposalAction(Request $request, CollectStep $collectStep, Proposal $proposal)
     {
@@ -136,6 +136,8 @@ class CollectStepsController extends FOSRestController
         // Keep in mind that refresh should usually not be triggered manually.
         $index = $this->get('fos_elastica.index');
         $index->refresh();
+
+        return $vote;
     }
 
     /**

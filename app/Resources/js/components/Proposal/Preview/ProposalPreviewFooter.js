@@ -20,8 +20,8 @@ const ProposalPreviewFooter = React.createClass({
   render() {
     const { proposal, stepId, votesDelta, showVotes } = this.props;
     const votesCount = stepId
-      ? proposal.votesCountBySteps[stepId]
-        ? proposal.votesCountBySteps[stepId] + votesDelta
+      ? proposal.votesCountByStepId[stepId]
+        ? proposal.votesCountByStepId[stepId] + votesDelta
         : 0 + votesDelta
       : proposal.votesCount
     ;

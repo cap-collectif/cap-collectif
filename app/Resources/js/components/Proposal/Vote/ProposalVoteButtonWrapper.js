@@ -11,8 +11,6 @@ const ProposalVoteButtonWrapper = React.createClass({
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object,
     creditsLeft: PropTypes.number,
-    onClick: PropTypes.func.isRequired,
-    userHasVote: PropTypes.bool.isRequired,
     user: PropTypes.object,
     style: PropTypes.object,
     className: PropTypes.string,
@@ -37,21 +35,19 @@ const ProposalVoteButtonWrapper = React.createClass({
     const {
       creditsLeft,
       proposal,
-      userHasVote,
     } = this.props;
-    if (!userHasVote && creditsLeft !== null && !!proposal.estimation) {
+    if (!proposal.userHasVote && creditsLeft !== null && !!proposal.estimation) {
       return creditsLeft >= proposal.estimation;
     }
     return true;
   },
 
   render() {
-    const { user, step, userHasVote, onClick, proposal, style, className } = this.props;
+    const { user, step, proposal, style, className } = this.props;
     if (step && step.voteType === VOTE_TYPE_SIMPLE) {
       return (
         <ProposalVoteButton
-          userHasVote={userHasVote}
-          onClick={onClick}
+          userHasVote={proposal.userHasVote}
           disabled={!step.open}
           style={style}
           className={className}
@@ -66,8 +62,7 @@ const ProposalVoteButtonWrapper = React.createClass({
             show={!this.userHasEnoughCredits()}
         >
           <ProposalVoteButton
-            userHasVote={userHasVote}
-            onClick={onClick}
+            userHasVote={proposal.userHasVote}
             disabled={!(step && step.open) || !this.userHasEnoughCredits()}
             style={style}
             className={className}
@@ -79,7 +74,7 @@ const ProposalVoteButtonWrapper = React.createClass({
     return (
       <LoginOverlay>
         <ProposalVoteButton
-          userHasVote={userHasVote}
+          userHasVote={proposal.userHasVote}
           disabled={!(step && step.open)}
           style={style}
           className={className}

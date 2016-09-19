@@ -6,17 +6,17 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { connect } from 'react-redux';
+import { closeVoteModal, startVoting } from '../../../redux/modules/proposal';
 
 const ProposalVoteModal = React.createClass({
   displayName: 'ProposalVoteModal',
   propTypes: {
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object,
+    dispatch: PropTypes.func.isRequired,
     showModal: PropTypes.bool.isRequired,
-    onToggleModal: PropTypes.func.isRequired,
-    userHasVote: PropTypes.bool,
+    isSubmitting: PropTypes.bool.isRequired,
     creditsLeft: PropTypes.number,
-    onVoteChange: PropTypes.func,
     user: PropTypes.object,
   },
   mixins: [IntlMixin],
@@ -25,43 +25,8 @@ const ProposalVoteModal = React.createClass({
     return {
       user: null,
       step: null,
-      userHasVote: false,
       creditsLeft: null,
-      onVoteChange: () => {},
     };
-  },
-
-  getInitialState() {
-    return {
-      isSubmitting: false,
-    };
-  },
-
-  handleSubmit() {
-    this.setState({
-      isSubmitting: true,
-    });
-  },
-
-  handleSubmitSuccess() {
-    const { onVoteChange } = this.props;
-    this.setState({
-      isSubmitting: false,
-    });
-    this.close();
-    onVoteChange();
-  },
-
-  handleSubmitFailure() {
-    this.setState({
-      isSubmitting: false,
-    });
-  },
-
-  handleValidationFailure() {
-    this.setState({
-      isSubmitting: false,
-    });
   },
 
   userHasEnoughCredits() {
@@ -69,9 +34,8 @@ const ProposalVoteModal = React.createClass({
       creditsLeft,
       proposal,
       user,
-      userHasVote,
     } = this.props;
-    if (user && !userHasVote && creditsLeft !== null && proposal.estimation !== null) {
+    if (user && !proposal.userHasVote && creditsLeft !== null && proposal.estimation !== null) {
       return creditsLeft >= proposal.estimation;
     }
     return true;
@@ -85,30 +49,21 @@ const ProposalVoteModal = React.createClass({
     return !step || !step.open || (user && step.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
   },
 
-  close() {
-    const { onToggleModal } = this.props;
-    onToggleModal(false);
-  },
-
-  show() {
-    const { onToggleModal } = this.props;
-    onToggleModal(true);
-  },
-
   render() {
     const {
+      dispatch,
       showModal,
       proposal,
       step,
-      userHasVote,
       creditsLeft,
+      isSubmitting,
       user,
     } = this.props;
     return (
       <Modal
         animation={false}
         show={showModal}
-        onHide={this.close}
+        onHide={() => { dispatch(closeVoteModal()); }}
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
       >
@@ -121,12 +76,7 @@ const ProposalVoteModal = React.createClass({
           <ProposalVoteBox
             proposal={proposal}
             step={step}
-            userHasVote={userHasVote}
             creditsLeft={creditsLeft}
-            isSubmitting={this.state.isSubmitting}
-            onSubmitSuccess={this.handleSubmitSuccess}
-            onSubmitFailure={this.handleSubmitFailure}
-            onValidationFailure={this.handleValidationFailure}
             user={user}
           />
         </Modal.Body>
@@ -134,10 +84,9 @@ const ProposalVoteModal = React.createClass({
           <CloseButton className="pull-right" onClose={this.close} />
           <SubmitButton
             id="confirm-proposal-vote"
-            isSubmitting={this.state.isSubmitting}
-            onSubmit={this.handleSubmit}
+            onSubmit={() => { dispatch(startVoting()); }}
             label="proposal.vote.confirm"
-            bsStyle={(!userHasVote || this.state.isSubmitting) ? 'success' : 'danger'}
+            bsStyle={(!proposal.userHasVote || isSubmitting) ? 'success' : 'danger'}
             style={{ marginLeft: '10px' }}
             disabled={this.disableSubmitButton()}
             loginOverlay={step && step.voteType === VOTE_TYPE_BUDGET}
@@ -152,6 +101,8 @@ const ProposalVoteModal = React.createClass({
 const mapStateToProps = (state) => {
   return {
     user: state.default.user,
+    showModal: state.proposal.showVoteModal,
+    isSubmitting: state.proposal.isVoting,
   };
 };
 

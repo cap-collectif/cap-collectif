@@ -6,7 +6,6 @@ import {
   RECEIVE_PROPOSAL,
   RECEIVE_PROPOSAL_VOTES,
   RECEIVE_PROPOSALS,
-  RECEIVE_VOTABLE_STEPS,
 
   INIT_PROPOSAL,
   SUBMIT_PROPOSAL,
@@ -21,12 +20,6 @@ import {
   INIT_PROPOSALS,
   INIT_PROPOSAL_VOTES,
   INIT_VOTABLE_STEPS,
-  CREATE_PROPOSAL_VOTE,
-  CREATE_PROPOSAL_VOTE_SUCCESS,
-  CREATE_PROPOSAL_VOTE_FAILURE,
-  DELETE_PROPOSAL_VOTE,
-  DELETE_PROPOSAL_VOTE_SUCCESS,
-  DELETE_PROPOSAL_VOTE_FAILURE,
 
   CHANGE_PAGE,
   CHANGE_ORDER,
@@ -309,141 +302,6 @@ export default {
           userHasVote: data.userHasVote,
         });
         return true;
-      });
-  },
-
-  vote: (step, proposal, estimation = null, data = {}, successMessage = 'proposal.request.vote.success') => {
-    const hasComment = data.comment && data.comment.length > 0;
-    AppDispatcher.dispatch({
-      actionType: CREATE_PROPOSAL_VOTE,
-      proposal,
-      step,
-      estimation,
-      hasComment,
-    });
-    if (step.step_type === 'selection') {
-      return Fetcher
-      .post(`/selection_steps/${step.id}/proposals/${proposal}/votes`, data)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: CREATE_PROPOSAL_VOTE_SUCCESS,
-        });
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: successMessage },
-        });
-        if (hasComment) {
-          AppDispatcher.dispatch({
-            actionType: CREATE_COMMENT_SUCCESS,
-            message: 'comment.submit_success',
-          });
-        }
-        return true;
-      })
-      .catch((error) => {
-        AppDispatcher.dispatch({
-          actionType: CREATE_PROPOSAL_VOTE_FAILURE,
-          estimation,
-        });
-        if (hasComment) {
-          AppDispatcher.dispatch({
-            actionType: CREATE_COMMENT_FAILURE,
-            message: 'comment.submit_error',
-          });
-        }
-        throw error;
-      });
-    }
-
-    return Fetcher
-      .post(`/collect_steps/${step.id}/proposals/${proposal}/votes`, data)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: CREATE_PROPOSAL_VOTE_SUCCESS,
-        });
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: successMessage },
-        });
-        if (hasComment) {
-          AppDispatcher.dispatch({
-            actionType: CREATE_COMMENT_SUCCESS,
-            message: 'comment.submit_success',
-          });
-        }
-        return true;
-      })
-      .catch((error) => {
-        AppDispatcher.dispatch({
-          actionType: CREATE_PROPOSAL_VOTE_FAILURE,
-          estimation,
-        });
-        if (hasComment) {
-          AppDispatcher.dispatch({
-            actionType: CREATE_COMMENT_FAILURE,
-            message: 'comment.submit_error',
-          });
-        }
-        throw error;
-      });
-  },
-
-  deleteVote: (step, proposal, estimation = null, successMessage = 'proposal.request.delete_vote.success', errorMessage = 'proposal.request.delete_vote.failure') => {
-    AppDispatcher.dispatch({
-      actionType: DELETE_PROPOSAL_VOTE,
-      proposal,
-      step,
-      estimation,
-    });
-
-    if (step.step_type === 'selection') {
-      return Fetcher
-          .delete(`/selection_steps/${step.id}/proposals/${proposal}/votes`)
-          .then(() => {
-            AppDispatcher.dispatch({
-              actionType: DELETE_PROPOSAL_VOTE_SUCCESS,
-            });
-            AppDispatcher.dispatch({
-              actionType: UPDATE_ALERT,
-              alert: { bsStyle: 'success', content: successMessage },
-            });
-            return true;
-          })
-          .catch(() => {
-            AppDispatcher.dispatch({
-              actionType: DELETE_PROPOSAL_VOTE_FAILURE,
-              estimation,
-            });
-            AppDispatcher.dispatch({
-              actionType: UPDATE_ALERT,
-              alert: { bsStyle: 'warning', content: errorMessage },
-            });
-            return false;
-          });
-    }
-
-    return Fetcher
-      .delete(`/collect_steps/${step.id}/proposals/${proposal}/votes`)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: DELETE_PROPOSAL_VOTE_SUCCESS,
-        });
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: successMessage },
-        });
-        return true;
-      })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: DELETE_PROPOSAL_VOTE_FAILURE,
-          estimation,
-        });
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'warning', content: errorMessage },
-        });
-        return false;
       });
   },
 };

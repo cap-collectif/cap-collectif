@@ -90,7 +90,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
             ->getCountsByProposalGroupedBySteps($proposal);
 
         $event->getVisitor()->addData(
-            'votesCountBySteps',
+            'votesCountByStepId',
             $selectionVotesCount + $collectVotesCount
         );
 
@@ -126,6 +126,9 @@ class ProposalSerializationListener extends AbstractSerializationListener
         if (isset($this->getIncludedGroups($event)['ProposalUserData'])) {
             $event->getVisitor()->addData(
                 'hasUserReported', $user === 'anon.' ? false : $proposal->userHasReport($user)
+            );
+            $event->getVisitor()->addData(
+                'userHasVote', $user === 'anon.' ? false : $proposal->userHasVote($user)
             );
         }
     }

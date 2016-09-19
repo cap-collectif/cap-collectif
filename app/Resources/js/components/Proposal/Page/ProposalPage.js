@@ -13,10 +13,10 @@ import ProposalPageMetadata from './ProposalPageMetadata';
 import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
-import { VOTE_TYPE_DISABLED, VOTE_TYPE_SIMPLE, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
 import ProposalActions from '../../../actions/ProposalActions';
+import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { connect } from 'react-redux';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
 
@@ -27,7 +27,6 @@ export const ProposalPage = React.createClass({
     categories: PropTypes.array.isRequired,
     steps: React.PropTypes.array.isRequired,
     votableStep: PropTypes.object,
-    userHasVote: PropTypes.bool,
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
@@ -36,62 +35,13 @@ export const ProposalPage = React.createClass({
   getDefaultProps() {
     return {
       votableStep: null,
-      userHasVote: false,
       creditsLeft: null,
       user: null,
     };
   },
 
-  getInitialState() {
-    const {
-        proposal,
-        userHasVote,
-        votableStep,
-      } = this.props;
-    if (votableStep) {
-      ProposalActions.initProposalVotes(votableStep.creditsLeft, !!userHasVote);
-    }
-    ProposalActions.initProposal(proposal);
-    return {
-      proposal,
-      userHasVote: !!userHasVote,
-      creditsLeft: ProposalVoteStore.creditsLeft,
-      showVotesModal: false,
-    };
-  },
-
-  componentWillMount() {
-    ProposalStore.addChangeListener(this.onChange);
-    ProposalVoteStore.addChangeListener(this.onVoteChange);
-  },
-
   componentDidMount() {
     setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
-  },
-
-  componentWillUnmount() {
-    ProposalStore.removeChangeListener(this.onChange);
-    ProposalVoteStore.removeChangeListener(this.onVoteChange);
-  },
-
-  onChange() {
-    if (ProposalStore.isProposalSync) {
-      this.setState({
-        proposal: ProposalStore.proposal,
-      });
-      return;
-    }
-    this.loadProposal();
-  },
-
-  onVoteChange() {
-    const { user } = this.props;
-    if (user) {
-      this.setState({
-        userHasVote: ProposalVoteStore.userHasVote,
-        creditsLeft: ProposalVoteStore.creditsLeft,
-      });
-    }
   },
 
   getHashKey(hash) {
@@ -116,60 +66,9 @@ export const ProposalPage = React.createClass({
     return 'content';
   },
 
-  toggleVotesModal(value) {
-    this.setState({
-      showVotesModal: value,
-    });
-  },
-
-  vote() {
-    const {
-        proposal,
-        votableStep,
-        } = this.props;
-    ProposalActions
-        .vote(
-            votableStep.id,
-            proposal.id,
-            proposal.estimation
-        )
-    ;
-  },
-
-  deleteVote() {
-    const {
-        proposal,
-        votableStep,
-        } = this.props;
-    ProposalActions
-        .deleteVote(
-            votableStep.id,
-            proposal.id,
-            proposal.estimation
-        )
-    ;
-  },
-
-  voteAction() {
-    const { user } = this.props;
-    if (!user || !this.state.userHasVote) {
-      this.toggleVotesModal(true);
-      return;
-    }
-    this.deleteVote();
-  },
-
-  loadProposal() {
-    const { form } = this.props;
-    ProposalActions.getOne(
-        form.id,
-        this.state.proposal.id
-    );
-  },
-
   render() {
-    const { proposal, userHasVote, creditsLeft, showVotesModal } = this.state;
-    const { form, categories, votableStep, features, steps } = this.props;
+    const { proposal, form, categories, votableStep, features, steps } = this.props;
+    // creditsLeft,
     const showVotes = !!votableStep && votableStep.voteType !== VOTE_TYPE_DISABLED;
     const showVotesTab = proposal.votesCount > 0 || showVotes;
     const stepsFiltered = steps.filter((step) => step.type === 'selection' || step.type === 'collect');
@@ -180,10 +79,8 @@ export const ProposalPage = React.createClass({
               proposal={proposal}
               className="container container--custom"
               showThemes={features.themes && form.usingThemes}
-              userHasVote={userHasVote}
-              onVote={this.voteAction}
               step={votableStep}
-              creditsLeft={creditsLeft}
+              // creditsLeft={creditsLeft}
           />
           <Tab.Container
               id="proposal-page-tabs"
@@ -216,9 +113,7 @@ export const ProposalPage = React.createClass({
                   <ProposalVoteButtonWrapper
                       step={votableStep}
                       proposal={proposal}
-                      creditsLeft={creditsLeft}
-                      userHasVote={userHasVote}
-                      onClick={this.voteAction}
+                      // creditsLeft={creditsLeft}
                       style={{ marginTop: '10px' }}
                       className="pull-right hidden-xs"
                   />
@@ -236,10 +131,8 @@ export const ProposalPage = React.createClass({
                             proposal={proposal}
                             form={form}
                             categories={categories}
-                            userHasVote={userHasVote}
                             step={votableStep}
-                            creditsLeft={creditsLeft}
-                            onVote={this.voteAction}
+                            // creditsLeft={creditsLeft}
                         />
                       </Col>
                       <Col xs={12} sm={4}>
@@ -308,7 +201,7 @@ export const ProposalPage = React.createClass({
                             <Nav bsStyle="pills">
                               {
                                 stepsFiltered.map((step, index) => {
-                                  return <NavItem key={index} eventKey={step.id}>{step.title} <span className="badge">{proposal.votesCountBySteps[step.id]}</span></NavItem>;
+                                  return <NavItem key={index} eventKey={step.id}>{step.title} <span className="badge">{proposal.votesCountByStepId[step.id]}</span></NavItem>;
                                 })
                               }
                             </Nav>
@@ -337,8 +230,6 @@ export const ProposalPage = React.createClass({
                 && <ProposalVoteModal
                     proposal={proposal}
                     step={votableStep}
-                    showModal={showVotesModal}
-                    onToggleModal={this.toggleVotesModal}
                 />
               }
             </div>

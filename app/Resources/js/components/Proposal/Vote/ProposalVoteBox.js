@@ -12,13 +12,9 @@ const ProposalVoteBox = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
-    userHasVote: PropTypes.bool,
     creditsLeft: PropTypes.number,
     className: PropTypes.string,
     formWrapperClassName: PropTypes.string,
-    onSubmitSuccess: PropTypes.func,
-    onSubmitFailure: PropTypes.func,
-    onValidationFailure: PropTypes.func,
     isSubmitting: PropTypes.bool.isRequired,
     user: PropTypes.object,
   },
@@ -26,7 +22,6 @@ const ProposalVoteBox = React.createClass({
 
   getDefaultProps() {
     return {
-      userHasVote: false,
       creditsLeft: null,
       className: '',
       formWrapperClassName: '',
@@ -37,21 +32,13 @@ const ProposalVoteBox = React.createClass({
     };
   },
 
-  userHasVote() {
-    const {
-      user,
-      userHasVote,
-    } = this.props;
-    return user && userHasVote;
-  },
-
   userHasEnoughCredits() {
     const {
       creditsLeft,
       proposal,
       user,
     } = this.props;
-    if (user && !this.userHasVote() && creditsLeft !== null && proposal.estimation !== null) {
+    if (user && !proposal.userHasVote && creditsLeft !== null && proposal.estimation !== null) {
       return creditsLeft >= proposal.estimation;
     }
     return true;
@@ -76,7 +63,6 @@ const ProposalVoteBox = React.createClass({
       proposal,
       step,
       user,
-      userHasVote,
     } = this.props;
     return (
       <div className={className}>
@@ -124,7 +110,7 @@ const ProposalVoteBox = React.createClass({
               onValidationFailure={onValidationFailure}
               onSubmitSuccess={onSubmitSuccess}
               onSubmitFailure={onSubmitFailure}
-              userHasVote={userHasVote}
+              userHasVote={proposal.userHasVote}
               />
           }
           <ProposalVoteBoxMessage

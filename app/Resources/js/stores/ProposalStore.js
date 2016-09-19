@@ -15,7 +15,6 @@ import {
   DELETE_PROPOSAL_FAILURE,
 
   CREATE_PROPOSAL_VOTE_SUCCESS,
-  CREATE_PROPOSAL_VOTE_FAILURE,
   DELETE_PROPOSAL_VOTE_SUCCESS,
   DELETE_PROPOSAL_VOTE_FAILURE,
 
@@ -100,10 +99,6 @@ class ProposalStore extends BaseStore {
         this.emitChange();
         break;
       case CREATE_PROPOSAL_VOTE_SUCCESS:
-        this._isProposalSync = false;
-        this.emitChange();
-        break;
-      case CREATE_PROPOSAL_VOTE_FAILURE:
         this._isProposalSync = false;
         this.emitChange();
         break;
