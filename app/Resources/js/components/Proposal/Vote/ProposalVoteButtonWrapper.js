@@ -47,7 +47,9 @@ const ProposalVoteButtonWrapper = React.createClass({
     if (step && step.voteType === VOTE_TYPE_SIMPLE) {
       return (
         <ProposalVoteButton
-          userHasVote={proposal.userHasVote}
+          proposal={proposal}
+          step={step}
+          user={user}
           disabled={!step.open}
           style={style}
           className={className}
@@ -62,7 +64,9 @@ const ProposalVoteButtonWrapper = React.createClass({
             show={!this.userHasEnoughCredits()}
         >
           <ProposalVoteButton
-            userHasVote={proposal.userHasVote}
+            proposal={proposal}
+            step={step}
+            user={user}
             disabled={!(step && step.open) || !this.userHasEnoughCredits()}
             style={style}
             className={className}
@@ -74,7 +78,9 @@ const ProposalVoteButtonWrapper = React.createClass({
     return (
       <LoginOverlay>
         <ProposalVoteButton
-          userHasVote={proposal.userHasVote}
+          proposal={proposal}
+          step={step}
+          user={user}
           disabled={!(step && step.open)}
           style={style}
           className={className}

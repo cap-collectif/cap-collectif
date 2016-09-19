@@ -25,9 +25,6 @@ const ProposalVoteBox = React.createClass({
       creditsLeft: null,
       className: '',
       formWrapperClassName: '',
-      onSubmitSuccess: () => {},
-      onSubmitFailure: () => {},
-      onValidationFailure: () => {},
       user: null,
     };
   },
@@ -57,9 +54,6 @@ const ProposalVoteBox = React.createClass({
       className,
       formWrapperClassName,
       isSubmitting,
-      onSubmitFailure,
-      onSubmitSuccess,
-      onValidationFailure,
       proposal,
       step,
       user,
@@ -102,16 +96,13 @@ const ProposalVoteBox = React.createClass({
         }
         <div className={formWrapperClassName}>
           {
-            this.displayForm()
-              && <ProposalVoteForm
+            this.displayForm() &&
+            <ProposalVoteForm
               proposal={proposal}
               step={step}
               isSubmitting={isSubmitting}
-              onValidationFailure={onValidationFailure}
-              onSubmitSuccess={onSubmitSuccess}
-              onSubmitFailure={onSubmitFailure}
               userHasVote={proposal.userHasVote}
-              />
+            />
           }
           <ProposalVoteBoxMessage
             enoughCredits={this.userHasEnoughCredits()}

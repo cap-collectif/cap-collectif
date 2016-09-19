@@ -55,6 +55,7 @@ export const vote = (dispatch, step, proposal, data = {}) => {
     .then(json)
     .then((vote) => {
       dispatch(voteSuccess(proposal.id, vote));
+      dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'success', content: 'proposal.request.vote.success' },
@@ -102,7 +103,7 @@ export const deleteVote = (dispatch, step, proposal) => {
       url = `/selection_steps/${step.id}/proposals/${proposal.id}/votes`;
       break;
     case 'collect':
-      url = `/collect_steps/${step.id}/proposals/${proposal}/votes`;
+      url = `/collect_steps/${step.id}/proposals/${proposal.id}/votes`;
       break;
     default:
       console.log('unknown step');

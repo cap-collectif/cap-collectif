@@ -2,13 +2,16 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
-import { openVoteModal } from '../../../redux/modules/proposal';
+import { openVoteModal, deleteVote } from '../../../redux/modules/proposal';
 import { connect } from 'react-redux';
 
 const ProposalVoteButton = React.createClass({
   propTypes: {
     disabled: PropTypes.bool.isRequired,
-    userHasVote: PropTypes.bool.isRequired,
+    proposal: PropTypes.object.isRequired,
+    step: PropTypes.object,
+    user: PropTypes.object,
+    dispatch: PropTypes.func,
     onMouseOver: PropTypes.func,
     onMouseOut: PropTypes.func,
     onFocus: PropTypes.func,
@@ -27,21 +30,35 @@ const ProposalVoteButton = React.createClass({
       onBlur: () => {},
       style: {},
       className: '',
+      step: null,
     };
   },
 
   render() {
     const {
       dispatch,
-      style, className, userHasVote, disabled, onMouseOver, onMouseOut, onFocus, onBlur } = this.props;
-    const bsStyle = userHasVote ? 'danger' : 'success';
+      style,
+      step,
+      user,
+      className,
+      proposal,
+      disabled,
+      onMouseOver,
+      onMouseOut,
+      onFocus,
+      onBlur,
+    } = this.props;
+    const userHasVote = proposal.userHasVote;
+    const bsStyle = user && userHasVote ? 'danger' : 'success';
     let classes = classNames({
       'btn--outline': true,
       disabled,
     });
     classes += ` ${className}`;
-    const onClick = disabled ? null : () => { dispatch(openVoteModal()); };
-    console.log('onClick', onClick);
+    const action = user && userHasVote
+      ? () => { deleteVote(dispatch, step, proposal); }
+      : () => { dispatch(openVoteModal()); };
+    const onClick = disabled ? null : action;
     return (
       <Button
         bsStyle={bsStyle}
@@ -55,7 +72,7 @@ const ProposalVoteButton = React.createClass({
         onBlur={onBlur}
       >
         {
-          userHasVote
+          user && userHasVote
             ? this.getIntlMessage('proposal.vote.delete')
             : this.getIntlMessage('proposal.vote.add')
         }

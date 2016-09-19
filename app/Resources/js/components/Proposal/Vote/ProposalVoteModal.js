@@ -74,6 +74,7 @@ const ProposalVoteModal = React.createClass({
         </Modal.Header>
         <Modal.Body>
           <ProposalVoteBox
+            isSubmitting={isSubmitting}
             proposal={proposal}
             step={step}
             creditsLeft={creditsLeft}
@@ -86,6 +87,7 @@ const ProposalVoteModal = React.createClass({
             id="confirm-proposal-vote"
             onSubmit={() => { dispatch(startVoting()); }}
             label="proposal.vote.confirm"
+            isSubmitting={isSubmitting}
             bsStyle={(!proposal.userHasVote || isSubmitting) ? 'success' : 'danger'}
             style={{ marginLeft: '10px' }}
             disabled={this.disableSubmitButton()}

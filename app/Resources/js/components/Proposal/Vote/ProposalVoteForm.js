@@ -13,9 +13,6 @@ const ProposalVoteForm = React.createClass({
     step: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
-    onValidationFailure: PropTypes.func.isRequired,
-    onSubmitSuccess: PropTypes.func.isRequired,
-    onSubmitFailure: PropTypes.func.isRequired,
     user: PropTypes.object,
   },
   mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
@@ -63,9 +60,6 @@ const ProposalVoteForm = React.createClass({
   componentWillReceiveProps(nextProps) {
     const {
       isSubmitting,
-      // onSubmitFailure,
-      // onSubmitSuccess,
-      // onValidationFailure,
       proposal,
       dispatch,
       step,
@@ -83,8 +77,6 @@ const ProposalVoteForm = React.createClass({
         }
         vote(dispatch, step, proposal, data);
       }
-
-      // onValidationFailure();
     }
   },
 
