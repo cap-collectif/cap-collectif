@@ -85,7 +85,7 @@ describe('<ProposalPage />', () => {
     const commentsItem = navItems.at(1);
     expect(commentsItem.prop('eventKey')).to.equal('comments');
     expect(commentsItem.prop('className')).to.equal('tabs__pill');
-    expect(commentsItem.children().first().text()).to.equal('Discussions');
+    expect(commentsItem.children().first().text()).to.equal('Commentaires');
     expect(commentsItem.find('.badge').text()).to.equal(`${proposalNoVotes.comments_count}`);
     const voteButtonWrapper = tabsPills.find('Connect(ProposalVoteButtonWrapper)');
     expect(voteButtonWrapper).to.have.length(1);
