@@ -18,8 +18,16 @@ class AuthService {
     this.hasRequestedToken = false;
   }
 
+  isUser() {
+    return LocalStorageService.isValid('jwt');
+  }
+
+  isAnonymous() {
+    return !LocalStorageService.get('jwt') && this.hasRequestedToken;
+  }
+
   login() {
-    if (LocalStorageService.isValid('jwt') || this.hasRequestedToken) {
+    if (this.isUser() || this.isAnonymous()) {
       return Promise.resolve();
     }
     return fetch(`${window.location.protocol}//${window.location.host}/get_api_token`, {
