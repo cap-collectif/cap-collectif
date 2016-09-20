@@ -14,8 +14,12 @@ function json(response) {
 
 class AuthService {
 
+  constructor() {
+    this.hasRequestedToken = false;
+  }
+
   login() {
-    if (LocalStorageService.isValid('jwt')) {
+    if (LocalStorageService.isValid('jwt') || this.hasRequestedToken) {
       return Promise.resolve();
     }
     return fetch(`${window.location.protocol}//${window.location.host}/get_api_token`, {
@@ -29,6 +33,7 @@ class AuthService {
     .then(status)
     .then(json)
     .then((data) => {
+      this.hasRequestedToken = true;
       return data.token
         ? LoginActions.loginUser(data.token)
         : this.logout()
