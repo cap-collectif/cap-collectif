@@ -39,7 +39,7 @@ class OpinionVoteRepository extends EntityRepository
 
         if ($asArray) {
           $qb
-            ->addSelect('u', 'ut', 'o')
+            ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
           ;
