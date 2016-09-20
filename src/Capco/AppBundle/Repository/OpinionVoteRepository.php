@@ -35,14 +35,21 @@ class OpinionVoteRepository extends EntityRepository
 
     public function getByOpinion(int $opinionId, bool $asArray = false, int $limit = -1, int $offset = 0)
     {
-        $qb = $this->getQueryBuilder()
-            ->addSelect('u', 'ut', 'o')
+        $qb = $this->getQueryBuilder()->addSelect('u', 'ut', 'o');
+
+        if ($asArray) {
+          $qb
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
+          ;
+        }
+
+        $qb
             ->leftJoin('v.opinion', 'o')
             ->andWhere('v.opinion = :opinion')
             ->setParameter('opinion', $opinionId)
-            ->orderBy('v.updatedAt', 'ASC');
+            ->orderBy('v.updatedAt', 'ASC')
+        ;
 
         if ($limit > 0) {
             $qb->setMaxResults($limit);

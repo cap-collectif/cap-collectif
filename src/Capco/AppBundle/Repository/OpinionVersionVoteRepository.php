@@ -39,8 +39,16 @@ class OpinionVersionVoteRepository extends EntityRepository
     {
         $qb = $this->getQueryBuilder()
             ->addSelect('u', 'ut')
+        ;
+        
+        if ($asArray) {
+          $qb
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
+          ;
+        }
+
+        $qb
             ->andWhere('v.opinionVersion = :version')
             ->setParameter('version', $versionId)
             ->orderBy('v.updatedAt', 'ASC');
