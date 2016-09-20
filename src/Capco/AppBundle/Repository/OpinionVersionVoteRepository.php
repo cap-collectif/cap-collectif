@@ -55,6 +55,18 @@ class OpinionVersionVoteRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
+    public function getVotesCountByVersion(OpinionVersion $version)
+    {
+      $qb = $this->createQueryBuilder('ov');
+
+      $qb->select('count(ov.id)')
+          ->where('ov.version = :version')
+          ->setParameter('version', $version)
+      ;
+
+      return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     protected function getQueryBuilder()
     {
         return $this->createQueryBuilder('v')

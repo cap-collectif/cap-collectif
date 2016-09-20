@@ -54,6 +54,18 @@ class OpinionVoteRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
+    public function getVotesCountByOpinion(Opinion $opinion)
+    {
+      $qb = $this->createQueryBuilder('ov');
+
+      $qb->select('count(ov.id)')
+          ->where('ov.opinion = :opinion')
+          ->setParameter('opinion', $opinion)
+      ;
+
+      return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     protected function getQueryBuilder()
     {
         return $this->createQueryBuilder('v')
