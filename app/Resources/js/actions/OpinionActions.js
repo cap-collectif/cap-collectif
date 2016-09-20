@@ -53,7 +53,7 @@ export default {
     const url = versionId ? `/opinions/${opinionId}/versions/${versionId}/votes` : `/opinions/${opinionId}/votes`;
     let hasMore = true;
     let iterationCount = 0;
-    const votesPerIteration = 100;
+    const votesPerIteration = 30;
     const votes = [];
     while (hasMore) {
       const result = await Fetcher.get(`${url}?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`);
