@@ -37,12 +37,11 @@ class OpinionVersionVoteRepository extends EntityRepository
 
     public function getByVersion(int $versionId, bool $asArray = false, int $limit = -1, int $offset = 0)
     {
-        $qb = $this->getQueryBuilder()
-            ->addSelect('u', 'ut')
-        ;
-        
+        $qb = $this->getQueryBuilder();
+
         if ($asArray) {
           $qb
+            ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
           ;

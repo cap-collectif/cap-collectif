@@ -35,16 +35,18 @@ class OpinionVoteRepository extends EntityRepository
 
     public function getByOpinion(int $opinionId, bool $asArray = false, int $limit = -1, int $offset = 0)
     {
-        $qb = $this->getQueryBuilder()->addSelect('u', 'ut', 'o');
+        $qb = $this->getQueryBuilder();
 
         if ($asArray) {
           $qb
+            ->addSelect('u', 'ut', 'o')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
           ;
         }
 
         $qb
+            ->addSelect('o')
             ->leftJoin('v.opinion', 'o')
             ->andWhere('v.opinion = :opinion')
             ->setParameter('opinion', $opinionId)
