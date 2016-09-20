@@ -60,7 +60,7 @@ class OpinionVersionVoteRepository extends EntityRepository
       $qb = $this->createQueryBuilder('ov');
 
       $qb->select('count(ov.id)')
-          ->where('ov.version = :version')
+          ->where('ov.opinionVersion = :version')
           ->setParameter('version', $version)
       ;
 
