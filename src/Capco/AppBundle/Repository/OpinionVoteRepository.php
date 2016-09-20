@@ -33,14 +33,7 @@ class OpinionVoteRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * Get all by opinion.
-     *
-     * @param $opinion
-     *
-     * @return mixed
-     */
-    public function getAllByOpinion($opinionId, $asArray = false)
+    public function getByOpinion(int $opinionId, bool $asArray = false, int $limit = -1, int $offset = 0)
     {
         $qb = $this->getQueryBuilder()
             ->addSelect('u', 'ut', 'o')
@@ -50,6 +43,11 @@ class OpinionVoteRepository extends EntityRepository
             ->andWhere('v.opinion = :opinion')
             ->setParameter('opinion', $opinionId)
             ->orderBy('v.updatedAt', 'ASC');
+
+        if ($limit > 0) {
+            $qb->setMaxResults($limit);
+            $qb->setFirstResult($offset);
+        }
 
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }

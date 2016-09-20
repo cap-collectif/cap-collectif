@@ -224,16 +224,10 @@ class OpinionsController extends FOSRestController
         $limit = $paramFetcher->get('limit');
         $offset = $paramFetcher->get('offset');
 
-        $em = $this->get('doctrine.orm.entity_manager');
+        $repo = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:OpinionVote');
 
-        $votes = $em->getRepository('CapcoAppBundle:OpinionVote')
-            ->getAllByOpinion($opinion->getId());
-
-        $count = $this
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:OpinionVote')
-            ->getVotesCountByOpinion($opinion)
-        ;
+        $votes = $repo->getByOpinion($opinion->getId(), false, $limit, $offset);
+        $count = $repo->getVotesCountByOpinion($opinion);
 
         return [
             'votes' => $votes,
@@ -658,7 +652,7 @@ class OpinionsController extends FOSRestController
           ->get('doctrine.orm.entity_manager')
           ->getRepository('CapcoAppBundle:OpinionVersionVote')
         ;
-        $votes = $repo->getAllByVersion($version->getId());
+        $votes = $repo->getByVersion($version->getId(), false, $limit, $offset);
         $count = $repo->getVotesCountByVersion($version);
 
         return [
