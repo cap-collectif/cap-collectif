@@ -32,42 +32,41 @@ class CollectStepsController extends FOSRestController
      */
     public function getProposalsByCollectStepAction(Request $request, CollectStep $collectStep, ParamFetcherInterface $paramFetcher)
     {
-        $page = intval($paramFetcher->get('page'));
-        $pagination = intval($paramFetcher->get('pagination'));
-        $order = $paramFetcher->get('order') ? $paramFetcher->get('order') : $collectStep->getDefaultSort();
+      $proposalForm = $collectStep->getProposalForm();
+      $page = intval($paramFetcher->get('page'));
+      $pagination = intval($paramFetcher->get('pagination'));
+      $order = $paramFetcher->get('order');
+      $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
 
-        if ($order === 'votes' && !$collectStep->isVotable()) {
-            $order = 'last';
-        }
+      if ($proposalForm->getStep()->isPrivate()) {
+          if (!$this->getUser()) {
+              return ['proposals' => [], 'count' => 0, 'order' => $order];
+          }
 
-        $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
+          $providedFilters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
+      }
 
-        // Filters
-        $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
-        $providedFilters['collectStep'] = $collectStep->getId();
+      $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
 
-        $results = $this->get('capco.search.resolver')->searchProposals(
-            $page,
-            $pagination,
-            $order,
-            $terms,
-            $providedFilters
-        );
+      // Filters
+      $providedFilters['proposalForm'] = $proposalForm->getId();
 
-        $user = $this->getUser();
+      $results = $this->get('capco.search.resolver')->searchProposals($page, $pagination, $order, $terms, $providedFilters);
 
-        if ($user) {
-            $results['proposals'] = $this
-                ->get('capco.proposal_votes.resolver')
-                ->addVotesToProposalsForCollectStepAndUser(
-                    $results['proposals'],
-                    $collectStep,
-                    $user
-                )
-            ;
-        }
+      $user = $this->getUser();
 
-        return $results;
+      if ($user) {
+          $results['proposals'] = $this
+              ->get('capco.proposal_votes.resolver')
+              ->addVotesToProposalsForCollectStepAndUser(
+                  $results['proposals'],
+                  $proposalForm->getStep(),
+                  $user
+              )
+          ;
+      }
+
+      return $results;
     }
 
     /**

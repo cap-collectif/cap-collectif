@@ -39,58 +39,6 @@ use Swarrot\Broker\Message;
 class ProposalsController extends FOSRestController
 {
     /**
-     * @Post("/proposal_forms/{proposal_form_id}/proposals/search")
-     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}})
-     * @QueryParam(name="page", requirements="[0-9.]+", default="1")
-     * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
-     * @QueryParam(name="order", requirements="(old|last|comments|random)", default="random")
-     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
-     *
-     * @param Request               $request
-     * @param ProposalForm          $proposalForm
-     * @param ParamFetcherInterface $paramFetcher
-     *
-     * @return array
-     */
-    public function getProposalsByFormAction(Request $request, ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
-    {
-        $page = intval($paramFetcher->get('page'));
-        $pagination = intval($paramFetcher->get('pagination'));
-        $order = $paramFetcher->get('order');
-        $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
-
-        if ($proposalForm->getStep()->isPrivate()) {
-            if (!$this->getUser()) {
-                return ['proposals' => [], 'count' => 0, 'order' => $order];
-            }
-
-            $providedFilters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
-        }
-
-        $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
-
-        // Filters
-        $providedFilters['proposalForm'] = $proposalForm->getId();
-
-        $results = $this->get('capco.search.resolver')->searchProposals($page, $pagination, $order, $terms, $providedFilters);
-
-        $user = $this->getUser();
-
-        if ($user) {
-            $results['proposals'] = $this
-                ->get('capco.proposal_votes.resolver')
-                ->addVotesToProposalsForCollectStepAndUser(
-                    $results['proposals'],
-                    $proposalForm->getStep(),
-                    $user
-                )
-            ;
-        }
-
-        return $results;
-    }
-
-    /**
      * Get a proposal.
      *
      * @ApiDoc(

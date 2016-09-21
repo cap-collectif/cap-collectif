@@ -57,7 +57,7 @@ const ProposalVoteButton = React.createClass({
     classes += ` ${className}`;
     const action = user && userHasVote
       ? () => { deleteVote(dispatch, step, proposal); }
-      : () => { dispatch(openVoteModal()); };
+      : () => { dispatch(openVoteModal(proposal.id)); };
     const onClick = disabled ? null : action;
     return (
       <Button

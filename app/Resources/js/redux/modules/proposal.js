@@ -40,7 +40,7 @@ export const SUBMIT_PROPOSAL_FORM = 'proposal/SUBMIT_PROPOSAL_FORM';
 const initialState = {
   currentProposalById: null,
   proposals: [],
-  showVoteModal: false,
+  currentVoteModal: null,
   showCreateModal: false,
   isCreating: false,
   isVoting: false,
@@ -77,9 +77,10 @@ export const closeCreateModal = () => {
   };
 };
 
-export const openVoteModal = () => {
+export const openVoteModal = (id) => {
   return {
     type: OPEN_VOTE_MODAL,
+    id,
   };
 };
 
@@ -103,7 +104,7 @@ export const changeOrder = (order) => {
   };
 };
 
-export const changeTerms = (terms) => {
+export const changeTerm = (terms) => {
   return {
     type: CHANGE_TERMS,
     terms,
@@ -118,11 +119,9 @@ export const changeFilter = (filter, value) => {
   };
 };
 
-export const loadProposals = (fetchFrom, id) => {
+export const loadProposals = () => {
   return {
     type: FETCH_REQUESTED,
-    fetchFrom,
-    id,
   };
 };
 
@@ -194,7 +193,7 @@ export const submitProposal = (dispatch, form, data) => {
       .post(`/proposal_forms/${form}/proposals`, data)
       .then(() => {
         dispatch(closeCreateModal());
-        dispatch(loadProposals('form', form));
+        dispatch(loadProposals());
         FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'proposal.request.create.success' },
@@ -247,19 +246,21 @@ export function* fetchAllVotes(action) {
   // }
 }
 
-export function* fetchProposals(action) {
+export function* fetchProposals() {
   const globalState = yield select();
+  const steps = globalState.project.projects[globalState.project.currentProjectById].steps;
+  const step = steps.filter(s => s.id === globalState.project.currentProjectStepById)[0];
   const state = globalState.proposal;
   let url = '';
-  switch (action.fetchFrom) {
-    case 'form':
-      url = `/proposal_forms/${action.id}/proposals/search`;
+  switch (step.type) {
+    case 'collect':
+      url = `/collect_steps/${step.id}/proposals/search`;
       break;
-    case 'selectionStep':
-      url = `/selection_steps/${action.id}/proposals/search`;
+    case 'selection':
+      url = `/selection_steps/${step.id}/proposals/search`;
       break;
     default:
-      console.log('Unknown fetchFrom');
+      console.log('Unknown step type');
       return false;
   }
   url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${state.order}`;
@@ -316,21 +317,23 @@ export const reducer = (state = initialState, action) => {
     case CLOSE_CREATE_MODAL:
       return { ...state, showCreateModal: false, isCreating: false };
     case OPEN_VOTE_MODAL:
-      return { ...state, showVoteModal: true };
+      return { ...state, currentVoteModal: action.id };
     case CLOSE_VOTE_MODAL:
-      return { ...state, showVoteModal: false };
+      return { ...state, currentVoteModal: null };
     case VOTE_REQUESTED:
       return { ...state, isVoting: true };
     case VOTE_FAILED:
       return { ...state, isVoting: false };
     case VOTE_SUCCEEDED: {
-      const proposal = state.proposals[action.proposalId];
+      console.log(action);
+      const proposals = state.proposals;
+      const proposal = proposals.filter(p => p.id = action.proposalId)[0];
+      const index = proposals.indexOf(proposal);
       const previousVotes = proposal.votes || [];
-      const votes = previousVotes.push(action.vote);
-      const proposals = {
-        [action.proposalId]: { ...proposal, votes, userHasVote: true },
-      };
-      return { ...state, proposals, isVoting: false };
+      proposal.userHasVote = true;
+      proposal.votes = previousVotes.push(action.vote);
+      proposals[index] = proposal;
+      return { ...state, proposals, isVoting: false, currentVoteModal: null };
     }
     case FETCH_REQUESTED:
       return { ...state, isLoading: true };

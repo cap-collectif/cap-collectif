@@ -31,7 +31,7 @@ export const CollectStepPage = React.createClass({
   mixins: [IntlMixin],
 
   componentDidMount() {
-    this.props.dispatch(loadProposals('form', this.props.form.id));
+    this.props.dispatch(loadProposals());
   },
 
   selectPage(newPage) {

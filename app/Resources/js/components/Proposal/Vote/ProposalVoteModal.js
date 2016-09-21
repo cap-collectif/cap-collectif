@@ -103,10 +103,10 @@ const ProposalVoteModal = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     user: state.default.user,
-    showModal: state.proposal.showVoteModal,
+    showModal: state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id,
     isSubmitting: state.proposal.isVoting,
   };
 };

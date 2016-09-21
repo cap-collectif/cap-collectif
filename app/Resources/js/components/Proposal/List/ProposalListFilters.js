@@ -8,8 +8,6 @@ import { changeFilter, changeOrder, loadProposals } from '../../../redux/modules
 
 export const ProposalListFilters = React.createClass({
   propTypes: {
-    id: PropTypes.number.isRequired,
-    fetchFrom: PropTypes.string,
     themes: PropTypes.array.isRequired,
     types: PropTypes.array.isRequired,
     districts: PropTypes.array.isRequired,
@@ -26,7 +24,6 @@ export const ProposalListFilters = React.createClass({
 
   getDefaultProps() {
     return {
-      fetchFrom: 'form',
       orderByVotes: false,
     };
   },
@@ -50,7 +47,7 @@ export const ProposalListFilters = React.createClass({
 
   componentDidUpdate(prevProps) {
     if (prevProps && (prevProps.order !== this.props.order || prevProps.filters !== this.props.filters)) {
-      this.reload();
+      this.props.dispatch(loadProposals());
     }
   },
 
@@ -76,21 +73,10 @@ export const ProposalListFilters = React.createClass({
   // handleFilterChange(filterName) {
   //   const value = this[filterName].getValue();
   //   ProposalActions.changeFilterValue(filterName, value);
-  //   this.reload();
   // },
-
-  reload() {
-    const {
-      fetchFrom,
-      id,
-    } = this.props;
-    this.props.dispatch(loadProposals(fetchFrom, id));
-  },
 
   render() {
     const {
-      fetchFrom,
-      id,
       order,
       dispatch,
       filters,
@@ -117,7 +103,7 @@ export const ProposalListFilters = React.createClass({
           </Input>
         </Col>
         <Col xs={12} md={6}>
-          <ProposalListSearch fetchFrom={fetchFrom} id={id} />
+          <ProposalListSearch />
         </Col>
       </Row>
       <Row>

@@ -30,6 +30,7 @@
 {% endfor %}
 {% set state = {
   'project': {
+    'currentProjectStepById': currentStep.id|default(null),
     'currentProjectById': project.id,
     'projects': {
       (project.id) : {
