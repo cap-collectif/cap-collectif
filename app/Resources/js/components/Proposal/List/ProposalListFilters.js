@@ -1,17 +1,15 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import ProposalActions from '../../../actions/ProposalActions';
-import ProposalStore from '../../../stores/ProposalStore';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { changeFilter, changeOrder, loadProposals } from '../../../redux/modules/proposal';
 
 export const ProposalListFilters = React.createClass({
   propTypes: {
     id: PropTypes.number.isRequired,
     fetchFrom: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
     themes: PropTypes.array.isRequired,
     types: PropTypes.array.isRequired,
     districts: PropTypes.array.isRequired,
@@ -20,6 +18,9 @@ export const ProposalListFilters = React.createClass({
     orderByVotes: PropTypes.bool,
     features: PropTypes.object.isRequired,
     showThemes: PropTypes.bool.isRequired,
+    order: PropTypes.string.isRequired,
+    filters: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -32,15 +33,9 @@ export const ProposalListFilters = React.createClass({
 
   getInitialState() {
     return {
-      order: ProposalStore.order,
-      filters: ProposalStore.filters,
       displayedFilters: ['statuses', 'types', 'districts', 'themes', 'categories'],
       displayedOrders: ['random', 'last', 'old', 'comments'],
     };
-  },
-
-  componentWillMount() {
-    ProposalStore.addChangeListener(this.onChange);
   },
 
   componentDidMount() {
@@ -53,27 +48,10 @@ export const ProposalListFilters = React.createClass({
     this.updateDisplayedFilters();
   },
 
-  componentWillReceiveProps() {
-    this.updateDisplayedFilters();
-  },
-
-  componentDidUpdate(prevProps, prevState) {
-    const { onChange } = this.props;
-    if (prevState && (prevState.order !== this.state.order || prevState.filters !== this.state.filters)) {
+  componentDidUpdate(prevProps) {
+    if (prevProps && (prevProps.order !== this.props.order || prevProps.filters !== this.props.filters)) {
       this.reload();
-      onChange();
     }
-  },
-
-  componentWillUnmount() {
-    ProposalStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    this.setState({
-      order: ProposalStore.order,
-      filters: ProposalStore.filters,
-    });
   },
 
   updateDisplayedFilters() {
@@ -95,29 +73,27 @@ export const ProposalListFilters = React.createClass({
     this.setState({ displayedFilters: filters });
   },
 
-  handleOrderChange(ev) {
-    const order = ev.target.value;
-    ProposalActions.changeOrder(order);
-  },
-
-  handleFilterChange(filterName) {
-    const value = this[filterName].getValue();
-    ProposalActions.changeFilterValue(filterName, value);
-    this.reload();
-  },
+  // handleFilterChange(filterName) {
+  //   const value = this[filterName].getValue();
+  //   ProposalActions.changeFilterValue(filterName, value);
+  //   this.reload();
+  // },
 
   reload() {
     const {
       fetchFrom,
       id,
     } = this.props;
-    ProposalActions.load(fetchFrom, id);
+    this.props.dispatch(loadProposals(fetchFrom, id));
   },
 
   render() {
     const {
       fetchFrom,
       id,
+      order,
+      dispatch,
+      filters,
     } = this.props;
     return (
     <div>
@@ -126,8 +102,8 @@ export const ProposalListFilters = React.createClass({
           <Input
             id="proposal-sorting"
             type="select"
-            onChange={this.handleOrderChange}
-            value={this.state.order || 'random'}
+            onChange={(e) => { dispatch(changeOrder(e.target.value)); }}
+            value={order}
           >
             {
               this.state.displayedOrders.map((choice) => {
@@ -146,21 +122,20 @@ export const ProposalListFilters = React.createClass({
       </Row>
       <Row>
         {
-          this.state.displayedFilters.map((filterName, index) => {
+          this.state.displayedFilters.filter((filterName) => filters[filterName]).map((filterName, index) => {
             return (
               <Col xs={12} md={6} key={index}>
                 <Input
                   type="select"
                   id={`proposal-filter-${filterName}`}
-                  ref={(c) => this[filterName] = c}
-                  onChange={this.handleFilterChange.bind(this, filterName)}
-                  value={this.state.filters[filterName] || 0}
+                  onChange={(e) => { dispatch(changeFilter(filterName, e)); }}
+                  value={filters[filterName] || 0}
                 >
                   <option value="0">
                     {this.getIntlMessage(`global.select_${filterName}`)}
                   </option>
                   {
-                    this.props[filterName].map((choice) => {
+                    filters[filterName].map((choice) => {
                       return (
                         <option key={choice.id} value={choice.id}>
                           {choice.title || choice.name}
@@ -181,7 +156,11 @@ export const ProposalListFilters = React.createClass({
 });
 
 const mapStateToProps = (state) => {
-  return { features: state.default.features };
+  return {
+    features: state.default.features,
+    order: state.proposal.order,
+    filters: state.proposal.filters,
+  };
 };
 
 export default connect(mapStateToProps, null, null, { pure: false })(ProposalListFilters);

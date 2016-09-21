@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-
-import ProposalStore from '../../stores/ProposalStore';
-import ProposalVoteStore from '../../stores/ProposalVoteStore';
-import ProposalActions from '../../actions/ProposalActions';
+import { connect } from 'react-redux';
 import { VOTE_TYPE_DISABLED, PROPOSAL_PAGINATION } from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalList from '../Proposal/List/ProposalList';
@@ -13,8 +10,9 @@ import CollectStepPageHeader from './CollectStepPageHeader';
 import ProposalRandomButton from '../Proposal/List/ProposalRandomButton';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
 import VisibilityBox from '../Utils/VisibilityBox';
+import { loadProposals, changePage } from '../../redux/modules/proposal';
 
-const CollectStepPage = React.createClass({
+export const CollectStepPage = React.createClass({
   propTypes: {
     step: PropTypes.object.isRequired,
     count: PropTypes.number.isRequired,
@@ -24,89 +22,44 @@ const CollectStepPage = React.createClass({
     districts: PropTypes.array.isRequired,
     types: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
+    proposals: PropTypes.array.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    randomOrder: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
-  getInitialState() {
-    const { count } = this.props;
-    return {
-      proposals: ProposalStore.proposals,
-      proposalsCount: count,
-      currentPage: ProposalStore.currentPage,
-      isLoading: true,
-      randomOrder: ProposalStore.order === 'random',
-    };
-  },
-
-  componentWillMount() {
-    ProposalStore.addChangeListener(this.onChange);
-  },
-
   componentDidMount() {
-    this.loadProposals();
-  },
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState && (prevState.currentPage !== this.state.currentPage)) {
-      this.loadProposals();
-    }
-  },
-
-  componentWillUnmount() {
-    ProposalStore.removeChangeListener(this.onChange);
-    ProposalVoteStore.removeChangeListener(this.onVoteChange);
-  },
-
-  onChange() {
-    if (!ProposalStore.isProcessing && ProposalStore.isProposalListSync) {
-      this.setState({
-        proposals: ProposalStore.proposals,
-        proposalsCount: ProposalStore.proposalsCount,
-        currentPage: ProposalStore.currentPage,
-        isLoading: false,
-        randomOrder: ProposalStore.order === 'random',
-      });
-      return;
-    }
-
-    this.loadProposals();
-  },
-
-  loadProposals() {
-    const { form } = this.props;
-    this.setState({
-      isLoading: true,
-    });
-    ProposalActions.load('form', form.id);
-  },
-
-  handleFilterOrOrderChange() {
-    this.setState({ isLoading: true });
+    this.props.dispatch(loadProposals('form', this.props.form.id));
   },
 
   selectPage(newPage) {
-    this.setState({ isLoading: true });
-    ProposalActions.changePage(newPage);
+    this.props.dispatch(changePage(newPage));
   },
 
   render() {
     const {
+      proposals,
       categories,
       districts,
       form,
       statuses,
       step,
       themes,
+      count,
       types,
+      isLoading,
+      randomOrder,
     } = this.props;
-    const nbPages = Math.ceil(this.state.proposalsCount / PROPOSAL_PAGINATION);
-    const showPagination = nbPages > 1 && !this.state.randomOrder;
-    const showRandomButton = nbPages > 1 && this.state.randomOrder;
+    const nbPages = Math.ceil(count / PROPOSAL_PAGINATION);
+    const showPagination = nbPages > 1 && !randomOrder;
+    const showRandomButton = nbPages > 1 && randomOrder;
     return (
       <div>
         <StepPageHeader step={step} />
         <CollectStepPageHeader
-          count={this.state.proposalsCount}
+          count={count}
           form={form}
           themes={themes}
           districts={districts}
@@ -119,37 +72,37 @@ const CollectStepPage = React.createClass({
           types={types}
           statuses={statuses}
           categories={categories}
-          onChange={() => this.handleFilterOrOrderChange()}
           orderByVotes={step.voteType !== VOTE_TYPE_DISABLED}
           showThemes={form.usingThemes}
         />
         <br />
-        <Loader show={this.state.isLoading}>
+        <Loader show={isLoading}>
           <div>
             {
-              this.state.proposals.length === 0 && !step.isPrivate
-              ? <p className={{ 'p--centered': true }} style={{ 'margin-bottom': '40px' }}>{ this.getIntlMessage('proposal.empty') }</p>
-              : <VisibilityBox enabled={step.isPrivate}>
-                <ProposalList
-                  proposals={this.state.proposals}
-                  step={step}
-                  showThemes={form.usingThemes}
-                />
-              </VisibilityBox>
+              proposals.length === 0 && !step.isPrivate
+                ? <p className={{ 'p--centered': true }} style={{ 'margin-bottom': '40px' }}>{ this.getIntlMessage('proposal.empty') }</p>
+                : <VisibilityBox enabled={step.isPrivate}>
+                    <ProposalList
+                      proposals={proposals}
+                      step={step}
+                      showThemes={form.usingThemes}
+                    />
+                  </VisibilityBox>
             }
             {
-              showPagination
-              ? <Pagination
+              showPagination &&
+                <Pagination
                   current={this.state.currentPage}
                   nbPages={nbPages}
                   onChange={this.selectPage}
-              />
-              : null
+                />
             }
             {
-              showRandomButton
-              ? <ProposalRandomButton isLoading={this.state.isLoading} onClick={this.loadProposals} />
-              : null
+              showRandomButton &&
+                <ProposalRandomButton
+                  isLoading={isLoading}
+                  onClick={this.loadProposals}
+                />
             }
           </div>
         </Loader>
@@ -159,4 +112,12 @@ const CollectStepPage = React.createClass({
 
 });
 
-export default CollectStepPage;
+const mapStateToProps = (state) => {
+  return {
+    proposals: state.proposal.proposals,
+    currentPage: state.proposal.currentPaginationPage,
+    randomOrder: state.proposal.order === 'random',
+    isLoading: state.proposal.isLoading,
+  };
+};
+export default connect(mapStateToProps)(CollectStepPage);

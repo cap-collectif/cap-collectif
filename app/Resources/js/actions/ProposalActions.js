@@ -5,7 +5,6 @@ import flatten from 'flat';
 import {
   RECEIVE_PROPOSAL,
   RECEIVE_PROPOSAL_VOTES,
-  RECEIVE_PROPOSALS,
 
   INIT_PROPOSAL,
   SUBMIT_PROPOSAL,
@@ -17,21 +16,14 @@ import {
   DELETE_PROPOSAL_SUCCESS,
   DELETE_PROPOSAL_FAILURE,
 
-  INIT_PROPOSALS,
-  INIT_PROPOSAL_VOTES,
   INIT_VOTABLE_STEPS,
 
   CHANGE_PAGE,
   CHANGE_ORDER,
   CHANGE_SEARCH_TERMS,
   CHANGE_FILTERS,
-  PROPOSAL_PAGINATION,
 
 } from '../constants/ProposalConstants';
-import {
-  CREATE_COMMENT_SUCCESS,
-  CREATE_COMMENT_FAILURE,
-} from '../constants/CommentConstants';
 import { UPDATE_ALERT } from '../constants/AlertConstants';
 
 export default {
@@ -40,22 +32,6 @@ export default {
     AppDispatcher.dispatch({
       actionType: INIT_PROPOSAL,
       proposal,
-    });
-  },
-
-  initProposals: (proposals, count) => {
-    AppDispatcher.dispatch({
-      actionType: INIT_PROPOSALS,
-      proposals,
-      count,
-    });
-  },
-
-  initProposalVotes: (creditsLeft, userHasVote = false) => {
-    AppDispatcher.dispatch({
-      actionType: INIT_PROPOSAL_VOTES,
-      creditsLeft,
-      userHasVote,
     });
   },
 

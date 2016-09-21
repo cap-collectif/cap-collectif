@@ -25,7 +25,7 @@ export const ProposalPage = React.createClass({
     form: PropTypes.object.isRequired,
     proposal: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
-    steps: React.PropTypes.array.isRequired,
+    steps: PropTypes.array.isRequired,
     votableStep: PropTypes.object,
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
@@ -68,7 +68,6 @@ export const ProposalPage = React.createClass({
 
   render() {
     const { proposal, form, categories, votableStep, features, steps } = this.props;
-    // creditsLeft,
     const showVotes = !!votableStep && votableStep.voteType !== VOTE_TYPE_DISABLED;
     const showVotesTab = proposal.votesCount > 0 || showVotes;
     const stepsFiltered = steps.filter((step) => step.type === 'selection' || step.type === 'collect');
@@ -80,7 +79,6 @@ export const ProposalPage = React.createClass({
               className="container container--custom"
               showThemes={features.themes && form.usingThemes}
               step={votableStep}
-              // creditsLeft={creditsLeft}
           />
           <Tab.Container
               id="proposal-page-tabs"
@@ -113,7 +111,6 @@ export const ProposalPage = React.createClass({
                   <ProposalVoteButtonWrapper
                       step={votableStep}
                       proposal={proposal}
-                      // creditsLeft={creditsLeft}
                       style={{ marginTop: '10px' }}
                       className="pull-right hidden-xs"
                   />
@@ -132,7 +129,6 @@ export const ProposalPage = React.createClass({
                             form={form}
                             categories={categories}
                             step={votableStep}
-                            // creditsLeft={creditsLeft}
                         />
                       </Col>
                       <Col xs={12} sm={4}>
