@@ -2,26 +2,14 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../services/Fetcher';
 import ProposalStore from '../stores/ProposalStore';
 import flatten from 'flat';
+
 import {
   RECEIVE_PROPOSAL,
   RECEIVE_PROPOSAL_VOTES,
-
-  INIT_PROPOSAL,
-  SUBMIT_PROPOSAL,
-  PROPOSAL_VALIDATION_FAILURE,
-  CREATE_PROPOSAL_SUCCESS,
-  CREATE_PROPOSAL_FAILURE,
   UPDATE_PROPOSAL_SUCCESS,
   UPDATE_PROPOSAL_FAILURE,
   DELETE_PROPOSAL_SUCCESS,
   DELETE_PROPOSAL_FAILURE,
-
-  INIT_VOTABLE_STEPS,
-
-  CHANGE_PAGE,
-  CHANGE_ORDER,
-  CHANGE_SEARCH_TERMS,
-  CHANGE_FILTERS,
 
 } from '../constants/ProposalConstants';
 import { UPDATE_ALERT } from '../constants/AlertConstants';

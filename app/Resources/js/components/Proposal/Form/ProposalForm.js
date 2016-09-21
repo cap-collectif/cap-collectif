@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
@@ -10,6 +9,7 @@ import { connect } from 'react-redux';
 import ProposalPrivateField from '../ProposalPrivateField';
 import { Button, Collapse, Panel } from 'react-bootstrap';
 import { debounce } from 'lodash';
+import { submitProposal, updateProposal } from '../../../redux/modules/proposal';
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -18,12 +18,10 @@ const ProposalForm = React.createClass({
     districts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
-    onValidationFailure: PropTypes.func,
-    onSubmitSuccess: PropTypes.func,
-    onSubmitFailure: PropTypes.func,
+    dispatch: PropTypes.func.isRequired,
+    features: PropTypes.object.isRequired,
     mode: PropTypes.string,
     proposal: PropTypes.object,
-    features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
@@ -43,12 +41,6 @@ const ProposalForm = React.createClass({
           id: -1,
         },
         responses: [],
-      },
-      onSubmitSuccess: () => {
-      },
-      onSubmitFailure: () => {
-      },
-      onValidationFailure: () => {
       },
     };
   },
@@ -102,15 +94,12 @@ const ProposalForm = React.createClass({
       features,
       isSubmitting,
       mode,
-      onSubmitFailure,
-      onSubmitSuccess,
-      onValidationFailure,
       proposal,
     } = this.props;
     this.updateThemeConstraint();
     this.updateDistrictConstraint();
     this.updateCategoryConstraint();
-    if (!isSubmitting && nextProps.isSubmitting === true) {
+    if (!isSubmitting && nextProps.isSubmitting) {
       if (this.isValid()) {
         const form = this.state.form;
         const responses = [];
@@ -138,30 +127,11 @@ const ProposalForm = React.createClass({
           delete form.category;
         }
         if (mode === 'edit') {
-          ProposalActions
-            .update(this.props.form.id, proposal.id, form)
-            .then(() => {
-              this.setState(this.getInitialState());
-              onSubmitSuccess();
-            })
-            .catch(() => {
-              onSubmitFailure();
-            });
-          return;
+          updateProposal(this.props.dispatch, this.props.form.id, proposal.id, form);
+        } else {
+          submitProposal(this.props.dispatch, this.props.form.id, form);
         }
-        ProposalActions
-          .add(this.props.form.id, form)
-          .then(() => {
-            this.setState(this.getInitialState());
-            onSubmitSuccess();
-          })
-          .catch(() => {
-            onSubmitFailure();
-          });
-        return;
       }
-
-      onValidationFailure();
     }
   },
 
@@ -339,7 +309,7 @@ const ProposalForm = React.createClass({
               </Panel>
         </Collapse>
         {
-          features.themes && form.usingThemes ?
+          features.themes && form.usingThemes &&
             <Input
                 id="proposal_theme"
                 type="select"
@@ -360,12 +330,10 @@ const ProposalForm = React.createClass({
               })
             }
           </Input>
-            : null
         }
-
         {
-          categories.length > 0 && form.usingCategories
-          && <Input
+          categories.length > 0 && form.usingCategories &&
+          <Input
             id="proposal_category"
             type="select"
             valueLink={this.linkState('form.category')}
@@ -386,10 +354,9 @@ const ProposalForm = React.createClass({
             }
           </Input>
         }
-
         {
-          features.districts && form.usingDistrict
-          && <Input
+          features.districts && form.usingDistrict &&
+          <Input
             id="proposal_district"
             type="select"
             valueLink={this.linkState('form.district')}
@@ -410,7 +377,6 @@ const ProposalForm = React.createClass({
             }
           </Input>
         }
-
         <Input
           id="proposal_body"
           type="editor"
@@ -420,7 +386,6 @@ const ProposalForm = React.createClass({
           valueLink={this.linkState('form.body')}
           help={form.descriptionHelpText}
         />
-
         {
           form.fields.map((field) => {
             const key = `custom-${field.id}`;

@@ -82,7 +82,10 @@ const ProposalVoteModal = React.createClass({
           />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton className="pull-right" onClose={this.close} />
+          <CloseButton
+            className="pull-right"
+            onClose={() => { dispatch(closeVoteModal()); }}
+          />
           <SubmitButton
             id="confirm-proposal-vote"
             onSubmit={() => { dispatch(startVoting()); }}

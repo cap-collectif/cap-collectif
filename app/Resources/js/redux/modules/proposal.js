@@ -7,6 +7,8 @@ import { UPDATE_ALERT } from '../../constants/AlertConstants';
 export const POSTS_FETCH_REQUESTED = 'proposal/POSTS_FETCH_REQUESTED';
 export const POSTS_FETCH_SUCCEEDED = 'proposal/POSTS_FETCH_SUCCEEDED';
 export const POSTS_FETCH_FAILED = 'proposal/POSTS_FETCH_FAILED';
+export const OPEN_CREATE_MODAL = 'proposal/OPEN_CREATE_MODAL';
+export const CLOSE_CREATE_MODAL = 'proposal/CLOSE_CREATE_MODAL';
 
 export const FETCH_REQUESTED = 'proposal/FETCH_REQUESTED';
 export const FETCH_SUCCEEDED = 'proposal/FETCH_SUCCEEDED';
@@ -33,10 +35,14 @@ export const CHANGE_ORDER = 'proposal/CHANGE_ORDER';
 export const CHANGE_TERMS = 'proposal/CHANGE_TERMS';
 export const CHANGE_FILTER = 'proposal/CHANGE_FILTER';
 
+export const SUBMIT_PROPOSAL_FORM = 'proposal/SUBMIT_PROPOSAL_FORM';
+
 const initialState = {
   currentProposalById: null,
   proposals: [],
   showVoteModal: false,
+  showCreateModal: false,
+  isCreating: false,
   isVoting: false,
   isLoading: true,
   order: 'random',
@@ -50,6 +56,24 @@ export const voteSuccess = (proposalId, vote) => {
     type: VOTE_SUCCEEDED,
     proposalId,
     vote,
+  };
+};
+
+export const submitProposalForm = () => {
+  return {
+    type: SUBMIT_PROPOSAL_FORM,
+  };
+};
+
+export const openCreateModal = () => {
+  return {
+    type: OPEN_CREATE_MODAL,
+  };
+};
+
+export const closeCreateModal = () => {
+  return {
+    type: CLOSE_CREATE_MODAL,
   };
 };
 
@@ -91,6 +115,14 @@ export const changeFilter = (filter, value) => {
     type: CHANGE_FILTER,
     filter,
     value,
+  };
+};
+
+export const loadProposals = (fetchFrom, id) => {
+  return {
+    type: FETCH_REQUESTED,
+    fetchFrom,
+    id,
   };
 };
 
@@ -157,6 +189,45 @@ export const deleteVote = (dispatch, step, proposal) => {
       });
 };
 
+export const submitProposal = (dispatch, form, data) => {
+  return Fetcher
+      .post(`/proposal_forms/${form}/proposals`, data)
+      .then(() => {
+        dispatch(closeCreateModal());
+        dispatch(loadProposals('form', form));
+        FluxDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: { bsStyle: 'success', content: 'proposal.request.create.success' },
+        });
+      })
+      .catch(() => {
+        FluxDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: { bsStyle: 'warning', content: 'proposal.request.create.failure' },
+        });
+      })
+    ;
+};
+
+export const updateProposal = (dispatch, form, id, data) => {
+  return Fetcher
+    .put(`/proposal_forms/${form}/proposals/${id}`, data)
+    .then(() => {
+      // reload proposal
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: { bsStyle: 'success', content: 'proposal.request.update.success' },
+      });
+    })
+    .catch(() => {
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: { bsStyle: 'warning', content: 'proposal.request.update.failure' },
+      });
+    });
+};
+
+
 export function* fetchAllVotes(action) {
   // try {
   //   let hasMore = true;
@@ -177,7 +248,8 @@ export function* fetchAllVotes(action) {
 }
 
 export function* fetchProposals(action) {
-  const state = yield select();
+  const globalState = yield select();
+  const state = globalState.proposal;
   let url = '';
   switch (action.fetchFrom) {
     case 'form':
@@ -196,10 +268,9 @@ export function* fetchProposals(action) {
     url,
     {
       terms: state.terms,
-      tilfers: state.filters,
+      filters: state.filters,
     },
   );
-  console.log(result);
   yield put({ type: FETCH_SUCCEEDED, proposals: result.proposals });
 }
 
@@ -208,14 +279,6 @@ export const fetchProposalPosts = (proposalId) => {
   return {
     type: POSTS_FETCH_REQUESTED,
     proposalId,
-  };
-};
-
-export const loadProposals = (fetchFrom, id) => {
-  return {
-    type: FETCH_REQUESTED,
-    fetchFrom,
-    id,
   };
 };
 
@@ -239,13 +302,19 @@ export function* saga() {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_FILTER: {
-      const filters = { ...this.state.filter, [action.filter]: action.value };
+      const filters = { ...this.state.filters, [action.filter]: action.value };
       return { ...state, filters, currentPaginationPage: 1 };
     }
     case CHANGE_ORDER:
       return { ...state, order: action.order, currentPaginationPage: 1 };
     case CHANGE_TERMS:
       return { ...state, terms: action.terms, currentPaginationPage: 1 };
+    case SUBMIT_PROPOSAL_FORM:
+      return { ...state, isCreating: true };
+    case OPEN_CREATE_MODAL:
+      return { ...state, showCreateModal: true };
+    case CLOSE_CREATE_MODAL:
+      return { ...state, showCreateModal: false, isCreating: false };
     case OPEN_VOTE_MODAL:
       return { ...state, showVoteModal: true };
     case CLOSE_VOTE_MODAL:
@@ -263,6 +332,8 @@ export const reducer = (state = initialState, action) => {
       };
       return { ...state, proposals, isVoting: false };
     }
+    case FETCH_REQUESTED:
+      return { ...state, isLoading: true };
     case FETCH_SUCCEEDED:
       return { ...state, proposals: action.proposals, isLoading: false };
     case POSTS_FETCH_SUCCEEDED: {
