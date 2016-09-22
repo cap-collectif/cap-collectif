@@ -2,58 +2,56 @@
    $Dialog
 ================================================================*/
 .dialog {
-    padding: 0;
-    @include border-radius(6px);
+  padding: 0;
+  @include border-radius(6px);
 }
 
 .dialog__header {
-    @include border-top-radius(6px);
-    .dialog__title {
-        margin: 0;
-        color: $black;
-    }
+  @include border-top-radius(6px);
+  .dialog__title {
+    margin: 0;
+    color: black;
+  }
 }
 
 @each $type in $opinion-types {
-    $name: nth($type, 1);
-    $color: nth($type, 2);
-    $text: set-link-text-color($color);
+  $name: nth($type, 1);
+  $color: nth($type, 2);
+  $text: set-link-text-color($color);
 
-    .dialog.dialog--#{$name} {
-        .dialog__header {
-            background-color: $color;
-            color: $text;
-        }
+  .dialog.dialog--#{$name} {
+    .dialog__header {
+      background-color: $color;
+      color: $text;
     }
+  }
 }
 
 .dialog__message {
-    border-top: 1px solid $gray-primary;
-    background-color: $alert-warning-bg;
-    color: $alert-warning-text;
-    font-size: 15px;
-    text-align: center;
-
-    p {
-        margin-bottom: 0;
-    }
+  border-top: 1px solid $gray-primary;
+  background-color: $alert-warning-bg;
+  color: $alert-warning-text;
+  text-align: center;
+  font-size: 15px;
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .dialog__body {
-    border-top: 1px solid $gray-primary;
+  border-top: 1px solid $gray-primary;
+  textarea {
+    resize: vertical;
+  }
 
-    textarea {
-        resize: vertical;
+  .opinion__list {
+    .opinion:first-child {
+      border-top: 0px;
     }
-
-    .opinion__list {
-        .opinion:first-child {
-            border-top: 0;
-        }
-    }
+  }
 }
 
 .dialog__footer {
-    overflow: hidden;
-    border-top: 1px solid $gray-primary;
+  overflow: hidden;
+  border-top: 1px solid $gray-primary;
 }

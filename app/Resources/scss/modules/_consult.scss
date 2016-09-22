@@ -5,122 +5,114 @@
 // Nav
 .consultation__nav {
 
-    li > a {
-        padding: 5px 15px;
-        color: $black;
-        font-size: 16px;
-        padding-left: 90px;
-    }
+  li > a {
+    color: $black;
+    font-size: 16px;
+    padding: 5px 15px;
+    padding-left: 90px;
+  }
 
-    @for $i from 0 through 5 {
-        .nav--level-#{$i} {
-            padding-left: $i * 15px + 15px;
-        }
+  @for $i from 0 through 5 {
+    .nav--level-#{$i} {
+      padding-left: $i * 15px + 15px;
     }
+  }
 }
 
 .counters-nav {
-    padding: 5px;
+  padding: 5px;
 
-    & > li > a {
-        padding: 0;
-
-        &:hover {
-            background-color: inherit;
-
-            .category {
-                color: $brand-primary;
-            }
-        }
-
-    }
-
-    li {
-        padding-right: 20px;
-    }
-
-    li i {
-        color: $black;
-        font-size: 18px;
-
-        &:hover,
-        &:active {
-            color: $black;
-        }
-    }
-
-    li .value {
+  & > li > a {
+    padding: 0;
+    &:hover {
+      background-color: inherit;
+      .category {
         color: $brand-primary;
-        font-size: 18px;
+      }
     }
 
-    li .category {
-        font-size: 14px;
+  }
+
+  li {
+    padding-right: 20px;
+  }
+
+  li i {
+    font-size: 18px;
+    color: $black;
+    &:hover, &:active {
+      color: $black;
     }
+  }
+
+  li .value {
+      color: $brand-primary;
+      font-size: 18px;
+  }
+
+  li .category {
+    font-size: 14px;
+  }
 }
 
 .counters-nav--bordered {
-    border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
 }
 
 .counters-nav--project {
-    border-top: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
-    margin-top: 15px;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  margin-top: 15px;
 }
 
 .counters-nav.counters-nav--proposal {
-    border-top: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
-    margin-top: 15px;
-
-    li .value {
-        color: $black;
-        font-size: 24px;
-    }
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  margin-top: 15px;
+  li .value {
+    color: $black;
+    font-size: 24px;
+  }
 }
 
 .project__header__title {
-    color: $black;
-    padding-top: 0;
-    margin-top: 0;
+  color: $black;
+  padding-top: 0px;
+  margin-top: 0;
 
-    @media (max-width: $screen-xs-max) {
-        padding-top: 15px;
-    }
+  @media (max-width: $screen-xs-max) {
+    padding-top: 15px;
+  }
 }
 
 // Empty consultation
 .project__empty-block {
-    padding: 30px 15px;
-    color: $dark-gray;
-    font-weight: bold;
-
-    @media (max-width: $screen-xs-max) {
-        padding: 35px 15px;
-    }
-
-    .icon {
-        font-size: 80px;
-        margin-bottom: 0;
-    }
+  color: $dark-gray;
+  font-weight: bold;
+  padding: 30px 15px;
+  @media (max-width: $screen-xs-max) {
+    padding: 35px 15px;
+  }
+  .icon {
+    font-size: 80px;
+    margin-bottom: 0;
+  }
 }
 
 .opinion-type__empty-block {
-    padding: 15px;
-    color: $dark-gray;
-    font-weight: bold;
-
-    .icon {
-        font-size: 40px;
-        margin-bottom: 0;
-    }
+  color: $dark-gray;
+  font-weight: bold;
+  padding: 15px 15px;
+  .icon {
+    font-size: 40px;
+    margin-bottom: 0;
+  }
 }
 
 #details > h2:first-child {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .step__intro__content {
-    overflow: hidden;
+  overflow: hidden;
 }

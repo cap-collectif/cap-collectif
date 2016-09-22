@@ -3,23 +3,23 @@
 ================================================================*/
 .settings__nav {
 
-    border-top: 1px solid $border-color;
+	border-top: 1px solid $border-color;
 
-    li a {
-        @include border-radius(0);
-        color: $black;
-    }
+	li a {
+		@include border-radius(0);
+		color: $black;
+	}
 }
 
 .settings__form label {
-    color: $dark-gray;
-    font-size: 15px;
-    text-align: left !important;
+	color: $dark-gray;
+	font-size: 15px;
+	text-align: left !important;
 }
 
 .settings__del-button {
-    @media (max-width: $screen-sm-max) {
-        float: none !important;
-        margin-top: 10px;
-    }
+	@media (max-width: $screen-sm-max) {
+		float: none !important;
+		margin-top: 10px;
+	}
 }

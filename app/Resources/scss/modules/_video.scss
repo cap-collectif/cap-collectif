@@ -1,14 +1,13 @@
 @media (max-width: $screen-sm-min) {
-    .video {
-        margin-bottom: 15px;
-
-        .img-responsive {
-            width: 100%;
-        }
+  .video {
+    margin-bottom: 15px;
+    .img-responsive {
+      width: 100%;
     }
+  }
 }
 
 .bg--video {
-    position: static;
-    height: 240px;
+  height: 240px;
+  position: static;
 }
