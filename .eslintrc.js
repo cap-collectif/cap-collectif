@@ -21,7 +21,6 @@ module.exports = {
     jQuery: true,
     __SERVER__: true
   },
-  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 7,
     sourceType: 'module',

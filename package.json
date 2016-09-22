@@ -40,7 +40,6 @@
     "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-es2016": "^6.11.3",
-    "babel-preset-es2017": "^6.14.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-runtime": "^6.11.6",
@@ -73,7 +72,6 @@
     "react-google-recaptcha": "^0.5.2",
     "react-intl": "1.2.0",
     "react-linkify": "^0.1.1",
-    "react-nl2br": "^0.2.0",
     "react-on-rails": "^6.1.0",
     "react-radio": "^2.1.1",
     "react-redux": "^4.4.5",
@@ -91,7 +89,6 @@
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^6.1.2",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.5.1",
     "chai-subset": "^1.2.2",

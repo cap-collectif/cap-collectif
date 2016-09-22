@@ -200,6 +200,8 @@ class OpinionsController extends FOSRestController
     }
 
     /**
+     * Get all votes of an opinion.
+     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get all votes of an opinion",
@@ -208,31 +210,24 @@ class OpinionsController extends FOSRestController
      *    404 = "Returned when opinion is not found",
      *  }
      * )
+     *
      * @Get("/opinions/{id}/votes")
      * @ParamConverter("opinion", options={
      *  "mapping": {"id": "id"},
      *  "repository_method": "getOne",
      *  "map_method_signature" = true
      * })
-     * @QueryParam(name="limit", requirements="[0-9.]+", default="100")
-     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @Cache(smaxage="60", public=true)
      * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */
-    public function getVotesAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
+    public function getOpinionVotesAction(Opinion $opinion)
     {
-        $limit = $paramFetcher->get('limit');
-        $offset = $paramFetcher->get('offset');
-
-        $repo = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:OpinionVote');
-
-        $votes = $repo->getByOpinion($opinion->getId(), false, $limit, $offset);
-        $count = $repo->getVotesCountByOpinion($opinion);
+        $em = $this->get('doctrine.orm.entity_manager');
+        $votes = $em->getRepository('CapcoAppBundle:OpinionVote')
+            ->getAllByOpinion($opinion->getId());
 
         return [
             'votes' => $votes,
-            'count' => $count,
-            'hasMore' => $count > $offset + $limit,
         ];
     }
 
@@ -638,27 +633,17 @@ class OpinionsController extends FOSRestController
      * @Get("/opinions/{opinionId}/versions/{versionId}/votes")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
-     * @QueryParam(name="limit", requirements="[0-9.]+", default="100")
-     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
      * @Cache(smaxage="60", public=true)
      * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos", "UserMedias"})
      */
-    public function getVersionVotesAction(Opinion $opinion, OpinionVersion $version, ParamFetcherInterface $paramFetcher)
+    public function getOpinionVersionVotesAction(Opinion $opinion, OpinionVersion $version)
     {
-        $limit = $paramFetcher->get('limit');
-        $offset = $paramFetcher->get('offset');
-
-        $repo = $this
-          ->get('doctrine.orm.entity_manager')
-          ->getRepository('CapcoAppBundle:OpinionVersionVote')
-        ;
-        $votes = $repo->getByVersion($version->getId(), false, $limit, $offset);
-        $count = $repo->getVotesCountByVersion($version);
+        $em = $this->get('doctrine.orm.entity_manager');
+        $votes = $em->getRepository('CapcoAppBundle:OpinionVersionVote')
+            ->getAllByVersion($version->getId());
 
         return [
             'votes' => $votes,
-            'count' => $count,
-            'hasMore' => $count > $offset + $limit,
         ];
     }
 

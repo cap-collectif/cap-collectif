@@ -49,21 +49,15 @@ export default {
   },
 
   // Vote for opinion or version
-  loadAllVotes: async (opinionId, versionId) => {
+
+  loadAllVotes: (opinionId, versionId) => {
     const url = versionId ? `/opinions/${opinionId}/versions/${versionId}/votes` : `/opinions/${opinionId}/votes`;
-    let hasMore = true;
-    let iterationCount = 0;
-    const votesPerIteration = 30;
-    const votes = [];
-    while (hasMore) {
-      const result = await Fetcher.get(`${url}?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`);
-      hasMore = result.hasMore;
-      iterationCount++;
-      for (const vote of result.votes) {
-        votes.push(vote);
-      }
-    }
-    return votes;
+    return Fetcher
+      .get(url)
+      .then((data) => {
+        return data.votes;
+      })
+    ;
   },
 
   vote: (data, opinion, parent, user, successMessage = 'opinion.request.create_vote.success', errorMessage = 'opinion.request.failure') => {

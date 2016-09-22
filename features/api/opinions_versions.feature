@@ -277,9 +277,7 @@ Feature: Opinions Versions
           "value": @integer@
         },
         @...@
-      ],
-      "count": @integer@,
-      "hasMore": @boolean@
+      ]
     }
     """
 

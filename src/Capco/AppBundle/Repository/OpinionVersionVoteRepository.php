@@ -35,41 +35,24 @@ class OpinionVersionVoteRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
-    public function getByVersion(int $versionId, bool $asArray = false, int $limit = -1, int $offset = 0)
+    /**
+     * Get all by version.
+     *
+     * @param $versionId
+     *
+     * @return mixed
+     */
+    public function getAllByVersion($versionId, $asArray = false)
     {
-        $qb = $this->getQueryBuilder();
-
-        if ($asArray) {
-          $qb
+        $qb = $this->getQueryBuilder()
             ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
-          ;
-        }
-
-        $qb
             ->andWhere('v.opinionVersion = :version')
             ->setParameter('version', $versionId)
             ->orderBy('v.updatedAt', 'ASC');
 
-        if ($limit > 0) {
-            $qb->setMaxResults($limit);
-            $qb->setFirstResult($offset);
-        }
-
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
-    }
-
-    public function getVotesCountByVersion(OpinionVersion $version)
-    {
-      $qb = $this->createQueryBuilder('ov');
-
-      $qb->select('count(ov.id)')
-          ->where('ov.opinionVersion = :version')
-          ->setParameter('version', $version)
-      ;
-
-      return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getQueryBuilder()

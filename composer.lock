@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c2f81d8904947c608746e1cfc2e082f7",
-    "content-hash": "2db45d986eaba2767d8a82050ea781ac",
+    "hash": "8c77bb558df5d0f3fff7a8f34e60faa3",
+    "content-hash": "0ea6adaece7d95735f200cda844fb847",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3990,50 +3990,6 @@
             "time": "2016-05-27 01:59:56"
         },
         {
-            "name": "odolbeau/rabbit-mq-admin-toolkit",
-            "version": "v3.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/odolbeau/rabbit-mq-admin-toolkit.git",
-                "reference": "6d3a6b5689879b50fd7b220ef5f10f9cb09492aa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/odolbeau/rabbit-mq-admin-toolkit/zipball/6d3a6b5689879b50fd7b220ef5f10f9cb09492aa",
-                "reference": "6d3a6b5689879b50fd7b220ef5f10f9cb09492aa",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~5.4|~7.0",
-                "swarrot/swarrot": "~2.0",
-                "symfony/console": "~2.4",
-                "symfony/yaml": "~2.4"
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "~1.4"
-            },
-            "bin": [
-                "rabbit"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Bab\\RabbitMq": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "RabbitMQ administration toolkit",
-            "time": "2015-12-29 13:00:03"
-        },
-        {
             "name": "org_heigl/hyphenator",
             "version": "v2.0.3",
             "source": {
@@ -5975,122 +5931,6 @@
                 "tree"
             ],
             "time": "2016-01-26 23:58:32"
-        },
-        {
-            "name": "swarrot/swarrot",
-            "version": "v2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/swarrot/swarrot.git",
-                "reference": "c7ea70c99eb6b0cd77910bb2a63d692d57f3d148"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/swarrot/swarrot/zipball/c7ea70c99eb6b0cd77910bb2a63d692d57f3d148",
-                "reference": "c7ea70c99eb6b0cd77910bb2a63d692d57f3d148",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "psr/log": "~1.0",
-                "symfony/options-resolver": "~2.3|~3.0"
-            },
-            "require-dev": {
-                "doctrine/common": "~2.3",
-                "doctrine/dbal": "~2.2",
-                "php-amqplib/php-amqplib": "~2.1",
-                "phpunit/phpunit": "~4.7|~5.0"
-            },
-            "suggest": {
-                "pecl-amqp": "*",
-                "php-amqplib/php-amqplib": "~2.1",
-                "symfony/console": "~2.4|~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Swarrot": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Olivier Dolbeau",
-                    "homepage": "http://odolbeau.fr/"
-                }
-            ],
-            "description": "A simple lib to consume RabbitMQ queues",
-            "keywords": [
-                "swarrot",
-                "worker"
-            ],
-            "time": "2016-06-15 12:44:43"
-        },
-        {
-            "name": "swarrot/swarrot-bundle",
-            "version": "v1.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/swarrot/SwarrotBundle.git",
-                "reference": "ab3021ab8e61c6a74771e6ad79c323981a632bec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/swarrot/SwarrotBundle/zipball/ab3021ab8e61c6a74771e6ad79c323981a632bec",
-                "reference": "ab3021ab8e61c6a74771e6ad79c323981a632bec",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "psr/log": "~1.0",
-                "swarrot/swarrot": "^2.1.1",
-                "symfony/console": "~2.4|~3.0",
-                "symfony/framework-bundle": "~2.4|~3.0"
-            },
-            "require-dev": {
-                "doctrine/common": "~2.2",
-                "doctrine/dbal": "~2.2",
-                "phpunit/phpunit": "~4.5",
-                "symfony/phpunit-bridge": "~2.8|~3.0"
-            },
-            "suggest": {
-                "php-amqplib/php-amqplib": "Required if using amqp_lib"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Swarrot\\SwarrotBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Olivier Dolbeau",
-                    "homepage": "http://odolbeau.fr/"
-                }
-            ],
-            "description": "SwarrotBundle",
-            "keywords": [
-                "bundle",
-                "swarrot"
-            ],
-            "time": "2016-07-19 09:36:09"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -8620,12 +8460,12 @@
             "version": "v1.3.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/janephp/jane.git",
+                "url": "https://github.com/jolicode/jane.git",
                 "reference": "af6e0a570443b9c41e9a68ef76b19b10fee84214"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janephp/jane/zipball/af6e0a570443b9c41e9a68ef76b19b10fee84214",
+                "url": "https://api.github.com/repos/jolicode/jane/zipball/af6e0a570443b9c41e9a68ef76b19b10fee84214",
                 "reference": "af6e0a570443b9c41e9a68ef76b19b10fee84214",
                 "shasum": ""
             },
@@ -8679,12 +8519,12 @@
             "version": "v1.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/janephp/openapi.git",
+                "url": "https://github.com/jolicode/jane-openapi.git",
                 "reference": "189aafaec2b2ff1ef1519c8d6a2f09ac4b85d4e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janephp/openapi/zipball/189aafaec2b2ff1ef1519c8d6a2f09ac4b85d4e9",
+                "url": "https://api.github.com/repos/jolicode/jane-openapi/zipball/189aafaec2b2ff1ef1519c8d6a2f09ac4b85d4e9",
                 "reference": "189aafaec2b2ff1ef1519c8d6a2f09ac4b85d4e9",
                 "shasum": ""
             },

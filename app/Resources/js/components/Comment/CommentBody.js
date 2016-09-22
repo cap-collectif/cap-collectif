@@ -1,7 +1,6 @@
 import React from 'react';
 import Linkify from 'react-linkify';
 import { IntlMixin } from 'react-intl';
-import nl2br from 'react-nl2br';
 
 const CommentBody = React.createClass({
   propTypes: {
@@ -35,7 +34,7 @@ const CommentBody = React.createClass({
       text += ' ';
     }
 
-    return text;
+    return text.replace(/\r?\n/g, '<br/>');
   },
 
   expand(expanded) {
@@ -66,7 +65,7 @@ const CommentBody = React.createClass({
     return (
       <div className="opinion__text">
         { this.renderTrashedLabel() }
-        <Linkify properties={{ className: 'external-link' }}>{nl2br(this.generateText())}</Linkify>
+        <Linkify properties={{ className: 'external-link' }}>{this.generateText()}</Linkify>
         { this.renderReadMoreOrLess() }
       </div>
     );

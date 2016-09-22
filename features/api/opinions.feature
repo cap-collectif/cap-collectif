@@ -256,9 +256,7 @@ Feature: Opinions
           "value": @integer@
         },
         @...@
-      ],
-      "count": @integer@,
-      "hasMore": @boolean@
+      ]
     }
     """
 
