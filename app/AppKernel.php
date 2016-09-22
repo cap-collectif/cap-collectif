@@ -83,6 +83,9 @@ class AppKernel extends Kernel
             new Gfreeau\Bundle\GetJWTBundle\GfreeauGetJWTBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 
+            // Swarrot to publish and consume rabbitmq messages
+            new Swarrot\SwarrotBundle\SwarrotBundle(),
+
             // Server side Js rendering
             new Limenius\ReactBundle\LimeniusReactBundle(),
 

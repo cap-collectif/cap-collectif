@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3e78edf4bdf18d81fac00e38fec135fe",
-    "content-hash": "fd26181bfde9c52cc627ad9dffc09970",
+    "hash": "c2f81d8904947c608746e1cfc2e082f7",
+    "content-hash": "2db45d986eaba2767d8a82050ea781ac",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -6033,6 +6033,64 @@
                 "worker"
             ],
             "time": "2016-06-15 12:44:43"
+        },
+        {
+            "name": "swarrot/swarrot-bundle",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swarrot/SwarrotBundle.git",
+                "reference": "ab3021ab8e61c6a74771e6ad79c323981a632bec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swarrot/SwarrotBundle/zipball/ab3021ab8e61c6a74771e6ad79c323981a632bec",
+                "reference": "ab3021ab8e61c6a74771e6ad79c323981a632bec",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "psr/log": "~1.0",
+                "swarrot/swarrot": "^2.1.1",
+                "symfony/console": "~2.4|~3.0",
+                "symfony/framework-bundle": "~2.4|~3.0"
+            },
+            "require-dev": {
+                "doctrine/common": "~2.2",
+                "doctrine/dbal": "~2.2",
+                "phpunit/phpunit": "~4.5",
+                "symfony/phpunit-bridge": "~2.8|~3.0"
+            },
+            "suggest": {
+                "php-amqplib/php-amqplib": "Required if using amqp_lib"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Swarrot\\SwarrotBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Dolbeau",
+                    "homepage": "http://odolbeau.fr/"
+                }
+            ],
+            "description": "SwarrotBundle",
+            "keywords": [
+                "bundle",
+                "swarrot"
+            ],
+            "time": "2016-07-19 09:36:09"
         },
         {
             "name": "swiftmailer/swiftmailer",
