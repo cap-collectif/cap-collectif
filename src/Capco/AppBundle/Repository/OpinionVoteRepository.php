@@ -33,25 +33,44 @@ class OpinionVoteRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * Get all by opinion.
-     *
-     * @param $opinion
-     *
-     * @return mixed
-     */
-    public function getAllByOpinion($opinionId, $asArray = false)
+    public function getByOpinion(int $opinionId, bool $asArray = false, int $limit = -1, int $offset = 0)
     {
-        $qb = $this->getQueryBuilder()
-            ->addSelect('u', 'ut', 'o')
+        $qb = $this->getQueryBuilder();
+
+        if ($asArray) {
+          $qb
+            ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
+          ;
+        }
+
+        $qb
+            ->addSelect('o')
             ->leftJoin('v.opinion', 'o')
             ->andWhere('v.opinion = :opinion')
             ->setParameter('opinion', $opinionId)
-            ->orderBy('v.updatedAt', 'ASC');
+            ->orderBy('v.updatedAt', 'ASC')
+        ;
+
+        if ($limit > 0) {
+            $qb->setMaxResults($limit);
+            $qb->setFirstResult($offset);
+        }
 
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
+    }
+
+    public function getVotesCountByOpinion(Opinion $opinion)
+    {
+      $qb = $this->createQueryBuilder('ov');
+
+      $qb->select('count(ov.id)')
+          ->where('ov.opinion = :opinion')
+          ->setParameter('opinion', $opinion)
+      ;
+
+      return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getQueryBuilder()

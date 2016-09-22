@@ -244,7 +244,7 @@ class ProjectDownloadResolver
                 $this->addItemToData($this->getOpinionItem($opinion));
                 $votes = $this->em
                     ->getRepository('CapcoAppBundle:OpinionVote')
-                    ->getAllByOpinion($opinion['id'], true);
+                    ->getByOpinion($opinion['id'], true);
                 $arguments = $this->em
                     ->getRepository('CapcoAppBundle:Argument')
                     ->getAllByOpinion($opinion['id'], true);
@@ -267,7 +267,7 @@ class ProjectDownloadResolver
                 $this->addItemToData($this->getOpinionVersionItem($version));
                 $votes = $this->em
                     ->getRepository('CapcoAppBundle:OpinionVersionVote')
-                    ->getAllByVersion($version['id'], true);
+                    ->getByVersion($version['id'], true);
                 $arguments = $this->em
                     ->getRepository('CapcoAppBundle:Argument')
                     ->getAllByVersion($version['id'], true);
