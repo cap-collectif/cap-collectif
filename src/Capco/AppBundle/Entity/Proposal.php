@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
@@ -424,6 +423,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     public function removeSelection(Selection $selection): self
     {
         $this->selections->removeElement($selection);
+
         return $this;
     }
 
