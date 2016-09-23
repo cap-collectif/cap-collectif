@@ -1,5 +1,0 @@
-#!/bin/bash
-
-echo "Starting rabbitmq..."
-
-exec rabbitmq-server

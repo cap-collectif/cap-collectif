@@ -1,18 +1,19 @@
 .sonata-ba-sortable-handler:hover {
-  cursor: move;
+    cursor: move;
 }
 
 .sonata-ba-list-field-actions {
-  display: inline-table;
-  margin: 8px;
+    display: inline-table;
+    margin: 8px;
 }
 
 .capco--sonata-ba-field-help {
-  color: #f0ad4e !important;
+    color: #f0ad4e !important;
 }
 
 .checkbox[disabled="disabled"] {
-  label, ins {
-    cursor: not-allowed;
-  }
+    label,
+    ins {
+        cursor: not-allowed;
+    }
 }

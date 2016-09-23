@@ -129,14 +129,6 @@ RUN cd / && \
     rm -f elasticsearch-1.7.3.tar.gz && \
     mv /elasticsearch-1.7.3 /etc/elasticsearch
 
-# Install rabbitmq
-RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \
-    wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add - && \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server && \
-    rm -rf /var/lib/apt/lists/* && \
-    rabbitmq-plugins enable rabbitmq_management
-
 # Install New Relic Agent
 RUN echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list && \
     wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
@@ -174,7 +166,6 @@ COPY redis/run                  /etc/service/redis/run
 COPY cron/run                   /etc/service/cron/run
 COPY elasticsearch/run          /etc/service/elasticsearch/run
 COPY varnish/run                /etc/service/varnish/run
-COPY rabbitmq/run                /etc/service/rabbitmq/run
 
 # Configuration
 COPY mysql/capco.cnf            /etc/mysql/conf.d/capco.cnf
@@ -185,7 +176,6 @@ COPY php-fpm/capco.ini          /etc/php/7.0/cli/conf.d/capco.ini
 COPY cron/crontab               /etc/cron.d/crontab
 COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
-COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
 
 # Daemons
 COPY php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index

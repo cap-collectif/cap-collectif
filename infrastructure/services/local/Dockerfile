@@ -85,14 +85,6 @@ RUN curl -s https://packagecloud.io/gpg.key | apt-key add - && \
     apt-get update && \
     apt-get install blackfire-agent
 
-# Install rabbitmq
-RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \
-    wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add - && \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server && \
-    rm -rf /var/lib/apt/lists/* && \
-    rabbitmq-plugins enable rabbitmq_management
-
 # Install nginx, mysql client and redis client
 RUN apt-get update && \
     apt-get install -y -qq \
@@ -122,7 +114,6 @@ COPY php-fpm/run                /etc/service/php-fpm/run
 COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
 COPY blackfire/run              /etc/service/blackfire/run
-COPY rabbitmq/run              /etc/service/rabbitmq/run
 
 # Configuration
 COPY nginx/nginx.conf           /etc/nginx/nginx.conf
@@ -131,7 +122,6 @@ COPY php-fpm/capco.ini          /etc/php/7.0/fpm/conf.d/capco.ini
 COPY php-fpm/capco.ini          /etc/php/7.0/cli/conf.d/capco.ini
 COPY cron/crontab               /etc/cron.d/crontab
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
-COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
 
 # Volume for log / cache ...
 VOLUME /var/www/var/cache

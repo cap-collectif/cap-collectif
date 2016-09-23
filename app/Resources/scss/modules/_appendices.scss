@@ -4,26 +4,26 @@
 
 // Container
 .container.appendices__container {
-  padding-top: 0;
-  padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .appendices__item {
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
+    border-left: 1px solid $border-color;
+    border-right: 1px solid $border-color;
 
-  h4 {
-    color: $black;
-    margin-top: 10px;
-  }
+    h4 {
+        color: $black;
+        margin-top: 10px;
+    }
 
-  &:last-child:not(:only-of-type) {
-    border-left: 0;
-  }
+    &:last-child:not(:only-of-type) {
+        border-left: 0;
+    }
 }
 
 @media(max-width: $screen-xs-max) {
-  .appendices__item:not(:last-child) {
-    border-bottom: 1px solid $border-color;
-  }
+    .appendices__item:not(:last-child) {
+        border-bottom: 1px solid $border-color;
+    }
 }

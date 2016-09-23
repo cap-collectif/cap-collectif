@@ -2,36 +2,36 @@
 $THEME
 ================================================================*/
 .bg--theme {
-  background-color: $brand-primary;
-  padding-top: 45px;
-  padding-bottom: 45px;
+    background-color: $brand-primary;
+    padding-top: 45px;
+    padding-bottom: 45px;
 }
 
 .theme {
-  text-align: center;
+    text-align: center;
 
-  &:hover {
-    background-color: $light-gray;
-  }
-
-  .theme__title {
-    font-size: 20px;
-    margin: 0;
-    padding: 0 0 10px 0;
-  }
-
-  p:last-of-type {
-    margin-bottom: 0;
-  }
-
-  @media (max-width: $screen-xs-max) {
-    img {
-      width: 100%;
+    &:hover {
+        background-color: $light-gray;
     }
-  }
+
+    .theme__title {
+        padding: 0 0 10px;
+        margin: 0;
+        font-size: 20px;
+    }
+
+    p:last-of-type {
+        margin-bottom: 0;
+    }
+
+    @media (max-width: $screen-xs-max) {
+        img {
+            width: 100%;
+        }
+    }
 
 }
 
 .theme__status {
-  margin-top: 20px;
+    margin-top: 20px;
 }
