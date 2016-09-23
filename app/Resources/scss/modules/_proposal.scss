@@ -1,276 +1,284 @@
-$statuses:
-  (primary $brand-primary $white)
-  (success $brand-success $white)
-  (info $brand-info $white)
-  (warning $brand-warning $white)
-  (danger $brand-danger $white)
-  (default $dark-gray $white)
-;
+$statuses: (primary $brand-primary $white) (success $brand-success $white) (info $brand-info $white) (warning $brand-warning $white) (danger $brand-danger $white) (default $dark-gray $white);
 
 .proposal__author {
-  height: 60px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    overflow: hidden;
+    height: 60px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .proposal__body {
-  clear: both;
-  padding-top: 10px;
-  height: 200px;
+    clear: both;
+    padding-top: 10px;
+    height: 200px;
 }
 
 .proposal__title {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 .proposal__infos {
-  font-size: 85%;
+    font-size: 85%;
 }
 
 .proposal__info {
-  padding-top: 5px;
-  padding-left: 5px;
-  max-height: 36px;
-  word-break: break-word;
-  overflow: hidden;
-  .cap {
-    padding-right: 5px;
-  }
+    overflow: hidden;
+    max-height: 36px;
+    padding-top: 5px;
+    padding-left: 5px;
+    word-break: break-word;
+
+    .cap {
+        padding-right: 5px;
+    }
 }
 
 .proposal__page__metadata .proposal__infos {
-  background-color: #f6f6f6;
-  padding: 10px;
-  font-size: 100%;
+    padding: 10px;
+    background-color: #f6f6f6;
+    font-size: 100%;
 
-  .proposal__info {
-    padding-top: 10px;
-    .cap {
-      font-size: 22px;
+    .proposal__info {
+        padding-top: 10px;
+
+        .cap {
+            font-size: 22px;
+        }
     }
-  }
 
-  .proposal__info:first-child {
-    padding-top: 0;
-  }
+    .proposal__info:first-child {
+        padding-top: 0;
+    }
 }
 
 .proposal__status {
-  padding: 5px 0;
-  display: block;
-  margin: 10px 0;
+    display: block;
+    padding: 5px 0;
+    margin: 10px 0;
 }
 
 .proposal__preview .proposal__status {
-  text-align: center;
-  padding: 5px;
-  margin: 0;
-  color: $white;
-  height: 32px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    overflow: hidden;
+    height: 32px;
+    padding: 5px;
+    margin: 0;
+    color: $white;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
-  @each $status in $statuses {
-    $name: nth($status, 1);
-    $bg: nth($status, 2);
-    $color: nth($status, 3);
+    @each $status in $statuses {
+        $name: nth($status, 1);
+        $bg: nth($status, 2);
+        $color: nth($status, 3);
 
-    &.status--#{$name} {
-      color: $color;
-      background-color: $bg;
+        &.status--#{$name} {
+            background-color: $bg;
+            color: $color;
+        }
     }
-  }
 }
 
 .proposal__counters {
-  background-color: $lightest-gray;
-  padding: 5px;
-  border-top: 1px solid $border-color;
+    padding: 5px;
+    background-color: $lightest-gray;
+    border-top: 1px solid $border-color;
 }
 
 .proposal__counter {
-  width: 100%;
-  display: inline-block;
-  text-align: center;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
 }
 
 .proposal__counter__value {
-  font-size: 18px;
+    font-size: 18px;
 }
+
 .proposal__counter__label {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 .proposal__avatar {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .proposal__author .proposal__date {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .proposal__preview .proposal__info {
-  display: block;
+    display: block;
 }
 
 .proposal-search-group {
-  @media (max-width: $screen-sm-max) {
-    margin-top: 15px;
-  }
+    @media (max-width: $screen-sm-max) {
+        margin-top: 15px;
+    }
 }
 
 @media (min-width: $screen-sm-min) {
-  .proposal__details__button {
-    margin-top: 10px;
-  }
+    .proposal__details__button {
+        margin-top: 10px;
+    }
 }
 
 .nb--highlighted {
-  color: $brand-primary;
-  font-size: 120%;
+    color: $brand-primary;
+    font-size: 120%;
 }
 
 .proposals-user-votes__table {
-  border: 1px solid $border-color;
-  border-top: 0;
+    border: 1px solid $border-color;
+    border-top: 0;
 }
 
 .proposal__votes .proposal__vote .media--aligned {
-  line-height: 1.5em;
-  height: 3em;
+    height: 3em;
+    line-height: 1.5em;
 }
 
 // Vote widget
 
 .proposal-vote__widget {
-  margin-top: $navbar-height;
-  height: $navbar-height;
-  overflow: hidden;
-  z-index: 1020;
-  border-color: $votes-widget-border;
-  background-color: $votes-widget-bg;
+    margin-top: $navbar-height;
+    z-index: 1020;
+    overflow: hidden;
+    height: $navbar-height;
+    border-color: $votes-widget-border;
+    background-color: $votes-widget-bg;
 
-  .container {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  li {
-    margin: 0;
-    padding: 15px;
-  }
-
-  .widget__counter {
-    color: $votes-widget-text;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-right: 1px solid $votes-widget-border;
-  }
-
-  .widget__counter__label {
-    margin-bottom: 0;
-    font-size: 12px;
-  }
-
-  .widget__counter__select {
-    height: 22px;
-  }
-
-  .widget__progress-bar {
-    width: 300px;
-
-    .progress-bar {
-      min-width: 30px;
+    .container {
+        padding-top: 0;
+        padding-bottom: 0;
     }
-  }
 
-  .widget__button {
-    margin-left: 15px;
-    background-color: $votes-widget-btn-bg;
-    color: $votes-widget-btn-text;
-  }
+    li {
+        padding: 15px;
+        margin: 0;
+    }
 
-  .widget__image {
-    height: auto;
-    width: auto;
-    padding: 5px;
-    max-height: 50px;
-  }
+    .widget__counter {
+        color: $votes-widget-text;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-right: 1px solid $votes-widget-border;
+    }
+
+    .widget__counter__label {
+        margin-bottom: 0;
+        font-size: 12px;
+    }
+
+    .widget__counter__select {
+        height: 22px;
+    }
+
+    .widget__progress-bar {
+        width: 300px;
+
+        .progress-bar {
+            min-width: 30px;
+        }
+    }
+
+    .widget__button {
+        margin-left: 15px;
+        background-color: $votes-widget-btn-bg;
+        color: $votes-widget-btn-text;
+    }
+
+    .widget__image {
+        width: auto;
+        height: auto;
+        max-height: 50px;
+        padding: 5px;
+    }
 }
 
 @media (max-width: $screen-xs-max) {
-  .proposal-vote__widget {
-    margin-top: $navbar-collapsed-height;
-    height: auto;
-    .container {
-      padding-top: 0;
-      padding-bottom: 0;
+    .proposal-vote__widget {
+        margin-top: $navbar-collapsed-height;
+        height: auto;
+
+        .container {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .widget__image {
+            margin-right: 10px;
+        }
+
+        & > .container .navbar-brand {
+            margin-left: 15px !important;
+        }
+
+        .widget__progress-bar {
+            width: auto;
+        }
+
+        .progress {
+            margin-bottom: 0;
+        }
+
+        .navbar-toggle {
+            padding: 0;
+            border: 0;
+            background-color: transparent !important;
+            margin-bottom: 0;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .widget__counter__select {
+            width: auto;
+            margin-right: 0;
+        }
+
+        .widget__counter__value .form-group {
+            margin-bottom: 0;
+        }
+
+        .navbar-nav {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .widget__button {
+            float: none !important;
+            margin-left: 0;
+            width: 100%;
+        }
     }
-    .widget__image {
-      margin-right: 10px;
-    }
-    & > .container .navbar-brand {
-      margin-left: 15px !important;
-    }
-    .widget__progress-bar {
-      width: auto;
-    }
-    .progress {
-      margin-bottom: 0;
-    }
-    .navbar-toggle {
-      padding: 0;
-      border: 0;
-      background-color: transparent !important;
-      margin-bottom: 0;
-      cursor: pointer;
-      margin-left: 10px;
-    }
-    .widget__counter__select {
-      width: auto;
-      margin-right: 0;
-    }
-    .widget__counter__value .form-group {
-      margin-bottom: 0;
-    }
-    .navbar-nav {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-    .widget__button {
-      float: none !important;
-      margin-left: 0;
-      width: 100%;
-    }
-  }
 }
 
 .proposal-vote__widget > .container .navbar-brand {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .has-vote-widget {
-  body {
-    padding-top: $navbar-height * 2;
-  }
-  @media (max-width: $screen-xs-max) {
     body {
-      padding-top: $navbar-height + $navbar-collapsed-height;
+        padding-top: $navbar-height * 2;
     }
-  }
-  @media (min-width: $screen-md-min) {
-    .sidebar {
-      top: 120px;
+
+    @media (max-width: $screen-xs-max) {
+        body {
+            padding-top: $navbar-height + $navbar-collapsed-height;
+        }
     }
-  }
+
+    @media (min-width: $screen-md-min) {
+        .sidebar {
+            top: 120px;
+        }
+    }
 }
 
 #proposal-page-tabs > .container {
-  padding-top: 20px;
+    padding-top: 20px;
 }
 
 .proposal__private-field h2 {
-  margin-top: 0;
+    margin-top: 0;
 }

@@ -2,89 +2,91 @@
     $SUB-NAVBAR
 ================================================================*/
 .navbar--sub {
-  font-size: 15px;
-  background-color: $white;
-  border: 1px solid $border-color;
-  margin-bottom: 0;
+    border: 1px solid $border-color;
+    background-color: $white;
+    margin-bottom: 0;
+    font-size: 15px;
 
-  .nav {
+    .nav {
 
-    li {
-      overflow: hidden;
-      border-top: 1px solid $border-color;
-      width: 100%;
-      position: relative;
+        li {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            border-top: 1px solid $border-color;
 
-      & > div {
-        position: relative;
-        display: block;
-        padding: 10px 15px;
-      }
+            & > div {
+                position: relative;
+                display: block;
+                padding: 10px 15px;
+            }
 
-      &:first-child {
-        border-top: none;
-      }
+            &:first-child {
+                border-top: 0;
+            }
 
-      &.active a,
-      &.active > div,
-      &.active:hover a,
-      &.active:hover > div {
-        border-left: 5px solid $brand-primary;
-        background-color: $light-gray;
-      }
+            &.active a,
+            &.active > div,
+            &.active:hover a,
+            &.active:hover > div {
+                border-left: 5px solid $brand-primary;
+                background-color: $light-gray;
+            }
 
-      &:hover a, &:hover > div{
-        background-color: $light-gray;
-      }
+            &:hover a,
+            &:hover > div {
+                background-color: $light-gray;
+            }
+        }
     }
-  }
-
-  .navbar__step-nb {
-    font-size: 25px;
-    color: $brand-primary;
-    float: left;
-    padding-bottom: 0;
-  }
-
-  .navbar__step-title {
-    margin-bottom: 5px;
-    margin-top: 8px;
-    padding-top: 0;
-    color: $black;
-    font-size: 16px;
-  }
-
-  .navbar__step {
-    margin-left: 25px;
-
-    p.excerpt {
-      margin-bottom: 5px;
-    }
-  }
-}
-
-.navbar--sub.navbar--no-nb .navbar__step-title {
-  margin-top: 0;
-}
-
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-  .navbar--sub {
 
     .navbar__step-nb {
-      float: none;
+        float: left;
+        color: $brand-primary;
+        font-size: 25px;
+        padding-bottom: 0;
     }
 
     .navbar__step-title {
-      margin-top: 0;
+        margin-bottom: 5px;
+        margin-top: 8px;
+        padding-top: 0;
+        color: $black;
+        font-size: 16px;
     }
 
-    .navbar__step-nb {
-      padding-top: 0;
-      padding-bottom: 5px;
-    }
     .navbar__step {
-      margin-left: 0;
-    }
+        margin-left: 25px;
 
-  }
+        p.excerpt {
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.navbar--sub.navbar--no-nb .navbar__step-title {
+    margin-top: 0;
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    .navbar--sub {
+
+        .navbar__step-nb {
+            float: none;
+        }
+
+        .navbar__step-title {
+            margin-top: 0;
+        }
+
+        .navbar__step-nb {
+            padding-top: 0;
+            padding-bottom: 5px;
+        }
+
+        .navbar__step {
+            margin-left: 0;
+        }
+
+    }
 }
