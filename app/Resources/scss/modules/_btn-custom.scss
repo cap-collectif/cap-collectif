@@ -2,46 +2,45 @@
    $Button custom
 ================================================================*/
 @each $btn-custom in $btns-custom {
-    $name: nth($btn-custom, 1);
-    $bg: nth($btn-custom, 2);
-    $color: nth($btn-custom, 3);
+  $name: nth($btn-custom, 1);
+  $bg: nth($btn-custom, 2);
+  $color: nth($btn-custom, 3);
 
-    .btn-#{$name} {
-        @include button-variant($color, $bg, darken($bg, 5%));
-    }
+  .btn-#{$name} {
+    @include button-variant($color, $bg, darken($bg, 5%));
+  }
 }
 
 body .btn:focus {
-    outline: thin dotted !important;
+  outline: thin dotted!important;
 }
 
 .btn--outline {
-    background-color: transparent;
-    background-image: none;
-    text-shadow: none;
+  background-color: transparent;
+  background-image: none;
+  text-shadow: none;
 
-    @each $btn-outline in $btns-outline {
-        $name: nth($btn-outline, 1);
-        $border: nth($btn-outline, 2);
-        $bg: nth($btn-outline, 3);
-        $color: nth($btn-outline, 4);
+  @each $btn-outline in $btns-outline {
+    $name: nth($btn-outline, 1);
+    $border: nth($btn-outline, 2);
+    $bg: nth($btn-outline, 3);
+    $color: nth($btn-outline, 4);
 
-        &.btn-#{$name} {
-            border: 1px solid $border;
-            color: $bg;
-
-            &:hover,
-            &.active {
-                background-color: $bg;
-                color: $color;
-            }
-        }
+    &.btn-#{$name} {
+      border: 1px solid $border;
+      color: $bg;
+      &:hover,
+      &.active {
+        background-color: $bg;
+        color: $color;
+      }
     }
+  }
 
 }
 
+
 /* This problem may be specific to MacOS with Chrome */
-.btn:focus,
-.btn:active:focus {
-    outline: none !important;
+.btn:focus, .btn:active:focus {
+  outline: none !important;
 }

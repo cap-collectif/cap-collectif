@@ -10,19 +10,17 @@
 }
 
 .media-list .opinion--comment .media-list {
-    padding-top: 0;
-    margin-left: 0;
-    padding-left: 0;
+   padding-top: 0;
+   margin-left: 0;
+   padding-left: 0;
 }
 
 .comments__section {
 
-    svg,
-    .pull-left img {
+    svg, .pull-left img {
         margin-right: 10px;
         display: block;
     }
-
     .opinion__data {
         overflow: hidden;
     }
@@ -34,31 +32,31 @@
 }
 
 .opinion--comment .opinion__content {
-    padding: 5px;
-    border-radius: 5px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 // List of comment answers
 .comment-answers {
 
-    .opinion__list {
-        .opinion--comment {
-            padding-bottom: 10px;
-            border-bottom: 0;
-        }
+  .opinion__list {
+    .opinion--comment {
+      padding-bottom: 10px;
+      border-bottom: 0;
     }
+  }
 
-    li {
+  li {
         padding-left: 5px;
-    }
+  }
 
-    .opinion__body {
-        padding-left: 10px;
-    }
+  .opinion__body {
+    padding-left: 10px;
+  }
 }
 
 .commentAnswerForm {
-    padding-left: 40px;
+  padding-left: 40px;
 }
 
 .comment-answers-block {
@@ -69,7 +67,7 @@
 }
 
 .comments__section > .opinion__list > .opinion--comment:first-child {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .opinion__list {

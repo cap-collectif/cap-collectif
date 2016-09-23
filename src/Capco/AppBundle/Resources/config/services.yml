@@ -5,6 +5,7 @@ imports:
     - { resource: services/twig.yml }
     - { resource: services/validators.yml }
     - { resource: services/forms.yml }
+    - { resource: services/processors.yml }
 
 parameters:
   traits:

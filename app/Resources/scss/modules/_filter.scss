@@ -3,49 +3,47 @@
 ================================================================*/
 .filter {
 
+  label {
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  .formgroup--inline {
+    display: table;
+    width: 100%;
+
     label {
-        font-size: 13px;
-        cursor: pointer;
+      display: table-cell;
+      width: 1px;
+      white-space: nowrap;
     }
-
-    .formgroup--inline {
-        display: table;
-        width: 100%;
-
-        label {
-            display: table-cell;
-            width: 1px;
-            white-space: nowrap;
-        }
-
-        .formgroup--inline__control {
-            display: table-cell;
-            padding-left: 10px;
-        }
-
-        select,
-        input {
-            width: 100%;
-        }
+    .formgroup--inline__control {
+      display: table-cell;
+      padding-left: 10px;
     }
-
-    .filter__search {
-        .input-group-btn button {
-            height: 34px;
-        }
+    select,
+    input {
+      width: 100%;
     }
+  }
 
-    @media (max-width: $screen-sm-max) {
-        .filter__down-sm {
-            margin-top: 15px;
-        }
+  .filter__search {
+    .input-group-btn button {
+      height: 34px;
     }
+  }
 
-    @media (max-width: $screen-xs-max) {
-        form .filter__down,
-        form .filter__down-sm {
-            margin-top: 10px;
-        }
+  @media (max-width: $screen-sm-max) {
+    .filter__down-sm {
+      margin-top: 15px;
     }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    form .filter__down, form .filter__down-sm {
+      margin-top: 10px;
+    }
+  }
 
 }
+

@@ -2,65 +2,65 @@
    $Macro
 ================================================================*/
 .media--macro {
-    padding: 15px;
+  padding: 15px;
+  color: $black;
+
+  .media-body {
+    height: 65px;
+  }
+
+  &:hover {
+    background-color: $light-gray;
+  }
+
+  .media-heading {
+    margin-bottom: 0;
+  }
+
+  .excerpt a {
+    color: $excerpt;
+  }
+
+  .media--macro__user a {
     color: $black;
+  }
 
-    .media-body {
-        height: 65px;
-    }
+  .media-heading {
+    max-height: 43px;
+    overflow: hidden;
+    padding-top: 5px;
+    margin-bottom: 0;
+  }
 
-    &:hover {
-        background-color: $light-gray;
-    }
+  .media-content {
+  	margin-top: 15px;
+  }
 
-    .media-heading {
-        margin-bottom: 0;
-    }
-
-    .excerpt a {
-        color: $excerpt;
-    }
-
-    .media--macro__user a {
-        color: $black;
-    }
-
-    .media-heading {
-        overflow: hidden;
-        max-height: 43px;
-        padding-top: 5px;
-        margin-bottom: 0;
-    }
-
-    .media-content {
-        margin-top: 15px;
-    }
-
-    .media__content h2 {
-        margin-top: 10px;
-        overflow: hidden;
-        height: 58px;
-    }
+  .media__content h2 {
+    margin-top: 10px;
+    height: 58px;
+    overflow: hidden;
+  }
 }
 
 // special case: user thumbnail
 
 .media--user-thumbnail {
 
-    .media--macro__user {
-        margin-bottom: 0;
-        height: 40px;
-        line-height: 20px;
-    }
+  .media--macro__user {
+    line-height: 20px;
+    margin-bottom: 0;
+    height: 40px;
+  }
 
-    .media-heading {
-        padding-top: 0;
-        overflow: hidden;
-        height: 22px;
-    }
+  .media-heading {
+    padding-top: 0;
+    height: 22px;
+    overflow: hidden;
+  }
 
-    .media-body {
-        height: auto;
-        word-break: break-word;
-    }
+  .media-body {
+    height: auto;
+    word-break: break-word;
+  }
 }

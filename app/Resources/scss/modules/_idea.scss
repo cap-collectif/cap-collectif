@@ -2,54 +2,53 @@
    Idea
  =================== */
 .idea__preview {
-    &:hover {
-        background-color: #f6f6f6;
-
-        .idea__title:after {
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), #f6f6f6 50%);
-        }
+  &:hover {
+    background-color: #F6F6F6;
+    .idea__title:after {
+      background: linear-gradient(to right, rgba(255,255,255,0), #F6F6F6 50%);
     }
+  }
 
-    .idea__avatar {
-        margin-right: 10px;
+  .idea__avatar {
+    margin-right: 10px;
+  }
+
+  .idea__author {
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    & > a {
+      color: black;
     }
+  }
 
-    .idea__author {
-        overflow: hidden;
-        height: 50px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+  .idea__author .idea__date {
+    margin-bottom: 0;
+  }
 
-        & > a {
-            color: $black;
-        }
-    }
+  .idea__preview__body {
+    clear: both;
+    padding-top: 10px;
+    line-height: 1.2em;
+    height: 7.2em;
+  }
 
-    .idea__author .idea__date {
-        margin-bottom: 0;
-    }
+  .idea__title {
+    margin: 0 auto;
+  }
 
-    .idea__preview__body {
-        clear: both;
-        height: 7.2em;
-        padding-top: 10px;
-        line-height: 1.2em;
-    }
-
-    .idea__title {
-        margin: 0 auto;
-    }
-
-    .idea__label {
-        margin-top: 1.2em;
-        height: 1.2em;
-    }
+  .idea__label {
+    margin-top: 1.2em;
+    height: 1.2em;
+  }
 }
 
 .idea {
-    .idea__date {
-        margin-bottom: 0;
-        color: $excerpt;
-        font-size: 80%;
-    }
+  .idea__date {
+    margin-bottom: 0;
+    font-size: 80%;
+    color: $excerpt;
+  }
 }

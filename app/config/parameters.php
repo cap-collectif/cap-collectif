@@ -16,6 +16,9 @@ setOverridableParameter($container, 'database_user', 'root', 'SYMFONY_DATABASE_U
 setOverridableParameter($container, 'database_password', null, 'SYMFONY_DATABASE_PASSWORD');
 setOverridableParameter($container, 'database_server_version', '5.6', 'SYMFONY_DATABASE_SERVER_VERSION');
 
+setOverridableParameter($container, 'rabbitmq_login', 'guest', 'SYMFONY_RABBITMQ_LOGIN');
+setOverridableParameter($container, 'rabbitmq_password', 'guest', 'SYMFONY_RABBITMQ_PASSWORD');
+
 // We use an elasticsearch container in dev/test
 setOverridableParameter($container, 'elasticsearch_host', '127.0.0.1', 'SYMFONY_ELASTICSEARCH_HOST');
 
