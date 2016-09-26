@@ -122,12 +122,11 @@ export default {
   },
 
   loadSuggestions: (id, value) => {
-    const url = `/proposal_forms/${id}/proposals/search`;
-    const data = {};
-    data.terms = value;
-
     return Fetcher
-      .post(url, data)
+      .post(`/proposal_forms/${id}/proposals/search`, {
+        terms: value,
+        order: 'old',
+      })
       .then(json)
     ;
   },

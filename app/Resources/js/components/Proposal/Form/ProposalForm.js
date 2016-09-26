@@ -316,7 +316,7 @@ const ProposalForm = React.createClass({
               />
             }
           >
-            <ul>
+            <ul style={{ listStyleType: 'none', padding: 0 }}>
             {
               this.state.suggestions.slice(0, 5).map(suggest =>
                 <li>
