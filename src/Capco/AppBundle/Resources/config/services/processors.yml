@@ -1,3 +1,0 @@
-services:
-  example.processor:
-    class: Capco\AppBundle\Processor\ExampleProcessor

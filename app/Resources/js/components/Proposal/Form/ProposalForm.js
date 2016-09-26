@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import ReactDOM from 'react-dom';
+import { IntlMixin, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import ProposalActions from '../../../actions/ProposalActions';
@@ -8,6 +9,8 @@ import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
 import { connect } from 'react-redux';
 import ProposalPrivateField from '../ProposalPrivateField';
+import { Button, Overlay } from 'react-bootstrap';
+import Popover from '../../Utils/Popover';
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -71,6 +74,7 @@ const ProposalForm = React.createClass({
         category: [],
         media: [],
       },
+      suggestions: [],
     };
   },
 
@@ -176,6 +180,27 @@ const ProposalForm = React.createClass({
     return '';
   },
 
+  handleTitleChange(e) {
+    const title = e.target.value;
+    this.setState(prevState => ({
+      form: { ...prevState.form, title },
+      suggestions: [],
+    }));
+    if (title.length > 3) {
+      this.setState({ isLoadingSuggestions: true });
+      ProposalActions
+        .loadSuggestions(this.props.form.id, title)
+        .then(res => {
+          if (this.state.form.title === title) { // last request only
+            this.setState({
+              suggestions: res.proposals,
+              isLoadingSuggestions: false,
+            });
+          }
+        });
+    }
+  },
+
   updateThemeConstraint() {
     const {
       features,
@@ -262,15 +287,49 @@ const ProposalForm = React.createClass({
             ? <FormattedHTMLMessage message={form.description} />
             : null
         }
-        <Input
-          id="proposal_title"
-          type="text"
-          valueLink={this.linkState('form.title')}
-          label={this.getIntlMessage('proposal.title')}
-          groupClassName={this.getGroupStyle('title')}
-          errors={this.renderFormErrors('title')}
-        />
-
+          <Input
+            id="proposal_title"
+            type="text"
+            ref={c => this._titleInput = c}
+            onChange={this.handleTitleChange}
+            label={this.getIntlMessage('proposal.title')}
+            groupClassName={this.getGroupStyle('title')}
+            errors={this.renderFormErrors('title')}
+            addonAfter={this.state.isLoadingSuggestions ? <span className="glyphicon glyphicon-refresh glyphicon-spin" /> : <span className="glyphicon glyphicon-refresh" />}
+          />
+          <Overlay
+            show={this.state.suggestions.length > 0}
+            container={this}
+            placement="bottom"
+            target={() => ReactDOM.findDOMNode(this._titleInput)}
+          >
+          <Popover
+            id="proposal_suggest_title"
+            left={15}
+            top={115}
+            width={ReactDOM.findDOMNode(this._titleInput) ? `${(ReactDOM.findDOMNode(this._titleInput).offsetWidth).toString()}px` : '100%'}
+            title={
+              <FormattedMessage
+                message={this.getIntlMessage('proposal.suggest_header')}
+                matches={this.state.suggestions.length}
+                terms={this.state.form.title.split(' ').length}
+              />
+            }
+          >
+            <ul>
+            {
+              this.state.suggestions.slice(0, 5).map(suggest =>
+                <li>
+                  <a href={suggest._links.show} className="external-link">
+                    { suggest.title }
+                  </a>
+                </li>
+              )
+            }
+            </ul>
+            <Button onClick={() => { this.setState({ suggestions: [] }); }}>{this.getIntlMessage('global.close')}</Button>
+          </Popover>
+        </Overlay>
         {
           features.themes && form.usingThemes ?
             <Input

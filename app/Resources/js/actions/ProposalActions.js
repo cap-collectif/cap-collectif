@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
-import Fetcher from '../services/Fetcher';
+import Fetcher, { json } from '../services/Fetcher';
 import ProposalStore from '../stores/ProposalStore';
 import flatten from 'flat';
 import {
@@ -119,6 +119,17 @@ export default {
           return true;
         });
       });
+  },
+
+  loadSuggestions: (id, value) => {
+    const url = `/proposal_forms/${id}/proposals/search`;
+    const data = {};
+    data.terms = value;
+
+    return Fetcher
+      .post(url, data)
+      .then(json)
+    ;
   },
 
   loadProposalVotes: (proposalForm, proposal) => {

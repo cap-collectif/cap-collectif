@@ -266,11 +266,8 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\CollectStep", options={"mapping" = {"stepSlug": "slug"}})
-     *
-     * @param Project     $project
-     * @param CollectStep $step
-     *
-     * @return Response
+     * @Cache(smaxage="60", public=true)
+     * @Template("CapcoAppBundle:Step:collect.html.twig")
      */
     public function showCollectStepAction(Project $project, CollectStep $step)
     {
@@ -308,30 +305,20 @@ class StepController extends Controller
             'proposals' => $searchResults['proposals'],
         ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'ThemeDetails', 'Districts', 'Default', 'Steps', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
 
-        $response = $this->render('CapcoAppBundle:Step:collect.html.twig', [
+        return [
             'project' => $project,
             'currentStep' => $step,
             'proposalsCount' => $searchResults['count'],
             'props' => $props,
-        ]);
-
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
-            $response->setPublic();
-            $response->setSharedMaxAge(60);
-        }
-
-        return $response;
+        ];
     }
 
     /**
      * @Route("/project/{projectSlug}/questionnaire/{stepSlug}", name="app_project_show_questionnaire")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\QuestionnaireStep", options={"mapping" = {"stepSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
-     *
-     * @param Project           $project
-     * @param QuestionnaireStep $step
-     *
-     * @return Response
+     * @Cache(smaxage="60", public=true)
+     * @Template("CapcoAppBundle:Step:questionnaire.html.twig")
      */
     public function showQuestionnaireStepAction(Project $project, QuestionnaireStep $step)
     {
@@ -380,16 +367,11 @@ class StepController extends Controller
             ->setGroups(['Questionnaires', 'Questions', 'Steps', 'UserVotes', 'Replies', 'UsersInfos', 'UserMedias']))
         ;
 
-        $response = $this->render('CapcoAppBundle:Step:questionnaire.html.twig', [
+        return [
             'project' => $project,
             'currentStep' => $step,
             'props' => $props,
-        ]);
-
-        $response->setSharedMaxAge(60);
-        $response->setPublic();
-
-        return $response;
+        ];
     }
 
     /**
