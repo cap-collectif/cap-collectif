@@ -58,7 +58,6 @@ const Popover = React.createClass({
       top: this.props.arrowOffsetTop,
     };
 
-    console.log('custom popo');
     return (
       <div
         role="tooltip"
