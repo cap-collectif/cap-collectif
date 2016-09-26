@@ -1,126 +1,120 @@
-/* ===============================================================
-  $Thumbnail
+ /* ===============================================================
+   $Thumbnail
 ================================================================*/
 
 .thumbnail--custom {
-    @include border-radius(0);
-    padding: 0;
+  @include border-radius(0);
+  padding: 0;
 
-    &:hover {
-        background-color: $light-gray;
+  &:hover {
+    background-color: $light-gray;
 
-        .smart-fade:after {
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), $light-gray 50%);
-        }
+    .smart-fade:after {
+      background: linear-gradient(to right, rgba(255,255,255,0), $light-gray 50%);
+    }
+  }
+
+  .project__preview__cover {
+   height: 175px;
+   width: 100%;
+   overflow: hidden;
+   img {
+     width: 100%;
+     height: 100%;
+   }
+  }
+
+  .project__preview__body {
+    height: 180px; // (themes + title + progress bar + padding)
+  }
+
+  .project__preview__themes {
+    line-height: 15px;
+    height: 30px;
+    overflow: hidden;
+
+    &:after {
+      height: 15px;
+    }
+  }
+
+  .project__preview__title {
+    line-height: 25px;
+    height: 75px;
+    margin-top: 10px;
+    overflow: hidden;
+
+    &:after {
+      height: 25px
+    }
+  }
+
+  .progress {
+    @include progress-bar-variant($gray-primary);
+  }
+
+  .progress-bar--custom {
+    text-align: left;
+    padding-left: 15px;
+  }
+
+  .thumbnail__steps-bar {
+    width: 100%;
+    height: 25px;
+
+    .thumbnail__steps-bar__percentage {
+      position: absolute;
+      left: 45%;
+      color: #EBEBEB;
     }
 
-    .project__preview__cover {
-        overflow: hidden;
-        width: 100%;
-        height: 175px;
+    .thumbnail__steps-bar__item {
+      height: 100%;
+      display: inline-block;
+      border-left: 1px solid #f6f6f6;
+      background-color: $brand-success;
 
-        img {
-            width: 100%;
-            height: 100%;
-        }
+      &:first-child {
+        border-left: 0;
+      }
     }
-
-    .project__preview__body {
-        height: 180px; // (themes + title + progress bar + padding)
+    .thumbnail__steps-bar__item--closed {
+      background-color: $brand-success;
     }
-
-    .project__preview__themes {
-        overflow: hidden;
-        height: 30px;
-        line-height: 15px;
-
-        &:after {
-            height: 15px;
-        }
+    .thumbnail__steps-bar__item--open {
+      background-color: $brand-warning;
     }
-
-    .project__preview__title {
-        overflow: hidden;
-        height: 75px;
-        margin-top: 10px;
-        line-height: 25px;
-
-        &:after {
-            height: 25px;
-        }
+    .thumbnail__steps-bar__item--future {
+      background-color: #dddddd;
     }
+  }
 
-    .progress {
-        @include progress-bar-variant($gray-primary);
+  .thumbnail__numbers {
+    background-color: #f6f6f6;
+    padding: 5px;
+    border-top: 1px solid #ddd;
+    height: 55px;
+
+    .thumbnail__number-block {
+      display: inline-block;
+      text-align: center;
+      border-left: 1px solid $border-color;
+
+      &:first-of-type {
+        border-left: 0;
+      }
     }
-
-    .progress-bar--custom {
-        text-align: left;
-        padding-left: 15px;
+    .thumbnail__number {
+      font-size: 18px;
     }
-
-    .thumbnail__steps-bar {
-        width: 100%;
-        height: 25px;
-
-        .thumbnail__steps-bar__percentage {
-            position: absolute;
-            left: 45%;
-            color: #ebebeb;
-        }
-
-        .thumbnail__steps-bar__item {
-            display: inline-block;
-            height: 100%;
-            border-left: 1px solid #f6f6f6;
-            background-color: $brand-success;
-
-            &:first-child {
-                border-left: 0;
-            }
-        }
-
-        .thumbnail__steps-bar__item--closed {
-            background-color: $brand-success;
-        }
-
-        .thumbnail__steps-bar__item--open {
-            background-color: $brand-warning;
-        }
-
-        .thumbnail__steps-bar__item--future {
-            background-color: #ddd;
-        }
+    .thumbnail__number__label {
+      font-size: 12px;
     }
-
-    .thumbnail__numbers {
-        height: 55px;
-        padding: 5px;
-        background-color: #f6f6f6;
-        border-top: 1px solid #ddd;
-
-        .thumbnail__number-block {
-            display: inline-block;
-            text-align: center;
-            border-left: 1px solid $border-color;
-
-            &:first-of-type {
-                border-left: 0;
-            }
-        }
-
-        .thumbnail__number {
-            font-size: 18px;
-        }
-
-        .thumbnail__number__label {
-            font-size: 12px;
-        }
-    }
+  }
 }
 
 .bg--project {
-    background-color: $brand-primary;
-    padding-top: 30px;
-    padding-bottom: 30px;
+  background-color: $brand-primary;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }

@@ -73,6 +73,33 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     apt-get clean all
 
+# Install rabbitmq lib and php-amqp
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y vim git make cmake g++ libreadline-dev && \
+    cd /tmp && \
+    git clone https://github.com/alanxz/rabbitmq-c.git && \
+    cd /tmp/rabbitmq-c && \
+    git checkout v0.8.0 && \
+    mkdir build && cd build && \
+    cmake .. && \
+    cmake --build . --target install && \
+    ln -s /usr/local/lib64/librabbitmq.so.4.0.0 /usr/lib/librabbitmq.so.4 && \
+    ln -s /usr/local/lib64/librabbitmq.so.4.0.0 /usr/lib/librabbitmq.so && \
+    cd /tmp && \
+    git clone https://github.com/pdezwart/php-amqp.git && \
+    cd /tmp/php-amqp && \
+    git checkout v1.7.1 && \
+    phpize && \
+    ./configure && \
+    make && \
+    make install && \
+    echo "extension=amqp.so" > /etc/php/7.0/fpm/conf.d/20-amqp.ini && \
+    echo "extension=amqp.so" > /etc/php/7.0/cli/conf.d/20-amqp.ini && \
+    apt-get purge -y vim git cmake make g++ libreadline-dev && \
+    apt-get autoremove -y && \
+    apt-get clean all
+
 # Install mariadb
 RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
     echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.1/debian jessie main" >> /etc/apt/sources.list && \
@@ -129,6 +156,14 @@ RUN cd / && \
     rm -f elasticsearch-1.7.3.tar.gz && \
     mv /elasticsearch-1.7.3 /etc/elasticsearch
 
+# Install rabbitmq
+RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \
+    wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add - && \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server && \
+    rm -rf /var/lib/apt/lists/* && \
+    rabbitmq-plugins enable rabbitmq_management
+
 # Install New Relic Agent
 RUN echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list && \
     wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
@@ -166,6 +201,7 @@ COPY redis/run                  /etc/service/redis/run
 COPY cron/run                   /etc/service/cron/run
 COPY elasticsearch/run          /etc/service/elasticsearch/run
 COPY varnish/run                /etc/service/varnish/run
+COPY rabbitmq/run                /etc/service/rabbitmq/run
 
 # Configuration
 COPY mysql/capco.cnf            /etc/mysql/conf.d/capco.cnf
@@ -176,6 +212,7 @@ COPY php-fpm/capco.ini          /etc/php/7.0/cli/conf.d/capco.ini
 COPY cron/crontab               /etc/cron.d/crontab
 COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
+COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
 
 # Daemons
 COPY php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index

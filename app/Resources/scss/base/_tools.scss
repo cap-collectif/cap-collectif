@@ -5,63 +5,61 @@
 
 // = Inline-block
 // -----------------------------
-@mixin inline-block($haslayout : true) {
-    display: inline-block;
-    vertical-align: middle;
-    @if $haslayout == true {
-        .lt-ie8 & {
-            display: inline;
-            zoom: 1;
-        }
+@mixin inline-block ($haslayout : true){
+  display: inline-block;
+  vertical-align: middle;
+  @if $haslayout == true {
+    .lt-ie8 & {
+      display: inline;
+      zoom: 1;
     }
+  }
 }
 
 // = Clearfix
 // -----------------------------
-@mixin clearfix($haslayout : true) {
-    @if $haslayout == true {
-        .lt-ie8 & {
-            zoom: 1;
-        }
+@mixin clearfix ($haslayout : true) {
+  @if $haslayout == true {
+    .lt-ie8 & {
+      zoom: 1;
     }
-
-    &:before,
-    &:after {
-        display: table;
-        content: "";
-    }
-
-    &:after {
-        clear: both;
-    }
+  }
+  &:before, &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both
+  }
 }
 
 // = UL
 // -----------------------------
 @mixin ul-list-inline() {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 
-    li {
-        @include inline-block();
-    }
+  li {
+    @include inline-block();
+  }
 }
 
 @mixin reset-ul() {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 // = Lightness BG-color > Text-Color
 // -----------------------------
 @function set-link-text-color($color) {
-    @if (lightness( $color ) > 76) {
-        @return $black;
-    } @else {
-        @return $white;
-    }
+  @if (lightness( $color ) > 76) {
+    @return $black;
+  }
+  @else {
+    @return $white;
+  }
 }
 
 // = Triangle
@@ -70,35 +68,35 @@
     width: 0;
     height: 0;
 
-    @if $position == "bottom" {
+    @if $position == 'bottom' {
         border-top: $width solid $background;
-        border-left: $width / 2 solid transparent;
-        border-right: $width / 2 solid transparent;
+        border-left: $width/2 solid transparent;
+        border-right: $width/2 solid transparent;
     }
-    @if $position == "top" {
+    @if $position == 'top' {
         border-bottom: $width solid $background;
-        border-left: $width / 2 solid transparent;
-        border-right: $width / 2 solid transparent;
+        border-left: $width/2 solid transparent;
+        border-right: $width/2 solid transparent;
     }
-    @if $position == "right" {
-        border-top: $width / 2 solid transparent;
+    @if $position == 'right' {
+        border-top: $width/2 solid transparent;
         border-right: $width solid $background;
-        border-bottom: $width / 2 solid transparent;
+        border-bottom: $width/2 solid transparent;
     }
-    @if $position == "left" {
-        border-top: $width / 2 solid transparent;
+    @if $position == 'left' {
+        border-top: $width/2 solid transparent;
         border-left: $width solid $background;
-        border-bottom: $width / 2 solid transparent;
+        border-bottom: $width/2 solid transparent;
     }
 }
 
 @mixin iconize() {
-    font-family: "cap-collectif" !important;
-    font-style: normal !important;
-    font-weight: normal !important;
-    font-variant: normal !important;
-    text-transform: none !important;
-    speak: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: "cap-collectif" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

@@ -53,7 +53,6 @@
     "diff": "^3.0.0",
     "exports-loader": "^0.6.3",
     "fancybox": "^3.0.0",
-    "flat": "^2.0.1",
     "flux": "^2.1.1",
     "imports-loader": "^0.6.5",
     "javascript-brunch": "^2.0.0",

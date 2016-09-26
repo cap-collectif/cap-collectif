@@ -3,17 +3,16 @@
 ================================================================*/
 
 #cookieChoiceInfo {
-    background-color: $white;
-    color: #666;
-    font-size: 14px;
-    border-bottom: 1px solid $border-color;
+  background-color: $white;
+  color: #666;
+  font-size: 14px;
+  border-bottom: 1px solid $border-color;
 }
 
-#cookieChoiceInfo span,
-#cookieChoiceInfo a:not(.btn) {
-    color: #666;
+#cookieChoiceInfo span, #cookieChoiceInfo a:not(.btn) {
+  color: #666;
 }
 
 #cookieChoiceInfo a:not(.btn) {
-    text-decoration: underline;
+  text-decoration: underline;
 }

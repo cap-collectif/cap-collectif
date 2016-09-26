@@ -112,7 +112,6 @@ export const RegistrationForm = React.createClass({
           </span>
         ),
         labelClassName: 'h5',
-        autoComplete: 'postal-code',
       });
     }
     return (
@@ -130,7 +129,6 @@ export const RegistrationForm = React.createClass({
             labelClassName: 'h5',
             type: 'text',
             id: '_username',
-            autoComplete: 'username',
           },
           {
             name: 'email',
@@ -142,7 +140,6 @@ export const RegistrationForm = React.createClass({
               id: 'registration-email-tooltip',
               message: this.getIntlMessage('registration.tooltip.email'),
             },
-            autoComplete: 'email',
           },
           {
             name: 'plainPassword',
@@ -154,7 +151,6 @@ export const RegistrationForm = React.createClass({
               id: 'registration-password-tooltip',
               message: this.getIntlMessage('registration.tooltip.password'),
             },
-            autoComplete: 'new-password',
           },
         ]
         .concat(dynamicsField)

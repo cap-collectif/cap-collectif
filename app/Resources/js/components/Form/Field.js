@@ -18,14 +18,13 @@ const Field = React.createClass({
       name: PropTypes.string.isRequired,
       autoFocus: PropTypes.bool.isRequired,
       value: PropTypes.any,
-      autoComplete: PropTypes.string,
     }).isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
     const { touched, error } = this.props;
-    const { disableValidation, label, placeholder, type, name, divClassName, labelClassName, autoComplete } = this.props.input;
+    const { disableValidation, label, placeholder, type, name, divClassName, labelClassName } = this.props.input;
     const check = touched && !disableValidation;
     const input = (
       <Input
@@ -37,7 +36,6 @@ const Field = React.createClass({
         errors={(check && error) ? this.getIntlMessage(error) : null}
         bsStyle={check ? (error ? 'error' : 'success') : null}
         hasFeedback={check}
-        autoComplete={autoComplete}
         {...this.props.input}
       />
     );

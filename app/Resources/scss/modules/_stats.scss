@@ -4,33 +4,33 @@
 
 .stats__list {
 
+  position: relative;
+
+  .stats__list__header {
+    font-size: 18px;
+  }
+
+  .stats__list__value {
     position: relative;
+    z-index: 1000;
+    white-space: normal;
+  }
 
-    .stats__list__header {
-        font-size: 18px;
-    }
-
-    .stats__list__value {
-        position: relative;
-        z-index: 1000;
-        white-space: normal;
-    }
-
-    .stats__list__bar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        height: 100%;
-        background-color: #ebebeb;
-    }
+  .stats__list__bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    height: 100%;
+    background-color: #EBEBEB;
+  }
 }
 
 .stats__filters {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .stats__buttons .btn.btn-link:active,
 .stats__buttons .btn.btn-link.active {
-    color: $excerpt;
+  color: $excerpt;
 }

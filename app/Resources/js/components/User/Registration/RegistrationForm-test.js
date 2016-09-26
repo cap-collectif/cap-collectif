@@ -45,7 +45,6 @@ describe('<RegistrationForm />', () => {
         labelClassName: 'h5',
         type: 'text',
         id: '_username',
-        autoComplete: 'username',
       }
     );
   });
@@ -63,7 +62,6 @@ describe('<RegistrationForm />', () => {
           id: 'registration-email-tooltip',
           message: 'Vous recevrez un e-mail contenant un lien permettant de confirmer qu\'il s\'agit bien de votre adresse.',
         },
-        autoComplete: 'email',
       }
     );
   });
@@ -81,7 +79,6 @@ describe('<RegistrationForm />', () => {
           id: 'registration-password-tooltip',
           message: 'Le mot de passe doit comporter au moins huit caractères.',
         },
-        autoComplete: 'new-password',
       }
     );
   });

@@ -56,16 +56,6 @@ class ProposalAdmin extends Admin
                 'required' => true,
                 'property' => 'username',
             ])
-            ->add('media', 'sonata_type_model_list', [
-                'label' => 'admin.fields.proposal.media',
-                'required' => false,
-            ], [
-                'link_parameters' => [
-                    'context' => 'default',
-                    'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
-                ],
-            ])
             ->add('theme', 'sonata_type_model', [
                 'label' => 'admin.fields.proposal.theme',
                 'required' => false,

@@ -72,6 +72,33 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     apt-get clean all
 
+# Install rabbitmq lib and php-amqp
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y vim git make cmake g++ libreadline-dev && \
+    cd /tmp && \
+    git clone https://github.com/alanxz/rabbitmq-c.git && \
+    cd /tmp/rabbitmq-c && \
+    git checkout v0.8.0 && \
+    mkdir build && cd build && \
+    cmake .. && \
+    cmake --build . --target install && \
+    ln -s /usr/local/lib64/librabbitmq.so.4.0.0 /usr/lib/librabbitmq.so.4 && \
+    ln -s /usr/local/lib64/librabbitmq.so.4.0.0 /usr/lib/librabbitmq.so && \
+    cd /tmp && \
+    git clone https://github.com/pdezwart/php-amqp.git && \
+    cd /tmp/php-amqp && \
+    git checkout v1.7.1 && \
+    phpize && \
+    ./configure && \
+    make && \
+    make install && \
+    echo "extension=amqp.so" > /etc/php/7.0/fpm/conf.d/20-amqp.ini && \
+    echo "extension=amqp.so" > /etc/php/7.0/cli/conf.d/20-amqp.ini && \
+    apt-get purge -y vim git cmake make g++ libreadline-dev && \
+    apt-get autoremove -y && \
+    apt-get clean all
+
 # Install blackfire PHP Probe
 RUN curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/70 && \
     tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
@@ -84,6 +111,14 @@ RUN curl -s https://packagecloud.io/gpg.key | apt-key add - && \
     echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
     apt-get update && \
     apt-get install blackfire-agent
+
+# Install rabbitmq
+RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \
+    wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add - && \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server && \
+    rm -rf /var/lib/apt/lists/* && \
+    rabbitmq-plugins enable rabbitmq_management
 
 # Install nginx, mysql client and redis client
 RUN apt-get update && \
@@ -114,6 +149,7 @@ COPY php-fpm/run                /etc/service/php-fpm/run
 COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
 COPY blackfire/run              /etc/service/blackfire/run
+COPY rabbitmq/run              /etc/service/rabbitmq/run
 
 # Configuration
 COPY nginx/nginx.conf           /etc/nginx/nginx.conf
@@ -122,6 +158,7 @@ COPY php-fpm/capco.ini          /etc/php/7.0/fpm/conf.d/capco.ini
 COPY php-fpm/capco.ini          /etc/php/7.0/cli/conf.d/capco.ini
 COPY cron/crontab               /etc/cron.d/crontab
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
+COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
 
 # Volume for log / cache ...
 VOLUME /var/www/var/cache

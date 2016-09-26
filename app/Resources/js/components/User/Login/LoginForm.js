@@ -58,7 +58,6 @@ const LoginForm = React.createClass({
           valueLink={this.linkState('form._username')}
           id="_username"
           label={this.getIntlMessage('global.email')}
-          autoComplete="email"
         />
         <Input
           type="password"
@@ -66,7 +65,6 @@ const LoginForm = React.createClass({
           valueLink={this.linkState('form._password')}
           labelClassName="w100 h5"
           label={this.getIntlMessage('global.password')}
-          autoComplete="current-password"
         />
         <a className="small" href="/resetting/request">{this.getIntlMessage('global.forgot_password')}</a>
       </div>
