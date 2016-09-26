@@ -113,7 +113,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
             try {
                 $event->getVisitor()->addData(
                     'media', [
-                        'url' => $this->mediaExtension->path($proposal->getMedia(), 'idea'),
+                        'url' => $this->mediaExtension->path($proposal->getMedia(), 'proposal'),
                     ]
                 );
             } catch (RouteNotFoundException $e) {

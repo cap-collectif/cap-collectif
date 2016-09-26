@@ -145,7 +145,6 @@ export default class Input extends ReactBootstrapInput {
           type !== 'captcha' && this.renderIcon(), // no feedbacks for captcha
         ]),
         this.renderSuggestion(),
-        this.renderImage(),
         this.renderErrors(),
       ]
       : this.renderWrapper([
@@ -156,7 +155,6 @@ export default class Input extends ReactBootstrapInput {
         ),
         this.renderErrors(),
         this.renderHelp(),
-        this.renderImage(),
       ])
     ;
   }

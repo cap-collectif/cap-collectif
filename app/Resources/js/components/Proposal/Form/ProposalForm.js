@@ -116,7 +116,7 @@ const ProposalForm = React.createClass({
           const question = key.split('-')[1];
           responses.push({
             question,
-            value: custom[key],
+            value: typeof custom[key] !== 'undefined' ? custom[key] : '',
           });
         });
         form.responses = responses;
@@ -174,7 +174,7 @@ const ProposalForm = React.createClass({
       'field',
       'id'
     );
-    if (index > -1) {
+    if (index > -1 && typeof proposal.responses[index].value !== 'undefined') {
       return proposal.responses[index].value;
     }
     return '';
@@ -278,6 +278,12 @@ const ProposalForm = React.createClass({
       <span>
         {this.getIntlMessage('proposal.district')}
         {!form.districtMandatory && optional}
+      </span>
+    );
+    const illustration = (
+      <span>
+        {this.getIntlMessage('proposal.media')}
+        {optional}
       </span>
     );
     return (
@@ -446,7 +452,7 @@ const ProposalForm = React.createClass({
           id="proposal_media"
           type="image"
           image={proposal && proposal.media ? proposal.media.url : null}
-          label={this.getIntlMessage('proposal.media')}
+          label={illustration}
           groupClassName={this.getGroupStyle('media')}
           errors={this.renderFormErrors('media')}
           valueLink={this.linkState('form.media')}

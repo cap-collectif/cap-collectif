@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,7 +28,7 @@ class ResponseType extends AbstractType
         $this->transformer->setEntityRepository('CapcoAppBundle:Questions\AbstractQuestion');
         $builder
             ->add('value', null)
-            ->add('question', 'hidden')
+            ->add('question', HiddenType::class)
         ;
         $builder
             ->get('question')

@@ -603,7 +603,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     }
 
     /**
-     * @return mixed
+     * @return Media
      */
     public function getMedia()
     {

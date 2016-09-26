@@ -21,7 +21,7 @@ class MediaManager
         $media->setBinaryContent($file);
         $media->setContext('default');
         $media->setEnabled(true);
-        $this->mediaManager->save($media, false);
+        $this->mediaManager->save($media);
 
         return $media;
     }

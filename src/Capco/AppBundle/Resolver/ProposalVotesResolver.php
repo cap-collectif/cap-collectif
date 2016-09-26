@@ -126,7 +126,7 @@ class ProposalVotesResolver
 
         return $creditsLeft;
     }
-
+    
     public function getVotableStepsForProposal(Proposal $proposal)
     {
         return $this

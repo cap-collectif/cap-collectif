@@ -10,7 +10,6 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Helper\ArrayHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -94,6 +93,7 @@ class ProposalsController extends FOSRestController
         $firstVotableStep = $this->get('capco.proposal_votes.resolver')
             ->getFirstVotableStepForProposal($proposal)
         ;
+
         $userHasVote = false;
         if ($this->getUser() && $firstVotableStep) {
             $userVote = $em
@@ -162,15 +162,12 @@ class ProposalsController extends FOSRestController
             'proposalForm' => $proposalForm,
         ]);
 
-        $unflattenRequest = ArrayHelper::unflatten($request->request->all());
-
-        if (($uploadedMedia = $request->files->get('media')) && (!$deleteMedia = $request->request->get('delete_media'))) {
-            $mediaManager = $this->get('capco.media.manager');
-            $media = $mediaManager->createImageFromUploadedFile($uploadedMedia);
+        if ($uploadedMedia = $request->files->get('media')) {
+            $media = $this->get('capco.media.manager')->createImageFromUploadedFile($uploadedMedia);
             $proposal->setMedia($media);
         }
 
-        $form->submit($unflattenRequest);
+        $form->submit(ArrayHelper::unflatten($request->request->all()));
 
         if (!$form->isValid()) {
             return $form;
@@ -178,6 +175,7 @@ class ProposalsController extends FOSRestController
 
         $em->persist($proposal);
         $em->flush();
+
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         // If not present, es listener will take some time to execute the refresh
@@ -372,6 +370,9 @@ class ProposalsController extends FOSRestController
 
         $unflattenRequest = ArrayHelper::unflatten($request->request->all());
 
+        // due to flatennation...
+        unset($unflattenRequest['media']);
+
         if ($deleteMedia = $request->request->get('delete_media')) {
             if ($proposal->getMedia()) {
                 $em->remove($proposal->getMedia());
@@ -381,13 +382,7 @@ class ProposalsController extends FOSRestController
             if ($proposal->getMedia()) {
                 $em->remove($proposal->getMedia());
             }
-            $mediaManager = $this->get('sonata.media.manager.media');
-            $media = $mediaManager->create();
-            $media->setProviderName('sonata.media.provider.image');
-            $media->setBinaryContent($uploadedMedia);
-            $media->setContext('default');
-            $media->setEnabled(true);
-            $mediaManager->save($media, false);
+            $media = $this->get('capco.media.manager')->createImageFromUploadedFile($uploadedMedia);
             $proposal->setMedia($media);
         }
 

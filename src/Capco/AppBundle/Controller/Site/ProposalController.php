@@ -61,6 +61,8 @@ class ProposalController extends Controller
                 'ProposalForms',
                 'Questions',
                 'Steps',
+                'ThemeDetails',
+                'UserMedias',
             ]))
         ;
 
@@ -76,6 +78,7 @@ class ProposalController extends Controller
                 'UserMedias',
                 'Proposals',
                 'ProposalCategories',
+                'ThemeDetails',
                 'ProposalUserData',
             ]))
         ;
