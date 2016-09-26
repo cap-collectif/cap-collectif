@@ -121,21 +121,6 @@ export default {
       });
   },
 
-  loadSuggestions: (id, value) => {
-    const url = `/proposal_forms/${id}/proposals/search`;
-    const data = {};
-    data.terms = value;
-
-    Fetcher
-      .post(url, data)
-      .then((response) => {
-        const promise = response.json();
-        promise.then((result) => {
-          return result.proposals;
-        });
-      });
-  },
-
   loadProposalVotes: (proposalForm, proposal) => {
     Fetcher
       .get(`/proposal_forms/${proposalForm}/proposals/${proposal}/votes`)

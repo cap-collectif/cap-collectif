@@ -262,7 +262,6 @@ const ProposalForm = React.createClass({
             ? <FormattedHTMLMessage message={form.description} />
             : null
         }
-
         <Input
           id="proposal_title"
           type="text"
