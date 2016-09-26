@@ -146,7 +146,6 @@ export default {
     Object.keys(data).map((key) => {
       formData.append(key, data[key]);
     });
-
     return Fetcher
       .postFormData(`/ideas/${idea}`, formData)
       .then(() => {

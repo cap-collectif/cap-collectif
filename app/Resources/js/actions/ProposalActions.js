@@ -1,6 +1,7 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
 import ProposalStore from '../stores/ProposalStore';
+import flatten from 'flat';
 import {
   RECEIVE_PROPOSAL,
   RECEIVE_PROPOSAL_VOTES,
@@ -200,8 +201,13 @@ export default {
   },
 
   add: (form, data, successMessage = 'proposal.request.create.success', errorMessage = 'proposal.request.create.failure') => {
+    const formData = new FormData();
+    data = flatten(data);
+    Object.keys(data).map((key) => {
+      formData.append(key, data[key]);
+    });
     return Fetcher
-      .post(`/proposal_forms/${form}/proposals`, data)
+      .postFormData(`/proposal_forms/${form}/proposals`, formData)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: CREATE_PROPOSAL_SUCCESS,
@@ -226,8 +232,13 @@ export default {
   },
 
   update: (form, proposal, data, successMessage = 'proposal.request.update.success', errorMessage = 'proposal.request.update.failure') => {
+    const formData = new FormData();
+    data = flatten(data);
+    Object.keys(data).map((key) => {
+      formData.append(key, data[key]);
+    });
     return Fetcher
-      .put(`/proposal_forms/${form}/proposals/${proposal}`, data)
+      .postFormData(`/proposal_forms/${form}/proposals/${proposal}`, formData)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_PROPOSAL_SUCCESS,

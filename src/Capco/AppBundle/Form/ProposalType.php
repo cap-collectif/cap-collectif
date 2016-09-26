@@ -3,9 +3,14 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -30,8 +35,8 @@ class ProposalType extends AbstractType
         }
 
         $builder
-            ->add('title', 'purified_text', ['required' => true])
-            ->add('body', 'purified_textarea', ['required' => true])
+            ->add('title', PurifiedTextType::class, ['required' => true])
+            ->add('body', PurifiedTextareaType::class, ['required' => true])
         ;
 
         if ($this->toggleManager->isActive('themes') && $form->isUsingThemes()) {
@@ -47,7 +52,7 @@ class ProposalType extends AbstractType
         }
 
         $builder
-            ->add('responses', 'collection', [
+            ->add('responses', CollectionType::class, [
                 'allow_add' => true,
                 'allow_delete' => false,
                 'by_reference' => false,
@@ -55,6 +60,16 @@ class ProposalType extends AbstractType
                 'required' => false,
             ])
         ;
+
+        $builder->add('media', MediaType::class, [
+            'required' => false,
+            'provider' => 'sonata.media.provider.image',
+            'context' => 'default',
+        ])
+        ->add('delete_media', CheckboxType::class, [
+            'required' => false,
+            'mapped' => false,
+        ]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

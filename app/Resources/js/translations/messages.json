@@ -609,6 +609,7 @@
     },
     "district": "Localisation",
     "empty": "Aucune proposition",
+    "media": "Illustration",
     "private": {
       "show_login": "Connectez-vous pour consulter ou modifier vos propositions déjà déposées",
       "message": "Visible uniquement par vous et l'administrateur",

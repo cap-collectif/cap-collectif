@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Event\ProposalEvent;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
+use Capco\AppBundle\Helper\ArrayHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,6 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -161,7 +161,16 @@ class ProposalsController extends FOSRestController
         $form = $this->createForm('proposal', $proposal, [
             'proposalForm' => $proposalForm,
         ]);
-        $form->submit($request->request->all());
+
+        $unflattenRequest = ArrayHelper::unflatten($request->request->all());
+
+        if (($uploadedMedia = $request->files->get('media')) && (!$deleteMedia = $request->request->get('delete_media'))) {
+            $mediaManager = $this->get('capco.media.manager');
+            $media = $mediaManager->createImageFromUploadedFile($uploadedMedia);
+            $proposal->setMedia($media);
+        }
+
+        $form->submit($unflattenRequest);
 
         if (!$form->isValid()) {
             return $form;
@@ -333,7 +342,7 @@ class ProposalsController extends FOSRestController
      * )
      *
      * @Security("has_role('ROLE_USER')")
-     * @Put("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
+     * @Post("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200)
@@ -360,7 +369,29 @@ class ProposalsController extends FOSRestController
         $form = $this->createForm('proposal', $proposal, [
             'proposalForm' => $proposalForm,
         ]);
-        $form->submit($request->request->all(), false);
+
+        $unflattenRequest = ArrayHelper::unflatten($request->request->all());
+
+        if ($deleteMedia = $request->request->get('delete_media')) {
+            if ($proposal->getMedia()) {
+                $em->remove($proposal->getMedia());
+                $proposal->setMedia(null);
+            }
+        } elseif ($uploadedMedia = $request->files->get('media')) {
+            if ($proposal->getMedia()) {
+                $em->remove($proposal->getMedia());
+            }
+            $mediaManager = $this->get('sonata.media.manager.media');
+            $media = $mediaManager->create();
+            $media->setProviderName('sonata.media.provider.image');
+            $media->setBinaryContent($uploadedMedia);
+            $media->setContext('default');
+            $media->setEnabled(true);
+            $mediaManager->save($media, false);
+            $proposal->setMedia($media);
+        }
+
+        $form->submit($unflattenRequest, false);
 
         if ($form->isValid()) {
             $em->persist($proposal);
