@@ -162,12 +162,15 @@ class ProposalsController extends FOSRestController
             'proposalForm' => $proposalForm,
         ]);
 
+        $unFlattenRequest = ArrayHelper::unflatten($request->request->all());
+        unset($unFlattenRequest['media']);
+
         if ($uploadedMedia = $request->files->get('media')) {
             $media = $this->get('capco.media.manager')->createImageFromUploadedFile($uploadedMedia);
             $proposal->setMedia($media);
         }
 
-        $form->submit(ArrayHelper::unflatten($request->request->all()));
+        $form->submit($unFlattenRequest, false);
 
         if (!$form->isValid()) {
             return $form;
