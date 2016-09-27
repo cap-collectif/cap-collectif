@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Entity\Theme;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -113,7 +112,9 @@ class IdeaController extends Controller
         $props = $serializer->serialize(
           $idea,
           'json',
-          SerializationContext::create()->setSerializeNull(true)->setGroups(['Ideas', 'UsersInfos', 'UserMedias'])
+          SerializationContext::create()->setSerializeNull(true)->setGroups([
+              'Ideas', 'ThemeDetails', 'UsersInfos', 'UserMedias',
+          ])
         );
 
         return [

@@ -371,12 +371,7 @@ class ProposalsController extends FOSRestController
             'proposalForm' => $proposalForm,
         ]);
 
-        $unflattenRequest = ArrayHelper::unflatten($request->request->all());
-
-        // due to flatennation...
-        unset($unflattenRequest['media']);
-
-        if ($deleteMedia = $request->request->get('delete_media')) {
+        if ($request->request->get('media') === 'false') {
             if ($proposal->getMedia()) {
                 $em->remove($proposal->getMedia());
                 $proposal->setMedia(null);
@@ -388,6 +383,9 @@ class ProposalsController extends FOSRestController
             $media = $this->get('capco.media.manager')->createImageFromUploadedFile($uploadedMedia);
             $proposal->setMedia($media);
         }
+
+        $request->request->remove('media');
+        $unflattenRequest = ArrayHelper::unflatten($request->request->all());
 
         $form->submit($unflattenRequest, false);
 
