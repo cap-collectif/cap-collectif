@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import { IntlMixin, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
@@ -9,8 +8,7 @@ import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
 import { connect } from 'react-redux';
 import ProposalPrivateField from '../ProposalPrivateField';
-import { Button, Overlay } from 'react-bootstrap';
-import Popover from '../../Utils/Popover';
+import { Button, Collapse, Panel } from 'react-bootstrap';
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -296,46 +294,35 @@ const ProposalForm = React.createClass({
           <Input
             id="proposal_title"
             type="text"
-            ref={c => this._titleInput = c}
+            autoComplete={false}
             onChange={this.handleTitleChange}
             label={this.getIntlMessage('proposal.title')}
             groupClassName={this.getGroupStyle('title')}
             errors={this.renderFormErrors('title')}
             addonAfter={this.state.isLoadingSuggestions ? <span className="glyphicon glyphicon-refresh glyphicon-spin" /> : <span className="glyphicon glyphicon-refresh" />}
           />
-          <Overlay
-            show={this.state.suggestions.length > 0}
-            container={this}
-            placement="bottom"
-            target={() => ReactDOM.findDOMNode(this._titleInput)}
+          <Collapse
+            in={this.state.suggestions.length > 0}
           >
-          <Popover
-            id="proposal_suggest_title"
-            left={15}
-            top={115}
-            width={ReactDOM.findDOMNode(this._titleInput) ? `${(ReactDOM.findDOMNode(this._titleInput).offsetWidth).toString()}px` : '100%'}
-            title={
-              <FormattedMessage
-                message={this.getIntlMessage('proposal.suggest_header')}
-                matches={this.state.suggestions.length}
-                terms={this.state.form.title.split(' ').length}
-              />
-            }
-          >
-            <ul style={{ listStyleType: 'none', padding: 0 }}>
-            {
-              this.state.suggestions.slice(0, 5).map(suggest =>
-                <li>
-                  <a href={suggest._links.show} className="external-link">
-                    { suggest.title }
-                  </a>
-                </li>
-              )
-            }
-            </ul>
-            <Button onClick={() => { this.setState({ suggestions: [] }); }}>{this.getIntlMessage('global.close')}</Button>
-          </Popover>
-        </Overlay>
+              <Panel header={<FormattedMessage
+                        message={this.getIntlMessage('proposal.suggest_header')}
+                        matches={this.state.suggestions.length}
+                        terms={this.state.form.title.split(' ').length}
+              />}>
+                <ul style={{ listStyleType: 'none', padding: 0 }}>
+                {
+                  this.state.suggestions.slice(0, 5).map(suggest =>
+                    <li>
+                      <a href={suggest._links.show} className="external-link">
+                        { suggest.title }
+                      </a>
+                    </li>
+                  )
+                }
+                </ul>
+                <Button onClick={() => { this.setState({ suggestions: [] }); }}>{this.getIntlMessage('global.close')}</Button>
+              </Panel>
+        </Collapse>
         {
           features.themes && form.usingThemes ?
             <Input
