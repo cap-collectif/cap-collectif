@@ -464,6 +464,16 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this->getProposalForm() ? $this->getProposalForm()->getStep()->isPrivate() : false;
     }
 
+    public function isSelected() : bool
+    {
+        return !$this->getSelections()->isEmpty();
+    }
+
+    public function isVisible() : bool
+    {
+        return !$this->isPrivate() || $this->isSelected();
+    }
+
     /**
      * @return bool
      */
