@@ -30,13 +30,16 @@ export const ProposalList = React.createClass({
   render() {
     const {
       creditsLeft,
-      proposals,
       selectionStep,
       showAllVotes,
       showThemes,
     } = this.props;
 
-    console.log(proposals);
+    let { proposals } = this.props;
+
+    if (!Array.isArray(proposals)) {
+      proposals = Object.keys(proposals).map((k) => proposals[k]);
+    }
 
     if (proposals.length === 0) {
       return (<p className={classNames({ 'p--centered': true })} style={{ 'margin-bottom': '40px' }}>{ this.getIntlMessage('proposal.private.empty') }</p>);
