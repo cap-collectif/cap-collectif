@@ -294,7 +294,7 @@ const ProposalForm = React.createClass({
           <Input
             id="proposal_title"
             type="text"
-            autoComplete="off"
+            autoComplete={false}
             onChange={this.handleTitleChange}
             label={this.getIntlMessage('proposal.title')}
             groupClassName={this.getGroupStyle('title')}
