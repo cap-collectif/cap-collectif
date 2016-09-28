@@ -36,6 +36,8 @@ export const ProposalList = React.createClass({
       showThemes,
     } = this.props;
 
+    console.log(proposals);
+
     if (proposals.length === 0) {
       return (<p className={classNames({ 'p--centered': true })} style={{ 'margin-bottom': '40px' }}>{ this.getIntlMessage('proposal.private.empty') }</p>);
     }
