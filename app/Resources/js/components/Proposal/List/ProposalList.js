@@ -34,7 +34,6 @@ export const ProposalList = React.createClass({
       selectionStep,
       showAllVotes,
       showThemes,
-      user,
     } = this.props;
 
     if (proposals.length === 0) {
@@ -46,8 +45,13 @@ export const ProposalList = React.createClass({
       opinion__list: true,
     });
 
-    const privateProposals = proposals.filter((proposal) => !proposal.visible);
-    const publicProposals = proposals.filter((proposal) => proposal.visible);
+    let privateProposals = [];
+    let publicProposals = proposals;
+
+    if (typeof proposals[0].visible !== 'undefined') {
+      privateProposals = proposals.filter((proposal) => !proposal.visible);
+      publicProposals = proposals.filter((proposal) => proposal.visible);
+    }
 
     return (
       <div>
@@ -71,7 +75,7 @@ export const ProposalList = React.createClass({
           </Row>
         }
         {
-          privateProposals.length > 0 && user &&
+          privateProposals.length > 0 &&
           <VisibilityBox enabled>
             <Row componentClass="ul" className={classes}>
               {

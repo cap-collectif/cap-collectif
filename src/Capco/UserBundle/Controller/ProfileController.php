@@ -199,19 +199,22 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Proposal')
             ->getByUser($user)
         ;
+        if ($this->getUser() !== $user) {
+            $proposalsRaw = array_filter(
+                $proposalsRaw,
+                function ($proposal) {
+                    return $proposal->isVisible();
+                }
+            );
+        }
+
+        $proposalsCount = count($proposalsRaw);
 
         $proposalsProps = $serializer->serialize([
             'proposals' => $proposalsRaw,
             'showAllVotes' => true,
         ], 'json', SerializationContext::create()->setGroups(['Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
 
-        if ($this->getUser() === $user) {
-            $proposalsCount = count($proposalsRaw);
-        } else {
-            $proposalsCount = count(
-                array_filter($proposalsRaw, function ($proposal) { return $proposal->isVisible(); })
-            );
-        }
 
         $replies = $this
             ->get('doctrine.orm.entity_manager')
