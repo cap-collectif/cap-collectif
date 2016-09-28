@@ -3,6 +3,8 @@ import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import ProposalPreview from '../Preview/ProposalPreview';
 import { Row } from 'react-bootstrap';
+import VisibilityBox from '../../Utils/VisibilityBox';
+import { connect } from 'react-redux';
 
 export const ProposalList = React.createClass({
   propTypes: {
@@ -11,6 +13,7 @@ export const ProposalList = React.createClass({
     creditsLeft: PropTypes.number,
     showAllVotes: PropTypes.bool,
     showThemes: PropTypes.bool,
+    user: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -20,6 +23,7 @@ export const ProposalList = React.createClass({
       selectionStep: null,
       showAllVotes: false,
       showThemes: false,
+      user: null,
     };
   },
 
@@ -30,6 +34,7 @@ export const ProposalList = React.createClass({
       selectionStep,
       showAllVotes,
       showThemes,
+      user,
     } = this.props;
 
     if (proposals.length === 0) {
@@ -41,25 +46,60 @@ export const ProposalList = React.createClass({
       opinion__list: true,
     });
 
+    const privateProposals = proposals.filter((proposal) => proposal.private);
+    const publicProposals = proposals.filter((proposal) => !proposal.private);
+
     return (
-      <Row componentClass="ul" className={classes}>
+      <div>
         {
-          proposals.map((proposal) => {
-            return (
-              <ProposalPreview
-                key={proposal.id}
-                proposal={proposal}
-                selectionStep={selectionStep}
-                creditsLeft={creditsLeft}
-                showAllVotes={showAllVotes}
-                showThemes={showThemes}
-              />
-            );
-          })
+          publicProposals.length > 0 &&
+          <Row componentClass="ul" className={classes}>
+            {
+              publicProposals.map((proposal) => {
+                return (
+                  <ProposalPreview
+                    key={proposal.id}
+                    proposal={proposal}
+                    selectionStep={selectionStep}
+                    creditsLeft={creditsLeft}
+                    showAllVotes={showAllVotes}
+                    showThemes={showThemes}
+                  />
+                );
+              })
+            }
+          </Row>
         }
-      </Row>
+        {
+          privateProposals.length > 0 && user &&
+          <VisibilityBox enabled>
+            <Row componentClass="ul" className={classes}>
+              {
+                privateProposals.map((proposal) => {
+                  return (
+                      <ProposalPreview
+                        key={proposal.id}
+                        proposal={proposal}
+                        selectionStep={selectionStep}
+                        creditsLeft={creditsLeft}
+                        showAllVotes={showAllVotes}
+                        showThemes={showThemes}
+                      />
+                  );
+                })
+              }
+            </Row>
+          </VisibilityBox>
+        }
+      </div>
     );
   },
 });
 
-export default ProposalList;
+const mapStateToProps = (state) => {
+  return {
+    user: state.default.user,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalList);

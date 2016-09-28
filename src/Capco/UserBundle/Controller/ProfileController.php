@@ -54,10 +54,15 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Proposal')
             ->getByUser($user)
         ;
+
+        if ($this->getUser() !== $user) {
+            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) { return !$proposal->isPrivate(); });
+        }
+
         $proposalsProps = $serializer->serialize([
             'proposals' => $proposalsRaw,
             'showAllVotes' => true,
-        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
+        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
         $proposalsCount = count($proposalsRaw);
 
         $replies = $this
@@ -194,11 +199,20 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Proposal')
             ->getByUser($user)
         ;
+
         $proposalsProps = $serializer->serialize([
             'proposals' => $proposalsRaw,
             'showAllVotes' => true,
-        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
-        $proposalsCount = count($proposalsRaw);
+        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
+
+        if ($this->getUser() === $user) {
+            $proposalsCount = count($proposalsRaw);
+        } else {
+            $proposalsCount = count(
+                array_filter($proposalsRaw, function ($proposal) { return !$proposal->isPrivate(); })
+            );
+        }
+
         $replies = $this
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:Reply')
@@ -305,10 +319,16 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Proposal')
             ->getByUser($user)
         ;
+
+        if ($this->getUser() !== $user) {
+            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) { return !$proposal->isPrivate(); });
+        }
+
         $proposalProps = $serializer->serialize([
             'proposals' => $proposalsRaw,
             'showAllVotes' => true,
-        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
+        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
+
         $proposalsCount = count($proposalsRaw);
 
         return [
