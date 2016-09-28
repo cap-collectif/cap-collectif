@@ -5,14 +5,10 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Class CollectStep.
- *
  * @ORM\Table(name="collect_step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CollectStepRepository")
- * @Serializer\ExclusionPolicy("all")
  */
 class CollectStep extends AbstractStep
 {
@@ -37,8 +33,8 @@ class CollectStep extends AbstractStep
     private $contributorsCount = 0;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
-     * @ORM\Column(name="default_status_id", nullable=true)
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="default_status_id", nullable=true)
      */
     private $defaultStatus = null;
 

@@ -56,7 +56,7 @@ class ProfileController extends BaseController
         ;
 
         if ($this->getUser() !== $user) {
-            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) { return $proposal->isVisible(); });
+            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) { return !$proposal->isPrivate(); });
         }
 
         $proposalsProps = $serializer->serialize([
@@ -209,7 +209,7 @@ class ProfileController extends BaseController
             $proposalsCount = count($proposalsRaw);
         } else {
             $proposalsCount = count(
-                array_filter($proposalsRaw, function ($proposal) { return $proposal->isVisible(); })
+                array_filter($proposalsRaw, function ($proposal) { return !$proposal->isPrivate(); })
             );
         }
 
@@ -321,7 +321,7 @@ class ProfileController extends BaseController
         ;
 
         if ($this->getUser() !== $user) {
-            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) { return $proposal->isVisible(); });
+            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) { return !$proposal->isPrivate(); });
         }
 
         $proposalProps = $serializer->serialize([

@@ -90,8 +90,8 @@ Capco\AppBundle\Entity\Proposal:
       expose: true
       groups: [ProposalVotes]
   virtual_properties:
-    isVisible:
+    isPrivate:
       expose: true
       type: boolean
       groups: [PrivateProposals]
-      serialized_name: visible
+      serialized_name: private

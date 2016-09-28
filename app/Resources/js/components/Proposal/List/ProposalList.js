@@ -46,8 +46,8 @@ export const ProposalList = React.createClass({
       opinion__list: true,
     });
 
-    const privateProposals = proposals.filter((proposal) => !proposal.visible);
-    const publicProposals = proposals.filter((proposal) => proposal.visible);
+    const privateProposals = proposals.filter((proposal) => proposal.private);
+    const publicProposals = proposals.filter((proposal) => !proposal.private);
 
     return (
       <div>
