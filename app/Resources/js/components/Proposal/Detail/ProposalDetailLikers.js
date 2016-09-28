@@ -33,7 +33,7 @@ const ProposalDetailLikers = React.createClass({
 
   render() {
     const { proposal, componentClass } = this.props;
-    let Component = componentClass;
+    const Component = componentClass;
     if (proposal.likers.length > 0) {
       return (
         <Component className="proposal__info">
