@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Notifications\ProposalFormNotification;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -129,13 +128,6 @@ class ProposalForm
      * @ORM\Column(name="using_district", type="boolean")
      */
     private $usingDistrict = false;
-
-    /**
-     * @var
-     *
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Notifications\ProposalFormNotification", fetch="LAZY", mappedBy="proposalForm", cascade={"persist", "remove"})
-     */
-    private $notifications;
 
     /**
      * Constructor.
@@ -533,18 +525,5 @@ class ProposalForm
         }
 
         return $label;
-    }
-
-    public function getNotifications()
-    {
-        return $this->notifications;
-    }
-
-    public function setNotifications(ProposalFormNotification $notifications) : self
-    {
-        $this->notifications = $notifications;
-        $notifications->setProposalForm($this);
-
-        return $this;
     }
 }

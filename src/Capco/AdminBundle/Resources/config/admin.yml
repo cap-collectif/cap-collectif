@@ -417,9 +417,3 @@ services:
       arguments: [~, Capco\AppBundle\Entity\ProgressStep, SonataAdminBundle:CRUD]
       tags:
         - {name: sonata.admin, manager_type: orm, label: admin.label.progress_step}
-
-  capco_admin.admin.proposal_form.notification:
-      class: Capco\AdminBundle\Admin\ProposalFormNotificationAdmin
-      arguments: [~, Capco\AppBundle\Entity\Notifications\ProposalFormNotification, SonataAdminBundle:CRUD]
-      tags:
-        - {name: sonata.admin, manager_type: orm, label: admin.label.proposal_form.notifications}
