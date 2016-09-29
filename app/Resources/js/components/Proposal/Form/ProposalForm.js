@@ -118,9 +118,6 @@ const ProposalForm = React.createClass({
           });
         });
         form.responses = responses;
-        if (responses.length === 0) {
-          delete form.responses;
-        }
         if (!features.themes || !this.props.form.usingThemes || form.theme === -1) {
           delete form.theme;
         }
