@@ -647,7 +647,7 @@
         "success": "Merci, votre vote a bien \u00e9t\u00e9 pris en compte."
       }
     },
-    "suggest_header": "{matches, plural, one{# proposition déjà déposée} other{# propositions déjà déposées}} contenant {terms, plural, one{ce mot-clé} other {ces mots-clés}}",
+    "suggest_header": "{matches, plural, one{# proposition déjà déposée contenant} other{# propositions déjà déposées contiennent}} {terms, plural, one{ce mot-clé} other {ces mots-clés}}",
     "search": "Rechercher une proposition",
     "select": {
       "category": "Sélectionnez une catégorie",
