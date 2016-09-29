@@ -685,21 +685,7 @@ svg.avatar {
 }
 
 .smart-fade {
-    position: relative;
-    overflow: hidden;
-    height: 3.6em;
-    line-height: 1.2em;
-
-    &:after {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 50%;
-        height: 1.2em;
-        text-align: right;
-        content: "";
-        background: linear-gradient(to right, rgba(255, 255, 255, 0), $white 50%);
-    }
+    @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 2, $bgColor: $white);
 }
 
 .image-uploader__dropzone {

@@ -22,8 +22,9 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposal__info {
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
-    max-height: 36px;
     padding-top: 5px;
     padding-left: 5px;
     word-break: break-word;
