@@ -131,7 +131,8 @@ class ProposalForm
     private $usingDistrict = false;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist", "remove"}, mappedBy="proposalForm")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist", "remove"}, inversedBy="proposalForm")
+     * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=true)
      */
     private $notificationsConfiguration;
 

@@ -26,8 +26,7 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
     private $onDelete = false;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="notificationsConfiguration")
-     * @ORM\JoinColumn(name="proposalform_id", referencedColumnName="id", nullable=false)
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="notificationsConfiguration")
      */
     private $proposalForm;
 
