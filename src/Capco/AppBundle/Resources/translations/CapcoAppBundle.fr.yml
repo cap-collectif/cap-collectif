@@ -693,21 +693,27 @@ moderation:
       body: Bonjour,<br> nous avons le regret de vous informer que votre contribution "%title%" a été déplacée dans la corbeille pour le motif suivant :
       contribution: Voir votre contribution
 
-proposal_deletion:
-  notification:
-      subject: Une proposition a été supprimée par son auteur.
-      body: |
-        <p>Bonjour,</p>
-        <p>La proposition "%title%" vient d’être supprimée par son auteur sur %sitename%.</p>
-        <p><strong>Informations complémentaires :</strong></p>
-        <ul>
-          <li>Projet : %project%</li>
-          <li>Étape : %step%</li>
-          <li>Titre : %title%</li>
-          <li>Auteur : %author%</li>
-          <li>Contenu :</li>
-        </ul>
-        <div>%content%</div>
+notification:
+  email:
+    admin_footer: |
+      <p>Vous recevez ce courriel car votre adresse email est configurée dans la section Notification de l'administration du site %sitename%.</p>
+      <p>Ce message vous a été adressé automatiquement par <a href="https://cap-collectif.com/">Cap Collectif</a>.</p>
+    proposal:
+      create:
+          subject: %sitename% — Une proposition a été déposée sur %project%
+          body: |
+            <p>Bonjour,</p>
+            <p>L'utilisateur <a href="%userUrl%">%username%</a> vient de publier une proposition <a href="%proposalUrl%">%proposal%</a> sur le projet %project%.</p>
+      update:
+          subject: %sitename% — Une proposition a été modifiée sur %project%
+          body: |
+            <p>Bonjour,</p>
+            <p>L'utilisateur <a href="%userUrl%">%username%</a> vient de modifier la proposition <a href="%proposalUrl%">%proposal%</a> sur le projet %project%.</p>
+      delete:
+          subject: %sitename% — Une proposition a été supprimée sur %project%
+          body: |
+            <p>Bonjour,</p>
+            <p>L'utilisateur <a href="%userUrl%">%username%</a> vient de supprimer la proposition <a href="%proposalUrl%">%proposal%</a> sur le projet %project%.</p>
 
 proposal_status_change:
   notification:

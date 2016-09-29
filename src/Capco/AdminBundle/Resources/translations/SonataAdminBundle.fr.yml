@@ -478,6 +478,7 @@ admin:
       created_at: Création
       district: Localisation
       enabled: Publié
+      deletedAt: Supprimé
       form: Étape de dépôt
       group_content: Proposition
       group_publication: Options de publication
@@ -528,6 +529,12 @@ admin:
       help_text_description_help_text: Le champ Description est présent par défaut.
       help_text_district_help_text: Le champ Localisation est présent par défaut.
       help_text_title_help_text: Le champ Titre est présent par défaut.
+      notifications: Notifications
+      notification:
+        help: "Recevoir une notification par e-mail lorsqu'une proposition est :"
+        on_create: Déposée
+        on_update: Modifiée
+        on_delete: Supprimée
       questions: Questions
       theme_help_text: Texte d'aide pour le champ Thème.
       theme_mandatory: Saisie du thème obligatoire

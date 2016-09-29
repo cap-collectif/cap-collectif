@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 class ProposalFormAdmin extends Admin
 {
@@ -105,8 +106,16 @@ class ProposalFormAdmin extends Admin
                 'label' => 'admin.fields.proposal_form.category_help_text',
                 'required' => false,
             ])
-            ->end()
-            ->with('admin.fields.proposal_form.group_questions')
+            ->end();
+
+        $formMapper->with('admin.fields.proposal_form.notifications')
+            ->add('notificationsConfiguration', 'sonata_type_admin', [
+                'label' => 'admin.fields.proposal_form.notification.help',
+                'required' => false
+            ])
+            ->end();
+
+        $formMapper->with('admin.fields.proposal_form.group_questions')
             ->add('questions', 'sonata_type_collection', [
                 'label' => 'admin.fields.proposal_form.questions',
                 'by_reference' => false,
@@ -116,8 +125,7 @@ class ProposalFormAdmin extends Admin
                 'inline' => 'table',
                 'sortable' => 'position',
             ])
-            ->end()
-        ;
+            ->end();
     }
 
     // Fields to be shown on filter forms

@@ -9,17 +9,24 @@ swarrot:
             password: "%rabbitmq_password%"
             vhost: /
     messages_types:
-        message.example:
+        proposal.create:
             exchange: capco_direct_exchange
-            routing_key: capco_example
+            routing_key: proposal_create
+        proposal.update:
+            exchange: capco_direct_exchange
+            routing_key: proposal_update
+        proposal.delete:
+            exchange: capco_direct_exchange
+            routing_key: proposal_delete
     processors_stack:
         signal_handler: 'Swarrot\Processor\SignalHandler\SignalHandlerProcessor'
         retry: 'Swarrot\Processor\Retry\RetryProcessor'
         exception_catcher: 'Swarrot\Processor\ExceptionCatcher\ExceptionCatcherProcessor'
         ack: 'Swarrot\Processor\Ack\AckProcessor'
     consumers:
-        example_consumer:
-            processor: example.processor
-            extras:
-                retry_exchange: retry
-                retry_attempts: 0
+        proposal_create:
+            processor: proposal_create.processor
+        proposal_update:
+            processor: proposal_update.processor
+        proposal_delete:
+            processor: proposal_delete.processor

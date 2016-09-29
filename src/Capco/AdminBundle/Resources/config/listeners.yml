@@ -5,3 +5,8 @@ services:
         - [ setContainer, [ @service_container ] ]
       tags:
         - { name: doctrine.event_listener, event: preUpdate }
+  filter.configurator:
+      class: Capco\AdminBundle\EventListener\FilterConfigurator
+      arguments: ["@doctrine.orm.entity_manager"]
+      tags:
+        - { name: kernel.event_listener, event: kernel.controller }

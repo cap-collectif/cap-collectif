@@ -10,7 +10,7 @@
         background-color: $light-gray;
 
         .smart-fade:after {
-            background: $light-gray;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), $light-gray 50%);
         }
     }
 
@@ -30,8 +30,23 @@
     }
 
     .project__preview__themes {
+        overflow: hidden;
+        height: 30px;
+        line-height: 15px;
+
         &:after {
             height: 15px;
+        }
+    }
+
+    .project__preview__title {
+        overflow: hidden;
+        height: 75px;
+        margin-top: 10px;
+        line-height: 25px;
+
+        &:after {
+            height: 25px;
         }
     }
 

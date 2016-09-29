@@ -11,6 +11,7 @@ use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\User;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use FOS\UserBundle\Mailer\MailerInterface;
@@ -52,11 +53,16 @@ class Notify implements MailerInterface
         ;
     }
 
-    public function sendInternalEmail($body, $subject, $contentType = 'text/html')
+    private function sendInternalEmail($body, $subject, $contentType = 'text/html')
     {
         $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
         $fromAdress = $this->resolver->getValue('admin.mail.notifications.send_address');
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
+        $body .= $this->translator->trans(
+            'notification.email.admin_footer', [
+              '%sitename%' => $this->resolver->getValue('global.site.fullname'),
+            ], 'CapcoAppBundle'
+        );
         $this->sendEmail($to, $fromAdress, $fromName, $body, $subject, $contentType);
     }
 
@@ -87,7 +93,7 @@ class Notify implements MailerInterface
         $subject = $this->translator->trans('email.alert_expire_user.subject', ['%sitename%' => $sitename], 'CapcoAppBundle');
         $url = $this->router->generate('capco_user_confirmation_email', [
         'token' => $user->getConfirmationToken(),
-      ], true);
+      ], UrlGeneratorInterface::ABSOLUTE_URL);
         $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
 
@@ -134,7 +140,7 @@ class Notify implements MailerInterface
         $template = $this->parameters['confirmation.template'];
         $url = $this->router->generate('capco_user_confirmation_email', [
           'token' => $user->getConfirmationToken(),
-        ], true);
+        ], UrlGeneratorInterface::ABSOLUTE_URL);
         $rendered = $this->templating->render($template, [
             'user' => $user,
             'confirmationUrl' => $url,
@@ -145,7 +151,7 @@ class Notify implements MailerInterface
     public function sendResettingEmailMessage(UserInterface $user)
     {
         $template = $this->parameters['resetting.template'];
-        $url = $this->router->generate('fos_user_resetting_reset', ['token' => $user->getConfirmationToken()], true);
+        $url = $this->router->generate('fos_user_resetting_reset', ['token' => $user->getConfirmationToken()], UrlGeneratorInterface::ABSOLUTE_URL);
         $rendered = $this->templating->render($template, [
             'user' => $user,
             'confirmationUrl' => $url,
@@ -233,30 +239,43 @@ class Notify implements MailerInterface
         }
     }
 
-    /**
-     * @param $contribution
-     */
-    public function notifyProposalDeletion($contribution)
+    public function notifyProposal(Proposal $proposal, string $action)
     {
-        if ($contribution) {
-            $subject = $this->translator->trans(
-                'proposal_deletion.notification.subject', [], 'CapcoAppBundle'
-            );
-            $template = 'CapcoAppBundle:Mail:notifyProposalDeletion.html.twig';
-            $body = $this->templating->render(
-                $template,
-                [
-                    'contribution' => $contribution,
-                ]
-            );
-
-            $this->sendInternalEmail($body, $subject);
-        }
+        $step = $proposal->getProposalForm()->getStep();
+        $project = $step->getProject();
+        $subject = $this->translator->trans(
+            'notification.email.proposal.'. $action . '.subject', [
+              '%sitename%' => $this->resolver->getValue('global.site.fullname'),
+              '%project%' => $project->getTitle(),
+            ], 'CapcoAppBundle'
+        );
+        $body = $this->translator->trans(
+          'notification.email.proposal.'. $action .'.body', [
+              '%userUrl%' => $this->router->generate(
+                'capco_user_profile_show_all', [
+                  'slug' => $proposal->getAuthor()->getSlug(),
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+              ),
+              '%username%' => $proposal->getAuthor()->getDisplayName(),
+              '%proposal%' => $proposal->getTitle(),
+              '%proposalUrl%' => $this->router->generate(
+                $action !== 'delete' ? 'app_project_show_proposal' : 'admin_capco_app_proposal_show',
+                $action !== 'delete'
+                ? [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                    'proposalSlug' => $proposal->getSlug(),
+                  ]
+                : [ 'id' => $proposal->getId() ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+              ),
+              '%project%' => $project->getTitle(),
+            ], 'CapcoAppBundle'
+        );
+        $this->sendInternalEmail($body, $subject);
     }
 
-    /**
-     * @param Proposal $proposal
-     */
     public function notifyProposalStatusChange(Proposal $proposal)
     {
         $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');

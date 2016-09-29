@@ -215,6 +215,9 @@ class ProposalAdmin extends Admin
                 'editable' => true,
                 'label' => 'admin.fields.proposal.isTrashed',
             ])
+            ->add('deletedAt', null, [
+                'label' => 'admin.fields.proposal.deletedAt',
+            ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
             ])

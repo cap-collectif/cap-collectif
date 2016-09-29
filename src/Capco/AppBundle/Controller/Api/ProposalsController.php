@@ -27,6 +27,7 @@ use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Swarrot\Broker\Message;
 
 class ProposalsController extends FOSRestController
 {
@@ -186,6 +187,14 @@ class ProposalsController extends FOSRestController
         // Keep in mind that refresh should usually not be triggered manually.
         $index = $this->get('fos_elastica.index');
         $index->refresh();
+
+        if ($proposalForm->getNotificationsConfiguration()->isOnCreate()) {
+            $this->get('swarrot.publisher')->publish('proposal.create', new Message(
+              json_encode([
+                'proposalId' => $proposal->getId(),
+              ])
+            ));
+        }
 
         return $proposal;
     }
@@ -393,6 +402,14 @@ class ProposalsController extends FOSRestController
             $em->persist($proposal);
             $em->flush();
 
+            if ($proposalForm->getNotificationsConfiguration()->isOnUpdate()) {
+                $this->get('swarrot.publisher')->publish('proposal.update', new Message(
+                  json_encode([
+                    'proposalId' => $proposal->getId(),
+                  ])
+                ));
+            }
+
             return $proposal;
         }
 
@@ -440,10 +457,13 @@ class ProposalsController extends FOSRestController
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
-        $this->get('event_dispatcher')->dispatch(
-            CapcoAppBundleEvents::PROPOSAL_DELETED,
-            new ProposalEvent($proposal, 'remove')
-        );
+        if ($proposalForm->getNotificationsConfiguration()->isOnDelete()) {
+            $this->get('swarrot.publisher')->publish('proposal.delete', new Message(
+              json_encode([
+                'proposalId' => $proposal->getId(),
+              ])
+            ));
+        }
 
         // If not present, es listener will take some time to execute the refresh
         // and, next time proposals will be fetched, the set of data will be outdated.

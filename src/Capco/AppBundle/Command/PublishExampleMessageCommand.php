@@ -19,7 +19,8 @@ class PublishExampleMessageCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $publisher = $this->getContainer()->get('swarrot.publisher');
+        $publisher = $this->getContainer()
+        ->get('swarrot.publisher');
         $publisher->publish('message.example', new Message('salut c cool'));
         $output->writeln('message published');
     }
