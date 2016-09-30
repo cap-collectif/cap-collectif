@@ -9,6 +9,7 @@ import Input from '../../Form/Input';
 import { connect } from 'react-redux';
 import ProposalPrivateField from '../ProposalPrivateField';
 import { Button, Collapse, Panel } from 'react-bootstrap';
+import { debounce } from 'lodash';
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -74,6 +75,10 @@ const ProposalForm = React.createClass({
       },
       suggestions: [],
     };
+  },
+
+  componentWillMount() {
+    this.handleTitleChangeDebounced = debounce(this.handleTitleChangeDebounced, 1000);
   },
 
   componentDidMount() {
@@ -182,6 +187,11 @@ const ProposalForm = React.createClass({
   },
 
   handleTitleChange(e) {
+    e.persist();
+    this.handleTitleChangeDebounced(e);
+  },
+
+  handleTitleChangeDebounced(e) {
     const title = e.target.value;
     this.setState(prevState => ({
       form: { ...prevState.form, title },
