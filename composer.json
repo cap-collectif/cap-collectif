@@ -33,8 +33,8 @@
     "require": {
         "php": ">=7.0",
         "symfony/symfony": "~2.8.7",
-        "doctrine/orm": "^2.4.8",
-        "doctrine/dbal": "^2.4.4",
+        "doctrine/orm": "2.4.8",
+        "doctrine/dbal": "2.4.5",
         "doctrine/doctrine-bundle": "^1.6.3",
         "twig/extensions": "~1.0",
         "symfony/swiftmailer-bundle": "~2.3",
