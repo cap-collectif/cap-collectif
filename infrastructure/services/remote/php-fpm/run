@@ -66,7 +66,7 @@ fi
 echo "Database is ready after $(( SECONDS - start )) seconds!"
 
 while ! curl http://localhost:15672 > /dev/null 2>&1;
-  do sleep 1
+  do sleep 0.1
   echo "Waiting for rabbitmq to boot..."
 done
 
