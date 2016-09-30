@@ -65,8 +65,11 @@ else
 fi
 echo "Database is ready after $(( SECONDS - start )) seconds!"
 
-echo "Updating rabbitmq vhost to match schema..."
-php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml
+while ! curl http://localhost:15672 > /dev/null 2>&1;
+  do sleep 1
+  echo "Waiting for rabbitmq to boot..."
+done
+/etc/service/php-fpm/start_rabbitmq_consumers &
 
 echo "Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &

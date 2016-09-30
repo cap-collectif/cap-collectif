@@ -216,6 +216,7 @@ COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
 
 # Daemons
 COPY php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
+COPY php-fpm/start_rabbitmq_consumers /etc/service/php-fpm/start_rabbitmq_consumers
 
 WORKDIR /var/www
 USER root
