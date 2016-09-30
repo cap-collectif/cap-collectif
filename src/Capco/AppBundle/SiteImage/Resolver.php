@@ -9,17 +9,20 @@ class Resolver
 {
     protected $repository;
     protected $logger;
-    protected $images;
+    protected $images = null;
 
     public function __construct(SiteImageRepository $repository, LoggerInterface $logger)
     {
         $this->repository = $repository;
         $this->logger = $logger;
-        $this->images = $this->repository->getValuesIfEnabled();
     }
 
     public function getMedia($key)
     {
+        if (!$this->images) {
+          $this->images = $this->repository->getValuesIfEnabled();
+        }
+
         if (!array_key_exists($key, $this->images)) {
             return;
         }
