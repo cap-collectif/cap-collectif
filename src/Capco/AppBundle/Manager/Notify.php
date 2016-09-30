@@ -241,11 +241,12 @@ class Notify implements MailerInterface
 
     public function notifyProposal(Proposal $proposal, string $action)
     {
+        $sitename = $this->resolver->getValue('global.site.fullname'):
         $step = $proposal->getProposalForm()->getStep();
         $project = $step->getProject();
         $subject = $this->translator->trans(
             'notification.email.proposal.'. $action . '.subject', [
-              '%sitename%' => $this->resolver->getValue('global.site.fullname'),
+              '%sitename%' => $sitename,
               '%project%' => $project->getTitle(),
             ], 'CapcoAppBundle'
         );
