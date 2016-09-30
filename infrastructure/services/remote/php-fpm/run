@@ -44,7 +44,7 @@ VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod 
 database=`echo "$VERSIONS" | grep -o "Unknown database" | wc -l`
 if [ "$database" != "0" ]; then
     echo "Creating a new database with production data..."
-    mysql --host=127.0.0.1 < "create database symfony;"
+    mysql --host=127.0.0.1 -e "create database symfony;"
     # php bin/console doctrine:database:create --env=prod --no-interaction
     su capco <<'EOF'
 php bin/console doctrine:schema:create --env=prod --no-interaction
