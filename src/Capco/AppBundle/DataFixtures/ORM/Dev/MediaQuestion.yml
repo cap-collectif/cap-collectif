@@ -1,0 +1,14 @@
+Capco\AppBundle\Entity\Questions\MediaQuestion:
+  mediaquestion1:
+    title: Documents
+    helpText: "5 fichiers max"
+    required: false
+    type: 7 # media
+    private: false
+
+  mediaquestion2:
+    title: Bilans
+    helpText: "5 fichiers max"
+    required: false
+    type: 7 # media
+    private: false

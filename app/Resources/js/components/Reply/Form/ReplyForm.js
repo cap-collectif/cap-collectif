@@ -107,7 +107,6 @@ const ReplyForm = React.createClass({
         const data = {};
         Object.keys(this.state.form).map((key) => {
           const response = { question: key };
-
           if (Array.isArray(this.state.form[key])) {
             let currentField = null;
             form.fields.map((field) => {

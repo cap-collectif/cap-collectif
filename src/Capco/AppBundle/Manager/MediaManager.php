@@ -14,15 +14,22 @@ class MediaManager
         $this->mediaManager = $mediaManager;
     }
 
-    public function createImageFromUploadedFile(UploadedFile $file)
+    public function createFileFromUploadedFile(UploadedFile $file, string $context = 'default')
     {
         $media = $this->mediaManager->create();
-        $media->setProviderName('sonata.media.provider.image');
+        $media->setProviderName($this->resolveProviderName($file));
         $media->setBinaryContent($file);
-        $media->setContext('default');
+        $media->setContext($context);
         $media->setEnabled(true);
         $this->mediaManager->save($media);
 
         return $media;
+    }
+
+    protected function resolveProviderName(UploadedFile $file) : string
+    {
+        return preg_match('/^image\/[a-z]+/', $file->getClientMimeType())
+            ? 'sonata.media.provider.image'
+            : 'sonata.media.provider.file';
     }
 }

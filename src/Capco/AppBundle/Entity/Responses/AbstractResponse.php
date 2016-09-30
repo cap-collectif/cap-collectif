@@ -1,8 +1,10 @@
 <?php
 
-namespace Capco\AppBundle\Entity;
+namespace Capco\AppBundle\Entity\Responses;
 
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -14,14 +16,22 @@ use Capco\AppBundle\Traits\IdTrait;
  * Response.
  *
  * @ORM\Table(name="response")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ResponseRepository")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractResponseRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasRequiredNumberOfChoices()
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name = "response_type", type = "string")
+ * @ORM\DiscriminatorMap({
+ *      "value"  = "ValueResponse",
+ *      "media"  = "MediaResponse",
+ * })
  */
-class Response
+abstract class AbstractResponse
 {
     use IdTrait;
     use TimestampableTrait;
+
+    abstract public function getType();
 
     /**
      * @var Proposal
@@ -48,12 +58,6 @@ class Response
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private $question;
-
-    /**
-     * @var string
-     * @ORM\Column(name="value", type="json", nullable=true)
-     */
-    private $value;
 
     /**
      * @var \DateTime
@@ -106,26 +110,6 @@ class Response
     public function setQuestion(AbstractQuestion $question)
     {
         $this->question = $question;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
 
         return $this;
     }

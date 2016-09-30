@@ -7,7 +7,6 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation as Serializer;
 
 /**
  * AbstractQuestion.
@@ -19,11 +18,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\DiscriminatorMap({
  *      "simple"          = "SimpleQuestion",
  *      "multiple_choice" = "MultipleChoiceQuestion",
- * })
- * @Serializer\ExclusionPolicy("all")
- * @Serializer\Discriminator(field = "question_type", map = {
- *      "simple"          = "Capco\AppBundle\Entity\Questions\SimpleQuestion",
- *      "multiple_choice" = "Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion",
+ *      "media"           = "MediaQuestion",
  * })
  */
 abstract class AbstractQuestion
@@ -38,6 +33,7 @@ abstract class AbstractQuestion
     const QUESTION_TYPE_SELECT = 4;
     const QUESTION_TYPE_CHECKBOX = 5;
     const QUESTION_TYPE_RANKING = 6;
+    const QUESTION_TYPE_MEDIAS = 7;
 
     public static $questionTypesInputs = [
         self::QUESTION_TYPE_SIMPLE_TEXT => 'text',
@@ -47,6 +43,7 @@ abstract class AbstractQuestion
         self::QUESTION_TYPE_SELECT => 'select',
         self::QUESTION_TYPE_CHECKBOX => 'checkbox',
         self::QUESTION_TYPE_RANKING => 'ranking',
+        self::QUESTION_TYPE_MEDIAS => 'medias',
     ];
 
     public static $questionTypesLabels = [];
@@ -70,7 +67,7 @@ abstract class AbstractQuestion
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Response", mappedBy="question")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="question")
      */
     private $responses;
 
@@ -106,7 +103,7 @@ abstract class AbstractQuestion
     /**
      * @var string
      * @Assert\NotNull()
-     * @Assert\Range(min=0, max=6)
+     * @Assert\Range(min=0, max=7)
      * @ORM\Column(name="type", nullable=false)
      */
     protected $type;

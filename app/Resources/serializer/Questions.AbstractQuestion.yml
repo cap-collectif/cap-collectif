@@ -5,6 +5,7 @@ Capco\AppBundle\Entity\Questions\AbstractQuestion:
     map:
       simple: Capco\AppBundle\Entity\Questions\SimpleQuestion
       multiple_choice: Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion
+      media: Capco\AppBundle\Entity\Questions\MediaQuestion
   properties:
     id:
       expose: true

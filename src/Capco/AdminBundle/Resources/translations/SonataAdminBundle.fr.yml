@@ -894,6 +894,7 @@ ranking_step: Étape de classement
 selection_step: Étape de sélection
 questionnaire_step: Étape de questionnaire
 
+document_question: Document
 simple_question: Question simple
 multiple_choice_question: Question à choix multiple
 filter:
@@ -901,3 +902,4 @@ filter:
 
 Project List: Liste des projets
 Dashboard: Tableau de bord
+description.media_responses_download_strategy: MEDIA_RESPONSES

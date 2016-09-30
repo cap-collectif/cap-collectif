@@ -7,10 +7,10 @@ use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -52,11 +52,14 @@ class ProposalType extends AbstractType
         }
 
         $builder
-            ->add('responses', CollectionType::class, [
+            ->add('responses', PolyCollectionType::class, [
                 'allow_add' => true,
                 'allow_delete' => false,
                 'by_reference' => false,
-                'type' => new ResponseType($this->transformer, $this->questionRepository),
+                'types' => [
+                    new ValueResponseType($this->transformer, $this->questionRepository),
+                    new MediaResponseType($this->transformer, $this->questionRepository),
+                ],
                 'required' => false,
             ])
         ;

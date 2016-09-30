@@ -59,6 +59,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
         unset(self::$questionTypesInputs[self::QUESTION_TYPE_SIMPLE_TEXT]);
         unset(self::$questionTypesInputs[self::QUESTION_TYPE_MULTILINE_TEXT]);
         unset(self::$questionTypesInputs[self::QUESTION_TYPE_EDITOR]);
+        unset(self::$questionTypesInputs[self::QUESTION_TYPE_MEDIAS]);
     }
 
     /**

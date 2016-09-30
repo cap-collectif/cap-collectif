@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ResponseType extends AbstractType
+class ValueResponseType extends AbstractType
 {
     protected $transformer;
 
@@ -18,10 +18,6 @@ class ResponseType extends AbstractType
         $this->transformer = $transformer;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->transformer->setEntityClass(AbstractQuestion::class);
@@ -34,23 +30,26 @@ class ResponseType extends AbstractType
             ->get('question')
             ->addModelTransformer($this->transformer)
         ;
+
+        $builder->add('_type', HiddenType::class, array(
+            'data' => $this->getName(),
+            'mapped' => false,
+        ));
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Response',
+            'data_class' => 'Capco\AppBundle\Entity\Responses\ValueResponse',
+            'model_class' => 'Capco\AppBundle\Entity\Responses\ValueResponse',
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
         ]);
     }
 
-    public function getName()
+    public function getName() : string
     {
-        return 'response';
+        return 'value_response';
     }
 }

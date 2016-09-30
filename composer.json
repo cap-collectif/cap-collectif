@@ -51,7 +51,7 @@
         "sonata-project/admin-bundle": "~2.3@dev",
         "sonata-project/doctrine-orm-admin-bundle": "~2.3@dev",
         "sonata-project/block-bundle": "~2.2",
-        "sonata-project/media-bundle": "dev-master#2c655a5673af10964ffc032fc451bbb2dcc98819",
+        "sonata-project/media-bundle": "dev-master#98553d7faf8639ff6f2557c74a1a4e032b25f490",
         "sonata-project/user-bundle": "~2.2@dev",
         "sonata-project/datagrid-bundle": "~2.2@dev",
         "sonata-project/exporter": "~1.4",
@@ -92,7 +92,8 @@
         "odolbeau/rabbit-mq-admin-toolkit": "^3.1",
         "swarrot/swarrot-bundle": "^1.3.3",
         "doctrine/orm": "^2.5",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "infinite-networks/form-bundle": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

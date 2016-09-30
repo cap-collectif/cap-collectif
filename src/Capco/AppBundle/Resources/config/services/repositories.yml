@@ -70,9 +70,9 @@ services:
     arguments: ['CapcoAppBundle:QuestionChoice']
 
   capco.response.repository:
-    class: Capco\AppBundle\Repository\ResponseRepository
+    class: Capco\AppBundle\Repository\AbstractResponseRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Response']
+    arguments: ['CapcoAppBundle:Responses\AbstractResponse']
 
   capco.section.repository:
     class: Capco\AppBundle\Repository\SectionRepository
@@ -120,9 +120,9 @@ services:
     arguments: ['CapcoAppBundle:Video']
 
   capco.project.repository:
-    class:           Capco\AppBundle\Repository\ProjectRepository
+    class: Capco\AppBundle\Repository\ProjectRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments:       ['CapcoAppBundle:Project']
+    arguments: ['CapcoAppBundle:Project']
 
   capco.abstract_step.repository:
     class: Capco\AppBundle\Entity\Steps\AbstractStep

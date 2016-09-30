@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\Responses\MediaResponse:
+  response13:
+    question: '@mediaquestion1'
+    proposal: '@proposal1'
+    medias: ['@MediaCapcoSite', '@MediaUser4']
+  response14:
+    question: '@mediaquestion2'
+    proposal: '@proposal1'
+    medias: ['@MediaUser1', '@MediaUser3', '@MediaFilePdf']

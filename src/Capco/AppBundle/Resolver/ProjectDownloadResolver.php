@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Answer;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\Response;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -329,7 +327,7 @@ class ProjectDownloadResolver
         foreach ($replies as $reply) {
             if ($reply['enabled']) {
                 $responses = $this->em
-                    ->getRepository('CapcoAppBundle:Response')
+                    ->getRepository('CapcoAppBundle:Responses\AbstractResponse')
                     ->getByReplyAsArray($reply['id']);
                 $this->addItemToData($this->getReplyItem($reply, $responses));
             }

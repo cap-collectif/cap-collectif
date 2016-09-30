@@ -76,6 +76,7 @@ export default class Input extends ReactBootstrapInput {
       className,
       id,
       image,
+      medias,
       valueLink,
     } = this.props;
     if (type && type === 'editor') {
@@ -87,7 +88,44 @@ export default class Input extends ReactBootstrapInput {
     }
 
     if (type && type === 'image') {
-      return <ImageUpload id={id} className={className} valueLink={valueLink} preview={image} />;
+      return <ImageUpload id={id} className={className} valueLink={valueLink} accept="image/*" preview={image} />;
+    }
+
+    if (type && type === 'medias') {
+      const acceptedMimeTypes = [
+        'image/*',
+        'application/pdf',
+        'application/txt',
+        'application/rtf',
+        'application/doc',
+        'application/docx',
+        'application/xls',
+        'application/xlsx',
+        'application/ppt',
+        'application/pttx',
+        'application/odt',
+        'application/odg',
+        'application/odp',
+        'application/ods',
+        'application/odc',
+        'application/odf',
+        'application/odb',
+        'application/csv',
+        'application/xml',
+      ];
+
+      return (
+        <ImageUpload
+          id={id}
+          className={className}
+          valueLink={valueLink}
+          accept={acceptedMimeTypes.join()}
+          maxSize={26214400}
+          files={medias}
+          disablePreview
+          multiple
+        />
+      );
     }
 
     if (popover) {
@@ -164,10 +202,12 @@ export default class Input extends ReactBootstrapInput {
 Input.PropTypes = {
   errors: React.PropTypes.node,
   image: React.PropTypes.string,
+  medias: React.PropTypes.array,
 };
 
 Input.defaultProps = {
   errors: null,
   labelClassName: 'h5',
   image: null,
+  medias: [],
 };

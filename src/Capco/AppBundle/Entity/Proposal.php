@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
@@ -131,7 +132,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Response", mappedBy="proposal", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="proposal", cascade={"persist", "remove"})
      */
     private $responses;
 
@@ -343,7 +344,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this->author;
     }
 
-    public function setAuthor(User $author): self
+    public function setAuthor(User $author) : self
     {
         $this->author = $author;
 
@@ -355,7 +356,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this->proposalForm;
     }
 
-    public function setProposalForm(ProposalForm $proposalForm): self
+    public function setProposalForm(ProposalForm $proposalForm) : self
     {
         $this->proposalForm = $proposalForm;
 
@@ -367,7 +368,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this->proposalForm ? $this->proposalForm->getStep() : null;
     }
 
-    public function addResponse(Response $response): self
+    public function addResponse(AbstractResponse $response) : self
     {
         if (!$this->responses->contains($response)) {
             $this->responses[] = $response;
@@ -377,7 +378,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this;
     }
 
-    public function removeResponse(Response $response): self
+    public function removeResponse(AbstractResponse $response): self
     {
         $this->responses->removeElement($response);
 
@@ -389,7 +390,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this->responses;
     }
 
-    public function setResponses(Collection $responses): self
+    public function setResponses(Collection $responses) : self
     {
         $this->responses = $responses;
         foreach ($responses as $response) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedHTMLMessage, IntlMixin } from 'react-intl';
 import ProposalPrivateField from '../ProposalPrivateField';
+import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 
 const ProposalResponse = React.createClass({
   propTypes: {
@@ -15,19 +16,30 @@ const ProposalResponse = React.createClass({
 
   render() {
     const response = this.props.response;
-    if (!response.value || response.value.length === 0) {
+    let value = '';
+    if ((!response.value || response.value.length === 0) && response.field.type !== 'medias') {
       return null;
     }
-    const value = (
-      <div>
-        <h2 className="h2">{ response.field.question }</h2>
-        {
-          this.isHTML()
-          ? <FormattedHTMLMessage message={response.value} />
-          : <p>{response.value}</p>
-        }
-      </div>
-    );
+    if (response.field.type === 'medias') {
+      value = (
+        <div>
+          <h4 className="h4">{ response.field.question }</h4>
+          <ProposalMediaResponse medias={response.medias} />
+        </div>
+      );
+    } else {
+      value = (
+        <div>
+          <h4 className="h4">{ response.field.question }</h4>
+          {
+            this.isHTML()
+              ? <FormattedHTMLMessage message={response.value} />
+              : <p>{response.value}</p>
+          }
+        </div>
+      );
+    }
+
     return (
       <ProposalPrivateField
         show={response.field.private}

@@ -152,7 +152,7 @@ class IdeasController extends FOSRestController
 
         if (($uploadedMedia = $request->files->get('media')) && (!$deleteMedia = $request->request->get('delete_media'))) {
             $mediaManager = $this->get('capco.media.manager');
-            $media = $mediaManager->createImageFromUploadedFile($uploadedMedia);
+            $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
             $idea->setMedia($media);
         }
 

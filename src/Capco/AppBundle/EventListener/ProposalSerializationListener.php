@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\ProposalVoteRepository;
-use Capco\AppBundle\Repository\ResponseRepository;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
@@ -25,7 +25,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
         RouterInterface $router,
         TokenStorageInterface $tokenStorage,
         ProposalVoteRepository $proposalVoteRepository,
-        ResponseRepository $responseRepository,
+        AbstractResponseRepository $responseRepository,
         MediaExtension $mediaExtension,
         Serializer $serializer
     ) {
@@ -104,6 +104,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
             'json',
             (new SerializationContext())->setGroups(['Proposals'])
         );
+
         $event->getVisitor()->addData(
             'responses',
             json_decode($serializedResponses, true)

@@ -115,7 +115,7 @@ services:
       - {name: sonata.admin, manager_type: orm, label: admin.label.question}
     calls:
       - [ setTranslationDomain, [SonataAdminBundle]]
-      - [ setSubClasses, [{ simple_question: Capco\AppBundle\Entity\Questions\SimpleQuestion, multiple_choice_question: Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion }]]
+      - [ setSubClasses, [{ simple_question: Capco\AppBundle\Entity\Questions\SimpleQuestion, multiple_choice_question: Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion, document_question: Capco\AppBundle\Entity\Questions\MediaQuestion }]]
       - [ setTemplate, [edit, CapcoAdminBundle:Question:edit.html.twig]]
 
   capco_admin.admin.question_choice:
@@ -392,7 +392,7 @@ services:
 
   capco_admin.admin.response:
       class: Capco\AdminBundle\Admin\ResponseAdmin
-      arguments: [~, Capco\AppBundle\Entity\Response, SonataAdminBundle:CRUD]
+      arguments: [~, Capco\AppBundle\Entity\Response\AbstractResponse, SonataAdminBundle:CRUD]
       tags:
         - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.response}
       calls:

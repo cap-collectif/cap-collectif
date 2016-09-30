@@ -2479,6 +2479,62 @@
             "time": "2013-07-10 17:25:36"
         },
         {
+            "name": "infinite-networks/form-bundle",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/infinite-networks/InfiniteFormBundle.git",
+                "reference": "93730b0ba068ab70f36b26d2aa5ea78b0db76dec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/infinite-networks/InfiniteFormBundle/zipball/93730b0ba068ab70f36b26d2aa5ea78b0db76dec",
+                "reference": "93730b0ba068ab70f36b26d2aa5ea78b0db76dec",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "~2.3",
+                "php": ">=5.3.2",
+                "symfony/form": "^2.3 || ^3.0",
+                "symfony/framework-bundle": "^2.3 || ^3.0"
+            },
+            "conflict": {
+                "twig/twig": "<1.12"
+            },
+            "require-dev": {
+                "components/jquery": "*",
+                "components/qunit": "*",
+                "doctrine/doctrine-bundle": "~1.2",
+                "doctrine/orm": "~2.3",
+                "robloach/component-installer": "^0.2",
+                "symfony/phpunit-bridge": "^2.7",
+                "symfony/symfony": "^2.3.5 || ^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Infinite\\FormBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Nagel",
+                    "email": "t.nagel@infinite.net.au"
+                }
+            ],
+            "description": "A collection of useful form types and extensions for Symfony2",
+            "time": "2016-06-26 02:10:44"
+        },
+        {
             "name": "ircmaxell/password-compat",
             "version": "v1.0.4",
             "source": {
@@ -5678,12 +5734,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spyl94/SonataMediaBundle.git",
-                "reference": "2c655a5673af10964ffc032fc451bbb2dcc98819"
+                "reference": "98553d7faf8639ff6f2557c74a1a4e032b25f490"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spyl94/SonataMediaBundle/zipball/2c655a5673af10964ffc032fc451bbb2dcc98819",
-                "reference": "2c655a5673af10964ffc032fc451bbb2dcc98819",
+                "url": "https://api.github.com/repos/spyl94/SonataMediaBundle/zipball/98553d7faf8639ff6f2557c74a1a4e032b25f490",
+                "reference": "98553d7faf8639ff6f2557c74a1a4e032b25f490",
                 "shasum": ""
             },
             "require": {

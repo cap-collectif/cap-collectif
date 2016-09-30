@@ -117,10 +117,12 @@ const ProposalForm = React.createClass({
         const custom = this.state.custom;
         Object.keys(custom).map((key) => {
           const question = key.split('-')[1];
-          responses.push({
-            question,
-            value: typeof custom[key] !== 'undefined' ? custom[key] : '',
-          });
+          if (typeof custom[key] !== 'undefined' && custom[key].length > 0) {
+            responses.push({
+              question,
+              value: custom[key],
+            });
+          }
         });
         form.responses = responses;
         if (responses.length === 0) {

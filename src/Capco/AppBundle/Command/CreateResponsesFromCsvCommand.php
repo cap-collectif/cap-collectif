@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\Response;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -69,7 +69,7 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
                 $em->persist($reply);
             }
             $question = $em->getRepository('CapcoAppBundle:Questions\AbstractQuestion')->find($row['question_id']);
-            $response = new Response();
+            $response = new ValueResponse();
             $response->setReply($reply);
             $response->setQuestion($question);
             $response->setValue($row['value']);

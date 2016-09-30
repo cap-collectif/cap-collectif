@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AdminBundle\Form\QuestionValidationRuleType;
@@ -35,13 +36,21 @@ class QuestionAdmin extends Admin
                 ->add('help_text', 'textarea', [
                     'label' => 'admin.fields.question.help_text',
                     'required' => false,
-                ])
-                ->add('type', 'choice', [
-                    'label' => 'admin.fields.question.type',
-                    'choices' => $questionTypesLabels,
-                    'translation_domain' => 'CapcoAppBundle',
-                ])
-                ->add('required', null, [
+                ]);
+
+        if (!$subject instanceof MediaQuestion) {
+            $formMapper->add(
+                    'type',
+                    'choice',
+                    [
+                        'label' => 'admin.fields.question.type',
+                        'choices' => $questionTypesLabels,
+                        'translation_domain' => 'CapcoAppBundle',
+                    ]
+                );
+        }
+
+        $formMapper->add('required', null, [
                     'label' => 'admin.fields.question.required',
                     'required' => false,
                 ])

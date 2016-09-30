@@ -44,11 +44,17 @@ services:
     tags:
       - { name: form.type, alias: reply }
 
-  capco.form.response:
-    class: Capco\AppBundle\Form\ResponseType
+  capco.form.response.value:
+    class: Capco\AppBundle\Form\ValueResponseType
     arguments: ["@capco.form.transformer.entity_to_id"]
     tags:
-      - { name: form.type, alias: response }
+      - { name: form.type, alias: value_response }
+
+  capco.form.response.media:
+    class: Capco\AppBundle\Form\MediaResponseType
+    arguments: ["@capco.form.transformer.entity_to_id"]
+    tags:
+      - { name: form.type, alias: media_response }
 
   capco.form.proposal_vote:
       class: Capco\AppBundle\Form\ProposalVoteType

@@ -70,7 +70,7 @@ const ProposalPageContent = React.createClass({
           <img id="proposal-media" src={proposal.media.url} role="presentation" className="block img-responsive" />
         }
         <div className="block">
-          <h2 className="h2">{ this.getIntlMessage('proposal.description') }</h2>
+          <h3 className="h3">{ this.getIntlMessage('proposal.description') }</h3>
           <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
         </div>
         {

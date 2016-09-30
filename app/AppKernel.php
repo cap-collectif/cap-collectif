@@ -96,6 +96,9 @@ class AppKernel extends Kernel
 
             // Excel files generation
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
+
+            // PolyCollection support.
+            new \Infinite\FormBundle\InfiniteFormBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

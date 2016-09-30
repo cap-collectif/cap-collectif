@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\UserBundle\Entity\User;
@@ -50,7 +51,7 @@ class Reply implements Contribution
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Response", mappedBy="reply", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="reply", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $responses;
 
@@ -112,14 +113,7 @@ class Reply implements Contribution
         return $this;
     }
 
-    /**
-     * Add response.
-     *
-     * @param Response $response
-     *
-     * @return Reply
-     */
-    public function addResponse(Response $response)
+    public function addResponse(AbstractResponse $response) : self
     {
         if (!$this->responses->contains($response)) {
             $this->responses->add($response);
@@ -129,14 +123,7 @@ class Reply implements Contribution
         return $this;
     }
 
-    /**
-     * Remove response.
-     *
-     * @param Response $response
-     *
-     * @return Reply
-     */
-    public function removeResponse(Response $response)
+    public function removeResponse(AbstractResponse $response) : self
     {
         $this->responses->removeElement($response);
 

@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SimpleQuestion.
  *
- * @ORM\Table(name="simple_question")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SimpleQuestionRepository")
  */
 class SimpleQuestion extends AbstractQuestion
@@ -24,6 +23,7 @@ class SimpleQuestion extends AbstractQuestion
         unset(self::$questionTypesInputs[self::QUESTION_TYPE_RADIO]);
         unset(self::$questionTypesInputs[self::QUESTION_TYPE_SELECT]);
         unset(self::$questionTypesInputs[self::QUESTION_TYPE_CHECKBOX]);
+        unset(self::$questionTypesInputs[self::QUESTION_TYPE_MEDIAS]);
     }
 
     /**

@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Questions\SimpleQuestion:
   simplequestion1:
     title: Evaluez l'importance de votre proposition
-    helpText: Décrivez l'importance de votre proposition avec un adjectif (ex: indispensable, souhaitable ...)
+    helpText: "Décrivez l'importance de votre proposition avec un adjectif (ex: indispensable, souhaitable ...)"
     required: false
     type: 0 # one line text
     private: true

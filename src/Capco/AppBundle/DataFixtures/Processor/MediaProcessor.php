@@ -12,7 +12,7 @@ class MediaProcessor implements ProcessorInterface
         if ($object instanceof Media) {
             $object->setBinaryContent(realpath(dirname(__FILE__)).'/../files/'.$object->getBinaryContent());
             $object->setEnabled(true);
-            $object->setProviderName('sonata.media.provider.image');
+            $object->setProviderName($this->resolveProviderName($object));
             $object->setContext('default');
 
             return $object;
@@ -24,5 +24,12 @@ class MediaProcessor implements ProcessorInterface
      */
     public function postProcess($object)
     {
+    }
+
+    protected function resolveProviderName(Media $media) : string
+    {
+        return in_array(pathinfo($media->getBinaryContent(), PATHINFO_EXTENSION), ['png', 'jpeg', 'jpg', 'bmp', 'gif', 'tiff'])
+            ? 'sonata.media.provider.image'
+            : 'sonata.media.provider.file';
     }
 }

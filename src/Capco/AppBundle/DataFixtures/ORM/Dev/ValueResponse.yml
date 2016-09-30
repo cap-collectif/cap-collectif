@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\Response:
+Capco\AppBundle\Entity\Responses\ValueResponse:
   response1:
     question: '@simplequestion1'
     proposal: '@proposal1'

@@ -215,7 +215,6 @@ class ProfileController extends BaseController
             'showAllVotes' => true,
         ], 'json', SerializationContext::create()->setGroups(['Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
 
-
         $replies = $this
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:Reply')

@@ -41,6 +41,24 @@ Feature: ProposalForm Restful Api
       "private": @boolean@,
       "question": @string@,
       "slug": @string@
+    },
+    {
+      "id": @integer@,
+      "type": @string@,
+      "helpText": @string@,
+      "required": false,
+      "private": @boolean@,
+      "question": @string@,
+      "slug": @string@
+    },
+    {
+      "id": @integer@,
+      "type": @string@,
+      "helpText": @string@,
+      "required": false,
+      "private": @boolean@,
+      "question": @string@,
+      "slug": @string@
     }
   ]
 }

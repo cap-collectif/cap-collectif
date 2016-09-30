@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Swarrot\Broker\Message;
@@ -163,15 +164,23 @@ class ProposalsController extends FOSRestController
             'proposalForm' => $proposalForm,
         ]);
 
-        $unFlattenRequest = ArrayHelper::unflatten($request->request->all());
-        unset($unFlattenRequest['media']);
-
         if ($uploadedMedia = $request->files->get('media')) {
-            $media = $this->get('capco.media.manager')->createImageFromUploadedFile($uploadedMedia);
+            $media = $this->get('capco.media.manager')->createFileFromUploadedFile($uploadedMedia);
             $proposal->setMedia($media);
+            $request->files->remove('media');
         }
 
-        $form->submit($unFlattenRequest, false);
+        $request->files->remove('media');
+        $request->request->remove('media');
+        $request->request->remove('delete_media');
+
+        $unflattenRequest = ArrayHelper::unflatten($request->request->all());
+        $unflattenFile = ArrayHelper::unflatten($request->files->all());
+
+        $unflattenRequest = $this->get('capco.media.response.media.manager')
+            ->resolveTypeOfResponses($unflattenRequest, $unflattenFile);
+
+        $form->submit($unflattenRequest, false);
 
         if (!$form->isValid()) {
             return $form;
@@ -180,6 +189,11 @@ class ProposalsController extends FOSRestController
         $em->persist($proposal);
         $em->flush();
 
+        if (count($request->files->all()) > 0) {
+            $this->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
+            $em->persist($proposal);
+            $em->flush();
+        }
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         // If not present, es listener will take some time to execute the refresh
@@ -369,8 +383,7 @@ class ProposalsController extends FOSRestController
             throw new BadRequestHttpException('This proposal is no longer editable.');
         }
 
-        $user = $this->getUser();
-        if ($user !== $proposal->getAuthor()) {
+        if ($this->getUser() !== $proposal->getAuthor()) {
             throw new AccessDeniedException();
         }
 
@@ -385,16 +398,29 @@ class ProposalsController extends FOSRestController
                 $em->remove($proposal->getMedia());
                 $proposal->setMedia(null);
             }
+            $request->files->remove('delete_media');
         } elseif ($uploadedMedia = $request->files->get('media')) {
             if ($proposal->getMedia()) {
                 $em->remove($proposal->getMedia());
             }
-            $media = $this->get('capco.media.manager')->createImageFromUploadedFile($uploadedMedia);
+            $media = $this->get('capco.media.manager')->createFileFromUploadedFile($uploadedMedia);
             $proposal->setMedia($media);
         }
 
+        $request->files->remove('media');
         $request->request->remove('media');
+        $request->request->remove('delete_media');
+
         $unflattenRequest = ArrayHelper::unflatten($request->request->all());
+
+        if (count($request->files->all()) > 0) {
+            $request = $this->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
+        }
+
+        $unflattenFile = ArrayHelper::unflatten($request->files->all());
+
+        $unflattenRequest = $this->get('capco.media.response.media.manager')
+            ->resolveTypeOfResponses($unflattenRequest, $unflattenFile);
 
         $form->submit($unflattenRequest, false);
 

@@ -217,10 +217,16 @@
     "fullname": "Nom complet *",
     "hidden_email": "Adresse \u00e9lectronique (cach\u00e9e) *",
     "image_uploader": {
-      "btn": "Ouvrir l'explorateur de fichier",
-      "delete": "Supprimer mon image",
-      "dropzone": "Glissez-déposez votre image ici ou cliquez pour sélectionner une image.",
-      "preview": "Aperçu de l'image"
+      "image": {
+        "btn": "Sélectionner une photo sur votre ordinateur",
+        "delete": "Supprimer mon image",
+        "dropzone": "Faites glisser votre image sur cette zone ou",
+        "preview": "Aperçu de l'image"
+      },
+      "file": {
+        "btn": "Sélectionner un document sur votre ordinateur",
+        "dropzone": "Faites glisser votre document sur cette zone ou"
+      }
     },
     "insert": "Ins\u00e9rer",
     "link": "Lien *",
@@ -596,7 +602,8 @@
       "district": "Merci de s\u00e9lectionner une localisation.",
       "field_mandatory": "Ce champ est obligatoire.",
       "theme": "Merci de s\u00e9lectionner un th\u00e8me.",
-      "title": "Le titre de la proposition doit faire au moins 2 caract\u00e8res."
+      "title": "Le titre de la proposition doit faire au moins 2 caract\u00e8res.",
+      "media": "Vous avez sélectionné un nombre trop important d'image."
     },
     "count": "{num, plural, =0{0 proposition} one{# proposition} other{# propositions}}",
     "delete": {

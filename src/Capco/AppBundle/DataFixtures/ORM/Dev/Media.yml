@@ -74,3 +74,7 @@ Capco\MediaBundle\Entity\Media:
     MediaVotesBar:
         binaryContent: votes_bar_image.png
         name: Image de la barre de votes
+    # File
+    MediaFilePdf:
+        binaryContent: small_pdf.pdf
+        name: Small PDF

@@ -1,5 +1,5 @@
 liip_imagine:
-    formats: ['png', 'jpg']
+    formats: ['png', 'jpg', 'jpeg', 'bmp']
     driver: imagick
     filter_sets:
         admin:
@@ -62,6 +62,12 @@ liip_imagine:
             quality: 70
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             filters:
+                relative_resize: { heighten: 400 }
+
+        default_response:
+             quality: 70
+             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+             filters:
                 relative_resize: { heighten: 400 }
 
         default_logo:
