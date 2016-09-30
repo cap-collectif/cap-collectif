@@ -143,7 +143,6 @@ class ProposalForm
     {
         $this->questions = new ArrayCollection();
         $this->categories = new ArrayCollection();
-        $this->$notificationsConfiguration = new ProposalFormNotificationConfiguration();
     }
 
     public function __toString()
