@@ -14,7 +14,7 @@ setOverridableParameter($container, 'database_port', 3306, 'SYMFONY_DATABASE_POR
 setOverridableParameter($container, 'database_name', 'symfony', 'SYMFONY_DATABASE_NAME');
 setOverridableParameter($container, 'database_user', 'root', 'SYMFONY_DATABASE_USER');
 setOverridableParameter($container, 'database_password', null, 'SYMFONY_DATABASE_PASSWORD');
-setOverridableParameter($container, 'database_server_version', '5.6', 'SYMFONY_DATABASE_SERVER_VERSION');
+setOverridableParameter($container, 'database_server_version', 5.6, 'SYMFONY_DATABASE_SERVER_VERSION');
 
 setOverridableParameter($container, 'rabbitmq_login', 'guest', 'SYMFONY_RABBITMQ_LOGIN');
 setOverridableParameter($container, 'rabbitmq_password', 'guest', 'SYMFONY_RABBITMQ_PASSWORD');
