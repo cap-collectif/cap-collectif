@@ -252,7 +252,7 @@ class SynthesisElement
     /**
      * @var string
      *
-     * @ORM\Column(name="linked_data_url", type="string", length=255, nullable=true)
+     * @ORM\Column(name="linked_data_url", type="text", nullable=true)
      */
     private $linkedDataUrl = null;
 
