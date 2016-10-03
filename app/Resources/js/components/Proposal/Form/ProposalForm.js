@@ -78,7 +78,7 @@ const ProposalForm = React.createClass({
   },
 
   componentWillMount() {
-    this.handleTitleChangeDebounced = debounce(this.handleTitleChangeDebounced, 1000);
+    this.handleTitleChangeDebounced = debounce(this.handleTitleChangeDebounced, 500);
   },
 
   componentDidMount() {
