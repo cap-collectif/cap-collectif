@@ -20,7 +20,7 @@ class Resolver
     public function getMedia($key)
     {
         if (!$this->images) {
-          $this->images = $this->repository->getValuesIfEnabled();
+            $this->images = $this->repository->getValuesIfEnabled();
         }
 
         if (!array_key_exists($key, $this->images)) {

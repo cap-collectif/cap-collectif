@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 class ProposalFormAdmin extends Admin
 {
@@ -111,7 +110,7 @@ class ProposalFormAdmin extends Admin
         $formMapper->with('admin.fields.proposal_form.notifications')
             ->add('notificationsConfiguration', 'sonata_type_admin', [
                 'label' => 'admin.fields.proposal_form.notification.help',
-                'required' => false
+                'required' => false,
             ])
             ->end();
 

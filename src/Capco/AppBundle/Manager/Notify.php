@@ -245,13 +245,13 @@ class Notify implements MailerInterface
         $step = $proposal->getProposalForm()->getStep();
         $project = $step->getProject();
         $subject = $this->translator->trans(
-            'notification.email.proposal.'. $action . '.subject', [
+            'notification.email.proposal.'.$action.'.subject', [
               '%sitename%' => $sitename,
               '%project%' => $project->getTitle(),
             ], 'CapcoAppBundle'
         );
         $body = $this->translator->trans(
-          'notification.email.proposal.'. $action .'.body', [
+          'notification.email.proposal.'.$action.'.body', [
               '%userUrl%' => $this->router->generate(
                 'capco_user_profile_show_all', [
                   'slug' => $proposal->getAuthor()->getSlug(),
@@ -268,7 +268,7 @@ class Notify implements MailerInterface
                     'stepSlug' => $step->getSlug(),
                     'proposalSlug' => $proposal->getSlug(),
                   ]
-                : [ 'id' => $proposal->getId() ],
+                : ['id' => $proposal->getId()],
                 UrlGeneratorInterface::ABSOLUTE_URL
               ),
               '%project%' => $project->getTitle(),

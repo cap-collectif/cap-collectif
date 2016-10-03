@@ -13,15 +13,15 @@ class ProposalFormNotificationConfigurationAdmin extends Admin
         $formMapper
             ->add('onCreate', CheckboxType::class, [
                 'label' => 'admin.fields.proposal_form.notification.on_create',
-                'required' => false
+                'required' => false,
             ])
             ->add('onUpdate', CheckboxType::class, [
                     'label' => 'admin.fields.proposal_form.notification.on_update',
-                    'required' => false
+                    'required' => false,
                 ])
             ->add('onDelete', CheckboxType::class, [
                 'label' => 'admin.fields.proposal_form.notification.on_delete',
-                'required' => false
+                'required' => false,
             ])
             ->end();
     }

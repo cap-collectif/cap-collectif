@@ -155,7 +155,7 @@ sonata_media:
 
         sources:
             download:
-                strategy: sonata.media.security.public_strategy
+                strategy: sonata.media.security.superadmin_strategy
                 mode: http
             providers:
                 - sonata.media.provider.file

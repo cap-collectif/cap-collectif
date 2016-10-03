@@ -21,7 +21,7 @@ class Resolver
     public function getValue($key, $value = null)
     {
         if (!$this->parameters) {
-          $this->parameters = $this->repository->getValuesIfEnabled();
+            $this->parameters = $this->repository->getValuesIfEnabled();
         }
         if (!array_key_exists($key, $this->parameters)) {
             return $value;

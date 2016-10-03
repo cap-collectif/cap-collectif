@@ -6,7 +6,7 @@ use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class AbstractNotificationConfiguration
+ * Class AbstractNotificationConfiguration.
  *
  * @ORM\Table(name="notifications_configuration")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractNotificationConfigurationRepository")

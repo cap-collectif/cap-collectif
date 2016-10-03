@@ -7,8 +7,6 @@ use Capco\MediaBundle\Entity\Media;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Serializer;
 use Sonata\CoreBundle\Twig\Extension\TemplateExtension;
-use Sonata\MediaBundle\Twig\Extension\FormatterMediaExtension;
-use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Bridge\Twig\Extension\RoutingExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
@@ -22,7 +20,7 @@ class MediaResponseSerializationListener extends AbstractSerializationListener
     {
         $this->serializer = $serializer;
         $this->routingExtension = $routingExtension;
-        $this->templateExtension= $templateExtension;
+        $this->templateExtension = $templateExtension;
     }
 
     public static function getSubscribedEvents()
@@ -46,11 +44,15 @@ class MediaResponseSerializationListener extends AbstractSerializationListener
     protected function getMediasMetas(MediaResponse $response) : array
     {
         return $response->getMedias()
-            ->map(function (Media $media) {
+            ->map(function (Media $media) use ($response) {
                 $metas = [];
                 try {
                     $metas['url'] = $this->routingExtension->getPath(
-                        'sonata_media_download', ['id' => $this->templateExtension->getUrlsafeIdentifier($media)]
+                        'app_media_response_download',
+                        [
+                            'responseId' => $response->getId(),
+                            'mediaId' => $this->templateExtension->getUrlsafeIdentifier($media),
+                        ]
                     );
                     $metas['name'] = $media->getName();
                     $metas['size'] = $this->formatBytes($media->getSize());
