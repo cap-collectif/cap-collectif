@@ -335,39 +335,39 @@ fos_elastica:
             listener: ~
             finder: ~
         # Proposal vote
-        # proposalVote:
-          # indexable_callback: isIndexable
-          # _all: { enabled: false }
-          # serializer:
-            # groups: [ProposalVotes]
-          # mappings:
-            # user:
-              # type: object
-              # properties:
-                # slug:
-                  # index: not_analyzed
-            # createdAt:
-              # type: date
-              # fields:
-                # std: { type: string, analyzer: standard }
-            # updatedAt:
-              # type: date
-            # proposal:
-              # type: object
-              # properties:
-                # id:
-                  # type: long
-            # selectionStep:
-              # type: object
-              # properties:
-                # id:
-                  # type: long
-          # persistence:
-            # driver: orm
-            # model: Capco\AppBundle\Entity\ProposalVote
-            # provider: ~
-            # listener: ~
-            # finder: ~
+        proposalVote:
+          indexable_callback: isIndexable
+          _all: { enabled: false }
+          serializer:
+            groups: [ProposalVotes]
+          mappings:
+            user:
+              type: object
+              properties:
+                slug:
+                  index: not_analyzed
+            createdAt:
+              type: date
+              fields:
+                std: { type: string, analyzer: standard }
+            updatedAt:
+              type: date
+            proposal:
+              type: object
+              properties:
+                id:
+                  type: long
+            selectionStep:
+              type: object
+              properties:
+                id:
+                  type: long
+          persistence:
+            driver: orm
+            model: Capco\AppBundle\Entity\ProposalVote
+            provider: ~
+            listener: ~
+            finder: ~
        # Opinion
         opinion:
           indexable_callback: isIndexable
