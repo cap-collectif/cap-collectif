@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class FixSynthesesUrlsCommand extends ContainerAwareCommand
@@ -13,6 +14,7 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
         $this
             ->setName('capco:syntheses:fix-urls')
             ->setDescription('Set original contributions urls on syntheses elements')
+            ->addOption('force', 'f', InputOption::VALUE_NONE, 'Regenerate all URLs')
         ;
     }
 
@@ -23,12 +25,15 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
         $em = $container->get('doctrine.orm.entity_manager');
         $elements = $em
             ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
-            ->createQueryBuilder('se')
-            ->where('se.linkedDataClass IS NOT NULL')
-            ->andWhere('se.linkedDataId IS NOT NULL')
-            ->getQuery()
-            ->getResult()
-        ;
+            ->createQueryBuilder('se');
+
+        if (!$input->getOption('force')) {
+            $elements->where('se.linkedDataClass IS NOT NULL')
+                ->andWhere('se.linkedDataId IS NOT NULL');
+        }
+        
+        $elements->getQuery()->getResult();
+
         foreach ($elements as $el) {
             $contribution = $em->getRepository($el->getLinkedDataClass())->find($el->getLinkedDataId());
             $urlResolver = $container->get('capco.url.resolver');
