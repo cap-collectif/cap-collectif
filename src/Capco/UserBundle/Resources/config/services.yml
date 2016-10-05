@@ -31,6 +31,15 @@ services:
       tags:
           - { name: form.type, alias: capco_user_change_password }
 
+  # Saml
+  capco.logout_handler:
+      class: Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler
+      arguments: ["@simplesamlphp.auth", "@router"]
+
+  capco.saml.authenticator:
+      class: Capco\UserBundle\Saml\SamlAuthenticator
+      arguments: ["@simplesamlphp.auth", "%simplesamlphp.auth_attribute%", "@security.http_utils", "@capco.toggle.manager"]
+
   # We override default security services:
   security.authentication.success_handler:
       class:  Capco\UserBundle\Handler\AuthenticationSuccessHandler

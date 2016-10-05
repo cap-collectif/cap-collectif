@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Saml;
+namespace Capco\UserBundle\Saml;
 
 use Hslavich\SimplesamlphpBundle\Security\Core\Authentication\Token\SamlToken;
 use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;

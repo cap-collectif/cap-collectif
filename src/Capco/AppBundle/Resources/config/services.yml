@@ -119,7 +119,3 @@ services:
   capco.media.security.media_responses_strategy:
     class:     Capco\MediaBundle\DownloadStrategy\MediaResponsesDownloadStrategy
     arguments: ['@service_container', '@translator']
-
-  capco.simplesamlphp.authenticator:
-      class: Capco\AppBundle\Saml\SamlAuthenticator
-      arguments: [ "@simplesamlphp.auth", "%simplesamlphp.auth_attribute%", "@security.http_utils", "@capco.toggle.manager"]
