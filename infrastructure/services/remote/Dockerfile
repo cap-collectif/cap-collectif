@@ -18,6 +18,7 @@ RUN apt-get update && \
         runit \
         wget \
         libicu-dev \
+        sqlite \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -39,9 +40,12 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
         php7.0-imagick \
         php7.0-intl \
         php7.0-json \
+        php7.0-mcrypt \
         php7.0-mysql \
+        php7.0-sqlite3 \
         php7.0-opcache \
         php7.0-redis \
+        php7.0-xml \
         php7.0-xsl \
     && \
     apt-get clean && \

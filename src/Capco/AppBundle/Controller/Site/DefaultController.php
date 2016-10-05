@@ -14,6 +14,15 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
+     * @Route("/login-saml", name="saml_login")
+     */
+    public function loginSamlAction(Request $request)
+    {
+        $destination = $request->query->get('_destination') ?? $this->generateUrl('app_homepage');
+        return $this->redirect($destination);
+    }
+
+    /**
      * @Route("/contact", name="app_contact")
      * @Template("CapcoAppBundle:Default:contact.html.twig")
      */

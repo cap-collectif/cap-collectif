@@ -24,7 +24,7 @@ class CommentController extends Controller
      */
     public function loginToCommentAction($objectType, $objectId)
     {
-        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+        if (!$this->get('security.token_storage')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 

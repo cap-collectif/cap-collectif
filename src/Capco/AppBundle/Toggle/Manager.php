@@ -18,6 +18,7 @@ class Manager
         'idea_trash',
         'login_facebook',
         'login_gplus',
+        'login_saml',
         'members_list',
         'newsletter',
         'profiles',

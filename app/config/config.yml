@@ -374,3 +374,7 @@ exercise_html_purifier:
         HTML.BlockWrapper: "div"
         HTML.CoreModules:
           - { Structure: true, Text: true, Hypertext: true, List: true, NonXMLCommonAttributes: false, XMLCommonAttributes: false, CommonAttributes: false, }
+
+hslavich_simplesamlphp:
+    sp: "%saml_sp%"
+    authentication_attribute: oda_id

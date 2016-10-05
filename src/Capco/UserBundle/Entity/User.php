@@ -5,12 +5,15 @@ namespace Capco\UserBundle\Entity;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\MediaBundle\Entity\Media;
 use Capco\AppBundle\Model\IndexableInterface;
+use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 
-class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface, IndexableInterface
+class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface, EquatableInterface, SamlUserInterface
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
@@ -24,12 +27,33 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         'date' => 'user.index.sort.date',
     ];
 
+    public function setSamlAttributes(array $attributes)
+    {
+        if (!$this->getUsername()) {
+            $this->setUsername($attributes['oda_prenom'][0] . ' ' . $attributes['oda_nom'][0]);
+        }
+    }
+
+    protected $samlId;
+
+    public function setSamlId($id)
+    {
+        $this->samlId = $id;
+
+        return $this;
+    }
+
     // used as a lifecycleCallback
     public function sanitizePhoneNumber()
     {
         if ($this->phone) {
             $this->phone = '+'.preg_replace('/[^0-9]/', '', $this->phone);
         }
+    }
+
+    public function isEqualTo(RealUserInterface $user)
+    {
+        return $this->id === $user->getId();
     }
 
     /**

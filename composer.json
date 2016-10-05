@@ -23,6 +23,14 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/travishegner/simplesamlphp"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/spyl94/SimplesamlphpBundle"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/spyl94/BehatPageObjectExtension"
         },
         {
@@ -85,15 +93,19 @@
         "twilio/sdk": "^4.10",
         "misd/phone-number-bundle": "^1.1",
         "liuggio/excelbundle": "~2.0",
+
         "ocramius/proxy-manager": "2.0.2",
         "exercise/htmlpurifier-bundle": "^0.2.3",
         "doctrine/data-fixtures": "1.1.1",
         "nelmio/alice": "^2.2",
         "odolbeau/rabbit-mq-admin-toolkit": "^3.1",
-        "swarrot/swarrot-bundle": "^1.3.3",
+
         "doctrine/orm": "^2.5",
         "doctrine/dbal": "^2.5",
-        "infinite-networks/form-bundle": "^1.0"
+        "infinite-networks/form-bundle": "^1.0",
+        "swarrot/swarrot-bundle": "1.3.3",
+        "hslavich/simplesamlphp-bundle": "dev-master#9bd15465574d3d9d3d20529a849cd51ab43a069a",
+        "simplesamlphp/simplesamlphp": "dev-master#583a1a564d9e6637a75233821dd713d1fe61c0cd"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

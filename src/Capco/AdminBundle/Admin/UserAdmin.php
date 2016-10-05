@@ -151,7 +151,7 @@ class UserAdmin extends BaseAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $currentUser = $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
+        $currentUser = $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $subject = $this->getSubject();
 
         // define group zoning

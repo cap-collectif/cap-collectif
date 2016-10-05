@@ -74,6 +74,6 @@ class SettingsController extends Controller
 
         $category = $this->get('capco.admin.features_category_resolver')->findCategoryForToggle($toggle);
 
-        return $this->redirect($this->generateUrl('capco_admin_settings', ['category' => $category]));
+        return $this->redirect($this->generateUrl('capco_admin_settings', ['category' => $category ?? 'settings.modules']));
     }
 }

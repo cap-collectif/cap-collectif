@@ -111,6 +111,10 @@ class FeaturesCategoryResolver
             }
         }
 
+        if ($category === 'settings.modules' && getenv('SYMFONY_LOGIN_SAML_ALLOWED') === 'True') {
+            $toggles['login_saml'] = $this->manager->isActive('login_saml');
+        }
+
         return $toggles;
     }
 

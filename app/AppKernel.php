@@ -94,6 +94,9 @@ class AppKernel extends Kernel
             // Secure our forms against XSS
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
 
+            // Saml
+            new Hslavich\SimplesamlphpBundle\HslavichSimplesamlphpBundle(),
+
             // Excel files generation
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
 

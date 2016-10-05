@@ -37,6 +37,7 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
         php7.0-imagick \
         php7.0-intl \
         php7.0-json \
+        php7.0-sqlite3 \
         php7.0-mysql \
         php7.0-opcache \
         php7.0-redis \
@@ -123,6 +124,7 @@ RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.
 # Install nginx, mysql client and redis client
 RUN apt-get update && \
     apt-get install -y -qq \
+        sqlite \
         mysql-client \
         redis-tools \
         nginx \

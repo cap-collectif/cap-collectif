@@ -3,6 +3,7 @@ import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import FacebookLoginButton from './FacebookLoginButton';
 import GoogleLoginButton from './GoogleLoginButton';
+import SamlLoginButton from './SamlLoginButton';
 
 export const LoginSocialButtons = React.createClass({
   propTypes: {
@@ -19,13 +20,14 @@ export const LoginSocialButtons = React.createClass({
 
   render() {
     const { features } = this.props;
-    if (!features.login_facebook && !features.login_gplus) {
+    if (!features.login_facebook && !features.login_gplus && !features.login_saml) {
       return null;
     }
     return (
       <div>
         <FacebookLoginButton {...this.props} />
         <GoogleLoginButton {...this.props} />
+        <SamlLoginButton {...this.props} />
         <p className="p--centered">
           <span>{this.getIntlMessage('login.or')}</span>
         </p>

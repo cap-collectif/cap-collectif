@@ -3,6 +3,10 @@ services:
       class: Capco\UserBundle\Security\Core\User\UserProvider
       arguments: [@fos_user.user_manager,{facebook: facebook_id, google: google_id}]
 
+  saml_user_provider:
+      class: Capco\UserBundle\Security\Core\User\SamlUserProvider
+      arguments: [@fos_user.user_manager]
+
   capco_user.registration.form.type:
     class: Capco\UserBundle\Form\Type\RegistrationFormType
     tags:

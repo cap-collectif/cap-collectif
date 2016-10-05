@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9009127571b47ffc89567fc463072cb2",
-    "content-hash": "ee3a6f5a22ef967d1cde8124918418ba",
+    "hash": "bd1d19ef140506873a64f8f7205860d7",
+    "content-hash": "db550dcfca94997c14b1a7b709ed5874",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2240,6 +2240,50 @@
                 "symfony"
             ],
             "time": "2016-06-07 20:46:56"
+        },
+        {
+            "name": "hslavich/simplesamlphp-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spyl94/SimplesamlphpBundle.git",
+                "reference": "9bd15465574d3d9d3d20529a849cd51ab43a069a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spyl94/SimplesamlphpBundle/zipball/9bd15465574d3d9d3d20529a849cd51ab43a069a",
+                "reference": "9bd15465574d3d9d3d20529a849cd51ab43a069a",
+                "shasum": ""
+            },
+            "require": {
+                "simplesamlphp/simplesamlphp": "dev-master#583a1a564d9e6637a75233821dd713d1fe61c0cd",
+                "symfony/symfony": ">=2.8"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Hslavich\\SimplesamlphpBundle\\": ""
+                }
+            },
+            "authors": [
+                {
+                    "name": "hslavich",
+                    "email": "hernan.slavich@gmail.com"
+                },
+                {
+                    "name": "Moritz Hesse",
+                    "email": "moritz.hesse@tu-dresden.de"
+                }
+            ],
+            "description": "SimpleSAMLphp Bundle for Symfony2",
+            "keywords": [
+                "saml",
+                "simplesamlphp"
+            ],
+            "support": {
+                "source": "https://github.com/spyl94/SimplesamlphpBundle/tree/master"
+            },
+            "time": "2016-06-01 16:12:11"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -4678,6 +4722,47 @@
             "time": "2016-03-04 15:29:26"
         },
         {
+            "name": "robrichards/xmlseclibs",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robrichards/xmlseclibs.git",
+                "reference": "79fb5e03c4ee4dc3ec77e4b2628231374364a017"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/79fb5e03c4ee4dc3ec77e4b2628231374364a017",
+                "reference": "79fb5e03c4ee4dc3ec77e4b2628231374364a017",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 5.2"
+            },
+            "suggest": {
+                "ext/mcrypt": "MCrypt extension",
+                "ext/openssl": "OpenSSL extension"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "A PHP library for XML Security",
+            "homepage": "https://github.com/robrichards/xmlseclibs",
+            "keywords": [
+                "security",
+                "signature",
+                "xml",
+                "xmldsig"
+            ],
+            "time": "2016-09-08 13:31:44"
+        },
+        {
             "name": "ruflin/elastica",
             "version": "3.0.1",
             "source": {
@@ -4889,6 +4974,122 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2015-11-07 08:07:40"
+        },
+        {
+            "name": "simplesamlphp/saml2",
+            "version": "v1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/simplesamlphp/saml2.git",
+                "reference": "6a4b1eece19b067b17fff718176689b82dc89fb9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/simplesamlphp/saml2/zipball/6a4b1eece19b067b17fff718176689b82dc89fb9",
+                "reference": "6a4b1eece19b067b17fff718176689b82dc89fb9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-openssl": "*",
+                "php": ">=5.3.3",
+                "psr/log": "~1.0",
+                "robrichards/xmlseclibs": "^1.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpmd/phpmd": "~1.5",
+                "phpunit/phpunit": "~3.7",
+                "satooshi/php-coveralls": "~0.6.1",
+                "sebastian/phpcpd": "~1.4",
+                "sensiolabs/security-checker": "~1.1",
+                "squizlabs/php_codesniffer": "~1.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SAML2_": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Åkre Solberg",
+                    "email": "andreas.solberg@uninett.no"
+                }
+            ],
+            "description": "SAML2 PHP library from SimpleSAMLphp",
+            "time": "2016-09-15 06:14:20"
+        },
+        {
+            "name": "simplesamlphp/simplesamlphp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/travishegner/simplesamlphp.git",
+                "reference": "583a1a564d9e6637a75233821dd713d1fe61c0cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/travishegner/simplesamlphp/zipball/583a1a564d9e6637a75233821dd713d1fe61c0cd",
+                "reference": "583a1a564d9e6637a75233821dd713d1fe61c0cd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3",
+                "robrichards/xmlseclibs": "~1.4.1",
+                "simplesamlphp/saml2": "~1.9",
+                "whitehat101/apr1-md5": "~1.0"
+            },
+            "require-dev": {
+                "ext-pdo_sqlite": "*",
+                "phpunit/phpunit": "~3.7",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "SimpleSAML\\": "lib/SimpleSAML"
+                },
+                "files": [
+                    "lib/_autoload_modules.php"
+                ]
+            },
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Åkre Solberg",
+                    "email": "andreas.solberg@uninett.no"
+                },
+                {
+                    "name": "Olav Morken",
+                    "email": "olav.morken@uninett.no"
+                },
+                {
+                    "name": "Jaime Perez",
+                    "email": "jaime.perez@uninett.no"
+                }
+            ],
+            "description": "A PHP implementation of a SAML 2.0 service provider and identity provider, also compatible with Shibboleth 1.3 and 2.0.",
+            "homepage": "http://simplesamlphp.org",
+            "keywords": [
+                "idp",
+                "oauth",
+                "saml2",
+                "shibboleth",
+                "sp",
+                "ws-federation"
+            ],
+            "support": {
+                "issues": "https://github.com/simplesamlphp/simplesamlphp/issues",
+                "source": "https://github.com/simplesamlphp/simplesamlphp"
+            },
+            "time": "2016-05-13 15:05:47"
         },
         {
             "name": "snc/redis-bundle",
@@ -5815,7 +6016,7 @@
             "support": {
                 "source": "https://github.com/spyl94/SonataMediaBundle/tree/master"
             },
-            "time": "2016-04-21 16:19:23"
+            "time": "2016-09-30 14:15:26"
         },
         {
             "name": "sonata-project/notification-bundle",
@@ -7179,6 +7380,50 @@
                 "twilio"
             ],
             "time": "2016-01-29 00:19:22"
+        },
+        {
+            "name": "whitehat101/apr1-md5",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whitehat101/apr1-md5.git",
+                "reference": "8b261c9fc0481b4e9fa9d01c6ca70867b5d5e819"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whitehat101/apr1-md5/zipball/8b261c9fc0481b4e9fa9d01c6ca70867b5d5e819",
+                "reference": "8b261c9fc0481b4e9fa9d01c6ca70867b5d5e819",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WhiteHat101\\Crypt\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Ebler",
+                    "email": "jebler@gmail.com"
+                }
+            ],
+            "description": "Apache's APR1-MD5 algorithm in pure PHP",
+            "homepage": "https://github.com/whitehat101/apr1-md5",
+            "keywords": [
+                "MD5",
+                "apr1"
+            ],
+            "time": "2015-02-11 11:06:42"
         },
         {
             "name": "willdurand/geocoder",
@@ -10925,6 +11170,8 @@
         "jms/serializer": 20,
         "snc/redis-bundle": 20,
         "caxy/htmldiff-bundle": 20,
+        "hslavich/simplesamlphp-bundle": 20,
+        "simplesamlphp/simplesamlphp": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "tonicforhealth/behat-parallel-scenario": 20
     },
