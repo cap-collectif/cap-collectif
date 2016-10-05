@@ -19,25 +19,23 @@ done
 echo "Checking media permissions after $(( SECONDS - start )) seconds..."
 chmod -R 777 web/media
 
+echo "Configure simplesamlphp library"
+rm -rf vendor/simplesamlphp/simplesamlphp/config/*
+rm -rf vendor/simplesamlphp/simplesamlphp/metadata/*
+rm -rf vendor/simplesamlphp/simplesamlphp/cert
+php bin/console simplesamlphp:config --env=prod
+
 echo "Checking var permissions after $(( SECONDS - start )) seconds..."
 chown -R capco:capco var
 
 echo "Clearing cache after $(( SECONDS - start )) seconds..."
-su capco <<'EOF'
 rm -rf var/cache/prod
-EOF
 
 echo "Checking if mysql is booted after $(( SECONDS - start )) seconds..."
 while ! mysql --host=127.0.0.1 > /dev/null 2>&1;
   do sleep 0.1
 done
 echo "Mysql is ready after $(( SECONDS - start )) seconds!"
-
-echo "Configure simplesamlphp library"
-rm -rf vendor/simplesamlphp/simplesamlphp/config/*
-rm -rf vendor/simplesamlphp/simplesamlphp/metadata/*
-rm -rf vendor/simplesamlphp/simplesamlphp/cert
-php bin/console simplesamlphp:config --env=prod
 
 echo "Warming up cache and install bundle assets after $(( SECONDS - start )) seconds..."
 su capco <<'EOF'
