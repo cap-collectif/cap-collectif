@@ -63,6 +63,7 @@ class ProposalController extends Controller
                 'Steps',
                 'ThemeDetails',
                 'UserMedias',
+                'VoteThreshold',
             ]))
         ;
 
@@ -80,6 +81,7 @@ class ProposalController extends Controller
                 'ProposalCategories',
                 'ThemeDetails',
                 'ProposalUserData',
+                'VoteThreshold',
             ]))
         ;
 

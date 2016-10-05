@@ -33,6 +33,30 @@
                 toggleVotesHelpTextField(e.target.value === "1" || e.target.value === "2");
                 toggleBudgetField(e.target.value === "2");
             });
+
+            const voteThresholdCheckbox = $("#{{ admin.uniqid }}_hasVoteThreshold");
+            const voteThresholdField = $("#sonata-ba-field-container-{{ admin.uniqid }}_voteThreshold");
+            const voteThresholdInput = $("#{{ admin.uniqid }}_voteThreshold");
+
+            function toggleVoteThresholdField(show) {
+                if (show) {
+                    voteThresholdField.removeClass('hidden');
+                } else {
+                    voteThresholdField.addClass('hidden');
+                }
+            }
+
+            const initialVoteThresholdValue = voteThresholdInput.val();
+            toggleVoteThresholdField(initialVoteThresholdValue > 0);
+
+            voteThresholdCheckbox.on('ifChecked', function(e){
+                toggleVoteThresholdField(true);
+            });
+
+            voteThresholdCheckbox.on('ifUnchecked', function () {
+                toggleVoteThresholdField(false);
+                voteThresholdInput.val(0);
+            });
         });
     </script>
 {% endblock %}

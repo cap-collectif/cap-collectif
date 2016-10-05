@@ -27,7 +27,7 @@ class SelectionStepsController extends FOSRestController
     /**
     * @Get("/selection_steps/{selection_step_id}")
     * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
-    * @View(statusCode=200, serializerGroups={"Statuses", "Steps", "SelectionSteps"})
+    * @View(statusCode=200, serializerGroups={"Statuses", "Steps", "SelectionSteps", "VoteThreshold"})
     */
    public function getBySelectionStepAction(SelectionStep $selectionStep)
    {

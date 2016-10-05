@@ -351,7 +351,7 @@ class OpinionRepository extends EntityRepository
                     // trick in DQL to order NULL values last
                     ->addSelect('-o.position as HIDDEN inversePosition')
                     ->addOrderBy('inversePosition', 'DESC')
-                    //
+
                     ->addSelect('RAND() as HIDDEN rand')
                     ->addOrderBy('rand')
                 ;

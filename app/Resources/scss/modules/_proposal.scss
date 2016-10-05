@@ -51,6 +51,58 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 }
 
+.proposal__page__vote_threshold {
+    padding: 10px;
+    background-color: #f6f6f6;
+    font-size: 100%;
+
+    .proposal__info {
+        padding-top: 10px;
+
+        .cap {
+            font-size: 34px;
+        }
+    }
+
+    &__votes {
+        font-size: 2.2em;
+        text-align: center;
+    }
+
+    &__progressbar {
+        color: $brand-info;
+    }
+
+    .proposal__info:first-child {
+        padding-top: 0;
+    }
+
+    .progress-bar {
+        min-width: 2em;
+        width: 2%;
+    }
+
+    .progress {
+        background-color: #cecece;
+    }
+}
+
+.propopal__vote_threshold {
+    .progress {
+        margin-bottom: 5px;
+    }
+
+    .progress-bar {
+        min-width: 2em;
+        width: 2%;
+    }
+
+    &--no-min-width {
+        .progress-bar {
+        }
+    }
+}
+
 .proposal__status {
     display: block;
     padding: 5px 0;

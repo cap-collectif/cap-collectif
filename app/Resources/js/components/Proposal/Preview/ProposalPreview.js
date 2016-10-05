@@ -9,6 +9,7 @@ import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalStatus from './ProposalStatus';
+import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
 import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
 const ProposalPreview = React.createClass({
@@ -76,17 +77,32 @@ const ProposalPreview = React.createClass({
                 />
               </div>
             </div>
+            {
+              selectionStep.voteThreshold > 0 &&
+              <div style={{ marginTop: '20px' }}>
+                <ProposalVoteThresholdProgressBar
+                  proposal={proposal}
+                  votesCount={proposal.votesCount}
+                  voteThreshold={selectionStep.voteThreshold}
+                  votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, userHasVote)}
+                  selectionStepId={selectionStep ? selectionStep.id : null}
+                />
+              </div>
+            }
           </div>
-          <ProposalStatus
-            proposal={proposal}
-            selectionStepId={selectionStep ? selectionStep.id : null}
-          />
           <ProposalPreviewFooter
             proposal={proposal}
-            showVotes={showAllVotes || voteType !== VOTE_TYPE_DISABLED}
+            showVotes={(showAllVotes || voteType !== VOTE_TYPE_DISABLED) && selectionStep.voteThreshold === 0}
             votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, userHasVote)}
             selectionStepId={selectionStep ? selectionStep.id : null}
           />
+          {
+            selectionStep &&
+            <ProposalStatus
+              proposal={proposal}
+              selectionStepId={selectionStep.id}
+            />
+          }
         </div>
       </Col>
     );

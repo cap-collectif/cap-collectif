@@ -70,8 +70,8 @@ class OauthConnectController extends ConnectController
     /**
      * Connects a user to a given account if the user is logged in and connect is enabled.
      *
-     * @param Request $request The active request.
-     * @param string  $service Name of the resource owner to connect to.
+     * @param Request $request The active request
+     * @param string  $service Name of the resource owner to connect to
      *
      * @throws NotFoundHttpException if features associated to web service are not enabled
      */

@@ -709,6 +709,9 @@ admin:
       updated_at: Mise à jour
       votesHelpText: Informations à propos du vote
       vote_type: Type de vote
+      vote_threshold:
+        checkbox: Définir un seuil à atteindre
+        input: Seuil à atteindre
       verification: Demander la vérification des comptes
       private: Seuls les auteurs peuvent voir leur(s) proposition(s)
     synthesis:

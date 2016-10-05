@@ -33,6 +33,11 @@ const ProposalVoteButtonWrapper = React.createClass({
     return selectionStep && selectionStep.open;
   },
 
+  voteThresholdReached() {
+    const { selectionStep, proposal } = this.props;
+    return selectionStep && selectionStep.voteThreshold <= proposal.votesCount;
+  },
+
   userHasEnoughCredits() {
     const {
       creditsLeft,
@@ -52,7 +57,7 @@ const ProposalVoteButtonWrapper = React.createClass({
         <ProposalVoteButton
           userHasVote={userHasVote}
           onClick={onClick}
-          disabled={!this.selectionStepIsOpen()}
+          disabled={!this.selectionStepIsOpen() || (selectionStep.voteThreshold > 0 && this.voteThresholdReached())}
           style={style}
           className={className}
         />

@@ -10,6 +10,7 @@ import ProposalPageBlog from './ProposalPageBlog';
 import ProposalPageComments from './ProposalPageComments';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalPageMetadata from './ProposalPageMetadata';
+import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
@@ -247,6 +248,12 @@ export const ProposalPage = React.createClass({
                         showNullEstimation={!!votableStep && votableStep.voteType === VOTE_TYPE_BUDGET}
                       />
                       <br />
+                      {
+                        votableStep && votableStep.voteThreshold > 0 &&
+                        <span>
+                          <ProposalPageVoteThreshold proposal={proposal} step={votableStep} /><br />
+                        </span>
+                      }
                       <ProposalPageAdvancement
                         proposal={proposal}
                       />

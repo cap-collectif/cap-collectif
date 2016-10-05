@@ -3,6 +3,7 @@
 /**
  * @Copyright 2015 Aurélien David a.k.a "PretentiouSpyl" <adavid@jolicode.com>
  */
+
 namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
@@ -131,7 +132,7 @@ class ApiContext extends ApplicationContext
      */
     public function iSendSourceRequest($method, $url)
     {
-        $json = <<< EOF
+        $json = <<< 'EOF'
         {
             "link": "http://google.com",
             "title": "Je suis une source",
@@ -148,7 +149,7 @@ EOF;
       */
      public function iSendOpinionRequest($method, $url)
      {
-         $json = <<< EOF
+         $json = <<< 'EOF'
        {
          "title": "Nouveau titre",
          "body": "Mes modifications blablabla"
@@ -162,7 +163,7 @@ EOF;
         */
        public function iSendOpinionLinkRequest($method, $url)
        {
-           $json = <<< EOF
+           $json = <<< 'EOF'
          {
            "title": "Nouveau titre",
            "body": "Mes modifications blablabla",
@@ -177,7 +178,7 @@ EOF;
      */
     public function iSendReportRequest($method, $url)
     {
-        $json = <<< EOF
+        $json = <<< 'EOF'
         {
             "status": 2,
             "body": "Pas très catholique tout ça"
@@ -192,7 +193,7 @@ EOF;
      */
     public function iSendArgumentRequest($method, $url)
     {
-        $json = <<< EOF
+        $json = <<< 'EOF'
         {
             "type": "1",
             "body": "Coucou, je suis un argument !"
@@ -207,7 +208,7 @@ EOF;
      */
     public function iSendUpdateArgumentRequest($method, $url)
     {
-        $json = <<< EOF
+        $json = <<< 'EOF'
         {
             "body": "Je suis un argument modifié."
         }
@@ -221,7 +222,7 @@ EOF;
      */
     public function iSendIdeaRequest($method, $url)
     {
-        $json = <<< EOF
+        $json = <<< 'EOF'
         {
             "title": "Ma nouvelle idée",
             "object": "Tester",
@@ -238,7 +239,7 @@ EOF;
      */
     public function iSendUpdateIdeaRequest($method, $url)
     {
-        $json = <<< EOF
+        $json = <<< 'EOF'
         {
             "title": "Nouveau titre de l'idée.",
             "object": "Tester",
@@ -539,7 +540,7 @@ EOF;
      */
     public function iSendUpdateSynthesisDisplayRulesRequest($method, $url)
     {
-        $json = <<< EOF
+        $json = <<< 'EOF'
         {
             "level": 1
         }

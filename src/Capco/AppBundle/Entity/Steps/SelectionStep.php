@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,6 +17,8 @@ use Capco\AppBundle\Entity\Selection;
  */
 class SelectionStep extends AbstractStep
 {
+    use VoteThresholdTrait;
+
     const VOTE_TYPE_DISABLED = 0;
     const VOTE_TYPE_SIMPLE = 1;
     const VOTE_TYPE_BUDGET = 2;

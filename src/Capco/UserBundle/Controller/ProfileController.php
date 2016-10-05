@@ -56,7 +56,9 @@ class ProfileController extends BaseController
         ;
 
         if ($this->getUser() !== $user) {
-            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) { return $proposal->isVisible(); });
+            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) {
+                return $proposal->isVisible();
+            });
         }
 
         $proposalsProps = $serializer->serialize([
@@ -323,7 +325,9 @@ class ProfileController extends BaseController
         ;
 
         if ($this->getUser() !== $user) {
-            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) { return $proposal->isVisible(); });
+            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) {
+                return $proposal->isVisible();
+            });
         }
 
         $proposalProps = $serializer->serialize([

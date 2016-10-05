@@ -15,6 +15,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class StepAdmin extends Admin
 {
@@ -203,6 +204,17 @@ class StepAdmin extends Admin
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
                     'help' => 'admin.help.step.vote_type',
+                ])
+                ->add('hasVoteThreshold', CheckboxType::class, [
+                    'label' => 'admin.fields.step.vote_threshold.checkbox',
+                    'required' => false,
+                    'mapped' => false,
+                    'data' => $subject->hasVoteThreshold(),
+                ])
+                ->add('voteThreshold', IntegerType::class, [
+                    'label' => 'admin.fields.step.vote_threshold.input',
+                    'required' => false,
+                    'attr' => ['style' => 'width: 200px;'],
                 ])
                 ->add('budget', 'money', [
                     'currency' => 'EUR',

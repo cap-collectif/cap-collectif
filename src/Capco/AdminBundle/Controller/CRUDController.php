@@ -17,7 +17,7 @@ class CRUDController extends Controller
      *
      * @return JsonResponse
      *                      Method from Sonata Admin HelperController used to fetch items in autocompletion.
-     *                      Extended to allow additional conditions in query.
+     *                      Extended to allow additional conditions in query
      */
     protected function retrieveAutocompleteItems(Request $request, $conditions = [])
     {

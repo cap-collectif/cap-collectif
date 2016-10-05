@@ -31,7 +31,7 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
             $elements->where('se.linkedDataClass IS NOT NULL')
                 ->andWhere('se.linkedDataId IS NOT NULL');
         }
-        
+
         $elements->getQuery()->getResult();
 
         foreach ($elements as $el) {

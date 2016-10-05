@@ -771,7 +771,7 @@ class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, 
 
         if ($filter === 'old') {
             usort($connections, function ($a, $b) {
-               return $a->getCreatedAt() > $b->getCreatedAt() ? 1 : -1;
+                return $a->getCreatedAt() > $b->getCreatedAt() ? 1 : -1;
             });
         } elseif ($filter === 'last') {
             usort($connections, function ($a, $b) {

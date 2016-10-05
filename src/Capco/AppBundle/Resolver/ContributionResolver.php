@@ -97,7 +97,9 @@ class ContributionResolver
             $contributor['votes'] += isset($contributor['proposals_votes']) ? $contributor['proposals_votes'] : 0;
         }
 
-        uasort($contributors, function ($a, $b) { return $b['contributions'] + $b['votes'] - $a['contributions'] - $a['votes']; });
+        uasort($contributors, function ($a, $b) {
+            return $b['contributions'] + $b['votes'] - $a['contributions'] - $a['votes'];
+        });
 
         if ($pagination && $page) {
             $contributorsPage = array_slice($contributors, $pagination * $page - $pagination, $pagination, true);
@@ -188,7 +190,9 @@ class ContributionResolver
             $contributor['votes'] += isset($contributor['proposals_votes']) ? $contributor['proposals_votes'] : 0;
         }
 
-        uasort($contributors, function ($a, $b) { return $b['contributions'] + $b['votes'] - $a['contributions'] - $a['votes']; });
+        uasort($contributors, function ($a, $b) {
+            return $b['contributions'] + $b['votes'] - $a['contributions'] - $a['votes'];
+        });
 
         return $contributors;
     }

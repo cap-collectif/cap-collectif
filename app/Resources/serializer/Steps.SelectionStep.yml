@@ -23,3 +23,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
       statuses:
         expose: true
         groups: [Steps, Statuses]
+      voteThreshold:
+        expose: true
+        groups: [VoteThreshold]
+        type: integer
+        serialized_name: voteThreshold

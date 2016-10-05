@@ -49,8 +49,6 @@ class PostComment extends Comment
 
     // ************************ Overriden methods *********************************
 
-    /**
-     */
     public function getRelatedObject()
     {
         return $this->getPost();

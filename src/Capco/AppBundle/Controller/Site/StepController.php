@@ -422,7 +422,7 @@ class StepController extends Controller
             'proposals' => $searchResults['proposals'],
             'count' => $searchResults['count'],
             'showThemes' => $showThemes,
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Statuses', 'ThemeDetails', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias']));
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Statuses', 'ThemeDetails', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias', 'VoteThreshold']));
 
         return [
             'project' => $project,

@@ -61,7 +61,7 @@ function drupal_random_bytes($count)
     return $output;
 }
 
-######
+//#####
 
 /*
  * The standard log2 number of iterations for password stretching. This should
@@ -96,7 +96,7 @@ define('DRUPAL_HASH_LENGTH', 55);
  * An alternative or custom version of this password hashing API may be
  * used by setting the variable password_inc to the name of the PHP file
  * containing replacement user_hash_password(), user_check_password(), and
- * user_needs_new_hash() functions.
+ * user_needs_new_hash() functions
  */
 
 /**
@@ -111,9 +111,9 @@ function _password_itoa64()
  * Encodes bytes into printable base 64 using the *nix standard from crypt().
  *
  * @param $input
- *   The string containing bytes to encode.
+ *   The string containing bytes to encode
  * @param $count
- *   The number of characters (bytes) to encode.
+ *   The number of characters (bytes) to encode
  *
  * @return
  *   Encoded string
@@ -157,10 +157,10 @@ function _password_base64_encode($input, $count)
  *
  * @param $count_log2
  *   Integer that determines the number of iterations used in the hashing
- *   process. A larger value is more secure, but takes more time to complete.
+ *   process. A larger value is more secure, but takes more time to complete
  *
  * @return
- *   A 12 character string containing the iteration count and a random salt.
+ *   A 12 character string containing the iteration count and a random salt
  */
 function _password_generate_salt($count_log2)
 {
@@ -181,10 +181,10 @@ function _password_generate_salt($count_log2)
  *
  * @param $count_log2
  *   Integer that determines the number of iterations used in the hashing
- *   process. A larger value is more secure, but takes more time to complete.
+ *   process. A larger value is more secure, but takes more time to complete
  *
  * @return
- *   Integer within set bounds that is closest to $count_log2.
+ *   Integer within set bounds that is closest to $count_log2
  */
 function _password_enforce_log2_boundaries($count_log2)
 {
@@ -206,16 +206,16 @@ function _password_enforce_log2_boundaries($count_log2)
  * hashes of a large number of plain-text words or strings to find a match.
  *
  * @param $algo
- *   The string name of a hashing algorithm usable by hash(), like 'sha256'.
+ *   The string name of a hashing algorithm usable by hash(), like 'sha256'
  * @param $password
- *   Plain-text password up to 512 bytes (128 to 512 UTF-8 characters) to hash.
+ *   Plain-text password up to 512 bytes (128 to 512 UTF-8 characters) to hash
  * @param $setting
  *   An existing hash or the output of _password_generate_salt().  Must be
- *   at least 12 characters (the settings and salt).
+ *   at least 12 characters (the settings and salt)
  *
  * @return
  *   A string containing the hashed password (and salt) or FALSE on failure.
- *   The return string will be truncated at DRUPAL_HASH_LENGTH characters max.
+ *   The return string will be truncated at DRUPAL_HASH_LENGTH characters max
  */
 function _password_crypt($algo, $password, $setting)
 {
@@ -272,13 +272,13 @@ function _password_get_count_log2($setting)
  * Hash a password using a secure hash.
  *
  * @param $password
- *   A plain-text password.
+ *   A plain-text password
  * @param $count_log2
  *   Optional integer to specify the iteration count. Generally used only during
- *   mass operations where a value less than the default is needed for speed.
+ *   mass operations where a value less than the default is needed for speed
  *
  * @return
- *   A string containing the hashed password (and a salt), or FALSE on failure.
+ *   A string containing the hashed password (and a salt), or FALSE on failure
  */
 function user_hash_password($password, $count_log2 = 0)
 {

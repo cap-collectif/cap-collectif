@@ -49,8 +49,6 @@ class IdeaComment extends Comment
 
     // ************************ Overriden methods *********************************
 
-    /**
-     */
     public function getRelatedObject()
     {
         return $this->getIdea();

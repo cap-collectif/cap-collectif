@@ -230,7 +230,7 @@ class SearchResolver
                 $sortField = 'comments_count';
                 $sortOrder = 'desc';
                 break;
-            default;
+            default:
                 $sortField = '_score';
                 $sortOrder = 'desc';
                 break;

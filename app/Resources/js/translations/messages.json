@@ -695,6 +695,13 @@
       "modal": {
         "title": "Voter pour"
       },
+      "threshold": {
+        "step": "{num, plural, =0{Aucun vote n'est nécessaire} one{# vote est nécessaire} other{# votes sont nécessaires}} pour qu'une proposition atteigne le seuil",
+        "title": "Soutenez cette proposition",
+        "reached": "Objectif atteint",
+        "progress": "Encore {num, plural, =0{0 vote} one{# vote} other{# votes}} pour atteindre {max, plural, =0{0 vote} one{# vote} other{# votes}}",
+        "progress_reached": "{num, plural, =0{0 vote} one{# vote} other{# votes}} atteints {max, plural, =0{0 vote} one{# vote} other{# votes}}"
+      },
       "must_log_in": "Vous devez vous connecter pour pouvoir voter pour cette proposition.",
       "non_authenticated": "Voter sans compte",
       "none": "Aucun vote",

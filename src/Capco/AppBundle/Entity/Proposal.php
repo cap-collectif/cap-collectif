@@ -575,7 +575,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         }, $this->getSelections()->getValues()),
             function ($value) {
                 return $value !== null;
-        });
+            });
 
         return $ids;
     }

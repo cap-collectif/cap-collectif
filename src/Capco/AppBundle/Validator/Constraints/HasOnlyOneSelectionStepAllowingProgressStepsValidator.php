@@ -14,7 +14,9 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintVa
         // Convert a ProjectAbstractStep collection to an AbstractStep collection with phpspec fallback
         // https://github.com/phpspec/phpspec/issues/991
         // TODO: Fixme by removing ProjectAbstractStep and use an AbstractStep collection instead
-        $steps = $value instanceof Collection ? $value->map(function ($pas) { return $pas->getStep(); }) : new ArrayCollection($value);
+        $steps = $value instanceof Collection ? $value->map(function ($pas) {
+            return $pas->getStep();
+        }) : new ArrayCollection($value);
 
         if ($this->hasMoreThanOneSelectionStepAllowingProgressSteps($steps)) {
             $this->context
