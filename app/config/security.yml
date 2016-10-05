@@ -66,7 +66,7 @@ security:
               domain: ~
             logout:
               path: /logout
-              success_handler: simplesamlphp.logout_handler
+              target: /
 
     access_control:
         - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
