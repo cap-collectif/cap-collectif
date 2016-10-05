@@ -20,7 +20,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
     protected $httpUtils;
     protected $toggleManager;
 
-    public function __construct(SimpleSAML_Auth_Simple $samlAuth, string $authAttribute, HttpUtils $httpUtils, Manager $toggleManager)
+    public function __construct(\SimpleSAML_Auth_Simple $samlAuth, string $authAttribute, HttpUtils $httpUtils, Manager $toggleManager)
     {
         $this->samlAuth = $samlAuth;
         $this->authAttribute = $authAttribute;
