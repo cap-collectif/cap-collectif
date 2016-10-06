@@ -1,7 +1,7 @@
 import React from 'react';
 import CountersNav from './CountersNav';
 import StepText from './StepText';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 
 const StepInfos = React.createClass({
   displayName: 'StepInfos',
@@ -20,13 +20,6 @@ const StepInfos = React.createClass({
 
     return (
       <div>
-        {
-          (step.step_type === 'selection' && step.voteThreshold > 0) &&
-          <h4>
-            <i className="cap cap-hand-like-2-1"></i>{' '}
-            <FormattedMessage message={this.getIntlMessage('proposal.vote.threshold.step')} num={step.voteThreshold} />
-          </h4>
-        }
         <div className="step__infos block block--bordered">
           <CountersNav counters={counters} bordered={!!body} />
           <StepText text={body} />
