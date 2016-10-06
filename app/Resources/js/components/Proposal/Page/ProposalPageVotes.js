@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Row, Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { IntlMixin, FormattedMessage } from 'react-intl';
@@ -9,10 +9,10 @@ import { PROPOSAL_VOTES_TO_SHOW } from '../../../constants/ProposalConstants';
 const ProposalPageVotes = React.createClass({
   displayName: 'ProposalPageVotes',
   propTypes: {
-    proposal: React.PropTypes.object.isRequired,
-    stepId: React.PropTypes.number.isRequired,
-    votes: React.PropTypes.object.isRequired,
-    className: React.PropTypes.string,
+    proposal: PropTypes.object.isRequired,
+    stepId: PropTypes.number.isRequired,
+    votes: PropTypes.object.isRequired,
+    className: PropTypes.string,
   },
   mixins: [IntlMixin],
 
@@ -23,13 +23,7 @@ const ProposalPageVotes = React.createClass({
   },
 
   getInitialState() {
-    const {
-      proposal,
-      votes,
-    } = this.props;
     return {
-      votes,
-      votesCount: proposal.votesCount,
       showModal: false,
     };
   },
@@ -49,18 +43,18 @@ const ProposalPageVotes = React.createClass({
   },
 
   render() {
-    const { className } = this.props;
+    const { className, proposal } = this.props;
     const votesToDisplay = this.state.votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
-    const moreVotes = this.state.votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
+    const moreVotes = proposal.votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
 
-    if (!this.state.votesCount) {
+    if (proposal.votesCount <= 0) {
       return <p>{this.getIntlMessage('proposal.vote.none')}</p>;
     }
 
     const classes = {
       proposal__votes: true,
+      [className]: true,
     };
-    classes[className] = true;
 
     return (
       <div className={classNames(classes)}>
@@ -72,9 +66,14 @@ const ProposalPageVotes = React.createClass({
         </h2>
         <Row>
           {
-            votesToDisplay.map((vote, index) => {
-              return <UserBox key={index} user={vote.user} username={vote.username} className="proposal__vote" />;
-            })
+            votesToDisplay.map((vote, index) =>
+              <UserBox
+                key={index}
+                user={vote.user}
+                username={vote.username}
+                className="proposal__vote"
+              />
+            )
           }
         </Row>
         {
@@ -88,7 +87,7 @@ const ProposalPageVotes = React.createClass({
           </Button>
         }
         <AllVotesModal
-          votes={this.state.votes}
+          votes={proposal.votes}
           onToggleModal={this.toggleModal}
           showModal={this.state.showModal}
         />

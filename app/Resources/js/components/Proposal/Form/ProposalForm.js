@@ -272,9 +272,8 @@ const ProposalForm = React.createClass({
     return (
       <form id="proposal-form">
         {
-          form.description
-            ? <FormattedHTMLMessage message={form.description} />
-            : null
+          form.description &&
+              <FormattedHTMLMessage message={form.description} />
         }
           <Input
             id="proposal_title"
@@ -289,11 +288,15 @@ const ProposalForm = React.createClass({
           <Collapse
             in={this.state.suggestions.length > 0}
           >
-              <Panel header={<FormattedMessage
-                        message={this.getIntlMessage('proposal.suggest_header')}
-                        matches={this.state.suggestions.length}
-                        terms={this.state.form.title.split(' ').length}
-              />}>
+              <Panel
+                header={
+                  <FormattedMessage
+                     message={this.getIntlMessage('proposal.suggest_header')}
+                     matches={this.state.suggestions.length}
+                     terms={this.state.form.title.split(' ').length}
+                  />
+                }
+              >
                 <ul style={{ listStyleType: 'none', padding: 0 }}>
                 {
                   this.state.suggestions.slice(0, 5).map(suggest =>
@@ -321,13 +324,11 @@ const ProposalForm = React.createClass({
             >
             <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
             {
-              themes.map((theme) => {
-                return (
-                  <option key={theme.id} value={theme.id}>
-                    {theme.title}
-                  </option>
-                );
-              })
+              themes.map(theme =>
+                <option key={theme.id} value={theme.id}>
+                  {theme.title}
+                </option>
+              )
             }
           </Input>
         }

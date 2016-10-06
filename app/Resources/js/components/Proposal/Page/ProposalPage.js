@@ -27,7 +27,6 @@ export const ProposalPage = React.createClass({
     categories: PropTypes.array.isRequired,
     steps: PropTypes.array.isRequired,
     votableStep: PropTypes.object,
-    user: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
@@ -36,7 +35,6 @@ export const ProposalPage = React.createClass({
     return {
       votableStep: null,
       creditsLeft: null,
-      user: null,
     };
   },
 
@@ -139,6 +137,12 @@ export const ProposalPage = React.createClass({
                             showNullEstimation={!!votableStep && votableStep.voteType === VOTE_TYPE_BUDGET}
                         />
                         <br />
+                        {
+                          votableStep && votableStep.voteThreshold > 0 &&
+                          <span>
+                            <ProposalPageVoteThreshold proposal={proposal} step={votableStep} /><br />
+                          </span>
+                        }
                         <ProposalPageAdvancement
                             proposal={proposal}
                         />
@@ -226,7 +230,6 @@ export const ProposalPage = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    user: state.default.user,
     features: state.default.features,
     proposal: state.proposal.proposals[state.proposal.currentProposalById],
     steps: state.project.projects[state.project.currentProjectById].steps,
