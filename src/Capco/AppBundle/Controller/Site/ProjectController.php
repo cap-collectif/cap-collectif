@@ -401,33 +401,4 @@ class ProjectController extends Controller
 
         return $parameters;
     }
-
-    /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
-     * @Template("CapcoAppBundle:Project:votes_widget.html.twig")
-     *
-     * @param Project $project
-     *
-     * @return array
-     */
-    public function showVotesWidgetAction(Project $project)
-    {
-        $serializer = $this->get('jms_serializer');
-
-        $props = $serializer->serialize([
-            'votableSteps' => $this
-                ->get('capco.proposal_votes.resolver')
-                ->getVotableStepsForProject($project),
-            'image' => $this
-                ->get('capco.site_image.resolver')
-                ->getMedia('image.votes_bar'),
-            'votesPageUrl' => $this->get('router')->generate('app_project_show_user_votes', ['projectSlug' => $project->getSlug()], true),
-            'projectId' => $project->getId(),
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
-
-        return [
-            'props' => $props,
-        ];
-    }
 }
