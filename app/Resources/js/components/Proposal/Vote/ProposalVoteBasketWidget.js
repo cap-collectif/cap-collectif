@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedNumber, FormattedMessage } from 'react-intl';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import { Nav, Navbar, Button, ProgressBar } from 'react-bootstrap';
-import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalVotesHelper from '../../../services/ProposalVotesHelper';
+import { connect } from 'react-redux';
 
 const ProposalVoteBasketWidget = React.createClass({
   propTypes: {
-    projectId: React.PropTypes.number.isRequired,
-    votableSteps: React.PropTypes.array.isRequired,
-    votesPageUrl: React.PropTypes.string.isRequired,
-    image: React.PropTypes.object,
+    projectId: PropTypes.number.isRequired,
+    votableSteps: PropTypes.array.isRequired,
+    votesPageUrl: PropTypes.string.isRequired,
+    image: PropTypes.object,
   },
   mixins: [IntlMixin, DeepLinkStateMixin],
 
@@ -22,19 +22,19 @@ const ProposalVoteBasketWidget = React.createClass({
     };
   },
 
-      // selectedStepId: votableSteps[0].id,
+  getInitialState() {
+    return {
+      selectedStepId: this.props.votableSteps[0].id,
+    };
+  },
 
   render() {
-    return null;
     const {
       image,
       votesPageUrl,
       votableSteps,
     } = this.props;
-    const selectedStep = ArrayHelper.getElementFromArray(
-      this.state.votableSteps,
-      parseInt(this.state.selectedStepId, 10)
-    );
+    const selectedStep = votableSteps.filter(step => step.id === parseInt(this.state.selectedStepId, 10))[0];
     const budget = selectedStep.budget || 0;
     const creditsLeft = selectedStep.creditsLeft || 0;
     const creditsSpent = budget - creditsLeft;
@@ -45,8 +45,8 @@ const ProposalVoteBasketWidget = React.createClass({
     return (
       <Navbar fixedTop className="proposal-vote__widget">
         {
-          image
-          ? <Navbar.Header>
+          image &&
+           <Navbar.Header>
             <Navbar.Brand>
               <img className="widget__image" role="presentation" src={image.url} />
             </Navbar.Brand>
@@ -61,12 +61,11 @@ const ProposalVoteBasketWidget = React.createClass({
               <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%" />
             </li>
           </Navbar.Header>
-          : null
         }
         <Navbar.Collapse>
           <Nav>
             {
-              this.state.votableSteps.length > 1 &&
+              votableSteps.length > 1 &&
                 <li className="navbar-text widget__counter">
                   <p className="widget__counter__label">
                     {this.getIntlMessage('project.votes.widget.step')}
@@ -80,13 +79,11 @@ const ProposalVoteBasketWidget = React.createClass({
                       label={false}
                     >
                       {
-                        this.state.votableSteps.map((step) => {
-                          return (
+                        votableSteps.map(step =>
                             <option key={step.id} value={step.id}>
                               {step.title}
                             </option>
-                          );
-                        })
+                        )
                       }
                     </Input>
                   </span>
@@ -174,4 +171,9 @@ const ProposalVoteBasketWidget = React.createClass({
 
 });
 
-export default ProposalVoteBasketWidget;
+const mapStateToProps = (state) => {
+  return {
+    votableSteps: state.project.projects[state.project.currentProjectById].steps.filter(step => step.votable),
+  };
+};
+export default connect(mapStateToProps)(ProposalVoteBasketWidget);

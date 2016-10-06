@@ -31,6 +31,11 @@ export const CHANGE_FILTER = 'proposal/CHANGE_FILTER';
 
 export const SUBMIT_PROPOSAL_FORM = 'proposal/SUBMIT_PROPOSAL_FORM';
 
+export const CLOSE_DELETE_MODAL = 'proposal/CLOSE_DELETE_MODAL';
+export const OPEN_DELETE_MODAL = 'proposal/OPEN_DELETE_MODAL';
+export const CLOSE_EDIT_MODAL = 'proposal/CLOSE_EDIT_MODAL';
+export const OPEN_EDIT_MODAL = 'proposal/OPEN_EDIT_MODAL';
+
 // this._creditsLeft = 0;
 // this._proposalVotesByStepIds = {};
 // this._votableSteps = [];
@@ -42,9 +47,12 @@ const initialState = {
   currentVoteModal: null,
   showCreateModal: false,
   isCreating: false,
+  showDeleteModal: false,
   isDeleting: false,
   isVoting: false,
   isLoading: true,
+  isEditing: false,
+  showEditModal: false,
   order: 'random',
   filters: {},
   terms: null,
@@ -56,6 +64,30 @@ export const voteSuccess = (proposalId, vote) => {
     type: VOTE_SUCCEEDED,
     proposalId,
     vote,
+  };
+};
+
+export const closeEditProposalModal = () => {
+  return {
+    type: CLOSE_EDIT_MODAL,
+  };
+};
+
+export const openEditProposalModal = () => {
+  return {
+    type: OPEN_EDIT_MODAL,
+  };
+};
+
+export const closeDeleteProposalModal = () => {
+  return {
+    type: CLOSE_DELETE_MODAL,
+  };
+};
+
+export const openDeleteProposalModal = () => {
+  return {
+    type: OPEN_DELETE_MODAL,
   };
 };
 
@@ -125,7 +157,7 @@ export const loadProposals = () => {
   };
 };
 
-export const deleteProposal = (form, proposal) => {
+export const deleteProposal = (form, proposal, dispatch) => {
   return Fetcher
     .delete(`/proposal_forms/${form}/proposals/${proposal}`)
     .then(() => {
@@ -133,6 +165,8 @@ export const deleteProposal = (form, proposal) => {
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'success', content: 'proposal.request.delete.success' },
       });
+      dispatch(closeDeleteProposalModal());
+      window.location.href = proposal._links.index;
     })
     .catch(() => {
       FluxDispatcher.dispatch({
@@ -157,7 +191,7 @@ export const vote = (dispatch, step, proposal, data = {}) => {
   }
   Fetcher.post(url, data)
     .then(json)
-    .then((newVote) => {
+    .then(newVote => {
       dispatch(voteSuccess(proposal.id, newVote));
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
@@ -334,6 +368,14 @@ export const reducer = (state = initialState, action) => {
       return { ...state, terms: action.terms, currentPaginationPage: 1 };
     case SUBMIT_PROPOSAL_FORM:
       return { ...state, isCreating: true };
+    case OPEN_EDIT_MODAL:
+      return { ...state, showEditModal: true };
+    case CLOSE_EDIT_MODAL:
+      return { ...state, showEditModal: false, isEditing: false };
+    case OPEN_DELETE_MODAL:
+      return { ...state, showDeleteModal: true };
+    case CLOSE_DELETE_MODAL:
+      return { ...state, showDeleteModal: false, isDeleting: false };
     case OPEN_CREATE_MODAL:
       return { ...state, showCreateModal: true };
     case CLOSE_CREATE_MODAL:

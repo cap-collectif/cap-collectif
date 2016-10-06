@@ -97,7 +97,7 @@ class SelectionStepsController extends FOSRestController
      * @Post("/selection_steps/{selection_step_id}/proposals/{proposal_id}/votes")
      * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
-     * @View(statusCode=201)
+     * @View(statusCode=200, serializerGroups={"ProposalSelectionVotes", "UsersInfos", "UserMedias"})
      */
     public function voteOnProposalAction(Request $request, SelectionStep $selectionStep, Proposal $proposal)
     {

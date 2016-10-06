@@ -4,6 +4,8 @@ import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
 import { Modal } from 'react-bootstrap';
+import { updateProposal, closeEditProposalModal } from '../../../redux/modules/proposal';
+import { connect } from 'react-redux';
 
 const ProposalEditModal = React.createClass({
   propTypes: {
@@ -11,34 +13,10 @@ const ProposalEditModal = React.createClass({
     categories: PropTypes.array.isRequired,
     proposal: PropTypes.object.isRequired,
     show: PropTypes.bool.isRequired,
-    onToggleModal: PropTypes.func.isRequired,
+    isSubmitting: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
-
-  getInitialState() {
-    return {
-      isSubmitting: false,
-    };
-  },
-
-  close() {
-    const { onToggleModal } = this.props;
-    onToggleModal(false);
-  },
-
-  show() {
-    const { onToggleModal } = this.props;
-    onToggleModal(true);
-  },
-
-  handleSubmit() {
-    // ProposalActions.submit();
-  },
-
-  handleSubmitSuccess() {
-    this.close();
-    location.reload();
-  },
 
   render() {
     const {
@@ -46,13 +24,15 @@ const ProposalEditModal = React.createClass({
       form,
       proposal,
       show,
+      isSubmitting,
+      dispatch,
     } = this.props;
     return (
       <div>
         <Modal
           animation={false}
           show={show}
-          onHide={this.close}
+          onHide={() => { dispatch(closeEditProposalModal()); }}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
@@ -65,19 +45,19 @@ const ProposalEditModal = React.createClass({
             <ProposalForm
               form={form}
               categories={categories}
-              isSubmitting={this.state.isSubmitting}
-              onValidationFailure={this.handleValidationFailure}
-              onSubmitSuccess={this.handleSubmitSuccess}
+              isSubmitting={isSubmitting}
               mode="edit"
               proposal={proposal}
             />
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={this.close} />
+            <CloseButton
+              onClose={() => { dispatch(closeEditProposalModal()); }}
+            />
             <SubmitButton
               id="confirm-proposal-edit"
-              isSubmitting={this.state.isSubmitting}
-              onSubmit={this.handleSubmit}
+              isSubmitting={isSubmitting}
+              onSubmit={() => { updateProposal(dispatch); }}
             />
           </Modal.Footer>
         </Modal>
@@ -87,4 +67,10 @@ const ProposalEditModal = React.createClass({
 
 });
 
-export default ProposalEditModal;
+const mapStateToProps = (state) => {
+  return {
+    show: state.proposal.showEditModal,
+    isSubmitting: state.proposal.isEditing,
+  };
+};
+export default connect(mapStateToProps)(ProposalEditModal);

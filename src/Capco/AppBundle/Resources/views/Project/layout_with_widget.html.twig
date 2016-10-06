@@ -24,7 +24,9 @@
       'position': step.step.position,
       'type': step.step.getType(),
       'showProgressSteps': step.step.allowingProgressSteps|default(false),
-      'statuses': stepStatuses
+      'statuses': stepStatuses,
+      'votable': step.step.isVotable()|default(false),
+      'budget': step.step.budget|default(null)
     }])
     %}
 {% endfor %}

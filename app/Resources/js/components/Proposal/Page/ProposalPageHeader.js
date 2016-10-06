@@ -12,7 +12,6 @@ const ProposalPageHeader = React.createClass({
     proposal: PropTypes.object.isRequired,
     className: PropTypes.string,
     showThemes: PropTypes.bool.isRequired,
-    userHasVote: PropTypes.bool.isRequired,
     onVote: PropTypes.func.isRequired,
     creditsLeft: PropTypes.number,
     step: PropTypes.object,
@@ -31,7 +30,6 @@ const ProposalPageHeader = React.createClass({
     const {
       proposal,
       showThemes,
-      userHasVote,
       creditsLeft,
       step,
       onVote,
@@ -86,7 +84,6 @@ const ProposalPageHeader = React.createClass({
                 step={step}
                 proposal={proposal}
                 creditsLeft={creditsLeft}
-                userHasVote={userHasVote}
                 onClick={onVote}
                 className="visible-xs pull-right"
               />

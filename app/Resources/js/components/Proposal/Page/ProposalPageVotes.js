@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Row, Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { IntlMixin, FormattedMessage } from 'react-intl';
@@ -11,7 +12,8 @@ const ProposalPageVotes = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
     stepId: PropTypes.number.isRequired,
-    votes: PropTypes.object.isRequired,
+    votes: PropTypes.array.isRequired,
+    showModal: PropTypes.bool.isRequired,
     className: PropTypes.string,
   },
   mixins: [IntlMixin],
@@ -22,28 +24,8 @@ const ProposalPageVotes = React.createClass({
     };
   },
 
-  getInitialState() {
-    return {
-      showModal: false,
-    };
-  },
-
-  componentDidMount() {
-    // this.loadProposalVotes();
-  },
-
-  showModal() {
-    this.toggleModal(true);
-  },
-
-  toggleModal(value) {
-    this.setState({
-      showModal: value,
-    });
-  },
-
   render() {
-    const { className, proposal, votes } = this.props;
+    const { className, proposal, votes, showModal } = this.props;
     const votesToDisplay = votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
     const moreVotes = proposal.votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
 
@@ -77,19 +59,19 @@ const ProposalPageVotes = React.createClass({
           }
         </Row>
         {
-          moreVotes
-          && <Button
+          moreVotes &&
+            <Button
               bsStyle="primary"
               onClick={this.showModal}
               className="btn--outline"
-          >
+            >
             {this.getIntlMessage('proposal.vote.show_more')}
           </Button>
         }
         <AllVotesModal
           votes={votes}
           onToggleModal={this.toggleModal}
-          showModal={this.state.showModal}
+          showModal={showModal}
         />
       </div>
     );
@@ -97,4 +79,10 @@ const ProposalPageVotes = React.createClass({
 
 });
 
-export default ProposalPageVotes;
+const mapStateToProps = () => {
+  return {
+    showModal: false,
+    votes: [],
+  };
+};
+export default connect(mapStateToProps)(ProposalPageVotes);

@@ -26,18 +26,6 @@ export default {
   //     });
   // },
 
-  // loadVotableSteps: (projectId) => {
-  //   Fetcher
-  //     .get(`/projects/${projectId}/votable_steps`)
-  //     .then((result) => {
-  //       AppDispatcher.dispatch({
-  //         actionType: RECEIVE_VOTABLE_STEPS,
-  //         votableSteps: result.votableSteps,
-  //       });
-  //       return true;
-  //     });
-  // },
-
   // loadProposalVotesForUser: (projectId) => {
   //   Fetcher
   //     .get(`/projects/${projectId}/user_votes`)
