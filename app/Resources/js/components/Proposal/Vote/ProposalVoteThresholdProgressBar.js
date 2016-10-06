@@ -37,7 +37,7 @@ const ProposalVoteThresholdProgressBar = React.createClass({
         </p>
         <ProgressBar
           min={0}
-          max={voteThreshold}
+          max={votesCount >= voteThreshold ? votesCount : voteThreshold}
           now={votesCount}
           bsStyle="success"
           label={votesCount >= voteThreshold ? this.getIntlMessage('proposal.vote.threshold.reached') : ''}

@@ -37,7 +37,7 @@ const ProposalPageVoteThreshold = React.createClass({
             now={votesPercentage}
             label={`${votesPercentage}%`}
             min={0}
-            max={100}
+            max={votesPercentage > 100 ? votesPercentage : 100}
             bsStyle="success"
           />
           <div>
