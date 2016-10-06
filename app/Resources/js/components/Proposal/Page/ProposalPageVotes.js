@@ -4,8 +4,6 @@ import classNames from 'classnames';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
-import ProposalActions from '../../../actions/ProposalActions';
-import ProposalVoteStore from '../../../stores/ProposalVoteStore';
 import { PROPOSAL_VOTES_TO_SHOW } from '../../../constants/ProposalConstants';
 
 const ProposalPageVotes = React.createClass({
@@ -36,33 +34,8 @@ const ProposalPageVotes = React.createClass({
     };
   },
 
-  componentWillMount() {
-    ProposalVoteStore.addChangeListener(this.onChange);
-  },
-
   componentDidMount() {
     this.loadProposalVotes();
-  },
-
-  componentWillUnmount() {
-    ProposalVoteStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    if (ProposalVoteStore.isProposalVotesListSync) {
-      this.setState({
-        votes: ProposalVoteStore.proposalVotesByStepId(this.props.stepId),
-        votesCount: ProposalVoteStore.votesCountByStepId(this.props.stepId),
-      });
-      return;
-    }
-
-    this.loadProposalVotes();
-  },
-
-  loadProposalVotes() {
-    const { proposal, stepId } = this.props;
-    ProposalActions.loadProposalVotes(stepId, proposal.id);
   },
 
   showModal() {

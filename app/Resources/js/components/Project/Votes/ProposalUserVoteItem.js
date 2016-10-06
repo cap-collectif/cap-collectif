@@ -1,6 +1,5 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import ProposalActions from '../../../actions/ProposalActions';
 import UserLink from '../../User/UserLink';
 import { Button } from 'react-bootstrap';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
@@ -19,10 +18,10 @@ const ProposalUserVoteItem = React.createClass({
       vote,
     } = this.props;
     e.preventDefault();
-    ProposalActions.deleteVote(
-      step.id,
-      vote.proposal.id
-    );
+    // ProposalActions.deleteVote(
+    //   step.id,
+    //   vote.proposal.id
+    // );
   },
 
   render() {

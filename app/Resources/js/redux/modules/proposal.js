@@ -3,33 +3,27 @@ import { takeEvery } from 'redux-saga';
 import { select, call, put } from 'redux-saga/effects';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
+import flatten from 'flat';
 
 export const POSTS_FETCH_REQUESTED = 'proposal/POSTS_FETCH_REQUESTED';
 export const POSTS_FETCH_SUCCEEDED = 'proposal/POSTS_FETCH_SUCCEEDED';
 export const POSTS_FETCH_FAILED = 'proposal/POSTS_FETCH_FAILED';
 export const OPEN_CREATE_MODAL = 'proposal/OPEN_CREATE_MODAL';
 export const CLOSE_CREATE_MODAL = 'proposal/CLOSE_CREATE_MODAL';
-
 export const FETCH_REQUESTED = 'proposal/FETCH_REQUESTED';
 export const FETCH_SUCCEEDED = 'proposal/FETCH_SUCCEEDED';
-
 export const VOTE_REQUESTED = 'proposal/VOTE_REQUESTED';
 export const VOTE_SUCCEEDED = 'proposal/VOTE_SUCCEEDED';
 export const VOTE_FAILED = 'proposal/VOTE_FAILED';
-
 export const OPEN_VOTE_MODAL = 'proposal/OPEN_VOTE_MODAL';
 export const CLOSE_VOTE_MODAL = 'proposal/CLOSE_VOTE_MODAL';
-
 export const VOTES_FETCH_REQUESTED = 'proposal/VOTES_FETCH_REQUESTED';
 export const VOTES_FETCH_SUCCEEDED = 'proposal/VOTES_FETCH_SUCCEEDED';
 export const VOTES_FETCH_FAILED = 'proposal/VOTES_FETCH_FAILED';
-
 export const DELETE_VOTE_REQUESTED = 'proposal/VOTE_REQUESTED';
 export const DELETE_VOTE_SUCCEEDED = 'proposal/DELETE_VOTE_SUCCEEDED';
 export const DELETE_VOTE_FAILED = 'proposal/DELETE_VOTE_FAILED';
-
 export const PROPOSAL_PAGINATION = 50;
-
 export const CHANGE_PAGE = 'proposal/CHANGE_PAGE';
 export const CHANGE_ORDER = 'proposal/CHANGE_ORDER';
 export const CHANGE_TERMS = 'proposal/CHANGE_TERMS';
@@ -37,12 +31,18 @@ export const CHANGE_FILTER = 'proposal/CHANGE_FILTER';
 
 export const SUBMIT_PROPOSAL_FORM = 'proposal/SUBMIT_PROPOSAL_FORM';
 
+// this._creditsLeft = 0;
+// this._proposalVotesByStepIds = {};
+// this._votableSteps = [];
+// this._votesCountByStepId = {};
 const initialState = {
   currentProposalById: null,
   proposals: [],
+  creditsLeft: 0,
   currentVoteModal: null,
   showCreateModal: false,
   isCreating: false,
+  isDeleting: false,
   isVoting: false,
   isLoading: true,
   order: 'random',
@@ -125,6 +125,23 @@ export const loadProposals = () => {
   };
 };
 
+export const deleteProposal = (form, proposal) => {
+  return Fetcher
+    .delete(`/proposal_forms/${form}/proposals/${proposal}`)
+    .then(() => {
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: { bsStyle: 'success', content: 'proposal.request.delete.success' },
+      });
+    })
+    .catch(() => {
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: { bsStyle: 'warning', content: 'proposal.request.delete.failure' },
+      });
+    });
+};
+
 export const vote = (dispatch, step, proposal, data = {}) => {
   let url = '';
   switch (step.step_type) {
@@ -135,7 +152,7 @@ export const vote = (dispatch, step, proposal, data = {}) => {
       url = `/collect_steps/${step.id}/proposals/${proposal.id}/votes`;
       break;
     default:
-      console.log('unknown step');
+      console.log('unknown step'); // eslint-disable-line no-console
       return false;
   }
   Fetcher.post(url, data)
@@ -149,7 +166,7 @@ export const vote = (dispatch, step, proposal, data = {}) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error); // eslint-disable-line no-console
     });
 };
 
@@ -169,7 +186,7 @@ export const deleteVote = (dispatch, step, proposal) => {
       url = `/collect_steps/${step.id}/proposals/${proposal.id}/votes`;
       break;
     default:
-      console.log('unknown step');
+      console.log('unknown step'); // eslint-disable-line no-console
       return false;
   }
   return Fetcher
@@ -189,8 +206,11 @@ export const deleteVote = (dispatch, step, proposal) => {
 };
 
 export const submitProposal = (dispatch, form, data) => {
+  const formData = new FormData();
+  const flattenedData = flatten(data);
+  Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
   return Fetcher
-      .post(`/proposal_forms/${form}/proposals`, data)
+      .postFormData(`/proposal_forms/${form}/proposals`, data)
       .then(() => {
         dispatch(closeCreateModal());
         dispatch(loadProposals());
@@ -209,8 +229,11 @@ export const submitProposal = (dispatch, form, data) => {
 };
 
 export const updateProposal = (dispatch, form, id, data) => {
+  const formData = new FormData();
+  const flattenedData = flatten(data);
+  Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
   return Fetcher
-    .put(`/proposal_forms/${form}/proposals/${id}`, data)
+    .postFormData(`/proposal_forms/${form}/proposals/${id}`, data)
     .then(() => {
       // reload proposal
       FluxDispatcher.dispatch({
@@ -260,7 +283,7 @@ export function* fetchProposals() {
       url = `/selection_steps/${step.id}/proposals/search`;
       break;
     default:
-      console.log('Unknown step type');
+      console.log('Unknown step type'); // eslint-disable-line no-console
       return false;
   }
   url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${state.order}`;
@@ -333,7 +356,13 @@ export const reducer = (state = initialState, action) => {
       proposal.userHasVote = true;
       proposal.votes = previousVotes.push(action.vote);
       proposals[index] = proposal;
-      return { ...state, proposals, isVoting: false, currentVoteModal: null };
+      return {
+        ...state,
+        proposals,
+        isVoting: false,
+        currentVoteModal: null,
+        creditsLeft: state.creditsLeft - (action.vote.estimation || 0),
+      };
     }
     case FETCH_REQUESTED:
       return { ...state, isLoading: true };

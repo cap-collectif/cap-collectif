@@ -10,6 +10,7 @@ import ProposalPrivateField from '../ProposalPrivateField';
 import { Button, Collapse, Panel } from 'react-bootstrap';
 import { debounce } from 'lodash';
 import { submitProposal, updateProposal } from '../../../redux/modules/proposal';
+import { loadSuggestions } from '../../../actions/ProposalActions';
 
 const ProposalForm = React.createClass({
   propTypes: {
@@ -171,8 +172,7 @@ const ProposalForm = React.createClass({
     }));
     if (title.length > 3) {
       this.setState({ isLoadingSuggestions: true });
-      ProposalActions
-        .loadSuggestions(this.props.form.id, title)
+      loadSuggestions(this.props.form.id, title)
         .then(res => {
           if (this.state.form.title === title) { // last request only
             this.setState({
@@ -391,9 +391,9 @@ const ProposalForm = React.createClass({
             const key = `custom-${field.id}`;
             const label = (
               <span>
-              {field.question}
+                {field.question}
                 {!field.required && optional}
-            </span>
+              </span>
             );
             const input = (
               <Input

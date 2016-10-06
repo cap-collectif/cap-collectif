@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
-import ProposalActions from '../../../actions/ProposalActions';
 import { Modal } from 'react-bootstrap';
 
 const ProposalDeleteModal = React.createClass({
   propTypes: {
-    form: React.PropTypes.object.isRequired,
-    proposal: React.PropTypes.object.isRequired,
-    show: React.PropTypes.bool.isRequired,
-    onToggleModal: React.PropTypes.func.isRequired,
+    form: PropTypes.object.isRequired,
+    proposal: PropTypes.object.isRequired,
+    show: PropTypes.bool.isRequired,
+    onToggleModal: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -26,15 +25,14 @@ const ProposalDeleteModal = React.createClass({
       proposal,
     } = this.props;
     this.setState({ isSubmitting: true });
-    ProposalActions
-      .delete(form.id, proposal.id)
-      .then(() => {
-        window.location.href = proposal._links.index;
-      })
-      .catch(() => {
-        this.setState({ isSubmitting: false });
-      })
-    ;
+    // ProposalActions
+    //   .delete(form.id, proposal.id)
+    //   .then(() => {
+    //     window.location.href = proposal._links.index;
+    //   })
+    //   .catch(() => {
+    //     this.setState({ isSubmitting: false });
+    //   })
   },
 
   close() {
@@ -57,7 +55,7 @@ const ProposalDeleteModal = React.createClass({
         <Modal
           animation={false}
           show={show}
-          onHide={this.close.bind(null, this)}
+          onHide={this.close}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
@@ -75,11 +73,11 @@ const ProposalDeleteModal = React.createClass({
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={this.close.bind(null, this)} />
+            <CloseButton onClose={this.close} />
             <SubmitButton
               id="confirm-proposal-delete"
               isSubmitting={this.state.isSubmitting}
-              onSubmit={this.handleSubmit.bind(null, this)}
+              onSubmit={this.handleSubmit}
               label="global.remove"
               bsStyle="danger"
             />

@@ -1,6 +1,4 @@
-import React from 'react';
-import ProposalActions from '../../../actions/ProposalActions';
-import ProposalVoteStore from '../../../stores/ProposalVoteStore';
+import React, { PropTypes } from 'react';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
 import { Table } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
@@ -8,41 +6,15 @@ import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
 const ProposalsUserVotesPage = React.createClass({
   propTypes: {
-    projectId: React.PropTypes.number.isRequired,
-    themes: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
-    votableSteps: React.PropTypes.array.isRequired,
+    projectId: PropTypes.number.isRequired,
+    themes: PropTypes.array.isRequired,
+    districts: PropTypes.array.isRequired,
+    votableSteps: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
-  getInitialState() {
-    const { votableSteps } = this.props;
-    ProposalActions.initVotableSteps(votableSteps);
-    return {
-      votableSteps: ProposalVoteStore.votableSteps,
-    };
-  },
-
-  componentWillMount() {
-    ProposalVoteStore.addChangeListener(this.onVotesChange);
-  },
-
-  componentWillUnmount() {
-    ProposalVoteStore.removeChangeListener(this.onVotesChange);
-  },
-
-  onVotesChange() {
-    const { projectId } = this.props;
-    if (ProposalVoteStore.isVotableStepsSync) {
-      this.setState({
-        votableSteps: ProposalVoteStore.votableSteps,
-      });
-      return;
-    }
-    ProposalActions.loadVotableSteps(projectId);
-  },
-
   render() {
+    const { votableSteps } = this.props;
     return (
       <div>
         <div className="container container--custom text-center">
@@ -50,12 +22,12 @@ const ProposalsUserVotesPage = React.createClass({
         </div>
         <div className="container container--custom">
           {
-            this.state.votableSteps.length > 0
-              ? this.state.votableSteps.map((step, index) => {
+            votableSteps.length > 0
+              ? votableSteps.map((step, index) => {
                 return (
                   <div key={index} className="block">
                     {
-                      this.state.votableSteps.length > 1
+                      votableSteps.length > 1
                       ? <h2>
                           <a className="pull-left btn btn-default" href={step._links.show} style={{ marginRight: '15px' }}>
                             <i className="cap cap-arrow-1-1"></i>
@@ -76,11 +48,10 @@ const ProposalsUserVotesPage = React.createClass({
                         </p>
                     }
                     {
-                      step.votesHelpText
-                      ? <div>
+                      step.votesHelpText &&
+                        <div>
                           <FormattedHTMLMessage message={step.votesHelpText} />
-                      </div>
-                      : null
+                        </div>
                     }
                     <h3>
                       <FormattedMessage

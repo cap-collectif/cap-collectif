@@ -3,8 +3,6 @@ import { IntlMixin } from 'react-intl';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
-import ProposalStore from '../../../stores/ProposalStore';
-import ProposalActions from '../../../actions/ProposalActions';
 import { Modal } from 'react-bootstrap';
 
 const ProposalEditModal = React.createClass({
@@ -21,20 +19,6 @@ const ProposalEditModal = React.createClass({
     return {
       isSubmitting: false,
     };
-  },
-
-  componentWillMount() {
-    ProposalStore.addChangeListener(this.onChange);
-  },
-
-  componentWillUnmount() {
-    ProposalStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    this.setState({
-      isSubmitting: ProposalStore.isProcessing,
-    });
   },
 
   close() {
@@ -56,15 +40,6 @@ const ProposalEditModal = React.createClass({
     location.reload();
   },
 
-  handleValidationFailure() {
-    ProposalActions.validationFailure();
-  },
-
-  reload() {
-    this.setState(this.getInitialState());
-    location.reload();
-  },
-
   render() {
     const {
       categories,
@@ -77,7 +52,7 @@ const ProposalEditModal = React.createClass({
         <Modal
           animation={false}
           show={show}
-          onHide={this.close.bind(null, this)}
+          onHide={this.close}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
@@ -91,14 +66,14 @@ const ProposalEditModal = React.createClass({
               form={form}
               categories={categories}
               isSubmitting={this.state.isSubmitting}
-              onValidationFailure={this.handleValidationFailure.bind(null, this)}
-              onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
+              onValidationFailure={this.handleValidationFailure}
+              onSubmitSuccess={this.handleSubmitSuccess}
               mode="edit"
               proposal={proposal}
             />
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={this.close.bind(null, this)} />
+            <CloseButton onClose={this.close} />
             <SubmitButton
               id="confirm-proposal-edit"
               isSubmitting={this.state.isSubmitting}

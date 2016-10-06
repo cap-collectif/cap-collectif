@@ -1,8 +1,5 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
-import ProposalStore from '../../stores/ProposalStore';
-import ProposalVoteStore from '../../stores/ProposalVoteStore';
-import ProposalActions from '../../actions/ProposalActions';
 import { PROPOSAL_PAGINATION, VOTE_TYPE_DISABLED } from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalList from '../Proposal/List/ProposalList';
@@ -25,77 +22,10 @@ const SelectionStepPage = React.createClass({
   },
   mixins: [IntlMixin],
 
-  getInitialState() {
-    const {
-      count,
-      proposals,
-      step,
-    } = this.props;
-    ProposalActions.initProposals(proposals, count);
-    ProposalActions.initProposalVotes(step.creditsLeft);
-    ProposalActions.changeOrder(step.defaultOrder);
-    return {
-      proposals: ProposalStore.proposals,
-      proposalsCount: ProposalStore.proposalsCount,
-      currentPage: ProposalStore.currentPage,
-      creditsLeft: ProposalVoteStore.creditsLeft,
-      randomOrder: ProposalStore.order === 'random',
-      isLoading: false,
-    };
-  },
-
-  componentWillMount() {
-    ProposalStore.addChangeListener(this.onChange);
-    ProposalVoteStore.addChangeListener(this.onVoteChange);
-  },
-
   componentDidUpdate(prevProps, prevState) {
     if (prevState && (prevState.currentPage !== this.state.currentPage)) {
       this.loadProposals();
     }
-  },
-
-  componentWillUnmount() {
-    ProposalStore.removeChangeListener(this.onChange);
-    ProposalVoteStore.removeChangeListener(this.onVoteChange);
-  },
-
-  onVoteChange() {
-    this.setState({
-      creditsLeft: ProposalVoteStore.creditsLeft,
-    });
-  },
-
-  onChange() {
-    if (!ProposalStore.isProcessing && ProposalStore.isProposalListSync) {
-      this.setState({
-        proposals: ProposalStore.proposals,
-        proposalsCount: ProposalStore.proposalsCount,
-        currentPage: ProposalStore.currentPage,
-        isLoading: false,
-        randomOrder: ProposalStore.order === 'random',
-      });
-      return;
-    }
-
-    this.loadProposals();
-  },
-
-  loadProposals() {
-    const { step } = this.props;
-    this.setState({
-      isLoading: true,
-    });
-    ProposalActions.load('selectionStep', step.id);
-  },
-
-  handleFilterOrOrderChange() {
-    this.setState({ isLoading: true });
-  },
-
-  selectPage(newPage) {
-    this.setState({ isLoading: true });
-    ProposalActions.changePage(newPage);
   },
 
   render() {

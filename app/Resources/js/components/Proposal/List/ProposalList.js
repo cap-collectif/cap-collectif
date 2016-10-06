@@ -4,16 +4,14 @@ import classNames from 'classnames';
 import ProposalPreview from '../Preview/ProposalPreview';
 import { Row } from 'react-bootstrap';
 import VisibilityBox from '../../Utils/VisibilityBox';
-import { connect } from 'react-redux';
 
-export const ProposalList = React.createClass({
+const ProposalList = React.createClass({
   propTypes: {
     proposals: PropTypes.array.isRequired,
     step: PropTypes.object.isRequired,
     creditsLeft: PropTypes.number,
     showAllVotes: PropTypes.bool,
     showThemes: PropTypes.bool,
-    user: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -23,15 +21,12 @@ export const ProposalList = React.createClass({
       step: null,
       showAllVotes: false,
       showThemes: false,
-      user: null,
     };
   },
 
   render() {
     const {
       creditsLeft,
-      selectionStep,
-      proposals,
       step,
       showAllVotes,
       showThemes,
@@ -71,7 +66,7 @@ export const ProposalList = React.createClass({
                   <ProposalPreview
                     key={proposal.id}
                     proposal={proposal}
-                    selectionStep={selectionStep}
+                    step={step}
                     creditsLeft={creditsLeft}
                     showAllVotes={showAllVotes}
                     showThemes={showThemes}
@@ -91,7 +86,7 @@ export const ProposalList = React.createClass({
                       <ProposalPreview
                         key={proposal.id}
                         proposal={proposal}
-                        selectionStep={selectionStep}
+                        step={step}
                         creditsLeft={creditsLeft}
                         showAllVotes={showAllVotes}
                         showThemes={showThemes}
@@ -101,28 +96,10 @@ export const ProposalList = React.createClass({
               }
             </Row>
           </VisibilityBox>
-          proposals.map((proposal) => {
-            return (
-              <ProposalPreview
-                key={proposal.id}
-                proposal={proposal}
-                step={step}
-                creditsLeft={creditsLeft}
-                showAllVotes={showAllVotes}
-                showThemes={showThemes}
-              />
-            );
-          })
-        }
+      }
       </div>
     );
   },
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.default.user,
-  };
-};
-
-export default connect(mapStateToProps)(ProposalList);
+export default ProposalList;

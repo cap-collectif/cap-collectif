@@ -22,9 +22,17 @@ class ProposalSerializationListener extends AbstractSerializationListener
     private $proposalCollectVoteRepository;
     private $responseRepository;
     private $mediaExtension;
-    protected $serializer;
+    private $serializer;
 
-    public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage, ProposalSelectionVoteRepository $proposalSelectionVoteRepository, ResponseRepository $responseRepository, Serializer $serializer, ProposalCollectVoteRepository $proposalCollectVoteRepository)
+    public function __construct(
+      RouterInterface $router,
+      TokenStorageInterface $tokenStorage,
+      ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+      AbstractResponseRepository $responseRepository,
+      $mediaExtension,
+      Serializer $serializer,
+      ProposalCollectVoteRepository $proposalCollectVoteRepository
+    )
     {
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;

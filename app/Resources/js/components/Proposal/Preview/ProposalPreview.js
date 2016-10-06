@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Col } from 'react-bootstrap';
 import classNames from 'classnames';
@@ -14,34 +14,19 @@ import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/Proposa
 
 const ProposalPreview = React.createClass({
   propTypes: {
-    proposal: React.PropTypes.object.isRequired,
-    step: React.PropTypes.object.isRequired,
-    creditsLeft: React.PropTypes.number,
-    showAllVotes: React.PropTypes.bool,
-    showThemes: React.PropTypes.bool,
+    proposal: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
+    showAllVotes: PropTypes.bool,
+    showThemes: PropTypes.bool,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       step: null,
-      creditsLeft: null,
       showAllVotes: false,
       showThemes: false,
     };
-  },
-
-  getInitialState() {
-    const { proposal } = this.props;
-    return {
-      userHasVote: proposal.userHasVote || false,
-    };
-  },
-
-  onVoteChange() {
-    this.setState({
-      userHasVote: !this.state.userHasVote,
-    });
   },
 
   render() {
@@ -56,7 +41,6 @@ const ProposalPreview = React.createClass({
       box: true,
       'bg-vip': proposal.author && proposal.author.vip,
     });
-    const { userHasVote } = this.state;
 
     return (
       <Col componentClass="li" xs={12} sm={6} md={4}>
@@ -72,37 +56,37 @@ const ProposalPreview = React.createClass({
               <div>
                 <ProposalPreviewVote
                   {...this.props}
-                  userHasVote={userHasVote}
+                  userHasVote={proposal.userHasVote}
                   onVoteChange={this.onVoteChange}
                 />
               </div>
             </div>
             {
-              selectionStep && selectionStep.voteThreshold > 0 &&
+              step.voteThreshold > 0 &&
               <div style={{ marginTop: '20px' }}>
                 <ProposalVoteThresholdProgressBar
                   proposal={proposal}
                   votesCount={proposal.votesCount}
-                  voteThreshold={selectionStep.voteThreshold}
-                  votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, userHasVote)}
-                  selectionStepId={selectionStep ? selectionStep.id : null}
+                  voteThreshold={step.voteThreshold}
+                  votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, proposal.userHasVote)}
+                  stepId={step ? step.id : null}
                 />
               </div>
             }
           </div>
           <ProposalStatus
             proposal={proposal}
-            selectionStepId={step ? step.id : null}
+            stepId={step ? step.id : null}
           />
           <ProposalPreviewFooter
             proposal={proposal}
-            showVotes={(showAllVotes || voteType !== VOTE_TYPE_DISABLED) && selectionStep.voteThreshold === 0}
-            votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, userHasVote)}
+            showVotes={(showAllVotes || voteType !== VOTE_TYPE_DISABLED) && step.voteThreshold === 0}
+            votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, proposal.userHasVote)}
             stepId={step ? step.id : null}
           />
           <ProposalStatus
             proposal={proposal}
-            selectionStepId={selectionStep ? selectionStep.id : null}
+            stepId={step ? step.id : null}
           />
         </div>
       </Col>

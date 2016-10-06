@@ -149,12 +149,9 @@ export const ProposalPage = React.createClass({
                     <ProposalPageComments
                         form={form}
                         categories={categories}
-                        userHasVote={userHasVote}
                         selectionStep={votableStep}
-                        creditsLeft={creditsLeft}
                         onVote={this.voteAction}
-                      />
-                    </Col>
+                    />
                     <Col xs={12} sm={4}>
                       <ProposalPageMetadata
                         proposal={proposal}
@@ -173,7 +170,6 @@ export const ProposalPage = React.createClass({
                         proposal={proposal}
                       />
                     </Col>
-                  </Row>
                 </Tab.Pane>
                 <Tab.Pane eventKey="comments">
                   <ProposalPageComments
@@ -181,14 +177,6 @@ export const ProposalPage = React.createClass({
                     id={proposal.id}
                   />
                 </Tab.Pane>
-                {
-                  showVotesTab
-                  && <Tab.Pane eventKey="votes">
-                    <ProposalPageVotes
-                      proposal={proposal}
-                      id={proposal.id}
-                    />
-                  </Tab.Pane>
                   {
                     showVotesTab
                     && <Tab.Pane eventKey="votes">
