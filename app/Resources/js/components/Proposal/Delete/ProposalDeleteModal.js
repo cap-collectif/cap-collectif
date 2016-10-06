@@ -53,7 +53,7 @@ const ProposalDeleteModal = React.createClass({
             <SubmitButton
               id="confirm-proposal-delete"
               isSubmitting={isDeleting}
-              onSubmit={() => { deleteProposal(form.id, proposal.id, dispatch); }}
+              onSubmit={() => { deleteProposal(form.id, proposal, dispatch); }}
               label="global.remove"
               bsStyle="danger"
             />

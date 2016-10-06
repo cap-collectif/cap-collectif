@@ -35,7 +35,8 @@ export const CLOSE_DELETE_MODAL = 'proposal/CLOSE_DELETE_MODAL';
 export const OPEN_DELETE_MODAL = 'proposal/OPEN_DELETE_MODAL';
 export const CLOSE_EDIT_MODAL = 'proposal/CLOSE_EDIT_MODAL';
 export const OPEN_EDIT_MODAL = 'proposal/OPEN_EDIT_MODAL';
-
+export const CANCEL_SUBMIT_PROPOSAL = 'proposal/CANCEL_SUBMIT_PROPOSAL';
+const DELETE_REQUEST = 'proposal/DELETE_REQUEST';
 // this._creditsLeft = 0;
 // this._proposalVotesByStepIds = {};
 // this._votableSteps = [];
@@ -103,6 +104,12 @@ export const openCreateModal = () => {
   };
 };
 
+export const cancelSubmitProposal = () => {
+  return {
+    type: CANCEL_SUBMIT_PROPOSAL,
+  };
+};
+
 export const closeCreateModal = () => {
   return {
     type: CLOSE_CREATE_MODAL,
@@ -158,15 +165,16 @@ export const loadProposals = () => {
 };
 
 export const deleteProposal = (form, proposal, dispatch) => {
+  dispatch({ type: DELETE_REQUEST });
   return Fetcher
-    .delete(`/proposal_forms/${form}/proposals/${proposal}`)
+    .delete(`/proposal_forms/${form}/proposals/${proposal.id}`)
     .then(() => {
+      dispatch(closeDeleteProposalModal());
+      window.location.href = proposal._links.index;
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'success', content: 'proposal.request.delete.success' },
       });
-      dispatch(closeDeleteProposalModal());
-      window.location.href = proposal._links.index;
     })
     .catch(() => {
       FluxDispatcher.dispatch({
@@ -242,9 +250,11 @@ export const deleteVote = (dispatch, step, proposal) => {
 export const submitProposal = (dispatch, form, data) => {
   const formData = new FormData();
   const flattenedData = flatten(data);
-  Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
+  Object.keys(flattenedData).map(key => {
+    formData.append(key, flattenedData[key]);
+  });
   return Fetcher
-      .postFormData(`/proposal_forms/${form}/proposals`, data)
+      .postFormData(`/proposal_forms/${form}/proposals`, formData)
       .then(() => {
         dispatch(closeCreateModal());
         dispatch(loadProposals());
@@ -254,6 +264,7 @@ export const submitProposal = (dispatch, form, data) => {
         });
       })
       .catch(() => {
+        dispatch(cancelSubmitProposal());
         FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'warning', content: 'proposal.request.create.failure' },
@@ -368,6 +379,8 @@ export const reducer = (state = initialState, action) => {
       return { ...state, terms: action.terms, currentPaginationPage: 1 };
     case SUBMIT_PROPOSAL_FORM:
       return { ...state, isCreating: true };
+    case CANCEL_SUBMIT_PROPOSAL:
+      return { ...state, isCreating: false };
     case OPEN_EDIT_MODAL:
       return { ...state, showEditModal: true };
     case CLOSE_EDIT_MODAL:
@@ -405,6 +418,8 @@ export const reducer = (state = initialState, action) => {
         creditsLeft: state.creditsLeft - (action.vote.estimation || 0),
       };
     }
+    case DELETE_REQUEST:
+      return { ...state, isDeleting: true };
     case FETCH_REQUESTED:
       return { ...state, isLoading: true };
     case FETCH_SUCCEEDED:
