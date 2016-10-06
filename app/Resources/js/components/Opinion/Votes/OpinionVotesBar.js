@@ -21,13 +21,13 @@ const OpinionVotesBar = React.createClass({
 
     return (
       <div>
-        {this.getOpinionType().votesThreshold
-          ? <VotesBar
+        {
+          this.getOpinionType().votesThreshold &&
+            <VotesBar
               max={this.getOpinionType().votesThreshold}
               value={opinion.votes_ok}
               helpText={this.getOpinionType().votesThresholdHelpText}
-          />
-          : null
+            />
         }
         <div style={{ paddingTop: '20px' }}>
           {

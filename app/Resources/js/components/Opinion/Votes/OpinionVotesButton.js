@@ -2,17 +2,18 @@ import React, { PropTypes } from 'react';
 import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-
-import OpinionActions from '../../../actions/OpinionActions';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import { Button } from 'react-bootstrap';
+import { deleteVoteVersion, deleteVoteOpinion, voteOpinion, voteVersion } from '../../../redux/modules/opinion';
 
 export const OpinionVotesButton = React.createClass({
   propTypes: {
     style: PropTypes.object,
     opinion: PropTypes.object.isRequired,
     value: PropTypes.oneOf([-1, 0, 1]).isRequired,
+    active: PropTypes.bool.isRequired,
     disabled: PropTypes.bool,
+    dispatch: PropTypes.func.isRequired,
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
@@ -30,29 +31,21 @@ export const OpinionVotesButton = React.createClass({
     return !!opinion.parent;
   },
 
-  isCurrentVote() {
-    const {
-      opinion,
-      value,
-    } = this.props;
-    return value === opinion.user_vote;
-  },
-
   vote() {
-    const { user, opinion, value } = this.props;
+    const { opinion, value, dispatch } = this.props;
     if (this.isVersion()) {
-      OpinionActions.vote({ value }, opinion.id, opinion.parent.id, user);
+      voteVersion({ value }, opinion.id, opinion.parent.id, dispatch);
     } else {
-      OpinionActions.vote({ value }, opinion.id, null, user);
+      voteOpinion({ value }, opinion.id, dispatch);
     }
   },
 
   deleteVote() {
-    const { user, opinion } = this.props;
+    const { opinion, dispatch } = this.props;
     if (this.isVersion()) {
-      OpinionActions.deleteVote(opinion.id, opinion.parent.id, user);
+      deleteVoteVersion(opinion.id, opinion.parent.id, dispatch);
     } else {
-      OpinionActions.deleteVote(opinion.id, null, user);
+      deleteVoteOpinion(opinion.id, dispatch);
     }
   },
 
@@ -60,11 +53,12 @@ export const OpinionVotesButton = React.createClass({
     const {
       disabled,
       user,
+      active,
     } = this.props;
     if (!user || disabled) {
       return null;
     }
-    return this.isCurrentVote() ? this.deleteVote() : this.vote();
+    return active ? this.deleteVote() : this.vote();
   },
 
   voteIsEnabled() {
@@ -110,6 +104,7 @@ export const OpinionVotesButton = React.createClass({
       disabled,
       style,
       value,
+      active,
     } = this.props;
     const data = this.data[value];
     return (
@@ -119,8 +114,12 @@ export const OpinionVotesButton = React.createClass({
           bsStyle={data.style}
           className="btn--outline"
           onClick={this.voteAction}
-          active={this.isCurrentVote()}
-          aria-label={this.isCurrentVote() ? this.getIntlMessage(`vote.aria_label_active.${data.str}`) : this.getIntlMessage(`vote.aria_label.${data.str}`)}
+          active={active}
+          aria-label={
+            active
+            ? this.getIntlMessage(`vote.aria_label_active.${data.str}`)
+            : this.getIntlMessage(`vote.aria_label.${data.str}`)
+          }
           disabled={disabled}
         >
           <i className={data.icon}></i>
@@ -132,10 +131,14 @@ export const OpinionVotesButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+  const vote = props.opinion.parent
+    ? state.opinion.versions[props.opinion.id].user_vote
+    : state.opinion.opinions[props.opinion.id].user_vote;
   return {
     features: state.default.features,
     user: state.default.user,
+    active: vote !== null && vote === props.value,
   };
 };
 

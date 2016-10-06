@@ -66,53 +66,6 @@ export default {
     return votes;
   },
 
-  vote: (data, opinion, parent, user, successMessage = 'opinion.request.create_vote.success', errorMessage = 'opinion.request.failure') => {
-    AppDispatcher.dispatch({
-      actionType: CREATE_OPINION_VOTE,
-      value: data.value,
-      user,
-    });
-    const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
-    return Fetcher
-    .put(url, data)
-    .then(() => {
-      AppDispatcher.dispatch({
-        actionType: UPDATE_OPINION_SUCCESS,
-        message: successMessage,
-      });
-      return true;
-    })
-    .catch(() => {
-      AppDispatcher.dispatch({
-        actionType: UPDATE_OPINION_FAILURE,
-        message: errorMessage,
-      });
-    });
-  },
-
-  deleteVote: (opinion, parent, user, successMessage = 'opinion.request.delete_vote.success', errorMessage = 'opinion.request.failure') => {
-    AppDispatcher.dispatch({
-      actionType: DELETE_OPINION_VOTE,
-      user,
-    });
-    const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
-    return Fetcher
-      .delete(url)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_OPINION_SUCCESS,
-          message: successMessage,
-        });
-        return true;
-      })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_OPINION_FAILURE,
-          message: errorMessage,
-        });
-      });
-  },
-
   // Create or update versions
 
   createVersion: (opinion, data) => {

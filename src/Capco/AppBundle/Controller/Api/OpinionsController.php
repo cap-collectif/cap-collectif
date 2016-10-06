@@ -253,7 +253,7 @@ class OpinionsController extends FOSRestController
      * @Put("/opinions/{id}/votes")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
      * @ParamConverter("vote", converter="fos_rest.request_body")
-     * @View(statusCode=204, serializerGroups={})
+     * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */
     public function putOpinionVoteAction(Opinion $opinion, OpinionVote $vote, ConstraintViolationListInterface $validationErrors)
     {
@@ -679,7 +679,7 @@ class OpinionsController extends FOSRestController
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
      * @ParamConverter("vote", converter="fos_rest.request_body")
-     * @View(statusCode=204, serializerGroups={})
+     * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos", "UserMedias"})
      */
     public function putOpinionVersionVoteAction(Opinion $opinion, OpinionVersion $version, OpinionVersionVote $vote, ConstraintViolationListInterface $validationErrors)
     {

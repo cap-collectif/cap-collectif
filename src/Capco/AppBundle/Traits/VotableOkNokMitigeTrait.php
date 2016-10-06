@@ -63,12 +63,12 @@ trait VotableOkNokMitigeTrait
     public function getVoteValueByUser(User $user)
     {
         foreach ($this->votes as $vote) {
-            if ($vote->getUser() === $user && $vote->isConfirmed()) {
+            if ($vote->getUser() === $user) {
                 return $vote->getValue();
             }
         }
 
-        return;
+        return null;
     }
 
     public function resetVotes()

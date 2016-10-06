@@ -20,6 +20,20 @@
     {{ parent() }} - {{ version.title }}
 {% endblock %}
 
+{% block reduxStore %}
+  {% set initialState = {
+    'opinion': {
+      'currentVersionById': version.id,
+      'versions': {
+        (version.id) : {
+          'user_vote': version.getVoteValueByUser(app.user)
+        }
+      }
+    }
+  } %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState} %}
+{% endblock %}
+
 {% block content %}
     {{ react_intl_component('OpinionPageApp', {
       'props': {'opinionId': opinion.id, 'versionId': version.id},
