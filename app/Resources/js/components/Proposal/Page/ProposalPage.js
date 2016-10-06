@@ -13,7 +13,7 @@ import ProposalPageMetadata from './ProposalPageMetadata';
 import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
-import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_DISABLED, VOTE_TYPE_SIMPLE, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalStore from '../../../stores/ProposalStore';
 import ProposalVoteStore from '../../../stores/ProposalVoteStore';
 import ProposalActions from '../../../actions/ProposalActions';
@@ -249,7 +249,7 @@ export const ProposalPage = React.createClass({
                       />
                       <br />
                       {
-                        votableStep && votableStep.voteThreshold > 0 &&
+                        votableStep && votableStep.voteType === VOTE_TYPE_SIMPLE && votableStep.voteThreshold > 0 &&
                         <span>
                           <ProposalPageVoteThreshold proposal={proposal} step={votableStep} /><br />
                         </span>
