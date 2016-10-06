@@ -700,7 +700,7 @@
         "title": "Soutenez cette proposition",
         "reached": "Objectif atteint",
         "progress": "Encore {num, plural, =0{0 vote} one{# vote} other{# votes}} pour atteindre {max, plural, =0{0 vote} one{# vote} other{# votes}}",
-        "progress_reached": "{num, plural, =0{0 vote} one{# vote} other{# votes}} atteints {max, plural, =0{0 vote} one{# vote} other{# votes}}"
+        "progress_reached": "{num, plural, =0{0 vote} one{# vote} other{# votes}} atteints sur {max, plural, =0{0 vote} one{# vote} other{# votes}}"
       },
       "must_log_in": "Vous devez vous connecter pour pouvoir voter pour cette proposition.",
       "non_authenticated": "Voter sans compte",

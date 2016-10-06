@@ -18,14 +18,14 @@ const ProposalPageVoteThreshold = React.createClass({
 
     return (
       <div className="proposal__page__vote_threshold">
-        <div className="proposal__infos">
-          <h5>
+        <div className="proposal__infos" style={{ marginTop: '-15px' }}>
+          <h4>
             {
               votesPercentage >= 100
                 ? this.getIntlMessage('proposal.vote.threshold.reached')
                 : this.getIntlMessage('proposal.vote.threshold.title')
             }
-          </h5>
+          </h4>
           <p className="proposal__page__vote_threshold__votes">
             <i className="cap cap-hand-like-2-1"></i>{' '}
             <FormattedMessage

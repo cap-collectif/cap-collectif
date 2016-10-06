@@ -3,11 +3,35 @@
 {% block form %}
     {{ parent() }}
     <script type="text/javascript">
-        $(document).ready( function() {
+        $(document).ready(function () {
 
             const voteTypeField = $("#{{ admin.uniqid }}_voteType");
             const votesHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_votesHelpText");
             const budgetField = $("#sonata-ba-field-container-{{ admin.uniqid }}_budget");
+            const voteThresholdCheckboxField = $("#sonata-ba-field-container-{{ admin.uniqid }}_hasVoteThreshold");
+            const voteThresholdCheckbox = $("#{{ admin.uniqid }}_hasVoteThreshold");
+            const voteThresholdField = $("#sonata-ba-field-container-{{ admin.uniqid }}_voteThreshold");
+            const voteThresholdInput = $("#{{ admin.uniqid }}_voteThreshold");
+
+            function toggleVoteThresholdField(show) {
+                if (show) {
+                    voteThresholdField.removeClass('hidden');
+                } else {
+                    voteThresholdField.addClass('hidden');
+                }
+            }
+
+            function toggleVoteThresholdSection(show) {
+                if (show) {
+                    voteThresholdCheckboxField.removeClass('hidden');
+                } else {
+                    toggleVoteThresholdField(false);
+                    voteThresholdInput.val(0);
+                    voteThresholdCheckbox.iCheck('uncheck');
+                    voteThresholdCheckboxField.addClass('hidden');
+                }
+
+            }
 
             function toggleVotesHelpTextField(show) {
                 if (show) {
@@ -28,28 +52,18 @@
             const initialValue = voteTypeField.val();
             toggleVotesHelpTextField(initialValue === "1" || initialValue === "2");
             toggleBudgetField(initialValue === "2");
+            toggleVoteThresholdSection(initialValue === "1");
 
-            voteTypeField.on('change', function(e) {
+            voteTypeField.on('change', function (e) {
                 toggleVotesHelpTextField(e.target.value === "1" || e.target.value === "2");
                 toggleBudgetField(e.target.value === "2");
+                toggleVoteThresholdSection(e.target.value === "1");
             });
-
-            const voteThresholdCheckbox = $("#{{ admin.uniqid }}_hasVoteThreshold");
-            const voteThresholdField = $("#sonata-ba-field-container-{{ admin.uniqid }}_voteThreshold");
-            const voteThresholdInput = $("#{{ admin.uniqid }}_voteThreshold");
-
-            function toggleVoteThresholdField(show) {
-                if (show) {
-                    voteThresholdField.removeClass('hidden');
-                } else {
-                    voteThresholdField.addClass('hidden');
-                }
-            }
 
             const initialVoteThresholdValue = voteThresholdInput.val();
             toggleVoteThresholdField(initialVoteThresholdValue > 0);
 
-            voteThresholdCheckbox.on('ifChecked', function(e){
+            voteThresholdCheckbox.on('ifChecked', function () {
                 toggleVoteThresholdField(true);
             });
 
