@@ -32,7 +32,7 @@ const ProposalEditModal = React.createClass({
   },
 
   handleSubmit() {
-    ProposalActions.submit();
+    // ProposalActions.submit();
   },
 
   handleSubmitSuccess() {

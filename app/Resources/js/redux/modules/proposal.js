@@ -249,25 +249,24 @@ export const updateProposal = (dispatch, form, id, data) => {
     });
 };
 
-
-export function* fetchAllVotes(action) {
-  // try {
-  //   let hasMore = true;
-  //   let iterationCount = 0;
-  //   const votesPerIteration = 50;
-  //   while (hasMore) {
-  //     const result = yield call(
-  //       Fetcher.get,
-  //       `/ideas/${action.ideaId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
-  //     );
-  //     hasMore = result.hasMore;
-  //     iterationCount++;
-  //     yield put({ type: VOTES_FETCH_SUCCEEDED, votes: result.votes, ideaId: action.ideaId });
-  //   }
-  // } catch (e) {
-  //   yield put({ type: VOTES_FETCH_FAILED, error: e });
-  // }
-}
+// export function* fetchAllVotes(action) {
+//   // try {
+//   //   let hasMore = true;
+//   //   let iterationCount = 0;
+//   //   const votesPerIteration = 50;
+//   //   while (hasMore) {
+//   //     const result = yield call(
+//   //       Fetcher.get,
+//   //       `/ideas/${action.ideaId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
+//   //     );
+//   //     hasMore = result.hasMore;
+//   //     iterationCount++;
+//   //     yield put({ type: VOTES_FETCH_SUCCEEDED, votes: result.votes, ideaId: action.ideaId });
+//   //   }
+//   // } catch (e) {
+//   //   yield put({ type: VOTES_FETCH_FAILED, error: e });
+//   // }
+// }
 
 export function* fetchProposals() {
   const globalState = yield select();

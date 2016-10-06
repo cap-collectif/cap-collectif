@@ -153,7 +153,7 @@ export const ProposalPage = React.createClass({
                     <ProposalPageComments
                         form={form}
                         categories={categories}
-                        selectionStep={votableStep}
+                        step={votableStep}
                         onVote={this.voteAction}
                     />
                     <Col xs={12} sm={4}>

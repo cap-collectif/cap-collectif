@@ -20,10 +20,10 @@ const ProposalDeleteModal = React.createClass({
   },
 
   handleSubmit() {
-    const {
-      form,
-      proposal,
-    } = this.props;
+    // const {
+    //   form,
+    //   proposal,
+    // } = this.props;
     this.setState({ isSubmitting: true });
     // ProposalActions
     //   .delete(form.id, proposal.id)

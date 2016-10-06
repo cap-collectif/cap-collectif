@@ -29,7 +29,7 @@ const ProposalPageVotes = React.createClass({
   },
 
   componentDidMount() {
-    this.loadProposalVotes();
+    // this.loadProposalVotes();
   },
 
   showModal() {
@@ -43,8 +43,8 @@ const ProposalPageVotes = React.createClass({
   },
 
   render() {
-    const { className, proposal } = this.props;
-    const votesToDisplay = this.state.votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
+    const { className, proposal, votes } = this.props;
+    const votesToDisplay = votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
     const moreVotes = proposal.votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
 
     if (proposal.votesCount <= 0) {
@@ -61,7 +61,7 @@ const ProposalPageVotes = React.createClass({
         <h2>
           <FormattedMessage
             message={this.getIntlMessage('proposal.vote.count')}
-            num={this.state.votesCount}
+            num={0}
           />
         </h2>
         <Row>
@@ -87,7 +87,7 @@ const ProposalPageVotes = React.createClass({
           </Button>
         }
         <AllVotesModal
-          votes={proposal.votes}
+          votes={votes}
           onToggleModal={this.toggleModal}
           showModal={this.state.showModal}
         />

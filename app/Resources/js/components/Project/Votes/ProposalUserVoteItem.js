@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import UserLink from '../../User/UserLink';
 import { Button } from 'react-bootstrap';
@@ -7,16 +7,12 @@ import ProposalDetailsEstimation from '../../Proposal/Detail/ProposalDetailEstim
 
 const ProposalUserVoteItem = React.createClass({
   propTypes: {
-    vote: React.PropTypes.object.isRequired,
-    step: React.PropTypes.object.isRequired,
+    vote: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
   handleClick(e) {
-    const {
-      step,
-      vote,
-    } = this.props;
     e.preventDefault();
     // ProposalActions.deleteVote(
     //   step.id,
