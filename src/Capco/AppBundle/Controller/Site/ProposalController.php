@@ -35,20 +35,6 @@ class ProposalController extends Controller
             ->getFirstVotableStepForProposal($proposal)
         ;
 
-        $userHasVote = false;
-        if ($this->getUser() && $firstVotableStep) {
-            $userVote = $em
-                ->getRepository('CapcoAppBundle:ProposalSelectionVote')
-                ->findOneBy([
-                    'selectionStep' => $firstVotableStep,
-                    'user' => $this->getUser(),
-                    'proposal' => $proposal,
-                ]);
-            if ($userVote) {
-                $userHasVote = true;
-            }
-        }
-
         $proposalForm = $currentStep->getProposalForm();
         $props = $serializer->serialize([
             'form' => $proposalForm,
