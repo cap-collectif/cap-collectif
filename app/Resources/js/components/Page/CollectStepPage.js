@@ -114,7 +114,7 @@ export const CollectStepPage = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    proposals: state.proposal.proposals,
+    proposals: Object.values(state.proposal.proposalsById),
     currentPage: state.proposal.currentPaginationPage,
     randomOrder: state.proposal.order === 'random',
     isLoading: state.proposal.isLoading,

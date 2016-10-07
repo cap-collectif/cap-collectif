@@ -17,6 +17,7 @@ const ProposalVoteButton = React.createClass({
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     style: PropTypes.object,
+    isLoading: PropTypes.bool.isRequired,
     className: PropTypes.string,
   },
   mixins: [IntlMixin],
@@ -47,6 +48,7 @@ const ProposalVoteButton = React.createClass({
       onMouseOut,
       onFocus,
       onBlur,
+      isLoading,
     } = this.props;
     const userHasVote = proposal.userHasVote;
     const bsStyle = user && userHasVote ? 'danger' : 'success';
@@ -66,6 +68,7 @@ const ProposalVoteButton = React.createClass({
         style={style}
         onClick={onClick}
         active={userHasVote}
+        isLoading={isLoading}
         onMouseOver={onMouseOver}
         onMouseOut={onMouseOut}
         onFocus={onFocus}
@@ -82,4 +85,10 @@ const ProposalVoteButton = React.createClass({
 
 });
 
-export default connect()(ProposalVoteButton);
+const mapStateToProps = (state, props) => {
+  return {
+    isLoading: state.proposal.currentDeletingVote === props.proposal.id,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalVoteButton);

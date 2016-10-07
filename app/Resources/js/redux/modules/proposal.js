@@ -42,9 +42,10 @@ const DELETE_REQUEST = 'proposal/DELETE_REQUEST';
 // this._votesCountByStepId = {};
 const initialState = {
   currentProposalId: null,
-  proposals: [],
+  proposalsById: [],
   creditsLeft: 0,
   currentVoteModal: null,
+  currentDeletingVote: null,
   showCreateModal: false,
   isCreating: false,
   showDeleteModal: false,
@@ -71,6 +72,21 @@ export const loadVotes = (stepId, proposalId) => {
   return {
     type: VOTES_FETCH_REQUESTED,
     stepId,
+    proposalId,
+  };
+};
+
+const deleteVoteSucceeded = (stepId, proposalId) => {
+  return {
+    type: DELETE_VOTE_REQUESTED,
+    proposalId,
+    stepId,
+  };
+};
+
+const deleteVoteRequested = (proposalId) => {
+  return {
+    type: DELETE_VOTE_REQUESTED,
     proposalId,
   };
 };
@@ -192,8 +208,9 @@ export const deleteProposal = (form, proposal, dispatch) => {
 };
 
 export const vote = (dispatch, step, proposal, data = {}) => {
+  console.log(step, proposal, data);
   let url = '';
-  switch (step.step_type) {
+  switch (step.type) {
     case 'selection':
       url = `/selection_steps/${step.id}/proposals/${proposal.id}/votes`;
       break;
@@ -226,8 +243,9 @@ export const startVoting = () => {
 };
 
 export const deleteVote = (dispatch, step, proposal) => {
+  dispatch(deleteVoteRequested(proposal.id));
   let url = '';
-  switch (step.step_type) {
+  switch (step.type) {
     case 'selection':
       url = `/selection_steps/${step.id}/proposals/${proposal.id}/votes`;
       break;
@@ -241,6 +259,7 @@ export const deleteVote = (dispatch, step, proposal) => {
   return Fetcher
       .delete(url)
       .then(() => {
+        dispatch(deleteVoteSucceeded(proposal.id));
         FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'proposal.request.delete_vote.success' },
@@ -413,6 +432,8 @@ export const reducer = (state = initialState, action) => {
       return { ...state, isVoting: true };
     case VOTE_FAILED:
       return { ...state, isVoting: false };
+    case DELETE_VOTE_REQUESTED:
+      return { ...state, currentDeletingVote: action.proposal.id };
     case VOTE_SUCCEEDED: {
       const proposal = state.proposalsById[action.proposalId];
       const votesByStepId = proposal.votesByStepId;
@@ -432,7 +453,7 @@ export const reducer = (state = initialState, action) => {
     case FETCH_REQUESTED:
       return { ...state, isLoading: true };
     case FETCH_SUCCEEDED: {
-      const proposalsById = action.proposal.reduce((map, obj) => {
+      const proposalsById = action.proposals.reduce((map, obj) => {
         map[obj.id] = obj;
         return map;
       }, {});

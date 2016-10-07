@@ -224,7 +224,7 @@ export const ProposalPage = React.createClass({
 const mapStateToProps = (state) => {
   return {
     features: state.default.features,
-    proposal: state.proposal.proposals[state.proposal.currentProposalById],
+    proposal: state.proposal.proposalsById[state.proposal.currentProposalId],
     steps: state.project.projects[state.project.currentProjectById].steps,
   };
 };

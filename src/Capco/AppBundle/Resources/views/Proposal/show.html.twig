@@ -11,7 +11,7 @@
 {% block reduxStore %}
   {% set initialState = {
     'proposal': {
-      'currentProposalById': proposal.id,
+      'currentProposalId': proposal.id,
       'proposalsById': {
         (proposal.id) : proposalSerialized
       }

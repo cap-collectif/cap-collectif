@@ -90,11 +90,11 @@ const ProposalVoteButtonWrapper = React.createClass({
 
 });
 
-const mapStateToProps = (state, proposal) => {
+const mapStateToProps = (state, props) => {
   return {
     user: state.default.user,
-    step: proposal.votableStepId
-      ? state.project.projects[state.project.currentProjectById].steps[proposal.votableStepId]
+    step: props.proposal.votableStepId
+      ? state.project.projects[state.project.currentProjectById].steps.filter(step => step.id === props.proposal.votableStepId)[0]
       : null,
   };
 };

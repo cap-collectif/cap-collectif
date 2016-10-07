@@ -387,7 +387,7 @@ class ProposalsController extends FOSRestController
         if (count($request->files->all()) > 0) {
             $request = $this->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
         }
-        
+
         if (isset($unflattenRequest['responses'])) {
             $unflattenRequest = $this->get('capco.media.response.media.manager')
                 ->resolveTypeOfResponses($unflattenRequest, ArrayHelper::unflatten($request->files->all()));
