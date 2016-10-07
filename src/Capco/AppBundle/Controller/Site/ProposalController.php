@@ -30,16 +30,10 @@ class ProposalController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $firstVotableStep = $this
-            ->get('capco.proposal_votes.resolver')
-            ->getFirstVotableStepForProposal($proposal)
-        ;
-
         $proposalForm = $currentStep->getProposalForm();
         $props = $serializer->serialize([
             'form' => $proposalForm,
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
-            'votableStep' => $firstVotableStep,
         ], 'json', SerializationContext::create()
             ->setSerializeNull(true)
             ->setGroups([
@@ -54,12 +48,6 @@ class ProposalController extends Controller
                 'Default', // force step_type serialization
             ]))
         ;
-
-        $previewedSelectionVotes = $this->getDoctrine()->getRepository(ProposalSelectionVote::class)->getVotesForProposalByStepId($proposal, $currentStep->getId(), 6);
-        $proposal->setSelectionVotes(new ArrayCollection($previewedSelectionVotes));
-
-        $previewedCollectVotes = $this->getDoctrine()->getRepository(ProposalCollectVote::class)->getVotesForProposalByStepId($proposal, $currentStep->getId(), 6);
-        $proposal->setCollectVotes(new ArrayCollection($previewedCollectVotes));
 
         $proposalSerialized = $serializer->serialize($proposal, 'json',
           SerializationContext::create()

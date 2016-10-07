@@ -13,10 +13,7 @@ import ProposalPageMetadata from './ProposalPageMetadata';
 import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
-import ProposalStore from '../../../stores/ProposalStore';
-import ProposalVoteStore from '../../../stores/ProposalVoteStore';
-import ProposalActions from '../../../actions/ProposalActions';
-import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { connect } from 'react-redux';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
 
@@ -26,17 +23,9 @@ export const ProposalPage = React.createClass({
     proposal: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
     steps: PropTypes.array.isRequired,
-    votableStep: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
-
-  getDefaultProps() {
-    return {
-      votableStep: null,
-      creditsLeft: null,
-    };
-  },
 
   componentDidMount() {
     setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
@@ -65,9 +54,9 @@ export const ProposalPage = React.createClass({
   },
 
   render() {
-    const { proposal, form, categories, votableStep, features, steps } = this.props;
-    const showVotes = !!votableStep && votableStep.voteType !== VOTE_TYPE_DISABLED;
-    const showVotesTab = proposal.votesCount > 0 || showVotes;
+    const { proposal, form, categories, features, steps } = this.props;
+    const votableStep = proposal.votableStepId ? steps[proposal.votableStepId].votable : null;
+    const showVotesTab = proposal.votesCount > 0 || votableStep !== null;
     const votableSteps = steps.filter(step => step.votable && (step.type === 'selection' || step.type === 'collect'));
     return (
         <div>
@@ -76,7 +65,6 @@ export const ProposalPage = React.createClass({
               proposal={proposal}
               className="container container--custom"
               showThemes={features.themes && form.usingThemes}
-              step={votableStep}
           />
           <Tab.Container
               id="proposal-page-tabs"
@@ -107,7 +95,6 @@ export const ProposalPage = React.createClass({
                     </NavItem>
                   </Nav>
                   <ProposalVoteButtonWrapper
-                      step={votableStep}
                       proposal={proposal}
                       style={{ marginTop: '10px' }}
                       className="pull-right hidden-xs"
@@ -126,7 +113,6 @@ export const ProposalPage = React.createClass({
                             proposal={proposal}
                             form={form}
                             categories={categories}
-                            step={votableStep}
                         />
                       </Col>
                       <Col xs={12} sm={4}>
@@ -134,13 +120,16 @@ export const ProposalPage = React.createClass({
                             proposal={proposal}
                             showDistricts={features.districts}
                             showCategories={form.usingCategories}
-                            showNullEstimation={!!votableStep && votableStep.voteType === VOTE_TYPE_BUDGET}
+                            showNullEstimation={votableStep && votableStep.voteType === VOTE_TYPE_BUDGET}
                         />
                         <br />
                         {
                           votableStep && votableStep.voteThreshold > 0 &&
                             <span>
-                              <ProposalPageVoteThreshold proposal={proposal} step={votableStep} />
+                              <ProposalPageVoteThreshold
+                                proposal={proposal}
+                                step={votableStep}
+                              />
                               <br />
                             </span>
                         }
@@ -219,10 +208,9 @@ export const ProposalPage = React.createClass({
                 </Tab.Content>
               </div>
               {
-                showVotes &&
+                votableStep != null &&
                   <ProposalVoteModal
                       proposal={proposal}
-                      step={votableStep}
                   />
               }
             </div>

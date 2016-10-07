@@ -285,11 +285,6 @@ class ProposalsController extends FOSRestController
      * @ParamConverter("step", options={"mapping": {"step": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
      * @View(serializerGroups={"ProposalSelectionVotes", "UsersInfos", "UserMedias", "ProposalCollectVotes"})
-     *
-     * @param AbstractStep $step
-     * @param Proposal     $proposal
-     *
-     * @return array
      */
     public function getAllProposalVotesAction(AbstractStep $step, Proposal $proposal)
     {

@@ -13,6 +13,7 @@ use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 
 class ProposalSerializationListener extends AbstractSerializationListener
 {
@@ -23,6 +24,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
     private $responseRepository;
     private $mediaExtension;
     private $serializer;
+    private $voteResolver;
 
     public function __construct(
       RouterInterface $router,
@@ -31,7 +33,8 @@ class ProposalSerializationListener extends AbstractSerializationListener
       AbstractResponseRepository $responseRepository,
       $mediaExtension,
       Serializer $serializer,
-      ProposalCollectVoteRepository $proposalCollectVoteRepository
+      ProposalCollectVoteRepository $proposalCollectVoteRepository,
+      ProposalStepVotesResolver $voteResolver
     )
     {
         $this->router = $router;
@@ -41,6 +44,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
         $this->mediaExtension = $mediaExtension;
         $this->serializer = $serializer;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
+        $this->voteResolver = $voteResolver;
     }
 
     public static function getSubscribedEvents()
@@ -117,6 +121,12 @@ class ProposalSerializationListener extends AbstractSerializationListener
         $event->getVisitor()->addData(
             'responses',
             json_decode($serializedResponses, true)
+        );
+
+        $firstVotableStep = $this->voteResolver->getFirstVotableStepForProposal($proposal);
+        $event->getVisitor()->addData(
+            'votableStepId',
+            json_decode($firstVotableStep ? $firstVotableStep->getId() : null, true)
         );
 
         if ($proposal->getMedia()) {

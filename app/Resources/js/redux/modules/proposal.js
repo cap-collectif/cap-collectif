@@ -38,11 +38,10 @@ export const OPEN_EDIT_MODAL = 'proposal/OPEN_EDIT_MODAL';
 export const CANCEL_SUBMIT_PROPOSAL = 'proposal/CANCEL_SUBMIT_PROPOSAL';
 const DELETE_REQUEST = 'proposal/DELETE_REQUEST';
 // this._creditsLeft = 0;
-// this._proposalVotesByStepIds = {};
 // this._votableSteps = [];
 // this._votesCountByStepId = {};
 const initialState = {
-  currentProposalById: null,
+  currentProposalId: null,
   proposals: [],
   creditsLeft: 0,
   currentVoteModal: null,
@@ -65,6 +64,14 @@ export const voteSuccess = (proposalId, vote) => {
     type: VOTE_SUCCEEDED,
     proposalId,
     vote,
+  };
+};
+
+export const loadVotes = (stepId, proposalId) => {
+  return {
+    type: VOTES_FETCH_REQUESTED,
+    stepId,
+    proposalId,
   };
 };
 
@@ -294,24 +301,29 @@ export const updateProposal = (dispatch, form, id, data) => {
     });
 };
 
-// export function* fetchAllVotes(action) {
-//   // try {
-//   //   let hasMore = true;
-//   //   let iterationCount = 0;
-//   //   const votesPerIteration = 50;
-//   //   while (hasMore) {
-//   //     const result = yield call(
-//   //       Fetcher.get,
-//   //       `/ideas/${action.ideaId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
-//   //     );
-//   //     hasMore = result.hasMore;
-//   //     iterationCount++;
-//   //     yield put({ type: VOTES_FETCH_SUCCEEDED, votes: result.votes, ideaId: action.ideaId });
-//   //   }
-//   // } catch (e) {
-//   //   yield put({ type: VOTES_FETCH_FAILED, error: e });
-//   // }
-// }
+export function* fetchVotesByStep(action) {
+  try {
+    let hasMore = true;
+    let iterationCount = 0;
+    const votesPerIteration = 50;
+    while (hasMore) {
+      const result = yield call(
+        Fetcher.get,
+        `/steps/${action.stepId}/proposals/${action.proposalId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
+      );
+      hasMore = result.hasMore;
+      iterationCount++;
+      yield put({
+        type: VOTES_FETCH_SUCCEEDED,
+        votes: result.votes,
+        stepId: action.stepId,
+        proposalId: action.proposalId,
+      });
+    }
+  } catch (e) {
+    yield put({ type: VOTES_FETCH_FAILED, error: e });
+  }
+}
 
 export function* fetchProposals() {
   const globalState = yield select();
@@ -362,7 +374,7 @@ export function* fetchPosts(action) {
 export function* saga() {
   yield [
     takeEvery(POSTS_FETCH_REQUESTED, fetchPosts),
-    // takeEvery(VOTES_FETCH_REQUESTED, fetchAllVotes),
+    takeEvery(VOTES_FETCH_REQUESTED, fetchVotesByStep),
     takeEvery(FETCH_REQUESTED, fetchProposals),
   ];
 }
@@ -402,17 +414,14 @@ export const reducer = (state = initialState, action) => {
     case VOTE_FAILED:
       return { ...state, isVoting: false };
     case VOTE_SUCCEEDED: {
-      console.log(action);
-      const proposals = state.proposals;
-      const proposal = proposals.filter(p => p.id = action.proposalId)[0];
-      const index = proposals.indexOf(proposal);
-      const previousVotes = proposal.votes || [];
-      proposal.userHasVote = true;
-      proposal.votes = previousVotes.push(action.vote);
-      proposals[index] = proposal;
+      const proposal = state.proposalsById[action.proposalId];
+      const votesByStepId = proposal.votesByStepId;
+      votesByStepId[action.stepId].push(action.vote);
+      const proposalsById = state.proposalsById;
+      proposalsById[action.proposalId] = { ...proposal, votesByStepId };
       return {
         ...state,
-        proposals,
+        proposalsById,
         isVoting: false,
         currentVoteModal: null,
         creditsLeft: state.creditsLeft - (action.vote.estimation || 0),
@@ -422,14 +431,26 @@ export const reducer = (state = initialState, action) => {
       return { ...state, isDeleting: true };
     case FETCH_REQUESTED:
       return { ...state, isLoading: true };
-    case FETCH_SUCCEEDED:
-      return { ...state, proposals: action.proposals, isLoading: false };
+    case FETCH_SUCCEEDED: {
+      const proposalsById = action.proposal.reduce((map, obj) => {
+        map[obj.id] = obj;
+        return map;
+      }, {});
+      return { ...state, proposalsById, isLoading: false };
+    }
     case POSTS_FETCH_SUCCEEDED: {
       const posts = action.posts;
-      const proposals = {
-        [action.proposalId]: { ...state.proposals[action.proposalId], posts },
-      };
-      return { ...state, proposals };
+      const proposalsById = state.proposalsById;
+      proposalsById[action.proposalId] = { ...state.proposalsById[action.proposalId], posts };
+      return { ...state, proposalsById };
+    }
+    case VOTES_FETCH_SUCCEEDED: {
+      const proposal = state.proposalsById[action.proposalId];
+      const votesByStepId = proposal.votesByStepId;
+      votesByStepId[action.stepId] = action.votes;
+      const proposalsById = state.proposalsById;
+      proposalsById[action.proposalId] = { ...proposal, votesByStepId };
+      return { ...state, proposalsById };
     }
     case POSTS_FETCH_FAILED: {
       console.log(POSTS_FETCH_FAILED, action.error); // eslint-disable-line no-console

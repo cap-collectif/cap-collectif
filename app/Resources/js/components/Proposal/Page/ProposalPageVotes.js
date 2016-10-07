@@ -6,15 +6,16 @@ import { IntlMixin, FormattedMessage } from 'react-intl';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
 import { PROPOSAL_VOTES_TO_SHOW } from '../../../constants/ProposalConstants';
+import { loadVotes } from '../../../redux/modules/proposal';
 
 const ProposalPageVotes = React.createClass({
   displayName: 'ProposalPageVotes',
   propTypes: {
     proposal: PropTypes.object.isRequired,
     stepId: PropTypes.number.isRequired,
-    votes: PropTypes.array.isRequired,
     showModal: PropTypes.bool.isRequired,
     className: PropTypes.string,
+    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -24,8 +25,18 @@ const ProposalPageVotes = React.createClass({
     };
   },
 
+  componentDidMount() {
+    const {
+      dispatch,
+      stepId,
+      proposal,
+    } = this.props;
+    dispatch(loadVotes(stepId, proposal.id));
+  },
+
   render() {
-    const { className, proposal, votes, showModal } = this.props;
+    const { className, proposal, stepId, showModal } = this.props;
+    const votes = proposal.votesByStepId[stepId];
     const votesToDisplay = votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
     const moreVotes = proposal.votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
 
@@ -82,7 +93,6 @@ const ProposalPageVotes = React.createClass({
 const mapStateToProps = () => {
   return {
     showModal: false,
-    votes: [],
   };
 };
 export default connect(mapStateToProps)(ProposalPageVotes);

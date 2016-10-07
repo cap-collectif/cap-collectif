@@ -18,7 +18,6 @@ const ProposalVoteButtonWrapper = React.createClass({
 
   getDefaultProps() {
     return {
-      step: null,
       creditsLeft: null,
       user: null,
       style: {},
@@ -91,9 +90,12 @@ const ProposalVoteButtonWrapper = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, proposal) => {
   return {
     user: state.default.user,
+    step: proposal.votableStepId
+      ? state.project.projects[state.project.currentProjectById].steps[proposal.votableStepId]
+      : null,
   };
 };
 

@@ -11,7 +11,7 @@ const ProposalVoteButton = React.createClass({
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object,
     user: PropTypes.object,
-    dispatch: PropTypes.func,
+    dispatch: PropTypes.func.isRequired,
     onMouseOver: PropTypes.func,
     onMouseOut: PropTypes.func,
     onFocus: PropTypes.func,

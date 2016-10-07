@@ -10,7 +10,6 @@ import DeleteButton from '../../Form/DeleteButton';
 import ProposalReportButton from '../Report/ProposalReportButton';
 import ProposalResponse from './ProposalResponse';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
-
 import { openDeleteProposalModal, openEditProposalModal } from '../../../redux/modules/proposal';
 
 
@@ -21,7 +20,6 @@ const ProposalPageContent = React.createClass({
     form: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
     className: PropTypes.string,
-    step: PropTypes.object,
     creditsLeft: PropTypes.number,
     userHasVote: PropTypes.bool.isRequired,
     onVote: PropTypes.func.isRequired,
@@ -32,7 +30,6 @@ const ProposalPageContent = React.createClass({
   getDefaultProps() {
     return {
       className: '',
-      step: null,
       creditsLeft: null,
     };
   },
@@ -44,7 +41,6 @@ const ProposalPageContent = React.createClass({
       form,
       categories,
       userHasVote,
-      step,
       creditsLeft,
       onVote,
       dispatch,
@@ -78,7 +74,6 @@ const ProposalPageContent = React.createClass({
         }
         <div className="block proposal__buttons">
           <ProposalVoteButtonWrapper
-            step={step}
             proposal={proposal}
             creditsLeft={creditsLeft}
             userHasVote={userHasVote}
