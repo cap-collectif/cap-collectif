@@ -102,7 +102,7 @@ export const deleteVoteVersion = (version, opinion, dispatch) => {
 };
 
 export const voteOpinion = (value, opinion, dispatch) => {
-  return vote(value, null, opinion, dispatch);
+  return vote(value, opinion, null, dispatch);
 };
 
 export const voteVersion = (value, version, opinion, dispatch) => {
