@@ -135,8 +135,16 @@ class ProposalSerializationListener extends AbstractSerializationListener
             $event->getVisitor()->addData(
                 'hasUserReported', $user === 'anon.' ? false : $proposal->userHasReport($user)
             );
+
+            $userHasVoteOnSelectionSteps = $this->proposalSelectionVoteRepository
+                ->getUserVoteByProposalGroupedBySteps($proposal, $user === 'anon.' ? null : $user);
+
+            $userHasVoteOnCollectSteps = $this->proposalCollectVoteRepository
+                ->getUserVoteByProposalGroupedBySteps($proposal, $user === 'anon.' ? null : $user);
+
             $event->getVisitor()->addData(
-                'userHasVote', $user === 'anon.' ? false : $proposal->userHasVote($user)
+                'userHasVoteByStepId',
+                $userHasVoteOnSelectionSteps + $userHasVoteOnCollectSteps
             );
         }
     }

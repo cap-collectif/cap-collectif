@@ -5,12 +5,39 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\EntityRepository;
+use Capco\UserBundle\Entity\User;
 
 /**
  * ProposalCollectVoteRepository.
  */
 class ProposalCollectVoteRepository extends EntityRepository
 {
+  public function getUserVoteByProposalGroupedBySteps(Proposal $proposal, User $user = null): array
+  {
+      $userHasVoteByStepId = [];
+      if ($user) {
+        $results = $this->createQueryBuilder('pv')
+            ->select('COUNT(pv.id) as votesCount', 'cs.id as collectStep')
+            ->leftJoin('pv.collectStep', 'cs')
+            ->andWhere('pv.proposal = :proposal')
+            ->andWhere('pv.user = :user')
+            ->setParameter('proposal', $proposal)
+            ->setParameter('user', $user)
+            ->groupBy('pv.collectStep')
+            ->getQuery()
+            ->getResult();
+        foreach ($results as $result) {
+          $userHasVoteByStepId[$result['collectStep']] = intval($result['votesCount']) > 0;
+        }
+      }
+
+      $id = $proposal->getProposalForm()->getStep()->getId();
+      if (!array_key_exists($id, $userHasVoteByStepId)) {
+        $userHasVoteByStepId[$id] = false;
+      }
+      return $userHasVoteByStepId;
+  }
+
     public function getCountsByProposalGroupedBySteps(Proposal $proposal)
     {
         $qb = $this->createQueryBuilder('pv')

@@ -52,8 +52,8 @@
     {% if showVotesWidget %}
       {{ react_intl_component('ProposalVoteBasketWidgetApp', {
           'props': {
-            'image': {% thumbnail 'image.votes_bar' %}
-            'votesPageUrl': {% path('app_project_show_user_votes', ['projectSlug': project.slug]) }
+            'image': media_public_url(capco_site_image_media('image.votes_bar'), 'default_small'),
+            'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
           },
           'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
           })

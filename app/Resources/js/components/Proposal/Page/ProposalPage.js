@@ -68,7 +68,7 @@ export const ProposalPage = React.createClass({
     const { proposal, form, categories, votableStep, features, steps } = this.props;
     const showVotes = !!votableStep && votableStep.voteType !== VOTE_TYPE_DISABLED;
     const showVotesTab = proposal.votesCount > 0 || showVotes;
-    const stepsFiltered = steps.filter((step) => step.type === 'selection' || step.type === 'collect');
+    const votableSteps = steps.filter(step => step.votable && (step.type === 'selection' || step.type === 'collect'));
     return (
         <div>
           <ProposalPageAlert proposal={proposal} />
@@ -98,7 +98,7 @@ export const ProposalPage = React.createClass({
                       showVotesTab
                       && <NavItem eventKey="votes" className="tabs__pill">
                         {this.getIntlMessage('proposal.tabs.votes')}
-                        <span className="badge">{proposal.votesCount}</span>
+                        <span className="badge">{Object.values(proposal.votesCountByStepId).reduce((a, b = 0) => a + b)}</span>
                       </NavItem>
                     }
                     <NavItem eventKey="blog" className="tabs__pill">
@@ -139,9 +139,10 @@ export const ProposalPage = React.createClass({
                         <br />
                         {
                           votableStep && votableStep.voteThreshold > 0 &&
-                          <span>
-                            <ProposalPageVoteThreshold proposal={proposal} step={votableStep} /><br />
-                          </span>
+                            <span>
+                              <ProposalPageVoteThreshold proposal={proposal} step={votableStep} />
+                              <br />
+                            </span>
                         }
                         <ProposalPageAdvancement
                             proposal={proposal}
@@ -151,10 +152,8 @@ export const ProposalPage = React.createClass({
                   </Tab.Pane>
                   <Tab.Pane eventKey="comments">
                     <ProposalPageComments
+                        id={proposal.id}
                         form={form}
-                        categories={categories}
-                        step={votableStep}
-                        onVote={this.voteAction}
                     />
                     <Col xs={12} sm={4}>
                       <ProposalPageMetadata
@@ -188,20 +187,26 @@ export const ProposalPage = React.createClass({
                           <Row className="clearfix">
                             <Nav bsStyle="pills">
                               {
-                                stepsFiltered.map((step, index) => {
-                                  return <NavItem key={index} eventKey={step.id}>{step.title} <span className="badge">{proposal.votesCountByStepId[step.id]}</span></NavItem>;
-                                })
+                                votableSteps.map((step, index) =>
+                                  <NavItem
+                                    key={index}
+                                    eventKey={step.id}
+                                  >
+                                    {step.title} <span className="badge">{proposal.votesCountByStepId[step.id] || 0}</span>
+                                  </NavItem>
+                                )
                               }
                             </Nav>
                             <Tab.Content animation={false}>
                               {
-                                stepsFiltered.map((step, index) => {
-                                  return (
+                                votableSteps.map((step, index) =>
                                     <Tab.Pane key={index} eventKey={step.id}>
-                                      <ProposalPageVotes stepId={step.id} proposal={proposal} votes={step.type === 'selection' ? proposal.selectionVotes : proposal.collectVotes} />
+                                      <ProposalPageVotes
+                                        stepId={step.id}
+                                        proposal={proposal}
+                                      />
                                     </Tab.Pane>
-                                  );
-                                })
+                                )
                               }
                             </Tab.Content>
                           </Row>
@@ -214,11 +219,11 @@ export const ProposalPage = React.createClass({
                 </Tab.Content>
               </div>
               {
-                showVotes
-                && <ProposalVoteModal
-                    proposal={proposal}
-                    step={votableStep}
-                />
+                showVotes &&
+                  <ProposalVoteModal
+                      proposal={proposal}
+                      step={votableStep}
+                  />
               }
             </div>
           </Tab.Container>

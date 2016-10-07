@@ -521,24 +521,6 @@ class Proposal implements Contribution, CommentableInterface
         return $this;
     }
 
-    public function userHasVote(User $user = null): bool
-    {
-        if ($user != null) {
-            foreach ($this->selectionVotes as $vote) {
-                if ($vote->getUser() == $user) {
-                    return true;
-                }
-            }
-            foreach ($this->collectVotes as $vote) {
-                if ($vote->getUser() == $user) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
     public function getSelectionVotes(): Collection
     {
         return $this->selectionVotes;

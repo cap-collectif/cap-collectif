@@ -12,7 +12,7 @@ const ProposalVoteBasketWidget = React.createClass({
     projectId: PropTypes.number.isRequired,
     votableSteps: PropTypes.array.isRequired,
     votesPageUrl: PropTypes.string.isRequired,
-    image: PropTypes.object,
+    image: PropTypes.string,
   },
   mixins: [IntlMixin, DeepLinkStateMixin],
 
@@ -48,7 +48,7 @@ const ProposalVoteBasketWidget = React.createClass({
           image &&
            <Navbar.Header>
             <Navbar.Brand>
-              <img className="widget__image" role="presentation" src={image.url} />
+              <img className="widget__image" role="presentation" src={image} />
             </Navbar.Brand>
             <Navbar.Toggle>
               <i
@@ -174,6 +174,7 @@ const ProposalVoteBasketWidget = React.createClass({
 const mapStateToProps = (state) => {
   return {
     votableSteps: state.project.projects[state.project.currentProjectById].steps.filter(step => step.votable),
+    projectId: state.project.currentProjectById,
   };
 };
 export default connect(mapStateToProps)(ProposalVoteBasketWidget);
