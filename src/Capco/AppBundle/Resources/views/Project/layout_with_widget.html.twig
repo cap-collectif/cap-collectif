@@ -20,7 +20,7 @@
       'id': step.step.id,
       'title': step.step.title,
       'startAt': step.step.startAt|localizeddate('medium', 'none'),
-      'endAt': step.step.endAt|localizeddate('medium', 'none'),
+      'endAt': step.step.endAt ? step.step.endAt|localizeddate('medium', 'none') : null,
       'position': step.step.position,
       'type': step.step.getType(),
       'showProgressSteps': step.step.allowingProgressSteps|default(false),
