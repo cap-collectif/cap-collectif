@@ -176,8 +176,11 @@ class ProposalsController extends FOSRestController
         $unflattenRequest = ArrayHelper::unflatten($request->request->all());
         $unflattenFile = ArrayHelper::unflatten($request->files->all());
 
-        $unflattenRequest = $this->get('capco.media.response.media.manager')
-            ->resolveTypeOfResponses($unflattenRequest, $unflattenFile);
+
+        if (isset($unflattenRequest['responses'])) {
+            $unflattenRequest = $this->get('capco.media.response.media.manager')
+                ->resolveTypeOfResponses($unflattenRequest, $unflattenFile);
+        }
 
         $form->submit($unflattenRequest, false);
 
@@ -415,11 +418,11 @@ class ProposalsController extends FOSRestController
         if (count($request->files->all()) > 0) {
             $request = $this->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
         }
-
-        $unflattenFile = ArrayHelper::unflatten($request->files->all());
-
-        $unflattenRequest = $this->get('capco.media.response.media.manager')
-            ->resolveTypeOfResponses($unflattenRequest, $unflattenFile);
+        
+        if (isset($unflattenRequest['responses'])) {
+            $unflattenRequest = $this->get('capco.media.response.media.manager')
+                ->resolveTypeOfResponses($unflattenRequest, ArrayHelper::unflatten($request->files->all()));
+        }
 
         $form->submit($unflattenRequest, false);
 
