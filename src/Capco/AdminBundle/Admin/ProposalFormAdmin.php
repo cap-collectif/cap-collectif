@@ -91,6 +91,16 @@ class ProposalFormAdmin extends Admin
             ])
         ;
 
+        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('districts')) {
+            $formMapper
+                ->add('districtHelpText', null, [
+                    'label' => 'admin.fields.proposal_form.district_help_text',
+                    'required' => false,
+                    'help' => 'admin.fields.proposal_form.help_text_district_help_text',
+                ])
+            ;
+        }
+
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper
                 ->add('themeHelpText', null, [

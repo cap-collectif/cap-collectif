@@ -18,6 +18,7 @@
 
             const usingCategoriesField = $("input#{{ admin.uniqid }}_usingCategories");
             const categoryHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_categoryHelpText");
+            const districtHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_districtHelpText");
             const categoryMandatoryField = $("#sonata-ba-field-container-{{ admin.uniqid }}_categoryMandatory");
             const categoriesGroup = $(".categories-hideable");
 
@@ -48,7 +49,7 @@
             toggleField(usingCategoriesField.prop('checked'), categoryMandatoryField, categoryHelpTextField, categoriesGroup);
 
             // For District
-            toggleField(usingDistrictField.prop('checked'), districtMandatoryField, null, null);
+            toggleField(usingDistrictField.prop('checked'), districtMandatoryField, districtHelpTextField, null);
 
             usingThemesField.on('ifChanged', function(e) {
                 $(e.target).iCheck('update');
@@ -62,7 +63,7 @@
 
             usingDistrictField.on('ifChanged', function(e) {
                 $(e.target).iCheck('update');
-                toggleField($(e.target).prop('checked'), districtMandatoryField, null, null);
+                toggleField($(e.target).prop('checked'), districtMandatoryField, districtHelpTextField, null);
             });
         });
     </script>
