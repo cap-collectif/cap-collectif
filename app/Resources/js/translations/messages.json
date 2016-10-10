@@ -612,7 +612,12 @@
     "description": "Description",
     "details": "D\u00e9tails",
     "detail":  {
-      "advancement": "État d'avancement"
+      "advancement": "État d'avancement",
+      "intervals": {
+        "continuously": "En continu",
+        "from": "À partir du",
+        "until": "Jusqu'au"
+      }
     },
     "district": "Localisation",
     "empty": "Aucune proposition",

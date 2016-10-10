@@ -496,6 +496,19 @@ abstract class AbstractStep
             return $this->startAt < $now && $this->endAt > $now;
         }
 
+        // If Start exist and End is NULL
+        if (null !== $this->startAt && null === $this->endAt && $this->startAt < $now) {
+            return true;
+        }
+
+        if (null === $this->endAt && null === $this->startAt) {
+            return true;
+        }
+
+        if (null === $this->startAt) {
+            return $this->endAt !== null && $this->endAt > $now;
+        }
+
         return false;
     }
 
@@ -503,9 +516,14 @@ abstract class AbstractStep
     {
         $now = new \DateTime();
 
-        if (null == $this->endAt) {
-            return $this->startAt !== null && $this->startAt < $now;
+        if (null !== $this->startAt && null === $this->endAt) {
+            return false;
         }
+
+        if (null === $this->endAt && null === $this->startAt) {
+            return false;
+        }
+
         if ($this->endAt < $now) {
             return $this->startAt === null || $this->startAt < $now;
         }
@@ -517,9 +535,6 @@ abstract class AbstractStep
     {
         $now = new \DateTime();
 
-        if (null === $this->startAt) {
-            return $this->endAt !== null && $this->endAt > $now;
-        }
         if ($this->startAt > $now) {
             return $this->endAt === null || $this->endAt > $now;
         }

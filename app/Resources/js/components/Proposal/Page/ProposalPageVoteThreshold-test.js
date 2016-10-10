@@ -26,7 +26,7 @@ describe('<ProposalPageVoteThreshold />', () => {
     const secondDiv = mainDiv.find('div.proposal__infos');
     expect(secondDiv).to.have.length(1);
 
-    expect(secondDiv.find('h5').text()).to.equals('Soutenez cette proposition');
+    expect(secondDiv.find('h4').text()).to.equals('Soutenez cette proposition');
     expect(secondDiv.find('p.proposal__page__vote_threshold__votes')).to.have.length(1);
     expect(secondDiv.find('p.proposal__page__vote_threshold__votes').children()).to.have.length(3);
   });
@@ -38,7 +38,7 @@ describe('<ProposalPageVoteThreshold />', () => {
     const secondDiv = mainDiv.find('div.proposal__infos');
     expect(secondDiv).to.have.length(1);
 
-    expect(secondDiv.find('h5').text()).to.equals('Objectif atteint');
+    expect(secondDiv.find('h4').text()).to.equals('Objectif atteint');
     expect(secondDiv.find('p.proposal__page__vote_threshold__votes')).to.have.length(1);
     expect(secondDiv.find('p.proposal__page__vote_threshold__votes').children()).to.have.length(3);
   });

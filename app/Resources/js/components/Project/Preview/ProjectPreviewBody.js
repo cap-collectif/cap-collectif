@@ -10,8 +10,26 @@ const ProjectPreviewBody = React.createClass({
   },
   mixins: [IntlMixin],
 
+
+  shouldRenderProgressBar() {
+    const { project } = this.props;
+    return project.steps.filter(step => {
+      return !step.startAt && !step.endAt
+        && step.type !== 'presentation' && step.type !== 'ranking' && step.type !== 'other';
+    }).length === 0;
+  },
+
   render() {
     const { project } = this.props;
+
+    let progress;
+
+    if (this.shouldRenderProgressBar()) {
+      progress = <ProjectPreviewProgressBar project={project} />;
+    } else {
+      progress = <div style={{ height: '25px' }}></div>;
+    }
+
     const tooltip = <Tooltip id={`project-${project.id}-tooltip`} >{project.title}</Tooltip>;
     return (
       <div className="box project__preview__body">
@@ -25,7 +43,7 @@ const ProjectPreviewBody = React.createClass({
               </OverlayTrigger>
             </h2>
         </div>
-        <ProjectPreviewProgressBar project={project} />
+        {progress}
       </div>
     );
   },

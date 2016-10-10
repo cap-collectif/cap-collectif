@@ -34,7 +34,7 @@ class ProjectController extends Controller
                 ->get('doctrine.orm.entity_manager')
                 ->getRepository('CapcoAppBundle:Project')
                 ->getLastPublished($max, $offset),
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'StepTypes', 'ThemeDetails']));
 
         return [
             'props' => $props,
@@ -380,7 +380,7 @@ class ProjectController extends Controller
         $count = $em->getRepository('CapcoAppBundle:Project')->countPublished();
         $props = $serializer->serialize([
             'projects' => $projectsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
+        ], 'json', SerializationContext::create()->setGroups(['Default', 'Projects', 'Steps', 'ThemeDetails']));
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;

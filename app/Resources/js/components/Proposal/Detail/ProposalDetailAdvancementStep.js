@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Label } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 
 const ProposalDetailAdvancementStep = React.createClass({
   displayName: 'ProposalDetailAdvancementStep',
@@ -9,6 +10,23 @@ const ProposalDetailAdvancementStep = React.createClass({
     status: PropTypes.object,
     borderColor: PropTypes.string,
     children: PropTypes.node,
+  },
+  mixins: [IntlMixin],
+
+  renderDate() {
+    const { step } = this.props;
+    if (!step.endAt && !step.startAt) {
+      return this.getIntlMessage('proposal.detail.intervals.continuously');
+    }
+    if (!step.endAt && step.startAt) {
+      return `${this.getIntlMessage('proposal.detail.intervals.from')} ${step.startAt}`;
+    }
+    if (step.endAt && !step.startAt) {
+      return `${this.getIntlMessage('proposal.detail.intervals.until')} ${step.endAt}`;
+    }
+    if (step.startAt && step.endAt) {
+      return `${step.startAt} - ${step.endAt}`;
+    }
   },
 
   render() {
@@ -49,14 +67,7 @@ const ProposalDetailAdvancementStep = React.createClass({
           <div style={{ marginTop: '-15px' }}>
             <div>{ step.title }</div>
             <div className="excerpt small">
-              {step.startAt}
-              {
-                step.endAt &&
-                  <span>
-                    { ' - ' }
-                    { step.endAt }
-                  </span>
-              }
+                <span>{ this.renderDate() }</span>
             </div>
             {
               status &&
