@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -26,11 +27,11 @@ class ReplyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('responses', 'collection', [
+            ->add('responses', CollectionType::class, [
                 'allow_add' => true,
                 'allow_delete' => false,
                 'by_reference' => false,
-                'type' => new ResponseType($this->transformer),
+                'type' => new ValueResponseType($this->transformer),
                 'required' => false,
             ])
         ;
