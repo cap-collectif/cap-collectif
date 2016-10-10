@@ -204,7 +204,10 @@ class ProposalsController extends FOSRestController
         $index = $this->get('fos_elastica.index');
         $index->refresh();
 
-        if ($proposalForm->getNotificationsConfiguration()->isOnCreate()) {
+        if (
+            $proposalForm->getNotificationsConfiguration()
+            && $proposalForm->getNotificationsConfiguration()->isOnCreate()
+        ) {
             $this->get('swarrot.publisher')->publish('proposal.create', new Message(
               json_encode([
                 'proposalId' => $proposal->getId(),
@@ -430,7 +433,10 @@ class ProposalsController extends FOSRestController
             $em->persist($proposal);
             $em->flush();
 
-            if ($proposalForm->getNotificationsConfiguration()->isOnUpdate()) {
+            if (
+                $proposalForm->getNotificationsConfiguration()
+                && $proposalForm->getNotificationsConfiguration()->isOnUpdate()
+            ) {
                 $this->get('swarrot.publisher')->publish('proposal.update', new Message(
                   json_encode([
                     'proposalId' => $proposal->getId(),
@@ -485,7 +491,10 @@ class ProposalsController extends FOSRestController
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
-        if ($proposalForm->getNotificationsConfiguration()->isOnDelete()) {
+        if (
+            $proposalForm->getNotificationsConfiguration()
+            && $proposalForm->getNotificationsConfiguration()->isOnDelete()
+        ) {
             $this->get('swarrot.publisher')->publish('proposal.delete', new Message(
               json_encode([
                 'proposalId' => $proposal->getId(),
