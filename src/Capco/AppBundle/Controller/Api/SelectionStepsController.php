@@ -57,7 +57,7 @@ class SelectionStepsController extends FOSRestController
         // Filters
         $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
         $providedFilters['selectionStep'] = $selectionStep->getId();
-        if ($providedFilters['statuses']) {
+        if (array_key_exists('statuses', $providedFilters)) {
             $providedFilters['selectionStatuses'] = $providedFilters['statuses'];
             unset($providedFilters['statuses']);
         }
@@ -160,6 +160,8 @@ class SelectionStepsController extends FOSRestController
         // Keep in mind that refresh should usually not be triggered manually.
         $index = $this->get('fos_elastica.index');
         $index->refresh();
+
+        return $vote;
     }
 
     /**

@@ -247,6 +247,11 @@ export const vote = (dispatch, step, proposal, data = {}) => {
       });
     })
     .catch((error) => {
+      dispatch(closeVoteModal());
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: { bsStyle: 'danger', content: 'proposal.request.vote.failure' },
+      });
       console.log(error); // eslint-disable-line no-console
     });
 };

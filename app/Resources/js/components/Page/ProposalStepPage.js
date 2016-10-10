@@ -12,15 +12,12 @@ import StepPageHeader from '../Steps/Page/StepPageHeader';
 import VisibilityBox from '../Utils/VisibilityBox';
 import { loadProposals, changePage } from '../../redux/modules/proposal';
 
-export const CollectStepPage = React.createClass({
+export const ProposalStepPage = React.createClass({
   propTypes: {
     step: PropTypes.object.isRequired,
     count: PropTypes.number.isRequired,
     form: PropTypes.object.isRequired,
-    themes: PropTypes.array.isRequired,
     statuses: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
-    types: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     proposals: PropTypes.array.isRequired,
     currentPage: PropTypes.number.isRequired,
@@ -38,13 +35,10 @@ export const CollectStepPage = React.createClass({
     const {
       proposals,
       categories,
-      districts,
       form,
       statuses,
       step,
-      themes,
       count,
-      types,
       currentPage,
       dispatch,
       isLoading,
@@ -56,18 +50,16 @@ export const CollectStepPage = React.createClass({
     return (
       <div>
         <StepPageHeader step={step} />
-        <CollectStepPageHeader
-          count={count}
-          form={form}
-          themes={themes}
-          districts={districts}
-          categories={categories}
-        />
+        {
+          step.type === 'collect' &&
+          <CollectStepPageHeader
+            count={count}
+            form={form}
+            categories={categories}
+          />
+        }
         <ProposalListFilters
           id={form.id}
-          themes={themes}
-          districts={districts}
-          types={types}
           statuses={statuses}
           categories={categories}
           orderByVotes={step.voteType !== VOTE_TYPE_DISABLED}
@@ -119,4 +111,4 @@ const mapStateToProps = (state) => {
     isLoading: state.proposal.isLoading,
   };
 };
-export default connect(mapStateToProps)(CollectStepPage);
+export default connect(mapStateToProps)(ProposalStepPage);

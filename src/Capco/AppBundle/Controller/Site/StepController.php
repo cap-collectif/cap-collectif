@@ -306,9 +306,6 @@ class StepController extends Controller
         $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),
             'form' => $proposalForm,
-            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
-            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
-            'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
             'step' => $step,
             'count' => $searchResults['count'],
@@ -412,16 +409,12 @@ class StepController extends Controller
 
         $user = $this->getUser();
 
-        if ($user && count($searchResults) > 0) {
-            $searchResults['proposals'] = $this
-                ->get('capco.proposal_votes.resolver')
-                ->addVotesToProposalsForSelectionStepAndUser(
-                    $searchResults['proposals'],
-                    $step,
-                    $user
-                )
-            ;
-        }
+        $searchResults['proposals'] = $this
+            ->get('capco.proposal_votes.resolver')
+            ->addUserHasVoteToProposals(
+                $searchResults['proposals'],
+                $user
+        );
 
         $form = $step->getProposalForm();
 
@@ -430,15 +423,13 @@ class StepController extends Controller
 
         $props = $serializer->serialize([
             'step' => $step,
-            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
             'statuses' => $step->getStatuses(),
-            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
-            'types' => $em->getRepository('CapcoUserBundle:UserType')->findAll(),
             'categories' => $categories,
             'proposals' => $searchResults['proposals'],
             'count' => $searchResults['count'],
+            'form' => $form,
             'showThemes' => $showThemes,
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Statuses', 'ThemeDetails', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias', 'VoteThreshold']));
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'ProposalForms', 'UserVotes', 'Statuses', 'ThemeDetails', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias', 'VoteThreshold']));
 
         return [
             'project' => $project,

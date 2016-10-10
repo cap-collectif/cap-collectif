@@ -14,16 +14,9 @@ const ProposalPageVotes = React.createClass({
     proposal: PropTypes.object.isRequired,
     stepId: PropTypes.number.isRequired,
     showModal: PropTypes.bool.isRequired,
-    className: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
-
-  getDefaultProps() {
-    return {
-      className: '',
-    };
-  },
 
   componentDidMount() {
     const {
@@ -35,7 +28,7 @@ const ProposalPageVotes = React.createClass({
   },
 
   render() {
-    const { className, proposal, stepId, showModal, dispatch } = this.props;
+    const { proposal, stepId, showModal, dispatch } = this.props;
     const votes = proposal.votesByStepId[stepId];
     const votesCount = proposal.votesCountByStepId[stepId];
     const votesToDisplay = votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
@@ -45,13 +38,8 @@ const ProposalPageVotes = React.createClass({
       return <p>{this.getIntlMessage('proposal.vote.none')}</p>;
     }
 
-    const classes = {
-      proposal__votes: true,
-      [className]: true,
-    };
-
     return (
-      <div className={classNames(classes)}>
+      <div className={classNames({ proposal__votes: true })}>
         <h2>
           <FormattedMessage
             message={this.getIntlMessage('proposal.vote.count')}
