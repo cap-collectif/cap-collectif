@@ -464,10 +464,12 @@ export const reducer = (state = initialState, action) => {
       const proposal = state.proposalsById[action.proposalId];
       const votesByStepId = proposal.votesByStepId;
       votesByStepId[action.stepId].push(action.vote);
+      const votesCountByStepId = proposal.votesByStepId;
+      votesCountByStepId[action.stepId]++;
       const proposalsById = state.proposalsById;
       const userHasVoteByStepId = proposal.userHasVoteByStepId;
       userHasVoteByStepId[action.stepId] = true;
-      proposalsById[action.proposalId] = { ...proposal, votesByStepId, userHasVoteByStepId };
+      proposalsById[action.proposalId] = { ...proposal, votesByStepId, votesCountByStepId, userHasVoteByStepId };
       return {
         ...state,
         proposalsById,
@@ -480,10 +482,12 @@ export const reducer = (state = initialState, action) => {
       const proposal = state.proposalsById[action.proposalId];
       // const votesByStepId = proposal.votesByStepId;
       // votesByStepId[action.stepId].push(action.vote);
+      const votesCountByStepId = proposal.votesByStepId;
+      votesCountByStepId[action.stepId]--;
       const proposalsById = state.proposalsById;
       const userHasVoteByStepId = proposal.userHasVoteByStepId;
       userHasVoteByStepId[action.stepId] = false;
-      proposalsById[action.proposalId] = { ...proposal, userHasVoteByStepId };
+      proposalsById[action.proposalId] = { ...proposal, votesCountByStepId, userHasVoteByStepId };
       return {
         ...state,
         proposalsById,

@@ -205,5 +205,7 @@ class SelectionStepsController extends FOSRestController
         // Keep in mind that refresh should usually not be triggered manually.
         $index = $this->get('fos_elastica.index');
         $index->refresh();
+
+        return $vote;
     }
 }
