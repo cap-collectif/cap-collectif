@@ -12,7 +12,7 @@ const ProposalVoteModal = React.createClass({
   displayName: 'ProposalVoteModal',
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    step: PropTypes.object,
+    step: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     showModal: PropTypes.bool.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
@@ -24,7 +24,6 @@ const ProposalVoteModal = React.createClass({
   getDefaultProps() {
     return {
       user: null,
-      step: null,
       creditsLeft: null,
     };
   },
@@ -34,8 +33,9 @@ const ProposalVoteModal = React.createClass({
       creditsLeft,
       proposal,
       user,
+      step,
     } = this.props;
-    if (user && !proposal.userHasVote && creditsLeft !== null && proposal.estimation !== null) {
+    if (user && !proposal.userHasVoteByStepId[step.id] && creditsLeft !== null && proposal.estimation !== null) {
       return creditsLeft >= proposal.estimation;
     }
     return true;
@@ -104,10 +104,12 @@ const ProposalVoteModal = React.createClass({
 });
 
 const mapStateToProps = (state, props) => {
+  const steps = state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId);
   return {
     user: state.default.user,
     showModal: !!(state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id),
     isSubmitting: state.proposal.isVoting,
+    step: steps.length === 1 ? steps[0] : null,
   };
 };
 

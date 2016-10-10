@@ -295,17 +295,13 @@ class StepController extends Controller
         }
 
         $user = $this->getUser();
-
-        if ($user) {
-            $searchResults['proposals'] = $this
-                ->get('capco.proposal_votes.resolver')
-                ->addVotesToProposalsForCollectStepAndUser(
-                    $searchResults['proposals'],
-                    $step,
-                    $user
-                )
-            ;
-        }
+        $searchResults['proposals'] = $this
+            ->get('capco.proposal_votes.resolver')
+            ->addUserHasVoteToProposals(
+                $searchResults['proposals'],
+                $user
+            )
+        ;
 
         $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),

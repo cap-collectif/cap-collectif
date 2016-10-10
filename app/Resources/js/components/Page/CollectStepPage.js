@@ -34,10 +34,6 @@ export const CollectStepPage = React.createClass({
     this.props.dispatch(loadProposals());
   },
 
-  selectPage(newPage) {
-    this.props.dispatch(changePage(newPage));
-  },
-
   render() {
     const {
       proposals,
@@ -49,6 +45,8 @@ export const CollectStepPage = React.createClass({
       themes,
       count,
       types,
+      currentPage,
+      dispatch,
       isLoading,
       randomOrder,
     } = this.props;
@@ -80,7 +78,9 @@ export const CollectStepPage = React.createClass({
           <div>
             {
               proposals.length === 0 && !step.isPrivate
-                ? <p className={{ 'p--centered': true }} style={{ 'margin-bottom': '40px' }}>{ this.getIntlMessage('proposal.empty') }</p>
+                ? <p className={{ 'p--centered': true }} style={{ marginBottom: '40px' }}>
+                    { this.getIntlMessage('proposal.empty') }
+                  </p>
                 : <VisibilityBox enabled={step.isPrivate}>
                     <ProposalList
                       proposals={proposals}
@@ -92,17 +92,16 @@ export const CollectStepPage = React.createClass({
             {
               showPagination &&
                 <Pagination
-                  current={this.state.currentPage}
+                  current={currentPage}
                   nbPages={nbPages}
-                  onChange={this.selectPage}
+                  onChange={(newPage) => {
+                    dispatch(changePage(newPage));
+                    dispatch(loadProposals());
+                  }}
                 />
             }
             {
-              showRandomButton &&
-                <ProposalRandomButton
-                  isLoading={isLoading}
-                  onClick={this.loadProposals}
-                />
+              showRandomButton && <ProposalRandomButton />
             }
           </div>
         </Loader>

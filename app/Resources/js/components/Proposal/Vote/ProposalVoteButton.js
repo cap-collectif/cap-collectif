@@ -7,17 +7,13 @@ import { connect } from 'react-redux';
 
 const ProposalVoteButton = React.createClass({
   propTypes: {
-    disabled: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object,
     user: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    onMouseOver: PropTypes.func,
-    onMouseOut: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
     style: PropTypes.object,
-    isLoading: PropTypes.bool.isRequired,
+    isDeleting: PropTypes.bool.isRequired,
     className: PropTypes.string,
   },
   mixins: [IntlMixin],
@@ -25,10 +21,6 @@ const ProposalVoteButton = React.createClass({
   getDefaultProps() {
     return {
       disabled: false,
-      onMouseOver: () => {},
-      onMouseOut: () => {},
-      onFocus: () => {},
-      onBlur: () => {},
       style: {},
       className: '',
       step: null,
@@ -44,13 +36,9 @@ const ProposalVoteButton = React.createClass({
       className,
       proposal,
       disabled,
-      onMouseOver,
-      onMouseOut,
-      onFocus,
-      onBlur,
-      isLoading,
+      isDeleting,
     } = this.props;
-    const userHasVote = proposal.userHasVote;
+    const userHasVote = step !== null && proposal.userHasVoteByStepId[step.id];
     const bsStyle = user && userHasVote ? 'danger' : 'success';
     let classes = classNames({
       'btn--outline': true,
@@ -68,14 +56,12 @@ const ProposalVoteButton = React.createClass({
         style={style}
         onClick={onClick}
         active={userHasVote}
-        isLoading={isLoading}
-        onMouseOver={onMouseOver}
-        onMouseOut={onMouseOut}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        disabled={disabled || isDeleting}
       >
         {
-          user && userHasVote
+          isDeleting
+          ? this.getIntlMessage('proposal.vote.deleting')
+          : user && userHasVote
             ? this.getIntlMessage('proposal.vote.delete')
             : this.getIntlMessage('proposal.vote.add')
         }
@@ -87,7 +73,7 @@ const ProposalVoteButton = React.createClass({
 
 const mapStateToProps = (state, props) => {
   return {
-    isLoading: state.proposal.currentDeletingVote === props.proposal.id,
+    isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
   };
 };
 

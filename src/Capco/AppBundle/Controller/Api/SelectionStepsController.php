@@ -72,16 +72,13 @@ class SelectionStepsController extends FOSRestController
 
         $user = $this->getUser();
 
-        if ($user) {
-            $results['proposals'] = $this
-                ->get('capco.proposal_votes.resolver')
-                ->addVotesToProposalsForSelectionStepAndUser(
-                    $results['proposals'],
-                    $selectionStep,
-                    $user
-                )
-            ;
-        }
+        $results['proposals'] = $this
+            ->get('capco.proposal_votes.resolver')
+            ->addUserHasVoteToProposals(
+                $results['proposals'],
+                $user
+            )
+        ;
 
         $creditsLeft = $this
             ->get('capco.proposal_votes.resolver')
@@ -170,7 +167,7 @@ class SelectionStepsController extends FOSRestController
      * @Delete("/selection_steps/{selection_step_id}/proposals/{proposal_id}/votes")
      * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
-     * @View(statusCode=204)
+     * @View(statusCode=200, serializerGroups={"ProposalSelectionVotes", "UsersInfos", "UserMedias"})
      */
     public function deleteVoteOnProposalAction(Request $request, SelectionStep $selectionStep, Proposal $proposal)
     {

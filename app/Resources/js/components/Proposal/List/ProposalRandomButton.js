@@ -1,25 +1,27 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { loadProposals } from '../../../redux/modules/proposal';
 
 const ProposalRandomButton = React.createClass({
   propTypes: {
-    isLoading: React.PropTypes.bool.isRequired,
-    onClick: React.PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
     const {
       isLoading,
-      onClick,
+      dispatch,
     } = this.props;
     return (
       <div className="pagination--custom  text-center">
         <Button
           bsStyle="primary"
           disabled={isLoading}
-          onClick={onClick}
+          onClick={() => { dispatch(loadProposals()); }}
         >
           {
             isLoading
@@ -33,4 +35,10 @@ const ProposalRandomButton = React.createClass({
 
 });
 
-export default ProposalRandomButton;
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.proposal.isLoading,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalRandomButton);

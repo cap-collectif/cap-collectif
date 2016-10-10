@@ -12,6 +12,7 @@ use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,67 +23,42 @@ class ProposalStepVotesResolver
     protected $selectionStepRepository;
     protected $proposalCollectVoteRepository;
     protected $collectStepRepository;
+    protected $proposalRepository;
 
     public function __construct(
       ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
       SelectionStepRepository $selectionStepRepository,
       ProposalCollectVoteRepository $proposalCollectVoteRepository,
-      CollectStepRepository $collectStepRepository
+      CollectStepRepository $collectStepRepository,
+      ProposalRepository $proposalRepository
       )
     {
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->selectionStepRepository = $selectionStepRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->collectStepRepository = $collectStepRepository;
+        $this->proposalRepository = $proposalRepository;
     }
 
-    public function addVotesToProposalsForSelectionStepAndUser(array $proposals, SelectionStep $selectionStep, User $user)
+    public function addUserHasVoteToProposals(array $proposals, User $user = null)
     {
-        $usersVotesForSelectionStep = $this
-            ->proposalSelectionVoteRepository
-            ->findBy(
-                [
-                    'selectionStep' => $selectionStep,
-                    'user' => $user,
-                ]
-            );
         $results = [];
         foreach ($proposals as $proposal) {
-            $proposal['userHasVote'] = $this->proposalHasVote($proposal, $usersVotesForSelectionStep);
+            $userHasVoteOnSelectionSteps = $this->proposalSelectionVoteRepository
+              ->getUserVoteByProposalGroupedBySteps(
+              $this->proposalRepository->find($proposal['id']),
+              $user
+            );
+            $userHasVoteOnCollectSteps = $this->proposalCollectVoteRepository
+              ->getUserVoteByProposalGroupedBySteps(
+              $this->proposalRepository->find($proposal['id']),
+              $user
+            );
+            $proposal['userHasVoteByStepId'] = $userHasVoteOnSelectionSteps + $userHasVoteOnCollectSteps;
             $results[] = $proposal;
         }
 
         return $results;
-    }
-
-    public function addVotesToProposalsForCollectStepAndUser(array $proposals, CollectStep $collectStep, User $user)
-    {
-        $usersVotesForCollectStep = $this
-            ->proposalCollectVoteRepository
-            ->findBy(
-                [
-                    'collectStep' => $collectStep,
-                    'user' => $user,
-                ]
-            );
-        $results = [];
-        foreach ($proposals as $proposal) {
-            $proposal['userHasVote'] = $this->proposalHasVote($proposal, $usersVotesForCollectStep);
-            $results[] = $proposal;
-        }
-
-        return $results;
-    }
-
-    public function proposalHasVote($proposal, $usersVotesForStep)
-    {
-        foreach ($usersVotesForStep as $vote) {
-            if ($vote->getProposal()->getId() === $proposal['id']) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private function checkIntanceOfProposalVote($vote)

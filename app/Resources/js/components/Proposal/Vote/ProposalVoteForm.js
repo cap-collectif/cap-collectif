@@ -67,7 +67,7 @@ const ProposalVoteForm = React.createClass({
     } = this.props;
     if (!isSubmitting && nextProps.isSubmitting) {
       if (this.isValid()) {
-        if (user && proposal.userHasVote) {
+        if (user && proposal.userHasVoteByStepId[step.id]) {
           deleteVote(dispatch, step, proposal);
         }
         const data = this.state.form;

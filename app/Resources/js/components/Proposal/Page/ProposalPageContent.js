@@ -20,9 +20,6 @@ const ProposalPageContent = React.createClass({
     form: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
     className: PropTypes.string,
-    creditsLeft: PropTypes.number,
-    userHasVote: PropTypes.bool.isRequired,
-    onVote: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
@@ -30,7 +27,6 @@ const ProposalPageContent = React.createClass({
   getDefaultProps() {
     return {
       className: '',
-      creditsLeft: null,
     };
   },
 
@@ -40,9 +36,6 @@ const ProposalPageContent = React.createClass({
       className,
       form,
       categories,
-      userHasVote,
-      creditsLeft,
-      onVote,
       dispatch,
     } = this.props;
     const classes = {
@@ -53,12 +46,12 @@ const ProposalPageContent = React.createClass({
       <div className={classNames(classes)}>
         {
           proposal.media &&
-          <img
-            id="proposal-media"
-            src={proposal.media.url}
-            role="presentation"
-            className="block img-responsive"
-          />
+            <img
+              id="proposal-media"
+              src={proposal.media.url}
+              role="presentation"
+              className="block img-responsive"
+            />
         }
         <div className="block">
           <h3 className="h3">{ this.getIntlMessage('proposal.description') }</h3>
@@ -73,12 +66,7 @@ const ProposalPageContent = React.createClass({
           )
         }
         <div className="block proposal__buttons">
-          <ProposalVoteButtonWrapper
-            proposal={proposal}
-            creditsLeft={creditsLeft}
-            userHasVote={userHasVote}
-            onClick={onVote}
-          />
+          <ProposalVoteButtonWrapper proposal={proposal} />
           <ShareButtonDropdown
             id="proposal-share-button"
             url={proposal._links.show}

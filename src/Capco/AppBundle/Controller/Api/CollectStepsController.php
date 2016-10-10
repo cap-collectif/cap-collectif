@@ -55,16 +55,13 @@ class CollectStepsController extends FOSRestController
 
       $user = $this->getUser();
 
-      if ($user) {
-          $results['proposals'] = $this
-              ->get('capco.proposal_votes.resolver')
-              ->addVotesToProposalsForCollectStepAndUser(
-                  $results['proposals'],
-                  $proposalForm->getStep(),
-                  $user
-              )
-          ;
-      }
+      $results['proposals'] = $this
+          ->get('capco.proposal_votes.resolver')
+          ->addUserHasVoteToProposals(
+              $results['proposals'],
+              $user
+          )
+      ;
 
       return $results;
     }

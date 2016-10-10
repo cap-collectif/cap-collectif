@@ -119,6 +119,16 @@ class ProposalSerializationListener extends AbstractSerializationListener
             ->getByProposal($proposal, $userIsAuthorOrAdmin)
         ;
 
+        $userHasVoteOnSelectionSteps = $this->proposalSelectionVoteRepository
+            ->getUserVoteByProposalGroupedBySteps($proposal, $user === 'anon.' ? null : $user);
+        $userHasVoteOnCollectSteps = $this->proposalCollectVoteRepository
+            ->getUserVoteByProposalGroupedBySteps($proposal, $user === 'anon.' ? null : $user);
+
+        $event->getVisitor()->addData(
+            'userHasVoteByStepId',
+            $userHasVoteOnSelectionSteps + $userHasVoteOnCollectSteps
+        );
+
         $serializedResponses = $this->serializer->serialize(
             $responses,
             'json',
@@ -151,17 +161,6 @@ class ProposalSerializationListener extends AbstractSerializationListener
         if (isset($this->getIncludedGroups($event)['ProposalUserData'])) {
             $event->getVisitor()->addData(
                 'hasUserReported', $user === 'anon.' ? false : $proposal->userHasReport($user)
-            );
-
-            $userHasVoteOnSelectionSteps = $this->proposalSelectionVoteRepository
-                ->getUserVoteByProposalGroupedBySteps($proposal, $user === 'anon.' ? null : $user);
-
-            $userHasVoteOnCollectSteps = $this->proposalCollectVoteRepository
-                ->getUserVoteByProposalGroupedBySteps($proposal, $user === 'anon.' ? null : $user);
-
-            $event->getVisitor()->addData(
-                'userHasVoteByStepId',
-                $userHasVoteOnSelectionSteps + $userHasVoteOnCollectSteps
             );
         }
     }

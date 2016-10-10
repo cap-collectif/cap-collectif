@@ -20,7 +20,7 @@ export const CLOSE_VOTE_MODAL = 'proposal/CLOSE_VOTE_MODAL';
 export const VOTES_FETCH_REQUESTED = 'proposal/VOTES_FETCH_REQUESTED';
 export const VOTES_FETCH_SUCCEEDED = 'proposal/VOTES_FETCH_SUCCEEDED';
 export const VOTES_FETCH_FAILED = 'proposal/VOTES_FETCH_FAILED';
-export const DELETE_VOTE_REQUESTED = 'proposal/VOTE_REQUESTED';
+export const DELETE_VOTE_REQUESTED = 'proposal/DELETE_VOTE_REQUESTED';
 export const DELETE_VOTE_SUCCEEDED = 'proposal/DELETE_VOTE_SUCCEEDED';
 export const DELETE_VOTE_FAILED = 'proposal/DELETE_VOTE_FAILED';
 export const PROPOSAL_PAGINATION = 50;
@@ -31,19 +31,22 @@ export const CHANGE_FILTER = 'proposal/CHANGE_FILTER';
 
 export const SUBMIT_PROPOSAL_FORM = 'proposal/SUBMIT_PROPOSAL_FORM';
 
+export const OPEN_VOTES_MODAL = 'proposal/OPEN_VOTES_MODAL';
+export const CLOSE_VOTES_MODAL = 'proposal/CLOSE_VOTES_MODAL';
+
 export const CLOSE_DELETE_MODAL = 'proposal/CLOSE_DELETE_MODAL';
 export const OPEN_DELETE_MODAL = 'proposal/OPEN_DELETE_MODAL';
 export const CLOSE_EDIT_MODAL = 'proposal/CLOSE_EDIT_MODAL';
 export const OPEN_EDIT_MODAL = 'proposal/OPEN_EDIT_MODAL';
 export const CANCEL_SUBMIT_PROPOSAL = 'proposal/CANCEL_SUBMIT_PROPOSAL';
 const DELETE_REQUEST = 'proposal/DELETE_REQUEST';
+
 // this._creditsLeft = 0;
-// this._votableSteps = [];
-// this._votesCountByStepId = {};
 const initialState = {
   currentProposalId: null,
   proposalsById: [],
   creditsLeft: 0,
+  currentVotesModal: null,
   currentVoteModal: null,
   currentDeletingVote: null,
   showCreateModal: false,
@@ -60,10 +63,23 @@ const initialState = {
   currentPaginationPage: 1,
 };
 
-export const voteSuccess = (proposalId, vote) => {
+export const openVotesModal = () => {
+  return {
+    type: OPEN_VOTES_MODAL,
+  };
+};
+
+export const closeVotesModal = () => {
+  return {
+    type: CLOSE_VOTES_MODAL,
+  };
+};
+
+export const voteSuccess = (proposalId, stepId, vote) => {
   return {
     type: VOTE_SUCCEEDED,
     proposalId,
+    stepId,
     vote,
   };
 };
@@ -78,7 +94,7 @@ export const loadVotes = (stepId, proposalId) => {
 
 const deleteVoteSucceeded = (stepId, proposalId) => {
   return {
-    type: DELETE_VOTE_REQUESTED,
+    type: DELETE_VOTE_SUCCEEDED,
     proposalId,
     stepId,
   };
@@ -208,9 +224,8 @@ export const deleteProposal = (form, proposal, dispatch) => {
 };
 
 export const vote = (dispatch, step, proposal, data = {}) => {
-  console.log(step, proposal, data);
   let url = '';
-  switch (step.type) {
+  switch (typeof step.step_type !== 'undefined' ? step.step_type : step.type) {
     case 'selection':
       url = `/selection_steps/${step.id}/proposals/${proposal.id}/votes`;
       break;
@@ -224,7 +239,7 @@ export const vote = (dispatch, step, proposal, data = {}) => {
   Fetcher.post(url, data)
     .then(json)
     .then(newVote => {
-      dispatch(voteSuccess(proposal.id, newVote));
+      dispatch(voteSuccess(proposal.id, step.id, newVote));
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
@@ -245,7 +260,7 @@ export const startVoting = () => {
 export const deleteVote = (dispatch, step, proposal) => {
   dispatch(deleteVoteRequested(proposal.id));
   let url = '';
-  switch (step.type) {
+  switch (typeof step.step_type !== 'undefined' ? step.step_type : step.type) {
     case 'selection':
       url = `/selection_steps/${step.id}/proposals/${proposal.id}/votes`;
       break;
@@ -259,7 +274,7 @@ export const deleteVote = (dispatch, step, proposal) => {
   return Fetcher
       .delete(url)
       .then(() => {
-        dispatch(deleteVoteSucceeded(proposal.id));
+        dispatch(deleteVoteSucceeded(step.id, proposal.id));
         FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'proposal.request.delete_vote.success' },
@@ -404,8 +419,14 @@ export const reducer = (state = initialState, action) => {
       const filters = { ...this.state.filters, [action.filter]: action.value };
       return { ...state, filters, currentPaginationPage: 1 };
     }
+    case OPEN_VOTES_MODAL:
+      return { ...state, currentVotesModal: state.currentProposalId };
+    case CLOSE_VOTES_MODAL:
+      return { ...state, currentVotesModal: state.currentProposalId };
     case CHANGE_ORDER:
       return { ...state, order: action.order, currentPaginationPage: 1 };
+    case CHANGE_PAGE:
+      return { ...state, currentPaginationPage: action.page };
     case CHANGE_TERMS:
       return { ...state, terms: action.terms, currentPaginationPage: 1 };
     case SUBMIT_PROPOSAL_FORM:
@@ -427,25 +448,43 @@ export const reducer = (state = initialState, action) => {
     case OPEN_VOTE_MODAL:
       return { ...state, currentVoteModal: action.id };
     case CLOSE_VOTE_MODAL:
-      return { ...state, currentVoteModal: null };
+      return { ...state, currentVoteModal: null, isVoting: false };
     case VOTE_REQUESTED:
       return { ...state, isVoting: true };
     case VOTE_FAILED:
       return { ...state, isVoting: false };
     case DELETE_VOTE_REQUESTED:
-      return { ...state, currentDeletingVote: action.proposal.id };
+      return { ...state, currentDeletingVote: action.proposalId };
     case VOTE_SUCCEEDED: {
       const proposal = state.proposalsById[action.proposalId];
       const votesByStepId = proposal.votesByStepId;
       votesByStepId[action.stepId].push(action.vote);
       const proposalsById = state.proposalsById;
-      proposalsById[action.proposalId] = { ...proposal, votesByStepId };
+      const userHasVoteByStepId = proposal.userHasVoteByStepId;
+      userHasVoteByStepId[action.stepId] = true;
+      proposalsById[action.proposalId] = { ...proposal, votesByStepId, userHasVoteByStepId };
       return {
         ...state,
         proposalsById,
         isVoting: false,
         currentVoteModal: null,
         creditsLeft: state.creditsLeft - (action.vote.estimation || 0),
+      };
+    }
+    case DELETE_VOTE_SUCCEEDED: {
+      const proposal = state.proposalsById[action.proposalId];
+      // const votesByStepId = proposal.votesByStepId;
+      // votesByStepId[action.stepId].push(action.vote);
+      const proposalsById = state.proposalsById;
+      const userHasVoteByStepId = proposal.userHasVoteByStepId;
+      userHasVoteByStepId[action.stepId] = false;
+      proposalsById[action.proposalId] = { ...proposal, userHasVoteByStepId };
+      return {
+        ...state,
+        proposalsById,
+        isVoting: false,
+        currentDeletingVote: null,
+        // creditsLeft: state.creditsLeft + (action.vote.estimation || 0),
       };
     }
     case DELETE_REQUEST:

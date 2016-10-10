@@ -61,22 +61,6 @@ class ProposalsController extends FOSRestController
             ->getFirstVotableStepForProposal($proposal)
         ;
 
-        $userHasVote = false;
-        if ($this->getUser() && $firstVotableStep) {
-            $userVote = $em
-                ->getRepository('CapcoAppBundle:ProposalSelectionVote')
-                ->findOneBy(
-                    [
-                        'selectionStep' => $firstVotableStep,
-                        'user' => $this->getUser(),
-                        'proposal' => $proposal,
-                    ]
-                );
-            if ($userVote !== null) {
-                $userHasVote = true;
-            }
-        }
-
         $creditsLeft = $this
             ->get('capco.proposal_votes.resolver')
             ->getCreditsLeftForUser($this->getUser(), $firstVotableStep)
@@ -84,7 +68,6 @@ class ProposalsController extends FOSRestController
 
         return [
             'proposal' => $proposal,
-            'userHasVote' => $userHasVote,
             'creditsLeft' => $creditsLeft,
         ];
     }

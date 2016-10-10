@@ -22,7 +22,6 @@ const ProposalPreviewVote = React.createClass({
     return (
       <div>
         <ProposalVoteButtonWrapper
-          step={step}
           proposal={proposal}
           style={{ width: '100%' }}
         />

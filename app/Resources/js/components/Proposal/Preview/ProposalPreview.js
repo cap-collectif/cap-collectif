@@ -56,8 +56,6 @@ const ProposalPreview = React.createClass({
               <div>
                 <ProposalPreviewVote
                   {...this.props}
-                  userHasVote={proposal.userHasVote}
-                  onVoteChange={this.onVoteChange}
                 />
               </div>
             </div>
@@ -74,10 +72,6 @@ const ProposalPreview = React.createClass({
               </div>
             }
           </div>
-          <ProposalStatus
-            proposal={proposal}
-            stepId={step ? step.id : null}
-          />
           <ProposalPreviewFooter
             proposal={proposal}
             showVotes={(showAllVotes || voteType !== VOTE_TYPE_DISABLED) && step.voteThreshold === 0}

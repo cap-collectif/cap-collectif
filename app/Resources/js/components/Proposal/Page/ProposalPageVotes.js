@@ -6,7 +6,7 @@ import { IntlMixin, FormattedMessage } from 'react-intl';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
 import { PROPOSAL_VOTES_TO_SHOW } from '../../../constants/ProposalConstants';
-import { loadVotes } from '../../../redux/modules/proposal';
+import { loadVotes, openVotesModal } from '../../../redux/modules/proposal';
 
 const ProposalPageVotes = React.createClass({
   displayName: 'ProposalPageVotes',
@@ -35,12 +35,13 @@ const ProposalPageVotes = React.createClass({
   },
 
   render() {
-    const { className, proposal, stepId, showModal } = this.props;
+    const { className, proposal, stepId, showModal, dispatch } = this.props;
     const votes = proposal.votesByStepId[stepId];
+    const votesCount = proposal.votesCountByStepId[stepId];
     const votesToDisplay = votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
-    const moreVotes = proposal.votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
+    const moreVotes = votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
 
-    if (proposal.votesCount <= 0) {
+    if (votesCount === 0) {
       return <p>{this.getIntlMessage('proposal.vote.none')}</p>;
     }
 
@@ -81,7 +82,7 @@ const ProposalPageVotes = React.createClass({
         }
         <AllVotesModal
           votes={votes}
-          onToggleModal={this.toggleModal}
+          onToggleModal={() => { dispatch(openVotesModal()); }}
           showModal={showModal}
         />
       </div>
@@ -90,9 +91,9 @@ const ProposalPageVotes = React.createClass({
 
 });
 
-const mapStateToProps = () => {
+const mapStateToProps = (state, props) => {
   return {
-    showModal: false,
+    showModal: !!(state.proposal.currentVotesModal && state.proposal.currentVotesModal === props.proposal.id),
   };
 };
 export default connect(mapStateToProps)(ProposalPageVotes);
