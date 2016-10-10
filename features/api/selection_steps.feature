@@ -91,8 +91,7 @@ Scenario: Anonymous API client wants to get a step
         @...@
       ],
       "count": 3,
-      "order": "random",
-      "creditsLeft": @...@
+      "order": "random"
     }
     """
 
@@ -149,8 +148,7 @@ Scenario: Anonymous API client wants to get a step
         @...@
       ],
       "count": 3,
-      "order": "random",
-      "creditsLeft": @...@
+      "order": "random"
     }
     """
 
@@ -210,7 +208,6 @@ Scenario: Anonymous API client wants to get a step
         @...@
       ],
       "count": 2,
-      "order": "random",
-      "creditsLeft": @...@
+      "order": "random"
     }
     """

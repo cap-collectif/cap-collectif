@@ -9,7 +9,6 @@ const ProposalList = React.createClass({
   propTypes: {
     proposals: PropTypes.array.isRequired,
     step: PropTypes.object.isRequired,
-    creditsLeft: PropTypes.number,
     showAllVotes: PropTypes.bool,
     showThemes: PropTypes.bool,
   },
@@ -17,7 +16,6 @@ const ProposalList = React.createClass({
 
   getDefaultProps() {
     return {
-      creditsLeft: null,
       step: null,
       showAllVotes: false,
       showThemes: false,
@@ -26,7 +24,6 @@ const ProposalList = React.createClass({
 
   render() {
     const {
-      creditsLeft,
       step,
       showAllVotes,
       showThemes,
@@ -67,7 +64,6 @@ const ProposalList = React.createClass({
                     key={proposal.id}
                     proposal={proposal}
                     step={step}
-                    creditsLeft={creditsLeft}
                     showAllVotes={showAllVotes}
                     showThemes={showThemes}
                   />
@@ -87,7 +83,6 @@ const ProposalList = React.createClass({
                         key={proposal.id}
                         proposal={proposal}
                         step={step}
-                        creditsLeft={creditsLeft}
                         showAllVotes={showAllVotes}
                         showThemes={showThemes}
                       />

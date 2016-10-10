@@ -13,6 +13,7 @@ const ProposalVoteForm = React.createClass({
     step: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
+    userHasVote: PropTypes.bool.isRequired,
     user: PropTypes.object,
   },
   mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
@@ -61,13 +62,14 @@ const ProposalVoteForm = React.createClass({
     const {
       isSubmitting,
       proposal,
+      userHasVote,
       dispatch,
       step,
       user,
     } = this.props;
     if (!isSubmitting && nextProps.isSubmitting) {
       if (this.isValid()) {
-        if (user && proposal.userHasVoteByStepId[step.id]) {
+        if (user && userHasVote) {
           deleteVote(dispatch, step, proposal);
         }
         const data = this.state.form;
@@ -166,9 +168,10 @@ const ProposalVoteForm = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     user: state.default.user,
+    userHasVote: props.step !== null && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
   };
 };
 

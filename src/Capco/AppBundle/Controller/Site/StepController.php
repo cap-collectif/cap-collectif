@@ -294,15 +294,6 @@ class StepController extends Controller
             }
         }
 
-        $user = $this->getUser();
-        $searchResults['proposals'] = $this
-            ->get('capco.proposal_votes.resolver')
-            ->addUserHasVoteToProposals(
-                $searchResults['proposals'],
-                $user
-            )
-        ;
-
         $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),
             'form' => $proposalForm,
@@ -406,15 +397,6 @@ class StepController extends Controller
                 null,
                 ['selectionStep' => $step->canShowProposals() ? $step->getId() : 0]
             );
-
-        $user = $this->getUser();
-
-        $searchResults['proposals'] = $this
-            ->get('capco.proposal_votes.resolver')
-            ->addUserHasVoteToProposals(
-                $searchResults['proposals'],
-                $user
-        );
 
         $form = $step->getProposalForm();
 

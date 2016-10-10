@@ -70,12 +70,8 @@ export const ProposalListFilters = React.createClass({
     this.setState({ displayedFilters: filters });
   },
 
-  // handleFilterChange(filterName) {
-  //   const value = this[filterName].getValue();
-  //   ProposalActions.changeFilterValue(filterName, value);
-  // },
-
   render() {
+    return null;
     const {
       order,
       dispatch,
@@ -146,6 +142,8 @@ const mapStateToProps = (state) => {
     features: state.default.features,
     order: state.proposal.order,
     filters: state.proposal.filters,
+    districts: state.default.districts,
+    statuses: [],
   };
 };
 

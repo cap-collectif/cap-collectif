@@ -40,25 +40,31 @@ class ProposalStepVotesResolver
         $this->proposalRepository = $proposalRepository;
     }
 
-    public function addUserHasVoteToProposals(array $proposals, User $user = null)
+    public function getUserVotesByStepIdForProject(Project $project, User $user = null)
     {
-        $results = [];
-        foreach ($proposals as $proposal) {
-            $userHasVoteOnSelectionSteps = $this->proposalSelectionVoteRepository
-              ->getUserVoteByProposalGroupedBySteps(
-              $this->proposalRepository->find($proposal['id']),
-              $user
-            );
-            $userHasVoteOnCollectSteps = $this->proposalCollectVoteRepository
-              ->getUserVoteByProposalGroupedBySteps(
-              $this->proposalRepository->find($proposal['id']),
-              $user
-            );
-            $proposal['userHasVoteByStepId'] = $userHasVoteOnSelectionSteps + $userHasVoteOnCollectSteps;
-            $results[] = $proposal;
-        }
+        $steps = $project->getSteps()->map(function ($step) {
+          return $step->getStep();
+        });
 
-        return $results;
+        $userVotesOnSelectionSteps = $this->proposalSelectionVoteRepository
+          ->getUserVotesGroupedByStepIds(
+          $steps->filter(function($step) {
+            return $step->isSelectionStep();
+          })->map(function($step) {
+            return $step->getId();
+          })->toArray(),
+          $user
+        );
+        $userHasVoteOnCollectSteps = $this->proposalCollectVoteRepository
+          ->getUserVotesGroupedByStepIds(
+          $steps->filter(function($step) {
+            return $step->isCollectStep();
+          })->map(function($step) {
+            return $step->getId();
+          })->toArray(),
+          $user
+        );
+        return $userVotesOnSelectionSteps + $userHasVoteOnCollectSteps;
     }
 
     private function checkIntanceOfProposalVote($vote)
@@ -116,31 +122,46 @@ class ProposalStepVotesResolver
         return $spent;
     }
 
-    public function getSpentCreditsForUser(User $user, SelectionStep $selectionStep)
+    public function getSpentCreditsForUser(User $user, AbstractStep $step)
     {
-        $votes = $this
-            ->proposalSelectionVoteRepository
-            ->findBy(
-                [
-                    'selectionStep' => $selectionStep,
-                    'user' => $user,
-                ]
-            )
-        ;
+        if ($step instanceof SelectionStep) {
+          $votes = $this
+              ->proposalSelectionVoteRepository
+              ->findBy(
+                  [
+                      'selectionStep' => $selectionStep,
+                      'user' => $user,
+                  ]
+              )
+          ;
+        }
+        if ($step instanceof CollectStep) {
+          $votes = $this
+              -$proposalCollectVoteRepository
+              ->findBy(
+                  [
+                      'collectStep' => $step,
+                      'user' => $user,
+                  ]
+              )
+          ;
+        }
 
         return $this->getAmountSpentForVotes($votes);
     }
 
-    public function getCreditsLeftForUser(User $user = null, SelectionStep $selectionStep)
+    public function getCreditsLeftByStepIdForProjectAndUser(Project $project, User $user = null)
     {
-        $creditsLeft = $selectionStep->getBudget();
-        if ($creditsLeft > 0 && $user && $selectionStep->isBudgetVotable()) {
-            $creditsLeft -= $this
-                ->getSpentCreditsForUser($user, $selectionStep)
-            ;
+        $creditsLeftByStepId = [];
+        foreach ($project->getSteps() as $step) {
+          $creditsLeft = $step->getBudget();
+          if ($creditsLeft > 0 && $user && $step->isBudgetVotable()) {
+              $creditsLeft -= $this->getSpentCreditsForUser($user, $step);
+          }
+          $creditsLeftByStepId[$step->getId()] = $creditsLeft;
         }
 
-        return $creditsLeft;
+        return $creditsLeftByStepId;
     }
 
     public function getVotableStepsForProposal(Proposal $proposal)

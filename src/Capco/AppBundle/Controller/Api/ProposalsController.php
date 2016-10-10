@@ -56,19 +56,8 @@ class ProposalsController extends FOSRestController
      */
     public function getProposalAction(Proposal $proposal)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $firstVotableStep = $this->get('capco.proposal_votes.resolver')
-            ->getFirstVotableStepForProposal($proposal)
-        ;
-
-        $creditsLeft = $this
-            ->get('capco.proposal_votes.resolver')
-            ->getCreditsLeftForUser($this->getUser(), $firstVotableStep)
-        ;
-
         return [
             'proposal' => $proposal,
-            'creditsLeft' => $creditsLeft,
         ];
     }
 

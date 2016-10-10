@@ -119,16 +119,6 @@ class ProposalSerializationListener extends AbstractSerializationListener
             ->getByProposal($proposal, $userIsAuthorOrAdmin)
         ;
 
-        $userHasVoteOnSelectionSteps = $this->proposalSelectionVoteRepository
-            ->getUserVoteByProposalGroupedBySteps($proposal, $user === 'anon.' ? null : $user);
-        $userHasVoteOnCollectSteps = $this->proposalCollectVoteRepository
-            ->getUserVoteByProposalGroupedBySteps($proposal, $user === 'anon.' ? null : $user);
-
-        $event->getVisitor()->addData(
-            'userHasVoteByStepId',
-            $userHasVoteOnSelectionSteps + $userHasVoteOnCollectSteps
-        );
-
         $serializedResponses = $this->serializer->serialize(
             $responses,
             'json',

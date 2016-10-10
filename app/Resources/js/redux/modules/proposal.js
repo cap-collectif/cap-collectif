@@ -41,11 +41,9 @@ export const OPEN_EDIT_MODAL = 'proposal/OPEN_EDIT_MODAL';
 export const CANCEL_SUBMIT_PROPOSAL = 'proposal/CANCEL_SUBMIT_PROPOSAL';
 const DELETE_REQUEST = 'proposal/DELETE_REQUEST';
 
-// this._creditsLeft = 0;
 const initialState = {
   currentProposalId: null,
   proposalsById: [],
-  creditsLeft: 0,
   currentVotesModal: null,
   currentVoteModal: null,
   currentDeletingVote: null,
@@ -462,17 +460,18 @@ export const reducer = (state = initialState, action) => {
       return { ...state, currentDeletingVote: action.proposalId };
     case VOTE_SUCCEEDED: {
       const proposal = state.proposalsById[action.proposalId];
-      const votesByStepId = proposal.votesByStepId;
-      votesByStepId[action.stepId].push(action.vote);
+      // const votesByStepId = proposal.votesByStepId;
+      // votesByStepId[action.stepId].push(action.vote);
       const votesCountByStepId = proposal.votesByStepId;
       votesCountByStepId[action.stepId]++;
       const proposalsById = state.proposalsById;
-      const userHasVoteByStepId = proposal.userHasVoteByStepId;
-      userHasVoteByStepId[action.stepId] = true;
-      proposalsById[action.proposalId] = { ...proposal, votesByStepId, votesCountByStepId, userHasVoteByStepId };
+      const userVotesByStepId = state.userVotesByStepId;
+      userVotesByStepId[action.stepId].push(proposal.id);
+      proposalsById[action.proposalId] = { ...proposal, votesCountByStepId };
       return {
         ...state,
         proposalsById,
+        userVotesByStepId,
         isVoting: false,
         currentVoteModal: null,
         creditsLeft: state.creditsLeft - (action.vote.estimation || 0),
@@ -480,17 +479,16 @@ export const reducer = (state = initialState, action) => {
     }
     case DELETE_VOTE_SUCCEEDED: {
       const proposal = state.proposalsById[action.proposalId];
-      // const votesByStepId = proposal.votesByStepId;
-      // votesByStepId[action.stepId].push(action.vote);
       const votesCountByStepId = proposal.votesByStepId;
       votesCountByStepId[action.stepId]--;
       const proposalsById = state.proposalsById;
-      const userHasVoteByStepId = proposal.userHasVoteByStepId;
-      userHasVoteByStepId[action.stepId] = false;
-      proposalsById[action.proposalId] = { ...proposal, votesCountByStepId, userHasVoteByStepId };
+      const userVotesByStepId = state.userVotesByStepId;
+      userVotesByStepId[action.stepId].slice(proposal.id);
+      proposalsById[action.proposalId] = { ...proposal, votesCountByStepId };
       return {
         ...state,
         proposalsById,
+        userVotesByStepId,
         isVoting: false,
         currentDeletingVote: null,
         // creditsLeft: state.creditsLeft + (action.vote.estimation || 0),

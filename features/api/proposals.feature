@@ -128,9 +128,7 @@ Feature: Proposal Restful Api
           "show": @string@,
           "index": @string@
         }
-      },
-      "userHasVote": false,
-      "creditsLeft": @...@
+      }
     }
     """
 
@@ -275,9 +273,7 @@ Feature: Proposal Restful Api
           "show": @string@,
           "index": @string@
         }
-      },
-      "userHasVote": false,
-      "creditsLeft": @...@
+      }
     }
     """
 
@@ -422,9 +418,7 @@ Feature: Proposal Restful Api
           "show": @string@,
           "index": @string@
         }
-      },
-      "userHasVote": false,
-      "creditsLeft": @...@
+      }
     }
     """
 

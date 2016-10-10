@@ -12,6 +12,8 @@ const ProposalVoteBasketWidget = React.createClass({
     projectId: PropTypes.number.isRequired,
     votableSteps: PropTypes.array.isRequired,
     votesPageUrl: PropTypes.string.isRequired,
+    userVotesCountByStepId: PropTypes.object.isRequired,
+    creditsLeftByStepId: PropTypes.object.isRequired,
     image: PropTypes.string,
   },
   mixins: [IntlMixin, DeepLinkStateMixin],
@@ -33,10 +35,12 @@ const ProposalVoteBasketWidget = React.createClass({
       image,
       votesPageUrl,
       votableSteps,
+      userVotesCountByStepId,
+      creditsLeftByStepId,
     } = this.props;
     const selectedStep = votableSteps.filter(step => step.id === parseInt(this.state.selectedStepId, 10))[0];
-    const budget = selectedStep.budget || 0;
-    const creditsLeft = selectedStep.creditsLeft || 0;
+    const budget = selectedStep.budget;
+    const creditsLeft = creditsLeftByStepId[selectedStep.id];
     const creditsSpent = budget - creditsLeft;
     const percentage = ProposalVotesHelper.getSpentPercentage(
       budget,
@@ -96,7 +100,7 @@ const ProposalVoteBasketWidget = React.createClass({
               <span className="widget__counter__value">
                 <FormattedMessage
                   message={this.getIntlMessage('project.votes.widget.count')}
-                  num={selectedStep.userVotesCount}
+                  num={userVotesCountByStepId[selectedStep.id]}
                 />
               </span>
             </li>
@@ -173,6 +177,8 @@ const ProposalVoteBasketWidget = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
+    userVotesCountByStepId: state.proposal.userVotesCountByStepId || {},
+    creditsLeftByStepId: state.proposal.creditsLeftByStepId || {},
     votableSteps: state.project.projects[state.project.currentProjectById].steps.filter(step => step.votable),
     projectId: state.project.currentProjectById,
   };

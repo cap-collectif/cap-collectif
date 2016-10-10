@@ -70,23 +70,6 @@ class SelectionStepsController extends FOSRestController
             $providedFilters
         );
 
-        $user = $this->getUser();
-
-        $results['proposals'] = $this
-            ->get('capco.proposal_votes.resolver')
-            ->addUserHasVoteToProposals(
-                $results['proposals'],
-                $user
-            )
-        ;
-
-        $creditsLeft = $this
-            ->get('capco.proposal_votes.resolver')
-            ->getCreditsLeftForUser($user, $selectionStep)
-        ;
-
-        $results['creditsLeft'] = $creditsLeft;
-
         return $results;
     }
 

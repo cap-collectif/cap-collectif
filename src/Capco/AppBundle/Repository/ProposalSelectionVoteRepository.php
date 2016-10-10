@@ -13,37 +13,31 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProposalSelectionVoteRepository extends EntityRepository
 {
-  public function getUserVoteByProposalGroupedBySteps(Proposal $proposal, User $user = null)
+  public function getUserVotesGroupedByStepIds(array $selectionStepsIds, User $user = null)
   {
-        $ids = array_map(function ($value) {
-          return $value->getId();
-        }, $proposal->getSelectionSteps());
-
-        $userHasVoteByStepId = [];
-
+        $userVotes = [];
         if ($user) {
-          $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id) as votesCount', 'ss.id as selectionStep')
-            ->leftJoin('pv.selectionStep', 'ss')
-            ->andWhere('pv.proposal = :proposal')
-            ->andWhere('pv.user = :user')
-            ->setParameter('proposal', $proposal)
-            ->setParameter('user', $user)
-            ->groupBy('pv.selectionStep')
-            ;
-          $results = $qb->getQuery()->getResult();
-          foreach ($results as $result) {
-            $userHasVoteByStepId[$result['selectionStep']] = intval($result['votesCount']) > 0;
+          foreach ($selectionStepsIds as $id) {
+            $qb = $this->createQueryBuilder('pv')
+              ->select('proposal.id')
+              ->andWhere('pv.selectionStep = :id')
+              ->andWhere('pv.user = :user')
+              ->leftJoin('pv.proposal', 'proposal')
+              ->setParameter('user', $user)
+              ->setParameter('id', $id)
+              ;
+            $results = $qb->getQuery()->getScalarResult();
+            $userVotes[$id] = array_column($results, 'id');
           }
         }
 
-        foreach ($ids as $id) {
-          if (!array_key_exists($id, $userHasVoteByStepId)) {
-            $userHasVoteByStepId[$id] = false;
+        foreach ($selectionStepsIds as $id) {
+          if (!array_key_exists($id, $userVotes)) {
+            $userVotes[$id] = [];
           }
         }
 
-        return $userHasVoteByStepId;
+        return $userVotes;
     }
 
     public function getCountsByProposalGroupedBySteps(Proposal $proposal)

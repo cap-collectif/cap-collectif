@@ -34,9 +34,9 @@ const ProposalVoteBox = React.createClass({
       creditsLeft,
       proposal,
       user,
-      step,
+      // step,
     } = this.props;
-    if (user && !proposal.userHasVoteByStepId[step.id] && creditsLeft !== null && proposal.estimation !== null) {
+    if (user /*! &&  proposal.userHasVoteByStepId[step.id]*/ && creditsLeft !== null && proposal.estimation !== null) {
       return creditsLeft >= proposal.estimation;
     }
     return true;

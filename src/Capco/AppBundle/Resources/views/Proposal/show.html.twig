@@ -14,7 +14,8 @@
       'currentProposalId': proposal.id,
       'proposalsById': {
         (proposal.id) : proposalSerialized
-      }
+      },
+      'userVotesByStepId': project|proposal_votes_list(app.user),
     }
   } %}
   {% include '@CapcoApp/redux_store.html.twig' with {'data' : state|merge(initialState)} %}

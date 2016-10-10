@@ -53,16 +53,6 @@ class CollectStepsController extends FOSRestController
 
       $results = $this->get('capco.search.resolver')->searchProposals($page, $pagination, $order, $terms, $providedFilters);
 
-      $user = $this->getUser();
-
-      $results['proposals'] = $this
-          ->get('capco.proposal_votes.resolver')
-          ->addUserHasVoteToProposals(
-              $results['proposals'],
-              $user
-          )
-      ;
-
       return $results;
     }
 
