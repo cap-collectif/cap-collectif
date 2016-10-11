@@ -34,12 +34,14 @@ export const ProposalListFilters = React.createClass({
       features,
       showThemes,
       orderByVotes,
+      statuses,
     } = this.props;
     return {
-      displayedFilters: ['statuses', 'types']
+      displayedFilters: ['types']
         .concat(features.districts ? ['districts'] : [])
         .concat(features.themes && showThemes ? ['themes'] : [])
-        .concat(categories.length > 0 ? ['categories'] : []),
+        .concat(categories.length > 0 ? ['categories'] : [])
+        .concat(statuses.length > 0 ? ['statuses'] : []),
       displayedOrders: ['random', 'last', 'old', 'comments'].concat(orderByVotes ? ['votes'] : []),
     };
   },
@@ -51,7 +53,6 @@ export const ProposalListFilters = React.createClass({
       filters,
     } = this.props;
     const { displayedFilters, displayedOrders } = this.state;
-    console.log(displayedFilters, filters);
     return (
     <div>
       <Row>
@@ -87,7 +88,7 @@ export const ProposalListFilters = React.createClass({
                   type="select"
                   id={`proposal-filter-${filterName}`}
                   onChange={(e) => {
-                    dispatch(changeFilter(filterName, e));
+                    dispatch(changeFilter(filterName, e.target.value));
                     dispatch(loadProposals());
                   }}
                   value={filters[filterName] || 0}
@@ -121,8 +122,7 @@ const mapStateToProps = (state) => {
     districts: state.default.districts,
     order: state.proposal.order,
     filters: state.proposal.filters,
-    statuses: [],
   };
 };
 
-export default connect(mapStateToProps, null, null, { pure: false })(ProposalListFilters);
+export default connect(mapStateToProps)(ProposalListFilters);
