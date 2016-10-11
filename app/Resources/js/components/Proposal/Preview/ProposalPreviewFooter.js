@@ -6,25 +6,18 @@ const ProposalPreviewFooter = React.createClass({
     proposal: PropTypes.object.isRequired,
     stepId: PropTypes.number.isRequired,
     showVotes: PropTypes.bool,
-    votesDelta: PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
-      stepId: null,
       showVotes: false,
     };
   },
 
   render() {
-    const { proposal, stepId, votesDelta, showVotes } = this.props;
-    const votesCount = stepId
-      ? proposal.votesCountByStepId[stepId]
-        ? proposal.votesCountByStepId[stepId] + votesDelta
-        : 0 + votesDelta
-      : proposal.votesCount
-    ;
+    const { proposal, stepId, showVotes } = this.props;
+    const votesCount = proposal.votesCountByStepId[stepId] || 0;
     const counterWidth = showVotes ? '50%' : '100%';
 
     return (

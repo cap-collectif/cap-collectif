@@ -71,7 +71,6 @@ export const ProposalListFilters = React.createClass({
   },
 
   render() {
-    return null;
     const {
       order,
       dispatch,
@@ -140,6 +139,8 @@ export const ProposalListFilters = React.createClass({
 const mapStateToProps = (state) => {
   return {
     features: state.default.features,
+    themes: state.default.themes,
+    types: state.default.user_types,
     order: state.proposal.order,
     filters: state.proposal.filters,
     districts: state.default.districts,

@@ -4,7 +4,7 @@ import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import { Nav, Navbar, Button, ProgressBar } from 'react-bootstrap';
 import Input from '../../Form/Input';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
-import ProposalVotesHelper from '../../../services/ProposalVotesHelper';
+import { getSpentPercentage } from '../../../services/ProposalVotesHelper';
 import { connect } from 'react-redux';
 import { mapValues } from 'lodash';
 
@@ -43,10 +43,7 @@ const ProposalVoteBasketWidget = React.createClass({
     const budget = selectedStep.budget;
     const creditsLeft = creditsLeftByStepId[selectedStep.id];
     const creditsSpent = budget - creditsLeft;
-    const percentage = ProposalVotesHelper.getSpentPercentage(
-      budget,
-      creditsSpent
-    );
+    const percentage = getSpentPercentage(budget, creditsSpent);
     return (
       <Navbar fixedTop className="proposal-vote__widget">
         {

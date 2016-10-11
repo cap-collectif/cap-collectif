@@ -2,8 +2,6 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Col } from 'react-bootstrap';
 import classNames from 'classnames';
-
-import ProposalVotesHelper from '../../../services/ProposalVotesHelper';
 import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewVote from './ProposalPreviewVote';
@@ -23,7 +21,6 @@ const ProposalPreview = React.createClass({
 
   getDefaultProps() {
     return {
-      step: null,
       showAllVotes: false,
       showThemes: false,
     };
@@ -36,7 +33,7 @@ const ProposalPreview = React.createClass({
       showAllVotes,
       showThemes,
     } = this.props;
-    const voteType = step ? step.voteType : 0;
+    const voteType = step ? step.voteType : VOTE_TYPE_DISABLED;
     const classes = classNames({
       box: true,
       'bg-vip': proposal.author && proposal.author.vip,
@@ -60,14 +57,11 @@ const ProposalPreview = React.createClass({
               </div>
             </div>
             {
-              step.voteThreshold > 0 &&
+              step && step.voteThreshold > 0 &&
               <div style={{ marginTop: '20px' }}>
                 <ProposalVoteThresholdProgressBar
                   proposal={proposal}
-                  votesCount={proposal.votesCount}
-                  voteThreshold={step.voteThreshold}
-                  votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, proposal.userHasVote)}
-                  stepId={step ? step.id : null}
+                  step={step}
                 />
               </div>
             }
@@ -75,7 +69,6 @@ const ProposalPreview = React.createClass({
           <ProposalPreviewFooter
             proposal={proposal}
             showVotes={(showAllVotes || voteType !== VOTE_TYPE_DISABLED) && step.voteThreshold === 0}
-            votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, proposal.userHasVote)}
             stepId={step ? step.id : null}
           />
           <ProposalStatus

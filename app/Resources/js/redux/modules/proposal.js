@@ -415,8 +415,10 @@ export function* saga() {
   ];
 }
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = {}, action) => {
   switch (action.type) {
+    case '@@INIT':
+      return { ...initialState, ...state };
     case CHANGE_FILTER: {
       const filters = { ...this.state.filters, [action.filter]: action.value };
       return { ...state, filters, currentPaginationPage: 1 };
@@ -467,13 +469,15 @@ export const reducer = (state = initialState, action) => {
       const userVotesByStepId = state.userVotesByStepId;
       userVotesByStepId[action.stepId].push(proposal.id);
       proposalsById[action.proposalId] = { ...proposal, votesCountByStepId };
+      const creditsLeftByStepId = state.creditsLeftByStepId;
+      creditsLeftByStepId[action.stepId] -= proposal.estimation || 0;
       return {
         ...state,
         proposalsById,
         userVotesByStepId,
         isVoting: false,
         currentVoteModal: null,
-        creditsLeft: state.creditsLeft - (action.vote.estimation || 0),
+        creditsLeftByStepId,
       };
     }
     case DELETE_VOTE_SUCCEEDED: {
@@ -484,13 +488,15 @@ export const reducer = (state = initialState, action) => {
       const userVotesByStepId = state.userVotesByStepId;
       userVotesByStepId[action.stepId] = userVotesByStepId[action.stepId].filter(voteId => voteId !== action.proposalId);
       proposalsById[action.proposalId] = { ...proposal, votesCountByStepId };
+      const creditsLeftByStepId = state.creditsLeftByStepId;
+      creditsLeftByStepId[action.stepId] += proposal.estimation || 0;
       return {
         ...state,
         proposalsById,
         userVotesByStepId,
+        creditsLeftByStepId,
         isVoting: false,
         currentDeletingVote: null,
-        // creditsLeft: state.creditsLeft + (action.vote.estimation || 0),
       };
     }
     case DELETE_REQUEST:

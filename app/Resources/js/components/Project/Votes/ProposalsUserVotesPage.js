@@ -3,18 +3,17 @@ import ProposalUserVoteItem from './ProposalUserVoteItem';
 import { Table } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
+import { connect } from 'react-redux';
 
 const ProposalsUserVotesPage = React.createClass({
   propTypes: {
-    projectId: PropTypes.number.isRequired,
-    themes: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
+    userVotesCountByStepId: PropTypes.object.isRequired,
     votableSteps: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { votableSteps } = this.props;
+    const { votableSteps, userVotesCountByStepId } = this.props;
     return (
       <div>
         <div className="container container--custom text-center">
@@ -55,7 +54,7 @@ const ProposalsUserVotesPage = React.createClass({
                     }
                     <h3>
                       <FormattedMessage
-                        num={step.userVotesCount}
+                        num={userVotesCountByStepId[step.id]}
                         message={this.getIntlMessage('project.votes.nb')}
                       />
                     </h3>
@@ -80,4 +79,10 @@ const ProposalsUserVotesPage = React.createClass({
 
 });
 
-export default ProposalsUserVotesPage;
+const mapStateToProps = (state) => {
+  return {
+    userVotesCountByStepId: state.proposal.userVotesCountByStepId,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalsUserVotesPage);
