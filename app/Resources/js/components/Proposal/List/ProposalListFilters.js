@@ -29,45 +29,19 @@ export const ProposalListFilters = React.createClass({
   },
 
   getInitialState() {
-    return {
-      displayedFilters: ['statuses', 'types', 'districts', 'themes', 'categories'],
-      displayedOrders: ['random', 'last', 'old', 'comments'],
-    };
-  },
-
-  componentDidMount() {
-    const { orderByVotes } = this.props;
-    if (orderByVotes) {
-      const orders = this.state.displayedOrders;
-      orders.push('votes');
-      this.setState({ displayedOrders: orders }); // eslint-disable-line react/no-did-mount-set-state
-    }
-    this.updateDisplayedFilters();
-  },
-
-  componentDidUpdate(prevProps) {
-    if (prevProps && (prevProps.order !== this.props.order || prevProps.filters !== this.props.filters)) {
-      this.props.dispatch(loadProposals());
-    }
-  },
-
-  updateDisplayedFilters() {
     const {
       categories,
       features,
       showThemes,
+      orderByVotes,
     } = this.props;
-    const filters = ['statuses', 'types'];
-    if (features.districts) {
-      filters.push('districts');
-    }
-    if (features.themes && showThemes) {
-      filters.push('themes');
-    }
-    if (categories.length > 0) {
-      filters.push('categories');
-    }
-    this.setState({ displayedFilters: filters });
+    return {
+      displayedFilters: ['statuses', 'types']
+        .concat(features.districts ? ['districts'] : [])
+        .concat(features.themes && showThemes ? ['themes'] : [])
+        .concat(categories.length > 0 ? ['categories'] : []),
+      displayedOrders: ['random', 'last', 'old', 'comments'].concat(orderByVotes ? ['votes'] : []),
+    };
   },
 
   render() {
@@ -76,6 +50,8 @@ export const ProposalListFilters = React.createClass({
       dispatch,
       filters,
     } = this.props;
+    const { displayedFilters, displayedOrders } = this.state;
+    console.log(displayedFilters, filters);
     return (
     <div>
       <Row>
@@ -83,16 +59,18 @@ export const ProposalListFilters = React.createClass({
           <Input
             id="proposal-sorting"
             type="select"
-            onChange={(e) => { dispatch(changeOrder(e.target.value)); }}
+            onChange={(e) => {
+              dispatch(changeOrder(e.target.value));
+              dispatch(loadProposals());
+            }}
             value={order}
           >
             {
-              this.state.displayedOrders.map((choice) => {
-                return (
+              displayedOrders.map(choice =>
                   <option key={choice} value={choice}>
                     {this.getIntlMessage(`global.filter_f_${choice}`)}
                   </option>
-                );
+                )
               })
             }
           </Input>
@@ -103,37 +81,36 @@ export const ProposalListFilters = React.createClass({
       </Row>
       <Row>
         {
-          this.state.displayedFilters.filter((filterName) => filters[filterName]).map((filterName, index) => {
-            return (
+          displayedFilters.map((filterName, index) =>
               <Col xs={12} md={6} key={index}>
                 <Input
                   type="select"
                   id={`proposal-filter-${filterName}`}
-                  onChange={(e) => { dispatch(changeFilter(filterName, e)); }}
+                  onChange={(e) => {
+                    dispatch(changeFilter(filterName, e));
+                    dispatch(loadProposals());
+                  }}
                   value={filters[filterName] || 0}
                 >
                   <option value="0">
                     {this.getIntlMessage(`global.select_${filterName}`)}
                   </option>
                   {
-                    filters[filterName].map((choice) => {
-                      return (
+                    this.props[filterName].map(choice =>
                         <option key={choice.id} value={choice.id}>
                           {choice.title || choice.name}
                         </option>
-                      );
+                      )
                     })
                   }
                 </Input>
               </Col>
-            );
-          })
+          )
         }
       </Row>
     </div>
     );
   },
-
 });
 
 const mapStateToProps = (state) => {
@@ -141,9 +118,9 @@ const mapStateToProps = (state) => {
     features: state.default.features,
     themes: state.default.themes,
     types: state.default.user_types,
+    districts: state.default.districts,
     order: state.proposal.order,
     filters: state.proposal.filters,
-    districts: state.default.districts,
     statuses: [],
   };
 };

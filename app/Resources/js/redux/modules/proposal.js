@@ -420,7 +420,7 @@ export const reducer = (state = {}, action) => {
     case '@@INIT':
       return { ...initialState, ...state };
     case CHANGE_FILTER: {
-      const filters = { ...this.state.filters, [action.filter]: action.value };
+      const filters = { ...state.filters, [action.filter]: action.value };
       return { ...state, filters, currentPaginationPage: 1 };
     }
     case OPEN_VOTES_MODAL:
