@@ -56,11 +56,6 @@ class SelectionStep extends AbstractStep implements IndexableInterface
     private $contributorsCount = 0;
 
     /**
-     * @ORM\Column(name="budget", type="float", nullable=true)
-     */
-    private $budget = null;
-
-    /**
      * @ORM\Column(name="proposals_hidden", type="boolean", nullable=false, options={"default" = false})
      */
     private $proposalsHidden = false;
@@ -138,26 +133,6 @@ class SelectionStep extends AbstractStep implements IndexableInterface
     public function setContributorsCount($contributorsCount)
     {
         $this->contributorsCount = $contributorsCount;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBudget()
-    {
-        return $this->budget;
-    }
-
-    /**
-     * @param mixed $budget
-     *
-     * @return $this
-     */
-    public function setBudget($budget)
-    {
-        $this->budget = $budget;
 
         return $this;
     }

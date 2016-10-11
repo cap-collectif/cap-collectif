@@ -30,6 +30,23 @@ trait VoteTypeTrait
      */
     private $voteType = 0;
 
+    /**
+     * @ORM\Column(name="budget", type="float", nullable=true)
+     */
+    private $budget = null;
+
+    public function getBudget()
+    {
+        return $this->budget;
+    }
+
+    public function setBudget(float $budget = null): self
+    {
+        $this->budget = $budget;
+
+        return $this;
+    }
+
     public function getVoteType(): int
     {
         return $this->voteType;

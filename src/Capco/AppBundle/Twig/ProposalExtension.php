@@ -24,11 +24,17 @@ class ProposalExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFilter('proposal_votes_list', [$this, 'votesList']),
+            new \Twig_SimpleFilter('credits_list_list', [$this, 'creditsLeftList']),
         ];
     }
 
     public function votesList(Project $project, User $user = null)
     {
         return $this->resolver->getUserVotesByStepIdForProject($project, $user);
+    }
+
+    public function creditsLeftList(Project $project, User $user = null)
+    {
+        return $this->resolver->getCreditsLeftByStepIdForProjectAndUser($project, $user);
     }
 }

@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProposalSelectionVoteRepository extends EntityRepository
 {
-  public function getUserVotesGroupedByStepIds(array $selectionStepsIds, User $user = null)
+  public function getUserVotesGroupedByStepIds(array $selectionStepsIds, User $user = null): array
   {
         $userVotes = [];
         if ($user) {
@@ -42,7 +42,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $userVotes;
     }
 
-    public function getCountsByProposalGroupedBySteps(Proposal $proposal)
+    public function getCountsByProposalGroupedBySteps(Proposal $proposal): array
     {
         $ids = array_map(function ($value) {
             return $value->getId();
@@ -90,50 +90,50 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getVotesForUserInProjectGroupedBySteps(User $user, Project $project)
-    {
-        $qb = $this->createQueryBuilder('pv')
-            ->addSelect('p', 'pf', 's')
-            ->leftJoin('pv.proposal', 'p')
-            ->leftJoin('p.proposalForm', 'pf')
-            ->leftJoin('pv.selectionStep', 'ss')
-            ->leftJoin('pf.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pas')
-            ->where('pv.user = :user')
-            ->setParameter('user', $user)
-            ->andWhere('pas.project = :project')
-            ->setParameter('project', $project)
-            ->orderBy('pv.createdAt', 'DESC')
-            ->groupBy('ss.id')
-        ;
+    // public function getVotesForUserInProjectGroupedBySteps(User $user, Project $project)
+    // {
+    //     $qb = $this->createQueryBuilder('pv')
+    //         ->addSelect('p', 'pf', 's')
+    //         ->leftJoin('pv.proposal', 'p')
+    //         ->leftJoin('p.proposalForm', 'pf')
+    //         ->leftJoin('pv.selectionStep', 'ss')
+    //         ->leftJoin('pf.step', 's')
+    //         ->leftJoin('s.projectAbstractStep', 'pas')
+    //         ->where('pv.user = :user')
+    //         ->setParameter('user', $user)
+    //         ->andWhere('pas.project = :project')
+    //         ->setParameter('project', $project)
+    //         ->orderBy('pv.createdAt', 'DESC')
+    //         ->groupBy('ss.id')
+    //     ;
+    //
+    //     return $qb->getQuery()->getResult();
+    // }
 
-        return $qb->getQuery()->getResult();
-    }
+    // public function countForUserAndStep(User $user, SelectionStep $step)
+    // {
+    //     $qb = $this->createQueryBuilder('pv')
+    //         ->select('COUNT(pv.id) as votesCount')
+    //         ->where('pv.user = :user')
+    //         ->setParameter('user', $user)
+    //         ->andWhere('pv.selectionStep = :step')
+    //         ->setParameter('step', $step)
+    //     ;
+    //
+    //     return intval($qb->getQuery()->getSingleScalarResult());
+    // }
 
-    public function countForUserAndStep(User $user, SelectionStep $step)
-    {
-        $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id) as votesCount')
-            ->where('pv.user = :user')
-            ->setParameter('user', $user)
-            ->andWhere('pv.selectionStep = :step')
-            ->setParameter('step', $step)
-        ;
-
-        return intval($qb->getQuery()->getSingleScalarResult());
-    }
-
-    public function InCollectStep(User $user, SelectionStep $step)
-    {
-        $qb = $this->createQueryBuilder('pv')
-            ->where('pv.user = :user')
-            ->setParameter('user', $user)
-            ->andWhere('pv.selectionStep = :step')
-            ->setParameter('step', $step)
-        ;
-
-        return $qb->getQuery()->getResult();
-    }
+    // public function InCollectStep(User $user, SelectionStep $step)
+    // {
+    //     $qb = $this->createQueryBuilder('pv')
+    //         ->where('pv.user = :user')
+    //         ->setParameter('user', $user)
+    //         ->andWhere('pv.selectionStep = :step')
+    //         ->setParameter('step', $step)
+    //     ;
+    //
+    //     return $qb->getQuery()->getResult();
+    // }
 
     public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
     {

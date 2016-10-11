@@ -23,6 +23,7 @@
   {% set initialState = {
     'proposal': {
       'userVotesByStepId': project|proposal_votes_list(app.user),
+      'creditsLeftByStepId': project|credits_list_list(app.user),
       'proposalsById': [],
     }
   } %}

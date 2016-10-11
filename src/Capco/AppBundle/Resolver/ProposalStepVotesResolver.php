@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
@@ -122,14 +123,14 @@ class ProposalStepVotesResolver
         return $spent;
     }
 
-    public function getSpentCreditsForUser(User $user, AbstractStep $step)
+    private function getSpentCreditsForUser(User $user, AbstractStep $step)
     {
         if ($step instanceof SelectionStep) {
           $votes = $this
               ->proposalSelectionVoteRepository
               ->findBy(
                   [
-                      'selectionStep' => $selectionStep,
+                      'selectionStep' => $step,
                       'user' => $user,
                   ]
               )
@@ -152,13 +153,18 @@ class ProposalStepVotesResolver
 
     public function getCreditsLeftByStepIdForProjectAndUser(Project $project, User $user = null)
     {
+        $steps = $project->getSteps()->map(function ($step) {
+          return $step->getStep();
+        });
         $creditsLeftByStepId = [];
-        foreach ($project->getSteps() as $step) {
-          $creditsLeft = $step->getBudget();
-          if ($creditsLeft > 0 && $user && $step->isBudgetVotable()) {
-              $creditsLeft -= $this->getSpentCreditsForUser($user, $step);
+        foreach ($steps as $step) {
+          if ($step->isBudgetVotable()) {
+            $creditsLeft = $step->getBudget();
+            if ($creditsLeft > 0 && $user) {
+                $creditsLeft -= $this->getSpentCreditsForUser($user, $step);
+            }
+            $creditsLeftByStepId[$step->getId()] = $creditsLeft;
           }
-          $creditsLeftByStepId[$step->getId()] = $creditsLeft;
         }
 
         return $creditsLeftByStepId;
@@ -236,19 +242,19 @@ class ProposalStepVotesResolver
         return count($this->getVotableStepsNotFutureForProject($project)) > 0;
     }
 
-    public function getVotesCountForUserInSelectionStep(User $user, SelectionStep $step)
-    {
-        return $this
-            ->proposalSelectionVoteRepository
-            ->countForUserAndStep($user, $step)
-        ;
-    }
+    // public function getVotesCountForUserInSelectionStep(User $user, SelectionStep $step)
+    // {
+    //     return $this
+    //         ->proposalSelectionVoteRepository
+    //         ->countForUserAndStep($user, $step)
+    //     ;
+    // }
 
-    public function getVotesForUserInSelectionStep(User $user, SelectionStep $step)
-    {
-        return $this
-            ->proposalSelectionVoteRepository
-            ->InCollectStep($user, $step)
-        ;
-    }
+    // public function getVotesForUserInSelectionStep(User $user, SelectionStep $step)
+    // {
+    //     return $this
+    //         ->proposalSelectionVoteRepository
+    //         ->InCollectStep($user, $step)
+    //     ;
+    // }
 }

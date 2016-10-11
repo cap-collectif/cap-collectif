@@ -43,21 +43,21 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
 
-        if ($user !== 'anon.' && $this->eventHasGroup($event, 'UserVotes')) {
-            $event->getVisitor()->addData(
-                'creditsLeft', $this->proposalStepVotesResolver->getCreditsLeftForUser($user, $step)
-            );
-            $event->getVisitor()->addData(
-                'userVotesCount', $this->proposalStepVotesResolver->getVotesCountForUserInSelectionStep($user, $step)
-            );
-
-            $userVotes = $this->serializer->serialize([
-                'data' => $this
-                    ->proposalStepVotesResolver
-                    ->getVotesForUserInSelectionStep($user, $step),
-            ], 'json', SerializationContext::create()->setGroups(['ProposalSelectionVotes', 'Proposals', 'Steps', 'UsersInfos']));
-            $event->getVisitor()->addData('userVotes', json_decode($userVotes, true)['data']);
-        }
+        // if ($user !== 'anon.' && $this->eventHasGroup($event, 'UserVotes')) {
+        //      $event->getVisitor()->addData(
+        //         'creditsLeft', $this->proposalStepVotesResolver->getCreditsLeftForUser($user, $step)
+        //     );
+        //     $event->getVisitor()->addData(
+        //         'userVotesCount', $this->proposalStepVotesResolver->getVotesCountForUserInSelectionStep($user, $step)
+        //     );
+        //
+        //     $userVotes = $this->serializer->serialize([
+        //         'data' => $this
+        //             ->proposalStepVotesResolver
+        //             ->getVotesForUserInSelectionStep($user, $step),
+        //     ], 'json', SerializationContext::create()->setGroups(['ProposalSelectionVotes', 'Proposals', 'Steps', 'UsersInfos']));
+        //     $event->getVisitor()->addData('userVotes', json_decode($userVotes, true)['data']);
+        // }
 
         $counters = [];
         $counters['proposals'] = count($step->getProposals());

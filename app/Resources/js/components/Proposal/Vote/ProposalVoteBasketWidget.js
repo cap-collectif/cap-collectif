@@ -6,6 +6,7 @@ import Input from '../../Form/Input';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalVotesHelper from '../../../services/ProposalVotesHelper';
 import { connect } from 'react-redux';
+import { mapValues } from 'lodash';
 
 const ProposalVoteBasketWidget = React.createClass({
   propTypes: {
@@ -177,7 +178,7 @@ const ProposalVoteBasketWidget = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    userVotesCountByStepId: state.proposal.userVotesCountByStepId || {},
+    userVotesCountByStepId: mapValues(state.proposal.userVotesByStepId, votes => votes.length),
     creditsLeftByStepId: state.proposal.creditsLeftByStepId || {},
     votableSteps: state.project.projects[state.project.currentProjectById].steps.filter(step => step.votable),
     projectId: state.project.currentProjectById,
