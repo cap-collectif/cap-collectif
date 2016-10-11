@@ -24,3 +24,15 @@
         }}
     {% endif %}
 {% endif %}
+{% if object.startAt is null and object.endAt is not null %}
+    {% set endTime = object.endAt | localizeddate('none', 'short', app.request.locale) %}
+    {% set endDay = object.endAt | localizeddate('full', 'none', app.request.locale) %}
+    {% if date(object.endAt) > date() %}
+        {{ endTime != '00:00'
+        ? 'dates.end_before_start'|trans({'%end%': endDay, '%end_time%': endTime}, 'CapcoAppBundle')
+        : 'dates.end_before_start_no_time'|trans({'%end%': endDay}, 'CapcoAppBundle')
+        }}
+    {% else %}
+        {{ 'dates.end_after_start'|trans({'%end%': endDay}, 'CapcoAppBundle') }}
+    {% endif %}
+{% endif %}

@@ -14,8 +14,11 @@ const ProjectPreviewBody = React.createClass({
   shouldRenderProgressBar() {
     const { project } = this.props;
     return project.steps.filter(step => {
-      return !step.startAt && !step.endAt
-        && step.type !== 'presentation' && step.type !== 'ranking' && step.type !== 'other';
+      return !step.startAt
+        && !step.endAt
+        && step.type !== 'presentation'
+        && step.type !== 'ranking'
+        && step.type !== 'other';
     }).length === 0;
   },
 

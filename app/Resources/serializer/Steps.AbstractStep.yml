@@ -58,3 +58,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
       type: boolean
       groups: [Steps]
       serialized_name: open
+    getType:
+      expose: true
+      groups: [StepTypes]
+      seriealized_name: type

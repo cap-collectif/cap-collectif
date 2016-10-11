@@ -380,7 +380,7 @@ class ProjectController extends Controller
         $count = $em->getRepository('CapcoAppBundle:Project')->countPublished();
         $props = $serializer->serialize([
             'projects' => $projectsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Default', 'Projects', 'Steps', 'ThemeDetails']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
