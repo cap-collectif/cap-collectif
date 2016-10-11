@@ -262,7 +262,7 @@ class ProposalRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getLastByStep($limit = 1, $offset = 0, CollectStep $step)
+    public function getLastByStep($limit, $offset, CollectStep $step)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author', 'amedia', 'theme', 'status', 'district')

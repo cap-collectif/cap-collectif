@@ -73,6 +73,11 @@ class SelectionStep extends AbstractStep
     private $budget = null;
 
     /**
+     * @ORM\Column(name="proposals_visible", type="boolean", nullable=false, options={"default" = true})
+     */
+    private $proposalsVisible = true;
+
+    /**
      * @ORM\Column(name="allowing_progess_steps", type="boolean")
      */
     private $allowingProgressSteps = false;
@@ -310,5 +315,22 @@ class SelectionStep extends AbstractStep
             });
 
         return $ids;
+    }
+
+    public function getProposalsVisible() : bool
+    {
+        return $this->proposalsVisible;
+    }
+
+    public function setProposalsVisible(bool $proposalsVisible) : self
+    {
+        $this->proposalsVisible = $proposalsVisible;
+
+        return $this;
+    }
+
+    public function canShowProposals() : bool
+    {
+        return $this->getProposalsVisible() || $this->getStartAt() <= new \DateTime();
     }
 }

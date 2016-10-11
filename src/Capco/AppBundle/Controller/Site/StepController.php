@@ -391,12 +391,17 @@ class StepController extends Controller
 
         $searchResults = $this
             ->get('capco.search.resolver')
-            ->searchProposals(1, 50, $step->getDefaultSort(), null, ['selectionStep' => $step->getId()])
-        ;
+            ->searchProposals(
+                1,
+                50,
+                $step->getDefaultSort(),
+                null,
+                ['selectionStep' => $step->canShowProposals() ? $step->getId() : 0]
+            );
 
         $user = $this->getUser();
 
-        if ($user) {
+        if ($user && count($searchResults) > 0) {
             $searchResults['proposals'] = $this
                 ->get('capco.proposal_votes.resolver')
                 ->addVotesToProposalsForSelectionStepAndUser(
