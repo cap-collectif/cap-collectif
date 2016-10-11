@@ -13,7 +13,7 @@ import ProposalPageMetadata from './ProposalPageMetadata';
 import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
-import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import { connect } from 'react-redux';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
 
@@ -144,30 +144,6 @@ export const ProposalPage = React.createClass({
                         id={proposal.id}
                         form={form}
                     />
-                    <Col xs={12} sm={4}>
-                      <ProposalPageMetadata
-                        proposal={proposal}
-                        showDistricts={features.districts}
-                        showCategories={form.usingCategories}
-                        showNullEstimation={!!votableStep && votableStep.voteType === VOTE_TYPE_BUDGET}
-                      />
-                      <br />
-                      {
-                        votableStep && votableStep.voteType === VOTE_TYPE_SIMPLE && votableStep.voteThreshold > 0 &&
-                        <span>
-                          <ProposalPageVoteThreshold proposal={proposal} step={votableStep} /><br />
-                        </span>
-                      }
-                      <ProposalPageAdvancement
-                        proposal={proposal}
-                      />
-                    </Col>
-                </Tab.Pane>
-                <Tab.Pane eventKey="comments">
-                  <ProposalPageComments
-                    form={form}
-                    id={proposal.id}
-                  />
                 </Tab.Pane>
                   {
                     showVotesTab
