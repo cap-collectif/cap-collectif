@@ -13,7 +13,7 @@ import ProposalPageMetadata from './ProposalPageMetadata';
 import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
-import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { connect } from 'react-redux';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
 
