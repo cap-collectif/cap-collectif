@@ -26,7 +26,9 @@ class ProposalCollectVoteRepository extends EntityRepository
               ->setParameter('id', $id)
               ;
             $results = $qb->getQuery()->getScalarResult();
-            $userVotes[$id] = array_column($results, 'id');
+            $userVotes[$id] = array_map(function($id) {
+              return intval($id);
+            }, array_column($results, 'id'));
           }
         }
 

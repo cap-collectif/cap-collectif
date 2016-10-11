@@ -108,7 +108,7 @@ const mapStateToProps = (state, props) => {
   return {
     user: state.default.user,
     showModal: !!(state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id),
-    isSubmitting: state.proposal.isVoting,
+    isSubmitting: !!state.proposal.isVoting,
     step: steps.length === 1 ? steps[0] : null,
   };
 };

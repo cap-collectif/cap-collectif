@@ -238,7 +238,6 @@ export const vote = (dispatch, step, proposal, data = {}) => {
     .then(json)
     .then(newVote => {
       dispatch(voteSuccess(proposal.id, step.id, newVote));
-      dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'success', content: 'proposal.request.vote.success' },
@@ -462,7 +461,7 @@ export const reducer = (state = initialState, action) => {
       const proposal = state.proposalsById[action.proposalId];
       // const votesByStepId = proposal.votesByStepId;
       // votesByStepId[action.stepId].push(action.vote);
-      const votesCountByStepId = proposal.votesByStepId;
+      const votesCountByStepId = proposal.votesCountByStepId;
       votesCountByStepId[action.stepId]++;
       const proposalsById = state.proposalsById;
       const userVotesByStepId = state.userVotesByStepId;
@@ -479,11 +478,11 @@ export const reducer = (state = initialState, action) => {
     }
     case DELETE_VOTE_SUCCEEDED: {
       const proposal = state.proposalsById[action.proposalId];
-      const votesCountByStepId = proposal.votesByStepId;
+      const votesCountByStepId = proposal.votesCountByStepId;
       votesCountByStepId[action.stepId]--;
       const proposalsById = state.proposalsById;
       const userVotesByStepId = state.userVotesByStepId;
-      userVotesByStepId[action.stepId].slice(proposal.id);
+      userVotesByStepId[action.stepId] = userVotesByStepId[action.stepId].filter(voteId => voteId !== action.proposalId);
       proposalsById[action.proposalId] = { ...proposal, votesCountByStepId };
       return {
         ...state,
@@ -512,12 +511,12 @@ export const reducer = (state = initialState, action) => {
       return { ...state, proposalsById };
     }
     case VOTES_FETCH_SUCCEEDED: {
-      const proposal = state.proposalsById[action.proposalId];
-      const votesByStepId = proposal.votesByStepId;
-      votesByStepId[action.stepId] = action.votes;
-      const proposalsById = state.proposalsById;
-      proposalsById[action.proposalId] = { ...proposal, votesByStepId };
-      return { ...state, proposalsById };
+      // const proposal = state.proposalsById[action.proposalId];
+      // const votesByStepId = proposal.votesByStepId;
+      // votesByStepId[action.stepId] = action.votes;
+      // const proposalsById = state.proposalsById;
+      // proposalsById[action.proposalId] = { ...proposal, votesByStepId };
+      return { ...state };
     }
     case POSTS_FETCH_FAILED: {
       console.log(POSTS_FETCH_FAILED, action.error); // eslint-disable-line no-console
