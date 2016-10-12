@@ -225,7 +225,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             ]);
     }
 
-    public function it_can_count_user_types(
+    public function it_can_count_userTypes(
         SelectionStepRepository $selectionStepRepo,
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,

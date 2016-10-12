@@ -16,7 +16,7 @@ describe('<RegistrationForm />', () => {
     ...IntlData,
     onSubmitSuccess: () => {},
     onSubmitFail: () => {},
-    user_types: [],
+    userTypes: [],
     parameters: {
       'signin.cgu.name': 'la charte',
       'signin.cgu.link': '/charte',
@@ -87,7 +87,7 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders a user_type select', () => {
-    const wrapper = shallow(<RegistrationForm {...props} user_types={[{ id: 1, name: 'type_1' }]} features={{ user_type: true, zipcode_at_register: false }} />);
+    const wrapper = shallow(<RegistrationForm {...props} userTypes={[{ id: 1, name: 'type_1' }]} features={{ user_type: true, zipcode_at_register: false }} />);
     const select = wrapper.find('ReduxForm').prop('fields')[3];
     expect(select).to.containSubset(
       {

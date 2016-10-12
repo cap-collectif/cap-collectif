@@ -4,7 +4,7 @@
     'districts': districts_list(),
     'themes': themes_list(),
     'features': features_list(),
-    'user_types': user_type_list(),
+    'userTypes': user_type_list()|default([]),
     'parameters': site_parameters_list(),
     'isLoggedIn': app.user ? true : false,
     'user': app.user

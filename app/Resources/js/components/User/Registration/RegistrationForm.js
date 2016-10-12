@@ -31,7 +31,7 @@ export const RegistrationForm = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     features: PropTypes.object.isRequired,
-    user_types: PropTypes.array.isRequired,
+    userTypes: PropTypes.array.isRequired,
     parameters: PropTypes.object.isRequired,
     onSubmitSuccess: PropTypes.func.isRequired,
     onSubmitFail: PropTypes.func.isRequired,
@@ -82,7 +82,7 @@ export const RegistrationForm = React.createClass({
   },
 
   render() {
-    const { features, user_types, parameters, onSubmitSuccess } = this.props;
+    const { features, userTypes, parameters, onSubmitSuccess } = this.props;
     const cguName = parameters['signin.cgu.name'];
     const cguLink = parameters['signin.cgu.link'];
     const dynamicsField = [];
@@ -98,7 +98,7 @@ export const RegistrationForm = React.createClass({
         ),
         labelClassName: 'h5',
         defaultOptionLabel: this.getIntlMessage('registration.select.type'),
-        options: user_types.map((type) => { return { value: type.id, label: type.name }; }),
+        options: userTypes.map((type) => { return { value: type.id, label: type.name }; }),
       });
     }
     if (features.zipcode_at_register) {
@@ -187,7 +187,7 @@ export const RegistrationForm = React.createClass({
 const mapStateToProps = (state) => {
   return {
     features: state.default.features,
-    user_types: state.default.user_types,
+    userTypes: state.default.userTypes,
     parameters: state.default.parameters,
   };
 };
