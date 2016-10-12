@@ -5,7 +5,7 @@ import { VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import { connect } from 'react-redux';
 
-const ProposalVoteButtonWrapper = React.createClass({
+export const ProposalVoteButtonWrapper = React.createClass({
   displayName: 'ProposalVoteButtonWrapper',
   propTypes: {
     proposal: PropTypes.object.isRequired,

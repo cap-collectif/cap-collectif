@@ -17,12 +17,14 @@ describe('<ProposalPage />', () => {
     themes: [],
     districts: [],
     categories: [],
-    steps: [],
-    votes: [],
     features: {
       themes: true,
       districts: false,
     },
+    steps: [
+    { id: 1, voteType: VOTE_TYPE_DISABLED },
+    { id: 2, voteType: VOTE_TYPE_SIMPLE },
+    ],
   };
 
   const proposalNoVotes = {
@@ -35,35 +37,21 @@ describe('<ProposalPage />', () => {
     votesCount: 5,
   };
 
-  const votableStepDisabled = { id: 1, voteType: VOTE_TYPE_DISABLED };
-  const votableStepSimple = { id: 2, voteType: VOTE_TYPE_SIMPLE };
-
-  const state = {
-    userHasVote: true,
-    creditsLeft: null,
-    showVotesModal: false,
-  };
-
   it('should render a proposal page', () => {
     const wrapper = shallow(<ProposalPage {...props} proposal={proposalNoVotes} {...IntlData} />);
-    const newState = {
-      proposal: proposalNoVotes,
-      ...state,
-    };
-    wrapper.setState(newState);
+
     const alert = wrapper.find('ProposalPageAlert');
     expect(alert).to.have.length(1);
     expect(alert.prop('proposal')).to.equal(proposalNoVotes);
+
     const header = wrapper.find('ProposalPageHeader');
     expect(header.props()).to.contains({
       proposal: proposalNoVotes,
       className: 'container container--custom',
       showThemes: true,
-      userHasVote: state.userHasVote,
-      step: null,
-      creditsLeft: state.creditsLeft,
     });
     expect(header.prop('onVote')).to.be.a('function');
+
     const tabContainer = wrapper.find(Tab.Container);
     expect(tabContainer).to.have.length(1);
     expect(tabContainer.props()).to.contains({
@@ -71,6 +59,7 @@ describe('<ProposalPage />', () => {
       defaultActiveKey: 'content',
       className: 'container--custom',
     });
+
     const tabsPills = tabContainer.find('div.tabs__pills');
     expect(tabsPills).to.have.length(1);
     expect(tabsPills.find('div.container')).to.have.length(1);
@@ -93,8 +82,6 @@ describe('<ProposalPage />', () => {
     expect(voteButtonWrapper.props()).to.contains({
       step: null,
       proposal: proposalNoVotes,
-      creditsLeft: state.creditsLeft,
-      userHasVote: state.userHasVote,
       className: 'pull-right hidden-xs',
     });
     expect(voteButtonWrapper.prop('onClick')).to.be.a('function');
@@ -111,41 +98,34 @@ describe('<ProposalPage />', () => {
       proposal: proposalNoVotes,
       form: props.form,
       categories: props.categories,
-      userHasVote: state.userHasVote,
       step: null,
-      creditsLeft: state.creditsLeft,
     });
     expect(proposalContent.prop('onVote')).to.be.a('function');
     const proposalMetadata = contentTabPane.find('ProposalPageMetadata');
-    expect(proposalMetadata).to.have.length(1);
     expect(proposalMetadata.props()).to.eql({
       proposal: proposalNoVotes,
       showDistricts: false,
       showCategories: false,
       showNullEstimation: false,
     });
+
     const proposalAdvancement = contentTabPane.find('ProposalPageAdvancement');
-    expect(proposalAdvancement).to.have.length(1);
+
     expect(proposalAdvancement.props()).to.eql({ proposal: proposalNoVotes });
     const commentsTabPane = tabPanes.at(1);
     expect(commentsTabPane.props()).to.contains({ eventKey: 'comments' });
+
     const proposalComments = commentsTabPane.find('ProposalPageComments');
-    expect(proposalComments).to.have.length(1);
     expect(proposalComments.prop('form')).to.equal(props.form);
     expect(proposalComments.prop('id')).to.equal(proposalNoVotes.id);
     const blogPane = tabPanes.at(2);
+
     const proposalBlog = blogPane.find('Connect(ProposalPageBlog)');
-    expect(proposalBlog).to.have.length(1);
     expect(proposalBlog.props()).to.eql({});
   });
 
   it('should render a vote tab and a vote modal if votable step is specified', () => {
-    const wrapper = shallow(<ProposalPage {...props} proposal={proposalWithVotes} votableStep={votableStepSimple} {...IntlData} />);
-    const newState = {
-      proposal: proposalWithVotes,
-      ...state,
-    };
-    wrapper.setState(newState);
+    const wrapper = shallow(<ProposalPage {...props} proposal={proposalWithVotes} {...IntlData} />);
     const tabContainer = wrapper.find(Tab.Container);
     const tabsPills = tabContainer.find('div.tabs__pills');
     const nav = tabsPills.find(Nav);
@@ -165,7 +145,6 @@ describe('<ProposalPage />', () => {
     expect(proposalVoteModal).to.have.length(1);
     expect(proposalVoteModal.props()).to.contains({
       proposal: proposalWithVotes,
-      step: votableStepSimple,
       showModal: false,
     });
     expect(proposalVoteModal.prop('onToggleModal')).to.be.a('function');
@@ -173,11 +152,6 @@ describe('<ProposalPage />', () => {
 
   it('should not render a vote tab if proposal has no votes and selection step is not specified', () => {
     const wrapper = shallow(<ProposalPage {...props} proposal={proposalNoVotes} {...IntlData} />);
-    const newState = {
-      proposal: proposalNoVotes,
-      ...state,
-    };
-    wrapper.setState(newState);
     const tabContainer = wrapper.find(Tab.Container);
     const tabsPills = tabContainer.find('div.tabs__pills');
     const nav = tabsPills.find(Nav);
@@ -192,23 +166,13 @@ describe('<ProposalPage />', () => {
 
   it('should not render a vote modal if selection step is not specified', () => {
     const wrapper = shallow(<ProposalPage {...props} proposal={proposalWithVotes} {...IntlData} />);
-    const newState = {
-      proposal: proposalWithVotes,
-      ...state,
-    };
-    wrapper.setState(newState);
     const tabContainer = wrapper.find(Tab.Container);
     const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');
     expect(proposalVoteModal).to.have.length(0);
   });
 
   it('should not render a vote modal if selection step\'s vote type is disabled', () => {
-    const wrapper = shallow(<ProposalPage {...props} proposal={proposalWithVotes} votableStep={votableStepDisabled} {...IntlData} />);
-    const newState = {
-      proposal: proposalWithVotes,
-      ...state,
-    };
-    wrapper.setState(newState);
+    const wrapper = shallow(<ProposalPage {...props} proposal={proposalWithVotes} {...IntlData} />);
     const tabContainer = wrapper.find(Tab.Container);
     const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');
     expect(proposalVoteModal).to.have.length(0);

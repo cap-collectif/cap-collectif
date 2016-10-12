@@ -43,8 +43,8 @@ const ProposalPageHeader = React.createClass({
 
     const classes = {
       proposal__header: true,
+      [className]: true,
     };
-    classes[className] = true;
 
     return (
       <div className={classNames(classes)}>

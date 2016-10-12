@@ -5,7 +5,7 @@ import ProposalPreview from '../Preview/ProposalPreview';
 import { Row } from 'react-bootstrap';
 import VisibilityBox from '../../Utils/VisibilityBox';
 
-const ProposalList = React.createClass({
+export const ProposalList = React.createClass({
   propTypes: {
     proposals: PropTypes.array.isRequired,
     step: PropTypes.object.isRequired,
