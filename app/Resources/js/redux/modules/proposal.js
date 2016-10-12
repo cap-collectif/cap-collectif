@@ -92,11 +92,12 @@ export const loadVotes = (stepId, proposalId) => {
   };
 };
 
-const deleteVoteSucceeded = (stepId, proposalId) => {
+const deleteVoteSucceeded = (stepId, proposalId, vote) => {
   return {
     type: DELETE_VOTE_SUCCEEDED,
     proposalId,
     stepId,
+    vote,
   };
 };
 
@@ -277,8 +278,9 @@ export const deleteVote = (dispatch, step, proposal) => {
   }
   return Fetcher
       .delete(url)
-      .then(() => {
-        dispatch(deleteVoteSucceeded(step.id, proposal.id));
+      .then(json)
+      .then(v => {
+        dispatch(deleteVoteSucceeded(step.id, proposal.id, v));
         FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'proposal.request.delete_vote.success' },
@@ -486,10 +488,16 @@ export const reducer = (state = {}, action) => {
       const proposal = state.proposalsById[action.proposalId];
       const votesCountByStepId = proposal.votesCountByStepId;
       votesCountByStepId[action.stepId]--;
+      const votesByStepId = proposal.votesByStepId || [];
+      if (action.vote.user) {
+        votesByStepId[action.stepId] = votesByStepId[action.stepId].filter(v => v.user.uniqueId !== action.vote.user.uniqueId);
+      } else {
+        votesByStepId[action.stepId].slice(votesByStepId[action.stepId].findIndex(v => v.user === null), 1);
+      }
       const proposalsById = state.proposalsById;
       const userVotesByStepId = state.userVotesByStepId;
       userVotesByStepId[action.stepId] = userVotesByStepId[action.stepId].filter(voteId => voteId !== action.proposalId);
-      proposalsById[action.proposalId] = { ...proposal, votesCountByStepId };
+      proposalsById[action.proposalId] = { ...proposal, votesCountByStepId, votesByStepId };
       const creditsLeftByStepId = state.creditsLeftByStepId;
       creditsLeftByStepId[action.stepId] += proposal.estimation || 0;
       return {
@@ -520,7 +528,7 @@ export const reducer = (state = {}, action) => {
     }
     case VOTES_FETCH_SUCCEEDED: {
       const proposal = state.proposalsById[action.proposalId];
-      const votesByStepId = proposal.votesByStepId || {};
+      const votesByStepId = proposal.votesByStepId || [];
       votesByStepId[action.stepId] = action.votes;
       const proposalsById = state.proposalsById;
       proposalsById[action.proposalId] = { ...proposal, votesByStepId };
