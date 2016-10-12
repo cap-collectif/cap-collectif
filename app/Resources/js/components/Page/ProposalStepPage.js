@@ -51,7 +51,7 @@ export const ProposalStepPage = React.createClass({
       <div>
         <StepPageHeader step={step} />
         {
-          step.type === 'collect' &&
+          step.step_type === 'collect' &&
           <CollectStepPageHeader
             count={count}
             form={form}

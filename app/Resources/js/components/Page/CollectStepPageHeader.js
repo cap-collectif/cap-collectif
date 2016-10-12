@@ -6,8 +6,6 @@ const CollectStepPageHeader = React.createClass({
   propTypes: {
     count: PropTypes.number,
     form: PropTypes.object.isRequired,
-    themes: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
