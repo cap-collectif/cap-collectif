@@ -1,5 +1,9 @@
 $statuses: (primary $brand-primary $white) (success $brand-success $white) (info $brand-info $white) (warning $brand-warning $white) (danger $brand-danger $white) (default $dark-gray $white);
 
+.ellipsis {
+    @include ellipsis();
+}
+
 .proposal__author {
     overflow: hidden;
     height: 60px;

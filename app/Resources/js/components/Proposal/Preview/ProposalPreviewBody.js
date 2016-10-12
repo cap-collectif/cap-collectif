@@ -27,20 +27,20 @@ const ProposalPreviewBody = React.createClass({
         <div className="proposal__infos">
           {
             features.themes && showThemes && proposal.theme
-            && <div className="proposal__info">
-                <i className="cap cap-tag-1-1 icon--blue"></i><Truncate>{proposal.theme.title}</Truncate>
+            && <div className="proposal__info ellipsis">
+                <i className="cap cap-tag-1-1 icon--blue"></i>{proposal.theme.title}
               </div>
           }
           {
             proposal.category
-            && <div className="proposal__info">
-              <i className="cap cap-tag-1-1 icon--blue"></i><Truncate>{proposal.category.name}</Truncate>
+            && <div className="proposal__info ellipsis">
+              <i className="cap cap-tag-1-1 icon--blue"></i>{proposal.category.name}
             </div>
           }
           {
             features.districts && proposal.district
-            && <div className="proposal__info">
-              <i className="cap cap-marker-1-1 icon--blue"></i><Truncate>{proposal.district.name}</Truncate>
+            && <div className="proposal__info ellipsis">
+              <i className="cap cap-marker-1-1 icon--blue"></i>{proposal.district.name}
             </div>
           }
           <ProposalDetailEstimation
