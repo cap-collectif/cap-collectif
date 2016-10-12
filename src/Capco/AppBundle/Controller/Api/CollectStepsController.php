@@ -90,7 +90,6 @@ class CollectStepsController extends FOSRestController
         ;
 
         $form = $this->createForm('proposal_collect_vote', $vote);
-
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {

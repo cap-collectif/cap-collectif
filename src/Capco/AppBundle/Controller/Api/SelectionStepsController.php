@@ -115,7 +115,7 @@ class SelectionStepsController extends FOSRestController
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {
-            return $this->view($form->getErrors(true, true), Response::HTTP_BAD_REQUEST);
+            return $form;
         }
 
         if ($form->has('comment') && null != ($content = $form->get('comment')->getData())) {

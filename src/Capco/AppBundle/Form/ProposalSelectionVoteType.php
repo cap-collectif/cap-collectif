@@ -17,10 +17,6 @@ class ProposalSelectionVoteType extends AbstractType
         $this->tokenStorage = $tokenStorage;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($this->tokenStorage->getToken()->getUser()) {
