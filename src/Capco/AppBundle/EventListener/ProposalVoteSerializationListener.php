@@ -24,6 +24,11 @@ class ProposalVoteSerializationListener implements EventSubscriberInterface
                 'class' => 'Capco\AppBundle\Entity\ProposalSelectionVote',
                 'method' => 'onPreProposalVote',
             ],
+            [
+                'event' => 'serializer.pre_serialize',
+                'class' => 'Capco\AppBundle\Entity\ProposalCollectVote',
+                'method' => 'onPreProposalVote',
+            ],
         ];
     }
 

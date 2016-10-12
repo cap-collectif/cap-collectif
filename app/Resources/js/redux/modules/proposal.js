@@ -43,7 +43,7 @@ const DELETE_REQUEST = 'proposal/DELETE_REQUEST';
 
 const initialState = {
   currentProposalId: null,
-  proposalsById: [],
+  proposalsById: {},
   currentVotesModal: null,
   currentVoteModal: null,
   currentDeletingVote: null,
@@ -286,7 +286,8 @@ export const deleteVote = (dispatch, step, proposal) => {
           alert: { bsStyle: 'success', content: 'proposal.request.delete_vote.success' },
         });
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e); // eslint-disable-line no-console
         FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'warning', content: 'proposal.request.delete_vote.failure' },
@@ -466,7 +467,7 @@ export const reducer = (state = {}, action) => {
     case VOTE_SUCCEEDED: {
       const proposal = state.proposalsById[action.proposalId];
       const votesByStepId = proposal.votesByStepId || {};
-      votesByStepId[action.stepId].push(action.vote);
+      votesByStepId[action.stepId].unshift(action.vote);
       const votesCountByStepId = proposal.votesCountByStepId;
       votesCountByStepId[action.stepId]++;
       const proposalsById = state.proposalsById;
