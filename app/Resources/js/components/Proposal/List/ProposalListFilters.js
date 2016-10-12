@@ -34,12 +34,16 @@ export const ProposalListFilters = React.createClass({
       features,
       showThemes,
       orderByVotes,
+      districts,
       statuses,
+      themes,
+      types,
     } = this.props;
     return {
-      displayedFilters: ['types']
-        .concat(features.districts ? ['districts'] : [])
-        .concat(features.themes && showThemes ? ['themes'] : [])
+      displayedFilters: []
+        .concat(types.length > 0 ? ['types'] : [])
+        .concat(features.districts && districts.length > 0 ? ['districts'] : [])
+        .concat(features.themes && showThemes && themes.length > 0 ? ['themes'] : [])
         .concat(categories.length > 0 ? ['categories'] : [])
         .concat(statuses.length > 0 ? ['statuses'] : []),
       displayedOrders: ['random', 'last', 'old', 'comments'].concat(orderByVotes ? ['votes'] : []),

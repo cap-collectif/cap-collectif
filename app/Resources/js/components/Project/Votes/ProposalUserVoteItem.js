@@ -4,26 +4,22 @@ import UserLink from '../../User/UserLink';
 import { Button } from 'react-bootstrap';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalDetailsEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
+import { deleteVote } from '../../../redux/modules/proposal';
+import { connect } from 'react-redux';
 
-const ProposalUserVoteItem = React.createClass({
+export const ProposalUserVoteItem = React.createClass({
   propTypes: {
+    dispatch: PropTypes.func.isRequired,
     vote: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
-  handleClick(e) {
-    e.preventDefault();
-    // ProposalActions.deleteVote(
-    //   step.id,
-    //   vote.proposal.id
-    // );
-  },
-
   render() {
     const {
       step,
       vote,
+      dispatch,
     } = this.props;
     const proposal = vote.proposal;
     return (
@@ -38,7 +34,7 @@ const ProposalUserVoteItem = React.createClass({
           />
         </td>
         <td>
-          <Button onClick={this.handleClick} className="proposal-vote__delete">
+          <Button onClick={() => deleteVote(dispatch, step, proposal)} className="proposal-vote__delete">
             {this.getIntlMessage('project.votes.delete')}
           </Button>
         </td>
@@ -48,4 +44,4 @@ const ProposalUserVoteItem = React.createClass({
 
 });
 
-export default ProposalUserVoteItem;
+export default connect()(ProposalUserVoteItem);
