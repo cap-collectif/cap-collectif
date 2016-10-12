@@ -61,15 +61,17 @@ const initialState = {
   currentPaginationPage: 1,
 };
 
-export const openVotesModal = () => {
+export const openVotesModal = (stepId) => {
   return {
     type: OPEN_VOTES_MODAL,
+    stepId,
   };
 };
 
-export const closeVotesModal = () => {
+export const closeVotesModal = (stepId) => {
   return {
     type: CLOSE_VOTES_MODAL,
+    stepId,
   };
 };
 
@@ -424,9 +426,9 @@ export const reducer = (state = {}, action) => {
       return { ...state, filters, currentPaginationPage: 1 };
     }
     case OPEN_VOTES_MODAL:
-      return { ...state, currentVotesModal: state.currentProposalId };
+      return { ...state, currentVotesModal: { proposalId: state.currentProposalId, stepId: action.stepId } };
     case CLOSE_VOTES_MODAL:
-      return { ...state, currentVotesModal: state.currentProposalId };
+      return { ...state, currentVotesModal: null };
     case CHANGE_ORDER:
       return { ...state, order: action.order, currentPaginationPage: 1 };
     case CHANGE_PAGE:
@@ -519,10 +521,10 @@ export const reducer = (state = {}, action) => {
     case VOTES_FETCH_SUCCEEDED: {
       const proposal = state.proposalsById[action.proposalId];
       const votesByStepId = proposal.votesByStepId || {};
-      // votesByStepId[action.stepId] = action.votes;
-      // const proposalsById = state.proposalsById;
-      // proposalsById[action.proposalId] = { ...proposal, votesByStepId };
-      return { ...state };
+      votesByStepId[action.stepId] = action.votes;
+      const proposalsById = state.proposalsById;
+      proposalsById[action.proposalId] = { ...proposal, votesByStepId };
+      return { ...state, proposalsById };
     }
     case POSTS_FETCH_FAILED: {
       console.log(POSTS_FETCH_FAILED, action.error); // eslint-disable-line no-console
