@@ -517,8 +517,8 @@ export const reducer = (state = {}, action) => {
       return { ...state, proposalsById };
     }
     case VOTES_FETCH_SUCCEEDED: {
-      // const proposal = state.proposalsById[action.proposalId];
-      // const votesByStepId = proposal.votesByStepId;
+      const proposal = state.proposalsById[action.proposalId];
+      const votesByStepId = proposal.votesByStepId || {};
       // votesByStepId[action.stepId] = action.votes;
       // const proposalsById = state.proposalsById;
       // proposalsById[action.proposalId] = { ...proposal, votesByStepId };
