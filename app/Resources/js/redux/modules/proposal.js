@@ -463,14 +463,14 @@ export const reducer = (state = {}, action) => {
       return { ...state, currentDeletingVote: action.proposalId };
     case VOTE_SUCCEEDED: {
       const proposal = state.proposalsById[action.proposalId];
-      // const votesByStepId = proposal.votesByStepId;
-      // votesByStepId[action.stepId].push(action.vote);
+      const votesByStepId = proposal.votesByStepId || {};
+      votesByStepId[action.stepId].push(action.vote);
       const votesCountByStepId = proposal.votesCountByStepId;
       votesCountByStepId[action.stepId]++;
       const proposalsById = state.proposalsById;
       const userVotesByStepId = state.userVotesByStepId;
       userVotesByStepId[action.stepId].push(proposal.id);
-      proposalsById[action.proposalId] = { ...proposal, votesCountByStepId };
+      proposalsById[action.proposalId] = { ...proposal, votesCountByStepId, votesByStepId };
       const creditsLeftByStepId = state.creditsLeftByStepId;
       creditsLeftByStepId[action.stepId] -= proposal.estimation || 0;
       return {
