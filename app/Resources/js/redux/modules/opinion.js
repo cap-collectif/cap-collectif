@@ -28,7 +28,7 @@ export function* fetchAllOpinionVotes(action) {
     let hasMore = true;
     let iterationCount = 0;
     const votesPerIteration = 30;
-    const votesUrl = action.parent
+    const votesUrl = action.versionId
       ? `/opinions/${action.opinionId}/versions/${action.versionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
       : `/opinions/${action.opinionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`;
     while (hasMore) {
@@ -105,7 +105,7 @@ const deleteVote = (opinion, parent, dispatch) => {
         message: 'opinion.request.delete_vote.success',
       });
     })
-    .catch((e) => {
+    .catch(() => {
       FluxDispatcher.dispatch({
         actionType: UPDATE_OPINION_FAILURE,
         message: 'opinion.request.failure',
@@ -190,7 +190,6 @@ export const reducer = (state = initialState, action) => {
     case DELETE_OPINION_VOTE_SUCCEEDED: {
       const opinion = state.opinions[action.opinionId];
       const indexToRemove = opinion.votes.indexOf(find(opinion.votes, (v) => {
-        console.log(v.user, action);
         return v.user && v.user.uniqueId === action.vote.user.uniqueId;
       }));
       const opinions = {
