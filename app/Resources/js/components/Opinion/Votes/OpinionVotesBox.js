@@ -2,15 +2,24 @@ import React, { PropTypes } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import { VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
+import { fetchOpinionVotes } from '../../../redux/modules/opinion';
 import VotePiechart from '../../Utils/VotePiechart';
 import OpinionVotesBar from './OpinionVotesBar';
 import OpinionVotesButtons from './OpinionVotesButtons';
+import { connect } from 'react-redux';
 
 const OpinionVotesBox = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
+    fetchOpinionVotes: PropTypes.func.isRequired,
+    votes: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
+
+  componentDidMount() {
+    this.props.fetchOpinionVotes(this.props.opinion.id);
+    console.log(this.props.votes);
+  },
 
   getOpinionType() {
     const { opinion } = this.props;
@@ -75,4 +84,16 @@ const OpinionVotesBox = React.createClass({
 
 });
 
-export default OpinionVotesBox;
+const mapStateToProps = (state, props) => {
+  return {
+    votes: state.opinion.opinions[props.opinion.id],
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchOpinionVotes: (opinionId) => dispatch(fetchOpinionVotes(opinionId)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OpinionVotesBox);
