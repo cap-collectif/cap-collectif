@@ -163,6 +163,7 @@ export const ProposalPage = React.createClass({
                               }
                             </Nav>
                             <Tab.Content animation={false}>
+                              <Tab.Container id="proposal-votesByStep-tab" defaultActiveKey={0}>
                               {
                                 votableSteps.map((step, index) =>
                                     <Tab.Pane key={index} eventKey={step.id}>
@@ -173,6 +174,7 @@ export const ProposalPage = React.createClass({
                                     </Tab.Pane>
                                 )
                               }
+                              </Tab.Container>
                             </Tab.Content>
                           </Row>
                         </Tab.Container>
