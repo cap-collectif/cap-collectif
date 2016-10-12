@@ -3,6 +3,7 @@ import { IntlMixin } from 'react-intl';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 import { connect } from 'react-redux';
+import Truncate from 'react-truncate';
 
 const ProposalPreviewBody = React.createClass({
   propTypes: {
@@ -18,26 +19,28 @@ const ProposalPreviewBody = React.createClass({
 
     return (
       <div className="proposal__body" >
-        <h2 className="h4 proposal__title smart-fade">
-          <a href={proposal._links.show}>{proposal.title}</a>
-        </h2>
+        <a href={proposal._links.show}>
+          <h2 className="h4 proposal__title">
+            <Truncate lines={3}>{proposal.title}</Truncate>
+          </h2>
+        </a>
         <div className="proposal__infos">
           {
             features.themes && showThemes && proposal.theme
             && <div className="proposal__info">
-                <i className="cap cap-tag-1-1 icon--blue"></i>{proposal.theme.title}
+                <i className="cap cap-tag-1-1 icon--blue"></i><Truncate>{proposal.theme.title}</Truncate>
               </div>
           }
           {
             proposal.category
             && <div className="proposal__info">
-              <i className="cap cap-tag-1-1 icon--blue"></i>{proposal.category.name}
+              <i className="cap cap-tag-1-1 icon--blue"></i><Truncate>{proposal.category.name}</Truncate>
             </div>
           }
           {
             features.districts && proposal.district
             && <div className="proposal__info">
-              <i className="cap cap-marker-1-1 icon--blue"></i>{proposal.district.name}
+              <i className="cap cap-marker-1-1 icon--blue"></i><Truncate>{proposal.district.name}</Truncate>
             </div>
           }
           <ProposalDetailEstimation

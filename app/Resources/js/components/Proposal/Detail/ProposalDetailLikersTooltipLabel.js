@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import Truncate from 'react-truncate';
 
 const ProposalDetailLikersTooltipLabel = React.createClass({
   propTypes: {
@@ -11,10 +12,12 @@ const ProposalDetailLikersTooltipLabel = React.createClass({
     const { likers } = this.props;
     if (likers.length === 1) {
       return (
-        <FormattedMessage
-          message={this.getIntlMessage('proposal.likers.label')}
-          user={likers[0].displayName}
-        />
+        <Truncate>
+          <FormattedMessage
+            message={this.getIntlMessage('proposal.likers.label')}
+            user={likers[0].displayName}
+          />
+        </Truncate>
       );
     }
     if (likers.length > 1) {
@@ -26,7 +29,9 @@ const ProposalDetailLikersTooltipLabel = React.createClass({
             num={likers.length}
           />
           <br />
-          <FormattedHTMLMessage message={message} />
+          <Truncate>
+            <FormattedHTMLMessage message={message} />
+          </Truncate>
         </span>
       );
     }

@@ -15,7 +15,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposal__title {
-    margin: 0 auto;
+    margin: 0 auto 10px;
 }
 
 .proposal__infos {
@@ -23,11 +23,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposal__info {
-    max-height: 36px;
-    overflow: hidden;
     padding-top: 5px;
     padding-left: 5px;
-    word-break: break-word;
 
     .cap {
         padding-right: 5px;
@@ -69,9 +66,10 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
         font-size: 1.3em;
         text-align: left;
         padding-left: 5px;
+
         i {
-            font-size: 22px;
             color: $blue;
+            font-size: 22px;
         }
     }
 
@@ -84,8 +82,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 
     .progress-bar {
-        min-width: 2em;
         width: 2%;
+        min-width: 2em;
     }
 
     .progress {
@@ -100,13 +98,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 
     .progress-bar {
-        min-width: 2em;
         width: 2%;
-    }
-
-    &--no-min-width {
-        .progress-bar {
-        }
+        min-width: 2em;
     }
 }
 
