@@ -148,25 +148,21 @@ export const ProposalPage = React.createClass({
                   {
                     showVotesTab
                     && <Tab.Pane eventKey="votes">
-                        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                        <Tab.Container id="tab-votesByStep" defaultActiveKey={0}>
                           <Row className="clearfix">
                             <Nav bsStyle="pills">
                               {
                                 votableSteps.map((step, index) =>
-                                  <NavItem
-                                    key={index}
-                                    eventKey={step.id}
-                                  >
+                                  <NavItem key={index} eventKey={index}>
                                     {step.title} <span className="badge">{proposal.votesCountByStepId[step.id] || 0}</span>
                                   </NavItem>
                                 )
                               }
                             </Nav>
-                            <Tab.Content animation={false}>
-                              <Tab.Container id="proposal-votesByStep-tab" defaultActiveKey={0}>
+                              <Tab.Content animation={false}>
                               {
                                 votableSteps.map((step, index) =>
-                                    <Tab.Pane key={index} eventKey={step.id}>
+                                    <Tab.Pane key={index} eventKey={index}>
                                       <ProposalPageVotes
                                         stepId={step.id}
                                         proposal={proposal}
@@ -174,8 +170,7 @@ export const ProposalPage = React.createClass({
                                     </Tab.Pane>
                                 )
                               }
-                              </Tab.Container>
-                            </Tab.Content>
+                              </Tab.Content>
                           </Row>
                         </Tab.Container>
                       </Tab.Pane>
