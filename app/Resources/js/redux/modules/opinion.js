@@ -2,7 +2,10 @@ import Fetcher, { json } from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
+import { find } from 'lodash';
 import { UPDATE_OPINION_SUCCESS, UPDATE_OPINION_FAILURE } from '../../constants/OpinionConstants';
+
+const VOTES_PREVIEW_COUNT = 8;
 
 const OPINION_VOTE_SUCCEEDED = 'opinion/OPINION_VOTE_SUCCEEDED';
 const VERSION_VOTE_SUCCEEDED = 'opinion/VERSION_VOTE_SUCCEEDED';
@@ -20,21 +23,13 @@ const initialState = {
   versions: [],
 };
 
-export const fetchOpinionVotes = (opinionId, parent) => {
-  return {
-    type: OPINION_VOTES_FETCH_REQUESTED,
-    opinionId,
-    parent,
-  };
-};
-
 export function* fetchAllOpinionVotes(action) {
   try {
     let hasMore = true;
     let iterationCount = 0;
     const votesPerIteration = 30;
     const votesUrl = action.parent
-      ? `/opinions/${action.parent}/versions/${action.opinionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
+      ? `/opinions/${action.opinionId}/versions/${action.versionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
       : `/opinions/${action.opinionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`;
     while (hasMore) {
       const result = yield call(
@@ -54,6 +49,14 @@ export function* saga() {
   yield* takeEvery(OPINION_VOTES_FETCH_REQUESTED, fetchAllOpinionVotes);
 }
 
+export const fetchOpinionVotes = (opinionId, versionId) => {
+  return {
+    type: OPINION_VOTES_FETCH_REQUESTED,
+    opinionId,
+    versionId,
+  };
+};
+
 const versionVoteSuccess = (versionId, vote) => {
   return {
     type: VERSION_VOTE_SUCCEEDED,
@@ -70,17 +73,19 @@ const opinionVoteSuccess = (opinionId, vote) => {
   };
 };
 
-const deleteOpinionVoteSuccess = (opinionId) => {
+const deleteOpinionVoteSuccess = (opinionId, vote) => {
   return {
     type: DELETE_OPINION_VOTE_SUCCEEDED,
     opinionId,
+    vote,
   };
 };
 
-const deleteVersionVoteSuccess = (versionId) => {
+const deleteVersionVoteSuccess = (versionId, vote) => {
   return {
     type: DELETE_VERSION_VOTE_SUCCEEDED,
     versionId,
+    vote,
   };
 };
 
@@ -88,19 +93,19 @@ const deleteVote = (opinion, parent, dispatch) => {
   const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
   return Fetcher
     .delete(url)
-    .then(() => {
+    .then(json)
+    .then((data) => {
       if (parent) {
-        dispatch(deleteVersionVoteSuccess(opinion));
+        dispatch(deleteVersionVoteSuccess(opinion, data));
       } else {
-        dispatch(deleteOpinionVoteSuccess(opinion));
+        dispatch(deleteOpinionVoteSuccess(opinion, data));
       }
       FluxDispatcher.dispatch({
         actionType: UPDATE_OPINION_SUCCESS,
         message: 'opinion.request.delete_vote.success',
       });
-      //location.reload();
     })
-    .catch(() => {
+    .catch((e) => {
       FluxDispatcher.dispatch({
         actionType: UPDATE_OPINION_FAILURE,
         message: 'opinion.request.failure',
@@ -123,7 +128,6 @@ const vote = (value, opinion, parent, dispatch) => {
         actionType: UPDATE_OPINION_SUCCESS,
         message: 'opinion.request.create_vote.success',
       });
-      //location.reload();
     })
     .catch(() => {
       FluxDispatcher.dispatch({
@@ -152,15 +156,11 @@ export const voteVersion = (value, version, opinion, dispatch) => {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case OPINION_VOTES_FETCH_SUCCEEDED: {
-      let votes = typeof state.opinions[action.opinionId].votes === 'undefined'
-        ? state.opinions[action.opinionId].votes
-        : [];
-      if (votes.length <= 8) {
+      let votes = state.opinions[action.opinionId].votes || [];
+      if (votes.length <= VOTES_PREVIEW_COUNT) {
         votes = []; // we remove preview votes
       }
-      for (const vote of action.votes) {
-        votes.push(vote);
-      }
+      votes.push(...action.votes);
       const opinions = {
         [action.opinionId]: { ...state.opinions[action.opinionId], votes },
       };
@@ -168,25 +168,38 @@ export const reducer = (state = initialState, action) => {
     }
     case OPINION_VOTE_SUCCEEDED: {
       const opinion = state.opinions[action.opinionId];
+      if (!opinion.user_vote) {
+        const opinions = {
+          [action.opinionId]: {
+            ...opinion,
+            ...{
+              ...state.opinions[action.opinionId],
+              votes: [action.vote, ...opinion.votes],
+              userHasVote: true,
+              votesCount: opinion.votesCount + 1,
+              user_vote: action.vote.value,
+            },
+          },
+        };
+
+        return { ...state, opinions };
+      }
+
+      return state;
+    }
+    case DELETE_OPINION_VOTE_SUCCEEDED: {
+      const opinion = state.opinions[action.opinionId];
+      const indexToRemove = opinion.votes.indexOf(find(opinion.votes, (v) => {
+        console.log(v.user, action);
+        return v.user && v.user.uniqueId === action.vote.user.uniqueId;
+      }));
       const opinions = {
         [action.opinionId]: {
           ...opinion,
-          ...{
-            ...state.opinions[action.opinionId],
-            votes: [action.vote, ...opinion.votes],
-            userHasVote: true,
-            votesCount: opinion.votesCount + 1,
-            user_vote: action.vote.value,
-          },
-        },
-      };
-      return { ...state, opinions };
-    }
-    case DELETE_OPINION_VOTE_SUCCEEDED: {
-      const opinions = {
-        [action.opinionId]: {
-          ...state.opinions[action.opinionId],
+          votes: [...opinion.votes.slice(0, indexToRemove), ...opinion.votes.slice(indexToRemove + 1)],
           user_vote: null,
+          userHasVote: false,
+          votesCount: opinion.votesCount - 1,
         },
       };
       return { ...state, opinions };
@@ -196,6 +209,7 @@ export const reducer = (state = initialState, action) => {
         [action.versionId]: {
           ...state.versions[action.versionId],
           user_vote: action.vote.value,
+          userHasVote: true,
         },
       };
       return { ...state, versions };
@@ -205,6 +219,7 @@ export const reducer = (state = initialState, action) => {
         [action.versionId]: {
           ...state.versions[action.versionId],
           user_vote: null,
+          userHasVote: false,
         },
       };
       return { ...state, versions };

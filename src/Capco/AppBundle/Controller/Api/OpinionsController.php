@@ -309,7 +309,7 @@ class OpinionsController extends FOSRestController
      * @Security("has_role('ROLE_USER')")
      * @Delete("/opinions/{id}/votes")
      * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
-     * @View(statusCode=204, serializerGroups={})
+     * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */
     public function deleteOpinionVoteAction(Opinion $opinion)
     {
@@ -329,6 +329,8 @@ class OpinionsController extends FOSRestController
         $this->get('doctrine.orm.entity_manager')->remove($vote);
         $this->get('doctrine.orm.entity_manager')->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+
+        return $vote;
     }
 
     /**
@@ -730,7 +732,7 @@ class OpinionsController extends FOSRestController
      *  resource=true,
      *  description="Delete a vote from an opinion version.",
      *  statusCodes={
-     *    204 = "Returned when successful",
+     *    200 = "Returned when successful",
      *    404 = "Returned when opinion or opinion version not found",
      *  }
      * )
@@ -739,7 +741,7 @@ class OpinionsController extends FOSRestController
      * @Delete("/opinions/{opinionId}/versions/{versionId}/votes")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
-     * @View(statusCode=204, serializerGroups={})
+     * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos", "UserMedias"})
      */
     public function deleteOpinionVersionVoteAction(Opinion $opinion, OpinionVersion $version)
     {
@@ -763,6 +765,8 @@ class OpinionsController extends FOSRestController
         $this->getDoctrine()->getManager()->remove($vote);
         $this->getDoctrine()->getManager()->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+
+        return $vote;
     }
 
     /**

@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
 import OpinionStore from '../../stores/OpinionStore';
 import OpinionActions from '../../actions/OpinionActions';
 import FlashMessages from '../Utils/FlashMessages';
+import { fetchOpinionVotes } from '../../redux/modules/opinion';
 
 import OpinionBox from './OpinionBox';
 import OpinionTabs from './OpinionTabs';
@@ -12,6 +14,7 @@ const OpinionPage = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.number.isRequired,
     versionId: React.PropTypes.number,
+    fetchOpinionVotes: React.PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -64,6 +67,7 @@ const OpinionPage = React.createClass({
       opinionId,
       versionId
     );
+    this.props.fetchOpinionVotes(opinionId, versionId);
   },
 
   render() {
@@ -81,7 +85,12 @@ const OpinionPage = React.createClass({
       </div>
     );
   },
-
 });
 
-export default OpinionPage;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchOpinionVotes: (opinionId) => dispatch(fetchOpinionVotes(opinionId)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(OpinionPage);

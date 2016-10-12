@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
@@ -7,6 +8,7 @@ import OpinionVotesModal from './OpinionVotesModal';
 const OpinionVotesBar = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
+    votes: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -16,8 +18,7 @@ const OpinionVotesBar = React.createClass({
   },
 
   render() {
-    const opinion = this.props.opinion;
-    const votes = opinion.votes;
+    const { opinion, votes } = this.props;
 
     return (
       <div>
@@ -43,7 +44,12 @@ const OpinionVotesBar = React.createClass({
       </div>
     );
   },
-
 });
 
-export default OpinionVotesBar;
+const mapStateToProps = (state, props) => {
+  return {
+    votes: state.opinion.opinions[props.opinion.id].votes,
+  };
+};
+
+export default connect(mapStateToProps)(OpinionVotesBar);
