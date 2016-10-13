@@ -4,19 +4,29 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('+3 days', '+10 days')>
+    voteType: 0
   collectstep2:
     title: Collecte des propositions fermée
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
     endAt: <dateTimeBetween('-28 days', '-10 days')>
+    voteType: 0
   collectstep3:
     title: Collecte des propositions
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
     endAt: <dateTimeBetween('-28 days', '-10 days')>
+    voteType: 0
   collectstep4:
     title: Collecte des propositions privée
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
     endAt: <dateTimeBetween('-28 days', '-10 days')>
     private: true
+    voteType: 0
+  collectstep5:
+    title: Collecte des propositions avec vote simple
+    body: <p><text(1000)></p>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('+28 days', '+50 days')>
+    voteType: 1

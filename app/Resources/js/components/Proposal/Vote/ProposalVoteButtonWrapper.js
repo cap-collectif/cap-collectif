@@ -5,14 +5,12 @@ import { VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import { connect } from 'react-redux';
 
-const ProposalVoteButtonWrapper = React.createClass({
+export const ProposalVoteButtonWrapper = React.createClass({
   displayName: 'ProposalVoteButtonWrapper',
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    selectionStep: PropTypes.object,
+    step: PropTypes.object,
     creditsLeft: PropTypes.number,
-    onClick: PropTypes.func.isRequired,
-    userHasVote: PropTypes.bool.isRequired,
     user: PropTypes.object,
     style: PropTypes.object,
     className: PropTypes.string,
@@ -20,7 +18,6 @@ const ProposalVoteButtonWrapper = React.createClass({
 
   getDefaultProps() {
     return {
-      selectionStep: null,
       creditsLeft: null,
       user: null,
       style: {},
@@ -28,31 +25,31 @@ const ProposalVoteButtonWrapper = React.createClass({
     };
   },
 
-  selectionStepIsOpen() {
-    const { selectionStep } = this.props;
-    return selectionStep && selectionStep.open;
+  voteThresholdReached() {
+    const { step, proposal } = this.props;
+    return step && step.voteThreshold <= proposal.votesCount;
   },
 
   userHasEnoughCredits() {
     const {
       creditsLeft,
       proposal,
-      userHasVote,
     } = this.props;
-    if (!userHasVote && creditsLeft !== null && !!proposal.estimation) {
+    if (!proposal.userHasVote && creditsLeft !== null && !!proposal.estimation) {
       return creditsLeft >= proposal.estimation;
     }
     return true;
   },
 
   render() {
-    const { user, selectionStep, userHasVote, onClick, proposal, style, className } = this.props;
-    if (selectionStep && selectionStep.voteType === VOTE_TYPE_SIMPLE) {
+    const { user, step, proposal, style, className } = this.props;
+    if (step && step.voteType === VOTE_TYPE_SIMPLE) {
       return (
         <ProposalVoteButton
-          userHasVote={userHasVote}
-          onClick={onClick}
-          disabled={!this.selectionStepIsOpen()}
+          proposal={proposal}
+          step={step}
+          user={user}
+          disabled={!step.open}
           style={style}
           className={className}
         />
@@ -66,9 +63,10 @@ const ProposalVoteButtonWrapper = React.createClass({
             show={!this.userHasEnoughCredits()}
         >
           <ProposalVoteButton
-            userHasVote={userHasVote}
-            onClick={this.userHasEnoughCredits() ? onClick : null}
-            disabled={!this.selectionStepIsOpen() || !this.userHasEnoughCredits()}
+            proposal={proposal}
+            step={step}
+            user={user}
+            disabled={!(step && step.open) || !this.userHasEnoughCredits()}
             style={style}
             className={className}
           />
@@ -79,9 +77,10 @@ const ProposalVoteButtonWrapper = React.createClass({
     return (
       <LoginOverlay>
         <ProposalVoteButton
-          userHasVote={userHasVote}
-          onClick={null}
-          disabled={!this.selectionStepIsOpen()}
+          proposal={proposal}
+          step={step}
+          user={user}
+          disabled={!(step && step.open)}
           style={style}
           className={className}
         />
@@ -91,9 +90,12 @@ const ProposalVoteButtonWrapper = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     user: state.default.user,
+    step: state.project.currentProjectById && props.proposal.votableStepId
+      ? state.project.projects[state.project.currentProjectById].steps.filter(step => step.id === props.proposal.votableStepId)[0]
+      : null,
   };
 };
 

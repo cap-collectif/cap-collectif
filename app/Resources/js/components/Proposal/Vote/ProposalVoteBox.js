@@ -11,14 +11,10 @@ import { Row, Col } from 'react-bootstrap';
 const ProposalVoteBox = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    selectionStep: PropTypes.object.isRequired,
-    userHasVote: PropTypes.bool,
+    step: PropTypes.object.isRequired,
     creditsLeft: PropTypes.number,
     className: PropTypes.string,
     formWrapperClassName: PropTypes.string,
-    onSubmitSuccess: PropTypes.func,
-    onSubmitFailure: PropTypes.func,
-    onValidationFailure: PropTypes.func,
     isSubmitting: PropTypes.bool.isRequired,
     user: PropTypes.object,
   },
@@ -26,23 +22,11 @@ const ProposalVoteBox = React.createClass({
 
   getDefaultProps() {
     return {
-      userHasVote: false,
       creditsLeft: null,
       className: '',
       formWrapperClassName: '',
-      onSubmitSuccess: () => {},
-      onSubmitFailure: () => {},
-      onValidationFailure: () => {},
       user: null,
     };
-  },
-
-  userHasVote() {
-    const {
-      user,
-      userHasVote,
-    } = this.props;
-    return user && userHasVote;
   },
 
   userHasEnoughCredits() {
@@ -50,8 +34,9 @@ const ProposalVoteBox = React.createClass({
       creditsLeft,
       proposal,
       user,
+      // step,
     } = this.props;
-    if (user && !this.userHasVote() && creditsLeft !== null && proposal.estimation !== null) {
+    if (user && creditsLeft !== null && proposal.estimation !== null) {
       return creditsLeft >= proposal.estimation;
     }
     return true;
@@ -59,10 +44,10 @@ const ProposalVoteBox = React.createClass({
 
   displayForm() {
     const {
-      selectionStep,
+      step,
       user,
     } = this.props;
-    return selectionStep.open && (selectionStep.voteType === VOTE_TYPE_SIMPLE || (user && this.userHasEnoughCredits()));
+    return step.open && (step.voteType === VOTE_TYPE_SIMPLE || (user && this.userHasEnoughCredits()));
   },
 
   render() {
@@ -70,18 +55,14 @@ const ProposalVoteBox = React.createClass({
       className,
       formWrapperClassName,
       isSubmitting,
-      onSubmitFailure,
-      onSubmitSuccess,
-      onValidationFailure,
       proposal,
-      selectionStep,
+      step,
       user,
-      userHasVote,
     } = this.props;
     return (
       <div className={className}>
         {
-          !user && selectionStep.voteType !== VOTE_TYPE_BUDGET && selectionStep.open
+          !user && step.voteType !== VOTE_TYPE_BUDGET && step.open
           && <div>
             <p className="text-center small" style={{ fontWeight: 'bold' }}>
               {this.getIntlMessage('proposal.vote.authenticated')}
@@ -116,21 +97,17 @@ const ProposalVoteBox = React.createClass({
         }
         <div className={formWrapperClassName}>
           {
-            this.displayForm()
-              && <ProposalVoteForm
+            this.displayForm() &&
+            <ProposalVoteForm
               proposal={proposal}
-              selectionStepId={selectionStep.id}
+              step={step}
               isSubmitting={isSubmitting}
-              onValidationFailure={onValidationFailure}
-              onSubmitSuccess={onSubmitSuccess}
-              onSubmitFailure={onSubmitFailure}
-              userHasVote={userHasVote}
-              />
+            />
           }
           <ProposalVoteBoxMessage
             enoughCredits={this.userHasEnoughCredits()}
             submitting={isSubmitting}
-            selectionStep={selectionStep}
+            step={step}
           />
         </div>
       </div>

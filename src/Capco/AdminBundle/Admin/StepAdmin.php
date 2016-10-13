@@ -195,12 +195,12 @@ class StepAdmin extends Admin
 
         $formMapper->end();
 
-        if ($subject instanceof SelectionStep) {
+        if ($subject instanceof SelectionStep || $subject instanceof CollectStep) {
             $formMapper
                 ->with('admin.fields.step.group_votes')
                 ->add('voteType', 'choice', [
                     'label' => 'admin.fields.step.vote_type',
-                    'choices' => SelectionStep::$voteTypeLabels,
+                    'choices' => SelectionStep::getVoteTypeLabels(),
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
                     'help' => 'admin.help.step.vote_type',
@@ -228,9 +228,6 @@ class StepAdmin extends Admin
                 ])
                 ->end()
             ;
-        }
-
-        if ($subject instanceof CollectStep || $subject instanceof SelectionStep) {
             $formMapper
                 ->with('admin.fields.step.group_statuses')
                 ->add('statuses', 'sonata_type_collection', [
@@ -254,9 +251,7 @@ class StepAdmin extends Admin
                         'empty_value' => 'admin.fields.step.default_status_none',
                     ])
                 ;
-
                 $formMapper->end();
-
                 $formMapper->with('admin.fields.step.group_selections')
                     ->add(
                         'private',
@@ -267,10 +262,9 @@ class StepAdmin extends Admin
                         ]
                     );
             }
-
             $formMapper->end();
         }
-        
+
         if ($subject instanceof SelectionStep) {
             $formMapper
                 ->with('admin.fields.step.group_selections')

@@ -2,21 +2,20 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
- * ProposalVote.
- *
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalVoteRepository")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalSelectionVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasAnonymousOrUser()
  * @CapcoAssert\EmailDoesNotBelongToUser(message="proposal.vote.email_belongs_to_user")
- * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalVote", objectPath="proposal")
+ * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalSelectionVote", objectPath="proposal")
  * @CapcoAssert\HasEnoughCreditsToVote()
  */
-class ProposalVote extends AbstractVote
+class ProposalSelectionVote extends AbstractVote
 {
     use \Capco\AppBundle\Traits\AnonymousableTrait;
     use \Capco\AppBundle\Traits\PrivatableTrait;
@@ -24,56 +23,36 @@ class ProposalVote extends AbstractVote
     const ANONYMOUS = 'ANONYMOUS';
 
     /**
-     * @var
-     *
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="votes", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selectionVotes", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $proposal;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", cascade={"persist"})
      * @ORM\JoinColumn(name="selection_step_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $selectionStep;
 
-    /**
-     * @return Proposal
-     */
-    public function getProposal()
+    public function getProposal(): Proposal
     {
         return $this->proposal;
     }
 
-    /**
-     * @param Proposal $proposal
-     *
-     * @return $this
-     */
-    public function setProposal(Proposal $proposal)
+    public function setProposal(Proposal $proposal): self
     {
         $this->proposal = $proposal;
-        $proposal->addVote($this);
+        $proposal->addSelectionVote($this);
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSelectionStep()
+    public function getSelectionStep(): SelectionStep
     {
         return $this->selectionStep;
     }
 
-    /**
-     * @param SelectionStep $selectionStep
-     *
-     * @return $this
-     */
-    public function setSelectionStep(SelectionStep $selectionStep)
+    public function setSelectionStep(SelectionStep $selectionStep): self
     {
         $this->selectionStep = $selectionStep;
 
@@ -85,15 +64,11 @@ class ProposalVote extends AbstractVote
         return $this->proposal;
     }
 
-    // *************************** Lifecycle **********************************
-
     /**
      * @ORM\PreRemove
      */
     public function deleteVote()
     {
-        if ($this->proposal != null) {
-            $this->proposal->removeVote($this);
-        }
+        $this->proposal->removeSelectionVote($this);
     }
 }

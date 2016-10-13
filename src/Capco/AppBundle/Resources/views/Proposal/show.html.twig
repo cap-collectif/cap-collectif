@@ -11,10 +11,12 @@
 {% block reduxStore %}
   {% set initialState = {
     'proposal': {
-      'currentProposalById': proposal.id,
-      'proposals': {
+      'currentProposalId': proposal.id,
+      'proposalsById': {
         (proposal.id) : proposalSerialized
-      }
+      },
+      'userVotesByStepId': project|proposal_votes_list(app.user),
+      'creditsLeftByStepId': project|credits_list_list(app.user)
     }
   } %}
   {% include '@CapcoApp/redux_store.html.twig' with {'data' : state|merge(initialState)} %}

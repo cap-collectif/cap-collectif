@@ -3,9 +3,9 @@ import { IntlMixin } from 'react-intl';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
-import ProposalStore from '../../../stores/ProposalStore';
-import ProposalActions from '../../../actions/ProposalActions';
 import { Modal } from 'react-bootstrap';
+import { updateProposal, closeEditProposalModal } from '../../../redux/modules/proposal';
+import { connect } from 'react-redux';
 
 const ProposalEditModal = React.createClass({
   propTypes: {
@@ -13,57 +13,10 @@ const ProposalEditModal = React.createClass({
     categories: PropTypes.array.isRequired,
     proposal: PropTypes.object.isRequired,
     show: PropTypes.bool.isRequired,
-    onToggleModal: PropTypes.func.isRequired,
+    isSubmitting: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
-
-  getInitialState() {
-    return {
-      isSubmitting: false,
-    };
-  },
-
-  componentWillMount() {
-    ProposalStore.addChangeListener(this.onChange);
-  },
-
-  componentWillUnmount() {
-    ProposalStore.removeChangeListener(this.onChange);
-  },
-
-  onChange() {
-    this.setState({
-      isSubmitting: ProposalStore.isProcessing,
-    });
-  },
-
-  close() {
-    const { onToggleModal } = this.props;
-    onToggleModal(false);
-  },
-
-  show() {
-    const { onToggleModal } = this.props;
-    onToggleModal(true);
-  },
-
-  handleSubmit() {
-    ProposalActions.submit();
-  },
-
-  handleSubmitSuccess() {
-    this.close();
-    location.reload();
-  },
-
-  handleValidationFailure() {
-    ProposalActions.validationFailure();
-  },
-
-  reload() {
-    this.setState(this.getInitialState());
-    location.reload();
-  },
 
   render() {
     const {
@@ -71,13 +24,15 @@ const ProposalEditModal = React.createClass({
       form,
       proposal,
       show,
+      isSubmitting,
+      dispatch,
     } = this.props;
     return (
       <div>
         <Modal
           animation={false}
           show={show}
-          onHide={this.close.bind(null, this)}
+          onHide={() => { dispatch(closeEditProposalModal()); }}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
@@ -90,19 +45,19 @@ const ProposalEditModal = React.createClass({
             <ProposalForm
               form={form}
               categories={categories}
-              isSubmitting={this.state.isSubmitting}
-              onValidationFailure={this.handleValidationFailure.bind(null, this)}
-              onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
+              isSubmitting={isSubmitting}
               mode="edit"
               proposal={proposal}
             />
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={this.close.bind(null, this)} />
+            <CloseButton
+              onClose={() => { dispatch(closeEditProposalModal()); }}
+            />
             <SubmitButton
               id="confirm-proposal-edit"
-              isSubmitting={this.state.isSubmitting}
-              onSubmit={this.handleSubmit}
+              isSubmitting={isSubmitting}
+              onSubmit={() => { updateProposal(dispatch); }}
             />
           </Modal.Footer>
         </Modal>
@@ -112,4 +67,10 @@ const ProposalEditModal = React.createClass({
 
 });
 
-export default ProposalEditModal;
+const mapStateToProps = (state) => {
+  return {
+    show: state.proposal.showEditModal,
+    isSubmitting: state.proposal.isEditing,
+  };
+};
+export default connect(mapStateToProps)(ProposalEditModal);

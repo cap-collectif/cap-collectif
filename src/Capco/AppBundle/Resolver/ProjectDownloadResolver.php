@@ -221,7 +221,7 @@ class ProjectDownloadResolver
         foreach ($proposals as $proposal) {
             if ($proposal['enabled']) {
                 $this->addItemToData($this->getProposalItem($proposal));
-                $this->getProposalVotesData($proposal['votes'], $proposal);
+                $this->getProposalVotesData($proposal['selectionVotes'], $proposal);
             }
         }
     }

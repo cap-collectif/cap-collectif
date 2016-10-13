@@ -1,41 +1,34 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import ProposalActions from '../../../actions/ProposalActions';
 import UserLink from '../../User/UserLink';
 import { Button } from 'react-bootstrap';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalDetailsEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
+import { deleteVote } from '../../../redux/modules/proposal';
+import { connect } from 'react-redux';
 
-const ProposalUserVoteItem = React.createClass({
+export const ProposalUserVoteItem = React.createClass({
   propTypes: {
-    vote: React.PropTypes.object.isRequired,
-    step: React.PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    proposal: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
-
-  handleClick(e) {
-    const {
-      step,
-      vote,
-    } = this.props;
-    e.preventDefault();
-    ProposalActions.deleteVote(
-      step.id,
-      vote.proposal.id
-    );
-  },
 
   render() {
     const {
       step,
-      vote,
+      proposal,
+      dispatch,
     } = this.props;
-    const proposal = vote.proposal;
     return (
       <tr className="proposals-user-votes__row" id={`vote-step${step.id}-proposal${proposal.id}`}>
         <td><a href={proposal._links.show}>{proposal.title}</a></td>
         <td><i className="cap cap-user-2"></i><UserLink user={proposal.author} /></td>
-        <td><i className="cap cap-marker-1"></i>{proposal.district.name}</td>
+        {
+          proposal.district &&
+            <td><i className="cap cap-marker-1"></i>{proposal.district.name}</td>
+        }
         <td>
           <ProposalDetailsEstimation
             proposal={proposal}
@@ -43,7 +36,11 @@ const ProposalUserVoteItem = React.createClass({
           />
         </td>
         <td>
-          <Button onClick={this.handleClick} className="proposal-vote__delete">
+          <Button onClick={() => {
+            deleteVote(dispatch, step, proposal);
+            location.reload();
+          }} className="proposal-vote__delete"
+          >
             {this.getIntlMessage('project.votes.delete')}
           </Button>
         </td>
@@ -53,4 +50,4 @@ const ProposalUserVoteItem = React.createClass({
 
 });
 
-export default ProposalUserVoteItem;
+export default connect()(ProposalUserVoteItem);

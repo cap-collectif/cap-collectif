@@ -2,27 +2,24 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import ProposalActions from '../../../actions/ProposalActions';
 import FlashMessages from '../../Utils/FlashMessages';
 import Input from '../../Form/Input';
 import { connect } from 'react-redux';
+import { vote, deleteVote } from '../../../redux/modules/proposal';
 
 const ProposalVoteForm = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    selectionStepId: PropTypes.number.isRequired,
+    step: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
-    onValidationFailure: PropTypes.func.isRequired,
-    onSubmitSuccess: PropTypes.func.isRequired,
-    onSubmitFailure: PropTypes.func.isRequired,
-    userHasVote: PropTypes.bool,
+    dispatch: PropTypes.func.isRequired,
+    userHasVote: PropTypes.bool.isRequired,
     user: PropTypes.object,
   },
   mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
-      userHasVote: false,
       user: null,
     };
   },
@@ -64,56 +61,24 @@ const ProposalVoteForm = React.createClass({
   componentWillReceiveProps(nextProps) {
     const {
       isSubmitting,
-      onSubmitFailure,
-      onSubmitSuccess,
-      onValidationFailure,
       proposal,
-      selectionStepId,
-      user,
       userHasVote,
+      dispatch,
+      step,
+      user,
     } = this.props;
     if (!isSubmitting && nextProps.isSubmitting) {
       if (this.isValid()) {
         if (user && userHasVote) {
-          ProposalActions
-            .deleteVote(selectionStepId, proposal.id, proposal.estimation)
-            .then(() => {
-              this.setState(this.getInitialState());
-              onSubmitSuccess();
-            })
-            .catch(() => {
-              onSubmitFailure();
-            })
-          ;
-          return;
+          deleteVote(dispatch, step, proposal);
         }
         const data = this.state.form;
         if (user) {
           delete data.username;
           delete data.email;
         }
-        ProposalActions
-          .vote(
-            selectionStepId,
-            proposal.id,
-            proposal.estimation,
-            data
-          )
-          .then(() => {
-            this.setState(this.getInitialState());
-            onSubmitSuccess();
-          })
-          .catch((error) => {
-            this.setState({
-              serverErrors: error.response.errors,
-            });
-            onSubmitFailure();
-          })
-        ;
-        return;
+        vote(dispatch, step, proposal, data);
       }
-
-      onValidationFailure();
     }
   },
 
@@ -128,9 +93,9 @@ const ProposalVoteForm = React.createClass({
   },
 
   render() {
-    const { user } = this.props;
+    const { user, proposal } = this.props;
     const anonymous = !user;
-    const userHasVote = this.props.userHasVote;
+    const userHasVote = proposal.userHasVote;
     const commentLabel = (
       <span>
         {this.getIntlMessage('proposal.vote.form.comment')}
@@ -203,9 +168,10 @@ const ProposalVoteForm = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     user: state.default.user,
+    userHasVote: props.step !== null && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
   };
 };
 

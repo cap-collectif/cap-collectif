@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Entity\ProposalVote;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\PreSerializeEvent;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -21,7 +21,12 @@ class ProposalVoteSerializationListener implements EventSubscriberInterface
         return [
             [
                 'event' => 'serializer.pre_serialize',
-                'class' => 'Capco\AppBundle\Entity\ProposalVote',
+                'class' => 'Capco\AppBundle\Entity\ProposalSelectionVote',
+                'method' => 'onPreProposalVote',
+            ],
+            [
+                'event' => 'serializer.pre_serialize',
+                'class' => 'Capco\AppBundle\Entity\ProposalCollectVote',
                 'method' => 'onPreProposalVote',
             ],
         ];
@@ -34,7 +39,7 @@ class ProposalVoteSerializationListener implements EventSubscriberInterface
         if ($proposalVote->isPrivate()) {
             $proposalVote->setUser(null);
             $proposalVote->setEmail(null);
-            $proposalVote->setUsername(ProposalVote::ANONYMOUS);
+            $proposalVote->setUsername(ProposalSelectionVote::ANONYMOUS);
         }
     }
 }

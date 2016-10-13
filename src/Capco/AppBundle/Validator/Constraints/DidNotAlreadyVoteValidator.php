@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Capco\AppBundle\Entity\ProposalVote;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -35,7 +35,7 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
         }
 
         // Data specific to proposal votes
-        if ($object instanceof ProposalVote) {
+        if ($object instanceof ProposalSelectionVote) {
             $data['selectionStep'] = $object->getSelectionStep();
         }
 

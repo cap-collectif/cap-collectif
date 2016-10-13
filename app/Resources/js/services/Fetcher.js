@@ -90,6 +90,21 @@ class Fetcher {
     ;
   }
 
+  postToJson(uri, body) {
+    return AuthService.login()
+      .then(() => {
+        return fetch(config.api + uri, {
+          method: 'post',
+          headers: createHeaders(),
+          beforeSend: addAuthorization,
+          body: JSON.stringify(body),
+        })
+          .then(status)
+          .then(json);
+      })
+    ;
+  }
+
   put(uri, body) {
     return AuthService.login()
       .then(() => {

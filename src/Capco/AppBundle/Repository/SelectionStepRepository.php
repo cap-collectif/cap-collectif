@@ -6,9 +6,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Project;
 
-/**
- * SelectionStepRepository.
- */
 class SelectionStepRepository extends AbstractStepRepository
 {
     public function getVotableStepsForProposal(Proposal $proposal)
@@ -31,7 +28,7 @@ class SelectionStepRepository extends AbstractStepRepository
         $expr = $qb->expr();
         $qb
             ->leftJoin('ss.projectAbstractStep', 'pas')
-            ->andWhere($expr->neq('ss.voteType', SelectionStep::VOTE_TYPE_DISABLED))
+            ->andWhere($expr->neq('ss.voteType', SelectionStep::$VOTE_TYPE_DISABLED))
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)
             ->orderBy('pas.position')

@@ -26,6 +26,17 @@
 {% block jumbotron %}
 {% endblock %}
 
+{% block reduxStore %}
+  {% set initialState = {
+    'proposal': {
+      'userVotesByStepId': project|proposal_votes_list(app.user),
+      'creditsLeftByStepId': project|credits_list_list(app.user),
+      'proposalsById': [],
+    }
+  } %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'data' : state|merge(initialState)} %}
+{% endblock %}
+
 {% block details %}
     {% if currentStep.isClosed and currentStep.isVotable %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
@@ -39,7 +50,7 @@
         </div>
     {% endif %}
 
-    {{ react_intl_component('SelectionStepPageApp', {
+    {{ react_intl_component('ProposalStepPageApp', {
         'props': props,
         'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
         })

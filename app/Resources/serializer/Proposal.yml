@@ -82,13 +82,6 @@ Capco\AppBundle\Entity\Proposal:
     likers:
       expose: true
       groups: [Proposals]
-    votesCount:
-      expose: true
-      groups: [Proposals]
-      serialized_name: votesCount
-    votes:
-      expose: true
-      groups: [ProposalVotes]
   virtual_properties:
     isVisible:
       expose: true

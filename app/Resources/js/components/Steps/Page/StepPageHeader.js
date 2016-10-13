@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import StepInfos from './StepInfos';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 
 const StepPageHeader = React.createClass({
   propTypes: {
-    step: React.PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 

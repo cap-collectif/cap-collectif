@@ -286,7 +286,7 @@ Feature: Opinions
       "value": 1
     }
     """
-    Then the JSON response status code should be 204
+    Then the JSON response status code should be 200
     # update
     When I send a PUT request to "/api/opinions/57/votes" with json:
     """
@@ -294,7 +294,7 @@ Feature: Opinions
       "value": -1
     }
     """
-    Then the JSON response status code should be 204
+    Then the JSON response status code should be 200
     # delete
     When I send a DELETE request to "/api/opinions/57/votes"
     Then the JSON response status code should be 204

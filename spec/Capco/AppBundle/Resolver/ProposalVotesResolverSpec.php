@@ -4,14 +4,14 @@ namespace spec\Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalVote;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Repository\ProposalVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 
-class ProposalVotesResolverSpec extends ObjectBehavior
+class ProposalSelectionVotesResolverSpec extends ObjectBehavior
 {
     function let(ProposalVoteRepository $proposalVoteRepository, SelectionStepRepository $selectionStepRepository)
     {
@@ -20,7 +20,7 @@ class ProposalVotesResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Resolver\ProposalVotesResolver');
+        $this->shouldHaveType('Capco\AppBundle\Resolver\ProposalSelectionVotesResolver');
     }
 
     function it_can_tell_if_proposal_has_vote(ProposalVote $vote1, ProposalVote $vote2, Proposal $proposal1, Proposal $proposal2)

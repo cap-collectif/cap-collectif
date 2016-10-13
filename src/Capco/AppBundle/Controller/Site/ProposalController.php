@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProposalCollectVote;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -28,31 +30,10 @@ class ProposalController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
-        $firstVotableStep = $this
-            ->get('capco.proposal_votes.resolver')
-            ->getFirstVotableStepForProposal($proposal)
-        ;
-
-        $userHasVote = false;
-        if ($this->getUser() && $firstVotableStep) {
-            $userVote = $em
-                ->getRepository('CapcoAppBundle:ProposalVote')
-                ->findOneBy([
-                    'selectionStep' => $firstVotableStep,
-                    'user' => $this->getUser(),
-                    'proposal' => $proposal,
-                ]);
-            if ($userVote) {
-                $userHasVote = true;
-            }
-        }
-
         $proposalForm = $currentStep->getProposalForm();
         $props = $serializer->serialize([
             'form' => $proposalForm,
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
-            'votableStep' => $firstVotableStep,
-            'userHasVote' => $userHasVote,
         ], 'json', SerializationContext::create()
             ->setSerializeNull(true)
             ->setGroups([
@@ -64,17 +45,16 @@ class ProposalController extends Controller
                 'ThemeDetails',
                 'UserMedias',
                 'VoteThreshold',
+                'Default', // force step_type serialization
             ]))
         ;
-
-        $previewedVotes = $em->getRepository('CapcoAppBundle:ProposalVote')->getVotesForProposal($proposal, 6);
-        $proposal->setVotes(new ArrayCollection($previewedVotes));
 
         $proposalSerialized = $serializer->serialize($proposal, 'json',
           SerializationContext::create()
             ->setSerializeNull(true)
             ->setGroups([
-                'ProposalVotes',
+                'ProposalSelectionVotes',
+                'ProposalCollectVotes',
                 'UsersInfos',
                 'UserMedias',
                 'Proposals',

@@ -1,0 +1,31 @@
+Capco\AppBundle\Entity\ProposalSelectionVote:
+  proposalSelectionVote1:
+    proposal: @proposal2
+    selectionStep: @selectionStep1
+    user: @user4
+  proposalSelectionVote2:
+    proposal: @proposal2
+    selectionStep: @selectionStep1
+    username: coucou
+    email: cheater@test.com
+  proposalSelectionVote3:
+    proposal: @proposal3
+    selectionStep: @selectionStep1
+    user: @user5
+  proposalSelectionVote4:
+    proposal: @proposal2
+    selectionStep: @selectionStep1
+    username: coucou
+    email: voter@test.com
+  proposalSelectionVote{5...50}:
+    proposal: @proposal3
+    selectionStep: @selectionStep1
+    user: @user<current()>
+  proposalSelectionVote51:
+    proposal: @proposal7
+    selectionStep: @selectionStep4
+    user: @user4
+  proposalSelectionVote52:
+    proposal: @proposal11
+    selectionStep: @selectionStep3
+    user: @user4

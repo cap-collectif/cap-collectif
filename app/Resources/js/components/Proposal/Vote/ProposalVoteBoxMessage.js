@@ -1,41 +1,28 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
-import { connect } from 'react-redux';
 
 const ProposalVoteBoxMessage = React.createClass({
   propTypes: {
-    selectionStep: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
     enoughCredits: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    user: PropTypes.object,
   },
   mixins: [IntlMixin],
-
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
 
   getMessage() {
     const {
       enoughCredits,
-      selectionStep,
+      step,
       submitting,
-      user,
     } = this.props;
     if (!enoughCredits && !submitting) {
       return this.getIntlMessage('proposal.vote.not_enough_credits');
     }
-    if (selectionStep.status === 'future') {
+    if (step.status === 'future') {
       return this.getIntlMessage('proposal.vote.step_not_yet_open');
     }
-    if (selectionStep.status === 'closed') {
+    if (step.status === 'closed') {
       return this.getIntlMessage('proposal.vote.step_closed');
-    }
-    if (selectionStep.voteType === VOTE_TYPE_BUDGET && !user) {
-      return this.getIntlMessage('proposal.vote.must_log_in');
     }
     return null;
   },
@@ -51,10 +38,4 @@ const ProposalVoteBoxMessage = React.createClass({
   },
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.default.user,
-  };
-};
-
-export default connect(mapStateToProps)(ProposalVoteBoxMessage);
+export default ProposalVoteBoxMessage;

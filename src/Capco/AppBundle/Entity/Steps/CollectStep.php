@@ -4,31 +4,43 @@ namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Traits\VoteThresholdTrait;
+use Capco\AppBundle\Traits\VoteTypeTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Model\IndexableInterface;
 
 /**
  * @ORM\Table(name="collect_step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CollectStepRepository")
  */
-class CollectStep extends AbstractStep
+class CollectStep extends AbstractStep implements IndexableInterface
 {
+    use VoteThresholdTrait;
+    use VoteTypeTrait;
+
+    public static $sort = ['old', 'last', 'votes', 'comments', 'random'];
+
+    public static $sortLabels = [
+        'comments' => 'step.sort.comments',
+        'last' => 'step.sort.last',
+        'old' => 'step.sort.old',
+        'random' => 'step.sort.random',
+        'votes' => 'step.sort.votes',
+    ];
+
     /**
-     * @var ProposalForm
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="step", cascade={"persist", "remove"})
      */
     private $proposalForm = null;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="proposals_count", type="integer")
+     * @ORM\Column(name="proposals_count", type="integer", nullable=false)
      */
     private $proposalsCount = 0;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="contributors_count", type="integer")
+     * @ORM\Column(name="contributors_count", type="integer", nullable=false)
      */
     private $contributorsCount = 0;
 
@@ -40,85 +52,57 @@ class CollectStep extends AbstractStep
 
     /**
      * @ORM\Column(name="private", type="boolean", nullable=false)
-     *
-     * @var bool
      */
-    private $private = 0;
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    private $private = false;
 
     /**
-     * @return int
+     * @ORM\Column(name="default_sort", type="string", nullable=false)
+     * @Assert\Choice(choices={"old","last","votes","comments","random"})
      */
-    public function getProposalsCount()
+    private $defaultSort = 'random';
+
+    public function getProposalsCount(): int
     {
-        return $this->proposalsCount;
+        return $this->proposalsCount ?? 0;
     }
 
-    /**
-     * @param int $proposalsCount
-     *
-     * @return $this
-     */
-    public function setProposalsCount($proposalsCount)
+    public function setProposalsCount(int $proposalsCount): self
     {
         $this->proposalsCount = $proposalsCount;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getContributorsCount()
+    public function getContributorsCount(): int
     {
-        return $this->contributorsCount;
+        return $this->contributorsCount ?? 0;
     }
 
-    /**
-     * @param int $contributorsCount
-     *
-     * @return $this
-     */
-    public function setContributorsCount($contributorsCount)
+    public function setContributorsCount(int $contributorsCount): self
     {
         $this->contributorsCount = $contributorsCount;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDefaultStatus()
     {
         return $this->defaultStatus;
     }
 
-    public function setDefaultStatus(Status $defaultStatus = null)
+    public function setDefaultStatus(Status $defaultStatus = null): self
     {
         $this->defaultStatus = $defaultStatus;
 
         return $this;
     }
 
-    /**
-     * @return ProposalForm
-     */
     public function getProposalForm()
     {
         return $this->proposalForm;
     }
 
-    /**
-     * @param ProposalForm $proposalForm
-     *
-     * @return $this
-     */
-    public function setProposalForm(ProposalForm $proposalForm = null)
+    public function setProposalForm(ProposalForm $proposalForm = null): self
     {
         if ($proposalForm) {
             $proposalForm->setStep($this);
@@ -133,9 +117,21 @@ class CollectStep extends AbstractStep
         return $this->private;
     }
 
-    public function setPrivate(bool $private)
+    public function setPrivate(bool $private): self
     {
         $this->private = $private;
+
+        return $this;
+    }
+
+    public function getDefaultSort(): string
+    {
+        return $this->defaultSort;
+    }
+
+    public function setDefaultSort(string $defaultSort): self
+    {
+        $this->defaultSort = $defaultSort;
 
         return $this;
     }
@@ -147,8 +143,13 @@ class CollectStep extends AbstractStep
         return 'collect';
     }
 
-    public function isCollectStep()
+    public function isCollectStep(): bool
     {
         return true;
+    }
+
+    public function isIndexable(): bool
+    {
+        return $this->getIsEnabled();
     }
 }

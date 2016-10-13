@@ -12,88 +12,68 @@ use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\Common\Collections\Collection;
 
-/**
- * ProposalRepository.
- */
 class ProposalRepository extends EntityRepository
 {
-    public function getByUser(User $user)
+  public function getProposalsGroupedByCollectSteps(User $user, bool $onlyVisible = false): array
+  {
+    $qb = $this->getIsEnabledQueryBuilder()
+        ->addSelect('district', 'status', 'theme', 'form', 'step')
+        ->leftJoin('proposal.district', 'district')
+        ->leftJoin('proposal.status', 'status')
+        ->leftJoin('proposal.theme', 'theme')
+        ->leftJoin('proposal.proposalForm', 'form')
+        ->leftJoin('form.step', 'step')
+        ->andWhere('proposal.author = :author')
+        ->setParameter('author', $user)
+    ;
+
+    $results = $qb->getQuery()->getResult();
+
+    if ($onlyVisible) {
+      $results = array_filter($results, function ($proposal) {
+        return $proposal->isVisible();
+      });
+    }
+
+    $proposalsWithStep = [];
+    foreach ($results as $result) {
+        $collectStep = $result->getProposalForm()->getStep();
+        if (array_key_exists($collectStep->getId(), $proposalsWithStep)) {
+          array_push($proposalsWithStep[$collectStep->getId()]['proposals'], $result);
+        } else {
+          $proposalsWithStep[$collectStep->getId()] = [
+              'step' => $collectStep,
+              'proposals' => [$result],
+          ];
+       }
+    }
+    return $proposalsWithStep;
+  }
+
+    public function countByUser(User $user): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('district', 'status', 'theme', 'form', 'step')
-            ->leftJoin('proposal.district', 'district')
-            ->leftJoin('proposal.status', 'status')
-            ->leftJoin('proposal.theme', 'theme')
-            ->leftJoin('proposal.proposalForm', 'form')
-            ->leftJoin('form.step', 'step')
+            ->select('COUNT(proposal.id)')
             ->andWhere('proposal.author = :author')
             ->setParameter('author', $user)
         ;
 
-        return $qb->getQuery()->getResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getPublishedByProposalForm(ProposalForm $proposalForm, $first = 0, $offset = 100, $order = 'last', Theme $theme = null, Status $status = null, District $district = null, UserType $type = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('author', 'amedia', 'theme', 'status', 'district')
-            ->leftJoin('proposal.author', 'author')
-            ->leftJoin('author.Media', 'amedia')
-            ->leftJoin('proposal.theme', 'theme')
-            ->leftJoin('proposal.district', 'district')
-            ->leftJoin('proposal.status', 'status')
-            ->andWhere('proposal.isTrashed = :notTrashed')
-            ->andWhere('proposal.proposalForm = :proposalForm')
-            ->setParameter('notTrashed', false)
-            ->setParameter('proposalForm', $proposalForm)
-        ;
-
-        if ($theme) {
-            $qb->andWhere('proposal.theme = :theme')
-               ->setParameter('theme', $theme);
-        }
-
-        if ($status) {
-            $qb->andWhere('proposal.status = :status')
-               ->setParameter('status', $status);
-        }
-
-        if ($district) {
-            $qb->andWhere('proposal.district = :district')
-               ->setParameter('district', $district);
-        }
-
-        if ($type) {
-            $qb->andWhere('author.userType = :type')
-               ->setParameter('type', $type);
-        }
-
-        if ($order === 'old') {
-            $qb->addOrderBy('proposal.createdAt', 'ASC');
-        }
-
-        if ($order === 'last') {
-            $qb->addOrderBy('proposal.createdAt', 'DESC');
-        }
-
-        if ($order === 'popular') {
-            $qb->addOrderBy('proposal.votesCount', 'DESC');
-        }
-
-        if ($order === 'comments') {
-            $qb->addOrderBy('proposal.commentsCount', 'DESC');
-        }
-
-        $qb
-            ->setFirstResult($first)
-            ->setMaxResults($offset)
-        ;
-
-        return new Paginator($qb);
-    }
-
-    public function getPublishedBySelectionStep(SelectionStep $step, $first = 0, $offset = 100, $order = 'last', Theme $theme = null, Status $status = null, District $district = null, UserType $type = null)
+    public function getPublishedBySelectionStep(
+      SelectionStep $step,
+      int $first = 0,
+      int $offset = 100,
+      string $order = 'last',
+      Theme $theme = null,
+      Status $status = null,
+      District $district = null,
+      UserType $type = null
+    )
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author', 'amedia', 'theme', 'status', 'district')
@@ -138,9 +118,10 @@ class ProposalRepository extends EntityRepository
             $qb->addOrderBy('proposal.createdAt', 'DESC');
         }
 
-        if ($order === 'popular') {
-            $qb->addOrderBy('proposal.votesCount', 'DESC');
-        }
+        // Let's see what we do there
+        // if ($order === 'popular') {
+        //     $qb->addOrderBy('proposal.votesCount', 'DESC');
+        // }
 
         if ($order === 'comments') {
             $qb->addOrderBy('proposal.commentsCount', 'DESC');
@@ -154,42 +135,35 @@ class ProposalRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function countPublishedForForm($form)
+    public function countPublishedForForm(ProposalForm $form): int
     {
         $qb = $this
             ->getIsEnabledQueryBuilder()
             ->select('COUNT(proposal.id) as proposalsCount')
-            ->andWhere('proposal.isTrashed = :notTrashed')
+            ->andWhere('proposal.isTrashed = false')
             ->andWhere('proposal.proposalForm = :proposalForm')
-            ->setParameter('notTrashed', false)
             ->setParameter('proposalForm', $form)
         ;
 
         return intval($qb->getQuery()->getSingleScalarResult());
     }
 
-    public function countPublishedForSelectionStep(SelectionStep $step)
+    public function countPublishedForSelectionStep(SelectionStep $step): int
     {
         $qb = $this
             ->getIsEnabledQueryBuilder()
             ->select('COUNT(proposal.id) as proposalsCount')
             ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('selections.selectionStep', 'selectionStep')
-            ->andWhere('proposal.isTrashed = :notTrashed')
+            ->andWhere('proposal.isTrashed = false')
             ->andWhere('selectionStep.id = :stepId')
-            ->setParameter('notTrashed', false)
             ->setParameter('stepId', $step->getId())
         ;
 
         return intval($qb->getQuery()->getSingleScalarResult());
     }
 
-    /**
-     * @param string $alias
-     *
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    protected function getIsEnabledQueryBuilder($alias = 'proposal')
+    protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
             ->andWhere($alias.'.enabled = true')
@@ -197,14 +171,7 @@ class ProposalRepository extends EntityRepository
           ;
     }
 
-    /**
-     * @param $slug
-     *
-     * @return mixed
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function getOne($slug)
+    public function getOne(string $slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author', 'amedia', 'theme', 'status', 'district', 'responses', 'questions')
@@ -222,15 +189,7 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    /**
-     * Get last proposals.
-     *
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return mixed
-     */
-    public function getLast($limit = 1, $offset = 0)
+    public function getLast(int $limit = 1, int $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author', 'amedia', 'theme', 'status', 'district')
@@ -239,8 +198,7 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.theme', 'theme')
             ->leftJoin('proposal.status', 'status')
             ->leftJoin('proposal.district', 'district')
-            ->andWhere('proposal.isTrashed = :notTrashed')
-            ->setParameter('notTrashed', false)
+            ->andWhere('proposal.isTrashed = false')
             ->orderBy('proposal.commentsCount', 'DESC')
             ->addOrderBy('proposal.createdAt', 'DESC')
             ->addGroupBy('proposal.id');
@@ -289,14 +247,7 @@ class ProposalRepository extends EntityRepository
         ;
     }
 
-    /**
-     * Get all trashed or unpublished proposals.
-     *
-     * @param $project
-     *
-     * @return array
-     */
-    public function getTrashedOrUnpublishedByProject($project)
+    public function getTrashedOrUnpublishedByProject(Project $project)
     {
         $qb = $this->createQueryBuilder('p')
             ->addSelect('f', 's', 'aut', 'm', 'theme', 'status', 'district')
@@ -318,10 +269,10 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getEnabledByProposalForm(ProposalForm $proposalForm, $asArray = false)
+    public function getEnabledByProposalForm(ProposalForm $proposalForm, bool $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('author', 'ut', 'amedia', 'theme', 'status', 'district', 'responses', 'questions', 'votes', 'votesaut', 'votesautut', 'answer', 'answeraut')
+            ->addSelect('author', 'ut', 'amedia', 'theme', 'status', 'district', 'responses', 'questions', 'selectionVotes', 'votesaut', 'votesautut', 'answer', 'answeraut')
             ->leftJoin('proposal.author', 'author')
             ->leftJoin('author.userType', 'ut')
             ->leftJoin('author.Media', 'amedia')
@@ -330,8 +281,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.status', 'status')
             ->leftJoin('proposal.responses', 'responses')
             ->leftJoin('responses.question', 'questions')
-            ->leftJoin('proposal.votes', 'votes')
-            ->leftJoin('votes.user', 'votesaut')
+            ->leftJoin('proposal.selectionVotes', 'selectionVotes')
+            ->leftJoin('selectionVotes.user', 'votesaut')
             ->leftJoin('votesaut.userType', 'votesautut')
             ->leftJoin('proposal.answer', 'answer')
             ->leftJoin('answer.author', 'answeraut')
@@ -342,7 +293,7 @@ class ProposalRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
-    public function getProposalsWithCostsForStep(CollectStep $step, $limit = null)
+    public function getProposalsWithCostsForStep(CollectStep $step, int $limit = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('proposal.title as name', 'proposal.estimation as value')
@@ -359,13 +310,13 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, $limit = null, $themeId = null, $districtId = null)
+    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, int $limit = null, int $themeId = null, int $districtId = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('proposal.title as name')
             ->addSelect('(
                 SELECT COUNT(pv.id) as pvCount
-                FROM CapcoAppBundle:ProposalVote pv
+                FROM CapcoAppBundle:ProposalSelectionVote pv
                 LEFT JOIN pv.proposal as pvp
                 LEFT JOIN pv.selectionStep ss
                 WHERE ss.id = :stepId
@@ -402,7 +353,7 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getTotalCostForStep(CollectStep $step)
+    public function getTotalCostForStep(CollectStep $step): int
     {
         $qb = $this->getIsEnabledQueryBuilder('p')
             ->select('SUM(p.estimation)')
@@ -414,7 +365,7 @@ class ProposalRepository extends EntityRepository
         return intval($qb->getQuery()->getSingleScalarResult());
     }
 
-    public function countForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
+    public function countForSelectionStep(SelectionStep $step, int $themeId = null, int $districtId = null): int
     {
         $qb = $this->getIsEnabledQueryBuilder('p')
             ->select('COUNT(p.id)')

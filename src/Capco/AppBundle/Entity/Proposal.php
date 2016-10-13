@@ -13,7 +13,6 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,8 +25,6 @@ use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 
 /**
- * Proposal.
- *
  * @ORM\Table(name="proposal")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
  * @ORM\HasLifecycleCallbacks()
@@ -38,12 +35,11 @@ use Capco\AppBundle\Traits\IdTrait;
  * @CapcoAssert\HasCategoryIfMandatory()
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
  */
-class Proposal implements Contribution, CommentableInterface, VotableInterface
+class Proposal implements Contribution, CommentableInterface
 {
     use IdTrait;
     use CommentableTrait;
     use TimestampableTrait;
-    use VotableOkTrait;
     use EnableTrait;
     use TrashableTrait;
     use SluggableTitleTrait;
@@ -54,30 +50,23 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     public static $ratings = [1, 2, 3, 4, 5];
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank()
      */
     private $body;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="rating", type="integer", nullable=true)
      */
     private $rating;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="annotation", type="text", nullable=true)
      */
     private $annotation;
@@ -107,31 +96,25 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     private $category = null;
 
     /**
-     * @var string
-     *
      * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     protected $author;
 
     /**
-     * @var ProposalForm
-     *
      * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="proposals")
-     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     protected $proposalForm;
 
     /**
-     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalComment", mappedBy="proposal", cascade={"persist", "remove"})
      */
     private $comments;
 
     /**
-     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="proposal", cascade={"persist", "remove"})
      */
     private $responses;
@@ -142,19 +125,16 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     protected $reports;
 
     /**
-     * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Selection", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
      */
     private $selections;
 
     /**
-     * @var
      * @ORM\Column(name="estimation", type="float", nullable=true)
      */
     private $estimation = null;
 
     /**
-     * @var
      * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinTable(name="user_favorite_proposal")
      */
@@ -166,8 +146,6 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     private $progressSteps;
 
     /**
-     * @var
-     *
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
@@ -175,11 +153,19 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     private $media;
 
     /**
-     * Constructor.
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSelectionVote", mappedBy="proposal", cascade={"persist"})
      */
+    private $selectionVotes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalCollectVote", mappedBy="proposal", cascade={"persist"})
+     */
+    private $collectVotes;
+
     public function __construct()
     {
-        $this->votes = new ArrayCollection();
+        $this->selectionVotes = new ArrayCollection();
+        $this->collectVotes = new ArrayCollection();
         $this->reports = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->responses = new ArrayCollection();
@@ -190,7 +176,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         $this->progressSteps = new ArrayCollection();
     }
 
-    public function isIndexable()
+    public function isIndexable(): bool
     {
         return $this->enabled && !$this->expired;
     }
@@ -200,120 +186,72 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this->getId() ? $this->getTitle() : 'New proposal';
     }
 
-    /**
-     * @return string
-     */
-    public function getBody()
+    public function getBody(): string
     {
-        return $this->body;
+        return $this->body ?? '';
     }
 
-    /**
-     * @param string $body
-     *
-     * @return $this
-     */
-    public function setBody($body)
+    public function setBody(string $body): self
     {
         $this->body = $body;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getRating()
     {
         return $this->rating;
     }
 
-    /**
-     * @param int $rating
-     *
-     * @return $this
-     */
-    public function setRating($rating)
+    public function setRating(int $rating = null)
     {
         $this->rating = $rating;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getAnnotation()
     {
         return $this->annotation;
     }
 
-    /**
-     * @param string $annotation
-     *
-     * @return $this
-     */
-    public function setAnnotation($annotation)
+    public function setAnnotation(string $annotation = null): self
     {
         $this->annotation = $annotation;
 
         return $this;
     }
 
-    /**
-     * @return Status
-     */
     public function getStatus()
     {
         return $this->status;
     }
 
-    /**
-     * @param Status $status
-     *
-     * @return $this
-     */
-    public function setStatus(Status $status = null)
+    public function setStatus(Status $status = null): self
     {
         $this->status = $status;
 
         return $this;
     }
 
-    /**
-     * @return ProposalCategory
-     */
     public function getCategory()
     {
         return $this->category;
     }
 
-    /**
-     * @param ProposalCategory $category
-     *
-     * @return $this
-     */
-    public function setCategory(ProposalCategory $category = null)
+    public function setCategory(ProposalCategory $category = null): self
     {
         $this->category = $category;
 
         return $this;
     }
 
-    /**
-     * @return Theme
-     */
     public function getTheme()
     {
         return $this->theme;
     }
 
-    /**
-     * @param Theme $theme
-     *
-     * @return $this
-     */
-    public function setTheme(Theme $theme = null)
+    public function setTheme(Theme $theme = null): self
     {
         $this->theme = $theme;
         if ($theme) {
@@ -323,18 +261,17 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this;
     }
 
-    /**
-     * @return District
-     */
     public function getDistrict()
     {
         return $this->district;
     }
 
-    public function setDistrict(District $district): self
+    public function setDistrict(District $district = null): self
     {
         $this->district = $district;
-        $district->addProposal($this);
+        if ($district) {
+          $district->addProposal($this);
+        }
 
         return $this;
     }
@@ -443,19 +380,12 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this->selections;
     }
 
-    // CommentableInterface methods implementation
-    /**
-     * @return string
-     */
-    public function getClassName()
+    public function getClassName(): string
     {
         return 'Proposal';
     }
 
-    /**
-     * @return bool
-     */
-    public function canDisplay()
+    public function canDisplay(): bool
     {
         return $this->enabled && !$this->isTrashed && $this->getStep()->canDisplay();
     }
@@ -478,17 +408,17 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
     /**
      * @return bool
      */
-    public function canContribute()
+    public function canContribute(): bool
     {
         return $this->enabled && !$this->isTrashed && $this->getStep()->canContribute();
     }
 
-    public function canComment()
+    public function canComment(): bool
     {
         return $this->enabled && !$this->isTrashed && $this->getIsCommentable();
     }
 
-    public function userHasReport(User $user)
+    public function userHasReport(User $user): bool
     {
         foreach ($this->reports as $report) {
             if ($report->getReporter() == $user) {
@@ -499,35 +429,24 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return false;
     }
 
-    /**
-     * @return float
-     */
     public function getEstimation()
     {
         return $this->estimation;
     }
 
-    /**
-     * @param float $estimation
-     *
-     * @return $this
-     */
-    public function setEstimation($estimation)
+    public function setEstimation(float $estimation = null): self
     {
         $this->estimation = $estimation;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLikers()
+    public function getLikers(): Collection
     {
         return $this->likers;
     }
 
-    public function addLiker(User $liker)
+    public function addLiker(User $liker): self
     {
         if (!$this->likers->contains($liker)) {
             $this->likers[] = $liker;
@@ -536,20 +455,19 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this;
     }
 
-    public function removeLiker(User $liker)
+    public function removeLiker(User $liker): self
     {
         $this->likers->removeElement($liker);
+
+        return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isPublished()
+    public function isPublished(): bool
     {
         return $this->enabled && !$this->isTrashed;
     }
 
-    public function getSelectionSteps()
+    public function getSelectionSteps(): array
     {
         $steps = [];
         foreach ($this->selections as $selection) {
@@ -568,7 +486,7 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return;
     }
 
-    public function getSelectionStepsIds()
+    public function getSelectionStepsIds(): array
     {
         $ids = array_filter(array_map(function ($value) {
             return $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null;
@@ -585,33 +503,101 @@ class Proposal implements Contribution, CommentableInterface, VotableInterface
         return $this->progressSteps;
     }
 
-    public function setProgressSteps(ArrayCollection $progressSteps) : self
+    public function setProgressSteps(Collection $progressSteps) : self
     {
         $this->progressSteps = $progressSteps;
 
         return $this;
     }
 
-    public function addProgressStep(ProgressStep $progressStep) : self
+    public function resetVotes(): self
+    {
+        foreach ($this->selectionVotes as $vote) {
+            $this->removeVote($vote);
+        }
+        foreach ($this->collectVotes as $vote) {
+            $this->removeVote($vote);
+        }
+        return $this;
+    }
+
+    public function getSelectionVotes(): Collection
+    {
+        return $this->selectionVotes;
+    }
+
+    public function setSelectionVotes(Collection $votes)
+    {
+        $this->selectionVotes = $votes;
+
+        return $this;
+    }
+
+    public function getCollectVotes(): Collection
+    {
+        return $this->collectVotes;
+    }
+
+    public function setCollectVotes(Collection $collectVotes): self
+    {
+        $this->collectVotes = $collectVotes;
+
+        return $this;
+    }
+
+    public function addSelectionVote(ProposalSelectionVote $selectionVote): self
+    {
+        if (!$this->selectionVotes->contains($selectionVote)) {
+            $this->selectionVotes->add($selectionVote);
+        }
+
+        return $this;
+    }
+
+    public function removeSelectionVote(ProposalSelectionVote $vote): self
+    {
+        if ($this->selectionVotes->contains($vote)) {
+            $this->selectionVotes->removeElement($vote);
+        }
+
+        return $this;
+    }
+
+    public function addCollectVote(ProposalCollectVote $vote): self
+    {
+        if (!$this->collectVotes->contains($vote)) {
+            $this->collectVotes->add($vote);
+        }
+
+        return $this;
+    }
+
+    public function addProgressStep(ProgressStep $progressStep): self
     {
         if (!$this->progressSteps->contains($progressStep)) {
             $this->progressSteps->add($progressStep);
             $progressStep->setProposal($this);
         }
-
         return $this;
     }
 
-    public function removeProgressStep(ProgressStep $progressStep) : self
+    public function removeCollectVote(ProposalCollectVote $vote): self
+    {
+        if ($this->collectVotes->contains($vote)) {
+            $this->collectVotes->removeElement($vote);
+        }
+        return $this;
+    }
+
+    public function removeProgressStep(ProgressStep $progressStep): self
     {
         if ($this->progressSteps->contains($progressStep)) {
             $this->progressSteps->removeElement($progressStep);
         }
-
         return $this;
     }
 
-    public function canHaveProgessSteps() : bool
+    public function canHaveProgessSteps(): bool
     {
         return $this->getProposalForm()->getStep()->getProject()->getSteps()->exists(function ($key, $step) {
             return $step->getStep()->isSelectionStep() && $step->getStep()->isAllowingProgressSteps();

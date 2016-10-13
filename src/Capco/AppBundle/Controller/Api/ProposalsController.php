@@ -3,8 +3,14 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Event\ProposalEvent;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Helper\ArrayHelper;
@@ -26,48 +32,12 @@ use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Swarrot\Broker\Message;
 
 class ProposalsController extends FOSRestController
 {
-    /**
-     * @Post("/proposal_forms/{proposal_form_id}/proposals/search")
-     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}})
-     * @QueryParam(name="page", requirements="[0-9.]+", default="1")
-     * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
-     * @QueryParam(name="order", requirements="(old|last|comments|random)", default="random")
-     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
-     *
-     * @param Request               $request
-     * @param ProposalForm          $proposalForm
-     * @param ParamFetcherInterface $paramFetcher
-     *
-     * @return array
-     */
-    public function getProposalsByFormAction(Request $request, ProposalForm $proposalForm, ParamFetcherInterface $paramFetcher)
-    {
-        $page = intval($paramFetcher->get('page'));
-        $pagination = intval($paramFetcher->get('pagination'));
-        $order = $paramFetcher->get('order');
-        $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
-
-        if ($proposalForm->getStep()->isPrivate()) {
-            if (!$this->getUser()) {
-                return ['proposals' => [], 'count' => 0, 'order' => $order];
-            }
-
-            $providedFilters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
-        }
-
-        $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
-
-        // Filters
-        $providedFilters['proposalForm'] = $proposalForm->getId();
-
-        return $this->get('capco.search.resolver')->searchProposals($page, $pagination, $order, $terms, $providedFilters);
-    }
-
     /**
      * Get a proposal.
      *
@@ -83,43 +53,11 @@ class ProposalsController extends FOSRestController
      * @Get("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias", "ThemeDetails", "ProposalUserData", "Steps"})
-     *
-     * @param Proposal $proposal
-     *
-     * @return array
      */
     public function getProposalAction(Proposal $proposal)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $firstVotableStep = $this->get('capco.proposal_votes.resolver')
-            ->getFirstVotableStepForProposal($proposal)
-        ;
-
-        $userHasVote = false;
-        if ($this->getUser() && $firstVotableStep) {
-            $userVote = $em
-                ->getRepository('CapcoAppBundle:ProposalVote')
-                ->findOneBy(
-                    [
-                        'selectionStep' => $firstVotableStep,
-                        'user' => $this->getUser(),
-                        'proposal' => $proposal,
-                    ]
-                );
-            if ($userVote !== null) {
-                $userHasVote = true;
-            }
-        }
-
-        $creditsLeft = $this
-            ->get('capco.proposal_votes.resolver')
-            ->getCreditsLeftForUser($this->getUser(), $firstVotableStep)
-        ;
-
         return [
             'proposal' => $proposal,
-            'userHasVote' => $userHasVote,
-            'creditsLeft' => $creditsLeft,
         ];
     }
 
@@ -315,23 +253,23 @@ class ProposalsController extends FOSRestController
     }
 
     /**
-     * @Get("/proposal_forms/{form}/proposals/{proposal}/votes")
-     * @ParamConverter("form", options={"mapping": {"form": "id"}})
+     * @Get("/steps/{step}/proposals/{proposal}/votes")
+     * @ParamConverter("step", options={"mapping": {"step": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
-     * @View(serializerGroups={"ProposalVotes", "UsersInfos", "UserMedias"})
-     *
-     * @param ProposalForm $form
-     * @param Proposal     $proposal
-     *
-     * @return array
+     * @View(serializerGroups={"ProposalSelectionVotes", "UsersInfos", "UserMedias", "ProposalCollectVotes"})
      */
-    public function getAllProposalVotesAction(ProposalForm $form, Proposal $proposal)
+    public function getAllProposalVotesAction(AbstractStep $step, Proposal $proposal)
     {
-        $votes = $this
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:ProposalVote')
-            ->getVotesForProposal($proposal)
-        ;
+        switch (true) {
+            case $step instanceof CollectStep:
+                $votes = $this->getDoctrine()->getRepository(ProposalCollectVote::class)->getVotesForProposalByStepId($proposal, $step->getId());
+                break;
+            case $step instanceof SelectionStep:
+                $votes = $this->getDoctrine()->getRepository(ProposalSelectionVote::class)->getVotesForProposalByStepId($proposal, $step->getId());
+                break;
+            default:
+                throw new NotFoundHttpException();
+        }
 
         return [
             'votes' => $votes,
@@ -421,7 +359,7 @@ class ProposalsController extends FOSRestController
         if (count($request->files->all()) > 0) {
             $request = $this->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
         }
-        
+
         if (isset($unflattenRequest['responses'])) {
             $unflattenRequest = $this->get('capco.media.response.media.manager')
                 ->resolveTypeOfResponses($unflattenRequest, ArrayHelper::unflatten($request->files->all()));

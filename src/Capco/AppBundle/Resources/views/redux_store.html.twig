@@ -4,6 +4,7 @@
     'districts': districts_list(),
     'themes': themes_list(),
     'features': features_list(),
+    'userTypes': user_type_list()|default([]),
     'parameters': site_parameters_list(),
     'isLoggedIn': app.user ? true : false,
     'user': app.user
@@ -23,7 +24,6 @@
           'uniqueId': app.user.slug,
         }
       : null,
-    'user_types': user_type_list(),
   }
 } %}
 {% set state = state|merge(data is defined ? data : {}) %}

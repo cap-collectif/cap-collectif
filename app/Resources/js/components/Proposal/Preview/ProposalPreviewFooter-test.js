@@ -9,8 +9,8 @@ import IntlData from '../../../translations/FR';
 describe('<ProposalPreviewFooter />', () => {
   const proposal = {
     comments_count: 3,
-    votesCount: 8,
-    votesCountBySelectionSteps: {
+    votesCount: 1,
+    votesCountByStepId: {
       42: 5,
     },
   };
@@ -18,6 +18,7 @@ describe('<ProposalPreviewFooter />', () => {
   const props = {
     proposal,
     votesDelta: 1,
+    stepId: 1,
     ...IntlData,
   };
 
@@ -51,7 +52,7 @@ describe('<ProposalPreviewFooter />', () => {
   });
 
   it('should render a footer with comment and votes counters when selection step is specified', () => {
-    const wrapper = shallow(<ProposalPreviewFooter {...props} showVotes selectionStepId={42} />);
+    const wrapper = shallow(<ProposalPreviewFooter {...props} showVotes stepId={42} />);
     const footer = wrapper.find('div.proposal__footer');
     expect(footer).to.have.length(1);
     const countersDiv = footer.find('div.proposal__counters');
@@ -62,12 +63,12 @@ describe('<ProposalPreviewFooter />', () => {
     expect(commentsCounter.find('.proposal__counter__value').text()).to.equal('3');
     const votesCounter = countersDiv.find('div.proposal__counter--votes');
     expect(votesCounter).to.have.length(1);
-    const expectedVotes = proposal.votesCountBySelectionSteps[42] + props.votesDelta;
+    const expectedVotes = proposal.votesCountByStepId[42] + props.votesDelta;
     expect(votesCounter.find('.proposal__counter__value').text()).to.equal(`${expectedVotes}`);
   });
 
   it('should render a footer with comment and votes counters when selection step votes are not specified', () => {
-    const wrapper = shallow(<ProposalPreviewFooter {...props} showVotes selectionStepId={43} />);
+    const wrapper = shallow(<ProposalPreviewFooter {...props} showVotes stepId={43} />);
     const footer = wrapper.find('div.proposal__footer');
     expect(footer).to.have.length(1);
     const countersDiv = footer.find('div.proposal__counters');

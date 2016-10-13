@@ -84,15 +84,14 @@ Scenario: Anonymous API client wants to get a step
           "enabled": @boolean@,
           "isTrashed": @boolean@,
           "title": @string@,
-          "votesCountBySelectionSteps": @...@,
+          "votesCountByStepId": @...@,
           "userHasVote": @boolean@,
           "_links": @...@
         },
         @...@
       ],
       "count": 3,
-      "order": "random",
-      "creditsLeft": @...@
+      "order": "random"
     }
     """
 
@@ -143,14 +142,13 @@ Scenario: Anonymous API client wants to get a step
           "enabled": @boolean@,
           "isTrashed": @boolean@,
           "title": @string@,
-          "votesCountBySelectionSteps": @...@,
+          "votesCountByStepId": @...@,
           "_links": @...@
         },
         @...@
       ],
       "count": 3,
-      "order": "random",
-      "creditsLeft": @...@
+      "order": "random"
     }
     """
 
@@ -204,13 +202,12 @@ Scenario: Anonymous API client wants to get a step
           "enabled": @boolean@,
           "isTrashed": @boolean@,
           "title": @string@,
-          "votesCountBySelectionSteps": @...@,
+          "votesCountByStepId": @...@,
           "_links": @...@
         },
         @...@
       ],
       "count": 2,
-      "order": "random",
-      "creditsLeft": @...@
+      "order": "random"
     }
     """
