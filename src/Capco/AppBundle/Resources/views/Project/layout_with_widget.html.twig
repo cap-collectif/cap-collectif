@@ -33,7 +33,7 @@
       'voteType': step.step.voteType|default(0),
       'budget': step.step.budget|default(null),
       '_links': {
-        'show': path('app_project_show_selection', {'projectSlug': project.slug, 'stepSlug': step.step.slug})
+        'show': step.step.getType() == 'other' ? '' : path('app_project_show_'~ step.step.getType(), {'projectSlug': project.slug, 'stepSlug': step.step.slug})
       }
     }])
     %}
