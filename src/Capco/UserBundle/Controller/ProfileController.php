@@ -50,21 +50,19 @@ class ProfileController extends BaseController
         ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'ThemeDetails']));
         $ideasCount = count($ideasRaw);
 
-        $proposalsRaw = $doctrine
+        $proposalsWithStep = $doctrine
             ->getRepository('CapcoAppBundle:Proposal')
-            ->getByUser($user)
+            ->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user)
         ;
+        $proposalsCount = array_reduce($proposalsWithStep, function($sum, $item) {
+          $sum += count($item['proposals']);
+          return $sum;
+        });
 
-        if ($this->getUser() !== $user) {
-            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) {
-                return $proposal->isVisible();
-            });
+        $proposalsPropsBySteps = [];
+        foreach ($proposalsWithStep as $key => $value) {
+          $proposalsPropsBySteps[$key] = json_decode($serializer->serialize($value, 'json', SerializationContext::create()->setGroups(['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])), true);
         }
-
-        $proposalsProps = $serializer->serialize([
-            'proposals' => $proposalsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
-        $proposalsCount = count($proposalsRaw);
 
         $replies = $this
             ->get('doctrine.orm.entity_manager')
@@ -87,7 +85,7 @@ class ProfileController extends BaseController
             'arguments' => $arguments,
             'ideasProps' => $ideas,
             'ideasCount' => $ideasCount,
-            'proposalsProps' => $proposalsProps,
+            'proposalsPropsBySteps' => $proposalsPropsBySteps,
             'proposalsCount' => $proposalsCount,
             'replies' => $replies,
             'sources' => $sources,

@@ -17,20 +17,51 @@ use Doctrine\Common\Collections\Collection;
 
 class ProposalRepository extends EntityRepository
 {
-    public function getByUser(User $user)
+  public function getProposalsGroupedByCollectSteps(User $user, bool $onlyVisible = false): array
+  {
+    $qb = $this->getIsEnabledQueryBuilder()
+        ->addSelect('district', 'status', 'theme', 'form', 'step')
+        ->leftJoin('proposal.district', 'district')
+        ->leftJoin('proposal.status', 'status')
+        ->leftJoin('proposal.theme', 'theme')
+        ->leftJoin('proposal.proposalForm', 'form')
+        ->leftJoin('form.step', 'step')
+        ->andWhere('proposal.author = :author')
+        ->setParameter('author', $user)
+    ;
+
+    $results = $qb->getQuery()->getResult();
+
+    if ($onlyVisible) {
+      $results = $results->filter(function ($proposal) {
+        return $proposal->isVisible();
+      });
+    }
+
+    $proposalsWithStep = [];
+    foreach ($results as $result) {
+        $collectStep = $result->getProposalForm()->getStep();
+        if (array_key_exists($collectStep->getId(), $proposalsWithStep)) {
+          array_push($proposalsWithStep[$collectStep->getId()]['proposals'], $result);
+        } else {
+          $proposalsWithStep[$collectStep->getId()] = [
+              'step' => $collectStep,
+              'proposals' => [$result],
+          ];
+       }
+    }
+    return $proposalsWithStep;
+  }
+
+    public function countByUser(User $user): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('district', 'status', 'theme', 'form', 'step')
-            ->leftJoin('proposal.district', 'district')
-            ->leftJoin('proposal.status', 'status')
-            ->leftJoin('proposal.theme', 'theme')
-            ->leftJoin('proposal.proposalForm', 'form')
-            ->leftJoin('form.step', 'step')
+            ->select('COUNT(proposal.id)')
             ->andWhere('proposal.author = :author')
             ->setParameter('author', $user)
         ;
 
-        return $qb->getQuery()->getResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getPublishedBySelectionStep(
