@@ -25,7 +25,10 @@ export const ProposalUserVoteItem = React.createClass({
       <tr className="proposals-user-votes__row" id={`vote-step${step.id}-proposal${proposal.id}`}>
         <td><a href={proposal._links.show}>{proposal.title}</a></td>
         <td><i className="cap cap-user-2"></i><UserLink user={proposal.author} /></td>
-        <td><i className="cap cap-marker-1"></i>{proposal.district.name}</td>
+        {
+          proposal.district &&
+            <td><i className="cap cap-marker-1"></i>{proposal.district.name}</td>
+        }
         <td>
           <ProposalDetailsEstimation
             proposal={proposal}
