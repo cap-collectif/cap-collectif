@@ -60,7 +60,7 @@ class ProjectController extends Controller
           foreach ($proposals as $proposalId) {
             array_push(
               $userVotesByStepIdSerialized[$stepId],
-              json_decode($serializer->serialize($proposalRepo->find($proposalId), 'json', SerializationContext::create()->setGroups(['Proposals'])), true)
+              json_decode($serializer->serialize($proposalRepo->find($proposalId), 'json', SerializationContext::create()->setGroups(['Proposals', 'UsersInfos'])), true)
             );
           }
         }
