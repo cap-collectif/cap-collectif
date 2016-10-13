@@ -189,10 +189,12 @@ class ProposalStepVotesResolver
 
     public function getVotableStepsForProject(Project $project)
     {
-        return $this
+        $collection = $this
             ->selectionStepRepository
             ->getVotableStepsForProject($project)
         ;
+        $collection->add($this->collectStepRepository->getCollectStepsForProject($project)->first());
+        return $collection;
     }
 
     public function getVotableStepsNotFutureForProject(Project $project)
