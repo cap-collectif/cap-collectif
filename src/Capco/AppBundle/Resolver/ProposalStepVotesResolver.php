@@ -193,7 +193,13 @@ class ProposalStepVotesResolver
             ->selectionStepRepository
             ->getVotableStepsForProject($project)
         ;
-        $collection->add($this->collectStepRepository->getCollectStepsForProject($project)->first());
+        $collectSteps = $this->collectStepRepository->getCollectStepsForProject($project);
+        if (count($collectSteps) > 0) {
+          $step = $collectSteps[0];
+          if ($step->isVotable()) {
+            array_push($collection, $step);
+          }
+        }
         return $collection;
     }
 
