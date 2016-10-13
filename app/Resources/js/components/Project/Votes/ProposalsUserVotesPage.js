@@ -7,13 +7,13 @@ import { connect } from 'react-redux';
 
 const ProposalsUserVotesPage = React.createClass({
   propTypes: {
-    userVotesCountByStepId: PropTypes.object.isRequired,
+    userVotesByStepId: PropTypes.object.isRequired,
     votableSteps: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { votableSteps, userVotesCountByStepId } = this.props;
+    const { votableSteps, userVotesByStepId } = this.props;
     return (
       <div>
         <div className="container container--custom text-center">
@@ -54,16 +54,20 @@ const ProposalsUserVotesPage = React.createClass({
                     }
                     <h3>
                       <FormattedMessage
-                        num={userVotesCountByStepId[step.id]}
+                        num={userVotesByStepId[step.id].length}
                         message={this.getIntlMessage('project.votes.nb')}
                       />
                     </h3>
                     <Table responsive hover className="proposals-user-votes__table">
                       <tbody>
                       {
-                        step.userVotes.map((vote, index2) => {
-                          return <ProposalUserVoteItem key={index2} vote={vote} step={step} />;
-                        })
+                        userVotesByStepId[step.id].map((proposal, index2) =>
+                          <ProposalUserVoteItem
+                            key={index2}
+                            proposal={proposal}
+                            step={step}
+                          />
+                        )
                       }
                       </tbody>
                     </Table>
@@ -81,7 +85,7 @@ const ProposalsUserVotesPage = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    userVotesCountByStepId: state.proposal.userVotesCountByStepId,
+    votableSteps: state.project.projects[state.project.currentProjectById].steps.filter(step => step.votable),
   };
 };
 

@@ -21,7 +21,6 @@ export const ProposalList = React.createClass({
   },
 
   render() {
-    console.log(this.props);
     const {
       step,
       showThemes,

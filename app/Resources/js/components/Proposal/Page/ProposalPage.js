@@ -57,8 +57,7 @@ export const ProposalPage = React.createClass({
     const { proposal, form, categories, features, steps } = this.props;
     const currentVotableStep = proposal.votableStepId ? steps.filter(s => s.id === proposal.votableStepId)[0] : null;
     const showVotesTab = proposal.votesCount > 0 || currentVotableStep !== null;
-    const votableSteps = steps.filter(step => step.votable && (step.type === 'selection' || step.type === 'collect'));
-    console.log(currentVotableStep);
+    const votableSteps = steps.filter(step => step.votable);
     return (
         <div>
           <ProposalPageAlert proposal={proposal} />

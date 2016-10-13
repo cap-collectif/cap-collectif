@@ -487,6 +487,7 @@ export const reducer = (state = {}, action) => {
     }
     case DELETE_VOTE_SUCCEEDED: {
       const proposal = state.proposalsById[action.proposalId];
+      if (!proposal) return { ...state }; // Fix for user votes page
       const votesCountByStepId = proposal.votesCountByStepId;
       votesCountByStepId[action.stepId]--;
       const votesByStepId = proposal.votesByStepId || [];

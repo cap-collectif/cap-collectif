@@ -3,6 +3,7 @@
 {% set showVotesWidget = capco_has_votable_step_not_future(project) and is_granted('ROLE_USER') %}
 {% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
 {% set projectSteps = [] %}
+
 {% for step in project.steps if step.step.isEnabled %}
     {% set stepStatuses = [] %}
     {% for status in step.step.statuses %}
@@ -27,9 +28,13 @@
       'statuses': stepStatuses,
       'open': step.step.open,
       'voteThreshold': step.step.voteThreshold|default(null),
+      'votesHelpText': step.step.votesHelpText|default(null),
       'votable': step.step.isVotable()|default(false),
       'voteType': step.step.voteType|default(0),
-      'budget': step.step.budget|default(null)
+      'budget': step.step.budget|default(null),
+      '_links': {
+        'show': path('app_project_show_selection', {'projectSlug': project.slug, 'stepSlug': step.step.slug})
+      }
     }])
     %}
 {% endfor %}

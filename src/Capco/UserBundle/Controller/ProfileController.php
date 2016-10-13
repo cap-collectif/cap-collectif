@@ -132,7 +132,6 @@ class ProfileController extends BaseController
           $sum += count($item['proposals']);
           return $sum;
         });
-
         $proposalsPropsBySteps = [];
         foreach ($proposalsWithStep as $key => $value) {
           $proposalsPropsBySteps[$key] = json_decode($serializer->serialize($value, 'json', SerializationContext::create()->setGroups(['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])), true);

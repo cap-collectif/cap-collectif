@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 export const ProposalUserVoteItem = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
-    vote: PropTypes.object.isRequired,
+    proposal: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
@@ -18,10 +18,9 @@ export const ProposalUserVoteItem = React.createClass({
   render() {
     const {
       step,
-      vote,
+      proposal,
       dispatch,
     } = this.props;
-    const proposal = vote.proposal;
     return (
       <tr className="proposals-user-votes__row" id={`vote-step${step.id}-proposal${proposal.id}`}>
         <td><a href={proposal._links.show}>{proposal.title}</a></td>
@@ -34,7 +33,11 @@ export const ProposalUserVoteItem = React.createClass({
           />
         </td>
         <td>
-          <Button onClick={() => deleteVote(dispatch, step, proposal)} className="proposal-vote__delete">
+          <Button onClick={() => {
+            deleteVote(dispatch, step, proposal);
+            location.reload();
+          }} className="proposal-vote__delete"
+          >
             {this.getIntlMessage('project.votes.delete')}
           </Button>
         </td>

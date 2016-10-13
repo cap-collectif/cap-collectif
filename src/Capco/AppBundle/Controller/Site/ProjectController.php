@@ -45,21 +45,28 @@ class ProjectController extends Controller
      * @Security("has_role('ROLE_USER')")
      * @Route("/projects/{projectSlug}/votes", name="app_project_show_user_votes")
      * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
-     * @Cache(smaxage="60", public="true")
      * @Template("CapcoAppBundle:Project:show_user_votes.html.twig")
      */
     public function showUserVotesAction(Project $project)
     {
-        $em = $this->getDoctrine()->getManager();
+        $userVotesByStepId = $this->get('capco.proposal_votes.resolver')->getUserVotesByStepIdForProject($project, $this->getUser());
+
         $serializer = $this->get('jms_serializer');
+        $proposalRepo = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:Proposal');
 
-        $props = $serializer->serialize([
-            'projectId' => $project->getId(),
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Districts', 'ThemeDetails']));
-
+        $userVotesByStepIdSerialized = [];
+        foreach ($userVotesByStepId as $stepId => $proposals) {
+          $userVotesByStepIdSerialized[$stepId] = [];
+          foreach ($proposals as $proposalId) {
+            array_push(
+              $userVotesByStepIdSerialized[$stepId],
+              json_decode($serializer->serialize($proposalRepo->find($proposalId), 'json', SerializationContext::create()->setGroups(['Proposals'])), true)
+            );
+          }
+        }
         return [
           'project' => $project,
-          'props' => $props,
+          'props' => ['userVotesByStepId' => $userVotesByStepIdSerialized],
         ];
     }
 
