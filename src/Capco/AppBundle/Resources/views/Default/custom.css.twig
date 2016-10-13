@@ -104,6 +104,10 @@
         color: {{ link | raw }};
     }
 
+    a .proposal__title {
+        color: {{ link | raw }};
+    }
+
     a:hover,
     a:focus,
     .opinion .opinion__body .opinion__title a:hover,
@@ -113,6 +117,11 @@
     .btn.btn-link.active {
         color: {{ linkHover | raw }};
     }
+
+    a:hover .proposal__title {
+        color: {{ linkHover | raw }};
+    }
+
 
     .opinion__header .opinion__header__title,
     .opinion__header .opinion__header__back {
