@@ -97,7 +97,7 @@ class ProposalStepVotesResolver
             return false;
         }
 
-        if ($vote instanceof ProposalSelectionVote) {
+        if ($vote instanceof ProposalSelectionVote || $vote instanceof ProposalCollectVote) {
             if ($step->isBudgetVotable() && $step->getBudget()) {
                 $left = $step->getBudget() - $this->getAmountSpentForVotes($otherVotes);
 
@@ -158,7 +158,7 @@ class ProposalStepVotesResolver
         });
         $creditsLeftByStepId = [];
         foreach ($steps as $step) {
-          if ($step->isBudgetVotable()) {
+          if (($step instanceof SelectionStep || $step instanceof CollectStep) && $step->isBudgetVotable()) {
             $creditsLeft = $step->getBudget();
             if ($creditsLeft > 0 && $user) {
                 $creditsLeft -= $this->getSpentCreditsForUser($user, $step);
