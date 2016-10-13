@@ -1,40 +1,79 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
 import ProposalCreateButton from './ProposalCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
+import ProposalActions from '../../../actions/ProposalActions';
+import ProposalStore from '../../../stores/ProposalStore';
 import { Modal } from 'react-bootstrap';
-import { submitProposalForm, openCreateModal, closeCreateModal } from '../../../redux/modules/proposal';
 
 const ProposalCreate = React.createClass({
   propTypes: {
     form: PropTypes.object.isRequired,
+    themes: PropTypes.array.isRequired,
+    districts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
-    showModal: PropTypes.bool.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
+
+  getInitialState() {
+    return {
+      showModal: false,
+      isSubmitting: false,
+    };
+  },
+
+  componentWillMount() {
+    ProposalStore.addChangeListener(this.onChange);
+  },
+
+  componentWillUnmount() {
+    ProposalStore.removeChangeListener(this.onChange);
+  },
+
+  onChange() {
+    this.setState({
+      isSubmitting: ProposalStore.isProcessing,
+    });
+  },
+
+  handleSubmit() {
+    ProposalActions.submit();
+  },
+
+  handleSubmitSuccess() {
+    const { form } = this.props;
+    this.close();
+    ProposalActions.load('form', form.id);
+  },
+
+  handleValidationFailure() {
+    ProposalActions.validationFailure();
+  },
+
+  close() {
+    this.setState({ showModal: false });
+  },
+
+  show() {
+    this.setState({ showModal: true });
+  },
 
   render() {
     const {
       categories,
+      districts,
       form,
-      showModal,
-      isSubmitting,
+      themes,
     } = this.props;
     return (
       <div>
-        <ProposalCreateButton
-          disabled={!form.isContribuable}
-          handleClick={() => this.props.dispatch(openCreateModal())}
-        />
+        <ProposalCreateButton disabled={!form.isContribuable} handleClick={this.show.bind(null, this)} />
         <Modal
           animation={false}
-          show={showModal}
-          onHide={() => this.props.dispatch(closeCreateModal())}
+          show={this.state.showModal}
+          onHide={this.close.bind(null, this)}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
@@ -46,18 +85,20 @@ const ProposalCreate = React.createClass({
           <Modal.Body>
             <ProposalForm
               form={form}
-              isSubmitting={isSubmitting}
+              themes={themes}
+              districts={districts}
+              isSubmitting={this.state.isSubmitting}
+              onValidationFailure={this.handleValidationFailure.bind(null, this)}
+              onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
               categories={categories}
             />
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton
-              onClose={() => this.props.dispatch(closeCreateModal())}
-            />
+            <CloseButton onClose={this.close.bind(null, this)} />
             <SubmitButton
               id="confirm-proposal-create"
-              isSubmitting={isSubmitting}
-              onSubmit={() => this.props.dispatch(submitProposalForm())}
+              isSubmitting={this.state.isSubmitting}
+              onSubmit={this.handleSubmit.bind(null, this)}
             />
           </Modal.Footer>
         </Modal>
@@ -67,11 +108,4 @@ const ProposalCreate = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    isSubmitting: state.proposal.isCreating,
-    showModal: state.proposal.showCreateModal,
-  };
-};
-
-export default connect(mapStateToProps)(ProposalCreate);
+export default ProposalCreate;

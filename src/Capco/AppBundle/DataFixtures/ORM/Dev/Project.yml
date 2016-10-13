@@ -57,10 +57,3 @@ Capco\AppBundle\Entity\Project:
     themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
-  p9:
-    title: Appel à projets
-    Author: '@user1'
-    isEnabled: true
-    themes: []
-    exportable: true
-    publishedAt: <dateTimeBetween('-50 days', 'now')>

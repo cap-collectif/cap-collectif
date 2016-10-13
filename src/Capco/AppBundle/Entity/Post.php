@@ -13,6 +13,8 @@ use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Traits\IdTrait;
 
 /**
+ * Post.
+ *
  * @ORM\Table(name="blog_post")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()

@@ -25,14 +25,10 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         ;
     }
 
-    protected function compute($dql, $native = false)
+    protected function compute($dql)
     {
         if ($this->force) {
-            if ($native) {
-              $this->em->getConnection()->executeUpdate($dql);
-            } else {
-              $this->em->createQuery($dql)->execute();
-            }
+            $this->em->createQuery($dql)->execute();
         } else {
             $this->executeOnlyChangesFromLastRun($dql);
         }
@@ -208,12 +204,12 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
           GROUP BY ovv.user
         )');
 
-        $this->compute('UPDATE fos_user u set u.proposal_votes_count = (
-          SELECT count(pv.id) from votes pv
-          INNER JOIN proposal p ON pv.proposal_id = p.id
-          WHERE pv.voter_id = u.id AND pv.expired = 0 AND pv.private = 0 AND p.enabled = 1
-          GROUP BY pv.voter_id
-        )', true);
+        $this->compute('UPDATE CapcoUserBundle:User u set u.proposalVotesCount = (
+          SELECT count(pv.id) from CapcoAppBundle:ProposalVote pv
+          INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
+          WHERE pv.user = u AND pv.expired = 0 AND pv.private = 0 AND p.enabled = 1
+          GROUP BY pv.user
+        )');
 
         $this->compute('UPDATE CapcoUserBundle:User u set u.argumentVotesCount = (
             SELECT count(av.id)

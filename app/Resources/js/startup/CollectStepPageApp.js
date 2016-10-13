@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ProposalStepPage from '../components/Page/ProposalStepPage';
+import CollectStepPage from '../components/Page/CollectStepPage';
 import ReactOnRails from 'react-on-rails';
 
 // See documentation for https://github.com/reactjs/react-redux.
@@ -11,7 +11,7 @@ const mainNode = (props) => {
 
   return (
    <Provider store={store}>
-     <ProposalStepPage {...props} />
+     <CollectStepPage {...props} />
    </Provider>
  );
 };

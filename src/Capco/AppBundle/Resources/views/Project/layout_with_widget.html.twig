@@ -3,7 +3,6 @@
 {% set showVotesWidget = capco_has_votable_step_not_future(project) and is_granted('ROLE_USER') %}
 {% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
 {% set projectSteps = [] %}
-
 {% for step in project.steps if step.step.isEnabled %}
     {% set stepStatuses = [] %}
     {% for status in step.step.statuses %}
@@ -25,22 +24,12 @@
       'position': step.step.position,
       'type': step.step.getType(),
       'showProgressSteps': step.step.allowingProgressSteps|default(false),
-      'statuses': stepStatuses,
-      'open': step.step.open,
-      'voteThreshold': step.step.voteThreshold|default(null),
-      'votesHelpText': step.step.votesHelpText|default(null),
-      'votable': step.step.isVotable()|default(false),
-      'voteType': step.step.voteType|default(0),
-      'budget': step.step.budget|default(null),
-      '_links': {
-        'show': step.step.getType() == 'other' ? '' : path('app_project_show_'~ step.step.getType(), {'projectSlug': project.slug, 'stepSlug': step.step.slug})
-      }
+      'statuses': stepStatuses
     }])
     %}
 {% endfor %}
 {% set state = {
   'project': {
-    'currentProjectStepById': currentStep.id|default(null),
     'currentProjectById': project.id,
     'projects': {
       (project.id) : {
@@ -58,14 +47,7 @@
 {% block mainContent %}
 
     {% if showVotesWidget %}
-      {{ react_intl_component('ProposalVoteBasketWidgetApp', {
-          'props': {
-            'image': media_public_url(capco_site_image_media('image.votes_bar'), 'default_small'),
-            'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
-          },
-          'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-          })
-      }}
+        {{ render(controller('CapcoAppBundle:Site/Project:showVotesWidget', { 'projectSlug': project.slug })) }}
     {% endif %}
 
     {{ parent() }}

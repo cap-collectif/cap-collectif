@@ -1,6 +1,7 @@
 import ReactOnRails from 'react-on-rails';
 import ProjectsListApp from './startup/ProjectsListAppClient';
-import ProposalStepPageApp from './startup/ProposalStepPageApp';
+import CollectStepPageApp from './startup/CollectStepPageApp';
+import SelectionStepPageApp from './startup/SelectionStepPageApp';
 import NavbarApp from './startup/NavbarAppClient';
 import EmailNotConfirmedApp from './startup/EmailNotConfirmedAppClient';
 import NewOpinionApp from './startup/NewOpinionAppClient';
@@ -33,7 +34,8 @@ window.__SERVER__ = false;
 
 registerStore({ appStore });
 register({ ProjectsListApp });
-register({ ProposalStepPageApp });
+register({ CollectStepPageApp });
+register({ SelectionStepPageApp });
 register({ NavbarApp });
 register({ EmailNotConfirmedApp });
 register({ NewOpinionApp });

@@ -1,35 +1,63 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
+import ProposalActions from '../../../actions/ProposalActions';
 import { Modal } from 'react-bootstrap';
-import { deleteProposal, closeDeleteProposalModal } from '../../../redux/modules/proposal';
-import { connect } from 'react-redux';
 
 const ProposalDeleteModal = React.createClass({
   propTypes: {
-    form: PropTypes.object.isRequired,
-    proposal: PropTypes.object.isRequired,
-    show: PropTypes.bool.isRequired,
-    isDeleting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    form: React.PropTypes.object.isRequired,
+    proposal: React.PropTypes.object.isRequired,
+    show: React.PropTypes.bool.isRequired,
+    onToggleModal: React.PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
+
+  getInitialState() {
+    return {
+      isSubmitting: false,
+    };
+  },
+
+  handleSubmit() {
+    const {
+      form,
+      proposal,
+    } = this.props;
+    this.setState({ isSubmitting: true });
+    ProposalActions
+      .delete(form.id, proposal.id)
+      .then(() => {
+        window.location.href = proposal._links.index;
+      })
+      .catch(() => {
+        this.setState({ isSubmitting: false });
+      })
+    ;
+  },
+
+  close() {
+    const { onToggleModal } = this.props;
+    onToggleModal(false);
+  },
+
+  show() {
+    const { onToggleModal } = this.props;
+    onToggleModal(true);
+  },
 
   render() {
     const {
       proposal,
-      form,
       show,
-      isDeleting,
-      dispatch,
     } = this.props;
     return (
       <div>
         <Modal
           animation={false}
           show={show}
-          onHide={() => { dispatch(closeDeleteProposalModal()); }}
+          onHide={this.close.bind(null, this)}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
@@ -47,13 +75,11 @@ const ProposalDeleteModal = React.createClass({
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton
-              onClose={() => { dispatch(closeDeleteProposalModal()); }}
-            />
+            <CloseButton onClose={this.close.bind(null, this)} />
             <SubmitButton
               id="confirm-proposal-delete"
-              isSubmitting={isDeleting}
-              onSubmit={() => { deleteProposal(form.id, proposal, dispatch); }}
+              isSubmitting={this.state.isSubmitting}
+              onSubmit={this.handleSubmit.bind(null, this)}
               label="global.remove"
               bsStyle="danger"
             />
@@ -65,10 +91,4 @@ const ProposalDeleteModal = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    isDeleting: state.proposal.isDeleting,
-    show: state.proposal.showDeleteModal,
-  };
-};
-export default connect(mapStateToProps)(ProposalDeleteModal);
+export default ProposalDeleteModal;

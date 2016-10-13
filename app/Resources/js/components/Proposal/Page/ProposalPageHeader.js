@@ -12,12 +12,18 @@ const ProposalPageHeader = React.createClass({
     proposal: PropTypes.object.isRequired,
     className: PropTypes.string,
     showThemes: PropTypes.bool.isRequired,
+    userHasVote: PropTypes.bool.isRequired,
+    onVote: PropTypes.func.isRequired,
+    creditsLeft: PropTypes.number,
+    selectionStep: PropTypes.object,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
       className: '',
+      creditsLeft: null,
+      selectionStep: null,
     };
   },
 
@@ -25,6 +31,10 @@ const ProposalPageHeader = React.createClass({
     const {
       proposal,
       showThemes,
+      userHasVote,
+      creditsLeft,
+      selectionStep,
+      onVote,
       className,
     } = this.props;
 
@@ -43,8 +53,8 @@ const ProposalPageHeader = React.createClass({
 
     const classes = {
       proposal__header: true,
-      [className]: true,
     };
+    classes[className] = true;
 
     return (
       <div className={classNames(classes)}>
@@ -73,7 +83,11 @@ const ProposalPageHeader = React.createClass({
                 </span>
               }
               <ProposalVoteButtonWrapper
+                selectionStep={selectionStep}
                 proposal={proposal}
+                creditsLeft={creditsLeft}
+                userHasVote={userHasVote}
+                onClick={onVote}
                 className="visible-xs pull-right"
               />
             </p>

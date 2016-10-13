@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ProposalCollectVoteType extends AbstractType
+class ProposalVoteType extends AbstractType
 {
     private $tokenStorage;
 
@@ -17,6 +17,10 @@ class ProposalCollectVoteType extends AbstractType
         $this->tokenStorage = $tokenStorage;
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($this->tokenStorage->getToken()->getUser()) {
@@ -45,7 +49,7 @@ class ProposalCollectVoteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\ProposalCollectVote',
+            'data_class' => 'Capco\AppBundle\Entity\ProposalVote',
             'csrf_protection' => false,
         ]);
     }
@@ -55,6 +59,6 @@ class ProposalCollectVoteType extends AbstractType
      */
     public function getName()
     {
-        return 'proposal_collect_vote';
+        return 'proposal_vote';
     }
 }

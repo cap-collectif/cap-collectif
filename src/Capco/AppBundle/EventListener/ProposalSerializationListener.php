@@ -3,9 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Repository\AbstractResponseRepository;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Capco\AppBundle\Repository\ResponseRepository;
+use Capco\AppBundle\Repository\ProposalVoteRepository;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
@@ -13,38 +11,30 @@ use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 
 class ProposalSerializationListener extends AbstractSerializationListener
 {
     private $router;
     private $tokenStorage;
-    private $proposalSelectionVoteRepository;
-    private $proposalCollectVoteRepository;
+    private $proposalVoteRepository;
     private $responseRepository;
     private $mediaExtension;
-    private $serializer;
-    private $voteResolver;
+    protected $serializer;
 
     public function __construct(
-      RouterInterface $router,
-      TokenStorageInterface $tokenStorage,
-      ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-      AbstractResponseRepository $responseRepository,
-      $mediaExtension,
-      Serializer $serializer,
-      ProposalCollectVoteRepository $proposalCollectVoteRepository,
-      ProposalStepVotesResolver $voteResolver
-    )
-    {
+        RouterInterface $router,
+        TokenStorageInterface $tokenStorage,
+        ProposalVoteRepository $proposalVoteRepository,
+        AbstractResponseRepository $responseRepository,
+        MediaExtension $mediaExtension,
+        Serializer $serializer
+    ) {
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        $this->proposalVoteRepository = $proposalVoteRepository;
         $this->responseRepository = $responseRepository;
         $this->mediaExtension = $mediaExtension;
         $this->serializer = $serializer;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->voteResolver = $voteResolver;
     }
 
     public static function getSubscribedEvents()
@@ -95,23 +85,13 @@ class ProposalSerializationListener extends AbstractSerializationListener
             );
         }
 
-        $selectionVotesCount = $this->proposalSelectionVoteRepository
-            ->getCountsByProposalGroupedBySteps($proposal);
-
-        $collectVotesCount = $this->proposalCollectVoteRepository
-            ->getCountsByProposalGroupedBySteps($proposal);
+        $votesCount = $this->proposalVoteRepository
+            ->getCountsByStepsForProposal($proposal);
 
         $event->getVisitor()->addData(
-            'votesCountByStepId',
-            $selectionVotesCount + $collectVotesCount
+            'votesCountBySelectionSteps',
+            $votesCount
         );
-
-        $votesByStepId = [];
-        foreach ($proposal->getSelectionStepsIds() as $value) {
-          $votesByStepId[$value] = [];
-        };
-        $votesByStepId[$proposal->getProposalForm()->getStep()->getId()] = [];
-        $event->getVisitor()->addData('votesByStepId', $votesByStepId);
 
         $userIsAuthorOrAdmin = $user !== 'anon.' && ($user->getId() === $proposal->getAuthor()->getId() || $user->isAdmin());
         $responses = $this
@@ -128,12 +108,6 @@ class ProposalSerializationListener extends AbstractSerializationListener
         $event->getVisitor()->addData(
             'responses',
             json_decode($serializedResponses, true)
-        );
-
-        $firstVotableStep = $this->voteResolver->getFirstVotableStepForProposal($proposal);
-        $event->getVisitor()->addData(
-            'votableStepId',
-            json_decode($firstVotableStep ? $firstVotableStep->getId() : null, true)
         );
 
         if ($proposal->getMedia()) {

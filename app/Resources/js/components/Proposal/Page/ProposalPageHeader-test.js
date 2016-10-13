@@ -27,7 +27,6 @@ describe('<ProposalPageHeader />', () => {
 
   it('should render a proposal header', () => {
     const wrapper = shallow(<ProposalPageHeader proposal={proposal} showThemes {...props} {...IntlData} />);
-    console.log(wrapper.debug());
     const mainDiv = wrapper.find('div.proposal__header');
     expect(mainDiv).to.have.length(1);
     const theme = mainDiv.children().find('p').first();
@@ -46,10 +45,14 @@ describe('<ProposalPageHeader />', () => {
     expect(mediaBody).to.have.length(1);
     const par = mediaBody.find('p.media--aligned.excerpt');
     expect(par).to.have.length(1);
-
     const proposalVoteWrapper = par.find('Connect(ProposalVoteButtonWrapper)');
     expect(proposalVoteWrapper).to.have.length(1);
-    expect(proposalVoteWrapper.props()).eql({ proposal, className: 'visible-xs pull-right' });
+    expect(proposalVoteWrapper.prop('selectionStep')).to.equal(null);
+    expect(proposalVoteWrapper.prop('proposal')).to.equal(proposal);
+    expect(proposalVoteWrapper.prop('creditsLeft')).to.equal(null);
+    expect(proposalVoteWrapper.prop('userHasVote')).to.equal(props.userHasVote);
+    expect(proposalVoteWrapper.prop('onClick')).to.equal(props.onVote);
+    expect(proposalVoteWrapper.prop('className')).to.equal('visible-xs pull-right');
   });
 
   it('should not render theme if proposal has none', () => {

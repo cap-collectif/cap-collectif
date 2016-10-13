@@ -4,18 +4,18 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Entity\AbstractVote as Vote;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
+use Capco\AppBundle\Resolver\ProposalVotesResolver;
 use Capco\AppBundle\Resolver\VoteResolver;
 
 class VoteExtension extends \Twig_Extension
 {
     protected $voteResolver;
-    protected $proposalStepVotesResolver;
+    protected $proposalVotesResolver;
 
-    public function __construct(VoteResolver $voteResolver, ProposalStepVotesResolver $proposalStepVotesResolver)
+    public function __construct(VoteResolver $voteResolver, ProposalVotesResolver $proposalVotesResolver)
     {
         $this->voteResolver = $voteResolver;
-        $this->proposalStepVotesResolver = $proposalStepVotesResolver;
+        $this->proposalVotesResolver = $proposalVotesResolver;
     }
 
     /**
@@ -55,6 +55,6 @@ class VoteExtension extends \Twig_Extension
 
     public function hasVotableStepNotFuture(Project $project)
     {
-        return $this->proposalStepVotesResolver->hasVotableStepNotFuture($project);
+        return $this->proposalVotesResolver->hasVotableStepNotFuture($project);
     }
 }

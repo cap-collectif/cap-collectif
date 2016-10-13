@@ -17,6 +17,11 @@ const AllVotesModal = React.createClass({
     onToggleModal(false);
   },
 
+  show() {
+    const { onToggleModal } = this.props;
+    onToggleModal(true);
+  },
+
   render() {
     const {
       showModal,

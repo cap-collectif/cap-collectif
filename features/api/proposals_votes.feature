@@ -4,7 +4,7 @@ Feature: Proposal Votes Restful Api
 
   @parallel-scenario
   Scenario: Anonymous API client wants to get all votes for a proposal
-    When I send a GET request to "/api/steps/6/proposals/4/votes"
+    When I send a GET request to "/api/proposal_forms/1/proposals/2/votes"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
@@ -20,6 +20,44 @@ Feature: Proposal Votes Restful Api
         @...@
       ],
       "count": @integer@
+    }
+    """
+
+  @parallel-scenario
+  Scenario: Logged in API client wants to get all votable steps with votes
+    Given I am logged in to api as admin
+    When I send a GET request to "/api/projects/7/votable_steps"
+    Then the JSON response status code should be 200
+    And the JSON response should match:
+    """
+    {
+      "votableSteps": [
+        {
+          "projectId": @integer@,
+          "position": @integer@,
+          "id": @integer@,
+          "open": @boolean@,
+          "title": @string@,
+          "enabled": @boolean@,
+          "startAt": "@string@.isDateTime()",
+          "endAt": "@string@.isDateTime()",
+          "voteType": @integer@,
+          "votesHelpText": @string@,
+          "budget": @...@,
+          "creditsLeft": @number@,
+          "body": @string@,
+          "userVotesCount": @integer@,
+          "userVotes": [
+            {
+              "proposal": @...@,
+              "selectionStep": @...@,
+              "private": @boolean@
+            },
+            @...@
+          ]
+        },
+        @...@
+      ]
     }
     """
 

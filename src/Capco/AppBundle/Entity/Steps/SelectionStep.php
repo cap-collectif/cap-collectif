@@ -3,22 +3,21 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Traits\VoteThresholdTrait;
-use Capco\AppBundle\Traits\VoteTypeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Entity\Selection;
-use Capco\AppBundle\Model\IndexableInterface;
 
 /**
+ * Class SelectionStep.
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionStepRepository")
  * @CapcoAssert\HasOnlyOneSelectionPerProposal()
  */
-class SelectionStep extends AbstractStep implements IndexableInterface
+class SelectionStep extends AbstractStep
 {
     use VoteThresholdTrait;
-    use VoteTypeTrait;
 
     const VOTE_TYPE_DISABLED = 0;
     const VOTE_TYPE_SIMPLE = 1;
@@ -46,9 +45,32 @@ class SelectionStep extends AbstractStep implements IndexableInterface
     private $selections;
 
     /**
+     * @Assert\Choice(choices={0,1,2})
+     * @ORM\Column(name="vote_type", type="integer")
+     */
+    private $voteType = self::VOTE_TYPE_DISABLED;
+
+    /**
+     * @ORM\Column(name="votes_count", type="integer")
+     */
+    private $votesCount = 0;
+
+    /**
+     * @ORM\Column(name="votes_help_text", type="string", nullable=true)
+     */
+    private $votesHelpText = null;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="contributors_count", type="integer")
      */
     private $contributorsCount = 0;
+
+    /**
+     * @ORM\Column(name="budget", type="float", nullable=true)
+     */
+    private $budget = null;
 
     /**
      * @ORM\Column(name="proposals_hidden", type="boolean", nullable=false, options={"default" = false})
@@ -95,6 +117,64 @@ class SelectionStep extends AbstractStep implements IndexableInterface
     /**
      * @return mixed
      */
+    public function getVotesCount()
+    {
+        if (!$this->votesCount) {
+            return 0;
+        }
+
+        return $this->votesCount;
+    }
+
+    /**
+     * @param mixed $votesCount
+     *
+     * @return $this
+     */
+    public function setVotesCount($votesCount)
+    {
+        $this->votesCount = $votesCount;
+
+        return $this;
+    }
+
+    public function incrementVotesCount()
+    {
+        ++$this->votesCount;
+
+        return $this;
+    }
+
+    public function decrementVotesCount()
+    {
+        --$this->votesCount;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVotesHelpText()
+    {
+        return $this->votesHelpText;
+    }
+
+    /**
+     * @param mixed $votesHelpText
+     *
+     * @return $this
+     */
+    public function setVotesHelpText($votesHelpText)
+    {
+        $this->votesHelpText = $votesHelpText;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getContributorsCount()
     {
         return $this->contributorsCount;
@@ -108,6 +188,46 @@ class SelectionStep extends AbstractStep implements IndexableInterface
     public function setContributorsCount($contributorsCount)
     {
         $this->contributorsCount = $contributorsCount;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVoteType()
+    {
+        return $this->voteType;
+    }
+
+    /**
+     * @param mixed $voteType
+     *
+     * @return $this
+     */
+    public function setVoteType($voteType)
+    {
+        $this->voteType = $voteType;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBudget()
+    {
+        return $this->budget;
+    }
+
+    /**
+     * @param mixed $budget
+     *
+     * @return $this
+     */
+    public function setBudget($budget)
+    {
+        $this->budget = $budget;
 
         return $this;
     }
@@ -132,26 +252,38 @@ class SelectionStep extends AbstractStep implements IndexableInterface
         return $this;
     }
 
-    public function isAllowingProgressSteps(): bool
+    public function isAllowingProgressSteps() : bool
     {
         return $this->allowingProgressSteps;
     }
 
-    public function setAllowingProgressSteps(bool $allowingProgressSteps): self
+    public function setAllowingProgressSteps(bool $allowingProgressSteps) : self
     {
         $this->allowingProgressSteps = $allowingProgressSteps;
 
         return $this;
     }
 
+    // **************************** Custom methods *******************************
+
     public function getType()
     {
         return 'selection';
     }
 
-    public function isSelectionStep(): bool
+    public function isSelectionStep()
     {
         return true;
+    }
+
+    public function isVotable()
+    {
+        return $this->voteType !== self::VOTE_TYPE_DISABLED;
+    }
+
+    public function isBudgetVotable()
+    {
+        return $this->voteType === self::VOTE_TYPE_BUDGET;
     }
 
     public function getProposalForm()
@@ -200,10 +332,5 @@ class SelectionStep extends AbstractStep implements IndexableInterface
     public function canShowProposals() : bool
     {
         return !$this->isProposalsHidden() || $this->getStartAt() <= new \DateTime();
-    }
-
-    public function isIndexable(): bool
-    {
-        return $this->getIsEnabled();
     }
 }

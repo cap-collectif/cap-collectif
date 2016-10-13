@@ -111,6 +111,7 @@ Feature: Proposal Restful Api
         ],
         "comments_count": @integer@,
         "created_at": "@string@.isDateTime()",
+        "votesCount": @integer@,
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "trashedReason": @...@,
@@ -120,14 +121,16 @@ Feature: Proposal Restful Api
           "body": @string@,
           "author": @...@
         },
-        "votesCountByStepId": @...@,
+        "votesCountBySelectionSteps": @...@,
         "hasUserReported": @boolean@,
         "likers": @array@,
         "_links": {
           "show": @string@,
           "index": @string@
         }
-      }
+      },
+      "userHasVote": false,
+      "creditsLeft": @...@
     }
     """
 
@@ -255,6 +258,7 @@ Feature: Proposal Restful Api
         ],
         "comments_count": @integer@,
         "created_at": "@string@.isDateTime()",
+        "votesCount": @integer@,
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "trashedReason": @...@,
@@ -264,22 +268,16 @@ Feature: Proposal Restful Api
           "body": @string@,
           "author": @...@
         },
-        "votesByStepId": {
-          "6": [],
-          "22": []
-        },
-        "votableStepId": 6,
-        "votesCountByStepId": {
-          "6": 0,
-          "22": 0
-        },
+        "votesCountBySelectionSteps": @...@,
         "hasUserReported": @boolean@,
         "likers": @array@,
         "_links": {
           "show": @string@,
           "index": @string@
         }
-      }
+      },
+      "userHasVote": false,
+      "creditsLeft": @...@
     }
     """
 
@@ -407,6 +405,7 @@ Feature: Proposal Restful Api
         ],
         "comments_count": @integer@,
         "created_at": "@string@.isDateTime()",
+        "votesCount": @integer@,
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "trashedReason": @...@,
@@ -416,14 +415,16 @@ Feature: Proposal Restful Api
           "body": @string@,
           "author": @...@
         },
-        "votesCountByStepId": @...@,
+        "votesCountBySelectionSteps": @...@,
         "hasUserReported": @boolean@,
         "likers": @array@,
         "_links": {
           "show": @string@,
           "index": @string@
         }
-      }
+      },
+      "userHasVote": false,
+      "creditsLeft": @...@
     }
     """
 
@@ -469,11 +470,12 @@ Feature: Proposal Restful Api
           "selections": @...@,
           "comments_count": @integer@,
           "created_at": "@string@.isDateTime()",
+          "votesCount": @integer@,
           "enabled": @boolean@,
           "isTrashed": @boolean@,
           "title": @string@,
           "answer": @...@,
-          "votesCountByStepId": @...@,
+          "votesCountBySelectionSteps": @...@,
           "likers": @array@,
           "_links": @...@
         },
@@ -518,10 +520,11 @@ Feature: Proposal Restful Api
           "selections": @...@,
           "comments_count": @integer@,
           "created_at": "@string@.isDateTime()",
+          "votesCount": @integer@,
           "enabled": @boolean@,
           "isTrashed": @boolean@,
           "title": @string@,
-          "votesCountByStepId": @...@,
+          "votesCountBySelectionSteps": @...@,
           "likers": @array@,
           "_links": @...@
         },
@@ -601,7 +604,7 @@ Feature: Proposal Restful Api
           "isTrashed": @boolean@,
           "title": @string@,
           "answer": @...@,
-          "votesCountByStepId": @...@,
+          "votesCountBySelectionSteps": @...@,
           "likers": @array@,
           "_links": @...@
         }

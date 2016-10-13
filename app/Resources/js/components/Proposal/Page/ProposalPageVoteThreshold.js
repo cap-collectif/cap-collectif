@@ -12,9 +12,10 @@ const ProposalPageVoteThreshold = React.createClass({
 
   render() {
     const { proposal, step } = this.props;
-    const votesCount = proposal.votesCountByStepId[step.id];
-    const votesRemaining = step.voteThreshold - votesCount;
-    const votesPercentage = Math.ceil((votesCount * 100) / step.voteThreshold);
+
+    const votesRemaining = step.voteThreshold - proposal.votesCount;
+    const votesPercentage = Math.ceil((proposal.votesCount * 100) / step.voteThreshold);
+
     return (
       <div className="proposal__page__vote_threshold">
         <div className="proposal__infos" style={{ marginTop: '-15px' }}>
@@ -29,7 +30,7 @@ const ProposalPageVoteThreshold = React.createClass({
             <i className="cap cap-hand-like-2-1"></i>{' '}
             <FormattedMessage
               message={this.getIntlMessage('proposal.vote.count')}
-              num={votesCount}
+              num={proposal.votesCount}
             />
           </p>
           <ProgressBar
@@ -44,7 +45,7 @@ const ProposalPageVoteThreshold = React.createClass({
               votesPercentage >= 100 &&
               <FormattedMessage
                 message={this.getIntlMessage('proposal.vote.threshold.progress_reached')}
-                num={votesCount}
+                num={proposal.votesCount}
                 max={step.voteThreshold}
               />
             }

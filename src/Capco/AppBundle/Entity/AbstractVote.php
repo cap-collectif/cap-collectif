@@ -19,14 +19,13 @@ use Capco\AppBundle\Traits\IdTrait;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "voteType", type = "string")
  * @ORM\DiscriminatorMap({
- *      "idea"              = "IdeaVote",
- *      "comment"           = "CommentVote",
- *      "opinion"           = "OpinionVote",
- *      "opinionVersion"    = "OpinionVersionVote",
- *      "argument"          = "ArgumentVote",
- *      "source"            = "SourceVote",
- *      "proposalSelection" = "ProposalSelectionVote",
- *      "proposalCollect"   = "ProposalCollectVote",
+ *      "idea"            = "IdeaVote",
+ *      "comment"         = "CommentVote",
+ *      "opinion"         = "OpinionVote",
+ *      "opinionVersion"  = "OpinionVersionVote",
+ *      "argument"        = "ArgumentVote",
+ *      "source"          = "SourceVote",
+ *      "proposal"        = "ProposalVote"
  * })
  */
 abstract class AbstractVote implements Contribution, HasAuthorInterface

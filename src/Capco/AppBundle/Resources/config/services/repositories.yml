@@ -59,15 +59,10 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Proposal']
 
-  capco.proposal_selection_vote.repository:
-    class: Capco\AppBundle\Repository\ProposalSelectionVoteRepository
+  capco.proposal_vote.repository:
+    class: Capco\AppBundle\Repository\ProposalVoteRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:ProposalSelectionVote']
-
-  capco.proposal_collect_vote.repository:
-    class: Capco\AppBundle\Repository\ProposalCollectVoteRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:ProposalCollectVote']
+    arguments: ['CapcoAppBundle:ProposalVote']
 
   capco.question_choice.repository:
     class: Capco\AppBundle\Repository\QuestionChoiceRepository
@@ -130,7 +125,7 @@ services:
     arguments: ['CapcoAppBundle:Project']
 
   capco.abstract_step.repository:
-    class: Capco\AppBundle\Entity\Steps\AbstractStep
+    class: Capco\AppBundle\Repository\AbstractStepRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\AbstractStep']
 

@@ -1,5 +1,4 @@
 const initialState = {
-  currentProjectStepById: null,
   currentProjectById: null,
   projects: [],
 };

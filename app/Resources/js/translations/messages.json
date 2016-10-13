@@ -689,7 +689,6 @@
       "count": "{num, plural, =0{0 vote} one{# vote} other{# votes}}",
       "count_no_nb": "{count, plural, =0{vote} one{vote} other{votes}}",
       "delete": "Annuler mon vote",
-      "deleting": "Annulation en cours...",
       "form": {
         "comment": "Commentaire",
         "comment_placeholder": "Pourquoi soutenez-vous ce projet ?",

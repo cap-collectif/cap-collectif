@@ -4,20 +4,27 @@ import { IntlMixin, FormattedMessage } from 'react-intl';
 const ProposalPreviewFooter = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    stepId: PropTypes.number.isRequired,
+    selectionStepId: PropTypes.number,
     showVotes: PropTypes.bool,
+    votesDelta: PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
+      selectionStepId: null,
       showVotes: false,
     };
   },
 
   render() {
-    const { proposal, stepId, showVotes } = this.props;
-    const votesCount = proposal.votesCountByStepId[stepId] || 0;
+    const { proposal, selectionStepId, votesDelta, showVotes } = this.props;
+    const votesCount = selectionStepId
+      ? proposal.votesCountBySelectionSteps[selectionStepId]
+        ? proposal.votesCountBySelectionSteps[selectionStepId] + votesDelta
+        : 0 + votesDelta
+      : proposal.votesCount
+    ;
     const counterWidth = showVotes ? '50%' : '100%';
 
     return (

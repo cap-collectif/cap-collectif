@@ -36,7 +36,7 @@ export const ProposalPageBlog = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    proposal: state.proposal.proposalsById[state.proposal.currentProposalId],
+    proposal: state.proposal.proposals[state.proposal.currentProposalById],
   };
 };
 

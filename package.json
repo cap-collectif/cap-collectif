@@ -61,7 +61,6 @@
     "json-brunch": "^1.5.4",
     "mailcheck": "^1.1.1",
     "moment": "^2.11.2",
-    "normalizr": "^2.2.1",
     "process-env-brunch": "^1.4.4-d",
     "quill": "^0.20.1",
     "react": "^15.3.1",

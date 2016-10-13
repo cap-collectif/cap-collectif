@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Entity\ProposalSelectionVote;
+use Capco\AppBundle\Entity\ProposalVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -41,6 +41,10 @@ class SelectionStepsController extends FOSRestController
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|votes|comments|random)", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
+     *
+     * @param Request               $request
+     * @param SelectionStep         $selectionStep
+     * @param ParamFetcherInterface $paramFetcher
      */
     public function getProposalsBySelectionStepAction(Request $request, SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
     {
@@ -57,7 +61,7 @@ class SelectionStepsController extends FOSRestController
         // Filters
         $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
         $providedFilters['selectionStep'] = $selectionStep->getId();
-        if (array_key_exists('statuses', $providedFilters)) {
+        if ($providedFilters['statuses']) {
             $providedFilters['selectionStatuses'] = $providedFilters['statuses'];
             unset($providedFilters['statuses']);
         }
@@ -70,6 +74,26 @@ class SelectionStepsController extends FOSRestController
             $providedFilters
         );
 
+        $user = $this->getUser();
+
+        if ($user) {
+            $results['proposals'] = $this
+                ->get('capco.proposal_votes.resolver')
+                ->addVotesToProposalsForSelectionStepAndUser(
+                    $results['proposals'],
+                    $selectionStep,
+                    $user
+                )
+            ;
+        }
+
+        $creditsLeft = $this
+            ->get('capco.proposal_votes.resolver')
+            ->getCreditsLeftForUser($user, $selectionStep)
+        ;
+
+        $results['creditsLeft'] = $creditsLeft;
+
         return $results;
     }
 
@@ -77,7 +101,7 @@ class SelectionStepsController extends FOSRestController
      * @Post("/selection_steps/{selection_step_id}/proposals/{proposal_id}/votes")
      * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
-     * @View(statusCode=200, serializerGroups={"ProposalSelectionVotes", "UsersInfos", "UserMedias"})
+     * @View(statusCode=201)
      */
     public function voteOnProposalAction(Request $request, SelectionStep $selectionStep, Proposal $proposal)
     {
@@ -104,19 +128,22 @@ class SelectionStepsController extends FOSRestController
             throw new UnauthorizedHttpException('Must be logged to vote.');
         }
 
-        $vote = (new ProposalSelectionVote())
+        $vote = (new ProposalVote())
             ->setIpAddress($request->getClientIp())
             ->setUser($user)
             ->setProposal($proposal)
             ->setSelectionStep($selectionStep)
         ;
 
-        $form = $this->createForm('proposal_selection_vote', $vote);
+        $form = $this->createForm('proposal_vote', $vote);
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {
-            return $form;
+            return $this->view($form->getErrors(true, true), Response::HTTP_BAD_REQUEST);
         }
+
+        $proposal->incrementVotesCount();
+        $selectionStep->incrementVotesCount();
 
         if ($form->has('comment') && null != ($content = $form->get('comment')->getData())) {
             $comment = new ProposalComment();
@@ -143,8 +170,6 @@ class SelectionStepsController extends FOSRestController
         // Keep in mind that refresh should usually not be triggered manually.
         $index = $this->get('fos_elastica.index');
         $index->refresh();
-
-        return $vote;
     }
 
     /**
@@ -152,7 +177,7 @@ class SelectionStepsController extends FOSRestController
      * @Delete("/selection_steps/{selection_step_id}/proposals/{proposal_id}/votes")
      * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
-     * @View(statusCode=200, serializerGroups={"ProposalSelectionVotes", "UsersInfos", "UserMedias"})
+     * @View(statusCode=204)
      */
     public function deleteVoteOnProposalAction(Request $request, SelectionStep $selectionStep, Proposal $proposal)
     {
@@ -169,7 +194,7 @@ class SelectionStepsController extends FOSRestController
         }
 
         $vote = $em
-            ->getRepository('CapcoAppBundle:ProposalSelectionVote')
+            ->getRepository('CapcoAppBundle:ProposalVote')
             ->findOneBy([
                 'user' => $this->getUser(),
                 'proposal' => $proposal,
@@ -180,6 +205,9 @@ class SelectionStepsController extends FOSRestController
             throw new BadRequestHttpException('You have not voted for this proposal in this selection step.');
         }
 
+        $proposal->decrementVotesCount();
+        $selectionStep->decrementVotesCount();
+
         $em->remove($vote);
         $em->flush();
 
@@ -188,7 +216,5 @@ class SelectionStepsController extends FOSRestController
         // Keep in mind that refresh should usually not be triggered manually.
         $index = $this->get('fos_elastica.index');
         $index->refresh();
-
-        return $vote;
     }
 }

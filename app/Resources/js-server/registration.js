@@ -1,10 +1,10 @@
 import moment from 'moment';
-
 moment.locale('fr');
 
 import ReactOnRails from 'react-on-rails';
 import ProjectsListApp from '../js/startup/ProjectsListAppClient';
-import ProposalStepPageApp from '../js/startup/ProposalStepPageApp';
+import CollectStepPageApp from '../js/startup/CollectStepPageApp';
+import SelectionStepPageApp from '../js/startup/SelectionStepPageApp';
 import NavbarApp from '../js/startup/NavbarAppClient';
 import EmailNotConfirmedApp from '../js/startup/EmailNotConfirmedAppClient';
 import NewOpinionApp from '../js/startup/NewOpinionAppClient';
@@ -40,7 +40,8 @@ global.setInterval = global.setInterval || emptyFunction;
 
 registerStore({ appStore });
 register({ ProjectsListApp });
-register({ ProposalStepPageApp });
+register({ CollectStepPageApp });
+register({ SelectionStepPageApp });
 register({ NavbarApp });
 register({ EmailNotConfirmedApp });
 register({ NewOpinionApp });

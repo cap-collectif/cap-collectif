@@ -66,14 +66,6 @@ services:
     calls:
       - [ setTranslationDomain, [SonataAdminBundle]]
 
-  capco_admin.admin.proposal_collect_vote:
-    class: Capco\AdminBundle\Admin\ProposalCollectVoteAdmin
-    arguments: [~, Capco\AppBundle\Entity\ProposalCollectVote, SonataAdminBundle:CRUD]
-    tags:
-      - {name: sonata.admin, manager_type: orm, label: admin.label.proposal_collect_vote}
-    calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
-
   capco_admin.admin.project:
     class: Capco\AdminBundle\Admin\ProjectAdmin
     arguments: [~, Capco\AppBundle\Entity\Project, SonataAdminBundle:CRUD]

@@ -3,31 +3,40 @@
 namespace Capco\AppBundle\Helper;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
 
 class StepHelper
 {
+    protected $projectHelper;
+
+    public function __construct(ProjectHelper $projectHelper)
+    {
+        $this->projectHelper = $projectHelper;
+    }
+
     public function getStatus(AbstractStep $step)
     {
         $now = new \DateTime();
 
-        if (null !== $step->getStartAt() && $step->getStartAt() > $now) {
-            return 'future';
+        if ($step->getStartAt()) {
+            if ($step->getEndAt()) {
+                if ($step->getStartAt() > $now) {
+                    return 'future';
+                }
+
+                return $step->getEndAt() > $now ? 'open' : 'closed';
+            }
+
+            return $step->getStartAt() > $now ? 'future' : 'closed';
         }
 
-        if (null !== $step->getStartAt() && null === $step->getEndAt() && $step->getStartAt() < $now) {
-            return 'open';
-        }
+        $previousSteps = $this->projectHelper->getPreviousSteps($step);
 
-        if (null === $step->getEndAt() && null === $step->getStartAt()) {
-            return 'open';
-        }
-
-        if (null === $step->getStartAt() && $step->getEndAt() > $now) {
-            return 'open';
-        }
-
-        if ($step->getStartAt() && $step->getStartAt() < $now && $step->getEndAt() > $now) {
-            return 'open';
+        foreach ($previousSteps as $previousStep) {
+            if ($previousStep->getStartAt() > $now || $previousStep->getEndAt() > $now) {
+                return 'future';
+            }
         }
 
         return 'closed';

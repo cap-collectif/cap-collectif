@@ -1,16 +1,17 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin, FormattedNumber } from 'react-intl';
 
 const ProposalDetailEstimation = React.createClass({
   displayName: 'ProposalDetailEstimation',
   propTypes: {
-    proposal: PropTypes.object.isRequired,
-    showNullEstimation: PropTypes.bool.isRequired,
+    proposal: React.PropTypes.object.isRequired,
+    showNullEstimation: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { showNullEstimation, proposal } = this.props;
+    const { showNullEstimation } = this.props;
+    const proposal = this.props.proposal;
     const estimation = !proposal.estimation && showNullEstimation ? 0 : proposal.estimation;
 
     return estimation !== null && typeof estimation !== 'undefined'
