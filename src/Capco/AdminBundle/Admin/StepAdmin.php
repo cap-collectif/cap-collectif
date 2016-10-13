@@ -274,8 +274,8 @@ class StepAdmin extends Admin
         if ($subject instanceof SelectionStep) {
             $formMapper
                 ->with('admin.fields.step.group_selections')
-                ->add('proposalsVisible', CheckboxType::class,
-                    ['label' => 'admin.fields.step.proposals_visibility', 'required' => false]
+                ->add('proposalsHidden', CheckboxType::class,
+                    ['label' => 'admin.fields.step.proposals_hidden', 'required' => false]
                 )
                 ->add('selections', 'sonata_type_collection', [
                     'label' => 'admin.fields.step.selections',

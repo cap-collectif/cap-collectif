@@ -699,7 +699,7 @@ admin:
       position: Position
       project: Projet
       proposal_form: Formulaire
-      proposals_visibility: Publier les propositions avant la date de début
+      proposals_hidden: Publier les propositions à la date de début de l'étape
       questionnaire: Questionnaire
       selections: Sélection
       start_at: Commence
