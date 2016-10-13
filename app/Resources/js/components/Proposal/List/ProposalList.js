@@ -9,7 +9,6 @@ export const ProposalList = React.createClass({
   propTypes: {
     proposals: PropTypes.array.isRequired,
     step: PropTypes.object.isRequired,
-    showAllVotes: PropTypes.bool,
     showThemes: PropTypes.bool,
   },
   mixins: [IntlMixin],
@@ -17,7 +16,6 @@ export const ProposalList = React.createClass({
   getDefaultProps() {
     return {
       step: null,
-      showAllVotes: false,
       showThemes: false,
     };
   },
@@ -25,7 +23,6 @@ export const ProposalList = React.createClass({
   render() {
     const {
       step,
-      showAllVotes,
       showThemes,
     } = this.props;
 
@@ -64,7 +61,6 @@ export const ProposalList = React.createClass({
                     key={proposal.id}
                     proposal={proposal}
                     step={step}
-                    showAllVotes={showAllVotes}
                     showThemes={showThemes}
                   />
                 );
@@ -83,7 +79,6 @@ export const ProposalList = React.createClass({
                         key={proposal.id}
                         proposal={proposal}
                         step={step}
-                        showAllVotes={showAllVotes}
                         showThemes={showThemes}
                       />
                   );

@@ -14,14 +14,12 @@ const ProposalPreview = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
-    showAllVotes: PropTypes.bool,
     showThemes: PropTypes.bool,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
-      showAllVotes: false,
       showThemes: false,
     };
   },
@@ -30,10 +28,9 @@ const ProposalPreview = React.createClass({
     const {
       proposal,
       step,
-      showAllVotes,
       showThemes,
     } = this.props;
-    const voteType = step ? step.voteType : VOTE_TYPE_DISABLED;
+    const voteType = step.voteType;
     const classes = classNames({
       box: true,
       'bg-vip': proposal.author && proposal.author.vip,
@@ -50,14 +47,12 @@ const ProposalPreview = React.createClass({
               showThemes={showThemes}
             />
             <div className="proposal__buttons text-center" >
-              <div>
                 <ProposalPreviewVote
                   {...this.props}
                 />
-              </div>
             </div>
             {
-              step && step.voteThreshold > 0 &&
+              step.voteThreshold > 0 &&
               <div style={{ marginTop: '20px' }}>
                 <ProposalVoteThresholdProgressBar
                   proposal={proposal}
@@ -68,12 +63,12 @@ const ProposalPreview = React.createClass({
           </div>
           <ProposalPreviewFooter
             proposal={proposal}
-            showVotes={(showAllVotes || voteType !== VOTE_TYPE_DISABLED) && step.voteThreshold === 0}
-            stepId={step ? step.id : null}
+            showVotes={voteType !== VOTE_TYPE_DISABLED}
+            stepId={step.id}
           />
           <ProposalStatus
             proposal={proposal}
-            stepId={step ? step.id : null}
+            stepId={step.id}
           />
         </div>
       </Col>
