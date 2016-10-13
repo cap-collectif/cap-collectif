@@ -96,13 +96,10 @@ const ProposalPreview = React.createClass({
             votesDelta={ProposalVotesHelper.getVotesDelta(proposal.userHasVote, userHasVote)}
             selectionStepId={selectionStep ? selectionStep.id : null}
           />
-          {
-            selectionStep &&
-            <ProposalStatus
-              proposal={proposal}
-              selectionStepId={selectionStep.id}
-            />
-          }
+          <ProposalStatus
+            proposal={proposal}
+            selectionStepId={selectionStep ? selectionStep.id : null}
+          />
         </div>
       </Col>
     );
