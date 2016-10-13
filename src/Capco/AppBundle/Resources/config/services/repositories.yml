@@ -130,7 +130,7 @@ services:
     arguments: ['CapcoAppBundle:Project']
 
   capco.abstract_step.repository:
-    class: Capco\AppBundle\Entity\Steps\AbstractStep
+    class: Capco\AppBundle\Repository\AbstractStepRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\AbstractStep']
 
