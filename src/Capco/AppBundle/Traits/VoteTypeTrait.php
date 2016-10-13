@@ -20,6 +20,11 @@ trait VoteTypeTrait
     }
 
     /**
+     * @ORM\Column(name="votes_help_text", type="string", nullable=true)
+     */
+    private $votesHelpText = null;
+
+    /**
      * @ORM\Column(name="votes_count", type="integer")
      */
     private $votesCount = 0;
@@ -91,6 +96,18 @@ trait VoteTypeTrait
     public function decrementVotesCount(): self
     {
         --$this->votesCount;
+
+        return $this;
+    }
+
+    public function getVotesHelpText()
+    {
+        return $this->votesHelpText;
+    }
+
+    public function setVotesHelpText($votesHelpText)
+    {
+        $this->votesHelpText = $votesHelpText;
 
         return $this;
     }

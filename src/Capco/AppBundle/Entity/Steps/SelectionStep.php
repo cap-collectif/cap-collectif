@@ -46,11 +46,6 @@ class SelectionStep extends AbstractStep implements IndexableInterface
     private $selections;
 
     /**
-     * @ORM\Column(name="votes_help_text", type="string", nullable=true)
-     */
-    private $votesHelpText = null;
-
-    /**
      * @ORM\Column(name="contributors_count", type="integer")
      */
     private $contributorsCount = 0;
@@ -95,26 +90,6 @@ class SelectionStep extends AbstractStep implements IndexableInterface
     public function getSelections()
     {
         return $this->selections;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVotesHelpText()
-    {
-        return $this->votesHelpText;
-    }
-
-    /**
-     * @param mixed $votesHelpText
-     *
-     * @return $this
-     */
-    public function setVotesHelpText($votesHelpText)
-    {
-        $this->votesHelpText = $votesHelpText;
-
-        return $this;
     }
 
     /**
