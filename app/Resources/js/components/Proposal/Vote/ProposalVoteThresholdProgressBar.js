@@ -11,7 +11,7 @@ const ProposalVoteThresholdProgressBar = React.createClass({
 
   render() {
     const { proposal, step } = this.props;
-    const votesCount = proposal.votesCountByStep[step.id] || 0;
+    const votesCount = proposal.votesCountByStepId[step.id];
     const voteThreshold = step.voteThreshold;
     return (
       <div className="propopal__vote_threshold--no-min-width" style={{ fontSize: '85%' }}>

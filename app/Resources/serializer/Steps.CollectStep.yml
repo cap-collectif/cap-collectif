@@ -5,8 +5,6 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         expose: true
         serialized_name: isPrivate
         groups: [Steps]
-      user:
-        expose: true
       voteType:
         expose: true
         type: integer
@@ -17,3 +15,15 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         type: string
         groups: [Steps]
         serialized_name: defaultOrder
+      voteThreshold:
+        expose: true
+        groups: [VoteThreshold]
+        type: integer
+        serialized_name: voteThreshold
+      budget:
+        expose: true
+        type: float
+        groups: [Steps]
+      statuses:
+        expose: true
+        groups: [Steps, Statuses]

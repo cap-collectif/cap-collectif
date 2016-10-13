@@ -55,9 +55,10 @@ export const ProposalPage = React.createClass({
 
   render() {
     const { proposal, form, categories, features, steps } = this.props;
-    const votableStep = proposal.votableStepId ? steps.filter(s => s.id === proposal.votableStepId)[0].votable : null;
-    const showVotesTab = proposal.votesCount > 0 || votableStep !== null;
+    const currentVotableStep = proposal.votableStepId ? steps.filter(s => s.id === proposal.votableStepId)[0] : null;
+    const showVotesTab = proposal.votesCount > 0 || currentVotableStep !== null;
     const votableSteps = steps.filter(step => step.votable && (step.type === 'selection' || step.type === 'collect'));
+    console.log(currentVotableStep);
     return (
         <div>
           <ProposalPageAlert proposal={proposal} />
@@ -120,15 +121,15 @@ export const ProposalPage = React.createClass({
                             proposal={proposal}
                             showDistricts={features.districts}
                             showCategories={form.usingCategories}
-                            showNullEstimation={votableStep && votableStep.voteType === VOTE_TYPE_BUDGET}
+                            showNullEstimation={currentVotableStep && currentVotableStep.voteType === VOTE_TYPE_BUDGET}
                         />
                         <br />
                         {
-                          votableStep && votableStep.voteThreshold > 0 &&
+                          currentVotableStep && currentVotableStep.voteThreshold > 0 &&
                             <span>
                               <ProposalPageVoteThreshold
                                 proposal={proposal}
-                                step={votableStep}
+                                step={currentVotableStep}
                               />
                               <br />
                             </span>
@@ -181,7 +182,7 @@ export const ProposalPage = React.createClass({
                 </Tab.Content>
               </div>
               {
-                votableStep != null &&
+                currentVotableStep != null &&
                   <ProposalVoteModal
                       proposal={proposal}
                   />

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,6 +16,7 @@ use Capco\AppBundle\Model\IndexableInterface;
  */
 class CollectStep extends AbstractStep implements IndexableInterface
 {
+    use VoteThresholdTrait;
     use VoteTypeTrait;
 
     public static $sort = ['old', 'last', 'votes', 'comments', 'random'];
