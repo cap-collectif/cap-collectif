@@ -45,10 +45,8 @@ class ProjectController extends Controller
      * @Security("has_role('ROLE_USER')")
      * @Route("/projects/{projectSlug}/votes", name="app_project_show_user_votes")
      * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
-     *
-     * @param Project $project
-     *
-     * @return Response
+     * @Cache(smaxage="60", public="true")
+     * @Template("CapcoAppBundle:Project:show_user_votes.html.twig")
      */
     public function showUserVotesAction(Project $project)
     {
@@ -56,25 +54,13 @@ class ProjectController extends Controller
         $serializer = $this->get('jms_serializer');
 
         $props = $serializer->serialize([
-            'votableSteps' => $this
-                ->get('capco.proposal_votes.resolver')
-                ->getVotableStepsForProject($project),
-            'districts' => $em->getRepository('CapcoAppBundle:District')->findAll(),
-            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
             'projectId' => $project->getId(),
         ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes', 'Districts', 'ThemeDetails']));
 
-        $response = $this->render('CapcoAppBundle:Project:show_user_votes.html.twig', [
-            'project' => $project,
-            'props' => $props,
-        ]);
-
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
-            $response->setPublic();
-            $response->setSharedMaxAge(60);
-        }
-
-        return $response;
+        return [
+          'project' => $project,
+          'props' => $props,
+        ];
     }
 
     /**

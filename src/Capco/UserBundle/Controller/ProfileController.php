@@ -18,16 +18,90 @@ use JMS\Serializer\SerializationContext;
  */
 class ProfileController extends BaseController
 {
+
+  /**
+   * @Route("/edit-profile", name="capco_profile_edit", defaults={"_feature_flags" = "profiles"})
+   * @Template("CapcoUserBundle:Profile:edit_profile.html.twig")
+   * @Security("has_role('ROLE_USER')")
+   */
+  public function editProfileAction()
+  {
+      $user = $this->getUser();
+      if (!is_object($user) || !$user instanceof UserInterface) {
+          throw $this->createAccessDeniedException('This user does not have access to this section.');
+      }
+
+      $form = $this->get('sonata.user.profile.form');
+      $form->remove('email');
+      $formHandler = $this->get('sonata.user.profile.form.handler');
+
+      $process = $formHandler->process($user);
+      if ($process) {
+          $this->setFlash('sonata_user_success', 'profile.flash.updated');
+      }
+
+      return [
+          'form' => $form->createView(),
+      ];
+  }
+
+  /**
+   * @Route("/edit-mobile", name="capco_profile_edit_mobile")
+   * @Template("CapcoUserBundle:Profile:edit_mobile.html.twig")
+   * @Security("has_role('ROLE_USER')")
+   */
+  public function editProfileMobileAction()
+  {
+  }
+
+  /**
+   * @Route("/edit-account", name="capco_profile_edit_account")
+   * @Template("CapcoUserBundle:Profile:edit_account.html.twig")
+   * @Security("has_role('ROLE_USER')")
+   */
+  public function editAccountAction(Request $request)
+  {
+      $user = $this->getUser();
+      if (!is_object($user) || !$user instanceof UserInterface) {
+          throw $this->createAccessDeniedException('This user does not have access to this section.');
+      }
+
+      $form = $this->createForm(new AccountFormType(), $user);
+
+      if ('POST' == $request->getMethod()) {
+          $form->submit($request);
+          $userManager = $this->get('sonata.user.user_manager');
+
+          if ($form->isValid()) {
+              $userManager->updateUser($user);
+
+              $this->setFlash('sonata_user_success', 'profile.flash.updated');
+          }
+
+          // Reloads the user to reset its username. This is needed when the
+          // username or password have been changed to avoid issues with the
+          // security layer.
+          $userManager->reloadUser($user);
+      }
+
+      return [
+          'form' => $form->createView(),
+      ];
+  }
     /**
      * @Route("/", name="capco_user_profile_show", defaults={"_feature_flags" = "profiles"})
+     * @Route("/{slug}", name="capco_user_profile_show_all", defaults={"_feature_flags" = "profiles"})
      * @Template()
      * @Security("has_role('ROLE_USER')")
      */
-    public function showAction()
+    public function showAction(User $user = null)
     {
+        if (!$user) {
+          $user = $this->get('security.token_storage')->getToken()->getUser();
+        }
+
         $doctrine = $this->getDoctrine();
         $serializer = $this->get('jms_serializer');
-        $user = $this->get('security.token_storage')->getToken()->getUser();
 
         $projectsRaw = $doctrine
             ->getRepository('CapcoAppBundle:Project')
@@ -86,154 +160,6 @@ class ProfileController extends BaseController
             'ideasProps' => $ideas,
             'ideasCount' => $ideasCount,
             'proposalsPropsBySteps' => $proposalsPropsBySteps,
-            'proposalsCount' => $proposalsCount,
-            'replies' => $replies,
-            'sources' => $sources,
-            'comments' => $comments,
-            'votes' => $votes,
-            'argumentsLabels' => Argument::$argumentTypesLabels,
-        ];
-    }
-
-    /**
-     * @Route("/edit-mobile", name="capco_profile_edit_mobile")
-     * @Template("CapcoUserBundle:Profile:edit_mobile.html.twig")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function editProfileMobileAction()
-    {
-    }
-
-    /**
-     * @Route("/edit-account", name="capco_profile_edit_account")
-     * @Template("CapcoUserBundle:Profile:edit_account.html.twig")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function editAccountAction(Request $request)
-    {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw $this->createAccessDeniedException('This user does not have access to this section.');
-        }
-
-        $form = $this->createForm(new AccountFormType(), $user);
-
-        if ('POST' == $request->getMethod()) {
-            $form->submit($request);
-            $userManager = $this->get('sonata.user.user_manager');
-
-            if ($form->isValid()) {
-                $userManager->updateUser($user);
-
-                $this->setFlash('sonata_user_success', 'profile.flash.updated');
-            }
-
-            // Reloads the user to reset its username. This is needed when the
-            // username or password have been changed to avoid issues with the
-            // security layer.
-            $userManager->reloadUser($user);
-        }
-
-        return [
-            'form' => $form->createView(),
-        ];
-    }
-
-    /**
-     * @Route("/edit-profile", name="capco_profile_edit", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:edit_profile.html.twig")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function editProfileAction()
-    {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw $this->createAccessDeniedException('This user does not have access to this section.');
-        }
-
-        $form = $this->get('sonata.user.profile.form');
-        $form->remove('email');
-        $formHandler = $this->get('sonata.user.profile.form.handler');
-
-        $process = $formHandler->process($user);
-        if ($process) {
-            $this->setFlash('sonata_user_success', 'profile.flash.updated');
-        }
-
-        return [
-            'form' => $form->createView(),
-        ];
-    }
-
-    /**
-     * @Route("/{slug}", name="capco_user_profile_show_all", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:show.html.twig")
-     */
-    public function showUserAction(User $user)
-    {
-        $serializer = $this->get('jms_serializer');
-        $doctrine = $this->getDoctrine();
-        $projectsRaw = $doctrine
-            ->getRepository('CapcoAppBundle:Project')
-            ->getByUser($user)
-        ;
-        $projectsProps = $serializer->serialize([
-            'projects' => $projectsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
-        $projectsCount = count($projectsRaw);
-        $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
-        $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
-        $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
-
-        $ideasRaw = $doctrine
-            ->getRepository('CapcoAppBundle:Idea')
-            ->getByUser($user)
-        ;
-        $ideas = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'ThemeDetails']));
-        $ideasCount = count($ideasRaw);
-
-        $proposalsRaw = $doctrine
-            ->getRepository('CapcoAppBundle:Proposal')
-            ->getByUser($user)
-        ;
-        if ($this->getUser() !== $user) {
-            $proposalsRaw = array_filter(
-                $proposalsRaw,
-                function ($proposal) {
-                    return $proposal->isVisible();
-                }
-            );
-        }
-
-        $proposalsCount = count($proposalsRaw);
-
-        $proposalsProps = $serializer->serialize([
-            'proposals' => $proposalsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
-
-        $replies = $this
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:Reply')
-            ->findBy([
-                'author' => $user,
-                'private' => false,
-            ]);
-        $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
-        $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
-        $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getPublicVotesByUser($user);
-
-        return [
-            'user' => $user,
-            'projectsProps' => $projectsProps,
-            'projectsCount' => $projectsCount,
-            'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
-            'versions' => $versions,
-            'arguments' => $arguments,
-            'ideasProps' => $ideas,
-            'ideasCount' => $ideasCount,
-            'proposalsProps' => $proposalsProps,
             'proposalsCount' => $proposalsCount,
             'replies' => $replies,
             'sources' => $sources,

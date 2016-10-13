@@ -33,7 +33,7 @@ class ProposalRepository extends EntityRepository
     $results = $qb->getQuery()->getResult();
 
     if ($onlyVisible) {
-      $results = $results->filter(function ($proposal) {
+      $results = array_filter($results, function ($proposal) {
         return $proposal->isVisible();
       });
     }
