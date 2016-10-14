@@ -873,7 +873,7 @@ class ProjectDownloadResolver
         return $this->translator->trans('project_download.values.no', [], 'CapcoAppBundle');
     }
 
-    private function dateToString($date)
+    private function dateToString(\DateTime $date = null)
     {
         if ($date != null) {
             return $date->format('Y-m-d H:i:s');

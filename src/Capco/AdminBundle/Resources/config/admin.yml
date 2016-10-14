@@ -400,7 +400,7 @@ services:
 
   capco_admin.admin.response:
       class: Capco\AdminBundle\Admin\ResponseAdmin
-      arguments: [~, Capco\AppBundle\Entity\Response\AbstractResponse, SonataAdminBundle:CRUD]
+      arguments: [~, Capco\AppBundle\Entity\Responses\AbstractResponse, SonataAdminBundle:CRUD]
       tags:
         - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.response}
       calls:
