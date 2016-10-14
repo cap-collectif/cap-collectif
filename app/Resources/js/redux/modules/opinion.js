@@ -168,6 +168,9 @@ export const reducer = (state = initialState, action) => {
     }
     case OPINION_VOTE_SUCCEEDED: {
       const opinion = state.opinions[action.opinionId];
+      const indexOfCurrentUser = opinion.votes.indexOf(find(opinion.votes, (v) => {
+        return v.user && v.user.uniqueId === action.vote.user.uniqueId;
+      }));
       if (!opinion.user_vote) {
         const opinions = {
           [action.opinionId]: {
@@ -176,7 +179,7 @@ export const reducer = (state = initialState, action) => {
               ...state.opinions[action.opinionId],
               votes: [action.vote, ...opinion.votes],
               userHasVote: true,
-              votesCount: opinion.votesCount + 1,
+              votesCount: indexOfCurrentUser !== -1 ? opinion.votesCount + 1 : opinion.votesCount,
               user_vote: action.vote.value,
             },
           },
