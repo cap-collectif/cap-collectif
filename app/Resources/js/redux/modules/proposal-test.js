@@ -12,7 +12,7 @@ import Fetcher from '../../services/Fetcher';
 describe('Proposal Reducer', () => {
   it('Should handle POSTS_FETCH_SUCCEEDED', () => {
     const initialState = {
-      proposals: {
+      proposalsById: {
         1: { },
       },
     };
@@ -26,7 +26,7 @@ describe('Proposal Reducer', () => {
       posts,
     });
     expect(newState).to.eql({
-      proposals: {
+      proposalsById: {
         1: {
           posts,
         },
