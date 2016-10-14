@@ -9,8 +9,8 @@ import IntlData from '../../../translations/FR';
 describe('<ProposalPreviewFooter />', () => {
   const proposal = {
     comments_count: 3,
+    votesCount: 1,
     votesCountByStepId: {
-      1: 1,
       42: 5,
     },
   };
@@ -26,23 +26,19 @@ describe('<ProposalPreviewFooter />', () => {
     const wrapper = shallow(<ProposalPreviewFooter {...props} />);
     const footer = wrapper.find('div.proposal__footer');
     expect(footer).to.have.length(1);
-
     const countersDiv = footer.find('div.proposal__counters');
     expect(countersDiv).to.have.length(1);
     expect(countersDiv.find('div.proposal__counter')).to.have.length(1);
-    expect(countersDiv.find('div.proposal__counter--votes')).to.have.length(0);
-
     const commentsCounter = countersDiv.find('div.proposal__counter--comments');
     expect(commentsCounter).to.have.length(1);
     expect(commentsCounter.find('.proposal__counter__value').text()).to.equal('3');
+    expect(countersDiv.find('div.proposal__counter--votes')).to.have.length(0);
   });
 
   it('should render a footer with comment and votes counters', () => {
     const wrapper = shallow(<ProposalPreviewFooter {...props} showVotes />);
-    console.log(wrapper.debug());
     const footer = wrapper.find('div.proposal__footer');
     expect(footer).to.have.length(1);
-
     const countersDiv = footer.find('div.proposal__counters');
     expect(countersDiv).to.have.length(1);
     expect(countersDiv.find('div.proposal__counter')).to.have.length(2);
@@ -51,7 +47,8 @@ describe('<ProposalPreviewFooter />', () => {
     expect(commentsCounter.find('.proposal__counter__value').text()).to.equal('3');
     const votesCounter = countersDiv.find('div.proposal__counter--votes');
     expect(votesCounter).to.have.length(1);
-    expect(votesCounter.find('.proposal__counter__value').text()).to.equal(`${proposal.votesCount}`);
+    const expectedVotes = proposal.votesCount;
+    expect(votesCounter.find('.proposal__counter__value').text()).to.equal(`${expectedVotes}`);
   });
 
   it('should render a footer with comment and votes counters when selection step is specified', () => {
