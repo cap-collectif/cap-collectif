@@ -357,13 +357,8 @@ jms_serializer:
 
 limenius_react:
     serverside_rendering:
-        # In case of error in server-side rendering, throw exception
         fail_loud: false
-        # Replay every console.log message produced during server-side rendering
-        # in the JavaScript console
-        # Note that if enabled it will throw a (harmless) React warning
-        trace: false
-        # Location of the server bundle, that contains React and React on Rails.
+        trace: true
         server_bundle_path: "%kernel.root_dir%/../web/js/server-bundle.js"
 
 exercise_html_purifier:

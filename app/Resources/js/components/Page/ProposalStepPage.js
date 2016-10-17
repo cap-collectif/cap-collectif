@@ -16,7 +16,7 @@ export const ProposalStepPage = React.createClass({
   propTypes: {
     step: PropTypes.object.isRequired,
     count: PropTypes.number.isRequired,
-    form: PropTypes.object.isRequired,
+    form: PropTypes.object,
     statuses: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     proposals: PropTypes.array.isRequired,
@@ -59,7 +59,6 @@ export const ProposalStepPage = React.createClass({
           />
         }
         <ProposalListFilters
-          id={form.id}
           statuses={statuses}
           categories={categories}
           orderByVotes={step.voteType !== VOTE_TYPE_DISABLED}

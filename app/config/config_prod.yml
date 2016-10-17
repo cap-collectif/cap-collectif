@@ -32,3 +32,8 @@ monolog:
         console:
             type: console
             bubble: false
+
+limenius_react:
+    serverside_rendering:
+        fail_loud: true
+        trace: false
