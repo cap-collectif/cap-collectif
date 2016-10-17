@@ -12,7 +12,7 @@ class Version20161014160001 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('UPDATE votes SET voteType = \'proposalSelection\' where v.voteType = \'proposal\';');
+        $this->addSql('UPDATE votes SET voteType = \'proposalSelection\' where voteType = \'proposal\';');
     }
 
     /**
