@@ -8,6 +8,11 @@ framework:
     profiler:
         only_exceptions: false
 
+limenius_react:
+    serverside_rendering:
+        fail_loud: false
+        trace: false
+
 web_profiler:
     toolbar: true
     intercept_redirects: false

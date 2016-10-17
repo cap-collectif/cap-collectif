@@ -32,11 +32,10 @@ const NavbarRight = React.createClass({
     return (
       <Nav pullRight style={{ marginRight: 0 }}>
         {
-          features.search
-          ? <NavItem eventKey={1} className="navbar__search" href="/search">
+          features.search &&
+            <NavItem eventKey={1} className="navbar__search" href="/search">
               <i className="cap cap-magnifier"></i> <span className="visible-xs">{ this.getIntlMessage('navbar.search') }</span>
             </NavItem>
-          : null
         }
         {
           user
@@ -54,18 +53,16 @@ const NavbarRight = React.createClass({
               id="navbar-username"
           >
               {
-                user.isAdmin
-                ? <MenuItem key={3.1} eventKey={3.1} href="/admin">
+                user.isAdmin &&
+                  <MenuItem key={3.1} eventKey={3.1} href="/admin">
                     { this.getIntlMessage('navbar.admin') }
                   </MenuItem>
-                : null
               }
               {
-                features.profiles
-                ? <MenuItem key={3.2} eventKey={3.2} href="/profile">
-                  { this.getIntlMessage('navbar.profile') }
-                </MenuItem>
-                : null
+                features.profiles &&
+                  <MenuItem key={3.2} eventKey={3.2} href="/profile">
+                    { this.getIntlMessage('navbar.profile') }
+                  </MenuItem>
               }
               <MenuItem key={3.3} eventKey={3.3} href={`/profile/${features.profiles ? 'edit-profile' : 'edit-account'}`}>
                 { this.getIntlMessage('navbar.user_settings') }

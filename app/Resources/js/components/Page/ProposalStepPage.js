@@ -16,7 +16,7 @@ export const ProposalStepPage = React.createClass({
   propTypes: {
     step: PropTypes.object.isRequired,
     count: PropTypes.number.isRequired,
-    form: PropTypes.object,
+    form: PropTypes.object.isRequired,
     statuses: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     proposals: PropTypes.array.isRequired,

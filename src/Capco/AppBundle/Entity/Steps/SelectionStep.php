@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Model\IndexableInterface;
+use Capco\AppBundle\Entity\ProposalForm;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionStepRepository")
@@ -154,13 +155,11 @@ class SelectionStep extends AbstractStep implements IndexableInterface
         return true;
     }
 
-    public function getProposalForm()
+    public function getProposalForm(): ProposalForm
     {
-        if (count($this->getSelections()) > 0) {
-            return $this->getSelections()[0]->getProposal()->getProposalForm();
-        }
-
-        return;
+        return $this->getProject()->getExportableSteps()->filter(function(AbstractStep $step) {
+          return $step->isCollectStep();
+        })[0]->getProposalForm();
     }
 
     public function getProposals()

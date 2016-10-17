@@ -119,12 +119,12 @@ const Navbar = React.createClass({
                 })
               }
               {
-                moreItem
-                && <NavbarItem
-                  item={moreItem}
-                  ref={(c) => this.seeMoreDropdown = c}
-                  className="navbar-dropdown-more"
-                />
+                moreItem &&
+                  <NavbarItem
+                    item={moreItem}
+                    ref={(c) => this.seeMoreDropdown = c}
+                    className="navbar-dropdown-more"
+                  />
               }
               </Nav>
               <NavbarRight ref={(c) => this.navright = c} />

@@ -399,9 +399,8 @@ class StepController extends Controller
             );
 
         $form = $step->getProposalForm();
-
-        $showThemes = $form ? $form->isUsingThemes() : false;
-        $categories = $form ? $form->getCategories() : [];
+        $showThemes = $form->isUsingThemes();
+        $categories = $form->getCategories();
 
         $props = $serializer->serialize([
             'step' => $step,
