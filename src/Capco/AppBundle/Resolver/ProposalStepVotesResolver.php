@@ -249,20 +249,4 @@ class ProposalStepVotesResolver
     {
         return count($this->getVotableStepsNotFutureForProject($project)) > 0;
     }
-
-    // public function getVotesCountForUserInSelectionStep(User $user, SelectionStep $step)
-    // {
-    //     return $this
-    //         ->proposalSelectionVoteRepository
-    //         ->countForUserAndStep($user, $step)
-    //     ;
-    // }
-
-    // public function getVotesForUserInSelectionStep(User $user, SelectionStep $step)
-    // {
-    //     return $this
-    //         ->proposalSelectionVoteRepository
-    //         ->InCollectStep($user, $step)
-    //     ;
-    // }
 }
