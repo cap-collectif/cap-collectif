@@ -3,7 +3,7 @@
 echo "Starting rabbitmq consumers..."
 
 su capco -c "php bin/console swarrot:consume:proposal_create proposal_create --env=prod --requeue-on-error &"
-su capco -c "php bin/console swarrot:consume:proposal_update proposal_update --env=prod &"
-su capco -c "php bin/console swarrot:consume:proposal_delete proposal_delete --env=prod &"
+su capco -c "php bin/console swarrot:consume:proposal_update proposal_update --env=prod --requeue-on-error &"
+su capco -c "php bin/console swarrot:consume:proposal_delete proposal_delete --env=prod --requeue-on-error &"
 
 echo "Rabbitmq consumers are up!"

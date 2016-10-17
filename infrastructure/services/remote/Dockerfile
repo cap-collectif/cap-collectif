@@ -211,7 +211,7 @@ COPY redis/run                  /etc/service/redis/run
 COPY cron/run                   /etc/service/cron/run
 COPY elasticsearch/run          /etc/service/elasticsearch/run
 COPY varnish/run                /etc/service/varnish/run
-COPY rabbitmq/run                /etc/service/rabbitmq/run
+COPY rabbitmq/run               /etc/service/rabbitmq/run
 
 # Configuration
 COPY mysql/capco.cnf            /etc/mysql/conf.d/capco.cnf
@@ -223,6 +223,9 @@ COPY cron/crontab               /etc/cron.d/crontab
 COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
+
+# Binaries
+COPY rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin
 
 # Daemons
 COPY php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
