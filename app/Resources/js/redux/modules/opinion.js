@@ -171,24 +171,20 @@ export const reducer = (state = initialState, action) => {
       const indexOfCurrentUser = opinion.votes.indexOf(find(opinion.votes, (v) => {
         return v.user && v.user.uniqueId === action.vote.user.uniqueId;
       }));
-      if (!opinion.user_vote) {
-        const opinions = {
-          [action.opinionId]: {
-            ...opinion,
-            ...{
-              ...state.opinions[action.opinionId],
-              votes: [action.vote, ...opinion.votes],
-              userHasVote: true,
-              votesCount: indexOfCurrentUser !== -1 ? opinion.votesCount + 1 : opinion.votesCount,
-              user_vote: action.vote.value,
-            },
+      const opinions = {
+        [action.opinionId]: {
+          ...opinion,
+          ...{
+            ...state.opinions[action.opinionId],
+            votes: indexOfCurrentUser === -1 ? [action.vote, ...opinion.votes] : opinion.votes,
+            userHasVote: true,
+            votesCount: indexOfCurrentUser === -1 ? opinion.votesCount + 1 : opinion.votesCount,
+            user_vote: action.vote.value,
           },
-        };
+        },
+      };
 
-        return { ...state, opinions };
-      }
-
-      return state;
+      return { ...state, opinions };
     }
     case DELETE_OPINION_VOTE_SUCCEEDED: {
       const opinion = state.opinions[action.opinionId];
