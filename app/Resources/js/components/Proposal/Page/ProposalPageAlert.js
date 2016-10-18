@@ -19,15 +19,14 @@ const ProposalPageAlert = React.createClass({
         >
           <strong>{this.getIntlMessage('proposal.trashed.label')}</strong>
           {
-            proposal.trashedReason
-              ? <span>
+            proposal.trashedReason &&
+               <span>
                   {' '}
                   <FormattedMessage
                     message={this.getIntlMessage('proposal.trashed.motive')}
                     motive={proposal.trashedReason}
                   />
-                </span>
-            : null
+              </span>
           }
         </Alert>
       );

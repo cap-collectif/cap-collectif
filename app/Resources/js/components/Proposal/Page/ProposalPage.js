@@ -84,11 +84,11 @@ export const ProposalPage = React.createClass({
                       <span className="badge">{proposal.comments_count}</span>
                     </NavItem>
                     {
-                      showVotesTab
-                      && <NavItem eventKey="votes" className="tabs__pill">
-                        {this.getIntlMessage('proposal.tabs.votes')}
-                        <span className="badge">{votesCount}</span>
-                      </NavItem>
+                      showVotesTab &&
+                        <NavItem eventKey="votes" className="tabs__pill">
+                          {this.getIntlMessage('proposal.tabs.votes')}
+                          <span className="badge">{votesCount}</span>
+                        </NavItem>
                     }
                     <NavItem eventKey="blog" className="tabs__pill">
                       {this.getIntlMessage('proposal.tabs.blog')}
@@ -155,7 +155,7 @@ export const ProposalPage = React.createClass({
                               {
                                 votableSteps.map((step, index) =>
                                   <NavItem key={index} eventKey={index}>
-                                    {step.title} <span className="badge">{proposal.votesCountByStepId[step.id] || 0}</span>
+                                    {step.title} <span className="badge">{proposal.votesCountByStepId[step.id]}</span>
                                   </NavItem>
                                 )
                               }
@@ -182,7 +182,7 @@ export const ProposalPage = React.createClass({
                 </Tab.Content>
               </div>
               {
-                currentVotableStep != null &&
+                currentVotableStep &&
                   <ProposalVoteModal
                       proposal={proposal}
                   />

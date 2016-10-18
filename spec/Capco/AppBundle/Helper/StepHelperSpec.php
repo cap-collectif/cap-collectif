@@ -43,7 +43,7 @@ class StepHelperSpec extends ObjectBehavior
         // if start date is past
         $step->getStartAt()->willReturn((new \DateTime())->modify('-1 weeks'));
         $step->getEndAt()->willReturn(null);
-        $this->getStatus($step)->shouldReturn('open');
+        $this->getStatus($step)->shouldReturn('closed');
 
         $step->getStartAt()->willReturn(null);
         $step->getEndAt()->willReturn(null);
@@ -62,17 +62,17 @@ class StepHelperSpec extends ObjectBehavior
 
         // if no previous steps 
         $projectHelper->getPreviousSteps($step)->willReturn([]);
-        $this->getStatus($step)->shouldReturn('open');
+        $this->getStatus($step)->shouldReturn('closed');
 
         // if no previous steps has dates
         $projectHelper->getPreviousSteps($step)->willReturn([$stepA]);
         $stepA->getStartAt()->willReturn(null);
         $stepA->getEndAt()->willReturn(null);
-        $this->getStatus($step)->shouldReturn('open');
+        $this->getStatus($step)->shouldReturn('closed');
 
         // if previous steps have past dates
         $stepA->getStartAt()->willReturn((new \DateTime())->modify('-1 weeks'));
         $stepA->getEndAt()->willReturn((new \DateTime())->modify('-1 weeks'));
-        $this->getStatus($step)->shouldReturn('open');
+        $this->getStatus($step)->shouldReturn('closed');
     }
 }
