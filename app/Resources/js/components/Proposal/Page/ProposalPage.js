@@ -56,7 +56,8 @@ export const ProposalPage = React.createClass({
   render() {
     const { proposal, form, categories, features, steps } = this.props;
     const currentVotableStep = proposal.votableStepId ? steps.filter(s => s.id === proposal.votableStepId)[0] : null;
-    const showVotesTab = proposal.votesCount > 0 || currentVotableStep !== null;
+    const votesCount = Object.values(proposal.votesCountByStepId).reduce((a, b = 0) => a + b);
+    const showVotesTab = votesCount > 0 || currentVotableStep !== null;
     const votableSteps = steps.filter(step => step.votable);
     return (
         <div>
@@ -86,7 +87,7 @@ export const ProposalPage = React.createClass({
                       showVotesTab
                       && <NavItem eventKey="votes" className="tabs__pill">
                         {this.getIntlMessage('proposal.tabs.votes')}
-                        <span className="badge">{Object.values(proposal.votesCountByStepId).reduce((a, b = 0) => a + b)}</span>
+                        <span className="badge">{votesCount}</span>
                       </NavItem>
                     }
                     <NavItem eventKey="blog" className="tabs__pill">
