@@ -3,6 +3,10 @@
 namespace Capco\AppBundle\Helper;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 
 class StepHelper
 {
@@ -27,6 +31,15 @@ class StepHelper
 
         if (!$step->getEndAt() && !$step->getStartAt()) {
             $previousSteps = $this->projectHelper->getPreviousSteps($step);
+
+            if (
+                $step instanceof CollectStep
+                || $step instanceof  SelectionStep
+                || $step instanceof ConsultationStep
+                || $step instanceof QuestionnaireStep
+            ) {
+                return 'open';
+            }
 
             foreach ($previousSteps as $previousStep) {
                 if ($previousStep->getStartAt() > $now || $previousStep->getEndAt() > $now) {
