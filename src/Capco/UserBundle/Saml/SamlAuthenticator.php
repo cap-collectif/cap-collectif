@@ -7,7 +7,6 @@ use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
 use Hslavich\SimplesamlphpBundle\Exception\MissingSamlAuthAttributeException;
 use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\Security\Core\User\UserProviderInterface;

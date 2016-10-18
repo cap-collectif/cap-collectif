@@ -19,6 +19,7 @@ class DefaultController extends Controller
     public function loginSamlAction(Request $request)
     {
         $destination = $request->query->get('_destination') ?? $this->generateUrl('app_homepage');
+
         return $this->redirect($destination);
     }
 

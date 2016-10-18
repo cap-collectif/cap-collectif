@@ -18,8 +18,7 @@ use JMS\Serializer\SerializationContext;
  */
 class ProfileController extends BaseController
 {
-
-  /**
+    /**
    * @Route("/edit-profile", name="capco_profile_edit", defaults={"_feature_flags" = "profiles"})
    * @Template("CapcoUserBundle:Profile:edit_profile.html.twig")
    * @Security("has_role('ROLE_USER')")
@@ -89,25 +88,28 @@ class ProfileController extends BaseController
       ];
   }
 
-    private function getProposalsProps(User $user) {
-      $proposalsWithStep = $this
+    private function getProposalsProps(User $user)
+    {
+        $proposalsWithStep = $this
           ->getDoctrine()->getRepository('CapcoAppBundle:Proposal')
           ->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user)
       ;
-      $proposalsCount = array_reduce($proposalsWithStep, function($sum, $item) {
-        $sum += count($item['proposals']);
-        return $sum;
-      });
-      $proposalsPropsBySteps = [];
-      foreach ($proposalsWithStep as $key => $value) {
-        $proposalsPropsBySteps[$key] = json_decode($this->get('jms_serializer')->serialize($value, 'json', SerializationContext::create()->setGroups(['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])), true);
-      }
-      return [
+        $proposalsCount = array_reduce($proposalsWithStep, function ($sum, $item) {
+            $sum += count($item['proposals']);
+
+            return $sum;
+        });
+        $proposalsPropsBySteps = [];
+        foreach ($proposalsWithStep as $key => $value) {
+            $proposalsPropsBySteps[$key] = json_decode($this->get('jms_serializer')->serialize($value, 'json', SerializationContext::create()->setGroups(['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])), true);
+        }
+
+        return [
         'proposalsPropsBySteps' => $proposalsPropsBySteps,
         'proposalsCount' => $proposalsCount,
       ];
     }
-    
+
     /**
      * @Route("/", name="capco_user_profile_show", defaults={"_feature_flags" = "profiles"})
      * @Route("/{slug}", name="capco_user_profile_show_all", defaults={"_feature_flags" = "profiles"})
@@ -117,7 +119,7 @@ class ProfileController extends BaseController
     public function showAction(User $user = null)
     {
         if (!$user) {
-          $user = $this->get('security.token_storage')->getToken()->getUser();
+            $user = $this->get('security.token_storage')->getToken()->getUser();
         }
 
         $doctrine = $this->getDoctrine();
