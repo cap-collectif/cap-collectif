@@ -19,32 +19,24 @@ class StepHelper
     {
         $now = new \DateTime();
 
-        if ($step->getStartAt() && $step->getStartAt() > $now) {
-            return 'future';
-        }
-
-        if ($step->getStartAt() && !$step->getEndAt() && $step->getStartAt() < $now) {
-            return 'open';
-        }
-
-        if (!$step->getEndAt() && !$step->getStartAt()) {
-            $previousSteps = $this->projectHelper->getPreviousSteps($step);
-
-            foreach ($previousSteps as $previousStep) {
-                if ($previousStep->getStartAt() > $now || $previousStep->getEndAt() > $now) {
+        if ($step->getStartAt()) {
+            if ($step->getEndAt()) {
+                if ($step->getStartAt() > $now) {
                     return 'future';
                 }
+
+                return $step->getEndAt() > $now ? 'open' : 'closed';
             }
 
-            return 'open';
+            return $step->getStartAt() > $now ? 'future' : 'closed';
         }
 
-        if (!$step->getStartAt() && $step->getEndAt() > $now) {
-            return 'open';
-        }
+        $previousSteps = $this->projectHelper->getPreviousSteps($step);
 
-        if ($step->getStartAt() && $step->getStartAt() < $now && $step->getEndAt() > $now) {
-            return 'open';
+        foreach ($previousSteps as $previousStep) {
+            if ($previousStep->getStartAt() > $now || $previousStep->getEndAt() > $now) {
+                return 'future';
+            }
         }
 
         return 'closed';

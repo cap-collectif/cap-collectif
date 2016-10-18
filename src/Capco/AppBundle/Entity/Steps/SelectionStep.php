@@ -157,9 +157,17 @@ class SelectionStep extends AbstractStep implements IndexableInterface
 
     public function getProposalForm(): ProposalForm
     {
-        return $this->getProject()->getExportableSteps()->filter(function(AbstractStep $step) {
-          return $step->isCollectStep();
-        })[0]->getProposalForm();
+            $step = (new ArrayCollection($this->getProject()->getExportableSteps()))
+                ->filter(function(ProjectAbstractStep $step) {
+                    return $step->getStep()->isCollectStep();
+                })
+                ->first();
+
+            if ($step) {
+                return $step->getStep()->getProposalForm();
+            }
+
+            throw new \Exception('No proposalForm found for this selection step');
     }
 
     public function getProposals()
