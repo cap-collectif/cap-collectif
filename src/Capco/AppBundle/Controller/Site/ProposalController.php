@@ -4,15 +4,12 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\ProposalCollectVote;
-use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use JMS\Serializer\SerializationContext;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class ProposalController extends Controller

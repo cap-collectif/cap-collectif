@@ -13,13 +13,12 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\Common\Collections\Collection;
 
 class ProposalRepository extends EntityRepository
 {
-  public function getProposalsGroupedByCollectSteps(User $user, bool $onlyVisible = false): array
-  {
-    $qb = $this->getIsEnabledQueryBuilder()
+    public function getProposalsGroupedByCollectSteps(User $user, bool $onlyVisible = false): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
         ->addSelect('district', 'status', 'theme', 'form', 'step')
         ->leftJoin('proposal.district', 'district')
         ->leftJoin('proposal.status', 'status')
@@ -30,28 +29,29 @@ class ProposalRepository extends EntityRepository
         ->setParameter('author', $user)
     ;
 
-    $results = $qb->getQuery()->getResult();
+        $results = $qb->getQuery()->getResult();
 
-    if ($onlyVisible) {
-      $results = array_filter($results, function ($proposal) {
-        return $proposal->isVisible();
-      });
-    }
+        if ($onlyVisible) {
+            $results = array_filter($results, function ($proposal) {
+                return $proposal->isVisible();
+            });
+        }
 
-    $proposalsWithStep = [];
-    foreach ($results as $result) {
-        $collectStep = $result->getProposalForm()->getStep();
-        if (array_key_exists($collectStep->getId(), $proposalsWithStep)) {
-          array_push($proposalsWithStep[$collectStep->getId()]['proposals'], $result);
-        } else {
-          $proposalsWithStep[$collectStep->getId()] = [
+        $proposalsWithStep = [];
+        foreach ($results as $result) {
+            $collectStep = $result->getProposalForm()->getStep();
+            if (array_key_exists($collectStep->getId(), $proposalsWithStep)) {
+                array_push($proposalsWithStep[$collectStep->getId()]['proposals'], $result);
+            } else {
+                $proposalsWithStep[$collectStep->getId()] = [
               'step' => $collectStep,
               'proposals' => [$result],
           ];
-       }
+            }
+        }
+
+        return $proposalsWithStep;
     }
-    return $proposalsWithStep;
-  }
 
     public function countByUser(User $user): int
     {
@@ -73,8 +73,7 @@ class ProposalRepository extends EntityRepository
       Status $status = null,
       District $district = null,
       UserType $type = null
-    )
-    {
+    ) {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author', 'amedia', 'theme', 'status', 'district')
             ->leftJoin('proposal.author', 'author')

@@ -35,8 +35,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
       Serializer $serializer,
       ProposalCollectVoteRepository $proposalCollectVoteRepository,
       ProposalStepVotesResolver $voteResolver
-    )
-    {
+    ) {
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -108,8 +107,8 @@ class ProposalSerializationListener extends AbstractSerializationListener
 
         $votesByStepId = [];
         foreach ($proposal->getSelectionStepsIds() as $value) {
-          $votesByStepId[$value] = [];
-        };
+            $votesByStepId[$value] = [];
+        }
         $votesByStepId[$proposal->getProposalForm()->getStep()->getId()] = [];
         $event->getVisitor()->addData('votesByStepId', $votesByStepId);
 
