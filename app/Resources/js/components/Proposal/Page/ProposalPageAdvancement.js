@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import ProposalDetailAdvancement from '../Detail/ProposalDetailAdvancement';
 
-const ProposalPageMetadata = React.createClass({
+const ProposalPageAdvancement = React.createClass({
   displayName: 'ProposalPageAdvancement',
   propTypes: {
     proposal: PropTypes.object.isRequired,
@@ -24,4 +24,4 @@ const ProposalPageMetadata = React.createClass({
 
 });
 
-export default ProposalPageMetadata;
+export default ProposalPageAdvancement;

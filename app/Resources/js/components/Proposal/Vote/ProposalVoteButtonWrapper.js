@@ -85,12 +85,13 @@ export const ProposalVoteButtonWrapper = React.createClass({
 });
 
 const mapStateToProps = (state, props) => {
-  const step = state.project.currentProjectById && props.proposal.votableStepId
+  const step = (state.project.currentProjectById && props.proposal.votableStepId)
     ? state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)[0]
     : null;
+  const user = state.default.user;
   return {
-    user: state.default.user,
-    userHasVote: state.default.user && step !== null && state.proposal.userVotesByStepId[step.id].includes(props.proposal.id),
+    user,
+    userHasVote: !!(user && step && state.proposal.userVotesByStepId[step.id].includes(props.proposal.id)),
     creditsLeft: step ? state.proposal.creditsLeftByStepId[step.id] : null,
     step,
   };

@@ -220,10 +220,11 @@ class SearchResolver
                 $sortOrder = 'desc';
                 break;
             case 'votes':
-                $sortField = $providedFilters['step']
-                    ? 'votesCountByStepId.'.$providedFilters['step']
-                    : 'created_at'
-                ;
+                $sortField = 'created_at';
+                // $providedFilters['step']
+                    // ? 'votesCountByStepId.'.$providedFilters['step']
+                    // : 'created_at'
+                // ;
                 $sortOrder = 'desc';
                 break;
             case 'comments':

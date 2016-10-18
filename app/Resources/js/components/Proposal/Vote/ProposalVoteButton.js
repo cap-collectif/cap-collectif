@@ -78,7 +78,7 @@ const ProposalVoteButton = React.createClass({
 const mapStateToProps = (state, props) => {
   return {
     isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
-    userHasVote: props.step !== null && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
+    userHasVote: !!(props.step && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id)),
   };
 };
 

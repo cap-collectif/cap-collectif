@@ -121,7 +121,7 @@ export const ProposalPage = React.createClass({
                             proposal={proposal}
                             showDistricts={features.districts}
                             showCategories={form.usingCategories}
-                            showNullEstimation={currentVotableStep && currentVotableStep.voteType === VOTE_TYPE_BUDGET}
+                            showNullEstimation={!!(currentVotableStep && currentVotableStep.voteType === VOTE_TYPE_BUDGET)}
                         />
                         <br />
                         {
