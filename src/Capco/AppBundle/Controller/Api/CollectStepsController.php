@@ -32,28 +32,28 @@ class CollectStepsController extends FOSRestController
      */
     public function getProposalsByCollectStepAction(Request $request, CollectStep $collectStep, ParamFetcherInterface $paramFetcher)
     {
-        $proposalForm = $collectStep->getProposalForm();
-        $page = intval($paramFetcher->get('page'));
-        $pagination = intval($paramFetcher->get('pagination'));
-        $order = $paramFetcher->get('order');
-        $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
+      $proposalForm = $collectStep->getProposalForm();
+      $page = intval($paramFetcher->get('page'));
+      $pagination = intval($paramFetcher->get('pagination'));
+      $order = $paramFetcher->get('order');
+      $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
 
-        if ($proposalForm->getStep()->isPrivate()) {
-            if (!$this->getUser()) {
-                return ['proposals' => [], 'count' => 0, 'order' => $order];
-            }
+      if ($proposalForm->getStep()->isPrivate()) {
+          if (!$this->getUser()) {
+              return ['proposals' => [], 'count' => 0, 'order' => $order];
+          }
 
-            $providedFilters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
-        }
+          $providedFilters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
+      }
 
-        $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
+      $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
 
       // Filters
       $providedFilters['proposalForm'] = $proposalForm->getId();
 
-        $results = $this->get('capco.search.resolver')->searchProposals($page, $pagination, $order, $terms, $providedFilters);
+      $results = $this->get('capco.search.resolver')->searchProposals($page, $pagination, $order, $terms, $providedFilters);
 
-        return $results;
+      return $results;
     }
 
     /**

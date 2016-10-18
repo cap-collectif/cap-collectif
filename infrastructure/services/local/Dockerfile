@@ -2,8 +2,6 @@ FROM debian:jessie
 
 MAINTAINER Aurélien David <adavid@jolicode.com>
 
-RUN sed -i 's/httpredir.debian.org/debian.mirrors.ovh.net/g' /etc/apt/sources.list
-
 # Install basic
 RUN apt-get update && \
     apt-get install -y -qq --fix-missing \
@@ -153,7 +151,7 @@ COPY php-fpm/run                /etc/service/php-fpm/run
 COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
 COPY blackfire/run              /etc/service/blackfire/run
-COPY rabbitmq/run              /etc/service/rabbitmq/run
+COPY rabbitmq/run               /etc/service/rabbitmq/run
 
 # Configuration
 COPY nginx/nginx.conf           /etc/nginx/nginx.conf

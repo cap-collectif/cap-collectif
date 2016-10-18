@@ -7,21 +7,24 @@
     queues:
         proposal_create:
             durable: true
-            retries: [0]
+            delay: 5000
+            retries: [25, 125, 625]
             bindings:
                 -
                     exchange: capco_direct_exchange
                     routing_key: proposal_create
         proposal_update:
             durable: true
-            retries: [0]
+            delay: 5000
+            retries: [25, 125, 625]
             bindings:
                 -
                     exchange: capco_direct_exchange
                     routing_key: proposal_update
         proposal_delete:
            durable: true
-           retries: [0]
+           delay: 5000
+           retries: [25, 125, 625]
            bindings:
                -
                    exchange: capco_direct_exchange

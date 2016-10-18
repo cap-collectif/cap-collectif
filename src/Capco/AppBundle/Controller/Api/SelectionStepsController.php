@@ -17,6 +17,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Symfony\Component\HttpFoundation\Response;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;

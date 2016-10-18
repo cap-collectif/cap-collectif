@@ -10,6 +10,7 @@ use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -269,7 +270,7 @@ class Proposal implements Contribution, CommentableInterface
     {
         $this->district = $district;
         if ($district) {
-            $district->addProposal($this);
+          $district->addProposal($this);
         }
 
         return $this;
@@ -517,7 +518,6 @@ class Proposal implements Contribution, CommentableInterface
         foreach ($this->collectVotes as $vote) {
             $this->removeVote($vote);
         }
-
         return $this;
     }
 
@@ -578,7 +578,6 @@ class Proposal implements Contribution, CommentableInterface
             $this->progressSteps->add($progressStep);
             $progressStep->setProposal($this);
         }
-
         return $this;
     }
 
@@ -587,7 +586,6 @@ class Proposal implements Contribution, CommentableInterface
         if ($this->collectVotes->contains($vote)) {
             $this->collectVotes->removeElement($vote);
         }
-
         return $this;
     }
 
@@ -596,7 +594,6 @@ class Proposal implements Contribution, CommentableInterface
         if ($this->progressSteps->contains($progressStep)) {
             $this->progressSteps->removeElement($progressStep);
         }
-
         return $this;
     }
 

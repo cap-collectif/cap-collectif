@@ -50,7 +50,7 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
         //     $event->getVisitor()->addData(
         //         'userVotesCount', $this->proposalStepVotesResolver->getVotesCountForUserInSelectionStep($user, $step)
         //     );
-
+        //
         //     $userVotes = $this->serializer->serialize([
         //         'data' => $this
         //             ->proposalStepVotesResolver
