@@ -9,6 +9,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
   displayName: 'ProposalVoteButtonWrapper',
   propTypes: {
     proposal: PropTypes.object.isRequired,
+    userHasVote: PropTypes.bool.isRequired,
     step: PropTypes.object,
     creditsLeft: PropTypes.number,
     user: PropTypes.object,
@@ -18,16 +19,9 @@ export const ProposalVoteButtonWrapper = React.createClass({
 
   getDefaultProps() {
     return {
-      creditsLeft: null,
-      user: null,
       style: {},
       className: '',
     };
-  },
-
-  voteThresholdReached() {
-    const { step, proposal } = this.props;
-    return step && step.voteThreshold <= proposal.votesCount;
   },
 
   userHasEnoughCredits() {
@@ -35,14 +29,14 @@ export const ProposalVoteButtonWrapper = React.createClass({
       creditsLeft,
       proposal,
     } = this.props;
-    if (!proposal.userHasVote && creditsLeft !== null && !!proposal.estimation) {
+    if (creditsLeft !== null && !!proposal.estimation) {
       return creditsLeft >= proposal.estimation;
     }
     return true;
   },
 
   render() {
-    const { user, step, proposal, style, className } = this.props;
+    const { user, step, proposal, style, className, userHasVote } = this.props;
     if (step && step.voteType === VOTE_TYPE_SIMPLE) {
       return (
         <ProposalVoteButton
@@ -60,7 +54,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
       return (
         <VoteButtonOverlay
             popoverId={`vote-tooltip-proposal-${proposal.id}`}
-            show={!this.userHasEnoughCredits()}
+            show={!userHasVote && !this.userHasEnoughCredits()}
         >
           <ProposalVoteButton
             proposal={proposal}
@@ -91,11 +85,14 @@ export const ProposalVoteButtonWrapper = React.createClass({
 });
 
 const mapStateToProps = (state, props) => {
+  const step = state.project.currentProjectById && props.proposal.votableStepId
+    ? state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)[0]
+    : null;
   return {
     user: state.default.user,
-    step: state.project.currentProjectById && props.proposal.votableStepId
-      ? state.project.projects[state.project.currentProjectById].steps.filter(step => step.id === props.proposal.votableStepId)[0]
-      : null,
+    userHasVote: state.default.user && step !== null && state.proposal.userVotesByStepId[step.id].includes(props.proposal.id),
+    creditsLeft: step ? state.proposal.creditsLeftByStepId[step.id] : null,
+    step,
   };
 };
 

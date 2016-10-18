@@ -29,7 +29,7 @@ const ProposalPageVotes = React.createClass({
 
   render() {
     const { proposal, stepId, showModal, dispatch } = this.props;
-    const votes = proposal.votesByStepId[stepId] || [];
+    const votes = proposal.votesByStepId[stepId];
     const votesCount = proposal.votesCountByStepId[stepId];
     const votesToDisplay = votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
     const moreVotes = votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
@@ -48,9 +48,9 @@ const ProposalPageVotes = React.createClass({
         </h2>
         <Row>
           {
-            votesToDisplay.map((vote, index) =>
+            votesToDisplay.map((vote, key) =>
               <UserBox
-                key={index}
+                key={key}
                 user={vote.user}
                 username={vote.username}
                 className="proposal__vote"
