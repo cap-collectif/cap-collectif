@@ -138,7 +138,7 @@ class ProposalStepVotesResolver
         }
         if ($step instanceof CollectStep) {
             $votes = $this
-              - $proposalCollectVoteRepository
+              ->proposalCollectVoteRepository
               ->findBy(
                   [
                       'collectStep' => $step,
