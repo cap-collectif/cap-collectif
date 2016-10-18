@@ -29,9 +29,9 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
     {
         if ($this->force) {
             if ($native) {
-                $this->em->getConnection()->executeUpdate($dql);
+              $this->em->getConnection()->executeUpdate($dql);
             } else {
-                $this->em->createQuery($dql)->execute();
+              $this->em->createQuery($dql)->execute();
             }
         } else {
             $this->executeOnlyChangesFromLastRun($dql);

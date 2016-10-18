@@ -12,12 +12,12 @@ use Capco\UserBundle\Entity\User;
  */
 class ProposalCollectVoteRepository extends EntityRepository
 {
-    public function getUserVotesGroupedByStepIds(array $collectStepsIds, User $user = null): array
-    {
+  public function getUserVotesGroupedByStepIds(array $collectStepsIds, User $user = null): array
+  {
         $userVotes = [];
         if ($user) {
-            foreach ($collectStepsIds as $id) {
-                $qb = $this->createQueryBuilder('pv')
+          foreach ($collectStepsIds as $id) {
+            $qb = $this->createQueryBuilder('pv')
               ->select('proposal.id')
               ->andWhere('pv.collectStep = :id')
               ->andWhere('pv.user = :user')
@@ -25,17 +25,17 @@ class ProposalCollectVoteRepository extends EntityRepository
               ->setParameter('user', $user)
               ->setParameter('id', $id)
               ;
-                $results = $qb->getQuery()->getScalarResult();
-                $userVotes[$id] = array_map(function ($id) {
-                    return intval($id);
-                }, array_column($results, 'id'));
-            }
+            $results = $qb->getQuery()->getScalarResult();
+            $userVotes[$id] = array_map(function($id) {
+              return intval($id);
+            }, array_column($results, 'id'));
+          }
         }
 
         foreach ($collectStepsIds as $id) {
-            if (!array_key_exists($id, $userVotes)) {
-                $userVotes[$id] = [];
-            }
+          if (!array_key_exists($id, $userVotes)) {
+            $userVotes[$id] = [];
+          }
         }
 
         return $userVotes;
@@ -59,7 +59,7 @@ class ProposalCollectVoteRepository extends EntityRepository
 
         $id = $proposal->getProposalForm()->getStep()->getId();
         if (!array_key_exists($id, $votesBySteps)) {
-            $votesBySteps[$id] = 0;
+          $votesBySteps[$id] = 0;
         }
 
         return $votesBySteps;

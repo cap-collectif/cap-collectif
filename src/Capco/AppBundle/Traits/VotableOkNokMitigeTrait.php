@@ -63,7 +63,7 @@ trait VotableOkNokMitigeTrait
     public function getVoteValueByUser(User $user = null)
     {
         if (!$user) {
-            return null;
+          return null;
         }
         foreach ($this->votes as $vote) {
             if ($vote->getUser() === $user) {

@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\MediaBundle\Entity\Media;
+use Capco\AppBundle\Model\IndexableInterface;
 use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 
@@ -29,7 +30,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setSamlAttributes(array $attributes)
     {
         if (!$this->getUsername()) {
-            $this->setUsername($attributes['oda_prenom'][0].' '.$attributes['oda_nom'][0]);
+            $this->setUsername($attributes['oda_prenom'][0] . ' ' . $attributes['oda_nom'][0]);
         }
     }
 
