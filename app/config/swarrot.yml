@@ -23,7 +23,7 @@ swarrot:
         retry: 'Swarrot\Processor\Retry\RetryProcessor'
         exception_catcher: 'Swarrot\Processor\ExceptionCatcher\ExceptionCatcherProcessor'
         ack: 'Swarrot\Processor\Ack\AckProcessor'
-        object_manager: 'Swarrot\Processor\Doctrince\ObjectManagerProcessor'
+        object_manager: 'Swarrot\Processor\Doctrine\ObjectManagerProcessor'
     consumers:
         proposal_create:
             processor: proposal_create.processor
