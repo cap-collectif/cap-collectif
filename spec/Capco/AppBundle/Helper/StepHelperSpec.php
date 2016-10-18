@@ -2,6 +2,8 @@
 
 namespace spec\Capco\AppBundle\Helper;
 
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Helper\ProjectHelper;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -16,7 +18,14 @@ class StepHelperSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Helper\StepHelper');
     }
 
-    function it_can_guess_opening_status(AbstractStep $step, ProjectHelper $projectHelper, AbstractStep $stepA, AbstractStep $stepB)
+    function it_can_guess_opening_status(
+        AbstractStep $step,
+        CollectStep $collectStep,
+        PresentationStep $presentationStep,
+        ProjectHelper $projectHelper,
+        AbstractStep $stepA,
+        AbstractStep $stepB
+    )
     {
         $this->beConstructedWith($projectHelper);
 
@@ -63,6 +72,12 @@ class StepHelperSpec extends ObjectBehavior
         // if no previous steps 
         $projectHelper->getPreviousSteps($step)->willReturn([]);
         $this->getStatus($step)->shouldReturn('open');
+
+        // if no previous steps and Step is a votable step
+        $collectStep->getStartAt()->willReturn(null);
+        $collectStep->getEndAt()->willReturn(null);
+        $projectHelper->getPreviousSteps($collectStep)->willReturn([]);
+        $this->getStatus($collectStep)->shouldReturn('open');
 
         // if no previous steps has dates
         $projectHelper->getPreviousSteps($step)->willReturn([$stepA]);

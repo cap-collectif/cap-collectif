@@ -13,20 +13,33 @@ const ProposalDetailAdvancementStep = React.createClass({
   },
   mixins: [IntlMixin],
 
+  isTimeless() {
+    const { step } = this.props;
+    return !step.endAt && !step.startAt && !step.progressStep;
+  },
+
   renderDate() {
     const { step } = this.props;
-    if (!step.endAt && !step.startAt) {
-      return this.getIntlMessage('proposal.detail.intervals.continuously');
+
+    if (this.isTimeless()) {
+      if (!step.endAt && !step.startAt) {
+        return this.getIntlMessage('proposal.detail.intervals.continuously');
+      }
+      if (!step.endAt && step.startAt) {
+        return `${this.getIntlMessage('proposal.detail.intervals.from')} ${step.startAt}`;
+      }
+      if (step.endAt && !step.startAt) {
+        return `${this.getIntlMessage('proposal.detail.intervals.until')} ${step.endAt}`;
+      }
+      if (step.startAt && step.endAt) {
+        return `${step.startAt} - ${step.endAt}`;
+      }
     }
-    if (!step.endAt && step.startAt) {
-      return `${this.getIntlMessage('proposal.detail.intervals.from')} ${step.startAt}`;
+
+    if (!step.endAt) {
+      return step.startAt;
     }
-    if (step.endAt && !step.startAt) {
-      return `${this.getIntlMessage('proposal.detail.intervals.until')} ${step.endAt}`;
-    }
-    if (step.startAt && step.endAt) {
-      return `${step.startAt} - ${step.endAt}`;
-    }
+    return `${step.startAt} - ${step.endAt}`;
   },
 
   render() {

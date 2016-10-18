@@ -19,27 +19,25 @@ swarrot:
             exchange: capco_direct_exchange
             routing_key: proposal_delete
     processors_stack:
+        doctrine_connection: 'Swarrot\Processor\Doctrince\ConnectionProcessor'
+        doctrine_om: 'Swarrot\Processor\Doctrince\ObjectManagerProcessor'
         signal_handler: 'Swarrot\Processor\SignalHandler\SignalHandlerProcessor'
         retry: 'Swarrot\Processor\Retry\RetryProcessor'
         exception_catcher: 'Swarrot\Processor\ExceptionCatcher\ExceptionCatcherProcessor'
         ack: 'Swarrot\Processor\Ack\AckProcessor'
-        object_manager: 'Swarrot\Processor\Doctrince\ObjectManagerProcessor'
     consumers:
         proposal_create:
             processor: proposal_create.processor
             extras:
-                requeue_on_error: true
-                # retry_routing_key_pattern: 'proposal_create_retry_%%attempt%%'
-                # retry_attempts: 3
+                retry_routing_key_pattern: 'proposal_create_retry_%%attempt%%'
+                retry_attempts: 3
         proposal_update:
             processor: proposal_update.processor
             extras:
-                requeue_on_error: true
-                # retry_routing_key_pattern: 'proposal_update_retry_%%attempt%%'
-                # retry_attempts: 3
+                retry_routing_key_pattern: 'proposal_update_retry_%%attempt%%'
+                retry_attempts: 3
         proposal_delete:
             processor: proposal_delete.processor
             extras:
-                requeue_on_error: true
-                # retry_routing_key_pattern: 'proposal_delete_retry_%%attempt%%'
-                # retry_attempts: 3
+                retry_routing_key_pattern: 'proposal_delete_retry_%%attempt%%'
+                retry_attempts: 3

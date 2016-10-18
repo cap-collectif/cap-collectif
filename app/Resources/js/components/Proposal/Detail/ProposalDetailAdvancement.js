@@ -59,6 +59,7 @@ const generateProgressStepsWithColorAndStatus = (progressSteps) => {
       }
       isPastCurrent = true;
     }
+
     steps.push({ ...progressStep, ...props });
   }
 
@@ -126,7 +127,7 @@ export const ProposalDetailAdvancement = React.createClass({
             return (
               <ProposalDetailAdvancementStep
                 key={index}
-                step={{ title: step.title, startAt: step.startAt, endAt: step.endAt }}
+                step={{ title: step.title, startAt: step.startAt, endAt: step.endAt, progressStep: false }}
                 status={step.isCurrent ? this.getStatus(step) : null}
                 roundColor={roundColor}
                 borderColor={index + 1 === displayedSteps.length ? null : (displayedSteps[index + 1].isCurrent || displayedSteps[index + 1].isPast ? green : grey)}
@@ -141,6 +142,7 @@ export const ProposalDetailAdvancement = React.createClass({
                               title: progressStep.title,
                               startAt: <FormattedDate value={moment(progressStep.startAt)} day="numeric" month="long" year="numeric" />,
                               endAt: progressStep.endAt ? <FormattedDate value={moment(progressStep.endAt)} day="numeric" month="long" year="numeric" /> : null,
+                              progressStep: true,
                             }}
                             status={progressStep.status}
                             roundColor={progressStep.roundColor}
