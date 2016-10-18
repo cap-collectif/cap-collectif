@@ -2,6 +2,8 @@ FROM debian:jessie
 
 MAINTAINER Bastien Jaillot <bjaillot@jolicode.com>
 
+RUN sed -i 's/httpredir.debian.org/debian.mirrors.ovh.net/g' /etc/apt/sources.list
+
 # Install basic
 RUN apt-get update && \
     apt-get install -y --force-yes -qq --fix-missing \
