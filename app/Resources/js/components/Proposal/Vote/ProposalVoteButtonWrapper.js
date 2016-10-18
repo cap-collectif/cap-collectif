@@ -18,6 +18,8 @@ export const ProposalVoteButtonWrapper = React.createClass({
 
   getDefaultProps() {
     return {
+      creditsLeft: null,
+      user: null,
       style: {},
       className: '',
     };
@@ -33,7 +35,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
       creditsLeft,
       proposal,
     } = this.props;
-    if (creditsLeft !== null && !!proposal.estimation) {
+    if (!proposal.userHasVote && creditsLeft !== null && !!proposal.estimation) {
       return creditsLeft >= proposal.estimation;
     }
     return true;
@@ -89,13 +91,11 @@ export const ProposalVoteButtonWrapper = React.createClass({
 });
 
 const mapStateToProps = (state, props) => {
-  const step = state.project.currentProjectById && props.proposal.votableStepId
-    ? state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)[0]
-    : null;
   return {
     user: state.default.user,
-    creditsLeft: step ? state.proposal.creditsLeftByStepId[step.id] : null,
-    step,
+    step: state.project.currentProjectById && props.proposal.votableStepId
+      ? state.project.projects[state.project.currentProjectById].steps.filter(step => step.id === props.proposal.votableStepId)[0]
+      : null,
   };
 };
 
