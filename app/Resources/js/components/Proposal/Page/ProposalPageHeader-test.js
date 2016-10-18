@@ -27,7 +27,6 @@ describe('<ProposalPageHeader />', () => {
 
   it('should render a proposal header', () => {
     const wrapper = shallow(<ProposalPageHeader proposal={proposal} showThemes {...props} {...IntlData} />);
-    console.log(wrapper.debug());
     const mainDiv = wrapper.find('div.proposal__header');
     expect(mainDiv).to.have.length(1);
     const theme = mainDiv.children().find('p').first();

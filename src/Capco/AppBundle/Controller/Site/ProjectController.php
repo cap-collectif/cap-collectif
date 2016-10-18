@@ -56,14 +56,15 @@ class ProjectController extends Controller
 
         $userVotesByStepIdSerialized = [];
         foreach ($userVotesByStepId as $stepId => $proposals) {
-          $userVotesByStepIdSerialized[$stepId] = [];
-          foreach ($proposals as $proposalId) {
-            array_push(
+            $userVotesByStepIdSerialized[$stepId] = [];
+            foreach ($proposals as $proposalId) {
+                array_push(
               $userVotesByStepIdSerialized[$stepId],
               json_decode($serializer->serialize($proposalRepo->find($proposalId), 'json', SerializationContext::create()->setGroups(['Proposals', 'UsersInfos'])), true)
             );
-          }
+            }
         }
+
         return [
           'project' => $project,
           'props' => ['userVotesByStepId' => $userVotesByStepIdSerialized],

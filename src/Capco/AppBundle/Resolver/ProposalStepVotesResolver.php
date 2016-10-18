@@ -32,8 +32,7 @@ class ProposalStepVotesResolver
       ProposalCollectVoteRepository $proposalCollectVoteRepository,
       CollectStepRepository $collectStepRepository,
       ProposalRepository $proposalRepository
-      )
-    {
+      ) {
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->selectionStepRepository = $selectionStepRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
@@ -44,27 +43,28 @@ class ProposalStepVotesResolver
     public function getUserVotesByStepIdForProject(Project $project, User $user = null)
     {
         $steps = $project->getSteps()->map(function ($step) {
-          return $step->getStep();
+            return $step->getStep();
         });
 
         $userVotesOnSelectionSteps = $this->proposalSelectionVoteRepository
           ->getUserVotesGroupedByStepIds(
-          $steps->filter(function($step) {
-            return $step->isSelectionStep();
-          })->map(function($step) {
-            return $step->getId();
+          $steps->filter(function ($step) {
+              return $step->isSelectionStep();
+          })->map(function ($step) {
+              return $step->getId();
           })->toArray(),
           $user
         );
         $userHasVoteOnCollectSteps = $this->proposalCollectVoteRepository
           ->getUserVotesGroupedByStepIds(
-          $steps->filter(function($step) {
-            return $step->isCollectStep();
-          })->map(function($step) {
-            return $step->getId();
+          $steps->filter(function ($step) {
+              return $step->isCollectStep();
+          })->map(function ($step) {
+              return $step->getId();
           })->toArray(),
           $user
         );
+
         return $userVotesOnSelectionSteps + $userHasVoteOnCollectSteps;
     }
 
@@ -126,7 +126,7 @@ class ProposalStepVotesResolver
     private function getSpentCreditsForUser(User $user, AbstractStep $step)
     {
         if ($step instanceof SelectionStep) {
-          $votes = $this
+            $votes = $this
               ->proposalSelectionVoteRepository
               ->findBy(
                   [
@@ -137,8 +137,8 @@ class ProposalStepVotesResolver
           ;
         }
         if ($step instanceof CollectStep) {
-          $votes = $this
-              -$proposalCollectVoteRepository
+            $votes = $this
+              - $proposalCollectVoteRepository
               ->findBy(
                   [
                       'collectStep' => $step,
@@ -154,17 +154,17 @@ class ProposalStepVotesResolver
     public function getCreditsLeftByStepIdForProjectAndUser(Project $project, User $user = null)
     {
         $steps = $project->getSteps()->map(function ($step) {
-          return $step->getStep();
+            return $step->getStep();
         });
         $creditsLeftByStepId = [];
         foreach ($steps as $step) {
-          if (($step instanceof SelectionStep || $step instanceof CollectStep) && $step->isBudgetVotable()) {
-            $creditsLeft = $step->getBudget();
-            if ($creditsLeft > 0 && $user) {
-                $creditsLeft -= $this->getSpentCreditsForUser($user, $step);
+            if (($step instanceof SelectionStep || $step instanceof CollectStep) && $step->isBudgetVotable()) {
+                $creditsLeft = $step->getBudget();
+                if ($creditsLeft > 0 && $user) {
+                    $creditsLeft -= $this->getSpentCreditsForUser($user, $step);
+                }
+                $creditsLeftByStepId[$step->getId()] = $creditsLeft;
             }
-            $creditsLeftByStepId[$step->getId()] = $creditsLeft;
-          }
         }
 
         return $creditsLeftByStepId;
@@ -182,8 +182,9 @@ class ProposalStepVotesResolver
           ->getVotableStepsForProposal($proposal)
         ;
         foreach ($selectionSteps as $step) {
-          $votableSteps->add($step);
+            $votableSteps->add($step);
         }
+
         return $votableSteps;
     }
 
@@ -195,11 +196,12 @@ class ProposalStepVotesResolver
         ;
         $collectSteps = $this->collectStepRepository->getCollectStepsForProject($project);
         if (count($collectSteps) > 0) {
-          $step = $collectSteps[0];
-          if ($step->isVotable()) {
-            array_push($collection, $step);
-          }
+            $step = $collectSteps[0];
+            if ($step->isVotable()) {
+                array_push($collection, $step);
+            }
         }
+
         return $collection;
     }
 

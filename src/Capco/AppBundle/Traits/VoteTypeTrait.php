@@ -11,7 +11,8 @@ trait VoteTypeTrait
     public static $VOTE_TYPE_SIMPLE = 1;
     public static $VOTE_TYPE_BUDGET = 2;
 
-    static function getVoteTypeLabels() {
+    public static function getVoteTypeLabels()
+    {
         return [
             self::$VOTE_TYPE_DISABLED => 'step.vote_type.disabled',
             self::$VOTE_TYPE_SIMPLE => 'step.vote_type.simple',

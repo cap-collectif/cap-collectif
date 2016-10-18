@@ -13,12 +13,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProposalSelectionVoteRepository extends EntityRepository
 {
-  public function getUserVotesGroupedByStepIds(array $selectionStepsIds, User $user = null): array
-  {
+    public function getUserVotesGroupedByStepIds(array $selectionStepsIds, User $user = null): array
+    {
         $userVotes = [];
         if ($user) {
-          foreach ($selectionStepsIds as $id) {
-            $qb = $this->createQueryBuilder('pv')
+            foreach ($selectionStepsIds as $id) {
+                $qb = $this->createQueryBuilder('pv')
               ->select('proposal.id')
               ->andWhere('pv.selectionStep = :id')
               ->andWhere('pv.user = :user')
@@ -26,17 +26,17 @@ class ProposalSelectionVoteRepository extends EntityRepository
               ->setParameter('user', $user)
               ->setParameter('id', $id)
               ;
-            $results = $qb->getQuery()->getScalarResult();
-            $userVotes[$id] = array_map(function($id) {
-              return intval($id);
-            }, array_column($results, 'id'));
-          }
+                $results = $qb->getQuery()->getScalarResult();
+                $userVotes[$id] = array_map(function ($id) {
+                    return intval($id);
+                }, array_column($results, 'id'));
+            }
         }
 
         foreach ($selectionStepsIds as $id) {
-          if (!array_key_exists($id, $userVotes)) {
-            $userVotes[$id] = [];
-          }
+            if (!array_key_exists($id, $userVotes)) {
+                $userVotes[$id] = [];
+            }
         }
 
         return $userVotes;
@@ -106,7 +106,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
     //         ->orderBy('pv.createdAt', 'DESC')
     //         ->groupBy('ss.id')
     //     ;
-    //
+
     //     return $qb->getQuery()->getResult();
     // }
 
@@ -119,7 +119,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
     //         ->andWhere('pv.selectionStep = :step')
     //         ->setParameter('step', $step)
     //     ;
-    //
+
     //     return intval($qb->getQuery()->getSingleScalarResult());
     // }
 
@@ -131,7 +131,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
     //         ->andWhere('pv.selectionStep = :step')
     //         ->setParameter('step', $step)
     //     ;
-    //
+
     //     return $qb->getQuery()->getResult();
     // }
 

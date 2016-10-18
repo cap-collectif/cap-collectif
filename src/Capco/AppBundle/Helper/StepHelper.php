@@ -3,8 +3,6 @@
 namespace Capco\AppBundle\Helper;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
 
 class StepHelper
 {

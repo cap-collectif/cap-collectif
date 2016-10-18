@@ -91,17 +91,18 @@ class ReinitCommand extends ContainerAwareCommand
         }
     }
 
-    private function runCommands(array $commands, $output) {
-      foreach ($commands as $key => $value) {
-          $input = new ArrayInput($value);
-          $input->setInteractive(false);
-          $this->getApplication()->find($key)->run($input, $output);
-      }
+    private function runCommands(array $commands, $output)
+    {
+        foreach ($commands as $key => $value) {
+            $input = new ArrayInput($value);
+            $input->setInteractive(false);
+            $this->getApplication()->find($key)->run($input, $output);
+        }
     }
 
     protected function createDatabase(OutputInterface $output)
     {
-      $this->runCommands([
+        $this->runCommands([
         'doctrine:database:create' => [],
       ], $output);
     }
@@ -128,14 +129,14 @@ class ReinitCommand extends ContainerAwareCommand
 
     protected function loadFixtures(OutputInterface $output)
     {
-      $this->runCommands([
+        $this->runCommands([
         'hautelook_alice:doctrine:fixtures:load' => ['-e' => 'dev'],
       ], $output);
     }
 
     protected function loadToggles(OutputInterface $output)
     {
-      $this->runCommands([
+        $this->runCommands([
         'capco:reset-feature-flags' => ['--force' => true],
       ], $output);
     }
@@ -152,7 +153,7 @@ class ReinitCommand extends ContainerAwareCommand
 
     protected function updateSyntheses(OutputInterface $output)
     {
-      $this->runCommands([
+        $this->runCommands([
         'capco:syntheses:update' => [],
         'capco:syntheses:fix-urls' => [],
         'capco:syntheses:counters' => [],
@@ -161,22 +162,22 @@ class ReinitCommand extends ContainerAwareCommand
 
     protected function populateElastica(OutputInterface $output)
     {
-      $this->runCommands([
-        'fos:elastica:populate' => ['--quiet' => true, '--no-debug' => true]
+        $this->runCommands([
+        'fos:elastica:populate' => ['--quiet' => true, '--no-debug' => true],
       ], $output);
     }
 
     protected function executeMigrations(OutputInterface $output)
     {
-      $this->runCommands([
-        'doctrine:migration:migrate' => ['--no-interaction' => true]
+        $this->runCommands([
+        'doctrine:migration:migrate' => ['--no-interaction' => true],
       ], $output);
     }
 
     protected function mockMigrations(OutputInterface $output)
     {
         $this->runCommands([
-          'doctrine:migration:version' => ['--add' => true, '--all' => true]
+          'doctrine:migration:version' => ['--add' => true, '--all' => true],
         ], $output);
     }
 }
