@@ -43,7 +43,7 @@ class StepHelperSpec extends ObjectBehavior
         // if start date is past
         $step->getStartAt()->willReturn((new \DateTime())->modify('-1 weeks'));
         $step->getEndAt()->willReturn(null);
-        $this->getStatus($step)->shouldReturn('closed');
+        $this->getStatus($step)->shouldReturn('open');
 
         $step->getStartAt()->willReturn(null);
         $step->getEndAt()->willReturn(null);
