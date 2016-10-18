@@ -63,13 +63,7 @@
     {% if proposalsCount > 0 %}
         <div class="container container--custom">
             <h2>{{ 'user.profile.show.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% for key, props in proposalsPropsBySteps %}
-              {{ react_intl_component('ProposalListApp', {
-                  'props': props,
-                  'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-                })
-              }}
-            {% endfor %}
+            {% include '@CapcoUser/Profile/proposals.html.twig' %}
         </div>
     {% endif %}
 

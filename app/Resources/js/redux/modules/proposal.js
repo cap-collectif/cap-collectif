@@ -43,6 +43,7 @@ const DELETE_REQUEST = 'proposal/DELETE_REQUEST';
 
 const initialState = {
   currentProposalId: null,
+  creditsLeftByStepId: {},
   proposalsById: {},
   currentVotesModal: null,
   currentVoteModal: null,

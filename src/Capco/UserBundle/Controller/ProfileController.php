@@ -88,6 +88,25 @@ class ProfileController extends BaseController
           'form' => $form->createView(),
       ];
   }
+
+    private function getProposalsProps(User $user) {
+      $proposalsWithStep = $this
+          ->getDoctrine()->getRepository('CapcoAppBundle:Proposal')
+          ->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user)
+      ;
+      $proposalsCount = array_reduce($proposalsWithStep, function($sum, $item) {
+        $sum += count($item['proposals']);
+        return $sum;
+      });
+      $proposalsPropsBySteps = [];
+      foreach ($proposalsWithStep as $key => $value) {
+        $proposalsPropsBySteps[$key] = json_decode($serializer->serialize($value, 'json', SerializationContext::create()->setGroups(['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])), true);
+      }
+      return [
+        'proposalsPropsBySteps' => $proposalsPropsBySteps,
+        'proposalsCount' => $proposalsCount,
+      ];
+    }
     /**
      * @Route("/", name="capco_user_profile_show", defaults={"_feature_flags" = "profiles"})
      * @Route("/{slug}", name="capco_user_profile_show_all", defaults={"_feature_flags" = "profiles"})
@@ -124,19 +143,6 @@ class ProfileController extends BaseController
         ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'ThemeDetails']));
         $ideasCount = count($ideasRaw);
 
-        $proposalsWithStep = $doctrine
-            ->getRepository('CapcoAppBundle:Proposal')
-            ->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user)
-        ;
-        $proposalsCount = array_reduce($proposalsWithStep, function($sum, $item) {
-          $sum += count($item['proposals']);
-          return $sum;
-        });
-        $proposalsPropsBySteps = [];
-        foreach ($proposalsWithStep as $key => $value) {
-          $proposalsPropsBySteps[$key] = json_decode($serializer->serialize($value, 'json', SerializationContext::create()->setGroups(['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])), true);
-        }
-
         $replies = $this
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:Reply')
@@ -149,7 +155,7 @@ class ProfileController extends BaseController
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getPublicVotesByUser($user);
 
-        return [
+        return array_merge([
             'user' => $user,
             'projectsProps' => $projectsProps,
             'projectsCount' => $projectsCount,
@@ -158,14 +164,12 @@ class ProfileController extends BaseController
             'arguments' => $arguments,
             'ideasProps' => $ideas,
             'ideasCount' => $ideasCount,
-            'proposalsPropsBySteps' => $proposalsPropsBySteps,
-            'proposalsCount' => $proposalsCount,
             'replies' => $replies,
             'sources' => $sources,
             'comments' => $comments,
             'votes' => $votes,
             'argumentsLabels' => Argument::$argumentTypesLabels,
-        ];
+        ], $this->getProposalsProps($user));
     }
 
     /**
@@ -231,37 +235,12 @@ class ProfileController extends BaseController
     /**
      * @Route("/{slug}/proposals", name="capco_user_profile_show_proposals", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserProposals.html.twig")
-     *
-     * @param User $user
-     *
-     * @return array
      */
     public function showProposalsAction(User $user)
     {
-        $serializer = $this->get('jms_serializer');
-        $proposalsRaw = $this
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:Proposal')
-            ->getByUser($user)
-        ;
-
-        if ($this->getUser() !== $user) {
-            $proposalsRaw = array_filter($proposalsRaw, function ($proposal) {
-                return $proposal->isVisible();
-            });
-        }
-
-        $proposalProps = $serializer->serialize([
-            'proposals' => $proposalsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']));
-
-        $proposalsCount = count($proposalsRaw);
-
-        return [
+        return array_merge([
             'user' => $user,
-            'proposalsProps' => $proposalProps,
-            'proposalsCount' => $proposalsCount,
-        ];
+        ], $this->getProposalsProps($user));
     }
 
     /**
