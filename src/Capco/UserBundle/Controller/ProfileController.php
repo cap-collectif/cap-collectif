@@ -100,7 +100,7 @@ class ProfileController extends BaseController
       });
       $proposalsPropsBySteps = [];
       foreach ($proposalsWithStep as $key => $value) {
-        $proposalsPropsBySteps[$key] = json_decode($serializer->serialize($value, 'json', SerializationContext::create()->setGroups(['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])), true);
+        $proposalsPropsBySteps[$key] = json_decode($this->get('jms_serializer')->serialize($value, 'json', SerializationContext::create()->setGroups(['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])), true);
       }
       return [
         'proposalsPropsBySteps' => $proposalsPropsBySteps,
