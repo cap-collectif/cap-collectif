@@ -298,7 +298,7 @@ class StepController extends Controller
             'statuses' => $step->getStatuses(),
             'form' => $proposalForm,
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
-            'step' => $step,
+            'stepId' => $step->getId(),
             'count' => $searchResults['count'],
             'proposals' => $searchResults['proposals'],
         ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'ThemeDetails', 'Districts', 'Default', 'Steps', 'VoteThreshold', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
@@ -403,7 +403,7 @@ class StepController extends Controller
         $categories = $form->getCategories();
 
         $props = $serializer->serialize([
-            'step' => $step,
+            'stepId' => $step->getId(),
             'statuses' => $step->getStatuses(),
             'categories' => $categories,
             'proposals' => $searchResults['proposals'],

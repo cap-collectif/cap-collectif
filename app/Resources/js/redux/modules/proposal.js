@@ -235,7 +235,7 @@ export const deleteProposal = (form, proposal, dispatch) => {
 
 export const vote = (dispatch, step, proposal, data = {}) => {
   let url = '';
-  switch (typeof step.step_type !== 'undefined' ? step.step_type : step.type) {
+  switch (step.type) {
     case 'selection':
       url = `/selection_steps/${step.id}/proposals/${proposal.id}/votes`;
       break;
@@ -274,7 +274,7 @@ export const startVoting = () => {
 export const deleteVote = (dispatch, step, proposal) => {
   dispatch(deleteVoteRequested(proposal.id));
   let url = '';
-  switch (typeof step.step_type !== 'undefined' ? step.step_type : step.type) {
+  switch (step.type) {
     case 'selection':
       url = `/selection_steps/${step.id}/proposals/${proposal.id}/votes`;
       break;
