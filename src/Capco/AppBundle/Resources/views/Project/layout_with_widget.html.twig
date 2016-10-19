@@ -32,6 +32,7 @@
       'votable': step.step.isVotable()|default(false),
       'voteType': step.step.voteType|default(0),
       'budget': step.step.budget|default(null),
+      'isPrivate': step.step.isPrivate()|default(false),
       '_links': {
         'show': step.step.getType() == 'other' ? '' : path('app_project_show_'~ step.step.getType(), {'projectSlug': project.slug, 'stepSlug': step.step.slug})
       }

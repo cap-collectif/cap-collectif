@@ -14,7 +14,7 @@ const StepPageHeader = React.createClass({
       <div>
         <h2 className="h2">{step.title}</h2>
         {
-          (step.step_type === 'selection' && step.voteThreshold > 0) &&
+          (step.type === 'selection' && step.voteThreshold > 0) &&
           <h4 style={{ marginBottom: '20px' }}>
             <i className="cap cap-hand-like-2-1" style={{ fontSize: '22px', color: '#377bb5' }}></i>{' '}
             <FormattedMessage message={this.getIntlMessage('proposal.vote.threshold.step')} num={step.voteThreshold} />
