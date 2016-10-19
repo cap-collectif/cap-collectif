@@ -28,10 +28,10 @@ export function* fetchAllOpinionVotes(action) {
     let hasMore = true;
     let iterationCount = 0;
     const votesPerIteration = 30;
-    const votesUrl = action.versionId
-      ? `/opinions/${action.opinionId}/versions/${action.versionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
-      : `/opinions/${action.opinionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`;
     while (hasMore) {
+      const votesUrl = action.versionId
+        ? `/opinions/${action.opinionId}/versions/${action.versionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
+        : `/opinions/${action.opinionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`;
       const result = yield call(
         Fetcher.get,
         votesUrl
