@@ -51,16 +51,17 @@ export const ProposalVoteButtonWrapper = React.createClass({
     }
 
     if (user) {
+      const notVotedAndNotEnoughCredits = !userHasVote && !this.userHasEnoughCredits();
       return (
         <VoteButtonOverlay
             popoverId={`vote-tooltip-proposal-${proposal.id}`}
-            show={!userHasVote && !this.userHasEnoughCredits()}
+            show={notVotedAndNotEnoughCredits}
         >
           <ProposalVoteButton
             proposal={proposal}
             step={step}
             user={user}
-            disabled={!(step && step.open) || !this.userHasEnoughCredits()}
+            disabled={!(step && step.open) || notVotedAndNotEnoughCredits}
             style={style}
             className={className}
           />
