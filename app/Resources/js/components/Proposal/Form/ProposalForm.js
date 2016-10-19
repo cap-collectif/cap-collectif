@@ -48,6 +48,7 @@ const ProposalForm = React.createClass({
 
   getInitialState() {
     const { proposal } = this.props;
+    console.log(proposal);
     return {
       form: {
         title: proposal.title,
@@ -96,6 +97,7 @@ const ProposalForm = React.createClass({
       isSubmitting,
       mode,
       proposal,
+      dispatch,
     } = this.props;
     this.updateThemeConstraint();
     this.updateDistrictConstraint();
@@ -128,9 +130,9 @@ const ProposalForm = React.createClass({
           delete form.category;
         }
         if (mode === 'edit') {
-          updateProposal(this.props.dispatch, this.props.form.id, proposal.id, form);
+          updateProposal(dispatch, this.props.form.id, proposal.id, form);
         } else {
-          submitProposal(this.props.dispatch, this.props.form.id, form);
+          submitProposal(dispatch, this.props.form.id, form);
         }
       }
     }
@@ -161,15 +163,17 @@ const ProposalForm = React.createClass({
 
   handleTitleChange(e) {
     e.persist();
-    this.handleTitleChangeDebounced(e);
-  },
-
-  handleTitleChangeDebounced(e) {
     const title = e.target.value;
     this.setState(prevState => ({
       form: { ...prevState.form, title },
-      suggestions: [],
     }));
+    this.handleTitleChangeDebounced(title);
+  },
+
+  handleTitleChangeDebounced(title) {
+    this.setState({
+      suggestions: [],
+    });
     if (title.length > 3) {
       this.setState({ isLoadingSuggestions: true });
       loadSuggestions(this.props.form.id, title)
@@ -279,6 +283,7 @@ const ProposalForm = React.createClass({
             id="proposal_title"
             type="text"
             autoComplete="off"
+            value={this.state.form.title}
             onChange={this.handleTitleChange}
             label={this.getIntlMessage('proposal.title')}
             groupClassName={this.getGroupStyle('title')}

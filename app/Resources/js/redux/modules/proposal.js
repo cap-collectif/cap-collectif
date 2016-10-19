@@ -40,6 +40,7 @@ export const CLOSE_EDIT_MODAL = 'proposal/CLOSE_EDIT_MODAL';
 export const OPEN_EDIT_MODAL = 'proposal/OPEN_EDIT_MODAL';
 export const CANCEL_SUBMIT_PROPOSAL = 'proposal/CANCEL_SUBMIT_PROPOSAL';
 const DELETE_REQUEST = 'proposal/DELETE_REQUEST';
+const EDIT_PROPOSAL_FORM = 'proposal/EDIT_PROPOSAL_FORM';
 
 const initialState = {
   currentProposalId: null,
@@ -136,6 +137,12 @@ export const openDeleteProposalModal = () => {
 export const submitProposalForm = () => {
   return {
     type: SUBMIT_PROPOSAL_FORM,
+  };
+};
+
+export const editProposalForm = () => {
+  return {
+    type: EDIT_PROPOSAL_FORM,
   };
 };
 
@@ -327,9 +334,10 @@ export const updateProposal = (dispatch, form, id, data) => {
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
   return Fetcher
-    .postFormData(`/proposal_forms/${form}/proposals/${id}`, data)
+    .postFormData(`/proposal_forms/${form}/proposals/${id}`, formData)
     .then(() => {
-      // reload proposal
+      dispatch(closeEditProposalModal());
+      location.reload();
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'success', content: 'proposal.request.update.success' },
@@ -443,6 +451,8 @@ export const reducer = (state = {}, action) => {
       return { ...state, isCreating: true };
     case CANCEL_SUBMIT_PROPOSAL:
       return { ...state, isCreating: false };
+    case EDIT_PROPOSAL_FORM:
+      return { ...state, isEditing: true };
     case OPEN_EDIT_MODAL:
       return { ...state, showEditModal: true };
     case CLOSE_EDIT_MODAL:

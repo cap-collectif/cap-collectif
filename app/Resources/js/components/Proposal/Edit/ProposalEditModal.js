@@ -4,7 +4,7 @@ import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
 import { Modal } from 'react-bootstrap';
-import { updateProposal, closeEditProposalModal } from '../../../redux/modules/proposal';
+import { editProposalForm, closeEditProposalModal } from '../../../redux/modules/proposal';
 import { connect } from 'react-redux';
 
 const ProposalEditModal = React.createClass({
@@ -57,7 +57,7 @@ const ProposalEditModal = React.createClass({
             <SubmitButton
               id="confirm-proposal-edit"
               isSubmitting={isSubmitting}
-              onSubmit={() => { updateProposal(dispatch); }}
+              onSubmit={() => { dispatch(editProposalForm()); }}
             />
           </Modal.Footer>
         </Modal>
