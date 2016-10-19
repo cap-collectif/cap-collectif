@@ -46,6 +46,7 @@ const initialState = {
   currentProposalId: null,
   creditsLeftByStepId: {},
   proposalsById: {},
+  userVotesByStepId: {},
   currentVotesModal: null,
   currentVoteModal: null,
   currentDeletingVote: null,
