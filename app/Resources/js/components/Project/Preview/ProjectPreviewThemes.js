@@ -16,23 +16,20 @@ const ProjectPreviewThemes = React.createClass({
         <div className="excerpt project__preview__themes smart-fade small">
           {
             project.themes.map((theme, index) => {
-              if (theme.enabled) {
-                return (
-                  <span key={index}>
-                    <a
-                      className="excerpt"
-                      href={theme._links.show}
-                    >
-                      {theme.title}
-                    </a>
-                    {
-                      index < project.themes.length - 1
-                      ? <span>, </span>
-                      : null
-                    }
-                  </span>
-                );
-              }
+              return (
+                <span key={index}>
+                  <a
+                    className="excerpt"
+                    href={theme._links.show}
+                  >
+                    {theme.title}
+                  </a>
+                  {
+                    index < project.themes.length - 1 &&
+                    <span>, </span>
+                  }
+                </span>
+              );
             })
           }
         </div>

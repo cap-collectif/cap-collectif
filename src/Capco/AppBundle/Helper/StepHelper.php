@@ -26,7 +26,6 @@ class StepHelper
         }
 
         if (!$step->getEndAt() && !$step->getStartAt()) {
-
             $previousSteps = $this->projectHelper->getPreviousSteps($step);
 
             foreach ($previousSteps as $previousStep) {
