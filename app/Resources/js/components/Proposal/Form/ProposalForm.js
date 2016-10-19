@@ -48,7 +48,6 @@ const ProposalForm = React.createClass({
 
   getInitialState() {
     const { proposal } = this.props;
-    console.log(proposal);
     return {
       form: {
         title: proposal.title,
