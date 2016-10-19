@@ -48,7 +48,7 @@ const ProposalPreview = React.createClass({
             />
             <div className="proposal__buttons text-center" >
                 {
-                  step.votable &&
+                  step.id === proposal.votableStepId &&
                     <ProposalPreviewVote
                       proposal={proposal}
                     />

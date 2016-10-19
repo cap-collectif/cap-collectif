@@ -17,7 +17,7 @@ const ProposalPreviewFooter = React.createClass({
 
   render() {
     const { proposal, stepId, showVotes } = this.props;
-    const votesCount = proposal.votesCountByStepId[stepId] || 0;
+    const votesCount = proposal.votesCountByStepId[stepId];
     const counterWidth = showVotes ? '50%' : '100%';
 
     return (
@@ -35,8 +35,8 @@ const ProposalPreviewFooter = React.createClass({
             </div>
           </div>
           {
-            showVotes
-            && <div className="proposal__counter proposal__counter--votes" style={{ width: counterWidth, borderLeft: '1px solid #ccc' }}>
+            showVotes &&
+              <div className="proposal__counter proposal__counter--votes" style={{ width: counterWidth, borderLeft: '1px solid #ccc' }}>
                 <div className="proposal__counter__value" >
                   {votesCount}
                 </div>
