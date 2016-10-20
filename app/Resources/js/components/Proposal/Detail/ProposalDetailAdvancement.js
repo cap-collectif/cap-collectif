@@ -8,7 +8,6 @@ import moment from 'moment';
 const grey = '#d9d9d9';
 const green = '#5cb85c';
 
-
 const consideredCurrentProgressStep = (progressSteps) => {
   let lastStarting = null;
   for (const step of progressSteps) {
@@ -140,8 +139,8 @@ export const ProposalDetailAdvancement = React.createClass({
                             key={i}
                             step={{
                               title: progressStep.title,
-                              startAt: <FormattedDate value={moment(progressStep.startAt)} day="numeric" month="long" year="numeric" />,
-                              endAt: progressStep.endAt ? <FormattedDate value={moment(progressStep.endAt)} day="numeric" month="long" year="numeric" /> : null,
+                              startAt: moment(progressStep.startAt).format('ll'),
+                              endAt: progressStep.endAt ? moment(progressStep.endAt).format('ll') : null,
                               progressStep: true,
                             }}
                             status={progressStep.status}
