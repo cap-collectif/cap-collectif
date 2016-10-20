@@ -1,6 +1,6 @@
 FROM debian:jessie
 
-MAINTAINER Bastien Jaillot <bjaillot@jolicode.com>
+MAINTAINER Aurélien David <adavid@jolicode.com>
 
 RUN sed -i 's/httpredir.debian.org/debian.mirrors.ovh.net/g' /etc/apt/sources.list
 
@@ -39,13 +39,23 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install nodejs and deps for npm install
-RUN curl https://deb.nodesource.com/node_5.x/pool/main/n/nodejs/nodejs_5.1.1-1nodesource1~jessie1_amd64.deb > node.deb && \
-    dpkg -i node.deb && \
-    npm set progress=false && \
-    rm node.deb
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+    apt-get update && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Update npm and install bower
-RUN npm install -g bower
+# Install yarn
+RUN apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3 && \
+  echo "deb http://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+  apt-get update && \
+  apt-get install yarn && \
+  export PATH="$PATH:$HOME/.yarn/bin" && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install bower
+RUN yarn global add bower
 
 # Install pep8
 RUN pip install pep8 autopep8

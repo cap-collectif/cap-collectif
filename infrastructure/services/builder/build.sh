@@ -12,12 +12,12 @@ if [ "$PRODUCTION" ]; then
   php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var || exit 1
 
   # Frontend deps
-  npm --quiet --no-color install --production || exit 1
+  yarn install --production || exit 1
   bower install --config.interactive=false --allow-root --config.storage.cache=/home/capco/.cache/bower || exit 1
-  npm run build:prod || exit 1
+  yarn run build:prod || exit 1
 
   # Server side rendering deps
-  npm run build-server-bundle:prod || exit 1
+  yarn run build-server-bundle:prod || exit 1
 else
   echo "Building for development"
   # Symfony deps
@@ -25,11 +25,10 @@ else
   composer dump-autoload
 
   # Frontend deps
-  npm install
-  npm rebuild node-sass
+  yarn install
   bower install --config.interactive=false --config.storage.cache=/home/capco/.bower
-  npm run build
+  yarn run build || (npm rebuild node-sass && yarn run build)
 
   # Server side rendering deps
-  npm run build-server-bundle
+  yarn run build-server-bundle
 fi

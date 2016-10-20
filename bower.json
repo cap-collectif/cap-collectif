@@ -16,15 +16,15 @@
     "tests"
   ],
   "dependencies": {
+    "Readmore.js": "readmore#~2.1.0",
+    "bootstrap-sass": "~3.3.6",
     "ckeditor": "#full/4.4.7",
     "compass-mixins": "~1.0.2",
-    "react-intl": "~1.2.0",
     "css-spinners": "~2.1.0",
     "es6-promise": "~2.2.0",
     "fetch": "~0.10.1",
-    "bootstrap-sass": "~3.3.6",
-    "Readmore.js": "readmore#~2.1.0",
-    "jquery-minicolors": "~2.2.3"
+    "jquery-minicolors": "~2.2.3",
+    "react-intl": "~1.2.0"
   },
   "overrides": {
     "fancybox": {
