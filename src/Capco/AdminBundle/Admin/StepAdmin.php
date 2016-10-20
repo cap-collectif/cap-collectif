@@ -92,7 +92,16 @@ class StepAdmin extends Admin
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.step.is_enabled',
                 'required' => false,
-            ])
+            ]);
+
+        if ($subject instanceof ParticipativeStepInterface) {
+            $formMapper->add('timeless', CheckboxType::class, [
+                'label' => 'admin.fields.step.timeless',
+                'required' => false,
+            ]);
+        }
+
+        $formMapper
             ->add('startAt', 'sonata_type_datetime_picker', [
                 'label' => 'admin.fields.step.start_at',
                 'format' => 'dd/MM/yyyy HH:mm',
@@ -111,14 +120,6 @@ class StepAdmin extends Admin
                 ],
                 'required' => false,
             ]);
-
-            if ($subject instanceof ParticipativeStepInterface) {
-                $formMapper->add('timeless', CheckboxType::class, [
-                        'label' => 'admin.fields.step.timeless',
-                        'required' => false,
-                ]);
-            }
-        ;
 
         if ($subject instanceof PresentationStep
             || $subject instanceof OtherStep
