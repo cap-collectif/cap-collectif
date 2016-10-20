@@ -193,6 +193,7 @@ class ProjectDownloadResolver
 
         foreach ($proposals as &$proposal) {
           $proposal['Step'] = $collectStep;
+          $proposal['entity_type'] = 'proposal';
         }
 
         $this->getProposalsData($proposals);
@@ -342,7 +343,6 @@ class ProjectDownloadResolver
 
     private function getProposalItem(array $proposal)
     {
-        $proposal['entity_type'] = 'proposal';
         $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
         $author = $proposal['author'];
         $authorName = $author ? $author['username'] : $this->translator->trans(
