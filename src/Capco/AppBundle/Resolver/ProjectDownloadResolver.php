@@ -191,6 +191,10 @@ class ProjectDownloadResolver
             ->getRepository('CapcoAppBundle:Proposal')
             ->getEnabledByProposalForm($collectStep->getProposalForm(), true);
 
+        foreach ($proposals as &$proposal) {
+          $proposal['Step'] = $collectStep;
+        }
+
         $this->getProposalsData($proposals);
 
         return $this->data;
@@ -338,6 +342,7 @@ class ProjectDownloadResolver
 
     private function getProposalItem(array $proposal)
     {
+        $proposal['entity_type'] = 'proposal';
         $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
         $author = $proposal['author'];
         $authorName = $author ? $author['username'] : $this->translator->trans(
@@ -360,7 +365,7 @@ class ProjectDownloadResolver
                 'CapcoAppBundle'
             ),
             'content' => $this->getProposalContent($proposal),
-            'link' => $na,
+            'link' => $this->urlArrayResolver->getRoute($proposal),
             'created' => $this->dateToString($proposal['createdAt']),
             'updated' => $proposal['updatedAt'] != $proposal['createdAt'] ? $this->dateToString(
                 $proposal['updatedAt']
@@ -377,7 +382,8 @@ class ProjectDownloadResolver
             'status' => $proposal['status'] ? $proposal['status']['name'] : '',
             'estimation' => $proposal['estimation'] ? $proposal['estimation'].' €' : '',
             'answer' => $proposal['answer'] ? $this->getProposalAnswer($proposal['answer']) : '',
-            'nbVotes' => $proposal['votesCount'] ? $proposal['votesCount'] : 0,
+            'nbVotes' => $na,
+            //$proposal['votesCount'] ? $proposal['votesCount'] : 0,
             'annotation' => $annotation,
             'note' => $note,
         ];
