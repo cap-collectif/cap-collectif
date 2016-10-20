@@ -56,13 +56,13 @@ class ProjectDownloadResolver
         'author_id',
         'author_email',
         'user_type',
+        'category',
         'content',
         'theme',
         'district',
         'status',
         'estimation',
         'answer',
-        'nbVotes',
         'created',
         'updated',
         'link',
@@ -186,7 +186,6 @@ class ProjectDownloadResolver
 
         $this->data = [];
 
-        // Proposals
         $proposals = $this->em
             ->getRepository('CapcoAppBundle:Proposal')
             ->getEnabledByProposalForm($collectStep->getProposalForm(), true);
@@ -364,6 +363,7 @@ class ProjectDownloadResolver
                 [],
                 'CapcoAppBundle'
             ),
+            'category' => $proposal['category'] ? $proposal['category']['name'] : '',
             'content' => $this->getProposalContent($proposal),
             'link' => $this->urlArrayResolver->getRoute($proposal),
             'created' => $this->dateToString($proposal['createdAt']),
@@ -382,8 +382,6 @@ class ProjectDownloadResolver
             'status' => $proposal['status'] ? $proposal['status']['name'] : '',
             'estimation' => $proposal['estimation'] ? $proposal['estimation'].' €' : '',
             'answer' => $proposal['answer'] ? $this->getProposalAnswer($proposal['answer']) : '',
-            'nbVotes' => $na,
-            //$proposal['votesCount'] ? $proposal['votesCount'] : 0,
             'annotation' => $annotation,
             'note' => $note,
         ];
@@ -409,6 +407,7 @@ class ProjectDownloadResolver
                 'CapcoAppBundle'
             ),
             'content' => $na,
+            'category' => $proposal['category'] ? $proposal['category']['name'] : '',
             'link' => $na,
             'created' => $this->dateToString($vote['createdAt']),
             'updated' => $na,
@@ -424,7 +423,6 @@ class ProjectDownloadResolver
             'status' => $na,
             'estimation' => $na,
             'answer' => $na,
-            'nbVotes' => $na,
             'annotation' => $annotation,
             'note' => $note,
         ];
