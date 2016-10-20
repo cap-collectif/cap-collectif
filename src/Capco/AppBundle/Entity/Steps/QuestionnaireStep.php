@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
@@ -12,10 +14,11 @@ use Capco\AppBundle\Entity\Questionnaire;
  *
  * @ORM\Table(name="questionnaire_step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireStepRepository")
- * @Serializer\ExclusionPolicy("all")
  */
-class QuestionnaireStep extends AbstractStep
+class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterface
 {
+    use TimelessStepTrait;
+
     const VERIFICATION_NONE = 'none';
     const VERIFICATION_SMS = 'sms';
     public static $verificationLabels = [
@@ -145,5 +148,10 @@ class QuestionnaireStep extends AbstractStep
         $this->questionnaire = $questionnaire;
 
         return $this;
+    }
+
+    public function isParticipative() : bool
+    {
+        return true;
     }
 }

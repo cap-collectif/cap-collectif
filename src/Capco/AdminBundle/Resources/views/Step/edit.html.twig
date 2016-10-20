@@ -71,6 +71,36 @@
                 toggleVoteThresholdField(false);
                 voteThresholdInput.val(0);
             });
+
+            // For Timeless uses.
+            const timelessField = $("#{{ admin.uniqid }}_timeless");
+            const startAtField = $("#dtp_{{ admin.uniqid }}_startAt");
+            const endAtField = $("#dtp_{{ admin.uniqid }}_endAt");
+            const startAtContainer = $("#sonata-ba-field-container-{{ admin.uniqid }}_startAt");
+            const endAtContainer = $("#sonata-ba-field-container-{{ admin.uniqid }}_endAt");
+
+            function toggleDateFields(show) {
+                if (show) {
+                    startAtContainer.removeClass('hidden');
+                    endAtContainer.removeClass('hidden');
+                } else {
+                    startAtContainer.addClass('hidden');
+                    endAtContainer.addClass('hidden');
+                }
+            }
+
+            timelessField.on('ifChecked', function () {
+                toggleDateFields(false);
+                startAtField.data("DateTimePicker").setDate(null);
+                endAtField.data("DateTimePicker").setDate(null);
+            });
+
+            timelessField.on('ifUnchecked', function () {
+                toggleDateFields(true);
+            });
+
+            toggleDateFields(!timelessField.iCheck('update')[0].checked);
+
         });
     </script>
 {% endblock %}

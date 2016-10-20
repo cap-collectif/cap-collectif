@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,10 +16,9 @@ use Capco\AppBundle\Model\IndexableInterface;
  * @ORM\Table(name="collect_step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CollectStepRepository")
  */
-class CollectStep extends AbstractStep implements IndexableInterface
+class CollectStep extends AbstractStep implements IndexableInterface, ParticipativeStepInterface
 {
-    use VoteThresholdTrait;
-    use VoteTypeTrait;
+    use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait;
 
     public static $sort = ['old', 'last', 'votes', 'comments', 'random'];
 
@@ -151,5 +152,10 @@ class CollectStep extends AbstractStep implements IndexableInterface
     public function isIndexable(): bool
     {
         return $this->getIsEnabled();
+    }
+
+    public function isParticipative() : bool
+    {
+        return true;
     }
 }

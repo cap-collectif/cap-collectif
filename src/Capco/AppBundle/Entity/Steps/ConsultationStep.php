@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation as Serializer;
@@ -11,10 +13,11 @@ use Capco\AppBundle\Model\IndexableInterface;
  * Class ConsultationStep.
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationStepRepository")
- * @Serializer\ExclusionPolicy("all")
  */
-class ConsultationStep extends AbstractStep implements IndexableInterface
+class ConsultationStep extends AbstractStep implements IndexableInterface, ParticipativeStepInterface
 {
+    use TimelessStepTrait;
+
     public function isIndexable()
     {
         return $this->getIsEnabled();
@@ -383,5 +386,10 @@ class ConsultationStep extends AbstractStep implements IndexableInterface
         }
 
         return $label;
+    }
+
+    public function isParticipative() : bool
+    {
+        return true;
     }
 }

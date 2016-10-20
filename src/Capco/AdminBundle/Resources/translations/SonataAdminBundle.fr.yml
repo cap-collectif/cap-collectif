@@ -706,6 +706,7 @@ admin:
       start_at: Commence
       statuses: Statuts
       synthesis: Synthèse
+      timeless: Participation en continu
       title: Titre
       type: Type d'étape
       updated_at: Mise à jour

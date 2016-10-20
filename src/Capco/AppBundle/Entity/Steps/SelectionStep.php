@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,10 +18,9 @@ use Capco\AppBundle\Entity\ProposalForm;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionStepRepository")
  * @CapcoAssert\HasOnlyOneSelectionPerProposal()
  */
-class SelectionStep extends AbstractStep implements IndexableInterface
+class SelectionStep extends AbstractStep implements IndexableInterface, ParticipativeStepInterface
 {
-    use VoteThresholdTrait;
-    use VoteTypeTrait;
+    use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait;
 
     const VOTE_TYPE_DISABLED = 0;
     const VOTE_TYPE_SIMPLE = 1;
@@ -212,5 +213,10 @@ class SelectionStep extends AbstractStep implements IndexableInterface
     public function isIndexable(): bool
     {
         return $this->getIsEnabled();
+    }
+
+    public function isParticipative() : bool
+    {
+        return true;
     }
 }

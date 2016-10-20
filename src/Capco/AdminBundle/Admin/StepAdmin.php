@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -109,10 +110,21 @@ class StepAdmin extends Admin
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
                 'required' => false,
-            ])
+            ]);
+
+            if ($subject instanceof ParticipativeStepInterface) {
+                $formMapper->add('timeless', CheckboxType::class, [
+                        'label' => 'admin.fields.step.timeless',
+                        'required' => false,
+                ]);
+            }
         ;
 
-        if ($subject instanceof PresentationStep || $subject instanceof OtherStep || $subject instanceof CollectStep || $subject instanceof QuestionnaireStep) {
+        if ($subject instanceof PresentationStep
+            || $subject instanceof OtherStep
+            || $subject instanceof CollectStep
+            || $subject instanceof QuestionnaireStep
+        ) {
             $formMapper
                 ->add('body', 'ckeditor', [
                     'config_name' => 'admin_editor',
@@ -253,14 +265,10 @@ class StepAdmin extends Admin
                 ;
                 $formMapper->end();
                 $formMapper->with('admin.fields.step.group_selections')
-                    ->add(
-                        'private',
-                        CheckboxType::class,
-                        [
+                    ->add('private', CheckboxType::class, [
                             'label' => 'admin.fields.step.private',
                             'required' => false,
-                        ]
-                    );
+                    ]);
             }
             $formMapper->end();
         }

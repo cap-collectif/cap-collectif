@@ -541,4 +541,18 @@ abstract class AbstractStep
 
         return false;
     }
+
+    public function isTimeless()
+    {
+        if (!property_exists($this, 'timeless')) {
+            return false;
+        }
+
+        return $this->timeless;
+    }
+
+    public function isParticipative()
+    {
+        return false;
+    }
 }

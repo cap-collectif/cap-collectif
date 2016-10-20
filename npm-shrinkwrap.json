@@ -4860,9 +4860,9 @@
       "resolved": "https://registry.npmjs.org/react-router-bootstrap/-/react-router-bootstrap-0.23.1.tgz"
     },
     "react-truncate": {
-      "version": "1.1.5",
-      "from": "react-truncate@1.1.5",
-      "resolved": "https://registry.npmjs.org/react-truncate/-/react-truncate-1.1.5.tgz"
+      "version": "2.0.0",
+      "from": "react-truncate@2.0.0",
+      "resolved": "https://registry.npmjs.org/react-truncate/-/react-truncate-2.0.0.tgz"
     },
     "read": {
       "version": "1.0.7",
