@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin, FormattedDate } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
 import { connect } from 'react-redux';
 import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
