@@ -62,3 +62,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
       expose: true
       groups: [StepTypes]
       seriealized_name: type
+    isTimeless:
+      expose: true
+      groups: [Steps]
+      serialized_name: timeless

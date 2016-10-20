@@ -501,7 +501,7 @@ abstract class AbstractStep
             return true;
         }
 
-        if (null === $this->endAt && null === $this->startAt) {
+        if ($this->isTimeless()) {
             return true;
         }
 
@@ -520,7 +520,7 @@ abstract class AbstractStep
             return false;
         }
 
-        if (null === $this->endAt && null === $this->startAt) {
+        if (null === $this->endAt && null === $this->startAt && $this->isTimeless()) {
             return false;
         }
 

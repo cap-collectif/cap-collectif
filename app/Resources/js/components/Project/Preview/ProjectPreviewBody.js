@@ -18,7 +18,8 @@ const ProjectPreviewBody = React.createClass({
         && !step.endAt
         && step.type !== 'presentation'
         && step.type !== 'ranking'
-        && step.type !== 'other';
+        && step.type !== 'other'
+        && step.timeless;
     }).length === 0;
   },
 
