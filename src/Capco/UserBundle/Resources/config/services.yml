@@ -34,7 +34,7 @@ services:
   # Saml
   capco.logout_handler:
       class: Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler
-      arguments: ["@simplesamlphp.auth", "@router"]
+      arguments: ["@simplesamlphp.auth", "@router", "@capco.toggle.manager"]
 
   capco.saml.authenticator:
       class: Capco\UserBundle\Saml\SamlAuthenticator
