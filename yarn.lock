@@ -2076,7 +2076,7 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-brunch@^3.11.1:
+eslint-brunch:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/eslint-brunch/-/eslint-brunch-3.12.0.tgz#2af82d98afd93861df6147a4113345a256237e47"
   dependencies:
