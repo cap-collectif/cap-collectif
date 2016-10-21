@@ -1,11 +1,22 @@
 {% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
 
 {% block field %}
-    {%  if value | length > 0 %}
+    {% if value | length > 0 %}
         {% for response in value %}
             <strong>{{ response.question.title }}</strong></br>
-            {{ response.value | raw }}</br>
-            {% if loop.last == false %}</br>{% endif %}
+            {% if response.value is defined %}
+                {{ response.value | raw }}</br>
+                {% if loop.last == false %}</br>{% endif %}
+            {% else %}
+                <ul>
+                    {% for media in response.medias %}
+                        <li><a target="_blank"
+                           href="{{ path('app_media_response_download', { 'responseId': response.id, 'mediaId': media.id }) }}">
+                            {{ media.name }}
+                        </a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% endfor %}
-    {%  endif %}
+    {% endif %}
 {% endblock %}

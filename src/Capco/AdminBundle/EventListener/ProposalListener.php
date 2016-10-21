@@ -12,9 +12,6 @@ class ProposalListener implements ContainerAwareInterface
 {
     private $container;
 
-    /**
-     * @param ContainerInterface|null $container
-     */
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
@@ -29,6 +26,10 @@ class ProposalListener implements ContainerAwareInterface
         $changeSet = $args->getEntityChangeSet();
 
         if ($entity instanceof Proposal) {
+            if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+                $entity->setUpdateAuthor($this->container->get('security.token_storage')->getToken()->getUser());
+            }
+
             $notifier = $this->container->get('capco.notify_manager');
 
             if (array_key_exists('status', $changeSet)) {

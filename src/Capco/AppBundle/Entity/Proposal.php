@@ -102,6 +102,12 @@ class Proposal implements Contribution, CommentableInterface
     protected $author;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
+     * @ORM\JoinColumn(name="update_author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    protected $updateAuthor;
+
+    /**
      * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="proposals")
      * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
@@ -283,6 +289,22 @@ class Proposal implements Contribution, CommentableInterface
     public function setAuthor(User $author) : self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getUpdateAuthor()
+    {
+        if (!$this->updateAuthor) {
+            return $this->getAuthor();
+        }
+
+        return $this->updateAuthor;
+    }
+
+    public function setUpdateAuthor(User $updateAuthor = null) : self
+    {
+        $this->updateAuthor = $updateAuthor;
 
         return $this;
     }

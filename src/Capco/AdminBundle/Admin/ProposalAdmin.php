@@ -204,9 +204,6 @@ class ProposalAdmin extends Admin
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.proposal.title',
             ])
-            ->addIdentifier('category', null, [
-                'label' => 'admin.fields.proposal.category',
-            ])
             ->add('enabled', null, [
                 'editable' => true,
                 'label' => 'admin.fields.proposal.enabled',
@@ -215,8 +212,8 @@ class ProposalAdmin extends Admin
                 'editable' => true,
                 'label' => 'admin.fields.proposal.isTrashed',
             ])
-            ->add('deletedAt', null, [
-                'label' => 'admin.fields.proposal.deletedAt',
+            ->add('updateAuthor', 'sonata_type_model', [
+                'label' => 'admin.fields.proposal.updateAuthor'
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
@@ -246,14 +243,16 @@ class ProposalAdmin extends Admin
             ->add('isTrashed', null, [
                 'label' => 'admin.fields.proposal.isTrashed',
             ])
+            ->add('updateAuthor', 'doctrine_orm_model_autocomplete', [
+                'label' => 'admin.fields.proposal.updateAuthor',
+            ], null, [
+                'property' => 'username',
+            ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
             ])
             ->add('status', null, [
                 'label' => 'admin.fields.proposal.status',
-            ])
-            ->add('category', null, [
-                'label' => 'admin.fields.proposal.category',
             ])
             ->add('estimation', null, [
                 'label' => 'admin.fields.proposal.estimation',
@@ -322,6 +321,9 @@ class ProposalAdmin extends Admin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
+            ])
+            ->add('updateAuthor', null, [
+                'label' => 'admin.fields.proposal.updateAuthor'
             ])
             ->add('link', null, [
                 'label' => 'admin.fields.proposal.link',

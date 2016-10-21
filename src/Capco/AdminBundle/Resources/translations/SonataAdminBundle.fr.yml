@@ -510,6 +510,7 @@ admin:
       theme: Thème
       title: Titre
       trashedReason: Raison de la mise dans la corbeille
+      updateAuthor: Auteur de la dernière mise à jour
       updated_at: Mise à jour
     proposal_category:
       name: Nom
