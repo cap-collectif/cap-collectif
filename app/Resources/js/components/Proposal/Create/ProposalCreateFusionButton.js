@@ -12,16 +12,19 @@ export const ProposalCreateFusionButton = React.createClass({
   propTypes: {
     showModal: PropTypes.bool.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
+    open: PropTypes.func.isRequired,
+    close: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { showModal, isSubmitting } = this.props;
+    const { showModal, isSubmitting, open, close } = this.props;
     return (
       <div>
         <Button
           id="add-proposal-fusion"
           bsStyle="primary"
+          onClick={() => open()}
         >
           <i className="cap cap-add-1"></i>
           { ` ${this.getIntlMessage('proposal.add')}`}
@@ -29,7 +32,7 @@ export const ProposalCreateFusionButton = React.createClass({
         <Modal
           animation={false}
           show={showModal}
-          onHide={() => closeCreateFusionModal()}
+          onHide={() => close()}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
@@ -39,11 +42,13 @@ export const ProposalCreateFusionButton = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <h3>Propositions à fusionner</h3>
             <ProposalFusionForm />
+            <h3>Nouvelle proposition issue de la fusion</h3>
           </Modal.Body>
           <Modal.Footer>
             <CloseButton
-              onClose={() => closeCreateFusionModal()}
+              onClose={() => close()}
             />
             <SubmitButton
               id="confirm-proposal-create"
@@ -59,11 +64,11 @@ export const ProposalCreateFusionButton = React.createClass({
 });
 
 const mapStateToProps = (state) => ({
-  showModal: state.proposal.isOpenFusionModal,
+  showModal: state.proposal.isCreatingFusion,
   isSubmitting: false,
 });
 
 export default connect(
   mapStateToProps,
-  { closeCreateFusionModal, openCreateFusionModal }
+  { close: closeCreateFusionModal, open: openCreateFusionModal }
 )(ProposalCreateFusionButton);

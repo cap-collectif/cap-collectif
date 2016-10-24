@@ -1,39 +1,56 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-// import { submitProposal } from '../../../redux/modules/proposal';
+import { fetchProjects } from '../../../redux/modules/project';
 import { Field, reduxForm } from 'redux-form';
+import Input from '../../Form/Input';
 
 const formName = 'proposal-fusion';
-const renderField = ({ input, label, type, meta: { touched, error } }) => ( // eslint-disable-line
-  <div>
-    <label htmlFor>{label}</label>
-    <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched && error && <span>{error}</span>}
-    </div>
-  </div>
-);
+const renderField = ({error, touched, input: { placeholder, type, autoFocus, label, name, labelClassName }}) => { // eslint-disable-line
+  return (<Input
+    type={type}
+    name={name}
+    labelClassName={labelClassName || ''}
+    label={label || null}
+    placeholder={placeholder || null}
+    // errors={(touched && error) ? this.getIntlMessage(error) : null}
+    bsStyle={touched ? (error ? 'error' : 'success') : null}
+    hasFeedback={touched}
+  />);
+};
 
-const validate = () => true;
+const validate = (values) => {
+  console.log(values);
+};
 const handleSubmit = () => {};
 
 const ProposalFusionForm = React.createClass({
   propTypes: {
-    form: PropTypes.object.isRequired,
+    proposalForm: PropTypes.object,
+    projects: PropTypes.array.isRequired,
+    proposals: PropTypes.array.isRequired,
     themes: PropTypes.array.isRequired,
     districts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    onMount: PropTypes.func.isRequired,
     features: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
+  componentDidMount() {
+    this.props.onMount();
+  },
+
   render() {
+    const { projects } = this.props;
     return (
       <form id="proposal-fustion-form" onSubmit={handleSubmit}>
-        <Field name="firstName" type="text" component={renderField} label="First Name" />
-        <Field name="lastName" type="text" component={renderField} label="Last Name" />
+        <Field name="project" component="select" label="Mon Project" autoFocus>
+            <option>Sélectionner un projet</option>
+            {
+              projects.map(project => <option value={project.id}>{project.title}</option>)
+            }
+        </Field>
       </form>
     );
   },
@@ -43,11 +60,13 @@ const mapStateToProps = (state) => ({
   features: state.default.features,
   themes: state.default.themes,
   districts: state.default.districts,
+  projects: state.project.projects,
   categories: [],
-  form: null,
+  proposals: [],
+  proposalForm: null,
 });
 
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps)({ onMount: fetchProjects })(
   reduxForm({
     form: formName,
     destroyOnUnmount: false,

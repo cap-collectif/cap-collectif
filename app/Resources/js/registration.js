@@ -40,31 +40,29 @@ window.__SERVER__ = false;
 registerStore({ appStore });
 register({
   ProjectsListApp,
-});
-register({
   ProposalCreateFusionButtonApp,
+  ProposalStepPageApp,
+  NavbarApp,
+  EmailNotConfirmedApp,
+  NewOpinionApp,
+  NewIdeaApp,
+  ProjectTrashButtonApp,
+  OpinionPageApp,
+  CommentSectionApp,
+  SynthesisViewBoxApp,
+  SynthesisEditBoxApp,
+  ProposalPageApp,
+  QuestionnaireStepPageApp,
+  ProjectStatsPageApp,
+  ProposalVoteBasketWidgetApp,
+  AlertBoxApp,
+  StepInfosApp,
+  ProposalListApp,
+  ProposalsUserVotesPageApp,
+  PhoneProfileApp,
+  IdeasIndexPageApp,
+  IdeasListApp,
+  IdeaPageApp,
+  IdeaCreateApp,
+  ShareButtonDropdownApp,
 });
-register({ ProposalStepPageApp });
-register({ NavbarApp });
-register({ EmailNotConfirmedApp });
-register({ NewOpinionApp });
-register({ NewIdeaApp });
-register({ ProjectTrashButtonApp });
-register({ OpinionPageApp });
-register({ CommentSectionApp });
-register({ SynthesisViewBoxApp });
-register({ SynthesisEditBoxApp });
-register({ ProposalPageApp });
-register({ QuestionnaireStepPageApp });
-register({ ProjectStatsPageApp });
-register({ ProposalVoteBasketWidgetApp });
-register({ AlertBoxApp });
-register({ StepInfosApp });
-register({ ProposalListApp });
-register({ ProposalsUserVotesPageApp });
-register({ PhoneProfileApp });
-register({ IdeasIndexPageApp });
-register({ IdeasListApp });
-register({ IdeaPageApp });
-register({ IdeaCreateApp });
-register({ ShareButtonDropdownApp });

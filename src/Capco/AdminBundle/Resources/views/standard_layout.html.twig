@@ -4,14 +4,17 @@
     {{ parent() }}
     <link href="{{ asset('css/jquery.minicolors.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
-{% endblock %}
-
-{% block javascripts %}
     {% block reduxStore %}
       {% include '@CapcoApp/redux_store.html.twig' %}
     {% endblock %}
+{% endblock %}
+
+{% block javascripts %}
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+    var App = require('Resources/js/app').default;
+    </script>
     {{ parent() }}
     <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('js/jquery.minicolors.js') }}"></script>

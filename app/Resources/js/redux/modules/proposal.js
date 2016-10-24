@@ -28,12 +28,9 @@ export const CHANGE_PAGE = 'proposal/CHANGE_PAGE';
 export const CHANGE_ORDER = 'proposal/CHANGE_ORDER';
 export const CHANGE_TERMS = 'proposal/CHANGE_TERMS';
 export const CHANGE_FILTER = 'proposal/CHANGE_FILTER';
-
 export const SUBMIT_PROPOSAL_FORM = 'proposal/SUBMIT_PROPOSAL_FORM';
-
 export const OPEN_VOTES_MODAL = 'proposal/OPEN_VOTES_MODAL';
 export const CLOSE_VOTES_MODAL = 'proposal/CLOSE_VOTES_MODAL';
-
 export const CLOSE_DELETE_MODAL = 'proposal/CLOSE_DELETE_MODAL';
 export const OPEN_DELETE_MODAL = 'proposal/OPEN_DELETE_MODAL';
 export const CLOSE_EDIT_MODAL = 'proposal/CLOSE_EDIT_MODAL';
@@ -41,6 +38,8 @@ export const OPEN_EDIT_MODAL = 'proposal/OPEN_EDIT_MODAL';
 export const CANCEL_SUBMIT_PROPOSAL = 'proposal/CANCEL_SUBMIT_PROPOSAL';
 const DELETE_REQUEST = 'proposal/DELETE_REQUEST';
 const EDIT_PROPOSAL_FORM = 'proposal/EDIT_PROPOSAL_FORM';
+const CLOSE_CREATE_FUSION_MODAL = 'proposal/CLOSE_CREATE_FUSION_MODAL';
+const OPEN_CREATE_FUSION_MODAL = 'proposal/OPEN_CREATE_FUSION_MODAL';
 
 const initialState = {
   currentProposalId: null,
@@ -52,6 +51,7 @@ const initialState = {
   currentDeletingVote: null,
   showCreateModal: false,
   isCreating: false,
+  isCreatingFusion: false,
   showDeleteModal: false,
   isDeleting: false,
   isVoting: false,
@@ -64,154 +64,46 @@ const initialState = {
   currentPaginationPage: 1,
 };
 
-export const openVotesModal = (stepId) => {
-  return {
-    type: OPEN_VOTES_MODAL,
-    stepId,
-  };
-};
-
-export const closeVotesModal = (stepId) => {
-  return {
-    type: CLOSE_VOTES_MODAL,
-    stepId,
-  };
-};
-
-export const voteSuccess = (proposalId, stepId, vote) => {
-  return {
-    type: VOTE_SUCCEEDED,
-    proposalId,
-    stepId,
-    vote,
-  };
-};
-
-export const loadVotes = (stepId, proposalId) => {
-  return {
-    type: VOTES_FETCH_REQUESTED,
-    stepId,
-    proposalId,
-  };
-};
-
-const deleteVoteSucceeded = (stepId, proposalId, vote) => {
-  return {
-    type: DELETE_VOTE_SUCCEEDED,
-    proposalId,
-    stepId,
-    vote,
-  };
-};
-
-const deleteVoteRequested = (proposalId) => {
-  return {
-    type: DELETE_VOTE_REQUESTED,
-    proposalId,
-  };
-};
-
-export const closeEditProposalModal = () => {
-  return {
-    type: CLOSE_EDIT_MODAL,
-  };
-};
-
-export const openEditProposalModal = () => {
-  return {
-    type: OPEN_EDIT_MODAL,
-  };
-};
-
-export const closeDeleteProposalModal = () => {
-  return {
-    type: CLOSE_DELETE_MODAL,
-  };
-};
-
-export const openDeleteProposalModal = () => {
-  return {
-    type: OPEN_DELETE_MODAL,
-  };
-};
-
-export const submitProposalForm = () => {
-  return {
-    type: SUBMIT_PROPOSAL_FORM,
-  };
-};
-
-export const editProposalForm = () => {
-  return {
-    type: EDIT_PROPOSAL_FORM,
-  };
-};
-
-export const openCreateModal = () => {
-  return {
-    type: OPEN_CREATE_MODAL,
-  };
-};
-
-export const cancelSubmitProposal = () => {
-  return {
-    type: CANCEL_SUBMIT_PROPOSAL,
-  };
-};
-
-export const closeCreateModal = () => {
-  return {
-    type: CLOSE_CREATE_MODAL,
-  };
-};
-
-export const openVoteModal = (id) => {
-  return {
-    type: OPEN_VOTE_MODAL,
-    id,
-  };
-};
-
-export const closeVoteModal = () => {
-  return {
-    type: CLOSE_VOTE_MODAL,
-  };
-};
-
-export const changePage = (page) => {
-  return {
-    type: CHANGE_PAGE,
-    page,
-  };
-};
-
-export const changeOrder = (order) => {
-  return {
-    type: CHANGE_ORDER,
-    order,
-  };
-};
-
-export const changeTerm = (terms) => {
-  return {
-    type: CHANGE_TERMS,
-    terms,
-  };
-};
-
-export const changeFilter = (filter, value) => {
-  return {
-    type: CHANGE_FILTER,
-    filter,
-    value,
-  };
-};
-
-export const loadProposals = () => {
-  return {
-    type: FETCH_REQUESTED,
-  };
-};
+export const closeCreateFusionModal = () => ({ type: CLOSE_CREATE_FUSION_MODAL });
+export const openCreateFusionModal = () => ({ type: OPEN_CREATE_FUSION_MODAL });
+export const openVotesModal = (stepId) => ({ type: OPEN_VOTES_MODAL, stepId });
+export const closeVotesModal = (stepId) => ({ type: CLOSE_VOTES_MODAL, stepId });
+export const voteSuccess = (proposalId, stepId, vote) => ({
+  type: VOTE_SUCCEEDED, proposalId, stepId, vote,
+});
+export const loadVotes = (stepId, proposalId) => ({
+  type: VOTES_FETCH_REQUESTED,
+  stepId,
+  proposalId,
+});
+const deleteVoteSucceeded = (stepId, proposalId, vote) => ({ type: DELETE_VOTE_SUCCEEDED, proposalId, stepId, vote });
+const deleteVoteRequested = (proposalId) => ({
+  type: DELETE_VOTE_REQUESTED,
+  proposalId,
+});
+export const closeEditProposalModal = () => ({ type: CLOSE_EDIT_MODAL });
+export const openEditProposalModal = () => ({ type: OPEN_EDIT_MODAL });
+export const closeDeleteProposalModal = () => ({ type: CLOSE_DELETE_MODAL });
+export const openDeleteProposalModal = () => ({ type: OPEN_DELETE_MODAL });
+export const submitProposalForm = () => ({ type: SUBMIT_PROPOSAL_FORM });
+export const editProposalForm = () => ({ type: EDIT_PROPOSAL_FORM });
+export const openCreateModal = () => ({ type: OPEN_CREATE_MODAL });
+export const cancelSubmitProposal = () => ({ type: CANCEL_SUBMIT_PROPOSAL });
+export const closeCreateModal = () => ({ type: CLOSE_CREATE_MODAL });
+export const openVoteModal = (id) => ({ type: OPEN_VOTE_MODAL, id });
+export const closeVoteModal = () => ({ type: CLOSE_VOTE_MODAL });
+export const changePage = (page) => ({ type: CHANGE_PAGE, page });
+export const changeOrder = (order) => ({ type: CHANGE_ORDER, order });
+export const changeTerm = (terms) => ({
+  type: CHANGE_TERMS,
+  terms,
+});
+export const changeFilter = (filter, value) => ({
+  type: CHANGE_FILTER,
+  filter,
+  value,
+});
+export const loadProposals = () => ({ type: FETCH_REQUESTED });
 
 export const deleteProposal = (form, proposal, dispatch) => {
   dispatch({ type: DELETE_REQUEST });
@@ -265,11 +157,7 @@ export const vote = (dispatch, step, proposal, data = {}) => {
     });
 };
 
-export const startVoting = () => {
-  return {
-    type: VOTE_REQUESTED,
-  };
-};
+export const startVoting = () => ({ type: VOTE_REQUESTED });
 
 export const deleteVote = (dispatch, step, proposal) => {
   dispatch(deleteVoteRequested(proposal.id));
@@ -406,12 +294,7 @@ export function* fetchProposals() {
 }
 
 
-export const fetchProposalPosts = (proposalId) => {
-  return {
-    type: POSTS_FETCH_REQUESTED,
-    proposalId,
-  };
-};
+export const fetchProposalPosts = (proposalId) => ({ type: POSTS_FETCH_REQUESTED, proposalId });
 
 export function* fetchPosts(action) {
   try {
@@ -438,6 +321,10 @@ export const reducer = (state = {}, action) => {
       const filters = { ...state.filters, [action.filter]: action.value };
       return { ...state, filters, currentPaginationPage: 1 };
     }
+    case OPEN_CREATE_FUSION_MODAL:
+      return { ...state, isCreatingFusion: true };
+    case CLOSE_CREATE_FUSION_MODAL:
+      return { ...state, isCreatingFusion: false };
     case OPEN_VOTES_MODAL:
       return { ...state, currentVotesModal: { proposalId: state.currentProposalId, stepId: action.stepId } };
     case CLOSE_VOTES_MODAL:

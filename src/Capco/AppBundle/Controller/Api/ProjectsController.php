@@ -17,20 +17,17 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class ProjectsController extends FOSRestController
 {
     /**
-     * @Get("/projects/{project_id}/votable_steps")
-     * @ParamConverter("project", options={"mapping": {"project_id": "id"}})
-     * @View(serializerGroups={"Steps", "UserVotes"})
+     * @Get("/projects")
+     * @View(serializerGroups={"Projects", "Steps", "UserVotes"})
      */
-    public function getVotableStepsAction(Project $project)
+    public function getProjectsAction()
     {
-        $votableSteps = $this
-            ->get('capco.proposal_votes.resolver')
-            ->getVotableStepsForProject($project)
+        $projects = $this
+            ->get('capco.project.repository')
+            ->findBy(['isEnabled' => true])
         ;
 
-        return [
-            'votableSteps' => $votableSteps,
-        ];
+        return $projects;
     }
 
     /**
