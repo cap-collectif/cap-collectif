@@ -55,6 +55,7 @@ let ProposalFusionForm = React.createClass({
               projects.map(project => <option value={project.id}>{project.title}</option>)
             }
         </Field>
+        <br />
         <Field name="proposal" component="select">
             <option>Sélectionner les propositions à fusionner</option>
             {
@@ -72,7 +73,6 @@ ProposalFusionForm = reduxForm({
   validate,
 })(ProposalFusionForm);
 
-// loadProposals
 ProposalFusionForm = connect(state => ({
   projects: state.project.projects.filter(project => project.steps.filter(step => step.type === 'collect').length > 0),
   proposals: Object.values(state.proposal.proposalsById),
