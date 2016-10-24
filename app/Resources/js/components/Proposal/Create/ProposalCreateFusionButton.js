@@ -63,7 +63,7 @@ export const ProposalCreateFusionButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   showModal: state.proposal.isCreatingFusion,
   isSubmitting: false,
 });

@@ -4,9 +4,6 @@
     {{ parent() }}
     <link href="{{ asset('css/jquery.minicolors.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
-    {% block reduxStore %}
-      {% include '@CapcoApp/redux_store.html.twig' %}
-    {% endblock %}
 {% endblock %}
 
 {% block javascripts %}
@@ -29,6 +26,9 @@
 
 
 {% block sonata_admin_content_actions_wrappers %}
+
+{% include '@CapcoApp/redux_store.html.twig' %}
+
 <ul class="nav navbar-nav navbar-right">
   <li>
       {{ react_intl_component('ProposalCreateFusionButtonApp') }}

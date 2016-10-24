@@ -29,6 +29,8 @@ export function* saga() {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case PROJECTS_FETCH_SUCCEEDED:
+      return { ...state, projects: action.projects };
     default:
       return state;
   }

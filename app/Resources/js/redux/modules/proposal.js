@@ -103,7 +103,7 @@ export const changeFilter = (filter, value) => ({
   filter,
   value,
 });
-export const loadProposals = () => ({ type: FETCH_REQUESTED });
+export const loadProposals = (step) => ({ type: FETCH_REQUESTED, step });
 
 export const deleteProposal = (form, proposal, dispatch) => {
   dispatch({ type: DELETE_REQUEST });
@@ -264,10 +264,9 @@ export function* fetchVotesByStep(action) {
   }
 }
 
-export function* fetchProposals() {
+export function* fetchProposals({ step }) {
   const globalState = yield select();
-  const steps = globalState.project.projects[globalState.project.currentProjectById].steps;
-  const step = steps.filter(s => s.id === globalState.project.currentProjectStepById)[0];
+  step = step || globalState.project.projects[globalState.project.currentProjectById].steps.filter(s => s.id === globalState.project.currentProjectStepById)[0];
   const state = globalState.proposal;
   let url = '';
   switch (step.type) {

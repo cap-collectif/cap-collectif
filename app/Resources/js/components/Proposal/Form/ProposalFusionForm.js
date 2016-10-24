@@ -2,10 +2,12 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { fetchProjects } from '../../../redux/modules/project';
-import { Field, reduxForm } from 'redux-form';
+import { loadProposals } from '../../../redux/modules/proposal';
+import { Field, reduxForm, change } from 'redux-form';
 import Input from '../../Form/Input';
 
-const formName = 'proposal-fusion';
+const formName = 'proposal';
+
 const renderField = ({error, touched, input: { placeholder, type, autoFocus, label, name, labelClassName }}) => { // eslint-disable-line
   return (<Input
     type={type}
@@ -24,16 +26,14 @@ const validate = (values) => {
 };
 const handleSubmit = () => {};
 
-const ProposalFusionForm = React.createClass({
+let ProposalFusionForm = React.createClass({
   propTypes: {
     proposalForm: PropTypes.object,
     projects: PropTypes.array.isRequired,
     proposals: PropTypes.array.isRequired,
-    themes: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired,
     onMount: PropTypes.func.isRequired,
-    features: PropTypes.object.isRequired,
+    onProjectChangeForm: PropTypes.func.isRequired,
+    onProjectChange: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -42,13 +42,23 @@ const ProposalFusionForm = React.createClass({
   },
 
   render() {
-    const { projects } = this.props;
+    const { projects, proposals, onProjectChange, onProjectChangeForm } = this.props;
     return (
-      <form id="proposal-fustion-form" onSubmit={handleSubmit}>
-        <Field name="project" component="select" label="Mon Project" autoFocus>
+      <form onSubmit={handleSubmit}>
+        <Field name="project" component="select" onChange={e => {
+          onProjectChangeForm(formName, 'project', e.target.value);
+          onProjectChange(projects.find(p => parseInt(p.id, 10) === parseInt(e.target.value, 10)).steps.filter(step => step.type === 'collect')[0]);
+        }}
+        >
             <option>Sélectionner un projet</option>
             {
               projects.map(project => <option value={project.id}>{project.title}</option>)
+            }
+        </Field>
+        <Field name="proposal" component="select">
+            <option>Sélectionner les propositions à fusionner</option>
+            {
+              proposals.map(proposal => <option value={proposal.id}>{proposal.title}</option>)
             }
         </Field>
       </form>
@@ -56,19 +66,17 @@ const ProposalFusionForm = React.createClass({
   },
 });
 
-const mapStateToProps = (state) => ({
-  features: state.default.features,
-  themes: state.default.themes,
-  districts: state.default.districts,
-  projects: state.project.projects,
-  categories: [],
-  proposals: [],
-  proposalForm: null,
-});
+ProposalFusionForm = reduxForm({
+  form: formName,
+  destroyOnUnmount: false,
+  validate,
+})(ProposalFusionForm);
 
-export default connect(mapStateToProps)({ onMount: fetchProjects })(
-  reduxForm({
-    form: formName,
-    destroyOnUnmount: false,
-    validate,
-  })(ProposalFusionForm));
+// loadProposals
+ProposalFusionForm = connect(state => ({
+  projects: state.project.projects.filter(project => project.steps.filter(step => step.type === 'collect').length > 0),
+  proposals: Object.values(state.proposal.proposalsById),
+  proposalForm: null,
+}), { onMount: fetchProjects, onProjectChange: loadProposals, onProjectChangeForm: change })(ProposalFusionForm);
+
+export default ProposalFusionForm;

@@ -32,13 +32,11 @@ import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
 import appStore from '../js/stores/AppStore';
 
-const register = ReactOnRails.register;
-const registerStore = ReactOnRails.registerStore;
-
 window.__SERVER__ = false;
 
-registerStore({ appStore });
-register({
+ReactOnRails.registerStore({ appStore });
+
+ReactOnRails.register({
   ProjectsListApp,
   ProposalCreateFusionButtonApp,
   ProposalStepPageApp,
