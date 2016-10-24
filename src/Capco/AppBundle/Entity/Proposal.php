@@ -102,7 +102,7 @@ class Proposal implements Contribution, CommentableInterface
     protected $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="update_author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $updateAuthor;
