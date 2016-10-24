@@ -28,6 +28,7 @@ import IdeaPageApp from '../js/startup/IdeaPageApp';
 import IdeasListApp from '../js/startup/IdeasListApp';
 import IdeaCreateApp from '../js/startup/IdeaCreateApp';
 import ShareButtonDropdownApp from '../js/startup/ShareButtonDropdownApp';
+import ProposalCreateFusionButtonApp from '../js/startup/ProposalCreateFusionButtonApp';
 import appStore from '../js/stores/AppStore';
 
 const register = ReactOnRails.register;
@@ -39,6 +40,7 @@ global.setTimeout = global.setTimeout || emptyFunction;
 global.setInterval = global.setInterval || emptyFunction;
 
 registerStore({ appStore });
+register({ ProposalCreateFusionButtonApp });
 register({ ProjectsListApp });
 register({ ProposalStepPageApp });
 register({ NavbarApp });

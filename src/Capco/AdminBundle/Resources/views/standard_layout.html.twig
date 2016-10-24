@@ -28,7 +28,7 @@
 {% block sonata_admin_content_actions_wrappers %}
 <ul class="nav navbar-nav navbar-right">
   <li>
-    <button class="btn btn-default navbar-btn">Fusionner des propositions</button>
+      {{ react_intl_component('ProposalCreateFusionButtonApp') }}
   </li>
 </ul>
     {% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}

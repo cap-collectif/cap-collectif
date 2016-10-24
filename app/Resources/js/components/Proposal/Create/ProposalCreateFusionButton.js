@@ -3,15 +3,20 @@ import { IntlMixin } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { closeCreateFusionModal, openCreateFusionModal } from '../../../redux/modules/proposal';
+import ProposalFusionForm from '../Form/ProposalFusionForm';
+import CloseButton from '../../Form/CloseButton';
+import SubmitButton from '../../Form/SubmitButton';
 
-const ProposalCreateFusionButton = React.createClass({
+const submitProposalFusionForm = () => {};
+export const ProposalCreateFusionButton = React.createClass({
   propTypes: {
     showModal: PropTypes.bool.isRequired,
+    isSubmitting: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { showModal } = this.props;
+    const { showModal, isSubmitting } = this.props;
     return (
       <div>
         <Button
@@ -24,7 +29,7 @@ const ProposalCreateFusionButton = React.createClass({
         <Modal
           animation={false}
           show={showModal}
-          onHide={() => this.props.dispatch(closeCreateFusionModal())}
+          onHide={() => closeCreateFusionModal()}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
@@ -34,20 +39,16 @@ const ProposalCreateFusionButton = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProposalForm
-              form={form}
-              isSubmitting={isSubmitting}
-              categories={categories}
-            />
+            <ProposalFusionForm />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton
-              onClose={() => this.props.dispatch(closeCreateModal())}
+              onClose={() => closeCreateFusionModal()}
             />
             <SubmitButton
               id="confirm-proposal-create"
               isSubmitting={isSubmitting}
-              onSubmit={() => this.props.dispatch(submitProposalForm())}
+              onSubmit={() => submitProposalFusionForm()}
             />
           </Modal.Footer>
         </Modal>
@@ -59,6 +60,10 @@ const ProposalCreateFusionButton = React.createClass({
 
 const mapStateToProps = (state) => ({
   showModal: state.proposal.isOpenFusionModal,
+  isSubmitting: false,
 });
 
-export default connect(mapStateToProps)(ProposalCreateFusionButton);
+export default connect(
+  mapStateToProps,
+  { closeCreateFusionModal, openCreateFusionModal }
+)(ProposalCreateFusionButton);
