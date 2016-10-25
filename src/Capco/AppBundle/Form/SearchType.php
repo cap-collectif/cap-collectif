@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Capco\AppBundle\Toggle\Manager;
@@ -50,29 +52,28 @@ class SearchType extends AbstractType
         return $choices;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $choices = $this->generateChoices();
 
         $builder
-            ->add('term', 'text', [
+            ->add('term',
+                TextType::class, [
                 'required' => false,
                 'label' => 'search.form.label.term',
                 'translation_domain' => 'CapcoAppBundle',
                 'attr' => ['placeholder' => 'search.form.placeholder.term'],
             ])
-            ->add('type', 'choice', [
+            ->add('type',
+                ChoiceType::class, [
                 'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
                 'empty_value' => false,
                 'expanded' => true,
                 'choices' => $choices,
             ])
-            ->add('sort', 'choice', [
+            ->add('sort',
+                ChoiceType::class, [
                 'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
                 'empty_value' => false,
@@ -91,13 +92,5 @@ class SearchType extends AbstractType
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'q';
     }
 }

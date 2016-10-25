@@ -13,20 +13,7 @@ class HighlightedContentExtension extends \Twig_Extension
         $this->resolver = $resolver;
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'capco_highlighted_resolver';
-    }
-
-    /**
-     * @return array
-     */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_SimpleFilter('capco_is_first_highlighted', [$this, 'isFirstHighlightedContent']),

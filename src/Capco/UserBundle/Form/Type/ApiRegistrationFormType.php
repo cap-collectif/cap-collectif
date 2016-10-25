@@ -3,8 +3,9 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Capco\AppBundle\Toggle\Manager;
 
 class ApiRegistrationFormType extends AbstractType
@@ -21,7 +22,7 @@ class ApiRegistrationFormType extends AbstractType
         // disable password repeated
         $builder
             ->remove('plainPassword')
-            ->add('plainPassword', 'password')
+            ->add('plainPassword', PasswordType::class)
         ;
 
         $builder->add('captcha', ReCaptchaType::class, ['validation_groups' => ['registration']]);
@@ -35,7 +36,7 @@ class ApiRegistrationFormType extends AbstractType
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
@@ -47,10 +48,5 @@ class ApiRegistrationFormType extends AbstractType
     public function getParent()
     {
         return 'sonata_user_registration';
-    }
-
-    public function getName()
-    {
-        return 'registration';
     }
 }

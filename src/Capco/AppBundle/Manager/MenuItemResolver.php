@@ -5,8 +5,8 @@ namespace Capco\AppBundle\Manager;
 use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Routing\Router;
-use Symfony\Component\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Constraints\Url;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MenuItemResolver
 {
@@ -23,11 +23,6 @@ class MenuItemResolver
         $this->validator = $validator;
     }
 
-    /**
-     * @param $menu
-     *
-     * @return array
-     */
     public function getEnabledMenuItemsWithChildren($menu, $currentUrl = null)
     {
         if (!$menu) {

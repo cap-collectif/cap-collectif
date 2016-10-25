@@ -2,10 +2,13 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 
 class CommentType extends AbstractType
@@ -25,7 +28,8 @@ class CommentType extends AbstractType
     {
         if ($options['actionType'] === 'edit') {
             $builder
-                ->add('confirm', 'checkbox', [
+                ->add('confirm',
+                    CheckboxType::class, [
                     'mapped' => false,
                     'label' => 'opinion.form.confirm',
                     'required' => true,
@@ -35,7 +39,7 @@ class CommentType extends AbstractType
         }
 
         $builder
-            ->add('body', 'purified_textarea', ['required' => true])
+            ->add('body', PurifiedTextareaType::class, ['required' => true])
         ;
 
         if ($options['actionType'] === 'create') {
@@ -46,16 +50,13 @@ class CommentType extends AbstractType
 
         if (!$this->user) {
             $builder
-                ->add('authorName', 'purified_text', ['required' => true])
+                ->add('authorName', PurifiedTextType::class, ['required' => true])
                 ->add('authorEmail', null, ['required' => true])
             ;
         }
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\Comment',
@@ -63,13 +64,5 @@ class CommentType extends AbstractType
             'translation_domain' => 'CapcoAppBundle',
             'actionType' => 'create',
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return '';
     }
 }

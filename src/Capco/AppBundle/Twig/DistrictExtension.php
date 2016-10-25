@@ -13,11 +13,6 @@ class DistrictExtension extends \Twig_Extension
         $this->districtRepo = $districtRepo;
     }
 
-    public function getName() : string
-    {
-        return 'capco_district';
-    }
-
     public function getFunctions() : array
     {
         return [

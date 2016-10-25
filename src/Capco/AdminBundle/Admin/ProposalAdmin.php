@@ -213,7 +213,7 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.isTrashed',
             ])
             ->add('updateAuthor', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.updateAuthor'
+                'label' => 'admin.fields.proposal.updateAuthor',
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
@@ -323,7 +323,7 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.updated_at',
             ])
             ->add('updateAuthor', null, [
-                'label' => 'admin.fields.proposal.updateAuthor'
+                'label' => 'admin.fields.proposal.updateAuthor',
             ])
             ->add('link', null, [
                 'label' => 'admin.fields.proposal.link',

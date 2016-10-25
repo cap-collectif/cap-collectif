@@ -13,12 +13,7 @@ class UserTypeExtension extends \Twig_Extension
         $this->repo = $repo;
     }
 
-    public function getName()
-    {
-        return 'user_type';
-    }
-
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new \Twig_SimpleFunction('user_type_list', [$this, 'getUserTypes']),

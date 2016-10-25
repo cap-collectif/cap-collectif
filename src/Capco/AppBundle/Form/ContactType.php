@@ -2,7 +2,10 @@
 
 namespace Capco\AppBundle\Form;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Email;
@@ -12,17 +15,20 @@ class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'purified_text', [
+        $builder->add('name',
+            PurifiedTextType::class, [
                 'label' => 'contact.form.name',
                 'required' => true,
                 'constraints' => [new NotBlank(['message' => 'contact.no_name'])],
             ])
-            ->add('email', 'email', [
+            ->add('email',
+                EmailType::class, [
                 'label' => 'contact.form.email',
                 'required' => true,
                 'constraints' => [new NotBlank(['message' => 'contact.no_email']), new Email()],
             ])
-            ->add('message', 'purified_textarea', [
+            ->add('message',
+                PurifiedTextareaType::class, [
                 'label' => 'contact.form.message',
                 'required' => true,
                 'attr' => [
@@ -34,12 +40,7 @@ class ContactType extends AbstractType
         ;
     }
 
-    public function getName()
-    {
-        return 'contact';
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'translation_domain' => 'CapcoAppBundle',

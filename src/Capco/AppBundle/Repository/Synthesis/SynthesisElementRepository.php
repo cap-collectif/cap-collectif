@@ -245,7 +245,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
                     // Assigning the root child
                     $i = count($nestedTree);
                     $nestedTree[$i] = $item;
-                    $stack[] = &$nestedTree[$i];
+                    $stack[] = $nestedTree[$i];
                     $idsStack[] = $item['id'];
                 } else {
                     // Check if item parent is present in the tree
@@ -254,7 +254,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
                         // Add child to parent
                         $i = count($stack[$l - 1][$childrenIndex]);
                         $stack[$l - 1][$childrenIndex][$i] = $item;
-                        $stack[] = &$stack[$l - 1][$childrenIndex][$i];
+                        $stack[] = $stack[$l - 1][$childrenIndex][$i];
                         $idsStack[] = $item['id'];
                     }
                 }

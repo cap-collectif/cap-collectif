@@ -4,16 +4,6 @@ namespace Capco\AppBundle\Twig;
 
 class DateExtension extends \Twig_Extension
 {
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'capco_date_extension';
-    }
-
     public function getFilters()
     {
         return array(
@@ -34,7 +24,7 @@ class DateExtension extends \Twig_Extension
         return $diff > $maxDiff;
     }
 
-    protected function getDiffInSeconds($firstDate, $secondDate, $absolute = false)
+    protected function getDiffInSeconds(\DateTime $firstDate, \DateTime $secondDate, $absolute = false)
     {
         $diff = $firstDate->getTimestamp() - $secondDate->getTimestamp();
 

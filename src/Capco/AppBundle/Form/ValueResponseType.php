@@ -32,7 +32,7 @@ class ValueResponseType extends AbstractType
         ;
 
         $builder->add('_type', HiddenType::class, array(
-            'data' => $this->getName(),
+            'data' => 'value_response',
             'mapped' => false,
         ));
     }
@@ -46,10 +46,5 @@ class ValueResponseType extends AbstractType
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
         ]);
-    }
-
-    public function getName() : string
-    {
-        return 'value_response';
     }
 }

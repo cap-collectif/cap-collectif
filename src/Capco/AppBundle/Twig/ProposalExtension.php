@@ -15,12 +15,7 @@ class ProposalExtension extends \Twig_Extension
         $this->resolver = $resolver;
     }
 
-    public function getName()
-    {
-        return 'capco_proposal_helper';
-    }
-
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_SimpleFilter('proposal_votes_list', [$this, 'votesList']),

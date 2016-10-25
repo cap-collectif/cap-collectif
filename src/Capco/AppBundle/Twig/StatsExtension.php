@@ -14,17 +14,7 @@ class StatsExtension extends \Twig_Extension
         $this->projectStatsResolver = $projectStatsResolver;
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'capco_stats';
-    }
-
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new \Twig_SimpleFunction('capco_has_stats', [$this, 'hasStats']),

@@ -13,17 +13,7 @@ class MenuLinkExtension extends \Twig_Extension
         $this->resolver = $resolver;
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'menu_link';
-    }
-
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new \Twig_SimpleFunction('menu_url', [$this, 'getMenuUrl']),

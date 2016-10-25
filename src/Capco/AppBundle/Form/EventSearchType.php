@@ -2,12 +2,14 @@
 
 namespace Capco\AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventSearchType extends AbstractType
 {
@@ -25,7 +27,8 @@ class EventSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('term', 'search', [
+            ->add('term',
+                SearchType::class, [
                 'required' => false,
                 'label' => 'event.searchform.term',
                 'translation_domain' => 'CapcoAppBundle',
@@ -36,7 +39,7 @@ class EventSearchType extends AbstractType
             $builder
                 ->add(
                     'theme',
-                    'entity',
+                    EntityType::class,
                     [
                         'required' => false,
                         'class' => 'CapcoAppBundle:Theme',
@@ -54,7 +57,8 @@ class EventSearchType extends AbstractType
                 );
         }
 
-        $builder->add('project', 'entity', [
+        $builder->add('project',
+            EntityType::class, [
             'required' => false,
             'class' => 'CapcoAppBundle:Project',
             'property' => 'title',
@@ -70,21 +74,10 @@ class EventSearchType extends AbstractType
         ]);
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'capco_app_event_search';
     }
 }

@@ -7,7 +7,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReplyType extends AbstractType
 {
@@ -45,10 +45,7 @@ class ReplyType extends AbstractType
         }
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\Reply',
@@ -56,10 +53,5 @@ class ReplyType extends AbstractType
             'cascade_validation' => true,
             'anonymousAllowed' => false,
         ]);
-    }
-
-    public function getName()
-    {
-        return 'reply';
     }
 }

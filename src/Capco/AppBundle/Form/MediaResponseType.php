@@ -31,7 +31,7 @@ class MediaResponseType extends AbstractType
         ;
 
         $builder->add('_type', HiddenType::class, [
-            'data' => $this->getName(), // Arbitrary, but must be distinct
+            'data' => 'media_response', // Arbitrary, but must be distinct
             'mapped' => false,
         ]);
     }
@@ -45,11 +45,6 @@ class MediaResponseType extends AbstractType
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
         ]);
-    }
-
-    public function getName() : string
-    {
-        return 'media_response';
     }
 
     public function getBlockPrefix() : string

@@ -13,11 +13,6 @@ class ThemeExtension extends \Twig_Extension
         $this->themeRepo = $themeRepo;
     }
 
-    public function getName() : string
-    {
-        return 'capco_theme';
-    }
-
     public function getFunctions() : array
     {
         return [

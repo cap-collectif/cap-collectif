@@ -2,17 +2,19 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ApiSourceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'purified_text', ['required' => true])
-            ->add('body', 'purified_textarea', ['required' => true])
+            ->add('title', PurifiedTextType::class, ['required' => true])
+            ->add('body', PurifiedTextareaType::class, ['required' => true])
             ->add('Category', null, ['required' => true])
             ->add('link', 'url', [
                 'required' => true,
@@ -21,17 +23,12 @@ class ApiSourceType extends AbstractType
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
             'data_class' => 'Capco\AppBundle\Entity\Source',
             'validation_groups' => ['Default', 'link'],
         ]);
-    }
-
-    public function getName()
-    {
-        return '';
     }
 }

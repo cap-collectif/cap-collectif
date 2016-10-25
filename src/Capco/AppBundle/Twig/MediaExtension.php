@@ -2,24 +2,21 @@
 
 namespace Capco\AppBundle\Twig;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 class MediaExtension extends \Twig_Extension
 {
     protected $container;
 
-    public function __construct($container)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }
 
-    public function getName()
-    {
-        return 'media_extension';
-    }
-
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
-          'media_public_url' => new \Twig_Function_Method($this, 'getMediaUrl'),
+            new \Twig_SimpleFunction('media_public_url', [$this, 'getMediaUrl']),
         ];
     }
 

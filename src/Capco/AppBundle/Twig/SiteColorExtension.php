@@ -13,17 +13,7 @@ class SiteColorExtension extends \Twig_Extension
         $this->resolver = $resolver;
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'site_color';
-    }
-
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new \Twig_SimpleFunction('capco_site_color_value', [$this, 'getSiteColorValue'], ['is_safe' => ['html']]),

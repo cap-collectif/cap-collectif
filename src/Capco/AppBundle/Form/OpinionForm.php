@@ -2,7 +2,10 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -11,9 +14,10 @@ class OpinionForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'purified_text', ['required' => true])
-            ->add('body', 'purified_textarea', ['required' => true])
-            ->add('appendices', 'collection', [
+            ->add('title', PurifiedTextType::class, ['required' => true])
+            ->add('body', PurifiedTextareaType::class, ['required' => true])
+            ->add('appendices',
+                CollectionType::class, [
                 'type' => new AppendixType(),
                 'required' => false,
                 'allow_add' => true,
@@ -28,10 +32,5 @@ class OpinionForm extends AbstractType
             'data_class' => 'Capco\AppBundle\Entity\Opinion',
             'csrf_protection' => false,
         ]);
-    }
-
-    public function getName() : string
-    {
-        return 'opinion';
     }
 }

@@ -13,17 +13,7 @@ class UrlExtension extends \Twig_Extension
         $this->urlResolver = $urlResolver;
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'capco_url';
-    }
-
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_SimpleFilter('capco_url', [$this, 'getObjectUrl']),

@@ -2,19 +2,17 @@
 
 namespace Capco\AppBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\IsTrue;
 
 class IdeaUpdateType extends IdeaType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('confirm', 'checkbox', [
+            ->add('confirm',
+                CheckboxType::class, [
                 'mapped' => false,
                 'label' => 'idea.form.confirm',
                 'required' => true,
@@ -23,13 +21,5 @@ class IdeaUpdateType extends IdeaType
         ;
 
         parent::buildForm($builder, $options);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'capco_appbundle_ideaupdatetype';
     }
 }

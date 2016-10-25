@@ -60,7 +60,7 @@ security:
                     service: my_user_provider
             remember_me:
               always_remember_me: false
-              key: %remember_secret%
+              key: "%remember_secret%"
               lifetime: 31536000
               path: /
               domain: ~

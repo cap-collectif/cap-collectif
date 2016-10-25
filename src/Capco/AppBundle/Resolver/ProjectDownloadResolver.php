@@ -191,8 +191,8 @@ class ProjectDownloadResolver
             ->getEnabledByProposalForm($collectStep->getProposalForm(), true);
 
         foreach ($proposals as &$proposal) {
-          $proposal['Step'] = $collectStep;
-          $proposal['entity_type'] = 'proposal';
+            $proposal['Step'] = $collectStep;
+            $proposal['entity_type'] = 'proposal';
         }
 
         $this->getProposalsData($proposals);

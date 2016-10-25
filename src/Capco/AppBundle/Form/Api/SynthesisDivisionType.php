@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Form\Api;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SynthesisDivisionType extends AbstractType
 {
@@ -21,16 +21,11 @@ class SynthesisDivisionType extends AbstractType
         ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\Synthesis\SynthesisDivision',
             'csrf_protection' => false,
         ]);
-    }
-
-    public function getName()
-    {
-        return '';
     }
 }

@@ -9,9 +9,6 @@ class ReactIntlRenderExtension extends \Twig_Extension
     private $extension;
     private $messages;
 
-    /**
-     * Constructor.
-     */
     public function __construct(ReactRenderExtension $extension, $file)
     {
         $this->extension = $extension;
@@ -39,10 +36,5 @@ class ReactIntlRenderExtension extends \Twig_Extension
         }
 
         return $this->extension->reactRenderComponent($componentName, $options);
-    }
-
-    public function getName()
-    {
-        return 'react_render_intl_extension';
     }
 }

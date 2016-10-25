@@ -37,12 +37,12 @@ snc_redis:
             type: predis
             alias: default
             dsn: redis://%redis_host%
-            logging: %kernel.debug%
+            logging: "%kernel.debug%"
         session:
             type: predis
             alias: session
             dsn: redis://%redis_host%
-            logging: %kernel.debug%
+            logging: "%kernel.debug%"
     session:
         client: session
         ttl: 1209600 # Two weeks
@@ -58,7 +58,7 @@ twig:
             - 'CapcoAppBundle:Form:media_widgets.html.twig'
             - 'SonataCoreBundle:Form:datepicker.html.twig'
     globals:
-        facebook_app_id: %facebook_app_id%
+        facebook_app_id: "%facebook_app_id%"
         google_maps_key: '%google_maps_key%'
 
 ekino_new_relic:
@@ -325,10 +325,10 @@ fos_rest:
             'Symfony\Component\Security\Core\Exception\AuthenticationException': true
 
 lexik_jwt_authentication:
-    private_key_path: %kernel.root_dir%/var/jwt/private.pem
-    public_key_path:  %kernel.root_dir%/var/jwt/public.pem
+    private_key_path: "%kernel.root_dir%/var/jwt/private.pem"
+    public_key_path:  "%kernel.root_dir%/var/jwt/public.pem"
     pass_phrase: iamapassphrase
-    token_ttl: %jwt_token_ttl%
+    token_ttl: "%jwt_token_ttl%"
     user_identity_field: email
 
 jms_serializer:

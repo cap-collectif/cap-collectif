@@ -13,16 +13,6 @@ class EventExtension extends \Twig_Extension
         $this->helper = $helper;
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'capco_event_helper';
-    }
-
     public function getFilters()
     {
         return [

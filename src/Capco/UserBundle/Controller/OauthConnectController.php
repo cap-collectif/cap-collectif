@@ -56,7 +56,7 @@ class OauthConnectController extends ConnectController
             $session = $request->getSession();
             $session->set('_hwi_oauth.registration_error.'.$key, $error);
 
-            return new RedirectResponse($this->generate('hwi_oauth_connect_registration', ['key' => $key]));
+            return new RedirectResponse($this->generateUrl('hwi_oauth_connect_registration', ['key' => $key]));
         }
 
         if ($error) {
@@ -64,7 +64,7 @@ class OauthConnectController extends ConnectController
             $error = $error->getMessage();
         }
 
-        return new RedirectResponse($this->generate('app_homepage'));
+        return new RedirectResponse($this->generateUrl('app_homepage'));
     }
 
     /**
@@ -72,6 +72,8 @@ class OauthConnectController extends ConnectController
      *
      * @param Request $request The active request
      * @param string  $service Name of the resource owner to connect to
+     *
+     * @return Response
      *
      * @throws NotFoundHttpException if features associated to web service are not enabled
      */
@@ -88,6 +90,8 @@ class OauthConnectController extends ConnectController
     /**
      * @param Request $request
      * @param string  $service
+     *
+     * @return RedirectResponse
      *
      * @throws NotFoundHttpException if features associated to web service are not enabled
      */

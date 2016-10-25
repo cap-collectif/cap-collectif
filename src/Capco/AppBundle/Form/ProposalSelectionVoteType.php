@@ -3,7 +3,10 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Form\EventListener\NoCommentWhenPrivateSubscriber;
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -21,17 +24,18 @@ class ProposalSelectionVoteType extends AbstractType
     {
         if ($this->tokenStorage->getToken()->getUser()) {
             $builder
-                ->add('username', 'purified_text', [
+                ->add('username', PurifiedTextType::class, [
                     'required' => true,
                 ])
-                ->add('email', 'email', [
+                ->add('email',
+                    EmailType::class, [
                     'required' => true,
                 ])
             ;
         }
 
         $builder
-            ->add('comment', 'purified_textarea', [
+            ->add('comment', PurifiedTextareaType::class, [
                 'required' => false,
                 'mapped' => false,
             ])
@@ -48,13 +52,5 @@ class ProposalSelectionVoteType extends AbstractType
             'data_class' => 'Capco\AppBundle\Entity\ProposalSelectionVote',
             'csrf_protection' => false,
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'proposal_selection_vote';
     }
 }

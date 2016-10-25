@@ -13,17 +13,7 @@ class SiteParameterExtension extends \Twig_Extension
         $this->resolver = $resolver;
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'site_parameter';
-    }
-
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new \Twig_SimpleFunction('capco_site_parameter_value', [$this, 'getSiteParameterValue'], ['is_safe' => ['html']]),

@@ -3,8 +3,9 @@
 namespace Capco\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Capco\UserBundle\Entity\User;
 
 class EventRegistrationType extends AbstractType
@@ -39,7 +40,8 @@ class EventRegistrationType extends AbstractType
                   'required' => false,
                   'label' => 'event_registration.create.private',
               ])
-              ->add('submit', 'submit', [
+              ->add('submit',
+                  SubmitType::class, [
                   'label' => 'event_registration.create.register',
                   'attr' => ['class' => 'btn btn-success btn-block'],
               ])
@@ -59,26 +61,19 @@ class EventRegistrationType extends AbstractType
                 'required' => false,
                 'label' => 'event_registration.create.private',
             ])
-            ->add('submit', 'submit', [
+            ->add('submit',
+                SubmitType::class, [
                   'label' => 'event_registration.create.submit',
                   'attr' => ['class' => 'btn  btn-success  btn-block'],
             ])
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\EventRegistration',
             'translation_domain' => 'CapcoAppBundle',
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'capco_event_registration';
     }
 }

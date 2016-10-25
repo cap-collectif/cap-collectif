@@ -18,17 +18,7 @@ class VoteExtension extends \Twig_Extension
         $this->proposalStepVotesResolver = $proposalStepVotesResolver;
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'capco_vote';
-    }
-
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new \Twig_SimpleFunction('capco_vote_object_url', [$this, 'getRelatedObjectUrl']),

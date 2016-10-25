@@ -2,7 +2,10 @@
 
 namespace Capco\AppBundle\Form\Extension;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -11,7 +14,7 @@ class MediaTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'show_unlink' => true,
@@ -24,14 +27,16 @@ class MediaTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (!$options['show_unlink']) {
-            $builder->add('unlink', 'hidden', [
+            $builder->add('unlink',
+                HiddenType::class, [
                 'mapped' => false,
                 'data' => false,
                 'required' => false,
                 ])
             ;
         } else {
-            $builder->add('unlink', 'checkbox', [
+            $builder->add('unlink',
+                CheckboxType::class, [
                 'label' => 'media.form.unlink',
                 'translation_domain' => 'CapcoAppBundle',
                 'mapped' => false,
@@ -40,7 +45,8 @@ class MediaTypeExtension extends AbstractTypeExtension
             ]);
         }
         $builder
-            ->add('binaryContent', 'file', [
+            ->add('binaryContent',
+                FileType::class, [
                 'label' => 'media.form.binary_content',
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
@@ -49,10 +55,7 @@ class MediaTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getExtendedType()
+    public function getExtendedType(): string
     {
         return 'sonata_media_type';
     }

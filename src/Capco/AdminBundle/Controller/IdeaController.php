@@ -11,7 +11,7 @@ class IdeaController extends Controller
     {
         $idea = $this->admin->getSubject();
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('CapcoAppBundle:IdeaVote');
         $anonymous = $repo->getAnonymousVotersByIdea($idea);
         $members = $repo->getMemberVotersByIdea($idea);

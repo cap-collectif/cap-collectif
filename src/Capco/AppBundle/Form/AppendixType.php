@@ -2,16 +2,18 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AppendixType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('body', 'purified_textarea', [
+            ->add('body',
+                PurifiedTextareaType::class, [
                 'required' => false,
             ])
             ->add('appendixType', null, [
@@ -20,16 +22,11 @@ class AppendixType extends AbstractType
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\OpinionAppendix',
             'csrf_protection' => false,
         ]);
-    }
-
-    public function getName() : string
-    {
-        return 'capco_app_appendix';
     }
 }

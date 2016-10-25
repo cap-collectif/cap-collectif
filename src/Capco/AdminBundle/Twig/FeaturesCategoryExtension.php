@@ -62,14 +62,4 @@ class FeaturesCategoryExtension extends \Twig_Extension
     {
         return $this->resolver->getEnabledSettingsCategories();
     }
-
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'capco_admin_features';
-    }
 }

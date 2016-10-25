@@ -4,9 +4,11 @@ namespace Capco\UserBundle\Form\Type;
 
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MemberSearchType extends AbstractType
 {
@@ -17,14 +19,11 @@ class MemberSearchType extends AbstractType
         $this->toggleManager = $toggleManager;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sort', 'choice', [
+            ->add('sort',
+                ChoiceType::class, [
                 'required' => false,
                 'choices' => User::$sortOrderLabels,
                 'translation_domain' => 'CapcoAppBundle',
@@ -35,7 +34,8 @@ class MemberSearchType extends AbstractType
         ;
 
         if ($this->toggleManager->isActive('user_type')) {
-            $builder->add('userType', 'entity', [
+            $builder->add('userType',
+                EntityType::class, [
                 'required' => false,
                 'class' => 'CapcoUserBundle:UserType',
                 'property' => 'name',
@@ -47,21 +47,10 @@ class MemberSearchType extends AbstractType
         }
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'capco_app_search_members';
     }
 }

@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
@@ -16,10 +16,6 @@ class RecentContributionsBlockService extends BaseBlockService
 {
     protected $resolver;
 
-    /**
-     * @param string          $name
-     * @param EngineInterface $templating
-     */
     public function __construct($name, EngineInterface $templating, RecentContributionsResolver $resolver)
     {
         parent::__construct($name, $templating);
@@ -62,7 +58,7 @@ class RecentContributionsBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
+    public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'number' => 10,

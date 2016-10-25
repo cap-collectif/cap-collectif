@@ -4,10 +4,13 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Toggle\Manager;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Repository\ThemeRepository;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProjectSearchType extends AbstractType
 {
@@ -18,19 +21,17 @@ class ProjectSearchType extends AbstractType
         $this->toggleManager = $toggleManager;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('term', 'search', [
+            ->add('term',
+                SearchType::class, [
                 'required' => false,
                 'label' => 'project.searchform.term',
                 'translation_domain' => 'CapcoAppBundle',
             ])
-            ->add('sort', 'choice', [
+            ->add('sort',
+                ChoiceType::class, [
                 'required' => false,
                 'choices' => Project::$sortOrderLabels,
                 'translation_domain' => 'CapcoAppBundle',
@@ -41,7 +42,8 @@ class ProjectSearchType extends AbstractType
         ;
 
         if ($this->toggleManager->isActive('themes')) {
-            $builder->add('theme', 'entity', [
+            $builder->add('theme',
+                EntityType::class, [
                 'required' => false,
                 'class' => 'CapcoAppBundle:Theme',
                 'property' => 'title',
@@ -58,21 +60,10 @@ class ProjectSearchType extends AbstractType
         }
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'capco_app_search_project';
     }
 }

@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Toggle\Manager;
 
@@ -77,7 +78,8 @@ class ProfileFormType extends AbstractType
                 'required' => true,
                 'translation_domain' => 'SonataUserBundle',
             ])
-            ->add('dateOfBirth', 'birthday', [
+            ->add('dateOfBirth',
+                BirthdayType::class, [
                 'required' => false,
                 'label' => 'user.profile.edit.birthday',
                 'translation_domain' => 'CapcoAppBundle',
@@ -97,10 +99,5 @@ class ProfileFormType extends AbstractType
     public function getParent()
     {
         return 'sonata_user_profile';
-    }
-
-    public function getName()
-    {
-        return 'capco_user_profile';
     }
 }

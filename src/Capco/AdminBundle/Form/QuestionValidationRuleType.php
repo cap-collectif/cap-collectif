@@ -58,9 +58,4 @@ class QuestionValidationRuleType extends AbstractType implements DataMapperInter
             'empty_data' => null,
         ]);
     }
-
-    public function getName()
-    {
-        return 'question_validation_rule';
-    }
 }

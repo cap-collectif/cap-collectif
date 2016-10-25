@@ -2,7 +2,11 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Capco\AppBundle\Toggle\Manager;
@@ -23,7 +27,8 @@ class IdeaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'purified_text', [
+            ->add('title',
+                PurifiedTextType::class, [
                 'required' => true,
             ])
         ;
@@ -35,13 +40,15 @@ class IdeaType extends AbstractType
         }
 
         $builder
-            ->add('body', 'purified_textarea', [
+            ->add('body',
+                PurifiedTextareaType::class, [
                 'required' => true,
             ])
             ->add('object', null, [
                 'required' => true,
             ])
-            ->add('url', 'url', [
+            ->add('url',
+                UrlType::class, [
                 'required' => false,
                 'default_protocol' => 'http',
             ])
@@ -50,7 +57,8 @@ class IdeaType extends AbstractType
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
             ])
-            ->add('delete_media', 'checkbox', [
+            ->add('delete_media',
+                CheckboxType::class, [
                 'required' => false,
                 'mapped' => false,
             ])
@@ -64,13 +72,5 @@ class IdeaType extends AbstractType
             'csrf_protection' => false,
             'cascade_validation' => true,
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'idea';
     }
 }

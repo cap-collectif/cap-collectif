@@ -2,9 +2,10 @@
 
 namespace Capco\AppBundle\Form\Api;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SynthesisElementType extends AbstractType
 {
@@ -25,7 +26,8 @@ class SynthesisElementType extends AbstractType
             ->add('archived', null, ['required' => false])
             ->add('notation', null, ['required' => false])
             ->add('comment', null, ['required' => false])
-            ->add('parent', 'entity', [
+            ->add('parent',
+                EntityType::class, [
                 'class' => 'Capco\AppBundle\Entity\Synthesis\SynthesisElement',
                 'property' => 'id',
                 'required' => false,
@@ -40,16 +42,11 @@ class SynthesisElementType extends AbstractType
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\Synthesis\SynthesisElement',
             'csrf_protection' => false,
         ]);
-    }
-
-    public function getName()
-    {
-        return '';
     }
 }

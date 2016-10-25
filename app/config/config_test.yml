@@ -21,7 +21,7 @@ services:
     # We disable captcha validation
     capco.recaptcha.validator:
           class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
-          arguments: [@request_stack, '%recaptcha_private_key%', false]
+          arguments: ["@request_stack", '%recaptcha_private_key%', false]
           tags:
               - { name: validator.constraint_validator, alias: recaptcha.validator }
 
@@ -33,5 +33,5 @@ monolog:
             level:  warning
         file:
             type: stream
-            path: %kernel.logs_dir%/test.log
+            path: "%kernel.logs_dir%/test.log"
             level: debug

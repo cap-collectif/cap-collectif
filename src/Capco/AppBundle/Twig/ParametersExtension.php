@@ -16,17 +16,7 @@ class ParametersExtension extends \Twig_Extension
         $this->siteParameterResolver = $siteParameterResolver;
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'parameters';
-    }
-
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new \Twig_SimpleFunction('is_feature_enabled', [$this, 'getIsFeatureEnabled']),

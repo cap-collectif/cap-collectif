@@ -13,17 +13,7 @@ class IdeaExtension extends \Twig_Extension
         $this->helper = $helper;
     }
 
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return 'capco_idea_helper';
-    }
-
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new \Twig_SimpleFilter('capco_idea_user_voted', [$this, 'hasVoted']),
