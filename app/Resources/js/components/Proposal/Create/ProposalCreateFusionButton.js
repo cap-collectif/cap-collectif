@@ -6,6 +6,7 @@ import { closeCreateFusionModal, openCreateFusionModal } from '../../../redux/mo
 import ProposalFusionForm from '../Form/ProposalFusionForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
+import ProposalAdminForm from '../Form/ProposalAdminForm';
 
 const submitProposalFusionForm = () => {};
 export const ProposalCreateFusionButton = React.createClass({
@@ -42,9 +43,10 @@ export const ProposalCreateFusionButton = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h3>Propositions à fusionner</h3>
+            <h3>Propositions fusionnées</h3>
             <ProposalFusionForm />
             <h3>Nouvelle proposition issue de la fusion</h3>
+            <ProposalAdminForm />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton

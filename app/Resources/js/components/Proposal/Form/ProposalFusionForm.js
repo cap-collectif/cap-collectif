@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { fetchProjects } from '../../../redux/modules/project';
-import { loadProposals } from '../../../redux/modules/proposal';
-import { Field, reduxForm, change } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import Input from '../../Form/Input';
+import Select from 'react-select';
+import Fetcher from '../../../services/Fetcher';
 
 const formName = 'proposal';
 
@@ -21,6 +22,13 @@ const renderField = ({error, touched, input: { placeholder, type, autoFocus, lab
   />);
 };
 
+const renderSelect = ({ label, input }) => { // eslint-disable-line
+  if (typeof input.loadOptions === 'function') {
+    return <Select.Async {...input} label={label} onBlur={() => { input.onBlur(input.value); }} />;
+  }
+  return <Select {...input} label={label} onBlur={() => { input.onBlur(input.value); }} />;
+};
+
 const validate = (values) => {
   console.log(values);
 };
@@ -32,8 +40,7 @@ let ProposalFusionForm = React.createClass({
     projects: PropTypes.array.isRequired,
     proposals: PropTypes.array.isRequired,
     onMount: PropTypes.func.isRequired,
-    onProjectChangeForm: PropTypes.func.isRequired,
-    onProjectChange: PropTypes.func.isRequired,
+    currentCollectStep: PropTypes.object,
   },
   mixins: [IntlMixin],
 
@@ -42,26 +49,32 @@ let ProposalFusionForm = React.createClass({
   },
 
   render() {
-    const { projects, proposals, onProjectChange, onProjectChangeForm } = this.props;
+    const { currentCollectStep, projects } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <Field name="project" component="select" onChange={e => {
-          onProjectChangeForm(formName, 'project', e.target.value);
-          onProjectChange(projects.find(p => parseInt(p.id, 10) === parseInt(e.target.value, 10)).steps.filter(step => step.type === 'collect')[0]);
-        }}
-        >
-            <option>Sélectionner un projet</option>
-            {
-              projects.map(project => <option value={project.id}>{project.title}</option>)
-            }
-        </Field>
+        <Field
+          name="project"
+          label="Projet lié"
+          placeholder="Sélectionnez un projet"
+          isLoading={projects.length === 0}
+          component={renderSelect}
+          options={projects.map(project => ({ value: project.id, label: project.title }))}
+        />
         <br />
-        <Field name="proposal" component="select">
-            <option>Sélectionner les propositions à fusionner</option>
-            {
-              proposals.map(proposal => <option value={proposal.id}>{proposal.title}</option>)
-            }
-        </Field>
+        {
+          currentCollectStep &&
+            <Field
+              name="parents"
+              multi
+              label="Propositions"
+              placeholder="Sélectionnez les propositions à fusionner"
+              component={renderSelect}
+              loadOptions={input => Fetcher
+                .postToJson(`/collect_steps/${currentCollectStep.id}/proposals/search`, { terms: input })
+                .then(res => ({ options: res.proposals.map(p => ({ value: p.id, label: p.title })) }))
+              }
+            />
+       }
       </form>
     );
   },
@@ -73,10 +86,13 @@ ProposalFusionForm = reduxForm({
   validate,
 })(ProposalFusionForm);
 
-ProposalFusionForm = connect(state => ({
-  projects: state.project.projects.filter(project => project.steps.filter(step => step.type === 'collect').length > 0),
-  proposals: Object.values(state.proposal.proposalsById),
-  proposalForm: null,
-}), { onMount: fetchProjects, onProjectChange: loadProposals, onProjectChangeForm: change })(ProposalFusionForm);
+ProposalFusionForm = connect(state => {
+  const projects = state.project.projects.filter(project => project.steps.filter(step => step.type === 'collect').length > 0);
+  const selectedProject = parseInt(formValueSelector(formName)(state, 'project'), 10);
+  return {
+    projects,
+    currentCollectStep: selectedProject ? projects.find(p => p.id === selectedProject).steps.filter(step => step.type === 'collect')[0] : null,
+  };
+}, { onMount: fetchProjects })(ProposalFusionForm);
 
 export default ProposalFusionForm;

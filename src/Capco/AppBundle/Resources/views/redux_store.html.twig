@@ -8,6 +8,7 @@
     'isLoggedIn': app.user ? true : false,
     'user': app.user
       ? {
+          'id': app.user.id,
           'username': app.user.username,
           'isEmailConfirmed': app.user.isEmailConfirmed,
           'isPhoneConfirmed': app.user.isPhoneConfirmed,
