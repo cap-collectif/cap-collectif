@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Processor;
+namespace Capco\AppBundle\Processor\Proposal;
 
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
@@ -10,7 +10,7 @@ use Capco\AppBundle\Repository\ProposalRepository;
 class ProposalCreateProcessor implements ProcessorInterface
 {
     private $proposalRepository;
-    private $notifer;
+    private $notifier;
 
     public function __construct(ProposalRepository $proposalRepository, Notify $notifier)
     {

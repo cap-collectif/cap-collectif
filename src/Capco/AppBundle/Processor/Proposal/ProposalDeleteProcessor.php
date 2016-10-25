@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Processor;
+namespace Capco\AppBundle\Processor\Proposal;
 
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
@@ -12,7 +12,7 @@ class ProposalDeleteProcessor implements ProcessorInterface
 {
     private $em;
     private $proposalRepository;
-    private $notifer;
+    private $notifier;
 
     public function __construct(EntityManager $em, ProposalRepository $proposalRepository, Notify $notifier)
     {
