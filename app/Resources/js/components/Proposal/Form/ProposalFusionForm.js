@@ -22,11 +22,11 @@ const renderField = ({error, touched, input: { placeholder, type, autoFocus, lab
   />);
 };
 
-const renderSelect = ({ label, input }) => { // eslint-disable-line
+const renderSelect = ({ name, label, input }) => { // eslint-disable-line
   if (typeof input.loadOptions === 'function') {
-    return <Select.Async {...input} label={label} onBlur={() => { input.onBlur(input.value); }} />;
+    return <Select.Async {...input} name={name} label={label} onBlur={() => { input.onBlur(input.value); }} />;
   }
-  return <Select {...input} label={label} onBlur={() => { input.onBlur(input.value); }} />;
+  return <Select {...input} name={name} label={label} onBlur={() => { input.onBlur(input.value); }} />;
 };
 
 const validate = (values) => {

@@ -18,6 +18,10 @@ export const ProposalCreateFusionButton = React.createClass({
   },
   mixins: [IntlMixin],
 
+  loadProposalForm() {
+    Fetcher.get(`/proposal_forms/${id}`);
+  },
+
   render() {
     const { showModal, isSubmitting, open, close } = this.props;
     return (
@@ -49,9 +53,7 @@ export const ProposalCreateFusionButton = React.createClass({
             <ProposalAdminForm />
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton
-              onClose={() => close()}
-            />
+            <CloseButton onClose={() => close()} />
             <SubmitButton
               id="confirm-proposal-create"
               isSubmitting={isSubmitting}

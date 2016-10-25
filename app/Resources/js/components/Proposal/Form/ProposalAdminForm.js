@@ -7,12 +7,12 @@ import Select from 'react-select';
 
 const formName = 'proposal';
 
-const renderSelect = ({ label, input }) => { // eslint-disable-line
+const renderSelect = ({ name, label, input }) => { // eslint-disable-line
   // noResultsText
   if (typeof input.loadOptions === 'function') {
-    return <Select.Async {...input} label={label} onBlur={() => { input.onBlur(input.value); }} />;
+    return <Select.Async {...input} name={name} label={label} onBlur={() => { input.onBlur(input.value); }} />;
   }
-  return <Select {...input} label={label} onBlur={() => { input.onBlur(input.value); }} />;
+  return <Select {...input} name={name} label={label} onBlur={() => { input.onBlur(input.value); }} />;
 };
 
 const validate = (values) => {
@@ -48,8 +48,6 @@ let ProposalAdminForm = React.createClass({
 ProposalAdminForm = reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  // enableReinitialize: true,
-  // keepDirtyOnReinitialize: true,
   validate,
 })(ProposalAdminForm);
 
