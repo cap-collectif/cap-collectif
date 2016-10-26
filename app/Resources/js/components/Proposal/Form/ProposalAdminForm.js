@@ -11,7 +11,7 @@ const validate = (values) => {
   console.log(values);
 };
 
-let ProposalAdminForm = React.createClass({
+export const ProposalAdminForm = React.createClass({
   propTypes: {
     proposalForm: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
@@ -24,12 +24,6 @@ let ProposalAdminForm = React.createClass({
   render() {
     const { districts, themes, features, user, proposalForm } = this.props;
     const optional = <span className="excerpt">{` ${this.getIntlMessage('global.form.optional')}`}</span>;
-    // const illustration = (
-    //   <span>
-    //     {this.getIntlMessage('proposal.media')}
-    //     {optional}
-    //   </span>
-    // );
     return (
       <form className="form-horizontal">
         <Field
@@ -111,42 +105,39 @@ let ProposalAdminForm = React.createClass({
             />
         }
         {
-          // <FieldArray name="responses" component={renderMembers}/>
-        //   proposalForm.fields.map(field =>
-        //       <Field
-        //         name={`responses${field.id}`}
-        //         type={field.type}
-        //         component={renderInput}
-        //         /* label={(
-        //           <span>
-        //             {field.question}
-        //             {!field.required && optional}
-        //           </span>
-        //         )}*/
-        //         // help={field.helpText}
-        //       />
-        //   )
+          proposalForm.fields.map((field, index) =>
+              <Field
+                name={`responses[${index}].value`}
+                type={field.type}
+                component={renderInput}
+                labelClassName="col-sm-2"
+                wrapperClassName="col-sm-10"
+                label={
+                  <span>
+                    {field.question}
+                    {!field.required && optional}
+                  </span>
+                }
+                // help={field.helpText}
+              />
+          )
         }
-              {/* <ProposalPrivateField
-                show={field.private}
-                children={input}
-              /> */}
       </form>
     );
   },
 });
 
-ProposalAdminForm = reduxForm({
+export default reduxForm({
   form: formName,
   destroyOnUnmount: false,
   validate,
-})(ProposalAdminForm);
-
-ProposalAdminForm = connect(state => ({
-  initialValues: { author: state.default.user.id },
+})(connect((state, props) => ({
+  initialValues: {
+    author: state.default.user.id,
+    responses: props.proposalForm.fields.map(field => ({ question: field.id })),
+  },
   user: state.default.user,
   features: state.default.features,
   themes: state.default.themes,
   districts: state.default.districts,
-}))(ProposalAdminForm);
-export default ProposalAdminForm;
+}))(ProposalAdminForm));

@@ -97,7 +97,9 @@ class ProposalsController extends FOSRestController
             $proposal->setStatus($defaultStatus);
         }
 
-        $form = $this->createForm(ProposalType::class, $proposal, [
+        $formClass = $user->isAdmin() ? ProposalAdminType::class : ProposalType::class;
+
+        $form = $this->createForm($formClass, $proposal, [
             'proposalForm' => $proposalForm,
         ]);
 
@@ -141,10 +143,7 @@ class ProposalsController extends FOSRestController
         $index = $this->get('fos_elastica.index');
         $index->refresh();
 
-        if (
-            $proposalForm->getNotificationsConfiguration()
-            && $proposalForm->getNotificationsConfiguration()->isOnCreate()
-        ) {
+        if ($proposalForm->isNotifyingOnCreate()) {
             $this->get('swarrot.publisher')->publish('proposal.create', new Message(
               json_encode([
                 'proposalId' => $proposal->getId(),
