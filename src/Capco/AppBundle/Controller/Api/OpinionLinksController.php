@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Form\OpinionLinkForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -61,7 +62,7 @@ class OpinionLinksController extends FOSRestController
             ->setIsEnabled(true)
         ;
 
-        $form = $this->createForm('opinion_link', $link);
+        $form = $this->createForm(OpinionLinkForm::class, $link);
         $form->submit($request->request->all(), false);
 
         if (!$link->getOpinionType()->isLinkable()) {

@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Form\ProposalCollectVoteType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -89,7 +90,7 @@ class CollectStepsController extends FOSRestController
             ->setCollectStep($collectStep)
         ;
 
-        $form = $this->createForm('proposal_collect_vote', $vote);
+        $form = $this->createForm(ProposalCollectVoteType::class, $vote);
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {

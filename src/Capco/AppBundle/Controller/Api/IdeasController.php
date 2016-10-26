@@ -6,6 +6,8 @@ use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\IdeaComment;
 use Capco\AppBundle\Entity\IdeaVote;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Form\IdeaType;
+use Capco\AppBundle\Form\IdeaVoteType;
 use Capco\AppBundle\Form\ReportingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -156,7 +158,7 @@ class IdeasController extends FOSRestController
             $idea->setMedia($media);
         }
 
-        $form = $this->createForm('idea', $idea);
+        $form = $this->createForm(IdeaType::class, $idea);
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {
@@ -205,7 +207,7 @@ class IdeasController extends FOSRestController
             $idea->setMedia($media);
         }
 
-        $form = $this->createForm('idea', $idea);
+        $form = $this->createForm(IdeaType::class, $idea);
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {
@@ -259,7 +261,7 @@ class IdeasController extends FOSRestController
             ->setIdea($idea)
         ;
 
-        $form = $this->createForm('idea_vote', $vote, ['commentable' => $idea->getIsCommentable()]);
+        $form = $this->createForm(IdeaVoteType::class, $vote, ['commentable' => $idea->getIsCommentable()]);
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {

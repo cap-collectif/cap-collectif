@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\ArgumentVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Form\ArgumentType;
 use Capco\AppBundle\Form\ReportingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -134,7 +135,7 @@ class ArgumentsController extends FOSRestController
             ->setUpdatedAt(new \Datetime())
         ;
 
-        $form = $this->createForm('argument', $argument);
+        $form = $this->createForm(ArgumentType::class, $argument);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -188,7 +189,7 @@ class ArgumentsController extends FOSRestController
             ->setUpdatedAt(new \Datetime())
         ;
 
-        $form = $this->createForm('argument', $argument);
+        $form = $this->createForm(ArgumentType::class, $argument);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -225,7 +226,7 @@ class ArgumentsController extends FOSRestController
             throw new BadRequestHttpException('Uncontributable argument');
         }
 
-        $form = $this->createForm('argument', $argument);
+        $form = $this->createForm(ArgumentType::class, $argument);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -267,7 +268,7 @@ class ArgumentsController extends FOSRestController
             throw new BadRequestHttpException('Uncontributable argument');
         }
 
-        $form = $this->createForm('argument', $argument);
+        $form = $this->createForm(ArgumentType::class, $argument);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

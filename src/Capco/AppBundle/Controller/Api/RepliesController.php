@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Form\ReplyType;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
@@ -128,7 +129,7 @@ class RepliesController extends FOSRestController
             ->setEnabled(true)
         ;
 
-        $form = $this->createForm('reply', $reply, ['anonymousAllowed' => $questionnaire->isAnonymousAllowed()]);
+        $form = $this->createForm(ReplyType::class, $reply, ['anonymousAllowed' => $questionnaire->isAnonymousAllowed()]);
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {
@@ -181,7 +182,7 @@ class RepliesController extends FOSRestController
             throw new AccessDeniedException();
         }
 
-        $form = $this->createForm('reply', $reply);
+        $form = $this->createForm(ReplyType::class, $reply);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

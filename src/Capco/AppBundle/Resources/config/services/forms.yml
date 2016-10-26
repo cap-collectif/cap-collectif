@@ -1,21 +1,20 @@
 services:
-
   capco.form.type.purified_text:
     class: Capco\AppBundle\Form\Type\PurifiedTextType
     arguments: ["@capco.form.transformer.html_purifier"]
     tags:
-      - { name: form.type, alias: purified_text }
+      - { name: form.type }
 
   capco.form.type.purified_textarea:
     class: Capco\AppBundle\Form\Type\PurifiedTextareaType
     arguments: ["@capco.form.transformer.html_purifier"]
     tags:
-      - { name: form.type, alias: purified_textarea }
+      - { name: form.type }
 
   capco.help_extension:
     class: Capco\AppBundle\Form\Extension\HelpExtension
     tags:
-      - { name: form.type_extension, alias: text }
+      - { name: form.type_extension }
 
   capco.form.type_extension.media:
     class: Capco\AppBundle\Form\Extension\MediaTypeExtension
@@ -25,48 +24,48 @@ services:
   capco.form.opinion:
     class: Capco\AppBundle\Form\OpinionForm
     tags:
-      - { name: form.type, alias: opinion }
+      - { name: form.type }
 
   capco.form.opinion_link:
     class: Capco\AppBundle\Form\OpinionLinkForm
     tags:
-      - { name: form.type, alias: opinion_link }
+      - { name: form.type }
 
   capco.form.proposal:
     class: Capco\AppBundle\Form\ProposalType
     arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager", "@capco.abstract_question.repository"]
     tags:
-      - { name: form.type, alias: proposal }
+      - { name: form.type }
 
   capco.form.reply:
     class: Capco\AppBundle\Form\ReplyType
     arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager"]
     tags:
-      - { name: form.type, alias: reply }
+      - { name: form.type }
 
   capco.form.response.value:
     class: Capco\AppBundle\Form\ValueResponseType
     arguments: ["@capco.form.transformer.entity_to_id"]
     tags:
-      - { name: form.type, alias: value_response }
+      - { name: form.type }
 
   capco.form.response.media:
     class: Capco\AppBundle\Form\MediaResponseType
     arguments: ["@capco.form.transformer.entity_to_id"]
     tags:
-      - { name: form.type, alias: media_response }
+      - { name: form.type }
 
   capco.form.proposal_selection_vote:
       class: Capco\AppBundle\Form\ProposalSelectionVoteType
       arguments: ["@security.token_storage"]
       tags:
-        - { name: form.type, alias: proposal_selection_vote }
+        - { name: form.type }
 
   capco.form.proposal_collect_vote:
       class: Capco\AppBundle\Form\ProposalCollectVoteType
       arguments: ["@security.token_storage"]
       tags:
-        - { name: form.type, alias: proposal_collect_vote }
+        - { name: form.type }
 
   capco.form.transformer.entity_to_id:
     class: Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer
@@ -75,27 +74,27 @@ services:
   capco.form.argument:
     class: Capco\AppBundle\Form\ArgumentType
     tags:
-      - { name: form.type, alias: argument }
+      - { name: form.type }
 
   capco.form.profile:
       class: Capco\UserBundle\Form\Type\ApiProfileFormType
       tags:
-        - { name: form.type, alias: api_user_profile }
+        - { name: form.type }
 
   capco.form.registration:
       class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
       arguments: ["@capco.toggle.manager"]
       tags:
-        - { name: form.type, alias: registration }
+        - { name: form.type }
 
   capco.form.idea:
     class: Capco\AppBundle\Form\IdeaType
     arguments: ["@capco.toggle.manager"]
     tags:
-      - { name: form.type, alias: idea }
+      - { name: form.type }
 
   capco.form.idea_vote:
     class: Capco\AppBundle\Form\IdeaVoteType
     arguments: ["@security.token_storage"]
     tags:
-      - { name: form.type, alias: idea_vote }
+      - { name: form.type }

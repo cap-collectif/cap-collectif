@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
+use Sonata\UserBundle\Form\Type\ApiUserType;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -76,7 +78,7 @@ class UsersController extends FOSRestController
     {
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
-        $form = $this->createForm('registration', $user);
+        $form = $this->createForm(ApiRegistrationFormType::class, $user);
 
         $form->submit($request->request->all(), false);
 
@@ -108,7 +110,7 @@ class UsersController extends FOSRestController
         $user = $this->getUser();
         $previousPhone = $user->getPhone();
 
-        $form = $this->createForm('api_user_profile', $user);
+        $form = $this->createForm(ApiUserType::class, $user);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

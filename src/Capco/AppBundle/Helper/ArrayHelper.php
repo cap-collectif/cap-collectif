@@ -13,16 +13,16 @@ class ArrayHelper
                 $unflat[$key] = $value;
                 continue;
             }
-            $pointer = $unflat;
+            $pointer = &$unflat;
             do {
                 $level = array_shift($path);
                 if (!isset($pointer[$level])) {
                     $pointer[$level] = [];
                 }
 
-                $tmpPointer = $pointer[$level];
+                $tmpPointer = &$pointer[$level];
                 unset($pointer);
-                $pointer = $tmpPointer;
+                $pointer = &$tmpPointer;
                 unset($tmpPointer);
 
                 if (count($path) === 1) {

@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Form\OpinionForm;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -118,7 +119,7 @@ class OpinionsController extends FOSRestController
           ->setOpinionType($type)
           ;
 
-         $form = $this->createForm('opinion', $opinion);
+         $form = $this->createForm(OpinionForm::class, $opinion);
          $form->submit($request->request->all(), false);
 
          if (!$form->isValid()) {
@@ -152,7 +153,7 @@ class OpinionsController extends FOSRestController
            throw new BadRequestHttpException('Uncontribuable opinion.');
        }
 
-       $form = $this->createForm('opinion', $opinion);
+       $form = $this->createForm(OpinionForm::class, $opinion);
        $form->submit($request->request->all(), false);
 
        if (!$form->isValid()) {

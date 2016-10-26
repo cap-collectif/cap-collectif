@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Form\ProposalType;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Helper\ArrayHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -96,7 +97,7 @@ class ProposalsController extends FOSRestController
             $proposal->setStatus($defaultStatus);
         }
 
-        $form = $this->createForm('proposal', $proposal, [
+        $form = $this->createForm(ProposalType::class, $proposal, [
             'proposalForm' => $proposalForm,
         ]);
 
@@ -330,7 +331,7 @@ class ProposalsController extends FOSRestController
 
         $em = $this->get('doctrine.orm.entity_manager');
 
-        $form = $this->createForm('proposal', $proposal, [
+        $form = $this->createForm(ProposalType::class, $proposal, [
             'proposalForm' => $proposalForm,
         ]);
 

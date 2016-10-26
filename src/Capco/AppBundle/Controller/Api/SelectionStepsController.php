@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Form\ProposalSelectionVoteType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -110,7 +111,7 @@ class SelectionStepsController extends FOSRestController
             ->setSelectionStep($selectionStep)
         ;
 
-        $form = $this->createForm('proposal_selection_vote', $vote);
+        $form = $this->createForm(ProposalSelectionVoteType::class, $vote);
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {
