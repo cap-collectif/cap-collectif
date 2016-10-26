@@ -203,11 +203,6 @@ sonata_user:
             type: capco_user_profile
             validation_groups:
                 - profile
-        register:
-            form:
-                type: capco_user_registration
-                validation_groups:
-                    - registration
     admin:
         user:
             class: Capco\AdminBundle\Admin\UserAdmin
