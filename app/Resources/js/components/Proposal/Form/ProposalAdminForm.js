@@ -2,19 +2,11 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import Select from 'react-select';
 // import Fetcher from '../../../services/Fetcher';
 import renderInput from '../../Form/Field';
+import { renderSelect } from '../../Form/Select';
 
 const formName = 'proposal';
-
-const renderSelect = ({ name, label, input }) => { // eslint-disable-line
-  // noResultsText
-  if (typeof input.loadOptions === 'function') {
-    return <Select.Async {...input} name={name} label={label} onBlur={() => { input.onBlur(input.value); }} />;
-  }
-  return <Select {...input} name={name} label={label} onBlur={() => { input.onBlur(input.value); }} />;
-};
 
 const validate = (values) => {
   console.log(values);
@@ -40,7 +32,7 @@ let ProposalAdminForm = React.createClass({
     //   </span>
     // );
     return (
-      <form>
+      <form className="form-horizontal">
         <Field
           name="author"
           label="Auteur"
@@ -68,6 +60,7 @@ let ProposalAdminForm = React.createClass({
           proposalForm.usingCategories && proposalForm.categories.length > 0 &&
             <Field
               name="category"
+              clearable={!proposalForm.categoryMandatory}
               label={
                 <span>
                   {this.getIntlMessage('proposal.category')}
@@ -87,6 +80,7 @@ let ProposalAdminForm = React.createClass({
                 placeholder={this.getIntlMessage('proposal.select.theme')}
                 options={themes.map(theme => ({ value: theme.id, label: theme.title }))}
                 component={renderSelect}
+                clearable={!proposalForm.themeMandatory}
                 label={
                   <span>
                     {this.getIntlMessage('proposal.theme')}
@@ -102,6 +96,7 @@ let ProposalAdminForm = React.createClass({
               name="district"
               placeholder={this.getIntlMessage('proposal.select.district')}
               component={renderSelect}
+              clearable={!proposalForm.districtMandatory}
               label={
                 <span>
                   {this.getIntlMessage('proposal.district')}
