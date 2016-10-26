@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-// import Fetcher from '../../../services/Fetcher';
 import renderInput from '../../Form/Field';
 import { renderSelect } from '../../Form/Select';
 
@@ -47,6 +46,8 @@ let ProposalAdminForm = React.createClass({
           label="Titre"
           type="text"
           autoComplete="off"
+          labelClassName="col-sm-2"
+          wrapperClassName="col-sm-10"
           component={renderInput}
         />
         <Field
@@ -54,7 +55,9 @@ let ProposalAdminForm = React.createClass({
           type="editor"
           component={renderInput}
           label={this.getIntlMessage('proposal.body')}
-          help={proposalForm.descriptionHelpText}
+          labelClassName="col-sm-2"
+          wrapperClassName="col-sm-10"
+          // help={proposalForm.descriptionHelpText}
         />
         {
           proposalForm.usingCategories && proposalForm.categories.length > 0 &&
@@ -68,7 +71,7 @@ let ProposalAdminForm = React.createClass({
                 </span>
               }
               component={renderSelect}
-              help={proposalForm.categoryHelpText}
+              // help={proposalForm.categoryHelpText}
               placeholder={this.getIntlMessage('proposal.select.category')}
               options={proposalForm.categories.map(c => ({ value: c.id, label: c.name }))}
             />
@@ -78,7 +81,7 @@ let ProposalAdminForm = React.createClass({
             <Field
                 name="theme"
                 placeholder={this.getIntlMessage('proposal.select.theme')}
-                options={themes.map(theme => ({ value: theme.id, label: theme.title }))}
+                options={themes.map(t => ({ value: t.id, label: t.title }))}
                 component={renderSelect}
                 clearable={!proposalForm.themeMandatory}
                 label={
@@ -87,7 +90,7 @@ let ProposalAdminForm = React.createClass({
                     {!proposalForm.themeMandatory && optional}
                   </span>
                 }
-                help={proposalForm.themeHelpText}
+                // help={proposalForm.themeHelpText}
             />
         }
         {
@@ -104,7 +107,7 @@ let ProposalAdminForm = React.createClass({
                 </span>
               }
               help={proposalForm.districtHelpText}
-              options={districts.map(district => ({ value: district.id, label: district.name }))}
+              options={districts.map(d => ({ value: d.id, label: d.name }))}
             />
         }
         {
