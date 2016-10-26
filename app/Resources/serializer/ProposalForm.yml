@@ -68,6 +68,9 @@ Capco\AppBundle\Entity\ProposalForm:
           type: boolean
           groups: [ProposalForms]
           serialized_name: districtMandatory
+        categories:
+          expose: true
+          groups: [ProposalForms]
     virtual_properties:
         canContribute:
             serialized_name: isContribuable

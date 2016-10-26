@@ -27,3 +27,8 @@ Capco\AppBundle\Entity\Steps\CollectStep:
       statuses:
         expose: true
         groups: [Steps, Statuses]
+    virtual_properties:
+        getProposalFormId:
+          serialized_name: proposalFormId
+          expose: true
+          groups: [Steps]

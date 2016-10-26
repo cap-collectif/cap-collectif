@@ -32,13 +32,11 @@ const renderSelect = ({ name, label, input }) => { // eslint-disable-line
 const validate = (values) => {
   console.log(values);
 };
-const handleSubmit = () => {};
 
 let ProposalFusionForm = React.createClass({
   propTypes: {
     proposalForm: PropTypes.object,
     projects: PropTypes.array.isRequired,
-    proposals: PropTypes.array.isRequired,
     onMount: PropTypes.func.isRequired,
     currentCollectStep: PropTypes.object,
   },
@@ -51,7 +49,7 @@ let ProposalFusionForm = React.createClass({
   render() {
     const { currentCollectStep, projects } = this.props;
     return (
-      <form onSubmit={handleSubmit}>
+      <form>
         <Field
           name="project"
           label="Projet lié"
