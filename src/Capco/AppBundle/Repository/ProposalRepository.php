@@ -188,7 +188,7 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getLast(int $limit = 1, int $offset = 0)
+    public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author', 'amedia', 'theme', 'status', 'district')
@@ -202,8 +202,10 @@ class ProposalRepository extends EntityRepository
             ->addOrderBy('proposal.createdAt', 'DESC')
             ->addGroupBy('proposal.id');
 
-        $qb->setMaxResults($limit);
-        $qb->setFirstResult($offset);
+        if ($limit) {
+          $qb->setMaxResults($limit);
+          $qb->setFirstResult($offset);
+        }
 
         return $qb
             ->getQuery()
