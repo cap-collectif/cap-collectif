@@ -40,7 +40,7 @@ export const ProposalFusionForm = React.createClass({
         {
           currentCollectStep &&
             <Field
-              name="parents"
+              name="childConnections"
               multi
               label="Propositions"
               placeholder="Sélectionnez les propositions à fusionner"
