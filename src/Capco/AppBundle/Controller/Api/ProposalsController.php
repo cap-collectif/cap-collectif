@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ProposalType;
+use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Helper\ArrayHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;

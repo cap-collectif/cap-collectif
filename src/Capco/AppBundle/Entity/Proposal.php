@@ -229,6 +229,8 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $this->selections = new ArrayCollection();
         $this->likers = new ArrayCollection();
         $this->progressSteps = new ArrayCollection();
+        $this->childConnections = new ArrayCollection();
+        $this->parentConnections = new ArrayCollection();
     }
 
     public function isIndexable(): bool
