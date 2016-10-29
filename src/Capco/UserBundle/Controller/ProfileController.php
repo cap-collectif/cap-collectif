@@ -114,7 +114,6 @@ class ProfileController extends BaseController
      * @Route("/", name="capco_user_profile_show", defaults={"_feature_flags" = "profiles"})
      * @Route("/{slug}", name="capco_user_profile_show_all", defaults={"_feature_flags" = "profiles"})
      * @Template()
-     * @Security("has_role('ROLE_USER')")
      */
     public function showAction(User $user = null)
     {
