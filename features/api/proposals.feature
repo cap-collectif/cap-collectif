@@ -649,7 +649,7 @@ Feature: Proposal Restful Api
       {
         "author": 2,
         "childConnections": [
-          1
+          1, 2
         ],
         "title": "Acheter un sauna pour Capco",
         "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
@@ -668,6 +668,8 @@ Feature: Proposal Restful Api
       }
       """
       Then the JSON response status code should be 201
+      And proposal "1" should be fusioned
+      And proposal "2" should be fusioned
 
   @database
   Scenario: Logged in API client wants to add a proposal (with nothing for not required response)
