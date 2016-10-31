@@ -1,15 +1,13 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import renderInput from '../../Form/Field';
 import { renderSelect } from '../../Form/Select';
 
 const formName = 'proposal';
 
-const validate = (values) => {
-  console.log(values);
-};
+const validate = (values) => true;
 
 export const ProposalAdminForm = React.createClass({
   propTypes: {
@@ -29,7 +27,7 @@ export const ProposalAdminForm = React.createClass({
         <Field
           name="author"
           label="Auteur"
-          options={[{ label: user.displayName, value: user.id }, { label: 'lol', value: 899 }]}
+          options={[{ label: user.displayName, value: user.id }]}
           component={renderSelect}
           clearable={false}
           autoload={false}
@@ -127,12 +125,9 @@ export const ProposalAdminForm = React.createClass({
   },
 });
 
-export default reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-  validate,
-})(connect((state, props) => ({
+export default connect((state, props) => ({
   initialValues: {
+    project: parseInt(formValueSelector(formName)(state, 'project'), 10), // keepDirty fails
     author: state.default.user.id,
     responses: props.proposalForm.fields.map(field => ({ question: field.id })),
   },
@@ -140,4 +135,10 @@ export default reduxForm({
   features: state.default.features,
   themes: state.default.themes,
   districts: state.default.districts,
-}))(ProposalAdminForm));
+}))(reduxForm({
+  form: formName,
+  destroyOnUnmount: false,
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+  validate,
+})(ProposalAdminForm));

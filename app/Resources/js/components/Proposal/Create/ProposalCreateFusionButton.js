@@ -2,7 +2,11 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { closeCreateFusionModal, openCreateFusionModal } from '../../../redux/modules/proposal';
+import {
+  closeCreateFusionModal,
+  openCreateFusionModal,
+  submitFusionForm,
+} from '../../../redux/modules/proposal';
 import ProposalFusionForm from '../Form/ProposalFusionForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
@@ -10,13 +14,13 @@ import ProposalAdminForm from '../Form/ProposalAdminForm';
 import Fetcher from '../../../services/Fetcher';
 import { formValueSelector } from 'redux-form';
 
-const submitProposalFusionForm = () => {};
 export const ProposalCreateFusionButton = React.createClass({
   propTypes: {
     showModal: PropTypes.bool.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     open: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired,
+    submit: PropTypes.func.isRequired,
     proposalFormId: PropTypes.number,
   },
   mixins: [IntlMixin],
@@ -43,7 +47,7 @@ export const ProposalCreateFusionButton = React.createClass({
   },
 
   render() {
-    const { showModal, isSubmitting, open, close } = this.props;
+    const { showModal, isSubmitting, open, close, submit } = this.props;
     const { proposalForm } = this.state;
     return (
       <div>
@@ -83,7 +87,8 @@ export const ProposalCreateFusionButton = React.createClass({
             <SubmitButton
               id="confirm-proposal-create"
               isSubmitting={isSubmitting}
-              onSubmit={() => submitProposalFusionForm()}
+              // loginOverlay={false}
+              onSubmit={() => submit(proposalForm.id)}
             />
           </Modal.Footer>
         </Modal>
@@ -105,5 +110,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { close: closeCreateFusionModal, open: openCreateFusionModal }
+  { close: closeCreateFusionModal, open: openCreateFusionModal, submit: submitFusionForm }
 )(ProposalCreateFusionButton);

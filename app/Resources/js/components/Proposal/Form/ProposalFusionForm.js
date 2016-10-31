@@ -34,6 +34,7 @@ export const ProposalFusionForm = React.createClass({
           placeholder="Sélectionnez un projet"
           isLoading={projects.length === 0}
           component={renderSelect}
+          clearable={false}
           options={projects.map(project => ({ value: project.id, label: project.title }))}
         />
         <br />
@@ -56,11 +57,7 @@ export const ProposalFusionForm = React.createClass({
   },
 });
 
-export default reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-  validate,
-})(connect(state => {
+export default connect(state => {
   const projects = state.project.projects.filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
   const selectedProject = parseInt(formValueSelector(formName)(state, 'project'), 10);
   return {
@@ -69,4 +66,8 @@ export default reduxForm({
       ? projects.find(p => p.id === selectedProject).steps.filter(s => s.type === 'collect')[0]
       : null,
   };
-}, { onMount: fetchProjects })(ProposalFusionForm));
+}, { onMount: fetchProjects })(reduxForm({
+  form: formName,
+  destroyOnUnmount: false,
+  validate,
+})(ProposalFusionForm));

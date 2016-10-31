@@ -40,6 +40,7 @@ const DELETE_REQUEST = 'proposal/DELETE_REQUEST';
 const EDIT_PROPOSAL_FORM = 'proposal/EDIT_PROPOSAL_FORM';
 const CLOSE_CREATE_FUSION_MODAL = 'proposal/CLOSE_CREATE_FUSION_MODAL';
 const OPEN_CREATE_FUSION_MODAL = 'proposal/OPEN_CREATE_FUSION_MODAL';
+const SUBMIT_FUSION_FORM = 'proposa/SUBMIT_FUSION_FORM';
 
 const initialState = {
   currentProposalId: null,
@@ -52,6 +53,7 @@ const initialState = {
   showCreateModal: false,
   isCreating: false,
   isCreatingFusion: false,
+  isSubmittingFusion: false,
   showDeleteModal: false,
   isDeleting: false,
   isVoting: false,
@@ -66,6 +68,7 @@ const initialState = {
 
 export const closeCreateFusionModal = () => ({ type: CLOSE_CREATE_FUSION_MODAL });
 export const openCreateFusionModal = () => ({ type: OPEN_CREATE_FUSION_MODAL });
+export const submitFusionForm = (proposalForm) => ({ type: SUBMIT_FUSION_FORM, proposalForm });
 export const openVotesModal = (stepId) => ({ type: OPEN_VOTES_MODAL, stepId });
 export const closeVotesModal = (stepId) => ({ type: CLOSE_VOTES_MODAL, stepId });
 export const voteSuccess = (proposalId, stepId, vote) => ({
@@ -264,6 +267,26 @@ export function* fetchVotesByStep(action) {
   }
 }
 
+function* submitFusionFormData({ proposalForm }) {
+  const globalState = yield select();
+  const formData = new FormData();
+  const data = { ...globalState.form.proposal.values };
+  delete data.project;
+  const flattenedData = flatten(data);
+  Object.keys(flattenedData).map(key => {
+    formData.append(key, flattenedData[key]);
+  });
+  return Fetcher
+      .postFormData(`/proposal_forms/${proposalForm}/proposals`, formData)
+      .then(() => {
+        // dispatch(closeCreateModal());
+      })
+      .catch(() => {
+        // dispatch(cancelSubmitProposal());
+      })
+    ;
+}
+
 export function* fetchProposals({ step }) {
   const globalState = yield select();
   step = step || globalState.project.projects[globalState.project.currentProjectById].steps.filter(s => s.id === globalState.project.currentProjectStepById)[0];
@@ -309,6 +332,7 @@ export function* saga() {
     takeEvery(POSTS_FETCH_REQUESTED, fetchPosts),
     takeEvery(VOTES_FETCH_REQUESTED, fetchVotesByStep),
     takeEvery(FETCH_REQUESTED, fetchProposals),
+    takeEvery(SUBMIT_FUSION_FORM, submitFusionFormData),
   ];
 }
 
