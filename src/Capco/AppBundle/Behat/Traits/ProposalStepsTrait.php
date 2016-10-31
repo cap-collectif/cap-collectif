@@ -664,13 +664,22 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @Then proposal :id should be fusioned
+     * @Then proposal :id should be fusioned to proposal :lastId
      */
-    public function proposalShouldBeFusioned($id)
+    public function proposalShouldBeFusioned(int $id, int $lastId)
     {
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($id);
         expect($proposal->getParentConnections()->count())->toBe(1);
-        expect($proposal->getParentConnections()->first()->getId())->toBe(15);
+        expect($proposal->getParentConnections()->first()->getId())->toBe($lastId);
+    }
+
+    /**
+     * @Then proposal :id should have author :username
+     */
+    public function proposalShouldHaveAuthor($id, $username)
+    {
+        $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($id);
+        expect($proposal->getAuthor()->getUsername())->toBe($username);
     }
 
     /**
