@@ -117,8 +117,10 @@ class ProfileController extends BaseController
      */
     public function showAction(User $user = null)
     {
-        if (!$user) {
-            $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $user ?? $this->get('security.token_storage')->getToken()->getUser();
+
+        if (!$user || !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
         }
 
         $doctrine = $this->getDoctrine();
