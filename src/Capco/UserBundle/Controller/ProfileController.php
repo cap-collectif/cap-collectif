@@ -117,11 +117,11 @@ class ProfileController extends BaseController
      */
     public function showAction(User $user = null)
     {
-        $user = $user ?? $this->get('security.token_storage')->getToken()->getUser();
-
         if (!$user && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
+
+        $user = $user ?? $this->get('security.token_storage')->getToken()->getUser();
 
         $doctrine = $this->getDoctrine();
         $serializer = $this->get('jms_serializer');
