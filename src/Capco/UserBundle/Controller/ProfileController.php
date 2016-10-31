@@ -119,7 +119,7 @@ class ProfileController extends BaseController
     {
         $user = $user ?? $this->get('security.token_storage')->getToken()->getUser();
 
-        if (!$user || !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (!$user && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
 
