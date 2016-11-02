@@ -22,8 +22,6 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\SelfLinkableTrait;
-use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 
 /**
  * @ORM\Table(name="proposal")
@@ -36,7 +34,7 @@ use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
  * @CapcoAssert\HasCategoryIfMandatory()
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
  */
-class Proposal implements Contribution, CommentableInterface, SelfLinkableInterface
+class Proposal implements Contribution, CommentableInterface
 {
     use IdTrait;
     use CommentableTrait;
@@ -47,7 +45,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use SoftDeleteableEntity;
     use AnswerableTrait;
     use ExpirableTrait;
-    use SelfLinkableTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -229,8 +226,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $this->selections = new ArrayCollection();
         $this->likers = new ArrayCollection();
         $this->progressSteps = new ArrayCollection();
-        $this->childConnections = new ArrayCollection();
-        $this->parentConnections = new ArrayCollection();
     }
 
     public function isIndexable(): bool

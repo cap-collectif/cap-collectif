@@ -11,7 +11,6 @@ exports.config = {
     enabled: true,
     styles: {
       quill: ['dist/quill.base.css', 'dist/quill.snow.css'],
-      'react-select': ['dist/react-select.css'],
     },
   },
   paths: {
@@ -89,7 +88,6 @@ exports.config = {
         ],
         'css/style-admin.css': [
           'app/Resources/scss/style-admin.scss',
-          /^node_modules/,
         ],
       },
     },

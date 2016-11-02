@@ -16,7 +16,7 @@ const Field = React.createClass({
       placeholder: PropTypes.string,
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      autoFocus: PropTypes.bool,
+      autoFocus: PropTypes.bool.isRequired,
       value: PropTypes.any,
       autoComplete: PropTypes.string,
     }).isRequired,
@@ -25,7 +25,7 @@ const Field = React.createClass({
 
   render() {
     const { touched, error } = this.props;
-    const { autoFocus, disableValidation, label, placeholder, type, name, divClassName, labelClassName, autoComplete } = this.props.input;
+    const { disableValidation, label, placeholder, type, name, divClassName, labelClassName, autoComplete } = this.props.input;
     const check = touched && !disableValidation;
     const input = (
       <Input
@@ -38,7 +38,6 @@ const Field = React.createClass({
         bsStyle={check ? (error ? 'error' : 'success') : null}
         hasFeedback={check}
         autoComplete={autoComplete}
-        autoFocus={autoFocus || false}
         {...this.props.input}
       />
     );

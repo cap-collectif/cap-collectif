@@ -660,26 +660,7 @@ trait ProposalStepsTrait
     public function iShouldHaveNbVotes($nb)
     {
         $count = $this->navigationContext->getPage('project user votes page')->countVotes();
-        expect($count)->toBe($nb);
-    }
-
-    /**
-     * @Then proposal :id should be fusioned to proposal :lastId
-     */
-    public function proposalShouldBeFusioned(int $id, int $lastId)
-    {
-        $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($id);
-        expect($proposal->getParentConnections()->count())->toBe(1);
-        expect($proposal->getParentConnections()->first()->getId())->toBe($lastId);
-    }
-
-    /**
-     * @Then proposal :id should have author :username
-     */
-    public function proposalShouldHaveAuthor($id, $username)
-    {
-        $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($id);
-        expect($proposal->getAuthor()->getUsername())->toBe($username);
+        expect($count == $nb);
     }
 
     /**

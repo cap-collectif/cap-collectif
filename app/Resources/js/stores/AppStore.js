@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import { reducer as formReducer } from 'redux-form';
 import LocalStorageService from '../services/LocalStorageService';
 import { reducer as reportReducer } from '../redux/modules/report';
-import { reducer as projectReducer, saga as projectSaga } from '../redux/modules/project';
+import { reducer as projectReducer } from '../redux/modules/project';
 import { reducer as ideaReducer, saga as ideaSaga } from '../redux/modules/idea';
 import { reducer as proposalReducer, saga as proposalSaga } from '../redux/modules/proposal';
 import { reducer as opinionReducer } from '../redux/modules/opinion';
@@ -37,7 +37,6 @@ export default function configureStore(initialState) {
 
   sagaMiddleware.run(ideaSaga);
   sagaMiddleware.run(proposalSaga);
-  sagaMiddleware.run(projectSaga);
 
   return store;
 }
