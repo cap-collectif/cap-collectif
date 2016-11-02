@@ -49,7 +49,6 @@ export const ProposalAdminForm = React.createClass({
           label={this.getIntlMessage('proposal.body')}
           labelClassName="col-sm-2"
           wrapperClassName="col-sm-10"
-          // help={proposalForm.descriptionHelpText}
         />
         {
           proposalForm.usingCategories && proposalForm.categories.length > 0 &&
@@ -63,7 +62,6 @@ export const ProposalAdminForm = React.createClass({
                 </span>
               }
               component={renderSelect}
-              // help={proposalForm.categoryHelpText}
               placeholder={this.getIntlMessage('proposal.select.category')}
               options={proposalForm.categories.map(c => ({ value: c.id, label: c.name }))}
             />
@@ -71,18 +69,17 @@ export const ProposalAdminForm = React.createClass({
         {
           features.themes && proposalForm.usingThemes &&
             <Field
-                name="theme"
-                placeholder={this.getIntlMessage('proposal.select.theme')}
-                options={themes.map(t => ({ value: t.id, label: t.title }))}
-                component={renderSelect}
-                clearable={!proposalForm.themeMandatory}
-                label={
-                  <span>
-                    {this.getIntlMessage('proposal.theme')}
-                    {!proposalForm.themeMandatory && optional}
-                  </span>
-                }
-                // help={proposalForm.themeHelpText}
+              name="theme"
+              placeholder={this.getIntlMessage('proposal.select.theme')}
+              options={themes.map(t => ({ value: t.id, label: t.title }))}
+              component={renderSelect}
+              clearable={!proposalForm.themeMandatory}
+              label={
+                <span>
+                  {this.getIntlMessage('proposal.theme')}
+                  {!proposalForm.themeMandatory && optional}
+                </span>
+              }
             />
         }
         {
@@ -104,20 +101,19 @@ export const ProposalAdminForm = React.createClass({
         }
         {
           proposalForm.fields.map((field, index) =>
-              <Field
-                name={`responses[${index}].value`}
-                type={field.type}
-                component={renderInput}
-                labelClassName="col-sm-2"
-                wrapperClassName="col-sm-10"
-                label={
-                  <span>
-                    {field.question}
-                    {!field.required && optional}
-                  </span>
-                }
-                // help={field.helpText}
-              />
+            <Field
+              name={`responses[${index}].value`}
+              type={field.type}
+              component={renderInput}
+              labelClassName="col-sm-2"
+              wrapperClassName="col-sm-10"
+              label={
+                <span>
+                  {field.question}
+                  {!field.required && optional}
+                </span>
+              }
+            />
           )
         }
       </form>

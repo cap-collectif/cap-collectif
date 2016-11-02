@@ -57,7 +57,7 @@ export const ProposalCreateFusionButton = React.createClass({
           onClick={() => open()}
         >
           <i className="cap cap-add-1"></i>
-          { ` ${this.getIntlMessage('proposal.add')}`}
+          { ` ${this.getIntlMessage('proposal.add_fusion')}`}
         </Button>
         <Modal
           animation={false}
@@ -87,7 +87,6 @@ export const ProposalCreateFusionButton = React.createClass({
             <SubmitButton
               id="confirm-proposal-create"
               isSubmitting={isSubmitting}
-              // loginOverlay={false}
               onSubmit={() => submit(proposalForm.id)}
             />
           </Modal.Footer>
