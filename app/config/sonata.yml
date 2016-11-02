@@ -200,7 +200,7 @@ sonata_user:
         user:                 Capco\UserBundle\Entity\User
     profile:
         form:
-            type: capco_user_profile
+            type: Capco\UserBundle\Form\Type\ProfileFormType
             validation_groups:
                 - profile
     admin:

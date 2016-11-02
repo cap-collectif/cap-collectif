@@ -3,12 +3,15 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Helper\EnvHelper;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProposalAdmin extends Admin
 {
@@ -47,7 +50,7 @@ class ProposalAdmin extends Admin
             ->add('title', null, [
                 'label' => 'admin.fields.proposal.title',
             ])
-            ->add('body', 'ckeditor', [
+            ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.proposal.body',
                 'config_name' => 'admin_editor',
             ])
@@ -91,13 +94,13 @@ class ProposalAdmin extends Admin
                 'required' => false,
                 'help' => 'admin.fields.proposal.help.estimation',
             ])
-            ->add('rating', 'choice', [
+            ->add('rating', ChoiceType::class, [
                 'label' => 'admin.fields.proposal.rating',
                 'required' => false,
                 'choices' => Proposal::$ratings,
                 'help' => 'admin.fields.proposal.help.rating',
             ])
-            ->add('annotation', 'ckeditor', [
+            ->add('annotation', CKEditorType::class, [
                 'label' => 'admin.fields.proposal.annotation',
                 'required' => false,
                 'help' => 'admin.fields.proposal.help.annotation',
@@ -176,6 +179,103 @@ class ProposalAdmin extends Admin
                     'edit' => 'inline',
                     'inline' => 'table',
                 ])
+                ->end();
+        }
+
+        // Evaluation
+        if (EnvHelper::get('INSTANCE_NAME') === 'rennes' || EnvHelper::get('INSTANCE_NAME') === 'rennespreprod') {
+            $formMapper
+                ->with('admin.fields.proposal.group_evaluation')
+                ->add(
+                    'servicePilote',
+                    CKEditorType::class,
+                    [
+                        'label' => 'admin.fields.proposal.servicePilote',
+                        'config_name' => 'admin_editor',
+                        'required' => false,
+                        'help' => 'admin.fields.proposal.help.servicePilote',
+                    ]
+                )
+                ->add(
+                    'domaniality',
+                    CKEditorType::class,
+                    [
+                        'label' => 'admin.fields.proposal.domaniality',
+                        'config_name' => 'admin_editor',
+                        'required' => false,
+                        'help' => 'admin.fields.proposal.help.domaniality',
+                    ]
+                )
+                ->add(
+                    'compatibility',
+                    CKEditorType::class,
+                    [
+                        'label' => 'admin.fields.proposal.compatibility',
+                        'config_name' => 'admin_editor',
+                        'required' => false,
+                        'help' => 'admin.fields.proposal.help.compatibility',
+                    ]
+                )
+                ->add(
+                    'environmentalImpact',
+                    CKEditorType::class,
+                    [
+                        'label' => 'admin.fields.proposal.environmentalImpact',
+                        'config_name' => 'admin_editor',
+                        'required' => false,
+                        'help' => 'admin.fields.proposal.help.environmentalImpact',
+                    ]
+                )
+                ->add(
+                    'dimension',
+                    CKEditorType::class,
+                    [
+                        'label' => 'admin.fields.proposal.dimension',
+                        'config_name' => 'admin_editor',
+                        'required' => false,
+                        'help' => 'admin.fields.proposal.help.dimension',
+                    ]
+                )
+                ->add(
+                    'functioningImpact',
+                    CKEditorType::class,
+                    [
+                        'label' => 'admin.fields.proposal.functioningImpact',
+                        'config_name' => 'admin_editor',
+                        'required' => false,
+                        'help' => 'admin.fields.proposal.help.functioningImpact',
+                    ]
+                )
+                ->add(
+                    'evaluation',
+                    CKEditorType::class,
+                    [
+                        'label' => 'admin.fields.proposal.evaluation',
+                        'config_name' => 'admin_editor',
+                        'required' => false,
+                        'help' => 'admin.fields.proposal.help.evaluation',
+                    ]
+                )
+                ->add(
+                    'delay',
+                    CKEditorType::class,
+                    [
+                        'label' => 'admin.fields.proposal.delay',
+                        'config_name' => 'admin_editor',
+                        'required' => false,
+                        'help' => 'admin.fields.proposal.help.delay',
+                    ]
+                )
+                ->add(
+                    'proposedAnswer',
+                    CKEditorType::class,
+                    [
+                        'label' => 'admin.fields.proposal.proposedAnswer',
+                        'config_name' => 'admin_editor',
+                        'required' => false,
+                        'help' => 'admin.fields.proposal.help.proposedAnswer',
+                    ]
+                )
                 ->end();
         }
 
