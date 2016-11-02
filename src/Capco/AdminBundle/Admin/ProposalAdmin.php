@@ -183,7 +183,9 @@ class ProposalAdmin extends Admin
         }
 
         // Evaluation
-        if (EnvHelper::get('INSTANCE_NAME') === 'rennes' || EnvHelper::get('INSTANCE_NAME') === 'rennespreprod') {
+        if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
+            || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod'
+        ) {
             $formMapper
                 ->with('admin.fields.proposal.group_evaluation')
                 ->add(
