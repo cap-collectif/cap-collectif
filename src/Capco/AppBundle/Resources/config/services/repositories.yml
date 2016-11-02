@@ -138,3 +138,8 @@ services:
     class: Capco\AppBundle\Repository\ProgressStepRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\ProgressStep']
+
+  capco.category.repository:
+    class: Capco\AppBundle\Repository\CategoryRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Category']
