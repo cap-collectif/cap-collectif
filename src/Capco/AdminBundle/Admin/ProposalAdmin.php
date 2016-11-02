@@ -193,6 +193,7 @@ class ProposalAdmin extends Admin
                         'label' => 'admin.fields.proposal.servicePilote',
                         'config_name' => 'admin_editor',
                         'required' => false,
+                        'help' => 'admin.fields.proposal.help.servicePilote',
                     ]
                 )
                 ->add(
@@ -202,6 +203,7 @@ class ProposalAdmin extends Admin
                         'label' => 'admin.fields.proposal.domaniality',
                         'config_name' => 'admin_editor',
                         'required' => false,
+                        'help' => 'admin.fields.proposal.help.domaniality',
                     ]
                 )
                 ->add(
@@ -211,6 +213,7 @@ class ProposalAdmin extends Admin
                         'label' => 'admin.fields.proposal.compatibility',
                         'config_name' => 'admin_editor',
                         'required' => false,
+                        'help' => 'admin.fields.proposal.help.compatibility',
                     ]
                 )
                 ->add(
@@ -220,6 +223,7 @@ class ProposalAdmin extends Admin
                         'label' => 'admin.fields.proposal.environmentalImpact',
                         'config_name' => 'admin_editor',
                         'required' => false,
+                        'help' => 'admin.fields.proposal.help.environmentalImpact',
                     ]
                 )
                 ->add(
@@ -229,6 +233,7 @@ class ProposalAdmin extends Admin
                         'label' => 'admin.fields.proposal.dimension',
                         'config_name' => 'admin_editor',
                         'required' => false,
+                        'help' => 'admin.fields.proposal.help.dimension',
                     ]
                 )
                 ->add(
@@ -238,6 +243,7 @@ class ProposalAdmin extends Admin
                         'label' => 'admin.fields.proposal.functioningImpact',
                         'config_name' => 'admin_editor',
                         'required' => false,
+                        'help' => 'admin.fields.proposal.help.functioningImpact',
                     ]
                 )
                 ->add(
@@ -247,6 +253,7 @@ class ProposalAdmin extends Admin
                         'label' => 'admin.fields.proposal.evaluation',
                         'config_name' => 'admin_editor',
                         'required' => false,
+                        'help' => 'admin.fields.proposal.help.evaluation',
                     ]
                 )
                 ->add(
@@ -256,6 +263,7 @@ class ProposalAdmin extends Admin
                         'label' => 'admin.fields.proposal.delay',
                         'config_name' => 'admin_editor',
                         'required' => false,
+                        'help' => 'admin.fields.proposal.help.delay',
                     ]
                 )
                 ->add(
@@ -265,6 +273,7 @@ class ProposalAdmin extends Admin
                         'label' => 'admin.fields.proposal.proposedAnswer',
                         'config_name' => 'admin_editor',
                         'required' => false,
+                        'help' => 'admin.fields.proposal.help.proposedAnswer',
                     ]
                 )
                 ->end();
