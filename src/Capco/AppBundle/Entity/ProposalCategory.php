@@ -8,10 +8,8 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 
 /**
- * Category.
- *
  * @ORM\Table(name="proposal_category")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalCategoryRepository")
  */
 class ProposalCategory
 {

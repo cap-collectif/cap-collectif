@@ -9,7 +9,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\DistrictRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\CategoryRepository;
+use Capco\AppBundle\Repository\ProposalCategoryRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
@@ -31,7 +31,7 @@ class ProjectStatsResolver
       CollectStepRepository $collectStepRepo,
       ThemeRepository $themeRepo,
       DistrictRepository $districtRepo,
-      CategoryRepository $categoryRepo,
+      ProposalCategoryRepository $categoryRepo,
       UserTypeRepository $userTypeRepo,
       ProposalRepository $proposalRepo,
       ProposalSelectionVoteRepository $proposalSelectionVoteRepo

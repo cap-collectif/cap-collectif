@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -121,11 +120,11 @@ class OpinionVersionAdmin extends Admin
                 ->add('parent', 'sonata_type_model', [
                     'label' => 'admin.fields.opinion_version.parent',
                 ])
-                ->add('body', CKEditorType::class, [
+                ->add('body', 'ckeditor', [
                     'label' => 'admin.fields.opinion_version.body',
                     'config_name' => 'admin_editor',
                 ])
-                ->add('comment', CKEditorType::class, [
+                ->add('comment', 'ckeditor', [
                     'label' => 'admin.fields.opinion_version.comment',
                     'config_name' => 'admin_editor',
                 ])

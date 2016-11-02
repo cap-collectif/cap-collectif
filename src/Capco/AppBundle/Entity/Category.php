@@ -9,7 +9,7 @@ use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CategoryRepository")
+ * @ORM\Entity
  */
 class Category
 {

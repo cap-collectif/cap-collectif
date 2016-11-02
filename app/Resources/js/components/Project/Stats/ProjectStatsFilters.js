@@ -38,13 +38,11 @@ const ProjectStatsFilters = React.createClass({
               {this.getIntlMessage('global.select_themes')}
             </option>
             {
-              themes.map((theme) => {
-                return (
-                  <option key={theme.id} value={theme.id}>
-                    {theme.title}
-                  </option>
-                );
-              })
+              themes.map(theme =>
+                <option key={theme.id} value={theme.id}>
+                  {theme.title}
+                </option>
+              )
             }
           </Input>
         </Col>
@@ -59,13 +57,11 @@ const ProjectStatsFilters = React.createClass({
               {this.getIntlMessage('global.select_districts')}
             </option>
             {
-              districts.map((district) => {
-                return (
-                  <option key={district.id} value={district.id}>
-                    {district.name}
-                  </option>
-                );
-              })
+              districts.map(district =>
+                <option key={district.id} value={district.id}>
+                  {district.name}
+                </option>
+              )
             }
           </Input>
         </Col>

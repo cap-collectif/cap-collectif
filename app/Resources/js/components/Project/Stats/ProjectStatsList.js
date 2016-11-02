@@ -143,19 +143,18 @@ const ProjectStatsList = React.createClass({
           }
         </ListGroup>
         {
-          data.total > data.values.length
-            ? <ProjectStatsModal
-                type={type}
-                stepId={stepId}
-                data={data}
-                label={label}
-                icon={icon}
-                showPercentage={this.state.showPercentage}
-                isCurrency={isCurrency}
-                theme={this.state.theme}
-                district={this.state.district}
+          data.total > data.values.length &&
+            <ProjectStatsModal
+              type={type}
+              stepId={stepId}
+              data={data}
+              label={label}
+              icon={icon}
+              showPercentage={this.state.showPercentage}
+              isCurrency={isCurrency}
+              theme={this.state.theme}
+              district={this.state.district}
             />
-            : null
         }
       </div>
     );

@@ -2,12 +2,9 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class OpinionAppendixAdmin extends Admin
 {
@@ -24,7 +21,7 @@ class OpinionAppendixAdmin extends Admin
         $subject = $this->getSubject();
 
         $formMapper
-            ->add('type', TextType::class, [
+            ->add('type', 'text', [
                 'label' => 'admin.fields.appendix.type',
                 'mapped' => false,
                 'data' => $subject->getAppendixType(),
@@ -33,10 +30,10 @@ class OpinionAppendixAdmin extends Admin
                     'disabled' => true,
                 ],
             ])
-            ->add('appendixType', HiddenType::class, [
+            ->add('appendixType', 'hidden', [
                 'property_path' => 'appendixType.id',
             ])
-            ->add('body', CKEditorType::class, [
+            ->add('body', 'ckeditor', [
                 'label' => 'admin.fields.appendix.body',
                 'config_name' => 'admin_editor',
                 'required' => false,

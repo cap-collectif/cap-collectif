@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Resolver;
 
-use Capco\AppBundle\Helper\EnvHelper;
 use Capco\AppBundle\Toggle\Manager;
 
 class FeaturesCategoryResolver
@@ -112,7 +111,7 @@ class FeaturesCategoryResolver
             }
         }
 
-        if ($category === 'settings.modules' && EnvHelper::get('SYMFONY_LOGIN_SAML_ALLOWED')) {
+        if ($category === 'settings.modules' && getenv('SYMFONY_LOGIN_SAML_ALLOWED') === 'True') {
             $toggles['login_saml'] = $this->manager->isActive('login_saml');
         }
 

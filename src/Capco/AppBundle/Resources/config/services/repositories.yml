@@ -139,7 +139,7 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\ProgressStep']
 
-  capco.category.repository:
-    class: Capco\AppBundle\Repository\CategoryRepository
+  capco.proposal_category.repository:
+    class: Capco\AppBundle\Repository\ProposalCategoryRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Category']
+    arguments: ['CapcoAppBundle:ProposalCategory']

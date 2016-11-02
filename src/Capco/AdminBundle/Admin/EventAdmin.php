@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Event;
 use Geocoder\Provider\GoogleMaps;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Ivory\HttpAdapter\CurlHttpAdapter;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -12,8 +11,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class EventAdmin extends Admin
 {
@@ -139,7 +136,7 @@ class EventAdmin extends Admin
             ->add('title', null, [
                 'label' => 'admin.fields.event.title',
             ])
-            ->add('body', CKEditorType::class, [
+            ->add('body', 'ckeditor', [
                 'label' => 'admin.fields.event.body',
                 'config_name' => 'admin_editor',
             ])
@@ -169,7 +166,7 @@ class EventAdmin extends Admin
                   'label' => 'admin.fields.event.registration_enable',
                   'required' => false,
             ])
-            ->add('link', UrlType::class, [
+            ->add('link', 'url', [
                 'label' => 'admin.fields.event.link',
                 'required' => false,
                 'attr' => [
@@ -219,7 +216,7 @@ class EventAdmin extends Admin
                 'required' => false,
                 'help' => 'admin.help.event.adress',
             ])
-            ->add('zipCode', NumberType::class, [
+            ->add('zipCode', 'number', [
                 'label' => 'admin.fields.event.zipcode',
                 'required' => false,
             ])
