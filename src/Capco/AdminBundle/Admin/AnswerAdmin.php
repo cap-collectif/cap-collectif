@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -32,7 +33,7 @@ class AnswerAdmin extends Admin
                 'property' => 'username',
                 'required' => true,
             ])
-            ->add('body', 'ckeditor', [
+            ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.answer.body',
                 'config_name' => 'admin_editor',
                 'required' => true,
