@@ -560,6 +560,7 @@
       "list": {
         "costs": "R\u00e9partition des co\u00fbts par proposition",
         "districts": "R\u00e9partition par localisations",
+        "categories": "R\u00e9partition par catégories",
         "themes": "R\u00e9partition par th\u00e8mes",
         "userTypes": "R\u00e9partition par profil de l'auteur",
         "votes": "R\u00e9partition des votes par propositions"

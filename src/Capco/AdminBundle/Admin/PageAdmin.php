@@ -4,7 +4,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -25,7 +24,7 @@ class PageAdmin extends Admin
             ->add('title', null, [
                 'label' => 'admin.fields.page.title',
             ])
-            ->add('body', CKEditorType::class, [
+            ->add('body', 'ckeditor', [
                 'label' => 'admin.fields.page.body',
                 'config_name' => 'admin_editor',
             ])

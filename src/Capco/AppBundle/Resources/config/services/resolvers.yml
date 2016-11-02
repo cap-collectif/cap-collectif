@@ -85,7 +85,7 @@ services:
 
   capco.project_stats.resolver:
     class: Capco\AppBundle\Resolver\ProjectStatsResolver
-    arguments: ['@capco.selection_step.repository', '@capco.collect_step.repository', '@capco.theme.repository', '@capco.district.repository', '@capco.user_type.repository', '@capco.proposal.repository', '@capco.proposal_selection_vote.repository']
+    arguments: ['@capco.selection_step.repository', '@capco.collect_step.repository', '@capco.theme.repository', '@capco.district.repository', '@capco.category.repository', '@capco.user_type.repository', '@capco.proposal.repository', '@capco.proposal_selection_vote.repository']
 
   capco.media.manager:
     class: Capco\AppBundle\Manager\MediaManager

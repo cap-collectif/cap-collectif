@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -143,11 +142,11 @@ class IdeaAdmin extends Admin
         }
 
         $formMapper
-            ->add('object', CKEditorType::class, [
+            ->add('object', 'ckeditor', [
                 'label' => 'admin.fields.idea.object',
                 'config_name' => 'admin_editor',
             ])
-            ->add('body', CKEditorType::class, [
+            ->add('body', 'ckeditor', [
                 'label' => 'admin.fields.idea.body',
                 'config_name' => 'admin_editor',
             ])
