@@ -31,12 +31,6 @@ services:
     tags:
       - { name: form.type }
 
-  capco.form.proposal_admin:
-    class: Capco\AppBundle\Form\ProposalAdminType
-    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager", "@capco.abstract_question.repository"]
-    tags:
-      - { name: form.type }
-
   capco.form.proposal:
     class: Capco\AppBundle\Form\ProposalType
     arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager", "@capco.abstract_question.repository"]

@@ -595,7 +595,6 @@
   },
   "proposal": {
     "add": "Déposer une proposition",
-    "add_fusion": "Fusionner",
     "body": "Description",
     "category": "Catégorie",
     "constraints": {

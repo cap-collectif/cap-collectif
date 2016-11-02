@@ -4,20 +4,20 @@ import classNames from 'classnames';
 const ProposalStatus = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    selectionStepId: PropTypes.number,
+    stepId: PropTypes.number,
   },
 
   getDefaultProps() {
     return {
-      selectionStepId: null,
+      stepId: null,
     };
   },
 
   getStatus() {
-    const { proposal, selectionStepId } = this.props;
-    if (selectionStepId) {
+    const { proposal, stepId } = this.props;
+    if (stepId) {
       const selection = proposal.selections.filter((sel) => {
-        return sel.step.id === selectionStepId;
+        return sel.step.id === stepId;
       });
       if (selection.length > 0) {
         return selection[0].status;

@@ -535,11 +535,6 @@ class ProposalForm
         return $label;
     }
 
-    public function isNotifyingOnCreate(): bool
-    {
-      return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCreate();
-    }
-
     public function getNotificationsConfiguration()
     {
         return $this->notificationsConfiguration;
