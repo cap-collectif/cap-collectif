@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -127,7 +128,7 @@ class StepAdmin extends Admin
             || $subject instanceof QuestionnaireStep
         ) {
             $formMapper
-                ->add('body', 'ckeditor', [
+                ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false,
@@ -137,7 +138,7 @@ class StepAdmin extends Admin
 
         if ($subject instanceof ConsultationStep) {
             $formMapper
-                ->add('body', 'ckeditor', [
+                ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false,
@@ -150,7 +151,7 @@ class StepAdmin extends Admin
             ;
         } elseif ($subject instanceof SynthesisStep) {
             $formMapper
-                ->add('body', 'ckeditor', [
+                ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false,
@@ -162,7 +163,7 @@ class StepAdmin extends Admin
             );
         } elseif ($subject instanceof RankingStep) {
             $formMapper
-                ->add('body', 'ckeditor', [
+                ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false,
@@ -178,7 +179,7 @@ class StepAdmin extends Admin
             ;
         } elseif ($subject instanceof SelectionStep) {
             $formMapper
-                ->add('body', 'ckeditor', [
+                ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.body',
                     'required' => false,
@@ -234,7 +235,7 @@ class StepAdmin extends Admin
                     'label' => 'admin.fields.step.budget',
                     'required' => false,
                 ])
-                ->add('votesHelpText', 'ckeditor', [
+                ->add('votesHelpText', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.votesHelpText',
                     'required' => false,
