@@ -8,8 +8,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\IdTrait;
 
 /**
+ * Category.
+ *
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CategoryRepository")
+ * @ORM\Entity
  */
 class Category
 {

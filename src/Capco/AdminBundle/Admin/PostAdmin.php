@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -146,7 +147,7 @@ class PostAdmin extends Admin
             ->add('abstract', null, [
                 'label' => 'admin.fields.blog_post.abstract',
             ])
-            ->add('body', 'ckeditor', [
+            ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.blog_post.body',
                 'config_name' => 'admin_editor',
             ])
@@ -243,7 +244,7 @@ class PostAdmin extends Admin
             ->add('abstract', null, [
                 'label' => 'admin.fields.blog_post.abstract',
             ])
-            ->add('body', 'ckeditor', [
+            ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.blog_post.body',
                 'config_name' => 'admin_editor',
             ])

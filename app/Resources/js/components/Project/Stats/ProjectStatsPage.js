@@ -1,15 +1,14 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
 import ProjectStatsList from './ProjectStatsList';
 import { Nav, NavItem } from 'react-bootstrap';
 
 const ProjectStatsPage = React.createClass({
   propTypes: {
-    projectId: PropTypes.number.isRequired,
-    steps: PropTypes.array.isRequired,
-    themes: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
+    projectId: React.PropTypes.number.isRequired,
+    steps: React.PropTypes.array.isRequired,
+    themes: React.PropTypes.array.isRequired,
+    districts: React.PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -97,9 +96,4 @@ const ProjectStatsPage = React.createClass({
 
 });
 
-export default connect(
-  state => ({
-    themes: state.default.themes,
-    districts: state.default.districts,
-  })
-)(ProjectStatsPage);
+export default ProjectStatsPage;
