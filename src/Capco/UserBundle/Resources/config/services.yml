@@ -17,7 +17,7 @@ services:
     class: Capco\UserBundle\Form\Type\ProfileFormType
     arguments: ["@capco.toggle.manager"]
     tags:
-      - { name: form.type, alias: capco_user_profile }
+      - { name: form.type }
 
   capco_user.user_provider.email:
     class: Capco\UserBundle\Security\Core\User\UserEmailProvider
