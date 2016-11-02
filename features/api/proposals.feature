@@ -639,6 +639,37 @@ Feature: Proposal Restful Api
     """
     Then the JSON response status code should be 201
 
+    @database @devlol
+    Scenario: Logged in admin API client wants to add a proposal with fusion
+      Given I am logged in to api as admin
+      Given feature themes is enabled
+      Given feature districts is enabled
+      When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+      """
+      {
+        "author": 2,
+        "childConnections": [1, 2],
+        "title": "Acheter un sauna pour Capco",
+        "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
+        "theme": 1,
+        "category": 1,
+        "responses": [
+          {
+            "question": 1,
+            "value": ""
+          },
+          {
+            "question": 3,
+            "value": "Réponse à la question obligatoire"
+          }
+        ]
+      }
+      """
+      Then the JSON response status code should be 201
+      And proposal "1" should be fusioned to proposal "15"
+      And proposal "2" should be fusioned to proposal "15"
+      And proposal "15" should have author "sfavot"
+
   @database
   Scenario: Logged in API client wants to add a proposal (with nothing for not required response)
     Given I am logged in to api as user

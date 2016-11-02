@@ -28,39 +28,40 @@ import IdeaPageApp from '../js/startup/IdeaPageApp';
 import IdeasListApp from '../js/startup/IdeasListApp';
 import IdeaCreateApp from '../js/startup/IdeaCreateApp';
 import ShareButtonDropdownApp from '../js/startup/ShareButtonDropdownApp';
+import ProposalCreateFusionButtonApp from '../js/startup/ProposalCreateFusionButtonApp';
 import appStore from '../js/stores/AppStore';
-
-const register = ReactOnRails.register;
-const registerStore = ReactOnRails.registerStore;
 
 const emptyFunction = () => {};
 global.clearTimeout = global.clearTimeout || emptyFunction;
 global.setTimeout = global.setTimeout || emptyFunction;
 global.setInterval = global.setInterval || emptyFunction;
 
-registerStore({ appStore });
-register({ ProjectsListApp });
-register({ ProposalStepPageApp });
-register({ NavbarApp });
-register({ EmailNotConfirmedApp });
-register({ NewOpinionApp });
-register({ NewIdeaApp });
-register({ ProjectTrashButtonApp });
-register({ OpinionPageApp });
-register({ CommentSectionApp });
-register({ SynthesisViewBoxApp });
-register({ SynthesisEditBoxApp });
-register({ ProposalPageApp });
-register({ QuestionnaireStepPageApp });
-register({ ProjectStatsPageApp });
-register({ ProposalVoteBasketWidgetApp });
-register({ AlertBoxApp });
-register({ StepInfosApp });
-register({ ProposalListApp });
-register({ ProposalsUserVotesPageApp });
-register({ PhoneProfileApp });
-register({ IdeasIndexPageApp });
-register({ IdeasListApp });
-register({ IdeaPageApp });
-register({ IdeaCreateApp });
-register({ ShareButtonDropdownApp });
+ReactOnRails.registerStore({ appStore });
+ReactOnRails.register({
+  ProposalCreateFusionButtonApp,
+  ProjectsListApp,
+  ProposalStepPageApp,
+  NavbarApp,
+  EmailNotConfirmedApp,
+  NewOpinionApp,
+  NewIdeaApp,
+  ProjectTrashButtonApp,
+  OpinionPageApp,
+  CommentSectionApp,
+  SynthesisViewBoxApp,
+  SynthesisEditBoxApp,
+  ProposalPageApp,
+  QuestionnaireStepPageApp,
+  ProjectStatsPageApp,
+  ProposalVoteBasketWidgetApp,
+  AlertBoxApp,
+  StepInfosApp,
+  ProposalListApp,
+  ProposalsUserVotesPageApp,
+  PhoneProfileApp,
+  IdeasIndexPageApp,
+  IdeasListApp,
+  IdeaPageApp,
+  IdeaCreateApp,
+  ShareButtonDropdownApp,
+});

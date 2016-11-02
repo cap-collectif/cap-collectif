@@ -4,8 +4,8 @@ Capco\AppBundle\Entity\ProposalCategory:
         id:
             expose: true
             type: integer
-            groups: [ProposalCategories, Proposals]
+            groups: [ProposalForms, ProposalCategories, Proposals]
         name:
             expose: true
             type: string
-            groups: [ProposalCategories, Proposals]
+            groups: [ProposalForms, ProposalCategories, Proposals]

@@ -185,7 +185,7 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeElementOnPage($element, $page)
     {
-        expect($this->navigationContext->getPage($page)->containsElement($element));
+        expect($this->navigationContext->getPage($page)->containsElement($element))->toBe(true);
     }
 
     /**
@@ -193,7 +193,7 @@ class ApplicationContext extends UserContext
      */
     public function iShouldNotSeeElementOnPage($element, $page)
     {
-        expect(!$this->navigationContext->getPage($page)->containsElement($element));
+        expect($this->navigationContext->getPage($page)->containsElement($element))->toBe(false);
     }
 
     /**
@@ -201,7 +201,7 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeNbElementOnPage($nb, $element)
     {
-        expect($nb == count($this->getSession()->getPage()->find('css', $element)));
+        expect(count($this->getSession()->getPage()->find('css', $element)))->toBe($nb);
     }
 
     /**
