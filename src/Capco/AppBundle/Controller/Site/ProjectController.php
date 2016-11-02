@@ -74,10 +74,6 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{projectSlug}/stats", name="app_project_show_stats")
      * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
-     *
-     * @param Project $project
-     *
-     * @return Response
      */
     public function showStatsAction(Project $project)
     {

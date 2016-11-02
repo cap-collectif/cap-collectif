@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -150,7 +149,7 @@ class SectionAdmin extends Admin
         }
 
         if ($fields['body']) {
-            $formMapper->add('body', CKEditorType::class, [
+            $formMapper->add('body', 'ckeditor', [
                 'label' => 'admin.fields.section.body',
                 'config_name' => 'admin_editor',
             ]);
@@ -186,11 +185,11 @@ class SectionAdmin extends Admin
             ->add('position', null, [
                 'label' => 'admin.fields.section.position',
             ])
-            ->add('teaser', CKEditorType::class, [
+            ->add('teaser', 'ckeditor', [
                 'label' => 'admin.fields.section.teaser',
                 'config_name' => 'admin_editor',
             ])
-            ->add('body', CKEditorType::class, [
+            ->add('body', 'ckeditor', [
                 'label' => 'admin.fields.section.body',
                 'config_name' => 'admin_editor',
             ])

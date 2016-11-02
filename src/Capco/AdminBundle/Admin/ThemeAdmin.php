@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -10,9 +9,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Capco\AppBundle\Entity\Theme;
 use Sonata\CoreBundle\Model\Metadata;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ThemeAdmin extends Admin
 {
@@ -133,19 +129,19 @@ class ThemeAdmin extends Admin
                 'label' => 'admin.fields.theme.is_enabled',
                 'required' => false,
             ])
-            ->add('position', IntegerType::class, [
+            ->add('position', 'integer', [
                 'label' => 'admin.fields.theme.position',
             ])
-            ->add('teaser', TextareaType::class, [
+            ->add('teaser', 'textarea', [
                 'label' => 'admin.fields.theme.teaser',
                 'required' => false,
             ])
-            ->add('body', CKEditorType::class, [
+            ->add('body', 'ckeditor', [
                 'label' => 'admin.fields.theme.body',
                 'config_name' => 'admin_editor',
                 'required' => false,
             ])
-            ->add('status', ChoiceType::class, [
+            ->add('status', 'choice', [
                 'label' => 'admin.fields.theme.status',
                 'choices' => Theme::$statusesLabels,
                 'translation_domain' => 'CapcoAppBundle',

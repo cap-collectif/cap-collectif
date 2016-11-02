@@ -512,16 +512,6 @@ admin:
       trashedReason: Raison de la mise dans la corbeille
       updateAuthor: Auteur de la dernière mise à jour
       updated_at: Mise à jour
-      group_evaluation: Évaluation
-      servicePilote: Service pilote / Référent du dossier
-      domaniality: Domanialité
-      compatibility: Compatibilité avec les politiques publiques menées
-      environmentalImpact: Impact environnemental
-      dimension: Dimension sociale du projet
-      functioningImpact: Impact en matière de fonctionnement
-      evaluation: Évaluation financière de l'investissement proposé
-      delay: Délai de mise en œuvre du projet
-      proposedAnswer: Réponse proposée
     proposal_category:
       name: Nom
     proposal_form:
