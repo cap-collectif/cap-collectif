@@ -46,13 +46,13 @@ const ProjectStatsPage = React.createClass({
         <h2>{this.getIntlMessage('project.stats.title')}</h2>
         {
           steps.length > 1
-          ? <Nav
+            ? <Nav
               bsStyle="pills"
               justified
               activeKey={this.state.selectedStepIndex}
               onSelect={this.selectStep}
               className="block"
-          >
+            >
               {
                 steps.map((step, index) => {
                   return (
@@ -67,9 +67,9 @@ const ProjectStatsPage = React.createClass({
         }
         {
           selectedStep
-          ? <div className="block stats__step-details">
+            ? <div className="block stats__step-details">
               {
-                Object.keys(selectedStep.stats).map((key) => {
+                Object.keys(selectedStep.stats).map(key => {
                   return (
                     <ProjectStatsList
                       key={key}

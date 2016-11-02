@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -172,7 +171,7 @@ class OpinionAdmin extends Admin
                     'label' => 'admin.fields.opinion.position',
                     'required' => false,
                 ])
-                ->add('body', CKEditorType::class, [
+                ->add('body', 'ckeditor', [
                     'label' => 'admin.fields.opinion.body',
                     'config_name' => 'admin_editor',
                 ])

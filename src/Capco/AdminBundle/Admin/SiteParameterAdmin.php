@@ -3,16 +3,9 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\SiteParameter;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class SiteParameterAdmin extends Admin
 {
@@ -37,30 +30,30 @@ class SiteParameterAdmin extends Admin
         $types = SiteParameter::$types;
 
         if ($subject->getType() == $types['simple_text']) {
-            $formMapper->add('value', TextType::class, [
+            $formMapper->add('value', 'text', [
                     'label' => 'admin.fields.site_parameter.value',
                     'required' => false,
                 ]);
         } elseif ($subject->getType() == $types['rich_text']) {
-            $formMapper->add('value', CKEditorType::class, [
+            $formMapper->add('value', 'ckeditor', [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'config_name' => 'admin_editor',
             ]);
         } elseif ($subject->getType() == $types['integer']) {
-            $formMapper->add('value', IntegerType::class, [
+            $formMapper->add('value', 'integer', [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
             ]);
         } elseif ($subject->getType() == $types['javascript']) {
-            $formMapper->add('value', TextareaType::class, [
+            $formMapper->add('value', 'textarea', [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'help' => 'admin.help.site_parameter.js',
                 'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
             ]);
         } elseif ($subject->getType() == $types['email']) {
-            $formMapper->add('value', EmailType::class, [
+            $formMapper->add('value', 'email', [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'attr' => ['placeholder' => 'hello@exemple.com'],
@@ -71,7 +64,7 @@ class SiteParameterAdmin extends Admin
                 'required' => false,
             ]);
         } elseif ($subject->getType() == $types['url']) {
-            $formMapper->add('value', UrlType::class, [
+            $formMapper->add('value', 'url', [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
             ]);
@@ -81,7 +74,7 @@ class SiteParameterAdmin extends Admin
                 'required' => false,
             ]);
         } elseif ($subject->getType() == $types['boolean']) {
-            $formMapper->add('value', ChoiceType::class, [
+            $formMapper->add('value', 'choice', [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'choices' => ['1' => 'Activé', '0' => 'Désactivé'],

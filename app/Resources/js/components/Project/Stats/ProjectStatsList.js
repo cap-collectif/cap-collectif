@@ -89,6 +89,10 @@ const ProjectStatsList = React.createClass({
     } = this.props;
     const { data } = this.state;
 
+    if (data.values.reduce((a, b) => a + parseInt(b.value, 10), 0) === 0) {
+      return null;
+    }
+
     return (
       <div className="block" id={`stats-${stepId}-${type}`}>
         <ProjectStatsFilters
