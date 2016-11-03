@@ -639,7 +639,7 @@ Feature: Proposal Restful Api
     """
     Then the JSON response status code should be 201
 
-    @database @devlol
+    @database
     Scenario: Logged in admin API client wants to add a proposal with fusion
       Given I am logged in to api as admin
       Given feature themes is enabled
