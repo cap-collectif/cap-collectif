@@ -50,9 +50,13 @@ export const renderSelect = React.createClass({
                 noResultsText={'En attente de résultats...'}
                 onBlur={() => { input.onBlur(input.value); }}
                 onChange={event => {
-                  input.onChange(Array.isArray(event)
-                  ? event.map(e => e.value)
-                  : event.value);
+                  if (input.onChange) {
+                    input.onChange(
+                    Array.isArray(event)
+                    ? event.map(e => e.value)
+                    : event.value
+                    );
+                  }
                   onChange();
                 }}
               />
@@ -66,9 +70,13 @@ export const renderSelect = React.createClass({
               noResultsText={'En attente de résultats...'}
               onBlur={() => input.onBlur(input.value)}
               onChange={event => {
-                input.onChange(Array.isArray(event)
-                ? event.map(e => e.value)
-                : event.value);
+                if (input.onChange) {
+                  input.onChange(
+                  Array.isArray(event)
+                  ? event.map(e => e.value)
+                  : event.value
+                  );
+                }
                 onChange();
               }}
             />
