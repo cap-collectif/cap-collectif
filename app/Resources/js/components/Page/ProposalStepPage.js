@@ -52,11 +52,11 @@ export const ProposalStepPage = React.createClass({
         <StepPageHeader step={step} />
         {
           step.type === 'collect' &&
-          <CollectStepPageHeader
-            count={count}
-            form={form}
-            categories={categories}
-          />
+            <CollectStepPageHeader
+              count={count}
+              form={form}
+              categories={categories}
+            />
         }
         <ProposalListFilters
           statuses={statuses}
