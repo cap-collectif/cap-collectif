@@ -53,10 +53,10 @@ export const ProposalCreateFusionButton = React.createClass({
       <div>
         <Button
           id="add-proposal-fusion"
-          bsStyle="primary"
+          bsStyle="default"
+          style={{ marginTop: 10 }}
           onClick={() => open()}
         >
-          <i className="cap cap-add-1"></i>
           { ` ${this.getIntlMessage('proposal.add_fusion')}`}
         </Button>
         <Modal

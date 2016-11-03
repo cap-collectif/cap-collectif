@@ -28,12 +28,13 @@
 {% block sonata_admin_content_actions_wrappers %}
 
 {% include '@CapcoApp/redux_store.html.twig' %}
-
-<ul class="nav navbar-nav navbar-right">
-  <li>
-      {{ react_intl_component('ProposalCreateFusionButtonApp') }}
-  </li>
-</ul>
+  {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' %}
+  <ul class="nav navbar-nav navbar-right">
+    <li>
+        {{ react_intl_component('ProposalCreateFusionButtonApp') }}
+    </li>
+  </ul>
+  {% endif %}
     {% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}
         <ul class="nav navbar-nav navbar-right">
         {% if _actions|split('</a>')|length > 2 %}
