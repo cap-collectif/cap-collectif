@@ -29,7 +29,6 @@ export const renderSelect = React.createClass({
 
   render() {
     const { onChange, isLoading, input, label, multi, filterOptions, clearable, loadOptions, meta: { touched, error }, ...rest } = this.props;
-    console.log(this.props);
     return (
       <div className="form-group">
         <label htmlFor={input.name} className="col-sm-2 control-label" >

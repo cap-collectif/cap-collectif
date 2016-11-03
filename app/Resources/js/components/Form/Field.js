@@ -27,7 +27,6 @@ const Field = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    console.log(this.props);
     const { touched, error } = this.props.meta;
     const { autoComplete, disableValidation, placeholder, type, label, divClassName, wrapperClassName, labelClassName } = this.props;
     const { autoFocus, name } = this.props.input;
