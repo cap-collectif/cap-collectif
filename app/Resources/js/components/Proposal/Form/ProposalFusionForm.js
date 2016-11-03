@@ -9,7 +9,7 @@ import { renderSelect } from '../../Form/Select';
 const formName = 'proposal';
 const validate = values => {
   const errors = {};
-  if (values.childConnections.length < 2) {
+  if (values.childConnections && values.childConnections.length < 2) {
     errors.childConnections = 'Au moins 2 propositions';
   }
   return errors;
@@ -37,10 +37,9 @@ export const ProposalFusionForm = React.createClass({
           label="Projet lié"
           placeholder="Sélectionnez un projet"
           isLoading={projects.length === 0}
-          autofocus
           component={renderSelect}
           clearable={false}
-          options={projects.map(project => ({ value: project.id, label: project.title }))}
+          options={projects.map(p => ({ value: p.id, label: p.title }))}
         />
         <br />
         {
@@ -66,16 +65,29 @@ export const ProposalFusionForm = React.createClass({
   },
 });
 
-export default connect(state => {
-  const projects = state.project.projects.filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
-  const selectedProject = parseInt(formValueSelector(formName)(state, 'project'), 10);
-  return {
-    projects,
-    currentCollectStep: selectedProject
-      ? projects.find(p => p.id === selectedProject).steps.filter(s => s.type === 'collect')[0]
-      : null,
-  };
-}, { onMount: fetchProjects })(reduxForm({
+const getBudgetProjects = projects => {
+  return projects.filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
+};
+
+const getSelectedProjectId = state => {
+  return parseInt(formValueSelector(formName)(state, 'project'), 10);
+};
+
+const getCurrentCollectStep = state => {
+  const selectedProject = getSelectedProjectId(state);
+  if (!selectedProject) {
+    return null;
+  }
+  return getBudgetProjects(state.project.projects).find(p => p.id === selectedProject).steps.filter(s => s.type === 'collect')[0];
+};
+
+export default connect(state =>
+  ({
+    projects: getBudgetProjects(state.project.projects),
+    currentCollectStep: getCurrentCollectStep(state),
+  }),
+   { onMount: fetchProjects }
+)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
   validate,

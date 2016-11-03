@@ -285,6 +285,7 @@ function* submitFusionFormData({ proposalForm }) {
       formData
     );
     yield put(closeCreateFusionModal());
+    location.reload();
   } catch (e) {
     yield put(cancelSubmitFusionForm());
   }
@@ -339,7 +340,7 @@ export function* saga() {
   ];
 }
 
-export const reducer = (state = {}, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };

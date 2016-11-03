@@ -101,7 +101,6 @@ export const ProposalAdminForm = React.createClass({
                   {!proposalForm.districtMandatory && optional}
                 </span>
               }
-              help={proposalForm.districtHelpText}
               options={districts.map(d => ({ value: d.id, label: d.name }))}
             />
         }

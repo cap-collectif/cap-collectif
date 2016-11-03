@@ -5,32 +5,38 @@ import Input from './Input';
 const Field = React.createClass({
   displayName: 'Field',
   propTypes: {
-    touched: PropTypes.bool.isRequired,
-    error: PropTypes.node,
+    meta: PropTypes.shape({
+      touched: PropTypes.bool.isRequired,
+      error: PropTypes.node,
+    }),
+    labelClassName: PropTypes.string,
+    divClassName: PropTypes.string,
+    wrapperClassName: PropTypes.string,
+    autoComplete: PropTypes.string,
+    disableValidation: PropTypes.bool,
+    type: PropTypes.oneOf(['text', 'textarea', 'editor', 'select', 'checkbox', 'password', 'captcha', 'email']).isRequired,
+    label: PropTypes.string,
+    placeholder: PropTypes.string,
     input: PropTypes.shape({
-      labelClassName: PropTypes.string,
-      divClassName: PropTypes.string,
-      disableValidation: PropTypes.bool,
-      type: PropTypes.oneOf(['text', 'textarea', 'editor', 'select', 'checkbox', 'password', 'captcha', 'email']).isRequired,
-      label: PropTypes.string,
-      placeholder: PropTypes.string,
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       autoFocus: PropTypes.bool,
       value: PropTypes.any,
-      autoComplete: PropTypes.string,
     }).isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { touched, error } = this.props;
-    const { autoFocus, disableValidation, label, placeholder, type, name, divClassName, labelClassName, autoComplete } = this.props.input;
+    console.log(this.props);
+    const { touched, error } = this.props.meta;
+    const { autoComplete, disableValidation, placeholder, type, label, divClassName, wrapperClassName, labelClassName } = this.props;
+    const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
     const input = (
       <Input
         type={type}
         name={name}
+        wrapperClassName={wrapperClassName || ''}
         labelClassName={labelClassName || ''}
         label={label || null}
         placeholder={placeholder || null}

@@ -68,7 +68,7 @@ export const ProposalCreateFusionButton = React.createClass({
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              { this.getIntlMessage('proposal.add') }
+              { this.getIntlMessage('proposal.add_fusion') }
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -109,5 +109,9 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { close: closeCreateFusionModal, open: openCreateFusionModal, submit: submitFusionForm }
+  {
+    close: closeCreateFusionModal,
+    open: openCreateFusionModal,
+    submit: submitFusionForm,
+  }
 )(ProposalCreateFusionButton);

@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 
 export const ProposalMediaResponse = React.createClass({
   propTypes: {
-    medias: React.PropTypes.array.isRequired,
+    medias: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const medias = this.props.medias;
+    const { medias } = this.props;
     if (medias.length === 0) {
       return null;
     }
