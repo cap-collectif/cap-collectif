@@ -155,7 +155,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
                         'proposalSlug' => $child->getSlug(),
                         'projectSlug' => $project->getSlug(),
                         'stepSlug' => $step->getSlug(),
-                      ], true),
+                      ]),
                     ];
             };
             $event->getVisitor()->addData('fusionnedFrom', $proposal->getChildConnections()->map($serializeFusioned)->toArray());
