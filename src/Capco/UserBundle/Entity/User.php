@@ -28,9 +28,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function setSamlAttributes(array $attributes)
     {
-        if (!$this->getUsername()) {
-            $this->setUsername($attributes['oda_prenom'][0].' '.$attributes['oda_nom'][0]);
-        }
+        $this->setUsername($attributes['oda_prenom'][0].' '.$attributes['oda_nom'][0]);
     }
 
     protected $samlId;
