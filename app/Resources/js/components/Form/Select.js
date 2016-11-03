@@ -11,19 +11,11 @@ export const renderSelect = React.createClass({
     error: PropTypes.any,
     options: PropTypes.array,
     clearable: PropTypes.bool,
-    multi: PropTypes.bool.isRequired,
+    multi: PropTypes.bool,
     loadOptions: PropTypes.func,
     filterOptions: PropTypes.func,
     isLoading: PropTypes.bool,
     onChange: PropTypes.func,
-  },
-
-  getDefaultProps() {
-    return {
-      multi: false,
-      clearable: true,
-      isLoading: false,
-    };
   },
 
   render() {
