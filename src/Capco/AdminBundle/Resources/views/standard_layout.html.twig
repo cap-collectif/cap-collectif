@@ -7,6 +7,11 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/vendor.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+    var App = require('Resources/js/app').default;
+    </script>
     {{ parent() }}
     <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('js/jquery.minicolors.js') }}"></script>
@@ -18,6 +23,32 @@
         });
     </script>
 {% endblock %}
+
+
+{% block sonata_admin_content_actions_wrappers %}
+
+{% include '@CapcoApp/redux_store.html.twig' %}
+
+<ul class="nav navbar-nav navbar-right">
+  <li>
+      {{ react_intl_component('ProposalCreateFusionButtonApp') }}
+  </li>
+</ul>
+    {% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}
+        <ul class="nav navbar-nav navbar-right">
+        {% if _actions|split('</a>')|length > 2 %}
+            <li class="dropdown sonata-actions">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'link_actions'|trans({}, 'SonataAdminBundle') }} <b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu">
+                    {{ _actions|raw }}
+                </ul>
+            </li>
+        {% else %}
+            {{ _actions|raw }}
+        {% endif %}
+        </ul>
+    {% endif %}
+{% endblock sonata_admin_content_actions_wrappers %}
 
 {% block logo %}
     {% if admin_pool is defined %}
