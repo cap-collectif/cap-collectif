@@ -13,17 +13,22 @@ export const renderSelect = React.createClass({
     clearable: PropTypes.bool,
     multi: PropTypes.bool.isRequired,
     loadOptions: PropTypes.func,
+    filterOptions: PropTypes.func,
+    isLoading: PropTypes.bool,
+    onChange: PropTypes.func.isRequired,
   },
 
   getInitialProps() {
     return {
       multi: false,
       clearable: true,
+      isLoading: false,
+      onChange: () => {},
     };
   },
 
   render() {
-    const { input, label, multi, clearable, loadOptions, meta: { touched, error }, ...rest } = this.props;
+    const { onChange, isLoading, input, label, multi, filterOptions, clearable, loadOptions, meta: { touched, error }, ...rest } = this.props;
     console.log(this.props);
     return (
       <div className="form-group">
@@ -36,23 +41,36 @@ export const renderSelect = React.createClass({
               <Select.Async
                 {...input}
                 multi={multi}
+                isLoading={isLoading}
                 clearable={clearable}
                 loadOptions={loadOptions}
                 options={rest.options}
+                filterOptions={filterOptions}
                 placeholder={rest.placeholder}
                 noResultsText={'En attente de résultats...'}
                 onBlur={() => { input.onBlur(input.value); }}
-                onChange={event => { input.onChange(Array.isArray(event) ? event.map(e => e.value) : event.value); }}
+                onChange={event => {
+                  input.onChange(Array.isArray(event)
+                  ? event.map(e => e.value)
+                  : event.value);
+                  onChange();
+                }}
               />
             : <Select
               {...input}
               multi={multi}
+              isLoading={isLoading}
               clearable={clearable}
               options={rest.options}
               placeholder={rest.placeholder}
               noResultsText={'En attente de résultats...'}
               onBlur={() => input.onBlur(input.value)}
-              onChange={event => { input.onChange(Array.isArray(event) ? event.map(e => e.value) : event.value); }}
+              onChange={event => {
+                input.onChange(Array.isArray(event)
+                ? event.map(e => e.value)
+                : event.value);
+                onChange();
+              }}
             />
           }
           { touched && error }

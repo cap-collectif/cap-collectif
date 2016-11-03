@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { fetchProjects } from '../../../redux/modules/project';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector, change } from 'redux-form';
 import Fetcher from '../../../services/Fetcher';
 import { renderSelect } from '../../Form/Select';
 
@@ -21,6 +21,7 @@ export const ProposalFusionForm = React.createClass({
     projects: PropTypes.array.isRequired,
     onMount: PropTypes.func.isRequired,
     currentCollectStep: PropTypes.object,
+    onProjectChange: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -29,7 +30,7 @@ export const ProposalFusionForm = React.createClass({
   },
 
   render() {
-    const { currentCollectStep, projects } = this.props;
+    const { currentCollectStep, projects, onProjectChange } = this.props;
     return (
       <form className="form-horizontal">
         <Field
@@ -39,6 +40,7 @@ export const ProposalFusionForm = React.createClass({
           isLoading={projects.length === 0}
           component={renderSelect}
           clearable={false}
+          onChange={() => onProjectChange(formName, 'childConnections', [])}
           options={projects.map(p => ({ value: p.id, label: p.title }))}
         />
         <br />
@@ -86,7 +88,7 @@ export default connect(state =>
     projects: getBudgetProjects(state.project.projects),
     currentCollectStep: getCurrentCollectStep(state),
   }),
-   { onMount: fetchProjects }
+   { onMount: fetchProjects, onProjectChange: change }
 )(reduxForm({
   form: formName,
   destroyOnUnmount: false,
