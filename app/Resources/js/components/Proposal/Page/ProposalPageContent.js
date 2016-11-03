@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
+import ProposalFusionList from './ProposalFusionList';
 import classNames from 'classnames';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
 import ProposalEditModal from '../Edit/ProposalEditModal';
@@ -53,6 +54,8 @@ const ProposalPageContent = React.createClass({
               className="block img-responsive"
             />
         }
+        <ProposalFusionList proposal={proposal} type="From" />
+        <ProposalFusionList proposal={proposal} type="Into" />
         <div className="block">
           <h3 className="h3">{ this.getIntlMessage('proposal.description') }</h3>
           <div dangerouslySetInnerHTML={{ __html: proposal.body }} />

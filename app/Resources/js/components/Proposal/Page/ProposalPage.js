@@ -63,14 +63,14 @@ export const ProposalPage = React.createClass({
         <div>
           <ProposalPageAlert proposal={proposal} />
           <ProposalPageHeader
-              proposal={proposal}
-              className="container container--custom"
-              showThemes={features.themes && form.usingThemes}
+            proposal={proposal}
+            className="container container--custom"
+            showThemes={features.themes && form.usingThemes}
           />
           <Tab.Container
-              id="proposal-page-tabs"
-              defaultActiveKey={this.getDefaultKey()}
-              className="container--custom"
+            id="proposal-page-tabs"
+            defaultActiveKey={this.getDefaultKey()}
+            className="container--custom"
           >
             <div>
               <div className="tabs__pills">
@@ -96,9 +96,9 @@ export const ProposalPage = React.createClass({
                     </NavItem>
                   </Nav>
                   <ProposalVoteButtonWrapper
-                      proposal={proposal}
-                      style={{ marginTop: '10px' }}
-                      className="pull-right hidden-xs"
+                    proposal={proposal}
+                    style={{ marginTop: '10px' }}
+                    className="pull-right hidden-xs"
                   />
                 </div>
               </div>
@@ -108,20 +108,20 @@ export const ProposalPage = React.createClass({
                     <Row>
                       <Col xs={12} sm={8}>
                         <ProposalPageAnswer
-                            answer={proposal.answer}
+                          answer={proposal.answer}
                         />
                         <ProposalPageContent
-                            proposal={proposal}
-                            form={form}
-                            categories={categories}
+                          proposal={proposal}
+                          form={form}
+                          categories={categories}
                         />
                       </Col>
                       <Col xs={12} sm={4}>
                         <ProposalPageMetadata
-                            proposal={proposal}
-                            showDistricts={features.districts}
-                            showCategories={form.usingCategories}
-                            showNullEstimation={!!(currentVotableStep && currentVotableStep.voteType === VOTE_TYPE_BUDGET)}
+                          proposal={proposal}
+                          showDistricts={features.districts}
+                          showCategories={form.usingCategories}
+                          showNullEstimation={!!(currentVotableStep && currentVotableStep.voteType === VOTE_TYPE_BUDGET)}
                         />
                         <br />
                         {
@@ -135,20 +135,20 @@ export const ProposalPage = React.createClass({
                             </span>
                         }
                         <ProposalPageAdvancement
-                            proposal={proposal}
+                          proposal={proposal}
                         />
                       </Col>
                     </Row>
                   </Tab.Pane>
                   <Tab.Pane eventKey="comments">
                     <ProposalPageComments
-                        id={proposal.id}
-                        form={form}
+                      id={proposal.id}
+                      form={form}
                     />
-                </Tab.Pane>
+                  </Tab.Pane>
                   {
                     showVotesTab
-                    && <Tab.Pane eventKey="votes">
+                      && <Tab.Pane eventKey="votes">
                         <Tab.Container id="tab-votesByStep" defaultActiveKey={0}>
                           <Row className="clearfix">
                             <Nav bsStyle="pills">
@@ -160,18 +160,18 @@ export const ProposalPage = React.createClass({
                                 )
                               }
                             </Nav>
-                              <Tab.Content animation={false}>
+                            <Tab.Content animation={false}>
                               {
                                 votableSteps.map((step, index) =>
-                                    <Tab.Pane key={index} eventKey={index}>
-                                      <ProposalPageVotes
-                                        stepId={step.id}
-                                        proposal={proposal}
-                                      />
-                                    </Tab.Pane>
+                                  <Tab.Pane key={index} eventKey={index}>
+                                    <ProposalPageVotes
+                                      stepId={step.id}
+                                      proposal={proposal}
+                                    />
+                                  </Tab.Pane>
                                 )
                               }
-                              </Tab.Content>
+                            </Tab.Content>
                           </Row>
                         </Tab.Container>
                       </Tab.Pane>
@@ -184,7 +184,7 @@ export const ProposalPage = React.createClass({
               {
                 currentVotableStep &&
                   <ProposalVoteModal
-                      proposal={proposal}
+                    proposal={proposal}
                   />
               }
             </div>

@@ -50,6 +50,7 @@ class ProposalController extends Controller
           SerializationContext::create()
             ->setSerializeNull(true)
             ->setGroups([
+                'ProposalFusions',
                 'ProposalSelectionVotes',
                 'ProposalCollectVotes',
                 'UsersInfos',

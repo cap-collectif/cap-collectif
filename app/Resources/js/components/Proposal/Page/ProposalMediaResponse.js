@@ -10,7 +10,7 @@ export const ProposalMediaResponse = React.createClass({
 
   render() {
     const { medias } = this.props;
-    if (medias.length === 0) {
+    if (!medias || medias.length === 0) {
       return null;
     }
     return (

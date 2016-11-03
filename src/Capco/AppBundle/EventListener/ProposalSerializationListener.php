@@ -147,6 +147,21 @@ class ProposalSerializationListener extends AbstractSerializationListener
             }
         }
 
+        if (isset($this->getIncludedGroups($event)['ProposalFusions'])) {
+            $serializeFusioned = function ($child) use ($step, $project) {
+              return [
+                'title' => $child->getTitle(),
+                'url' => $this->router->generate('app_project_show_proposal', [
+                        'proposalSlug' => $child->getSlug(),
+                        'projectSlug' => $project->getSlug(),
+                        'stepSlug' => $step->getSlug(),
+                      ], true),
+                    ];
+            };
+            $event->getVisitor()->addData('fusionnedFrom', $proposal->getChildConnections()->map($serializeFusioned)->toArray());
+            $event->getVisitor()->addData('fusionnedInto', $proposal->getParentConnections()->map($serializeFusioned)->toArray());
+        }
+
         if (isset($this->getIncludedGroups($event)['ProposalUserData'])) {
             $event->getVisitor()->addData(
                 'hasUserReported', $user === 'anon.' ? false : $proposal->userHasReport($user)

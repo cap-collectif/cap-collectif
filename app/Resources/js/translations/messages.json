@@ -598,6 +598,8 @@
     "add_fusion": "Fusionner",
     "body": "Description",
     "category": "Catégorie",
+    "fusionnedInto": "Proposition fusionnée avec {num, plural, one{1 autre} other {# autres}}",
+    "fusionnedFrom": "Proposition issue de la fusion de {num, plural, other {# propositions}}",
     "constraints": {
       "body": "La description de la proposition doit faire au moins 2 caract\u00e8res.",
       "category": "Merci de sélectionner une catégorie.",
