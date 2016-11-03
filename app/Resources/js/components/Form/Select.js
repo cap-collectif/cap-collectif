@@ -39,7 +39,7 @@ export const renderSelect = React.createClass({
         </label>
         <div className="col-sm-10">
           {
-            typeof loadOptions === 'function' ?
+            typeof custom.loadOptions === 'function' ?
               <Select.Async
                 {...input}
                 {...custom}
