@@ -5,7 +5,6 @@ import ProposalCreate from '../Proposal/Create/ProposalCreate';
 const CollectStepPageHeader = React.createClass({
   propTypes: {
     count: PropTypes.number,
-    countFusions: PropTypes.number,
     form: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
   },
@@ -21,7 +20,6 @@ const CollectStepPageHeader = React.createClass({
     const {
       categories,
       count,
-      countFusions,
       form,
     } = this.props;
     return (
@@ -30,13 +28,6 @@ const CollectStepPageHeader = React.createClass({
           message={this.getIntlMessage('proposal.count')}
           num={count}
         />
-        { ' ' }
-        <span style={{ color: '#999', fontWeight: 300 }}>
-          <FormattedMessage
-            message={this.getIntlMessage('proposal.count_fusions')}
-            num={countFusions}
-          />
-        </span>
         <span className="pull-right">
           <ProposalCreate
             form={form}

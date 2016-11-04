@@ -278,6 +278,7 @@ class StepController extends Controller
         $serializer = $this->get('jms_serializer');
 
         $proposalForm = $step->getProposalForm();
+
         $searchResults = ['proposals' => [], 'count' => 0];
 
         if ($proposalForm) {
@@ -293,18 +294,12 @@ class StepController extends Controller
             }
         }
 
-        $countFusions = $em
-          ->getRepository('CapcoAppBundle:Proposal')
-          ->countFusionsByProposalForm($proposalForm)
-        ;
-
         $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),
             'form' => $proposalForm,
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
             'stepId' => $step->getId(),
             'count' => $searchResults['count'],
-            'countFusions' => $countFusions,
             'proposals' => $searchResults['proposals'],
         ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'ThemeDetails', 'Districts', 'Default', 'Steps', 'VoteThreshold', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
 

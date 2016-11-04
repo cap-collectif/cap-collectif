@@ -7,13 +7,14 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script type="text/javascript">window.CKEDITOR_BASEPATH = '/js/ckeditor/';</script>
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
     var App = require('Resources/js/app').default;
     </script>
     {{ parent() }}
-    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('js/jquery.minicolors.js') }}"></script>
     <script type="text/javascript">
         $(window).on('load', function() {
