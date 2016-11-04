@@ -40,6 +40,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this;
     }
 
+    public function getSamlId()
+    {
+        return $this->samlId;
+    }
+
     // used as a lifecycleCallback
     public function sanitizePhoneNumber()
     {
