@@ -26,7 +26,8 @@ const VoteButtonOverlay = React.createClass({
         <Popover id={popoverId} title={this.getIntlMessage('proposal.vote.not_enough_credits')}>
           {this.getIntlMessage('proposal.vote.not_enough_credits_text')}
         </Popover>
-      }>
+      }
+      >
         {children}
       </OverlayTrigger>
     );

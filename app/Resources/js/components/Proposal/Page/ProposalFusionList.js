@@ -21,7 +21,8 @@ export const ProposalFusionList = React.createClass({
               message={this.getIntlMessage(`proposal.fusionned${type}`)}
               num={list.length}
             />
-          }>
+          }
+          >
             {
               list.map(p => <div><a href={p.url}>{p.title}</a></div>)
             }

@@ -45,6 +45,7 @@ const CANCEL_SUBMIT_FUSION_FORM = 'proposa/CANCEL_SUBMIT_FUSION_FORM';
 
 const initialState = {
   currentProposalId: null,
+  proposalShowedId: [],
   creditsLeftByStepId: {},
   proposalsById: {},
   userVotesByStepId: {},
@@ -450,7 +451,8 @@ export const reducer = (state = initialState, action) => {
         map[obj.id] = obj;
         return map;
       }, {});
-      return { ...state, proposalsById, isLoading: false };
+      const proposalShowedId = action.proposals.map((proposal) => proposal.id);
+      return { ...state, proposalsById, proposalShowedId, isLoading: false };
     }
     case POSTS_FETCH_SUCCEEDED: {
       const posts = action.posts;

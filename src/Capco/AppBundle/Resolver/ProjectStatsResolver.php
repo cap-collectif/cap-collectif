@@ -35,8 +35,7 @@ class ProjectStatsResolver
       UserTypeRepository $userTypeRepo,
       ProposalRepository $proposalRepo,
       ProposalSelectionVoteRepository $proposalSelectionVoteRepo
-    )
-    {
+    ) {
         $this->selectionStepRepo = $selectionStepRepo;
         $this->collectStepRepo = $collectStepRepo;
         $this->themeRepo = $themeRepo;

@@ -537,7 +537,7 @@ class ProposalForm
 
     public function isNotifyingOnCreate(): bool
     {
-      return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCreate();
+        return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCreate();
     }
 
     public function getNotificationsConfiguration()

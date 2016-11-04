@@ -109,7 +109,7 @@ const mapStateToProps = (state, props) => {
   return {
     stepId: undefined,
     step: state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.stepId)[0],
-    proposals: Object.values(state.proposal.proposalsById),
+    proposals: state.proposal.proposalShowedId.map(proposal => state.proposal.proposalsById[proposal]),
     currentPage: state.proposal.currentPaginationPage,
     randomOrder: state.proposal.order === 'random',
     isLoading: state.proposal.isLoading,

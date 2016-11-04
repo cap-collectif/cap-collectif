@@ -11,7 +11,7 @@ use Elastica\Query\MultiMatch;
 use Elastica\Query\Filtered;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\AbstractQuery;
-use Elastica\Filter\Type;
+use Elastica\Result;
 use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 
 class SearchResolver
@@ -88,14 +88,7 @@ class SearchResolver
         ];
     }
 
-    /**
-     * Get random sorted query.
-     *
-     * @param AbstractQuery $query
-     *
-     * @return FunctionScore
-     */
-    protected function getRandomSortedQuery(AbstractQuery $query)
+    protected function getRandomSortedQuery(AbstractQuery $query): Query
     {
         $functionScore = new FunctionScore();
         $functionScore->setQuery($query);
@@ -104,14 +97,7 @@ class SearchResolver
         return new Query($functionScore);
     }
 
-    /**
-     * Get multi match query on term.
-     *
-     * @param $term
-     *
-     * @return MultiMatch
-     */
-    protected function getMultiMatchQuery($term)
+    protected function getMultiMatchQuery($term): Query\BoolQuery
     {
         $boolQuery = new Query\BoolQuery();
 
@@ -137,12 +123,11 @@ class SearchResolver
      * The array of filters can contain either simple filters (fieldName => value)
      * or nested filters (path => [filters]).
      *
-     * @param $type
      * @param array $filters
      *
      * @return BoolFilter
      */
-    public function getBoolFilter(array $filters)
+    public function getBoolFilter(array $filters): BoolFilter
     {
         $boolFilter = new BoolFilter();
 
@@ -162,22 +147,12 @@ class SearchResolver
         return $boolFilter;
     }
 
-    /**
-     * @param $sort
-     * @param string $order
-     *
-     * @return array|void
-     */
-    protected function getSortSettings($sort = '_score', $order = 'desc')
+    protected function getSortSettings(string $sort = '_score', string $order = 'desc'): array
     {
-        $sort = $sort ? $sort : '_score';
-        $order = $order ? $order : 'desc';
-        $missing = $order === 'desc' ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1;
-
         return [
             $sort => [
                 'order' => $order,
-                'missing' => $missing,
+                'missing' => $order === 'desc' ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1,
             ],
         ];
     }
@@ -281,13 +256,10 @@ class SearchResolver
             $order === 'random'
         );
 
-        $proposals = [];
-        foreach ($results['results'] as $result) {
-            $proposals[] = $result->getHit()['_source'];
-        }
-
         return [
-            'proposals' => $proposals,
+            'proposals' => array_map(function (Result $result) {
+                return $result->getSource();
+            }, $results['results']),
             'count' => $results['count'],
             'order' => $order,
         ];
