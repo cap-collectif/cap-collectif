@@ -567,7 +567,6 @@ $dark-red: #a94442;
     @media (max-width: $screen-xs-max) {
         margin-left: 0;
         display: block;
-        @extend .text-center;
     }
 
     &:first-child {

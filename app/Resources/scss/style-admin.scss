@@ -1,8 +1,13 @@
 /* ===============================================================
     $ADMIN
 ================================================================*/
-@import "base/tools";
-@import "base/fonts";
-@import "modules/social-block";
-@import "modules/sonata";
-@import "modules/editor";
+
+@import "bower_components/compass-mixins/lib/compass";
+
+@import
+  "base/tools",
+  "base/fonts",
+  "modules/social-block",
+  "modules/sonata",
+  "modules/editor"
+;

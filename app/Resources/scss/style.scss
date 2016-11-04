@@ -44,7 +44,9 @@
 /* ===============================================================
     $BOOTSTRAP
 ================================================================*/
-@import "../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "bower_components/compass-mixins/lib/compass";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+
 /* ===============================================================
     $FONTS
 ================================================================*/
@@ -56,43 +58,48 @@
 /* ===============================================================
     $BASE
 ================================================================*/
-@import "base/tools";
-@import "base/base";
-@import "base/header";
-@import "base/footer";
+@import
+  "base/tools",
+  "base/base",
+  "base/header",
+  "base/footer"
+;
+
 /* ===============================================================
     $MODULES
 ================================================================*/
-@import "modules/filter";
-@import "modules/macro";
-@import "modules/news";
-@import "modules/thumbnail";
-@import "modules/btn-custom";
-@import "modules/event";
-@import "modules/social-block";
-@import "modules/colors";
-@import "modules/theme";
-@import "modules/login";
-@import "modules/profile";
-@import "modules/sub-navbar";
-@import "modules/consult";
-@import "modules/opinion";
-@import "modules/dialog";
-@import "modules/user-settings";
-@import "modules/form";
-@import "modules/appendices";
-@import "modules/video";
-@import "modules/carousel";
-@import "modules/sidebar";
-@import "modules/cnil";
-@import "modules/diff";
-@import "modules/registration";
-@import "modules/comment";
-@import "modules/synthesis";
-@import "modules/search";
-@import "modules/modal";
-@import "modules/proposal";
-@import "modules/reply";
-@import "modules/editor";
-@import "modules/idea";
-@import "modules/stats";
+@import
+  "modules/filter",
+  "modules/macro",
+  "modules/news",
+  "modules/thumbnail",
+  "modules/btn-custom",
+  "modules/event",
+  "modules/social-block",
+  "modules/colors",
+  "modules/theme",
+  "modules/login",
+  "modules/profile",
+  "modules/sub-navbar",
+  "modules/consult",
+  "modules/opinion",
+  "modules/dialog",
+  "modules/user-settings",
+  "modules/form",
+  "modules/appendices",
+  "modules/video",
+  "modules/carousel",
+  "modules/sidebar",
+  "modules/cnil",
+  "modules/diff",
+  "modules/registration",
+  "modules/comment",
+  "modules/synthesis",
+  "modules/search",
+  "modules/modal",
+  "modules/proposal",
+  "modules/reply",
+  "modules/editor",
+  "modules/idea",
+  "modules/stats"
+;
