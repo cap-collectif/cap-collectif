@@ -12,7 +12,7 @@ if [ "$PRODUCTION" ]; then
   php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var || exit 1
 
   # Frontend deps
-  yarn install --production || exit 1
+  yarn install || exit 1
   bower install --config.interactive=false --allow-root --config.storage.cache=/home/capco/.cache/bower || exit 1
   yarn run build:prod || exit 1
 
