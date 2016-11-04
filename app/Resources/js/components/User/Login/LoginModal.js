@@ -65,8 +65,7 @@ export const LoginModal = React.createClass({
               login_facebook: features.login_facebook,
               login_gplus: features.login_gplus,
               login_saml: features.login_saml,
-            }}
-            />
+            }} />
             <LoginForm
               isSubmitting={this.state.isSubmitting}
               onSubmitFailure={this.stopSubmit}

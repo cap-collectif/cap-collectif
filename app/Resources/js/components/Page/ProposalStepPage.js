@@ -16,6 +16,7 @@ export const ProposalStepPage = React.createClass({
   propTypes: {
     step: PropTypes.object.isRequired,
     count: PropTypes.number.isRequired,
+    countFusions: PropTypes.number.isRequired,
     form: PropTypes.object.isRequired,
     statuses: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
@@ -39,6 +40,7 @@ export const ProposalStepPage = React.createClass({
       statuses,
       step,
       count,
+      countFusions,
       currentPage,
       dispatch,
       isLoading,
@@ -54,6 +56,7 @@ export const ProposalStepPage = React.createClass({
           step.type === 'collect' &&
             <CollectStepPageHeader
               count={count}
+              countFusions={countFusions}
               form={form}
               categories={categories}
             />
@@ -106,7 +109,7 @@ const mapStateToProps = (state, props) => {
   return {
     stepId: undefined,
     step: state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.stepId)[0],
-    proposals: state.proposal.proposalShowedId.map(proposal => state.proposal.proposalsById[proposal]),
+    proposals: Object.values(state.proposal.proposalsById),
     currentPage: state.proposal.currentPaginationPage,
     randomOrder: state.proposal.order === 'random',
     isLoading: state.proposal.isLoading,

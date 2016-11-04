@@ -90,7 +90,7 @@ export const Post = React.createClass({
             <p className="media--news__text">{ post.abstract }</p>
           </div>
         </li>
-    );
+      );
   },
 
 });

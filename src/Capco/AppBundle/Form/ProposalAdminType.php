@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class ProposalAdminType extends ProposalType
@@ -14,7 +15,7 @@ class ProposalAdminType extends ProposalType
             ->add('author', EntityType::class, [
               'class' => 'CapcoUserBundle:User',
               'required' => true,
-              'property' => 'id',
+              'property' => 'id'
             ])
             ->add('childConnections', EntityType::class, [
                 'multiple' => true,
@@ -23,8 +24,8 @@ class ProposalAdminType extends ProposalType
                   new Assert\Count([
                     'min' => 2,
                     'minMessage' => 'You must specify more than 2 proposal',
-                  ]),
-                ],
+                  ])
+                ]
             ])
         ;
 

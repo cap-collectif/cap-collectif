@@ -13,7 +13,7 @@ const mainNode = (props) => {
    <Provider store={store}>
      <ProposalsUserVotesPage {...props} />
    </Provider>
-  );
+ );
 };
 
 export default mainNode;

@@ -66,7 +66,7 @@ const mainNode = (props) => {
         </Route>
       </Router>
     </Provider>
-  );
+ );
 };
 
 export default mainNode;

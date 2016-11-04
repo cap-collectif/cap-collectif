@@ -79,7 +79,7 @@ const ProposalDetailAdvancementStep = React.createClass({
         </div>
           { children }
         </span>
-    );
+      );
   },
 
 });

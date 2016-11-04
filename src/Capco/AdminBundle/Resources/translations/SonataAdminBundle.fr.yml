@@ -525,12 +525,12 @@ admin:
       servicePilote: Service pilote / Référent du dossier
       domaniality: Domanialité
       compatibility: Compatibilité avec les politiques publiques menées
-      environmentalImpact: Le projet constitue-t-il une amélioration environnementale ?
+      environmentalImpact: Impact environnemental
       dimension: Dimension sociale du projet
       functioningImpact: Impact en matière de fonctionnement
       evaluation: Évaluation financière de l'investissement proposé
       delay: Délai de mise en œuvre du projet
-      proposedAnswer: Analyse synthétique de l'avis du service
+      proposedAnswer: Réponse proposée
     proposal_category:
       name: Nom
     proposal_form:
