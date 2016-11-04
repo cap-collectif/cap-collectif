@@ -163,6 +163,10 @@ array-find-index@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-find-index/-/array-find-index-1.0.2.tgz#df010aa1287e164bbda6f9723b0a96a1ec4187a1"
 
+array-findindex-polyfill@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/array-findindex-polyfill/-/array-findindex-polyfill-0.1.0.tgz#c362665bec7645f22d7a3c3aac9793f71c3622ef"
+
 array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
@@ -1367,7 +1371,7 @@ circular-json@^0.3.0:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.1.tgz#be8b36aefccde8b3ca7aa2d6afc07a37242c0d2d"
 
-classnames@^2.2.3, classnames@^2.2.5:
+classnames@^2.2.3, classnames@^2.2.4, classnames@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -2010,7 +2014,7 @@ es5-ext@^0.10.7, es5-ext@^0.10.8, es5-ext@~0.10.11, es5-ext@~0.10.2, es5-ext@~0.
     es6-iterator "2"
     es6-symbol "~3.1"
 
-es6-error@^3.0.0:
+es6-error@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/es6-error/-/es6-error-3.2.0.tgz#e567cfdcb324d4e7ae5922a3700ada5de879a0ca"
 
@@ -3536,7 +3540,7 @@ lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
 
-lodash.keys@^3.0.0:
+lodash.keys@^3.0.0, lodash.keys@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/lodash.keys/-/lodash.keys-3.1.2.tgz#4dbc0472b156be50a0b286855d1bd0b0c656098a"
   dependencies:
@@ -4479,10 +4483,6 @@ rc@~1.1.0:
     minimist "^1.2.0"
     strip-json-comments "~1.0.4"
 
-react-addons-shallow-compare@^15.2.0:
-  version "15.3.2"
-  resolved "https://registry.yarnpkg.com/react-addons-shallow-compare/-/react-addons-shallow-compare-15.3.2.tgz#c9edba49b9eab44d0c59024d289beb1ab97318b5"
-
 "react-addons-test-utils@^0.14.8 || ^15.0.1", react-addons-test-utils@^15.3.1:
   version "15.3.2"
   resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.3.2.tgz#c09a44f583425a4a9c1b38444d7a6c3e6f0f41f6"
@@ -4570,6 +4570,10 @@ react-google-recaptcha@^0.5.2:
     babel-runtime "^5.8.0"
     react-async-script "~0.5.0"
 
+react-input-autosize@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-1.1.0.tgz#3fe1ac832387d8abab85f6051ceab1c9e5570853"
+
 react-intl@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-1.2.0.tgz#7e670c3e5013418b4663b173b1b2ad8c545247ec"
@@ -4646,6 +4650,13 @@ react-router@^2.7.0:
     invariant "^2.2.1"
     loose-envify "^1.2.0"
     warning "^3.0.0"
+
+react-select@^1.0.0-rc.2:
+  version "1.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.0.0-rc.2.tgz#9fc11b149a3dc1ac831289d21b40a59742f82f8d"
+  dependencies:
+    classnames "^2.2.4"
+    react-input-autosize "^1.1.0"
 
 react-truncate@^2.0.0:
   version "2.0.0"
@@ -4771,20 +4782,21 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
-redux-form@6.0.0-rc.3:
-  version "6.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-6.0.0-rc.3.tgz#22f8776deeaf597a0745adc67efe42619b0aca97"
+redux-form@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-6.1.1.tgz#0a007d64abf1373962ed1fde90001ec433b0c28a"
   dependencies:
+    array-findindex-polyfill "^0.1.0"
     deep-equal "^1.0.1"
-    es6-error "^3.0.0"
+    es6-error "^3.1.0"
     hoist-non-react-statics "^1.0.5"
     invariant "^2.2.1"
     is-promise "^2.1.0"
     lodash "^4.12.0"
     lodash-es "^4.12.0"
-    react-addons-shallow-compare "^15.2.0"
+    shallowequal "^0.2.2"
 
-redux-saga@^0.11.0:
+redux-saga@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.11.1.tgz#dc2023d059af0b91c0b1b4febce21194b67d5a58"
 
@@ -5064,6 +5076,12 @@ sha.js@^2.3.6:
 sha.js@2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/sha.js/-/sha.js-2.2.6.tgz#17ddeddc5f722fb66501658895461977867315ba"
+
+shallowequal@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-0.2.2.tgz#1e32fd5bcab6ad688a4812cb0cc04efc75c7014e"
+  dependencies:
+    lodash.keys "^3.1.2"
 
 shebang-regex@^1.0.0:
   version "1.0.0"
