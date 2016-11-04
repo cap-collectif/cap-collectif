@@ -84,7 +84,7 @@ class ProposalsController extends FOSRestController
         $user = $this->getUser();
         $em = $this->get('doctrine.orm.entity_manager');
 
-        if (!$proposalForm->canContribute()) {
+        if (!$proposalForm->canContribute() && !$user->isAdmin()) {
             throw new BadRequestHttpException('You can no longer contribute to this collect step.');
         }
 

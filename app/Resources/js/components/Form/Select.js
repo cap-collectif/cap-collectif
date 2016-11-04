@@ -11,24 +11,27 @@ export const renderSelect = React.createClass({
     error: PropTypes.any,
     options: PropTypes.array,
     clearable: PropTypes.bool,
-    multi: PropTypes.bool.isRequired,
+    multi: PropTypes.bool,
     loadOptions: PropTypes.func,
     filterOptions: PropTypes.func,
     isLoading: PropTypes.bool,
-    onChange: PropTypes.func.isRequired,
-  },
-
-  getInitialProps() {
-    return {
-      multi: false,
-      clearable: true,
-      isLoading: false,
-      onChange: () => {},
-    };
+    onChange: PropTypes.func,
   },
 
   render() {
-    const { onChange, isLoading, input, label, multi, filterOptions, clearable, loadOptions, meta: { touched, error }, ...rest } = this.props;
+    const { onChange, input, label, meta: { touched, error }, ...custom } = this.props;
+    const reactSelectToReduxForm = event => {
+      if (input.onChange) {
+        input.onChange(
+        Array.isArray(event)
+        ? event.map(e => e.value || [])
+        : (event && event.value) || null
+        );
+      }
+      if (typeof onChange === 'function') {
+        onChange();
+      }
+    };
     return (
       <div className="form-group">
         <label htmlFor={input.name} className="col-sm-2 control-label" >
@@ -36,48 +39,20 @@ export const renderSelect = React.createClass({
         </label>
         <div className="col-sm-10">
           {
-            typeof loadOptions === 'function' ?
+            typeof custom.loadOptions === 'function' ?
               <Select.Async
                 {...input}
-                multi={multi}
-                isLoading={isLoading}
-                clearable={clearable}
-                loadOptions={loadOptions}
-                options={rest.options}
-                filterOptions={filterOptions}
-                placeholder={rest.placeholder}
+                {...custom}
                 noResultsText={'En attente de résultats...'}
                 onBlur={() => { input.onBlur(input.value); }}
-                onChange={event => {
-                  if (input.onChange) {
-                    input.onChange(
-                    Array.isArray(event)
-                    ? event.map(e => e.value)
-                    : event.value
-                    );
-                  }
-                  onChange();
-                }}
+                onChange={reactSelectToReduxForm}
               />
             : <Select
               {...input}
-              multi={multi}
-              isLoading={isLoading}
-              clearable={clearable}
-              options={rest.options}
-              placeholder={rest.placeholder}
+              {...custom}
               noResultsText={'En attente de résultats...'}
               onBlur={() => input.onBlur(input.value)}
-              onChange={event => {
-                if (input.onChange) {
-                  input.onChange(
-                  Array.isArray(event)
-                  ? event.map(e => e.value)
-                  : event.value
-                  );
-                }
-                onChange();
-              }}
+              onChange={reactSelectToReduxForm}
             />
           }
           { touched && error }
