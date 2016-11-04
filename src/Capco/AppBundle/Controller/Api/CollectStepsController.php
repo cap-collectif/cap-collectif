@@ -31,8 +31,11 @@ class CollectStepsController extends FOSRestController
      * @QueryParam(name="order", requirements="(old|last|votes|comments|random)", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
      */
-    public function getProposalsByCollectStepAction(Request $request, CollectStep $collectStep, ParamFetcherInterface $paramFetcher)
-    {
+    public function getProposalsByCollectStepAction(
+        Request $request,
+        CollectStep $collectStep,
+        ParamFetcherInterface $paramFetcher
+    ) {
         $proposalForm = $collectStep->getProposalForm();
         $page = intval($paramFetcher->get('page'));
         $pagination = intval($paramFetcher->get('pagination'));
@@ -49,10 +52,16 @@ class CollectStepsController extends FOSRestController
 
         $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
 
-      // Filters
-      $providedFilters['proposalForm'] = $proposalForm->getId();
+        // Filters
+        $providedFilters['proposalForm'] = $proposalForm->getId();
 
-        $results = $this->get('capco.search.resolver')->searchProposals($page, $pagination, $order, $terms, $providedFilters);
+        $results = $this->get('capco.search.resolver')->searchProposals(
+            $page,
+            $pagination,
+            $order,
+            $terms,
+            $providedFilters
+        );
 
         return $results;
     }
@@ -87,8 +96,7 @@ class CollectStepsController extends FOSRestController
             ->setIpAddress($request->getClientIp())
             ->setUser($user)
             ->setProposal($proposal)
-            ->setCollectStep($collectStep)
-        ;
+            ->setCollectStep($collectStep);
 
         $form = $this->createForm(ProposalCollectVoteType::class, $vote);
         $form->submit($request->request->all());
@@ -104,8 +112,7 @@ class CollectStepsController extends FOSRestController
                 ->setAuthorName($vote->getUsername())
                 ->setAuthorEmail($vote->getEmail())
                 ->setBody($content)
-                ->setProposal($proposal)
-            ;
+                ->setProposal($proposal);
 
             $em->persist($comment);
             $this->get('event_dispatcher')->dispatch(
@@ -149,11 +156,13 @@ class CollectStepsController extends FOSRestController
 
         $vote = $em
             ->getRepository('CapcoAppBundle:ProposalCollectVote')
-            ->findOneBy([
-                'user' => $this->getUser(),
-                'proposal' => $proposal,
-                'collectStep' => $collectStep,
-            ]);
+            ->findOneBy(
+                [
+                    'user' => $this->getUser(),
+                    'proposal' => $proposal,
+                    'collectStep' => $collectStep,
+                ]
+            );
 
         if (!$vote) {
             throw new BadRequestHttpException('You have not voted for this proposal in this selection step.');

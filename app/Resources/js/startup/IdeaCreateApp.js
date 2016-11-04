@@ -13,7 +13,7 @@ const mainNode = (props) => {
    <Provider store={store}>
      <IdeaCreate {...props} />
    </Provider>
- );
+  );
 };
 
 export default mainNode;

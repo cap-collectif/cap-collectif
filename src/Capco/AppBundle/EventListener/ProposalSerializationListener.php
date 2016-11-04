@@ -149,7 +149,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
 
         if (isset($this->getIncludedGroups($event)['ProposalFusions'])) {
             $serializeFusioned = function ($child) use ($step, $project) {
-              return [
+                return [
                 'title' => $child->getTitle(),
                 'url' => $this->router->generate('app_project_show_proposal', [
                         'proposalSlug' => $child->getSlug(),

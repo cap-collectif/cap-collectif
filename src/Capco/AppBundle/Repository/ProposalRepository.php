@@ -203,8 +203,8 @@ class ProposalRepository extends EntityRepository
             ->addGroupBy('proposal.id');
 
         if ($limit) {
-          $qb->setMaxResults($limit);
-          $qb->setFirstResult($offset);
+            $qb->setMaxResults($limit);
+            $qb->setFirstResult($offset);
         }
 
         return $qb

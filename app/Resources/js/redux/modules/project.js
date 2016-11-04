@@ -19,7 +19,6 @@ export function* fetchProjectsSaga() {
     const result = yield call(Fetcher.get, '/projects');
     yield put({ type: PROJECTS_FETCH_SUCCEEDED, projects: result });
   } catch (e) {
-    console.log(e);
     yield put({ type: PROJECTS_FETCH_FAILED, error: e });
   }
 }

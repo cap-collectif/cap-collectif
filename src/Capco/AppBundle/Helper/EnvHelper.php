@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Helper;
 use Closure;
 
 /**
- * Class EnvHelper
+ * Class EnvHelper.
  *
  * Many things of this helper comes from Laravel.
  */
@@ -14,7 +14,7 @@ class EnvHelper
     /**
      * Gets the value of an environment variable. Supports boolean, empty and null.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return mixed
      */
@@ -51,8 +51,9 @@ class EnvHelper
     /**
      * Determine if a given string starts with a given substring.
      *
-     * @param  string  $haystack
-     * @param  string|array  $needles
+     * @param string       $haystack
+     * @param string|array $needles
+     *
      * @return bool
      */
     private static function startsWith(string $haystack, $needles): bool
@@ -62,14 +63,16 @@ class EnvHelper
                 return true;
             }
         }
+
         return false;
     }
 
     /**
      * Determine if a given string ends with a given substring.
      *
-     * @param  string  $haystack
-     * @param  string|array  $needles
+     * @param string       $haystack
+     * @param string|array $needles
+     *
      * @return bool
      */
     private static function endsWith(string $haystack, $needles): bool
@@ -79,7 +82,7 @@ class EnvHelper
                 return true;
             }
         }
+
         return false;
     }
-
 }
