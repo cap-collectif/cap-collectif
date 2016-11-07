@@ -27,7 +27,10 @@ else
   # Frontend deps
   yarn install
   bower install --config.interactive=false --config.storage.cache=/home/capco/.bower
-  yarn run build || (npm rebuild node-sass && yarn run build)
+  if ./node_modules/node-sass/bin/node-sass | grep --quiet `npm rebuild node-sass` &> /dev/null; then
+      yarn rebuild node-sass > /dev/null
+  fi
+  yarn run build
 
   # Server side rendering deps
   yarn run build-server-bundle
