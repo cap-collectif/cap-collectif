@@ -105,7 +105,7 @@ class CollectStep extends AbstractStep implements IndexableInterface, Participat
 
     public function getProposalFormId()
     {
-        return $this->proposalForm ? $this->proposalForm->getId() || null;
+        return $this->proposalForm ? $this->proposalForm->getId() : null;
     }
 
     public function setProposalForm(ProposalForm $proposalForm = null): self
