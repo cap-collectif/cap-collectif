@@ -37,6 +37,7 @@ export const ProposalAdminForm = React.createClass({
           component={renderSelect}
           clearable={false}
           autoload={false}
+          cache={false}
           loadOptions={() => Promise.resolve({ options: [{ label: user.displayName, value: user.id }, { label: 'lol', value: 899 }] })}
         />
         <Field
@@ -121,6 +122,19 @@ export const ProposalAdminForm = React.createClass({
             />
           )
         }
+        <Field
+          name="media"
+          type="image"
+          component={renderInput}
+          labelClassName="col-sm-2"
+          wrapperClassName="col-sm-10"
+          label={
+            <span>
+              {this.getIntlMessage('proposal.media')}
+              {optional}
+            </span>
+          }
+        />
       </form>
     );
   },

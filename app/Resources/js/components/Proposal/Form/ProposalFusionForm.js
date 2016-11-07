@@ -10,7 +10,7 @@ const formName = 'proposal';
 const validate = values => {
   const errors = {};
   if (values.childConnections && values.childConnections.length < 2) {
-    errors.childConnections = 'Au moins 2 propositions';
+    errors.childConnections = 'Sélectionnez au moins 2 propositions.';
   }
   return errors;
 };
