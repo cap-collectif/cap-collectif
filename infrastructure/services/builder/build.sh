@@ -28,7 +28,7 @@ else
   yarn install
   bower install --config.interactive=false --config.storage.cache=/home/capco/.bower
   if ./node_modules/node-sass/bin/node-sass | grep --quiet `npm rebuild node-sass` &> /dev/null; then
-      yarn rebuild node-sass > /dev/null
+      npm rebuild node-sass > /dev/null
   fi
   yarn run build
 
