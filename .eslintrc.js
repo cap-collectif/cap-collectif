@@ -36,6 +36,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/no-find-dom-node': 'off',
     'react/no-string-refs': 'off',
+    'react/jsx-closing-bracket-location': 'off',
     'react/jsx-first-prop-new-line': 'off',
     'react/self-closing-comp': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
