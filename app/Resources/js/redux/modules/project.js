@@ -19,7 +19,6 @@ export function* fetchProjectsSaga() {
     const result = yield call(Fetcher.get, '/projects');
     yield put({ type: PROJECTS_FETCH_SUCCEEDED, projects: result });
   } catch (e) {
-    console.log(e); // eslint-disable-line no-console
     yield put({ type: PROJECTS_FETCH_FAILED, error: e });
   }
 }
