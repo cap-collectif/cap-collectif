@@ -46,8 +46,8 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install yarn
-RUN apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3 && \
-  echo "deb http://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+RUN apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg && \
+  echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
   apt-get update && \
   apt-get install yarn && \
   export PATH="$PATH:$HOME/.yarn/bin" && \
