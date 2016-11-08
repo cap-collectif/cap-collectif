@@ -5,7 +5,6 @@ application:
         - ../../:/var/www
         - /var/run/docker.sock:/run/docker.sock:ro
         - /usr/bin/docker:/usr/bin/docker
-        - /etc/localtime:/etc/localtime:ro
 
 elasticsearch:
     image: elasticsearch:1.7.3
