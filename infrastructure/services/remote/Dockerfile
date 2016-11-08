@@ -107,8 +107,9 @@ RUN apt-get update && \
     apt-get clean all
 
 # Install mariadb
-RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
+RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 199369E5404BD5FC7D2FE43BCBCB082A1BB943DB && \
     apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 430BDF5C56E7C94E848EE60C1C4CBDCDCD2EFD2A && \
+    apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 4D1BB29D63D98E422B2113B19334A25F8507EFA5 && \
     echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.1/debian jessie main" >> /etc/apt/sources.list \
     && { \
 		    echo 'Package: *'; \
@@ -117,8 +118,8 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a
 	  } > /etc/apt/preferences.d/mariadb && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
-        mariadb-server=10.1.18+maria-1~jessie \
-        mariadb-client=10.1.18+maria-1~jessie \
+        mariadb-server=10.1.19+maria-1~jessie \
+        mariadb-client=10.1.19+maria-1~jessie \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

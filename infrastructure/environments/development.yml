@@ -9,7 +9,6 @@ application:
         - ../../:/var/www
         - /var/run/docker.sock:/var/run/docker.sock
         - /usr/local/bin/docker:/usr/bin/docker
-        - /etc/localtime:/etc/localtime:ro
     links:
         - database:database
         - elasticsearch:elasticsearch

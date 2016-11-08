@@ -45,31 +45,17 @@ const generateProgressStepsWithColorAndStatus = (progressSteps) => {
     };
 
     if (progressStep.title === stepConsideredCurrent.title) {
-      const currentTime = moment();
-
-      if (progressStep.startAt && progressStep.endAt
-        && moment(progressStep.startAt) <= currentTime && moment(progressStep.endAt) >= currentTime
-      ) {
+      if (moment(progressStep.startAt) > moment()) {
+        props.status = { name: 'A venir', color: 'info' };
+        props.roundColor = bootstrapToHex('info');
+      } else if (progressStep.endAt && moment(progressStep.endAt) < moment()) {
+        props.status = { name: 'Terminé', color: 'success' };
+        props.roundColor = bootstrapToHex('success');
+      } else {
         props.status = { name: 'En cours', color: 'warning' };
         props.roundColor = bootstrapToHex('warning');
         props.borderColor = grey;
       }
-
-      if (!progressStep.endAt && moment(progressStep.startAt) <= currentTime) {
-        props.status = { name: 'Terminé', color: 'success' };
-        props.roundColor = bootstrapToHex('success');
-      }
-
-      if (!progressStep.endAt && moment(progressStep.startAt) > currentTime) {
-        props.status = { name: 'A venir', color: 'info' };
-        props.roundColor = bootstrapToHex('info');
-      }
-
-      if (progressStep.endAt && moment(progressStep.endAt) < currentTime) {
-        props.status = { name: 'Terminé', color: 'success' };
-        props.roundColor = bootstrapToHex('success');
-      }
-
       isPastCurrent = true;
     }
 
