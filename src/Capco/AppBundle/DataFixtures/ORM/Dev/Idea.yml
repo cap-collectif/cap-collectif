@@ -1,5 +1,6 @@
 Capco\AppBundle\Entity\Idea:
   Idea1:
+    id: 1
     title: ideaNotCommentable
     body: |
           <p><text(100)></p>
@@ -15,6 +16,7 @@ Capco\AppBundle\Entity\Idea:
     isCommentable: false
 
   Idea2:
+    id: 2
     title: ideaCommentable
     body: |
         <p><text(100)></p>
@@ -29,6 +31,7 @@ Capco\AppBundle\Entity\Idea:
     media: '@MediaIdea2'
 
   Idea3:
+    id: 3
     title: Troisième idée
     body: |
         <p><text(100)></p>
@@ -43,6 +46,7 @@ Capco\AppBundle\Entity\Idea:
     isTrashed: false
 
   Idea4:
+    id: 4
     title: Idée avec un titre très très long pour voir comment ça rend dans la preview
     body: |
           <p><text(100)></p>
@@ -55,6 +59,7 @@ Capco\AppBundle\Entity\Idea:
     isTrashed: false
 
   Idea{5..20}:
+    id: <current()>
     title: <text(38)>
     body: |
           <p><text(100)></p>
@@ -68,6 +73,7 @@ Capco\AppBundle\Entity\Idea:
     isTrashed: <boolean()>
 
   Idea21:
+    id: 21
     title: Dernière idée
     body: |
           <p><text(100)></p>
@@ -81,6 +87,7 @@ Capco\AppBundle\Entity\Idea:
     isTrashed: false
 
   Idea22:
+    id: 22
     title: Idée à la corbeille
     body: |
           <p><text(100)></p>
