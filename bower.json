@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "authors": [
     "Laurent Brunet <lbrunet@jolicode.com>",
-    "Suzanne Favot <sfavott@jolicode.com>"
+    "Suzanne Favot <sfavott@jolicode.com>",
+    "Aurélien David <adavid@jolicode.com"
   ],
   "description": "Cap-Collectif version Symfony2",
   "license": "MIT",
