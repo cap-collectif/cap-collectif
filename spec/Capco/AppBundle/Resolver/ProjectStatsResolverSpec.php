@@ -3,11 +3,13 @@
 namespace spec\Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\DistrictRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ProposalCategoryRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
@@ -17,22 +19,24 @@ use PhpSpec\ObjectBehavior;
 class ProjectStatsResolverSpec extends ObjectBehavior
 {
     function let(
-        SelectionStepRepository $selectionStepRepo,
-        CollectStepRepository $collectStepRepo,
-        ThemeRepository $themeRepo,
-        DistrictRepository $districtRepo,
-        UserTypeRepository $userTypeRepo,
-        ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
+      SelectionStepRepository $selectionStepRepo,
+      CollectStepRepository $collectStepRepo,
+      ThemeRepository $themeRepo,
+      DistrictRepository $districtRepo,
+      ProposalCategoryRepository $categoryRepo,
+      UserTypeRepository $userTypeRepo,
+      ProposalRepository $proposalRepo,
+      ProposalSelectionVoteRepository $proposalSelectionVoteRepo
     ) {
         $this->beConstructedWith(
             $selectionStepRepo,
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
-            $proposalVoteRepo
+            $proposalSelectionVoteRepo
         );
     }
 
@@ -47,6 +51,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -68,6 +73,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
@@ -92,6 +98,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -103,6 +110,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
@@ -116,6 +124,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -137,6 +146,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
@@ -161,6 +171,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -172,6 +183,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
@@ -185,6 +197,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -206,6 +219,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
@@ -230,6 +244,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -241,6 +256,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
@@ -254,6 +270,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -275,6 +292,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
@@ -300,6 +318,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -310,6 +329,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
@@ -323,6 +343,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -344,6 +365,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
@@ -369,6 +391,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -379,6 +402,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
@@ -392,6 +416,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -402,6 +427,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
@@ -467,6 +493,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
         DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
@@ -488,6 +515,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $collectStepRepo,
             $themeRepo,
             $districtRepo,
+            $categoryRepo,
             $userTypeRepo,
             $proposalRepo,
             $proposalVoteRepo
