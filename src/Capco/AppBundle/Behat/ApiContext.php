@@ -331,7 +331,6 @@ EOF;
     {
         $this->response->json(); // check if json
         $body = (string) $this->response->getBody();
-        var_dump($body);
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
         PHPUnit::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError());

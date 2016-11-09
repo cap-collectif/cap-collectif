@@ -546,7 +546,7 @@ Feature: Synthesis
     ]
     """
 
-  @database @fixme
+  @database
   Scenario: API client wants to get synthesis elements tree
     Given I am logged in to api as admin
     And there is a synthesis with id "48" based on consultation step 2
