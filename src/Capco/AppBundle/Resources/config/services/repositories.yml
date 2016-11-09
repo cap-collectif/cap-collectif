@@ -110,9 +110,9 @@ services:
     arguments: ['CapcoAppBundle:Theme']
 
   capco.user_type.repository:
-    class: Capco\UserBundle\Repository\UserTypeRepository
+    class:           Capco\UserBundle\Repository\UserTypeRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoUserBundle:UserType']
+    arguments:       ['CapcoUserBundle:UserType']
 
   capco.user.repository:
     class: Capco\UserBundle\Repository\UserRepository

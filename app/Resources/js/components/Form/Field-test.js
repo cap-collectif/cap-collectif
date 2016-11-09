@@ -8,22 +8,20 @@ import IntlData from '../../translations/FR';
 
 describe('<Field />', () => {
   const defaultProps = {
-    type: 'text',
     input: {
       id: 'id',
       autoFocus: false,
+      type: 'text',
       name: 'name',
       label: 'label',
     },
-    meta: {
-      touched: false,
-    },
+    touched: false,
     ...IntlData,
   };
 
   it('pass input props to children', () => {
     const wrapper = shallow(<Field {...defaultProps} />);
-    expect(wrapper.prop('type')).to.equal(defaultProps.type);
+    expect(wrapper.prop('type')).to.equal(defaultProps.input.type);
     expect(wrapper.prop('label')).to.equal(defaultProps.input.label);
     expect(wrapper.prop('id')).to.equal(defaultProps.input.id);
     expect(wrapper.prop('autoFocus')).to.equal(defaultProps.input.autoFocus);
@@ -40,7 +38,7 @@ describe('<Field />', () => {
   });
 
   it('renders a validated <Input /> element', () => {
-    const wrapper = shallow(<Field {...defaultProps} meta={{ touched: true }} />);
+    const wrapper = shallow(<Field {...defaultProps} touched />);
     expect(wrapper.is('Input')).to.be.true;
     expect(wrapper.prop('errors')).to.be.null;
     expect(wrapper.prop('bsStyle')).to.equal('success');
@@ -48,7 +46,7 @@ describe('<Field />', () => {
   });
 
   it('renders an errored <Input /> element', () => {
-    const wrapper = shallow(<Field {...defaultProps} meta={{ touched: true, error: "global.required" }} />);
+    const wrapper = shallow(<Field {...defaultProps} touched error="global.required" />);
     expect(wrapper.is('Input')).to.be.true;
     expect(wrapper.prop('errors')).to.equal('Cette valeur est requise.');
     expect(wrapper.prop('bsStyle')).to.equal('error');
@@ -64,7 +62,7 @@ describe('<Field />', () => {
   });
 
   it('renders a div around <Input /> element', () => {
-    const wrapper = shallow(<Field {...defaultProps} divClassName='myclassName' />);
+    const wrapper = shallow(<Field {...defaultProps} input={Object.assign(defaultProps.input, { divClassName: 'myclassName' })} />);
     expect(wrapper.is('div')).to.be.true;
     expect(wrapper.prop('className')).to.equal('myclassName');
     expect(wrapper.find('Input').length).to.equal(1);

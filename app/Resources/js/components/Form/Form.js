@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import component from './Field';
-import { renderSelect } from '../Form/Select';
 
 export const Form = React.createClass({
   displayName: 'Form',
@@ -32,11 +31,18 @@ export const Form = React.createClass({
       <form id={form} onSubmit={onSubmit}>
       {
         fields.map((field, index) => {
+          const children = field.options ?
+          [
+            field.defaultOptionLabel && <option key={0} value="">{field.defaultOptionLabel}</option>,
+          ].concat(
+            field.options.map((opt, i) => <option key={i + 1} value={opt.value}>{opt.label}</option>)
+          ) : null;
           return (
             <Field
               key={index}
               autoFocus={index === 0}
-              component={field.type === 'select' ? renderSelect : component}
+              component={component}
+              children={children}
               {...field}
             />
           );

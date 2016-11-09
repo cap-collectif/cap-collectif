@@ -91,16 +91,14 @@ export const RegistrationForm = React.createClass({
         id: '_user_type',
         name: 'userType',
         type: 'select',
-        inputClassName: 'null',
         label: (
           <span>
             {this.getIntlMessage('registration.type')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
           </span>
         ),
         labelClassName: 'h5',
-        placeholder: this.getIntlMessage('registration.select.type'),
+        defaultOptionLabel: this.getIntlMessage('registration.select.type'),
         options: userTypes.map((type) => { return { value: type.id, label: type.name }; }),
-        meta: { active: true },
       });
     }
     if (features.zipcode_at_register) {
