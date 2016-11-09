@@ -37,7 +37,7 @@ class SynthesisController extends FOSRestController
      *    404 = "No syntheses",
      *  }
      * )
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Get("/syntheses")
      * @View(serializerGroups={"Syntheses", "Elements"})
      */
@@ -250,7 +250,7 @@ class SynthesisController extends FOSRestController
 
         $isVisibleOnlyByAdmin = $type !== 'published' || !$synthesis->isEnabled();
         if ($isVisibleOnlyByAdmin && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
+            $this->createAccessDeniedException()
         }
 
         $tree = $this->get('capco.synthesis.synthesis_element_handler')
