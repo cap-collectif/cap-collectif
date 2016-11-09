@@ -39,8 +39,7 @@ builder:
     volumes:
         - ../../:/var/www
         - ~/.composer:/home/capco/.composer
-        - ~/.npm:/home/capco/.npm
-        - ~/.bower:/home/capco/.bower
+        - ~/.yarn-cache:/home/capco/.yarn-cache
     command: echo "Use 'docker-compose run builder build' to build deps"
 
 seleniumhub:

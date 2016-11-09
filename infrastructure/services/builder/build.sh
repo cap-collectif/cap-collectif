@@ -12,8 +12,8 @@ if [ "$PRODUCTION" ]; then
   php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var || exit 1
 
   # Frontend deps
-  yarn --production || exit 1
-  bower install --config.interactive=false --allow-root --config.storage.cache=/home/capco/.cache/bower || exit 1
+  yarn || exit 1
+  bower install --config.interactive=false --allow-root || exit 1
   yarn run build:prod || exit 1
 
   # Server side rendering deps
@@ -26,8 +26,9 @@ else
 
   # Frontend deps
   yarn
-  bower install --config.interactive=false --config.storage.cache=/home/capco/.bower
+  bower install --config.interactive=false
   if ./node_modules/node-sass/bin/node-sass | grep --quiet `npm rebuild node-sass` &> /dev/null; then
+      echo "Building node-sass binding for the container..."
       npm rebuild node-sass > /dev/null
   fi
   yarn run build

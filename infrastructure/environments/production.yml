@@ -7,7 +7,6 @@ builder:
         - ../../:/var/www
         - ~/.composer:/home/capco/.composer
         - ~/.yarn-cache:/home/capco/.yarn-cache
-        - ~/.bower:/home/capco/.bower
     command: echo "Use 'docker-compose run builder build' to build deps"
 
 elasticsearch:
