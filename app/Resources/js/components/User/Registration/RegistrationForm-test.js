@@ -101,7 +101,7 @@ describe('<RegistrationForm />', () => {
             value: 1,
           },
         ],
-        defaultOptionLabel: 'Je suis...',
+        placeholder: 'Je suis...',
       }
     );
     expect(select.label).to.be.a.symbol;
