@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * SynthesisElement.
@@ -19,14 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SynthesisElement
 {
-    /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\Column(name="id", type="guid")
-     * @ORM\GeneratedValue(strategy="UUID")
-     */
-    private $id;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="published", type="boolean")
@@ -262,24 +256,6 @@ class SynthesisElement
         $this->votes = [];
         $this->children = new ArrayCollection();
         $this->displayType = 'folder';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**

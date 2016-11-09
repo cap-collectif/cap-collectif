@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * Synthesis.
@@ -27,14 +28,7 @@ class Synthesis
         self::SOURCE_TYPE_NONE => 'synthesis.source_types.none',
     ];
 
-    /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\Column(name="id", type="guid")
-     * @ORM\GeneratedValue(strategy="UUID")
-     */
-    private $id;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="enabled", type="boolean")
@@ -81,26 +75,6 @@ class Synthesis
     public function __construct()
     {
         $this->elements = new ArrayCollection();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**

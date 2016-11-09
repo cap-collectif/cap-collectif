@@ -331,6 +331,7 @@ EOF;
     {
         $this->response->json(); // check if json
         $body = (string) $this->response->getBody();
+        var_dump($body);
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
         PHPUnit::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError());
@@ -415,7 +416,7 @@ EOF;
      *
      * @Given there is a synthesis with id :sid based on consultation step :csId
      */
-    public function thereIsASynthesisBasedOnConsultationStep($sId, $csId)
+    public function thereIsASynthesisBasedOnConsultationStep(string $sId, int $csId)
     {
         $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($sId);
 

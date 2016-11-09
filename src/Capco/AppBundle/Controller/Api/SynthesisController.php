@@ -38,7 +38,6 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
-     * @Security("has_role('ROLE_ADMIN')")
      * @Get("/syntheses")
      * @View(serializerGroups={"Syntheses", "Elements"})
      */
@@ -249,11 +248,13 @@ class SynthesisController extends FOSRestController
         $depth = $paramFetcher->get('depth');
         $parent = $paramFetcher->get('parent');
 
-        if (($type !== 'published' || !$synthesis->isEnabled()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        $isVisibleOnlyByAdmin = $type !== 'published' || !$synthesis->isEnabled();
+        if ($isVisibleOnlyByAdmin && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
 
-        $tree = $this->get('capco.synthesis.synthesis_element_handler')->getElementsTreeFromSynthesisByType($synthesis, $type, $parent, $depth);
+        $tree = $this->get('capco.synthesis.synthesis_element_handler')
+                    ->getElementsTreeFromSynthesisByType($synthesis, $type, $parent, $depth);
 
         return $tree;
     }

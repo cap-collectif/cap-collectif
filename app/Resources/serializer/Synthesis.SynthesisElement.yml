@@ -96,4 +96,3 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
           element_id: expr(object.getId())
       exclusion:
         groups: [Elements, ElementsList, ElementDetails]
-

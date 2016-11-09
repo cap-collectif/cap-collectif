@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Synthesis;
 
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * SynthesisDivision.
@@ -12,14 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SynthesisDivision
 {
-    /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\Column(name="id", type="guid")
-     * @ORM\GeneratedValue(strategy="UUID")
-     */
-    private $id;
+    use UuidTrait;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="division", cascade={"persist"}, orphanRemoval=true)
@@ -31,14 +25,6 @@ class SynthesisDivision
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="originalDivision", cascade={"persist"})
      */
     private $elements;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @return mixed

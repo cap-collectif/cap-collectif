@@ -4,23 +4,15 @@ namespace Capco\AppBundle\Entity\Synthesis;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
- * Synthesis.
- *
  * @ORM\Table(name="synthesis_user")
  * @ORM\Entity()
  */
 class SynthesisUser implements SynthesisUserInterface
 {
-    /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\Column(name="id", type="guid")
-     * @ORM\GeneratedValue(strategy="UUID")
-     */
-    private $id;
+    use UuidTrait;
 
     /**
      * @var string
