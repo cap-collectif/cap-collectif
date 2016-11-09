@@ -250,7 +250,7 @@ class SynthesisController extends FOSRestController
 
         $isVisibleOnlyByAdmin = $type !== 'published' || !$synthesis->isEnabled();
         if ($isVisibleOnlyByAdmin && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            $this->createAccessDeniedException()
+            $this->createAccessDeniedException();
         }
 
         $tree = $this->get('capco.synthesis.synthesis_element_handler')
