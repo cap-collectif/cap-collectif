@@ -16,19 +16,10 @@ export const renderSelect = React.createClass({
     filterOptions: PropTypes.func,
     isLoading: PropTypes.bool,
     onChange: PropTypes.func,
-    labelClassName: PropTypes.string,
-    inputClassName: PropTypes.string,
   },
 
   render() {
-    const {
-      onChange,
-      input,
-      label,
-      labelClassName,
-      inputClassName,
-      meta: { touched, error },
-      ...custom } = this.props;
+    const { onChange, input, label, meta: { touched, error }, ...custom } = this.props;
     const reactSelectToReduxForm = event => {
       if (input.onChange) {
         input.onChange(
@@ -43,10 +34,10 @@ export const renderSelect = React.createClass({
     };
     return (
       <div className="form-group">
-        <label htmlFor={input.name} className={labelClassName || 'col-sm-2 control-label'} >
+        <label htmlFor={input.name} className="col-sm-2 control-label" >
           { label }
         </label>
-        <div className={inputClassName || 'col-sm-10'}>
+        <div className="col-sm-10">
           {
             typeof custom.loadOptions === 'function' ?
               <Select.Async
