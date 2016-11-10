@@ -55,7 +55,7 @@ RUN apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install bower
-RUN npm install -g bower
+RUN yarn global add bower
 
 # Install pep8
 RUN pip install pep8 autopep8
