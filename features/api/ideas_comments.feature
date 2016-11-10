@@ -5,7 +5,7 @@ Feature: Ideas comments
 
   @parallel-scenario
   Scenario: API client wants to list comments of an idea
-    When I send a GET request to "/api/ideas/5/comments"
+    When I send a GET request to "/api/ideas/2/comments"
     Then the JSON response should match:
     """
     {
@@ -50,7 +50,7 @@ Feature: Ideas comments
 
   @parallel-scenario
   Scenario: API client wants to find the first comment of an idea
-    When I send a GET request to "/api/ideas/5/comments?limit=1"
+    When I send a GET request to "/api/ideas/2/comments?limit=1"
     Then the JSON response should match:
     """
     {
@@ -81,7 +81,7 @@ Feature: Ideas comments
 
   @parallel-scenario
   Scenario: API client wants to find popular comments of an idea
-    When I send a GET request to "/api/ideas/5/comments?filter=popular"
+    When I send a GET request to "/api/ideas/2/comments?filter=popular"
     Then the JSON response should match:
     """
     {
@@ -102,7 +102,7 @@ Feature: Ideas comments
 
   @database
   Scenario: Anonymous API client wants to add a comment
-    When I send a POST request to "/api/ideas/5/comments" with json:
+    When I send a POST request to "/api/ideas/2/comments" with json:
     """
     {
       "authorName": "Kéké",
@@ -114,7 +114,7 @@ Feature: Ideas comments
 
   @database
   Scenario: Anonymous API client wants to add an answer to a comment
-    When I send a POST request to "/api/ideas/5/comments" with json:
+    When I send a POST request to "/api/ideas/2/comments" with json:
     """
     {
       "parent": 1,
@@ -127,7 +127,7 @@ Feature: Ideas comments
 
   @security
   Scenario: Anonymous API client wants to add a comment without user informations
-    When I send a POST request to "/api/ideas/5/comments" with json:
+    When I send a POST request to "/api/ideas/2/comments" with json:
     """
     {
       "body": "Vive moi qui suis plus fort que www.google.fr !"
@@ -140,7 +140,7 @@ Feature: Ideas comments
   @database
   Scenario: logged in API client wants to add a comment
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/5/comments" with json:
+    When I send a POST request to "/api/ideas/2/comments" with json:
     """
     {
       "body": "Vive moi user ! Réponds à ça si tu l'oses."
@@ -151,7 +151,7 @@ Feature: Ideas comments
   @database
   Scenario: logged in API client wants to add an answer to a comment
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/5/comments" with json:
+    When I send a POST request to "/api/ideas/2/comments" with json:
     """
     {
       "parent": 1,
@@ -163,7 +163,7 @@ Feature: Ideas comments
   @security
   Scenario: logged in API client wants to add a comment by hacking
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/5/comments" with json:
+    When I send a POST request to "/api/ideas/2/comments" with json:
     """
     {
       "parent": 57,
@@ -183,7 +183,7 @@ Feature: Ideas comments
   @security
   Scenario: logged in API client wants to add a comment to the wrong idea
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/5/comments" with json:
+    When I send a POST request to "/api/ideas/2/comments" with json:
     """
     {
       "parent": 55,
@@ -203,7 +203,7 @@ Feature: Ideas comments
   @security
   Scenario: logged in API client wants to add an answer to an answer
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/5/comments" with json:
+    When I send a POST request to "/api/ideas/2/comments" with json:
     """
     {
       "parent": 5,
