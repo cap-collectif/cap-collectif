@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
+import LoginOverlay from '../Utils/LoginOverlay';
+
 
 import UserAvatar from '../User/UserAvatar';
 import FlashMessages from '../Utils/FlashMessages';
@@ -157,9 +159,11 @@ const CommentForm = React.createClass({
           <Row>
             <Col sm={12} md={6}>
               <p>{ this.getIntlMessage('comment.with_my_account') }</p>
-              <a className="btn btn-primary" href={`${window.location.protocol}//${window.location.host}/login`} >
-                { this.getIntlMessage('global.login') }
-              </a>
+              <LoginOverlay>
+                <button className="btn btn-primary" >
+                  { this.getIntlMessage('global.login') }
+                </button>
+              </LoginOverlay>
               <h5>{ this.getIntlMessage('comment.why_create_account') }</h5>
               <ul className="excerpt small">
                 <li>

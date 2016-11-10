@@ -7,6 +7,7 @@ use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -20,10 +21,6 @@ class CommentType extends AbstractType
         $this->user = $user;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['actionType'] === 'edit') {
@@ -38,20 +35,16 @@ class CommentType extends AbstractType
             ;
         }
 
-        $builder
-            ->add('body', PurifiedTextareaType::class, ['required' => true])
-        ;
+        $builder->add('body', PurifiedTextareaType::class, ['required' => true]);
 
         if ($options['actionType'] === 'create') {
-            $builder
-                ->add('parent', null, ['required' => false])
-            ;
+            $builder->add('parent', null, ['required' => false]);
         }
 
         if (!$this->user) {
             $builder
                 ->add('authorName', PurifiedTextType::class, ['required' => true])
-                ->add('authorEmail', null, ['required' => true])
+                ->add('authorEmail', EmailType::class, ['required' => true])
             ;
         }
     }
@@ -64,5 +57,10 @@ class CommentType extends AbstractType
             'translation_domain' => 'CapcoAppBundle',
             'actionType' => 'create',
         ]);
+    }
+
+    public function getName()
+    {
+        return '';
     }
 }

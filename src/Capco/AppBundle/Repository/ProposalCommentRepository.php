@@ -48,7 +48,7 @@ class ProposalCommentRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function countCommentsAndAnswersEnabledByproposal($proposal)
+    public function countCommentsAndAnswersEnabledByProposal($proposal)
     {
         $qb = $this->getIsEnabledQueryBuilder()
                    ->select('count(c.id)')

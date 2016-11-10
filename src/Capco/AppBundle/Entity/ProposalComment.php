@@ -34,12 +34,7 @@ class ProposalComment extends Comment
         return $this->proposal;
     }
 
-    /**
-     * @param Proposal $proposal
-     *
-     * @return $this
-     */
-    public function setProposal(Proposal $proposal)
+    public function setProposal(Proposal $proposal): self
     {
         $this->proposal = $proposal;
         $proposal->addComment($this);

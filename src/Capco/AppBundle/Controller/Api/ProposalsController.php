@@ -16,6 +16,7 @@ use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Helper\ArrayHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -201,12 +202,6 @@ class ProposalsController extends FOSRestController
      * @ParamConverter("form", options={"mapping": {"form": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
      * @View(statusCode=201, serializerGroups={"Comments", "UsersInfos"})
-     *
-     * @param Request      $request
-     * @param ProposalForm $form
-     * @param Proposal     $proposal
-     *
-     * @return ProposalForm|\Symfony\Component\Form\Form
      */
     public function postProposalCommentsAction(Request $request, ProposalForm $form, Proposal $proposal)
     {
@@ -217,32 +212,35 @@ class ProposalsController extends FOSRestController
         $user = $this->getUser();
 
         $comment = (new ProposalComment())
-                    ->setAuthorIp($request->getClientIp())
-                    ->setAuthor($user)
-                    ->setProposal($proposal)
-                    ->setIsEnabled(true)
-                ;
+            ->setAuthorIp($request->getClientIp())
+            ->setAuthor($user)
+            ->setProposal($proposal)
+            ->setIsEnabled(true)
+        ;
 
         $form = $this->createForm(new CommentType($user), $comment);
         $form->handleRequest($request);
 
         if (!$form->isValid()) {
-            return $form;
+            throw new BadRequestHttpException($form->getErrors(true));
         }
 
         $parent = $comment->getParent();
+
         if ($parent) {
             if (!$parent instanceof ProposalComment || $proposal != $parent->getProposal()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this proposal');
             }
-            if ($parent->getParent() != null) {
+
+            if ($parent->getParent()) {
                 throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
             }
         }
 
         $proposal->setCommentsCount($proposal->getCommentsCount() + 1);
-        $this->getDoctrine()->getManager()->persist($comment);
-        $this->getDoctrine()->getManager()->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($comment);
+        $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         $this->get('event_dispatcher')->dispatch(

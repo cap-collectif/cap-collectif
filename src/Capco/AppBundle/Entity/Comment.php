@@ -35,11 +35,7 @@ use Capco\AppBundle\Traits\IdTrait;
  */
 abstract class Comment implements Contribution, VotableInterface, HasAuthorInterface
 {
-    use ValidableTrait;
-    use VotableOkTrait;
-    use PinnableTrait;
-    use ExpirableTrait;
-    use IdTrait;
+    use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, IdTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
@@ -52,8 +48,6 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     }
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank(message="comment.create.no_body_error")
      */
@@ -173,14 +167,7 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
         return $this->body;
     }
 
-    /**
-     * Set body.
-     *
-     * @param string $body
-     *
-     * @return Argument
-     */
-    public function setBody($body)
+    public function setBody(string $body): self
     {
         $this->body = $body;
 
