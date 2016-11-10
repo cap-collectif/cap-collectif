@@ -298,7 +298,7 @@ Feature: Opinions Versions
   ### As a logged in user
 
   @database
-  Scenario: logged in API client wants to add a version vote
+  Scenario: Logged in API client can add, change and delete a version vote
     Given I am logged in to api as user
     When I send a PUT request to "/api/opinions/57/versions/1/votes" with json:
     """
@@ -306,13 +306,13 @@ Feature: Opinions Versions
       "value": 1
     }
     """
-    Then the JSON response status code should be 204
+    Then the JSON response status code should be 200
     When I send a PUT request to "/api/opinions/57/versions/1/votes" with json:
     """
     {
       "value": -1
     }
     """
-    Then the JSON response status code should be 204
+    Then the JSON response status code should be 200
     When I send a DELETE request to "/api/opinions/57/versions/1/votes"
     Then the JSON response status code should be 204
