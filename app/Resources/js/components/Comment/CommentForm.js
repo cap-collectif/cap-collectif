@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
-import LoginOverlay from '../Utils/LoginOverlay';
+import RegistrationButton from '../User/Registration/RegistrationButton';
+import LoginButton from '../User/Login/LoginButton';
 
 
 import UserAvatar from '../User/UserAvatar';
@@ -159,11 +160,9 @@ const CommentForm = React.createClass({
           <Row>
             <Col sm={12} md={6}>
               <p>{ this.getIntlMessage('comment.with_my_account') }</p>
-              <LoginOverlay>
-                <button className="btn btn-primary" >
-                  { this.getIntlMessage('global.login') }
-                </button>
-              </LoginOverlay>
+              <RegistrationButton />
+              { ' ' }
+              <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
               <h5>{ this.getIntlMessage('comment.why_create_account') }</h5>
               <ul className="excerpt small">
                 <li>
@@ -251,7 +250,7 @@ const CommentForm = React.createClass({
     return (
       <div className={classes} style={{ padding: '5px' }}>
         <UserAvatar user={user} className="pull-left" />
-        <div className="opinion__data" ref="commentBlock" onBlur={() => this.expand(false)}>
+        <div className="opinion__data" ref="commentBlock">
           <form ref={(c) => this.form = c}>
             <Input
               type="textarea"

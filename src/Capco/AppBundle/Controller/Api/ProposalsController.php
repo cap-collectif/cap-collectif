@@ -222,7 +222,7 @@ class ProposalsController extends FOSRestController
         $form->handleRequest($request);
 
         if (!$form->isValid()) {
-            throw new BadRequestHttpException($form->getErrors(true));
+            return $form;
         }
 
         $parent = $comment->getParent();
