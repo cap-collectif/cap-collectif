@@ -180,7 +180,7 @@ class IdeasController extends FOSRestController
      * @ParamConverter("idea", options={"mapping": {"id": "id"}})
      * @View(statusCode=200, serializerGroups={})
      */
-    public function putIdeaAction(Request $request, Idea $idea)
+    public function updateIdeaAction(Request $request, Idea $idea)
     {
         $em = $this->get('doctrine.orm.entity_manager');
 

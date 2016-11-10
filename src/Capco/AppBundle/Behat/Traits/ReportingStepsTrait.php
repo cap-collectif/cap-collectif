@@ -9,7 +9,7 @@ trait ReportingStepsTrait
      */
     public function iFillTheReportingFormFromTheModal()
     {
-        $this->getSession()->wait(1000, "$('#reportBody').length > 0");
+        $this->getSession()->wait(2000, "$('#reportBody').length > 0");
         $this->fillField('reportBody', 'Pas terrible tout ça...');
         $this->selectOption('reportType', 'Contenu à caractère sexuel');
     }
