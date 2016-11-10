@@ -550,7 +550,7 @@ Feature: Proposal Restful Api
     }
     """
 
-  @elasticsearch @fix
+  @elasticsearch
   Scenario: Anonymous API client wants to get proposals from a collect step with filters
     When I send a POST request to "/api/collect_steps/22/proposals/search?order=last" with json:
     """
