@@ -1,4 +1,4 @@
-@replies
+@reply
 Feature: Reply Restful Api
   As an API client
 
@@ -125,7 +125,7 @@ Feature: Reply Restful Api
           "value": "Je pense que c'est la ville parfaite pour organiser les JO"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": [2, 3]
         }
       ]
@@ -153,7 +153,7 @@ Feature: Reply Restful Api
           "value": "Je pense que c'est la ville parfaite pour organiser les JO"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme", "Natation", "Sports collectifs"]
           }
@@ -178,7 +178,7 @@ Feature: Reply Restful Api
           "value": "Je pense que c'est la ville parfaite pour organiser les JO"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme", "Natation", "Sports collectifs"]
           }
@@ -200,7 +200,7 @@ Feature: Reply Restful Api
           "value": "Je pense que c'est la ville parfaite pour organiser les JO"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme", "Natation", "Sports collectifs"]
           }
@@ -218,7 +218,7 @@ Feature: Reply Restful Api
     {
       "responses": [
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme", "Natation", "Sports collectifs"]
           }
@@ -251,7 +251,7 @@ Feature: Reply Restful Api
           "value": "Je pense que c'est la ville parfaite pour organiser les JO"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme"]
           }
@@ -298,7 +298,7 @@ Feature: Reply Restful Api
           "value": "Je pense que c'est la ville parfaite pour organiser les JO"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme", "Natation", "Sports collectifs"]
           }
@@ -352,7 +352,7 @@ Feature: Reply Restful Api
           "value": "Je pense que c'est la ville parfaite pour organiser les JO"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme", "Natation", "Sports collectifs"]
           }
@@ -382,7 +382,7 @@ Feature: Reply Restful Api
           "value": "Je pense que c'est la ville parfaite pour organiser les JO"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme", "Natation", "Sports collectifs"]
           }
@@ -404,7 +404,7 @@ Feature: Reply Restful Api
           "value": "Je pense que c'est la ville parfaite pour organiser les JO"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme", "Natation", "Sports collectifs"]
           }
@@ -434,7 +434,7 @@ Feature: Reply Restful Api
           "value": "En fait c'est nul, je ne veux pas des JO à Paris"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme", "Natation", "Sports collectifs"]
           }
@@ -456,7 +456,7 @@ Feature: Reply Restful Api
           "value": "En fait c'est nul, je ne veux pas des JO à Paris"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme", "Natation", "Sports collectifs"]
           }
@@ -478,7 +478,7 @@ Feature: Reply Restful Api
           "value": "Je pense que c'est la ville parfaite pour organiser les JO"
         },
         {
-          "question": 6,
+          "question": 10,
           "value": {
             "labels": ["Athlétisme", "Natation", "Sports collectifs"]
           }

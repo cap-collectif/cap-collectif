@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -25,6 +26,7 @@ abstract class AbstractQuestion
 {
     use TimestampableTrait;
     use SluggableTitleTrait;
+    use IdTrait;
 
     const QUESTION_TYPE_SIMPLE_TEXT = 0;
     const QUESTION_TYPE_MULTILINE_TEXT = 1;
@@ -47,15 +49,6 @@ abstract class AbstractQuestion
     ];
 
     public static $questionTypesLabels = [];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var string
@@ -115,16 +108,6 @@ abstract class AbstractQuestion
         }
 
         return 'New Question';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

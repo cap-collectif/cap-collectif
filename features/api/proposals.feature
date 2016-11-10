@@ -99,8 +99,7 @@ Feature: Proposal Restful Api
               "votesHelpText": @string@,
               "open": @boolean@,
               "budget": @...@,
-              "body": @string@,
-              "timeless": @boolean@
+              "body": @string@
             },
             "status": {
               "id": @integer@,
@@ -244,8 +243,7 @@ Feature: Proposal Restful Api
               "votesHelpText": @string@,
               "open": @boolean@,
               "budget": @...@,
-              "body": @string@,
-              "timeless": @boolean@
+              "body": @string@
             },
             "status": {
               "id": @integer@,
@@ -397,8 +395,7 @@ Feature: Proposal Restful Api
               "votesHelpText": @string@,
               "open": @boolean@,
               "budget": @...@,
-              "body": @string@,
-              "timeless": @boolean@
+              "body": @string@
             },
             "status": {
               "id": @integer@,
@@ -431,8 +428,8 @@ Feature: Proposal Restful Api
     """
 
   @elasticsearch
-  Scenario: Anonymous API client wants to get all proposals from a collect step
-    When I send a POST request to "/api/collect_steps/22/proposals/search?page=1&pagination=50&order=old" with json:
+  Scenario: Anonymous API client wants to get all proposals from a ProposalForm
+    When I send a POST request to "/api/proposal_forms/1/proposals/search?page=1&pagination=50&order=old" with json:
     """
     {}
     """
@@ -488,9 +485,9 @@ Feature: Proposal Restful Api
     """
 
   @elasticsearch
-  Scenario: Logged in API client wants to get all proposals from a private collect step
+  Scenario: Logged in API client wants to get all proposals from a ProposalForm with a private step
     Given I am logged in to api as user
-    When I send a POST request to "/api/collect_steps/25/proposals/search?page=1&pagination=50&order=old" with json:
+    When I send a POST request to "/api/proposal_forms/4/proposals/search?page=1&pagination=50&order=old" with json:
     """
     {}
     """
@@ -536,8 +533,8 @@ Feature: Proposal Restful Api
     """
 
   @elasticsearch
-  Scenario: Anonymous API client wants to get all proposals from a private collect step
-    When I send a POST request to "/api/collect_steps/25/proposals/search?page=1&pagination=50&order=old" with json:
+  Scenario: Anonymous API client wants to get all proposals from a ProposalForm with a private step
+    When I send a POST request to "/api/proposal_forms/4/proposals/search?page=1&pagination=50&order=old" with json:
     """
     {}
     """
@@ -551,13 +548,16 @@ Feature: Proposal Restful Api
     """
 
   @elasticsearch
-  Scenario: Anonymous API client wants to get proposals from a collect step with filters
-    When I send a POST request to "/api/collect_steps/22/proposals/search?order=last" with json:
+  Scenario: Anonymous API client wants to get proposals from a ProposalForm with filters
+    When I send a POST request to "/api/proposal_forms/1/proposals/search" with json:
     """
     {
       "terms": null,
       "filters": {
-        "categories": 2
+        "themes": 2,
+        "types": 1,
+        "statuses": 1,
+        "districts": 1
       }
     }
     """
@@ -600,53 +600,14 @@ Feature: Proposal Restful Api
           "enabled": @boolean@,
           "isTrashed": @boolean@,
           "title": @string@,
-          "votesCountByStepId": @...@,
-          "likers": @array@,
-          "_links": @...@
-        },
-        {
-          "id": @integer@,
-          "body": @string@,
-          "updated_at": "@string@.isDateTime()",
-          "theme": {
-            "id": @integer@,
-            "title": @string@,
-            "enabled": @boolean@,
-            "_links": @...@
-          },
-          "district": {
-            "id": @integer@,
-            "name": @string@
-          },
-          "status": {
-            "id": @integer@,
-            "name": @string@,
-            "color": @string@
-          },
-          "category": {
-            "id": @integer@,
-            "name": @string@
-          },
-          "author": @...@,
-          "proposalForm": {
-            "id": @integer@
-          },
           "answer": @...@,
-          "comments": @...@,
-          "responses": @...@,
-          "selections": @...@,
-          "comments_count": @integer@,
-          "created_at": "@string@.isDateTime()",
-          "enabled": @boolean@,
-          "isTrashed": @boolean@,
-          "title": @string@,
           "votesCountByStepId": @...@,
           "likers": @array@,
           "_links": @...@
         }
       ],
-      "count": 2,
-      "order": "last"
+      "count": 1,
+      "order": "random"
     }
     """
 
