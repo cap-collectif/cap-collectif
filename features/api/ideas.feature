@@ -135,39 +135,39 @@ Feature: Ideas
   ## Update
 
   @security
-  Scenario: Anonymous API client wants to update an idea
-    When I send a POST request to "/api/ideas/5" with a valid idea update json
+  Scenario: Anonymous API client can't update an idea
+    When I send a POST request to "/api/ideas/2" with a valid idea update json
     Then the JSON response status code should be 401
 
   @security
-  Scenario: Logged in API client wants to update an idea but is not the author
+  Scenario: Logged in API client can't update an idea when not the author
     Given I am logged in to api as admin
-    When I send a POST request to "/api/ideas/5" with a valid idea update json
+    When I send a POST request to "/api/ideas/2" with a valid idea update json
     Then the JSON response status code should be 403
 
   @database
-  Scenario: Logged in API client wants to update his idea
+  Scenario: Logged in API client can update his idea
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/5" with a valid idea update json
+    When I send a POST request to "/api/ideas/2" with a valid idea update json
     Then the JSON response status code should be 200
 
   ## Delete
 
   @security
   Scenario: Anonymous API client wants to delete a idea
-    When I send a DELETE request to "/api/ideas/5"
+    When I send a DELETE request to "/api/ideas/2"
     Then the JSON response status code should be 401
 
   @security
   Scenario: Logged in API client wants to delete an idea but is not the author
     Given I am logged in to api as admin
-    When I send a DELETE request to "/api/ideas/5"
+    When I send a DELETE request to "/api/ideas/2"
     Then the JSON response status code should be 403
 
   @database
   Scenario: Logged in API client wants to delete his idea
     Given I am logged in to api as user
-    When I send a DELETE request to "/api/ideas/5"
+    When I send a DELETE request to "/api/ideas/2"
     Then the JSON response status code should be 204
 
 ## Vote
@@ -175,10 +175,9 @@ Feature: Ideas
   @database
   Scenario: Logged in API client wants to vote and unvote for an idea
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/5/votes" with json:
+    When I send a POST request to "/api/ideas/2/votes" with json:
     """
-    {
-    }
+    {}
     """
     Then the JSON response status code should be 201
     And the JSON response should match:
@@ -189,7 +188,7 @@ Feature: Ideas
       "username": ""
     }
     """
-    And I send a DELETE request to "/api/ideas/5/votes"
+    And I send a DELETE request to "/api/ideas/2/votes"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
@@ -203,7 +202,7 @@ Feature: Ideas
   @database
   Scenario: Logged in API client wants to vote for an idea anonymously
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/5/votes" with json:
+    When I send a POST request to "/api/ideas/2/votes" with json:
     """
     {
       "private": true
@@ -214,7 +213,7 @@ Feature: Ideas
   @database
   Scenario: Logged in API client wants to vote for an idea with a comment
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/5/votes" with json:
+    When I send a POST request to "/api/ideas/2/votes" with json:
     """
     {
       "comment": "Je suis un commentaire"
@@ -225,7 +224,7 @@ Feature: Ideas
   @security
   Scenario: Logged in API client wants to vote for an idea with a comment and anonymously
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/5/votes" with json:
+    When I send a POST request to "/api/ideas/2/votes" with json:
     """
     {
       "comment": "Je suis un commentaire",
@@ -244,7 +243,7 @@ Feature: Ideas
 
   @database
   Scenario: Anonymous API client wants to vote for an idea
-    When I send a POST request to "/api/ideas/5/votes" with json:
+    When I send a POST request to "/api/ideas/2/votes" with json:
     """
     {
       "username": "test",
@@ -255,7 +254,7 @@ Feature: Ideas
 
   @database
   Scenario: Anonymous API client wants to vote for an idea anonymously
-    When I send a POST request to "/api/ideas/5/votes" with json:
+    When I send a POST request to "/api/ideas/2/votes" with json:
     """
     {
       "username": "test",
@@ -267,7 +266,7 @@ Feature: Ideas
 
   @database
   Scenario: Anonymous API client wants to vote for an idea with a comment
-    When I send a POST request to "/api/ideas/5/votes" with json:
+    When I send a POST request to "/api/ideas/2/votes" with json:
     """
     {
       "comment": "Je suis un commentaire !",
@@ -280,7 +279,7 @@ Feature: Ideas
   @security
   Scenario: Logged in API client wants to vote several times for an idea
     Given I am logged in to api as admin
-    When I send a POST request to "/api/ideas/5/votes" with json:
+    When I send a POST request to "/api/ideas/2/votes" with json:
     """
     {
     }
@@ -297,7 +296,7 @@ Feature: Ideas
 
   @security
   Scenario: Anonymous API client wants to vote several times for an idea
-    When I send a POST request to "/api/ideas/3/votes" with json:
+    When I send a POST request to "/api/ideas/21/votes" with json:
     """
     {
       "username": "test",
@@ -316,7 +315,7 @@ Feature: Ideas
 
   @security
   Scenario: Anonymous API client wants to vote with an email associated to an account
-    When I send a POST request to "/api/ideas/5/votes" with json:
+    When I send a POST request to "/api/ideas/2/votes" with json:
     """
     {
       "username": "test",
@@ -336,7 +335,7 @@ Feature: Ideas
   @security
   Scenario: Logged in API client wants to delete a non-existing vote
     Given I am logged in to api as user
-    When I send a DELETE request to "/api/ideas/5/votes"
+    When I send a DELETE request to "/api/ideas/2/votes"
     Then the JSON response status code should be 400
     And the JSON response should match:
     """
@@ -350,7 +349,7 @@ Feature: Ideas
   @security
   Scenario: Logged in API client wants to vote for an idea that is not contributable
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/4/votes" with json:
+    When I send a POST request to "/api/ideas/22/votes" with json:
     """
     {
     }
@@ -366,10 +365,13 @@ Feature: Ideas
     """
 
   @security
-  Scenario: Anonymous API client wants to vote for an idea that is not contributable
-    Given I send a POST request to "/api/ideas/4/votes" with json:
+  Scenario: Anonymous API client can't vote for an idea that is not contributable
+    Given I send a POST request to "/api/ideas/22/votes" with json:
     """
     {
+      "username": "test",
+      "email": "test@test.com",
+      "comment": "Je suis un commentaire"
     }
     """
     Then the JSON response status code should be 400
@@ -396,8 +398,8 @@ Feature: Ideas
     """
     {
       "code": 400,
-       "message": "Ce formulaire ne doit pas contenir des champs supplémentaires.",
-       "errors": @null@
+      "message": "Ce formulaire ne doit pas contenir des champs supplémentaires.",
+      "errors": @null@
     }
     """
 
@@ -422,7 +424,7 @@ Feature: Ideas
     """
 
   Scenario: Anonymous API client wants get votes
-    When I send a GET request to "/api/ideas/5/votes?offset=0&limit=50"
+    When I send a GET request to "/api/ideas/2/votes?offset=0&limit=50"
     Then the JSON response should match:
     """
     {
@@ -438,19 +440,19 @@ Feature: Ideas
 
   @database
   Scenario: Anonymous API client wants to report a idea
-    When I send a POST request to "/api/ideas/5/reports" with a valid report json
+    When I send a POST request to "/api/ideas/2/reports" with a valid report json
     Then the JSON response status code should be 401
 
   @database
   Scenario: Logged in API client wants to report his own idea
     Given I am logged in to api as user
-    When I send a POST request to "/api/ideas/5/reports" with a valid report json
+    When I send a POST request to "/api/ideas/2/reports" with a valid report json
     Then the JSON response status code should be 403
 
   @database
   Scenario: Logged in API client wants to report an idea
     Given I am logged in to api as admin
-    When I send a POST request to "/api/ideas/5/reports" with a valid report json
+    When I send a POST request to "/api/ideas/2/reports" with a valid report json
     Then the JSON response status code should be 201
 
   ## Stats
