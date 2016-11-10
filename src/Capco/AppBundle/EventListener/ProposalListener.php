@@ -26,10 +26,7 @@ class ProposalListener implements ContainerAwareInterface
         $changeSet = $args->getEntityChangeSet();
 
         if ($entity instanceof Proposal) {
-            if (
-                $this->container->get('security.token_storage')->getToken()
-                && $this->container->get('security.token_storage')->getToken()->isAuthenticated()
-            ) {
+            if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
                 $entity->setUpdateAuthor($this->container->get('security.token_storage')->getToken()->getUser());
             }
 
