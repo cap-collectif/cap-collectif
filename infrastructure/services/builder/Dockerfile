@@ -66,8 +66,9 @@ RUN groupadd --gid=1000 capco && \
     /usr/sbin/useradd --system --uid=1000 --home /home/capco --shell /bin/bash -g capco capco
 
 # Install composer & php-cs-fixer
-RUN wget https://getcomposer.org/composer.phar -O- -q >> /usr/local/bin/composer && \
-    wget http://get.sensiolabs.org/php-cs-fixer.phar -O- -q >> /usr/local/bin/php-cs-fixer && \
+RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/local/bin/composer && \
+    wget --quiet https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v1.12.3/php-cs-fixer.phar -O php-cs-fixer && \
+    mv php-cs-fixer /usr/local/bin/php-cs-fixer && \
     chmod +x /usr/local/bin/composer && \
     chmod +x /usr/local/bin/php-cs-fixer
 

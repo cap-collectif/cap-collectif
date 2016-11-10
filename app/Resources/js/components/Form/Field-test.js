@@ -48,7 +48,7 @@ describe('<Field />', () => {
   });
 
   it('renders an errored <Input /> element', () => {
-    const wrapper = shallow(<Field {...defaultProps} meta={{ touched: true, error: "global.required" }} />);
+    const wrapper = shallow(<Field {...defaultProps} meta={{ touched: true, error: 'global.required' }} />);
     expect(wrapper.is('Input')).to.be.true;
     expect(wrapper.prop('errors')).to.equal('Cette valeur est requise.');
     expect(wrapper.prop('bsStyle')).to.equal('error');
@@ -64,7 +64,7 @@ describe('<Field />', () => {
   });
 
   it('renders a div around <Input /> element', () => {
-    const wrapper = shallow(<Field {...defaultProps} divClassName='myclassName' />);
+    const wrapper = shallow(<Field {...defaultProps} divClassName="myclassName" />);
     expect(wrapper.is('div')).to.be.true;
     expect(wrapper.prop('className')).to.equal('myclassName');
     expect(wrapper.find('Input').length).to.equal(1);
