@@ -203,7 +203,6 @@ class ApplicationContext extends UserContext
     {
         $page = $this->navigationContext->getPage($pageSlug);
         $this->getSession()->wait(2000, "$('".$page->getSelector($element)."').length > 0");
-        $this->iWait(5);
         expect($page->getElement($element)->hasAttribute('disabled'))->toBe(true);
     }
 
