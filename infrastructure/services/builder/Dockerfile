@@ -49,8 +49,7 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
 RUN mkdir -m 777 -p /home/capco
 RUN groupadd --gid=1000 capco && \
     /usr/sbin/useradd --system --uid=1000 --home /home/capco --shell /bin/bash -g capco capco
-RUN chown -R capco /usr/local
-RUN chown -R capco /usr/lib
+RUN chown -R capco /usr/local /usr/bin /usr/lib
 
 USER capco
 
