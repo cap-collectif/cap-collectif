@@ -18,6 +18,16 @@ def fix_environment_variables_with_lxc():
 
 
 @task(environments=['testing'])
+def clean_cache():
+    "Clean cache of docker images"
+    commit_message = local('git log --format=%B --no-merges -n 1', capture=True)
+    if re.search('\[clean-cache\]', commit_message):
+        local('rm -rf ~/docker')
+        local('rm -rf ~/.composer')
+        local('rm -rf ~/.yarn-cache')
+        local('rm -rf node_modules')
+
+@task(environments=['testing'])
 def load_cache():
     "Load cache"
     local('/bin/bash -c "if [[ -e ~/docker/capcotest_application.tar ]]; then docker load -i ~/docker/capcotest_application.tar; fi"')
