@@ -19,7 +19,7 @@ Scenario: Anonymous wants to list archived events
 @javascript
 Scenario: Events can be filtered by projects
   Given I visited "events page"
-  And I select "Croissance, innovation, disruption" from "capco_app_event_search_project"
+  And I select "Croissance, innovation, disruption" from "event_search_project"
   And I wait 1 seconds
   Then I should see 2 ".event" elements
   And I should see "Event with registrations"
@@ -29,7 +29,7 @@ Scenario: Events can be filtered by projects
 Scenario: Archived events can be filtered by projects
   Given I visited "events page"
   And I follow "Voir les évènements passés"
-  And I select "Croissance, innovation, disruption" from "capco_app_event_search_project"
+  And I select "Croissance, innovation, disruption" from "event_search_project"
   And I wait 1 seconds
   Then I should see 1 ".event" elements
   And I should see "PHPTour2014"
@@ -39,7 +39,7 @@ Scenario: Archived events can be filtered by projects
 Scenario: Events can be filtered by theme
   Given feature "themes" is enabled
   And I visited "events page"
-  And I select "Justice" from "capco_app_event_search_theme"
+  And I select "Justice" from "event_search_theme"
   And I wait 1 seconds
   Then I should see 1 ".event" elements
   And I should see "Event with registrations"
@@ -50,7 +50,7 @@ Scenario: Archived events can be filtered by theme
   Given feature "themes" is enabled
   And I visited "events page"
   And I follow "Voir les évènements passés"
-  And I select "Justice" from "capco_app_event_search_theme"
+  And I select "Justice" from "event_search_theme"
   And I wait 1 seconds
   Then I should see 1 ".event" elements
   And I should see "PHPTour2014"
@@ -60,7 +60,7 @@ Scenario: Archived events can be filtered by theme
 Scenario: Events can be filtered by title
   Given I visited "events page"
   When I fill in the following:
-    | capco_app_event_search_term | without |
+    | event_search_term | without |
   And I click the ".filter__search .btn" element
   And I wait 1 seconds
   Then I should see 1 ".event" elements
@@ -72,7 +72,7 @@ Scenario: Archived events can be filtered by title
   Given I visited "events page"
   And I follow "Voir les évènements passés"
   When I fill in the following:
-    | capco_app_event_search_term | ParisWeb2014 |
+    | event_search_term | ParisWeb2014 |
   And I click the ".filter__search .btn" element
   And I wait 1 seconds
   Then I should see 1 ".event" elements

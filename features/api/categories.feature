@@ -1,3 +1,4 @@
+@categories
 Feature: Categories
 
 ## List Categories
