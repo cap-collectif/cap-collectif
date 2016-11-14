@@ -11,7 +11,7 @@ Scenario: Anonymous wants to list published posts
 @javascript @elasticsearch
 Scenario: Posts can be filtered by projects
   And I visited "blog page"
-  And I select "Croissance, innovation, disruption" from "capco_app_search_blog_project"
+  And I select "Croissance, innovation, disruption" from "post_search_project"
   Then I should see 5 ".media--news" elements
   And I should see "Post 5"
   And I should not see "Post 8"
@@ -20,7 +20,7 @@ Scenario: Posts can be filtered by projects
 Scenario: Post can be filtered by theme
   And feature "themes" is enabled
   And I visited "blog page"
-  And I select "Justice" from "capco_app_search_blog_theme"
+  And I select "Justice" from "post_search_theme"
   Then I should see 8 ".media--news" elements
   And I should see "Post 8"
   And I should not see "Post 2"
