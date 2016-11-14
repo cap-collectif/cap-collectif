@@ -63,11 +63,11 @@ RUN npm install --global bower
 RUN pip install pep8 autopep8
 
 # Install composer & php-cs-fixer
-RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/local/bin/composer && \
+RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/bin/composer && \
     wget --quiet https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v1.12.3/php-cs-fixer.phar -O php-cs-fixer && \
-    mv php-cs-fixer /usr/local/bin/php-cs-fixer && \
-    chmod +x /usr/local/bin/composer && \
-    chmod +x /usr/local/bin/php-cs-fixer
+    mv php-cs-fixer /usr/bin/php-cs-fixer && \
+    chmod +x /usr/bin/composer && \
+    chmod +x /usr/bin/php-cs-fixer
 
 COPY capco.ini /etc/php/7.0/cli/conf.d/capco.ini
 COPY build.sh /usr/local/bin/build
