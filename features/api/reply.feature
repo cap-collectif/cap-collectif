@@ -286,7 +286,7 @@ Feature: Reply Restful Api
     }
     """
 
-  @security @elasticsearch @fixmepls
+  @security @elasticsearch
   Scenario: Logged in API client wants to add a reply with not enough choices for optional field with validation rules
     Given I am logged in to api as user
     When I send a POST request to "/api/questionnaires/1/replies" with json:
