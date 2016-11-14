@@ -33,11 +33,11 @@ const ReportForm = React.createClass({
             name: 'status',
             label: this.getIntlMessage('global.modal.report.form.status'),
             type: 'select',
+            clearable: false,
             inputClassName: 'null',
             labelClassName: 'null',
             placeholder: this.getIntlMessage('global.select'),
             options: [
-            { value: 0, label: this.getIntlMessage('reporting.status.sexual') },
             { value: 1, label: this.getIntlMessage('reporting.status.offending') },
             { value: 2, label: this.getIntlMessage('reporting.status.spam') },
             { value: 3, label: this.getIntlMessage('reporting.status.error') },

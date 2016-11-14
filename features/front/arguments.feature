@@ -28,15 +28,10 @@ Feature: Arguments
     Then I should see "Les avis sont limités à 2000 caractères. Soyez plus concis ou publiez une nouvelle proposition."
 
   @javascript @security
-  Scenario: Can not create an argument in opinion when not logged in
-    Given I go to an opinion
-    Then I should not see the argument creation boxes
-
-  @javascript @security
   Scenario: Can not create an argument in opinion when step is closed
     Given I am logged in as user
     And I go to an opinion in a closed step
-    Then I should not see the argument creation boxes
+    Then I should see the argument creation boxes disabled
 
   ## Create in version
 
@@ -63,15 +58,10 @@ Feature: Arguments
     Then I should see "Les avis sont limités à 2000 caractères. Soyez plus concis ou publiez une nouvelle proposition."
 
   @javascript @security
-  Scenario: Can not create an argument in a version when not logged in
-    Given I go to a version
-    Then I should not see the argument creation boxes
-
-  @javascript @security
   Scenario: Can not create an argument in a version when step is closed
     Given I am logged in as user
     And I go to an opinion version in a closed step
-    Then I should not see the argument creation boxes
+    Then I should see the argument creation boxes disabled
 
   ## Update in opinion
 

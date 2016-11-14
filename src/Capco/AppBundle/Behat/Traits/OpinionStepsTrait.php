@@ -283,14 +283,12 @@ trait OpinionStepsTrait
     }
 
     /**
-     * I should not see the argument creation boxes.
-     *
-     * @Then I should not see the argument creation boxes
+     * @Then I should see the argument creation boxes disabled
      */
-    public function iShouldNotSeeTheArgumentCreationBoxes()
+    public function iShouldSeeTheArgumentCreationBoxesDisabled()
     {
-        $this->iShouldNotSeeElementOnPage('argument yes field', 'opinion page');
-        $this->iShouldNotSeeElementOnPage('argument no field', 'opinion page');
+        $this->iShouldSeeElementOnPageDisabled('argument yes field', 'opinion page');
+        $this->iShouldSeeElementOnPageDisabled('argument no field', 'opinion page');
     }
 
     /**

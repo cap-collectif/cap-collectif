@@ -30,18 +30,24 @@ export const Form = React.createClass({
     }
     return (
       <form id={form} onSubmit={onSubmit}>
-      {
-        fields.map((field, index) => {
-          return (
+        {
+          fields.map((field, index) =>
             <Field
               key={index}
               autoFocus={index === 0}
-              component={field.type === 'select' ? renderSelect : component}
+              component={field.type === 'newSelect' ? renderSelect : component}
               {...field}
+              children={
+                field.options ?
+                [
+                  field.defaultOptionLabel && <option key={0} value="">{field.defaultOptionLabel}</option>,
+                ].concat(
+                  field.options.map((opt, i) => <option key={i + 1} value={opt.value}>{opt.label}</option>)
+                ) : null
+              }
             />
-          );
-        })
-      }
+          )
+        }
       </form>
     );
   },

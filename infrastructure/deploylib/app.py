@@ -14,6 +14,11 @@ def deploy(environment='dev'):
     env.service_command('php bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', env.www_app)
     env.service_command('php bin/console assets:install --symlink', 'application', env.www_app)
 
+@task
+def clean():
+    "Clean"
+    env.compose('rm -f --all chrome')
+
 
 @task
 def ssh(user='capco'):

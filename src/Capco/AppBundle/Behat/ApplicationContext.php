@@ -197,6 +197,17 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Then I should see :element on :page disabled
+     */
+    public function iShouldSeeElementOnPageDisabled(string $element, string $pageSlug)
+    {
+        $page = $this->navigationContext->getPage($pageSlug);
+        $this->getSession()->wait(2000, "$('".$page->getSelector($element)."').length > 0");
+        $this->iWait(5);
+        expect($page->getElement($element)->hasAttribute('disabled'))->toBe(true);
+    }
+
+    /**
      * @Then I should see :nb :element on current page
      */
     public function iShouldSeeNbElementOnPage(int $nb, string $element)

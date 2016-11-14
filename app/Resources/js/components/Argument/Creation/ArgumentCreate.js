@@ -101,7 +101,7 @@ const ArgumentCreate = React.createClass({
       <div className="opinion__body box">
         <div className="opinion__data">
           <form id={`argument-form--${type}`} ref="form">
-            <LoginOverlay>
+            <LoginOverlay enabled={opinion.isContribuable}>
               <Input
                 id={`arguments-body-${type}`}
                 type="textarea"
@@ -117,18 +117,19 @@ const ArgumentCreate = React.createClass({
                 disabled={disabled}
               />
             </LoginOverlay>
-            {user
-              ? <Button
+            {
+              user &&
+                <Button
                   disabled={this.state.isSubmitting || disabled}
                   onClick={this.state.isSubmitting || disabled ? null : this.create}
                   bsStyle="primary"
-              >
-                {this.state.isSubmitting
-                  ? this.getIntlMessage('global.loading')
-                  : this.getIntlMessage('global.publish')
-                }
-              </Button>
-              : null
+                >
+                  {
+                    this.state.isSubmitting
+                    ? this.getIntlMessage('global.loading')
+                    : this.getIntlMessage('global.publish')
+                  }
+                </Button>
             }
           </form>
         </div>

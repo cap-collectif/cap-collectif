@@ -7,6 +7,7 @@ export const renderSelect = React.createClass({
     meta: PropTypes.any,
     touched: PropTypes.bool,
     label: PropTypes.any.isRequired,
+    id: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     error: PropTypes.any,
     options: PropTypes.array,
@@ -28,7 +29,8 @@ export const renderSelect = React.createClass({
       labelClassName,
       inputClassName,
       meta: { touched, error },
-      ...custom } = this.props;
+      ...custom
+    } = this.props;
     const reactSelectToReduxForm = event => {
       if (input.onChange) {
         input.onChange(

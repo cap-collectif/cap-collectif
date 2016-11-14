@@ -17,8 +17,9 @@ const Field = React.createClass({
     type: PropTypes.oneOf(['text', 'textarea', 'editor', 'select', 'checkbox', 'password', 'captcha', 'email']).isRequired,
     label: PropTypes.string,
     placeholder: PropTypes.string,
+    children: PropTypes.any,
+    id: PropTypes.string.isRequired,
     input: PropTypes.shape({
-      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       autoFocus: PropTypes.bool,
       value: PropTypes.any,
@@ -28,11 +29,12 @@ const Field = React.createClass({
 
   render() {
     const { touched, error } = this.props.meta;
-    const { autoComplete, disableValidation, placeholder, type, label, divClassName, wrapperClassName, labelClassName } = this.props;
+    const { children, id, autoComplete, disableValidation, placeholder, type, label, divClassName, wrapperClassName, labelClassName } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
     const input = (
       <Input
+        id={id}
         type={type}
         name={name}
         wrapperClassName={wrapperClassName || ''}
@@ -45,6 +47,7 @@ const Field = React.createClass({
         autoComplete={autoComplete}
         autoFocus={autoFocus || false}
         {...this.props.input}
+        children={children}
       />
     );
     if (divClassName) {
