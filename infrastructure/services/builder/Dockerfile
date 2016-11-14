@@ -70,7 +70,7 @@ RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/bin/composer 
     chmod +x /usr/bin/php-cs-fixer
 
 COPY capco.ini /etc/php/7.0/cli/conf.d/capco.ini
-COPY build.sh /usr/local/bin/build
+COPY build.sh /usr/bin/build
 
 # Use utf 8
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
