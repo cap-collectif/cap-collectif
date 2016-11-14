@@ -13,6 +13,7 @@ dependencies:
         - mkdir -p $CIRCLE_TEST_REPORTS/junit/
         - pip install -q -r requirements.txt
         - fab testing.circle.fix_environment_variables_with_lxc
+        - fab testing.circle.clean_cache
         - fab testing.circle.load_cache
         - fab testing.infrastructure.build
         - fab testing.circle.save_cache
