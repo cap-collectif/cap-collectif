@@ -4,7 +4,7 @@ Feature: Proposal Votes Restful Api
 
   @parallel-scenario
   Scenario: Anonymous API client wants to get all votes for a proposal
-    When I send a GET request to "/api/steps/6/proposals/4/votes"
+    When I send a GET request to "/api/steps/6/proposals/2/votes"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
@@ -23,7 +23,7 @@ Feature: Proposal Votes Restful Api
     }
     """
 
-  @database
+  @database @elasticsearch
   Scenario: Logged in API client wants to vote and unvote for a proposal in a selection step
     Given I am logged in to api as user
     When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
@@ -31,11 +31,11 @@ Feature: Proposal Votes Restful Api
     {
     }
     """
-    Then the JSON response status code should be 201
+    Then the JSON response status code should be 200
     And I send a DELETE request to "/api/selection_steps/6/proposals/2/votes"
-    Then the JSON response status code should be 204
+    Then the JSON response status code should be 200
 
-  @database
+  @database @elasticsearch
   Scenario: Anonymous API client wants to vote for a proposal in a selection step
     When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
     """
@@ -44,7 +44,7 @@ Feature: Proposal Votes Restful Api
       "email": "test@test.com"
     }
     """
-    Then the JSON response status code should be 201
+    Then the JSON response status code should be 200
 
   @security
   Scenario: Logged in API client wants to vote several times for a proposal in a selection step
@@ -58,10 +58,18 @@ Feature: Proposal Votes Restful Api
     And the JSON response should match:
     """
     {
-      "form": @...@,
-      "errors":[
-        "Vous avez déjà voté pour cette proposition."
-      ]
+      "code": 400,
+      "message": "Validation Failed",
+      "errors": {
+        "children": {
+          "username":[],
+          "email": {
+            "errors": ["Vous avez déjà voté pour cette proposition."]
+          },
+          "comment":[],
+          "private":[]
+        }
+      }
     }
     """
 
@@ -78,10 +86,18 @@ Feature: Proposal Votes Restful Api
     And the JSON response should match:
     """
     {
-      "form": @...@,
-      "errors":[
-        "Vous avez déjà voté pour cette proposition."
-      ]
+      "code": 400,
+      "message": "Validation Failed",
+      "errors": {
+        "children": {
+          "username":[],
+          "email": {
+            "errors": ["Vous avez déjà voté pour cette proposition."]
+          },
+          "comment":[],
+          "private":[]
+        }
+      }
     }
     """
 
@@ -98,10 +114,18 @@ Feature: Proposal Votes Restful Api
     And the JSON response should match:
     """
     {
-      "form": @...@,
-      "errors":[
-        "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition."
-      ]
+      "code": 400,
+      "message": "Validation Failed",
+      "errors": {
+        "children": {
+          "username":[],
+          "email": {
+            "errors": ["Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition."]
+          },
+          "comment":[],
+          "private":[]
+        }
+      }
     }
     """
 
@@ -119,13 +143,12 @@ Feature: Proposal Votes Restful Api
     }
     """
 
-  @security
+  @security @elasticsearch
   Scenario: Logged in API client wants to vote for a proposal in a wrong selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/6/proposals/3/votes" with json:
+    When I send a POST request to "/api/selection_steps/6/proposals/13/votes" with json:
     """
-    {
-    }
+    {}
     """
     Then the JSON response status code should be 400
     And the JSON response should match:
@@ -185,10 +208,12 @@ Feature: Proposal Votes Restful Api
       And the JSON response should match:
       """
       {
-        "form": @...@,
-        "errors":[
-          "Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition."
-        ]
+        "code":400,
+        "message":"Validation Failed",
+        "errors": {
+          "errors": ["Vous n'avez pas suffisamment de cr\u00e9dits disponibles pour soutenir cette proposition."],
+          "children":{"username":[],"email":[],"comment":[],"private":[]}
+        }
       }
       """
 

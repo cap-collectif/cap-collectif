@@ -40,6 +40,7 @@ Feature: Opinions
           "id": @integer@,
           "projectId": @integer@,
           "position": @integer@,
+          "timeless": @boolean@,
           "counters": {
             "remainingDays": @integer@,
             "contributions": @integer@,

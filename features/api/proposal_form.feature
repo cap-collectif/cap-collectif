@@ -23,6 +23,16 @@ Feature: ProposalForm Restful Api
   "districtMandatory": @boolean@,
   "usingCategories": @boolean@,
   "categoryMandatory": @boolean@,
+  "categories":[
+    {
+      "name": "Aménagement",
+      "id": @integer@
+    },
+    {
+      "name": "Politique",
+      "id": @integer@
+    }
+  ],
   "fields": [
     {
       "id": @integer@,

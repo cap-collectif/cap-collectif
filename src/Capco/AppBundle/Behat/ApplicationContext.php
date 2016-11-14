@@ -199,7 +199,7 @@ class ApplicationContext extends UserContext
     /**
      * @Then I should see :nb :element on current page
      */
-    public function iShouldSeeNbElementOnPage($nb, $element)
+    public function iShouldSeeNbElementOnPage(int $nb, string $element)
     {
         expect(count($this->getSession()->getPage()->find('css', $element)))->toBe($nb);
     }
