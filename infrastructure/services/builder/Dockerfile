@@ -71,11 +71,6 @@ RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/bin/composer 
 COPY capco.ini /etc/php/7.0/cli/conf.d/capco.ini
 COPY build.sh /usr/bin/build
 
-# Use utf 8
-RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
 
 # Add composer global binaries to $PATH
 ENV PATH $PATH:/home/capco/.composer/vendor/bin/
