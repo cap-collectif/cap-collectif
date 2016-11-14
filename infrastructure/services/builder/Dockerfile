@@ -45,25 +45,23 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install yarn
-RUN apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg && \
-  echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  apt-get update && \
-  apt-get install yarn && \
-  export PATH="$PATH:$HOME/.yarn/bin" && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Install bower
-RUN yarn global add bower
-
-# Install pep8
-RUN pip install pep8 autopep8
-
 # Install fake user 1000
 RUN mkdir -m 777 -p /home/capco
 RUN groupadd --gid=1000 capco && \
     /usr/sbin/useradd --system --uid=1000 --home /home/capco --shell /bin/bash -g capco capco
+RUN chown -R capco /usr/local
+RUN chown -R capco /usr/lib
+
+USER capco
+
+# Install yarn
+RUN npm install --global yarn
+
+# Install bower
+RUN npm install --global bower
+
+# Install pep8
+RUN pip install pep8 autopep8
 
 # Install composer & php-cs-fixer
 RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/local/bin/composer && \
@@ -84,7 +82,6 @@ ENV LC_ALL en_US.UTF-8
 # Add composer global binaries to $PATH
 ENV PATH $PATH:/home/capco/.composer/vendor/bin/
 
-USER capco
 WORKDIR /var/www
 
 CMD ["/usr/local/bin/build"]
