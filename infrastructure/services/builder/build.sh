@@ -7,12 +7,12 @@ if [ "$PRODUCTION" ]; then
   # We install vendors with composer
   # We don't use `--no-scripts` or `--no-plugins` because a script in a composer plugin
   # will generate the file vendor/ocramius/package-versions/src/PackageVersions/Versions.php
-  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-progress --ignore-platform-reqs || exit 1
+  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs || exit 1
   # We build bootstrap.php.cache in the `var` directory
   php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var || exit 1
 
   # Frontend deps
-  yarn install --no-progress --pure-lockfile || exit 1
+  yarn install --pure-lockfile || exit 1
   bower install --config.interactive=false --allow-root || exit 1
   yarn run build:prod || exit 1
 
@@ -25,13 +25,14 @@ else
   composer dump-autoload
 
   # Frontend deps
-  yarn install --no-progress --pure-lockfile
+  yarn install --pure-lockfile
   bower install --config.interactive=false
-  if ./node_modules/node-sass/bin/node-sass | grep --quiet `npm rebuild node-sass` &> /dev/null; then
+  echo "Testing node-sass binding..."
+  if ./node_modules/node-sass/bin/node-sass >/dev/null 2>&1 | grep --quiet `npm rebuild node-sass` >/dev/null 2>&1; then
       echo "Building node-sass binding for the container..."
       npm rebuild node-sass > /dev/null
-      echo "Done!"
   fi
+  echo "Binding ready!"
   yarn run build
 
   # Server side rendering deps

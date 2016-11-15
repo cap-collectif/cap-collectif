@@ -58,4 +58,3 @@ chrome:
    links:
      - seleniumhub:hub
      - application:capco.test
-     #--auto-open-devtools-for-tab
