@@ -12,9 +12,6 @@ def build(use_cache='true'):
     "Build services for infrastructure"
     ensure_vm_is_up()
     env.compose('build' + ('', '  --no-cache')[use_cache == 'false'])
-    env.service_command('chmod -R 777 var/cache/*', 'application', '.', 'root')
-    env.service_command('chmod -R 777 web/media/*', 'application', '.', 'root')
-
 
 @task
 def up(force_recreate='false'):
@@ -23,7 +20,8 @@ def up(force_recreate='false'):
     if env.build_at_up:
         env.compose('build')
     env.compose('up -d' + ('', ' --force-recreate')[force_recreate == 'true'])
-
+    env.service_command('chmod -R 777 var/cache/*', 'application', '.', 'root')
+    env.service_command('chmod -R 777 web/media/*', 'application', '.', 'root')
 
 @task
 def stop():
