@@ -7,9 +7,9 @@
   "scripts": {
     "test": "NODE_ENV=test mocha --opts mocha.opts",
     "test:watch": "NODE_ENV=test mocha --opts mocha.opts --watch --reporter min",
-    "build": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch build --jobs 4",
-    "build:watch": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch watch --jobs 4",
-    "build:prod": "LOGGY_STACKS=true NODE_ENV=production ./node_modules/brunch/bin/brunch build --production --jobs 4",
+    "build": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch build",
+    "build:watch": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
+    "build:prod": "LOGGY_STACKS=true NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
     "build-server-bundle": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-server-bundle:prod": "LOGGY_STACKS=true NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js && ./node_modules/jscs/bin/jscs app/Resources/js/translations/*.js",

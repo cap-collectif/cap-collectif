@@ -19,9 +19,13 @@ if [ "$PRODUCTION" ]; then
   # Server side rendering deps
   yarn run build-server-bundle:prod || exit 1
 else
-  echo "Building for development"
+  echo "Building for development/testing"
   # Symfony deps
-  composer install --prefer-dist --no-interaction --ignore-platform-reqs
+  if [ -n "CI" ]; then
+      composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-progress
+  else
+      composer install --prefer-dist --no-interaction --ignore-platform-reqs
+  fi
   composer dump-autoload
 
   # Frontend deps

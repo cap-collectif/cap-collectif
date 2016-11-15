@@ -4,6 +4,7 @@ from fabric.api import env
 
 import os
 
+
 @task
 def deploy(environment='dev', user='capco'):
     "Deploy"

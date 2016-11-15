@@ -18,7 +18,7 @@ dependencies:
         - fab testing.infrastructure.build
         - fab testing.circle.save_cache
         - fab testing.infrastructure.up
-        - fab testing.app.deploy:environment=test,user=capco
+        - fab testing.app.deploy:environment=test
         - fab testing.qa.save_fixtures_image
 
 test:
