@@ -21,7 +21,6 @@ def up(force_recreate='false'):
         env.compose('build')
     env.compose('up -d' + ('', ' --force-recreate')[force_recreate == 'true'])
     env.service_command('chmod -R 777 var/cache/*', 'application', '.', 'root')
-    env.service_command('chmod -R 777 web/media/*', 'application', '.', 'root')
 
 @task
 def stop():
