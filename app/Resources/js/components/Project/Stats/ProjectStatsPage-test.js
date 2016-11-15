@@ -3,7 +3,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import ProjectStatsPage from './ProjectStatsPage';
+import { ProjectStatsPage } from './ProjectStatsPage';
 import IntlData from '../../../translations/FR';
 
 describe('<ProjectStatsPage />', () => {

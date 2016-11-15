@@ -38,7 +38,7 @@ describe('<ProposalStatus />', () => {
   });
 
   it('should render the selection step status when specified', () => {
-    const wrapper = shallow(<ProposalStatus proposal={proposal} selectionStepId={42} />);
+    const wrapper = shallow(<ProposalStatus proposal={proposal} stepId={42} />);
     expect(wrapper.find('div.proposal__status')).to.have.length(1);
     expect(wrapper.find('div.status--danger')).to.have.length(1);
     expect(wrapper.find('div.proposal__status').text()).to.equal('Hello');

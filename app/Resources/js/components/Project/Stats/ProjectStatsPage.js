@@ -4,7 +4,7 @@ import { IntlMixin } from 'react-intl';
 import ProjectStatsList from './ProjectStatsList';
 import { Nav, NavItem } from 'react-bootstrap';
 
-const ProjectStatsPage = React.createClass({
+export const ProjectStatsPage = React.createClass({
   propTypes: {
     projectId: PropTypes.number.isRequired,
     steps: PropTypes.array.isRequired,

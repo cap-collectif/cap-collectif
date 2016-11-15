@@ -9,12 +9,6 @@ import IntlData from '../../../translations/FR';
 describe('<ProposalDetailLikersLabel />', () => {
   const oneLiker = [
     {
-      displayName: 'user',
-    },
-  ];
-
-  const oneLongNameLiker = [
-    {
       displayName: 'user with a very long name that need to be truncated',
     },
   ];
@@ -28,14 +22,9 @@ describe('<ProposalDetailLikersLabel />', () => {
     },
   ];
 
-  it('should render liker name when only one liker', () => {
+  it('should render truncated liker name when only one liker', () => {
     const wrapper = shallow(<ProposalDetailLikersLabel likers={oneLiker} {...IntlData} />);
-    expect(wrapper.text()).to.equal('user');
-  });
-
-  it('should render truncated liker name when the liker has a long name', () => {
-    const wrapper = shallow(<ProposalDetailLikersLabel likers={oneLongNameLiker} {...IntlData} />);
-    expect(wrapper.text()).to.equal('user with a very long name t...');
+    expect(wrapper.find('Truncate').prop('children')).to.equal(oneLiker[0].displayName);
   });
 
   it('should render a <FormattedMessage/> when several likers', () => {

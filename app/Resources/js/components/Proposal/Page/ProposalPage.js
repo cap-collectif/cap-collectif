@@ -56,7 +56,7 @@ export const ProposalPage = React.createClass({
   render() {
     const { proposal, form, categories, features, steps } = this.props;
     const currentVotableStep = proposal.votableStepId ? steps.filter(s => s.id === proposal.votableStepId)[0] : null;
-    const votesCount = Object.values(proposal.votesCountByStepId).reduce((a, b = 0) => a + b);
+    const votesCount = Object.values(proposal.votesCountByStepId).reduce((a, b) => a + b, 0);
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
     const votableSteps = steps.filter(step => step.votable);
     return (

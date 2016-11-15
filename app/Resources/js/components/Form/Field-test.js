@@ -8,9 +8,9 @@ import IntlData from '../../translations/FR';
 
 describe('<Field />', () => {
   const defaultProps = {
+    id: 'id',
     type: 'text',
     input: {
-      id: 'id',
       autoFocus: false,
       name: 'name',
       label: 'label',
@@ -25,7 +25,7 @@ describe('<Field />', () => {
     const wrapper = shallow(<Field {...defaultProps} />);
     expect(wrapper.prop('type')).to.equal(defaultProps.type);
     expect(wrapper.prop('label')).to.equal(defaultProps.input.label);
-    expect(wrapper.prop('id')).to.equal(defaultProps.input.id);
+    expect(wrapper.prop('id')).to.equal(defaultProps.id);
     expect(wrapper.prop('autoFocus')).to.equal(defaultProps.input.autoFocus);
     expect(wrapper.prop('labelClassName')).to.equal('');
     expect(wrapper.prop('placeholder')).to.be.null;

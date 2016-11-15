@@ -39,12 +39,12 @@ describe('<ProposalPageMetadata />', () => {
     const infos = secondDiv.find('div.proposal__info');
     expect(infos).to.have.length(2);
     const category = infos.first();
-    expect(category.prop('className')).to.equal('proposal__info proposal__info--category');
+    expect(category.prop('className')).to.equal('proposal__info proposal__info--category ellipsis');
     const catIcon = category.find('i');
     expect(catIcon.prop('className')).to.equal('cap cap-tag-1-1 icon--blue');
     expect(category.children().last().text()).to.equal('Nom de la catégorie');
     const district = infos.last();
-    expect(district.prop('className')).to.equal('proposal__info proposal__info--district');
+    expect(district.prop('className')).to.equal('proposal__info proposal__info--district ellipsis');
     const distIcon = district.find('i');
     expect(distIcon.prop('className')).to.equal('cap cap-marker-1-1 icon--blue');
     expect(district.children().last().text()).to.equal('Nom du quartier');
