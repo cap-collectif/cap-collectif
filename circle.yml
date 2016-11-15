@@ -7,6 +7,7 @@ dependencies:
         - ~/docker
         - bower_components
         - node_modules
+        - vendor
         - ~/.composer
         - ~/.bower
     override:

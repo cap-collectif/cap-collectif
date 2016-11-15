@@ -22,7 +22,7 @@ else
   echo "Building for development/testing"
   # Symfony deps
   if [ -n "CI" ]; then
-      composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-progress
+      composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress
   else
       composer install --prefer-dist --no-interaction --ignore-platform-reqs
   fi
