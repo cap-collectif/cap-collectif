@@ -12,7 +12,7 @@ if [ "$PRODUCTION" ]; then
   php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var || exit 1
 
   # Frontend deps
-  yarn install --pure-lockfile || exit 1
+  yarn install --no-progress --pure-lockfile || exit 1
   bower install --config.interactive=false --allow-root || exit 1
   yarn run build:prod || exit 1
 
@@ -25,7 +25,7 @@ else
   composer dump-autoload
 
   # Frontend deps
-  yarn install --pure-lockfile
+  yarn install --no-progress --pure-lockfile
   bower install --config.interactive=false
   if ./node_modules/node-sass/bin/node-sass | grep --quiet `npm rebuild node-sass` &> /dev/null; then
       echo "Building node-sass binding for the container..."
