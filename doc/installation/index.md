@@ -10,8 +10,8 @@ On va utiliser Fabric pour faciliter l'intéraction développeur / environement 
 # vérifier que pip est installé
 $ pip --version
 
-# builder les dépendances
-$ sudo pip install -r requirements.txt
+# installer les dépendances
+$ sudo pip install docker-compose==1.8.0 Fabric==1.10.2
 ```
 
 Pour lister les commandes disponibles : ``fab -l``
