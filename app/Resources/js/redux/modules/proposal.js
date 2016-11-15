@@ -235,7 +235,7 @@ export const updateProposal = (dispatch, form, id, data) => {
       location.reload();
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'proposal.request.update.success' },
+        alert: { bsStyle: 'success', content: 'alert.success.update.proposal' },
       });
     })
     .catch(() => {

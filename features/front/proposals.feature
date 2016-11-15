@@ -21,7 +21,7 @@ Feature: Proposals
      And I go to a private open collect step
      Then there should be 2 proposals
 
-  @javascript @elasticsearch @fixme
+  @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a collect step and sort them
     Given I go to an open collect step
     Then proposals should be ordered randomly
@@ -113,8 +113,8 @@ Feature: Proposals
     When I click the edit proposal button
     And I change the proposal title
     And I submit the edit proposal form
-    Then I should see "Votre proposition a bien été modifiée."
-    And the proposal title should have changed
+    # Then I should see "Merci ! Votre proposition a bien été modifiée."
+    Then the proposal title should have changed
 
   @javascript
   Scenario: Non author of a proposal wants to update it

@@ -2,34 +2,34 @@
   "alert": {
     "danger": {
       "add": {
-        "argument": "Toutes nos excuses, un probl\u00e8me est survenu lors de la cr\u00e9ation de l'argument. R\u00e9essayez plus tard.",
+        "argument": "Toutes nos excuses, un problème est survenu lors de la création de l'argument. Réessayez plus tard.",
         "idea": "Toutes nos excuses, un problème est survenu lors de la création de l'idée. Réessayez plus tard.",
-        "source": "Toutes nos excuses, un probl\u00e8me est survenu lors de l'ajout de la source. R\u00e9essayez plus tard.",
-        "vote": "Toutes nos excuses, un probl\u00e8me est survenu lors de l'ajout de votre vote. R\u00e9essayez plus tard."
+        "source": "Toutes nos excuses, un problème est survenu lors de l'ajout de la source. Réessayez plus tard.",
+        "vote": "Toutes nos excuses, un problème est survenu lors de l'ajout de votre vote. Réessayez plus tard."
       },
       "delete": {
         "idea": "Toutes nos excuses, un problème est survenu lors de la suppression de votre idée. Réessayez plus tard.",
-        "vote": "Toutes nos excuses, un probl\u00e8me est survenu lors de la suppression votre vote. R\u00e9essayez plus tard."
+        "vote": "Toutes nos excuses, un problème est survenu lors de la suppression votre vote. Réessayez plus tard."
       },
       "update": {
-        "argument": "Toutes nos excuses, un probl\u00e8me est survenu lors de la mise \u00e0 jour de votre argument. R\u00e9essayez plus tard.",
+        "argument": "Toutes nos excuses, un problème est survenu lors de la mise à jour de votre argument. Réessayez plus tard.",
         "idea": "Toutes nos excuses, un problème est survenu lors de la mise à jour de votre idée. Réessayez plus tard.",
-        "source": "Toutes nos excuses, un probl\u00e8me est survenu lors de l'\u00e9dition de votre source. R\u00e9essayez plus tard."
+        "source": "Toutes nos excuses, un problème est survenu lors de l'édition de votre source. Réessayez plus tard."
       }
     },
     "success": {
       "add": {
-        "argument": "Merci ! Votre argument a bien \u00e9t\u00e9 enregistr\u00e9.",
+        "argument": "Merci ! Votre argument a bien été enregistré.",
         "idea": "Merci ! Votre idée a bien été enregistrée.",
-        "source": "Merci ! La source a bien \u00e9t\u00e9 ajout\u00e9e.",
+        "source": "Merci ! La source a bien été ajoutée.",
         "user": "Merci, votre compte a été créé avec succès.",
-        "vote": "Merci ! Votre vote a bien \u00e9t\u00e9 pris en compte."
+        "vote": "Merci ! Votre vote a bien été pris en compte."
       },
       "delete": {
-        "argument": "Votre argument a bien \u00e9t\u00e9 supprim\u00e9.",
+        "argument": "Votre argument a bien été supprimé.",
         "idea": "Votre idée a bien été supprimée.",
-        "source": "La source a bien \u00e9t\u00e9 supprim\u00e9e.",
-        "vote": "Votre vote a bien \u00e9t\u00e9 supprim\u00e9.",
+        "source": "La source a bien été supprimée.",
+        "vote": "Votre vote a bien été supprimé.",
         "phone": "Le numéro de téléphone a bien été supprimé."
       },
       "report": {
@@ -42,9 +42,10 @@
         "source": "Merci ! La source a bien été signalée."
       },
       "update": {
-        "argument": "Merci ! Votre argument a bien \u00e9t\u00e9 mis \u00e0 jour.",
+        "argument": "Merci ! Votre argument a bien été mis à jour.",
         "idea": "Merci ! Votre idée a bien été modifiée.",
-        "source": "Merci ! Votre source a bien \u00e9t\u00e9 modifi\u00e9e.",
+        "proposal": "Merci ! La proposition a bien été modifiée.",
+        "source": "Merci ! Votre source a bien été modifiée.",
         "synthesis_display": "Merci ! Vos modifications ont bien été enregistrées."
       }
     }
@@ -52,19 +53,19 @@
   "argument": {
     "constraints": {
       "confirm": "Vous devez confirmer la perte de vos votes pour continuer.",
-      "max": "Les avis sont limit\u00e9s \u00e0 2000 caract\u00e8res. Soyez plus concis ou publiez une nouvelle proposition.",
-      "min": "Le contenu doit faire au moins 3 caract\u00e8res."
+      "max": "Les avis sont limités à 2000 caractères. Soyez plus concis ou publiez une nouvelle proposition.",
+      "min": "Le contenu doit faire au moins 3 caractères."
     },
     "delete": {
       "modal": {
         "bold": "\u00cates-vous s\u00fbr de vouloir supprimer cet argument ?",
-        "infos": "Cette suppression marquera la fin de ce contenu \u00e0 jamais.",
+        "infos": "Cette suppression marquera la fin de ce contenu à jamais.",
         "title": "Supprimer l'argument"
       }
     },
     "edit": {
       "body": "Contenu",
-      "confirm": "En modifiant mon argument, je comprends que les votes qui lui sont associ\u00e9s seront r\u00e9initialis\u00e9s."
+      "confirm": "En modifiant mon argument, je comprends que les votes qui lui sont associés seront réinitialisés."
     },
     "filter": {
       "no": "Trier les arguments contre",
@@ -76,7 +77,7 @@
       "list": "{num, plural, =0{0 argument contre} one{# argument contre} other{# arguments contre}}"
     },
     "simple": {
-      "add": "D\u00e9poser un avis",
+      "add": "Déposer un avis",
       "list": "{num, plural, =0{0 avis} one{# avis} other{# avis}}"
     },
     "update": "Modifier l'argument",
@@ -89,26 +90,26 @@
     "add": "Commenter",
     "constraints": {
       "author_email": "Cette valeur n'est pas une adresse email valide.",
-      "author_name": "Votre nom doit faire au moins 2 caract\u00e8res",
-      "body": "Votre commentaire doit faire au moins 2 caract\u00e8res"
+      "author_name": "Votre nom doit faire au moins 2 caractères",
+      "body": "Votre commentaire doit faire au moins 2 caractères"
     },
     "count_no_nb": "{count, plural, =0{commentaire} one{commentaire} other{commentaires}}",
     "create_account_reason_1": "valider que vous n'\u00eates pas un robot une bonne fois pour toutes",
     "create_account_reason_2": "modifier\/supprimer vos commentaires",
-    "create_account_reason_3": "lier vos commentaires \u00e0 votre profil",
-    "edited": "modifi\u00e9 le",
+    "create_account_reason_3": "lier vos commentaires à votre profil",
+    "edited": "modifié le",
     "email_info": "Pour valider que vous n'\u00eates pas un robot.",
     "list": "{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}",
     "more": "Voir plus de commentaires",
     "public_name": "Votre nom sera rendu public sur la plateforme.",
     "publish": "Publier un commentaire",
     "report": {
-      "reported": "Signal\u00e9",
+      "reported": "Signalé",
       "submit": "Signaler"
     },
     "submit": "Commenter",
-    "submit_error": "D\u00e9sol\u00e9, un probl\u00e8me est survenu lors de l'ajout de votre commentaire.",
-    "submit_success": "Merci ! Votre commentaire a bien \u00e9t\u00e9 ajout\u00e9.",
+    "submit_error": "Désolé, un problème est survenu lors de l'ajout de votre commentaire.",
+    "submit_success": "Merci ! Votre commentaire a bien été ajouté.",
     "trashed": {
       "label": "Dans la corbeille"
     },
@@ -119,9 +120,9 @@
       "remove": "Annuler mon vote",
       "submit": "D'accord"
     },
-    "why_create_account": "Pourquoi cr\u00e9er un compte ?",
+    "why_create_account": "Pourquoi créer un compte ?",
     "with_my_account": "Commenter avec mon compte",
-    "without_account": "Commenter sans cr\u00e9er de compte",
+    "without_account": "Commenter sans créer de compte",
     "write": "Ecrire un commentaire..."
   },
   "editor": {
@@ -135,7 +136,7 @@
     "bullet": "Liste",
     "image": "Image",
     "link": "Lien",
-    "list": "Liste ordonn\u00e9e",
+    "list": "Liste ordonnée",
     "size": {
       "large": "Grand",
       "normal": "Normal",
@@ -144,11 +145,11 @@
     "url": "Visiter l'URL"
   },
   "global": {
-    "advanced_filters": "Filtres avanc\u00e9s",
+    "advanced_filters": "Filtres avancés",
     "required": "Cette valeur est requise.",
     "all_required": "Tous les champs sont obligatoires.",
     "anonymous": "Anonyme",
-    "answer": "R\u00e9pondre",
+    "answer": "Répondre",
     "arguments": "{num, plural, =0{0 argument} one{# argument} other{# arguments}}",
     "back": "Retour",
     "byAuthor": "par {author}",
@@ -177,28 +178,28 @@
     },
     "dates": {
       "between": "Du {start} au {end}",
-      "full_day": "Le {date} \u00e0 {time}",
-      "part_day": "Le {date} de {startTime} \u00e0 {endTime}"
+      "full_day": "Le {date} à {time}",
+      "part_day": "Le {date} de {startTime} à {endTime}"
     },
     "delete": "Supprimer",
-    "done": "Termin\u00e9",
+    "done": "Terminé",
     "email": "Adresse électronique",
     "edit": "Modifier",
-    "edited": "modifi\u00e9 le",
-    "edited_on": "Modifi\u00e9 le {updated}",
-    "filter_comments": "Comment\u00e9s",
-    "filter_f_comments": "Les plus comment\u00e9es",
-    "filter_f_last": "Les plus r\u00e9centes",
+    "edited": "modifié le",
+    "edited_on": "Modifié le {updated}",
+    "filter_comments": "Commentés",
+    "filter_f_comments": "Les plus commentées",
+    "filter_f_last": "Les plus récentes",
     "filter_f_old": "Les plus anciennes",
     "filter_f_popular": "Les plus populaires",
-    "filter_f_random": "Tri al\u00e9atoire",
-    "filter_f_votes": "Les plus vot\u00e9es",
+    "filter_f_random": "Tri aléatoire",
+    "filter_f_votes": "Les plus votées",
     "filter_favorable": "Favorables",
-    "filter_last": "R\u00e9cents",
+    "filter_last": "Récents",
     "filter_old": "Anciens",
     "filter_popular": "Populaires",
-    "filter_random": "Tri al\u00e9atoire",
-    "filter_votes": "Vot\u00e9s",
+    "filter_random": "Tri aléatoire",
+    "filter_votes": "Votés",
     "form": {
       "optional": " (facultatif)",
       "private": "Visible uniquement par vous et l'administrateur",
@@ -215,7 +216,7 @@
     },
     "forgot_password": "Mot de passe oublié ?",
     "fullname": "Nom complet *",
-    "hidden_email": "Adresse \u00e9lectronique (cach\u00e9e) *",
+    "hidden_email": "Adresse électronique (cachée) *",
     "image_uploader": {
       "image": {
         "btn": "Sélectionner une photo sur votre ordinateur",
@@ -228,18 +229,18 @@
         "dropzone": "Faites glisser votre document sur cette zone ou"
       }
     },
-    "insert": "Ins\u00e9rer",
+    "insert": "Insérer",
     "link": "Lien *",
-    "links": "{num, plural, =0{0 proposition li\u00e9e} one{# proposition li\u00e9e} other{# propositions li\u00e9es}}",
+    "links": "{num, plural, =0{0 proposition liée} one{# proposition liée} other{# propositions liées}}",
     "loading": "Chargement...",
     "login": "Connexion",
     "modal": {
       "report": {
         "form": {
           "body": "Message *",
-          "status": "Quelle est la nature du probl\u00e8me ? *"
+          "status": "Quelle est la nature du problème ? *"
         },
-        "infos": "L'\u00e9quipe du site \u00e9value les contenus et les utilisateurs signal\u00e9s r\u00e9guli\u00e8rement pour d\u00e9terminer s'ils portent atteinte au r\u00e8glement de la communaut\u00e9. Les comptes sont sanctionn\u00e9s pour toute infraction au r\u00e8glement de la communaut\u00e9 et peuvent \u00eatre cl\u00f4tur\u00e9s en cas de violations graves ou r\u00e9p\u00e9t\u00e9es.",
+        "infos": "L'équipe du site évalue les contenus et les utilisateurs signalés régulièrement pour déterminer s'ils portent atteinte au règlement de la communauté. Les comptes sont sanctionnés pour toute infraction au règlement de la communauté et peuvent \u00eatre cl\u00f4turés en cas de violations graves ou répétées.",
         "title": "Signaler un contenu"
       }
     },
@@ -251,8 +252,8 @@
     "or": "OU",
     "password": "Mot de passe",
     "pinned": {
-      "label": "\u00c9pingl\u00e9",
-      "tooltip": "Ce commentaire a \u00e9t\u00e9 \u00e9pingl\u00e9 par l'administrateur."
+      "label": "\u00c9pinglé",
+      "tooltip": "Ce commentaire a été épinglé par l'administrateur."
     },
     "phone": "Numéro de téléphone portable",
     "preview": "Aper\u00e7u",
@@ -271,14 +272,14 @@
     },
     "remove": "Supprimer",
     "report": {
-      "reported": "Signal\u00e9",
+      "reported": "Signalé",
       "submit": "Signaler"
     },
     "select": "Choisir une valeur",
     "select_categories": "Toutes les catégories",
     "select_districts": "Toutes les localisations",
     "select_statuses": "Tous les statuts",
-    "select_themes": "Tous les th\u00e8mes",
+    "select_themes": "Tous les thèmes",
     "select_types": "Tous les contributeurs",
     "share": "Partager",
     "simple_arguments": "{num, plural, =0{0 avis} one{# avis} other{# avis}}",
@@ -378,17 +379,17 @@
       "show": "Afficher {title}"
     },
     "body": "Proposition*",
-    "body_help": "R\u00e9digez votre proposition",
+    "body_help": "Rédigez votre proposition",
     "constraints": {
-      "body": "Le contenu de la proposition doit faire au moins 2 caract\u00e8res.",
-      "title": "Le titre de la proposition doit faire au moins 2 caract\u00e8res."
+      "body": "Le contenu de la proposition doit faire au moins 2 caractères.",
+      "title": "Le titre de la proposition doit faire au moins 2 caractères."
     },
     "delete": {
       "confirm": "Voulez-vous vraiment supprimer la proposition \"{title}\" ?"
     },
     "diff": {
       "infos": "Les ajouts en vert et les suppressions en rouge",
-      "title": "Modification(s) propos\u00e9e(s)",
+      "title": "Modification(s) proposée(s)",
       "tooltip": "Voir les modifications"
     },
     "edit_check": "En modifiant ma proposition, je comprends que les votes qui lui sont associés seront réinitialisés.",
@@ -399,26 +400,26 @@
       "version": "Modification"
     },
     "link": {
-      "add_new": "Ajouter une proposition li\u00e9e",
+      "add_new": "Ajouter une proposition liée",
       "constraints": {
-        "type": "Veuillez choisir un type pour soumettre une proposition li\u00e9e."
+        "type": "Veuillez choisir un type pour soumettre une proposition liée."
       },
       "help": {
-        "body": "R\u00e9digez votre proposition",
+        "body": "Rédigez votre proposition",
         "title": "Quel est l'objet de votre proposition ?",
         "type": "Quel est le type de votre proposition ?"
       },
       "select_type": "Section",
-      "info": "Votre proposition sera li\u00e9e \u00e0 :",
+      "info": "Votre proposition sera liée à :",
       "infos": "Merci d'examiner les propositions existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !",
       "type": "Type de proposition*"
     },
-    "no_new_link": "Aucune proposition li\u00e9e",
-    "no_new_source": "Aucune source propos\u00e9e",
-    "no_new_version": "Aucune modification propos\u00e9e",
+    "no_new_link": "Aucune proposition liée",
+    "no_new_source": "Aucune source proposée",
+    "no_new_version": "Aucune modification proposée",
     "progress": {
       "done": "{num, plural, =0{0 vote favorable} one{# vote favorable} other{# votes favorables}}.",
-      "left": "{left, plural, =0{0 n\u00e9cessaire} one{# n\u00e9cessaire} other{# n\u00e9cessaires}} pour atteindre {max}.",
+      "left": "{left, plural, =0{0 nécessaire} one{# nécessaire} other{# nécessaires}} pour atteindre {max}.",
       "reached": "Cette proposition a atteint le seuil avec {with, plural, =0{0 vote} one{# vote} other{# votes}}."
     },
     "ranking": {
@@ -428,12 +429,12 @@
     },
     "request": {
       "create_vote": {
-        "success": "Merci ! Votre vote a bien \u00e9t\u00e9 pris en compte."
+        "success": "Merci ! Votre vote a bien été pris en compte."
       },
       "delete_vote": {
-        "success": "Votre vote a bien \u00e9t\u00e9 supprim\u00e9."
+        "success": "Votre vote a bien été supprimé."
       },
-      "failure": "Une erreur est survenue, veuillez r\u00e9essayer."
+      "failure": "Une erreur est survenue, veuillez réessayer."
     },
     "title": "Titre*",
     "title_help": "Quel est l'objet de votre proposition ?",
@@ -445,11 +446,11 @@
       "body_helper": "Modifiez le texte",
       "comment": "Explication",
       "comment_helper": "Expliquez pourquoi vous souhaitez apporter ces modifications",
-      "confirm": "En modifiant ma contribution, je comprends que tous les votes qui lui sont associ\u00e9s seront r\u00e9initialis\u00e9s.",
+      "confirm": "En modifiant ma contribution, je comprends que tous les votes qui lui sont associés seront réinitialisés.",
       "confirm_error": "Vous devez confirmer la perte de vos votes pour continuer.",
       "filter": "Trier les modifications",
       "title": "Titre *",
-      "title_error": "Le titre doit contenir au moins 2 caract\u00e8res."
+      "title_error": "Le titre doit contenir au moins 2 caractères."
     },
     "version_comment": "Explication",
     "version_parent": "Modification de : ",
@@ -558,26 +559,26 @@
         "percentage": "Pourcentage"
       },
       "list": {
-        "costs": "R\u00e9partition des co\u00fbts par proposition",
-        "districts": "R\u00e9partition par localisations",
-        "categories": "R\u00e9partition par catégories",
-        "themes": "R\u00e9partition par th\u00e8mes",
-        "userTypes": "R\u00e9partition par profil de l'auteur",
-        "votes": "R\u00e9partition des votes par propositions"
+        "costs": "Répartition des co\u00fbts par proposition",
+        "districts": "Répartition par localisations",
+        "categories": "Répartition par catégories",
+        "themes": "Répartition par thèmes",
+        "userTypes": "Répartition par profil de l'auteur",
+        "votes": "Répartition des votes par propositions"
       },
       "modal": {
         "close": "Fermer"
       },
-      "no_data": "Aucune source de donn\u00e9es",
-      "no_values": "Aucun \u00e9l\u00e8ment.",
+      "no_data": "Aucune source de données",
+      "no_values": "Aucun élèment.",
       "title": "Statistiques"
     },
     "votes": {
-      "back": "Retour \u00e0 l'\u00e9tape de vote",
+      "back": "Retour à l'étape de vote",
       "delete": "Retirer",
-      "nb": "{num, plural, =0{0 proposition s\u00e9lectionn\u00e9e} one{# proposition s\u00e9lectionn\u00e9e} other{# propositions s\u00e9lectionn\u00e9es}}",
-      "no_active_step": "Aucun \u00e9tape de vote n'est actuellement active.",
-      "title": "D\u00e9tails de mes votes",
+      "nb": "{num, plural, =0{0 proposition sélectionnée} one{# proposition sélectionnée} other{# propositions sélectionnées}}",
+      "no_active_step": "Aucun étape de vote n'est actuellement active.",
+      "title": "Détails de mes votes",
       "type": {
         "budget": "(vote selon le budget)",
         "simple": "(vote simple)"
@@ -586,9 +587,9 @@
         "budget": "Budget",
         "count": "{num, plural, =0{0 vote} one{# vote} other{# votes}}",
         "left": "Restant",
-        "no_value": "Non renseign\u00e9",
-        "selection": "Ma s\u00e9lection",
-        "spent": "D\u00e9pens\u00e9",
+        "no_value": "Non renseigné",
+        "selection": "Ma sélection",
+        "spent": "Dépensé",
         "step": "\u00c9tape"
       }
     }
@@ -601,12 +602,12 @@
     "fusionnedInto": "Proposition fusionnée avec {num, plural, one{1 autre} other {# autres}}",
     "fusionnedFrom": "Proposition issue de la fusion de {num, plural, other {# propositions}}",
     "constraints": {
-      "body": "La description de la proposition doit faire au moins 2 caract\u00e8res.",
+      "body": "La description de la proposition doit faire au moins 2 caractères.",
       "category": "Merci de sélectionner une catégorie.",
-      "district": "Merci de s\u00e9lectionner une localisation.",
+      "district": "Merci de sélectionner une localisation.",
       "field_mandatory": "Ce champ est obligatoire.",
-      "theme": "Merci de s\u00e9lectionner un th\u00e8me.",
-      "title": "Le titre de la proposition doit faire au moins 2 caract\u00e8res.",
+      "theme": "Merci de sélectionner un thème.",
+      "title": "Le titre de la proposition doit faire au moins 2 caractères.",
       "media": "Vous avez sélectionné un nombre trop important d'image."
     },
     "count": "{num, plural, =0{0 proposition} one{# proposition} other{# propositions}}",
@@ -615,7 +616,7 @@
       "confirm": "Voulez-vous vraiment supprimer la proposition \"{title}\" ?"
     },
     "description": "Description",
-    "details": "D\u00e9tails",
+    "details": "Détails",
     "detail":  {
       "advancement": "État d'avancement",
       "intervals": {
@@ -644,32 +645,31 @@
     "random_search": "Afficher d'autres propositions",
     "request": {
       "create": {
-        "failure": "Toutes nos excuses ! Une erreur est survenue, merci de r\u00e9essayer plus tard.",
-        "success": "Merci ! Votre proposition a bien \u00e9t\u00e9 cr\u00e9\u00e9e."
+        "failure": "Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.",
+        "success": "Merci ! Votre proposition a bien été créée."
       },
       "delete": {
-        "failure": "Toutes nos excuses ! Une erreur est survenue, merci de r\u00e9essayer plus tard.",
-        "success": "Votre proposition a bien \u00e9t\u00e9 supprim\u00e9e."
+        "failure": "Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.",
+        "success": "Votre proposition a bien été supprimée."
       },
       "delete_vote": {
-        "failure": "Toutes nos excuses ! Une erreur est survenue, merci de r\u00e9essayer plus tard.",
-        "success": "Merci, votre vote a bien \u00e9t\u00e9 supprim\u00e9."
+        "failure": "Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.",
+        "success": "Merci, votre vote a bien été supprimé."
       },
       "update": {
-        "failure": "Toutes nos excuses ! Une erreur est survenue, merci de r\u00e9essayer plus tard.",
-        "success": "Votre proposition a bien \u00e9t\u00e9 modifi\u00e9e."
+        "failure": "Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard."
       },
       "vote": {
-        "failure": "Toutes nos excuses ! Une erreur est survenue, merci de r\u00e9essayer plus tard.",
-        "success": "Merci, votre vote a bien \u00e9t\u00e9 pris en compte."
+        "failure": "Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.",
+        "success": "Merci, votre vote a bien été pris en compte."
       }
     },
     "suggest_header": "{matches, plural, one{# proposition déjà déposée contenant} other{# propositions déjà déposées contiennent}} {terms, plural, one{ce mot-clé} other {ces mots-clés}}",
     "search": "Rechercher une proposition",
     "select": {
       "category": "Sélectionnez une catégorie",
-      "district": "S\u00e9lectionnez une localisation",
-      "theme": "S\u00e9lectionnez un th\u00e8me"
+      "district": "Sélectionnez une localisation",
+      "theme": "Sélectionnez un thème"
     },
     "tabs": {
       "blog": "Actualités",
@@ -689,7 +689,7 @@
       "confirm": "Valider mon vote",
       "constraints": {
         "email": "Veuillez entrer une adresse email valide",
-        "username": "Le nom doit faire au moins 2 caract\u00e8res."
+        "username": "Le nom doit faire au moins 2 caractères."
       },
       "count": "{num, plural, =0{0 vote} one{# vote} other{# votes}}",
       "count_no_nb": "{count, plural, =0{vote} one{vote} other{votes}}",
@@ -698,7 +698,7 @@
       "form": {
         "comment": "Commentaire",
         "comment_placeholder": "Pourquoi soutenez-vous ce projet ?",
-        "email": "Adresse \u00e9lectronique",
+        "email": "Adresse électronique",
         "private": "Rendre mon vote anonyme",
         "username": "Nom"
       },
@@ -716,11 +716,11 @@
       "must_log_in": "Vous devez vous connecter pour pouvoir voter pour cette proposition.",
       "non_authenticated": "Voter sans compte",
       "none": "Aucun vote",
-      "not_enough_credits": "Pas assez de cr\u00e9dits.",
-      "not_enough_credits_text": "D\u00e9s\u00e9lectionnez un projet ou s\u00e9lectionnez un projet moins co\u00fbteux.",
+      "not_enough_credits": "Pas assez de crédits.",
+      "not_enough_credits_text": "Désélectionnez un projet ou sélectionnez un projet moins co\u00fbteux.",
       "show_more": "Voir tous les votes",
-      "step_closed": "L'\u00e9tape de s\u00e9lection est termin\u00e9e, merci pour votre participation.",
-      "step_not_yet_open": "L'\u00e9tape de s\u00e9lection n'est pas encore ouverte aux votes. Revenez plus tard !",
+      "step_closed": "L'étape de sélection est terminée, merci pour votre participation.",
+      "step_not_yet_open": "L'étape de sélection n'est pas encore ouverte aux votes. Revenez plus tard !",
       "vote_with_my_account": "Voter avec mon compte"
     }
   },
@@ -773,10 +773,10 @@
   },
   "reporting": {
     "status": {
-      "error": "Information erron\u00e9e",
+      "error": "Information erronée",
       "off_topic": "Propos hors-sujet",
       "offending": "Contenu raciste, offensant ou haineux",
-      "sexual": "Contenu \u00e0 caract\u00e8re sexuel",
+      "sexual": "Contenu à caractère sexuel",
       "spam": "Spam ou contenu trompeur"
     }
   },
@@ -788,20 +788,20 @@
     "twitter": "Twitter"
   },
   "source": {
-    "add": "Cr\u00e9er une source",
+    "add": "Créer une source",
     "add_infos": "Merci d'examiner les sources existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !",
     "body": "Description *",
-    "check": "En modifiant ma source, je comprends que les votes qui lui sont associ\u00e9s seront r\u00e9initialis\u00e9s.",
+    "check": "En modifiant ma source, je comprends que les votes qui lui sont associés seront réinitialisés.",
     "constraints": {
-      "body": "Le contenu de la source doit faire au moins 2 caract\u00e8res.",
+      "body": "Le contenu de la source doit faire au moins 2 caractères.",
       "category": "Veuillez choisir un type pour soumettre une source",
       "check": "Veuillez cocher cette case pour continuer.",
       "link": "Cette valeur n'est pas une URL valide.",
-      "title": "Le titre de la source doit faire au moins 2 caract\u00e8res."
+      "title": "Le titre de la source doit faire au moins 2 caractères."
     },
     "delete_modal": {
       "bold": "\u00cates-vous s\u00fbr de vouloir supprimer cette source ?",
-      "infos": "Cette suppression marquera la fin de ce contenu \u00e0 jamais.",
+      "infos": "Cette suppression marquera la fin de ce contenu à jamais.",
       "title": "Supprimer une source"
     },
     "link": "Lien *",
@@ -811,7 +811,7 @@
   },
   "step": {
     "status": {
-      "closed": "Termin\u00e9",
+      "closed": "Terminé",
       "future": "\u00c0 venir",
       "open": "En cours"
     }
@@ -991,32 +991,32 @@
   "vote": {
     "add": "Voter",
     "aria_label": {
-      "mitige": "Souhaitez-vous d\u00e9clarer \u00eatre mitig\u00e9 sur cette proposition ?",
-      "nok": "Souhaitez-vous d\u00e9clarer ne pas \u00eatre d'accord avec cette proposition ?",
-      "ok": "Souhaitez-vous d\u00e9clarer \u00eatre d'accord avec cette proposition ?"
+      "mitige": "Souhaitez-vous déclarer \u00eatre mitigé sur cette proposition ?",
+      "nok": "Souhaitez-vous déclarer ne pas \u00eatre d'accord avec cette proposition ?",
+      "ok": "Souhaitez-vous déclarer \u00eatre d'accord avec cette proposition ?"
     },
     "aria_label_active": {
-      "mitige": "Vous avez d\u00e9clar\u00e9 \u00eatre mitig\u00e9 sur cette proposition",
-      "nok": "Vous avez d\u00e9clar\u00e9 n'\u00eatre pas d'accord avec cette proposition",
-      "ok": "Vous avez d\u00e9clar\u00e9 \u00eatre d'accord avec cette proposition"
+      "mitige": "Vous avez déclaré \u00eatre mitigé sur cette proposition",
+      "nok": "Vous avez déclaré n'\u00eatre pas d'accord avec cette proposition",
+      "ok": "Vous avez déclaré \u00eatre d'accord avec cette proposition"
     },
     "cancel": "Annuler mon vote",
     "count": "{count, plural, =0{0 vote} one{# vote} other{# votes}}",
     "count_no_nb": "{count, plural, =0{vote} one{vote} other{votes}}",
     "evolution": {
       "date": "Date",
-      "mitige": "Mitig\u00e9",
+      "mitige": "Mitigé",
       "nok": "Pas d'accord",
       "ok": "D'accord",
       "tab": "\u00c9volution des votes",
       "vaxis": "Votes"
     },
     "form": "Formulaire de vote",
-    "mitige": "Mitig\u00e9",
+    "mitige": "Mitigé",
     "nok": "Pas d'accord",
     "ok": "D'accord",
     "popover": {
-      "body": "Vous devez \u00eatre connect\u00e9 pour r\u00e9aliser cette action.",
+      "body": "Vous devez \u00eatre connecté pour réaliser cette action.",
       "login": "Connexion",
       "signin": "Inscription",
       "title": "Connectez-vous pour contribuer"
