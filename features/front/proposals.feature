@@ -21,7 +21,7 @@ Feature: Proposals
      And I go to a private open collect step
      Then there should be 2 proposals
 
-  @javascript @elasticsearch
+  @javascript @elasticsearch @fixme
   Scenario: Anonymous user wants to see proposals in a collect step and sort them
     Given I go to an open collect step
     Then proposals should be ordered randomly

@@ -55,9 +55,15 @@ mailcatcher:
 
 chrome:
    image: selenium/node-chrome-debug:2.47.1
-   #  shm_size: 1G
-   #  tmpfs:
-        # - /tmp
+   environment:
+      SCREEN_WIDTH: 3220
+      SCREEN_HEIGHT: 2040
+      TZ: "Europe/Paris"
+   volumes:
+      - /dev/shm:/dev/shm
    links:
      - seleniumhub:hub
      - application:capco.test
+   #  shm_size: 1G
+   #  tmpfs:
+        # - /tmp

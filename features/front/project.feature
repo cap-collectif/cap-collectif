@@ -29,7 +29,7 @@ Feature: Project
     And feature "projects_form" is enabled
     And I visited "projects page"
     And I wait 1 seconds
-    Then I should see 7 ".thumbnail--custom" elements
+    Then I should see 8 ".thumbnail--custom" elements
     And I select "Transport" from "project_search_theme"
     And I wait 1 seconds
     Then I should see 6 ".thumbnail--custom" elements
@@ -64,14 +64,6 @@ Feature: Project
     And I should see "Croissance, innovation, disruption"
     And I should not see "Stratégie technologique de l'Etat et services publics"
     And I should not see "Projet vide"
-
-  @javascript
-  Scenario: Project should contain allowed types only
-    Given I am logged in as user
-    And I visited "consultation page" with:
-      | projectSlug   | strategie-technologique-de-l-etat-et-services-publics |
-      | stepSlug      | collecte-des-avis-pour-une-meilleur-strategie         |
-    Then I should see 4 "Opinion nav item" on current page
 
   Scenario: Presentation step should display correct number of element
     Given feature "calendar" is enabled
@@ -163,9 +155,3 @@ Feature: Project
     When I follow "Corbeille"
     Then I should see 100 ".opinion__list .opinion" elements
     And I should see "100" in the "span.badge" element
-
-  Scenario: I should not see opinion types menu when only one type is allowed
-    Given I visited "consultation page" with:
-      | projectSlug | projet-vide |
-      | stepSlug    | projet      |
-    Then I should see 0 ".project__nav" on current page

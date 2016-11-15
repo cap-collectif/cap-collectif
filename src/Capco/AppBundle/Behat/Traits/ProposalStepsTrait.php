@@ -214,13 +214,11 @@ trait ProposalStepsTrait
         $this->element1ShouldBeBeforeElement2ForSelector(
             $proposal1,
             $proposal2,
-            '.proposal__preview .proposal__title a'
+            '.proposal__preview .proposal__title'
         );
     }
 
     /**
-     * Proposals should be ordered by date.
-     *
      * @Then proposals should be ordered by date
      */
     public function proposalsShouldBeOrderedByDate()
