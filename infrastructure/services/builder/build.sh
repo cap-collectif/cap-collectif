@@ -30,6 +30,7 @@ else
   if ./node_modules/node-sass/bin/node-sass | grep --quiet `npm rebuild node-sass` &> /dev/null; then
       echo "Building node-sass binding for the container..."
       npm rebuild node-sass > /dev/null
+      echo "Done!"
   fi
   yarn run build
 
