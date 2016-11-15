@@ -27,6 +27,7 @@ def clean_cache():
         local('rm -rf ~/.yarn-cache')
         local('rm -rf node_modules')
 
+
 @task(environments=['testing'])
 def load_cache():
     "Load cache"

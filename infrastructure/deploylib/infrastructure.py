@@ -13,6 +13,7 @@ def build(use_cache='true'):
     ensure_vm_is_up()
     env.compose('build' + ('', '  --no-cache')[use_cache == 'false'])
 
+
 @task
 def up(force_recreate='false'):
     "Ensure infrastructure is sync and running"
@@ -21,6 +22,7 @@ def up(force_recreate='false'):
         env.compose('build')
     env.compose('up -d' + ('', ' --force-recreate')[force_recreate == 'true'])
     env.service_command('chmod -R 777 var/cache/*', 'application', '.', 'root')
+
 
 @task
 def stop():
