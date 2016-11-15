@@ -1,3 +1,0 @@
-pycrypto==2.6.1
-Fabric==1.10.2
-docker-compose==1.7.1
