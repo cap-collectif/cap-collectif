@@ -56,8 +56,8 @@ mailcatcher:
 chrome:
    image: selenium/node-chrome-debug:2.47.1
    environment:
-      SCREEN_WIDTH: 3220
-      SCREEN_HEIGHT: 2040
+      SCREEN_WIDTH: 1920
+      SCREEN_HEIGHT: 1080
       TZ: "Europe/Paris"
    volumes:
       - /dev/shm:/dev/shm
