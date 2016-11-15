@@ -1,4 +1,5 @@
-Feature: Profile
+@profil
+Feature: Profil
 
   Background:
     Given feature "profiles" is enabled
