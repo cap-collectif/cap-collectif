@@ -182,12 +182,27 @@ class ProposalAdmin extends Admin
                 ->end();
         }
 
+        $formMapper
+            // Answer
+            ->with('admin.fields.proposal.group_answer')
+            ->add('answer', 'sonata_type_model_list', [
+                'label' => 'admin.fields.proposal.answer',
+                'btn_list' => false,
+                'required' => false,
+                'help' => 'admin.fields.proposal.help.answer',
+            ])
+            ->end()
+        ;
+
         // Evaluation
         if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
             || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod'
         ) {
             $formMapper
-                ->with('admin.fields.proposal.group_evaluation')
+                ->with('admin.fields.proposal.group_evaluation',
+                [
+                  'description' => 'Le contenu des champs suivants ne sera pas publié sur le site. Cette section est réservée à l\'analyse des référents des services techniques. Aucun autre champ ne doit être renseigné ou modifié en dehors de cette section.'
+                ])
                 ->add(
                     'servicePilote',
                     CKEditorType::class,
@@ -280,18 +295,6 @@ class ProposalAdmin extends Admin
                 )
                 ->end();
         }
-
-        $formMapper
-            // Answer
-            ->with('admin.fields.proposal.group_answer')
-            ->add('answer', 'sonata_type_model_list', [
-                'label' => 'admin.fields.proposal.answer',
-                'btn_list' => false,
-                'required' => false,
-                'help' => 'admin.fields.proposal.help.answer',
-            ])
-            ->end()
-        ;
     }
 
     // Fields to be shown on lists
