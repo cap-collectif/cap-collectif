@@ -100,10 +100,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
         $collectVotesCount = $this->proposalCollectVoteRepository
             ->getCountsByProposalGroupedBySteps($proposal);
 
-        $event->getVisitor()->addData(
-            'votesCountByStepId',
-            $selectionVotesCount + $collectVotesCount
-        );
+        $event->getVisitor()->addData('votesCountByStepId', $selectionVotesCount + $collectVotesCount);
 
         $votesByStepId = [];
         foreach ($proposal->getSelectionStepsIds() as $value) {

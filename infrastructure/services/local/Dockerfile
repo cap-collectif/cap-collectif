@@ -110,10 +110,15 @@ RUN curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire
     echo "extension=blackfire.so\nblackfire.agent_socket=tcp://0.0.0.0:8707" > /etc/php/7.0/cli/conf.d/20-blackfire.ini
 
 # Install blackfire agent to profile CLI and url
-RUN curl -s https://packagecloud.io/gpg.key | apt-key add - && \
+
+# Install blackfire
+RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
     echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
     apt-get update && \
-    apt-get install blackfire-agent
+    apt-get install -y blackfire-agent blackfire-php && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
+    mkdir -p /var/run/blackfire
 
 # Install rabbitmq
 RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \
