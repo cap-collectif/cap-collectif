@@ -98,13 +98,12 @@ class ApplicationContext extends UserContext
         $manager->create($this->dbContainer)->start($this->dbContainer);
     }
 
-
-    /**
-     * @BeforeScenario @javascript
-     */
+     /**
+      * @BeforeScenario @javascript
+      */
      public function maximizeWindow()
      {
-        $this->getSession()->getDriver()->maximizeWindow();
+         $this->getSession()->getDriver()->maximizeWindow();
      }
 
     /**

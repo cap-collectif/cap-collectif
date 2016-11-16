@@ -91,11 +91,11 @@ Feature: Project
     And I follow "posts_link"
     And I should see 5 ".media--news" elements
 
-  # Scenario: Project header should display correct number of votes
-  #   Given I visited "consultation page" with:
-  #     | projectSlug | croissance-innovation-disruption |
-  #     | stepSlug    | collecte-des-avis                |
-  #   Then I should see "8 votes"
+  Scenario: Project header should display correct number of votes
+    Given I visited "consultation page" with:
+      | projectSlug | croissance-innovation-disruption |
+      | stepSlug    | collecte-des-avis                |
+    Then I should see "8 votes"
 
   @javascript
   Scenario: Project header should display correct number of contributions
