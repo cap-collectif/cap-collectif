@@ -28,3 +28,7 @@ Capco\AppBundle\Entity\ProposalForm:
     title: Formulaire de la collecte 5
     description: <text(100)>
     step: "@collectstep5"
+  proposalform6:
+    title: Formulaire du dépôt fermé
+    description: <text(100)>
+    step: "@collectstep6"

@@ -26,7 +26,7 @@ trait ProposalStepsTrait
         'stepSlug' => 'selection',
     ];
     protected static $selectionStepWithBudgetVoteParams = [
-        'projectSlug' => 'projet-avec-budget',
+        'projectSlug' => 'depot-avec-selection-vote-budget',
         'stepSlug' => 'selection-avec-vote-selon-le-budget',
     ];
     protected static $selectionStepNotYetOpen = [
@@ -43,7 +43,7 @@ trait ProposalStepsTrait
         'proposalSlug' => 'renovation-du-gymnase',
     ];
     protected static $proposalWithBudgetVoteParams = [
-        'projectSlug' => 'projet-avec-budget',
+        'projectSlug' => 'depot-avec-selection-vote-budget',
         'stepSlug' => 'collecte-des-propositions-1',
         'proposalSlug' => 'proposition-pas-chere',
     ];

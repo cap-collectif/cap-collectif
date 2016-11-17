@@ -199,3 +199,19 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 100
+  proposal15:
+    id: 15
+    title: Proposition 15
+    body: <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    author: '@user1'
+    proposalForm: '@proposalform6'
+  proposal16:
+    id: 16
+    title: Proposition 16
+    body: <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    author: '@user1'
+    proposalForm: '@proposalform6'

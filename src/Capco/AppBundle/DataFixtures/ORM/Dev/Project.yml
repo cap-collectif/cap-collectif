@@ -1,5 +1,6 @@
 Capco\AppBundle\Entity\Project:
   p1:
+    id: 1
     title: Croissance, innovation, disruption
     Author: '@user4'
     Cover: @MediaProject1
@@ -10,23 +11,27 @@ Capco\AppBundle\Entity\Project:
     opinionsRankingThreshold: 60
     versionsRankingThreshold: 20
   p2:
+    id: 2
     title: Stratégie technologique de l'Etat et services publics
     Author: '@user4'
     Cover: '@MediaProject2'
     themes: ['@theme1', '@theme3']
     publishedAt: <dateTimeBetween('-50 days', 'now')>
   p3:
+    id: 3
     title: Transformation numérique des relations
     isEnabled: false
     Author: '@user4'
     themes: ['@theme2', '@theme3']
   p4:
+    id: 4
     title: Projet vide
     isEnabled: true
     Author: '@user4'
     themes: ['@theme2', '@theme3']
     publishedAt: <dateTimeBetween('+1 days', '+10 days')>
   p5:
+    id: 5
     title: Projet de loi Renseignement
     Author: '@user2'
     Cover: '@MediaProject2'
@@ -37,6 +42,7 @@ Capco\AppBundle\Entity\Project:
     opinionsRankingThreshold: 60
     versionsRankingThreshold: 20
   p6:
+    id: 6
     title: Budget Participatif Rennes
     Author: '@user502'
     isEnabled: true
@@ -44,13 +50,15 @@ Capco\AppBundle\Entity\Project:
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
   p7:
-    title: Projet avec budget
+    id: 7
+    title: Dépot avec selection vote budget
     Author: '@user4'
     isEnabled: true
     themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
   p8:
+    id: 8
     title: Projet avec questionnaire
     Author: '@user502'
     isEnabled: true
@@ -58,9 +66,18 @@ Capco\AppBundle\Entity\Project:
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
   p9:
+    id: 9
     title: Appel à projets
     Author: '@user1'
     isEnabled: true
     themes: []
+    exportable: true
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+  p10:
+    id: 10
+    title: Dépôt avec selection vote simple
+    Author: '@user4'
+    isEnabled: true
+    themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
