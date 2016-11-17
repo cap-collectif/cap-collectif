@@ -705,9 +705,9 @@ Feature: Proposal Restful Api
       }
       """
       Then the JSON response status code should be 201
-      And proposal "1" should be fusioned to proposal "15"
-      And proposal "2" should be fusioned to proposal "15"
-      And proposal "15" should have author "sfavot"
+      And proposal "1" should be fusioned to proposal "17"
+      And proposal "2" should be fusioned to proposal "17"
+      And proposal "17" should have author "sfavot"
 
   @database
   Scenario: Logged in API client wants to add a proposal (with nothing for not required response)

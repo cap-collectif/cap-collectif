@@ -1,167 +1,93 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import FormMixin from '../../../utils/FormMixin';
-import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import FlashMessages from '../../Utils/FlashMessages';
-import Input from '../../Form/Input';
+// import FlashMessages from '../../Utils/FlashMessages';
+import renderComponent from '../../Form/Field';
 import { connect } from 'react-redux';
-import { vote, deleteVote } from '../../../redux/modules/proposal';
+import { reduxForm, Field } from 'redux-form';
+import { vote } from '../../../redux/modules/proposal';
+
+// const validate = (values, props) => {
+//   if (!user) {
+//     this.formValidationRules = {
+//       username: {
+//         min: { value: 2, message: 'proposal.vote.constraints.username' },
+//         notBlank: { message: 'proposal.vote.constraints.username' },
+//       },
+//       email: {
+//         notBlank: { message: 'proposal.vote.constraints.email' },
+//         isEmail: { message: 'proposal.vote.constraints.email' },
+//       },
+//     };
+//   }
+// };
 
 const ProposalVoteForm = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    isPrivate: PropTypes.bool.isRequired,
     userHasVote: PropTypes.bool.isRequired,
-    user: PropTypes.object,
+    anonymous: PropTypes.bool.isRequired,
+    comment: PropTypes.string.isRequired,
+    error: PropTypes.string,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
-
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
-
-  getInitialState() {
-    return {
-      form: {
-        username: '',
-        email: '',
-        comment: '',
-        private: false,
-      },
-      errors: {
-        username: [],
-        email: [],
-        comment: [],
-        private: [],
-      },
-      serverErrors: [],
-    };
-  },
-
-  componentDidMount() {
-    const { user } = this.props;
-    if (!user) {
-      this.formValidationRules = {
-        username: {
-          min: { value: 2, message: 'proposal.vote.constraints.username' },
-          notBlank: { message: 'proposal.vote.constraints.username' },
-        },
-        email: {
-          notBlank: { message: 'proposal.vote.constraints.email' },
-          isEmail: { message: 'proposal.vote.constraints.email' },
-        },
-      };
-    }
-  },
-
-  componentWillReceiveProps(nextProps) {
-    const {
-      isSubmitting,
-      proposal,
-      userHasVote,
-      dispatch,
-      step,
-      user,
-    } = this.props;
-    if (!isSubmitting && nextProps.isSubmitting) {
-      if (this.isValid()) {
-        if (user && userHasVote) {
-          deleteVote(dispatch, step, proposal);
-        }
-        const data = this.state.form;
-        if (user) {
-          delete data.username;
-          delete data.email;
-        }
-        vote(dispatch, step, proposal, data);
-      }
-    }
-  },
-
-  formValidationRules: {},
-
-  renderFormErrors(field) {
-    const errors = this.getErrorsMessages(field);
-    if (errors.length === 0) {
-      return null;
-    }
-    return <FlashMessages errors={errors} form />;
-  },
+  mixins: [IntlMixin],
 
   render() {
-    const { user, proposal } = this.props;
-    const anonymous = !user;
-    const userHasVote = proposal.userHasVote;
-    const commentLabel = (
-      <span>
-        {this.getIntlMessage('proposal.vote.form.comment')}
-        <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-      </span>
-    );
-
+    const { error, handleSubmit, comment, isPrivate, anonymous, proposal: { userHasVote } } = this.props;
     return (
-      <form ref="form">
-
-        <FlashMessages errors={this.state.serverErrors} translate={false} />
-
+      <form onSubmit={handleSubmit}>
         {
-          anonymous
-          && <Input
+          error && <strong>{error}</strong>
+        }
+        {
+          anonymous &&
+            <Field
               type="text"
-              name="proposal-vote__username"
-              valueLink={this.linkState('form.username')}
-              ref="username"
+              component={renderComponent}
+              name="username"
+              id="proposal-vote__username"
               label={this.getIntlMessage('proposal.vote.form.username')}
-              groupClassName={this.getGroupStyle('username')}
-              errors={this.renderFormErrors('username')}
-          />
+            />
         }
-
         {
-          anonymous
-          && <Input
-              type="text"
-              name="proposal-vote__email"
-              valueLink={this.linkState('form.email')}
-              ref="email"
+          anonymous &&
+            <Field
+              type="email"
+              component={renderComponent}
+              name="email"
+              id="proposal-vote__email"
               label={this.getIntlMessage('proposal.vote.form.email')}
-              groupClassName={this.getGroupStyle('email')}
-              errors={this.renderFormErrors('email')}
-          />
+            />
         }
-
         {
-          (!this.state.form.private && (anonymous || !userHasVote))
-            && <Input
+          (!isPrivate && (anonymous || !userHasVote)) &&
+            <Field
               type="textarea"
-              name="proposal-vote__comment"
-              valueLink={this.linkState('form.comment')}
-              ref="comment"
-              label={commentLabel}
+              component={renderComponent}
+              name="comment"
+              id="proposal-vote__comment"
+              label={
+                <span>
+                  {this.getIntlMessage('proposal.vote.form.comment')}
+                  <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
+                </span>
+              }
               placeholder={this.getIntlMessage('proposal.vote.form.comment_placeholder')}
-              groupClassName={this.getGroupStyle('comment')}
-              errors={this.renderFormErrors('comment')}
             />
         }
-
         {
-          (this.state.form.comment.length > 0 || (!anonymous && userHasVote))
-            ? null
-            : <Input
+          comment.length > 0 || (!anonymous && userHasVote)
+          ? null
+            : <Field
               type="checkbox"
-              name="proposal-vote__private"
-              checkedLink={this.linkState('form.private')}
-              ref="private"
+              component={renderComponent}
+              name="private"
+              id="proposal-vote__private"
               label={this.getIntlMessage('proposal.vote.form.private')}
-              groupClassName={this.getGroupStyle('private')}
-              errors={this.renderFormErrors('private')}
-            />
+              />
         }
-
       </form>
     );
   },
@@ -170,9 +96,14 @@ const ProposalVoteForm = React.createClass({
 
 const mapStateToProps = (state, props) => {
   return {
-    user: state.default.user,
+    comment: '',
+    private: false,
+    anonymous: state.default.user === null,
     userHasVote: props.step !== null && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
   };
 };
 
-export default connect(mapStateToProps)(ProposalVoteForm);
+export default connect(mapStateToProps)(reduxForm({
+  form: 'proposalVote',
+  onSubmit: (values, dispatch, { proposal, step }) => { console.log(values); vote(dispatch, step, proposal, values); },
+})(ProposalVoteForm));

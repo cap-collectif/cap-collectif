@@ -7,6 +7,7 @@ import SubmitButton from '../../Form/SubmitButton';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { connect } from 'react-redux';
 import { closeVoteModal, startVoting } from '../../../redux/modules/proposal';
+import { submit } from 'redux-form';
 
 const ProposalVoteModal = React.createClass({
   displayName: 'ProposalVoteModal',
@@ -87,7 +88,10 @@ const ProposalVoteModal = React.createClass({
           />
           <SubmitButton
             id="confirm-proposal-vote"
-            onSubmit={() => { dispatch(startVoting()); }}
+            onSubmit={() => {
+              dispatch(startVoting());
+              dispatch(submit('proposalVote'));
+            }}
             label="proposal.vote.confirm"
             isSubmitting={isSubmitting}
             bsStyle={(!proposal.userHasVote || isSubmitting) ? 'success' : 'danger'}

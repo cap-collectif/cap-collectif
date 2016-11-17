@@ -4,6 +4,7 @@ import { select, call, put } from 'redux-saga/effects';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import flatten from 'flat';
+import { SubmissionError } from 'redux-form';
 
 export const POSTS_FETCH_REQUESTED = 'proposal/POSTS_FETCH_REQUESTED';
 export const POSTS_FETCH_SUCCEEDED = 'proposal/POSTS_FETCH_SUCCEEDED';
@@ -131,7 +132,11 @@ export const deleteProposal = (form, proposal, dispatch) => {
     });
 };
 
-export const vote = (dispatch, step, proposal, data = {}) => {
+export const startVoting = () => ({ type: VOTE_REQUESTED });
+export const stopVoting = () => ({ type: VOTE_FAILED });
+
+export const vote = (dispatch, step, proposal, data) => {
+  console.log({ data });
   let url = '';
   switch (step.type) {
     case 'selection':
@@ -153,17 +158,20 @@ export const vote = (dispatch, step, proposal, data = {}) => {
         alert: { bsStyle: 'success', content: 'proposal.request.vote.success' },
       });
     })
-    .catch((error) => {
+    .catch(e => {
+      if (e.message === 'Validation Failed') {
+        dispatch(stopVoting());
+        if (e.errors.children.email) {
+          throw new SubmissionError({ _error: e.errors.children.email[0] });
+        }
+      }
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'danger', content: 'proposal.request.vote.failure' },
       });
-      console.log(error); // eslint-disable-line no-console
     });
 };
-
-export const startVoting = () => ({ type: VOTE_REQUESTED });
 
 export const deleteVote = (dispatch, step, proposal) => {
   dispatch(deleteVoteRequested(proposal.id));
