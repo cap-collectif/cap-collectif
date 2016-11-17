@@ -201,7 +201,7 @@ class ProposalAdmin extends Admin
             $formMapper
                 ->with('admin.fields.proposal.group_evaluation',
                 [
-                  'description' => 'Le contenu des champs suivants ne sera pas publié sur le site. Cette section est réservée à l\'analyse des référents des services techniques. Aucun autre champ ne doit être renseigné ou modifié en dehors de cette section.',
+                  'description' => 'Le contenu des champs suivants ne sera pas publié sur le site. Cette section est réservée à l\'analyse des référents des services techniques. Aucun autre champ ne doit être renseigné ou modifié en dehors de cette section.'
                 ])
                 ->add(
                     'servicePilote',

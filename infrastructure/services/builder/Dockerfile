@@ -73,6 +73,9 @@ RUN chown -R capco /usr/local /usr/bin /usr/lib
 
 USER capco
 
+# Change npm verbosity
+RUN npm config set loglevel warn
+
 # Install yarn
 RUN npm install --global yarn
 

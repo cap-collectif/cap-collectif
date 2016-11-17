@@ -63,7 +63,7 @@ Feature: Ideas
     When I click the idea create button
     And I fill the idea create form
     And I submit the new idea
-    # Then I should see "Merci ! Votre idée a bien été enregistrée."
+    Then I should see "Merci ! Votre idée a bien été enregistrée."
     And I should see my new idea
 
   @database @javascript

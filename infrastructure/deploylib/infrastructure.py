@@ -53,9 +53,9 @@ def ps():
 
 
 @task
-def logs(containers=''):
+def logs():
     "Show infrastructure logs"
-    env.compose('logs ' + containers)
+    env.compose('logs')
 
 
 def ensure_vm_is_up():
