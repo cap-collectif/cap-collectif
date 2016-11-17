@@ -20,6 +20,7 @@ def up(force_recreate='false'):
     ensure_vm_is_up()
     if env.build_at_up:
         env.compose('build')
+    env.compose('up -d --force-recreate chrome')
     env.compose('up -d' + ('', ' --force-recreate')[force_recreate == 'true'])
 
 
@@ -27,11 +28,6 @@ def up(force_recreate='false'):
 def stop():
     "Stop the infrastructure"
     env.compose('stop')
-    if env.dinghy:
-        local('docker-machine stop dinghy')
-    else:
-        local('docker-machine stop capco')
-
 
 @task
 def reboot():
@@ -53,9 +49,9 @@ def ps():
 
 
 @task
-def logs():
+def logs(containers=''):
     "Show infrastructure logs"
-    env.compose('logs')
+    env.compose('logs ' + containers)
 
 
 def ensure_vm_is_up():

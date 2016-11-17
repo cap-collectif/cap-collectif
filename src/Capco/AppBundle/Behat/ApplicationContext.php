@@ -98,13 +98,14 @@ class ApplicationContext extends UserContext
         $manager->create($this->dbContainer)->start($this->dbContainer);
     }
 
-
-    /**
-     * @BeforeScenario @javascript
-     */
+     /**
+      * @BeforeScenario @javascript
+      */
      public function maximizeWindow()
      {
-        $this->getSession()->getDriver()->maximizeWindow();
+         $this->getSession()->getDriver()->maximizeWindow();
+         $this->getSession()->visit('http://capco.test');
+         $this->getSession()->setCookie('displayCookieConsent', 'y');
      }
 
     /**
@@ -118,8 +119,6 @@ class ApplicationContext extends UserContext
 
     /**
      * @AfterSuite
-     *
-     * @param $suiteScope
      */
     public static function notifyEnd(AfterSuiteScope $suiteScope)
     {
