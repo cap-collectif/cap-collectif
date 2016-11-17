@@ -54,7 +54,7 @@ RUN set -ex \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
   done
 
-ENV NPM_CONFIG_LOGLEVEL info
+ENV NPM_CONFIG_LOGLEVEL warn
 ENV NODE_VERSION 6.9.1
 
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
@@ -72,9 +72,6 @@ RUN groupadd --gid=1000 capco && \
 RUN chown -R capco /usr/local /usr/bin /usr/lib
 
 USER capco
-
-# Change npm verbosity
-RUN npm config set loglevel warn
 
 # Install yarn
 RUN npm install --global yarn
