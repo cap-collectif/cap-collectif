@@ -104,8 +104,30 @@ class ApplicationContext extends UserContext
      public function maximizeWindow()
      {
          $this->getSession()->getDriver()->maximizeWindow();
-         $this->getSession()->visit('http://capco.test');
-         $this->getSession()->setCookie('displayCookieConsent', 'y');
+     }
+
+     /**
+      * @Given I visited :pageName
+      */
+     public function iVisitedPage(string $pageName)
+     {
+        if ($this->getSession()) {
+          $this->navigationContext->iVisitedPage('homepage');
+          $this->getSession()->setCookie('displayCookieConsent', 'y');
+        }
+        $this->navigationContext->iVisitedPage($pageName);
+     }
+
+     /**
+      * @Given I visited :pageName with:
+      */
+     public function iVisitedPageWith($pageName, TableNode $parameters)
+     {
+        if ($this->getSession()) {
+          $this->navigationContext->iVisitedPage('homepage');
+          $this->getSession()->setCookie('displayCookieConsent', 'y');
+        }
+        $this->navigationContext->iVisitedPageWith($pageName, $parameters);
      }
 
     /**
