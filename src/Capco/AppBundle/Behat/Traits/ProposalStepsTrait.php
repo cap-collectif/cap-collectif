@@ -655,7 +655,7 @@ trait ProposalStepsTrait
      *
      * @Then I should have :nb votes
      */
-    public function iShouldHaveNbVotes($nb)
+    public function iShouldHaveNbVotes(int $nb)
     {
         $count = $this->navigationContext->getPage('project user votes page')->countVotes();
         expect($count)->toBe($nb);
