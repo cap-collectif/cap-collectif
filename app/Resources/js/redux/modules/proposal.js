@@ -5,6 +5,7 @@ import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import flatten from 'flat';
 import { SubmissionError } from 'redux-form';
+import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
 
 export const POSTS_FETCH_REQUESTED = 'proposal/POSTS_FETCH_REQUESTED';
 export const POSTS_FETCH_SUCCEEDED = 'proposal/POSTS_FETCH_SUCCEEDED';
@@ -75,8 +76,12 @@ export const submitFusionForm = (proposalForm) => ({ type: SUBMIT_FUSION_FORM, p
 export const cancelSubmitFusionForm = (proposalForm) => ({ type: CANCEL_SUBMIT_FUSION_FORM, proposalForm });
 export const openVotesModal = (stepId) => ({ type: OPEN_VOTES_MODAL, stepId });
 export const closeVotesModal = (stepId) => ({ type: CLOSE_VOTES_MODAL, stepId });
-export const voteSuccess = (proposalId, stepId, vote) => ({
-  type: VOTE_SUCCEEDED, proposalId, stepId, vote,
+export const voteSuccess = (proposalId, stepId, vote, comment) => ({
+  type: VOTE_SUCCEEDED,
+  proposalId,
+  stepId,
+  vote,
+  comment,
 });
 export const loadVotes = (stepId, proposalId) => ({
   type: VOTES_FETCH_REQUESTED,
@@ -136,7 +141,6 @@ export const startVoting = () => ({ type: VOTE_REQUESTED });
 export const stopVoting = () => ({ type: VOTE_FAILED });
 
 export const vote = (dispatch, step, proposal, data) => {
-  console.log({ data });
   let url = '';
   switch (step.type) {
     case 'selection':
@@ -151,7 +155,13 @@ export const vote = (dispatch, step, proposal, data) => {
   }
   return Fetcher.postToJson(url, data)
     .then(newVote => {
-      dispatch(voteSuccess(proposal.id, step.id, newVote));
+      dispatch(voteSuccess(proposal.id, step.id, newVote, data.comment));
+      if (data.comment) {
+        FluxDispatcher.dispatch({
+          actionType: CREATE_COMMENT_SUCCESS,
+          message: null,
+        });
+      }
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'success', content: 'proposal.request.vote.success' },
@@ -196,7 +206,7 @@ export const deleteVote = (dispatch, step, proposal) => {
           alert: { bsStyle: 'success', content: 'proposal.request.delete_vote.success' },
         });
       })
-      .catch((e) => {
+      .catch(e => {
         console.log(e); // eslint-disable-line no-console
         FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
@@ -408,10 +418,14 @@ export const reducer = (state = initialState, action) => {
       votesByStepId[action.stepId].unshift(action.vote);
       const votesCountByStepId = proposal.votesCountByStepId;
       votesCountByStepId[action.stepId]++;
+      let commentsCount = proposal.comments_count;
+      if (action.comment) {
+        commentsCount++;
+      }
       const proposalsById = state.proposalsById;
       const userVotesByStepId = state.userVotesByStepId;
       userVotesByStepId[action.stepId].push(proposal.id);
-      proposalsById[action.proposalId] = { ...proposal, votesCountByStepId, votesByStepId };
+      proposalsById[action.proposalId] = { ...proposal, votesCountByStepId, votesByStepId, comments_count: commentsCount };
       const creditsLeftByStepId = state.creditsLeftByStepId;
       creditsLeftByStepId[action.stepId] -= proposal.estimation || 0;
       return {
@@ -430,7 +444,7 @@ export const reducer = (state = initialState, action) => {
       votesCountByStepId[action.stepId]--;
       const votesByStepId = proposal.votesByStepId || [];
       if (action.vote.user) {
-        votesByStepId[action.stepId] = votesByStepId[action.stepId].filter(v => v.user.uniqueId !== action.vote.user.uniqueId);
+        votesByStepId[action.stepId] = votesByStepId[action.stepId].filter(v => !v.user || v.user.uniqueId !== action.vote.user.uniqueId);
       } else {
         votesByStepId[action.stepId].slice(votesByStepId[action.stepId].findIndex(v => v.user === null), 1);
       }

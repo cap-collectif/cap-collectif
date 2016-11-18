@@ -28,7 +28,9 @@ class CommentStore extends BaseStore {
         break;
       case CREATE_COMMENT_SUCCESS:
         this._resetMessages();
-        this._messages.success.push(action.message);
+        if (action.message) {
+          this._messages.success.push(action.message);
+        }
         this._isSync = false;
         this.emitChange();
         break;
