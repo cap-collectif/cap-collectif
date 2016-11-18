@@ -86,7 +86,7 @@
     "react-truncate": "^2.0.0",
     "readmore": "0.0.2",
     "redux": "^3.4.0",
-    "redux-form": "latest",
+    "redux-form": "6.2.0",
     "redux-saga": "^0.11.1",
     "sass-brunch": "https://github.com/spyl94/sass-brunch",
     "sinon": "^1.17.3",
