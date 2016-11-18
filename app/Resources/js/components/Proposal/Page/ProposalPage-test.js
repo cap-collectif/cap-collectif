@@ -92,7 +92,7 @@ describe('<ProposalPage />', () => {
     expect(voteButtonWrapper).to.have.length(1);
     expect(voteButtonWrapper.props()).to.contains({
       proposal: proposalNoVotes,
-      className: 'pull-right hidden-xs',
+      className: 'pull-right hidden-xs proposal__preview__vote',
     });
     expect(voteButtonWrapper.prop('style')).to.deep.equal({ marginTop: '10px' });
     const tabContent = tabContainer.first().find(Tab.Content);

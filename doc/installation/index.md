@@ -49,3 +49,10 @@ $ fab local.system.linux_docker_install
 ```
 
 Sinon l'installation manuelle : [OSX](osx.md) ou [Linux](linux.md).
+
+## Enfin parfois il faut libérer de la place sur son disque
+
+```
+$ fab local.infrastructure.clean
+```
+La commande suivante va nettoyer complètement les containers, ensuite il faudra rebuild toute l'application!

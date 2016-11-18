@@ -24,6 +24,7 @@ use Docker\Http\Client;
 use Docker\Container;
 use Docker\Exception\UnexpectedStatusCodeException;
 use Symfony\Component\Process\Process;
+use Behat\Gherkin\Node\TableNode;
 
 class ApplicationContext extends UserContext
 {
@@ -111,11 +112,11 @@ class ApplicationContext extends UserContext
       */
      public function iVisitedPage(string $pageName)
      {
-        if ($this->getSession()) {
-          $this->navigationContext->iVisitedPage('homepage');
-          $this->getSession()->setCookie('displayCookieConsent', 'y');
-        }
-        $this->navigationContext->iVisitedPage($pageName);
+         if ($this->getSession()) {
+             $this->navigationContext->iVisitedPage('homepage');
+             $this->getSession()->setCookie('displayCookieConsent', 'y');
+         }
+         $this->navigationContext->iVisitedPage($pageName);
      }
 
      /**
@@ -123,11 +124,11 @@ class ApplicationContext extends UserContext
       */
      public function iVisitedPageWith($pageName, TableNode $parameters)
      {
-        if ($this->getSession()) {
-          $this->navigationContext->iVisitedPage('homepage');
-          $this->getSession()->setCookie('displayCookieConsent', 'y');
-        }
-        $this->navigationContext->iVisitedPageWith($pageName, $parameters);
+         if ($this->getSession()) {
+             $this->navigationContext->iVisitedPage('homepage');
+             $this->getSession()->setCookie('displayCookieConsent', 'y');
+         }
+         $this->navigationContext->iVisitedPageWith($pageName, $parameters);
      }
 
     /**

@@ -29,6 +29,7 @@ def stop():
     "Stop the infrastructure"
     env.compose('stop')
 
+
 @task
 def reboot():
     stop()
@@ -40,6 +41,8 @@ def reboot():
 def clean():
     "Clean the infrastructure, will also remove all data"
     env.compose('rm -f -v')
+    if env.dinghy:
+        local('dinghy ssh docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc')
 
 
 @task
