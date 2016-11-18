@@ -149,8 +149,7 @@ export const vote = (dispatch, step, proposal, data) => {
       console.log('unknown step'); // eslint-disable-line no-console
       return false;
   }
-  Fetcher.post(url, data)
-    .then(json)
+  return Fetcher.postToJson(url, data)
     .then(newVote => {
       dispatch(voteSuccess(proposal.id, step.id, newVote));
       FluxDispatcher.dispatch({
@@ -158,11 +157,11 @@ export const vote = (dispatch, step, proposal, data) => {
         alert: { bsStyle: 'success', content: 'proposal.request.vote.success' },
       });
     })
-    .catch(e => {
-      if (e.message === 'Validation Failed') {
+    .catch(({ response }) => {
+      if (response.message === 'Validation Failed') {
         dispatch(stopVoting());
-        if (e.errors.children.email) {
-          throw new SubmissionError({ _error: e.errors.children.email[0] });
+        if (typeof response.errors.children.email === 'object') {
+          throw new SubmissionError({ _error: response.errors.children.email.errors[0] });
         }
       }
       dispatch(closeVoteModal());

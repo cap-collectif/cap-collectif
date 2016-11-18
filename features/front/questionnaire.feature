@@ -124,7 +124,7 @@ Feature: Questionnaire
 
   ## Deletion
 
-  @javascript @database
+  @javascript @database @fixme
   Scenario: Logged in user wants to remove a reply
     Given I am logged in as admin
     When I go to a questionnaire step

@@ -29,10 +29,10 @@ Feature: Project
     And feature "projects_form" is enabled
     And I visited "projects page"
     And I wait 1 seconds
-    Then I should see 8 ".thumbnail--custom" elements
+    Then I should see 9 ".thumbnail--custom" elements
     And I select "Transport" from "project_search_theme"
     And I wait 1 seconds
-    Then I should see 6 ".thumbnail--custom" elements
+    Then I should see 7 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"
@@ -46,7 +46,7 @@ Feature: Project
     And I wait 1 seconds
     And I select "Nombre de contributions" from "project_search_sort"
     And I wait 1 seconds
-    Then I should see 6 ".thumbnail--custom" elements
+    Then I should see 7 ".thumbnail--custom" elements
     And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
     And I should not see "Croissance, innovation, disruption"

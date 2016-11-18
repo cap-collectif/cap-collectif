@@ -5,18 +5,14 @@ namespace Capco\AppBundle\Behat\Traits;
 trait ProjectStepsTrait
 {
     /**
-     * Go to a project stats page.
-     *
      * @When I go to a project stats page
      */
     public function iGoToAProjectStatsPage()
     {
-        $this->visitPageWithParams('project stats page', ['projectSlug' => 'projet-avec-budget']);
+        $this->visitPageWithParams('project stats page', ['projectSlug' => 'depot-avec-selection-vote-budget']);
     }
 
     /**
-     * I should see theme stats.
-     *
      * @Then I should see theme stats
      */
     public function iShouldSeeThemeStats()
@@ -26,8 +22,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * I should see districts stats.
-     *
      * @Then I should see district stats
      */
     public function iShouldSeeDistrictsStats()
@@ -37,8 +31,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * I should see user types stats.
-     *
      * @Then I should see user types stats
      */
     public function iShouldSeeUserTypeStats()
@@ -48,8 +40,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * I should see costs stats.
-     *
      * @Then I should see costs stats
      */
     public function iShouldSeeCostsStats()
@@ -59,8 +49,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * I should see votes stats.
-     *
      * @Then I should see votes stats
      */
     public function iShouldSeeVotesStats()
@@ -70,8 +58,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * I go to the selection step stats.
-     *
      * @When I go to the selection step stats
      */
     public function iGoToTheSelectionStepStats()
@@ -81,8 +67,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * I click the show all districts stats button.
-     *
      * @When I click the show all districts stats button
      */
     public function iClickTheShowAllDistrictsStatsButton()
@@ -92,8 +76,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * I should see all districts stats.
-     *
      * @Then I should see all districts stats
      */
     public function iShouldSeeAllDistrictsStats()
@@ -103,8 +85,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * I filter votes stats by theme.
-     *
      * @When I filter votes stats by theme
      */
     public function iFilterVotesStatsByTheme()
@@ -114,8 +94,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * I filter votes stats by district.
-     *
      * @When I filter votes stats by district
      */
     public function iFilterVotesStatsByDistrict()
@@ -125,8 +103,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * The votes stats should be filtered by theme.
-     *
      * @Then the votes stats should be filtered by theme
      */
     public function theVotesStatsShouldBeFilteredByTheme()
@@ -136,8 +112,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * The votes stats should be filtered by theme and district.
-     *
      * @Then the votes stats should be filtered by theme and district
      */
     public function theVotesStatsShouldBeFilteredByThemeAndDistrict()

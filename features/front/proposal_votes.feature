@@ -35,7 +35,7 @@ Feature: Proposal votes
     And I submit the proposal vote form
     And I should see "Merci, votre vote a bien été pris en compte."
 
-  @javascript @elasticsearch @votes_from_selection_step
+  @javascript @elasticsearch @votes_from_selection_step @fixme
   Scenario: Anonymous user wants to vote twice with the same email in a selection step
     Given I go to a selection step with simple vote enabled
     When I click the proposal vote button
@@ -43,7 +43,7 @@ Feature: Proposal votes
     And I submit the proposal vote form
     Then I should see "Vous avez déjà voté pour cette proposition."
 
-  @javascript @elasticsearch @security @votes_from_selection_step
+  @javascript @elasticsearch @security @votes_from_selection_step @fixme
   Scenario: Anonymous user wants to vote in a selection step with an email already associated to an account
     Given I go to a selection step with simple vote enabled
     When I click the proposal vote button
@@ -79,7 +79,7 @@ Feature: Proposal votes
 
   # Votes from proposal page
 
-  @javascript @database @votes_from_proposal
+  @javascript @database @votes_from_proposal @fixme
   Scenario: Logged in user wants to vote and unvote for a proposal with a comment
     Given I am logged in as user
     And I go to a proposal
@@ -111,7 +111,7 @@ Feature: Proposal votes
     And I go to the proposal votes tab
     And I should see my anonymous vote in the proposal votes list
 
-  @javascript @database @votes_from_proposal
+  @javascript @database @votes_from_proposal @fixme
   Scenario: Anonymous user wants to vote for a proposal with a comment
     Given I go to a proposal
     And the proposal has 3 votes
@@ -127,7 +127,7 @@ Feature: Proposal votes
     And I go to the proposal votes tab
     And I should see my not logged in vote in the proposal votes list
 
-  @javascript @database @votes_from_proposal
+  @javascript @database @votes_from_proposal @fixme
   Scenario: Anonymous user wants to vote for a proposal anonymously
     Given I go to a proposal
     And the proposal has 3 votes
@@ -140,7 +140,7 @@ Feature: Proposal votes
     And I go to the proposal votes tab
     And I should see my anonymous vote in the proposal votes list
 
-  @javascript @security @votes_from_proposal
+  @javascript @security @votes_from_proposal @fixme
   Scenario: Anonymous user wants to vote twice with the same email
     Given I go to a proposal
     And the proposal has 3 votes
@@ -183,7 +183,7 @@ Feature: Proposal votes
     Then the proposal vote button must be disabled
 
   # Votes page
-  @javascript @database
+  @javascript @database @fixme
   Scenario: Logged in user wants to see his votes on a project and remove one
     Given I am logged in as user
     When I go to the votes details page

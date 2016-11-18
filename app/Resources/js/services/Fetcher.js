@@ -6,7 +6,7 @@ const status = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-  return response.json().then((res) => {
+  return response.json().then(res => {
     const error = new Error(response.statusText);
     error.response = res;
     throw error;

@@ -3,9 +3,11 @@ import { IntlMixin } from 'react-intl';
 // import FlashMessages from '../../Utils/FlashMessages';
 import renderComponent from '../../Form/Field';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, formValueSelector, Field } from 'redux-form';
 import { vote } from '../../../redux/modules/proposal';
+import { Alert } from 'react-bootstrap';
 
+const form = 'proposalVote';
 // const validate = (values, props) => {
 //   if (!user) {
 //     this.formValidationRules = {
@@ -27,7 +29,6 @@ const ProposalVoteForm = React.createClass({
     step: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     isPrivate: PropTypes.bool.isRequired,
-    userHasVote: PropTypes.bool.isRequired,
     anonymous: PropTypes.bool.isRequired,
     comment: PropTypes.string.isRequired,
     error: PropTypes.string,
@@ -35,11 +36,14 @@ const ProposalVoteForm = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    const { error, handleSubmit, comment, isPrivate, anonymous, proposal: { userHasVote } } = this.props;
+    const { error, handleSubmit, comment, isPrivate, anonymous } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         {
-          error && <strong>{error}</strong>
+          error &&
+            <Alert bsStyle="danger">
+              <p>{error}</p>
+            </Alert>
         }
         {
           anonymous &&
@@ -62,7 +66,7 @@ const ProposalVoteForm = React.createClass({
             />
         }
         {
-          (!isPrivate && (anonymous || !userHasVote)) &&
+          !isPrivate &&
             <Field
               type="textarea"
               component={renderComponent}
@@ -78,7 +82,7 @@ const ProposalVoteForm = React.createClass({
             />
         }
         {
-          comment.length > 0 || (!anonymous && userHasVote)
+          comment.length > 0
           ? null
             : <Field
               type="checkbox"
@@ -94,16 +98,13 @@ const ProposalVoteForm = React.createClass({
 
 });
 
-const mapStateToProps = (state, props) => {
-  return {
-    comment: '',
-    private: false,
-    anonymous: state.default.user === null,
-    userHasVote: props.step !== null && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
-  };
-};
+const mapStateToProps = state => ({
+  comment: formValueSelector(form)(state, 'comment') || '',
+  isPrivate: formValueSelector(form)(state, 'private'),
+  anonymous: state.default.user === null,
+});
 
 export default connect(mapStateToProps)(reduxForm({
-  form: 'proposalVote',
-  onSubmit: (values, dispatch, { proposal, step }) => { console.log(values); vote(dispatch, step, proposal, values); },
+  form,
+  onSubmit: (values, dispatch, { proposal, step }) => (vote(dispatch, step, proposal, values)),
 })(ProposalVoteForm));

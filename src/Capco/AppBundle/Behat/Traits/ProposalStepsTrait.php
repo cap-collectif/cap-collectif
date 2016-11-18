@@ -760,8 +760,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I fill the proposal vote form with already used email.
-     *
      * @When I fill the proposal vote form with already used email
      */
     public function iFillTheProposalVoteFormWithAlreadyUsedEmail()

@@ -9,9 +9,6 @@ class ProjectStatsPage extends Page
 {
     use PageTrait;
 
-    /**
-     * @var string
-     */
     protected $path = '/projects/{projectSlug}/stats';
 
     public $elements = [
