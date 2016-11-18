@@ -181,13 +181,10 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I should not see my reply anymore.
-     *
      * @Then I should not see my reply anymore
      */
     public function iShouldNotSeeMyReplyAnymore()
     {
-        $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
         $userReplySelector = $this->navigationContext->getPage('questionnaire page')->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(0, $userReplySelector);
     }

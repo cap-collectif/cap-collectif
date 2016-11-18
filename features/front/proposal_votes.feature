@@ -140,7 +140,7 @@ Feature: Proposal votes
     And I go to the proposal votes tab
     And I should see my anonymous vote in the proposal votes list
 
-  @javascript @security @votes_from_proposal @fixme
+  @javascript @security @votes_from_proposal
   Scenario: Anonymous user wants to vote twice with the same email
     Given I go to a proposal
     And the proposal has 3 votes
