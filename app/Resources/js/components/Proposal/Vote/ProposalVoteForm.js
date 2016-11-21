@@ -12,12 +12,12 @@ const validate = (values, { anonymous }) => {
   const errors = {};
   if (anonymous) {
     if (!values.username) {
-      errors.username = 'proposal.vote.constraints.username';
+      errors.username = 'global.required';
     } else if (values.username.length < 2) {
       errors.username = 'proposal.vote.constraints.username';
     }
     if (!values.email) {
-      errors.email = 'proposal.vote.constraints.email';
+      errors.email = 'global.required';
     } else if (!isEmail(values.email)) {
       errors.email = 'proposal.vote.constraints.email';
     }
