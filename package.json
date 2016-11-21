@@ -5,8 +5,8 @@
   "description": "Cap-Collectif version Symfony2",
   "main": "brunch-config.js",
   "scripts": {
-    "test": "NODE_ENV=test jest",
-    "test:watch": "NODE_ENV=test jest --watchAll",
+    "test": "NODE_ENV=test mocha --opts mocha.opts",
+    "test:watch": "NODE_ENV=test mocha --opts mocha.opts --watch --reporter min",
     "build": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
     "build:prod": "LOGGY_STACKS=true NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
@@ -27,25 +27,11 @@
   "jscsConfig": {
     "validateOrderInObjectKeys": "asc"
   },
-  "jest": {
-    "testPathDirs": [
-      "app/Resources/js"
-    ],
-    "testEnvironment": "jsdom",
-    "testRegex": "\\-test.js",
-    "setupFiles": [
-      "jest-setup.js"
-    ],
-    "transform": {
-      ".*": "<rootDir>/node_modules/babel-jest"
-    }
-  },
   "homepage": "https://github.com/jolicode/CapCollectif-SF2",
   "dependencies": {
     "autosize": "^3.0.15",
     "babel-brunch": "^6.0.6",
     "babel-core": "^6.14.0",
-    "babel-jest": "^17.0.2",
     "babel-loader": "^6.2.5",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-react-display-name": "^2.0.0",
@@ -72,6 +58,7 @@
     "imports-loader": "^0.6.5",
     "javascript-brunch": "^2.0.0",
     "jquery": "^3.1.0",
+    "jsdom": "^9.8.3",
     "json-brunch": "^1.5.4",
     "mailcheck": "^1.1.1",
     "moment": "^2.11.2",
@@ -116,12 +103,12 @@
     "eslint-brunch": "^3.12.0",
     "eslint-config-airbnb": "^10.0.1",
     "eslint-plugin-import": "^1.16.0",
-    "eslint-plugin-jest": "^1.0.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-mocha": "^4.4.0",
     "eslint-plugin-react": "^6.3.0",
     "fb-flo-brunch": "^1.7.22",
-    "jest": "^17.0.3",
     "jscs": "^3.0.7",
+    "mocha": "^3.0.2",
     "react-addons-test-utils": "^15.3.1"
   }
 }
