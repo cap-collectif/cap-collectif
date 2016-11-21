@@ -22,9 +22,6 @@ const validate = (values, { anonymous }) => {
       errors.email = 'proposal.vote.constraints.email';
     }
   }
-  // if (Object.keys(errors).length >= 1) {
-  //   dispatch(stopVoting());
-  // }
   return errors;
 };
 
