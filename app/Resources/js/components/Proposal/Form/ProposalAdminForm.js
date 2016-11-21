@@ -38,7 +38,7 @@ export const ProposalAdminForm = React.createClass({
           clearable={false}
           autoload={false}
           cache={false}
-          loadOptions={() => Promise.resolve({ options: [{ label: user.displayName, value: user.id }, { label: 'lol', value: 899 }] })}
+          loadOptions={() => Promise.resolve({ options: [{ label: user.displayName, value: user.id }] })}
         />
         <Field
           name="title"
