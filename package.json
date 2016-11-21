@@ -6,7 +6,7 @@
   "main": "brunch-config.js",
   "scripts": {
     "test": "NODE_ENV=test jest",
-    "test:watch": "NODE_ENV=test jest --watch --reporter min",
+    "test:watch": "NODE_ENV=test jest --watchAll",
     "build": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
     "build:prod": "LOGGY_STACKS=true NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
@@ -38,23 +38,7 @@
     ],
     "transform": {
       ".*": "<rootDir>/node_modules/babel-jest"
-    },
-    "unmockedModulePathPatterns": [
-      "react",
-      "react-dom",
-      "react-addons-test-utils",
-      "fbjs",
-      "enzyme",
-      "cheerio",
-      "htmlparser2",
-      "underscore",
-      "lodash",
-      "domhandler",
-      "object.assign",
-      "define-properties",
-      "function-bind",
-      "object-keys"
-    ]
+    }
   },
   "homepage": "https://github.com/jolicode/CapCollectif-SF2",
   "dependencies": {
@@ -87,7 +71,7 @@
     "flux": "^2.1.1",
     "imports-loader": "^0.6.5",
     "javascript-brunch": "^2.0.0",
-    "jest": "latest",
+    "jest": "17.0.3",
     "jest-cli": "^17.0.3",
     "jquery": "^3.1.0",
     "json-brunch": "^1.5.4",
