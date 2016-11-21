@@ -71,8 +71,6 @@
     "flux": "^2.1.1",
     "imports-loader": "^0.6.5",
     "javascript-brunch": "^2.0.0",
-    "jest": "17.0.3",
-    "jest-cli": "^17.0.3",
     "jquery": "^3.1.0",
     "json-brunch": "^1.5.4",
     "mailcheck": "^1.1.1",
@@ -122,6 +120,7 @@
     "eslint-plugin-mocha": "^4.4.0",
     "eslint-plugin-react": "^6.3.0",
     "fb-flo-brunch": "^1.7.22",
+    "jest": "^17.0.3",
     "jscs": "^3.0.7",
     "mocha": "^3.0.2",
     "react-addons-test-utils": "^15.3.1"
