@@ -3741,7 +3741,7 @@ jsdoctypeparser@~1.2.0:
   dependencies:
     lodash "^3.7.0"
 
-jsdom@^9.8.1, jsdom@^9.8.3:
+jsdom@^9.8.1:
   version "9.8.3"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-9.8.3.tgz#fde29c109c32a1131e0b6c65914e64198f97c370"
   dependencies:

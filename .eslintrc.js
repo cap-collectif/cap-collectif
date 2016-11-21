@@ -3,7 +3,7 @@ module.exports = {
   plugins: [
     'import',
     'react',
-    'mocha'
+    'jest'
   ],
   globals: {
     $: true,

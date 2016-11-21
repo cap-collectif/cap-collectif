@@ -5,8 +5,8 @@
   "description": "Cap-Collectif version Symfony2",
   "main": "brunch-config.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha --opts mocha.opts",
-    "test:watch": "NODE_ENV=test mocha --opts mocha.opts --watch --reporter min",
+    "test": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch --reporter min",
     "build": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
     "build:prod": "LOGGY_STACKS=true NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
@@ -31,6 +31,7 @@
     "testPathDirs": [
       "app/Resources/js"
     ],
+    "testEnvironment": "jsdom",
     "testRegex": "\\-test.js",
     "setupFiles": [
       "jest-setup.js"
@@ -87,8 +88,8 @@
     "imports-loader": "^0.6.5",
     "javascript-brunch": "^2.0.0",
     "jest": "latest",
+    "jest-cli": "^17.0.3",
     "jquery": "^3.1.0",
-    "jsdom": "^9.8.3",
     "json-brunch": "^1.5.4",
     "mailcheck": "^1.1.1",
     "moment": "^2.11.2",
