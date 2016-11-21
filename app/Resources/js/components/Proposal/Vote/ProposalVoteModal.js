@@ -6,8 +6,8 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { connect } from 'react-redux';
-import { closeVoteModal, startVoting } from '../../../redux/modules/proposal';
-import { submit } from 'redux-form';
+import { closeVoteModal } from '../../../redux/modules/proposal';
+import { submit, isValid } from 'redux-form';
 
 const ProposalVoteModal = React.createClass({
   displayName: 'ProposalVoteModal',
@@ -17,6 +17,7 @@ const ProposalVoteModal = React.createClass({
     dispatch: PropTypes.func.isRequired,
     showModal: PropTypes.bool.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
+    valid: PropTypes.bool.isRequired,
     creditsLeft: PropTypes.number,
     user: PropTypes.object,
   },
@@ -57,6 +58,7 @@ const ProposalVoteModal = React.createClass({
       step,
       creditsLeft,
       isSubmitting,
+      valid,
       user,
     } = this.props;
     return (
@@ -88,12 +90,9 @@ const ProposalVoteModal = React.createClass({
           />
           <SubmitButton
             id="confirm-proposal-vote"
-            onSubmit={() => {
-              dispatch(startVoting());
-              dispatch(submit('proposalVote'));
-            }}
+            onSubmit={() => { dispatch(submit('proposalVote')); }}
             label="proposal.vote.confirm"
-            isSubmitting={isSubmitting}
+            isSubmitting={valid && isSubmitting}
             bsStyle={(!proposal.userHasVote || isSubmitting) ? 'success' : 'danger'}
             style={{ marginLeft: '10px' }}
             disabled={this.disableSubmitButton()}
@@ -114,6 +113,7 @@ const mapStateToProps = (state, props) => {
     user: state.default.user,
     showModal: !!(state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id),
     isSubmitting: !!state.proposal.isVoting,
+    valid: isValid('proposalVote')(state),
     step: steps.length === 1 ? steps[0] : null,
   };
 };

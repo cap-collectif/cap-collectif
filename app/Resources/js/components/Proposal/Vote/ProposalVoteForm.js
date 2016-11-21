@@ -1,27 +1,32 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-// import FlashMessages from '../../Utils/FlashMessages';
 import renderComponent from '../../Form/Field';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, Field } from 'redux-form';
 import { vote } from '../../../redux/modules/proposal';
 import { Alert } from 'react-bootstrap';
+import { isEmail } from '../../../services/Validator';
 
 const form = 'proposalVote';
-// const validate = (values, props) => {
-//   if (!user) {
-//     this.formValidationRules = {
-//       username: {
-//         min: { value: 2, message: 'proposal.vote.constraints.username' },
-//         notBlank: { message: 'proposal.vote.constraints.username' },
-//       },
-//       email: {
-//         notBlank: { message: 'proposal.vote.constraints.email' },
-//         isEmail: { message: 'proposal.vote.constraints.email' },
-//       },
-//     };
-//   }
-// };
+const validate = (values, { anonymous }) => {
+  const errors = {};
+  if (anonymous) {
+    if (!values.username) {
+      errors.username = 'proposal.vote.constraints.username';
+    } else if (values.username.length < 2) {
+      errors.username = 'proposal.vote.constraints.username';
+    }
+    if (!values.email) {
+      errors.email = 'proposal.vote.constraints.email';
+    } else if (!isEmail(values.email)) {
+      errors.email = 'proposal.vote.constraints.email';
+    }
+  }
+  // if (Object.keys(errors).length >= 1) {
+  //   dispatch(stopVoting());
+  // }
+  return errors;
+};
 
 const ProposalVoteForm = React.createClass({
   propTypes: {
@@ -100,11 +105,12 @@ const ProposalVoteForm = React.createClass({
 
 const mapStateToProps = state => ({
   comment: formValueSelector(form)(state, 'comment') || '',
-  isPrivate: formValueSelector(form)(state, 'private'),
+  isPrivate: formValueSelector(form)(state, 'private') || false,
   anonymous: state.default.user === null,
 });
 
 export default connect(mapStateToProps)(reduxForm({
   form,
+  validate,
   onSubmit: (values, dispatch, { proposal, step }) => (vote(dispatch, step, proposal, values)),
 })(ProposalVoteForm));

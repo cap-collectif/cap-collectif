@@ -1,3 +1,9 @@
+
+export const isEmail = value => {
+  const re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,15}(?:\.[a-z]{2})?)$/i;
+  return value && re.test(value);
+};
+
 class Validator {
 
   constructor(value, rules) {
@@ -39,7 +45,7 @@ class Validator {
           }
           break;
         case 'isEmail':
-          if (!this.isEmail()) {
+          if (!isEmail(this.value)) {
             errors.push(message);
           }
           break;

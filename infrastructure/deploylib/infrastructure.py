@@ -20,7 +20,6 @@ def up(force_recreate='false'):
     ensure_vm_is_up()
     if env.build_at_up:
         env.compose('build')
-    env.compose('up -d --force-recreate chrome')
     env.compose('up -d' + ('', ' --force-recreate')[force_recreate == 'true'])
 
 

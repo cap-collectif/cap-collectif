@@ -153,6 +153,7 @@ export const vote = (dispatch, step, proposal, data) => {
       console.log('unknown step'); // eslint-disable-line no-console
       return false;
   }
+  dispatch(startVoting());
   return Fetcher.postToJson(url, data)
     .then(newVote => {
       dispatch(voteSuccess(proposal.id, step.id, newVote, data.comment));
