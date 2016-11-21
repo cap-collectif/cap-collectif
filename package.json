@@ -27,11 +27,40 @@
   "jscsConfig": {
     "validateOrderInObjectKeys": "asc"
   },
+  "jest": {
+    "testPathDirs": [
+      "app/Resources/js"
+    ],
+    "testRegex": "\\-test.js",
+    "setupFiles": [
+      "jest-setup.js"
+    ],
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    },
+    "unmockedModulePathPatterns": [
+      "react",
+      "react-dom",
+      "react-addons-test-utils",
+      "fbjs",
+      "enzyme",
+      "cheerio",
+      "htmlparser2",
+      "underscore",
+      "lodash",
+      "domhandler",
+      "object.assign",
+      "define-properties",
+      "function-bind",
+      "object-keys"
+    ]
+  },
   "homepage": "https://github.com/jolicode/CapCollectif-SF2",
   "dependencies": {
     "autosize": "^3.0.15",
     "babel-brunch": "^6.0.6",
     "babel-core": "^6.14.0",
+    "babel-jest": "^17.0.2",
     "babel-loader": "^6.2.5",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-react-display-name": "^2.0.0",
@@ -57,6 +86,7 @@
     "flux": "^2.1.1",
     "imports-loader": "^0.6.5",
     "javascript-brunch": "^2.0.0",
+    "jest": "latest",
     "jquery": "^3.1.0",
     "jsdom": "^9.8.3",
     "json-brunch": "^1.5.4",
