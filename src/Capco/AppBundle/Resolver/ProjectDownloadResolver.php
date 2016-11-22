@@ -422,8 +422,6 @@ class ProjectDownloadResolver
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorEmail = $author ? $author['email'] : $vote['email'];
-        $annotation = $vote['annotation'] ?? $na;
-        $note = $vote['rating'] ?? '';
 
         $item = [
             'id' => $vote['id'],
@@ -450,8 +448,6 @@ class ProjectDownloadResolver
             'status' => $na,
             'estimation' => $na,
             'answer' => $na,
-            'annotation' => $annotation,
-            'note' => $note,
         ];
 
         if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
