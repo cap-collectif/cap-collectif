@@ -28,8 +28,10 @@ class ProjectsController extends FOSRestController
      */
     public function getProjectsAction(ParamFetcherInterface $paramFetcher)
     {
+        $shouldLimit = !$paramFetcher->get('limit') && $this->get('capco.toggle.manager')->isActive('projects_form');
+
         return $this->get('capco.project.search.resolver')
-            ->search(ProjectSearchParameters::createFromRequest($paramFetcher));
+            ->search(ProjectSearchParameters::createFromRequest($paramFetcher, $shouldLimit));
     }
 
     /**

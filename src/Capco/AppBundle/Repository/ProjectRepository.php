@@ -111,7 +111,7 @@ class ProjectRepository extends EntityRepository
      * @param null $term
      * @param null $type
      *
-     * @return \Capco\AppBundle\Entity\Project[]
+     * @return Paginator
      */
     public function getSearchResults(
         int $nbByPage = 9,
@@ -168,13 +168,7 @@ class ProjectRepository extends EntityRepository
                 ->setMaxResults($nbByPage);
         }
 
-        $results = new Paginator($query);
-        $projects = [];
-        foreach ($results as $project) {
-            $projects[] = $project;
-        }
-
-        return $projects;
+        return new Paginator($query);
     }
 
     /**

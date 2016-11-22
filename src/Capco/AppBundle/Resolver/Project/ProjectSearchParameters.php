@@ -81,10 +81,10 @@ class ProjectSearchParameters
         return $this->page;
     }
 
-    public static function createFromRequest(ParamFetcherInterface $request): self
+    public static function createFromRequest(ParamFetcherInterface $request, bool $limit = false): self
     {
         return new self(
-            $request->get('limit') ?? 0,
+            $request->get('limit') ?? $limit ? 8 : 0,
             $request->get('page') ?? 1,
             $request->get('term'),
             $request->get('type'),
