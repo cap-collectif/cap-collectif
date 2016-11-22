@@ -338,6 +338,15 @@ project:
   error:
     not_found: Projet introuvable.
     no_contribute: Impossible de contribuer sur ce projet.
+  types:
+    callForProject: Call for projects
+    consultation: Consultation
+    interpellation: Interpellation
+    participatoryBudgeting: Participatory budgeting
+    petition: Petition
+    publicInquiry: Public inquiry
+    questionnaire: Questionnaire
+    suggestionBox: Suggestion box
 
 step:
   status:

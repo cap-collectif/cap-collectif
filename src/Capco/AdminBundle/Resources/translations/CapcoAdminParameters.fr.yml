@@ -161,7 +161,7 @@ security:
 signin:
   cgu:
     link: Lien du document à accepter
-    name: Nom du document à accepter (Exemples : la charte, les conditions d'utilisation, etc.)
+    name: "Nom du document à accepter (Exemples : la charte, les conditions d'utilisation, etc.)"
   text:
     bottom: Mention en bas de page
     top: Message d'avertissement

@@ -206,6 +206,12 @@ class Project implements IndexableInterface
     private $opinionTerm = self::OPINION_TERM_OPINION;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProjectType", inversedBy="projects")
+     * @ORM\JoinColumn(name="project_type_id", referencedColumnName="id", nullable=true)
+     */
+    private $projectType;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -842,6 +848,21 @@ class Project implements IndexableInterface
         }
 
         return $steps;
+    }
+
+    /**
+     * @return null|ProjectType
+     */
+    public function getProjectType()
+    {
+        return $this->projectType;
+    }
+
+    public function setProjectType(ProjectType $projectType = null): self
+    {
+        $this->projectType = $projectType;
+
+        return $this;
     }
 
     // ************************** Lifecycle **************************************

@@ -95,6 +95,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__.'/Video.yml',
             __DIR__.'/Section.yml',
             __DIR__.'/HighlightedContent.yml',
+            __DIR__.'/ProjectType.yml',
         ];
     }
 }

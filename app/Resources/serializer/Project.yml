@@ -47,6 +47,10 @@ Capco\AppBundle\Entity\Project:
     themes:
       expose: true
       groups: [Projects]
+    projectType:
+      expose: true
+      groups: [Projects]
+      serialized_name: projectType
     video:
       expose: true
       groups: [Projects]

@@ -29,6 +29,7 @@ import IdeasListApp from '../js/startup/IdeasListApp';
 import IdeaCreateApp from '../js/startup/IdeaCreateApp';
 import ShareButtonDropdownApp from '../js/startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from '../js/startup/ProposalCreateFusionButtonApp';
+import ProjectListPageApp from '../js/startup/ProjectListPageApp';
 import appStore from '../js/stores/AppStore';
 
 const emptyFunction = () => {};
@@ -38,6 +39,7 @@ global.setInterval = global.setInterval || emptyFunction;
 
 ReactOnRails.registerStore({ appStore });
 ReactOnRails.register({
+  ProjectListPageApp,
   ProposalCreateFusionButtonApp,
   ProjectsListApp,
   ProposalStepPageApp,

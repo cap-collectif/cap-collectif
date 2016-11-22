@@ -592,6 +592,16 @@
         "spent": "Dépensé",
         "step": "\u00c9tape"
       }
+    },
+    "types": {
+      "callForProject": "Appel à projets",
+      "consultation": "Consultation",
+      "interpellation": "Interpellation",
+      "participatoryBudgeting": "Budget participatif",
+      "petition": "Pétition",
+      "publicInquiry": "Enquête publique",
+      "questionnaire": "Questionnaire",
+      "suggestionBox": "Boite à idées"
     }
   },
   "proposal": {

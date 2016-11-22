@@ -58,35 +58,35 @@ export const ProposalListFilters = React.createClass({
     } = this.props;
     const { displayedFilters, displayedOrders } = this.state;
     return (
-    <div>
-      <Row>
-        <Col xs={12} md={6}>
-          <Input
-            id="proposal-sorting"
-            type="select"
-            onChange={(e) => {
-              dispatch(changeOrder(e.target.value));
-              dispatch(loadProposals());
-            }}
-            value={order}
-          >
-            {
-              displayedOrders.map(choice =>
+      <div>
+        <Row>
+          <Col xs={12} md={6}>
+            <Input
+              id="proposal-sorting"
+              type="select"
+              onChange={(e) => {
+                dispatch(changeOrder(e.target.value));
+                dispatch(loadProposals());
+              }}
+              value={order}
+            >
+              {
+                displayedOrders.map(choice =>
                   <option key={choice} value={choice}>
                     {this.getIntlMessage(`global.filter_f_${choice}`)}
                   </option>
                 )
               })
-            }
-          </Input>
-        </Col>
-        <Col xs={12} md={6}>
-          <ProposalListSearch />
-        </Col>
-      </Row>
-      <Row>
-        {
-          displayedFilters.map((filterName, index) =>
+              }
+            </Input>
+          </Col>
+          <Col xs={12} md={6}>
+            <ProposalListSearch />
+          </Col>
+        </Row>
+        <Row>
+          {
+            displayedFilters.map((filterName, index) =>
               <Col xs={12} md={6} key={index}>
                 <Input
                   type="select"
@@ -101,19 +101,16 @@ export const ProposalListFilters = React.createClass({
                     {this.getIntlMessage(`global.select_${filterName}`)}
                   </option>
                   {
-                    this.props[filterName].map(choice =>
-                        <option key={choice.id} value={choice.id}>
-                          {choice.title || choice.name}
-                        </option>
-                      )
+                    this.props[filterName].map((choice) => {
+                      return <option key={choice.id} value={choice.id}>{choice.title || choice.name}</option>;
                     })
                   }
                 </Input>
               </Col>
-          )
-        }
-      </Row>
-    </div>
+            )
+          }
+        </Row>
+      </div>
     );
   },
 });

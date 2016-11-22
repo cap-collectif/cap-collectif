@@ -41,6 +41,7 @@ sonata_admin:
                     - capco_admin.admin.consultation_step_type
                     - capco_admin.admin.proposal_form
                     - capco_admin.admin.questionnaire
+                    - capco_admin.admin.project_type
             sonata.admin.group.user:
                 items:
                     - sonata.user.admin.user

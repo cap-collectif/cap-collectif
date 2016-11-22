@@ -3,15 +3,14 @@ Feature: Project
 
   Scenario: Can not sort or filter if feature projects_form is disabled
     Given I visited "projects page"
-    Then I should not see "project_search_sort"
-    Then I should not see "project_search_theme"
+    Then I should not see "project-theme"
 
   @javascript @elasticsearch
   Scenario: Project can be sorted by published date
     Given feature "projects_form" is enabled
     And I visited "projects page"
     And I wait 1 seconds
-    And I select "Date de publication" from "project_search_sort"
+    And I select "Les plus récents" from "project-sorting"
     And I wait 1 seconds
     Then "Projet vide" should be before "Croissance, innovation, disruption" for selector ".thumbnail--custom .project__preview__title a"
 
@@ -19,7 +18,7 @@ Feature: Project
   Scenario: Project can be sorted by contributions number
     Given feature "projects_form" is enabled
     And I visited "projects page"
-    And I select "Nombre de contributions" from "project_search_sort"
+    And I select "Les plus populaires" from "project-sorting"
     And I wait 1 seconds
     Then "Croissance, innovation, disruption" should be before "Projet vide" for selector ".thumbnail--custom .project__preview__title a"
 
@@ -30,11 +29,11 @@ Feature: Project
     And I visited "projects page"
     And I wait 1 seconds
     Then I should see 9 ".thumbnail--custom" elements
-    And I select "Transport" from "project_search_theme"
+    And I select "Transport" from "project-theme"
     And I wait 1 seconds
     Then I should see 7 ".thumbnail--custom" elements
-    And I should see "Stratégie technologique de l'Etat et services publics"
     And I should see "Projet vide"
+    And I should see "Dépot avec selection vote budget"
     And I should not see "Croissance, innovation, disruption"
 
   @javascript
@@ -42,23 +41,37 @@ Feature: Project
     Given feature "themes" is enabled
     And feature "projects_form" is enabled
     And I visited "projects page"
-    And I select "Transport" from "project_search_theme"
+    And I select "Transport" from "project-theme"
     And I wait 1 seconds
-    And I select "Nombre de contributions" from "project_search_sort"
+    And I select "Les plus populaires" from "project-sorting"
     And I wait 1 seconds
     Then I should see 7 ".thumbnail--custom" elements
-    And I should see "Stratégie technologique de l'Etat et services publics"
-    And I should see "Projet vide"
+    And I should see "Projet de loi Renseignement"
+    And I should see "Budget Participatif Rennes"
     And I should not see "Croissance, innovation, disruption"
     And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".thumbnail--custom .project__preview__title a"
+
+    @javascript
+    Scenario: Project can be filtered by type and sorted by contributions number at the same time
+      And feature "projects_form" is enabled
+      And I visited "projects page"
+      And I select "Consultation" from "project-type"
+      And I wait 1 seconds
+      And I select "Les plus populaires" from "project-sorting"
+      And I wait 1 seconds
+      Then I should see 3 ".thumbnail--custom" elements
+      And I should see "Projet de loi Renseignement"
+      And I should see "Stratégie technologique de l'Etat et services publics"
+      And I should not see "Croissance, innovation, disruption"
+      And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".thumbnail--custom .project__preview__title a"
 
   @javascript
   Scenario: Project can be filtered by title
     Given feature "projects_form" is enabled
     And I visited "projects page"
     When I fill in the following:
-      | project_search_term | innovation |
-    And I click the ".filter__search .btn" element
+      | project-search-input | innovation |
+    And I click the "#project-search-button" element
     And I wait 1 seconds
     Then I should see 1 ".thumbnail--custom" elements
     And I should see "Croissance, innovation, disruption"

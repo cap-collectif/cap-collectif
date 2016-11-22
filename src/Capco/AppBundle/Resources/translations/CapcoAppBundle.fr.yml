@@ -403,6 +403,15 @@ project:
     contributions_nb: Nombre de contributions
     published_at: Date de publication
   title: Projets participatifs
+  types:
+    callForProject: Appel à projets
+    consultation: Consultation
+    interpellation: Interpellation
+    participatoryBudgeting: Budget participatif
+    petition: Pétition
+    publicInquiry: Enquête publique
+    questionnaire: Questionnaire
+    suggestionBox: Boite à idées
 
 step:
   consultation:

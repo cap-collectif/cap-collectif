@@ -45,9 +45,12 @@ export const renderSelect = React.createClass({
     };
     return (
       <div className="form-group">
-        <label htmlFor={input.name} className={labelClassName || 'col-sm-2 control-label'} >
-          { label }
-        </label>
+        {
+          label &&
+          <label htmlFor={input.name} className={labelClassName || 'col-sm-2 control-label'} >
+            { label }
+          </label>
+        }
         <div className={inputClassName || 'col-sm-10'}>
           {
             typeof custom.loadOptions === 'function' ?

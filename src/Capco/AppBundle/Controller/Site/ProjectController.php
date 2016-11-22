@@ -4,8 +4,6 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Form\ProjectSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -308,82 +306,31 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects/{page}", name="app_project", requirements={"page" = "\d+"}, defaults={"page" = 1} )
-     * @Route("/projects/{theme}/{sort}/{page}", name="app_project_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
-     * @Route("/projects/{theme}/{sort}/{term}/{page}", name="app_project_search_term", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all"} )
+     * @Route("/projects", name="app_project")
      * @Template("CapcoAppBundle:Project:index.html.twig")
-     *
-     * @param $page
-     * @param $request
-     * @param $theme
-     * @param $sort
-     * @param $term
-     *
-     * @return array
      */
-    public function indexAction(Request $request, $page, $theme = null, $sort = null, $term = null)
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $currentUrl = $this->generateUrl('app_project');
-        $toggleManager = $this->get('capco.toggle.manager');
-        $themesActivated = $toggleManager->isActive('themes');
-        $formActivated = $toggleManager->isActive('projects_form');
+        $parameters = [];
+        $form = $this->createForm(new ProjectSearchType($this->get('capco.toggle.manager')));
+        $form->submit($request->query->all());
 
-        if ($formActivated) {
-            $form = $this->createForm(new ProjectSearchType($this->get('capco.toggle.manager')), null, [
-                'action' => $currentUrl,
-                'method' => 'POST',
-            ]);
-        }
+        if ($form->isValid()) {
+            $parameters = $form->getData();
+            $parameters['type'] = $parameters['type'] ? $parameters['type']->getSlug() : null;
 
-        if ($request->getMethod() == 'POST' && $formActivated) {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                // redirect to the results page (avoids reload alerts)
-                $data = $form->getData();
-
-                return $this->redirect($this->generateUrl('app_project_search_term', [
-                    'theme' => ($themesActivated && array_key_exists('theme', $data) && $data['theme']) ? $data['theme']->getSlug() : Theme::FILTER_ALL,
-                    'sort' => $data['sort'],
-                    'term' => $data['term'],
-                ]));
-            }
-        } else {
-            if ($formActivated) {
-                $form->setData([
-                    'theme' => $themesActivated ? $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme) : null,
-                    'sort' => $sort,
-                    'term' => $term,
-                ]);
+            if (isset($parameters['theme'])) {
+                $parameters['theme'] = $parameters['theme'] ? $parameters['theme']->getSlug() : null;
             }
         }
 
-        $serializer = $this->get('jms_serializer');
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue('projects.pagination');
-        $projectsRaw = $em->getRepository('CapcoAppBundle:Project')->getSearchResults($pagination, $page, $theme, $sort, $term);
-        $count = $em->getRepository('CapcoAppBundle:Project')->countPublished();
-        $props = $serializer->serialize([
-            'projects' => $projectsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
+        $parameters['projectTypes'] = $this->getDoctrine()->getRepository('CapcoAppBundle:ProjectType')
+            ->findAll();
 
-        //Avoid division by 0 in nbPage calculation
-        $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
-            $nbPage = ceil($count / $pagination);
-        }
-
-        $parameters = [
-            'props' => $props,
-            'count' => $count,
-            'page' => $page,
-            'nbPage' => $nbPage,
+        return [
+            'props' => $this->get('serializer')->serialize(['project' => $parameters], 'json',
+                SerializationContext::create()->setGroups(['ProjectType'])),
+            'params' => $parameters,
         ];
-
-        if ($formActivated) {
-            $parameters['form'] = $form->createView();
-        }
-
-        return $parameters;
     }
 }

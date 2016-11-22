@@ -30,6 +30,7 @@ import IdeaPageApp from './startup/IdeaPageApp';
 import IdeaCreateApp from './startup/IdeaCreateApp';
 import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
+import ProjectListPageApp from './startup/ProjectListPageApp';
 import appStore from '../js/stores/AppStore';
 
 window.__SERVER__ = false;
@@ -37,6 +38,7 @@ window.__SERVER__ = false;
 ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
+  ProjectListPageApp,
   ProjectsListApp,
   ProposalCreateFusionButtonApp,
   ProposalStepPageApp,

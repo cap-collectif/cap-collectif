@@ -115,7 +115,3 @@ services:
     class: Capco\AppBundle\DataFixtures\Processor\FixedIdsProcessor
     tags: [ { name: hautelook_alice.alice.processor } ]
     arguments: ["@doctrine.orm.entity_manager"]
-
-  capco.media.security.media_responses_strategy:
-    class:     Capco\MediaBundle\DownloadStrategy\MediaResponsesDownloadStrategy
-    arguments: ['@service_container', '@translator']

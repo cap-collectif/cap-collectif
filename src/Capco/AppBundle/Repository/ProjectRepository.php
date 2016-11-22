@@ -51,10 +51,11 @@ class ProjectRepository extends EntityRepository
      */
     public function getByUser($user)
     {
-        $qb = $this->getIsEnabledQueryBuilder('p')
-            ->addSelect('a', 'm')
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('a', 'm', 't')
             ->leftJoin('p.Author', 'a')
             ->leftJoin('a.Media', 'm')
+            ->leftJoin('p.projectType', 't')
             ->andWhere('p.Author = :user')
             ->setParameter('user', $user)
             ->orderBy('p.updatedAt', 'DESC')
@@ -108,11 +109,18 @@ class ProjectRepository extends EntityRepository
      * @param null $theme
      * @param null $sort
      * @param null $term
+     * @param null $type
      *
-     * @return Paginator
+     * @return \Capco\AppBundle\Entity\Project[]
      */
-    public function getSearchResults($nbByPage = 8, $page = 1, $theme = null, $sort = null, $term = null)
-    {
+    public function getSearchResults(
+        int $nbByPage = 9,
+        int $page = 1,
+        $theme = null,
+        $sort = null,
+        $term = null,
+        $type = null
+    ) {
         if ((int) $page < 1) {
             throw new \InvalidArgumentException(sprintf(
                 'The argument "page" cannot be lower than 1 (current value: "%s")',
@@ -126,6 +134,7 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 's')
             ->leftJoin('p.Cover', 'pov')
+            ->leftJoin('p.projectType', 'projectType')
             ->addOrderBy('p.publishedAt', 'DESC');
 
         if ($theme !== null && $theme !== Theme::FILTER_ALL) {
@@ -137,6 +146,12 @@ class ProjectRepository extends EntityRepository
         if ($term !== null) {
             $qb->andWhere('p.title LIKE :term')
                 ->setParameter('term', '%'.$term.'%')
+            ;
+        }
+
+        if ($type !== null) {
+            $qb->andWhere('projectType.slug = :type')
+                ->setParameter('type', $type)
             ;
         }
 
@@ -211,6 +226,7 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 's')
             ->leftJoin('p.Cover', 'pov')
+            ->leftJoin('p.projectType', 'type')
             ->addOrderBy('p.publishedAt', 'DESC');
 
         if ($limit) {

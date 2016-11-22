@@ -78,6 +78,7 @@ admin.label.pages.login: Connexion
 admin.label.pages.members: Liste des membres
 admin.label.pages.registration: Inscription
 admin.label.pages.themes: Thèmes
+admin.label.pages.types: Types de projet
 
 admin.label.settings.appearance: Apparence
 admin.label.settings.global: Général
@@ -102,6 +103,7 @@ admin:
       link: Si vous avez associé une page à l'élément de menu, le lien sera défini automatiquement.
       parent: Non applicable pour les éléments du menu de bas de page (footer).
     project:
+      type: Sélectionner un type
       closed_at: Si le projet ne dure qu'une journée, renseignez la même date que pour la date de début.
       steps: |
                 Ajoutez ici les étapes postérieures ou antérieures au le projet (synthèse finale, présentation préliminaire...). L'étape correspondant au le projet elle-même sera créée automatiquement en fonction des dates renseignées.
@@ -442,6 +444,9 @@ admin:
       video: Vidéo
       general: Général
       proposals: Propositions
+      type:
+        title: Type
+        color: Couleur
       proposals_table:
         id: Id
         title: Titre
@@ -928,5 +933,18 @@ filter:
   label_phone: Numéro de téléphone
 
 Project List: Liste des projets
+Project Type List: Types de projet
 Dashboard: Tableau de bord
 description.media_responses_download_strategy: MEDIA_RESPONSES
+
+project:
+  types:
+    callForProject: Appel à projets
+    consultation: Consultation
+    interpellation: Interpellation
+    participatoryBudgeting: Budget participatif
+    petition: Pétition
+    publicInquiry: Enquête publique
+    questionnaire: Questionnaire
+    suggestionBox: Boite à idées
+

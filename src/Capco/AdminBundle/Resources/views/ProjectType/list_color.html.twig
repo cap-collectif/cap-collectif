@@ -1,0 +1,13 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object.color is not null %}
+        <div>
+            <div style="background-color: {{ object.color }}; padding: 15px 0; float: left; width: 30%">
+            </div>
+            <strong style="text-align: center; float: left;width: 70%">{{ object.color }}</strong>
+        </div>
+    {% else %}
+        {{ 'admin.settings.color.undefined' | trans({}, 'SonataAdminBundle') }}
+    {% endif %}
+{% endblock %}

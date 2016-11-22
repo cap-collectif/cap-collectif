@@ -7,6 +7,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Capco\AppBundle\Repository\ThemeRepository;
@@ -27,36 +28,40 @@ class ProjectSearchType extends AbstractType
             ->add('term',
                 SearchType::class, [
                 'required' => false,
-                'label' => 'project.searchform.term',
-                'translation_domain' => 'CapcoAppBundle',
             ])
-            ->add('sort',
+            ->add('orderBy',
                 ChoiceType::class, [
-                'required' => false,
-                'choices' => Project::$sortOrderLabels,
-                'translation_domain' => 'CapcoAppBundle',
-                'label' => 'project.searchform.sort',
-                'empty_value' => false,
-                'attr' => ['onchange' => 'this.form.submit()'],
+                    'required' => false,
+                    'choices' => Project::$sortOrderLabels,
+                    'empty_value' => false,
             ])
         ;
+
+        $builder->add('type', EntityType::class, [
+            'required' => false,
+            'class' => 'Capco\AppBundle\Entity\ProjectType',
+            'choice_value' => 'slug',
+        ]);
 
         if ($this->toggleManager->isActive('themes')) {
             $builder->add('theme',
                 EntityType::class, [
                 'required' => false,
                 'class' => 'CapcoAppBundle:Theme',
-                'property' => 'title',
-                'label' => 'project.searchform.theme',
-                'translation_domain' => 'CapcoAppBundle',
+                'choice_value' => 'slug',
                 'query_builder' => function (ThemeRepository $tr) {
                     return $tr->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
                 'empty_value' => 'project.searchform.all_themes',
-                'attr' => ['onchange' => 'this.form.submit()'],
             ]);
+        }
+
+        $builder->add('page', IntegerType::class, ['required' => false]);
+
+        if ($this->toggleManager->isActive('project_form')) {
+            $builder->add('limit', IntegerType::class, ['required' => false]);
         }
     }
 
@@ -65,5 +70,10 @@ class ProjectSearchType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }

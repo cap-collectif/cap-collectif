@@ -200,13 +200,13 @@ class HomepageController extends Controller
     public function lastProjectsAction($max = 3, $offset = 0, $section = null, $alt = null)
     {
         $serializer = $this->get('jms_serializer');
-        $count = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:Project')->countPublished();
+        $count = $this->getDoctrine()->getRepository('CapcoAppBundle:Project')->countPublished();
         $props = $serializer->serialize([
             'projects' => $this
-                ->get('doctrine.orm.entity_manager')
+                ->getDoctrine()
                 ->getRepository('CapcoAppBundle:Project')
                 ->getLastPublished($max, $offset),
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes', 'ProjectType']));
 
         return [
             'max' => $max,

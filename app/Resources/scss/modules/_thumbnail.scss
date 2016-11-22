@@ -21,8 +21,18 @@
 
         img {
             width: 100%;
+            object-fit: cover;
             height: 100%;
         }
+    }
+
+    .project__preview__type {
+        overflow: hidden;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        color: #FFFFFF;
+        text-align: center;
     }
 
     .project__preview__themes {

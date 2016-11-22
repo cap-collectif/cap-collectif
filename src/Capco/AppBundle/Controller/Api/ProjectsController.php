@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Resolver\Project\ProjectSearchParameters;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -18,16 +18,18 @@ class ProjectsController extends FOSRestController
 {
     /**
      * @Get("/projects")
-     * @View(serializerGroups={"Projects", "Steps", "UserVotes"})
+     * @QueryParam(name="limit", requirements="\d+", nullable=true)
+     * @QueryParam(name="page", requirements="\d+", nullable=true)
+     * @QueryParam(name="theme", requirements="[a-z0-9]+(?:-[a-z0-9]+)*", default="all")
+     * @QueryParam(name="orderBy", requirements="(date|popularity)", default="date")
+     * @QueryParam(name="type", requirements="[a-z0-9]+(?:-[a-z0-9]+)*", nullable=true)
+     * @QueryParam(name="term", nullable=true)
+     * @View(serializerGroups={"Projects", "Steps", "UserVotes", "ThemeDetails", "ProjectType"})
      */
-    public function getProjectsAction()
+    public function getProjectsAction(ParamFetcherInterface $paramFetcher)
     {
-        $projects = $this
-            ->get('capco.project.repository')
-            ->findBy(['isEnabled' => true])
-        ;
-
-        return $projects;
+        return $this->get('capco.project.search.resolver')
+            ->search(ProjectSearchParameters::createFromRequest($paramFetcher));
     }
 
     /**

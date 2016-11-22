@@ -11,12 +11,13 @@ const ProjectsList = React.createClass({
 
   render() {
     const { projects } = this.props;
+
     if (projects.length > 0) {
       return (
         <Row>
           {
-            projects.map((project, index) => {
-              return <ProjectPreview key={index} project={project} />;
+            projects.map((projectDetail, index) => {
+              return <ProjectPreview key={index} project={projectDetail} />;
             })
           }
         </Row>

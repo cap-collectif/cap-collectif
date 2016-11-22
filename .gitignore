@@ -43,6 +43,7 @@ app/test.db-journal
 /report/
 mails.txt
 dump.txt
+/jest
 
 
 # OS X

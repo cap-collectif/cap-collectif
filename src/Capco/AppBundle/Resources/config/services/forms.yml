@@ -104,3 +104,9 @@ services:
     arguments: ["@security.token_storage"]
     tags:
       - { name: form.type }
+
+  capco.form.project_search:
+    class: Capco\AppBundle\Form\ProjectSearchType
+    arguments: ["@capco.toggle.manager"]
+    tags:
+      - { name: form.type }

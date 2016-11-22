@@ -140,6 +140,12 @@ class ProjectAdmin extends Admin
             ->add('title', null, [
                 'label' => 'admin.fields.project.title',
             ])
+            ->add('projectType', 'sonata_type_model', [
+                'label' => 'admin.fields.project.type.title',
+                'translation_domain' => 'SonataAdminBundle',
+                'required' => false,
+                'attr' => ['placeholder' => 'admin.help.project.type'],
+            ])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.project.author',
                 'property' => 'username',
