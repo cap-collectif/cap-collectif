@@ -139,7 +139,8 @@ Feature: Projects
     When I send a POST request to "/api/projects"  with json:
     """
     {
-        "title": "My new project"
+        "title": "My new project",
+        "author": 1
     }
     """
     Then the JSON response status code should be 201

@@ -142,7 +142,7 @@ Feature: Users
       Then the JSON response status code should be 201
 
     @database
-    Scenario: Admin API client wants to register an other admin
+    Scenario: Admin API client can register an other admin
     Given feature "registration" is enabled
     And I am logged in to api as admin
     When I send a POST request to "/api/users" with json:
@@ -153,7 +153,13 @@ Feature: Users
       "roles": ["USER_ADMIN"]
     }
     """
-    Then the JSON response status code should be 201
+    Then the JSON response status code should be 200
+    Then the JSON response should match:
+    """
+    {
+      "id": @integer@
+    }
+    """
     # And "admin2" password should have been generated
     # And 1 mail should be sent
     # And I open mail with subject "Cap-Collectif — "
