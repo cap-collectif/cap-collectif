@@ -29,10 +29,12 @@ class ProjectController extends Controller
     {
         $props = $this->get('jms_serializer')->serialize([
             'projects' => $this
-                ->get('doctrine.orm.entity_manager')
+                ->getDoctrine()
                 ->getRepository('CapcoAppBundle:Project')
                 ->getLastPublished($max, $offset),
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'StepTypes', 'ThemeDetails']));
+        ], 'json', SerializationContext::create()->setGroups([
+            'Projects', 'Steps', 'StepTypes', 'ThemeDetails', 'ProjectType'
+        ]));
 
         return [
             'props' => $props,
