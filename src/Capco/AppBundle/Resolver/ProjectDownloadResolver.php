@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Helper\EnvHelper;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -69,8 +70,6 @@ class ProjectDownloadResolver
         'trashed',
         'trashed_date',
         'trashed_reason',
-        'annotation',
-        'note',
     ];
 
     protected $em;
@@ -123,6 +122,22 @@ class ProjectDownloadResolver
             $this->headers = $this->consultationHeaders;
             $data = $this->getConsultationStepData($step);
         } elseif ($step instanceof CollectStep) {
+            if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
+                || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod'
+            ) {
+                array_push(
+                    $this->collectHeaders,
+                    'servicePilote',
+                    'domaniality',
+                    'compatibility',
+                    'environmentalImpact',
+                    'dimension',
+                    'functioningImpact',
+                    'evaluation',
+                    'delay',
+                    'proposedAnswer'
+                );
+            }
             $this->headers = $this->collectHeaders;
             $data = $this->getCollectStepData($step);
         } elseif ($step instanceof QuestionnaireStep) {
@@ -352,10 +367,8 @@ class ProjectDownloadResolver
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorEmail = $author ? $author['email'] : $na;
-        $annotation = $proposal['annotation'] ?? $na;
-        $note = $proposal['rating'] ?? '';
 
-        return $item = [
+        $item = [
             'id' => $proposal['id'],
             'title' => $proposal['title'],
             'content_type' => $this->translator->trans(
@@ -382,9 +395,23 @@ class ProjectDownloadResolver
             'status' => $proposal['status'] ? $proposal['status']['name'] : '',
             'estimation' => $proposal['estimation'] ? $proposal['estimation'].' €' : '',
             'answer' => $proposal['answer'] ? $this->getProposalAnswer($proposal['answer']) : '',
-            'annotation' => $annotation,
-            'note' => $note,
         ];
+
+        if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
+            || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod'
+        ) {
+            $item['servicePilote'] = $proposal['servicePilote'] ?? '';
+            $item['domaniality'] = $proposal['domaniality'] ?? '';
+            $item['compatibility'] = $proposal['compatibility'] ?? '';
+            $item['environmentalImpact'] = $proposal['environmentalImpact'] ?? '';
+            $item['dimension'] = $proposal['dimension'] ?? '';
+            $item['functioningImpact'] = $proposal['functioningImpact'] ?? '';
+            $item['evaluation'] = $proposal['evaluation'] ?? '';
+            $item['delay'] = $proposal['delay'] ?? '';
+            $item['proposedAnswer'] = $proposal['proposedAnswer'] ?? '';
+        }
+
+        return $item;
     }
 
     private function getProposalVoteItem(array $vote, array $proposal)
@@ -398,7 +425,7 @@ class ProjectDownloadResolver
         $annotation = $vote['annotation'] ?? $na;
         $note = $vote['rating'] ?? '';
 
-        return $item = [
+        $item = [
             'id' => $vote['id'],
             'title' => $proposal['title'],
             'content_type' => $this->translator->trans(
@@ -426,6 +453,22 @@ class ProjectDownloadResolver
             'annotation' => $annotation,
             'note' => $note,
         ];
+
+        if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
+            || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod'
+        ) {
+            $item['servicePilote'] = $proposal['servicePilote'] ?? '';
+            $item['domaniality'] = $proposal['domaniality'] ?? '';
+            $item['compatibility'] = $proposal['compatibility'] ?? '';
+            $item['environmentalImpact'] = $proposal['environmentalImpact'] ?? '';
+            $item['dimension'] = $proposal['dimension'] ?? '';
+            $item['functioningImpact'] = $proposal['functioningImpact'] ?? '';
+            $item['evaluation'] = $proposal['evaluation'] ?? '';
+            $item['delay'] = $proposal['delay'] ?? '';
+            $item['proposedAnswer'] = $proposal['proposedAnswer'] ?? '';
+        }
+
+        return $item;
     }
 
     private function getOpinionItem(array $opinion)

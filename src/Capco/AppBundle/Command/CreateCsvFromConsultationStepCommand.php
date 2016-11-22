@@ -20,7 +20,7 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
         $resolver = $this->getContainer()->get('capco.project.download.resolver');
 
         $steps = $this->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get('doctrine')
             ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
             ->findAll();
 

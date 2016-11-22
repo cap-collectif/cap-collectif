@@ -1131,8 +1131,15 @@ project_download:
     votes_mitigated: Votes mitigés
     votes_nok: Votes contre
     votes_ok: Votes pour
-    annotation: Annotation
-    note: Note
+    servicePilote: Service pilote / Référent du dossier
+    domaniality: Domanialité
+    compatibility: Compatibilité avec les politiques publiques menées
+    environmentalImpact: Le projet constitue-t-il une amélioration environnementale ?
+    dimension: Dimension sociale du projet
+    functioningImpact: Impact en matière de fonctionnement
+    evaluation: Évaluation financière de l'investissement proposé
+    delay: Délai de mise en œuvre du projet
+    proposedAnswer: Analyse synthétique de l'avis du service
   sheet:
     title: Contributions
   values:
