@@ -127,3 +127,21 @@ Feature: Projects
       "count": 3
     }
     """
+
+  @security
+  Scenario: Anonymous API client wants to create a project
+    When I send a POST request to "/api/projects"
+    Then the JSON response status code should be 404
+
+  @security
+  Scenario: Admin API client can create a project
+    And I am logged in to api as admin
+    When I send a POST request to "/api/projects"  with json:
+    """
+    {
+        "title": "My new project"
+    }
+    """
+    Then the JSON response status code should be 201
+    Then the created project should have admin as author
+    Then the created project should be published
