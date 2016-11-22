@@ -10,9 +10,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Capco\AppBundle\Form\ProjectType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProjectsController extends FOSRestController
 {
@@ -32,6 +36,25 @@ class ProjectsController extends FOSRestController
 
         return $this->get('capco.project.search.resolver')
             ->search(ProjectSearchParameters::createFromRequest($paramFetcher, $shouldLimit));
+    }
+
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Post("/projects")
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function postProjectAction(Request $request)
+    {
+        $project = new Project();
+        $form = $this->createForm(new ProjectType(), $project);
+        $form->submit($request->request->all(), false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $this->get('doctrine.orm.entity_manager')->persist($project);
+        $this->get('doctrine.orm.entity_manager')->flush();
     }
 
     /**

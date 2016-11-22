@@ -141,7 +141,7 @@ Feature: Users
       """
       Then the JSON response status code should be 201
 
-    @database
+    @database @dev
     Scenario: Admin API client can register an other admin
     Given feature "registration" is enabled
     And I am logged in to api as admin
@@ -153,11 +153,12 @@ Feature: Users
       "roles": ["USER_ADMIN"]
     }
     """
-    Then the JSON response status code should be 200
+    Then the JSON response status code should be 201
     Then the JSON response should match:
     """
     {
-      "id": @integer@
+      "id": @integer@,
+      "_links": @...@
     }
     """
     # And "admin2" password should have been generated

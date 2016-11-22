@@ -1,6 +1,10 @@
 Capco\UserBundle\Entity\User:
     exclusion_policy: ALL
     properties:
+      id:
+        expose: true
+        type: integer
+        groups: [UserId]
       slug:
         expose: true
         type: string

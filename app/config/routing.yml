@@ -18,6 +18,11 @@ capco_api_ideas:
   type: annotation
   prefix: /api
 
+capco_api_projects:
+  resource: "@CapcoAppBundle/Controller/Api/ProjectsController.php"
+  type: annotation
+  prefix: /api
+
 capco_api_comments:
   resource: "@CapcoAppBundle/Controller/Api/CommentsController.php"
   type: annotation

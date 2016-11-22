@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiProfileFormType;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
+use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -72,13 +73,19 @@ class UsersController extends FOSRestController
      * )
      *
      * @Post("/users", defaults={"_feature_flags" = "registration"})
-     * @View(statusCode=201, serializerGroups={})
+     * @View(statusCode=201, serializerGroups={"UserId"})
      */
     public function postUserAction(Request $request)
     {
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
-        $form = $this->createForm(ApiRegistrationFormType::class, $user);
+
+        $formClass = ApiRegistrationFormType::class;
+        if ($this->getUser() && $this->getUser()->isAdmin()) {
+            $user->setPlainPassword('totototototo');
+            $formClass = ApiAdminRegistrationFormType::class;
+        }
+        $form = $this->createForm($formClass, $user);
 
         $form->submit($request->request->all(), false);
 
@@ -97,7 +104,7 @@ class UsersController extends FOSRestController
 
         $userManager->updateUser($user);
 
-        return ['user' => $user];
+        return $user;
     }
 
     /**
