@@ -12,7 +12,7 @@ Feature: Project
     And I wait 1 seconds
     And I select "Les plus récents" from "project-sorting"
     And I wait 1 seconds
-    Then "Projet vide" should be before "Croissance, innovation, disruption" for selector ".thumbnail--custom .project__preview__title a"
+    Then "Projet vide" should be before "Transformation numérique des relations" for selector ".thumbnail--custom .project__preview__title a"
 
   @javascript @elasticsearch
   Scenario: Project can be sorted by contributions number
@@ -20,7 +20,7 @@ Feature: Project
     And I visited "projects page"
     And I select "Les plus populaires" from "project-sorting"
     And I wait 1 seconds
-    Then "Croissance, innovation, disruption" should be before "Projet vide" for selector ".thumbnail--custom .project__preview__title a"
+    Then "Croissance, innovation, disruption" should be before "Projet de loi Renseignement" for selector ".thumbnail--custom .project__preview__title a"
 
   @javascript
   Scenario: Project can be filtered by theme
