@@ -122,8 +122,9 @@ class ProjectDownloadResolver
             $this->headers = $this->consultationHeaders;
             $data = $this->getConsultationStepData($step);
         } elseif ($step instanceof CollectStep) {
-            if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
-                || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod'
+            if (!in_array('servicePilote', $this->collectHeaders)
+                && (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
+                    || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod')
             ) {
                 array_push(
                     $this->collectHeaders,
@@ -400,15 +401,15 @@ class ProjectDownloadResolver
         if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
             || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod'
         ) {
-            $item['servicePilote'] = $proposal['servicePilote'] ?? '';
-            $item['domaniality'] = $proposal['domaniality'] ?? '';
-            $item['compatibility'] = $proposal['compatibility'] ?? '';
-            $item['environmentalImpact'] = $proposal['environmentalImpact'] ?? '';
-            $item['dimension'] = $proposal['dimension'] ?? '';
-            $item['functioningImpact'] = $proposal['functioningImpact'] ?? '';
-            $item['evaluation'] = $proposal['evaluation'] ?? '';
-            $item['delay'] = $proposal['delay'] ?? '';
-            $item['proposedAnswer'] = $proposal['proposedAnswer'] ?? '';
+            $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
+            $item['domaniality'] = $proposal['domaniality'] ? $this->formatText(html_entity_decode($proposal['domaniality'])) : '';
+            $item['compatibility'] = $proposal['compatibility'] ? $this->formatText(html_entity_decode($proposal['compatibility'])) : '';
+            $item['environmentalImpact'] = $proposal['environmentalImpact'] ? $this->formatText(html_entity_decode($proposal['environmentalImpact'])) : '';
+            $item['dimension'] = $proposal['dimension'] ? $this->formatText(html_entity_decode($proposal['dimension'])) : '';
+            $item['functioningImpact'] = $proposal['functioningImpact'] ? $this->formatText(html_entity_decode($proposal['functioningImpact'])) : '';
+            $item['evaluation'] = $proposal['evaluation'] ? $this->formatText(html_entity_decode($proposal['evaluation'])) : '';
+            $item['delay'] = $proposal['delay'] ? $this->formatText(html_entity_decode($proposal['delay'])) : '';
+            $item['proposedAnswer'] = $proposal['proposedAnswer'] ? $this->formatText(html_entity_decode($proposal['proposedAnswer'])) : '';
         }
 
         return $item;
@@ -453,15 +454,15 @@ class ProjectDownloadResolver
         if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
             || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod'
         ) {
-            $item['servicePilote'] = $proposal['servicePilote'] ?? '';
-            $item['domaniality'] = $proposal['domaniality'] ?? '';
-            $item['compatibility'] = $proposal['compatibility'] ?? '';
-            $item['environmentalImpact'] = $proposal['environmentalImpact'] ?? '';
-            $item['dimension'] = $proposal['dimension'] ?? '';
-            $item['functioningImpact'] = $proposal['functioningImpact'] ?? '';
-            $item['evaluation'] = $proposal['evaluation'] ?? '';
-            $item['delay'] = $proposal['delay'] ?? '';
-            $item['proposedAnswer'] = $proposal['proposedAnswer'] ?? '';
+            $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
+            $item['domaniality'] = $proposal['domaniality'] ? $this->formatText(html_entity_decode($proposal['domaniality'])) : '';
+            $item['compatibility'] = $proposal['compatibility'] ? $this->formatText(html_entity_decode($proposal['compatibility'])) : '';
+            $item['environmentalImpact'] = $proposal['environmentalImpact'] ? $this->formatText(html_entity_decode($proposal['environmentalImpact'])) : '';
+            $item['dimension'] = $proposal['dimension'] ? $this->formatText(html_entity_decode($proposal['dimension'])) : '';
+            $item['functioningImpact'] = $proposal['functioningImpact'] ? $this->formatText(html_entity_decode($proposal['functioningImpact'])) : '';
+            $item['evaluation'] = $proposal['evaluation'] ? $this->formatText(html_entity_decode($proposal['evaluation'])) : '';
+            $item['delay'] = $proposal['delay'] ? $this->formatText(html_entity_decode($proposal['delay'])) : '';
+            $item['proposedAnswer'] = $proposal['proposedAnswer'] ? $this->formatText(html_entity_decode($proposal['proposedAnswer'])) : '';
         }
 
         return $item;
