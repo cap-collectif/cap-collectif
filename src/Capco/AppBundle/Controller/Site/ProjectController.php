@@ -33,7 +33,7 @@ class ProjectController extends Controller
                 ->getRepository('CapcoAppBundle:Project')
                 ->getLastPublished($max, $offset),
         ], 'json', SerializationContext::create()->setGroups([
-            'Projects', 'Steps', 'StepTypes', 'ThemeDetails', 'ProjectType'
+            'Projects', 'Steps', 'StepTypes', 'ThemeDetails', 'ProjectType',
         ]));
 
         return [
