@@ -154,20 +154,6 @@ class ProposalAdmin extends Admin
 
         // Sélection
         $projectId = $this->getPersistentParameter('projectId');
-        if ($projectId) {
-            $formMapper
-                ->with('admin.fields.proposal.group_selection')
-                ->add('selections', 'sonata_type_collection', [
-                    'label' => 'admin.fields.proposal.selection_steps',
-                    'by_reference' => false,
-                ], [
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'link_parameters' => ['projectId' => $projectId],
-                ])
-                ->end()
-            ;
-        }
 
         if ($this->getSubject()->canHaveProgessSteps()) {
             $formMapper->with('admin.fields.project.progress_steps')
