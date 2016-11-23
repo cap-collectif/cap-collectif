@@ -12,7 +12,7 @@ Feature: Project
     And I wait 1 seconds
     And I select "Les plus récents" from "project-sorting"
     And I wait 1 seconds
-    Then "Projet vide" should be before "Transformation numérique des relations" for selector ".thumbnail--custom .project__preview__title a"
+    Then "Projet vide" should be before "Dépot avec selection vote budget" for selector ".thumbnail--custom .project__preview__title a"
 
   @javascript @elasticsearch
   Scenario: Project can be sorted by contributions number
@@ -28,7 +28,7 @@ Feature: Project
     And feature "projects_form" is enabled
     And I visited "projects page"
     And I wait 1 seconds
-    Then I should see 9 ".thumbnail--custom" elements
+    Then I should see 8 ".thumbnail--custom" elements
     And I select "Transport" from "project-theme"
     And I wait 1 seconds
     Then I should see 7 ".thumbnail--custom" elements

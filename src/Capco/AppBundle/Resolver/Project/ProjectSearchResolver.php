@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Resolver\Project;
 
 use Capco\AppBundle\Repository\ProjectRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use IteratorAggregate;
 
 class ProjectSearchResolver
 {

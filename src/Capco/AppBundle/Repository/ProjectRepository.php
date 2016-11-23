@@ -26,7 +26,7 @@ class ProjectRepository extends EntityRepository
      */
     public function getOne($slug)
     {
-        $qb = $this->getIsEnabledQueryBuilder('p')
+        $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('t', 'pas', 's', 'pov')
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :enabled')
             ->leftJoin('p.steps', 'pas')
@@ -77,7 +77,7 @@ class ProjectRepository extends EntityRepository
      */
     public function getOneBySlugWithStepsAndEventsAndPosts($slug)
     {
-        $qb = $this->getIsEnabledQueryBuilder('p')
+        $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('t', 'pas', 's', 'pov', 'pst', 'e')
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.steps', 'pas')
@@ -114,7 +114,7 @@ class ProjectRepository extends EntityRepository
      * @return Paginator
      */
     public function getSearchResults(
-        int $nbByPage = 9,
+        int $nbByPage = 8,
         int $page = 1,
         $theme = null,
         $sort = null,
