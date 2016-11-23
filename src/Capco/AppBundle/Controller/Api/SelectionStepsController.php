@@ -74,6 +74,24 @@ class SelectionStepsController extends FOSRestController
     }
 
     /**
+     * @Post("/selection_steps/{selection_step_id}/selections")
+     * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
+     * @Security("has_role('ROLE_ADMIN')")
+     * @View(statusCode=201, serializerGroups={})
+     */
+    public function selectProposalAction(Request $request, SelectionStep $selectionStep)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($request->request->get('proposal'));
+        $selection = new Selection();
+        $selection->setSelectionStep($selectionStep);
+        $selection->setProposal($proposal);
+        $em->persist($selection);
+        $em->flush();
+        $this->get('fos_elastica.index')->refresh();
+    }
+
+    /**
      * @Post("/selection_steps/{selection_step_id}/proposals/{proposal_id}/votes")
      * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})

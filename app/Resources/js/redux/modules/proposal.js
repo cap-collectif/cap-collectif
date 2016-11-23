@@ -44,6 +44,8 @@ const CLOSE_CREATE_FUSION_MODAL = 'proposal/CLOSE_CREATE_FUSION_MODAL';
 const OPEN_CREATE_FUSION_MODAL = 'proposal/OPEN_CREATE_FUSION_MODAL';
 const SUBMIT_FUSION_FORM = 'proposa/SUBMIT_FUSION_FORM';
 const CANCEL_SUBMIT_FUSION_FORM = 'proposa/CANCEL_SUBMIT_FUSION_FORM';
+const LOAD_SELECTIONS_SUCCEEDED = 'proposal/LOAD_SELECTIONS_SUCCEEDED';
+const LOAD_SELECTIONS_REQUEST = 'proposal/LOAD_SELECTIONS_REQUEST';
 
 const initialState = {
   currentProposalId: null,
@@ -70,6 +72,8 @@ const initialState = {
   currentPaginationPage: 1,
 };
 
+export const loadSelections = (proposalId) => ({ type: LOAD_SELECTIONS_REQUEST, proposalId });
+export const loadSelectionsSucess = (proposalId) => ({ type: LOAD_SELECTIONS_SUCCEEDED, proposalId });
 export const closeCreateFusionModal = () => ({ type: CLOSE_CREATE_FUSION_MODAL });
 export const openCreateFusionModal = () => ({ type: OPEN_CREATE_FUSION_MODAL });
 export const submitFusionForm = (proposalForm) => ({ type: SUBMIT_FUSION_FORM, proposalForm });
@@ -139,6 +143,10 @@ export const deleteProposal = (form, proposal, dispatch) => {
 
 export const startVoting = () => ({ type: VOTE_REQUESTED });
 export const stopVoting = () => ({ type: VOTE_FAILED });
+
+export const selectStep (dispatch, proposalId, stepId) => {
+  
+}
 
 export const vote = (dispatch, step, proposal, data) => {
   let url = '';
@@ -349,6 +357,14 @@ export function* fetchPosts(action) {
     yield put({ type: POSTS_FETCH_FAILED, error: e });
   }
 }
+export function* fetchSelections(action) {
+  try {
+    const selections = yield call(Fetcher.get, `/proposals/${action.proposalId}/selections`);
+    yield put({ type: LOAD_SELECTIONS_SUCCEEDED, selections, proposalId: action.proposalId });
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 export function* saga() {
   yield [
@@ -356,6 +372,7 @@ export function* saga() {
     takeEvery(VOTES_FETCH_REQUESTED, fetchVotesByStep),
     takeEvery(FETCH_REQUESTED, fetchProposals),
     takeEvery(SUBMIT_FUSION_FORM, submitFusionFormData),
+    takeEvery(LOAD_SELECTIONS_REQUEST, fetchSelections),
   ];
 }
 
@@ -475,6 +492,12 @@ export const reducer = (state = initialState, action) => {
       }, {});
       const proposalShowedId = action.proposals.map((proposal) => proposal.id);
       return { ...state, proposalsById, proposalShowedId, isLoading: false };
+    }
+    case LOAD_SELECTIONS_SUCCEEDED: {
+      const selections = action.selections;
+      const proposalsById = state.proposalsById;
+      proposalsById[action.proposalId] = { ...state.proposalsById[action.proposalId], selections };
+      return { ...state, proposalsById };
     }
     case POSTS_FETCH_SUCCEEDED: {
       const posts = action.posts;

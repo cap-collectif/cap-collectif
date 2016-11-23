@@ -209,3 +209,14 @@ Scenario: Anonymous API client wants to get a step
       "order": "random"
     }
     """
+
+    @elasticsearch
+    Scenario: Admin API client wants to get all proposals from a selection step
+      Given I am logged in to api as admin
+      When I send a POST request to "/api/selection_steps/6/selections" with json:
+      """
+      {
+        "proposal": 8
+      }
+      """
+      Then the JSON response status code should be 201

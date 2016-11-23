@@ -64,7 +64,7 @@ class ProjectsController extends FOSRestController
 
     /** @Get("/projects/{projectId}/steps")
      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
-     * @View(serializerGroups={"Steps"})
+     * @View(serializerGroups={"Steps", "Default"})
      */
     public function getProjectStepsAction(Project $project)
     {

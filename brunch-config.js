@@ -12,6 +12,7 @@ exports.config = {
     styles: {
       quill: ['dist/quill.base.css', 'dist/quill.snow.css'],
       'react-select': ['dist/react-select.css'],
+      'react-toggle': ['style.css'],
     },
   },
   paths: {
