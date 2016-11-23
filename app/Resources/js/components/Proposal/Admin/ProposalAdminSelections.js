@@ -132,18 +132,23 @@ export const ProposalAdminSelections = React.createClass({
   },
 });
 
-const wrapWithFetchedData = Component => React.createClass({
-  contextTypes: Component.contextTypes,
+const wrapWithFetchedData = Component => React.createClass({ // eslint-disable-line
+  propTypes: {
+    projectId: PropTypes.number.isRequired,
+    proposalId: PropTypes.number.isRequired,
+  },
   getInitialState() {
     return {};
   },
   componentDidMount() {
-    console.log(this.props);
     Fetcher
       .get(`/projects/${this.props.projectId}/steps`)
-      .then(res => {
-        console.log(res);
-        this.setState({ steps: res });
+      .then(steps => {
+        Fetcher.get(`/proposals/${this.props.proposalId}/selections`)
+          .then(selections => {
+            this.setState({ selections, steps });
+          }
+        );
       });
   },
   render() {

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Resolver\Project\ProjectSearchParameters;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -59,6 +60,17 @@ class ProjectsController extends FOSRestController
         $em->flush();
 
         return $project;
+    }
+
+    /** @Get("/projects/{projectId}/steps")
+     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
+     * @View(serializerGroups={"Steps"})
+     */
+    public function getProjectStepsAction(Project $project)
+    {
+        return $project->getSteps()->map(function ($step) {
+            return $step->getStep();
+        });
     }
 
     /**

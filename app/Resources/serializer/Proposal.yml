@@ -77,7 +77,7 @@ Capco\AppBundle\Entity\Proposal:
       serialized_name: progressSteps
     selections:
       expose: true
-      groups: [Proposals]
+      groups: [Proposals, ProposalSelections]
       serialized_name: selections
     likers:
       expose: true

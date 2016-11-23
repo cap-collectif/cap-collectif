@@ -159,3 +159,27 @@ Feature: Projects
     """
     # Then the created project should have admin as author
     # Then the created project should be published
+
+    @parallel-scenario
+    Scenario: API client wants to get all project steps
+        When I send a GET request to "/api/projects/1/steps"
+        Then the JSON response status code should be 200
+        And the JSON response should match:
+        """
+        [
+        {
+          "projectId": 1,
+          "position": 1,
+          "open": false,
+          "timeless": false,
+          "id": 13,
+          "title": "Présentation",
+          "enabled": true,
+          "startAt": @null@,
+          "endAt": @null@,
+          "body": @string@,
+          "status": "closed"
+        },
+        @...@
+      ]
+    """

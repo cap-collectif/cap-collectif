@@ -43,58 +43,42 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
 
-        // if ($user !== 'anon.' && $this->eventHasGroup($event, 'UserVotes')) {
-        //      $event->getVisitor()->addData(
-        //         'creditsLeft', $this->proposalStepVotesResolver->getCreditsLeftForUser($user, $step)
-        //     );
-        //     $event->getVisitor()->addData(
-        //         'userVotesCount', $this->proposalStepVotesResolver->getVotesCountForUserInSelectionStep($user, $step)
-        //     );
+        if (isset($this->getIncludedGroups($event)['Steps'])) {
+          $counters = [];
+          $counters['proposals'] = count($step->getProposals());
+          if ($step->isVotable()) {
+              $counters['votes'] = $step->getVotesCount();
+              $counters['voters'] = $step->getContributorsCount();
+          }
 
-        //     $userVotes = $this->serializer->serialize([
-        //         'data' => $this
-        //             ->proposalStepVotesResolver
-        //             ->getVotesForUserInSelectionStep($user, $step),
-        //     ], 'json', SerializationContext::create()->setGroups(['ProposalSelectionVotes', 'Proposals', 'Steps', 'UsersInfos']));
-        //     $event->getVisitor()->addData('userVotes', json_decode($userVotes, true)['data']);
-        // }
-
-        $counters = [];
-        $counters['proposals'] = count($step->getProposals());
-        if ($step->isVotable()) {
-            $counters['votes'] = $step->getVotesCount();
-            $counters['voters'] = $step->getContributorsCount();
-        }
-
-        $remainingTime = $step->getRemainingTime();
-        if ($remainingTime) {
-            if ($step->isClosed()) {
-                $counters['remainingDays'] = $remainingTime['days'];
-            } elseif ($step->isOpen()) {
-                if ($remainingTime['days'] > 0) {
-                    $counters['remainingDays'] = $remainingTime['days'];
-                } else {
-                    $counters['remainingHours'] = $remainingTime['hours'];
-                }
-            }
-        }
-
-        $event->getVisitor()->addData('counters', $counters);
-
-        if ($project) {
-            $event->getVisitor()->addData(
-                '_links',
-                [
-                    'show' => $this->router->generate(
-                        'app_project_show_selection',
-                        [
-                            'projectSlug' => $project->getSlug(),
-                            'stepSlug' => $step->getSlug(),
-                        ],
-                        true
-                    ),
-                ]
-            );
+          $remainingTime = $step->getRemainingTime();
+          if ($remainingTime) {
+              if ($step->isClosed()) {
+                  $counters['remainingDays'] = $remainingTime['days'];
+              } elseif ($step->isOpen()) {
+                  if ($remainingTime['days'] > 0) {
+                      $counters['remainingDays'] = $remainingTime['days'];
+                  } else {
+                      $counters['remainingHours'] = $remainingTime['hours'];
+                  }
+              }
+          }
+          $event->getVisitor()->addData('counters', $counters);
+          if ($project) {
+              $event->getVisitor()->addData(
+                  '_links',
+                  [
+                      'show' => $this->router->generate(
+                          'app_project_show_selection',
+                          [
+                              'projectSlug' => $project->getSlug(),
+                              'stepSlug' => $step->getSlug(),
+                          ],
+                          true
+                      ),
+                  ]
+              );
+          }
         }
     }
 }

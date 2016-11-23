@@ -872,3 +872,22 @@ Feature: Proposal Restful Api
     Given I am logged in to api as admin
     When I send a POST request to "/api/proposals/1/reports" with a valid report json
     Then the JSON response status code should be 201
+
+  # Selections
+
+  Scenario: Anonymous API client wants to get selections of a proposal
+    When I send a GET request to "/api/proposals/1/selections"
+    Then the JSON response should match:
+    """
+      [
+        {
+          "step": {
+            "id": 6
+          },
+          "status": {
+            "name": "Soumis au vote",
+            "id": 4
+          }
+        }
+      ]
+    """
