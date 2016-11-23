@@ -2,10 +2,10 @@
 
 {% block field %}
     {% if object.color is not null %}
-        <div>
-            <div style="background-color: {{ object.color }}; padding: 15px 0; float: left; width: 30%">
+        <div class="row">
+            <div class="col-xs-12 col-md-6" style="background-color: {{ object.color }}; padding: 15px 0;">
             </div>
-            <strong style="text-align: center; float: left;width: 70%">{{ object.color }}</strong>
+            <div class="col-xs-12 col-md-6" style="text-align: center;">{{ object.color }}</div>
         </div>
     {% else %}
         {{ 'admin.settings.color.undefined' | trans({}, 'SonataAdminBundle') }}

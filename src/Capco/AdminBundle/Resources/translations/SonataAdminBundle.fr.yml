@@ -848,7 +848,7 @@ capco:
     shield_mode: Protection du site par mot de passe
     user_type: Demander le type de profil
     members_list: Liste des membres
-    projects_form: Filtrer et trier les projets participatifs
+    projects_form: Pagination
     share_buttons: Boutons de partage
     idea_creation: Soumettre une idée
     project_trash: Corbeille des projets participatifs

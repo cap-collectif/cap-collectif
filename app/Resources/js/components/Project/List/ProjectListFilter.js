@@ -61,26 +61,28 @@ const ProjectListFilter = React.createClass({
       </FormControl>
     );
 
-    filters.push(
-      <FormControl
-        id="project-type"
-        componentClass="select"
-        type="select"
-        name="type"
-        value={type}
-        onChange={(e) => {
-          dispatch(changeType(e.target.value));
-          dispatch(fetchProjects());
-        }}
-      >
-        <option key="all" value="">Tous les types</option>
-        {
-          projectTypes.map((projectType) => {
-            return <option value={projectType.slug}>{this.getIntlMessage(projectType.title)}</option>;
-          })
-        }
-      </FormControl>
-    );
+    if (projectTypes.length > 0) {
+      filters.push(
+        <FormControl
+          id="project-type"
+          componentClass="select"
+          type="select"
+          name="type"
+          value={type}
+          onChange={(e) => {
+            dispatch(changeType(e.target.value));
+            dispatch(fetchProjects());
+          }}
+        >
+          <option key="all" value="">Tous les types</option>
+          {
+            projectTypes.map((projectType) => {
+              return <option value={projectType.slug}>{this.getIntlMessage(projectType.title)}</option>;
+            })
+          }
+        </FormControl>
+      );
+    }
 
     if (features.themes) {
       filters.push(
@@ -122,7 +124,7 @@ const ProjectListFilter = React.createClass({
       </form>
     );
 
-    const columnWidth = filters.length % 2 === 0 ? filters.length - 1 : filters.length;
+    const columnWidth = 12 / filters.length;
 
     return (
       <Row>

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 class ProjectTypeRepository extends EntityRepository
 {
@@ -10,6 +11,10 @@ class ProjectTypeRepository extends EntityRepository
     {
         return $this->createQueryBuilder('p')
             ->select('p')
+            ->leftJoin('p.projects', 'projects', Join::WITH, 'projects.projectType IS NOT NULL')
+            ->where('projects.isEnabled = true')
+            ->groupBy('projects.id')
+            ->distinct('p.id')
             ->getQuery()
             ->getArrayResult();
     }
