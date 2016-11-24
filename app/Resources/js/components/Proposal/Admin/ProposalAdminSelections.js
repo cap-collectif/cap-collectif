@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { ListGroup, ListGroupItem, Well } from 'react-bootstrap';
 import Toggle from 'react-toggle';
 import Loader from '../../Utils/Loader';
-import { loadSelections, selectStep, unSelectStep } from '../../../redux/modules/proposal';
+import { loadSelections, selectStep, unSelectStep, updateStepStatus } from '../../../redux/modules/proposal';
 import { loadSteps } from '../../../redux/modules/project';
 import Input from '../../Form/Input';
+import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
 
 export const ProposalAdminSelections = React.createClass({
   propTypes: {
@@ -30,13 +31,15 @@ export const ProposalAdminSelections = React.createClass({
       <div className="box box-primary">
         <div className="box-header">
           <h4 className="box-title">Avancement</h4>
-          <a href="http://aide.cap-collectif.com/article/115-section-avancement">Lien d'aide</a>
-          <h5>Etapes</h5>
+          <a className="pull-right link" target="_blank" rel="noopener noreferrer" href="http://aide.cap-collectif.com/article/115-section-avancement">
+            <i className="fa fa-info-circle" /> {' '} Aide
+          </a>
+          <h5 style={{ marginBottom: 0, fontWeight: 'bold' }}>Etapes</h5>
         </div>
         <Loader show={steps.length === 0}>
-          <ListGroup style={{ margin: 10 }}>
+          <ListGroup style={{ margin: 10, paddingBottom: 10 }}>
             { steps.map(s =>
-              <ListGroupItem className="row" style={{ marginLeft: 0, marginRight: 0 }}>
+              <ListGroupItem className="row" style={{ padding: '10px 0', marginLeft: 0, marginRight: 0 }}>
                 <div className="col col-xs-10">
                   <strong>{s.title}</strong>
                   <div>
@@ -63,37 +66,39 @@ export const ProposalAdminSelections = React.createClass({
                   </div>
                 </div>
                 {
-                  s.isSelected && s.step_type === 'selection' && s.statuses &&
+                  s.isSelected &&
                     <div className="col-xs-12">
-                      <Well>
-                        <div className="col col-xs-2">Statut</div>
-                        <div className="col col-xs-4">
+                      <Well className="row" style={{ margin: '10px 0' }}>
+                        <div style={{ lineHeight: '34px' }} className="col col-md-1 col-xs-12"><strong>Statut</strong></div>
+                        <div className="col col-md-5 col-xs-12">
                           <Input
                             type="select"
-                            style={{ marginTop: -5 }}
+                            style={{ marginBottom: 0 }}
+                            value={s.status ? s.status.value : -1}
+                            onChange={e => { updateStepStatus(dispatch, proposalId, s, e.target.value); }}
                           >
-                            <option value={-1}>Aucun statut</option>
+                            <option value={-1} disabled={s.statuses.length === 0}>Aucun statut</option>
                             {
-                              s.statuses.map(status =>
-                                <option key={status.id} value={status.id}>
-                                  {status.name}
-                                </option>
-                              )
+                              s.statuses.map(st => <option key={st.id} value={st.id}>{st.name}</option>)
                             }
                           </Input>
                         </div>
-                        <div className="col col-xs-6">L'auteur sera notifié du changement de statut par email</div>
-                        <br />
+                        {
+                          s.step_type === 'collect' &&
+                            <div style={{ lineHeight: '34px', color: bootstrapToHex('info') }} className="col col-md-6">
+                              <i className="fa fa-info-circle" />
+                              { ' ' }
+                              L'auteur sera notifié du changement de statut par email
+                            </div>
+                        }
                       </Well>
                     </div>
                 }
-
-                    </ListGroupItem>
+              </ListGroupItem>
             )
             }
           </ListGroup>
         </Loader>
-        <br />
       </div>
     );
   },
@@ -102,10 +107,15 @@ export const ProposalAdminSelections = React.createClass({
 export default connect((state, props) => {
   const steps = state.project.projectsById[props.projectId].steps;
   const proposal = state.proposal.proposalsById[props.proposalId];
-  console.log(proposal);
   return {
     steps: steps.filter(s => s.step_type === 'collect' || s.step_type === 'selection').map(s => {
-      s.isSelected = s.step_type === 'collect' || proposal.selections.filter(selection => selection.step.id === s.id).length > 0;
+      const selectionAsArray = proposal.selections.filter(sel => sel.step.id === s.id);
+      s.isSelected = s.step_type === 'collect' || selectionAsArray.length > 0;
+      if (s.step_type === 'collect') {
+        s.status = proposal.status;
+      } else {
+        s.status = s.isSelected ? selectionAsArray[0].status : null;
+      }
       return s;
     }),
   };

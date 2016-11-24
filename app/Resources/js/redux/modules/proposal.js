@@ -48,6 +48,7 @@ const LOAD_SELECTIONS_SUCCEEDED = 'proposal/LOAD_SELECTIONS_SUCCEEDED';
 const LOAD_SELECTIONS_REQUEST = 'proposal/LOAD_SELECTIONS_REQUEST';
 const UNSELECT_SUCCEED = 'proposal/UNSELECT_SUCCEED';
 const SELECT_SUCCEED = 'proposal/SELECT_SUCCEED';
+const UPDATE_SELECTION_STATUS_SUCCEED = 'proposal/UPDATE_SELECTION_STATUS_SUCCEED';
 
 const initialState = {
   currentProposalId: null,
@@ -148,6 +149,33 @@ export const stopVoting = () => ({ type: VOTE_FAILED });
 
 const unSelectStepSucceed = (stepId, proposalId) => ({ type: UNSELECT_SUCCEED, stepId, proposalId });
 const selectStepSucceed = (stepId, proposalId) => ({ type: SELECT_SUCCEED, stepId, proposalId });
+const updateSelectionStatusSucceed = (stepId, proposalId, status) => ({ type: UPDATE_SELECTION_STATUS_SUCCEED, stepId, proposalId, status });
+
+export const updateStepStatus = (dispatch, proposalId, step, value) => {
+  if (step.step_type === 'selection') {
+    updateSelectionStatus(dispatch, proposalId, step.id, value);
+  } else {
+    updateProposalStatus(dispatch, proposalId, value);
+  }
+};
+
+export const updateProposalStatus = (dispatch, proposalFormId, proposalId, value) => {
+  Fetcher
+    .put(`/proposal_forms/${proposalFormId}/proposals/${proposalId}`, { status: value })
+    .then(json)
+    .then(status => {
+      dispatch(updateProposalStatusSucceed(proposalId, status));
+    });
+};
+
+export const updateSelectionStatus = (dispatch, proposalId, stepId, value) => {
+  Fetcher
+    .put(`/selection_steps/${stepId}/selections/${proposalId}`, { status: value })
+    .then(json)
+    .then(status => {
+      dispatch(updateSelectionStatusSucceed(stepId, proposalId, status));
+    });
+};
 
 export const unSelectStep = (dispatch, proposalId, stepId) => {
   Fetcher
@@ -459,6 +487,18 @@ export const reducer = (state = initialState, action) => {
       proposalsById[action.proposalId] = { ...proposal, selections };
       return { ...state, proposalsById };
     }
+    case UPDATE_SELECTION_STATUS_SUCCEED: {
+      const proposalsById = state.proposalsById;
+      const proposal = proposalsById[action.proposalId];
+      const selections = proposal.selections.map(s => {
+        if (s.step.id === action.stepId) {
+          s.status = action.status;
+        }
+        return s;
+      });
+      proposalsById[action.proposalId] = { ...proposal, selections };
+      return { ...state, proposalsById };
+    }
     case DELETE_VOTE_REQUESTED:
       return { ...state, currentDeletingVote: action.proposalId };
     case VOTE_SUCCEEDED: {
@@ -525,9 +565,9 @@ export const reducer = (state = initialState, action) => {
       return { ...state, proposalsById, proposalShowedId, isLoading: false };
     }
     case LOAD_SELECTIONS_SUCCEEDED: {
-      const selections = action.selections;
       const proposalsById = state.proposalsById;
-      proposalsById[action.proposalId] = { ...state.proposalsById[action.proposalId], selections };
+      proposalsById[action.proposalId] = {
+        ...state.proposalsById[action.proposalId], selections: action.selections };
       return { ...state, proposalsById };
     }
     case POSTS_FETCH_SUCCEEDED: {

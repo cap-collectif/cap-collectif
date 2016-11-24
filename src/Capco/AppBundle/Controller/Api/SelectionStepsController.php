@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
@@ -109,6 +110,36 @@ class SelectionStepsController extends FOSRestController
 
         $em->remove($selection);
         $em->flush();
+    }
+
+    /**
+     * @Put("/selection_steps/{selectionStepId}/selections/{proposalId}")
+     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
+     * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
+     * @Security("has_role('ROLE_ADMIN')")
+     * @View(statusCode=200, serializerGroups={"Statuses"})
+     */
+    public function updateSelectionStatusAction(Request $request, SelectionStep $selectionStep, Proposal $proposal)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $selection = $em->getRepository('CapcoAppBundle:Selection')->findOneBy([
+          'proposal' => $proposal,
+          'selectionStep' => $selectionStep
+        ]);
+
+        $status = null;
+        if ($id = $request->request->get('status') > 0) {
+          $status = $em->getRepository('CapcoAppBundle:Status')->find($id);
+        }
+
+        if (!$selection) {
+          throw new Exception("Error Processing Request", 1);
+        }
+
+        $selection->setStatus($status);
+        $em->flush();
+
+        return $status;
     }
 
     /**

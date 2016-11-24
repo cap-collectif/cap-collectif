@@ -6,12 +6,8 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
- * Class Selection
- * Association between a proposal and a selection step.
- *
  * @ORM\Entity()
  * @ORM\Table(name="selection")
  * @ORM\HasLifecycleCallbacks
@@ -19,9 +15,13 @@ use Capco\AppBundle\Traits\IdTrait;
  */
 class Selection
 {
-    use IdTrait;
-
+    public function getId()
+    {
+       return ['selectionStep' => $this->selectionStep->getId(), 'proposal' => $this->proposal->getId()];
+    }
+    
     /**
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", inversedBy="selections", cascade={"persist"})
      * @ORM\JoinColumn(name="selection_step_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * @Assert\NotNull()
@@ -29,6 +29,7 @@ class Selection
     protected $selectionStep;
 
     /**
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selections", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * @Assert\NotNull()
@@ -46,7 +47,7 @@ class Selection
         return $this->selectionStep;
     }
 
-    public function setSelectionStep(SelectionStep $selectionStep = null)
+    public function setSelectionStep(SelectionStep $selectionStep = null): self
     {
         $this->selectionStep = $selectionStep;
 
@@ -58,7 +59,7 @@ class Selection
         return $this->proposal;
     }
 
-    public function setProposal(Proposal $proposal)
+    public function setProposal(Proposal $proposal): self
     {
         $this->proposal = $proposal;
 
