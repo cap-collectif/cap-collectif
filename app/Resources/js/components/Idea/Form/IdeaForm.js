@@ -118,17 +118,17 @@ export const IdeaForm = React.createClass({
       <form id="idea-form" ref="form">
         {idea
           ? <div className="alert alert-warning edit-confirm-alert">
-              <Input
-                  type="checkbox"
-                  ref="confirm"
-                  id="idea_confirm"
-                  checkedLink={this.linkState('form.confirm')}
-                  label={this.getIntlMessage('idea.confirm')}
-                  labelClassName=""
-                  groupClassName={this.getGroupStyle('confirm')}
-                  errors={this.renderFormErrors('confirm')}
-              />
-            </div>
+            <Input
+              type="checkbox"
+              ref="confirm"
+              id="idea_confirm"
+              checkedLink={this.linkState('form.confirm')}
+              label={this.getIntlMessage('idea.confirm')}
+              labelClassName=""
+              groupClassName={this.getGroupStyle('confirm')}
+              errors={this.renderFormErrors('confirm')}
+            />
+          </div>
           : null
         }
         <Input
@@ -151,7 +151,7 @@ export const IdeaForm = React.createClass({
               label={`${this.getIntlMessage('idea.form.theme')} *`}
               groupClassName={this.getGroupStyle('theme')}
               errors={this.renderFormErrors('theme')}
-            >
+              >
               <option value={-1} disabled>{this.getIntlMessage('idea.form.select_theme')}</option>
               {
                 themes.map((theme) => {

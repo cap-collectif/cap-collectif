@@ -24,7 +24,7 @@ exports.config = {
     ignored: [
       /[\\/]_/,
       'app/Resources/js-server/registration.js',
-      /\-test.js$/,
+      /-test.js$/,
     ],
   },
   files: {

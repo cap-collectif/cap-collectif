@@ -210,8 +210,8 @@ Scenario: Anonymous API client wants to get a step
     }
     """
 
-    @elasticsearch
-    Scenario: Admin API client wants to get all proposals from a selection step
+    @database
+    Scenario: Admin API client wants add, then delete a selection
       Given I am logged in to api as admin
       When I send a POST request to "/api/selection_steps/6/selections" with json:
       """
@@ -220,3 +220,5 @@ Scenario: Anonymous API client wants to get a step
       }
       """
       Then the JSON response status code should be 201
+      When I send a DELETE request to "/api/selection_steps/6/selections/8"
+      Then the JSON response status code should be 204

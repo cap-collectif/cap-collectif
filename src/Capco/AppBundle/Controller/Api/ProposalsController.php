@@ -66,7 +66,7 @@ class ProposalsController extends FOSRestController
     /**
      * @Get("/proposals/{proposalId}/selections")
      * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
-     * @View(serializerGroups={"ProposalSelections"})
+     * @View(serializerGroups={"Statuses"})
      */
     public function getProposalSelectionsAction(Proposal $proposal)
     {

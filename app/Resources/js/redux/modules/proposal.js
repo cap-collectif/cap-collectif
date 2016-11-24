@@ -46,6 +46,8 @@ const SUBMIT_FUSION_FORM = 'proposa/SUBMIT_FUSION_FORM';
 const CANCEL_SUBMIT_FUSION_FORM = 'proposa/CANCEL_SUBMIT_FUSION_FORM';
 const LOAD_SELECTIONS_SUCCEEDED = 'proposal/LOAD_SELECTIONS_SUCCEEDED';
 const LOAD_SELECTIONS_REQUEST = 'proposal/LOAD_SELECTIONS_REQUEST';
+const UNSELECT_SUCCEED = 'proposal/UNSELECT_SUCCEED';
+const SELECT_SUCCEED = 'proposal/SELECT_SUCCEED';
 
 const initialState = {
   currentProposalId: null,
@@ -144,9 +146,23 @@ export const deleteProposal = (form, proposal, dispatch) => {
 export const startVoting = () => ({ type: VOTE_REQUESTED });
 export const stopVoting = () => ({ type: VOTE_FAILED });
 
-export const selectStep (dispatch, proposalId, stepId) => {
-  
-}
+const unSelectStepSucceed = (stepId, proposalId) => ({ type: UNSELECT_SUCCEED, stepId, proposalId });
+const selectStepSucceed = (stepId, proposalId) => ({ type: SELECT_SUCCEED, stepId, proposalId });
+
+export const unSelectStep = (dispatch, proposalId, stepId) => {
+  Fetcher
+    .delete(`/selection_steps/${stepId}/selections/${proposalId}`)
+    .then(() => {
+      dispatch(unSelectStepSucceed(stepId, proposalId));
+    });
+};
+export const selectStep = (dispatch, proposalId, stepId) => {
+  Fetcher
+    .post(`/selection_steps/${stepId}/selections`, { proposal: proposalId })
+    .then(() => {
+      dispatch(selectStepSucceed(stepId, proposalId));
+    });
+};
 
 export const vote = (dispatch, step, proposal, data) => {
   let url = '';
@@ -428,6 +444,21 @@ export const reducer = (state = initialState, action) => {
       return { ...state, isVoting: true };
     case VOTE_FAILED:
       return { ...state, isVoting: false };
+    case SELECT_SUCCEED: {
+      const proposalsById = state.proposalsById;
+      const proposal = proposalsById[action.proposalId];
+      const selections = proposal.selections;
+      selections.push({ step: { id: action.stepId }, status: null });
+      proposalsById[action.proposalId] = { ...proposal, selections };
+      return { ...state, proposalsById };
+    }
+    case UNSELECT_SUCCEED: {
+      const proposalsById = state.proposalsById;
+      const proposal = proposalsById[action.proposalId];
+      const selections = proposal.selections.filter(s => s.step.id !== action.stepId);
+      proposalsById[action.proposalId] = { ...proposal, selections };
+      return { ...state, proposalsById };
+    }
     case DELETE_VOTE_REQUESTED:
       return { ...state, currentDeletingVote: action.proposalId };
     case VOTE_SUCCEEDED: {

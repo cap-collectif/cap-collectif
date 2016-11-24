@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Form\ProposalSelectionVoteType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -74,8 +75,8 @@ class SelectionStepsController extends FOSRestController
     }
 
     /**
-     * @Post("/selection_steps/{selection_step_id}/selections")
-     * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
+     * @Post("/selection_steps/{selectionStepId}/selections")
+     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      * @View(statusCode=201, serializerGroups={})
      */
@@ -88,7 +89,26 @@ class SelectionStepsController extends FOSRestController
         $selection->setProposal($proposal);
         $em->persist($selection);
         $em->flush();
-        $this->get('fos_elastica.index')->refresh();
+    }
+
+    /**
+     * @Delete("/selection_steps/{selectionStepId}/selections/{proposalId}")
+     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
+     * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
+     * @Security("has_role('ROLE_ADMIN')")
+     * @View(statusCode=204, serializerGroups={})
+     */
+    public function unselectProposalAction(SelectionStep $selectionStep, Proposal $proposal)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $selection = $em->getRepository('CapcoAppBundle:Selection')
+                        ->findOneBy(['proposal' => $proposal, 'selectionStep' => $selectionStep]);
+        if (!$selection) {
+          throw new Exception("Error Processing Request", 1);
+        }
+
+        $em->remove($selection);
+        $em->flush();
     }
 
     /**
