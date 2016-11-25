@@ -24,6 +24,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 
 /**
  * @ORM\Table(name="proposal")
@@ -471,6 +472,13 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     public function isSelected() : bool
     {
         return !$this->getSelections()->isEmpty();
+    }
+
+    public function isSelectedInSelectionStep(SelectionStep $selectionStep) : bool
+    {
+        return $this->getSelections()->filter(function ($selection) {
+          return $selection->getSelectionStep() === $selectionStep;
+        })->count() === 1;
     }
 
     public function isVisible() : bool

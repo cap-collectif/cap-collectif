@@ -26,7 +26,6 @@ export const ProposalAdminSelections = React.createClass({
 
   render() {
     const { steps, proposalId, dispatch } = this.props;
-    console.log(steps);
     return (
       <div className="box box-primary">
         <div className="box-header">
@@ -77,7 +76,7 @@ export const ProposalAdminSelections = React.createClass({
                             value={s.status ? s.status.value : -1}
                             onChange={e => { updateStepStatus(dispatch, proposalId, s, e.target.value); }}
                           >
-                            <option value={-1} disabled={s.statuses.length === 0}>Aucun statut</option>
+                            <option value={-1}>Aucun statut</option>
                             {
                               s.statuses.map(st => <option key={st.id} value={st.id}>{st.name}</option>)
                             }

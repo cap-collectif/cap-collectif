@@ -49,6 +49,7 @@ const LOAD_SELECTIONS_REQUEST = 'proposal/LOAD_SELECTIONS_REQUEST';
 const UNSELECT_SUCCEED = 'proposal/UNSELECT_SUCCEED';
 const SELECT_SUCCEED = 'proposal/SELECT_SUCCEED';
 const UPDATE_SELECTION_STATUS_SUCCEED = 'proposal/UPDATE_SELECTION_STATUS_SUCCEED';
+const UPDATE_PROPOSAL_STATUS_SUCCEED = 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED';
 
 const initialState = {
   currentProposalId: null,
@@ -150,21 +151,14 @@ export const stopVoting = () => ({ type: VOTE_FAILED });
 const unSelectStepSucceed = (stepId, proposalId) => ({ type: UNSELECT_SUCCEED, stepId, proposalId });
 const selectStepSucceed = (stepId, proposalId) => ({ type: SELECT_SUCCEED, stepId, proposalId });
 const updateSelectionStatusSucceed = (stepId, proposalId, status) => ({ type: UPDATE_SELECTION_STATUS_SUCCEED, stepId, proposalId, status });
-
-export const updateStepStatus = (dispatch, proposalId, step, value) => {
-  if (step.step_type === 'selection') {
-    updateSelectionStatus(dispatch, proposalId, step.id, value);
-  } else {
-    updateProposalStatus(dispatch, proposalId, value);
-  }
-};
+const updateProposalCollectStatusSucceed = (proposalId, status) => ({ type: UPDATE_PROPOSAL_STATUS_SUCCEED, proposalId, status });
 
 export const updateProposalStatus = (dispatch, proposalFormId, proposalId, value) => {
   Fetcher
     .put(`/proposal_forms/${proposalFormId}/proposals/${proposalId}`, { status: value })
     .then(json)
     .then(status => {
-      dispatch(updateProposalStatusSucceed(proposalId, status));
+      dispatch(updateProposalCollectStatusSucceed(proposalId, status));
     });
 };
 
@@ -175,6 +169,13 @@ export const updateSelectionStatus = (dispatch, proposalId, stepId, value) => {
     .then(status => {
       dispatch(updateSelectionStatusSucceed(stepId, proposalId, status));
     });
+};
+export const updateStepStatus = (dispatch, proposalId, step, value) => {
+  if (step.step_type === 'selection') {
+    updateSelectionStatus(dispatch, proposalId, step.id, value);
+  } else {
+    updateProposalStatus(dispatch, proposalId, value);
+  }
 };
 
 export const unSelectStep = (dispatch, proposalId, stepId) => {
@@ -475,8 +476,7 @@ export const reducer = (state = initialState, action) => {
     case SELECT_SUCCEED: {
       const proposalsById = state.proposalsById;
       const proposal = proposalsById[action.proposalId];
-      const selections = proposal.selections;
-      selections.push({ step: { id: action.stepId }, status: null });
+      const selections = [...proposal.selections, { step: { id: action.stepId }, status: null }];
       proposalsById[action.proposalId] = { ...proposal, selections };
       return { ...state, proposalsById };
     }
@@ -485,6 +485,12 @@ export const reducer = (state = initialState, action) => {
       const proposal = proposalsById[action.proposalId];
       const selections = proposal.selections.filter(s => s.step.id !== action.stepId);
       proposalsById[action.proposalId] = { ...proposal, selections };
+      return { ...state, proposalsById };
+    }
+    case UPDATE_PROPOSAL_STATUS_SUCCEED: {
+      const proposalsById = state.proposalsById;
+      const proposal = proposalsById[action.proposalId];
+      proposalsById[action.proposalId] = { ...proposal, status: action.status };
       return { ...state, proposalsById };
     }
     case UPDATE_SELECTION_STATUS_SUCCEED: {

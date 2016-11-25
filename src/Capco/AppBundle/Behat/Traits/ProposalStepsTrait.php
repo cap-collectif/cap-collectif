@@ -786,6 +786,26 @@ trait ProposalStepsTrait
     }
 
     /**
+     * @Then proposal :proposalId should be selected in selection step :stepId
+     */
+     public function proposalShouldBeSelected(int $proposalId, int $selectionStepId)
+     {
+        $step = $this->getRepository('CapcoAppBundle:SelectionStep')->find($selectionStepId);
+        $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+        expect($proposal->isSelectedInSelectionStep($step)->toBe(true);
+     }
+
+     /**
+      * @Then proposal :proposalId should not be selected in selection step :stepId
+      */
+      public function proposalShouldNotBeSelected(int $proposalId, int $selectionStepId)
+      {
+         $step = $this->getRepository('CapcoAppBundle:SelectionStep')->find($selectionStepId);
+         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+         expect($proposal->isSelectedInSelectionStep($step)->toBe(false);
+      }
+
+    /**
      * I add a proposal vote comment.
      *
      * @When I add a proposal vote comment
