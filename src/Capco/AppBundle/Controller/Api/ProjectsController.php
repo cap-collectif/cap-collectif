@@ -53,8 +53,9 @@ class ProjectsController extends FOSRestController
             return $form;
         }
 
-        $this->get('doctrine.orm.entity_manager')->persist($project);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($project);
+        $em->flush();
     }
 
     /**
