@@ -17,6 +17,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Form\ProjectType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Capco\AppBundle\Entity\Project;
 
 class ProjectsController extends FOSRestController
 {
@@ -39,8 +40,8 @@ class ProjectsController extends FOSRestController
     }
 
     /**
-     * @Security("has_role('ROLE_ADMIN')")
      * @Post("/projects")
+     * @Security("has_role('ROLE_ADMIN')")
      * @View(statusCode=201, serializerGroups={})
      */
     public function postProjectAction(Request $request)
