@@ -23,6 +23,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations\Patch;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Delete;
@@ -304,6 +305,26 @@ class ProposalsController extends FOSRestController
     }
 
     /**
+     * @Patch("/proposals/{proposalId}")
+     * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
+     * @Security("has_role('ROLE_ADMIN')")
+     * @View(serializerGroups={})
+     */
+     public function patchProposalAction(Request $request, Proposal $proposal)
+     {
+       $em = $this->get('doctrine.orm.entity_manager');
+
+       $status = null;
+       if ($request->request->get('status') !== null) {
+          $status = $em->getRepository('CapcoAppBundle:Status')->find($request->request->get('status'));
+       }
+
+       $proposal->setStatus($status);
+       $em->persist($proposal);
+       $em->flush();
+     }
+
+    /**
      * Update a proposal.
      *
      * @ApiDoc(
@@ -320,12 +341,6 @@ class ProposalsController extends FOSRestController
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200)
-     *
-     * @param Request      $request
-     * @param ProposalForm $proposalForm
-     * @param Proposal     $proposal
-     *
-     * @return bool
      */
     public function putProposalAction(Request $request, ProposalForm $proposalForm, Proposal $proposal)
     {

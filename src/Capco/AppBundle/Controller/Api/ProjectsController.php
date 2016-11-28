@@ -18,7 +18,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Form\ProjectType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Entity\Project;
 
 class ProjectsController extends FOSRestController
 {

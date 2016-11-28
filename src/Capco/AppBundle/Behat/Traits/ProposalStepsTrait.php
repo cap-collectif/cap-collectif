@@ -792,7 +792,7 @@ trait ProposalStepsTrait
      {
         $step = $this->getRepository('CapcoAppBundle:SelectionStep')->find($selectionStepId);
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
-        expect($proposal->isSelectedInSelectionStep($step)->toBe(true);
+        expect($proposal->isSelectedInSelectionStep($step))->toBe(true);
      }
 
      /**
@@ -802,7 +802,7 @@ trait ProposalStepsTrait
       {
          $step = $this->getRepository('CapcoAppBundle:SelectionStep')->find($selectionStepId);
          $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
-         expect($proposal->isSelectedInSelectionStep($step)->toBe(false);
+         expect($proposal->isSelectedInSelectionStep($step))->toBe(false);
       }
 
     /**
