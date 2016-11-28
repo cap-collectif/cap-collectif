@@ -73,7 +73,7 @@ export const ProposalAdminSelections = React.createClass({
                           <Input
                             type="select"
                             style={{ marginBottom: 0 }}
-                            value={s.status ? s.status.value : -1}
+                            value={s.status ? s.status.id : -1}
                             onChange={e => { updateStepStatus(dispatch, proposalId, s, e.target.value); }}
                           >
                             <option value={-1}>Aucun statut</option>
