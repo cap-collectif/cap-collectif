@@ -210,7 +210,7 @@ Scenario: Anonymous API client wants to get a step
     }
     """
 
-    @database @dev
+    @database
     Scenario: Admin API client wants add, then delete a selection
       Given I am logged in to api as admin
       When I send a POST request to "/api/selection_steps/6/selections" with json:

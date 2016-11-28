@@ -313,7 +313,6 @@ class ProposalsController extends FOSRestController
      public function patchProposalAction(Request $request, Proposal $proposal)
      {
        $em = $this->get('doctrine.orm.entity_manager');
-
        $status = null;
 
        if ($request->request->get('status')) {

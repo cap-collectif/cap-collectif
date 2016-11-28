@@ -153,7 +153,7 @@ const selectStepSucceed = (stepId, proposalId) => ({ type: SELECT_SUCCEED, stepI
 const updateSelectionStatusSucceed = (stepId, proposalId, status) => ({ type: UPDATE_SELECTION_STATUS_SUCCEED, stepId, proposalId, status });
 const updateProposalCollectStatusSucceed = (proposalId, status) => ({ type: UPDATE_PROPOSAL_STATUS_SUCCEED, proposalId, status });
 
-export const updateProposalStatus = (dispatch, proposalFormId, proposalId, value) => {
+export const updateProposalStatus = (dispatch, proposalId, value) => {
   Fetcher
     .patch(`/proposals/${proposalId}`, { status: value })
     .then(json)
@@ -168,6 +168,9 @@ export const updateSelectionStatus = (dispatch, proposalId, stepId, value) => {
     .then(json)
     .then(status => {
       dispatch(updateSelectionStatusSucceed(stepId, proposalId, status));
+    })
+    .catch(() => {
+      dispatch(updateSelectionStatusSucceed(stepId, proposalId, null));
     });
 };
 export const updateStepStatus = (dispatch, proposalId, step, value) => {

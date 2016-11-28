@@ -15,11 +15,14 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 class Selection
 {
-    public function getId()
+    public function getId() // for elasticsearch
     {
-       return ['selectionStep' => $this->selectionStep->getId(), 'proposal' => $this->proposal->getId()];
+       return [
+          'selectionStep' => $this->selectionStep->getId(),
+          'proposal' => $this->proposal->getId()
+       ];
     }
-    
+
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", inversedBy="selections", cascade={"persist"})
@@ -47,7 +50,7 @@ class Selection
         return $this->selectionStep;
     }
 
-    public function setSelectionStep(SelectionStep $selectionStep = null): self
+    public function setSelectionStep(SelectionStep $selectionStep): self
     {
         $this->selectionStep = $selectionStep;
 

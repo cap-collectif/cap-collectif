@@ -731,7 +731,7 @@ Feature: Proposal Restful Api
     """
     Then the JSON response status code should be 201
 
-    @database @dev
+    @database
     Scenario: Admin API client wants to update proposal status
       Given I am logged in to api as admin
       When I send a PATCH request to "/api/proposals/12" with json:
@@ -740,7 +740,7 @@ Feature: Proposal Restful Api
         "status": 1
       }
       """
-      Then the JSON response status code should be 204
+      Then the JSON response status code should be 200
       And proposal 12 should have status 1
       When I send a PATCH request to "/api/proposals/12" with json:
       """

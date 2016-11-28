@@ -810,9 +810,12 @@ trait ProposalStepsTrait
      */
      public function proposalShouldBeSelected(int $proposalId, int $selectionStepId)
      {
-        $step = $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->find($selectionStepId);
-        $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
-        expect($proposal->isSelectedInSelectionStep($step))->toBe(true);
+        $this->getEntityManager()->clear();
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+          'selectionStep' => $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->find($selectionStepId),
+          'proposal' => $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId),
+        ]);
+        expect($selection)->toNotBe(null);
      }
 
      /**
@@ -820,9 +823,12 @@ trait ProposalStepsTrait
       */
       public function proposalShouldNotBeSelected(int $proposalId, int $selectionStepId)
       {
-         $step = $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->find($selectionStepId);
-         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
-         expect($proposal->isSelectedInSelectionStep($step))->toBe(false);
+        $this->getEntityManager()->clear();
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+          'selectionStep' => $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->find($selectionStepId),
+          'proposal' => $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId),
+        ]);
+        expect($selection)->toBe(null);
       }
 
     /**

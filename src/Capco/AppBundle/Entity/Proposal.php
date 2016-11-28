@@ -474,13 +474,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return !$this->getSelections()->isEmpty();
     }
 
-    public function isSelectedInSelectionStep(SelectionStep $selectionStep) : bool
-    {
-        return $this->getSelections()->filter(function ($selection) {
-          return $selection->getSelectionStep() === $selectionStep;
-        })->count() === 1;
-    }
-
     public function isVisible() : bool
     {
         return !$this->isPrivate() || $this->isSelected();

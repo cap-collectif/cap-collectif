@@ -85,9 +85,10 @@ class SelectionStepsController extends FOSRestController
     {
         $em = $this->get('doctrine.orm.entity_manager');
         $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($request->request->get('proposal'));
+
         $selection = new Selection();
         $selection->setSelectionStep($selectionStep);
-        $selection->setProposal($proposal);
+        $proposal->addSelection($selection);
         $em->persist($selection);
         $em->flush();
     }
