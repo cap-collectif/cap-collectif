@@ -159,12 +159,15 @@ export const updateProposalStatus = (dispatch, proposalId, value) => {
     .then(json)
     .then(status => {
       dispatch(updateProposalCollectStatusSucceed(proposalId, status));
+    })
+    .catch(() => {
+      dispatch(updateProposalCollectStatusSucceed(proposalId, null));
     });
 };
 
 export const updateSelectionStatus = (dispatch, proposalId, stepId, value) => {
   Fetcher
-    .put(`/selection_steps/${stepId}/selections/${proposalId}`, { status: value })
+    .patch(`/selection_steps/${stepId}/selections/${proposalId}`, { status: value })
     .then(json)
     .then(status => {
       dispatch(updateSelectionStatusSucceed(stepId, proposalId, status));
