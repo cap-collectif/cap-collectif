@@ -786,11 +786,31 @@ trait ProposalStepsTrait
     }
 
     /**
+     * @Then proposal :proposalId should have status :statusId
+     */
+     public function proposalShouldHaveStatus(int $proposalId, int $statusId)
+     {
+        $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+        expect($proposal->getStatus()->getId())->toBe($statusId);
+        $this->getEntityManager()->clear();
+     }
+
+     /**
+      * @Then proposal :proposalId should not have a status
+      */
+      public function proposalShouldHaveNoStatus(int $proposalId)
+      {
+         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+         expect($proposal->getStatus())->toBe(null);
+         $this->getEntityManager()->clear();
+      }
+
+    /**
      * @Then proposal :proposalId should be selected in selection step :stepId
      */
      public function proposalShouldBeSelected(int $proposalId, int $selectionStepId)
      {
-        $step = $this->getRepository('CapcoAppBundle:SelectionStep')->find($selectionStepId);
+        $step = $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->find($selectionStepId);
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
         expect($proposal->isSelectedInSelectionStep($step))->toBe(true);
      }
@@ -800,7 +820,7 @@ trait ProposalStepsTrait
       */
       public function proposalShouldNotBeSelected(int $proposalId, int $selectionStepId)
       {
-         $step = $this->getRepository('CapcoAppBundle:SelectionStep')->find($selectionStepId);
+         $step = $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->find($selectionStepId);
          $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
          expect($proposal->isSelectedInSelectionStep($step))->toBe(false);
       }

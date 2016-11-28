@@ -741,6 +741,7 @@ Feature: Proposal Restful Api
       }
       """
       Then the JSON response status code should be 204
+      And proposal 12 should have status 1
       When I send a PATCH request to "/api/proposals/12" with json:
       """
       {
@@ -748,6 +749,7 @@ Feature: Proposal Restful Api
       }
       """
       Then the JSON response status code should be 204
+      And proposal 12 should not have a status
 
   @security
   Scenario: Logged in API client wants to add a proposal without required response

@@ -155,7 +155,7 @@ const updateProposalCollectStatusSucceed = (proposalId, status) => ({ type: UPDA
 
 export const updateProposalStatus = (dispatch, proposalFormId, proposalId, value) => {
   Fetcher
-    .put(`/proposal_forms/${proposalFormId}/proposals/${proposalId}`, { status: value })
+    .patch(`/proposals/${proposalId}`, { status: value })
     .then(json)
     .then(status => {
       dispatch(updateProposalCollectStatusSucceed(proposalId, status));
