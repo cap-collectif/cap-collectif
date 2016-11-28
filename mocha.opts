@@ -1,3 +1,0 @@
---require babel-core/register
---require ./jest-setup.js
-app/Resources/js/**/*-test.js
