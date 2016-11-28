@@ -13,6 +13,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\Patch;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
@@ -114,7 +115,7 @@ class SelectionStepsController extends FOSRestController
     }
 
     /**
-     * @Put("/selection_steps/{selectionStepId}/selections/{proposalId}")
+     * @Patch("/selection_steps/{selectionStepId}/selections/{proposalId}")
      * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
@@ -127,15 +128,15 @@ class SelectionStepsController extends FOSRestController
           'proposal' => $proposal,
           'selectionStep' => $selectionStep,
         ]);
+        if (!$selection) {
+            throw new \Exception('Error Processing Request', 1);
+        }
 
         $status = null;
-        if ($id = $request->request->get('status') > 0) {
-            $status = $em->getRepository('CapcoAppBundle:Status')->find($id);
+        if ($request->request->get('status')) {
+            $status = $em->getRepository('CapcoAppBundle:Status')->find($request->request->get('status'));
         }
 
-        if (!$selection) {
-            throw new Exception('Error Processing Request', 1);
-        }
 
         $selection->setStatus($status);
         $em->flush();
