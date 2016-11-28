@@ -178,6 +178,8 @@ Feature: Projects
           "startAt": @null@,
           "endAt": @null@,
           "body": @string@,
+          "statuses": [],
+          "step_type": @string@,
           "status": "closed"
         },
         @...@

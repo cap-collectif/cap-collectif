@@ -17,9 +17,9 @@ class Selection
 {
     public function getId() // for elasticsearch
     {
-       return [
+        return [
           'selectionStep' => $this->selectionStep->getId(),
-          'proposal' => $this->proposal->getId()
+          'proposal' => $this->proposal->getId(),
        ];
     }
 

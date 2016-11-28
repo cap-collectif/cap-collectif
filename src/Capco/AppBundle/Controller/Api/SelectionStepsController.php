@@ -106,7 +106,7 @@ class SelectionStepsController extends FOSRestController
         $selection = $em->getRepository('CapcoAppBundle:Selection')
                         ->findOneBy(['proposal' => $proposal, 'selectionStep' => $selectionStep]);
         if (!$selection) {
-          throw new Exception("Error Processing Request", 1);
+            throw new Exception('Error Processing Request', 1);
         }
 
         $em->remove($selection);
@@ -125,16 +125,16 @@ class SelectionStepsController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
         $selection = $em->getRepository('CapcoAppBundle:Selection')->findOneBy([
           'proposal' => $proposal,
-          'selectionStep' => $selectionStep
+          'selectionStep' => $selectionStep,
         ]);
 
         $status = null;
         if ($id = $request->request->get('status') > 0) {
-          $status = $em->getRepository('CapcoAppBundle:Status')->find($id);
+            $status = $em->getRepository('CapcoAppBundle:Status')->find($id);
         }
 
         if (!$selection) {
-          throw new Exception("Error Processing Request", 1);
+            throw new Exception('Error Processing Request', 1);
         }
 
         $selection->setStatus($status);

@@ -304,25 +304,25 @@ class ProposalsController extends FOSRestController
         ];
     }
 
-    /**
-     * @Patch("/proposals/{proposalId}")
-     * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
-     * @Security("has_role('ROLE_ADMIN')")
-     * @View(statusCode=200, serializerGroups={"Statuses"})
-     */
+     /**
+      * @Patch("/proposals/{proposalId}")
+      * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
+      * @Security("has_role('ROLE_ADMIN')")
+      * @View(statusCode=200, serializerGroups={"Statuses"})
+      */
      public function patchProposalAction(Request $request, Proposal $proposal)
      {
-       $em = $this->get('doctrine.orm.entity_manager');
-       $status = null;
+         $em = $this->get('doctrine.orm.entity_manager');
+         $status = null;
 
-       if ($request->request->get('status')) {
-          $status = $em->getRepository('CapcoAppBundle:Status')->find($request->request->get('status'));
-       }
+         if ($request->request->get('status')) {
+             $status = $em->getRepository('CapcoAppBundle:Status')->find($request->request->get('status'));
+         }
 
-       $proposal->setStatus($status);
-       $em->flush();
+         $proposal->setStatus($status);
+         $em->flush();
 
-       return $status;
+         return $status;
      }
 
     /**

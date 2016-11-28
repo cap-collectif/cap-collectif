@@ -902,9 +902,11 @@ Feature: Proposal Restful Api
       [
         {
           "step": {
-            "id": 6
+            "id": 6,
+            "statuses": @...@
           },
           "status": {
+            "color": @string@,
             "name": "Soumis au vote",
             "id": 4
           }
