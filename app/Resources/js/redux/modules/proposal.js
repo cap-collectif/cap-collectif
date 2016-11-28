@@ -410,7 +410,7 @@ export function* fetchSelections(action) {
     const selections = yield call(Fetcher.get, `/proposals/${action.proposalId}/selections`);
     yield put({ type: LOAD_SELECTIONS_SUCCEEDED, selections, proposalId: action.proposalId });
   } catch (e) {
-    console.error(e);
+    console.log(e); // eslint-disable-line
   }
 }
 

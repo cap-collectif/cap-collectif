@@ -46,7 +46,7 @@ export function* fetchStepsSaga(action) {
     const result = yield call(Fetcher.get, `/projects/${action.projectId}/steps`);
     yield put({ type: STEPS_FETCH_SUCCEEDED, steps: result, projectId: action.projectId });
   } catch (e) {
-    console.log(e);
+    console.log(e); // eslint-disable-line
   }
 }
 
