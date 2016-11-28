@@ -322,6 +322,9 @@ class ProposalsController extends FOSRestController
          $proposal->setStatus($status);
          $em->flush();
 
+         $notifier = $this->container->get('capco.notify_manager');
+         $notifier->notifyProposalStatusChange($proposal);
+
          return $status;
      }
 
