@@ -15,9 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
 class MultipleChoiceQuestion extends AbstractQuestion
 {
     /**
-     * @var ArrayCollection
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $questionChoices;
 
