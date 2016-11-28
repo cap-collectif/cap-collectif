@@ -785,6 +785,32 @@ trait ProposalStepsTrait
         $this->fillFields($tableNode);
     }
 
+    /**
+     * @Then selection :selectionStepId :proposalId should have status :statusId
+     */
+    public function proposalSelectionShouldHaveStatus(int $selectionStepId, int $proposalId, int $statusId)
+    {
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+          "selectionStep" => $selectionStepId,
+          "proposal" => $proposalId,
+        ]);
+        expect($selection->getStatus()->getId())->toBe($statusId);
+        $this->getEntityManager()->clear();
+    }
+
+    /**
+     * @Then selection :selectionStepId :proposalId should have no status
+     */
+    public function proposalSelectionShouldHaveNoStatus(int $selectionStepId, int $proposalId)
+    {
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+          "selectionStep" => $selectionStepId,
+          "proposal" => $proposalId,
+        ]);
+        expect($selection->getStatus())->toBe(null);
+        $this->getEntityManager()->clear();
+    }
+
      /**
       * @Then proposal :proposalId should have status :statusId
       */
@@ -812,8 +838,8 @@ trait ProposalStepsTrait
      {
          $this->getEntityManager()->clear();
          $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
-          'selectionStep' => $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->find($selectionStepId),
-          'proposal' => $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId),
+          'selectionStep' => $selectionStepId,
+          'proposal' => $proposalId,
         ]);
          expect($selection)->toNotBe(null);
      }
@@ -825,8 +851,8 @@ trait ProposalStepsTrait
       {
           $this->getEntityManager()->clear();
           $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
-          'selectionStep' => $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->find($selectionStepId),
-          'proposal' => $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId),
+          'selectionStep' => $selectionStepId,
+          'proposal' => $proposalId,
         ]);
           expect($selection)->toBe(null);
       }
