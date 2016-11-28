@@ -5,7 +5,8 @@
       'proposal': {
         'proposalsById': {
           (admin.subject.id) : {
-            'selections': []
+            'selections': [],
+            'status': admin.subject.status ? ['id': admin.subject.status.id, 'name': admin.subject.status.name] : null,
           }
         },
       },
