@@ -305,8 +305,8 @@ class ProposalsController extends FOSRestController
     }
 
      /**
-      * @Patch("/proposals/{proposalId}")
-      * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
+      * @Patch("/proposals/{proposal}")
+      * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
       * @Security("has_role('ROLE_ADMIN')")
       * @View(statusCode=200, serializerGroups={"Statuses"})
       */

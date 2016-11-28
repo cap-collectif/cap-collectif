@@ -123,7 +123,7 @@ class Fetcher {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {
-          method: 'patch',
+          method: 'PATCH',
           headers: createHeaders(),
           beforeSend: addAuthorization,
           body: JSON.stringify(body),
