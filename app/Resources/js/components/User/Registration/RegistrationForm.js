@@ -11,7 +11,7 @@ export const validate = values => {
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
   }
-  if (!values.email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  if (!values.email || !/^[-a-z0-9~!$%^&*_=+}{'?]+(\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i.test(values.email)) {
     errors.email = 'registration.constraints.email.invalid';
   }
   if (!values.plainPassword || values.plainPassword.length < 8) {
