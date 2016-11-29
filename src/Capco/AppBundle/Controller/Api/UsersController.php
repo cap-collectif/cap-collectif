@@ -55,10 +55,10 @@ class UsersController extends FOSRestController
         }
 
         if ($email) {
-          $users = $em->getRepository('CapcoUserBundle:User')
+            $users = $em->getRepository('CapcoUserBundle:User')
                       ->findBy(['email' => $email]);
         } else {
-          $users = $em->getRepository('CapcoUserBundle:User')
+            $users = $em->getRepository('CapcoUserBundle:User')
                       ->getEnabledWith($userType, $from, $to);
         }
 

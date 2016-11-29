@@ -15,7 +15,7 @@ class ApiAdminRegistrationFormType extends ApiRegistrationFormType
         $builder->remove('captcha');
         $builder->add('roles', CollectionType::class, [
           'entry_type' => TextType::class,
-          'validation_groups' => ['registration']
+          'validation_groups' => ['registration'],
         ]);
     }
 }

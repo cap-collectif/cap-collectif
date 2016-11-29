@@ -946,6 +946,10 @@ class ProjectDownloadResolver
         $phpExcelObject->setActiveSheetIndex(0);
         $sheet = $phpExcelObject->getActiveSheet();
         $sheet->setTitle($this->translator->trans('project_download.sheet.title', [], 'CapcoAppBundle'));
+        \PHPExcel_Settings::setCacheStorageMethod(
+            \PHPExcel_CachedObjectStorageFactory::cache_to_phpTemp,
+            ['memoryCacheSize' => '512M']
+        );
         $nbCols = count($headers);
         // Add headers
         list($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString('A1');
@@ -972,7 +976,7 @@ class ProjectDownloadResolver
             ++$currentRow;
         }
         // create the writer
-        $writer = $this->phpexcel->createWriter($phpExcelObject, 'Excel5');
+        $writer = $this->phpexcel->createWriter($phpExcelObject, 'Excel2007');
 
         return $writer;
     }
