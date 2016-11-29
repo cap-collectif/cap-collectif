@@ -166,15 +166,17 @@ class ProjectController extends Controller
         if ($step->getProject()) {
             $filename .= $step->getProject()->getSlug().'_';
         }
-        $filename .= $step->getSlug().'.xls';
+        $filename .= $step->getSlug();
 
         $request = $this->get('request_stack')->getCurrentRequest();
 
-        if (!file_exists($path.$filename)) {
+        if (!file_exists($path.$filename.'.xlsx') && !file_exists($path.$filename.'.xls')) {
             $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('project.download.not_yet_generated', [], 'CapcoAppBundle'));
 
             return $this->redirect($request->headers->get('referer'));
         }
+
+        $filename = file_exists($path.$filename.'.xlsx') ? $filename.'.xlsx' : $filename.'.xls';
 
         $date = (new \DateTime())->format('Y-m-d');
         $request = $this->container->get('request_stack')->getCurrentRequest();
