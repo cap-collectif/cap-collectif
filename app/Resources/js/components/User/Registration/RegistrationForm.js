@@ -5,13 +5,14 @@ import { SubmissionError, change } from 'redux-form';
 import UserActions from '../../../actions/UserActions';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import Form from '../../Form/Form';
+import { isEmail } from '../../../services/Validator';
 
 export const validate = values => {
   const errors = {};
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
   }
-  if (!values.email || !/^[-a-z0-9~!$%^&*_=+}{'?]+(\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i.test(values.email)) {
+  if (!values.email || !isEmail(values.email)) {
     errors.email = 'registration.constraints.email.invalid';
   }
   if (!values.plainPassword || values.plainPassword.length < 8) {
