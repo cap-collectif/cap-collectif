@@ -30,7 +30,9 @@ class AbstractResponseRepository extends EntityRepository
         $qb = $this->createQueryBuilder('r')
             ->addSelect('question')
             ->leftJoin('r.question', 'question')
+            ->leftJoin('question.questionnaireAbstractQuestion', 'questionnaire_abstract_question')
             ->andWhere('r.proposal = :proposal')
+            ->orderBy('questionnaire_abstract_question.position', 'ASC')
             ->setParameter('proposal', $proposal->getId())
         ;
 
