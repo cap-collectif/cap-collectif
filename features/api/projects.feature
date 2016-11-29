@@ -148,5 +148,14 @@ Feature: Projects
     }
     """
     Then the JSON response status code should be 201
+    And the JSON response should match:
+    """
+    {
+      "_links": {
+        "show": @string@,
+        "admin": @string@
+      }
+    }
+    """
     # Then the created project should have admin as author
     # Then the created project should be published

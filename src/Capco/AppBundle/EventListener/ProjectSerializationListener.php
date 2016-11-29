@@ -9,6 +9,7 @@ use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializationContext;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Symfony\Component\Routing\Router;
 
 class ProjectSerializationListener extends AbstractSerializationListener
 {
@@ -16,13 +17,20 @@ class ProjectSerializationListener extends AbstractSerializationListener
     private $mediaExtension;
     private $serializer;
     private $helper;
+    private $router;
 
-    public function __construct(StepResolver $stepResolver, MediaExtension $mediaExtension, Serializer $serializer, ProjectHelper $helper)
-    {
+    public function __construct(
+      StepResolver $stepResolver,
+      MediaExtension $mediaExtension,
+      Serializer $serializer,
+      ProjectHelper $helper,
+      Router $router
+      ) {
         $this->stepResolver = $stepResolver;
         $this->mediaExtension = $mediaExtension;
         $this->serializer = $serializer;
         $this->helper = $helper;
+        $this->router = $router;
     }
 
     public static function getSubscribedEvents()
@@ -39,33 +47,34 @@ class ProjectSerializationListener extends AbstractSerializationListener
     public function onPostProject(ObjectEvent $event)
     {
         $project = $event->getObject();
-        $event->getVisitor()->addData(
-            '_links', [
-                'show' => $this->stepResolver->getFirstStepLinkForProject($project),
-            ]
-        );
+        $links = ['show' => $this->stepResolver->getFirstStepLinkForProject($project)];
 
-        if ($project->getCover()) {
-            try {
-                $event->getVisitor()->addData(
-                    'cover', [
-                        'url' => $this->mediaExtension->path($project->getCover(), 'project'),
-                    ]
-                );
-            } catch (RouteNotFoundException $e) {
-                // Avoid some SonataMedia problems
-            }
+        if ($this->eventHasGroup($event, 'ProjectAdmin')) {
+            $links['admin'] = $this->router->generate('admin_capco_app_project_edit', ['id' => $project->getId()]);
         }
 
-        $abstractSteps = $this->helper->getAbstractSteps($project);
+        $event->getVisitor()->addData('_links', $links);
 
-        $context = new SerializationContext();
-        $context->setGroups(['Steps', 'StepTypes']);
-        $steps = $this->serializer->serialize($abstractSteps, 'json', $context);
+        if ($this->eventHasGroup($event, 'Projects')) {
+            if ($project->getCover()) {
+                try {
+                    $event->getVisitor()->addData(
+                      'cover', [
+                          'url' => $this->mediaExtension->path($project->getCover(), 'project'),
+                          ]
+                        );
+                } catch (RouteNotFoundException $e) {
+                    // Avoid some SonataMedia problems
+                }
+            }
 
-        $event->getVisitor()->addData(
-            'steps',
-            json_decode($steps, true)
-        );
+            $abstractSteps = $this->helper->getAbstractSteps($project);
+
+            $context = new SerializationContext();
+            $context->setGroups(['Steps', 'StepTypes']);
+            $steps = $this->serializer->serialize($abstractSteps, 'json', $context);
+
+            $event->getVisitor()->addData('steps', json_decode($steps, true));
+        }
     }
 }

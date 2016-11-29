@@ -164,7 +164,7 @@ Feature: Users
       """
       Then the JSON response status code should be 201
 
-    @database @dev
+    @database
     Scenario: Admin API client can register an other admin
     Given feature "registration" is enabled
     And I am logged in to api as admin

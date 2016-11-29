@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,9 +18,17 @@ use Capco\AppBundle\Traits\PositionableTrait;
  */
 class QuestionnaireAbstractQuestion
 {
-    use IdTrait, PositionableTrait;
+    use PositionableTrait;
 
     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="questions", cascade={"persist"})
      * @ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      **/

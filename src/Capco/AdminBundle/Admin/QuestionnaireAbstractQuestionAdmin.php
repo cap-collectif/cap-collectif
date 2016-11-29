@@ -19,6 +19,9 @@ class QuestionnaireAbstractQuestionAdmin extends Admin
 
     protected $translationDomain = 'SonataAdminBundle';
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $questionnaireId = null;
@@ -33,7 +36,6 @@ class QuestionnaireAbstractQuestionAdmin extends Admin
         $formMapper
             ->add('position', null, [
                 'label' => 'admin.fields.questionnaire_abstractquestion.position',
-                'required' => true,
             ])
             ->add('question', 'sonata_type_model_list', [
                 'required' => true,
@@ -51,7 +53,7 @@ class QuestionnaireAbstractQuestionAdmin extends Admin
     {
         // delete linked question
         if ($object->getQuestion()) {
-            $em = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager.abstract');
+            $em = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
             $em->remove($object->getQuestion());
         }
     }
@@ -60,5 +62,4 @@ class QuestionnaireAbstractQuestionAdmin extends Admin
     {
         $collection->clearExcept(['create', 'delete', 'edit']);
     }
-
 }

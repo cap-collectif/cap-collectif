@@ -42,7 +42,7 @@ class ProjectsController extends FOSRestController
     /**
      * @Post("/projects")
      * @Security("has_role('ROLE_ADMIN')")
-     * @View(statusCode=201, serializerGroups={})
+     * @View(statusCode=201, serializerGroups={"ProjectAdmin"})
      */
     public function postProjectAction(Request $request)
     {
@@ -57,6 +57,8 @@ class ProjectsController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($project);
         $em->flush();
+
+        return $project;
     }
 
     /**

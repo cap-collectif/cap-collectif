@@ -98,9 +98,6 @@ class CollectStep extends AbstractStep implements IndexableInterface, Participat
         return $this;
     }
 
-    /**
-     * @return null|ProposalForm
-     */
     public function getProposalForm()
     {
         return $this->proposalForm;
