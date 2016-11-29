@@ -3,33 +3,56 @@ Feature: Users
 
   @parallel-scenario
   Scenario: API client wants to know the number of users
+    Given I am logged in to api as admin
     When I send a GET request to "/api/users"
     Then the JSON response should match:
     """
     {
-      "count": "@integer@.greaterThan(0)"
+      "count": "@integer@.greaterThan(0)",
+      "users": @...@
     }
     """
 
   @parallel-scenario
   Scenario: API client wants to know the number of citoyens
+    Given I am logged in to api as admin
     When I send a GET request to "/api/users?type=citoyen"
     Then the JSON response should match:
     """
     {
-      "count": "@integer@.greaterThan(0)"
+      "count": "@integer@.greaterThan(0)",
+      "users": @...@
     }
     """
 
   @parallel-scenario
   Scenario: API client wants to know the number of citoyens who registered since 2011-11-23
-    When I send a GET request to "/api/users?type=citoyen&from=2016-11-23T00:00:00"
+    Given I am logged in to api as admin
+    When I send a GET request to "/api/users?type=citoyen&from=2017-11-23T00:00:00"
     Then the JSON response should match:
     """
     {
-      "count": 0
+      "count": 0,
+      "users": []
     }
     """
+
+    @parallel-scenario
+    Scenario: API client wants to know the number of citoyens who registered since 2011-11-23
+      Given I am logged in to api as admin
+      When I send a GET request to "/api/users?email=adavid@jolicode.com"
+      Then the JSON response should match:
+      """
+      {
+        "count": 1,
+        "users": [{
+          "id": 502,
+          "_links": {
+            "settings": @string@
+          }
+        }]
+      }
+      """
 
   @security
   Scenario: Anonymous API client wants to register but registration is not enabled

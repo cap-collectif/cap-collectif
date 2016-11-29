@@ -21,8 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 class UsersController extends FOSRestController
 {
     /**
-     * Get users.
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get users",
@@ -32,10 +30,12 @@ class UsersController extends FOSRestController
      * )
      *
      * @Get("/users")
+     * @Security("has_role('ROLE_ADMIN')")
      * @QueryParam(name="type", nullable=true)
      * @QueryParam(name="from", nullable=true)
      * @QueryParam(name="to", nullable=true)
-     * @View(serializerGroups={})
+     * @QueryParam(name="email", nullable=true)
+     * @View(serializerGroups={"UserId"})
      */
     public function getUsersAction(ParamFetcherInterface $paramFetcher)
     {
@@ -43,6 +43,7 @@ class UsersController extends FOSRestController
         $type = $paramFetcher->get('type');
         $from = $paramFetcher->get('from');
         $to = $paramFetcher->get('to');
+        $email = $paramFetcher->get('email');
         $userType = null;
 
         if ($type) {
@@ -53,11 +54,17 @@ class UsersController extends FOSRestController
             }
         }
 
-        $users = $em->getRepository('CapcoUserBundle:User')
-                    ->getEnabledWith($userType, $from, $to);
+        if ($email) {
+          $users = $em->getRepository('CapcoUserBundle:User')
+                      ->findBy(['email' => $email]);
+        } else {
+          $users = $em->getRepository('CapcoUserBundle:User')
+                      ->getEnabledWith($userType, $from, $to);
+        }
 
         return [
             'count' => count($users),
+            'users' => $users,
         ];
     }
 

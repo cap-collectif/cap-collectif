@@ -8,7 +8,6 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\IdTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * QuestionChoice.
@@ -30,13 +29,16 @@ class QuestionChoice
     private $description;
 
     /**
+     * @var Media
+     *
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $image;
 
     /**
-     * @Gedmo\SortableGroup
+     * @var Question
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion", inversedBy="questionChoices", cascade={"persist"})
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
