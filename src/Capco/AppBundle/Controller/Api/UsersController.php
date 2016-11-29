@@ -17,6 +17,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class UsersController extends FOSRestController
 {
@@ -30,11 +31,10 @@ class UsersController extends FOSRestController
      * )
      *
      * @Get("/users")
-     * @Security("has_role('ROLE_ADMIN')")
-     * @QueryParam(name="type", nullable=true)
+     * @QueryParam(name="type", requirements="[a-z]+", nullable=true)
      * @QueryParam(name="from", nullable=true)
      * @QueryParam(name="to", nullable=true)
-     * @QueryParam(name="email", nullable=true)
+     * @QueryParam(name="email", requirements=@Assert\Email, nullable=true)
      * @View(serializerGroups={"UserId"})
      */
     public function getUsersAction(ParamFetcherInterface $paramFetcher)
