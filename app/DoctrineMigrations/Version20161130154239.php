@@ -30,6 +30,6 @@ class Version20161130154239 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE selection ADD id INT NOT NULL');
+        $this->addSql('ALTER TABLE selection DROP PRIMARY KEY, ADD PRIMARY KEY id INT AUTO_INCREMENT NOT NULL');
     }
 }
