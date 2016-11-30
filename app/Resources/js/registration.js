@@ -31,7 +31,6 @@ import IdeaCreateApp from './startup/IdeaCreateApp';
 import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
 import ProjectListPageApp from './startup/ProjectListPageApp';
-import ProposalAdminSelectionsApp from './startup/ProposalAdminSelectionsApp';
 import appStore from '../js/stores/AppStore';
 
 window.__SERVER__ = false;
@@ -41,7 +40,6 @@ ReactOnRails.registerStore({ appStore });
 ReactOnRails.register({
   ProjectListPageApp,
   ProjectsListApp,
-  ProposalAdminSelectionsApp,
   ProposalCreateFusionButtonApp,
   ProposalStepPageApp,
   NavbarApp,

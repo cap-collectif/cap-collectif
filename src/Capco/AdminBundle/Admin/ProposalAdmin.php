@@ -134,7 +134,40 @@ class ProposalAdmin extends Admin
                     'required' => false,
                 ])
             ->end()
+
+            // Collect
+            ->with('admin.fields.proposal.group_collect')
+            ->add('proposalForm', null, [
+                'label' => 'admin.fields.proposal.form',
+                'property' => 'labelTitle',
+            ])
+            ->add('status', 'sonata_type_model', [
+                'label' => 'admin.fields.proposal.status',
+                'required' => false,
+                'empty_value' => 'admin.fields.proposal.no_status',
+                'btn_add' => false,
+                'help' => 'admin.fields.proposal.help.status',
+                'query' => $this->createQueryForCollectStatus(),
+            ])
+            ->end()
         ;
+
+        // Sélection
+        $projectId = $this->getPersistentParameter('projectId');
+        if ($projectId) {
+            $formMapper
+                ->with('admin.fields.proposal.group_selection')
+                ->add('selections', 'sonata_type_collection', [
+                    'label' => 'admin.fields.proposal.selection_steps',
+                    'by_reference' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'link_parameters' => ['projectId' => $projectId],
+                ])
+                ->end()
+            ;
+        }
 
         if ($this->getSubject()->canHaveProgessSteps()) {
             $formMapper->with('admin.fields.project.progress_steps')

@@ -30,7 +30,6 @@ import IdeaCreateApp from '../js/startup/IdeaCreateApp';
 import ShareButtonDropdownApp from '../js/startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from '../js/startup/ProposalCreateFusionButtonApp';
 import ProjectListPageApp from '../js/startup/ProjectListPageApp';
-import ProposalAdminSelectionsApp from '../js/startup/ProposalAdminSelectionsApp';
 import appStore from '../js/stores/AppStore';
 
 const emptyFunction = () => {};
@@ -42,7 +41,6 @@ ReactOnRails.registerStore({ appStore });
 ReactOnRails.register({
   ProjectListPageApp,
   ProposalCreateFusionButtonApp,
-  ProposalAdminSelectionsApp,
   ProjectsListApp,
   ProposalStepPageApp,
   NavbarApp,

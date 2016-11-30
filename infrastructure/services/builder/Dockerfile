@@ -86,7 +86,7 @@ RUN pip install pep8 autopep8
 
 # Install composer & php-cs-fixer
 RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/bin/composer && \
-    wget --quiet https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v1.12.3/php-cs-fixer.phar -O /usr/bin/php-cs-fixer && \
+    wget --quiet https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v1.13.0/php-cs-fixer.phar -O /usr/bin/php-cs-fixer && \
     chmod +x /usr/bin/composer && \
     chmod +x /usr/bin/php-cs-fixer
 

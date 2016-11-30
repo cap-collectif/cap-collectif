@@ -12,7 +12,6 @@ exports.config = {
     styles: {
       quill: ['dist/quill.base.css', 'dist/quill.snow.css'],
       'react-select': ['dist/react-select.css'],
-      'react-toggle': ['style.css'],
     },
   },
   paths: {
@@ -24,7 +23,7 @@ exports.config = {
     ignored: [
       /[\\/]_/,
       'app/Resources/js-server/registration.js',
-      /-test.js$/,
+      /\-test.js$/,
     ],
   },
   files: {
@@ -90,7 +89,6 @@ exports.config = {
         ],
         'css/style-admin.css': [
           'app/Resources/scss/style-admin.scss',
-          'bower_components/css-spinners/css/spinners.css',
           /^node_modules/,
         ],
       },

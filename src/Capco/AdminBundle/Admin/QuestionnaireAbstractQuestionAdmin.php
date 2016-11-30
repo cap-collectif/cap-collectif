@@ -60,5 +60,4 @@ class QuestionnaireAbstractQuestionAdmin extends Admin
     {
         $collection->clearExcept(['create', 'delete', 'edit']);
     }
-
 }

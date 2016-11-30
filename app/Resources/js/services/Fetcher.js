@@ -119,20 +119,6 @@ class Fetcher {
     ;
   }
 
-  patch(uri, body) {
-    return AuthService.login()
-      .then(() => {
-        return fetch(config.api + uri, {
-          method: 'PATCH',
-          headers: createHeaders(),
-          beforeSend: addAuthorization,
-          body: JSON.stringify(body),
-        })
-          .then(status);
-      })
-    ;
-  }
-
   delete(uri) {
     return AuthService.login()
       .then(() => {
