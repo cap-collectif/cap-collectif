@@ -1,35 +1,33 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
 {% block form %}
+    {% include '@CapcoApp/redux_store.html.twig' with {'data' : {
+      'proposal': {
+        'proposalsById': {
+          (admin.subject.id) : {
+            'selections': [],
+            'status': admin.subject.status
+            ? {
+                'id': admin.subject.status.id,
+                'name': admin.subject.status.name
+              }
+           : null
+          }
+        },
+      },
+      'project': {
+        'projectsById': {
+          (admin.subject.proposalForm.step.getProjectId()) : {
+            'steps': []
+          }
+        }
+      }
+    }} %}
+    {{ react_intl_component('ProposalAdminSelectionsApp', {
+      'props': {
+        'proposalId': admin.subject.id,
+        'projectId': admin.subject.proposalForm.step.getProjectId()
+      }
+    }) }}
     {{ parent() }}
-    <script type="text/javascript">
-        $(document).ready( function() {
-            const selectionStepField = $("#{{ admin.uniqid }}_selections_0_selectionStep");
-            const statusField = $("#{{ admin.uniqid }}_selections_0_status");
-            var firstCheck = true;
-
-            function updateStepStatus() {
-                fetch(window.location.protocol + '//' + window.location.host + '/api/selection_steps/' + $(selectionStepField).val())
-                .then(function(response) {
-                  return response.json();
-                })
-                .then(function(step) {
-                  var select2 = $("#s2id_{{ admin.uniqid }}_selections_0_status");
-                  var select = $("#s2id_{{ admin.uniqid }}_selections_0_status + select");
-                  var html = step.statuses.map(function(status) {
-                    return '<option value="' + status.id +'">' + status.name + '</option>';
-                  });
-                  select.html('<option value="">{{ 'admin.fields.proposal.no_status'|trans({}, 'SonataAdminBundle') }}</option>' + html);
-                  if (firstCheck) {
-                    select2.change();
-                    firstCheck = false;
-                  } else {
-                    select2.select2('val', '').change();
-                  }
-                });
-            }
-            updateStepStatus();
-            selectionStepField.on('change', updateStepStatus);
-        });
-    </script>
 {% endblock %}

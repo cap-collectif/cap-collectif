@@ -731,6 +731,26 @@ Feature: Proposal Restful Api
     """
     Then the JSON response status code should be 201
 
+    @database
+    Scenario: Admin API client wants to update proposal status
+      Given I am logged in to api as admin
+      When I send a PATCH request to "/api/proposals/12" with json:
+      """
+      {
+        "status": 1
+      }
+      """
+      Then the JSON response status code should be 200
+      And proposal 12 should have status 1
+      When I send a PATCH request to "/api/proposals/12" with json:
+      """
+      {
+        "status": null
+      }
+      """
+      Then the JSON response status code should be 204
+      And proposal 12 should not have a status
+
   @security
   Scenario: Logged in API client wants to add a proposal without required response
     Given I am logged in to api as user
@@ -872,3 +892,24 @@ Feature: Proposal Restful Api
     Given I am logged in to api as admin
     When I send a POST request to "/api/proposals/1/reports" with a valid report json
     Then the JSON response status code should be 201
+
+  # Selections
+
+  Scenario: Anonymous API client wants to get selections of a proposal
+    When I send a GET request to "/api/proposals/1/selections"
+    Then the JSON response should match:
+    """
+      [
+        {
+          "step": {
+            "id": 6,
+            "statuses": @...@
+          },
+          "status": {
+            "color": @string@,
+            "name": "Soumis au vote",
+            "id": 4
+          }
+        }
+      ]
+    """

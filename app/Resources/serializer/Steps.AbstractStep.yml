@@ -15,7 +15,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
     id:
       expose: true
       type: integer
-      groups: [Opinions, Proposals, Steps]
+      groups: [Opinions, Proposals, Steps, SelectionStepId]
     title:
       expose: true
       type: string
@@ -41,7 +41,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
       groups: [Steps]
     statuses:
       expose: true
-      groups: [SelectionSteps]
+      groups: [SelectionSteps, Statuses]
   virtual_properties:
     getProjectId:
       expose: true

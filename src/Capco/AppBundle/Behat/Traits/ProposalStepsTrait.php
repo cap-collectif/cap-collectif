@@ -786,6 +786,78 @@ trait ProposalStepsTrait
     }
 
     /**
+     * @Then selection :selectionStepId :proposalId should have status :statusId
+     */
+    public function proposalSelectionShouldHaveStatus(int $selectionStepId, int $proposalId, int $statusId)
+    {
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+          "selectionStep" => $selectionStepId,
+          "proposal" => $proposalId,
+        ]);
+        expect($selection->getStatus()->getId())->toBe($statusId);
+        $this->getEntityManager()->clear();
+    }
+
+    /**
+     * @Then selection :selectionStepId :proposalId should have no status
+     */
+    public function proposalSelectionShouldHaveNoStatus(int $selectionStepId, int $proposalId)
+    {
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+          "selectionStep" => $selectionStepId,
+          "proposal" => $proposalId,
+        ]);
+        expect($selection->getStatus())->toBe(null);
+        $this->getEntityManager()->clear();
+    }
+
+     /**
+      * @Then proposal :proposalId should have status :statusId
+      */
+     public function proposalShouldHaveStatus(int $proposalId, int $statusId)
+     {
+         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+         expect($proposal->getStatus()->getId())->toBe($statusId);
+         $this->getEntityManager()->clear();
+     }
+
+      /**
+       * @Then proposal :proposalId should not have a status
+       */
+      public function proposalShouldHaveNoStatus(int $proposalId)
+      {
+          $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+          expect($proposal->getStatus())->toBe(null);
+          $this->getEntityManager()->clear();
+      }
+
+     /**
+      * @Then proposal :proposalId should be selected in selection step :stepId
+      */
+     public function proposalShouldBeSelected(int $proposalId, int $selectionStepId)
+     {
+         $this->getEntityManager()->clear();
+         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+          'selectionStep' => $selectionStepId,
+          'proposal' => $proposalId,
+        ]);
+         expect($selection)->toNotBe(null);
+     }
+
+      /**
+       * @Then proposal :proposalId should not be selected in selection step :stepId
+       */
+      public function proposalShouldNotBeSelected(int $proposalId, int $selectionStepId)
+      {
+          $this->getEntityManager()->clear();
+          $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+          'selectionStep' => $selectionStepId,
+          'proposal' => $proposalId,
+        ]);
+          expect($selection)->toBe(null);
+      }
+
+    /**
      * I add a proposal vote comment.
      *
      * @When I add a proposal vote comment

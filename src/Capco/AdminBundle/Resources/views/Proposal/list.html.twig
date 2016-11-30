@@ -1,0 +1,6 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+
+{% block tab_menu %}
+  {{ parent() }}
+  {% include '@CapcoApp/redux_store.html.twig' %}
+{% endblock %}

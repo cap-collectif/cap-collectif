@@ -209,3 +209,38 @@ Scenario: Anonymous API client wants to get a step
       "order": "random"
     }
     """
+
+    @database
+    Scenario: Admin API client wants add, then delete a selection
+      Given I am logged in to api as admin
+      When I send a POST request to "/api/selection_steps/6/selections" with json:
+      """
+      {
+        "proposal": 8
+      }
+      """
+      Then the JSON response status code should be 201
+      And proposal "8" should be selected in selection step "6"
+      When I send a DELETE request to "/api/selection_steps/6/selections/8"
+      Then the JSON response status code should be 204
+      And proposal "8" should not be selected in selection step "6"
+
+    @database
+    Scenario: Admin API client wants to update proposal status
+      Given I am logged in to api as admin
+      When I send a PATCH request to "/api/selection_steps/6/selections/3" with json:
+      """
+      {
+        "status": 1
+      }
+      """
+      Then the JSON response status code should be 200
+      And selection 6 3 should have status 1
+      When I send a PATCH request to "/api/selection_steps/6/selections/3" with json:
+      """
+      {
+        "status": null
+      }
+      """
+      Then the JSON response status code should be 204
+      And selection 6 3 should have no status

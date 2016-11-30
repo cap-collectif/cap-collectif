@@ -44,6 +44,12 @@ const CLOSE_CREATE_FUSION_MODAL = 'proposal/CLOSE_CREATE_FUSION_MODAL';
 const OPEN_CREATE_FUSION_MODAL = 'proposal/OPEN_CREATE_FUSION_MODAL';
 const SUBMIT_FUSION_FORM = 'proposa/SUBMIT_FUSION_FORM';
 const CANCEL_SUBMIT_FUSION_FORM = 'proposa/CANCEL_SUBMIT_FUSION_FORM';
+const LOAD_SELECTIONS_SUCCEEDED = 'proposal/LOAD_SELECTIONS_SUCCEEDED';
+const LOAD_SELECTIONS_REQUEST = 'proposal/LOAD_SELECTIONS_REQUEST';
+const UNSELECT_SUCCEED = 'proposal/UNSELECT_SUCCEED';
+const SELECT_SUCCEED = 'proposal/SELECT_SUCCEED';
+const UPDATE_SELECTION_STATUS_SUCCEED = 'proposal/UPDATE_SELECTION_STATUS_SUCCEED';
+const UPDATE_PROPOSAL_STATUS_SUCCEED = 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED';
 
 const initialState = {
   currentProposalId: null,
@@ -70,6 +76,8 @@ const initialState = {
   currentPaginationPage: 1,
 };
 
+export const loadSelections = (proposalId) => ({ type: LOAD_SELECTIONS_REQUEST, proposalId });
+export const loadSelectionsSucess = (proposalId) => ({ type: LOAD_SELECTIONS_SUCCEEDED, proposalId });
 export const closeCreateFusionModal = () => ({ type: CLOSE_CREATE_FUSION_MODAL });
 export const openCreateFusionModal = () => ({ type: OPEN_CREATE_FUSION_MODAL });
 export const submitFusionForm = (proposalForm) => ({ type: SUBMIT_FUSION_FORM, proposalForm });
@@ -139,6 +147,57 @@ export const deleteProposal = (form, proposal, dispatch) => {
 
 export const startVoting = () => ({ type: VOTE_REQUESTED });
 export const stopVoting = () => ({ type: VOTE_FAILED });
+
+const unSelectStepSucceed = (stepId, proposalId) => ({ type: UNSELECT_SUCCEED, stepId, proposalId });
+const selectStepSucceed = (stepId, proposalId) => ({ type: SELECT_SUCCEED, stepId, proposalId });
+const updateSelectionStatusSucceed = (stepId, proposalId, status) => ({ type: UPDATE_SELECTION_STATUS_SUCCEED, stepId, proposalId, status });
+const updateProposalCollectStatusSucceed = (proposalId, status) => ({ type: UPDATE_PROPOSAL_STATUS_SUCCEED, proposalId, status });
+
+export const updateProposalStatus = (dispatch, proposalId, value) => {
+  Fetcher
+    .patch(`/proposals/${proposalId}`, { status: value })
+    .then(json)
+    .then(status => {
+      dispatch(updateProposalCollectStatusSucceed(proposalId, status));
+    })
+    .catch(() => {
+      dispatch(updateProposalCollectStatusSucceed(proposalId, null));
+    });
+};
+
+export const updateSelectionStatus = (dispatch, proposalId, stepId, value) => {
+  Fetcher
+    .patch(`/selection_steps/${stepId}/selections/${proposalId}`, { status: value })
+    .then(json)
+    .then(status => {
+      dispatch(updateSelectionStatusSucceed(stepId, proposalId, status));
+    })
+    .catch(() => {
+      dispatch(updateSelectionStatusSucceed(stepId, proposalId, null));
+    });
+};
+export const updateStepStatus = (dispatch, proposalId, step, value) => {
+  if (step.step_type === 'selection') {
+    updateSelectionStatus(dispatch, proposalId, step.id, value);
+  } else {
+    updateProposalStatus(dispatch, proposalId, value);
+  }
+};
+
+export const unSelectStep = (dispatch, proposalId, stepId) => {
+  Fetcher
+    .delete(`/selection_steps/${stepId}/selections/${proposalId}`)
+    .then(() => {
+      dispatch(unSelectStepSucceed(stepId, proposalId));
+    });
+};
+export const selectStep = (dispatch, proposalId, stepId) => {
+  Fetcher
+    .post(`/selection_steps/${stepId}/selections`, { proposal: proposalId })
+    .then(() => {
+      dispatch(selectStepSucceed(stepId, proposalId));
+    });
+};
 
 export const vote = (dispatch, step, proposal, data) => {
   let url = '';
@@ -349,6 +408,14 @@ export function* fetchPosts(action) {
     yield put({ type: POSTS_FETCH_FAILED, error: e });
   }
 }
+export function* fetchSelections(action) {
+  try {
+    const selections = yield call(Fetcher.get, `/proposals/${action.proposalId}/selections`);
+    yield put({ type: LOAD_SELECTIONS_SUCCEEDED, selections, proposalId: action.proposalId });
+  } catch (e) {
+    console.log(e); // eslint-disable-line
+  }
+}
 
 export function* saga() {
   yield [
@@ -356,6 +423,7 @@ export function* saga() {
     takeEvery(VOTES_FETCH_REQUESTED, fetchVotesByStep),
     takeEvery(FETCH_REQUESTED, fetchProposals),
     takeEvery(SUBMIT_FUSION_FORM, submitFusionFormData),
+    takeEvery(LOAD_SELECTIONS_REQUEST, fetchSelections),
   ];
 }
 
@@ -411,6 +479,38 @@ export const reducer = (state = initialState, action) => {
       return { ...state, isVoting: true };
     case VOTE_FAILED:
       return { ...state, isVoting: false };
+    case SELECT_SUCCEED: {
+      const proposalsById = state.proposalsById;
+      const proposal = proposalsById[action.proposalId];
+      const selections = [...proposal.selections, { step: { id: action.stepId }, status: null }];
+      proposalsById[action.proposalId] = { ...proposal, selections };
+      return { ...state, proposalsById };
+    }
+    case UNSELECT_SUCCEED: {
+      const proposalsById = state.proposalsById;
+      const proposal = proposalsById[action.proposalId];
+      const selections = proposal.selections.filter(s => s.step.id !== action.stepId);
+      proposalsById[action.proposalId] = { ...proposal, selections };
+      return { ...state, proposalsById };
+    }
+    case UPDATE_PROPOSAL_STATUS_SUCCEED: {
+      const proposalsById = state.proposalsById;
+      const proposal = proposalsById[action.proposalId];
+      proposalsById[action.proposalId] = { ...proposal, status: action.status };
+      return { ...state, proposalsById };
+    }
+    case UPDATE_SELECTION_STATUS_SUCCEED: {
+      const proposalsById = state.proposalsById;
+      const proposal = proposalsById[action.proposalId];
+      const selections = proposal.selections.map(s => {
+        if (s.step.id === action.stepId) {
+          s.status = action.status;
+        }
+        return s;
+      });
+      proposalsById[action.proposalId] = { ...proposal, selections };
+      return { ...state, proposalsById };
+    }
     case DELETE_VOTE_REQUESTED:
       return { ...state, currentDeletingVote: action.proposalId };
     case VOTE_SUCCEEDED: {
@@ -475,6 +575,12 @@ export const reducer = (state = initialState, action) => {
       }, {});
       const proposalShowedId = action.proposals.map((proposal) => proposal.id);
       return { ...state, proposalsById, proposalShowedId, isLoading: false };
+    }
+    case LOAD_SELECTIONS_SUCCEEDED: {
+      const proposalsById = state.proposalsById;
+      proposalsById[action.proposalId] = {
+        ...state.proposalsById[action.proposalId], selections: action.selections };
+      return { ...state, proposalsById };
     }
     case POSTS_FETCH_SUCCEEDED: {
       const posts = action.posts;

@@ -90,6 +90,7 @@ services:
     calls:
       - [ setTranslationDomain, [SonataAdminBundle]]
       - [ setTemplate, [edit, CapcoAdminBundle:Proposal:edit.html.twig]]
+      - [ setTemplate, [list, CapcoAdminBundle:Proposal:list.html.twig]]
 
   capco_admin.admin.reply:
     class: Capco\AdminBundle\Admin\ReplyAdmin

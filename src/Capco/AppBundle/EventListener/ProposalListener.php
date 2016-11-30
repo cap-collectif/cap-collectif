@@ -33,12 +33,6 @@ class ProposalListener implements ContainerAwareInterface
                 $entity->setUpdateAuthor($this->container->get('security.token_storage')->getToken()->getUser());
             }
 
-            $notifier = $this->container->get('capco.notify_manager');
-
-            if (array_key_exists('status', $changeSet)) {
-                $notifier->notifyProposalStatusChange($entity);
-            }
-
             if (array_key_exists('answer', $changeSet) && $changeSet['answer'][1] instanceof Answer) {
                 $notifier->notifyProposalAnswer($entity);
             }

@@ -27,7 +27,6 @@ Feature: Users
 
   @parallel-scenario
   Scenario: API client wants to know the number of citoyens who registered since 2011-11-23
-    Given I am logged in to api as admin
     When I send a GET request to "/api/users?type=citoyen&from=2017-11-23T00:00:00"
     Then the JSON response should match:
     """
