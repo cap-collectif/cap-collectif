@@ -31,6 +31,10 @@ class ConfirmationController extends Controller
         $hasRepublishedContributions = $this->get('capco.contribution.manager')->republishContributions($user);
         $manager->updateUser($user);
 
+        if ($user->getPassword() === null) {
+            return $this->render('');
+        }
+
         $this->get('fos_user.security.login_manager')->loginUser(
             $this->container->getParameter('fos_user.firewall_name'),
             $user,

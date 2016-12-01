@@ -56,29 +56,31 @@ export const LoginOverlay = React.createClass({
 
     const popover = showRegistration || showLogin
       ? <span />
-      : <Popover ref={c => this.popover = c} id="login-popover" title={this.getIntlMessage('vote.popover.title')}>
-        <p>{ this.getIntlMessage('vote.popover.body') }</p>
-        {
-          features.registration &&
+      : (
+        <Popover ref={c => this.popover = c} id="login-popover" title={this.getIntlMessage('vote.popover.title')}>
+          <p>{ this.getIntlMessage('vote.popover.body') }</p>
+          {
+            features.registration &&
+              <p>
+                <Button
+                  onClick={this.handleRegistrationClick}
+                  className="center-block btn-block"
+                >
+                  { this.getIntlMessage('global.registration') }
+                </Button>
+              </p>
+          }
           <p>
             <Button
-              onClick={this.handleRegistrationClick}
-                className="center-block btn-block"
+              onClick={this.handleLoginClick}
+              bsStyle="success"
+              className="center-block btn-block"
             >
-              { this.getIntlMessage('global.registration') }
+              { this.getIntlMessage('global.login') }
             </Button>
           </p>
-        }
-        <p>
-          <Button
-            onClick={this.handleLoginClick}
-            bsStyle="success"
-            className="center-block btn-block"
-          >
-          { this.getIntlMessage('global.login') }
-          </Button>
-        </p>
-      </Popover>
+        </Popover>
+      )
     ;
     return (
      <span>
