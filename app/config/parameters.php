@@ -54,7 +54,7 @@ setOverridableParameter($container, 'remember_secret', '***REMOVED***', 'SYMFONY
 setOverridableParameter($container, 'router.request_context.host', 'capco.dev', 'SYMFONY_ROUTER__REQUEST_CONTEXT__HOST');
 
 // set at every deployment
-setOverridableParameter($container, 'assets_version', 'v2', 'SYMFONY_ASSETS_VERSION');
+setOverridableParameter($container, 'assets_version', 'v1', 'SYMFONY_ASSETS_VERSION');
 
 setOverridableParameter($container, 'recaptcha_private_key', '***REMOVED***', 'SYMFONY_RECAPTCHA_PRIVATE_KEY');
 

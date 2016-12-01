@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { ListGroup, ListGroupItem, Well } from 'react-bootstrap';
-// import Toggle from 'react-toggle';
+import Toggle from 'react-toggle';
 import Loader from '../../Utils/Loader';
 import { loadSelections, selectStep, unSelectStep, updateStepStatus } from '../../../redux/modules/proposal';
 import { loadSteps } from '../../../redux/modules/project';
@@ -10,12 +10,12 @@ import Input from '../../Form/Input';
 import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
 
 export const ProposalAdminSelections = React.createClass({
-  // propTypes: {
-  //   dispatch: PropTypes.func.isRequired,
-  //   steps: PropTypes.array.isRequired,
-  //   projectId: PropTypes.number.isRequired,
-  //   proposalId: PropTypes.number.isRequired,
-  // },
+  propTypes: {
+    dispatch: PropTypes.func.isRequired,
+    steps: PropTypes.array.isRequired,
+    projectId: PropTypes.number.isRequired,
+    proposalId: PropTypes.number.isRequired,
+  },
   mixins: [IntlMixin],
 
   componentDidMount() {
@@ -51,17 +51,17 @@ export const ProposalAdminSelections = React.createClass({
                 </div>
                 <div className="col col-xs-2">
                   <div className="pull-right">
-                    {/* <Toggle
+                    <Toggle
                       disabled={s.step_type === 'collect'}
                       checked={s.isSelected}
                       onChange={() => {
-                      if (s.isSelected) {
-                      unSelectStep(dispatch, proposalId, s.id);
-                      } else {
-                      selectStep(dispatch, proposalId, s.id);
-                      }
+                        if (s.isSelected) {
+                          unSelectStep(dispatch, proposalId, s.id);
+                        } else {
+                          selectStep(dispatch, proposalId, s.id);
+                        }
                       }}
-                    /> */}
+                    />
                   </div>
                 </div>
                 {
