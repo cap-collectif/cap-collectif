@@ -40,7 +40,7 @@ class ConfirmationController extends Controller
             $manager->updateUser($user);
             // We send a mail so that user can reset password after if link is lost
             $this->container->get('fos_user.mailer')->sendResettingEmailMessage($user);
-            return $this->redirect('fos_user_resetting_reset', ['token' => $token]);
+            return $this->redirectToRoute('fos_user_resetting_reset', ['token' => $token]);
         }
 
         $this->get('fos_user.security.login_manager')->loginUser(
