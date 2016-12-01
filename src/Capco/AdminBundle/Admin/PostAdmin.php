@@ -130,7 +130,7 @@ class PostAdmin extends Admin
         $formMapper
           ->with('admin.fields.blog_post.group_content', ['class' => 'col-md-12'])->end()
           ->with('admin.fields.blog_post.group_linked_content', ['class' => 'col-md-6'])->end()
-          ->with('admin.fields.blog_post.group_meta',    ['class' => 'col-md-6'])->end()
+          ->with('admin.fields.blog_post.group_meta', ['class' => 'col-md-6'])->end()
       ;
 
         $formMapper

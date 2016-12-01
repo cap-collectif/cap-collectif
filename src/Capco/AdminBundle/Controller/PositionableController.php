@@ -58,7 +58,6 @@ class PositionableController extends Controller
         $objectToSwitch = $resolver->getObjectToSwitch($object, $relativePosition);
 
         if (null != $objectToSwitch) {
-
             // Switch position
             $oldPosition = $object->getPosition();
             $object->setPosition($objectToSwitch->getPosition());

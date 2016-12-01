@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Helper;
 
 class ArrayHelper
 {
-    public static function unflatten(array $flat, string $delimiter = '_') : array
+    public static function unflatten(array $flat, string $delimiter = '_'): array
     {
         $unflat = [];
         foreach ($flat as $key => $value) {

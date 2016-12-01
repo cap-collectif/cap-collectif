@@ -23,7 +23,7 @@ class ResponseMediaManager
         $this->mediaManager = $mediaManager;
     }
 
-    public function updateMediasFromRequest(Proposal $proposal, Request $request) : Request
+    public function updateMediasFromRequest(Proposal $proposal, Request $request): Request
     {
         if (!$proposal && !$request) {
             throw new \InvalidArgumentException('Proposal or Request must not be null.');
@@ -56,7 +56,7 @@ class ResponseMediaManager
         return $this->request;
     }
 
-    public function resolveTypeOfResponses(array $valueResponses, array $mediasResponses) : array
+    public function resolveTypeOfResponses(array $valueResponses, array $mediasResponses): array
     {
         if (count($mediasResponses) === 0 || !isset($mediasResponses['responses'])) {
             $valueResponses['responses'] = array_map(function ($valueResponse) {

@@ -501,7 +501,7 @@ class OpinionType
         return $this;
     }
 
-    public function isLinkable() : bool
+    public function isLinkable(): bool
     {
         return $this->linkable;
     }
@@ -513,7 +513,7 @@ class OpinionType
         return $this;
     }
 
-    public function isSourceable() : bool
+    public function isSourceable(): bool
     {
         return $this->sourceable;
     }

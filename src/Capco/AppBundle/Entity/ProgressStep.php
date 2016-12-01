@@ -39,24 +39,24 @@ class ProgressStep
         $this->startAt = new \DateTime();
     }
 
-    public function getTitle() : string
+    public function getTitle(): string
     {
         return $this->title ?? '';
     }
 
-    public function setTitle($title) : self
+    public function setTitle($title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getStartAt() : \DateTime
+    public function getStartAt(): \DateTime
     {
         return $this->startAt;
     }
 
-    public function setStartAt($startAt) : self
+    public function setStartAt($startAt): self
     {
         $this->startAt = $startAt;
 
@@ -68,21 +68,21 @@ class ProgressStep
         return $this->endAt;
     }
 
-    public function setEndAt(\DateTime $endAt = null) : self
+    public function setEndAt(\DateTime $endAt = null): self
     {
         $this->endAt = $endAt;
 
         return $this;
     }
 
-    public function setProposal(Proposal $proposal) : self
+    public function setProposal(Proposal $proposal): self
     {
         $this->proposal = $proposal;
 
         return $this;
     }
 
-    public function getProposal() : Proposal
+    public function getProposal(): Proposal
     {
         return $this->proposal;
     }

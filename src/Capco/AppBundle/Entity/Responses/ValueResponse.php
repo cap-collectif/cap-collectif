@@ -21,14 +21,14 @@ class ValueResponse extends AbstractResponse
         return $this->value;
     }
 
-    public function setValue($value) : self
+    public function setValue($value): self
     {
         $this->value = $value;
 
         return $this;
     }
 
-    public function getType() : string
+    public function getType(): string
     {
         return 'value';
     }
