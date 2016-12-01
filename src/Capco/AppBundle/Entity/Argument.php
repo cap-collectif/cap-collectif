@@ -362,6 +362,7 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
 
         return $this;
     }
+
     /**
      * @return string
      */

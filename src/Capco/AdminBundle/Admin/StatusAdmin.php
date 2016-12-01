@@ -41,6 +41,7 @@ class StatusAdmin extends Admin
     }
 
     // Fields to be shown on show page
+
     /**
      * @param ShowMapper $showMapper
      */
@@ -49,6 +50,7 @@ class StatusAdmin extends Admin
     }
 
     // Fields to be shown on filter forms
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -57,6 +59,7 @@ class StatusAdmin extends Admin
     }
 
     // Fields to be shown on lists
+
     /**
      * @param ListMapper $listMapper
      */

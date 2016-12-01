@@ -159,7 +159,6 @@ class MenuItemAdmin extends Admin
                     'required' => false,
                     'btn_add' => 'add',
                     'query' => $this->createPageQuery(),
-
                 ])
                 ->add('link', null, [
                     'label' => 'admin.fields.menu_item.link',

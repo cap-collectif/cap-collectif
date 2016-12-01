@@ -5,6 +5,27 @@ namespace Capco\AppBundle\Behat\Traits;
 trait ProjectStepsTrait
 {
     /**
+     * @Then project :projectId should have author :authorId
+     */
+    public function projectShouldHaveAuthor(int $projectId, int $authorId)
+    {
+        $this->getEntityManager()->clear();
+        $project = $this->getRepository('CapcoAppBundle:Project')->find($projectId);
+        expect($project->getAuthor()->getId())->toBe($authorId);
+    }
+
+    /**
+     * @Then project :projectId is not published
+     * @Then project :projectId should not be published
+     */
+    public function projectIsNotPublished(int $projectId)
+    {
+        $this->getEntityManager()->clear();
+        $project = $this->getRepository('CapcoAppBundle:Project')->find($projectId);
+        expect($project->getIsEnabled())->toBe(false);
+    }
+
+    /**
      * @When I go to a project stats page
      */
     public function iGoToAProjectStatsPage()

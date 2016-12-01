@@ -137,14 +137,15 @@ Feature: Projects
     {"code":401,"message":"Invalid credentials"}
     """
 
-  @security
+  @database @dev
   Scenario: Admin API client can create a project
-    And I am logged in to api as admin
+    Given I am logged in to api as admin
+    And user 42 doesn't have role "ROLE_ADMIN"
     When I send a POST request to "/api/projects" with json:
     """
     {
         "title": "My new project",
-        "Author": 1
+        "Author": 42
     }
     """
     Then the JSON response status code should be 201
@@ -157,8 +158,9 @@ Feature: Projects
       }
     }
     """
-    # Then the created project should have admin as author
-    # Then the created project should be published
+    And project "11" should have author 42
+    And user 42 should have role "ROLE_ADMIN"
+    And project "11" should not be published
 
     @parallel-scenario
     Scenario: API client wants to get all project steps

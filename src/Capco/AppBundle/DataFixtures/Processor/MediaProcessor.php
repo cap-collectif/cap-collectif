@@ -26,7 +26,7 @@ class MediaProcessor implements ProcessorInterface
     {
     }
 
-    protected function resolveProviderName(Media $media) : string
+    protected function resolveProviderName(Media $media): string
     {
         return in_array(pathinfo($media->getBinaryContent(), PATHINFO_EXTENSION), ['png', 'jpeg', 'jpg', 'bmp', 'gif', 'tiff'])
             ? 'sonata.media.provider.image'

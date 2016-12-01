@@ -383,7 +383,6 @@ EOF;
             $element = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($elId);
 
             if (null === $element) {
-
                 // Create element
                 $element = new SynthesisElement();
                 $element->setSynthesis($synthesis);

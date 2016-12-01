@@ -74,7 +74,7 @@
         "nelmio/api-doc-bundle": "~2.9",
         "lexik/jwt-authentication-bundle": "~1.4",
         "willdurand/hateoas-bundle": "~1.1",
-        "snc/redis-bundle": "2.x-dev",
+        "snc/redis-bundle": "^2.0",
         "ekino/newrelic-bundle": "~1.3",
         "caxy/htmldiff-bundle": "dev-master",
         "limenius/react-bundle": "^0.8.4",
