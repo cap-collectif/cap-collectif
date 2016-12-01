@@ -36,7 +36,7 @@ Feature: Login
     Given I want to login as expired_user
     Then I should see "Email ou mot de passe incorrect."
 
-  @javascript @database @dev
+  @javascript @database
   Scenario: Admin wants to set his password
     Given features "registration", "profiles" are enabled
     And I go to "/email-confirmation/check-my-email-token"
