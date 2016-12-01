@@ -54,9 +54,6 @@
             <attribute-override name="email">
                 <field column="email" type="string" length="255" nullable="true" />
             </attribute-override>
-            <attribute-override name="password">
-                <field column="password" type="string" length="255" nullable="true" />
-            </attribute-override>
         </attribute-overrides>
 
         <many-to-one field="Media" target-entity="Capco\MediaBundle\Entity\Media">
