@@ -184,7 +184,7 @@ Feature: Users
     }
     """
     And 1 mail should be sent
-    And I open mail with subject "Votre inscription sur capco.test"
+    And I open mail with subject "Votre inscription sur Cap-Collectif"
     Then I should see "Accéder à votre compte administrateur" in mail
 
   @security

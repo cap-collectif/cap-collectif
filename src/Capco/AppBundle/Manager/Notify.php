@@ -140,13 +140,14 @@ class Notify implements MailerInterface
           'token' => $user->getConfirmationToken(),
         ], UrlGeneratorInterface::ABSOLUTE_URL);
         $sitename = $this->resolver->getValue('global.site.fullname');
+        $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
 
         $rendered = $this->templating->render('CapcoAppBundle:Mail:confirmAdminAccount.html.twig', [
             'user' => $user,
             'sitename' => $sitename,
             'confirmationUrl' => $url,
         ]);
-        $this->sendEmail($user->getEmail(), $fromAdress, $rendered, 'Votre inscription sur '.$sitename);
+        $this->sendEmail($user->getEmail(), $fromAddress, 'Cap Collectif', $rendered, 'Votre inscription sur '.$sitename);
     }
 
     // FOS User emails

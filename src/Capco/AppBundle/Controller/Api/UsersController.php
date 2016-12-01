@@ -110,7 +110,6 @@ class UsersController extends FOSRestController
 
         if ($creatingAnAdmin) {
           $this->get('capco.notify_manager')->sendAdminConfirmationEmailMessage($user);
-
         } else {
           $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
         }
