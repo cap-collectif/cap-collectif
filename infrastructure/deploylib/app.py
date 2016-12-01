@@ -20,7 +20,7 @@ def deploy(environment='dev', user='capco'):
 @task
 def clean():
     "Clean"
-    env.compose('rm -f --all chrome')
+    env.compose('rm -f chrome')
 
 
 @task
