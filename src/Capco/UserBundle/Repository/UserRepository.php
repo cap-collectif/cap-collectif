@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Doctrine\ORM\EntityRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Project;
@@ -259,6 +260,29 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
+    public function countProjectProposalAnonymousVotersWithCount(Project $project, $excludePrivate = false)
+    {
+        $query = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('COUNT(DISTINCT proposal_selection_vote.email)')
+            ->from('CapcoAppBundle:ProposalSelectionVote', 'proposal_selection_vote')
+            ->leftJoin('CapcoAppBundle:Proposal', 'proposal', Join::WITH, 'proposal_selection_vote.proposal = proposal')
+            ->leftJoin('proposal_selection_vote.selectionStep', 'selection_step')
+            ->leftJoin('selection_step.projectAbstractStep', 'project_abstract_step')
+            ->andWhere('proposal.enabled = 1')
+            ->andWhere('proposal.expired = 0')
+            ->andWhere('project_abstract_step.project = :project')
+            ->setParameter('project', $project);
+
+        $query->andWhere($query->expr()->andX($query->expr()->isNotNull('proposal_selection_vote.email')));
+
+        if ($excludePrivate) {
+            $query->andWhere('proposal_selection_vote.private = 0');
+        }
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
     public function findWithMediaByIds($ids)
     {
         $qb = $this->createQueryBuilder('u');
@@ -481,6 +505,23 @@ class UserRepository extends EntityRepository
             ->setParameter('step', $step);
 
         return $query->getResult();
+    }
+
+    public function countSelectionStepProposalAnonymousVoters(SelectionStep $step)
+    {
+        $query = $this->getEntityManager()->createQueryBuilder()
+            ->select('COUNT(DISTINCT proposal_selection_vote.email)')
+            ->from('CapcoAppBundle:ProposalSelectionVote', 'proposal_selection_vote')
+            ->leftJoin('CapcoAppBundle:Proposal', 'proposal', Join::WITH, 'proposal_selection_vote.proposal = proposal')
+            ->andWhere('proposal_selection_vote.expired = 0')
+            ->andWhere('proposal.enabled = 1')
+            ->andWhere('proposal.expired = 0')
+            ->andWhere('proposal_selection_vote.selectionStep = :step');
+
+        $query->andWhere($query->expr()->andX($query->expr()->isNotNull('proposal_selection_vote.email')))
+            ->setParameter('step', $step);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     /**

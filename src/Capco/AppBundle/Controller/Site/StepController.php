@@ -390,7 +390,6 @@ class StepController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
 
         $searchResults = $this
