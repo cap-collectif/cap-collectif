@@ -31,12 +31,12 @@ class MediaResponse extends AbstractResponse
         $this->medias = new ArrayCollection();
     }
 
-    public function getMedias(): Collection
+    public function getMedias() : Collection
     {
         return $this->medias;
     }
 
-    public function addMedia(Media $media): self
+    public function addMedia(Media $media) : self
     {
         if (!$this->medias->contains($media)) {
             $this->medias->add($media);
@@ -50,7 +50,7 @@ class MediaResponse extends AbstractResponse
         $this->medias = $medias;
     }
 
-    public function getType(): string
+    public function getType() : string
     {
         return 'media';
     }

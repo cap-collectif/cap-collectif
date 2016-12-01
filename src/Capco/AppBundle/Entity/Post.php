@@ -268,14 +268,14 @@ class Post implements CommentableInterface, IndexableInterface
         return $this->isPublished;
     }
 
-    public function setdisplayedOnBlog(bool $displayedOnBlog): Post
+    public function setdisplayedOnBlog(bool $displayedOnBlog) : Post
     {
         $this->displayedOnBlog = $displayedOnBlog;
 
         return $this;
     }
 
-    public function isdisplayedOnBlog(): bool
+    public function isdisplayedOnBlog() : bool
     {
         return $this->displayedOnBlog;
     }
@@ -512,12 +512,12 @@ class Post implements CommentableInterface, IndexableInterface
         return $this;
     }
 
-    public function getProposals(): Collection
+    public function getProposals() : Collection
     {
         return $this->proposals;
     }
 
-    public function addProposal(Proposal $proposal): Post
+    public function addProposal(Proposal $proposal) : Post
     {
         if (!$this->proposals->contains($proposal)) {
             $this->proposals->add($proposal);
@@ -526,7 +526,7 @@ class Post implements CommentableInterface, IndexableInterface
         return $this;
     }
 
-    public function removeProposal(Proposal $proposal): Post
+    public function removeProposal(Proposal $proposal) : Post
     {
         if ($this->proposals->contains($proposal)) {
             $this->proposals->removeElement($proposal);

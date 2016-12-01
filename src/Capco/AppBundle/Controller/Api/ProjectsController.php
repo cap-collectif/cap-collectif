@@ -54,12 +54,6 @@ class ProjectsController extends FOSRestController
             return $form;
         }
 
-        $project->setIsEnabled(false);
-
-        // We make sure the author can edit his project
-        $author = $project->getAuthor();
-        $author->addRole('ROLE_ADMIN');
-
         $em = $this->getDoctrine()->getManager();
         $em->persist($project);
         $em->flush();

@@ -149,7 +149,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
         return $this;
     }
 
-    public function isParticipative(): bool
+    public function isParticipative() : bool
     {
         return true;
     }

@@ -791,8 +791,8 @@ trait ProposalStepsTrait
     public function proposalSelectionShouldHaveStatus(int $selectionStepId, int $proposalId, int $statusId)
     {
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
-          'selectionStep' => $selectionStepId,
-          'proposal' => $proposalId,
+          "selectionStep" => $selectionStepId,
+          "proposal" => $proposalId,
         ]);
         expect($selection->getStatus()->getId())->toBe($statusId);
         $this->getEntityManager()->clear();
@@ -804,8 +804,8 @@ trait ProposalStepsTrait
     public function proposalSelectionShouldHaveNoStatus(int $selectionStepId, int $proposalId)
     {
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
-          'selectionStep' => $selectionStepId,
-          'proposal' => $proposalId,
+          "selectionStep" => $selectionStepId,
+          "proposal" => $proposalId,
         ]);
         expect($selection->getStatus())->toBe(null);
         $this->getEntityManager()->clear();

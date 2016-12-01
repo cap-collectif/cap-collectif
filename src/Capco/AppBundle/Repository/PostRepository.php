@@ -24,7 +24,6 @@ class PostRepository extends EntityRepository
           ->setParameter('id', $proposal->getId())
         ;
     }
-
     public function getPublishedPostsByProposal(Proposal $proposal)
     {
         return $this->createPublishedPostsByProposalQB($proposal)
@@ -39,7 +38,7 @@ class PostRepository extends EntityRepository
         ;
     }
 
-    public function countPublishedPostsByProposal(Proposal $proposal): int
+    public function countPublishedPostsByProposal(Proposal $proposal) : int
     {
         return (int) $this->createPublishedPostsByProposalQB($proposal)
           ->select('count(p.id)')

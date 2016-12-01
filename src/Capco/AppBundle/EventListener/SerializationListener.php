@@ -77,7 +77,6 @@ class SerializationListener extends AbstractSerializationListener
                 }
             );
     }
-
     public function onPostElementSerialize(ObjectEvent $event)
     {
         $context = $event->getContext();

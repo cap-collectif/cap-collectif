@@ -338,7 +338,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->author;
     }
 
-    public function setAuthor(User $author): self
+    public function setAuthor(User $author) : self
     {
         $this->author = $author;
 
@@ -354,7 +354,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->updateAuthor;
     }
 
-    public function setUpdateAuthor(User $updateAuthor = null): self
+    public function setUpdateAuthor(User $updateAuthor = null) : self
     {
         $this->updateAuthor = $updateAuthor;
 
@@ -366,7 +366,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->proposalForm;
     }
 
-    public function setProposalForm(ProposalForm $proposalForm): self
+    public function setProposalForm(ProposalForm $proposalForm) : self
     {
         $this->proposalForm = $proposalForm;
 
@@ -378,7 +378,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->proposalForm ? $this->proposalForm->getStep() : null;
     }
 
-    public function addResponse(AbstractResponse $response): self
+    public function addResponse(AbstractResponse $response) : self
     {
         if (!$this->responses->contains($response)) {
             $this->responses[] = $response;
@@ -400,7 +400,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->responses;
     }
 
-    public function setResponses(Collection $responses): self
+    public function setResponses(Collection $responses) : self
     {
         $this->responses = $responses;
         foreach ($responses as $response) {
@@ -463,17 +463,17 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->enabled && !$this->isTrashed && $this->getStep()->canDisplay();
     }
 
-    public function isPrivate(): bool
+    public function isPrivate() : bool
     {
         return $this->getProposalForm() ? $this->getProposalForm()->getStep()->isPrivate() : false;
     }
 
-    public function isSelected(): bool
+    public function isSelected() : bool
     {
         return !$this->getSelections()->isEmpty();
     }
 
-    public function isVisible(): bool
+    public function isVisible() : bool
     {
         return !$this->isPrivate() || $this->isSelected();
     }
@@ -571,12 +571,12 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $ids;
     }
 
-    public function getProgressSteps(): Collection
+    public function getProgressSteps() : Collection
     {
         return $this->progressSteps;
     }
 
-    public function setProgressSteps(Collection $progressSteps): self
+    public function setProgressSteps(Collection $progressSteps) : self
     {
         $this->progressSteps = $progressSteps;
 

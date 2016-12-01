@@ -134,6 +134,21 @@ class Notify implements MailerInterface
         $this->sendEmail($user->getEmail(), $fromAddress, $fromName, $rendered, $subject);
     }
 
+    public function sendAdminConfirmationEmailMessage(UserInterface $user)
+    {
+        $url = $this->router->generate('capco_user_confirmation_email', [
+          'token' => $user->getConfirmationToken(),
+        ], UrlGeneratorInterface::ABSOLUTE_URL);
+        $sitename = $this->resolver->getValue('global.site.fullname');
+
+        $rendered = $this->templating->render('CapcoAppBundle:Mail:confirmAdminAccount.html.twig', [
+            'user' => $user,
+            'sitename' => $sitename,
+            'confirmationUrl' => $url,
+        ]);
+        $this->sendEmail($user->getEmail(), $fromAdress, $rendered, 'Votre inscription sur '.$sitename);
+    }
+
     // FOS User emails
     public function sendConfirmationEmailMessage(UserInterface $user)
     {

@@ -18,17 +18,15 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-        $em = $container->get('doctrine')->getManager();
+        $container = $this->getApplication()->getKernel()->getContainer();
+        $em = $container->get('doctrine.orm.entity_manager');
         $contributionResolver = $container->get('capco.contribution.resolver');
 
         $projects = $em->getRepository('CapcoAppBundle:Project')->findAll();
 
         // Participants count
         foreach ($projects as $p) {
-            $anonymousParticipants = $em->getRepository('CapcoUserBundle:User')
-                ->countProjectProposalAnonymousVotersWithCount($p);
-            $participants = $contributionResolver->countProjectContributors($p) + $anonymousParticipants;
+            $participants = $contributionResolver->countProjectContributors($p);
             $query = $em->createQuery('
               update CapcoAppBundle:Project p
               set p.participantsCount = '.$participants.'

@@ -113,6 +113,7 @@ class ConsultationStepExtractor
     public function createElementsFromOpinions($opinions, SynthesisElement $parent = null)
     {
         foreach ($opinions as $opinion) {
+
             // Create or update element from opinion
             $elementFromOpinion = $this->getRelatedElement($opinion, $parent);
 
@@ -149,6 +150,7 @@ class ConsultationStepExtractor
     public function createElementsFromVersions($versions, SynthesisElement $parent = null)
     {
         foreach ($versions as $version) {
+
             // Create or update element from version
             $elementFromVersion = $this->getRelatedElement($version, $parent);
 
@@ -196,6 +198,7 @@ class ConsultationStepExtractor
     public function createElementsFromSources($sources, SynthesisElement $parent)
     {
         foreach ($sources as $source) {
+
             // Create or update element from source
             $elementFromSource = $this->getRelatedElement($source, $parent);
         }

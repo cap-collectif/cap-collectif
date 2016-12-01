@@ -47,7 +47,7 @@ class MediaResponseType extends AbstractType
         ]);
     }
 
-    public function getBlockPrefix(): string
+    public function getBlockPrefix() : string
     {
         return 'media_response';
     }

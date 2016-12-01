@@ -132,7 +132,7 @@ class OpinionTypeRepository extends EntityRepository
     public function getAllowedTypesWithOpinionCount(ConsultationStep $step, $allowedTypes)
     {
         $qb = $this->createQueryBuilder('ot')
-            ->select('ot.id', 'ot.title', 'ot.color', 'ot.isEnabled', 'ot.slug', 'ot.defaultFilter', 'count(o.id) as total_opinions_count')
+            ->select('ot.id', 'ot.title', 'ot.color', 'ot.isEnabled',  'ot.slug', 'ot.defaultFilter', 'count(o.id) as total_opinions_count')
             ->leftJoin('ot.Opinions', 'o', 'WITH', 'o.isEnabled = :enabled AND o.step = :step AND o.isTrashed = :notTrashed')
             ->andWhere('ot IN (:allowedTypes)')
             ->setParameter('step', $step)

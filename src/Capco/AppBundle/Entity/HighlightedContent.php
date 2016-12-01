@@ -30,9 +30,7 @@ abstract class HighlightedContent
     private $position;
 
     abstract public function getMedia();
-
     abstract public function getType();
-
     abstract public function getAssociatedFeatures();
 
     /**

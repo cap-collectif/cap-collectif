@@ -87,27 +87,33 @@ class UsersController extends FOSRestController
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
 
-        $formClass = ApiRegistrationFormType::class;
-        if ($this->getUser() && $this->getUser()->isAdmin()) {
-            $user->setPlainPassword('totototototo');
-            $formClass = ApiAdminRegistrationFormType::class;
-        }
-        $form = $this->createForm($formClass, $user);
+        $creatingAnAdmin = $this->getUser() && $this->getUser()->isAdmin();
 
+        $formClass = $creatingAnAdmin
+          ? ApiAdminRegistrationFormType::class
+          : ApiRegistrationFormType::class
+        ;
+        $form = $this->createForm($formClass, $user);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
             return $form;
         }
 
-        // We generate a confirmation token to valdiate email
+        // We generate a confirmation token to validate email
         $token = $this->get('fos_user.util.token_generator')->generateToken();
 
         $userManager->updatePassword($user);
         $user->setEnabled(true); // the user can use the website but...
         $user->setExpiresAt((new \DateTime())->modify('+ 3 days')); // the account expires in 3 days (if not confirmed)
         $user->setConfirmationToken($token);
-        $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
+
+        if ($creatingAnAdmin) {
+          $this->get('capco.notify_manager')->sendAdminConfirmationEmailMessage($user);
+
+        } else {
+          $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
+        }
 
         $userManager->updateUser($user);
 

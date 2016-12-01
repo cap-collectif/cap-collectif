@@ -26,7 +26,7 @@ class MediaManager
         return $media;
     }
 
-    protected function resolveProviderName(UploadedFile $file): string
+    protected function resolveProviderName(UploadedFile $file) : string
     {
         return preg_match('/^image\/[a-z]+/', $file->getClientMimeType())
             ? 'sonata.media.provider.image'

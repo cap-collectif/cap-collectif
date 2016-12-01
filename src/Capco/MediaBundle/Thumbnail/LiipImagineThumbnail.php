@@ -54,6 +54,7 @@ class LiipImagineThumbnail implements ThumbnailInterface
     public function generatePrivateUrl(MediaProviderInterface $provider, MediaInterface $media, $format)
     {
         if ($format != 'reference') {
+
             // This bundle is madness ¯\_(ツ)_/¯
             // throw new \RuntimeException('No private url for LiipImagineThumbnail');
 

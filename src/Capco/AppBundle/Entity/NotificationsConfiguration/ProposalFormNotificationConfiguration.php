@@ -35,7 +35,7 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
         return $this->onCreate;
     }
 
-    public function setOnCreate(bool $onCreate): self
+    public function setOnCreate(bool $onCreate) : self
     {
         $this->onCreate = $onCreate;
 
@@ -47,7 +47,7 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
         return $this->onUpdate;
     }
 
-    public function setOnUpdate(bool $onUpdate): self
+    public function setOnUpdate(bool $onUpdate) : self
     {
         $this->onUpdate = $onUpdate;
 
@@ -59,7 +59,7 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
         return $this->onDelete;
     }
 
-    public function setOnDelete(bool $onDelete): self
+    public function setOnDelete(bool $onDelete) : self
     {
         $this->onDelete = $onDelete;
 
@@ -71,14 +71,14 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
         return $this->proposalForm;
     }
 
-    public function setProposalForm(ProposalForm $proposalForm): self
+    public function setProposalForm(ProposalForm $proposalForm) : self
     {
         $this->proposalForm = $proposalForm;
 
         return $this;
     }
 
-    public function getType(): string
+    public function getType() : string
     {
         return 'proposalForm';
     }

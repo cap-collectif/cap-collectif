@@ -193,19 +193,19 @@ class SelectionStep extends AbstractStep implements IndexableInterface, Particip
         return $ids;
     }
 
-    public function isProposalsHidden(): bool
+    public function isProposalsHidden() : bool
     {
         return $this->proposalsHidden;
     }
 
-    public function setProposalsHidden(bool $proposalsHidden): self
+    public function setProposalsHidden(bool $proposalsHidden) : self
     {
         $this->proposalsHidden = $proposalsHidden;
 
         return $this;
     }
 
-    public function canShowProposals(): bool
+    public function canShowProposals() : bool
     {
         return !$this->isProposalsHidden() || $this->getStartAt() <= new \DateTime();
     }
@@ -215,7 +215,7 @@ class SelectionStep extends AbstractStep implements IndexableInterface, Particip
         return $this->getIsEnabled();
     }
 
-    public function isParticipative(): bool
+    public function isParticipative() : bool
     {
         return true;
     }

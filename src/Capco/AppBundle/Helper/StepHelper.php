@@ -13,7 +13,7 @@ class StepHelper
         $this->projectHelper = $projectHelper;
     }
 
-    public function getStatus(AbstractStep $step): string
+    public function getStatus(AbstractStep $step) : string
     {
         $now = new \DateTime();
 

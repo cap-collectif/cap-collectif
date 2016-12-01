@@ -13,7 +13,7 @@ class ThemeExtension extends \Twig_Extension
         $this->themeRepo = $themeRepo;
     }
 
-    public function getFunctions(): array
+    public function getFunctions() : array
     {
         return [
             new \Twig_SimpleFunction('themes_list', [$this, 'listThemes']),
