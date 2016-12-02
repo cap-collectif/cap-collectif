@@ -11,7 +11,6 @@ const ProjectCover = React.createClass({
 
   render() {
     const { project } = this.props;
-    const link = project._links.external !== null ? project._links.external : project._links.show;
     const linkClasses = classNames({
       bg__wrapper: !project.cover,
     });
@@ -20,7 +19,7 @@ const ProjectCover = React.createClass({
     });
     return (
       <div className={divClasses}>
-        <a href={link} alt={project.title} className={linkClasses}>
+        <a href={project._links.show} alt={project.title} className={linkClasses}>
           <ProjectImage project={project} />
         </a>
       </div>

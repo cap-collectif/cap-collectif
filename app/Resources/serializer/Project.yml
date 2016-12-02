@@ -9,11 +9,11 @@ Capco\AppBundle\Entity\Project:
       expose: true
       type: string
       groups: [Projects]
-    Author:
+    author:
       expose: true
+      type: Capco\UserBundle\Entity\User
       serialized_name: author
       groups: [Projects]
-      serialized_name: author
     contributionsCount:
       expose: true
       type: integer

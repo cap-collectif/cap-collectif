@@ -29,7 +29,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $output->writeln('');
         $output->writeln('Resetting the feature toggles to the default configuration');
 
-        $toggleManager = $this->getApplication()->getKernel()->getContainer()->get('capco.toggle.manager');
+        $toggleManager = $this->getContainer()->get('capco.toggle.manager');
         $toggleManager->activate('blog');
         $toggleManager->activate('calendar');
         $toggleManager->activate('newsletter');
@@ -55,6 +55,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->deactivate('zipcode_at_register');
         $toggleManager->deactivate('shield_mode');
         $toggleManager->deactivate('login_saml');
+        $toggleManager->deactivate('vote_without_account');
 
         $output->writeln('Feature flags reseted');
     }

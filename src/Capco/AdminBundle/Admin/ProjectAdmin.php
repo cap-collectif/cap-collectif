@@ -155,27 +155,9 @@ class ProjectAdmin extends Admin
                 'choices' => Project::$opinionTermsLabels,
                 'translation_domain' => 'CapcoAppBundle',
             ])
-        ;
+            ->end()
 
-        if ($this->getConfigurationPool()->getContainer()->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
-          $formMapper
-              ->add('externalLink', null, [
-                  'label' => 'admin.fields.project.externalLink',
-                  'required' => false,
-              ])
-              ->add('participantsCount', null, [
-                  'label' => 'admin.fields.project.participantsCount',
-              ])
-              ->add('contributionsCount', null, [
-                  'label' => 'admin.fields.project.contributionsCount',
-              ])
-              ->add('votesCount', null, [
-                  'label' => 'admin.fields.project.votesCount',
-              ])
-            ;
-        }
-
-        $formMapper->end()
+            // Metadata
             ->with('admin.fields.project.group_meta')
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.project.is_enabled',

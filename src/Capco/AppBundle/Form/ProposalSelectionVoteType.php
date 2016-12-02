@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Form\EventListener\NoCommentWhenPrivateSubscriber;
 use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,15 +15,17 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class ProposalSelectionVoteType extends AbstractType
 {
     private $tokenStorage;
+    private $manager;
 
-    public function __construct(TokenStorageInterface $tokenStorage)
+    public function __construct(TokenStorageInterface $tokenStorage, Manager $manager)
     {
         $this->tokenStorage = $tokenStorage;
+        $this->manager = $manager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($this->tokenStorage->getToken()->getUser()) {
+        if ($this->tokenStorage->getToken()->getUser() && $this->manager->isActive('vote_without_account')) {
             $builder
                 ->add('username', PurifiedTextType::class, [
                     'required' => true,

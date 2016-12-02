@@ -30,9 +30,9 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
                 ->countProjectProposalAnonymousVotersWithCount($p);
             $participants = $contributionResolver->countProjectContributors($p) + $anonymousParticipants;
             $query = $em->createQuery('
-              UPDATE CapcoAppBundle:Project p
-              SET p.participantsCount = '.$participants.'
-              WHERE p.externalLink IS NULL AND p.id = '.$p->getId()
+              update CapcoAppBundle:Project p
+              set p.participantsCount = '.$participants.'
+              where p.id = '.$p->getId()
             );
             $query->execute();
         }
@@ -41,9 +41,9 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
         foreach ($projects as $p) {
             $contributions = $contributionResolver->countProjectContributions($p);
             $query = $em->createQuery('
-              UPDATE CapcoAppBundle:Project p
-              SET p.contributionsCount = '.$contributions.'
-              WHERE p.externalLink IS NULL AND p.id = '.$p->getId()
+              update CapcoAppBundle:Project p
+              set p.contributionsCount = '.$contributions.'
+              where p.id = '.$p->getId()
             );
             $query->execute();
         }
@@ -52,9 +52,9 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
         foreach ($projects as $p) {
             $votes = $contributionResolver->countProjectVotes($p);
             $query = $em->createQuery('
-              UPDATE CapcoAppBundle:Project p
-              SET p.votesCount = '.$votes.'
-              WHERE p.externalLink IS NULL AND p.id = '.$p->getId()
+              update CapcoAppBundle:Project p
+              set p.votesCount = '.$votes.'
+              where p.id = '.$p->getId()
             );
             $query->execute();
         }

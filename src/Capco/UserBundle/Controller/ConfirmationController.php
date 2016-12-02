@@ -34,6 +34,7 @@ class ConfirmationController extends Controller
         if ($user->getPassword() === null) {
             $user->setPasswordRequestedAt(new \DateTime());
             $manager->updateUser($user);
+
             return $this->redirectToRoute('fos_user_resetting_reset', ['token' => $user->getConfirmationToken()]);
         }
 
