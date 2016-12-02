@@ -35,3 +35,16 @@ Feature: Login
   Scenario: Expired user can not login
     Given I want to login as expired_user
     Then I should see "Email ou mot de passe incorrect."
+
+  @javascript @database
+  Scenario: Admin wants to set his password
+    Given features "registration", "profiles" are enabled
+    And I go to "/email-confirmation/check-my-email-token"
+    Then I should be redirected to "/resetting/reset/check-my-email-token"
+    When I fill in the following:
+      | fos_user_resetting_form_new_first  | capcopopototo |
+      | fos_user_resetting_form_new_second | capcopopototo |
+    And I press "Modifier le mot de passe"
+    Then I should be redirected to "/profile/"
+    Then I can see I am logged in as "admin_without_password"
+    And I should see "Votre mot de passe a bien été modifié."

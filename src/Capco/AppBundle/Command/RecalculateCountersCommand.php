@@ -23,7 +23,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getApplication()->getKernel()->getContainer();
+        $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
         $contributionResolver = $container->get('capco.contribution.resolver');
         $force = $input->getOption('force');
@@ -312,7 +312,8 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         $selectionSteps = $em->getRepository('CapcoAppBundle:Steps\SelectionStep')->findAll();
         foreach ($selectionSteps as $ss) {
-            $participants = $contributionResolver->countStepContributors($ss);
+            $anonymousParticipants = $em->getRepository('CapcoUserBundle:User')->countSelectionStepProposalAnonymousVoters($ss);
+            $participants = $contributionResolver->countStepContributors($ss) + $anonymousParticipants;
             $em->createQuery('
               UPDATE CapcoAppBundle:Steps\SelectionStep ss
               set ss.contributorsCount = '.$participants.'

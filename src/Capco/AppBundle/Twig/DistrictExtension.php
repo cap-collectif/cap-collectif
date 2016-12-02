@@ -13,7 +13,7 @@ class DistrictExtension extends \Twig_Extension
         $this->districtRepo = $districtRepo;
     }
 
-    public function getFunctions() : array
+    public function getFunctions(): array
     {
         return [
             new \Twig_SimpleFunction('districts_list', [$this, 'listDistricts']),

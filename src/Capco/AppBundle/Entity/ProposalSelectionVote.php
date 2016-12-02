@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Traits\AnonymousableTrait;
+use Capco\AppBundle\Traits\PrivatableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
@@ -16,8 +18,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 class ProposalSelectionVote extends AbstractVote
 {
-    use \Capco\AppBundle\Traits\AnonymousableTrait;
-    use \Capco\AppBundle\Traits\PrivatableTrait;
+    use AnonymousableTrait, PrivatableTrait;
 
     const ANONYMOUS = 'ANONYMOUS';
 

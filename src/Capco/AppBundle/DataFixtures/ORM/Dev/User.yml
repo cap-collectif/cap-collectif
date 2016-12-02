@@ -287,3 +287,17 @@ Capco\UserBundle\Entity\User:
         confirmationToken: ~
         phone: '+33628232323'
         smsConfirmationCode: 123456
+
+    admin_without_password:
+        username: admin_without_password
+        firstname: admin_without_password
+        lastname: admin_without_password
+        email: admin_without_password@test.com
+        enabled: false
+        expired: false
+        expiresAt: ~
+        userType: '@UserType1'
+        roles:
+         - 'ROLE_ADMIN'
+        Media: null
+        confirmationToken: check-my-email-token

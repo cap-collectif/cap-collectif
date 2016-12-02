@@ -23,12 +23,21 @@ class ConfirmationController extends Controller
             return $response;
         }
 
-        $user->setConfirmationToken(null);
         $user->setEnabled(true);
         $user->setExpired(false);
         $user->setExpiresAt(null);
         $user->setLastLogin(new \DateTime());
         $hasRepublishedContributions = $this->get('capco.contribution.manager')->republishContributions($user);
+
+        // if user has been created via API he has no password yet.
+        // That's why we create a reset password request to let him chose a password
+        if ($user->getPassword() === null) {
+            $user->setPasswordRequestedAt(new \DateTime());
+            $manager->updateUser($user);
+            return $this->redirectToRoute('fos_user_resetting_reset', ['token' => $user->getConfirmationToken()]);
+        }
+
+        $user->setConfirmationToken(null);
         $manager->updateUser($user);
 
         $this->get('fos_user.security.login_manager')->loginUser(

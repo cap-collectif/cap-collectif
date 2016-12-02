@@ -129,9 +129,9 @@ class ProjectAdmin extends Admin
     {
         $formMapper
             ->with('admin.fields.project.group_content', ['class' => 'col-md-12'])->end()
-            ->with('admin.fields.project.group_meta',    ['class' => 'col-md-6'])->end()
+            ->with('admin.fields.project.group_meta', ['class' => 'col-md-6'])->end()
             ->with('admin.fields.project.group_ranking', ['class' => 'col-md-6'])->end()
-            ->with('admin.fields.project.group_steps',   ['class' => 'col-md-12'])->end()
+            ->with('admin.fields.project.group_steps', ['class' => 'col-md-12'])->end()
         ;
 
         $formMapper

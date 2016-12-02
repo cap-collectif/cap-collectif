@@ -11,12 +11,12 @@ trait TimelessStepTrait
      */
     private $timeless = false;
 
-    public function isTimeless() : bool
+    public function isTimeless(): bool
     {
         return $this->timeless;
     }
 
-    public function setTimeless(bool $timeless = null) : self
+    public function setTimeless(bool $timeless = null): self
     {
         $this->timeless = $timeless;
 

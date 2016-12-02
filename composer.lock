@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "25fea3d2df03e952030c29fcb5458ae5",
-    "content-hash": "766ff9f39f709d30fe652c4ca77e4563",
+    "hash": "f3610c4927bfde924cfcba33ff8c0492",
+    "content-hash": "a493c0706705270a5c1b0bebc7262b65",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5096,16 +5096,16 @@
         },
         {
             "name": "snc/redis-bundle",
-            "version": "dev-master",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/snc/SncRedisBundle.git",
-                "reference": "baa89a36bdb2483d7571ba5a748f5bb9aa8a6b71"
+                "reference": "b8aa1a966b32c4fba6b7dac4532d5eeb1d890afb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/baa89a36bdb2483d7571ba5a748f5bb9aa8a6b71",
-                "reference": "baa89a36bdb2483d7571ba5a748f5bb9aa8a6b71",
+                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/b8aa1a966b32c4fba6b7dac4532d5eeb1d890afb",
+                "reference": "b8aa1a966b32c4fba6b7dac4532d5eeb1d890afb",
                 "shasum": ""
             },
             "require": {
@@ -5115,7 +5115,7 @@
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
-                "phpunit/phpunit": "4.7.*",
+                "phpunit/phpunit": "4.8.*",
                 "predis/predis": "^1.0",
                 "symfony/console": "^2.7 || ^3.0",
                 "symfony/phpunit-bridge": "^2.7 || ^3.0"
@@ -5157,7 +5157,7 @@
                 "redis",
                 "symfony"
             ],
-            "time": "2016-02-15 13:14:43"
+            "time": "2016-06-17 11:50:26"
         },
         {
             "name": "sonata-project/admin-bundle",
@@ -11181,7 +11181,6 @@
         "jolicode/jolitypo-bundle": 0,
         "friendsofsymfony/elastica-bundle": 20,
         "jms/serializer": 20,
-        "snc/redis-bundle": 20,
         "caxy/htmldiff-bundle": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "tonicforhealth/behat-parallel-scenario": 20

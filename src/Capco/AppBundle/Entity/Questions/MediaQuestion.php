@@ -14,7 +14,7 @@ class MediaQuestion extends AbstractQuestion
         $this->type = 7;
     }
 
-    public function isMediaQuestion() : bool
+    public function isMediaQuestion(): bool
     {
         return true;
     }

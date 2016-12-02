@@ -55,7 +55,7 @@ class DownloadController extends Controller
         throw $this->createAccessDeniedException();
     }
 
-    protected function getProvider(MediaInterface $media) : MediaProviderInterface
+    protected function getProvider(MediaInterface $media): MediaProviderInterface
     {
         return $this->get('sonata.media.pool')->getProvider($media->getProviderName());
     }
