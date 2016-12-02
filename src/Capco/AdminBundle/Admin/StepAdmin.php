@@ -190,7 +190,7 @@ class StepAdmin extends Admin
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
                 ])
-                ->add('allowingProgressSteps', null, [
+              ->add('allowingProgressSteps', null, [
                   'label' => 'admin.fields.step.allowingProgressSteps',
                   'required' => false,
                 ])
@@ -281,6 +281,18 @@ class StepAdmin extends Admin
                 ->add('proposalsHidden', CheckboxType::class,
                     ['label' => 'admin.fields.step.proposals_hidden', 'required' => false]
                 )
+                ->add('selections', 'sonata_type_collection', [
+                    'label' => 'admin.fields.step.selections',
+                    'by_reference' => false,
+                    'help' => 'admin.help.step.selections',
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'link_parameters' => [
+                        'projectId' => $projectId,
+                        'selectionStepId' => $this->getSubject()->getId(),
+                    ],
+                ])
                 ->end()
             ;
         }
