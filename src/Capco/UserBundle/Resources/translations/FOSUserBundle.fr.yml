@@ -5,10 +5,14 @@ resetting:
   check_email: Si un compte est associé à l'adresse %email%, vous recevrez un e-mail avec un lien pour réinitialiser votre mot de passe.
   email:
     message: "Bonjour %username% !<br><br>Pour réinitialiser votre mot de passe, merci de vous rendre sur <a href='%confirmationUrl%'>%confirmationUrl%</a><br><br>Cordialement,<br>L'équipe.<br>"
-
-form:
-  no_type: Sélectionner un statut
+  reset:
+      submit: 'Créer votre mot de passe'
 
 registration:
   email:
     subject: %sitename% — Confirmez votre adresse électronique
+
+change_password:
+    submit: 'Confirmer'
+    flash:
+        success: 'Votre mot de passe a bien été configuré'

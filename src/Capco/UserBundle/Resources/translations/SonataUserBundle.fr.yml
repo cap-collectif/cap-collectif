@@ -1,6 +1,11 @@
 change_password:
-  flash:
-    success: Votre mot de passe a bien été modifié.
+    submit: 'Confirmer'
+    flash:
+        success: 'Votre mot de passe a bien été configuré'
+    form:
+      password: Créer votre mot de passe
+      password_confirmation: Répéter le mot de passe
+      submit: Confirmer
 
 form:
   label_address: Adresse
@@ -43,7 +48,7 @@ registration:
 
 resetting:
   flash:
-    success: Votre mot de passe a bien été modifié.
+    success: Votre mot de passe a bien été configuré
 
 roles:
   admin: Administrateur

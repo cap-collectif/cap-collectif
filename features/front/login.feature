@@ -44,7 +44,7 @@ Feature: Login
     When I fill in the following:
       | fos_user_resetting_form_new_first  | capcopopototo |
       | fos_user_resetting_form_new_second | capcopopototo |
-    And I press "Modifier le mot de passe"
+    And I press "Confirmer"
     Then I should be redirected to "/profile/"
     Then I can see I am logged in as "admin_without_password"
     And I should see "Votre mot de passe a bien été modifié."
