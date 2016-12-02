@@ -72,4 +72,3 @@ dump.sql
 
 # cs-fixer
 php-cs-fixer
-.php_cs.cache

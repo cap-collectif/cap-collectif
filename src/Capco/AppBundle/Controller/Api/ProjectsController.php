@@ -29,7 +29,7 @@ class ProjectsController extends FOSRestController
      * @QueryParam(name="orderBy", requirements="(date|popularity)", default="date")
      * @QueryParam(name="type", requirements="[a-z0-9]+(?:-[a-z0-9]+)*", nullable=true)
      * @QueryParam(name="term", nullable=true)
-     * @View(serializerGroups={"Projects", "Steps", "UserVotes", "ThemeDetails", "ProjectType"})
+     * @View(serializerGroups={"Projects", "Steps", "UserDetails", "UserVotes", "ThemeDetails", "ProjectType"})
      */
     public function getProjectsAction(ParamFetcherInterface $paramFetcher)
     {

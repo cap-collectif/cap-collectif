@@ -151,12 +151,7 @@ class SelectionStepsController extends FOSRestController
     public function voteOnProposalAction(Request $request, SelectionStep $selectionStep, Proposal $proposal)
     {
         $user = $this->getUser();
-        $em = $this->get('doctrine')->getManager();
-
-        // Check if we can vote without account
-        if (!$this->get('capco.toggle.manager')->isActive('vote_without_account') && !$user) {
-            throw new BadRequestHttpException('You cannot vote without an account.');
-        }
+        $em = $this->get('doctrine.orm.entity_manager');
 
         // Check if proposal is in step
         if (!in_array($selectionStep, $proposal->getSelectionSteps())) {

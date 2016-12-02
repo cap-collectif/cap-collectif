@@ -109,9 +109,9 @@ class UsersController extends FOSRestController
         $user->setConfirmationToken($token);
 
         if ($creatingAnAdmin) {
-            $this->get('capco.notify_manager')->sendAdminConfirmationEmailMessage($user);
+          $this->get('capco.notify_manager')->sendAdminConfirmationEmailMessage($user);
         } else {
-            $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
+          $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
         }
 
         $userManager->updateUser($user);

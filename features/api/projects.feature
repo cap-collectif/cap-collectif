@@ -23,6 +23,7 @@ Feature: Projects
             },
             @...@
           ],
+          "author": @...@,
           "video": @null@,
           "participantsCount": @integer@,
           "contributionsCount": @integer@,
@@ -65,6 +66,7 @@ Feature: Projects
             },
             @...@
           ],
+          "author": @...@,
           "video": @string@,
           "cover": @array@,
           "participantsCount": @integer@,
@@ -108,6 +110,7 @@ Feature: Projects
             },
             @...@
           ],
+          "author": @...@,
           "video": @null@,
           "participantsCount": @integer@,
           "contributionsCount": @integer@,
@@ -154,6 +157,7 @@ Feature: Projects
     {
       "_links": {
         "show": @string@,
+        "external": @null@,
         "admin": @string@
       }
     }

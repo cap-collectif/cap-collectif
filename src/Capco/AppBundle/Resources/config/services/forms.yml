@@ -63,7 +63,7 @@ services:
 
   capco.form.proposal_selection_vote:
       class: Capco\AppBundle\Form\ProposalSelectionVoteType
-      arguments: ["@security.token_storage", "@capco.toggle.manager"]
+      arguments: ["@security.token_storage"]
       tags:
         - { name: form.type }
 

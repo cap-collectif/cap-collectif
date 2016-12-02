@@ -411,6 +411,10 @@ admin:
       cover: Image
       created_at: Création
       events: Évènements
+      externalLink: Lien externe
+      participantsCount: Nombre de participants
+      contributionsCount: Nombre de contributions
+      votesCount: Nombre de votes
       events_count: Évènements
       exportable: Autoriser l'export
       group_content: Contenu
@@ -947,4 +951,3 @@ project:
     publicInquiry: Enquête publique
     questionnaire: Questionnaire
     suggestionBox: Boite à idées
-
