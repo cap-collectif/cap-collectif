@@ -69,6 +69,11 @@ class Project implements IndexableInterface
     private $title;
 
     /**
+     * @ORM\Column(name="external_link", type="string", length=255)
+     */
+    private $externalLink;
+
+    /**
      * @Gedmo\Slug(fields={"title"}, updatable=false)
      * @ORM\Column(length=255)
      */
@@ -249,6 +254,18 @@ class Project implements IndexableInterface
         $this->title = $title;
 
         return $this;
+    }
+
+    public function getExternalLink()
+    {
+        return $this->externalLink;
+    }
+
+    public function setExternalLink(string $link = null): self
+    {
+      $this->externalLink = $link;
+
+      return $this;
     }
 
     /**

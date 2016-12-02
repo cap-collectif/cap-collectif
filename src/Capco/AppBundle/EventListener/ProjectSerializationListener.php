@@ -47,7 +47,10 @@ class ProjectSerializationListener extends AbstractSerializationListener
     public function onPostProject(ObjectEvent $event)
     {
         $project = $event->getObject();
-        $links = ['show' => $this->stepResolver->getFirstStepLinkForProject($project)];
+        $links = [
+          'show' => $this->stepResolver->getFirstStepLinkForProject($project),
+          'external' => $project->getExternalLink(),
+        ];
 
         if ($this->eventHasGroup($event, 'ProjectAdmin')) {
             $links['admin'] = $this->router->generate('admin_capco_app_project_edit', ['id' => $project->getId()]);
