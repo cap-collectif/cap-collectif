@@ -69,7 +69,7 @@ class Project implements IndexableInterface
     private $title;
 
     /**
-     * @ORM\Column(name="external_link", type="string", length=255, nullable=true)
+     * @ORM\Column(name="external_link", type="text", length=255, nullable=true)
      */
     private $externalLink;
 
