@@ -43,6 +43,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         'security.shield_mode.username' => 'Cap Collectif',
         'security.shield_mode.password' => 'Rg6hd4Tg',
+
     ];
 
     private $siteColors = [

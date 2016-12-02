@@ -11,7 +11,7 @@ trait VoteThresholdTrait
      */
     private $voteThreshold = 0;
 
-    public function getVoteThreshold(): int
+    public function getVoteThreshold() : int
     {
         if (!$this->voteThreshold) {
             return 0;
@@ -20,19 +20,19 @@ trait VoteThresholdTrait
         return $this->voteThreshold;
     }
 
-    public function setVoteThreshold(int $voteThreshold = null): self
+    public function setVoteThreshold(int $voteThreshold = null) : self
     {
         $this->voteThreshold = $voteThreshold;
 
         return $this;
     }
 
-    public function hasVoteThreshold(): bool
+    public function hasVoteThreshold() : bool
     {
         return $this->getVoteThreshold() > 0;
     }
 
-    public function isThresholdReached(): bool
+    public function isThresholdReached() : bool
     {
         return $this->getVotesCount() >= $this->getVoteThreshold();
     }

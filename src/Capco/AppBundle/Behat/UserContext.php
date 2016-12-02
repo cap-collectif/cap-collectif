@@ -26,28 +26,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Then user :userId should have role :role
-     * @Given user :userId has role :role
-     */
-    public function userHasRole(int $userId, string $role)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
-        expect($user->hasRole($role))->toBe(true);
-    }
-
-    /**
-     * @Then user :userId should not have role :role
-     * @Given user :userId doesn't have role :role
-     */
-    public function userDoesntHaveRole(int $userId, string $role)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
-        expect($user->hasRole($role))->toBe(false);
-    }
-
-    /**
      * @Given I am logged in as admin
      */
     public function iAmLoggedInAsAdmin()

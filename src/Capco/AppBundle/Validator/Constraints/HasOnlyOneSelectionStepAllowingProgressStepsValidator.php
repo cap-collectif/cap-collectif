@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\Collection;
 
 class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint): bool
+    public function validate($value, Constraint $constraint) : bool
     {
         // Convert a ProjectAbstractStep collection to an AbstractStep collection with phpspec fallback
         // https://github.com/phpspec/phpspec/issues/991
@@ -30,7 +30,7 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintVa
         return true;
     }
 
-    public function hasMoreThanOneSelectionStepAllowingProgressSteps(ArrayCollection $steps): bool
+    public function hasMoreThanOneSelectionStepAllowingProgressSteps(ArrayCollection $steps) : bool
     {
         return $steps->filter(
             function ($step) {

@@ -31,6 +31,7 @@ class RequestListener
 
         // When requesting the API, we don't use shield mode to prevent conflicts with JWT Token
         if (false === strpos($request->getRequestUri(), '/api/')) {
+
             // Shield mode activated
             if ($this->manager->isActive('shield_mode')) {
                 $header = $request->headers->get('Authorization');

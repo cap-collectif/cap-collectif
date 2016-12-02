@@ -546,7 +546,7 @@ class ProposalForm
         return $this->notificationsConfiguration;
     }
 
-    public function setNotificationsConfiguration(ProposalFormNotificationConfiguration $configuration): self
+    public function setNotificationsConfiguration(ProposalFormNotificationConfiguration $configuration) : self
     {
         $this->notificationsConfiguration = $configuration;
         $configuration->setProposalForm($this);

@@ -41,7 +41,7 @@ class MediaResponseSerializationListener extends AbstractSerializationListener
         $event->getVisitor()->addData('medias', $this->getMediasMetas($response));
     }
 
-    protected function getMediasMetas(MediaResponse $response): array
+    protected function getMediasMetas(MediaResponse $response) : array
     {
         return $response->getMedias()
             ->map(function (Media $media) use ($response) {
@@ -66,7 +66,7 @@ class MediaResponseSerializationListener extends AbstractSerializationListener
             })->toArray();
     }
 
-    protected function formatBytes(int $bytes): string
+    protected function formatBytes(int $bytes) : string
     {
         $units = array('O', 'Ko', 'Mo', 'Go', 'To');
         $power = $bytes > 0 ? floor(log($bytes, 1024)) : 0;

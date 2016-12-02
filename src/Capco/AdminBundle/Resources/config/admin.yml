@@ -415,12 +415,6 @@ services:
       calls:
         - [ setTranslationDomain, [SonataAdminBundle]]
 
-  capco_admin.admin.selection:
-      class: Capco\AdminBundle\Admin\SelectionAdmin
-      arguments: [~, Capco\AppBundle\Entity\Selection, SonataAdminBundle:CRUD]
-      tags:
-        - {name: sonata.admin, manager_type: orm, label: admin.label.selection}
-
   capco_admin.admin.progress_step:
       class: Capco\AdminBundle\Admin\ProgressStepAdmin
       arguments: [~, Capco\AppBundle\Entity\ProgressStep, SonataAdminBundle:CRUD]

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,10 +10,6 @@ use Symfony\Component\Console\Input\InputOption;
 class RecalculateUsersCountersCommand extends ContainerAwareCommand
 {
     public $force;
-
-    /**
-     * @var EntityManager
-     */
     public $em;
     public $redis;
 
@@ -56,8 +51,8 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
     {
         $redisKey = 'recalculate_user_counters';
         $this->force = $input->getOption('force');
-        $container = $this->getContainer();
-        $this->em = $container->get('doctrine')->getManager();
+        $container = $this->getApplication()->getKernel()->getContainer();
+        $this->em = $container->get('doctrine.orm.entity_manager');
         $redis = $container->get('snc_redis.default');
         $this->ids = $redis->smembers($redisKey);
         $redis->del($redisKey);

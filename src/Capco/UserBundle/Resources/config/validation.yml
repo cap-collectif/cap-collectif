@@ -4,14 +4,14 @@ Capco\UserBundle\Entity\User:
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: phone, message: already_used_phone, groups: [registration, profile] }
   properties:
     username:
-      - NotBlank: { message: username.blank, groups: [registration, registrationAdmin, profile] }
+      - NotBlank: { message: username.blank, groups: [registration, profile] }
       - Length: { min: 2, max: 128, minMessage: username.minMessage, groups: [registration, profile] }
     plainPassword:
       - NotBlank: { message: password.blank, groups: [registration] }
       - Length: { min: 8, max: 128, minMessage: password.minMessage, groups: [registration] }
     email:
-      - NotBlank: { message: email.blank, groups: [registration, registrationAdmin, profile] }
-      - Email: { message: email.invalid, groups: [registration, registrationAdmin, profile] }
+      - NotBlank: { message: email.blank, groups: [registration, profile] }
+      - Email: { message: email.invalid, groups: [registration, profile] }
       - EmailChecker\Constraints\NotThrowawayEmail: { message: email.throwable, groups: [registration, profile] }
     twitterUrl:
       - Url: { groups: [profile] }

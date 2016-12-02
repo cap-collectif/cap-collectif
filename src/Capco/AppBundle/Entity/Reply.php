@@ -113,7 +113,7 @@ class Reply implements Contribution
         return $this;
     }
 
-    public function addResponse(AbstractResponse $response): self
+    public function addResponse(AbstractResponse $response) : self
     {
         if (!$this->responses->contains($response)) {
             $this->responses->add($response);
@@ -123,7 +123,7 @@ class Reply implements Contribution
         return $this;
     }
 
-    public function removeResponse(AbstractResponse $response): self
+    public function removeResponse(AbstractResponse $response) : self
     {
         $this->responses->removeElement($response);
 

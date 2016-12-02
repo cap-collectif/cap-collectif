@@ -387,7 +387,7 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
         return $label;
     }
 
-    public function isParticipative(): bool
+    public function isParticipative() : bool
     {
         return true;
     }

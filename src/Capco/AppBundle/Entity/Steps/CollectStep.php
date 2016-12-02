@@ -162,7 +162,7 @@ class CollectStep extends AbstractStep implements IndexableInterface, Participat
         return $this->getIsEnabled();
     }
 
-    public function isParticipative(): bool
+    public function isParticipative() : bool
     {
         return true;
     }
