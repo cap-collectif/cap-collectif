@@ -8,6 +8,9 @@ resetting:
   reset:
       submit: 'Créer votre mot de passe'
 
+form:
+  no_type: Sélectionner un statut
+  
 registration:
   email:
     subject: %sitename% — Confirmez votre adresse électronique
