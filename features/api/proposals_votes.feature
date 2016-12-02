@@ -37,6 +37,7 @@ Feature: Proposal Votes Restful Api
 
   @database @elasticsearch
   Scenario: Anonymous API client wants to vote for a proposal in a selection step
+    Given feature "vote_without_account" is enabled
     When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
     """
     {
@@ -45,6 +46,23 @@ Feature: Proposal Votes Restful Api
     }
     """
     Then the JSON response status code should be 200
+
+    @database @elasticsearch
+    Scenario: Anonymous API client wants to vote for a proposal in a selection step with vote_without_account feature disabled
+      When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
+      """
+      {
+      }
+      """
+      Then the JSON response status code should be 400
+      And the JSON response should match:
+      """
+      {
+        "code": 400,
+        "message": "You cannot vote without an account.",
+        "errors": null
+      }
+      """
 
   @security
   Scenario: Logged in API client wants to vote several times for a proposal in a selection step
@@ -61,11 +79,8 @@ Feature: Proposal Votes Restful Api
       "code": 400,
       "message": "Validation Failed",
       "errors": {
+        "errors": ["Vous avez déjà voté pour cette proposition."],
         "children": {
-          "username":[],
-          "email": {
-            "errors": ["Vous avez déjà voté pour cette proposition."]
-          },
           "comment":[],
           "private":[]
         }
@@ -75,6 +90,7 @@ Feature: Proposal Votes Restful Api
 
   @security
   Scenario: Anonymous API client wants to vote several times for a proposal in a selection step
+    Given feature "vote_without_account" is enabled
     When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
     """
     {
@@ -103,6 +119,7 @@ Feature: Proposal Votes Restful Api
 
   @security
   Scenario: Anonymous API client wants to vote with an email associated to an account
+    Given feature "vote_without_account" is enabled
     When I send a POST request to "/api/selection_steps/6/proposals/2/votes" with json:
     """
     {
@@ -212,13 +229,14 @@ Feature: Proposal Votes Restful Api
         "message":"Validation Failed",
         "errors": {
           "errors": ["Vous n'avez pas suffisamment de cr\u00e9dits disponibles pour soutenir cette proposition."],
-          "children":{"username":[],"email":[],"comment":[],"private":[]}
+          "children":{"comment":[],"private":[]}
         }
       }
       """
 
   @security
   Scenario: Anonymous API client wants to vote on a selection step that has budget vote
+    Given feature "vote_without_account" is enabled
     When I send a POST request to "/api/selection_steps/9/proposals/8/votes" with json:
       """
       {
