@@ -37,8 +37,6 @@
 
     .project__preview__themes {
         overflow: hidden;
-        height: 15px;
-        line-height: 15px;
 
         &:after {
             height: 15px;
@@ -49,11 +47,15 @@
         overflow: hidden;
         height: 75px;
         margin-top: 10px;
-        line-height: 25px;
 
         &:after {
             height: 25px;
         }
+    }
+
+    .project__preview__author {
+        overflow: hidden;
+        height: 15px;
     }
 
     .progress {

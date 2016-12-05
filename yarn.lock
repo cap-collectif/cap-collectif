@@ -5142,9 +5142,9 @@ react-toggle@^2.1.1:
     classnames "~2.2"
     react-addons-pure-render-mixin ">=0.14.0"
 
-react-truncate@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-truncate/-/react-truncate-2.0.1.tgz#a8ae67dffa3994e3a843a48b46c970641b84ae21"
+react-truncate@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-truncate/-/react-truncate-2.0.3.tgz#66c6f113f65db853475e0c5ce4e44b8c3bbfa16b"
 
 "react@>=0.11.2 <1.0.0":
   version "0.14.8"
