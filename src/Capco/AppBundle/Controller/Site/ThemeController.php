@@ -88,7 +88,7 @@ class ThemeController extends Controller
                 ->getDoctrine()
                 ->getRepository('CapcoAppBundle:Project')
                 ->getProjectsByTheme($theme, $maxProjectsDisplayed),
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes', 'ProjectType']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'UserDetails', 'Steps', 'Themes', 'ProjectType']));
 
         $ideaCreationProps = $serializer->serialize([
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),

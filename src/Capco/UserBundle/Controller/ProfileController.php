@@ -132,7 +132,7 @@ class ProfileController extends BaseController
 
         $projectsProps = $serializer->serialize([
             'projects' => $projectsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails', 'ProjectType']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'UserDetails', 'Steps', 'ThemeDetails', 'ProjectType']));
         $projectsCount = count($projectsRaw);
 
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
