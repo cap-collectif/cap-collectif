@@ -240,6 +240,26 @@ class ProjectRepository extends EntityRepository
         return $projects;
     }
 
+    public function getProjectsByTheme(Theme $theme, int $max = 0): array
+    {
+        $query = $this->getIsEnabledQueryBuilder()
+            ->addSelect('t', 'pas', 's', 'pov')
+            ->leftJoin('p.themes', 't')
+            ->leftJoin('p.steps', 'pas')
+            ->leftJoin('pas.step', 's')
+            ->leftJoin('p.Cover', 'pov')
+            ->leftJoin('p.projectType', 'type')
+            ->andWhere('t = :theme')
+            ->setParameter('theme', $theme)
+            ->addOrderBy('p.publishedAt', 'DESC');
+
+        if ($max > 0) {
+            $query->setMaxResults($max)->setFirstResult(0);
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
     public function countPublished()
     {
         $qb = $this->getIsEnabledQueryBuilder()

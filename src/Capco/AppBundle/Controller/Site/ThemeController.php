@@ -73,27 +73,22 @@ class ThemeController extends Controller
      * @Route("/themes/{slug}", name="app_theme_show", defaults={"_feature_flags" = "themes"})
      * @ParamConverter("theme", class="CapcoAppBundle:Theme", options={"repository_method" = "getOneBySlug"})
      * @Template("CapcoAppBundle:Theme:show.html.twig")
-     *
-     * @param Theme $theme
-     * @param int   $max
-     *
-     * @return array
      */
     public function showAction(Theme $theme)
     {
-        if (false == $theme->canDisplay()) {
+        if (!$theme->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', [], 'CapcoAppBundle'));
         }
         $maxProjectsDisplayed = 12;
 
-        $em = $this->get('doctrine.orm.entity_manager');
-        $serializer = $this->get('jms_serializer');
+        $em = $this->get('doctrine')->getManager();
+        $serializer = $this->get('serializer');
         $projectProps = $serializer->serialize([
             'projects' => $this
-                ->get('doctrine.orm.entity_manager')
+                ->getDoctrine()
                 ->getRepository('CapcoAppBundle:Project')
-                ->getLastByTheme($theme->getId(), $maxProjectsDisplayed, 0),
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
+                ->getProjectsByTheme($theme, $maxProjectsDisplayed),
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes', 'ProjectType']));
 
         $ideaCreationProps = $serializer->serialize([
             'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
