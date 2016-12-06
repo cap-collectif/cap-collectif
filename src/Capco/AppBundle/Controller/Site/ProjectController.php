@@ -33,7 +33,7 @@ class ProjectController extends Controller
                 ->getRepository('CapcoAppBundle:Project')
                 ->getLastPublished($max, $offset),
         ], 'json', SerializationContext::create()->setGroups([
-            'Projects', 'Steps', 'UserDetails', 'StepTypes', 'ThemeDetails', 'ProjectType',
+            'Projects', 'Steps', 'StepTypes', 'ThemeDetails', 'ProjectType',
         ]));
 
         return [
@@ -52,20 +52,16 @@ class ProjectController extends Controller
         $userVotesByStepId = $this->get('capco.proposal_votes.resolver')->getUserVotesByStepIdForProject($project, $this->getUser());
 
         $serializer = $this->get('jms_serializer');
-        $proposalRepo = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Proposal');
+        $proposalRepo = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:Proposal');
 
         $userVotesByStepIdSerialized = [];
         foreach ($userVotesByStepId as $stepId => $proposals) {
             $userVotesByStepIdSerialized[$stepId] = [];
             foreach ($proposals as $proposalId) {
-                $userVotesByStepIdSerialized[$stepId][] = json_decode(
-                    $serializer->serialize(
-                        $proposalRepo->find($proposalId),
-                        'json',
-                        SerializationContext::create()->setGroups(['Proposals', 'UsersInfos'])
-                    ),
-                    true
-                );
+                array_push(
+              $userVotesByStepIdSerialized[$stepId],
+              json_decode($serializer->serialize($proposalRepo->find($proposalId), 'json', SerializationContext::create()->setGroups(['Proposals', 'UsersInfos'])), true)
+            );
             }
         }
 
@@ -83,7 +79,8 @@ class ProjectController extends Controller
      */
     public function showStatsAction(Project $project)
     {
-        $serializer = $this->get('serializer');
+        $serializer = $this->get('jms_serializer');
+        $em = $this->get('doctrine.orm.entity_manager');
 
         $steps = $this
             ->get('capco.project_stats.resolver')
@@ -114,7 +111,7 @@ class ProjectController extends Controller
      */
     public function showTrashedAction(Project $project)
     {
-        if (!$project->canDisplay()) {
+        if (false == $project->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
 
@@ -122,7 +119,7 @@ class ProjectController extends Controller
             throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
 
         $opinions = $em->getRepository('CapcoAppBundle:Opinion')->getTrashedOrUnpublishedByProject($project);
         $versions = $em->getRepository('CapcoAppBundle:OpinionVersion')->getTrashedOrUnpublishedByProject($project);

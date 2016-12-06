@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-import Truncate from 'react-truncate';
 
 const ProjectPreviewThemes = React.createClass({
   propTypes: {
@@ -14,32 +13,30 @@ const ProjectPreviewThemes = React.createClass({
     const { project, features } = this.props;
     if (features.themes && project.themes.length > 0) {
       return (
-        <div className="excerpt project__preview__themes small">
-          <Truncate lines={1}>
-            {
-              project.themes.map((theme, index) => {
-                return (
-                  <span key={index}>
+        <div className="excerpt project__preview__themes smart-fade small" style={{ height: 15 }}>
+          {
+            project.themes.map((theme, index) => {
+              return (
+                <span key={index}>
                   <a
                     className="excerpt"
                     href={theme._links.show}
                   >
                     {theme.title}
                   </a>
-                    {
-                      index < project.themes.length - 1 &&
-                      <span>, </span>
-                    }
+                  {
+                    index < project.themes.length - 1 &&
+                    <span>, </span>
+                  }
                 </span>
-                );
-              })
-            }
-          </Truncate>
+              );
+            })
+          }
         </div>
       );
     }
     return (
-      <div className="excerpt project__preview__themes small"></div>
+      <div className="excerpt project__preview__themes smart-fade small"></div>
     );
   },
 

@@ -263,9 +263,9 @@ class Project implements IndexableInterface
 
     public function setExternalLink(string $link = null): self
     {
-        $this->externalLink = $link;
+      $this->externalLink = $link;
 
-        return $this;
+      return $this;
     }
 
     /**
