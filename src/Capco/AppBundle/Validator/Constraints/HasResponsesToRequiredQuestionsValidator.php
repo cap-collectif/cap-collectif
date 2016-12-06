@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Doctrine\Common\Collections\Collection;
 
 class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
 {
@@ -35,6 +36,9 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                   $value = $response->getMedias();
                 } else {
                   $value = $response->getValue();
+                }
+                if ($value instanceof Collection && $value->count() > 0) {
+                  return true;
                 }
                 if (is_array($value) && count($value)) {
                     return true;
