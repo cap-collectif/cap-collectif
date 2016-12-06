@@ -232,21 +232,9 @@ class Notify implements MailerInterface
         }
     }
 
-    public function notifyProjectCreated(Project $project)
-    {
-      $author = $project->getAuthor();
-      $editUrl = $this->router->generate('admin_capco_app_project_edit', ['id' => $project->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-      $sitename = $this->resolver->getValue('global.site.fullname');
-      $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
-      $rendered = $this->templating->render('CapcoAppBundle:Mail:createProject.html.twig', [
-          'user' => $author,
-          'sitename' => $sitename,
-          'editUrl' => $editUrl,
-          'projectsUrl' => $this->router->generate('app_project', [], UrlGeneratorInterface::ABSOLUTE_URL),
-      ]);
-      $this->sendEmail($author->getEmail(), $fromAddress, 'Cap Collectif', $rendered, 'Votre consultation sur '.$sitename);
-    }
-
+    /**
+     * @param $contribution
+     */
     public function notifyModeration($contribution)
     {
         $from = $this->resolver->getValue('admin.mail.notifications.send_address');

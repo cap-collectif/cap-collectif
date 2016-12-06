@@ -15,9 +15,6 @@
 !/bin/symfony_requirements
 /bin/
 
-# Flow - for now, we don't commit defs, maybe in the future
-flow-typed
-
 # infra
 infrastructure/environments/current.yml
 infrastructure/services/databasefixtures/dump.sql

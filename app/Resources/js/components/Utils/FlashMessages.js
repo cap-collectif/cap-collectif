@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import { Alert } from 'react-bootstrap';
@@ -14,7 +13,7 @@ const FlashMessages = React.createClass({
   },
   mixins: [IntlMixin],
 
-  getDefaultProps(): Object {
+  getDefaultProps() {
     return {
       errors: [],
       success: [],
@@ -25,7 +24,7 @@ const FlashMessages = React.createClass({
     };
   },
 
-  renderText(message: any): string {
+  renderText(message) {
     const { translate } = this.props;
     if (translate) {
       if (typeof message === 'string') {
@@ -40,7 +39,7 @@ const FlashMessages = React.createClass({
     return message;
   },
 
-  renderMessage(index: number, message: string, type: string): ?React$Element<any> {
+  renderMessage(index, message, type) {
     const {
       form,
       onDismissMessage,
@@ -65,23 +64,23 @@ const FlashMessages = React.createClass({
     );
   },
 
-  render(): ?React$Element<any> {
+  render() {
     const {
       errors,
       success,
     } = this.props;
-    if ((errors && errors.length > 0) || (success && success.length > 0)) {
+    if (errors.length > 0 || success.length > 0) {
       return (
         <div className="flashmessages">
           {
-            errors && errors.map((message: string, index: number): ?React$Element<any> => {
+            errors.map((message, index) => {
               return this.renderMessage(index, message, 'warning');
             })
-              }
-              {
-                success && success.map((message: string, index: number): ?React$Element<any> => {
-                  return this.renderMessage(index, message, 'success');
-                })
+          }
+          {
+            success.map((message, index) => {
+              return this.renderMessage(index, message, 'success');
+            })
           }
         </div>
       );

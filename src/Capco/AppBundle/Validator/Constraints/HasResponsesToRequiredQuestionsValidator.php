@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
 
 class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
 {
@@ -29,7 +30,12 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
     {
         foreach ($responses as $response) {
             if ($response->getQuestion() === $question) {
-                $value = $response->getValue();
+                $value = null;
+                if ($response instanceof MediaResponse) {
+                  $value = $response->getMedias();
+                } else {
+                  $value = $response->getValue();
+                }
                 if (is_array($value) && count($value)) {
                     return true;
                 }
