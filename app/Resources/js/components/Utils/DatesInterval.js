@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin, FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
@@ -9,19 +10,19 @@ const DatesInterval = React.createClass({
   },
   mixins: [IntlMixin],
 
-  getDefaultProps() {
+  getDefaultProps(): Object {
     return {
       startAt: null,
       endAt: null,
     };
   },
 
-  lastOneDay() {
+  lastOneDay(): boolean {
     const { startAt, endAt } = this.props;
     return moment(endAt).diff(moment(startAt), 'days') < 1;
   },
 
-  render() {
+  render(): ?React$Element<any> {
     const { startAt, endAt } = this.props;
 
     if (!startAt) {

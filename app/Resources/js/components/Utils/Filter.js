@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 
@@ -10,14 +11,14 @@ const Filter = React.createClass({
   },
   mixins: [IntlMixin],
 
-  getDefaultProps() {
+  getDefaultProps(): Object {
     return {
       values: ['popular', 'last', 'old'],
       show: true,
     };
   },
 
-  render() {
+  render(): ?React$Element<any> {
     const {
       onChange,
       show,
@@ -32,7 +33,7 @@ const Filter = React.createClass({
           onChange={onChange}
         >
           {
-            values.map((val, index) => {
+            values && values.map((val: number, index: number): ?React$Element<any> => {
               return (
                 <option value={val} key={index}>
                   {this.getIntlMessage(`global.filter_${val}`)}

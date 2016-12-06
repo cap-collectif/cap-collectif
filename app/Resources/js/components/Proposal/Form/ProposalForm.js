@@ -14,6 +14,7 @@ import { loadSuggestions } from '../../../actions/ProposalActions';
 
 const ProposalForm = React.createClass({
   propTypes: {
+    currentStepId: PropTypes.number.isRequired,
     form: PropTypes.object.isRequired,
     themes: PropTypes.array.isRequired,
     districts: PropTypes.array.isRequired,
@@ -175,7 +176,7 @@ const ProposalForm = React.createClass({
     });
     if (title.length > 3) {
       this.setState({ isLoadingSuggestions: true });
-      loadSuggestions(this.props.form.id, title)
+      loadSuggestions(this.props.currentStepId, title)
         .then(res => {
           if (this.state.form.title === title) { // last request only
             this.setState({
@@ -435,12 +436,11 @@ const ProposalForm = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.default.features,
-    themes: state.default.themes,
-    districts: state.default.districts,
-  };
-};
+const mapStateToProps = state => ({
+  features: state.default.features,
+  themes: state.default.themes,
+  districts: state.default.districts,
+  currentStepId: state.project.currentStepId,
+});
 
 export default connect(mapStateToProps)(ProposalForm);

@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes, cloneElement } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
@@ -15,19 +16,21 @@ export const LoginOverlay = React.createClass({
   },
   mixins: [IntlMixin],
 
-  getDefaultProps() {
+  getDefaultProps(): Object {
     return {
       user: null,
       enabled: true,
     };
   },
 
-  getInitialState() {
+  getInitialState(): Object {
     return {
       showLogin: false,
       showRegistration: false,
     };
   },
+
+  popover: null,
 
   handleLoginClick() {
     this.setState({ showLogin: true });
@@ -46,7 +49,7 @@ export const LoginOverlay = React.createClass({
   },
 
   // We add Popover if user is not connected
-  render() {
+  render(): ?React$Element<any> {
     const { user, children, enabled, features } = this.props;
     const { showRegistration, showLogin } = this.state;
 
@@ -60,7 +63,7 @@ export const LoginOverlay = React.createClass({
         <p>{ this.getIntlMessage('vote.popover.body') }</p>
         {
           features.registration &&
-          <p>
+            <p>
             <Button
               onClick={this.handleRegistrationClick}
                 className="center-block btn-block"
@@ -99,11 +102,9 @@ export const LoginOverlay = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.default.features,
-    user: state.default.user,
-  };
-};
+const mapStateToProps = (state: Object): Object => ({
+  features: state.default.features,
+  user: state.default.user,
+});
 
 export default connect(mapStateToProps)(LoginOverlay);
