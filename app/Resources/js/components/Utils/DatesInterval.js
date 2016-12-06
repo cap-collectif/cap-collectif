@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin, FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';

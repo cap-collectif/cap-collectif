@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes, cloneElement } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
@@ -28,6 +29,8 @@ export const LoginOverlay = React.createClass({
       showRegistration: false,
     };
   },
+
+  popover: null,
 
   handleLoginClick() {
     this.setState({ showLogin: true });
@@ -60,7 +63,7 @@ export const LoginOverlay = React.createClass({
         <p>{ this.getIntlMessage('vote.popover.body') }</p>
         {
           features.registration &&
-          <p>
+            <p>
             <Button
               onClick={this.handleRegistrationClick}
                 className="center-block btn-block"
