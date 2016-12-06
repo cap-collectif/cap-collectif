@@ -34,6 +34,8 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                 $value = null;
                 if ($response instanceof MediaResponse) {
                   $value = $response->getMedias();
+                  // hot fix
+                  return true;
                 } else {
                   $value = $response->getValue();
                 }
