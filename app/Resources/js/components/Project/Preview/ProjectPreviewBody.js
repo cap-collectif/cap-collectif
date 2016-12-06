@@ -21,7 +21,7 @@ const ProjectPreviewBody = React.createClass({
         && step.type !== 'ranking'
         && step.type !== 'other'
         && step.timeless;
-    }).length === 0;
+    }).length === 0 && project.steps.length > 0;
   },
 
   render() {
