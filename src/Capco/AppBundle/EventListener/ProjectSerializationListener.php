@@ -8,6 +8,7 @@ use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializationContext;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Router;
 
@@ -53,7 +54,11 @@ class ProjectSerializationListener extends AbstractSerializationListener
         ];
 
         if ($this->eventHasGroup($event, 'ProjectAdmin')) {
-            $links['admin'] = $this->router->generate('admin_capco_app_project_edit', ['id' => $project->getId()]);
+            $links['admin'] = $this->router->generate(
+              'admin_capco_app_project_edit',
+              ['id' => $project->getId()],
+              UrlGeneratorInterface::ABSOLUTE_URL
+            );
         }
 
         $event->getVisitor()->addData('_links', $links);

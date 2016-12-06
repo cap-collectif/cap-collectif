@@ -3653,6 +3653,10 @@ jest-runtime@^17.0.3:
     multimatch "^2.1.0"
     yargs "^6.3.0"
 
+jest-serializer-enzyme@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/jest-serializer-enzyme/-/jest-serializer-enzyme-0.1.2.tgz#bfbbc0085fb68060bb090170be22eb329ee4715a"
+
 jest-snapshot@^17.0.3:
   version "17.0.3"
   resolved "https://registry.yarnpkg.com/jest-snapshot/-/jest-snapshot-17.0.3.tgz#c8199db4ccbd5515cfecc8e800ab076bdda7abc0"

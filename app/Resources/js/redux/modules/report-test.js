@@ -1,4 +1,4 @@
-/* eslint-env mocha */
+/* eslint-env jest */
 import { expect } from 'chai';
 import { reducer, OPEN_MODAL, CLOSE_MODAL, START_LOADING, STOP_LOADING, ADD_REPORTED } from './report';
 

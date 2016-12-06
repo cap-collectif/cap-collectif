@@ -36,6 +36,9 @@
     "setupFiles": [
       "jest-setup.js"
     ],
+    "snapshotSerializer": [
+      "<rootDir>/node_modules/jest-serializer-enzyme"
+    ],
     "transform": {
       ".*": "<rootDir>/node_modules/babel-jest"
     }
@@ -126,6 +129,7 @@
     "fb-flo-brunch": "^1.7.22",
     "flow-bin": "^0.36.0",
     "jest": "^17.0.3",
+    "jest-serializer-enzyme": "^0.1.2",
     "jscs": "^3.0.7",
     "react-addons-test-utils": "^15.3.1"
   }
