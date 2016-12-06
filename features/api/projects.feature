@@ -165,6 +165,7 @@ Feature: Projects
     And project "11" should have author 42
     And user 42 should have role "ROLE_ADMIN"
     And project "11" should not be published
+    Then 1 mail should be sent
 
     @parallel-scenario
     Scenario: API client wants to get all project steps
