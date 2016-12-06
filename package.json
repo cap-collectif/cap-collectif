@@ -96,7 +96,7 @@
     "react-router-bootstrap": "^0.23.1",
     "react-select": "^1.0.0-rc.2",
     "react-toggle": "^2.1.1",
-    "react-truncate": "^2.0.0",
+    "react-truncate": "^2.0.3",
     "readmore": "0.0.2",
     "redux": "^3.4.0",
     "redux-form": "6.2.0",

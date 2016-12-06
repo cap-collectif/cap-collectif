@@ -19,6 +19,7 @@ Feature: Proposal votes
 
   @javascript @database @elasticsearch @votes_from_selection_step
   Scenario: Anonymous user wants to vote for a proposal in a selection step with a comment
+    Given feature "vote_without_account" is enabled
     Given I go to a selection step with simple vote enabled
     When I click the proposal vote button
     And I fill the proposal vote form
@@ -28,6 +29,7 @@ Feature: Proposal votes
 
   @javascript @database @elasticsearch @votes_from_selection_step
   Scenario: Anonymous user wants to vote for a proposal in a selection step anonymously
+    Given feature "vote_without_account" is enabled
     Given I go to a selection step with simple vote enabled
     When I click the proposal vote button
     And I fill the proposal vote form
@@ -37,6 +39,7 @@ Feature: Proposal votes
 
   @javascript @elasticsearch @votes_from_selection_step
   Scenario: Anonymous user wants to vote twice with the same email in a selection step
+    Given feature "vote_without_account" is enabled
     Given I go to a selection step with simple vote enabled
     When I click the proposal vote button
     And I fill the proposal vote form with already used email
@@ -45,6 +48,7 @@ Feature: Proposal votes
 
   @javascript @elasticsearch @security @votes_from_selection_step
   Scenario: Anonymous user wants to vote in a selection step with an email already associated to an account
+    Given feature "vote_without_account" is enabled
     Given I go to a selection step with simple vote enabled
     When I click the proposal vote button
     And I fill the proposal vote form with a registered email
@@ -61,18 +65,21 @@ Feature: Proposal votes
 
   @javascript @security @elasticsearch @votes_from_selection_step
   Scenario: Anonymous user wants to vote on a selection step that has budget vote in a selection step
+    Given feature "vote_without_account" is enabled
     When I go to a selection step with budget vote enabled
     And I click the proposal vote button
     Then I should see "Vous devez être connecté pour réaliser cette action."
 
   @javascript @security @elasticsearch @votes_from_selection_step
-    Scenario: Anonymous user wants to vote on a selection step that is not open yet
+  Scenario: Anonymous user wants to vote on a selection step that is not open yet
+    Given feature "vote_without_account" is enabled
     When I go to a selection step not yet open
     Then the proposal should have 0 votes
     And the proposal vote button must be disabled
 
   @javascript @security @elasticsearch @votes_from_selection_step
   Scenario: Anonymous user wants to vote on a selection step that is closed
+    Given feature "vote_without_account" is enabled
     When I go to a closed selection step
     Then the proposal should have 1 votes
     And the proposal vote button must be disabled
@@ -113,6 +120,7 @@ Feature: Proposal votes
 
   @javascript @database @votes_from_proposal
   Scenario: Anonymous user wants to vote for a proposal with a comment
+    Given feature "vote_without_account" is enabled
     Given I go to a proposal
     And the proposal has 3 votes
     And the proposal has 0 comments
@@ -129,6 +137,7 @@ Feature: Proposal votes
 
   @javascript @elasticsearch @database @votes_from_proposal
   Scenario: Anonymous user wants to vote for a proposal anonymously
+    Given feature "vote_without_account" is enabled
     Given I go to a proposal
     And the proposal has 3 votes
     When I click the proposal vote button
@@ -142,6 +151,7 @@ Feature: Proposal votes
 
   @javascript @security @votes_from_proposal
   Scenario: Anonymous user wants to vote twice with the same email
+    Given feature "vote_without_account" is enabled
     Given I go to a proposal
     And the proposal has 3 votes
     When I click the proposal vote button
@@ -151,6 +161,7 @@ Feature: Proposal votes
 
   @javascript @security @votes_from_proposal
   Scenario: Anonymous user wants to vote with an email already associated to an account
+    Given feature "vote_without_account" is enabled
     Given I go to a proposal
     And the proposal has 3 votes
     When I click the proposal vote button

@@ -86,6 +86,8 @@ admin.label.settings.modules: Fonctionnalités
 admin.label.settings.notifications: Notifications
 admin.label.settings.shield_mode: Mode bouclier
 
+admin.label.help_block: Besoin d'aide ?
+
 step:
   verification:
     none: Non

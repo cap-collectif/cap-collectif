@@ -34,11 +34,12 @@ const ProposalVoteForm = React.createClass({
     anonymous: PropTypes.bool.isRequired,
     comment: PropTypes.string.isRequired,
     error: PropTypes.string,
+    voteWithoutAccount: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { error, handleSubmit, comment, isPrivate, anonymous } = this.props;
+    const { error, handleSubmit, comment, isPrivate, anonymous, voteWithoutAccount } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         {
@@ -48,7 +49,7 @@ const ProposalVoteForm = React.createClass({
             </Alert>
         }
         {
-          anonymous &&
+          anonymous && voteWithoutAccount &&
             <Field
               type="text"
               component={renderComponent}
@@ -58,7 +59,7 @@ const ProposalVoteForm = React.createClass({
             />
         }
         {
-          anonymous &&
+          anonymous && voteWithoutAccount &&
             <Field
               type="email"
               component={renderComponent}
@@ -68,7 +69,7 @@ const ProposalVoteForm = React.createClass({
             />
         }
         {
-          !isPrivate &&
+          !isPrivate && (!voteWithoutAccount || anonymous) &&
             <Field
               type="textarea"
               component={renderComponent}
@@ -84,7 +85,7 @@ const ProposalVoteForm = React.createClass({
             />
         }
         {
-          comment.length > 0
+          comment.length > 0 && (voteWithoutAccount || !anonymous)
           ? null
             : <Field
               type="checkbox"
@@ -104,6 +105,7 @@ const mapStateToProps = state => ({
   comment: formValueSelector(form)(state, 'comment') || '',
   isPrivate: formValueSelector(form)(state, 'private') || false,
   anonymous: state.default.user === null,
+  voteWithoutAccount: state.default.features.vote_without_account,
 });
 
 export default connect(mapStateToProps)(reduxForm({

@@ -10,6 +10,7 @@ sonata_admin:
     dashboard:
         blocks:
             - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [admin.group.moderation] } }
+            - { position: right,  type: capco_admin.block.help, settings: { title: admin.label.help_block } }
             - { position: right,  type: capco_admin.block.recent_contributions, settings: { number: 5, title: admin.label.recent_contributions } }
             - { position: left,  type: capco_admin.blog.block.recent_posts, settings: { number: 7, title: admin.label.recent_posts, toggle: 'blog' } }
         groups:
@@ -70,17 +71,18 @@ sonata_block:
         sonata.admin.block.search_result:
             contexts:   [ admin ]
 
-        sonata.block.service.text:
-        sonata.block.service.rss:
+        sonata.block.service.text: ~
+        sonata.block.service.rss: ~
 
-        sonata.user.block.menu:    # used to display the menu in profile pages
-        sonata.user.block.account: # used to display menu option (login option)
+        sonata.user.block.menu: ~   # used to display the menu in profile pages
+        sonata.user.block.account: ~ # used to display menu option (login option)
 
-        sonata.media.block.media:
-        sonata.media.block.gallery:
-        sonata.media.block.feature_media:
-        capco_admin.blog.block.recent_posts:
-        capco_admin.block.recent_contributions:
+        sonata.media.block.media: ~
+        sonata.media.block.gallery: ~
+        sonata.media.block.feature_media: ~
+        capco_admin.blog.block.recent_posts: ~
+        capco_admin.block.recent_contributions: ~
+        capco_admin.block.help: ~
 
 sonata_classification:
     class:

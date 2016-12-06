@@ -206,7 +206,7 @@ class HomepageController extends Controller
                 ->getDoctrine()
                 ->getRepository('CapcoAppBundle:Project')
                 ->getLastPublished($max, $offset),
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'Themes', 'ProjectType']));
+        ], 'json', SerializationContext::create()->setGroups(['Projects', 'UserDetails', 'Steps', 'Themes', 'ProjectType']));
 
         return [
             'max' => $max,

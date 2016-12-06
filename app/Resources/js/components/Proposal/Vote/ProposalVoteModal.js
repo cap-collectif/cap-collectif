@@ -20,6 +20,7 @@ const ProposalVoteModal = React.createClass({
     valid: PropTypes.bool.isRequired,
     creditsLeft: PropTypes.number,
     user: PropTypes.object,
+    voteWithoutAccount: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -60,12 +61,15 @@ const ProposalVoteModal = React.createClass({
       isSubmitting,
       valid,
       user,
+      voteWithoutAccount,
     } = this.props;
     return (
       <Modal
         animation={false}
         show={showModal}
-        onHide={() => { dispatch(closeVoteModal()); }}
+        onHide={() => {
+          dispatch(closeVoteModal());
+        }}
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
       >
@@ -86,18 +90,25 @@ const ProposalVoteModal = React.createClass({
         <Modal.Footer>
           <CloseButton
             className="pull-right"
-            onClose={() => { dispatch(closeVoteModal()); }}
+            onClose={() => {
+              dispatch(closeVoteModal());
+            }}
           />
-          <SubmitButton
-            id="confirm-proposal-vote"
-            onSubmit={() => { dispatch(submit('proposalVote')); }}
-            label="proposal.vote.confirm"
-            isSubmitting={valid && isSubmitting}
-            bsStyle={(!proposal.userHasVote || isSubmitting) ? 'success' : 'danger'}
-            style={{ marginLeft: '10px' }}
-            disabled={this.disableSubmitButton()}
-            loginOverlay={step && step.voteType === VOTE_TYPE_BUDGET}
-          />
+          {
+            (voteWithoutAccount || user) &&
+            <SubmitButton
+              id="confirm-proposal-vote"
+              onSubmit={() => {
+                dispatch(submit('proposalVote'));
+              }}
+              label="proposal.vote.confirm"
+              isSubmitting={valid && isSubmitting}
+              bsStyle={(!proposal.userHasVote || isSubmitting) ? 'success' : 'danger'}
+              style={{ marginLeft: '10px' }}
+              disabled={this.disableSubmitButton()}
+              loginOverlay={step && step.voteType === VOTE_TYPE_BUDGET}
+            />
+          }
         </Modal.Footer>
       </Modal>
     );
@@ -115,6 +126,7 @@ const mapStateToProps = (state, props) => {
     isSubmitting: !!state.proposal.isVoting,
     valid: isValid('proposalVote')(state),
     step: steps.length === 1 ? steps[0] : null,
+    voteWithoutAccount: state.default.features.vote_without_account,
   };
 };
 

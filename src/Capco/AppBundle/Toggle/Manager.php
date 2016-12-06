@@ -36,6 +36,7 @@ class Manager
         'votes_evolution',
         'server_side_rendering',
         'zipcode_at_register',
+        'vote_without_account',
     ];
 
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)
