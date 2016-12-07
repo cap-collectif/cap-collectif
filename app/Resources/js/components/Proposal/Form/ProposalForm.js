@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import ProposalPrivateField from '../ProposalPrivateField';
 import { Button, Collapse, Panel } from 'react-bootstrap';
 import { debounce } from 'lodash';
-import { submitProposal, updateProposal } from '../../../redux/modules/proposal';
+import { submitProposal, updateProposal, cancelSubmitProposal } from '../../../redux/modules/proposal';
 import { loadSuggestions } from '../../../actions/ProposalActions';
 
 const ProposalForm = React.createClass({
@@ -134,6 +134,8 @@ const ProposalForm = React.createClass({
         } else {
           submitProposal(dispatch, this.props.form.id, form);
         }
+      } else {
+        dispatch(cancelSubmitProposal());
       }
     }
   },
@@ -440,7 +442,7 @@ const mapStateToProps = state => ({
   features: state.default.features,
   themes: state.default.themes,
   districts: state.default.districts,
-  currentStepId: state.project.currentStepId,
+  currentStepId: state.project.currentProjectStepById,
 });
 
 export default connect(mapStateToProps)(ProposalForm);

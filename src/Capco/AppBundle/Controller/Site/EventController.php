@@ -71,13 +71,6 @@ class EventController extends Controller
      * @Route("/events/archived/{theme}/{project}", name="app_event_archived_project", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
      * @Route("/events/archived/{theme}/{project}/{term}", name="app_event_archived_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
      * @Template("CapcoAppBundle:Event:show_archived.html.twig")
-     *
-     * @param $theme
-     * @param $project
-     * @param $term
-     * @param $request
-     *
-     * @return array
      */
     public function showArchivedAction(Request $request, $theme = null, $project = null, $term = null)
     {
