@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import OpinionCreateForm from './OpinionCreateForm';
 import { defaultValidation } from './OpinionForm';
@@ -36,10 +36,10 @@ describe('<OpinionCreateForm />', () => {
 
   it('renders a form', () => {
     const wrapper = shallow(<OpinionCreateForm {...props} />);
-    expect(wrapper.is('OpinionForm')).to.be.true;
-    expect(wrapper.prop('form')).to.equal('opinion-create-form');
-    expect(wrapper.prop('validate')).to.equal(defaultValidation);
-    expect(wrapper.prop('fields')).to.eql([
+    expect(wrapper.is('OpinionForm')).toEqual(true);
+    expect(wrapper.prop('form')).toEqual('opinion-create-form');
+    expect(wrapper.prop('validate')).toEqual(defaultValidation);
+    expect(wrapper.prop('fields')).toEqual([
       {
         id: 'opinion_title',
         label: 'title',
@@ -60,7 +60,7 @@ describe('<OpinionCreateForm />', () => {
       },
     ]);
     expect(wrapper.prop('initialValues')).to.be.undefined;
-    expect(wrapper.prop('onSubmitFail')).to.equal(props.onFailure);
+    expect(wrapper.prop('onSubmitFail')).toEqual(props.onFailure);
     expect(wrapper.prop('onSubmit')).to.be.defined;
   });
 });

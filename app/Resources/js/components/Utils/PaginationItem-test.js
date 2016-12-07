@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../translations/FR';
 import PaginationItem from './PaginationItem';
@@ -18,10 +18,10 @@ describe('<PaginationItem />', () => {
     expect(item.prop('className')).to.not.contain('active');
     expect(item.prop('className')).to.not.contain('disabled');
     const itemWrapper = wrapper.find('.page-item__wrapper');
-    expect(itemWrapper.prop('onClick')).to.equal(props.onSelect);
-    expect(itemWrapper.prop('aria-label')).to.equal(props.page);
+    expect(itemWrapper.prop('onClick')).toEqual(props.onSelect);
+    expect(itemWrapper.prop('aria-label')).toEqual(props.page);
     const itemLabel = wrapper.find('.page-item__label');
-    expect(itemLabel.text()).to.equal(`${props.page}`);
+    expect(itemLabel.text()).toEqual(`${props.page}`);
   });
 
   it('should render a disabled pagination item when specified', () => {
@@ -39,16 +39,16 @@ describe('<PaginationItem />', () => {
   it('should render a pagination with specified label', () => {
     const wrapper = shallow(<PaginationItem {...props} label="test" {...IntlData} />);
     const itemWrapper = wrapper.find('.page-item__wrapper');
-    expect(itemWrapper.prop('aria-label')).to.equal('test');
+    expect(itemWrapper.prop('aria-label')).toEqual('test');
     const itemLabel = wrapper.find('.page-item__label');
-    expect(itemLabel.text()).to.equal('test');
+    expect(itemLabel.text()).toEqual('test');
   });
 
   it('should render a pagination with specified aria label even when label is specified', () => {
     const wrapper = shallow(<PaginationItem {...props} ariaLabel="test" label="test2" {...IntlData} />);
     const itemWrapper = wrapper.find('.page-item__wrapper');
-    expect(itemWrapper.prop('aria-label')).to.equal('test');
+    expect(itemWrapper.prop('aria-label')).toEqual('test');
     const itemLabel = wrapper.find('.page-item__label');
-    expect(itemLabel.text()).to.equal('test2');
+    expect(itemLabel.text()).toEqual('test2');
   });
 });

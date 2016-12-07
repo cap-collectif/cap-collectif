@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import { VisibilityBox } from './VisibilityBox';
 import IntlData from '../../translations/FR';
@@ -17,7 +17,7 @@ describe('<VisibilityBox />', () => {
         <div className="foo" />
       </VisibilityBox>
     );
-    expect(wrapper.html()).to.equal('<div class="foo"></div>');
+    expect(wrapper.html()).toEqual('<div class="foo"></div>');
   });
 
   it('renders children if user is logged', () => {
@@ -26,8 +26,8 @@ describe('<VisibilityBox />', () => {
         <div className="foo" />
       </VisibilityBox>
     );
-    expect(wrapper.find('.foo').html()).to.equal('<div class="foo"></div>');
-    expect(wrapper.find('#privateInfo')).to.have.length(1);
+    expect(wrapper.find('.foo').html()).toEqual('<div class="foo"></div>');
+    expect(wrapper.find('#privateInfo')).toHaveLength(1);
     expect(wrapper.find('#privateInfo').text().trim()).to.be.eql(IntlData.messages.proposal.private.message);
   });
 
@@ -37,7 +37,7 @@ describe('<VisibilityBox />', () => {
         <div className="foo" />
       </VisibilityBox>
     );
-    expect(wrapper.find('Jumbotron')).to.have.length(1);
-    expect(wrapper.children().find('LoginButton')).to.have.length(1);
+    expect(wrapper.find('Jumbotron')).toHaveLength(1);
+    expect(wrapper.children().find('LoginButton')).toHaveLength(1);
   });
 });

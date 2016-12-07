@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import IdeasList from './IdeasList';
@@ -15,12 +15,12 @@ const ideas = [
 describe('<IdeasList />', () => {
   it('it should render nothing when no ideas', () => {
     const wrapper = shallow(<IdeasList ideas={[]} {...IntlData} />);
-    expect(wrapper.children()).to.have.length(0);
+    expect(wrapper.children()).toHaveLength(0);
   });
 
   it('it should render a row containing as many idea list item as ideas in props', () => {
     const wrapper = shallow(<IdeasList ideas={ideas} {...IntlData} />);
-    expect(wrapper.find('Row')).to.have.length(1);
-    expect(wrapper.find(IdeaListItem)).to.have.length(2);
+    expect(wrapper.find('Row')).toHaveLength(1);
+    expect(wrapper.find(IdeaListItem)).toHaveLength(2);
   });
 });

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../translations/FR';
 import RankingBox from './RankingBox';
@@ -26,57 +26,57 @@ const itemsList = [
 describe('<RankingBox />', () => {
   it('should render ranking pick box with correct props', () => {
     const wrapper = shallow(<RankingBox {...props} items={itemsList} listType="pickBox" />);
-    expect(wrapper.find('.ranking__pick-box__choices')).to.have.lengthOf(1);
+    expect(wrapper.find('.ranking__pick-box__choices')).toHaveLength(1);
     const spots = wrapper.find(RankingSpot);
-    expect(spots).to.have.lengthOf(3);
-    expect(spots.first().prop('onDrop')).to.be.a('function');
+    expect(spots).toHaveLength(3);
+    expect(spots.first().prop('onDrop')).toBeDefined();
     const items = wrapper.find(RankingItem);
-    expect(items).to.have.lengthOf(2);
-    expect(items.first().prop('item')).to.equal(item1);
-    expect(items.first().prop('id')).to.equal('reply-42_choice-1');
-    expect(items.first().prop('disabled')).to.equal(false);
-    expect(items.first().prop('arrowFunctions')).to.include.keys('right');
-    expect(items.first().prop('arrowFunctions')).to.not.include.keys('left');
-    expect(items.first().prop('arrowFunctions')).to.not.include.keys('up');
-    expect(items.first().prop('arrowFunctions')).to.not.include.keys('down');
-    expect(items.last().prop('item')).to.equal(item2);
-    expect(items.last().prop('id')).to.equal('reply-42_choice-2');
-    expect(items.last().prop('disabled')).to.equal(false);
+    expect(items).toHaveLength(2);
+    expect(items.first().prop('item')).toEqual(item1);
+    expect(items.first().prop('id')).toEqual('reply-42_choice-1');
+    expect(items.first().prop('disabled')).toEqual(false);
+    expect(items.first().prop('arrowFunctions')).toContain('right');
+    expect(items.first().prop('arrowFunctions')).not.toContain('left');
+    expect(items.first().prop('arrowFunctions')).not.toContain('up');
+    expect(items.first().prop('arrowFunctions')).not.toContain('down');
+    expect(items.last().prop('item')).toEqual(item2);
+    expect(items.last().prop('id')).toEqual('reply-42_choice-2');
+    expect(items.last().prop('disabled')).toEqual(false);
   });
 
   it('should render ranking choice box with correct props', () => {
     const wrapper = shallow(<RankingBox {...props} items={itemsList} listType="choiceBox" />);
-    expect(wrapper.find('.ranking__choice-box__choices')).to.have.lengthOf(1);
+    expect(wrapper.find('.ranking__choice-box__choices')).toHaveLength(1);
     const spots = wrapper.find(RankingSpot);
-    expect(spots).to.have.lengthOf(3);
-    expect(spots.first().prop('onDrop')).to.be.a('function');
+    expect(spots).toHaveLength(3);
+    expect(spots.first().prop('onDrop')).toBeDefined();
     const items = wrapper.find(RankingItem);
-    expect(items).to.have.lengthOf(2);
-    expect(items.first().prop('item')).to.equal(item1);
-    expect(items.first().prop('id')).to.equal('reply-42_choice-1');
-    expect(items.first().prop('disabled')).to.equal(false);
-    expect(items.first().prop('arrowFunctions')).to.not.include.keys('right');
-    expect(items.first().prop('arrowFunctions')).to.include.keys('left');
-    expect(items.first().prop('arrowFunctions')).to.include.keys('up');
-    expect(items.first().prop('arrowFunctions')).to.include.keys('down');
-    expect(items.last().prop('item')).to.equal(item2);
-    expect(items.last().prop('id')).to.equal('reply-42_choice-2');
-    expect(items.last().prop('disabled')).to.equal(false);
+    expect(items).toHaveLength(2);
+    expect(items.first().prop('item')).toEqual(item1);
+    expect(items.first().prop('id')).toEqual('reply-42_choice-1');
+    expect(items.first().prop('disabled')).toEqual(false);
+    expect(items.first().prop('arrowFunctions')).not.toContain('right');
+    expect(items.first().prop('arrowFunctions')).toContain('left');
+    expect(items.first().prop('arrowFunctions')).toContain('up');
+    expect(items.first().prop('arrowFunctions')).toContain('down');
+    expect(items.last().prop('item')).toEqual(item2);
+    expect(items.last().prop('id')).toEqual('reply-42_choice-2');
+    expect(items.last().prop('disabled')).toEqual(false);
   });
 
   it('should render ranking choice box with disabled items', () => {
     const wrapper = shallow(<RankingBox {...props} items={itemsList} disabled listType="choiceBox" />);
-    expect(wrapper.find('.ranking__choice-box__choices')).to.have.lengthOf(1);
+    expect(wrapper.find('.ranking__choice-box__choices')).toHaveLength(1);
     const spots = wrapper.find(RankingSpot);
-    expect(spots).to.have.lengthOf(3);
-    expect(spots.first().prop('onDrop')).to.be.a('function');
+    expect(spots).toHaveLength(3);
+    expect(spots.first().prop('onDrop')).toBeDefined();
     const items = wrapper.find(RankingItem);
-    expect(items).to.have.lengthOf(2);
-    expect(items.first().prop('item')).to.equal(item1);
-    expect(items.first().prop('id')).to.equal('reply-42_choice-1');
-    expect(items.first().prop('disabled')).to.equal(true);
-    expect(items.last().prop('item')).to.equal(item2);
-    expect(items.last().prop('id')).to.equal('reply-42_choice-2');
-    expect(items.last().prop('disabled')).to.equal(true);
+    expect(items).toHaveLength(2);
+    expect(items.first().prop('item')).toEqual(item1);
+    expect(items.first().prop('id')).toEqual('reply-42_choice-1');
+    expect(items.first().prop('disabled')).toEqual(true);
+    expect(items.last().prop('item')).toEqual(item2);
+    expect(items.last().prop('id')).toEqual('reply-42_choice-2');
+    expect(items.last().prop('disabled')).toEqual(true);
   });
 });

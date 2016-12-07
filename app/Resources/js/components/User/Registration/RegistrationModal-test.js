@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import { RegistrationModal } from './RegistrationModal';
 import IntlData from '../../../translations/FR';
@@ -20,35 +20,35 @@ describe('<RegistrationModal />', () => {
 
   it('renders hidden modal if not shown', () => {
     const wrapper = shallow(<RegistrationModal show={false} features={{}} parameters={{}} {...props} />);
-    expect(wrapper.find('Modal')).to.have.length(1);
-    expect(wrapper.find('Modal').prop('show')).to.equal(false);
+    expect(wrapper.find('Modal')).toHaveLength(1);
+    expect(wrapper.find('Modal').prop('show')).toEqual(false);
   });
 
   it('renders modal if shown', () => {
     const wrapper = shallow(<RegistrationModal show features={{}} parameters={{}} {...props} />);
-    expect(wrapper.find('Modal')).to.have.length(1);
-    expect(wrapper.find('Modal').prop('show')).to.equal(true);
+    expect(wrapper.find('Modal')).toHaveLength(1);
+    expect(wrapper.find('Modal').prop('show')).toEqual(true);
   });
 
   it('renders a form', () => {
     const wrapper = shallow(<RegistrationModal show features={{}} parameters={{}} {...props} />);
     const form = wrapper.find(RegistrationForm);
-    expect(form).to.have.length(1);
-    expect(form.prop('onSubmitFail')).to.be.a('function');
-    expect(form.prop('onSubmitSuccess')).to.be.a('function');
+    expect(form).toHaveLength(1);
+    expect(form.prop('onSubmitFail')).toBeDefined();
+    expect(form.prop('onSubmitSuccess')).toBeDefined();
   });
 
   it('renders a top text and a bottom text if specified', () => {
     const wrapper = shallow(<RegistrationModal show features={{}} parameters={parametersWithTexts} {...props} />);
     const topText = wrapper.find('Alert');
-    expect(topText).to.have.length(1);
-    expect(topText.prop('className')).to.equal('text-center');
-    expect(topText.prop('bsStyle')).to.equal('info');
+    expect(topText).toHaveLength(1);
+    expect(topText.prop('className')).toEqual('text-center');
+    expect(topText.prop('bsStyle')).toEqual('info');
     const topMessage = topText.find('FormattedHTMLMessage');
-    expect(topMessage.prop('message')).to.equal(parametersWithTexts['signin.text.top']);
+    expect(topMessage.prop('message')).toEqual(parametersWithTexts['signin.text.top']);
     const bottomText = wrapper.find('.text-center.small.excerpt');
-    expect(bottomText).to.have.length(1);
+    expect(bottomText).toHaveLength(1);
     const bottomMessage = bottomText.find('FormattedHTMLMessage');
-    expect(bottomMessage.prop('message')).to.equal(parametersWithTexts['signin.text.bottom']);
+    expect(bottomMessage.prop('message')).toEqual(parametersWithTexts['signin.text.bottom']);
   });
 });

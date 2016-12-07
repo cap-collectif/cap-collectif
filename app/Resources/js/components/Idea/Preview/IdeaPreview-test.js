@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import IdeaPreview from './IdeaPreview';
@@ -24,15 +24,15 @@ const ideaVip = {
 describe('<IdeaPreview />', () => {
   it('it should render idea preview', () => {
     const wrapper = shallow(<IdeaPreview idea={idea} {...IntlData} />);
-    expect(wrapper.find('.idea__preview')).to.have.length(1);
-    expect(wrapper.find('.idea__preview.bg-vip')).to.have.length(0);
-    expect(wrapper.find(IdeaPreviewHeader)).to.have.length(1);
-    expect(wrapper.find(IdeaPreviewBody)).to.have.length(1);
-    expect(wrapper.find(IdeaPreviewFooter)).to.have.length(1);
+    expect(wrapper.find('.idea__preview')).toHaveLength(1);
+    expect(wrapper.find('.idea__preview.bg-vip')).toHaveLength(0);
+    expect(wrapper.find(IdeaPreviewHeader)).toHaveLength(1);
+    expect(wrapper.find(IdeaPreviewBody)).toHaveLength(1);
+    expect(wrapper.find(IdeaPreviewFooter)).toHaveLength(1);
   });
 
   it('should render vip background when idea author is vip', () => {
     const wrapper = shallow(<IdeaPreview idea={ideaVip} {...IntlData} />);
-    expect(wrapper.find('.idea__preview.bg-vip')).to.have.length(1);
+    expect(wrapper.find('.idea__preview.bg-vip')).toHaveLength(1);
   });
 });

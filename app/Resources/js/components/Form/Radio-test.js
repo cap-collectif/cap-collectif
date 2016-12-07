@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../translations/FR';
 import Input from './Input';
@@ -36,9 +36,9 @@ describe('<Radio />', () => {
       renderFormErrors={emptyFunction}
       {...IntlData}
     />);
-    expect(wrapper.find(RadioGroup)).to.have.lengthOf(1);
-    expect(wrapper.find(RadioGroup).prop('name')).to.equal(`choices-for-field-${field.id}`);
-    expect(wrapper.find(RadioGroup).prop('onChange')).to.be.a('function');
+    expect(wrapper.find(RadioGroup)).toHaveLength(1);
+    expect(wrapper.find(RadioGroup).prop('name')).toEqual(`choices-for-field-${field.id}`);
+    expect(wrapper.find(RadioGroup).prop('onChange')).toBeDefined();
   });
 
   it('should render a RadioGroup component with 4 Input components inside', () => {
@@ -51,12 +51,12 @@ describe('<Radio />', () => {
       renderFormErrors={emptyFunction}
       {...IntlData}
     />);
-    expect(wrapper.find(RadioGroup).find(Input)).to.have.lengthOf(4);
-    expect(wrapper.find(RadioGroup).find(Input).first().prop('id')).to.equal(`reply-12_choice-${field.choices[0].id}`);
-    expect(wrapper.find(RadioGroup).find(Input).first().prop('name')).to.equal(`choices-for-field-${field.id}`);
-    expect(wrapper.find(RadioGroup).find(Input).first().prop('type')).to.equal('radio');
-    expect(wrapper.find(RadioGroup).find(Input).first().prop('label')).to.equal(field.choices[0].label);
-    expect(wrapper.find(RadioGroup).find(Input).first().prop('value')).to.equal(field.choices[0].label);
+    expect(wrapper.find(RadioGroup).find(Input)).toHaveLength(4);
+    expect(wrapper.find(RadioGroup).find(Input).first().prop('id')).toEqual(`reply-12_choice-${field.choices[0].id}`);
+    expect(wrapper.find(RadioGroup).find(Input).first().prop('name')).toEqual(`choices-for-field-${field.id}`);
+    expect(wrapper.find(RadioGroup).find(Input).first().prop('type')).toEqual('radio');
+    expect(wrapper.find(RadioGroup).find(Input).first().prop('label')).toEqual(field.choices[0].label);
+    expect(wrapper.find(RadioGroup).find(Input).first().prop('value')).toEqual(field.choices[0].label);
   });
 
   it('should render a RadioGroup component with an Other component inside', () => {
@@ -69,8 +69,8 @@ describe('<Radio />', () => {
       renderFormErrors={emptyFunction}
       {...IntlData}
     />);
-    expect(wrapper.find(RadioGroup).find(Other)).to.have.lengthOf(1);
-    expect(wrapper.find(RadioGroup).find(Other).prop('field')).to.eql(field);
-    expect(wrapper.find(RadioGroup).find(Other).prop('onChange')).to.be.a('function');
+    expect(wrapper.find(RadioGroup).find(Other)).toHaveLength(1);
+    expect(wrapper.find(RadioGroup).find(Other).prop('field')).toEqual(field);
+    expect(wrapper.find(RadioGroup).find(Other).prop('onChange')).toBeDefined();
   });
 });

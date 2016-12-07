@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import { Post } from './Post';
 import IntlData from '../../translations/FR';
@@ -29,6 +29,6 @@ describe('<Post />', () => {
       className: 'media media--news block block--bordered box',
     });
 
-    expect(wrapper.find('.media--news__text').text()).to.equal(post.abstract);
+    expect(wrapper.find('.media--news__text').text()).toEqual(post.abstract);
   });
 });

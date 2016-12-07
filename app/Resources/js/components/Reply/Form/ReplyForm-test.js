@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import ReplyForm from './ReplyForm';
@@ -94,10 +94,10 @@ describe('<ReplyForm />', () => {
       {...IntlData}
     />);
     const component = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'text'));
-    expect(component).to.have.lengthOf(1);
-    expect(component.prop('type')).to.equal(form.fields[0].type);
-    expect(component.prop('label')).to.equal(form.fields[0].question);
-    expect(component.prop('id')).to.equal(`reply-${form.fields[0].id}`);
+    expect(component).toHaveLength(1);
+    expect(component.prop('type')).toEqual(form.fields[0].type);
+    expect(component.prop('label')).toEqual(form.fields[0].question);
+    expect(component.prop('id')).toEqual(`reply-${form.fields[0].id}`);
     expect(component.prop('help')).to.be.empty;
   });
 
@@ -111,12 +111,12 @@ describe('<ReplyForm />', () => {
       disabled={false}
       {...IntlData}
     />);
-    expect(wrapper.find(Checkbox)).to.have.lengthOf(1);
-    expect(wrapper.find(Checkbox).prop('id')).to.equal(`reply-${form.fields[1].id}`);
-    expect(wrapper.find(Checkbox).prop('field')).to.eql(form.fields[1]);
-    expect(wrapper.find(Checkbox).prop('onChange')).to.be.a('function');
-    expect(wrapper.find(Checkbox).prop('getGroupStyle')).to.be.a('function');
-    expect(wrapper.find(Checkbox).prop('renderFormErrors')).to.be.a('function');
+    expect(wrapper.find(Checkbox)).toHaveLength(1);
+    expect(wrapper.find(Checkbox).prop('id')).toEqual(`reply-${form.fields[1].id}`);
+    expect(wrapper.find(Checkbox).prop('field')).toEqual(form.fields[1]);
+    expect(wrapper.find(Checkbox).prop('onChange')).toBeDefined();
+    expect(wrapper.find(Checkbox).prop('getGroupStyle')).toBeDefined();
+    expect(wrapper.find(Checkbox).prop('renderFormErrors')).toBeDefined();
     expect(wrapper.find(Checkbox).prop('disabled')).to.be.a('boolean');
   });
 
@@ -129,12 +129,12 @@ describe('<ReplyForm />', () => {
       onValidationFailure={handleFailure}
       {...IntlData}
     />);
-    expect(wrapper.find(Radio)).to.have.lengthOf(1);
-    expect(wrapper.find(Radio).prop('id')).to.equal(`reply-${form.fields[2].id}`);
-    expect(wrapper.find(Radio).prop('field')).to.eql(form.fields[2]);
-    expect(wrapper.find(Checkbox).prop('onChange')).to.be.a('function');
-    expect(wrapper.find(Checkbox).prop('getGroupStyle')).to.be.a('function');
-    expect(wrapper.find(Checkbox).prop('renderFormErrors')).to.be.a('function');
+    expect(wrapper.find(Radio)).toHaveLength(1);
+    expect(wrapper.find(Radio).prop('id')).toEqual(`reply-${form.fields[2].id}`);
+    expect(wrapper.find(Radio).prop('field')).toEqual(form.fields[2]);
+    expect(wrapper.find(Checkbox).prop('onChange')).toBeDefined();
+    expect(wrapper.find(Checkbox).prop('getGroupStyle')).toBeDefined();
+    expect(wrapper.find(Checkbox).prop('renderFormErrors')).toBeDefined();
   });
 
   it('should render a Input select component with right props', () => {
@@ -147,10 +147,10 @@ describe('<ReplyForm />', () => {
       {...IntlData}
     />);
     const component = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'select'));
-    expect(component).to.have.length(1);
-    expect(component.prop('type')).to.equal(form.fields[3].type);
-    expect(component.prop('label')).to.equal(`${form.fields[3].question} (facultatif)`);
-    expect(component.prop('id')).to.equal(`reply-${form.fields[3].id}`);
+    expect(component).toHaveLength(1);
+    expect(component.prop('type')).toEqual(form.fields[3].type);
+    expect(component.prop('label')).toEqual(`${form.fields[3].question} (facultatif)`);
+    expect(component.prop('id')).toEqual(`reply-${form.fields[3].id}`);
     expect(component.prop('help')).to.be.equal(form.fields[3].helpText);
   });
 
@@ -164,11 +164,11 @@ describe('<ReplyForm />', () => {
       {...IntlData}
     />);
     const component = wrapper.find('Ranking');
-    expect(component).to.have.length(1);
-    expect(component.prop('id')).to.equal(`reply-${form.fields[4].id}`);
+    expect(component).toHaveLength(1);
+    expect(component.prop('id')).toEqual(`reply-${form.fields[4].id}`);
     expect(component.prop('field')).to.be.equal(form.fields[4]);
-    expect(component.prop('onChange')).to.be.a('function');
-    expect(component.prop('labelClassName')).to.equal('h4');
+    expect(component.prop('onChange')).toBeDefined();
+    expect(component.prop('labelClassName')).toEqual('h4');
   });
 
   it('should render disabled fields when form is disabled', () => {
@@ -182,14 +182,14 @@ describe('<ReplyForm />', () => {
       {...IntlData}
     />);
     const disabledInputs = wrapper.findWhere(n => (n.type() === Input && n.prop('disabled') === true));
-    expect(disabledInputs).to.have.length(2);
+    expect(disabledInputs).toHaveLength(2);
     const disabledCheckboxes = wrapper.findWhere(n => (n.type() === Checkbox && n.prop('disabled') === true));
-    expect(disabledCheckboxes).to.have.length(1);
+    expect(disabledCheckboxes).toHaveLength(1);
     const disabledRadios = wrapper.findWhere(n => (n.type() === Radio && n.prop('disabled') === true));
-    expect(disabledRadios).to.have.length(1);
+    expect(disabledRadios).toHaveLength(1);
     const enabledFields = wrapper.findWhere(n => ((n.type() === Input || n.type === Checkbox || n.type === Radio) && n.prop('disabled') === false));
-    expect(enabledFields).to.have.length(0);
+    expect(enabledFields).toHaveLength(0);
     const disabledRanking = wrapper.findWhere(n => (n.type() === Ranking && n.prop('disabled') === true));
-    expect(disabledRanking).to.have.length(1);
+    expect(disabledRanking).toHaveLength(1);
   });
 });

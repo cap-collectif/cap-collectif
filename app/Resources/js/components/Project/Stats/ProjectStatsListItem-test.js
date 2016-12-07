@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import ProjectStatsListItem from './ProjectStatsListItem';
 
@@ -20,7 +20,7 @@ describe('<ProjectStatsListItem />', () => {
 
   it('should render a bar and a value', () => {
     const wrapper = shallow(<ProjectStatsListItem {...props} />);
-    expect(wrapper.find('span.stats__list__bar')).to.have.length(1);
-    expect(wrapper.find('div.stats__list__value')).to.have.length(1);
+    expect(wrapper.find('span.stats__list__bar')).toHaveLength(1);
+    expect(wrapper.find('div.stats__list__value')).toHaveLength(1);
   });
 });

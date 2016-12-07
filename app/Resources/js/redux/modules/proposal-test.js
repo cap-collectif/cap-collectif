@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { expect } from 'chai';
+
 import {
   reducer,
   fetchPosts,
@@ -25,7 +25,7 @@ describe('Proposal Reducer', () => {
       proposalId: 1,
       posts,
     });
-    expect(newState).to.eql({
+    expect(newState).toEqual({
       proposalsById: {
         1: {
           posts,
@@ -41,8 +41,8 @@ describe('Proposal Sagas', () => {
       proposalId: 1,
     });
     const posts = [];
-    expect(generator.next().value).to.eql(call(Fetcher.get, '/proposals/1/posts'));
-    expect(generator.next({ posts }).value).to.eql(
+    expect(generator.next().value).toEqual(call(Fetcher.get, '/proposals/1/posts'));
+    expect(generator.next({ posts }).value).toEqual(
       put({
         type: POSTS_FETCH_SUCCEEDED,
         proposalId: 1,
@@ -50,6 +50,6 @@ describe('Proposal Sagas', () => {
       })
     );
 
-    expect(generator.throw({}).value).to.eql(put({ type: POSTS_FETCH_FAILED, error: {} }));
+    expect(generator.throw({}).value).toEqual(put({ type: POSTS_FETCH_FAILED, error: {} }));
   });
 });

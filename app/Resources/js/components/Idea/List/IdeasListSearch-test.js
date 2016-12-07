@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import IdeasListSearch from './IdeasListSearch';
@@ -15,13 +15,13 @@ describe('<IdeasListSearch />', () => {
   it('it should render a search input', () => {
     const wrapper = shallow(<IdeasListSearch {...props} {...IntlData} />);
     const form = wrapper.find('form');
-    expect(form).to.have.length(1);
-    expect(form.prop('onSubmit')).to.be.a('function');
-    expect(form.prop('className')).to.equal('filter__search');
+    expect(form).toHaveLength(1);
+    expect(form.prop('onSubmit')).toBeDefined();
+    expect(form.prop('className')).toEqual('filter__search');
     const input = wrapper.find(Input);
-    expect(input).to.have.length(1);
-    expect(input.prop('id')).to.equal('idea-search-input');
-    expect(input.prop('type')).to.equal('text');
-    expect(input.prop('groupClassName')).to.equal('idea-search-group pull-right');
+    expect(input).toHaveLength(1);
+    expect(input.prop('id')).toEqual('idea-search-input');
+    expect(input.prop('type')).toEqual('text');
+    expect(input.prop('groupClassName')).toEqual('idea-search-group pull-right');
   });
 });

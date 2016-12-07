@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import { IdeaReportButton } from './IdeaReportButton';
@@ -21,10 +21,10 @@ describe('<IdeaReportButton />', () => {
   it('should render a report box', () => {
     const wrapper = shallow(<IdeaReportButton {...props} {...IntlData} />);
     const reportBox = wrapper.find('Connect(ReportBox)');
-    expect(reportBox).to.have.length(1);
-    expect(reportBox.prop('reported')).to.equal(props.idea.userHasReport);
-    expect(reportBox.prop('onReport')).to.be.a.function;
-    expect(reportBox.prop('author')).to.equal(props.idea.author);
-    expect(reportBox.prop('buttonClassName')).to.equal('idea__btn--report');
+    expect(reportBox).toHaveLength(1);
+    expect(reportBox.prop('reported')).toEqual(props.idea.userHasReport);
+    expect(reportBox.prop('onReport')).toBeDefined;
+    expect(reportBox.prop('author')).toEqual(props.idea.author);
+    expect(reportBox.prop('buttonClassName')).toEqual('idea__btn--report');
   });
 });

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import { IdeaPageVotes } from './IdeaPageVotes';
@@ -50,7 +50,7 @@ describe('<IdeaPageVotes />', () => {
         {...IntlData}
       />
     );
-    expect(wrapper.children()).to.have.length(0);
+    expect(wrapper.children()).toHaveLength(0);
   });
 
   it('it should render as many votes as provided', () => {
@@ -61,19 +61,19 @@ describe('<IdeaPageVotes />', () => {
         {...IntlData}
       />
     );
-    expect(wrapper.find('.idea__votes')).to.have.length(1);
-    expect(wrapper.find('h2')).to.have.length(1);
+    expect(wrapper.find('.idea__votes')).toHaveLength(1);
+    expect(wrapper.find('h2')).toHaveLength(1);
     const messages = wrapper.find('FormattedMessage');
-    expect(messages.find({ num: idea.votesCount })).to.have.length(1);
-    expect(wrapper.find('Row')).to.have.length(1);
-    expect(wrapper.find('UserBox')).to.have.length(2);
+    expect(messages.find({ num: idea.votesCount })).toHaveLength(1);
+    expect(wrapper.find('Row')).toHaveLength(1);
+    expect(wrapper.find('UserBox')).toHaveLength(2);
 
     const modal = wrapper.find('AllVotesModal');
-    expect(modal).to.have.length(1);
-    expect(modal.prop('votes')).to.equal(idea.votes);
-    expect(modal.prop('onToggleModal')).to.be.a('function');
-    expect(modal.prop('showModal')).to.equal(wrapper.state('showModal'));
-    expect(wrapper.find('.idea__votes__show-more')).to.have.length(0);
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('votes')).toEqual(idea.votes);
+    expect(modal.prop('onToggleModal')).toBeDefined();
+    expect(modal.prop('showModal')).toEqual(wrapper.state('showModal'));
+    expect(wrapper.find('.idea__votes__show-more')).toHaveLength(0);
   });
 
   it('it should render show more button when idea has too much votes', () => {
@@ -84,6 +84,6 @@ describe('<IdeaPageVotes />', () => {
         {...IntlData}
       />
     );
-    expect(wrapper.find('.idea__votes__show-more')).to.have.length(1);
+    expect(wrapper.find('.idea__votes__show-more')).toHaveLength(1);
   });
 });

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IdeaDeleteModal from './IdeaDeleteModal';
 import IntlData from '../../../translations/FR';
@@ -19,9 +19,9 @@ const props = {
 describe('<IdeaDeleteModal />', () => {
   it('should render a modal', () => {
     const wrapper = shallow(<IdeaDeleteModal {...props} {...IntlData} />);
-    expect(wrapper.find('Modal')).to.have.length(1);
+    expect(wrapper.find('Modal')).toHaveLength(1);
     const message = wrapper.find('FormattedMessage');
-    expect(message.prop('title')).to.equal(props.idea.title);
+    expect(message.prop('title')).toEqual(props.idea.title);
     expect(wrapper.find(CloseButton));
     expect(wrapper.find(SubmitButton));
   });

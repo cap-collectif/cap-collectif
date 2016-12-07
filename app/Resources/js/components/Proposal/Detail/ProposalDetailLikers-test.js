@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ProposalDetailLikers from './ProposalDetailLikers';
@@ -15,7 +15,7 @@ describe('<ProposalDetailLikers />', () => {
 
   it('should not render anything when proposal has no likers', () => {
     const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithoutLikers} />);
-    expect(wrapper.children()).to.have.length(0);
+    expect(wrapper.children()).toHaveLength(0);
   });
 
   const proposalWithLikers = {
@@ -29,31 +29,31 @@ describe('<ProposalDetailLikers />', () => {
 
   it('should render a span with class proposal__info when proposal has likers', () => {
     const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithLikers} />);
-    expect(wrapper.find('span.proposal__info')).to.have.length(1);
+    expect(wrapper.find('span.proposal__info')).toHaveLength(1);
   });
 
   it('should render a <OverlayTrigger /> with <Tooltip /> when proposal has likers', () => {
     const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithLikers} />);
     const overlayTrigger = wrapper.find(OverlayTrigger);
-    expect(overlayTrigger).to.have.length(1);
-    expect(overlayTrigger.prop('placement')).to.equal('top');
+    expect(overlayTrigger).toHaveLength(1);
+    expect(overlayTrigger.prop('placement')).toEqual('top');
     const tooltip = shallow(overlayTrigger.prop('overlay'));
     expect(tooltip.instance()).to.be.instanceOf(Tooltip);
-    expect(tooltip.prop('id')).to.equal('proposal-1-likers-tooltip-');
+    expect(tooltip.prop('id')).toEqual('proposal-1-likers-tooltip-');
     const tooltipLabel = tooltip.find(ProposalDetailLikersTooltipLabel);
-    expect(tooltipLabel).to.have.length(1);
-    expect(tooltipLabel.prop('likers')).to.equal(proposalWithLikers.likers);
+    expect(tooltipLabel).toHaveLength(1);
+    expect(tooltipLabel.prop('likers')).toEqual(proposalWithLikers.likers);
   });
 
   it('should render a <ProposalDetailLikersLabel> when proposal has likers', () => {
     const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithLikers} />);
     const label = wrapper.find(ProposalDetailLikersLabel);
-    expect(label).to.have.length(1);
-    expect(label.prop('likers')).to.equal(proposalWithLikers.likers);
+    expect(label).toHaveLength(1);
+    expect(label.prop('likers')).toEqual(proposalWithLikers.likers);
   });
 
   it('should render a div with class proposal__info when specified', () => {
     const wrapper = shallow(<ProposalDetailLikers componentClass="div" proposal={proposalWithLikers} />);
-    expect(wrapper.find('div.proposal__info')).to.have.length(1);
+    expect(wrapper.find('div.proposal__info')).toHaveLength(1);
   });
 });

@@ -29,11 +29,11 @@ describe('<RegistrationForm />', () => {
 
   it('renders a form with inputs and a captcha', () => {
     const wrapper = shallow(<RegistrationForm {...props} />);
-    expect(wrapper.find('ReduxForm')).to.have.length(1);
-    expect(wrapper.find('ReduxForm').prop('form')).to.equal('registration-form');
-    expect(wrapper.find('ReduxForm').prop('fields')).to.have.length(5);
-    // expect(wrapper.find('AsyncScriptLoader')).to.have.length(1);
-    // expect(wrapper.fi  nd('AsyncScriptLoader').prop('sitekey')).to.equal('6LctYxsTAAAAANsAl06GxNeV5xGaPjy5jbDe-J8M');
+    expect(wrapper.find('ReduxForm')).toHaveLength(1);
+    expect(wrapper.find('ReduxForm').prop('form')).toEqual('registration-form');
+    expect(wrapper.find('ReduxForm').prop('fields')).toHaveLength(5);
+    // expect(wrapper.find('AsyncScriptLoader')).toHaveLength(1);
+    // expect(wrapper.fi  nd('AsyncScriptLoader').prop('sitekey')).toEqual('6LctYxsTAAAAANsAl06GxNeV5xGaPjy5jbDe-J8M');
   });
 
   it('renders a username input', () => {

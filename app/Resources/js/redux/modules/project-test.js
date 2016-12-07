@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { expect } from 'chai';
+
 import {
   reducer,
   fetchProjectsSaga,
@@ -25,7 +25,7 @@ describe('Project Reducer', () => {
       type: PROJECTS_FETCH_SUCCEEDED,
       project: result,
     });
-    expect(newState).to.eql({
+    expect(newState).toEqual({
       isLoading: false,
       projects: result.projects,
     });
@@ -40,15 +40,15 @@ describe('Project Sagas', () => {
         projects: [],
       },
     };
-    expect(generator.next().value).to.eql(select());
-    expect(generator.next(project).value).to.eql(call(Fetcher.get, '/projects?'));
-    expect(generator.next(project).value).to.eql(
+    expect(generator.next().value).toEqual(select());
+    expect(generator.next(project).value).toEqual(call(Fetcher.get, '/projects?'));
+    expect(generator.next(project).value).toEqual(
       put({
         type: PROJECTS_FETCH_SUCCEEDED,
         project,
       })
     );
 
-    expect(generator.throw({}).value).to.eql(put({ type: PROJECTS_FETCH_FAILED, error: {} }));
+    expect(generator.throw({}).value).toEqual(put({ type: PROJECTS_FETCH_FAILED, error: {} }));
   });
 });

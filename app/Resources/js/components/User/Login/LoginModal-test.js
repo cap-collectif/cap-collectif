@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import { LoginModal } from './LoginModal';
 import IntlData from '../../../translations/FR';
@@ -19,33 +19,33 @@ describe('<LoginModal />', () => {
 
   it('renders hidden modal if not shown', () => {
     const wrapper = shallow(<LoginModal show={false} features={{}} parameters={{}} {...props} />);
-    expect(wrapper.find('Modal')).to.have.length(1);
-    expect(wrapper.find('Modal').prop('show')).to.equal(false);
+    expect(wrapper.find('Modal')).toHaveLength(1);
+    expect(wrapper.find('Modal').prop('show')).toEqual(false);
   });
 
   it('renders modal if shown', () => {
     const wrapper = shallow(<LoginModal show features={{}} parameters={{}} {...props} />);
-    expect(wrapper.find('Modal')).to.have.length(1);
-    expect(wrapper.find('Modal').prop('show')).to.equal(true);
+    expect(wrapper.find('Modal')).toHaveLength(1);
+    expect(wrapper.find('Modal').prop('show')).toEqual(true);
   });
 
   it('renders a form', () => {
     const wrapper = shallow(<LoginModal show features={{}} parameters={{}} {...props} />);
-    expect(wrapper.find('form')).to.have.length(1);
-    expect(wrapper.find('form').prop('id')).to.equal('login-form');
+    expect(wrapper.find('form')).toHaveLength(1);
+    expect(wrapper.find('form').prop('id')).toEqual('login-form');
   });
 
   it('renders a top text and a bottom text if specified', () => {
     const wrapper = shallow(<LoginModal show features={{}} parameters={parametersWithTexts} {...props} />);
     const topText = wrapper.find('Alert');
-    expect(topText).to.have.length(1);
-    expect(topText.prop('className')).to.equal('text-center');
-    expect(topText.prop('bsStyle')).to.equal('info');
+    expect(topText).toHaveLength(1);
+    expect(topText.prop('className')).toEqual('text-center');
+    expect(topText.prop('bsStyle')).toEqual('info');
     const topMessage = topText.find('FormattedHTMLMessage');
-    expect(topMessage.prop('message')).to.equal(parametersWithTexts['login.text.top']);
+    expect(topMessage.prop('message')).toEqual(parametersWithTexts['login.text.top']);
     const bottomText = wrapper.find('.text-center.small.excerpt');
-    expect(bottomText).to.have.length(1);
+    expect(bottomText).toHaveLength(1);
     const bottomMessage = bottomText.find('FormattedHTMLMessage');
-    expect(bottomMessage.prop('message')).to.equal(parametersWithTexts['login.text.bottom']);
+    expect(bottomMessage.prop('message')).toEqual(parametersWithTexts['login.text.bottom']);
   });
 });

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import RankingItem from './RankingItem';
 
@@ -41,54 +41,54 @@ describe('<RankingItem />', () => {
   it('should render ranking item', () => {
     const wrapper = shallow(<OriginalComponent {...props} item={item} disabled={false} isDragging={false} />);
     const container = wrapper.find('.ranking__item');
-    expect(container).to.have.lengthOf(1);
-    expect(container.prop('style').opacity).to.equal(1);
-    expect(container.hasClass('list-group-item')).to.equal(true);
-    expect(container.hasClass('disabled')).to.equal(false);
-    expect(wrapper.find('.ranking__item__icon')).to.have.lengthOf(1);
-    expect(wrapper.find('i.cap.cap-cursor-move')).to.have.lengthOf(1);
+    expect(container).toHaveLength(1);
+    expect(container.prop('style').opacity).toEqual(1);
+    expect(container.hasClass('list-group-item')).toEqual(true);
+    expect(container.hasClass('disabled')).toEqual(false);
+    expect(wrapper.find('.ranking__item__icon')).toHaveLength(1);
+    expect(wrapper.find('i.cap.cap-cursor-move')).toHaveLength(1);
     const label = wrapper.find('.ranking__item__label');
-    expect(label).to.have.lengthOf(1);
-    expect(label.text()).to.equal('Choix 1');
+    expect(label).toHaveLength(1);
+    expect(label.text()).toEqual('Choix 1');
     const arrows = wrapper.find('RankingArrows');
-    expect(arrows).to.have.lengthOf(1);
-    expect(arrows.prop('item')).to.equal(item);
-    expect(arrows.prop('arrowFunctions')).to.equal(arrowFunctions);
-    expect(arrows.prop('disabled')).to.equal(false);
+    expect(arrows).toHaveLength(1);
+    expect(arrows.prop('item')).toEqual(item);
+    expect(arrows.prop('arrowFunctions')).toEqual(arrowFunctions);
+    expect(arrows.prop('disabled')).toEqual(false);
     const description = wrapper.find('.ranking__item__description');
-    expect(description).to.have.lengthOf(1);
-    expect(description.text()).to.equal('Description');
+    expect(description).toHaveLength(1);
+    expect(description.text()).toEqual('Description');
     const image = wrapper.find('.ranking__item__image');
-    expect(image).to.have.lengthOf(1);
-    expect(image.prop('src')).to.equal('test.png');
+    expect(image).toHaveLength(1);
+    expect(image.prop('src')).toEqual('test.png');
   });
 
   it('should render transparent item when dragged', () => {
     const wrapper = shallow(<OriginalComponent {...props} item={item} disabled={false} isDragging />);
     const container = wrapper.find('.ranking__item');
-    expect(container).to.have.lengthOf(1);
-    expect(container.prop('style').opacity).to.equal(0.5);
+    expect(container).toHaveLength(1);
+    expect(container.prop('style').opacity).toEqual(0.5);
   });
 
   it('should render disabled item when required', () => {
     const wrapper = shallow(<OriginalComponent {...props} item={item} disabled isDragging={false} />);
     const container = wrapper.find('.ranking__item');
-    expect(container).to.have.lengthOf(1);
-    expect(container.hasClass('disabled')).to.equal(true);
+    expect(container).toHaveLength(1);
+    expect(container.hasClass('disabled')).toEqual(true);
     const arrows = wrapper.find('RankingArrows');
-    expect(arrows).to.have.lengthOf(1);
-    expect(arrows.prop('disabled')).to.equal(true);
+    expect(arrows).toHaveLength(1);
+    expect(arrows.prop('disabled')).toEqual(true);
   });
 
   it('should render no description when item has not', () => {
     const wrapper = shallow(<OriginalComponent {...props} item={itemWithoutDescription} disabled={false} isDragging={false} />);
     const description = wrapper.find('.ranking__item__description');
-    expect(description).to.have.lengthOf(0);
+    expect(description).toHaveLength(0);
   });
 
   it('should render no image when item has not', () => {
     const wrapper = shallow(<OriginalComponent {...props} item={itemWithoutImage} disabled={false} isDragging={false} />);
     const image = wrapper.find('.ranking__item__image');
-    expect(image).to.have.lengthOf(0);
+    expect(image).toHaveLength(0);
   });
 });

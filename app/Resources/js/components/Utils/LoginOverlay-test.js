@@ -2,7 +2,7 @@
 /* eslint no-unused-expressions:0 */
 
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import { LoginOverlay } from './LoginOverlay';
 import IntlData from '../../translations/FR';
@@ -18,7 +18,7 @@ describe('<LoginOverlay />', () => {
         <div className="foo" />
       </LoginOverlay>
     );
-    expect(wrapper.html()).to.equal('<div class="foo"></div>');
+    expect(wrapper.html()).toEqual('<div class="foo"></div>');
   });
 
   it('renders children if user is logged', () => {
@@ -27,7 +27,7 @@ describe('<LoginOverlay />', () => {
         <div className="foo" />
       </LoginOverlay>
     );
-    expect(wrapper.html()).to.equal('<div class="foo"></div>');
+    expect(wrapper.html()).toEqual('<div class="foo"></div>');
   });
 
   it('renders popover if user is not logged', () => {
@@ -36,7 +36,7 @@ describe('<LoginOverlay />', () => {
         <div className="foo" />
       </LoginOverlay>
     );
-    expect(wrapper.find('OverlayTrigger')).to.have.length(1);
-    expect(wrapper.find('OverlayTrigger').html()).to.equal('<div class="foo" aria-describedby="login-popover"></div>');
+    expect(wrapper.find('OverlayTrigger')).toHaveLength(1);
+    expect(wrapper.find('OverlayTrigger').html()).toEqual('<div class="foo" aria-describedby="login-popover"></div>');
   });
 });

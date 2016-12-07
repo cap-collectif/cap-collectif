@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import { defaultValidation } from './OpinionForm';
 import OpinionLinkCreateForm from './OpinionLinkCreateForm';
@@ -24,14 +24,14 @@ describe('<OpinionLinkCreateForm />', () => {
   it('renders 2 forms', () => {
     const wrapper = shallow(<OpinionLinkCreateForm {...props} />);
     const form1 = wrapper.find('ReduxForm');
-    expect(form1.prop('options')).to.equal(props.availableTypes);
-    expect(form1.prop('initialValues')).to.eql({ opinionType: 1337 });
+    expect(form1.prop('options')).toEqual(props.availableTypes);
+    expect(form1.prop('initialValues')).toEqual({ opinionType: 1337 });
     const form2 = wrapper.find('OpinionForm');
-    expect(form2.prop('form')).to.equal('opinion-link-create-form');
-    expect(form2.prop('validate')).to.equal(defaultValidation);
-    expect(form2.prop('onSubmit')).to.be.a.function;
-    expect(form2.prop('onSubmitFail')).to.equal(props.onFailure);
-    expect(form2.prop('fields')).to.eql([
+    expect(form2.prop('form')).toEqual('opinion-link-create-form');
+    expect(form2.prop('validate')).toEqual(defaultValidation);
+    expect(form2.prop('onSubmit')).toBeDefined;
+    expect(form2.prop('onSubmitFail')).toEqual(props.onFailure);
+    expect(form2.prop('fields')).toEqual([
       { label: 'title', name: 'title', type: 'text', id: 'opinion_title' },
       { label: 'body', name: 'body', type: 'editor', id: 'opinion_body' },
       { id: 'opinion_appendix-1', label: 'appendix-1', name: 'appendix-1', type: 'editor' },

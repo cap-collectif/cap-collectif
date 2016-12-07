@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import { MainNavbarUser } from './MainNavbarUser';
 import IntlData from '../../../translations/FR';
@@ -29,20 +29,20 @@ describe('<MainNavbarUser />', () => {
 
   it('should render nothing when user is not logged in', () => {
     const wrapper = shallow(<MainNavbarUser user={null} features={features} {...IntlData} />);
-    expect(wrapper.children()).to.have.length(0);
+    expect(wrapper.children()).toHaveLength(0);
   });
 
   it('should render the dropdown without admin menu item when user is not admin', () => {
     const wrapper = shallow(<MainNavbarUser user={user} features={features} {...IntlData} />);
-    expect(wrapper.find('Nav')).to.have.length(1);
-    expect(wrapper.find('NavDropdown')).to.have.length(1);
-    expect(wrapper.find('MenuItem')).to.have.length(4);
+    expect(wrapper.find('Nav')).toHaveLength(1);
+    expect(wrapper.find('NavDropdown')).toHaveLength(1);
+    expect(wrapper.find('MenuItem')).toHaveLength(4);
   });
 
   it('should render the dropdown with admin menu item when user is admin', () => {
     const wrapper = shallow(<MainNavbarUser user={admin} features={features} {...IntlData} />);
-    expect(wrapper.find('Nav')).to.have.length(1);
-    expect(wrapper.find('NavDropdown')).to.have.length(1);
-    expect(wrapper.find('MenuItem')).to.have.length(5);
+    expect(wrapper.find('Nav')).toHaveLength(1);
+    expect(wrapper.find('NavDropdown')).toHaveLength(1);
+    expect(wrapper.find('MenuItem')).toHaveLength(5);
   });
 });

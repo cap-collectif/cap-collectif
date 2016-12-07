@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../translations/FR';
 import Input from './Input';
@@ -37,10 +37,10 @@ describe('<Checkbox />', () => {
       disabled={false}
       {...IntlData}
     />);
-    expect(wrapper.find(CheckboxGroup)).to.have.lengthOf(1);
-    expect(wrapper.find(CheckboxGroup).prop('name')).to.equal(`choices-for-field-${field.id}`);
+    expect(wrapper.find(CheckboxGroup)).toHaveLength(1);
+    expect(wrapper.find(CheckboxGroup).prop('name')).toEqual(`choices-for-field-${field.id}`);
     expect(wrapper.find(CheckboxGroup).prop('value')).to.be.a('array');
-    expect(wrapper.find(CheckboxGroup).prop('onChange')).to.be.a('function');
+    expect(wrapper.find(CheckboxGroup).prop('onChange')).toBeDefined();
   });
 
   it('should render a CheckboxGroup component with 4 Input components inside', () => {
@@ -53,12 +53,12 @@ describe('<Checkbox />', () => {
       disabled={false}
       {...IntlData}
     />);
-    expect(wrapper.find(CheckboxGroup).find(Input)).to.have.lengthOf(4);
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('id')).to.equal(`reply-11_choice-${field.choices[0].id}`);
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('name')).to.equal(`choices-for-field-${field.id}`);
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('type')).to.equal('checkbox');
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('label')).to.equal(field.choices[0].label);
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('value')).to.equal(field.choices[0].label);
+    expect(wrapper.find(CheckboxGroup).find(Input)).toHaveLength(4);
+    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('id')).toEqual(`reply-11_choice-${field.choices[0].id}`);
+    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('name')).toEqual(`choices-for-field-${field.id}`);
+    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('type')).toEqual('checkbox');
+    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('label')).toEqual(field.choices[0].label);
+    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('value')).toEqual(field.choices[0].label);
   });
 
   it('should render a CheckboxGroup component with an Other component inside', () => {
@@ -71,9 +71,9 @@ describe('<Checkbox />', () => {
       disabled={false}
       {...IntlData}
     />);
-    expect(wrapper.find(CheckboxGroup).find(Other)).to.have.lengthOf(1);
-    expect(wrapper.find(CheckboxGroup).find(Other).prop('field')).to.eql(field);
-    expect(wrapper.find(CheckboxGroup).find(Other).prop('onChange')).to.be.a('function');
+    expect(wrapper.find(CheckboxGroup).find(Other)).toHaveLength(1);
+    expect(wrapper.find(CheckboxGroup).find(Other).prop('field')).toEqual(field);
+    expect(wrapper.find(CheckboxGroup).find(Other).prop('onChange')).toBeDefined();
     expect(wrapper.find(CheckboxGroup).find(Other).prop('disabled')).to.be.a('boolean');
   });
 });

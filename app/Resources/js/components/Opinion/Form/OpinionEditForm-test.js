@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import OpinionEditForm from './OpinionEditForm';
 import IntlData from '../../../translations/FR';
@@ -30,9 +30,9 @@ describe('<OpinionEditForm />', () => {
   it('renders a form', () => {
     const wrapper = shallow(<OpinionEditForm {...props} />);
     const form = wrapper.find('OpinionForm');
-    expect(form.length).to.equal(1);
-    expect(form.prop('form')).to.equal('opinion-edit-form');
-    expect(form.prop('fields')).to.eql([
+    expect(form.length).toEqual(1);
+    expect(form.prop('form')).toEqual('opinion-edit-form');
+    expect(form.prop('fields')).toEqual([
       {
         divClassName: 'alert alert-warning edit-confirm-alert',
         id: 'opinion_check',
@@ -59,11 +59,11 @@ describe('<OpinionEditForm />', () => {
         type: 'editor',
       },
     ]);
-    expect(form.prop('initialValues')).to.eql({
+    expect(form.prop('initialValues')).toEqual({
       title: props.opinion.title,
       body: props.opinion.body,
     });
-    expect(form.prop('onSubmitFail')).to.equal(props.onFailure);
+    expect(form.prop('onSubmitFail')).toEqual(props.onFailure);
     expect(form.prop('onSubmit')).to.be.defined;
   });
 });

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import OpinionForm, { labels } from './OpinionForm';
 import IntlData from '../../../translations/FR';
@@ -33,12 +33,12 @@ describe('<OpinionForm />', () => {
 
   it('renders a form', () => {
     const wrapper = shallow(<OpinionForm {...props} />);
-    expect(wrapper.is('ReduxForm')).to.be.true;
+    expect(wrapper.is('ReduxForm')).toEqual(true);
     const form = wrapper.find('ReduxForm').shallow().find('Connect').shallow();
-    expect(form.is('Form')).to.be.true;
-    expect(form.prop('form')).to.equal(props.form);
-    expect(form.prop('fields')).to.equal(props.fields);
-    expect(form.prop('onSubmit')).to.equal(props.onSubmit);
-    expect(form.prop('translations')).to.equal(labels);
+    expect(form.is('Form')).toEqual(true);
+    expect(form.prop('form')).toEqual(props.form);
+    expect(form.prop('fields')).toEqual(props.fields);
+    expect(form.prop('onSubmit')).toEqual(props.onSubmit);
+    expect(form.prop('translations')).toEqual(labels);
   });
 });

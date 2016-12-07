@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
 
@@ -25,7 +25,7 @@ describe('<ProposalDetailAdvancementStep />', () => {
       />
     );
     const label = wrapper.find('Label');
-    expect(label.length).to.equal(0);
+    expect(label.length).toEqual(0);
   });
 
   it('can render a step with status', () => {
@@ -37,6 +37,6 @@ describe('<ProposalDetailAdvancementStep />', () => {
       />
     );
     const label = wrapper.find('Label');
-    expect(label.prop('bsStyle')).to.equal('success');
+    expect(label.prop('bsStyle')).toEqual('success');
   });
 });

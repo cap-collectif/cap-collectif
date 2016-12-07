@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import { ReplyCreateFormWrapper } from './ReplyCreateFormWrapper';
@@ -28,13 +28,13 @@ describe('<ReplyCreateFormWrapper />', () => {
       {...IntlData}
     />);
     const alert = wrapper.find('Alert');
-    expect(alert).to.have.length(1);
-    expect(alert.prop('bsStyle')).to.equal('warning');
-    expect(alert.childAt(0).html()).to.equal('<strong>Vous devez être inscrit et connecté pour répondre à ce questionnaire.</strong>');
+    expect(alert).toHaveLength(1);
+    expect(alert.prop('bsStyle')).toEqual('warning');
+    expect(alert.childAt(0).html()).toEqual('<strong>Vous devez être inscrit et connecté pour répondre à ce questionnaire.</strong>');
     const form = wrapper.find('ReplyCreateForm');
-    expect(form).to.have.length(1);
-    expect(form.prop('form')).to.equal(formContribuable);
-    expect(form.prop('disabled')).to.equal(true);
+    expect(form).toHaveLength(1);
+    expect(form.prop('form')).toEqual(formContribuable);
+    expect(form.prop('disabled')).toEqual(true);
   });
 
   it('should render an alert an a disabled form when form is contribuable and doesn\'t allow multiple votes and user has already votes', () => {
@@ -45,13 +45,13 @@ describe('<ReplyCreateFormWrapper />', () => {
       {...IntlData}
     />);
     const alert = wrapper.find('Alert');
-    expect(alert).to.have.length(1);
-    expect(alert.prop('bsStyle')).to.equal('warning');
-    expect(alert.childAt(0).html()).to.equal('<strong>Vous avez déjà répondu à ce questionnaire.</strong>');
+    expect(alert).toHaveLength(1);
+    expect(alert.prop('bsStyle')).toEqual('warning');
+    expect(alert.childAt(0).html()).toEqual('<strong>Vous avez déjà répondu à ce questionnaire.</strong>');
     const form = wrapper.find('ReplyCreateForm');
-    expect(form).to.have.length(1);
-    expect(form.prop('form')).to.equal(formContribuableWithoutMultipleVotes);
-    expect(form.prop('disabled')).to.equal(true);
+    expect(form).toHaveLength(1);
+    expect(form.prop('form')).toEqual(formContribuableWithoutMultipleVotes);
+    expect(form.prop('disabled')).toEqual(true);
   });
 
   it('should no alert an a disabled form when form is not contribuable', () => {
@@ -62,10 +62,10 @@ describe('<ReplyCreateFormWrapper />', () => {
       {...IntlData}
     />);
     const alert = wrapper.find('Alert');
-    expect(alert).to.have.length(0);
+    expect(alert).toHaveLength(0);
     const form = wrapper.find('ReplyCreateForm');
-    expect(form.prop('form')).to.equal(formNotContribuable);
-    expect(form.prop('disabled')).to.equal(true);
+    expect(form.prop('form')).toEqual(formNotContribuable);
+    expect(form.prop('disabled')).toEqual(true);
   });
 
   it('should render no alert an an enabled form', () => {
@@ -76,9 +76,9 @@ describe('<ReplyCreateFormWrapper />', () => {
       {...IntlData}
     />);
     const alert = wrapper.find('Alert');
-    expect(alert).to.have.length(0);
+    expect(alert).toHaveLength(0);
     const form = wrapper.find('ReplyCreateForm');
-    expect(form.prop('form')).to.equal(formContribuable);
-    expect(form.prop('disabled')).to.equal(false);
+    expect(form.prop('form')).toEqual(formContribuable);
+    expect(form.prop('disabled')).toEqual(false);
   });
 });

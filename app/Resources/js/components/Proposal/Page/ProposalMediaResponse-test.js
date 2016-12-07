@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import { ProposalMediaResponse } from './ProposalMediaResponse';
 import IntlData from '../../../translations/FR';
@@ -16,18 +16,18 @@ describe('<ProposalMediaResponse />', () => {
 
   it('should render a list of files', () => {
     const wrapper = shallow(<ProposalMediaResponse {...props} {...IntlData} />);
-    expect(wrapper.find('Row')).to.have.length(1);
-    expect(wrapper.find('Col')).to.have.length(2);
+    expect(wrapper.find('Row')).toHaveLength(1);
+    expect(wrapper.find('Col')).toHaveLength(2);
     const link1 = wrapper.find('Col').at(0).find('a');
     const link2 = wrapper.find('Col').at(1).find('a');
-    expect(link1.text()).to.equal('Media1 (2 Mo)');
-    expect(link2.text()).to.equal('Media2 (2 Mo)');
-    expect(link1.props().href).to.equal('/media/1.jpg');
-    expect(link2.props().href).to.equal('/media/2.jpg');
+    expect(link1.text()).toEqual('Media1 (2 Mo)');
+    expect(link2.text()).toEqual('Media2 (2 Mo)');
+    expect(link1.props().href).toEqual('/media/1.jpg');
+    expect(link2.props().href).toEqual('/media/2.jpg');
   });
 
   it('should render nothin when no media', () => {
     const wrapper = shallow(<ProposalMediaResponse medias={[]} {...IntlData} />);
-    expect(wrapper.html()).to.equal(null);
+    expect(wrapper.html()).toEqual(null);
   });
 });

@@ -1,7 +1,6 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { ReportBox } from './ReportBox';
 import IntlData from '../../translations/FR';
@@ -24,32 +23,32 @@ describe('<ReportBox />', () => {
   it('renders a report button and a modal', () => {
     const wrapper = shallow(<ReportBox {...defaultProps} />);
     const button = wrapper.find('Connect(ReportButton)');
-    expect(button).to.have.length(1);
-    expect(button.prop('id')).to.equal(defaultProps.id);
-    expect(button.prop('reported')).to.equal(defaultProps.reported);
-    expect(button.prop('onClick')).to.be.a.function;
-    expect(button.prop('bsSize')).to.equal(null);
-    expect(button.prop('style')).to.deep.equal({});
-    expect(button.prop('className')).to.equal(defaultProps.buttonClassName);
+    expect(button).toHaveLength(1);
+    expect(button.prop('id')).toEqual(defaultProps.id);
+    expect(button.prop('reported')).toEqual(defaultProps.reported);
+    expect(button.prop('onClick')).toBeDefined;
+    expect(button.prop('bsSize')).toEqual(null);
+    expect(button.prop('style')).toEqual({});
+    expect(button.prop('className')).toEqual(defaultProps.buttonClassName);
     const modal = wrapper.find('Connect(ReportModal)');
-    expect(modal).to.have.length(1);
-    expect(modal.prop('show')).to.equal(defaultProps.show);
-    expect(modal.prop('onSubmit')).to.be.a.function;
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('show')).toEqual(defaultProps.show);
+    expect(modal.prop('onSubmit')).toBeDefined;
   });
 
   it('renders nothing if reporting is not enabled', () => {
     const wrapper = shallow(<ReportBox {...defaultProps} features={{ reporting: false }} />);
-    expect(wrapper.children().isEmpty()).to.be.true;
+    expect(wrapper.children().isEmpty()).toEqual(true);
   });
 
   it('renders a ReportButton if not logged in', () => {
     const wrapper = shallow(<ReportBox {...defaultProps} user={null} />);
     const button = wrapper.find('Connect(ReportButton)');
-    expect(button).to.have.length(1);
+    expect(button).toHaveLength(1);
   });
 
   it('renders nothing if logged user is the author', () => {
     const wrapper = shallow(<ReportBox {...defaultProps} author={defaultProps.user} />);
-    expect(wrapper.children().isEmpty()).to.be.true;
+    expect(wrapper.children().isEmpty()).toEqual(true);
   });
 });

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import { ProjectStatsPage } from './ProjectStatsPage';
 import IntlData from '../../../translations/FR';
@@ -34,12 +34,12 @@ describe('<ProjectStatsPage />', () => {
 
   it('should render only one block', () => {
     const wrapper = shallow(<ProjectStatsPage steps={steps} {...props} />);
-    expect(wrapper.find('div.stats__step-details')).to.have.length(1);
+    expect(wrapper.find('div.stats__step-details')).toHaveLength(1);
   });
 
   it('should render a paragraph if no steps', () => {
     const wrapper = shallow(<ProjectStatsPage steps={[]} {...props} />);
     expect(wrapper.find('h3')).to.not.exists;
-    expect(wrapper.find('p.project-stats__empty')).to.have.length(1);
+    expect(wrapper.find('p.project-stats__empty')).toHaveLength(1);
   });
 });

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import IdeaPageBody from './IdeaPageBody';
@@ -32,25 +32,25 @@ const ideaWithMediaObjectAndUrl = {
 describe('<IdeaPageBody />', () => {
   it('it should render a div with provided className', () => {
     const wrapper = shallow(<IdeaPageBody {...props} idea={idea} className={classes} {...IntlData} />);
-    expect(wrapper.find('div.idea__body.css-class')).to.have.length(1);
+    expect(wrapper.find('div.idea__body.css-class')).toHaveLength(1);
   });
 
   it('it should show idea body, trash block and buttons', () => {
     const wrapper = shallow(<IdeaPageBody {...props} idea={idea} {...IntlData} />);
-    expect(wrapper.find('#idea-body')).to.have.length(1);
-    expect(wrapper.find('h2')).to.have.length(1);
-    expect(wrapper.find('FormattedHTMLMessage')).to.have.length(1);
-    expect(wrapper.find(IdeaPageTrashBlock)).to.have.length(1);
-    expect(wrapper.find(IdeaPageButtons)).to.have.length(1);
-    expect(wrapper.find('#idea-media')).to.have.length(0);
-    expect(wrapper.find('#idea-object')).to.have.length(0);
-    expect(wrapper.find('#idea-url')).to.have.length(0);
+    expect(wrapper.find('#idea-body')).toHaveLength(1);
+    expect(wrapper.find('h2')).toHaveLength(1);
+    expect(wrapper.find('FormattedHTMLMessage')).toHaveLength(1);
+    expect(wrapper.find(IdeaPageTrashBlock)).toHaveLength(1);
+    expect(wrapper.find(IdeaPageButtons)).toHaveLength(1);
+    expect(wrapper.find('#idea-media')).toHaveLength(0);
+    expect(wrapper.find('#idea-object')).toHaveLength(0);
+    expect(wrapper.find('#idea-url')).toHaveLength(0);
   });
 
   it('it should render idea media, object and url when provided', () => {
     const wrapper = shallow(<IdeaPageBody {...props} idea={ideaWithMediaObjectAndUrl} {...IntlData} />);
-    expect(wrapper.find('#idea-media')).to.have.length(1);
-    expect(wrapper.find('#idea-object')).to.have.length(1);
-    expect(wrapper.find('#idea-url')).to.have.length(1);
+    expect(wrapper.find('#idea-media')).toHaveLength(1);
+    expect(wrapper.find('#idea-object')).toHaveLength(1);
+    expect(wrapper.find('#idea-url')).toHaveLength(1);
   });
 });

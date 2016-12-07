@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import StepInfos from './StepInfos';
 
@@ -13,8 +13,8 @@ describe('<StepInfos />', () => {
 
   it('should render a step infos block, a CountersNav and a StepText', () => {
     const wrapper = shallow(<StepInfos step={step} />);
-    expect(wrapper.find('div.step__infos.block.block--bordered')).to.have.length(1);
-    expect(wrapper.find('CountersNav')).to.have.length(1);
-    expect(wrapper.find('StepText')).to.have.length(1);
+    expect(wrapper.find('div.step__infos.block.block--bordered')).toHaveLength(1);
+    expect(wrapper.find('CountersNav')).toHaveLength(1);
+    expect(wrapper.find('StepText')).toHaveLength(1);
   });
 });

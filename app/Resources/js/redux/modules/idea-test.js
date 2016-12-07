@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { expect } from 'chai';
+
 import {
   reducer,
   fetchAllVotes,
@@ -27,7 +27,7 @@ describe('Idea Reducer', () => {
       ideaId: 1,
       votes,
     });
-    expect(newState).to.eql({
+    expect(newState).toEqual({
       ideas: {
         1: {
           votes,
@@ -46,7 +46,7 @@ describe('Idea Reducer', () => {
       ideaId: 1,
       vote: { id: 2 },
     });
-    expect(newState).to.eql({
+    expect(newState).toEqual({
       ideas: {
         1: {
           votesCount: 2,
@@ -73,7 +73,7 @@ describe('Idea Reducer', () => {
       ideaId: 1,
       vote: { user: { unidId: 'user' } },
     });
-    expect(newState).to.eql({
+    expect(newState).toEqual({
       ideas: {
         1: {
           votesCount: 1,
@@ -87,7 +87,7 @@ describe('Idea Reducer', () => {
       ideaId: 1,
       vote: { private: true },
     });
-    expect(newState).to.eql({
+    expect(newState).toEqual({
       ideas: {
         1: {
           votesCount: 1,
@@ -106,19 +106,19 @@ describe('Idea Sagas', () => {
     });
 
     const votes = [];
-    expect(generator.next().value).to.eql(call(Fetcher.get, '/ideas/1/votes?offset=0&limit=50'));
+    expect(generator.next().value).toEqual(call(Fetcher.get, '/ideas/1/votes?offset=0&limit=50'));
     expect(generator.next({
       hasMore: true,
       votes,
-    }).value).to.eql(
+    }).value).toEqual(
       put({
         type: VOTES_FETCH_SUCCEEDED,
         ideaId: 1,
         votes,
       })
     );
-    expect(generator.next().value).to.eql(call(Fetcher.get, '/ideas/1/votes?offset=50&limit=50'));
+    expect(generator.next().value).toEqual(call(Fetcher.get, '/ideas/1/votes?offset=50&limit=50'));
 
-    expect(generator.throw({}).value).to.eql(put({ type: VOTES_FETCH_FAILED, error: {} }));
+    expect(generator.throw({}).value).toEqual(put({ type: VOTES_FETCH_FAILED, error: {} }));
   });
 });

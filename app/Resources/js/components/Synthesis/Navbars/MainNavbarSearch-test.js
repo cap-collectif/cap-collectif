@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import MainNavbarSearch from './MainNavbarSearch';
 import IntlData from '../../../translations/FR';
@@ -13,7 +13,7 @@ describe('<MainNavbarSearch />', () => {
     const wrapper = shallow(<MainNavbarSearch {...IntlData} />,
       { context }
     );
-    expect(wrapper.find(Navbar.Form)).to.have.length(1);
-    expect(wrapper.find(Input)).to.have.length(1);
+    expect(wrapper.find(Navbar.Form)).toHaveLength(1);
+    expect(wrapper.find(Input)).toHaveLength(1);
   });
 });

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import CounterNavItem from './CounterNavItem';
 
@@ -13,9 +13,9 @@ describe('<CounterNavItem />', () => {
   };
   it('should render a li, an icon, a value and a label', () => {
     const wrapper = shallow(<CounterNavItem {...props} />);
-    expect(wrapper.find('li')).to.have.length(1);
-    expect(wrapper.find('i')).to.have.length(1);
-    expect(wrapper.find('span.value')).to.have.length(1);
-    expect(wrapper.find('FormattedMessage')).to.have.length(1);
+    expect(wrapper.find('li')).toHaveLength(1);
+    expect(wrapper.find('i')).toHaveLength(1);
+    expect(wrapper.find('span.value')).toHaveLength(1);
+    expect(wrapper.find('FormattedMessage')).toHaveLength(1);
   });
 });

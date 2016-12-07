@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import { ProposalPage } from './ProposalPage';
 import IntlData from '../../../translations/FR';
@@ -53,18 +53,18 @@ describe('<ProposalPage />', () => {
     const wrapper = shallow(<ProposalPage {...props} proposal={proposalNoVotes} {...IntlData} />);
 
     const alert = wrapper.find('ProposalPageAlert');
-    expect(alert).to.have.length(1);
-    expect(alert.prop('proposal')).to.equal(proposalNoVotes);
+    expect(alert).toHaveLength(1);
+    expect(alert.prop('proposal')).toEqual(proposalNoVotes);
 
     const header = wrapper.find('ProposalPageHeader');
-    expect(header.props()).to.eql({
+    expect(header.props()).toEqual({
       proposal: proposalNoVotes,
       className: 'container container--custom',
       showThemes: true,
     });
 
     const tabContainer = wrapper.find(Tab.Container);
-    expect(tabContainer).to.have.length(2);
+    expect(tabContainer).toHaveLength(2);
     expect(tabContainer.first().props()).to.contains({
       id: 'proposal-page-tabs',
       defaultActiveKey: 'content',
@@ -72,44 +72,44 @@ describe('<ProposalPage />', () => {
     });
 
     const tabsPills = tabContainer.first().find('div.tabs__pills');
-    expect(tabsPills).to.have.length(1);
-    expect(tabsPills.find('div.container')).to.have.length(1);
+    expect(tabsPills).toHaveLength(1);
+    expect(tabsPills.find('div.container')).toHaveLength(1);
     const nav = tabsPills.find(Nav);
-    expect(nav.prop('bsStyle')).to.equal('pills');
-    expect(nav.prop('style')).to.deep.equal({ display: 'inline-block' });
+    expect(nav.prop('bsStyle')).toEqual('pills');
+    expect(nav.prop('style')).toEqual({ display: 'inline-block' });
     const navItems = nav.find(NavItem);
-    expect(navItems).to.have.length(4);
+    expect(navItems).toHaveLength(4);
     const contentItem = navItems.first();
-    expect(contentItem.prop('eventKey')).to.equal('content');
-    expect(contentItem.prop('className')).to.equal('tabs__pill');
-    expect(contentItem.children().first().text()).to.equal('Présentation');
+    expect(contentItem.prop('eventKey')).toEqual('content');
+    expect(contentItem.prop('className')).toEqual('tabs__pill');
+    expect(contentItem.children().first().text()).toEqual('Présentation');
     const commentsItem = navItems.at(1);
-    expect(commentsItem.prop('eventKey')).to.equal('comments');
-    expect(commentsItem.prop('className')).to.equal('tabs__pill');
-    expect(commentsItem.children().first().text()).to.equal('Discussions');
-    expect(commentsItem.find('.badge').text()).to.equal(`${proposalNoVotes.comments_count}`);
+    expect(commentsItem.prop('eventKey')).toEqual('comments');
+    expect(commentsItem.prop('className')).toEqual('tabs__pill');
+    expect(commentsItem.children().first().text()).toEqual('Discussions');
+    expect(commentsItem.find('.badge').text()).toEqual(`${proposalNoVotes.comments_count}`);
     const voteButtonWrapper = tabsPills.find('Connect(ProposalVoteButtonWrapper)');
-    expect(voteButtonWrapper).to.have.length(1);
+    expect(voteButtonWrapper).toHaveLength(1);
     expect(voteButtonWrapper.props()).to.contains({
       proposal: proposalNoVotes,
       className: 'pull-right hidden-xs proposal__preview__vote',
     });
-    expect(voteButtonWrapper.prop('style')).to.deep.equal({ marginTop: '10px' });
+    expect(voteButtonWrapper.prop('style')).toEqual({ marginTop: '10px' });
     const tabContent = tabContainer.first().find(Tab.Content);
-    expect(tabContent).to.have.length(2);
+    expect(tabContent).toHaveLength(2);
     const tabPanes = tabContent.first().find(Tab.Pane);
-    expect(tabPanes).to.have.length(4);
+    expect(tabPanes).toHaveLength(4);
     const contentTabPane = tabPanes.first();
-    expect(contentTabPane.prop('eventKey')).to.equal('content');
+    expect(contentTabPane.prop('eventKey')).toEqual('content');
     const proposalContent = contentTabPane.find('Connect(ProposalPageContent)');
-    expect(proposalContent).to.have.length(1);
+    expect(proposalContent).toHaveLength(1);
     expect(proposalContent.props()).to.contains({
       proposal: proposalNoVotes,
       form: props.form,
       categories: props.categories,
     });
     const proposalMetadata = wrapper.find('ProposalPageMetadata');
-    expect(proposalMetadata.props()).to.eql({
+    expect(proposalMetadata.props()).toEqual({
       proposal: proposalNoVotes,
       showDistricts: false,
       showCategories: false,
@@ -118,16 +118,16 @@ describe('<ProposalPage />', () => {
 
     const proposalAdvancement = contentTabPane.find('ProposalPageAdvancement');
 
-    expect(proposalAdvancement.props()).to.eql({ proposal: proposalNoVotes });
+    expect(proposalAdvancement.props()).toEqual({ proposal: proposalNoVotes });
     const commentsTabPane = tabPanes.at(1);
     expect(commentsTabPane.props()).to.contains({ eventKey: 'comments' });
 
     const proposalComments = commentsTabPane.find('ProposalPageComments');
-    expect(proposalComments.prop('form')).to.equal(props.form);
-    expect(proposalComments.prop('id')).to.equal(proposalNoVotes.id);
+    expect(proposalComments.prop('form')).toEqual(props.form);
+    expect(proposalComments.prop('id')).toEqual(proposalNoVotes.id);
 
     const proposalBlog = wrapper.find('Connect(ProposalPageBlog)');
-    expect(proposalBlog.props()).to.eql({});
+    expect(proposalBlog.props()).toEqual({});
   });
 
   it('should render a vote tab and a vote modal if votable step is specified', () => {
@@ -136,20 +136,20 @@ describe('<ProposalPage />', () => {
     const tabsPills = tabContainer.find('div.tabs__pills');
     const nav = tabsPills.find(Nav);
     const navItems = nav.find(NavItem);
-    expect(navItems).to.have.length(4);
+    expect(navItems).toHaveLength(4);
     const votesItem = navItems.at(2);
-    expect(votesItem.prop('eventKey')).to.equal('votes');
-    expect(votesItem.prop('className')).to.equal('tabs__pill');
-    expect(votesItem.children().first().text()).to.equal('Votes');
-    expect(votesItem.find('.badge').text()).to.equal(`${proposalWithVotes.votesCountByStepId[2]}`);
+    expect(votesItem.prop('eventKey')).toEqual('votes');
+    expect(votesItem.prop('className')).toEqual('tabs__pill');
+    expect(votesItem.children().first().text()).toEqual('Votes');
+    expect(votesItem.find('.badge').text()).toEqual(`${proposalWithVotes.votesCountByStepId[2]}`);
     const tabContent = tabContainer.find(Tab.Content);
     const tabPanes = tabContent.find(Tab.Pane);
-    expect(tabPanes).to.have.length(4);
+    expect(tabPanes).toHaveLength(4);
     const votesTabPane = tabPanes.at(2);
-    expect(votesTabPane.prop('eventKey')).to.equal('votes');
+    expect(votesTabPane.prop('eventKey')).toEqual('votes');
     const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');
-    expect(proposalVoteModal).to.have.length(1);
-    expect(proposalVoteModal.props()).to.eql({
+    expect(proposalVoteModal).toHaveLength(1);
+    expect(proposalVoteModal.props()).toEqual({
       proposal: proposalWithVotes,
     });
   });
@@ -158,6 +158,6 @@ describe('<ProposalPage />', () => {
     const wrapper = shallow(<ProposalPage {...props} proposal={proposalWithoutVotableStep} {...IntlData} />);
     const tabContainer = wrapper.find(Tab.Container);
     const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');
-    expect(proposalVoteModal).to.have.length(0);
+    expect(proposalVoteModal).toHaveLength(0);
   });
 });

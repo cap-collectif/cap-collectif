@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-unused-expressions:0 */
 import React from 'react';
-import { expect } from 'chai';
+
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import { OpinionVotesButton } from './OpinionVotesButton';
@@ -37,26 +37,26 @@ describe('<OpinionVotesButton />', () => {
 
   it('should render a green button when value is 1 and vote type is both', () => {
     const wrapper = shallow(<OpinionVotesButton {...defaultProps} opinion={opinionVoteBoth} value={1} />);
-    expect(wrapper.find('Button')).to.have.length(1);
-    expect(wrapper.find({ bsStyle: 'success' })).to.have.length(1);
+    expect(wrapper.find('Button')).toHaveLength(1);
+    expect(wrapper.find({ bsStyle: 'success' })).toHaveLength(1);
   });
 
   it('should render an orange button when value is 0 and vote type is both', () => {
     const wrapper = shallow(<OpinionVotesButton {...defaultProps} opinion={opinionVoteBoth} value={0} />);
-    expect(wrapper.find('Button')).to.have.length(1);
-    expect(wrapper.find({ bsStyle: 'warning' })).to.have.length(1);
+    expect(wrapper.find('Button')).toHaveLength(1);
+    expect(wrapper.find({ bsStyle: 'warning' })).toHaveLength(1);
   });
 
   it('should render a red button when value is -1 and vote type is both', () => {
     const wrapper = shallow(<OpinionVotesButton {...defaultProps} opinion={opinionVoteBoth} value={-1} />);
-    expect(wrapper.find('Button')).to.have.length(1);
-    expect(wrapper.find({ bsStyle: 'danger' })).to.have.length(1);
+    expect(wrapper.find('Button')).toHaveLength(1);
+    expect(wrapper.find({ bsStyle: 'danger' })).toHaveLength(1);
   });
 
   it('should render a green button when value is 1 and vote type is simple', () => {
     const wrapper = shallow(<OpinionVotesButton {...defaultProps} opinion={opinionVoteSimple} value={1} />);
-    expect(wrapper.find('Button')).to.have.length(1);
-    expect(wrapper.find({ bsStyle: 'success' })).to.have.length(1);
+    expect(wrapper.find('Button')).toHaveLength(1);
+    expect(wrapper.find({ bsStyle: 'success' })).toHaveLength(1);
   });
 
   it('should not render a button when value is 0 and vote type is simple', () => {
