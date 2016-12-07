@@ -1,0 +1,15 @@
+Consultation:
+    type: object
+    config:
+        description: "A consultation"
+        fields:
+            id:
+                type: "Int!"
+                description: "The id of the consultation."
+            title:
+                type: "String!"
+                description: "The title of the consultation."
+            contributions:
+                type: "[Contribution]"
+                description: "List of contributions."
+                resolve: "@=resolver('consultation_contributions', [value])"

@@ -1,0 +1,8 @@
+Query:
+    type: object
+    config:
+        description: "A humanoid creature in the Star Wars universe."
+        fields:
+            consultations:
+                type: "[Consultation]"
+                resolve: "@=resolver('consultation', [])"

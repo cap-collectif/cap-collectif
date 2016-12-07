@@ -1,0 +1,15 @@
+Contribution:
+    type: object
+    config:
+        description: "A contribution"
+        # resolveType: "@=resolver('consultation_contributions', [value])"
+        fields:
+            # author:
+            #     type: "Person!"
+            #     description: "The author of the contribution."
+            id:
+                type: "Int!"
+                description: "The content of the contribution."
+            body:
+                type: "String!"
+                description: "The content of the contribution."

@@ -3,6 +3,9 @@ capco_admin:
   type:     annotation
   prefix:   /
 
+overblog_graphql_endpoint:
+    resource: "@OverblogGraphQLBundle/Resources/config/routing/graphql.yml"
+
 # API
 
 capco_api_login_check:

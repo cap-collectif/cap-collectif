@@ -373,3 +373,12 @@ exercise_html_purifier:
 hslavich_simplesamlphp:
     sp: "%saml_sp%"
     authentication_attribute: oda_id
+
+overblog_graphql:
+    definitions:
+        show_debug_info: true
+        internal_error_message: "An error occurred, please retry later or contact us!"
+        config_validation: %kernel.debug%
+        schema:
+            query: Query
+            mutation: ~

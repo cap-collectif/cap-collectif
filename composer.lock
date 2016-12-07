@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f3610c4927bfde924cfcba33ff8c0492",
-    "content-hash": "a493c0706705270a5c1b0bebc7262b65",
+    "hash": "704c2eae04dec8796daa0c5895e5d627",
+    "content-hash": "a4bc860ab54e366944ea1966fae0a541",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -4177,6 +4177,123 @@
             "time": "2013-05-16 19:30:56"
         },
         {
+            "name": "overblog/graphql-bundle",
+            "version": "v0.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overblog/GraphQLBundle.git",
+                "reference": "14b7219050a582745e17bfb6a38e3841db5bc3c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/14b7219050a582745e17bfb6a38e3841db5bc3c1",
+                "reference": "14b7219050a582745e17bfb6a38e3841db5bc3c1",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-cache-bundle": "^1.2",
+                "overblog/graphql-php-generator": "^0.3.0",
+                "php": "^5.4|~7.0",
+                "symfony/expression-language": "^2.7|^3.0",
+                "symfony/framework-bundle": "^2.7|^3.0",
+                "symfony/options-resolver": "^2.7|^3.0",
+                "symfony/property-access": "^2.7|^3.0",
+                "webonyx/graphql-php": "^0.7"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.11",
+                "sensio/framework-extra-bundle": "^3.0.13",
+                "sllh/php-cs-fixer-styleci-bridge": "^1.5",
+                "symfony/browser-kit": "^2.7|^3.0",
+                "symfony/css-selector": "^2.7|^3.0",
+                "symfony/dependency-injection": "^2.7|^3.0",
+                "symfony/phpunit-bridge": "~2.7|^3.0",
+                "symfony/security-bundle": "^2.7|^3.0",
+                "symfony/twig-bundle": "^2.7|^3.0",
+                "symfony/web-profiler-bundle": "^2.7|^3.0",
+                "symfony/yaml": "^2.7|^3.0"
+            },
+            "suggest": {
+                "twig/twig": "If you want to use graphiQL."
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Overblog\\GraphQLBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Overblog",
+                    "homepage": "http://www.over-blog.com"
+                }
+            ],
+            "description": "This bundle provides tools to build a GraphQL server in your Symfony App.",
+            "keywords": [
+                "Relay",
+                "graphql"
+            ],
+            "time": "2016-11-18 09:59:13"
+        },
+        {
+            "name": "overblog/graphql-php-generator",
+            "version": "v0.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overblog/GraphQLPhpGenerator.git",
+                "reference": "fa42d6778dc59cd099c2c1719389b8024389039f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overblog/GraphQLPhpGenerator/zipball/fa42d6778dc59cd099c2c1719389b8024389039f",
+                "reference": "fa42d6778dc59cd099c2c1719389b8024389039f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4|~7.0",
+                "webonyx/graphql-php": "*"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.11",
+                "phpunit/phpunit": "^4.1|^5.1",
+                "sllh/php-cs-fixer-styleci-bridge": "^1.5",
+                "symfony/expression-language": "^2.7|^3.0",
+                "symfony/filesystem": "^2.7|^3.0",
+                "symfony/process": "^2.7|^3.0",
+                "symfony/yaml": "^2.7|^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Overblog\\GraphQLGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Overblog",
+                    "homepage": "http://www.over-blog.com"
+                }
+            ],
+            "description": "GraphQL types generator",
+            "keywords": [
+                "generator",
+                "graphql",
+                "type"
+            ],
+            "time": "2016-11-09 08:59:24"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v2.0.4",
             "source": {
@@ -7392,6 +7509,44 @@
                 "twilio"
             ],
             "time": "2016-01-29 00:19:22"
+        },
+        {
+            "name": "webonyx/graphql-php",
+            "version": "v0.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webonyx/graphql-php.git",
+                "reference": "f91cbf3409ba0385b2d43b1692600efeda43d980"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/f91cbf3409ba0385b2d43b1692600efeda43d980",
+                "reference": "f91cbf3409ba0385b2d43b1692600efeda43d980",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4,<8.0-DEV"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GraphQL\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "description": "A PHP port of GraphQL reference implementation",
+            "homepage": "https://github.com/webonyx/graphql-php",
+            "keywords": [
+                "api",
+                "graphql"
+            ],
+            "time": "2016-09-16 09:48:07"
         },
         {
             "name": "whitehat101/apr1-md5",
