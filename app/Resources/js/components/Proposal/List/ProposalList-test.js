@@ -28,7 +28,7 @@ describe('<ProposalList />', () => {
   it('should not render list if proposal is not provided', () => {
     const wrapper = shallow(<ProposalList step={step} proposals={[]} {...IntlData} />);
     expect(wrapper.children()).toHaveLength(1);
-    expect(wrapper.children().text()).to.be.eql(IntlData.messages.proposal.private.empty);
+    expect(wrapper.children().text()).toEqual(IntlData.messages.proposal.private.empty);
   });
 
   it('should render a proposal list', () => {

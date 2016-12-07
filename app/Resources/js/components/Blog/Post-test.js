@@ -25,7 +25,7 @@ describe('<Post />', () => {
 
   it('should render a post', () => {
     const wrapper = shallow(<Post {...props} post={post} />);
-    expect(wrapper.find('li').props()).to.contains({
+    expect(wrapper.find('li').props()).toMatchObject({
       className: 'media media--news block block--bordered box',
     });
 

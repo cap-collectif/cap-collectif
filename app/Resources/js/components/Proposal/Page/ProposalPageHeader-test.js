@@ -48,7 +48,7 @@ describe('<ProposalPageHeader />', () => {
 
     const proposalVoteWrapper = par.find('Connect(ProposalVoteButtonWrapper)');
     expect(proposalVoteWrapper).toHaveLength(1);
-    expect(proposalVoteWrapper.props()).eql({ proposal, className: 'visible-xs pull-right' });
+    expect(proposalVoteWrapper.props()).toEqual({ proposal, className: 'visible-xs pull-right' });
   });
 
   it('should not render theme if proposal has none', () => {

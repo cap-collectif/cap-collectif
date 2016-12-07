@@ -32,13 +32,11 @@ describe('<RegistrationForm />', () => {
     expect(wrapper.find('ReduxForm')).toHaveLength(1);
     expect(wrapper.find('ReduxForm').prop('form')).toEqual('registration-form');
     expect(wrapper.find('ReduxForm').prop('fields')).toHaveLength(5);
-    // expect(wrapper.find('AsyncScriptLoader')).toHaveLength(1);
-    // expect(wrapper.fi  nd('AsyncScriptLoader').prop('sitekey')).toEqual('6LctYxsTAAAAANsAl06GxNeV5xGaPjy5jbDe-J8M');
   });
 
   it('renders a username input', () => {
     const wrapper = shallow(<RegistrationForm {...props} />);
-    expect(wrapper.find('ReduxForm').prop('fields')).to.contains(
+    expect(wrapper.find('ReduxForm').prop('fields')).toMatchObject(
       {
         name: 'username',
         label: 'Nom ou pseudonyme',
@@ -52,7 +50,7 @@ describe('<RegistrationForm />', () => {
 
   it('renders an email input', () => {
     const wrapper = shallow(<RegistrationForm {...props} />);
-    expect(wrapper.find('ReduxForm').prop('fields')).to.contains(
+    expect(wrapper.find('ReduxForm').prop('fields')).toMatchObject(
       {
         name: 'email',
         label: 'Adresse électronique',
@@ -70,7 +68,7 @@ describe('<RegistrationForm />', () => {
 
   it('renders a password input', () => {
     const wrapper = shallow(<RegistrationForm {...props} />);
-    expect(wrapper.find('ReduxForm').prop('fields')).to.contains(
+    expect(wrapper.find('ReduxForm').prop('fields')).toMatchObject(
       {
         name: 'plainPassword',
         label: 'Créez un mot de passe',
@@ -89,7 +87,7 @@ describe('<RegistrationForm />', () => {
   it('renders a user_type select', () => {
     const wrapper = shallow(<RegistrationForm {...props} userTypes={[{ id: 1, name: 'type_1' }]} features={{ user_type: true, zipcode_at_register: false }} />);
     const select = wrapper.find('ReduxForm').prop('fields')[3];
-    expect(select).to.containSubset(
+    expect(select).toMatchObject(
       {
         name: 'userType',
         type: 'select',
@@ -104,13 +102,13 @@ describe('<RegistrationForm />', () => {
         placeholder: 'Je suis...',
       }
     );
-    expect(select.label).to.be.a.symbol;
+    expect(select.label).toBeDefined;
   });
 
   it('renders a charte checkbox', () => {
     const wrapper = shallow(<RegistrationForm {...props} />);
     const checkbox = wrapper.find('ReduxForm').prop('fields')[3];
-    expect(checkbox).to.containSubset(
+    expect(checkbox).toMatchObject(
       {
         name: 'charte',
         labelClassName: 'h5',
@@ -118,6 +116,6 @@ describe('<RegistrationForm />', () => {
         id: '_charte',
       }
     );
-    expect(checkbox.label).to.be.a.symbol;
+    expect(checkbox.label).toBeDefined;
   });
 });

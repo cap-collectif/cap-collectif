@@ -20,6 +20,6 @@ describe('<LoginSocialButtons />', () => {
     const wrapper = shallow(<LoginSocialButtons features={{ login_facebook: true, login_gplus: true }} {...props} />);
     expect(wrapper.find('FacebookLoginButton')).toHaveLength(1);
     expect(wrapper.find('GoogleLoginButton')).toHaveLength(1);
-    expect(wrapper.text()).to.contains('OU');
+    expect(wrapper.text()).toContain('OU');
   });
 });

@@ -15,8 +15,8 @@ describe('<PaginationItem />', () => {
   it('should render a pagination item', () => {
     const wrapper = shallow(<PaginationItem {...props} {...IntlData} />);
     const item = wrapper.find('li');
-    expect(item.prop('className')).to.not.contain('active');
-    expect(item.prop('className')).to.not.contain('disabled');
+    expect(item.prop('className')).not.toContain('active');
+    expect(item.prop('className')).not.toContain('disabled');
     const itemWrapper = wrapper.find('.page-item__wrapper');
     expect(itemWrapper.prop('onClick')).toEqual(props.onSelect);
     expect(itemWrapper.prop('aria-label')).toEqual(props.page);
@@ -27,13 +27,13 @@ describe('<PaginationItem />', () => {
   it('should render a disabled pagination item when specified', () => {
     const wrapper = shallow(<PaginationItem {...props} disabled {...IntlData} />);
     const item = wrapper.find('li');
-    expect(item.prop('className')).to.contain('disabled');
+    expect(item.prop('className')).toContain('disabled');
   });
 
   it('should render an active pagination item when specified', () => {
     const wrapper = shallow(<PaginationItem {...props} active {...IntlData} />);
     const item = wrapper.find('li');
-    expect(item.prop('className')).to.contain('active');
+    expect(item.prop('className')).toContain('active');
   });
 
   it('should render a pagination with specified label', () => {

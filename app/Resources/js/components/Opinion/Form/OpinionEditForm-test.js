@@ -64,6 +64,6 @@ describe('<OpinionEditForm />', () => {
       body: props.opinion.body,
     });
     expect(form.prop('onSubmitFail')).toEqual(props.onFailure);
-    expect(form.prop('onSubmit')).to.be.defined;
+    expect(form.prop('onSubmit')).toBeDefined();;
   });
 });

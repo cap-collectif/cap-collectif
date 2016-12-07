@@ -39,7 +39,7 @@ describe('<Checkbox />', () => {
     />);
     expect(wrapper.find(CheckboxGroup)).toHaveLength(1);
     expect(wrapper.find(CheckboxGroup).prop('name')).toEqual(`choices-for-field-${field.id}`);
-    expect(wrapper.find(CheckboxGroup).prop('value')).to.be.a('array');
+    expect(wrapper.find(CheckboxGroup).prop('value')).toBeDefined();
     expect(wrapper.find(CheckboxGroup).prop('onChange')).toBeDefined();
   });
 
@@ -74,6 +74,6 @@ describe('<Checkbox />', () => {
     expect(wrapper.find(CheckboxGroup).find(Other)).toHaveLength(1);
     expect(wrapper.find(CheckboxGroup).find(Other).prop('field')).toEqual(field);
     expect(wrapper.find(CheckboxGroup).find(Other).prop('onChange')).toBeDefined();
-    expect(wrapper.find(CheckboxGroup).find(Other).prop('disabled')).to.be.a('boolean');
+    expect(wrapper.find(CheckboxGroup).find(Other).prop('disabled')).toBeDefined();
   });
 });

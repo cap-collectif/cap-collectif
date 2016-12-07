@@ -17,8 +17,8 @@ describe('<IdeaPageComments />', () => {
     expect(wrapper.find('div.idea__comments')).toHaveLength(1);
     const comments = wrapper.find(CommentSection);
     expect(comments).toHaveLength(1);
-    expect(comments.prop('uri')).toEquals('ideas');
-    expect(comments.prop('object')).toEquals(props.id);
+    expect(comments.prop('uri')).toEqual('ideas');
+    expect(comments.prop('object')).toEqual(props.id);
   });
 
   it('it should a div with provided class name', () => {

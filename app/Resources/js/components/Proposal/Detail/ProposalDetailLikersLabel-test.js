@@ -30,7 +30,7 @@ describe('<ProposalDetailLikersLabel />', () => {
   it('should render a <FormattedMessage/> when several likers', () => {
     const wrapper = shallow(<ProposalDetailLikersLabel likers={severalLikers} {...IntlData} />);
     expect(wrapper.find('FormattedMessage')).toHaveLength(1);
-    expect(wrapper.find('FormattedMessage').prop('num')).toEquals(2);
+    expect(wrapper.find('FormattedMessage').prop('num')).toEqual(2);
   });
 
   it('should render nothing when no likers', () => {

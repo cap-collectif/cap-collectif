@@ -52,8 +52,8 @@ describe('<Other />', () => {
     expect(radioComponent.prop('id')).toEqual(`reply-${radioField.id}_choice-other--check`);
     expect(radioComponent.prop('name')).toEqual(`choices-for-field-${radioField.id}`);
     expect(radioComponent.prop('type')).toEqual('radio');
-    expect(radioComponent.prop('checked')).to.be.a('boolean');
-    expect(radioComponent.prop('disabled')).to.be.a('boolean');
+    expect(radioComponent.prop('checked')).toBeDefined();
+    expect(radioComponent.prop('disabled')).toBeDefined();
     expect(radioComponent.prop('onChange')).toBeDefined();
 
     const textComponent = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'text'));
@@ -61,8 +61,8 @@ describe('<Other />', () => {
     expect(textComponent.prop('id')).toEqual(`reply-${radioField.id}_choice-other--field`);
     expect(textComponent.prop('type')).toEqual('text');
     expect(textComponent.prop('bsSize')).toEqual('small');
-    expect(textComponent.prop('placeholder')).to.be.a('string');
-    expect(textComponent.prop('disabled')).to.be.a('boolean');
+    expect(textComponent.prop('placeholder')).toBeDefined();
+    expect(textComponent.prop('disabled')).toBeDefined();
     expect(textComponent.prop('onChange')).toBeDefined();
   });
 
@@ -78,8 +78,8 @@ describe('<Other />', () => {
     expect(checkboxComponent.prop('id')).toEqual(`reply-${checkboxField.id}_choice-other--check`);
     expect(checkboxComponent.prop('name')).toEqual(`choices-for-field-${checkboxField.id}`);
     expect(checkboxComponent.prop('type')).toEqual('checkbox');
-    expect(checkboxComponent.prop('checked')).to.be.a('boolean');
-    expect(checkboxComponent.prop('disabled')).to.be.a('boolean');
+    expect(checkboxComponent.prop('checked')).toBeDefined();
+    expect(checkboxComponent.prop('disabled')).toBeDefined();
     expect(checkboxComponent.prop('onChange')).toBeDefined();
 
     const textComponent = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'text'));
@@ -87,8 +87,8 @@ describe('<Other />', () => {
     expect(textComponent.prop('id')).toEqual(`reply-${checkboxField.id}_choice-other--field`);
     expect(textComponent.prop('type')).toEqual('text');
     expect(textComponent.prop('bsSize')).toEqual('small');
-    expect(textComponent.prop('placeholder')).to.be.a('string');
-    expect(textComponent.prop('disabled')).to.be.a('boolean');
+    expect(textComponent.prop('placeholder')).toBeDefined();
+    expect(textComponent.prop('disabled')).toBeDefined();
     expect(textComponent.prop('onChange')).toBeDefined();
   });
 });

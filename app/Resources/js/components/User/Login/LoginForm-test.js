@@ -35,7 +35,7 @@ describe('<LoginForm />', () => {
     expect(input.prop('id')).toEqual('_password');
     expect(input.prop('type')).toEqual('password');
     expect(input.prop('label')).toEqual('Mot de passe');
-    expect(input.prop('help')).to.not.exist;
+    expect(input.prop('help')).not.toBeDefined();
     expect(input.prop('labelClassName')).toEqual('w100 h5');
   });
 });

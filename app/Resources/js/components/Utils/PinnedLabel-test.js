@@ -14,6 +14,6 @@ describe('<PinnedLabel />', () => {
 
   it('should not render a blue label if not shown', () => {
     const wrapper = shallow(<PinnedLabel show={false} {...IntlData} />);
-    expect(wrapper.find('span.opinion__label.opinion__label--blue')).to.not.exists;
+    expect(wrapper.find('span.opinion__label.opinion__label--blue')).toHaveLength(0.0);
   });
 });

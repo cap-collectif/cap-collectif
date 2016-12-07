@@ -35,7 +35,7 @@ describe('<RankingBox />', () => {
     expect(items.first().prop('item')).toEqual(item1);
     expect(items.first().prop('id')).toEqual('reply-42_choice-1');
     expect(items.first().prop('disabled')).toEqual(false);
-    expect(items.first().prop('arrowFunctions')).toContain('right');
+    expect(items.first().prop('arrowFunctions').right).toBeDefined();
     expect(items.first().prop('arrowFunctions')).not.toContain('left');
     expect(items.first().prop('arrowFunctions')).not.toContain('up');
     expect(items.first().prop('arrowFunctions')).not.toContain('down');

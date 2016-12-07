@@ -28,7 +28,7 @@ describe('<VisibilityBox />', () => {
     );
     expect(wrapper.find('.foo').html()).toEqual('<div class="foo"></div>');
     expect(wrapper.find('#privateInfo')).toHaveLength(1);
-    expect(wrapper.find('#privateInfo').text().trim()).to.be.eql(IntlData.messages.proposal.private.message);
+    expect(wrapper.find('#privateInfo').text().trim()).toEqual(IntlData.messages.proposal.private.message);
   });
 
   it('renders jumbotron if user is not logged', () => {

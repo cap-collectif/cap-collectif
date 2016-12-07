@@ -61,26 +61,26 @@ describe('<OpinionVotesButton />', () => {
 
   it('should not render a button when value is 0 and vote type is simple', () => {
     const wrapper = shallow(<OpinionVotesButton {...defaultProps} opinion={opinionVoteSimple} value={0} />);
-    expect(wrapper.find('Button')).to.not.exists;
+    expect(wrapper.find('Button')).toHaveLength(0.0);
   });
 
   it('should not render a button when value is -1 and vote type is simple', () => {
     const wrapper = shallow(<OpinionVotesButton {...defaultProps} opinion={opinionVoteSimple} value={-1} />);
-    expect(wrapper.find('Button')).to.not.exists;
+    expect(wrapper.find('Button')).toHaveLength(0.0);
   });
 
   it('should not render a button when value is 1 and vote type is disabled', () => {
     const wrapper = shallow(<OpinionVotesButton {...defaultProps} opinion={opinionVoteDisabled} value={1} />);
-    expect(wrapper.find('Button')).to.not.exists;
+    expect(wrapper.find('Button')).toHaveLength(0.0);
   });
 
   it('should not render a button when value is 0 and vote type is disabled', () => {
     const wrapper = shallow(<OpinionVotesButton {...defaultProps} opinion={opinionVoteDisabled} value={0} />);
-    expect(wrapper.find('Button')).to.not.exists;
+    expect(wrapper.find('Button')).toHaveLength(0.0);
   });
 
   it('should not render a button when value is -1 and vote type is disabled', () => {
     const wrapper = shallow(<OpinionVotesButton {...defaultProps} opinion={opinionVoteDisabled} value={-1} />);
-    expect(wrapper.find('Button')).to.not.exists;
+    expect(wrapper.find('Button')).toHaveLength(0.0);
   });
 });

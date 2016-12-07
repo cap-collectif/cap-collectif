@@ -39,7 +39,7 @@ describe('<ProjectStatsPage />', () => {
 
   it('should render a paragraph if no steps', () => {
     const wrapper = shallow(<ProjectStatsPage steps={[]} {...props} />);
-    expect(wrapper.find('h3')).to.not.exists;
+    expect(wrapper.find('h3')).toHaveLength(0.0);
     expect(wrapper.find('p.project-stats__empty')).toHaveLength(1);
   });
 });

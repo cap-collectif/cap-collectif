@@ -98,7 +98,6 @@ describe('<ReplyForm />', () => {
     expect(component.prop('type')).toEqual(form.fields[0].type);
     expect(component.prop('label')).toEqual(form.fields[0].question);
     expect(component.prop('id')).toEqual(`reply-${form.fields[0].id}`);
-    expect(component.prop('help')).to.be.empty;
   });
 
   it('should render a Checkbox component with right props', () => {
@@ -117,7 +116,7 @@ describe('<ReplyForm />', () => {
     expect(wrapper.find(Checkbox).prop('onChange')).toBeDefined();
     expect(wrapper.find(Checkbox).prop('getGroupStyle')).toBeDefined();
     expect(wrapper.find(Checkbox).prop('renderFormErrors')).toBeDefined();
-    expect(wrapper.find(Checkbox).prop('disabled')).to.be.a('boolean');
+    expect(wrapper.find(Checkbox).prop('disabled')).toBeDefined();
   });
 
   it('should render a Radio component with right props', () => {
@@ -151,7 +150,7 @@ describe('<ReplyForm />', () => {
     expect(component.prop('type')).toEqual(form.fields[3].type);
     expect(component.prop('label')).toEqual(`${form.fields[3].question} (facultatif)`);
     expect(component.prop('id')).toEqual(`reply-${form.fields[3].id}`);
-    expect(component.prop('help')).to.be.equal(form.fields[3].helpText);
+    expect(component.prop('help')).toEqual(form.fields[3].helpText);
   });
 
   it('should render a Ranking component with right props', () => {
@@ -166,7 +165,7 @@ describe('<ReplyForm />', () => {
     const component = wrapper.find('Ranking');
     expect(component).toHaveLength(1);
     expect(component.prop('id')).toEqual(`reply-${form.fields[4].id}`);
-    expect(component.prop('field')).to.be.equal(form.fields[4]);
+    expect(component.prop('field')).toEqual(form.fields[4]);
     expect(component.prop('onChange')).toBeDefined();
     expect(component.prop('labelClassName')).toEqual('h4');
   });

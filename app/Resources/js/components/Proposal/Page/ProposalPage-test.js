@@ -1,7 +1,5 @@
 /* eslint-env jest */
-/* eslint no-unused-expressions:0 */
 import React from 'react';
-
 import { shallow } from 'enzyme';
 import { ProposalPage } from './ProposalPage';
 import IntlData from '../../../translations/FR';
@@ -65,7 +63,7 @@ describe('<ProposalPage />', () => {
 
     const tabContainer = wrapper.find(Tab.Container);
     expect(tabContainer).toHaveLength(2);
-    expect(tabContainer.first().props()).to.contains({
+    expect(tabContainer.first().props()).toMatchObject({
       id: 'proposal-page-tabs',
       defaultActiveKey: 'content',
       className: 'container--custom',
@@ -90,7 +88,7 @@ describe('<ProposalPage />', () => {
     expect(commentsItem.find('.badge').text()).toEqual(`${proposalNoVotes.comments_count}`);
     const voteButtonWrapper = tabsPills.find('Connect(ProposalVoteButtonWrapper)');
     expect(voteButtonWrapper).toHaveLength(1);
-    expect(voteButtonWrapper.props()).to.contains({
+    expect(voteButtonWrapper.props()).toContain({
       proposal: proposalNoVotes,
       className: 'pull-right hidden-xs proposal__preview__vote',
     });
@@ -103,7 +101,7 @@ describe('<ProposalPage />', () => {
     expect(contentTabPane.prop('eventKey')).toEqual('content');
     const proposalContent = contentTabPane.find('Connect(ProposalPageContent)');
     expect(proposalContent).toHaveLength(1);
-    expect(proposalContent.props()).to.contains({
+    expect(proposalContent.props()).toContain({
       proposal: proposalNoVotes,
       form: props.form,
       categories: props.categories,
@@ -120,7 +118,7 @@ describe('<ProposalPage />', () => {
 
     expect(proposalAdvancement.props()).toEqual({ proposal: proposalNoVotes });
     const commentsTabPane = tabPanes.at(1);
-    expect(commentsTabPane.props()).to.contains({ eventKey: 'comments' });
+    expect(commentsTabPane.props()).toContain({ eventKey: 'comments' });
 
     const proposalComments = commentsTabPane.find('ProposalPageComments');
     expect(proposalComments.prop('form')).toEqual(props.form);

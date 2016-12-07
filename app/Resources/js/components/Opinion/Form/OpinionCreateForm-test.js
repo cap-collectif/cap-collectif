@@ -59,8 +59,8 @@ describe('<OpinionCreateForm />', () => {
         type: 'editor',
       },
     ]);
-    expect(wrapper.prop('initialValues')).to.be.undefined;
+    expect(wrapper.prop('initialValues')).not.toBeDefined();
     expect(wrapper.prop('onSubmitFail')).toEqual(props.onFailure);
-    expect(wrapper.prop('onSubmit')).to.be.defined;
+    expect(wrapper.prop('onSubmit')).toBeDefined();
   });
 });

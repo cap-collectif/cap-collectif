@@ -34,6 +34,6 @@ describe('<OpinionSource />', () => {
 
   it('should render a white li if not vip', () => {
     const wrapper = shallow(<OpinionSource source={sourceUserNotVip} />);
-    expect(wrapper.find('li.bg-vip')).to.not.exists;
+    expect(wrapper.find('li.bg-vip')).toHaveLength(0.0);
   });
 });

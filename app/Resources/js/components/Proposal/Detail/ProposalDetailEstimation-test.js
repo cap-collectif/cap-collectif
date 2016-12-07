@@ -25,6 +25,6 @@ describe('<ProposalDetailEstimation />', () => {
 
   it('should not render a div with class proposal_info when estimation is null and showNullEstimation is false', () => {
     const wrapper = shallow(<ProposalDetailEstimation proposal={proposalWithNullEstimation} showNullEstimation={false} />);
-    expect(wrapper.find('div.proposal__info')).to.not.exists;
+    expect(wrapper.find('div.proposal__info')).toHaveLength(0.0);
   });
 });

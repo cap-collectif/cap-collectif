@@ -38,7 +38,7 @@ describe('<ProposalDetailLikers />', () => {
     expect(overlayTrigger).toHaveLength(1);
     expect(overlayTrigger.prop('placement')).toEqual('top');
     const tooltip = shallow(overlayTrigger.prop('overlay'));
-    expect(tooltip.instance()).to.be.instanceOf(Tooltip);
+    expect(tooltip.instance()).toBeDefined();
     expect(tooltip.prop('id')).toEqual('proposal-1-likers-tooltip-');
     const tooltipLabel = tooltip.find(ProposalDetailLikersTooltipLabel);
     expect(tooltipLabel).toHaveLength(1);
