@@ -4,7 +4,8 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Capco\AppBundle\Entiy\Opinion;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 class ConsultationResolver implements ContainerAwareInterface
 {
@@ -20,12 +21,17 @@ class ConsultationResolver implements ContainerAwareInterface
         return $repo->findAll();
     }
 
+    public function resolveConsultationSections(ConsultationStep $consultation)
+    {
+      return $consultation->getConsultationStepType()->getOpinionTypes();
+    }
+
     public function resolvePropositionSection(Opinion $proposition)
     {
       return $proposition->getOpinionType();
     }
 
-    public function resolveContributions($consultation)
+    public function resolveContributions(ConsultationStep $consultation)
     {
         return $this->container
         ->get('capco.opinion.repository')->findBy([

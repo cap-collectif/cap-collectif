@@ -9,3 +9,6 @@ Section:
             title:
                 type: "String!"
                 description: "The title of the section."
+            children:
+                type: "[Section]"
+                description: "Subsection."

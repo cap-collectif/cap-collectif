@@ -13,3 +13,7 @@ Consultation:
                 type: "[Contribution]"
                 description: "List of contributions."
                 resolve: "@=resolver('consultation_contributions', [value])"
+            sections:
+                type: "[Section]"
+                description: "List of contributions."
+                resolve: "@=resolver('consultation_sections', [value])"
