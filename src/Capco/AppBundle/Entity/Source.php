@@ -63,8 +63,6 @@ class Source implements Contribution, VotableInterface, IsPublishableInterface
     private $link;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank()
      */

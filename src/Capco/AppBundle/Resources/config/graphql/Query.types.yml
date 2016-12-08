@@ -5,4 +5,8 @@ Query:
         fields:
             consultations:
                 type: "[Consultation]"
-                resolve: "@=resolver('consultation', [])"
+                args:
+                    id:
+                        description: "If omitted, returns all consultations. If provided, returns the consultation of the particular id."
+                        type: "Int"
+                resolve: "@=resolver('consultation', [args])"

@@ -2,14 +2,26 @@ Contribution:
     type: object
     config:
         description: "A contribution"
-        # resolveType: "@=resolver('consultation_contributions', [value])"
         fields:
-            # author:
-            #     type: "Person!"
-            #     description: "The author of the contribution."
+            author:
+                type: "Person!"
+                description: "The author of the contribution."
             id:
                 type: "Int!"
                 description: "The content of the contribution."
+            title:
+                type: "String!"
+                description: "The title of the contribution."
             body:
                 type: "String!"
                 description: "The content of the contribution."
+            arguments:
+                type: "[Argument]"
+                description: "The arguments related to the contribution."
+            sources:
+                type: "[Source]"
+                description: "The sources related to the contribution."
+            section:
+                type: "Section!"
+                description: "Where the proposition has been placed."
+                resolve: "@=resolver('proposition_section', [value])"

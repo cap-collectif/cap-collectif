@@ -1,0 +1,11 @@
+Section:
+    type: object
+    config:
+        description: "A section"
+        fields:
+            id:
+                type: "Int!"
+                description: "The id of the section."
+            title:
+                type: "String!"
+                description: "The title of the section."

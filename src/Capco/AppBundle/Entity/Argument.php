@@ -60,7 +60,6 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
     private $body;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
@@ -174,11 +173,6 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this;
     }
 
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;

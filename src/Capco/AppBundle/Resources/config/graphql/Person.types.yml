@@ -4,5 +4,5 @@ Person:
         description: "A person"
         fields:
             id:
-                type: "String!"
+                type: "Int!"
                 description: "The id of the person."

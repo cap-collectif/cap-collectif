@@ -1,0 +1,9 @@
+ArgumentValue:
+    type: enum
+    config:
+        description: "Value of an argument"
+        values:
+            FOR:
+                value: 0
+            AGAINST:
+                value: 1

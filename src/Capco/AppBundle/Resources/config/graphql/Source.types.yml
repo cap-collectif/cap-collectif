@@ -1,0 +1,17 @@
+Source:
+    type: object
+    config:
+        description: "A source"
+        fields:
+            id:
+              type: "Int!"
+              description: "The id of the source."
+            author:
+                type: "Person!"
+                description: "The author of the source."
+            title:
+                type: "String!"
+                description: "The title of the source."
+            body:
+                type: "String!"
+                description: "The content of the source."

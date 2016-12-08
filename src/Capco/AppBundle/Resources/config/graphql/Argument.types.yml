@@ -1,0 +1,17 @@
+Argument:
+    type: object
+    config:
+        description: "An argument"
+        fields:
+            author:
+                type: "Person!"
+                description: "The author of the argument."
+            type:
+                type: "ArgumentValue!"
+                description: "The type."
+            id:
+                type: "Int!"
+                description: "The content of the argument."
+            body:
+                type: "String!"
+                description: "The content of the argument."
