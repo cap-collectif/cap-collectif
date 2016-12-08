@@ -6,6 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Overblog\GraphQLBundle\Definition\Argument;
 
 class ConsultationResolver implements ContainerAwareInterface
 {
@@ -24,6 +25,15 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolveConsultationSections(ConsultationStep $consultation)
     {
       return $consultation->getConsultationStepType()->getOpinionTypes();
+    }
+
+    public function resolvePropositionArguments(Opinion $proposition, Argument $argument) {
+        if ($argument->offsetExists('type')) {
+          return $proposition->getArguments()->filter(function ($a) use ($argument) {
+              return $a->getType() === $argument->offsetGet('type');
+          });
+        }
+        return $proposition->getArguments();
     }
 
     public function resolvePropositionSection(Opinion $proposition)

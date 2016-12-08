@@ -11,3 +11,4 @@ services:
           - { name: overblog_graphql.resolver, alias: "consultation_contributions", method: "resolveContributions" }
           - { name: overblog_graphql.resolver, alias: "proposition_section", method: "resolvePropositionSection" }
           - { name: overblog_graphql.resolver, alias: "consultation_sections", method: "resolveConsultationSections" }
+          - { name: overblog_graphql.resolver, alias: "proposition_arguments", method: "resolvePropositionArguments" }

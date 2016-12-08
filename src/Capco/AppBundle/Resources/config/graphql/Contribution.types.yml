@@ -17,7 +17,12 @@ Contribution:
                 description: "The content of the contribution."
             arguments:
                 type: "[Argument]"
+                args:
+                    type:
+                        description: "If omitted, returns all arguments. If provided, returns the arguments of this particular type."
+                        type: "ArgumentValue"
                 description: "The arguments related to the contribution."
+                resolve: "@=resolver('proposition_arguments', [value, args])"
             sources:
                 type: "[Source]"
                 description: "The sources related to the contribution."
