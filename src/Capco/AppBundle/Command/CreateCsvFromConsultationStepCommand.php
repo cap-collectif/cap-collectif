@@ -12,6 +12,31 @@ use Symfony\Component\Console\Helper\ProgressBar;
 
 class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
 {
+
+  const headers = [
+      'proposition_id',
+      'proposition_title',
+      'proposition_content',
+      'proposition_section_title',
+      'proposition_author_id',
+      'proposition_url',
+      'proposition_votes_count_ok',
+      'proposition_votes_count_nok',
+      'proposition_votes_count_paired',
+
+      'proposition_votes_author_id',
+      'proposition_votes_value',
+
+      'argument_id',
+      'argument_type',
+      'argument_content',
+      'argument_votes_count',
+
+      'source_id',
+      'source_content',
+      'source_votes_count',
+  ];
+
     protected function configure()
     {
         $this
@@ -52,6 +77,10 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
        }';
     }
 
+    public function getCleanRow() {
+      return array_combine(CreateCsvFromConsultationStepCommand::headers, array_map(function ($h) { return ""; }, CreateCsvFromConsultationStepCommand::headers));
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
       $query = '{
@@ -86,35 +115,11 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
          }
        }';
 
-        $headers = [
-            'proposition_id',
-            'proposition_title',
-            'proposition_content',
-            'proposition_section_title',
-            'proposition_author_id',
-            'proposition_url',
-            'proposition_votes_count_ok',
-            'proposition_votes_count_nok',
-            'proposition_votes_count_paired',
-
-            'proposition_votes_author_id',
-            'proposition_votes_value',
-
-            'argument_id',
-            'argument_type',
-            'argument_content',
-            'argument_votes_count',
-
-            'source_id',
-            'source_content',
-            'source_votes_count',
-        ];
-
         $writer = Writer::createFromPath('web/export/papapo.csv', 'w');
         $writer->setDelimiter(",");
         $writer->setNewline("\r\n");
         $writer->setOutputBOM(Writer::BOM_UTF8);
-        $writer->insertOne($headers);
+        $writer->insertOne(CreateCsvFromConsultationStepCommand::headers);
 
         $data = $this->queryGraphql($query);
         foreach ($data['consultations'] as $consultation) {
@@ -123,92 +128,38 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
             $progress->start();
             foreach ($consultation['contributions'] as $key => $contribution) {
               $progress->advance();
-              $writer->insertOne([
-                $contribution['id'],
-                $contribution['title'],
-                $contribution['body'],
-                $contribution['section']['title'],
-                $contribution['author']['id'],
-                $contribution['url'],
-                $contribution['votesCountOk'],
-                $contribution['votesCountNok'],
-                $contribution['votesCountMitige'],
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-              ]);
+              $row = $this->getCleanRow();
+              $row["proposition_id"] = $contribution['id'];
+              $row['proposition_title'] = $contribution['title'];
+              $row['proposition_content'] = $contribution['body'];
+              $row['proposition_section_title'] = $contribution['section']['title'];
+              $row['proposition_author_id'] = $contribution['author']['id'];
+              $row['proposition_url'] = $contribution['url'];
+              $row['proposition_votes_count_ok'] = $contribution['votesCountOk'];
+              $row['proposition_votes_count_nok'] = $contribution['votesCountNok'];
+              $row['proposition_votes_count_paired'] = $contribution['votesCountMitige'];
+              $writer->insertOne(array_values($row));
               $votes = $this->queryGraphql($this->getVotesQuery($contribution['id']))['votesByContribution'];
               foreach ($votes as $vote) {
-                $writer->insertOne([
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  $vote['author']['id'],
-                  $vote['value'],
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                ]);
+                $row = $this->getCleanRow();
+                $row['proposition_votes_author_id'] = $vote['author']['id'];
+                $row['proposition_votes_value'] = $vote['value'];
+                $writer->insertOne(array_values($row));
               }
               foreach ($contribution['arguments'] as $argument) {
-                $writer->insertOne([
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  $argument['id'],
-                  $argument['type'],
-                  $argument['body'],
-                  $argument['votesCount'],
-                  "",
-                  "",
-                  "",
-                ]);
+                $row = $this->getCleanRow();
+                $row['argument_id'] = $argument['id'];
+                $row['argument_type'] = $argument['type'];
+                $row['argument_content'] = $argument['body'];
+                $row['argument_votes_count'] = $argument['votesCount'];
+                $writer->insertOne(array_values($row));
               }
               foreach ($contribution['sources'] as $source) {
-                $writer->insertOne([
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  $source['id'],
-                  $source['body'],
-                  $source['votesCount'],
-                ]);
+                $row = $this->getCleanRow();
+                $row['source_id'] = $source['id'];
+                $row['source_content'] = $source['body'];
+                $row['source_votes_count'] = $source['votesCount'];
+                $writer->insertOne(array_values($row));
               }
             }
             $progress->finish();
