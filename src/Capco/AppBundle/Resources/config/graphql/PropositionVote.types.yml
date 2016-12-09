@@ -1,0 +1,10 @@
+PropositionVote:
+    type: object
+    config:
+        fields:
+            author:
+                type: "Person!"
+                description: "The author of the contribution."
+                resolve: "@=resolver('proposition_vote_author', [value])"
+            value:
+                type: "YesNoPairedVoteValue!"

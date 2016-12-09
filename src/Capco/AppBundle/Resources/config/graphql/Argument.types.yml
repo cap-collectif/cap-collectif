@@ -9,6 +9,8 @@ Argument:
             type:
                 type: "ArgumentValue!"
                 description: "The type."
+            votesCount:
+                type: "Int!"
             id:
                 type: "Int!"
                 description: "The content of the argument."

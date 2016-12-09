@@ -21,7 +21,43 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $client = new Client(['base_url' => 'http://capco.dev']);
-        $query = '{ consultations(id: 1) { id contributions { id title body author { id } arguments { id type body } } } }';
+        $query = '{
+          consultations {
+             id
+             contributions {
+               id
+               title
+               body
+               url
+               votesCountOk
+               votesCountNok
+               votesCountMitige
+               votes(first: 200) {
+                 author {
+                   id
+                 }
+                 value
+               }
+               section {
+                title
+               }
+               author {
+                id
+               }
+               arguments {
+                id
+                type
+                body
+                votesCount
+               }
+               sources {
+                id
+                body
+                votesCount
+               }
+             }
+           }
+         }';
 
         $request = $client->createRequest(
             'GET',
@@ -37,18 +73,31 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
         $urlQuery->setEncodingType(Query::RFC1738);
         $request->setQuery($urlQuery);
 
-
         $response = $client->send($request);
-        $data = $response->json()['data'];
+        $data = $response->json();
 
         $headers = [
             'proposition_id',
             'proposition_title',
             'proposition_content',
+            'proposition_section_title',
             'proposition_author_id',
+            'proposition_url',
+            'proposition_votes_count_ok',
+            'proposition_votes_count_nok',
+            'proposition_votes_count_paired',
+
+            'proposition_votes_author_id',
+            'proposition_votes_value',
+
             'argument_id',
             'argument_type',
             'argument_content',
+            'argument_votes_count',
+
+            'source_id',
+            'source_content',
+            'source_votes_count',
         ];
 
         $writer = Writer::createFromPath('web/export/popo.csv', 'w');
@@ -57,19 +106,59 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
         $writer->setOutputBOM(Writer::BOM_UTF8);
         $writer->insertOne($headers);
 
-        foreach ($data['consultations'] as $consultation) {
+        foreach ($data['data']['consultations'] as $consultation) {
             foreach ($consultation['contributions'] as $contribution) {
               $writer->insertOne([
                 $contribution['id'],
                 $contribution['title'],
                 $contribution['body'],
+                $contribution['section']['title'],
                 $contribution['author']['id'],
+                $contribution['url'],
+                $contribution['votesCountOk'],
+                $contribution['votesCountNok'],
+                $contribution['votesCountMitige'],
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
                 "",
                 "",
                 "",
               ]);
+              foreach ($contribution['votes'] as $vote) {
+                $writer->insertOne([
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  $vote['author']['id'],
+                  $vote['value'],
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                ]);
+              }
               foreach ($contribution['arguments'] as $argument) {
                 $writer->insertOne([
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
                   "",
                   "",
                   "",
@@ -77,6 +166,32 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
                   $argument['id'],
                   $argument['type'],
                   $argument['body'],
+                  $argument['votesCount'],
+                  "",
+                  "",
+                  "",
+                ]);
+              }
+              foreach ($contribution['sources'] as $source) {
+                $writer->insertOne([
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "",
+                  $source['id'],
+                  $source['body'],
+                  $source['votesCount'],
                 ]);
               }
             }

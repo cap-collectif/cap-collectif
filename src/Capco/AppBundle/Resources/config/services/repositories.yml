@@ -69,6 +69,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProposalCollectVote']
 
+  capco.opinion_vote.repository:
+    class: Capco\AppBundle\Repository\OpinionVoteRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:OpinionVote']
+
   capco.question_choice.repository:
     class: Capco\AppBundle\Repository\QuestionChoiceRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

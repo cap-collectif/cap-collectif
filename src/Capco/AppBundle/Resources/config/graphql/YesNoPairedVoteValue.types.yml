@@ -1,0 +1,10 @@
+YesNoPairedVoteValue:
+    type: enum
+    config:
+        values:
+            YES:
+                value: 1
+            NO:
+                value: -1
+            MITIGE:
+                value: 0

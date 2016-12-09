@@ -3,9 +3,25 @@ Contribution:
     config:
         description: "A contribution"
         fields:
+            url:
+                type: "String!"
+                description: "The url of contribution."
+                resolve: "@=resolver('proposition_url', [value])"
             author:
                 type: "Person!"
                 description: "The author of the contribution."
+            votesCountMitige:
+                type: "Int!"
+            votesCountOk:
+                type: "Int!"
+            votesCountNok:
+                type: "Int!"
+            votes:
+                type: "[PropositionVote]"
+                args:
+                    first:
+                        type: "Int"
+                resolve: "@=resolver('proposition_votes', [value, args])"
             id:
                 type: "Int!"
                 description: "The content of the contribution."

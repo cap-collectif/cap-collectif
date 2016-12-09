@@ -22,6 +22,20 @@ class ConsultationResolver implements ContainerAwareInterface
         return $repo->findAll();
     }
 
+    public function resolvePropositionUrl(Opinion $contribution)
+    {
+      return $this->container->get('router')->generate(
+          'app_consultation_show_opinion',
+          [
+              'projectSlug' => $contribution->getStep()->getProject()->getSlug(),
+              'stepSlug' => $contribution->getStep()->getSlug(),
+              'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
+              'opinionSlug' => $contribution->getSlug(),
+          ],
+          true
+      );
+    }
+
     public function resolveConsultationSections(ConsultationStep $consultation)
     {
       return $consultation->getConsultationStepType()->getOpinionTypes();
@@ -39,6 +53,28 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolvePropositionSection(Opinion $proposition)
     {
       return $proposition->getOpinionType();
+    }
+
+    public function resolvePropositionVoteAuthor($vote)
+    {
+        return $vote['user'];
+    }
+
+    public function resolvePropositionVotes(Opinion $proposition, Argument $argument)
+    {
+      return $this->container->get('doctrine')->getEntityManager()
+      ->createQuery('SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = ' . $proposition->getId())
+      ->setMaxResults(200)
+      ->getArrayResult()
+      ;
+    }
+
+    public function resolveVotesByContribution(Argument $argument)
+    {
+      return $this->container->get('doctrine')->getEntityManager()
+      ->createQuery('SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = ' . $argument->offsetGet('contribution'))
+      ->getArrayResult()
+      ;
     }
 
     public function resolveContributions(ConsultationStep $consultation)

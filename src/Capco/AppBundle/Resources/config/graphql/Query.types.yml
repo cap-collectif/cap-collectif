@@ -10,3 +10,9 @@ Query:
                         description: "If omitted, returns all consultations. If provided, returns the consultation of the particular id."
                         type: "Int"
                 resolve: "@=resolver('consultation', [args])"
+            votesByContribution:
+                type: "[PropositionVote]"
+                args:
+                    contribution:
+                        type: "Int!"
+                resolve: "@=resolver('votesByContribution', [args])"
