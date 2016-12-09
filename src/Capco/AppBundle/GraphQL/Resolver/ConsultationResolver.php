@@ -64,7 +64,7 @@ class ConsultationResolver implements ContainerAwareInterface
     {
       return $this->container->get('doctrine')->getEntityManager()
       ->createQuery('SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = ' . $proposition->getId())
-      ->setMaxResults(200)
+      ->setMaxResults(50)
       ->getArrayResult()
       ;
     }

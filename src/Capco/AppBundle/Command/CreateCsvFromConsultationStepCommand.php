@@ -8,6 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Query;
 use League\Csv\Writer;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
 {
@@ -18,63 +19,72 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
             ->setDescription('Create csv file from consultation step data');
     }
 
+    public function queryGraphql(string $query)
+    {
+      $client = new Client(['base_url' => 'http://capco.dev']);
+      $request = $client->createRequest(
+          'GET',
+          '/',
+          [
+            'query' => [ 'query' => $query ],
+            'headers' => [
+              'CONTENT_TYPE' => 'application/graphql'
+            ],
+          ]
+      );
+      $urlQuery = $request->getQuery();
+      $urlQuery->setEncodingType(Query::RFC1738);
+      $request->setQuery($urlQuery);
+      $response = $client->send($request);
+      $response = $response->json();
+      return $response['data'];
+    }
+
+    public function getVotesQuery(int $id)
+    {
+      return '{
+          votesByContribution(contribution: '.$id.') {
+            value
+            author {
+              id
+            }
+          }
+       }';
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $client = new Client(['base_url' => 'http://capco.dev']);
-        $query = '{
-          consultations {
+      $query = '{
+        consultations {
+           id
+           contributions {
              id
-             contributions {
-               id
-               title
-               body
-               url
-               votesCountOk
-               votesCountNok
-               votesCountMitige
-               votes(first: 200) {
-                 author {
-                   id
-                 }
-                 value
-               }
-               section {
-                title
-               }
-               author {
-                id
-               }
-               arguments {
-                id
-                type
-                body
-                votesCount
-               }
-               sources {
-                id
-                body
-                votesCount
-               }
+             title
+             body
+             url
+             votesCountOk
+             votesCountNok
+             votesCountMitige
+             section {
+              title
+             }
+             author {
+              id
+             }
+             arguments {
+              id
+              type
+              body
+              votesCount
+             }
+             sources {
+              id
+              body
+              votesCount
              }
            }
-         }';
-
-        $request = $client->createRequest(
-            'GET',
-            '/',
-            [
-              'query' => [ 'query' => $query ],
-              'headers' => [
-                'CONTENT_TYPE' => 'application/graphql'
-              ],
-            ]
-        );
-        $urlQuery = $request->getQuery();
-        $urlQuery->setEncodingType(Query::RFC1738);
-        $request->setQuery($urlQuery);
-
-        $response = $client->send($request);
-        $data = $response->json();
+         }
+       }';
 
         $headers = [
             'proposition_id',
@@ -100,14 +110,19 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
             'source_votes_count',
         ];
 
-        $writer = Writer::createFromPath('web/export/popo.csv', 'w');
+        $writer = Writer::createFromPath('web/export/papapo.csv', 'w');
         $writer->setDelimiter(",");
         $writer->setNewline("\r\n");
         $writer->setOutputBOM(Writer::BOM_UTF8);
         $writer->insertOne($headers);
 
-        foreach ($data['data']['consultations'] as $consultation) {
-            foreach ($consultation['contributions'] as $contribution) {
+        $data = $this->queryGraphql($query);
+        foreach ($data['consultations'] as $consultation) {
+            $progress = new ProgressBar($output, count($consultation['contributions']));
+            $progress->setFormat('debug');
+            $progress->start();
+            foreach ($consultation['contributions'] as $key => $contribution) {
+              $progress->advance();
               $writer->insertOne([
                 $contribution['id'],
                 $contribution['title'],
@@ -128,7 +143,8 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
                 "",
                 "",
               ]);
-              foreach ($contribution['votes'] as $vote) {
+              $votes = $this->queryGraphql($this->getVotesQuery($contribution['id']))['votesByContribution'];
+              foreach ($votes as $vote) {
                 $writer->insertOne([
                   "",
                   "",
@@ -195,6 +211,7 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
                 ]);
               }
             }
+            $progress->finish();
         }
     }
 }
