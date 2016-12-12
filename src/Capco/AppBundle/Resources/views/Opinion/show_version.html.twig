@@ -26,6 +26,7 @@
       'currentVersionId': version.id,
       'versionsById': {
         (version.id) : {
+          'id': version.id,
           'votes': [],
           'user_vote': version.getVoteValueByUser(app.user)
         }

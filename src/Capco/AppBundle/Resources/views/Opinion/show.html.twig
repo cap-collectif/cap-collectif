@@ -24,7 +24,12 @@
       'currentOpinionId': opinion.id,
       'opinionsById': {
         (opinion.id) : {
+          'id': opinion.id,
           'votes': [],
+          'votesCount': opinion.getVotesCountAll(),
+          'votesCountOk': opinion.votesCountOk,
+          'votesCountNok': opinion.votesCountNok,
+          'votesCountMitige': opinion.votesCountMitige,
           'user_vote': opinion.getVoteValueByUser(app.user)
         }
       }

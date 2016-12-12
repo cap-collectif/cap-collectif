@@ -35,8 +35,9 @@ const OpinionVotesBox = React.createClass({
   },
 
   showPiechart() {
+    const { opinion: { votesCount } } = this.props;
     const widgetType = this.getOpinionType().voteWidgetType;
-    return this.props.opinion.votes.length > 0 && widgetType === VOTE_WIDGET_BOTH;
+    return votesCount > 0 && widgetType === VOTE_WIDGET_BOTH;
   },
 
   render() {
@@ -63,9 +64,9 @@ const OpinionVotesBox = React.createClass({
                   top={20}
                   height={'180px'}
                   width={'200px'}
-                  ok={opinion.votes_ok}
-                  nok={opinion.votes_nok}
-                  mitige={opinion.votes_mitige}
+                  ok={opinion.votesCountOk}
+                  nok={opinion.votesCountNok}
+                  mitige={opinion.votesCountMitige}
                 />
               </Col>
           }
@@ -76,8 +77,11 @@ const OpinionVotesBox = React.createClass({
 
 });
 
-const mapStateToProps = ({ opinion: opinionsById }, props) => ({
-  opinion: { ...props.opinion, votes: opinionsById[props.opinion.id].votes },
+const mapStateToProps = ({ opinion: { opinionsById } }, { opinion }) => ({
+  opinion: {
+    ...opinion,
+    ...opinionsById[opinion.id],
+  },
 });
 
 export default connect(mapStateToProps)(OpinionVotesBox);

@@ -19,14 +19,13 @@ const OpinionVotesBar = React.createClass({
 
   render() {
     const { opinion } = this.props;
-
     return (
       <div>
         {
           this.getOpinionType().votesThreshold &&
             <VotesBar
               max={this.getOpinionType().votesThreshold}
-              value={opinion.votes_ok}
+              value={opinion.votesCountOk}
               helpText={this.getOpinionType().votesThresholdHelpText}
             />
         }
@@ -46,8 +45,12 @@ const OpinionVotesBar = React.createClass({
   },
 });
 
-const mapStateToProps = ({ opinion: opinionsById }, props) => ({
-  opinion: { ...props.opinion, votes: opinionsById[props.opinion.id].votes },
+const mapStateToProps = ({ opinion: { opinionsById } }, { opinion }) => ({
+  opinion: {
+    ...opinion,
+    votes: opinionsById[opinion.id].votes,
+    votesCountOk: opinionsById[opinion.id].votesCountOk,
+  },
 });
 
 export default connect(mapStateToProps)(OpinionVotesBar);

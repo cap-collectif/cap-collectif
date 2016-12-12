@@ -21,11 +21,12 @@ type VoteValue = -1 | 0 | 1;
 type Action =
   { type: string, payload: Object }
 ;
+type ContributionMap = {[id: number]: Object};
 type State = {
   currentOpinionId: ?number,
   currentVersionId: ?number,
-  opinionsById: Object,
-  versionsById: Object
+  opinionsById: ContributionMap,
+  versionsById: ContributionMap
 };
 type Dispatch = (action: Action) => void;
 
@@ -177,6 +178,12 @@ const updateVersion = (state: State, version: Object): State => ({
   versionsById: { ...state.versionsById, [version.id]: version },
 });
 
+const getVoteStringByValue = (value: VoteValue): string => {
+  if (value === 1) return 'Ok';
+  if (value === -1) return 'Nok';
+  return 'Mitige';
+};
+
 export const reducer = (state: State = initialState, action: Action) => {
   const { type, payload } = action;
   switch (type) {
@@ -190,17 +197,27 @@ export const reducer = (state: State = initialState, action: Action) => {
     }
     case OPINION_VOTE_SUCCEEDED: {
       const opinion = state.opinionsById[payload.opinionId];
-      const indexOfCurrentUser = opinion.votes.indexOf(find(opinion.votes, (v) => {
-        return v.user && v.user.uniqueId === payload.vote.user.uniqueId;
-      }));
+      const indexOfCurrentUserVote = opinion.votes.indexOf(find(opinion.votes, v => v.user.uniqueId === payload.vote.user.uniqueId));
+      const voteCountIncreasing = `votesCount${getVoteStringByValue(payload.vote.value)}`;
+      if (indexOfCurrentUserVote === -1) { // first vote
+        return updateOpinion(state, {
+          ...opinion,
+          votes: [payload.vote, ...opinion.votes],
+          userHasVote: true,
+          [voteCountIncreasing]: opinion[voteCountIncreasing] + 1,
+          votesCount: opinion.votesCount + 1,
+          user_vote: payload.vote.value,
+        });
+      }
+      const previousVote = opinion.votes[indexOfCurrentUserVote];
+      const votes = opinion.votes.splice(indexOfCurrentUserVote, 1);
+      const voteCountDecreasing = `votesCount${getVoteStringByValue(previousVote.value)}`;
       return updateOpinion(state, {
         ...opinion,
-        ...{
-          votes: indexOfCurrentUser === -1 ? [payload.vote, ...opinion.votes] : opinion.votes,
-          userHasVote: true,
-          votesCount: indexOfCurrentUser === -1 ? opinion.votesCount + 1 : opinion.votesCount,
-          user_vote: payload.vote.value,
-        },
+        votes: [payload.vote, ...votes],
+        [voteCountDecreasing]: opinion[voteCountDecreasing] - 1,
+        [voteCountIncreasing]: opinion[voteCountIncreasing] + 1,
+        user_vote: payload.vote.value,
       });
     }
     case DELETE_OPINION_VOTE_SUCCEEDED: {
