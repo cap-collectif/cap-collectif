@@ -59,7 +59,7 @@ export const LoginOverlay = React.createClass({
 
     const popover = showRegistration || showLogin
       ? <span />
-      : <Popover ref={c => this.popover = c} id="login-popover" title={this.getIntlMessage('vote.popover.title')}>
+      : (<Popover ref={c => this.popover = c} id="login-popover" title={this.getIntlMessage('vote.popover.title')}>
         <p>{ this.getIntlMessage('vote.popover.body') }</p>
         {
           features.registration &&
@@ -81,7 +81,7 @@ export const LoginOverlay = React.createClass({
           { this.getIntlMessage('global.login') }
           </Button>
         </p>
-      </Popover>
+      </Popover>)
     ;
     return (
      <span>
