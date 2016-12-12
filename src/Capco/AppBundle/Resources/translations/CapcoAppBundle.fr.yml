@@ -32,7 +32,7 @@ error:
     title: "Erreur sur le serveur (%code%)"
   other:
     title: Erreur %code%
-  actions: Vous pouvez :
+  actions: "Vous pouvez :"
   to_previous_page: Retourner à la page précédente
   to_homepage: Aller à la page d'Accueil
   report: Reporter un problème
@@ -253,7 +253,7 @@ reply:
     subject: '%sitename% - Accusé de réception de votre participation'
     hello: Bonjour %username%,
     thx: Merci d'avoir participé au projet %projectname% sur %sitename%.
-    replies: Nous accusons réception de votre participation. Vos réponses étaient les suivantes :
+    replies: "Nous accusons réception de votre participation. Vos réponses étaient les suivantes :"
     done: Cordialement,
     footer1: Vous recevez ce courriel parce que vous êtes inscrit sur %sitename%.
     footer2: 'Ce message vous a été adressé automatiquement par %sitename% via <a href="http://www.cap-collectif.com">Cap Collectif</a>.'
@@ -314,12 +314,12 @@ project:
   download:
     button: Exporter
     modal:
-      body: Choisissez le format du fichier :
+      body: "Choisissez le format du fichier :"
       button: Format %format%
       cancel: Fermer
       title: Exporter l'étape de consultation "%title%"
     not_yet_generated: L'export est en cours de génération, veuillez réessayer dans une heure.
-    step: Étape %position% : "%title%"
+    step: 'Étape %position% : "%title%"'
   error:
     not_exportable: Impossible de télécharger cette étape de consultation.
     not_found: Étape de consultation introuvable.
@@ -336,7 +336,7 @@ project:
     all_themes: Tous les thèmes
     no_result:  Aucun projet ne correspond à ces critères de recherche.
     search: Rechercher
-    sort: Trier :
+    sort: "Trier :"
     term: Terme
     theme: Thème
   see_all: Voir tous les projets
@@ -350,7 +350,7 @@ project:
       anonymous: "]-Inf, 1] dont 1 anonyme | ]1,Inf[ dont %count% anonymes"
       title: Participants
     contributors_nb: "]-Inf, 1] participant | ]1,Inf[ participants"
-    end_at: Date de fin : %date%
+    end_at: "Date de fin : %date%"
     events:
       title: Évènements
     global:
@@ -521,7 +521,7 @@ argument:
       against: Contre
       simple: Avis
   trashed:
-    linked_proposition: Lié à la proposition :
+    linked_proposition: "Lié à la proposition :"
   sort:
     date: Les plus récents
     oldest: Les plus anciens
@@ -601,7 +601,7 @@ source:
     file: Fichier
   show:
     count: "]-Inf, 0] 0 source | {1} 1 source | ]1,Inf[ %count% sources"
-  linked_proposition: Liée à la proposition :
+  linked_proposition: "Liée à la proposition :"
   none: Il n'y a pas de sources.
   error:
     not_found: Source introuvable.
@@ -699,7 +699,7 @@ opinion:
 moderation:
   notification:
       subject: Votre contribution a fait l'objet d'une modération.
-      body: Bonjour,<br> nous avons le regret de vous informer que votre contribution "%title%" a été déplacée dans la corbeille pour le motif suivant :
+      body: 'Bonjour,<br> nous avons le regret de vous informer que votre contribution "%title%" a été déplacée dans la corbeille pour le motif suivant :'
       contribution: Voir votre contribution
 
 notification:
@@ -709,17 +709,17 @@ notification:
       <p>Ce message vous a été adressé automatiquement par <a href="https://cap-collectif.com/">Cap Collectif</a>.</p>
     proposal:
       create:
-          subject: %sitename% — Une proposition a été déposée sur %project%
+          subject: "%sitename% — Une proposition a été déposée sur %project%"
           body: |
             <p>Bonjour,</p>
             <p>L'utilisateur <a href="%userUrl%">%username%</a> vient de publier une proposition <a href="%proposalUrl%">%proposal%</a> sur le projet %project%.</p>
       update:
-          subject: %sitename% — Une proposition a été modifiée sur %project%
+          subject: "%sitename% — Une proposition a été modifiée sur %project%"
           body: |
             <p>Bonjour,</p>
             <p>L'utilisateur <a href="%userUrl%">%username%</a> vient de modifier la proposition <a href="%proposalUrl%">%proposal%</a> sur le projet %project%.</p>
       delete:
-          subject: %sitename% — Une proposition a été supprimée sur %project%
+          subject: "%sitename% — Une proposition a été supprimée sur %project%"
           body: |
             <p>Bonjour,</p>
             <p>L'utilisateur <a href="%userUrl%">%username%</a> vient de supprimer la proposition <a href="%proposalUrl%">%proposal%</a> sur le projet %project%.</p>
@@ -777,7 +777,7 @@ reporting:
     body: Bonjour,<br> un contenu vient d’être signalé par %username% comme abusif sur %sitename%.
     message_title: <strong>Motif de signalement</strong>
     type_title: <strong>Type</strong>
-    contribution: Voir la contribution signalée :
+    contribution: "Voir la contribution signalée :"
     contribution_in_bo: dans l'administration
     contribution_on_site: sur le site
     contribution_title: <strong>Contribution</strong>
@@ -815,7 +815,7 @@ user:
     sort:
       activity: Les plus actifs
       date: Les plus récents
-      label: Trier par :
+      label: "Trier par :"
     user_type:
       label: Type de profil
       all_types: Tous les inscrits
@@ -838,7 +838,7 @@ user:
     confirmation_message:
       hello: Bonjour %username%,
       thanks: Merci de votre inscription sur %sitename%.
-      please: Veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique :
+      please: "Veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique :"
       validate: <a href="%url%"><strong>Confirmer mon adresse électronique</strong></a>
       participate: A l'aide de votre compte, vous pourrez voter, contribuer et éditer votre profil.
       question: Si vous avez des questions concernant votre compte ou tout autre sujet, n'hésitez pas à nous contacter à cette adresse <a href="mailto:%email%">%email%</a>.
@@ -854,7 +854,7 @@ user:
       username: Nom ou pseudonyme *
     email: Adresse électronique *
     password: Mot de passe *
-    user_type: Vous êtes :
+    user_type: "Vous êtes :"
     zipcode: Code postal
     terms:
       label: "J'ai lu et j'accepte %cgu%."
@@ -1025,7 +1025,7 @@ event_registration:
 
 # comments
 comment:
-  linked_object: Lié à l'objet :
+  linked_object: "Lié à l'objet :"
   trashed:
     label: Dans la corbeille
   read_more: Lire plus
@@ -1099,6 +1099,9 @@ project_download:
   label:
     anonymous: Anonyme
     answer: Réponse officielle
+    argument_vote_type: Type de vote
+    argument_section_type: Type de section
+    argument_source_type: Type de source
     arguments_nok: Arguments contre
     arguments_ok: Arguments pour
     author: Auteur
@@ -1115,7 +1118,7 @@ project_download:
     link: Lien
     nbVotes: Nombre de votes
     phone: Numéro de téléphone
-    related_object: Lié à :
+    related_object: "Lié à :"
     score: Score
     sources: Sources
     status: Statut
@@ -1156,7 +1159,7 @@ project_download:
     link:
       media: Fichier
     no: Non
-    non_applicable: n/a
+    non_applicable: ''
     related:
       argument: Argument "%id%"
       opinion: Proposition "%id%"
@@ -1229,8 +1232,8 @@ search:
       theme: Thème
       time_period: Période
       sort: Trier par
-      start_date: Du :
-      end_date: Au :
+      start_date: "Du :"
+      end_date: "Au :"
     types:
       all: Tous
       arguments: Arguments
@@ -1280,12 +1283,12 @@ questionnaire:
 
 email:
   expire_user:
-      subject_no_contrib: %sitename% — Votre compte a expiré
-      subject_with_contrib: %sitename% — Votre compte a expiré et vos contenus ont été dépubliés
+      subject_no_contrib: "%sitename% — Votre compte a expiré"
+      subject_with_contrib: "%sitename% — Votre compte a expiré et vos contenus ont été dépubliés"
       hello: Bonjour %username%,
       info_no_contrib: Nous sommes au regret de vous annoncer que votre compte a expiré, car celui-ci n'a pas été vérifié dans un délai de 72 heures.
       info_with_contrib: Nous sommes au regret de vous annoncer que votre compte a expiré et que vos contenus ont été dépubliés, car votre compte n'a pas été vérifié dans un délai de 72 heures.
-      reactivate: Si vous souhaitez tout de même participer, veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique et réactiver votre compte :
+      reactivate: "Si vous souhaitez tout de même participer, veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique et réactiver votre compte :"
       confirm: <a href="%url%"><strong>Confirmer mon adresse électronique et réactiver mon compte</strong></a>
       after_no_contrib: Après avoir réactivé votre compte, vous pourrez de nouveau vous connecter, voter et contribuer.
       after_with_contrib: Après avoir réactivé votre compte, vous pourrez de nouveau vous connecter, voter et contribuer. Les contenus dépubliés seront également restaurés.
@@ -1293,10 +1296,10 @@ email:
       done: Bien cordialement,
       footer: Ce message vous a été adressé automatiquement par %sitename% via <a href="http://www.cap-collectif.com">Cap Collectif</a>.
   alert_expire_user:
-      subject: %sitename% — Rappel : Vous n'avez pas encore confirmé votre adresse email
+      subject: "%sitename% — Rappel : Vous n'avez pas encore confirmé votre adresse email"
       hello: Bonjour %username%,
       info: Merci pour votre inscription sur %sitename%.
-      click: Veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique :
+      click: "Veuillez cliquer sur le lien ci-dessous pour confirmer votre adresse électronique :"
       confirm: <a href="%url%"><strong>Confirmer mon adresse électronique</strong></a>
       question: Si vous avez des questions concernant votre compte ou tout autre sujet, n'hésitez pas à nous contacter à cette adresse %email%.
       done: Bien cordialement,

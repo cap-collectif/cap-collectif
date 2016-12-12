@@ -33,14 +33,14 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
             if ($response->getQuestion() === $question) {
                 $value = null;
                 if ($response instanceof MediaResponse) {
-                  $value = $response->getMedias();
+                    $value = $response->getMedias();
                   // hot fix
                   return true;
                 } else {
-                  $value = $response->getValue();
+                    $value = $response->getValue();
                 }
                 if ($value instanceof Collection && $value->count() > 0) {
-                  return true;
+                    return true;
                 }
                 if (is_array($value) && count($value)) {
                     return true;

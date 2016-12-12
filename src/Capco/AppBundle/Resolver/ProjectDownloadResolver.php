@@ -2,16 +2,11 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Helper\EnvHelper;
 use Doctrine\ORM\EntityManager;
@@ -31,10 +26,12 @@ class ProjectDownloadResolver
         'updated',
         'title',
         'content_type',
-        'category',
         'related_object',
         'content',
         'link',
+        'argument_vote_type',
+        'argument_section_type',
+        'argument_source_type',
         'score',
         'total_votes',
         'votes_ok',
@@ -114,7 +111,7 @@ class ProjectDownloadResolver
 
     public function getContent(AbstractStep $step): \PHPExcel_Writer_IWriter
     {
-        if (null == $step) {
+        if (!$step) {
             throw new NotFoundHttpException('Step not found');
         }
 
@@ -122,7 +119,7 @@ class ProjectDownloadResolver
             $this->headers = $this->consultationHeaders;
             $data = $this->getConsultationStepData($step);
         } elseif ($step instanceof CollectStep) {
-            if (!in_array('servicePilote', $this->collectHeaders)
+            if (!in_array('servicePilote', $this->collectHeaders, true)
                 && (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
                     || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod')
             ) {
@@ -145,14 +142,12 @@ class ProjectDownloadResolver
             $this->headers = $this->getQuestionnaireStepHeaders($step);
             $data = $this->getQuestionnaireStepData($step);
         } else {
-            throw new \Exception('Step must be of type collect, questionnaire or consultation');
+            throw new \InvalidArgumentException('Step must be of type collect, questionnaire or consultation');
         }
         $title = $step->getProject() ? $step->getProject()->getTitle().'_' : '';
         $title .= $step->getTitle();
 
-        $writer = $this->getWriterFromData($data, $this->headers, $title);
-
-        return $writer;
+        return $this->getWriterFromData($data, $this->headers, $title);
     }
 
     /*
@@ -182,10 +177,12 @@ class ProjectDownloadResolver
         foreach ($opinions as &$opinion) {
             $opinion['Step'] = $consultationStep;
         }
+        unset($opinion);
 
         foreach ($versions as &$version) {
             $version['Step'] = $consultationStep;
         }
+        unset($version);
 
         // Create items from data
         $this->getOpinionsData($opinions);
@@ -210,6 +207,7 @@ class ProjectDownloadResolver
             $proposal['Step'] = $collectStep;
             $proposal['entity_type'] = 'proposal';
         }
+        unset($proposal);
 
         $this->getProposalsData($proposals);
 
@@ -481,7 +479,10 @@ class ProjectDownloadResolver
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorMail = $author['email'] ?? $na;
 
-        return $item = [
+        return [
+            'argument_vote_type' => '',
+            'argument_section_type' => $this->getOpinionParents($opinion),
+            'argument_source_type' => '',
             'id' => $opinion['id'],
             'title' => $opinion['title'],
             'content_type' => $this->translator->trans(
@@ -490,7 +491,6 @@ class ProjectDownloadResolver
                 'CapcoAppBundle'
             ),
             'related_object' => $na,
-            'category' => $this->getOpinionParents($opinion),
             'content' => $this->getOpinionContent($opinion),
             'link' => $this->urlArrayResolver->getRoute($opinion),
             'created' => $this->dateToString($opinion['createdAt']),
@@ -534,7 +534,10 @@ class ProjectDownloadResolver
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorMail = $author['email'] ?? $na;
 
-        return $item = [
+        return [
+            'argument_vote_type' => '',
+            'argument_section_type' => $this->getOpinionParents($opinion),
+            'argument_source_type' => '',
             'id' => $version['id'],
             'title' => $version['title'],
             'content_type' => $this->translator->trans(
@@ -612,7 +615,9 @@ class ProjectDownloadResolver
             'id' => $argument['id'],
             'title' => $na,
             'content_type' => $contentType,
-            'category' => $category,
+            'argument_vote_type' => $category,
+            'argument_section_type' => '',
+            'argument_source_type' => '',
             'related_object' => $relatedObject,
             'content' => $this->formatText($argument['body']),
             'link' => $na,
@@ -665,7 +670,10 @@ class ProjectDownloadResolver
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorMail = $author['email'] ?? $na;
 
-        return $item = [
+        return [
+            'argument_vote_type' => '',
+            'argument_section_type' => '',
+            'argument_source_type' => $source['Category']['title'],
             'id' => $source['id'],
             'title' => $source['title'],
             'content_type' => $this->translator->trans(
@@ -673,7 +681,6 @@ class ProjectDownloadResolver
                 [],
                 'CapcoAppBundle'
             ),
-            'category' => $source['Category']['title'],
             'related_object' => $relatedObject,
             'content' => $this->formatText($source['body']),
             'link' => $this->getSourceLink($source),
@@ -713,7 +720,10 @@ class ProjectDownloadResolver
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorMail = $author['email'] ?? $na;
 
-        return $item = [
+        return [
+            'argument_vote_type' => $this->getVoteValue($vote),
+            'argument_section_type' => '',
+            'argument_source_type' => '',
             'id' => '',
             'title' => $na,
             'content_type' => $this->translator->trans(
@@ -722,7 +732,6 @@ class ProjectDownloadResolver
                 'CapcoAppBundle'
             ),
             'related_object' => $this->getVoteObject($entity),
-            'category' => $this->getVoteValue($vote),
             'content' => $na,
             'link' => $na,
             'created' => $this->dateToString($vote['updatedAt']),
@@ -785,10 +794,10 @@ class ProjectDownloadResolver
     private function getVoteValue(array $vote)
     {
         if (array_key_exists('value', $vote)) {
-            if ($vote['value'] == -1) {
+            if ($vote['value'] === -1) {
                 return $this->translator->trans('project_download.values.votes.nok', [], 'CapcoAppBundle');
             }
-            if ($vote['value'] == 0) {
+            if ($vote['value'] === 0) {
                 return $this->translator->trans('project_download.values.votes.mitige', [], 'CapcoAppBundle');
             }
         }
@@ -898,10 +907,10 @@ class ProjectDownloadResolver
 
     private function getSourceLink($source)
     {
-        if (null != $source['link']) {
+        if ($source['link']) {
             return $source['link'];
         }
-        if (null != $source['media']) {
+        if ($source['media']) {
             return $this->translator->trans('project_download.values.link.media', [], 'CapcoAppBundle');
         }
 
@@ -919,7 +928,7 @@ class ProjectDownloadResolver
 
     private function dateToString(\DateTime $date = null)
     {
-        if ($date != null) {
+        if ($date) {
             return $date->format('Y-m-d H:i:s');
         }
 
@@ -947,7 +956,7 @@ class ProjectDownloadResolver
         $sheet = $phpExcelObject->getActiveSheet();
         $sheet->setTitle($this->translator->trans('project_download.sheet.title', [], 'CapcoAppBundle'));
         \PHPExcel_Settings::setCacheStorageMethod(
-            \PHPExcel_CachedObjectStorageFactory::cache_to_phpTemp,
+            \PHPExcel_CachedObjectStorageFactory::cache_in_memory,
             ['memoryCacheSize' => '512M']
         );
         $nbCols = count($headers);
@@ -975,9 +984,8 @@ class ProjectDownloadResolver
             }
             ++$currentRow;
         }
-        // create the writer
-        $writer = $this->phpexcel->createWriter($phpExcelObject, 'Excel2007');
 
-        return $writer;
+        // create the writer
+        return $this->phpexcel->createWriter($phpExcelObject, 'Excel2007');
     }
 }
