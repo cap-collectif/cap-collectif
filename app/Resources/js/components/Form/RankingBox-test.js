@@ -36,9 +36,9 @@ describe('<RankingBox />', () => {
     expect(items.first().prop('id')).toEqual('reply-42_choice-1');
     expect(items.first().prop('disabled')).toEqual(false);
     expect(items.first().prop('arrowFunctions').right).toBeDefined();
-    expect(items.first().prop('arrowFunctions')).not.toContain('left');
-    expect(items.first().prop('arrowFunctions')).not.toContain('up');
-    expect(items.first().prop('arrowFunctions')).not.toContain('down');
+    expect(items.first().prop('arrowFunctions').left).not.toBeDefined();
+    expect(items.first().prop('arrowFunctions').up).not.toBeDefined();
+    expect(items.first().prop('arrowFunctions').down).not.toBeDefined();
     expect(items.last().prop('item')).toEqual(item2);
     expect(items.last().prop('id')).toEqual('reply-42_choice-2');
     expect(items.last().prop('disabled')).toEqual(false);
@@ -55,10 +55,10 @@ describe('<RankingBox />', () => {
     expect(items.first().prop('item')).toEqual(item1);
     expect(items.first().prop('id')).toEqual('reply-42_choice-1');
     expect(items.first().prop('disabled')).toEqual(false);
-    expect(items.first().prop('arrowFunctions')).not.toContain('right');
-    expect(items.first().prop('arrowFunctions')).toContain('left');
-    expect(items.first().prop('arrowFunctions')).toContain('up');
-    expect(items.first().prop('arrowFunctions')).toContain('down');
+    expect(items.first().prop('arrowFunctions').right).not.toBeDefined();
+    expect(items.first().prop('arrowFunctions').left).toBeDefined();
+    expect(items.first().prop('arrowFunctions').up).toBeDefined();
+    expect(items.first().prop('arrowFunctions').down).toBeDefined();
     expect(items.last().prop('item')).toEqual(item2);
     expect(items.last().prop('id')).toEqual('reply-42_choice-2');
     expect(items.last().prop('disabled')).toEqual(false);
