@@ -148,6 +148,7 @@ class StepAdmin extends Admin
                     'required' => true,
                     'btn_add' => false,
                 ])
+                ->add('opinionCountShownBySection', null, ['required' => true])
             ;
         } elseif ($subject instanceof SynthesisStep) {
             $formMapper

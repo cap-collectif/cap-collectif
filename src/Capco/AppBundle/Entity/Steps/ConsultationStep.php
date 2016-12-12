@@ -30,6 +30,11 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
     private $opinionCount = 0;
 
     /**
+     * @ORM\Column(name="opinion_count_shown_by_section", type="integer")
+     */
+    private $opinionCountShownBySection = 5;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="trashed_opinion_count", type="integer")
@@ -127,6 +132,18 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
     public function setOpinionCount($opinionCount)
     {
         $this->opinionCount = $opinionCount;
+
+        return $this;
+    }
+
+    public function getOpinionCountShownBySection(): int
+    {
+        return $this->opinionCountShownBySection;
+    }
+
+    public function setOpinionCountShownBySection(int $opinionCountShownBySection): self
+    {
+        $this->opinionCountShownBySection = $opinionCountShownBySection;
 
         return $this;
     }
