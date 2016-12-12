@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import { IntlMixin } from 'react-intl';
@@ -131,14 +132,17 @@ export const OpinionVotesButton = React.createClass({
 
 });
 
-const mapStateToProps = (state, props) => {
-  const vote = props.opinion.parent
-    ? state.opinion.versions[props.opinion.id].user_vote
-    : state.opinion.opinions[props.opinion.id].user_vote;
+const mapStateToProps = ({
+  default: { user, features },
+  opinion: { versionsById, opinionsById },
+}, { opinion, value }) => {
+  const vote = opinion.parent
+    ? versionsById[opinion.id].user_vote
+    : opinionsById[opinion.id].user_vote;
   return {
-    features: state.default.features,
-    user: state.default.user,
-    active: vote !== null && vote === props.value,
+    features,
+    user,
+    active: vote !== null && vote === value,
   };
 };
 

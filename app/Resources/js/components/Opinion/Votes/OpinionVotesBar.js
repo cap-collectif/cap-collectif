@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IntlMixin, FormattedMessage } from 'react-intl';
@@ -8,7 +9,6 @@ import OpinionVotesModal from './OpinionVotesModal';
 const OpinionVotesBar = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
-    votes: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -18,7 +18,7 @@ const OpinionVotesBar = React.createClass({
   },
 
   render() {
-    const { opinion, votes } = this.props;
+    const { opinion } = this.props;
 
     return (
       <div>
@@ -32,24 +32,22 @@ const OpinionVotesBar = React.createClass({
         }
         <div style={{ paddingTop: '20px' }}>
           {
-            votes.map((vote, index) => {
+            opinion.votes.map((vote, index) => {
               return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
             })
           }
           <OpinionVotesModal opinion={opinion} />
         </div>
         <div>
-          <FormattedMessage message={this.getIntlMessage('global.votes')} num={votes.length} />
+          <FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes.length} />
         </div>
       </div>
     );
   },
 });
 
-const mapStateToProps = (state, props) => {
-  return {
-    votes: state.opinion.opinions[props.opinion.id].votes,
-  };
-};
+const mapStateToProps = ({ opinion: opinionsById }, props) => ({
+  opinion: { ...props.opinion, votes: opinionsById[props.opinion.id].votes },
+});
 
 export default connect(mapStateToProps)(OpinionVotesBar);

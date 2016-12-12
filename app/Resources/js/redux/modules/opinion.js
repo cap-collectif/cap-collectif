@@ -1,3 +1,4 @@
+// @flow
 import Fetcher, { json } from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { takeEvery } from 'redux-saga';
@@ -16,85 +17,98 @@ const OPINION_VOTES_FETCH_REQUESTED = 'opinion/OPINION_VOTES_FETCH_REQUESTED';
 const OPINION_VOTES_FETCH_SUCCEEDED = 'opinion/OPINION_VOTES_FETCH_SUCCEEDED';
 const OPINION_VOTES_FETCH_FAILED = 'opinion/OPINION_VOTES_FETCH_FAILED';
 
+type VoteValue = -1 | 0 | 1;
+type Action =
+  { type: string, payload: Object }
+;
+type State = {
+  currentOpinionId: ?number,
+  currentVersionId: ?number,
+  opinionsById: Object,
+  versionsById: Object
+};
+type Dispatch = (action: Action) => void;
+
 const initialState = {
-  currentOpinionById: null,
-  opinions: [],
-  currentVersionById: null,
-  versions: [],
+  currentOpinionId: null,
+  opinionsById: {},
+  currentVersionId: null,
+  versionsById: {},
 };
 
-export function* fetchAllOpinionVotes(action) {
+export function* fetchAllOpinionVotes(action: Action): Generator<*, *, *> {
   try {
     let hasMore = true;
     let iterationCount = 0;
     const votesPerIteration = 30;
+    const { opinionId, versionId } = action.payload;
     while (hasMore) {
-      const votesUrl = action.versionId
-        ? `/opinions/${action.opinionId}/versions/${action.versionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
-        : `/opinions/${action.opinionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`;
-      const result = yield call(
+      const votesUrl = versionId
+        ? `/opinions/${opinionId}/versions/${versionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
+        : `/opinions/${opinionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`;
+      const result: Object = yield call(
         Fetcher.get,
         votesUrl
       );
       hasMore = result.hasMore;
       iterationCount++;
-      yield put({ type: OPINION_VOTES_FETCH_SUCCEEDED, votes: result.votes, opinionId: action.opinionId });
+      yield put({ type: OPINION_VOTES_FETCH_SUCCEEDED, payload: { votes: result.votes, opinionId } });
     }
   } catch (e) {
-    yield put({ type: OPINION_VOTES_FETCH_FAILED, error: e });
+    yield put({ type: OPINION_VOTES_FETCH_FAILED, payload: { error: e } });
   }
 }
 
-export function* saga() {
+export function* saga(): Generator<*, *, *> {
   yield* takeEvery(OPINION_VOTES_FETCH_REQUESTED, fetchAllOpinionVotes);
 }
 
-export const fetchOpinionVotes = (opinionId, versionId) => {
-  return {
-    type: OPINION_VOTES_FETCH_REQUESTED,
+export const fetchOpinionVotes = (opinionId: number, versionId: number): Action => ({
+  type: OPINION_VOTES_FETCH_REQUESTED,
+  payload: {
     opinionId,
     versionId,
-  };
-};
+  },
+});
 
-const versionVoteSuccess = (versionId, vote) => {
-  return {
-    type: VERSION_VOTE_SUCCEEDED,
+const versionVoteSuccess = (versionId: number, vote): Action => ({
+  type: VERSION_VOTE_SUCCEEDED,
+  payload: {
     versionId,
     vote,
-  };
-};
+  },
+});
 
-const opinionVoteSuccess = (opinionId, vote) => {
-  return {
-    type: OPINION_VOTE_SUCCEEDED,
+const opinionVoteSuccess = (opinionId: number, vote): Action => ({
+  type: OPINION_VOTE_SUCCEEDED,
+  payload: {
     opinionId,
     vote,
-  };
-};
+  },
+});
 
-const deleteOpinionVoteSuccess = (opinionId, vote) => {
-  return {
-    type: DELETE_OPINION_VOTE_SUCCEEDED,
+const deleteOpinionVoteSuccess = (opinionId: number, vote): Action => ({
+  type: DELETE_OPINION_VOTE_SUCCEEDED,
+  payload: {
     opinionId,
     vote,
-  };
-};
+  },
+});
 
-const deleteVersionVoteSuccess = (versionId, vote) => {
-  return {
-    type: DELETE_VERSION_VOTE_SUCCEEDED,
+const deleteVersionVoteSuccess = (versionId: number, vote): Action => ({
+  type: DELETE_VERSION_VOTE_SUCCEEDED,
+  payload: {
     versionId,
     vote,
-  };
-};
+  },
+});
 
-const deleteVote = (opinion, parent, dispatch) => {
+const deleteVote = (opinion: number, parent: ?number, dispatch: Dispatch) => {
   const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
   return Fetcher
     .delete(url)
     .then(json)
-    .then((data) => {
+    .then(data => {
       if (parent) {
         dispatch(deleteVersionVoteSuccess(opinion, data));
       } else {
@@ -113,7 +127,7 @@ const deleteVote = (opinion, parent, dispatch) => {
     });
 };
 
-const vote = (value, opinion, parent, dispatch) => {
+const vote = (value: VoteValue, opinion: number, parent: ?number, dispatch: Dispatch) => {
   const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
   return Fetcher
     .put(url, value)
@@ -137,93 +151,87 @@ const vote = (value, opinion, parent, dispatch) => {
     });
 };
 
-export const deleteVoteOpinion = (opinion, dispatch) => {
-  return deleteVote(opinion, null, dispatch);
-};
+export const deleteVoteOpinion = (opinion: number, dispatch: Dispatch) => (
+  deleteVote(opinion, null, dispatch))
+;
 
-export const deleteVoteVersion = (version, opinion, dispatch) => {
-  return deleteVote(version, opinion, dispatch);
-};
+export const deleteVoteVersion = (version: number, opinion: number, dispatch: Dispatch) => (
+  deleteVote(version, opinion, dispatch)
+);
 
-export const voteOpinion = (value, opinion, dispatch) => {
-  return vote(value, opinion, null, dispatch);
-};
+export const voteOpinion = (value: VoteValue, opinion: number, dispatch: Dispatch) => (
+  vote(value, opinion, null, dispatch)
+);
 
-export const voteVersion = (value, version, opinion, dispatch) => {
-  return vote(value, version, opinion, dispatch);
-};
+export const voteVersion = (value: VoteValue, version: number, opinion: number, dispatch: Dispatch) => (
+  vote(value, version, opinion, dispatch)
+);
 
-export const reducer = (state = initialState, action) => {
-  switch (action.type) {
+const updateOpinion = (state: State, opinion: Object): State => ({
+  ...state,
+  opinionsById: { ...state.opinionsById, [opinion.id]: opinion },
+});
+
+const updateVersion = (state: State, version: Object): State => ({
+  ...state,
+  versionsById: { ...state.versionsById, [version.id]: version },
+});
+
+export const reducer = (state: State = initialState, action: Action) => {
+  const { type, payload } = action;
+  switch (type) {
     case OPINION_VOTES_FETCH_SUCCEEDED: {
-      let votes = state.opinions[action.opinionId].votes || [];
+      let votes = state.opinionsById[payload.opinionId].votes;
       if (votes.length <= VOTES_PREVIEW_COUNT) {
         votes = []; // we remove preview votes
       }
-      votes.push(...action.votes);
-      const opinions = {
-        [action.opinionId]: { ...state.opinions[action.opinionId], votes },
-      };
-      return { ...state, opinions };
+      votes.push(...payload.votes);
+      return updateOpinion(state, { ...state.opinionsById[payload.opinionId], votes });
     }
     case OPINION_VOTE_SUCCEEDED: {
-      const opinion = state.opinions[action.opinionId];
+      const opinion = state.opinionsById[payload.opinionId];
       const indexOfCurrentUser = opinion.votes.indexOf(find(opinion.votes, (v) => {
-        return v.user && v.user.uniqueId === action.vote.user.uniqueId;
+        return v.user && v.user.uniqueId === payload.vote.user.uniqueId;
       }));
-      const opinions = {
-        [action.opinionId]: {
-          ...opinion,
-          ...{
-            ...state.opinions[action.opinionId],
-            votes: indexOfCurrentUser === -1 ? [action.vote, ...opinion.votes] : opinion.votes,
-            userHasVote: true,
-            votesCount: indexOfCurrentUser === -1 ? opinion.votesCount + 1 : opinion.votesCount,
-            user_vote: action.vote.value,
-          },
+      return updateOpinion(state, {
+        ...opinion,
+        ...{
+          votes: indexOfCurrentUser === -1 ? [payload.vote, ...opinion.votes] : opinion.votes,
+          userHasVote: true,
+          votesCount: indexOfCurrentUser === -1 ? opinion.votesCount + 1 : opinion.votesCount,
+          user_vote: payload.vote.value,
         },
-      };
-
-      return { ...state, opinions };
+      });
     }
     case DELETE_OPINION_VOTE_SUCCEEDED: {
-      const opinion = state.opinions[action.opinionId];
+      const opinion = state.opinionsById[payload.opinionId];
       const indexToRemove = opinion.votes.indexOf(find(opinion.votes, (v) => {
-        return v.user && v.user.uniqueId === action.vote.user.uniqueId;
+        return v.user && v.user.uniqueId === payload.vote.user.uniqueId;
       }));
-      const opinions = {
-        [action.opinionId]: {
-          ...opinion,
-          votes: [...opinion.votes.slice(0, indexToRemove), ...opinion.votes.slice(indexToRemove + 1)],
-          user_vote: null,
-          userHasVote: false,
-          votesCount: opinion.votesCount - 1,
-        },
-      };
-      return { ...state, opinions };
+      return updateOpinion(state, {
+        ...opinion,
+        votes: [...opinion.votes.slice(0, indexToRemove), ...opinion.votes.slice(indexToRemove + 1)],
+        user_vote: null,
+        userHasVote: false,
+        votesCount: opinion.votesCount - 1,
+      });
     }
     case VERSION_VOTE_SUCCEEDED: {
-      const versions = {
-        [action.versionId]: {
-          ...state.versions[action.versionId],
-          user_vote: action.vote.value,
-          userHasVote: true,
-        },
-      };
-      return { ...state, versions };
+      return updateVersion(state, {
+        ...state.versionsById[payload.versionId],
+        user_vote: payload.vote.value,
+        userHasVote: true,
+      });
     }
     case DELETE_VERSION_VOTE_SUCCEEDED: {
-      const versions = {
-        [action.versionId]: {
-          ...state.versions[action.versionId],
-          user_vote: null,
-          userHasVote: false,
-        },
-      };
-      return { ...state, versions };
+      return updateVersion(state, {
+        ...state.versionsById[payload.versionId],
+        user_vote: null,
+        userHasVote: false,
+      });
     }
     case OPINION_VOTES_FETCH_FAILED: {
-      console.log(OPINION_VOTES_FETCH_FAILED, action.error); // eslint-disable-line no-console
+      console.log(OPINION_VOTES_FETCH_FAILED, payload.error); // eslint-disable-line no-console
       return state;
     }
     default:

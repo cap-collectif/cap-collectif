@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -10,7 +11,6 @@ import { connect } from 'react-redux';
 const OpinionVotesBox = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
-    votes: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -35,19 +35,16 @@ const OpinionVotesBox = React.createClass({
   },
 
   showPiechart() {
-    const { votes } = this.props;
     const widgetType = this.getOpinionType().voteWidgetType;
-    return votes.length > 0 && widgetType === VOTE_WIDGET_BOTH;
+    return this.props.opinion.votes.length > 0 && widgetType === VOTE_WIDGET_BOTH;
   },
 
   render() {
     if (this.getOpinionType().voteWidgetType === VOTE_WIDGET_DISABLED) {
       return null;
     }
-    const { opinion, votes } = this.props;
+    const { opinion } = this.props;
     const helpText = this.getOpinionType().votesHelpText;
-
-    opinion.votes = votes;
 
     return (
       <div className="opinion__votes__box">
@@ -79,10 +76,8 @@ const OpinionVotesBox = React.createClass({
 
 });
 
-const mapStateToProps = (state, props) => {
-  return {
-    votes: state.opinion.opinions[props.opinion.id].votes,
-  };
-};
+const mapStateToProps = ({ opinion: opinionsById }, props) => ({
+  opinion: { ...props.opinion, votes: opinionsById[props.opinion.id].votes },
+});
 
 export default connect(mapStateToProps)(OpinionVotesBox);

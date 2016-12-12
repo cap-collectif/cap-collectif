@@ -21,9 +21,10 @@
 {% block reduxStore %}
   {% set initialState = {
     'opinion': {
-      'currentOpinionById': opinion.id,
-      'opinions': {
+      'currentOpinionId': opinion.id,
+      'opinionsById': {
         (opinion.id) : {
+          'votes': [],
           'user_vote': opinion.getVoteValueByUser(app.user)
         }
       }

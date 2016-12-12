@@ -23,9 +23,10 @@
 {% block reduxStore %}
   {% set initialState = {
     'opinion': {
-      'currentVersionById': version.id,
-      'versions': {
+      'currentVersionId': version.id,
+      'versionsById': {
         (version.id) : {
+          'votes': [],
           'user_vote': version.getVoteValueByUser(app.user)
         }
       }
