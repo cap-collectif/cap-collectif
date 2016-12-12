@@ -5034,16 +5034,16 @@
         },
         {
             "name": "simplesamlphp/simplesamlphp",
-            "version": "v1.14.8",
+            "version": "v1.14.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/simplesamlphp.git",
-                "reference": "44f617fb581b8f7ceea7b535d521698db69bba42"
+                "reference": "da637c53962c13905eaae5ec9f33e658a237c284"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/simplesamlphp/zipball/44f617fb581b8f7ceea7b535d521698db69bba42",
-                "reference": "44f617fb581b8f7ceea7b535d521698db69bba42",
+                "url": "https://api.github.com/repos/simplesamlphp/simplesamlphp/zipball/da637c53962c13905eaae5ec9f33e658a237c284",
+                "reference": "da637c53962c13905eaae5ec9f33e658a237c284",
                 "shasum": ""
             },
             "require": {
