@@ -10,6 +10,10 @@ import {
 // import Fetcher from '../../services/Fetcher';
 
 describe('Opinion Reducers', () => {
+  const vote = {
+    value: 1,
+    user: { uniqueId: 'admin' },
+  };
   it('Should handle opinionVoteSuccess and deleteOpinionVoteSuccess', () => {
     const initialState = {
       opinionsById: {
@@ -24,10 +28,6 @@ describe('Opinion Reducers', () => {
           userHasVote: false,
         },
       },
-    };
-    const vote = {
-      value: 1,
-      user: { uniqueId: 'admin' },
     };
     const newState = reducer(initialState, opinionVoteSuccess(1, vote));
     expect(newState).toMatchSnapshot();
@@ -48,10 +48,6 @@ describe('Opinion Reducers', () => {
           userHasVote: false,
         },
       },
-    };
-    const vote = {
-      value: 1,
-      user: { uniqueId: 'admin' },
     };
     const newState = reducer(initialState, versionVoteSuccess(1, vote));
     expect(newState).toMatchSnapshot();

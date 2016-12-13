@@ -129,7 +129,6 @@ const vote = (value: VoteValue, opinion: number, parent: ?number, dispatch: Disp
     .put(url, { value })
     .then(json)
     .then((newVote: OpinionVote) => {
-      console.log(newVote);
       if (parent) {
         dispatch(versionVoteSuccess(opinion, newVote));
       } else {
@@ -245,7 +244,7 @@ export const reducer = (state: State = initialState, action: Action): State => {
       return removeVote(state, action.vote, state.versionsById[action.versionId], 'version');
     }
     case OPINION_VOTES_FETCH_FAILED: {
-      console.log(OPINION_VOTES_FETCH_FAILED, action.error); // eslint-disable-line no-console
+      console.log(OPINION_VOTES_FETCH_FAILED, action.error);
       return state;
     }
     default:
