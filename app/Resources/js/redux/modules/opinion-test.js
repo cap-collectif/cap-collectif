@@ -5,15 +5,20 @@ import {
   deleteOpinionVoteSuccess,
   versionVoteSuccess,
   deleteVersionVoteSuccess,
+  fetchAllOpinionVotes,
+  fetchOpinionVotes,
+  OPINION_VOTES_FETCH_FAILED,
+  OPINION_VOTES_FETCH_SUCCEEDED,
 } from './opinion';
-// import { call, put } from 'redux-saga/effects';
-// import Fetcher from '../../services/Fetcher';
+import { call, put } from 'redux-saga/effects';
+import Fetcher from '../../services/Fetcher';
+
+const vote = {
+  value: 1,
+  user: { uniqueId: 'admin' },
+};
 
 describe('Opinion Reducers', () => {
-  const vote = {
-    value: 1,
-    user: { uniqueId: 'admin' },
-  };
   it('Should handle opinionVoteSuccess and deleteOpinionVoteSuccess', () => {
     const initialState = {
       opinionsById: {
@@ -56,21 +61,16 @@ describe('Opinion Reducers', () => {
   });
 });
 
-// describe('Opinion Sagas', () => {
-  // it('Should fetchPosts', () => {
-  //   const generator = fetchPosts({
-  //     proposalId: 1,
-  //   });
-  //   const posts = [];
-  //   expect(generator.next().value).to.eql(call(Fetcher.get, '/proposals/1/posts'));
-  //   expect(generator.next({ posts }).value).to.eql(
-  //     put({
-  //       type: POSTS_FETCH_SUCCEEDED,
-  //       proposalId: 1,
-  //       posts,
-  //     })
-  //   );
-  //
-  //   expect(generator.throw({}).value).to.eql(put({ type: POSTS_FETCH_FAILED, error: {} }));
-  // });
-// });
+describe('Opinion Sagas', () => {
+  it('Should fetchPosts', () => {
+    const votes = [vote];
+    const generator = fetchAllOpinionVotes(fetchOpinionVotes(1));
+    expect(generator.next().value).toEqual(call(Fetcher.get, '/opinions/1/votes?offset=0&limit=30'));
+    expect(generator.next({ votes, hasMore: false }).value)
+    .toEqual(
+      put({ type: OPINION_VOTES_FETCH_SUCCEEDED, votes, opinionId: 1 })
+    );
+    const error = {};
+    expect(generator.throw(error).value).toEqual(put({ type: OPINION_VOTES_FETCH_FAILED, error }));
+  });
+});
