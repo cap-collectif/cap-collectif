@@ -45,11 +45,10 @@ const OpinionVotesBar = React.createClass({
   },
 });
 
-const mapStateToProps = ({ opinion: { opinionsById } }, { opinion }) => ({
+const mapStateToProps = ({ opinion: { opinionsById, versionsById } }, { opinion }) => ({
   opinion: {
     ...opinion,
-    votes: opinionsById[opinion.id].votes,
-    votesCountOk: opinionsById[opinion.id].votesCountOk,
+    ...(Object.keys(opinionsById).length ? opinionsById[opinion.id] : versionsById[opinion.id]),
   },
 });
 

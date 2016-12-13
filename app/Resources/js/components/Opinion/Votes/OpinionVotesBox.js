@@ -77,10 +77,10 @@ const OpinionVotesBox = React.createClass({
 
 });
 
-const mapStateToProps = ({ opinion: { opinionsById } }, { opinion }) => ({
+const mapStateToProps = ({ opinion: { opinionsById, versionsById } }, { opinion }) => ({
   opinion: {
     ...opinion,
-    ...opinionsById[opinion.id],
+    ...(Object.keys(opinionsById).length ? opinionsById[opinion.id] : versionsById[opinion.id]),
   },
 });
 

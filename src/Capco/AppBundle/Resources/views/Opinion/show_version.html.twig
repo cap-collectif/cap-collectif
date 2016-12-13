@@ -24,10 +24,15 @@
   {% set initialState = {
     'opinion': {
       'currentVersionId': version.id,
+      'opinionsById': {},
       'versionsById': {
         (version.id) : {
           'id': version.id,
           'votes': [],
+          'votesCount': version.getVotesCountAll(),
+          'votesCountOk': version.votesCountOk,
+          'votesCountNok': version.votesCountNok,
+          'votesCountMitige': version.votesCountMitige,
           'user_vote': version.getVoteValueByUser(app.user)
         }
       }
