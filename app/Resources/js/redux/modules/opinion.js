@@ -29,8 +29,8 @@ type State = {
 type Dispatch = ReduxDispatch<Action>;
 
 const VOTES_PREVIEW_COUNT = 8;
-const OPINION_VOTE_SUCCEEDED = 'opinion/OPINION_VOTE_SUCCEEDED';
-const VERSION_VOTE_SUCCEEDED = 'opinion/VERSION_VOTE_SUCCEEDED';
+export const OPINION_VOTE_SUCCEEDED = 'opinion/OPINION_VOTE_SUCCEEDED';
+export const VERSION_VOTE_SUCCEEDED = 'opinion/VERSION_VOTE_SUCCEEDED';
 const DELETE_OPINION_VOTE_SUCCEEDED = 'opinion/DELETE_OPINION_VOTE_SUCCEEDED';
 const DELETE_VERSION_VOTE_SUCCEEDED = 'opinion/DELETE_VERSION_VOTE_SUCCEEDED';
 const OPINION_VOTES_FETCH_REQUESTED = 'opinion/OPINION_VOTES_FETCH_REQUESTED';
@@ -74,25 +74,25 @@ export const fetchOpinionVotes = (opinionId: number, versionId: number): FetchOp
   versionId,
 });
 
-const versionVoteSuccess = (versionId: number, vote: OpinionVote): Action => ({
+export const versionVoteSuccess = (versionId: number, vote: OpinionVote): Action => ({
   type: VERSION_VOTE_SUCCEEDED,
   versionId,
   vote,
 });
 
-const opinionVoteSuccess = (opinionId: number, vote: OpinionVote): Action => ({
+export const opinionVoteSuccess = (opinionId: number, vote: OpinionVote): Action => ({
   type: OPINION_VOTE_SUCCEEDED,
   opinionId,
   vote,
 });
 
-const deleteOpinionVoteSuccess = (opinionId: number, vote: OpinionVote): Action => ({
+export const deleteOpinionVoteSuccess = (opinionId: number, vote: OpinionVote): Action => ({
   type: DELETE_OPINION_VOTE_SUCCEEDED,
   opinionId,
   vote,
 });
 
-const deleteVersionVoteSuccess = (versionId: number, vote: OpinionVote): Action => ({
+export const deleteVersionVoteSuccess = (versionId: number, vote: OpinionVote): Action => ({
   type: DELETE_VERSION_VOTE_SUCCEEDED,
   versionId,
   vote,
@@ -181,6 +181,47 @@ const getVoteStringByValue = (value: VoteValue): string => {
   return 'Mitige';
 };
 
+const appendVote = (state: State, newVote: Object, object: Object, type: string): State => {
+  const previousVote = _.find(object.votes, v => v.user.uniqueId === newVote.user.uniqueId);
+  const voteCountIncreasing = `votesCount${getVoteStringByValue(newVote.value)}`;
+  if (typeof previousVote === 'undefined') { // first vote
+    const lol = {
+      ...object,
+      votes: [...object.votes, newVote],
+      userHasVote: true,
+      [voteCountIncreasing]: object[voteCountIncreasing] + 1,
+      votesCount: object.votesCount + 1,
+      user_vote: newVote.value,
+    };
+    return type === 'version' ? updateVersion(state, lol) : updateOpinion(state, lol);
+  }
+  const indexOfCurrentUserVote = _.findIndex(object.votes, v => v.user.uniqueId === newVote.user.uniqueId);
+  object.votes.splice(indexOfCurrentUserVote, 1);
+  const voteCountDecreasing = `votesCount${getVoteStringByValue(previousVote.value)}`;
+  const lol = {
+    ...object,
+    votes: [...object.votes, newVote],
+    [voteCountDecreasing]: object[voteCountDecreasing] - 1,
+    [voteCountIncreasing]: object[voteCountIncreasing] + 1,
+    user_vote: newVote.value,
+  };
+  return type === 'version' ? updateVersion(state, lol) : updateOpinion(state, lol);
+};
+
+const removeVote = (state: State, oldVote: Object, object: Object, type: string): State => {
+  const indexToRemove = _.findIndex(object.votes, v => v.user && v.user.uniqueId === oldVote.user.uniqueId);
+  const voteCountDecreasing = `votesCount${getVoteStringByValue(oldVote.value)}`;
+  const lol = {
+    ...object,
+    votes: [...object.votes.slice(0, indexToRemove), ...object.votes.slice(indexToRemove + 1)],
+    [voteCountDecreasing]: object[voteCountDecreasing] - 1,
+    user_vote: null,
+    userHasVote: false,
+    votesCount: object.votesCount - 1,
+  };
+  return type === 'version' ? updateVersion(state, lol) : updateOpinion(state, lol);
+};
+
 export const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case OPINION_VOTES_FETCH_SUCCEEDED: {
@@ -192,58 +233,16 @@ export const reducer = (state: State = initialState, action: Action): State => {
       return updateOpinion(state, { ...state.opinionsById[action.opinionId], votes });
     }
     case OPINION_VOTE_SUCCEEDED: {
-      const opinion = state.opinionsById[action.opinionId];
-      const newVote = action.vote;
-      const previousVote = _.find(opinion.votes, v => v.user.uniqueId === newVote.user.uniqueId);
-      const voteCountIncreasing = `votesCount${getVoteStringByValue(newVote.value)}`;
-      if (typeof previousVote === 'undefined') { // first vote
-        return updateOpinion(state, {
-          ...opinion,
-          votes: [...opinion.votes, newVote],
-          userHasVote: true,
-          [voteCountIncreasing]: opinion[voteCountIncreasing] + 1,
-          votesCount: opinion.votesCount + 1,
-          user_vote: newVote.value,
-        });
-      }
-      const indexOfCurrentUserVote = _.findIndex(opinion.votes, v => v.user.uniqueId === newVote.user.uniqueId);
-      opinion.votes.splice(indexOfCurrentUserVote, 1);
-      const voteCountDecreasing = `votesCount${getVoteStringByValue(previousVote.value)}`;
-      return updateOpinion(state, {
-        ...opinion,
-        votes: [...opinion.votes, action.vote],
-        [voteCountDecreasing]: opinion[voteCountDecreasing] - 1,
-        [voteCountIncreasing]: opinion[voteCountIncreasing] + 1,
-        user_vote: action.vote.value,
-      });
+      return appendVote(state, action.vote, state.opinionsById[action.opinionId], 'opinion');
     }
     case DELETE_OPINION_VOTE_SUCCEEDED: {
-      const opinion = state.opinionsById[action.opinionId];
-      const deletedVote = action.vote;
-      const indexToRemove = _.findIndex(opinion.votes, v => v.user && v.user.uniqueId === deletedVote.user.uniqueId);
-      const voteCountDecreasing = `votesCount${getVoteStringByValue(deletedVote.value)}`;
-      return updateOpinion(state, {
-        ...opinion,
-        votes: [...opinion.votes.slice(0, indexToRemove), ...opinion.votes.slice(indexToRemove + 1)],
-        [voteCountDecreasing]: opinion[voteCountDecreasing] - 1,
-        user_vote: null,
-        userHasVote: false,
-        votesCount: opinion.votesCount - 1,
-      });
+      return removeVote(state, action.vote, state.opinionsById[action.opinionId], 'opinion');
     }
     case VERSION_VOTE_SUCCEEDED: {
-      return updateVersion(state, {
-        ...state.versionsById[action.versionId],
-        user_vote: action.vote.value,
-        userHasVote: true,
-      });
+      return appendVote(state, action.vote, state.versionsById[action.versionId], 'version');
     }
     case DELETE_VERSION_VOTE_SUCCEEDED: {
-      return updateVersion(state, {
-        ...state.versionsById[action.versionId],
-        user_vote: null,
-        userHasVote: false,
-      });
+      return removeVote(state, action.vote, state.versionsById[action.versionId], 'version');
     }
     case OPINION_VOTES_FETCH_FAILED: {
       console.log(OPINION_VOTES_FETCH_FAILED, action.error); // eslint-disable-line no-console
