@@ -5,7 +5,6 @@ import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../../services/Fetcher';
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
-import _ from 'lodash';
 
 export type VoteValue = -1 | 0 | 1;
 type OpinionVote = {| user: { uniqueId: string }, value: VoteValue |};
@@ -181,10 +180,10 @@ const getVoteStringByValue = (value: VoteValue): string => {
 };
 
 const appendVote = (state: State, newVote: Object, object: Object, type: string): State => {
-  const previousVote = _.find(object.votes, v => v.user.uniqueId === newVote.user.uniqueId);
+  const previousVote = object.votes.find(v => v.user.uniqueId === newVote.user.uniqueId);
   const voteCountIncreasing = `votesCount${getVoteStringByValue(newVote.value)}`;
   if (typeof previousVote === 'undefined') { // first vote
-    const lol = {
+    const contribution = {
       ...object,
       votes: [...object.votes, newVote],
       userHasVote: true,
@@ -192,23 +191,23 @@ const appendVote = (state: State, newVote: Object, object: Object, type: string)
       votesCount: object.votesCount + 1,
       user_vote: newVote.value,
     };
-    return type === 'version' ? updateVersion(state, lol) : updateOpinion(state, lol);
+    return type === 'version' ? updateVersion(state, contribution) : updateOpinion(state, contribution);
   }
-  const indexOfCurrentUserVote = _.findIndex(object.votes, v => v.user.uniqueId === newVote.user.uniqueId);
+  const indexOfCurrentUserVote = object.votes.findIndex(v => v.user.uniqueId === newVote.user.uniqueId);
   object.votes.splice(indexOfCurrentUserVote, 1);
   const voteCountDecreasing = `votesCount${getVoteStringByValue(previousVote.value)}`;
-  const lol = {
+  const contribution = {
     ...object,
     votes: [...object.votes, newVote],
     [voteCountDecreasing]: object[voteCountDecreasing] - 1,
     [voteCountIncreasing]: object[voteCountIncreasing] + 1,
     user_vote: newVote.value,
   };
-  return type === 'version' ? updateVersion(state, lol) : updateOpinion(state, lol);
+  return type === 'version' ? updateVersion(state, contribution) : updateOpinion(state, contribution);
 };
 
 const removeVote = (state: State, oldVote: Object, object: Object, type: string): State => {
-  const indexToRemove = _.findIndex(object.votes, v => v.user && v.user.uniqueId === oldVote.user.uniqueId);
+  const indexToRemove = object.votes.findIndex(v => v.user && v.user.uniqueId === oldVote.user.uniqueId);
   const voteCountDecreasing = `votesCount${getVoteStringByValue(oldVote.value)}`;
   const lol = {
     ...object,

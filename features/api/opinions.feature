@@ -298,4 +298,8 @@ Feature: Opinions
     Then the JSON response status code should be 200
     # delete
     When I send a DELETE request to "/api/opinions/57/votes"
-    Then the JSON response status code should be 204
+    Then the JSON response status code should be 200
+    And the JSON response should match:
+    """
+    { "user": @...@, "value": -1}
+    """
