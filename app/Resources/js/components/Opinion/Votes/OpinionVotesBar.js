@@ -38,7 +38,7 @@ const OpinionVotesBar = React.createClass({
           <OpinionVotesModal opinion={opinion} />
         </div>
         <div>
-          <FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes.length} />
+          <FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votesCount} />
         </div>
       </div>
     );
