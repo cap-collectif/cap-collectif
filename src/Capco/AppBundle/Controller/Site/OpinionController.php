@@ -19,11 +19,15 @@ class OpinionController extends Controller
 {
     /**
      * @Template("CapcoAppBundle:Consultation:show_opinions.html.twig")
+     *
+     * @param $project
+     * @param $currentStep
+     *
+     * @return array
      */
     public function showOpinionsAction(Project $project, ConsultationStep $currentStep)
     {
-        $tree = $this->get('capco.opinion_types.resolver')
-            ->getGroupedOpinionsForStep($currentStep);
+        $tree = $this->get('capco.opinion_types.resolver')->getGroupedOpinionsForStep($currentStep);
 
         return [
             'blocks' => $tree,

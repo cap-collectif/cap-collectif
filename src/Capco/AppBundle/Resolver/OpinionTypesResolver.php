@@ -22,10 +22,8 @@ class OpinionTypesResolver
         $this->router = $router;
     }
 
-    public function getGroupedOpinionsForStep(ConsultationStep $step)
+    public function getGroupedOpinionsForStep(ConsultationStep $step, $limit = 5, $page = 1)
     {
-        $limit = $step->getOpinionCountShownBySection();
-        $page = 1;
         $roots = $step->getConsultationStepType()->getRootOpinionTypes();
 
         $build = function ($tree) use (&$build, &$step, &$limit, &$page) {
