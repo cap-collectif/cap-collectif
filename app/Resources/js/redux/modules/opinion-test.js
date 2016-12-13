@@ -64,13 +64,12 @@ describe('Opinion Reducers', () => {
 describe('Opinion Sagas', () => {
   it('Should fetchPosts', () => {
     const votes = [vote];
-    const generator = fetchAllOpinionVotes(fetchOpinionVotes(1));
-    expect(generator.next().value).toEqual(call(Fetcher.get, '/opinions/1/votes?offset=0&limit=30'));
-    expect(generator.next({ votes, hasMore: false }).value)
-    .toEqual(
-      put({ type: OPINION_VOTES_FETCH_SUCCEEDED, votes, opinionId: 1 })
-    );
     const error = {};
-    expect(generator.throw(error).value).toEqual(put({ type: OPINION_VOTES_FETCH_FAILED, error }));
+    const dispatchSuccess = put({ type: OPINION_VOTES_FETCH_SUCCEEDED, votes, opinionId: 1 });
+    const dispatchFailure = put({ type: OPINION_VOTES_FETCH_FAILED, error });
+    const gen = fetchAllOpinionVotes(fetchOpinionVotes(1));
+    expect(gen.next().value).toEqual(call(Fetcher.get, '/opinions/1/votes?offset=0&limit=30'));
+    expect(gen.next({ votes, hasMore: false }).value).toEqual(dispatchSuccess);
+    expect(gen.throw(error).value).toEqual(dispatchFailure);
   });
 });
