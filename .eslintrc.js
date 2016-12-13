@@ -63,6 +63,7 @@ module.exports = {
     'react/jsx-indent': 'off',
     'react/jsx-indent-props': 'off',
     'react/jsx-no-bind': 'off',
+    'no-duplicate-imports': 'off', // for flow type import
     'react/prefer-stateless-function': 'off',
     'react/require-extension': 'off',
     'react/prefer-es6-class': 'off',

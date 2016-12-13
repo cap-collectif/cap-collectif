@@ -63,14 +63,11 @@ class OpinionStore extends BaseStore {
       case UPDATE_OPINION_SUCCESS:
         this._resetMessages();
         this._messages.success.push(action.message);
-        this._isProcessing = false;
         this.emitChange();
         break;
       case UPDATE_OPINION_FAILURE:
         this._messages.errors.push(action.message);
         this._messages.success = [];
-        this._isProcessing = false;
-        this._isOpinionSync = true;
         this.emitChange();
         break;
       default: break;

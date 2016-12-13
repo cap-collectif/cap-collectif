@@ -1,8 +1,32 @@
 // @flow
+import type { Dispatch as ReduxDispatch } from 'redux';
+import { UPDATE_OPINION_SUCCESS, UPDATE_OPINION_FAILURE } from '../../constants/OpinionConstants';
+import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../../services/Fetcher';
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
-import { find } from 'lodash';
+import _ from 'lodash';
+
+export type VoteValue = -1 | 0 | 1;
+type OpinionVote = {| user: { uniqueId: string }, value: VoteValue |};
+type OpinionVotes = Array<OpinionVote>;
+type Action =
+    {| type: 'opinion/OPINION_VOTE_SUCCEEDED', opinionId: number, vote: OpinionVote |}
+  | {| type: 'opinion/VERSION_VOTE_SUCCEEDED', versionId: number, vote: OpinionVote |}
+  | {| type: 'opinion/DELETE_OPINION_VOTE_SUCCEEDED', opinionId: number, vote: OpinionVote |}
+  | {| type: 'opinion/DELETE_VERSION_VOTE_SUCCEEDED', versionId: number, vote: OpinionVote |}
+  | {| type: 'opinion/OPINION_VOTES_FETCH_SUCCEEDED', votes: OpinionVotes, opinionId: number |}
+  | {| type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: any |}
+;
+type FetchOpinionVotesAction = {| type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: number, versionId: ?number |};
+type ContributionMap = {[id: number]: {votes: OpinionVotes, votesCount: number}};
+type State = {
+  currentOpinionId: ?number,
+  currentVersionId: ?number,
+  opinionsById: ContributionMap,
+  versionsById: ContributionMap
+};
+type Dispatch = ReduxDispatch<Action>;
 
 const VOTES_PREVIEW_COUNT = 8;
 const OPINION_VOTE_SUCCEEDED = 'opinion/OPINION_VOTE_SUCCEEDED';
@@ -13,26 +37,6 @@ const OPINION_VOTES_FETCH_REQUESTED = 'opinion/OPINION_VOTES_FETCH_REQUESTED';
 const OPINION_VOTES_FETCH_SUCCEEDED = 'opinion/OPINION_VOTES_FETCH_SUCCEEDED';
 const OPINION_VOTES_FETCH_FAILED = 'opinion/OPINION_VOTES_FETCH_FAILED';
 
-type VoteValue = -1 | 0 | 1;
-type Action =
-    { type: 'opinion/OPINION_VOTE_SUCCEEDED', opinionId: number, vote: Object}
-  | { type: 'opinion/VERSION_VOTE_SUCCEEDED', versionId: number, vote: Object }
-  | { type: 'opinion/DELETE_OPINION_VOTE_SUCCEEDED', opinionId: number, vote: Object }
-  | { type: 'opinion/DELETE_VERSION_VOTE_SUCCEEDED', versionId: number, vote: Object }
-  | { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: number, versionId: ?number }
-  | { type: 'opinion/OPINION_VOTES_FETCH_SUCCEEDED', votes: Object[], opinionId: number }
-  | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: Object }
-;
-
-type ContributionMap = {[id: number]: Object};
-type State = {
-  currentOpinionId: ?number,
-  currentVersionId: ?number,
-  opinionsById: ContributionMap,
-  versionsById: ContributionMap
-};
-type Dispatch = (action: Action) => void;
-
 const initialState = {
   currentOpinionId: null,
   opinionsById: {},
@@ -40,7 +44,7 @@ const initialState = {
   versionsById: {},
 };
 
-export function* fetchAllOpinionVotes(action: Action): Generator<*, *, *> {
+export function* fetchAllOpinionVotes(action: FetchOpinionVotesAction): Generator<*, *, *> {
   try {
     let hasMore = true;
     let iterationCount = 0;
@@ -50,10 +54,7 @@ export function* fetchAllOpinionVotes(action: Action): Generator<*, *, *> {
       const votesUrl = versionId
         ? `/opinions/${opinionId}/versions/${versionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
         : `/opinions/${opinionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`;
-      const result: Object = yield call(
-        Fetcher.get,
-        votesUrl
-      );
+      const result: {votes: OpinionVotes, hasMore: boolean} = yield call(Fetcher.get, votesUrl);
       hasMore = result.hasMore;
       iterationCount++;
       yield put({ type: OPINION_VOTES_FETCH_SUCCEEDED, votes: result.votes, opinionId });
@@ -67,39 +68,39 @@ export function* saga(): Generator<*, *, *> {
   yield* takeEvery(OPINION_VOTES_FETCH_REQUESTED, fetchAllOpinionVotes);
 }
 
-export const fetchOpinionVotes = (opinionId: number, versionId: number): Action => ({
+export const fetchOpinionVotes = (opinionId: number, versionId: number): FetchOpinionVotesAction => ({
   type: OPINION_VOTES_FETCH_REQUESTED,
   opinionId,
   versionId,
 });
 
-const versionVoteSuccess = (versionId: number, vote): Action => ({
+const versionVoteSuccess = (versionId: number, vote: OpinionVote): Action => ({
   type: VERSION_VOTE_SUCCEEDED,
   versionId,
   vote,
 });
 
-const opinionVoteSuccess = (opinionId: number, vote): Action => ({
+const opinionVoteSuccess = (opinionId: number, vote: OpinionVote): Action => ({
   type: OPINION_VOTE_SUCCEEDED,
   opinionId,
   vote,
 });
 
-const deleteOpinionVoteSuccess = (opinionId: number, vote): Action => ({
+const deleteOpinionVoteSuccess = (opinionId: number, vote: OpinionVote): Action => ({
   type: DELETE_OPINION_VOTE_SUCCEEDED,
   opinionId,
   vote,
 });
 
-const deleteVersionVoteSuccess = (versionId: number, vote: Object): Action => ({
+const deleteVersionVoteSuccess = (versionId: number, vote: OpinionVote): Action => ({
   type: DELETE_VERSION_VOTE_SUCCEEDED,
   versionId,
   vote,
 });
 
-const deleteVote = (opinion: number, parent: ?number, dispatch: Dispatch) => {
+const deleteVote = (opinion: number, parent: ?number, dispatch: Dispatch): void => {
   const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
-  return Fetcher
+  Fetcher
     .delete(url)
     .then(json)
     .then(data => {
@@ -108,56 +109,59 @@ const deleteVote = (opinion: number, parent: ?number, dispatch: Dispatch) => {
       } else {
         dispatch(deleteOpinionVoteSuccess(opinion, data));
       }
-      // FluxDispatcher.dispatch({
-      //   actionType: UPDATE_OPINION_SUCCESS,
-      //   message: 'opinion.request.delete_vote.success',
-      // });
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_OPINION_SUCCESS,
+        message: 'opinion.request.delete_vote.success',
+      });
     })
-    .catch(() => {
-      // FluxDispatcher.dispatch({
-      //   actionType: UPDATE_OPINION_FAILURE,
-      //   message: 'opinion.request.failure',
-      // });
+    .catch(e => {
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_OPINION_FAILURE,
+        message: 'opinion.request.failure',
+      });
+      console.error(e);
     });
 };
 
-const vote = (value: VoteValue, opinion: number, parent: ?number, dispatch: Dispatch) => {
+const vote = (value: VoteValue, opinion: number, parent: ?number, dispatch: Dispatch): void => {
   const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
-  return Fetcher
-    .put(url, value)
+  Fetcher
+    .put(url, { value })
     .then(json)
-    .then(newVote => {
+    .then((newVote: OpinionVote) => {
+      console.log(newVote);
       if (parent) {
         dispatch(versionVoteSuccess(opinion, newVote));
       } else {
         dispatch(opinionVoteSuccess(opinion, newVote));
       }
-      // FluxDispatcher.dispatch({
-      //   actionType: UPDATE_OPINION_SUCCESS,
-      //   message: 'opinion.request.create_vote.success',
-      // });
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_OPINION_SUCCESS,
+        message: 'opinion.request.create_vote.success',
+      });
     })
-    .catch(() => {
-      // FluxDispatcher.dispatch({
-      //   actionType: UPDATE_OPINION_FAILURE,
-      //   message: 'opinion.request.failure',
-      // });
+    .catch(e => {
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_OPINION_FAILURE,
+        message: 'opinion.request.failure',
+      });
+      console.error(e);
     });
 };
 
-export const deleteVoteOpinion = (opinion: number, dispatch: Dispatch) => (
+export const deleteVoteOpinion = (opinion: number, dispatch: Dispatch): void => (
   deleteVote(opinion, null, dispatch))
 ;
 
-export const deleteVoteVersion = (version: number, opinion: number, dispatch: Dispatch) => (
+export const deleteVoteVersion = (version: number, opinion: number, dispatch: Dispatch): void => (
   deleteVote(version, opinion, dispatch)
 );
 
-export const voteOpinion = (value: VoteValue, opinion: number, dispatch: Dispatch) => (
+export const voteOpinion = (value: VoteValue, opinion: number, dispatch: Dispatch): void => (
   vote(value, opinion, null, dispatch)
 );
 
-export const voteVersion = (value: VoteValue, version: number, opinion: number, dispatch: Dispatch) => (
+export const voteVersion = (value: VoteValue, version: number, opinion: number, dispatch: Dispatch): void => (
   vote(value, version, opinion, dispatch)
 );
 
@@ -177,7 +181,7 @@ const getVoteStringByValue = (value: VoteValue): string => {
   return 'Mitige';
 };
 
-export const reducer = (state: State = initialState, action: Action) => {
+export const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case OPINION_VOTES_FETCH_SUCCEEDED: {
       let votes = state.opinionsById[action.opinionId].votes;
@@ -189,24 +193,25 @@ export const reducer = (state: State = initialState, action: Action) => {
     }
     case OPINION_VOTE_SUCCEEDED: {
       const opinion = state.opinionsById[action.opinionId];
-      const indexOfCurrentUserVote = opinion.votes.indexOf(find(opinion.votes, v => v.user.uniqueId === action.vote.user.uniqueId));
-      const voteCountIncreasing = `votesCount${getVoteStringByValue(action.vote.value)}`;
-      if (indexOfCurrentUserVote === -1) { // first vote
+      const newVote = action.vote;
+      const previousVote = _.find(opinion.votes, v => v.user.uniqueId === newVote.user.uniqueId);
+      const voteCountIncreasing = `votesCount${getVoteStringByValue(newVote.value)}`;
+      if (typeof previousVote === 'undefined') { // first vote
         return updateOpinion(state, {
           ...opinion,
-          votes: [action.vote, ...opinion.votes],
+          votes: [...opinion.votes, newVote],
           userHasVote: true,
           [voteCountIncreasing]: opinion[voteCountIncreasing] + 1,
           votesCount: opinion.votesCount + 1,
-          user_vote: action.vote.value,
+          user_vote: newVote.value,
         });
       }
-      const previousVote = opinion.votes[indexOfCurrentUserVote];
-      const votes = opinion.votes.splice(indexOfCurrentUserVote, 1);
+      const indexOfCurrentUserVote = _.findIndex(opinion.votes, v => v.user.uniqueId === newVote.user.uniqueId);
+      opinion.votes.splice(indexOfCurrentUserVote, 1);
       const voteCountDecreasing = `votesCount${getVoteStringByValue(previousVote.value)}`;
       return updateOpinion(state, {
         ...opinion,
-        votes: [action.vote, ...votes],
+        votes: [...opinion.votes, action.vote],
         [voteCountDecreasing]: opinion[voteCountDecreasing] - 1,
         [voteCountIncreasing]: opinion[voteCountIncreasing] + 1,
         user_vote: action.vote.value,
@@ -214,12 +219,13 @@ export const reducer = (state: State = initialState, action: Action) => {
     }
     case DELETE_OPINION_VOTE_SUCCEEDED: {
       const opinion = state.opinionsById[action.opinionId];
-      const indexToRemove = opinion.votes.indexOf(find(opinion.votes, (v) => {
-        return v.user && v.user.uniqueId === action.vote.user.uniqueId;
-      }));
+      const deletedVote = action.vote;
+      const indexToRemove = _.findIndex(opinion.votes, v => v.user && v.user.uniqueId === deletedVote.user.uniqueId);
+      const voteCountDecreasing = `votesCount${getVoteStringByValue(deletedVote.value)}`;
       return updateOpinion(state, {
         ...opinion,
         votes: [...opinion.votes.slice(0, indexToRemove), ...opinion.votes.slice(indexToRemove + 1)],
+        [voteCountDecreasing]: opinion[voteCountDecreasing] - 1,
         user_vote: null,
         userHasVote: false,
         votesCount: opinion.votesCount - 1,
