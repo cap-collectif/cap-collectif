@@ -7,6 +7,7 @@ import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import CollectStepPageHeader from './CollectStepPageHeader';
+import SelectionStepPageHeader from './SelectionStepPageHeader';
 import ProposalRandomButton from '../Proposal/List/ProposalRandomButton';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
 import VisibilityBox from '../Utils/VisibilityBox';
@@ -53,13 +54,14 @@ export const ProposalStepPage = React.createClass({
       <div>
         <StepPageHeader step={step} />
         {
-          step.type === 'collect' &&
-            <CollectStepPageHeader
+          step.type === 'collect'
+            ? <CollectStepPageHeader
               count={count}
               countFusions={countFusions}
               form={form}
               categories={categories}
-            />
+              />
+          : <SelectionStepPageHeader count={count} />
         }
         <ProposalListFilters
           statuses={statuses}
@@ -73,15 +75,15 @@ export const ProposalStepPage = React.createClass({
             {
               proposals.length === 0 && !step.isPrivate
                 ? <p className={{ 'p--centered': true }} style={{ marginBottom: '40px' }}>
-                    { this.getIntlMessage('proposal.empty') }
-                  </p>
-                : <VisibilityBox enabled={step.isPrivate}>
-                    <ProposalList
-                      proposals={proposals}
-                      step={step}
-                      showThemes={form.usingThemes}
-                    />
-                  </VisibilityBox>
+                  { this.getIntlMessage('proposal.empty') }
+                </p>
+              : <VisibilityBox enabled={step.isPrivate}>
+                <ProposalList
+                  proposals={proposals}
+                  step={step}
+                  showThemes={form.usingThemes}
+                />
+              </VisibilityBox>
             }
             {
               showPagination &&
@@ -105,14 +107,12 @@ export const ProposalStepPage = React.createClass({
 
 });
 
-const mapStateToProps = (state, props) => {
-  return {
-    stepId: undefined,
-    step: state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.stepId)[0],
-    proposals: state.proposal.proposalShowedId.map(proposal => state.proposal.proposalsById[proposal]),
-    currentPage: state.proposal.currentPaginationPage,
-    randomOrder: state.proposal.order === 'random',
-    isLoading: state.proposal.isLoading,
-  };
-};
+const mapStateToProps = (state, props) => ({
+  stepId: undefined,
+  step: state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.stepId)[0],
+  proposals: state.proposal.proposalShowedId.map(proposal => state.proposal.proposalsById[proposal]),
+  currentPage: state.proposal.currentPaginationPage,
+  randomOrder: state.proposal.order === 'random',
+  isLoading: state.proposal.isLoading,
+});
 export default connect(mapStateToProps)(ProposalStepPage);

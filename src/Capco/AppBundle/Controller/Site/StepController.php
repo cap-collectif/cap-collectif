@@ -469,18 +469,12 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/consultation/{stepSlug}", name="app_project_show_consultation")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}, "repository_method"="getOne"})
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOne"})
-     *
-     * @param Request          $request
-     * @param Project          $project
-     * @param ConsultationStep $currentStep
-     *
-     * @return array
      */
     public function showConsultationAction(Request $request, Project $project, ConsultationStep $currentStep)
     {
         $serializer = $this->get('jms_serializer');
 
-        if (false === $currentStep->canDisplay()) {
+        if (!$currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
 

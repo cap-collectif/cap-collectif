@@ -1,6 +1,4 @@
-// @flow
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
@@ -18,38 +16,34 @@ const OpinionVotesBar = React.createClass({
   },
 
   render() {
-    const { opinion } = this.props;
+    const opinion = this.props.opinion;
+    const votes = opinion.votes;
+
     return (
       <div>
         {
           this.getOpinionType().votesThreshold &&
             <VotesBar
               max={this.getOpinionType().votesThreshold}
-              value={opinion.votesCountOk}
+              value={opinion.votes_ok}
               helpText={this.getOpinionType().votesThresholdHelpText}
             />
         }
         <div style={{ paddingTop: '20px' }}>
           {
-            opinion.votes.map((vote, index) => {
+            votes.map((vote, index) => {
               return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
             })
           }
           <OpinionVotesModal opinion={opinion} />
         </div>
         <div>
-          <FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votesCount} />
+          <FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total} />
         </div>
       </div>
     );
   },
+
 });
 
-const mapStateToProps = ({ opinion: { opinionsById, versionsById } }, { opinion }) => ({
-  opinion: {
-    ...opinion,
-    ...(Object.keys(opinionsById).length ? opinionsById[opinion.id] : versionsById[opinion.id]),
-  },
-});
-
-export default connect(mapStateToProps)(OpinionVotesBar);
+export default OpinionVotesBar;

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Model\IndexableInterface;
 
@@ -28,6 +29,12 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
      * @ORM\Column(name="opinion_count", type="integer")
      */
     private $opinionCount = 0;
+
+    /**
+     * @ORM\Column(name="opinion_count_shown_by_section", type="integer")
+     * @Assert\Range(max=20,min=1)
+     */
+    private $opinionCountShownBySection = 5;
 
     /**
      * @var int
@@ -127,6 +134,18 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
     public function setOpinionCount($opinionCount)
     {
         $this->opinionCount = $opinionCount;
+
+        return $this;
+    }
+
+    public function getOpinionCountShownBySection(): int
+    {
+        return $this->opinionCountShownBySection;
+    }
+
+    public function setOpinionCountShownBySection(int $opinionCountShownBySection): self
+    {
+        $this->opinionCountShownBySection = $opinionCountShownBySection;
 
         return $this;
     }

@@ -80,9 +80,9 @@ const OpinionEditForm = React.createClass({
           { name: 'body', label: 'body', type: 'editor', id: 'opinion_body' },
         ].concat(opinion.appendices.map((a, i) => { return { label: a.type.title, name: a.type.title, type: 'editor', id: `opinion_appendix-${i + 1}` }; }))}
         initialValues={$.extend({},
-          { title: opinion.title,
-            body: opinion.body,
-          },
+                                { title: opinion.title,
+                                  body: opinion.body,
+                                },
           dynamicsInitialValues
         )}
       />
