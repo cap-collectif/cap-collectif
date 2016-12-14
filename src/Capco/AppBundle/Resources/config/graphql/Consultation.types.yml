@@ -9,6 +9,10 @@ Consultation:
             title:
                 type: "String!"
                 description: "The title of the consultation."
+            contribuable:
+                type: "Boolean!"
+                description: "Contributions are allowed right now."
+                resolve: "@=resolver('consultation_contribuable', [value])"
             contributions:
                 type: "[Contribution]"
                 description: "List of contributions."

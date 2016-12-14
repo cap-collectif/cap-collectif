@@ -12,7 +12,12 @@ class ConsultationResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function resolve($args)
+    public function resolveConsultationIsContribuable(ConsultationStep $consultation): bool
+    {
+        return $consultation->canContribute();
+    }
+
+    public function resolve(Argument $args)
     {
         $repo = $this->container
         ->get('capco.consultation_step.repository');
@@ -22,7 +27,7 @@ class ConsultationResolver implements ContainerAwareInterface
         return $repo->findAll();
     }
 
-    public function resolvePropositionUrl(Opinion $contribution)
+    public function resolvePropositionUrl(Opinion $contribution): string
     {
       return $this->container->get('router')->generate(
           'app_consultation_show_opinion',

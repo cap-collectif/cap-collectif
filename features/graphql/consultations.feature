@@ -6,8 +6,16 @@ Feature: Consultations
     """
     {
       consultations {
-        id
-      }
+         id
+         title
+         contribuable
+         sections {
+           title
+         }
+         contributions {
+           id
+         }
+       }
     }
     """
     Then the JSON response should match:
@@ -16,7 +24,21 @@ Feature: Consultations
       "data": {
         "consultations": [
           {
-            "id": @integer@
+            "id": @integer@,
+            "title": @string@,
+            "contribuable": @boolean@,
+            "sections": [
+              {
+                "title": @string@
+              },
+              @...@
+            ],
+            "contributions": [
+              {
+                "id": @integer@
+              },
+              @...@
+            ]
           },
           @...@
         ]
