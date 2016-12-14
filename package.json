@@ -32,7 +32,7 @@
       "app/Resources/js"
     ],
     "testEnvironment": "jsdom",
-    "testRegex": "\\-test.js$",
+    "testRegex": "\\-test.js",
     "setupFiles": [
       "jest-setup.js"
     ],

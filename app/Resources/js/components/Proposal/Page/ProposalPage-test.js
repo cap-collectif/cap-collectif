@@ -22,8 +22,8 @@ describe('<ProposalPage />', () => {
       districts: false,
     },
     steps: [
-      { id: 1, voteType: VOTE_TYPE_DISABLED },
-      { id: 2, voteType: VOTE_TYPE_SIMPLE },
+    { id: 1, voteType: VOTE_TYPE_DISABLED },
+    { id: 2, voteType: VOTE_TYPE_SIMPLE },
     ],
   };
 

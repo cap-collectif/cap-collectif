@@ -1,32 +1,10 @@
-// @flow
 import React, { PropTypes } from 'react';
 import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import { Button } from 'react-bootstrap';
-import type { VoteValue } from '../../../redux/modules/opinion';
 import { deleteVoteVersion, deleteVoteOpinion, voteOpinion, voteVersion } from '../../../redux/modules/opinion';
-
-const valueToObject = (value: VoteValue): Object => {
-  if (value === -1) {
-    return {
-      style: 'danger',
-      str: 'nok',
-      icon: 'cap cap-hand-unlike-2-1',
-    }; }
-  if (value === 0) {
-    return {
-      style: 'warning',
-      str: 'mitige',
-      icon: 'cap cap-hand-like-2 icon-rotate',
-    }; }
-  return {
-    style: 'success',
-    str: 'ok',
-    icon: 'cap cap-hand-like-2-1',
-  };
-};
 
 export const OpinionVotesButton = React.createClass({
   propTypes: {
@@ -56,9 +34,9 @@ export const OpinionVotesButton = React.createClass({
   vote() {
     const { opinion, value, dispatch } = this.props;
     if (this.isVersion()) {
-      voteVersion(value, opinion.id, opinion.parent.id, dispatch);
+      voteVersion({ value }, opinion.id, opinion.parent.id, dispatch);
     } else {
-      voteOpinion(value, opinion.id, dispatch);
+      voteOpinion({ value }, opinion.id, dispatch);
     }
   },
 
@@ -98,19 +76,39 @@ export const OpinionVotesButton = React.createClass({
     return false;
   },
 
+  data: {
+    '-1': {
+      style: 'danger',
+      str: 'nok',
+      icon: 'cap cap-hand-unlike-2-1',
+    },
+    0: {
+      style: 'warning',
+      str: 'mitige',
+      icon: 'cap cap-hand-like-2 icon-rotate',
+    },
+    1: {
+      style: 'success',
+      str: 'ok',
+      icon: 'cap cap-hand-like-2-1',
+    },
+  },
+
   render() {
     if (!this.voteIsEnabled()) {
       return null;
     }
     const {
+      user,
+      features,
       disabled,
       style,
       value,
       active,
     } = this.props;
-    const data = valueToObject(value);
+    const data = this.data[value];
     return (
-      <LoginOverlay>
+      <LoginOverlay user={user} features={features}>
         <Button
           style={style}
           bsStyle={data.style}
@@ -133,17 +131,14 @@ export const OpinionVotesButton = React.createClass({
 
 });
 
-const mapStateToProps = ({
-  default: { user, features },
-  opinion: { versionsById, opinionsById },
-}, { opinion, value }) => {
-  const vote = opinion.parent
-    ? versionsById[opinion.id].user_vote
-    : opinionsById[opinion.id].user_vote;
+const mapStateToProps = (state, props) => {
+  const vote = props.opinion.parent
+    ? state.opinion.versions[props.opinion.id].user_vote
+    : state.opinion.opinions[props.opinion.id].user_vote;
   return {
-    features,
-    user,
-    active: vote !== null && vote === value,
+    features: state.default.features,
+    user: state.default.user,
+    active: vote !== null && vote === props.value,
   };
 };
 

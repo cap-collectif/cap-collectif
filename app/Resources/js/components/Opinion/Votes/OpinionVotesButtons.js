@@ -1,4 +1,3 @@
-// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import OpinionVotesButton from './OpinionVotesButton';
@@ -51,8 +50,10 @@ const OpinionVotesButtons = React.createClass({
 
 });
 
-const mapStateToProps = state => ({
-  user: state.default.user,
-});
+const mapStateToProps = (state) => {
+  return {
+    user: state.default.user,
+  };
+};
 
 export default connect(mapStateToProps)(OpinionVotesButtons);

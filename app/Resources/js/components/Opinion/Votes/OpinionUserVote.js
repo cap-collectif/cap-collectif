@@ -1,4 +1,3 @@
-// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import UserAvatar from '../../User/UserAvatar';
