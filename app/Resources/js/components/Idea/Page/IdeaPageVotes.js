@@ -92,10 +92,10 @@ export const IdeaPageVotes = React.createClass({
 
 });
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     fetchIdeaVotes: (ideaId) => dispatch(fetchIdeaVotes(ideaId)),
   };
-}
+};
 
 export default connect(null, mapDispatchToProps)(IdeaPageVotes);

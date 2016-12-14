@@ -3,7 +3,7 @@
 .*/node_modules/*
 
 [libs]
-<PROJECT_ROOT>/flow-typed
+flow-typed
 
 [options]
 module.name_mapper='^image![a-zA-Z0-9$_-]+$' -> 'GlobalImageStub'

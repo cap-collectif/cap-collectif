@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -5,6 +6,7 @@ import { VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH } from '../../../constants/VoteC
 import VotePiechart from '../../Utils/VotePiechart';
 import OpinionVotesBar from './OpinionVotesBar';
 import OpinionVotesButtons from './OpinionVotesButtons';
+import { connect } from 'react-redux';
 
 const OpinionVotesBox = React.createClass({
   propTypes: {
@@ -33,9 +35,9 @@ const OpinionVotesBox = React.createClass({
   },
 
   showPiechart() {
-    const { opinion } = this.props;
+    const { opinion: { votesCount } } = this.props;
     const widgetType = this.getOpinionType().voteWidgetType;
-    return opinion.votes.length > 0 && widgetType === VOTE_WIDGET_BOTH;
+    return votesCount > 0 && widgetType === VOTE_WIDGET_BOTH;
   },
 
   render() {
@@ -62,9 +64,9 @@ const OpinionVotesBox = React.createClass({
                   top={20}
                   height={'180px'}
                   width={'200px'}
-                  ok={opinion.votes_ok}
-                  nok={opinion.votes_nok}
-                  mitige={opinion.votes_mitige}
+                  ok={opinion.votesCountOk}
+                  nok={opinion.votesCountNok}
+                  mitige={opinion.votesCountMitige}
                 />
               </Col>
           }
@@ -75,4 +77,11 @@ const OpinionVotesBox = React.createClass({
 
 });
 
-export default OpinionVotesBox;
+const mapStateToProps = ({ opinion: { opinionsById, versionsById } }, { opinion }) => ({
+  opinion: {
+    ...opinion,
+    ...(Object.keys(opinionsById).length ? opinionsById[opinion.id] : versionsById[opinion.id]),
+  },
+});
+
+export default connect(mapStateToProps)(OpinionVotesBox);
