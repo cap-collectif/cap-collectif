@@ -5,6 +5,7 @@ import { ProposalPage } from './ProposalPage';
 import IntlData from '../../../translations/FR';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { VOTE_TYPE_SIMPLE, VOTE_TYPE_DISABLED } from '../../../constants/ProposalConstants';
+import '../../../../../../__helper';
 
 describe('<ProposalPage />', () => {
   const props = {
@@ -88,7 +89,7 @@ describe('<ProposalPage />', () => {
     expect(commentsItem.find('.badge').text()).toEqual(`${proposalNoVotes.comments_count}`);
     const voteButtonWrapper = tabsPills.find('Connect(ProposalVoteButtonWrapper)');
     expect(voteButtonWrapper).toHaveLength(1);
-    expect(voteButtonWrapper.props()).toContain({
+    expect(voteButtonWrapper.props()).toMatchObject({
       proposal: proposalNoVotes,
       className: 'pull-right hidden-xs proposal__preview__vote',
     });
@@ -101,7 +102,7 @@ describe('<ProposalPage />', () => {
     expect(contentTabPane.prop('eventKey')).toEqual('content');
     const proposalContent = contentTabPane.find('Connect(ProposalPageContent)');
     expect(proposalContent).toHaveLength(1);
-    expect(proposalContent.props()).toContain({
+    expect(proposalContent.props()).toMatchObject({
       proposal: proposalNoVotes,
       form: props.form,
       categories: props.categories,
@@ -118,7 +119,7 @@ describe('<ProposalPage />', () => {
 
     expect(proposalAdvancement.props()).toEqual({ proposal: proposalNoVotes });
     const commentsTabPane = tabPanes.at(1);
-    expect(commentsTabPane.props()).toContain({ eventKey: 'comments' });
+    expect(commentsTabPane.props()).toMatchObject({ eventKey: 'comments' });
 
     const proposalComments = commentsTabPane.find('ProposalPageComments');
     expect(proposalComments.prop('form')).toEqual(props.form);

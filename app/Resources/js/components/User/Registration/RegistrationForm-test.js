@@ -1,14 +1,9 @@
 /* eslint-env jest */
-/* eslint no-unused-expressions:0 */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationForm } from './RegistrationForm';
 import IntlData from '../../../translations/FR';
-import chai from 'chai';
-import chaiSubset from 'chai-subset';
-
-chai.use(chaiSubset);
-const expect = chai.expect;
+import '../../../../../../__helper';
 
 describe('<RegistrationForm />', () => {
   const props = {
@@ -36,7 +31,7 @@ describe('<RegistrationForm />', () => {
 
   it('renders a username input', () => {
     const wrapper = shallow(<RegistrationForm {...props} />);
-    expect(wrapper.find('ReduxForm').prop('fields')).toMatchObject(
+    expect(wrapper.find('ReduxForm').prop('fields')[0]).toMatchObject(
       {
         name: 'username',
         label: 'Nom ou pseudonyme',
@@ -50,7 +45,7 @@ describe('<RegistrationForm />', () => {
 
   it('renders an email input', () => {
     const wrapper = shallow(<RegistrationForm {...props} />);
-    expect(wrapper.find('ReduxForm').prop('fields')).toMatchObject(
+    expect(wrapper.find('ReduxForm').prop('fields')[1]).toMatchObject(
       {
         name: 'email',
         label: 'Adresse électronique',
@@ -68,7 +63,7 @@ describe('<RegistrationForm />', () => {
 
   it('renders a password input', () => {
     const wrapper = shallow(<RegistrationForm {...props} />);
-    expect(wrapper.find('ReduxForm').prop('fields')).toMatchObject(
+    expect(wrapper.find('ReduxForm').prop('fields')[2]).toMatchObject(
       {
         name: 'plainPassword',
         label: 'Créez un mot de passe',
@@ -102,7 +97,7 @@ describe('<RegistrationForm />', () => {
         placeholder: 'Je suis...',
       }
     );
-    expect(select.label).toBeDefined;
+    expect(select.label).toBeDefined();
   });
 
   it('renders a charte checkbox', () => {
@@ -116,6 +111,6 @@ describe('<RegistrationForm />', () => {
         id: '_charte',
       }
     );
-    expect(checkbox.label).toBeDefined;
+    expect(checkbox.label).toBeDefined();
   });
 });

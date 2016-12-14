@@ -1,9 +1,7 @@
 /* eslint-env jest */
-/* eslint no-unused-expressions:0 */
 import React from 'react';
-
 import { shallow } from 'enzyme';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
 import ProposalDetailLikers from './ProposalDetailLikers';
 import ProposalDetailLikersTooltipLabel from './ProposalDetailLikersTooltipLabel';
 import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';

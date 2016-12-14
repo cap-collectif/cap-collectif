@@ -1,5 +1,5 @@
 /* eslint-env jest */
-/* eslint no-unused-expressions:0 */
+
 
 import React from 'react';
 

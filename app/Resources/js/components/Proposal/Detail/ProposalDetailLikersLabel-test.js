@@ -1,7 +1,5 @@
 /* eslint-env jest */
-/* eslint no-unused-expressions:0 */
 import React from 'react';
-
 import { shallow } from 'enzyme';
 import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
 import IntlData from '../../../translations/FR';
