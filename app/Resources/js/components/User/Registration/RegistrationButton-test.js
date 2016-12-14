@@ -1,7 +1,5 @@
 /* eslint-env jest */
-
 import React from 'react';
-
 import { shallow } from 'enzyme';
 import { RegistrationButton } from './RegistrationButton';
 import IntlData from '../../../translations/FR';

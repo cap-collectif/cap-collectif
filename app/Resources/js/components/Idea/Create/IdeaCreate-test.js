@@ -1,7 +1,5 @@
 /* eslint-env jest */
-
 import React from 'react';
-
 import { shallow } from 'enzyme';
 import IdeaCreate from './IdeaCreate';
 import IdeaCreateButton from './IdeaCreateButton';

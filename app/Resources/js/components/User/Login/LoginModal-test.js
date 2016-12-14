@@ -1,7 +1,5 @@
 /* eslint-env jest */
-
 import React from 'react';
-
 import { shallow } from 'enzyme';
 import { LoginModal } from './LoginModal';
 import IntlData from '../../../translations/FR';

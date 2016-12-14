@@ -1,7 +1,5 @@
 /* eslint-env jest */
-
 import React from 'react';
-
 import { shallow } from 'enzyme';
 import OpinionEditForm from './OpinionEditForm';
 import IntlData from '../../../translations/FR';
@@ -64,6 +62,6 @@ describe('<OpinionEditForm />', () => {
       body: props.opinion.body,
     });
     expect(form.prop('onSubmitFail')).toEqual(props.onFailure);
-    expect(form.prop('onSubmit')).toBeDefined();;
+    expect(form.prop('onSubmit')).toBeDefined();
   });
 });

@@ -1,11 +1,8 @@
 /* eslint-env jest */
-
 import React from 'react';
-
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import IdeaPageTrashBlock from './IdeaPageTrashBlock';
-
 
 const ideaNotTrashed = {
   id: 1,

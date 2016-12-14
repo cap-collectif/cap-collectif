@@ -1,7 +1,5 @@
 /* eslint-env jest */
-
 import React from 'react';
-
 import { shallow } from 'enzyme';
 import IdeaDeleteModal from './IdeaDeleteModal';
 import IntlData from '../../../translations/FR';
