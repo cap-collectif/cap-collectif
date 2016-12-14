@@ -1,10 +1,11 @@
 capco_admin:
   resource: "@CapcoAdminBundle/Controller/"
-  type:     annotation
-  prefix:   /
+  type: annotation
+  prefix: /
 
 overblog_graphql_endpoint:
-    resource: "@OverblogGraphQLBundle/Resources/config/routing/graphql.yml"
+  resource: "@OverblogGraphQLBundle/Resources/config/routing/graphql.yml"
+  prefix: /graphql
 
 # API
 
@@ -205,7 +206,7 @@ media:
 # liip imagine
 _imagine:
     resource: .
-    type:     imagine
+    type: imagine
 
 #HWIOAuthBundle routes
 hwi_oauth:
@@ -229,4 +230,4 @@ NelmioApiDocBundle:
 # last...
 capco_app_cms:
     resource: "@CapcoAppBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix: /
