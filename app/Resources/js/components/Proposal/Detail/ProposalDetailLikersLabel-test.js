@@ -24,7 +24,7 @@ describe('<ProposalDetailLikersLabel />', () => {
 
   it('should render truncated liker name when only one liker', () => {
     const wrapper = shallow(<ProposalDetailLikersLabel likers={oneLiker} {...IntlData} />);
-    expect(wrapper.find('Truncate').prop('children')).to.equal(oneLiker[0].displayName);
+    expect(wrapper.find('Truncate').prop('children')).to.equal('user with a very long name that need to be truncated');
   });
 
   it('should render a <FormattedMessage/> when several likers', () => {

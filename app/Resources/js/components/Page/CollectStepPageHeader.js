@@ -4,12 +4,18 @@ import ProposalCreate from '../Proposal/Create/ProposalCreate';
 
 const CollectStepPageHeader = React.createClass({
   propTypes: {
-    count: PropTypes.number.isRequired,
+    count: PropTypes.number,
     countFusions: PropTypes.number,
     form: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      count: 0,
+    };
+  },
 
   render() {
     const {

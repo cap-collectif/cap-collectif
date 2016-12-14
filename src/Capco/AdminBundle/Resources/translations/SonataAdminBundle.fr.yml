@@ -728,7 +728,6 @@ admin:
       nb_versions_to_display: Nombre de modifications dans l'aperçu du classement
       no_proposal_form: Aucun formulaire
       no_questionnaire: Aucun questionnaire
-      opinionCountShownBySection: Nombre de propositions affichées par section
       position: Position
       project: Projet
       proposal_form: Formulaire

@@ -6,7 +6,7 @@ import { reducer as reportReducer } from '../redux/modules/report';
 import { reducer as projectReducer, saga as projectSaga } from '../redux/modules/project';
 import { reducer as ideaReducer, saga as ideaSaga } from '../redux/modules/idea';
 import { reducer as proposalReducer, saga as proposalSaga } from '../redux/modules/proposal';
-import { reducer as opinionReducer } from '../redux/modules/opinion';
+import { reducer as opinionReducer, saga as opinionSaga } from '../redux/modules/opinion';
 
 export default function configureStore(initialState) {
   if (initialState.default.user === null) {
@@ -38,6 +38,7 @@ export default function configureStore(initialState) {
   sagaMiddleware.run(ideaSaga);
   sagaMiddleware.run(proposalSaga);
   sagaMiddleware.run(projectSaga);
+  sagaMiddleware.run(opinionSaga);
 
   return store;
 }
