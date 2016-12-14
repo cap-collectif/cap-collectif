@@ -376,7 +376,7 @@ hslavich_simplesamlphp:
 
 overblog_graphql:
     definitions:
-        show_debug_info: true
+        show_debug_info: %kernel.debug%
         internal_error_message: "An error occurred, please retry later or contact us!"
         config_validation: %kernel.debug%
         schema:
