@@ -13,7 +13,7 @@
     "build-server-bundle": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-server-bundle:prod": "LOGGY_STACKS=true NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js",
-    "lint": "./node_modules/eslint/bin/eslint.js --cache --fix  app/Resources/js"
+    "lint": "./node_modules/eslint/bin/eslint.js --cache --fix app/Resources/js"
   },
   "repository": {
     "type": "git",
@@ -31,9 +31,9 @@
     "testEnvironment": "jsdom",
     "testRegex": "\\-test.js$",
     "setupFiles": [
-      "jest-setup.js"
+      "<rootDir>/jest-setup.js"
     ],
-    "snapshotSerializer": [
+    "snapshotSerializers": [
       "<rootDir>/node_modules/jest-serializer-enzyme"
     ],
     "transform": {
@@ -45,8 +45,8 @@
     "autosize": "^3.0.15",
     "babel-brunch": "^6.0.6",
     "babel-core": "^6.20.0",
-    "babel-jest": "^17.0.2",
-    "babel-loader": "^6.2.9",
+    "babel-jest": "^18.0.0",
+    "babel-loader": "^6.2.10",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-react-display-name": "^2.0.0",
     "babel-plugin-transform-class-properties": "^6.11.5",
@@ -68,7 +68,7 @@
     "fancybox": "^3.0.0",
     "flat": "^2.0.1",
     "flux": "^2.1.1",
-    "imports-loader": "^0.6.5",
+    "imports-loader": "^0.7.0",
     "javascript-brunch": "^2.0.0",
     "jquery": "^3.1.0",
     "json-brunch": "^1.5.4",
@@ -123,7 +123,7 @@
     "eslint-plugin-react": "^6.3.0",
     "fb-flo-brunch": "^1.7.22",
     "flow-bin": "^0.37.0",
-    "jest": "^17.0.3",
+    "jest": "^18.0.0",
     "jest-serializer-enzyme": "^1.0.0",
     "react-addons-test-utils": "^15.3.1"
   }

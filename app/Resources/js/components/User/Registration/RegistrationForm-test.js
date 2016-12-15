@@ -3,7 +3,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationForm } from './RegistrationForm';
 import IntlData from '../../../translations/FR';
-import '../../../../../../__helper';
 
 describe('<RegistrationForm />', () => {
   const props = {

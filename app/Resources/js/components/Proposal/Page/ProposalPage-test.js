@@ -5,7 +5,6 @@ import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { ProposalPage } from './ProposalPage';
 import IntlData from '../../../translations/FR';
 import { VOTE_TYPE_SIMPLE, VOTE_TYPE_DISABLED } from '../../../constants/ProposalConstants';
-import '../../../../../../__helper';
 
 describe('<ProposalPage />', () => {
   const props = {

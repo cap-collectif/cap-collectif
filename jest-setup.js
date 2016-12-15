@@ -1,7 +1,10 @@
-global.window.__SERVER__ = false;
+import 'babel-polyfill';
+
 global.$ = require('jquery')(window);
 
-const throwError = warning => {
+global.window.__SERVER__ = false;
+
+const throwError = (warning) => {
   if (!/node-uuid: crypto not usable|You are manually calling|Unknown props/.test(warning)) { // fix warnings and remove this
     throw new Error(warning);
   }

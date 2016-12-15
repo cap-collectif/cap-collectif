@@ -36,7 +36,7 @@ export const OPINION_VOTES_FETCH_REQUESTED = 'opinion/OPINION_VOTES_FETCH_REQUES
 export const OPINION_VOTES_FETCH_SUCCEEDED = 'opinion/OPINION_VOTES_FETCH_SUCCEEDED';
 export const OPINION_VOTES_FETCH_FAILED = 'opinion/OPINION_VOTES_FETCH_FAILED';
 
-const initialState = {
+const initialState: State = {
   currentOpinionId: null,
   opinionsById: {},
   currentVersionId: null,

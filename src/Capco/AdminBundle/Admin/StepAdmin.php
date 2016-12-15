@@ -150,7 +150,7 @@ class StepAdmin extends Admin
                 ])
                 ->add('opinionCountShownBySection', null, [
                   'label' => 'admin.fields.step.opinionCountShownBySection',
-                  'required' => true
+                  'required' => true,
                 ])
             ;
         } elseif ($subject instanceof SynthesisStep) {
