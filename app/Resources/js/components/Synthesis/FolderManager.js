@@ -61,7 +61,7 @@ const FolderManager = React.createClass({
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(
       synthesis.id,
-      'notIgnored'
+      'notIgnored',
     );
   },
 

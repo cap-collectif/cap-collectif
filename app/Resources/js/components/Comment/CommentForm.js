@@ -3,17 +3,15 @@ import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
+import { Row, Col, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
-
-
 import UserAvatar from '../User/UserAvatar';
 import FlashMessages from '../Utils/FlashMessages';
 import FormMixin from '../../utils/FormMixin';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 import Input from '../Form/Input';
-import { Row, Col, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
 
 const CommentForm = React.createClass({
   propTypes: {
@@ -251,7 +249,7 @@ const CommentForm = React.createClass({
       <div className={classes} style={{ padding: '5px' }}>
         <UserAvatar user={user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock">
-          <form ref={(c) => this.form = c}>
+          <form ref={c => this.form = c}>
             <Input
               type="textarea"
               name="body"

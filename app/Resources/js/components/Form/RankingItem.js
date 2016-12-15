@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { DragSource } from 'react-dnd';
+import classNames from 'classnames';
 import { ITEM_TYPE } from '../../constants/RankingConstants';
 import RankingArrows from './RankingArrows';
-import classNames from 'classnames';
 
 const itemSource = {
   beginDrag(props) {
@@ -68,7 +68,7 @@ const RankingItem = React.createClass({
           arrowFunctions={arrowFunctions}
           disabled={disabled}
         />
-      </div>
+      </div>,
     );
   },
 

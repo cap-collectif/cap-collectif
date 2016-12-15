@@ -1,12 +1,11 @@
 /* eslint-env jest */
-
+import { call, put } from 'redux-saga/effects';
 import {
   reducer,
   fetchPosts,
   POSTS_FETCH_SUCCEEDED,
   POSTS_FETCH_FAILED,
 } from './proposal';
-import { call, put } from 'redux-saga/effects';
 import Fetcher from '../../services/Fetcher';
 
 describe('Proposal Reducer', () => {
@@ -47,7 +46,7 @@ describe('Proposal Sagas', () => {
         type: POSTS_FETCH_SUCCEEDED,
         proposalId: 1,
         posts,
-      })
+      }),
     );
 
     expect(generator.throw({}).value).toEqual(put({ type: POSTS_FETCH_FAILED, error: {} }));

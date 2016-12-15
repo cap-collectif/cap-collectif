@@ -174,7 +174,7 @@ const ImageUpload = React.createClass({
                   type="checkbox"
                   name="image-uploader__delete"
                   onChange={this.onToggleDelete}
-                  ref={(c) => this._deleteCheckbox = c}
+                  ref={c => this._deleteCheckbox = c}
                   label={this.getIntlMessage('global.image_uploader.image.delete')}
                 />
             }

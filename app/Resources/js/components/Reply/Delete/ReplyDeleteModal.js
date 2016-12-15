@@ -1,8 +1,8 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
+import { Modal } from 'react-bootstrap';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
-import { Modal } from 'react-bootstrap';
 import ReplyActions from '../../../actions/ReplyActions';
 
 const ReplyDeleteModal = React.createClass({

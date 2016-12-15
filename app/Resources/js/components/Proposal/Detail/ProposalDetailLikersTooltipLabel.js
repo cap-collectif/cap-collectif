@@ -21,7 +21,7 @@ const ProposalDetailLikersTooltipLabel = React.createClass({
       );
     }
     if (likers.length > 1) {
-      const message = likers.map((liker) => liker.displayName).join('<br/>');
+      const message = likers.map(liker => liker.displayName).join('<br/>');
       return (
         <span>
           <FormattedMessage

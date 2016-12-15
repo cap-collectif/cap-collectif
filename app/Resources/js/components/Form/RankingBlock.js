@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import RankingBox from './RankingBox';
 import { Row, Col, ListGroup } from 'react-bootstrap';
 import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import { ITEM_TYPE } from '../../constants/RankingConstants';
 import ReactDOM from 'react-dom';
+import RankingBox from './RankingBox';
+import { ITEM_TYPE } from '../../constants/RankingConstants';
 
 const itemTarget = {
   drop() {},
@@ -104,7 +104,7 @@ const RankingBlock = React.createClass({
             </h5>
             <ListGroup className="ranking__pick-box">
               <RankingBox
-                ref={(c) => this.pickBox = c}
+                ref={c => this.pickBox = c}
                 items={items.pickBox}
                 spotsNb={spotsNb}
                 listType="pickBox"
@@ -123,7 +123,7 @@ const RankingBlock = React.createClass({
               style={{ height: choicesHeight }}
             >
               <RankingBox
-                ref={(c) => this.choiceBox = c}
+                ref={c => this.choiceBox = c}
                 items={items.choiceBox}
                 spotsNb={spotsNb}
                 listType="choiceBox"
@@ -144,7 +144,7 @@ const RankingBlock = React.createClass({
             </ListGroup>
           </Col>
         </Row>
-      </div>
+      </div>,
     );
   },
 

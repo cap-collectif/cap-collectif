@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import UserAvatar from '../../User/UserAvatar';
-import { Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Nav, NavDropdown, MenuItem } from 'react-bootstrap';
+import UserAvatar from '../../User/UserAvatar';
 
 export const MainNavbarUser = React.createClass({
   displayName: 'MainNavbarUser',

@@ -8,7 +8,7 @@ export const START_LOADING = 'report/START_LOADING';
 export const STOP_LOADING = 'report/STOP_LOADING';
 export const ADD_REPORTED = 'report/ADD_REPORTED';
 
-const baseUrl = (opinion) => opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
+const baseUrl = opinion => opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
 
 const initialState = {
   currentReportingModal: null,
@@ -74,7 +74,7 @@ export const submitIdeaReport = (idea, data, dispatch) => {
     `/ideas/${idea}/reports`,
     data,
     dispatch,
-    'alert.success.report.idea'
+    'alert.success.report.idea',
   );
 };
 
@@ -83,7 +83,7 @@ export const submitSourceReport = (opinion, sourceId, data, dispatch) => {
     `/${baseUrl(opinion)}/${opinion.id}/sources/${sourceId}/reports`,
     data,
     dispatch,
-    'alert.success.report.source'
+    'alert.success.report.source',
   );
 };
 
@@ -92,7 +92,7 @@ export const submitArgumentReport = (opinion, argument, data, dispatch) => {
     `/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}/reports`,
     data,
     dispatch,
-    'alert.success.report.argument'
+    'alert.success.report.argument',
   );
 };
 
@@ -101,7 +101,7 @@ export const submitOpinionReport = (opinion, data, dispatch) => {
     `/${baseUrl(opinion)}/${opinion.id}/reports`,
     data,
     dispatch,
-    'alert.success.report.opinion'
+    'alert.success.report.opinion',
   );
 };
 
@@ -110,7 +110,7 @@ export const submitCommentReport = (comment, data, dispatch) => {
     `/comments/${comment.id}/reports`,
     data,
     dispatch,
-    'alert.success.report.comment'
+    'alert.success.report.comment',
   );
 };
 
@@ -119,7 +119,7 @@ export const submitProposalReport = (proposal, data, dispatch) => {
     `/proposals/${proposal.id}/reports`,
     data,
     dispatch,
-    'alert.success.report.proposal'
+    'alert.success.report.proposal',
   );
 };
 

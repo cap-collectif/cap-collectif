@@ -74,7 +74,7 @@ export const ProposalAdminSelections = React.createClass({
                             type="select"
                             style={{ marginBottom: 0 }}
                             value={s.status ? s.status.id : -1}
-                            onChange={e => { updateStepStatus(dispatch, proposalId, s, e.target.value); }}
+                            onChange={(e) => { updateStepStatus(dispatch, proposalId, s, e.target.value); }}
                           >
                             <option value={-1}>Aucun statut</option>
                             {
@@ -93,7 +93,7 @@ export const ProposalAdminSelections = React.createClass({
                       </Well>
                     </div>
                 }
-              </ListGroupItem>
+              </ListGroupItem>,
             )
             }
           </ListGroup>
@@ -107,7 +107,7 @@ export default connect((state, props) => {
   const steps = state.project.projectsById[props.projectId].steps;
   const proposal = state.proposal.proposalsById[props.proposalId];
   return {
-    steps: steps.filter(s => s.step_type === 'collect' || s.step_type === 'selection').map(s => {
+    steps: steps.filter(s => s.step_type === 'collect' || s.step_type === 'selection').map((s) => {
       const selectionAsArray = proposal.selections.filter(sel => sel.step.id === s.id);
       s.isSelected = s.step_type === 'collect' || selectionAsArray.length > 0;
       if (s.step_type === 'collect') {

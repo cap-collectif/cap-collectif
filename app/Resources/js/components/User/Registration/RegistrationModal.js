@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { Modal, Alert } from 'react-bootstrap';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import RegistrationForm from './RegistrationForm';
 import { LoginSocialButtons } from '../Login/LoginSocialButtons';
-import { connect } from 'react-redux';
 
 export const RegistrationModal = React.createClass({
   propTypes: {
@@ -57,7 +57,9 @@ export const RegistrationModal = React.createClass({
         enforceFocus={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg" children={this.getIntlMessage('global.register')} />
+          <Modal.Title id="contained-modal-title-lg">
+            {this.getIntlMessage('global.register')}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {
@@ -74,7 +76,7 @@ export const RegistrationModal = React.createClass({
             prefix="registration."
           />
           <RegistrationForm
-            ref={(c) => this.form = c}
+            ref={c => this.form = c}
             onSubmitFail={this.stopSubmit}
             onSubmitSuccess={this.handleSubmitSuccess}
           />

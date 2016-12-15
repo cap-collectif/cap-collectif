@@ -54,7 +54,7 @@ const ProposalPageVotes = React.createClass({
                 user={vote.user}
                 username={vote.username}
                 className="proposal__vote"
-              />
+              />,
             )
           }
         </Row>

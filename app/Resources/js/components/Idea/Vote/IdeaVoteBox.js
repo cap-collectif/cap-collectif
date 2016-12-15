@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
 import IdeaCreateVoteForm from './IdeaCreateVoteForm';
 import IdeaDeleteVoteForm from './IdeaDeleteVoteForm';
-import { connect } from 'react-redux';
 
 export const IdeaVoteBox = React.createClass({
   displayName: 'IdeaVoteBox',

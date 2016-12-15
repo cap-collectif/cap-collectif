@@ -1,9 +1,9 @@
 import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
+import { Modal } from 'react-bootstrap';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import IdeaActions from '../../../actions/IdeaActions';
-import { Modal } from 'react-bootstrap';
 
 const IdeaDeleteModal = React.createClass({
   propTypes: {

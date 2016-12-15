@@ -15,7 +15,7 @@ const IdeasList = React.createClass({
       return (
         <Row>
           {
-            ideas.map((idea) => <IdeaListItem key={idea.id} idea={idea} />)
+            ideas.map(idea => <IdeaListItem key={idea.id} idea={idea} />)
           }
         </Row>
       );

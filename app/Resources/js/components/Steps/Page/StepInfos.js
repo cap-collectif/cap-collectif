@@ -1,7 +1,7 @@
 import React from 'react';
+import { IntlMixin } from 'react-intl';
 import CountersNav from './CountersNav';
 import StepText from './StepText';
-import { IntlMixin } from 'react-intl';
 
 const StepInfos = React.createClass({
   displayName: 'StepInfos',

@@ -11,7 +11,7 @@ const Captcha = React.createClass({
     const { onChange } = this.props;
     return (
         <ReCAPTCHA
-          ref={(c) => this.captcha = c}
+          ref={c => this.captcha = c}
           style={{ transform: 'scale(0.85)', transformOrigin: '0 0' }}
           sitekey="6LctYxsTAAAAANsAl06GxNeV5xGaPjy5jbDe-J8M"
           onChange={onChange}

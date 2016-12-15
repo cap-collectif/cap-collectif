@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import LoginOverlay from '../../Utils/LoginOverlay';
 import { Button } from 'react-bootstrap';
+import LoginOverlay from '../../Utils/LoginOverlay';
 
 const OpinionLinkCreateButton = React.createClass({
   propTypes: {

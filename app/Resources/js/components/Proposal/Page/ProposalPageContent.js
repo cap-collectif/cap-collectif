@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-import ProposalFusionList from './ProposalFusionList';
 import classNames from 'classnames';
+import ProposalFusionList from './ProposalFusionList';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
 import ProposalEditModal from '../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
@@ -65,7 +65,7 @@ const ProposalPageContent = React.createClass({
             <ProposalResponse
               key={index}
               response={response}
-            />
+            />,
           )
         }
         <div className="block proposal__buttons">

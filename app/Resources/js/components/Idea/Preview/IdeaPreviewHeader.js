@@ -1,8 +1,8 @@
 import React from 'react';
 import moment from 'moment';
+import { FormattedDate } from 'react-intl';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
-import { FormattedDate } from 'react-intl';
 
 const IdeaPreviewHeader = React.createClass({
   propTypes: {

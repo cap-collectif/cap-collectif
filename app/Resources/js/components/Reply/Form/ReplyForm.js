@@ -164,7 +164,7 @@ const ReplyForm = React.createClass({
       reply.responses,
       { field: { id } },
       'field',
-      'id'
+      'id',
     );
     if (index > -1) {
       return reply.responses[index].value;

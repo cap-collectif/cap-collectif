@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
 import RadioGroup from 'react-radio';
+import classNames from 'classnames';
 import Input from './Input';
 import Other from './Other';
-import classNames from 'classnames';
 
 const Radio = React.createClass({
   propTypes: {

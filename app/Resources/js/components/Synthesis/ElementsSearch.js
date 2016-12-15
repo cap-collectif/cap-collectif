@@ -82,7 +82,7 @@ const ElementsSearch = React.createClass({
       synthesis.id,
       term,
       this.state.offset,
-      this.state.limit
+      this.state.limit,
     );
   },
 

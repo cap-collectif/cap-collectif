@@ -1,9 +1,9 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
+import { Modal } from 'react-bootstrap';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ReplyForm from '../Form/ReplyForm';
-import { Modal } from 'react-bootstrap';
 
 const ReplyEditModal = React.createClass({
   propTypes: {

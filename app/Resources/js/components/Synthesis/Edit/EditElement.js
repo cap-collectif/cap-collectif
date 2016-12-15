@@ -80,7 +80,7 @@ const EditElement = React.createClass({
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementFromServer(
       synthesis.id,
-      id
+      id,
     );
   },
 

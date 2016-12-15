@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-import { fetchProjects } from '../../../redux/modules/project';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
+import { fetchProjects } from '../../../redux/modules/project';
 import Fetcher from '../../../services/Fetcher';
 import { renderSelect } from '../../Form/Select';
 
 const formName = 'proposal';
-const validate = values => {
+const validate = (values) => {
   const errors = {};
   if (values.childConnections && values.childConnections.length < 2) {
     errors.childConnections = 'Sélectionnez au moins 2 propositions.';
@@ -67,15 +67,15 @@ export const ProposalFusionForm = React.createClass({
   },
 });
 
-const getBudgetProjects = projects => {
+const getBudgetProjects = (projects) => {
   return projects.filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
 };
 
-const getSelectedProjectId = state => {
+const getSelectedProjectId = (state) => {
   return parseInt(formValueSelector(formName)(state, 'project'), 10);
 };
 
-const getCurrentCollectStep = state => {
+const getCurrentCollectStep = (state) => {
   const selectedProject = getSelectedProjectId(state);
   if (!selectedProject) {
     return null;
@@ -88,7 +88,7 @@ export default connect(state =>
     projects: getBudgetProjects(state.project.projects),
     currentCollectStep: getCurrentCollectStep(state),
   }),
-   { onMount: fetchProjects, onProjectChange: change }
+   { onMount: fetchProjects, onProjectChange: change },
 )(reduxForm({
   form: formName,
   destroyOnUnmount: false,

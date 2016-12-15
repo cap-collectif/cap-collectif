@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import renderComponent from '../../Form/Field';
 import { connect } from 'react-redux';
+import { Alert } from 'react-bootstrap';
 import { reduxForm, formValueSelector, Field } from 'redux-form';
 import { vote } from '../../../redux/modules/proposal';
-import { Alert } from 'react-bootstrap';
 import { isEmail } from '../../../services/Validator';
+import renderComponent from '../../Form/Field';
 
 const form = 'proposalVote';
 const validate = (values, { anonymous }) => {

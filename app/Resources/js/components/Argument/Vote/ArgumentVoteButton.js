@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
-import LoginOverlay from '../../Utils/LoginOverlay';
 import { connect } from 'react-redux';
+import LoginOverlay from '../../Utils/LoginOverlay';
 
 const ArgumentVoteButton = React.createClass({
   propTypes: {

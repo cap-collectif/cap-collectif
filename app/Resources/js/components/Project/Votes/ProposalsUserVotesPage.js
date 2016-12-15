@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import ProposalUserVoteItem from './ProposalUserVoteItem';
 import { Table } from 'react-bootstrap';
-import { IntlMixin, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { connect } from 'react-redux';
+import { IntlMixin, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import ProposalUserVoteItem from './ProposalUserVoteItem';
+import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
 const ProposalsUserVotesPage = React.createClass({
   propTypes: {
@@ -66,7 +66,7 @@ const ProposalsUserVotesPage = React.createClass({
                             key={index2}
                             proposal={proposal}
                             step={step}
-                          />
+                          />,
                         )
                       }
                       </tbody>

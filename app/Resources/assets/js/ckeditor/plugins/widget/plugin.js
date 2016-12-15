@@ -14,9 +14,7 @@
 	var DRAG_HANDLER_SIZE = 15;
 
 	CKEDITOR.plugins.add( 'widget', {
-		// jscs:disable maximumLineLength
 		lang: 'af,ar,ca,cs,cy,da,de,el,en,en-gb,eo,es,fa,fi,fr,gl,he,hr,hu,it,ja,km,ko,ku,nb,nl,no,pl,pt,pt-br,ru,sk,sl,sq,sv,tr,tt,uk,vi,zh,zh-cn', // %REMOVE_LINE_CORE%
-		// jscs:enable maximumLineLength
 		requires: 'lineutils,clipboard',
 		onLoad: function() {
 			CKEDITOR.addCss(

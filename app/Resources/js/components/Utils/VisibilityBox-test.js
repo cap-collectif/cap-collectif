@@ -13,7 +13,7 @@ describe('<VisibilityBox />', () => {
     const wrapper = shallow(
       <VisibilityBox {...props}>
         <div className="foo" />
-      </VisibilityBox>
+      </VisibilityBox>,
     );
     expect(wrapper.html()).toEqual('<div class="foo"></div>');
   });
@@ -22,7 +22,7 @@ describe('<VisibilityBox />', () => {
     const wrapper = shallow(
       <VisibilityBox enabled user={{}} {...props}>
         <div className="foo" />
-      </VisibilityBox>
+      </VisibilityBox>,
     );
     expect(wrapper.find('.foo').html()).toEqual('<div class="foo"></div>');
     expect(wrapper.find('#privateInfo')).toHaveLength(1);
@@ -33,7 +33,7 @@ describe('<VisibilityBox />', () => {
     const wrapper = shallow(
       <VisibilityBox enabled user={null} {...props}>
         <div className="foo" />
-      </VisibilityBox>
+      </VisibilityBox>,
     );
     expect(wrapper.find('Jumbotron')).toHaveLength(1);
     expect(wrapper.children().find('LoginButton')).toHaveLength(1);

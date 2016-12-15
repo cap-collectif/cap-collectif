@@ -31,8 +31,8 @@ export default function configureStore(initialState) {
     initialState,
     compose(
       applyMiddleware(sagaMiddleware),
-      typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
-    )
+      typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f,
+    ),
   );
 
   sagaMiddleware.run(ideaSaga);

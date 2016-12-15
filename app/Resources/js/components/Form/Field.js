@@ -47,8 +47,9 @@ const Field = React.createClass({
         autoComplete={autoComplete}
         autoFocus={autoFocus || false}
         {...this.props.input}
-        children={children}
-      />
+      >
+        {children}
+      </Input>
     );
     if (divClassName) {
       return (

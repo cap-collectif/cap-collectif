@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import autosize from 'autosize';
+import { connect } from 'react-redux';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import ValidatorMixin from '../../../utils/ValidatorMixin';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArgumentActions from '../../../actions/ArgumentActions';
 import Input from '../../Form/Input';
-import { connect } from 'react-redux';
 
 const ArgumentCreate = React.createClass({
   propTypes: {

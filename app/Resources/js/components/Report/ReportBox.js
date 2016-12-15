@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import ReportModal from './ReportModal';
 import ReportButton from './ReportButton';
-import { connect } from 'react-redux';
 import { openModal } from '../../redux/modules/report';
 
 export const ReportBox = React.createClass({

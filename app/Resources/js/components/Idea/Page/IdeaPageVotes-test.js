@@ -46,7 +46,7 @@ describe('<IdeaPageVotes />', () => {
         fetchIdeaVotes={fetchIdeaVotes}
         idea={ideaWithNoVotes}
         {...IntlData}
-      />
+      />,
     );
     expect(wrapper.children()).toHaveLength(0);
   });
@@ -57,7 +57,7 @@ describe('<IdeaPageVotes />', () => {
         fetchIdeaVotes={fetchIdeaVotes}
         idea={idea}
         {...IntlData}
-      />
+      />,
     );
     expect(wrapper.find('.idea__votes')).toHaveLength(1);
     expect(wrapper.find('h2')).toHaveLength(1);
@@ -80,7 +80,7 @@ describe('<IdeaPageVotes />', () => {
         fetchIdeaVotes={fetchIdeaVotes}
         idea={ideaWithLoadsOfVotes}
         {...IntlData}
-      />
+      />,
     );
     expect(wrapper.find('.idea__votes__show-more')).toHaveLength(1);
   });

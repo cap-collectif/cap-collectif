@@ -41,7 +41,7 @@ const ProjectStatsFilters = React.createClass({
               themes.map(theme =>
                 <option key={theme.id} value={theme.id}>
                   {theme.title}
-                </option>
+                </option>,
               )
             }
           </Input>
@@ -60,7 +60,7 @@ const ProjectStatsFilters = React.createClass({
               districts.map(district =>
                 <option key={district.id} value={district.id}>
                   {district.name}
-                </option>
+                </option>,
               )
             }
           </Input>

@@ -1,9 +1,9 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import OpinionVotesButton from './OpinionVotesButton';
 import { ButtonToolbar } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import OpinionVotesButton from './OpinionVotesButton';
 
 const OpinionVotesButtons = React.createClass({
   propTypes: {

@@ -10,7 +10,7 @@ import {
 
 import { UPDATE_ALERT } from '../constants/AlertConstants';
 
-const baseUrl = (opinion) => opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
+const baseUrl = opinion => opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
 
 export default {
 

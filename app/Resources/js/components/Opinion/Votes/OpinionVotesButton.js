@@ -1,10 +1,10 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-import LoginOverlay from '../../Utils/LoginOverlay';
 import { Button } from 'react-bootstrap';
+import LoginOverlay from '../../Utils/LoginOverlay';
+import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import type { VoteValue } from '../../../redux/modules/opinion';
 import { deleteVoteVersion, deleteVoteOpinion, voteOpinion, voteVersion } from '../../../redux/modules/opinion';
 
@@ -14,13 +14,15 @@ const valueToObject = (value: VoteValue): Object => {
       style: 'danger',
       str: 'nok',
       icon: 'cap cap-hand-unlike-2-1',
-    }; }
+    };
+  }
   if (value === 0) {
     return {
       style: 'warning',
       str: 'mitige',
       icon: 'cap cap-hand-like-2 icon-rotate',
-    }; }
+    };
+  }
   return {
     style: 'success',
     str: 'ok',

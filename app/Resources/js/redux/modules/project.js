@@ -1,7 +1,7 @@
 import { takeEvery } from 'redux-saga';
 import { select, call, put } from 'redux-saga/effects';
-import Fetcher from '../../services/Fetcher';
 import { stringify } from 'qs';
+import Fetcher from '../../services/Fetcher';
 
 export const STEPS_FETCH_REQUESTED = 'project/STEPS_FETCH_REQUESTED';
 export const PROJECTS_FETCH_REQUESTED = 'project/PROJECTS_FETCH_REQUESTED';
@@ -35,11 +35,11 @@ const initialState = {
 
 export const loadSteps = projectId => ({ type: STEPS_FETCH_REQUESTED, projectId });
 export const fetchProjects = () => ({ type: PROJECTS_FETCH_REQUESTED });
-export const changePage = (page) => ({ type: CHANGE_PAGE, page });
-export const changeOrderBy = (orderBy) => ({ type: CHANGE_ORDER_BY, orderBy });
-export const changeType = (projectType) => ({ type: CHANGE_TYPE, projectType });
-export const changeTerm = (term) => ({ type: CHANGE_TERM, term });
-export const changeTheme = (theme) => ({ type: CHANGE_THEME, theme });
+export const changePage = page => ({ type: CHANGE_PAGE, page });
+export const changeOrderBy = orderBy => ({ type: CHANGE_ORDER_BY, orderBy });
+export const changeType = projectType => ({ type: CHANGE_TYPE, projectType });
+export const changeTerm = term => ({ type: CHANGE_TERM, term });
+export const changeTheme = theme => ({ type: CHANGE_THEME, theme });
 
 export function* fetchStepsSaga(action) {
   try {

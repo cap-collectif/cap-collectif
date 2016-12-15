@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import IdeaActions from '../../../actions/IdeaActions';
 import IdeaForm from '../Form/IdeaForm';
-import { connect } from 'react-redux';
 
 const IdeaCreateForm = React.createClass({
   propTypes: {
@@ -72,7 +72,7 @@ const IdeaCreateForm = React.createClass({
     const { features } = this.props;
     return (
       <IdeaForm
-        ref={(c) => this.ideaForm = c}
+        ref={c => this.ideaForm = c}
         {...this.props}
         showThemes={features.themes}
       />

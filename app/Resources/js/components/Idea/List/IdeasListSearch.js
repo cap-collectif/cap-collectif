@@ -1,9 +1,9 @@
 import React from 'react';
-import IdeaActions from '../../../actions/IdeaActions';
-import Input from '../../Form/Input';
 import { Button } from 'react-bootstrap';
-import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import { IntlMixin } from 'react-intl';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import Input from '../../Form/Input';
+import IdeaActions from '../../../actions/IdeaActions';
 
 const IdeasListSearch = React.createClass({
   propTypes: {
@@ -45,7 +45,7 @@ const IdeasListSearch = React.createClass({
         <Input
           id="idea-search-input"
           type="text"
-          ref={(c) => this._input = c}
+          ref={c => this._input = c}
           placeholder={this.getIntlMessage('idea.search')}
           buttonAfter={button}
           valueLink={this.linkState('value')}

@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
-import OpinionActions from '../../../actions/OpinionActions';
+import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
+import OpinionActions from '../../../actions/OpinionActions';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import { connect } from 'react-redux';
 
 const OpinionDelete = React.createClass({
   propTypes: {

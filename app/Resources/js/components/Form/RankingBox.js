@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import classNames from 'classnames';
 import RankingSpot from './RankingSpot';
 import RankingItem from './RankingItem';
-import classNames from 'classnames';
 
 const RankingBox = React.createClass({
   propTypes: {
@@ -34,17 +34,17 @@ const RankingBox = React.createClass({
             const item = items[i];
             const arrowFunctions = (listType === 'pickBox')
             ? {
-              right: (it) => moveItem('choiceBox', spotsNb, it),
+              right: it => moveItem('choiceBox', spotsNb, it),
             }
             : {
-              up: i > 0 ? (it) => moveItem('choiceBox', i - 1, it) : null,
-              down: i < (items.length - 1) ? (it) => moveItem('choiceBox', i + 1, it) : null,
-              left: (it) => moveItem('pickBox', spotsNb, it),
+              up: i > 0 ? it => moveItem('choiceBox', i - 1, it) : null,
+              down: i < (items.length - 1) ? it => moveItem('choiceBox', i + 1, it) : null,
+              left: it => moveItem('pickBox', spotsNb, it),
             };
             return (
               <RankingSpot
                 key={i}
-                onDrop={(it) => moveItem(listType, i, it)}
+                onDrop={it => moveItem(listType, i, it)}
               >
                 {
                   item

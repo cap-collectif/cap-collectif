@@ -78,7 +78,9 @@ const SynthesisBox = React.createClass({
       }
       if (mode === 'edit') {
         return (
-          <EditBox synthesis={this.state.synthesis} children={children} sideMenu={sideMenu} />
+          <EditBox synthesis={this.state.synthesis} sideMenu={sideMenu}>
+            {children}
+          </EditBox>
         );
       }
       return (

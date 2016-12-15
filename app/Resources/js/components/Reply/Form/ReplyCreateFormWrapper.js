@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
+import { Alert, Button } from 'react-bootstrap';
 import ReplyCreateForm from './ReplyCreateForm';
 import LoginButton from '../../User/Login/LoginButton';
 import RegistrationButton from '../../User/Registration/RegistrationButton';
-import { connect } from 'react-redux';
-import { Alert, Button } from 'react-bootstrap';
 import PhoneModal from '../../User/Phone/PhoneModal';
 
 export const ReplyCreateFormWrapper = React.createClass({

@@ -13,7 +13,7 @@ describe('<LoginOverlay />', () => {
     const wrapper = shallow(
       <LoginOverlay enabled={false} features={{ registration: true }} {...props}>
         <div className="foo" />
-      </LoginOverlay>
+      </LoginOverlay>,
     );
     expect(wrapper.html()).toEqual('<div class="foo"></div>');
   });
@@ -22,7 +22,7 @@ describe('<LoginOverlay />', () => {
     const wrapper = shallow(
       <LoginOverlay enabled user={{}} features={{ registration: true }} {...props}>
         <div className="foo" />
-      </LoginOverlay>
+      </LoginOverlay>,
     );
     expect(wrapper.html()).toEqual('<div class="foo"></div>');
   });
@@ -31,7 +31,7 @@ describe('<LoginOverlay />', () => {
     const wrapper = shallow(
       <LoginOverlay enabled user={null} features={{ registration: true }} {...props}>
         <div className="foo" />
-      </LoginOverlay>
+      </LoginOverlay>,
     );
     expect(wrapper.find('OverlayTrigger')).toHaveLength(1);
     expect(wrapper.find('OverlayTrigger').html()).toEqual('<div class="foo" aria-describedby="login-popover"></div>');

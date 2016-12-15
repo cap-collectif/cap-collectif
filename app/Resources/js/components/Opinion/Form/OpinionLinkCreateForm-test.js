@@ -27,7 +27,7 @@ describe('<OpinionLinkCreateForm />', () => {
     const form2 = wrapper.find('OpinionForm');
     expect(form2.prop('form')).toEqual('opinion-link-create-form');
     expect(form2.prop('validate')).toEqual(defaultValidation);
-    expect(form2.prop('onSubmit')).toBeDefined;
+    expect(form2.prop('onSubmit')).toBeDefined();
     expect(form2.prop('onSubmitFail')).toEqual(props.onFailure);
     expect(form2.prop('fields')).toEqual([
       { label: 'title', name: 'title', type: 'text', id: 'opinion_title' },

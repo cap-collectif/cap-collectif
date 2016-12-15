@@ -68,7 +68,7 @@ const ArgumentList = React.createClass({
     const { opinion } = this.props;
     ArgumentActions.load(
       opinion,
-      this.state.type
+      this.state.type,
     );
   },
 

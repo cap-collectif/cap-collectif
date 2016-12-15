@@ -3,7 +3,7 @@ import { IntlMixin } from 'react-intl';
 import OpinionForm from './OpinionForm';
 import Fetcher, { json } from '../../../services/Fetcher';
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
   if (!values.title || values.title.length < 2) {
     errors.title = 'opinion.constraints.title';
@@ -30,13 +30,13 @@ const OpinionEditForm = React.createClass({
     // We format appendices to call API (could be improved by changing api design)
     const appendices =
       Object.keys(data)
-      .filter((key) => key !== 'title' && key !== 'body' && key !== 'check')
+      .filter(key => key !== 'title' && key !== 'body' && key !== 'check')
       .map((key) => {
         return {
-          appendixType: opinion.appendices.filter((a) => a.type.title === key)[0].type.id,
+          appendixType: opinion.appendices.filter(a => a.type.title === key)[0].type.id,
           body: data[key],
         };
-      }
+      },
     );
     const form = {
       title: data.title,
@@ -83,7 +83,7 @@ const OpinionEditForm = React.createClass({
           { title: opinion.title,
             body: opinion.body,
           },
-          dynamicsInitialValues
+          dynamicsInitialValues,
         )}
       />
     );

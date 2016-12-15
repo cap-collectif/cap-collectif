@@ -21,7 +21,7 @@ describe('<IdeaReportButton />', () => {
     const reportBox = wrapper.find('Connect(ReportBox)');
     expect(reportBox).toHaveLength(1);
     expect(reportBox.prop('reported')).toEqual(props.idea.userHasReport);
-    expect(reportBox.prop('onReport')).toBeDefined;
+    expect(reportBox.prop('onReport')).toBeDefined();
     expect(reportBox.prop('author')).toEqual(props.idea.author);
     expect(reportBox.prop('buttonClassName')).toEqual('idea__btn--report');
   });

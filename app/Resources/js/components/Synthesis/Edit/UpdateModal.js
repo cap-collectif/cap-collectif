@@ -1,9 +1,9 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
+import { Button, Modal, Input } from 'react-bootstrap';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
 import ElementsFinder from './../ElementsFinder';
-import { Button, Modal, Input } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 
 const UpdateModal = React.createClass({
@@ -148,7 +148,7 @@ const UpdateModal = React.createClass({
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(
       synthesis.id,
-      'notIgnored'
+      'notIgnored',
     );
   },
 

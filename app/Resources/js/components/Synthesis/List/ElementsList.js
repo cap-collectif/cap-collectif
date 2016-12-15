@@ -1,7 +1,7 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import ElementListItem from './ElementListItem';
 import { Nav } from 'react-bootstrap';
+import ElementListItem from './ElementListItem';
 
 const ElementsList = React.createClass({
   propTypes: {

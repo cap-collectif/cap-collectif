@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
-import { openVoteModal, deleteVote } from '../../../redux/modules/proposal';
 import { connect } from 'react-redux';
+import { openVoteModal, deleteVote } from '../../../redux/modules/proposal';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 

@@ -48,7 +48,7 @@ const IdeaSidebar = React.createClass({
                 ? 'idea.vote.hide'
                 : idea.userHasVote
                   ? 'idea.vote.delete'
-                  : 'idea.vote.add'
+                  : 'idea.vote.add',
             )
           }
         </Button>

@@ -12,8 +12,8 @@
     "build:prod": "LOGGY_STACKS=true NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
     "build-server-bundle": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-server-bundle:prod": "LOGGY_STACKS=true NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
-    "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js && ./node_modules/jscs/bin/jscs app/Resources/js/translations/*.js",
-    "lint": "./node_modules/eslint/bin/eslint.js --cache --fix  app/Resources/js && ./node_modules/jscs/bin/jscs --fix app/Resources/js/translations/*.js"
+    "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js",
+    "lint": "./node_modules/eslint/bin/eslint.js --cache --fix  app/Resources/js"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,6 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jolicode/CapCollectif-SF2/issues"
-  },
-  "jscsConfig": {
-    "validateOrderInObjectKeys": "asc"
   },
   "jest": {
     "testPathDirs": [
@@ -115,20 +112,19 @@
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "enzyme": "^2.4.1",
-    "eslint": "^3.3.1",
+    "eslint": "^3.12.2",
     "eslint-brunch": "^3.12.0",
-    "eslint-config-airbnb": "^10.0.1",
+    "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-flowtype": "^2.29.1",
-    "eslint-plugin-flowtype-errors": "^1.5.0",
-    "eslint-plugin-import": "^1.16.0",
-    "eslint-plugin-jest": "^1.0.0",
-    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-flowtype-errors": "^2.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jest": "^1.0.2",
+    "eslint-plugin-jsx-a11y": "2.2.3",
     "eslint-plugin-react": "^6.3.0",
     "fb-flo-brunch": "^1.7.22",
     "flow-bin": "^0.37.0",
     "jest": "^17.0.3",
     "jest-serializer-enzyme": "^1.0.0",
-    "jscs": "^3.0.7",
     "react-addons-test-utils": "^15.3.1"
   }
 }

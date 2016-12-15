@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { Button, Collapse, Panel } from 'react-bootstrap';
+import { debounce } from 'lodash';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
-import { connect } from 'react-redux';
 import ProposalPrivateField from '../ProposalPrivateField';
-import { Button, Collapse, Panel } from 'react-bootstrap';
-import { debounce } from 'lodash';
 import { submitProposal, updateProposal, cancelSubmitProposal } from '../../../redux/modules/proposal';
 import { loadSuggestions } from '../../../actions/ProposalActions';
 
@@ -155,7 +155,7 @@ const ProposalForm = React.createClass({
       proposal.responses,
       { field: { id } },
       'field',
-      'id'
+      'id',
     );
     if (index > -1 && typeof proposal.responses[index].value !== 'undefined') {
       return proposal.responses[index].value;
@@ -179,7 +179,7 @@ const ProposalForm = React.createClass({
     if (title.length > 3) {
       this.setState({ isLoadingSuggestions: true });
       loadSuggestions(this.props.currentStepId, title)
-        .then(res => {
+        .then((res) => {
           if (this.state.form.title === title) { // last request only
             this.setState({
               suggestions: res.proposals,
@@ -311,7 +311,7 @@ const ProposalForm = React.createClass({
                       <a href={suggest._links.show} className="external-link">
                         { suggest.title }
                       </a>
-                    </li>
+                    </li>,
                   )
                 }
                 </ul>
@@ -334,7 +334,7 @@ const ProposalForm = React.createClass({
               themes.map(theme =>
                 <option key={theme.id} value={theme.id}>
                   {theme.title}
-                </option>
+                </option>,
               )
             }
           </Input>

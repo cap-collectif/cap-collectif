@@ -51,7 +51,7 @@ export const Post = React.createClass({
                     {
                         post.themes.length > i && ' '
                     }
-                  </span>
+                  </span>,
                 )
               }
               <FormattedMessage
@@ -79,7 +79,7 @@ export const Post = React.createClass({
                             {
                               post.authors.length > i + 1 && ', '
                             }
-                          </span>
+                          </span>,
                       )
                      }
                      </span>

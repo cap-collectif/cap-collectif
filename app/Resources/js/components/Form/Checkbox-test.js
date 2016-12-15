@@ -1,11 +1,11 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
+import CheckboxGroup from 'react-checkbox-group';
 import IntlData from '../../translations/FR';
 import Input from './Input';
 import Other from './Other';
 import Checkbox from './Checkbox';
-import CheckboxGroup from 'react-checkbox-group';
 
 describe('<Checkbox />', () => {
   const field = {

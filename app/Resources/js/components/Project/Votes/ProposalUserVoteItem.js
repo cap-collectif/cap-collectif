@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import UserLink from '../../User/UserLink';
+import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import UserLink from '../../User/UserLink';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalDetailsEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
 import { deleteVote } from '../../../redux/modules/proposal';
-import { connect } from 'react-redux';
 
 export const ProposalUserVoteItem = React.createClass({
   propTypes: {

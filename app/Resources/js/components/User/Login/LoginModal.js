@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button, Alert } from 'react-bootstrap';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import CloseButton from '../../Form/CloseButton';
 import LoginForm from './LoginForm';
 import { LoginSocialButtons } from './LoginSocialButtons';
-import { connect } from 'react-redux';
 
 export const LoginModal = React.createClass({
   propTypes: {

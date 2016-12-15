@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { submitCommentReport } from '../../redux/modules/report';
-import ReportBox from '../Report/ReportBox.js';
+import ReportBox from '../Report/ReportBox';
 
 const CommentReportButton = React.createClass({
   propTypes: {

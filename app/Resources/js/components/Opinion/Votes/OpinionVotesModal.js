@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
+import { Modal, Row } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import OpinionActions from '../../../actions/OpinionActions';
-import { Modal, Row } from 'react-bootstrap';
 import Loader from '../../Utils/Loader';
 import UserBox from '../../User/UserBox';
 

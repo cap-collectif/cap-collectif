@@ -66,7 +66,7 @@ const ProjectStatsList = React.createClass({
       type,
       DEFAULT_STATS_PAGINATION,
       this.state.theme,
-      this.state.district
+      this.state.district,
     )
       .then((response) => {
         this.setState({

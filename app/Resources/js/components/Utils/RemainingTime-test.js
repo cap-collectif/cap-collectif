@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
-import IntlData from '../../translations/FR';
 import { shallow } from 'enzyme';
+import IntlData from '../../translations/FR';
 import RemainingTime from './RemainingTime';
 
 describe('<RemainingTime />', () => {

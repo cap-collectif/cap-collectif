@@ -1,8 +1,8 @@
 /* eslint-env jest */
 import React from 'react';
-import IntlData from '../../translations/FR';
 import { shallow } from 'enzyme';
 import ReadMoreLink from './ReadMoreLink';
+import IntlData from '../../translations/FR';
 
 describe('<ReadMoreLink />', () => {
   const emptyFunction = () => {};

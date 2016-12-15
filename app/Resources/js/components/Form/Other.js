@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import Input from './Input';
 import { Row, Col } from 'react-bootstrap';
+import Input from './Input';
 
 const Other = React.createClass({
   propTypes: {

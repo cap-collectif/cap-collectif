@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-
+import { ButtonToolbar } from 'react-bootstrap';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import OpinionVersionForm from './OpinionVersionForm';
 import OpinionReportButton from './OpinionReportButton';
-import { ButtonToolbar } from 'react-bootstrap';
 import OpinionDelete from './Delete/OpinionDelete';
 import OpinionEditButton from './OpinionEditButton';
 

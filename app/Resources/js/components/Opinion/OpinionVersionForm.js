@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import FormMixin from '../../utils/FormMixin';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 import OpinionActions from '../../actions/OpinionActions';
 import LoginOverlay from '../Utils/LoginOverlay';
 import FlashMessages from '../Utils/FlashMessages';
 import Input from '../Form/Input';
-import { connect } from 'react-redux';
 
 const OpinionVersionForm = React.createClass({
   propTypes: {

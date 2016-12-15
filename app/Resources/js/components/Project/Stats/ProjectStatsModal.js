@@ -55,7 +55,7 @@ const ProjectStatsModal = React.createClass({
       type,
       null,
       theme,
-      district
+      district,
     )
       .then((response) => {
         this.setState({

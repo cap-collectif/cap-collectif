@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Row, Col, Tab, Nav, NavItem } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import ProposalPageHeader from './ProposalPageHeader';
 import ProposalPageAlert from './ProposalPageAlert';
 import ProposalPageContent from './ProposalPageContent';
@@ -14,7 +15,6 @@ import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
-import { connect } from 'react-redux';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
 
 export const ProposalPage = React.createClass({
@@ -156,7 +156,7 @@ export const ProposalPage = React.createClass({
                                 votableSteps.map((step, index) =>
                                   <NavItem key={index} eventKey={index}>
                                     {step.title} <span className="badge">{proposal.votesCountByStepId[step.id]}</span>
-                                  </NavItem>
+                                  </NavItem>,
                                 )
                               }
                             </Nav>
@@ -168,7 +168,7 @@ export const ProposalPage = React.createClass({
                                       stepId={step.id}
                                       proposal={proposal}
                                     />
-                                  </Tab.Pane>
+                                  </Tab.Pane>,
                                 )
                               }
                             </Tab.Content>

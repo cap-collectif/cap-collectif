@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
-import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 import { connect } from 'react-redux';
 import Truncate from 'react-truncate';
+import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
+import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 
 const ProposalPreviewBody = React.createClass({
   propTypes: {

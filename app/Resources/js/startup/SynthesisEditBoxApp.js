@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import SynthesisBox from '../components/Synthesis/SynthesisBox';
 import ReactOnRails from 'react-on-rails';
 import { Router, hashHistory, IndexRoute, Route } from 'react-router';
 import ElementsInbox from '../components/Synthesis/Inbox/ElementsInbox';
@@ -10,11 +9,9 @@ import Settings from '../components/Synthesis/Settings/Settings';
 import DisplaySettings from '../components/Synthesis/Settings/DisplaySettings';
 import EditElement from '../components/Synthesis/Edit/EditElement';
 import Preview from '../components/Synthesis/View/Preview';
+import SynthesisBox from '../components/Synthesis/SynthesisBox';
 
-// See documentation for https://github.com/reactjs/react-redux.
-// This is how you get props from the Rails view into the redux store.
-// This code here binds your smart component to the redux store.
-const mainNode = (props) => {
+export default (props) => {
   const store = ReactOnRails.getStore('appStore');
 
   const redirectToDefaultInbox = (nextState, replace) => {
@@ -31,17 +28,18 @@ const mainNode = (props) => {
 
   const SynthesisBoxWrapper = React.createClass({
     propTypes: {
-      children: React.PropTypes.object.isRequired,
+      children: PropTypes.object.isRequired,
     },
     render() {
       const { children } = this.props;
       const showSideMenu = children.type.displayName !== 'Settings';
       return (
         <SynthesisBox
-          children={children}
           {...props}
           sideMenu={showSideMenu}
-        />
+        >
+          {children}
+        </SynthesisBox>
       );
     },
   });
@@ -68,5 +66,3 @@ const mainNode = (props) => {
     </Provider>
   );
 };
-
-export default mainNode;

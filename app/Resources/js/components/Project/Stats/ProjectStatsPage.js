@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
-import ProjectStatsList from './ProjectStatsList';
 import { Nav, NavItem } from 'react-bootstrap';
+import ProjectStatsList from './ProjectStatsList';
 
 export const ProjectStatsPage = React.createClass({
   propTypes: {
@@ -69,7 +69,7 @@ export const ProjectStatsPage = React.createClass({
           selectedStep
             ? <div className="block stats__step-details">
               {
-                Object.keys(selectedStep.stats).map(key => {
+                Object.keys(selectedStep.stats).map((key) => {
                   return (
                     <ProjectStatsList
                       key={key}
@@ -101,5 +101,5 @@ export default connect(
   state => ({
     themes: state.default.themes,
     districts: state.default.districts,
-  })
+  }),
 )(ProjectStatsPage);

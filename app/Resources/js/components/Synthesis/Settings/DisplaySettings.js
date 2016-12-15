@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { Button } from 'react-bootstrap';
 import Input from '../../Form/Input';
 import SynthesisActions from '../../../actions/SynthesisActions';
-import { Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FormMixin from '../../../utils/FormMixin';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -41,7 +41,7 @@ const DisplaySettings = React.createClass({
       });
       SynthesisActions.updateDisplaySettings(
         synthesis.id,
-        { rules: this.state.form }
+        { rules: this.state.form },
       ).then(() => {
         SynthesisActions.load(synthesis.id);
         this.setState({

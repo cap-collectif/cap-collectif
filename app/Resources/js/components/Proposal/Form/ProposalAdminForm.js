@@ -7,7 +7,7 @@ import { renderSelect } from '../../Form/Select';
 
 const formName = 'proposal';
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
   if (!values.title) {
     errors.title = 'global.required';
@@ -119,7 +119,7 @@ export const ProposalAdminForm = React.createClass({
                   {!field.required && optional}
                 </span>
               }
-            />
+            />,
           )
         }
         <Field

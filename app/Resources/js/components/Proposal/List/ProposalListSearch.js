@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Input from '../../Form/Input';
+import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import { IntlMixin } from 'react-intl';
 import { changeTerm, loadProposals } from '../../../redux/modules/proposal';
+import Input from '../../Form/Input';
 
 const ProposalListSearch = React.createClass({
   propTypes: {
@@ -35,7 +35,7 @@ const ProposalListSearch = React.createClass({
         <Input
           id="proposal-search-input"
           type="text"
-          ref={(c) => this._input = c}
+          ref={c => this._input = c}
           placeholder={this.getIntlMessage('proposal.search')}
           buttonAfter={
             <Button id="proposal-search-button" type="submit">

@@ -34,13 +34,13 @@ const OpinionLinkCreateForm = React.createClass({
     // We format appendices to call API (could be improved by changing api design)
     const appendices =
       Object.keys(data)
-      .filter((key) => key !== 'title' && key !== 'body')
+      .filter(key => key !== 'title' && key !== 'body')
       .map((key) => {
         return {
           appendixType: availableTypes.filter(a => a.id === currentType.id)[0].appendixTypes.filter(t => t.title === key)[0].id,
           body: data[key],
         };
-      }
+      },
     );
     const form = {
       OpinionType: currentType.id,

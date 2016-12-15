@@ -31,12 +31,12 @@ export const renderSelect = React.createClass({
       meta: { touched, error },
       ...custom
     } = this.props;
-    const reactSelectToReduxForm = event => {
+    const reactSelectToReduxForm = (event) => {
       if (input.onChange) {
         input.onChange(
         Array.isArray(event)
         ? event.map(e => e.value || [])
-        : (event && event.value) || null
+        : (event && event.value) || null,
         );
       }
       if (typeof onChange === 'function') {

@@ -1,10 +1,10 @@
-import Fetcher, { json } from '../../services/Fetcher';
 import { takeEvery } from 'redux-saga';
 import { select, call, put } from 'redux-saga/effects';
-import FluxDispatcher from '../../dispatchers/AppDispatcher';
-import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import flatten from 'flat';
 import { SubmissionError } from 'redux-form';
+import Fetcher, { json } from '../../services/Fetcher';
+import FluxDispatcher from '../../dispatchers/AppDispatcher';
+import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
 
 export const POSTS_FETCH_REQUESTED = 'proposal/POSTS_FETCH_REQUESTED';
@@ -76,14 +76,14 @@ const initialState = {
   currentPaginationPage: 1,
 };
 
-export const loadSelections = (proposalId) => ({ type: LOAD_SELECTIONS_REQUEST, proposalId });
-export const loadSelectionsSucess = (proposalId) => ({ type: LOAD_SELECTIONS_SUCCEEDED, proposalId });
+export const loadSelections = proposalId => ({ type: LOAD_SELECTIONS_REQUEST, proposalId });
+export const loadSelectionsSucess = proposalId => ({ type: LOAD_SELECTIONS_SUCCEEDED, proposalId });
 export const closeCreateFusionModal = () => ({ type: CLOSE_CREATE_FUSION_MODAL });
 export const openCreateFusionModal = () => ({ type: OPEN_CREATE_FUSION_MODAL });
-export const submitFusionForm = (proposalForm) => ({ type: SUBMIT_FUSION_FORM, proposalForm });
-export const cancelSubmitFusionForm = (proposalForm) => ({ type: CANCEL_SUBMIT_FUSION_FORM, proposalForm });
-export const openVotesModal = (stepId) => ({ type: OPEN_VOTES_MODAL, stepId });
-export const closeVotesModal = (stepId) => ({ type: CLOSE_VOTES_MODAL, stepId });
+export const submitFusionForm = proposalForm => ({ type: SUBMIT_FUSION_FORM, proposalForm });
+export const cancelSubmitFusionForm = proposalForm => ({ type: CANCEL_SUBMIT_FUSION_FORM, proposalForm });
+export const openVotesModal = stepId => ({ type: OPEN_VOTES_MODAL, stepId });
+export const closeVotesModal = stepId => ({ type: CLOSE_VOTES_MODAL, stepId });
 export const voteSuccess = (proposalId, stepId, vote, comment) => ({
   type: VOTE_SUCCEEDED,
   proposalId,
@@ -97,7 +97,7 @@ export const loadVotes = (stepId, proposalId) => ({
   proposalId,
 });
 const deleteVoteSucceeded = (stepId, proposalId, vote) => ({ type: DELETE_VOTE_SUCCEEDED, proposalId, stepId, vote });
-const deleteVoteRequested = (proposalId) => ({
+const deleteVoteRequested = proposalId => ({
   type: DELETE_VOTE_REQUESTED,
   proposalId,
 });
@@ -110,11 +110,11 @@ export const editProposalForm = () => ({ type: EDIT_PROPOSAL_FORM });
 export const openCreateModal = () => ({ type: OPEN_CREATE_MODAL });
 export const cancelSubmitProposal = () => ({ type: CANCEL_SUBMIT_PROPOSAL });
 export const closeCreateModal = () => ({ type: CLOSE_CREATE_MODAL });
-export const openVoteModal = (id) => ({ type: OPEN_VOTE_MODAL, id });
+export const openVoteModal = id => ({ type: OPEN_VOTE_MODAL, id });
 export const closeVoteModal = () => ({ type: CLOSE_VOTE_MODAL });
-export const changePage = (page) => ({ type: CHANGE_PAGE, page });
-export const changeOrder = (order) => ({ type: CHANGE_ORDER, order });
-export const changeTerm = (terms) => ({
+export const changePage = page => ({ type: CHANGE_PAGE, page });
+export const changeOrder = order => ({ type: CHANGE_ORDER, order });
+export const changeTerm = terms => ({
   type: CHANGE_TERMS,
   terms,
 });
@@ -123,7 +123,7 @@ export const changeFilter = (filter, value) => ({
   filter,
   value,
 });
-export const loadProposals = (step) => ({ type: FETCH_REQUESTED, step });
+export const loadProposals = step => ({ type: FETCH_REQUESTED, step });
 
 export const deleteProposal = (form, proposal, dispatch) => {
   dispatch({ type: DELETE_REQUEST });
@@ -157,7 +157,7 @@ export const updateProposalStatus = (dispatch, proposalId, value) => {
   Fetcher
     .patch(`/proposals/${proposalId}`, { status: value })
     .then(json)
-    .then(status => {
+    .then((status) => {
       dispatch(updateProposalCollectStatusSucceed(proposalId, status));
     })
     .catch(() => {
@@ -169,7 +169,7 @@ export const updateSelectionStatus = (dispatch, proposalId, stepId, value) => {
   Fetcher
     .patch(`/selection_steps/${stepId}/selections/${proposalId}`, { status: value })
     .then(json)
-    .then(status => {
+    .then((status) => {
       dispatch(updateSelectionStatusSucceed(stepId, proposalId, status));
     })
     .catch(() => {
@@ -214,7 +214,7 @@ export const vote = (dispatch, step, proposal, data) => {
   }
   dispatch(startVoting());
   return Fetcher.postToJson(url, data)
-    .then(newVote => {
+    .then((newVote) => {
       dispatch(voteSuccess(proposal.id, step.id, newVote, data.comment));
       if (data.comment) {
         FluxDispatcher.dispatch({
@@ -259,14 +259,14 @@ export const deleteVote = (dispatch, step, proposal) => {
   return Fetcher
       .delete(url)
       .then(json)
-      .then(v => {
+      .then((v) => {
         dispatch(deleteVoteSucceeded(step.id, proposal.id, v));
         FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'proposal.request.delete_vote.success' },
         });
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e); // eslint-disable-line no-console
         FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
@@ -278,7 +278,7 @@ export const deleteVote = (dispatch, step, proposal) => {
 export const submitProposal = (dispatch, form, data) => {
   const formData = new FormData();
   const flattenedData = flatten(data);
-  Object.keys(flattenedData).map(key => {
+  Object.keys(flattenedData).map((key) => {
     formData.append(key, flattenedData[key]);
   });
   return Fetcher
@@ -331,7 +331,7 @@ export function* fetchVotesByStep({ stepId, proposalId }) {
     while (hasMore) {
       const result = yield call(
         Fetcher.get,
-        `/steps/${stepId}/proposals/${proposalId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
+        `/steps/${stepId}/proposals/${proposalId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`,
       );
       hasMore = result.hasMore;
       iterationCount++;
@@ -353,14 +353,14 @@ function* submitFusionFormData({ proposalForm }) {
   const data = { ...globalState.form.proposal.values };
   delete data.project;
   const flattenedData = flatten(data);
-  Object.keys(flattenedData).map(key => {
+  Object.keys(flattenedData).map((key) => {
     formData.append(key, flattenedData[key]);
   });
   try {
     yield call(
       Fetcher.postFormData,
       `/proposal_forms/${proposalForm}/proposals`,
-      formData
+      formData,
     );
     yield put(closeCreateFusionModal());
     location.reload();
@@ -398,7 +398,7 @@ export function* fetchProposals({ step }) {
 }
 
 
-export const fetchProposalPosts = (proposalId) => ({ type: POSTS_FETCH_REQUESTED, proposalId });
+export const fetchProposalPosts = proposalId => ({ type: POSTS_FETCH_REQUESTED, proposalId });
 
 export function* fetchPosts(action) {
   try {
@@ -502,7 +502,7 @@ export const reducer = (state = initialState, action) => {
     case UPDATE_SELECTION_STATUS_SUCCEED: {
       const proposalsById = state.proposalsById;
       const proposal = proposalsById[action.proposalId];
-      const selections = proposal.selections.map(s => {
+      const selections = proposal.selections.map((s) => {
         if (s.step.id === action.stepId) {
           s.status = action.status;
         }
@@ -573,7 +573,7 @@ export const reducer = (state = initialState, action) => {
         map[obj.id] = obj;
         return map;
       }, {});
-      const proposalShowedId = action.proposals.map((proposal) => proposal.id);
+      const proposalShowedId = action.proposals.map(proposal => proposal.id);
       return { ...state, proposalsById, proposalShowedId, isLoading: false };
     }
     case LOAD_SELECTIONS_SUCCEEDED: {

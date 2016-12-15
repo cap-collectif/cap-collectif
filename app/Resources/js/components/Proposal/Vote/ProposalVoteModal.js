@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Modal } from 'react-bootstrap';
+import { submit, isValid } from 'redux-form';
+import { connect } from 'react-redux';
 import ProposalVoteBox from './ProposalVoteBox';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
-import { connect } from 'react-redux';
 import { closeVoteModal } from '../../../redux/modules/proposal';
-import { submit, isValid } from 'redux-form';
 
 const ProposalVoteModal = React.createClass({
   displayName: 'ProposalVoteModal',

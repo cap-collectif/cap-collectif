@@ -4,7 +4,6 @@ import { ProgressBar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const VotesBar = React.createClass({
   propTypes: {
-    className: React.PropTypes.string,
     style: React.PropTypes.object,
     max: React.PropTypes.number.isRequired,
     value: React.PropTypes.number.isRequired,

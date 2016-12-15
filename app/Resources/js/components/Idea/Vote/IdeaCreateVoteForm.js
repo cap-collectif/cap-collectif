@@ -77,7 +77,7 @@ export const IdeaCreateVoteForm = React.createClass({
     } = this.props;
     return (
       <IdeaVoteForm
-        ref={(c) => this.ideaVoteForm = c}
+        ref={c => this.ideaVoteForm = c}
         idea={idea}
         serverErrors={this.state.serverErrors}
         anonymous={anonymous}

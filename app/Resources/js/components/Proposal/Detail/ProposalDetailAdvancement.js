@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
-import { connect } from 'react-redux';
-import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
+import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
 
 const grey = '#d9d9d9';
 const green = '#5cb85c';
@@ -111,7 +111,7 @@ export const ProposalDetailAdvancement = React.createClass({
     const steps = project.steps.sort((a, b) => a.position - b.position);
     const selections = proposal.selections.sort((a, b) => a.step.position - b.step.position);
     for (const step of steps) {
-      step.isSelected = step.type === 'collect' || selections.map((selection) => selection.step.id).includes(step.id);
+      step.isSelected = step.type === 'collect' || selections.map(selection => selection.step.id).includes(step.id);
     }
     let consideredCurrent = steps[0];
     for (const step of steps) {
@@ -160,7 +160,7 @@ export const ProposalDetailAdvancement = React.createClass({
                             status={progressStep.status}
                             roundColor={progressStep.roundColor}
                             borderColor={i + 1 === progressSteps.length ? null : progressStep.borderColor}
-                          />
+                          />,
                         )
                       }
                     </div>

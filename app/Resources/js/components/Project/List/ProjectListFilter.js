@@ -58,7 +58,7 @@ const ProjectListFilter = React.createClass({
       >
         <option key="date" value="date">Les plus récents</option>
         <option key="popularity" value="popularity">Les plus populaires</option>
-      </FormControl>
+      </FormControl>,
     );
 
     if (projectTypes.length > 0) {
@@ -80,7 +80,7 @@ const ProjectListFilter = React.createClass({
               return <option value={projectType.slug}>{this.getIntlMessage(projectType.title)}</option>;
             })
           }
-        </FormControl>
+        </FormControl>,
       );
     }
 
@@ -102,7 +102,7 @@ const ProjectListFilter = React.createClass({
               return <option value={theme.slug}>{theme.title}</option>;
             })
           }
-        </FormControl>
+        </FormControl>,
       );
     }
 
@@ -121,7 +121,7 @@ const ProjectListFilter = React.createClass({
           value={this.state.value}
           onChange={this.handleChangeTermInput}
         />
-      </form>
+      </form>,
     );
 
     const columnWidth = 12 / filters.length;

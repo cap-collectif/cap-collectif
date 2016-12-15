@@ -1,11 +1,11 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
+import { Modal } from 'react-bootstrap';
 import IdeaCreateButton from './IdeaCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import IdeaCreateForm from './IdeaCreateForm';
 import IdeaActions from '../../../actions/IdeaActions';
-import { Modal } from 'react-bootstrap';
 
 const IdeaCreate = React.createClass({
   propTypes: {

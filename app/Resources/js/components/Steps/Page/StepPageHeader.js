@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import StepInfos from './StepInfos';
 import { IntlMixin, FormattedMessage } from 'react-intl';
+import StepInfos from './StepInfos';
 
 const StepPageHeader = React.createClass({
   propTypes: {

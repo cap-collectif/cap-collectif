@@ -103,7 +103,7 @@ const CommentSection = React.createClass({
       object,
       this.state.offset,
       this.state.limit,
-      this.state.filter
+      this.state.filter,
     );
   },
 

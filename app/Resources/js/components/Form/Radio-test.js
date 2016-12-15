@@ -1,11 +1,11 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
+import RadioGroup from 'react-radio';
 import IntlData from '../../translations/FR';
 import Input from './Input';
 import Other from './Other';
 import Radio from './Radio';
-import RadioGroup from 'react-radio';
 
 describe('<Radio />', () => {
   const field = {

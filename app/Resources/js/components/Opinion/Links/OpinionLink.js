@@ -1,8 +1,8 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import OpinionPreview from '../OpinionPreview';
 import { Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
+import OpinionPreview from '../OpinionPreview';
 
 const OpinionLink = React.createClass({
   propTypes: {

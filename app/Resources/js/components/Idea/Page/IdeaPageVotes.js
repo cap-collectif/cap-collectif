@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchIdeaVotes, VOTES_PREVIEW_COUNT } from '../../../redux/modules/idea';
 import { Row, Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { IntlMixin, FormattedMessage } from 'react-intl';
+import { fetchIdeaVotes, VOTES_PREVIEW_COUNT } from '../../../redux/modules/idea';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
 
@@ -94,7 +94,7 @@ export const IdeaPageVotes = React.createClass({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchIdeaVotes: (ideaId) => dispatch(fetchIdeaVotes(ideaId)),
+    fetchIdeaVotes: ideaId => dispatch(fetchIdeaVotes(ideaId)),
   };
 };
 

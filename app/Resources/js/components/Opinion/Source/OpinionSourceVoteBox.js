@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import SourceActions from '../../../actions/SourceActions';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
-import { connect } from 'react-redux';
 
 const OpinionSourceVoteBox = React.createClass({
   propTypes: {

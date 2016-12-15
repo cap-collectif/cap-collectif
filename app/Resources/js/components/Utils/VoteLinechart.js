@@ -7,8 +7,6 @@ const VoteLinechart = React.createClass({
     history: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
     width: React.PropTypes.number,
-    top: React.PropTypes.number,
-    left: React.PropTypes.number,
   },
   mixins: [IntlMixin],
 

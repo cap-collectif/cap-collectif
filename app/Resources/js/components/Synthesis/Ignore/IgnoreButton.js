@@ -1,8 +1,8 @@
 import React from 'react';
-import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import { Button, Modal } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import { hashHistory } from 'react-router';
+import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 
 const IgnoreButton = React.createClass({
   propTypes: {

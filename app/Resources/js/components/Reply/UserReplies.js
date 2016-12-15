@@ -1,7 +1,7 @@
 import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
-import ReplyModalLink from './Show/ReplyModalLink';
 import { ListGroup } from 'react-bootstrap';
+import ReplyModalLink from './Show/ReplyModalLink';
 
 const UserReplies = React.createClass({
   propTypes: {

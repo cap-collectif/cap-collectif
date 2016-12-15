@@ -1,10 +1,10 @@
 // @flow
 import type { Dispatch as ReduxDispatch } from 'redux';
+import { takeEvery } from 'redux-saga';
+import { call, put } from 'redux-saga/effects';
 import { UPDATE_OPINION_SUCCESS, UPDATE_OPINION_FAILURE } from '../../constants/OpinionConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../../services/Fetcher';
-import { takeEvery } from 'redux-saga';
-import { call, put } from 'redux-saga/effects';
 
 export type VoteValue = -1 | 0 | 1;
 type OpinionVote = {| user: { uniqueId: string }, value: VoteValue |};
@@ -102,7 +102,7 @@ const deleteVote = (opinion: number, parent: ?number, dispatch: Dispatch): void 
   Fetcher
     .delete(url)
     .then(json)
-    .then(data => {
+    .then((data) => {
       if (parent) {
         dispatch(deleteVersionVoteSuccess(opinion, data));
       } else {
@@ -113,7 +113,7 @@ const deleteVote = (opinion: number, parent: ?number, dispatch: Dispatch): void 
         message: 'opinion.request.delete_vote.success',
       });
     })
-    .catch(e => {
+    .catch((e) => {
       FluxDispatcher.dispatch({
         actionType: UPDATE_OPINION_FAILURE,
         message: 'opinion.request.failure',
@@ -138,7 +138,7 @@ const vote = (value: VoteValue, opinion: number, parent: ?number, dispatch: Disp
         message: 'opinion.request.create_vote.success',
       });
     })
-    .catch(e => {
+    .catch((e) => {
       FluxDispatcher.dispatch({
         actionType: UPDATE_OPINION_FAILURE,
         message: 'opinion.request.failure',

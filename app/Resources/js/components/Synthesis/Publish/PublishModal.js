@@ -1,12 +1,12 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
+import { Button, Modal, Input } from 'react-bootstrap';
+import { hashHistory } from 'react-router';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
 import NotationButtons from './../Edit/NotationButtons';
 import ElementsFinder from './../ElementsFinder';
-import { Button, Modal, Input } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import { hashHistory } from 'react-router';
 
 const PublishModal = React.createClass({
   propTypes: {
@@ -165,7 +165,7 @@ const PublishModal = React.createClass({
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(
       synthesis.id,
-      'notIgnored'
+      'notIgnored',
     );
   },
 

@@ -1,8 +1,5 @@
 import moment from 'moment';
 import 'moment/locale/fr';
-
-moment.locale('fr');
-
 import ReactOnRails from 'react-on-rails';
 import ProjectsListApp from './startup/ProjectsListAppClient';
 import ProposalStepPageApp from './startup/ProposalStepPageApp';
@@ -34,6 +31,7 @@ import ProjectListPageApp from './startup/ProjectListPageApp';
 import ProposalAdminSelectionsApp from './startup/ProposalAdminSelectionsApp';
 import appStore from '../js/stores/AppStore';
 
+moment.locale('fr');
 window.__SERVER__ = false;
 
 ReactOnRails.registerStore({ appStore });

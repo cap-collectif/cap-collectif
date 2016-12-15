@@ -81,7 +81,7 @@ const ElementsInbox = React.createClass({
       synthesis.id,
       type,
       this.state.offset,
-      this.state.limit
+      this.state.limit,
     );
   },
 

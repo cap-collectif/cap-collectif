@@ -96,9 +96,9 @@ const Navbar = React.createClass({
                 </div>
             </div>
         </div>
-        <div className="container" ref={(c) => this.container = c}>
+        <div className="container" ref={c => this.container = c}>
           <Navigation.Header >
-            <Navigation.Brand href="/" id="home" ref={(c) => this.header = c}>
+            <Navigation.Brand href="/" id="home" ref={c => this.header = c}>
               <a href="/" >
                 <img src={logo} title={this.getIntlMessage('navbar.homepage')} alt={this.getIntlMessage('navbar.homepage')} />
               </a>
@@ -113,7 +113,7 @@ const Navbar = React.createClass({
                     <NavbarItem
                       key={index}
                       item={header}
-                      ref={(c) => this[`item-${header.id}`] = c}
+                      ref={c => this[`item-${header.id}`] = c}
                     />
                   );
                 })
@@ -122,12 +122,12 @@ const Navbar = React.createClass({
                 moreItem &&
                   <NavbarItem
                     item={moreItem}
-                    ref={(c) => this.seeMoreDropdown = c}
+                    ref={c => this.seeMoreDropdown = c}
                     className="navbar-dropdown-more"
                   />
               }
               </Nav>
-              <NavbarRight ref={(c) => this.navright = c} />
+              <NavbarRight ref={c => this.navright = c} />
           </Navigation.Collapse>
         </div>
       </Navigation>

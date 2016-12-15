@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import CheckboxGroup from 'react-checkbox-group';
+import classNames from 'classnames';
 import Input from './Input';
 import Other from './Other';
-import classNames from 'classnames';
 
 const Checkbox = React.createClass({
   propTypes: {

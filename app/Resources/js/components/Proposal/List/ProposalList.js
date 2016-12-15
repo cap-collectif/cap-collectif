@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
-import ProposalPreview from '../Preview/ProposalPreview';
 import { Row } from 'react-bootstrap';
+import ProposalPreview from '../Preview/ProposalPreview';
 import VisibilityBox from '../../Utils/VisibilityBox';
 
 export const ProposalList = React.createClass({
@@ -28,7 +28,7 @@ export const ProposalList = React.createClass({
     let { proposals } = this.props;
 
     if (!Array.isArray(proposals)) {
-      proposals = Object.keys(proposals).map((k) => proposals[k]);
+      proposals = Object.keys(proposals).map(k => proposals[k]);
     }
 
     if (proposals.length === 0) {
@@ -44,8 +44,8 @@ export const ProposalList = React.createClass({
     let publicProposals = proposals;
 
     if (typeof proposals[0].visible !== 'undefined') {
-      privateProposals = proposals.filter((proposal) => !proposal.visible);
-      publicProposals = proposals.filter((proposal) => proposal.visible);
+      privateProposals = proposals.filter(proposal => !proposal.visible);
+      publicProposals = proposals.filter(proposal => proposal.visible);
     }
 
     return (
@@ -60,7 +60,7 @@ export const ProposalList = React.createClass({
                     proposal={proposal}
                     step={step}
                     showThemes={showThemes}
-                  />
+                  />,
               )
             }
           </Row>
@@ -76,7 +76,7 @@ export const ProposalList = React.createClass({
                         proposal={proposal}
                         step={step}
                         showThemes={showThemes}
-                      />
+                      />,
                 )
               }
             </Row>

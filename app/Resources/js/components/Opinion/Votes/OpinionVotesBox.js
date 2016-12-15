@@ -2,11 +2,11 @@
 import React, { PropTypes } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import { VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import VotePiechart from '../../Utils/VotePiechart';
 import OpinionVotesBar from './OpinionVotesBar';
 import OpinionVotesButtons from './OpinionVotesButtons';
-import { connect } from 'react-redux';
 
 const OpinionVotesBox = React.createClass({
   propTypes: {

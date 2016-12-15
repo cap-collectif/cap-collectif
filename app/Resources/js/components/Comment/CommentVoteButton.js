@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import CommentActions from '../../actions/CommentActions';
 import LoginOverlay from '../Utils/LoginOverlay';
-import { connect } from 'react-redux';
 
 const CommentVoteButton = React.createClass({
   propTypes: {

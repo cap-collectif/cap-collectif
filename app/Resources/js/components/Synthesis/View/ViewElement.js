@@ -1,11 +1,11 @@
 import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import ElementTitle from './../Element/ElementTitle';
 import UserAvatar from '../../User/UserAvatar';
 import VotePiechart from '../../Utils/VotePiechart';
 import ChildrenModal from './ChildrenModal';
 import SynthesisDisplayRules from '../../../services/SynthesisDisplayRules';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 const ViewElement = React.createClass({
   propTypes: {
@@ -157,13 +157,13 @@ const ViewElement = React.createClass({
     } = this.props;
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'percentage') && parent) {
       let percentage = Math.round(
-        (element.childrenElementsNb / parent.childrenElementsNb) * 1000
+        (element.childrenElementsNb / parent.childrenElementsNb) * 1000,
       ) / 10;
       percentage = percentage > 0 ? percentage : 0;
       const tooltip = this.getPercentageTooltip(
         element.publishedChildrenCount,
         element.childrenScore,
-        percentage
+        percentage,
       );
       return (
         <OverlayTrigger placement="top" overlay={tooltip}>
@@ -211,13 +211,13 @@ const ViewElement = React.createClass({
     } = this.props;
     if (parent) {
       let percentage = Math.round(
-        (element.childrenElementsNb / parent.parentChildrenElementsNb) * 1000
+        (element.childrenElementsNb / parent.parentChildrenElementsNb) * 1000,
       ) / 10;
       percentage = percentage > 0 ? percentage : 0;
       const tooltip = this.getPercentageTooltip(
         element.publishedChildrenCount,
         element.childrenScore,
-        percentage
+        percentage,
       );
       return (
         <div className="synthesis__element">

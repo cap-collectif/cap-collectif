@@ -1,5 +1,5 @@
 import LoginActions from '../actions/LoginActions';
-import LocalStorageService from './LocalStorageService.js';
+import LocalStorageService from './LocalStorageService';
 
 function status(response) {
   if (response.status >= 200 && response.status < 300) {

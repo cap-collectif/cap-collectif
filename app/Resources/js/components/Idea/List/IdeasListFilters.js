@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
+import { Row, Col } from 'react-bootstrap';
 import IdeaActions from '../../../actions/IdeaActions';
 import IdeaStore from '../../../stores/IdeaStore';
 import IdeasListSearch from './IdeasListSearch';
 import Input from '../../Form/Input';
-import { Row, Col } from 'react-bootstrap';
 import IdeaCreate from '../Create/IdeaCreate';
-import { connect } from 'react-redux';
 
 export const IdeasListFilters = React.createClass({
   propTypes: {

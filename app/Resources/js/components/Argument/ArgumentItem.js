@@ -2,10 +2,10 @@ import React from 'react';
 import { IntlMixin, FormattedDate } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
+import Linkify from 'react-linkify';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
-import Linkify from 'react-linkify';
 
 const ArgumentItem = React.createClass({
   propTypes: {

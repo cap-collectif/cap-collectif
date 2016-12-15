@@ -39,7 +39,7 @@ describe('<RegistrationForm />', () => {
         type: 'text',
         id: '_username',
         autoComplete: 'username',
-      }
+      },
     );
   });
 
@@ -57,7 +57,7 @@ describe('<RegistrationForm />', () => {
           message: 'Vous recevrez un e-mail contenant un lien permettant de confirmer qu\'il s\'agit bien de votre adresse.',
         },
         autoComplete: 'email',
-      }
+      },
     );
   });
 
@@ -75,7 +75,7 @@ describe('<RegistrationForm />', () => {
           message: 'Le mot de passe doit comporter au moins huit caractères.',
         },
         autoComplete: 'new-password',
-      }
+      },
     );
   });
 
@@ -95,7 +95,7 @@ describe('<RegistrationForm />', () => {
           },
         ],
         placeholder: 'Je suis...',
-      }
+      },
     );
     expect(select.label).toBeDefined();
   });
@@ -109,7 +109,7 @@ describe('<RegistrationForm />', () => {
         labelClassName: 'h5',
         type: 'checkbox',
         id: '_charte',
-      }
+      },
     );
     expect(checkbox.label).toBeDefined();
   });

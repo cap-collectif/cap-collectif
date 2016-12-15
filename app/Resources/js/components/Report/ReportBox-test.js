@@ -25,14 +25,14 @@ describe('<ReportBox />', () => {
     expect(button).toHaveLength(1);
     expect(button.prop('id')).toEqual(defaultProps.id);
     expect(button.prop('reported')).toEqual(defaultProps.reported);
-    expect(button.prop('onClick')).toBeDefined;
+    expect(button.prop('onClick')).toBeDefined();
     expect(button.prop('bsSize')).toEqual(null);
     expect(button.prop('style')).toEqual({});
     expect(button.prop('className')).toEqual(defaultProps.buttonClassName);
     const modal = wrapper.find('Connect(ReportModal)');
     expect(modal).toHaveLength(1);
     expect(modal.prop('show')).toEqual(defaultProps.show);
-    expect(modal.prop('onSubmit')).toBeDefined;
+    expect(modal.prop('onSubmit')).toBeDefined();
   });
 
   it('renders nothing if reporting is not enabled', () => {

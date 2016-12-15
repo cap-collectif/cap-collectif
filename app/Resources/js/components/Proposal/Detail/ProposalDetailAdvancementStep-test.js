@@ -20,7 +20,7 @@ describe('<ProposalDetailAdvancementStep />', () => {
       <ProposalDetailAdvancementStep
         step={step}
         roundColor={roundColor}
-      />
+      />,
     );
     const label = wrapper.find('Label');
     expect(label.length).toEqual(0);
@@ -32,7 +32,7 @@ describe('<ProposalDetailAdvancementStep />', () => {
         step={step}
         roundColor={roundColor}
         status={status}
-      />
+      />,
     );
     const label = wrapper.find('Label');
     expect(label.prop('bsStyle')).toEqual('success');

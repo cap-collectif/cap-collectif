@@ -65,7 +65,7 @@ const OpinionPage = React.createClass({
     } = this.props;
     OpinionActions.loadOpinion(
       opinionId,
-      versionId
+      versionId,
     );
     this.props.fetchOpinionVotes(opinionId, versionId);
   },
@@ -89,7 +89,7 @@ const OpinionPage = React.createClass({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchOpinionVotes: (opinionId) => dispatch(fetchOpinionVotes(opinionId)),
+    fetchOpinionVotes: opinionId => dispatch(fetchOpinionVotes(opinionId)),
   };
 };
 

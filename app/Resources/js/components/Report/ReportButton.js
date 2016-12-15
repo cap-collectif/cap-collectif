@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import LoginOverlay from '../Utils/LoginOverlay';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import LoginOverlay from '../Utils/LoginOverlay';
 
 export const ReportButton = React.createClass({
   displayName: 'ReportButton',

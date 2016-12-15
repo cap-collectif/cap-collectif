@@ -69,7 +69,6 @@ const IdeasIndexPage = React.createClass({
       currentPage: IdeaStore.currentPage,
       isLoading: false,
     });
-    return;
   },
 
   loadIdeas() {

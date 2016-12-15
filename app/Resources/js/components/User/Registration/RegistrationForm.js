@@ -7,7 +7,7 @@ import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import Form from '../../Form/Form';
 import { isEmail } from '../../../services/Validator';
 
-export const validate = values => {
+export const validate = (values) => {
   const errors = {};
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
@@ -58,7 +58,7 @@ export const RegistrationForm = React.createClass({
         const errors = { _error: 'Registration failed !' };
         if (response.errors) {
           if (response.errors.children.email.errors && response.errors.children.email.errors.length > 0) {
-            response.errors.children.email.errors.map(string => {
+            response.errors.children.email.errors.map((string) => {
               if (string === 'already_used_email') {
                 errors.email = 'registration.constraints.email.already_used';
               } else {

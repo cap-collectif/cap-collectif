@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import RankingArrow from './RankingArrow';
 import { ButtonGroup } from 'react-bootstrap';
+import RankingArrow from './RankingArrow';
 
 const RankingArrows = React.createClass({
   displayName: 'RankingArrows',

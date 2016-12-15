@@ -1,10 +1,10 @@
 import React from 'react';
-import Editor from './Editor';
 import autosize from 'autosize';
-import ImageUpload from './ImageUpload';
-import { OverlayTrigger, Popover, Input as ReactBootstrapInput, FormGroup } from 'react-bootstrap';
-import Captcha from './Captcha';
 import mailcheck from 'mailcheck';
+import { OverlayTrigger, Popover, Input as ReactBootstrapInput, FormGroup } from 'react-bootstrap';
+import Editor from './Editor';
+import ImageUpload from './ImageUpload';
+import Captcha from './Captcha';
 import domains from '../../utils/email_domains';
 
 export default class Input extends ReactBootstrapInput {
@@ -178,7 +178,7 @@ export default class Input extends ReactBootstrapInput {
         this.renderHelp(),
         this.renderWrapper([
           this.renderInputGroup(
-            this.renderInput()
+            this.renderInput(),
           ),
           type !== 'captcha' && this.renderIcon(), // no feedbacks for captcha
         ]),
@@ -188,8 +188,8 @@ export default class Input extends ReactBootstrapInput {
       : this.renderWrapper([
         this.renderCheckboxAndRadioWrapper(
           this.renderLabel(
-            this.renderInput()
-          )
+            this.renderInput(),
+          ),
         ),
         this.renderErrors(),
         this.renderHelp(),

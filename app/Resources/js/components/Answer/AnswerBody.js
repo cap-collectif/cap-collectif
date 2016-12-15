@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedDate } from 'react-intl';
+import moment from 'moment';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
-import moment from 'moment';
 
 const AnswerBody = React.createClass({
   displayName: 'AnswerBody',

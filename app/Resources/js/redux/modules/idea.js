@@ -1,7 +1,7 @@
-import Fetcher from '../../services/Fetcher';
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import { find, findLast } from 'lodash';
+import Fetcher from '../../services/Fetcher';
 
 export const VOTES_PREVIEW_COUNT = 8;
 export const VOTES_FETCH_REQUESTED = 'idea/VOTES_FETCH_REQUESTED';
@@ -46,7 +46,7 @@ export function* fetchAllVotes(action) {
     while (hasMore) {
       const result = yield call(
         Fetcher.get,
-        `/ideas/${action.ideaId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
+        `/ideas/${action.ideaId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`,
       );
       hasMore = result.hasMore;
       iterationCount++;

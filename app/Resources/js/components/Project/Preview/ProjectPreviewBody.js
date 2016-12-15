@@ -1,9 +1,9 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
+import Truncate from 'react-truncate';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
-import Truncate from 'react-truncate';
 
 const ProjectPreviewBody = React.createClass({
   propTypes: {
@@ -14,7 +14,7 @@ const ProjectPreviewBody = React.createClass({
 
   shouldRenderProgressBar() {
     const { project } = this.props;
-    return project.steps.filter(step => {
+    return project.steps.filter((step) => {
       return !step.startAt
         && !step.endAt
         && step.type !== 'presentation'

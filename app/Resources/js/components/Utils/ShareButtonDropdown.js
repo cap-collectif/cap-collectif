@@ -37,7 +37,7 @@ const ShareButtonDropdown = React.createClass({
     const { title } = this.props;
     this.openSharer(
       `http://www.facebook.com/sharer.php?u=${this.getEncodedUrl()}&t=${title}`,
-      'Facebook'
+      'Facebook',
     );
   },
 
@@ -45,7 +45,7 @@ const ShareButtonDropdown = React.createClass({
     const { title } = this.props;
     this.openSharer(
       `https://twitter.com/share?url=${this.getEncodedUrl()}&text=${title}`,
-      'Twitter'
+      'Twitter',
     );
   },
 
@@ -53,7 +53,7 @@ const ShareButtonDropdown = React.createClass({
     const { title } = this.props;
     this.openSharer(
       `https://plus.google.com/share?url=${this.getEncodedUrl()}&title=${title}`,
-      'Google+'
+      'Google+',
     );
   },
 
@@ -65,7 +65,7 @@ const ShareButtonDropdown = React.createClass({
     window.open(
       href,
       name,
-      `top=${top},left=${left},menubar=0,toolbar=0,status=0,width=${width},height=${height}`
+      `top=${top},left=${left},menubar=0,toolbar=0,status=0,width=${width},height=${height}`,
     );
   },
 

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import ViewTree from './View/ViewTree';
 import { connect } from 'react-redux';
+import ViewTree from './View/ViewTree';
 
 const ViewBox = React.createClass({
   propTypes: {

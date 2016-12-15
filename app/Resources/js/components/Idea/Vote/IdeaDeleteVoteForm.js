@@ -49,7 +49,7 @@ export const IdeaDeleteVoteForm = React.createClass({
     } = this.props;
     return (
       <IdeaVoteForm
-        ref={(c) => this.ideaVoteForm = c}
+        ref={c => this.ideaVoteForm = c}
         idea={idea}
         anonymous={anonymous}
       />

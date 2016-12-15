@@ -1,5 +1,5 @@
 /* eslint-env jest */
-
+import { call, put } from 'redux-saga/effects';
 import {
   reducer,
   fetchAllVotes,
@@ -8,7 +8,6 @@ import {
   VOTES_FETCH_FAILED,
   VOTE_SUCCEEDED,
  } from './idea';
-import { call, put } from 'redux-saga/effects';
 import Fetcher from '../../services/Fetcher';
 
 describe('Idea Reducer', () => {
@@ -115,7 +114,7 @@ describe('Idea Sagas', () => {
         type: VOTES_FETCH_SUCCEEDED,
         ideaId: 1,
         votes,
-      })
+      }),
     );
     expect(generator.next().value).toEqual(call(Fetcher.get, '/ideas/1/votes?offset=50&limit=50'));
 

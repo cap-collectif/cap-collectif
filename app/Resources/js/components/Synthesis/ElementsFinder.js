@@ -121,7 +121,7 @@ const ElementsFinder = React.createClass({
     });
     if (element.childrenCount > 0) {
       return (
-        <i className={classes} onClick={(ev) => this.toggleExpand(ev, element)}></i>
+        <i className={classes} onClick={ev => this.toggleExpand(ev, element)}></i>
       );
     }
   },

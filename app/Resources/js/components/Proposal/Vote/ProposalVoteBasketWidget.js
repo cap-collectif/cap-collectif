@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedNumber, FormattedMessage } from 'react-intl';
-import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import { connect } from 'react-redux';
+import { mapValues } from 'lodash';
 import { Nav, Navbar, Button, ProgressBar } from 'react-bootstrap';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import Input from '../../Form/Input';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { getSpentPercentage } from '../../../services/ProposalVotesHelper';
-import { connect } from 'react-redux';
-import { mapValues } from 'lodash';
 
 const ProposalVoteBasketWidget = React.createClass({
   propTypes: {
@@ -84,7 +84,7 @@ const ProposalVoteBasketWidget = React.createClass({
                         votableSteps.map(step =>
                             <option key={step.id} value={step.id}>
                               {step.title}
-                            </option>
+                            </option>,
                         )
                       }
                     </Input>

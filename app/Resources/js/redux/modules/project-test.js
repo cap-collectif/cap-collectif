@@ -1,12 +1,11 @@
 /* eslint-env jest */
-
+import { put, select, call } from 'redux-saga/effects';
 import {
   reducer,
   fetchProjectsSaga,
   PROJECTS_FETCH_SUCCEEDED,
   PROJECTS_FETCH_FAILED,
 } from './project';
-import { put, select, call } from 'redux-saga/effects';
 import Fetcher from '../../services/Fetcher';
 
 describe('Project Reducer', () => {
@@ -46,7 +45,7 @@ describe('Project Sagas', () => {
       put({
         type: PROJECTS_FETCH_SUCCEEDED,
         project,
-      })
+      }),
     );
 
     expect(generator.throw({}).value).toEqual(put({ type: PROJECTS_FETCH_FAILED, error: {} }));

@@ -35,7 +35,7 @@ const RankingSpot = React.createClass({
         style={{ backgroundColor: color }}
       >
         {children}
-      </div>
+      </div>,
     );
   },
 

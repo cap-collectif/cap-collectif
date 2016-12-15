@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import ProposalListSearch from '../List/ProposalListSearch';
-import Input from '../../Form/Input';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import ProposalListSearch from '../List/ProposalListSearch';
+import Input from '../../Form/Input';
 import { changeFilter, changeOrder, loadProposals } from '../../../redux/modules/proposal';
 
 export const ProposalListFilters = React.createClass({
@@ -74,7 +74,7 @@ export const ProposalListFilters = React.createClass({
                 displayedOrders.map(choice =>
                   <option key={choice} value={choice}>
                     {this.getIntlMessage(`global.filter_f_${choice}`)}
-                  </option>
+                  </option>,
                 )
               })
               }
@@ -106,7 +106,7 @@ export const ProposalListFilters = React.createClass({
                     })
                   }
                 </Input>
-              </Col>
+              </Col>,
             )
           }
         </Row>

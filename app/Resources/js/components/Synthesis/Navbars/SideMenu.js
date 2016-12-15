@@ -82,7 +82,7 @@ const SideMenu = React.createClass({
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(
       synthesis.id,
-      'notIgnored'
+      'notIgnored',
     );
   },
 

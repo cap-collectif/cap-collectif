@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import ProposalVoteButton from './ProposalVoteButton';
 import VoteButtonOverlay from './VoteButtonOverlay';
 import { VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import { connect } from 'react-redux';
 
 export const ProposalVoteButtonWrapper = React.createClass({
   displayName: 'ProposalVoteButtonWrapper',

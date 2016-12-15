@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 import {
   closeCreateFusionModal,
   openCreateFusionModal,
@@ -12,7 +13,6 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import ProposalAdminForm from '../Form/ProposalAdminForm';
 import Fetcher from '../../../services/Fetcher';
-import { formValueSelector } from 'redux-form';
 
 export const ProposalCreateFusionButton = React.createClass({
   propTypes: {
@@ -97,7 +97,7 @@ export const ProposalCreateFusionButton = React.createClass({
 
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const selectedProject = parseInt(formValueSelector('proposal')(state, 'project'), 10);
   const currentCollectStep = selectedProject ? state.project.projects.find(p => p.id === selectedProject).steps.filter(step => step.type === 'collect')[0] : null;
   return {
@@ -113,5 +113,5 @@ export default connect(
     close: closeCreateFusionModal,
     open: openCreateFusionModal,
     submit: submitFusionForm,
-  }
+  },
 )(ProposalCreateFusionButton);

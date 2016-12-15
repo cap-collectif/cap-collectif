@@ -14,7 +14,7 @@ export default {
       },
     })
     .then(response => response.json())
-    .then(response => {
+    .then((response) => {
       if (response.success) {
         setTimeout(() => window.location.reload(), 100);
         return true;

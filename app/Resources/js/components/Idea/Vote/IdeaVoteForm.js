@@ -88,7 +88,7 @@ const IdeaVoteForm = React.createClass({
     const { form } = this.state;
 
     return (
-      <form ref={(c) => this.form = c}>
+      <form ref={c => this.form = c}>
 
         <FlashMessages errors={serverErrors} translate={false} />
 

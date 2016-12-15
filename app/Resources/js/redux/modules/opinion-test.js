@@ -1,4 +1,5 @@
 /* eslint-env jest */
+import { call, put } from 'redux-saga/effects';
 import {
   reducer,
   opinionVoteSuccess,
@@ -10,7 +11,6 @@ import {
   OPINION_VOTES_FETCH_FAILED,
   OPINION_VOTES_FETCH_SUCCEEDED,
 } from './opinion';
-import { call, put } from 'redux-saga/effects';
 import Fetcher from '../../services/Fetcher';
 
 const vote = {

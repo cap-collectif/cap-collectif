@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
 import moment from 'moment';
-import UserLink from '../../User/UserLink';
 import { connect } from 'react-redux';
+import UserLink from '../../User/UserLink';
 
 export const IdeaPageHeaderInfos = React.createClass({
   propTypes: {
