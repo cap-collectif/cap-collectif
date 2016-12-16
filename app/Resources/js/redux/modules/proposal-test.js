@@ -2,6 +2,7 @@
 import { call, put } from 'redux-saga/effects';
 import {
   reducer,
+  sendProposalNotificationSucceed,
   fetchPosts,
   POSTS_FETCH_SUCCEEDED,
   POSTS_FETCH_FAILED,
@@ -31,6 +32,17 @@ describe('Proposal Reducer', () => {
         },
       },
     });
+  });
+
+  it('Should handle sendProposalNotificationSucceed', () => {
+    const initialState = {
+      proposalsById: {
+        1: { },
+      },
+      lastNotifiedStepId: null,
+    };
+    const newState = reducer(initialState, sendProposalNotificationSucceed(1, 2));
+    expect(newState).toMatchSnapshot();
   });
 });
 

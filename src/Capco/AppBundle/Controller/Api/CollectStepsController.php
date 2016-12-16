@@ -37,8 +37,8 @@ class CollectStepsController extends FOSRestController
         ParamFetcherInterface $paramFetcher
     ) {
         $proposalForm = $collectStep->getProposalForm();
-        $page = intval($paramFetcher->get('page'));
-        $pagination = intval($paramFetcher->get('pagination'));
+        $page = (int) $paramFetcher->get('page');
+        $pagination = (int) $paramFetcher->get('pagination');
         $order = $paramFetcher->get('order');
         $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
 

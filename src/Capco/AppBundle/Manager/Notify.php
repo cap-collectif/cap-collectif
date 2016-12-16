@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
-use Capco\UserBundle\Entity\User;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -305,25 +305,40 @@ class Notify implements MailerInterface
         $this->sendInternalEmail($body, $subject);
     }
 
-    public function notifyProposalStatusChange(Proposal $proposal)
+    public function notifyProposalStatusChangeInCollect(Proposal $proposal)
     {
         $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
 
         $subject = $this->translator->trans(
-            'proposal_status_change.notification.subject', [
+            'proposal_status_change_collect.notification.subject', [
                 '%sitename%' => $this->resolver->getValue('global.site.fullname'),
             ], 'CapcoAppBundle'
         );
         $template = 'CapcoAppBundle:Mail:notifyProposalStatusChange.html.twig';
-        $body = $this->templating->render(
-            $template,
-            [
-                'proposal' => $proposal,
-            ]
-        );
+        $body = $this->templating->render($template, [
+            'proposal' => $proposal,
+        ]);
 
         $this->sendEmail($proposal->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
+    }
+
+    public function notifyProposalStatusChangeInSelection(Selection $selection)
+    {
+        $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
+        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
+
+        $subject = $this->translator->trans(
+            'proposal_status_change_selection.notification.subject', [
+            '%sitename%' => $this->resolver->getValue('global.site.fullname'),
+        ], 'CapcoAppBundle'
+        );
+        $template = 'CapcoAppBundle:Mail:notifyProposalStatusChangeInSelection.html.twig';
+        $body = $this->templating->render($template, [
+            'selection' => $selection,
+        ]);
+
+        $this->sendEmail($selection->getProposal()->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
     }
 
     /**

@@ -1,3 +1,5 @@
+// @flow
+import type { Dispatch as ReduxDispatch } from 'redux';
 import { takeEvery } from 'redux-saga';
 import { select, call, put } from 'redux-saga/effects';
 import flatten from 'flat';
@@ -50,6 +52,8 @@ const UNSELECT_SUCCEED = 'proposal/UNSELECT_SUCCEED';
 const SELECT_SUCCEED = 'proposal/SELECT_SUCCEED';
 const UPDATE_SELECTION_STATUS_SUCCEED = 'proposal/UPDATE_SELECTION_STATUS_SUCCEED';
 const UPDATE_PROPOSAL_STATUS_SUCCEED = 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED';
+const SEND_PROPOSAL_NOTIFICATION_SUCCEED = 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED';
+const SEND_PROPOSAL_NOTIFICATION_ERROR = 'proposal/SEND_SELECTION_NOTIFICATION_ERROR';
 
 const initialState = {
   currentProposalId: null,
@@ -74,6 +78,8 @@ const initialState = {
   filters: {},
   terms: null,
   currentPaginationPage: 1,
+  lastEditedProposalId: null,
+  lastNotifiedStepId: null,
 };
 
 export const loadSelections = proposalId => ({ type: LOAD_SELECTIONS_REQUEST, proposalId });
@@ -148,20 +154,41 @@ export const deleteProposal = (form, proposal, dispatch) => {
 export const startVoting = () => ({ type: VOTE_REQUESTED });
 export const stopVoting = () => ({ type: VOTE_FAILED });
 
+type Status = { id: number };
+
 const unSelectStepSucceed = (stepId, proposalId) => ({ type: UNSELECT_SUCCEED, stepId, proposalId });
 const selectStepSucceed = (stepId, proposalId) => ({ type: SELECT_SUCCEED, stepId, proposalId });
-const updateSelectionStatusSucceed = (stepId, proposalId, status) => ({ type: UPDATE_SELECTION_STATUS_SUCCEED, stepId, proposalId, status });
-const updateProposalCollectStatusSucceed = (proposalId, status) => ({ type: UPDATE_PROPOSAL_STATUS_SUCCEED, proposalId, status });
+const updateSelectionStatusSucceed = (stepId: number, proposalId: number, status: Status) => ({ type: UPDATE_SELECTION_STATUS_SUCCEED, stepId, proposalId, status });
+const updateProposalCollectStatusSucceed = (proposalId: number, stepId: number, status: Status) => ({ type: UPDATE_PROPOSAL_STATUS_SUCCEED, proposalId, stepId, status });
+export const sendProposalNotificationSucceed = (proposalId: number, stepId: number) => ({ type: SEND_PROPOSAL_NOTIFICATION_SUCCEED, proposalId, stepId });
+const sendProposalNotificationError = (error: string) => ({ type: SEND_PROPOSAL_NOTIFICATION_ERROR, error });
 
-export const updateProposalStatus = (dispatch, proposalId, value) => {
+type Action = {| type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId: number, stepId: number |}
+  | {| type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error: string |};
+
+type Dispatch = ReduxDispatch<Action>;
+
+export const sendProposalNotification = (dispatch: Dispatch, proposalId: number, stepId: number): void => {
+  Fetcher.post(`/proposals/${proposalId}/notify-status-changed`)
+    .then(() => { dispatch(sendProposalNotificationSucceed(proposalId, stepId)); })
+    .catch((error) => { dispatch(sendProposalNotificationError(error)); });
+};
+
+export const sendSelectionNotification = (dispatch: Dispatch, proposalId: number, stepId: number): void => {
+  Fetcher.post(`/selection_step/${stepId}/proposals/${proposalId}/notify-status-changed`, { proposalId, stepId })
+    .then(() => { dispatch(sendProposalNotificationSucceed(proposalId, stepId)); })
+    .catch((error) => { dispatch(sendProposalNotificationError(error)); });
+};
+
+export const updateProposalStatus = (dispatch, proposalId, stepId, value) => {
   Fetcher
     .patch(`/proposals/${proposalId}`, { status: value })
     .then(json)
     .then((status) => {
-      dispatch(updateProposalCollectStatusSucceed(proposalId, status));
+      dispatch(updateProposalCollectStatusSucceed(proposalId, stepId, status));
     })
     .catch(() => {
-      dispatch(updateProposalCollectStatusSucceed(proposalId, null));
+      dispatch(updateProposalCollectStatusSucceed(proposalId, stepId));
     });
 };
 
@@ -180,7 +207,7 @@ export const updateStepStatus = (dispatch, proposalId, step, value) => {
   if (step.step_type === 'selection') {
     updateSelectionStatus(dispatch, proposalId, step.id, value);
   } else {
-    updateProposalStatus(dispatch, proposalId, value);
+    updateProposalStatus(dispatch, proposalId, step.id, value);
   }
 };
 
@@ -497,7 +524,8 @@ export const reducer = (state = initialState, action) => {
       const proposalsById = state.proposalsById;
       const proposal = proposalsById[action.proposalId];
       proposalsById[action.proposalId] = { ...proposal, status: action.status };
-      return { ...state, proposalsById };
+      const lastEditedStepId = action.status === -1 ? null : action.stepId;
+      return { ...state, proposalsById, lastEditedStepId, lastNotifiedStepId: null };
     }
     case UPDATE_SELECTION_STATUS_SUCCEED: {
       const proposalsById = state.proposalsById;
@@ -509,7 +537,8 @@ export const reducer = (state = initialState, action) => {
         return s;
       });
       proposalsById[action.proposalId] = { ...proposal, selections };
-      return { ...state, proposalsById };
+      const lastEditedStepId = action.status === -1 ? null : action.stepId;
+      return { ...state, proposalsById, lastEditedStepId, lastNotifiedStepId: null };
     }
     case DELETE_VOTE_REQUESTED:
       return { ...state, currentDeletingVote: action.proposalId };
@@ -598,6 +627,13 @@ export const reducer = (state = initialState, action) => {
     }
     case POSTS_FETCH_FAILED: {
       console.log(POSTS_FETCH_FAILED, action.error); // eslint-disable-line no-console
+      return state;
+    }
+    case SEND_PROPOSAL_NOTIFICATION_SUCCEED: {
+      return { ...state, lastNotifiedStepId: action.stepId };
+    }
+    case SEND_PROPOSAL_NOTIFICATION_ERROR: {
+      console.log(SEND_PROPOSAL_NOTIFICATION_ERROR, action.error); // eslint-disable-line no-console
       return state;
     }
     default:

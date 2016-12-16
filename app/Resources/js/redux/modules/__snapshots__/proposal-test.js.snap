@@ -1,0 +1,8 @@
+exports[`Proposal Reducer Should handle sendProposalNotificationSucceed 1`] = `
+Object {
+  "lastNotifiedStepId": 2,
+  "proposalsById": Object {
+    "1": Object {},
+  },
+}
+`;

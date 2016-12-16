@@ -724,7 +724,7 @@ notification:
             <p>Bonjour,</p>
             <p>L'utilisateur <a href="%userUrl%">%username%</a> vient de supprimer la proposition <a href="%proposalUrl%">%proposal%</a> sur le projet %project%.</p>
 
-proposal_status_change:
+proposal_status_change_collect:
   notification:
     subject: Le statut de votre proposition vient d’être mis à jour sur %sitename%.
     body: |
@@ -737,6 +737,23 @@ proposal_status_change:
       <p><strong>Publiée dans :</strong></p>
       <ul>
         <li><strong>Projet :</strong> %project%</li>
+      </ul>
+      <a href="%proposal_link%">Voir votre contribution sur le site</a>
+
+proposal_status_change_selection:
+  notification:
+    subject: Le statut de votre proposition vient d’être mis à jour sur %sitename%.
+    body: |
+      <p>Bonjour %user%,</p>
+      <p>Le statut de votre proposition vient d’être mis à jour sur %sitename%.</p>
+      <ul>
+        <li><strong>Proposition :</strong> %proposal%</li>
+        <li><strong>Nouveau statut :</strong> %status%</li>
+      </ul>
+      <p><strong>Publiée dans :</strong></p>
+      <ul>
+        <li><strong>Projet :</strong> %project%</li>
+        <li><strong>Étape :</strong> %step%</li>
       </ul>
       <a href="%proposal_link%">Voir votre contribution sur le site</a>
 

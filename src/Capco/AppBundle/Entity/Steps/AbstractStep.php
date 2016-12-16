@@ -462,16 +462,16 @@ abstract class AbstractStep
     {
         $now = new \DateTime();
         if ($this->isOpen()) {
-            if (null != $this->endAt) {
+            if ($this->endAt) {
                 $time = $this->endAt->diff($now);
             } else {
-                $time = null != $this->startAt ? $this->startAt->diff($now) : null;
+                $time = $this->startAt ? $this->startAt->diff($now) : null;
             }
 
             if ($time) {
                 return [
-                    'days' => intval($time->format('%a')),
-                    'hours' => intval($time->format('%h')),
+                    'days' => (int) $time->format('%a'),
+                    'hours' => (int) $time->format('%h'),
                 ];
             }
         }
@@ -481,7 +481,7 @@ abstract class AbstractStep
 
     public function lastOneDay()
     {
-        if ($this->endAt != null && $this->startAt != null) {
+        if ($this->endAt && $this->startAt) {
             return $this->isSameDate($this->startAt, $this->endAt);
         }
 

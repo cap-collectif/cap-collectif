@@ -1,6 +1,6 @@
 {% block body_text %}
     {% autoescape false %}
-        {{ 'proposal_status_change.notification.body'|trans({
+        {{ 'proposal_status_change_collect.notification.body'|trans({
             '%sitename%': capco_site_parameter_value('global.site.fullname'),
             '%project%': proposal.step.project.title,
             '%proposal%': proposal.title,

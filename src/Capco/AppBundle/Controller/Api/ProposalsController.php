@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
+use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -33,7 +34,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\CapcoAppBundleEvents;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -94,7 +94,7 @@ class ProposalsController extends FOSRestController
     public function postProposalAction(Request $request, ProposalForm $proposalForm)
     {
         $user = $this->getUser();
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
 
         if (!$proposalForm->canContribute() && !$user->isAdmin()) {
             throw new BadRequestHttpException('You can no longer contribute to this collect step.');
@@ -202,7 +202,7 @@ class ProposalsController extends FOSRestController
                       ->countCommentsAndAnswersEnabledByProposal($proposal);
 
         return [
-            'comments_and_answers_count' => intval($countWithAnswers),
+            'comments_and_answers_count' => (int) $countWithAnswers,
             'comments_count' => count($paginator),
             'comments' => $comments,
         ];
@@ -294,7 +294,7 @@ class ProposalsController extends FOSRestController
     public function getProposalPostsAction(Proposal $proposal)
     {
         $posts = $this
-            ->get('doctrine.orm.entity_manager')
+            ->getDoctrine()->getManager()
             ->getRepository('CapcoAppBundle:Post')
             ->getPublishedPostsByProposal($proposal)
         ;
@@ -312,7 +312,7 @@ class ProposalsController extends FOSRestController
       */
      public function patchProposalAction(Request $request, Proposal $proposal)
      {
-         $em = $this->get('doctrine.orm.entity_manager');
+         $em = $this->getDoctrine()->getManager();
          $status = null;
 
          if ($request->request->get('status')) {
@@ -322,11 +322,23 @@ class ProposalsController extends FOSRestController
          $proposal->setStatus($status);
          $em->flush();
 
-         $notifier = $this->container->get('capco.notify_manager');
-         $notifier->notifyProposalStatusChange($proposal);
-
          return $status;
      }
+
+    /**
+     * @Post("/proposals/{proposal}/notify-status-changed")
+     * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
+     * @Security("has_role('ROLE_ADMIN')")
+     * @View(statusCode=200)
+     */
+    public function notifyProposalStatusChangeInCollectAction(Proposal $proposal)
+    {
+        if (!$proposal->getStatus()) {
+            throw new BadRequestHttpException('Proposal should have a status');
+        }
+
+        $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInCollect($proposal);
+    }
 
     /**
      * Update a proposal.
@@ -356,7 +368,7 @@ class ProposalsController extends FOSRestController
             throw new AccessDeniedException();
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(ProposalType::class, $proposal, [
             'proposalForm' => $proposalForm,
@@ -411,9 +423,7 @@ class ProposalsController extends FOSRestController
             return $proposal;
         }
 
-        $view = $this->view($form->getErrors(true), Response::HTTP_BAD_REQUEST);
-
-        return $view;
+        return $this->view($form->getErrors(true), Response::HTTP_BAD_REQUEST);
     }
 
     /**
@@ -436,8 +446,6 @@ class ProposalsController extends FOSRestController
      *
      * @param ProposalForm $proposalForm
      * @param Proposal     $proposal
-     *
-     * @return bool
      */
     public function deleteProposalAction(ProposalForm $proposalForm, Proposal $proposal)
     {
@@ -484,7 +492,7 @@ class ProposalsController extends FOSRestController
     public function postProposalReportAction(Request $request, Proposal $proposal)
     {
         if ($this->getUser() === $proposal->getAuthor()) {
-            throw new AccessDeniedHttpException();
+            throw $this->createAccessDeniedException();
         }
 
         $report = (new Reporting())
@@ -499,8 +507,8 @@ class ProposalsController extends FOSRestController
             return $form;
         }
 
-        $this->get('doctrine.orm.entity_manager')->persist($report);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $this->getDoctrine()->getManager()->persist($report);
+        $this->getDoctrine()->getManager()->flush();
         $this->get('capco.notify_manager')->sendNotifyMessage($report);
 
         return $report;

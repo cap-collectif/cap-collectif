@@ -118,7 +118,7 @@ const deleteVote = (opinion: number, parent: ?number, dispatch: Dispatch): void 
         actionType: UPDATE_OPINION_FAILURE,
         message: 'opinion.request.failure',
       });
-      console.error(e);
+      console.error(e); // eslint-disable no-console
     });
 };
 
@@ -143,7 +143,7 @@ const vote = (value: VoteValue, opinion: number, parent: ?number, dispatch: Disp
         actionType: UPDATE_OPINION_FAILURE,
         message: 'opinion.request.failure',
       });
-      console.error(e);
+      console.error(e); // eslint-disable no-console
     });
 };
 
@@ -243,7 +243,7 @@ export const reducer = (state: State = initialState, action: Action): State => {
       return removeVote(state, action.vote, state.versionsById[action.versionId], 'version');
     }
     case OPINION_VOTES_FETCH_FAILED: {
-      console.log(OPINION_VOTES_FETCH_FAILED, action.error);
+      console.log(OPINION_VOTES_FETCH_FAILED, action.error); // eslint-disable no-console
       return state;
     }
     default:
