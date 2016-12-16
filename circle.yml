@@ -29,6 +29,7 @@ test:
         - fab testing.qa.mocha
         - fab testing.qa.check_cs
         - fab testing.qa.check_deps
+        - fab testing.qa.check_type
         - fab testing.qa.behat:fast_failure=false,profile=api
         - fab testing.qa.behat:fast_failure=false,profile=commands,parallel=true
         - fab testing.qa.behat:fast_failure=false,profile=frontend

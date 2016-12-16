@@ -6,6 +6,7 @@
   "main": "brunch-config.js",
   "scripts": {
     "test": "NODE_ENV=test jest",
+    "typecheck": "./node_modules/flow-bin/cli.js check",
     "test:watch": "NODE_ENV=test jest --watchAll",
     "build": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
