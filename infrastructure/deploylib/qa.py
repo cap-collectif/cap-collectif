@@ -36,7 +36,7 @@ def lint():
 @task(environments=['local', 'testing'])
 def check_type():
     "Typecheck"
-    env.compose_run('npm run typecheck', 'builder', '.', no_deps=True)
+    local('npm run typecheck')
 
 
 @task(environments=['local', 'testing'])

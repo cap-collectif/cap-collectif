@@ -1,8 +1,9 @@
+// @flow
 import config from '../config';
 import AuthService from './AuthService';
 import LocalStorageService from './LocalStorageService';
 
-const status = (response) => {
+const status = (response: Object): Object | Error => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -15,14 +16,14 @@ const status = (response) => {
 
 export const json = response => response ? response.json() : {};
 
-const createHeaders = () => {
+const createHeaders = (): {[key: string]: string} => {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
 
   if (LocalStorageService.isValid('jwt')) {
-    headers.Authorization = `Bearer ${LocalStorageService.get('jwt')}`;
+    headers['Authorization'] = `Bearer ${LocalStorageService.get('jwt')}`;
   }
 
   return headers;
@@ -48,11 +49,11 @@ const addAuthorization = (req) => {
 
 class Fetcher {
 
-  get(uri) {
+  get(uri: string): Promise {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {
-          method: 'get',
+          method: 'GET',
           headers: createHeaders(),
           beforeSend: addAuthorization,
         })
@@ -62,11 +63,11 @@ class Fetcher {
     ;
   }
 
-  postFormData(uri, body) {
+  postFormData(uri: string, body: string): Promise {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {
-          method: 'post',
+          method: 'POST'
           headers: createFormDataHeaders(),
           beforeSend: addAuthorization,
           body,
@@ -76,11 +77,11 @@ class Fetcher {
     ;
   }
 
-  post(uri, body) {
+  post(uri: string, body: Object) {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {
-          method: 'post',
+          method: 'POST',
           headers: createHeaders(),
           beforeSend: addAuthorization,
           body: JSON.stringify(body),
@@ -90,11 +91,11 @@ class Fetcher {
     ;
   }
 
-  postToJson(uri, body) {
+  postToJson(uri: string, body: Object) {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {
-          method: 'post',
+          method: 'POST',
           headers: createHeaders(),
           beforeSend: addAuthorization,
           body: JSON.stringify(body),
@@ -105,11 +106,11 @@ class Fetcher {
     ;
   }
 
-  put(uri, body) {
+  put(uri: string, body: Object) {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {
-          method: 'put',
+          method: 'PUT',
           headers: createHeaders(),
           beforeSend: addAuthorization,
           body: JSON.stringify(body),
@@ -119,7 +120,7 @@ class Fetcher {
     ;
   }
 
-  patch(uri, body) {
+  patch(uri: string, body: Object) {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {
@@ -133,11 +134,11 @@ class Fetcher {
     ;
   }
 
-  delete(uri) {
+  delete(uri: string) {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {
-          method: 'delete',
+          method: 'DELETE',
           headers: createHeaders(),
           beforeSend: addAuthorization,
         })
