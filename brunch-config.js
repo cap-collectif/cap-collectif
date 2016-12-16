@@ -103,9 +103,6 @@ exports.config = {
     sass: {
       mode: 'native',
     },
-    'fb-flo': {
-      port: 8888,
-    },
     cleancss: {
       keepSpecialComments: 0,
       removeEmpty: true,
