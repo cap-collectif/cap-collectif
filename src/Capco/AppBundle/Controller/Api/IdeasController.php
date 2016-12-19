@@ -49,11 +49,11 @@ class IdeasController extends FOSRestController
      */
     public function getIdeasAction(Request $request, ParamFetcherInterface $paramFetcher)
     {
-        $pagination = (int) $paramFetcher->get('pagination');
+        $pagination = intval($paramFetcher->get('pagination'));
         if ($pagination === null) {
             $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
         }
-        $page = (int) $paramFetcher->get('page');
+        $page = intval($paramFetcher->get('page'));
         $from = $paramFetcher->get('from');
         $to = $paramFetcher->get('to');
         $order = $paramFetcher->get('order');
@@ -62,7 +62,7 @@ class IdeasController extends FOSRestController
         $theme = $request->request->has('theme') ? $request->request->get('theme') : null;
 
         $repo = $this
-            ->getDoctrine()
+            ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:Idea')
         ;
 
@@ -112,13 +112,13 @@ class IdeasController extends FOSRestController
         $offset = $paramFetcher->get('offset');
 
         $votes = $this
-            ->getDoctrine()
+            ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:IdeaVote')
             ->getVotesForIdea($idea, $limit, $offset)
         ;
 
         $count = $this
-            ->getDoctrine()
+            ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:IdeaVote')
             ->getVotesCountForIdea($idea)
         ;
@@ -165,7 +165,7 @@ class IdeasController extends FOSRestController
             return $form;
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
         $em->persist($idea);
         $em->flush();
 
@@ -182,7 +182,7 @@ class IdeasController extends FOSRestController
      */
     public function updateIdeaAction(Request $request, Idea $idea)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
 
         if ($this->getUser() !== $idea->getAuthor()) {
             throw new AccessDeniedHttpException();
@@ -230,10 +230,10 @@ class IdeasController extends FOSRestController
     public function deleteIdeaAction(Idea $idea)
     {
         if ($this->getUser() !== $idea->getAuthor()) {
-            throw $this->createAccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
         $em->remove($idea);
         $em->flush();
 
@@ -248,7 +248,7 @@ class IdeasController extends FOSRestController
     public function postIdeaVoteAction(Request $request, Idea $idea)
     {
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
 
         // Check if idea is votable
         if (!$idea->canContribute()) {
@@ -302,7 +302,7 @@ class IdeasController extends FOSRestController
      */
     public function deleteIdeaVoteAction(Idea $idea)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
 
         $vote = $em
             ->getRepository('CapcoAppBundle:IdeaVote')
@@ -334,7 +334,7 @@ class IdeasController extends FOSRestController
     public function postIdeaReportAction(Request $request, Idea $idea)
     {
         if ($this->getUser() === $idea->getAuthor()) {
-            throw $this->createAccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         $report = (new Reporting())
@@ -349,7 +349,7 @@ class IdeasController extends FOSRestController
             return $form;
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
         $em->persist($report);
         $em->flush();
         $this->get('capco.notify_manager')->sendNotifyMessage($report);
@@ -396,7 +396,7 @@ class IdeasController extends FOSRestController
             ->countCommentsAndAnswersEnabledByIdea($idea);
 
         return [
-            'comments_and_answers_count' => (int) $countWithAnswers,
+            'comments_and_answers_count' => intval($countWithAnswers),
             'comments_count' => count($paginator),
             'comments' => $comments,
         ];

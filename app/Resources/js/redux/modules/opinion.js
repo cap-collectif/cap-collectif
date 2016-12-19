@@ -7,6 +7,7 @@ import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../../services/Fetcher';
 
 export type VoteValue = -1 | 0 | 1;
+type Opinion = {| id: number |};
 type OpinionVote = {| user: { uniqueId: string }, value: VoteValue |};
 type OpinionVotes = Array<OpinionVote>;
 type Action =
@@ -19,12 +20,12 @@ type Action =
 ;
 type FetchOpinionVotesAction = {| type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: number, versionId: ?number |};
 type ContributionMap = {[id: number]: {votes: OpinionVotes, votesCount: number}};
-type State = {
+type State = {|
   currentOpinionId: ?number,
   currentVersionId: ?number,
   opinionsById: ContributionMap,
   versionsById: ContributionMap
-};
+|};
 type Dispatch = ReduxDispatch<Action>;
 
 const VOTES_PREVIEW_COUNT = 8;
@@ -163,12 +164,12 @@ export const voteVersion = (value: VoteValue, version: number, opinion: number, 
   vote(value, version, opinion, dispatch)
 );
 
-const updateOpinion = (state: State, opinion: Object): State => ({
+const updateOpinion = (state: State, opinion: Opinion): State => ({
   ...state,
   opinionsById: { ...state.opinionsById, [opinion.id]: opinion },
 });
 
-const updateVersion = (state: State, version: Object): State => ({
+const updateVersion = (state: State, version: Opinion): State => ({
   ...state,
   versionsById: { ...state.versionsById, [version.id]: version },
 });
