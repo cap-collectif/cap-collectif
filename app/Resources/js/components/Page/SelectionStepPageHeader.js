@@ -4,25 +4,25 @@ import { IntlMixin, FormattedMessage } from 'react-intl';
 
 const SelectionStepPageHeader = React.createClass({
   propTypes: {
-    count: PropTypes.number.isRequired,
+    queryCount: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { count, total } = this.props;
+    const { queryCount, total } = this.props;
     return (
       <h3 className="h3" style={{ marginBottom: '15px' }}>
         {
-          total === count
+          queryCount !== null && total !== queryCount
             ? <FormattedMessage
-              message={this.getIntlMessage('proposal.count')}
-              num={count}
+              message={this.getIntlMessage('proposal.count_with_total')}
+              num={queryCount}
+              total={total}
               />
           : <FormattedMessage
-            message={this.getIntlMessage('proposal.count_with_total')}
-            num={count}
-            total={total}
+            message={this.getIntlMessage('proposal.count')}
+            num={total}
             />
         }
       </h3>
@@ -31,4 +31,4 @@ const SelectionStepPageHeader = React.createClass({
 
 });
 
-export default connect((state, props) => ({ count: state.proposal.queryCount || props.total }))(SelectionStepPageHeader);
+export default connect(state => ({ queryCount: state.proposal.queryCount }))(SelectionStepPageHeader);

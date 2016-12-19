@@ -6,7 +6,7 @@ import ProposalCreate from '../Proposal/Create/ProposalCreate';
 const CollectStepPageHeader = React.createClass({
   propTypes: {
     total: PropTypes.number.isRequired,
-    count: PropTypes.number.isRequired,
+    queryCount: PropTypes.number.isRequired,
     countFusions: PropTypes.number,
     form: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
@@ -16,7 +16,7 @@ const CollectStepPageHeader = React.createClass({
   render() {
     const {
       categories,
-      count,
+      queryCount,
       total,
       countFusions,
       form,
@@ -24,15 +24,15 @@ const CollectStepPageHeader = React.createClass({
     return (
       <h3 className="h3" style={{ marginBottom: '15px' }}>
         {
-          total === count
+          queryCount !== null && total !== queryCount
             ? <FormattedMessage
-              message={this.getIntlMessage('proposal.count')}
-              num={count}
+              message={this.getIntlMessage('proposal.count_with_total')}
+              num={queryCount}
+              total={total}
               />
           : <FormattedMessage
-            message={this.getIntlMessage('proposal.count_with_total')}
-            num={count}
-            total={total}
+            message={this.getIntlMessage('proposal.count')}
+            num={total}
             />
         }
         { ' ' }
@@ -54,4 +54,4 @@ const CollectStepPageHeader = React.createClass({
 
 });
 
-export default connect((state, props) => ({ count: state.proposal.queryCount || props.total }))(CollectStepPageHeader);
+export default connect(state => ({ queryCount: state.proposal.queryCount }))(CollectStepPageHeader);
