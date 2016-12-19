@@ -518,7 +518,7 @@ export const reducer = (state = initialState, action) => {
       const proposal = proposalsById[action.proposalId];
       const selections = proposal.selections.filter(s => s.step.id !== action.stepId);
       proposalsById[action.proposalId] = { ...proposal, selections };
-      return { ...state, proposalsById };
+      return { ...state, proposalsById, lastEditedStepId: null, lastNotifiedStepId: null };
     }
     case UPDATE_PROPOSAL_STATUS_SUCCEED: {
       const proposalsById = state.proposalsById;

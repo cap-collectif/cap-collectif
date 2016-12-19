@@ -86,15 +86,14 @@ export const ProposalAdminSelections = React.createClass({
                           (s.step_type === 'collect' || s.step_type === 'selection') &&
                           <div style={{ display: lastNotifiedStepId !== s.id ? 'inline' : 'none' }}>
                             <Col md={6}>
-                              <div className="pull-right" style={{ fontSize: 16 }}>
+                              <div className="pull-right" style={{ fontSize: 14, visibility: lastEditedStepId === s.id ? 'visible' : 'hidden' }}>
                                 Souhaitez-vous notifier l'auteur du changement de statut par email ?
                               </div>
                             </Col>
                             <Col md={2}>
-                              <div className="pull-right">
+                              <div className="pull-right" style={{ visibility: lastEditedStepId === s.id ? 'visible' : 'hidden' }}>
                                <Button
                                  bsStyle={lastEditedStepId !== s.id ? 'default' : 'primary'}
-                                 bsSize="large"
                                  disabled={lastEditedStepId !== s.id}
                                  onClick={() => {
                                    if (s.step_type === 'collect') {
