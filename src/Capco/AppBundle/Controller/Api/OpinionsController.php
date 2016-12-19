@@ -56,7 +56,7 @@ class OpinionsController extends FOSRestController
      */
     public function getOpinionAction(Opinion $opinion)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
         $repo = $em->getRepository('CapcoAppBundle:Opinion');
         $id = $opinion->getId();
 
@@ -126,7 +126,7 @@ class OpinionsController extends FOSRestController
              return $form;
          }
 
-         $em = $this->getDoctrine()->getManager();
+         $em = $this->get('doctrine.orm.entity_manager');
          $em->persist($opinion);
          $em->flush();
 
@@ -162,7 +162,7 @@ class OpinionsController extends FOSRestController
 
        $opinion->resetVotes();
        $opinion->setValidated(false);
-       $this->getDoctrine()->getManager()->flush();
+       $this->get('doctrine.orm.entity_manager')->flush();
 
        return $opinion;
    }
@@ -192,7 +192,7 @@ class OpinionsController extends FOSRestController
             throw new AccessDeniedException();
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
         $em->remove($opinion);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
@@ -225,7 +225,7 @@ class OpinionsController extends FOSRestController
         $limit = $paramFetcher->get('limit');
         $offset = $paramFetcher->get('offset');
 
-        $repo = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVote');
+        $repo = $this->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:OpinionVote');
 
         $votes = $repo->getByOpinion($opinion->getId(), false, $limit, $offset);
         $count = $repo->getVotesCountByOpinion($opinion);
@@ -267,7 +267,7 @@ class OpinionsController extends FOSRestController
         }
 
         $user = $this->getUser();
-        $previousVote = $this->getDoctrine()
+        $previousVote = $this->get('doctrine.orm.entity_manager')
                     ->getRepository('CapcoAppBundle:OpinionVote')
                     ->findOneBy(['user' => $user, 'opinion' => $opinion]);
 
@@ -276,7 +276,7 @@ class OpinionsController extends FOSRestController
             $opinion->decrementVotesCountByType($previousVote->getValue());
 
             $previousVote->setValue($vote->getValue());
-            $this->getDoctrine()->getManager()->flush();
+            $this->get('doctrine.orm.entity_manager')->flush();
 
             return $previousVote;
         }
@@ -287,8 +287,8 @@ class OpinionsController extends FOSRestController
         ;
 
         $opinion->incrementVotesCountByType($vote->getValue());
-        $this->getDoctrine()->getManager()->persist($vote);
-        $this->getDoctrine()->getManager()->flush();
+        $this->get('doctrine.orm.entity_manager')->persist($vote);
+        $this->get('doctrine.orm.entity_manager')->flush();
 
         return $vote;
     }
@@ -317,7 +317,7 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException('Uncontribuable opinion.');
         }
 
-        $vote = $this->getDoctrine()->getManager()
+        $vote = $this->get('doctrine.orm.entity_manager')
                      ->getRepository('CapcoAppBundle:OpinionVote')
                      ->findOneBy(['user' => $this->getUser(), 'opinion' => $opinion]);
 
@@ -326,8 +326,8 @@ class OpinionsController extends FOSRestController
         }
 
         $opinion->decrementVotesCountByType($vote->getValue());
-        $this->getDoctrine()->getManager()->remove($vote);
-        $this->getDoctrine()->getManager()->flush();
+        $this->get('doctrine.orm.entity_manager')->remove($vote);
+        $this->get('doctrine.orm.entity_manager')->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return $vote;
@@ -398,7 +398,7 @@ class OpinionsController extends FOSRestController
     {
         $project = $opinion->getStep()->getProject();
 
-        $votes = $this->getDoctrine()->getManager()
+        $votes = $this->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:OpinionVersion')
             ->getWithVotes($version->getId(), 5);
 
@@ -499,13 +499,15 @@ class OpinionsController extends FOSRestController
         if ($form->isValid()) {
             $opinionVersion->resetVotes();
             $opinionVersion->setValidated(false);
-            $this->getDoctrine()->getManager()->persist($opinionVersion);
-            $this->getDoctrine()->getManager()->flush();
+            $this->get('doctrine.orm.entity_manager')->persist($opinionVersion);
+            $this->get('doctrine.orm.entity_manager')->flush();
 
             return $opinionVersion;
         }
 
-        return $this->view($form->getErrors(true), Response::HTTP_BAD_REQUEST);
+        $view = $this->view($form->getErrors(true), Response::HTTP_BAD_REQUEST);
+
+        return $view;
     }
 
     /**
@@ -531,10 +533,10 @@ class OpinionsController extends FOSRestController
     {
         $user = $this->getUser();
         if ($user !== $opinionVersion->getAuthor()) {
-            throw $this->createAccessDeniedException();
+            throw new AccessDeniedException();
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
         $em->remove($opinionVersion);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
@@ -649,9 +651,10 @@ class OpinionsController extends FOSRestController
         $limit = $paramFetcher->get('limit');
         $offset = $paramFetcher->get('offset');
 
-        $repo = $this->getDoctrine()->getManager()
-            ->getRepository('CapcoAppBundle:OpinionVersionVote');
-
+        $repo = $this
+          ->get('doctrine.orm.entity_manager')
+          ->getRepository('CapcoAppBundle:OpinionVersionVote')
+        ;
         $votes = $repo->getByVersion($version->getId(), false, $limit, $offset);
         $count = $repo->getVotesCountByVersion($version);
 
@@ -775,7 +778,7 @@ class OpinionsController extends FOSRestController
     public function postOpinionReportAction(Request $request, Opinion $opinion)
     {
         if ($this->getUser() === $opinion->getAuthor()) {
-            throw $this->createAccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         $report = (new Reporting())
@@ -790,8 +793,8 @@ class OpinionsController extends FOSRestController
             return $form;
         }
 
-        $this->getDoctrine()->getManager()->persist($report);
-        $this->getDoctrine()->getManager()->flush();
+        $this->get('doctrine.orm.entity_manager')->persist($report);
+        $this->get('doctrine.orm.entity_manager')->flush();
         $this->get('capco.notify_manager')->sendNotifyMessage($report);
 
         return $report;
@@ -806,7 +809,7 @@ class OpinionsController extends FOSRestController
     public function postOpinionVersionReportAction(Request $request, OpinionVersion $version)
     {
         if ($this->getUser() === $version->getAuthor()) {
-            throw $this->createAccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         $report = (new Reporting())
@@ -821,8 +824,8 @@ class OpinionsController extends FOSRestController
             return $form;
         }
 
-        $this->getDoctrine()->getManager()->persist($report);
-        $this->getDoctrine()->getManager()->flush();
+        $this->get('doctrine.orm.entity_manager')->persist($report);
+        $this->get('doctrine.orm.entity_manager')->flush();
         $this->get('capco.notify_manager')->sendNotifyMessage($report);
 
         return $report;
