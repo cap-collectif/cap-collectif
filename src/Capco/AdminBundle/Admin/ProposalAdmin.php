@@ -161,10 +161,10 @@ class ProposalAdmin extends Admin
             ->end()
         ;
 
+        $instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
+
         // Evaluation
-        if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
-            || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod'
-        ) {
+        if ($instanceName === 'rennes' || $instanceName === 'rennespreprod') {
             $formMapper
                 ->with('admin.fields.proposal.group_evaluation',
                 [
@@ -418,33 +418,12 @@ class ProposalAdmin extends Admin
 
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get('doctrine')
             ->getRepository('CapcoAppBundle:ProposalCategory')
             ->createQueryBuilder('pc')
             ->leftJoin('pc.form', 'form')
             ->andWhere('form.id = :formId')
             ->setParameter('formId', $proposalFormId)
-        ;
-
-        return $qb->getQuery();
-    }
-
-    private function createQueryForCollectStatus()
-    {
-        $collectStepId = 0;
-        $subject = $this->getSubject();
-        if ($subject->getId()) {
-            $collectStepId = $subject->getProposalForm()->getStep()->getId();
-        }
-
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:Status')
-            ->createQueryBuilder('s')
-            ->leftJoin('s.step', 'step')
-            ->andWhere('step.id = :stepId')
-            ->setParameter('stepId', $collectStepId)
         ;
 
         return $qb->getQuery();

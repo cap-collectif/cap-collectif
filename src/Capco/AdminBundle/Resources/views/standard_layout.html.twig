@@ -27,7 +27,7 @@
 
 
 {% block sonata_admin_content_actions_wrappers %}
-  {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' %}
+  {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' and not admin.show %}
   <ul class="nav navbar-nav navbar-right">
     <li>
         {{ react_intl_component('ProposalCreateFusionButtonApp') }}
