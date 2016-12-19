@@ -33,6 +33,11 @@ def lint():
     env.compose_run('npm run lint', 'builder', '.', no_deps=True)
     env.compose_run('autopep8 --in-place --aggressive --aggressive infrastructure/deploylib/* --ignore=E501', 'builder', '.', no_deps=True)
 
+@task(environments=['local', 'testing'])
+def check_type():
+    "Typecheck"
+    local('npm run typecheck')
+
 
 @task(environments=['local', 'testing'])
 def phpspec():
@@ -41,7 +46,7 @@ def phpspec():
 
 
 @task(environments=['local', 'testing'])
-def mocha():
+def jest():
     "Run JS Unit Tests"
     env.compose_run('npm test', 'builder', '.', no_deps=True)
 

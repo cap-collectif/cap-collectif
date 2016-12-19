@@ -23,6 +23,7 @@ class Post implements CommentableInterface, IndexableInterface
     use IdTrait;
 
     /**
+     * @var string
      * @Assert\NotBlank()
      * @ORM\Column(name="title", type="string", length=255)
      */
@@ -36,6 +37,7 @@ class Post implements CommentableInterface, IndexableInterface
     private $abstract;
 
     /**
+     * @var string
      * @Gedmo\Slug(separator="-", unique=true, fields={"title"}, updatable=false)
      * @ORM\Column(name="slug", type="string", length=255)
      */
@@ -50,6 +52,8 @@ class Post implements CommentableInterface, IndexableInterface
     private $body;
 
     /**
+     * @var bool
+     *
      * @ORM\Column(name="is_published", type="boolean")
      */
     private $isPublished = false;
@@ -60,12 +64,15 @@ class Post implements CommentableInterface, IndexableInterface
     private $displayedOnBlog = true;
 
     /**
+     * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(name="published_at", type="datetime", nullable=true)
      */
     private $publishedAt;
@@ -129,7 +136,6 @@ class Post implements CommentableInterface, IndexableInterface
         $this->proposals = new ArrayCollection();
         $this->commentsCount = 0;
         $this->updatedAt = new \Datetime();
-        $this->publishedAt = new \Datetime();
     }
 
     public function isIndexable()
