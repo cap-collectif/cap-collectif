@@ -67,6 +67,7 @@ type Action =
 // };
 type ProposalMap = {[id: number]: Object};
 type State = {|
+  queryCount: ?number,
   currentProposalId: ?number,
   proposalShowedId: Array<number>,
   creditsLeftByStepId: Object,
@@ -97,6 +98,7 @@ type Dispatch = ReduxDispatch<Action>;
 const initialState: State = {
   currentProposalId: null,
   proposalShowedId: [],
+  queryCount: 0,
   creditsLeftByStepId: {},
   proposalsById: {},
   userVotesByStepId: {},
@@ -456,7 +458,7 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
       filters: state.filters,
     },
   );
-  yield put({ type: FETCH_SUCCEEDED, proposals: result.proposals });
+  yield put({ type: FETCH_SUCCEEDED, proposals: result.proposals, count: result.count });
 }
 
 
@@ -638,7 +640,7 @@ export const reducer = (state: State = initialState, action: Action): State => {
         return map;
       }, {});
       const proposalShowedId = action.proposals.map(proposal => proposal.id);
-      return { ...state, proposalsById, proposalShowedId, isLoading: false };
+      return { ...state, proposalsById, proposalShowedId, isLoading: false, queryCount: action.count };
     }
     case LOAD_SELECTIONS_SUCCEEDED: {
       const proposalsById = state.proposalsById;

@@ -621,6 +621,7 @@
       "media": "Vous avez sélectionné un nombre trop important d'image."
     },
     "count": "{num, plural, =0{0 proposition} one{# proposition} other{# propositions}}",
+    "count_with_total": "{num, plural, =0{0 proposition} one{# proposition} other{# propositions}} sur {total} propositions",
     "count_fusions": "{num, plural, =0{} one{dont # issue d'une fusion} other{dont # issues d'une fusion}}",
     "delete": {
       "confirm": "Voulez-vous vraiment supprimer la proposition \"{title}\" ?"
