@@ -12,6 +12,12 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="uuid" column="uuid" type="guid" nullable="true" />
+
+        <!-- <id name="id" column="id" type="guid">
+            <generator strategy="UUID" />
+        </id> -->
+
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="sanitizePhoneNumber"/>
             <lifecycle-callback type="preUpdate" method="sanitizePhoneNumber"/>

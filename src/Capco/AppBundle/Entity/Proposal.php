@@ -58,6 +58,26 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     private $body;
 
     /**
+     * @ORM\Column(name="author_uuid", type="guid", nullable=true)
+     */
+    private $authorUuuid;
+
+    /**
+     * @ORM\Column(name="proposal_update_author_uuid", type="guid", nullable=true)
+     */
+    private $proposalAuthorUpdateuuid;
+
+    public function setAuthorUuid($uuid)
+    {
+      $this->authorUuuid = $uuid;
+    }
+
+    public function setUpdateProposalAuthorUuid($uuid)
+    {
+      $this->proposalAuthorUpdateuuid = $uuid;
+    }
+
+    /**
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
