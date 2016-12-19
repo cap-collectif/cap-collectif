@@ -105,7 +105,6 @@
     "redux-form": "6.2.0",
     "redux-saga": "^0.11.1",
     "sass-brunch": "https://github.com/spyl94/sass-brunch",
-    "sinon": "^1.17.3",
     "uglify-js-brunch": "^2.0.1",
     "webpack": "^1.13.2",
     "whatwg-fetch": "^1.0.0"
