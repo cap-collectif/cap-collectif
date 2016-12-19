@@ -6,7 +6,6 @@
   "main": "brunch-config.js",
   "scripts": {
     "test": "NODE_ENV=test jest",
-    "typecheck": "flow check || true",
     "test:watch": "NODE_ENV=test jest --watchAll",
     "build": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "LOGGY_STACKS=true NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
@@ -117,11 +116,13 @@
     "eslint-brunch": "^3.12.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-flowtype": "^2.29.1",
+    "eslint-plugin-flowtype-errors": "^2.0.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jest": "^1.0.2",
     "eslint-plugin-jsx-a11y": "2.2.3",
     "eslint-plugin-react": "^6.3.0",
-    "flow-bin": "latest",
+    "fb-flo-brunch": "^1.7.22",
+    "flow-bin": "^0.37.0",
     "jest": "^18.0.0",
     "jest-serializer-enzyme": "^1.0.0",
     "react-addons-test-utils": "^15.3.1"

@@ -4,7 +4,7 @@ export default {
 
   login: (data) => {
     return fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
-      method: 'POST',
+      method: 'post',
       body: JSON.stringify(data),
       credentials: 'include',
       headers: {

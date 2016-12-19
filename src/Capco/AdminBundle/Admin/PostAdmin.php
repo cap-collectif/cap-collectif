@@ -68,9 +68,6 @@ class PostAdmin extends Admin
         ;
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -199,7 +196,7 @@ class PostAdmin extends Admin
           ->end()
           ->with('admin.fields.blog_post.group_meta')
             ->add('publishedAt', 'sonata_type_datetime_picker', [
-                'required' => false,
+                'required' => true,
                 'label' => 'admin.fields.blog_post.published_at',
                 'format' => 'dd/MM/yyyy HH:mm',
                 'attr' => [
