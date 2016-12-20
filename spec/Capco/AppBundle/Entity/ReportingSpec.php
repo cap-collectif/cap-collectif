@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\Entity;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 class ReportingSpec extends ObjectBehavior
 {

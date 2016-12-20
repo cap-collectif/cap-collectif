@@ -3,9 +3,12 @@
 namespace spec\Capco\AppBundle\Helper;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Doctrine\Common\Collections\ArrayCollection;
+
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\EventRegistration;
 
 class EventHelperSpec extends ObjectBehavior
 {

@@ -227,7 +227,6 @@ COPY cron/crontab               /etc/cron.d/crontab
 COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
-COPY logrotate/mysql-slow-logs   /etc/logrotate.d/mysql-slow-logs
 
 # Binaries
 COPY rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin
