@@ -3,11 +3,19 @@
 namespace spec\Capco\AppBundle\Manager;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Entity\IdeaComment;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Repository\EventCommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\IdeaCommentRepository;
 use Capco\AppBundle\Repository\IdeaRepository;
 use Capco\AppBundle\Resolver\UrlResolver;
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Routing\Router;
 
@@ -40,5 +48,6 @@ class CommentResolverSpec extends ObjectBehavior
 
         $this->getObjectByTypeAndId('Idea', $objectId)->shouldReturn($idea);
         $this->getObjectByTypeAndId('Event', $objectId)->shouldReturn($event);
+
     }
 }

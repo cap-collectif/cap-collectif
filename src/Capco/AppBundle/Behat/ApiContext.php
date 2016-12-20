@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @Copyright 2015 Aurélien David a.k.a "PretentiouSpyl" <adavid@jolicode.com>
+ */
+
 namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
@@ -314,8 +318,8 @@ EOF;
     public function theJsonResponseStatusCodeShouldBe($code)
     {
         PHPUnit::assertSame(
-            (int) $code,
-            (int) $this->response->getStatusCode(),
+            intval($code),
+            intval($this->response->getStatusCode()),
             (string) $this->response->getBody()
         );
     }
