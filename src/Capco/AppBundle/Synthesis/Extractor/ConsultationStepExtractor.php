@@ -58,7 +58,7 @@ class ConsultationStepExtractor
      */
     public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep = null)
     {
-        if (!$consultationStep) {
+        if (!$consultationStep || !$consultationStep->getIsEnabled()) {
             return false;
         }
 

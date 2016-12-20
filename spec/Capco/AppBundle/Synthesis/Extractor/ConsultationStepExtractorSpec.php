@@ -19,6 +19,7 @@ use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
 
 class ConsultationStepExtractorSpec extends ObjectBehavior
 {
@@ -29,10 +30,10 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor');
+        $this->shouldHaveType(ConsultationStepExtractor::class);
     }
 
-    function it_can_create_or_update_elements_from_consultation_step(EntityManager $em, OpinionRepository $repo, Synthesis $synthesis, ConsultationStep $consultationStep, OpinionTypesResolver $opinionTypesResolver)
+    function it_can_create_or_update_elements_from_consultation_step(EntityManager $em, Synthesis $synthesis, ConsultationStep $consultationStep)
     {
         // Objects can not be mocked because we need to call get_class() method on them
 
@@ -69,33 +70,34 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         // Element0 is linked to opinionType
         $element0 = new SynthesisElement();
         $element0->setLinkedDataId(1);
-        $element0->setLinkedDataClass('Capco\AppBundle\Entity\OpinionType');
+        $element0->setLinkedDataClass(OpinionType::class);
 
         // Element 1 is linked to opinion 1
         $element1 = new SynthesisElement();
         $element1->setLinkedDataId(1);
-        $element1->setLinkedDataClass('Capco\AppBundle\Entity\Opinion');
+        $element1->setLinkedDataClass(Opinion::class);
 
         // Element 2 is linked to argument 2
         $element2 = new SynthesisElement();
         $element2->setLinkedDataId(422);
-        $element2->setLinkedDataClass('Capco\AppBundle\Entity\Argument');
+        $element2->setLinkedDataClass(Argument::class);
 
         // Element 3 is linked to argument 4
         $element3 = new SynthesisElement();
         $element3->setLinkedDataId(424);
-        $element3->setLinkedDataClass('Capco\AppBundle\Entity\Argument');
+        $element3->setLinkedDataClass(Argument::class);
 
         $currentElements = new ArrayCollection([$element0, $element1, $element2, $element3]);
-        $opinions = new ArrayCollection([$opinion1, $opinion2]);
 
         $synthesis->getElements()->willReturn($currentElements)->shouldBeCalled();
         $consultationStepType = new ConsultationStepType();
+        $consultationStep->getIsEnabled()->willReturn(true);
         $consultationStep->getConsultationStepType()->willReturn($consultationStepType)->shouldBeCalled();
 
         $em->flush()->shouldBeCalled();
 
-        $synthesis = $this->createOrUpdateElementsFromConsultationStep($synthesis, $consultationStep)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
+        $synthesis = $this->createOrUpdateElementsFromConsultationStep($synthesis, $consultationStep)
+            ->shouldReturnAnInstanceOf(Synthesis::class);
 
         expect(count($synthesis->getElements()))->toBe(4);
     }
@@ -107,12 +109,12 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $opinion->setId(42);
 
         // Related element (same class, same id)
-        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Opinion')->shouldBeCalled();
+        $element->getLinkedDataClass()->willReturn(Opinion::class)->shouldBeCalled();
         $element->getLinkedDataId()->willReturn(42)->shouldBeCalled();
         $this->isElementRelated($element, $opinion)->shouldReturn(true);
 
         // Not related (different id)
-        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Opinion')->shouldBeCalled();
+        $element->getLinkedDataClass()->willReturn(Opinion::class)->shouldBeCalled();
         $element->getLinkedDataId()->willReturn(51)->shouldBeCalled();
         $this->isElementRelated($element, $opinion)->shouldReturn(false);
 
@@ -148,7 +150,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->elementIsOutdated($element, $opinion)->shouldReturn(false);
     }
 
-    function it_can_update_an_element_from_an_object(SynthesisElement $element, SynthesisDivision $division, User $author, EntityManager $em, TranslatorInterface $translator, Router $router, Opinion $object)
+    function it_can_update_an_element_from_an_object(SynthesisElement $element, User $author, Opinion $object)
     {
         $date = new \DateTime();
         $object->getTitle()->willReturn('test')->shouldBeCalled();
@@ -171,6 +173,6 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $element->setBody('blabla')->shouldBeCalled();
         $element->setVotes([-1 => 25, 0 => 25, 1 => 25])->shouldBeCalled();
 
-        $this->updateElementFrom($element, $object)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $this->updateElementFrom($element, $object)->shouldReturnAnInstanceOf(SynthesisElement::class);
     }
 }
