@@ -2,10 +2,8 @@
 
 namespace spec\Capco\AppBundle\Synthesis\Extractor;
 
-use Buzz\Util\Url;
 use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
@@ -19,7 +17,6 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Doctrine\Common\Collections\ArrayCollection;
-use Prophecy\Argument as ProphecyArgument;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
@@ -101,7 +98,6 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $synthesis = $this->createOrUpdateElementsFromConsultationStep($synthesis, $consultationStep)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
 
         expect(count($synthesis->getElements()))->toBe(4);
-
     }
 
     function it_can_tell_if_element_is_related_to_object(SynthesisElement $element)
@@ -177,5 +173,4 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
 
         $this->updateElementFrom($element, $object)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
     }
-
 }

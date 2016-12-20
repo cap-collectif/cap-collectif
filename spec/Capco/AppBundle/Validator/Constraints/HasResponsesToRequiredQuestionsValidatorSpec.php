@@ -5,7 +5,6 @@ namespace spec\Capco\AppBundle\Command;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
 {
@@ -32,5 +31,4 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         $this->hasResponseForQuestion($question1, [$response2])->shouldReturn(false);
         $this->hasResponseForQuestion($question1, [$response3])->shouldReturn(false);
     }
-
 }

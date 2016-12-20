@@ -2,14 +2,12 @@
 
 namespace spec\Capco\AppBundle\Validator\Constraints;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Validator\Constraints\IsCollectOrSelectionStep;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class IsCollectOrSelectionStepValidatorSpec extends ObjectBehavior
 {
@@ -22,9 +20,7 @@ class IsCollectOrSelectionStepValidatorSpec extends ObjectBehavior
         ConsultationStep $step,
         IsCollectOrSelectionStep $constraint,
         ExecutionContextInterface $context
-
-    )
-    {
+    ) {
         $step->isSelectionStep()->willReturn(false)->shouldBeCalled();
         $step->isCollectStep()->willReturn(false)->shouldBeCalled();
 
@@ -37,9 +33,7 @@ class IsCollectOrSelectionStepValidatorSpec extends ObjectBehavior
         SelectionStep $step,
         IsCollectOrSelectionStep $constraint,
         ExecutionContextInterface $context
-
-    )
-    {
+    ) {
         $step->isSelectionStep()->willReturn(true)->shouldBeCalled();
         $this->initialize($context);
         $context->addViolation($constraint->message, [])->shouldNotBeCalled();
@@ -50,14 +44,11 @@ class IsCollectOrSelectionStepValidatorSpec extends ObjectBehavior
         CollectStep $step,
         IsCollectOrSelectionStep $constraint,
         ExecutionContextInterface $context
-
-    )
-    {
+    ) {
         $step->isSelectionStep()->willReturn(false)->shouldBeCalled();
         $step->isCollectStep()->willReturn(true)->shouldBeCalled();
         $this->initialize($context);
         $context->addViolation($constraint->message, [])->shouldNotBeCalled();
         $this->validate($step, $constraint);
     }
-
 }

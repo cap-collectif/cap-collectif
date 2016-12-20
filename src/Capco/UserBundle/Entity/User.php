@@ -63,13 +63,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     protected $id;
 
-    public function setUuid(string $uuid)
-    {
-        $this->uuid = $uuid;
-    }
-
-    protected $uuid;
-
     /**
      * @var string
      */
