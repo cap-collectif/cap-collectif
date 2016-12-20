@@ -3,7 +3,6 @@
 namespace spec\Capco\AppBundle\Entity;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class IdeaSpec extends ObjectBehavior
 {

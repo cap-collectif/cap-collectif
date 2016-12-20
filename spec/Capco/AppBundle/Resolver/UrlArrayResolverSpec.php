@@ -5,9 +5,7 @@ namespace spec\Capco\AppBundle\Resolver;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Routing\Router;
-
 
 class UrlArrayResolverSpec extends ObjectBehavior
 {

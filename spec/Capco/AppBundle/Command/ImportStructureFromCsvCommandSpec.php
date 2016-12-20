@@ -3,7 +3,6 @@
 namespace spec\Capco\AppBundle\Command;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Capco\AppBundle\Entity\OpinionType;
 
 class ImportStructureFromCsvCommandSpec extends ObjectBehavior
@@ -28,5 +27,4 @@ class ImportStructureFromCsvCommandSpec extends ObjectBehavior
         $this->shouldThrow(new \Exception('Unknown opinion title: "Chapitre 2"', 1))
              ->duringFindOpinionTypeByPath('Chapitre 2', [$ot1]);
     }
-
 }

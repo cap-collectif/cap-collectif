@@ -7,7 +7,7 @@ trait ProjectStepsTrait
     /**
      * @Then project :projectId should have author :authorId
      */
-    public function projectShouldHaveAuthor(int $projectId, string $authorId)
+    public function projectShouldHaveAuthor(int $projectId, int $authorId)
     {
         $this->getEntityManager()->clear();
         $project = $this->getRepository('CapcoAppBundle:Project')->find($projectId);

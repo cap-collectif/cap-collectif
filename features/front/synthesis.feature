@@ -65,6 +65,7 @@ Scenario: Admin wants to see all elements list
 Scenario: Admin wants to see an element details
   Given I am logged in as admin
   And I go to a synthesis edition page
+  When I go to the all elements inbox
   When I click on a synthesis element
   Then I should see the synthesis element details
 
@@ -74,6 +75,7 @@ Scenario: Admin wants to see an element details
 Scenario: Admin wants to ignore an element
   Given I am logged in as admin
   And I go to a synthesis edition page
+  When I go to the all elements inbox
   When I click on a synthesis element
   And I click the ignore element button
   And I confirm the ignore element action
@@ -84,6 +86,7 @@ Scenario: Admin wants to ignore an element
 Scenario: Admin wants to publish an element without note, comment or parent
   Given I am logged in as admin
   And I go to a synthesis edition page
+  When I go to the all elements inbox
   When I click on a synthesis element
   And I click the publish element button
   And I confirm element publication
@@ -94,6 +97,7 @@ Scenario: Admin wants to publish an element without note, comment or parent
 Scenario: Admin wants to publish an element with note
   Given I am logged in as admin
   And I go to a synthesis edition page
+  When I go to the all elements inbox
   When I click on a synthesis element
   And I click the publish element button
   And I give a note to the synthesis element
@@ -108,6 +112,7 @@ Scenario: Admin wants to publish an element with note
 Scenario: Admin wants to publish an element with parent
   Given I am logged in as admin
   And I go to a synthesis edition page
+  When I go to the all elements inbox
   When I click on a synthesis element
   And I click the publish element button
   And I choose a parent for the synthesis element
@@ -119,6 +124,7 @@ Scenario: Admin wants to publish an element with parent
 Scenario: Admin wants to publish an element with comment
   Given I am logged in as admin
   And I go to a synthesis edition page
+  When I go to the all elements inbox
   When I click on a synthesis element
   And I click the publish element button
   And I add a comment to the synthesis element
@@ -130,6 +136,7 @@ Scenario: Admin wants to publish an element with comment
 Scenario: Admin wants to divide an element without selecting text
   Given I am logged in as admin
   And I go to a synthesis edition page
+  When I go to the all elements inbox
   When I click on a synthesis element
   And I click the divide element button
   And I click the create element division button

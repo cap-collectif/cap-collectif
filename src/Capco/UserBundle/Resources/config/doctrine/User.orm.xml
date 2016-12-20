@@ -8,8 +8,8 @@
     <entity name="Capco\UserBundle\Entity\User"
             table="fos_user"
             repository-class="Capco\UserBundle\Repository\UserRepository">
-        <id name="id" column="id" type="guid">
-            <generator strategy="UUID" />
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
         </id>
 
         <lifecycle-callbacks>

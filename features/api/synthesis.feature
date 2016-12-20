@@ -470,7 +470,7 @@ Feature: Synthesis
         "title": "Le problème constaté",
         "body": @string@,
         "description": @null@,
-        "childrenCount": 0,
+        "childrenCount": 1,
         "votes": [],
         "published": true,
         "publishedChildrenCount": 0,

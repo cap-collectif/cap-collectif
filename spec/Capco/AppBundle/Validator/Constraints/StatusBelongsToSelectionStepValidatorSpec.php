@@ -25,8 +25,7 @@ class StatusBelongsToSelectionStepValidatorSpec extends ObjectBehavior
         StatusBelongsToSelectionStep $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $builder
-    )
-    {
+    ) {
         $status->getStep()->willReturn($otherStep)->shouldBeCalled();
         $selection->getStatus()->willReturn($status)->shouldBeCalled();
         $selection->getSelectionStep()->willReturn($step)->shouldBeCalled();
@@ -45,8 +44,7 @@ class StatusBelongsToSelectionStepValidatorSpec extends ObjectBehavior
         StatusBelongsToSelectionStep $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $builder
-    )
-    {
+    ) {
         $status->getStep()->willReturn($step)->shouldBeCalled();
         $selection->getStatus()->willReturn($status)->shouldBeCalled();
         $selection->getSelectionStep()->willReturn($step)->shouldBeCalled();
@@ -55,5 +53,4 @@ class StatusBelongsToSelectionStepValidatorSpec extends ObjectBehavior
         $builder->addViolation()->shouldNotBeCalled();
         $this->validate($selection, $constraint);
     }
-
 }
