@@ -17,3 +17,4 @@ services:
           - { name: overblog_graphql.resolver, alias: "proposition_vote_author", method: "resolvePropositionVoteAuthor" }
           - { name: overblog_graphql.resolver, alias: "votesByContribution", method: "resolveVotesByContribution" }
           - { name: overblog_graphql.resolver, alias: "consultation_contribuable", method: "resolveConsultationIsContribuable" }
+          - { name: overblog_graphql.resolver, alias: "contributions", method: "resolveContributionsByConsultation" }

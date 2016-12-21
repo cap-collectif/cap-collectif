@@ -68,9 +68,9 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolvePropositionVotes(Opinion $proposition, Argument $argument)
     {
       return $this->container->get('doctrine')->getEntityManager()
-      ->createQuery('SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = ' . $proposition->getId())
-      ->setMaxResults(50)
-      ->getArrayResult()
+        ->createQuery('SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = ' . $proposition->getId())
+        ->setMaxResults(50)
+        ->getArrayResult()
       ;
     }
 
@@ -80,6 +80,14 @@ class ConsultationResolver implements ContainerAwareInterface
       ->createQuery('SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = ' . $argument->offsetGet('contribution'))
       ->getArrayResult()
       ;
+    }
+
+    public function resolveContributionsByConsultation(Argument $argument)
+    {
+      return $this->container
+        ->get('capco.opinion.repository')->findBy([
+          'step' => $argument->offsetGet('consultation'),
+        ]);
     }
 
     public function resolveContributions(ConsultationStep $consultation)

@@ -6,3 +6,6 @@ Person:
             id:
                 type: "Int!"
                 description: "The id of the person."
+            type:
+                type: "PersonType"
+                description: "The facultative type of the person."

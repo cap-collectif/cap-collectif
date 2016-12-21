@@ -9,34 +9,12 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Query;
 use League\Csv\Writer;
 use Symfony\Component\Console\Helper\ProgressBar;
+use GraphQL\Language\Parser;
+use GraphQL\Language\Source;
+use GraphQL\Executor\Executor;
 
 class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
 {
-
-  const headers = [
-      'proposition_id',
-      'proposition_title',
-      'proposition_content',
-      'proposition_section_title',
-      'proposition_author_id',
-      'proposition_url',
-      'proposition_votes_count_ok',
-      'proposition_votes_count_nok',
-      'proposition_votes_count_paired',
-
-      'proposition_votes_author_id',
-      'proposition_votes_value',
-
-      'argument_id',
-      'argument_type',
-      'argument_content',
-      'argument_votes_count',
-
-      'source_id',
-      'source_content',
-      'source_votes_count',
-  ];
-
     protected function configure()
     {
         $this
@@ -49,7 +27,7 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
       $client = new Client(['base_url' => 'http://capco.dev']);
       $request = $client->createRequest(
           'GET',
-          '/',
+          '/graphql/',
           [
             'query' => [ 'query' => $query ],
             'headers' => [
@@ -65,104 +43,140 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
       return $response['data'];
     }
 
-    public function getVotesQuery(int $id)
-    {
-      return '{
-          votesByContribution(contribution: '.$id.') {
-            value
-            author {
-              id
-            }
-          }
-       }';
-    }
-
-    public function getCleanRow() {
-      return array_combine(CreateCsvFromConsultationStepCommand::headers, array_map(function ($h) { return ""; }, CreateCsvFromConsultationStepCommand::headers));
-    }
+    // public function getVotesQuery(int $id)
+    // {
+    //   return '{
+    //       votesByContribution(contribution: '.$id.') {
+    //         value
+    //         author {
+    //           id
+    //         }
+    //       }
+    //    }';
+    // }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-      $query = '{
-        consultations {
+      $requestString = '{
+          contributions(consultation: 1) {
            id
-           contributions {
-             id
-             title
-             body
-             url
-             votesCountOk
-             votesCountNok
-             votesCountMitige
-             section {
-              title
-             }
-             author {
-              id
-             }
-             arguments {
-              id
-              type
-              body
-              votesCount
-             }
-             sources {
-              id
-              body
-              votesCount
-             }
+           title
+           body
+           url
+           votesCountOk
+           votesCountNok
+           votesCountMitige
+           section {
+            title
            }
-         }
+           author {
+            id
+            type {
+              name
+            }
+           }
+           arguments {
+            id
+            type
+            body
+            votesCount
+           }
+           sources {
+            id
+            body
+            votesCount
+           }
+          }
        }';
+
+// code from GraphQL\Type\Definition\ResolveInfo;
+function foldSelectionSet($selectionSet)
+{
+    $fields = [];
+    foreach ($selectionSet->selections as $selectionNode) {
+        $fields[$selectionNode->name->value] = !empty($selectionNode->selectionSet)
+            ? foldSelectionSet($selectionNode->selectionSet)
+            : true;
+    }
+    return $fields;
+}
+        $documentNode = Parser::parse(new Source($requestString));
+        $fields = foldSelectionSet($documentNode->definitions[0]->selectionSet);
+        // dump($fields);
+
+function appendString($string, $array, &$result) {
+    if (is_array($array)) {
+      foreach ($array as $key => $value) {
+        appendString(($string !== '' ? $string . '_' : '').  $key, $value, $result);
+      }
+      return;
+    }
+    $result[] = $string;
+}
+        $headers = [];
+        appendString('', $fields, $headers);
 
         $writer = Writer::createFromPath('web/export/papapo.csv', 'w');
         $writer->setDelimiter(",");
         $writer->setNewline("\r\n");
         $writer->setOutputBOM(Writer::BOM_UTF8);
-        $writer->insertOne(CreateCsvFromConsultationStepCommand::headers);
+        $writer->insertOne($headers);
 
-        $data = $this->queryGraphql($query);
-        foreach ($data['consultations'] as $consultation) {
-            $progress = new ProgressBar($output, count($consultation['contributions']));
-            $progress->setFormat('debug');
-            $progress->start();
-            foreach ($consultation['contributions'] as $key => $contribution) {
-              $progress->advance();
-              $row = $this->getCleanRow();
-              $row["proposition_id"] = $contribution['id'];
-              $row['proposition_title'] = $contribution['title'];
-              $row['proposition_content'] = $contribution['body'];
-              $row['proposition_section_title'] = $contribution['section']['title'];
-              $row['proposition_author_id'] = $contribution['author']['id'];
-              $row['proposition_url'] = $contribution['url'];
-              $row['proposition_votes_count_ok'] = $contribution['votesCountOk'];
-              $row['proposition_votes_count_nok'] = $contribution['votesCountNok'];
-              $row['proposition_votes_count_paired'] = $contribution['votesCountMitige'];
-              $writer->insertOne(array_values($row));
-              $votes = $this->queryGraphql($this->getVotesQuery($contribution['id']))['votesByContribution'];
-              foreach ($votes as $vote) {
-                $row = $this->getCleanRow();
-                $row['proposition_votes_author_id'] = $vote['author']['id'];
-                $row['proposition_votes_value'] = $vote['value'];
-                $writer->insertOne(array_values($row));
-              }
-              foreach ($contribution['arguments'] as $argument) {
-                $row = $this->getCleanRow();
-                $row['argument_id'] = $argument['id'];
-                $row['argument_type'] = $argument['type'];
-                $row['argument_content'] = $argument['body'];
-                $row['argument_votes_count'] = $argument['votesCount'];
-                $writer->insertOne(array_values($row));
-              }
-              foreach ($contribution['sources'] as $source) {
-                $row = $this->getCleanRow();
-                $row['source_id'] = $source['id'];
-                $row['source_content'] = $source['body'];
-                $row['source_votes_count'] = $source['votesCount'];
-                $writer->insertOne(array_values($row));
+        $data = $this->queryGraphql($requestString);
+
+        function is_multi($a) {
+            $rv = array_filter($a,'is_array');
+            if(count($rv)>0) return true;
+            return false;
+        }
+
+        function getCleanRow($headers) {
+            return array_combine($headers, array_map(function ($h) { return ""; }, $headers));
+        }
+
+        function writeRowData(&$row, $currentData, $fieldKey) {
+          foreach ($currentData as $dataFieldKey => $dataFieldValue) {
+            if (!is_array($dataFieldValue)) {
+              $rowName = $fieldKey. '_' . $dataFieldKey;
+              if (array_key_exists($rowName, $row)) {
+                  $row[$rowName] = $dataFieldValue;
+              } else {
+                // echo "missing: " . $rowName . PHP_EOL;
               }
             }
-            $progress->finish();
+            else {
+              if (!is_multi($dataFieldValue)) {
+                writeRowData($row, $dataFieldValue, $fieldKey . '_'. $dataFieldKey);
+              }
+            }
+          }
+        }
+
+        function writeNewRow (&$rows, $currentData, $headers, $fieldKey) {
+          $row = getCleanRow($headers);
+            writeRowData($row, $currentData, $fieldKey);
+            foreach ($currentData as $dataFieldKey => $dataFieldValue) {
+              if (is_array($dataFieldValue) && is_multi($dataFieldValue)) {
+                foreach ($dataFieldValue as $key => $value) {
+                  writeNewRow($rows, $value, $headers, $fieldKey . '_'. $dataFieldKey);
+                }
+              }
+            }
+          $rows[] = array_values($row);
+        }
+
+        foreach (array_keys($fields) as $fieldKey) {
+          $rows = [];
+          // $progress = new ProgressBar($output, count($data[$fieldKey]));
+          // $progress->setFormat('debug');
+          // $progress->start();
+          foreach ($data[$fieldKey] as $currentData) {
+            writeNewRow($rows, $currentData, $headers, $fieldKey);
+            // $progress->advance();
+          }
+          // $progress->finish();
+          // dump($rows);
+          $writer->insertAll($rows);
         }
     }
 }

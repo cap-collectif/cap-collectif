@@ -16,3 +16,10 @@ Query:
                     contribution:
                         type: "Int!"
                 resolve: "@=resolver('votesByContribution', [args])"
+            contributions:
+                type: "[Contribution]"
+                args:
+                    consultation:
+                        description: "Returns all contributions of the provided consultation."
+                        type: "Int!"
+                resolve: "@=resolver('contributions', [args])"
