@@ -3,11 +3,8 @@
 namespace spec\Capco\AppBundle\Helper;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Helper\ProjectHelper;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 
 class StepHelperSpec extends ObjectBehavior
@@ -24,8 +21,7 @@ class StepHelperSpec extends ObjectBehavior
         ProjectHelper $projectHelper,
         AbstractStep $stepA,
         AbstractStep $stepB
-    )
-    {
+    ) {
         $this->beConstructedWith($projectHelper);
 
         $step->isTimeless()->willReturn(false);

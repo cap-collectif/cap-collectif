@@ -61,7 +61,7 @@ trait SynthesisStepsTrait
     public function iShouldSeeTheNewSynthesisElements()
     {
         $elementsSelector = $this->navigationContext->getPage('synthesis edition page')->getElementsSelector();
-        $this->assertNumElements(8, $elementsSelector);
+        $this->assertNumElements(7, $elementsSelector);
     }
 
     /**

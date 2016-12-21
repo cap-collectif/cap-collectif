@@ -45,7 +45,7 @@ Feature: Users
       {
         "count": 1,
         "users": [{
-          "id": @string@,
+          "id": 502,
           "_links": {
             "settings": @string@
           }
@@ -163,7 +163,7 @@ Feature: Users
       """
       Then the JSON response status code should be 201
 
-    @database
+    @database 
     Scenario: Admin API client can register an other admin
     Given feature "registration" is enabled
     And I am logged in to api as admin
@@ -179,7 +179,7 @@ Feature: Users
     Then the JSON response should match:
     """
     {
-      "id": @string@,
+      "id": @integer@,
       "_links": @...@
     }
     """

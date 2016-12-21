@@ -679,7 +679,7 @@ svg.avatar {
     $name: nth($icon, 1);
     $color: nth($icon, 2);
 
-    .icon--#{$name} {
+    .#{$name} {
         color: $color;
     }
 }

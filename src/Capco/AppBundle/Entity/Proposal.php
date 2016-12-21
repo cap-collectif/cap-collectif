@@ -347,6 +347,10 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function getUpdateAuthor()
     {
+        if (!$this->updateAuthor) {
+            return $this->getAuthor();
+        }
+
         return $this->updateAuthor;
     }
 

@@ -1,6 +1,5 @@
 Capco\UserBundle\Entity\User:
     user1:
-        id: '1'
         username: lbrunet
         firstname: Laurent
         lastname: Brunet
@@ -14,7 +13,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: ~
 
     user2:
-        id: '2'
         username: sfavot
         firstname: Suzanne
         lastname: Favot
@@ -33,7 +31,6 @@ Capco\UserBundle\Entity\User:
         phoneConfirmed: true
 
     user3:
-        id: '3'
         username: xlacot
         firstname: Xavier
         lastname: Lacot
@@ -47,7 +44,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: ~
 
     user4:
-        id: 'admin'
         username: admin
         firstname: Administrateur
         lastname: authentifier
@@ -64,7 +60,6 @@ Capco\UserBundle\Entity\User:
         phone: '+33675492871'
 
     user5:
-        id: '5'
         username: user
         firstname: Utilisater
         lastname: authentifier
@@ -80,7 +75,6 @@ Capco\UserBundle\Entity\User:
         phone: '+33135492871'
 
     user_drupal:
-        id: 'drupal'
         __construct: ['drupal']
         username: drupal
         userType: '@UserType1'
@@ -92,7 +86,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: ~
 
     user{6..500}:
-        id: <current()>
         username: <username()>
         firstname: <firstname()>
         lastname: <lastname()>
@@ -105,7 +98,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: ~
 
     user501:
-        id: '501'
         username: spyl
         firstname: Aurélien
         lastname: David
@@ -120,7 +112,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: ~
 
     user502:
-        id: '502'
         username: welcomattic
         firstname: Mathieu
         lastname: Santostefano
@@ -135,7 +126,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: ~
 
     user503:
-        id: '503'
         username: disabled
         firstname: disabled
         lastname: disabled
@@ -150,7 +140,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: ~
 
     user504:
-        id: '504'
         username: user avec un nom très long comme par exemple conseil régional de machin truc
         firstname: prenom
         lastname: nom
@@ -165,7 +154,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: ~
 
     user505:
-        id: '505'
         username: ptondereau
         firstname: Pierre
         lastname: Tondereau
@@ -180,7 +168,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: ~
 
     user_not_confirmed:
-        id: '506'
         username: user_not_confirmed
         firstname: user_not_confirmed
         lastname: user_not_confirmed
@@ -194,7 +181,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: azertyuiop
 
     user_not_confirmed_to_be_expired:
-        id: '507'
         username: user_not_confirmed_to_be_expired
         firstname: user_not_confirmed_to_be_expired
         lastname: user_not_confirmed_to_be_expired
@@ -210,7 +196,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: qsdfghjklm
 
     user_not_confirmed_with_contributions_to_be_expired:
-        id: '508'
         username: user_not_confirmed_with_contributions_to_be_expired
         firstname: user_not_confirmed_with_contributions_to_be_expired
         lastname: user_not_confirmed_with_contributions_to_be_expired
@@ -226,7 +211,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: oklmoklm
 
     user_not_confirmed_to_be_expired_in_24_hours:
-        id: '509'
         username: user_not_confirmed_to_be_expired_in_24_hours
         firstname: user_not_confirmed_to_be_expired_in_24_hours
         lastname: user_not_confirmed_to_be_expired_in_24_hours
@@ -242,7 +226,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: qsdfgsqdqsdsqdsqdhjkldsqdsqdsqdqsdm
 
     user_expired:
-        id: '510'
         username: user_expired
         firstname: user_expired
         lastname: user_expired
@@ -258,7 +241,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: wxcvbn
 
     user_without_phone:
-        id: '511'
         username: user_without_phone
         firstname: user_without_phone
         lastname: user_without_phone
@@ -274,7 +256,6 @@ Capco\UserBundle\Entity\User:
         confirmationToken: ~
 
     user_with_phone_not_phone_confirmed:
-        id: '512'
         username: user_with_phone_not_phone_confirmed
         firstname: user_with_phone_not_phone_confirmed
         lastname: user_with_phone_not_phone_confirmed
@@ -291,7 +272,6 @@ Capco\UserBundle\Entity\User:
         phone: '+33628353289'
 
     user_with_code_not_phone_confirmed:
-        id: '513'
         username: user_with_code_not_phone_confirmed
         firstname: user_with_code_not_phone_confirmed
         lastname: user_with_code_not_phone_confirmed
@@ -309,7 +289,6 @@ Capco\UserBundle\Entity\User:
         smsConfirmationCode: 123456
 
     admin_without_password:
-        id: '514'
         username: admin_without_password
         firstname: admin_without_password
         lastname: admin_without_password

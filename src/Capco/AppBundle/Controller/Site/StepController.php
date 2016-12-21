@@ -12,7 +12,6 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -39,13 +38,14 @@ class StepController extends Controller
     public function showStepAction($projectSlug, OtherStep $step)
     {
         if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+
         if (!$project) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         return [
@@ -68,13 +68,13 @@ class StepController extends Controller
     public function showPresentationAction($projectSlug, PresentationStep $step)
     {
         if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
         $events = $this->get('capco.event.resolver')->getLastByProject($projectSlug, 2);
         $posts = $this->get('capco.blog.post.repository')->getLastPublishedByProject($projectSlug, 2);
@@ -102,22 +102,17 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
      * @Template("CapcoAppBundle:Step:ranking.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
-     *
-     * @param $projectSlug
-     * @param RankingStep $step
-     *
-     * @return array
      */
     public function showRankingAction($projectSlug, RankingStep $step)
     {
         if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
@@ -149,22 +144,17 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_consultation_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:opinions_ranking.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
-     *
-     * @param $projectSlug
-     * @param RankingStep $step
-     *
-     * @return array
      */
     public function showOpinionsRankingAction($projectSlug, RankingStep $step, $page = 1)
     {
         if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
@@ -198,13 +188,13 @@ class StepController extends Controller
     public function showVersionsRankingAction($projectSlug, RankingStep $step, $page = 1)
     {
         if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
@@ -238,16 +228,16 @@ class StepController extends Controller
     public function showSynthesisAction($projectSlug, SynthesisStep $step)
     {
         if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
 
         $props = $serializer->serialize([
             'synthesis_id' => $step->getSynthesis()->getId(),
@@ -271,11 +261,11 @@ class StepController extends Controller
     public function showCollectStepAction(Project $project, CollectStep $step)
     {
         if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         $em = $this->getDoctrine()->getManager();
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
 
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
@@ -287,7 +277,7 @@ class StepController extends Controller
                 $filters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
                 $searchResults = $this->get('capco.search.resolver')
                     ->searchProposals(1, 51, null, null, $filters);
-            } elseif (!$step->isPrivate()) {
+            } else {
                 $searchResults = $this->get('capco.search.resolver')
                     ->searchProposals(1, 51, null, null, $filters);
             }
@@ -326,7 +316,7 @@ class StepController extends Controller
     public function showQuestionnaireStepAction(Project $project, QuestionnaireStep $step)
     {
         if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         if (!$step->getQuestionnaire()) {
@@ -347,7 +337,7 @@ class StepController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
 
         $userRepliesRaw = [];
         if ($this->getUser()) {
@@ -364,7 +354,7 @@ class StepController extends Controller
 
         $props = $serializer->serialize([
             'step' => $step,
-            'form' => $step->getQuestionnaire() ? $step->getQuestionnaire() : null,
+            'form' => $step->getQuestionnaire() ?: null,
             'userReplies' => $userRepliesRaw,
         ], 'json', SerializationContext::create()
             ->setGroups(['Questionnaires', 'Questions', 'Steps', 'UserVotes', 'Replies', 'UsersInfos', 'UserMedias']))
@@ -387,10 +377,10 @@ class StepController extends Controller
     public function showSelectionStepAction(Project $project, SelectionStep $step)
     {
         if (!$step->canDisplay()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
 
         $searchResults = $this
             ->get('capco.search.resolver')
@@ -437,20 +427,20 @@ class StepController extends Controller
     public function editSynthesisAction($projectSlug, SynthesisStep $step)
     {
         if (!$step->canDisplay() || !$step->getSynthesis()) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
         if (!$step->getSynthesis()->isEditable() || !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw $this->createAccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
-            throw new NotFoundHttpException();
+            throw $this->createNotFoundException();
         }
 
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
 
         $props = $serializer->serialize([
             'synthesis_id' => $step->getSynthesis()->getId(),
@@ -470,9 +460,9 @@ class StepController extends Controller
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}, "repository_method"="getOne"})
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOne"})
      */
-    public function showConsultationAction(Request $request, Project $project, ConsultationStep $currentStep)
+    public function showConsultationAction(Project $project, ConsultationStep $currentStep)
     {
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
 
         if (!$currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));

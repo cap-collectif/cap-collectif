@@ -61,7 +61,7 @@ else
       echo "No migrations to execute."
   else
     echo "Migrating an existing database..."
-    su capco -c "php -d memory_limit=-1 bin/console doctrine:migrations:migrate --env=prod --no-interaction"
+    su capco -c "php bin/console doctrine:migrations:migrate --env=prod --no-interaction"
     if [ $? -eq 1 ]; then
       echo "Database migration failed... Exiting" >&2
       exit 1

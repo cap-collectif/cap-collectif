@@ -169,6 +169,7 @@ COPY php-fpm/capco.ini          /etc/php/7.0/cli/conf.d/capco.ini
 COPY cron/crontab               /etc/cron.d/crontab
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
+COPY logrotate/mysql-slow-logs   /etc/logrotate.d/mysql-slow-logs
 
 # Volume for log / cache ...
 VOLUME /var/www/var/cache

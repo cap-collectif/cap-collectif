@@ -3,7 +3,6 @@
 namespace spec\Capco\AppBundle\Entity\Steps;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class OtherStepSpec extends ObjectBehavior
 {
