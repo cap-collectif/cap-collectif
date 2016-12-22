@@ -60,33 +60,61 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
       $requestString = '{
           contributions(consultation: 1) {
            id
-           title
-           body
-           url
-           votesCountOk
-           votesCountNok
-           votesCountMitige
-           section {
-            title
-           }
            author {
             id
             type {
               name
             }
            }
+           section {
+            title
+           }
+           title
+           body
+           createdAt
+           updatedAt
+           url
+           expired
+           published
+           trashed
+           trashedAt
+           trashedReason
+           votesCount
+           votesCountOk
+           votesCountMitige
+           votesCountNok
+           argumentsCount
+           argumentsCountFor
+           argumentsCountAgainst
+           versionsCount
+           sourcesCount
            arguments {
             id
             type
             body
+            createdAt
+            updatedAt
+            url
+            expired
+            published
+            trashed
+            trashedAt
+            trashedReason
             votesCount
            }
            sources {
             id
             body
+            createdAt
+            updatedAt
+            expired
+            published
+            trashed
+            trashedAt
+            trashedReason
             votesCount
            }
-          }
+         }
        }';
 
 // code from GraphQL\Type\Definition\ResolveInfo;

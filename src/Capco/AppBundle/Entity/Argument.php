@@ -245,6 +245,11 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this->isTrashed;
     }
 
+    public function isTrashed()
+    {
+        return $this->isTrashed;
+    }
+
     /**
      * Set isTrashed.
      *

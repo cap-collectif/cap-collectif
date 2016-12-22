@@ -477,6 +477,11 @@ class Source implements Contribution, VotableInterface, IsPublishableInterface
         return $this->isTrashed;
     }
 
+    public function isTrashed()
+    {
+        return $this->isTrashed;
+    }
+
     /**
      * Set isTrashed.
      *

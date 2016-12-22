@@ -65,6 +65,47 @@ class ConsultationResolver implements ContainerAwareInterface
         return $vote['user'];
     }
 
+    public function resolveTrashedAt($object)
+    {
+      return $object->getCreatedAt() ? $object->getCreatedAt()->format('Y-m-d H:i:s') : null;
+    }
+
+    public function resolveContributionVotesCount(Opinion $opinion): int
+    {
+        return $opinion->getVotesCountAll();
+    }
+
+    public function resolveArgumentsCountFor(Opinion $opinion)
+    {
+        return $opinion->getArgumentForCount();
+    }
+
+    public function resolveArgumentsCountAgainst(Opinion $opinion)
+    {
+        return $opinion->getArgumentAgainstCount();
+    }
+
+    public function resolveArgumentUrl($argument): string
+    {
+      $parent = $argument->getParent();
+      if ($parent instanceof Opinion) {
+          return $this->resolvePropositionUrl($parent) .'#arg-'.$argument->getId();
+      } elseif ($parent instanceof OpinionVersion) {
+        return $this->resolvePropositionVersionUrl($parent) .'#arg-'.$argument->getId();
+      }
+      return '';
+    }
+
+    public function resolveCreatedAt($object): string
+    {
+        return $object->getCreatedAt()->format('Y-m-d H:i:s');
+    }
+
+    public function resolveUpdatedAt($object): string
+    {
+        return $object->getUpdatedAt()->format('Y-m-d H:i:s');
+    }
+
     public function resolvePropositionVotes(Opinion $proposition, Argument $argument)
     {
       return $this->container->get('doctrine')->getEntityManager()

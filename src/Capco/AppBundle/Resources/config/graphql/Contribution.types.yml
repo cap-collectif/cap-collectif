@@ -3,6 +3,14 @@ Contribution:
     config:
         description: "A contribution"
         fields:
+            createdAt:
+                type: "String!"
+                description: "Date of creation."
+                resolve: "@=resolver('proposition_createdAt', [value])"
+            updatedAt:
+                type: "String!"
+                description: "Date of last edition."
+                resolve: "@=resolver('proposition_updatedAt', [value])"
             url:
                 type: "String!"
                 description: "The url of contribution."
@@ -10,12 +18,49 @@ Contribution:
             author:
                 type: "Person!"
                 description: "The author of the contribution."
-            votesCountMitige:
+            expired:
+                type: "Boolean!"
+            published:
+                type: "Boolean!"
+            trashed:
+                type: "Boolean!"
+            trashedAt:
+                type: "String"
+                description: "Date of trash."
+                resolve: "@=resolver('proposition_trashedAt', [value])"
+            trashedReason:
+                type: "String"
+                description: "Reason of trash."
+            votesCount:
                 type: "Int!"
+                description: "Number of votes."
+                resolve: "@=resolver('proposition_votesCount', [value])"
             votesCountOk:
                 type: "Int!"
+                description: "Number of ok votes."
+            votesCountMitige:
+                type: "Int!"
+                description: "Number of mitige votes."
             votesCountNok:
                 type: "Int!"
+                description: "Number of negative votes."
+            argumentsCount:
+                type: "Int!"
+                description: "Number of arguments."
+            argumentsCountFor:
+                type: "Int!"
+                description: "Number of for arguments."
+                resolve: "@=resolver('proposition_argumentsCountFor', [value])"
+            argumentsCountAgainst:
+                type: "Int!"
+                description: "Number of against arguments."
+                resolve: "@=resolver('proposition_argumentsCountAgainst', [value])"
+            versionsCount:
+                type: "Int!"
+                description: "Number of versions."
+            sourcesCount:
+                type: "Int!"
+                description: "Number of sources."
             votes:
                 type: "[PropositionVote]"
                 args:

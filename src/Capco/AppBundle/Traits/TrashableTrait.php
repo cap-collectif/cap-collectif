@@ -36,6 +36,11 @@ trait TrashableTrait
         return $this->isTrashed;
     }
 
+    public function IsTrashed()
+    {
+        return $this->isTrashed;
+    }
+
     /**
      * @param bool $isTrashed
      */
