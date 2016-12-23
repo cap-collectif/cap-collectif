@@ -1,0 +1,14 @@
+TrashableContribution:
+    type: interface
+    config:
+        description: "A trashable contribution"
+        fields:
+            trashed:
+                type: "Boolean!"
+            trashedAt:
+                type: "String"
+                description: "Date of trash."
+                resolve: "@=resolver('proposition_trashedAt', [value])"
+            trashedReason:
+                type: "String"
+                description: "Reason of trash."

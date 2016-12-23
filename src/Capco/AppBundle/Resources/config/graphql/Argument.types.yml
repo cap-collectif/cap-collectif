@@ -2,6 +2,7 @@ Argument:
     type: object
     config:
         description: "An argument"
+        interfaces: [TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "String!"

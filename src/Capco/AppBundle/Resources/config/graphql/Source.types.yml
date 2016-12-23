@@ -2,6 +2,7 @@ Source:
     type: object
     config:
         description: "A source"
+        interfaces: [TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "String!"

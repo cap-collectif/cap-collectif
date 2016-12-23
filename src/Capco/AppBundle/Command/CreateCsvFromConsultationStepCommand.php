@@ -56,143 +56,118 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
 
     private function getContributionsGraphQLqueryByConsultationStep($constulationStep)
     {
-      return '{
-          contributions(consultation: '. $constulationStep->getId() .') {
-           id
-           author {
-            id
-            type {
-              name
-            }
-           }
-           section {
-            title
-           }
-           title
-           body
-           createdAt
-           updatedAt
-           url
-           expired
-           published
-           trashed
-           trashedAt
-           trashedReason
-           votesCount
-           votesCountOk
-           votesCountMitige
-           votesCountNok
-           argumentsCount
-           argumentsCountFor
-           argumentsCountAgainst
-           versionsCount
-           sourcesCount
-           arguments {
-            id
-            type
-            body
-            createdAt
-            updatedAt
-            url
-            expired
-            published
-            trashed
-            trashedAt
-            trashedReason
-            votesCount
-           }
-           sources {
-            id
-            body
-            createdAt
-            updatedAt
-            expired
-            published
-            trashed
-            trashedAt
-            trashedReason
-            votesCount
-           }
-           reportings {
-            id
-            author {
-             id
-             type {
-               name
-             }
-            }
-            type
-            body
-            createdAt
-           }
-           versions {
-             id
-             author {
-              id
-              type {
-                name
-              }
-             }
-             title
-             body
-             createdAt
-             updatedAt
-             url
-             expired
-             published
-             trashed
-             trashedAt
-             trashedReason
-             votesCount
-             votesCountOk
-             votesCountMitige
-             votesCountNok
-             argumentsCount
-             argumentsCountFor
-             argumentsCountAgainst
-             sourcesCount
-             arguments {
-              id
-              type
-              body
-              createdAt
-              updatedAt
-              url
-              expired
-              published
-              trashed
-              trashedAt
-              trashedReason
-              votesCount
-             }
-             sources {
-              id
-              body
-              createdAt
-              updatedAt
-              expired
-              published
-              trashed
-              trashedAt
-              trashedReason
-              votesCount
-             }
-             reportings {
-              id
-              author {
-               id
-               type {
-                 name
-               }
-              }
-              type
-              body
-              createdAt
-             }
-           }
-         }
-       }
-       ';
+      return '
+fragment trashableInfos on TrashableContribution {
+  trashed
+  trashedAt
+  trashedReason
+}
+fragment authorInfos on ContributionWithAuthor {
+  author {
+    id
+    type {
+      name
+    }
+  }
+}
+fragment reportInfos on Reporting {
+  id
+  ...authorInfos
+  type
+  body
+  createdAt
+}
+fragment argumentInfos on Argument {
+  id
+  type
+  body
+  createdAt
+  updatedAt
+  url
+  expired
+  published
+  ...trashableInfos
+  votesCount
+}
+fragment sourceInfos on Source {
+  id
+  body
+  createdAt
+  updatedAt
+  expired
+  published
+  ...trashableInfos
+  votesCount
+}
+{
+  contributions(consultation:'. $constulationStep->getId(). ') {
+    id
+  	...authorInfos
+    section {
+      title
+    }
+    title
+    body
+    createdAt
+    updatedAt
+    url
+    expired
+    published
+  	...trashableInfos
+    votesCount
+    votesCountOk
+    votesCountMitige
+    votesCountNok
+    argumentsCount
+    argumentsCountFor
+    argumentsCountAgainst
+    sourcesCount
+    versionsCount
+    arguments {
+  		...argumentInfos
+    }
+    sources {
+  		...sourceInfos
+    }
+    reportings {
+  		...reportInfos
+    }
+    versions {
+      id
+  		...authorInfos
+      title
+      body
+      createdAt
+      updatedAt
+      url
+      expired
+      published
+  		...trashableInfos
+      votesCount
+      votesCountOk
+      votesCountMitige
+      votesCountNok
+      argumentsCount
+      argumentsCountFor
+      argumentsCountAgainst
+      sourcesCount
+      arguments {
+  			...argumentInfos
+      }
+      sources {
+  			...sourceInfos
+      }
+      reportings {
+  			...reportInfos
+      }
+   }
+   votes {
+      ...authorInfos
+      createdAt
+      expired
+   }
+ }
+}';
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

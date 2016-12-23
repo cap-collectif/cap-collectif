@@ -2,6 +2,7 @@ Reporting:
     type: object
     config:
         description: "A report"
+        interfaces: [ContributionWithAuthor]
         fields:
             createdAt:
                 type: "String!"

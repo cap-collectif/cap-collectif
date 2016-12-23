@@ -17,7 +17,7 @@ Query:
                         type: "Int!"
                 resolve: "@=resolver('votesByContribution', [args])"
             contributions:
-                type: "[Contribution]"
+                type: "[Opinion]"
                 args:
                     consultation:
                         description: "Returns all contributions of the provided consultation."

@@ -61,9 +61,14 @@ class ConsultationResolver implements ContainerAwareInterface
       return $proposition->getOpinionType();
     }
 
-    public function resolvePropositionVoteAuthor($vote)
+    public function resolvePropositionVoteAuthor(array $vote)
     {
         return $vote['user'];
+    }
+
+    public function resolverPropositionVoteCreatedAt(array $vote): string
+    {
+      return $vote['createdAt']->format(\DateTime::ISO8601);
     }
 
     public function resolveTrashedAt($object)
@@ -156,7 +161,7 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolvePropositionVotes(Opinion $proposition, Argument $argument)
     {
       return $this->container->get('doctrine')->getEntityManager()
-        ->createQuery('SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = ' . $proposition->getId())
+        ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = ' . $proposition->getId())
         ->setMaxResults(50)
         ->getArrayResult()
       ;

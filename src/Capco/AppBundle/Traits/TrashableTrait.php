@@ -36,7 +36,7 @@ trait TrashableTrait
         return $this->isTrashed;
     }
 
-    public function IsTrashed()
+    public function isTrashed()
     {
         return $this->isTrashed;
     }

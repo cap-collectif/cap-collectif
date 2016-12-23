@@ -76,7 +76,12 @@ class GraphQLToCsv
     private function queryStringToFields(string $requestString)
     {
       $documentNode = Parser::parse(new Source($requestString));
-      return foldSelectionSet($documentNode->definitions[0]->selectionSet);
+      foreach ($documentNode->definitions as $definition) {
+        if ($definition->kind === 'OperationDefinitionNode') {
+          return foldSelectionSet($defition->selectionSet);
+        }
+      }
+      return [];
     }
 
     private function guessHeadersFromFields(array $fields)

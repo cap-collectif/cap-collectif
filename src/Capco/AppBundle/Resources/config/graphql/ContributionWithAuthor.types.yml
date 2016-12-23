@@ -1,0 +1,8 @@
+ContributionWithAuthor:
+    type: interface
+    config:
+        description: "A contribution with an author"
+        fields:
+            author:
+                type: "Person!"
+                description: "The author of the contribution."

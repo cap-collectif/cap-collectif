@@ -1,6 +1,7 @@
 VersionVote:
     type: object
     config:
+        interfaces: [ContributionWithAuthor]
         fields:
             author:
                 type: "Person!"

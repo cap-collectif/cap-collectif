@@ -2,6 +2,7 @@ Version:
     type: object
     config:
         description: "A version of contribution"
+        interfaces: [TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "String!"

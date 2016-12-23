@@ -1,7 +1,8 @@
-Contribution:
+Opinion:
     type: object
     config:
         description: "A contribution"
+        interfaces: [TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "String!"

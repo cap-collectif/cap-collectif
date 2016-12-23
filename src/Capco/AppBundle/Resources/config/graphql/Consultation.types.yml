@@ -14,7 +14,7 @@ Consultation:
                 description: "Contributions are allowed right now."
                 resolve: "@=resolver('consultation_contribuable', [value])"
             contributions:
-                type: "[Contribution]"
+                type: "[Opinion]"
                 description: "List of contributions."
                 resolve: "@=resolver('consultation_contributions', [value])"
             sections:
