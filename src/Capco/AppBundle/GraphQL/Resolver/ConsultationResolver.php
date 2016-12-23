@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ConsultationResolver implements ContainerAwareInterface
 {
@@ -38,7 +39,7 @@ class ConsultationResolver implements ContainerAwareInterface
               'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
               'opinionSlug' => $contribution->getSlug(),
           ],
-          true
+          UrlGeneratorInterface::ABSOLUTE_URL
       );
     }
 
@@ -144,7 +145,7 @@ class ConsultationResolver implements ContainerAwareInterface
               'opinionSlug' => $opinion->getSlug(),
               'versionSlug' => $version->getSlug(),
           ],
-          true
+          UrlGeneratorInterface::ABSOLUTE_URL
       );
     }
 
@@ -162,7 +163,16 @@ class ConsultationResolver implements ContainerAwareInterface
     {
       return $this->container->get('doctrine')->getEntityManager()
         ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = ' . $proposition->getId())
-        ->setMaxResults(50)
+        // ->setMaxResults(50)
+        ->getArrayResult()
+      ;
+    }
+
+    public function resolveVersionVotes(OpinionVersion $version, Argument $argument)
+    {
+      return $this->container->get('doctrine')->getEntityManager()
+        ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVersionVote vote LEFT JOIN vote.user author WHERE vote.opinionVersion = ' . $version->getId())
+        // ->setMaxResults(50)
         ->getArrayResult()
       ;
     }

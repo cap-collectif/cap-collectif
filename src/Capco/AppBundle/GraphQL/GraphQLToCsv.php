@@ -6,17 +6,27 @@ use League\Csv\Writer;
 use GraphQL\Language\Parser;
 use GraphQL\Language\Source;
 use GraphQL\Executor\Executor;
+use GraphQL\Language\AST\FieldNode;
+use GraphQL\Language\AST\FragmentSpreadNode;
 
 // code from GraphQL\Type\Definition\ResolveInfo;
-function foldSelectionSet($selectionSet)
+function foldSelectionSet($selectionSet, $fragments = [])
 {
-    $fields = [];
-    foreach ($selectionSet->selections as $selectionNode) {
-        $fields[$selectionNode->name->value] = !empty($selectionNode->selectionSet)
-            ? foldSelectionSet($selectionNode->selectionSet)
-            : true;
-    }
-    return $fields;
+  $fields = [];
+  foreach ($selectionSet->selections as $selectionNode) {
+      if ($selectionNode->kind === 'Field') {
+          $fields[$selectionNode->name->value] = !empty($selectionNode->selectionSet)
+              ? foldSelectionSet($selectionNode->selectionSet, $fragments)
+              : true;
+      } else if ($selectionNode->kind === 'FragmentSpread') {
+          $spreadName = $selectionNode->name->value;
+          if (isset($fragments[$spreadName])) {
+              $fragment = $fragments[$spreadName];
+              $fields += foldSelectionSet($fragment->selectionSet);
+          }
+      }
+  }
+  return $fields;
 }
 
 function appendString($string, $array, &$result) {
@@ -47,7 +57,7 @@ function appendString($string, $array, &$result) {
             if (array_key_exists($rowName, $row)) {
                 $row[$rowName] = $dataFieldValue;
             } else {
-              // echo "missing: " . $rowName . PHP_EOL;
+              echo "missing: " . $rowName . PHP_EOL;
             }
           }
           else {
@@ -76,10 +86,12 @@ class GraphQLToCsv
     private function queryStringToFields(string $requestString)
     {
       $documentNode = Parser::parse(new Source($requestString));
+      $fragments = [];
       foreach ($documentNode->definitions as $definition) {
-        if ($definition->kind === 'OperationDefinitionNode') {
-          return foldSelectionSet($defition->selectionSet);
+        if ($definition->kind === 'OperationDefinition') {
+          return foldSelectionSet($definition->selectionSet, $fragments);
         }
+        $fragments[$definition->name->value] = $definition;
       }
       return [];
     }
@@ -96,11 +108,12 @@ class GraphQLToCsv
     {
       $fields = $this->queryStringToFields($requestString);
       $headers = $this->guessHeadersFromFields($fields);
+      dump($headers);
       $writer->insertOne($headers);
 
       foreach (array_keys($fields) as $fieldKey) {
           $rows = [];
-          foreach ($requestResult[$fieldKey] as $currentData) {
+          foreach ($requestResult['data'][$fieldKey] as $currentData) {
             writeNewRow($rows, $currentData, $headers, $fieldKey);
           }
           $writer->insertAll($rows);

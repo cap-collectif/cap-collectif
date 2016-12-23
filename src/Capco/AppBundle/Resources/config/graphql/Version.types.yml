@@ -64,7 +64,7 @@ Version:
                 args:
                     first:
                         type: "Int"
-                resolve: "@=resolver('proposition_votes', [value, args])"
+                resolve: "@=resolver('version_votes', [value, args])"
             id:
                 type: "Int!"
                 description: "The content of the contribution."

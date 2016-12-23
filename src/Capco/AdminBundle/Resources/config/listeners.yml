@@ -31,3 +31,4 @@ services:
           - { name: overblog_graphql.resolver, alias: "version_url", method: "resolveVersionUrl" }
           - { name: overblog_graphql.resolver, alias: "version_reportings", method: "resolveVersionReportings" }
           - { name: overblog_graphql.resolver, alias: "vote_createdAt", method: "resolverPropositionVoteCreatedAt" }
+          - { name: overblog_graphql.resolver, alias: "version_votes", method: "resolveVersionVotes" }

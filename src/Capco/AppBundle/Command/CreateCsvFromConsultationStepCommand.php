@@ -22,36 +22,10 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
 
     public function queryGraphql(string $query)
     {
-      $client = new Client(['base_url' => 'http://capco.dev']);
-      $request = $client->createRequest(
-          'GET',
-          '/graphql/',
-          [
-            'query' => [ 'query' => $query ],
-            'headers' => [
-              'CONTENT_TYPE' => 'application/graphql'
-            ],
-          ]
-      );
-      $urlQuery = $request->getQuery();
-      $urlQuery->setEncodingType(Query::RFC1738);
-      $request->setQuery($urlQuery);
-      $response = $client->send($request);
-      $response = $response->json();
-      dump($response);
-      return $response['data'];
-    }
-
-    private function getVotesGraphQLqueryByContributionId(int $id)
-    {
-      return '{
-          votesByContribution(contribution: '.$id.') {
-            value
-            author {
-              id
-            }
-          }
-       }';
+        $executor = $this->getContainer()->get('overblog_graphql.request_executor');
+        $response = $executor->execute([ 'query' => $query, 'variables'=> [] ], [], null)->toArray();
+        dump($response);
+        return $response;
     }
 
     private function getContributionsGraphQLqueryByConsultationStep($constulationStep)
@@ -159,6 +133,11 @@ fragment sourceInfos on Source {
       }
       reportings {
   			...reportInfos
+      }
+      votes {
+         ...authorInfos
+         createdAt
+         expired
       }
    }
    votes {
