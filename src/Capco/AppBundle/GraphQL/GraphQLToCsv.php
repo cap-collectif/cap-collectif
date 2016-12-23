@@ -7,47 +7,28 @@ use GraphQL\Language\Parser;
 use GraphQL\Language\Source;
 use GraphQL\Executor\Executor;
 
-class GraphQLToCsv
+// code from GraphQL\Type\Definition\ResolveInfo;
+function foldSelectionSet($selectionSet)
 {
-    private function queryStringToFields(string $requestString)
-    {
-      // code from GraphQL\Type\Definition\ResolveInfo;
-      function foldSelectionSet($selectionSet)
-      {
-          $fields = [];
-          foreach ($selectionSet->selections as $selectionNode) {
-              $fields[$selectionNode->name->value] = !empty($selectionNode->selectionSet)
-                  ? foldSelectionSet($selectionNode->selectionSet)
-                  : true;
-          }
-          return $fields;
-      }
-      $documentNode = Parser::parse(new Source($requestString));
-      return foldSelectionSet($documentNode->definitions[0]->selectionSet);
+    $fields = [];
+    foreach ($selectionSet->selections as $selectionNode) {
+        $fields[$selectionNode->name->value] = !empty($selectionNode->selectionSet)
+            ? foldSelectionSet($selectionNode->selectionSet)
+            : true;
     }
+    return $fields;
+}
 
-    private function guessHeadersFromFields(array $fields)
-    {
-      function appendString($string, $array, &$result) {
-          if (is_array($array)) {
-            foreach ($array as $key => $value) {
-              appendString(($string !== '' ? $string . '_' : '').  $key, $value, $result);
-            }
-            return;
-          }
-          $result[] = $string;
+function appendString($string, $array, &$result) {
+    if (is_array($array)) {
+      foreach ($array as $key => $value) {
+        appendString(($string !== '' ? $string . '_' : '').  $key, $value, $result);
       }
-      $headers = [];
-      appendString('', $fields, $headers);
-      return $headers;
+      return;
     }
+    $result[] = $string;
+}
 
-
-    public function generate(string $requestString, array $requestResult, Writer &$writer)
-    {
-      $fields = $this->queryStringToFields($requestString);
-      $headers = $this->guessHeadersFromFields($fields);
-      $writer->insertOne($headers);
 
       function is_multi($a) {
           $rv = array_filter($a,'is_array');
@@ -89,6 +70,28 @@ class GraphQLToCsv
           }
         $rows[] = array_values($row);
       }
+
+class GraphQLToCsv
+{
+    private function queryStringToFields(string $requestString)
+    {
+      $documentNode = Parser::parse(new Source($requestString));
+      return foldSelectionSet($documentNode->definitions[0]->selectionSet);
+    }
+
+    private function guessHeadersFromFields(array $fields)
+    {
+      $headers = [];
+      appendString('', $fields, $headers);
+      return $headers;
+    }
+
+
+    public function generate(string $requestString, array $requestResult, Writer &$writer)
+    {
+      $fields = $this->queryStringToFields($requestString);
+      $headers = $this->guessHeadersFromFields($fields);
+      $writer->insertOne($headers);
 
       foreach (array_keys($fields) as $fieldKey) {
           $rows = [];

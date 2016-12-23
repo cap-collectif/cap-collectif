@@ -1,7 +1,7 @@
-Contribution:
+Version:
     type: object
     config:
-        description: "A contribution"
+        description: "A version of contribution"
         fields:
             createdAt:
                 type: "String!"
@@ -13,8 +13,8 @@ Contribution:
                 resolve: "@=resolver('proposition_updatedAt', [value])"
             url:
                 type: "String!"
-                description: "The url of contribution."
-                resolve: "@=resolver('proposition_url', [value])"
+                description: "The url of version."
+                resolve: "@=resolver('version_url', [value])"
             author:
                 type: "Person!"
                 description: "The author of the contribution."
@@ -55,14 +55,11 @@ Contribution:
                 type: "Int!"
                 description: "Number of against arguments."
                 resolve: "@=resolver('proposition_argumentsCountAgainst', [value])"
-            versionsCount:
-                type: "Int!"
-                description: "Number of versions."
             sourcesCount:
                 type: "Int!"
                 description: "Number of sources."
             votes:
-                type: "[PropositionVote]"
+                type: "[VersionVote]"
                 args:
                     first:
                         type: "Int"
@@ -84,16 +81,9 @@ Contribution:
                         type: "ArgumentValue"
                 description: "The arguments related to the contribution."
                 resolve: "@=resolver('proposition_arguments', [value, args])"
-            versions:
-                type: "[Version]"
-                description: "The versions related to the contribution."
             sources:
                 type: "[Source]"
                 description: "The sources related to the contribution."
-            section:
-                type: "Section!"
-                description: "Where the proposition has been placed."
-                resolve: "@=resolver('proposition_section', [value])"
             reportings:
                 type: "[Reporting]"
-                resolve: "@=resolver('proposition_reportings', [value])"
+                resolve: "@=resolver('version_reportings', [value])"

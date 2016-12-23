@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Overblog\GraphQLBundle\Definition\Argument;
 
@@ -46,7 +47,7 @@ class ConsultationResolver implements ContainerAwareInterface
       return $consultation->getConsultationStepType()->getOpinionTypes();
     }
 
-    public function resolvePropositionArguments(Opinion $proposition, Argument $argument) {
+    public function resolvePropositionArguments(/*Opinion|OpinionVersion*/ $proposition, Argument $argument) {
         if ($argument->offsetExists('type')) {
           return $proposition->getArguments()->filter(function ($a) use ($argument) {
               return $a->getType() === $argument->offsetGet('type');
@@ -70,17 +71,17 @@ class ConsultationResolver implements ContainerAwareInterface
       return $object->getCreatedAt() ? $object->getCreatedAt()->format(\DateTime::ISO8601) : null;
     }
 
-    public function resolveContributionVotesCount(Opinion $opinion): int
+    public function resolveContributionVotesCount(/*Opinion|OpinionVersion*/ $opinion): int
     {
         return $opinion->getVotesCountAll();
     }
 
-    public function resolveArgumentsCountFor(Opinion $opinion)
+    public function resolveArgumentsCountFor(/*Opinion|OpinionVersion*/ $opinion)
     {
         return $opinion->getArgumentForCount();
     }
 
-    public function resolveArgumentsCountAgainst(Opinion $opinion)
+    public function resolveArgumentsCountAgainst(/*Opinion|OpinionVersion*/ $opinion)
     {
         return $opinion->getArgumentAgainstCount();
     }
@@ -103,15 +104,43 @@ class ConsultationResolver implements ContainerAwareInterface
         ;
     }
 
+    public function resolveVersionReportings(OpinionVersion $version)
+    {
+        return $this->container
+                    ->get('capco.reporting.repository')
+                    ->findBy(['opinionVersion' => $version])
+        ;
+    }
+
     public function resolveArgumentUrl($argument): string
     {
       $parent = $argument->getParent();
       if ($parent instanceof Opinion) {
           return $this->resolvePropositionUrl($parent) .'#arg-'.$argument->getId();
       } elseif ($parent instanceof OpinionVersion) {
-        return $this->resolvePropositionVersionUrl($parent) .'#arg-'.$argument->getId();
+        return $this->resolveVersionUrl($parent) .'#arg-'.$argument->getId();
       }
       return '';
+    }
+
+    public function resolveVersionUrl($version): string
+    {
+      $opinion = $version->getParent();
+      $opinionType = $opinion->getOpinionType();
+      $step = $opinion->getStep();
+      $project = $step->getProject();
+
+      return $this->container->get('router')->generate(
+          'app_project_show_opinion_version',
+          [
+              'projectSlug' => $project->getSlug(),
+              'stepSlug' => $step->getSlug(),
+              'opinionTypeSlug' => $opinionType->getSlug(),
+              'opinionSlug' => $opinion->getSlug(),
+              'versionSlug' => $version->getSlug(),
+          ],
+          true
+      );
     }
 
     public function resolveCreatedAt($object): string

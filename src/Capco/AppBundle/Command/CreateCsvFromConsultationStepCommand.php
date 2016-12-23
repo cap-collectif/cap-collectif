@@ -38,25 +38,26 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
       $request->setQuery($urlQuery);
       $response = $client->send($request);
       $response = $response->json();
+      dump($response);
       return $response['data'];
     }
 
-    // public function getVotesQuery(int $id)
-    // {
-    //   return '{
-    //       votesByContribution(contribution: '.$id.') {
-    //         value
-    //         author {
-    //           id
-    //         }
-    //       }
-    //    }';
-    // }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
+    private function getVotesGraphQLqueryByContributionId(int $id)
     {
-      $requestString = '{
-          contributions(consultation: 1) {
+      return '{
+          votesByContribution(contribution: '.$id.') {
+            value
+            author {
+              id
+            }
+          }
+       }';
+    }
+
+    private function getContributionsGraphQLqueryByConsultationStep($constulationStep)
+    {
+      return '{
+          contributions(consultation: '. $constulationStep->getId() .') {
            id
            author {
             id
@@ -149,21 +150,72 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
              argumentsCount
              argumentsCountFor
              argumentsCountAgainst
-             versionsCount
              sourcesCount
+             arguments {
+              id
+              type
+              body
+              createdAt
+              updatedAt
+              url
+              expired
+              published
+              trashed
+              trashedAt
+              trashedReason
+              votesCount
+             }
+             sources {
+              id
+              body
+              createdAt
+              updatedAt
+              expired
+              published
+              trashed
+              trashedAt
+              trashedReason
+              votesCount
+             }
+             reportings {
+              id
+              author {
+               id
+               type {
+                 name
+               }
+              }
+              type
+              body
+              createdAt
+             }
            }
          }
        }
        ';
+    }
 
-        $writer = Writer::createFromPath('web/export/papapo.csv', 'w');
-        $writer->setDelimiter(",");
-        $writer->setNewline("\r\n");
-        $writer->setOutputBOM(Writer::BOM_UTF8);
-        (new GraphQLToCsv())
-          ->generate(
-            $requestString,
-            $this->queryGraphql($requestString),
-            $writer
-        );
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $steps = $this->getContainer()
+            ->get('doctrine')
+            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
+            ->findAll();
+        $generator = new GraphQLToCsv();
+
+        foreach ($steps as $step) {
+            $requestString = $this->getContributionsGraphQLqueryByConsultationStep($step);
+            $fileName = $step->getProject()->getSlug().'_'.$step->getSlug().'.csv';
+            $writer = Writer::createFromPath('web/export/'.$fileName, 'w');
+            $writer->setDelimiter(",");
+            $writer->setNewline("\r\n");
+            $writer->setOutputBOM(Writer::BOM_UTF8);
+            $generator->generate(
+                $requestString,
+                $this->queryGraphql($requestString),
+                $writer
+            );
+            $output->writeln('The export file "'.$fileName.'" has been created.');
+        }
+    }
 }
