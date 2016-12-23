@@ -67,7 +67,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolveTrashedAt($object)
     {
-      return $object->getCreatedAt() ? $object->getCreatedAt()->format('Y-m-d H:i:s') : null;
+      return $object->getCreatedAt() ? $object->getCreatedAt()->format(\DateTime::ISO8601) : null;
     }
 
     public function resolveContributionVotesCount(Opinion $opinion): int
@@ -85,6 +85,24 @@ class ConsultationResolver implements ContainerAwareInterface
         return $opinion->getArgumentAgainstCount();
     }
 
+    public function resolveReportingType($reporting): int
+    {
+      return $reporting->getStatus();
+    }
+
+    public function resolveReportingAuthor($reporting)
+    {
+        return $reporting->getReporter();
+    }
+
+    public function resolvePropositionReportings(Opinion $opinion)
+    {
+        return $this->container
+                    ->get('capco.reporting.repository')
+                    ->findBy(['Opinion' => $opinion])
+        ;
+    }
+
     public function resolveArgumentUrl($argument): string
     {
       $parent = $argument->getParent();
@@ -98,12 +116,12 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolveCreatedAt($object): string
     {
-        return $object->getCreatedAt()->format('Y-m-d H:i:s');
+        return $object->getCreatedAt()->format(\DateTime::ISO8601);
     }
 
     public function resolveUpdatedAt($object): string
     {
-        return $object->getUpdatedAt()->format('Y-m-d H:i:s');
+        return $object->getUpdatedAt()->format(\DateTime::ISO8601);
     }
 
     public function resolvePropositionVotes(Opinion $proposition, Argument $argument)

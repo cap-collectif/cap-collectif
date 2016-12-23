@@ -1,0 +1,23 @@
+Reporting:
+    type: object
+    config:
+        description: "A report"
+        fields:
+            createdAt:
+                type: "String!"
+                description: "Date of creation."
+                resolve: "@=resolver('proposition_createdAt', [value])"
+            author:
+                type: "Person!"
+                description: "The author of the reporting."
+                resolve: "@=resolver('reporting_author', [value])"
+            type:
+                type: "ReportingType!"
+                description: "Kind of report."
+                resolve: "@=resolver('reporting_type', [value])"
+            id:
+                type: "Int!"
+                description: "The content of the argument."
+            body:
+                type: "String!"
+                description: "The content of the argument."

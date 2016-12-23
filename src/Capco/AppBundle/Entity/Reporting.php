@@ -8,10 +8,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Traits\IdTrait;
 
 /**
- * Reporting.
- *
  * @ORM\Table(name="reporting")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReportingRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Reporting

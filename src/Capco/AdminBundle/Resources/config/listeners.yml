@@ -25,3 +25,6 @@ services:
           - { name: overblog_graphql.resolver, alias: "proposition_argumentsCountFor", method: "resolveArgumentsCountFor" }
           - { name: overblog_graphql.resolver, alias: "proposition_argumentsCountAgainst", method: "resolveArgumentsCountAgainst" }
           - { name: overblog_graphql.resolver, alias: "argument_url", method: "resolveArgumentUrl" }
+          - { name: overblog_graphql.resolver, alias: "proposition_reportings", method: "resolvePropositionReportings" }
+          - { name: overblog_graphql.resolver, alias: "reporting_author", method: "resolveReportingAuthor" }
+          - { name: overblog_graphql.resolver, alias: "reporting_type", method: "resolveReportingType" }
