@@ -25,8 +25,7 @@ class JsonProjectSerializerSpec extends ObjectBehavior
     function it_should_serialize_an_array_of_projects(
         ProjectSerializerInterface $projectSerializer,
         Serializer $serializer
-    )
-    {
+    ) {
         $projects = [
             new Project(),
             new Project(),

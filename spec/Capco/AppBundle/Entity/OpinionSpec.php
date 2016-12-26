@@ -3,7 +3,6 @@
 namespace spec\Capco\AppBundle\Entity;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class OpinionSpec extends ObjectBehavior
 {
@@ -14,10 +13,10 @@ class OpinionSpec extends ObjectBehavior
 
     function it_can_be_unstrashed()
     {
-    	$this->setIsTrashed(false);
+        $this->setIsTrashed(false);
 
-    	$this->getIsTrashed()->shouldReturn(false);
-    	$this->getTrashedReason()->shouldReturn(null);
-    	$this->getTrashedAt()->shouldReturn(null);
+        $this->getIsTrashed()->shouldReturn(false);
+        $this->getTrashedReason()->shouldReturn(null);
+        $this->getTrashedAt()->shouldReturn(null);
     }
 }

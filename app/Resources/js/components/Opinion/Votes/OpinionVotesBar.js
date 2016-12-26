@@ -31,7 +31,7 @@ const OpinionVotesBar = React.createClass({
         }
         <div style={{ paddingTop: '20px' }}>
           {
-            opinion.votes.map((vote, index) => {
+            opinion.votes.slice(0, 5).map((vote, index) => {
               return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
             })
           }

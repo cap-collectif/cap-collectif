@@ -10,9 +10,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Manager\LogManager;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Prophecy\Argument as ProphecyArgument;
 
 class SynthesisElementHandlerSpec extends ObjectBehavior
 {
@@ -40,7 +38,6 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $term = null;
         $synthesisElementRepo->getWith($synthesis, $type, $term, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
-
     }
 
     function it_can_get_new_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
@@ -57,7 +54,6 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $term = null;
         $synthesisElementRepo->getWith($synthesis, $type, $term, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
-
     }
 
     function it_can_get_unpublished_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
@@ -74,7 +70,6 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $term = null;
         $synthesisElementRepo->getWith($synthesis, $type, $term, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
-
     }
 
     function it_can_get_published_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
@@ -91,7 +86,6 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $term = null;
         $synthesisElementRepo->getWith($synthesis, $type, $term, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
-
     }
 
     function it_can_get_archived_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
@@ -108,7 +102,6 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $term = null;
         $synthesisElementRepo->getWith($synthesis, $type, $term, $offset, $limit)->willReturn($paginator)->shouldBeCalled();
         $this->getElementsFromSynthesisByType($synthesis, $type)->shouldBeArray();
-
     }
 
     function it_can_get_elements_published_tree_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
@@ -229,5 +222,4 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($em, $logManager);
         $this->getLogsForElement($element)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
     }
-
 }

@@ -11,7 +11,6 @@ use Prophecy\Argument;
 
 class ProjectSearchResolverSpec extends ObjectBehavior
 {
-
     function let(ProjectRepository $repository)
     {
         $this->beConstructedWith($repository);
@@ -27,8 +26,7 @@ class ProjectSearchResolverSpec extends ObjectBehavior
         ProjectSearchParameters $projectSearchParameters,
         Paginator $paginator,
         \ArrayIterator $arrayIterator
-    )
-    {
+    ) {
         $projects = $this->getSampleArrayOfProjects();
 
         $arrayIterator->getArrayCopy()->willReturn($projects['projects']);
@@ -47,7 +45,7 @@ class ProjectSearchResolverSpec extends ObjectBehavior
             null,
             null,
             null,
-            null
+            null,
         ]);
 
         $projectSearchParameters->getElements()->willReturn(0);
@@ -64,8 +62,7 @@ class ProjectSearchResolverSpec extends ObjectBehavior
             'projects' => [new Project(), new Project()],
             'page' => 1,
             'pages' => 1,
-            'count' => 2
+            'count' => 2,
         ];
     }
-
 }

@@ -58,7 +58,7 @@ class ConsultationStepExtractor
      */
     public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep = null)
     {
-        if (!$consultationStep) {
+        if (!$consultationStep || !$consultationStep->getIsEnabled()) {
             return false;
         }
 
@@ -284,9 +284,11 @@ class ConsultationStepExtractor
             $element->setArchived(true);
             $element->setPublished(true);
         } else {
+            // Contributions from consultation author are automatically published and archived
+            $authorIsConsultationAuthor = method_exists($contribution, 'getAuthor') && $contribution->getAuthor() === $this->consultationStep->getProject()->getAuthor();
             $element->setDisplayType('contribution');
-            $element->setArchived(false);
-            $element->setPublished(false);
+            $element->setArchived($authorIsConsultationAuthor);
+            $element->setPublished($authorIsConsultationAuthor);
         }
 
         return $this->setDataFrom($element, $contribution);
@@ -304,8 +306,15 @@ class ConsultationStepExtractor
     {
         // Update last modified, archive status and deletion date
         $element->setLinkedDataLastUpdate($contribution->getUpdatedAt());
-        $element->setArchived(false);
-        $element->setPublished(false);
+        if (
+            !$this->consultationStep
+            || !method_exists($contribution, 'getAuthor')
+            || !$this->consultationStep->getProject()
+            || $contribution->getAuthor() !== $this->consultationStep->getProject()->getAuthor()
+        ) {
+            $element->setArchived(false);
+            $element->setPublished(false);
+        }
         if (!$element->getOriginalDivision()) {
             $element->setDeletedAt(null);
         }

@@ -19,20 +19,20 @@ class HasDistrictIfMandatoryValidatorSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Validator\Constraints\HasDistrictIfMandatoryValidator');
     }
 
-     public function it_should_validate_if_proposal_hasdistrict(
+    public function it_should_validate_if_proposal_hasdistrict(
          Manager $manager,
          ExecutionContextInterface $context,
          HasDistrictIfMandatory $constraint,
          Proposal $proposal,
          District $district
      ) {
-         $proposal->getDistrict()->willReturn($district)->shouldBeCalled();
+        $proposal->getDistrict()->willReturn($district)->shouldBeCalled();
 
-         $context->buildViolation($constraint->message)->shouldNotBeCalled();
-         $this->beConstructedWith($manager);
-         $this->initialize($context);
-         $this->validate($proposal, $constraint);
-     }
+        $context->buildViolation($constraint->message)->shouldNotBeCalled();
+        $this->beConstructedWith($manager);
+        $this->initialize($context);
+        $this->validate($proposal, $constraint);
+    }
 
     public function it_should_not_validate_if_proposal_hasnodistrict_and_districtismandatory_and_feature_isactive(
         Manager $manager,
@@ -42,7 +42,6 @@ class HasDistrictIfMandatoryValidatorSpec extends ObjectBehavior
         ProposalForm $proposalForm,
         ConstraintViolationBuilderInterface $builder
     ) {
-
         $proposalForm->isDistrictMandatory()->willReturn(true)->shouldBeCalled();
         $proposal->getProposalForm()->willReturn($proposalForm)->shouldBeCalled();
         $proposal->getDistrict()->willReturn(null)->shouldBeCalled();
