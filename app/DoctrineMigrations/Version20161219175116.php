@@ -39,7 +39,7 @@ class Version20161219175116 extends AbstractMigration implements ContainerAwareI
 
     public function setContainer(ContainerInterface $container = null)
     {
-        $this->em = $container->get('doctrine');
+        $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();
     }
 
