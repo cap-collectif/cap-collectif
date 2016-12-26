@@ -129,7 +129,7 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="ideas")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $Author;
 

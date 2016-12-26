@@ -32,11 +32,9 @@ class Reply implements Contribution
     use ExpirableTrait;
 
     /**
-     * @var string
-     *
      * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="replies")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $author;
 

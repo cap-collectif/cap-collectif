@@ -100,7 +100,7 @@ class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, 
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinions")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $Author;
 

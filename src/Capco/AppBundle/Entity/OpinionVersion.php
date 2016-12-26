@@ -59,7 +59,7 @@ class OpinionVersion implements Contribution, VotableInterface, HasDiffInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinionVersions")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $author;
 

@@ -66,7 +66,7 @@ class Reporting
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $Reporter;
 

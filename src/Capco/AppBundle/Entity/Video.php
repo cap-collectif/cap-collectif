@@ -90,7 +90,7 @@ class Video
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $Author;
 

@@ -161,7 +161,7 @@ class Event implements CommentableInterface, IndexableInterface
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      * @Assert\NotNull()
      */
     private $Author;
