@@ -4,7 +4,7 @@ Person:
         description: "A person"
         fields:
             id:
-                type: "Int!"
+                type: "String!"
                 description: "The id of the person."
             type:
                 type: "PersonType"
