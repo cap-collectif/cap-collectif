@@ -68,6 +68,7 @@ class Version20161219175116 extends AbstractMigration implements ContainerAwareI
       foreach ($this->fkTables as $fk) {
         $pk = isset($fk['pk']) ? implode(',', $fk['pk']) : 'id';
         $fetch = $this->connection->fetchAll('SELECT '. $pk .', '. $fk['key'] .' FROM '. $fk['table']);
+        echo 'Adding uuid to table "' . $fk['table'] . '"...' . PHP_EOL;
         foreach ($fetch as $data) {
             if ($data[$fk['key']]) { // do nothing when null
               if (!isset($fk['pk'])) {
