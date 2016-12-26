@@ -29,7 +29,7 @@ class GraphQLContext implements Context
     {
         $request = $this->client->createRequest('GET', 'graphql/', [
             'exceptions' => false,
-            'query' => [ 'query' => $query->getRaw() ],
+            'query' => ['query' => $query->getRaw()],
             'headers' => [
                 'Content-Type' => 'application/graphql',
             ],

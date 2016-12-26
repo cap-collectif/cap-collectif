@@ -24,14 +24,15 @@ class ConsultationResolver implements ContainerAwareInterface
         $repo = $this->container
         ->get('capco.consultation_step.repository');
         if (isset($args['id'])) {
-          return [$repo->find($args['id'])];
+            return [$repo->find($args['id'])];
         }
+
         return $repo->findAll();
     }
 
     public function resolvePropositionUrl(Opinion $contribution): string
     {
-      return $this->container->get('router')->generate(
+        return $this->container->get('router')->generate(
           'app_consultation_show_opinion',
           [
               'projectSlug' => $contribution->getStep()->getProject()->getSlug(),
@@ -45,21 +46,23 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolveConsultationSections(ConsultationStep $consultation)
     {
-      return $consultation->getConsultationStepType()->getOpinionTypes();
+        return $consultation->getConsultationStepType()->getOpinionTypes();
     }
 
-    public function resolvePropositionArguments(/*Opinion|OpinionVersion*/ $proposition, Argument $argument) {
+    public function resolvePropositionArguments(/*Opinion|OpinionVersion*/ $proposition, Argument $argument)
+    {
         if ($argument->offsetExists('type')) {
-          return $proposition->getArguments()->filter(function ($a) use ($argument) {
+            return $proposition->getArguments()->filter(function ($a) use ($argument) {
               return $a->getType() === $argument->offsetGet('type');
           });
         }
+
         return $proposition->getArguments();
     }
 
     public function resolvePropositionSection(Opinion $proposition)
     {
-      return $proposition->getOpinionType();
+        return $proposition->getOpinionType();
     }
 
     public function resolvePropositionVoteAuthor(array $vote)
@@ -69,12 +72,12 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolverPropositionVoteCreatedAt(array $vote): string
     {
-      return $vote['createdAt']->format(\DateTime::ISO8601);
+        return $vote['createdAt']->format(\DateTime::ISO8601);
     }
 
     public function resolveTrashedAt($object)
     {
-      return $object->getCreatedAt() ? $object->getCreatedAt()->format(\DateTime::ISO8601) : null;
+        return $object->getCreatedAt() ? $object->getCreatedAt()->format(\DateTime::ISO8601) : null;
     }
 
     public function resolveContributionVotesCount(/*Opinion|OpinionVersion*/ $opinion): int
@@ -94,7 +97,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolveReportingType($reporting): int
     {
-      return $reporting->getStatus();
+        return $reporting->getStatus();
     }
 
     public function resolveReportingAuthor($reporting)
@@ -120,23 +123,24 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolveArgumentUrl($argument): string
     {
-      $parent = $argument->getParent();
-      if ($parent instanceof Opinion) {
-          return $this->resolvePropositionUrl($parent) .'#arg-'.$argument->getId();
-      } elseif ($parent instanceof OpinionVersion) {
-        return $this->resolveVersionUrl($parent) .'#arg-'.$argument->getId();
-      }
-      return '';
+        $parent = $argument->getParent();
+        if ($parent instanceof Opinion) {
+            return $this->resolvePropositionUrl($parent).'#arg-'.$argument->getId();
+        } elseif ($parent instanceof OpinionVersion) {
+            return $this->resolveVersionUrl($parent).'#arg-'.$argument->getId();
+        }
+
+        return '';
     }
 
     public function resolveVersionUrl($version): string
     {
-      $opinion = $version->getParent();
-      $opinionType = $opinion->getOpinionType();
-      $step = $opinion->getStep();
-      $project = $step->getProject();
+        $opinion = $version->getParent();
+        $opinionType = $opinion->getOpinionType();
+        $step = $opinion->getStep();
+        $project = $step->getProject();
 
-      return $this->container->get('router')->generate(
+        return $this->container->get('router')->generate(
           'app_project_show_opinion_version',
           [
               'projectSlug' => $project->getSlug(),
@@ -161,8 +165,8 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolvePropositionVotes(Opinion $proposition, Argument $argument)
     {
-      return $this->container->get('doctrine')->getEntityManager()
-        ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = ' . $proposition->getId())
+        return $this->container->get('doctrine')->getEntityManager()
+        ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = '.$proposition->getId())
         // ->setMaxResults(50)
         ->getArrayResult()
       ;
@@ -170,8 +174,8 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolveVersionVotes(OpinionVersion $version, Argument $argument)
     {
-      return $this->container->get('doctrine')->getEntityManager()
-        ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVersionVote vote LEFT JOIN vote.user author WHERE vote.opinionVersion = ' . $version->getId())
+        return $this->container->get('doctrine')->getEntityManager()
+        ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVersionVote vote LEFT JOIN vote.user author WHERE vote.opinionVersion = '.$version->getId())
         // ->setMaxResults(50)
         ->getArrayResult()
       ;
@@ -179,15 +183,15 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolveVotesByContribution(Argument $argument)
     {
-      return $this->container->get('doctrine')->getEntityManager()
-      ->createQuery('SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = ' . $argument->offsetGet('contribution'))
+        return $this->container->get('doctrine')->getEntityManager()
+      ->createQuery('SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = '.$argument->offsetGet('contribution'))
       ->getArrayResult()
       ;
     }
 
     public function resolveContributionsByConsultation(Argument $argument)
     {
-      return $this->container
+        return $this->container
         ->get('capco.opinion.repository')->findBy([
           'step' => $argument->offsetGet('consultation'),
         ]);

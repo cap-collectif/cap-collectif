@@ -47,7 +47,7 @@ class OpinionController extends Controller
      * @param ConsultationStep $currentStep
      * @param OpinionType      $opinionType
      * @param $page
-     * @param Request $request
+     * @param Request          $request
      * @param $opinionsSort
      */
     public function showByTypeAction(Project $project, ConsultationStep $currentStep, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)

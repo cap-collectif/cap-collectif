@@ -73,6 +73,6 @@ class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
             return $this->doctrine->getRepository('CapcoAppBundle:Project')->find($input->getArgument('projectId'));
         }
 
-        return null;
+        return;
     }
 }

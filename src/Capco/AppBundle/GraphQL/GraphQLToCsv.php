@@ -5,118 +5,124 @@ namespace Capco\AppBundle\GraphQL;
 use League\Csv\Writer;
 use GraphQL\Language\Parser;
 use GraphQL\Language\Source;
-use GraphQL\Executor\Executor;
-use GraphQL\Language\AST\FieldNode;
-use GraphQL\Language\AST\FragmentSpreadNode;
 
 // code from GraphQL\Type\Definition\ResolveInfo;
 function foldSelectionSet($selectionSet, $fragments = [])
 {
-  $fields = [];
-  foreach ($selectionSet->selections as $selectionNode) {
-      if ($selectionNode->kind === 'Field') {
-          $fields[$selectionNode->name->value] = !empty($selectionNode->selectionSet)
+    $fields = [];
+    foreach ($selectionSet->selections as $selectionNode) {
+        if ($selectionNode->kind === 'Field') {
+            $fields[$selectionNode->name->value] = !empty($selectionNode->selectionSet)
               ? foldSelectionSet($selectionNode->selectionSet, $fragments)
               : true;
-      } else if ($selectionNode->kind === 'FragmentSpread') {
-          $spreadName = $selectionNode->name->value;
-          if (isset($fragments[$spreadName])) {
-              $fragment = $fragments[$spreadName];
-              $fields += foldSelectionSet($fragment->selectionSet);
-          }
-      }
-  }
-  return $fields;
+        } elseif ($selectionNode->kind === 'FragmentSpread') {
+            $spreadName = $selectionNode->name->value;
+            if (isset($fragments[$spreadName])) {
+                $fragment = $fragments[$spreadName];
+                $fields += foldSelectionSet($fragment->selectionSet);
+            }
+        }
+    }
+
+    return $fields;
 }
 
-function appendString($string, $array, &$result) {
+function appendString($string, $array, &$result)
+{
     if (is_array($array)) {
-      foreach ($array as $key => $value) {
-        appendString(($string !== '' ? $string . '_' : '').  $key, $value, $result);
-      }
-      return;
+        foreach ($array as $key => $value) {
+            appendString(($string !== '' ? $string.'_' : '').$key, $value, $result);
+        }
+
+        return;
     }
     $result[] = $string;
 }
 
+      function is_multi($a)
+      {
+          $rv = array_filter($a, 'is_array');
+          if (count($rv)>0) {
+              return true;
+          }
 
-      function is_multi($a) {
-          $rv = array_filter($a,'is_array');
-          if(count($rv)>0) return true;
           return false;
       }
 
-      function getCleanRow($headers) {
-          return array_combine($headers, array_map(function ($h) { return ""; }, $headers));
+      function getCleanRow($headers)
+      {
+          return array_combine($headers, array_map(function ($h) { return ''; }, $headers));
       }
 
-      function writeRowData(&$row, $currentData, $fieldKey) {
-        foreach ($currentData as $dataFieldKey => $dataFieldValue) {
-          if (!is_array($dataFieldValue)) {
-            $rowName = $fieldKey. '_' . $dataFieldKey;
-            if (array_key_exists($rowName, $row)) {
-                $row[$rowName] = $dataFieldValue;
-            } else {
-              echo "missing: " . $rowName . PHP_EOL;
-            }
+      function writeRowData(&$row, $currentData, $fieldKey)
+      {
+          foreach ($currentData as $dataFieldKey => $dataFieldValue) {
+              if (!is_array($dataFieldValue)) {
+                  $rowName = $fieldKey.'_'.$dataFieldKey;
+                  if (array_key_exists($rowName, $row)) {
+                      $row[$rowName] = $dataFieldValue;
+                  } else {
+                      echo 'missing: '.$rowName.PHP_EOL;
+                  }
+              } else {
+                  if (!is_multi($dataFieldValue)) {
+                      writeRowData($row, $dataFieldValue, $fieldKey.'_'.$dataFieldKey);
+                  }
+              }
           }
-          else {
-            if (!is_multi($dataFieldValue)) {
-              writeRowData($row, $dataFieldValue, $fieldKey . '_'. $dataFieldKey);
-            }
-          }
-        }
       }
 
-      function writeNewRow (&$rows, $currentData, $headers, $fieldKey) {
-        $row = getCleanRow($headers);
+      function writeNewRow(&$rows, $currentData, $headers, $fieldKey)
+      {
+          $row = getCleanRow($headers);
           writeRowData($row, $currentData, $fieldKey);
           foreach ($currentData as $dataFieldKey => $dataFieldValue) {
-            if (is_array($dataFieldValue) && is_multi($dataFieldValue)) {
-              foreach ($dataFieldValue as $key => $value) {
-                writeNewRow($rows, $value, $headers, $fieldKey . '_'. $dataFieldKey);
+              if (is_array($dataFieldValue) && is_multi($dataFieldValue)) {
+                  foreach ($dataFieldValue as $key => $value) {
+                      writeNewRow($rows, $value, $headers, $fieldKey.'_'.$dataFieldKey);
+                  }
               }
-            }
           }
-        $rows[] = array_values($row);
+          $rows[] = array_values($row);
       }
 
 class GraphQLToCsv
 {
     private function queryStringToFields(string $requestString)
     {
-      $documentNode = Parser::parse(new Source($requestString));
-      $fragments = [];
-      foreach ($documentNode->definitions as $definition) {
-        if ($definition->kind === 'OperationDefinition') {
-          return foldSelectionSet($definition->selectionSet, $fragments);
+        $documentNode = Parser::parse(new Source($requestString));
+        $fragments = [];
+        foreach ($documentNode->definitions as $definition) {
+            if ($definition->kind === 'OperationDefinition') {
+                return foldSelectionSet($definition->selectionSet, $fragments);
+            }
+            $fragments[$definition->name->value] = $definition;
         }
-        $fragments[$definition->name->value] = $definition;
-      }
-      return [];
+
+        return [];
     }
 
     private function guessHeadersFromFields(array $fields)
     {
-      $headers = [];
-      appendString('', $fields, $headers);
-      return $headers;
-    }
+        $headers = [];
+        appendString('', $fields, $headers);
 
+        return $headers;
+    }
 
     public function generate(string $requestString, array $requestResult, Writer &$writer)
     {
-      $fields = $this->queryStringToFields($requestString);
-      $headers = $this->guessHeadersFromFields($fields);
-      dump($headers);
-      $writer->insertOne($headers);
+        $fields = $this->queryStringToFields($requestString);
+        $headers = $this->guessHeadersFromFields($fields);
+        dump($headers);
+        $writer->insertOne($headers);
 
-      foreach (array_keys($fields) as $fieldKey) {
-          $rows = [];
-          foreach ($requestResult['data'][$fieldKey] as $currentData) {
-            writeNewRow($rows, $currentData, $headers, $fieldKey);
-          }
-          $writer->insertAll($rows);
-      }
-   }
+        foreach (array_keys($fields) as $fieldKey) {
+            $rows = [];
+            foreach ($requestResult['data'][$fieldKey] as $currentData) {
+                writeNewRow($rows, $currentData, $headers, $fieldKey);
+            }
+            $writer->insertAll($rows);
+        }
+    }
 }

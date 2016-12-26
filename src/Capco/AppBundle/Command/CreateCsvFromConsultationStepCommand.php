@@ -5,10 +5,8 @@ namespace Capco\AppBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use GuzzleHttp\Client;
 use GuzzleHttp\Query;
 use League\Csv\Writer;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Capco\AppBundle\GraphQL\GraphQLToCsv;
 
 class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
@@ -23,14 +21,15 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
     public function queryGraphql(string $query)
     {
         $executor = $this->getContainer()->get('overblog_graphql.request_executor');
-        $response = $executor->execute([ 'query' => $query, 'variables'=> [] ], [], null)->toArray();
+        $response = $executor->execute(['query' => $query, 'variables' => []], [], null)->toArray();
         dump($response);
+
         return $response;
     }
 
     private function getContributionsGraphQLqueryByConsultationStep($constulationStep)
     {
-      return '
+        return '
 fragment trashableInfos on TrashableContribution {
   trashed
   trashedAt
@@ -74,7 +73,7 @@ fragment sourceInfos on Source {
   votesCount
 }
 {
-  contributions(consultation:'. $constulationStep->getId(). ') {
+  contributions(consultation:'.$constulationStep->getId().') {
     id
   	...authorInfos
     section {
@@ -161,7 +160,7 @@ fragment sourceInfos on Source {
             $requestString = $this->getContributionsGraphQLqueryByConsultationStep($step);
             $fileName = $step->getProject()->getSlug().'_'.$step->getSlug().'.csv';
             $writer = Writer::createFromPath('web/export/'.$fileName, 'w');
-            $writer->setDelimiter(",");
+            $writer->setDelimiter(',');
             $writer->setNewline("\r\n");
             $writer->setOutputBOM(Writer::BOM_UTF8);
             $generator->generate(
