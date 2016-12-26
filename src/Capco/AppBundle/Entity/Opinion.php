@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\IsPublishableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\IdTrait;
@@ -18,19 +17,16 @@ use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
- * Opinion.
- *
- * @ORM\Table(name="opinion",indexes={@ORM\Index(name="idx_enabled", columns={"id", "enabled"})})
+ * @ORM\Table(name="opinion", indexes={@ORM\Index(name="idx_enabled", columns={"id", "enabled"})})
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\AppendicesCorrespondToOpinionType()
  */
-class Opinion implements Contribution, SelfLinkableInterface, VotableInterface, IsPublishableInterface
+class Opinion implements OpinionContributionInterface, SelfLinkableInterface
 {
     use IdTrait;
     use TrashableTrait;

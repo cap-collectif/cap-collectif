@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\GraphQL\GraphQLToCsv;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use GuzzleHttp\Query;
 use League\Csv\Writer;
-use Capco\AppBundle\GraphQL\GraphQLToCsv;
 
 class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
 {

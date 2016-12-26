@@ -5,10 +5,15 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
+use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 
 class ConsultationResolver implements ContainerAwareInterface
 {
@@ -19,7 +24,7 @@ class ConsultationResolver implements ContainerAwareInterface
         return $consultation->canContribute();
     }
 
-    public function resolve(Argument $args)
+    public function resolve(Arg $args)
     {
         $repo = $this->container
         ->get('capco.consultation_step.repository');
@@ -49,7 +54,7 @@ class ConsultationResolver implements ContainerAwareInterface
         return $consultation->getConsultationStepType()->getOpinionTypes();
     }
 
-    public function resolvePropositionArguments(/*Opinion|OpinionVersion*/ $proposition, Argument $argument)
+    public function resolvePropositionArguments(OpinionContributionInterface $proposition, Arg $argument)
     {
         if ($argument->offsetExists('type')) {
             return $proposition->getArguments()->filter(function ($a) use ($argument) {
@@ -75,32 +80,32 @@ class ConsultationResolver implements ContainerAwareInterface
         return $vote['createdAt']->format(\DateTime::ISO8601);
     }
 
-    public function resolveTrashedAt($object)
+    public function resolveTrashedAt(TrashableInterface $object)
     {
-        return $object->getCreatedAt() ? $object->getCreatedAt()->format(\DateTime::ISO8601) : null;
+        return $object->getTrashedAt() ? $object->getTrashedAt()->format(\DateTime::ISO8601) : null;
     }
 
-    public function resolveContributionVotesCount(/*Opinion|OpinionVersion*/ $opinion): int
+    public function resolveContributionVotesCount(OpinionContributionInterface $opinion): int
     {
         return $opinion->getVotesCountAll();
     }
 
-    public function resolveArgumentsCountFor(/*Opinion|OpinionVersion*/ $opinion)
+    public function resolveArgumentsCountFor(OpinionContributionInterface $opinion)
     {
         return $opinion->getArgumentForCount();
     }
 
-    public function resolveArgumentsCountAgainst(/*Opinion|OpinionVersion*/ $opinion)
+    public function resolveArgumentsCountAgainst(OpinionContributionInterface $opinion)
     {
         return $opinion->getArgumentAgainstCount();
     }
 
-    public function resolveReportingType($reporting): int
+    public function resolveReportingType(Reporting $reporting): int
     {
         return $reporting->getStatus();
     }
 
-    public function resolveReportingAuthor($reporting)
+    public function resolveReportingAuthor(Reporting $reporting)
     {
         return $reporting->getReporter();
     }
@@ -121,7 +126,7 @@ class ConsultationResolver implements ContainerAwareInterface
         ;
     }
 
-    public function resolveArgumentUrl($argument): string
+    public function resolveArgumentUrl(Argument $argument): string
     {
         $parent = $argument->getParent();
         if ($parent instanceof Opinion) {
@@ -133,7 +138,7 @@ class ConsultationResolver implements ContainerAwareInterface
         return '';
     }
 
-    public function resolveVersionUrl($version): string
+    public function resolveVersionUrl(OpinionVersion $version): string
     {
         $opinion = $version->getParent();
         $opinionType = $opinion->getOpinionType();
@@ -153,7 +158,7 @@ class ConsultationResolver implements ContainerAwareInterface
       );
     }
 
-    public function resolveCreatedAt($object): string
+    public function resolveCreatedAt(Contribution $object): string
     {
         return $object->getCreatedAt()->format(\DateTime::ISO8601);
     }
@@ -163,7 +168,7 @@ class ConsultationResolver implements ContainerAwareInterface
         return $object->getUpdatedAt()->format(\DateTime::ISO8601);
     }
 
-    public function resolvePropositionVotes(Opinion $proposition, Argument $argument)
+    public function resolvePropositionVotes(Opinion $proposition, Arg $argument)
     {
         return $this->container->get('doctrine')->getEntityManager()
         ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = '.$proposition->getId())
@@ -172,7 +177,7 @@ class ConsultationResolver implements ContainerAwareInterface
       ;
     }
 
-    public function resolveVersionVotes(OpinionVersion $version, Argument $argument)
+    public function resolveVersionVotes(OpinionVersion $version, Arg $argument)
     {
         return $this->container->get('doctrine')->getEntityManager()
         ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVersionVote vote LEFT JOIN vote.user author WHERE vote.opinionVersion = '.$version->getId())
@@ -181,7 +186,7 @@ class ConsultationResolver implements ContainerAwareInterface
       ;
     }
 
-    public function resolveVotesByContribution(Argument $argument)
+    public function resolveVotesByContribution(Arg $argument)
     {
         return $this->container->get('doctrine')->getEntityManager()
       ->createQuery('SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = '.$argument->offsetGet('contribution'))
@@ -189,7 +194,7 @@ class ConsultationResolver implements ContainerAwareInterface
       ;
     }
 
-    public function resolveContributionsByConsultation(Argument $argument)
+    public function resolveContributionsByConsultation(Arg $argument)
     {
         return $this->container
         ->get('capco.opinion.repository')->findBy([

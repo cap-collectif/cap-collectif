@@ -14,6 +14,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 
 /**
  * Source.
@@ -22,7 +23,7 @@ use Capco\AppBundle\Traits\IdTrait;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Source implements Contribution, VotableInterface, IsPublishableInterface
+class Source implements Contribution, TrashableInterface, VotableInterface, IsPublishableInterface
 {
     use IdTrait;
 

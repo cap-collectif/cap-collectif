@@ -14,6 +14,7 @@ use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 
 /**
  * Argument.
@@ -22,7 +23,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements Contribution, VotableInterface, IsPublishableInterface
+class Argument implements Contribution, TrashableInterface, VotableInterface, IsPublishableInterface
 {
     use IdTrait;
     use ValidableTrait;

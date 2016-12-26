@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\IsPublishableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,9 +15,8 @@ use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\UserBundle\Entity\User;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\HasDiffInterface;
-use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 
@@ -29,7 +27,7 @@ use Capco\AppBundle\Traits\IdTrait;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVersionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionVersion implements Contribution, VotableInterface, HasDiffInterface, IsPublishableInterface
+class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 {
     use IdTrait;
     use TrashableTrait;
