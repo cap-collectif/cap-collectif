@@ -22,7 +22,8 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidatorSpec extends ObjectBe
         ConstraintViolationBuilderInterface $builder,
         SelectionStep $selectionStep1,
         SelectionStep $selectionStep2
-    ) {
+    )
+    {
         $selectionStep1->isSelectionStep()->willReturn(true);
         $selectionStep2->isSelectionStep()->willReturn(true);
         $selectionStep1->isAllowingProgressSteps()->willReturn(true);
@@ -42,16 +43,18 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidatorSpec extends ObjectBe
         SelectionStep $selectionStep,
         SelectionStep $selectionStepNotAllowing,
         AbstractStep $randomStep
-    ) {
-        $selectionStep->isSelectionStep()->willReturn(true);
-        $selectionStepNotAllowing->isSelectionStep()->willReturn(true);
-        $randomStep->isSelectionStep()->willReturn(false);
-        $selectionStep->isAllowingProgressSteps()->willReturn(true);
-        $selectionStepNotAllowing->isAllowingProgressSteps()->willReturn(false);
+    )
+    {
+      $selectionStep->isSelectionStep()->willReturn(true);
+      $selectionStepNotAllowing->isSelectionStep()->willReturn(true);
+      $randomStep->isSelectionStep()->willReturn(false);
+      $selectionStep->isAllowingProgressSteps()->willReturn(true);
+      $selectionStepNotAllowing->isAllowingProgressSteps()->willReturn(false);
 
-        $context->buildViolation($constraint->message)->shouldNotBeCalled();
+      $context->buildViolation($constraint->message)->shouldNotBeCalled();
 
-        $this->initialize($context);
-        $this->validate([$selectionStep, $selectionStepNotAllowing, $randomStep], $constraint)->shouldReturn(true);
+      $this->initialize($context);
+      $this->validate([$selectionStep, $selectionStepNotAllowing, $randomStep], $constraint)->shouldReturn(true);
     }
+
 }

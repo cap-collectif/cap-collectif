@@ -4,10 +4,12 @@ namespace spec\Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 
 class ProposalSelectionVotesResolverSpec extends ObjectBehavior
 {

@@ -42,13 +42,15 @@ class SynthesisEditionPage extends Page
         $expectedUrl = $this->getUrl($urlParameters);
         $currentUrl = $this->getSession()->getCurrentUrl();
 
-        if ($currentUrl !== $expectedUrl && false === strrpos($currentUrl, 'edition#/')) {
-            throw new UnexpectedPageException(
-                sprintf(
-                    'Expected to be on "%s" but found "%s" instead',
-                    $this->getUrl($urlParameters),
-                    $this->getSession()->getCurrentUrl()
-                ));
+        if ($currentUrl !== $expectedUrl) {
+            if (false === strrpos($currentUrl, 'edition#/')) {
+                throw new UnexpectedPageException(
+                    sprintf(
+                        'Expected to be on "%s" but found "%s" instead',
+                        $this->getUrl($urlParameters),
+                        $this->getSession()->getCurrentUrl()
+                    ));
+            }
         }
     }
 

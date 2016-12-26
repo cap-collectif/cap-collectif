@@ -20,7 +20,9 @@ class HasOnlyOneSelectionPerProposalValidatorSpec extends ObjectBehavior
         HasOnlyOneSelectionPerProposal $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $builder
-    ) {
+
+    )
+    {
         $step->getProposalsIds()->willReturn([1, 6, 235, 235])->shouldBeCalled();
 
         $this->initialize($context);
@@ -35,10 +37,13 @@ class HasOnlyOneSelectionPerProposalValidatorSpec extends ObjectBehavior
         HasOnlyOneSelectionPerProposal $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $builder
-    ) {
+
+    )
+    {
         $step->getProposalsIds()->willReturn([1, 6, 235])->shouldBeCalled();
         $this->initialize($context);
         $builder->addViolation()->shouldNotBeCalled();
         $this->validate($step, $constraint);
     }
+
 }

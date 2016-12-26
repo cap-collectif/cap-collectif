@@ -3,7 +3,7 @@ Capco\UserBundle\Entity\User:
     properties:
       id:
         expose: true
-        type: integer
+        type: string
         groups: [UserId]
       slug:
         expose: true

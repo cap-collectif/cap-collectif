@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\Entity\Steps;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 class PresentationStepSpec extends ObjectBehavior
 {

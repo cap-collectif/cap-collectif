@@ -119,8 +119,8 @@ RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 199369E5404BD
 	  } > /etc/apt/preferences.d/mariadb && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
-        mariadb-server=10.1.20+maria-1~jessie \
-        mariadb-client=10.1.20+maria-1~jessie \
+        mariadb-server=10.1.19+maria-1~jessie \
+        mariadb-client=10.1.19+maria-1~jessie \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -227,7 +227,6 @@ COPY cron/crontab               /etc/cron.d/crontab
 COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
-COPY logrotate/mysql-slow-logs   /etc/logrotate.d/mysql-slow-logs
 
 # Binaries
 COPY rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin

@@ -10,6 +10,7 @@ use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Prophecy\Argument as ProphecyArgument;
 
 class SynthesisHandlerSpec extends ObjectBehavior
 {
@@ -96,4 +97,5 @@ class SynthesisHandlerSpec extends ObjectBehavior
 
         $this->createOrUpdateElementsFromSource($synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\Synthesis');
     }
+
 }

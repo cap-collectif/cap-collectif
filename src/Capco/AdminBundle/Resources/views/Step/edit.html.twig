@@ -99,11 +99,7 @@
                 toggleDateFields(true);
             });
 
-            if (typeof timelessField !== 'undefined' && typeof timelessField.iCheck('update')[0] !== 'undefined') {
-                toggleDateFields(!timelessField.iCheck('update')[0].checked);
-            } else {
-            	toggleDateFields(true);
-            }
+            toggleDateFields(!timelessField.iCheck('update')[0].checked);
 
         });
     </script>

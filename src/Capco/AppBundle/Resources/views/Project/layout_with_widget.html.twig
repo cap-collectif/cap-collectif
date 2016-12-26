@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
-{% set showVotesWidget = currentStep.slug is defined and not currentStep.isPresentationStep() and capco_has_votable_step_not_future(project) and is_granted('ROLE_USER') %}
+{% set showVotesWidget = currentStep is iterable and not currentStep.isPresentationStep() and capco_has_votable_step_not_future(project) and is_granted('ROLE_USER') %}
 {% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
 {% set projectSteps = [] %}
 

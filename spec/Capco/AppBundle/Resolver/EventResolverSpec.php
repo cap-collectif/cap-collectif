@@ -3,10 +3,12 @@
 namespace spec\Capco\AppBundle\Resolver;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Capco\AppBundle\Repository\EventRepository;
 
 class EventResolverSpec extends ObjectBehavior
 {
+
     function let(EventRepository $repository)
     {
         $this->beConstructedWith($repository);

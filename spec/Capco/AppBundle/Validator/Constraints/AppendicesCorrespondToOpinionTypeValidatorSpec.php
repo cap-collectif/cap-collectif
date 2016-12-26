@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Capco\AppBundle\Validator\Constraints\AppendicesCorrespondToOpinionType;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
@@ -30,8 +31,9 @@ class AppendicesCorrespondToOpinionTypeValidatorSpec extends ObjectBehavior
       AppendicesCorrespondToOpinionType $constraint,
       ExecutionContextInterface $context,
       ConstraintViolationBuilderInterface $builder
-      ) {
-        // $appendixType1->getId()->willReturn(1);
+      )
+    {
+      // $appendixType1->getId()->willReturn(1);
       // $appendixType2->getId()->willReturn(2);
       // $otat->getAppendixType()->willReturn($appendixType1);
       // $appendix->getAppendixType()->willReturn($appendixType2);
@@ -59,8 +61,9 @@ class AppendicesCorrespondToOpinionTypeValidatorSpec extends ObjectBehavior
       AppendicesCorrespondToOpinionType $constraint,
       ExecutionContextInterface $context,
       ConstraintViolationBuilderInterface $builder
-      ) {
-        // $appendixType1->getId()->willReturn(1);
+      )
+    {
+      // $appendixType1->getId()->willReturn(1);
       // $appendixType2->getId()->willReturn(2);
       //
       // $otat1->getAppendixType()->willReturn($appendixType1);
@@ -75,7 +78,7 @@ class AppendicesCorrespondToOpinionTypeValidatorSpec extends ObjectBehavior
       // bug in phpspec ?
 
       $this->initialize($context);
-        $context->addViolationAt('appendices', $constraint->message)->shouldNotBeCalled();
+      $context->addViolationAt('appendices', $constraint->message)->shouldNotBeCalled();
       // $this->validate($opinion, $constraint);
     }
 
@@ -84,10 +87,12 @@ class AppendicesCorrespondToOpinionTypeValidatorSpec extends ObjectBehavior
       AppendicesCorrespondToOpinionType $constraint,
       ExecutionContextInterface $context,
       ConstraintViolationBuilderInterface $builder
-      ) {
-        $opinion->getAppendices()->willReturn(new ArrayCollection([]));
-        $this->initialize($context);
-        $context->addViolationAt('appendices', $constraint->message)->shouldNotBeCalled();
-        $this->validate($opinion, $constraint);
+      )
+    {
+      $opinion->getAppendices()->willReturn(new ArrayCollection([]));
+      $this->initialize($context);
+      $context->addViolationAt('appendices', $constraint->message)->shouldNotBeCalled();
+      $this->validate($opinion, $constraint);
     }
+
 }
