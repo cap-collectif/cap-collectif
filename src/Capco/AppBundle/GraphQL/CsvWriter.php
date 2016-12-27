@@ -17,15 +17,12 @@ class CsvWriter
 
   private function isMultiDimensionalArray(array $array): bool
   {
-    if (count(array_filter($array, 'is_array')) > 0) {
-        return true;
-    }
-    return false;
+    return count(array_filter($array, 'is_array')) > 0;
   }
 
   private function getCleanRow(): array
   {
-    return array_combine($this->headers, array_map(function ($h) { return ''; }, $this->headers));
+    return array_filter($this->headers, function () { return ''; });
   }
 
   public function writeRowData(&$row, array $currentData, string $fieldKey)

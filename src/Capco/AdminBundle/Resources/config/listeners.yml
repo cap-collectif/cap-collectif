@@ -4,7 +4,7 @@ services:
       arguments: ["@doctrine.orm.entity_manager"]
       tags:
         - { name: kernel.event_listener, event: kernel.controller }
-  my.graph.resolver.consultations:
+  capco.resolver.consultations:
       class: Capco\AppBundle\GraphQL\Resolver\ConsultationResolver
       tags:
           - { name: overblog_graphql.resolver, alias: "consultation", method: "resolve" }
