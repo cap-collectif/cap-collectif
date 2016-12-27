@@ -3,13 +3,14 @@
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
+use Capco\AppBundle\IdToUuidMigration;
 
 class Version20161219175116 extends IdToUuidMigration
 {
     public function __construct()
     {
         $this->table = 'fos_user';
-        $this->fkTables = [
+        $this->fks = [
           ['table' => 'proposal', 'key' => 'author_id', 'tmpKey' => 'author_uuid', 'nullable'=> false],
           ['table' => 'proposal', 'key' => 'update_author_id', 'tmpKey' => 'update_author_uuid', 'nullable'=> true],
           ['table' => 'user_favorite_proposal', 'pk'=> ['proposal_id', 'user_id'], 'key' => 'user_id', 'tmpKey'=> 'user_uuid', 'nullable'=> false],
@@ -31,10 +32,6 @@ class Version20161219175116 extends IdToUuidMigration
           ['table' => 'video', 'key' => 'author_id', 'tmpKey' => 'author_uuid', 'nullable'=> true],
           ['table' => 'votes', 'key' => 'voter_id', 'tmpKey' => 'voter_uuid', 'nullable'=> true],
           ['table' => 'fos_user_user_group', 'pk'=> ['group_id', 'user_id'], 'key' => 'user_id', 'tmpKey' => 'user_uuid', 'nullable'=> false],
-        ];
-    }
-
-    public function down(Schema $schema)
-    {
+       ];
     }
 }
