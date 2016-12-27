@@ -8,7 +8,7 @@ use GraphQL\Language\Source;
 
 class InfoResolver
 {
-  public function queryStringToFields(string $requestString)
+  public function queryStringToFields(string $requestString): array
   {
       $documentNode = Parser::parse(new Source($requestString));
       $fragments = [];
@@ -22,7 +22,7 @@ class InfoResolver
       return [];
   }
 
-  public function guessHeadersFromFields(array $fields)
+  public function guessHeadersFromFields(array $fields): array
   {
       $headers = [];
       $this->appendString('', $fields, $headers);
@@ -30,7 +30,7 @@ class InfoResolver
       return $headers;
   }
 
-  private function foldSelectionSet($selectionSet, array $fragments = [])
+  private function foldSelectionSet($selectionSet, array $fragments = []): array
   {
       $fields = [];
       foreach ($selectionSet->selections as $selectionNode) {
@@ -46,7 +46,6 @@ class InfoResolver
               }
           }
       }
-
       return $fields;
   }
 

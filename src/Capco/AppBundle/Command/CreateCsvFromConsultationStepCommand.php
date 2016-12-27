@@ -18,11 +18,10 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
             ->setDescription('Create csv file from consultation step data');
     }
 
-    public function queryGraphql(string $query)
+    public function queryGraphQLToArray(string $query): array
     {
         $executor = $this->getContainer()->get('overblog_graphql.request_executor');
         $response = $executor->execute(['query' => $query, 'variables' => []], [], null)->toArray();
-        dump($response);
 
         return $response;
     }
@@ -150,8 +149,7 @@ fragment sourceInfos on Source {
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $steps = $this->getContainer()
-            ->get('doctrine')
+        $steps = $this->getContainer()->get('doctrine')
             ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
             ->findAll();
         $generator = new GraphQLToCsv();
@@ -165,7 +163,7 @@ fragment sourceInfos on Source {
             $writer->setOutputBOM(Writer::BOM_UTF8);
             $generator->generate(
                 $requestString,
-                $this->queryGraphql($requestString),
+                $this->queryGraphQLToArray($requestString),
                 $writer
             );
             $output->writeln('The export file "'.$fileName.'" has been created.');
