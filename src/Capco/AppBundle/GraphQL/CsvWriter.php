@@ -22,7 +22,7 @@ class CsvWriter
 
   private function getCleanRow(): array
   {
-    return array_filter($this->headers, function () { return ''; });
+     return array_combine($this->headers, array_map(function ($h) { return ''; }, $this->headers));
   }
 
   public function writeRowData(&$row, array $currentData, string $fieldKey)
