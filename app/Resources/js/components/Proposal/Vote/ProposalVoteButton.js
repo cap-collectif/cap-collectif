@@ -49,30 +49,26 @@ const ProposalVoteButton = React.createClass({
     });
     classes += ` ${className}`;
     const action = user && userHasVote
-      ? () => {
-        deleteVote(dispatch, step, proposal);
-      }
-      : () => {
-        dispatch(openVoteModal(proposal.id));
-      };
+      ? () => { deleteVote(dispatch, step, proposal); }
+      : () => { dispatch(openVoteModal(proposal.id)); };
     return (
       <LoginOverlay enabled={!disabled && step && step.voteType === VOTE_TYPE_BUDGET}>
-        <Button
-          bsStyle={bsStyle}
-          className={classes}
-          style={style}
-          onClick={disabled ? null : action}
-          active={userHasVote}
-          disabled={disabled || isDeleting}
-        >
-          {
-            isDeleting
-              ? this.getIntlMessage('proposal.vote.deleting')
-              : user && userHasVote
-                ? this.getIntlMessage('proposal.vote.delete')
-                : this.getIntlMessage('proposal.vote.add')
-          }
-        </Button>
+      <Button
+        bsStyle={bsStyle}
+        className={classes}
+        style={style}
+        onClick={disabled ? null : action}
+        active={userHasVote}
+        disabled={disabled || isDeleting}
+      >
+        {
+          isDeleting
+          ? this.getIntlMessage('proposal.vote.deleting')
+          : user && userHasVote
+            ? this.getIntlMessage('proposal.vote.delete')
+            : this.getIntlMessage('proposal.vote.add')
+        }
+      </Button>
       </LoginOverlay>
     );
   },

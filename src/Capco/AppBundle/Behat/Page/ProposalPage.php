@@ -19,7 +19,7 @@ class ProposalPage extends Page
         'proposal comments counter' => '#proposal-page-tabs-tab-comments .badge',
         'comments list' => '.proposal__comments',
         'first vote' => '.proposal__vote:nth-child(1)',
-        'proposal vote button' => '.proposal__preview__vote',
+        'proposal vote button' => '.tabs__pills .proposal__preview__vote',
         'proposal vote form submit button' => '#confirm-proposal-vote',
         'edit proposal button' => '#proposal-edit-button',
         'delete proposal button' => '#proposal-delete-button',
@@ -44,7 +44,7 @@ class ProposalPage extends Page
 
     public function getVotesCount()
     {
-        return (int) $this->getVotesCounter()->getText();
+        return intval($this->getVotesCounter()->getText());
     }
 
     public function getCommentsCounter()
@@ -54,7 +54,7 @@ class ProposalPage extends Page
 
     public function getCommentsCount()
     {
-        return (int) $this->getCommentsCounter()->getText();
+        return intval($this->getCommentsCounter()->getText());
     }
 
     public function getCommentsListSelector()

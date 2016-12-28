@@ -26,7 +26,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class SelectionStepsController extends FOSRestController
 {
-    /**
+   /**
     * @Get("/selection_steps/{selection_step_id}")
     * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
     * @View(statusCode=200, serializerGroups={"Statuses", "Steps", "SelectionSteps", "VoteThreshold"})
@@ -228,12 +228,12 @@ class SelectionStepsController extends FOSRestController
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
      * @View(statusCode=200, serializerGroups={"ProposalSelectionVotes", "UsersInfos", "UserMedias"})
      */
-    public function deleteVoteOnProposalAction(SelectionStep $selectionStep, Proposal $proposal)
+    public function deleteVoteOnProposalAction(Request $request, SelectionStep $selectionStep, Proposal $proposal)
     {
         $em = $this->getDoctrine()->getManager();
 
         // Check if proposal is in step
-        if (!in_array($selectionStep, $proposal->getSelectionSteps(), true)) {
+        if (!in_array($selectionStep, $proposal->getSelectionSteps())) {
             throw new BadRequestHttpException('This proposal is not associated to this selection step.');
         }
 

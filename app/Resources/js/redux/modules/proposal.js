@@ -143,8 +143,11 @@ export const loadVotes = (stepId: number, proposalId: number): Action => ({
   stepId,
   proposalId,
 });
-export const deleteVoteSucceeded = (stepId: number, proposalId: number, vote: Object): Action => ({ type: DELETE_VOTE_SUCCEEDED, proposalId, stepId, vote });
-const deleteVoteRequested = (proposalId: number): Action => ({ type: DELETE_VOTE_REQUESTED, proposalId });
+const deleteVoteSucceeded = (stepId: number, proposalId: number, vote: Object): Action => ({ type: DELETE_VOTE_SUCCEEDED, proposalId, stepId, vote });
+const deleteVoteRequested = (proposalId: number): Action => ({
+  type: DELETE_VOTE_REQUESTED,
+  proposalId,
+});
 export const closeEditProposalModal = (): Action => ({ type: CLOSE_EDIT_MODAL });
 export const openEditProposalModal = (): Action => ({ type: OPEN_EDIT_MODAL });
 export const closeDeleteProposalModal = (): Action => ({ type: CLOSE_DELETE_MODAL });
@@ -374,6 +377,7 @@ export const updateProposal = (dispatch: Dispatch, form: number, id: number, dat
       });
     })
     .catch(() => {
+      dispatch(cancelSubmitProposal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'warning', content: 'proposal.request.update.failure' },
@@ -517,7 +521,7 @@ export const reducer = (state: State = initialState, action: Action): State => {
     case SUBMIT_PROPOSAL_FORM:
       return { ...state, isCreating: true };
     case CANCEL_SUBMIT_PROPOSAL:
-      return { ...state, isCreating: false };
+      return { ...state, isCreating: false, isEditing: false };
     case EDIT_PROPOSAL_FORM:
       return { ...state, isEditing: true };
     case OPEN_EDIT_MODAL:
@@ -603,11 +607,7 @@ export const reducer = (state: State = initialState, action: Action): State => {
     }
     case DELETE_VOTE_SUCCEEDED: {
       const proposal = state.proposalsById[action.proposalId];
-      if (!proposal) {
-        const userVotesByStepId = state.userVotesByStepId;
-        userVotesByStepId[action.stepId] = userVotesByStepId[action.stepId].filter(voteId => voteId !== action.proposalId);
-        return { ...state, userVotesByStepId };
-      }// Fix for user votes page
+      if (!proposal) return { ...state }; // Fix for user votes page
       const votesCountByStepId = proposal.votesCountByStepId;
       votesCountByStepId[action.stepId]--;
       const votesByStepId = proposal.votesByStepId || [];

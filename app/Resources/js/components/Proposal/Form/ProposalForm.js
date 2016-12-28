@@ -236,7 +236,7 @@ const ProposalForm = React.createClass({
     },
     body: {
       min: { value: 2, message: 'proposal.constraints.body' },
-      notBlank: { message: 'proposal.constraints.body' },
+      notBlankHtml: { message: 'proposal.constraints.body' },
     },
   },
 

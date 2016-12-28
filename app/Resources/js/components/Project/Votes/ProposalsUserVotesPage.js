@@ -9,13 +9,11 @@ const ProposalsUserVotesPage = React.createClass({
   propTypes: {
     userVotesByStepId: PropTypes.object.isRequired,
     votableSteps: PropTypes.array.isRequired,
-    currentUserVotesByStepId: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
     const { votableSteps, userVotesByStepId } = this.props;
-
     return (
       <div>
         <div className="container container--custom text-center">
@@ -85,37 +83,9 @@ const ProposalsUserVotesPage = React.createClass({
 
 });
 
-const mapStateToProps = (state, props) => {
-  // transform state.userVotesByStepId into a real array with the same keys
-  const votes = [];
-  const currentUserVotesByStepId = state.proposal.userVotesByStepId;
-  for (const i in currentUserVotesByStepId) {
-    if (Object.prototype.hasOwnProperty.call(currentUserVotesByStepId, i)) {
-      votes[i] = currentUserVotesByStepId[i];
-    }
-  }
-
-  // we take userVotesByStepId props from serialized data and we transform it into a real array (copy of state)
-  let items = [];
-  for (const i in props.userVotesByStepId) {
-    if (Object.prototype.hasOwnProperty.call(props.userVotesByStepId, i)) {
-      items[i] = props.userVotesByStepId[i];
-    }
-  }
-
-  // we filter thought the copy to sync array at deeper level (all votes of a proposal should be synced)
-  items = items.map((item, key) => {
-    if (votes[key].length > 0) {
-      return item.map((it, index) => votes[key][index] === it.id ? it : null)
-        .filter(it => it !== null);
-    }
-    return [];
-  });
-
+const mapStateToProps = (state) => {
   return {
     votableSteps: state.project.projects[state.project.currentProjectById].steps.filter(step => step.votable),
-    currentUserVotesByStepId: state.proposal.userVotesByStepId,
-    userVotesByStepId: items || [],
   };
 };
 

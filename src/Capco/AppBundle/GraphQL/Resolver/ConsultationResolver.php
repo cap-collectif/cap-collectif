@@ -58,8 +58,8 @@ class ConsultationResolver implements ContainerAwareInterface
     {
         if ($argument->offsetExists('type')) {
             return $proposition->getArguments()->filter(function ($a) use ($argument) {
-                return $a->getType() === $argument->offsetGet('type');
-            });
+              return $a->getType() === $argument->offsetGet('type');
+          });
         }
 
         return $proposition->getArguments();

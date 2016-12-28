@@ -53,6 +53,7 @@ class ProposalAdmin extends Admin
             ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.proposal.body',
                 'config_name' => 'admin_editor',
+                'required' => true,
             ])
             ->add('author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.proposal.author',
@@ -166,8 +167,7 @@ class ProposalAdmin extends Admin
         // Evaluation
         if ($instanceName === 'rennes' || $instanceName === 'rennespreprod') {
             $formMapper
-                ->with('admin.fields.proposal.group_evaluation',
-                [
+                ->with('admin.fields.proposal.group_evaluation', [
                   'description' => 'Le contenu des champs suivants ne sera pas publié sur le site. Cette section est réservée à l\'analyse des référents des services techniques. Aucun autre champ ne doit être renseigné ou modifié en dehors de cette section.',
                 ])
                 ->add(
