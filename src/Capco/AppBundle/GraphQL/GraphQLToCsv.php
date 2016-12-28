@@ -3,8 +3,6 @@
 namespace Capco\AppBundle\GraphQL;
 
 use League\Csv\Writer;
-use GraphQL\Language\Parser;
-use GraphQL\Language\Source;
 
 class GraphQLToCsv
 {

@@ -22,9 +22,7 @@ class ProjectUserVotesPage extends Page
 
     public function countVotes()
     {
-        $table = $this->getElement('vote table');
-
-        return count($table->find('css', '.proposals-user-votes__row'));
+        return count($this->getElement('vote table')->findAll('css', 'button'));
     }
 
     public function removeFirstVote()

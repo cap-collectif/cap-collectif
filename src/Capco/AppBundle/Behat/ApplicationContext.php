@@ -15,7 +15,6 @@ use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
 use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
-use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
 use WebDriver\Exception\ElementNotVisible;
@@ -327,7 +326,7 @@ class ApplicationContext extends UserContext
      */
     public function iWait($seconds)
     {
-        $this->getSession()->wait(intval($seconds * 1000));
+        $this->getSession()->wait((int) ($seconds * 1000));
     }
 
     /**
@@ -346,7 +345,7 @@ class ApplicationContext extends UserContext
     public function iShouldSeeResponseStatusCode($statusCode)
     {
         $responseStatusCode = $this->getSession()->getStatusCode();
-        if (!$responseStatusCode == intval($statusCode)) {
+        if (!$responseStatusCode == (int) $statusCode) {
             throw new \Exception(sprintf('Did not see response status code %s, but %s.', $statusCode, $responseStatusCode));
         }
     }

@@ -3,6 +3,7 @@ import { call, put } from 'redux-saga/effects';
 import {
   reducer,
   sendProposalNotificationSucceed,
+  deleteVoteSucceeded,
   fetchPosts,
   POSTS_FETCH_SUCCEEDED,
   POSTS_FETCH_FAILED,
@@ -42,6 +43,15 @@ describe('Proposal Reducer', () => {
       lastNotifiedStepId: null,
     };
     const newState = reducer(initialState, sendProposalNotificationSucceed(1, 2));
+    expect(newState).toMatchSnapshot();
+  });
+
+  it('Should handle deleteVoteSucceeded', () => {
+    const initialState = {
+      userVotesByStepId: { 6: [2, 3] },
+      proposalsById: {},
+    };
+    const newState = reducer(initialState, deleteVoteSucceeded(6, 2, {}));
     expect(newState).toMatchSnapshot();
   });
 });
