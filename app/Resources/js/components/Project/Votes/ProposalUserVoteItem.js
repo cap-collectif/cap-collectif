@@ -27,7 +27,7 @@ export const ProposalUserVoteItem = React.createClass({
         <td><i className="cap cap-user-2"></i><UserLink user={proposal.author} /></td>
         {
           proposal.district &&
-            <td><i className="cap cap-marker-1"></i>{proposal.district.name}</td>
+          <td><i className="cap cap-marker-1"></i>{proposal.district.name}</td>
         }
         <td>
           <ProposalDetailsEstimation
@@ -36,10 +36,12 @@ export const ProposalUserVoteItem = React.createClass({
           />
         </td>
         <td>
-          <Button onClick={() => {
-            deleteVote(dispatch, step, proposal);
-            location.reload();
-          }} className="proposal-vote__delete"
+          <Button
+            onClick={() => {
+              deleteVote(dispatch, step, proposal);
+            }}
+            className="proposal-vote__delete"
+            disabled={!step.open}
           >
             {this.getIntlMessage('project.votes.delete')}
           </Button>

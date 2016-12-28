@@ -1,3 +1,14 @@
+exports[`Proposal Reducer Should handle deleteVoteSucceeded 1`] = `
+Object {
+  "proposalsById": Object {},
+  "userVotesByStepId": Object {
+    "6": Array [
+      3,
+    ],
+  },
+}
+`;
+
 exports[`Proposal Reducer Should handle sendProposalNotificationSucceed 1`] = `
 Object {
   "lastNotifiedStepId": 2,

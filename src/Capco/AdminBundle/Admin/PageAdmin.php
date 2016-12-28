@@ -2,7 +2,6 @@
 
 // src/Acme/DemoBundle/Admin/PostAdmin.php
 
-
 namespace Capco\AdminBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;

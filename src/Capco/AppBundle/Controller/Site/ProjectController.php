@@ -51,7 +51,7 @@ class ProjectController extends Controller
     {
         $userVotesByStepId = $this->get('capco.proposal_votes.resolver')->getUserVotesByStepIdForProject($project, $this->getUser());
 
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
         $proposalRepo = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Proposal');
 
         $userVotesByStepIdSerialized = [];

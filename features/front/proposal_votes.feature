@@ -198,9 +198,8 @@ Feature: Proposal votes
   Scenario: Logged in user wants to see his votes on a project and remove one
     Given I am logged in as admin
     When I go to the votes details page
-    Then I should have 1 votes
+    Then I should have 2 votes
     And I should see "1 proposition sélectionnée"
-    # And I remove the first vote
-    # Then I should see "Merci, votre vote a bien été supprimé"
-    # And I should see "0 proposition sélectionnée"
-    # And I should have 0 votes
+    And I remove the first vote
+    Then I should see "0 proposition sélectionnée"
+    And I should have 1 votes
