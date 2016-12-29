@@ -192,7 +192,7 @@ class SelectionStepsController extends FOSRestController
             return $form;
         }
 
-        if ($form->has('comment') && null !== ($content = $form->get('comment')->getData())) {
+        if ($form->has('comment') && !empty($content = $form->get('comment')->getData())) {
             $comment = new ProposalComment();
             $comment
                 ->setAuthor($vote->getUser())
