@@ -139,10 +139,10 @@ class UserAdmin extends BaseAdmin
             ->add('twitter_id')
             ->add('twitter_access_token')
             ->end()
-            ->with('Security')
+            /* ->with('Security')
             ->add('token')
-            ->add('twoStepVerificationCode')
-            ->end()
+            ->add('twoStepVerificationCode') /
+            ->end() */
         ;
     }
 
@@ -165,8 +165,8 @@ class UserAdmin extends BaseAdmin
         if (($subject && !$subject->hasRole('ROLE_SUPER_ADMIN')) || $currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper
                 ->tab('Security')
-                ->with('Status', ['class' => 'col-md-6'])->end()
-                ->with('Keys', ['class' => 'col-md-6'])->end()
+                ->with('Status', ['class' => 'col-md-12'])->end()
+                // ->with('Keys', ['class' => 'col-md-6'])->end()
                 ->with('Roles', ['class' => 'col-md-12'])->end()
                 ->end()
             ;
@@ -278,18 +278,17 @@ class UserAdmin extends BaseAdmin
                 )
                 ->end()
 
-                ->with('Keys')
+                /* ->with('Keys')
                 ->add('token', null, ['required' => false])
                 ->add('twoStepVerificationCode', null, ['required' => false])
-                ->end()
-                ->end()
+                ->end() */
             ;
         }
     }
 
     public function getTemplate($name)
     {
-        if ($name == 'delete') {
+        if ($name === 'delete') {
             return 'CapcoAdminBundle:User:delete.html.twig';
         }
 
