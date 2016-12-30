@@ -19,7 +19,10 @@ class MenuItemController extends Controller
     public function batchActionDeleteIsRelevant(array $selectedIds, $allEntitiesSelected)
     {
         foreach ($selectedIds as $id) {
-            $item = $this->container->get('doctrine.orm.entity_manager')->getRepository('CapcoAppBundle:MenuItem')->find($id);
+            $item = $this->container->get('doctrine')
+                ->getManager()
+                ->getRepository('CapcoAppBundle:MenuItem')
+                ->find($id);
             if (!$item->getIsDeletable()) {
                 return 'admin.action.menu_item.batch_delete.denied';
             }
@@ -45,7 +48,7 @@ class MenuItemController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object->getIsDeletable()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         return parent::deleteAction($id, $request);

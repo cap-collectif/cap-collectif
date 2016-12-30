@@ -10,6 +10,9 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Post;
 
 class CommentAdmin extends Admin
 {
@@ -210,21 +213,21 @@ class CommentAdmin extends Admin
             $formMapper
                 ->add('idea', 'sonata_type_model', [
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Idea',
+                    'class' => Idea::class,
                 ])
             ;
         } elseif ($subject instanceof EventComment) {
             $formMapper
                 ->add('event', 'sonata_type_model', [
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Event',
+                    'class' => Event::class,
                 ])
             ;
         } elseif ($subject instanceof PostComment) {
             $formMapper
                 ->add('post', 'sonata_type_model', [
                     'label' => 'admin.fields.comment.idea',
-                    'class' => 'Capco\AppBundle\Entity\Post',
+                    'class' => Post::class,
                 ])
             ;
         }

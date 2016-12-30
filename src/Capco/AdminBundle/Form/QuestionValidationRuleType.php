@@ -41,20 +41,19 @@ class QuestionValidationRuleType extends AbstractType implements DataMapperInter
     public function mapFormsToData($forms, &$data)
     {
         $forms = iterator_to_array($forms);
+        $data = null;
         if ($forms['type']->getData() && $forms['number']->getData()) {
             $data = MultipleChoiceQuestionValidationRule::create(
                 $forms['type']->getData(),
                 $forms['number']->getData()
             );
-        } else {
-            $data = null;
         }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule',
+            'data_class' => MultipleChoiceQuestionValidationRule::class,
             'empty_data' => null,
         ]);
     }

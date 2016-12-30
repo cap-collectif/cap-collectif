@@ -240,8 +240,6 @@ class EventAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $subject = $this->getSubject();
-
         $showMapper
             ->add('title', null, [
                 'label' => 'admin.fields.event.title',
@@ -333,7 +331,7 @@ class EventAdmin extends Admin
 
     private function checkRegistration($event)
     {
-        if ($event->getLink() != null) {
+        if ($event->getLink()) {
             $event->setRegistrationEnable(false);
         }
     }
@@ -362,7 +360,7 @@ class EventAdmin extends Admin
     public function getObjectMetadata($object)
     {
         $media = $object->getMedia();
-        if ($media != null) {
+        if ($media) {
             $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
             $format = $provider->getFormatName($media, 'form');
             $url = $provider->generatePublicUrl($media, $format);

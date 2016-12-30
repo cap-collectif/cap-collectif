@@ -30,7 +30,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
     private $username = 'Gouvernement';
     private $password = 'KvN+j\E43&2U%KAF';
 
-    private $siteParameters = [
+    private static $siteParameters = [
         'admin.mail.notifications.send_address' => 'coucou@cap-collectif.com',
         'admin.mail.notifications.receive_address' => 'assistance@cap-collectif.com',
         'admin.mail.contact' => 'coucou@cap-collectif.com',
@@ -45,7 +45,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         'security.shield_mode.password' => 'Rg6hd4Tg',
     ];
 
-    private $siteColors = [
+    private static $siteColors = [
         'color.body.bg' => '#ffffff',
         'color.body.text' => '#333333',
         'color.header.bg' => '#01a0d0',
@@ -112,7 +112,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                 }
             }
         }
-        throw new \Exception('Unknown opinion title: '.$title, 1);
+        throw new \InvalidArgumentException('Unknown opinion title: '.$title, 1);
     }
 
     protected function configure()
@@ -154,15 +154,8 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $citoyenType = $em->getRepository('CapcoUserBundle:UserType')
                        ->findOneBySlug('citoyen');
 
-        $context = $em->getRepository('CapcoClassificationBundle:Context')
-                      ->find('default');
-
-        $media = $this->getContainer()
-                      ->get('sonata.media.manager.media')
-                      ->create();
-
         $user = new User();
-        $user->setUserName($this->username);
+        $user->setUsername($this->username);
         $user->setEmail('gouv@gouv.fr');
         $user->setPlainPassword($this->password);
         $user->setEnabled(true);
@@ -171,21 +164,21 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $em->persist($user);
 
         $bertrand = new User();
-        $bertrand->setUserName('Bertrand Pailhès');
+        $bertrand->setUsername('Bertrand Pailhès');
         $bertrand->setEmail('pailhes@gmail.com');
         $bertrand->setPlainPassword('testtest');
         $bertrand->setEnabled(true);
         $user->setUserType($citoyenType);
         $em->persist($bertrand);
 
-        foreach ($this->siteParameters as $key => $value) {
+        foreach (self::$siteParameters as $key => $value) {
             $param = $em->getRepository('CapcoAppBundle:SiteParameter')
                         ->findOneByKeyname($key)
                     ;
             $param->setValue($value);
         }
 
-        foreach ($this->siteColors as $key => $value) {
+        foreach (self::$siteColors as $key => $value) {
             $param = $em->getRepository('CapcoAppBundle:SiteColor')
                         ->findOneByKeyname($key)
                     ;
@@ -401,7 +394,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                           ->findOneByTitle($row['opinion']);
 
             if (!is_object($opinion)) {
-                throw new \Exception('Unknown title: '.$row['opinion'], 1);
+                throw new \InvalidArgumentException('Unknown title: '.$row['opinion'], 1);
             }
 
             if (count($opinion->getAppendices()) === 0) {
@@ -425,7 +418,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                           ->findOneByTitle($row['opinion']);
 
             if (!is_object($opinion)) {
-                throw new \Exception('Unknown title: '.$row['opinion'], 1);
+                throw new \InvalidArgumentException('Unknown title: '.$row['opinion'], 1);
             }
 
             $modal = new OpinionModal();

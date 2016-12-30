@@ -12,6 +12,11 @@ use Capco\AppBundle\Entity\HighlightedEvent;
 use Capco\AppBundle\Entity\HighlightedTheme;
 use Capco\AppBundle\Entity\HighlightedIdea;
 use Capco\AppBundle\Entity\HighlightedProject;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Theme;
 
 class HighlightedContentAdmin extends Admin
 {
@@ -71,35 +76,35 @@ class HighlightedContentAdmin extends Admin
             $formMapper
                 ->add('post', 'sonata_type_model', [
                     'label' => 'admin.fields.highlighted_content.post',
-                    'class' => 'Capco\AppBundle\Entity\Post',
+                    'class' => Post::class,
                 ])
             ;
         } elseif ($subject instanceof HighlightedProject) {
             $formMapper
                 ->add('project', 'sonata_type_model', [
                     'label' => 'admin.fields.highlighted_content.project',
-                    'class' => 'Capco\AppBundle\Entity\Project',
+                    'class' => Project::class,
                 ])
             ;
         } elseif ($subject instanceof HighlightedIdea) {
             $formMapper
                 ->add('idea', 'sonata_type_model', [
                     'label' => 'admin.fields.highlighted_content.idea',
-                    'class' => 'Capco\AppBundle\Entity\Idea',
+                    'class' => Idea::class,
                 ])
             ;
         } elseif ($subject instanceof HighlightedEvent) {
             $formMapper
                 ->add('event', 'sonata_type_model', [
                     'label' => 'admin.fields.highlighted_content.event',
-                    'class' => 'Capco\AppBundle\Entity\Event',
+                    'class' => Event::class,
                 ])
             ;
         } elseif ($subject instanceof HighlightedTheme) {
             $formMapper
                 ->add('theme', 'sonata_type_model', [
                     'label' => 'admin.fields.highlighted_content.theme',
-                    'class' => 'Capco\AppBundle\Entity\Theme',
+                    'class' => Theme::class,
                 ])
             ;
         }

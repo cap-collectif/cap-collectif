@@ -26,7 +26,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
         $contributionResolver = $container->get('capco.contribution.resolver');
-        $force = $input->getOption('force');
 
         // ****************************** Opinion counters **********************************************
 

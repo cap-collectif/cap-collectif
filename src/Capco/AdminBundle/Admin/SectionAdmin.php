@@ -21,7 +21,7 @@ class SectionAdmin extends Admin
     public function createQuery($context = 'list')
     {
         $manager = $this->getConfigurationPool()->getContainer()->get('capco.toggle.manager');
-        $em = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
 
         $all = $em->getRepository('CapcoAppBundle:Section')->findAll();
 
@@ -210,7 +210,7 @@ class SectionAdmin extends Admin
     {
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get('doctrine')
             ->getRepository('CapcoAppBundle:Steps\CollectStep')
             ->createQueryBuilder('cs')
             ->where('cs.isEnabled = :enabled')

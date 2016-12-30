@@ -48,6 +48,5 @@ class AnswerAdmin extends Admin
 
     public function getBatchActions()
     {
-        return;
     }
 }

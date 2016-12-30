@@ -42,10 +42,10 @@ class RecentPostBlockService extends BaseBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        if ($flag = $blockContext->getSetting('toggle')) {
-            if (!$this->toggleManager->isActive($flag)) {
-                return new Response();
-            }
+        if ($blockContext->getSetting('toggle')
+            && !$this->toggleManager->isActive($blockContext->getSetting('toggle'))
+        ) {
+            return new Response();
         }
 
         $parameters = [

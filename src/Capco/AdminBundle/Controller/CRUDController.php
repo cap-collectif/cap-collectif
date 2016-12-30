@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sonata\AdminBundle\Filter\FilterInterface;
 use Sonata\AdminBundle\Admin\AdminInterface;
@@ -27,14 +26,14 @@ class CRUDController extends Controller
         $context = $request->get('_context', '');
 
         if ($context === 'filter' && false === $admin->isGranted('LIST')) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         if ($context !== 'filter'
             && false === $admin->isGranted('CREATE')
             && false === $admin->isGranted('EDIT')
         ) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         // subject will be empty to avoid unnecessary database requests and keep autocomplete function fast
@@ -57,7 +56,7 @@ class CRUDController extends Controller
             $formAutocomplete = $admin->getForm()->get($fieldDescription->getName());
 
             if ($formAutocomplete->getConfig()->getAttribute('disabled')) {
-                throw new AccessDeniedException('Autocomplete list can`t be retrieved because the form element is disabled or read_only.');
+                throw $this->createAccessDeniedException('Autocomplete list can`t be retrieved because the form element is disabled or read_only.');
             }
 
             $property = $formAutocomplete->getConfig()->getAttribute('property');
@@ -74,7 +73,7 @@ class CRUDController extends Controller
 
         // check user permission
         if (false === $targetAdmin->isGranted('LIST')) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         if (mb_strlen($searchText, 'UTF-8') < $minimumInputLength) {
@@ -89,7 +88,7 @@ class CRUDController extends Controller
                 throw new \RuntimeException('Callback does not contain callable function.');
             }
 
-            call_user_func($callback, $targetAdmin, $property, $searchText);
+            $callback($targetAdmin, $property, $searchText);
         } else {
             if (is_array($property)) {
                 // multiple properties

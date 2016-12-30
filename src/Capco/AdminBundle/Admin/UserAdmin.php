@@ -299,7 +299,7 @@ class UserAdmin extends BaseAdmin
     public function getObjectMetadata($object)
     {
         $media = $object->getMedia();
-        if ($media != null) {
+        if ($media) {
             $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
             $format = $provider->getFormatName($media, 'form');
             $url = $provider->generatePublicUrl($media, $format);

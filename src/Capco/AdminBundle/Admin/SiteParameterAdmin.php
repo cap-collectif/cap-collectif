@@ -36,51 +36,51 @@ class SiteParameterAdmin extends Admin
         $subject = $this->getSubject();
         $types = SiteParameter::$types;
 
-        if ($subject->getType() == $types['simple_text']) {
+        if ($subject->getType() === $types['simple_text']) {
             $formMapper->add('value', TextType::class, [
                     'label' => 'admin.fields.site_parameter.value',
                     'required' => false,
                 ]);
-        } elseif ($subject->getType() == $types['rich_text']) {
+        } elseif ($subject->getType() === $types['rich_text']) {
             $formMapper->add('value', CKEditorType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'config_name' => 'admin_editor',
             ]);
-        } elseif ($subject->getType() == $types['integer']) {
+        } elseif ($subject->getType() === $types['integer']) {
             $formMapper->add('value', IntegerType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
             ]);
-        } elseif ($subject->getType() == $types['javascript']) {
+        } elseif ($subject->getType() === $types['javascript']) {
             $formMapper->add('value', TextareaType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'help' => 'admin.help.site_parameter.js',
                 'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
             ]);
-        } elseif ($subject->getType() == $types['email']) {
+        } elseif ($subject->getType() === $types['email']) {
             $formMapper->add('value', EmailType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'attr' => ['placeholder' => 'hello@exemple.com'],
             ]);
-        } elseif ($subject->getType() == $types['intern_url']) {
+        } elseif ($subject->getType() === $types['intern_url']) {
             $formMapper->add('value', null, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
             ]);
-        } elseif ($subject->getType() == $types['url']) {
+        } elseif ($subject->getType() === $types['url']) {
             $formMapper->add('value', UrlType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
             ]);
-        } elseif ($subject->getType() == $types['tel']) {
+        } elseif ($subject->getType() === $types['tel']) {
             $formMapper->add('value', null, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
             ]);
-        } elseif ($subject->getType() == $types['boolean']) {
+        } elseif ($subject->getType() === $types['boolean']) {
             $formMapper->add('value', ChoiceType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,

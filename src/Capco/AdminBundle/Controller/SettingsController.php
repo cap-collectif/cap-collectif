@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SettingsController extends Controller
 {
@@ -16,12 +15,12 @@ class SettingsController extends Controller
      */
     public function listAction(Request $request, $category)
     {
-        if (false == $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException();
         }
 
         $admin_pool = $this->get('sonata.admin.pool');
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->get('doctrine')->getManager();
 
         $parameters = $em->getRepository('CapcoAppBundle:SiteParameter')->findBy([
             'category' => $category,
@@ -57,8 +56,8 @@ class SettingsController extends Controller
      */
     public function switchToggleAction($toggle)
     {
-        if (false == $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException();
         }
 
         $toggleManager = $this->get('capco.toggle.manager');

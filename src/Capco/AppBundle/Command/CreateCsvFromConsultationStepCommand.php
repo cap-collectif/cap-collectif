@@ -6,7 +6,6 @@ use Capco\AppBundle\GraphQL\GraphQLToCsv;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use GuzzleHttp\Query;
 use League\Csv\Writer;
 
 class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand

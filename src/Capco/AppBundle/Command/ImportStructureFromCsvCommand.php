@@ -63,7 +63,7 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
                 return $this->findOpinionTypeByPath($next, $type->getChildren());
             }
         }
-        throw new \Exception('Unknown opinion title: "'.$current.'"', 1);
+        throw new \InvalidArgumentException('Unknown opinion title: "'.$current.'"', 1);
     }
 
     protected function import(InputInterface $input, OutputInterface $output)

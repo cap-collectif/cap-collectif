@@ -328,7 +328,7 @@ class ProjectAdmin extends Admin
     public function getObjectMetadata($object)
     {
         $cover = $object->getCover();
-        if ($cover != null) {
+        if ($cover) {
             $provider = $this->getConfigurationPool()->getContainer()->get($cover->getProviderName());
             $format = $provider->getFormatName($cover, 'form');
             $url = $provider->generatePublicUrl($cover, $format);

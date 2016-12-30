@@ -51,7 +51,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
                             ]);
 
             if (!is_object($opinion)) {
-                throw new \Exception('Unknown title: '.$row['opinion'], 1);
+                throw new \InvalidArgumentException('Unknown title: '.$row['opinion'], 1);
             }
 
             $modal = new OpinionModal();

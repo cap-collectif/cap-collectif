@@ -6,6 +6,8 @@ use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\Opinion;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Sonata\AdminBundle\Exception\LockException;
+use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -15,7 +17,7 @@ class OpinionController extends Controller
     public function listAction(Request $request = null)
     {
         if (false === $this->admin->isGranted('LIST')) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $preResponse = $this->preList($request);
@@ -53,7 +55,7 @@ class OpinionController extends Controller
         $templateKey = 'edit';
 
         if (false === $this->admin->isGranted('CREATE')) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $object = $this->admin->getNewInstance();
@@ -62,7 +64,8 @@ class OpinionController extends Controller
 
         $opinionTypeId = $request->get('opinion_type');
         if ($opinionTypeId) {
-            $opinionType = $this->get('doctrine.orm.entity_manager')
+            $opinionType = $this->get('doctrine')
+                ->getManager()
                 ->getRepository('CapcoAppBundle:OpinionType')
                 ->find($opinionTypeId);
             if ($opinionType) {
@@ -93,7 +96,7 @@ class OpinionController extends Controller
             // persist if the form was valid and if in preview mode the preview was approved
             if ($isFormValid && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))) {
                 if (false === $this->admin->isGranted('CREATE', $object)) {
-                    throw new AccessDeniedException();
+                    throw $this->createAccessDeniedException();
                 }
 
                 try {
@@ -168,10 +171,6 @@ class OpinionController extends Controller
 
     public function editAction($id = null, Request $request = null)
     {
-        $opinionTypes = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:OpinionType')
-            ->findAll();
-
         // the key used to lookup the template
         $templateKey = 'edit';
 
@@ -183,7 +182,7 @@ class OpinionController extends Controller
         }
 
         if (false === $this->admin->isGranted('EDIT', $object)) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $preResponse = $this->preEdit($request, $object);
@@ -296,11 +295,11 @@ class OpinionController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
         }
 
         if (false === $this->admin->isGranted('VIEW', $object)) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $preResponse = $this->preShow($request, $object);
@@ -333,7 +332,7 @@ class OpinionController extends Controller
         }
 
         if (false === $this->admin->isGranted('DELETE', $object)) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $preResponse = $this->preDelete($request, $object);
@@ -397,7 +396,8 @@ class OpinionController extends Controller
 
     public function getConsultationStepTypes()
     {
-        $rootOpinionTypes = $this->get('doctrine.orm.entity_manager')
+        $rootOpinionTypes = $this->get('doctrine')
+            ->getManager()
             ->getRepository('CapcoAppBundle:OpinionType')
             ->createQueryBuilder('ot')
             ->select('ot', 'ct')
@@ -409,7 +409,7 @@ class OpinionController extends Controller
             ->getArrayResult()
         ;
 
-        $otRepo = $this->get('doctrine.orm.entity_manager')
+        $otRepo = $this->get('doctrine')->getManager()
             ->getRepository('CapcoAppBundle:OpinionType')
         ;
 
@@ -430,7 +430,7 @@ class OpinionController extends Controller
 
     public function updateAppendicesForOpinion(Opinion $opinion)
     {
-        $appendixTypes = $this->get('doctrine.orm.entity_manager')
+        $appendixTypes = $this->get('doctrine')->getManager()
             ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
             ->findBy(
                 ['opinionType' => $opinion->getOpinionType()],

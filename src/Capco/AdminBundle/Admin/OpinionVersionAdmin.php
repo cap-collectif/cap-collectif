@@ -235,6 +235,5 @@ class OpinionVersionAdmin extends Admin
 
     public function getBatchActions()
     {
-        return;
     }
 }

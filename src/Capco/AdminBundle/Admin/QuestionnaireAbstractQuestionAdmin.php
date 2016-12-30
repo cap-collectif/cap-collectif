@@ -51,7 +51,7 @@ class QuestionnaireAbstractQuestionAdmin extends Admin
     {
         // delete linked question
         if ($object->getQuestion()) {
-            $em = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager.abstract');
+            $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
             $em->remove($object->getQuestion());
         }
     }

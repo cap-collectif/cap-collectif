@@ -20,7 +20,7 @@ class MenuItemAdmin extends Admin
     public function createQuery($context = 'list')
     {
         $resolver = $this->getConfigurationPool()->getContainer()->get('capco.menu_item.resolver');
-        $em = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
 
         $all = $em->getRepository('CapcoAppBundle:MenuItem')->findAll();
 
@@ -232,7 +232,7 @@ class MenuItemAdmin extends Admin
     private function manageLink($menuItem)
     {
         $page = $menuItem->getPage();
-        if (null != $page) {
+        if ($page) {
             $link = 'pages/'.$page->getSlug();
             $menuItem->setLink($link);
         }

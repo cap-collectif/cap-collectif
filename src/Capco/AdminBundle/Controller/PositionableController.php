@@ -2,10 +2,8 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class PositionableController extends Controller
 {
@@ -45,11 +43,11 @@ class PositionableController extends Controller
     private function move($object, $relativePosition)
     {
         if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+            throw $this->createNotFoundException('Unable to find the object');
         }
 
         if (false === $this->admin->isGranted('EDIT', $object)) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $resolver = $this->get($this->resolverName);
@@ -57,7 +55,7 @@ class PositionableController extends Controller
         // Object to switch position with
         $objectToSwitch = $resolver->getObjectToSwitch($object, $relativePosition);
 
-        if (null != $objectToSwitch) {
+        if ($objectToSwitch) {
             // Switch position
             $oldPosition = $object->getPosition();
             $object->setPosition($objectToSwitch->getPosition());

@@ -53,7 +53,7 @@ class ProjectAbstractStepAdmin extends Admin
     {
         // delete linked step
         if ($object->getStep()) {
-            $em = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
+            $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
             $em->remove($object->getStep());
         }
     }

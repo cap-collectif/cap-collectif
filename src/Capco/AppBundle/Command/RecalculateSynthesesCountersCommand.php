@@ -21,8 +21,6 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $em = $container->get('doctrine.orm.entity_manager');
 
-        $connection = $em->getConnection();
-
         $query = $em
             ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
             ->createQueryBuilder('se')

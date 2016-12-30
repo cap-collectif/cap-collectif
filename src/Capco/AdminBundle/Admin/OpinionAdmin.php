@@ -148,7 +148,8 @@ class OpinionAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $subjectHasAppendices = $this->getSubject()->getAppendices()->count() > 0 ? true : false;
+        $subjectHasAppendices = $this->getSubject()->getAppendices()->count() > 0;
+
         $classname = $subjectHasAppendices ? '' : 'hidden';
         $formMapper
             ->with('admin.fields.opinion.group_content', ['class' => 'col-md-12'])->end()
@@ -239,7 +240,7 @@ class OpinionAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $subject = $this->getSubject();
-        $subjectHasAppendices = $this->getSubject()->getAppendices()->count() > 0 ? true : false;
+        $subjectHasAppendices = $this->getSubject()->getAppendices()->count() > 0;
 
         $showMapper
             ->add('title', null, [
@@ -328,14 +329,15 @@ class OpinionAdmin extends Admin
 
         $em = $this->getConfigurationPool()
             ->getContainer()
-            ->get('doctrine.orm.entity_manager');
+            ->get('doctrine')
+            ->getManager();
 
         $opinionType = $em
             ->getRepository('CapcoAppBundle:OpinionType')
             ->find($this->getPersistentParameter('opinion_type'));
 
         if (!$opinionType) {
-            throw new \Exception('Invalid opinion type.');
+            throw new \InvalidArgumentException('Invalid opinion type.');
         }
 
         $consultationStepType = $opinionType->getConsultationStepType();
@@ -350,16 +352,16 @@ class OpinionAdmin extends Admin
 
     public function getTemplate($name)
     {
-        if ($name == 'list') {
+        if ($name === 'list') {
             return 'CapcoAdminBundle:Opinion:list.html.twig';
         }
-        if ($name == 'edit') {
+        if ($name === 'edit') {
             return 'CapcoAdminBundle:Opinion:edit.html.twig';
         }
-        if ($name == 'show') {
+        if ($name === 'show') {
             return 'CapcoAdminBundle:Opinion:show.html.twig';
         }
-        if ($name == 'delete') {
+        if ($name === 'delete') {
             return 'CapcoAdminBundle:Opinion:delete.html.twig';
         }
 
@@ -371,7 +373,8 @@ class OpinionAdmin extends Admin
         if (!$opinion->getOpinionType()) {
             $opinionType = $this->getConfigurationPool()
                 ->getContainer()
-                ->get('doctrine.orm.entity_manager')
+                ->get('doctrine')
+                ->getManager()
                 ->getRepository('CapcoAppBundle:OpinionType')
                 ->find($this->getPersistentParameters('opinion_type'));
             $opinion->setOpinionType($opinionType);
@@ -385,6 +388,5 @@ class OpinionAdmin extends Admin
 
     public function getBatchActions()
     {
-        return;
     }
 }

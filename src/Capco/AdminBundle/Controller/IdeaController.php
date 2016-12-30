@@ -23,7 +23,7 @@ class IdeaController extends Controller
             }
         }
 
-        $handle = fopen('php://memory', 'r+');
+        $handle = fopen('php://memory', 'rb+');
         fputcsv($handle, $emails);
         rewind($handle);
         $content = stream_get_contents($handle);

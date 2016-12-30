@@ -41,7 +41,7 @@ class UserController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$this->isGranted('ROLE_SUPER_ADMIN') && $object->hasRole('ROLE_SUPER_ADMIN')) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         return parent::deleteAction($id, $request);
@@ -64,7 +64,7 @@ class UserController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$this->isGranted('ROLE_SUPER_ADMIN') && $object->hasRole('ROLE_SUPER_ADMIN')) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         return parent::editAction($id, $request);

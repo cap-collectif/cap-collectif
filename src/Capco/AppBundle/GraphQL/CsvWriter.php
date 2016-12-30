@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL;
 
 class CsvWriter
 {
-    private $header = [];
+    private $headers = [];
 
     public function setHeaders(array $headers)
     {

@@ -80,7 +80,7 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
             }
 
             if (!$object) {
-                throw new \Exception('Object '.$type.' '.$slug.' not found.');
+                throw new \RuntimeException('Object '.$type.' '.$slug.' not found.');
             }
 
             if ($object->getAnswer()) {

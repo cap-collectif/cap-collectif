@@ -13,12 +13,12 @@ class ReportingController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
         }
 
         $related = $object->getRelatedObject();
 
-        if ($related != null) {
+        if ($related) {
             $related->setIsEnabled(false);
             $this->get('capco.notify_manager')->notifyModeration($related);
         }
@@ -42,12 +42,12 @@ class ReportingController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
         }
 
         $related = $object->getRelatedObject();
 
-        if ($related != null) {
+        if ($related) {
             $related->setIsTrashed(true);
             $this->get('capco.notify_manager')->notifyModeration($related);
         }
@@ -71,7 +71,7 @@ class ReportingController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
         }
 
         $object->setIsArchived(true);

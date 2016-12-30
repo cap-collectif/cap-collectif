@@ -139,8 +139,6 @@ class VideoAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $subject = $this->getSubject();
-
         $showMapper
             ->add('title', null, [
                 'label' => 'admin.fields.video.title',
@@ -178,7 +176,7 @@ class VideoAdmin extends Admin
     public function getObjectMetadata($object)
     {
         $media = $object->getMedia();
-        if ($media != null) {
+        if ($media) {
             $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
             $format = $provider->getFormatName($media, 'form');
             $url = $provider->generatePublicUrl($media, $format);

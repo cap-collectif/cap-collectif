@@ -23,7 +23,10 @@ class SectionController extends PositionableController
     public function batchActionDeleteIsRelevant(array $selectedIds, $allEntitiesSelected)
     {
         foreach ($selectedIds as $id) {
-            $item = $this->container->get('doctrine.orm.entity_manager')->getRepository('Section')->find($id);
+            $item = $this->container->get('doctrine')
+                ->getManager()
+                ->getRepository('Section')
+                ->find($id);
             if (!$item->isCustom()) {
                 return 'admin.action.section.batch_delete.denied';
             }
@@ -49,7 +52,7 @@ class SectionController extends PositionableController
         $object = $this->admin->getObject($id);
 
         if (!$object->isCustom()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         return parent::deleteAction($id, $request);

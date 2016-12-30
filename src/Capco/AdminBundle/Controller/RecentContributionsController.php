@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -16,7 +15,7 @@ class RecentContributionsController extends Controller
      * @Route("/admin/contributions", name="capco_admin_contributions_index")
      * @Template("CapcoAdminBundle:RecentContributions:index.html.twig")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $resolver = $this->get('capco_admin.recent_contributions_resolver');
 
@@ -35,14 +34,14 @@ class RecentContributionsController extends Controller
      * @Route("/admin/contributions/{type}/{id}", name="capco_admin_contributions_show")
      * @Template("CapcoAdminBundle:RecentContributions:show.html.twig")
      */
-    public function showAction(Request $request, $type, $id)
+    public function showAction($type, $id)
     {
         $resolver = $this->get('capco_admin.recent_contributions_resolver');
 
         $contribution = $resolver->getContributionByTypeAndId($type, $id);
 
         if (!$contribution) {
-            throw new NotFoundHttpException('Contribution not found');
+            throw $this->createNotFoundException('Contribution not found');
         }
 
         return [
@@ -57,14 +56,14 @@ class RecentContributionsController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}/validate", name="capco_admin_contributions_validate")
      */
-    public function validateAction(Request $request, $type, $id)
+    public function validateAction($type, $id)
     {
         $resolver = $this->get('capco_admin.recent_contributions_resolver');
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->get('doctrine')->getManager();
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 
         if (!$contribution) {
-            throw new NotFoundHttpException('Contribution not found');
+            throw $this->createNotFoundException('Contribution not found');
         }
 
         $contribution->setValidated(true);
@@ -89,11 +88,11 @@ class RecentContributionsController extends Controller
     public function unpublishAction(Request $request, $type, $id)
     {
         $resolver = $this->get('capco_admin.recent_contributions_resolver');
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->get('doctrine')->getManager();
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 
         if (!$contribution) {
-            throw new NotFoundHttpException('Contribution not found');
+            throw $this->createNotFoundException('Contribution not found');
         }
 
         if ('POST' === $request->getMethod()) {
@@ -134,11 +133,11 @@ class RecentContributionsController extends Controller
     public function trashAction(Request $request, $type, $id)
     {
         $resolver = $this->get('capco_admin.recent_contributions_resolver');
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->get('doctrine')->getManager();
         $contribution = $resolver->getEntityByTypeAndId($type, $id);
 
         if (!$contribution) {
-            throw new NotFoundHttpException('Contribution not found');
+            throw $this->createNotFoundException('Contribution not found');
         }
 
         if ('POST' === $request->getMethod()) {
