@@ -39,6 +39,7 @@ const IdeaEditForm = React.createClass({
       const ideaForm = this.ideaForm.getWrappedInstance();
       if (ideaForm.isValid()) {
         const form = ideaForm.state.form;
+        form.url = form.url || '';
         if (!features.themes) {
           delete form.theme;
         }

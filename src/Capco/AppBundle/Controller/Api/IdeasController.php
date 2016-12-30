@@ -185,7 +185,7 @@ class IdeasController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
 
         if ($this->getUser() !== $idea->getAuthor()) {
-            throw new AccessDeniedHttpException();
+            throw $this->createAccessDeniedException();
         }
 
         if ($deleteMedia = $request->request->get('delete_media')) {
