@@ -11,7 +11,6 @@ use Capco\AppBundle\Form\IdeaVoteType;
 use Capco\AppBundle\Form\ReportingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\CapcoAppBundleEvents;
