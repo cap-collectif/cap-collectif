@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
+use Capco\AppBundle\Entity\Proposal;
 
 class ProposalSerializationListener extends AbstractSerializationListener
 {
@@ -51,7 +52,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
         return [
             [
                 'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\Proposal',
+                'class' => Proposal::class,
                 'method' => 'onPostProposal',
             ],
         ];

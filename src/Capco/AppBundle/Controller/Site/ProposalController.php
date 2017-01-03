@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProposalController extends Controller
 {
@@ -22,10 +23,15 @@ class ProposalController extends Controller
      * @Template("CapcoAppBundle:Proposal:show.html.twig")
      * @Cache(smaxage="60", public=true)
      */
-    public function showProposalAction(Project $project, CollectStep $currentStep, Proposal $proposal)
+    public function showProposalAction(Request $request, Project $project, CollectStep $currentStep, Proposal $proposal)
     {
         $em = $this->getDoctrine()->getManager();
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
+
+        $refererUri = $request->headers->has('referer')
+            && filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) !== false
+                ? $request->headers->get('referer')
+                : null;
 
         $proposalForm = $currentStep->getProposalForm();
         $props = $serializer->serialize([
@@ -72,6 +78,7 @@ class ProposalController extends Controller
             'props' => $props,
             'proposal' => $proposal,
             'proposalSerialized' => $proposalSerializedAsArray,
+            'referer' => $refererUri
         ]);
     }
 }

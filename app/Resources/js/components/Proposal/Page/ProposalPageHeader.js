@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
 import moment from 'moment';
 import UserAvatar from '../../User/UserAvatar';
@@ -11,7 +12,7 @@ const ProposalPageHeader = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
     className: PropTypes.string,
-    showThemes: PropTypes.bool.isRequired,
+    referer: PropTypes.string.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -24,8 +25,8 @@ const ProposalPageHeader = React.createClass({
   render() {
     const {
       proposal,
-      showThemes,
       className,
+      referer,
     } = this.props;
 
     const createdDate = (
@@ -48,10 +49,13 @@ const ProposalPageHeader = React.createClass({
 
     return (
       <div className={classNames(classes)}>
-        {
-          showThemes && proposal.theme
-          && <p className="excerpt">{proposal.theme.title}</p>
-        }
+        <div style={{ marginBottom: 10 }}>
+          <a href={referer || proposal._links.index}>
+            <i className="cap cap-arrow-1-1 icon--blue"></i>
+            { ' ' }
+            {this.getIntlMessage('proposal.back')}
+          </a>
+        </div>
         <h1 className="consultation__header__title h1">{proposal.title}</h1>
         <div className="media">
           <UserAvatar className="pull-left" user={proposal.author} />
@@ -85,4 +89,10 @@ const ProposalPageHeader = React.createClass({
 
 });
 
-export default ProposalPageHeader;
+const mapStateToProps = (state) => {
+  return {
+    referer: state.proposal.referer,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalPageHeader);

@@ -609,6 +609,7 @@
     "add_fusion": "Fusionner",
     "body": "Description",
     "category": "Catégorie",
+    "back": "Retour à liste",
     "fusionnedInto": "Proposition fusionnée avec {num, plural, one{1 autre} other {# autres}}",
     "fusionnedFrom": "Proposition issue de la fusion de {num, plural, other {# propositions}}",
     "constraints": {

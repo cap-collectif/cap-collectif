@@ -65,7 +65,6 @@ export const ProposalPage = React.createClass({
           <ProposalPageHeader
             proposal={proposal}
             className="container container--custom"
-            showThemes={features.themes && form.usingThemes}
           />
           <Tab.Container
             id="proposal-page-tabs"
@@ -122,6 +121,7 @@ export const ProposalPage = React.createClass({
                           showDistricts={features.districts}
                           showCategories={form.usingCategories}
                           showNullEstimation={!!(currentVotableStep && currentVotableStep.voteType === VOTE_TYPE_BUDGET)}
+                          showThemes={features.themes && form.usingThemes}
                         />
                         <br />
                         {
