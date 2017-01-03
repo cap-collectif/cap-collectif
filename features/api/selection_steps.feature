@@ -61,7 +61,7 @@ Scenario: Anonymous API client wants to get a step
             "_links": @...@
           },
           "district": {
-            "id": @integer@,
+            "id": @string@,
             "name": @string@
           },
           "status": {
@@ -117,7 +117,7 @@ Scenario: Anonymous API client wants to get a step
             "_links": @...@
           },
           "district": {
-            "id": @integer@,
+            "id": @string@,
             "name": @string@
           },
           "status": {
@@ -176,7 +176,7 @@ Scenario: Anonymous API client wants to get a step
             "_links": @...@
           },
           "district": {
-            "id": @integer@,
+            "id": @string@,
             "name": @string@
           },
           "status": {
