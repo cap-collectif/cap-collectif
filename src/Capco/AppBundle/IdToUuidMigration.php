@@ -13,6 +13,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
     protected $em;
     protected $idToUuidMap = [];
     protected $generator;
+
     protected $table = ''; // set this
     protected $fks = []; // set this
 
@@ -30,7 +31,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
 
     public function addUuidFields()
     {
-        $this->connection->executeQuery('ALTER TABLE ' . $this->table . ' ADD uuid CHAR(36) COMMENT \'(DC2Type:guid)\'');
+        $this->connection->executeQuery('ALTER TABLE ' . $this->table . ' ADD uuid CHAR(36) COMMENT \'(DC2Type:guid)\' FIRST');
         foreach ($this->fks as $fk) {
             $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' ADD '. $fk['tmpKey'] .' CHAR(36) COMMENT \'(DC2Type:guid)\'');
         }
