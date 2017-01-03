@@ -144,7 +144,6 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
 
     public function dropIdPrimaryKeyAndSetUuidToPrimaryKey()
     {
-        // if this fail you probably still have a FK referencing id
         $this->connection->executeQuery('ALTER TABLE '. $this->table .' DROP PRIMARY KEY, DROP COLUMN id');
         $this->connection->executeQuery('ALTER TABLE '. $this->table .' CHANGE uuid id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\'');
         $this->connection->executeQuery('ALTER TABLE '. $this->table .' ADD PRIMARY KEY (id)');
@@ -152,6 +151,21 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
 
     public function restoreConstraintsAndIndexes()
     {
+        // $sm = $this->connection->getSchemaManager();
+        // foreach ($sm->listTables('symfony') as $table) {
+        //   if ($table->getName() === $this->table) {
+        //       // if ($table->columnsAreIndexed(['id'])) {
+        //           $indexes = $table->getIndexes();
+        //           foreach ($indexes as $index) {
+        //             var_dump($index->getName(), $index->getColumns());
+        //             if ($index->getName() != 'PRIMARY' && in_array('id', $index->getColumns())) {
+        //               $this->connection->executeQuery('DROP INDEX '. $index->getName() .' ON '. $this->table);
+        //               $this->connection->executeQuery('CREATE INDEX '. $index->getName() .' ON '. $this->table .' (' . implode(',', $index->getColumns()) . ')');
+        //             }
+        //           }
+        //       // }
+        //   }
+        // }
         foreach ($this->fks as $fk) {
           if (isset($fk['pk'])) {
             $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' ADD PRIMARY KEY ('. implode(',', $fk['pk']) .')');
