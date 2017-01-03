@@ -78,7 +78,7 @@ class ProposalController extends Controller
             'props' => $props,
             'proposal' => $proposal,
             'proposalSerialized' => $proposalSerializedAsArray,
-            'referer' => $refererUri
+            'referer' => $refererUri,
         ]);
     }
 }

@@ -27,6 +27,7 @@ describe('<ProposalPage />', () => {
 
   const proposalNoVotes = {
     id: 41,
+    referer: 'http://capco.test',
     votableStepId: 2,
     votesCountByStepId: {
       2: 0,
@@ -35,6 +36,7 @@ describe('<ProposalPage />', () => {
   };
   const proposalWithVotes = {
     id: 42,
+    referer: 'http://capco.test',
     votableStepId: 2,
     votesCountByStepId: {
       2: 5,
@@ -43,6 +45,7 @@ describe('<ProposalPage />', () => {
 
   const proposalWithoutVotableStep = {
     id: 42,
+    referer: 'http://capco.test',
     votableStepId: null,
     votesCountByStepId: {},
   };
@@ -54,11 +57,10 @@ describe('<ProposalPage />', () => {
     expect(alert).toHaveLength(1);
     expect(alert.prop('proposal')).toEqual(proposalNoVotes);
 
-    const header = wrapper.find('ProposalPageHeader');
+    const header = wrapper.find('Connect(ProposalPageHeader)');
     expect(header.props()).toEqual({
       proposal: proposalNoVotes,
       className: 'container container--custom',
-      showThemes: true,
     });
 
     const tabContainer = wrapper.find(Tab.Container);
@@ -112,6 +114,7 @@ describe('<ProposalPage />', () => {
       showDistricts: false,
       showCategories: false,
       showNullEstimation: false,
+      showThemes: true,
     });
 
     const proposalAdvancement = contentTabPane.find('ProposalPageAdvancement');

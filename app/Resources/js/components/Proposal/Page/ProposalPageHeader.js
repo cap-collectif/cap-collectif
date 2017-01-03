@@ -7,7 +7,7 @@ import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 
-const ProposalPageHeader = React.createClass({
+export const ProposalPageHeader = React.createClass({
   displayName: 'ProposalPageHeader',
   propTypes: {
     proposal: PropTypes.object.isRequired,

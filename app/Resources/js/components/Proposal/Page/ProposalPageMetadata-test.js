@@ -29,7 +29,7 @@ describe('<ProposalPageMetadata />', () => {
   };
 
   it('should render proposal page metadata', () => {
-    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories showDistricts showNullEstimation />);
+    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories showDistricts showNullEstimation showThemes />);
     const mainDiv = wrapper.find('div.proposal__page__metadata');
     expect(mainDiv).toHaveLength(1);
     const secondDiv = mainDiv.find('div.proposal__infos');
@@ -57,28 +57,28 @@ describe('<ProposalPageMetadata />', () => {
   });
 
   it('should not render category if specified not to', () => {
-    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories={false} showDistricts showNullEstimation />);
+    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories={false} showDistricts showNullEstimation showThemes />);
     const infos = wrapper.find('div.proposal__info');
     expect(infos).toHaveLength(1);
     expect(wrapper.find('div.proposal__info--category')).toHaveLength(0);
   });
 
   it('should not render category if proposal has none', () => {
-    const wrapper = shallow(<ProposalPageMetadata proposal={proposalWithoutCategory} showCategories showDistricts showNullEstimation />);
+    const wrapper = shallow(<ProposalPageMetadata proposal={proposalWithoutCategory} showCategories showDistricts showNullEstimation showThemes />);
     const infos = wrapper.find('div.proposal__info');
     expect(infos).toHaveLength(1);
     expect(wrapper.find('div.proposal__info--category')).toHaveLength(0);
   });
 
   it('should not render district if specified not to', () => {
-    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories showDistricts={false} showNullEstimation />);
+    const wrapper = shallow(<ProposalPageMetadata proposal={proposal} showCategories showDistricts={false} showNullEstimation showThemes />);
     const infos = wrapper.find('div.proposal__info');
     expect(infos).toHaveLength(1);
     expect(wrapper.find('div.proposal__info--district')).toHaveLength(0);
   });
 
   it('should not render district if proposal has none', () => {
-    const wrapper = shallow(<ProposalPageMetadata proposal={proposalWithoutDistrict} showCategories showDistricts showNullEstimation />);
+    const wrapper = shallow(<ProposalPageMetadata proposal={proposalWithoutDistrict} showCategories showDistricts showNullEstimation showThemes />);
     const infos = wrapper.find('div.proposal__info');
     expect(infos).toHaveLength(1);
     expect(wrapper.find('div.proposal__info--district')).toHaveLength(0);

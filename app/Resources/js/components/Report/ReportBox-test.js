@@ -37,7 +37,7 @@ describe('<ReportBox />', () => {
 
   it('renders nothing if reporting is not enabled', () => {
     const wrapper = shallow(<ReportBox {...defaultProps} features={{ reporting: false }} />);
-    expect(wrapper.children().isEmpty()).toEqual(true);
+    expect(wrapper.children().exists()).toEqual(false);
   });
 
   it('renders a ReportButton if not logged in', () => {
@@ -48,6 +48,6 @@ describe('<ReportBox />', () => {
 
   it('renders nothing if logged user is the author', () => {
     const wrapper = shallow(<ReportBox {...defaultProps} author={defaultProps.user} />);
-    expect(wrapper.children().isEmpty()).toEqual(true);
+    expect(wrapper.children().exists()).toEqual(false);
   });
 });
