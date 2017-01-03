@@ -40,7 +40,6 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
             if ($foreignKey->getForeignTableName() === $this->table && $foreignKey->getForeignColumns()[0] === "id") {
               $nullable = true;
               foreach ($table->getColumns() as $column) {
-                  var_dump($column->getName());
                   if ($column->getName() === $foreignKey->getColumns()[0]) {
                     if ($column->getNotnull()) {
                         $nullable = false;
@@ -51,12 +50,11 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
               $fk = [
                   'table' => $table->getName(),
                   'key' => $foreignKey->getColumns()[0],
-                  'tmpKey' => str_replace('id', 'uuid', $foreignKey->getColumns()[0]),
+                  'tmpKey' => $foreignKey->getColumns()[0].'_to_uuid',
                   'nullable' => $nullable,
                   'onDelete' => $foreignKey->onDelete(),
                   'name' => $foreignKey->getName(),
               ];
-              var_dump($table->getPrimaryKeyColumns());
               if (in_array($foreignKey->getColumns()[0], $table->getPrimaryKeyColumns())) {
                 $fk['pk'] = $table->getPrimaryKeyColumns();
               }
@@ -127,7 +125,11 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
       // $this->write('Deleting previous foreign keys...');
       foreach ($this->fks as $fk) {
         if (isset($fk['pk'])) { // if fk is in primary key
-          $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' DROP PRIMARY KEY');
+          try {
+            $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' DROP PRIMARY KEY');
+          } catch (\Exception $e) {
+            var_dump($e->getMessage());
+          }
         }
         $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' DROP FOREIGN KEY '. $fk['name']);
         $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' DROP COLUMN '. $fk['key']);
@@ -151,27 +153,16 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
 
     public function restoreConstraintsAndIndexes()
     {
-        // $sm = $this->connection->getSchemaManager();
-        // foreach ($sm->listTables('symfony') as $table) {
-        //   if ($table->getName() === $this->table) {
-        //       // if ($table->columnsAreIndexed(['id'])) {
-        //           $indexes = $table->getIndexes();
-        //           foreach ($indexes as $index) {
-        //             var_dump($index->getName(), $index->getColumns());
-        //             if ($index->getName() != 'PRIMARY' && in_array('id', $index->getColumns())) {
-        //               $this->connection->executeQuery('DROP INDEX '. $index->getName() .' ON '. $this->table);
-        //               $this->connection->executeQuery('CREATE INDEX '. $index->getName() .' ON '. $this->table .' (' . implode(',', $index->getColumns()) . ')');
-        //             }
-        //           }
-        //       // }
-        //   }
-        // }
         foreach ($this->fks as $fk) {
           if (isset($fk['pk'])) {
-            $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' ADD PRIMARY KEY ('. implode(',', $fk['pk']) .')');
+            try {
+              $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' ADD PRIMARY KEY ('. implode(',', $fk['pk']) .')');
+            } catch (\Exception $e) {
+              var_dump($e->getMessage());
+            }
           }
           $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' ADD CONSTRAINT '. $fk['name'] .' FOREIGN KEY ('.$fk['key'].') REFERENCES '.$this->table.' (id) ON DELETE '. $fk['onDelete']);
-          $this->connection->executeQuery('CREATE INDEX IDX_'.$this->getKeyName($fk['table'], $fk['key']).' ON '. $fk['table'] .' ('.$fk['key'].')');
+          $this->connection->executeQuery('CREATE INDEX '. str_replace('FK_', 'IDX_', $fk['name']).' ON '. $fk['table'] .' ('.$fk['key'].')');
         }
     }
 

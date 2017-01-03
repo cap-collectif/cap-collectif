@@ -12,5 +12,6 @@ class Version20161220164237 extends IdToUuidMigration
         $this->migrate('source');
         $this->migrate('district');
         $this->migrate('reply');
+        $this->migrate('project');
     }
 }
