@@ -28,7 +28,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
 
     }
 
-    public function prepare(string $tableName, $dbName = 'symfony')
+    private function prepare(string $tableName, $dbName = 'symfony')
     {
       $this->table = $tableName;
       $this->fks = [];
@@ -64,7 +64,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
       }
     }
 
-    public function addUuidFields()
+    private function addUuidFields()
     {
         $this->connection->executeQuery('ALTER TABLE ' . $this->table . ' ADD uuid CHAR(36) COMMENT \'(DC2Type:guid)\' FIRST');
         foreach ($this->fks as $fk) {
@@ -72,7 +72,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
         }
     }
 
-    public function generateUuidsToReplaceIds()
+    private function generateUuidsToReplaceIds()
     {
       $fetchs = $this->connection->fetchAll('SELECT id from ' . $this->table);
       foreach ($fetchs as $fetch) {
@@ -84,7 +84,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
       }
     }
 
-    public function addThoseUuidsToTablesWithFK()
+    private function addThoseUuidsToTablesWithFK()
     {
       echo 'Adding uuid to every table with fks...' . PHP_EOL;
       foreach ($this->fks as $fk) {
@@ -111,16 +111,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
       }
     }
 
-    private function getKeyName(string $table, string $key): string
-    {
-      // code from AbstractAsset dbal
-      $hash = implode('', array_map(function($column) {
-            return dechex(crc32($column));
-        }, [$table, $key]));
-      return substr(strtoupper($hash), 0, 30);
-    }
-
-    public function deletePreviousFKs()
+    private function deletePreviousFKs()
     {
       // $this->write('Deleting previous foreign keys...');
       foreach ($this->fks as $fk) {
@@ -136,7 +127,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
       }
     }
 
-    public function renameNewFKsToPreviousNames()
+    private function renameNewFKsToPreviousNames()
     {
         // $this->write('Renaming new foreign keys to previous names...');
         foreach ($this->fks as $fk) {
@@ -144,14 +135,14 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
         }
     }
 
-    public function dropIdPrimaryKeyAndSetUuidToPrimaryKey()
+    private function dropIdPrimaryKeyAndSetUuidToPrimaryKey()
     {
         $this->connection->executeQuery('ALTER TABLE '. $this->table .' DROP PRIMARY KEY, DROP COLUMN id');
         $this->connection->executeQuery('ALTER TABLE '. $this->table .' CHANGE uuid id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\'');
         $this->connection->executeQuery('ALTER TABLE '. $this->table .' ADD PRIMARY KEY (id)');
     }
 
-    public function restoreConstraintsAndIndexes()
+    private function restoreConstraintsAndIndexes()
     {
         foreach ($this->fks as $fk) {
           if (isset($fk['pk'])) {

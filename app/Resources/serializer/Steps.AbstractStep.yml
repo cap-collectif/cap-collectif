@@ -45,7 +45,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
   virtual_properties:
     getProjectId:
       expose: true
-      type: integer
+      type: string
       groups: [Steps]
       serialized_name: projectId
     getPosition:

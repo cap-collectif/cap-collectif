@@ -6,7 +6,7 @@ Scenario: Anonymous API client wants to get a step
   Then the JSON response should match:
   """
   {
-    "projectId": @integer@,
+    "projectId": @string@,
     "position": @integer@,
     "open": @boolean@,
     "id": @integer@,

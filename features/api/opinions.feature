@@ -38,7 +38,7 @@ Feature: Opinions
 
         "step": {
           "id": @integer@,
-          "projectId": @integer@,
+          "projectId": @string@,
           "position": @integer@,
           "timeless": @boolean@,
           "counters": {

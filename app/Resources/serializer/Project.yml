@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Project:
   properties:
     id:
       expose: true
-      type: integer
+      type: string
       groups: [Projects]
     title:
       expose: true
