@@ -13,9 +13,8 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
     protected $em;
     protected $idToUuidMap = [];
     protected $generator;
-
-    protected $table = ''; // set this
-    protected $fks = []; // set this
+    protected $fks;
+    protected $table;
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -27,6 +26,44 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
     public function up(Schema $schema)
     {
 
+    }
+
+    public function prepare(string $tableName, $dbName = 'symfony')
+    {
+      $this->table = $tableName;
+      $this->fks = [];
+      $this->idToUuidMap = [];
+      $sm = $this->connection->getSchemaManager();
+      foreach ($sm->listTables($dbName) as $table) {
+          $foreignKeys = $sm->listTableForeignKeys($table->getName());
+          foreach ($foreignKeys as $foreignKey) {
+            if ($foreignKey->getForeignTableName() === $this->table && $foreignKey->getForeignColumns()[0] === "id") {
+              $nullable = true;
+              foreach ($table->getColumns() as $column) {
+                  var_dump($column->getName());
+                  if ($column->getName() === $foreignKey->getColumns()[0]) {
+                    if ($column->getNotnull()) {
+                        $nullable = false;
+                    }
+                    break;
+                 }
+              }
+              $fk = [
+                  'table' => $table->getName(),
+                  'key' => $foreignKey->getColumns()[0],
+                  'tmpKey' => str_replace('id', 'uuid', $foreignKey->getColumns()[0]),
+                  'nullable' => $nullable,
+                  'onDelete' => $foreignKey->onDelete(),
+                  'name' => $foreignKey->getName(),
+              ];
+              var_dump($table->getPrimaryKeyColumns());
+              if (in_array($foreignKey->getColumns()[0], $table->getPrimaryKeyColumns())) {
+                $fk['pk'] = $table->getPrimaryKeyColumns();
+              }
+              $this->fks[] = $fk;
+           }
+        }
+      }
     }
 
     public function addUuidFields()
@@ -42,7 +79,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
       $fetchs = $this->connection->fetchAll('SELECT id from ' . $this->table);
       foreach ($fetchs as $fetch) {
           $id = $fetch['id'];
-          // $this->write('Creating uuid for id: ' . $fetch['id']);
+          echo 'Creating uuid for id: ' . $fetch['id'] . PHP_EOL;
           $uuid = $this->generator->generate($this->em, null);
           $this->idToUuidMap[$id] = $uuid;
           $this->connection->update($this->table, ['uuid' => $uuid], ['id' => $id]);
@@ -92,7 +129,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
         if (isset($fk['pk'])) { // if fk is in primary key
           $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' DROP PRIMARY KEY');
         }
-        $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' DROP FOREIGN KEY '. 'FK_'.$this->getKeyName($fk['table'], $fk['key']));
+        $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' DROP FOREIGN KEY '. $fk['name']);
         $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' DROP COLUMN '. $fk['key']);
       }
     }
@@ -116,20 +153,30 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
     public function restoreConstraintsAndIndexes()
     {
         foreach ($this->fks as $fk) {
-          $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' ADD CONSTRAINT FK_'.$this->getKeyName($fk['table'], $fk['key']).' FOREIGN KEY ('.$fk['key'].') REFERENCES '.$this->table.' (id) ON DELETE CASCADE');
+          if (isset($fk['pk'])) {
+            $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' ADD PRIMARY KEY ('. implode(',', $fk['pk']) .')');
+          }
+          $this->connection->executeQuery('ALTER TABLE '. $fk['table'] .' ADD CONSTRAINT '. $fk['name'] .' FOREIGN KEY ('.$fk['key'].') REFERENCES '.$this->table.' (id) ON DELETE '. $fk['onDelete']);
           $this->connection->executeQuery('CREATE INDEX IDX_'.$this->getKeyName($fk['table'], $fk['key']).' ON '. $fk['table'] .' ('.$fk['key'].')');
         }
     }
 
+    public function migrate(string $tableName)
+    {
+      echo "Migrating " . $tableName . '...' . PHP_EOL;
+      $this->prepare($tableName);
+      $this->addUuidFields();
+      $this->generateUuidsToReplaceIds();
+      $this->addThoseUuidsToTablesWithFK();
+      $this->deletePreviousFKs();
+      $this->renameNewFKsToPreviousNames();
+      $this->dropIdPrimaryKeyAndSetUuidToPrimaryKey();
+      $this->restoreConstraintsAndIndexes();
+    }
+
     public function postUp(Schema $schema)
     {
-        $this->addUuidFields();
-        $this->generateUuidsToReplaceIds();
-        $this->addThoseUuidsToTablesWithFK();
-        $this->deletePreviousFKs();
-        $this->renameNewFKsToPreviousNames();
-        $this->dropIdPrimaryKeyAndSetUuidToPrimaryKey();
-        $this->restoreConstraintsAndIndexes();
+
     }
 
     public function down(Schema $schema)

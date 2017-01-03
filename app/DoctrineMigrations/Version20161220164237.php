@@ -7,12 +7,10 @@ use Capco\AppBundle\IdToUuidMigration;
 
 class Version20161220164237 extends IdToUuidMigration
 {
-    public function __construct()
+    public function postUp(Schema $schema)
     {
-        $this->table = 'source';
-        $this->fks = [
-          ['table' => 'reporting', 'key' => 'source_id', 'tmpKey' => 'source_uuid', 'nullable'=> true],
-          ['table' => 'votes', 'key' => 'source_id', 'tmpKey' => 'source_uuid', 'nullable'=> true],
-        ];
+        $this->migrate('source');
+        $this->migrate('district');
+        $this->migrate('reply');
     }
 }
