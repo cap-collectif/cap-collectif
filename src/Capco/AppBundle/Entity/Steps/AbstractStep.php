@@ -376,11 +376,6 @@ abstract class AbstractStep
         return;
     }
 
-    /**
-     * Get project id.
-     *
-     * @return int
-     */
     public function getProjectId()
     {
         $project = $this->getProject();

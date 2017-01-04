@@ -6,7 +6,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * District.
@@ -18,7 +18,7 @@ use Capco\AppBundle\Traits\IdTrait;
 class District
 {
     use TimestampableTrait;
-    use IdTrait;
+    use UuidTrait;
 
     /**
      * @var string

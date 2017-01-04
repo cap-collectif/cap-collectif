@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Reply:
   properties:
     id:
       expose: true
-      type: integer
+      type: string
       groups: [Replies]
     responses:
       expose: true

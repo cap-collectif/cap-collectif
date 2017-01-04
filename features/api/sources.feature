@@ -11,7 +11,7 @@ Feature: Sources
   {
     "sources": [
       {
-        "id": @integer@,
+        "id": @string@,
         "title": @string@,
         "category": {
           "id": @integer@,

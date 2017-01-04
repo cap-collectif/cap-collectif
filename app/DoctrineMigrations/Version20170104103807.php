@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20161220164236 extends AbstractMigration
+class Version20170104103807 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -17,6 +17,9 @@ class Version20161220164236 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
+        $this->addSql('DROP INDEX id_username_idx ON fos_user');
+        $this->addSql('CREATE INDEX id_username_idx ON fos_user (id, username)');
     }
 
     /**
@@ -26,5 +29,8 @@ class Version20161220164236 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
+        $this->addSql('DROP INDEX id_username_idx ON fos_user');
+        $this->addSql('CREATE INDEX id_username_idx ON fos_user (username)');
     }
 }

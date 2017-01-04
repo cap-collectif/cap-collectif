@@ -11,7 +11,7 @@ export const ProposalAdminSelections = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     steps: PropTypes.array.isRequired,
-    projectId: PropTypes.number.isRequired,
+    projectId: PropTypes.string.isRequired,
     proposalId: PropTypes.number.isRequired,
     lastEditedStepId: PropTypes.number.isRequired,
     lastNotifiedStepId: PropTypes.number.isRequired,
