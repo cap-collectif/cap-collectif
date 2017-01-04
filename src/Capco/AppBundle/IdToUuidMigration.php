@@ -92,7 +92,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
         foreach ($this->fks as $fk) {
             $selectPk = isset($fk['primaryKey']) ? implode(',', $fk['primaryKey']) : 'id';
             $fetchs = $this->connection->fetchAll('SELECT '.$selectPk.', '.$fk['key'].' FROM '.$fk['table']);
-            echo 'Adding uuid to table "'.$fk['table'].'"...'.PHP_EOL;
+            echo 'Adding uuid to "'.$fk['table'].'.'.$fk['key'].'"...'.PHP_EOL;
             foreach ($fetchs as $fetch) {
                 if ($fetch[$fk['key']]) {
                   // do something when the value of foreign key is not null
