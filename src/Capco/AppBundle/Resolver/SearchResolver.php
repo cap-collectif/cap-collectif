@@ -227,7 +227,7 @@ class SearchResolver
         if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses'] > 0) {
             $filters['selections.status.id'] = $providedFilters['selectionStatuses'];
         }
-        if (array_key_exists('districts', $providedFilters) && $providedFilters['districts'] > 0) {
+        if (array_key_exists('districts', $providedFilters) && $providedFilters['districts'] != -1) {
             $filters['district.id'] = $providedFilters['districts'];
         }
         if (array_key_exists('themes', $providedFilters) && $providedFilters['themes'] > 0) {

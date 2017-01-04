@@ -13,8 +13,8 @@ use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * Source.
@@ -25,7 +25,7 @@ use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
  */
 class Source implements Contribution, TrashableInterface, VotableInterface, IsPublishableInterface
 {
-    use IdTrait;
+    use UuidTrait;
 
     const TYPE_FOR = 1;
     const LINK = 0;

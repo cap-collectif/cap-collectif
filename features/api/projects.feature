@@ -10,7 +10,7 @@ Feature: Projects
     {
       "projects": [
         {
-          "id": 4,
+          "id": "4",
           "title": @string@,
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
@@ -53,7 +53,7 @@ Feature: Projects
     {
       "projects": [
         {
-          "id": 1,
+          "id": "1",
           "title": @string@,
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
@@ -97,7 +97,7 @@ Feature: Projects
     {
       "projects": [
         {
-          "id": 4,
+          "id": "4",
           "title": @string@,
           "created_at": "@string@.isDateTime()",
           "updated_at": "@string@.isDateTime()",
@@ -162,9 +162,9 @@ Feature: Projects
       }
     }
     """
-    And project "11" should have author "42"
+    And project with slug "my-new-project" should have author "42"
     And user "admin" should have role "ROLE_ADMIN"
-    And project "11" should not be published
+    And project with slug "my-new-project" should not be published
     Then 1 mail should be sent
 
     @parallel-scenario
@@ -175,7 +175,7 @@ Feature: Projects
         """
         [
         {
-          "projectId": 1,
+          "projectId": "1",
           "position": 1,
           "open": false,
           "timeless": false,

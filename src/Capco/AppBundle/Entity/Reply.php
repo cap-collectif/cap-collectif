@@ -14,7 +14,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * Reply.
@@ -25,7 +25,7 @@ use Capco\AppBundle\Traits\IdTrait;
  */
 class Reply implements Contribution
 {
-    use IdTrait;
+    use UuidTrait;
     use TimestampableTrait;
     use EnableTrait;
     use PrivatableTrait;

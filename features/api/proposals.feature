@@ -22,7 +22,7 @@ Feature: Proposal Restful Api
           }
         },
         "district": {
-          "id": @integer@,
+          "id": @string@,
           "name": @string@
         },
         "status": {
@@ -89,7 +89,7 @@ Feature: Proposal Restful Api
           {
             "step": {
               "id": @integer@,
-              "projectId": @integer@,
+              "projectId": @string@,
               "position": @integer@,
               "title": @string@,
               "enabled": @boolean@,
@@ -153,7 +153,7 @@ Feature: Proposal Restful Api
           }
         },
         "district": {
-          "id": @integer@,
+          "id": @string@,
           "name": @string@
         },
         "status": {
@@ -234,7 +234,7 @@ Feature: Proposal Restful Api
           {
             "step": {
               "id": @integer@,
-              "projectId": @integer@,
+              "projectId": @string@,
               "position": @integer@,
               "title": @string@,
               "enabled": @boolean@,
@@ -306,7 +306,7 @@ Feature: Proposal Restful Api
           }
         },
         "district": {
-          "id": @integer@,
+          "id": @string@,
           "name": @string@
         },
         "status": {
@@ -387,7 +387,7 @@ Feature: Proposal Restful Api
           {
             "step": {
               "id": @integer@,
-              "projectId": @integer@,
+              "projectId": @string@,
               "position": @integer@,
               "title": @string@,
               "enabled": @boolean@,
@@ -451,7 +451,7 @@ Feature: Proposal Restful Api
             "_links": @...@
           },
           "district": {
-            "id": @integer@,
+            "id": @string@,
             "name": @string@
           },
           "status": {
@@ -576,7 +576,7 @@ Feature: Proposal Restful Api
             "_links": @...@
           },
           "district": {
-            "id": @integer@,
+            "id": @string@,
             "name": @string@
           },
           "status": {
@@ -615,7 +615,7 @@ Feature: Proposal Restful Api
             "_links": @...@
           },
           "district": {
-            "id": @integer@,
+            "id": @string@,
             "name": @string@
           },
           "status": {

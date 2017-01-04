@@ -6,7 +6,7 @@ import ProjectStatsList from './ProjectStatsList';
 
 export const ProjectStatsPage = React.createClass({
   propTypes: {
-    projectId: PropTypes.number.isRequired,
+    projectId: PropTypes.string.isRequired,
     steps: PropTypes.array.isRequired,
     themes: PropTypes.array.isRequired,
     districts: PropTypes.array.isRequired,

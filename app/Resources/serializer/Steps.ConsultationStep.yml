@@ -4,5 +4,4 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
         getProjectId:
             serialized_name: projectId
             groups: [Opinions, ConsultationSteps]
-            type: integer
-
+            type: string
