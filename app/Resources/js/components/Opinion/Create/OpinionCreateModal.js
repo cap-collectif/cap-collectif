@@ -9,7 +9,7 @@ import Fetcher from '../../../services/Fetcher';
 const OpinionCreateModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
-    projectId: PropTypes.string.isRequired,
+    projectId: PropTypes.number.isRequired,
     stepId: PropTypes.number.isRequired,
     opinionTypeId: PropTypes.number.isRequired,
     onClose: PropTypes.func.isRequired,

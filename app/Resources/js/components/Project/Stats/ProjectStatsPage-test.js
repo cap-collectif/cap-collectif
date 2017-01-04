@@ -24,7 +24,7 @@ describe('<ProjectStatsPage />', () => {
   ];
 
   const props = {
-    projectId: '1',
+    projectId: 1,
     themes: [],
     districts: [],
     ...IntlData,

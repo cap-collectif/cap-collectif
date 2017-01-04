@@ -10,7 +10,7 @@ import { getSpentPercentage } from '../../../services/ProposalVotesHelper';
 
 const ProposalVoteBasketWidget = React.createClass({
   propTypes: {
-    projectId: PropTypes.string.isRequired,
+    projectId: PropTypes.number.isRequired,
     votableSteps: PropTypes.array.isRequired,
     votesPageUrl: PropTypes.string.isRequired,
     userVotesCountByStepId: PropTypes.object.isRequired,

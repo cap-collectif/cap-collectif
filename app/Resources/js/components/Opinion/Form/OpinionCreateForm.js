@@ -5,7 +5,7 @@ import Fetcher, { json } from '../../../services/Fetcher';
 
 const OpinionCreateForm = React.createClass({
   propTypes: {
-    projectId: PropTypes.string.isRequired,
+    projectId: PropTypes.number.isRequired,
     stepId: PropTypes.number.isRequired,
     opinionType: PropTypes.object.isRequired,
     onSubmitSuccess: PropTypes.func.isRequired,

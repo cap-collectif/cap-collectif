@@ -5,23 +5,23 @@ namespace Capco\AppBundle\Behat\Traits;
 trait ProjectStepsTrait
 {
     /**
-     * @Then project with slug :slug should have author :authorId
+     * @Then project :projectId should have author :authorId
      */
-    public function projectShouldHaveAuthor(string $slug, string $authorId)
+    public function projectShouldHaveAuthor(int $projectId, string $authorId)
     {
         $this->getEntityManager()->clear();
-        $project = $this->getRepository('CapcoAppBundle:Project')->findOneBySlug($slug);
+        $project = $this->getRepository('CapcoAppBundle:Project')->find($projectId);
         expect($project->getAuthor()->getId())->toBe($authorId);
     }
 
     /**
-     * @Then project with slug :slug is not published
-     * @Then project with slug :slug should not be published
+     * @Then project :projectId is not published
+     * @Then project :projectId should not be published
      */
-    public function projectIsNotPublished(string $slug)
+    public function projectIsNotPublished(int $projectId)
     {
         $this->getEntityManager()->clear();
-        $project = $this->getRepository('CapcoAppBundle:Project')->findOneBySlug($slug);
+        $project = $this->getRepository('CapcoAppBundle:Project')->find($projectId);
         expect($project->getIsEnabled())->toBe(false);
     }
 
