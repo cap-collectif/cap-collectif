@@ -11,6 +11,10 @@
     "repositories": [
         {
             "type": "vcs",
+            "url": "https://github.com/cap-collectif/id-to-uuid"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/ArteGEIE/serializer"
         },
         {
@@ -91,6 +95,8 @@
         "doctrine/data-fixtures": "1.1.1",
         "nelmio/alice": "^2.2",
         "odolbeau/rabbit-mq-admin-toolkit": "^3.1",
+
+        "cap-collectif/id-to-uuid": "dev-master",
 
         "doctrine/orm": "^2.5",
         "doctrine/dbal": "^2.5",
