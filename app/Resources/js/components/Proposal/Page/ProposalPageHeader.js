@@ -50,8 +50,8 @@ export const ProposalPageHeader = React.createClass({
     return (
       <div className={classNames(classes)}>
         <div style={{ marginBottom: 10 }}>
-          <a href={referer || proposal._links.index}>
-            <i className="cap cap-arrow-1-1 icon--blue"></i>
+          <a style={{ textDecoration: 'none' }} href={referer || proposal._links.index}>
+            <i className="cap cap-arrow-65-1 icon--black"></i>
             { ' ' }
             {this.getIntlMessage('proposal.back')}
           </a>
