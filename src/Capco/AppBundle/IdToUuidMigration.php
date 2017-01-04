@@ -27,13 +27,13 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
     {
     }
 
-    private function prepare(string $tableName, $dbName = 'symfony')
+    private function prepare(string $tableName)
     {
         $this->table = $tableName;
         $this->fks = [];
         $this->idToUuidMap = [];
         $sm = $this->connection->getSchemaManager();
-        foreach ($sm->listTables($dbName) as $table) {
+        foreach ($sm->listTables() as $table) {
             $foreignKeys = $sm->listTableForeignKeys($table->getName());
             foreach ($foreignKeys as $foreignKey) {
                 if ($foreignKey->getForeignTableName() === $this->table && $foreignKey->getForeignColumns()[0] === 'id') {
@@ -55,7 +55,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
                       'onDelete' => $foreignKey->onDelete(),
                       'name' => $foreignKey->getName(),
                     ];
-                    if (in_array($key, $table->getPrimaryKeyColumns())) {
+                    if (in_array($key, $table->getPrimaryKeyColumns(), true)) {
                         // if the foreign key is present in the primary key
                         // we must also remove temporary the primary key
                         $fk['primaryKey'] = $table->getPrimaryKeyColumns();
@@ -123,7 +123,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
               // drop primary key if not already dropped
               $this->connection->executeQuery('ALTER TABLE '.$fk['table'].' DROP PRIMARY KEY');
             } catch (\Exception $e) {
-              var_dump($e->getMessage());
+              echo $e->getMessage();
             }
           }
           $this->connection->executeQuery('ALTER TABLE '.$fk['table'].' DROP FOREIGN KEY '.$fk['name']);
@@ -154,7 +154,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
                     // restore primary key if not already restored
                     $this->connection->executeQuery('ALTER TABLE '.$fk['table'].' ADD PRIMARY KEY ('.implode(',', $fk['primaryKey']).')');
                 } catch (\Exception $e) {
-                    var_dump($e->getMessage());
+                    echo $e->getMessage();
                 }
             }
             $this->connection->executeQuery('ALTER TABLE '.$fk['table'].' ADD CONSTRAINT '.$fk['name'].' FOREIGN KEY ('.$fk['key'].') REFERENCES '.$this->table.' (id) ON DELETE '.$fk['onDelete']);
