@@ -6,7 +6,7 @@ Scenario: Anonymous API client wants to get a step
   Then the JSON response should match:
   """
   {
-    "projectId": @string@,
+    "projectId": @integer@,
     "position": @integer@,
     "open": @boolean@,
     "id": @integer@,
@@ -61,7 +61,7 @@ Scenario: Anonymous API client wants to get a step
             "_links": @...@
           },
           "district": {
-            "id": @string@,
+            "id": @integer@,
             "name": @string@
           },
           "status": {
@@ -117,7 +117,7 @@ Scenario: Anonymous API client wants to get a step
             "_links": @...@
           },
           "district": {
-            "id": @string@,
+            "id": @integer@,
             "name": @string@
           },
           "status": {
@@ -176,7 +176,7 @@ Scenario: Anonymous API client wants to get a step
             "_links": @...@
           },
           "district": {
-            "id": @string@,
+            "id": @integer@,
             "name": @string@
           },
           "status": {

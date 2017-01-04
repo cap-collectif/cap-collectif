@@ -9,7 +9,7 @@ Feature: Districts
 """
 [
   {
-    "id": @string@,
+    "id": @integer@,
     "name": @string@
   },
   @...@

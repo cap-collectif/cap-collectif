@@ -9,7 +9,7 @@ Feature: Reply Restful Api
     Then the JSON response should match:
     """
     {
-      "id": @string@,
+      "id": @integer@,
       "enabled": @boolean@,
       "createdAt": "@string@.isDateTime()",
       "updatedAt": "@string@.isDateTime()",
@@ -70,7 +70,7 @@ Feature: Reply Restful Api
     {
       "replies": [
         {
-          "id": @string@,
+          "id": @integer@,
           "enabled": @boolean@,
           "createdAt": "@string@.isDateTime()",
           "updatedAt": "@string@.isDateTime()",

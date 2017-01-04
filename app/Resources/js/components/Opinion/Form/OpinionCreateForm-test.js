@@ -8,7 +8,7 @@ import IntlData from '../../../translations/FR';
 
 describe('<OpinionCreateForm />', () => {
   const props = {
-    projectId: '1',
+    projectId: 1,
     stepId: 1,
     opinionType: { appendixTypes: [{
       type: 1,

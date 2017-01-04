@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Model\IndexableInterface;
-use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Project.
@@ -20,7 +20,7 @@ use Capco\AppBundle\Traits\UuidTrait;
  */
 class Project implements IndexableInterface
 {
-    use UuidTrait;
+    use IdTrait;
 
     const FILTER_ALL = 'all';
 
