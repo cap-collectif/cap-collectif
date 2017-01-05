@@ -14,7 +14,7 @@ const status = (response: Object): Object | Error => {
   });
 };
 
-export const json = response => response ? response.json() : {};
+export const json = (response: ?Object) => response ? response.json() : {};
 
 const createHeaders = (): {[key: string]: string} => {
   const headers = {

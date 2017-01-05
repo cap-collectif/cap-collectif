@@ -459,7 +459,6 @@ class ProposalsController extends FOSRestController
             throw $this->createNotFoundException('Proposal not found');
         }
 
-        // Soft delete.
         $em->remove($proposal);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
