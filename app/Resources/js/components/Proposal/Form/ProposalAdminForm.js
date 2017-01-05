@@ -142,7 +142,7 @@ export const ProposalAdminForm = React.createClass({
 
 export default connect((state, props) => ({
   initialValues: {
-    project: parseInt(formValueSelector(formName)(state, 'project'), 10), // keepDirty fails
+    project: formValueSelector(formName)(state, 'project'),
     author: state.default.user.id,
     responses: props.proposalForm.fields.map(field => ({ question: field.id })),
   },

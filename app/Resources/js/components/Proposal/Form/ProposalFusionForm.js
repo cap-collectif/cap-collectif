@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
@@ -61,21 +62,21 @@ export const ProposalFusionForm = React.createClass({
                 .then(res => ({ options: res.proposals.map(p => ({ value: p.id, label: p.title, stepId: currentCollectStep.id })) }))
               }
             />
-       }
+        }
       </form>
     );
   },
 });
 
-const getBudgetProjects = (projects) => {
+const getBudgetProjects = (projects: Array<Object>): Array<Object> => {
   return projects.filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
 };
 
-const getSelectedProjectId = (state) => {
-  return parseInt(formValueSelector(formName)(state, 'project'), 10);
+const getSelectedProjectId = (state): string => {
+  return formValueSelector(formName)(state, 'project');
 };
 
-const getCurrentCollectStep = (state) => {
+const getCurrentCollectStep = (state): ?Object => {
   const selectedProject = getSelectedProjectId(state);
   if (!selectedProject) {
     return null;

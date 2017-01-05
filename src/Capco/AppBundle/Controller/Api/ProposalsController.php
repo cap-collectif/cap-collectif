@@ -129,7 +129,7 @@ class ProposalsController extends FOSRestController
         $unflattenRequest = ArrayHelper::unflatten($request->request->all());
         $unflattenFile = ArrayHelper::unflatten($request->files->all());
 
-        if (isset($unflattenRequest['responses'])) {
+        if (isset($unflattenRequest['responses']) && is_array($unflattenRequest['responses'])) {
             $unflattenRequest = $this->get('capco.media.response.media.manager')
                 ->resolveTypeOfResponses($unflattenRequest, $unflattenFile);
         }

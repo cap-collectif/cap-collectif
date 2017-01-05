@@ -98,7 +98,7 @@ export const ProposalCreateFusionButton = React.createClass({
 });
 
 const mapStateToProps = (state) => {
-  const selectedProject = parseInt(formValueSelector('proposal')(state, 'project'), 10);
+  const selectedProject = formValueSelector('proposal')(state, 'project');
   const currentCollectStep = selectedProject ? state.project.projects.find(p => p.id === selectedProject).steps.filter(step => step.type === 'collect')[0] : null;
   return {
     showModal: state.proposal.isCreatingFusion,

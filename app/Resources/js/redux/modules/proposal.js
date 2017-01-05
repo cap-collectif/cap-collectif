@@ -57,8 +57,8 @@ const SEND_PROPOSAL_NOTIFICATION_ERROR = 'proposal/SEND_SELECTION_NOTIFICATION_E
 
 type Status = { id: number };
 type Action =
-    {| type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId: number, stepId: number |}
-  | {| type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error: string |}
+    { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId: number, stepId: number }
+  | { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error: string }
   | Object
 ;
 // type Step = {
@@ -66,7 +66,7 @@ type Action =
 //   id: number
 // };
 type ProposalMap = {[id: number]: Object};
-type State = {|
+type State = {
   queryCount: ?number,
   currentProposalId: ?number,
   proposalShowedId: Array<number>,
@@ -92,7 +92,7 @@ type State = {|
   currentPaginationPage: number,
   lastEditedProposalId: ?number,
   lastNotifiedStepId: ?number
-|};
+};
 type Dispatch = ReduxDispatch<Action>;
 
 const initialState: State = {
@@ -413,6 +413,9 @@ function* submitFusionFormData(action: Action): Generator<*, *, *> {
   const formData = new FormData();
   const data = { ...globalState.form.proposal.values };
   delete data.project;
+  if (data.responses.length === 0) {
+    delete data.responses;
+  }
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map((key) => {
     formData.append(key, flattenedData[key]);

@@ -7,25 +7,25 @@ import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../../services/Fetcher';
 
 export type VoteValue = -1 | 0 | 1;
-type Opinion = {| id: number |};
-type OpinionVote = {| user: { uniqueId: string }, value: VoteValue |};
+type Opinion = { id: number };
+type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
 type Action =
-    {| type: 'opinion/OPINION_VOTE_SUCCEEDED', opinionId: number, vote: OpinionVote |}
-  | {| type: 'opinion/VERSION_VOTE_SUCCEEDED', versionId: number, vote: OpinionVote |}
-  | {| type: 'opinion/DELETE_OPINION_VOTE_SUCCEEDED', opinionId: number, vote: OpinionVote |}
-  | {| type: 'opinion/DELETE_VERSION_VOTE_SUCCEEDED', versionId: number, vote: OpinionVote |}
-  | {| type: 'opinion/OPINION_VOTES_FETCH_SUCCEEDED', votes: OpinionVotes, opinionId: number |}
-  | {| type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: any |}
+    { type: 'opinion/OPINION_VOTE_SUCCEEDED', opinionId: number, vote: OpinionVote }
+  | { type: 'opinion/VERSION_VOTE_SUCCEEDED', versionId: number, vote: OpinionVote }
+  | { type: 'opinion/DELETE_OPINION_VOTE_SUCCEEDED', opinionId: number, vote: OpinionVote }
+  | { type: 'opinion/DELETE_VERSION_VOTE_SUCCEEDED', versionId: number, vote: OpinionVote }
+  | { type: 'opinion/OPINION_VOTES_FETCH_SUCCEEDED', votes: OpinionVotes, opinionId: number }
+  | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: any }
 ;
-type FetchOpinionVotesAction = {| type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: number, versionId: ?number |};
+type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: number, versionId: ?number };
 type ContributionMap = {[id: number]: {votes: OpinionVotes, votesCount: number}};
-type State = {|
+type State = {
   currentOpinionId: ?number,
   currentVersionId: ?number,
   opinionsById: ContributionMap,
   versionsById: ContributionMap
-|};
+};
 type Dispatch = ReduxDispatch<Action>;
 
 const VOTES_PREVIEW_COUNT = 8;
