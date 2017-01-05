@@ -148,20 +148,16 @@ class ProjectController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\AbstractStep", options={"mapping": {"stepSlug": "slug"}})
-     *
-     * @param Project      $project
-     * @param AbstractStep $step
-     *
-     * @return Response $response
      */
-    public function downloadAction(Project $project, AbstractStep $step)
+    public function downloadAction(Request $request, Project $project, AbstractStep $step)
     {
+        $trans = $this->get('translator');
         if (!$project || !$step) {
-            throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException($trans->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
 
         if (!$project->isExportable() && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException($this->get('translator')->trans('project.error.not_exportable', [], 'CapcoAppBundle'));
+            throw new AccessDeniedException($trans->trans('project.error.not_exportable', [], 'CapcoAppBundle'));
         }
 
         $path = $this->container->getParameter('kernel.root_dir').'/../web/export/';
@@ -170,19 +166,15 @@ class ProjectController extends Controller
             $filename .= $step->getProject()->getSlug().'_';
         }
         $filename .= $step->getSlug();
+        $filename .= '.csv';
 
-        $request = $this->get('request_stack')->getCurrentRequest();
-
-        if (!file_exists($path.$filename.'.xlsx') && !file_exists($path.$filename.'.xls')) {
-            $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('project.download.not_yet_generated', [], 'CapcoAppBundle'));
+        if (!file_exists($path.$filename)) {
+            $this->get('session')->getFlashBag()->add('danger', $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle'));
 
             return $this->redirect($request->headers->get('referer'));
         }
 
-        $filename = file_exists($path.$filename.'.xlsx') ? $filename.'.xlsx' : $filename.'.xls';
-
         $date = (new \DateTime())->format('Y-m-d');
-        $request = $this->container->get('request_stack')->getCurrentRequest();
 
         $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
         $response = new BinaryFileResponse($path.$filename);
@@ -190,7 +182,7 @@ class ProjectController extends Controller
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT, $date.'_'.$filename
         );
-        $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
 

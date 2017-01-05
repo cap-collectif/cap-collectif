@@ -14,6 +14,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
+use Capco\AppBundle\Model\CreatableInterface;
 
 class ConsultationResolver implements ContainerAwareInterface
 {
@@ -157,7 +158,7 @@ class ConsultationResolver implements ContainerAwareInterface
         );
     }
 
-    public function resolveCreatedAt(Contribution $object): string
+    public function resolveCreatedAt(CreatableInterface $object): string
     {
         return $object->getCreatedAt()->format(\DateTime::ATOM);
     }

@@ -49,7 +49,7 @@ export const ProposalPageHeader = React.createClass({
 
     return (
       <div className={classNames(classes)}>
-        <div>
+        <div style={{ marginBottom: 15 }}>
           <a style={{ textDecoration: 'none' }} href={referer || proposal._links.index}>
             <i className="cap cap-arrow-65-1 icon--black"></i>
             { ' ' }

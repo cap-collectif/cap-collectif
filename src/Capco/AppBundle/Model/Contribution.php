@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Model;
 
-interface Contribution extends ExpirableInterface, IndexableInterface
+interface Contribution extends CreatableInterface, ExpirableInterface, IndexableInterface
 {
-    public function getCreatedAt();
+
 }

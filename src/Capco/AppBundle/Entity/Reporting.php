@@ -6,13 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Model\CreatableInterface;
 
 /**
  * @ORM\Table(name="reporting")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReportingRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Reporting
+class Reporting implements CreatableInterface
 {
     use IdTrait;
 
@@ -31,134 +32,87 @@ class Reporting
     ];
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="status", type="integer")
      * @Assert\NotNull()
      */
     private $status;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"status", "body", "Reporter", "Opinion", "Source", "Argument", "Idea"})
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    private $updatedAt;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank()
      */
     private $body;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $Reporter;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Reports", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Opinion;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="Reports", cascade={"persist"})
      * @ORM\JoinColumn(name="source_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Source;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Reports", cascade={"persist"})
      * @ORM\JoinColumn(name="argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Argument;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="Reports", cascade={"persist"})
      * @ORM\JoinColumn(name="idea_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Idea;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="reports", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinionVersion;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="Reports", cascade={"persist"})
      * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Comment;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="reports", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $proposal;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_archived", type="boolean")
+     * @ORM\Column(name="is_archived", type="boolean", nullable=false)
      */
     private $isArchived = false;
-
-    public function __construct()
-    {
-        $this->updatedAt = new \Datetime();
-    }
 
     public function __toString()
     {
         return $this->getId() ? 'Signalement de '.$this->getRelatedObject() : 'Signalement';
     }
 
-    /**
-     * Get status.
-     *
-     * @return int
-     */
     public function getStatus()
     {
         return $this->status;
     }
 
-    /**
-     * Set status.
-     *
-     * @param int $status
-     *
-     * @return Reporting
-     */
-    public function setStatus($status)
+    public function setStatus(int $status): self
     {
         $this->status = $status;
 
@@ -176,16 +130,6 @@ class Reporting
     }
 
     /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
      * @return string
      */
     public function getBody()
@@ -196,7 +140,7 @@ class Reporting
     /**
      * @param string $body
      */
-    public function setBody($body)
+    public function setBody(string $body)
     {
         $this->body = $body;
 

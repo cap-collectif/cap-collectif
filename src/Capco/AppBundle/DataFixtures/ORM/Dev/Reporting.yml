@@ -1,0 +1,64 @@
+Capco\AppBundle\Entity\Reporting:
+    reporting1:
+        id: 1
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        Reporter: '@user499'
+        Opinion: '@opinion1'
+        status: 2
+        isArchived: false
+    reporting2:
+        id: 2
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        Reporter: '@user499'
+        proposal: '@proposal1'
+        status: 2
+        isArchived: false
+    reporting3:
+        id: 3
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        Reporter: '@user499'
+        Source: '@source1'
+        status: 2
+        isArchived: false
+    reporting4:
+        id: 4
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        Reporter: '@user499'
+        opinionVersion: '@version1'
+        status: 2
+        isArchived: false
+    reporting5:
+        id: 5
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        Reporter: '@user499'
+        Argument: '@argument1'
+        status: 2
+        isArchived: false
+    reporting6:
+        id: 6
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        Reporter: '@user499'
+        Idea: '@Idea1'
+        status: 2
+        isArchived: false
+    reporting7:
+        id: 7
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        Reporter: '@user499'
+        Comment: '@iComment1'
+        status: 2
+        isArchived: false
