@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\Answer;
+use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Capco\AppBundle\Entity\Proposal;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -38,6 +39,16 @@ class ProposalListener implements ContainerAwareInterface
             if (array_key_exists('answer', $changeSet) && $changeSet['answer'][1] instanceof Answer) {
                 $notifier->notifyProposalAnswer($entity);
             }
+        }
+    }
+
+    public function preRemove(LifecycleEventArgs $args)
+    {
+        $entity = $args->getObject();
+
+        if ($entity instanceof Proposal) {
+            $args->getObjectManager()->remove($entity->getSelections());
+            $args->getObjectManager()->flush();
         }
     }
 }
