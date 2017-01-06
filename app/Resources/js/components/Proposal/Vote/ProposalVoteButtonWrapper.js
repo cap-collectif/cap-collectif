@@ -80,8 +80,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
         </LoginOverlay>
       );
     }
-
-    return (<div style={{ height: 33 }}></div>);
+    return null;
   },
 
 });
