@@ -222,6 +222,10 @@ class StepAdmin extends Admin
                     'required' => true,
                     'help' => 'admin.help.step.vote_type',
                 ])
+                ->add('votesLimit', IntegerType::class, [
+                  'label' => 'admin.fields.step.votesLimit',
+                  'required' => false,
+                ])
                 ->add('hasVoteThreshold', CheckboxType::class, [
                     'label' => 'admin.fields.step.vote_threshold.checkbox',
                     'required' => false,

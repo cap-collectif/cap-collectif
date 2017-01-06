@@ -2,7 +2,7 @@
 Feature: Selection steps
 
 Scenario: Anonymous API client wants to get a step
-  When I send a GET request to "/api/selection_steps/7"
+  When I send a GET request to "/api/selection_steps/72"
   Then the JSON response should match:
   """
   {
@@ -41,7 +41,7 @@ Scenario: Anonymous API client wants to get a step
   @elasticsearch
   Scenario: Logged in API client wants to get all proposals from a selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/6/proposals/search" with json:
+    When I send a POST request to "/api/selection_steps/71/proposals/search" with json:
       """
       {
       }
@@ -97,7 +97,7 @@ Scenario: Anonymous API client wants to get a step
 
   @elasticsearch
   Scenario: Anonymous API client wants to get all proposals from a selection step
-    When I send a POST request to "/api/selection_steps/6/proposals/search" with json:
+    When I send a POST request to "/api/selection_steps/71/proposals/search" with json:
       """
       {
       }
@@ -153,7 +153,7 @@ Scenario: Anonymous API client wants to get a step
 
   @elasticsearch
   Scenario: Anonymous API client wants to get all proposals in a theme from a selection step filtered by theme
-    When I send a POST request to "/api/selection_steps/6/proposals/search" with json:
+    When I send a POST request to "/api/selection_steps/71/proposals/search" with json:
     """
       {
         "filters": {
@@ -213,22 +213,22 @@ Scenario: Anonymous API client wants to get a step
     @database
     Scenario: Admin API client wants add, then delete a selection
       Given I am logged in to api as admin
-      When I send a POST request to "/api/selection_steps/6/selections" with json:
+      When I send a POST request to "/api/selection_steps/71/selections" with json:
       """
       {
         "proposal": 8
       }
       """
       Then the JSON response status code should be 201
-      And proposal "8" should be selected in selection step "6"
-      When I send a DELETE request to "/api/selection_steps/6/selections/8"
+      And proposal "8" should be selected in selection step "71"
+      When I send a DELETE request to "/api/selection_steps/71/selections/8"
       Then the JSON response status code should be 204
-      And proposal "8" should not be selected in selection step "6"
+      And proposal "8" should not be selected in selection step "71"
 
     @database
     Scenario: Admin API client wants to update proposal status
       Given I am logged in to api as admin
-      When I send a PATCH request to "/api/selection_steps/6/selections/3" with json:
+      When I send a PATCH request to "/api/selection_steps/71/selections/3" with json:
       """
       {
         "status": 1
@@ -236,7 +236,7 @@ Scenario: Anonymous API client wants to get a step
       """
       Then the JSON response status code should be 200
       And selection 6 3 should have status 1
-      When I send a PATCH request to "/api/selection_steps/6/selections/3" with json:
+      When I send a PATCH request to "/api/selection_steps/71/selections/3" with json:
       """
       {
         "status": null
@@ -248,7 +248,7 @@ Scenario: Anonymous API client wants to get a step
   @database
   Scenario: Admin API client wants to notify that a proposal's status changed
       Given I am logged in to api as admin
-      When I send a POST request to "/api/selection_step/6/proposals/2/notify-status-changed"
+      When I send a POST request to "/api/selection_step/71/proposals/2/notify-status-changed"
       Then the JSON response status code should be 204
       And 1 mail should be sent
       And I open mail with subject "Le statut de votre proposition vient d’être mis à jour sur Cap-Collectif."

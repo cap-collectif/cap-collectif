@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Traits\DateHelperTrait;
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -34,6 +35,7 @@ use JMS\Serializer\Annotation as Serializer;
 abstract class AbstractStep
 {
     use DateHelperTrait;
+    use IdTrait;
 
     abstract public function getType();
 
@@ -59,16 +61,6 @@ abstract class AbstractStep
         'questionnaire' => 'step.types.questionnaire',
         'realisation' => 'step.types.realisation',
     ];
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @Serializer\Expose
-     */
-    private $id;
 
     /**
      * @var string
@@ -152,21 +144,11 @@ abstract class AbstractStep
 
     public function __toString()
     {
-        if ($this->id) {
+        if ($this->getId()) {
             return $this->getTitle();
         }
 
         return 'New step';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

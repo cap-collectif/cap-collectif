@@ -629,7 +629,7 @@
       "confirm": "Voulez-vous vraiment supprimer la proposition \"{title}\" ?"
     },
     "description": "Description",
-    "details": "Détails",
+    "details": "Mes votes",
     "detail":  {
       "advancement": "État d'avancement",
       "intervals": {

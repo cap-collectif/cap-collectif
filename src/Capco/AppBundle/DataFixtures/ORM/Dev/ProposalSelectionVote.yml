@@ -29,3 +29,7 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     proposal: @proposal11
     selectionStep: @selectionStep3
     user: @user4
+  proposalSelectionVote53:
+    proposal: @proposal17
+    selectionStep: @selectionStep8
+    user: @user5

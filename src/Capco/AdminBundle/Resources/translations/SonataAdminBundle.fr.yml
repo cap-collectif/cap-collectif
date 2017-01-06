@@ -744,6 +744,7 @@ admin:
       updated_at: Mise à jour
       votesHelpText: Informations à propos du vote
       vote_type: Type de vote
+      votesLimit: Nombre de votes maximum
       vote_threshold:
         checkbox: Définir un seuil à atteindre
         input: Seuil à atteindre

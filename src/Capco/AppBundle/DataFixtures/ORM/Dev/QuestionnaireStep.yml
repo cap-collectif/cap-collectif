@@ -1,16 +1,19 @@
 Capco\AppBundle\Entity\Steps\QuestionnaireStep:
   questionnairestep1:
+    id: 81
     title: Questionnaire des JO 2024
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('+3 days', '+10 days')>
     verification: 'sms'
   questionnairestep2:
+    id: 82
     title: Questionnaire
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('+3 days', '+10 days')>
   questionnairestep3:
+    id: 83
     title: Etape de questionnaire fermée
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>

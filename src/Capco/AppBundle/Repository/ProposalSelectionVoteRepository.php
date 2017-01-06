@@ -42,6 +42,19 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $userVotes;
     }
 
+    public function countVotesByStepAndUser(SelectionStep $step, User $user): int
+    {
+      return $this->createQueryBuilder('pv')
+          ->select('COUNT(pv.id)')
+          ->andWhere('pv.selectionStep = :selectionStep')
+          ->andWhere('pv.user = :user')
+          ->setParameter('selectionStep', $step)
+          ->setParameter('user', $user)
+          ->getQuery()
+          ->getSingleScalarResult()
+      ;
+    }
+
     public function getCountsByProposalGroupedBySteps(Proposal $proposal): array
     {
         $ids = array_map(function ($value) {

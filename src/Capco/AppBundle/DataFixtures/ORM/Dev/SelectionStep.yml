@@ -1,5 +1,6 @@
 Capco\AppBundle\Entity\Steps\SelectionStep:
   selectionStep1:
+    id: 71
     title: Sélection
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
@@ -8,6 +9,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     voteType: 1
     votesHelpText: <p><text(1000)></p>
   selectionStep2:
+    id: 72
     title: Vainqueur
     isEnabled: true
     startAt: <dateTimeBetween('-10 days', 'now')>
@@ -15,6 +17,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     body: <p><text(1000)></p>
     voteType: 0
   selectionStep3:
+    id: 73
     title: Fermée
     isEnabled: true
     startAt: <dateTimeBetween('-10 days', '-5 days')>
@@ -22,6 +25,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     body: <p><text(1000)></p>
     voteType: 1
   selectionStep4:
+    id: 74
     title: Sélection avec vote selon le budget
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
@@ -31,6 +35,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     votesHelpText: <p><text(1000)></p>
     budget: 3000000
   selectionStep5:
+    id: 75
     title: Sélection avec vote simple
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
@@ -39,6 +44,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     voteType: 1
     votesHelpText: <p><text(1000)></p>
   selectionStep6:
+    id: 76
     title: Sélection à venir
     isEnabled: true
     startAt: <dateTimeBetween('+1 days', '+10 days')>
@@ -46,9 +52,19 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     body: <p><text(1000)></p>
     voteType: 1
   selectionStep7:
+    id: 77
     title: Réalisation
     isEnabled: true
     allowingProgressSteps: true
     startAt: <dateTimeBetween('+1 days', '+10 days')>
     body: <p><text(1000)></p>
     voteType: 0
+  selectionStep8:
+    id: 78
+    title: Sélection avec vote budget limité
+    isEnabled: true
+    startAt: <dateTimeBetween('-10 days', '-5 days')>
+    endAt: <dateTimeBetween('+11 days', '+20 days')>
+    body: <p><text(1000)></p>
+    voteType: 2
+    votesLimit: 1

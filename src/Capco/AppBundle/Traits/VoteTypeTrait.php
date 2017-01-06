@@ -41,6 +41,12 @@ trait VoteTypeTrait
      */
     private $budget = null;
 
+    /**
+     * @ORM\Column(name="votes_limit", type="integer", nullable=true)
+     * @Assert\Length(min=1)
+     */
+    private $votesLimit = null;
+
     public function getBudget()
     {
         return $this->budget;
@@ -49,6 +55,23 @@ trait VoteTypeTrait
     public function setBudget(float $budget = null): self
     {
         $this->budget = $budget;
+
+        return $this;
+    }
+
+    public function isNumberOfVotesLimitted(): bool
+    {
+        return $this->votesLimit !== null;
+    }
+
+    public function getVotesLimit()
+    {
+        return $this->votesLimit;
+    }
+
+    public function setVotesLimit(int $limit = null): self
+    {
+        $this->votesLimit = $limit;
 
         return $this;
     }
@@ -106,7 +129,7 @@ trait VoteTypeTrait
         return $this->votesHelpText;
     }
 
-    public function setVotesHelpText($votesHelpText)
+    public function setVotesHelpText(string $votesHelpText = null): self
     {
         $this->votesHelpText = $votesHelpText;
 

@@ -1,11 +1,13 @@
 Capco\AppBundle\Entity\Steps\PresentationStep:
   pstep1:
+    id: 11
     title: Présentation
     isEnabled: true
     body: |
       <p>Afficher le texte pour la préparation de la synthèse</p>
       <p><text(1000)></p>
   pstep2:
+    id: 12
     title: Présentation
     isEnabled: true
     body: |

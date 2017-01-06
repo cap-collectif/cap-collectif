@@ -215,3 +215,19 @@ Capco\AppBundle\Entity\Proposal:
     isTrashed: false
     author: '@user1'
     proposalForm: '@proposalform6'
+  proposal17:
+    id: 17
+    title: Proposition 17
+    body: <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    author: '@user1'
+    proposalForm: '@proposalform7'
+  proposal18:
+    id: 18
+    title: Proposition 18
+    body: <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    author: '@user1'
+    proposalForm: '@proposalform7'

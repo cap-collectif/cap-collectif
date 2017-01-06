@@ -268,12 +268,12 @@ Feature: Proposal Restful Api
         },
         "votesByStepId": {
           "6": [],
-          "22": []
+          "61": []
         },
         "votableStepId": 6,
         "votesCountByStepId": {
           "6": 0,
-          "22": 0
+          "61": 0
         },
         "hasUserReported": @boolean@,
         "likers": @array@,
@@ -432,7 +432,7 @@ Feature: Proposal Restful Api
 
   @elasticsearch
   Scenario: Anonymous API client wants to get all proposals from a collect step
-    When I send a POST request to "/api/collect_steps/22/proposals/search?page=1&pagination=50&order=old" with json:
+    When I send a POST request to "/api/collect_steps/61/proposals/search?page=1&pagination=50&order=old" with json:
     """
     {}
     """
@@ -490,7 +490,7 @@ Feature: Proposal Restful Api
   @elasticsearch
   Scenario: Logged in API client wants to get all proposals from a private collect step
     Given I am logged in to api as user
-    When I send a POST request to "/api/collect_steps/25/proposals/search?page=1&pagination=50&order=old" with json:
+    When I send a POST request to "/api/collect_steps/64/proposals/search?page=1&pagination=50&order=old" with json:
     """
     {}
     """
@@ -537,7 +537,7 @@ Feature: Proposal Restful Api
 
   @elasticsearch
   Scenario: Anonymous API client wants to get all proposals from a private collect step
-    When I send a POST request to "/api/collect_steps/25/proposals/search?page=1&pagination=50&order=old" with json:
+    When I send a POST request to "/api/collect_steps/64/proposals/search?page=1&pagination=50&order=old" with json:
     """
     {}
     """
@@ -552,7 +552,7 @@ Feature: Proposal Restful Api
 
   @elasticsearch
   Scenario: Anonymous API client wants to get proposals from a collect step with filters
-    When I send a POST request to "/api/collect_steps/22/proposals/search?order=last" with json:
+    When I send a POST request to "/api/collect_steps/61/proposals/search?order=last" with json:
     """
     {
       "terms": null,
@@ -705,9 +705,9 @@ Feature: Proposal Restful Api
       }
       """
       Then the JSON response status code should be 201
-      And proposal "1" should be fusioned to proposal "17"
-      And proposal "2" should be fusioned to proposal "17"
-      And proposal "17" should have author "sfavot"
+      And proposal "1" should be fusioned to proposal "19"
+      And proposal "2" should be fusioned to proposal "19"
+      And proposal "19" should have author "sfavot"
 
   @database
   Scenario: Logged in API client wants to add a proposal (with nothing for not required response)

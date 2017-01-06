@@ -91,3 +91,11 @@ Capco\AppBundle\Entity\Project:
     themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+  p11:
+    id: '11'
+    title: Budget avec vote limitté
+    projectType: '@projectType4'
+    Author: '@user4'
+    isEnabled: true
+    exportable: true
+    publishedAt: <dateTimeBetween('-50 days', 'now')>

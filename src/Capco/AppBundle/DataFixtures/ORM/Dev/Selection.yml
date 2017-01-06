@@ -34,3 +34,9 @@ Capco\AppBundle\Entity\Selection:
   selection14:
      proposal: '@proposal15'
      selectionStep: '@selectionStep5'
+  selection15:
+     proposal: '@proposal17'
+     selectionStep: '@selectionStep8'
+  selection16:
+     proposal: '@proposal18'
+     selectionStep: '@selectionStep8'

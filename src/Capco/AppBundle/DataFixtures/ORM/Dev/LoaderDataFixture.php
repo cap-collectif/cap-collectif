@@ -39,14 +39,16 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__.'/Project.yml',
 
             __DIR__.'/ConsultationStep.yml',
-            __DIR__.'/SelectionStep.yml',
             __DIR__.'/PresentationStep.yml',
             __DIR__.'/RankingStep.yml',
             __DIR__.'/OtherStep.yml',
 
             __DIR__.'/Synthesis.yml',
             __DIR__.'/SynthesisStep.yml',
+
             __DIR__.'/CollectStep.yml',
+            __DIR__.'/SelectionStep.yml',
+
             __DIR__.'/QuestionnaireStep.yml',
             __DIR__.'/ProjectAbstractStep.yml',
 

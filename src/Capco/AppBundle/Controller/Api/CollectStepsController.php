@@ -92,6 +92,17 @@ class CollectStepsController extends FOSRestController
             throw new BadRequestHttpException('This collect step is not votable.');
         }
 
+        // Check if user has reached limit of votes
+        if ($collectStep->isNumberOfVotesLimitted()) {
+            $countUserVotes = $em
+                ->getRepository('CapcoAppBundle:ProposalCollectVote')
+                ->countVotesByStepAndUser($collectStep, $user)
+            ;
+            if ($countUserVotes >= $collectStep->getVotesLimit()) {
+              throw new BadRequestHttpException('You have reached the limit of votes.');
+            }
+        }
+
         $vote = (new ProposalCollectVote())
             ->setIpAddress($request->getClientIp())
             ->setUser($user)

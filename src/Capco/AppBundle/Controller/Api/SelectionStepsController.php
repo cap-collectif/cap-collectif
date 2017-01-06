@@ -173,6 +173,17 @@ class SelectionStepsController extends FOSRestController
             throw new BadRequestHttpException('This selection step is not votable.');
         }
 
+        // Check if user has reached limit of votes
+        if ($selectionStep->isNumberOfVotesLimitted()) {
+            $countUserVotes = $em
+                ->getRepository('CapcoAppBundle:ProposalSelectionVote')
+                ->countVotesByStepAndUser($selectionStep, $user)
+            ;
+            if ($countUserVotes >= $selectionStep->getVotesLimit()) {
+              throw new BadRequestHttpException('You have reached the limit of votes.');
+            }
+        }
+
         // If selection step vote type is of type "budget", user must be logged in
         if (!$user && $selectionStep->isBudgetVotable()) {
             throw new UnauthorizedHttpException('Must be logged to vote.');
