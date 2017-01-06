@@ -9,7 +9,6 @@ use Capco\AppBundle\Traits\VoteTypeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Entity\ProposalForm;

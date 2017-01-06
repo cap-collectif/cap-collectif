@@ -10,7 +10,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
     userHasVote: PropTypes.bool.isRequired,
-    step: PropTypes.object,
+    step: PropTypes.object.isRequired,
     creditsLeft: PropTypes.number,
     user: PropTypes.object,
     style: PropTypes.object,
@@ -37,50 +37,51 @@ export const ProposalVoteButtonWrapper = React.createClass({
 
   render() {
     const { user, step, proposal, style, className, userHasVote } = this.props;
-    if (step && step.voteType === VOTE_TYPE_SIMPLE) {
+    if (step && step.voteType === VOTE_TYPE_SIMPLE && step.open) {
       return (
         <ProposalVoteButton
           proposal={proposal}
           step={step}
           user={user}
-          disabled={!step.open}
           style={style}
           className={className}
         />
       );
     }
-
-    if (user) {
-      const notVotedAndNotEnoughCredits = !userHasVote && !this.userHasEnoughCredits();
-      return (
-        <VoteButtonOverlay
+    if (step && step.open) {
+      if (user) {
+        const notVotedAndNotEnoughCredits = !userHasVote && !this.userHasEnoughCredits();
+        return (
+          <VoteButtonOverlay
             popoverId={`vote-tooltip-proposal-${proposal.id}`}
             show={notVotedAndNotEnoughCredits}
-        >
+          >
+            <ProposalVoteButton
+              proposal={proposal}
+              step={step}
+              user={user}
+              disabled={notVotedAndNotEnoughCredits}
+              style={style}
+              className={className}
+            />
+          </VoteButtonOverlay>
+        );
+      }
+
+      return (
+        <LoginOverlay>
           <ProposalVoteButton
             proposal={proposal}
             step={step}
             user={user}
-            disabled={!(step && step.open) || notVotedAndNotEnoughCredits}
             style={style}
             className={className}
           />
-        </VoteButtonOverlay>
+        </LoginOverlay>
       );
     }
 
-    return (
-      <LoginOverlay>
-        <ProposalVoteButton
-          proposal={proposal}
-          step={step}
-          user={user}
-          disabled={!(step && step.open)}
-          style={style}
-          className={className}
-        />
-      </LoginOverlay>
-    );
+    return (<div style={{ height: 33 }}></div>);
   },
 
 });

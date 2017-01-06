@@ -94,11 +94,14 @@ export const ProposalPage = React.createClass({
                       <span className="badge">{proposal.postsCount}</span>
                     </NavItem>
                   </Nav>
-                  <ProposalVoteButtonWrapper
-                    proposal={proposal}
-                    style={{ marginTop: '10px' }}
-                    className="pull-right hidden-xs proposal__preview__vote"
-                  />
+                  {
+                    currentVotableStep &&
+                    <ProposalVoteButtonWrapper
+                      proposal={proposal}
+                      style={{ marginTop: '10px' }}
+                      className="pull-right hidden-xs proposal__preview__vote"
+                    />
+                  }
                 </div>
               </div>
               <div className="container">
