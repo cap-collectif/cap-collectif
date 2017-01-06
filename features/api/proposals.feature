@@ -880,6 +880,15 @@ Feature: Proposal Restful Api
     When I send a DELETE request to "api/proposal_forms/1/proposals/2"
     Then the JSON response status code should be 204
 
+  # TODO: investigate on why soft delete filter is not injected
+  # @database
+  # Scenario: logged in API client wants to remove a proposal and ensure that its selections was deleted
+    # Given I am logged in to api as user
+    # When I send a DELETE request to "api/proposal_forms/4/proposals/12"
+    # Then the JSON response status code should be 204
+    # And proposal with id 12 should be soft deleted
+    # And selections of a proposal with id 2 should be deleted
+
   # Report
 
   @database

@@ -16,7 +16,6 @@ use Capco\AppBundle\Entity\ProposalForm;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionStepRepository")
- * @CapcoAssert\HasOnlyOneSelectionPerProposal()
  */
 class SelectionStep extends AbstractStep implements IndexableInterface, ParticipativeStepInterface
 {
@@ -179,18 +178,6 @@ class SelectionStep extends AbstractStep implements IndexableInterface, Particip
         }
 
         return $proposals;
-    }
-
-    public function getProposalsIds()
-    {
-        $ids = array_filter(array_map(function ($value) {
-            return $value->getProposal() ? $value->getProposal()->getId() : null;
-        }, $this->getSelections()->getValues()),
-            function ($value) {
-                return $value !== null;
-            });
-
-        return $ids;
     }
 
     public function isProposalsHidden(): bool
