@@ -235,7 +235,7 @@ Scenario: Anonymous API client wants to get a step
       }
       """
       Then the JSON response status code should be 200
-      And selection 6 3 should have status 1
+      And selection 71 3 should have status 1
       When I send a PATCH request to "/api/selection_steps/71/selections/3" with json:
       """
       {
@@ -243,7 +243,7 @@ Scenario: Anonymous API client wants to get a step
       }
       """
       Then the JSON response status code should be 204
-      And selection 6 3 should have no status
+      And selection 71 3 should have no status
 
   @database
   Scenario: Admin API client wants to notify that a proposal's status changed
