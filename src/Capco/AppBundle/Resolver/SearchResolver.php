@@ -52,7 +52,7 @@ class SearchResolver
         if ($multiMatchQuery && $boolFilter) {
             $abstractQuery = new Filtered($multiMatchQuery, $boolFilter);
         } else {
-            $abstractQuery = $multiMatchQuery ? $multiMatchQuery : $boolFilter;
+            $abstractQuery = $multiMatchQuery ?: $boolFilter;
         }
 
         if ($random) {

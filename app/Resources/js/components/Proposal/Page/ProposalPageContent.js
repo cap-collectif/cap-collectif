@@ -74,7 +74,6 @@ const ProposalPageContent = React.createClass({
             id="proposal-share-button"
             url={proposal._links.show}
             title={proposal.title}
-            style={{ marginLeft: '15px' }}
           />
           <ProposalReportButton proposal={proposal} />
           <div className="pull-right">
