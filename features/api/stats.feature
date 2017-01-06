@@ -3,7 +3,7 @@ Feature: Stats
 
   @parallel-scenario
   Scenario: Anonymous API client wants to get votes stats for a selection step
-    When I send a GET request to "/api/project_stats/6?key=votes"
+    When I send a GET request to "/api/project_stats/71?key=votes"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
@@ -24,7 +24,7 @@ Feature: Stats
 
   @parallel-scenario
   Scenario: Anonymous API client wants to get votes stats for a selection step filtered by theme
-    When I send a GET request to "/api/project_stats/6?key=votes&theme=1"
+    When I send a GET request to "/api/project_stats/71?key=votes&theme=1"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
@@ -38,7 +38,7 @@ Feature: Stats
 
   @parallel-scenario
   Scenario: Anonymous API client wants to get themes stats for a collect step
-    When I send a GET request to "/api/project_stats/22?key=themes"
+    When I send a GET request to "/api/project_stats/61?key=themes"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
@@ -59,7 +59,7 @@ Feature: Stats
 
   @security
   Scenario: Anonymous API client wants to get votes stats for a collect step
-    When I send a GET request to "/api/project_stats/22?key=votes"
+    When I send a GET request to "/api/project_stats/61?key=votes"
     Then the JSON response status code should be 400
     And the JSON response should match:
     """
@@ -72,7 +72,7 @@ Feature: Stats
 
   @security
   Scenario: Anonymous API client wants to get districts stats for a selection step
-    When I send a GET request to "/api/project_stats/6?key=districts"
+    When I send a GET request to "/api/project_stats/71?key=districts"
     Then the JSON response status code should be 400
     And the JSON response should match:
     """
@@ -85,7 +85,7 @@ Feature: Stats
 
   @security
   Scenario: Anonymous API client wants to get votes stats for a collect step filtered by theme
-    When I send a GET request to "/api/project_stats/22?key=districts&theme=1"
+    When I send a GET request to "/api/project_stats/61?key=districts&theme=1"
     Then the JSON response status code should be 400
     And the JSON response should match:
     """
