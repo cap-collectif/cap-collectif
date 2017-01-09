@@ -20,6 +20,10 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         groups: [VoteThreshold]
         type: integer
         serialized_name: voteThreshold
+      votesLimit:
+        expose: true
+        groups: [Steps]
+        type: integer
       budget:
         expose: true
         type: float

@@ -10,7 +10,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
     userHasVote: PropTypes.bool.isRequired,
-    step: PropTypes.object.isRequired,
+    step: PropTypes.object,
     creditsLeft: PropTypes.number,
     user: PropTypes.object,
     style: PropTypes.object,
@@ -29,7 +29,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
       creditsLeft,
       proposal,
     } = this.props;
-    if (creditsLeft !== null && !!proposal.estimation) {
+    if (creditsLeft !== null && proposal.estimation) {
       return creditsLeft >= proposal.estimation;
     }
     return true;
@@ -37,18 +37,23 @@ export const ProposalVoteButtonWrapper = React.createClass({
 
   render() {
     const { user, step, proposal, style, className, userHasVote } = this.props;
-    if (step && step.voteType === VOTE_TYPE_SIMPLE && step.open) {
+    if (!step) {
+      return <div />;
+    }
+    if (step.voteType === VOTE_TYPE_SIMPLE && step.open) {
       return (
-        <ProposalVoteButton
-          proposal={proposal}
-          step={step}
-          user={user}
-          style={style}
-          className={className}
-        />
+        <VoteButtonOverlay>
+          <ProposalVoteButton
+            proposal={proposal}
+            step={step}
+            user={user}
+            style={style}
+            className={className}
+          />
+        </VoteButtonOverlay>
       );
     }
-    if (step && step.open) {
+    if (step.open) {
       if (user) {
         const notVotedAndNotEnoughCredits = !userHasVote && !this.userHasEnoughCredits();
         return (
@@ -70,29 +75,33 @@ export const ProposalVoteButtonWrapper = React.createClass({
 
       return (
         <LoginOverlay>
-          <ProposalVoteButton
-            proposal={proposal}
-            step={step}
-            user={user}
-            style={style}
-            className={className}
-          />
+          <VoteButtonOverlay
+            popoverId={`vote-tooltip-proposal-${proposal.id}`}
+            // notVotedAndNotEnoughCredits={notVotedAndNotEnoughCredits}
+            // notVotedAndLimitReached={notVotedAndNotEnoughCredits}
+          >
+            <ProposalVoteButton
+              proposal={proposal}
+              step={step}
+              user={user}
+              style={style}
+              className={className}
+            />
+          </VoteButtonOverlay>
         </LoginOverlay>
       );
     }
-    return null;
   },
-
 });
 
 const mapStateToProps = (state, props) => {
   const step = (state.project.currentProjectById && props.proposal.votableStepId)
-    ? state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)[0]
-    : null;
+            ? state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)[0]
+            : null;
   const user = state.default.user;
   return {
     user,
-    userHasVote: !!(user && step && state.proposal.userVotesByStepId[step.id].includes(props.proposal.id)),
+    userHasVote: user && step && state.proposal.userVotesByStepId[step.id].includes(props.proposal.id),
     creditsLeft: step ? state.proposal.creditsLeftByStepId[step.id] : null,
     step,
   };

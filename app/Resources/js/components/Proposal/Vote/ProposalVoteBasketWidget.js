@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin, FormattedNumber, FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedNumber } from 'react-intl';
 import { connect } from 'react-redux';
 import { mapValues } from 'lodash';
 import { Nav, Navbar, Button, ProgressBar } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import Input from '../../Form/Input';
-import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import { getSpentPercentage } from '../../../services/ProposalVotesHelper';
 
 const ProposalVoteBasketWidget = React.createClass({
@@ -43,26 +43,35 @@ const ProposalVoteBasketWidget = React.createClass({
     const budget = selectedStep.budget;
     const creditsLeft = creditsLeftByStepId[selectedStep.id];
     const creditsSpent = budget - creditsLeft;
-    const percentage = getSpentPercentage(budget, creditsSpent);
+    const showProgressBar =
+        (selectedStep.voteType === VOTE_TYPE_SIMPLE && selectedStep.votesLimit)
+      || selectedStep.voteType === VOTE_TYPE_BUDGET
+    ;
+    let percentage;
+    if (selectedStep.voteType === VOTE_TYPE_BUDGET) {
+      percentage = getSpentPercentage(budget, creditsSpent);
+    } else {
+      percentage = getSpentPercentage(selectedStep.votesLimit, userVotesCountByStepId[selectedStep.id]);
+    }
     return (
       <Navbar fixedTop className="proposal-vote__widget">
         {
           image &&
-           <Navbar.Header>
-            <Navbar.Brand>
-              <img className="widget__image" role="presentation" src={image} />
-            </Navbar.Brand>
-            <Navbar.Toggle>
-              <i
-                style={{ fontSize: '24px' }}
-                className="cap cap-information-1"
-              >
-              </i>
-            </Navbar.Toggle>
-            <li className="navbar-text widget__progress-bar hidden visible-xs">
-              <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%" />
-            </li>
-          </Navbar.Header>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <img className="widget__image" role="presentation" src={image} />
+              </Navbar.Brand>
+              <Navbar.Toggle>
+                <i
+                  style={{ fontSize: '24px' }}
+                  className="cap cap-information-1"
+                >
+                </i>
+              </Navbar.Toggle>
+              <li className="navbar-text widget__progress-bar hidden visible-xs">
+                <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%" />
+              </li>
+            </Navbar.Header>
         }
         <Navbar.Collapse>
           <Nav>
@@ -82,27 +91,45 @@ const ProposalVoteBasketWidget = React.createClass({
                     >
                       {
                         votableSteps.map(step =>
-                            <option key={step.id} value={step.id}>
-                              {step.title}
-                            </option>,
+                          <option key={step.id} value={step.id}>
+                            {step.title}
+                          </option>,
                         )
                       }
                     </Input>
                   </span>
-              </li>
+                </li>
             }
-            <li className="navbar-text widget__counter">
-              <p className="widget__counter__label">
-                {this.getIntlMessage('project.votes.widget.selection')}
-              </p>
-              <span className="widget__counter__value">
-                <FormattedMessage
-                  message={this.getIntlMessage('project.votes.widget.count')}
-                  num={userVotesCountByStepId[selectedStep.id]}
-                />
-              </span>
-            </li>
           </Nav>
+          {
+            selectedStep.voteType === VOTE_TYPE_SIMPLE && selectedStep.votesLimit &&
+              <Nav>
+                <li className="navbar-text widget__counter">
+                  <p className="widget__counter__label">
+                    {this.getIntlMessage('project.votes.widget.votes')}
+                  </p>
+                  <span className="widget__counter__value">
+                    {selectedStep.votesLimit}
+                  </span>
+                </li>
+                <li className="navbar-text widget__counter">
+                  <p className="widget__counter__label">
+                    {this.getIntlMessage('project.votes.widget.votes_left')}
+                  </p>
+                  <span className="widget__counter__value">
+                    {selectedStep.votesLimit - userVotesCountByStepId[selectedStep.id]}
+                  </span>
+                </li>
+                <li className="navbar-text widget__counter">
+                  <p className="widget__counter__label">
+                    {this.getIntlMessage('project.votes.widget.votes_spent')}
+                  </p>
+                  <span className="widget__counter__value">
+                    { userVotesCountByStepId[selectedStep.id]}
+                  </span>
+                </li>
+              </Nav>
+          }
           {
             selectedStep.voteType === VOTE_TYPE_BUDGET &&
               <Nav>
@@ -114,12 +141,12 @@ const ProposalVoteBasketWidget = React.createClass({
                     {
                       budget
                         ? <FormattedNumber
-                            minimumFractionDigits={0}
-                            value={budget}
-                            style="currency"
-                            currency="EUR"
-                        />
-                        : this.getIntlMessage('project.votes.widget.no_value')
+                          minimumFractionDigits={0}
+                          value={budget}
+                          style="currency"
+                          currency="EUR"
+                          />
+                      : this.getIntlMessage('project.votes.widget.no_value')
                     }
                   </span>
                 </li>
@@ -127,14 +154,14 @@ const ProposalVoteBasketWidget = React.createClass({
                   <p className="widget__counter__label">
                     {this.getIntlMessage('project.votes.widget.spent')}
                   </p>
-                    <span className="widget__counter__value">
-                      <FormattedNumber
-                        minimumFractionDigits={0}
-                        value={creditsSpent}
-                        style="currency"
-                        currency="EUR"
-                      />
-                    </span>
+                  <span className="widget__counter__value">
+                    <FormattedNumber
+                      minimumFractionDigits={0}
+                      value={creditsSpent}
+                      style="currency"
+                      currency="EUR"
+                    />
+                  </span>
                 </li>
                 <li className="navbar-text widget__counter">
                   <p className="widget__counter__label">
@@ -149,7 +176,18 @@ const ProposalVoteBasketWidget = React.createClass({
                     />
                   </span>
                 </li>
-            </Nav>
+                {
+                  selectedStep.votesLimit &&
+                    <li className="navbar-text widget__counter">
+                      <p className="widget__counter__label">
+                        {this.getIntlMessage('project.votes.widget.votes_left_budget')}
+                      </p>
+                      <span className="widget__counter__value">
+                        {selectedStep.votesLimit - userVotesCountByStepId[selectedStep.id]}
+                      </span>
+                    </li>
+                }
+              </Nav>
           }
           <Button
             bsStyle="default"
@@ -159,7 +197,7 @@ const ProposalVoteBasketWidget = React.createClass({
             {this.getIntlMessage('proposal.details') }
           </Button>
           {
-            selectedStep.voteType === VOTE_TYPE_BUDGET &&
+            showProgressBar &&
               <Nav pullRight className="widget__progress-bar-nav hidden-xs">
                 <li className="navbar-text widget__progress-bar">
                   <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%" />

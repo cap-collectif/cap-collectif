@@ -588,7 +588,10 @@
         "count": "{num, plural, =0{0 vote} one{# vote} other{# votes}}",
         "left": "Restant",
         "no_value": "Non renseigné",
-        "selection": "Ma sélection",
+        "votes": "Votes",
+        "votes_left": "Restants",
+        "votes_spent": "Dépensés",
+        "votes_left_budget": "Votes restants",
         "spent": "Dépensé",
         "step": "\u00c9tape"
       }
