@@ -12,6 +12,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
     userHasVote: PropTypes.bool.isRequired,
     step: PropTypes.object,
     creditsLeft: PropTypes.number,
+    userVotesCount: PropTypes.number.isRequired,
     user: PropTypes.object,
     style: PropTypes.object,
     className: PropTypes.string,
@@ -36,13 +37,31 @@ export const ProposalVoteButtonWrapper = React.createClass({
   },
 
   render() {
-    const { user, step, proposal, style, className, userHasVote } = this.props;
-    if (!step) {
+    const { user, step, proposal, style, className, userHasVote, userVotesCount } = this.props;
+    if (!user) {
+      return (
+        <LoginOverlay>
+          <ProposalVoteButton
+            proposal={proposal}
+            step={step}
+            user={user}
+            style={style}
+            className={className}
+          />
+        </LoginOverlay>
+      );
+    }
+    if (!step || !step.open) {
       return <div />;
     }
-    if (step.voteType === VOTE_TYPE_SIMPLE && step.open) {
+    if (step.voteType === VOTE_TYPE_SIMPLE) {
       return (
-        <VoteButtonOverlay>
+        <VoteButtonOverlay
+          popoverId={`vote-tooltip-proposal-${proposal.id}`}
+          userHasVote={userHasVote}
+          limit={step.votesLimit}
+          hasReachedLimit={!userHasVote && step.votesLimit && (step.votesLimit - userVotesCount) <= 0}
+        >
           <ProposalVoteButton
             proposal={proposal}
             step={step}
@@ -53,54 +72,36 @@ export const ProposalVoteButtonWrapper = React.createClass({
         </VoteButtonOverlay>
       );
     }
-    if (step.open) {
-      if (user) {
-        const notVotedAndNotEnoughCredits = !userHasVote && !this.userHasEnoughCredits();
-        return (
-          <VoteButtonOverlay
-            popoverId={`vote-tooltip-proposal-${proposal.id}`}
-            show={notVotedAndNotEnoughCredits}
-          >
-            <ProposalVoteButton
-              proposal={proposal}
-              step={step}
-              user={user}
-              disabled={notVotedAndNotEnoughCredits}
-              style={style}
-              className={className}
-            />
-          </VoteButtonOverlay>
-        );
-      }
-
-      return (
-        <LoginOverlay>
-          <VoteButtonOverlay
-            popoverId={`vote-tooltip-proposal-${proposal.id}`}
-            // notVotedAndNotEnoughCredits={notVotedAndNotEnoughCredits}
-            // notVotedAndLimitReached={notVotedAndNotEnoughCredits}
-          >
-            <ProposalVoteButton
-              proposal={proposal}
-              step={step}
-              user={user}
-              style={style}
-              className={className}
-            />
-          </VoteButtonOverlay>
-        </LoginOverlay>
-      );
-    }
+    return (
+        <VoteButtonOverlay
+          popoverId={`vote-tooltip-proposal-${proposal.id}`}
+          userHasVote={userHasVote}
+          limit={step.votesLimit}
+          hasReachedLimit={step.votesLimit && (step.votesLimit - userVotesCount) <= 0}
+          hasUserEnoughCredits={this.userHasEnoughCredits()}
+        >
+          <ProposalVoteButton
+            proposal={proposal}
+            step={step}
+            user={user}
+            disabled={!userHasVote && !this.userHasEnoughCredits()}
+            style={style}
+            className={className}
+          />
+        </VoteButtonOverlay>
+    );
   },
 });
 
 const mapStateToProps = (state, props) => {
   const step = (state.project.currentProjectById && props.proposal.votableStepId)
-            ? state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)[0]
-            : null;
+      ? state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)[0]
+      : null
+  ;
   const user = state.default.user;
   return {
     user,
+    userVotesCount: (user && step && state.proposal.userVotesByStepId[step.id].length) || 0,
     userHasVote: user && step && state.proposal.userVotesByStepId[step.id].includes(props.proposal.id),
     creditsLeft: step ? state.proposal.creditsLeftByStepId[step.id] : null,
     step,

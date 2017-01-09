@@ -96,11 +96,11 @@ export const ProposalPage = React.createClass({
                   </Nav>
                   {
                     currentVotableStep &&
-                    <ProposalVoteButtonWrapper
-                      proposal={proposal}
-                      style={{ marginTop: '10px' }}
-                      className="pull-right hidden-xs proposal__preview__vote"
-                    />
+                      <ProposalVoteButtonWrapper
+                        proposal={proposal}
+                        style={{ marginTop: '10px' }}
+                        className="pull-right hidden-xs proposal__preview__vote"
+                      />
                   }
                 </div>
               </div>

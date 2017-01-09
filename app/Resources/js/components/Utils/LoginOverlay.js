@@ -85,8 +85,8 @@ export const LoginOverlay = React.createClass({
     ;
     return (
      <span>
-        <OverlayTrigger trigger="click" rootClose placement="top" overlay={popover}>
-        { cloneElement(children, { onClick: null }) }
+       <OverlayTrigger trigger="click" rootClose placement="top" overlay={popover}>
+         { cloneElement(children, { onClick: null }) }
        </OverlayTrigger>
        <LoginModal
          show={showLogin}

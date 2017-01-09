@@ -4,9 +4,8 @@ import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { openVoteModal, deleteVote } from '../../../redux/modules/proposal';
-import LoginOverlay from '../../Utils/LoginOverlay';
-import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
+// Should only be used via ProposalVoteButtonWrapper
 const ProposalVoteButton = React.createClass({
   propTypes: {
     disabled: PropTypes.bool,
@@ -43,9 +42,7 @@ const ProposalVoteButton = React.createClass({
       isDeleting,
     } = this.props;
     const bsStyle = user && userHasVote ? 'danger' : 'success';
-    let classes = classNames({
-      disabled,
-    });
+    let classes = classNames({ disabled });
     classes += ` ${className}`;
     const action = user && userHasVote
       ? () => {
@@ -55,7 +52,6 @@ const ProposalVoteButton = React.createClass({
         dispatch(openVoteModal(proposal.id));
       };
     return (
-      <LoginOverlay enabled={!disabled && step && step.voteType === VOTE_TYPE_BUDGET}>
         <Button
           bsStyle={bsStyle}
           className={classes}
@@ -66,23 +62,21 @@ const ProposalVoteButton = React.createClass({
         >
           {
             isDeleting
-              ? this.getIntlMessage('proposal.vote.deleting')
-              : user && userHasVote
-                ? this.getIntlMessage('proposal.vote.delete')
-                : this.getIntlMessage('proposal.vote.add')
+            ? this.getIntlMessage('proposal.vote.deleting')
+            : (user && userHasVote
+              ? this.getIntlMessage('proposal.vote.delete')
+              : this.getIntlMessage('proposal.vote.add')
+            )
           }
         </Button>
-      </LoginOverlay>
     );
   },
 
 });
 
-const mapStateToProps = (state, props) => {
-  return {
-    isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
-    userHasVote: !!(props.step && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id)),
-  };
-};
+const mapStateToProps = (state, props) => ({
+  isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
+  userHasVote: !!(props.step && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id)),
+});
 
 export default connect(mapStateToProps)(ProposalVoteButton);

@@ -42,17 +42,17 @@ export const IdeaPageHeaderInfos = React.createClass({
       <p className="media--aligned excerpt">
         {
           themeLink
-          ? <FormattedMessage
-            message={this.getIntlMessage('idea.header.infos')}
-            user={<UserLink user={idea.author} />}
-            created={createdDate}
-            theme={themeLink}
-          />
+            ? <FormattedMessage
+              message={this.getIntlMessage('idea.header.infos')}
+              user={<UserLink user={idea.author} />}
+              created={createdDate}
+              theme={themeLink}
+              />
           : <FormattedMessage
             message={this.getIntlMessage('idea.header.infos_no_theme')}
             user={<UserLink user={idea.author} />}
             created={createdDate}
-          />
+            />
         }
         {
           (moment(idea.updatedAt).diff(idea.createdAt, 'seconds') > 1)
