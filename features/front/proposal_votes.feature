@@ -75,14 +75,14 @@ Feature: Proposal votes
     Given feature "vote_without_account" is enabled
     When I go to a selection step not yet open
     Then the proposal should have 0 votes
-    And the proposal vote button must be disabled
+    And the proposal vote button with id 10 must not be present
 
   @javascript @security @elasticsearch @votes_from_selection_step
   Scenario: Anonymous user wants to vote on a selection step that is closed
     Given feature "vote_without_account" is enabled
     When I go to a closed selection step
     Then the proposal should have 1 votes
-    And the proposal vote button must be disabled
+    And the proposal vote button with id 11 must not be present
 
   # Votes from proposal page
 
@@ -173,7 +173,7 @@ Feature: Proposal votes
   Scenario: Logged in user wants to vote when he has not enough credits left
     Given I am logged in as admin
     When I go to a proposal with budget vote enabled
-    Then the proposal vote button must be disabled
+    Then the proposal vote button with id 10 must not be present
     # Hovering not working
     # And I hover over the proposal vote button
     # And I should see "Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux."
@@ -186,12 +186,12 @@ Feature: Proposal votes
   @javascript @security @votes_from_proposal
   Scenario: Anonymous user wants to vote for a proposal that is not votable yet
     Given I go to a proposal not yet votable
-    Then the proposal vote button must be disabled
+    Then the proposal vote button must not be present
 
   @javascript @security @votes_from_proposal
   Scenario: Anonymous user wants to vote for a proposal that is not votable anymore
     Given I go to a proposal not votable anymore
-    Then the proposal vote button must be disabled
+    Then the proposal vote button must not be present
 
   # Votes page
   @javascript @database

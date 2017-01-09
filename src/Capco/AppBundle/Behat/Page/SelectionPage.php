@@ -86,7 +86,7 @@ class SelectionPage extends Page
 
     public function getVotesCount($id = 2)
     {
-        return intval($this->getVotesCounter($id)->getText());
+        return (int) $this->getVotesCounter($id)->getText();
     }
 
     public function getCommentsCounter($id)
@@ -96,7 +96,7 @@ class SelectionPage extends Page
 
     public function getCommentsCount($id = 2)
     {
-        return intval($this->getCommentsCounter($id)->getText());
+        return (int) $this->getCommentsCounter($id)->getText();
     }
 
     public function submitProposalVoteForm()

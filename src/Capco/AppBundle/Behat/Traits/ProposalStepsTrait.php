@@ -903,6 +903,25 @@ trait ProposalStepsTrait
     }
 
     /**
+     * The proposal vote button must be disabled.
+     *
+     * @Then the proposal vote button with id :id must not be present
+     * @Then the proposal vote button must not be present
+     */
+    public function theProposalVoteButtonWithIdMustNotBePresent(int $id = 0)
+    {
+        $execpetionMessage = $id > 0
+            ? '"proposal vote button '.$id.'" element is not present on the page'
+            : '"proposal vote button" element is not present on the page';
+
+        try {
+            $button = $this->getCurrentPage()->getVoteButton($this->getProposalId());
+        } catch (\Exception $e) {
+            \PHPUnit_Framework_Assert::assertSame($execpetionMessage, $e->getMessage());
+        }
+    }
+
+    /**
      * I should see the proposal vote tooltip.
      *
      * @When I should see the proposal vote tooltip
