@@ -14,7 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use JMS\Serializer\SerializationContext;
 
@@ -29,6 +28,7 @@ class ProjectController extends Controller
         $props = $this->get('jms_serializer')->serialize([
             'projects' => $this
                 ->getDoctrine()
+                ->getManager()
                 ->getRepository('CapcoAppBundle:Project')
                 ->getLastPublished($max, $offset),
         ], 'json', SerializationContext::create()->setGroups([
@@ -118,7 +118,7 @@ class ProjectController extends Controller
         }
 
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw $this->createAccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -156,7 +156,7 @@ class ProjectController extends Controller
         }
 
         if (!$project->isExportable() && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException($trans->trans('project.error.not_exportable', [], 'CapcoAppBundle'));
+            throw $this->createAccessDeniedException($trans->trans('project.error.not_exportable', [], 'CapcoAppBundle'));
         }
 
         $path = $this->container->getParameter('kernel.root_dir').'/../web/export/';
@@ -165,13 +165,18 @@ class ProjectController extends Controller
             $filename .= $step->getProject()->getSlug().'_';
         }
         $filename .= $step->getSlug();
-        $filename .= '.csv';
 
-        if (!file_exists($path.$filename)) {
+        $csvFile = $filename.'.csv';
+        $xlsxFile = $filename.'.xlsx';
+
+        if (!file_exists($path.$csvFile) && !file_exists($path.$xlsxFile)) {
             $this->get('session')->getFlashBag()->add('danger', $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle'));
 
             return $this->redirect($request->headers->get('referer'));
         }
+
+        $filename = file_exists($path.$csvFile) ? $csvFile : $xlsxFile;
+        $contentType = file_exists($path.$csvFile) ? 'text/csv' : 'application/vnd.ms-excel';
 
         $date = (new \DateTime())->format('Y-m-d');
 
@@ -181,7 +186,7 @@ class ProjectController extends Controller
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT, $date.'_'.$filename
         );
-        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
+        $response->headers->set('Content-Type', $contentType.'; charset=utf-8');
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
 
@@ -292,7 +297,7 @@ class ProjectController extends Controller
      */
     public function showMetaAction($projectSlug, $currentStepSlug)
     {
-        $em = $this->getDoctrine();
+        $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('CapcoAppBundle:Project')->getOneBySlugWithStepsAndEventsAndPosts($projectSlug);
         $projectSteps = $em->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
 

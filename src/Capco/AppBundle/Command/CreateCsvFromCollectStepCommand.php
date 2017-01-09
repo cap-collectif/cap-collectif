@@ -63,8 +63,8 @@ class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
     protected function filename(CollectStep $collectStep): string
     {
         return $collectStep->getProject()
-            ? $collectStep->getProject()->getSlug().'_'.$collectStep->getSlug().'.csv'
-            : $collectStep->getSlug().'.csv';
+            ? $collectStep->getProject()->getSlug().'_'.$collectStep->getSlug().'.xlsx'
+            : $collectStep->getSlug().'.xlsx';
     }
 
     protected function getProject(InputInterface $input)

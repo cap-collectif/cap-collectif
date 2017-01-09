@@ -986,6 +986,6 @@ class ProjectDownloadResolver
         }
 
         // create the writer
-        return $this->phpexcel->createWriter($phpExcelObject, 'CSV');
+        return $this->phpexcel->createWriter($phpExcelObject, 'Excel2007');
     }
 }
