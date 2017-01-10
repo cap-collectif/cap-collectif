@@ -64,13 +64,13 @@ export const LoginOverlay = React.createClass({
         {
           features.registration &&
             <p>
-            <Button
-              onClick={this.handleRegistrationClick}
+              <Button
+                onClick={this.handleRegistrationClick}
                 className="center-block btn-block"
-            >
-              { this.getIntlMessage('global.registration') }
-            </Button>
-          </p>
+              >
+                { this.getIntlMessage('global.registration') }
+              </Button>
+            </p>
         }
         <p>
           <Button
@@ -78,14 +78,19 @@ export const LoginOverlay = React.createClass({
             bsStyle="success"
             className="center-block btn-block"
           >
-          { this.getIntlMessage('global.login') }
+            { this.getIntlMessage('global.login') }
           </Button>
         </p>
       </Popover>)
     ;
     return (
      <span>
-       <OverlayTrigger trigger="click" rootClose placement="top" overlay={popover}>
+       <OverlayTrigger
+         trigger="click"
+         rootClose
+         placement="top"
+         overlay={popover}
+       >
          { cloneElement(children, { onClick: null }) }
        </OverlayTrigger>
        <LoginModal

@@ -14,6 +14,7 @@ const ProposalVoteButton = React.createClass({
     user: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
     style: PropTypes.object,
+    id: PropTypes.string,
     userHasVote: PropTypes.bool.isRequired,
     isDeleting: PropTypes.bool.isRequired,
     className: PropTypes.string,
@@ -22,6 +23,7 @@ const ProposalVoteButton = React.createClass({
 
   getDefaultProps() {
     return {
+      id: undefined,
       disabled: false,
       style: {},
       className: '',
@@ -40,6 +42,7 @@ const ProposalVoteButton = React.createClass({
       disabled,
       userHasVote,
       isDeleting,
+      id,
     } = this.props;
     const bsStyle = user && userHasVote ? 'danger' : 'success';
     let classes = classNames({ disabled });
@@ -53,6 +56,7 @@ const ProposalVoteButton = React.createClass({
       };
     return (
         <Button
+          id={id}
           bsStyle={bsStyle}
           className={classes}
           style={style}
@@ -76,7 +80,7 @@ const ProposalVoteButton = React.createClass({
 
 const mapStateToProps = (state, props) => ({
   isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
-  userHasVote: !!(props.step && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id)),
+  userHasVote: props.step && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
 });
 
 export default connect(mapStateToProps)(ProposalVoteButton);

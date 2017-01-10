@@ -13,7 +13,6 @@ import ProposalResponse from './ProposalResponse';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 import { openDeleteProposalModal, openEditProposalModal } from '../../../redux/modules/proposal';
 
-
 const ProposalPageContent = React.createClass({
   displayName: 'ProposalPageContent',
   propTypes: {
@@ -71,7 +70,8 @@ const ProposalPageContent = React.createClass({
         <div className="block proposal__buttons">
           <ProposalVoteButtonWrapper
             proposal={proposal}
-            style={{ display: 'inline-block', marginRight: 15 }}
+            id="proposal-vote-btn"
+            style={{ marginRight: 15 }}
           />
           <ShareButtonDropdown
             id="proposal-share-button"

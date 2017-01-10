@@ -10,30 +10,27 @@ class SelectionPage extends Page
 {
     use PageTrait;
 
-    /**
-     * @var string
-     */
     protected $path = '/project/{projectSlug}/selection/{stepSlug}';
 
     protected $elements = [
         'proposal preview 2' => '#proposal-2',
         'proposal votes counter 2' => '#proposal-2 .proposal__counter--votes .proposal__counter__value',
-        'proposal vote button 2' => '#proposal-2 .proposal__preview__vote',
+        'proposal vote button 2' => 'button#proposal-vote-btn-2',
         'proposal comments counter 2' => '#proposal-2 .proposal__counter--comments .proposal__counter__value',
         'proposal preview 10' => '#proposal-10',
         'proposal votes counter 10' => '#proposal-10 .proposal__counter--votes .proposal__counter__value',
-        'proposal vote button 10' => '#proposal-10 .proposal__preview__vote',
+        'proposal vote button 10' => 'button#proposal-vote-btn-10',
         'proposal comments counter 10' => '#proposal-10 .proposal__counter--comments .proposal__counter__value',
         'proposal preview 11' => '#proposal-11',
         'proposal votes counter 11' => '#proposal-11 .proposal__counter--votes .proposal__counter__value',
-        'proposal vote button 11' => '#proposal-11 .proposal__preview__vote',
+        'proposal vote button 11' => 'button#proposal-vote-btn-11',
         'proposal comments counter 11' => '#proposal-11 .proposal__counter--comments .proposal__counter__value',
         'proposal preview 8' => '#proposal-8',
         'proposal votes counter 8' => '#proposal-8 .proposal__counter--votes .proposal__counter__value',
-        'proposal vote button 8' => '#proposal-8 .proposal__preview__vote',
+        'proposal vote button 8' => 'button#proposal-vote-btn-8',
         'proposal comments counter 8' => '#proposal-8 .proposal__counter--comments .proposal__counter__value',
         'proposal' => '.proposal__preview',
-        'proposal vote button to hover' => '#proposal-1 .proposal__preview__vote',
+        'proposal vote button to hover' => '#proposal-vote-btn-1',
         'sorting select' => 'select#proposal-sorting',
         'selected sorting option' => '#proposal-sorting option[selected]',
         'proposal vote form submit button' => '#confirm-proposal-vote',
@@ -54,47 +51,54 @@ class SelectionPage extends Page
         return $this->getElement('sorting select')->getValue();
     }
 
-    public function getProposalSelector()
+    public function getProposalSelector(): string
     {
         return $this->getSelector('proposal');
     }
 
-    public function getVoteButton($id)
+    public function getVoteButton(int $id)
     {
         return $this->getElement('proposal vote button '.$id);
     }
 
-    public function getVoteButtonSelector($id = 2)
+    public function getVoteButtonSelector(int $id = 2): string
     {
         return $this->getSelector('proposal vote button '.$id);
     }
 
-    public function clickVoteButton($id = 2)
+    public function clickVoteButton(int $id = 2)
     {
-        $this->getVoteButton($id)->click();
+        $button = $this->getVoteButton($id);
+        try {
+          $button->click();
+        } catch(\Exception $e) {
+          $button->getParent()->getParent()->getParent()->mouseOver();
+          $button->getParent()->getParent()->getParent()->focus();
+          $button->getParent()->getParent()->getParent()->click();
+        }
     }
 
-    public function getVoteButtonLabel($id = 2)
+    public function getVoteButtonLabel(int $id = 2)
     {
         return $this->getVoteButton($id)->getText();
     }
 
-    public function getVotesCounter($id)
+    public function getVotesCounter(int $id)
     {
         return $this->getElement('proposal votes counter '.$id);
     }
 
-    public function getVotesCount($id = 2)
+    public function getVotesCount(int $id = 2)
     {
         return (int) $this->getVotesCounter($id)->getText();
     }
 
-    public function getCommentsCounter($id)
+    public function getCommentsCounter(int $id)
     {
         return $this->getElement('proposal comments counter '.$id);
     }
 
-    public function getCommentsCount($id = 2)
+    public function getCommentsCount(int $id = 2)
     {
         return (int) $this->getCommentsCounter($id)->getText();
     }
@@ -104,7 +108,7 @@ class SelectionPage extends Page
         $this->getElement('proposal vote form submit button')->click();
     }
 
-    public function hoverOverVoteButton($id = 8)
+    public function hoverVoteButton(int $id = 8)
     {
         $this->getVoteButton($id)->mouseOver();
     }

@@ -11,6 +11,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
     proposal: PropTypes.object.isRequired,
     userHasVote: PropTypes.bool.isRequired,
     step: PropTypes.object,
+    id: PropTypes.string,
     creditsLeft: PropTypes.number,
     userVotesCount: PropTypes.number.isRequired,
     user: PropTypes.object,
@@ -20,6 +21,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
 
   getDefaultProps() {
     return {
+      id: undefined,
       style: {},
       className: '',
     };
@@ -37,18 +39,17 @@ export const ProposalVoteButtonWrapper = React.createClass({
   },
 
   render() {
-    const { user, step, proposal, style, className, userHasVote, userVotesCount } = this.props;
+    const { id, user, step, proposal, style, className, userHasVote, userVotesCount } = this.props;
     if (!user) {
       return (
-        <LoginOverlay>
           <ProposalVoteButton
+            id={id}
             proposal={proposal}
             step={step}
             user={user}
             style={style}
             className={className}
           />
-        </LoginOverlay>
       );
     }
     if (!step || !step.open) {
@@ -63,6 +64,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
           hasReachedLimit={!userHasVote && step.votesLimit && (step.votesLimit - userVotesCount) <= 0}
         >
           <ProposalVoteButton
+            id={id}
             proposal={proposal}
             step={step}
             user={user}
@@ -81,6 +83,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
           hasUserEnoughCredits={this.userHasEnoughCredits()}
         >
           <ProposalVoteButton
+            id={id}
             proposal={proposal}
             step={step}
             user={user}

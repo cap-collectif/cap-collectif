@@ -20,6 +20,7 @@ def deploy(environment='dev', user='capco'):
 @task
 def clean():
     "Clean"
+    env.compose('stop chrome || true')
     env.compose('rm -f chrome')
 
 

@@ -99,7 +99,7 @@ export const ProposalPage = React.createClass({
                       <ProposalVoteButtonWrapper
                         proposal={proposal}
                         style={{ marginTop: '10px' }}
-                        className="pull-right hidden-xs proposal__preview__vote"
+                        className="pull-right hidden-xs"
                       />
                   }
                 </div>

@@ -2,7 +2,6 @@
 Feature: Proposal votes
 
   # Votes from selection step page
-
   @javascript @database @elasticsearch @votes_from_selection_step
   Scenario: Logged in user wants to vote and unvote for a proposal in a selection step with a comment
     Given I am logged in as user
@@ -60,15 +59,13 @@ Feature: Proposal votes
     Given I am logged in as admin
     When I go to a selection step with budget vote enabled
     Then the proposal vote button must be disabled
-    # Hovering still not working
-    # And I should see the proposal vote tooltip
+    And I should see the proposal vote tooltip
 
   @javascript @security @elasticsearch @votes_from_selection_step
   Scenario: Anonymous user wants to vote on a selection step that has budget vote in a selection step
-    Given feature "vote_without_account" is enabled
-    When I go to a selection step with budget vote enabled
-    And I click the proposal vote button
-    Then I should see "Vous devez être connecté pour réaliser cette action."
+    Given I go to a selection step with budget vote enabled
+    When I click the proposal vote button
+    Then I should see "Voter avec mon compte"
 
   @javascript @security @elasticsearch @votes_from_selection_step
   Scenario: Anonymous user wants to vote on a selection step that is not open yet
@@ -169,14 +166,14 @@ Feature: Proposal votes
     And I submit the proposal vote form
     Then I should see "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition."
 
-  @javascript @security @votes_from_proposal
+  @javascript @security @votes_from_proposal @lolololol
   Scenario: Logged in user wants to vote when he has not enough credits left
     Given I am logged in as admin
     When I go to a proposal with budget vote enabled
-    Then the proposal vote button with id 10 must not be present
+    # Then the proposal vote button with id 10 must not be present
     # Hovering not working
-    # And I hover over the proposal vote button
-    # And I should see "Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux."
+    And I hover the proposal vote button
+    And I should see "Vous avez atteint la limite du budget."
 
   @javascript @security @votes_from_proposal
   Scenario: Anonymous user wants to vote on a selection step that has budget vote

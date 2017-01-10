@@ -632,7 +632,7 @@ trait ProposalStepsTrait
         return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalWithBudgetVoteParams);
     }
 
-    protected function getProposalId()
+    protected function getProposalId(): int
     {
         if ($this->proposalPageIsOpen() || $this->selectionStepWithSimpleVoteIsOpen()) {
             return 2;
@@ -647,7 +647,7 @@ trait ProposalStepsTrait
             return 11;
         }
 
-        return;
+        throw new \Exception('Unknown proposalId');
     }
 
     /**
@@ -715,15 +715,26 @@ trait ProposalStepsTrait
         $this->iWait(5);
     }
 
-    protected function clickProposalVoteButtonWithLabel($label)
+    protected function clickProposalVoteButtonWithLabel(string $label)
     {
         $page = $this->getCurrentPage();
         $proposalId = $this->getProposalId();
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
         \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label '.$buttonLabel.' on proposal vote button.');
         $page->clickVoteButton($proposalId);
-        $this->iWait(2);
+        $this->iWait(5);
     }
+
+    // protected function hoverElement($element)
+    // {
+    //   $session = $this->getSession()->getDriver()->getWebDriverSession();
+    //   $elementId = $session->element('xpath', $element->getXpath())->getID();
+    //   $session->moveto(['element' => $elementId]);
+    //   $this->getSession()->getDriver()->rightClick($element->getXpath());
+    //   $this->getSession()->getDriver()->rightClick($element->getXpath());
+    //   $session->moveto(['xoffset' => 0, 'yoffset' => 0]);
+    //   $this->iWait(1);
+    // }
 
     /**
      * I click the proposal vote button.
@@ -731,6 +742,14 @@ trait ProposalStepsTrait
      * @When I click the proposal vote button
      */
     public function iClickTheProposalVoteButton()
+    {
+        $this->clickProposalVoteButtonWithLabel('Voter pour');
+    }
+
+    /**
+     * @When I hover the proposal vote button
+     */
+    public function iHoverTheProposalVoteButton()
     {
         $this->clickProposalVoteButtonWithLabel('Voter pour');
     }
@@ -889,8 +908,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * The proposal vote button must be disabled.
-     *
      * @Then the proposal vote button must be disabled
      */
     public function theProposalVoteButtonMustBeDisabled()
@@ -922,15 +939,18 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should see the proposal vote tooltip.
-     *
      * @When I should see the proposal vote tooltip
      */
     public function iShouldSeeTheProposalVoteTooltip()
     {
-        $this->navigationContext->getPage('selection page')->hoverOverVoteButton($this->getProposalId());
+        $button = $this->navigationContext->getPage('selection page')->getVoteButton($this->getProposalId());
+        // useless click to scroll the page
+        $this->getSession()->getDriver()->click($button->getParent()->getParent()->getParent()->getParent()->getXpath());
+        try {
+          $this->getSession()->getDriver()->click($button->getParent()->getXpath());
+        } catch (\Exception $e) {}
         $this->iWait(1);
-        $this->assertPageContainsText('Pas assez de crédits. Désélectionnez un projet ou sélectionnez un projet moins coûteux.');
+        $this->assertPageContainsText('Vous avez atteint la limite du budget.');
     }
 
     protected function assertProposalCommentsContains($text)
