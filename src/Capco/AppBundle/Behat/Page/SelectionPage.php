@@ -75,8 +75,6 @@ class SelectionPage extends Page
           $button->getParent()->getParent()->getParent()->getParent()->mouseOver();
           $button->click();
         } catch(\Exception $e) {
-          $button->getParent()->getParent()->getParent()->mouseOver();
-          $button->getParent()->getParent()->getParent()->focus();
           $button->getParent()->getParent()->getParent()->click();
         }
     }
