@@ -10,8 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * AbstractQuestion.
- *
  * @ORM\Table(name="question")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractQuestionRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
@@ -51,21 +49,16 @@ abstract class AbstractQuestion
     public static $questionTypesLabels = [];
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="help_text", type="text", nullable=true)
      */
     private $helpText = null;
 
     /**
-     * @var ArrayCollection
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="question")
      */
     private $responses;
 
     /**
-     * @var bool
      * @ORM\Column(name="required", type="boolean", nullable=false)
      */
     private $required = false;
@@ -73,11 +66,12 @@ abstract class AbstractQuestion
     /**
      * Needed by sonata admin.
      *
-     * @var QuestionnaireAbstractQuestion
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="question",
-     *                                                                                              orphanRemoval=true,
-     *                                                                                              cascade={"persist",
-     *                                                                                              "remove"})
+     * @ORM\OneToOne(
+     *  targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion",
+     *  mappedBy="question",
+     *  orphanRemoval=true,
+     *  cascade={"persist", "remove"}
+     * )
      */
     protected $questionnaireAbstractQuestion;
 

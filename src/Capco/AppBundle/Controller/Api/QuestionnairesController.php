@@ -37,4 +37,47 @@ class QuestionnairesController extends FOSRestController
     {
         return $questionnaire;
     }
+
+    /**
+     * @Get("/questionnaires-stats")
+     * @View(statusCode=200)
+     */
+    public function getQuestionnairesStatsAction()
+    {
+        $questionnaires = $this->getDoctrine()->getManager()
+             ->getRepository('CapcoAppBundle:Questionnaire')
+             ->findAll()
+        ;
+        $results = [];
+        foreach ($questionnaires as $questionnaire) {
+          $questions = $questionnaire->getRealQuestions();
+          $rankingQuestions = [];
+          foreach ($questions as $question) {
+            if ($question->getInputType() === 'ranking') {
+              $rankingQuestions[] = $question;
+            }
+          }
+          foreach ($rankingQuestions as $rakingQuestion) {
+            $questionChoices = $rakingQuestion->getQuestionChoices();
+            $choices = $questionChoices->map(function($choice) { return $choice->getTitle(); })->toArray();
+            $scores = array_combine($choices, array_map(function ($h) {
+                return 0;
+            }, $choices));
+            foreach ($rakingQuestion->getResponses() as $response) {
+              $score = count($response->getValue()['labels']);
+              foreach ($response->getValue()['labels'] as $label) {
+                $scores[$label] += $score;
+                $score--;
+              }
+            }
+            $results[] = [
+              'questionnaire_id' => $questionnaire->getId(),
+              'question_title' => $rakingQuestion->getTitle(),
+              'scores' => $scores,
+            ];
+          }
+        }
+
+        return $results;
+    }
 }
