@@ -54,7 +54,7 @@ const ProposalForm = React.createClass({
         title: proposal.title,
         body: proposal.body,
         theme: proposal.theme ? proposal.theme.id : -1,
-        district: proposal.district ? proposal.district.id : -1,
+        district: proposal.district ? proposal.district.id : null,
         category: proposal.category ? proposal.category.id : -1,
         media: null,
       },
@@ -123,7 +123,7 @@ const ProposalForm = React.createClass({
         if (!features.themes || !this.props.form.usingThemes || form.theme === -1) {
           delete form.theme;
         }
-        if (!features.districts || form.district === -1 || !this.props.form.usingDistrict) {
+        if (!features.districts || !form.district || !this.props.form.usingDistrict) {
           delete form.district;
         }
         if (categories.length === 0 || !this.props.form.usingCategories || form.category === -1) {
@@ -208,7 +208,7 @@ const ProposalForm = React.createClass({
     const { features, form } = this.props;
     if (features.districts && form.usingDistrict && form.districtMandatory) {
       this.formValidationRules.district = {
-        minValue: { value: 0, message: 'proposal.constraints.district' },
+        notBlank: { message: 'proposal.constraints.district' },
       };
       return;
     }
@@ -279,111 +279,109 @@ const ProposalForm = React.createClass({
       <form id="proposal-form">
         {
           form.description &&
-              <FormattedHTMLMessage message={form.description} />
+            <FormattedHTMLMessage message={form.description} />
         }
-          <Input
-            id="proposal_title"
-            type="text"
-            autoComplete="off"
-            value={this.state.form.title}
-            onChange={this.handleTitleChange}
-            label={this.getIntlMessage('proposal.title')}
-            groupClassName={this.getGroupStyle('title')}
-            errors={this.renderFormErrors('title')}
-            addonAfter={this.state.isLoadingSuggestions ? <span className="glyphicon glyphicon-refresh glyphicon-spin" /> : <span className="glyphicon glyphicon-refresh" />}
-          />
-          <Collapse
-            in={this.state.suggestions.length > 0}
+        <Input
+          id="proposal_title"
+          type="text"
+          autoComplete="off"
+          value={this.state.form.title}
+          onChange={this.handleTitleChange}
+          label={this.getIntlMessage('proposal.title')}
+          groupClassName={this.getGroupStyle('title')}
+          errors={this.renderFormErrors('title')}
+          addonAfter={this.state.isLoadingSuggestions ? <span className="glyphicon glyphicon-refresh glyphicon-spin" /> : <span className="glyphicon glyphicon-refresh" />}
+        />
+        <Collapse
+          in={this.state.suggestions.length > 0}
+        >
+          <Panel
+            header={
+              <FormattedMessage
+                message={this.getIntlMessage('proposal.suggest_header')}
+                matches={this.state.suggestions.length}
+                terms={this.state.form.title.split(' ').length}
+              />
+            }
           >
-              <Panel
-                header={
-                  <FormattedMessage
-                     message={this.getIntlMessage('proposal.suggest_header')}
-                     matches={this.state.suggestions.length}
-                     terms={this.state.form.title.split(' ').length}
-                  />
-                }
-              >
-                <ul style={{ listStyleType: 'none', padding: 0 }}>
-                {
-                  this.state.suggestions.slice(0, 5).map(suggest =>
-                    <li>
-                      <a href={suggest._links.show} className="external-link">
-                        { suggest.title }
-                      </a>
-                    </li>,
-                  )
-                }
-                </ul>
-                <Button onClick={() => { this.setState({ suggestions: [] }); }}>{this.getIntlMessage('global.close')}</Button>
-              </Panel>
+            <ul style={{ listStyleType: 'none', padding: 0 }}>
+              {
+                this.state.suggestions.slice(0, 5).map(suggest =>
+                  <li>
+                    <a href={suggest._links.show} className="external-link">
+                      { suggest.title }
+                    </a>
+                  </li>,
+                )
+              }
+            </ul>
+            <Button onClick={() => { this.setState({ suggestions: [] }); }}>{this.getIntlMessage('global.close')}</Button>
+          </Panel>
         </Collapse>
         {
           features.themes && form.usingThemes &&
             <Input
-                id="proposal_theme"
-                type="select"
-                valueLink={this.linkState('form.theme')}
-                label={themeLabel}
-                groupClassName={this.getGroupStyle('theme')}
-                errors={this.renderFormErrors('theme')}
-                help={form.themeHelpText}
+              id="proposal_theme"
+              type="select"
+              valueLink={this.linkState('form.theme')}
+              label={themeLabel}
+              groupClassName={this.getGroupStyle('theme')}
+              errors={this.renderFormErrors('theme')}
+              help={form.themeHelpText}
             >
-            <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
-            {
-              themes.map(theme =>
-                <option key={theme.id} value={theme.id}>
-                  {theme.title}
-                </option>,
-              )
-            }
-          </Input>
+              <option value={-1} disabled>{this.getIntlMessage('proposal.select.theme')}</option>
+              {
+                themes.map(theme =>
+                  <option key={theme.id} value={theme.id}>
+                    {theme.title}
+                  </option>,
+                )
+              }
+            </Input>
         }
         {
           categories.length > 0 && form.usingCategories &&
-          <Input
-            id="proposal_category"
-            type="select"
-            valueLink={this.linkState('form.category')}
-            label={categoryLabel}
-            groupClassName={this.getGroupStyle('category')}
-            errors={this.renderFormErrors('category')}
-            help={form.categoryHelpText}
-          >
-            <option value={-1} disabled>{this.getIntlMessage('proposal.select.category')}</option>
-            {
-              categories.map((category) => {
-                return (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                );
-              })
-            }
-          </Input>
+            <Input
+              id="proposal_category"
+              type="select"
+              valueLink={this.linkState('form.category')}
+              label={categoryLabel}
+              groupClassName={this.getGroupStyle('category')}
+              errors={this.renderFormErrors('category')}
+              help={form.categoryHelpText}
+            >
+              <option value={-1} disabled>{this.getIntlMessage('proposal.select.category')}</option>
+              {
+                categories.map((category) => {
+                  return (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  );
+                })
+              }
+            </Input>
         }
         {
           features.districts && form.usingDistrict &&
-          <Input
-            id="proposal_district"
-            type="select"
-            valueLink={this.linkState('form.district')}
-            label={districtLabel}
-            groupClassName={this.getGroupStyle('district')}
-            errors={this.renderFormErrors('district')}
-            help={form.districtHelpText}
-          >
-            <option value={-1} disabled>{this.getIntlMessage('proposal.select.district')}</option>
-            {
-              districts.map((district) => {
-                return (
+            <Input
+              id="proposal_district"
+              type="select"
+              valueLink={this.linkState('form.district')}
+              label={districtLabel}
+              groupClassName={this.getGroupStyle('district')}
+              errors={this.renderFormErrors('district')}
+              help={form.districtHelpText}
+            >
+              <option value="">{this.getIntlMessage('proposal.select.district')}</option>
+              {
+                districts.map(district => (
                   <option key={district.id} value={district.id}>
                     {district.name}
                   </option>
-                );
-              })
-            }
-          </Input>
+                ))
+              }
+            </Input>
         }
         <Input
           id="proposal_body"
