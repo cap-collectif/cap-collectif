@@ -81,8 +81,16 @@ Feature: Proposal votes
     Then the proposal should have 1 votes
     And the proposal vote button with id 11 must not be present
 
-  # Votes from proposal page
+  @javascript @security @elasticsearch @votes_from_selection_step @current
+  Scenario: Logged in user wants to vote when he has reached limit in a selection step
+    Given I am logged in as user
+    And "user" has voted for proposal 17 in selection step "selection-avec-vote-budget-limite"
+    When I go to a selection step with budget vote limited enabled
+    And the proposal 18 vote button must be disabled
+    When I click the proposal 18 vote button
+    And I should see the proposal vote limited tooltip
 
+  # Votes from proposal page
   @javascript @database @votes_from_proposal
   Scenario: Logged in user wants to vote and unvote for a proposal with a comment
     Given I am logged in as user
@@ -166,13 +174,11 @@ Feature: Proposal votes
     And I submit the proposal vote form
     Then I should see "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition."
 
-  @javascript @security @votes_from_proposal @lolololol
+  @javascript @security @votes_from_proposal
   Scenario: Logged in user wants to vote when he has not enough credits left
     Given I am logged in as admin
     When I go to a proposal with budget vote enabled
-    # Then the proposal vote button with id 10 must not be present
-    # Hovering not working
-    And I hover the proposal vote button
+    And I click the proposal vote button
     And I should see "Vous avez atteint la limite du budget."
 
   @javascript @security @votes_from_proposal

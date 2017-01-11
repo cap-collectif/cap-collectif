@@ -70,7 +70,6 @@ const ProposalPageContent = React.createClass({
         <div className="block proposal__buttons">
           <ProposalVoteButtonWrapper
             proposal={proposal}
-            id="proposal-vote-btn"
             style={{ marginRight: 15 }}
           />
           <ShareButtonDropdown

@@ -29,6 +29,10 @@ trait ProposalStepsTrait
         'projectSlug' => 'depot-avec-selection-vote-budget',
         'stepSlug' => 'selection-avec-vote-selon-le-budget',
     ];
+    protected static $selectionStepWithBudgetVoteLimitedParams = [
+        'projectSlug' => 'budget-avec-vote-limitte',
+        'stepSlug' => 'selection-avec-vote-budget-limite',
+    ];
     protected static $selectionStepNotYetOpen = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'selection-a-venir',
@@ -61,8 +65,6 @@ trait ProposalStepsTrait
     // ********************************* Proposals *********************************************
 
     /**
-     * Go to an open collect step page.
-     *
      * @When I go to an open collect step
      */
     public function iGoToAnOpenCollectStep()
@@ -71,8 +73,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Go to a private open collect step page.
-     *
      * @When I go to a private open collect step
      */
     public function iGoToAPrivateOpenCollectStep()
@@ -89,8 +89,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Go to a closed collect step page.
-     *
      * @When I go to a closed collect step
      */
     public function iGoToAClosedCollectStep()
@@ -107,8 +105,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Go to a proposal page.
-     *
      * @When I go to a proposal
      */
     public function iGoToAProposal()
@@ -123,8 +119,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Go to a proposal not yet votable.
-     *
      * @When I go to a proposal not yet votable
      */
     public function iGoToAProposalNotYetVotable()
@@ -138,8 +132,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Go to a proposal not votable anymore.
-     *
      * @When I go to a proposal not votable anymore
      */
     public function iGoToAProposalNotVotableAnymore()
@@ -153,8 +145,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * There should be nb proposals.
-     *
      * @Then there should be :nb proposals
      */
     public function thereShouldBeNbProposals($nb)
@@ -165,8 +155,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I change the proposals theme filter.
-     *
      * @When I change the proposals theme filter
      */
     public function iChangeTheProposalsThemeFilter()
@@ -176,8 +164,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I sort proposals by date.
-     *
      * @When I sort proposals by date
      */
     public function iSortProposalsByDate()
@@ -187,8 +173,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I sort proposals by comments.
-     *
      * @When I sort proposals by comments
      */
     public function iSortProposalsByComments()
@@ -198,8 +182,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I search for proposals with terms.
-     *
      * @When I search for proposals with terms :terms
      */
     public function iSearchForProposalsWithTerms($terms)
@@ -232,8 +214,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Proposals should be ordered randomly.
-     *
      * @Then proposals should be ordered randomly
      */
     public function proposalsShouldBeOrderedRandomly()
@@ -243,8 +223,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Proposals should be ordered by comments.
-     *
      * @Then proposals should be ordered by comments
      */
     public function proposalsShouldBeOrderedByComments()
@@ -258,8 +236,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Proposals should be filtered by terms.
-     *
      * @Then proposals should be filtered by terms
      */
     public function proposalsShouldBeFilteredByTerms()
@@ -269,8 +245,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Proposals should be filtered by theme and terms and sorted by comments.
-     *
      * @Then proposals should be filtered by theme and terms and sorted by comments
      */
     public function proposalsShouldBeFilteredByThemeAndTermsAndSortedByComments()
@@ -286,8 +260,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I click the create proposal button.
-     *
      * @Then I click the create proposal button
      */
     public function iClickTheCreateProposalButton()
@@ -297,8 +269,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should see the proposal private field.
-     *
      * @Then I should see the proposal private field
      */
     public function iShouldSeeTheProposalPrivateField()
@@ -309,8 +279,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should not see the proposal private field.
-     *
      * @Then I should not see the proposal private field
      */
     public function iShouldNotSeeTheProposalPrivateField()
@@ -320,8 +288,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I fill the proposal form.
-     *
      * @When I fill the proposal form
      */
     public function iFillTheProposalForm()
@@ -330,8 +296,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I fill the proposal form with a theme.
-     *
      * @When I fill the proposal form with a theme
      */
     public function iFillTheProposalFormWithATheme()
@@ -340,8 +304,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I fill the proposal form without required response.
-     *
      * @When I fill the proposal form without required response
      */
     public function iFillTheProposalFormWithoutRequiredResponse()
@@ -367,8 +329,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I submit the create proposal form.
-     *
      * @When I submit the create proposal form
      */
     public function iSubmitTheCreateProposalForm()
@@ -378,8 +338,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I submit the edit proposal form.
-     *
      * @When I submit the edit proposal form
      */
     public function iSubmitTheEditProposalForm()
@@ -389,8 +347,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * The create proposal button should be disabled.
-     *
      * @Then the create proposal button should be disabled
      */
     public function theCreateProposalButtonShouldBeDisabled()
@@ -400,8 +356,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should see my new proposal.
-     *
      * @Then I should see my new proposal
      */
     public function iShouldSeMyNewProposal()
@@ -410,8 +364,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I click the edit proposal button.
-     *
      * @Then I click the edit proposal button
      */
     public function iClickTheEditProposalButton()
@@ -421,8 +373,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I change the proposal title.
-     *
      * @When I change the proposal title
      */
     public function iChangeTheProposalTitle()
@@ -431,8 +381,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * The proposal title should have change.
-     *
      * @Then the proposal title should have changed
      */
     public function theProposalTitleShouldHaveChanged()
@@ -442,8 +390,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should not see the edit proposal button.
-     *
      * @Then I should not see the edit proposal button
      */
     public function iShouldNotSeeTheEditProposalButton()
@@ -453,8 +399,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I click the delete proposal button.
-     *
      * @Then I click the delete proposal button
      */
     public function iClickTheDeleteProposalButton()
@@ -464,8 +408,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I confirm proposal deletion.
-     *
      * @Then I confirm proposal deletion
      */
     public function iConfirmProposalDeletion()
@@ -476,8 +418,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should not see my proposal anymore.
-     *
      * @Then I should not see my proposal anymore
      */
     public function iShouldNotSeeMyProposalAnymore()
@@ -486,8 +426,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should not see the delete proposal button.
-     *
      * @Then I should not see the delete proposal button
      */
     public function iShouldNotSeeTheDeleteProposalButton()
@@ -497,8 +435,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I click the report proposal button.
-     *
      * @Then I click the report proposal button
      */
     public function iClickTheReportProposalButton()
@@ -508,8 +444,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should see the proposal likers.
-     *
      * @Then I should see the proposal likers
      */
     public function iShouldSeeTheProposalLikers()
@@ -518,8 +452,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I click the share proposal button.
-     *
      * @When I click the share proposal button
      */
     public function iClickTheShareProposalButton()
@@ -531,8 +463,6 @@ trait ProposalStepsTrait
     // ********************************** Proposal votes *************************************************
 
     /**
-     * Go to the votes details page.
-     *
      * @When I go to the votes details page
      */
     public function iGoToTheVotesDetailsPage()
@@ -546,8 +476,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Go to a selection step page with simple vote enabled.
-     *
      * @When I go to a selection step with simple vote enabled
      */
     public function iGoToASelectionStepWithSimpleVoteEnabled()
@@ -564,13 +492,19 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Go to a selection step page with budget vote enabled.
-     *
      * @When I go to a selection step with budget vote enabled
      */
     public function iGoToASelectionStepWithBudgetVoteEnabled()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepWithBudgetVoteParams);
+    }
+
+    /**
+     * @When I go to a selection step with budget vote limited enabled
+     */
+    public function iGoToASelectionStepWithBudgetVoteLimitedEnabled()
+    {
+        $this->visitPageWithParams('selection page', self::$selectionStepWithBudgetVoteLimitedParams);
     }
 
     protected function selectionStepWithBudgetVoteIsOpen()
@@ -582,8 +516,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Go to a selection step not yet open.
-     *
      * @When I go to a selection step not yet open
      */
     public function iGoToASelectionStepNotYetOpen()
@@ -600,8 +532,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Go to a closed selection step.
-     *
      * @When I go to a closed selection step
      */
     public function iGoToAClosedSelectionStep()
@@ -618,8 +548,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * Go to a proposal page with budget vote enabled.
-     *
      * @When I go to a proposal with budget vote enabled
      */
     public function iGoToAProposalWithBudgetVoteEnabled()
@@ -651,8 +579,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should have nb votes.
-     *
      * @Then I should have :nb votes
      */
     public function iShouldHaveNbVotes(int $nb)
@@ -681,8 +607,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * The proposal should have nb votes.
-     *
      * @Given the proposal has :nb votes
      * @Then the proposal should have :nb votes
      */
@@ -693,8 +617,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * The proposal should have nb comments.
-     *
      * @Given the proposal has :nb comments
      * @Then the proposal should have :nb comments
      */
@@ -705,8 +627,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I remove the first vote.
-     *
      * @When I remove the first vote
      */
     public function iRemoveTheFirstVote()
@@ -715,48 +635,26 @@ trait ProposalStepsTrait
         $this->iWait(5);
     }
 
-    protected function clickProposalVoteButtonWithLabel(string $label)
+    protected function clickProposalVoteButtonWithLabel(string $label, int $id = null)
     {
         $page = $this->getCurrentPage();
-        $proposalId = $this->getProposalId();
+        $proposalId = $id ?: $this->getProposalId();
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
         \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label '.$buttonLabel.' on proposal vote button.');
         $page->clickVoteButton($proposalId);
-        $this->iWait(5);
+        $this->iWait(3);
     }
 
-    // protected function hoverElement($element)
-    // {
-    //   $session = $this->getSession()->getDriver()->getWebDriverSession();
-    //   $elementId = $session->element('xpath', $element->getXpath())->getID();
-    //   $session->moveto(['element' => $elementId]);
-    //   $this->getSession()->getDriver()->rightClick($element->getXpath());
-    //   $this->getSession()->getDriver()->rightClick($element->getXpath());
-    //   $session->moveto(['xoffset' => 0, 'yoffset' => 0]);
-    //   $this->iWait(1);
-    // }
-
     /**
-     * I click the proposal vote button.
-     *
      * @When I click the proposal vote button
+     * @When I click the proposal :id vote button
      */
-    public function iClickTheProposalVoteButton()
+    public function iClickTheProposalVoteButton(int $id = null)
     {
-        $this->clickProposalVoteButtonWithLabel('Voter pour');
+        $this->clickProposalVoteButtonWithLabel('Voter pour', $id);
     }
 
     /**
-     * @When I hover the proposal vote button
-     */
-    public function iHoverTheProposalVoteButton()
-    {
-        $this->clickProposalVoteButtonWithLabel('Voter pour');
-    }
-
-    /**
-     * I click the proposal unvote button.
-     *
      * @When I click the proposal unvote button
      */
     public function iClickTheProposalUnvoteButton()
@@ -765,8 +663,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I fill the proposal vote form.
-     *
      * @When I fill the proposal vote form
      */
     public function iFillTheProposalVoteForm()
@@ -791,8 +687,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I fill the proposal vote form with a registered email.
-     *
      * @When I fill the proposal vote form with a registered email
      */
     public function iFillTheProposalVoteFormWithARegisteredEmail()
@@ -877,8 +771,6 @@ trait ProposalStepsTrait
       }
 
     /**
-     * I add a proposal vote comment.
-     *
      * @When I add a proposal vote comment
      */
     public function iAddAProposalVoteComment()
@@ -887,8 +779,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I check the proposal vote private checkbox.
-     *
      * @When I check the proposal vote private checkbox
      */
     public function iCheckTheProposalVotePrivateCheckbox()
@@ -897,8 +787,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I submit the proposal vote form.
-     *
      * @When I submit the proposal vote form
      */
     public function iSubmitTheProposalVoteForm()
@@ -908,11 +796,27 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @Then the proposal vote button must be disabled
+     * @Given :userSlug has voted for proposal :proposalId in selection step :stepSlug
      */
-    public function theProposalVoteButtonMustBeDisabled()
+    public function userHasVotedForProposalForStep(string $userSlug, int $proposalId, string $stepSlug)
     {
-        $button = $this->getCurrentPage()->getVoteButton($this->getProposalId());
+        $user = $this->getRepository('CapcoUserBundle:User')->findOneBySlug($userSlug);
+        $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+        $step = $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->findOneBySlug($stepSlug);
+        \PHPUnit_Framework_Assert::assertNotNull(
+          $this->getRepository('CapcoAppBundle:ProposalSelectionVote')
+               ->findOneBy(['user' => $user, 'proposal' => $proposal, 'selectionStep' => $step])
+        );
+    }
+
+    /**
+     * @Then the proposal vote button must be disabled
+     * @Then the proposal :id vote button must be disabled
+     */
+    public function theProposalVoteButtonMustBeDisabled(int $id = null)
+    {
+        $id = $id ?: $this->getProposalId();
+        $button = $this->getCurrentPage()->getVoteButton($id);
         \PHPUnit_Framework_Assert::assertTrue(
             $button->hasClass('disabled') || $button->hasAttribute('disabled'),
             'The proposal vote button is not disabled neither it has class "disabled".'
@@ -920,8 +824,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * The proposal vote button must be disabled.
-     *
      * @Then the proposal vote button with id :id must not be present
      * @Then the proposal vote button must not be present
      */
@@ -936,6 +838,14 @@ trait ProposalStepsTrait
         } catch (\Exception $e) {
             \PHPUnit_Framework_Assert::assertSame($execpetionMessage, $e->getMessage());
         }
+    }
+
+    /**
+     * @When I should see the proposal vote limited tooltip
+     */
+    public function iShouldSeeTheProposalVoteLimitedTooltip()
+    {
+        $this->assertPageContainsText('Limite de votes atteinte');
     }
 
     /**
@@ -960,8 +870,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should see my comment in the proposal comments list.
-     *
      * @Then I should see my comment in the proposal comments list
      */
     public function iShouldSeeMyCommentInTheProposalCommentsList()
@@ -982,8 +890,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should see my vote in the proposal votes list.
-     *
      * @Then I should see my vote in the proposal votes list
      */
     public function iShouldSeeMyVoteInTheProposalVotesList()
@@ -992,8 +898,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should not see my vote in the proposal votes list.
-     *
      * @Then I should not see my vote in the proposal votes list
      */
     public function iShouldNotSeeMyVoteInTheProposalVotesList()
@@ -1002,8 +906,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should see my anonymous vote in the proposal votes list.
-     *
      * @Then I should see my anonymous vote in the proposal votes list
      */
     public function iShouldSeeMyAnonymousVoteInTheProposalVotesList()
@@ -1012,8 +914,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * I should see my not logged in vote in the proposal votes list.
-     *
      * @Then I should see my not logged in vote in the proposal votes list
      */
     public function iShouldSeeMyNotLoggedInVoteInTheProposalVotesList()

@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import ProposalVoteButton from './ProposalVoteButton';
 import VoteButtonOverlay from './VoteButtonOverlay';
 import { VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
-import LoginOverlay from '../../Utils/LoginOverlay';
 
 export const ProposalVoteButtonWrapper = React.createClass({
   displayName: 'ProposalVoteButtonWrapper',
   propTypes: {
     proposal: PropTypes.object.isRequired,
     userHasVote: PropTypes.bool.isRequired,
-    step: PropTypes.object,
+    step: PropTypes.object.isRequired,
     id: PropTypes.string,
     creditsLeft: PropTypes.number,
     userVotesCount: PropTypes.number.isRequired,
@@ -51,9 +50,6 @@ export const ProposalVoteButtonWrapper = React.createClass({
             className={className}
           />
       );
-    }
-    if (!step || !step.open) {
-      return <div />;
     }
     if (step.voteType === VOTE_TYPE_SIMPLE) {
       return (

@@ -34,6 +34,8 @@ class SelectionPage extends Page
         'sorting select' => 'select#proposal-sorting',
         'selected sorting option' => '#proposal-sorting option[selected]',
         'proposal vote form submit button' => '#confirm-proposal-vote',
+        'proposal vote button 18' => 'button#proposal-vote-btn-18',
+        'proposal vote button 17' => 'button#proposal-vote-btn-17',
     ];
 
     public function sortByDate()
@@ -70,6 +72,7 @@ class SelectionPage extends Page
     {
         $button = $this->getVoteButton($id);
         try {
+          $button->getParent()->getParent()->getParent()->getParent()->mouseOver();
           $button->click();
         } catch(\Exception $e) {
           $button->getParent()->getParent()->getParent()->mouseOver();

@@ -97,6 +97,7 @@ export const ProposalPage = React.createClass({
                   {
                     currentVotableStep &&
                       <ProposalVoteButtonWrapper
+                        id="proposal-vote-btn"
                         proposal={proposal}
                         style={{ marginTop: '10px' }}
                         className="pull-right hidden-xs"

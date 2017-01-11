@@ -47,12 +47,12 @@ const ProposalPreview = React.createClass({
               showThemes={showThemes}
             />
             <div className="proposal__buttons text-center" >
-                {
-                  step.id === proposal.votableStepId &&
-                    <ProposalPreviewVote
-                      proposal={proposal}
-                    />
-                }
+              {
+                step.id === proposal.votableStepId &&
+                  <ProposalPreviewVote
+                    proposal={proposal}
+                  />
+              }
             </div>
             {
               step.voteThreshold > 0 &&
