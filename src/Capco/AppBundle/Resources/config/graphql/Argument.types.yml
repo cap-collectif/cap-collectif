@@ -37,7 +37,7 @@ Argument:
             votesCount:
                 type: "Int!"
             id:
-                type: "Int!"
+                type: "String!"
                 description: "The content of the argument."
             body:
                 type: "String!"

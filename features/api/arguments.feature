@@ -12,7 +12,7 @@ Feature: Arguments
     {
       "arguments": [
         {
-          "id": @integer@,
+          "id": @string@,
           "body": @string@,
           "type": @integer@,
           "created_at": "@string@.isDateTime()",
@@ -56,7 +56,7 @@ Feature: Arguments
     {
       "arguments": [
         {
-          "id": @integer@,
+          "id": @string@,
           "body": @string@,
           "type": @integer@,
           "created_at": "@string@.isDateTime()",

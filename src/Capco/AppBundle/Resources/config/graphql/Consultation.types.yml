@@ -4,7 +4,7 @@ Consultation:
         description: "A consultation"
         fields:
             id:
-                type: "Int!"
+                type: "String!"
                 description: "The id of the consultation."
             title:
                 type: "String!"

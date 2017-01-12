@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Argument:
     properties:
         id:
             expose: true
-            type: integer
+            type: string
             groups: [Opinions, OpinionVersions]
         body:
             expose: true

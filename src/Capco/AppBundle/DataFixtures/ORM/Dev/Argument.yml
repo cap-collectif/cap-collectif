@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\Argument:
 
   ## Arguments on opinion
   argument1:
-    id: 1
+    id: '1'
     Opinion: '@opinion2'
     type: 0
     Author: '@user5'
@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\Argument:
     isEnabled: true
     isTrashed: false
   argument2:
-    id: 2
+    id: '2'
     Opinion: '@opinion2'
     type: 0
     Author: @user4
@@ -55,7 +55,7 @@ Capco\AppBundle\Entity\Argument:
     isTrashed: false
 
   argument201:
-    id: 201
+    id: '201'
     Opinion: '@opinion51'
     type: 0
     Author: '@user1'
@@ -63,7 +63,7 @@ Capco\AppBundle\Entity\Argument:
     isEnabled: true
     isTrashed: false
   argument202:
-    id: 202
+    id: '202'
     Opinion: '@opinion51'
     type: 0
     Author: '@user2'
@@ -72,7 +72,7 @@ Capco\AppBundle\Entity\Argument:
     isTrashed: false
 
   argument203:
-    id: 203
+    id: '203'
     Opinion: '@opinion52'
     type: 0
     Author: '@user<numberBetween(1, 5)>'
@@ -82,7 +82,7 @@ Capco\AppBundle\Entity\Argument:
 
   # Argument on versions
   argument204:
-    id: 204
+    id: '204'
     opinionVersion: '@version1'
     type: 0
     Author: '@user5'
@@ -90,7 +90,7 @@ Capco\AppBundle\Entity\Argument:
     isEnabled: true
     isTrashed: false
   argument205:
-    id: 205
+    id: '205'
     opinionVersion: '@version1'
     type: 1
     Author: '@user<numberBetween(1, 5)>'
@@ -109,7 +109,7 @@ Capco\AppBundle\Entity\Argument:
     isTrashed: false
 
   argument211:
-    id: 211
+    id: '211'
     opinionVersion: '@version1'
     type: 1
     Author: '@user1'
@@ -118,7 +118,7 @@ Capco\AppBundle\Entity\Argument:
     isTrashed: false
 
   argument212:
-    id: 212
+    id: '212'
     opinionVersion: '@version11'
     type: 1
     Author: '@user1'
