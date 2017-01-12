@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,7 +28,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
  */
 class Opinion implements OpinionContributionInterface, SelfLinkableInterface
 {
-    use IdTrait;
+    use UuidTrait;
     use TrashableTrait;
     use SluggableTitleTrait;
     use VotableOkNokMitigeTrait;
@@ -49,8 +49,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     ];
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="enabled", type="boolean")
      */
     protected $isEnabled = true;

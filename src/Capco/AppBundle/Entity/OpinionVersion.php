@@ -18,18 +18,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Model\HasDiffInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
- * Opinion Version.
- *
  * @ORM\Table(name="opinion_version")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVersionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 {
-    use IdTrait;
+    use UuidTrait;
     use TrashableTrait;
     use EnableTrait;
     use SluggableTitleTrait;
@@ -41,16 +39,12 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     use ExpirableTrait;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank()
      */
     protected $body;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;

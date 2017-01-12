@@ -14,7 +14,7 @@ Feature: Opinions
         "isContribuable": @boolean@,
         "is_trashed": @boolean@,
 
-        "id": @integer@,
+        "id": @string@,
         "title": @string@,
         "body": @string@,
 
