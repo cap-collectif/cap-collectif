@@ -23,25 +23,6 @@ const StepText = React.createClass({
     };
   },
 
-  componentDidMount() {
-    /* const totalHeight = ReactDOM.findDOMNode(this.refs.content).offsetHeight;
-    // Text should be truncated
-    if (totalHeight > 105) {
-      this.setState({
-        hideText: false,
-        truncated: true,
-        expanded: false,
-      });
-      return;
-    }
-    // Text is not truncated
-    this.setState({
-      hideText: false,
-      truncated: false,
-      expanded: true,
-    }); */
-  },
-
   toggleExpand() {
     this.setState({
       expanded: !this.state.expanded,

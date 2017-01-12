@@ -20,6 +20,7 @@
     set projectSteps = projectSteps|merge([{
       'id': step.step.id,
       'title': step.step.title,
+      'body': step.step.body,
       'startAt': step.step.startAt ? step.step.startAt|localizeddate('medium', 'none') : null,
       'endAt': step.step.endAt ? step.step.endAt|localizeddate('medium', 'none') : null,
       'position': step.step.position,
