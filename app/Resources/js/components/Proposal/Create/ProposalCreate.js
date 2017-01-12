@@ -24,17 +24,22 @@ const ProposalCreate = React.createClass({
       form,
       showModal,
       isSubmitting,
+      dispatch,
     } = this.props;
     return (
       <div>
         <ProposalCreateButton
           disabled={!form.isContribuable}
-          handleClick={() => this.props.dispatch(openCreateModal())}
+          handleClick={() => dispatch(openCreateModal())}
         />
         <Modal
           animation={false}
           show={showModal}
-          onHide={() => this.props.dispatch(closeCreateModal())}
+          onHide={() => {
+            if (window.confirm(this.getIntlMessage('proposal.confirm_close_modal'))) { // eslint-disable-line no-alert
+              dispatch(closeCreateModal());
+            }
+          }}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
@@ -52,12 +57,12 @@ const ProposalCreate = React.createClass({
           </Modal.Body>
           <Modal.Footer>
             <CloseButton
-              onClose={() => this.props.dispatch(closeCreateModal())}
+              onClose={() => dispatch(closeCreateModal())}
             />
             <SubmitButton
               id="confirm-proposal-create"
               isSubmitting={isSubmitting}
-              onSubmit={() => this.props.dispatch(submitProposalForm())}
+              onSubmit={() => dispatch(submitProposalForm())}
             />
           </Modal.Footer>
         </Modal>
@@ -67,11 +72,9 @@ const ProposalCreate = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    isSubmitting: state.proposal.isCreating,
-    showModal: state.proposal.showCreateModal,
-  };
-};
+const mapStateToProps = state => ({
+  isSubmitting: state.proposal.isCreating,
+  showModal: state.proposal.showCreateModal,
+});
 
 export default connect(mapStateToProps)(ProposalCreate);

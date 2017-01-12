@@ -32,7 +32,11 @@ const ProposalEditModal = React.createClass({
         <Modal
           animation={false}
           show={show}
-          onHide={() => { dispatch(closeEditProposalModal()); }}
+          onHide={() => {
+            if (window.confirm(this.getIntlMessage('proposal.confirm_close_modal'))) { // eslint-disable-line no-alert
+              dispatch(closeEditProposalModal());
+            }
+          }}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg"
         >
