@@ -50,32 +50,34 @@ class QuestionnairesController extends FOSRestController
         ;
         $results = [];
         foreach ($questionnaires as $questionnaire) {
-          $questions = $questionnaire->getRealQuestions();
-          $rankingQuestions = [];
-          foreach ($questions as $question) {
-            if ($question->getInputType() === 'ranking') {
-              $rankingQuestions[] = $question;
+            $questions = $questionnaire->getRealQuestions();
+            $rankingQuestions = [];
+            foreach ($questions as $question) {
+                if ($question->getInputType() === 'ranking') {
+                    $rankingQuestions[] = $question;
+                }
             }
-          }
-          foreach ($rankingQuestions as $rakingQuestion) {
-            $questionChoices = $rakingQuestion->getQuestionChoices();
-            $choices = $questionChoices->map(function($choice) { return $choice->getTitle(); })->toArray();
-            $scores = array_combine($choices, array_map(function ($h) {
-                return 0;
-            }, $choices));
-            foreach ($rakingQuestion->getResponses() as $response) {
-              $score = count($response->getValue()['labels']);
-              foreach ($response->getValue()['labels'] as $label) {
-                $scores[$label] += $score;
-                $score--;
-              }
-            }
-            $results[] = [
+            foreach ($rankingQuestions as $rakingQuestion) {
+                $questionChoices = $rakingQuestion->getQuestionChoices();
+                $choices = $questionChoices->map(function ($choice) {
+                    return $choice->getTitle();
+                })->toArray();
+                $scores = array_combine($choices, array_map(function ($h) {
+                    return 0;
+                }, $choices));
+                foreach ($rakingQuestion->getResponses() as $response) {
+                    $score = count($response->getValue()['labels']);
+                    foreach ($response->getValue()['labels'] as $label) {
+                        $scores[$label] += $score;
+                        --$score;
+                    }
+                }
+                $results[] = [
               'questionnaire_id' => $questionnaire->getId(),
               'question_title' => $rakingQuestion->getTitle(),
               'scores' => $scores,
             ];
-          }
+            }
         }
 
         return $results;

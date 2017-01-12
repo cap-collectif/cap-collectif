@@ -154,18 +154,20 @@ fragment sourceInfos on Source {
         $generator = new GraphQLToCsv();
 
         foreach ($steps as $step) {
-            $requestString = $this->getContributionsGraphQLqueryByConsultationStep($step);
-            $fileName = $step->getProject()->getSlug().'_'.$step->getSlug().'.csv';
-            $writer = Writer::createFromPath('web/export/'.$fileName, 'w');
-            $writer->setDelimiter(',');
-            $writer->setNewline("\r\n");
-            $writer->setOutputBOM(Writer::BOM_UTF8);
-            $generator->generate(
-                $requestString,
-                $this->queryGraphQLToArray($requestString),
-                $writer
-            );
-            $output->writeln('The export file "'.$fileName.'" has been created.');
+            if ($step->getProject()) {
+                $requestString = $this->getContributionsGraphQLqueryByConsultationStep($step);
+                $fileName = $step->getProject()->getSlug().'_'.$step->getSlug().'.csv';
+                $writer = Writer::createFromPath('web/export/'.$fileName, 'w');
+                $writer->setDelimiter(',');
+                $writer->setNewline("\r\n");
+                $writer->setOutputBOM(Writer::BOM_UTF8);
+                $generator->generate(
+                  $requestString,
+                  $this->queryGraphQLToArray($requestString),
+                  $writer
+                );
+                $output->writeln('The export file "'.$fileName.'" has been created.');
+            }
         }
     }
 }
