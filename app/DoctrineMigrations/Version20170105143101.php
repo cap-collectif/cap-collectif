@@ -9,6 +9,6 @@ class Version20170105143101 extends IdToUuidMigration
 {
     public function postUp(Schema $schema)
     {
-        $this->migrate('arguments');
+        $this->migrate('argument');
     }
 }
