@@ -67,49 +67,53 @@ const ProposalVoteBox = React.createClass({
       <div className={className}>
         {
           !user && step.voteType !== VOTE_TYPE_BUDGET && step.open
-          && <div>
-            <p className="text-center small" style={{ fontWeight: 'bold' }}>
-              {this.getIntlMessage('proposal.vote.authenticated')}
-            </p>
-            <Row>
-              <Col xs={12} sm={6}>
-                <RegistrationButton
-                  className="btn-block"
-                  buttonStyle={{ margin: '0' }}
-                />
-              </Col>
-              <Col xs={12} sm={6}>
-                <LoginButton
-                  className="btn-darkest-gray btn-block btn--connection"
-                />
-              </Col>
-            </Row>
-            {
-              features.vote_without_account &&
-              <p className="excerpt p--lined">
-                <span>{this.getIntlMessage('global.or')}</span>
+            && <div>
+              <p className="text-center small" style={{ fontWeight: 'bold' }}>
+                {
+                  features.vote_without_account
+                  ? this.getIntlMessage('proposal.vote.authenticated')
+                  : 'Veuillez vous authentifier pour voter'
+                }
               </p>
-            }
-          </div>
+              <Row>
+                <Col xs={12} sm={6}>
+                  <RegistrationButton
+                    className="btn-block"
+                    buttonStyle={{ margin: '0' }}
+                  />
+                </Col>
+                <Col xs={12} sm={6}>
+                  <LoginButton
+                    className="btn-darkest-gray btn-block btn--connection"
+                  />
+                </Col>
+              </Row>
+              {
+                features.vote_without_account &&
+                  <p className="excerpt p--lined">
+                    <span>{this.getIntlMessage('global.or')}</span>
+                  </p>
+              }
+            </div>
         }
         {
           user
             ? <UserPreview
-            user={user}
-            style={{ padding: '0', marginBottom: '0', fontSize: '18px' }}
-          />
-            : features.vote_without_account &&
+              user={user}
+              style={{ padding: '0', marginBottom: '0', fontSize: '18px' }}
+              />
+          : features.vote_without_account &&
           <p className="text-center small" style={{ marginBottom: '0', fontWeight: 'bold' }}>
             {this.getIntlMessage('proposal.vote.non_authenticated')}
           </p>
         }
         <div className={formWrapperClassName}>
           {
-            this.displayForm() &&
-            <ProposalVoteForm
-              proposal={proposal}
-              step={step}
-            />
+            (user || features.vote_without_account) && this.displayForm() &&
+              <ProposalVoteForm
+                proposal={proposal}
+                step={step}
+              />
           }
           <ProposalVoteBoxMessage
             enoughCredits={this.userHasEnoughCredits()}
