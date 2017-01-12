@@ -1,5 +1,6 @@
 Capco\AppBundle\Entity\OpinionType:
     opinionType1:
+        id: '1'
         title: Le problème constaté
         position: 1
         color: red
@@ -10,6 +11,7 @@ Capco\AppBundle\Entity\OpinionType:
         votesThresholdHelpText: <text(200)>
         consultationStepType: '@typeAll'
     opinionType2:
+        id: '2'
         title: Les causes
         position: 2
         color: orange
@@ -17,6 +19,7 @@ Capco\AppBundle\Entity\OpinionType:
         isEnabled: true
         consultationStepType: '@typeAll'
     opinionType3:
+        id: '3'
         title: Les enjeux
         position: 3
         color: bluedark
@@ -25,6 +28,7 @@ Capco\AppBundle\Entity\OpinionType:
         sourceable: false
         consultationStepType: '@typeAll'
     opinionType4:
+        id: '4'
         title: Les solutions
         position: 4
         color: green
@@ -32,6 +36,7 @@ Capco\AppBundle\Entity\OpinionType:
         isEnabled: true
         consultationStepType: '@typeAll'
     opinionType5bis:
+        id: '5'
         title: Titre Ier
         subtitle: La circulation des données et du savoir
         position: 1
@@ -42,6 +47,7 @@ Capco\AppBundle\Entity\OpinionType:
         sourceable: false
         consultationStepType: '@typePJL'
     opinionType5ter:
+        id: '6'
         title: Chapitre Ier
         subtitle: Économie de la donnée
         position: 1
@@ -53,6 +59,7 @@ Capco\AppBundle\Entity\OpinionType:
         consultationStepType: '@typePJL'
         parent: '@opinionType5bis'
     opinionType5:
+        id: '7'
         title: Section 1
         subtitle: Ouverture des données publiques
         position: 1
@@ -67,6 +74,7 @@ Capco\AppBundle\Entity\OpinionType:
         parent: '@opinionType5ter'
         linkable: true
     opinionType6:
+        id: '8'
         title: Sous-partie 1
         position: 1
         color: orange
@@ -80,6 +88,7 @@ Capco\AppBundle\Entity\OpinionType:
         consultationStepType: '@typePJL'
         parent: '@opinionType5'
     opinionType7:
+        id: '9'
         title: Sous-partie 2
         position: 2
         color: red
@@ -93,6 +102,7 @@ Capco\AppBundle\Entity\OpinionType:
         consultationStepType: '@typePJL'
         parent: '@opinionType5'
     opinionType7bis:
+        id: '10'
         title: Sous-sous-partie 1
         position: 1
         color: red
@@ -105,6 +115,7 @@ Capco\AppBundle\Entity\OpinionType:
         consultationStepType: '@typePJL'
         parent: '@opinionType7'
     opinionType8:
+        id: '11'
         title: Le problème constaté
         position: 1
         color: red
@@ -115,6 +126,7 @@ Capco\AppBundle\Entity\OpinionType:
         votesThresholdHelpText: <text(200)>
         consultationStepType: '@typeDefault'
     opinionType9:
+        id: '12'
         title: Les causes
         position: 2
         color: orange
@@ -122,6 +134,7 @@ Capco\AppBundle\Entity\OpinionType:
         isEnabled: true
         consultationStepType: '@typeDefault'
     opinionType10:
+        id: '13'
         title: Les enjeux
         position: 3
         color: bluedark
@@ -130,6 +143,7 @@ Capco\AppBundle\Entity\OpinionType:
         sourceable: false
         consultationStepType: '@typeDefault'
     opinionType11:
+        id: '14'
         title: Le problème constaté
         position: 1
         color: red
@@ -140,6 +154,7 @@ Capco\AppBundle\Entity\OpinionType:
         votesThresholdHelpText: <text(200)>
         consultationStepType: '@typeSimple'
     opinionType12:
+        id: '15'
         title: Les causes
         position: 2
         color: orange
@@ -148,13 +163,15 @@ Capco\AppBundle\Entity\OpinionType:
         versionable: true
         consultationStepType: '@typeSimple'
     opinionType13:
+        id: '16'
         title: Les causes
         position: 2
         color: orange
         defaultFilter: votes
         isEnabled: true
         consultationStepType: '@typeCauses'
-    opinionType{14...24}:
+    opinionType{17...27}:
+        id: <current()>
         title: Test<current()>
         position: 2
         color: orange
