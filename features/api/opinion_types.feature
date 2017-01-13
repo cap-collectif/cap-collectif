@@ -6,7 +6,7 @@ Feature: Opinion Types Api
     Then the JSON response should match:
     """
     {
-      "id": 8,
+      "id": "8",
       "title": @string@,
       "voteWidgetType": @integer@,
       "commentSystem": @integer@,
@@ -16,7 +16,7 @@ Feature: Opinion Types Api
       "appendixTypes": @array@,
       "availableLinkTypes": [
         {
-          "id": @integer@,
+          "id": @string@,
           "title": @string@,
           "voteWidgetType": @integer@,
           "commentSystem": @integer@,

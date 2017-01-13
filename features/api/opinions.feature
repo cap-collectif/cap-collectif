@@ -22,7 +22,7 @@ Feature: Opinions
         "updated_at": "@string@.isDateTime()",
 
         "type": {
-          "id": @integer@,
+          "id": @string@,
           "title": @string@,
           "subtitle": @string@,
           "voteWidgetType": @integer@,
@@ -155,11 +155,11 @@ Feature: Opinions
       "body": "Mes modifications blablabla",
       "appendices": [
         {
-          "appendixType": 1,
+          "appendixType": "1",
           "body": "Voici mon exposé des motifs"
         },
         {
-          "appendixType": 2,
+          "appendixType": "2",
           "body": "Voici mon étude d'impact"
         }
       ]
@@ -177,7 +177,7 @@ Feature: Opinions
         "body": "Mes modifications blablabla",
         "appendices": [
           {
-            "appendixType": 3,
+            "appendixType": "3",
             "body": "Voici mon exposé des mensonges"
           }
         ]
@@ -206,7 +206,7 @@ Feature: Opinions
           "body": "Mes modifications blablabla",
           "appendices": [
             {
-              "appendixType": 666,
+              "appendixType": "666",
               "body": "Voici mon exposé qui n'existe pas"
             }
           ]
