@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\OpinionType:
     properties:
         id:
             expose: true
-            type: integer
+            type: string
             groups: [Opinions, OpinionVersions, OpinionTypeDetails]
         title:
             expose: true

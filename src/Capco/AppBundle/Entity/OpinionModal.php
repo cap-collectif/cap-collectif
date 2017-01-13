@@ -7,7 +7,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\AppBundle\Model\HasDiffInterface;
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * @ORM\Table(name="opinion_modals")
@@ -15,7 +15,7 @@ use Capco\AppBundle\Traits\IdTrait;
  */
 class OpinionModal implements HasDiffInterface
 {
-    use IdTrait;
+    use UuidTrait;
     use TimestampableTrait;
     use SluggableTitleTrait;
     use DiffableTrait;

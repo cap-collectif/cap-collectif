@@ -6,23 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
- * ConsultationStepType.
- *
  * @ORM\Table(name="consultation_step_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationStepTypeRepository")
  */
 class ConsultationStepType
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    use UuidTrait;
 
     /**
      * @var string

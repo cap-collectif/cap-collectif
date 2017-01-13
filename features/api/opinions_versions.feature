@@ -12,7 +12,7 @@ Feature: Opinions Versions
     {
       "versions": [
         {
-          "id": @integer@,
+          "id": @string@,
           "title": @string@,
           "slug": @string@,
 
@@ -81,7 +81,7 @@ Feature: Opinions Versions
     """
     {
       "version": {
-        "id": @integer@,
+        "id": @string@,
         "title": @string@,
         "body": @string@,
         "comment": @string@,
@@ -106,7 +106,7 @@ Feature: Opinions Versions
 
         "parent": {
           "isContribuable": @boolean@,
-          "id": @integer@,
+          "id": @string@,
           "body": @string@,
           "title": @string@,
           "type": {

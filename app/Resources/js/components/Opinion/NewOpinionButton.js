@@ -6,9 +6,9 @@ import OpinionCreateModal from './Create/OpinionCreateModal';
 const NewOpinionButton = React.createClass({
   propTypes: {
     opinionTypeSlug: PropTypes.string.isRequired,
-    opinionTypeId: PropTypes.number.isRequired,
+    opinionTypeId: PropTypes.string.isRequired,
     stepId: PropTypes.number.isRequired,
-    projectId: PropTypes.number.isRequired,
+    projectId: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
   },
   mixins: [IntlMixin],
@@ -31,23 +31,23 @@ const NewOpinionButton = React.createClass({
     const { label, opinionTypeSlug, opinionTypeId, projectId, stepId } = this.props;
     return (
       <span>
-      <LoginOverlay>
-        <a
-          id={`btn-add--${opinionTypeSlug}`}
-          onClick={this.openModal}
-          className="btn btn-primary"
-        >
-          <i className="cap cap-add-1" />
-          <span className="hidden-xs">{label}</span>
-        </a>
-      </LoginOverlay>
-      <OpinionCreateModal
-        opinionTypeId={opinionTypeId}
-        stepId={stepId}
-        projectId={projectId}
-        show={this.state.modal}
-        onClose={this.closeModal}
-      />
+        <LoginOverlay>
+          <a
+            id={`btn-add--${opinionTypeSlug}`}
+            onClick={this.openModal}
+            className="btn btn-primary"
+          >
+            <i className="cap cap-add-1" />
+            <span className="hidden-xs">{label}</span>
+          </a>
+        </LoginOverlay>
+        <OpinionCreateModal
+          opinionTypeId={opinionTypeId}
+          stepId={stepId}
+          projectId={projectId}
+          show={this.state.modal}
+          onClose={this.closeModal}
+        />
       </span>
     );
   },

@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\PositionableTrait;
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * @ORM\Table(name="opinion_type_appendix_type")
@@ -14,7 +14,7 @@ use Capco\AppBundle\Traits\IdTrait;
  */
 class OpinionTypeAppendixType
 {
-    use IdTrait;
+    use UuidTrait;
     use PositionableTrait;
 
     /**

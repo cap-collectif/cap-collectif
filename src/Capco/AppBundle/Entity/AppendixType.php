@@ -7,7 +7,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * @ORM\Table(name="appendix_type")
@@ -15,7 +15,7 @@ use Capco\AppBundle\Traits\IdTrait;
  */
 class AppendixType
 {
-    use IdTrait;
+    use UuidTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
 
