@@ -12,8 +12,8 @@ import Loader from '../Utils/Loader';
 
 const OpinionPage = React.createClass({
   propTypes: {
-    opinionId: React.PropTypes.number.isRequired,
-    versionId: React.PropTypes.number,
+    opinionId: React.PropTypes.string.isRequired,
+    versionId: React.PropTypes.string,
     fetchOpinionVotes: React.PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
