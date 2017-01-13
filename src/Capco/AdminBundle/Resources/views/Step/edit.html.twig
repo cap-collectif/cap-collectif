@@ -12,6 +12,15 @@
             const voteThresholdCheckbox = $("#{{ admin.uniqid }}_hasVoteThreshold");
             const voteThresholdField = $("#sonata-ba-field-container-{{ admin.uniqid }}_voteThreshold");
             const voteThresholdInput = $("#{{ admin.uniqid }}_voteThreshold");
+            const voteLimitField = $("#sonata-ba-field-container-{{ admin.uniqid }}_votesLimit");
+
+            function toggleVoteLimitField(show) {
+                if (show) {
+                    voteLimitField.removeClass('hidden');
+                } else {
+                    voteLimitField.addClass('hidden');
+                }
+            }
 
             function toggleVoteThresholdField(show) {
                 if (show) {
@@ -51,11 +60,13 @@
 
             const initialValue = voteTypeField.val();
             toggleVotesHelpTextField(initialValue === "1" || initialValue === "2");
+            toggleVoteLimitField(initialValue === "1" || initialValue === "2");
             toggleBudgetField(initialValue === "2");
             toggleVoteThresholdSection(initialValue === "1");
 
             voteTypeField.on('change', function (e) {
                 toggleVotesHelpTextField(e.target.value === "1" || e.target.value === "2");
+                toggleVoteLimitField(e.target.value === "1" || e.target.value === "2");
                 toggleBudgetField(e.target.value === "2");
                 toggleVoteThresholdSection(e.target.value === "1");
             });
