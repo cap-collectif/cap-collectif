@@ -53,18 +53,21 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:cap-collectif/id-to-uuid.git",
-                "reference": "a1b77c6cd28b895bd5c823ff3f4cc79eb958f134"
+                "reference": "20cdb5194994151bab1201c88a0a3c3a27d45930"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/id-to-uuid/zipball/a1b77c6cd28b895bd5c823ff3f4cc79eb958f134",
-                "reference": "a1b77c6cd28b895bd5c823ff3f4cc79eb958f134",
+                "url": "https://api.github.com/repos/cap-collectif/id-to-uuid/zipball/20cdb5194994151bab1201c88a0a3c3a27d45930",
+                "reference": "20cdb5194994151bab1201c88a0a3c3a27d45930",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "^2.5",
                 "doctrine/doctrine-migrations-bundle": "~1.1",
                 "doctrine/orm": "^2.5"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -86,7 +89,7 @@
                 "source": "https://github.com/cap-collectif/id-to-uuid/tree/master",
                 "issues": "https://github.com/cap-collectif/id-to-uuid/issues"
             },
-            "time": "2017-01-04 15:28:19"
+            "time": "2017-01-13 15:53:06"
         },
         {
             "name": "caxy/htmldiff-bundle",

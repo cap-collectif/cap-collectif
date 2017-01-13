@@ -77,7 +77,7 @@ Feature: Opinions
             "body": @string@,
             "type": {
               "title": @string@,
-              "id": @integer@
+              "id": @string@
             }
           },
           @...@
