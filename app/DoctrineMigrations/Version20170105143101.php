@@ -15,6 +15,7 @@ class Version20170105143101 extends IdToUuidMigration
         $this->migrate('opinion_type');
         $this->migrate('opinion_type_appendix_type');
         $this->migrate('opinion_modals');
+        $this->migrate('appendix_type');
         $this->migrate('opinion_appendices');
         $this->migrate('consultation_step_type');
     }
