@@ -16,10 +16,8 @@ class GraphQLToCsv
           $this->csvGenerator = new CsvWriter();
         }
 
-        echo "Getting headers";
         $fields = $this->infoResolver->queryStringToFields($requestString);
         $headers = $this->infoResolver->guessHeadersFromFields($fields);
-        echo "Done";
 
         $writer->insertOne($headers);
         $this->csvGenerator->setHeaders($headers);
@@ -29,7 +27,10 @@ class GraphQLToCsv
             foreach ($requestResult['data'][$fieldKey] as $currentData) {
                 $this->csvGenerator->writeNewRow($rows, $currentData, $fieldKey);
             }
-            $writer->insertAll($rows);
+            foreach ($rows as $row) {
+              $writer->insertOne($row);
+              usleep(100);
+            }
         }
     }
 }
