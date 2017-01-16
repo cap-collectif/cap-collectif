@@ -230,7 +230,7 @@ class SearchResolver
         if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses'] > 0) {
             $filters['selections.status.id'] = $providedFilters['selectionStatuses'];
         }
-        if (isset($providedFilters['districts']) && $this->validator->validate($providedFilters['districts'], new Uuid()) === 0) {
+        if (isset($providedFilters['districts']) && $this->validator->validate($providedFilters['districts'], new Uuid())->count() === 0) {
             $filters['district.id'] = $providedFilters['districts'];
         }
         if (array_key_exists('themes', $providedFilters) && $providedFilters['themes'] > 0) {

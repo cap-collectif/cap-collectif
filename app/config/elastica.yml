@@ -59,6 +59,7 @@ fos_elastica:
               properites:
                 id:
                   type: long
+                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\UserBundle\Entity\User
@@ -98,6 +99,8 @@ fos_elastica:
             groups: [Districts]
           _all: { enabled: false }
           mappings:
+            id:
+              index: not_analyzed
             name:
               index: not_analyzed
           persistence:
@@ -297,11 +300,13 @@ fos_elastica:
                   index: not_analyzed
                 id:
                   type: string
+                  index: not_analyzed
             status:
               type: object
               properties:
                 id:
                   type: long
+                  index: not_analyzed
                 name:
                   type: string
                   index: not_analyzed
@@ -310,6 +315,7 @@ fos_elastica:
               properties:
                 id:
                   type: long
+                  index: not_analyzed
                 name:
                   type: string
                   index: not_analyzed
@@ -318,11 +324,13 @@ fos_elastica:
               properties:
                 id:
                   type: long
+                  index: not_analyzed
             selections:
               type: object
               properties:
                 id:
                   type: long
+                  index: not_analyzed
             likers:
               type: object
               properties:
@@ -493,11 +501,13 @@ fos_elastica:
               properties:
                 id:
                   type: long
+                  index: not_analyzed
             selectionStep:
               type: object
               properties:
                 id:
                   type: long
+                  index: not_analyzed
           persistence:
             driver: orm
             model: Capco\AppBundle\Entity\Status
