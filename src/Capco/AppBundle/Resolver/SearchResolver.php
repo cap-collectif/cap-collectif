@@ -13,6 +13,7 @@ use Elastica\Query\FunctionScore;
 use Elastica\Query\AbstractQuery;
 use Elastica\Result;
 use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
+use Symfony\Component\Validator\Constraints\Uuid;
 
 class SearchResolver
 {
@@ -20,11 +21,13 @@ class SearchResolver
 
     protected $index;
     protected $transformer;
+    protected $validator;
 
-    public function __construct(Index $index, ElasticaToModelTransformerInterface $transformer)
+    public function __construct(Index $index, ElasticaToModelTransformerInterface $transformer, $validator)
     {
         $this->index = $index;
         $this->transformer = $transformer;
+        $this->validator = $validator;
     }
 
     /**
@@ -227,7 +230,7 @@ class SearchResolver
         if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses'] > 0) {
             $filters['selections.status.id'] = $providedFilters['selectionStatuses'];
         }
-        if (array_key_exists('districts', $providedFilters) && $providedFilters['districts'] != -1) {
+        if (isset($providedFilters['districts']) && $this->validator->validate($providedFilters['districts'], new Uuid()) === 0) {
             $filters['district.id'] = $providedFilters['districts'];
         }
         if (array_key_exists('themes', $providedFilters) && $providedFilters['themes'] > 0) {

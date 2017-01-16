@@ -29,7 +29,7 @@ services:
 
   capco.search.resolver:
     class: Capco\AppBundle\Resolver\SearchResolver
-    arguments: ['@fos_elastica.index', '@fos_elastica.elastica_to_model_transformer.collection.app']
+    arguments: ['@fos_elastica.index', '@fos_elastica.elastica_to_model_transformer.collection.app', '@validator']
 
   capco.section.resolver:
     class: Capco\AppBundle\Resolver\SectionResolver
