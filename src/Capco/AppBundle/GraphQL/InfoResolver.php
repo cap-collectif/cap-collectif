@@ -3,15 +3,19 @@
 namespace Capco\AppBundle\GraphQL;
 
 use GraphQL\Language\Parser;
-use GraphQL\Language\Source;
 
 class InfoResolver
 {
+    public $documentNode = null;
+
     public function queryStringToFields(string $requestString): array
     {
-        $documentNode = Parser::parse(new Source($requestString));
+        if ($this->documentNode === null) {
+          $this->documentNode = Parser::parse($requestString, ['noLocation' => true]);
+        }
+
         $fragments = [];
-        foreach ($documentNode->definitions as $definition) {
+        foreach ($this->documentNode->definitions as $definition) {
             if ($definition->kind === 'OperationDefinition') {
                 return $this->foldSelectionSet($definition->selectionSet, $fragments);
             }

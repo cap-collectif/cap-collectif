@@ -6,21 +6,28 @@ use League\Csv\Writer;
 
 class GraphQLToCsv
 {
+    public $infoResolver = null;
+    public $csvGenerator = null;
+
     public function generate(string $requestString, array $requestResult, Writer $writer)
     {
-        $infoResolver = new InfoResolver();
-        $csvGenerator = new CsvWriter();
+        if (!$this->infoResolver) {
+          $this->infoResolver = new InfoResolver();
+          $this->csvGenerator = new CsvWriter();
+        }
 
-        $fields = $infoResolver->queryStringToFields($requestString);
-        $headers = $infoResolver->guessHeadersFromFields($fields);
+        echo "Getting headers";
+        $fields = $this->infoResolver->queryStringToFields($requestString);
+        $headers = $this->infoResolver->guessHeadersFromFields($fields);
+        echo "Done";
 
         $writer->insertOne($headers);
-        $csvGenerator->setHeaders($headers);
+        $this->csvGenerator->setHeaders($headers);
 
         foreach ($fields as $fieldKey => $field) {
             $rows = [];
             foreach ($requestResult['data'][$fieldKey] as $currentData) {
-                $csvGenerator->writeNewRow($rows, $currentData, $fieldKey);
+                $this->csvGenerator->writeNewRow($rows, $currentData, $fieldKey);
             }
             $writer->insertAll($rows);
         }
