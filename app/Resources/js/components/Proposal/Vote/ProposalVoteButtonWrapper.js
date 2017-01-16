@@ -9,7 +9,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
     userHasVote: PropTypes.bool.isRequired,
-    step: PropTypes.object.isRequired,
+    step: PropTypes.object,
     id: PropTypes.string,
     creditsLeft: PropTypes.number,
     userVotesCount: PropTypes.number.isRequired,
@@ -39,6 +39,9 @@ export const ProposalVoteButtonWrapper = React.createClass({
 
   render() {
     const { id, user, step, proposal, style, className, userHasVote, userVotesCount } = this.props;
+    if (!step) {
+      return <div />;
+    }
     if (!user) {
       return (
           <ProposalVoteButton

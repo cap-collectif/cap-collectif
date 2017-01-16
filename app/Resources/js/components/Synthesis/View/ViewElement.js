@@ -244,11 +244,11 @@ const ViewElement = React.createClass({
         <div style={SynthesisDisplayRules.buildStyle(settings)}>
           {
             SynthesisDisplayRules.getValueForRule(settings, 'display', 'asProgressBar')
-              ? this.renderAsProgressBar()
+            ? this.renderAsProgressBar()
               : <p>
-                  {this.renderTitle()}
-                  {this.renderPercentage()}
-                </p>
+                {this.renderTitle()}
+                {this.renderPercentage()}
+              </p>
           }
           {this.renderSubtitle()}
         </div>
