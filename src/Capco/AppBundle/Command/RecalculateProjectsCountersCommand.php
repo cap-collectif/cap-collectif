@@ -32,7 +32,7 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
             $query = $em->createQuery('
               UPDATE CapcoAppBundle:Project p
               SET p.participantsCount = '.$participants.'
-              WHERE p.externalLink IS NULL AND p.id = '.$p->getId()
+              WHERE p.externalLink IS NULL AND p.id = \''.$p->getId().'\''
             );
             $query->execute();
         }
@@ -43,7 +43,7 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
             $query = $em->createQuery('
               UPDATE CapcoAppBundle:Project p
               SET p.contributionsCount = '.$contributions.'
-              WHERE p.externalLink IS NULL AND p.id = '.$p->getId()
+              WHERE p.externalLink IS NULL AND p.id = \''.$p->getId().'\''
             );
             $query->execute();
         }
@@ -54,7 +54,7 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
             $query = $em->createQuery('
               UPDATE CapcoAppBundle:Project p
               SET p.votesCount = '.$votes.'
-              WHERE p.externalLink IS NULL AND p.id = '.$p->getId()
+              WHERE p.externalLink IS NULL AND p.id = \''.$p->getId().'\''
             );
             $query->execute();
         }
