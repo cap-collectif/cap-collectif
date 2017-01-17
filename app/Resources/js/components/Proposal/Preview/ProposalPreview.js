@@ -56,12 +56,12 @@ const ProposalPreview = React.createClass({
             </div>
             {
               step.voteThreshold > 0 &&
-              <div style={{ marginTop: '20px' }}>
-                <ProposalVoteThresholdProgressBar
-                  proposal={proposal}
-                  step={step}
-                />
-              </div>
+                <div style={{ marginTop: '20px' }}>
+                  <ProposalVoteThresholdProgressBar
+                    proposal={proposal}
+                    step={step}
+                  />
+                </div>
             }
           </div>
           <ProposalPreviewFooter
