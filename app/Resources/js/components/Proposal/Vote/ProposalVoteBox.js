@@ -9,7 +9,6 @@ import ProposalVoteBoxMessage from './ProposalVoteBoxMessage';
 import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import RegistrationButton from '../../User/Registration/RegistrationButton';
 
-
 const ProposalVoteBox = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
@@ -50,7 +49,7 @@ const ProposalVoteBox = React.createClass({
       step,
       user,
     } = this.props;
-    return step.open && (step.voteType === VOTE_TYPE_SIMPLE || (user && this.userHasEnoughCredits()));
+    return step.voteType === VOTE_TYPE_SIMPLE || (user && this.userHasEnoughCredits());
   },
 
   render() {
