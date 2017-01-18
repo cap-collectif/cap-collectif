@@ -11,7 +11,7 @@ class InfoResolver
     public function queryStringToFields(string $requestString): array
     {
         if ($this->documentNode === null) {
-          $this->documentNode = Parser::parse($requestString, ['noLocation' => true]);
+            $this->documentNode = Parser::parse($requestString, ['noLocation' => true]);
         }
 
         $fragments = [];

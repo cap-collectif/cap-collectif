@@ -99,7 +99,7 @@ class CollectStepsController extends FOSRestController
                 ->countVotesByStepAndUser($collectStep, $user)
             ;
             if ($countUserVotes >= $collectStep->getVotesLimit()) {
-              throw new BadRequestHttpException('You have reached the limit of votes.');
+                throw new BadRequestHttpException('You have reached the limit of votes.');
             }
         }
 

@@ -72,10 +72,10 @@ class SelectionPage extends Page
     {
         $button = $this->getVoteButton($id);
         try {
-          $button->getParent()->getParent()->getParent()->getParent()->mouseOver();
-          $button->click();
-        } catch(\Exception $e) {
-          $button->getParent()->getParent()->getParent()->click();
+            $button->getParent()->getParent()->getParent()->getParent()->mouseOver();
+            $button->click();
+        } catch (\Exception $e) {
+            $button->getParent()->getParent()->getParent()->click();
         }
     }
 

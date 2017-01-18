@@ -76,10 +76,10 @@ class ProposalPage extends Page
     {
         $button = $this->getVoteButton();
         try {
-          $this->getVoteButton()->getParent()->getParent()->getParent()->mouseOver();
-          $button->click();
-        } catch(\Exception $e) {
-          $button->getParent()->getParent()->getParent()->click();
+            $this->getVoteButton()->getParent()->getParent()->getParent()->mouseOver();
+            $button->click();
+        } catch (\Exception $e) {
+            $button->getParent()->getParent()->getParent()->click();
         }
     }
 

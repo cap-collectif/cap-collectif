@@ -12,8 +12,8 @@ class GraphQLToCsv
     public function generate(string $requestString, array $requestResult, Writer $writer)
     {
         if (!$this->infoResolver) {
-          $this->infoResolver = new InfoResolver();
-          $this->csvGenerator = new CsvWriter();
+            $this->infoResolver = new InfoResolver();
+            $this->csvGenerator = new CsvWriter();
         }
 
         $fields = $this->infoResolver->queryStringToFields($requestString);
@@ -28,8 +28,8 @@ class GraphQLToCsv
                 $this->csvGenerator->writeNewRow($rows, $currentData, $fieldKey);
             }
             foreach ($rows as $row) {
-              $writer->insertOne($row);
-              usleep(100);
+                $writer->insertOne($row);
+                usleep(100);
             }
         }
     }

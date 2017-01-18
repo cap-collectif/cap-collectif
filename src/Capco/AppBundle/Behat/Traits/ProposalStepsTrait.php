@@ -857,8 +857,9 @@ trait ProposalStepsTrait
         // useless click to scroll the page
         $this->getSession()->getDriver()->click($button->getParent()->getParent()->getParent()->getParent()->getXpath());
         try {
-          $this->getSession()->getDriver()->click($button->getParent()->getXpath());
-        } catch (\Exception $e) {}
+            $this->getSession()->getDriver()->click($button->getParent()->getXpath());
+        } catch (\Exception $e) {
+        }
         $this->iWait(1);
         $this->assertPageContainsText('Vous avez atteint la limite du budget.');
     }

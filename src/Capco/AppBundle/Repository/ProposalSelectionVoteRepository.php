@@ -44,7 +44,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
 
     public function countVotesByStepAndUser(SelectionStep $step, User $user): int
     {
-      return $this->createQueryBuilder('pv')
+        return $this->createQueryBuilder('pv')
           ->select('COUNT(pv.id)')
           ->andWhere('pv.selectionStep = :selectionStep')
           ->andWhere('pv.user = :user')
