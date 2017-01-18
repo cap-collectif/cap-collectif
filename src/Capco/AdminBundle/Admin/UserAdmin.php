@@ -96,6 +96,7 @@ class UserAdmin extends BaseAdmin
     {
         $showMapper
             ->with('General')
+            ->add('id')
             ->add('username')
             ->add('email')
             ->add('createdAt')

@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import { MenuItem, DropdownButton, Modal } from 'react-bootstrap';
 
 const ShareButtonDropdown = React.createClass({
   propTypes: {
     id: PropTypes.string,
+    enabled: PropTypes.bool.isRequired,
     title: PropTypes.string,
     url: PropTypes.string.isRequired,
     className: PropTypes.string,
@@ -102,7 +104,10 @@ const ShareButtonDropdown = React.createClass({
   },
 
   render() {
-    const { style, id, bsStyle, className, title, url } = this.props;
+    const { enabled, style, id, bsStyle, className, title, url } = this.props;
+    if (!enabled) {
+      return <div />;
+    }
     return (
       <div className="share-button-dropdown">
         <DropdownButton
@@ -137,4 +142,8 @@ const ShareButtonDropdown = React.createClass({
 
 });
 
-export default ShareButtonDropdown;
+const mapStateToProps = state => ({
+  enabled: state.default.features.share_buttons,
+});
+
+export default connect(mapStateToProps)(ShareButtonDropdown);
