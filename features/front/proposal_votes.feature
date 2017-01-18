@@ -65,7 +65,7 @@ Feature: Proposal votes
   Scenario: Anonymous user wants to vote on a selection step that has budget vote in a selection step
     Given I go to a selection step with budget vote enabled
     When I click the proposal vote button
-    Then I should see "Voter avec mon compte"
+    Then I should see "Veuillez vous authentifier pour voter"
 
   @javascript @security @elasticsearch @votes_from_selection_step
   Scenario: Anonymous user wants to vote on a selection step that is not open yet

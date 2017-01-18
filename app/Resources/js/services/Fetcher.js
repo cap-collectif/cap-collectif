@@ -8,7 +8,7 @@ const status = (response: Object): Object | Error => {
     return response;
   }
   return response.json().then((res) => {
-    const error = new Error(response.statusText);
+    const error : Object = new Error(response.statusText);
     error.response = res;
     throw error;
   });
@@ -16,8 +16,8 @@ const status = (response: Object): Object | Error => {
 
 export const json = (response: ?Object) => response ? response.json() : {};
 
-const createHeaders = (): {[key: string]: string} => {
-  const headers = {
+const createHeaders = (): {[string]: string} => {
+  const headers : {[string]: string} = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
@@ -49,7 +49,7 @@ const addAuthorization = (req) => {
 
 class Fetcher {
 
-  get(uri: string): Promise {
+  get(uri: string): Promise<*> {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {
@@ -63,7 +63,7 @@ class Fetcher {
     ;
   }
 
-  postFormData(uri: string, body: string): Promise {
+  postFormData(uri: string, body: string): Promise<*> {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {

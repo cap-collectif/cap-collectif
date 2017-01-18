@@ -4,7 +4,7 @@ import { IntlMixin, FormattedMessage } from 'react-intl';
 
 const SelectionStepPageHeader = React.createClass({
   propTypes: {
-    queryCount: PropTypes.number.isRequired,
+    queryCount: PropTypes.number,
     total: PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
@@ -14,7 +14,7 @@ const SelectionStepPageHeader = React.createClass({
     return (
       <h3 className="h3" style={{ marginBottom: '15px' }}>
         {
-          queryCount !== null && total !== queryCount
+          typeof queryCount !== 'undefined' && total !== queryCount
             ? <FormattedMessage
               message={this.getIntlMessage('proposal.count_with_total')}
               num={queryCount}

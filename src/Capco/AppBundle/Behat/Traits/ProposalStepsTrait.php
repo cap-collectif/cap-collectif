@@ -792,7 +792,7 @@ trait ProposalStepsTrait
     public function iSubmitTheProposalVoteForm()
     {
         $page = $this->getCurrentPage()->submitProposalVoteForm();
-        $this->iWait(4);
+        $this->iWait(8); // We wait for alert to disappear
     }
 
     /**

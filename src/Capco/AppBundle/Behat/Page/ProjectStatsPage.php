@@ -12,15 +12,15 @@ class ProjectStatsPage extends Page
     protected $path = '/projects/{projectSlug}/stats';
 
     public $elements = [
-        'theme stats items' => '#stats-24-themes .stats__list__row',
-        'district stats items' => '#stats-24-districts .stats__list__row',
-        'district stats modal items' => '#stats-modal-24-districts .stats__list__row',
-        'district stats show more button' => '#stats-24-districts .stats__all-button',
-        'user type stats items' => '#stats-24-userTypes .stats__list__row',
-        'costs stats items' => '#stats-24-costs .stats__list__row',
-        'votes stats items' => '#stats-9-votes .stats__list__row',
-        'theme filter select' => '#stats-9-votes #stats-filter-themes',
-        'district filter select' => '#stats-9-votes #stats-filter-districts',
+        'theme stats items' => '#stats-61-themes .stats__list__row',
+        'district stats items' => '#stats-61-districts .stats__list__row',
+        'district stats modal items' => '#stats-modal-61-districts .stats__list__row',
+        'district stats show more button' => '#stats-61-districts .stats__all-button',
+        'user type stats items' => '#stats-61-userTypes .stats__list__row',
+        'costs stats items' => '#stats-61-costs .stats__list__row',
+        'votes stats items' => '#stats-71-votes .stats__list__row',
+        'theme filter select' => '#stats-71-votes #stats-filter-themes',
+        'district filter select' => '#stats-71-votes #stats-filter-districts',
     ];
 
     public function getThemeStatsItemsSelector()
