@@ -98,7 +98,7 @@ type Dispatch = ReduxDispatch<Action>;
 const initialState: State = {
   currentProposalId: null,
   proposalShowedId: [],
-  queryCount: null,
+  queryCount: undefined,
   creditsLeftByStepId: {},
   proposalsById: {},
   userVotesByStepId: {},
