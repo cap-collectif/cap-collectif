@@ -181,7 +181,8 @@ Feature: Ideas
 
   @javascript @database
   Scenario: Anonymous user wants to share an idea
-    Given I go to an idea with votes
+    Given feature "share_buttons" is enabled
+    And I go to an idea with votes
     When I click the share idea button
     Then I should see the share dropdown
     And I click the share link button

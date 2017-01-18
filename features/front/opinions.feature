@@ -121,7 +121,8 @@ Feature: Opinions
 
   @javascript
   Scenario: Anonymous user wants to share an opinion
-    Given I go to an opinion with versions
+    Given feature "share_buttons" is enabled
+    And I go to an opinion with versions
     When I click the share opinion button
     Then I should see the opinion share dropdown
     And I click the opinion share link button

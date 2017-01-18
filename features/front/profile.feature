@@ -54,4 +54,4 @@ Feature: Profil
       | fos_user_change_password_form_new_first        | toto12345   |
       | fos_user_change_password_form_new_second       | toto12345   |
     And I press "Enregistrer les modifications"
-    Then I should see "Votre mot de passe a bien été modifié."
+    Then I should see "Votre mot de passe a bien été configuré"

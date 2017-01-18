@@ -47,4 +47,4 @@ Feature: Login
     And I press "Confirmer"
     Then I should be redirected to "/profile/"
     Then I can see I am logged in as "admin_without_password"
-    And I should see "Votre mot de passe a bien été modifié."
+    And I should see "Votre mot de passe a bien été configuré"
