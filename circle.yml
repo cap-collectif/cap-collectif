@@ -1,5 +1,7 @@
 machine:
     pre:
+        - sudo curl -L -o /usr/bin/docker 'https://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.1-circleci'
+        - sudo chmod 0755 /usr/bin/docker
         - sudo pip install --upgrade pip
         - sudo pip install docker-compose==1.8.1 Fabric==1.12.0
     services:
@@ -8,13 +10,12 @@ machine:
 dependencies:
     cache_directories:
         - ~/docker
-        - bower_components
+        - ~/.composer
+        - ~/.yarn-cache
         - node_modules
         - vendor
-        - ~/.composer
-        - ~/.bower
+
     override:
-        - mkdir -p $CIRCLE_TEST_REPORTS/junit/
         - fab testing.circle.fix_environment_variables_with_lxc
         - fab testing.circle.clean_cache
         - fab testing.circle.load_cache
@@ -24,6 +25,9 @@ dependencies:
         - fab testing.qa.save_fixtures_image
 
 test:
+    pre:
+      - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+
     override:
         - fab testing.qa.phpspec
         - fab testing.qa.jest
