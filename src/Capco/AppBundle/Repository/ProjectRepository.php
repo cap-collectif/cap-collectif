@@ -19,9 +19,6 @@ class ProjectRepository extends EntityRepository
      * Get one by slug.
      *
      * @param $slug
-     *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getOne($slug)
