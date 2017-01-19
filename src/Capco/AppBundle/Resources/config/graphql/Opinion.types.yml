@@ -69,7 +69,7 @@ Opinion:
                         type: "Int"
                 resolve: "@=resolver('proposition_votes', [value, args])"
             id:
-                type: "Int!"
+                type: "String!"
                 description: "The content of the contribution."
             title:
                 type: "String!"
