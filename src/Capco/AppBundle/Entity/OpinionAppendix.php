@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * @ORM\Table(name="opinion_appendices")
@@ -13,7 +13,7 @@ use Capco\AppBundle\Traits\IdTrait;
  */
 class OpinionAppendix
 {
-    use IdTrait;
+    use UuidTrait;
     use TimestampableTrait;
 
     /**
