@@ -46,7 +46,7 @@ class ArgumentVoteRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getAllByArgument($argumentId, $asArray = false)
+    public function getAllByArgument(string $argumentId, $asArray = false)
     {
         $qb = $this->getQueryBuilder()
             ->addSelect('u', 'ut')

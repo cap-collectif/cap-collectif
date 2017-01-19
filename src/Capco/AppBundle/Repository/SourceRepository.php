@@ -38,7 +38,7 @@ class SourceRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getAllByOpinion($opinionId, $asArray = false)
+    public function getAllByOpinion(string $opinionId, $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'ut', 'cat', 'media')
@@ -60,7 +60,7 @@ class SourceRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getAllByVersion($versionId, $asArray = false)
+    public function getAllByVersion(string $versionId, $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'ut', 'cat', 'media')
@@ -75,7 +75,7 @@ class SourceRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
-    public function getArrayById($id)
+    public function getArrayById(string $id)
     {
         $qb = $this->createQueryBuilder('s')
             ->select('s.id', 's.title', 's.createdAt', 's.updatedAt', 'a.username as author', 's.isEnabled as published', 's.isTrashed as trashed', 's.body as body')
@@ -160,7 +160,7 @@ class SourceRepository extends EntityRepository
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOneBySlug($source)
+    public function getOneBySlug(string $slug)
     {
         return $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 'v', 'o', 'cat', 'media')
@@ -170,8 +170,8 @@ class SourceRepository extends EntityRepository
             ->leftJoin('a.Media', 'm')
             ->leftJoin('s.votes', 'v')
             ->leftJoin('s.Opinion', 'o')
-            ->andWhere('s.slug = :source')
-            ->setParameter('source', $source)
+            ->andWhere('s.slug = :slug')
+            ->setParameter('slug', $slug)
 
             ->getQuery()
             ->getOneOrNullResult();

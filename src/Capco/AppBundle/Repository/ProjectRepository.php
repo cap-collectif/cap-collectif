@@ -24,7 +24,7 @@ class ProjectRepository extends EntityRepository
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOne($slug)
+    public function getOne(string string $slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('t', 'pas', 's', 'pov')
@@ -75,7 +75,7 @@ class ProjectRepository extends EntityRepository
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOneBySlugWithStepsAndEventsAndPosts($slug)
+    public function getOneBySlugWithStepsAndEventsAndPosts(string $slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('t', 'pas', 's', 'pov', 'pst', 'e')

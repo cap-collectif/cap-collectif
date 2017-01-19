@@ -22,7 +22,7 @@ class OpinionVersionRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getOne($id)
+    public function getOne(string $id)
     {
         $qb = $this->getIsEnabledQueryBuilder('o')
             ->addSelect('a', 'm', 'argument', 'source')
@@ -55,7 +55,7 @@ class OpinionVersionRepository extends EntityRepository
         ;
     }
 
-    public function getArrayById($id)
+    public function getArrayById(string $id)
     {
         $qb = $this->createQueryBuilder('o')
             ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.enabled as published', 'o.isTrashed as trashed', 'CONCAT(CONCAT(o.comment, \'<hr>\'), o.body) as body', 'c.title as project')
@@ -285,7 +285,7 @@ class OpinionVersionRepository extends EntityRepository
         ;
     }
 
-    public function getWithVotes($id, $limit = null)
+    public function getWithVotes(string $id, $limit = null)
     {
         $qb = $this->getIsEnabledQueryBuilder('o')
             ->addSelect('vote')

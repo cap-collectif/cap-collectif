@@ -33,7 +33,7 @@ class ArgumentRepository extends EntityRepository
         ;
     }
 
-    public function getArrayById($id)
+    public function getArrayById(string $id)
     {
         $qb = $this->createQueryBuilder('a')
             ->select('a.id', 'a.createdAt', 'a.updatedAt', 'aut.username as author', 'a.isEnabled as published', 'a.isTrashed as trashed', 'a.body as body', 'c.title as project')
@@ -195,7 +195,7 @@ class ArgumentRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getAllByOpinion($opinionId, $asArray = false)
+    public function getAllByOpinion(string $opinionId, $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'ut')
@@ -215,7 +215,7 @@ class ArgumentRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getAllByVersion($versionId, $asArray = false)
+    public function getAllByVersion(string $versionId, $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'ut')

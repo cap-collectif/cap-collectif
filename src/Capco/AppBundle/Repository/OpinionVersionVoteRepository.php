@@ -35,7 +35,7 @@ class OpinionVersionVoteRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
-    public function getByVersion(int $versionId, bool $asArray = false, int $limit = -1, int $offset = 0)
+    public function getByVersion(string $versionId, bool $asArray = false, int $limit = -1, int $offset = 0)
     {
         $qb = $this->getQueryBuilder();
 

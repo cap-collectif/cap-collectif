@@ -33,7 +33,7 @@ class OpinionVoteRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getByOpinion(int $opinionId, bool $asArray = false, int $limit = -1, int $offset = 0)
+    public function getByOpinion(string $opinionId, bool $asArray = false, int $limit = -1, int $offset = 0)
     {
         $qb = $this->getQueryBuilder();
 

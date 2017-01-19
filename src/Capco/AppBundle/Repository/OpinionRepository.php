@@ -30,7 +30,7 @@ class OpinionRepository extends EntityRepository
         ;
     }
 
-    public function getArrayById($id)
+    public function getArrayById(string $id)
     {
         $qb = $this->createQueryBuilder('o')
             ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.isEnabled as published', 'o.isTrashed as trashed', 'o.body as body', 'c.title as project')
@@ -65,7 +65,7 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getWithArguments($id)
+    public function getWithArguments(string $id)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('argument')
@@ -77,7 +77,7 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getWithSources($id)
+    public function getWithSources(string $id)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('source')
@@ -89,7 +89,7 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getWithVotes($id, $limit = null)
+    public function getWithVotes(string $id, $limit = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('vote')

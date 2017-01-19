@@ -18,7 +18,7 @@ class OpinionTypeAppendixTypeRepository extends EntityRepository
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getAppendixTypesByOpinionTypes($id)
+    public function getAppendixTypesByOpinionTypes(string $id)
     {
         $qb = $this->createQueryBuilder('otat')
             ->select('otat.id', 'at.id', 'at.title')
