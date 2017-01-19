@@ -7,22 +7,23 @@ import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../../services/Fetcher';
 
 export type VoteValue = -1 | 0 | 1;
-type Opinion = { id: number };
+type Uuid = string;
+type Opinion = { id: Uuid };
 type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
 type Action =
-    { type: 'opinion/OPINION_VOTE_SUCCEEDED', opinionId: number, vote: OpinionVote }
-  | { type: 'opinion/VERSION_VOTE_SUCCEEDED', versionId: number, vote: OpinionVote }
-  | { type: 'opinion/DELETE_OPINION_VOTE_SUCCEEDED', opinionId: number, vote: OpinionVote }
-  | { type: 'opinion/DELETE_VERSION_VOTE_SUCCEEDED', versionId: number, vote: OpinionVote }
-  | { type: 'opinion/OPINION_VOTES_FETCH_SUCCEEDED', votes: OpinionVotes, opinionId: number }
+    { type: 'opinion/OPINION_VOTE_SUCCEEDED', opinionId: Uuid, vote: OpinionVote }
+  | { type: 'opinion/VERSION_VOTE_SUCCEEDED', versionId: Uuid, vote: OpinionVote }
+  | { type: 'opinion/DELETE_OPINION_VOTE_SUCCEEDED', opinionId: Uuid, vote: OpinionVote }
+  | { type: 'opinion/DELETE_VERSION_VOTE_SUCCEEDED', versionId: Uuid, vote: OpinionVote }
+  | { type: 'opinion/OPINION_VOTES_FETCH_SUCCEEDED', votes: OpinionVotes, opinionId: Uuid }
   | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: any }
 ;
-type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: number, versionId: ?number };
-type ContributionMap = {[id: number]: {votes: OpinionVotes, votesCount: number}};
+type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: Uuid, versionId: ?Uuid };
+type ContributionMap = {[id: Uuid]: {votes: OpinionVotes, votesCount: number}};
 type State = {
-  currentOpinionId: ?number,
-  currentVersionId: ?number,
+  currentOpinionId: ?Uuid,
+  currentVersionId: ?Uuid,
   opinionsById: ContributionMap,
   versionsById: ContributionMap
 };
@@ -68,37 +69,37 @@ export function* saga(): Generator<*, *, *> {
   yield* takeEvery(OPINION_VOTES_FETCH_REQUESTED, fetchAllOpinionVotes);
 }
 
-export const fetchOpinionVotes = (opinionId: number, versionId: number): FetchOpinionVotesAction => ({
+export const fetchOpinionVotes = (opinionId: Uuid, versionId: Uuid): FetchOpinionVotesAction => ({
   type: OPINION_VOTES_FETCH_REQUESTED,
   opinionId,
   versionId,
 });
 
-export const versionVoteSuccess = (versionId: number, vote: OpinionVote): Action => ({
+export const versionVoteSuccess = (versionId: Uuid, vote: OpinionVote): Action => ({
   type: VERSION_VOTE_SUCCEEDED,
   versionId,
   vote,
 });
 
-export const opinionVoteSuccess = (opinionId: number, vote: OpinionVote): Action => ({
+export const opinionVoteSuccess = (opinionId: Uuid, vote: OpinionVote): Action => ({
   type: OPINION_VOTE_SUCCEEDED,
   opinionId,
   vote,
 });
 
-export const deleteOpinionVoteSuccess = (opinionId: number, vote: OpinionVote): Action => ({
+export const deleteOpinionVoteSuccess = (opinionId: Uuid, vote: OpinionVote): Action => ({
   type: DELETE_OPINION_VOTE_SUCCEEDED,
   opinionId,
   vote,
 });
 
-export const deleteVersionVoteSuccess = (versionId: number, vote: OpinionVote): Action => ({
+export const deleteVersionVoteSuccess = (versionId: Uuid, vote: OpinionVote): Action => ({
   type: DELETE_VERSION_VOTE_SUCCEEDED,
   versionId,
   vote,
 });
 
-const deleteVote = (opinion: number, parent: ?number, dispatch: Dispatch): void => {
+const deleteVote = (opinion: Uuid, parent: ?Uuid, dispatch: Dispatch): void => {
   const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
   Fetcher
     .delete(url)
@@ -123,7 +124,7 @@ const deleteVote = (opinion: number, parent: ?number, dispatch: Dispatch): void 
     });
 };
 
-const vote = (value: VoteValue, opinion: number, parent: ?number, dispatch: Dispatch): void => {
+const vote = (value: VoteValue, opinion: Uuid, parent: ?Uuid, dispatch: Dispatch): void => {
   const url = parent ? `/opinions/${parent}/versions/${opinion}/votes` : `/opinions/${opinion}/votes`;
   Fetcher
     .put(url, { value })
@@ -148,19 +149,19 @@ const vote = (value: VoteValue, opinion: number, parent: ?number, dispatch: Disp
     });
 };
 
-export const deleteVoteOpinion = (opinion: number, dispatch: Dispatch): void => (
+export const deleteVoteOpinion = (opinion: Uuid, dispatch: Dispatch): void => (
   deleteVote(opinion, null, dispatch))
 ;
 
-export const deleteVoteVersion = (version: number, opinion: number, dispatch: Dispatch): void => (
+export const deleteVoteVersion = (version: Uuid, opinion: Uuid, dispatch: Dispatch): void => (
   deleteVote(version, opinion, dispatch)
 );
 
-export const voteOpinion = (value: VoteValue, opinion: number, dispatch: Dispatch): void => (
+export const voteOpinion = (value: VoteValue, opinion: Uuid, dispatch: Dispatch): void => (
   vote(value, opinion, null, dispatch)
 );
 
-export const voteVersion = (value: VoteValue, version: number, opinion: number, dispatch: Dispatch): void => (
+export const voteVersion = (value: VoteValue, version: Uuid, opinion: Uuid, dispatch: Dispatch): void => (
   vote(value, version, opinion, dispatch)
 );
 
