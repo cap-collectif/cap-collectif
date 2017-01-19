@@ -24,7 +24,7 @@ class ProjectRepository extends EntityRepository
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOne(string $slug)
+    public function getOne($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('t', 'pas', 's', 'pov')
