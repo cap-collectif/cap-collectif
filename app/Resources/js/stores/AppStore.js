@@ -12,6 +12,10 @@ export default function configureStore(initialState) {
   if (initialState.default.user === null) {
     LocalStorageService.remove('jwt');
   }
+  if (initialState.project && initialState.proposal && initialState.project.currentProjectStepById && LocalStorageService.isValid('proposal.filtersByStep')) {
+    const filtersByStep = LocalStorageService.get('proposal.filtersByStep') || {};
+    initialState.proposal.filters = filtersByStep[initialState.project.currentProjectStepById];
+  }
 
   const sagaMiddleware = createSagaMiddleware();
 

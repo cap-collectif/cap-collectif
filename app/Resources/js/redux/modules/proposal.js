@@ -4,6 +4,7 @@ import { takeEvery } from 'redux-saga';
 import { select, call, put } from 'redux-saga/effects';
 import flatten from 'flat';
 import { SubmissionError } from 'redux-form';
+import LocalStorageService from '../../services/LocalStorageService';
 import Fetcher, { json } from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
@@ -56,9 +57,12 @@ const SEND_PROPOSAL_NOTIFICATION_SUCCEED = 'proposal/SEND_PROPOSAL_NOTIFICATION_
 const SEND_PROPOSAL_NOTIFICATION_ERROR = 'proposal/SEND_SELECTION_NOTIFICATION_ERROR';
 
 type Status = { id: number };
+type ChangeFilterAction = { type: 'proposal/CHANGE_FILTER', filter: string, value: string };
+
 type Action =
     { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId: number, stepId: number }
   | { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error: string }
+  | ChangeFilterAction
   | Object
 ;
 // type Step = {
@@ -162,7 +166,7 @@ export const changeTerm = (terms: string): Action => ({
   type: CHANGE_TERMS,
   terms,
 });
-export const changeFilter = (filter: string, value: string): Action => ({
+export const changeFilter = (filter: string, value: string): ChangeFilterAction => ({
   type: CHANGE_FILTER,
   filter,
   value,
@@ -409,6 +413,7 @@ export function* fetchVotesByStep(action: Action): Generator<*, *, *> {
 
 function* submitFusionFormData(action: Action): Generator<*, *, *> {
   const { proposalForm } = action;
+  // $FlowFixMe
   const globalState = yield select();
   const formData = new FormData();
   const data = { ...globalState.form.proposal.values };
@@ -435,6 +440,7 @@ function* submitFusionFormData(action: Action): Generator<*, *, *> {
 
 export function* fetchProposals(action: Object): Generator<*, *, *> {
   let { step } = action;
+  // $FlowFixMe
   const globalState = yield select();
   step = step || globalState.project.projects[globalState.project.currentProjectById].steps.filter(s => s.id === globalState.project.currentProjectStepById)[0];
   const state = globalState.proposal;
@@ -482,6 +488,16 @@ export function* fetchSelections(action: Object): Generator<*, *, *> {
   }
 }
 
+export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generator<*, *, *> {
+  const { filter, value } = action;
+  // $FlowFixMe
+  const state = yield select();
+  const filters = { ...state.proposal.filters, [filter]: value };
+  const filtersByStep = LocalStorageService.get('proposal.filtersByStep') || {};
+  filtersByStep[state.project.currentProjectStepById] = filters;
+  LocalStorageService.set('proposal.filtersByStep', filtersByStep);
+}
+
 export function* saga(): Generator<*, *, *> {
   yield [
     takeEvery(POSTS_FETCH_REQUESTED, fetchPosts),
@@ -489,6 +505,7 @@ export function* saga(): Generator<*, *, *> {
     takeEvery(FETCH_REQUESTED, fetchProposals),
     takeEvery(SUBMIT_FUSION_FORM, submitFusionFormData),
     takeEvery(LOAD_SELECTIONS_REQUEST, fetchSelections),
+    takeEvery(CHANGE_FILTER, storeFiltersInLocalStorage),
   ];
 }
 

@@ -117,4 +117,14 @@ class ProjectsController extends FOSRestController
             'data' => $data,
         ];
     }
+
+    /**
+     * @Get("/projects/{projectId}")
+     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
+     * @View(serializerGroups={"Projects", "Default"})
+     */
+    public function getProjectAction(Project $project)
+    {
+        return $project;
+    }
 }
