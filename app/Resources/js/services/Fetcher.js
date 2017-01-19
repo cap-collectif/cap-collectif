@@ -63,7 +63,7 @@ class Fetcher {
     ;
   }
 
-  postFormData(uri: string, body: string): Promise<*> {
+  postFormData(uri: string, body: FormData): Promise<*> {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {
@@ -77,7 +77,7 @@ class Fetcher {
     ;
   }
 
-  post(uri: string, body: Object) {
+  post(uri: string, body: ?Object = {}) {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {

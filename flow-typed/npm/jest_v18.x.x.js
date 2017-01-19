@@ -1,5 +1,5 @@
-// flow-typed signature: 1727ed769886e0c8275ecf191d324212
-// flow-typed version: cc8af4672f/jest_v18.x.x/flow_>=v0.33.x
+// flow-typed signature: e49570b0f5e396c7206dda452bd6f004
+// flow-typed version: 1590d813f4/jest_v18.x.x/flow_>=v0.33.x
 
 type JestMockFn = {
   (...args: Array<any>): any,
@@ -190,6 +190,11 @@ type JestExpectType = {
    */
   toHaveBeenCalledWith(...args: Array<any>): void,
   /**
+   * Check that an object has a .length property and it is set to a certain
+   * numeric value.
+   */
+  toHaveLength(number: number): void,
+  /**
    *
    */
   toHaveProperty(propPath: string, value?: any): void,
@@ -377,6 +382,13 @@ declare var it: {
    * @param {Function} Test
    */
   skip(name: string, fn?: Function): ?Promise<void>,
+  /**
+   * Run the test concurrently
+   *
+   * @param {string} Name of Test
+   * @param {Function} Test
+   */
+  concurrent(name: string, fn?: Function): ?Promise<void>,
 };
 declare function fit(name: string, fn: Function): ?Promise<void>;
 /** An individual test unit */
@@ -422,6 +434,7 @@ declare var jasmine: {
   arrayContaining(value: Array<mixed>): void,
   clock(): JestClockType,
   createSpy(name: string): JestSpyType,
+  createSpyObj(baseName: string, methodNames: Array<string>): {[methodName: string]: JestSpyType},
   objectContaining(value: Object): void,
   stringMatching(value: string): void,
 }

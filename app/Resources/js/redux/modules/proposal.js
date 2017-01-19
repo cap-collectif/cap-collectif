@@ -73,7 +73,7 @@ type State = {
   creditsLeftByStepId: Object,
   proposalsById: ProposalMap,
   userVotesByStepId: Object,
-  currentVotesModal: ?number,
+  currentVotesModal: ?Object,
   currentVoteModal: ?number,
   currentDeletingVote: ?number,
   showCreateModal: boolean,
@@ -128,7 +128,7 @@ export const loadSelectionsSucess = (proposalId: number): Action => ({ type: LOA
 export const closeCreateFusionModal = (): Action => ({ type: CLOSE_CREATE_FUSION_MODAL });
 export const openCreateFusionModal = (): Action => ({ type: OPEN_CREATE_FUSION_MODAL });
 export const submitFusionForm = (proposalForm: Object): Action => ({ type: SUBMIT_FUSION_FORM, proposalForm });
-export const cancelSubmitFusionForm = (proposalForm: Object): Action => ({ type: CANCEL_SUBMIT_FUSION_FORM, proposalForm });
+export const cancelSubmitFusionForm = (): Action => ({ type: CANCEL_SUBMIT_FUSION_FORM });
 export const openVotesModal = (stepId: number): Action => ({ type: OPEN_VOTES_MODAL, stepId });
 export const closeVotesModal = (stepId: number): Action => ({ type: CLOSE_VOTES_MODAL, stepId });
 export const voteSuccess = (proposalId: number, stepId: number, vote: Object, comment: Object): Action => ({
@@ -167,7 +167,7 @@ export const changeFilter = (filter: string, value: string): Action => ({
   filter,
   value,
 });
-export const loadProposals = (step: number): Action => ({ type: FETCH_REQUESTED, step });
+export const loadProposals = (step: ?number): Action => ({ type: FETCH_REQUESTED, step });
 
 export const deleteProposal = (form: number, proposal: Object, dispatch: Dispatch): void => {
   dispatch({ type: DELETE_REQUEST });
@@ -194,8 +194,8 @@ export const stopVoting = (): Action => ({ type: VOTE_FAILED });
 
 const unSelectStepSucceed = (stepId, proposalId): Action => ({ type: UNSELECT_SUCCEED, stepId, proposalId });
 const selectStepSucceed = (stepId, proposalId): Action => ({ type: SELECT_SUCCEED, stepId, proposalId });
-const updateSelectionStatusSucceed = (stepId: number, proposalId: number, status: Status): Action => ({ type: UPDATE_SELECTION_STATUS_SUCCEED, stepId, proposalId, status });
-const updateProposalCollectStatusSucceed = (proposalId: number, stepId: number, status: Status): Action => ({ type: UPDATE_PROPOSAL_STATUS_SUCCEED, proposalId, stepId, status });
+const updateSelectionStatusSucceed = (stepId: number, proposalId: number, status: ?Status): Action => ({ type: UPDATE_SELECTION_STATUS_SUCCEED, stepId, proposalId, status });
+const updateProposalCollectStatusSucceed = (proposalId: number, stepId: number, status: ?Status): Action => ({ type: UPDATE_PROPOSAL_STATUS_SUCCEED, proposalId, stepId, status });
 export const sendProposalNotificationSucceed = (proposalId: number, stepId: number): Action => ({ type: SEND_PROPOSAL_NOTIFICATION_SUCCEED, proposalId, stepId });
 const sendProposalNotificationError = (error: string): Action => ({ type: SEND_PROPOSAL_NOTIFICATION_ERROR, error });
 
@@ -333,7 +333,7 @@ export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) =
       });
 };
 
-export const submitProposal = (dispatch: Dispatch, form: number, data: Object): Promise => {
+export const submitProposal = (dispatch: Dispatch, form: number, data: Object): Promise<*> => {
   const formData = new FormData();
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map((key) => {
