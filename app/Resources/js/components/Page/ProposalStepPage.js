@@ -17,6 +17,7 @@ export const ProposalStepPage = React.createClass({
   propTypes: {
     step: PropTypes.object.isRequired,
     count: PropTypes.number.isRequired,
+    queryCount: PropTypes.number,
     countFusions: PropTypes.number.isRequired,
     form: PropTypes.object.isRequired,
     statuses: PropTypes.array.isRequired,
@@ -41,13 +42,15 @@ export const ProposalStepPage = React.createClass({
       statuses,
       step,
       count,
+      queryCount,
       countFusions,
       currentPage,
       dispatch,
       isLoading,
       randomOrder,
     } = this.props;
-    const nbPages = Math.ceil(count / PROPOSAL_PAGINATION);
+    const total = queryCount || count;
+    const nbPages = Math.ceil(total / PROPOSAL_PAGINATION);
     const showPagination = nbPages > 1 && !randomOrder;
     const showRandomButton = nbPages > 1 && randomOrder;
     return (
@@ -111,6 +114,7 @@ const mapStateToProps = (state, props) => ({
   stepId: undefined,
   step: state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.stepId)[0],
   proposals: state.proposal.proposalShowedId.map(proposal => state.proposal.proposalsById[proposal]),
+  queryCount: state.proposal.queryCount,
   currentPage: state.proposal.currentPaginationPage,
   randomOrder: state.proposal.order === 'random',
   isLoading: state.proposal.isLoading,
