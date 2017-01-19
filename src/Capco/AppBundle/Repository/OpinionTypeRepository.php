@@ -23,7 +23,7 @@ class OpinionTypeRepository extends EntityRepository
         return $children;
     }
 
-    public function getAsArrayById(int $id)
+    public function getAsArrayById(string $id)
     {
         $qb = $this->createQueryBuilder('ot')
           ->where('ot.id = :id')
