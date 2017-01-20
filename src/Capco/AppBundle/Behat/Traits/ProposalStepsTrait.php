@@ -642,7 +642,7 @@ trait ProposalStepsTrait
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
         \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label '.$buttonLabel.' on proposal vote button.');
         $page->clickVoteButton($proposalId);
-        $this->iWait(3);
+        $this->iWait(2);
     }
 
     /**
@@ -792,7 +792,7 @@ trait ProposalStepsTrait
     public function iSubmitTheProposalVoteForm()
     {
         $page = $this->getCurrentPage()->submitProposalVoteForm();
-        $this->iWait(11); // We wait for alert to disappear
+        $this->iWait(8); // We wait for alert to disappear
     }
 
     /**
@@ -928,6 +928,7 @@ trait ProposalStepsTrait
     public function iGoToTheProposalVotesTab()
     {
         $page = $this->getCurrentPage();
+        $this->iWait(3); // Wait alert to disappear
         $this->getSession()->wait(3000, "$('".$page->getSelector('votes tab')."').length > 0");
         $page->clickVotesTab();
         $this->iWait(1);
@@ -939,6 +940,7 @@ trait ProposalStepsTrait
     public function iGoToTheProposalCommentsTab()
     {
         $page = $this->getCurrentPage();
+        $this->iWait(3); // Wait alert to disappear
         $this->getSession()->wait(3000, "$('".$page->getSelector('comments tab')."').length > 0");
         $page->clickCommentsTab();
         $this->iWait(1);

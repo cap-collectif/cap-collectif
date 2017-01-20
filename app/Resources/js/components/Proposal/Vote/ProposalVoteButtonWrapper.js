@@ -40,7 +40,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
   render() {
     const { id, user, step, proposal, style, className, userHasVote, userVotesCount } = this.props;
     if (!step || !step.open) {
-      return <div />;
+      return <span />;
     }
     if (!user) {
       return (
