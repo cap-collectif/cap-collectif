@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\OpinionTypeAppendixType:
   properties:
     id:
       expose: true
-      type: integer
+      type: string
     position:
       expose: true
       type: integer
@@ -15,5 +15,5 @@ Capco\AppBundle\Entity\OpinionTypeAppendixType:
       groups: [Opinions, OpinionTypeDetails]
     getAppendixTypeId:
       serialized_name: id
-      type: integer
+      type: string
       groups: [Opinions, OpinionTypeDetails]

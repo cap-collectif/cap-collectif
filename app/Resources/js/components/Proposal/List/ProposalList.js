@@ -52,36 +52,36 @@ export const ProposalList = React.createClass({
       <div>
         {
           publicProposals.length > 0 &&
-          <Row componentClass="ul" className={classes}>
-            {
-              publicProposals.map(proposal =>
+            <Row componentClass="ul" className={classes}>
+              {
+                publicProposals.map(proposal =>
                   <ProposalPreview
                     key={proposal.id}
                     proposal={proposal}
                     step={step}
                     showThemes={showThemes}
                   />,
-              )
-            }
-          </Row>
-        }
-        {
-          privateProposals.length > 0 &&
-          <VisibilityBox enabled>
-            <Row componentClass="ul" className={classes}>
-              {
-                privateProposals.map(proposal =>
-                      <ProposalPreview
-                        key={proposal.id}
-                        proposal={proposal}
-                        step={step}
-                        showThemes={showThemes}
-                      />,
                 )
               }
             </Row>
-          </VisibilityBox>
-      }
+        }
+        {
+          privateProposals.length > 0 &&
+            <VisibilityBox enabled>
+              <Row componentClass="ul" className={classes}>
+                {
+                  privateProposals.map(proposal =>
+                    <ProposalPreview
+                      key={proposal.id}
+                      proposal={proposal}
+                      step={step}
+                      showThemes={showThemes}
+                    />,
+                  )
+                }
+              </Row>
+            </VisibilityBox>
+        }
       </div>
     );
   },

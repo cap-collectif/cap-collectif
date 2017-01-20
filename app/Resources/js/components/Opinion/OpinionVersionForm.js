@@ -11,7 +11,7 @@ import Input from '../Form/Input';
 
 const OpinionVersionForm = React.createClass({
   propTypes: {
-    opinionId: PropTypes.number.isRequired,
+    opinionId: PropTypes.string.isRequired,
     opinionBody: PropTypes.string,
     version: PropTypes.object,
     mode: PropTypes.string,
