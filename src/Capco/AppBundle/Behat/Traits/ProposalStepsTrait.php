@@ -292,7 +292,7 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalForm()
     {
-        $this->fillProposalForm();
+        $this->fillProposalForm(true);
     }
 
     /**
@@ -300,7 +300,7 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalFormWithATheme()
     {
-        $this->fillProposalForm(true);
+        $this->fillProposalForm(true, true);
     }
 
     /**
@@ -308,10 +308,10 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalFormWithoutRequiredResponse()
     {
-        $this->fillProposalForm(false, false);
+        $this->fillProposalForm(true, false, false);
     }
 
-    protected function fillProposalForm($theme = false, $requiredResponse = 'Réponse à la question 2')
+    protected function fillProposalForm($fillDistrict = false, $fillTheme = false, $requiredResponse = 'Réponse à la question 2')
     {
         $tableNode = new TableNode([
             ['proposal_title', 'Nouvelle proposition créée'],
@@ -323,8 +323,11 @@ trait ProposalStepsTrait
         }
         $this->fillFields($tableNode);
         $this->selectOption('proposal_category', 'Politique');
-        if ($theme) {
+        if ($fillTheme) {
             $this->selectOption('proposal_theme', 'Justice');
+        }
+        if ($fillDistrict) {
+            $this->selectOption('proposal_district', 'Beauregard');
         }
     }
 
