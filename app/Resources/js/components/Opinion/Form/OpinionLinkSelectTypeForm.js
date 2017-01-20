@@ -19,7 +19,7 @@ export const OpinionLinkSelectTypeForm = React.createClass({
       opinionType,
     } = this.props;
     if (prevProps && prevProps.opinionType && prevProps.opinionType !== opinionType) {
-      onChange(opinionType);
+      onChange(parseInt(opinionType, 10));
     }
   },
 
@@ -39,7 +39,7 @@ export const OpinionLinkSelectTypeForm = React.createClass({
           {
             options.map((opt, i) => <option key={i} value={opt.id}>{opt.title}</option>)
           }
-        </ReduxFormField>
+      </ReduxFormField>
       </form>
     );
   },

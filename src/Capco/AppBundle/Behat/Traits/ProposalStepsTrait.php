@@ -292,7 +292,7 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalForm()
     {
-        $this->fillProposalForm(true);
+        $this->fillProposalForm();
     }
 
     /**
@@ -300,7 +300,7 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalFormWithATheme()
     {
-        $this->fillProposalForm(true, true);
+        $this->fillProposalForm(true);
     }
 
     /**
@@ -308,10 +308,10 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalFormWithoutRequiredResponse()
     {
-        $this->fillProposalForm(true, false, false);
+        $this->fillProposalForm(false, false);
     }
 
-    protected function fillProposalForm($fillDistrict = false, $fillTheme = false, $requiredResponse = 'Réponse à la question 2')
+    protected function fillProposalForm($theme = false, $requiredResponse = 'Réponse à la question 2')
     {
         $tableNode = new TableNode([
             ['proposal_title', 'Nouvelle proposition créée'],
@@ -323,11 +323,8 @@ trait ProposalStepsTrait
         }
         $this->fillFields($tableNode);
         $this->selectOption('proposal_category', 'Politique');
-        if ($fillTheme) {
+        if ($theme) {
             $this->selectOption('proposal_theme', 'Justice');
-        }
-        if ($fillDistrict) {
-            $this->selectOption('proposal_district', 'Beauregard');
         }
     }
 
@@ -645,7 +642,7 @@ trait ProposalStepsTrait
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
         \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label '.$buttonLabel.' on proposal vote button.');
         $page->clickVoteButton($proposalId);
-        $this->iWait(2);
+        $this->iWait(3);
     }
 
     /**
@@ -931,7 +928,6 @@ trait ProposalStepsTrait
     public function iGoToTheProposalVotesTab()
     {
         $page = $this->getCurrentPage();
-        $this->iWait(3); // Wait alert to disappear
         $this->getSession()->wait(3000, "$('".$page->getSelector('votes tab')."').length > 0");
         $page->clickVotesTab();
         $this->iWait(1);
@@ -943,7 +939,6 @@ trait ProposalStepsTrait
     public function iGoToTheProposalCommentsTab()
     {
         $page = $this->getCurrentPage();
-        $this->iWait(3); // Wait alert to disappear
         $this->getSession()->wait(3000, "$('".$page->getSelector('comments tab')."').length > 0");
         $page->clickCommentsTab();
         $this->iWait(1);

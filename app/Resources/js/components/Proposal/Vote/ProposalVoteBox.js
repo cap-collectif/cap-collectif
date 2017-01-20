@@ -65,7 +65,7 @@ const ProposalVoteBox = React.createClass({
     return (
       <div className={className}>
         {
-          !user && step.open
+          !user && step.voteType !== VOTE_TYPE_BUDGET && step.open
             && <div>
               <p className="text-center small" style={{ fontWeight: 'bold' }}>
                 {

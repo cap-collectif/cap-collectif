@@ -9,8 +9,6 @@ Capco\AppBundle\Entity\ProposalForm:
     descriptionHelpText: Décrivez votre proposition
     categoryHelpText: Sélectionnez une catégorie.
     usingThemes: true
-    usingDistrict: true
-    districtMandatory: true
     usingCategories: true
     themeMandatory: false
     categoryMandatory: true

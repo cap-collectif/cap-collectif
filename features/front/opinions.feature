@@ -105,7 +105,7 @@ Feature: Opinions
     And I fill in the following:
       | opinion_title      | Titre                           |
       | opinion_body       | Description de ma proposition   |
-      | opinion_appendix-2 | Exposay                         |
+      | opinion_appendix-1 | Exposay                         |
     And I press "confirm-opinion-link-create"
     Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/section-1-ouverture-des-donnees-publiques/titre"
     And I wait 1 seconds

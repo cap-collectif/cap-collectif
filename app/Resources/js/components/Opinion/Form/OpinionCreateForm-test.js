@@ -11,8 +11,8 @@ describe('<OpinionCreateForm />', () => {
     projectId: '1',
     stepId: 1,
     opinionType: { appendixTypes: [{
-      type: '1',
-      id: '1',
+      type: 1,
+      id: 1,
       title: 'appendice',
     }] },
     fields: [
