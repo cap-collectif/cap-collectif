@@ -17,9 +17,8 @@ const OpinionCreateForm = React.createClass({
     const { opinionType, projectId, stepId, onSubmitSuccess, onFailure } = this.props;
     const appendices = opinionType.appendixTypes
       .filter(type => data[type.title] && data[type.title].length > 0)
-      .map((type) => {
-        return { appendixType: type.id, body: data[type.title] };
-      });
+      .map(type => ({ appendixType: type.id, body: data[type.title] }),
+    );
     const form = {
       title: data.title,
       body: data.body,

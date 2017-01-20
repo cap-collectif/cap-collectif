@@ -40,71 +40,65 @@ export default class Pagination extends React.Component {
       <div className="pagination--custom  text-center">
         <ul className="pagination">
           {
-            showFirst
-            ? <PaginationItem
+            showFirst &&
+              <PaginationItem
                 id="first-page-item"
                 page={1}
-                onSelect={this.onSelect.bind(null, 1)}
+                onSelect={current < 2 ? null : this.onSelect.bind(null, 1)}
                 label="&laquo;"
                 ariaLabel="Page 1"
                 disabled={current < 2}
                 active={false}
-            />
-            : null
-          }
-          {
-            showPrev
-              ? <PaginationItem
-                  id="prev-page-item"
-                  page={prev}
-                  onSelect={this.onSelect.bind(null, prev)}
-                  label="&lsaquo;"
-                  ariaLabel={`Page ${prev}`}
-                  disabled={current < 2}
-                  active={false}
               />
-              : null
           }
           {
-            pages.map((page, index) => {
-              return (
-                <PaginationItem
-                  id={`page-item-${page}`}
-                  page={page}
-                  key={index}
-                  onSelect={this.onSelect.bind(null, page)}
-                  ariaLabel={`Page ${page}`}
-                  disabled={false}
-                  active={current === page}
-                />
-              );
-            })
-          }
-          {
-            showNext
-              ? <PaginationItem
-                  id="next-page-item"
-                  page={next}
-                  onSelect={this.onSelect.bind(null, next)}
-                  label="&rsaquo;"
-                  ariaLabel={`Page ${next}`}
-                  disabled={current > (nbPages - 1)}
-                  active={false}
+            showPrev &&
+              <PaginationItem
+                id="prev-page-item"
+                page={prev}
+                onSelect={current < 2 ? null : this.onSelect.bind(null, prev)}
+                label="&lsaquo;"
+                ariaLabel={`Page ${prev}`}
+                disabled={current < 2}
+                active={false}
               />
-              : null
           }
           {
-            showLast
-              ? <PaginationItem
-                  id="last-page-item"
-                  page={nbPages}
-                  onSelect={this.onSelect.bind(null, nbPages)}
-                  label="&raquo;"
-                  ariaLabel={`Page ${nbPages}`}
-                  disabled={current > (nbPages - 1)}
-                  active={false}
+            pages.map((page, index) => (
+              <PaginationItem
+                id={`page-item-${page}`}
+                page={page}
+                key={index}
+                onSelect={this.onSelect.bind(null, page)}
+                ariaLabel={`Page ${page}`}
+                disabled={false}
+                active={current === page}
               />
-              : null
+            ))
+          }
+          {
+            showNext &&
+              <PaginationItem
+                id="next-page-item"
+                page={next}
+                onSelect={current > (nbPages - 1) ? null : this.onSelect.bind(null, next)}
+                label="&rsaquo;"
+                ariaLabel={`Page ${next}`}
+                disabled={current > (nbPages - 1)}
+                active={false}
+              />
+          }
+          {
+            showLast &&
+              <PaginationItem
+                id="last-page-item"
+                page={nbPages}
+                onSelect={current > (nbPages - 1) ? null : this.onSelect.bind(null, nbPages)}
+                label="&raquo;"
+                ariaLabel={`Page ${nbPages}`}
+                disabled={current > (nbPages - 1)}
+                active={false}
+              />
           }
         </ul>
       </div>

@@ -71,7 +71,12 @@ const OpinionLinkCreateForm = React.createClass({
     const { availableTypes, onFailure } = this.props;
     const { currentType } = this.state;
     const dynamicsField = currentType.appendixTypes.map((type, index) => {
-      return { label: type.title, name: type.title, type: 'editor', id: `opinion_appendix-${index + 1}` };
+      return {
+        label: type.title,
+        name: type.title,
+        type: 'editor',
+        id: `opinion_appendix-${index + 1}`,
+      };
     });
     return (
       <div>

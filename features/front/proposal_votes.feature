@@ -178,13 +178,9 @@ Feature: Proposal votes
   Scenario: Logged in user wants to vote when he has not enough credits left
     Given I am logged in as admin
     When I go to a proposal with budget vote enabled
-    And I click the proposal vote button
-    And I should see "Vous avez atteint la limite du budget."
-
-  @javascript @security @votes_from_proposal
-  Scenario: Anonymous user wants to vote on a selection step that has budget vote
-    Given I go to a proposal with budget vote enabled
-    When I click the proposal vote button
+    Then the proposal vote button must be disabled
+    # And I click the proposal vote button
+    # And I should see "Vous avez atteint la limite du budget."
 
   @javascript @security @votes_from_proposal
   Scenario: Anonymous user wants to vote for a proposal that is not votable yet

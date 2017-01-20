@@ -12,7 +12,7 @@ describe('<OpinionLinkCreateForm />', () => {
       dispatch: () => {},
       getState: () => {},
     },
-    availableTypes: [{ id: 1337, appendixTypes: [{ id: 1, title: 'appendix-1' }] }],
+    availableTypes: [{ id: '1337', appendixTypes: [{ id: '1', title: 'appendix-1' }] }],
     opinion: {},
     onSubmitSuccess: () => {},
     onFailure: () => {},
@@ -23,7 +23,7 @@ describe('<OpinionLinkCreateForm />', () => {
     const wrapper = shallow(<OpinionLinkCreateForm {...props} />);
     const form1 = wrapper.find('ReduxForm');
     expect(form1.prop('options')).toEqual(props.availableTypes);
-    expect(form1.prop('initialValues')).toEqual({ opinionType: 1337 });
+    expect(form1.prop('initialValues')).toEqual({ opinionType: '1337' });
     const form2 = wrapper.find('OpinionForm');
     expect(form2.prop('form')).toEqual('opinion-link-create-form');
     expect(form2.prop('validate')).toEqual(defaultValidation);
