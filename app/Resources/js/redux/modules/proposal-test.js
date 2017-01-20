@@ -5,8 +5,6 @@ import {
   sendProposalNotificationSucceed,
   deleteVoteSucceeded,
   fetchPosts,
-  POSTS_FETCH_SUCCEEDED,
-  POSTS_FETCH_FAILED,
 } from './proposal';
 import Fetcher from '../../services/Fetcher';
 
@@ -22,7 +20,7 @@ describe('Proposal Reducer', () => {
         { },
     ];
     const newState = reducer(initialState, {
-      type: POSTS_FETCH_SUCCEEDED,
+      type: 'proposal/POSTS_FETCH_SUCCEEDED',
       proposalId: 1,
       posts,
     });
@@ -65,12 +63,12 @@ describe('Proposal Sagas', () => {
     expect(generator.next().value).toEqual(call(Fetcher.get, '/proposals/1/posts'));
     expect(generator.next({ posts }).value).toEqual(
       put({
-        type: POSTS_FETCH_SUCCEEDED,
+        type: 'proposal/POSTS_FETCH_SUCCEEDED',
         proposalId: 1,
         posts,
       }),
     );
 
-    expect(generator.throw({}).value).toEqual(put({ type: POSTS_FETCH_FAILED, error: {} }));
+    expect(generator.throw({}).value).toEqual(put({ type: 'proposal/POSTS_FETCH_FAILED', error: {} }));
   });
 });

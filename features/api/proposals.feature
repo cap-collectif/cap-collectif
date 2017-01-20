@@ -663,6 +663,7 @@ Feature: Proposal Restful Api
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "theme": 1,
+      "district": "1",
       "category": 1,
       "responses": [
         {
@@ -691,6 +692,7 @@ Feature: Proposal Restful Api
         "title": "Acheter un sauna pour Capco",
         "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
         "theme": 1,
+        "district": "1",
         "category": 1,
         "responses": [
           {
@@ -720,6 +722,7 @@ Feature: Proposal Restful Api
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "theme": 1,
+      "district": "1",
       "category": 1,
       "responses": [
         {
@@ -752,7 +755,7 @@ Feature: Proposal Restful Api
       And proposal 12 should not have a status
 
   @security
-  Scenario: Logged in API client wants to add a proposal without required response
+  Scenario: Logged in API client wants to add a proposal without a required response
     Given I am logged in to api as user
     Given feature themes is enabled
     Given feature districts is enabled
@@ -762,6 +765,7 @@ Feature: Proposal Restful Api
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "theme": 1,
+      "district": "1",
       "category": 1,
       "responses": [
         {
@@ -797,6 +801,7 @@ Feature: Proposal Restful Api
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "theme": 1,
+      "district": "1",
       "category": 1,
       "responses": [
         {
@@ -835,6 +840,7 @@ Feature: Proposal Restful Api
       "title": "Acheter un sauna pour Capco",
       "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
       "theme": 1,
+      "district": "1",
       "responses": [
         {
           "question": 1,

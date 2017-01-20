@@ -6,7 +6,7 @@ import UserPreview from '../../User/UserPreview';
 import ProposalVoteForm from './ProposalVoteForm';
 import LoginButton from '../../User/Login/LoginButton';
 import ProposalVoteBoxMessage from './ProposalVoteBoxMessage';
-import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import RegistrationButton from '../../User/Registration/RegistrationButton';
 
 const ProposalVoteBox = React.createClass({
