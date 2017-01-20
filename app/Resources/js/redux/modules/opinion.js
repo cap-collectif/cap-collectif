@@ -20,7 +20,7 @@ type Action =
   | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: any }
 ;
 type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: Uuid, versionId: ?Uuid };
-type ContributionMap = {[id: Uuid]: {votes: OpinionVotes, votesCount: number}};
+type ContributionMap = {[id: Uuid]: {id: string, votes: OpinionVotes, votesCount: number}};
 type State = {
   currentOpinionId: ?Uuid,
   currentVersionId: ?Uuid,
