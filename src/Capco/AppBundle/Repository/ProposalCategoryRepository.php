@@ -19,7 +19,9 @@ class ProposalCategoryRepository extends EntityRepository
                 WHERE pf.step = :step
                 AND pc.id = c.id
             ) as value')
+            ->andWhere('c.form = :form')
             ->setParameter('step', $step)
+            ->setParameter('form', $step->getProposalForm())
             ->orderBy('value', 'DESC')
         ;
 
