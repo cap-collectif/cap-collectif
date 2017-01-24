@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -12,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 
 class ProposalController extends Controller
 {
@@ -28,10 +30,16 @@ class ProposalController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('serializer');
 
+        $urlResolver = $this->get('capco.url.resolver');
+
+        $stepUrls = $project->getSteps()->map(function (ProjectAbstractStep $step) use ($urlResolver) {
+           return  $urlResolver->getStepUrl($step->getStep(), UrlGenerator::ABSOLUTE_URL);
+        })->toArray();
+
         $refererUri = $request->headers->has('referer')
-            && filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) !== false
+            && filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) !== false && in_array($request->headers->get('referer'), $stepUrls, true)
                 ? $request->headers->get('referer')
-                : null;
+                : $urlResolver->getStepUrl($project->getCurrentStep(), UrlGenerator::ABSOLUTE_URL);
 
         $proposalForm = $currentStep->getProposalForm();
         $props = $serializer->serialize([
