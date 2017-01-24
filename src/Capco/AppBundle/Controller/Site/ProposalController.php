@@ -39,7 +39,7 @@ class ProposalController extends Controller
         $refererUri = $request->headers->has('referer')
             && filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) !== false && in_array($request->headers->get('referer'), $stepUrls, true)
                 ? $request->headers->get('referer')
-                : $urlResolver->getStepUrl($project->getCurrentStep(), UrlGenerator::ABSOLUTE_URL);
+                : $urlResolver->getStepUrl($currentStep, UrlGenerator::ABSOLUTE_URL);
 
         $proposalForm = $currentStep->getProposalForm();
         $props = $serializer->serialize([
