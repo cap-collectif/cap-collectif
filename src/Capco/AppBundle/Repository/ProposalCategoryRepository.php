@@ -18,6 +18,7 @@ class ProposalCategoryRepository extends EntityRepository
                 LEFT JOIN p.category pc
                 WHERE pf.step = :step
                 AND pc.id = c.id
+                AND p.isTrashed = false
             ) as value')
             ->andWhere('c.form = :form')
             ->setParameter('step', $step)
