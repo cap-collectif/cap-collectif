@@ -34,6 +34,14 @@ abstract class AbstractVote implements Contribution, HasAuthorInterface
     use ExpirableTrait;
     use IdTrait;
 
+    public function getKind(): string {
+        return 'vote';
+    }
+
+    public function getRelated() {
+        return null;
+    }
+
     public function isIndexable()
     {
         return !$this->isExpired();

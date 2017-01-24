@@ -17,8 +17,6 @@ use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 use Capco\AppBundle\Traits\UuidTrait;
 
 /**
- * Source.
- *
  * @ORM\Table(name="source")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
@@ -26,6 +24,14 @@ use Capco\AppBundle\Traits\UuidTrait;
 class Source implements Contribution, TrashableInterface, VotableInterface, IsPublishableInterface
 {
     use UuidTrait;
+
+    public function getKind(): string {
+        return 'source';
+    }
+
+    public function getRelated(): Contribution {
+        return $this->Opinion ?? $this->opinionVersion;
+    }
 
     const TYPE_FOR = 1;
     const LINK = 0;
@@ -41,8 +47,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     use ExpirableTrait;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=100)
      * @Assert\NotBlank()
      */
@@ -55,8 +59,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     private $slug;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="link", type="text", length=255, nullable=true)
      * @Assert\NotBlank(groups={"link"})
      * @Assert\Url(groups={"link"})

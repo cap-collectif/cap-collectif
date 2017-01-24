@@ -1,0 +1,12 @@
+Contribution:
+    type: interface
+    config:
+        description: "A contribution with an author"
+        fields:
+            id:
+              type: "ID!"
+            kind:
+              type: "String!"
+            related:
+                type: "Contribution"
+                description: "Related contribution."

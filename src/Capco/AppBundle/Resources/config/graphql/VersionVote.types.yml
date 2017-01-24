@@ -1,8 +1,10 @@
 VersionVote:
     type: object
     config:
-        interfaces: [ContributionWithAuthor]
+        interfaces: [YesNoPairedVote, Contribution, ContributionWithAuthor]
         fields:
+            id:
+              type: "ID!"
             author:
                 type: "Person!"
                 description: "The author of the contribution."

@@ -17,7 +17,7 @@ Reporting:
                 description: "Kind of report."
                 resolve: "@=resolver('reporting_type', [value])"
             id:
-                type: "Int!"
+                type: "ID!"
                 description: "The content of the argument."
             body:
                 type: "String!"

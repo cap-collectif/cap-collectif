@@ -19,6 +19,7 @@ use Capco\AppBundle\Model\HasDiffInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Entity\Opinion;
 
 /**
  * @ORM\Table(name="opinion_version")
@@ -37,6 +38,14 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     use AnswerableTrait;
     use DiffableTrait;
     use ExpirableTrait;
+
+    public function getKind(): string {
+        return 'version';
+    }
+
+    public function getRelated(): Opinion {
+        return $this->parent;
+    }
 
     /**
      * @ORM\Column(name="body", type="text")

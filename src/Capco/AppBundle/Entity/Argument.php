@@ -28,6 +28,14 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
     use VotableOkTrait;
     use ExpirableTrait;
 
+    public function getKind(): string {
+        return 'argument';
+    }
+
+    public function getRelated() {
+        return $this->opinion ? $this->opinion : $this->opinionVersion;
+    }
+
     const TYPE_AGAINST = 0;
     const TYPE_FOR = 1;
     const TYPE_SIMPLE = 2;

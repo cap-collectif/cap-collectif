@@ -49,6 +49,14 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use ExpirableTrait;
     use SelfLinkableTrait;
 
+    public function getKind(): string {
+        return 'proposal';
+    }
+
+    public function getRelated() {
+        return null;
+    }
+
     public static $ratings = [1, 2, 3, 4, 5];
 
     /**
