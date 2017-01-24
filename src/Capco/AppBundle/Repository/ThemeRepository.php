@@ -139,7 +139,7 @@ class ThemeRepository extends EntityRepository
             ->select('COUNT(t.id)')
         ;
 
-        return intval($qb->getQuery()->getSingleScalarResult());
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder()

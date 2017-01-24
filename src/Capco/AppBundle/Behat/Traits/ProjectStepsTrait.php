@@ -124,6 +124,15 @@ trait ProjectStepsTrait
     }
 
     /**
+     * @When I filter votes stats by category
+     */
+    public function iFilterVotesStatsByCategory()
+    {
+        $this->navigationContext->getPage('project stats page')->filterByCategory();
+        $this->iWait(1);
+    }
+
+    /**
      * @Then the votes stats should be filtered by theme
      */
     public function theVotesStatsShouldBeFilteredByTheme()
@@ -139,5 +148,14 @@ trait ProjectStepsTrait
     {
         $selector = $this->navigationContext->getPage('project stats page')->getVotesStatsItemsSelector();
         $this->assertNumElements(0, $selector);
+    }
+
+    /**
+     * @Then the votes stats should be filtered by category
+     */
+    public function theVotesStatsShouldBeFilteredByCategory()
+    {
+        $selector = $this->navigationContext->getPage('project stats page')->getVotesStatsItemsSelector();
+        $this->assertNumElements(3, $selector);
     }
 }

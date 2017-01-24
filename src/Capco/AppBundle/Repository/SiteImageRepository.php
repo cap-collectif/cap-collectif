@@ -11,7 +11,7 @@ class SiteImageRepository extends EntityRepository
 {
     public function getValuesIfEnabled()
     {
-        return $this->_em->createQueryBuilder()
+        return $this->getEntityManager()->createQueryBuilder()
             ->select('p', 'm')
             ->from($this->getClassName(), 'p', 'p.keyname')
             ->leftJoin('p.Media', 'm')

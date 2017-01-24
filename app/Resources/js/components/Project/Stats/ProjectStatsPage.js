@@ -10,6 +10,7 @@ export const ProjectStatsPage = React.createClass({
     steps: PropTypes.array.isRequired,
     themes: PropTypes.array.isRequired,
     districts: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -38,6 +39,7 @@ export const ProjectStatsPage = React.createClass({
       districts,
       steps,
       themes,
+      categories,
     } = this.props;
     const icons = this.listIcons;
     const selectedStep = steps[this.state.selectedStepIndex];
@@ -82,6 +84,7 @@ export const ProjectStatsPage = React.createClass({
                       showFilters={key === 'votes'}
                       themes={themes}
                       districts={districts}
+                      categories={categories}
                     />
                   );
                 })
@@ -98,8 +101,14 @@ export const ProjectStatsPage = React.createClass({
 });
 
 export default connect(
-  state => ({
-    themes: state.default.themes,
-    districts: state.default.districts,
-  }),
+  (state, props) => {
+    const collectSteps = props.steps.filter(step => step.type === 'collect');
+    return {
+      themes: state.default.themes,
+      districts: state.default.districts,
+      categories: collectSteps.length > 0 && collectSteps[0].stats && collectSteps[0].stats.categories
+        ? collectSteps[0].stats.categories.values || []
+        : [],
+    };
+  },
 )(ProjectStatsPage);

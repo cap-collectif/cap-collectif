@@ -23,7 +23,7 @@ class VideoRepository extends EntityRepository
             ->orderBy('v.position', 'ASC')
         ;
 
-        return $query = $qb->getQuery()->getResult();
+        return $qb->getQuery()->getResult();
     }
 
     /**

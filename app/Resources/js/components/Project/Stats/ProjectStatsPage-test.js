@@ -27,6 +27,7 @@ describe('<ProjectStatsPage />', () => {
     projectId: '1',
     themes: [],
     districts: [],
+    categories: [],
     ...IntlData,
   };
 

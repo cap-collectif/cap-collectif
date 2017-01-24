@@ -34,6 +34,6 @@ class ProposalCategoryRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')->select('COUNT(c.id)');
 
-        return intval($qb->getQuery()->getSingleScalarResult());
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 }

@@ -40,6 +40,6 @@ class DistrictRepository extends EntityRepository
             ->select('COUNT(d.id)')
         ;
 
-        return intval($qb->getQuery()->getSingleScalarResult());
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 }

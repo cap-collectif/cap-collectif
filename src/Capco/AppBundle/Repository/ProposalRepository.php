@@ -42,7 +42,7 @@ class ProposalRepository extends EntityRepository
         foreach ($results as $result) {
             $collectStep = $result->getProposalForm()->getStep();
             if (array_key_exists($collectStep->getId(), $proposalsWithStep)) {
-                array_push($proposalsWithStep[$collectStep->getId()]['proposals'], $result);
+                $proposalsWithStep[$collectStep->getId()]['proposals'][] = $result;
             } else {
                 $proposalsWithStep[$collectStep->getId()] = [
               'step' => $collectStep,
@@ -157,7 +157,7 @@ class ProposalRepository extends EntityRepository
             ->setParameter('proposalForm', $form)
         ;
 
-        return intval($qb->getQuery()->getSingleScalarResult());
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countPublishedForSelectionStep(SelectionStep $step): int
@@ -172,7 +172,7 @@ class ProposalRepository extends EntityRepository
             ->setParameter('stepId', $step->getId())
         ;
 
-        return intval($qb->getQuery()->getSingleScalarResult());
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
@@ -325,7 +325,7 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, int $limit = null, int $themeId = null, string $districtId = null): array
+    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, int $limit = null, int $themeId = null, string $districtId = null, $categoryId = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('proposal.title as name')
@@ -359,6 +359,14 @@ class ProposalRepository extends EntityRepository
             ;
         }
 
+        if ($categoryId) {
+            $qb
+                ->leftJoin('proposal.category', 'category')
+                ->andWhere('category.id = :categoryId')
+                ->setParameter('categoryId', $categoryId)
+            ;
+        }
+
         $qb->orderBy('value', 'DESC');
 
         if ($limit) {
@@ -377,10 +385,10 @@ class ProposalRepository extends EntityRepository
             ->setParameter('step', $step)
         ;
 
-        return intval($qb->getQuery()->getSingleScalarResult());
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countForSelectionStep(SelectionStep $step, int $themeId = null, string $districtId = null): int
+    public function countForSelectionStep(SelectionStep $step, int $themeId = null, string $districtId = null, $categoryId = null): int
     {
         $qb = $this->getIsEnabledQueryBuilder('p')
             ->select('COUNT(p.id)')
@@ -406,6 +414,14 @@ class ProposalRepository extends EntityRepository
             ;
         }
 
-        return intval($qb->getQuery()->getSingleScalarResult());
+        if ($categoryId) {
+            $qb
+                ->leftJoin('p.category', 'category')
+                ->andWhere('category.id = :categoryId')
+                ->setParameter('categoryId', $categoryId)
+            ;
+        }
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 }

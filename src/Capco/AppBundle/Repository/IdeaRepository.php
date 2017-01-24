@@ -95,11 +95,7 @@ class IdeaRepository extends EntityRepository
           ->setParameter('trashed', true)
         ;
 
-        return intval(
-          $qb
-            ->getQuery()
-            ->getSingleScalarResult()
-        );
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -115,11 +111,7 @@ class IdeaRepository extends EntityRepository
           ->setParameter('notTrashed', false)
         ;
 
-        return intval(
-          $qb
-            ->getQuery()
-            ->getSingleScalarResult()
-        );
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -137,11 +129,7 @@ class IdeaRepository extends EntityRepository
           ->setParameter('author', $user)
         ;
 
-        return intval(
-          $qb
-            ->getQuery()
-            ->getSingleScalarResult()
-        );
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -343,11 +331,7 @@ class IdeaRepository extends EntityRepository
                 ->setParameter('to', $to);
         }
 
-        return intval(
-          $qb
-            ->getQuery()
-            ->getSingleScalarResult()
-        );
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**

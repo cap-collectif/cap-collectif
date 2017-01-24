@@ -15,6 +15,8 @@ Feature: Stats
     Then I should see votes stats
     When I filter votes stats by theme
     Then the votes stats should be filtered by theme
+    And I filter votes stats by category
+    Then the votes stats should be filtered by category
     And I filter votes stats by district
     Then the votes stats should be filtered by theme and district
 

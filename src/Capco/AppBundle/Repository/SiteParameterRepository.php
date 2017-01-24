@@ -11,7 +11,7 @@ class SiteParameterRepository extends EntityRepository
 {
     public function getValuesIfEnabled()
     {
-        return $this->_em->createQueryBuilder()
+        return $this->getEntityManager()->createQueryBuilder()
             ->from($this->getClassName(), 'p', 'p.keyname')
             ->select('p.value', 'p.keyname', 'p.type')
             ->andWhere('p.isEnabled = :enabled')

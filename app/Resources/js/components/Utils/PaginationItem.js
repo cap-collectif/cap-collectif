@@ -29,7 +29,7 @@ export default class PaginationItem extends React.Component {
 
 PaginationItem.propTypes = {
   page: React.PropTypes.number.isRequired,
-  onSelect: React.PropTypes.func.isRequired,
+  onSelect: React.PropTypes.func,
   label: React.PropTypes.string,
   ariaLabel: React.PropTypes.string,
   disabled: React.PropTypes.bool,

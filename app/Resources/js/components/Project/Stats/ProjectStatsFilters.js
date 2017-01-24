@@ -7,16 +7,20 @@ const ProjectStatsFilters = React.createClass({
   propTypes: {
     themes: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
+    categories: React.PropTypes.array.isRequired,
     showFilters: React.PropTypes.bool.isRequired,
     onThemeChange: React.PropTypes.func.isRequired,
     onDistrictChange: React.PropTypes.func.isRequired,
+    onCategoryChange: React.PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
     const {
       districts,
+      categories,
       onDistrictChange,
+      onCategoryChange,
       onThemeChange,
       showFilters,
       themes,
@@ -25,9 +29,11 @@ const ProjectStatsFilters = React.createClass({
       return null;
     }
 
+    const colWidth = categories.length > 0 ? 4 : 6;
+
     return (
       <Row className="stats__filters">
-        <Col xs={12} md={6}>
+        <Col xs={12} md={colWidth}>
           <Input
             id="stats-filter-themes"
             type="select"
@@ -46,7 +52,28 @@ const ProjectStatsFilters = React.createClass({
             }
           </Input>
         </Col>
-        <Col xs={12} md={6}>
+        {
+          categories.length > 0 &&
+          <Col xs={12} md={colWidth}>
+            <Input
+              id="stats-filter-categories"
+              type="select"
+              onChange={onCategoryChange}
+            >
+              <option value="0">
+                {this.getIntlMessage('global.select_categories')}
+              </option>
+              {
+                categories.map(category =>
+                  <option key={category.value} value={category.value}>
+                    {category.name}
+                  </option>,
+                )
+              }
+            </Input>
+          </Col>
+        }
+        <Col xs={12} md={colWidth}>
           <Input
             id="stats-filter-districts"
             type="select"

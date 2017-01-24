@@ -347,8 +347,8 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
     {
-        $proposalVoteRepo->getVotesCountForSelectionStep($ss, null, null)->willReturn(100);
-        $proposalRepo->getProposalsWithVotesCountForSelectionStep($ss, null, null, null)
+        $proposalVoteRepo->getVotesCountForSelectionStep($ss, null, null, null)->willReturn(100);
+        $proposalRepo->getProposalsWithVotesCountForSelectionStep($ss, null, null, null, null)
             ->willReturn([
                 [
                     'name' => 'Proposal 1',
@@ -395,7 +395,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
     {
-        $proposalVoteRepo->getVotesCountForSelectionStep($ss, null, null)->willReturn(100);
+        $proposalVoteRepo->getVotesCountForSelectionStep($ss, null, null, null)->willReturn(100);
         $this->beConstructedWith(
             $selectionStepRepo,
             $collectStepRepo,
@@ -420,7 +420,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalVoteRepo)
     {
-        $proposalRepo->countForSelectionStep($ss, null, null)->willReturn(100);
+        $proposalRepo->countForSelectionStep($ss, null, null, null)->willReturn(100);
         $this->beConstructedWith(
             $selectionStepRepo,
             $collectStepRepo,

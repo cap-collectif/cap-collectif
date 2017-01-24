@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\UserBundle\Entity\User;
@@ -28,7 +27,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
               ;
                 $results = $qb->getQuery()->getScalarResult();
                 $userVotes[$id] = array_map(function ($id) {
-                    return intval($id);
+                    return (int) $id;
                 }, array_column($results, 'id'));
             }
         }
@@ -72,7 +71,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         $votesBySteps = [];
 
         foreach ($results as $result) {
-            $votesBySteps[$result['selectionStep']] = intval($result['votesCount']);
+            $votesBySteps[$result['selectionStep']] = (int) $result['votesCount'];
         }
 
         foreach ($ids as $id) {
@@ -148,7 +147,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
     //     return $qb->getQuery()->getResult();
     // }
 
-    public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
+    public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null, $categoryId = null)
     {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
@@ -173,6 +172,14 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ;
         }
 
-        return intval($qb->getQuery()->getSingleScalarResult());
+        if ($categoryId) {
+            $qb
+                ->leftJoin('p.category', 'category')
+                ->andWhere('category.id = :categoryId')
+                ->setParameter('categoryId', $categoryId)
+            ;
+        }
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 }

@@ -21,6 +21,7 @@ class ProjectStatsPage extends Page
         'votes stats items' => '#stats-74-votes .stats__list__row',
         'theme filter select' => '#stats-74-votes #stats-filter-themes',
         'district filter select' => '#stats-74-votes #stats-filter-districts',
+        'category filter select' => '#stats-74-votes #stats-filter-categories',
     ];
 
     public function getThemeStatsItemsSelector()
@@ -66,5 +67,10 @@ class ProjectStatsPage extends Page
     public function filterByDistrict()
     {
         return $this->getElement('district filter select')->selectOption('Beauregard');
+    }
+
+    public function filterByCategory()
+    {
+        return $this->getElement('category filter select')->selectOption('Aménagement');
     }
 }

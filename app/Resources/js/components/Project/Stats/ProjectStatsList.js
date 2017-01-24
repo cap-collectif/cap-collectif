@@ -17,6 +17,7 @@ const ProjectStatsList = React.createClass({
     isCurrency: React.PropTypes.bool.isRequired,
     themes: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
+    categories: React.PropTypes.array.isRequired,
     showFilters: React.PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
@@ -28,6 +29,7 @@ const ProjectStatsList = React.createClass({
       data,
       theme: 0,
       district: 0,
+      category: 0,
     };
   },
 
@@ -55,6 +57,13 @@ const ProjectStatsList = React.createClass({
     });
   },
 
+  changeCategory(element) {
+    this.setState({
+      category: element.target.value,
+    }, () => {
+      this.reloadData();
+    });
+  },
 
   reloadData() {
     const {
@@ -67,6 +76,7 @@ const ProjectStatsList = React.createClass({
       DEFAULT_STATS_PAGINATION,
       this.state.theme,
       this.state.district,
+      this.state.category,
     )
       .then((response) => {
         this.setState({
@@ -85,6 +95,7 @@ const ProjectStatsList = React.createClass({
       showFilters,
       stepId,
       themes,
+      categories,
       type,
     } = this.props;
     const { data } = this.state;
@@ -98,8 +109,10 @@ const ProjectStatsList = React.createClass({
         <ProjectStatsFilters
           themes={themes}
           districts={districts}
+          categories={categories}
           onThemeChange={this.changeTheme}
           onDistrictChange={this.changeDistrict}
+          onCategoryChange={this.changeCategory}
           showFilters={showFilters}
         />
         <ListGroup className="stats__list">

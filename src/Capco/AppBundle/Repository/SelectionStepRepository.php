@@ -41,7 +41,7 @@ class SelectionStepRepository extends AbstractStepRepository
 
     private function getEnabledQueryBuilder()
     {
-        return $qb = $this->createQueryBuilder('ss')
+        return $this->createQueryBuilder('ss')
             ->where('ss.isEnabled = 1')
         ;
     }

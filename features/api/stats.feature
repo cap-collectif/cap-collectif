@@ -57,6 +57,20 @@ Feature: Stats
     }
     """
 
+    @parallel-scenario
+    Scenario: Anonymous API client wants to get votes stats for a selection step filtered by category
+      When I send a GET request to "/api/project_stats/71?key=votes&category=2"
+      Then the JSON response status code should be 200
+      And the JSON response should match:
+      """
+      {
+        "data": {
+          "total": 2,
+          "values": @array@
+        }
+      }
+      """
+
   @security
   Scenario: Anonymous API client wants to get votes stats for a collect step
     When I send a GET request to "/api/project_stats/61?key=votes"

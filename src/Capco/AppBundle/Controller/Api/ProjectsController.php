@@ -88,6 +88,7 @@ class ProjectsController extends FOSRestController
      * @QueryParam(name="limit", requirements="[0-9.]+", default=0)
      * @QueryParam(name="theme", default=null)
      * @QueryParam(name="district", default=null)
+     * @QueryParam(name="category", default=null)
      * @View()
      */
     public function getProjectStatsAction(AbstractStep $step, ParamFetcherInterface $paramFetcher)
@@ -96,6 +97,7 @@ class ProjectsController extends FOSRestController
         $limit = $paramFetcher->get('limit');
         $theme = $paramFetcher->get('theme');
         $district = $paramFetcher->get('district');
+        $category = $paramFetcher->get('category');
 
         if ($key === 'votes' && $step instanceof CollectStep) {
             throw new BadRequestHttpException('Collect steps have no votes stats.');
@@ -110,7 +112,7 @@ class ProjectsController extends FOSRestController
         }
 
         $data = $this->get('capco.project_stats.resolver')
-            ->getStatsForStepByKey($step, $key, $limit, $theme, $district)
+            ->getStatsForStepByKey($step, $key, $limit, $theme, $district, $category)
         ;
 
         return [

@@ -88,7 +88,7 @@ class ProjectStatsResolver
         return $stats;
     }
 
-    public function getStatsForStepByKey(AbstractStep $step, $key, $limit = null, $themeId = null, $districtId = null)
+    public function getStatsForStepByKey(AbstractStep $step, $key, $limit = null, $themeId = null, $districtId = null, $categoryId = null)
     {
         $data = [];
 
@@ -119,8 +119,8 @@ class ProjectStatsResolver
                 break;
             case 'votes':
                 if ($step->getType() === 'selection') {
-                    $data['values'] = $this->getProposalsWithVotesCountForSelectionStep($step, $limit, $themeId, $districtId);
-                    $data['total'] = $this->getProposalsCountForSelectionStep($step, $themeId, $districtId);
+                    $data['values'] = $this->getProposalsWithVotesCountForSelectionStep($step, $limit, $themeId, $districtId, $categoryId);
+                    $data['total'] = $this->getProposalsCountForSelectionStep($step, $themeId, $districtId, $categoryId);
                 }
                 break;
            case 'categories':
@@ -205,26 +205,26 @@ class ProjectStatsResolver
         ;
     }
 
-    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, $limit = null, $themeId = null, $districtId = null)
+    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, $limit = null, $themeId = null, $districtId = null, $categoryId = null)
     {
         $data = $this->proposalRepo
-            ->getProposalsWithVotesCountForSelectionStep($step, $limit, $themeId, $districtId)
+            ->getProposalsWithVotesCountForSelectionStep($step, $limit, $themeId, $districtId, $categoryId)
         ;
 
-        return $this->addPercentages($data, $this->getVotesCountForSelectionStep($step, $themeId, $districtId));
+        return $this->addPercentages($data, $this->getVotesCountForSelectionStep($step, $themeId, $districtId, $categoryId));
     }
 
-    public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
+    public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null, $categoryId = null)
     {
         return $this->proposalSelectionVoteRepo
-            ->getVotesCountForSelectionStep($step, $themeId, $districtId)
+            ->getVotesCountForSelectionStep($step, $themeId, $districtId, $categoryId)
         ;
     }
 
-    public function getProposalsCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null)
+    public function getProposalsCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null, $categoryId = null)
     {
         return $this->proposalRepo
-            ->countForSelectionStep($step, $themeId, $districtId)
+            ->countForSelectionStep($step, $themeId, $districtId, $categoryId)
         ;
     }
 

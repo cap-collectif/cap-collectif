@@ -141,7 +141,7 @@ class EventRepository extends EntityRepository
             ->addOrderBy('registration.updatedAt', 'DESC')
         ;
 
-        return $query = $qb->getQuery()->getOneOrNullResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
