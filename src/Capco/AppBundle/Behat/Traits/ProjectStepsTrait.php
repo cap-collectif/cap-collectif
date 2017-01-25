@@ -156,6 +156,6 @@ trait ProjectStepsTrait
     public function theVotesStatsShouldBeFilteredByCategory()
     {
         $selector = $this->navigationContext->getPage('project stats page')->getVotesStatsItemsSelector();
-        $this->assertNumElements(2, $selector);
+        $this->assertNumElements(3, $selector);
     }
 }

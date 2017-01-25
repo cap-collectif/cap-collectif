@@ -28,6 +28,7 @@ const ProjectStatsFilters = React.createClass({
     if (!showFilters) {
       return null;
     }
+
     const colWidth = categories.length > 0 ? 4 : 6;
 
     return (
@@ -64,7 +65,7 @@ const ProjectStatsFilters = React.createClass({
               </option>
               {
                 categories.map(category =>
-                  <option key={category.id} value={category.id}>
+                  <option key={category.value} value={category.value}>
                     {category.name}
                   </option>,
                 )

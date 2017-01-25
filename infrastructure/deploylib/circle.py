@@ -88,12 +88,12 @@ def save_cache():
         if match is not None:
             change_in_infrastructure = True
 
-    if change_in_infrastructure:
+    if change_in_infrastructure or not os.path.exists('~/docker'):
         env.compose('build')
         local('docker pull elasticsearch:1.7.3')
         local('docker pull redis:3')
-        local('docker pull selenium/hub:2.47.1')
-        local('docker pull selenium/node-chrome-debug:2.47.1')
+        local('docker pull selenium/hub:2.53.1')
+        local('docker pull selenium/node-chrome-debug:2.53.1-beryllium')
         local('docker pull jderusse/mailcatcher:latest')
         local('mkdir -p ~/docker')
         local('docker save capcotest_application > ~/docker/capcotest_application.tar')
