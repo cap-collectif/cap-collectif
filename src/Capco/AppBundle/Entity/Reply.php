@@ -31,16 +31,6 @@ class Reply implements Contribution
     use PrivatableTrait;
     use ExpirableTrait;
 
-    public function getKind(): string
-    {
-        return 'reply';
-    }
-
-    public function getRelated()
-    {
-        return null;
-    }
-
     /**
      * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="replies")

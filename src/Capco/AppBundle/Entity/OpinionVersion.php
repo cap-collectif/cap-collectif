@@ -38,16 +38,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     use DiffableTrait;
     use ExpirableTrait;
 
-    public function getKind(): string
-    {
-        return 'version';
-    }
-
-    public function getRelated()
-    {
-        return $this->getParent();
-    }
-
     /**
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank()

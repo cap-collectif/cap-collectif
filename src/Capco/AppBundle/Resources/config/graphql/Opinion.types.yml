@@ -2,7 +2,7 @@ Opinion:
     type: object
     config:
         description: "A contribution"
-        interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "String!"
@@ -69,14 +69,8 @@ Opinion:
                         type: "Int"
                 resolve: "@=resolver('proposition_votes', [value, args])"
             id:
-                type: "ID!"
-                description: "The content of the contribution."
-            related:
-                type: "Contribution"
-                description: "Return the related contribution if the contribution is related to another."
-            kind:
                 type: "String!"
-                description: "The kind of contribution."
+                description: "The content of the contribution."
             title:
                 type: "String!"
                 description: "The title of the contribution."

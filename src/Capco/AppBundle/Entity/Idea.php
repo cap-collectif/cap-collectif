@@ -36,16 +36,6 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     use ExpirableTrait;
     use IdTrait;
 
-    public function getKind(): string
-    {
-        return 'idea';
-    }
-
-    public function getRelated()
-    {
-        return null;
-    }
-
     public static $sortCriterias = [
         'last' => 'idea.sort.last',
         'old' => 'idea.sort.old',

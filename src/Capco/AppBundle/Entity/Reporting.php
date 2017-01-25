@@ -31,16 +31,6 @@ class Reporting implements CreatableInterface
         self::SIGNALEMENT_SEX => 'reporting.status.sexual',
     ];
 
-    public function getKind(): string
-    {
-        return 'report';
-    }
-
-    public function getRelated()
-    {
-        return $this->getRelatedObject();
-    }
-
     /**
      * @ORM\Column(name="status", type="integer")
      * @Assert\NotNull()

@@ -2,7 +2,7 @@ Argument:
     type: object
     config:
         description: "An argument"
-        interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "String!"
@@ -37,14 +37,8 @@ Argument:
             votesCount:
                 type: "Int!"
             id:
-                type: "ID!"
+                type: "String!"
                 description: "The content of the argument."
             body:
                 type: "String!"
                 description: "The content of the argument."
-            related:
-                type: "Contribution"
-                description: "Return the related contribution if the contribution is related to another."
-            kind:
-                type: "String!"
-                description: "The kind of contribution (argument)."

@@ -2,7 +2,7 @@ Source:
     type: object
     config:
         description: "A source"
-        interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "String!"
@@ -26,7 +26,7 @@ Source:
                 type: "String"
                 description: "Reason of trash."
             id:
-              type: "ID!"
+              type: "String!"
               description: "The id of the source."
             votesCount:
                 type: "Int!"
@@ -39,9 +39,3 @@ Source:
             body:
                 type: "String!"
                 description: "The content of the source."
-            related:
-                type: "Contribution"
-                description: "Return the related contribution if the contribution is related to another."
-            kind:
-                type: "String!"
-                description: "Returns 'source'."

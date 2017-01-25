@@ -1,10 +1,8 @@
 VersionVote:
     type: object
     config:
-        interfaces: [YesNoPairedVote, Contribution, ContributionWithAuthor]
+        interfaces: [ContributionWithAuthor]
         fields:
-            id:
-              type: "ID!"
             author:
                 type: "Person!"
                 description: "The author of the contribution."
@@ -18,9 +16,3 @@ VersionVote:
                 type: "String!"
                 description: "Date of vote."
                 resolve: "@=resolver('vote_createdAt', [value])"
-            related:
-                type: "Contribution"
-                description: "Return the related contribution if the contribution is related to another."
-            kind:
-                type: "String!"
-                description: "Returns 'vote'."

@@ -2,7 +2,7 @@ Version:
     type: object
     config:
         description: "A version of contribution"
-        interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "String!"
@@ -32,9 +32,6 @@ Version:
             trashedReason:
                 type: "String"
                 description: "Reason of trash."
-            comment:
-                type: "String"
-                description: "Explenation."
             votesCount:
                 type: "Int!"
                 description: "Number of votes."
@@ -69,14 +66,8 @@ Version:
                         type: "Int"
                 resolve: "@=resolver('version_votes', [value, args])"
             id:
-                type: "ID!"
-                description: "The content of the contribution."
-            related:
-                type: "Contribution"
-                description: "Return the related contribution if the contribution is related to another."
-            kind:
                 type: "String!"
-                description: "Returns 'version'."
+                description: "The content of the contribution."
             title:
                 type: "String!"
                 description: "The title of the contribution."

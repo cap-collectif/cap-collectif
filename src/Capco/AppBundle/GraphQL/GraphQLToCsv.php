@@ -9,24 +9,22 @@ class GraphQLToCsv
     public $infoResolver = null;
     public $csvGenerator = null;
 
-    public function generate(string $requestString, $executor, Writer $writer)
+    public function generate(string $requestString, array $requestResult, Writer $writer)
     {
-        $response = $executor->execute([
-          'query' => $requestString,
-          'variables' => [],
-        ], [], null)->toArray();
+        if (!$this->infoResolver) {
+            $this->infoResolver = new InfoResolver();
+            $this->csvGenerator = new CsvWriter();
+        }
 
-        $this->infoResolver = new InfoResolver();
-        $this->csvGenerator = new CsvWriter();
-
-        $headers = $this->infoResolver->guessHeadersFromFields($response['data']);
+        $fields = $this->infoResolver->queryStringToFields($requestString);
+        $headers = $this->infoResolver->guessHeadersFromFields($fields);
 
         $writer->insertOne($headers);
         $this->csvGenerator->setHeaders($headers);
 
-        foreach ($response['data'] as $fieldKey => $field) {
+        foreach ($fields as $fieldKey => $field) {
             $rows = [];
-            foreach ($response['data'][$fieldKey] as $currentData) {
+            foreach ($requestResult['data'][$fieldKey] as $currentData) {
                 $this->csvGenerator->writeNewRow($rows, $currentData, $fieldKey);
             }
             foreach ($rows as $row) {

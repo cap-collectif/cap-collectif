@@ -37,16 +37,6 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
 {
     use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, IdTrait;
 
-    public function getKind(): string
-    {
-        return 'comment';
-    }
-
-    public function getRelated()
-    {
-        return null;
-    }
-
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
         'popularity' => 'argument.sort.popularity',
