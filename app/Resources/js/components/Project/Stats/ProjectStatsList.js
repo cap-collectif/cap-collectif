@@ -42,8 +42,7 @@ const ProjectStatsList = React.createClass({
   changeTheme(ev) {
     this.setState({
       theme: ev.target.value,
-    },
-    () => {
+    }, () => {
       this.reloadData();
     });
   },
@@ -51,8 +50,7 @@ const ProjectStatsList = React.createClass({
   changeDistrict(ev) {
     this.setState({
       district: ev.target.value,
-    },
-    () => {
+    }, () => {
       this.reloadData();
     });
   },
@@ -100,9 +98,7 @@ const ProjectStatsList = React.createClass({
     } = this.props;
     const { data } = this.state;
 
-    if (data.values.reduce((a, b) => a + parseInt(b.value, 10), 0) === 0) {
-      return null;
-    }
+    const haveData = data.values.reduce((a, b) => a + parseInt(b.value, 10), 0) !== 0;
 
     return (
       <div className="block" id={`stats-${stepId}-${type}`}>
@@ -115,10 +111,12 @@ const ProjectStatsList = React.createClass({
           onCategoryChange={this.changeCategory}
           showFilters={showFilters}
         />
-        <ListGroup className="stats__list">
-          <ListGroupItem className="stats__list__header">
-            <i className={icon}></i> {this.getIntlMessage(label)}
-            <span id={`step-stats-display-${stepId}`} className="pull-right excerpt stats__buttons">
+        {
+          haveData &&
+          <ListGroup className="stats__list">
+            <ListGroupItem className="stats__list__header">
+              <i className={icon}></i> {this.getIntlMessage(label)}
+              <span id={`step-stats-display-${stepId}`} className="pull-right excerpt stats__buttons">
               <Button
                 bsStyle="link"
                 id={`step-stats-display-${stepId}-number`}
@@ -137,37 +135,38 @@ const ProjectStatsList = React.createClass({
                 {this.getIntlMessage('project.stats.display.percentage')}
               </Button>
             </span>
-          </ListGroupItem>
-          {
-            data.values.length > 0
-            ? data.values.map((row, index) => {
-              return (
-                <ProjectStatsListItem
-                  key={index}
-                  item={row}
-                  showPercentage={this.state.showPercentage}
-                  isCurrency={isCurrency}
-                />
-              );
-            })
-            : <ListGroupItem className="excerpt text-center">
-              {this.getIntlMessage('project.stats.no_values')}
             </ListGroupItem>
-          }
-        </ListGroup>
+            {
+              data.values.length > 0
+                ? data.values.map((row, index) => {
+                  return (
+                    <ProjectStatsListItem
+                      key={index}
+                      item={row}
+                      showPercentage={this.state.showPercentage}
+                      isCurrency={isCurrency}
+                    />
+                  );
+                })
+                : <ListGroupItem className="excerpt text-center">
+                  {this.getIntlMessage('project.stats.no_values')}
+                </ListGroupItem>
+            }
+          </ListGroup>
+        }
         {
-          data.total > data.values.length &&
-            <ProjectStatsModal
-              type={type}
-              stepId={stepId}
-              data={data}
-              label={label}
-              icon={icon}
-              showPercentage={this.state.showPercentage}
-              isCurrency={isCurrency}
-              theme={this.state.theme}
-              district={this.state.district}
-            />
+          haveData && data.total > data.values.length &&
+          <ProjectStatsModal
+            type={type}
+            stepId={stepId}
+            data={data}
+            label={label}
+            icon={icon}
+            showPercentage={this.state.showPercentage}
+            isCurrency={isCurrency}
+            theme={this.state.theme}
+            district={this.state.district}
+          />
         }
       </div>
     );

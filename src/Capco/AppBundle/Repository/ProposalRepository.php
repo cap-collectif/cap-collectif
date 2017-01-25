@@ -361,8 +361,7 @@ class ProposalRepository extends EntityRepository
 
         if ($categoryId) {
             $qb
-                ->leftJoin('proposal.category', 'category')
-                ->andWhere('category.id = :categoryId')
+                ->andWhere('proposal.category = :categoryId')
                 ->setParameter('categoryId', $categoryId)
             ;
         }

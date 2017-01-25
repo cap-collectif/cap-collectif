@@ -263,7 +263,7 @@ abstract class AbstractStep
     }
 
     /**
-     * @return mixed
+     * @return ProjectAbstractStep|null
      */
     public function getProjectAbstractStep()
     {
