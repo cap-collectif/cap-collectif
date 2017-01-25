@@ -36,11 +36,13 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     use ExpirableTrait;
     use IdTrait;
 
-    public function getKind(): string {
+    public function getKind(): string
+    {
         return 'idea';
     }
 
-    public function getRelated() {
+    public function getRelated()
+    {
         return null;
     }
 

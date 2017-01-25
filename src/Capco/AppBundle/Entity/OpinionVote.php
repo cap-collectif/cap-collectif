@@ -16,7 +16,8 @@ class OpinionVote extends AbstractVote
     const VOTE_NOK = -1;
     const VOTE_MITIGE = 0;
 
-    public function getRelated() {
+    public function getRelated()
+    {
         return $this->opinion;
     }
 

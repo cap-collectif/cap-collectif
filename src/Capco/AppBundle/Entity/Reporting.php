@@ -31,12 +31,14 @@ class Reporting implements CreatableInterface
         self::SIGNALEMENT_SEX => 'reporting.status.sexual',
     ];
 
-    public function getKind(): string {
-      return 'report';
+    public function getKind(): string
+    {
+        return 'report';
     }
 
-    public function getRelated() {
-      return $this->getRelatedObject();
+    public function getRelated()
+    {
+        return $this->getRelatedObject();
     }
 
     /**

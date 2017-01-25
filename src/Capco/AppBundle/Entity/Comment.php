@@ -37,11 +37,13 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
 {
     use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, IdTrait;
 
-    public function getKind(): string {
+    public function getKind(): string
+    {
         return 'comment';
     }
 
-    public function getRelated() {
+    public function getRelated()
+    {
         return null;
     }
 

@@ -25,11 +25,13 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
 {
     use UuidTrait;
 
-    public function getKind(): string {
+    public function getKind(): string
+    {
         return 'source';
     }
 
-    public function getRelated() {
+    public function getRelated()
+    {
         return $this->getParent();
     }
 

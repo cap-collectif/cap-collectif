@@ -31,11 +31,13 @@ class Reply implements Contribution
     use PrivatableTrait;
     use ExpirableTrait;
 
-    public function getKind(): string {
+    public function getKind(): string
+    {
         return 'reply';
     }
 
-    public function getRelated() {
+    public function getRelated()
+    {
         return null;
     }
 

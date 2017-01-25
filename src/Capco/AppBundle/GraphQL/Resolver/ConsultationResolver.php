@@ -20,27 +20,26 @@ class ConsultationResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-
     public function resolveContributionType($data)
     {
-           $typeResolver = $this->container->get('overblog_graphql.type_resolver');
-           if ($data instanceof Opinion) {
-               return $typeResolver->resolve('Opinion');
-           }
-           if ($data instanceof OpinionVersion) {
-               return $typeResolver->resolve('Version');
-           }
-           if ($data instanceof Argument) {
-               return $typeResolver->resolve('Argument');
-           }
-           if ($data instanceof Source) {
-               return $typeResolver->resolve('Source');
-           }
-           if ($data instanceof Reporting) {
-               return $typeResolver->resolve('Reporting');
-           }
+        $typeResolver = $this->container->get('overblog_graphql.type_resolver');
+        if ($data instanceof Opinion) {
+            return $typeResolver->resolve('Opinion');
+        }
+        if ($data instanceof OpinionVersion) {
+            return $typeResolver->resolve('Version');
+        }
+        if ($data instanceof Argument) {
+            return $typeResolver->resolve('Argument');
+        }
+        if ($data instanceof Source) {
+            return $typeResolver->resolve('Source');
+        }
+        if ($data instanceof Reporting) {
+            return $typeResolver->resolve('Reporting');
+        }
 
-           throw new \Exception('Can not resolve type, in resolveContributionType');
+        throw new \Exception('Can not resolve type, in resolveContributionType');
     }
 
     public function resolveConsultationIsContribuable(ConsultationStep $consultation): bool
@@ -103,11 +102,12 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolvePropositionVoteProposition(array $vote)
     {
         if (isset($vote['opinion'])) {
-          return $this->container
+            return $this->container
               ->get('capco.opinion.repository')
               ->find($vote['opinion'])
             ;
         }
+
         return null;
     }
 

@@ -23,7 +23,7 @@ class InfoResolver
             return;
         }
         if (!in_array($string, $result)) {
-          $result[] = $string;
+            $result[] = $string;
         }
     }
 }

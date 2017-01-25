@@ -38,11 +38,13 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     use PinnableTrait;
     use ExpirableTrait;
 
-    public function getKind(): string {
+    public function getKind(): string
+    {
         return 'opinion';
     }
 
-    public function getRelated() {
+    public function getRelated()
+    {
         return null;
     }
 

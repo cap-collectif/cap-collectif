@@ -13,7 +13,7 @@ class GraphQLToCsv
     {
         $response = $executor->execute([
           'query' => $requestString,
-          'variables' => []
+          'variables' => [],
         ], [], null)->toArray();
 
         $this->infoResolver = new InfoResolver();
