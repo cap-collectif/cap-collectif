@@ -30,8 +30,17 @@ class ConsultationResolver implements ContainerAwareInterface
            if ($data instanceof OpinionVersion) {
                return $typeResolver->resolve('Version');
            }
+           if ($data instanceof Argument) {
+               return $typeResolver->resolve('Argument');
+           }
+           if ($data instanceof Source) {
+               return $typeResolver->resolve('Source');
+           }
+           if ($data instanceof Reporting) {
+               return $typeResolver->resolve('Reporting');
+           }
 
-           return null;
+           throw new \Exception('Can not resolve type, in resolveContributionType');
     }
 
     public function resolveConsultationIsContribuable(ConsultationStep $consultation): bool

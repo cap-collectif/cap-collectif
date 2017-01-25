@@ -47,6 +47,7 @@ fragment authorInfos on ContributionWithAuthor {
   }
 }
 fragment reportInfos on Reporting {
+  ...relatedInfos
   id
   ...authorInfos
   type

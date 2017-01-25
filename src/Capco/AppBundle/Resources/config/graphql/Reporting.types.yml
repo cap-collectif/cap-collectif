@@ -2,7 +2,7 @@ Reporting:
     type: object
     config:
         description: "A report"
-        interfaces: [ContributionWithAuthor]
+        interfaces: [Contribution, ContributionWithAuthor]
         fields:
             createdAt:
                 type: "String!"
@@ -22,3 +22,9 @@ Reporting:
             body:
                 type: "String!"
                 description: "The content of the argument."
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."
+            kind:
+                type: "String!"
+                description: "Returns 'report'."
