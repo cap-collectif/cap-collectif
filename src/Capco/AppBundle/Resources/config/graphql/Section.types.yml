@@ -4,7 +4,7 @@ Section:
         description: "A section"
         fields:
             id:
-                type: "String!"
+                type: "ID!"
                 description: "The id of the section."
             title:
                 type: "String!"

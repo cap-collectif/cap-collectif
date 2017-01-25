@@ -38,6 +38,16 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     use PinnableTrait;
     use ExpirableTrait;
 
+    public function getKind(): string
+    {
+        return 'opinion';
+    }
+
+    public function getRelated()
+    {
+        return null;
+    }
+
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
         'random' => 'opinion.sort.random',

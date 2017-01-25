@@ -17,17 +17,22 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
             ->setDescription('Create csv file from consultation step data');
     }
 
-    public function queryGraphQLToArray(string $query): array
-    {
-        $executor = $this->getContainer()->get('overblog_graphql.request_executor');
-        $response = $executor->execute(['query' => $query, 'variables' => []], [], null)->toArray();
-
-        return $response;
-    }
-
     private function getContributionsGraphQLqueryByConsultationStep($constulationStep)
     {
         return '
+fragment relatedInfos on Contribution {
+   related {
+     id
+     kind
+   }
+}
+fragment voteInfos on YesNoPairedVote {
+   id
+   ...authorInfos
+   value
+   createdAt
+   expired
+}
 fragment trashableInfos on TrashableContribution {
   trashed
   trashedAt
@@ -42,6 +47,7 @@ fragment authorInfos on ContributionWithAuthor {
   }
 }
 fragment reportInfos on Reporting {
+  ...relatedInfos
   id
   ...authorInfos
   type
@@ -49,6 +55,7 @@ fragment reportInfos on Reporting {
   createdAt
 }
 fragment argumentInfos on Argument {
+  ...relatedInfos
   id
   type
   body
@@ -61,6 +68,7 @@ fragment argumentInfos on Argument {
   votesCount
 }
 fragment sourceInfos on Source {
+  ...relatedInfos
   id
   body
   createdAt
@@ -104,10 +112,12 @@ fragment sourceInfos on Source {
   		...reportInfos
     }
     versions {
+      ...relatedInfos
       id
   		...authorInfos
       title
       body
+      comment
       createdAt
       updatedAt
       url
@@ -132,15 +142,11 @@ fragment sourceInfos on Source {
   			...reportInfos
       }
       votes {
-         ...authorInfos
-         createdAt
-         expired
+        ...voteInfos
       }
    }
    votes {
-      ...authorInfos
-      createdAt
-      expired
+      ...voteInfos
    }
  }
 }';
@@ -151,7 +157,7 @@ fragment sourceInfos on Source {
         $steps = $this->getContainer()->get('doctrine')
             ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
             ->findAll();
-        $generator = new GraphQLToCsv();
+        $csvGenerator = new GraphQLToCsv();
 
         foreach ($steps as $step) {
             if ($step->getProject()) {
@@ -161,9 +167,9 @@ fragment sourceInfos on Source {
                 $writer->setDelimiter(',');
                 $writer->setNewline("\r\n");
                 $writer->setOutputBOM(Writer::BOM_UTF8);
-                $generator->generate(
+                $csvGenerator->generate(
                   $requestString,
-                  $this->queryGraphQLToArray($requestString),
+                  $this->getContainer()->get('overblog_graphql.request_executor'),
                   $writer
                 );
                 $output->writeln('The export file "'.$fileName.'" has been created.');

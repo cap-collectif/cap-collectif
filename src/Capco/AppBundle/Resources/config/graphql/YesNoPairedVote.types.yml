@@ -1,0 +1,17 @@
+YesNoPairedVote:
+    type: interface
+    config:
+        fields:
+            id:
+              type: "ID!"
+            author:
+                type: "Person!"
+                description: "The author of the contribution."
+            value:
+                type: "YesNoPairedVoteValue!"
+            expired:
+                type: "Boolean!"
+                description: "If vote is expired, it exists but doesn't count."
+            createdAt:
+                type: "String!"
+                description: "Date of vote."

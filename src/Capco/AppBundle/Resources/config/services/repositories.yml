@@ -4,6 +4,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:AbstractVote']
 
+  capco.argument.repository:
+    class: Capco\AppBundle\Repository\ArgumentRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Argument']
+
   capco.abstract_question.repository:
     class: Capco\AppBundle\Repository\AbstractQuestionRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

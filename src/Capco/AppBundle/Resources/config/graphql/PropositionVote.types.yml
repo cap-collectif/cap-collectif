@@ -1,8 +1,14 @@
 PropositionVote:
     type: object
     config:
-        interfaces: [ContributionWithAuthor]
+        interfaces: [YesNoPairedVote, Contribution, ContributionWithAuthor]
         fields:
+            id:
+              type: "ID!"
+            related:
+                type: "Contribution"
+                description: "The related proposition."
+                # resolve: "@=resolver('proposition_vote_proposition', [value])"
             author:
                 type: "Person!"
                 description: "The author of the contribution."
@@ -16,3 +22,9 @@ PropositionVote:
                 type: "String!"
                 description: "Date of vote."
                 resolve: "@=resolver('vote_createdAt', [value])"
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."
+            kind:
+                type: "String!"
+                description: "Returns 'vote'."

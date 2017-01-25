@@ -33,7 +33,7 @@ class ProposalController extends Controller
         $urlResolver = $this->get('capco.url.resolver');
 
         $stepUrls = $project->getSteps()->map(function (ProjectAbstractStep $step) use ($urlResolver) {
-           return  $urlResolver->getStepUrl($step->getStep(), UrlGenerator::ABSOLUTE_URL);
+            return  $urlResolver->getStepUrl($step->getStep(), UrlGenerator::ABSOLUTE_URL);
         })->toArray();
 
         $refererUri = $request->headers->has('referer')
