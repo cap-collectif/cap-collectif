@@ -103,7 +103,6 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 2999999
-    category: '@pCategory3'
   proposal8:
     id: 8
     title: Proposition pas chère
@@ -118,7 +117,6 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 100
-    category: '@pCategory3'
   proposal9:
     id: 9
     title: Proposition gratuite
@@ -132,7 +130,6 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district3'
     status: '@status1'
-    category: '@pCategory4'
   proposal10:
     id: 10
     title: Proposition pas encore votable

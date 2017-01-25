@@ -85,9 +85,9 @@ const ProposalsUserVotesPage = React.createClass({
 
 const mapStateToProps = (state, props) => {
   const currentUserVotesByStepId = state.proposal.userVotesByStepId;
-  const userVotesByStepId = [];
+  const userVotesByStepId = {};
   for (const stepId in props.userVotesByStepId) {
-    if (Object.prototype.hasOwnProperty.call(props.userVotesByStepId, stepId)) {
+    if (stepId && Object.prototype.hasOwnProperty.call(props.userVotesByStepId, stepId)) {
       userVotesByStepId[stepId] = [];
       for (const voteId of currentUserVotesByStepId[stepId]) {
         const vote = props.userVotesByStepId[stepId].find(v => v.id === voteId);

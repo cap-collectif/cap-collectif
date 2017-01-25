@@ -11,7 +11,6 @@ class ProposalCategoryRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')
             ->select('c.name as name')
-            ->addSelect('c.id as id')
             ->addSelect('(
                 SELECT COUNT(p.id) as pCount
                 FROM CapcoAppBundle:Proposal p
@@ -21,13 +20,11 @@ class ProposalCategoryRepository extends EntityRepository
                 AND pc.id = c.id
                 AND p.isTrashed = false
             ) as value')
+            ->andWhere('c.form = :form')
             ->setParameter('step', $step)
+            ->setParameter('form', $step->getProposalForm())
             ->orderBy('value', 'DESC')
         ;
-
-        if ($step->getProposalForm()) {
-            $qb->andWhere('c.form = :form')->setParameter('form', $step->getProposalForm());
-        }
 
         if ($limit) {
             $qb->setMaxResults($limit);

@@ -81,7 +81,11 @@ const getCurrentCollectStep = (state): ?Object => {
   if (!selectedProject) {
     return null;
   }
-  return getBudgetProjects(state.project.projects).find(p => p.id === selectedProject).steps.filter(s => s.type === 'collect')[0];
+  const project = getBudgetProjects(state.project.projects).find(p => p.id === selectedProject);
+  if (!project) {
+    return null;
+  }
+  return project.steps.filter(s => s.type === 'collect')[0];
 };
 
 export default connect(state =>
