@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 use Capco\AppBundle\Model\CreatableInterface;
-use Overblog\GraphQLBundle\Error\UserError;
 
 class ConsultationResolver implements ContainerAwareInterface
 {
@@ -40,7 +39,7 @@ class ConsultationResolver implements ContainerAwareInterface
             return $typeResolver->resolve('Reporting');
         }
 
-        throw new UserError('Could not resolve type of Contribution.');
+        throw new \Exception('Can not resolve type, in resolveContributionType');
     }
 
     public function resolveConsultationIsContribuable(ConsultationStep $consultation): bool
