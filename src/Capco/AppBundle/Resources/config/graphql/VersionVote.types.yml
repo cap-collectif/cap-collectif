@@ -18,3 +18,9 @@ VersionVote:
                 type: "String!"
                 description: "Date of vote."
                 resolve: "@=resolver('vote_createdAt', [value])"
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."
+            kind:
+                type: "String!"
+                description: "Returns 'vote'."

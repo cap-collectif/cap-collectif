@@ -14,6 +14,7 @@ services:
           - { name: overblog_graphql.resolver, alias: "proposition_arguments", method: "resolvePropositionArguments" }
           - { name: overblog_graphql.resolver, alias: "proposition_url", method: "resolvePropositionUrl" }
           - { name: overblog_graphql.resolver, alias: "proposition_votes", method: "resolvePropositionVotes" }
+          - { name: overblog_graphql.resolver, alias: "proposition_vote_proposition", method: "resolvePropositionVoteProposition" }
           - { name: overblog_graphql.resolver, alias: "proposition_vote_author", method: "resolvePropositionVoteAuthor" }
           - { name: overblog_graphql.resolver, alias: "votesByContribution", method: "resolveVotesByContribution" }
           - { name: overblog_graphql.resolver, alias: "consultation_contribuable", method: "resolveConsultationIsContribuable" }
@@ -32,3 +33,4 @@ services:
           - { name: overblog_graphql.resolver, alias: "version_reportings", method: "resolveVersionReportings" }
           - { name: overblog_graphql.resolver, alias: "vote_createdAt", method: "resolverPropositionVoteCreatedAt" }
           - { name: overblog_graphql.resolver, alias: "version_votes", method: "resolveVersionVotes" }
+          - { name: overblog_graphql.resolver, alias: "contribution_type", method: "resolveContributionType" }

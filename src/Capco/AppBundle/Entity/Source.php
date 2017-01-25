@@ -29,8 +29,8 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return 'source';
     }
 
-    public function getRelated(): Contribution {
-        return $this->Opinion ?? $this->opinionVersion;
+    public function getRelated() {
+        return $this->getParent();
     }
 
     const TYPE_FOR = 1;

@@ -20,6 +20,20 @@ class ConsultationResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
+
+    public function resolveContributionType($data)
+    {
+           $typeResolver = $this->container->get('overblog_graphql.type_resolver');
+           if ($data instanceof Opinion) {
+               return $typeResolver->resolve('Opinion');
+           }
+           if ($data instanceof OpinionVersion) {
+               return $typeResolver->resolve('Version');
+           }
+
+           return null;
+    }
+
     public function resolveConsultationIsContribuable(ConsultationStep $consultation): bool
     {
         return $consultation->canContribute();
@@ -75,6 +89,17 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolvePropositionVoteAuthor(array $vote)
     {
         return $vote['user'];
+    }
+
+    public function resolvePropositionVoteProposition(array $vote)
+    {
+        if (isset($vote['opinion'])) {
+          return $this->container
+              ->get('capco.opinion.repository')
+              ->find($vote['opinion'])
+            ;
+        }
+        return null;
     }
 
     public function resolverPropositionVoteCreatedAt(array $vote): string
@@ -172,7 +197,7 @@ class ConsultationResolver implements ContainerAwareInterface
     {
         return $this->container->get('doctrine')->getManager()
             ->createQuery(
-                'SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = '.$proposition->getId(
+                'SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id}, PARTIAL opinion.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author LEFT JOIN vote.opinion opinion WHERE vote.opinion = '.$proposition->getId(
                 )
             )
             // ->setMaxResults(50)

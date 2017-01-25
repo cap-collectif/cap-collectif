@@ -16,10 +16,6 @@ class GraphQLToCsv
           'variables' => []
         ], [], null)->toArray();
 
-        if (isset($response['errors'])) {
-          dump($response['errors']);
-        }
-
         $this->infoResolver = new InfoResolver();
         $this->csvGenerator = new CsvWriter();
 

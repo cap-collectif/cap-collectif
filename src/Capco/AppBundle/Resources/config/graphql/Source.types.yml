@@ -39,3 +39,9 @@ Source:
             body:
                 type: "String!"
                 description: "The content of the source."
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."
+            kind:
+                type: "String!"
+                description: "Returns 'source'."

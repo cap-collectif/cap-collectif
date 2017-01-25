@@ -16,6 +16,10 @@ class OpinionVote extends AbstractVote
     const VOTE_NOK = -1;
     const VOTE_MITIGE = 0;
 
+    public function getRelated() {
+        return $this->opinion;
+    }
+
     public static $voteTypes = [
         'ok' => self::VOTE_OK,
         'mitige' => self::VOTE_MITIGE,

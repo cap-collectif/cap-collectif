@@ -1,0 +1,4 @@
+OpinionOrVersion:
+    type: union
+    config:
+        types: [Opinion, Version]

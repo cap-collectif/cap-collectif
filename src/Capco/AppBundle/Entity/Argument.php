@@ -33,7 +33,7 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
     }
 
     public function getRelated() {
-        return $this->opinion ? $this->opinion : $this->opinionVersion;
+        return $this->getParent();
     }
 
     const TYPE_AGAINST = 0;

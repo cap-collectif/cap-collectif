@@ -43,8 +43,8 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return 'version';
     }
 
-    public function getRelated(): Opinion {
-        return $this->parent;
+    public function getRelated() {
+        return $this->getParent();
     }
 
     /**

@@ -20,16 +20,16 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
     private function getContributionsGraphQLqueryByConsultationStep($constulationStep)
     {
         return '
-fragment relatedContribution on Contribution {
-  related {
-    id
-    kind
-  }
+fragment relatedInfos on Contribution {
+   related {
+     id
+     kind
+   }
 }
 fragment voteInfos on YesNoPairedVote {
-   ...relatedContribution
    id
    ...authorInfos
+   value
    createdAt
    expired
 }
@@ -54,7 +54,7 @@ fragment reportInfos on Reporting {
   createdAt
 }
 fragment argumentInfos on Argument {
-  ...relatedContribution
+  ...relatedInfos
   id
   type
   body
@@ -67,7 +67,7 @@ fragment argumentInfos on Argument {
   votesCount
 }
 fragment sourceInfos on Source {
-  ...relatedContribution
+  ...relatedInfos
   id
   body
   createdAt
@@ -79,7 +79,6 @@ fragment sourceInfos on Source {
 }
 {
   contributions(consultation:'.$constulationStep->getId().') {
-    kind
     id
   	...authorInfos
     section {
@@ -112,7 +111,7 @@ fragment sourceInfos on Source {
   		...reportInfos
     }
     versions {
-      ...relatedContribution
+      ...relatedInfos
       id
   		...authorInfos
       title

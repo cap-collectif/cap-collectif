@@ -71,6 +71,12 @@ Version:
             id:
                 type: "ID!"
                 description: "The content of the contribution."
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."
+            kind:
+                type: "String!"
+                description: "Returns 'version'."
             title:
                 type: "String!"
                 description: "The title of the contribution."
