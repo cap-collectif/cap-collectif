@@ -92,7 +92,7 @@ def save_cache():
         env.compose('build')
         local('docker pull elasticsearch:1.7.3')
         local('docker pull redis:3')
-        local('docker pull selenium/hub:2.53.1')
+        local('docker pull selenium/hub:2.53.1-beryllium')
         local('docker pull selenium/node-chrome-debug:2.53.1-beryllium')
         local('docker pull jderusse/mailcatcher:latest')
         local('mkdir -p ~/docker')
