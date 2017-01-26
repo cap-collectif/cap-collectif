@@ -34,7 +34,12 @@ const NavbarRight = React.createClass({
         {
           features.search &&
             <NavItem eventKey={1} className="navbar__search" href="/search">
-              <i className="cap cap-magnifier"></i> <span className="visible-xs">{ this.getIntlMessage('navbar.search') }</span>
+              <i className="cap cap-magnifier"></i> <span
+              className="visible-xs-inline"
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              { this.getIntlMessage('navbar.search') }
+            </span>
             </NavItem>
         }
         {
