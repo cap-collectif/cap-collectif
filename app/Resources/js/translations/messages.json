@@ -715,7 +715,7 @@
         "comment": "Commentaire",
         "comment_placeholder": "Pourquoi soutenez-vous ce projet ?",
         "email": "Adresse électronique",
-        "private": "Vote anonyme",
+        "private": "Rendre mon vote anonyme",
         "username": "Nom"
       },
       "hide": "Masquer",

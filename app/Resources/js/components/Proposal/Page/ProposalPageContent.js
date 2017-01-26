@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import ProposalFusionList from './ProposalFusionList';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
 import ProposalEditModal from '../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
@@ -44,8 +43,6 @@ const ProposalPageContent = React.createClass({
     };
     return (
       <div className={classNames(classes)}>
-        <ProposalFusionList proposal={proposal} type="From" />
-        <ProposalFusionList proposal={proposal} type="Into" />
         {
           proposal.media &&
             <img

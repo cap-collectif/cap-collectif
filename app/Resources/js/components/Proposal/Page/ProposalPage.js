@@ -16,6 +16,7 @@ import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
+import ProposalFusionList from './ProposalFusionList';
 
 export const ProposalPage = React.createClass({
   propTypes: {
@@ -107,6 +108,8 @@ export const ProposalPage = React.createClass({
                   <Tab.Pane eventKey="content">
                     <Row>
                       <Col xs={12} sm={8}>
+                        <ProposalFusionList proposal={proposal} type="From" />
+                        <ProposalFusionList proposal={proposal} type="Into" />
                         <ProposalPageAnswer
                           answer={proposal.answer}
                         />
