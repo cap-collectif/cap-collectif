@@ -613,8 +613,8 @@
     "body": "Description",
     "category": "Catégorie",
     "back": "Liste des propositions",
-    "fusionnedInto": "Proposition fusionnée avec {num, plural, one{1 autre} other {# autres}}",
-    "fusionnedFrom": "Proposition issue de la fusion de {num, plural, other {# propositions}}",
+    "fusionnedInto": "Cette proposition a été fusionnée dans une nouvelle proposition",
+    "fusionnedFrom": "Cette proposition est issue d'une fusion de {num, plural, one{# propositions similaire} other{# propositions similaires}}",
     "constraints": {
       "body": "La description de la proposition doit faire au moins 2 caractères.",
       "category": "Merci de sélectionner une catégorie.",

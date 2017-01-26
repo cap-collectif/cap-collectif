@@ -44,6 +44,8 @@ const ProposalPageContent = React.createClass({
     };
     return (
       <div className={classNames(classes)}>
+        <ProposalFusionList proposal={proposal} type="From" />
+        <ProposalFusionList proposal={proposal} type="Into" />
         {
           proposal.media &&
             <img
@@ -53,8 +55,6 @@ const ProposalPageContent = React.createClass({
               className="block img-responsive"
             />
         }
-        <ProposalFusionList proposal={proposal} type="From" />
-        <ProposalFusionList proposal={proposal} type="Into" />
         <div className="block">
           <h3 className="h3">{ this.getIntlMessage('proposal.description') }</h3>
           <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
