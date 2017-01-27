@@ -50,7 +50,9 @@ class CsvWriter
       foreach ($currentData as $dataFieldKey => $dataFieldValue) {
           if (is_array($dataFieldValue) && $this->isMultiDimensionalArray($dataFieldValue)) {
               foreach ($dataFieldValue as $key => $value) {
-                  $this->writeNewRow($rows, $value, $fieldKey.'_'.$dataFieldKey);
+                  if ($value) {
+                      $this->writeNewRow($rows, $value, $fieldKey.'_'.$dataFieldKey);
+                  }
               }
           }
       }

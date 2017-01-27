@@ -3,10 +3,8 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Helper\EnvHelper;
 use Doctrine\ORM\EntityManager;
@@ -158,8 +156,6 @@ class ProjectDownloadResolver
                 ->getCountsByProposalGroupedBySteps($entity);
 
             $proposal['votesCountByStepId'] = json_encode($selectionVotesCount + $collectVotesCount);
-
-
         }
         unset($proposal);
 
