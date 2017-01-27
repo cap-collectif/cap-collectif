@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import UserPreview from '../../User/UserPreview';
 import ProposalVoteForm from './ProposalVoteForm';
 import LoginButton from '../../User/Login/LoginButton';
 import ProposalVoteBoxMessage from './ProposalVoteBoxMessage';
@@ -96,12 +95,7 @@ const ProposalVoteBox = React.createClass({
             </div>
         }
         {
-          user
-            ? <UserPreview
-              user={user}
-              style={{ padding: '0', marginBottom: '0', fontSize: '18px' }}
-              />
-          : features.vote_without_account &&
+          !user &&
           <p className="text-center small" style={{ marginBottom: '0', fontWeight: 'bold' }}>
             {this.getIntlMessage('proposal.vote.non_authenticated')}
           </p>

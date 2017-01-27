@@ -69,6 +69,18 @@ const ProposalVoteForm = React.createClass({
             />
         }
         {
+          comment.length > 0 && (voteWithoutAccount || !anonymous)
+            ? null
+            : <Field
+              type="checkbox"
+              component={renderComponent}
+              name="private"
+              id="proposal-vote__private"
+              disableValidation
+              label={this.getIntlMessage('proposal.vote.form.private')}
+            />
+        }
+        {
           !isPrivate && (!voteWithoutAccount || anonymous) &&
             <Field
               type="textarea"
@@ -76,24 +88,13 @@ const ProposalVoteForm = React.createClass({
               name="comment"
               id="proposal-vote__comment"
               label={
-                <span>
+                <span style={{ fontWeight: 'normal' }}>
                   {this.getIntlMessage('proposal.vote.form.comment')}
                   <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
                 </span>
               }
               placeholder={this.getIntlMessage('proposal.vote.form.comment_placeholder')}
             />
-        }
-        {
-          comment.length > 0 && (voteWithoutAccount || !anonymous)
-          ? null
-            : <Field
-              type="checkbox"
-              component={renderComponent}
-              name="private"
-              id="proposal-vote__private"
-              label={this.getIntlMessage('proposal.vote.form.private')}
-              />
         }
       </form>
     );
