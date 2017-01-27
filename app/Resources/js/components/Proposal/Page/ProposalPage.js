@@ -99,7 +99,7 @@ export const ProposalPage = React.createClass({
                     id="proposal-vote-btn"
                     proposal={proposal}
                     style={{ marginTop: '10px' }}
-                    className="pull-right hidden-xs"
+                    className="pull-right hidden-xs btn-lg"
                   />
                 </div>
               </div>

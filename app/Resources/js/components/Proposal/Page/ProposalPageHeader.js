@@ -68,17 +68,17 @@ export const ProposalPageHeader = React.createClass({
               />
               {
                 (moment(proposal.updated_at).diff(proposal.created_at, 'seconds') > 1)
-                && <span>
-                  {' • '}
-                  <FormattedMessage
-                    message={this.getIntlMessage('global.edited_on')}
-                    updated={updatedDate}
-                  />
-                </span>
+                  && <span>
+                    {' • '}
+                    <FormattedMessage
+                      message={this.getIntlMessage('global.edited_on')}
+                      updated={updatedDate}
+                    />
+                  </span>
               }
               <ProposalVoteButtonWrapper
                 proposal={proposal}
-                className="visible-xs pull-right"
+                className="visible-xs btn-lg pull-right"
               />
             </p>
           </div>
