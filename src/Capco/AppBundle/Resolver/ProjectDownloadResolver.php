@@ -298,7 +298,6 @@ class ProjectDownloadResolver
         $item = [
             'id' => $vote['id'],
             'title' => $proposal['title'],
-            'votesCountByStepId' => $proposal['votesCountByStepId'],
             'content_type' => $this->translator->trans(
                 'project_download.values.content_type.vote',
                 [],
