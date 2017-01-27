@@ -11,14 +11,14 @@ capcobot = {
 
 
 @task(environments=['local', 'testing'])
-def check_dependencies():
+def check_deps():
     "Check dependencies"
     env.compose_run('composer validate', 'builder', '.', no_deps=True)
     env.service_command('bin/console security:check', 'application', env.www_app)
 
 
 @task(environments=['local', 'testing'])
-def check_codestyle():
+def check_cs():
     "Check code style"
     env.compose_run('npm run checkcs', 'builder', '.', no_deps=True)
     env.compose_run('pep8 infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
@@ -35,10 +35,9 @@ def lint():
 
 
 @task(environments=['local', 'testing'])
-def static_analysis():
-    "Run static analysis tools"
+def check_type():
+    "Typecheck"
     local('npm run typecheck')
-    env.service_command('php bin/phpstan analyse src', 'application', env.www_app)
 
 
 @task(environments=['local', 'testing'])

@@ -124,8 +124,7 @@
         "tonicforhealth/behat-parallel-scenario": "dev-master#65b5b4d1130d3c9c16097d172882781e839ecfc5",
         "bossa/phpspec2-expect": "2.0.0",
         "phpspec/phpspec": "3.0",
-        "behat/gherkin": "^4.4",
-        "phpstan/phpstan": "^0.6.1"
+        "behat/gherkin": "^4.4"
     },
     "scripts": {},
     "config": {

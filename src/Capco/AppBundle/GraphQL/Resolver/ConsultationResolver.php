@@ -206,10 +206,7 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolvePropositionVotes(Opinion $proposition, Arg $argument)
     {
         return $this->container->get('doctrine')->getManager()
-            ->createQuery(
-                'SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id}, PARTIAL opinion.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author LEFT JOIN vote.opinion opinion WHERE vote.opinion = '.$proposition->getId(
-                )
-            )
+            ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id}, PARTIAL opinion.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author LEFT JOIN vote.opinion opinion WHERE vote.opinion = \''.$proposition->getId().'\'')
             // ->setMaxResults(50)
             ->getArrayResult();
     }
@@ -217,10 +214,7 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolveVersionVotes(OpinionVersion $version, Arg $argument)
     {
         return $this->container->get('doctrine')->getManager()
-            ->createQuery(
-                'SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVersionVote vote LEFT JOIN vote.user author WHERE vote.opinionVersion = '.$version->getId(
-                )
-            )
+            ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVersionVote vote LEFT JOIN vote.user author WHERE vote.opinionVersion = \''.$version->getId().'\'')
             // ->setMaxResults(50)
             ->getArrayResult();
     }
@@ -228,11 +222,7 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolveVotesByContribution(Arg $argument)
     {
         return $this->container->get('doctrine')->getManager()
-            ->createQuery(
-                'SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = '.$argument->offsetGet(
-                    'contribution'
-                )
-            )
+            ->createQuery('SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = \''.$argument->offsetGet('contribution').'\'')
             ->getArrayResult();
     }
 
