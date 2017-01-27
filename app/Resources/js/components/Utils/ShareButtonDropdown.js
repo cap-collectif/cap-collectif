@@ -106,7 +106,7 @@ const ShareButtonDropdown = React.createClass({
   render() {
     const { enabled, style, id, bsStyle, className, title, url } = this.props;
     if (!enabled) {
-      return <span />;
+      return null;
     }
     return (
       <div className="share-button-dropdown">
