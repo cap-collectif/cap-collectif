@@ -1148,6 +1148,7 @@ project_download:
     trashed_reason: Raison de la mise en corbeille
     updated: Modification
     user_type: Type de profil
+    votesCountByStepId: Nombre de votes par étape
     votes_mitigated: Votes mitigés
     votes_nok: Votes contre
     votes_ok: Votes pour

@@ -19,6 +19,7 @@ class ProjectDownloadResolver
     protected $collectHeaders = [
         'id',
         'title',
+        'votesCountByStepId',
         'content_type',
         'author',
         'author_id',
@@ -145,6 +146,20 @@ class ProjectDownloadResolver
         foreach ($proposals as &$proposal) {
             $proposal['Step'] = $collectStep;
             $proposal['entity_type'] = 'proposal';
+            $entity = $this->em
+                ->getRepository('CapcoAppBundle:Proposal')
+                ->find($proposal['id'])
+            ;
+            $selectionVotesCount = $this->em
+                ->getRepository('CapcoAppBundle:ProposalSelectionVote')
+                ->getCountsByProposalGroupedBySteps($entity);
+            $collectVotesCount = $this->em
+                ->getRepository('CapcoAppBundle:ProposalCollectVote')
+                ->getCountsByProposalGroupedBySteps($entity);
+
+            $proposal['votesCountByStepId'] = json_encode($selectionVotesCount + $collectVotesCount);
+
+
         }
         unset($proposal);
 
@@ -190,24 +205,6 @@ class ProjectDownloadResolver
         }
     }
 
-    public function getArgumentsData($arguments, $parent)
-    {
-        foreach ($arguments as $argument) {
-            if ($argument['isEnabled']) {
-                $argument['published'] = $argument['isEnabled'] && !$argument['isTrashed']
-                    && ($parent['entity_type'] === 'opinion'
-                        ? $parent['isEnabled'] && !$parent['isTrashed']
-                        : $parent['enabled'] && !$parent['isTrashed'] && $parent['parent']['isEnabled'] && !$parent['parent']['isTrashed']);
-                $argument['entity_type'] = 'argument';
-                $this->addItemToData($this->getArgumentItem($argument, $parent));
-                $votes = $this->em
-                    ->getRepository('CapcoAppBundle:ArgumentVote')
-                    ->getAllByArgument($argument['id'], true);
-                $this->getVotesData($votes, $argument);
-            }
-        }
-    }
-
     public function getVotesData($votes, $entity)
     {
         foreach ($votes as $vote) {
@@ -245,6 +242,7 @@ class ProjectDownloadResolver
         $item = [
             'id' => $proposal['id'],
             'title' => $proposal['title'],
+            'votesCountByStepId' => $proposal['votesCountByStepId'],
             'content_type' => $this->translator->trans(
                 'project_download.values.content_type.proposal',
                 [],
@@ -300,6 +298,7 @@ class ProjectDownloadResolver
         $item = [
             'id' => $vote['id'],
             'title' => $proposal['title'],
+            'votesCountByStepId' => $proposal['votesCountByStepId'],
             'content_type' => $this->translator->trans(
                 'project_download.values.content_type.vote',
                 [],
