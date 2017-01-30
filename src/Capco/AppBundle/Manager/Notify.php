@@ -169,11 +169,16 @@ class Notify implements MailerInterface
       $url = $this->router->generate('capco_user_confirmation_new_email', [
         'token' => $user->getNewEmailConfirmationToken(),
       ], UrlGeneratorInterface::ABSOLUTE_URL);
-      $rendered = $this->templating->render('', [
+      $rendered = $this->templating->render(
+        'CapcoAppBundle:Mail:confirmNewEmail.html.twig',
+        [
           'user' => $user,
           'confirmationUrl' => $url,
-      ]);
-      $this->sendFOSEmail($rendered, $user->getNewEmailToConfirm());
+        ]
+      );
+      $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
+
+      $this->sendEmail($user->getNewEmailToConfirm(), $fromAddress, 'Cap Collectif', $rendered, '['. $sitename. '] Veuillez confirmer votre nouvelle adresse électronique');
     }
 
     public function sendResettingEmailMessage(UserInterface $user)

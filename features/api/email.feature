@@ -91,3 +91,20 @@ Feature: Email
     }
     """
     And 0 mail should be sent
+
+    @database
+    Scenario: Logged in API client can update his email
+      Given feature "profile" is enabled
+      And I am logged in to api as user
+      And I send a PUT request to "/api/users/me" with json:
+      """
+      {
+        "email": "popopo@test.com",
+        "password": "user",
+      }
+      """
+      Then the JSON response status code should be 200
+      And 1 mail should be sent
+      And I open mail with subject "Cap-Collectif — Veuillez confirmer votre nouvelle adresse électronique"
+      Then I should see "Confirmez votre nouvelle adresse électronique" in mail
+      Then I should see "/update-email-confirmation/" in mail
