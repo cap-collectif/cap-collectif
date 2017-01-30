@@ -54,6 +54,7 @@ class CollectStepsController extends FOSRestController
 
         // Filters
         $providedFilters['proposalForm'] = $proposalForm->getId();
+        $providedFilters['step'] = $collectStep->getId();
 
         $results = $this->get('capco.search.resolver')->searchProposals(
             $page,

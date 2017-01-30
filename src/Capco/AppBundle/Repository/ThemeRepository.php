@@ -121,7 +121,6 @@ class ThemeRepository extends EntityRepository
                 WHERE pf.step = :step
                 AND p.enabled = true
                 AND pt.id = t.id
-                AND p.trashed = false
             ) as value')
             ->setParameter('step', $step)
             ->orderBy('value', 'DESC')

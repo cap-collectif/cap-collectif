@@ -46,7 +46,7 @@ trait TrashableTrait
      */
     public function setIsTrashed($isTrashed)
     {
-        if (!$isTrashed) {
+        if (false == $isTrashed) {
             $this->trashedReason = null;
             $this->trashedAt = null;
         }

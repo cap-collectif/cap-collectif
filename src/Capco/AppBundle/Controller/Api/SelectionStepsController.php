@@ -59,6 +59,7 @@ class SelectionStepsController extends FOSRestController
         // Filters
         $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
         $providedFilters['selectionStep'] = $selectionStep->getId();
+        $providedFilters['step'] = $selectionStep->getId();
         if (array_key_exists('statuses', $providedFilters)) {
             $providedFilters['selectionStatuses'] = $providedFilters['statuses'];
             unset($providedFilters['statuses']);
@@ -271,7 +272,7 @@ class SelectionStepsController extends FOSRestController
           ->get('fos_elastica.object_persister.app.proposal')
           ->insertOne($proposal)
         ;
-        
+
         return $vote;
     }
 

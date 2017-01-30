@@ -33,7 +33,6 @@ class UserTypeRepository extends EntityRepository
                 WHERE pf.step = :step
                 AND p.enabled = true
                 AND paut.id = ut.id
-                AND p.trashed = false
             ) as value')
             ->setParameter('step', $step)
             ->orderBy('value', 'DESC')
@@ -52,6 +51,6 @@ class UserTypeRepository extends EntityRepository
             ->select('COUNT(ut.id)')
         ;
 
-        return (int) $qb->getQuery()->getSingleScalarResult();
+        return intval($qb->getQuery()->getSingleScalarResult());
     }
 }

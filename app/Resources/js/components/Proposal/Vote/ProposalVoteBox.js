@@ -95,7 +95,7 @@ const ProposalVoteBox = React.createClass({
             </div>
         }
         {
-          !user && features.vote_without_account &&
+          !user &&
           <p className="text-center small" style={{ marginBottom: '0', fontWeight: 'bold' }}>
             {this.getIntlMessage('proposal.vote.non_authenticated')}
           </p>
