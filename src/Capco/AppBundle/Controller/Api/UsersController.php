@@ -119,6 +119,57 @@ class UsersController extends FOSRestController
         return $user;
     }
 
+    private function updatePhone(Request $request)
+    {
+      $user = $this->getUser();
+      $previousPhone = $user->getPhone();
+
+      $form = $this->createForm(ApiProfileFormType::class, $user);
+      $form->submit($request->request->all(), false);
+
+      if (!$form->isValid()) {
+          return $form;
+      }
+
+      // If phone is updated we have to make sure it's sms confirmed again
+      if ($previousPhone != null && $previousPhone != $user->getPhone()) {
+          $user->setPhoneConfirmed(false);
+          // TODO: security breach user can send unlimited sms if he change his number
+          $user->setSmsConfirmationSentAt(null);
+      }
+
+      $this->getDoctrine()->getManager()->flush();
+    }
+
+    private function updateEmail(Request $request)
+    {
+      $user = $this->getUser();
+      $previousEmail = $user->getEmail();
+      $newEmail = $request->request->get('email');
+      $password = $request->request->get('password');
+
+      if ($previousEmail === $newEmail) {
+          throw new \Exception('Already your email.');
+      }
+
+      $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+      if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
+          throw new \Exception('You must specify your password to update your email.');
+      }
+
+      $form = $this->createForm(ApiEmailFormType::class, $user);
+      $form->submit(['emailToConfirm' => $newEmail], false);
+
+      if (!$form->isValid()) {
+          return $form;
+      }
+
+      $user->setConfirmationToken('');
+      
+
+      $this->getDoctrine()->getManager()->flush();
+    }
+
     /**
      * @Put("/users/me")
      * @Security("has_role('ROLE_USER')")
@@ -126,24 +177,12 @@ class UsersController extends FOSRestController
      */
     public function putMeAction(Request $request)
     {
-        $user = $this->getUser();
-        $previousPhone = $user->getPhone();
-
-        $form = $this->createForm(ApiProfileFormType::class, $user);
-        $form->submit($request->request->all(), false);
-
-        if (!$form->isValid()) {
-            return $form;
+        if ($request->request->contains('phone')) {
+            return $this->updatePhone($request);
         }
-
-        // If phone is updated we have to make sure it's sms confirmed again
-        if ($previousPhone != null && $previousPhone != $user->getPhone()) {
-            $user->setPhoneConfirmed(false);
-            // TODO: security breach user can send unlimited sms if he change his number
-            $user->setSmsConfirmationSentAt(null);
+        if ($request->request->contains('email')) {
+            return $this->updateEmail($request);
         }
-
-        $this->getDoctrine()->getManager()->flush();
     }
 
     /**

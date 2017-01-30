@@ -27,6 +27,11 @@ class ConfirmationController extends Controller
         $user->setExpired(false);
         $user->setExpiresAt(null);
         $user->setLastLogin(new \DateTime());
+
+        if ($user->hasAnEmailToConfirm()) {
+            $user->setEmail($user->getEmailToConfirm());
+        }
+
         $hasRepublishedContributions = $this->get('capco.contribution.manager')->republishContributions($user);
 
         // if user has been created via API he has no password yet.

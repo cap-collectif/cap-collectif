@@ -18,9 +18,6 @@ export const validate = (values) => {
   if (!values.plainPassword || values.plainPassword.length < 8) {
     errors.plainPassword = 'registration.constraints.password.min';
   }
-  if (values.plainPassword && values.plainPassword.length > 72) {
-    errors.plainPassword = 'registration.constraints.password.max';
-  }
   if (!values.charte) {
     errors.charte = 'registration.constraints.charte.check';
   }

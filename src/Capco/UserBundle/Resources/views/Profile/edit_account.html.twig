@@ -10,55 +10,13 @@
     </div>
 {% endblock %}
 
-{% block javascripts %}
-  {{ parent() }}
-  <script>
-    window.localStorage.removeItem('jwt');
-    window.localStorage.removeItem('user');
-  </script>
-{% endblock %}
-
-
 {% block fos_user_content %}
     <div class="container  container--custom">
         <div class="row">
-
             {% include '@CapcoUser/Profile/action.html.twig' %}
-
             <div class="col-xs-12 col-sm-8 col-md-9">
-                <div class="block--bordered  block--first-mobile">
-                    <div class="box">
-                        <h4 class="h4">{{ "user.profile.account_title" | trans({}, 'CapcoAppBundle')}}</h4>
-                    </div>
-                    <hr class="hr--no-margin"/>
-                    <form action="{{ path('capco_profile_edit_account') }}" method="POST" enctype="multipart/form-data" class="form-horizontal settings__form" role="form">
-                        <div class="box">
-                            {{ form_errors(form) }}
-
-                            <div class="form-group">
-                                {{ form_errors(form.email) }}
-                                {{ form_label(form.email, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                                <div class="col-sm-9">
-                                  {{ form_widget(form.email) }}
-                                </div>
-                            </div>
-
-                            {{ form_widget(form._token) }}
-
-                        </div>
-
-                        <hr class="hr--no-margin"/>
-
-                        <div class="box">
-                            <div class="row form-actions">
-                                <div class="col-sm-offset-6 col-sm-6">
-                                    <button type="submit" name="submit"  class="btn btn-primary pull-right">{{ 'user.profile.edit.submit' | trans({}, 'CapcoAppBundle') }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div> <!-- col-xs-12 col-sm-8 col-md-9 -->
-        </div> <!-- row -->
-    </div> <!-- container -->
+                {{ react_intl_component('AccountProfileApp') }}
+            </div>
+        </div>
+    </div>
 {% endblock fos_user_content %}
