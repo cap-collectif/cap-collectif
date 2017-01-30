@@ -19,7 +19,7 @@ class ProposalCategoryRepository extends EntityRepository
                 LEFT JOIN p.category pc
                 WHERE pf.step = :step
                 AND pc.id = c.id
-                AND p.isTrashed = false
+                AND p.trashed = false
             ) as value')
             ->setParameter('step', $step)
             ->orderBy('value', 'DESC')
