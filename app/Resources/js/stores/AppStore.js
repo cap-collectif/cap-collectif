@@ -16,6 +16,10 @@ export default function configureStore(initialState) {
     const filtersByStep = LocalStorageService.get('proposal.filtersByStep') || {};
     initialState.proposal.filters = filtersByStep[initialState.project.currentProjectStepById];
   }
+  if (initialState.project && initialState.proposal && initialState.project.currentProjectStepById && LocalStorageService.isValid('proposal.orderByStep')) {
+    const orderByStep = LocalStorageService.get('proposal.orderByStep') || {};
+    initialState.proposal.order = orderByStep[initialState.project.currentProjectStepById];
+  }
 
   const sagaMiddleware = createSagaMiddleware();
 

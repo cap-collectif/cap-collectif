@@ -58,6 +58,7 @@ const SEND_PROPOSAL_NOTIFICATION_ERROR = 'proposal/SEND_SELECTION_NOTIFICATION_E
 
 type Status = { id: number };
 type ChangeFilterAction = { type: 'proposal/CHANGE_FILTER', filter: string, value: string };
+type ChangeOrderAction = { type: 'proposal/CHANGE_ODER', order: string };
 type SubmitFusionFormAction = { type: 'proposal/SUBMIT_FUSION_FORM', proposalForm: number };
 type FetchVotesRequestedAction = {
   type: 'proposal/VOTES_FETCH_REQUESTED',
@@ -506,6 +507,15 @@ export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generat
   LocalStorageService.set('proposal.filtersByStep', filtersByStep);
 }
 
+export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<*, *, *> {
+  const { order } = action;
+  // $FlowFixMe
+  const state = yield select();
+  const orderByStep = LocalStorageService.get('proposal.orderByStep') || {};
+  orderByStep[state.project.currentProjectStepById] = order;
+  LocalStorageService.set('proposal.orderByStep', orderByStep);
+}
+
 export function* saga(): Generator<*, *, *> {
   yield [
     takeEvery(POSTS_FETCH_REQUESTED, fetchPosts),
@@ -514,6 +524,7 @@ export function* saga(): Generator<*, *, *> {
     takeEvery(SUBMIT_FUSION_FORM, submitFusionFormData),
     takeEvery(LOAD_SELECTIONS_REQUEST, fetchSelections),
     takeEvery(CHANGE_FILTER, storeFiltersInLocalStorage),
+    takeEvery(CHANGE_ORDER, storeOrderInLocalStorage),
   ];
 }
 
