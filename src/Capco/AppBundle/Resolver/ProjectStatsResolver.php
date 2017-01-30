@@ -66,6 +66,11 @@ class ProjectStatsResolver
             $s['title'] = $step->getTitle();
             $s['type'] = $step->getType();
             $s['stats'] = $this->getStatsForStep($step, 10);
+            if ($step instanceof SelectionStep) {
+                $s['usingThemes'] = $step->getProposalForm()->isUsingThemes();
+                $s['usingCategories'] = $step->getProposalForm()->isUsingCategories();
+                $s['usingDistricts'] = $step->getProposalForm()->isUsingDistrict();
+            }
             $stepsWithData[] = $s;
         }
 
