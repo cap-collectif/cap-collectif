@@ -22,7 +22,7 @@ class DistrictRepository extends EntityRepository
                 WHERE pf.step = :step
                 AND p.enabled = true
                 AND pd.id = d.id
-                AND p.trashed = false
+                AND p.isTrashed = false
             ) as value')
             ->setParameter('step', $step)
             ->orderBy('value', 'DESC')
