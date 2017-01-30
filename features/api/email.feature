@@ -94,7 +94,6 @@ Feature: Email
 
     @database
     Scenario: Logged in API client can update his email
-      Given feature "profile" is enabled
       And I am logged in to api as user
       And I send a PUT request to "/api/users/me" with json:
       """
