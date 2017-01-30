@@ -14,12 +14,12 @@ class ConfirmationController extends Controller
     public function emailAction($token)
     {
         $manager = $this->container->get('fos_user.user_manager');
+        $session = $this->container->get('session');
         $user = $manager->findUserByConfirmationToken($token);
         $response = new RedirectResponse($this->container->get('router')->generate('app_homepage'));
 
         if (!$user) {
-            $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.already_email_confirmed');
-
+            $session->getFlashBag()->set('sonata_user_success', 'global.alert.already_email_confirmed');
             return $response;
         }
 
@@ -27,10 +27,6 @@ class ConfirmationController extends Controller
         $user->setExpired(false);
         $user->setExpiresAt(null);
         $user->setLastLogin(new \DateTime());
-
-        if ($user->hasAnEmailToConfirm()) {
-            $user->setEmail($user->getEmailToConfirm());
-        }
 
         $hasRepublishedContributions = $this->get('capco.contribution.manager')->republishContributions($user);
 
@@ -53,10 +49,42 @@ class ConfirmationController extends Controller
         );
 
         if ($hasRepublishedContributions) {
-            $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed_with_republish');
+            $session->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed_with_republish');
         } else {
-            $this->container->get('session')->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed');
+            $session->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed');
         }
+
+        return $response;
+    }
+
+    /**
+     * @Route("/update-email-confirmation/{token}", defaults={"_feature_flags" = "profile"})
+     */
+    public function newEmailAction($token)
+    {
+        $manager = $this->container->get('fos_user.user_manager');
+        $response = new RedirectResponse($this->container->get('router')->generate('app_homepage'));
+        $user = $this
+          ->container->get('capco.user.repository')
+          ->findUserByNewEmailConfirmationToken($token)
+        ;
+
+        if (!$user) {
+           return $response;
+        }
+
+        $user->setEmail($user->getNewEmailToConfirm());
+        $user->setNewEmailConfirmationToken(null);
+
+        $manager->updateUser($user);
+
+        $this->get('fos_user.security.login_manager')->loginUser(
+            $this->container->getParameter('fos_user.firewall_name'),
+            $user,
+            $response
+        );
+
+        $session->getFlashBag()->set('sonata_user_success', 'global.alert.email_updated');
 
         return $response;
     }

@@ -164,6 +164,18 @@ class Notify implements MailerInterface
         $this->sendFOSEmail($rendered, $user->getEmail());
     }
 
+    public function sendNewEmailConfirmationEmailMessage(UserInterface $user)
+    {
+      $url = $this->router->generate('capco_user_confirmation_new_email', [
+        'token' => $user->getNewEmailConfirmationToken(),
+      ], UrlGeneratorInterface::ABSOLUTE_URL);
+      $rendered = $this->templating->render('', [
+          'user' => $user,
+          'confirmationUrl' => $url,
+      ]);
+      $this->sendFOSEmail($rendered, $user->getNewEmailToConfirm());
+    }
+
     public function sendResettingEmailMessage(UserInterface $user)
     {
         $template = $this->parameters['resetting.template'];

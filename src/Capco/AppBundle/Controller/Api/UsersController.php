@@ -145,7 +145,7 @@ class UsersController extends FOSRestController
     {
       $user = $this->getUser();
       $previousEmail = $user->getEmail();
-      $newEmail = $request->request->get('email');
+      $newEmailToConfirm = $request->request->get('email');
       $password = $request->request->get('password');
 
       if ($previousEmail === $newEmail) {
@@ -158,14 +158,18 @@ class UsersController extends FOSRestController
       }
 
       $form = $this->createForm(ApiEmailFormType::class, $user);
-      $form->submit(['emailToConfirm' => $newEmail], false);
+      $form->submit(['newEmailToConfirm' => $newEmailToConfirm], false);
 
       if (!$form->isValid()) {
           return $form;
       }
 
-      $user->setConfirmationToken('');
-      
+      // We generate a confirmation token to validate the new email
+      $token = $this->get('fos_user.util.token_generator')->generateToken();
+
+      $user->setNewEmailConfirmitationToken($token);
+      $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
+
 
       $this->getDoctrine()->getManager()->flush();
     }

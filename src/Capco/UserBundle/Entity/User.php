@@ -264,6 +264,25 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $vip = false;
 
+    protected $newEmailToConfirm = null;
+    protected $newEmailConfirmationToken = null;
+
+    public function setNewEmailToConfirm(string $email = null): self {
+        $this->newEmailToConfirm = $email;
+
+        return $this;
+    }
+
+    public function getNewEmailConfirmitationToken(): string {
+        return $this->newEmailConfirmationToken;
+    }
+
+    public function setNewEmailConfirmitationToken(string $token = null): self {
+        $this->newEmailConfirmationToken = $token;
+
+        return $this;
+    }
+
     protected $emailConfirmationSentAt = null;
 
     protected $smsConfirmationSentAt = null;
