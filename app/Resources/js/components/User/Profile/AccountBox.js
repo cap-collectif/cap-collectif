@@ -4,6 +4,7 @@ import { Panel, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
 import AccountForm from './AccountForm';
+import ConfirmPasswordModal from '../ConfirmPasswordModal';
 import { confirmPassword } from '../../../redux/modules/user';
 
 export const AccountBox = React.createClass({
@@ -36,17 +37,16 @@ export const AccountBox = React.createClass({
         footer={footer}
       >
         <AccountForm />
+        <ConfirmPasswordModal />
       </Panel>
     );
   },
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.default.user,
-    submitting: state.user.isSubmittingAccountForm,
-  };
-};
+const mapStateToProps = state => ({
+  user: state.default.user,
+  submitting: state.user.isSubmittingAccountForm,
+});
 
 export default connect(mapStateToProps)(AccountBox);

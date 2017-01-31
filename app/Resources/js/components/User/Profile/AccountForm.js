@@ -1,19 +1,20 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { submitAccountForm as onSubmit } from '../../../redux/modules/user';
 import { isEmail } from '../../../services/Validator';
 import renderComponent from '../../Form/Field';
 
 const form = 'account';
-const validate = (values, { previousEmail }): Object => {
+const validate = (values, { initialValues: { email } }): Object => {
   const errors = {};
   if (!values.email) {
     errors.email = 'global.required';
   } else if (!isEmail(values.email)) {
     errors.email = 'proposal.vote.constraints.email';
   }
-  if (values.email === previousEmail) {
+  if (values.email === email) {
     errors.email = 'global.change.required';
   }
   return errors;
@@ -48,8 +49,13 @@ const AccountForm = React.createClass({
 
 });
 
-export default reduxForm({
+const mapStateToProps = state => ({
+  initialValues: {
+    email: state.default.user.email,
+  },
+});
+export default connect(mapStateToProps)(reduxForm({
   form,
   validate,
   onSubmit,
-})(AccountForm);
+})(AccountForm));

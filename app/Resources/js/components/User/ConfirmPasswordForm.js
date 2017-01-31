@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
-import { submitPasswordForm as onSubmit } from '../../redux/modules/user';
+import { submitConfirmPasswordForm as onSubmit } from '../../redux/modules/user';
 import renderComponent from '../Form/Field';
 
 const form = 'password';

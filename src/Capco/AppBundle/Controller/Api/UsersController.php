@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiProfileFormType;
+use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -148,7 +149,7 @@ class UsersController extends FOSRestController
       $newEmailToConfirm = $request->request->get('email');
       $password = $request->request->get('password');
 
-      if ($previousEmail === $newEmail) {
+      if ($previousEmail === $newEmailToConfirm) {
           throw new \Exception('Already your email.');
       }
 
@@ -157,7 +158,7 @@ class UsersController extends FOSRestController
           throw new \Exception('You must specify your password to update your email.');
       }
 
-      $form = $this->createForm(ApiEmailFormType::class, $user);
+      $form = $this->createForm(ApiProfileAccountFormType::class, $user);
       $form->submit(['newEmailToConfirm' => $newEmailToConfirm], false);
 
       if (!$form->isValid()) {
@@ -181,10 +182,10 @@ class UsersController extends FOSRestController
      */
     public function putMeAction(Request $request)
     {
-        if ($request->request->contains('phone')) {
+        if ($request->request->has('phone')) {
             return $this->updatePhone($request);
         }
-        if ($request->request->contains('email')) {
+        if ($request->request->has('email')) {
             return $this->updateEmail($request);
         }
     }

@@ -237,14 +237,14 @@ Feature: Users
       }
       """
 
-    @database
+    @database @devdevdev
     Scenario: API client wants to update his phone
       Given I am logged in to api as user
       When I send a PUT request to "/api/users/me" with json:
       """
       {
         "email": "popopopopo@test.com",
-        "password": "user",
+        "password": "user"
       }
       """
       Then the JSON response status code should be 204

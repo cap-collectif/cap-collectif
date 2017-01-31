@@ -172,6 +172,7 @@
       "check": "Veuillez cocher cette case."
     },
     "continue": "Continuer",
+    "confirm": "Confirmer",
     "content": "Contenu",
     "counters": {
       "contributions": "{num, plural, =0{contribution} one{contribution} other{contributions}}",

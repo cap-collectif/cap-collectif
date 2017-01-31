@@ -23,13 +23,15 @@ const initialState = {
 };
 
 export const confirmPassword = (): ConfirmPasswordAction => ({ type: 'SHOW_CONFIRM_PASSWORD_MODAL' });
-const closeConfirmPasswordModal = (): CloseConfirmPasswordModalAction => ({ type: 'CLOSE_CONFIRM_PASSWORD_MODAL' });
+export const closeConfirmPasswordModal = (): CloseConfirmPasswordModalAction => ({ type: 'CLOSE_CONFIRM_PASSWORD_MODAL' });
 const startSubmittingAccountForm = (): StartSubmittingAccountFormAction => ({ type: 'SUBMIT_ACCOUNT_FORM' });
 
 export const submitConfirmPasswordForm = (values: Object, dispatch: Dispatch<*>) => {
   dispatch({ type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password: values.password });
   dispatch(closeConfirmPasswordModal());
-  dispatch(submit('account'));
+  setTimeout(() => {
+    dispatch(submit('account'));
+  }, 1000);
 };
 
 export const submitAccountForm = (values: Object, dispatch: Dispatch<*>): Promise<*> => {
@@ -38,7 +40,7 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch<*>): Promis
     .then(() => {
       // dispatch(voteSuccess(proposal.id, step.id, newVote, data.comment));
     })
-    .catch(({ response }) => {
+    .catch(() => {
       // if (response.message === 'Validation Failed') {
       //   dispatch(stopVoting());
       //   if (typeof response.errors.children.email === 'object') {

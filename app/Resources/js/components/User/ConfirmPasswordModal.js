@@ -5,26 +5,26 @@ import { connect } from 'react-redux';
 import { submit } from 'redux-form';
 import CloseButton from '../Form/CloseButton';
 import ConfirmPasswordForm from './ConfirmPasswordForm';
+import { closeConfirmPasswordModal } from '../../redux/modules/user';
 
 export const ConfirmPasswordModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { show, onClose, dispatch } = this.props;
+    const { show, dispatch } = this.props;
     return (
       <Modal
         animation={false}
         show={show}
-        onHide={onClose}
+        onHide={() => dispatch(closeConfirmPasswordModal())}
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
       >
-        <form id="confirm-password-form" onSubmit={() => dispatch(submit('password'))}>
+        <form id="confirm-password-form" onSubmit={() => { dispatch(submit('password')); }}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
               {this.getIntlMessage('confirm_password.title')}
@@ -35,7 +35,9 @@ export const ConfirmPasswordModal = React.createClass({
             <ConfirmPasswordForm />
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={onClose} />
+            <CloseButton
+              onClose={() => dispatch(closeConfirmPasswordModal())}
+            />
             <Button
               id="confirm-password-form-submit"
               type="submit"
@@ -51,11 +53,9 @@ export const ConfirmPasswordModal = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    show: state.user.showConfirmPasswordModal,
-    isSubmitting: state.user.isSubmittingAccountForm,
-  };
-};
+const mapStateToProps = state => ({
+  show: state.user.showConfirmPasswordModal,
+  isSubmitting: state.user.isSubmittingAccountForm,
+});
 
 export default connect(mapStateToProps)(ConfirmPasswordModal);
