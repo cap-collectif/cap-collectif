@@ -4,6 +4,7 @@ import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit } from 'redux-form';
 import CloseButton from '../Form/CloseButton';
+import ConfirmPasswordForm from './ConfirmPasswordForm';
 
 export const ConfirmPasswordModal = React.createClass({
   propTypes: {
@@ -23,7 +24,7 @@ export const ConfirmPasswordModal = React.createClass({
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
       >
-        <form id="confirm-password-form" onSubmit={() => dispatch(submit('account'))}>
+        <form id="confirm-password-form" onSubmit={() => dispatch(submit('password'))}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
               {this.getIntlMessage('confirm_password.title')}

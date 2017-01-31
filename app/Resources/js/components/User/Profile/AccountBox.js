@@ -3,8 +3,8 @@ import React, { PropTypes } from 'react';
 import { Panel, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
-import { submit } from 'redux-form';
 import AccountForm from './AccountForm';
+import { confirmPassword } from '../../../redux/modules/user';
 
 export const AccountBox = React.createClass({
   propTypes: {
@@ -19,7 +19,6 @@ export const AccountBox = React.createClass({
     const footer = (
       <Button
         id="edit-account-profile-button"
-        //  dispatch(submit('account'))
         onClick={() => dispatch(confirmPassword())}
         disabled={submitting}
         bsStyle="primary"

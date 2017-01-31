@@ -1,5 +1,6 @@
 // @flow
 import type { Dispatch } from 'redux';
+import { submit } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
 
 type State = {
@@ -8,10 +9,12 @@ type State = {
 };
 type StartSubmittingAccountFormAction = { type: 'SUBMIT_ACCOUNT_FORM' };
 type ConfirmPasswordAction = { type: 'SHOW_CONFIRM_PASSWORD_MODAL' };
-
+export type SubmitConfirmPasswordAction = { type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password: string };
+type CloseConfirmPasswordModalAction = { type: 'CLOSE_CONFIRM_PASSWORD_MODAL' };
 type Action =
     StartSubmittingAccountFormAction
   | ConfirmPasswordAction
+  | CloseConfirmPasswordModalAction
 ;
 
 const initialState = {
@@ -20,7 +23,14 @@ const initialState = {
 };
 
 export const confirmPassword = (): ConfirmPasswordAction => ({ type: 'SHOW_CONFIRM_PASSWORD_MODAL' });
+const closeConfirmPasswordModal = (): CloseConfirmPasswordModalAction => ({ type: 'CLOSE_CONFIRM_PASSWORD_MODAL' });
 const startSubmittingAccountForm = (): StartSubmittingAccountFormAction => ({ type: 'SUBMIT_ACCOUNT_FORM' });
+
+export const submitConfirmPasswordForm = (values: Object, dispatch: Dispatch<*>) => {
+  dispatch({ type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password: values.password });
+  dispatch(closeConfirmPasswordModal());
+  dispatch(submit('account'));
+};
 
 export const submitAccountForm = (values: Object, dispatch: Dispatch<*>): Promise<*> => {
   dispatch(startSubmittingAccountForm());
@@ -44,6 +54,8 @@ export const reducer = (state: State = initialState, action: Action): State => {
       return { ...state, isSubmittingAccountForm: true };
     case 'SHOW_CONFIRM_PASSWORD_MODAL':
       return { ...state, showConfirmPasswordModal: true };
+    case 'CLOSE_CONFIRM_PASSWORD_MODAL':
+      return { ...state, showConfirmPasswordModal: false };
     default:
       return state;
   }

@@ -7,7 +7,7 @@ import { reducer as projectReducer, saga as projectSaga } from '../redux/modules
 import { reducer as ideaReducer, saga as ideaSaga } from '../redux/modules/idea';
 import { reducer as proposalReducer, saga as proposalSaga } from '../redux/modules/proposal';
 import { reducer as opinionReducer, saga as opinionSaga } from '../redux/modules/opinion';
-import { reducer as userReducer } from '../redux/modules/user';
+import { reducer as userReducer, type SubmitConfirmPasswordAction } from '../redux/modules/user';
 
 export default function configureStore(initialState) {
   if (initialState.default.user === null) {
@@ -33,9 +33,9 @@ export default function configureStore(initialState) {
     user: userReducer,
     opinion: opinionReducer,
     form: formReducer.plugin({
-      account: (state, action) => {
+      account: (state, action: SubmitConfirmPasswordAction) => {
         switch (action.type) {
-          case 'CONFIRM_PASSWORD':
+          case 'SUBMIT_CONFIRM_PASSWORD_FORM':
             return {
               ...state,
               values: { ...state.values, password: action.password },

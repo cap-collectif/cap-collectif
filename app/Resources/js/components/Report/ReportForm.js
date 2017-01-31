@@ -51,7 +51,7 @@ const ReportForm = React.createClass({
             type: 'textarea',
           },
         ]
-      }
+        }
       />
     );
   },
