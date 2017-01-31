@@ -350,7 +350,9 @@ export const submitProposal = (dispatch: Dispatch, form: number, data: Object): 
   const formData = new FormData();
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map((key) => {
-    formData.append(key, flattenedData[key]);
+    if (flattenedData[key] !== -1) {
+      formData.append(key, flattenedData[key]);
+    }
   });
   return Fetcher
       .postFormData(`/proposal_forms/${form}/proposals`, formData)
