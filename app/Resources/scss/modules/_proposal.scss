@@ -186,10 +186,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 
 .proposals-user-votes__table {
     border: 1px solid $border-color;
-}
-
-.proposals-user-votes__row {
-    margin: 15px 0 15px;
+    border-top: 0;
 }
 
 .proposal__votes .proposal__vote .media--aligned {

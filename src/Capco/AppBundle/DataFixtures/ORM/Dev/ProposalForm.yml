@@ -25,9 +25,6 @@ Capco\AppBundle\Entity\ProposalForm:
     title: Formulaire de la collecte 3
     description: <text(100)>
     step: "@collectstep3"
-    usingCategories: true
-    usingThemes: true
-    usingDistrict: true
   proposalform4:
     id: 4
     title: Formulaire de la collecte 4

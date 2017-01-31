@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -802,7 +801,7 @@ class Project implements IndexableInterface
     }
 
     /**
-     * @return AbstractStep|null
+     * @return mixed|null
      */
     public function getFirstStep()
     {

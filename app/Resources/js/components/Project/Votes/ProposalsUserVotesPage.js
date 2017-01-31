@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { Row } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { IntlMixin, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
@@ -59,17 +59,19 @@ const ProposalsUserVotesPage = React.createClass({
                     message={this.getIntlMessage('project.votes.nb')}
                   />
                 </h3>
-                <Row className="proposals-user-votes__table">
-                  {
-                    userVotesByStepId[step.id].map((proposal, index2) =>
-                      <ProposalUserVoteItem
-                        key={index2}
-                        proposal={proposal}
-                        step={step}
-                      />,
-                    )
-                  }
-                </Row>
+                <Table responsive hover className="proposals-user-votes__table">
+                  <tbody>
+                    {
+                      userVotesByStepId[step.id].map((proposal, index2) =>
+                        <ProposalUserVoteItem
+                          key={index2}
+                          proposal={proposal}
+                          step={step}
+                        />,
+                      )
+                    }
+                  </tbody>
+                </Table>
               </div>
             ))
             : <p>{this.getIntlMessage('project.votes.no_active_step')}</p>

@@ -82,7 +82,6 @@ export const ProjectStatsPage = React.createClass({
                       icon={icons[key]}
                       isCurrency={key === 'costs'}
                       showFilters={key === 'votes'}
-                      step={selectedStep}
                       themes={themes}
                       districts={districts}
                       categories={categories}
