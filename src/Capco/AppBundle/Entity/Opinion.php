@@ -218,14 +218,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this->isEnabled;
     }
 
-    /**
-     * Set isEnabled.
-     *
-     * @param bool $isEnabled
-     *
-     * @return Argument
-     */
-    public function setIsEnabled($isEnabled)
+    public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
 
@@ -399,12 +392,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    /**
-     * @param $source
-     *
-     * @return $this
-     */
-    public function addSource($source)
+    public function addSource($source): self
     {
         if (!$this->Sources->contains($source)) {
             $this->Sources->add($source);

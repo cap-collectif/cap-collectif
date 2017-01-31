@@ -11,6 +11,7 @@ class SmsService
     protected $sender;
     protected $number;
     protected $sitename;
+    protected $translator;
 
     public function __construct(SmsSender $sender, $number, Resolver $resolver, TranslatorInterface $translator)
     {
@@ -22,7 +23,7 @@ class SmsService
 
     public function confirm(User $user)
     {
-        $code = rand(100000, 999999);
+        $code = random_int(100000, 999999);
         $user->setSmsConfirmationCode($code);
         $message = $this->translator->trans('sms.content', [
           '%code%' => $code,

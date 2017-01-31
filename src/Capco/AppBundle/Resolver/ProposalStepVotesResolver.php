@@ -125,6 +125,8 @@ class ProposalStepVotesResolver
 
     private function getSpentCreditsForUser(User $user, AbstractStep $step)
     {
+        $votes = [];
+
         if ($step instanceof SelectionStep) {
             $votes = $this
               ->proposalSelectionVoteRepository

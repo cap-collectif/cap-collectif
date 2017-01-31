@@ -83,14 +83,7 @@ class ConsultationStepType
         return $this->title;
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return Project
-     */
-    public function setTitle($title)
+    public function setTitle($title): self
     {
         $this->title = $title;
 

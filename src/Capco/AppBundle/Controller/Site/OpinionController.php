@@ -6,14 +6,11 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\OpinionAppendix;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class OpinionController extends Controller
 {
@@ -52,17 +49,17 @@ class OpinionController extends Controller
      */
     public function showByTypeAction(Project $project, ConsultationStep $currentStep, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
     {
-        if (false == $currentStep->canDisplay()) {
+        if (!$currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
 
         $opinionTypesResolver = $this->get('capco.opinion_types.resolver');
 
         if (false == $opinionTypesResolver->stepAllowType($currentStep, $opinionType)) {
-            throw new NotFoundHttpException('This type does not exist for this consultation step');
+            throw $this->createNotFoundException('This type does not exist for this consultation step');
         }
 
-        $filter = $opinionsSort ? $opinionsSort : $opinionType->getDefaultFilter();
+        $filter = $opinionsSort ?: $opinionType->getDefaultFilter();
         $currentUrl = $this
             ->generateUrl('app_consultation_show_opinions', [
                 'projectSlug' => $project->getSlug(),
@@ -106,8 +103,6 @@ class OpinionController extends Controller
         $currentStep = $opinion->getStep();
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinionJoinUserReports($opinion, $this->getUser());
 
-        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
-
         return [
             'version' => $version,
             'currentStep' => $currentStep,
@@ -122,31 +117,21 @@ class OpinionController extends Controller
     /**
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/delete", name="app_project_delete_opinion")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/delete", name="app_consultation_delete_opinion")
-     *
-     * @param $projectSlug
-     * @param $stepSlug
-     * @param $opinionTypeSlug
-     * @param $projectSlug
-     * @param $opinionSlug
-     * @param $request
-     * @Template("CapcoAppBundle:Opinion:delete.html.twig")
-     *
-     * @return array
      */
     public function deleteOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            throw $this->createAccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
 
-        if ($opinion == null) {
+        if (!$opinion) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
         }
 
-        if (false == $opinion->canContribute()) {
-            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', [], 'CapcoAppBundle'));
+        if (!$opinion->canContribute()) {
+            throw $this->createAccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
         $opinionType = $opinion->getOpinionType();
@@ -157,13 +142,13 @@ class OpinionController extends Controller
         $userPostOpinion = $opinion->getAuthor()->getId();
 
         if ($userCurrent !== $userPostOpinion) {
-            throw new AccessDeniedException($this->get('translator')->trans('opinion.error.not_author', [], 'CapcoAppBundle'));
+            throw $this->createAccessDeniedException($this->get('translator')->trans('opinion.error.not_author', [], 'CapcoAppBundle'));
         }
 
         //Champ CSRF
         $form = $this->createFormBuilder()->getForm();
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -204,7 +189,7 @@ class OpinionController extends Controller
      *
      * @Template("CapcoAppBundle:Opinion:show.html.twig")
      */
-    public function showOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
+    public function showOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug)
     {
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
 
@@ -225,24 +210,5 @@ class OpinionController extends Controller
             'opinionType' => $opinion->getOpinionType(),
             'project_steps' => $steps,
         ];
-    }
-
-    // TODO fix this ugly stuff
-    private function createAppendicesForOpinion(Opinion $opinion)
-    {
-        $appendixTypes = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
-            ->findBy(
-                ['opinionType' => $opinion->getOpinionType()],
-                ['position' => 'ASC']
-            );
-        foreach ($appendixTypes as $otat) {
-            $app = new OpinionAppendix();
-            $app->setAppendixType($otat->getAppendixType());
-            $app->setOpinion($opinion);
-            $opinion->addAppendice($app);
-        }
-
-        return $opinion;
     }
 }

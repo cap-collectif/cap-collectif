@@ -368,7 +368,7 @@ class ArgumentsController extends FOSRestController
         }
 
         if ($validationErrors->count() > 0) {
-            throw new BadRequestHttpException($validationErrors->__toString());
+            throw new BadRequestHttpException($validationErrors);
         }
 
         $vote

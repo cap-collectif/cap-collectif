@@ -15,13 +15,6 @@ class EventRepository extends EntityRepository
 {
     /**
      * Get events depending on theme, project and search term, ordered by startAt criteria.
-     *
-     * @param $archived
-     * @param null $themeSlug
-     * @param null $projectSlug
-     * @param null $term
-     *
-     * @return array
      */
     public function getSearchResults($archived = null, $themeSlug = null, $projectSlug = null, $term = null, $limit = null, $offset = null)
     {

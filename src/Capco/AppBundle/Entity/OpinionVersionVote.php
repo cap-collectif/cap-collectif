@@ -74,14 +74,7 @@ class OpinionVersionVote extends AbstractVote
         return $this->value;
     }
 
-    /**
-     * Set value.
-     *
-     * @param int $value
-     *
-     * @return Vote
-     */
-    public function setValue($value)
+    public function setValue($value): self
     {
         $this->value = $value;
 
@@ -96,10 +89,7 @@ class OpinionVersionVote extends AbstractVote
         return $this->opinionVersion;
     }
 
-    /**
-     * @param mixed $Opinion
-     */
-    public function setOpinionVersion(OpinionVersion $version)
+    public function setOpinionVersion(OpinionVersion $version = null): self
     {
         $this->opinionVersion = $version;
 

@@ -7,6 +7,8 @@ use Doctrine\ORM\EntityManager;
 
 class ContributionManager
 {
+    protected $em;
+
     public function __construct(EntityManager $em)
     {
         $this->em = $em;

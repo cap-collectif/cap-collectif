@@ -10,6 +10,8 @@ use Doctrine\ORM\EntityManager;
 
 class FixedIdsProcessor implements ProcessorInterface
 {
+    protected $em;
+
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -18,7 +20,7 @@ class FixedIdsProcessor implements ProcessorInterface
     public function preProcess($object)
     {
         if (!($object instanceof Context) && $object->getId()) {
-            $metadata = $this->em->getClassMetaData(get_class($object));
+            $metadata = $this->em->getClassMetadata(get_class($object));
             $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
             $metadata->setIdGenerator(new AssignedGenerator());
         }

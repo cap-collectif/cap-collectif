@@ -231,8 +231,6 @@ class SynthesisElement
     private $linkedDataId = null;
 
     /**
-     * @var datetime
-     *
      * @ORM\Column(name="linked_data_last_update", type="datetime", nullable=true)
      */
     private $linkedDataLastUpdate = null;
@@ -719,17 +717,11 @@ class SynthesisElement
         $this->linkedDataId = $linkedDataId;
     }
 
-    /**
-     * @return datetime
-     */
     public function getLinkedDataLastUpdate()
     {
         return $this->linkedDataLastUpdate;
     }
 
-    /**
-     * @param datetime $linkedDataLastUpdate
-     */
     public function setLinkedDataLastUpdate($linkedDataLastUpdate)
     {
         $this->linkedDataLastUpdate = $linkedDataLastUpdate;
@@ -791,10 +783,7 @@ class SynthesisElement
 
     //************************** Custom methods *****************************
 
-    /**
-     * @return string
-     */
-    public function hasLinkedData()
+    public function hasLinkedData(): bool
     {
         return $this->linkedDataClass && $this->linkedDataId;
     }

@@ -16,6 +16,7 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PostsController extends FOSRestController
 {
@@ -58,7 +59,7 @@ class PostsController extends FOSRestController
                       ->countCommentsAndAnswersEnabledByPost($post);
 
         return [
-            'comments_and_answers_count' => intval($countWithAnswers),
+            'comments_and_answers_count' => (int) $countWithAnswers,
             'comments_count' => count($paginator),
             'comments' => $comments,
         ];

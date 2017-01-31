@@ -17,12 +17,6 @@ class ThemeController extends Controller
      * @Route("/themes/{page}", name="app_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "themes"} )
      * @Route("/themes/search/{term}/{page}", name="app_theme_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "themes"} )
      * @Template("CapcoAppBundle:Theme:index.html.twig")
-     *
-     * @param $page
-     * @param $request
-     * @param $term
-     *
-     * @return array
      */
     public function indexAction(Request $request, $page, $term = null)
     {
@@ -34,7 +28,7 @@ class ThemeController extends Controller
             'method' => 'POST',
         ]);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -46,9 +40,7 @@ class ThemeController extends Controller
                 ]));
             }
         } else {
-            $form->setData([
-                'term' => $term,
-            ]);
+            $form->setData(['term' => $term]);
         }
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('themes.pagination');
@@ -81,11 +73,10 @@ class ThemeController extends Controller
         }
         $maxProjectsDisplayed = 12;
 
-        $em = $this->get('doctrine')->getManager();
+        $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('serializer');
         $projectProps = $serializer->serialize([
-            'projects' => $this
-                ->getDoctrine()
+            'projects' => $em
                 ->getRepository('CapcoAppBundle:Project')
                 ->getProjectsByTheme($theme, $maxProjectsDisplayed),
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'UserDetails', 'Steps', 'Themes', 'ProjectType']));
@@ -105,16 +96,10 @@ class ThemeController extends Controller
 
     /**
      * @Template("CapcoAppBundle:Theme:lastIdeas.html.twig")
-     *
-     * @param $theme
-     * @param int $max
-     * @param int $offset
-     *
-     * @return array
      */
     public function lastIdeasAction($theme, $max = 8, $offset = 0)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('jms_serializer');
         $ideasRaw = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
         $props = $serializer->serialize([

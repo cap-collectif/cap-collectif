@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -366,7 +367,7 @@ class Project implements IndexableInterface
     }
 
     /**
-     * @return string
+     * @return User
      */
     public function getAuthor()
     {
@@ -518,12 +519,7 @@ class Project implements IndexableInterface
         return $this->events;
     }
 
-    /**
-     * @param Event $event
-     *
-     * @return Theme
-     */
-    public function addEvent(Event $event)
+    public function addEvent(Event $event): self
     {
         if (!$this->events->contains($event)) {
             $this->events->add($event);

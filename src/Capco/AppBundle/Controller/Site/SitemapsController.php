@@ -17,7 +17,7 @@ class SitemapsController extends Controller
     public function sitemapAction()
     {
         $toggleManager = $this->get('capco.toggle.manager');
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
         $urls = [];
         $hostname = $this->get('request_stack')->getCurrentRequest()->getHost();
 
@@ -36,9 +36,7 @@ class SitemapsController extends Controller
         ];
 
         // Pages
-        foreach ($em->getRepository('CapcoAppBundle:Page')->findBy([
-            'isEnabled' => true,
-        ]) as $page) {
+        foreach ($em->getRepository('CapcoAppBundle:Page')->findBy(['isEnabled' => true]) as $page) {
             $urls[] = [
                 'loc' => $this->get('router')->generate('app_page_show', ['slug' => $page->getSlug()]),
                 'lastmod' => $page->getUpdatedAt()->format(\DateTime::W3C),
@@ -54,9 +52,7 @@ class SitemapsController extends Controller
                 'changefreq' => 'weekly',
                 'priority' => '0.5',
             ];
-            foreach ($em->getRepository('CapcoAppBundle:Theme')->findBy([
-                'isEnabled' => true,
-            ]) as $theme) {
+            foreach ($em->getRepository('CapcoAppBundle:Theme')->findBy(['isEnabled' => true]) as $theme) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_theme_show', ['slug' => $theme->getSlug()]),
                     'lastmod' => $theme->getUpdatedAt()->format(\DateTime::W3C),
@@ -73,9 +69,7 @@ class SitemapsController extends Controller
                 'changefreq' => 'daily',
                 'priority' => '1.0',
             ];
-            foreach ($em->getRepository('CapcoAppBundle:Post')->findBy([
-                'isPublished' => true,
-            ]) as $post) {
+            foreach ($em->getRepository('CapcoAppBundle:Post')->findBy(['isPublished' => true]) as $post) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_blog_show', ['slug' => $post->getSlug()]),
                     'lastmod' => $post->getUpdatedAt()->format(\DateTime::W3C),
@@ -92,13 +86,11 @@ class SitemapsController extends Controller
                 'changefreq' => 'daily',
                 'priority' => '1.0',
             ];
-            foreach ($em->getRepository('CapcoAppBundle:Event')->findBy([
-                'isEnabled' => true,
-            ]) as $event) {
+            foreach ($em->getRepository('CapcoAppBundle:Event')->findBy(['isEnabled' => true]) as $event) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_event_show', ['slug' => $event->getSlug()]),
                     'priority' => '1.0',
-                    'lastmod' => $post->getUpdatedAt()->format(\DateTime::W3C),
+                    'lastmod' => $event->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'daily',
                 ];
             }
@@ -111,9 +103,7 @@ class SitemapsController extends Controller
                 'changefreq' => 'daily',
                 'priority' => '1.0',
             ];
-            foreach ($em->getRepository('CapcoAppBundle:Idea')->findBy([
-                'isEnabled' => true,
-            ]) as $idea) {
+            foreach ($em->getRepository('CapcoAppBundle:Idea')->findBy(['isEnabled' => true]) as $idea) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_idea_show', ['slug' => $idea->getSlug()]),
                     'lastmod' => $idea->getUpdatedAt()->format(\DateTime::W3C),
@@ -132,9 +122,7 @@ class SitemapsController extends Controller
 
         // Steps
         $stepResolver = $this->get('capco.step.resolver');
-        foreach ($em->getRepository('CapcoAppBundle:Steps\AbstractStep')->findBy([
-            'isEnabled' => true,
-        ]) as $step) {
+        foreach ($em->getRepository('CapcoAppBundle:Steps\AbstractStep')->findBy(['isEnabled' => true]) as $step) {
             if ($step->getProject()->canDisplay()) {
                 $urls[] = [
                     'loc' => $stepResolver->getLink($step, false),
@@ -146,9 +134,7 @@ class SitemapsController extends Controller
         }
 
         // Opinions
-        foreach ($em->getRepository('CapcoAppBundle:Opinion')->findBy([
-            'isEnabled' => true,
-        ]) as $opinion) {
+        foreach ($em->getRepository('CapcoAppBundle:Opinion')->findBy(['isEnabled' => true]) as $opinion) {
             if ($opinion->canDisplay()) {
                 $urls[] = [
                     'loc' => $this->get('router')->generate('app_project_show_opinion', ['projectSlug' => $opinion->getStep()->getProject()->getSlug(), 'stepSlug' => $opinion->getStep()->getSlug(), 'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(), 'opinionSlug' => $opinion->getSlug()]),

@@ -127,8 +127,6 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     protected $authorIp;
 
     /**
-     * @var string
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Comment", cascade={"persist", "remove"})
      */
     protected $Reports;
@@ -214,14 +212,7 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
         return $this->isEnabled;
     }
 
-    /**
-     * Set isEnabled.
-     *
-     * @param bool $isEnabled
-     *
-     * @return Argument
-     */
-    public function setIsEnabled($isEnabled)
+    public function setIsEnabled(bool $isEnabled = null): self
     {
         $this->isEnabled = $isEnabled;
 
@@ -400,17 +391,10 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
         return $this->isTrashed;
     }
 
-    /**
-     * Set isTrashed.
-     *
-     * @param bool $isTrashed
-     *
-     * @return Argument
-     */
-    public function setIsTrashed($isTrashed)
+    public function setIsTrashed(bool $isTrashed = null): self
     {
-        if ($isTrashed != $this->isTrashed) {
-            if ($isTrashed == false) {
+        if ($isTrashed !== $this->isTrashed) {
+            if (!$isTrashed) {
                 $this->trashedReason = null;
                 $this->trashedAt = null;
             }
@@ -430,14 +414,7 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
         return $this->trashedAt;
     }
 
-    /**
-     * Set trashedAt.
-     *
-     * @param \DateTime $trashedAt
-     *
-     * @return Argument
-     */
-    public function setTrashedAt($trashedAt)
+    public function setTrashedAt($trashedAt): self
     {
         $this->trashedAt = $trashedAt;
 
@@ -454,14 +431,7 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
         return $this->trashedReason;
     }
 
-    /**
-     * Set trashedReason.
-     *
-     * @param string $trashedReason
-     *
-     * @return Argument
-     */
-    public function setTrashedReason($trashedReason)
+    public function setTrashedReason($trashedReason): self
     {
         $this->trashedReason = $trashedReason;
 
@@ -522,9 +492,6 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
         return $excerpt;
     }
 
-    /**
-     * @return mixed
-     */
     public function removeCommentFromRelatedObject()
     {
         $this->getRelatedObject()->removeComment($this);
@@ -567,6 +534,6 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
      */
     public function deleteComment()
     {
-        $this->removeCommentFromRelatedObject($this);
+        $this->removeCommentFromRelatedObject();
     }
 }

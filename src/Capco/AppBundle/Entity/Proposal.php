@@ -343,6 +343,9 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this;
     }
 
+    /**
+     * @return null|User
+     */
     public function getAuthor()
     {
         return $this->author;
@@ -585,18 +588,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     public function setProgressSteps(Collection $progressSteps): self
     {
         $this->progressSteps = $progressSteps;
-
-        return $this;
-    }
-
-    public function resetVotes(): self
-    {
-        foreach ($this->selectionVotes as $vote) {
-            $this->removeVote($vote);
-        }
-        foreach ($this->collectVotes as $vote) {
-            $this->removeVote($vote);
-        }
 
         return $this;
     }

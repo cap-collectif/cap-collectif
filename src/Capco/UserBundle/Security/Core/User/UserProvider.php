@@ -16,8 +16,7 @@ class UserProvider extends FOSUBUserProvider
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
-        $property = $this->getProperty($response);
-        $email = $response->getEmail() ? $response->getEmail() : $response->getUsername();
+        $email = $response->getEmail() ?: $response->getUsername();
 
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
@@ -43,15 +42,15 @@ class UserProvider extends FOSUBUserProvider
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $email = $response->getEmail() ? $response->getEmail() : 'twitter_'.$response->getUsername();
-        $username = $response->getNickname() ? $response->getNickname() : $response->getFirstname().' '.$response->getLastname();
+        $email = $response->getEmail() ?: 'twitter_'.$response->getUsername();
+        $username = $response->getNickname() ?: $response->getFirstName().' '.$response->getLastName();
         $user = $this->userManager->findUserByEmail($email);
 
         if (null === $user) {
             $user = $this->userManager->createUser();
             $user->setUsername($username);
             $user->setEmail($email);
-            $user->setPlainPassword(self::random_string(20));
+            $user->setPlainPassword($this->random_string(20));
             $user->setEnabled(true);
         }
 

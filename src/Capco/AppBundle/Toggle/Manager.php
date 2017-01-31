@@ -39,6 +39,8 @@ class Manager
         'vote_without_account',
     ];
 
+    protected $context;
+
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)
     {
         $this->toggleManager = $toggleManager;
@@ -63,7 +65,7 @@ class Manager
         $return = [];
 
         foreach (self::$toggles as $name) {
-            if (null == $state || $state == $this->isActive($name)) {
+            if (!$state || $state === $this->isActive($name)) {
                 $return[$name] = $this->isActive($name);
             }
         }
@@ -116,7 +118,7 @@ class Manager
         return !$value;
     }
 
-    private function createToggle($name, $status, $conditions = [])
+    private function createToggle($name, $status, array $conditions = [])
     {
         $toggle = new Toggle($name, $conditions);
 
@@ -141,7 +143,7 @@ class Manager
         }
 
         foreach ($features as $feature) {
-            if (in_array($feature, array_keys($this->all(true)))) {
+            if (array_key_exists($feature, $this->all(true))) {
                 return true;
             }
         }

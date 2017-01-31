@@ -82,19 +82,14 @@ class Reply implements Contribution
     }
 
     /**
-     * @return string
+     * @return null|User
      */
     public function getAuthor()
     {
         return $this->author;
     }
 
-    /**
-     * @param string $author
-     *
-     * @return $this
-     */
-    public function setAuthor(User $author)
+    public function setAuthor(User $author): self
     {
         $this->author = $author;
 

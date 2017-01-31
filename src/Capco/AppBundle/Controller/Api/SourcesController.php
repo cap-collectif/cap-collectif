@@ -12,7 +12,6 @@ use Capco\AppBundle\Form\ReportingType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -56,8 +55,10 @@ class SourcesController extends FOSRestController
 
         $opinion->incrementSourcesCount();
 
-        $this->get('doctrine.orm.entity_manager')->persist($source);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($source);
+        $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return $source;
@@ -101,8 +102,10 @@ class SourcesController extends FOSRestController
 
         $version->incrementSourcesCount();
 
-        $this->get('doctrine.orm.entity_manager')->persist($source);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($source);
+        $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return $source;
@@ -118,7 +121,7 @@ class SourcesController extends FOSRestController
     public function putOpinionSourceAction(Request $request, Opinion $opinion, Source $source)
     {
         if ($this->getUser() !== $source->getAuthor()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         if ($source->getOpinion() != $opinion) {
@@ -138,8 +141,10 @@ class SourcesController extends FOSRestController
 
         $source->resetVotes();
 
-        $this->get('doctrine.orm.entity_manager')->persist($source);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($source);
+        $em->flush();
 
         return $source;
     }
@@ -155,7 +160,7 @@ class SourcesController extends FOSRestController
     public function putOpinionVersionSourceAction(Request $request, Opinion $opinion, OpinionVersion $version, Source $source)
     {
         if ($this->getUser() !== $source->getAuthor()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         if ($source->getOpinionVersion() != $version) {
@@ -183,8 +188,10 @@ class SourcesController extends FOSRestController
 
         $source->resetVotes();
 
-        $this->get('doctrine.orm.entity_manager')->persist($source);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($source);
+        $em->flush();
 
         return $source;
     }
@@ -203,7 +210,7 @@ class SourcesController extends FOSRestController
         }
 
         $user = $this->getUser();
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
 
         $previousVote = $em->getRepository('CapcoAppBundle:SourceVote')
                            ->findOneBy(['user' => $user, 'source' => $source]);
@@ -237,7 +244,7 @@ class SourcesController extends FOSRestController
     public function deleteOpinionSourceAction(Opinion $opinion, Source $source)
     {
         if ($this->getUser() !== $source->getAuthor()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         if ($source->getOpinion() != $opinion) {
@@ -249,7 +256,7 @@ class SourcesController extends FOSRestController
         }
 
         $opinion->decrementSourcesCount();
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
         $em->remove($source);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
@@ -266,7 +273,7 @@ class SourcesController extends FOSRestController
     public function deleteOpinionVersionSourceAction(Opinion $opinion, OpinionVersion $version, Source $source)
     {
         if ($this->getUser() !== $source->getAuthor()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         if ($source->getOpinionVersion() != $version) {
@@ -282,7 +289,7 @@ class SourcesController extends FOSRestController
         }
 
         $version->decrementSourcesCount();
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
         $em->remove($source);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
@@ -300,7 +307,7 @@ class SourcesController extends FOSRestController
             throw new BadRequestHttpException('Uncontributable source.');
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
 
         $vote = $em->getRepository('CapcoAppBundle:SourceVote')
                    ->findOneBy([
@@ -328,10 +335,10 @@ class SourcesController extends FOSRestController
     public function postOpinionSourceReportAction(Request $request, Opinion $opinion, Source $source)
     {
         if ($this->getUser() === $source->getAuthor()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
-        if ($source->getOpinion() != $opinion) {
+        if ($source->getOpinion() !== $opinion) {
             throw new BadRequestHttpException('Not a child.');
         }
 
@@ -349,10 +356,10 @@ class SourcesController extends FOSRestController
     public function postOpinionVersionSourceReportAction(Request $request, Opinion $opinion, OpinionVersion $version, Source $source)
     {
         if ($this->getUser() === $source->getAuthor()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
-        if ($source->getOpinionVersion() != $version) {
+        if ($source->getOpinionVersion() !== $version) {
             throw new BadRequestHttpException('Not a child.');
         }
 
@@ -373,8 +380,11 @@ class SourcesController extends FOSRestController
             return $form;
         }
 
-        $this->get('doctrine.orm.entity_manager')->persist($report);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($report);
+        $em->flush();
+
         $this->get('capco.notify_manager')->sendNotifyMessage($report);
 
         return $report;

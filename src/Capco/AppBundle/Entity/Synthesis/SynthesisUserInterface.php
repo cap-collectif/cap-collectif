@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity\Synthesis;
 
+use Capco\MediaBundle\Entity\Media;
+
 /**
  * SynthesisUserInterface.
  */
@@ -31,7 +33,7 @@ interface SynthesisUserInterface
     /**
      * Get media.
      *
-     * @return Media or null
+     * @return Media|null
      */
     public function getMedia();
 }

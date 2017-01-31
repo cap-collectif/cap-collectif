@@ -26,15 +26,9 @@ class StatusesController extends FOSRestController
      * @Get("/collect_steps/{collectStepId}/statuses")
      * @ParamConverter("collectStep", options={"mapping": {"collectStepId": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"Statuses"})
-     *
-     * @param CollectStep $collectStep
-     *
-     * @return array
      */
     public function getStatusesAction(CollectStep $collectStep)
     {
-        $statuses = $collectStep->getStatuses();
-
-        return $statuses;
+        return $collectStep->getStatuses();
     }
 }

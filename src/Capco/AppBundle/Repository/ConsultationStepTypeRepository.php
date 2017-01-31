@@ -21,7 +21,7 @@ class ConsultationStepTypeRepository extends EntityRepository
      */
     public function getRelatedTypes($id)
     {
-        $qb = $this->getIsEnabledQueryBuilder('ct')
+        $qb = $this->getIsEnabledQueryBuilder()
             ->select('ot.id')
             ->leftJoin('ct.opinionTypes', 'ot')
             ->andWhere('ct.id = :id')

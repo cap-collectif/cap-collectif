@@ -61,8 +61,6 @@ class Page
     private $isEnabled = true;
 
     /**
-     * @var MenuItem
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\MenuItem", mappedBy="Page", cascade={"persist", "remove"})
      */
     private $MenuItems;

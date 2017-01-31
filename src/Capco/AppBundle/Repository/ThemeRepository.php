@@ -11,12 +11,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ThemeRepository extends EntityRepository
 {
-    /**
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return array
-     */
     public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
@@ -49,7 +43,7 @@ class ThemeRepository extends EntityRepository
      */
     public function getSearchResultsWithProjectsAndIdeas($nbByPage = 8, $page = 1, $term = null)
     {
-        if ((int) $page < 1) {
+        if ($page < 1) {
             throw new \InvalidArgumentException(sprintf(
                 'The argument "page" cannot be lower than 1 (current value: "%s")',
                 $page

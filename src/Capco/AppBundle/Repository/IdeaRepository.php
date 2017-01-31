@@ -43,15 +43,10 @@ class IdeaRepository extends EntityRepository
 
     /**
      * Get all trashed ideas.
-     *
-     * @param int $nbByPage
-     * @param int $page
-     *
-     * @return Paginator
      */
     public function getTrashed($nbByPage = 8, $page = 1)
     {
-        if ((int) $page < 1) {
+        if ($page < 1) {
             throw new \InvalidArgumentException(sprintf(
                 'The argument "page" cannot be lower than 1 (current value: "%s")',
                 $page
@@ -223,7 +218,7 @@ class IdeaRepository extends EntityRepository
      */
     public function getSearchResults($pagination = null, $page = 1, $from = null, $to = null, $themeId = null, $sort = 'last', $term = null)
     {
-        if ((int) $page < 1) {
+        if ($page < 1) {
             throw new \InvalidArgumentException(sprintf(
                 'The argument "page" cannot be lower than 1 (current value: "%s")',
                 $page

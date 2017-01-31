@@ -299,24 +299,12 @@ class OpinionType
         return $this;
     }
 
-    /**
-     * Get defaultFilter.
-     *
-     * @return int
-     */
     public function getDefaultFilter()
     {
         return $this->defaultFilter;
     }
 
-    /**
-     * Set defaultFilter.
-     *
-     * @param int $defaultFilter
-     *
-     * @return OpinionType
-     */
-    public function setDefaultFilter($defaultFilter)
+    public function setDefaultFilter(string $defaultFilter): self
     {
         $this->defaultFilter = $defaultFilter;
 

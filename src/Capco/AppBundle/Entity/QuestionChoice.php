@@ -47,9 +47,6 @@ class QuestionChoice
         return $this->title ?? 'New QuestionChoice';
     }
 
-    /**
-     * @return Question
-     */
     public function getQuestion()
     {
         return $this->question;

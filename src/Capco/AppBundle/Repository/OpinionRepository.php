@@ -299,7 +299,7 @@ class OpinionRepository extends EntityRepository
      */
     public function getByOpinionTypeAndConsultationStepOrdered(ConsultationStep $step, $opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'positions')
     {
-        if ((int) $page < 1) {
+        if ($page < 1) {
             throw new \InvalidArgumentException(sprintf(
                 'The argument "page" cannot be lower than 1 (current value: "%s")',
                 $page

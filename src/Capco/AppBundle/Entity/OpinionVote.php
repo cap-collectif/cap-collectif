@@ -76,14 +76,7 @@ class OpinionVote extends AbstractVote
         return $this->value;
     }
 
-    /**
-     * Set value.
-     *
-     * @param int $value
-     *
-     * @return Vote
-     */
-    public function setValue($value)
+    public function setValue($value): self
     {
         $this->value = $value;
 

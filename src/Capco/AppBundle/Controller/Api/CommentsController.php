@@ -71,7 +71,7 @@ class CommentsController extends FOSRestController
     public function postCommentVoteAction(Comment $comment)
     {
         $user = $this->getUser();
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
         $previousVote = $em
             ->getRepository('CapcoAppBundle:CommentVote')
             ->findOneBy(['user' => $user, 'comment' => $comment]);

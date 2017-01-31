@@ -536,7 +536,7 @@ class UserRepository extends EntityRepository
      */
     public function getSearchResults($nbByPage = 8, $page = 1, $sort = null, $type = null)
     {
-        if ((int) $page < 1) {
+        if ($page < 1) {
             throw new \InvalidArgumentException(sprintf(
                 'The argument "page" cannot be lower than 1 (current value: "%s")',
                 $page

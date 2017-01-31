@@ -18,7 +18,7 @@ class RecalculateRankingsCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getApplication()->getKernel()->getContainer();
+        $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
 
         $projects = $em->getRepository('CapcoAppBundle:Project')

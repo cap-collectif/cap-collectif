@@ -67,7 +67,6 @@ class Synthesis
     private $deletedAt;
 
     /**
-     * @var string
      * @ORM\Column(name="display_rules", type="json", nullable=true)
      */
     private $displayRules = ['level' => 0];
@@ -204,12 +203,7 @@ class Synthesis
         return $this->displayRules;
     }
 
-    /**
-     * @param string $displayRules
-     *
-     * @return $this
-     */
-    public function setDisplayRules($displayRules)
+    public function setDisplayRules($displayRules): self
     {
         $this->displayRules = $displayRules;
 

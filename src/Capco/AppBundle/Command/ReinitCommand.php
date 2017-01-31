@@ -119,7 +119,7 @@ class ReinitCommand extends ContainerAwareCommand
         $this->runCommands([
           'doctrine:database:drop' => ['--force' => true],
         ], $output);
-        $connection = $this->getApplication()->getKernel()->getContainer()->get('doctrine')->getConnection();
+        $connection = $this->getContainer()->get('doctrine')->getConnection();
 
         if ($connection->isConnected()) {
             $connection->close();

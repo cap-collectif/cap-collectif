@@ -119,7 +119,7 @@ class ProjectRepository extends EntityRepository
         $term = null,
         $type = null
     ) {
-        if ((int) $page < 1) {
+        if ($page < 1) {
             throw new \InvalidArgumentException(sprintf(
                 'The argument "page" cannot be lower than 1 (current value: "%s")',
                 $page
@@ -204,11 +204,6 @@ class ProjectRepository extends EntityRepository
 
     /**
      * Get last enabled projects.
-     *
-     * @param int $limit
-     * @param int $offset
-     *
-     * @return Paginator
      */
     public function getLastPublished($limit = 1, $offset = 0)
     {

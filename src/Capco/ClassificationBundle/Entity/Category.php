@@ -2,7 +2,8 @@
 
 namespace Capco\ClassificationBundle\Entity;
 
-use Sonata\ClassificationBundle\Entity\BaseCategory as BaseCategory;
+use Doctrine\Common\Collections\ArrayCollection;
+use Sonata\ClassificationBundle\Entity\BaseCategory;
 
 class Category extends BaseCategory
 {
@@ -18,6 +19,6 @@ class Category extends BaseCategory
      */
     public function __construct()
     {
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 }

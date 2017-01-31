@@ -9,7 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
-use Capco\AppBundle\Entity\Project;
 use JMS\Serializer\SerializationContext;
 
 class HomepageController extends Controller
@@ -23,6 +22,8 @@ class HomepageController extends Controller
     {
         $sections = $this->get('capco.section.resolver')->getDisplayableEnabledOrdered();
         $newsletterActive = $this->get('capco.toggle.manager')->isActive('newsletter');
+
+        $form = null;
 
         // Subscription to newsletter
         if ($newsletterActive) {
@@ -97,7 +98,7 @@ class HomepageController extends Controller
     public function popularIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
         $serializer = $this->get('jms_serializer');
-        $ideasRaw = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getPopular($max, $offset);
+        $ideasRaw = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Idea')->getPopular($max, $offset);
         $props = $serializer->serialize([
             'ideas' => $ideasRaw,
         ], 'json', SerializationContext::create()->setGroups(['Ideas', 'ThemeDetails', 'UsersInfos']));
@@ -117,7 +118,7 @@ class HomepageController extends Controller
     public function lastIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
         $serializer = $this->get('jms_serializer');
-        $ideasRaw = $this->getDoctrine()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
+        $ideasRaw = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
         $props = $serializer->serialize([
             'ideas' => $ideasRaw,
         ], 'json', SerializationContext::create()->setGroups(['Ideas', 'Themes', 'UsersInfos']));
@@ -136,7 +137,7 @@ class HomepageController extends Controller
      */
     public function lastProposalsAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
         if ($section->getStep() && $section->getStep()->isCollectStep()) {
             $proposals = $em
                 ->getRepository('CapcoAppBundle:Proposal')
@@ -162,7 +163,7 @@ class HomepageController extends Controller
      */
     public function lastThemesAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
-        $topics = $this->getDoctrine()->getRepository('CapcoAppBundle:Theme')->getLast($max, $offset);
+        $topics = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Theme')->getLast($max, $offset);
 
         return [
             'topics' => $topics,
@@ -204,6 +205,7 @@ class HomepageController extends Controller
         $props = $serializer->serialize([
             'projects' => $this
                 ->getDoctrine()
+                ->getManager()
                 ->getRepository('CapcoAppBundle:Project')
                 ->getLastPublished($max, $offset),
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'UserDetails', 'Steps', 'Themes', 'ProjectType']));
@@ -242,7 +244,7 @@ class HomepageController extends Controller
      */
     public function socialNetworksAction($section = null, $alt = null)
     {
-        $socialNetworks = $this->getDoctrine()->getRepository('CapcoAppBundle:SocialNetwork')->getEnabled();
+        $socialNetworks = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:SocialNetwork')->getEnabled();
 
         return [
             'socialNetworks' => $socialNetworks,

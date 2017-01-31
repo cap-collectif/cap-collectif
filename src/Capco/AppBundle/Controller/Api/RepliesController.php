@@ -26,13 +26,10 @@ class RepliesController extends FOSRestController
      * @Get("/questionnaires/{questionnaire_id}/replies")
      * @ParamConverter("questionnaire", options={"mapping": {"questionnaire_id": "id"}})
      * @View(statusCode=200, serializerGroups={"Replies", "UsersInfos", "UserMedias"})
-     *
-     * @param Request       $request
-     * @param Questionnaire $questionnaire
      */
-    public function getUserRepliesByFormAction(Request $request, Questionnaire $questionnaire)
+    public function getUserRepliesByFormAction(Questionnaire $questionnaire)
     {
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->get('doctrine')->getManager();
         $userReplies = $em
           ->getRepository('CapcoAppBundle:Reply')
           ->findBy([
@@ -69,7 +66,7 @@ class RepliesController extends FOSRestController
     public function getReplyAction(Reply $reply)
     {
         if ($reply->getAuthor() !== $this->getUser()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         return $reply;
@@ -91,13 +88,6 @@ class RepliesController extends FOSRestController
      * @Post("/questionnaires/{questionnaire_id}/replies")
      * @ParamConverter("questionnaire", options={"mapping": {"questionnaire_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(statusCode=201, serializerGroups={"Questionnaires", "Replies", "UsersInfos", "UserMedias"})
-     *
-     * @param Request       $request
-     * @param Questionnaire $questionnaire
-     *
-     * @throws BadRequestHttpException
-     *
-     * @return Reply
      */
     public function postReplyAction(Request $request, Questionnaire $questionnaire)
     {
@@ -107,7 +97,7 @@ class RepliesController extends FOSRestController
             throw new BadRequestHttpException('You can no longer contribute to this questionnaire step.');
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
 
         if (!$questionnaire->isMultipleRepliesAllowed()) {
             $previousReply = $em
@@ -143,6 +133,8 @@ class RepliesController extends FOSRestController
         if ($questionnaire->isAcknowledgeReplies()) {
             $this->get('capco.notify_manager')->acknowledgeUserReply($questionnaire->getStep()->getProject(), $reply);
         }
+
+        return $this->view(null, 201);
     }
 
     /**
@@ -162,15 +154,6 @@ class RepliesController extends FOSRestController
      * @ParamConverter("questionnaire", options={"mapping": {"questionnaire_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("reply", options={"mapping": {"reply_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"Questionnaires", "Replies", "UsersInfos", "UserMedias"})
-     *
-     * @param Request       $request
-     * @param Questionnaire $questionnaire
-     * @param Reply         $reply
-     *
-     * @throws AccessDeniedException
-     * @throws BadRequestHttpException
-     *
-     * @return Reply
      */
     public function putReplyAction(Request $request, Questionnaire $questionnaire, Reply $reply)
     {
@@ -189,8 +172,7 @@ class RepliesController extends FOSRestController
             return $form;
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
-        $em->flush();
+        $this->getDoctrine()->getManager()->flush();
 
         return $reply;
     }
@@ -223,7 +205,7 @@ class RepliesController extends FOSRestController
     public function deleteReplyAction(Questionnaire $questionnaire, Reply $reply)
     {
         if ($this->getUser() !== $reply->getAuthor()) {
-            throw new AccessDeniedException('You are not the author of this reply');
+            throw $this->createAccessDeniedException('You are not the author of this reply');
         }
 
         if (!$reply) {

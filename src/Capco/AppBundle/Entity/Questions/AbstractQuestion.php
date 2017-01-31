@@ -88,7 +88,6 @@ abstract class AbstractQuestion
     private $private = false;
 
     /**
-     * @var string
      * @Assert\NotNull()
      * @Assert\Range(min=0, max=7)
      * @ORM\Column(name="type", nullable=false)
@@ -104,14 +103,7 @@ abstract class AbstractQuestion
         return 'New Question';
     }
 
-    /**
-     * Set helpText.
-     *
-     * @param string $helpText
-     *
-     * @return Question
-     */
-    public function setHelpText($helpText)
+    public function setHelpText(string $helpText = null): self
     {
         $this->helpText = $helpText;
 
@@ -216,12 +208,7 @@ abstract class AbstractQuestion
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     *
-     * @return $this
-     */
-    public function setType($type)
+    public function setType($type): self
     {
         $this->type = $type;
 
@@ -239,11 +226,6 @@ abstract class AbstractQuestion
         return;
     }
 
-    /**
-     * Get position.
-     *
-     * @return int
-     */
     public function getPosition()
     {
         if ($this->questionnaireAbstractQuestion) {
@@ -253,11 +235,6 @@ abstract class AbstractQuestion
         return;
     }
 
-    /**
-     * Get questionnaire.
-     *
-     * @return Questionnaire
-     */
     public function getQuestionnaire()
     {
         if ($this->questionnaireAbstractQuestion) {
@@ -267,11 +244,6 @@ abstract class AbstractQuestion
         return;
     }
 
-    /**
-     * Get question.
-     *
-     * @return Question
-     */
     public function getQuestion()
     {
         if ($this->questionnaireAbstractQuestion) {

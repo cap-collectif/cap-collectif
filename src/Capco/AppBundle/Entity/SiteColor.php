@@ -77,14 +77,7 @@ class SiteColor
         return $this->getId() ? $this->getKeyname() : 'New color';
     }
 
-    /**
-     * Set keyname.
-     *
-     * @param string $keyname
-     *
-     * @return SiteImage
-     */
-    public function setKeyname($keyname)
+    public function setKeyname($keyname): self
     {
         $this->keyname = $keyname;
 
@@ -111,15 +104,7 @@ class SiteColor
         return $this->isEnabled;
     }
 
-    /**
-     * Set isEnabled.
-     *
-     *
-     * @param bool $isEnabled
-     *
-     * @return SiteImage
-     */
-    public function setIsEnabled($isEnabled)
+    public function setIsEnabled($isEnabled): self
     {
         $this->isEnabled = $isEnabled;
 
@@ -142,14 +127,7 @@ class SiteColor
         return $this->updatedAt;
     }
 
-    /**
-     * Set value.
-     *
-     * @param string $value
-     *
-     * @return SiteParameter
-     */
-    public function setValue($value)
+    public function setValue($value): self
     {
         $this->value = $value;
 

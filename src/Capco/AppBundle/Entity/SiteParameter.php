@@ -178,14 +178,7 @@ class SiteParameter
         return $this;
     }
 
-    /**
-     * Set isEnabled.
-     *
-     * @param bool $isEnabled
-     *
-     * @return Project
-     */
-    public function setIsEnabled($isEnabled)
+    public function setIsEnabled($isEnabled): self
     {
         $this->isEnabled = $isEnabled;
 

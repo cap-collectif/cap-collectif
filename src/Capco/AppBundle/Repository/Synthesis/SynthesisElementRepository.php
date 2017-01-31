@@ -32,8 +32,6 @@ class SynthesisElementRepository extends MaterializedPathRepository
 
     /**
      * Get elements with values.
-     *
-     * @return int
      */
     public function getWith($synthesis, $type, $term, $offset = 0, $limit = 10)
     {
@@ -207,28 +205,28 @@ class SynthesisElementRepository extends MaterializedPathRepository
                 $item = $child;
                 $item[$childrenIndex] = [];
                 if (array_key_exists($childrenCountIndex, $item)) {
-                    $item[$childrenCountIndex] = intval($item[$childrenCountIndex]);
+                    $item[$childrenCountIndex] = (int) $item[$childrenCountIndex];
                 }
                 if (array_key_exists('publishedChildrenCount', $item)) {
-                    $item['publishedChildrenCount'] = intval($item['publishedChildrenCount']);
+                    $item['publishedChildrenCount'] = (int) $item['publishedChildrenCount'];
                 }
                 if (array_key_exists('publishedParentChildrenCount', $item)) {
-                    $item['publishedParentChildrenCount'] = intval($item['publishedParentChildrenCount']);
+                    $item['publishedParentChildrenCount'] = (int) $item['publishedParentChildrenCount'];
                 }
                 if (array_key_exists('childrenScore', $item)) {
-                    $item['childrenScore'] = intval($item['childrenScore']);
+                    $item['childrenScore'] = (int) $item['childrenScore'];
                 }
                 if (array_key_exists('parentChildrenScore', $item)) {
-                    $item['parentChildrenScore'] = intval($item['parentChildrenScore']);
+                    $item['parentChildrenScore'] = (int) $item['parentChildrenScore'];
                 }
                 if (array_key_exists('childrenElementsNb', $item)) {
-                    $item['childrenElementsNb'] = intval($item['childrenElementsNb']);
+                    $item['childrenElementsNb'] = (int) $item['childrenElementsNb'];
                 }
                 if (array_key_exists('parentChildrenElementsNb', $item)) {
-                    $item['parentChildrenElementsNb'] = intval($item['parentChildrenElementsNb']);
+                    $item['parentChildrenElementsNb'] = (int) $item['parentChildrenElementsNb'];
                 }
                 if (array_key_exists($childrenCountIndex, $item)) {
-                    $item[$childrenCountIndex] = intval($item[$childrenCountIndex]);
+                    $item[$childrenCountIndex] = (int) $item[$childrenCountIndex];
                 }
                 if (array_key_exists('body', $item)) {
                     $item['body'] = html_entity_decode($item['body'], ENT_QUOTES);
@@ -318,7 +316,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         if (is_object($parent) && $parent instanceof $meta->name) {
             $parent = new EntityWrapper($parent, $this->_em);
             $nodePath = $parent->getPropertyValue($path);
-            $expr = $qb->expr()->andx()->add(
+            $expr = $qb->expr()->andX()->add(
                 $qb->expr()->like(
                     'se.'.$path,
                     $qb->expr()->literal(
@@ -336,7 +334,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
 
             if ($depth && $depth > 0) {
                 $expr->add(
-                    $qb->expr()->andx(
+                    $qb->expr()->andX(
                         $qb->expr()->gte('se.'.$config['level'], $qb->expr()->literal($parent->getPropertyValue($config['level']))),
                         $qb->expr()->lte('se.'.$config['level'], $qb->expr()->literal($parent->getPropertyValue($config['level']) + $depth))
                     )

@@ -4,6 +4,8 @@ namespace Capco\AppBundle\EventListener;
 
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
+use Capco\AppBundle\Entity\QuestionChoice;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class QuestionChoiceSerializationListener extends AbstractSerializationListener
 {
@@ -19,7 +21,7 @@ class QuestionChoiceSerializationListener extends AbstractSerializationListener
         return [
             [
                 'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\QuestionChoice',
+                'class' => QuestionChoice::class,
                 'method' => 'onPostQuestionChoice',
             ],
         ];

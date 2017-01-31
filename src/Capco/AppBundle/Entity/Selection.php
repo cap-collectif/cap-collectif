@@ -57,6 +57,9 @@ class Selection
         return $this;
     }
 
+    /**
+     * @return null|Proposal
+     */
     public function getProposal()
     {
         return $this->proposal;

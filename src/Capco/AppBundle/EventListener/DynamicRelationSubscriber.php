@@ -30,11 +30,6 @@ class DynamicRelationSubscriber implements EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $metadata = $eventArgs->getClassMetadata();
-        $em = $eventArgs->getEntityManager();
-        $namingStrategy = $em
-            ->getConfiguration()
-            ->getNamingStrategy()
-        ;
 
         foreach ($this->traits as $trait => $params) {
             switch ($trait) {

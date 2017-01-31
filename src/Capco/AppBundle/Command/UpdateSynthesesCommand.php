@@ -18,12 +18,13 @@ class UpdateSynthesesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getApplication()->getKernel()->getContainer();
+        $container = $this->getContainer();
 
         $output->writeln('Updating all syntheses from their source data.');
 
         $syntheses = $container
-            ->get('doctrine.orm.entity_manager')
+            ->get('doctrine')
+            ->getManager()
             ->getRepository('CapcoAppBundle:Synthesis\Synthesis')
             ->findAll()
         ;

@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Helper\EnvHelper;
 use Doctrine\ORM\EntityManager;
@@ -84,10 +83,7 @@ class ProjectDownloadResolver
             throw new NotFoundHttpException('Step not found');
         }
 
-        if ($step instanceof ConsultationStep) {
-            $this->headers = $this->consultationHeaders;
-            $data = $this->getConsultationStepData($step);
-        } elseif ($step instanceof CollectStep) {
+        if ($step instanceof CollectStep) {
             if (!in_array('servicePilote', $this->collectHeaders, true)
                 && (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
                     || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod')
@@ -111,7 +107,7 @@ class ProjectDownloadResolver
             $this->headers = $this->getQuestionnaireStepHeaders($step);
             $data = $this->getQuestionnaireStepData($step);
         } else {
-            throw new \InvalidArgumentException('Step must be of type collect, questionnaire or consultation');
+            throw new \InvalidArgumentException('Step must be of type collect or questionnaire');
         }
         $title = $step->getProject() ? $step->getProject()->getTitle().'_' : '';
         $title .= $step->getTitle();
@@ -198,13 +194,6 @@ class ProjectDownloadResolver
     {
         foreach ($votes as $vote) {
             $this->addItemToData($this->getProposalVoteItem($vote, $proposal));
-        }
-    }
-
-    public function getVotesData($votes, $entity)
-    {
-        foreach ($votes as $vote) {
-            $this->addItemToData($this->getVoteItem($vote, $entity));
         }
     }
 

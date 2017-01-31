@@ -21,8 +21,6 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
     {
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        $votes = [];
-
         $data = [
             $constraint->objectPath => $accessor->getValue($object, $constraint->objectPath),
         ];

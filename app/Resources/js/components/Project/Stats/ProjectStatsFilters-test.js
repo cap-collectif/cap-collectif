@@ -5,11 +5,10 @@ import { ProjectStatsFilters } from './ProjectStatsFilters';
 import IntlData from '../../../translations/FR';
 
 describe('<ProjectStatsFilters />', () => {
-
   const props = {
-    themes: [{id: 1, title: 'theme-1'}],
-    districts: [{id: 1, title: 'district-1'}],
-    categories: [{id: 1, title: 'category-1'}],
+    themes: [{ id: 1, title: 'theme-1' }],
+    districts: [{ id: 1, title: 'district-1' }],
+    categories: [{ id: 1, title: 'category-1' }],
     showFilters: true,
     onThemeChange: () => {},
     onDistrictChange: () => {},
@@ -22,7 +21,7 @@ describe('<ProjectStatsFilters />', () => {
   const propsWithoutDistrictsAndThemes = {
     themes: [],
     districts: [],
-    categories: [{id: 1, title: 'category-1'}],
+    categories: [{ id: 1, title: 'category-1' }],
     showFilters: true,
     onThemeChange: () => {},
     onDistrictChange: () => {},

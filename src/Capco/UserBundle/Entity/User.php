@@ -1190,11 +1190,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     // ********************* Methods for synthesis tool **************************
 
-    /**
-     * Get unique identifier.
-     *
-     * @return int
-     */
     public function getUniqueIdentifier()
     {
         return $this->slug;

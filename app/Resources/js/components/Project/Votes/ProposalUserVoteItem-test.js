@@ -5,7 +5,6 @@ import { ProposalUserVoteItem } from './ProposalUserVoteItem';
 import IntlData from '../../../translations/FR';
 
 describe('<ProposalUserVoteItem />', () => {
-
   const props = {
     dispatch: () => {},
     proposal: {
@@ -15,7 +14,7 @@ describe('<ProposalUserVoteItem />', () => {
         name: 'district',
       },
       _links: {
-        show: 'http://capco.test/proposal'
+        show: 'http://capco.test/proposal',
       },
       author: {
         id: 1,

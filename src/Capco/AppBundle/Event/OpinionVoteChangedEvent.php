@@ -10,9 +10,8 @@ class OpinionVoteChangedEvent extends AbstractVoteChangedEvent
 
     public function __construct(OpinionVote $vote, $action, $previous = null)
     {
-        $this->vote = $vote;
-        $this->action = $action;
         $this->previous = $previous;
+        parent::__construct($vote, $action);
     }
 
     public function getPrevious()

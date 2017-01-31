@@ -18,8 +18,8 @@ class ExpireUsersCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getApplication()->getKernel()->getContainer();
-        $em = $container->get('doctrine.orm.entity_manager');
+        $container = $this->getContainer();
+        $em = $container->get('doctrine')->getManager();
         $notifier = $container->get('capco.notify_manager');
         $manager = $container->get('capco.contribution.manager');
 

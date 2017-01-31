@@ -17,6 +17,7 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
      */
     public $em;
     public $redis;
+    public $ids;
 
     protected function configure()
     {

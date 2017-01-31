@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\Source;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;

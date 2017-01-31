@@ -52,11 +52,6 @@ class ProposalComment extends Comment
         return $this->proposal;
     }
 
-    /**
-     * @param $object
-     *
-     * @return Proposal
-     */
     public function setRelatedObject($object)
     {
         return $this->setProposal($object);

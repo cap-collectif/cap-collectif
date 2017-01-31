@@ -124,9 +124,6 @@ class Questionnaire
         return $this->description;
     }
 
-    /**
-     * @return ArrayCollection
-     */
     public function getRealQuestions()
     {
         $questions = [];

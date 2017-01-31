@@ -85,8 +85,6 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     private $object;
 
     /**
-     * @var url
-     *
      * @ORM\Column(name="url", type="string", nullable=true)
      * @Assert\Url()
      */
@@ -153,8 +151,6 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     private $media;
 
     /**
-     * @var string
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Idea", cascade={"persist", "remove"})
      */
     private $Reports;

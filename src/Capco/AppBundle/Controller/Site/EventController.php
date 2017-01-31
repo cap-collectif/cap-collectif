@@ -35,7 +35,7 @@ class EventController extends Controller
             'method' => 'POST',
         ]);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -82,7 +82,7 @@ class EventController extends Controller
             'method' => 'POST',
         ]);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -114,10 +114,6 @@ class EventController extends Controller
      * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flags" = "calendar"})
      * @ParamConverter("event", options={"mapping": {"slug": "slug"}, "repository_method" = "getOne"})
      * @Template("CapcoAppBundle:Event:show.html.twig")
-     *
-     * @param $request
-     *
-     * @return array
      */
     public function showAction(Request $request, Event $event)
     {
@@ -141,7 +137,7 @@ class EventController extends Controller
         $registration = $eventHelper->findUserRegistrationOrCreate($event, $user);
         $form = $this->createForm(new EventRegistrationType($user, $registration->isConfirmed()), $registration);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() === 'POST') {
             $registration->setIpAddress($request->getClientIp());
             $registration->setUser($user);
             $form->handleRequest($request);

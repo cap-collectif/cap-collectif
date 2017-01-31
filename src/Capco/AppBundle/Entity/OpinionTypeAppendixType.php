@@ -56,12 +56,7 @@ class OpinionTypeAppendixType
         return $this->appendixType;
     }
 
-    /**
-     * @param mixed $appendixType
-     *
-     * @return this
-     */
-    public function setAppendixType($appendixType)
+    public function setAppendixType($appendixType): self
     {
         $this->appendixType = $appendixType;
 

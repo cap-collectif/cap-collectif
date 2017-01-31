@@ -30,16 +30,15 @@ class DefaultController extends Controller
     public function contactAction(Request $request)
     {
         $form = $this->createForm(new ContactType());
-        $translator = $this->get('translator');
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $data = $form->getData();
 
                 $adminEmail = $this->get('capco.site_parameter.resolver')->getValue('admin.mail.contact');
-                if (null == $adminEmail) {
+                if (null === $adminEmail) {
                     $this->get('session')->getFlashBag()->add('danger', 'contact.email.sent_error');
 
                     return $this->redirect($this->generateUrl('app_homepage'));

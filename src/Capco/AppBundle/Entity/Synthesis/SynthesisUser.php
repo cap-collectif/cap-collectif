@@ -84,13 +84,7 @@ class SynthesisUser implements SynthesisUserInterface
 
     // ************************* Methods needed by the SynthesisUserInterface ****************
 
-    /**
-     * Get media.
-     *
-     * @return Media or null
-     */
     public function getMedia()
     {
-        return;
     }
 }
