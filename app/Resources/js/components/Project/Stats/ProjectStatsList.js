@@ -14,6 +14,7 @@ const ProjectStatsList = React.createClass({
     icon: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
     data: React.PropTypes.object.isRequired,
+    step: React.PropTypes.object.isRequired,
     isCurrency: React.PropTypes.bool.isRequired,
     themes: React.PropTypes.array.isRequired,
     districts: React.PropTypes.array.isRequired,
@@ -95,6 +96,7 @@ const ProjectStatsList = React.createClass({
       themes,
       categories,
       type,
+      step,
     } = this.props;
     const { data } = this.state;
 
@@ -110,6 +112,8 @@ const ProjectStatsList = React.createClass({
           onDistrictChange={this.changeDistrict}
           onCategoryChange={this.changeCategory}
           showFilters={showFilters}
+          showDistricts={step.usingDistricts || false}
+          showThemes={step.usingThemes || false}
         />
         {
           haveData &&

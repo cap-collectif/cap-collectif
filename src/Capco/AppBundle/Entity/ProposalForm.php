@@ -197,7 +197,7 @@ class ProposalForm
     }
 
     /**
-     * @return ArrayCollection
+     * @return array
      */
     public function getRealQuestions()
     {

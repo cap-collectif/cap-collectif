@@ -1,0 +1,95 @@
+exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
+<Row
+  className="stats__filters"
+  componentClass="div">
+  <Col
+    componentClass="div"
+    md={4}
+    xs={12}>
+    <Input
+      errors={null}
+      id="stats-filter-themes"
+      image={null}
+      labelClassName="h5"
+      medias={Array []}
+      onChange={[Function]}
+      type="select">
+      <option
+        value="0">
+        Tous les thèmes
+      </option>
+      <option
+        value={1}>
+        theme-1
+      </option>
+    </Input>
+  </Col>
+  <Col
+    componentClass="div"
+    md={4}
+    xs={12}>
+    <Input
+      errors={null}
+      id="stats-filter-categories"
+      image={null}
+      labelClassName="h5"
+      medias={Array []}
+      onChange={[Function]}
+      type="select">
+      <option
+        value="0">
+        Toutes les catégories
+      </option>
+      <option
+        value={1} />
+    </Input>
+  </Col>
+  <Col
+    componentClass="div"
+    md={4}
+    xs={12}>
+    <Input
+      errors={null}
+      id="stats-filter-districts"
+      image={null}
+      labelClassName="h5"
+      medias={Array []}
+      onChange={[Function]}
+      type="select">
+      <option
+        value="0">
+        Toutes les localisations
+      </option>
+      <option
+        value={1} />
+    </Input>
+  </Col>
+</Row>
+`;
+
+exports[`<ProjectStatsFilters /> should render only categories filter 1`] = `
+<Row
+  className="stats__filters"
+  componentClass="div">
+  <Col
+    componentClass="div"
+    md={12}
+    xs={12}>
+    <Input
+      errors={null}
+      id="stats-filter-categories"
+      image={null}
+      labelClassName="h5"
+      medias={Array []}
+      onChange={[Function]}
+      type="select">
+      <option
+        value="0">
+        Toutes les catégories
+      </option>
+      <option
+        value={1} />
+    </Input>
+  </Col>
+</Row>
+`;
