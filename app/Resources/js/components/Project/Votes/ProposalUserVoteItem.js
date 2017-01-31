@@ -27,19 +27,19 @@ export const ProposalUserVoteItem = React.createClass({
 
     return (
       <Row className="proposals-user-votes__row" id={`vote-step${step.id}-proposal${proposal.id}`}>
-        <Col md={colWidth + 1} xs={12} className={{ 'center-block': true }}><a href={proposal._links.show}>{proposal.title}</a></Col>
-        <Col md={colWidth + 1} xs={12} className={{ 'center-block': true }}><i className="cap cap-user-2"></i><UserLink user={proposal.author} /></Col>
+        <Col md={colWidth === 3 ? colWidth + 1 : colWidth + 2} xs={12}><a href={proposal._links.show}>{proposal.title}</a></Col>
+        <Col md={colWidth} xs={12}><i className="cap cap-user-2"></i><UserLink user={proposal.author} /></Col>
         {
           proposal.district &&
           <Col md={colWidth} xs={12}><i className="cap cap-marker-1"></i>{proposal.district.name}</Col>
         }
-        <Col md={colWidth} xs={12} className={{ 'center-block': true }}>
+        <Col md={colWidth} xs={12}>
           <ProposalDetailsEstimation
             proposal={proposal}
             showNullEstimation={step.voteType === VOTE_TYPE_BUDGET}
           />
         </Col>
-        <Col md={colWidth} xs={12} className={{ 'center-block': true }}>
+        <Col md={colWidth} xs={12}>
           <Button
             onClick={() => {
               deleteVote(dispatch, step, proposal);

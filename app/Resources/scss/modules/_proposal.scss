@@ -186,10 +186,20 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 
 .proposals-user-votes__table {
     border: 1px solid $border-color;
+    margin-bottom: 5px;
 }
 
 .proposals-user-votes__row {
-    margin: 15px 0 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $border-color;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.proposals-user-votes__table.row {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .proposal__votes .proposal__vote .media--aligned {
