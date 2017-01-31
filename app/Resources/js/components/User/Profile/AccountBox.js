@@ -3,41 +3,40 @@ import React, { PropTypes } from 'react';
 import { Panel, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
+import { submit } from 'redux-form';
+import AccountForm from './AccountForm';
 
 export const AccountBox = React.createClass({
   propTypes: {
     user: PropTypes.object.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { user, isSubmitting } = this.props;
-
-    const header =
-         this.getIntlMessage('phone.confirm.phone')
-    ;
-
+    const { submitting, dispatch } = this.props;
     const footer = (
       <Button
         id="edit-account-profile-button"
-        onClick={this.handleSubmit}
-        disabled={isSubmitting}
+        //  dispatch(submit('account'))
+        onClick={() => dispatch(confirmPassword())}
+        disabled={submitting}
         bsStyle="primary"
       >
         {
-          isSubmitting
+          submitting
           ? this.getIntlMessage('global.loading')
-          : this.getIntlMessage('global.continue')
+          : this.getIntlMessage('global.save_modifications')
         }
       </Button>
     );
     return (
-      <Panel header={header} footer={footer}>
-        {/* <AccountForm
-          isSubmitting={isSubmitting}
-          initialValue={user.isPhoneConfirmed ? user.phone.slice(3, user.phone.length) : null}
-        /> */}
+      <Panel
+        header={this.getIntlMessage('profile.account.title')}
+        footer={footer}
+      >
+        <AccountForm />
       </Panel>
     );
   },
@@ -47,7 +46,7 @@ export const AccountBox = React.createClass({
 const mapStateToProps = (state) => {
   return {
     user: state.default.user,
-    isSubmitting: false,
+    submitting: state.user.isSubmittingAccountForm,
   };
 };
 

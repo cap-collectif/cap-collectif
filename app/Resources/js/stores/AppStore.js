@@ -7,6 +7,7 @@ import { reducer as projectReducer, saga as projectSaga } from '../redux/modules
 import { reducer as ideaReducer, saga as ideaSaga } from '../redux/modules/idea';
 import { reducer as proposalReducer, saga as proposalSaga } from '../redux/modules/proposal';
 import { reducer as opinionReducer, saga as opinionSaga } from '../redux/modules/opinion';
+import { reducer as userReducer } from '../redux/modules/user';
 
 export default function configureStore(initialState) {
   if (initialState.default.user === null) {
@@ -29,8 +30,21 @@ export default function configureStore(initialState) {
     proposal: proposalReducer,
     project: projectReducer,
     report: reportReducer,
-    form: formReducer,
+    user: userReducer,
     opinion: opinionReducer,
+    form: formReducer.plugin({
+      account: (state, action) => {
+        switch (action.type) {
+          case 'CONFIRM_PASSWORD':
+            return {
+              ...state,
+              values: { ...state.values, password: action.password },
+            };
+          default:
+            return state;
+        }
+      },
+    }),
   };
 
   const reducer = combineReducers(reducers);
