@@ -4,6 +4,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
   componentClass="div"
   id="vote-step1-proposal1">
   <Col
+    className="proposals-user-votes__col"
     componentClass="div"
     md={4}
     xs={12}>
@@ -13,6 +14,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     </a>
   </Col>
   <Col
+    className="proposals-user-votes__col"
     componentClass="div"
     md={2}
     xs={12}>
@@ -28,6 +30,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
       } />
   </Col>
   <Col
+    className="proposals-user-votes__col"
     componentClass="div"
     md={2}
     xs={12}>
@@ -36,6 +39,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     district
   </Col>
   <Col
+    className="proposals-user-votes__col"
     componentClass="div"
     md={2}
     xs={12}>
@@ -59,6 +63,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
       showNullEstimation={true} />
   </Col>
   <Col
+    className="proposals-user-votes__col"
     componentClass="div"
     md={2}
     xs={12}>

@@ -190,11 +190,15 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposals-user-votes__row {
-    padding-bottom: 15px;
+    padding: 15px 0 15px;
     border-bottom: 1px solid $border-color;
     text-align: left;
     margin-left: 0;
     margin-right: 0;
+}
+
+.proposals-user-votes__col {
+    padding-bottom: 5px;
 }
 
 .proposals-user-votes__table.row {
