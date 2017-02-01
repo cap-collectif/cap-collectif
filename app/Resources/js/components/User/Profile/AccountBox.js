@@ -48,7 +48,7 @@ export const AccountBox = React.createClass({
 });
 
 const mapStateToProps = state => ({
-  user: state.default.user,
+  user: state.user.user,
   submitting: state.user.isSubmittingAccountForm,
   invalid: isInvalid('account')(state),
 });

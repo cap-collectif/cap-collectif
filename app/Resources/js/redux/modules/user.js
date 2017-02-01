@@ -5,8 +5,24 @@ import Fetcher from '../../services/Fetcher';
 
 type State = {
   isSubmittingAccountForm: boolean,
-  showConfirmPasswordModal: boolean
+  showConfirmPasswordModal: boolean,
+  user: ?{
+    id: string,
+    username: string,
+    isEmailConfirmed: boolean,
+    isPhoneConfirmed: boolean,
+    phone: string,
+    isAdmin: boolean,
+    email: string,
+    newEmailToConfirm: ?string,
+    media: ?{
+        url: string
+    },
+    displayName: string,
+    uniqueId: string
+  }
 };
+type UserRequestEmailChangeAction = { type: 'USER_REQUEST_EMAIL_CHANGE', email: string };
 type StartSubmittingAccountFormAction = { type: 'SUBMIT_ACCOUNT_FORM' };
 type StopSubmittingAccountFormAction = { type: 'STOP_SUBMIT_ACCOUNT_FORM' };
 type ConfirmPasswordAction = { type: 'SHOW_CONFIRM_PASSWORD_MODAL' };
@@ -16,22 +32,25 @@ type Action =
     StartSubmittingAccountFormAction
   | ConfirmPasswordAction
   | CloseConfirmPasswordModalAction
+  | UserRequestEmailChangeAction
 ;
 
 const initialState = {
   isSubmittingAccountForm: false,
   showConfirmPasswordModal: false,
+  user: null,
 };
 
 export const confirmPassword = (): ConfirmPasswordAction => ({ type: 'SHOW_CONFIRM_PASSWORD_MODAL' });
 export const closeConfirmPasswordModal = (): CloseConfirmPasswordModalAction => ({ type: 'CLOSE_CONFIRM_PASSWORD_MODAL' });
 const startSubmittingAccountForm = (): StartSubmittingAccountFormAction => ({ type: 'SUBMIT_ACCOUNT_FORM' });
 const stopSubmittingAccountForm = (): StopSubmittingAccountFormAction => ({ type: 'STOP_SUBMIT_ACCOUNT_FORM' });
+const userRequestEmailChange = (email: string): UserRequestEmailChangeAction => ({ type: 'USER_REQUEST_EMAIL_CHANGE', email });
 
-export const submitConfirmPasswordForm = (values: Object, dispatch: Dispatch<*>) => {
-  dispatch({ type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password: values.password });
+export const submitConfirmPasswordForm = ({ password }: { password: string }, dispatch: Dispatch<*>): void => {
+  dispatch({ type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password });
   dispatch(closeConfirmPasswordModal());
-  setTimeout(() => {
+  setTimeout((): void => {
     dispatch(submit('account'));
   }, 1000);
 };
@@ -39,11 +58,11 @@ export const submitConfirmPasswordForm = (values: Object, dispatch: Dispatch<*>)
 export const submitAccountForm = (values: Object, dispatch: Dispatch<*>): Promise<*> => {
   dispatch(startSubmittingAccountForm());
   return Fetcher.put('/users/me', values)
-    .then(() => {
+    .then((): void => {
       dispatch(stopSubmittingAccountForm());
-      return true;
+      dispatch(userRequestEmailChange(values.email));
     })
-    .catch(({ response }) => {
+    .catch(({ response }): void => {
       dispatch(stopSubmittingAccountForm());
       console.log(response);
       if (response.message === 'Validation Failed') {
@@ -56,10 +75,14 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch<*>): Promis
 
 export const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
+    case '@@INIT':
+      return { ...initialState, ...state };
     case 'SUBMIT_ACCOUNT_FORM':
       return { ...state, isSubmittingAccountForm: true };
     case 'STOP_SUBMIT_ACCOUNT_FORM':
       return { ...state, isSubmittingAccountForm: false };
+    case 'USER_REQUEST_EMAIL_CHANGE':
+      return { ...state, user: { ...state.user, newEmailToConfirm: action.email } };
     case 'SHOW_CONFIRM_PASSWORD_MODAL':
       return { ...state, showConfirmPasswordModal: true };
     case 'CLOSE_CONFIRM_PASSWORD_MODAL':

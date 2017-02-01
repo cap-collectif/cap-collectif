@@ -45,7 +45,7 @@ export const NewEmailNotConfirmedAlert = React.createClass({
 });
 
 const mapStateToProps = state => ({
-  newEmailToConfirm: state.default.user.newEmailToConfirm,
+  newEmailToConfirm: state.user.user.newEmailToConfirm,
 });
 
 export default connect(mapStateToProps)(NewEmailNotConfirmedAlert);

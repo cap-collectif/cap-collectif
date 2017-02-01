@@ -65,9 +65,9 @@ const AccountForm = React.createClass({
 });
 
 const mapStateToProps = state => ({
-  newEmailToConfirm: state.default.user.newEmailToConfirm,
+  newEmailToConfirm: state.user.user.newEmailToConfirm,
   initialValues: {
-    email: state.default.user.email,
+    email: state.user.user.email,
   },
 });
 export default connect(mapStateToProps)(reduxForm({

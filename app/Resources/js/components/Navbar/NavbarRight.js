@@ -92,7 +92,7 @@ const NavbarRight = React.createClass({
 const mapStateToProps = (state) => {
   return {
     features: state.default.features,
-    user: state.default.user,
+    user: state.user.user,
   };
 };
 

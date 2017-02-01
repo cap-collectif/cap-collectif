@@ -52,7 +52,7 @@ const OpinionVotesButtons = React.createClass({
 });
 
 const mapStateToProps = state => ({
-  user: state.default.user,
+  user: state.user.user,
 });
 
 export default connect(mapStateToProps)(OpinionVotesButtons);

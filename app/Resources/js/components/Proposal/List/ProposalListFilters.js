@@ -119,7 +119,7 @@ const mapStateToProps = (state) => {
   return {
     features: state.default.features,
     themes: state.default.themes,
-    types: state.default.userTypes,
+    types: state.user.userTypes,
     districts: state.default.districts,
     order: state.proposal.order,
     filters: state.proposal.filters || {},

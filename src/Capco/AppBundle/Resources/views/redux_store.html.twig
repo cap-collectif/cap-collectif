@@ -6,25 +6,27 @@
     'userTypes': user_type_list()|default([]),
     'parameters': site_parameters_list(),
     'isLoggedIn': app.user ? true : false,
+  },
+  'user': {
     'user': app.user
       ? {
-          'id': app.user.id,
-          'username': app.user.username,
-          'isEmailConfirmed': app.user.isEmailConfirmed,
-          'isPhoneConfirmed': app.user.isPhoneConfirmed,
-          'phone': app.user.phone,
-          'isAdmin': app.user.isAdmin,
-          'email': app.user.email,
-          'newEmailToConfirm': app.user.newEmailToConfirm,
-          'media': app.user.Media
-          ? {
-              'url': media_public_url(app.user.Media, 'default_avatar')
-            }
-          : null,
-          'displayName': app.user.username,
-          'uniqueId': app.user.slug,
-        }
-      : null,
+        'id': app.user.id,
+        'username': app.user.username,
+        'isEmailConfirmed': app.user.isEmailConfirmed,
+        'isPhoneConfirmed': app.user.isPhoneConfirmed,
+        'phone': app.user.phone,
+        'isAdmin': app.user.isAdmin,
+        'email': app.user.email,
+        'newEmailToConfirm': app.user.newEmailToConfirm,
+        'media': app.user.Media
+        ? {
+            'url': media_public_url(app.user.Media, 'default_avatar')
+          }
+        : null,
+        'displayName': app.user.username,
+        'uniqueId': app.user.slug,
+      }
+    : null,
   }
 } %}
 {% set state = state|merge(data is defined ? data : {}) %}

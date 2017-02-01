@@ -72,7 +72,7 @@ const DeleteButton = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    user: state.default.user,
+    user: state.user.user,
   };
 };
 

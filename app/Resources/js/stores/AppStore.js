@@ -11,7 +11,7 @@ import { reducer as userReducer } from '../redux/modules/user';
 import type { SubmitConfirmPasswordAction } from '../redux/modules/user';
 
 export default function configureStore(initialState) {
-  if (initialState.default.user === null) {
+  if (initialState.user.user === null) {
     LocalStorageService.remove('jwt');
   }
   if (initialState.project && initialState.proposal && initialState.project.currentProjectStepById && LocalStorageService.isValid('proposal.filtersByStep')) {
