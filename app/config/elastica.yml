@@ -292,6 +292,8 @@ fos_elastica:
                 std: { type: string, analyzer: standard }
             updatedAt:
               type: date
+            deletedAt:
+              type: date
             district:
               type: object
               properties:

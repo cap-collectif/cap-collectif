@@ -8,6 +8,7 @@ use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\MediaBundle\Entity\Media;
@@ -16,7 +17,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Model\Contribution;
@@ -29,7 +29,6 @@ use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
  * @ORM\Table(name="proposal")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
  * @ORM\HasLifecycleCallbacks()
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="proposal.missing_required_responses", formField="proposalForm")
  * @CapcoAssert\HasDistrictIfMandatory()
  * @CapcoAssert\HasThemeIfMandatory()
@@ -44,10 +43,10 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use EnableTrait;
     use TrashableTrait;
     use SluggableTitleTrait;
-    use SoftDeleteableEntity;
     use AnswerableTrait;
     use ExpirableTrait;
     use SelfLinkableTrait;
+    use SoftDeleteTrait;
 
     public function getKind(): string
     {

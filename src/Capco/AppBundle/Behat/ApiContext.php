@@ -580,7 +580,7 @@ EOF;
         $em = $this->getEntityManager();
 
         // @TODO: 'softdeleteable' might be not injected in container.
-        $em->getFilters()->disable('softdeleteable');
+        $em->getFilters()->disable('softdeleted');
         $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($id);
 
         PHPUnit::assertNotNull($proposal);
@@ -593,7 +593,7 @@ EOF;
     public function selectionsOfProposalWithIdShouldBeDeleted(int $id)
     {
         // @TODO: 'softdeleteable' might be not injected in container.
-        $this->getEntityManager()->getFilters()->disable('softdeleteable');
+        $this->getEntityManager()->getFilters()->disable('softdeleted');
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($id);
 
         PHPUnit::assertNotNull($proposal);

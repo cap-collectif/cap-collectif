@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\Entity\Synthesis;
 
+use Capco\AppBundle\Traits\SoftDeleteTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\UuidTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Synthesis.
@@ -15,7 +16,6 @@ use Capco\AppBundle\Traits\UuidTrait;
  * @ORM\Table(name="synthesis")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Synthesis\SynthesisRepository")
  * @ORM\HasLifecycleCallbacks()
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  * @CapcoAssert\ConsultationStepExists()
  */
 class Synthesis
@@ -28,7 +28,7 @@ class Synthesis
         self::SOURCE_TYPE_NONE => 'synthesis.source_types.none',
     ];
 
-    use UuidTrait;
+    use UuidTrait, SoftDeleteTrait;
 
     /**
      * @ORM\Column(name="enabled", type="boolean")
@@ -59,12 +59,6 @@ class Synthesis
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Synthesis\SynthesisElement", mappedBy="synthesis", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $elements;
-
-    /**
-     * @var \DateTime
-     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
-     */
-    private $deletedAt;
 
     /**
      * @ORM\Column(name="display_rules", type="json", nullable=true)
@@ -177,22 +171,6 @@ class Synthesis
         $this->elements->removeElement($element);
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * @param mixed $deletedAt
-     */
-    public function setDeletedAt($deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
     }
 
     /**

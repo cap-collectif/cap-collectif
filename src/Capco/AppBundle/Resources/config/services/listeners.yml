@@ -2,6 +2,12 @@ parameters:
   capco.toggle.listener.request.class: Capco\AppBundle\Toggle\RequestListener
 
 services:
+  capco.listener.soft_delete:
+    class: Capco\AppBundle\EventListener\SoftDeleteEventListener
+    public: false
+    tags:
+      - { name: doctrine.event_listener, event: preFlush, method: preFlush }
+
   capco.toggle.listener.request:
     class:     "%capco.toggle.listener.request.class%"
     arguments: ["@capco.toggle.manager", "@translator", "@capco.site_parameter.resolver", "%shield_login%", "%shield_pwd%"]

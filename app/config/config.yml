@@ -83,8 +83,8 @@ doctrine:
         auto_generate_proxy_classes: true
         auto_mapping: true
         filters:
-          softdeleteable:
-              class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+          softdeleted:
+              class: Capco\AppBundle\Filter\SoftDeletedFilter
               enabled: true
         dql:
           datetime_functions:

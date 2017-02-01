@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Synthesis;
 
+use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -16,7 +17,6 @@ use Capco\AppBundle\Traits\UuidTrait;
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\Loggable()
  * @Gedmo\Tree(type="materializedPath")
- * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  */
 class SynthesisElement
 {
@@ -321,19 +321,18 @@ class SynthesisElement
     }
 
     /**
-     * @return \DateTime
+     * @return null|\DateTime
      */
     public function getDeletedAt()
     {
         return $this->deletedAt;
     }
 
-    /**
-     * @param \DateTime $deletedAt
-     */
-    public function setDeletedAt($deletedAt)
+    public function setDeletedAt(\DateTime $deletedAt = null): self
     {
         $this->deletedAt = $deletedAt;
+
+        return $this;
     }
 
     /**
