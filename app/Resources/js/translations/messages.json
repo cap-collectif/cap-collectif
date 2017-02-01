@@ -171,6 +171,9 @@
       "notBlank": "Cette valeur ne doit pas \u00eatre vide.",
       "check": "Veuillez cocher cette case."
     },
+    "change": {
+      "required": "Cette valeur doit être modifiée."
+    },
     "continue": "Continuer",
     "confirm": "Confirmer",
     "content": "Contenu",

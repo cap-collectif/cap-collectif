@@ -24,29 +24,28 @@ export const ConfirmPasswordModal = React.createClass({
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
       >
-        <form id="confirm-password-form" onSubmit={() => { dispatch(submit('password')); }}>
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-lg">
-              {this.getIntlMessage('confirm_password.title')}
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {this.getIntlMessage('confirm_password.help')}
-            <ConfirmPasswordForm />
-          </Modal.Body>
-          <Modal.Footer>
-            <CloseButton
-              onClose={() => dispatch(closeConfirmPasswordModal())}
-            />
-            <Button
-              id="confirm-password-form-submit"
-              type="submit"
-              bsStyle="primary"
-            >
-              { this.getIntlMessage('global.confirm') }
-            </Button>
-          </Modal.Footer>
-        </form>
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-lg">
+            {this.getIntlMessage('confirm_password.title')}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {this.getIntlMessage('confirm_password.help')}
+          <ConfirmPasswordForm />
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton
+            onClose={() => dispatch(closeConfirmPasswordModal())}
+          />
+          <Button
+            id="confirm-password-form-submit"
+            type="submit"
+            onClick={() => { dispatch(submit('password')); }}
+            bsStyle="primary"
+          >
+            { this.getIntlMessage('global.confirm') }
+          </Button>
+        </Modal.Footer>
       </Modal>
     );
   },

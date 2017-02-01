@@ -37,7 +37,6 @@ export default function configureStore(initialState) {
       account: (state, action: SubmitConfirmPasswordAction) => {
         switch (action.type) {
           case 'SUBMIT_CONFIRM_PASSWORD_FORM':
-            console.log(action);
             return {
               ...state,
               values: { ...state.values, password: action.password },

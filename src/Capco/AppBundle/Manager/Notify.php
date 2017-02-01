@@ -169,6 +169,7 @@ class Notify implements MailerInterface
       $url = $this->router->generate('capco_user_confirmation_newemail', [
         'token' => $user->getNewEmailConfirmationToken(),
       ], UrlGeneratorInterface::ABSOLUTE_URL);
+      $sitename = $this->resolver->getValue('global.site.fullname');
       $rendered = $this->templating->render(
         'CapcoAppBundle:Mail:confirmNewEmail.html.twig',
         [

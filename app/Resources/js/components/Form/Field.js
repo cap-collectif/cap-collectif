@@ -12,6 +12,7 @@ const Field = React.createClass({
     labelClassName: PropTypes.string,
     divClassName: PropTypes.string,
     wrapperClassName: PropTypes.string,
+    help: PropTypes.string,
     autoComplete: PropTypes.string,
     disableValidation: PropTypes.bool,
     type: PropTypes.oneOf(['text', 'textarea', 'editor', 'select', 'checkbox', 'password', 'captcha', 'email']).isRequired,

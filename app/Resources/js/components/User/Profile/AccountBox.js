@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 import { Panel, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { isInvalid } from 'redux-form';
 import { IntlMixin } from 'react-intl';
 import AccountForm from './AccountForm';
 import ConfirmPasswordModal from '../ConfirmPasswordModal';
@@ -11,18 +12,20 @@ export const AccountBox = React.createClass({
   propTypes: {
     user: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
+    invalid: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { submitting, dispatch } = this.props;
+    const { invalid, submitting, dispatch } = this.props;
     const footer = (
       <Button
         id="edit-account-profile-button"
         onClick={() => dispatch(confirmPassword())}
-        disabled={submitting}
+        disabled={invalid || submitting}
         bsStyle="primary"
+        className="col-sm-offset-4"
       >
         {
           submitting
@@ -47,6 +50,7 @@ export const AccountBox = React.createClass({
 const mapStateToProps = state => ({
   user: state.default.user,
   submitting: state.user.isSubmittingAccountForm,
+  invalid: isInvalid('account')(state),
 });
 
 export default connect(mapStateToProps)(AccountBox);
