@@ -40,6 +40,7 @@ class OpinionVoteAdmin extends Admin
             ->add('createdAt', null, [
                 'label' => 'admin.fields.opinion_vote.created_at',
             ])
+            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
         ;
     }
 
@@ -81,6 +82,7 @@ class OpinionVoteAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $showMapper
             ->add('opinion', 'sonata_type_model', [
                 'label' => 'admin.fields.opinion_vote.opinion',
@@ -96,9 +98,9 @@ class OpinionVoteAdmin extends Admin
             ])
             ->add('expired', null, [
                 'label' => 'admin.global.expired',
-                'read_only' => true,
+                'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 'attr' => [
-                  'disabled' => true,
+                  'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
             ->add('updatedAt', null, [

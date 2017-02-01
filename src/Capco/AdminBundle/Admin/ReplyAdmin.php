@@ -32,6 +32,7 @@ class ReplyAdmin extends Admin
             ->add('questionnaire.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.reply.project',
             ])
+            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
         ;
     }
 
@@ -73,6 +74,7 @@ class ReplyAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $formMapper
             ->with('admin.fields.reply.group_content')
                 ->add('author', 'sonata_type_model_autocomplete', [
@@ -95,9 +97,9 @@ class ReplyAdmin extends Admin
                 ])
                 ->add('expired', null, [
                     'label' => 'admin.global.expired',
-                    'read_only' => true,
+                    'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                     'attr' => [
-                      'disabled' => true,
+                      'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                     ],
                 ])
             ->end()

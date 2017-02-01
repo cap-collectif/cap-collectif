@@ -45,6 +45,7 @@ class ProposalAdmin extends Admin
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $formMapper
             ->with('admin.fields.proposal.group_content')
             ->add('title', null, [
@@ -121,9 +122,9 @@ class ProposalAdmin extends Admin
                 ])
                 ->add('expired', null, [
                     'label' => 'admin.global.expired',
-                    'read_only' => true,
+                    'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                     'attr' => [
-                      'disabled' => true,
+                      'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                     ],
                 ])
                 ->add('isTrashed', null, [
@@ -335,6 +336,7 @@ class ProposalAdmin extends Admin
             ->add('proposalForm.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.proposal.project',
             ])
+            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
         ;
     }
 

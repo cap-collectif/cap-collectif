@@ -32,6 +32,7 @@ class CommentVoteAdmin extends Admin
             ], null, [
                 'property' => 'username',
             ])
+            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
         ;
     }
 
@@ -62,6 +63,7 @@ class CommentVoteAdmin extends Admin
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $showMapper
             ->add('comment', 'sonata_type_model', [
                 'label' => 'admin.fields.comment_vote.comment',
@@ -71,9 +73,9 @@ class CommentVoteAdmin extends Admin
             ])
             ->add('expired', null, [
                 'label' => 'admin.global.expired',
-                'read_only' => true,
+                'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 'attr' => [
-                  'disabled' => true,
+                  'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
             ->add('createdAt', null, [

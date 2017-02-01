@@ -28,6 +28,7 @@ class ProposalCollectVoteAdmin extends Admin
             ], null, [
                 'property' => 'username',
             ])
+            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
         ;
     }
 
@@ -74,6 +75,7 @@ class ProposalCollectVoteAdmin extends Admin
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $showMapper
             ->add('proposal', 'sonata_type_model', [
                 'label' => 'admin.fields.argument_vote.argument',
@@ -83,9 +85,9 @@ class ProposalCollectVoteAdmin extends Admin
             ])
             ->add('expired', null, [
                 'label' => 'admin.global.expired',
-                'read_only' => true,
+                'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 'attr' => [
-                  'disabled' => true,
+                  'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
             ->add('createdAt', null, [

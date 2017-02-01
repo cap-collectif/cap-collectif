@@ -78,6 +78,7 @@ class OpinionAdmin extends Admin
             ->add('sourcesCount', null, [
                 'label' => 'admin.fields.opinion.source_count',
             ])
+            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
         ;
     }
 
@@ -149,6 +150,7 @@ class OpinionAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $subjectHasAppendices = $this->getSubject()->getAppendices()->count() > 0;
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         $classname = $subjectHasAppendices ? '' : 'hidden';
         $formMapper
@@ -209,9 +211,9 @@ class OpinionAdmin extends Admin
                 ])
                 ->add('expired', null, [
                     'label' => 'admin.global.expired',
-                    'read_only' => true,
+                    'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                     'attr' => [
-                      'disabled' => true,
+                      'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                     ],
                 ])
                 ->add('isTrashed', null, [

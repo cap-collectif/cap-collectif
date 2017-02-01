@@ -49,6 +49,7 @@ class OpinionVersionAdmin extends Admin
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.opinion_version.updated_at',
             ])
+            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
         ;
     }
 
@@ -101,6 +102,7 @@ class OpinionVersionAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $formMapper
             ->with('admin.fields.opinion_version.group_content', ['class' => 'col-md-12'])->end()
             ->with('admin.fields.opinion_version.group_publication', ['class' => 'col-md-12'])->end()
@@ -139,9 +141,9 @@ class OpinionVersionAdmin extends Admin
                 ])
                 ->add('expired', null, [
                     'label' => 'admin.global.expired',
-                    'read_only' => true,
+                    'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                     'attr' => [
-                      'disabled' => true,
+                      'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                     ],
                 ])
                 ->add('isTrashed', null, [

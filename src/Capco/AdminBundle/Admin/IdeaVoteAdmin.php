@@ -32,6 +32,7 @@ class IdeaVoteAdmin extends Admin
             ->add('createdAt', null, [
                 'label' => 'admin.fields.idea_vote.created_at',
             ])
+            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
         ;
     }
 
@@ -79,6 +80,7 @@ class IdeaVoteAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $showMapper
             ->add('idea', 'sonata_type_model', [
                     'label' => 'admin.fields.idea_vote.idea',
@@ -88,9 +90,9 @@ class IdeaVoteAdmin extends Admin
             ])
             ->add('expired', null, [
                 'label' => 'admin.global.expired',
-                'read_only' => true,
+                'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 'attr' => [
-                  'disabled' => true,
+                  'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
             ->add('createdAt', null, [

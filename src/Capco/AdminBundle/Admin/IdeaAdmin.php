@@ -56,6 +56,7 @@ class IdeaAdmin extends Admin
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.idea.updated_at',
             ])
+            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
         ;
     }
 
@@ -117,6 +118,7 @@ class IdeaAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $formMapper
             ->add('title', null, [
                 'label' => 'admin.fields.idea.title',
@@ -163,9 +165,9 @@ class IdeaAdmin extends Admin
             ])
             ->add('expired', null, [
                 'label' => 'admin.global.expired',
-                'read_only' => true,
+                'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 'attr' => [
-                  'disabled' => true,
+                  'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
             ->add('isTrashed', null, [

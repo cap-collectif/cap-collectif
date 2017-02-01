@@ -57,6 +57,7 @@ class SourceAdmin extends Admin
             ->add('isTrashed', null, [
                 'label' => 'admin.fields.source.is_trashed',
             ])
+            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
         ;
     }
 
@@ -109,6 +110,7 @@ class SourceAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $formMapper
             ->add('title', null, [
                 'label' => 'admin.fields.source.title',
@@ -138,9 +140,9 @@ class SourceAdmin extends Admin
             ])
             ->add('expired', null, [
                 'label' => 'admin.global.expired',
-                'read_only' => true,
+                'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 'attr' => [
-                  'disabled' => true,
+                  'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
             ->add('isTrashed', null, [

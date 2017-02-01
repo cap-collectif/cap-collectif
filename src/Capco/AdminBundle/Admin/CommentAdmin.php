@@ -67,6 +67,7 @@ class CommentAdmin extends Admin
                 'label' => 'admin.fields.comment.type',
                 'sub_classes' => $this->getSubClasses(),
             ])
+            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
         ;
     }
 
@@ -208,6 +209,7 @@ class CommentAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $subject = $this->getSubject();
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         if ($subject instanceof IdeaComment) {
             $formMapper
@@ -255,9 +257,9 @@ class CommentAdmin extends Admin
             ])
             ->add('expired', null, [
                 'label' => 'admin.global.expired',
-                'read_only' => true,
+                'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 'attr' => [
-                  'disabled' => true,
+                  'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
             ->add('isTrashed', null, [

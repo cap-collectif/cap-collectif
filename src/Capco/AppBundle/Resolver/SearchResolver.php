@@ -198,8 +198,7 @@ class SearchResolver
                 $sortOrder = 'desc';
                 break;
             case 'votes':
-                $stepId = $providedFilters['step'] ?? $providedFilters['selectionStep'];
-                $sortField = 'votesCountByStepId.'.$stepId;
+                $sortField = 'votesCountByStepId.'.$providedFilters['step'];
                 $sortOrder = 'desc';
                 break;
             case 'comments':
