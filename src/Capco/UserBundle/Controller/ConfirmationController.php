@@ -63,29 +63,31 @@ class ConfirmationController extends Controller
     public function newEmailAction($token)
     {
         $manager = $this->container->get('fos_user.user_manager');
-        $response = new RedirectResponse($this->container->get('router')->generate('app_homepage'));
+        $redirectResponse = new RedirectResponse($this->container->get('router')->generate('app_homepage'));
         $user = $this
           ->container->get('capco.user.repository')
           ->findUserByNewEmailConfirmationToken($token)
         ;
 
         if (!$user) {
-           return $response;
+           return $redirectResponse;
         }
 
         $user->setEmail($user->getNewEmailToConfirm());
         $user->setNewEmailConfirmationToken(null);
+        $user->setNewEmailToConfirm(null);
 
-        $manager->updateUser($user);
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
 
         $this->get('fos_user.security.login_manager')->loginUser(
             $this->container->getParameter('fos_user.firewall_name'),
             $user,
-            $response
+            $redirectResponse
         );
 
-        $session->getFlashBag()->set('sonata_user_success', 'global.alert.email_updated');
+        $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('global.alert.new_email_confirmed'));
 
-        return $response;
+        return $redirectResponse;
     }
 }

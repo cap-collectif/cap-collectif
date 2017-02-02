@@ -79,7 +79,7 @@ class UserRepository extends EntityRepository
         ->setParameter('token', $token)
       ;
 
-      return $qb->getQuery()->getSingleResult();
+      return $qb->getQuery()->getOneOrNullResult();
     }
 
     public function findUsersThatJustExpired()
