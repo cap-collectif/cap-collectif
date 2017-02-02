@@ -19,7 +19,6 @@ class Version20170201111312 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE proposal CHANGE deletedAt deleted_at DATETIME DEFAULT NULL');
-        $this->addSql('ALTER TABLE synthesis CHANGE deletedAt deleted_at DATETIME DEFAULT NULL');
     }
 
     /**
@@ -31,6 +30,5 @@ class Version20170201111312 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE proposal CHANGE deleted_at deletedAt DATETIME DEFAULT NULL');
-        $this->addSql('ALTER TABLE synthesis CHANGE deleted_at deletedAt DATETIME DEFAULT NULL');
     }
 }

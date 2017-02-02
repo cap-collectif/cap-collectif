@@ -489,7 +489,8 @@ admin:
       created_at: Création
       district: Localisation
       enabled: Publié
-      deletedAt: Supprimé
+      deleted: Supprimé
+      deleted_at: Supprimé le
       form: Étape de dépôt
       group_content: Proposition
       group_publication: Options de publication

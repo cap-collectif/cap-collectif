@@ -60,7 +60,21 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.author',
                 'required' => true,
                 'property' => 'username',
-            ])
+            ]);
+        if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
+            $formMapper->add(
+                'deletedAt',
+                'sonata_type_datetime_picker', [
+                    'label' => 'admin.fields.proposal.deleted_at',
+                    'required' => false,
+                    'format' => 'dd/MM/yyyy HH:mm',
+                    'dp_use_current' => false,
+                    'attr' => [
+                        'data-date-format' => 'DD/MM/YYYY HH:mm',
+                    ],
+            ]);
+        }
+        $formMapper
             ->add('media', 'sonata_type_model_list', [
                 'label' => 'admin.fields.proposal.media',
                 'required' => false,
@@ -270,6 +284,8 @@ class ProposalAdmin extends Admin
     {
         unset($this->listModes['mosaic']);
 
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
+
         $listMapper
             ->addIdentifier('id', null, [
                 'label' => 'admin.fields.proposal.id',
@@ -290,8 +306,13 @@ class ProposalAdmin extends Admin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
-            ])
-            ->add('_action', 'actions', [
+            ]);
+        if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
+            $listMapper->add('deletedAt', null, [
+                'label' => 'admin.fields.proposal.deleted',
+            ]);
+        }
+        $listMapper->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
@@ -303,6 +324,8 @@ class ProposalAdmin extends Admin
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
+
         $datagridMapper
             ->add('id', null, [
                 'label' => 'admin.fields.proposal.id',
@@ -323,8 +346,13 @@ class ProposalAdmin extends Admin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
-            ])
-            ->add('status', null, [
+            ]);
+            if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
+                $datagridMapper->add('deletedAt', null, [
+                    'label' => 'admin.fields.proposal.deleted',
+                ]);
+            }
+           $datagridMapper->add('status', null, [
                 'label' => 'admin.fields.proposal.status',
             ])
             ->add('estimation', null, [
@@ -345,6 +373,8 @@ class ProposalAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
+
         $showMapper
             ->add('id', null, [
                 'label' => 'admin.fields.proposal.id',
@@ -395,7 +425,15 @@ class ProposalAdmin extends Admin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
-            ])
+            ]);
+
+            if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
+                $showMapper->add('deletedAt', null, [
+                        'label' => 'admin.fields.proposal.deleted',
+                ]);
+            }
+
+        $showMapper
             ->add('updateAuthor', null, [
                 'label' => 'admin.fields.proposal.updateAuthor',
             ])
@@ -435,4 +473,5 @@ class ProposalAdmin extends Admin
     {
         $collection->remove('create');
     }
+
 }
