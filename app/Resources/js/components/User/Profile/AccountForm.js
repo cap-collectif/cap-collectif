@@ -8,20 +8,23 @@ import { isEmail } from '../../../services/Validator';
 import renderComponent from '../../Form/Field';
 
 export const form = 'account';
-const validate = (values, { initialValues: { email } }): Object => {
+const validate = (
+  values: { email: ?string },
+  props: { initialValues: { email: string }},
+): { email: ?string } => {
   const errors = {};
   if (!values.email) {
     errors.email = 'global.required';
   } else if (!isEmail(values.email)) {
     errors.email = 'proposal.vote.constraints.email';
   }
-  if (values.email === email) {
+  if (values.email === props.initialValues.email) {
     errors.email = 'global.change.required';
   }
   return errors;
 };
 
-const AccountForm = React.createClass({
+export const AccountForm = React.createClass({
   propTypes: {
     newEmailToConfirm: PropTypes.string,
     error: PropTypes.string,
@@ -38,7 +41,7 @@ const AccountForm = React.createClass({
         {
           error &&
             <Alert bsStyle="danger">
-              <p>{error}</p>
+              <p>{this.getIntlMessage(error)}</p>
             </Alert>
         }
         {

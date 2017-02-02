@@ -5,7 +5,7 @@ import { submitConfirmPasswordForm as onSubmit } from '../../redux/modules/user'
 import renderComponent from '../Form/Field';
 
 export const form = 'password';
-const AccountForm = React.createClass({
+export const ConfirmPasswordForm = React.createClass({
   propTypes: {
     handleSubmit: PropTypes.func.isRequired,
   },
@@ -27,4 +27,4 @@ const AccountForm = React.createClass({
   },
 });
 
-export default reduxForm({ form, onSubmit })(AccountForm);
+export default reduxForm({ form, onSubmit })(ConfirmPasswordForm);
