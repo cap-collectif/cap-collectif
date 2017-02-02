@@ -1,0 +1,182 @@
+exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an alert if user is logged and has not confirmed his email 1`] = `
+<Alert
+  bsClass="alert"
+  bsStyle="warning"
+  closeLabel="Close Alert"
+  id="alert-email-not-confirmed">
+  <div
+    className="container">
+    <div
+      className="col-md-7"
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }>
+      <FormattedHTMLMessage
+        link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 72 heures pour conserver l\'accès à votre compte. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>"
+        tagName="span" />
+    </div>
+    <div
+      className="col-md-5">
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        navDropdown={false}
+        navItem={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "marginBottom": 5,
+            "marginRight": 15,
+          }
+        }>
+        Renvoyer la confirmation
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        href="about:///profile/edit-account"
+        navDropdown={false}
+        navItem={false}
+        style={
+          Object {
+            "marginBottom": 5,
+          }
+        }>
+        Mettre à jour l\'adresse email
+      </Button>
+    </div>
+  </div>
+</Alert>
+`;
+
+exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`] = `
+<Alert
+  bsClass="alert"
+  bsStyle="warning"
+  closeLabel="Close Alert"
+  id="alert-email-not-confirmed">
+  <div
+    className="container">
+    <div
+      className="col-md-7"
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }>
+      <FormattedHTMLMessage
+        link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 72 heures pour conserver l\'accès à votre compte. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>"
+        tagName="span" />
+    </div>
+    <div
+      className="col-md-5">
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={true}
+        navDropdown={false}
+        navItem={false}
+        onClick={null}
+        style={
+          Object {
+            "marginBottom": 5,
+            "marginRight": 15,
+          }
+        }>
+        Envoi en cours...
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        href="about:///profile/edit-account"
+        navDropdown={false}
+        navItem={false}
+        style={
+          Object {
+            "marginBottom": 5,
+          }
+        }>
+        Mettre à jour l\'adresse email
+      </Button>
+    </div>
+  </div>
+</Alert>
+`;
+
+exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is done 1`] = `
+<Alert
+  bsClass="alert"
+  bsStyle="warning"
+  closeLabel="Close Alert"
+  id="alert-email-not-confirmed">
+  <div
+    className="container">
+    <div
+      className="col-md-7"
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }>
+      <FormattedHTMLMessage
+        link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 72 heures pour conserver l\'accès à votre compte. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>"
+        tagName="span" />
+    </div>
+    <div
+      className="col-md-5">
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        disabled={true}
+        navDropdown={false}
+        navItem={false}
+        style={
+          Object {
+            "marginBottom": 5,
+            "marginRight": 15,
+          }
+        }>
+        Un nouvel email de confirmation a été envoyé.
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        href="about:///profile/edit-account"
+        navDropdown={false}
+        navItem={false}
+        style={
+          Object {
+            "marginBottom": 5,
+          }
+        }>
+        Mettre à jour l\'adresse email
+      </Button>
+    </div>
+  </div>
+</Alert>
+`;
+
+exports[`<EmailNotConfirmedAlert /> renders nothing if logged user has confirmed his email 1`] = `null`;
+
+exports[`<EmailNotConfirmedAlert /> renders nothing if not logged 1`] = `null`;
