@@ -5,8 +5,12 @@ import EmailNotConfirmedAlert from '../components/User/EmailNotConfirmedAlert';
 import NewEmailNotConfirmedAlert from '../components/User/NewEmailNotConfirmedAlert';
 
 export default props =>
-  <Provider store={ReactOnRails.getStore('appStore')}>
-    <EmailNotConfirmedAlert {...props} />
-    <NewEmailNotConfirmedAlert {...props} />
-  </Provider>
+  <span>
+    <Provider store={ReactOnRails.getStore('appStore')}>
+      <EmailNotConfirmedAlert {...props} />
+    </Provider>
+    <Provider store={ReactOnRails.getStore('appStore')}>
+      <NewEmailNotConfirmedAlert {...props} />
+    </Provider>
+  </span>
 ;

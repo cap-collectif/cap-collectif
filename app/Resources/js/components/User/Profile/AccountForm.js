@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Alert, Button } from 'react-bootstrap';
+import { Alert, Button, ButtonToolbar } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
-import { submitAccountForm as onSubmit } from '../../../redux/modules/user';
+import { submitAccountForm as onSubmit, resendConfirmation, cancelEmailChange } from '../../../redux/modules/user';
 import { isEmail } from '../../../services/Validator';
 import renderComponent from '../../Form/Field';
 
@@ -25,18 +25,26 @@ const AccountForm = React.createClass({
   propTypes: {
     newEmailToConfirm: PropTypes.string,
     error: PropTypes.string,
+    confirmationEmailResent: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { handleSubmit, error, newEmailToConfirm } = this.props;
+    const { dispatch, handleSubmit, confirmationEmailResent, error, newEmailToConfirm } = this.props;
     return (
       <form onSubmit={handleSubmit} className="form-horizontal">
         {
           error &&
             <Alert bsStyle="danger">
               <p>{error}</p>
+            </Alert>
+        }
+        {
+          confirmationEmailResent &&
+            <Alert bsStyle="warning">
+              <p>{ 'Un email de confirmation vous a été envoyé.'}</p>
             </Alert>
         }
         <Field
@@ -53,10 +61,22 @@ const AccountForm = React.createClass({
         </p>
         {
           newEmailToConfirm &&
-            <p className="small excerpt col-sm-6 col-sm-offset-4">
-              Vérifiez votre email (contacta@spyl.net) pour confirmer votre nouvelle adresse. Jusqu'à ce que vous confirmez, les notifications continueront d'être envoyées à votre adresse email actuelle.
-              <Button onClick={() => {}}>Renvoyer la confirmation</Button> · <Button>Annuler cette modification</Button>
-            </p>
+            <div className="col-sm-6 col-sm-offset-4">
+              <p className="small excerpt">
+                <FormattedHTMLMessage
+                  message={this.getIntlMessage('user.confirm.profile_help')}
+                  email={newEmailToConfirm}
+                />
+              </p>
+              <ButtonToolbar>
+                <Button bsStyle="link" onClick={() => resendConfirmation()}>
+                  {this.getIntlMessage('user.confirm.resend')}
+                </Button>
+                <Button bsStyle="link" onClick={() => cancelEmailChange(dispatch)}>
+                  {this.getIntlMessage('user.confirm.cancel')}
+                </Button>
+              </ButtonToolbar>
+            </div>
         }
       </form>
     );
@@ -66,6 +86,7 @@ const AccountForm = React.createClass({
 
 const mapStateToProps = state => ({
   newEmailToConfirm: state.user.user.newEmailToConfirm,
+  confirmationEmailResent: state.user.confirmationEmailResent,
   initialValues: {
     email: state.user.user.email,
   },

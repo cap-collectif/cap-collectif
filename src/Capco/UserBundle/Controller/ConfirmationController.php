@@ -58,7 +58,7 @@ class ConfirmationController extends Controller
     }
 
     /**
-     * @Route("/update-email-confirmation/{token}", defaults={"_feature_flags" = "profile"})
+     * @Route("/account/new_email_confirmation/{token}")
      */
     public function newEmailAction($token)
     {

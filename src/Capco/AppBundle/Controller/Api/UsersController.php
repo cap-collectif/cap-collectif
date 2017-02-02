@@ -18,6 +18,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class UsersController extends FOSRestController
@@ -155,7 +156,9 @@ class UsersController extends FOSRestController
 
       $encoder = $this->get('security.encoder_factory')->getEncoder($user);
       if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
-          throw new \Exception('You must specify your password to update your email.');
+          return new JsonResponse([
+            'message' => 'You must specify your password to update your email.'
+          ], 400);
       }
 
       $form = $this->createForm(ApiProfileAccountFormType::class, $user);
@@ -168,7 +171,7 @@ class UsersController extends FOSRestController
       // We generate a confirmation token to validate the new email
       $token = $this->get('fos_user.util.token_generator')->generateToken();
 
-      $user->setNewEmailConfirmitationToken($token);
+      $user->setNewEmailConfirmationToken($token);
       $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
 
 
@@ -191,14 +194,27 @@ class UsersController extends FOSRestController
     }
 
     /**
-     * @Post("/resend-email-confirmation", defaults={"_feature_flags" = "registration"})
+     * @Post("/account/cancel_email_change")
+     * @Security("has_role('ROLE_USER')")
+     * @View(statusCode=200, serializerGroups={})
+     */
+    public function cancelEmailChangeAction()
+    {
+        $user = $this->getUser();
+        $user->setNewEmailToConfirm(null);
+        $user->setNewEmailConfirmationToken(null);
+        $this->getDoctrine()->getManager()->flush();
+    }
+
+    /**
+     * @Post("/account/resend_confirmation_email", defaults={"_feature_flags" = "registration"})
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */
     public function postResendEmailConfirmationAction()
     {
         $user = $this->getUser();
-        if ($user->isEmailConfirmed()) {
+        if ($user->isEmailConfirmed() && !$user->getNewEmailToConfirm()) {
             throw new BadRequestHttpException('Already confirmed.');
         }
         // security against mass click email resend
@@ -206,7 +222,12 @@ class UsersController extends FOSRestController
             throw new BadRequestHttpException('Email already sent less than a minute ago.');
         }
 
-        $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
+        if ($user->getNewEmailToConfirm()) {
+          $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
+        } else {
+          $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
+        }
+
         $user->setEmailConfirmationSentAt(new \DateTime());
         $this->getDoctrine()->getManager()->flush();
     }

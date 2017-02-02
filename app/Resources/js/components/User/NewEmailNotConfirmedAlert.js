@@ -2,16 +2,17 @@ import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Alert, Button } from 'react-bootstrap';
-import Fetcher from '../../services/Fetcher';
+import { resendConfirmation } from '../../redux/modules/user';
 
 export const NewEmailNotConfirmedAlert = React.createClass({
   propTypes: {
     newEmailToConfirm: PropTypes.string,
+    sendSucceed: PropTypes.bool,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { newEmailToConfirm } = this.props;
+    const { sendSucceed, newEmailToConfirm } = this.props;
     if (!newEmailToConfirm) {
       return null;
     }
@@ -20,23 +21,26 @@ export const NewEmailNotConfirmedAlert = React.createClass({
       <Alert bsStyle="warning" id="alert-new-email-not-confirmed">
         <div className="container">
           <div className="col-md-7" style={{ marginBottom: 5 }}>
-            <FormattedHTMLMessage
-              message={this.getIntlMessage('user.confirm.new_email')}
-              email={newEmailToConfirm}
-            />
+            {
+              sendSucceed &&
+                <FormattedHTMLMessage
+                  message={this.getIntlMessage('user.confirm.new_email_send_succeed')}
+                  email={newEmailToConfirm}
+                />
+            }
           </div>
           <div className="col-md-5">
             <Button
               style={{ marginRight: 15, marginBottom: 5 }}
-              onClick={() => {
-                Fetcher.post('/resend-new-email-confirmation', {});
-              }}
+              onClick={() => resendConfirmation()}
             >
               {
                 this.getIntlMessage('user.confirm.resend')
               }
             </Button>
-            <Button style={{ marginBottom: 5 }} href={editEmailUrl}>{ this.getIntlMessage('user.confirm.update') }</Button>
+            <Button style={{ marginBottom: 5 }} href={editEmailUrl}>
+              { sendSucceed && this.getIntlMessage('user.confirm.new_email_send_succeed_cancel_or_update') }
+            </Button>
           </div>
         </div>
       </Alert>
@@ -46,6 +50,7 @@ export const NewEmailNotConfirmedAlert = React.createClass({
 
 const mapStateToProps = state => ({
   newEmailToConfirm: state.user.user.newEmailToConfirm,
+  sendSucceed: true,
 });
 
 export default connect(mapStateToProps)(NewEmailNotConfirmedAlert);
