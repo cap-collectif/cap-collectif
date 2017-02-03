@@ -10,7 +10,7 @@ Capco\UserBundle\Entity\User:
       - Length: { max: 1000, groups: [profile] }
     plainPassword:
       - NotBlank: { message: password.blank, groups: [registration] }
-      - Length: { min: 8, max: 128, minMessage: password.minMessage, groups: [registration] }
+      - Length: { min: 8, max: 72, minMessage: password.minMessage, groups: [registration] }
     email:
       - NotBlank: { message: email.blank, groups: [registration, registrationAdmin, profile] }
       - Email: { message: email.invalid, groups: [registration, registrationAdmin, profile] }

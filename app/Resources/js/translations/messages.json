@@ -495,7 +495,7 @@
       },
       "password": {
         "min": "Le mot de passe doit faire au moins 8 caractères.",
-        "max": "Le mot de passe doit faire moins de 128 caractères."
+        "max": "Le mot de passe doit faire moins de 72 caractères."
       }
     }
   },
