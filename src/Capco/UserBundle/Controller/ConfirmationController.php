@@ -9,7 +9,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ConfirmationController extends Controller
 {
     /**
-     * @Route("/email-confirmation/{token}", defaults={"_feature_flags" = "registration"})
+     * @Route("/account/email_confirmation/{token}", defaults={"_feature_flags" = "registration"})
+     * @Route("/email-confirmation/{token}", defaults={"_feature_flags" = "registration"}) // legacy url
      */
     public function emailAction($token)
     {
@@ -20,6 +21,7 @@ class ConfirmationController extends Controller
 
         if (!$user) {
             $session->getFlashBag()->set('sonata_user_success', 'global.alert.already_email_confirmed');
+
             return $response;
         }
 
@@ -70,7 +72,7 @@ class ConfirmationController extends Controller
         ;
 
         if (!$user) {
-           return $redirectResponse;
+            return $redirectResponse;
         }
 
         $user->setEmail($user->getNewEmailToConfirm());

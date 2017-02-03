@@ -71,7 +71,7 @@ Feature: Email
     And 1 mail should be sent
     And I open mail with subject "Cap-Collectif — Confirmez votre adresse électronique"
     Then I should see "Confirmer mon adresse électronique" in mail
-    Then I should see "/email-confirmation/azertyuiop" in mail
+    Then I should see "/account/email_confirmation/azertyuiop" in mail
 
   @database @security
   Scenario: Not confirmed logged in API client wants to mass spam confirmation email
@@ -99,11 +99,11 @@ Feature: Email
       """
       {
         "email": "popopo@test.com",
-        "password": "user",
+        "password": "user"
       }
       """
-      Then the JSON response status code should be 200
+      Then the JSON response status code should be 204
       And 1 mail should be sent
-      And I open mail with subject "Cap-Collectif — Veuillez confirmer votre nouvelle adresse électronique"
-      Then I should see "Confirmez votre nouvelle adresse électronique" in mail
-      Then I should see "/update-email-confirmation/" in mail
+      And I open mail with subject "[Cap-Collectif] Veuillez confirmer votre nouvelle adresse électronique"
+      Then I should see "Confirmer mon adresse électronique" in mail
+      Then I should see "/account/new_email_confirmation/" in mail

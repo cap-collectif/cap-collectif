@@ -73,13 +73,13 @@ class UserRepository extends EntityRepository
 
     public function findUserByNewEmailConfirmationToken(string $token)
     {
-      $qb = $this->createQueryBuilder('u');
-      $qb
+        $qb = $this->createQueryBuilder('u');
+        $qb
         ->andWhere('u.newEmailConfirmationToken = :token')
         ->setParameter('token', $token)
       ;
 
-      return $qb->getQuery()->getOneOrNullResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     public function findUsersThatJustExpired()

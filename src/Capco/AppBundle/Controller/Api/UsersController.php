@@ -123,15 +123,15 @@ class UsersController extends FOSRestController
 
     private function updatePhone(Request $request)
     {
-      $user = $this->getUser();
-      $previousPhone = $user->getPhone();
+        $user = $this->getUser();
+        $previousPhone = $user->getPhone();
 
-      $form = $this->createForm(ApiProfileFormType::class, $user);
-      $form->submit($request->request->all(), false);
+        $form = $this->createForm(ApiProfileFormType::class, $user);
+        $form->submit($request->request->all(), false);
 
-      if (!$form->isValid()) {
-          return $form;
-      }
+        if (!$form->isValid()) {
+            return $form;
+        }
 
       // If phone is updated we have to make sure it's sms confirmed again
       if ($previousPhone != null && $previousPhone != $user->getPhone()) {
@@ -140,42 +140,41 @@ class UsersController extends FOSRestController
           $user->setSmsConfirmationSentAt(null);
       }
 
-      $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()->getManager()->flush();
     }
 
     private function updateEmail(Request $request)
     {
-      $user = $this->getUser();
-      $previousEmail = $user->getEmail();
-      $newEmailToConfirm = $request->request->get('email');
-      $password = $request->request->get('password');
+        $user = $this->getUser();
+        $previousEmail = $user->getEmail();
+        $newEmailToConfirm = $request->request->get('email');
+        $password = $request->request->get('password');
 
-      if ($previousEmail === $newEmailToConfirm) {
-          throw new \Exception('Already your email.');
-      }
+        if ($previousEmail === $newEmailToConfirm) {
+            throw new \Exception('Already your email.');
+        }
 
-      $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-      if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
-          return new JsonResponse([
-            'message' => 'You must specify your password to update your email.'
+        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+        if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
+            return new JsonResponse([
+            'message' => 'You must specify your password to update your email.',
           ], 400);
-      }
+        }
 
-      $form = $this->createForm(ApiProfileAccountFormType::class, $user);
-      $form->submit(['newEmailToConfirm' => $newEmailToConfirm], false);
+        $form = $this->createForm(ApiProfileAccountFormType::class, $user);
+        $form->submit(['newEmailToConfirm' => $newEmailToConfirm], false);
 
-      if (!$form->isValid()) {
-          return $form;
-      }
+        if (!$form->isValid()) {
+            return $form;
+        }
 
       // We generate a confirmation token to validate the new email
       $token = $this->get('fos_user.util.token_generator')->generateToken();
 
-      $user->setNewEmailConfirmationToken($token);
-      $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
+        $user->setNewEmailConfirmationToken($token);
+        $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
 
-
-      $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()->getManager()->flush();
     }
 
     /**
@@ -223,9 +222,9 @@ class UsersController extends FOSRestController
         }
 
         if ($user->getNewEmailToConfirm()) {
-          $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
+            $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
         } else {
-          $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
+            $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
         }
 
         $user->setEmailConfirmationSentAt(new \DateTime());
