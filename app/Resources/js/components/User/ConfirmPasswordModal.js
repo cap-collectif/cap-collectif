@@ -1,8 +1,10 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit } from 'redux-form';
+import type { State } from '../../stores/AppStore';
 import CloseButton from '../Form/CloseButton';
 import ConfirmPasswordForm from './ConfirmPasswordForm';
 import { closeConfirmPasswordModal } from '../../redux/modules/user';
@@ -49,10 +51,9 @@ export const ConfirmPasswordModal = React.createClass({
       </Modal>
     );
   },
-
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   show: state.user.showConfirmPasswordModal,
   isSubmitting: state.user.isSubmittingAccountForm,
 });

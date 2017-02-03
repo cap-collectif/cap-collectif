@@ -3,7 +3,7 @@ import type { Dispatch } from 'redux';
 import { submit, SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
 
-type State = {
+export type State = {
   isSubmittingAccountForm: boolean,
   showConfirmPasswordModal: boolean,
   confirmationEmailResent: boolean,
@@ -23,6 +23,7 @@ type State = {
     uniqueId: string
   }
 };
+
 type UserRequestEmailChangeAction = { type: 'USER_REQUEST_EMAIL_CHANGE', email: string };
 type StartSubmittingAccountFormAction = { type: 'SUBMIT_ACCOUNT_FORM' };
 type StopSubmittingAccountFormAction = { type: 'STOP_SUBMIT_ACCOUNT_FORM' };

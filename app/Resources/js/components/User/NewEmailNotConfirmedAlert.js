@@ -3,6 +3,7 @@ import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Alert, Button } from 'react-bootstrap';
 import { resendConfirmation } from '../../redux/modules/user';
+import type { State } from '../../stores/AppStore';
 
 export const NewEmailNotConfirmedAlert = React.createClass({
   propTypes: {
@@ -48,7 +49,7 @@ export const NewEmailNotConfirmedAlert = React.createClass({
   },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   newEmailToConfirm: state.user.user.newEmailToConfirm,
   sendSucceed: true,
 });

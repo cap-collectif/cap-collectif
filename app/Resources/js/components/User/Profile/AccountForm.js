@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -6,6 +7,7 @@ import { reduxForm, Field } from 'redux-form';
 import { submitAccountForm as onSubmit, resendConfirmation, cancelEmailChange } from '../../../redux/modules/user';
 import { isEmail } from '../../../services/Validator';
 import renderComponent from '../../Form/Field';
+import type { State } from '../../../stores/AppStore';
 
 export const form = 'account';
 const validate = (
@@ -84,16 +86,16 @@ export const AccountForm = React.createClass({
       </form>
     );
   },
-
 });
 
-const mapStateToProps = state => ({
-  newEmailToConfirm: state.user.user.newEmailToConfirm,
+const mapStateToProps = (state: State) => ({
+  newEmailToConfirm: state.user.user && state.user.user.newEmailToConfirm,
   confirmationEmailResent: state.user.confirmationEmailResent,
   initialValues: {
-    email: state.user.user.email,
+    email: state.user.user && state.user.user.email,
   },
 });
+
 export default connect(mapStateToProps)(reduxForm({
   form,
   validate,

@@ -3,6 +3,7 @@ import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Alert, Button } from 'react-bootstrap';
 import Fetcher from '../../services/Fetcher';
+import type { State } from '../../stores/AppStore';
 
 export const EmailNotConfirmedAlert = React.createClass({
   propTypes: {
@@ -89,10 +90,8 @@ export const EmailNotConfirmedAlert = React.createClass({
   },
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user.user,
-  };
-};
+const mapStateToProps = (state: State) => ({
+  user: state.user.user,
+});
 
 export default connect(mapStateToProps)(EmailNotConfirmedAlert);

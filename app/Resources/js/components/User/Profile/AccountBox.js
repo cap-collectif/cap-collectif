@@ -7,6 +7,7 @@ import { IntlMixin } from 'react-intl';
 import AccountForm from './AccountForm';
 import ConfirmPasswordModal from '../ConfirmPasswordModal';
 import { confirmPassword } from '../../../redux/modules/user';
+import type { State } from '../../../stores/AppStore';
 
 export const AccountBox = React.createClass({
   propTypes: {
@@ -47,7 +48,7 @@ export const AccountBox = React.createClass({
 
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   user: state.user.user,
   submitting: state.user.isSubmittingAccountForm,
   invalid: isInvalid('account')(state),

@@ -1,3 +1,4 @@
+// @flow
 import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { reducer as formReducer } from 'redux-form';
@@ -8,9 +9,21 @@ import { reducer as ideaReducer, saga as ideaSaga } from '../redux/modules/idea'
 import { reducer as proposalReducer, saga as proposalSaga } from '../redux/modules/proposal';
 import { reducer as opinionReducer, saga as opinionSaga } from '../redux/modules/opinion';
 import { reducer as userReducer } from '../redux/modules/user';
-import type { SubmitConfirmPasswordAction } from '../redux/modules/user';
+import type { SubmitConfirmPasswordAction, State as userState } from '../redux/modules/user';
+import type { State as proposalState } from '../redux/modules/proposal';
+import type { State as opinionState } from '../redux/modules/opinion';
 
-export default function configureStore(initialState) {
+export type State = {
+  default: Object,
+  idea: Object,
+  proposal: proposalState,
+  project: Object,
+  report: Object,
+  user: userState,
+  opinion: opinionState
+};
+
+export default function configureStore(initialState: Object) {
   if (initialState.user.user === null) {
     LocalStorageService.remove('jwt');
   }
@@ -59,6 +72,7 @@ export default function configureStore(initialState) {
   );
 
   sagaMiddleware.run(ideaSaga);
+  // $FlowFixMe
   sagaMiddleware.run(proposalSaga);
   sagaMiddleware.run(projectSaga);
   sagaMiddleware.run(opinionSaga);
