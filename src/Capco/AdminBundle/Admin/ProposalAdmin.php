@@ -60,21 +60,7 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.author',
                 'required' => true,
                 'property' => 'username',
-            ]);
-        if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-            $formMapper->add(
-                'deletedAt',
-                'sonata_type_datetime_picker', [
-                    'label' => 'admin.fields.proposal.deleted_at',
-                    'required' => false,
-                    'format' => 'dd/MM/yyyy HH:mm',
-                    'dp_use_current' => false,
-                    'attr' => [
-                        'data-date-format' => 'DD/MM/YYYY HH:mm',
-                    ],
-            ]);
-        }
-        $formMapper
+            ])
             ->add('media', 'sonata_type_model_list', [
                 'label' => 'admin.fields.proposal.media',
                 'required' => false,
@@ -148,8 +134,21 @@ class ProposalAdmin extends Admin
                 ->add('trashedReason', null, [
                     'label' => 'admin.fields.proposal.trashedReason',
                     'required' => false,
-                ])
-            ->end()
+                ]);
+        if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
+            $formMapper->add(
+                    'deletedAt',
+                    'sonata_type_datetime_picker', [
+                    'label' => 'admin.fields.proposal.deleted_at',
+                    'required' => false,
+                    'format' => 'dd/MM/yyyy HH:mm',
+                    'dp_use_current' => false,
+                    'attr' => [
+                        'data-date-format' => 'DD/MM/YYYY HH:mm',
+                    ],
+                ]);
+        }
+        $formMapper->end()
         ;
 
         if ($this->getSubject()->canHaveProgessSteps()) {
@@ -347,12 +346,12 @@ class ProposalAdmin extends Admin
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
             ]);
-            if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-                $datagridMapper->add('deletedAt', null, [
+        if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
+            $datagridMapper->add('deletedAt', null, [
                     'label' => 'admin.fields.proposal.deleted',
                 ]);
-            }
-           $datagridMapper->add('status', null, [
+        }
+        $datagridMapper->add('status', null, [
                 'label' => 'admin.fields.proposal.status',
             ])
             ->add('estimation', null, [
@@ -364,7 +363,7 @@ class ProposalAdmin extends Admin
             ->add('proposalForm.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.proposal.project',
             ])
-            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
+            ->add('expired', null, ['label' => 'admin.global.expired'])
         ;
     }
 
@@ -427,11 +426,11 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.updated_at',
             ]);
 
-            if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-                $showMapper->add('deletedAt', null, [
+        if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
+            $showMapper->add('deletedAt', null, [
                         'label' => 'admin.fields.proposal.deleted',
                 ]);
-            }
+        }
 
         $showMapper
             ->add('updateAuthor', null, [
@@ -473,5 +472,4 @@ class ProposalAdmin extends Admin
     {
         $collection->remove('create');
     }
-
 }

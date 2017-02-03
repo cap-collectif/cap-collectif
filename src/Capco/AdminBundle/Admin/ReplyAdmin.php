@@ -32,7 +32,7 @@ class ReplyAdmin extends Admin
             ->add('questionnaire.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.reply.project',
             ])
-            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
+            ->add('expired', null, ['label' => 'admin.global.expired'])
         ;
     }
 

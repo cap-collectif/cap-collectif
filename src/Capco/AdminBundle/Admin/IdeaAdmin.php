@@ -56,7 +56,7 @@ class IdeaAdmin extends Admin
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.idea.updated_at',
             ])
-            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
+            ->add('expired', null, ['label' => 'admin.global.expired'])
         ;
     }
 

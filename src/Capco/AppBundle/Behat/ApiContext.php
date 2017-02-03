@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Id\AssignedGenerator;
 use GuzzleHttp\Client;
 use Behat\Gherkin\Node\PyStringNode;
@@ -579,25 +578,9 @@ EOF;
     {
         $em = $this->getEntityManager();
 
-        // @TODO: 'softdeleteable' might be not injected in container.
         $em->getFilters()->disable('softdeleted');
         $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($id);
 
-        PHPUnit::assertNotNull($proposal);
         PHPUnit::assertInstanceOf(\DateTime::class, $proposal->getDeletedAt());
-    }
-
-    /**
-     * @Then selections of a proposal with id :id should be deleted
-     */
-    public function selectionsOfProposalWithIdShouldBeDeleted(int $id)
-    {
-        // @TODO: 'softdeleteable' might be not injected in container.
-        $this->getEntityManager()->getFilters()->disable('softdeleted');
-        $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($id);
-
-        PHPUnit::assertNotNull($proposal);
-        PHPUnit::assertInstanceOf(Collection::class, $proposal->getSelections());
-        PHPUnit::assertEmpty($proposal->getSelections());
     }
 }

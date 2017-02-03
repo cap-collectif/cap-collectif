@@ -32,7 +32,7 @@ class CommentVoteAdmin extends Admin
             ], null, [
                 'property' => 'username',
             ])
-            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
+            ->add('expired', null, ['label' => 'admin.global.expired'])
         ;
     }
 

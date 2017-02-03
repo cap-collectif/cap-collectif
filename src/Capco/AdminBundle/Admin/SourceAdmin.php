@@ -57,7 +57,7 @@ class SourceAdmin extends Admin
             ->add('isTrashed', null, [
                 'label' => 'admin.fields.source.is_trashed',
             ])
-            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
+            ->add('expired', null, ['label' => 'admin.global.expired'])
         ;
     }
 

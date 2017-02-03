@@ -67,7 +67,7 @@ class CommentAdmin extends Admin
                 'label' => 'admin.fields.comment.type',
                 'sub_classes' => $this->getSubClasses(),
             ])
-            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
+            ->add('expired', null, ['label' => 'admin.global.expired'])
         ;
     }
 

@@ -32,7 +32,7 @@ class IdeaVoteAdmin extends Admin
             ->add('createdAt', null, [
                 'label' => 'admin.fields.idea_vote.created_at',
             ])
-            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
+            ->add('expired', null, ['label' => 'admin.global.expired'])
         ;
     }
 

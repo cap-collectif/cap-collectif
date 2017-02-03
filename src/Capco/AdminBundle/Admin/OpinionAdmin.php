@@ -78,7 +78,7 @@ class OpinionAdmin extends Admin
             ->add('sourcesCount', null, [
                 'label' => 'admin.fields.opinion.source_count',
             ])
-            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
+            ->add('expired', null, ['label' => 'admin.global.expired'])
         ;
     }
 

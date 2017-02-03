@@ -453,13 +453,12 @@ class ProposalsController extends FOSRestController
             throw new BadRequestHttpException('You are not the author of this proposal');
         }
 
-        $em = $this->getDoctrine()->getManager();
-
         if (!$proposal) {
             throw $this->createNotFoundException('Proposal not found');
         }
 
         // Soft delete.
+        $em = $this->getDoctrine()->getManager();
         $em->remove($proposal);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());

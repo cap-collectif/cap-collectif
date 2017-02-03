@@ -46,7 +46,7 @@ class ArgumentAdmin extends Admin
             ->add('isTrashed', null, [
                 'label' => 'admin.fields.argument.is_trashed',
             ])
-            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
+            ->add('expired', null, ['label' => 'admin.global.expired'])
         ;
     }
 

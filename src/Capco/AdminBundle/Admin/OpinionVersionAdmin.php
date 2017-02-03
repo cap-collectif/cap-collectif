@@ -49,7 +49,7 @@ class OpinionVersionAdmin extends Admin
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.opinion_version.updated_at',
             ])
-            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
+            ->add('expired', null, ['label' => 'admin.global.expired'])
         ;
     }
 

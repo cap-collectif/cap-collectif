@@ -40,7 +40,7 @@ class OpinionVoteAdmin extends Admin
             ->add('createdAt', null, [
                 'label' => 'admin.fields.opinion_vote.created_at',
             ])
-            ->add('expired', null, [ 'label' => 'admin.global.expired' ])
+            ->add('expired', null, ['label' => 'admin.global.expired'])
         ;
     }
 

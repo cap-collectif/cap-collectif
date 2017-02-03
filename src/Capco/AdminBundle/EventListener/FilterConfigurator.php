@@ -5,14 +5,17 @@ namespace Capco\AdminBundle\EventListener;
 use Doctrine\Orm\EntityManager;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Sonata\AdminBundle\Controller\CRUDController;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class FilterConfigurator
 {
     private $em;
+    private $tokenStorage;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, TokenStorageInterface $tokenStorage)
     {
         $this->em = $em;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function onKernelController(FilterControllerEvent $event)
@@ -22,8 +25,11 @@ class FilterConfigurator
 
         if ($controllerClass instanceof CRUDController) {
             $filters = $this->em->getFilters();
-            if (array_key_exists('softdeleteable', $filters->getEnabledFilters())) {
-                $filters->disable('softdeleteable');
+            if (
+                $filters->isEnabled('softdeleted') &&
+                $this->tokenStorage->getToken()->getUser()->hasRole('ROLE_SUPER_ADMIN')
+            ) {
+                $this->em->getFilters()->disable('softdeleted');
             }
         }
     }
