@@ -107,3 +107,21 @@ Feature: Email
       And I open mail with subject "[Cap-Collectif] Veuillez confirmer votre nouvelle adresse électronique"
       Then I should see "Confirmer mon adresse électronique" in mail
       Then I should see "/account/new_email_confirmation/" in mail
+
+    @security
+    Scenario: Logged in API client can not update his email with a wrong password
+      And I am logged in to api as user
+      And I send a PUT request to "/api/users/me" with json:
+      """
+      {
+        "email": "popopo@test.com",
+        "password": "wrongpassword"
+      }
+      """
+      Then the JSON response status code should be 400
+      And the JSON response should match:
+      """
+      {
+        "message": "You must specify your password to update your email.",
+      }
+      """

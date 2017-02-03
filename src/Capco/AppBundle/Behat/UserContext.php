@@ -48,7 +48,7 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Given user :userSlug email_to_confirm should be :email
+     * @Then user :userSlug email_to_confirm should be :email
      */
     public function userNewEmailIs(string $userSlug, string $email)
     {

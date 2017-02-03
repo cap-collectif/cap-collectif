@@ -248,4 +248,4 @@ Feature: Users
       }
       """
       Then the JSON response status code should be 204
-      And "user" email_to_confirm should be "popopopopo@test.com"
+      And user "user" email_to_confirm should be "popopopopo@test.com"
