@@ -49,4 +49,4 @@ FOS\UserBundle\Form\Model\ChangePassword:
   properties:
     new:
       - NotBlank: { message: fos_user.new_password.blank, groups: [ChangePassword, ResetPassword]}
-      - Length: { min: 8, max: 128, minMessage: fos_user.new_password.short, groups: [ChangePassword, ResetPassword]}
+      - Length: { min: 8, max: 72, minMessage: fos_user.new_password.short, groups: [ChangePassword, ResetPassword]}
