@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -50,7 +51,7 @@ export const NewEmailNotConfirmedAlert = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-  newEmailToConfirm: state.user.user.newEmailToConfirm,
+  newEmailToConfirm: state.user.user && state.user.user.newEmailToConfirm,
   sendSucceed: true,
 });
 
