@@ -237,8 +237,8 @@ Feature: Users
       }
       """
 
-    @database @devdevdev
-    Scenario: API client wants to update his phone
+    @database
+    Scenario: API client wants to update his email
       Given I am logged in to api as user
       When I send a PUT request to "/api/users/me" with json:
       """
