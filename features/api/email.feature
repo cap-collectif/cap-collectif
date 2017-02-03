@@ -92,7 +92,7 @@ Feature: Email
     """
     And 0 mail should be sent
 
-    @database
+    @database @devdev
     Scenario: Logged in API client can update his email
       And I am logged in to api as user
       And I send a PUT request to "/api/users/me" with json:
@@ -103,10 +103,12 @@ Feature: Email
       }
       """
       Then the JSON response status code should be 204
-      And 1 mail should be sent
+      And 2 mail should be sent
       And I open mail with subject "[Cap-Collectif] Veuillez confirmer votre nouvelle adresse électronique"
       Then I should see "Confirmer mon adresse électronique" in mail
       Then I should see "/account/new_email_confirmation/" in mail
+      And I open mail with subject "[Cap-Collectif] L'adresse électronique de user a été changée"
+      Then I should see "Votre adresse électronique a été changée" in mail
 
     @security
     Scenario: Logged in API client can not update his email with a wrong password
