@@ -17,9 +17,6 @@ class OpinionVoteAdmin extends Admin
         '_sort_by' => 'opinion.title',
     ];
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -44,12 +41,10 @@ class OpinionVoteAdmin extends Admin
         ;
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         $listMapper
             ->add('opinion', 'sonata_type_model', [
@@ -64,6 +59,10 @@ class OpinionVoteAdmin extends Admin
                 'labels' => OpinionVote::$voteTypesLabels,
                 'styles' => OpinionVote::$voteTypesStyles,
             ])
+            ->add('expired', null, [
+                'label' => 'admin.global.expired',
+                'editable' => $currentUser->hasRole('ROLE_SUPER_ADMIN'),
+            ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.opinion_vote.updated_at',
             ])
@@ -77,9 +76,6 @@ class OpinionVoteAdmin extends Admin
         ;
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
@@ -112,11 +108,9 @@ class OpinionVoteAdmin extends Admin
         ;
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $formMapper
             ->add('opinion', 'sonata_type_model', [
                 'label' => 'admin.fields.opinion_vote.opinion',
@@ -129,6 +123,13 @@ class OpinionVoteAdmin extends Admin
                 'label' => 'admin.fields.opinion_vote.value',
                 'choices' => OpinionVote::$voteTypesLabels,
                 'translation_domain' => 'CapcoAppBundle',
+            ])
+            ->add('expired', null, [
+                'label' => 'admin.global.expired',
+                'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
+                'attr' => [
+                  'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
+                ],
             ])
         ;
     }

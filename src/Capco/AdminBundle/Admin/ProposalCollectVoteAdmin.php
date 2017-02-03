@@ -11,9 +11,6 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class ProposalCollectVoteAdmin extends Admin
 {
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -32,12 +29,10 @@ class ProposalCollectVoteAdmin extends Admin
         ;
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
+        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         $listMapper
             ->add('proposal', 'sonata_type_model', [
@@ -54,7 +49,7 @@ class ProposalCollectVoteAdmin extends Admin
             ])
             ->add('expired', null, [
                 'label' => 'admin.global.expired',
-                'editable' => true,
+                'editable' => $currentUser->hasRole('ROLE_SUPER_ADMIN'),
             ])
             ->add('private', null, [
                 'label' => 'admin.global.private',
