@@ -30,6 +30,7 @@ export const AccountForm = React.createClass({
   propTypes: {
     newEmailToConfirm: PropTypes.string,
     error: PropTypes.string,
+    initialValues: PropTypes.object.isRequired,
     confirmationEmailResent: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
@@ -73,14 +74,15 @@ export const AccountForm = React.createClass({
                   email={newEmailToConfirm}
                 />
               </p>
-              <ButtonToolbar>
-                <Button bsStyle="link" onClick={() => resendConfirmation()}>
+              <p className="small excerpt">
+                <a href="#resend" onClick={() => resendConfirmation()}>
                   {this.getIntlMessage('user.confirm.resend')}
-                </Button>
-                <Button bsStyle="link" onClick={() => cancelEmailChange(dispatch, initialValues.email)}>
+                </a>
+                { ' · ' }
+                <a href="#cancel" onClick={() => cancelEmailChange(dispatch, initialValues.email)}>
                   {this.getIntlMessage('user.confirm.cancel')}
-                </Button>
-              </ButtonToolbar>
+                </a>
+              </p>
             </div>
         }
       </form>

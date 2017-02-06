@@ -124,6 +124,6 @@ Feature: Email
       And the JSON response should match:
       """
       {
-        "message": "You must specify your password to update your email.",
+        "message": "You must specify your password to update your email."
       }
       """

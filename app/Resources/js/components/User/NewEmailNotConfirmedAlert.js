@@ -40,7 +40,7 @@ export const NewEmailNotConfirmedAlert = React.createClass({
                 this.getIntlMessage('user.confirm.resend')
               }
             </Button>
-            <Button style={{ marginBottom: 5 }} href={editEmailUrl}>
+            <Button bsStyle="link" style={{ marginBottom: 5 }} href={editEmailUrl}>
               { sendSucceed && this.getIntlMessage('user.confirm.new_email_send_succeed_cancel_or_update') }
             </Button>
           </div>
