@@ -1,5 +1,4 @@
 // @flow
-import type { Dispatch as ReduxDispatch } from 'redux';
 import { takeEvery } from 'redux-saga';
 import { select, call, put } from 'redux-saga/effects';
 import flatten from 'flat';
@@ -9,6 +8,7 @@ import Fetcher, { json } from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
+import type { Dispatch, Action } from '../../types';
 
 export const POSTS_FETCH_REQUESTED = 'proposal/POSTS_FETCH_REQUESTED';
 export const POSTS_FETCH_SUCCEEDED = 'proposal/POSTS_FETCH_SUCCEEDED';
@@ -66,7 +66,7 @@ type FetchVotesRequestedAction = {
   proposalId: number
 };
 
-type Action =
+export type ProposalAction =
     { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId: number, stepId: number }
   | { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error: string }
   | FetchVotesRequestedAction
@@ -79,7 +79,7 @@ type Action =
 //   id: number
 // };
 type ProposalMap = {[id: number]: Object};
-type State = {
+export type State = {
   queryCount: ?number,
   currentProposalId: ?number,
   proposalShowedId: Array<number>,
@@ -106,7 +106,6 @@ type State = {
   lastEditedProposalId: ?number,
   lastNotifiedStepId: ?number
 };
-type Dispatch = ReduxDispatch<Action>;
 
 const initialState: State = {
   currentProposalId: null,

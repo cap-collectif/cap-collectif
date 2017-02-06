@@ -1,0 +1,19 @@
+{% block body_text %}
+    {% autoescape false %}
+    <p>
+        {{ 'email.alert_expire_user.hello'|trans({'%username%' : user.username}, 'CapcoAppBundle') }}
+    </p>
+    <p>
+      Confirmez votre adresse électronique pour valider votre compte. Il suffit de cliquer sur le lien ci-dessous.
+    <p>
+        <a href="{{ confirmationUrl }}">Confirmer mon adresse électronique</a>
+    </p>
+    <p>
+      {{ 'global.email.footer'|trans({
+            '%sitename%': capco_site_parameter_value('global.site.fullname'),
+          }, 'CapcoAppBundle')
+      }}
+    </p>
+    {% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}

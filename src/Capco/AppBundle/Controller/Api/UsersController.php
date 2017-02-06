@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiProfileFormType;
+use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -17,6 +18,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class UsersController extends FOSRestController
@@ -119,12 +121,7 @@ class UsersController extends FOSRestController
         return $user;
     }
 
-    /**
-     * @Put("/users/me")
-     * @Security("has_role('ROLE_USER')")
-     * @View(statusCode=200, serializerGroups={})
-     */
-    public function putMeAction(Request $request)
+    private function updatePhone(Request $request)
     {
         $user = $this->getUser();
         $previousPhone = $user->getPhone();
@@ -136,33 +133,101 @@ class UsersController extends FOSRestController
             return $form;
         }
 
-        // If phone is updated we have to make sure it's sms confirmed again
-        if ($previousPhone != null && $previousPhone != $user->getPhone()) {
-            $user->setPhoneConfirmed(false);
-            // TODO: security breach user can send unlimited sms if he change his number
-            $user->setSmsConfirmationSentAt(null);
+      // If phone is updated we have to make sure it's sms confirmed again
+      if ($previousPhone != null && $previousPhone != $user->getPhone()) {
+          $user->setPhoneConfirmed(false);
+          // TODO: security breach user can send unlimited sms if he change his number
+          $user->setSmsConfirmationSentAt(null);
+      }
+
+        $this->getDoctrine()->getManager()->flush();
+    }
+
+    private function updateEmail(Request $request)
+    {
+        $user = $this->getUser();
+        $previousEmail = $user->getEmail();
+        $newEmailToConfirm = $request->request->get('email');
+        $password = $request->request->get('password');
+
+        if ($previousEmail === $newEmailToConfirm) {
+            throw new \Exception('Already your email.');
         }
+
+        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+        if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
+            return new JsonResponse([
+            'message' => 'You must specify your password to update your email.',
+          ], 400);
+        }
+
+        $form = $this->createForm(ApiProfileAccountFormType::class, $user);
+        $form->submit(['newEmailToConfirm' => $newEmailToConfirm], false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+      // We generate a confirmation token to validate the new email
+      $token = $this->get('fos_user.util.token_generator')->generateToken();
+
+        $user->setNewEmailConfirmationToken($token);
+        $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
 
         $this->getDoctrine()->getManager()->flush();
     }
 
     /**
-     * @Post("/resend-email-confirmation", defaults={"_feature_flags" = "registration"})
+     * @Put("/users/me")
+     * @Security("has_role('ROLE_USER')")
+     * @View(statusCode=200, serializerGroups={})
+     */
+    public function putMeAction(Request $request)
+    {
+        if ($request->request->has('phone')) {
+            return $this->updatePhone($request);
+        }
+        if ($request->request->has('email')) {
+            return $this->updateEmail($request);
+        }
+    }
+
+    /**
+     * @Post("/account/cancel_email_change")
+     * @Security("has_role('ROLE_USER')")
+     * @View(statusCode=200, serializerGroups={})
+     */
+    public function cancelEmailChangeAction()
+    {
+        $user = $this->getUser();
+        $user->setNewEmailToConfirm(null);
+        $user->setNewEmailConfirmationToken(null);
+        $this->getDoctrine()->getManager()->flush();
+    }
+
+    /**
+     * @Post("/account/resend_confirmation_email", defaults={"_feature_flags" = "registration"})
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */
     public function postResendEmailConfirmationAction()
     {
         $user = $this->getUser();
-        if ($user->isEmailConfirmed()) {
+        if ($user->isEmailConfirmed() && !$user->getNewEmailToConfirm()) {
             throw new BadRequestHttpException('Already confirmed.');
         }
+        
         // security against mass click email resend
         if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
             throw new BadRequestHttpException('Email already sent less than a minute ago.');
         }
 
-        $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
+        if ($user->getNewEmailToConfirm()) {
+            $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
+        } else {
+            $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
+        }
+
         $user->setEmailConfirmationSentAt(new \DateTime());
         $this->getDoctrine()->getManager()->flush();
     }

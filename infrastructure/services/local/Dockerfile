@@ -23,8 +23,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install php7.0
-RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list && \
+RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
+    echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
+    wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
     apt-get update && \
     apt-get install -y -qq \
         php7.0-apcu \
@@ -157,7 +158,7 @@ COPY nginx/run                  /etc/service/nginx/run
 COPY php-fpm/run                /etc/service/php-fpm/run
 COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
-# COPY blackfire/run              /etc/service/blackfire/run # Wait for credentials
+COPY blackfire/run              /etc/service/blackfire/run
 COPY rabbitmq/run               /etc/service/rabbitmq/run
 
 # Configuration

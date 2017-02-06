@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import RegistrationModal from './RegistrationModal';
+import type { State } from '../../../types';
 
 export const RegistrationButton = React.createClass({
   propTypes: {
@@ -71,11 +72,9 @@ export const RegistrationButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.default.features,
-    user: state.default.user,
-  };
-};
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
+  user: state.user.user,
+});
 
 export default connect(mapStateToProps)(RegistrationButton);

@@ -1,0 +1,61 @@
+exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newEmailToConfirm 1`] = `
+<Alert
+  bsClass="alert"
+  bsStyle="warning"
+  closeLabel="Close Alert"
+  id="alert-new-email-not-confirmed">
+  <div
+    className="container">
+    <div
+      className="col-md-7"
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }>
+      <FormattedHTMLMessage
+        email="new-email@test.com"
+        message="Il vous faut encore confirmer votre changement d\'adresse email. Un email de confirmation a été envoyé à <strong>{email}</strong>. Votre adresse ne sera pas changée tant que vous n\'aurez pas effectué cette étape !"
+        tagName="span" />
+    </div>
+    <div
+      className="col-md-5">
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        navDropdown={false}
+        navItem={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "marginBottom": 5,
+            "marginRight": 15,
+          }
+        }>
+        Renvoyer la confirmation
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        href="about:///profile/edit-account"
+        navDropdown={false}
+        navItem={false}
+        style={
+          Object {
+            "marginBottom": 5,
+          }
+        }>
+        Annuler ou mettre à jour cette adresse email
+      </Button>
+    </div>
+  </div>
+</Alert>
+`;
+
+exports[`<NewEmailNotConfirmedAlert /> should render nothing if no newEmailToConfirm 1`] = `null`;

@@ -143,10 +143,10 @@ export const ProposalAdminForm = React.createClass({
 export default connect((state, props) => ({
   initialValues: {
     project: formValueSelector(formName)(state, 'project'),
-    author: state.default.user.id,
+    author: state.user.user.id,
     responses: props.proposalForm.fields.map(field => ({ question: field.id })),
   },
-  user: state.default.user,
+  user: state.user.user,
   features: state.default.features,
   themes: state.default.themes,
   districts: state.default.districts,

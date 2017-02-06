@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import FacebookLoginButton from './FacebookLoginButton';
 import GoogleLoginButton from './GoogleLoginButton';
 import SamlLoginButton from './SamlLoginButton';
+import type { State } from '../../../types';
 
 export const LoginSocialButtons = React.createClass({
   propTypes: {
@@ -37,8 +38,8 @@ export const LoginSocialButtons = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return { features: state.default.features };
-};
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
+});
 
 export default connect(mapStateToProps)(LoginSocialButtons);

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
+import type { State } from '../../../types';
 
 export const SamlLoginButton = React.createClass({
   displayName: 'SamlLoginButton',
@@ -28,7 +29,7 @@ export const SamlLoginButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: State) => {
   return {
     show: state.default.features.login_saml,
   };

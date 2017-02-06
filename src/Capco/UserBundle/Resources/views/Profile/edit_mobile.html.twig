@@ -13,14 +13,9 @@
 {% block fos_user_content %}
     <div class="container  container--custom">
         <div class="row">
-
             {% include '@CapcoUser/Profile/action.html.twig' %}
-
             <div class="col-xs-12 col-sm-8 col-md-9">
-                {{ react_intl_component('PhoneProfileApp', {
-                    'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-                   })
-                }}
+                {{ react_intl_component('PhoneProfileApp') }}
             </div>
         </div>
     </div>

@@ -1,17 +1,17 @@
 // @flow
-import type { Dispatch as ReduxDispatch } from 'redux';
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import { UPDATE_OPINION_SUCCESS, UPDATE_OPINION_FAILURE } from '../../constants/OpinionConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../../services/Fetcher';
+import type { Dispatch, Action } from '../../types';
 
 export type VoteValue = -1 | 0 | 1;
 type Uuid = string;
 type Opinion = { id: Uuid };
 type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
-type Action =
+export type OpinionAction =
     { type: 'opinion/OPINION_VOTE_SUCCEEDED', opinionId: Uuid, vote: OpinionVote }
   | { type: 'opinion/VERSION_VOTE_SUCCEEDED', versionId: Uuid, vote: OpinionVote }
   | { type: 'opinion/DELETE_OPINION_VOTE_SUCCEEDED', opinionId: Uuid, vote: OpinionVote }
@@ -21,13 +21,12 @@ type Action =
 ;
 type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: Uuid, versionId: ?Uuid };
 type ContributionMap = {[id: Uuid]: {id: string, votes: OpinionVotes, votesCount: number}};
-type State = {
+export type State = {
   currentOpinionId: ?Uuid,
   currentVersionId: ?Uuid,
   opinionsById: ContributionMap,
   versionsById: ContributionMap
 };
-type Dispatch = ReduxDispatch<Action>;
 
 const VOTES_PREVIEW_COUNT = 8;
 export const OPINION_VOTE_SUCCEEDED = 'opinion/OPINION_VOTE_SUCCEEDED';

@@ -121,7 +121,7 @@ const mapStateToProps = (state, props) => {
     ? state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)
     : [];
   return {
-    user: state.default.user,
+    user: state.user.user,
     showModal: !!(state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id),
     isSubmitting: !!state.proposal.isVoting,
     valid: isValid('proposalVote')(state),

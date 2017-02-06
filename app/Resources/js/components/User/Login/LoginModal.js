@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import CloseButton from '../../Form/CloseButton';
 import LoginForm from './LoginForm';
 import { LoginSocialButtons } from './LoginSocialButtons';
+import type { State } from '../../../types';
 
 export const LoginModal = React.createClass({
   propTypes: {
@@ -100,11 +101,9 @@ export const LoginModal = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.default.features,
-    parameters: state.default.parameters,
-  };
-};
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
+  parameters: state.default.parameters,
+});
 
 export default connect(mapStateToProps)(LoginModal);

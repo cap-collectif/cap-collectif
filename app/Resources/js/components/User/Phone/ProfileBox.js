@@ -7,6 +7,7 @@ import SmsCodeForm from './SmsCodeForm';
 import UserActions from '../../../actions/UserActions';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../../constants/AlertConstants';
+import type { State } from '../../../types';
 
 export const ProfileBox = React.createClass({
   propTypes: {
@@ -170,10 +171,8 @@ export const ProfileBox = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.default.user,
-  };
-};
+const mapStateToProps = (state: State) => ({
+  user: state.user.user,
+});
 
 export default connect(mapStateToProps)(ProfileBox);

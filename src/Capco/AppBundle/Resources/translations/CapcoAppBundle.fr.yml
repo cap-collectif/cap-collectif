@@ -4,6 +4,7 @@ global:
     close: Fermer
     already_email_confirmed: Votre adresse électronique a déjà été confirmée avec succès.
     email_confirmed: Merci, votre adresse électronique a été confirmée avec succès.
+    new_email_confirmed: Merci, votre adresse électronique a été mise à jour.
     email_confirmed_with_republish: Merci, votre compte a bien été confirmé et votre contenu republié avec succès.
   capco_powered: Propulsé par %startlink%Cap Collectif%endlink%
   edited: Modifié le %date%
@@ -21,6 +22,9 @@ global:
     last: Aller à la dernière page
   helper:
     typo: Vouliez-vous dire
+  email:
+    footer: Ce message vous a été adressé automatiquement par %sitename% via <a href="http://www.cap-collectif.com">Cap Collectif</a>.
+
 
 sms:
   content: "%sitename% : Votre code de confirmation est %code%. Répondez STOP SMS pour annuler."
