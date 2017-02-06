@@ -77,31 +77,20 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
         message="Vérifiez votre email (<strong>{email}</strong>) pour confirmer votre nouvelle adresse. Jusqu\'à ce que vous confirmez, les notifications continueront d\'être envoyées à votre adresse email actuelle."
         tagName="span" />
     </p>
-    <ButtonToolbar
-      bsClass="btn-toolbar">
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        disabled={false}
-        navDropdown={false}
-        navItem={false}
+    <p
+      className="small excerpt">
+      <a
+        href="#resend"
         onClick={[Function]}>
         Renvoyer la confirmation
-      </Button>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        disabled={false}
-        navDropdown={false}
-        navItem={false}
+      </a>
+       · 
+      <a
+        href="#cancel"
         onClick={[Function]}>
         Annuler cette modification
-      </Button>
-    </ButtonToolbar>
+      </a>
+    </p>
   </div>
 </form>
 `;
@@ -131,31 +120,20 @@ exports[`<AccountForm /> should render a form with information about new email 1
         message="Vérifiez votre email (<strong>{email}</strong>) pour confirmer votre nouvelle adresse. Jusqu\'à ce que vous confirmez, les notifications continueront d\'être envoyées à votre adresse email actuelle."
         tagName="span" />
     </p>
-    <ButtonToolbar
-      bsClass="btn-toolbar">
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        disabled={false}
-        navDropdown={false}
-        navItem={false}
+    <p
+      className="small excerpt">
+      <a
+        href="#resend"
         onClick={[Function]}>
         Renvoyer la confirmation
-      </Button>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="link"
-        disabled={false}
-        navDropdown={false}
-        navItem={false}
+      </a>
+       · 
+      <a
+        href="#cancel"
         onClick={[Function]}>
         Annuler cette modification
-      </Button>
-    </ButtonToolbar>
+      </a>
+    </p>
   </div>
 </form>
 `;

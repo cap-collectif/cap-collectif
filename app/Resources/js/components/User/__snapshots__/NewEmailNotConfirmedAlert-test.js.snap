@@ -41,7 +41,7 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
         active={false}
         block={false}
         bsClass="btn"
-        bsStyle="default"
+        bsStyle="link"
         disabled={false}
         href="about:///profile/edit-account"
         navDropdown={false}
@@ -51,7 +51,7 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
             "marginBottom": 5,
           }
         }>
-        Annuler ou mettre à jour cette adresse email
+        Mettre à jour cette adresse email
       </Button>
     </div>
   </div>
