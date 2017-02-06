@@ -15,7 +15,7 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
       }>
       <FormattedHTMLMessage
         email="new-email@test.com"
-        message="Il vous faut encore confirmer votre changement d\'adresse email. Un email de confirmation a été envoyé à <strong>{email}</strong>. Votre adresse ne sera pas changée tant que vous n\'aurez pas effectué cette étape !"
+        message="Un email de confirmation a été envoyé à <strong>{email}</strong>. Votre email ne sera pas modifié tant que vous n\'aurez pas confirmé votre nouvelle adresse email."
         tagName="span" />
     </div>
     <div
