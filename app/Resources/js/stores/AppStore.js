@@ -1,4 +1,3 @@
-// @flow
 import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { reducer as formReducer } from 'redux-form';
@@ -8,30 +7,9 @@ import { reducer as projectReducer, saga as projectSaga } from '../redux/modules
 import { reducer as ideaReducer, saga as ideaSaga } from '../redux/modules/idea';
 import { reducer as proposalReducer, saga as proposalSaga } from '../redux/modules/proposal';
 import { reducer as opinionReducer, saga as opinionSaga } from '../redux/modules/opinion';
-import { reducer as userReducer } from '../redux/modules/user';
-import type { SubmitConfirmPasswordAction, State as userState } from '../redux/modules/user';
-import type { State as proposalState } from '../redux/modules/proposal';
-import type { State as opinionState } from '../redux/modules/opinion';
 
-export type State = {
-  default: {
-    districts: Array<Object>,
-    themes: Array<Object>,
-    features: Object,
-    userTypes: Array<Object>,
-    parameters: Object,
-    isLoggedIn: boolean
-  },
-  idea: Object,
-  proposal: proposalState,
-  project: Object,
-  report: Object,
-  user: userState,
-  opinion: opinionState
-};
-
-export default function configureStore(initialState: Object) {
-  if (initialState.user.user === null) {
+export default function configureStore(initialState) {
+  if (initialState.default.user === null) {
     LocalStorageService.remove('jwt');
   }
   if (initialState.project && initialState.proposal && initialState.project.currentProjectStepById && LocalStorageService.isValid('proposal.filtersByStep')) {
@@ -51,21 +29,8 @@ export default function configureStore(initialState: Object) {
     proposal: proposalReducer,
     project: projectReducer,
     report: reportReducer,
-    user: userReducer,
+    form: formReducer,
     opinion: opinionReducer,
-    form: formReducer.plugin({
-      account: (state, action: SubmitConfirmPasswordAction) => {
-        switch (action.type) {
-          case 'SUBMIT_CONFIRM_PASSWORD_FORM':
-            return {
-              ...state,
-              values: { ...state.values, password: action.password },
-            };
-          default:
-            return state;
-        }
-      },
-    }),
   };
 
   const reducer = combineReducers(reducers);
@@ -79,7 +44,6 @@ export default function configureStore(initialState: Object) {
   );
 
   sagaMiddleware.run(ideaSaga);
-  // $FlowFixMe
   sagaMiddleware.run(proposalSaga);
   sagaMiddleware.run(projectSaga);
   sagaMiddleware.run(opinionSaga);

@@ -322,19 +322,3 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_ADMIN'
         Media: null
         confirmationToken: check-my-email-token
-
-    user_updating_email:
-        id: '515'
-        username: user_updating_email
-        firstname: user_updating_email
-        lastname: user_updating_email
-        email: user_updating_email@test.com
-        enabled: true
-        expired: false
-        expiresAt: ~
-        userType: '@UserType1'
-        roles:
-         - 'ROLE_USER'
-        Media: null
-        newEmailToConfirm: new-email-to-confirm@test.com
-        newEmailConfirmationToken: check-my-new-email-token

@@ -105,7 +105,7 @@ const ProposalVoteForm = React.createClass({
 const mapStateToProps = state => ({
   comment: formValueSelector(form)(state, 'comment') || '',
   isPrivate: formValueSelector(form)(state, 'private') || false,
-  anonymous: state.user.user === null,
+  anonymous: state.default.user === null,
   voteWithoutAccount: state.default.features.vote_without_account,
 });
 

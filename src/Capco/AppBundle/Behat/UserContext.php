@@ -48,16 +48,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Then user :userSlug email_to_confirm should be :email
-     */
-    public function userNewEmailIs(string $userSlug, string $email)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository('CapcoUserBundle:User')->findOneBySlug($userSlug);
-        expect($user->getNewEmailToConfirm())->toBe($email);
-    }
-
-    /**
      * @Given I am logged in as admin
      */
     public function iAmLoggedInAsAdmin()

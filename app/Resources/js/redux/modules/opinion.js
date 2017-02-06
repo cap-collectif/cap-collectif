@@ -21,7 +21,7 @@ type Action =
 ;
 type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: Uuid, versionId: ?Uuid };
 type ContributionMap = {[id: Uuid]: {id: string, votes: OpinionVotes, votesCount: number}};
-export type State = {
+type State = {
   currentOpinionId: ?Uuid,
   currentVersionId: ?Uuid,
   opinionsById: ContributionMap,

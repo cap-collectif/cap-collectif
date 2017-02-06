@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import type { State } from '../../../stores/AppStore';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import { changeFilter, changeOrder, loadProposals } from '../../../redux/modules/proposal';
@@ -116,7 +115,7 @@ export const ProposalListFilters = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state) => {
   return {
     features: state.default.features,
     themes: state.default.themes,

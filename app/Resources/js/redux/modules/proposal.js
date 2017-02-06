@@ -79,7 +79,7 @@ type Action =
 //   id: number
 // };
 type ProposalMap = {[id: number]: Object};
-export type State = {
+type State = {
   queryCount: ?number,
   currentProposalId: ?number,
   proposalShowedId: Array<number>,

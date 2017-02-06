@@ -74,7 +74,7 @@ export const RegistrationButton = React.createClass({
 const mapStateToProps = (state) => {
   return {
     features: state.default.features,
-    user: state.user.user,
+    user: state.default.user,
   };
 };
 

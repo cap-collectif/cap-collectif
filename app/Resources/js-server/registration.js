@@ -1,4 +1,7 @@
 import moment from 'moment';
+
+moment.locale('fr');
+
 import ReactOnRails from 'react-on-rails';
 import ProjectsListApp from '../js/startup/ProjectsListAppClient';
 import ProposalStepPageApp from '../js/startup/ProposalStepPageApp';
@@ -7,7 +10,6 @@ import EmailNotConfirmedApp from '../js/startup/EmailNotConfirmedAppClient';
 import NewOpinionApp from '../js/startup/NewOpinionAppClient';
 import NewIdeaApp from '../js/startup/NewIdeaAppClient';
 import PhoneProfileApp from '../js/startup/PhoneProfileApp';
-import AccountProfileApp from '../js/startup/AccountProfileApp';
 import ProjectTrashButtonApp from '../js/startup/ProjectTrashButtonApp';
 import OpinionPageApp from '../js/startup/OpinionPageApp';
 import CommentSectionApp from '../js/startup/CommentSectionApp';
@@ -30,8 +32,6 @@ import ProposalCreateFusionButtonApp from '../js/startup/ProposalCreateFusionBut
 import ProjectListPageApp from '../js/startup/ProjectListPageApp';
 import ProposalAdminSelectionsApp from '../js/startup/ProposalAdminSelectionsApp';
 import appStore from '../js/stores/AppStore';
-
-moment.locale('fr');
 
 const emptyFunction = () => {};
 global.clearTimeout = global.clearTimeout || emptyFunction;
@@ -63,7 +63,6 @@ ReactOnRails.register({
   ProposalListApp,
   ProposalsUserVotesPageApp,
   PhoneProfileApp,
-  AccountProfileApp,
   IdeasIndexPageApp,
   IdeasListApp,
   IdeaPageApp,

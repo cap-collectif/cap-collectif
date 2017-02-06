@@ -49,7 +49,7 @@ const ArgumentVoteButton = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user.user,
+    user: state.default.user,
   };
 };
 

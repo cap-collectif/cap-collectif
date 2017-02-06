@@ -86,13 +86,6 @@
       "list": "{num, plural, =0{0 argument pour} one{# argument pour} other{# arguments pour}}"
     }
   },
-  "confirm_password": {
-    "title": "Confirmez votre mot de passe pour continuer",
-    "help": "Par mesure de sécurité, ressaisissez votre mot de passe.",
-    "errors": {
-      "password": "Mot de passe incorrect ! Entrez votre mot de passe actuel pour modifier vos paramètres."
-    }
-  },
   "comment": {
     "add": "Commenter",
     "constraints": {
@@ -171,11 +164,7 @@
       "notBlank": "Cette valeur ne doit pas \u00eatre vide.",
       "check": "Veuillez cocher cette case."
     },
-    "change": {
-      "required": "Cette valeur doit être modifiée."
-    },
     "continue": "Continuer",
-    "confirm": "Confirmer",
     "content": "Contenu",
     "counters": {
       "contributions": "{num, plural, =0{contribution} one{contribution} other{contributions}}",
@@ -270,7 +259,6 @@
     "preview": "Aper\u00e7u",
     "publish": "Publier",
     "save": "Enregistrer",
-    "save_modifications": "Enregistrer les modifications",
     "login_me": "Se connecter",
     "login_failed": "Email ou mot de passe incorrect.",
     "logout": "Déconnexion",
@@ -507,21 +495,15 @@
       },
       "password": {
         "min": "Le mot de passe doit faire au moins 8 caractères.",
-        "max": "Le mot de passe doit faire moins de 128 caractères."
+        "max": "Le mot de passe doit faire moins de 72 caractères."
       }
     }
   },
   "user": {
     "confirm": {
       "email": "Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 72 heures pour conserver l'accès à votre compte. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>",
-      "new_email_send_succeed": "Il vous faut encore confirmer votre changement d'adresse email. Un email de confirmation a été envoyé à <strong>{email}</strong>. Votre adresse ne sera pas changée tant que vous n'aurez pas effectué cette étape !",
-      "new_email_send_succeed_cancel_or_update": "Annuler ou mettre à jour cette adresse email",
-      "new_email_send_failed": "Oups, nous n'avons pas pu envoyer l'e-mail à votre nouvelle adresse ! Nous avons essayé d'envoyer des emails de confirmation à <strong>%email%</strong> mais ils n'ont pas été remis. Vous pouvez choisir une autre adresse ou nous pouvons réessayer.",
-      "profile_help": "Vérifiez votre email (<strong>{email}</strong>) pour confirmer votre nouvelle adresse. Jusqu'à ce que vous confirmez, les notifications continueront d'être envoyées à votre adresse email actuelle.",
       "sent": "Un nouvel email de confirmation a été envoyé.",
       "sending": "Envoi en cours...",
-      "wrong_password": "Mot de passe incorrect ! Entrez votre mot de passe actuel pour modifier votre email.",
-      "cancel": "Annuler cette modification",
       "update": "Mettre à jour l'adresse email",
       "resend": "Renvoyer la confirmation"
     }
@@ -557,9 +539,6 @@
         "already_used": "Ce numéro est déjà utilisé sur un autre compte",
         "invalid": "Le numéro renseigné semble incorrect"
       }
-    },
-    "account": {
-      "title": "Mon compte"
     }
   },
   "project": {

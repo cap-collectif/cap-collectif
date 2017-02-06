@@ -100,7 +100,7 @@ const mapStateToProps = (state, props) => {
       ? state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)[0]
       : null
   ;
-  const user = state.user.user;
+  const user = state.default.user;
   return {
     user,
     userVotesCount: (user && step && state.proposal.userVotesByStepId[step.id].length) || 0,

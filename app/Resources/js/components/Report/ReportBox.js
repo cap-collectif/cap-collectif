@@ -71,7 +71,7 @@ export const ReportBox = React.createClass({
 const mapStateToProps = (state, ownProps) => {
   return {
     features: state.default.features,
-    user: state.user.user,
+    user: state.default.user,
     showModal: state.report.currentReportingModal === ownProps.id,
   };
 };

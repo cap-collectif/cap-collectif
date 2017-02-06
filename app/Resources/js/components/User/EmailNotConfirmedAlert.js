@@ -1,10 +1,8 @@
-// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Alert, Button } from 'react-bootstrap';
 import Fetcher from '../../services/Fetcher';
-import type { State } from '../../stores/AppStore';
 
 export const EmailNotConfirmedAlert = React.createClass({
   propTypes: {
@@ -28,7 +26,7 @@ export const EmailNotConfirmedAlert = React.createClass({
   handleResend() {
     this.setState({ resendingConfirmation: true });
     Fetcher
-      .post('/account/resend_confirmation_email')
+      .post('/resend-email-confirmation', {})
       .then(() => {
         this.setState({
           resendingConfirmation: false,
@@ -49,41 +47,35 @@ export const EmailNotConfirmedAlert = React.createClass({
     if (!user || user.isEmailConfirmed) {
       return null;
     }
-    const editEmailUrl = `${window.location.protocol}//${window.location.host}/profile/edit-account`;
     const { confirmationSent, resendingConfirmation } = this.state;
     return (
       <Alert bsStyle="warning" id="alert-email-not-confirmed">
         <div className="container">
           <div className="col-md-7" style={{ marginBottom: 5 }}>
-            <FormattedHTMLMessage
-              message={this.getIntlMessage('user.confirm.email')}
-              email={user.email}
-              link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
-            />
+          <FormattedHTMLMessage
+            message={this.getIntlMessage('user.confirm.email')}
+            email={user.email}
+            link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+          />
           </div>
           <div className="col-md-5">
-            {
+          {
               confirmationSent
-                ? <Button style={{ marginRight: 15, marginBottom: 5 }} bsStyle="primary" disabled>
+              ? <Button style={{ marginRight: 15, marginBottom: 5 }} bsStyle="primary" disabled>
                   { this.getIntlMessage('user.confirm.sent') }
                 </Button>
               : <Button style={{ marginRight: 15, marginBottom: 5 }}
-                disabled={resendingConfirmation}
-                onClick={resendingConfirmation ? null : this.handleResend}
-                >
-                {
+                  disabled={resendingConfirmation}
+                  onClick={resendingConfirmation ? null : this.handleResend}
+              >
+                  {
                     resendingConfirmation
-                  ? this.getIntlMessage('user.confirm.sending')
-                  : this.getIntlMessage('user.confirm.resend')
-                }
-              </Button>
-            }
-            <Button
-              style={{ marginBottom: 5 }}
-              href={editEmailUrl}
-            >
-              { this.getIntlMessage('user.confirm.update') }
-            </Button>
+                    ? this.getIntlMessage('user.confirm.sending')
+                    : this.getIntlMessage('user.confirm.resend')
+                  }
+                </Button>
+          }
+          <Button style={{ marginBottom: 5 }} href="/profile/edit-account">{ this.getIntlMessage('user.confirm.update') }</Button>
           </div>
         </div>
       </Alert>
@@ -91,8 +83,10 @@ export const EmailNotConfirmedAlert = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State) => ({
-  user: state.user.user,
-});
+const mapStateToProps = (state) => {
+  return {
+    user: state.default.user,
+  };
+};
 
 export default connect(mapStateToProps)(EmailNotConfirmedAlert);

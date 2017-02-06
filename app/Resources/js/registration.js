@@ -20,8 +20,7 @@ import AlertBoxApp from './startup/AlertBoxApp';
 import StepInfosApp from './startup/StepInfosApp';
 import ProposalListApp from './startup/ProposalListApp';
 import ProposalsUserVotesPageApp from './startup/ProposalsUserVotesPageApp';
-import PhoneProfileApp from './startup/PhoneProfileApp';
-import AccountProfileApp from './startup/AccountProfileApp';
+import PhoneProfileApp from '../js/startup/PhoneProfileApp';
 import IdeasIndexPageApp from './startup/IdeasIndexPageApp';
 import IdeasListApp from './startup/IdeasListApp';
 import IdeaPageApp from './startup/IdeaPageApp';
@@ -47,7 +46,6 @@ ReactOnRails.register({
   EmailNotConfirmedApp,
   NewOpinionApp,
   NewIdeaApp,
-  AccountProfileApp,
   ProjectTrashButtonApp,
   OpinionPageApp,
   CommentSectionApp,

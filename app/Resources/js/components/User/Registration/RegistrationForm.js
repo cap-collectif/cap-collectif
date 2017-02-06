@@ -6,7 +6,6 @@ import UserActions from '../../../actions/UserActions';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import Form from '../../Form/Form';
 import { isEmail } from '../../../services/Validator';
-import type { State } from '../../../stores/AppStore';
 
 export const validate = (values) => {
   const errors = {};
@@ -18,6 +17,9 @@ export const validate = (values) => {
   }
   if (!values.plainPassword || values.plainPassword.length < 8) {
     errors.plainPassword = 'registration.constraints.password.min';
+  }
+  if (values.plainPassword && values.plainPassword.length > 72) {
+    errors.plainPassword = 'registration.constraints.password.max';
   }
   if (!values.charte) {
     errors.charte = 'registration.constraints.charte.check';
@@ -188,7 +190,7 @@ export const RegistrationForm = React.createClass({
 
 });
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state) => {
   return {
     features: state.default.features,
     userTypes: state.default.userTypes,
