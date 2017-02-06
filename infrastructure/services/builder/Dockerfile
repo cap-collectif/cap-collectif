@@ -24,18 +24,17 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install php7.0
-RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
-    echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
-    wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
+RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
+    echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -y -qq \
-        php7.0-cli \
-        php7.0-curl \
-        php7.0-gd \
-        php7.0-imagick \
-        php7.0-intl \
-        php7.0-mysql \
-        php7.0-zip \
+        php7.1-cli \
+        php7.1-curl \
+        php7.1-gd \
+        php7.1-imagick \
+        php7.1-intl \
+        php7.1-mysql \
+        php7.1-zip \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -90,7 +89,7 @@ RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/bin/composer 
     chmod +x /usr/bin/composer && \
     chmod +x /usr/bin/php-cs-fixer
 
-COPY capco.ini /etc/php/7.0/cli/conf.d/capco.ini
+COPY capco.ini /etc/php/7.1/cli/conf.d/capco.ini
 COPY build.sh /usr/bin/build
 
 
