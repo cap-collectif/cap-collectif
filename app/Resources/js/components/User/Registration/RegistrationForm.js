@@ -6,6 +6,7 @@ import UserActions from '../../../actions/UserActions';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import Form from '../../Form/Form';
 import { isEmail } from '../../../services/Validator';
+import type { State } from '../../../stores/AppStore';
 
 export const validate = (values) => {
   const errors = {};
@@ -187,10 +188,10 @@ export const RegistrationForm = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: State) => {
   return {
     features: state.default.features,
-    userTypes: state.user.userTypes,
+    userTypes: state.default.userTypes,
     parameters: state.default.parameters,
   };
 };

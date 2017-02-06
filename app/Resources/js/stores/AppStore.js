@@ -14,7 +14,14 @@ import type { State as proposalState } from '../redux/modules/proposal';
 import type { State as opinionState } from '../redux/modules/opinion';
 
 export type State = {
-  default: Object,
+  default: {
+    districts: Array<Object>,
+    themes: Array<Object>,
+    features: Object,
+    userTypes: Array<Object>,
+    parameters: Object,
+    isLoggedIn: boolean
+  },
   idea: Object,
   proposal: proposalState,
   project: Object,
