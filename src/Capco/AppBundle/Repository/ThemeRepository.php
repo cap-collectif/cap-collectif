@@ -34,14 +34,7 @@ class ThemeRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    /**
-     * @param int  $nbByPage
-     * @param int  $page
-     * @param null $term
-     *
-     * @return Paginator
-     */
-    public function getSearchResultsWithProjectsAndIdeas($nbByPage = 8, $page = 1, $term = null)
+    public function getSearchResultsWithCounters($nbByPage = 8, $page = 1, $term = null)
     {
         if ($page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -54,6 +47,8 @@ class ThemeRepository extends EntityRepository
         $qb->addSelect('c, i')
             ->leftJoin('t.projects', 'c')
             ->leftJoin('t.ideas', 'i')
+            ->leftJoin('t.events', 'events')
+            ->leftJoin('t.posts', 'posts')
             ->addOrderBy('t.position', 'ASC')
         ;
 

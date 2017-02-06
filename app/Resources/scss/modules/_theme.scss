@@ -35,3 +35,29 @@ $THEME
 .theme__status {
     margin-top: 20px;
 }
+
+.theme__counters {
+    height: 44px;
+    margin-bottom: 10px;
+}
+
+.theme__counters__list {
+    padding: 0;
+    -webkit-padding-start: 0;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+
+    &--counter {
+        &:after {
+            content: "•";
+            padding: 0 .1em;
+        }
+        &:last-child:after {
+            content: '';
+            padding: 0;
+        }
+        display: inline;
+    }
+
+
+}

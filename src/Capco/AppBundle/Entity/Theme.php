@@ -569,6 +569,20 @@ class Theme implements IndexableInterface
         return $count;
     }
 
+    public function countEnabledPosts(): int
+    {
+        return $this->posts->map(function (Post $post) {
+            return $post->canDisplay() && $post->getIsPublished();
+        })->count();
+    }
+
+    public function countEnabledEvents(): int
+    {
+        return $this->events->map(function (Event $event) {
+            return $event->getIsEnabled();
+        })->count();
+    }
+
     public function isOpened()
     {
         return $this->status == self::$statuses['opened'];

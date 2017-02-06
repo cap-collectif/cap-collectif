@@ -45,7 +45,7 @@ class ThemeController extends Controller
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('themes.pagination');
 
-        $themes = $em->getRepository('CapcoAppBundle:Theme')->getSearchResultsWithProjectsAndIdeas($pagination, $page, $term);
+        $themes = $em->getRepository('CapcoAppBundle:Theme')->getSearchResultsWithCounters($pagination, $page, $term);
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;

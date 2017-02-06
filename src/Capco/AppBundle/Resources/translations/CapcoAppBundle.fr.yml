@@ -272,8 +272,10 @@ theme:
     description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate.
     text_info: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, perspiciatis, cupiditate. Nesciunt eos nam ullam iste iusto similique officia sit enim excepturi numquam natus, ab eum sint perspiciatis repudiandae dolorem.
     search: Rechercher
-    projects: "]-Inf, 0] 0 projet | {1} 1 projet | ]1,Inf[ %count% projets"
-    ideas: "]-Inf, 0] 0 idée | {1} 1 idée | ]1,Inf[ %count% idées"
+    projects: "]-Inf, 0] | {1} 1&nbspprojet | ]1,Inf[ %count%&nbspprojets"
+    ideas: "]-Inf, 0] | {1} 1&nbspidée | ]1,Inf[ %count%&nbspidées"
+    events: "]-Inf, 0] | {1} 1&nbspévènement | ]1,Inf[ %count%&nbspévènements"
+    posts: "]-Inf, 0] | {1} 1&nbsparticle | ]1,Inf[ %count%&nbsparticles"
     none: Aucun thème
   show:
     projects:

@@ -20,17 +20,40 @@
             <h2 class="theme__title  h3"><a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a></h2>
             {% set nbProjects = theme.countEnabledProjects() %}
             {% set nbIdeas = theme.countEnabledIdeas() %}
-            <p class="excerpt">
-                {% transchoice nbProjects with {'%count%': nbProjects} from 'CapcoAppBundle' %}
-                theme.index.projects
-                {% endtranschoice %}
-                {% if is_feature_enabled('ideas') %}
-                    •
-                    {% transchoice nbIdeas with {'%count%': nbIdeas} from 'CapcoAppBundle' %}
-                        theme.index.ideas
-                    {% endtranschoice %}
+            {% set nbPosts = theme.countEnabledPosts() %}
+            {% set nbEvents = theme.countEnabledEvents() %}
+            <div class="excerpt theme__counters">
+                <ul class="theme__counters__list">
+                {% if nbProjects > 0 %}
+                    <li class="theme__counters__list--counter">
+                        {% transchoice nbProjects with {'%count%': nbProjects} from 'CapcoAppBundle' %}
+                            theme.index.projects
+                        {% endtranschoice %}
+                    </li>
                 {% endif %}
-            </p>
+                {% if nbPosts > 0 %}
+                    <li class="theme__counters__list--counter">
+                        {% transchoice nbPosts with {'%count%': nbPosts} from 'CapcoAppBundle' %}
+                            theme.index.posts
+                        {% endtranschoice %}
+                    </li>
+                {% endif %}
+                {% if nbEvents > 0 %}
+                    <li class="theme__counters__list--counter">
+                        {% transchoice nbEvents with {'%count%': nbEvents} from 'CapcoAppBundle' %}
+                            theme.index.events
+                        {% endtranschoice %}
+                    </li>
+                {% endif %}
+                {% if is_feature_enabled('ideas') and nbIdeas > 0 %}
+                    <li class="theme__counters__list--counter">
+                        {% transchoice nbIdeas with {'%count%': nbIdeas} from 'CapcoAppBundle' %}
+                            theme.index.ideas
+                        {% endtranschoice %}
+                    </li>
+                {% endif %}
+                </ul>
+            </div>
             {% if theme.status is not null %}
                 <p>
                     {% if theme.isOpened %}
