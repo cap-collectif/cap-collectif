@@ -13,7 +13,7 @@ use Liuggio\ExcelBundle\Factory;
 
 class ProjectDownloadResolver
 {
-    protected $collectHeaders = [
+    protected static $collectHeaders = [
         'id',
         'title',
         'votesCountByStepId',
@@ -43,6 +43,8 @@ class ProjectDownloadResolver
     protected $phpexcel;
     protected $headers;
     protected $data;
+    protected $instanceName;
+    protected $withVote;
 
     public function __construct(
         EntityManager $em,
@@ -56,6 +58,7 @@ class ProjectDownloadResolver
         $this->phpexcel = $phpexcel;
         $this->headers = [];
         $this->data = [];
+        $this->instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
     }
 
     public function getQuestionnaireStepHeaders(QuestionnaireStep $step)
@@ -77,19 +80,21 @@ class ProjectDownloadResolver
         return $headers;
     }
 
-    public function getContent(AbstractStep $step): \PHPExcel_Writer_IWriter
+    public function getContent(AbstractStep $step, bool $withVote = false): \PHPExcel_Writer_IWriter
     {
         if (!$step) {
             throw new NotFoundHttpException('Step not found');
         }
 
         if ($step instanceof CollectStep) {
-            if (!in_array('servicePilote', $this->collectHeaders, true)
-                && (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
-                    || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod')
+            $this->withVote = $withVote;
+
+            if (
+                ($this->instanceName === 'rennes' || $this->instanceName === 'rennespreprod')
+                && !in_array('servicePilote', self::$collectHeaders, true)
             ) {
                 array_push(
-                    $this->collectHeaders,
+                    self::$collectHeaders,
                     'servicePilote',
                     'domaniality',
                     'compatibility',
@@ -101,7 +106,7 @@ class ProjectDownloadResolver
                     'proposedAnswer'
                 );
             }
-            $this->headers = $this->collectHeaders;
+            $this->headers = self::$collectHeaders;
             $data = $this->getCollectStepData($step);
         } elseif ($step instanceof QuestionnaireStep) {
             $this->headers = $this->getQuestionnaireStepHeaders($step);
@@ -185,7 +190,9 @@ class ProjectDownloadResolver
         foreach ($proposals as $proposal) {
             if ($proposal['enabled']) {
                 $this->addItemToData($this->getProposalItem($proposal));
-                $this->getProposalVotesData($proposal['selectionVotes'], $proposal);
+                if ($this->withVote) {
+                    $this->getProposalVotesData($proposal['selectionVotes'], $proposal);
+                }
             }
         }
     }
@@ -254,9 +261,7 @@ class ProjectDownloadResolver
             'answer' => $proposal['answer'] ? $this->getProposalAnswer($proposal['answer']) : '',
         ];
 
-        if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
-            || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod'
-        ) {
+        if ($this->instanceName === 'rennes' || $this->instanceName === 'rennespreprod') {
             $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
             $item['domaniality'] = $proposal['domaniality'] ? $this->formatText(html_entity_decode($proposal['domaniality'])) : '';
             $item['compatibility'] = $proposal['compatibility'] ? $this->formatText(html_entity_decode($proposal['compatibility'])) : '';
@@ -283,6 +288,7 @@ class ProjectDownloadResolver
         $item = [
             'id' => $vote['id'],
             'title' => $proposal['title'],
+            'votesCountByStepId' => '',
             'content_type' => $this->translator->trans(
                 'project_download.values.content_type.vote',
                 [],
@@ -307,9 +313,7 @@ class ProjectDownloadResolver
             'answer' => $na,
         ];
 
-        if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes'
-            || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod'
-        ) {
+        if ($this->instanceName === 'rennes' || $this->instanceName === 'rennespreprod') {
             $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
             $item['domaniality'] = $proposal['domaniality'] ? $this->formatText(html_entity_decode($proposal['domaniality'])) : '';
             $item['compatibility'] = $proposal['compatibility'] ? $this->formatText(html_entity_decode($proposal['compatibility'])) : '';
@@ -348,11 +352,6 @@ class ProjectDownloadResolver
         return $item;
     }
 
-    private function calculateScore($ok, $mitigated, $nok)
-    {
-        return $ok - $nok;
-    }
-
     private function getResponseValue(array $response)
     {
         $originalValue = $response['value'];
@@ -366,20 +365,6 @@ class ProjectDownloadResolver
         }
 
         return $originalValue;
-    }
-
-    private function getOpinionContent(array $opinion)
-    {
-        $body = $this->formatText(html_entity_decode($opinion['body']));
-        if (count($opinion['appendices']) > 0) {
-            $body .= "\n".$this->translator->trans('project_download.values.appendices.title', [], 'CapcoAppBundle');
-            foreach ($opinion['appendices'] as $app) {
-                $body .= "\n".$app['appendixType']['title'].' :';
-                $body .= "\n".$this->formatText($app['body']);
-            }
-        }
-
-        return $body;
     }
 
     private function getProposalContent(array $proposal)
