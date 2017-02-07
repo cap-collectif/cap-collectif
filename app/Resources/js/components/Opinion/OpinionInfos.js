@@ -1,13 +1,14 @@
-import React from 'react';
+// @flow
+import React, { PropTypes } from 'react';
 import moment from 'moment';
 import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
 import UserLink from '../User/UserLink';
 
 const OpinionInfos = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
-    rankingThreshold: React.PropTypes.number,
-    opinionTerm: React.PropTypes.number,
+    opinion: PropTypes.object.isRequired,
+    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired,
+    opinionTerm: PropTypes.number,
   },
   mixins: [IntlMixin],
 
@@ -71,7 +72,7 @@ const OpinionInfos = React.createClass({
       rankingThreshold,
     } = this.props;
     const opinion = this.props.opinion;
-    if (rankingThreshold !== null && opinion.ranking !== null && opinion.ranking <= rankingThreshold) {
+    if (rankingThreshold && rankingThreshold !== null && opinion.ranking !== null && opinion.ranking <= rankingThreshold) {
       return (
         <span className="opinion__label opinion__label--green">
           <i className="cap cap-trophy"></i>

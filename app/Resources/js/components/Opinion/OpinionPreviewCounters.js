@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import { COMMENT_SYSTEM_NONE } from '../../constants/ArgumentConstants';

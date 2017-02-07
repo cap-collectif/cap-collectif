@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
@@ -7,6 +8,7 @@ import OpinionVersionForm from './OpinionVersionForm';
 import OpinionReportButton from './OpinionReportButton';
 import OpinionDelete from './Delete/OpinionDelete';
 import OpinionEditButton from './OpinionEditButton';
+import type { State } from '../../types';
 
 const OpinionButtons = React.createClass({
   propTypes: {
@@ -85,11 +87,9 @@ const OpinionButtons = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.default.features,
-    user: state.user.user,
-  };
-};
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
+  user: state.user.user,
+});
 
 export default connect(mapStateToProps)(OpinionButtons);

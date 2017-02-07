@@ -4,6 +4,12 @@ import type { State as ProposalState, ProposalAction } from './redux/modules/pro
 import type { State as OpinionState, OpinionAction } from './redux/modules/opinion';
 import type { State as UserState, UserAction } from './redux/modules/user';
 
+export type Uuid = string;
+export type VoteValue = -1 | 0 | 1;
+export type Opinion = { id: Uuid };
+export type Version = { id: Uuid, parent: Object };
+export type OpinionAndVersion = Opinion | Version;
+
 export type Action =
     ProposalAction
   | OpinionAction

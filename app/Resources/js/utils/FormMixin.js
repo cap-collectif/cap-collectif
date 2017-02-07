@@ -24,8 +24,6 @@ const FormMixin = { // This will be easy to use as an higher-order Component
 
       return errors.length === 0;
     }
-
-    throw new Error(`Unkown reference to ${ref} in formValidationRules`);
   },
 
   getGroupStyle(field) {
