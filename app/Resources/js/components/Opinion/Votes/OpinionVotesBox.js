@@ -7,7 +7,6 @@ import { VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH } from '../../../constants/VoteC
 import VotePiechart from '../../Utils/VotePiechart';
 import OpinionVotesBar from './OpinionVotesBar';
 import OpinionVotesButtons from './OpinionVotesButtons';
-import type { State, OpinionAndVersion } from '../../../types';
 
 const OpinionVotesBox = React.createClass({
   propTypes: {
@@ -78,10 +77,10 @@ const OpinionVotesBox = React.createClass({
 
 });
 
-const mapStateToProps = (state: State, props: { opinion: OpinionAndVersion }) => ({
+const mapStateToProps = ({ opinion: { opinionsById, versionsById } }, { opinion }) => ({
   opinion: {
-    ...props.opinion,
-    ...(Object.keys(state.opinion.opinionsById).length ? state.opinion.opinionsById[props.opinion.id] : state.opinion.versionsById[props.opinion.id]),
+    ...opinion,
+    ...(Object.keys(opinionsById).length ? opinionsById[opinion.id] : versionsById[opinion.id]),
   },
 });
 

@@ -1,4 +1,3 @@
-// @flow
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -17,7 +16,7 @@ const OpinionVersionForm = React.createClass({
     version: PropTypes.object,
     mode: PropTypes.string,
     className: PropTypes.string,
-    style: PropTypes.object.isRequired,
+    style: PropTypes.object,
     isContribuable: PropTypes.bool,
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
@@ -54,7 +53,6 @@ const OpinionVersionForm = React.createClass({
       },
       showModal: false,
       isSubmitting: false,
-      submitted: false,
     };
   },
 
@@ -125,19 +123,17 @@ const OpinionVersionForm = React.createClass({
         comment: this.state.form.comment,
       };
 
-      if (version) {
-        OpinionActions
-          .updateVersion(opinionId, version.id, data)
-          .then(() => {
-            this.setState(this.getInitialState());
-            this.close();
-            location.reload(); // TODO when enough time
-            return true;
-          })
-          .catch(() => {
-            this.setState({ isSubmitting: false, submitted: false });
-          });
-      }
+      OpinionActions
+        .updateVersion(opinionId, version.id, data)
+        .then(() => {
+          this.setState(this.getInitialState());
+          this.close();
+          location.reload(); // TODO when enough time
+          return true;
+        })
+        .catch(() => {
+          this.setState({ isSubmitting: false, submitted: false });
+        });
     });
   },
 
@@ -164,8 +160,6 @@ const OpinionVersionForm = React.createClass({
       notBlank: { message: 'opinion.version.title_error' },
       min: { value: 2, message: 'opinion.version.title_error' },
     },
-    body: undefined,
-    confirm: undefined,
   },
 
   renderFormErrors(field) {
@@ -227,15 +221,15 @@ const OpinionVersionForm = React.createClass({
 
               { mode === 'edit'
                 ? <div className="alert alert-warning edit-confirm-alert">
-                  <Input
-                    name="confirm"
-                    type="checkbox"
-                    groupClassName={this.getGroupStyle('confirm')}
-                    label={this.getIntlMessage('opinion.version.confirm')}
-                    errors={this.renderFormErrors('confirm')}
-                    checkedLink={this.linkState('form.confirm')}
-                  />
-                </div>
+                    <Input
+                      name="confirm"
+                      type="checkbox"
+                      groupClassName={this.getGroupStyle('confirm')}
+                      label={this.getIntlMessage('opinion.version.confirm')}
+                      errors={this.renderFormErrors('confirm')}
+                      checkedLink={this.linkState('form.confirm')}
+                    />
+                  </div>
                 : null
               }
 

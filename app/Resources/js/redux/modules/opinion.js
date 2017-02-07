@@ -4,8 +4,11 @@ import { call, put } from 'redux-saga/effects';
 import { UPDATE_OPINION_SUCCESS, UPDATE_OPINION_FAILURE } from '../../constants/OpinionConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../../services/Fetcher';
-import type { Version, Opinion, VoteValue, Uuid, Dispatch, Action } from '../../types';
+import type { Dispatch, Action } from '../../types';
 
+export type VoteValue = -1 | 0 | 1;
+type Uuid = string;
+type Opinion = { id: Uuid };
 type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
 export type OpinionAction =
@@ -17,12 +20,7 @@ export type OpinionAction =
   | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: any }
 ;
 type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: Uuid, versionId: ?Uuid };
-type ContributionMap = {[id: Uuid]: {
-  id: string,
-  votes: OpinionVotes,
-  votesCount: number,
-  user_vote: ?VoteValue
-}};
+type ContributionMap = {[id: Uuid]: {id: string, votes: OpinionVotes, votesCount: number}};
 export type State = {
   currentOpinionId: ?Uuid,
   currentVersionId: ?Uuid,
@@ -70,7 +68,7 @@ export function* saga(): Generator<*, *, *> {
   yield* takeEvery(OPINION_VOTES_FETCH_REQUESTED, fetchAllOpinionVotes);
 }
 
-export const fetchOpinionVotes = (opinionId: Uuid, versionId: ?Uuid): FetchOpinionVotesAction => ({
+export const fetchOpinionVotes = (opinionId: Uuid, versionId: Uuid): FetchOpinionVotesAction => ({
   type: OPINION_VOTES_FETCH_REQUESTED,
   opinionId,
   versionId,
@@ -171,7 +169,7 @@ const updateOpinion = (state: State, opinion: Opinion): State => ({
   opinionsById: { ...state.opinionsById, [opinion.id]: opinion },
 });
 
-const updateVersion = (state: State, version: Version): State => ({
+const updateVersion = (state: State, version: Opinion): State => ({
   ...state,
   versionsById: { ...state.versionsById, [version.id]: version },
 });

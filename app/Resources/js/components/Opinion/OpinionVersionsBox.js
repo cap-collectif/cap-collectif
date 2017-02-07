@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
@@ -30,7 +29,7 @@ const OpinionVersionsBox = React.createClass({
     this.loadVersionsFromServer();
   },
 
-  componentDidUpdate(prevProps: Object, prevState: Object) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.state.filter !== prevState.filter) {
       this.loadVersionsFromServer();
     }

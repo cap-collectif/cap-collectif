@@ -1,12 +1,11 @@
-// @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import AnswerBody from '../Answer/AnswerBody';
 
 const OpinionAnswer = React.createClass({
   propTypes: {
-    answer: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.object]).isRequired,
+    answer: React.PropTypes.object,
   },
   mixins: [IntlMixin],
 

@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';

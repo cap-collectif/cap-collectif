@@ -4,7 +4,6 @@ import { IntlMixin } from 'react-intl';
 import { ButtonToolbar } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import OpinionVotesButton from './OpinionVotesButton';
-import type { State } from '../../../types';
 
 const OpinionVotesButtons = React.createClass({
   propTypes: {
@@ -52,7 +51,7 @@ const OpinionVotesButtons = React.createClass({
 
 });
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = state => ({
   user: state.user.user,
 });
 

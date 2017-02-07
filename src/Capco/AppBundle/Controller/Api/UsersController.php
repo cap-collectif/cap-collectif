@@ -216,7 +216,7 @@ class UsersController extends FOSRestController
         if ($user->isEmailConfirmed() && !$user->getNewEmailToConfirm()) {
             throw new BadRequestHttpException('Already confirmed.');
         }
-        
+
         // security against mass click email resend
         if ($user->getEmailConfirmationSentAt() > (new \DateTime())->modify('- 1 minutes')) {
             throw new BadRequestHttpException('Email already sent less than a minute ago.');

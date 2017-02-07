@@ -5,7 +5,6 @@ import { IntlMixin, FormattedMessage } from 'react-intl';
 import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
 import OpinionVotesModal from './OpinionVotesModal';
-import type { State, OpinionAndVersion } from '../../../types';
 
 const OpinionVotesBar = React.createClass({
   propTypes: {
@@ -46,10 +45,10 @@ const OpinionVotesBar = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State, props: { opinion: OpinionAndVersion }) => ({
+const mapStateToProps = ({ opinion: { opinionsById, versionsById } }, { opinion }) => ({
   opinion: {
-    ...props.opinion,
-    ...(Object.keys(state.opinion.opinionsById).length ? state.opinion.opinionsById[props.opinion.id] : state.opinion.versionsById[props.opinion.id]),
+    ...opinion,
+    ...(Object.keys(opinionsById).length ? opinionsById[opinion.id] : versionsById[opinion.id]),
   },
 });
 

@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import OpinionAppendix from './OpinionAppendix';

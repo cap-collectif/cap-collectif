@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import { Button, Panel } from 'react-bootstrap';
