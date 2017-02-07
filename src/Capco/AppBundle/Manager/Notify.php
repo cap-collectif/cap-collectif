@@ -187,7 +187,7 @@ class Notify implements MailerInterface
         $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
 
         $this->sendEmail($user->getNewEmailToConfirm(), $fromAddress, 'Cap Collectif', $emailToNewMail, '['.$sitename.'] Veuillez confirmer votre nouvelle adresse électronique');
-        $this->sendEmail($user->getEmail(), $fromAddress, 'Cap Collectif', $emailToOldMail, '['.$sitename.'] L\'adresse électronique de '. $user->getUsername() . ' a été changée');
+        $this->sendEmail($user->getEmail(), $fromAddress, 'Cap Collectif', $emailToOldMail, '['.$sitename.'] L\'adresse électronique de '.$user->getUsername().' a été changée');
     }
 
     public function sendResettingEmailMessage(UserInterface $user)

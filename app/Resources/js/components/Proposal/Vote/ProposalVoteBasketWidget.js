@@ -8,7 +8,7 @@ import Input from '../../Form/Input';
 import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import { getSpentPercentage } from '../../../services/ProposalVotesHelper';
 
-const ProposalVoteBasketWidget = React.createClass({
+export const ProposalVoteBasketWidget = React.createClass({
   propTypes: {
     projectId: PropTypes.string.isRequired,
     votableSteps: PropTypes.array.isRequired,
@@ -68,9 +68,12 @@ const ProposalVoteBasketWidget = React.createClass({
                 >
                 </i>
               </Navbar.Toggle>
-              <li className="navbar-text widget__progress-bar hidden visible-xs">
-                <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%" />
-              </li>
+              {
+                showProgressBar &&
+                <li className="navbar-text widget__progress-bar hidden visible-xs">
+                  <ProgressBar bsStyle="success" now={percentage} label="%(percent)s%" />
+                </li>
+              }
             </Navbar.Header>
         }
         <Navbar.Collapse>
@@ -125,7 +128,7 @@ const ProposalVoteBasketWidget = React.createClass({
                     {this.getIntlMessage('project.votes.widget.votes_spent')}
                   </p>
                   <span className="widget__counter__value">
-                    { userVotesCountByStepId[selectedStep.id]}
+                    {userVotesCountByStepId[selectedStep.id]}
                   </span>
                 </li>
               </Nav>
@@ -187,6 +190,19 @@ const ProposalVoteBasketWidget = React.createClass({
                       </span>
                     </li>
                 }
+              </Nav>
+          }
+          {
+            selectedStep.voteType === VOTE_TYPE_SIMPLE && !selectedStep.votesLimit &&
+              <Nav>
+                <li className="navbar-text widget__counter">
+                  <p className="widget__counter__label">
+                    {this.getIntlMessage('project.votes.widget.votes')}
+                  </p>
+                  <span className="widget__counter__value">
+                   {userVotesCountByStepId[selectedStep.id]}
+                  </span>
+                </li>
               </Nav>
           }
           <Button
