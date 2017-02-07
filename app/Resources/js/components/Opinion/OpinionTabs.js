@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage } from 'react-intl';
@@ -51,7 +52,7 @@ const OpinionTabs = React.createClass({
     });
   },
 
-  getHashKey(hash) {
+  getHashKey(hash: string) {
     let key = null;
     if (hash.indexOf('arg') !== -1) {
       key = 'arguments';

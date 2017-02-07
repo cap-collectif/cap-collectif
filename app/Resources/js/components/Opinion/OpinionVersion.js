@@ -1,4 +1,5 @@
-import React from 'react';
+// @flow
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
 
@@ -7,8 +8,8 @@ import VotePiechart from '../Utils/VotePiechart';
 
 const OpinionVersion = React.createClass({
   propTypes: {
-    version: React.PropTypes.object.isRequired,
-    rankingThreshold: React.PropTypes.number,
+    version: PropTypes.object.isRequired,
+    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired,
   },
 
   render() {

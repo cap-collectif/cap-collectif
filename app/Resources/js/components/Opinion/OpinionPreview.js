@@ -1,4 +1,5 @@
-import React from 'react';
+// @flow
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import UserAvatar from '../User/UserAvatar';
 import OpinionInfos from './OpinionInfos';
@@ -7,10 +8,10 @@ import OpinionPreviewCounters from './OpinionPreviewCounters';
 
 const OpinionPreview = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
-    rankingThreshold: React.PropTypes.number,
-    link: React.PropTypes.bool,
-    showTypeLabel: React.PropTypes.bool,
+    opinion: PropTypes.object.isRequired,
+    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]),
+    link: PropTypes.bool,
+    showTypeLabel: PropTypes.bool,
   },
   mixins: [IntlMixin],
 
@@ -18,7 +19,6 @@ const OpinionPreview = React.createClass({
     return {
       link: true,
       showTypeLabel: false,
-      rankingThreshold: null,
     };
   },
 

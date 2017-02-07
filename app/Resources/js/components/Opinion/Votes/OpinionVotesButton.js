@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
-import type { VoteValue } from '../../../redux/modules/opinion';
 import { deleteVoteVersion, deleteVoteOpinion, voteOpinion, voteVersion } from '../../../redux/modules/opinion';
+import type { VoteValue, OpinionAndVersion, State } from '../../../types';
 
 const valueToObject = (value: VoteValue): Object => {
   if (value === -1) {
@@ -135,17 +135,13 @@ export const OpinionVotesButton = React.createClass({
 
 });
 
-const mapStateToProps = ({
-  default: { features },
-  user: { user },
-  opinion: { versionsById, opinionsById },
-}, { opinion, value }) => {
+const mapStateToProps = (state: State, { opinion, value }: { value: VoteValue, opinion: OpinionAndVersion}) => {
   const vote = opinion.parent
-    ? versionsById[opinion.id].user_vote
-    : opinionsById[opinion.id].user_vote;
+    ? state.opinion.versionsById[opinion.id].user_vote
+    : state.opinion.opinionsById[opinion.id].user_vote;
   return {
-    features,
-    user,
+    features: state.default.features,
+    user: state.user.user,
     active: vote !== null && vote === value,
   };
 };

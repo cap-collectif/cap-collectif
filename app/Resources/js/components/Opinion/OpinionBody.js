@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { Well } from 'react-bootstrap';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';

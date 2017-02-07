@@ -32,7 +32,7 @@ const OpinionSource = React.createClass({
                 className="pull-left"
               />
               <div className="opinion__data">
-                <OpinionInfos opinion={source} />
+                <OpinionInfos rankingThreshold={null} opinion={source} />
                 <OpinionSourceTitle source={source} />
                 <OpinionSourceContent source={source} />
                 <OpinionSourceFooter source={source} />

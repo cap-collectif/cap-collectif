@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import OpinionPreview from './OpinionPreview';
@@ -10,7 +11,7 @@ import OpinionVotesBox from './Votes/OpinionVotesBox';
 const OpinionBox = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
-    rankingThreshold: PropTypes.number,
+    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired,
     opinionTerm: PropTypes.number,
   },
   mixins: [IntlMixin],

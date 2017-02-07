@@ -22,7 +22,7 @@ const OpinionLink = React.createClass({
       <li className={classes} >
         <Row>
           <Col xs={12}>
-            <OpinionPreview opinion={link} showTypeLabel />
+            <OpinionPreview rankingThreshold={null} opinion={link} showTypeLabel />
           </Col>
         </Row>
       </li>

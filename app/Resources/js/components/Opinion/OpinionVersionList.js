@@ -1,11 +1,12 @@
-import React from 'react';
+// @flow
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import OpinionVersion from './OpinionVersion';
 
 const OpinionVersionList = React.createClass({
   propTypes: {
-    versions: React.PropTypes.array.isRequired,
-    rankingThreshold: React.PropTypes.number,
+    versions: PropTypes.array.isRequired,
+    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired,
   },
   mixins: [IntlMixin],
 

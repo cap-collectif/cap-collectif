@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Alert } from 'react-bootstrap';
+import { Alert, Button, ButtonToolbar } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
 import { submitAccountForm as onSubmit, resendConfirmation, cancelEmailChange } from '../../../redux/modules/user';
 import { isEmail } from '../../../services/Validator';
