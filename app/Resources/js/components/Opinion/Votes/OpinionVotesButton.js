@@ -136,7 +136,8 @@ export const OpinionVotesButton = React.createClass({
 });
 
 const mapStateToProps = ({
-  default: { user, features },
+  default: { features },
+  user: { user },
   opinion: { versionsById, opinionsById },
 }, { opinion, value }) => {
   const vote = opinion.parent
