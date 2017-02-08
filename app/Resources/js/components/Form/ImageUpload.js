@@ -166,9 +166,9 @@ const ImageUpload = React.createClass({
                 {
                   this.state.preview &&
                     <img alt="" role="presentation" src={this.state.preview} />
-                }
-              </div>
-              {
+              }
+            </div>
+            {
               (this.state.preview || preview) &&
                 <Input
                   type="checkbox"
