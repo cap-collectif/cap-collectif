@@ -54,6 +54,8 @@
 {% set btnText = capco_site_color_value('color.btn.text') %}
 {% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
 
+{% set jumbontronMargin = capco_site_parameter_value('homepage.jumbotron.margin') %}
+
 {# Headers (else than homepage) #}
 
 {% set headerBg = capco_site_color_value('color.header.bg') %}
@@ -414,7 +416,7 @@
         }
 
         .header-img {
-            padding: 0;
+            padding: {{ jumbontronMargin | raw }}px 0 {{ jumbontronMargin | raw }}px;
             margin: 0;
             position: relative;
             top: 0;
@@ -432,17 +434,26 @@
             .jumbotron--bg-1 {
                 background-image: url({% path capco_site_image_media('image.header'), 'header_sm' %});
             }
+            .header-img {
+                padding: {{ jumbontronMargin | raw }}px 0 {{ jumbontronMargin | raw }}px;
+            }
         }
 
         @media (min-width: 992px ) {
             .jumbotron--bg-1 {
                 background-image: url({% path capco_site_image_media('image.header'), 'header_md' %});
             }
+            .header-img {
+                padding: {{ jumbontronMargin | raw }}px 0 {{ jumbontronMargin | raw }}px;
+            }
         }
 
         @media (min-width: 1200px ) {
             .jumbotron--bg-1 {
                 background-image: url({% path capco_site_image_media('image.header'), 'header' %});
+            }
+            .header-img {
+                padding: {{ jumbontronMargin | raw }}px 0 {{ jumbontronMargin | raw }}px;
             }
         }
 

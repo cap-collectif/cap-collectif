@@ -25,6 +25,7 @@ class SiteParameter
     const TYPE_URL = 6;
     const TYPE_TEL_NB = 7;
     const TYPE_BOOLEAN = 8;
+    const TYPE_SELECT = 9;
 
     public static $types = [
         'simple_text' => self::TYPE_SIMPLE_TEXT,
@@ -36,6 +37,7 @@ class SiteParameter
         'url' => self::TYPE_URL,
         'tel' => self::TYPE_TEL_NB,
         'boolean' => self::TYPE_BOOLEAN,
+        'select' => self::TYPE_SELECT,
     ];
 
     /**

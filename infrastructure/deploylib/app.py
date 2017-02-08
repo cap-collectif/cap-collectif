@@ -34,3 +34,8 @@ def ssh(user='capco'):
 def clear_cache(environment='dev'):
     "Clear cache"
     env.service_command('rm -rf var/cache/' + environment, 'application', env.www_app, 'root')
+
+@task
+def cmd(command='', environment='dev'):
+    "Executing Symfony command"
+    env.service_command('php -d memory_limit=-1 bin/console ' + command + ' --no-interaction --env=' + environment, 'application', env.www_app, 'root')

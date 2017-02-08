@@ -86,6 +86,19 @@ class SiteParameterAdmin extends Admin
                 'required' => false,
                 'choices' => ['1' => 'Activé', '0' => 'Désactivé'],
             ]);
+        } elseif ($subject->getKeyname() === 'homepage.jumbotron.margin' && $subject->getType() === $types['select']) {
+            $formMapper->add('value', ChoiceType::class, [
+                'label' => 'admin.fields.site_parameter.value',
+                'required' => false,
+                'data' => 100,
+                'choices' => [
+                    0 => 'Pas de marge (0px)',
+                    50 => 'Petit marge (50px)',
+                    100 => 'Marge par défaut (100px)',
+                    150 => 'Marge importante (150px)',
+                    200 => 'Marge énorme (200px)',
+                ],
+            ]);
         } else {
             $formMapper->add('value', null, [
                 'label' => 'admin.fields.site_parameter.value',

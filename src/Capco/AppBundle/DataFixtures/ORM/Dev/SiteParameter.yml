@@ -37,6 +37,11 @@ Capco\AppBundle\Entity\SiteParameter:
         value: Ce site participatif a été réalisé grâce à la plateforme innovante de participation <a alt="Cap Collectif" href="http://www.cap-collectif.com">Cap Collectif</a>, selon les principes de la <a href="http://fr.wikipedia.org/wiki/Gouvernement_ouvert" alt="Wikipédia - Démocratie ouverte">démocratie ouverte</a>.
         position: 210
         type: 1
+    SiteParameter99:
+        keyname: homepage.jumbotron.margin
+        category: pages.homepage
+        value: 100
+        type: 9
 
     SiteParameter9:
         keyname: projects.jumbotron.title

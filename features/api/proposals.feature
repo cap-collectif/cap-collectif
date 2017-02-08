@@ -887,11 +887,11 @@ Feature: Proposal Restful Api
     Then the JSON response status code should be 204
 
   @database
-  Scenario: logged in API client wants to remove a proposal and ensure that its selections was deleted
+  Scenario: logged in API client wants to remove a proposal and ensure that its proposal was disabled
     Given I am logged in to api as user
     When I send a DELETE request to "api/proposal_forms/4/proposals/12"
     Then the JSON response status code should be 204
-    And proposal with id 12 should be soft deleted
+    And proposal with id 12 should be disable
 
   # Report
 

@@ -572,15 +572,13 @@ EOF;
     }
 
     /**
-     * @Then proposal with id :id should be soft deleted
+     * @Then proposal with id :id should be disable
      */
     public function proposalWithIdShouldBeSoftDeleted(int $id)
     {
         $em = $this->getEntityManager();
-
-        $em->getFilters()->disable('softdeleted');
         $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($id);
 
-        PHPUnit::assertInstanceOf(\DateTime::class, $proposal->getDeletedAt());
+        PHPUnit::assertFalse($proposal->isEnabled());
     }
 }
