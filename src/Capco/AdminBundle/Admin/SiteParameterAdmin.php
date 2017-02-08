@@ -92,10 +92,10 @@ class SiteParameterAdmin extends Admin
                 'required' => false,
                 'choices' => [
                     0 => 'Pas de marge (0px)',
-                    50 => 'Petites marges (50px)',
-                    100 => 'Marges par défaut (100px)',
-                    150 => 'Grandes marges (150px)',
-                    200 => 'Marge importantes (200px)',
+                    50 => 'Petit marge (50px)',
+                    100 => 'Marge par défaut (100px)',
+                    150 => 'Marge importante (150px)',
+                    200 => 'Marge énorme (200px)',
                 ],
             ]);
         } else {

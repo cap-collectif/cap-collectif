@@ -118,7 +118,7 @@ homepage:
     button_link: Lien du bouton principal
     darken: Assombrissement de l'image de fond
     title: Titre/objet du site
-    margin: Marges
+    margin: Marges de la section
 
 ideas:
   content:

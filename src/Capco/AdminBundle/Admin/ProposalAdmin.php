@@ -472,13 +472,4 @@ class ProposalAdmin extends Admin
     {
         $collection->remove('create');
     }
-
-    public function createQuery($context = 'list')
-    {
-        // Remove APC Cache for soft delete
-        $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
-        $em->getConfiguration()->getResultCacheImpl()->deleteAll();
-
-        return parent::createQuery($context);
-    }
 }
