@@ -14,7 +14,7 @@ const status = (response: Object): Object | Error => {
   });
 };
 
-export const json = (response: Object) => response.json();
+export const json = (response: ?Object) => response ? response.json() : {};
 
 const createHeaders = (): {[string]: string} => {
   const headers : {[string]: string} = {
@@ -72,7 +72,7 @@ class Fetcher {
           beforeSend: addAuthorization,
           body,
         })
-        .then(status);
+          .then(status);
       })
     ;
   }
@@ -106,7 +106,7 @@ class Fetcher {
     ;
   }
 
-  put(uri: string, body: Object): Promise<*> {
+  put(uri: string, body: Object) {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {

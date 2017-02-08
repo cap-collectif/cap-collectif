@@ -36,11 +36,8 @@ type CloseConfirmPasswordModalAction = { type: 'CLOSE_CONFIRM_PASSWORD_MODAL' };
 export type UserAction =
     StartSubmittingAccountFormAction
   | ConfirmPasswordAction
-  | StopSubmittingAccountFormAction
-  | CancelEmailChangeSucceedAction
   | CloseConfirmPasswordModalAction
   | UserRequestEmailChangeAction
-  | SubmitConfirmPasswordAction
 ;
 
 const initialState = {
@@ -52,14 +49,13 @@ const initialState = {
 
 export const confirmPassword = (): ConfirmPasswordAction => ({ type: 'SHOW_CONFIRM_PASSWORD_MODAL' });
 export const closeConfirmPasswordModal = (): CloseConfirmPasswordModalAction => ({ type: 'CLOSE_CONFIRM_PASSWORD_MODAL' });
-export const startSubmittingAccountForm = (): StartSubmittingAccountFormAction => ({ type: 'SUBMIT_ACCOUNT_FORM' });
-export const stopSubmittingAccountForm = (): StopSubmittingAccountFormAction => ({ type: 'STOP_SUBMIT_ACCOUNT_FORM' });
-export const userRequestEmailChange = (email: string): UserRequestEmailChangeAction => ({ type: 'USER_REQUEST_EMAIL_CHANGE', email });
-export const cancelEmailChangeSucceed = (): CancelEmailChangeSucceedAction => ({ type: 'CANCEL_EMAIL_CHANGE' });
-export const submitConfirmPasswordFormSucceed = (password: string): SubmitConfirmPasswordAction => ({ type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password });
+const startSubmittingAccountForm = (): StartSubmittingAccountFormAction => ({ type: 'SUBMIT_ACCOUNT_FORM' });
+const stopSubmittingAccountForm = (): StopSubmittingAccountFormAction => ({ type: 'STOP_SUBMIT_ACCOUNT_FORM' });
+const userRequestEmailChange = (email: string): UserRequestEmailChangeAction => ({ type: 'USER_REQUEST_EMAIL_CHANGE', email });
+const cancelEmailChangeSucceed = (): CancelEmailChangeSucceedAction => ({ type: 'CANCEL_EMAIL_CHANGE' });
 
 export const submitConfirmPasswordForm = ({ password }: { password: string }, dispatch: Dispatch): void => {
-  dispatch(submitConfirmPasswordFormSucceed(password));
+  dispatch({ type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password });
   dispatch(closeConfirmPasswordModal());
   setTimeout((): void => {
     dispatch(submit('account'));
@@ -75,14 +71,13 @@ export const cancelEmailChange = (dispatch: Dispatch, previousEmail: string): vo
     });
 };
 
-const sendEmail = () => {
-  FluxDispatcher.dispatch({
-    actionType: UPDATE_ALERT,
-    alert: { bsStyle: 'success', content: 'user.confirm.sent' },
-  });
-};
-
 export const resendConfirmation = (): void => {
+  const sendEmail = () => {
+    FluxDispatcher.dispatch({
+      actionType: UPDATE_ALERT,
+      alert: { bsStyle: 'success', content: 'user.confirm.sent' },
+    });
+  };
   Fetcher
     .post('/account/resend_confirmation_email')
     .then(sendEmail)
@@ -97,17 +92,12 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*
       dispatch(stopSubmittingAccountForm());
       dispatch(userRequestEmailChange(values.email));
     })
-    .catch(({ response: { message, errors } }: { response: { message: string, errors: Array<Object>}}): void => {
+    .catch(({ response }): void => {
       dispatch(stopSubmittingAccountForm());
-      if (message === 'You must specify your password to update your email.') {
+      if (response.message === 'You must specify your password to update your email.') {
         throw new SubmissionError({ _error: 'user.confirm.wrong_password' });
       }
-      if (message === 'Validation Failed.') {
-        if (errors.children && errors.children.email && errors.children.email.errors && Array.isArray(errors.children.email.errors)) {
-          throw new SubmissionError({ _error: errors.children.email.errors[0] });
-        }
-      }
-      throw new SubmissionError({ _error: 'global.error' });
+      throw new SubmissionError({ _error: 'user.confirm.wrong_password' });
     });
 };
 
@@ -116,7 +106,7 @@ export const reducer = (state: State = initialState, action: Action): State => {
     case '@@INIT':
       return { ...initialState, ...state };
     case 'CANCEL_EMAIL_CHANGE':
-      return { ...state, user: { ...state.user, newEmailToConfirm: null }, confirmationEmailResent: false };
+      return { ...state, user: { ...state.user, newEmailToConfirm: null, confirmationEmailResent: false } };
     case 'SUBMIT_ACCOUNT_FORM':
       return { ...state, isSubmittingAccountForm: true };
     case 'STOP_SUBMIT_ACCOUNT_FORM':
