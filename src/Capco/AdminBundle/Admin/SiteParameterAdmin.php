@@ -90,7 +90,6 @@ class SiteParameterAdmin extends Admin
             $formMapper->add('value', ChoiceType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'data' => 100,
                 'choices' => [
                     0 => 'Pas de marge (0px)',
                     50 => 'Petit marge (50px)',
