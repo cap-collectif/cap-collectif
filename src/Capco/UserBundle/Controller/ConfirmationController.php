@@ -30,7 +30,11 @@ class ConfirmationController extends Controller
         $user->setExpiresAt(null);
         $user->setLastLogin(new \DateTime());
 
-        $hasRepublishedContributions = $this->get('capco.contribution.manager')->republishContributions($user);
+        if (EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennes' || EnvHelper::get('SYMFONY_INSTANCE_NAME') === 'rennespreprod') {
+            $hasRepublishedContributions = false;
+        } else {
+            $hasRepublishedContributions = $this->get('capco.contribution.manager')->republishContributions($user);
+        }
 
         // if user has been created via API he has no password yet.
         // That's why we create a reset password request to let him chose a password

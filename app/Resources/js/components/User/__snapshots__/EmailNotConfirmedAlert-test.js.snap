@@ -15,7 +15,7 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
       }>
       <FormattedHTMLMessage
         link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
-        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 72 heures pour conserver l\'accès à votre compte. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>"
+        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 12 heures pour conserver l\'accès à votre compte. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>"
         tagName="span" />
     </div>
     <div
@@ -75,7 +75,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
       }>
       <FormattedHTMLMessage
         link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
-        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 72 heures pour conserver l\'accès à votre compte. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>"
+        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 12 heures pour conserver l\'accès à votre compte. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>"
         tagName="span" />
     </div>
     <div
@@ -135,7 +135,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
       }>
       <FormattedHTMLMessage
         link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
-        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 72 heures pour conserver l\'accès à votre compte. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>"
+        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 12 heures pour conserver l\'accès à votre compte. <a target=\"_blank\" href=\"{link}\">En savoir plus</a>"
         tagName="span" />
     </div>
     <div

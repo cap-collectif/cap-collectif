@@ -107,7 +107,7 @@ class UsersController extends FOSRestController
 
         $userManager->updatePassword($user);
         $user->setEnabled(true); // the user can use the website but...
-        $user->setExpiresAt((new \DateTime())->modify('+ 3 days')); // the account expires in 3 days (if not confirmed)
+        $user->setExpiresAt((new \DateTime())->modify('+ 12 hours')); // the account expires in 12 hours (if not confirmed)
         $user->setConfirmationToken($token);
 
         if ($creatingAnAdmin) {
