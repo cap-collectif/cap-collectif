@@ -32,7 +32,7 @@ const IdeaPageBody = React.createClass({
       <div className={classNames(classes)}>
         {
           idea.media &&
-            <img id="idea-media" src={idea.media.url} role="presentation" className="block img-responsive" />
+            <img id="idea-media" src={idea.media.url} alt="" role="presentation" className="block img-responsive" />
         }
         <div className="block" id="idea-body">
           <h2 className="h2">

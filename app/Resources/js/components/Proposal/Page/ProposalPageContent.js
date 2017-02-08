@@ -48,6 +48,7 @@ const ProposalPageContent = React.createClass({
             <img
               id="proposal-media"
               src={proposal.media.url}
+              alt=""
               role="presentation"
               className="block img-responsive"
             />

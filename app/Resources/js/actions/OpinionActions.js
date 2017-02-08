@@ -52,7 +52,7 @@ export default {
     const votesPerIteration = 30;
     const votes = [];
     while (hasMore) {
-      const result = await Fetcher.get(`${url}?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`);
+      const result = await Fetcher.get(`${url}?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`); // eslint-disable-line no-await-in-loop
       hasMore = result.hasMore;
       iterationCount++;
       for (const vote of result.votes) {

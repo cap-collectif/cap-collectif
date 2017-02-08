@@ -135,37 +135,37 @@ const ImageUpload = React.createClass({
         </Col>
         {
           disablePreview &&
-          <Col xs={12} sm={12}>
-            <Row>
-              {
-                this.state.files.map((file) => {
-                  return (
-                    <Col md={12}>
-                      <Label bsStyle="info" style={{ marginRight: '5px' }}>
-                        {file.name}{ ' ' }
-                        <i
-                          style={{ cursor: 'pointer' }}
-                          className="glyphicon glyphicon-remove"
-                          onClick={this.removeMedia.bind(this, file)}
-                        ></i>
-                      </Label>
-                    </Col>
-                  );
-                })
-              }
-            </Row>
-          </Col>
+            <Col xs={12} sm={12}>
+              <Row>
+                {
+                  this.state.files.map((file) => {
+                    return (
+                      <Col md={12}>
+                        <Label bsStyle="info" style={{ marginRight: '5px' }}>
+                          {file.name}{ ' ' }
+                          <i
+                            style={{ cursor: 'pointer' }}
+                            className="glyphicon glyphicon-remove"
+                            onClick={this.removeMedia.bind(this, file)}
+                          ></i>
+                        </Label>
+                      </Col>
+                    );
+                  })
+                }
+              </Row>
+            </Col>
         }
         {
           !disablePreview &&
-          <Col xs={12} sm={12}>
-            <p className="h5 text-center">
-              {this.getIntlMessage('global.image_uploader.image.preview')}
-            </p>
-            <div className="image-uploader__preview text-center">
-              {
-                this.state.preview &&
-                <img role="presentation" src={this.state.preview} />
+            <Col xs={12} sm={12}>
+              <p className="h5 text-center">
+                {this.getIntlMessage('global.image_uploader.image.preview')}
+              </p>
+              <div className="image-uploader__preview text-center">
+                {
+                  this.state.preview &&
+                    <img alt="" role="presentation" src={this.state.preview} />
               }
             </div>
             {

@@ -59,7 +59,7 @@ export const ProposalVoteBasketWidget = React.createClass({
           image &&
             <Navbar.Header>
               <Navbar.Brand>
-                <img className="widget__image" role="presentation" src={image} />
+                <img className="widget__image" alt="" role="presentation" src={image} />
               </Navbar.Brand>
               <Navbar.Toggle>
                 <i

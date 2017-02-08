@@ -9,7 +9,7 @@ import ArgumentButtons from './ArgumentButtons';
 
 const ArgumentItem = React.createClass({
   propTypes: {
-    argument: React.PropTypes.object,
+    argument: React.PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 

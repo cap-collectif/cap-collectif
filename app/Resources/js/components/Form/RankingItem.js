@@ -61,7 +61,7 @@ const RankingItem = React.createClass({
         }
         {
           item.image &&
-            <div><img className="ranking__item__image" role="presentation" src={item.image.url} /></div>
+            <div><img className="ranking__item__image" alt="" role="presentation" src={item.image.url} /></div>
         }
         <RankingArrows
           item={item}

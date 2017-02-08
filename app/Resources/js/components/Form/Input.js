@@ -151,7 +151,7 @@ export default class Input extends ReactBootstrapInput {
     const { image } = this.props;
     if (image) {
       return (
-        <img role="presentation" src={image} />
+        <img alt="" role="presentation" src={image} />
       );
     }
   }

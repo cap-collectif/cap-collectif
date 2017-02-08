@@ -20,7 +20,7 @@ module.exports = {
       __SERVER__: true,
     }),
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
     ...devBuild ? [] : [
