@@ -36,8 +36,11 @@ type CloseConfirmPasswordModalAction = { type: 'CLOSE_CONFIRM_PASSWORD_MODAL' };
 export type UserAction =
     StartSubmittingAccountFormAction
   | ConfirmPasswordAction
+  | StopSubmittingAccountFormAction
+  | CancelEmailChangeSucceedAction
   | CloseConfirmPasswordModalAction
   | UserRequestEmailChangeAction
+  | SubmitConfirmPasswordAction
 ;
 
 const initialState = {
@@ -72,13 +75,14 @@ export const cancelEmailChange = (dispatch: Dispatch, previousEmail: string): vo
     });
 };
 
+const sendEmail = () => {
+  FluxDispatcher.dispatch({
+    actionType: UPDATE_ALERT,
+    alert: { bsStyle: 'success', content: 'user.confirm.sent' },
+  });
+};
+
 export const resendConfirmation = (): void => {
-  const sendEmail = () => {
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: { bsStyle: 'success', content: 'user.confirm.sent' },
-    });
-  };
   Fetcher
     .post('/account/resend_confirmation_email')
     .then(sendEmail)
