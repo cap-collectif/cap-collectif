@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\Helper\EnvHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
