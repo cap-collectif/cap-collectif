@@ -310,4 +310,10 @@ class UserAdmin extends BaseAdmin
 
         return parent::getObjectMetadata($object);
     }
+
+    public function getExportFormats()
+    {
+        return ['csv'];
+    }
+
 }
