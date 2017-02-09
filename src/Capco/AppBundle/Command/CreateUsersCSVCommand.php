@@ -172,6 +172,13 @@ class CreateUsersCSVCommand extends ContainerAwareCommand
 
     protected function convertType(string $type): string
     {
-        return str_replace(['u', 'm', 'f'], ['Non communiqué', 'Homme', 'Femme'], $type);
+        if ($type === 'u') {
+            return 'Non communiqué';
+        }
+        if ($type === 'm') {
+            return 'Homme';
+        }
+
+        return 'Femme';
     }
 }
