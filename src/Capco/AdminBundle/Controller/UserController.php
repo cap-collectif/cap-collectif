@@ -103,7 +103,5 @@ class UserController extends Controller
         $response->headers->set('Cache-Control', 'maxage=1');
 
         return $response;
-
     }
-
 }

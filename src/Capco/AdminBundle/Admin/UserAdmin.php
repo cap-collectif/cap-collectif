@@ -315,5 +315,4 @@ class UserAdmin extends BaseAdmin
     {
         return ['csv'];
     }
-
 }

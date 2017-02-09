@@ -95,7 +95,7 @@ class CreateUsersCSVCommand extends ContainerAwareCommand
                 $user->getEventCommentsCount(),
                 $user->getProjectsCount(),
             ]);
-            $i++;
+            ++$i;
             $progressBar->advance();
         }
 
