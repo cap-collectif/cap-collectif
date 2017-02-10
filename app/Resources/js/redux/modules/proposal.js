@@ -154,8 +154,16 @@ export const openVotesModal = (stepId: number): Action => ({ type: OPEN_VOTES_MO
 type CloseVotesModalActionAction = { type: CLOSE_VOTES_MODAL, stepId: number };
 export const closeVotesModal = (stepId: number): Action => ({ type: CLOSE_VOTES_MODAL, stepId });
 
-export const voteSuccess = (proposalId: number, stepId: number, vote: Object, comment: Object): Action => ({
-  type: VOTE_SUCCEEDED,
+type VoteSuccessAction = {
+  type: 'VOTE_SUCCEEDED',
+  proposalId: number,
+  stepId: number,
+  vote: Object,
+  comment: Object
+};
+
+export const voteSuccess = (proposalId: number, stepId: number, vote: Object, comment: Object): VoteSuccessAction => ({
+  type: 'VOTE_SUCCEEDED',
   proposalId,
   stepId,
   vote,
