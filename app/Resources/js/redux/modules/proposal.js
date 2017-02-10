@@ -214,22 +214,28 @@ export const cancelSubmitProposal = (): CancelSubmitProposalAction => ({ type: '
 type CloseCreateModalAction = { type: 'CLOSE_CREATE_MODAL' };
 export const closeCreateModal = (): CloseCreateModalAction => ({ type: 'CLOSE_CREATE_MODAL' });
 
-type OpenVoteModalAction = { type: 'OPEN_VOTE_MODAL', id };
+type OpenVoteModalAction = { type: 'OPEN_VOTE_MODAL', id: number };
 export const openVoteModal = (id: number): OpenVoteModalAction => ({ type: OPEN_VOTE_MODAL, id });
 
-export const closeVoteModal = () => ({ type: CLOSE_VOTE_MODAL });
-export const changePage = (page: number): Action => ({ type: CHANGE_PAGE, page });
-export const changeOrder = (order: string): Action => ({ type: CHANGE_ORDER, order });
-export const changeTerm = (terms: string): Action => ({
-  type: CHANGE_TERMS,
-  terms,
-});
+type CloseVoteModalAction = { type: 'CLOSE_VOTE_MODAL' };
+export const closeVoteModal = (): CloseVoteModalAction => ({ type: 'CLOSE_VOTE_MODAL' });
+
+type ChangePageAction = { type: 'CHANGE_PAGE', page: number };
+export const changePage = (page: number): ChangePageAction => ({ type: 'CHANGE_PAGE', page });
+
+export const changeOrder = (order: string): ChangeOrderAction => ({ type: 'proposal/CHANGE_ORDER', order });
+
+type ChangeTermAction = { type: 'CHANGE_TERMS', terms: string };
+export const changeTerm = (terms: string): ChangeTermAction => ({ type: 'CHANGE_TERMS', terms });
+
 export const changeFilter = (filter: string, value: string): ChangeFilterAction => ({
   type: CHANGE_FILTER,
   filter,
   value,
 });
-export const loadProposals = (step: ?number): Action => ({ type: FETCH_REQUESTED, step });
+
+type RequestLoadProposalsAction = { type: 'FETCH_REQUESTED', step: ?number };
+export const loadProposals = (step: ?number): RequestLoadProposalsAction => ({ type: 'FETCH_REQUESTED', step });
 
 export const deleteProposal = (form: number, proposal: Object, dispatch: Dispatch): void => {
   dispatch({ type: DELETE_REQUEST });
