@@ -102,12 +102,12 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*
       if (message === 'You must specify your password to update your email.') {
         throw new SubmissionError({ _error: 'user.confirm.wrong_password' });
       }
-      // "throwable": "Ce fournisseur d'adresse électronique n'est pas accepté sur ce site, car il n'est pas considéré comme fiable. Veuillez utiliser une autre adresse.",
       if (message === 'Already used email.') {
         throw new SubmissionError({ _error: 'registration.constraints.email.already_used' });
       }
       if (message === 'Validation Failed.') {
-        if (errors.children && errors.children.newEmailToConfirm && errors.children.newEmailToConfirm.errors && Array.isArray(errors.children.newEmailToConfirm.errors)) {
+        if (errors.children && errors.children.newEmailToConfirm && errors.children.newEmailToConfirm.errors && Array.isArray(errors.children.newEmailToConfirm.errors) && errors.children.newEmailToConfirm.errors[0]) {
+          // $FlowFixMe
           throw new SubmissionError({ _error: `registration.constraints.${errors.children.newEmailToConfirm.errors[0]}` });
         }
       }
