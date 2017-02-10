@@ -169,12 +169,21 @@ export const voteSuccess = (proposalId: number, stepId: number, vote: Object, co
   vote,
   comment,
 });
-export const loadVotes = (stepId: number, proposalId: number): Action => ({
-  type: VOTES_FETCH_REQUESTED,
+type RequestLoadVotesAction = {
+  type: 'proposal/VOTES_FETCH_REQUESTED',
+  stepId: number,
+  proposalId: number
+};
+
+export const loadVotes = (stepId: number, proposalId: number): RequestLoadVotesAction => ({
+  type: 'proposal/VOTES_FETCH_REQUESTED',
   stepId,
   proposalId,
 });
-export const deleteVoteSucceeded = (stepId: number, proposalId: number, vote: Object): Action => ({ type: DELETE_VOTE_SUCCEEDED, proposalId, stepId, vote });
+
+type DeleteVoteSucceededAction = { type: 'DELETE_VOTE_SUCCEEDED', proposalId: number, stepId: number, vote: Object };
+
+export const deleteVoteSucceeded = (stepId: number, proposalId: number, vote: Object): DeleteVoteSucceededAction => ({ type: DELETE_VOTE_SUCCEEDED, proposalId, stepId, vote });
 const deleteVoteRequested = (proposalId: number): Action => ({ type: DELETE_VOTE_REQUESTED, proposalId });
 export const closeEditProposalModal = (): Action => ({ type: CLOSE_EDIT_MODAL });
 export const openEditProposalModal = (): Action => ({ type: OPEN_EDIT_MODAL });
