@@ -199,12 +199,24 @@ export const closeDeleteProposalModal = (): CloseDeleteProposalModalAction => ({
 type OpenDeleteProposalModalAction = { type: 'OPEN_DELETE_MODAL' };
 export const openDeleteProposalModal = (): OpenDeleteProposalModalAction => ({ type: 'OPEN_DELETE_MODAL' });
 
-export const submitProposalForm = (): Action => ({ type: SUBMIT_PROPOSAL_FORM });
-export const editProposalForm = (): Action => ({ type: EDIT_PROPOSAL_FORM });
-export const openCreateModal = (): Action => ({ type: OPEN_CREATE_MODAL });
-export const cancelSubmitProposal = (): Action => ({ type: CANCEL_SUBMIT_PROPOSAL });
-export const closeCreateModal = (): Action => ({ type: CLOSE_CREATE_MODAL });
-export const openVoteModal = (id: number): Action => ({ type: OPEN_VOTE_MODAL, id });
+type SubmitProposalFormAction = { type: 'SUBMIT_PROPOSAL_FORM' };
+export const submitProposalForm = (): SubmitProposalFormAction => ({ type: 'SUBMIT_PROPOSAL_FORM' });
+
+type EditProposalFormAction = { type: 'EDIT_PROPOSAL_FORM' };
+export const editProposalForm = (): EditProposalFormAction => ({ type: 'EDIT_PROPOSAL_FORM' });
+
+type OpenCreateModalAction = { type: 'OPEN_CREATE_MODAL' };
+export const openCreateModal = (): OpenCreateModalAction => ({ type: 'OPEN_CREATE_MODAL' });
+
+type CancelSubmitProposalAction = { type: 'CANCEL_SUBMIT_PROPOSAL' };
+export const cancelSubmitProposal = (): CancelSubmitProposalAction => ({ type: 'CANCEL_SUBMIT_PROPOSAL' });
+
+type CloseCreateModalAction = { type: 'CLOSE_CREATE_MODAL' };
+export const closeCreateModal = (): CloseCreateModalAction => ({ type: 'CLOSE_CREATE_MODAL' });
+
+type OpenVoteModalAction = { type: 'OPEN_VOTE_MODAL', id };
+export const openVoteModal = (id: number): OpenVoteModalAction => ({ type: OPEN_VOTE_MODAL, id });
+
 export const closeVoteModal = () => ({ type: CLOSE_VOTE_MODAL });
 export const changePage = (page: number): Action => ({ type: CHANGE_PAGE, page });
 export const changeOrder = (order: string): Action => ({ type: CHANGE_ORDER, order });
