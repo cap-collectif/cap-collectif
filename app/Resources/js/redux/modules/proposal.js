@@ -182,13 +182,23 @@ export const loadVotes = (stepId: number, proposalId: number): RequestLoadVotesA
 });
 
 type DeleteVoteSucceededAction = { type: 'DELETE_VOTE_SUCCEEDED', proposalId: number, stepId: number, vote: Object };
+export const deleteVoteSucceeded = (stepId: number, proposalId: number, vote: Object): DeleteVoteSucceededAction => ({ type: 'DELETE_VOTE_SUCCEEDED', proposalId, stepId, vote });
 
-export const deleteVoteSucceeded = (stepId: number, proposalId: number, vote: Object): DeleteVoteSucceededAction => ({ type: DELETE_VOTE_SUCCEEDED, proposalId, stepId, vote });
-const deleteVoteRequested = (proposalId: number): Action => ({ type: DELETE_VOTE_REQUESTED, proposalId });
-export const closeEditProposalModal = (): Action => ({ type: CLOSE_EDIT_MODAL });
-export const openEditProposalModal = (): Action => ({ type: OPEN_EDIT_MODAL });
-export const closeDeleteProposalModal = (): Action => ({ type: CLOSE_DELETE_MODAL });
-export const openDeleteProposalModal = (): Action => ({ type: OPEN_DELETE_MODAL });
+type RequestDeleteVoteAction = { type: 'DELETE_VOTE_REQUESTED', proposalId: number };
+const deleteVoteRequested = (proposalId: number): RequestDeleteVoteAction => ({ type: 'DELETE_VOTE_REQUESTED', proposalId });
+
+type CloseEditProposalModalAction = { type: 'CLOSE_EDIT_MODAL' };
+export const closeEditProposalModal = (): CloseEditProposalModalAction => ({ type: 'CLOSE_EDIT_MODAL' });
+
+type OpenEditProposalModalAction = { type: 'OPEN_EDIT_MODAL' };
+export const openEditProposalModal = (): OpenEditProposalModalAction => ({ type: 'OPEN_EDIT_MODAL' });
+
+type CloseDeleteProposalModalAction = { type: 'CLOSE_DELETE_MODAL' };
+export const closeDeleteProposalModal = (): CloseDeleteProposalModalAction => ({ type: CLOSE_DELETE_MODAL });
+
+type OpenDeleteProposalModalAction = { type: 'OPEN_DELETE_MODAL' };
+export const openDeleteProposalModal = (): OpenDeleteProposalModalAction => ({ type: 'OPEN_DELETE_MODAL' });
+
 export const submitProposalForm = (): Action => ({ type: SUBMIT_PROPOSAL_FORM });
 export const editProposalForm = (): Action => ({ type: EDIT_PROPOSAL_FORM });
 export const openCreateModal = (): Action => ({ type: OPEN_CREATE_MODAL });
