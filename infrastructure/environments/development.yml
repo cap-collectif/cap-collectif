@@ -5,6 +5,7 @@ application:
         BLACKFIRE_SERVER_TOKEN: ***REMOVED***
         BLACKFIRE_CLIENT_ID: ***REMOVED***
         BLACKFIRE_CLIENT_TOKEN: ***REMOVED***
+        SYMFONY_INSTANCE_NAME: dev
     volumes:
         - ../../:/var/www
         - /var/run/docker.sock:/var/run/docker.sock
