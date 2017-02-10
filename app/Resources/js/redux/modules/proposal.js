@@ -10,9 +10,11 @@ import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
 import type { Dispatch, Action } from '../../types';
 
+const PROPOSAL_PAGINATION = 20;
+
 type Status = { id: number };
 type ChangeFilterAction = { type: 'proposal/CHANGE_FILTER', filter: string, value: string };
-type ChangeOrderAction = { type: 'proposal/CHANGE_ODER', order: string };
+type ChangeOrderAction = { type: 'proposal/CHANGE_ORDER', order: string };
 type SubmitFusionFormAction = { type: 'proposal/SUBMIT_FUSION_FORM', proposalForm: number };
 type FetchVotesRequestedAction = {
   type: 'proposal/VOTES_FETCH_REQUESTED',
@@ -64,6 +66,8 @@ type ChangeTermAction = { type: 'proposal/CHANGE_TERMS', terms: string };
 type RequestLoadProposalsAction = { type: 'proposal/FETCH_REQUESTED', step: ?number };
 type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
 type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
+type SendProposalNotificationSuceedAction = { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId: number, stepId: number };
+type SendProposalNotificationFailedAction = { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error: string };
 
 // type Step = {
 //   type: string,
@@ -168,9 +172,11 @@ export const changeFilter = (filter: string, value: string): ChangeFilterAction 
   filter,
   value,
 });
+type RequestDeleteAction = { type: 'proposal/DELETE_REQUEST' };
+const deleteRequest = (): RequestDeleteAction => ({ type: 'proposal/DELETE_REQUEST' });
 export const loadProposals = (step: ?number): RequestLoadProposalsAction => ({ type: 'proposal/FETCH_REQUESTED', step });
 export const deleteProposal = (form: number, proposal: Object, dispatch: Dispatch): void => {
-  dispatch({ type: 'proposal/DELETE_REQUEST' });
+  dispatch(deleteRequest());
   Fetcher
     .delete(`/proposal_forms/${form}/proposals/${proposal.id}`)
     .then(() => {
@@ -192,12 +198,20 @@ export const startVoting = (): RequestVotingAction => ({ type: 'proposal/VOTE_RE
 export const stopVoting = (): VoteFailedAction => ({ type: 'proposal/VOTE_FAILED' });
 
 
-const unSelectStepSucceed = (stepId, proposalId) => ({ type: 'proposal/UNSELECT_SUCCEED', stepId, proposalId });
-const selectStepSucceed = (stepId, proposalId) => ({ type: 'proposal/SELECT_SUCCEED', stepId, proposalId });
-const updateSelectionStatusSucceed = (stepId: number, proposalId: number, status: ?Status) => ({ type: 'proposal/UPDATE_SELECTION_STATUS_SUCCEED', stepId, proposalId, status });
-const updateProposalCollectStatusSucceed = (proposalId: number, stepId: number, status: ?Status) => ({ type: 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED', proposalId, stepId, status });
-export const sendProposalNotificationSucceed = (proposalId: number, stepId: number) => ({ type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId, stepId });
-const sendProposalNotificationError = (error: string) => ({ type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error });
+type SelectStepSucceedAction = { type: 'proposal/SELECT_SUCCEED', stepId: number, proposalId: number };
+type UnSelectStepSucceedAction = { type: 'proposal/UNSELECT_SUCCEED', stepId: number, proposalId: number };
+
+const unSelectStepSucceed = (stepId, proposalId): UnSelectStepSucceedAction => ({ type: 'proposal/UNSELECT_SUCCEED', stepId, proposalId });
+const selectStepSucceed = (stepId: number, proposalId: number): SelectStepSucceedAction => ({ type: 'proposal/SELECT_SUCCEED', stepId, proposalId });
+
+type UpdateSelectionStatusSucceedAction = { type: 'proposal/UPDATE_SELECTION_STATUS_SUCCEED', stepId: number, proposalId: number, status: ?Status };
+const updateSelectionStatusSucceed = (stepId: number, proposalId: number, status: ?Status): UpdateSelectionStatusSucceedAction => ({ type: 'proposal/UPDATE_SELECTION_STATUS_SUCCEED', stepId, proposalId, status });
+
+type UpdateProposalCollectStatusSucceedAction = { type: 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED', proposalId: number, stepId: number, status: ?Status };
+const updateProposalCollectStatusSucceed = (proposalId: number, stepId: number, status: ?Status): UpdateProposalCollectStatusSucceedAction => ({ type: 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED', proposalId, stepId, status });
+
+export const sendProposalNotificationSucceed = (proposalId: number, stepId: number): SendProposalNotificationSuceedAction => ({ type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId, stepId });
+const sendProposalNotificationError = (error: string): SendProposalNotificationFailedAction => ({ type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error });
 
 export const sendProposalNotification = (dispatch: Dispatch, proposalId: number, stepId: number): void => {
   Fetcher.post(`/proposals/${proposalId}/notify-status-changed`)
@@ -507,8 +521,8 @@ export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<
 }
 
 export type ProposalAction =
-    { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId: number, stepId: number }
-  | { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error: string }
+    SendProposalNotificationSuceedAction
+  | SendProposalNotificationFailedAction
   | FetchVotesRequestedAction
   | SubmitFusionFormAction
   | ChangeFilterAction
@@ -523,10 +537,19 @@ export type ProposalAction =
   | CancelSubmitProposalAction
   | SubmitProposalFormAction
   | OpenDeleteProposalModalAction
-  | RequestDeleteVoteAction
   | RequestFetchProposalPostsAction
   | DeleteVoteSucceededAction
   | LoadSelectionsAction
+  | CloseEditProposalModalAction
+  | RequestDeleteProposalVoteAction
+  | CloseVoteModalAction
+  | VoteSuccessAction
+  | SelectStepSucceedAction
+  | UnSelectStepSucceedAction
+  | UpdateSelectionStatusSucceedAction
+  | UpdateProposalCollectStatusSucceedAction
+  | CloseDeleteProposalModalAction
+  | RequestDeleteAction
 ;
 
 export function* saga(): Generator<*, *, *> {
