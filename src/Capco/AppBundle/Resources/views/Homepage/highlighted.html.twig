@@ -18,7 +18,7 @@
                         <div class="item {% if loop.first %}active{% endif %}">
                         <a href="{{ url }}" class="h3" >
                             {% if highlighted.media is not null %}
-                                {% thumbnail highlighted.media, 'slider' with { 'alt': highlighted.media.name, 'title': highlighted.media.name, 'class': 'img-responsive' } %}
+                                {% thumbnail highlighted.media, 'slider' with {'class': 'img-responsive'} %}
                             {% else %}
                                 <span class="bg__wrapper">
                                     <div class="bg--default bg--project"></div>

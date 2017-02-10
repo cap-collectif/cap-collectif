@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\Controller;
 
-use Capco\AppBundle\Helper\EnvHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -32,7 +31,7 @@ class ConfirmationController extends Controller
         $user->setLastLogin(new \DateTime());
 
         $instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-        if ($instanceName === 'rennes' || $instanceName === 'rennespreprod') {
+        if ($instanceName === 'preprod' || $instanceName === 'rennes' || $instanceName === 'rennespreprod') {
             $hasRepublishedContributions = false;
         } else {
             $hasRepublishedContributions = $this->get('capco.contribution.manager')->republishContributions($user);
