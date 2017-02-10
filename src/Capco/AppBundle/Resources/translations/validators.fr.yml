@@ -21,7 +21,6 @@ date:
 email:
   blank: "Veuillez saisir votre adresse électronique."
   email_belongs_to_user: "Cette adresse électronique est déjà associée à un compte."
-  invalid: "Cet email n'est pas valide."
 
 event_registration:
   create:

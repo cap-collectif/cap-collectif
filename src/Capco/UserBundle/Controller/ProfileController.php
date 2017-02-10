@@ -3,7 +3,6 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
-use Capco\UserBundle\Form\Type\AccountFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -65,27 +64,7 @@ class ProfileController extends BaseController
           throw $this->createAccessDeniedException('This user does not have access to this section.');
       }
 
-      $form = $this->createForm(new AccountFormType(), $user);
-
-      if ('POST' == $request->getMethod()) {
-          $form->submit($request);
-          $userManager = $this->get('sonata.user.user_manager');
-
-          if ($form->isValid()) {
-              $userManager->updateUser($user);
-
-              $this->setFlash('sonata_user_success', 'profile.flash.updated');
-          }
-
-          // Reloads the user to reset its username. This is needed when the
-          // username or password have been changed to avoid issues with the
-          // security layer.
-          $userManager->reloadUser($user);
-      }
-
-      return [
-          'form' => $form->createView(),
-      ];
+      return [];
   }
 
     private function getProposalsProps(User $user)

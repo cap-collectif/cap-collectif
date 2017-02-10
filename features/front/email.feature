@@ -20,4 +20,4 @@ Feature: Email
     When I am on "/account/new_email_confirmation/check-my-new-email-token"
     Then I can see I am logged in as "user_updating_email"
     And I should not be asked to confirm my email
-    And User "user_updating_email" should have email "new-email-to-confirm@test.com"
+    And user "user_updating_email" should have email "new-email-to-confirm@test.com"

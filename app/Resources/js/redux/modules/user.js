@@ -102,9 +102,13 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*
       if (message === 'You must specify your password to update your email.') {
         throw new SubmissionError({ _error: 'user.confirm.wrong_password' });
       }
+      // "throwable": "Ce fournisseur d'adresse électronique n'est pas accepté sur ce site, car il n'est pas considéré comme fiable. Veuillez utiliser une autre adresse.",
+      if (message === 'Already used email.') {
+        throw new SubmissionError({ _error: 'registration.constraints.email.already_used' });
+      }
       if (message === 'Validation Failed.') {
-        if (errors.children && errors.children.email && errors.children.email.errors && Array.isArray(errors.children.email.errors)) {
-          throw new SubmissionError({ _error: errors.children.email.errors[0] });
+        if (errors.children && errors.children.newEmailToConfirm && errors.children.newEmailToConfirm.errors && Array.isArray(errors.children.newEmailToConfirm.errors)) {
+          throw new SubmissionError({ _error: `registration.constraints.${errors.children.newEmailToConfirm.errors[0]}` });
         }
       }
       throw new SubmissionError({ _error: 'global.error' });

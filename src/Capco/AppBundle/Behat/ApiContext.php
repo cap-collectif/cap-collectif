@@ -329,6 +329,7 @@ EOF;
         $body = (string) $this->response->getBody();
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
+        var_dump($body);
         PHPUnit::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError());
     }
 

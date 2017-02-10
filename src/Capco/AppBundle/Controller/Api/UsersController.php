@@ -146,19 +146,21 @@ class UsersController extends FOSRestController
     private function updateEmail(Request $request)
     {
         $user = $this->getUser();
-        $previousEmail = $user->getEmail();
         $newEmailToConfirm = $request->request->get('email');
         $password = $request->request->get('password');
-
-        if ($previousEmail === $newEmailToConfirm) {
-            throw new \Exception('Already your email.');
-        }
+        $em = $this->getDoctrine()->getManager();
 
         $encoder = $this->get('security.encoder_factory')->getEncoder($user);
         if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
             return new JsonResponse([
             'message' => 'You must specify your password to update your email.',
           ], 400);
+        }
+
+        if ($em->getRepository('CapcoUserBundle:User')->findOneByEmail($newEmailToConfirm)) {
+            return new JsonResponse([
+                'message' => 'Already used email.',
+            ], 400);
         }
 
         $form = $this->createForm(ApiProfileAccountFormType::class, $user);
@@ -174,7 +176,7 @@ class UsersController extends FOSRestController
         $user->setNewEmailConfirmationToken($token);
         $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
 
-        $this->getDoctrine()->getManager()->flush();
+        $em->flush();
     }
 
     /**

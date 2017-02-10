@@ -518,9 +518,10 @@
       "new_email_send_succeed_cancel_or_update": "Mettre à jour cette adresse email",
       "new_email_send_failed": "Oups, nous n'avons pas pu envoyer l'e-mail à votre nouvelle adresse ! Nous avons essayé d'envoyer des emails de confirmation à <strong>%email%</strong> mais ils n'ont pas été remis. Vous pouvez choisir une autre adresse ou nous pouvons réessayer.",
       "profile_help": "Vérifiez votre email (<strong>{email}</strong>) pour confirmer votre nouvelle adresse. Jusqu'à ce que vous confirmez, les notifications continueront d'être envoyées à votre adresse email actuelle.",
+      "email_already_used": "L'adresse email est déjà utilitée.",
       "sent": "Un nouvel email de confirmation a été envoyé.",
       "sending": "Envoi en cours...",
-      "wrong_password": "Mot de passe incorrect ! Entrez votre mot de passe actuel pour modifier votre email.",
+      "wrong_password": "<strong>Mot de passe incorrect.</strong> Entrez votre mot de passe actuel pour modifier votre adresse email.",
       "cancel": "Annuler cette modification",
       "update": "Mettre à jour l'adresse email",
       "resend": "Renvoyer la confirmation"

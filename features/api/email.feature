@@ -92,13 +92,13 @@ Feature: Email
     """
     And 0 mail should be sent
 
-    @database @devdev
+    @database
     Scenario: Logged in API client can update his email
       And I am logged in to api as user
       And I send a PUT request to "/api/users/me" with json:
       """
       {
-        "email": "popopo@test.com",
+        "email": "contact@spyl.net",
         "password": "user"
       }
       """
@@ -109,6 +109,53 @@ Feature: Email
       Then I should see "/account/new_email_confirmation/" in mail
       And I open mail with subject "[Cap-Collectif] L'adresse électronique de user a été changée"
       Then I should see "Votre adresse électronique a été changée" in mail
+
+    @security
+    Scenario: Logged in API client can't update his email, to an existing email
+      And I am logged in to api as user
+      And I send a PUT request to "/api/users/me" with json:
+      """
+      {
+        "email": "user@test.com",
+        "password": "user"
+      }
+      """
+      Then the JSON response status code should be 400
+      And the JSON response should match:
+      """
+      {
+        "message": "Already used email."
+      }
+      """
+
+    @security
+    Scenario: Logged in API client can't update his email to a wrong email
+      And I am logged in to api as user
+      And I send a PUT request to "/api/users/me" with json:
+      """
+      {
+        "email": "plop.com",
+        "password": "user"
+      }
+      """
+      Then the JSON response status code should be 400
+      And the JSON response should match:
+      """
+      {
+        "code": 400,
+        "message": "Validation Failed",
+        "errors": {
+          "children": {
+            "newEmailToConfirm": {
+              "errors": [
+                "email.invalid",
+                "email.throwable"
+              ]
+            }
+          }
+        }
+      }
+      """
 
     @security
     Scenario: Logged in API client can not update his email with a wrong password

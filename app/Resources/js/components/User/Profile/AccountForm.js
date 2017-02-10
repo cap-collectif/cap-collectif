@@ -44,7 +44,9 @@ export const AccountForm = React.createClass({
         {
           error &&
             <Alert bsStyle="danger">
-              <p>{this.getIntlMessage(error)}</p>
+              <p>
+                <FormattedHTMLMessage message={this.getIntlMessage(error)} />
+              </p>
             </Alert>
         }
         {

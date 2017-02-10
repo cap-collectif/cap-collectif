@@ -1,6 +1,6 @@
 Capco\UserBundle\Entity\User:
   constraints:
-    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: email, message: already_used_email, groups: [registration, profile] }
+    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: email, message: already_used_email, groups: [registration] }
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: phone, message: already_used_phone, groups: [registration, profile] }
   properties:
     username:
@@ -12,9 +12,9 @@ Capco\UserBundle\Entity\User:
       - NotBlank: { message: password.blank, groups: [registration] }
       - Length: { min: 8, max: 72, minMessage: password.minMessage, groups: [registration] }
     email:
-      - NotBlank: { message: email.blank, groups: [registration, registrationAdmin, profile] }
-      - Email: { message: email.invalid, groups: [registration, registrationAdmin, profile] }
-      - EmailChecker\Constraints\NotThrowawayEmail: { message: email.throwable, groups: [registration, profile] }
+      - NotBlank: { message: email.blank, groups: [registration, registrationAdmin] }
+      - Email: { message: email.invalid, groups: [registration, registrationAdmin] }
+      - EmailChecker\Constraints\NotThrowawayEmail: { message: email.throwable, groups: [registration] }
     twitterUrl:
       - Url: { groups: [profile] }
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: twitter, groups: [profile] }
