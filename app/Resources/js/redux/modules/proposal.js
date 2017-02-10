@@ -135,14 +135,25 @@ const initialState: State = {
   lastNotifiedStepId: null,
 };
 
+type LoadSelectionsAction = { type: LOAD_SELECTIONS_REQUEST, proposalId: number };
 export const loadSelections = (proposalId: number): Action => ({ type: LOAD_SELECTIONS_REQUEST, proposalId });
+type LoadSelectionsSucessAction = { type: LOAD_SELECTIONS_SUCCEEDED, proposalId: number };
 export const loadSelectionsSucess = (proposalId: number): Action => ({ type: LOAD_SELECTIONS_SUCCEEDED, proposalId });
+type CloseCreateFusionModalAction = { type: CLOSE_CREATE_FUSION_MODAL };
 export const closeCreateFusionModal = (): Action => ({ type: CLOSE_CREATE_FUSION_MODAL });
+type OpenCreateFusionModalAction = { type: OPEN_CREATE_FUSION_MODAL };
 export const openCreateFusionModal = (): Action => ({ type: OPEN_CREATE_FUSION_MODAL });
 export const submitFusionForm = (proposalForm: number): SubmitFusionFormAction => ({ type: 'proposal/SUBMIT_FUSION_FORM', proposalForm });
+
+type CancelSubmitFusionFormAction = { type: CANCEL_SUBMIT_FUSION_FORM };
 export const cancelSubmitFusionForm = (): Action => ({ type: CANCEL_SUBMIT_FUSION_FORM });
+
+type OpenVotesModalAction = { type: OPEN_VOTES_MODAL, stepId: number };
 export const openVotesModal = (stepId: number): Action => ({ type: OPEN_VOTES_MODAL, stepId });
+
+type CloseVotesModalActionAction = { type: CLOSE_VOTES_MODAL, stepId: number };
 export const closeVotesModal = (stepId: number): Action => ({ type: CLOSE_VOTES_MODAL, stepId });
+
 export const voteSuccess = (proposalId: number, stepId: number, vote: Object, comment: Object): Action => ({
   type: VOTE_SUCCEEDED,
   proposalId,
