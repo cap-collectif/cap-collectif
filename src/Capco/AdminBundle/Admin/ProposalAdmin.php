@@ -300,8 +300,10 @@ class ProposalAdmin extends Admin
                 'editable' => true,
                 'label' => 'admin.fields.proposal.isTrashed',
             ])
-            ->add('updateAuthor', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.updateAuthor',
+            ->add('updateAuthor', 'sonata_type_model_autocomplete', [
+                'label' => 'admin.fields.proposal.author',
+                'required' => true,
+                'property' => 'username',
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
