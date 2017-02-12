@@ -107,12 +107,12 @@ class ProposalAdmin extends Admin
                 'required' => false,
                 'help' => 'admin.fields.proposal.help.annotation',
             ])
-            ->add('likers', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.likers',
-                'multiple' => true,
-                'required' => false,
-                'btn_add' => false,
-            ])
+            // ->add('likers', 'sonata_type_model', [
+            //     'label' => 'admin.fields.proposal.likers',
+            //     'multiple' => true,
+            //     'required' => false,
+            //     'btn_add' => false,
+            // ])
             ->end()
 
             ->with('admin.fields.proposal.group_publication')
@@ -302,7 +302,6 @@ class ProposalAdmin extends Admin
             ])
             ->add('updateAuthor', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.proposal.updateAuthor',
-                'required' => true,
                 'property' => 'username',
             ])
             ->add('updatedAt', null, [
