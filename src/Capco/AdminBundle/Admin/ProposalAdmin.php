@@ -301,7 +301,7 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.isTrashed',
             ])
             ->add('updateAuthor', 'sonata_type_model_autocomplete', [
-                'label' => 'admin.fields.proposal.author',
+                'label' => 'admin.fields.proposal.updateAuthor',
                 'required' => true,
                 'property' => 'username',
             ])
