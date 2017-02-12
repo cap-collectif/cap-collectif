@@ -62,7 +62,6 @@ export default function configureStore(initialState: Object) {
   sagaMiddleware.run(ideaSaga);
   // $FlowFixMe
   sagaMiddleware.run(proposalSaga);
-  // $FlowFixMe
   sagaMiddleware.run(projectSaga);
   sagaMiddleware.run(opinionSaga);
 

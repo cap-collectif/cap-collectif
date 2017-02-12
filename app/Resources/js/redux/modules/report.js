@@ -1,53 +1,53 @@
-// @flow
-import type { Action, Dispatch, Uuid } from '../../types';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher from '../../services/Fetcher';
 
-export type State = {
-  currentReportingModal: ?number,
-  isLoading: boolean,
-  elements: Array<*>
-};
+export const OPEN_MODAL = 'report/OPEN_MODAL';
+export const CLOSE_MODAL = 'report/CLOSE_MODAL';
+export const START_LOADING = 'report/START_LOADING';
+export const STOP_LOADING = 'report/STOP_LOADING';
+export const ADD_REPORTED = 'report/ADD_REPORTED';
 
-const baseUrl = (opinion: { parent: ?{ id: number }}) => opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
+const baseUrl = opinion => opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
 
-const initialState: State = {
+const initialState = {
   currentReportingModal: null,
   isLoading: false,
   elements: [],
 };
 
-type OpenModalAction = { type: 'report/OPEN_MODAL', id: number };
-type CloseModalAction = { type: 'report/CLOSE_MODAL' };
-type StartReportingAction = { type: 'report/START_LOADING' };
-type StopReportingAction = { type: 'report/STOP_LOADING' };
-type AddReportedAction = { type: 'report/ADD_REPORTED' };
+export const openModal = (id) => {
+  return {
+    type: OPEN_MODAL,
+    payload: { id },
+  };
+};
 
-export type ReportAction = OpenModalAction | CloseModalAction | StartReportingAction | StopReportingAction | AddReportedAction;
+export const closeModal = () => {
+  return {
+    type: CLOSE_MODAL,
+  };
+};
 
-export const openModal = (id: number): OpenModalAction => ({
-  type: 'report/OPEN_MODAL',
-  id,
-});
+const startLoading = () => {
+  return {
+    type: START_LOADING,
+  };
+};
 
-export const closeModal = (): CloseModalAction => ({
-  type: 'report/CLOSE_MODAL',
-});
+const stopLoading = () => {
+  return {
+    type: STOP_LOADING,
+  };
+};
 
-const startLoading = (): StartReportingAction => ({
-  type: 'report/START_LOADING',
-});
+const addReported = () => {
+  return {
+    type: ADD_REPORTED,
+  };
+};
 
-const stopLoading = (): StopReportingAction => ({
-  type: 'report/STOP_LOADING',
-});
-
-const addReported = (): AddReportedAction => ({
-  type: 'report/ADD_REPORTED',
-});
-
-const submitReport = (url: string, data: Object, dispatch: Dispatch, successMessage: string) => {
+const submitReport = (url, data, dispatch, successMessage) => {
   dispatch(startLoading());
   return new Promise((resolve, reject) => {
     Fetcher
@@ -69,7 +69,7 @@ const submitReport = (url: string, data: Object, dispatch: Dispatch, successMess
   });
 };
 
-export const submitIdeaReport = (idea: number, data: Object, dispatch: Dispatch) => {
+export const submitIdeaReport = (idea, data, dispatch) => {
   return submitReport(
     `/ideas/${idea}/reports`,
     data,
@@ -78,7 +78,7 @@ export const submitIdeaReport = (idea: number, data: Object, dispatch: Dispatch)
   );
 };
 
-export const submitSourceReport = (opinion: Object, sourceId: Uuid, data: Object, dispatch: Dispatch) => {
+export const submitSourceReport = (opinion, sourceId, data, dispatch) => {
   return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/sources/${sourceId}/reports`,
     data,
@@ -87,7 +87,7 @@ export const submitSourceReport = (opinion: Object, sourceId: Uuid, data: Object
   );
 };
 
-export const submitArgumentReport = (opinion: Object, argument: Uuid, data: Object, dispatch: Dispatch) => {
+export const submitArgumentReport = (opinion, argument, data, dispatch) => {
   return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}/reports`,
     data,
@@ -96,7 +96,7 @@ export const submitArgumentReport = (opinion: Object, argument: Uuid, data: Obje
   );
 };
 
-export const submitOpinionReport = (opinion: Object, data: Object, dispatch: Dispatch) => {
+export const submitOpinionReport = (opinion, data, dispatch) => {
   return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/reports`,
     data,
@@ -105,7 +105,7 @@ export const submitOpinionReport = (opinion: Object, data: Object, dispatch: Dis
   );
 };
 
-export const submitCommentReport = (comment: Object, data: Object, dispatch: Dispatch) => {
+export const submitCommentReport = (comment, data, dispatch) => {
   return submitReport(
     `/comments/${comment.id}/reports`,
     data,
@@ -114,7 +114,7 @@ export const submitCommentReport = (comment: Object, data: Object, dispatch: Dis
   );
 };
 
-export const submitProposalReport = (proposal: Object, data: Object, dispatch: Dispatch) => {
+export const submitProposalReport = (proposal, data, dispatch) => {
   return submitReport(
     `/proposals/${proposal.id}/reports`,
     data,
@@ -123,17 +123,17 @@ export const submitProposalReport = (proposal: Object, data: Object, dispatch: D
   );
 };
 
-export const reducer = (state: State = initialState, action: Action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'report/START_LOADING':
+    case START_LOADING:
       return { ...state, isLoading: true };
-    case 'report/STOP_LOADING':
+    case STOP_LOADING:
       return { ...state, isLoading: false };
-    case 'report/OPEN_MODAL':
-      return { ...state, currentReportingModal: action.id };
-    case 'report/CLOSE_MODAL':
+    case OPEN_MODAL:
+      return { ...state, currentReportingModal: action.payload.id };
+    case CLOSE_MODAL:
       return { ...state, currentReportingModal: null };
-    case 'report/ADD_REPORTED': {
+    case ADD_REPORTED: {
       return { ...state, elements: [...state.elements, state.currentReportingModal] };
     }
     default:

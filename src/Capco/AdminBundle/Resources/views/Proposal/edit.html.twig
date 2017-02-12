@@ -27,7 +27,8 @@
       'props': {
         'proposalId': admin.subject.id,
         'projectId': admin.subject.proposalForm.step.getProjectId()
-      }
+      },
+      'rendering': 'client_side'
     }) }}
     {{ parent() }}
 {% endblock %}
