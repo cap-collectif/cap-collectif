@@ -61,7 +61,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->select('COUNT(pv.id) as votesCount', 'cs.id as stepId')
             ->leftJoin('pv.collectStep', 'cs')
             ->andWhere('pv.proposal = :proposal')
-            ->andWhere('pv.expired = 0')
+            ->andWhere('pv.expired = false')
             ->setParameter('proposal', $proposal)
             ->groupBy('pv.collectStep')
         ;
@@ -85,6 +85,7 @@ class ProposalCollectVoteRepository extends EntityRepository
         $qb = $this->createQueryBuilder('pv')
             ->leftJoin('pv.collectStep', 'cs')
             ->where('pv.proposal = :proposal')
+            ->andWhere('pv.expired = false')
             ->setParameter('proposal', $proposal)
             ->andWhere('cs.id = :step')
             ->setParameter('step', $step)
