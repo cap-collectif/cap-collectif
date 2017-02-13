@@ -43,7 +43,7 @@ export type UserAction =
   | SubmitConfirmPasswordAction
 ;
 
-const initialState : State = {
+const initialState = {
   isSubmittingAccountForm: false,
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,

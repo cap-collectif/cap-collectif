@@ -4,5 +4,5 @@ ContributionWithAuthor:
         description: "A contribution with an author"
         fields:
             author:
-                type: "User!"
+                type: "Person!"
                 description: "The author of the contribution."

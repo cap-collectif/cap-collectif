@@ -3,9 +3,6 @@ import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
 import type { State as ProposalState, ProposalAction } from './redux/modules/proposal';
 import type { State as OpinionState, OpinionAction } from './redux/modules/opinion';
 import type { State as UserState, UserAction } from './redux/modules/user';
-import type { State as ProjectState, ProjectAction } from './redux/modules/project';
-import type { State as IdeaState, IdeaAction } from './redux/modules/idea';
-import type { State as ReportState, ReportAction } from './redux/modules/report';
 
 export type Uuid = string;
 export type VoteValue = -1 | 0 | 1;
@@ -17,9 +14,6 @@ export type Action =
     ProposalAction
   | OpinionAction
   | UserAction
-  | ProjectAction
-  | IdeaAction
-  | ReportAction
 ;
 
 export type FeatureToggles = {
@@ -35,10 +29,10 @@ export type State = {
     parameters: Object,
     isLoggedIn: boolean
   },
-  idea: IdeaState,
+  idea: Object,
   proposal: ProposalState,
-  project: ProjectState,
-  report: ReportState,
+  project: Object,
+  report: Object,
   user: UserState,
   opinion: OpinionState
 };

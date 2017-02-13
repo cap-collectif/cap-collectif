@@ -20,7 +20,6 @@ export const ProposalListFilters = React.createClass({
     order: PropTypes.string.isRequired,
     filters: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    showDistrictFilter: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -40,12 +39,11 @@ export const ProposalListFilters = React.createClass({
       statuses,
       themes,
       types,
-      showDistrictFilter,
     } = this.props;
     return {
       displayedFilters: []
         .concat(types.length > 0 ? ['types'] : [])
-        .concat(features.districts && districts.length > 0 && showDistrictFilter ? ['districts'] : [])
+        .concat(features.districts && districts.length > 0 ? ['districts'] : [])
         .concat(features.themes && showThemes && themes.length > 0 ? ['themes'] : [])
         .concat(categories.length > 0 ? ['categories'] : [])
         .concat(statuses.length > 0 ? ['statuses'] : []),

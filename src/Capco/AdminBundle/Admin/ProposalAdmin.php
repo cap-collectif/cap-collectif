@@ -107,12 +107,12 @@ class ProposalAdmin extends Admin
                 'required' => false,
                 'help' => 'admin.fields.proposal.help.annotation',
             ])
-            // ->add('likers', 'sonata_type_model', [
-            //     'label' => 'admin.fields.proposal.likers',
-            //     'multiple' => true,
-            //     'required' => false,
-            //     'btn_add' => false,
-            // ])
+            ->add('likers', 'sonata_type_model_autocomplete', [
+                'label' => 'admin.fields.proposal.likers',
+                'multiple' => true,
+                'required' => false,
+                'btn_add' => false,
+            ])
             ->end()
 
             ->with('admin.fields.proposal.group_publication')
@@ -472,15 +472,6 @@ class ProposalAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create');
-    }
-
-    public function getList()
-    {
-        // Remove APC Cache for soft delete
-        $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
-        $em->getConfiguration()->getResultCacheImpl()->deleteAll();
-
-        return parent::getList();
     }
 
 }

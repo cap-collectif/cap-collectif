@@ -17,7 +17,7 @@ Opinion:
                 description: "The url of contribution."
                 resolve: "@=resolver('proposition_url', [value])"
             author:
-                type: "User!"
+                type: "Person!"
                 description: "The author of the contribution."
             expired:
                 type: "Boolean!"

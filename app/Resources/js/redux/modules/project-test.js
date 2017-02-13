@@ -3,6 +3,8 @@ import { put, select, call } from 'redux-saga/effects';
 import {
   reducer,
   fetchProjectsSaga,
+  PROJECTS_FETCH_SUCCEEDED,
+  PROJECTS_FETCH_FAILED,
 } from './project';
 import Fetcher from '../../services/Fetcher';
 
@@ -19,7 +21,7 @@ describe('Project Reducer', () => {
       ],
     };
     const newState = reducer(initialState, {
-      type: 'project/PROJECTS_FETCH_SUCCEEDED',
+      type: PROJECTS_FETCH_SUCCEEDED,
       project: result,
     });
     expect(newState).toEqual({
@@ -41,11 +43,11 @@ describe('Project Sagas', () => {
     expect(generator.next(project).value).toEqual(call(Fetcher.get, '/projects?'));
     expect(generator.next(project).value).toEqual(
       put({
-        type: 'project/PROJECTS_FETCH_SUCCEEDED',
+        type: PROJECTS_FETCH_SUCCEEDED,
         project,
       }),
     );
 
-    expect(generator.throw({}).value).toEqual(put({ type: 'project/PROJECTS_FETCH_FAILED', error: {} }));
+    expect(generator.throw({}).value).toEqual(put({ type: PROJECTS_FETCH_FAILED, error: {} }));
   });
 });

@@ -266,27 +266,14 @@ coop_tilleuls_ck_editor_sonata_media:
 nelmio_api_doc: ~
 
 fos_rest:
-    routing_loader:
-        default_format: json
-        include_format: false
     view:
         view_response_listener: true
         failed_validation: HTTP_BAD_REQUEST
         empty_content: 204
         formats:
-            jsonp: true
             json: true
-            xml: false
-            rss: false
-        templating_formats:
-            html: true
-        force_redirects:
-            html: true
     format_listener:
-        enabled: true
-        rules:
-            - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: false }
-            - { path: ^/, stop: true }
+        enabled: false # We support only json
     # versioning: false
     body_listener:
         enabled: true

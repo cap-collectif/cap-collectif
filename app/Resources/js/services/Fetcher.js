@@ -49,7 +49,7 @@ const addAuthorization = (req) => {
 
 class Fetcher {
 
-  get(uri: string): Promise<Object> {
+  get(uri: string): Promise<*> {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {

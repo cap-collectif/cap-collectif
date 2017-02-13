@@ -3,6 +3,10 @@ import { call, put } from 'redux-saga/effects';
 import {
   reducer,
   fetchAllVotes,
+  DELETE_VOTE_SUCCEEDED,
+  VOTES_FETCH_SUCCEEDED,
+  VOTES_FETCH_FAILED,
+  VOTE_SUCCEEDED,
  } from './idea';
 import Fetcher from '../../services/Fetcher';
 
@@ -18,7 +22,7 @@ describe('Idea Reducer', () => {
         { username: 'popo' },
     ];
     const newState = reducer(initialState, {
-      type: 'idea/VOTES_FETCH_SUCCEEDED',
+      type: VOTES_FETCH_SUCCEEDED,
       ideaId: 1,
       votes,
     });
@@ -37,7 +41,7 @@ describe('Idea Reducer', () => {
       },
     };
     const newState = reducer(initialState, {
-      type: 'idea/VOTE_SUCCEEDED',
+      type: VOTE_SUCCEEDED,
       ideaId: 1,
       vote: { id: 2 },
     });
@@ -64,7 +68,7 @@ describe('Idea Reducer', () => {
       },
     };
     let newState = reducer(initialState, {
-      type: 'idea/DELETE_VOTE_SUCCEEDED',
+      type: DELETE_VOTE_SUCCEEDED,
       ideaId: 1,
       vote: { user: { unidId: 'user' } },
     });
@@ -78,7 +82,7 @@ describe('Idea Reducer', () => {
       },
     });
     newState = reducer(initialState, {
-      type: 'idea/DELETE_VOTE_SUCCEEDED',
+      type: DELETE_VOTE_SUCCEEDED,
       ideaId: 1,
       vote: { private: true },
     });
@@ -107,13 +111,13 @@ describe('Idea Sagas', () => {
       votes,
     }).value).toEqual(
       put({
-        type: 'idea/VOTES_FETCH_SUCCEEDED',
+        type: VOTES_FETCH_SUCCEEDED,
         ideaId: 1,
         votes,
       }),
     );
     expect(generator.next().value).toEqual(call(Fetcher.get, '/ideas/1/votes?offset=50&limit=50'));
 
-    expect(generator.throw({}).value).toEqual(put({ type: 'idea/VOTES_FETCH_FAILED', error: {} }));
+    expect(generator.throw({}).value).toEqual(put({ type: VOTES_FETCH_FAILED, error: {} }));
   });
 });

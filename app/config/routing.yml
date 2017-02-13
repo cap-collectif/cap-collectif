@@ -14,118 +14,164 @@ capco_api_login_check:
 
 capco_api_synthesis:
   resource: "@CapcoAppBundle/Controller/Api/SynthesisController.php"
-  type: rest
+  type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_ideas:
   resource: "@CapcoAppBundle/Controller/Api/IdeasController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_projects:
   resource: "@CapcoAppBundle/Controller/Api/ProjectsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_comments:
   resource: "@CapcoAppBundle/Controller/Api/CommentsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_districts:
   resource: "@CapcoAppBundle/Controller/Api/DistrictsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_users:
   resource: "@CapcoAppBundle/Controller/Api/UsersController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_events:
   resource: "@CapcoAppBundle/Controller/Api/EventsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_posts:
   resource: "@CapcoAppBundle/Controller/Api/PostsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_selection_steps:
   resource: "@CapcoAppBundle/Controller/Api/SelectionStepsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_collect_steps:
   resource: "@CapcoAppBundle/Controller/Api/CollectStepsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_opinions:
   resource: "@CapcoAppBundle/Controller/Api/OpinionsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_opinion_links:
   resource: "@CapcoAppBundle/Controller/Api/OpinionLinksController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_opinion_types:
   resource: "@CapcoAppBundle/Controller/Api/OpinionTypesController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_projects:
   resource: "@CapcoAppBundle/Controller/Api/ProjectsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_questionnaires:
   resource: "@CapcoAppBundle/Controller/Api/QuestionnairesController.php"
-  type: rest
+  type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_proposal_forms:
   resource: "@CapcoAppBundle/Controller/Api/ProposalFormsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_proposals:
   resource: "@CapcoAppBundle/Controller/Api/ProposalsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_themes:
   resource: "@CapcoAppBundle/Controller/Api/ThemesController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_statuses:
   resource: "@CapcoAppBundle/Controller/Api/StatusesController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_arguments:
   resource: "@CapcoAppBundle/Controller/Api/ArgumentsController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_sources:
   resource: "@CapcoAppBundle/Controller/Api/SourcesController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_categories:
   resource: "@CapcoAppBundle/Controller/Api/CategoriesController.php"
   type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 capco_api_replies:
   resource: "@CapcoAppBundle/Controller/Api/RepliesController.php"
-  type: rest
+  type: annotation
   prefix: /api
+  defaults:
+    _format: json
 
 # App
 capco_app:

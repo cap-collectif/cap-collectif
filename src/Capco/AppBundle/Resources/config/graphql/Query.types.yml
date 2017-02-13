@@ -3,13 +3,6 @@ Query:
     config:
         description: "A humanoid creature in the Star Wars universe."
         fields:
-            users:
-                type: "[User]"
-                args:
-                    superAdmin:
-                        type: "Boolean!"
-                        description: "Remove super admin from export."
-                resolve: "@=resolver('user', [args])"
             consultations:
                 type: "[Consultation]"
                 args:

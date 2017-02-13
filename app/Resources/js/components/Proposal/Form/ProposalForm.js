@@ -12,7 +12,7 @@ import ProposalPrivateField from '../ProposalPrivateField';
 import { submitProposal, updateProposal, cancelSubmitProposal } from '../../../redux/modules/proposal';
 import { loadSuggestions } from '../../../actions/ProposalActions';
 
-export const ProposalForm = React.createClass({
+const ProposalForm = React.createClass({
   propTypes: {
     currentStepId: PropTypes.number.isRequired,
     form: PropTypes.object.isRequired,
@@ -363,7 +363,7 @@ export const ProposalForm = React.createClass({
             </Input>
         }
         {
-          features.districts && form.usingDistrict && districts.length > 0 &&
+          features.districts && form.usingDistrict &&
             <Input
               id="proposal_district"
               type="select"

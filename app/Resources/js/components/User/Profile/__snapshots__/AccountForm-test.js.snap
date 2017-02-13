@@ -26,9 +26,7 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
     bsStyle="danger"
     closeLabel="Close Alert">
     <p>
-      <FormattedHTMLMessage
-        message="<strong>Mot de passe incorrect.</strong> Entrez votre mot de passe actuel pour modifier votre adresse email."
-        tagName="span" />
+      Mot de passe incorrect ! Entrez votre mot de passe actuel pour modifier votre email.
     </p>
   </Alert>
   <Field

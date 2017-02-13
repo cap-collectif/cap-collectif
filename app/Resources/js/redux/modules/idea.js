@@ -1,64 +1,44 @@
-// @flow
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
-import type { IOEffect } from 'redux-saga/effects';
 import { find, findLast } from 'lodash';
 import Fetcher from '../../services/Fetcher';
-import type { Action } from '../../types';
 
 export const VOTES_PREVIEW_COUNT = 8;
+export const VOTES_FETCH_REQUESTED = 'idea/VOTES_FETCH_REQUESTED';
+export const VOTES_FETCH_SUCCEEDED = 'idea/VOTES_FETCH_SUCCEEDED';
+export const VOTES_FETCH_FAILED = 'idea/VOTES_FETCH_FAILED';
+export const VOTE_SUCCEEDED = 'idea/VOTE_SUCCEEDED';
+export const DELETE_VOTE_SUCCEEDED = 'idea/DELETE_VOTE_SUCCEEDED';
 
-type Vote = {
-  private: boolean,
-  user: ?{
-    uniqId: string
-  }
-};
-
-type Idea = {
-  id: number,
-  votesCount: number,
-  votes: Array<Vote>
-};
-
-type IdeaMap = {[id: number]: Idea};
-
-type RequestVotesFetchAction = { type: 'idea/VOTES_FETCH_REQUESTED', ideaId: number };
-type ReceivedVotesFetchSuccededAction = { type: 'idea/VOTES_FETCH_SUCCEEDED', votes: Array<Vote>, ideaId: number };
-type ReceivedVotesFetchFailedAction = { type: 'idea/VOTES_FETCH_FAILED', error: string };
-type VoteSucceedAction = { type: 'idea/VOTE_SUCCEEDED', ideaId: number, vote: Vote };
-type DeleteVoteSucceedAction = { type: 'idea/DELETE_VOTE_SUCCEEDED', ideaId: number, vote: Vote };
-
-export type IdeaAction = RequestVotesFetchAction | ReceivedVotesFetchSuccededAction | ReceivedVotesFetchFailedAction | VoteSucceedAction | DeleteVoteSucceedAction;
-
-export type State = {
-  currentIdeaById: ?number,
-  ideas: IdeaMap
-};
-
-const initialState: State = {
+const initialState = {
   currentIdeaById: null,
-  ideas: {},
+  ideas: [],
 };
 
-export const deleteVoteSucceeded = (ideaId: number, vote: Vote): DeleteVoteSucceedAction => ({
-  type: 'idea/DELETE_VOTE_SUCCEEDED',
-  ideaId,
-  vote,
-});
+export const deleteVoteSucceeded = (ideaId, vote) => {
+  return {
+    type: DELETE_VOTE_SUCCEEDED,
+    ideaId,
+    vote,
+  };
+};
 
-export const fetchIdeaVotes = (ideaId: number): RequestVotesFetchAction => ({
-  type: 'idea/VOTES_FETCH_REQUESTED',
-  ideaId,
-});
+export const fetchIdeaVotes = (ideaId) => {
+  return {
+    type: VOTES_FETCH_REQUESTED,
+    ideaId,
+  };
+};
 
-export const voteSuccess = (ideaId: number, vote: Vote): VoteSucceedAction => ({
-  type: 'idea/VOTE_SUCCEEDED',
-  ideaId,
-  vote,
-});
+export const voteSuccess = (ideaId, vote) => {
+  return {
+    type: VOTE_SUCCEEDED,
+    ideaId,
+    vote,
+  };
+};
 
-export function* fetchAllVotes(action: RequestVotesFetchAction): Generator<IOEffect, *, *> {
+export function* fetchAllVotes(action) {
   try {
     let hasMore = true;
     let iterationCount = 0;
@@ -70,22 +50,20 @@ export function* fetchAllVotes(action: RequestVotesFetchAction): Generator<IOEff
       );
       hasMore = result.hasMore;
       iterationCount++;
-      const succeededAction : ReceivedVotesFetchSuccededAction = { type: 'idea/VOTES_FETCH_SUCCEEDED', votes: result.votes, ideaId: action.ideaId };
-      yield put(succeededAction);
+      yield put({ type: VOTES_FETCH_SUCCEEDED, votes: result.votes, ideaId: action.ideaId });
     }
   } catch (e) {
-    const failedAction: ReceivedVotesFetchFailedAction = { type: 'idea/VOTES_FETCH_FAILED', error: e };
-    yield put(failedAction);
+    yield put({ type: VOTES_FETCH_FAILED, error: e });
   }
 }
 
-export function* saga(): Generator<IOEffect, *, *> {
-  yield* takeEvery('idea/VOTES_FETCH_REQUESTED', fetchAllVotes);
+export function* saga() {
+  yield* takeEvery(VOTES_FETCH_REQUESTED, fetchAllVotes);
 }
 
-export const reducer = (state: State = initialState, action: Action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'idea/VOTES_FETCH_SUCCEEDED': {
+    case VOTES_FETCH_SUCCEEDED: {
       let votes = state.ideas[action.ideaId].votes;
       if (votes.length <= VOTES_PREVIEW_COUNT) {
         votes = []; // we remove preview votes
@@ -98,7 +76,7 @@ export const reducer = (state: State = initialState, action: Action) => {
       };
       return { ...state, ideas };
     }
-    case 'idea/VOTE_SUCCEEDED': {
+    case VOTE_SUCCEEDED: {
       const idea = state.ideas[action.ideaId];
       const ideas = {
         [action.ideaId]: {
@@ -112,15 +90,13 @@ export const reducer = (state: State = initialState, action: Action) => {
       };
       return { ...state, ideas };
     }
-    case 'idea/DELETE_VOTE_SUCCEEDED': {
+    case DELETE_VOTE_SUCCEEDED: {
       const idea = state.ideas[action.ideaId];
       let index = 0;
-      const actionVote = action.vote;
-      if (actionVote.private) {
+      if (action.vote.private) {
         index = idea.votes.indexOf(findLast(idea.votes, v => v.private));
-      } else if (actionVote.user != null) {
-        const user = actionVote.user;
-        index = idea.votes.indexOf(find(idea.votes, v => v.user && v.user.uniqId === user.uniqId));
+      } else {
+        index = idea.votes.indexOf(find(idea.votes, v => v.user && v.user.uniqId === action.vote.user.uniqId));
       }
       const ideas = {
         [action.ideaId]: {
@@ -134,8 +110,8 @@ export const reducer = (state: State = initialState, action: Action) => {
       };
       return { ...state, ideas };
     }
-    case 'idea/VOTES_FETCH_FAILED': {
-      console.log('VOTES_FETCH_FAILED', action.error); // eslint-disable-line no-console
+    case VOTES_FETCH_FAILED: {
+      console.log(VOTES_FETCH_FAILED, action.error); // eslint-disable-line no-console
       return state;
     }
     default:

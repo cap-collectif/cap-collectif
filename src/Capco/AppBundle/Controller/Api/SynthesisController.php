@@ -121,7 +121,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
-     * @Get("/syntheses/{id}")
+     * @Get("/syntheses/{id}", name="get_synthesis")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"SynthesisDetails", "Elements"})
      */
@@ -204,7 +204,7 @@ class SynthesisController extends FOSRestController
      * @QueryParam(name="type", nullable=true)
      * @QueryParam(name="offset", nullable=true)
      * @QueryParam(name="limit", nullable=true)
-     * @Get("/syntheses/{id}/elements")
+     * @Get("/syntheses/{id}/elements", name="get_synthesis_elements")
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementsList", "UserDetails"})
      */
     public function getSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
@@ -300,7 +300,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
-     * @Get("/syntheses/{synthesis_id}/elements/{element_id}")
+     * @Get("/syntheses/{synthesis_id}/elements/{element_id}", name="get_synthesis_element")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
@@ -398,7 +398,7 @@ class SynthesisController extends FOSRestController
      * )
      *
      * @Security("has_role('ROLE_ADMIN')")
-     * @Get("/syntheses/{synthesis_id}/elements/{element_id}/history")
+     * @Get("/syntheses/{synthesis_id}/elements/{element_id}/history", name="get_synthesis_element_history")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
      * @View(serializerGroups={"Elements", "LogDetails"})

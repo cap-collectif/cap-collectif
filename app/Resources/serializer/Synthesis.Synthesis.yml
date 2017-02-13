@@ -37,4 +37,3 @@ Capco\AppBundle\Entity\Synthesis\Synthesis:
           id: expr(object.getId())
       exclusion:
         groups: [Syntheses, SynthesisDetails]
-
