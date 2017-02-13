@@ -672,6 +672,9 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function canHaveProgessSteps(): bool
     {
+        if (!$this->getProposalForm()) { // for sonata
+          return false;
+        }
         return $this->getProposalForm()->getStep()->getProject()->getSteps()->exists(function ($key, $step) {
             return $step->getStep()->isSelectionStep() && $step->getStep()->isAllowingProgressSteps();
         });
