@@ -10,70 +10,65 @@ import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
 import type { Dispatch, Action } from '../../types';
 
-export const POSTS_FETCH_REQUESTED = 'proposal/POSTS_FETCH_REQUESTED';
-export const POSTS_FETCH_SUCCEEDED = 'proposal/POSTS_FETCH_SUCCEEDED';
-export const POSTS_FETCH_FAILED = 'proposal/POSTS_FETCH_FAILED';
-export const OPEN_CREATE_MODAL = 'proposal/OPEN_CREATE_MODAL';
-export const CLOSE_CREATE_MODAL = 'proposal/CLOSE_CREATE_MODAL';
-export const FETCH_REQUESTED = 'proposal/FETCH_REQUESTED';
-export const FETCH_SUCCEEDED = 'proposal/FETCH_SUCCEEDED';
-export const VOTE_REQUESTED = 'proposal/VOTE_REQUESTED';
-export const VOTE_SUCCEEDED = 'proposal/VOTE_SUCCEEDED';
-export const VOTE_FAILED = 'proposal/VOTE_FAILED';
-export const OPEN_VOTE_MODAL = 'proposal/OPEN_VOTE_MODAL';
-export const CLOSE_VOTE_MODAL = 'proposal/CLOSE_VOTE_MODAL';
-export const VOTES_FETCH_REQUESTED = 'proposal/VOTES_FETCH_REQUESTED';
-export const VOTES_FETCH_SUCCEEDED = 'proposal/VOTES_FETCH_SUCCEEDED';
-export const VOTES_FETCH_FAILED = 'proposal/VOTES_FETCH_FAILED';
-export const DELETE_VOTE_REQUESTED = 'proposal/DELETE_VOTE_REQUESTED';
-export const DELETE_VOTE_SUCCEEDED = 'proposal/DELETE_VOTE_SUCCEEDED';
-export const DELETE_VOTE_FAILED = 'proposal/DELETE_VOTE_FAILED';
-export const PROPOSAL_PAGINATION = 51;
-export const CHANGE_PAGE = 'proposal/CHANGE_PAGE';
-export const CHANGE_ORDER = 'proposal/CHANGE_ORDER';
-export const CHANGE_TERMS = 'proposal/CHANGE_TERMS';
-export const CHANGE_FILTER = 'proposal/CHANGE_FILTER';
-export const SUBMIT_PROPOSAL_FORM = 'proposal/SUBMIT_PROPOSAL_FORM';
-export const OPEN_VOTES_MODAL = 'proposal/OPEN_VOTES_MODAL';
-export const CLOSE_VOTES_MODAL = 'proposal/CLOSE_VOTES_MODAL';
-export const CLOSE_DELETE_MODAL = 'proposal/CLOSE_DELETE_MODAL';
-export const OPEN_DELETE_MODAL = 'proposal/OPEN_DELETE_MODAL';
-export const CLOSE_EDIT_MODAL = 'proposal/CLOSE_EDIT_MODAL';
-export const OPEN_EDIT_MODAL = 'proposal/OPEN_EDIT_MODAL';
-export const CANCEL_SUBMIT_PROPOSAL = 'proposal/CANCEL_SUBMIT_PROPOSAL';
-const DELETE_REQUEST = 'proposal/DELETE_REQUEST';
-const EDIT_PROPOSAL_FORM = 'proposal/EDIT_PROPOSAL_FORM';
-const CLOSE_CREATE_FUSION_MODAL = 'proposal/CLOSE_CREATE_FUSION_MODAL';
-const OPEN_CREATE_FUSION_MODAL = 'proposal/OPEN_CREATE_FUSION_MODAL';
-const SUBMIT_FUSION_FORM = 'proposa/SUBMIT_FUSION_FORM';
-const CANCEL_SUBMIT_FUSION_FORM = 'proposa/CANCEL_SUBMIT_FUSION_FORM';
-const LOAD_SELECTIONS_SUCCEEDED = 'proposal/LOAD_SELECTIONS_SUCCEEDED';
-const LOAD_SELECTIONS_REQUEST = 'proposal/LOAD_SELECTIONS_REQUEST';
-const UNSELECT_SUCCEED = 'proposal/UNSELECT_SUCCEED';
-const SELECT_SUCCEED = 'proposal/SELECT_SUCCEED';
-const UPDATE_SELECTION_STATUS_SUCCEED = 'proposal/UPDATE_SELECTION_STATUS_SUCCEED';
-const UPDATE_PROPOSAL_STATUS_SUCCEED = 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED';
-const SEND_PROPOSAL_NOTIFICATION_SUCCEED = 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED';
-const SEND_PROPOSAL_NOTIFICATION_ERROR = 'proposal/SEND_SELECTION_NOTIFICATION_ERROR';
+const PROPOSAL_PAGINATION = 20;
 
 type Status = { id: number };
 type ChangeFilterAction = { type: 'proposal/CHANGE_FILTER', filter: string, value: string };
-type ChangeOrderAction = { type: 'proposal/CHANGE_ODER', order: string };
+type ChangeOrderAction = { type: 'proposal/CHANGE_ORDER', order: string };
 type SubmitFusionFormAction = { type: 'proposal/SUBMIT_FUSION_FORM', proposalForm: number };
 type FetchVotesRequestedAction = {
   type: 'proposal/VOTES_FETCH_REQUESTED',
   stepId: number,
   proposalId: number
 };
+type LoadSelectionsAction = { type: 'proposal/LOAD_SELECTIONS_REQUEST', proposalId: number };
+type LoadSelectionsSucessAction = { type: 'proposal/LOAD_SELECTIONS_SUCCEEDED', proposalId: number };
+type CloseCreateFusionModalAction = { type: 'proposal/CLOSE_CREATE_FUSION_MODAL' };
+type OpenCreateFusionModalAction = { type: 'proposal/OPEN_CREATE_FUSION_MODAL' };
+type CancelSubmitFusionFormAction = { type: 'proposal/CANCEL_SUBMIT_FUSION_FORM' };
+type OpenVotesModalAction = { type: 'proposal/OPEN_VOTES_MODAL', stepId: number };
+type CloseVotesModalActionAction = { type: 'proposal/CLOSE_VOTES_MODAL', stepId: number };
+type VoteSuccessAction = {
+  type: 'proposal/VOTE_SUCCEEDED',
+  proposalId: number,
+  stepId: number,
+  vote: Object,
+  comment: Object
+};
+type RequestLoadVotesAction = {
+  type: 'proposal/VOTES_FETCH_REQUESTED',
+  stepId: number,
+  proposalId: number
+};
+type DeleteVoteSucceededAction = {
+  type: 'proposal/DELETE_VOTE_SUCCEEDED',
+  proposalId: number,
+  stepId: number,
+  vote: Object
+};
+type RequestDeleteProposalVoteAction = {
+  type: 'proposal/DELETE_VOTE_REQUESTED',
+  proposalId: number
+};
+type CloseEditProposalModalAction = { type: 'proposal/CLOSE_EDIT_MODAL' };
+type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
+type CloseDeleteProposalModalAction = { type: 'proposal/CLOSE_DELETE_MODAL' };
+type OpenDeleteProposalModalAction = { type: 'proposal/OPEN_DELETE_MODAL' };
+type SubmitProposalFormAction = { type: 'proposal/SUBMIT_PROPOSAL_FORM' };
+type EditProposalFormAction = { type: 'proposal/EDIT_PROPOSAL_FORM' };
+type OpenCreateModalAction = { type: 'proposal/OPEN_CREATE_MODAL' };
+type CancelSubmitProposalAction = { type: 'proposal/CANCEL_SUBMIT_PROPOSAL' };
+type CloseCreateModalAction = { type: 'proposal/CLOSE_CREATE_MODAL' };
+type OpenVoteModalAction = { type: 'proposal/OPEN_VOTE_MODAL', id: number };
+type CloseVoteModalAction = { type: 'proposal/CLOSE_VOTE_MODAL' };
+type ChangePageAction = { type: 'proposal/CHANGE_PAGE', page: number };
+type ChangeTermAction = { type: 'proposal/CHANGE_TERMS', terms: string };
+type RequestLoadProposalsAction = { type: 'proposal/FETCH_REQUESTED', step: ?number };
+type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
+type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
+type SendProposalNotificationSuceedAction = { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId: number, stepId: number };
+type SendProposalNotificationFailedAction = { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error: string };
 
-export type ProposalAction =
-    { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId: number, stepId: number }
-  | { type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error: string }
-  | FetchVotesRequestedAction
-  | SubmitFusionFormAction
-  | ChangeFilterAction
-  | Object
-;
 // type Step = {
 //   type: string,
 //   id: number
@@ -135,54 +130,53 @@ const initialState: State = {
   lastNotifiedStepId: null,
 };
 
-export const loadSelections = (proposalId: number): Action => ({ type: LOAD_SELECTIONS_REQUEST, proposalId });
-export const loadSelectionsSucess = (proposalId: number): Action => ({ type: LOAD_SELECTIONS_SUCCEEDED, proposalId });
-export const closeCreateFusionModal = (): Action => ({ type: CLOSE_CREATE_FUSION_MODAL });
-export const openCreateFusionModal = (): Action => ({ type: OPEN_CREATE_FUSION_MODAL });
+
+export const loadSelections = (proposalId: number): LoadSelectionsAction => ({ type: 'proposal/LOAD_SELECTIONS_REQUEST', proposalId });
+export const loadSelectionsSucess = (proposalId: number): LoadSelectionsSucessAction => ({ type: 'proposal/LOAD_SELECTIONS_SUCCEEDED', proposalId });
+export const closeCreateFusionModal = (): CloseCreateFusionModalAction => ({ type: 'proposal/CLOSE_CREATE_FUSION_MODAL' });
+export const openCreateFusionModal = (): OpenCreateFusionModalAction => ({ type: 'proposal/OPEN_CREATE_FUSION_MODAL' });
 export const submitFusionForm = (proposalForm: number): SubmitFusionFormAction => ({ type: 'proposal/SUBMIT_FUSION_FORM', proposalForm });
-export const cancelSubmitFusionForm = (): Action => ({ type: CANCEL_SUBMIT_FUSION_FORM });
-export const openVotesModal = (stepId: number): Action => ({ type: OPEN_VOTES_MODAL, stepId });
-export const closeVotesModal = (stepId: number): Action => ({ type: CLOSE_VOTES_MODAL, stepId });
-export const voteSuccess = (proposalId: number, stepId: number, vote: Object, comment: Object): Action => ({
-  type: VOTE_SUCCEEDED,
+export const cancelSubmitFusionForm = (): CancelSubmitFusionFormAction => ({ type: 'proposal/CANCEL_SUBMIT_FUSION_FORM' });
+export const openVotesModal = (stepId: number): OpenVotesModalAction => ({ type: 'proposal/OPEN_VOTES_MODAL', stepId });
+export const closeVotesModal = (stepId: number): CloseVotesModalActionAction => ({ type: 'proposal/CLOSE_VOTES_MODAL', stepId });
+export const voteSuccess = (proposalId: number, stepId: number, vote: Object, comment: Object): VoteSuccessAction => ({
+  type: 'proposal/VOTE_SUCCEEDED',
   proposalId,
   stepId,
   vote,
   comment,
 });
-export const loadVotes = (stepId: number, proposalId: number): Action => ({
-  type: VOTES_FETCH_REQUESTED,
+export const loadVotes = (stepId: number, proposalId: number): RequestLoadVotesAction => ({
+  type: 'proposal/VOTES_FETCH_REQUESTED',
   stepId,
   proposalId,
 });
-export const deleteVoteSucceeded = (stepId: number, proposalId: number, vote: Object): Action => ({ type: DELETE_VOTE_SUCCEEDED, proposalId, stepId, vote });
-const deleteVoteRequested = (proposalId: number): Action => ({ type: DELETE_VOTE_REQUESTED, proposalId });
-export const closeEditProposalModal = (): Action => ({ type: CLOSE_EDIT_MODAL });
-export const openEditProposalModal = (): Action => ({ type: OPEN_EDIT_MODAL });
-export const closeDeleteProposalModal = (): Action => ({ type: CLOSE_DELETE_MODAL });
-export const openDeleteProposalModal = (): Action => ({ type: OPEN_DELETE_MODAL });
-export const submitProposalForm = (): Action => ({ type: SUBMIT_PROPOSAL_FORM });
-export const editProposalForm = (): Action => ({ type: EDIT_PROPOSAL_FORM });
-export const openCreateModal = (): Action => ({ type: OPEN_CREATE_MODAL });
-export const cancelSubmitProposal = (): Action => ({ type: CANCEL_SUBMIT_PROPOSAL });
-export const closeCreateModal = (): Action => ({ type: CLOSE_CREATE_MODAL });
-export const openVoteModal = (id: number): Action => ({ type: OPEN_VOTE_MODAL, id });
-export const closeVoteModal = () => ({ type: CLOSE_VOTE_MODAL });
-export const changePage = (page: number): Action => ({ type: CHANGE_PAGE, page });
-export const changeOrder = (order: string): Action => ({ type: CHANGE_ORDER, order });
-export const changeTerm = (terms: string): Action => ({
-  type: CHANGE_TERMS,
-  terms,
-});
+export const deleteVoteSucceeded = (stepId: number, proposalId: number, vote: Object): DeleteVoteSucceededAction => ({ type: 'proposal/DELETE_VOTE_SUCCEEDED', proposalId, stepId, vote });
+const deleteVoteRequested = (proposalId: number): RequestDeleteProposalVoteAction => ({ type: 'proposal/DELETE_VOTE_REQUESTED', proposalId });
+export const closeEditProposalModal = (): CloseEditProposalModalAction => ({ type: 'proposal/CLOSE_EDIT_MODAL' });
+export const openEditProposalModal = (): OpenEditProposalModalAction => ({ type: 'proposal/OPEN_EDIT_MODAL' });
+export const closeDeleteProposalModal = (): CloseDeleteProposalModalAction => ({ type: 'proposal/CLOSE_DELETE_MODAL' });
+export const openDeleteProposalModal = (): OpenDeleteProposalModalAction => ({ type: 'proposal/OPEN_DELETE_MODAL' });
+export const submitProposalForm = (): SubmitProposalFormAction => ({ type: 'proposal/SUBMIT_PROPOSAL_FORM' });
+export const editProposalForm = (): EditProposalFormAction => ({ type: 'proposal/EDIT_PROPOSAL_FORM' });
+export const openCreateModal = (): OpenCreateModalAction => ({ type: 'proposal/OPEN_CREATE_MODAL' });
+export const cancelSubmitProposal = (): CancelSubmitProposalAction => ({ type: 'proposal/CANCEL_SUBMIT_PROPOSAL' });
+export const closeCreateModal = (): CloseCreateModalAction => ({ type: 'proposal/CLOSE_CREATE_MODAL' });
+export const openVoteModal = (id: number): OpenVoteModalAction => ({ type: 'proposal/OPEN_VOTE_MODAL', id });
+export const closeVoteModal = (): CloseVoteModalAction => ({ type: 'proposal/CLOSE_VOTE_MODAL' });
+export const changePage = (page: number): ChangePageAction => ({ type: 'proposal/CHANGE_PAGE', page });
+export const changeOrder = (order: string): ChangeOrderAction => ({ type: 'proposal/CHANGE_ORDER', order });
+export const changeTerm = (terms: string): ChangeTermAction => ({ type: 'proposal/CHANGE_TERMS', terms });
 export const changeFilter = (filter: string, value: string): ChangeFilterAction => ({
-  type: CHANGE_FILTER,
+  type: 'proposal/CHANGE_FILTER',
   filter,
   value,
 });
-export const loadProposals = (step: ?number): Action => ({ type: FETCH_REQUESTED, step });
-
+type RequestDeleteAction = { type: 'proposal/DELETE_REQUEST' };
+const deleteRequest = (): RequestDeleteAction => ({ type: 'proposal/DELETE_REQUEST' });
+export const loadProposals = (step: ?number): RequestLoadProposalsAction => ({ type: 'proposal/FETCH_REQUESTED', step });
 export const deleteProposal = (form: number, proposal: Object, dispatch: Dispatch): void => {
-  dispatch({ type: DELETE_REQUEST });
+  dispatch(deleteRequest());
   Fetcher
     .delete(`/proposal_forms/${form}/proposals/${proposal.id}`)
     .then(() => {
@@ -200,16 +194,24 @@ export const deleteProposal = (form: number, proposal: Object, dispatch: Dispatc
       });
     });
 };
+export const startVoting = (): RequestVotingAction => ({ type: 'proposal/VOTE_REQUESTED' });
+export const stopVoting = (): VoteFailedAction => ({ type: 'proposal/VOTE_FAILED' });
 
-export const startVoting = (): Action => ({ type: VOTE_REQUESTED });
-export const stopVoting = (): Action => ({ type: VOTE_FAILED });
 
-const unSelectStepSucceed = (stepId, proposalId): Action => ({ type: UNSELECT_SUCCEED, stepId, proposalId });
-const selectStepSucceed = (stepId, proposalId): Action => ({ type: SELECT_SUCCEED, stepId, proposalId });
-const updateSelectionStatusSucceed = (stepId: number, proposalId: number, status: ?Status): Action => ({ type: UPDATE_SELECTION_STATUS_SUCCEED, stepId, proposalId, status });
-const updateProposalCollectStatusSucceed = (proposalId: number, stepId: number, status: ?Status): Action => ({ type: UPDATE_PROPOSAL_STATUS_SUCCEED, proposalId, stepId, status });
-export const sendProposalNotificationSucceed = (proposalId: number, stepId: number): Action => ({ type: SEND_PROPOSAL_NOTIFICATION_SUCCEED, proposalId, stepId });
-const sendProposalNotificationError = (error: string): Action => ({ type: SEND_PROPOSAL_NOTIFICATION_ERROR, error });
+type SelectStepSucceedAction = { type: 'proposal/SELECT_SUCCEED', stepId: number, proposalId: number };
+type UnSelectStepSucceedAction = { type: 'proposal/UNSELECT_SUCCEED', stepId: number, proposalId: number };
+
+const unSelectStepSucceed = (stepId, proposalId): UnSelectStepSucceedAction => ({ type: 'proposal/UNSELECT_SUCCEED', stepId, proposalId });
+const selectStepSucceed = (stepId: number, proposalId: number): SelectStepSucceedAction => ({ type: 'proposal/SELECT_SUCCEED', stepId, proposalId });
+
+type UpdateSelectionStatusSucceedAction = { type: 'proposal/UPDATE_SELECTION_STATUS_SUCCEED', stepId: number, proposalId: number, status: ?Status };
+const updateSelectionStatusSucceed = (stepId: number, proposalId: number, status: ?Status): UpdateSelectionStatusSucceedAction => ({ type: 'proposal/UPDATE_SELECTION_STATUS_SUCCEED', stepId, proposalId, status });
+
+type UpdateProposalCollectStatusSucceedAction = { type: 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED', proposalId: number, stepId: number, status: ?Status };
+const updateProposalCollectStatusSucceed = (proposalId: number, stepId: number, status: ?Status): UpdateProposalCollectStatusSucceedAction => ({ type: 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED', proposalId, stepId, status });
+
+export const sendProposalNotificationSucceed = (proposalId: number, stepId: number): SendProposalNotificationSuceedAction => ({ type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED', proposalId, stepId });
+const sendProposalNotificationError = (error: string): SendProposalNotificationFailedAction => ({ type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', error });
 
 export const sendProposalNotification = (dispatch: Dispatch, proposalId: number, stepId: number): void => {
   Fetcher.post(`/proposals/${proposalId}/notify-status-changed`)
@@ -410,14 +412,14 @@ export function* fetchVotesByStep(action: FetchVotesRequestedAction): Generator<
       hasMore = result.hasMore;
       iterationCount++;
       yield put({
-        type: VOTES_FETCH_SUCCEEDED,
+        type: 'proposal/VOTES_FETCH_SUCCEEDED',
         votes: result.votes,
         stepId,
         proposalId,
       });
     }
   } catch (e) {
-    yield put({ type: VOTES_FETCH_FAILED, error: e });
+    yield put({ type: 'proposal/VOTES_FETCH_FAILED', error: e });
   }
 }
 
@@ -475,24 +477,25 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
       filters: state.filters,
     },
   );
-  yield put({ type: FETCH_SUCCEEDED, proposals: result.proposals, count: result.count });
+  yield put({ type: 'proposal/FETCH_SUCCEEDED', proposals: result.proposals, count: result.count });
 }
 
 
-export const fetchProposalPosts = (proposalId: number): Action => ({ type: POSTS_FETCH_REQUESTED, proposalId });
+type RequestFetchProposalPostsAction = { type: 'proposal/POSTS_FETCH_REQUESTED', proposalId: number };
+export const fetchProposalPosts = (proposalId: number): RequestFetchProposalPostsAction => ({ type: 'proposal/POSTS_FETCH_REQUESTED', proposalId });
 
-export function* fetchPosts(action: Object): Generator<*, *, *> {
+export function* fetchPosts(action: RequestFetchProposalPostsAction): Generator<*, *, *> {
   try {
     const result = yield call(Fetcher.get, `/proposals/${action.proposalId}/posts`);
-    yield put({ type: POSTS_FETCH_SUCCEEDED, posts: result.posts, proposalId: action.proposalId });
+    yield put({ type: 'proposal/POSTS_FETCH_SUCCEEDED', posts: result.posts, proposalId: action.proposalId });
   } catch (e) {
-    yield put({ type: POSTS_FETCH_FAILED, error: e });
+    yield put({ type: 'proposal/POSTS_FETCH_FAILED', error: e });
   }
 }
-export function* fetchSelections(action: Object): Generator<*, *, *> {
+export function* fetchSelections(action: LoadSelectionsAction): Generator<*, *, *> {
   try {
     const selections = yield call(Fetcher.get, `/proposals/${action.proposalId}/selections`);
-    yield put({ type: LOAD_SELECTIONS_SUCCEEDED, selections, proposalId: action.proposalId });
+    yield put({ type: 'proposal/LOAD_SELECTIONS_SUCCEEDED', selections, proposalId: action.proposalId });
   } catch (e) {
     console.log(e); // eslint-disable-line
   }
@@ -517,15 +520,47 @@ export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<
   LocalStorageService.set('proposal.orderByStep', orderByStep);
 }
 
+export type ProposalAction =
+    SendProposalNotificationSuceedAction
+  | SendProposalNotificationFailedAction
+  | FetchVotesRequestedAction
+  | SubmitFusionFormAction
+  | ChangeFilterAction
+  | VoteFailedAction
+  | RequestVotingAction
+  | RequestLoadProposalsAction
+  | ChangeTermAction
+  | OpenDeleteProposalModalAction
+  | ChangePageAction
+  | CloseCreateModalAction
+  | OpenVoteModalAction
+  | CancelSubmitProposalAction
+  | SubmitProposalFormAction
+  | OpenDeleteProposalModalAction
+  | RequestFetchProposalPostsAction
+  | DeleteVoteSucceededAction
+  | LoadSelectionsAction
+  | CloseEditProposalModalAction
+  | RequestDeleteProposalVoteAction
+  | CloseVoteModalAction
+  | VoteSuccessAction
+  | SelectStepSucceedAction
+  | UnSelectStepSucceedAction
+  | UpdateSelectionStatusSucceedAction
+  | UpdateProposalCollectStatusSucceedAction
+  | CloseDeleteProposalModalAction
+  | RequestDeleteAction
+;
+
 export function* saga(): Generator<*, *, *> {
   yield [
-    takeEvery(POSTS_FETCH_REQUESTED, fetchPosts),
-    takeEvery(VOTES_FETCH_REQUESTED, fetchVotesByStep),
-    takeEvery(FETCH_REQUESTED, fetchProposals),
-    takeEvery(SUBMIT_FUSION_FORM, submitFusionFormData),
-    takeEvery(LOAD_SELECTIONS_REQUEST, fetchSelections),
-    takeEvery(CHANGE_FILTER, storeFiltersInLocalStorage),
-    takeEvery(CHANGE_ORDER, storeOrderInLocalStorage),
+    takeEvery('proposal/POSTS_FETCH_REQUESTED', fetchPosts),
+    takeEvery('proposal/VOTES_FETCH_REQUESTED', fetchVotesByStep),
+    takeEvery('proposal/FETCH_REQUESTED', fetchProposals),
+    takeEvery('proposal/SUBMIT_FUSION_FORM', submitFusionFormData),
+    takeEvery('proposal/LOAD_SELECTIONS_REQUEST', fetchSelections),
+    takeEvery('proposal/CHANGE_FILTER', storeFiltersInLocalStorage),
+    takeEvery('proposal/CHANGE_ORDER', storeOrderInLocalStorage),
   ];
 }
 
@@ -645,97 +680,97 @@ export const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
-    case CHANGE_FILTER: {
+    case 'proposal/CHANGE_FILTER': {
       const filters = { ...state.filters, [action.filter]: action.value };
       return { ...state, filters, currentPaginationPage: 1 };
     }
-    case OPEN_CREATE_FUSION_MODAL:
+    case 'proposal/OPEN_CREATE_FUSION_MODAL':
       return { ...state, isCreatingFusion: true };
-    case CLOSE_CREATE_FUSION_MODAL:
+    case 'proposal/CLOSE_CREATE_FUSION_MODAL':
       return { ...state, isCreatingFusion: false };
-    case SUBMIT_FUSION_FORM:
+    case 'proposal/SUBMIT_FUSION_FORM':
       return { ...state, isSubmittingFusion: true };
-    case CANCEL_SUBMIT_FUSION_FORM:
+    case 'proposal/CANCEL_SUBMIT_FUSION_FORM':
       return { ...state, isSubmittingFusion: false };
-    case OPEN_VOTES_MODAL:
+    case 'proposal/OPEN_VOTES_MODAL':
       return { ...state, currentVotesModal: { proposalId: state.currentProposalId, stepId: action.stepId } };
-    case CLOSE_VOTES_MODAL:
+    case 'proposal/CLOSE_VOTES_MODAL':
       return { ...state, currentVotesModal: null };
-    case CHANGE_ORDER:
+    case 'proposal/CHANGE_ORDER':
       return { ...state, order: action.order, currentPaginationPage: 1 };
-    case CHANGE_PAGE:
+    case 'proposal/CHANGE_PAGE':
       return { ...state, currentPaginationPage: action.page };
-    case CHANGE_TERMS:
+    case 'proposal/CHANGE_TERMS':
       return { ...state, terms: action.terms, currentPaginationPage: 1 };
-    case SUBMIT_PROPOSAL_FORM:
+    case 'proposal/SUBMIT_PROPOSAL_FORM':
       return { ...state, isCreating: true };
-    case CANCEL_SUBMIT_PROPOSAL:
+    case 'proposal/CANCEL_SUBMIT_PROPOSAL':
       return { ...state, isCreating: false, isEditing: false };
-    case EDIT_PROPOSAL_FORM:
+    case 'proposal/EDIT_PROPOSAL_FORM':
       return { ...state, isEditing: true };
-    case OPEN_EDIT_MODAL:
+    case 'proposal/OPEN_EDIT_MODAL':
       return { ...state, showEditModal: true };
-    case CLOSE_EDIT_MODAL:
+    case 'proposal/CLOSE_EDIT_MODAL':
       return { ...state, showEditModal: false, isEditing: false };
-    case OPEN_DELETE_MODAL:
+    case 'proposal/OPEN_DELETE_MODAL':
       return { ...state, showDeleteModal: true };
-    case CLOSE_DELETE_MODAL:
+    case 'proposal/CLOSE_DELETE_MODAL':
       return { ...state, showDeleteModal: false, isDeleting: false };
-    case OPEN_CREATE_MODAL:
+    case 'proposal/OPEN_CREATE_MODAL':
       return { ...state, showCreateModal: true };
-    case CLOSE_CREATE_MODAL:
+    case 'proposal/CLOSE_CREATE_MODAL':
       return { ...state, showCreateModal: false, isCreating: false };
-    case OPEN_VOTE_MODAL:
+    case 'proposal/OPEN_VOTE_MODAL':
       return { ...state, currentVoteModal: action.id };
-    case CLOSE_VOTE_MODAL:
+    case 'proposal/CLOSE_VOTE_MODAL':
       return { ...state, currentVoteModal: null, isVoting: false };
-    case VOTE_REQUESTED:
+    case 'proposal/VOTE_REQUESTED':
       return { ...state, isVoting: true };
-    case VOTE_FAILED:
+    case 'proposal/VOTE_FAILED':
       return { ...state, isVoting: false };
-    case SELECT_SUCCEED:
+    case 'proposal/SELECT_SUCCEED':
       return selectSucceededReducer(state, action);
-    case UNSELECT_SUCCEED:
+    case 'proposal/UNSELECT_SUCCEED':
       return unselectReducer(state, action);
-    case UPDATE_PROPOSAL_STATUS_SUCCEED:
+    case 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED':
       return updateProposalStatusReducer(state, action);
-    case UPDATE_SELECTION_STATUS_SUCCEED:
+    case 'proposal/UPDATE_SELECTION_STATUS_SUCCEED':
       return updateSelectionStatusSucceedReducer(state, action);
-    case DELETE_VOTE_REQUESTED:
+    case 'proposal/DELETE_VOTE_REQUESTED':
       return { ...state, currentDeletingVote: action.proposalId };
-    case VOTE_SUCCEEDED:
+    case 'proposal/VOTE_SUCCEEDED':
       return voteReducer(state, action);
-    case DELETE_VOTE_SUCCEEDED:
+    case 'proposal/DELETE_VOTE_SUCCEEDED':
       return deleteVoteReducer(state, action);
-    case DELETE_REQUEST:
+    case 'proposal/DELETE_REQUEST':
       return { ...state, isDeleting: true };
-    case FETCH_REQUESTED:
+    case 'proposal/FETCH_REQUESTED':
       return { ...state, isLoading: true };
-    case FETCH_SUCCEEDED:
+    case 'proposal/FETCH_SUCCEEDED':
       return fetchSucceededReducer(state, action);
-    case LOAD_SELECTIONS_SUCCEEDED: {
+    case 'proposal/LOAD_SELECTIONS_SUCCEEDED': {
       const proposalsById = state.proposalsById;
       proposalsById[action.proposalId] = {
         ...state.proposalsById[action.proposalId], selections: action.selections };
       return { ...state, proposalsById };
     }
-    case POSTS_FETCH_SUCCEEDED: {
+    case 'proposal/POSTS_FETCH_SUCCEEDED': {
       const posts = action.posts;
       const proposalsById = state.proposalsById;
       proposalsById[action.proposalId] = { ...state.proposalsById[action.proposalId], posts };
       return { ...state, proposalsById };
     }
-    case VOTES_FETCH_SUCCEEDED:
+    case 'proposal/VOTES_FETCH_SUCCEEDED':
       return fetchVotesSucceedReducer(state, action);
-    case POSTS_FETCH_FAILED: {
-      console.log(POSTS_FETCH_FAILED, action.error); // eslint-disable-line no-console
+    case 'proposal/POSTS_FETCH_FAILED': {
+      console.log('proposal/POSTS_FETCH_FAILED', action.error); // eslint-disable-line no-console
       return state;
     }
-    case SEND_PROPOSAL_NOTIFICATION_SUCCEED: {
+    case 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED': {
       return { ...state, lastNotifiedStepId: action.stepId };
     }
-    case SEND_PROPOSAL_NOTIFICATION_ERROR: {
-      console.log(SEND_PROPOSAL_NOTIFICATION_ERROR, action.error); // eslint-disable-line no-console
+    case 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR': {
+      console.log('proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', action.error); // eslint-disable-line no-console
       return state;
     }
     default:
