@@ -6,8 +6,8 @@ use League\Csv\Writer;
 
 class GraphQLToCsv
 {
-    public $infoResolver = null;
-    public $csvGenerator = null;
+    protected $infoResolver;
+    protected $csvGenerator;
 
     public function generate(string $requestString, $executor, Writer $writer)
     {
@@ -31,8 +31,11 @@ class GraphQLToCsv
             }
             foreach ($rows as $row) {
                 $writer->insertOne($row);
+
+                // https://github.com/thephpleague/csv/issues/114
                 usleep(100);
             }
         }
     }
+
 }

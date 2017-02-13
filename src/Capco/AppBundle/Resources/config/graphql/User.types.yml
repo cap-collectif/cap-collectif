@@ -1,0 +1,107 @@
+User:
+    type: object
+    config:
+        description: "An user"
+        fields:
+            id:
+                type: "ID!"
+                description: "The id of the user."
+            email:
+                type: "String"
+                description: "email."
+            username:
+                type: "String!"
+                description: "Username of the user."
+            createdAt:
+                type: "String!"
+                description: "Date of creation."
+                resolve: "@=resolver('user_createdAt', [value])"
+            updatedAt:
+                type: "String!"
+                description: "Updated date of the user."
+                resolve: "@=resolver('user_updatedAt', [value])"
+            lastLogin:
+                type: "String!"
+                description: "Last connection of the user."
+                resolve: "@=resolver('user_lastLogin', [value])"
+            enabled:
+                type: "Boolean"
+                description: "Is user is activated."
+            locked:
+                type: "Boolean!"
+            phoneConfirmed:
+                type: "Boolean!"
+            phoneConfirmationSentAt:
+                type: "String!"
+                resolve: "@=resolver('user_phoneConfirmationSentAt', [value])"
+            gender:
+                type: "String!"
+                resolve: "@=resolver('user_gender', [value])"
+            firstname:
+                type: "String!"
+            lastname:
+                type: "String!"
+            dateOfBirth:
+                type: "String!"
+                resolve: "@=resolver('user_dateOfBirth', [value])"
+            userType:
+                type: "String"
+                resolve: "@=resolver('user_userType', [value])"
+            website:
+                type: "String"
+            biography:
+                type: "String"
+            address:
+                type: "String"
+            address2:
+                type: "String"
+            zipCode:
+                type: "String"
+            city:
+                type: "String"
+            phone:
+                type: "String"
+            profileUrl:
+                type: "String"
+                resolve: "@=resolver('user_profileUrl', [value])"
+            googleId:
+                type: "String"
+            facebookId:
+                type: "String"
+            samlId:
+                type: "String"
+            opinionsCount:
+                type: "Int"
+            opinionVotesCount:
+                type: "Int"
+            opinionVersionsCount:
+                type: "Int"
+            argumentsCount:
+                type: "Int"
+            argumentVotesCount:
+                type: "Int"
+            proposalsCount:
+                type: "Int"
+            proposalVotesCount:
+                type: "Int"
+            commentVotesCount:
+                type: "Int"
+            sourcesCount:
+                type: "Int"
+            repliesCount:
+                type: "Int"
+            ideasCount:
+                type: "Int"
+            ideaVotesCount:
+                type: "Int"
+            ideaCommentsCount:
+                type: "Int"
+            postCommentsCount:
+                type: "Int"
+            eventCommentsCount:
+                type: "Int"
+            projectsCount:
+                type: "Int"
+            type:
+                type: "UserType"
+                description: "The facultative type of the person."
