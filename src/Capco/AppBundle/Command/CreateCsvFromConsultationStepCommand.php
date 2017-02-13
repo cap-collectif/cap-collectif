@@ -163,7 +163,7 @@ fragment sourceInfos on Source {
             if ($step->getProject()) {
                 $requestString = $this->getContributionsGraphQLqueryByConsultationStep($step);
                 $fileName = $step->getProject()->getSlug().'_'.$step->getSlug().'.csv';
-                $writer = Writer::createFromPath('/var/www/web/export/'.$fileName, 'w');
+                $writer = Writer::createFromPath($this->getContainer()->getParameter('kernel.root_dir').'/../web/export/'.$fileName, 'w');
                 $writer->setDelimiter(',');
                 $writer->setNewline("\r\n");
                 $writer->setOutputBOM(Writer::BOM_UTF8);
