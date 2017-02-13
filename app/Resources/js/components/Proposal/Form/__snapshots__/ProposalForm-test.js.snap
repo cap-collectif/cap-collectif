@@ -1,0 +1,345 @@
+exports[`<ProposalForm /> should render a simple form without custom field 1`] = `
+<form
+  id="proposal-form">
+  <FormattedHTMLMessage
+    message="description"
+    tagName="span" />
+  <Input
+    addonAfter={
+      <span
+        className="glyphicon glyphicon-refresh" />
+    }
+    autoComplete="off"
+    errors={null}
+    groupClassName=""
+    id="proposal_title"
+    image={null}
+    label="Titre"
+    labelClassName="h5"
+    medias={Array []}
+    onChange={[Function]}
+    type="text"
+    value="proposal title" />
+  <Collapse
+    dimension="height"
+    getDimensionValue={[Function]}
+    in={false}
+    timeout={300}
+    transitionAppear={false}
+    unmountOnExit={false}>
+    <Panel
+      bsClass="panel"
+      bsStyle="default"
+      defaultExpanded={false}
+      header={
+        <FormattedMessage
+          matches={0}
+          message="{matches, plural, one{# proposition déjà déposée contenant} other{# propositions déjà déposées contiennent}} {terms, plural, one{ce mot-clé} other {ces mots-clés}}"
+          tagName="span"
+          terms={2} />
+      }>
+      <ul
+        style={
+          Object {
+            "listStyleType": "none",
+            "padding": 0,
+          }
+        } />
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        navDropdown={false}
+        navItem={false}
+        onClick={[Function]}>
+        Fermer
+      </Button>
+    </Panel>
+  </Collapse>
+  <Input
+    errors={null}
+    groupClassName=""
+    id="proposal_theme"
+    image={null}
+    label={
+      <span>
+        Thème
+      </span>
+    }
+    labelClassName="h5"
+    medias={Array []}
+    type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": -1,
+      }
+    }>
+    <option
+      disabled={true}
+      value={-1}>
+      Sélectionnez un thème
+    </option>
+    <option
+      value={1}>
+      theme1
+    </option>
+  </Input>
+  <Input
+    errors={null}
+    groupClassName=""
+    id="proposal_category"
+    image={null}
+    label={
+      <span>
+        Catégorie
+      </span>
+    }
+    labelClassName="h5"
+    medias={Array []}
+    type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": -1,
+      }
+    }>
+    <option
+      disabled={true}
+      value={-1}>
+      Sélectionnez une catégorie
+    </option>
+    <option
+      value={1}>
+      category1
+    </option>
+  </Input>
+  <Input
+    errors={null}
+    groupClassName=""
+    id="proposal_district"
+    image={null}
+    label={
+      <span>
+        Localisation
+      </span>
+    }
+    labelClassName="h5"
+    medias={Array []}
+    type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    }>
+    <option
+      value="">
+      Sélectionnez une localisation
+    </option>
+    <option
+      value={1}>
+      disctrict1
+    </option>
+  </Input>
+  <Input
+    errors={null}
+    groupClassName=""
+    id="proposal_body"
+    image={null}
+    label="Description"
+    labelClassName="h5"
+    medias={Array []}
+    type="editor"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": undefined,
+      }
+    } />
+  <Input
+    errors={null}
+    groupClassName=""
+    id="proposal_media"
+    image={null}
+    label={
+      <span>
+        Illustration
+        <span
+          className="excerpt">
+            (facultatif)
+        </span>
+      </span>
+    }
+    labelClassName="h5"
+    medias={Array []}
+    type="image"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    } />
+</form>
+`;
+
+exports[`<ProposalForm /> should render a simple form without custom field and district 1`] = `
+<form
+  id="proposal-form">
+  <FormattedHTMLMessage
+    message="description"
+    tagName="span" />
+  <Input
+    addonAfter={
+      <span
+        className="glyphicon glyphicon-refresh" />
+    }
+    autoComplete="off"
+    errors={null}
+    groupClassName=""
+    id="proposal_title"
+    image={null}
+    label="Titre"
+    labelClassName="h5"
+    medias={Array []}
+    onChange={[Function]}
+    type="text"
+    value="proposal title" />
+  <Collapse
+    dimension="height"
+    getDimensionValue={[Function]}
+    in={false}
+    timeout={300}
+    transitionAppear={false}
+    unmountOnExit={false}>
+    <Panel
+      bsClass="panel"
+      bsStyle="default"
+      defaultExpanded={false}
+      header={
+        <FormattedMessage
+          matches={0}
+          message="{matches, plural, one{# proposition déjà déposée contenant} other{# propositions déjà déposées contiennent}} {terms, plural, one{ce mot-clé} other {ces mots-clés}}"
+          tagName="span"
+          terms={2} />
+      }>
+      <ul
+        style={
+          Object {
+            "listStyleType": "none",
+            "padding": 0,
+          }
+        } />
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        navDropdown={false}
+        navItem={false}
+        onClick={[Function]}>
+        Fermer
+      </Button>
+    </Panel>
+  </Collapse>
+  <Input
+    errors={null}
+    groupClassName=""
+    id="proposal_theme"
+    image={null}
+    label={
+      <span>
+        Thème
+      </span>
+    }
+    labelClassName="h5"
+    medias={Array []}
+    type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": -1,
+      }
+    }>
+    <option
+      disabled={true}
+      value={-1}>
+      Sélectionnez un thème
+    </option>
+    <option
+      value={1}>
+      theme1
+    </option>
+  </Input>
+  <Input
+    errors={null}
+    groupClassName=""
+    id="proposal_category"
+    image={null}
+    label={
+      <span>
+        Catégorie
+      </span>
+    }
+    labelClassName="h5"
+    medias={Array []}
+    type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": -1,
+      }
+    }>
+    <option
+      disabled={true}
+      value={-1}>
+      Sélectionnez une catégorie
+    </option>
+    <option
+      value={1}>
+      category1
+    </option>
+  </Input>
+  <Input
+    errors={null}
+    groupClassName=""
+    id="proposal_body"
+    image={null}
+    label="Description"
+    labelClassName="h5"
+    medias={Array []}
+    type="editor"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": undefined,
+      }
+    } />
+  <Input
+    errors={null}
+    groupClassName=""
+    id="proposal_media"
+    image={null}
+    label={
+      <span>
+        Illustration
+        <span
+          className="excerpt">
+            (facultatif)
+        </span>
+      </span>
+    }
+    labelClassName="h5"
+    medias={Array []}
+    type="image"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    } />
+</form>
+`;

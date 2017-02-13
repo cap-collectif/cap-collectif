@@ -20,6 +20,7 @@ export const ProposalListFilters = React.createClass({
     order: PropTypes.string.isRequired,
     filters: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
+    showDistrictFilter: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
