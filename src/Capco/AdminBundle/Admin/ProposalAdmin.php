@@ -473,5 +473,4 @@ class ProposalAdmin extends Admin
     {
         $collection->remove('create');
     }
-
 }
