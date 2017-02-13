@@ -79,7 +79,6 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         $writer->setNewline("\r\n");
         $writer->setOutputBOM(Writer::BOM_UTF8);
         $requestString = $this->getUsersGraphQLQuery();
-        $csvGenerator->setHeaders($this->getHeaders());
         $csvGenerator->generate(
             $requestString,
             $this->getContainer()->get('overblog_graphql.request_executor'),

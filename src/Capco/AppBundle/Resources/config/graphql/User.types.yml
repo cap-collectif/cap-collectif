@@ -71,37 +71,37 @@ User:
             samlId:
                 type: "String"
             opinionsCount:
-                type: "String"
+                type: "Int"
             opinionVotesCount:
-                type: "String"
+                type: "Int"
             opinionVersionsCount:
-                type: "String"
+                type: "Int"
             argumentsCount:
-                type: "String"
+                type: "Int"
             argumentVotesCount:
-                type: "String"
+                type: "Int"
             proposalsCount:
-                type: "String"
+                type: "Int"
             proposalVotesCount:
-                type: "String"
+                type: "Int"
             commentVotesCount:
-                type: "String"
+                type: "Int"
             sourcesCount:
-                type: "String"
+                type: "Int"
             repliesCount:
-                type: "String"
+                type: "Int"
             ideasCount:
-                type: "String"
+                type: "Int"
             ideaVotesCount:
-                type: "String"
+                type: "Int"
             ideaCommentsCount:
-                type: "String"
+                type: "Int"
             postCommentsCount:
-                type: "String"
+                type: "Int"
             eventCommentsCount:
-                type: "String"
+                type: "Int"
             projectsCount:
-                type: "String"
+                type: "Int"
             type:
                 type: "UserType"
                 description: "The facultative type of the person."
