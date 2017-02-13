@@ -596,4 +596,13 @@ class UserRepository extends EntityRepository
             ->orderBy('contributionsCount', $order)
         ;
     }
+
+    public function getAllUsersWithoutSuperAdmin()
+    {
+        $query = $this->createQueryBuilder('user')
+            ->andWhere('user.roles != :role')
+            ->setParameter('role', serialize(['ROLE_SUPER_ADMIN']));
+
+        return $query->getQuery()->getResult();
+    }
 }

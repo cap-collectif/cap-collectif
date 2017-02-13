@@ -1,4 +1,4 @@
-PersonType:
+UserType:
     type: object
     config:
         description: "A type of person"
