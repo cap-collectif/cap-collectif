@@ -74,7 +74,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
     {
         $csvGenerator = new GraphQLToCsv();
         $fileName = 'users_'.EnvHelper::get('SYMFONY_INSTANCE_NAME').'.csv';
-        $writer = Writer::createFromPath('web/export/'.$fileName, 'w');
+        $writer = Writer::createFromPath($this->getContainer()->getParameter('kernel.root_dir').'/../web/export/'.$fileName, 'w');
         $writer->setDelimiter(',');
         $writer->setNewline("\r\n");
         $writer->setOutputBOM(Writer::BOM_UTF8);
