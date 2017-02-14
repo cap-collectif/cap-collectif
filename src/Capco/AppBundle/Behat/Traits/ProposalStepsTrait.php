@@ -615,6 +615,7 @@ trait ProposalStepsTrait
      */
     public function theProposalShouldHaveNbVotes($nb)
     {
+        $this->iWait(2);
         $votesCount = $this->getCurrentPage()->getVotesCount($this->getProposalId());
         \PHPUnit_Framework_Assert::assertEquals($nb, $votesCount, 'Incorrect votes number '.$votesCount.' for proposal.');
     }

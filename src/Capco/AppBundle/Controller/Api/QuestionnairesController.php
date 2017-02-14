@@ -52,9 +52,13 @@ class QuestionnairesController extends FOSRestController
         foreach ($questionnaires as $questionnaire) {
             $questions = $questionnaire->getRealQuestions();
             $rankingQuestions = [];
+            $choiceQuestions = [];
             foreach ($questions as $question) {
                 if ($question->getInputType() === 'ranking') {
                     $rankingQuestions[] = $question;
+                }
+                if ($question->getInputType() === 'radio') {
+                    $choiceQuestions[] = $question;
                 }
             }
             foreach ($rankingQuestions as $rakingQuestion) {
@@ -66,10 +70,19 @@ class QuestionnairesController extends FOSRestController
                     return 0;
                 }, $choices));
                 foreach ($rakingQuestion->getResponses() as $response) {
-                    $score = count($response->getValue()['labels']);
-                    foreach ($response->getValue()['labels'] as $label) {
-                        $scores[$label] += $score;
-                        --$score;
+                    $reply = $response->getReply();
+                    if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
+                      // The score is the maximum number of choices for the question
+                      // 4 replies gives 4 3 2 1 points
+                      // 2 replies with maximum 4 gives 4 3 points
+                      $score = $rakingQuestion->getValidationRule()
+                        ? $rakingQuestion->getValidationRule()->getNumber()
+                        : $rakingQuestion->getQuestionChoices()->count()
+                      ;
+                      foreach ($response->getValue()['labels'] as $label) {
+                          $scores[$label] += $score;
+                          --$score;
+                      }
                     }
                 }
                 $results[] = [
@@ -78,8 +91,26 @@ class QuestionnairesController extends FOSRestController
               'scores' => $scores,
             ];
             }
-        }
-
+            foreach ($choiceQuestions as $choiceQuestion) {
+              $scores = [];
+              foreach ($choiceQuestion->getResponses() as $response) {
+                  $reply = $response->getReply();
+                  if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
+                    $value = $response->getValue();
+                    if (isset($scores[$value])) {
+                      $scores[$value] += 1;
+                    } else {
+                      $scores[$value] = 0;
+                    }
+                  }
+              }
+              $results[] = [
+                'questionnaire_id' => $questionnaire->getId(),
+                'question_title' => $rakingQuestion->getTitle(),
+                'scores' => $scores,
+              ];
+            }
+          }
         return $results;
     }
 }

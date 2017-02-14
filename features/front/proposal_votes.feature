@@ -12,8 +12,12 @@ Feature: Proposal votes
     And I submit the proposal vote form
     And I should see "Merci, votre vote a bien été pris en compte."
     Then the proposal should have 4 votes
+    And I reload the page
+    Then the proposal should have 4 votes
     Then I click the proposal unvote button
     And I should see "Merci, votre vote a bien été supprimé."
+    Then the proposal should have 3 votes
+    And I reload the page
     Then the proposal should have 3 votes
 
   @javascript @database @elasticsearch @votes_from_selection_step
