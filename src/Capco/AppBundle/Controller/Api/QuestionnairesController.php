@@ -106,7 +106,7 @@ class QuestionnairesController extends FOSRestController
               }
               $results[] = [
                 'questionnaire_id' => $questionnaire->getId(),
-                'question_title' => $rakingQuestion->getTitle(),
+                'question_title' => $choiceQuestion->getTitle(),
                 'scores' => $scores,
               ];
             }
