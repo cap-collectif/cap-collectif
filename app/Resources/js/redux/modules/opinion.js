@@ -14,7 +14,7 @@ export type OpinionAction =
   | { type: 'opinion/DELETE_OPINION_VOTE_SUCCEEDED', opinionId: Uuid, vote: OpinionVote }
   | { type: 'opinion/DELETE_VERSION_VOTE_SUCCEEDED', versionId: Uuid, vote: OpinionVote }
   | { type: 'opinion/OPINION_VOTES_FETCH_SUCCEEDED', votes: OpinionVotes, opinionId: Uuid }
-  | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: any }
+  | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: Object }
 ;
 type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: Uuid, versionId: ?Uuid };
 type ContributionMap = {[id: Uuid]: {

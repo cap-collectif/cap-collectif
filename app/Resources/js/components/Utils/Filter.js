@@ -18,7 +18,7 @@ const Filter = React.createClass({
     };
   },
 
-  render(): ?React$Element<any> {
+  render(): ?React$Element<> {
     const {
       onChange,
       show,
@@ -33,7 +33,7 @@ const Filter = React.createClass({
           onChange={onChange}
         >
           {
-            values && values.map((val: number, index: number): ?React$Element<any> => {
+            values && values.map((val: number, index: number): ?React$Element<> => {
               return (
                 <option value={val} key={index}>
                   {this.getIntlMessage(`global.filter_${val}`)}

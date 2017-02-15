@@ -23,9 +23,9 @@ describe('<ProposalForm />', () => {
       description: 'description',
       fields: [],
     },
-    themes: [{id: 1, title: 'theme1'}],
-    districts: [{id: 1, name: 'disctrict1'}],
-    categories: [{id: 1, name: 'category1'}],
+    themes: [{ id: 1, title: 'theme1' }],
+    districts: [{ id: 1, name: 'disctrict1' }],
+    categories: [{ id: 1, name: 'category1' }],
     isSubmitting: false,
     dispatch: () => {},
     features: {

@@ -49,7 +49,7 @@ export const LoginOverlay = React.createClass({
   },
 
   // We add Popover if user is not connected
-  render(): ?React$Element<any> {
+  render(): ?React$Element<> {
     const { user, children, enabled, features } = this.props;
     const { showRegistration, showLogin } = this.state;
 

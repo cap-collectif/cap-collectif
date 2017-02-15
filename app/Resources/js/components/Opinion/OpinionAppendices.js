@@ -20,7 +20,7 @@ const OpinionAppendices = React.createClass({
     if (!appendices) {
       return false;
     }
-    return appendices.some((app) => {
+    return appendices.some((app: Object) => {
       return !!app.body;
     });
   },
@@ -36,10 +36,10 @@ const OpinionAppendices = React.createClass({
       <div className="opinion__description">
         {this.isVersion()
           ?
-          <p>
-            {this.getIntlMessage('opinion.version_parent')}
-            <a href={opinion.parent._links.show} >{opinion.parent.title}</a>
-          </p>
+            <p>
+              {this.getIntlMessage('opinion.version_parent')}
+              <a href={opinion.parent._links.show} >{opinion.parent.title}</a>
+            </p>
           : null
         }
         {

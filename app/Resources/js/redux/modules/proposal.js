@@ -676,7 +676,7 @@ const fetchVotesSucceedReducer = (state: State, action): State => {
   return { ...state, proposalsById };
 };
 
-export const reducer = (state: State = initialState, action: Action): State => {
+export const reducer = (state: State = initialState, action: Action): $Shape<State> => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };

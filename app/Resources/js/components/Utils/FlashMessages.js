@@ -25,7 +25,7 @@ const FlashMessages = React.createClass({
     };
   },
 
-  renderText(message: any): string {
+  renderText(message: string | Object): string | void {
     const { translate } = this.props;
     if (translate) {
       if (typeof message === 'string') {
@@ -37,10 +37,12 @@ const FlashMessages = React.createClass({
           {...message.params}
         />);
     }
-    return message;
+    if (typeof message === 'string') {
+      return message;
+    }
   },
 
-  renderMessage(index: number, message: string, type: string): ?React$Element<any> {
+  renderMessage(index: number, message: string, type: string): ?React$Element<> {
     const {
       form,
       onDismissMessage,
@@ -65,7 +67,7 @@ const FlashMessages = React.createClass({
     );
   },
 
-  render(): ?React$Element<any> {
+  render(): ?React$Element<> {
     const {
       errors,
       success,
@@ -74,12 +76,12 @@ const FlashMessages = React.createClass({
       return (
         <div className="flashmessages">
           {
-            errors && errors.map((message: string, index: number): ?React$Element<any> => {
+            errors && errors.map((message: string, index: number): ?React$Element<> => {
               return this.renderMessage(index, message, 'warning');
             })
           }
           {
-            success && success.map((message: string, index: number): ?React$Element<any> => {
+            success && success.map((message: string, index: number): ?React$Element<> => {
               return this.renderMessage(index, message, 'success');
             })
           }

@@ -109,8 +109,8 @@ class QuestionnairesController extends FOSRestController
                 'question_title' => $choiceQuestion->getTitle(),
                 'scores' => $scores,
               ];
-            }
           }
+        }
         return $results;
     }
 }

@@ -22,7 +22,7 @@ const DatesInterval = React.createClass({
     return moment(endAt).diff(moment(startAt), 'days') < 1;
   },
 
-  render(): ?React$Element<any> {
+  render(): ?React$Element<> {
     const { startAt, endAt } = this.props;
 
     if (!startAt) {
