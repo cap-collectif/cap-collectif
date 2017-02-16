@@ -1,0 +1,112 @@
+import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
+import { connect, type Connector } from 'react-redux';
+
+export const AuthenticationPage = React.createClass({
+  propTypes: {
+    showRegistration: PropTypes.bool.isRequired,
+    count: PropTypes.number.isRequired,
+    queryCount: PropTypes.number,
+    countFusions: PropTypes.number.isRequired,
+    form: PropTypes.object.isRequired,
+    statuses: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
+    proposals: PropTypes.array.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    randomOrder: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  },
+  mixins: [IntlMixin],
+
+  componentDidMount() {
+    this.props.dispatch(loadProposals());
+  },
+
+  render() {
+    const {
+      proposals,
+      categories,
+      form,
+      statuses,
+      step,
+      count,
+      queryCount,
+      countFusions,
+      currentPage,
+      dispatch,
+      isLoading,
+      randomOrder,
+    } = this.props;
+    const total = queryCount || count;
+    const nbPages = Math.ceil(total / PROPOSAL_PAGINATION);
+    const showPagination = nbPages > 1 && !randomOrder;
+    const showRandomButton = nbPages > 1 && randomOrder;
+    return (
+      <div>
+        <StepPageHeader step={step} />
+        {
+          step.type === 'collect'
+            ? <CollectStepPageHeader
+              total={count}
+              countFusions={countFusions}
+              form={form}
+              categories={categories}
+              />
+          : <SelectionStepPageHeader total={count} />
+        }
+        <ProposalListFilters
+          statuses={statuses}
+          categories={categories}
+          orderByVotes={step.voteType !== VOTE_TYPE_DISABLED}
+          showThemes={form.usingThemes}
+          showDistrictFilter={form.usingDistrict}
+        />
+        <br />
+        <Loader show={isLoading}>
+          <div>
+            {
+              proposals.length === 0 && !step.isPrivate
+                ? <p className={{ 'p--centered': true }} style={{ marginBottom: '40px' }}>
+                  { this.getIntlMessage('proposal.empty') }
+                </p>
+              : <VisibilityBox enabled={step.isPrivate}>
+                <ProposalList
+                  proposals={proposals}
+                  step={step}
+                  showThemes={form.usingThemes}
+                />
+              </VisibilityBox>
+            }
+            {
+              showPagination &&
+                <Pagination
+                  current={currentPage}
+                  nbPages={nbPages}
+                  onChange={(newPage) => {
+                    dispatch(changePage(newPage));
+                    dispatch(loadProposals());
+                  }}
+                />
+            }
+            {
+              showRandomButton && <ProposalRandomButton />
+            }
+          </div>
+        </Loader>
+      </div>
+    );
+  },
+
+});
+
+const mapStateToProps = (state, props) => ({
+  stepId: undefined,
+  step: state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.stepId)[0],
+  proposals: state.proposal.proposalShowedId.map(proposal => state.proposal.proposalsById[proposal]),
+  queryCount: state.proposal.queryCount,
+  currentPage: state.proposal.currentPaginationPage,
+  randomOrder: state.proposal.order === 'random',
+  isLoading: state.proposal.isLoading,
+});
+export default connect(mapStateToProps)(ProposalStepPage);

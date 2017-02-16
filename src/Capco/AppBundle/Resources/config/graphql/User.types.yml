@@ -7,7 +7,7 @@ User:
                 type: "ID!"
                 description: "The id of the user."
             email:
-                type: "String!"
+                type: "String"
                 description: "email."
             username:
                 type: "String!"
@@ -17,32 +17,32 @@ User:
                 description: "Date of creation."
                 resolve: "@=resolver('user_createdAt', [value])"
             updatedAt:
-                type: "String"
+                type: "String!"
                 description: "Updated date of the user."
                 resolve: "@=resolver('user_updatedAt', [value])"
             lastLogin:
-                type: "String"
+                type: "String!"
                 description: "Last connection of the user."
                 resolve: "@=resolver('user_lastLogin', [value])"
             enabled:
-                type: "Boolean!"
+                type: "Boolean"
                 description: "Is user is activated."
             locked:
                 type: "Boolean!"
             phoneConfirmed:
                 type: "Boolean!"
             phoneConfirmationSentAt:
-                type: "String"
+                type: "String!"
                 resolve: "@=resolver('user_phoneConfirmationSentAt', [value])"
             gender:
-                type: "String"
+                type: "String!"
                 resolve: "@=resolver('user_gender', [value])"
             firstname:
-                type: "String"
+                type: "String!"
             lastname:
-                type: "String"
+                type: "String!"
             dateOfBirth:
-                type: "String"
+                type: "String!"
                 resolve: "@=resolver('user_dateOfBirth', [value])"
             userType:
                 type: "String"
@@ -71,37 +71,37 @@ User:
             samlId:
                 type: "String"
             opinionsCount:
-                type: "Int!"
+                type: "Int"
             opinionVotesCount:
-                type: "Int!"
+                type: "Int"
             opinionVersionsCount:
-                type: "Int!"
+                type: "Int"
             argumentsCount:
-                type: "Int!"
+                type: "Int"
             argumentVotesCount:
-                type: "Int!"
+                type: "Int"
             proposalsCount:
-                type: "Int!"
+                type: "Int"
             proposalVotesCount:
-                type: "Int!"
+                type: "Int"
             commentVotesCount:
-                type: "Int!"
+                type: "Int"
             sourcesCount:
-                type: "Int!"
+                type: "Int"
             repliesCount:
-                type: "Int!"
+                type: "Int"
             ideasCount:
-                type: "Int!"
+                type: "Int"
             ideaVotesCount:
-                type: "Int!"
+                type: "Int"
             ideaCommentsCount:
-                type: "Int!"
+                type: "Int"
             postCommentsCount:
-                type: "Int!"
+                type: "Int"
             eventCommentsCount:
-                type: "Int!"
+                type: "Int"
             projectsCount:
-                type: "Int!"
+                type: "Int"
             type:
                 type: "UserType"
                 description: "The facultative type of the person."

@@ -70,7 +70,7 @@ class FeaturesCategoryResolver
         ],
         'settings.shield_mode' => [
             'conditions' => [],
-            'features' => ['shield_mode'],
+            'features' => ['shield_mode', 'authentication_page'],
         ],
         'settings.appearance' => [
             'conditions' => [],

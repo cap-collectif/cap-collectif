@@ -35,16 +35,16 @@ const NavbarRight = React.createClass({
           features.search &&
             <NavItem eventKey={1} className="navbar__search" href="/search">
               <i className="cap cap-magnifier"></i> <span
-              className="visible-xs-inline"
-              style={{ whiteSpace: 'nowrap' }}
-            >
-              { this.getIntlMessage('navbar.search') }
-            </span>
+                className="visible-xs-inline"
+                style={{ whiteSpace: 'nowrap' }}
+                                                    >
+                { this.getIntlMessage('navbar.search') }
+              </span>
             </NavItem>
         }
         {
           user
-          ? <NavDropdown
+            ? <NavDropdown
               eventKey={3}
               title={
                 <span>
@@ -56,7 +56,7 @@ const NavbarRight = React.createClass({
               }
               className="navbar__dropdown"
               id="navbar-username"
-          >
+              >
               {
                 user.isAdmin &&
                   <MenuItem key={3.1} eventKey={3.1} href="/admin">
@@ -74,11 +74,11 @@ const NavbarRight = React.createClass({
               </MenuItem>
               <MenuItem key={3.4} divider />
               <MenuItem key={3.5} eventKey={3.5} id="logout-button" onClick={this.logout}>
-                  { this.getIntlMessage('global.logout') }
+                { this.getIntlMessage('global.logout') }
               </MenuItem>
             </NavDropdown>
           : <li>
-              <RegistrationButton />
+            <RegistrationButton />
             { ' ' }
             <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
           </li>

@@ -27,6 +27,7 @@ export type FeatureToggles = {
 };
 
 export type State = {
+  form: Object,
   default: {
     districts: Array<Object>,
     themes: Array<Object>,

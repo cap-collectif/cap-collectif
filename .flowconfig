@@ -1,13 +1,20 @@
 [ignore]
-.*/vendor/*
+; ignore module source to prefer libdef
 .*/node_modules/*
 .*/bower_components/*
+; ignore compiled files
 .*/web/*
+; large dirs that are not imported
+.*/vendor/*
 .*/app/Resources/assets/js/ckeditor/*
 
 [libs]
-flow-typed
+flow-typed/
 
 [options]
+emoji=true
+experimental.const_params=true
+experimental.strict_type_args=true
+module.use_strict=true
 unsafe.enable_getters_and_setters=true
 all=false

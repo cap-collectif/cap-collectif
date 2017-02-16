@@ -79,7 +79,7 @@ class UserController extends Controller
         $trans = $this->get('translator');
 
         $path = $this->container->getParameter('kernel.root_dir').'/../web/export/';
-        $filename = 'users.csv';
+        $filename = 'users_'.EnvHelper::get('SYMFONY_INSTANCE_NAME').'.csv';
 
         if (!file_exists($path.$filename)) {
             $this->get('session')->getFlashBag()->add('danger', $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle'));

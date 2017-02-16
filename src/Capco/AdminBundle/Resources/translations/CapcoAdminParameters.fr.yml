@@ -156,8 +156,8 @@ members:
 
 security:
   shield_mode:
-    password: Mot de passe
-    username: Identifiant
+    password: Mot de passe unique
+    username: Identifiant unique
 
 signin:
   cgu:
