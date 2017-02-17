@@ -11,14 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 class ShieldListener
 {
     protected $manager;
-    protected $router;
     protected $tokenStorage;
     protected $templating;
 
-    public function __construct(Manager $manager, $router, $tokenStorage, $templating)
+    public function __construct(Manager $manager, $tokenStorage, $templating)
     {
         $this->manager = $manager;
-        $this->router = $router;
         $this->tokenStorage = $tokenStorage;
         $this->templating = $templating;
     }
@@ -29,17 +27,9 @@ class ShieldListener
             return;
         }
 
-        // If already authenticated, we don't need to show the page
+        // If already authenticated, we don't need to show the shield
         $token = $this->tokenStorage->getToken();
         if ($token && $token->getUser() instanceof UserInterface) {
-            return;
-        }
-
-        $request = $event->getRequest();
-        $uri = $request->getRequestUri();
-
-        // Requesting API or GraphQL is allowed
-        if (strpos($uri, '/api/') || strpos($uri, '/graphql/')) {
             return;
         }
 

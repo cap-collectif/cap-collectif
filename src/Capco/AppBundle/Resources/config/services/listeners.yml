@@ -17,7 +17,6 @@ services:
     class: Capco\AppBundle\EventListener\ShieldListener
     arguments:
       - "@capco.toggle.manager"
-      - "@router"
       - "@security.token_storage"
       - "@templating"
     tags:
