@@ -19,6 +19,7 @@ services:
       - "@capco.toggle.manager"
       - "@router"
       - "@security.token_storage"
+      - "@templating"
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: -10 }
 
