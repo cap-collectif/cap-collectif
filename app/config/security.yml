@@ -49,6 +49,8 @@ security:
                 provider: saml
             form_login:
                 check_path: /login_check
+                username_parameter: username
+                password_parameter: password
                 require_previous_session: false
                 remember_me: true
             oauth:

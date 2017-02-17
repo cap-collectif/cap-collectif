@@ -3,25 +3,21 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\SiteParameter\Resolver;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ShieldListener
 {
     protected $manager;
-    protected $siteParameterResolver;
-    protected $shieldLogin;
-    protected $shieldPwd;
+    protected $router;
+    protected $tokenStorage;
 
-    public function __construct(Manager $manager, Resolver $siteParameterResolver, string $shieldLogin = null, string $shieldPwd = null)
+    public function __construct(Manager $manager, $router, $tokenStorage)
     {
         $this->manager = $manager;
-        $this->siteParameterResolver = $siteParameterResolver;
-        $this->shieldLogin = $shieldLogin;
-        $this->shieldPwd = $shieldPwd;
+        $this->router = $router;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -30,51 +26,26 @@ class ShieldListener
             return;
         }
 
-        // TODO: If Authenticated allow
+        // If already authenticated, we don't need to show the page
+        $token = $this->tokenStorage->getToken();
+        if ($token && $token->getUser() instanceof UserInterface) {
+            return;
+        }
 
         $request = $event->getRequest();
         $uri = $request->getRequestUri();
+
+        // If already requesting authentication page
+        if (strpos($uri, 'shield')) {
+            return;
+        }
 
         // Requesting API or GraphQL is allowed
         if (strpos($uri, '/api/') || strpos($uri, '/graphql/')) {
             return;
         }
 
-        $header = $request->headers->get('Authorization');
-        
-        // Normal authentication
-        $username = $this->siteParameterResolver->getValue('security.shield_mode.username');
-        if (null == $username) {
-            $username = 'admin';
-        }
-        $pwd = $this->siteParameterResolver->getValue('security.shield_mode.password');
-        $authString = base64_encode($username.':'.$pwd);
-
-        // Maintenance authentication
-        $maintenanceAuthString = null;
-        if ($this->shieldLogin != null && $this->shieldLogin != '' && $this->shieldPwd != null && $this->shieldPwd != '') {
-            $maintenanceAuthString = base64_encode($this->shieldLogin.':'.$this->shieldPwd);
-        }
-
-        if (
-          false === strpos($header, $authString) &&
-          null != $maintenanceAuthString &&
-          false === strpos($header, $maintenanceAuthString)) {
-            $event->setResponse(new Response('Access restricted'));
-            $event->getResponse()->headers->set('WWW-Authenticate', 'Basic realm="Member Area"');
-            $event->getResponse()->setStatusCode('401');
-        }
-
-
-        // // Disabled feature flag on requested url
-        // $flagsAttributes = $request->attributes->get('_feature_flags');
-        // $flags = $flagsAttributes ? explode(',', $flagsAttributes) : [];
-        //
-        // foreach ($flags as $flag) {
-        //     if (null !== $flag && !$this->manager->isActive($flag)) {
-        //         $message = $this->translator->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
-        //         throw new NotFoundHttpException($message);
-        //     }
-        // }
+        $redirect = new RedirectResponse($this->router->generate('authentication_page'));
+        $event->setResponse($redirect);
     }
 }

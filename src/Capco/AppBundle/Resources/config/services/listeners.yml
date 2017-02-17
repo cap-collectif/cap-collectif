@@ -5,21 +5,20 @@ services:
     tags:
       - { name: doctrine.event_listener, event: preFlush, method: preFlush }
 
+  capco.listener.feature_toggle:
+    class: Capco\AppBundle\EventListener\FeatureToggleListener
+    arguments:
+      - "@capco.toggle.manager"
+      - "@translator"
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
   capco.listener.shield:
     class: Capco\AppBundle\EventListener\ShieldListener
     arguments:
       - "@capco.toggle.manager"
-      - "@capco.site_parameter.resolver"
-      - "%shield_login%"
-      - "%shield_pwd%"
-    tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: -20 }
-
-  capco.listener.authentication_page:
-    class: Capco\AppBundle\EventListener\AuthenticationPageListener
-    arguments:
-      - "@capco.toggle.manager"
       - "@router"
+      - "@security.token_storage"
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: -10 }
 

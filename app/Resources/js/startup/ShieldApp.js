@@ -2,10 +2,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
-import AuthenticationPage from '../components/Page/AuthenticationPage';
+import Shield from '../components/Page/ShieldPage';
 
 export default (props: Object) =>
  <Provider store={ReactOnRails.getStore('appStore')}>
-   <AuthenticationPage {...props} />
+   <Shield {...props} />
  </Provider>
 ;

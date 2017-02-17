@@ -13,6 +13,7 @@ import {
 import type { State } from './user';
 
 const initialState : State = {
+  showLoginModal: false,
   isSubmittingAccountForm: false,
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,

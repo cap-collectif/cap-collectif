@@ -1,72 +1,61 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { Field, reduxForm } from 'redux-form';
 import { Alert } from 'react-bootstrap';
-import UserActions from '../../../actions/UserActions';
-import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import Input from '../../Form/Input';
+import renderInput from '../../Form/Field';
+import { login as onSubmit } from '../../../redux/modules/user';
 
-const LoginForm = React.createClass({
+type LoginValues = {
+  username: string,
+  password: string
+};
+const formName = 'login';
+
+const initialValues: LoginValues = {
+  username: '',
+  password: '',
+};
+
+export const LoginForm = React.createClass({
   propTypes: {
-    isSubmitting: PropTypes.bool.isRequired,
-    onSubmitSuccess: PropTypes.func.isRequired,
-    onSubmitFailure: PropTypes.func.isRequired,
+    error: PropTypes.string,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin],
-
-  getInitialState() {
-    return {
-      form: {
-        _username: '',
-        _password: '',
-      },
-      hasError: false,
-    };
-  },
-
-  componentWillReceiveProps(nextProps) {
-    const {
-      onSubmitFailure,
-      onSubmitSuccess,
-    } = this.props;
-    if (nextProps.isSubmitting) {
-      UserActions
-        .login(this.state.form)
-        .then(() => {
-          this.setState(this.getInitialState());
-          onSubmitSuccess();
-        })
-        .catch(() => {
-          this.setState({ hasError: true });
-          onSubmitFailure();
-        });
-    }
-  },
+  mixins: [IntlMixin],
 
   render() {
+    const { error } = this.props;
     return (
       <div>
         {
-          this.state.hasError
-          ? <Alert bsStyle="danger">
-              <p>{this.getIntlMessage('global.login_failed')}</p>
+          error &&
+            <Alert bsStyle="danger">
+              <p>{this.getIntlMessage(error)}</p>
             </Alert>
-          : null
         }
-        <Input
+        <Field
+          name="username"
           type="email"
           autoFocus
-          valueLink={this.linkState('form._username')}
+          disableValidation
           id="_username"
           label={this.getIntlMessage('global.email')}
           autoComplete="email"
+          // labelClassName="col-sm-2"
+          // wrapperClassName="col-sm-10"
+          component={renderInput}
         />
-        <Input
+        <Field
+          name="password"
           type="password"
-          id="_password"
-          valueLink={this.linkState('form._password')}
-          labelClassName="w100 h5"
+          autoFocus
+          disableValidation
+          id="password"
           label={this.getIntlMessage('global.password')}
+          labelClassName="w100 h5"
           autoComplete="current-password"
+          // wrapperClassName="col-sm-10"
+          component={renderInput}
         />
         <a className="small" href="/resetting/request">{this.getIntlMessage('global.forgot_password')}</a>
       </div>
@@ -75,4 +64,9 @@ const LoginForm = React.createClass({
 
 });
 
-export default LoginForm;
+export default reduxForm({
+  initialValues,
+  onSubmit,
+  form: formName,
+  destroyOnUnmount: true,
+})(LoginForm);

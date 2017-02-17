@@ -11,7 +11,6 @@ class Manager
     protected $toggleManager;
 
     protected static $toggles = [
-        'authentication_page',
         'blog',
         'calendar',
         'ideas',
