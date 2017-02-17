@@ -7,6 +7,7 @@ import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import Form from '../../Form/Form';
 import { isEmail } from '../../../services/Validator';
 import type { State } from '../../../types';
+import { login } from '../../../redux/modules/user';
 
 export const validate = (values) => {
   const errors = {};
@@ -54,7 +55,7 @@ export const RegistrationForm = React.createClass({
           actionType: 'UPDATE_ALERT',
           alert: { bsStyle: 'success', content: 'alert.success.add.user' },
         });
-        UserActions.login({ _username: values.email, _password: values.plainPassword });
+        login({ username: values.email, password: values.plainPassword }, this.props.dispatch);
         resolve();
       })
       .catch((error) => {

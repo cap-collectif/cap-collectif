@@ -33,6 +33,21 @@ class ShieldListener
             return;
         }
 
+        $request = $event->getRequest();
+        $availableRoutes = [
+          'capco_api_login_check',
+          'facebook_login',
+          'google_login',
+          'api_login_check',
+          'capco_app_api_users_postuser',
+          'hwi_oauth_service_redirect',
+          'app_get_api_token',
+        ];
+
+        if (in_array($request->get('_route'), $availableRoutes)) {
+            return;
+        }
+
         $response = new Response(
           $this->templating->render('CapcoAppBundle:Default:shield.html.twig')
         );
