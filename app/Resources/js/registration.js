@@ -30,6 +30,7 @@ import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
 import ProjectListPageApp from './startup/ProjectListPageApp';
 import ProposalAdminSelectionsApp from './startup/ProposalAdminSelectionsApp';
+import ShieldApp from './startup/ShieldApp';
 import appStore from '../js/stores/AppStore';
 
 moment.locale('fr');
@@ -38,6 +39,7 @@ window.__SERVER__ = false;
 ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
+  ShieldApp,
   ProjectListPageApp,
   ProjectsListApp,
   ProposalAdminSelectionsApp,

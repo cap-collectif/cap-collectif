@@ -84,7 +84,7 @@ admin.label.settings.appearance: Apparence
 admin.label.settings.global: Général
 admin.label.settings.modules: Fonctionnalités
 admin.label.settings.notifications: Notifications
-admin.label.settings.shield_mode: Mode bouclier
+admin.label.settings.shield_mode: Accès
 
 admin.label.help_block: Besoin d'aide ?
 
@@ -854,7 +854,7 @@ capco:
     login_gplus: Authentification avec Google+
     login_twitter: Authentification avec Twitter
     login_saml: Authentification avec SAML
-    shield_mode: Protection du site par mot de passe
+    shield_mode: Restreindre l'accès au site aux inscrits
     user_type: Demander le type de profil
     members_list: Liste des membres
     projects_form: Pagination

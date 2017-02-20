@@ -119,6 +119,22 @@ class ApplicationContext extends UserContext
      }
 
      /**
+      * @Given I should see the shield
+      */
+      public function iShouldSeeTheShield()
+      {
+        $this->assertSession()->elementExists('css', '#shield-mode');
+      }
+
+      /**
+       * @Given I should not see the shield
+       */
+       public function iShouldNotSeeTheShield()
+       {
+         $this->assertSession()->elementNotExists('css', '#shield-mode');
+       }
+
+     /**
       * @Given I visited :pageName with:
       */
      public function iVisitedPageWith($pageName, TableNode $parameters)
