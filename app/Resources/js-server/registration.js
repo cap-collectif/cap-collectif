@@ -29,7 +29,6 @@ import ShareButtonDropdownApp from '../js/startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from '../js/startup/ProposalCreateFusionButtonApp';
 import ProjectListPageApp from '../js/startup/ProjectListPageApp';
 import ProposalAdminSelectionsApp from '../js/startup/ProposalAdminSelectionsApp';
-import ShieldApp from '../js/startup/ShieldApp';
 import appStore from '../js/stores/AppStore';
 
 moment.locale('fr');
@@ -41,7 +40,6 @@ global.setInterval = global.setInterval || emptyFunction;
 
 ReactOnRails.registerStore({ appStore });
 ReactOnRails.register({
-  ShieldApp,
   ProjectListPageApp,
   ProposalCreateFusionButtonApp,
   ProposalAdminSelectionsApp,

@@ -289,6 +289,19 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 303
         type: 1
 
+    SiteParameterShieldUsername:
+        keyname: security.shield_mode.username
+        category: settings.shield_mode
+        value: admin
+        position: 1000
+        type: 0
+    SiteParameterShieldPassword:
+        keyname: security.shield_mode.password
+        category: settings.shield_mode
+        value: admin
+        position: 1001
+        type: 0
+
     SiteParameterHomepageDarkening:
         keyname: homepage.jumbotron.darken
         category: pages.homepage

@@ -154,6 +154,11 @@ members:
   pagination:
     size: Nombre d'inscrits par page
 
+security:
+  shield_mode:
+    password: Mot de passe
+    username: Identifiant
+
 signin:
   cgu:
     link: Lien du document à accepter

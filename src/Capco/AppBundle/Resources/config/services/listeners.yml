@@ -1,3 +1,6 @@
+parameters:
+  capco.toggle.listener.request.class: Capco\AppBundle\Toggle\RequestListener
+
 services:
   capco.listener.soft_delete:
     class: Capco\AppBundle\EventListener\SoftDeleteEventListener
@@ -5,22 +8,11 @@ services:
     tags:
       - { name: doctrine.event_listener, event: preFlush, method: preFlush }
 
-  capco.listener.feature_toggle:
-    class: Capco\AppBundle\EventListener\FeatureToggleListener
-    arguments:
-      - "@capco.toggle.manager"
-      - "@translator"
+  capco.toggle.listener.request:
+    class:     "%capco.toggle.listener.request.class%"
+    arguments: ["@capco.toggle.manager", "@translator", "@capco.site_parameter.resolver", "%shield_login%", "%shield_pwd%"]
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-
-  capco.listener.shield:
-    class: Capco\AppBundle\EventListener\ShieldListener
-    arguments:
-      - "@capco.toggle.manager"
-      - "@security.token_storage"
-      - "@templating"
-    tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: -10 }
 
   capco.diff.subscriber:
     class: Capco\AppBundle\EventListener\DiffSubscriber
