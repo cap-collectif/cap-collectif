@@ -35,13 +35,13 @@ export const Shield = React.createClass({
       );
     }
     return (
-      <div className="col-md-6 col-md-offset-3 block">
+      <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 block box block--bordered">
         <LoginBox />
         <SubmitButton
           onSubmit={() => { dispatch(submit('login')); }}
           isSubmitting={submitting}
           label="global.login"
-          className="btn-large"
+          className="btn-lg btn-success btn-block"
         />
       </div>
     );
