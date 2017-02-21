@@ -38,6 +38,8 @@ class ShieldListener
         }
 
         $request = $event->getRequest();
+        $route = $request->get('_route');
+
         $availableRoutes = [
           'capco_api_login_check',
           'facebook_login',
@@ -47,15 +49,15 @@ class ShieldListener
           'hwi_oauth_service_redirect',
           'app_get_api_token',
           'sonata_media_view',
+          'sonata_media_download',
           '_wdt',
         ];
 
-        $route = $request->get('_route');
         if (in_array($route, $availableRoutes)) {
             return;
         }
 
-        if (strpos($route, '_imagine')) {
+        if (strpos($route, '_imagine') !== false) {
             return;
         }
 
