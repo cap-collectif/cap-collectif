@@ -46,11 +46,16 @@ class ShieldListener
           'capco_app_api_users_postuser',
           'hwi_oauth_service_redirect',
           'app_get_api_token',
+          'sonata_media_view',
           '_wdt',
         ];
 
         $route = $request->get('_route');
         if (in_array($route, $availableRoutes)) {
+            return;
+        }
+
+        if (strpos($route) === '_imagine') {
             return;
         }
 
