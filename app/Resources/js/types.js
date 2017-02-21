@@ -23,37 +23,10 @@ export type Action =
 ;
 
 export type FeatureToggles = {
-  login_saml: boolean,
-  blog: boolean,
-  calendar: boolean,
-  ideas: boolean,
-  idea_creation: boolean,
-  idea_trash: boolean,
-  login_facebook: boolean,
-  login_gplus: boolean,
-  login_saml: boolean,
-  members_list: boolean,
-  newsletter: boolean,
-  profiles: boolean,
-  projects_form: boolean,
-  project_trash: boolean,
-  search: boolean,
-  share_buttons: boolean,
-  shield_mode: boolean,
-  registration: boolean,
-  phone_confirmation: boolean,
-  reporting: boolean,
-  themes: boolean,
-  districts: boolean,
-  user_type: boolean,
-  votes_evolution: boolean,
-  server_side_rendering: boolean,
-  zipcode_at_register: boolean,
-  vote_without_account: boolean
+  login_saml: boolean
 };
 
 export type State = {
-  form: Object,
   default: {
     districts: Array<Object>,
     themes: Array<Object>,

@@ -129,8 +129,8 @@ class UserContext extends DefaultContext
     private function logInWith($email, $pwd)
     {
         $this->iOpenLoginModal();
-        $this->fillField('username', $email);
-        $this->fillField('password', $pwd);
+        $this->fillField('_username', $email);
+        $this->fillField('_password', $pwd);
         $this->pressButton('Se connecter');
         sleep(4); // TODO
     }

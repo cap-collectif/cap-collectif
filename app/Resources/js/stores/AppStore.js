@@ -10,9 +10,8 @@ import { reducer as proposalReducer, saga as proposalSaga } from '../redux/modul
 import { reducer as opinionReducer, saga as opinionSaga } from '../redux/modules/opinion';
 import { reducer as userReducer } from '../redux/modules/user';
 import type { SubmitConfirmPasswordAction } from '../redux/modules/user';
-import type { Store } from '../types';
 
-export default function configureStore(initialState: Object): Store {
+export default function configureStore(initialState: Object) {
   if (initialState.user.user === null) {
     LocalStorageService.remove('jwt');
   }

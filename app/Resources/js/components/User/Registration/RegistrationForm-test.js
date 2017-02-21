@@ -68,7 +68,7 @@ describe('<RegistrationForm />', () => {
         label: 'Créez un mot de passe',
         labelClassName: 'h5',
         type: 'password',
-        id: 'password',
+        id: '_password',
         popover: {
           id: 'registration-password-tooltip',
           message: 'Le mot de passe doit comporter au moins huit caractères.',

@@ -6,7 +6,6 @@ import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Dispatch, Action } from '../../types';
 
 export type State = {
-  showLoginModal: boolean,
   isSubmittingAccountForm: boolean,
   showConfirmPasswordModal: boolean,
   confirmationEmailResent: boolean,
@@ -27,8 +26,6 @@ export type State = {
   }
 };
 
-type CloseLoginModalAction = { type: 'CLOSE_LOGIN_MODAL' };
-type ShowLoginModalAction = { type: 'SHOW_LOGIN_MODAL' };
 type UserRequestEmailChangeAction = { type: 'USER_REQUEST_EMAIL_CHANGE', email: string };
 type StartSubmittingAccountFormAction = { type: 'SUBMIT_ACCOUNT_FORM' };
 type StopSubmittingAccountFormAction = { type: 'STOP_SUBMIT_ACCOUNT_FORM' };
@@ -37,27 +34,22 @@ type ConfirmPasswordAction = { type: 'SHOW_CONFIRM_PASSWORD_MODAL' };
 export type SubmitConfirmPasswordAction = { type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password: string };
 type CloseConfirmPasswordModalAction = { type: 'CLOSE_CONFIRM_PASSWORD_MODAL' };
 export type UserAction =
-    ShowLoginModalAction |
-    CloseLoginModalAction |
-    StartSubmittingAccountFormAction |
-    ConfirmPasswordAction |
-    StopSubmittingAccountFormAction |
-    CancelEmailChangeSucceedAction |
-    CloseConfirmPasswordModalAction |
-    UserRequestEmailChangeAction |
-    SubmitConfirmPasswordAction
+    StartSubmittingAccountFormAction
+  | ConfirmPasswordAction
+  | StopSubmittingAccountFormAction
+  | CancelEmailChangeSucceedAction
+  | CloseConfirmPasswordModalAction
+  | UserRequestEmailChangeAction
+  | SubmitConfirmPasswordAction
 ;
 
 const initialState : State = {
-  showLoginModal: false,
   isSubmittingAccountForm: false,
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,
   user: null,
 };
 
-export const closeLoginModal = (): CloseLoginModalAction => ({ type: 'CLOSE_LOGIN_MODAL' });
-export const showLoginModal = (): ShowLoginModalAction => ({ type: 'SHOW_LOGIN_MODAL' });
 export const confirmPassword = (): ConfirmPasswordAction => ({ type: 'SHOW_CONFIRM_PASSWORD_MODAL' });
 export const closeConfirmPasswordModal = (): CloseConfirmPasswordModalAction => ({ type: 'CLOSE_CONFIRM_PASSWORD_MODAL' });
 export const startSubmittingAccountForm = (): StartSubmittingAccountFormAction => ({ type: 'SUBMIT_ACCOUNT_FORM' });
@@ -65,28 +57,6 @@ export const stopSubmittingAccountForm = (): StopSubmittingAccountFormAction => 
 export const userRequestEmailChange = (email: string): UserRequestEmailChangeAction => ({ type: 'USER_REQUEST_EMAIL_CHANGE', email });
 export const cancelEmailChangeSucceed = (): CancelEmailChangeSucceedAction => ({ type: 'CANCEL_EMAIL_CHANGE' });
 export const submitConfirmPasswordFormSucceed = (password: string): SubmitConfirmPasswordAction => ({ type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password });
-
-export const login = (data: { email: string, password: string }, dispatch: Dispatch): Promise<*> => {
-  return fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    credentials: 'include',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest',
-    },
-  })
-  .then(response => response.json())
-  .then((response: { success: boolean }) => {
-    if (response.success) {
-      dispatch(closeLoginModal());
-      window.location.reload();
-      return true;
-    }
-    throw new SubmissionError({ _error: 'global.login_failed' });
-  });
-};
 
 export const submitConfirmPasswordForm = ({ password }: { password: string }, dispatch: Dispatch): void => {
   dispatch(submitConfirmPasswordFormSucceed(password));
@@ -149,10 +119,6 @@ export const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
-    case 'SHOW_LOGIN_MODAL':
-      return { ...state, showLoginModal: true };
-    case 'CLOSE_LOGIN_MODAL':
-      return { ...state, showLoginModal: false };
     case 'CANCEL_EMAIL_CHANGE':
       return { ...state, user: { ...state.user, newEmailToConfirm: null }, confirmationEmailResent: false };
     case 'SUBMIT_ACCOUNT_FORM':
