@@ -33,6 +33,9 @@ module.exports = {
   //   }
   // },
   rules: {
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
     'flowtype/boolean-style': ['error', 'boolean'],
     'flowtype/define-flow-type': 1,
     'flowtype/delimiter-dangle': ['error','never'],
