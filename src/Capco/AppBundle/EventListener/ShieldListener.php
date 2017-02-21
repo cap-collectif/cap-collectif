@@ -55,7 +55,7 @@ class ShieldListener
             return;
         }
 
-        if (strpos($route) === '_imagine') {
+        if (strpos($route, '_imagine')) {
             return;
         }
 
