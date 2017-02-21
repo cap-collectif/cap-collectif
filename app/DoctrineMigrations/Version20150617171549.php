@@ -96,10 +96,6 @@ class Version20150617171549 extends AbstractMigration
                 'global.site.fullname',
                 'global.site.embed_js',
             ],
-            'settings.shield_mode' =>  [
-                'security.shield_mode.username',
-                'security.shield_mode.password',
-            ],
         ];
 
         foreach ($parameterCategories as $category => $keynames) {

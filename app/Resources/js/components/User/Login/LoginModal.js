@@ -1,46 +1,30 @@
+// @flow
 import React, { PropTypes } from 'react';
-import { Modal, Button, Alert } from 'react-bootstrap';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { Modal, Button } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
+import { submit, isSubmitting } from 'redux-form';
 import CloseButton from '../../Form/CloseButton';
-import LoginForm from './LoginForm';
-import { LoginSocialButtons } from './LoginSocialButtons';
-import type { State } from '../../../types';
+import LoginBox from './LoginBox';
+import { closeLoginModal } from '../../../redux/modules/user';
+import type { Dispatch, State } from '../../../types';
 
 export const LoginModal = React.createClass({
   propTypes: {
+    submitting: PropTypes.bool.isRequired,
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    features: PropTypes.object.isRequired,
-    parameters: PropTypes.object.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
-  getInitialState() {
-    return {
-      isSubmitting: false,
-    };
-  },
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.setState({ isSubmitting: true });
-  },
-
-  stopSubmit() {
-    this.setState({ isSubmitting: false });
-  },
-
   render() {
-    const { isSubmitting } = this.state;
     const {
-      onClose,
+      submitting,
       show,
-      parameters,
-      features,
+      onClose,
+      onSubmit,
     } = this.props;
-    const textTop = parameters['login.text.top'];
-    const textBottom = parameters['login.text.bottom'];
     return (
       <Modal
         animation={false}
@@ -49,46 +33,25 @@ export const LoginModal = React.createClass({
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
       >
-        <form id="login-form" onSubmit={this.handleSubmit}>
+        <form id="login-form" onSubmit={onSubmit}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
               {this.getIntlMessage('global.login')}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {
-              textTop &&
-              <Alert bsStyle="info" className="text-center">
-                <FormattedHTMLMessage message={textTop} />
-              </Alert>
-            }
-            <LoginSocialButtons features={{
-              login_facebook: features.login_facebook,
-              login_gplus: features.login_gplus,
-              login_saml: features.login_saml,
-            }}
-            />
-            <LoginForm
-              isSubmitting={this.state.isSubmitting}
-              onSubmitFailure={this.stopSubmit}
-              onSubmitSuccess={onClose}
-            />
-            {
-              textBottom &&
-              <div className="text-center small excerpt" style={{ marginTop: '15px' }}>
-                <FormattedHTMLMessage message={textBottom} />
-              </div>
-            }
+            <LoginBox />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={onClose} />
             <Button
               id="confirm-login"
               type="submit"
-              disabled={isSubmitting}
+              disabled={submitting}
               bsStyle="primary"
             >
-              {isSubmitting
+              {
+                submitting
                 ? this.getIntlMessage('global.loading')
                 : this.getIntlMessage('global.login_me')
               }
@@ -98,12 +61,19 @@ export const LoginModal = React.createClass({
       </Modal>
     );
   },
-
 });
 
 const mapStateToProps = (state: State) => ({
-  features: state.default.features,
-  parameters: state.default.parameters,
+  submitting: isSubmitting('login')(state),
+  show: state.user.showLoginModal,
+});
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onSubmit: (e: Event) => {
+    e.preventDefault();
+    dispatch(submit('login'));
+  },
+  onClose: () => { dispatch(closeLoginModal()); },
 });
 
-export default connect(mapStateToProps)(LoginModal);
+const connector = connect(mapStateToProps, mapDispatchToProps);
+export default connector(LoginModal);

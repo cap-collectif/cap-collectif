@@ -42,10 +42,6 @@ setOverridableParameter($container, 'facebook_app_secret', '***REMOVED***', 'SYM
 setOverridableParameter($container, 'google_app_id', '***REMOVED***', 'SYMFONY_GOOGLE_APP_ID');
 setOverridableParameter($container, 'google_app_secret', '***REMOVED***', 'SYMFONY_GOOGLE_APP_SECRET');
 
-// Backdoor for shield
-setOverridableParameter($container, 'shield_login', '***REMOVED***', 'SYMFONY_SHIELD_LOGIN');
-setOverridableParameter($container, 'shield_pwd', '***REMOVED***', 'SYMFONY_SHIELD_PWD');
-
 setOverridableParameter($container, 'jwt_token_ttl', 86400, 'SYMFONY_JWT_TOKEN_TTL');
 setOverridableParameter($container, 'language_analyzer', 'french', 'SYMFONY_LANGUAGE_ANALYZER');
 setOverridableParameter($container, 'remember_secret', '***REMOVED***', 'SYMFONY_REMEMBER_SECRET');

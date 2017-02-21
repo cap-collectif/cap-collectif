@@ -40,9 +40,6 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         'homepage.jumbotron.darken' => 0,
         'global.site.fullname' => 'République Numérique',
         'homepage.jumbotron.body' => '<p><span style="color:#FFFFFF ">Contribuez au projet de loi pour une r&eacute;publique num&eacute;rique</span></p>',
-
-        'security.shield_mode.username' => 'Cap Collectif',
-        'security.shield_mode.password' => 'Rg6hd4Tg',
     ];
 
     private static $siteColors = [

@@ -1,11 +1,15 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginModal from './LoginModal';
+import { showLoginModal } from '../../../redux/modules/user';
+import type { Dispatch } from '../../../types';
 
-const LoginButton = React.createClass({
+export const LoginButton = React.createClass({
   propTypes: {
     bsStyle: PropTypes.string,
+    onClick: PropTypes.func.isRequired,
     className: PropTypes.string,
     style: PropTypes.object,
   },
@@ -19,39 +23,26 @@ const LoginButton = React.createClass({
     };
   },
 
-  getInitialState() {
-    return {
-      show: false,
-    };
-  },
-
-  handleClick() {
-    this.setState({ show: true });
-  },
-
-  handleClose() {
-    this.setState({ show: false });
-  },
-
   render() {
-    const { style, bsStyle, className } = this.props;
+    const { onClick, style, bsStyle, className } = this.props;
     return (
       <span style={style}>
         <Button
           bsStyle={bsStyle}
-          onClick={this.handleClick}
+          onClick={onClick}
           className={className}
         >
-        { this.getIntlMessage('global.login') }
+          { this.getIntlMessage('global.login') }
         </Button>
-        <LoginModal
-          show={this.state.show}
-          onClose={this.handleClose}
-        />
+        <LoginModal />
       </span>
     );
   },
 
 });
 
-export default LoginButton;
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onClick: () => { dispatch(showLoginModal()); },
+});
+const connector = connect(null, mapDispatchToProps);
+export default connector(LoginButton);
