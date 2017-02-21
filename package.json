@@ -26,9 +26,7 @@
     "url": "https://github.com/jolicode/CapCollectif-SF2/issues"
   },
   "jest": {
-    "testPathDirs": [
-      "app/Resources/js"
-    ],
+    "roots": ["app/Resources/js"],
     "testEnvironment": "jsdom",
     "testRegex": "\\-test.js$",
     "setupFiles": [
@@ -63,7 +61,7 @@
     "brunch": "^2.10.8",
     "classnames": "^2.2.3",
     "clean-css-brunch": "^2.10.0",
-    "diff": "^3.0.0",
+    "diff": "^3.2.0",
     "exports-loader": "^0.6.3",
     "fancybox": "^3.0.0",
     "flat": "^2.0.1",
@@ -76,7 +74,7 @@
     "moment": "^2.11.2",
     "normalizr": "^2.3.0",
     "process-env-brunch": "^1.4.4-d",
-    "qs": "^6.3.0",
+    "qs": "^6.3.1",
     "quill": "^0.20.1",
     "react": "^15.4.2",
     "react-addons-shallow-compare": "^15.4.2",
@@ -91,7 +89,7 @@
     "react-intl": "1.2.0",
     "react-linkify": "^0.1.1",
     "react-nl2br": "^0.2.0",
-    "react-on-rails": "^6.3.2",
+    "react-on-rails": "^6.6.0",
     "react-radio": "^2.1.1",
     "react-redux": "^5.0.2",
     "react-router": "^2.7.0",
@@ -111,7 +109,7 @@
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "enzyme": "^2.7.1",
-    "eslint": "^3.15.0",
+    "eslint": "^3.16.0",
     "eslint-brunch": "^3.12.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-flowtype": "^2.30.0",

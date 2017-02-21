@@ -1,16 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget vote 1`] = `
 <Uncontrolled(Navbar)
   bsClass="navbar"
   bsStyle="default"
   className="proposal-vote__widget"
-  fixedTop={true}>
+  fixedTop={true}
+>
   <NavbarHeader>
     <NavbarBrand>
       <img
         alt=""
         className="widget__image"
         role="presentation"
-        src="http://capco.dev/images.png" />
+        src="http://capco.dev/images.png"
+      />
     </NavbarBrand>
     <NavbarToggle>
       <i
@@ -19,7 +23,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
           Object {
             "fontSize": "24px",
           }
-        } />
+        }
+      />
     </NavbarToggle>
   </NavbarHeader>
   <NavbarCollapse>
@@ -28,21 +33,26 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
       justified={false}
       pullLeft={false}
       pullRight={false}
-      stacked={false} />
+      stacked={false}
+    />
     <Nav
       bsClass="nav"
       justified={false}
       pullLeft={false}
       pullRight={false}
-      stacked={false}>
+      stacked={false}
+    >
       <li
-        className="navbar-text widget__counter">
+        className="navbar-text widget__counter"
+      >
         <p
-          className="widget__counter__label">
+          className="widget__counter__label"
+        >
           Votes
         </p>
         <span
-          className="widget__counter__value">
+          className="widget__counter__value"
+        >
           12
         </span>
       </li>
@@ -56,7 +66,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
       disabled={false}
       href="http//capco.dev/votes"
       navDropdown={false}
-      navItem={false}>
+      navItem={false}
+    >
       Mes votes
     </Button>
   </NavbarCollapse>
@@ -68,14 +79,16 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
   bsClass="navbar"
   bsStyle="default"
   className="proposal-vote__widget"
-  fixedTop={true}>
+  fixedTop={true}
+>
   <NavbarHeader>
     <NavbarBrand>
       <img
         alt=""
         className="widget__image"
         role="presentation"
-        src="http://capco.dev/images.png" />
+        src="http://capco.dev/images.png"
+      />
     </NavbarBrand>
     <NavbarToggle>
       <i
@@ -84,10 +97,12 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
           Object {
             "fontSize": "24px",
           }
-        } />
+        }
+      />
     </NavbarToggle>
     <li
-      className="navbar-text widget__progress-bar hidden visible-xs">
+      className="navbar-text widget__progress-bar hidden visible-xs"
+    >
       <ProgressBar
         active={false}
         bsClass="progress-bar"
@@ -98,7 +113,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
         min={0}
         now={50}
         srOnly={false}
-        striped={false} />
+        striped={false}
+      />
     </li>
   </NavbarHeader>
   <NavbarCollapse>
@@ -107,43 +123,54 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       justified={false}
       pullLeft={false}
       pullRight={false}
-      stacked={false} />
+      stacked={false}
+    />
     <Nav
       bsClass="nav"
       justified={false}
       pullLeft={false}
       pullRight={false}
-      stacked={false}>
+      stacked={false}
+    >
       <li
-        className="navbar-text widget__counter">
+        className="navbar-text widget__counter"
+      >
         <p
-          className="widget__counter__label">
+          className="widget__counter__label"
+        >
           Votes
         </p>
         <span
-          className="widget__counter__value">
+          className="widget__counter__value"
+        >
           2
         </span>
       </li>
       <li
-        className="navbar-text widget__counter">
+        className="navbar-text widget__counter"
+      >
         <p
-          className="widget__counter__label">
+          className="widget__counter__label"
+        >
           Restants
         </p>
         <span
-          className="widget__counter__value">
+          className="widget__counter__value"
+        >
           1
         </span>
       </li>
       <li
-        className="navbar-text widget__counter">
+        className="navbar-text widget__counter"
+      >
         <p
-          className="widget__counter__label">
+          className="widget__counter__label"
+        >
           Dépensés
         </p>
         <span
-          className="widget__counter__value">
+          className="widget__counter__value"
+        >
           1
         </span>
       </li>
@@ -157,7 +184,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       disabled={false}
       href="http//capco.dev/votes"
       navDropdown={false}
-      navItem={false}>
+      navItem={false}
+    >
       Mes votes
     </Button>
     <Nav
@@ -166,9 +194,11 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       justified={false}
       pullLeft={false}
       pullRight={true}
-      stacked={false}>
+      stacked={false}
+    >
       <li
-        className="navbar-text widget__progress-bar">
+        className="navbar-text widget__progress-bar"
+      >
         <ProgressBar
           active={false}
           bsClass="progress-bar"
@@ -179,7 +209,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
           min={0}
           now={50}
           srOnly={false}
-          striped={false} />
+          striped={false}
+        />
       </li>
     </Nav>
   </NavbarCollapse>
@@ -191,14 +222,16 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
   bsClass="navbar"
   bsStyle="default"
   className="proposal-vote__widget"
-  fixedTop={true}>
+  fixedTop={true}
+>
   <NavbarHeader>
     <NavbarBrand>
       <img
         alt=""
         className="widget__image"
         role="presentation"
-        src="http://capco.dev/images.png" />
+        src="http://capco.dev/images.png"
+      />
     </NavbarBrand>
     <NavbarToggle>
       <i
@@ -207,7 +240,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
           Object {
             "fontSize": "24px",
           }
-        } />
+        }
+      />
     </NavbarToggle>
   </NavbarHeader>
   <NavbarCollapse>
@@ -216,21 +250,26 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       justified={false}
       pullLeft={false}
       pullRight={false}
-      stacked={false} />
+      stacked={false}
+    />
     <Nav
       bsClass="nav"
       justified={false}
       pullLeft={false}
       pullRight={false}
-      stacked={false}>
+      stacked={false}
+    >
       <li
-        className="navbar-text widget__counter">
+        className="navbar-text widget__counter"
+      >
         <p
-          className="widget__counter__label">
+          className="widget__counter__label"
+        >
           Votes
         </p>
         <span
-          className="widget__counter__value">
+          className="widget__counter__value"
+        >
           12
         </span>
       </li>
@@ -244,7 +283,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       disabled={false}
       href="http//capco.dev/votes"
       navDropdown={false}
-      navItem={false}>
+      navItem={false}
+    >
       Mes votes
     </Button>
   </NavbarCollapse>

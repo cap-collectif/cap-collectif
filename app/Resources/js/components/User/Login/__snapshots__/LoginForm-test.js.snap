@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<LoginForm /> renders a form with inputs 1`] = `
 <div>
   <Field
@@ -9,7 +11,8 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
     label="Adresse électronique"
     labelClassName="h5"
     name="username"
-    type="email" />
+    type="email"
+  />
   <Field
     autoComplete="current-password"
     autoFocus={true}
@@ -19,10 +22,12 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
     label="Mot de passe"
     labelClassName="w100 h5"
     name="password"
-    type="password" />
+    type="password"
+  />
   <a
     className="small"
-    href="/resetting/request">
+    href="/resetting/request"
+  >
     Mot de passe oublié ?
   </a>
 </div>

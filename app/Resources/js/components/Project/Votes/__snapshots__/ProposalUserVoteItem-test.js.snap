@@ -1,15 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
 <Row
   className="proposals-user-votes__row"
   componentClass="div"
-  id="vote-step1-proposal1">
+  id="vote-step1-proposal1"
+>
   <Col
     className="proposals-user-votes__col"
     componentClass="div"
     md={4}
-    xs={12}>
+    xs={12}
+  >
     <a
-      href="http://capco.test/proposal">
+      href="http://capco.test/proposal"
+    >
       proposal
     </a>
   </Col>
@@ -17,9 +22,11 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     className="proposals-user-votes__col"
     componentClass="div"
     md={2}
-    xs={12}>
+    xs={12}
+  >
     <i
-      className="cap cap-user-2" />
+      className="cap cap-user-2"
+    />
     <UserLink
       className=""
       user={
@@ -27,22 +34,26 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
           "displayName": "user",
           "id": 1,
         }
-      } />
+      }
+    />
   </Col>
   <Col
     className="proposals-user-votes__col"
     componentClass="div"
     md={2}
-    xs={12}>
+    xs={12}
+  >
     <i
-      className="cap cap-marker-1" />
+      className="cap cap-marker-1"
+    />
     district
   </Col>
   <Col
     className="proposals-user-votes__col"
     componentClass="div"
     md={2}
-    xs={12}>
+    xs={12}
+  >
     <ProposalDetailEstimation
       proposal={
         Object {
@@ -60,13 +71,15 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
           "title": "proposal",
         }
       }
-      showNullEstimation={true} />
+      showNullEstimation={true}
+    />
   </Col>
   <Col
     className="proposals-user-votes__col"
     componentClass="div"
     md={2}
-    xs={12}>
+    xs={12}
+  >
     <Button
       active={false}
       block={false}
@@ -76,7 +89,8 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
       disabled={false}
       navDropdown={false}
       navItem={false}
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       Retirer
     </Button>
   </Col>

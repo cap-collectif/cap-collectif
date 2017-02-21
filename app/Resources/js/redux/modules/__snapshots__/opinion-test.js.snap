@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Opinion Reducers Should handle opinionVoteSuccess and deleteOpinionVoteSuccess 1`] = `
 Object {
   "opinionsById": Object {

@@ -1,7 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<AccountForm /> should render a form 1`] = `
 <form
   className="form-horizontal"
-  onSubmit={[Function]}>
+  onSubmit={[Function]}
+>
   <Field
     component={[Function]}
     id="account__email"
@@ -9,9 +12,11 @@ exports[`<AccountForm /> should render a form 1`] = `
     labelClassName="col-sm-4"
     name="email"
     type="email"
-    wrapperClassName="col-sm-6" />
+    wrapperClassName="col-sm-6"
+  />
   <p
-    className="small excerpt col-sm-6 col-sm-offset-4">
+    className="small excerpt col-sm-6 col-sm-offset-4"
+  >
     Votre adresse électronique ne sera pas rendue publique.
   </p>
 </form>
@@ -20,15 +25,18 @@ exports[`<AccountForm /> should render a form 1`] = `
 exports[`<AccountForm /> should render a form with an alert if submitted password is wrong 1`] = `
 <form
   className="form-horizontal"
-  onSubmit={[Function]}>
+  onSubmit={[Function]}
+>
   <Alert
     bsClass="alert"
     bsStyle="danger"
-    closeLabel="Close Alert">
+    closeLabel="Close Alert"
+  >
     <p>
       <FormattedHTMLMessage
         message="<strong>Mot de passe incorrect.</strong> Entrez votre mot de passe actuel pour modifier votre adresse email."
-        tagName="span" />
+        tagName="span"
+      />
     </p>
   </Alert>
   <Field
@@ -38,9 +46,11 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
     labelClassName="col-sm-4"
     name="email"
     type="email"
-    wrapperClassName="col-sm-6" />
+    wrapperClassName="col-sm-6"
+  />
   <p
-    className="small excerpt col-sm-6 col-sm-offset-4">
+    className="small excerpt col-sm-6 col-sm-offset-4"
+  >
     Votre adresse électronique ne sera pas rendue publique.
   </p>
 </form>
@@ -49,11 +59,13 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
 exports[`<AccountForm /> should render a form with an info if a confirmation email has been resent 1`] = `
 <form
   className="form-horizontal"
-  onSubmit={[Function]}>
+  onSubmit={[Function]}
+>
   <Alert
     bsClass="alert"
     bsStyle="warning"
-    closeLabel="Close Alert">
+    closeLabel="Close Alert"
+  >
     <p>
       Un email de confirmation vous a été envoyé.
     </p>
@@ -65,31 +77,39 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
     labelClassName="col-sm-4"
     name="email"
     type="email"
-    wrapperClassName="col-sm-6" />
+    wrapperClassName="col-sm-6"
+  />
   <p
-    className="small excerpt col-sm-6 col-sm-offset-4">
+    className="small excerpt col-sm-6 col-sm-offset-4"
+  >
     Votre adresse électronique ne sera pas rendue publique.
   </p>
   <div
-    className="col-sm-6 col-sm-offset-4">
+    className="col-sm-6 col-sm-offset-4"
+  >
     <p
-      className="small excerpt">
+      className="small excerpt"
+    >
       <FormattedHTMLMessage
         email="new-email@test.com"
-        message="Vérifiez votre email (<strong>{email}</strong>) pour confirmer votre nouvelle adresse. Jusqu\'à ce que vous confirmez, les notifications continueront d\'être envoyées à votre adresse email actuelle."
-        tagName="span" />
+        message="Vérifiez votre email (<strong>{email}</strong>) pour confirmer votre nouvelle adresse. Jusqu'à ce que vous confirmez, les notifications continueront d'être envoyées à votre adresse email actuelle."
+        tagName="span"
+      />
     </p>
     <p
-      className="small excerpt">
+      className="small excerpt"
+    >
       <a
         href="#resend"
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         Renvoyer la confirmation
       </a>
        · 
       <a
         href="#cancel"
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         Annuler cette modification
       </a>
     </p>
@@ -100,7 +120,8 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
 exports[`<AccountForm /> should render a form with information about new email 1`] = `
 <form
   className="form-horizontal"
-  onSubmit={[Function]}>
+  onSubmit={[Function]}
+>
   <Field
     component={[Function]}
     id="account__email"
@@ -108,31 +129,39 @@ exports[`<AccountForm /> should render a form with information about new email 1
     labelClassName="col-sm-4"
     name="email"
     type="email"
-    wrapperClassName="col-sm-6" />
+    wrapperClassName="col-sm-6"
+  />
   <p
-    className="small excerpt col-sm-6 col-sm-offset-4">
+    className="small excerpt col-sm-6 col-sm-offset-4"
+  >
     Votre adresse électronique ne sera pas rendue publique.
   </p>
   <div
-    className="col-sm-6 col-sm-offset-4">
+    className="col-sm-6 col-sm-offset-4"
+  >
     <p
-      className="small excerpt">
+      className="small excerpt"
+    >
       <FormattedHTMLMessage
         email="new-email@test.com"
-        message="Vérifiez votre email (<strong>{email}</strong>) pour confirmer votre nouvelle adresse. Jusqu\'à ce que vous confirmez, les notifications continueront d\'être envoyées à votre adresse email actuelle."
-        tagName="span" />
+        message="Vérifiez votre email (<strong>{email}</strong>) pour confirmer votre nouvelle adresse. Jusqu'à ce que vous confirmez, les notifications continueront d'être envoyées à votre adresse email actuelle."
+        tagName="span"
+      />
     </p>
     <p
-      className="small excerpt">
+      className="small excerpt"
+    >
       <a
         href="#resend"
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         Renvoyer la confirmation
       </a>
        · 
       <a
         href="#cancel"
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         Annuler cette modification
       </a>
     </p>

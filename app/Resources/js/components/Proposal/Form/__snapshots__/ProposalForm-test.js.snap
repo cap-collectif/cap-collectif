@@ -1,13 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<ProposalForm /> should render a simple form without custom field 1`] = `
 <form
-  id="proposal-form">
+  id="proposal-form"
+>
   <FormattedHTMLMessage
     message="description"
-    tagName="span" />
+    tagName="span"
+  />
   <Input
     addonAfter={
       <span
-        className="glyphicon glyphicon-refresh" />
+        className="glyphicon glyphicon-refresh"
+      />
     }
     autoComplete="off"
     errors={null}
@@ -19,14 +24,16 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     medias={Array []}
     onChange={[Function]}
     type="text"
-    value="proposal title" />
+    value="proposal title"
+  />
   <Collapse
     dimension="height"
     getDimensionValue={[Function]}
     in={false}
     timeout={300}
     transitionAppear={false}
-    unmountOnExit={false}>
+    unmountOnExit={false}
+  >
     <Panel
       bsClass="panel"
       bsStyle="default"
@@ -36,15 +43,18 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
           matches={0}
           message="{matches, plural, one{# proposition déjà déposée contenant} other{# propositions déjà déposées contiennent}} {terms, plural, one{ce mot-clé} other {ces mots-clés}}"
           tagName="span"
-          terms={2} />
-      }>
+          terms={2}
+        />
+      }
+    >
       <ul
         style={
           Object {
             "listStyleType": "none",
             "padding": 0,
           }
-        } />
+        }
+      />
       <Button
         active={false}
         block={false}
@@ -53,7 +63,8 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         disabled={false}
         navDropdown={false}
         navItem={false}
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         Fermer
       </Button>
     </Panel>
@@ -76,14 +87,17 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         "requestChange": [Function],
         "value": -1,
       }
-    }>
+    }
+  >
     <option
       disabled={true}
-      value={-1}>
+      value={-1}
+    >
       Sélectionnez un thème
     </option>
     <option
-      value={1}>
+      value={1}
+    >
       theme1
     </option>
   </Input>
@@ -105,14 +119,17 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         "requestChange": [Function],
         "value": -1,
       }
-    }>
+    }
+  >
     <option
       disabled={true}
-      value={-1}>
+      value={-1}
+    >
       Sélectionnez une catégorie
     </option>
     <option
-      value={1}>
+      value={1}
+    >
       category1
     </option>
   </Input>
@@ -134,13 +151,16 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         "requestChange": [Function],
         "value": null,
       }
-    }>
+    }
+  >
     <option
-      value="">
+      value=""
+    >
       Sélectionnez une localisation
     </option>
     <option
-      value={1}>
+      value={1}
+    >
       disctrict1
     </option>
   </Input>
@@ -158,7 +178,8 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         "requestChange": [Function],
         "value": undefined,
       }
-    } />
+    }
+  />
   <Input
     errors={null}
     groupClassName=""
@@ -168,7 +189,8 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
       <span>
         Illustration
         <span
-          className="excerpt">
+          className="excerpt"
+        >
             (facultatif)
         </span>
       </span>
@@ -181,20 +203,24 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         "requestChange": [Function],
         "value": null,
       }
-    } />
+    }
+  />
 </form>
 `;
 
 exports[`<ProposalForm /> should render a simple form without custom field and district 1`] = `
 <form
-  id="proposal-form">
+  id="proposal-form"
+>
   <FormattedHTMLMessage
     message="description"
-    tagName="span" />
+    tagName="span"
+  />
   <Input
     addonAfter={
       <span
-        className="glyphicon glyphicon-refresh" />
+        className="glyphicon glyphicon-refresh"
+      />
     }
     autoComplete="off"
     errors={null}
@@ -206,14 +232,16 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     medias={Array []}
     onChange={[Function]}
     type="text"
-    value="proposal title" />
+    value="proposal title"
+  />
   <Collapse
     dimension="height"
     getDimensionValue={[Function]}
     in={false}
     timeout={300}
     transitionAppear={false}
-    unmountOnExit={false}>
+    unmountOnExit={false}
+  >
     <Panel
       bsClass="panel"
       bsStyle="default"
@@ -223,15 +251,18 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
           matches={0}
           message="{matches, plural, one{# proposition déjà déposée contenant} other{# propositions déjà déposées contiennent}} {terms, plural, one{ce mot-clé} other {ces mots-clés}}"
           tagName="span"
-          terms={2} />
-      }>
+          terms={2}
+        />
+      }
+    >
       <ul
         style={
           Object {
             "listStyleType": "none",
             "padding": 0,
           }
-        } />
+        }
+      />
       <Button
         active={false}
         block={false}
@@ -240,7 +271,8 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         disabled={false}
         navDropdown={false}
         navItem={false}
-        onClick={[Function]}>
+        onClick={[Function]}
+      >
         Fermer
       </Button>
     </Panel>
@@ -263,14 +295,17 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         "requestChange": [Function],
         "value": -1,
       }
-    }>
+    }
+  >
     <option
       disabled={true}
-      value={-1}>
+      value={-1}
+    >
       Sélectionnez un thème
     </option>
     <option
-      value={1}>
+      value={1}
+    >
       theme1
     </option>
   </Input>
@@ -292,14 +327,17 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         "requestChange": [Function],
         "value": -1,
       }
-    }>
+    }
+  >
     <option
       disabled={true}
-      value={-1}>
+      value={-1}
+    >
       Sélectionnez une catégorie
     </option>
     <option
-      value={1}>
+      value={1}
+    >
       category1
     </option>
   </Input>
@@ -317,7 +355,8 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         "requestChange": [Function],
         "value": undefined,
       }
-    } />
+    }
+  />
   <Input
     errors={null}
     groupClassName=""
@@ -327,7 +366,8 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
       <span>
         Illustration
         <span
-          className="excerpt">
+          className="excerpt"
+        >
             (facultatif)
         </span>
       </span>
@@ -340,6 +380,7 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         "requestChange": [Function],
         "value": null,
       }
-    } />
+    }
+  />
 </form>
 `;

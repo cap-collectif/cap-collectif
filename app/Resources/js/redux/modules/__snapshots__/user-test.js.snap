@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`User Reducer Should handle CANCEL_EMAIL_CHANGE 1`] = `
 Object {
   "confirmationEmailResent": false,

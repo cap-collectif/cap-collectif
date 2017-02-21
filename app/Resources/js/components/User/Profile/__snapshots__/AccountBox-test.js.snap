@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<AccountBox /> should render a disabled button when the form is invalid 1`] = `
 <Panel
   bsClass="panel"
@@ -14,11 +16,13 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
       id="edit-account-profile-button"
       navDropdown={false}
       navItem={false}
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       Enregistrer les modifications
     </Button>
   }
-  header="Mon compte">
+  header="Mon compte"
+>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
 </Panel>
@@ -40,11 +44,13 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
       id="edit-account-profile-button"
       navDropdown={false}
       navItem={false}
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       Chargement...
     </Button>
   }
-  header="Mon compte">
+  header="Mon compte"
+>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
 </Panel>
@@ -66,11 +72,13 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
       id="edit-account-profile-button"
       navDropdown={false}
       navItem={false}
-      onClick={[Function]}>
+      onClick={[Function]}
+    >
       Enregistrer les modifications
     </Button>
   }
-  header="Mon compte">
+  header="Mon compte"
+>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
 </Panel>

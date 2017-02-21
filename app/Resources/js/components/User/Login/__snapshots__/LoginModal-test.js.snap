@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<LoginModal /> renders a visible modal if shown 1`] = `
 <Modal
   animation={false}
@@ -20,29 +22,36 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
   }
   onHide={[Function]}
   renderBackdrop={[Function]}
-  show={true}>
+  show={true}
+>
   <form
     id="login-form"
-    onSubmit={[Function]}>
+    onSubmit={[Function]}
+  >
     <ModalHeader
       aria-label="Close"
       bsClass="modal"
-      closeButton={true}>
+      closeButton={true}
+    >
       <ModalTitle
         bsClass="modal"
-        id="contained-modal-title-lg">
+        id="contained-modal-title-lg"
+      >
         Connexion
       </ModalTitle>
     </ModalHeader>
     <ModalBody
-      bsClass="modal">
+      bsClass="modal"
+    >
       <Connect(LoginBox) />
     </ModalBody>
     <ModalFooter
-      bsClass="modal">
+      bsClass="modal"
+    >
       <CloseButton
         label="global.cancel"
-        onClose={[Function]} />
+        onClose={[Function]}
+      />
       <Button
         active={false}
         block={false}
@@ -52,7 +61,8 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
         id="confirm-login"
         navDropdown={false}
         navItem={false}
-        type="submit">
+        type="submit"
+      >
         Se connecter
       </Button>
     </ModalFooter>

@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Proposal Reducer Should handle deleteVoteSucceeded 1`] = `
 Object {
   "proposalsById": Object {},
