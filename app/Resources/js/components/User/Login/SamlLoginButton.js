@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
@@ -29,10 +30,8 @@ export const SamlLoginButton = React.createClass({
 
 });
 
-const mapStateToProps = (state: State) => {
-  return {
-    show: state.default.features.login_saml,
-  };
-};
+const mapStateToProps = (state: State) => ({
+  show: state.default.features.login_saml,
+});
 
 export default connect(mapStateToProps)(SamlLoginButton);

@@ -11,7 +11,6 @@ describe('<LoginForm />', () => {
 
   it('renders a form with inputs', () => {
     const wrapper = shallow(<LoginForm {...props} />);
-    console.log(wrapper.debug());
     expect(wrapper.find('Field')).toHaveLength(2);
     expect(wrapper).toMatchSnapshot();
   });

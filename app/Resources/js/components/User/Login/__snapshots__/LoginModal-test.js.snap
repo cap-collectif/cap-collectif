@@ -1,4 +1,4 @@
-exports[`<LoginModal /> renders modal if shown 1`] = `
+exports[`<LoginModal /> renders a visible modal if shown 1`] = `
 <Modal
   animation={false}
   aria-labelledby="contained-modal-title-lg"

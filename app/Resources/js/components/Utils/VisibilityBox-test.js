@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -36,6 +37,6 @@ describe('<VisibilityBox />', () => {
       </VisibilityBox>,
     );
     expect(wrapper.find('Jumbotron')).toHaveLength(1);
-    expect(wrapper.children().find('LoginButton')).toHaveLength(1);
+    expect(wrapper.children().find('Connect(LoginButton)')).toHaveLength(1);
   });
 });
