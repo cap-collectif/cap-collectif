@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
-import { LoginSocialButtons } from './LoginSocialButtons';
+import LoginSocialButtons from './LoginSocialButtons';
 import LoginForm from './LoginForm';
 import type { State } from '../../../types';
 
@@ -10,14 +10,11 @@ export const LoginBox = React.createClass({
   propTypes: {
     textTop: PropTypes.string,
     textBottom: PropTypes.string,
-    login_facebook: PropTypes.bool.isRequired,
-    login_gplus: PropTypes.bool.isRequired,
-    login_saml: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { textTop, textBottom, login_facebook, login_gplus, login_saml } = this.props;
+    const { textTop, textBottom } = this.props;
     return (
       <div>
         {
@@ -26,13 +23,7 @@ export const LoginBox = React.createClass({
               <FormattedHTMLMessage message={textTop} />
             </Alert>
         }
-        <LoginSocialButtons
-          features={{
-            login_facebook,
-            login_gplus,
-            login_saml,
-          }}
-        />
+        <LoginSocialButtons />
         <LoginForm />
         {
           textBottom &&
@@ -47,9 +38,6 @@ export const LoginBox = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-  login_facebook: state.default.features.login_facebook,
-  login_gplus: state.default.features.login_gplus,
-  login_saml: state.default.features.login_saml,
   textTop: state.default.parameters['login.text.top'],
   textBottom: state.default.parameters['login.text.bottom'],
 });

@@ -38,7 +38,7 @@ export const LoginForm = React.createClass({
           type="email"
           autoFocus
           disableValidation
-          id="_username"
+          id="username"
           labelClassName="h5"
           label={this.getIntlMessage('global.email')}
           autoComplete="email"

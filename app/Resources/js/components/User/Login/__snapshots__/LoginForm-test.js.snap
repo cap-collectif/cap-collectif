@@ -1,0 +1,29 @@
+exports[`<LoginForm /> renders a form with inputs 1`] = `
+<div>
+  <Field
+    autoComplete="email"
+    autoFocus={true}
+    component={[Function]}
+    disableValidation={true}
+    id="username"
+    label="Adresse électronique"
+    labelClassName="h5"
+    name="username"
+    type="email" />
+  <Field
+    autoComplete="current-password"
+    autoFocus={true}
+    component={[Function]}
+    disableValidation={true}
+    id="password"
+    label="Mot de passe"
+    labelClassName="w100 h5"
+    name="password"
+    type="password" />
+  <a
+    className="small"
+    href="/resetting/request">
+    Mot de passe oublié ?
+  </a>
+</div>
+`;

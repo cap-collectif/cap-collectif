@@ -1,13 +1,14 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import LoginButton from './LoginButton';
+import { LoginButton } from './LoginButton';
 import IntlData from '../../../translations/FR';
 
 describe('<LoginButton />', () => {
   const props = {
     className: 'btn-darkest-gray navbar-btn btn--connection',
     ...IntlData,
+    onClick: jest.fn(),
   };
 
   it('renders a button', () => {

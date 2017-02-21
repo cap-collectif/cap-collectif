@@ -1,0 +1,6 @@
+exports[`<LoginBox /> renders 1`] = `
+<div>
+  <Connect(LoginSocialButtons) />
+  <ReduxForm />
+</div>
+`;

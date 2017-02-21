@@ -7,6 +7,7 @@ import IntlData from '../../translations/FR';
 describe('<LoginOverlay />', () => {
   const props = {
     ...IntlData,
+    openLoginModal: jest.fn(),
   };
 
   it('renders children if not enabled', () => {
