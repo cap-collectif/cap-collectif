@@ -90,7 +90,7 @@ class OpinionAdmin extends Admin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->add('id', 'integer', [
+            ->add('id', null, [
                 'label' => 'admin.fields.opinion.id',
             ])
             ->addIdentifier('title', null, [

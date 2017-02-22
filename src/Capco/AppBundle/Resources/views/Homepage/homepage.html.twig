@@ -3,7 +3,6 @@
 
 {% set jumbotron_title = capco_site_parameter_value('homepage.jumbotron.title') %}
 {% set jumbotron_body = capco_site_parameter_value('homepage.jumbotron.body') %}
-{% set meta_description = capco_site_parameter_value('homepage.meta_description') %}
 {% set picto = capco_site_image_media('image.picto') %}
 
 {% block canonical_link %}{{ url('app_homepage') }}{% endblock %}
@@ -12,7 +11,7 @@
     {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       jumbotron_title ?: siteName,
-        'description': meta_description,
+        'description': jumbotron_body|striptags,
         'url':         url('app_homepage'),
         'image':       image
     } only %}
