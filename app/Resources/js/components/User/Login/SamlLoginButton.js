@@ -19,8 +19,8 @@ export const SamlLoginButton = React.createClass({
     const title = this.getIntlMessage('login.saml');
     return (
       <a
-       href={`/login-saml?_destination=${window.location.href}`}
-       title={title}
+        href={`/login-saml?_destination=${window && window.location.href}`}
+        title={title}
        className="btn login__social-btn login__social-btn--saml"
       >
         {title}

@@ -1,7 +1,7 @@
 {% extends "CapcoAppBundle::base.html.twig" %}
 
 {% block mainContent %}
-<div id="shield-mode" class="container text-center">
-    {{ react_intl_component('ShieldApp', {'rendering': 'both'}) }}
+<div id="shield-mode" class="container">
+    {{ react_intl_component('ShieldApp', {'rendering': 'client_side'}) }}
 </div>
 {% endblock %}
